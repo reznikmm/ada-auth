@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:19 $}
+@Comment{$Date: 2000/05/29 21:33:47 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -344,7 +344,7 @@ The following names are used when referring to compound
 delimiters:
 @begin{Display}
 @TabClear()@TabSet(P11)delimiter @\name
-
+@comment{Blank line}
    => @\arrow
    .. @\double dot
    ** @\double star, exponentiate
@@ -415,7 +415,7 @@ to accommodate local conventions].
 @i{Examples of identifiers:}
 @begin{Display}
 Count      X    Get_Symbol   Ethelyn   Marion
-
+@Comment{Blank line}
 Snobol_4   X1   Page_Count    Store_Next_Item
 @end{Display}
 @end{Examples}
@@ -504,7 +504,7 @@ obtain the value of the @nt{decimal_literal} with the @nt{exponent}.
 @begin{Display}
 @tabclear()@tabset(P31)
 12        0      1E6    123_456 @\--@i{  integer literals}
-
+@Comment{Blank line}
 12.0      0.0    0.456  3.14159_26 @\--@i{  real literals}
 @end{Display}
 @end{Examples}
@@ -665,10 +665,10 @@ An end of line cannot appear in a @nt{string_literal}.
 @begin{Display}
 @tabclear()@tabset(P16)
 "Message of the day:"
-
+@comment{Blank line}
 ""   @\--@i{  a null string literal}
 "@ "   "A"   """"     @\--@i{  three string literals of length 1}
-
+@comment{Blank line}
 "Characters such as $, %, and } are allowed in string literals"
 @end{Display}
 @end{Examples}
@@ -708,12 +708,12 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @i{Examples of comments:}
 @begin{Display}
 --@i{  the last sentence above echoes the Algol 68 report }
-
+@comment{Blank line}
 @key[end];  --@i{  processing of Line is complete }
-
+@comment{Blank line}
 --@i{  a long comment may be split onto}
 --@i{  two or more consecutive lines   }
-
+@comment{Blank line}
 ----------------@i{  the first two hyphens start the comment  }
 @end{Display}
 @end{Examples}
@@ -1228,9 +1228,7 @@ The reserved words appear in @key{lower case boldface}
 in this International Standard,
 except when used in the @nt{designator} of an attribute
 (see @RefSecNum(Attributes)).
-
 Lower case boldface is also used
-
 for a reserved word in a
 @nt{string_literal} used as an @nt{operator_symbol}.
 This is merely a convention @em programs may be written in whatever

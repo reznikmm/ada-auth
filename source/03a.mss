@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:19 $}
+@Comment{$Date: 2000/05/29 21:33:47 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1125,9 +1125,7 @@ specific type are defined as follows:
   @nt<package_specification> and that operate on the type;
 
   @Defn2{Term=[override], Sec=(a primitive subprogram)}
-
   Any subprograms not covered above
-
   @Redundant[that are explicitly declared immediately within the same
   declarative region as the type] and that override (see @RefSecNum{Visibility})
   other implicitly declared primitive subprograms of the type.
@@ -1489,7 +1487,6 @@ the object is said to be @i(constrained by its initial value).
 @Redundant[In the case of an aliased object,
 this initial value may be either explicit or implicit;
 in the other cases, an explicit initial value is required.]
-
 When not constrained by its initial value, the actual and nominal
 subtypes of the object are the same.
 @Defn2{Term=[constrained], Sec=(object)}
@@ -2192,11 +2189,9 @@ The elaboration of a @nt<derived_type_definition>
 creates the derived type and its first subtype,
 and consists of the elaboration of the @nt<subtype_indication>
 and the @nt<record_extension_part>, if any.
-
 If the @nt{subtype_indication} depends on a discriminant,
 then only those expressions that do not depend on a discriminant
 are evaluated.
-
 
 @PDefn2{Term=[execution], Sec=(call on an inherited subprogram)}
 For the execution of a call on an inherited subprogram,

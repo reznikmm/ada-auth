@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2000/05/27 04:44:03 $}
+@comment{$Revision: 1.17 $ $Date: 2000/05/29 21:33:47 $}
 
 @begin{Intro}
 
@@ -85,6 +85,10 @@ which gives an introduction to the new features of Ada,
 and explains the rationale behind them.
 Programmers should read this first.
 
+@ChgRef{Version=[1],Kind=[Deleted]}
+@Chg{New=[], Old=[Changes to Ada @em 1987 to 1995. This document lists in detail the changes made
+to the 1987 edition of the standard.]}
+
 The Ada Reference Manual (RM).
 This is the International Standard @em ISO/IEC 8652:1995.
 @end{Itemize}
@@ -96,6 +100,10 @@ Rationale for the Ada Programming Language @em 1995 edition,
 which gives an introduction to the new features of Ada,
 and explains the rationale behind them.
 Programmers should read this first.
+
+@ChgRef{Version=[1],Kind=[Deleted]}
+@Chg{New=[], Old=[Changes to Ada @em 1987 to 1995. This document lists in detail the changes made
+to the 1987 edition of the standard.]}
 
 The Annotated Ada Reference Manual (AARM).
 The AARM contains all of the text in the RM95,
@@ -422,9 +430,7 @@ applicable to all types of a given class.
 @begin{Intro}
 
 This International Standard replaces the first edition of 1987.
-In this edition,
-
-the following major language changes have been incorporated:
+In this edition, the following major language changes have been incorporated:
 @begin{Itemize}
 Support for standard 8-bit and 16-bit character sets.
 See Section 2,
@@ -502,7 +508,7 @@ Comments should use the following format:
 @\@b(!from) @i{Author Name yy-mm-dd}
 @\@b(!keywords) @i{keywords related to topic}
 @\@b(!discussion)
-
+@comment{Blank line}
 @\@i{text of discussion}
 @end(display)
 

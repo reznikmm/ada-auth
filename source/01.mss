@@ -32,10 +32,10 @@ I probably ought to add a style just for this purpose)
 @end{WithoutParanum}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/05/27 04:43:59 $}
+@Comment{$Date: 2000/05/29 21:33:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1308,11 +1308,11 @@ categories:
      does not mean, @i(per se), that the program is free from other
      forms of error.
 
-     @Defn{compile-time error}
+     @NoPrefix@Defn{compile-time error}
      @Defn2{Term=[error], Sec=(compile-time)}
      @IndexSee{Term=[link-time error],See=(post-compilation error)}
      @Defn2{Term=[error], Sec=(link-time)}
-     @NoPrefix@;The rules are further classified as either compile time rules, or
+     The rules are further classified as either compile time rules, or
      post compilation rules, depending on whether a violation has to be
      detected at the time a compilation unit is submitted to
      the compiler,
@@ -1328,13 +1328,12 @@ categories:
      Errors that are required to be detected at run time by the
      execution of an Ada program;
 
-     @Defn{run-time error}
+     @NoPrefix@Defn{run-time error}
      @Defn2{Term=[error], Sec=(run-time)}
-     @NoPrefix@;The corresponding error situations are associated with the names of
+     The corresponding error situations are associated with the names of
      the predefined exceptions.  Every Ada compiler is required to
      generate code that raises the corresponding exception if such an
      error situation arises during program execution.
-
      @Redundant[If such an error situation is certain to arise in every
      execution of a construct, then an implementation is allowed
      (although not required) to report this fact at compilation time.]
@@ -1354,8 +1353,8 @@ categories:
 
      Erroneous execution.
 
-     @Defn{erroneous execution}
-     @NoPrefix@;In addition to bounded errors, the language rules define certain
+     @NoPrefix@Defn{erroneous execution}
+     In addition to bounded errors, the language rules define certain
      kinds of errors as leading to @i{erroneous execution}.  Like bounded
      errors, the implementation need not detect such errors either prior
      to or during run time.  Unlike bounded errors, there is no
@@ -1390,8 +1389,8 @@ categories:
 
 @begin{ImplPerm}
 @Redundant[@Defn2{Term={mode of operation}, Sec=(nonstandard)}
-@Defn{nonstandard mode}
-An implementation may provide @i(nonstandard modes) of operation.
+@Defn{nonstandard mode}An implementation may provide
+@i(nonstandard modes) of operation.
 Typically these modes would be selected by a @nt<pragma> or by a command line
 switch when the compiler is invoked.  When operating in
 a nonstandard mode, the implementation may reject @nt<compilation_unit>s
@@ -1544,6 +1543,12 @@ the @i(Webster's Third New International Dictionary of the
 English Language).
 Informal descriptions of some terms are also given in
 @RefSec{Glossary}.
+@Comment{These are here to avoid a blank paragraph at the end, and because
+they have to be somewhere.}
+@SeeAlso{Primary=[library unit], Other=(language-defined library units)}
+@SeeOther{Primary=[predefined library unit], Other=(language-defined library units)}
+@SeeAlso{Primary=[type], Other=(language-defined types)}
+@SeeOther{Primary=[predefined type], Other=(language-defined types)}
 @begin{Discussion}
 The index contains an entry for every defined term.
 @end{Discussion}
@@ -1575,7 +1580,3 @@ recommendations intended to increase uniformity across Ada implementations.
 @Defn(UI)
 A Uniformity Issue (UI) @Chg{New=<was>,Old=<is>} a numbered recommendation from the URG.
 @end{Discussion}
-@SeeAlso{Primary=[library unit], Other=(language-defined library units)}
-@SeeOther{Primary=[predefined library unit], Other=(language-defined library units)}
-@SeeAlso{Primary=[type], Other=(language-defined types)}
-@SeeOther{Primary=[predefined type], Other=(language-defined types)}
