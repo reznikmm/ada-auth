@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/08 06:44:24 $}
+@Comment{$Date: 2005/03/10 06:19:56 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -363,6 +363,11 @@ The attribute is needed so that it can be @Chg{Version=[2],
 New=[specified],Old=[specifiable]}
 via an @nt{attribute_definition_clause}.
 @end{Reason}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00417-01]}
+@ChgAdded{Version=[2],Text=[The string returned by the functions Expanded_Name,
+Wide_Expanded_Name, Wide_Wide_Expanded_Name, and External_Tag has lower bound
+1.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01]}
 The function Internal_Tag returns the tag that corresponds
@@ -777,6 +782,13 @@ Tagged types are a new concept.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00400-01]}
   @ChgAdded{Version=[2],Text=[Added Wide_Expanded_Name and Wide_Wide_Expanded_Name
   because identifiers can now contain characters outside of Latin-1.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00417-01]}
+  @ChgAdded{Version=[2],Text=[We now define the lower bound of the string
+  returned from [[Wide_]Wide_]Expanded_Name and External_Name. This makes
+  working with the returned string easier, and is consistent with many other
+  string-returning functions in Ada.]}
+
 @end{DiffWord95}
 
 @LabeledSubClause{Type Extensions}

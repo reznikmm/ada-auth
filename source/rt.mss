@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2005/03/03 06:18:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2005/03/10 06:20:00 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/03 06:18:23 $}
+@Comment{$Date: 2005/03/10 06:20:00 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -320,26 +320,58 @@ The description of the Priority pragma has been moved to this annex.
 @LabeledClause{Priority Scheduling}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
 @Redundant[This clause describes the rules that determine which task is
 selected for execution when more than one task is ready
-(see @RefSecNum{Task Execution - Task Activation}).
-The rules have two parts: the task dispatching model
+(see @Chg{Version=[2],New=[@RefSecNum{Tasks and Synchronization}],
+Old=[@RefSecNum{Task Execution - Task Activation}]}).@Chg{Version=[2],
+New=[],Old=[ The rules have two parts: the task dispatching model
 (see @RefSecNum{The Task Dispatching Model}),
 and a specific task dispatching policy
-(see @RefSecNum{The Standard Task Dispatching Policy}).]
+(see @RefSecNum{The Standard Task Dispatching Policy}).]}]
 @end{Intro}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+  @ChgAdded{Version=[2],Text=[This introduction is simplified in order to
+  reflect the rearrangement and expansion of this clause.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{The Task Dispatching Model}
 
 @begin{Intro}
-@Redundant[The task dispatching model specifies preemptive
-scheduling, based on conceptual priority-ordered ready queues.]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
+@Redundant[The task dispatching model specifies @Chg{Version=[2],
+New=[task],Old=[preemptive]} scheduling, based on conceptual
+priority-ordered ready queues.]
 @end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library package exists:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key<package> Ada.Dispatching @key<is>@ChildUnit{Parent=[Ada],Child=[Dispatching]}
+  @key<pragma> Pure(Dispatching);
+  @AdaDefn{Dispatching_Policy_Error} : @key<exception>;
+@key<end> Ada.Dispatching;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Dispatching serves as the parent of other
+language-defined library units concerned with dispatching.]}
+
+@end{StaticSem}
 
 @begin{RunTime}
 
-A task runs (that is, it becomes a @i{running task}) only when
-it is ready (see @RefSecNum{Task Execution - Task Activation}) and
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
+A task @Chg{Version=[2],New=[can become],Old=[runs (that is, it becomes]} a
+@i{running task}@Chg{Version=[2],New=[],Old=[)]} only @Chg{Version=[2],
+New=[if],Old=[when]} it is ready (see @Chg{Version=[2],New=[@RefSecNum{Tasks and Synchronization}],
+Old=[@RefSecNum{Task Execution - Task Activation}]}) and
 the execution resources required by that task are available.
 Processors are allocated to tasks based on each task's active priority.
 
@@ -348,26 +380,27 @@ is waiting for access to a protected object keeps its processor busy.
 @ImplDef{Whether, on a multiprocessor, a task that
 is waiting for access to a protected object keeps its processor busy.}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
 @Defn{task dispatching}
 @Defn{dispatching, task}
 @RootDefn{task dispatching point}
 @RootDefn{dispatching point}
 @i{Task dispatching} is the process by which one ready task is selected
 for execution on a processor. This selection is done at certain points
-during the execution of a task called @i{task dispatching
-points}.
+during the execution of a task called @i{task dispatching points}.
 A task reaches a task dispatching point whenever it becomes blocked,
-and whenever it becomes ready.
+and @Chg{Version=[2],New=[when it terminates],Old=[whenever it becomes ready.
 In addition, the completion of an @nt{accept_statement}
 (see @RefSecNum{Entries and Accept Statements}), and task termination are
-task dispatching points for the executing task.
+task dispatching points for the executing task]}.
 @Redundant[Other task dispatching points are defined
-throughout this Annex.]
+throughout this Annex@Chg{Version=[2],New=[ for specific policies],Old=[]}.]
 @begin{Ramification}
 On multiprocessor systems, more than one task can be chosen, at the
 same time, for execution on more than one processor, as explained below.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
 @Defn{ready queue}
 @Defn{head (of a queue)}
 @Defn{tail (of a queue)}
@@ -375,7 +408,8 @@ same time, for execution on more than one processor, as explained below.
 @PDefn{task dispatching policy}
 @PDefn{dispatching policy for tasks}
 @i{Task dispatching policies} are specified in terms of conceptual
-@i{ready queues}, task states, and task preemption.
+@i{ready queues}@Chg{Version=[2],New=[ and],Old=[,]} task states@Chg{Version=[2],
+New=[],Old=[, and task preemption]}.
 A ready queue is an ordered list of ready tasks.
 The first position in a queue is called the
 @i{head of the queue}, and the last position is called the
@@ -395,11 +429,14 @@ blocked. Here we refine this definition and
 talk about ready queues.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
 @Defn{running task}
 Each processor also has one @i{running task},
 which is the task currently being executed by that processor.
-Whenever a task running on a processor reaches a task dispatching point,
-one task is selected to run on that processor.
+Whenever a task running on a processor reaches a task dispatching
+point@Chg{Version=[2],New=[ it goes back to one or more ready queues; a],
+Old=[, one]} task @Chg{Version=[2],New=[(possibly the same task) ],Old=[]}is
+@Chg{Version=[2],New=[then ],Old=[]}selected to run on that processor.
 The task selected is the one at the head of the highest priority
 nonempty ready queue;
 this task is then removed from all ready queues to which it
@@ -409,7 +446,8 @@ There is always at least one task to run,
 if we count the idle task.
 @end{Discussion}
 
-@Defn{preemptible resource}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[@Defn{preemptible resource}
 A preemptible resource is a resource that while allocated
 to one task can be allocated (temporarily) to another
 instead.
@@ -419,36 +457,38 @@ is a nonpreemptible resource.
 @Defn{preempted task}
 When a higher-priority task is dispatched to the processor, and the previously
 running task is placed on the appropriate ready queue, the latter task
-is said to be @i{preempted}.
+is said to be @i{preempted}.]}
 @begin{Reason}
-A processor that is executing a task is available to execute tasks of
-higher priority, within the set of tasks that that processor is able to
-execute. Write access to a protected object, on the
-other hand, cannot be granted to a new task before the
-old task has released it.
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[A processor that is executing a task is available
+  to execute tasks of higher priority, within the set of tasks that that
+  processor is able to execute. Write access to a protected object, on the other
+  hand, cannot be granted to a new task before the old task has released it.]}
 @end{Reason}
 
-@PDefn{task dispatching point}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[@PDefn{task dispatching point}
 @PDefn{dispatching point}
 A new running task is also selected whenever there is a nonempty ready queue
 with a higher priority than the priority of the running
 task, or when the task dispatching policy requires a
 running task to go back to a ready queue.
-@Redundant[These are also task dispatching points.]
+@Redundant[These are also task dispatching points.]]}
 @begin{Ramification}
-Thus, when a task becomes ready,
-this is a task dispatching point for all running tasks of lower
-priority.
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[Thus, when a task becomes ready, this is a task
+  dispatching point for all running tasks of lower priority.]}
 @end{Ramification}
 
 @end{RunTime}
 
 @begin{ImplPerm}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
 An implementation is allowed to define additional resources as execution
 resources, and to define the corresponding allocation policies for them.
 Such resources may have an implementation defined effect on
-task dispatching (see @RefSecNum{The Standard Task Dispatching Policy}).
+task dispatching@Chg{Version=[2],New=[],Old=[ (see @RefSecNum{The Standard Task Dispatching Policy})]}.
 @ImplDef{The affect of implementation defined execution resources on
 task dispatching.}
 
@@ -462,6 +502,13 @@ level for any reason: via a pragma,
 via a call to Dynamic_Priorities.Set_Priority,
 or via priority inheritance.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00321-01]}
+@ChgNote{This was moved up from the previous section.}
+@ChgAdded{Version=[2],Text=[@Redundant[For optimization purposes,]
+an implementation may alter the points at which task dispatching occurs, in an
+implementation-defined manner. However, a @nt{delay_statement} always
+corresponds to at least one task dispatching point.]}
 
 @end{ImplPerm}
 
@@ -499,7 +546,23 @@ The priority of a task is determined by rules specified in this subclause, and
 under @RefSec{Task Priorities}, @RefSec{Priority Ceiling Locking}, and
 @RefSec{Dynamic Priorities}.
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+@ChgNote{This note is moved up from the next subclause.}
+@ChgAdded{Version=[2],Text=[The setting of a task's base priority as a result
+of a call to Set_Priority does not always take effect immediately when
+Set_Priority is called. The effect of setting the task's base priority is
+deferred while the affected task performs a protected action.]}
+
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+  @ChgAdded{Version=[2],Text=[This description is simplified to describe only
+  the parts of the dispatching model common to all policies. In particular,
+  rules about preemption are moved elsewhere. This makes
+  it easier to add other policies (which may not involve preemption).]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{The Standard Task Dispatching Policy}
 

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/03/08 06:44:25 $}
+@Comment{$Date: 2005/03/10 06:19:59 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -678,11 +678,10 @@ Raise_Exception(E'Identity, Message => @RI{implementation-defined-string});
 Exception_Identity returns the identity of the exception of the
 occurrence.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00378-01],ARef=[AI95-00400-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00400-01]}
 The @Chg{Version=[2],New=[Wide_@!Wide_@!Exception_Name],Old=[Exception_Name]}
 functions return the full expanded name of the
 exception, in upper case, starting with a root library unit.
-@Chg{Version=[2],New=[The returned string has lower bound 1.],Old=[]}
 For an exception declared immediately within package Standard,
 the @nt{defining_@!identifier} is returned.
 The result is implementation defined if the exception is declared within
@@ -709,13 +708,16 @@ Wide_Exception_Name) return the same sequence of graphic characters as that
 defined for Wide_Wide_Exception_Name, if all the graphic characters are defined
 in Character (respectively, Wide_Character); otherwise, the sequence of
 characters is implementation defined, but no shorter than that returned by
-Wide_Wide_Exception_Name for the same value of the argument. In any case, the
-lower bound of the returned string is 1.]}
+Wide_Wide_Exception_Name for the same value of the argument.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[
 The sequence of characters of the value returned by Exceptions.Exception_Name
 (respectively, Exceptions.Wide_Exception_Name) when some of the graphic
 characters of Exceptions.Wide_Wide_Exception_Name are not defined in Character
 (respectively, Wide_Character).],Old=[]}]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00378-01],ARef=[AI95-00417-01]}
+@ChgAdded{Version=[2],Text=[The string returned by the functions Exception_Name,
+Wide_Exception_Name, and Wide_Wide_Exception_Name has lower bound 1.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00378-01]}
 Exception_Information returns implementation-defined information
@@ -1042,12 +1044,11 @@ contains such a character.
   reflect that the string can come from a @nt{raise_statement} as well as a
   call of Raise_Exception.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00378-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00378-01],ARef=[AI95-00417-01]}
   @ChgAdded{Version=[2],Text=[We now define the lower bound of the string
-  returned from
-  Exception_Name, Exception_Message, and Exception_Information. This makes
-  working with the returned string easier, and is consistent with many other
-  string-returning functions in Ada.]}
+  returned from [[Wide_]Wide_]Exception_Name, Exception_Message, and
+  Exception_Information. This makes working with the returned string easier,
+  and is consistent with many other string-returning functions in Ada.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00400-01]}
   @ChgAdded{Version=[2],Text=[Added Wide_Exception_Name and

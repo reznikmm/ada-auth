@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2005/03/08 06:44:26 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2005/03/10 06:20:00 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/03/08 06:44:26 $}
+@Comment{$Date: 2005/03/10 06:20:00 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1354,7 +1354,7 @@ because the pragma was not used to mark variables as shared.
 @end{Diffword95}
 
 
-@LabeledRevisedClause{Version=[2],New=[Random Operations on Tasks],
+@LabeledRevisedClause{Version=[2],New=[Task Information],
 Old=[Task Identification and Attributes]}
 
 @begin{Intro}

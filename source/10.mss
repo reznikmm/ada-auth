@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/02/08 06:35:36 $}
+@Comment{$Date: 2005/03/10 06:19:59 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -226,6 +226,10 @@ Standard is a library unit.
 
 @begin{Intro}
 @Defn{library unit}
+@PDefn{library}@Comment{There is a different definition of library in 10.1.4.}
+@Seealso{Primary=[library],Other=[library level]}
+@Seealso{Primary=[library],Other=[library unit]}
+@Seealso{Primary=[library],Other=[library_item]}
 A @i{library unit} is a program unit that is declared by a
 @nt{library_item}.
 When a program unit is a library unit,

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/02/05 05:48:02 $}
+@Comment{$Date: 2005/03/10 06:19:56 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -969,6 +969,7 @@ in a @nt{pragma} Convention, Import, or Export.
   Note that @key[protected] and @key[entry] are reserved words.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00409-01]}
 @Defn{type conformance}
 @Defn2{Term=[profile],Sec=(type conformant)}
 Two profiles
@@ -976,7 +977,8 @@ are @i{type conformant} if they have the same number of parameters,
 and both have a result if either does, and corresponding
 parameter and result types are the same,
 or, for access parameters,
-corresponding designated types are the same.
+corresponding designated types are the same@Chg{Version=[2],New=[, or
+corresponding designated profiles are type conformant],Old=[]}.
 @IndexSee{Term=[type profile],See=(profile, type conformant)}
 @begin{Discussion}
 For access parameters, the designated types have to be the same for type
@@ -985,15 +987,21 @@ since in general each access parameter has its own anonymous access
 type, created when the subprogram is called.
 Of course, corresponding parameters have to be either both access
 parameters or both not access parameters.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00409-01]}
+@ChgAdded{Version=[2],Text=[Similarly, for anonymous access-to-subprogram
+parameters, the profiles of the types, not the types themselves, have to
+be conformant.]}
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00409-01]}
 @Defn{mode conformance}
 @Defn2{Term=[profile],Sec=(mode conformant)}
 Two profiles are @i{mode conformant} if they are type-conformant, and
 corresponding parameters have identical modes, and, for access
 parameters@Chg{Version=[2],New=[ or access result types],Old=[]}, the
-designated subtypes statically match.
+designated subtypes statically match@Chg{Version=[2],New=[, or the designated
+profiles are subtype conformant.],Old=[]}
 @PDefn2{Term=[statically matching],Sec=(required)}
 
 @Defn{subtype conformance}
@@ -1157,27 +1165,32 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 @end{Extend83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that the default convention is
-Ada. Also clarified that the convention of a primitive operation of a tagged
-type is the same as that of the type.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the default
+  convention is Ada. Also clarified that the convention of a primitive
+  operation of a tagged type is the same as that of the type.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0018],ARef=[AI95-00175-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to ensure that two
-attributes conform only if they have the same @nt{attribute_designator}.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0018],ARef=[AI95-00175-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to ensure that two
+  attributes conform only if they have the same @nt{attribute_designator}.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[Defined the calling convention for anonymous
-access-to-subprogram types and for the @nt{selected_component} whose @nt{prefix}
-denotes an object or value, and whose @nt{selector_name} denotes a subprogram (see
-@RefSecNum{Selected Components}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01],ARef=[AI95-00254-01]}
+  @ChgAdded{Version=[2],Text=[Defined the calling convention for anonymous
+  access-to-subprogram types and for the @nt{selected_component} whose
+  @nt{prefix} denotes an object or value, and whose @nt{selector_name} denotes
+  a subprogram (see @RefSecNum{Selected Components}).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[Defined the conformance of access result types (see
-@RefSecNum{Subprogram Declarations}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[Defined the conformance of access result types
+  (see @RefSecNum{Subprogram Declarations}).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[Defined the conformance of subprograms and entries.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[Defined the conformance of subprograms and
+  entries.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00409-01]}
+  @ChgAdded{Version=[2],Text=[Defined the conformance of anonymous
+  access-to-subprogram parameters.]}
 @end{DiffWord95}
 
 

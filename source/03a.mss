@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/03 06:18:22 $}
+@Comment{$Date: 2005/03/10 06:19:54 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1568,10 +1568,10 @@ of the (anonymous) type of the object.
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01],ARef=[AI95-00406-01]}
 @Syn{lhs=<object_declaration>,rhs="
     @Syn2{defining_identifier_list} : [@key{aliased}] [@key{constant}] @Syn2{subtype_indication} [:= @Syn2{expression}];@Chg{Version=[2],New=<
-  | @Syn2{defining_identifier_list} : [@key{constant}] @Syn2{access_definition} [:= @Syn2{expression}];>,Old=<>}
+  | @Syn2{defining_identifier_list} : [@key{aliased}] [@key{constant}] @Syn2{access_definition} [:= @Syn2{expression}];>,Old=<>}
   | @Syn2{defining_identifier_list} : [@key{aliased}] [@key{constant}] @Syn2{array_type_definition} [:= @Syn2{expression}];
   | @Syn2{single_task_declaration}
   | @Syn2{single_protected_declaration}"}
@@ -2043,7 +2043,7 @@ without an initialization expression.
   A constant may have a limited type; the initialization @nt{expression}
   has to be built in-place (see @RefSecNum{Limited Types}).]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00385-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00385-01],ARef=[AI95-00406-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   A stand-alone object may have an anonymous access type.]}
 @end{Extend95}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:04 $}
+@Comment{$Date: 2005/03/10 06:19:57 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1753,18 +1753,23 @@ irrelevant, since failing these tests is highly unlikely.
 @Syn{lhs=<object_renaming_declaration>,rhs="@Chg{Version=[2],New=[
     ],Old=[]}@Syn2{defining_identifier} : @Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name};@Chg{Version=[2],New=[
     @Syn2{defining_identifier} : @Syn2{access_definition} @key{renames} @SynI{object_}@Syn2{name};],Old=[]}"}
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00409-01]}
+@ChgAdded{Version=[2],Text=[The @nt{access_definition} shall not include a
+@nt{null_exclusion}.]}
+@end{SyntaxText}
 @end{Syntax}
 
 @begin{Resolution}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00254-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
 The type of the @SynI{object_}@nt{name} shall resolve to
 the type determined by the @nt{subtype_mark}@Chg{Version=[2],New=[,
-or in the case where the type is defined by an @nt{access_definition}, to a
-specific anonymous access type which in the case of an access-to-object type
+or in the case where the type is defined by an @nt{access_definition}, to an
+anonymous access type which in the case of an access-to-object type
 shall have the same designated type as that of the @nt{access_definition} and
 in the case of an access-to-subprogram type shall have a designated profile
-which is subtype conformant with that of the @nt{access_definition}],Old=[]}.
+which is type conformant with that of the @nt{access_definition}],Old=[]}.
 
 @begin{Reason}
 @leading@;A previous version of Ada 9X used the usual
@@ -1797,13 +1802,22 @@ That makes the rule different for @key[in] vs. @key[in out].
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{Conditional leading}
 The renamed entity shall be an object.@Chg{Version=[2],New=[ In the case
-where the type is defined by an @nt{access_definition} of an access-to-object
-type, the renamed entity shall be of an access-to-constant
-type if and only if the @nt{access_definition} defines an access-to-constant
-type.],Old=[]}
+where the type is defined by an @nt{access_definition},
+the type of the renamed object and the type defined by the
+@nt{access_definition}:],Old=[]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
+@ChgAdded{Version=[2],Text=[shall both be access-to-object types with
+statically matching designated subtypes and with both or neither being
+access-to-constant types; or]}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00409-01]}
+@ChgAdded{Version=[2],Text=[shall both be access-to-subprogram types with
+subtype conformant designated profiles.]}
+@end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
@@ -1877,14 +1891,15 @@ appropriate.
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00409-01]}
 An @nt{object_renaming_declaration} declares a new view
 @Redundant{of the renamed object} whose
 properties are identical to those of the renamed view.
 @Redundant[Thus, the properties of the renamed object are not affected by the
 @nt{renaming_declaration}.
 In particular, its value and whether or not it is a constant
-are unaffected; similarly, the constraints that apply to an object are
+are unaffected; similarly, the@Chg{Version=[2],New=[ null exclusion or],Old=[]}
+constraints that apply to an object are
 not affected by renaming (any constraint implied by the
 @nt{subtype_mark} @Chg{Version=[2],New=[or @nt{access_definition} ],Old=[]}of
 the @nt{object_renaming_declaration} is ignored).]
@@ -1893,6 +1908,12 @@ Because the constraints are ignored,
 it is a good idea
 to use the nominal subtype of the renamed object
 when writing an @nt{object_renaming_declaration}.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00409-01]}
+@ChgAdded{Version=[2],Text=[Explicit null_exclusion is not permitted.
+Null exclusiveness need not match, in the same way that constraints need not
+match, and @key{constant} is not specified. The renaming defines a view of the
+renamed entity, inheriting the original properties.]}
 @end{Discussion}
 @end{StaticSem}
 
@@ -1929,25 +1950,25 @@ and thus have no change in the legality of renaming for them. For example,
 using the type T2 of the previous example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   AT : @key{aliased} T2;
+@ChgAdded{Version=[2],Text=[   AT : @key{aliased} T2;
    C1_Ren : Integer @key{renames} AT.C1; -- @RI[Legal in Ada 2005, illegal in Ada 95]
    AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95, but does not in Ada 2005,]
-                                   -- @RI[so C1_Ren becomes invalid when this is assigned.]],Old=[]}
+                                   -- @RI[so C1_Ren becomes invalid when this is assigned.]]}
 @end{Example}
 @end{Incompatible95}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-A renaming can have an anonymous access type. In that case, the accessibility
-of the renaming is that of the original object (accessibility is not
-lost as it is for a component or stand-alone object).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  A renaming can have an anonymous access type. In that case, the accessibility
+  of the renaming is that of the original object (accessibility is not
+  lost as it is for a component or stand-alone object).]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0017],ARef=[AI95-00184-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Fixed to forbid renamings of
-depends-on-discriminant components if the type @i{might} be definite.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0017],ARef=[AI95-00184-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed to forbid renamings of
+  depends-on-discriminant components if the type @i{might} be definite.]}
 @end{DiffWord95}
 
 
@@ -2708,24 +2729,24 @@ type @em such a preference would cause Beaujolais effects.
 
     to a universal type that covers @i(T); or
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
     when @i(T) is @Chg{Version=[2],New=[a specific],Old=[an]} anonymous
     access@Chg{Version=[2],New=[-to-object],Old=[]} type
     (see @RefSecNum{Access Types}) with designated type @i(D),
     to an access-to-@Chg{Version=[2],New=[object],Old=[variable]} type
     whose designated type is @i(D)'Class or is covered by
-    @i(D)@Chg{Version=[2],New=[, and that is access-to-constant only if
-    @i(T) is access-to-constant; or],Old=[.]}
+    @i(D)@Chg{Version=[2],New=[; or],Old=[.]}
 
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
-      Because @Chg{Version=[2],New=[access-to-constant is included in this rule,],
-      Old=[it says @lquotes@;access-to-variable@rquotes@; instead of @lquotes@;access-to-object,@rquotes@;]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00409-01]}
+      @ChgNote{We use Chg here, rather than ChgDeleted so that the prefix is
+      left behind.}@Chg{Version=[2],New=[],Old=[Because it says @lquotes@;access-to-variable@rquotes@;
+      instead of @lquotes@;access-to-object,@rquotes@;
       two subprograms that differ only in that one has a parameter
       of an access-to-constant type,
       and the other has an
-      access@Chg{Version=[2],New=[-to-variable],Old=[]} parameter,
-      are distinguishable during overload resolution.
+      access parameter,
+      are distinguishable during overload resolution.]}
 
       The case where the actual is access-to-@i(D)'Class will only
       be legal as part of a call on a dispatching operation;
@@ -2733,10 +2754,10 @@ type @em such a preference would cause Beaujolais effects.
       Note that that rule is not a @ResolutionName.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Text=[when @i(T) is an anonymous access-to-subprogram
      type (see @RefSecNum{Access Types}), to an access-to-subprogram type
-     whose designated profile is subtype-conformant with that of @i{T}.]}
+     whose designated profile is type-conformant with that of @i{T}.]}
 
 @end(Inneritemize)
 @end{Itemize}
@@ -3025,18 +3046,39 @@ resolution rules, instead of having special cases that explicitly allow
 things like @lquotes@;any integer type.@rquotes@;
 @end{DiffWord83}
 
-@begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Generalized the anonymous access resolution rules to support the new
-capabilities of anonymous access types (that is, access-to-subprogram and
-access-to-constant).],Old=[]}
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00409-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{incompatibilities with Ada 95}
+  Ada 95 allowed name resolution to distinguish between anonymous
+  access-to-variable and access-to-constant types. This is similar to
+  distinguishing between subprograms with @key{in} and @key{in out} parameters,
+  which is known to be bad. Thus, that part of the rule was dropped as we now
+  have anonymous access-to-constant types, making this much more likely.]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Cacc @key{is access constant} Integer;
+@key{procedure} Proc (Acc : @key{access} Integer) ...
+@key{procedure} Proc (Acc : Cacc) ...
+List : Cacc := ...;
+Proc (List); -- @RI[OK in Ada 95, ambigious in Ada 2005.]]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If there is any code like this (such code should
+  be rare), it will be ambiguous in Ada 2005.]}
+@end{Incompatible95}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
-   @ChgAdded{Version=[2],Type=[Leading],Text=[We now allow the creation of
-   self-referencing types via anonymous access types. This is an extension
-   because in some unusual cases (in task and protected types) it will make
-   programs that were illegal in Ada 95 legal in Ada 2005. For example:]}
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Generalized the anonymous access resolution rules to support the new
+  capabilities of anonymous access types (that is, access-to-subprogram and
+  access-to-constant).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[We now allow the creation of
+  self-referencing types via anonymous access types. This is an extension
+  because in some unusual cases (in task and protected types) it will make
+  programs that were illegal in Ada 95 legal in Ada 2005. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{task type} T;]}

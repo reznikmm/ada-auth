@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/03/08 06:44:25 $}
+@Comment{$Date: 2005/03/10 06:19:58 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 
@@ -141,8 +141,11 @@ a named task object of that type.
      [@key{new} @Syn2{interface_list} @key{with}]
     >,Old=<>} @Syn2{task_definition}];"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00399-01]}
 @Syn{lhs=<single_task_declaration>,rhs="
-   @key{task} @Syn2{defining_identifier} [@key{is} @Syn2{task_definition}];"}
+   @key{task} @Syn2{defining_identifier} [@key{is}@Chg{Version=[2],New=<
+     [@key{new} @Syn2{interface_list} @key{with}]
+    >,Old=<>} @Syn2{task_definition}];"}
 
 
 @Syn{lhs=<task_definition>,rhs="
@@ -371,7 +374,7 @@ Systems Programming Annex,
 the Identity attribute
 can be used for task identification
 (see @Chg{Version=[2],New=[@RefSecNum(The Package Task_Identification)],
-Old=[@RefSecNum(Random Operations on Tasks)]}).
+Old=[@RefSecNum(Task Information)]}).
 @end{Notes}
 
 @begin{Examples}
@@ -448,10 +451,11 @@ because a @nt{declarative_part} can be empty.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Task types can be derived from one or more interfaces. Entries
-  of the task type can implement the primitive operations of an interface.]}
+  Task types and single tasks can be derived from one or more interfaces.
+  Entries of the task type can implement the primitive operations of an
+  interface.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -798,8 +802,11 @@ a named protected object of that type.
     >,Old=<>} @Syn2{protected_definition}];"}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00399-01]}
 @Syn{lhs=<single_protected_declaration>,rhs="
-  @key{protected} @Syn2{defining_identifier} @key{is} @Syn2{protected_definition};"}
+  @key{protected} @Syn2{defining_identifier} @key{is}@Chg{Version=[2],New=<
+     [@key{new} @Syn2{interface_list} @key{with}]
+    >,Old=<>} @Syn2{protected_definition};"}
 
 
 @Syn{lhs=<protected_definition>,rhs="
@@ -1250,11 +1257,11 @@ protected units do not exist in Ada 83.
 @end{Extend83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Protected types can be derived from one or more interfaces. Operations
-  declared in the protected type can implement the primitive operations of an
-  interface.]}
+  Protected types and single protected objects can be derived from one or
+  more interfaces. Operations declared in the protected type can implement
+  the primitive operations of an interface.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -1263,15 +1270,15 @@ protected units do not exist in Ada 83.
   to aspect clauses to reflect that they are used for more than just
   representation.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
+  @ChgAdded{Version=[2],Text=[Described what happens when an operation of a
+  finalized protected object is called.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[Revised the note on operations of
   protected types to
   reflect that limited types do have an assignment operation, but not
   copying (@nt{assignment_statement}s).]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
-  @ChgAdded{Version=[2],Text=[Described what happens when an operation of a
-  finalized protected object is called.]}
 @end{DiffWord95}
 
 
@@ -2294,7 +2301,7 @@ without waiting for the entire protected action to complete.
   not abortable in any case, and the "current_task" function is not
   guaranteed to work during a protected action
   (see @Chg{Version=[2],New=[@RefSecNum(The Package Task_Identification)],
-  Old=[@RefSecNum(Random Operations on Tasks)]}).
+  Old=[@RefSecNum(Task Information)]}).
 @end(Reason)
 
 When the entry of a protected object is checked to see whether it

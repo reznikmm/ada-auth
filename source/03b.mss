@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/02/04 06:36:39 $}
+@Comment{$Date: 2005/03/10 06:19:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @LabeledClause{Array Types}
 
@@ -33,8 +33,10 @@ value consisting of the values of the components.
 
 @Syn{lhs=<discrete_subtype_definition>,rhs="@SynI{discrete_}@Syn2{subtype_indication} | @Syn2{range}"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
-@Syn{lhs=<component_definition>,rhs="[@key{aliased}] @Syn2{subtype_indication}@Chg{Version=[2],New=< | @Syn2{access_definition}>,Old=<>}"}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00406-01]}
+@Syn{lhs=<component_definition>,rhs="@Chg{Version=[2],New=<
+   >,Old=<>}[@key{aliased}] @Syn2{subtype_indication}@Chg{Version=[2],New=<
+ | [@key{aliased}] @Syn2{access_definition}>,Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -360,7 +362,7 @@ RM83-3.7.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00406-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Array components can have an anonymous access type.]}
 
