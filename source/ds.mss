@@ -1,17 +1,14 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/18 01:10:07 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/08/17 03:15:27 $}
+@Comment{$Date: 2000/08/18 01:10:07 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
 @begin{Intro}
 @redundant[This Annex defines facilities for supporting the implementation
 of distributed systems using multiple partitions working
-cooperatively as part of a single Ada program.
-
-
-]
+cooperatively as part of a single Ada program.]
 @end{Intro}
 
 @begin{Extend83}
@@ -272,10 +269,8 @@ A library package or generic library package is called
 a @i{remote call interface} if a Remote_Call_Interface
 pragma applies to it.
 @Defn{normal library unit}
-
 A @i{normal library unit} is one to which no categorization pragma
 applies.
-
 
 @redundant[The various categories of library units
 and the associated restrictions are
@@ -283,10 +278,8 @@ described in this clause and its subclauses.
 The categories are related
 hierarchically in that the library units of one category can depend
 semantically only on library units of that category or an earlier one,
-
 except that the body of a remote types or remote call interface library
 unit is unrestricted.
-
 
 @Leading@;The overall hierarchy (including declared pure) is as follows:
 @begin{Description}
@@ -640,7 +633,6 @@ A @nt{pragma} All_Calls_Remote is a library unit pragma.
 @Defn{remote subprogram}
 A @i{remote call interface (RCI)} is a library unit to which the
 pragma Remote_Call_Interface applies.
-
 A subprogram declared in the visible part of such a library unit is
 called a @i{remote subprogram}.
 
@@ -976,7 +968,7 @@ procedure in the called partition returns.
 If a construct containing a remote call is aborted, the
 remote subprogram call is @i{cancelled}.
 Whether the execution of the remote subprogram is immediately aborted
-as a result of the cancellation is implementation defined.
+as a result of the cancellation is implemen@!tation defined.
 @ImplDef{Whether the execution of the remote subprogram is immediately
 aborted as a result of cancellation.}
 
@@ -1370,6 +1362,9 @@ should have a query function visible to the clients to inform them about the
 availability of the tapes in the system.
 @end{Discussion}
 
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+
 @begin{itemize}
 The package Tapes provides the necessary declarations of the type and its
 primitive operations.
@@ -1408,12 +1403,12 @@ dereferencing the controlling operands T1 and T2.
 @redundant[The @i{Partition Communication Subsystem} (PCS) provides facilities for
 supporting communication between the active partitions of a distributed
 program. The package System.RPC is a language-defined interface to the PCS.]
+An implementation conforming to this Annex shall use the RPC
+interface to implement remote subprogram calls.
 @begin{Reason}
 The prefix RPC is used rather than RSC because the term remote procedure call
 and its acronym are more familiar.
 @end{Reason}
-An implementation conforming to this Annex shall use the RPC
-interface to implement remote subprogram calls.
 @end{Intro}
 
 @begin{StaticSem}
@@ -1514,10 +1509,8 @@ the library units of an active partition
 (that is, right after the @i{elaboration of the partition}) if the partition
 includes an RCI library unit, but prior to invoking the main
 subprogram, if any.
-
 The Partition parameter is the Partition_ID of the active partition
 being elaborated.
-
 @Defn{RPC-receiver}
 The Receiver parameter designates an
 implementation-provided procedure called the

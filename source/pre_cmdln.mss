@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:29 $}
+@Comment{$Date: 2000/08/18 01:10:08 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -38,8 +38,7 @@ arguments and to set the exit status code to be returned on normal termination.
 @begin{Example}@Keepnext
 @key[function] Argument_Count @key[return] Natural;
 @end{Example}
-
-If the external execution environment supports passing arguments to
+@Trailing@;If the external execution environment supports passing arguments to
 a program, then
 Argument_Count returns
 the number of arguments passed to the program
@@ -49,8 +48,7 @@ The meaning of @lquotes@;number of arguments@rquotes@; is implementation defined
 @begin{Example}@Keepnext
 @key[function] Argument (Number : @key[in] Positive) @key[return] String;
 @end{Example}
-
-If the external execution environment supports passing arguments to
+@Trailing@;If the external execution environment supports passing arguments to
 a program, then
 Argument returns an implementation-defined value corresponding to
 the argument at relative position Number.
@@ -65,13 +63,18 @@ raise Constraint_Error, since Argument_Count is 0.@end{ramification}
 @begin{Example}@Keepnext
 @key[function] Command_Name @key[return] String;
 @end{Example}
-
-If the external execution environment supports passing arguments to
+@Trailing@;If the external execution environment supports passing arguments to
 a program, then
 Command_Name returns an implementation-defined value corresponding to
 the name of the command invoking the program;
 otherwise Command_Name returns the null string.
 
+@Comment{This is missing; leading the following paragraph glued to "Command_Name"}
+@begin{Example}@Keepnext
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[type] @AdaTypeDefn{Exit_Status} @key[is] @RI{implementation-defined integer type};],Old=[]}
+@end{Example}
+@Trailing@;
 The type Exit_Status represents the range of exit
 status values supported by the external execution environment.
 The constants Success and Failure correspond to success and failure,
@@ -80,7 +83,6 @@ respectively.
 @begin{Example}@Keepnext
 @key[procedure] Set_Exit_Status (Code : @key[in] Exit_Status);
 @end{Example}
-
 If the external execution environment supports returning an exit status
 from a program, then Set_Exit_Status sets Code as the status. Normal
 termination of a program returns as the exit status the value most

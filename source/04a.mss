@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:26 $}
+@Comment{$Date: 2000/08/18 01:10:07 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2649,15 +2649,9 @@ for those composite types covered earlier) is defined as follows:
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016]}
 @Chg{New=[For any composite type, the order in which "=" is called for
-components is not defined by the language. Furthermore, if the result can be
-determined before calling "=" on some components, the language does not define
-whether "=" is called on those components.@PDefn{Unspecified}],Old=[]}
-@begin{Honest}
-@ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[This new paragraph should have been worded using @i<Unspecified>
-instead of @i<Not defined by the language>. But this is unlikely to cause a
-problem, as @i<unspecified> carries no semantics.],Old=[]}
-@end{Honest}
+components is unspecified. Furthermore, if the result can be determined
+before calling "=" on some components, it is unspecified whether "=" is called
+on those components.@PDefn{Unspecified}],Old=[]}
 
 The predefined "/=" operator gives the complementary result
 to the predefined "=" operator.

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.15 $ $Date: 2000/08/12 00:40:17 $ $Author: Randy $ }
+@Comment{ $Revision: 1.16 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:17 $}
+@Comment{$Date: 2000/08/18 01:10:08 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -310,7 +310,7 @@ particular time.
 @end{Discussion}
 
 @Leading@Keepnext@;An object code listing, including:
-@begin{itemize}
+@begin{inneritemize}
 Machine instructions, with relative offsets;
 @begin{Discussion}
 
@@ -340,7 +340,7 @@ arising from a statement or declaration is in one basic block, this must be
 indicated by the implementation.
 
 @end{Discussion}
-@end{itemize}
+@end{inneritemize}
 
 An identification of each construct for which the implementation detects
 the possibility of erroneous execution;
@@ -353,7 +353,7 @@ exception will be raised, then such an identification would be useful.
 
 @end{Discussion}
 
-For each subprogram, block, task,
+@Trailing@;For each subprogram, block, task,
 or other construct implemented by
 reserving and subsequently freeing an area on a run-time stack,
 an identification
@@ -361,20 +361,16 @@ of the length of the fixed-size portion of the area and an indication
 of whether the non-fixed size portion is reserved on the stack
 or in a dynamically-managed storage region.
 @begin{Discussion}
-
 This requirement is vital for those requiring to show that the storage
 available to a program is sufficient. This is crucial in those cases in
 which the internal checks for stack overflow are suppressed (perhaps by
 @key[pragma] Restrictions(No_Exceptions)).
-
 @end{Discussion}
 @end{itemize}
 
-@begin{Wide}
 @Leading@;The implementation shall provide the following
 information for any partition to which the
 pragma applies:
-@end{Wide}
 @begin{Itemize}
 An object code listing of the entire partition, including
 initialization and finalization code as well as
@@ -391,16 +387,17 @@ manner.@end{discussion}
 
 A description of the run-time model relevant to the partition.
 @begin{Discussion}
-
 For example,
 a description of the storage model is vital,
 since the Ada language does not explicitly define such a model.
-
 @end{Discussion}
 @end{itemize}
 @end{ImplReq}
 
-The implementation shall provide control- and data-flow
+@Chgnote{The following paragraph is missing a number in the original version.
+To give it a number in the new version, it is marked as an insertion.}
+@ChgRef{Version=[0],Kind=[Added]}
+@Chg{New=[],Old=[@Noparanum@;]}The implementation shall provide control- and data-flow
 information, both within each compilation unit and across
 the compilation units of the partition.
 @begin{Discussion}
@@ -487,21 +484,21 @@ is involved in this pragma.
 @begin{StaticSem}
 @Defn{inspection point}
 An @i{inspection point} is a point in the object code
-corresponding to the occurrence of a pragma Inspection_Point in the
+corresponding to the occurrence of a pragma Inspection_@!Point in the
 compilation unit.
+@Defn{inspectable object}
+An object is @i{inspectable} at an inspection point if the corresponding
+pragma Inspection_Point either has an argument denoting that object,
+or has no arguments.
 @begin{ramification}
 If a pragma Inspection_Point is in an in-lined subprogram, there
 might be numerous inspection points in the object code corresponding to
 the single occurrence of the pragma in the source; similar considerations
 apply if such a
 pragma is in a generic, or in a loop that has been @lquotes@;unrolled@rquotes@; by an
-optimizer.@end{ramification}
-@Defn{inspectable object}
-An object is @i{inspectable} at an inspection point if the corresponding
-pragma Inspection_Point either has an argument denoting that object,
-or has no arguments.
+optimizer.
+@end{ramification}
 @begin{Discussion}
-
 If the short form of the pragma is used, then all objects are inspectable.
 This implies that objects out of scope at the point of the pragma are
 inspectable. A good interactive debugging system could provide information
@@ -601,30 +598,28 @@ a restriction can be imposed.
 @begin{StaticSem}
 The following restrictions, the same as in @RefSecNum{Tasking Restrictions},
 apply in this Annex:
- No_Task_Hierarchy,
- No_Abort_Statement,
-No_Implicit_Heap_Allocation,
- Max_Task_Entries is 0,
-Max_Asynchronous_Select_Nesting is 0, and
- Max_Tasks is 0.
+ No_Task_@!Hierarchy,
+ No_Abort_@!Statement,
+ No_Implicit_@!Heap_@!Allocation,
+ Max_@!Task_@!Entries is 0,
+ Max_@!Asynchronous_@!Select_@!Nesting is 0, and
+ Max_@!Tasks is 0.
 @redundant[The last three restrictions are checked prior to program execution.]
 
-The following additional restrictions apply in this Annex.
+@Trailing@;The following additional restrictions apply in this Annex.
 
-
-@leading@b{Tasking-related restriction:}
+@leading@keepnext@b{Tasking-related restriction:}
 @begin{Description}
-@Defn2{Term=[Restrictions],Sec=(No_Protected_Types)}No_Protected_Types @\There are no declarations of protected types or
-protected objects.
+@Trailing@;@Defn2{Term=[Restrictions],Sec=(No_Protected_Types)}No_Protected_Types @\There
+are no declarations of protected types or protected objects.
 
-@begin{Wide}
-@leading@b{Memory-management related restrictions:}
-@end{Wide}
+@leading@keepnext@b{Memory-management related restrictions:}
 
-@Defn2{Term=[Restrictions],Sec=(No_Allocators)}No_Allocators @\There are no occurrences of an @nt{allocator}.
+@Defn2{Term=[Restrictions],Sec=(No_Allocators)}No_Allocators @\There are no
+occurrences of an @nt{allocator}.
 
-@Defn2{Term=[Restrictions],Sec=(No_Local_Allocators)}No_Local_Allocators @\@nt{Allocator}s are prohibited in subprograms,
-generic subprograms,
+@Defn2{Term=[Restrictions],Sec=(No_Local_Allocators)}No_Local_Allocators @\@nt{Allocator}s
+are prohibited in subprograms, generic subprograms,
 tasks, and entry bodies; instantiations of generic packages are
 also prohibited in these contexts.
 @begin[Ramification]
@@ -650,24 +645,21 @@ danger of a dangling pointer can therefore be avoided.
 
 @end{Discussion}
 
-Immediate_Reclamation @\Except for storage occupied by objects created by
+@Trailing@;Immediate_Reclamation @\Except for storage occupied by objects created by
 @nt{allocator}s and not deallocated via unchecked deallocation, any storage
 reserved at run time for an object is immediately reclaimed when the
 object no longer exists.
 @Defn2{Term=[Restrictions],Sec=(Immediate_Reclamation)}
 @begin{Discussion}
-
 Immediate reclamation would apply to storage created by the compiler, such
 as for a return value from a function whose size is not known at the
 call site.
-
 @end{Discussion}
 
-@begin{Wide}
-@leading@b{Exception-related restriction:}
-@end{Wide}
+@leading@keepnext@b{Exception-related restriction:}
 
-@Defn2{Term=[Restrictions],Sec=(No_Exceptions)}No_Exceptions @\@nt{Raise_statement}s and @nt{exception_handler}s are not allowed.
+@Trailing@Defn2{Term=[Restrictions],Sec=(No_Exceptions)}No_Exceptions @\@nt{Raise_statement}s
+and @nt{exception_handler}s are not allowed.
 No language-defined run-time checks are generated;
 however, a run-time check performed automatically by the hardware
 is permitted.
@@ -684,9 +676,7 @@ programming at the assembler level.
 
 @end{Discussion}
 
-@begin{Wide}
-@leading@b{Other restrictions:}
-@end{Wide}
+@leading@keepnext@b{Other restrictions:}
 
 @Defn2{Term=[Restrictions],Sec=(No_Floating_Point)}No_Floating_Point @\Uses of predefined floating point types and
 operations, and declarations of new floating point types, are

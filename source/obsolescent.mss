@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:18 $}
+@Comment{$Date: 2000/08/18 01:10:08 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -197,16 +197,16 @@ denotes an ordinary fixed point subtype and a @nt<delta_constraint>
 defines an ordinary fixed point subtype with a @i(delta)
 given by the value of the @nt<expression> of the
 @nt<delta_constraint>.
-If the @nt<delta_constraint> includes a @nt<range_constraint>, then
-the ordinary fixed point subtype is constrained by the @nt<range_constraint>.
+If the @nt<delta_constraint> includes a @nt<range_@!constraint>, then
+the ordinary fixed point subtype is constrained by the @nt<range_@!constraint>.
 
 A @nt<subtype_indication> with a @nt<subtype_mark> that
 denotes a floating point subtype and a @nt<digits_constraint>
 defines a floating point subtype with a requested decimal precision
 (as reflected by its Digits attribute)
 given by the value of the @nt<expression> of the @nt<digits_constraint>.
-If the @nt<digits_constraint> includes a @nt<range_constraint>, then
-the floating point subtype is constrained by the @nt<range_constraint>.
+If the @nt<digits_constraint> includes a @nt<range_@!constraint>, then
+the floating point subtype is constrained by the @nt<range_@!constraint>.
 @end{StaticSem}
 
 @begin{RunTime}
@@ -427,8 +427,8 @@ X'@attr{Address} @\For a task entry whose address is specified
                value is implementation defined. The value of this attribute
                is of the type of the subtype System.Address.
 
-@PDefn2{Term=[specifiable], Sec=(of Address for entries)}
-               @NoPrefix@;Address may be specified for single entries
+@NoPrefix@;@PDefn2{Term=[specifiable], Sec=(of Address for entries)}
+               Address may be specified for single entries
                via an @nt{attribute_definition_clause}.
 @begin{Reason}
 Because of the equivalence of @nt{at_clause}s and

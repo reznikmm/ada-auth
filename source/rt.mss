@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/08/17 03:15:27 $}
+@Comment{$Date: 2000/08/18 01:10:08 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -139,8 +139,10 @@ starts executing.
 @leading@keepnext@;The following declarations exist in package System:
 @begin{example}
 @key{subtype} Any_Priority @key{is} Integer @key{range} @RI{implementation-defined};
-@key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @RI{implementation-defined};
-@key{subtype} Interrupt_Priority @key{is} Any_Priority @key{range} Priority'Last+1 .. Any_Priority'Last;
+@key{subtype} Priority @key{is} Any_Priority
+   @key{range} Any_Priority'First .. @RI{implementation-defined};
+@key{subtype} Interrupt_Priority @key{is} Any_Priority
+   @key{range} Priority'Last+1 .. Any_Priority'Last;
 
 Default_Priority : @key{constant} Priority := (Priority'First + Priority'Last)/2;
 @end{example}
@@ -149,8 +151,8 @@ Default_Priority : @key{constant} Priority := (Priority'First + Priority'Last)/2
 The full range of priority values supported by an implementation is specified
 by the subtype Any_Priority. The subrange of priority values that are high
 enough to require the blocking of one or more interrupts is specified by the
-subtype Interrupt_Priority. @Redundant[The subrange of priority values below
-System.Interrupt_Priority'First is specified by the subtype System.Priority.]
+subtype Interrupt_@!Priority. @Redundant[The subrange of priority values below
+System.@!Interrupt_@!Priority'First is specified by the subtype System.@!Priority.]
 
 The priority specified by a Priority or Interrupt_Priority pragma is the
 value of the @nt{expression} in the pragma, if any. If there is no
@@ -391,10 +393,13 @@ if we count the idle task.
 A preemptible resource is a resource that while allocated
 to one task can be allocated (temporarily) to another
 instead.
-Processors are preemptible resources.
-Access to a protected object
+Processors are preemptible resources. Access to a protected object
 (see @RefSecNum{Protected Subprograms and Protected Actions})
 is a nonpreemptible resource.
+@Defn{preempted task}
+When a higher-priority task is dispatched to the processor, and the previously
+running task is placed on the appropriate ready queue, the latter task
+is said to be @i{preempted}.
 @begin{Reason}
 A processor that is executing a task is available to execute tasks of
 higher priority, within the set of tasks that that processor is able to
@@ -402,10 +407,6 @@ execute. Write access to a protected object, on the
 other hand, cannot be granted to a new task before the
 old task has released it.
 @end{Reason}
-@Defn{preempted task}
-When a higher-priority task is dispatched to the processor, and the previously
-running task is placed on the appropriate ready queue, the latter task
-is said to be @i{preempted}.
 
 @PDefn{task dispatching point}
 @PDefn{dispatching point}
@@ -426,10 +427,8 @@ priority.
 
 An implementation is allowed to define additional resources as execution
 resources, and to define the corresponding allocation policies for them.
-
 Such resources may have an implementation defined effect on
 task dispatching (see @RefSecNum{The Standard Task Dispatching Policy}).
-
 @ImplDef{The affect of implementation defined execution resources on
 task dispatching.}
 
@@ -1359,34 +1358,27 @@ Storage_Error should be raised.
 @Leading@;The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
 @begin{Description}
-@Defn2{Term=[Restrictions],Sec=(Max_Storage_At_Blocking)}Max_Storage_At_Blocking @\Specifies the maximum portion
-                          @redundant[(in storage elements)]
-                          of a task's Storage_Size
-                          that can be retained by a blocked task.
+@Defn2{Term=[Restrictions],Sec=(Max_Storage_At_Blocking)}Max_Storage_At_Blocking @\Specifies
+  the maximum portion @redundant[(in storage elements)]
+  of a task's Storage_Size that can be retained by a blocked task.
 
-@Defn2{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies the maximum dynamic nesting level of
-                                @nt{asynchronous_select}s.
-
-                                @Redundant[A value of zero prevents
-                                the use of any
-                                @nt{asynchronous_select}.]
+@Defn2{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies
+  the maximum dynamic nesting level of @nt{asynchronous_select}s.
+  @Redundant[A value of zero prevents the use of any @nt{asynchronous_select}.]
 
 
-@Defn2{Term=[Restrictions],Sec=(Max_Tasks)}Max_Tasks @\Specifies the maximum number of task creations
-    that may be executed over the lifetime of a partition,
-    not counting the creation of the environment task.
-                                @begin{Ramification}
-                                Note that this is not a limit on the
-                                number of tasks active at a given time;
-                                it is a limit on the total number of
-                                task creations that occur.
-                                @end{Ramification}
-                                @begin{ImplNote}
-                                We envision an implementation approach
-                                that places TCBs or pointers to them
-                                in a fixed-size table, and never reuses
-                                table elements.
-                                @end{ImplNote}
+@Defn2{Term=[Restrictions],Sec=(Max_Tasks)}Max_Tasks @\Specifies the maximum
+  number of task creations that may be executed over the lifetime of a
+  partition, not counting the creation of the environment task.
+  @begin{Ramification}
+     Note that this is not a limit on the
+     number of tasks active at a given time;
+     it is a limit on the total number of task creations that occur.
+  @end{Ramification}
+  @begin{ImplNote}
+     We envision an implementation approach that places TCBs or pointers
+     to them in a fixed-size table, and never reuses table elements.
+  @end{ImplNote}
 @end{Description}
 
 It is implementation defined whether the use of pragma Restrictions
@@ -1457,6 +1449,8 @@ monotonic clock package.]
 
   @key[function] "@key[abs]"(Right : Time_Span) @key[return] Time_Span;
 
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
   @key[function] "<" (Left, Right : Time_Span) @key[return] Boolean;
   @key[function] "<="(Left, Right : Time_Span) @key[return] Boolean;
@@ -1634,7 +1628,7 @@ backward clock jumps.
 @begin{DocReq}
 
 The implementation shall document the values of Time_First, Time_Last,
-Time_Span_First, Time_Span_Last, Time_Span_Unit, and Tick.
+Time_Span_@!First, Time_Span_@!Last, Time_Span_@!Unit, and Tick.
 
 The implementation shall document the properties of the underlying
 time base used for the clock and for type Time,
@@ -1774,10 +1768,10 @@ There is no requirement that these be the same.
 @begin{Intro}
 @Redundant[This clause specifies performance requirements for the
 @nt{delay_statement}.
-The rules apply both to @nt{delay_relative_statement} and to
-@nt{delay_until_statement}. Similarly, they apply equally to a
-simple @nt{delay_statement} and to one which appears in a
-@nt{delay_alternative}.]
+The rules apply both to @nt{delay_@!relative_@!statement} and to
+@nt{delay_@!until_@!statement}. Similarly, they apply equally to a
+simple @nt{delay_@!statement} and to one which appears in a
+@nt{delay_@!alternative}.]
 @end{Intro}
 
 @begin{RunTime}
@@ -1804,15 +1798,15 @@ nevertheless a potentially blocking operation
 When a @nt{delay_statement} appears in a @nt{delay_alternative} of a
 @nt{timed_entry_call} the selection of the entry call is attempted,
 regardless of the specified expiration time.
+When a @nt{delay_statement} appears in a @nt{selective_accept_alternative},
+and a call is queued on one of the open entries, the selection of that
+entry call proceeds, regardless of the value of the delay expression.
 @begin{Ramification}
 The effect of these requirements is that one has to always attempt a rendezvous,
 regardless of the value of the delay expression. This can be tested by
 issuing a @nt{timed_entry_call} with an expiration time
 of zero, to an open entry.
 @end{Ramification}
-When a @nt{delay_statement} appears in a @nt{selective_accept_alternative},
-and a call is queued on one of the open entries, the selection of that
-entry call proceeds, regardless of the value of the delay expression.
 
 @end{RunTime}
 
@@ -1986,16 +1980,15 @@ It uses a conceptual @i{held priority} value to represent the task's
 @Defn{held priority}
 @Defn{idle task}
 After the Hold operation has been applied to a task, the task becomes
-@i{held}.
-@begin{Discussion}
-This state should not be confused with the blocked state as defined
-in @RefSecNum{Task Execution - Task Activation}; the task is still ready.
-@end{Discussion}
-For each processor there is a conceptual @i{idle task},
+@i{held}. For each processor there is a conceptual @i{idle task},
 which is always ready. The base priority of the idle task is below
-System.Any_Priority'First. The @i{held priority} is a
+System.@!Any_@!Priority'First. The @i{held priority} is a
 constant of the type integer whose value is below the base priority of the
 idle task.
+@begin{Discussion}
+The held state should not be confused with the blocked state as defined
+in @RefSecNum{Task Execution - Task Activation}; the task is still ready.
+@end{Discussion}
 
 The Hold operation sets the state of T to held. For a held task:
 the task's own base priority does not constitute an inheritance source
@@ -2116,14 +2109,13 @@ permitted in the execution of interrupt handlers.
 @end{Ramification}
 
 The implementation shall recognize entry-less protected types.
-The overhead of acquiring
-the execution resource of an object of such a type
-(see @RefSecNum{Protected Subprograms and Protected Actions}) shall be minimized.
-@begin{ImplNote}
-Ideally just a spin-lock.
-@end{ImplNote}
-In particular, there should not be any overhead due to evaluating
+The overhead of acquiring the execution resource of an object of such a type
+(see @RefSecNum{Protected Subprograms and Protected Actions}) shall be
+minimized. In particular, there should not be any overhead due to evaluating
 @nt{entry_barrier} @nt{condition}s.
+@begin{ImplNote}
+Ideally the overhead should just be a spin-lock.
+@end{ImplNote}
 
 Unchecked_Deallocation shall be supported for terminated tasks that are
 designated by access types, and shall have the effect of releasing all

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:27 $}
+@Comment{$Date: 2000/08/18 01:10:08 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -539,7 +539,7 @@ An object of the private type State can be used to hold the internal state of a
 generator. Such objects are only needed if the application is designed to
 save and restore generator states or to examine or manufacture them.
 
-The operations on generators affect the state and therefore the future values
+@Trailing@;The operations on generators affect the state and therefore the future values
 of the associated sequence. The semantics of the operations on generators and
 states are defined below.
 @begin{DescribeCode}
@@ -547,9 +547,8 @@ states are defined below.
 @key[function] Random (Gen : Generator) @key[return] Uniformly_Distributed;
 @key[function] Random (Gen : Generator) @key[return] Result_Subtype;
 @end{Example}
-
-Obtains the @lquotes@;next@rquotes@; random number from the given generator, relative to its
-current state, according to an implementation-defined algorithm.
+@Trailing@;Obtains the @lquotes@;next@rquotes@; random number from the given generator,
+relative to its current state, according to an implementation-defined algorithm.
 The result of the function in Numerics.Float_Random is delivered as a value of
 the subtype Uniformly_Distributed, which is a subtype of the predefined type
 Float having a range of
@@ -569,8 +568,7 @@ generic formal subtype Result_Subtype.
                  Initiator : @key[in] Integer);
 @key[procedure] Reset (Gen       : @key[in] Generator);
 @end{Example}
-
-@PDefn{unspecified}
+@Trailing@PDefn{unspecified}
 Sets the state of the specified generator to one that is an unspecified
 function of the value of the parameter Initiator (or to a time-dependent state,
 if only a generator parameter is
@@ -591,17 +589,15 @@ procedure}.
 @key[procedure] Reset (Gen        : @key[in]  Generator;
                  From_State : @key[in]  State);
 @end{Example}
-
-Save obtains the current state of a generator. Reset gives a generator the
-specified state. A generator that is reset to a state previously obtained by
-invoking Save is restored to the state it had when Save was
+@Trailing@;Save obtains the current state of a generator. Reset gives a
+generator the specified state. A generator that is reset to a state previously
+obtained by invoking Save is restored to the state it had when Save was
 invoked.
 
 @begin{Example}
 @key[function] Image (Of_State    : State)  @key[return] String;
 @key[function] Value (Coded_State : String) @key[return] State;
 @end{Example}
-
 Image provides a representation of a state coded (in an implementation-defined
 way) as a string whose length is bounded by the value of Max_Image_Width.
 Value is the inverse of Image: Value(Image(S)) = S for each state S that can be
@@ -720,7 +716,7 @@ value.
 
 @begin{Examples}
 @Leading@Keepnext@i{Example of a program that plays a simulated dice game:}
-@begin{Example}
+@begin{Example}@Trailing
 @key[with] Ada.Numerics.Discrete_Random;
 @key[procedure] Dice_Game @key[is]@Softpage
    @key[subtype] Die @key[is] Integer @key[range] 1 .. 6;
@@ -739,10 +735,8 @@ value.
 @key[end] Dice_Game;
 @end{Example}
 
-@begin{Wide}
 @Leading@Keepnext@i{Example of a program that simulates coin tosses:}
-@end{Wide}
-@begin{Example}
+@begin{Example}@Trailing
 @key[with] Ada.Numerics.Discrete_Random;
 @key[procedure] Flip_A_Coin @key[is]@Softpage
    @key[type] Coin @key[is] (Heads, Tails);
@@ -764,10 +758,8 @@ value.
 @key[end] Flip_A_Coin;
 @end{Example}
 
-@begin{Wide}
 @Leading@Keepnext@i{Example of a parallel simulation of a physical system,
 with a separate generator of event probabilities in each task:}
-@end{Wide}
 @begin{Example}
 @key[with] Ada.Numerics.Float_Random;
 @key[procedure] Parallel_Simulation @key[is]@Softpage

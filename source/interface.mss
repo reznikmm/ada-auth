@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/17 03:15:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:28 $}
+@Comment{$Date: 2000/08/18 01:10:08 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -808,15 +808,14 @@ C_float, and long_@!double correspond respectively
 to the C types signed char,
 unsigned short, unsigned long, unsigned char, float, and long double.
 
-The type of the subtype plain_char is either signed_char or
+@Trailing@;The type of the subtype plain_char is either signed_char or
 unsigned_char, depending on the C implementation.
 @begin{DescribeCode}
 @begin{Example}@Keepnext
 @key(function) To_C   (Item : @key(in) Character) @key(return) char;
 @key(function) To_Ada (Item : @key(in) char     ) @key(return) Character;
 @end{Example}
-
-The functions To_C and To_Ada map between the Ada type Character
+@Trailing@;The functions To_C and To_Ada map between the Ada type Character
 and the C type char.
 
 @begin{ImplNote}
@@ -844,11 +843,8 @@ otherwise the result is unspecified.], Old=[]}
 @begin{Example}@Keepnext
 @key(function) Is_Nul_Terminated (Item : @key(in) char_array) @key(return) Boolean;
 @end{Example}
-
-
-The result of Is_Nul_Terminated is True if Item contains nul, and is
+@Trailing@;The result of Is_Nul_Terminated is True if Item contains nul, and is
 False otherwise.
-
 
 @begin{Example}@Keepnext
 @key(function) To_C   (Item : @key(in) String;     Append_Nul : @key(in) Boolean := True)
@@ -865,20 +861,16 @@ For each component Item(I), the corresponding component in the result
 is To_C applied to Item(I).
 The value nul is appended if Append_Nul is True.
 
-The result of To_Ada is a String whose length is Item'Length (if Trim_Nul is
+@Trailing@;The result of To_Ada is a String whose length is Item'Length (if Trim_Nul is
 False) or the length of the slice of Item preceding the first
-nul (if
-Trim_Nul is True). The lower bound of the result is 1.
+nul (if Trim_Nul is True). The lower bound of the result is 1.
 If Trim_Nul is False, then for each component Item(I)
-the
-corresponding component in the result
+the corresponding component in the result
 is To_Ada applied to Item(I).
-If Trim_Nul is True, then for each component Item(I)
-before
+If Trim_Nul is True, then for each component Item(I) before
 the first nul the corresponding component in the result
 is To_Ada applied to Item(I).
-The function propagates Terminator_Error
- if Trim_Nul is True and
+The function propagates Terminator_Error if Trim_Nul is True and
 Item does not contain nul.
 
 @begin{Example}@Keepnext
@@ -892,7 +884,6 @@ Item does not contain nul.
                   Count    : @key(out) Natural;
                   Trim_Nul : @key(in) Boolean := True);
 @end{Example}
-
 For procedure To_C, each element of Item is converted (via the To_C function)
 to a char, which is assigned to the corresponding element
 of Target. If Append_Nul is True, nul
@@ -902,12 +893,10 @@ number of Target elements assigned.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Target is not long enough, Constraint_Error is propagated.
 
-For procedure To_Ada, each element of Item (if Trim_Nul is False) or
-each element of Item preceding the first nul
- (if Trim_Nul is True) is
+@Trailing@;For procedure To_Ada, each element of Item (if Trim_Nul is False) or
+each element of Item preceding the first nul (if Trim_Nul is True) is
 converted (via the To_Ada function) to a Character, which is
-assigned to the corresponding element of Target.
-Count
+assigned to the corresponding element of Target. Count
 is set to the number of Target elements assigned.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Target is not long enough, Constraint_Error is propagated.
@@ -917,18 +906,14 @@ then Terminator_Error is propagated.
 @begin{Example}@Keepnext
 @key(function) Is_Nul_Terminated (Item : @key(in) wchar_array) @key(return) Boolean;
 @end{Example}
-
-
-The result of Is_Nul_Terminated is True if Item contains wide_nul, and is
-False otherwise.
-
+@Trailing@;The result of Is_Nul_Terminated is True if Item contains wide_nul,
+and is False otherwise.
 
 @begin{Example}@Keepnext
 @key(function) To_C   (Item : @key(in) Wide_Character) @key(return) wchar_t;
 @key(function) To_Ada (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
 @end{Example}
-
-To_C and To_Ada provide the mappings between the Ada and C wide
+@Trailing@;To_C and To_Ada provide the mappings between the Ada and C wide
 character types.
 
 @begin{Example}
@@ -950,7 +935,6 @@ character types.
                   Count    : @key(out) Natural;
                   Trim_Nul : @key(in) Boolean := True);
 @end{Example}
-
 The To_C and To_Ada subprograms that convert between Wide_String and
 wchar_array have analogous effects to the To_C and To_Ada
 subprograms that convert between String and char_array, except that
@@ -1217,16 +1201,15 @@ for objects imported from, exported to, or passed to C.@end{discussion}
                        Nul_Check : @key(in) Boolean := False)
    @key(return) chars_ptr;
 @end{Example}
-
-If Item is @key(null), then To_Chars_Ptr returns Null_Ptr.
+@Trailing@;If Item is @key(null), then To_Chars_Ptr returns Null_Ptr.
 Otherwise, if Nul_Check is True and Item.@key(all) does not contain nul,
 then the function propagates Terminator_Error;
 if Nul_Check is True and Item.@key(all) does contain nul,
 To_Chars_Ptr performs a pointer conversion with no allocation of memory.
+
 @begin{Example}@Keepnext
 @key(function) New_Char_Array (Chars   : @key(in) char_array) @key(return) chars_ptr;
 @end{Example}
-
 This function returns a pointer to an allocated object initialized to
   Chars(Chars'First .. Index) & nul, where
 @begin{itemize}
@@ -1235,33 +1218,31 @@ Index = Chars'Last if Chars does not contain nul, or
 Index is the smallest size_t value I such that Chars(I+1) = nul.
 @end{itemize}
 
-@comment{The following paragraph is missing a number in the original version.
-To gove it a number in the new version, it is marked as an insertion.}
-@ChgRef{Version=[1],Kind=[Added]}
+@ChgNote{The following paragraph is missing a number in the original version.
+To give it a number in the new version, it is marked as an insertion.}
+@ChgRef{Version=[0],Kind=[Added]}@Trailing
 @Chg{New=[],Old=[@Noparanum@;]}Storage_Error is propagated if the allocation
 fails.
 
 @begin{Example}@Keepnext
 @key(function) New_String (Str : @key(in) String) @key(return) chars_ptr;
 @end{Example}
-
-This function is equivalent to New_Char_Array(To_C(Str)).
+@Trailing@;This function is equivalent to New_Char_Array(To_C(Str)).
 
 @begin{Example}@Keepnext
 @key(procedure) Free (Item : @key(in) @key(out) chars_ptr);
 @end{Example}
-
-If Item is Null_Ptr, then Free has no effect.
+@Trailing@;If Item is Null_Ptr, then Free has no effect.
 Otherwise, Free releases the storage occupied by Value(Item),
- and resets Item to Null_Ptr.
+and resets Item to Null_Ptr.
+
 @begin{Example}@Keepnext
 @key(function) Value (Item : @key(in) chars_ptr) @key(return) char_array;
 @end{Example}
-
-If Item = Null_Ptr then Value propagates Dereference_Error.
+@Trailing@;If Item = Null_Ptr then Value propagates Dereference_Error.
 Otherwise Value returns the prefix of the array
- of chars pointed to by Item, up to and including the
- first nul.
+of chars pointed to by Item, up to and including the
+first nul.
 The lower bound of the result is 0.
 If Item does not point to a nul-terminated string, then
 execution of Value is erroneous.
@@ -1270,10 +1251,9 @@ execution of Value is erroneous.
 @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
    @key(return) char_array;
 @end{Example}
-
-If Item = Null_Ptr then Value(Item) propagates Dereference_Error.
+@Trailing@;If Item = Null_Ptr then Value(Item) propagates Dereference_Error.
 Otherwise Value returns the shorter of two arrays:
- the first Length chars pointed to by Item, and Value(Item).
+the first Length chars pointed to by Item, and Value(Item).
 The lower bound of the result is 0.
 @begin{Ramification}
 Value(New_Char_Array(Chars)) = Chars if Chars does not contain
@@ -1284,21 +1264,18 @@ up to and including the first nul.
 @begin{Example}@Keepnext
 @key(function) Value (Item : @key(in) chars_ptr) @key(return) String;
 @end{Example}
-
-Equivalent to To_Ada(Value(Item), Trim_Nul=>True).
+@Trailing@;Equivalent to To_Ada(Value(Item), Trim_Nul=>True).
 
 @begin{Example}@Keepnext
 @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
    @key(return) String;
 @end{Example}
-
-Equivalent to To_Ada(Value(Item, Length), Trim_Nul=>True).
+@Trailing@;Equivalent to To_Ada(Value(Item, Length), Trim_Nul=>True).
 
 @begin{Example}@Keepnext
 @key(function) Strlen (Item : @key(in) chars_ptr) @key(return) size_t;
 @end{Example}
-
-Returns @i[Val]'Length@en@;1 where @i[Val] = Value(Item);
+@Trailing@;Returns @i[Val]'Length@en@;1 where @i[Val] = Value(Item);
 propagates Dereference_Error if Item = Null_Ptr.
 @begin{ramification}
 Strlen returns the number of chars in the array pointed to by Item, up to
@@ -1316,7 +1293,6 @@ Strlen has the effect of C's strlen function.
                   Chars  : @key(in) char_array;
                   Check  : Boolean := True);
 @end{Example}
-
 @Leading@;This procedure updates the value pointed to by Item, starting at
 position Offset, using Chars as the data to be copied into the array.
 Overwriting the nul terminator,
@@ -1332,19 +1308,19 @@ If Check is True, then:
  starting at the char at position Offset, with the data in Chars.
 @end{inneritemize}
 
-If Check is False, then
- processing is as above, but with no check that Offset+Chars'Length>N.
+@Trailing@;If Check is False, then
+processing is as above, but with no check that Offset+Chars'Length>N.
 @begin{Ramification}
 If Chars contains nul, Update's effect may be
 to @lquotes@;shorten@rquotes@; the pointed-to char array.@end{ramification}
 @end[itemize]
+
 @begin{Example}@Keepnext
 @key(procedure) Update (Item   : @key(in) chars_ptr;
                   Offset : @key(in) size_t;
                   Str    : @key(in) String;
                   Check  : @key(in) Boolean := True);
 @end{Example}
-
 Equivalent to Update(Item, Offset, To_C(Str), Check).
 @end{DescribeCode}
 @end{StaticSem}
@@ -1468,7 +1444,7 @@ Two styles are supported:
 Explicit termination of an array value with
 Default_Terminator (a special terminator value);
 
-Programmer-managed length, with
+@Trailing@;Programmer-managed length, with
 Default_Terminator treated simply as a data element.
 @end{Itemize}
 @begin{DescribeCode}
@@ -1477,11 +1453,9 @@ Default_Terminator treated simply as a data element.
                Terminator : @key(in) Element := Default_Terminator)
    @key(return) Element_Array;
 @end{Example}
-
-This function returns an Element_Array whose value is the array pointed
-  to by Ref, up to and including the first Terminator; the lower bound
-  of the array is Index'First.
-  Interfaces.C.Strings.Dereference_Error is
+@Trailing@;This function returns an Element_Array whose value is the array
+  pointed to by Ref, up to and including the first Terminator; the lower bound
+  of the array is Index'First. Interfaces.C.Strings.Dereference_Error is
   propagated if Ref is @key(null).
 
 @begin{Example}@Keepnext
@@ -1489,37 +1463,31 @@ This function returns an Element_Array whose value is the array pointed
                Length : @key(in) ptrdiff_t)
    @key(return) Element_Array;
 @end{Example}
-
-This function returns an Element_Array comprising the first Length
+@Trailing@;This function returns an Element_Array comprising the first Length
 elements pointed to by Ref. The exception
-Interfaces.C.Strings.Dereference_Error is
-propagated if Ref is @key(null).
+Interfaces.C.Strings.Dereference_Error is propagated if Ref is @key(null).
 @end{DescribeCode}
 
-The "+" and "@en@;" functions perform arithmetic on Pointer values, based on
-the Size of the array elements.
-In each of these functions, Pointer_Error
-is propagated if a Pointer parameter is @key(null).
+@Trailing@;The "+" and "@en@;" functions perform arithmetic on Pointer values,
+based on the Size of the array elements. In each of these functions,
+Pointer_Error is propagated if a Pointer parameter is @key(null).
 @begin{DescribeCode}
 @begin{Example}@Keepnext
 @key(procedure) Increment (Ref : @key(in) @key(out) Pointer);
 @end{Example}
-
-Equivalent to Ref := Ref+1.
+@Trailing@;Equivalent to Ref := Ref+1.
 
 @begin{Example}@Keepnext
 @key(procedure) Decrement (Ref : @key(in) @key(out) Pointer);
 @end{Example}
-
-Equivalent to Ref := Ref@en@;1.
+@Trailing@;Equivalent to Ref := Ref@en@;1.
 
 @begin{Example}@Keepnext
 @key(function) Virtual_Length (Ref        : @key(in) Pointer;
                          Terminator : @key(in) Element := Default_Terminator)
    @key(return) ptrdiff_t;
 @end{Example}
-
-Returns the number of Elements, up to the one just before the first
+@Trailing@;Returns the number of Elements, up to the one just before the first
 Terminator, in Value(Ref, Terminator).
 
 @begin{Example}@Keepnext
@@ -1529,15 +1497,14 @@ Terminator, in Value(Ref, Terminator).
     Limit      : @key(in) ptrdiff_t := ptrdiff_t'Last;
     Terminator : @key(in) Element := Default_Terminator);
 @end{Example}
-
-This procedure copies Value(Source, Terminator) into the array
-pointed to by Target;
-it stops either after Terminator has been copied, or the
+@Trailing@;This procedure copies Value(Source, Terminator) into the array
+pointed to by Target; it stops either after Terminator has been copied, or the
 number of elements copied is Limit, whichever occurs first.
 Dereference_Error is propagated if either Source or Target is @key(null).
 @begin{ramification}
 It is the programmer's responsibility to ensure that
-elements are not copied beyond the logical length of the target array.@end{ramification}
+elements are not copied beyond the logical length of the target array.
+@end{ramification}
 @begin{ImplNote}
   The implementation has to take care to check the Limit first.
 @end{ImplNote}
@@ -1547,7 +1514,6 @@ elements are not copied beyond the logical length of the target array.@end{ramif
                       Target  : @key(in) Pointer;
                       Length  : @key(in) ptrdiff_t);
 @end{Example}
-
 This procedure copies the first Length elements from the array pointed
  to by Source, into the array pointed to by Target.
  Dereference_Error is propagated if either
@@ -1850,7 +1816,7 @@ If Item'Length exceeds Target'Length, Constraint_Error is propagated.
 Type Numeric corresponds to COBOL's numeric data category with
 display usage.
 
-The types Display_Format, Binary_Format, and Packed_Format
+@Trailing@;The types Display_Format, Binary_Format, and Packed_Format
 are used in conversions between Ada decimal type values and
 COBOL internal or external data representations. The value of the
 constant Native_Binary is either High_Order_First or Low_Order_First,
@@ -1860,7 +1826,6 @@ depending on the implementation.
 @key(function) Valid (Item   : @key(in) Numeric;
                 Format : @key(in) Display_Format) @key(return) Boolean;
 @end{Example}
-
 @Leading@;The function Valid checks that the
 Item parameter has a value consistent with the value of Format.
 If the value of Format is other than
@@ -1879,7 +1844,7 @@ followed by a single occurrence of
 the plus or minus sign character, and then one or more
 decimal digit characters, then Valid returns True, else it returns False.
 
-Format=Trailing_Separate: if Item comprises zero or more leading space
+@Trailing@;Format=Trailing_Separate: if Item comprises zero or more leading space
 characters, followed by one or more decimal digit characters and
 finally a plus or minus sign character,
 then Valid returns True, else it returns False.
@@ -1888,16 +1853,14 @@ then Valid returns True, else it returns False.
 @begin{Example}@Keepnext
 @key(function) Length (Format : @key(in) Display_Format) @key(return) Natural;
 @end{Example}
-
-The Length function returns the minimal length of a Numeric value
+@Trailing@;The Length function returns the minimal length of a Numeric value
 sufficient to hold any value of type Num when represented as Format.
 
 @begin{Example}@Keepnext
 @key(function) To_Decimal (Item   : @key(in) Numeric;
                      Format : @key(in) Display_Format) @key(return) Num;
 @end{Example}
-
-Produces a value of type Num corresponding to Item as represented by
+@Trailing@;Produces a value of type Num corresponding to Item as represented by
 Format.
 The number of digits after the assumed
 radix point in Item is Num'Scale.
@@ -1911,8 +1874,7 @@ the number of decimal places is established by Num'Scale.@end{discussion}
 @key(function) To_Display (Item   : @key(in) Num;
                      Format : @key(in) Display_Format) @key(return) Numeric;
 @end{Example}
-
-This function returns the Numeric value for Item, represented in
+@Trailing@;This function returns the Numeric value for Item, represented in
 accordance with Format. Conversion_Error is propagated if Num is negative
 and Format is Unsigned.
 
@@ -1920,24 +1882,21 @@ and Format is Unsigned.
 @key(function) Valid (Item   : @key(in) Packed_Decimal;
                 Format : @key(in) Packed_Format) @key(return) Boolean;
 @end{Example}
-
-This function returns True if Item has a value consistent with Format,
+@Trailing@;This function returns True if Item has a value consistent with Format,
 and False otherwise. The rules for the formation of Packed_Decimal
 values are implementation defined.
 
 @begin{Example}@Keepnext
 @key(function) Length (Format : @key(in) Packed_Format) @key(return) Natural;
 @end{Example}
-
-This function returns the minimal length of a Packed_Decimal value
+@Trailing@;This function returns the minimal length of a Packed_Decimal value
 sufficient to hold any value of type Num when represented as Format.
 
 @begin{Example}@Keepnext
 @key(function) To_Decimal (Item   : @key(in) Packed_Decimal;
                      Format : @key(in) Packed_Format) @key(return) Num;
 @end{Example}
-
-Produces a value of type Num corresponding to Item as represented by
+@Trailing@;Produces a value of type Num corresponding to Item as represented by
 Format. Num'Scale is the number of digits after the assumed radix point
 in Item. Conversion_Error is propagated if the value represented by Item is
 outside the range of Num.
@@ -1946,8 +1905,7 @@ outside the range of Num.
 @key(function) To_Packed (Item   : @key(in) Num;
                     Format : @key(in) Packed_Format) @key(return) Packed_Decimal;
 @end{Example}
-
-This function returns the Packed_Decimal value for Item, represented in
+@Trailing@;This function returns the Packed_Decimal value for Item, represented in
 accordance with Format. Conversion_Error is propagated if Num is negative
 and Format is Packed_Unsigned.
 
@@ -1955,8 +1913,7 @@ and Format is Packed_Unsigned.
 @key(function) Valid (Item   : @key(in) Byte_Array;
                 Format : @key(in) Binary_Format) @key(return) Boolean;
 @end{Example}
-
-This function returns True if Item has a value consistent with Format,
+@Trailing@;This function returns True if Item has a value consistent with Format,
 and False otherwise.
 @begin{ramification}
 This function returns False only when the represented
@@ -1965,16 +1922,14 @@ value is outside the range of Num.@end{ramification}
 @begin{Example}@Keepnext
 @key(function) Length (Format : @key(in) Binary_Format) @key(return) Natural;
 @end{Example}
-
-This function returns the minimal length of a Byte_Array value
+@Trailing@;This function returns the minimal length of a Byte_Array value
 sufficient to hold any value of type Num when represented as Format.
 
 @begin{Example}@Keepnext
 @key(function) To_Decimal (Item   : @key(in) Byte_Array;
                      Format : @key(in) Binary_Format) @key(return) Num;
 @end{Example}
-
-Produces a value of type Num corresponding to Item as represented by
+@Trailing@;Produces a value of type Num corresponding to Item as represented by
 Format. Num'Scale is the number of digits after the assumed radix point
 in Item. Conversion_Error is propagated if the value represented by Item is
 outside the range of Num.
@@ -1983,8 +1938,7 @@ outside the range of Num.
 @key(function) To_Binary (Item   : @key(in) Num;
                     Format : @key(in) Binary_Format) @key(return) Byte_Array;
 @end{Example}
-
-This function returns the Byte_Array value for Item, represented in
+@Trailing@;This function returns the Byte_Array value for Item, represented in
 accordance with Format.
 
 @begin{Example}@Keepnext
@@ -1992,15 +1946,15 @@ accordance with Format.
 @comment{Blank line}
 @key(function) To_Decimal (Item : @key(in) Long_Binary) @key(return) Num;
 @end{Example}
-
-These functions convert from COBOL binary format to a corresponding
+@Trailing@;These functions convert from COBOL binary format to a corresponding
 value of the decimal type Num. Conversion_Error is propagated if Item is
 too large for Num.
 @begin{Ramification}
 There is no rescaling performed on the conversion. That
 is, the returned value in each case is a @lquotes@;bit copy@rquotes@; if Num has a
 binary radix. The programmer is responsible for maintaining the correct
-scale.@end{ramification}
+scale.
+@end{ramification}
 
 @begin{Example}@Keepnext
 @key(function) To_Binary      (Item : @key(in) Num)  @key(return) Binary;

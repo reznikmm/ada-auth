@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/08/18 01:10:07 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:27 $}
+@Comment{$Date: 2000/08/18 01:10:07 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -297,102 +297,105 @@ conventions specified in this clause.
 
 @begin{RunTime}
 @TabClear()
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 @begin{Display}
 @nt{picture_string} ::=
    @nt{fixed_$_picture_string}
  | @nt{fixed_#_picture_string}
  | @nt{floating_currency_picture_string}
  | @nt{non_currency_picture_string}
-
+@comment{Blank Line}
 @end{Display}
 @begin{display}
 @nt{fixed_$_picture_string} ::=
    [@nt{fixed_LHS_sign}] @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{zero_suppression}]
      @nt{number} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] [@nt{zero_suppression}]
      @nt{number} @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | @nt{floating_LHS_sign} @nt{number} @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | [@nt{fixed_LHS_sign}] @nt{fixed_$_char} {@nt{direct_insertion}}
      @nt{all_zero_suppression_number} {@nt{direct_insertion}}  [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}}
      @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | @nt{all_sign_number} {@nt{direct_insertion}} @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{fixed_#_picture_string} ::=
    [@nt{fixed_LHS_sign}] @nt{single_#_currency} {@nt{direct_insertion}}
      [@nt{zero_suppression}] @nt{number} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | [@nt{fixed_LHS_sign}] @nt{multiple_#_currency} {@nt{direct_insertion}}
      @nt{zero_suppression} @nt{number} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] [@nt{zero_suppression}]
      @nt{number} @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | @nt{floating_LHS_sign} @nt{number} @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | [@nt{fixed_LHS_sign}] @nt{single_#_currency} {@nt{direct_insertion}}
      @nt{all_zero_suppression_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | [@nt{fixed_LHS_sign}] @nt{multiple_#_currency} {@nt{direct_insertion}}
      @nt{all_zero_suppression_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}}
      @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
  | @nt{all_sign_number} {@nt{direct_insertion}} @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{floating_currency_picture_string} ::=
    [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{floating_$_currency} @nt{number} [@nt{RHS_sign}]
  | [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{floating_#_currency} @nt{number} [@nt{RHS_sign}]
  | [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{all_currency_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{non_currency_picture_string} ::=
    [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{zero_suppression} @nt{number} [@nt{RHS_sign}]
  | [@nt{floating_LHS_sign}] @nt{number} [@nt{RHS_sign}]
- | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
+ | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}}
+     [@nt{RHS_sign}]
  | @nt{all_sign_number} {@nt{direct_insertion}}
  | @nt{fixed_LHS_sign} @nt{direct_insertion} {@nt{direct_insertion}} @nt{number} [@nt{RHS_sign}]
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{fixed_LHS_sign} ::=  @nt{LHS_Sign}
 @end{display}
 @begin{display}
 @nt{LHS_Sign} ::=  + | @en | <
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{fixed_$_char} ::= $
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{direct_insertion} ::=  @nt{simple_insertion}
 @end{display}
 @begin{display}
 @nt{simple_insertion} ::=  _ | B | 0 | /
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{zero_suppression} ::=  Z {Z | @nt{context_sensitive_insertion}} | @nt{fill_string}
 @end{display}
 @begin{display}
 @nt{context_sensitive_insertion} ::=  @nt{simple_insertion}
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{fill_string} ::=  * {* | @nt{context_sensitive_insertion}}
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{number} ::=
@@ -407,37 +410,37 @@ conventions specified in this clause.
 @end{display}
 @begin{display}
 @nt{radix} ::= . | V
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{RHS_sign} ::= + | @en | > | CR | DB
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{floating_LHS_sign} ::=
    @nt{LHS_Sign} {@nt{context_sensitive_insertion}} @nt{LHS_Sign} {@nt{LHS_Sign} | @nt{context_sensitive_insertion}}
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{single_#_currency} ::= #
 @end{display}
 @begin{display}
 @nt{multiple_#_currency} ::= ## {#}
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{fixed_#_currency} ::= @nt{single_#_currency} | @nt{multiple_#_currency}
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{floating_$_currency} ::=
    $ {@nt{context_sensitive_insertion}} $ {$ | @nt{context_sensitive_insertion}}
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{floating_#_currency} ::=
    # {@nt{context_sensitive_insertion}} # {# | @nt{context_sensitive_insertion}}
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{all_sign_number} ::=  @nt{all_sign_fore} [@nt{radix} [@nt{all_sign_aft}]] [>]
@@ -448,12 +451,12 @@ conventions specified in this clause.
 @end{display}
 @begin{display}
 @nt{all_sign_aft} ::= {@nt{all_sign_aft_char}} @nt{sign_char}
-
+@comment{Blank Line}
 @nt{all_sign_aft_char} ::=  @nt{sign_char} | @nt{context_sensitive_insertion}
 @end{display}
 @begin{display}
 @nt{sign_char} ::= + | - | <
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{all_currency_number} ::=  @nt{all_currency_fore} [@nt{radix} [@nt{all_currency_aft}]]
@@ -465,12 +468,12 @@ conventions specified in this clause.
 @end{display}
 @begin{display}
 @nt{all_currency_aft} ::= {@nt{all_currency_aft_char}} @nt{currency_char}
-
+@comment{Blank Line}
 @nt{all_currency_aft_char} ::= @nt{currency_char} | @nt{context_sensitive_insertion}
 @end{display}
 @begin{display}
 @nt{currency_char} ::= $ | #
-
+@comment{Blank Line}
 @end{display}
 @begin{display}
 @nt{all_zero_suppression_number} ::=  @nt{all_zero_suppression_fore} [ @nt{radix} [@nt{all_zero_suppression_aft}]]
@@ -481,11 +484,11 @@ conventions specified in this clause.
 @end{display}
 @begin{display}
 @nt{all_zero_suppression_aft} ::= {@nt{all_zero_suppression_aft_char}} @nt{zero_suppression_char}
-
+@comment{Blank Line}
 @nt{all_zero_suppression_aft_char} ::=  @nt{zero_suppression_char} | @nt{context_sensitive_insertion}
 @end{display}
 @begin{display}
-@nt{zero_suppression_char} ::= Z | *
+@trailing@nt{zero_suppression_char} ::= Z | *
 @end{Display}
 
 @Leading@;The following composition constraints apply to a picture String:
@@ -507,27 +510,24 @@ An instance of @nt{all_sign_number} does not have occurrences of
 different @nt{sign_char} Character values.
 
 An instance of @nt{all_currency_number} does not have occurrences of
-different @nt{currency_char} Character values.
+different @nt{currency_@!char} Character values.
 
 An instance of @nt{all_zero_suppression_number} does not have occurrences
-of different @nt{zero_suppression_char} Character values, except for possible
+of different @nt{zero_@!suppression_@!char} Character values, except for possible
 case differences between 'Z' and 'z'.
 @end{Itemize}
 
 A @i{replicable Character} is a Character that, by the
 above rules, can occur in two consecutive positions in a picture String.
 
-A @i{Character replication} is a String
+@Leading@;A @i{Character replication} is a String
 @begin{example}
 @RI{char} & '(' & @RI{spaces} & @RI{count_string} & ')'
 @end{example}
-
 where @i{char} is a replicable Character,
 @i{spaces} is a String (possibly empty) comprising only space Character values,
 and @i{count_string} is a String of one or more decimal digit Character
-values.
-A Character
-replication  in a picture String has the same effect
+values. A Character replication in a picture String has the same effect
 as (and is said to be @i{equivalent to}) a String comprising @i[n]
 consecutive occurrences of @i{char}, where
 @i[n]=Integer'Value(@i{count_string}).
@@ -643,8 +643,8 @@ Table F-1.
 An instance of @nt{fixed_$_char} maps to Currency.
 
 An instance of @nt{direct_insertion} maps to
-       Separator if @nt{direct_insertion} = '_', and to
-       the @nt{direct_insertion} Character otherwise.
+Separator if @nt{direct_insertion} = '_', and to
+the @nt{direct_insertion} Character otherwise.
 
 
 @Leading@;An instance of @nt{number} maps to a string
@@ -653,45 +653,42 @@ where:
 @begin{Itemize}
    The string for @i{integer_part} is obtained as follows:
 @begin{Enumerate}
-                 Occurrences of '9'
-                  in @nt{fore_digits} of @nt{number} are replaced
-                  from right to left
-             with the decimal digit character values for I@-(1), ..., I@-(p),
-                  respectively.
+     Occurrences of '9' in @nt{fore_digits} of @nt{number} are replaced
+     from right to left with the decimal digit character values for
+     I@-(1), ..., I@-(p), respectively.
 
-                 Each occurrence of '9' in @nt{fore_digits}
-                  to the left of the leftmost '9' replaced according
-                  to rule 1 is replaced with '0'.
+     Each occurrence of '9' in @nt{fore_digits}
+     to the left of the leftmost '9' replaced according
+     to rule 1 is replaced with '0'.
 
-            If p exceeds the number of occurrences of '9' in
-            @nt{fore_digits} of @nt{number}, then the excess leftmost
-            digits are eligible for use in the mapping of
-            an instance of @nt{zero_suppression}, @nt{floating_LHS_sign},
-            @nt{floating_$_currency},
-            or @nt{floating_#_currency} to the left of @nt{number};
-            if there is no such instance, then a layout error
-            occurs and no edited output string is produced.
+     If p exceeds the number of occurrences of '9' in
+     @nt{fore_digits} of @nt{number}, then the excess leftmost
+     digits are eligible for use in the mapping of
+     an instance of @nt{zero_suppression}, @nt{floating_LHS_sign},
+     @nt{floating_$_currency},
+     or @nt{floating_#_currency} to the left of @nt{number};
+     if there is no such instance, then a layout error
+     occurs and no edited output string is produced.
 @end{Enumerate}
 
    @leading@;The @i{radix_part} is:
-@begin{Itemize}
-"" if @nt{number} does not include a @nt{radix}, if @nt{radix} = 'V',
-                      or if @nt{radix} = 'v'
+@begin{InnerItemize}
+        "" if @nt{number} does not include a @nt{radix}, if @nt{radix} = 'V',
+        or if @nt{radix} = 'v'
 
-                Radix_Mark if @nt{number} includes '.' as @nt{radix}
-@end{Itemize}
+        Radix_Mark if @nt{number} includes '.' as @nt{radix}
+@end{InnerItemize}
 
 @leading@;The string for @i{fraction_part} is obtained as follows:
 @begin{Enumerate}
-                Occurrences of '9'
-                 in @nt{aft_digits} of @nt{number} are replaced
-                from left to right
-                 with the decimal digit character values for F@-(1), ... F@-(q).
+        Occurrences of '9'
+        in @nt{aft_digits} of @nt{number} are replaced
+        from left to right with the decimal digit character values for F@-(1),
+        ... F@-(q).
 
-                Each occurrence of '9' in @nt{aft_digits}
-                 to the right of the rightmost '9' replaced according
-                to rule 1
-                is replaced by '0'.
+        Each occurrence of '9' in @nt{aft_digits}
+        to the right of the rightmost '9' replaced according to rule 1
+        is replaced by '0'.
 @end{Enumerate}
 @end{Itemize}
 
@@ -918,8 +915,7 @@ in @RefSecNum(Edited Output Generation).
 @begin{StaticSem}
 @leading@;The library package Text_IO.Editing has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Text_IO],Child=[Editing]}
-@key(package) Ada.Text_IO.Editing @key(is)
+@key(package) Ada.Text_IO.Editing @key(is)@ChildUnit{Parent=[Ada.Text_IO],Child=[Editing]}
 
    @key(type) @AdaTypeDefn{Picture} @key(is) @key(private);
 
@@ -944,10 +940,12 @@ in @RefSecNum(Edited Output Generation).
 
    @key(generic)
       @key(type) Num @key(is) @key(delta) <> @key(digits) <>;
-      Default_Currency   : @key(in) String    :=  Text_IO.Editing.Default_Currency;
-      Default_Fill       : @key(in) Character :=  Text_IO.Editing.Default_Fill;
-      Default_Separator  : @key(in) Character :=  Text_IO.Editing.Default_Separator;
-      Default_Radix_Mark : @key(in) Character :=  Text_IO.Editing.Default_Radix_Mark;
+      Default_Currency   : @key(in) String    := Text_IO.Editing.Default_Currency;
+      Default_Fill       : @key(in) Character := Text_IO.Editing.Default_Fill;
+      Default_Separator  : @key(in) Character :=
+                              Text_IO.Editing.Default_Separator;
+      Default_Radix_Mark : @key(in) Character :=
+                              Text_IO.Editing.Default_Radix_Mark;
    @key(package) @AdaDefn{Decimal_Output} @key(is)
       @key(function) @AdaSubDefn{Length} (Pic      : @key(in) Picture;
                        Currency : @key(in) String := Default_Currency)
@@ -981,7 +979,7 @@ in @RefSecNum(Edited Output Generation).
                      Separator  : @key(in) Character := Default_Separator;
                      Radix_Mark : @key(in) Character := Default_Radix_Mark);
 
-      @key(procedure) @AdaSubDefn{Put} (To         : @key(out) String;
+@trailing@;      @key(procedure) @AdaSubDefn{Put} (To         : @key(out) String;
                      Item       : @key(in) Num;
                      Pic        : @key(in) Picture;
                      Currency   : @key(in) String    := Default_Currency;
@@ -995,27 +993,25 @@ in @RefSecNum(Edited Output Generation).
 @end{Example}
 @ImplDef{The value of Max_Picture_Length in the package Text_IO.Editing}
 
-The exception Constraint_Error is raised
+@Trailing@;The exception Constraint_Error is raised
 if the Image function or any of the
 Put procedures is invoked with a null string for Currency.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Valid (Pic_String      : @key(in) String;
                 Blank_When_Zero : @key(in) Boolean := False) @key(return) Boolean;
 @end{Example}
-
-Valid returns True if Pic_String is a well-formed picture String
+@Trailing@;Valid returns True if Pic_String is a well-formed picture String
 (see @RefSecNum(Picture String Formation)) the
 length of whose expansion does not exceed Max_Picture_Length, and if
 either Blank_When_Zero is False or Pic_String contains no '*'.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Picture (Pic_String      : @key(in) String;
                      Blank_When_Zero : @key(in) Boolean := False)
    @key(return) Picture;
 @end{Example}
-
-To_Picture returns a result Picture such that the application of the
+@Trailing@;To_Picture returns a result Picture such that the application of the
 function Pic_String to this result
 yields an expanded picture String equivalent to Pic_String, and such
 that Blank_When_Zero applied to the result Picture is the same value as the
@@ -1025,11 +1021,10 @@ Valid(Pic_String, Blank_When_Zero).
 
 @begin{Example}
 @key(function) Pic_String      (Pic : @key(in) Picture) @key(return) String;
-
+@Comment{Blank line}
 @key(function) Blank_When_Zero (Pic : @key(in) Picture) @key(return) Boolean;
 @end{Example}
-
-If Pic is To_Picture(String_Item, Boolean_Item) for some String_Item and
+@Leading@;If Pic is To_Picture(String_Item, Boolean_Item) for some String_Item and
 Boolean_Item, then:
 @begin[itemize]
 Pic_String(Pic) returns an expanded picture String
@@ -1039,24 +1034,23 @@ replaced with its corresponding upper-case form, and
 Blank_When_Zero(Pic) returns Boolean_Item.
 @end[Itemize]
 
-If Pic_1 and Pic_2 are objects of type Picture, then "="(Pic_1, Pic_2)
+@Leading@;If Pic_1 and Pic_2 are objects of type Picture, then "="(Pic_1, Pic_2)
 is True when
 @begin[itemize]
 Pic_String(Pic_1) = Pic_String(Pic_2), and
 
-Blank_When_Zero(Pic_1) = Blank_When_Zero(Pic_2).
+@Trailing@;Blank_When_Zero(Pic_1) = Blank_When_Zero(Pic_2).
 @end[Itemize]
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Length (Pic      : @key(in) Picture;
                  Currency : @key(in) String := Default_Currency)
    @key(return) Natural;
 @end{Example}
-
-Length returns Pic_String(Pic)'Length + Currency_Length_Adjustment -
+@Leading@;Length returns Pic_String(Pic)'Length + Currency_Length_Adjustment -
 Radix_Adjustment where
 @begin[itemize]
-        Currency_Length_Adjustment =
+@Leading@;Currency_Length_Adjustment =
 @begin[Inneritemize]
            Currency'Length @en@; 1 if there is some occurrence of '$' in
              Pic_String(Pic), and
@@ -1064,22 +1058,21 @@ Radix_Adjustment where
            0 otherwise.
 @end[Inneritemize]
 
-        Radix_Adjustment =
+@Leading@;Radix_Adjustment =
 @begin[Inneritemize]
            1 if there is an occurrence of 'V' or 'v' in Pic_Str(Pic), and
 
-           0 otherwise.
+           @Trailing@;0 otherwise.
 @end[Inneritemize]
 @end[itemize]
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Valid (Item     : @key(in) Num;
                 Pic      : @key(in) Picture;
                 Currency : @key(in) String := Default_Currency)
    @key(return) Boolean;
 @end{Example}
-
-Valid returns True if Image(Item, Pic, Currency) does not raise
+@Trailing@;Valid returns True if Image(Item, Pic, Currency) does not raise
 Layout_Error, and returns False otherwise.
 
 @begin{Example}
@@ -1091,8 +1084,7 @@ Layout_Error, and returns False otherwise.
                 Radix_Mark : @key(in) Character := Default_Radix_Mark)
    @key(return) String;
 @end{Example}
-
-Image returns the edited output String as defined in
+@Trailing@;Image returns the edited output String as defined in
 @RefSecNum(Edited Output Generation) for Item,
 Pic_String(Pic), Blank_When_Zero(Pic),
 Currency, Fill, Separator,
@@ -1107,7 +1099,7 @@ raises the exception Layout_Error.
                Fill       : @key(in) Character := Default_Fill;
                Separator  : @key(in) Character := Default_Separator;
                Radix_Mark : @key(in) Character := Default_Radix_Mark);
-
+@Comment{Blank line}
 @key(procedure) Put (Item       : @key(in) Num;
                Pic        : @key(in) Picture;
                Currency   : @key(in) String    := Default_Currency;
@@ -1115,8 +1107,7 @@ raises the exception Layout_Error.
                Separator  : @key(in) Character := Default_Separator;
                Radix_Mark : @key(in) Character := Default_Radix_Mark);
 @end{Example}
-
-Each of these Put procedures
+@Trailing@;Each of these Put procedures
 outputs Image(Item, Pic, Currency, Fill, Separator, Radix_Mark)
 consistent with the conventions for Put for other real types in case
 of bounded line length (see @RefSec{Get and Put Procedures}).
@@ -1173,7 +1164,7 @@ following differences:
       parenthesization of negative values.
 @end{InnerItemize}
 @end{Itemize}
-The value of 30 for Max_Picture_Length is the same limit as in COBOL.
+@NoPrefix@;The value of 30 for Max_Picture_Length is the same limit as in COBOL.
 @end{Notes}
 
 @begin{Reason}

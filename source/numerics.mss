@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2000/08/18 01:10:07 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:27 $}
+@Comment{$Date: 2000/08/18 01:10:07 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -51,8 +51,8 @@ This Annex is new to Ada 95.
 Types and arithmetic operations for complex arithmetic are provided in
 Generic_Complex_Types, which is defined in @RefSecNum{Complex Types}.
 Implementation-defined approximations to the complex analogs of the mathematical
-functions known as the @lquotes@;elementary functions@rquotes@; are provided by the subprograms
-in Generic_Complex_Elementary_Functions, which is defined in
+functions known as the @lquotes@;elementary functions@rquotes@; are provided by
+the subprograms in Generic_@!Complex_@!Elementary_@!Functions, which is defined in
 @RefSecNum{Complex Elementary Functions}. Both of these library units are generic
 children of the predefined package Numerics (see @RefSecNum{The Numerics Packages}).
 Nongeneric equivalents of these generic packages for each of the predefined
@@ -73,9 +73,8 @@ operations.}
 @Leading@;The generic library package
 Numerics.Generic_Complex_Types has the following declaration:
 @begin{Example}
-@key{generic}
+@key{generic}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Types]}
    @key{type} Real @key{is} @key{digits} <>;
-@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Types]}
 @key{package} Ada.Numerics.Generic_Complex_Types @key{is}
    pragma Pure(Generic_Complex_Types);
 
@@ -284,15 +283,15 @@ Real'Base.}
    circular domain) anyway.
 @end{Reason}
 
-The arithmetic operations and the Re, Im, Modulus, Argument, and Conjugate
+@Leading@;The arithmetic operations and the Re, Im, Modulus, Argument, and Conjugate
 functions have their usual mathematical meanings. When applied to a parameter
 of pure-imaginary type, the @lquotes@;imaginary-part@rquotes@; function Im yields the value of
 its parameter, as the corresponding real value.
+The remaining subprograms have the following meanings:
 @begin{Reason}
-   The latter case can be understood by considering the parameter of
+   The middle case can be understood by considering the parameter of
    pure-imaginary type to represent a complex value with a zero real part.
 @end{Reason}
-@Leading@;The remaining subprograms have the following meanings:
 @begin{Itemize}
    The Set_Re and Set_Im procedures replace the designated component of a
    complex parameter with the given real value; applied to a parameter of
@@ -513,7 +512,7 @@ rational treatment of the signs of zero results and result components. As one
 example, the result of the Argument function should have the sign of the
 imaginary component of the parameter X when the point represented by that
 parameter lies on the positive real axis; as another, the sign of the imaginary
-component of the Compose_From_Polar function should be the same as (resp., the
+component of the Compose_@!From_@!Polar function should be the same as (resp., the
 opposite of) that of the Argument parameter when that parameter has a value of
 zero and the Modulus parameter has a nonnegative (resp., negative) value.
 @end{ImplAdvice}
@@ -549,10 +548,10 @@ Generic_Complex_Types as defined in ISO/IEC CD 13813
 Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @begin{Example}
 @key[with] Ada.Numerics.Generic_Complex_Types;
-@key[generic]
-   @key[with] @key[package] Complex_Types @key[is] @key[new] Ada.Numerics.Generic_Complex_Types (<>);
+@key[generic]@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Elementary_@!Functions]}
+   @key[with] @key[package] Complex_Types @key[is]
+         @key[new] Ada.Numerics.Generic_Complex_Types (<>);
    @key[use] Complex_Types;
-@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Elementary_@!Functions]}
 @key[package] Ada.Numerics.Generic_Complex_Elementary_Functions @key[is]
    pragma Pure(Generic_Complex_Elementary_Functions);
 
@@ -594,14 +593,14 @@ Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @Defn{Ada.Numerics.Complex_Elementary_Functions}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Elementary_@!Functions]}
 The library package Numerics.Complex_Elementary_Functions
-defines the same subprograms as Numerics.Generic_Complex_Elementary_Functions,
+defines the same subprograms as Numerics.@!Generic_@!Complex_@!Elementary_@!Functions,
 except that the predefined type Float is systematically substituted for
-Real'Base, and the Complex and Imaginary types exported by Numerics.Complex_Types
+Real'Base, and the Complex and Imaginary types exported by Numerics.@!Complex_@!Types
 are systematically substituted for Complex and Imaginary, throughout.
-Nongeneric equivalents of Numerics.Generic_Complex_Elementary_Functions
+Nongeneric equivalents of Numerics.@!Generic_@!Complex_@!Elementary_@!Functions
 corresponding to each of the other predefined floating point types are
-defined similarly, with the names Numerics.Short_Complex_Elementary_Functions,
-Numerics.Long_Complex_Elementary_Functions, etc.
+defined similarly, with the names Numerics.@!Short_@!Complex_@!Elementary_@!Functions,
+Numerics.@!Long_@!Complex_@!Elementary_@!Functions, etc.
 @begin{Reason}
    The nongeneric equivalents are provided to allow the programmer to
    construct simple mathematical applications without being required to
@@ -610,7 +609,7 @@ Numerics.Long_Complex_Elementary_Functions, etc.
 
 The overloading of the Exp function for the pure-imaginary type is provided
 to give the user an alternate way to compose a complex value from a given
-modulus and argument. In addition to Compose_From_Polar(Rho, Theta)
+modulus and argument. In addition to Compose_@!From_@!Polar(Rho, Theta)
 (see @RefSecNum{Complex Types}), the programmer may write Rho * Exp(i * Theta).
 
 The imaginary (resp., real) component of the parameter X of the forward
@@ -711,6 +710,9 @@ when a finite result overflows
 occur for parameter values sufficiently @i{near} poles, and, in the case of
 some of the functions, for parameter values having components of sufficiently
 large magnitude.]
+@PDefn{unspecified}
+When Complex_Types.Real'Machine_Overflows is False, the result at poles is
+unspecified.
 @begin{Reason}
    The purpose of raising Constraint_Error (rather than
    Numerics.Argument_Error) at the poles of a function, when
@@ -718,9 +720,6 @@ large magnitude.]
    the actual parameters of the function approach the pole and finally reach
    it.
 @end{Reason}
-@PDefn{unspecified}
-When Complex_Types.Real'Machine_Overflows is False, the result at poles is
-unspecified.
 @begin{Discussion}
    It is anticipated that an Ada binding to IEC 559:1989 will be developed
    in the future. As part of such a binding, the Machine_Overflows attribute
@@ -906,9 +905,9 @@ Text_IO.Complex_IO has the following declaration:
 @end{Ramification}
 @begin{Example}
 @key[with] Ada.Numerics.Generic_Complex_Types;
-@key[generic]
-   @key[with] @key[package] Complex_Types @key[is] @key[new] Ada.Numerics.Generic_Complex_Types (<>);
-@ChildUnit{Parent=[Ada.Text_IO],Child=[Complex_IO]}
+@key[generic]@ChildUnit{Parent=[Ada.Text_IO],Child=[Complex_IO]}
+   @key[with] @key[package] Complex_Types @key[is]
+         @key[new] Ada.Numerics.Generic_Complex_Types (<>);
 @key[package] Ada.Text_IO.Complex_IO @key[is]
 
 
@@ -937,7 +936,7 @@ Text_IO.Complex_IO has the following declaration:
                   Exp  : @key[in] Field := Default_Exp);
 
 
-   @key[procedure] @AdaSubDefn{Get} (From : @key[in]  String;
+@trailing@;   @key[procedure] @AdaSubDefn{Get} (From : @key[in]  String;
                   Item : @key[out] Complex;
                   Last : @key[out] Positive);
    @key[procedure] @AdaSubDefn{Put} (To   : @key[out] String;
@@ -957,7 +956,6 @@ The semantics of the Get and Put procedures are as follows:
 @key[procedure] Get (Item  : @key[out] Complex;
                Width : @key[in]  Field := 0);
 @end{Example}
-
 The input sequence is a pair of
 optionally signed real literals representing
 the real and imaginary components of a complex value; optionally, the pair of
@@ -975,8 +973,12 @@ parameter Width is zero, then
    sequence includes a left parenthesis, or when the imaginary component has
    been read, otherwise.
 @end{Itemize}
-If a nonzero value of
-Width is supplied, then
+
+@ChgNote{The following paragraph is missing a number in the original version.
+To give it a number in the new version, it is marked as an insertion.}
+@ChgRef{Version=[0],Kind=[Added]}@Leading
+@Chg{New=[],Old=[@Noparanum@;]}If a nonzero value of Width is supplied, then
+
 @begin{Itemize}
    the components shall be separated by at least one blank if the comma is
    omitted; and
@@ -998,7 +1000,7 @@ Width is supplied, then
 Returns, in the parameter Item, the value of type Complex that corresponds to
 the input sequence.
 
-The exception Text_IO.Data_Error
+@Trailing@;The exception Text_IO.Data_Error
 is raised if the input sequence
 does not have the required syntax or if the components of the complex value
 obtained are not of the base subtype of Complex_Types.Real.
@@ -1035,7 +1037,7 @@ More specifically,
    Text_IO.Float_IO for the base subtype of Complex_Types.Real, using the given values of
    Fore, Aft, and Exp;
 
-   outputs a right parenthesis.
+@Trailing@;outputs a right parenthesis.
 @end{itemize}
 @begin{Discussion}
    If the file has a bounded line length, a line terminator may be output
@@ -1062,7 +1064,7 @@ Item, the value of type Complex that corresponds to the input sequence.
 Returns in Last the index value such that From(Last) is the last character
 read.
 
-The exception Text_IO.Data_Error is raised if the input sequence
+@Trailing@;The exception Text_IO.Data_Error is raised if the input sequence
 does not have the required syntax or if the components of the complex value
 obtained are not of the base subtype of Complex_Types.Real.
 
@@ -1075,9 +1077,7 @@ obtained are not of the base subtype of Complex_Types.Real.
 
 Outputs the value of the parameter Item to the given string as a pair of
 decimal literals representing the real and imaginary components of the complex
-value,
-using the syntax
-of an aggregate.
+value, using the syntax of an aggregate.
 More specifically,
 @begin{itemize}
    a left parenthesis, the real component, and a comma are left justified in
@@ -1403,7 +1403,6 @@ large extent.
 In implementations that support the Numerics Annex, the model-oriented
 attributes of floating point types shall yield the values defined here,
 in both the strict and the relaxed modes.
-
 These definitions add conditions to those in
 @RefSecNum{Attributes of Floating Point Types}.
 @end{Intro}
@@ -1624,8 +1623,8 @@ mathematical result is @RI{v}, and for the conversion of a value
 @RI{v} to a fixed point type, the perfect result set and close result set
 are defined as follows:
 @begin(itemize)
-      If the result type is an ordinary fixed point type with a
-      @i(small) of @RI{s},
+      @Leading@Keepnext@;If the result type is an ordinary fixed point
+      type with a @i(small) of @RI{s},
       @begin(InnerItemize)
          if @RI{v} is an integer multiple of
          @RI{s},
@@ -1643,7 +1642,7 @@ are defined as follows:
       integer multiples of @RI{s} containing the perfect
       result set as a subset.
 
-      If the result type is a decimal type with a @i(small) of
+      @Leading@Keepnext@;If the result type is a decimal type with a @i(small) of
       @RI{s},
       @begin(InnerItemize)
          if @RI{v} is an integer multiple of
@@ -1667,7 +1666,7 @@ are defined as follows:
         when the operand types are also decimal types.
       @end{Ramification}
 
-      If the result type is an integer type,
+      @Leading@Keepnext@;If the result type is an integer type,
       @begin(InnerItemize)
          if @RI{v} is an integer,
          then the perfect result set contains only the
@@ -1715,11 +1714,9 @@ let @RI{s} be 1.0.
    @RI{v} as an integer
    multiple of a @lquotes@;compatible@rquotes@; @i(small), but the integer multiple may be
    @lquotes@;too big.@rquotes@;
-
    If there exists a factorization in which that multiple is less than some
    implementation-defined limit, the result shall belong to the perfect result
    set; otherwise, it belongs to the close result set.
-
    @ImplDef{Conditions on a @i{universal_real} operand of a fixed point
    multiplication or division for which the result shall be in the @i{perfect
    result set}.}
@@ -1728,8 +1725,6 @@ let @RI{s} be 1.0.
 A multiplication P * Q of an operand of a fixed point type F by an operand of
 an integer type I, or vice-versa, and a division P / Q of an operand of a
 fixed point type F by an operand of an integer type I, are also allowed.
-
-
 In these cases, the result has a type of F; explicit conversion of the
 result is never required. The accuracy required in these cases is the same as
 that required for a multiplication F(P * Q) or a division F(P / Q) obtained by
@@ -1826,7 +1821,7 @@ its bounds belong to the safe range of @i{EF}.Float_Type; otherwise,
    a value that belongs to the result interval or raises Constraint_Error,
    signaling overflow;
 
-   if @i{EF}.Float_Type'Machine_Overflows is False, the result is
+   @Trailing@;if @i{EF}.Float_Type'Machine_Overflows is False, the result is
    implementation defined.
    @ImplDef{The result of an elementary function reference in overflow
    situations, when the Machine_Overflows attribute of the result type is
@@ -1857,7 +1852,7 @@ When the Cycle parameter is omitted, the maximum relative error given above
 applies only when the absolute value of the angle parameter X is less than or
 equal to some implementation-defined @i{angle threshold}, which shall be at
 least
-@RI{EF}@R[.Float_Type'Machine_Radix] @+<@Floor(@RI{EF}@R[.Float_Type'Machine_Mantissa]/2)>.
+@RI{EF}@R[.Float_@!Type'Machine_@!Radix] @+<@Floor(@RI{EF}@R[.Float_@!Type'Machine_@!Mantissa]/2)>.
 Beyond the angle threshold, the accuracy of the forward trigonometric functions
 is implementation defined.
 @ImplDef{The value of the @i{angle threshold}, within which certain elementary
@@ -1886,6 +1881,11 @@ associated with the exact mathematical result given in the table.
 @ChgRef{Version=[1], Kind=[Deleted]}
 @Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number (12) from original RM}>]
 
+The last line of the table is meant to apply when
+@i{EF}.Float_Type'Signed_Zeros is False; the two lines just above it, when
+@i{EF}.Float_Type'Signed_Zeros is True and the parameter Y has a zero value
+with the indicated sign.
+
 @Table[Columns=<5>,
 Caption=<@b{Tightly Approximated Elementary Function Results}>,
 Headers=<@b{Function}@\@b{Value of X}@\@b{Value of Y}@\@b{Exact Result @*when Cycle @*Specified}@\@b{Exact Result @*when Cycle @*Omitted}>,
@@ -1898,11 +1898,6 @@ Arctan and Arccot@\0.0@\negative@\-@R[Cycle]/4.0@\-@Pi/2.0
 Arctan and Arccot@\negative@\+0.0@\Cycle/2.0@\@Pi
 Arctan and Arccot@\negative@\-0.0@\-@R[Cycle]/2.0@\-@Pi@Last
 Arctan and Arccot@\negative@\0.0@\Cycle/2.0@\@Pi>]
-
-The last line of the table is meant to apply when
-@i{EF}.Float_Type'Signed_Zeros is False; the two lines just above it, when
-@i{EF}.Float_Type'Signed_Zeros is True and the parameter Y has a zero value
-with the indicated sign.
 
 The amount by which the result of an inverse trigonometric function is allowed
 to spill over into a quadrant adjacent to the one corresponding to the
@@ -2148,8 +2143,8 @@ fewer than 5.
 @LabeledSubClause{Accuracy Requirements for Complex Arithmetic}
 
 @begin{Intro}
-In the strict mode, the performance of Numerics.Generic_Complex_Types and
-Numerics.Generic_Complex_Elementary_Functions shall be as specified here.
+In the strict mode, the performance of Numerics.Generic_@!Complex_Types and
+Numerics.Generic_@!Complex_@!Elementary_@!Functions shall be as specified here.
 @end{Intro}
 
 @begin{ImplReq}
@@ -2174,10 +2169,6 @@ When the result interval for the real (resp., imaginary) component is defined by
 maximum relative error, it is defined as for that of a real function, relative
 to the exact value of the real (resp., imaginary) part of the result of the
 corresponding mathematical function.
-@begin{Discussion}
-   The maximum relative error could be specified separately for each
-   component, but we do not take advantage of that freedom here.
-@end{Discussion}
 @Defn2{Term=[maximum box error],
         Sec=[for a component of the result of evaluating a complex function]}
 When defined by maximum box error, the result interval for a component of the
@@ -2186,6 +2177,15 @@ values of the corresponding part of @RI{f} @Times (1.0 + @RI{d}), where @RI{f} i
 exact complex value of the corresponding mathematical function at the given
 parameter values, @RI{d} is complex, and @Abs{@RI{d}} is less than or equal
 to the given maximum box error.
+@IndexCheck{Overflow_Check}
+The function delivers a value that belongs to the result interval (or a value
+both of whose components belong to their respective result intervals) when both
+bounds of the result interval(s) belong to the safe range of @i{CT}.Real;
+otherwise,
+@begin{Discussion}
+   The maximum relative error could be specified separately for each
+   component, but we do not take advantage of that freedom here.
+@end{Discussion}
 @begin{Discussion}
   Note that
   @RI{f} @Times (1.0 + @RI{d}) defines a small circular region of the complex
@@ -2212,11 +2212,6 @@ to the given maximum box error.
    result and the mathematical result is, nevertheless, a small fraction of the
    modulus of the mathematical result.
 @end{Ramification}
-@IndexCheck{Overflow_Check}
-The function delivers a value that belongs to the result interval (or a value
-both of whose components belong to their respective result intervals) when both
-bounds of the result interval(s) belong to the safe range of @i{CT}.Real;
-otherwise,
 @begin{itemize}
    @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
    if @i{CT}.Real'Machine_Overflows is True, the function either delivers a
@@ -2239,6 +2234,22 @@ In the table, the error bound is given as the coefficient of
 @ChgRef{Version=[1], Kind=[Deleted]}
 @Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number (12) from original RM}>]
 
+The maximum relative error given above applies throughout the domain of the
+Compose_From_Polar function when the Cycle parameter is specified. When the
+Cycle parameter is omitted, the maximum relative error applies only when the
+absolute value of the parameter Argument is less than or equal to the angle
+threshold (see @RefSecNum{Accuracy Requirements for the Elementary Functions}).
+For the Exp function, and for the forward hyperbolic (resp., trigonometric)
+functions, the maximum relative error given above likewise applies only when
+the absolute value of the imaginary (resp., real) component of the parameter X
+(or the absolute value of the parameter itself, in the case of the Exp function
+with a parameter of pure-imaginary type) is less than or equal to the angle
+threshold. For larger angles, the accuracy is
+implementation defined.
+@ImplDef{The accuracy of certain complex arithmetic operations and certain
+complex elementary functions for parameters (or components thereof) beyond
+the angle threshold.}
+
 @Table[Columns=<4>,
 Caption=<@b{Error Bounds for Particular Complex Functions}>,
 Headers=<@b{Function or Operator}@\@b{Nature of @*Result}@\@b{Nature of @*Bound}@\@b{Error Bound}>,
@@ -2255,22 +2266,6 @@ Sin, Cos, Sinh, and Cosh@\complex@\max. rel. error@\11.0
 Tan, Cot, Tanh, and Coth@\complex@\max. rel. error@\35.0
 inverse trigonometric@\complex@\max. rel. error@\14.0@Last
 inverse hyperbolic@\complex@\max. rel. error@\14.0>]
-
-The maximum relative error given above applies throughout the domain of the
-Compose_From_Polar function when the Cycle parameter is specified. When the
-Cycle parameter is omitted, the maximum relative error applies only when the
-absolute value of the parameter Argument is less than or equal to the angle
-threshold (see @RefSecNum{Accuracy Requirements for the Elementary Functions}).
-For the Exp function, and for the forward hyperbolic (resp., trigonometric)
-functions, the maximum relative error given above likewise applies only when
-the absolute value of the imaginary (resp., real) component of the parameter X
-(or the absolute value of the parameter itself, in the case of the Exp function
-with a parameter of pure-imaginary type) is less than or equal to the angle
-threshold. For larger angles, the accuracy is
-implementation defined.
-@ImplDef{The accuracy of certain complex arithmetic operations and certain
-complex elementary functions for parameters (or components thereof) beyond
-the angle threshold.}
 
 @Leading@;The prescribed results specified in
 @RefSecNum{Complex Elementary Functions} for certain functions at particular
