@@ -1,10 +1,10 @@
 @Part(impldef, Root="ada.mss")
 
-@Comment{$Date: 2005/01/20 06:32:02 $}
+@Comment{$Date: 2005/01/21 06:07:28 $}
 @LabeledRevisedInformativeAnnex{Version=[2],New=[Summary of Documentation Requirements],Old=[Implementation-Defined Characteristics]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/impldef.mss,v $}
-@comment{$Revision: 1.14 $}
+@comment{$Revision: 1.15 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -31,8 +31,9 @@ In addition to implementation-defined characteristics, each Ada implementation
 must document various properties of the implementation:]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Some of the items in this list require documentation only for
-implementations that conform to Specialized Needs Annexes.]}
+@ChgAdded{Version=[2],Text=[Most of the items in this list require
+documentation only for implementations that conform to Specialized Needs
+Annexes.]}
 @end{Ramification}
 
 @AddedDocReqList{Version=[2]}

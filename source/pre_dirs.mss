@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.8 $ $Date: 2005/01/13 05:06:15 $ $Author: Randy $ }
+@comment{ $Revision: 1.9 $ $Date: 2005/01/21 06:07:29 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/01/13 05:06:15 $}
+@Comment{$Date: 2005/01/21 06:07:29 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -813,6 +813,9 @@ Copy_File shall not propagate Use_Error.]}
 (such as the owner or creation date) in a directory entry, the implementation
 should provide functions in a child package Ada.Directories.Information to
 retrieve it.@ChildUnit{Parent=[Ada.Directories],Child=[Information]}]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Package Ada.Directories.Information should be provided to retrieve
+other information about a file.]}]}
 
 @begin{ImplNote}
 
@@ -1023,10 +1026,16 @@ these as possible.]}
 @ChgAdded{Version=[2],Text=[Start_Search and Search should raise Use_Error if
 Pattern is malformed, but not if it could represent a file in the directory but
 does not actually do so.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Directories.Start_Search and Directories.Search should raise Use_Error
+for malformed patterns.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[For Rename, if both New_Name and Old_Name are
 simple names, then Rename should not propagate Use_Error.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Directories.Rename should not raise Use_Error if New_Name and Old_Name
+are simple names.]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}

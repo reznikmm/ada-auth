@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2004/12/11 06:27:57 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2005/01/21 06:07:29 $ $Author: Randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2004/12/11 06:27:57 $}
+@Comment{$Date: 2005/01/21 06:07:29 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -194,6 +194,10 @@ environment variables prior to the execution of a partition.]}
 @ChgAdded{Version=[2],Text=[If the execution environment supports subprocesses,
 the currently defined environment variables should be used to initialize the
 environment variables of the subprocess.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If the execution environment supports subprocesses,
+the current environment variables should be used to initialize the
+environment variables of a subprocess.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Changes to the environment variables made outside the control of this package
@@ -201,6 +205,10 @@ should be reflected immediately in the effect of the operations of this package.
 Changes to the environment variables made using this package should be reflected
 immediately in the external execution environment. This package should not
 perform any buffering of the environment variables.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Changes to the environment variables made outside the control of
+Environment_Variables should be reflected immediately.]}]}
+
 @end{ImplAdvice}
 
 @begin{Extend95}

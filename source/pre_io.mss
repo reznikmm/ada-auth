@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/11/10 20:26:23 $}
+@Comment{$Date: 2005/01/21 06:07:29 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -139,15 +139,21 @@ The exceptions Storage_Error and Program_Error may be propagated.
 (Program_Error can only be propagated due to errors made by the
 caller of the subprogram.) Finally, exceptions can be propagated
 in certain implementation-defined situations.
-@ImplDef{Any implementation-defined characteristics of the
-input-output packages.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Any implementation-defined characteristics of the
+input-output packages.]}]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The last sentence here is refering to the
+documentation requirements in @RefSec{Exceptions in Input-Output}, and
+the documentation summary item is provided there.]}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{Notes}
 Each instantiation of the generic packages Sequential_IO and Direct_IO
 declares a different type File_Type. In the case of Text_IO, Wide_Text_IO,
-and Streams.Stream_IO, the corresponding type
-File_Type is unique.
+and Streams.Stream_IO, the corresponding type File_Type is unique.
 
 A bidirectional device can often be modeled as two sequential files
 associated with the device, one of mode In_File, and one of mode
@@ -290,11 +296,14 @@ or execute with a different effect in Ada 95.
 @end{Incompatible83}
 
 @begin{ImplNote}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097]}
-@Chg{New=[File_Type cannot be implemented as a (directly) controlled type, as
-Ada.Sequential_IO can be instantiated at any nesting depth. File_Type could have
-a component of a controlled type, as long as that type is declared in some
-other (non-generic) package.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097],ARef=[AI95-00115-01]}
+@ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00344-01]}
+@ChgDeleted{Version=[2],Text=[@Chg{Version=[1],New=[File_Type cannot be
+implemented as a (directly) controlled type, as Ada.Sequential_IO can be
+instantiated at any nesting depth. File_Type could have a component of a
+controlled type, as long as that type is declared in some other (non-generic)
+package.],Old=[]}]}@ChgNote{AI-344 allows controlled types to be declared at
+any nesting depth, so this note is obsolete.}
 @end{ImplNote}
 
 @LabeledSubClause{File Management}
@@ -603,11 +612,13 @@ uninitialized variables of the type.
 @end{Reason}
 
 @begin{ImplNote}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097]}
-@Chg{New=[File_Type cannot be implemented as a (directly) controlled type, as
-Ada.Direct_IO can be instantiated at any nesting depth. File_Type could have
-a component of a controlled type, as long as that type is declared in some
-other (non-generic) package.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097],ARef=[AI95-00115-01]}
+@ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00344-01]}
+@ChgDeleted{Version=[2],Text=[@Chg{Version=[1],New=[File_Type cannot be
+implemented as a (directly)
+controlled type, as Ada.Direct_IO can be instantiated at any nesting depth.
+File_Type could have a component of a controlled type, as long as that type is
+declared in some other (non-generic) package.],Old=[]}]}
 @end{ImplNote}
 
 @end{StaticSem}
@@ -819,15 +830,18 @@ files are open, have respectively the current modes In_File and
 Out_File, and are associated with two implementation-defined external
 files. Procedures are provided to change the current default input file
 and the current default output file.
-@ImplDef{external files for standard input, standard output, and
-standard error}
+@ChgNote{The following was poorly formatted.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[@Chg{Version=[2],New=[The ],
+Old=[]}external files @Chg{Version=[2],New=[associated with the],Old=[for]} standard
+input, standard output, and standard error@Chg{Version=[2],New=[ files.],Old=[]}]}
 @begin{ImplNote}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0113]}
-@Chg{New=[The default input file and default output file are not the names
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0113],ARef=[AI95-00087-01]}
+@ChgAdded{Version=[1],Text=[The default input file and default output file
+are not the names
 of distinct file objects, but rather the @i<role> played by one or more
 (other) file object(s). Thus, they generally will be implemented as accesses
 to another file object. An implementation that implements them by copying
-them is incorrect.],Old=[]}
+them is incorrect.]}
 @end{ImplNote}
 
 @Defn{standard error file}
@@ -975,7 +989,7 @@ Append_File is new in Ada 95.
    @key[function] @AdaSubDefn{Current_Error}   @key[return] File_Access;
 
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0051]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0051],ARef=[AI95-00057-01]}
 --@RI{Buffer control}
    @key[procedure] @AdaSubDefn{Flush} (File : @key[in] @Chg{New=[],Old=[@key[out] ]}File_Type);
    @key[procedure] @AdaSubDefn{Flush};
@@ -1294,6 +1308,13 @@ and the
 generic packages Modular_IO and Decimal_IO are new in Ada 95.
 @end{Extend83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0051],ARef=[AI95-00057-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter mode
+  of Flush; otherwise it could not be used on Standard_Output.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Text File Management}
 
 @begin{StaticSem}
@@ -1414,7 +1435,7 @@ or when application-dependent error-related text is to be output.
 @key[function] Standard_Error @key[return] File_Type;
 @key[function] Standard_Error @key[return] File_Access;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0052]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0052],ARef=[AI95-00194-01]}
   @Trailing@;Returns the standard error file (see @RefSecNum{Text Input-Output}),
   or an access value designating the standard @Chg{New=[error],Old=[output]} file, respectively.
 
@@ -1451,7 +1472,7 @@ Standard_Error at the start of program execution are implementation defined.
   or an access value designating the current default error file,
   respectively.
 
-@begin{Example}@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0051]}@Keepnext
+@begin{Example}@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0051],ARef=[AI95-00057-01]}@Keepnext
 @key[procedure] Flush (File : @key[in] @Chg{New=[],Old=[@key[out] ]}File_Type);
 @key[procedure] Flush;
 @end{Example}
@@ -1462,22 +1483,22 @@ If File is not explicitly specified, Current_Output is used.
 @end{StaticSem}
 
 @begin{Erron}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0053]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0053],ARef=[AI95-00063-01]}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
 The execution of a program is erroneous if it @Chg{New=[invokes an operation on],
 Old=[attempts to use]} a current default
 input, default output, or default error file@Chg{New=[, and if the
 corresponding file object is closed or],Old=[ that]} no longer exists.
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0053]}
-@Chg{New=[Closing a default file, then setting the default file to another
-open file before accessing it is not erroneous.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0053],ARef=[AI95-00063-01]}
+@ChgAdded{Version=[1],Text=[Closing a default file, then setting the default
+file to another open file before accessing it is not erroneous.]}
 @end{Ramification}
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0053]}
-@Chg{New=[],Old=[If the Close operation is applied to a file object that is
-also serving as the default input, default output, or default error
-file, then subsequent operations on such a default file are erroneous.]}
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0053],ARef=[AI95-00063-01]}
+@ChgDeleted{Version=[1],Text=[If the Close operation is applied to a file
+object that is also serving as the default input, default output, or default
+error file, then subsequent operations on such a default file are erroneous.]}
 @end{Erron}
 
 @begin{Notes}
@@ -1488,6 +1509,21 @@ parameter File of the corresponding procedures has the mode @key[in] @key[out].
 The standard input, standard output, and standard error files are different
 file objects, but not necessarily different external files.
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0051],ARef=[AI95-00057-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter mode
+  of Flush; otherwise it could not be used on Standard_Output.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0052],ARef=[AI95-00194-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected Standard_Error so it
+  refers to the correct file.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0053],ARef=[AI95-00063-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that execution
+  is erroneous only when a closed default file file is accessed.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Specification of Line and Page Lengths}
 
@@ -2056,6 +2092,9 @@ should always be available except at end of file. For a file
 associated with a keyboard-like device, any line-editing features
 of the underlying operating system should be disabled during
 the execution of Get_Immediate.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Get_Immediate should be implemented with unbuffered input; input
+should be available immediately; line-editing should be disabled.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -2210,7 +2249,7 @@ characters read forms an integer literal outside the range
 @begin{Examples}
 @begin{Example}
 @ChgRef{Version=[1], Kind=[Deleted]}
-@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+@ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @key[package] Int_IO @key[is] @key[new] Integer_IO(Small_Int); @key[use] Int_IO;
 --@RI{ default format used at instantiation,}
@@ -2442,7 +2481,7 @@ same set of formats.
 @begin{Examples}
 @begin{Example}
 @ChgRef{Version=[1], Kind=[Deleted]}
-@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+@ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @key[package] Real_IO @key[is] @key[new] Float_IO(Real); @key[use] Real_IO;
 --@RI{ default format used at instantiation, Default_Exp = 3}
@@ -2558,7 +2597,7 @@ Default_Setting : Type_Set := Upper_Case;
           length of the given string as the value for Width.
 @end{DescribeCode}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0054]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0054],ARef=[AI95-00007-01]}
 Although the specification of the generic package Enumeration_IO would allow
 instantiation for an @Chg{New=[integer],Old=[float]} type, this is not the
 intended purpose of this generic package, and the effect of such instantiations
@@ -2578,6 +2617,14 @@ enumeration values. Thus
 The type Boolean is an enumeration type, hence Enumeration_IO can be
 instantiated for this type.
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0054],ARef=[AI95-00007-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the wording to
+  say Enumeration_IO can be instantiated with an integer type, not a float
+  type.]}
+@end{DiffWord95}
+
 
 @LabeledClause{Wide Text Input-Output}
 
@@ -2637,15 +2684,16 @@ See @RefSecNum{Streams} for a general discussion of streams.
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[The elements of a stream file are stream elements. If positioning is
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Text=[The elements of a stream file are stream elements.
+If positioning is
 supported for the specified external file, a current index and current size
 are maintained for the file as described in @RefSecNum(Sequential and Direct Files).
 If positioning is not supported, a current index is not maintained, and the
 current size is implementation defined.@Defn2{Term=(Current index),
-Sec=(of an open stream file)}@Defn2{Term=(Current size),Sec=(of a stream file)}
-],Old=[]}
-@ChgImpldef{Version=[1],Kind=[Added],Text=[@Chg{New=[Current size for a stream file for which positioning is not supported.],Old=[]}]}
+Sec=(of an open stream file)}@Defn2{Term=(Current size),Sec=(of a stream file)}]}
+@ChgImpldef{Version=[1],Kind=[Added],Text=[@ChgAdded{Version=[1],
+Text=[Current size for a stream file for which positioning is not supported.]}]}
 
 @Leading@;The library package Streams.Stream_IO has the following declaration:
 @begin(example)
@@ -2688,7 +2736,7 @@ Sec=(of an open stream file)}@Defn2{Term=(Current size),Sec=(of a stream file)}
         -- @RI(Return stream access for use with T'Input and T'Output)
 
 @ChgRef{Version=[1], Kind=[Deleted]}
-@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+@ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
     -- @RI(Read array of stream elements from file)
     @key(procedure) @AdaSubDefn{Read} (File : @key(in)  File_Type;
@@ -2701,7 +2749,7 @@ Sec=(of an open stream file)}@Defn2{Term=(Current size),Sec=(of a stream file)}
                     Last : @key(out) Stream_Element_Offset);
 
 @ChgRef{Version=[1], Kind=[Deleted]}
-@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+@ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
     -- @RI(Write array of stream elements into file)
     @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
@@ -2712,7 +2760,7 @@ Sec=(of an open stream file)}@Defn2{Term=(Current size),Sec=(of a stream file)}
                            Item : @key(in) Stream_Element_Array);
 
 @ChgRef{Version=[1], Kind=[Deleted]}
-@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+@ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
     -- @RI(Operations on position within file)
 
@@ -2723,7 +2771,7 @@ Sec=(of an open stream file)}@Defn2{Term=(Current size),Sec=(of a stream file)}
 
     @key(procedure) @AdaSubDefn{Set_Mode}(File : @key(in) @key(out) File_Type; Mode : @key(in) File_Mode);
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0051]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0051],ARef=[AI95-00057-01]}
     @key(procedure) @AdaSubDefn{Flush}(File : @key(in) @Chg{New=[],Old=[@key(out) ]}File_Type);
 
 
@@ -2745,17 +2793,18 @@ The subprograms Create, Open, Close, Delete, Reset, Mode, Name, Form,
 Is_Open, and End_of_File have the same effect as the corresponding
 subprograms in Sequential_IO (see @RefSecNum(File Management)).
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[The Set_Mode procedure changes the mode of the file. If the new mode
-is Append_File, the file is positioned to its end; otherwise, the position in
-the file is unchanged.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Text=[The Set_Mode procedure changes the mode of the
+file. If the new mode is Append_File, the file is positioned to its end;
+otherwise, the position in the file is unchanged.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[The Flush procedure synchronizes the external file with the internal
-file (by flushing any internal buffers) without closing the file or changing
-the position. Mode_Error is propagated if the mode of the file is In_File.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Text=[The Flush procedure synchronizes the external file
+with the internal file (by flushing any internal buffers) without closing the
+file or changing the position. Mode_Error is propagated if the mode of the file
+is In_File.]}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0056]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0056],ARef=[AI95-00001-01]}
 The Stream function returns a Stream_Access result from a File_Type
 object, thus allowing the stream-oriented attributes Read, Write,
 Input, and Output to be used on the same file for multiple types.
@@ -2769,89 +2818,109 @@ parameter starts reading at the specified index.
 The Write procedure with a Positive_Count
 parameter starts writing at the specified index.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[The Size function returns the current size of the file.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Text=[The Size function returns the current size of the
+file.]}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0055]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0055],ARef=[AI95-00026-01]}
 The Index function returns the current @Chg{New=[],Old=[file ]}index@Chg{New=[],
 Old=[, as a count (in stream elements) from the beginning of the file.
 The position of the first element in the file is 1]}.
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Deleted]}
 @ChgNote{This ramification is now part of the official wording.}
-@Chg{New=[],Old=[The notion of Index for Stream_IO is analogous to that of
-Index in Direct_IO, except that the former is measured in Stream_Element
-units, whereas the latter is in terms of Element_Type values.]}
+@ChgDeleted{Version=[1],Text=[The notion of Index for Stream_IO is analogous
+to that of Index in Direct_IO, except that the former is measured in
+Stream_Element units, whereas the latter is in terms of Element_Type values.]}
 @end{Ramification}
 
 The Set_Index procedure sets the current index to the
 specified value.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[@Leading@;If positioning is supported for the external file, the
-current index is maintained as follows:],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Type=[Leading],Text=[If positioning is supported for the
+external file, the current index is maintained as follows:]}
 
 @begin{Itemize}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[For Open and Create, if the Mode parameter is Append_File, the
-current index is set to the current size of the file plus one; otherwise, the
-current index is set to one.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Text=[For Open and Create, if the Mode parameter is
+Append_File, the current index is set to the current size of the file plus one;
+otherwise, the current index is set to one.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[For Reset, if the Mode parameter is Append_File, or no Mode parameter
-is given and the current mode is Append_File, the current index is set to the
-current size of the file plus one; otherwise, the current index is set to one.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Text=[For Reset, if the Mode parameter is Append_File, or
+no Mode parameter is given and the current mode is Append_File, the current
+index is set to the current size of the file plus one; otherwise, the current
+index is set to one.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[For Set_Mode, if the new mode is Append_File, the current index is
-set to current size plus one; otherwise, the current index is unchanged.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Text=[For Set_Mode, if the new mode is Append_File, the
+current index is set to current size plus one; otherwise, the current index is
+unchanged.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[For Read and Write without a Positive_Count parameter, the current
-index is incremented by the number of stream elements read or written.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Text=[For Read and Write without a Positive_Count
+parameter, the current index is incremented by the number of stream elements
+read or written.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
-@Chg{New=[For Read and Write with a Positive_Count parameter, the value of the
-current index is set to the value of the Positive_Count parameter plus the
-number of stream elements read or written.],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgAdded{Version=[1],Text=[For Read and Write with a Positive_Count parameter,
+the value of the current index is set to the value of the Positive_Count
+parameter plus the number of stream elements read or written.]}
 @end{Itemize}
 
 If positioning is not supported for the given file, then a call
 of Index or Set_Index propagates Use_Error. Similarly, a call of
 Read or Write with a Positive_Count parameter propagates Use_Error.
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055]}
-@Chg{New=[],Old=[The Size function returns the current size of the file, in
-stream elements.]}
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgDeleted{Version=[1],Text=[The Size function returns the current size of
+the file, in stream elements.]}
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055]}
-@Chg{New=[],Old=[The Set_Mode procedure changes the mode of the file. If the
-new mode is Append_File, the file is positioned to its end;
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgDeleted{Version=[1],Text=[The Set_Mode procedure changes the mode of the
+file. If the new mode is Append_File, the file is positioned to its end;
 otherwise, the position in the file is unchanged.]}
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055]}
-@Chg{New=[],Old=[The Flush procedure synchronizes the external file with the
-internal file (by flushing any internal buffers) without closing
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgDeleted{Version=[1],Text=[The Flush procedure synchronizes the external
+file with the internal file (by flushing any internal buffers) without closing
 the file or changing the position.
 Mode_Error is propagated if the mode of the file is In_File.]}
 @end{StaticSem}
 @begin{Erron}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0056]}
-@Chg{New=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0056],ARef=[AI95-00001-01]}
+@ChgAdded{Version=[1],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the File_Type object passed to the Stream function is later
 closed or finalized, and the stream-oriented attributes are subsequently
 called (explicitly or implicitly) on the Stream_Access value returned by
 Stream, execution is erroneous. This rule applies even if the File_Type object
-was opened again after it had been closed.],Old=[]}
+was opened again after it had been closed.]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[These rules are analogous to the rule for the result of the
+@ChgAdded{Version=[1],Text=[These rules are analogous to the rule for the result of the
 Current_Input, Current_Output, and Current_Error functions. These rules make
 it possible to represent a value of (some decendant of) Root_Stream_Type which
 represents a file as an access value, with a null value corresponding to a
-closed file.],Old=[]}
+closed file.]}
 @end{Reason}
 @end{Erron}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0051],ARef=[AI95-00057-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter mode
+  of Flush; otherwise it could not be used on Standard_Output.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0055],ARef=[AI95-00026-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to describe the
+  effects of the various operations on the current index.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0056],ARef=[AI95-00001-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Stream can
+  raise Status_Error, and clarified that using a Stream_Access whose file
+  has been closed is erroneous.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{The Package Text_IO.Text_Streams}
 @begin{Intro}
@@ -2988,6 +3057,9 @@ attempt to Put too many characters to a string.
 @begin{DocReq}
 The implementation shall document the conditions under which
 Name_Error, Use_Error and Device_Error are propagated.
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
+The conditions under which Io_Exceptions.Name_Error, Io_Exceptions.Use_Error
+and Io_Exceptions.Device_Error are propagated shall be documented.]}]}
 @end{DocReq}
 
 
@@ -3026,9 +3098,9 @@ is supported by the implementation, the following effects are defined:
 Operations on one text file object do not affect the column,
 line, and page numbers of any other file object.
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0057]}
-@Chg{New=[],Old=[Standard_Input and Standard_Output are associated with
-distinct external files, so operations on one of these files cannot affect
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0057],ARef=[AI95-00050-01]}
+@ChgDeleted{Version=[1],Text=[Standard_Input and Standard_Output are associated
+with distinct external files, so operations on one of these files cannot affect
 operations on the other file. In particular, reading from
 Standard_Input does not affect the current page, line, and column
 numbers for Standard_Output, nor does writing to Standard_Output
@@ -3045,3 +3117,10 @@ the external file.
 
 All other effects are identical.
 @end{RunTime}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0057],ARef=[AI95-00050-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Removed the incorrect statement
+  that the external files associated with the standard input, standard output,
+  and standard error files are distinct.]}
+@end{DiffWord95}

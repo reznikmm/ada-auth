@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/01/20 06:32:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/01/21 06:07:28 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/01/20 06:32:03 $}
+@Comment{$Date: 2005/01/21 06:07:28 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -3994,7 +3994,7 @@ of the absolute error of the inner product @i{X}*@i{Y} shall not exceed
 to reduce cancellation errors such as extended precision arithmetic.]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[Any
 techniques used to reduce cancellation errors in
-Ada.Numerics.Generic_Complex_Arrays shall be documented.]}]}
+Numerics.Generic_Complex_Arrays shall be documented.]}]}
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The above accuracy requirement is met by the

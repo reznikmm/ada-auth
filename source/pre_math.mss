@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2000/09/01 03:51:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2005/01/21 06:07:30 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:24 $}
+@Comment{$Date: 2005/01/21 06:07:30 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -504,7 +504,7 @@ declaration:
 @ImplDef{The value of Numerics.Float_Random.Max_Image_Width.}
 @ImplDef{The value of Numerics.Discrete_Random.Max_Image_Width.}
 @begin{ImplNote}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0097]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0097],ARef=[AI95-00115-01]}
 @Leading@;
 The following is a possible implementation of the private part of
 @Chg{New=[Numerics.Float_Random], Old=[each package]} (assuming the presence
@@ -519,14 +519,16 @@ of @lquotes@;@key[with] Ada.Finalization;@rquotes@; as a context clause):
 @key[procedure] Finalize (G : @key[in] @key[out] Generator);
 @end{Example}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097]}
-@Chg{New=[Unfortunately, Numerics.Discrete_Random.Generator cannot be
-implemented this way, as Numerics.Discrete_Random can be instantiated at any
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097],ARef=[AI95-00115-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00344-01]}
+@Chg{Version=[1],New=[@Chg{Version=[2],New=[],
+Old=[Unfortunately, ]}Numerics.Discrete_Random.Generator @Chg{Version=[2],New=[also can],Old=[cannot]} be
+implemented this way@Chg{Version=[2],New=[],Old=[, as Numerics.Discrete_Random can be instantiated at any
 nesting depth. However, Generator could have a component of a controlled type,
 as long as that type is declared in some other (non-generic) package. One
 possible solution would be to implement Numerics.@!Discrete_@!Random in terms
 of Numerics.@!Float_@!Random, using a component of Numerics.@!Float_@!Random.Generator
-to implement Numerics.@!Float_@!Random.@!Generator.],Old=[]}
+to implement Numerics.@!Float_@!Random.@!Generator]}.],Old=[]}
 
 Clearly some level of indirection is required in the implementation of a
 Generator, since the parameter mode is @key(in) for all operations on a

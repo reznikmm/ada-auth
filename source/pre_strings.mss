@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2000/09/27 00:15:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2005/01/21 06:07:31 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/09/27 00:15:10 $}
+@Comment{$Date: 2005/01/21 06:07:31 $}
 
 @LabeledClause{String Handling}
 
@@ -1295,12 +1295,17 @@ the copying and comparison of bounded strings.@end{reason}
 @end{example}
 
 @begin{ImplNote}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097]}
-@Chg{New=[Bounded_String cannot be implemented as a (directly) controlled type,
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097],ARef=[AI95-00115-01]}
+@ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00344-01]}
+@ChgDeleted{Version=[2],Text=[@Chg{Version=[1],New=[Bounded_String cannot be
+implemented as a (directly) controlled type,
 as Ada.Strings.Bounded.Generic_Bounded_Length can be instantiated at any
 nesting depth. Bounded_String could have
 a component of a controlled type, as long as that type is declared in some
-other (non-generic) package (including directly in Ada.Strings.Bounded).],Old=[]}
+other (non-generic) package (including directly in Ada.Strings.Bounded).],Old=[]}]}
+@ChgNote{AI-344 allows controlled types to be declared at
+any nesting depth, so this note is obsolete.}
+
 @end{ImplNote}
 
 Null_Bounded_String represents the null string.

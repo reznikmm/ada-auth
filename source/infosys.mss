@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2005/01/18 05:34:46 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2005/01/21 06:07:28 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2005/01/18 05:34:46 $}
+@Comment{$Date: 2005/01/21 06:07:28 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -50,6 +50,10 @@ COBOL (respectively, C) in the interfacing pragmas
 (see @RefSecNum{Interface to Other Languages}),
 thus allowing Ada programs to interface with programs written in
 that language.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If COBOL (respectively, C) is supported in the target environment,
+then interfacing to COBOL (respectively, C) should be supported as
+specified in @RefSecNum{Interface to Other Languages}.]}]}
 @end{ImplAdvice}
 
 @begin{Extend83}
@@ -84,6 +88,9 @@ of 2 versus 10 for S'Machine_Radix is not specified.
 @begin{ImplAdvice}
 Packed decimal should be used as the internal representation
 for objects of subtype S when S'Machine_Radix = 10.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Packed decimal should be used as the internal representation
+for objects of subtype @i<S> when @i<S>'Machine_Radix = 10.]}]}
 @end{ImplAdvice}
 
 @begin{Discussion}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/01/20 06:32:02 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/01/21 06:07:27 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/01/20 06:32:02 $}
+@Comment{$Date: 2005/01/21 06:07:27 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1762,7 +1762,11 @@ The implementation of the PCS shall document whether
 the RPC-receiver is invoked from concurrent tasks. If there is an
 upper limit on the number of such tasks, this limit shall be documented as
 well, together with the mechanisms to configure it (if this is supported).
-@ImplDef{Implementation-defined aspects of the PCS.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of the PCS.]}]}
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Whether the RPC-receiver is invoked from concurrent tasks, and if so,
+the number of such tasks shall be documented.]}]}
 
 @end{DocReq}
 
@@ -1826,10 +1830,15 @@ Whenever possible, the PCS on the called partition should
 allow for multiple tasks to call the RPC-receiver with
 different messages and should allow them to block until the corresponding
 subprogram body returns.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The PCS should allow for multiple tasks to call the RPC-receiver.]}]}
 
 The Write operation on a stream of type Params_Stream_Type should raise
 Storage_Error if it runs out of space trying to write the Item
 into the stream.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The System.RPC.Write operation should raise Storage_Error if runs out
+of space when writing an item.]}]}
 @begin{ImplNote}
   An implementation could also dynamically allocate more space
   as needed, only propagating Storage_Error if the @nt<allocator>

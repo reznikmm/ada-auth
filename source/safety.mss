@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.24 $ $Date: 2005/01/13 05:06:15 $ $Author: Randy $ }
+@Comment{ $Revision: 1.25 $ $Date: 2005/01/21 06:07:31 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/01/13 05:06:15 $}
+@Comment{$Date: 2005/01/21 06:07:31 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -106,6 +106,10 @@ the implementation shall document the implicit initial value for
 scalar subtypes,
 and shall identify each case in which such a value is used
 and is not an invalid representation.
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[If
+a @nt{pragma} Normalize_Scalars applies, the implicit initial value for
+scalar subtypes shall be documented. Such a value should be an invalid
+representation when possible; any cases when is it not shall be documented.]}]}
 @begin{Honest}
 It's slightly inaccurate to say that the value is a
  representation, but
@@ -136,9 +140,13 @@ should be an invalid representation
 (see @RefSecNum{Data Validity}).
 @begin{Discussion}
 
-When an out of range value is used for the initialization,
-it is likely that constraint checks will detect it.
-In addition, it can be detected by the Valid attribute.
+  When an out of range value is used for the initialization,
+  it is likely that constraint checks will detect it.
+  In addition, it can be detected by the Valid attribute.
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This rule is included in the documentation
+  requirements, and thus does not need a separate summary item.]}
 
 @end{Discussion}
 @end{ImplAdvice}
@@ -187,7 +195,12 @@ independently of any compilation unit or partition, or as part of an annotated
 listing for a given unit or partition.
 See also @RefSecNum(Conformity of an Implementation with the Standard), and
 @RefSecNum(Structure).]
-@ImplDef{Information regarding bounded errors and erroneous execution.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Information regarding bounded errors and erroneous execution.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
+The range of effects for each bounded error and each unspecified effect
+shall be documented. If the effects of a given erroneous construct are
+constrained, the constraints shall be documented.]}]}
 
 @end{DocReq}
 
@@ -436,10 +449,17 @@ information in both a human-readable
 and machine-readable form,
 and should document the latter so as to ease further
 processing by automated tools.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The information produced by @nt{pragma} Reviewable should be
+provided in both a human-readable and machine-readable form, and the
+latter form should be documented.]}]}
 
 Object code listings should be provided both in a symbolic
 format and also in an appropriate numeric format (such as
 hexadecimal or octal).
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Object code listings should be provided both in a symbolic
+format and in a numeric format.]}]}
 @begin{Reason}
 
 This is to enable other tools to perform any analysis that the user
@@ -581,7 +601,12 @@ For each inspection point,
 identify a mapping between each inspectable object and the machine resources
 (such as memory locations or registers) from which the object's value
 can be obtained.
-@ImplDef{Implementation-defined aspects of pragma Inspection_Point.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of pragma Inspection_Point.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[For each inspection point, a mapping between each inspectable object
+and the machine resources where the object's value can be obtained shall
+be provided.]}]}
 @end{DocReq}
 
 @begin{Notes}
@@ -869,7 +894,12 @@ If a pragma Restrictions(No_Exceptions) is specified, the implementation
 shall document the effects of all constructs where language-defined checks are
 still performed automatically (for example, an overflow check performed
 by the processor).
-@ImplDef{Implementation-defined aspects of pragma Restrictions.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of pragma Restrictions.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
+If a pragma Restrictions(No_Exceptions) is specified, the effects of all
+constructs where language-defined checks are still performed shall be
+documented.]}]}
 @begin{Discussion}
 
 The documentation requirements here are quite difficult to satisfy. One
@@ -914,7 +944,11 @@ still formally erroneous.
 @end{Discussion}
 @end{Erron}
 
-@ImplDef{Any restrictions on pragma Restrictions.}
+@ChgNote{I can't find any reason in the normative wording for this item;
+therefore I've removed it. The notes below refer only to a non-standard mode,
+which is irrelevant in the Standard.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Any restrictions on pragma Restrictions.]}]}
 
 @begin{comment}
 @begin{Notes}
@@ -942,7 +976,6 @@ full RTS is being used),
 
 identify to the user the additional restrictions that need to be
 specified in the pragma in order to obtain the reduced RTS, and
-
 identify any constructs that would use any of the features so
 proscribed
 @end{itemize}
@@ -1083,6 +1116,11 @@ attached.]}
 and the Environment task becomes permanently blocked during elaboration then
 the partition is deadlocked and it is recommended that the partition be
 immediately terminated.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If the partition elaboration policy is Sequential
+and the Environment task becomes permanently blocked during elaboration then
+the partition be should immediately terminated.]}]}
+
 @end{ImplAdvice}
 
 @begin{ImplPerm}
