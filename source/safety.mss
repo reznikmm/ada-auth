@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.23 $ $Date: 2004/12/12 05:36:23 $ $Author: Randy $ }
+@Comment{ $Revision: 1.24 $ $Date: 2005/01/13 05:06:15 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2004/12/12 05:36:23 $}
+@Comment{$Date: 2005/01/13 05:06:15 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -301,8 +301,11 @@ situations. Of course, such events could well indicate a programmer error.
 
 @end{Discussion}
 
-For each reference to a scalar object, an identification of the
-reference as either @lquotes@;known to be initialized,@rquotes@; or @lquotes@;possibly uninitialized,@rquotes@;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00209-01]}
+For each @Chg{Version=[2],New=[read of],Old=[reference to]} a scalar object,
+an identification of the @Chg{Version=[2],New=[read],Old=[reference]} as
+either @lquotes@;known to be initialized,@rquotes@; or
+@lquotes@;possibly uninitialized,@rquotes@;
 independent of whether pragma Normalize_Scalars applies;
 @begin{Discussion}
 
@@ -463,6 +466,13 @@ the detailed information to allow review of the optimized object code.
 See also @nt<pragma> Optimize (@RefSecNum{Pragmas}).
 @end[discussion]
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00209-01]}
+  @ChgAdded{Version=[2],Text=[The wording was clarified that pragma Reviewable
+  applies to each read of an object, as it makes no sense to talk about the
+  state of an object that will immediately be overwritten.]}
+@end{DiffWord95}
+
 @LabeledSubClause{Pragma Inspection_Point}
 @begin{Intro}
 An occurrence of a pragma Inspection_Point identifies a set of objects each of
@@ -575,11 +585,13 @@ can be obtained.
 @end{DocReq}
 
 @begin{Notes}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00209-01]}
 The implementation is not allowed to perform @lquotes@;dead store elimination@rquotes@; on
 the last assignment to a variable prior to a point where the
 variable is inspectable.
 Thus an inspection point has the effect of an
-implicit reference to each of its inspectable objects.
+implicit @Chg{Version=[2],New=[read],Old=[reference]} to each of its
+inspectable objects.
 
 Inspection points are useful in maintaining a correspondence between the
 state of the program in source code terms, and the machine state during
@@ -783,10 +795,11 @@ is not allowed.
 (tagged)
 subtype T.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Defn2{Term=[Restrictions],Sec=(No_IO)}No_IO @\Semantic dependence on
 any of the library units
-Sequential_IO, Direct_IO, Text_IO, Wide_Text_IO, or Stream_IO
-is not allowed.
+Sequential_IO, Direct_IO, Text_IO, Wide_Text_IO, @Chg{Version=[2],
+New=[Wide_Wide_Text_IO, ],Old=[]}or Stream_IO is not allowed.
 @begin{Discussion}
 
 Excluding the input-output facilities of an implementation may be needed
@@ -937,13 +950,155 @@ proscribed
 @end{comment}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   No_Local_Allocators no longer prohibits generic instantiations.]}
 @end{Extend95}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[Wide_Wide_Text_IO (which is new) is added to the
+  No_IO restriction.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
   @ChgAdded{Version=[2],Text=[The title of this clause was changed to match the
   change to the Annex title. Pragma Profile(Ravenscar) is part of this annex.]}
 @end{DiffWord95}
+
+@LabeledAddedClause{Version=[2],Name=[Pragma Detect_Blocking]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[The following @nt{pragma} forces an implementation
+to detect potentially blocking operations within a protected operation.]}
+@end{Intro}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Detect_Blocking is as follows:]}
+@end{SyntaxText}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Detect_Blocking>;']}
+@end{Syntax}
+
+@begin{LinkTime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[A @nt{pragma} Detect_Blocking is a configuration
+pragma.]}
+@end{LinkTime}
+
+@begin{RunTime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[An implementation is required to detect a
+potentially blocking operation within a protected operation, and to raise
+Program_Error (see @RefSecNum{Protected Subprograms and Protected Actions}).]}
+@end{RunTime}
+
+@begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[An implementation is allowed to reject a
+@nt{compilation_unit} if a potentially blocking operation is present directly
+within an @nt{entry_body} or the body of a protected subprogram.]}
+@end{ImplPerm}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[An operation that causes a task to be blocked
+within a foreign language domain is not defined to be potentially blocking,
+and need not be detected.]}
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Pragma Detect_Blocking is new.]}
+@end{Extend95}
+
+@LabeledAddedClause{Version=[2],Name=[Pragma Partition_Elaboration_Policy]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgAdded{Version=[2],Text=[This clause defines a @nt{pragma}
+for user control over elaboration policy.]}
+@end{Intro}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Partition_Elaboration_Policy is as follows:]}
+@end{SyntaxText}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Partition_Elaboration_Policy> (@SynI<policy_>@Syn2<identifier>);']}
+
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The @SynI<policy_>@nt{identifier} shall be either
+Sequential, Concurrent or an implementation-defined identifier.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[Implementation-defined
+@SynI<policy_>@nt<identifier>s allowed in a @nt{pragma} Partition_Elaboration_Policy.],Old=[]}]}
+@end{SyntaxText}
+@end{Syntax}
+
+@begin{LinkTime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgAdded{Version=[2],Text=[The @nt{pragma} is a configuration pragma. It
+applies to all compilation units in a partition. If the Sequential policy is
+specified for a partition then pragma Restrictions (No_Task_Hierarchy) shall
+also be specified for the partition.]}
+@end{LinkTime}
+
+@begin{RunTime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgAdded{Version=[2],Text=[Notwithstanding what this International Standard
+says elsewhere, this @nt{pragma} allows partition elaboration rules concerning
+task activation and interrupt attachment to be changed. If the
+@SynI{policy_}@nt{identifier} is Concurrent, or if there is no pragma
+Partition_Elaboration_Policy defined for the partition, then the rules defined
+elsewhere in this Standard apply.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgAdded{Version=[2],Text=[If the partition elaboration policy is Sequential,
+all task activations for library-level tasks and all interrupt handler
+attachments for library-level interrupt handlers are deferred. The deferred
+task activations and handler attachments occur after the elaboration of all
+@nt{library_item}s prior to calling the main subprogram. At this point the
+Environment task is suspended until all deferred task activations and handler
+attachments are complete.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgAdded{Version=[2],Text=[If any deferred task activation fails,
+Tasking_Error is raised in the Environment task. The Environment task and all
+tasks whose activations fail are terminated. If a number of dynamic interrupt
+handler attachments for the same interrupt are deferred then the most recent
+call of Attach_Handler or Exchange_Handler determines which handler is
+attached.]}
+@end{RunTime}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgAdded{Version=[2],Text=[If the partition elaboration policy is Sequential
+and the Environment task becomes permanently blocked during elaboration then
+the partition is deadlocked and it is recommended that the partition be
+immediately terminated.]}
+@end{ImplAdvice}
+
+@begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgAdded{Version=[2],Text=[If the partition elaboration policy is Sequential
+and any task activation fails then an implementation may immediately terminate
+the active partition to mitigate the hazard posed by continuing to execute with
+a subset of the tasks being active.]}
+@end{ImplPerm}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @nt{Pragma} Partition_Elaboration_Policy is new.]}
+@end{Extend95}
+
+
+
+

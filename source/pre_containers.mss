@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.5 $ $Date: 2004/12/15 01:09:49 $ $Author: Randy $ }
+@comment{ $Revision: 1.6 $ $Date: 2005/01/13 05:06:15 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2004/12/15 01:09:49 $}
+@Comment{$Date: 2005/01/13 05:06:15 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -236,27 +236,6 @@ Containers has the following declaration:]}
 hash function. Count_Type represents the (potential or actual) number of
 elements of a container.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-02]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[Each child unit of Containers
-defines a container type. A subprogram is said to @i<tamper with> an object
-@i<C> of a container type if:@Defn2{Term=[tamper with], Sec=(a container)}]}
-
-@begin{Itemize}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it inserts or deletes elements from @i<C>; or]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it reorders the elements of @i<C>; or]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it finalizes @i<C>; or]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it calls the Move procedure (if such a procedure
-exists) with @i<C> as a parameter.]}
-
-@end{Itemize}
 @end{StaticSem}
 
 @begin{ImplAdvice}
@@ -284,16 +263,15 @@ The package Ada.Containers is new.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[ The language-defined package Containers.Vectors
-provides private types Vector and Cursor, and a set of operations for each
-type. A vector container allows insertion and deletion at any position, but it
-is specifically optimized for insertion and deletion at the high end (the end
-with the higher index) of the container. A vector container also provides
-random access to its elements.]}
+@ChgAdded{Version=[2],Text=[The language-defined generic package
+Containers.Vectors provides private types Vector and Cursor, and a set of
+operations for each type. A vector container allows insertion and deletion at
+any position, but it is specifically optimized for insertion and deletion at
+the high end (the end with the higher index) of the container. A vector
+container also provides random access to its elements.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[
-@Pdefn2{Term=[length], Sec=(of a vector container)}
+@ChgAdded{Version=[2],Text=[@Pdefn2{Term=[length], Sec=(of a vector container)}
 @Pdefn2{Term=[capacity], Sec=(of a vector container)}
 A vector container behaves conceptually as an array that expands as necessary
 as items are inserted. The @i{length} of a vector is the number of elements that
@@ -302,8 +280,7 @@ elements that can be inserted into the vector prior to it being automatically
 expanded.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[
-@Pdefn2{Term=[empty element], Sec=(of a vector container)}
+@ChgAdded{Version=[2],Text=[@Pdefn2{Term=[empty element], Sec=(of a vector container)}
 A vector container may contain @i{empty elements}. Empty elements do not have a
 specified value.]}
 
@@ -324,8 +301,8 @@ for an implementation to be a single contiguous array.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The library package
-Containers.Vectors has the following declaration:]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
+package Containers.Vectors has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{generic}
@@ -354,6 +331,9 @@ Containers.Vectors has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Vector} : @key{constant} Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{No_Element} : @key{constant} Cursor;]}
 
 
 

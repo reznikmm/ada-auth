@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/16 06:31:46 $}
+@Comment{$Date: 2005/01/13 05:06:13 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -3598,16 +3598,16 @@ S'Pred for a modular integer subtype wraps around
 @ChgAdded{Version=[2],Text=[@nt[numeric_literal]]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@nt[numeral].[@nt[exponent]]]}
+@ChgAdded{Version=[2],Text=<@nt[numeral].[@nt[exponent]]>}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[.@nt[numeral][@nt[exponent]]]}
+@ChgAdded{Version=[2],Text=<.@nt[numeral][@nt[exponent]]>}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@nt[base]#@nt[based_numeral].#[@nt[exponent]]]}
+@ChgAdded{Version=[2],Text=<@nt[base]#@nt[based_numeral].#[@nt[exponent]]>}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@nt[base]#.@nt[based_numeral]#[@nt[exponent]]]}
+@ChgAdded{Version=[2],Text=<@nt[base]#.@nt[based_numeral]#[@nt[exponent]]>}
 @end{Itemize}
 
     @ChgRef{Version=[2],Kind=[Added]}

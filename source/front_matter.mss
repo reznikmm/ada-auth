@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.37 $ $Date: 2004/12/10 06:13:45 $}
+@comment{$Revision: 1.38 $ $Date: 2005/01/13 05:06:16 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -175,36 +175,36 @@ RLB - 2000-05-17}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
 Programming Language @em 1995 edition, which]} gives an introduction to the
-new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition of this Standard],Old=[]},
-and explains the rationale behind them.
-Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],Old=[]}should
-read this first.
+new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition
+of this Standard],Old=[]}, and explains the rationale behind them.
+Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],
+Old=[]}should read this first.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[Ada 2005 Rationale. This gives an introduction to the
+@ChgAdded{Version=[2],Text=[Ada 2005 Rationale. This gives an introduction to the
 changes and new features in Ada 2005 (compared with the 1995 edition), and
 explains the rationale behind them. Programmers should read this rationale
-before reading this Standard in depth.],Old=[]}
+before reading this Standard in depth.]}
 
 @ChgRef{Version=[1],Kind=[Deleted]}
-@Chg{New=[], Old=[Changes to Ada @em 1987 to 1995. This document lists in detail the changes made
-to the 1987 edition of the standard.]}
+@ChgDeleted{Version=[1],Text=[Changes to Ada @em 1987 to 1995. This document
+lists in detail the changes made to the 1987 edition of the standard.]}
 
 The Ada Reference Manual (RM).
 This is the International Standard @em ISO/IEC 8652:1995.
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[Technical Corrigendum 1 @em ISO/IEC 8652:1995:COR.1:2001.
-This document lists corrections to the International Standard.],Old=[]}
+@ChgAdded{Version=[2],Text=[Technical Corrigendum 1 @em ISO/IEC 8652:1995:COR.1:2001.
+This document lists corrections to the International Standard.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[Amendment 1 @em ISO/IEC 8652:1995:AMD.1:200x. This
+@ChgAdded{Version=[2],Text=[Amendment 1 @em ISO/IEC 8652:1995:AMD.1:200x. This
 document outlines additional features and corrections to the International
-Standard.],Old=[]}
+Standard.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[The consolidated Ada Reference Manual. An @i{unofficial}
-document combining the above three documents into a single document.],Old=[]}
+@ChgAdded{Version=[2],Text=[The consolidated Ada Reference Manual. An @i{unofficial}
+document combining the above three documents into a single document.]}
 @end{Itemize}
 @end{AARMOnly}
 
@@ -215,24 +215,24 @@ document combining the above three documents into a single document.],Old=[]}
 Programming Language @em 1995 edition, which]} gives an introduction to the
 new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition of this Standard],Old=[]},
 and explains the rationale behind them. Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],
-Old=[]} read this first.
+Old=[]} should read this first.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[Ada 2005 Rationale. This give an introduction to the
-changes and new features in Ada 2005 (compared with the 1995 edition), and
-explains the rationale behind them. Programmers should read this rationale
-before reading this Standard in depth.],Old=[]}
+@ChgAdded{Version=[2],Text=[Ada 2005 Rationale. This give an introduction
+to the changes and new features in Ada 2005 (compared with the 1995 edition),
+and explains the rationale behind them. Programmers should read this rationale
+before reading this Standard in depth.]}
 
 @ChgRef{Version=[1],Kind=[Deleted]}
-@Chg{New=[], Old=[Changes to Ada @em 1987 to 1995. This document lists in detail the changes made
-to the 1987 edition of the standard.]}
+@ChgDeleted{Version=[1], Text=[Changes to Ada @em 1987 to 1995. This document lists in
+detail the changes made to the 1987 edition of the standard.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 The Annotated Ada Reference Manual (AARM).@Defn{Annotated Ada Reference Manual}
 @Defn{AARM}The AARM contains all of the text
 in @Chg{Version=[2],New=[the consolidated Ada Reference Manual],Old=[the RM95]},
 @ChgNote{John had "this International Standard", but it's really related to the
-unofficial document. Change it back if ISO decides to publish this consolidated.}
+unofficial document. Change it back if ISO decides to publish this consolidated RM.}
 plus various annotations. It is intended primarily for compiler writers,
 validation test writers,
 and others who wish to study the fine details.
@@ -480,8 +480,8 @@ include arrays and records. An array is an object with
 indexed components of the same type. A record is an object
 with named components of possibly different types. Task and
 protected types are also forms of composite types. The
-array types String and Wide_String are predefined.
-@Chg{Version=[2],New=[,],Old=[and]} Wide_String@Chg{Version=[2],
+array types String@Chg{Version=[2],New=[,],Old=[ and]}
+Wide_String@Chg{Version=[2],
 New=[, and Wide_Wide_String],Old=[]} are predefined.
 
 Record, task, and protected types may have special components
@@ -643,9 +643,10 @@ Old=[Section 10]}.
 Additional support @Chg{Version=[2],New=[was],Old=[has been]} added for
 interfacing to other languages. See @RefSecNum{Interface to Other Languages}.
 
-@leading@;The Specialized Needs Annexes have been added
-to provide specific support for certain
-application areas:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
+@leading@;The Specialized Needs Annexes
+@Chg{Version=[2],New=[were],Old=[have been]} added
+to provide specific support for certain application areas:
 @begin{InnerItemize}
 @RefSec{Systems Programming}
 

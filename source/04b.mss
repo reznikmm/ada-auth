@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/12/16 06:31:49 $}
+@Comment{$Date: 2005/01/13 05:06:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @LabeledClause{Type Conversions}
 
@@ -387,16 +387,6 @@ be an array type. Further:]}
   @Chg{Version=[2],New=[The component subtypes shall statically match;
   @PDefn2{Term=[statically matching],Sec=(required)}],Old=[]}
 
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00246-01]}
-  @Chg{Version=[2],New=[Neither the target type nor the operand type shall be
-  limited;],Old=[]}
-  @begin{Reason}
-    @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[We cannot allow conversions between unrelated limited
-    types, as they may have different representations, and (since the types
-    are limited), a copy cannot be made to reconcile the representations.]}
-  @end{Reason}
-
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00392-01]}
   @Chg{Version=[2],New=[If the component types are anonymous access types, then the
   accessibility level of the operand type shall not be statically deeper
@@ -409,6 +399,16 @@ be an array type. Further:]}
     a global type, in case the local type points at local objects. We don't
     need a check for other types of components; for them, the check on the
     conversion (if any) will be sufficient. (I don't buy this - RLB)]}
+  @end{Reason}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00246-01]}
+  @Chg{Version=[2],New=[Neither the target type nor the operand type shall be
+  limited;],Old=[]}
+  @begin{Reason}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[We cannot allow conversions between unrelated limited
+    types, as they may have different representations, and (since the types
+    are limited), a copy cannot be made to reconcile the representations.]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00246-01],ARef=[AI95-00251-01],ARef=[AI95-00363-01]}

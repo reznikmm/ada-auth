@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2004/12/16 06:31:50 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2005/01/13 05:06:15 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2004/12/16 06:31:50 $}
+@Comment{$Date: 2005/01/13 05:06:15 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -617,14 +617,456 @@ operations and types are provided:]}
 
 @begin{DescribeCode}
 
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{type} Directory_Entry_Type @key{is limited private};]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[The type Directory_Entry_Type represents a single item in a directory.
+These items can only be created by the Get_Next_Entry procedure in this
+package. Information about the item can be obtained from the functions declared
+in this package. A default initialized object of this type is invalid; objects
+returned from Get_Next_Entry are valid.]}
 
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{type} Filter_Type @key{is array} (File_Kind) @key{of} Boolean;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[The type Filter_Type specifies which directory entries are provided
+from a search operation. If the Directory component is True, directory entries
+representing directories are provided. If the Ordinary_File component is True,
+directory entries representing ordinary files are provided. If the Special_File
+component is True, directory entries representing special files are provided.]}
 
-**** The rest of this clause has yet to be inserted ****
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{type} Search_Type @key{is limited private};]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[The type Search_Type contains the
+state of a directory search. A
+default-initialized Search_Type object has no entries available (More_Entries
+returns False).]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Start_Search (Search : @key{in out} Search_Type;
+                        Directory : @key{in} String;
+                        Pattern : @key{in} String;
+                        Filter : @key{in} Filter_Type := (@key{others} => True));]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Starts a search in the
+directory entry in the directory named by
+Directory for entries matching Pattern. Pattern represents a file name matching
+pattern. If Pattern is null, all items in the directory are matched; otherwise,
+the interpretation of Pattern is implementation-defined. Only items which match
+Filter will be returned. After a successful call on Start_Search, the object
+Search may have entries available, but it may have no entries available if no
+files or directories match Pattern and Filter. The exception Name_Error is
+propagated if the string given by Directory does not identify an existing
+directory, or if Pattern does not allow the identification of any possible
+external file or directory. The exception Use_Error is propagated if the
+external environment does not support the searching of the directory with the
+given name (in the absence of Name_Error).]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+intepretation of a non-null search pattern in Ada.Directories.],Old=[]}]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} End_Search (Search : @key{in out} Search_Type);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Ends the search represented
+by Search. After a successful call on
+End_Search, the object Search will have no entries available.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} More_Entries (Search : @key{in} Search_Type) @key{return} Boolean;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if more entries are
+available to be returned by a call
+to Get_Next_Entry for the specified search object, and False otherwise.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Get_Next_Entry (Search : @key{in out} Search_Type;
+                          Directory_Entry : @key{out} Directory_Entry_Type);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the next Directory_Entry
+for the search described by Search
+that matches the pattern and filter. If no further matches are available,
+Status_Error is raised. It is implementation-defined as to whether the results
+returned by this routine are altered if the contents of the directory are
+altered while the Search object is valid (for example, by another program). The
+exception Use_Error is propagated if the external environment does not support
+continued searching of the directory represented by Search.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+results of an Ada.Directories search if the contents of the directory are
+altered while a search is in progress.],Old=[]}]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Search (
+    Directory : @key{in} String;
+    Pattern : @key{in} String;
+    Filter : @key{in} Filter_Type := (others => True);
+    Process : @key{not null access procedure}
+      (Directory_Entry : @key{in} Directory_Entry_Type));]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Searches in the directory entry
+in the directory named by Directory,
+calling the subprogram designated by Process passing each entry matching
+Pattern. Pattern represents a file name matching
+pattern. If Pattern is null, all items in the directory are matched;
+otherwise, the interpretation of Pattern is implementation-defined. Only
+items which match Filter will be returned.
+The exception Name_Error is propagated if the string given by Directory
+does not identify an existing directory, or if Pattern does not allow the
+identification of any possible external file or directory. The exception
+Use_Error is propagated if the external environment does not support the
+searching of the directory with the given name (in the absence of
+Name_Error).]}
+@Comment{The implementation-defined case is handled above.}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Simple_Name (Directory_Entry : @key{in} Directory_Entry_Type)
+     @key{return} String;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the simple external name
+of the external file (including
+directories) represented by Directory_Entry. The format of the name returned is
+implementation-defined. The exception Status_Error is propagated if
+Directory_Entry is invalid.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Full_Name (Directory_Entry : @key{in} Directory_Entry_Type)
+     @key{return} String;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the full external name of
+the external file (including
+directories) represented by Directory_Entry. The format of the name returned is
+implementation-defined. The exception Status_Error is propagated if
+Directory_Entry is invalid.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Kind (Directory_Entry : @key{in} Directory_Entry_Type)
+     @key{return} File_Kind;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the kind of external file
+represented by Directory_Entry. The
+exception Status_Error is propagated if Directory_Entry is invalid.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Size (Directory_Entry : @key{in} Directory_Entry_Type)
+     @key{return} File_Size;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the size of the external
+file represented by Directory_Entry.
+The size of an external file is the number of stream elements contained in
+the file. If the external file is discontiguous (not all elements exist), the
+result is implementation-defined. If the external file represented by
+Directory_Entry is not an ordinary file, the result is implementation-defined.
+The exception Status_Error is propagated if Directory_Entry is invalid. The
+exception Constraint_Error is propagated if the file size is not a value of
+type File_Size.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Modification_Time (Directory_Entry : @key{in} Directory_Entry_Type)
+     @key{return} Ada.Calendar.Time;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the time that the external
+file represented by Directory_Entry
+was most recently modified. If the external file represented by Directory_Entry
+is not an ordinary file, the result is implementation-defined. The exception
+Status_Error is propagated if Directory_Entry is invalid. The exception
+Use_Error is propagated if the external environment does not support the
+reading the modification time of the file represented by Directory_Entry.]}
 
 @end{DescribeCode}
 
-
 @end{StaticSem}
+
+@begin{ImplReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[For Copy_File, if Source_Name identifies an
+existing external ordinary file created by a predefined Ada Input-Output
+package, and Target_Name and Form can be used in the Create operation of that
+Input-Output package with mode Out_File without raising an exception, then
+Copy_File shall not propagate Use_Error.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This means that Copy_File will copy any file
+  that the Ada programmer could copy (by writing some possibly complicated
+  Ada code).]}
+@end{Discussion}
+@end{ImplReq}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[If other information about a file is available
+(such as the owner or creation date) in a directory entry, the implementation
+should provide functions in a child package Ada.Directories.Information to
+retrieve it.@ChildUnit{Parent=[Ada.Directories],Child=[Information]}]}
+
+@begin{ImplNote}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For Microsoft Windows,
+Ada.Directories.Information should contain at least the following routines:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @key{is}
+    -- @RI[System specific directory information.]
+    -- @RI[Windows version.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Creation_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Last_Access_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Read_Only (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Needs_Archiving (Name : @key{in} String) @key{return} Boolean;
+        -- @RI[This generally means that the file needs to be backed up.]
+        -- @RI[The flag is only cleared by backup programs.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Compressed (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Encrypted (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Hidden (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_System (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Offline (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Temporary (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Sparse (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Not_Indexed (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Creation_Time (Directory_Entry : @key{in} Directory_Entry_Type)
+         @key{return} Ada.Calendar.Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Last_Access_Time (Directory_Entry : @key{in} Directory_Entry_Type)
+         @key{return} Ada.Calendar.Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Read_Only (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Needs_Archiving (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;
+        -- @RI[This generally means that the file needs to be backed up.]
+        -- @RI[The flag is only cleared by backup programs.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Compressed (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Encrypted (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Hidden (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_System (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Offline (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Temporary (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Sparse (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Not_Indexed (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    -- @RI[Additional implementation-defined subprograms allowed here.]
+@key{end} Ada.Directories.Information;]}
+@end{Example}
+
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For Unix-like systems (POSIX,
+Linux, etc.), Ada.Directories.Information should contain at least the
+following routines:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @key{is}
+    -- @RI[System specific directory information.]
+    -- @RI[Unix version.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Last_Access_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Last_Status_Change_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{type} Permission @key{is}
+      (Others_Execute, Others_Write, Others_Read,
+       Group_Execute,  Group_Write,  Group_Read,
+       Owner_Execute,  Owner_Write,  Owner_Read,
+       Set_Group_ID,   Set_User_ID);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{type} Permission_Set_Type @key{is array} (Permission) @key{of} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Permission_Set (Name : @key{in} String) @key{return} Permision_Set_Type;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Owner (Name : @key{in} String) @key{return} String;
+        -- @RI[Returns the image of the User_Id. If a definition of User_Id]
+        -- @RI[is available, an implementation-defined version of Owner]
+        -- @RI[returning User_Id should also be defined.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Group (Name : @key{in} String) @key{return} String;
+        -- @RI[Returns the image of the User_Id. If a definition of Group_Id]
+        -- @RI[is available, an implementation-defined version of Group]
+        -- @RI[returning Group_Id should also be defined.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Block_Special_File (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Character_Special_File (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_FIFO (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Symbolic_Link (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Socket (Name : @key{in} String) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Last_Access_Time (Directory_Entry : @key{in} Directory_Entry_Type)
+       @key{return} Ada.Calendar.Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Last_Status_Change_Time (Directory_Entry : @key{in} Directory_Entry_Type)
+       @key{return} Ada.Calendar.Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Permission_Set (Directory_Entry : @key{in} Directory_Entry_Type)
+       @key{return} Permission_Set_Type;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Owner (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} String;
+       -- @RI[See Owner above.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Group (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} String;
+       -- @RI[See Group above.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Block_Special_File (Directory_Entry : @key{in} Directory_Entry_Type)
+       @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Character_Special_File (Directory_Entry : @key{in} Directory_Entry_Type)
+       @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_FIFO (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Symbolic_Link (Directory_Entry : @key{in} Directory_Entry_Type)
+       @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    @key{function} Is_Socket (Directory_Entry : @key{in} Directory_Entry_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[    -- @RI[Additional implementation-defined subprograms allowed here.]
+@key{end} Ada.Directories.Information;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[We give these definitions to give guidance so that
+every implementation for a given target is not unnecessarily different.
+Implementers are encouraged to make packages for other targets as similar to
+these as possible.]}
+
+@end{ImplNote}
+
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Start_Search and Search should raise Use_Error if
+Pattern is malformed, but not if it could represent a file in the directory but
+does not actually do so.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[For Rename, if both New_Name and Old_Name are
+simple names, then Rename should not propagate Use_Error.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This cannot be a requirement, since we have to
+  allow Use_Error to be raised (for instance, because the user may not have
+  permission to rename the file, even if New_Name doesn't exist and is a valid
+  name).]}
+@end{Discussion}
+
+@end{ImplAdvice}
+
+@begin{Notes}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The file name operations Containing_Directory,
+Full_Name, Simple_Name,
+Base_Name, Extension, and Compose operate on file names, not external files.
+The files identified by these operations do not need to exist. Name_Error is
+raised only if the file name is malformed and cannot possibly identify a file.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Using access types, values of Search_Type and
+Directory_Entry_Type can be
+saved and queried later. However, another task or application can modify or
+delete the file represented by a Directory_Entry_Type value or the directory
+represented by a Search_Type value; such a value can only give the information
+valid at the time it is created. Therefore, long-term storage of these values
+is not recommended.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[If the target system does not support directories
+inside of directories, Is_Directory will always return False, and
+Containing_Directory will always raise Use_Error.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[If the target system does not support creation or
+deletion of directories, Create_Directory, Create_Path, Delete_Directory, and
+Delete_Tree will always propagate Use_Error.]}
+
+@end{Notes}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}

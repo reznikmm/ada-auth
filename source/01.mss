@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2004/12/16 06:31:46 $}
+@Comment{$Date: 2005/01/13 05:06:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -758,8 +758,8 @@ This is not part of the definition of the language,
 and does not appear in the RM95@Chg{Version=[2],New=[ or RM2005],Old=[]}.
 @end{DiffWord83}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
 @begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
 @*
 The next three headings list all language changes between Ada 95
