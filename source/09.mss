@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2004/11/12 06:10:17 $}
+@Comment{$Date: 2004/11/13 06:47:17 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 
@@ -231,15 +231,18 @@ task declaration.],Old=[]}
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[Each @nt{interface_subtype_mark} of an
+@Chg{Version=[2],New=[@Redundant[Each @nt{interface_subtype_mark} of an
 @nt{interface_list} appearing within a @nt{task_type_declaration} shall denote
-a limited interface type that is not a protected interface.],Old=[]}
-@begin(Discussion)
+a limited interface type that is not a protected interface.]],Old=[]}
+@begin(TheProof)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[The interface can be a limited, task, or
-  synchronized interface, but not a nonlimited or protected interface (which
-  offer operations that a task does not have).],Old=[]}
-@end(Discussion)
+  @Chg{Version=[2],New=[@RefSecNum{Interface Types} requires that an
+  @nt{interface_list} only name interfaces, and limits the descendants of
+  the various kinds of interfaces. Only limited, task, or
+  synchronized interface can have a task type descendant. Nonlimited or
+  protected interfaces are not allowed, as they offer operations that a task
+  does not have.],Old=[]}
+@end(TheProof)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[@Leading@;For each primitive subprogram inherited by the type declared by a
@@ -892,15 +895,18 @@ protected declaration.],Old=[]}
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[Each @nt{interface_subtype_mark} of an @nt{interface_list} appearing within a
+@Chg{Version=[2],New=[@Redundant[Each @nt{interface_subtype_mark} of an @nt{interface_list} appearing within a
 @nt{protected_type_declaration} shall denote a limited interface type that
-is not a task interface.],Old=[]}
-@begin(Discussion)
+is not a task interface.]],Old=[]}
+@begin(TheProof)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[The interface can be a limited, protected, or
-  synchronized interface, but not a nonlimited or task interface (which offer
-  operations that a protected object does not have).],Old=[]}
-@end(Discussion)
+  @Chg{Version=[2],New=[@RefSecNum{Interface Types} requires that an
+  @nt{interface_list} only name interfaces, and limits the descendants of
+  the various kinds of interfaces. Only limited, protected, or
+  synchronized interface can have a protected type descendant. Nonlimited or
+  task interfaces are not allowed, as they offer operations that a protected
+  type does not have.],Old=[]}
+@end(TheProof)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[@Leading@;For each primitive subprogram inherited by the

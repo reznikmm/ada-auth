@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/11/12 06:10:15 $}
+@Comment{$Date: 2004/11/13 06:47:15 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @LabeledClause{Array Types}
 
@@ -3542,6 +3542,203 @@ but then clients of the package would not have visibility to T.
 @end{Discussion}
 @end{Notes}
 
+
+@LabeledAddedSubClause{Version=[2],Name=[Interface Types]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
+@Chg{Version=[2],New=[An interface type is an abstract tagged type which
+provides a restricted form of multiple inheritance. A tagged, task, or
+protected type may be derived from one or more interface types.],Old=[]}
+@end{Intro}
+
+@begin{Syntax}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
+@Syn{lhs=<@Chg{Version=[2],New=<interface_type_definition>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<
+    [@key{limited} | @key{task} | @key{protected} | @key{synchronized}] @key{interface} [@key{and} @Syn2{interface_list}]>,Old=<>}"}
+@end{Syntax}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251]}
+@Chg{Version=[2],New=[An interface type (also called an @i{interface})
+is@RootDefn{interface}@PDefn2{Term=[interface],Sec=[type]}
+a specific abstract tagged type that is defined by
+an @nt{interface_type_definition}.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345]}
+@Chg{Version=[2],New=[An interface with the reserved word @key{limited},
+@key{task}, @key{protected},
+or @key{synchronized} in its definition is termed, respectively, a @i{limited
+interface}, a @i{task interface}, a @i{protected interface}, or a
+@i{synchronized interface}.
+In addition,@PDefn2{Term=[interface],Sec=[synchronized]}
+@PDefn2{Term=[interface],Sec=[protected]}
+@PDefn2{Term=[interface],Sec=[task]}
+@PDefn2{Term=[interface],Sec=[limited]}
+@PDefn2{Term=[interface],Sec=[nonlimited]}
+@Defn{synchronized interface}
+@Defn{protected interface}
+@Defn{task interface}
+@Defn{limited interface}
+@Defn{nonlimited interface}
+all task and protected interfaces
+are synchronized interfaces, and all synchronized interfaces are limited
+interfaces. A view of an object that is of a task interface type (or of a
+corresponding class-wide type) is a task object. Similarly, a view of an
+object that is of a protected interface type (or of a corresponding
+class-wide type) is a protected object.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345]}
+@Chg{Version=[2],New=[A task or protected type derived from an interface is a tagged type. Such
+a tagged type is called a @i<synchronized> tagged
+type@Defn{synchronized type}@PDefn2{Term=[type],Sec=[synchronized]} as are
+synchronized interfaces and private extensions derived from synchronized
+interfaces.@PDefn2{Term=[interface],Sec=[synchronized]}],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[@Redundant[An interface type has no components.]],Old=[]}
+@begin{TheProof}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+   @Chg{Version=[2],New=[This follows from the syntax.],Old=[]}
+@end{TheProof}
+
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[All user-defined primitive subprograms of an interface
+type shall be abstract subprograms or null procedures.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[The type of a subtype named in an @nt{interface_list}
+shall be an interface type.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[If a type declaration names an interface type in an
+@nt{interface_list}, then the accessibility level of the declared type shall
+not be statically deeper than that of the interface type; also, the declared
+type shall not be declared in a generic body if the interface type is declared
+outside that body.],Old=[]}
+  @begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[This probably should be deleted in favor of the AI-344
+   rules. But I don't know if there is any interface specific issues.],Old=[]}
+  @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
+@Chg{Version=[2],New=[A descendant of a nonlimited interface shall be
+nonlimited. A descendant of a task interface shall be a task type or a task
+interface. A descendant of a protected interface shall be a protected type or a
+protected interface. A descendant of a synchronized interface shall be a task
+type, a protected type, or a synchronized interface.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+   @Chg{Version=[2],New=[We require that a descendant of a task, protected, or
+   synchronized interface repeat the explicit kind of interface it will be,
+   rather than simply inheriting it, so that a reader is always aware of
+   whether the interface provides synchronization and whether it may be
+   implemented only by a task or protected type. The only place where
+   inheritance of the kind of interface might be useful would be in a generic
+   if you didn't know the kind of the actual interface. However, the value of
+   that is low because you cannot implement an interface properly if you don't
+   know whether it is a task, protected, or synchronized interface. Hence, we
+   require the kind of the actual interface to match the kind of the formal
+   interface (see @RefSecNum{Formal Interface Types}).],Old=[]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[A full view shall be a descendant of an interface type if
+and only if the corresponding partial view (if any) is also a descendant of the
+interface type.],Old=[]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[@Leading@;Consider the following example:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{package} P @key{is}
+   @key{package} Pkg @key{is}
+      @key{type} Ifc @key{is interface};
+      @key{procedure} Foo (X : Ifc) @key{is abstract};
+   @key{end} Pkg;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key{type} Parent_1 @key{is tagged null record};],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key{type} T1 @key{is new} Parent_1 @key{with private};
+@key{private}
+   @key{type} Parent_2 @key{is new} Parent_1 @key{and} Pkg.Ifc @key{with null record};
+   @key{procedure} Foo (X : Parent_2); -- @RI[Foo #1]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key{type} T1 @key{is new} Parent_2 @key{with null record};
+@key{end} P;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{with} P;
+@key{package} P_Client @key{is}
+   @key{type} T2 @key{is new} P.T1 @key{and} P.Pkg.Ifc @key{with null record};
+   @key{procedure} Foo (X : T2); -- @RI[Foo #2]
+   X : T2;
+@key{end} P_Client;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{with} P_Client;
+@key{package body} P @key{is}
+  ...
+@key{begin}
+   Pkg.Foo (Pkg.Ifc'Class (P_Client.X));      -- @RI[call Foo #2]
+   Pkg.Foo (Pkg.Ifc'Class (T1 (P_Client.X))); -- @RI[call Foo #1]
+@key{end} P;],Old=[]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[
+    If this example were legal (it is illegal because the completion of T1
+    is descended from an interface that the partial view is not descended
+    from), then we would have two dispatching calls to Pkg.Foo with the two
+    controlling operands having the same tag and yet different bodies would
+    be executed. The two conversions to Pkg.Ifc'Class would map Pkg.Foo to
+    different slots in the same dispatch table because the source types of
+    the conversions are different. That would be bad.],Old=[]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[For an interface type declared in a visible part, a
+primitive subprogram shall not be declared in the private part.],Old=[]}
+  @begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[A dispatching call to a primitive of an interface type
+   will execute the body of a corresponding routine associated with the
+   specific type of the controlling operand. Without this restriction, it is
+   possible that the specific type might provide no such routine. It would be
+   OK to follow the example of the rules in @RefSecNum{Abstract Types and Subprograms}
+   and allow this in the case where the subprogram declared in the private part
+   @lquotes@;is overriding an abstract subprogram implicitly declared in the
+   visible part@rquotes, but this doesn't seem to be worth the bother because
+   this could only be used to override an abstract procedure with a
+   null procedure.],Old=[]}
+  @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[In addition to the places where @LegalityTitle Rules
+normally apply (see @RefSecNum{Generic Instantiation}), these rules apply also
+in the private part of an instance of a generic
+unit.@PDefn{generic contract issue}],Old=[]}
+
+@end{Legality}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}Interface types are new.
+They provide multiple inheritance of interfaces, similar to the facility
+provided in Java and other recent language designs.],Old=[]}
+@end{Extend95}
+
+
 @LabeledClause{Access Types}
 
 @begin{Intro}
@@ -3571,10 +3768,10 @@ by compile-time rules.
 @end{MetaRules}
 
 @begin{Syntax}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @Syn{lhs=<access_type_definition>,rhs="
-    @Syn2{access_to_object_definition}
-  | @Syn2{access_to_subprogram_definition}"}
-
+    @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{access_to_object_definition}
+  | @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{access_to_subprogram_definition}"}
 
 @Syn{lhs=<access_to_object_definition>,rhs="
     @key{access} [@Syn2{general_access_modifier}] @Syn2{subtype_indication}"}
@@ -3584,7 +3781,17 @@ by compile-time rules.
     @key{access} [@key{protected}] @key{procedure} @Syn2{parameter_profile}
   | @key{access} [@key{protected}] @key{function}  @Syn2{parameter_and_result_profile}"}
 
-@Syn{lhs=<access_definition>,rhs="@key{access} @Syn2{subtype_mark}"}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+@Syn{lhs=<@Chg{Version=[2],New=[null_exclusion],Old=[]}>,
+rhs="@Chg{Version=[2],New=[@key{not} @key{null}],Old=[]}"}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+@Syn{lhs=<access_definition>,rhs="@Chg{Version=[2],New=<
+    [@Syn2{null_exclusion}] @key{access} [@Syn2{general_access_modifier}] @Syn2{subtype_mark}
+  | [@Syn2{null_exclusion}] @key{access} [@key{protected}] @key{procedure} @Syn2{parameter_profile}
+  | [@Syn2{null_exclusion}] @key{access} [@key{protected}] @key{function} @Syn2{parameter_and_result_profile}>,
+Old=[@key{access} @Syn2{subtype_mark}]}"}
+
 @end{Syntax}
 
 @begin{StaticSem}
@@ -3623,19 +3830,23 @@ and aliased subcomponents of other objects.
   since it can point only to the elements of that pool.
 @end(ImplNote)
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00225-01],ARef=[AI95-00363-01]}
 @Defn{aliased}
 A view of an object is defined to be @i(aliased) if
 it is defined by an @nt<object_@!declaration> or @nt<component_@!definition>
 with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
-(see @RefSecNum{Type Conversions}) of an aliased view. Finally,
-the current instance of a limited type,
-and a formal parameter or generic formal object
-of a tagged type are defined to be aliased.
+(see @RefSecNum{Type Conversions}) of an aliased view.
+@Chg{Version=[2],New=[The],Old=[Finally, the]} current instance of a
+limited@Chg{Version=[2],New=[ tagged],Old=[]} type, @Chg{Version=[2],New=[a
+protected type, a task type, or a type that has the reserved word @key{limited}
+in its full definition is also defined to be aliased. Finally,],Old=[and]}
+a formal parameter or generic formal object of a
+tagged type @Chg{Version=[2],New=[is],Old=[are]} defined to be aliased.
 @Redundant[Aliased views are the ones that can be designated by an
 access value.]
-@Defn2{Term=[constrained], Sec=(object)}
+@Chg{Version=[2],New=[],Old=[@Defn2{Term=[constrained], Sec=(object)}
 @Defn2{Term=[unconstrained], Sec=(object)}
 @Defn{constrained by its initial value}
 If the view defined by an @nt{object_@!declaration} is aliased,
@@ -3645,7 +3856,7 @@ if its nominal subtype is unconstrained,
 then the object is constrained by its initial value.
 @Redundant[Similarly, if the object created by an @nt<allocator>
 has discriminants, the object is constrained,
-either by the designated subtype, or by its initial value.]
+either by the designated subtype, or by its initial value.]]}
 @ToGlossary{Term=<Aliased>,
   Text=<An aliased view of an object is one that can be designated by an
   access value.
@@ -3695,7 +3906,8 @@ either by the designated subtype, or by its initial value.]
 @key(end) P;
 @end{Example}
 
-  The rule about objects with discriminants is
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
+  @Chg{Version=[2],New=[],Old=[The rule about objects with discriminants is
   necessary because values of a constrained access subtype
   can designate an object whose nominal subtype is unconstrained;
   without this rule, a check on every use of such values would
@@ -3707,7 +3919,10 @@ either by the designated subtype, or by its initial value.]
   Note that this rule is necessary only for untagged types,
   since a discriminant of a tagged type can't have a default,
   so all tagged discriminated objects are always constrained
-  anyway.
+  anyway.]}
+  @ChgNote{This rule was a disaster, so it thankfully has been repealed.
+  We instead make general access constrained subtypes illegal if the type
+  allows unconstrained instances, see Discriminant Constraints.}
 
   We considered making more kinds of objects aliased by default.
   In particular, any object of a by-reference type will pretty
@@ -3864,56 +4079,84 @@ for how to override this default.]
   dispatching operations of tagged types, except that the static
   link is always known "statically."
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
   Note that access parameters of an
-  anonymous access-to-subprogram type are not permitted.
-  If there were such parameters,
-  full @lquotes@;downward@rquotes@; closures would be required, meaning that
+  anonymous access-to-subprogram type are @Chg{Version=[2],New=[],Old=[not ]}permitted.
+  @Chg{Version=[2],New=[For],Old=[If there were]} such parameters,
+  full @lquotes@;downward@rquotes@; closures
+  @Chg{Version=[2],New=[are],Old=[would be]} required, meaning that
   in an implementation that uses a per-task (global) display,
   the display would have to be passed as a hidden parameter,
-  and reconstructed at the point of call.
-  This was felt to be an undue implementation burden,
+  and reconstructed at the point of call.@Chg{Version=[2],New=[],
+  Old=[ This was felt to be an undue implementation burden,
   given that an equivalent (actually, more general) capability
-  is available via formal subprogram parameters to a generic.
+  is available via formal subprogram parameters to a generic.]}
 @end(ImplNote)
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
 @Defn{anonymous access type}
 @Defn2{Term=[designated subtype], Sec=(of an anonymous access type)}
 @Defn2{Term=[designated type], Sec=(of an anonymous access type)}
 An @nt{access_definition} defines an anonymous
-general access-to-variable type;
-the @nt<subtype_mark> denotes its @i(designated subtype).
-@Redundant[An @nt<access_definition> is used in the
+general @Chg{Version=[2],New=[access type or an
+anonymous access-to-subprogram type. For a general access type,],
+Old=[access-to-variable type;]} the @nt<subtype_mark> denotes
+its @i(designated subtype)@Chg{Version=[2],New=[; if the reserved word
+@key{constant} appears, the type is an access-to-constant type; otherwise it is
+an access-to-variable type. For an access-to-subprogram type, the
+@nt{parameter_profile} or @nt{parameter_and_result_profile} denotes its
+@i{designated profile}.@Defn2{Term=[designated profile], Sec=(of an anonymous access type)}
+If a @nt{null_exclusion} is present, or the
+@nt{access_definition} is for a controlling access parameter
+(see @RefSecNum{Dispatching Operations of Tagged Types}), the
+@nt{access_definition} defines an access subtype which excludes the null value;
+otherwise the subtype includes a null value.],
+Old=[. @Redundant[An @nt<access_definition> is used in the
 specification of an access discriminant
 (see @RefSecNum(Discriminants)) or an access
-parameter (see @RefSecNum(Subprogram Declarations)).]
+parameter (see @RefSecNum(Subprogram Declarations)).]]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+   @Chg{Version=[2],New=[An @nt{access_definition} used in a controlling
+   parameter is null-excluding because it is necessary to read the tag to
+   dispatch, and null has no tag. We would have preferred to
+   require @key{not null} to be specified for such
+   parameters, but that would have been too incompatible with Ada 95.],Old=[]}
+@end{Reason}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
 @Defn2{Term=[null value], Sec=(of an access type)}
-For each (named) access type, there is a literal @key(null) which has
-a null access value designating no entity at all.
-@Redundant[The null value of a named access type is the default
-initial value of the type.]
+For each @Chg{Version=[2],New=[],Old=[(named) ]}access type, there is
+@Chg{Version=[2],New=[],Old=[a literal @key(null) which has ]}a null
+access value designating no entity at all.
+@Redundant[The null value of @Chg{Version=[2],New=[an],Old=[a named]} access
+type is the default initial value of the type.]
 Other values of an access type are obtained by evaluating
 an @nt<attribute_reference> for the Access or Unchecked_Access
 attribute of an aliased view of an object or non-intrinsic subprogram, or,
-in the case of a named access-to-object type,
-an @nt<allocator>@Redundant[,
-which
+in the case of @Chg{Version=[2],New=[an],Old=[a named]} access-to-object type,
+an @nt<allocator>@Redundant[, which
 returns an access value designating a newly created object
 (see @RefSecNum(Operations of Access Types))].
 @begin{Ramification}
-A value of an anonymous access type
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
+@Chg{Version=[2],New=[],Old=[A value of an anonymous access type
 (that is, the value of an access parameter or access discriminant)
-cannot be null.@end{ramification}
+cannot be null.]}
+@end{ramification}
 @begin{Reason}
-Access parameters allow dispatching on the tag of the object designated
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
+@Chg{Version=[2],New=[],Old=[Access parameters allow dispatching on the
+tag of the object designated
 by the actual parameter (which gets converted to the anonymous access
 type as part of the call).
 In order for dispatching to work properly,
 there had better be such an object.
 Hence, the type conversion will raise Constraint_Error if the value of
-the actual parameter is null.
+the actual parameter is null.]}
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0013],ARef=[AI95-00012-01]}
 @PDefn2{Term=[constrained],Sec=(subtype)}
 @PDefn2{Term=[unconstrained],Sec=(subtype)}
@@ -3922,12 +4165,15 @@ are constrained.] The first subtype of a type defined by
 an @Chg{New=[@nt<access_definition>],Old=[@nt<access_type_definition>]} or an
 @nt<access_to_object_definition> is unconstrained if the designated subtype
 is an unconstrained array or discriminated @Chg{New=[subtype],Old=[type]};
-otherwise it is constrained.
+otherwise it is constrained.@Chg{Version=[2],New=[ The first subtype of a type
+defined by an @nt{access_type_definition} excludes the null value if
+a @nt{null_exclusion} is present; otherwise, the first subtype includes the
+null value.],Old=[]}
 @begin(TheProof)
-  The Legality Rules on @nt<range_constraint>s (see @RefSecNum(Scalar Types))
+  The @LegalityTitle on @nt<range_constraint>s (see @RefSecNum(Scalar Types))
   do not permit the @nt<subtype_mark> of the @nt<subtype_indication> to denote
   an access-to-scalar type, only a scalar type.
-  The Legality Rules on @nt<index_constraint>s
+  The @LegalityTitle on @nt<index_constraint>s
   (see @RefSecNum(Index Constraints and Discrete Ranges)) and
   @nt<discriminant_constraint>s (see @RefSecNum(Discriminant Constraints))
   both permit access-to-composite types in a @nt<subtype_indication>
@@ -3935,29 +4181,53 @@ otherwise it is constrained.
   is never permitted in a @nt<subtype_indication> with a @nt<constraint>.
 @end(TheProof)
 @begin(Reason)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
   Only @nt<composite_constraint>s are permitted
   for an access type, and only
   on access-to-composite types.
   A constraint on an access-to-scalar or access-to-access type
   might be violated due to assignments
   via other access paths that were not so constrained. By contrast,
-  if the designated subtype is an array or discriminated type,
+  if the designated subtype is an array or discriminated
+  type@Chg{Version=[2],New=[ without defaults],Old=[]},
   the constraint could not be violated by unconstrained assignments,
   since array objects are always constrained, and
-  aliased discriminated objects are also constrained (by fiat, see
-  @StaticSemTitle).
+  @Chg{Version=[2],New=[],Old=[aliased]} discriminated objects are
+  also constrained @Chg{Version=[2],New=[when the type does not have defaults
+  for its discriminants. Constraints are not allowed on general access-to-unconstrained
+  discriminated types if the type has defaults for its discriminants;
+  pool-specific constraints are allowed because allocated objects are
+  always constrained by their initial value.],Old=[(by fiat, see @StaticSemTitle).]}
 @end(Reason)
 @end{StaticSem}
 
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+@Chg{Version=[2],New=[A @nt{null_exclusion} is only allowed in a
+@nt{subtype_indication} whose @nt{subtype_mark} denotes an access subtype that
+includes a null value.],Old=[]}
+@begin(Reason)
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+  @Chg{Version=[2],New=[This is similar to doubly constraining a subtype,
+  which we don't allow either.],Old=[]}
+@end(Reason)
+@end{Legality}
+
 @begin{RunTime}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @PDefn2{Term=[compatibility],
   Sec=(composite_constraint with an access subtype)}
 A @nt<composite_constraint> is @i(compatible) with an unconstrained
-access subtype if it is compatible with the designated subtype.
+access subtype if it is compatible with the designated
+subtype.@Chg{Version=[2],New=[ A @nt{null_exclusion} is compatible with any
+access subtype that includes a null value.],Old=[]}
 @PDefn2{Term=[satisfies], Sec=(for an access value)}
 An access value @i(satisfies) a @nt<composite_constraint> of an access
 subtype if it equals the null value of its type
-or if it designates an object whose value satisfies the constraint.
+or if it designates an object whose value satisfies the
+constraint.@Chg{Version=[2],New=[ An access value satisifies a
+@nt{null_exclusion} imposed on an access subtype if it does not equal the
+null value of its type.],Old=[]}
 
 @PDefn2{Term=[elaboration], Sec=(access_type_definition)}
 The elaboration of an @nt{access_type_definition}
@@ -3966,11 +4236,12 @@ For an access-to-object type,
 this elaboration includes the elaboration of the @nt{subtype_indication},
 which creates the designated subtype.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @PDefn2{Term=[elaboration], Sec=(access_definition)}
 The elaboration of an @nt{access_definition} creates
-an anonymous general access-to-variable type
-@Redundant[(this happens as part of the initialization of
-an access parameter or access discriminant)].
+an anonymous general access-to-variable type@Chg{Version=[2],New=[],
+Old=[ @Redundant[(this happens as part of the initialization of
+an access parameter or access discriminant)]]}.
 @end{RunTime}
 
 @begin{Notes}
@@ -4043,6 +4314,46 @@ same storage pool;
 see @RefSecNum(Storage Management) for more discussion.)
 @end{DiffWord83}
 
+@begin{Inconsistent95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
+Most unconstrained aliased objects with discriminants are no longer
+constrained by their initial values. This means that a program that
+raised Constraint_Error from an attempt to change the discriminants
+will no longer do so. The change only affects programs that depended
+on the raising of Constraint_Error in this case, so the inconsistency
+is unlikely to occur outside of the ACATS. This change may however cause
+compilers to implement these objects differently, possibly taking additional
+memory or time. This is unlikely to be worse than the differences caused by
+any major compiler upgrade.],Old=[]}
+@end{Inconsistent95}
+
+@begin{Incompatible95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00225-01]}
+@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+The rule defining when a current instance of a limited type is considered to be
+aliased has been tightened to only apply to type which cannot become
+nonlimited. A program which attempts to take 'Access of the current instance
+of a limited type that can become nonlimited will be illegal in Ada 2005.
+While Ada 95 allowed the current instance of any limited type
+to be treated as aliased, this was inconsistently implemented in compilers,
+and was likely to not work as expected for types that are ultimately
+nonlimited.],Old=[]}
+@end{Incompatible95}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}The @nt{null_exclusion} is
+new. It is most useful to declare that parameters cannot be @key{null},
+thus eliminating the need for checks on use.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+@Chg{Version=[2],New=[The kinds of anonymous
+access types allowed were increased by adding anonymous access-to-constant
+and anonymous access-to-subprogram types. Anonymous access-to-subprogram
+types used as parameters allow passing of subprograms at any level.],Old=[]}
+@end{Extend95}
+
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0012],ARef=[AI95-00062-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Added accidentally omitted wording
@@ -4054,6 +4365,17 @@ have been incompatible with Ada 83.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0013],ARef=[AI95-00012-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Fixed typographical errors in
 the description of when access types are constrained.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+@Chg{Version=[2],New=[The wording was fixed to allow @nt{allocator}s and
+the literal @key{null} for anonymous access types. The former was clearly
+intended by Ada 95, see the @ImplAdviceTitle in @RefSecNum{Storage Management}.],
+Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+@Chg{Version=[2],New=[The rules about aliased objects being constrained by
+their initial values now only apply to allocated objects, and thus have
+been moved to @RefSec{Allocators}.],Old=[]}
 @end{DiffWord95}
 
 
@@ -4070,8 +4392,9 @@ to a subsequent @nt<full_type_declaration>.
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
 @Syn{lhs=<incomplete_type_declaration>,
-rhs="@key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}];"}
+rhs="@key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}]@Chg{Version=[2],New=< [@key{is tagged}]>,Old=<>};"}
 @end{Syntax}
 
 @begin{Legality}
@@ -4109,8 +4432,11 @@ visible part.
   Import.
 @end(Honest)
 
-If an @nt{incomplete_type_declaration} has a
-@nt{known_discriminant_part},
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[If an @nt{incomplete_type_declaration} includes the
+reserved word @key{tagged}, then a @nt{full_type_declaration} that completes
+it shall declare a tagged type. ],Old=[]}If an @nt{incomplete_type_declaration}
+has a @nt{known_discriminant_part},
 then a @nt{full_@!type_@!declaration} that completes it shall have a fully
 conforming (explicit) @nt{known_@!discriminant_@!part}
 (see @RefSecNum(Conformance Rules)).
@@ -4121,16 +4447,19 @@ then a corresponding @nt{full_@!type_@!declaration} is nevertheless allowed
 to have discriminants,
 either explicitly, or inherited via derivation.]
 
-@Leading@keepnext@;The only allowed uses of a @nt{name} that denotes an
-@nt{incomplete_type_declaration} are as follows:
+
+@Leading@keepnext@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[A],Old=[The only allowed uses of a]} @nt{name} that
+denotes an @Chg{Version=[2],New=[incomplete view of a type may be used],
+Old=[@nt{incomplete_type_declaration} are]} as follows:
 @begin(Discussion)
-  No need
-  to say "prior to the end of the @nt{full_type_declaration}" since
-  the name would not denote the @nt{incomplete_type_declaration}
-  after the end of the @nt{full_type_declaration}.
-  Also, with child library units, it would not be well defined
-  whether they come before or after the @nt<full_type_declaration>
-  for deferred incomplete types.
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}
+  @Chg{Version=[2],New=[],Old=[No need to say "prior to the end of the
+  @nt{full_type_declaration}" since the name would not denote the
+  @nt{incomplete_type_declaration} after the end of the
+  @nt{full_type_declaration}. Also, with child library units, it would not be
+  well defined whether they come before or after the @nt<full_type_declaration>
+  for deferred incomplete types.]}
 @end(Discussion)
 @begin(itemize)
   as the @nt{subtype_mark} in the @nt{subtype_indication}
@@ -4145,54 +4474,159 @@ either explicitly, or inherited via derivation.]
     In other words, we have effectively repealed AI83-00007.
   @end(ImplNote)
 
-
-  as the @nt{subtype_mark} defining the subtype of a parameter
-  or result of an @nt{access_to_@!subprogram_definition};
-
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}@ChgNote{Really moved}
+  @Chg{Version=[2],New=[],Old=[as the @nt{subtype_mark} defining the subtype
+  of a parameter or result of an @nt{access_to_@!subprogram_definition};]}
   @begin{Reason}
-
-    This allows, for example, a record to have a component
-    designating a subprogram that takes that same record
-    type as a parameter.
-
+    @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}@ChgNote{Really moved}
+    @Chg{Version=[2],New=[],Old=[This allows, for example, a record to have a
+    component designating a subprogram that takes that same record
+    type as a parameter.]}
   @end{Reason}
 
-  as the @nt<subtype_mark> in an @nt<access_definition>;
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
+  as the @nt<subtype_mark> in an @nt<access_definition>@Chg{Version=[2],New=[.],Old=[;]}
+@end{Itemize}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[@leading@keepnext@;If such a name denotes a tagged
+incomplete view, it may also be used:],Old=[]}
+
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+  @Chg{Version=[2],New=[as the @nt{subtype_mark} defining the subtype of a
+  parameter in a @nt{formal_part};],Old=[]}
+
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
   as the @nt{prefix} of an @nt{attribute_reference}
   whose @nt{attribute_@!designator}
   is Class; such an @nt{attribute_@!reference}
   is similarly restricted to the uses allowed here;
-  when used in this way,
+  @Chg{Version=[2],New=[it denotes a tagged incomplete view],
+  Old=[when used in this way,
   the corresponding @nt{full_type_@!declaration} shall
   declare a tagged type, and the @nt<attribute_@!reference>
   shall occur in the same library unit as
-  the @nt<incomplete_@!type_@!declaration>.
+  the @nt<incomplete_@!type_@!declaration>]}.
   @begin{Reason}
-This is to prevent
+    @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}
+    @Chg{Version=[2],New=[],Old=[This is to prevent
     children from imposing requirements on their ancestor library
-    units for deferred incomplete types.@end{reason}
+    units for deferred incomplete types.]}
+  @end{reason}
 @end(itemize)
 
-A dereference (whether implicit or explicit @em see @RefSecNum(Names))
-shall not be of an
-incomplete type.
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[@Leading@;If such a name occurs within the list of
+declarative_items containing the completion of the incomplete view, it may
+also be used:],Old=[]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}@ChgNote{Really moved}
+@Chg{Version=[2],New=[as the @nt{subtype_mark} defining the subtype of a
+parameter or result of an @nt{access_to_subprogram_definition}.],Old=[]}
+  @begin{Reason}
+    @ChgRef{Version=[2],Kind=[Added]}
+    @Chg{Version=[2],New=[This allows, for example, a record to have a
+    component designating a subprogram that takes that same record
+    type as a parameter.],Old=[]}
+  @end{Reason}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[If any of the above uses occurs as part of the
+declaration of a primitive subprogram of the incomplete view, and the
+declaration occurs immediately within the private part of a package, then
+the completion of the incomplete view shall also occur immediately within
+the private part; it may not be deferred to the package body.],Old=[]}
+  @begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[This fixes a hole in Ada 95 where a dispatching operation
+  with an access parameter could be declared in a private part and a dispatching
+  call on it could occur in a child even though there is no visibility on the
+  full type, requiring access to the controlling tag without access to the
+  representation of the type.],Old=[]}
+  @end{Reason}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[A @nt{prefix}],
+Old=[A dereference (whether implicit or explicit @em see @RefSecNum(Names))]}
+shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.
+  @begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[We used to disallow all dereferences of an incomplete
+  type. Now we only disallow such dereferences when used as a @nt{prefix}.
+  Dereferences used in other contexts do not pose a problem since normal type
+  matching will preclude their use except when the full type is @lquotes@;nearby@rquotes@;
+  as context (for example, as the expected type).],Old=[]}
+  @end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
 @Defn{incomplete type}
-An @nt{incomplete_type_declaration} declares an incomplete type
-and its first subtype; the first subtype is unconstrained if
-a @nt<known_discriminant_part> appears.
+An @nt{incomplete_type_declaration} declares
+an @Chg{Version=[2],New=[@i{incomplete view} of a@Defn{incomplete view}],Old=[incomplete]}
+type and its first subtype; the first subtype is unconstrained if
+a @nt<known_discriminant_part> appears.@Chg{Version=[2],New=[ If the
+@nt{incomplete_type_declaration} includes the reserved word @key{tagged}, it
+declares a @i{tagged incomplete view}.@Defn2{Term=[incomplete view],Sec=[tagged]}@Defn{tagged incomplete view}
+An incomplete view of a type is a limited view of the type (see @RefSecNum{Limited Types}).],Old=[]}
 @begin{Reason}
 If an @nt<unknown_discriminant_part> or no @nt{discriminant_part}
 appears, then the constrainedness of the first subtype doesn't matter
-for any other rules or semantics,
-so we don't bother defining it.
+for any other rules or semantics, so we don't bother defining it.
 The case with a @nt<known_discriminant_part> is the only case in which
 a constraint could later be given in a @nt{subtype_indication} naming
 the incomplete type.
 @end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[@Leading@;Given an access type @i{A} whose designated
+type @i{T} is an incomplete view, a dereference of a value of type @i{A} also
+has this incomplete view except when:],Old=[]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[it occurs in the immediate scope of the completion
+of @i{T}, or],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[it occurs in the scope of a @nt{nonlimited_with_clause}
+that mentions a library package in whose visible part the completion of @i{T}
+is declared.],Old=[]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[In these cases, the dereference has the full view of @i{T}.],Old=[]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[@Leading@;We need the @lquotes@;in whose visible
+  part@rquotes@; rule so that the second rule doesn't trigger in the body
+  of a package with a @key{with} of a child unit:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Key{package} P @Key{is}
+@Key{private}
+   @Key{type} T;
+   @Key{type} PtrT @Key{is access} T;
+@Key{end} P;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Key{private package} P.C @Key{is}
+   Ptr : PtrT;
+@Key{end} P.C;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Key{with} P.C;
+@Key{package body} P @Key{is}
+    -- @RI{Ptr.all'Size is not legal here, but it is in the scope of a}
+    -- @nt{nonlimited_with_clause} @RI{for P.}
+    @Key{type} T @Key{is} ...
+    --  @RI{Ptr.all'Size is legal here.}
+@Key{end} P;],Old=[]}
+@end{Example}
+@end{Discussion}
+
 @end{StaticSem}
 
 @begin{RunTime}
@@ -4323,8 +4757,45 @@ and for that dope to be in the same format for all kinds of types
 (or some other equivalently inefficient implementation).
 On the contrary, most implementations allocate dope differently (or
 not at all) for different designated subtypes.
-
 @end{DiffWord83}
+
+@begin{Incompatible95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+It is now illegal to use an incomplete view (type) as the parameter or result
+of an access-to-subprogram type unless the incomplete view is completed in the
+same list of declarations as the use. This was allowed in Ada 95 for incomplete
+types where the completion was deferred to the body. By disallowing this rare
+use of incomplete views, we can allow the use of incomplete views in many more
+places, which is especially valuable for limited views.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[
+It is now illegal to use an incomplete view (type} in a primitive subprogram
+of the type unless the incomplete view is completed in the package specification.
+This was allowed in Ada 95 for incomplete types where the completion was
+deferred to the body (the use would have to be in an access parameter).
+This incompatibility was caused by the fix for the hole noted in
+@LegalityTitle above.],Old=[]}
+@end{Incompatible95}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}Tagged incomplete types
+are new. They are allowed in parameter declarations as well as the usual
+places, as tagged types are always by-reference types (and thus there can
+be no code generation issue).],Old=[]}
+@end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[The description of incomplete types as @i{incomplete
+views} is new. Ada 95 defined these as separate types, but neglected to
+give any rules for matching them with other types. Luckily, implementers
+did the right thing anyway. This change also makes it easier to describe
+the meaning of a limited view.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Operations of Access Types}
 

@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:45 $}
+@Comment{$Date: 2004/11/13 06:47:18 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -737,6 +737,12 @@ incomplete class-wide type rooted at @i<T>. The completion of @i<T> shall
 declare a tagged type. Such an attribute reference shall occur in the same
 library unit as the @nt<incomplete_type_declaration>.],Old=[]}
 @end{Description}
+  @begin{Reason}
+    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+    @Chg{Version=[2],New=[This must occur in the same unit to prevent
+    children from imposing requirements on their ancestor library
+    units for deferred incomplete types.],Old=[]}
+  @end{reason}
 @end{StaticSem}
 
 @begin{DiffWord95}

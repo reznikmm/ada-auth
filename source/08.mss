@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/11/10 00:57:20 $}
+@Comment{$Date: 2004/11/13 06:47:16 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1302,6 +1302,38 @@ Visibility is defined only for declarations.
 @end{DiffWord83}
 
 
+@begin{Incompatible95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[@Leading@;@Defn{incompatibilities with Ada 95}
+Added rules to handle the inheritance and overriding of
+multiple homographs for a single type declaration, in order to support
+multiple inheritance from interfaces. The new rules are intended to be
+compatible with the existing rules so that programs that do not use
+interfaces do not change their legality. However, there is an very rare
+case where this is not true:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{generic}
+   @key{type} T1 @key{is private};
+   @key{type} T2 @key{is private};
+@key{package} G @key{is}
+   @key{type} T @key{is null record};
+   @key{procedure} P (X : T; Y : T1);
+   @key{procedure} P (X : T; Y : T2);
+@key{end} G;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{package} I @key{is new} G (Integer, Integer); -- @RI[Exports homographs of P.]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{type} D @key{is new} I.T; -- @RI[Legal in Ada 95, illegal in Ada 2005.]],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This case doesn't seem worth making the rules any more
+complex than they already are.],Old=[]}
+@end{Incompatible95}
+
+
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
@@ -1328,11 +1360,6 @@ defined so that it can be used by the stream attribute availability rules
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[The visibility of a limited view of a library package
 is defined (see @RefSecNum{Compilation Units - Library Units}).],Old=[]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[Added rules to handle the inheritance and overriding of
-multiple homographs for a single type declaration, in order to support
-multiple inheritance from interfaces.],Old=[]}
 @end{DiffWord95}
 
 
@@ -1842,7 +1869,7 @@ objects are still constrained by their initial value (see @RefSecNum{Allocators}
 and thus have no change in the legality of renaming. For example, using the
 type T2 of the previous example:],Old=[]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[   AT : @key{aliased} T2;
    C1_Ren : Integer @key{renames} AT.C1; -- @RI[Legal in Ada 2005, illegal in Ada 95]
    AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95, but does not in Ada 2005,]
