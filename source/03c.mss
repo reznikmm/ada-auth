@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/02/06 04:31:40 $}
+@Comment{$Date: 2005/02/08 06:35:34 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1343,9 +1343,13 @@ type declared in a
 @nt{package_specification}, overriding in the body or by a child subprogram.
 @end{ImplNote}
 @begin{Ramification}
-A consequence is that for a @nt{derived_type_declaration} in a
-@nt{declarative_part}, only the first primitive subprogram can be
-declared by a @nt{subprogram_body}.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251]}@ChgNote{Interfaces cause this too}
+A consequence is that for a @Chg{Version=[2],New=[tagged type declaration],
+Old=[@nt{derived_type_declaration}]} in a
+@nt{declarative_part}, only the @Chg{Version=[2],New=[last (overriding)],Old=[first]}
+primitive subprogram can be
+declared by a @nt{subprogram_body}.@Chg{Version=[2],New=[ (Other overridings
+must be provided by @nt{subprogram_declaration}s.)],Old=[]}
 @end{Ramification}
 
 @end{Legality}

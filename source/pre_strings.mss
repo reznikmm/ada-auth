@@ -1,16 +1,18 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2005/02/03 07:11:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2005/02/08 06:35:37 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/02/03 07:11:22 $}
+@Comment{$Date: 2005/02/08 06:35:37 $}
 
 @LabeledClause{String Handling}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 This clause presents the specifications of the package Strings and
 several child packages, which provide facilities for dealing with
  string data. Fixed-length,
 bounded-length, and unbounded-length strings are supported, for both
-String and Wide_String.
+String@Chg{Version=[2],New=[,],Old=[ and]} Wide_String@Chg{Version=[2],New=[,
+and Wide_Wide_String],Old=[]}.
 The string-handling subprograms include searches for pattern strings
 and for characters in program-specified  sets,
 translation (via a character-to-character mapping), and transformation
@@ -21,6 +23,13 @@ translation (via a character-to-character mapping), and transformation
 @Defn{extensions to Ada 83}
 This clause is new to Ada 95.
 @end{Extend83}
+
+@begin{Diffword95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[Included Wide_Wide_String in this description;
+  the individual changes are documented as extensions as needed.]}
+@end{Diffword95}
+
 
 @LabeledSubClause{The Package Strings}
 @begin{Intro}
@@ -34,8 +43,10 @@ common to the string handling packages.
 @ChildUnit{Parent=[Ada],Child=[Strings]}@key[package] Ada.Strings @key[is]
    @key[pragma] Pure(Strings);
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
    @AdaDefn{Space}      : @key[constant] Character      := ' ';
-   @AdaDefn{Wide_Space} : @key[constant] Wide_Character := ' ';
+   @AdaDefn{Wide_Space} : @key[constant] Wide_Character := ' ';@Chg{Version=[2],New=[
+   @AdaDefn{Wide_Wide_Space} : @key[constant] Wide_Wide_Character := ' ';],Old=[]}
 
    @AdaDefn{Length_Error}, @AdaDefn{Pattern_Error}, @AdaDefn{Index_Error}, @AdaDefn{Translation_Error} : @key[exception];
 
@@ -48,6 +59,19 @@ common to the string handling packages.
 @end{example}
 @end{StaticSem}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Constant Wide_Wide_Space is newly added to Ada.Strings. If Ada.Strings is
+  referenced in a @nt{use_clause}, and an entity @i<E> with a
+  @nt{defining_identifier} of Wide_Wide_Space is defined in a package that is
+  also referenced in a @nt{use_clause}, the entity @i<E> may no longer be
+  use-visible, resulting in errors. This should be rare and is easily fixed if
+  it does occur.]}
+@end{Incompatible95}
+
+
+
 @RmNewPage@Comment{Insert page break so printed RM's look better.}
 @LabeledSubClause{The Package Strings.Maps}
 @begin{Intro}
@@ -58,11 +82,14 @@ entities needed for character sets and character-to-character mappings.
 @begin{StaticSem}
 @Leading@;The library package Strings.Maps has the following declaration:
 @begin{example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Maps]}@key[package] Ada.Strings.Maps @key[is]
-   @key[pragma] Preelaborate(Maps);
+   @key[pragma] @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(Maps);
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
    --@RI{ Representation for a set of character values:}
-   @key[type] @AdaTypeDefn{Character_Set} @key[is] @key[private];
+   @key[type] @AdaTypeDefn{Character_Set} @key[is] @key[private];@Chg{Version=[2],New=[
+   @key[pragma] Preelaborable_Initialization(Character_Set);],Old=[]}
 
    @AdaDefn{Null_Set} : @key[constant] Character_Set;
 
@@ -112,8 +139,10 @@ entities needed for character sets and character-to-character mappings.
    @key[function] @AdaSubDefn{To_Sequence} (Set  : @key[in] Character_Set) @key[return] Character_Sequence;
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
    --@RI{ Representation for a character to character mapping:}
-   @key[type] @AdaTypeDefn{Character_Mapping} @key[is] @key[private];
+   @key[type] @AdaTypeDefn{Character_Mapping} @key[is] @key[private];@Chg{Version=[2],New=[
+   @key[pragma] Preelaborable_Initialization(Character_Mapping);],Old=[]}
 
    @key[function] @AdaSubDefn{Value} (Map     : @key[in] Character_Mapping;
                    Element : @key[in] Character)
@@ -326,6 +355,18 @@ and 'B' to 'Z', 'C' to 'A', 'D' to 'B', and each other Character to
 itself.
 @end{Examples}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Added @nt{pragma} Preelaboratable_Initialization to
+  types Character_Set and Character_Mapping, so that they can be used in
+  preelaborated units.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Strings.Maps is now Pure, so it can be used in pure units.]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0048],ARef=[AI95-00151-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the definition of
@@ -388,6 +429,36 @@ procedures.
 
 
 --@RI{ Search subprograms}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] String;
+                   Pattern : @key[in] String;
+                   From    : @key[in] Positive;
+                   Going   : @key[in] Direction := Forward;
+                   Mapping : @key[in] Maps.Character_Mapping := Maps.Identity)
+      @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] String;
+                   Pattern : @key[in] String;
+                   From    : @key[in] Positive;
+                   Going   : @key[in] Direction := Forward;
+                   Mapping : @key[in] Maps.Character_Mapping_Function)
+      @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] String;
+                   Set     : @key[in] Maps.Character_Set;
+                   From    : @key[in] Positive;
+                   Test    : @key[in] Membership := Inside;
+                   Going   : @key[in] Direction := Forward)
+      @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] String;
+                             From   : @key[in] Positive;
+                             Going  : @key[in] Direction := Forward)
+      @key[return] Natural;]}
 
    @key[function] @AdaSubDefn{Index} (Source   : @key[in] String;
                    Pattern  : @key[in] String;
@@ -617,6 +688,50 @@ overlap.@end{ramification}
 The order of parameters (Source before Target) corresponds to
 the order in COBOL's MOVE verb.@end{reason}
 
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key[function] Index (Source  : @key[in] String;
+                Pattern : @key[in] String;
+                From    : @key[in] Positive;
+                Going   : @key[in] Direction := Forward;
+                Mapping : @key[in] Maps.Character_Mapping := Maps.Identity)
+   @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key[function] Index (Source  : @key[in] String;
+                Pattern : @key[in] String;
+                From    : @key[in] Positive;
+                Going   : @key[in] Direction := Forward;
+                Mapping : @key[in] Maps.Character_Mapping_Function)
+   @key[return] Natural;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Each Index function searches, starting from From, for a slice of
+Source, with length Pattern'Length, that matches Pattern with respect to
+Mapping; the parameter Going indicates the direction of the lookup. If
+From < Source'First, then Index_Error is propagated. If Going =
+Forward, then Index returns the smallest index I which is greater than or equal
+to From such that the slice of Source starting at I matches Pattern. If Going =
+Backward, then Index returns the largest index I such that the slice of Source
+starting at I matches Pattern and has an upper bound less than or equal to
+From. If there is no such slice, then 0 is returned. If Pattern is the null
+string then Pattern_Error is propagated.]}
+
+@begin{Discussion}
+   @ChgRef{Version=[2],Kind=[AddedNormal]}
+   @ChgAdded{Version=[2],Text=[There is no default parameter for From; the
+   default value would need to depend on other parameters (the bounds of Source
+   and the direction Going). It is better to use overloaded functions rather
+   than a special value to represent the default.]}
+
+   @ChgRef{Version=[2],Kind=[AddedNormal]}
+   @ChgAdded{Version=[2],Text=[There is no default value for the Mapping
+   parameter that is a Character_Mapping_Function; if there were, a call would
+   be ambiguous since there is also a default for the Mapping parameter that is
+   a Character_Mapping.]}
+@end{Discussion}
+
 @begin{Example}@Keepnext
 @key[function] Index (Source   : @key[in] String;
                 Pattern  : @key[in] String;
@@ -630,7 +745,10 @@ the order in COBOL's MOVE verb.@end{reason}
                 Mapping  : @key[in] Maps.Character_Mapping_Function)
    @key[return] Natural;
 @end{Example}
-@Trailing@;Each Index function searches for a slice of Source, with length
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00301-01]}
+@ChgDeleted{Version=[2],Type=[Trailing],Text=[]}@Comment{Fake to hold conditional format.}
+@Chg{Version=[2],New=[If Going = Forward, returns],
+Old=[Each Index function searches for a slice of Source, with length
 Pattern'Length, that matches Pattern
 with respect to Mapping;
 the parameter Going indicates the direction of the lookup.
@@ -641,13 +759,43 @@ the parameter Going indicates the direction of the lookup.
  returns the largest index I such that
     the slice of Source starting at I matches Pattern.
   If there is no such slice, then 0 is returned.
-  If Pattern is the null string then Pattern_Error is propagated.
+  If Pattern is the null string then Pattern_Error is propagated.]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[      Index (Source, Pattern, Source'First, Forward, Mapping);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[otherwise returns]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[      Index (Source, Pattern, Source'Last, Backward, Mapping);]}
+@end{Example}
 @begin{discussion}
-There is no default value for the Mapping parameter that is
-a Character_Mapping_Function; if there were,
-a call would be ambiguous since there is also a default for
-the Mapping parameter that is a Character_Mapping.
+   @ChgRef{Version=[2],Kind=[Deleted]}@ChgNote{Moved up}
+   @ChgAdded{Version=[2],Text=[There is no default value for the Mapping
+   parameter that is a Character_Mapping_Function; if there were, a call would
+   be ambiguous since there is also a default for the Mapping parameter that is
+   a Character_Mapping.]}
 @end{discussion}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key[function] Index (Source  : @key[in] String;
+                Set     : @key[in] Maps.Character_Set;
+                From    : @key[in] Positive;
+                Test    : @key[in] Membership := Inside;
+                Going   : @key[in] Direction := Forward)
+   @key[return] Natural;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Index searches for the first or
+last occurrence of any of a set of characters (when Test=Inside), or any of the
+complement of a set of characters (when Test=Outside). If From < Source'First,
+then Index_Error is propagated. Otherwise, it returns the smallest index I >=
+From (if Going=Forward) or the largest index I <= From (if Going=Backward) such
+that Source(I) satisfies the Test condition with respect to Set; it returns 0
+if there is no such Character in Source.]}
 
 @begin{Example}@Keepnext
 @key[function] Index (Source : @key[in] String;
@@ -656,13 +804,37 @@ the Mapping parameter that is a Character_Mapping.
                 Going  : @key[in] Direction  := Forward)
    @key[return] Natural;
 @end{Example}
-@Trailing@;Index searches for the first or last occurrence of any of a set of
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00301-01]}
+@ChgDeleted{Version=[2],Type=[Trailing],Text=[]}@Comment{Fake to hold conditional format.}
+@Chg{Version=[2],New=[If Going = Forward, returns],
+Old=[Index searches for the first or last occurrence of any of a set of
 characters (when Test=Inside),
 or any of the complement of a set of characters (when Test=Outside).
 It returns the smallest index I (if Going=Forward) or the largest index I
 (if Going=Backward) such that
 Source(I) satisfies the Test condition with respect to Set;
-it returns 0 if there is no such Character in Source.
+it returns 0 if there is no such Character in Source.]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[      Index (Source, Set, Source'First, Test, Forward);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[otherwise returns]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[      Index (Source, Set, Source'Last, Test, Backward);]}
+@end{Example}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key[function] Index_Non_Blank (Source : @key[in] String;
+                          From   : @key[in] Positive;
+                          Going  : @key[in] Direction := Forward)
+   @key[return] Natural;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns Index (Source, Maps.To_Set(Space), From, Outside, Going);]}
 
 @begin{Example}@Keepnext
 @key[function] Index_Non_Blank (Source : @key[in] String;
@@ -948,6 +1120,17 @@ If a null Character_Mapping_Function is passed to any of the
 string handling subprograms, Constraint_Error is propagated.
 @end{Notes}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Overloaded versions of Index are newly added to Strings.Fixed. If
+  Strings.Fixed is referenced in a @nt{use_clause}, and an entity @i<E> with a
+  @nt{defining_identifier} of Index is defined in a package that is also
+  referenced in a @nt{use_clause}, the entity @i<E> may no longer be
+  use-visible, resulting in errors. This should be rare and is easily fixed if
+  it does occur.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0049],ARef=[AI95-00128-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Find_Token
@@ -1017,6 +1200,11 @@ the copying and comparison of bounded strings.@end{reason}
 
       @key[function] @AdaSubDefn{To_String} (Source : @key[in] Bounded_String) @key[return] String;
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[      @key[procedure] @AdaSubDefn{Set_Bounded_String}
+         (Target :    @key[out] Bounded_String;
+          Source : @key[in]     String;
+          Drop   : @key[in]     Truncation := Error);]}
 
       @key[function] @AdaSubDefn{Append} (Left, Right : @key[in] Bounded_String;
                        Drop        : @key[in] Truncation  := Error)
@@ -1084,6 +1272,20 @@ the copying and comparison of bounded strings.@end{reason}
                       High   : @key[in] Natural)
          @key[return] String;
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Bounded_Slice}
+         (Source : @key[in] Bounded_String;
+          Low    : @key[in] Positive;
+          High   : @key[in] Natural)
+             @key[return] Bounded_String;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[      @key[procedure] @AdaSubDefn{Bounded_Slice}
+         (Source : @key[in]     Bounded_String;
+          Target :    @key[out] Bounded_String;
+          Low    : @key[in]     Positive;
+          High   : @key[in]     Natural);]}
+
       @key[function] "="  (Left, Right : @key[in] Bounded_String) @key[return] Boolean;
       @key[function] "="  (Left : @key[in] Bounded_String; Right : @key[in] String)
         @key[return] Boolean;
@@ -1124,7 +1326,38 @@ the copying and comparison of bounded strings.@end{reason}
       @key[function] ">="  (Left : @key[in] String; Right : @key[in] Bounded_String)
         @key[return] Boolean;
 
-   --@RI{ Search functions}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00301-01]}
+   --@RI{ Search @Chg{Version=[2],New=[subprograms],Old=[functions]}}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Index} (Source  : @key[in] Bounded_String;
+                      Pattern : @key[in] String;
+                      From    : @key[in] Positive;
+                      Going   : @key[in] Direction := Forward;
+                      Mapping : @key[in] Maps.Character_Mapping := Maps.Identity)
+         @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Index} (Source  : @key[in] Bounded_String;
+                      Pattern : @key[in] String;
+                      From    : @key[in] Positive;
+                      Going   : @key[in] Direction := Forward;
+                      Mapping : @key[in] Maps.Character_Mapping_Function)
+         @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Index} (Source  : @key[in] Bounded_String;
+                      Set     : @key[in] Maps.Character_Set;
+                      From    : @key[in] Positive;
+                      Test    : @key[in] Membership := Inside;
+                      Going   : @key[in] Direction := Forward)
+         @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Bounded_String;
+                                From   : @key[in] Positive;
+                                Going  : @key[in] Direction := Forward)
+         @key[return] Natural;]}
 
       @key[function] @AdaSubDefn{Index} (Source   : @key[in] Bounded_String;
                       Pattern  : @key[in] String;
@@ -1238,7 +1471,7 @@ the copying and comparison of bounded strings.@end{reason}
                         From    : @key[in] Positive;
                         Through : @key[in] Natural);
 
---@RI{String selector subprograms}
+   --@RI{String selector subprograms}
 
       @key[function] @AdaSubDefn{Trim} (Source : @key[in] Bounded_String;
                      Side   : @key[in] Trim_End)
@@ -1277,7 +1510,7 @@ the copying and comparison of bounded strings.@end{reason}
                       Pad    : @key[in] Character  := Space;
                       Drop   : @key[in] Truncation := Error);
 
---@RI{String constructor subprograms}
+   --@RI{String constructor subprograms}
 
       @key[function] "*" (Left  : @key[in] Natural;
                     Right : @key[in] Character)
@@ -1363,6 +1596,18 @@ the leftmost Max_Length characters of Source.
 @end{Example}
 @Trailing@;To_String returns the String value with lower bound 1 represented by
 Source. If B is a Bounded_String, then B = To_Bounded_String(To_String(B)).
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key[procedure] Set_Bounded_String
+   (Target :    @key[out] Bounded_String;
+    Source : @key[in]     String;
+    Drop   : @key[in]     Truncation := Error);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Target := To_Bounded_String (Source, Drop);]}
+
 @end{DescribeCode}
 
 Each of the Append functions returns a Bounded_String obtained by concatenating
@@ -1402,9 +1647,38 @@ propagates Index_Error if Index > Length(Source).
    @key[return] String;
 @end{Example}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049],ARef=[AI95-00128-01]}
+@ChgRef{Version=[1],Kind=[Revised],ARef=[AI95-00238-01]}
 @Trailing@;Returns the slice at positions Low through High in the string
 represented by Source; propagates Index_Error if
-Low > Length(Source)+1@Chg{New=[ or High > Length(Source)],Old=[]}.
+Low > Length(Source)+1@Chg{New=[ or High > Length(Source)],Old=[]}.@Chg{Version=[2],
+New=[ The bounds of the returned string are Low and High.],Old=[]}.
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key[function] Bounded_Slice
+   (Source : @key[in] Bounded_String;
+    Low    : @key[in] Positive;
+    High   : @key[in] Natural)
+       @key[return] Bounded_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the slice at positions Low
+through High in the string represented by Source as a bounded string;
+propagates Index_Error if Low > Length(Source)+1 or High > Length(Source).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key[procedure] Bounded_Slice
+   (Source : @key[in]     Bounded_String;
+    Target :    @key[out] Bounded_String;
+    Low    : @key[in]     Positive;
+    High   : @key[in]     Natural);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Target := Bounded_Slice (Source, Low, High);]}
+
 @end{DescribeCode}
 
 Each of the functions "=", "<", ">","<=", and ">="
@@ -1476,6 +1750,18 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 @end{ImplNote}
 @end{ImplAdvice}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Procedure Set_Bounded_String, function Bounded_Slice, and overloaded
+  versions of Index are newly added to Strings.Bounded. If Strings.Bounded
+  referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Strings.Bounded is defined in a
+  package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
+  longer be use-visible, resulting in errors. This should be rare and is easily
+  fixed if it does occur.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0049],ARef=[AI95-00128-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the conditions for
@@ -1485,8 +1771,11 @@ Null_Bounded_String : @key[constant] Bounded_String :=
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the meaning of
   transformation, selector, and constructor subprograms by describing the
   effects of procedures and functions separately.]}
-@end{DiffWord95}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00238-01]}
+  @ChgAdded{Version=[2],Text=[Defined the bounds of the returned string from
+  Slice.]}
+@end{DiffWord95}
 
 
 @LabeledSubClause{Unbounded-Length String Handling}
@@ -1518,7 +1807,9 @@ as the length does not exceed the allocated length.
 @ChildUnit{Parent=[Ada.Strings],Child=[Unbounded]}@key[package] Ada.Strings.Unbounded @key[is]
    @key[pragma] Preelaborate(Unbounded);
 
-   @key[type] @AdaTypeDefn{Unbounded_String} @key[is] @key[private];
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+   @key[type] @AdaTypeDefn{Unbounded_String} @key[is] @key[private];@Chg{Version=[2],New=[
+   @key[pragma] Preelaborable_Initialization(Unbounded_String);],Old=[]}
 
    @AdaDefn{Null_Unbounded_String} : @key[constant] Unbounded_String;
 
@@ -1537,6 +1828,10 @@ as the length does not exceed the allocated length.
 
    @key[function] @AdaSubDefn{To_String} (Source : @key[in] Unbounded_String) @key[return] String;
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[procedure] @AdaSubDefn{Set_Unbounded_String}
+     (Target :    @key[out] Unbounded_String;
+      Source : @key[in]     String);]}
 
    @key[procedure] @AdaSubDefn{Append} (Source   : @key[in out] Unbounded_String;
                      New_Item : @key[in] Unbounded_String);
@@ -1577,6 +1872,19 @@ as the length does not exceed the allocated length.
                    High   : @key[in] Natural)
       @key[return] String;
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Unbounded_Slice}
+      (Source : @key[in] Unbounded_String;
+       Low    : @key[in] Positive;
+       High   : @key[in] Natural)
+          @key[return] Unbounded_String;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[procedure] @AdaSubDefn{Unbounded_Slice}
+      (Source : @key[in]     Unbounded_String;
+       Target :    @key[out] Unbounded_String;
+       Low    : @key[in]     Positive;
+       High   : @key[in]     Natural);]}
 
    @key[function] "="  (Left, Right : @key[in] Unbounded_String) @key[return] Boolean;
 
@@ -1620,6 +1928,36 @@ as the length does not exceed the allocated length.
 
 
 --@RI{ Search subprograms}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] Unbounded_String;
+                   Pattern : @key[in] String;
+                   From    : @key[in] Positive;
+                   Going   : @key[in] Direction := Forward;
+                   Mapping : @key[in] Maps.Character_Mapping := Maps.Identity)
+      @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] Unbounded_String;
+                   Pattern : @key[in] String;
+                   From    : @key[in] Positive;
+                   Going   : @key[in] Direction := Forward;
+                   Mapping : @key[in] Maps.Character_Mapping_Function)
+      @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] Unbounded_String;
+                   Set     : @key[in] Maps.Character_Set;
+                   From    : @key[in] Positive;
+                   Test    : @key[in] Membership := Inside;
+                   Going    : @key[in] Direction := Forward)
+      @key[return] Natural;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Unbounded_String;
+                             From   : @key[in] Positive;
+                             Going  : @key[in] Direction := Forward)
+      @key[return] Natural;]}
 
    @key[function] @AdaSubDefn{Index} (Source   : @key[in] Unbounded_String;
                    Pattern  : @key[in] String;
@@ -1776,6 +2114,10 @@ as the length does not exceed the allocated length.
 @key[end] Ada.Strings.Unbounded;
 @end{example}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
+@ChgAdded{Version=[2],Text=[The type Unbounded_String needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+
 Null_Unbounded_String represents the null String.
 If an object of type Unbounded_String is not otherwise initialized, it
 will be initialized to the same value as Null_Unbounded_String.
@@ -1800,6 +2142,10 @@ If S is a String, then To_String(To_Unbounded_String(S)) = S.
 If U is an Unbounded_String, then To_Unbounded_String(To_String(U)) = U.
 @end{itemize}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[The procedure Set_Unbounded_String sets Target to an Unbounded_String that
+represents Source.]}
+
 For each of the Append procedures,
 the resulting string represented by the Source parameter is given
 by the concatenation of the original value of Source and the value
@@ -1812,6 +2158,14 @@ and applying To_Unbounded_String to the concatenation result string.
 
 The Element, Replace_Element, and Slice subprograms have the same effect
 as the corresponding bounded-length string subprograms.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[The function Unbounded_Slice returns the slice at
+positions Low through High in the string represented by Source as an
+Unbounded_String. The procedure Unbounded_Slice sets Target to the
+Unbounded_String representing the slice at positions Low through High in the
+string represented by Source. Both routines propagate Index_Error if Low
+Length(Source)+1 or High > Length(Source).]}
 
 Each of the functions "=", "<", ">","<=", and ">="
 returns the same result as the corresponding String
@@ -1853,6 +2207,35 @@ the package and several of the subprograms appears in the Rationale.
 
 @end{ImplNote}
 @end{ImplReq}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Type Unbounded_String is defined to need finalization. If the
+  restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
+  applies to the partition, and Unbounded_String does not have a controlled
+  part, it will not be allowed in local objects in Ada 2005 whereas it would
+  be allowed in Ada 95. Such code is not portable, as most Ada compilers have
+  a controlled part in Unbounded_String, and thus would be illegal.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Text=[
+  Procedure Set_Unbounded_String, function Unbounded_Slice, and overloaded
+  versions of Index are newly added to Strings.Unbounded. If Strings.Unbounded
+  referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Strings.Unbounded is defined in a
+  package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
+  longer be use-visible, resulting in errors. This should be rare and is easily
+  fixed if it does occur.]}
+@end{Incompatible95}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Added a @nt{pragma} Preelaboratable_Initialization to
+  type Unbounded_String, so that it can be used in preelaborated units.]}
+@end{Extend95}
+
 
 @LabeledSubClause{String-Handling Sets and Mappings}
 
@@ -1911,11 +2294,12 @@ character mapping in Characters.Handling
 (see @refsecnum(The Package Characters.Handling)).
 @end{StaticSem}
 
-@begin{DiffWord95}
+@begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
-  @ChgAdded{Version=[2],Text=[Strings.Maps.Constants is now Pure,
-  so it can be used in more places.]}
-@end{DiffWord95}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Strings.Maps.Constants is now Pure,
+  so it can be used in pure units.]}
+@end{Extend95}
 
 
 @LabeledSubClause{Wide_String Handling}
@@ -2106,11 +2490,15 @@ constant in this package is the identity mapping when applied to
 any element outside the Character portion of Wide_Character.
 @end{Notes}
 
-@begin{DiffWord95}
+@begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
-  @ChgAdded{Version=[2],Text=[Various items are defined to have
-  Preelaborable_Initialization.]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Added @nt{pragma} Preelaboratable_Initialization to
+  types Wide_Character_Set and Wide_Character_Mapping, so that they can be
+  used in preelaborated units.]}
+@end{Extend95}
 
+@begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[Corrected the description of Character_Set.]}
 

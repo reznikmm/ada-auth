@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2005/02/06 04:31:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2005/02/08 06:35:37 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/02/06 04:31:45 $}
+@Comment{$Date: 2005/02/08 06:35:37 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -33,6 +33,7 @@ Much of the functionality in this Annex is new to Ada 95.
 @begin{DiffWord83}
 This Annex contains what used to be RM83-13.8.
 @end{DiffWord83}
+
 
 @LabeledClause{Interfacing Pragmas}
 
@@ -102,7 +103,7 @@ Their forms, together with that of the related
 A @nt[pragma] Linker_Options is allowed only at the place of a
 @nt[declarative_item].
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0058]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0058],ARef=[AI95-00036-01]}
 @ChgAdded{Version=[1],Text=[For @nt{pragma}s Import and Export, the argument
 for Link_Name shall not be given without the @nt{pragma_@!argument_@!identifier}
 unless the argument for External_Name is given.]}
@@ -385,6 +386,14 @@ precedence.
 @end{Discussion}
 @end{RunTime}
 
+@begin{Erron}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00320-01]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+It is the programmer's responsibility to ensure that the use of interfacing
+pragmas does not violate Ada semantics; otherwise, program execution is
+erroneous.]}
+@end{Erron}
+
 
 @begin{ImplAdvice}
     If an implementation supports pragma Export
@@ -541,6 +550,20 @@ Existing implementations can continue to support pragma Interface for
 upward compatibility.
 @end{Extend83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0058],ARef=[AI95-00036-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that @nt{pragma}s
+  Import and Export work like a subprogram call; parameters cannot be
+  omitted unless named notation is used. (Reordering is still not permitted,
+  however.)]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00320-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to say all bets are off if
+  foreign code doesn't follow the semantics promised by the Ada
+  specifications.]}
+@end{DiffWord95}
+
+
 @LabeledClause{The Package Interfaces}
 @begin{Intro}
 Package Interfaces is the parent of several library
@@ -646,6 +669,23 @@ precision, respectively.
 
 @end{ImplNote}
 @end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00204-01]}
+@ChgAdded{Version=[2],Text=[Support for interfacing to any foreign language is
+optional. However, an implementation shall not provide any attribute, library
+unit, or pragma having the same name as an attribute, library unit, or pragma
+(respectively) specified in the following clauses of this Annex unless the
+provided construct is either as specified in those clauses or is more limited
+in capability than that required by those clauses. A program that attempts to
+use an unsupported capability of this Annex shall either be identified by the
+implementation before run time or shall raise an exception at run time.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The intent is that the same rules apply for
+  language interfacing as apply for Specialized Needs Annexes. See
+  @RefSecNum{Conformity of an Implementation with the Standard} for a
+  discussion of the purpose of these rules.]}
+@end{Discussion}
 @end{ImplReq}
 
 @begin{ImplPerm}
@@ -657,37 +697,51 @@ in addition to the ones defined above.
 children of package Interfaces.@Chg{Version=[2],New=[],Old=[ The
 contents of the visible part of package Interfaces.]}]}
 @ChgNote{The latter sentence is given previously!}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00204-01]}
+@ChgAdded{Version=[2],Text=[A child package of package Interfaces with the name
+of a convention may be provided independently of whether the convention is
+supported by the pragma Convention and vice versa. Such a child package should
+contain any declarations that would be useful for interfacing to the language
+(implementation) represented by the convention. Any declarations useful for
+interfacing to any language on the given hardware architecture should be
+provided directly in Interfaces.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}@ChgNote{Moved from below}
+  @ChgAdded{Version=[2],Text=[For example, package Interfaces.XYZ_Pascal might
+  contain declarations of types that match the data types provided by the XYZ
+  implementation of Pascal, so that it will be more convenient to pass
+  parameters to a subprogram whose convention is XYZ_Pascal.]}
+@end{Ramification}
+
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-For each implementation-defined convention identifier,
-there should be a child package of
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00204-01]}
+@ChgDeleted{Version=[2],Text=[For each implementation-defined convention
+identifier, there should be a child package of
 package Interfaces with the corresponding name.
 This package should contain any declarations that would be useful for
-interfacing to the language (implementation) represented by the
-convention.
+interfacing to the language (implementation) represented by the convention.
 Any declarations useful for interfacing to any language on the
-given hardware architecture should be provided directly in Interfaces.
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[For each implementation-defined convention identifier,
-there should be a child package of package Interfaces with the
-corresponding name.]}]}
+given hardware architecture should be provided directly in Interfaces.]}
 @begin{Ramification}
-For example, package Interfaces.XYZ_Pascal might contain
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[For example, package Interfaces.XYZ_Pascal might contain
 declarations of types that match the data types provided by the
 XYZ implementation of Pascal,
 so that it will be more convenient to pass parameters to a subprogram
-whose convention is XYZ_Pascal.
+whose convention is XYZ_Pascal.]}
 @end{Ramification}
 
 An implementation supporting an interface to C, COBOL, or Fortran
 should provide the corresponding
-package or packages described in the following
-clauses.
+package or packages described in the following clauses.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If an interface to C, COBOL, or Fortran is provided, the corresponding
-package or packages described in the following clauses should also be
-provided.]}]}
+package or packages described in @RefSec{Interface to Other Languages}
+should also be provided.]}]}
 @begin{ImplNote}
 @Leading@;The intention is that an implementation might support several
 implementations of the foreign language: Interfaces.This_Fortran and
@@ -700,9 +754,16 @@ should be declared as a renaming:
 @end{ImplNote}
 @end{ImplAdvice}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00204-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that interfacing to foreign languages
+  is optional and has the same restrictions as a Specialized Needs Annex.]}
+@end{DiffWord95}
+
+
 @LabeledClause{Interfacing with C}
 @begin{Intro}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @Defn{interface to C}
 @Defn{C interface}
 The facilities relevant to interfacing with
@@ -764,7 +825,7 @@ functions.
 
    @key(type) @AdaTypeDefn{char} @key(is) @RI{<implementation-defined character type>};
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060],ARef=[AI95-00037-01]}
    @AdaDefn{nul} : @key(constant) char := @Chg{New=[@RI{implementation-defined}],Old=[char'First]};
 
    @key[function] @AdaSubDefn{To_C}   (Item : @key[in] Character) @key[return] char;
@@ -797,11 +858,11 @@ functions.
 
    @RI{-- Wide Character and Wide String}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060],ARef=[AI95-00037-01]}
    @key(type) @AdaTypeDefn{wchar_t} @key(is) @Chg{New=[@RI{<implementation-defined character type>}],
 Old=[@RI{implementation-defined}]};
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060],ARef=[AI95-00037-01]}
    @AdaDefn{wide_nul} : @key(constant) wchar_t := @Chg{New=[@RI{implementation-defined}],Old=[wchar_t'First]};
 
    @key(function) @AdaSubDefn{To_C}   (Item : @key(in) Wide_Character) @key(return) wchar_t;
@@ -860,7 +921,7 @@ unsigned_char, depending on the C implementation.
 and the C type char.
 
 @begin{ImplNote}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0114]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0114],ARef=[AI95-00038-01]}
 @ChgAdded{Version=[1],Text=[The To_C and To_Ada functions map between
 corresponding characters, not necessarily between characters with the same
 internal representation. Corresponding characters are characters defined by the
@@ -1027,25 +1088,25 @@ The C Interface packages support calling such functions.
 @end{Discussion}
 @end{DescribeCode}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgAdded{Version=[1],Text=[A Convention pragma with @i{convention}_@nt{identifier}
 C_Pass_By_Copy shall only be applied to a type.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgAdded{Version=[1],Text=[The eligibility rules in @RefSecNum(Interfacing Pragmas) do not apply
 to convention C_Pass_By_Copy. Instead, a type T is eligible for convention
 C_Pass_By_Copy if T is a record type that has no discriminants and that only
 has components with statically constrained subtypes, and each component is
 C-compatible.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgAdded{Version=[1],Text=[If a type is C_Pass_By_Copy-compatible then it is
 also C-compatible.]}
 
 @end{StaticSem}
 
 @begin{ImplReq}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
 An implementation shall support pragma Convention
 with a C @i{convention}_@nt{identifier} for a
 C-eligible type (see @refsecnum(Interfacing Pragmas))@Chg{New=[. An
@@ -1060,7 +1121,7 @@ interface packages.
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0060]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0060],ARef=[AI95-00037-01]}
 @ChgAdded{Version=[1],Text=[The constants nul and wide_nul should have a
 representation of zero.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -1092,13 +1153,13 @@ Ada type T. In the case of an elementary @key[out] or @key[in out]
 parameter, a pointer to a temporary copy is used to preserve
 by-copy semantics.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgAdded{Version=[1],Text=[An Ada parameter of a C_Pass_By_Copy-compatible
 (record) type T, of
 mode @key{in}, is passed as a t argument to a C function, where t is the
 C struct corresponding to the Ada type T.]}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
 An Ada parameter of a record type T, of any mode,
 @Chg{New=[other than an @key{in} parameter of a C_Pass_By_Copy-compatible type,],Old=[]}
 is passed as a t* argument to a C function, where t is the
@@ -1172,6 +1233,20 @@ specific numbers and types of parameters.
 @key(end) Test;
 @end{Example}
 @end{Examples}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0059],ARef=[AI95-00131-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @b<Corrigendum:> Convention C_Pass_By_Copy is new.]}
+@end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0060],ARef=[AI95-00037-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the intent for
+  Nul and Wide_Nul.]}
+@end{DiffWord95}
+
+
 
 @LabeledSubClause{The Package Interfaces.C.Strings}
 
@@ -1273,7 +1348,7 @@ for objects imported from, exported to, or passed to C.@end{discussion}
                        Nul_Check : @key(in) Boolean := False)
    @key(return) chars_ptr;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0061]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0061],ARef=[AI95-00140-01]}
 @Trailing@;If Item is @key(null), then To_Chars_Ptr returns Null_Ptr.
 @Chg{New=[If Item is not @key(null),], Old=[Otherwise, if ]}Nul_Check is
 True@Chg{New=[,],Old=[]} and Item.@key(all) does not contain nul, then
@@ -1326,7 +1401,7 @@ execution of Value is erroneous.
 @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
    @key(return) char_array;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0062]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0062],ARef=[AI95-00139-01]}
 @Trailing@;If Item = Null_Ptr then Value@Chg{New=[],Old=[(Item)]} propagates
 Dereference_Error.
 Otherwise Value returns the shorter of two arrays@Chg{New=[, either],Old=[:]}
@@ -1348,7 +1423,7 @@ up to and including the first nul.
 @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
    @key(return) String;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0063]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0063],ARef=[AI95-00177-01]}
 @Trailing@;Equivalent to To_Ada(Value(Item, Length)@Chg{New=[ & nul],Old=[]}, Trim_Nul=>True).
 
 @begin{Example}@Keepnext
@@ -1372,7 +1447,7 @@ Strlen has the effect of C's strlen function.
                   Chars  : @key(in) char_array;
                   Check  : Boolean := True);
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0064]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0064],ARef=[AI95-00039-01]}
 @Leading@;@Chg{New=[If Item = Null_Ptr, then Update propagates
 Dereference_Error. Otherwise, t],Old=[T]}his procedure updates the value
 pointed to by Item, starting at position Offset, using Chars as the data to be
@@ -1445,6 +1520,26 @@ the allocated object should be freed by the programmer via a call of
 Free, not by a called C function.
 @end{itemize}
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0061],ARef=[AI95-00140-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed the missing semantics
+  of To_Char_Ptr when Nul_Check is False.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0062],ARef=[AI95-00139-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed the missing semantics
+  of Value when the Length is 0.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0063],ARef=[AI95-00177-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the definition of
+  Value to avoid raising Terminator_Error.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0064],ARef=[AI95-00039-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed the missing semantics
+  of Update whrn Item is Null_Ptr.]}
+
+@end{DiffWord95}
+
 
 @LabeledSubClause{The Generic Package Interfaces.C.Pointers}
 @begin{Intro}
@@ -1681,7 +1776,7 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
          @key(raise) C.Strings.Dereference_Error;
       @key(end if);
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0065]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0065],ARef=[AI95-00142-01]}
       @key(loop)
          Element             := Source_Temp_Ptr.@key(all);
          Target_Temp_Ptr.@key(all) := Element;
@@ -1924,18 +2019,18 @@ Unsigned, Leading_Separate, and Trailing_Separate,
 the effect is implementation defined. If Format does have one
 of these values, the following rules apply:
 @begin{itemize}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066],ARef=[AI95-00071-01]}
 Format=Unsigned: if Item comprises @Chg{New=[],Old=[zero or more leading
 space characters followed by ]}one or more decimal digit
 characters then Valid returns True, else it returns False.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066],ARef=[AI95-00071-01]}
 Format=Leading_Separate: if Item comprises
 @Chg{New=[],Old=[zero or more leading space characters, followed by ]}a
 single occurrence of the plus or minus sign character, and then one or more
 decimal digit characters, then Valid returns True, else it returns False.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066],ARef=[AI95-00071-01]}
 @Trailing@;Format=Trailing_Separate: if Item comprises
 @Chg{New=[],Old=[zero or more leading space characters, followed by ]}one or
 more decimal digit characters and finally a plus or minus sign character,
@@ -1966,7 +2061,7 @@ the number of decimal places is established by Num'Scale.@end{discussion}
 @key(function) To_Display (Item   : @key(in) Num;
                      Format : @key(in) Display_Format) @key(return) Numeric;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0067]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0067],ARef=[AI95-00072-01]}
 @Trailing@;This function returns the Numeric value for Item, represented in
 accordance with Format.
 @Chg{New=[The length of the returned value is Length(Format), and the
@@ -2000,7 +2095,7 @@ outside the range of Num.
 @key(function) To_Packed (Item   : @key(in) Num;
                     Format : @key(in) Packed_Format) @key(return) Packed_Decimal;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0067]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0067],ARef=[AI95-00072-01]}
 @Trailing@;This function returns the Packed_Decimal value for Item, represented in
 accordance with Format.
 @Chg{New=[The length of the returned value is Length(Format), and the
@@ -2036,7 +2131,7 @@ outside the range of Num.
 @key(function) To_Binary (Item   : @key(in) Num;
                     Format : @key(in) Binary_Format) @key(return) Byte_Array;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0067]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0067],ARef=[AI95-00072-01]}
 @Trailing@;This function returns the Byte_Array value for Item, represented in
 accordance with Format.
 @Chg{New=[The length of the returned value is Length(Format), and the
@@ -2322,6 +2417,16 @@ call may specify
 @key(end) Test_External_Formats;
 @end{Example}
 @end{Examples}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0066],ARef=[AI95-00071-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the definition of
+  Valid to match COBOL.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0067],ARef=[AI95-00072-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Specified the bounds of the
+  results of To_Display, To_Packed, and To_Binary.]}
+@end{DiffWord95}
 
 @LabeledClause{Interfacing with Fortran}
 

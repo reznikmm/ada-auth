@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/02/05 05:48:03 $}
+@Comment{$Date: 2005/02/08 06:35:36 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -2987,7 +2987,7 @@ nested units.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
 @ChgAdded{Version=[2],Text=[@defn{preelaborable initialization}The following rules
-specify which entities have @i{preelaborable initialization}:], Old=[]}
+specify which entities have @i{preelaborable initialization}:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}

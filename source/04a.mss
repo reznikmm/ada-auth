@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/02/06 04:31:41 $}
+@Comment{$Date: 2005/02/08 06:35:35 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -103,9 +103,11 @@ This means
 @end{StaticSem}
 
 @begin{RunTime}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
 @PDefn2{Term=[evaluation], Sec=(name)}
 The evaluation of a @nt<name> determines the entity denoted by the
-name. This evaluation has no other effect for a @nt<name> that
+@Chg{Version=[2],New=[@nt<name>],Old=[name]}. This evaluation has no other
+effect for a @nt<name> that
 is a @nt<direct_name> or a @nt<character_literal>.
 
 @PDefn2{Term=[evaluation], Sec=(name that has a prefix)}
@@ -1520,10 +1522,31 @@ type, a formal private type, or a formal derived type:]}
    @nt{aggregate}s to disappear (if the full type is elementary).
    The full type is certain to be composite if the partial view has known
    discriminants or is tagged. Task and protected types are also allowed, as
-   they are always composite. We also disallow types with unknown
+   they are always composite.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We also disallow types with unknown
    discriminants. Unknown discriminants are often used to prevent uncontrolled
    initialization of objects, and we don't want to provide an uncontrolled
-   initialization mechanism for such types.]}
+   initialization mechanism for such types. Moreover, we would have break
+   privacy to make them work. For instance:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package} P @key{is}
+   @key{type} T (<>) @key{is tagged private};
+@key{private}
+   @key{type} T (D : Natural) @key{is tagged record}
+      C : String (1..D);
+   @key{end record};
+@key{end} P;]}
+@end{Example}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We couldn't allow giving an aggregate for T
+  outside of P, because we don't know what value to give the discriminant D.
+  But that would require looking in the private part to see if D had a default.
+  It's better to disallow unknown discriminants generally.]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
