@@ -18,7 +18,7 @@ package body ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2002, AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -114,6 +114,7 @@ package body ARM_Format is
     --  9/28/00 - RLB - Added RefSecbyNum command.
     -- 10/30/00 - RLB - Added ISOOnly paragraph grouping.
     --		- RLB - Fixed inserted paragraph numbers to support more than 9.
+    --  6/17/02 - RLB - Added Ada95 changes sections.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -146,6 +147,12 @@ package body ARM_Format is
 			 => (Length => 27, Str => "Incompatibility With Ada 83             "), -- Incompatible83Name
 	 Ada83_Extensions=> (Length => 19, Str => "Extension to Ada 83                     "), -- Extend83Name
 	 Ada83_Wording	 => (Length => 26, Str => "Wording Change from Ada 83              "), -- DiffWord83Name
+	 Ada95_Inconsistencies
+			 => (Length => 25, Str => "Inconsistency With Ada 95               "), -- Inconsistent95Name
+	 Ada95_Incompatibilities
+			 => (Length => 27, Str => "Incompatibility With Ada 95             "), -- Incompatible95Name
+	 Ada95_Extensions=> (Length => 19, Str => "Extension to Ada 95                     "), -- Extend95Name
+	 Ada95_Wording	 => (Length => 26, Str => "Wording Change from Ada 95              "), -- DiffWord95Name
 	 Reason		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Ramification	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Proof		 => (Length =>  0, Str => (others => ' ')), -- Not used.
@@ -194,6 +201,12 @@ package body ARM_Format is
 			 => (Length => 29, Str => "Incompatibilities With Ada 83           "), -- Incompatible83Title
 	 Ada83_Extensions=> (Length => 20, Str => "Extensions to Ada 83                    "), -- Extend83Title
 	 Ada83_Wording	 => (Length => 27, Str => "Wording Changes from Ada 83             "), -- DiffWord83Title
+	 Ada95_Inconsistencies
+			 => (Length => 27, Str => "Inconsistencies With Ada 95             "), -- Inconsistent95Title
+	 Ada95_Incompatibilities
+			 => (Length => 29, Str => "Incompatibilities With Ada 95           "), -- Incompatible95Title
+	 Ada95_Extensions=> (Length => 20, Str => "Extensions to Ada 95                    "), -- Extend95Title
+	 Ada95_Wording	 => (Length => 27, Str => "Wording Changes from Ada 95             "), -- DiffWord95Title
 	 Reason		 => (Length =>  8, Str => "Reason:                                 "), -- Paragraph start.
 	 Ramification	 => (Length => 14, Str => "Ramification:                           "), -- Paragraph start.
 	 Proof		 => (Length =>  7, Str => "Proof:                                  "), -- Paragraph start.
@@ -307,11 +320,13 @@ package body ARM_Format is
 	Doc_Name, Metrics_Name, Permission_Name, Advice_Name, Notes_Name,
 	Examples_Name, Meta_Name, Inconsistent83_Name, Incompatible83_Name,
 	Extend83_Name, Wording83_Name,
+	Inconsistent95_Name, Incompatible95_Name, Extend95_Name, Wording95_Name,
 	Syntax_Title, Resolution_Title, Legality_Title, Static_Title,
 	Link_Title, Run_Title, Bounded_Title, Erroneous_Title, Req_Title,
 	Doc_Title, Metrics_Title, Permission_Title, Advice_Title, Notes_Title,
 	Examples_Title, Meta_Title, Inconsistent83_Title, Incompatible83_Title,
-	Extend83_Title, Wording83_Title,
+	Extend83_Title, Wording83_Title, Inconsistent95_Title, Incompatible95_Title,
+	Extend95_Title, Wording95_Title,
 	-- Character macros:
 	EM_Dash, EN_Dash, LE, LT, GE, GT, NE, PI, Times, PorM, Single_Quote,
 	Latin_1, Ceiling, Floor, Absolute, Log, Thin_Space,
@@ -550,6 +565,14 @@ package body ARM_Format is
 	    return Extend83_Name;
 	elsif Canonical_Name = "diffword83name" then
 	    return Wording83_Name;
+	elsif Canonical_Name = "inconsistent95name" then
+	    return Inconsistent95_Name;
+	elsif Canonical_Name = "incompatible95name" then
+	    return Incompatible95_Name;
+	elsif Canonical_Name = "extend95name" then
+	    return Extend95_Name;
+	elsif Canonical_Name = "diffword95name" then
+	    return Wording95_Name;
 	elsif Canonical_Name = "syntaxtitle" then
 	    return Syntax_Title;
 	elsif Canonical_Name = "resolutiontitle" then
@@ -590,6 +613,14 @@ package body ARM_Format is
 	    return Extend83_Title;
 	elsif Canonical_Name = "diffword83title" then
 	    return Wording83_Title;
+	elsif Canonical_Name = "inconsistent95title" then
+	    return Inconsistent95_Title;
+	elsif Canonical_Name = "incompatible95title" then
+	    return Incompatible95_Title;
+	elsif Canonical_Name = "extend95title" then
+	    return Extend95_Title;
+	elsif Canonical_Name = "diffword95title" then
+	    return Wording95_Title;
 	elsif Canonical_Name = "em" then
 	    return EM_Dash;
 	elsif Canonical_Name = "en" then
@@ -1286,7 +1317,9 @@ package body ARM_Format is
 		    return False;
 	        when Language_Design | Ada83_Inconsistencies |
 		     Ada83_Incompatibilities | Ada83_Extensions |
-		     Ada83_Wording | Reason | Ramification | Proof |
+		     Ada83_Wording | Ada95_Inconsistencies |
+		     Ada95_Incompatibilities | Ada95_Extensions |
+		     Ada95_Wording | Reason | Ramification | Proof |
 		     Imp_Note | Corr_Change | Discussion |
 		     Honest | Glossary_Marker | Bare_Annotation =>
 		    return True;
@@ -1568,7 +1601,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Ada83_Inconsistencies | -- Inconsistent83
 		         Ada83_Incompatibilities | -- Incompatible83
 		         Ada83_Extensions | -- Extend83
-		         Ada83_Wording => -- DiffWord83
+		         Ada83_Wording | -- DiffWord83
+		         Ada95_Inconsistencies | -- Inconsistent95
+		         Ada95_Incompatibilities | -- Incompatible95
+		         Ada95_Extensions | -- Extend95
+		         Ada95_Wording => -- DiffWord95
 			Format_Object.Format := ARM_Output.Annotations;
 			Format_Object.No_Breaks := False;
         	    when Reason | Ramification | Proof |
@@ -1942,7 +1979,11 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 		         Ada83_Inconsistencies | -- Inconsistent83
 		         Ada83_Incompatibilities | -- Incompatible83
 		         Ada83_Extensions | -- Extend83
-		         Ada83_Wording => -- DiffWord83
+		         Ada83_Wording | -- DiffWord83
+		         Ada95_Inconsistencies | -- Inconsistent95
+		         Ada95_Incompatibilities | -- Incompatible95
+		         Ada95_Extensions | -- Extend95
+		         Ada95_Wording => -- DiffWord95
 			ARM_Output.Category_Header (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
 			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
         	    when Plain | Introduction =>
@@ -1985,7 +2026,11 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 		         Ada83_Inconsistencies | -- Inconsistent83
 		         Ada83_Incompatibilities | -- Incompatible83
 		         Ada83_Extensions | -- Extend83
-		         Ada83_Wording => -- DiffWord83
+		         Ada83_Wording | -- DiffWord83
+		         Ada95_Inconsistencies | -- Inconsistent95
+		         Ada95_Incompatibilities | -- Incompatible95
+		         Ada95_Extensions | -- Extend95
+		         Ada95_Wording => -- DiffWord95
 			null; -- Not an annotation.
         	    when Reason | Ramification | Proof |
 			 Imp_Note | Corr_Change | Discussion |
@@ -2582,6 +2627,42 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 		    Format_Object.Next_Paragraph_Subhead_Type := Ada83_Wording;
 		else -- RM, but this is AARM-only.
 		    Toss_for_RM ("diffword83");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "inconsistent95" then
+		if Format_Object.Document = ARM_Output.AARM then
+		    Format_Object.Next_Paragraph_Format_Type := Ada95_Inconsistencies;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada95_Inconsistencies;
+		else -- RM, but this is AARM-only.
+		    Toss_for_RM ("inconsistent95");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "incompatible95" then
+		if Format_Object.Document = ARM_Output.AARM then
+		    Format_Object.Next_Paragraph_Format_Type := Ada95_Incompatibilities;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada95_Incompatibilities;
+		else -- RM, but this is AARM-only.
+		    Toss_for_RM ("incompatible95");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "extend95" then
+		if Format_Object.Document = ARM_Output.AARM then
+		    Format_Object.Next_Paragraph_Format_Type := Ada95_Extensions;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada95_Extensions;
+		else -- RM, but this is AARM-only.
+		    Toss_for_RM ("extend95");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "diffword95" then
+		if Format_Object.Document = ARM_Output.AARM then
+		    Format_Object.Next_Paragraph_Format_Type := Ada95_Wording;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada95_Wording;
+		else -- RM, but this is AARM-only.
+		    Toss_for_RM ("diffword95");
 		end if;
 	    -- AARM annotations:
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
@@ -5429,12 +5510,16 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Doc_Name | Metrics_Name | Permission_Name | Advice_Name |
 		     Notes_Name | Examples_Name | Meta_Name | Inconsistent83_Name |
 		     Incompatible83_Name | Extend83_Name | Wording83_Name |
+		     Inconsistent95_Name |
+		     Incompatible95_Name | Extend95_Name | Wording95_Name |
 		     Syntax_Title | Resolution_Title | Legality_Title |
 		     Static_Title | Link_Title | Run_Title | Bounded_Title |
 		     Erroneous_Title | Req_Title | Doc_Title | Metrics_Title |
 		     Permission_Title | Advice_Title | Notes_Title |
 		     Examples_Title | Meta_Title | Inconsistent83_Title |
 		     Incompatible83_Title | Extend83_Title | Wording83_Title |
+		     Inconsistent95_Title |
+		     Incompatible95_Title | Extend95_Title | Wording95_Title |
 		     EM_Dash | EN_Dash | LT | LE | GT | GE | NE | PI |
 		     Times | PorM | Single_Quote | Thin_Space | Left_Quote |
 		     Right_Quote | Left_Double_Quote | Right_Double_Quote |
@@ -5691,6 +5776,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Put_Name(Ada83_Extensions);
 		when Wording83_Name =>
 		    Put_Name(Ada83_Wording);
+		when Inconsistent95_Name =>
+		    Put_Name(Ada95_Inconsistencies);
+		when Incompatible95_Name =>
+		    Put_Name(Ada95_Incompatibilities);
+		when Extend95_Name =>
+		    Put_Name(Ada95_Extensions);
+		when Wording95_Name =>
+		    Put_Name(Ada95_Wording);
 
 		when Syntax_Title =>
 		    Put_Title(Syntax);
@@ -5732,6 +5825,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Put_Title(Ada83_Extensions);
 		when Wording83_Title =>
 		    Put_Title(Ada83_Wording);
+		when Inconsistent95_Title =>
+		    Put_Title(Ada95_Inconsistencies);
+		when Incompatible95_Title =>
+		    Put_Title(Ada95_Incompatibilities);
+		when Extend95_Title =>
+		    Put_Title(Ada95_Extensions);
+		when Wording95_Title =>
+		    Put_Title(Ada95_Wording);
 
 		when EM_Dash =>
 		    Check_Paragraph;

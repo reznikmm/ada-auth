@@ -10,7 +10,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2002, AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -66,6 +66,7 @@ package ARM_Format is
     --  8/28/00 - RLB - Added flags for ChgAttribute and ChgImpldef commands.
     --  8/31/00 - RLB - Added the New_Changes change kind.
     --  9/26/00 - RLB - Added Syntax_Display format.
+    --  6/17/02 - RLB - Added Ada95 changes sections.
 
     type Format_Type is tagged limited private;
 
@@ -152,6 +153,8 @@ private
 	Notes, Examples,
 	Ada83_Inconsistencies, Ada83_Incompatibilities, -- AARM-only.
 	Ada83_Extensions, Ada83_Wording, -- AARM-only.
+	Ada95_Inconsistencies, Ada95_Incompatibilities, -- AARM-only.
+	Ada95_Extensions, Ada95_Wording, -- AARM-only.
 	-- AARM annotations (no headers)
 	Reason, Ramification, Proof, Imp_Note, Corr_Change, Discussion,
 	Honest, Glossary_Marker, Bare_Annotation,

@@ -11,7 +11,7 @@ package ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2001, AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -66,6 +66,7 @@ package ARM_HTML is
     --  9/27/00 - RLB - Added tab emulation when in the fixed font.
     --		- RLB - Added column emulation.
     --  9/29/00 - RLB - Added Any_Nonspace flag.
+    --  7/18/01 - RLB - Added support for Big_Files.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -329,6 +330,7 @@ private
 	Output_File : Ada.Text_IO.File_Type;
 	Document : ARM_Output.Document_Type;
 	Section_Name : String(1..3);
+	Big_Files : Boolean; -- For HTML, this means to generate a single monster file.
 	Char_Count : Natural := 0; -- Characters on current line.
 	Disp_Char_Count : Natural := 0; -- Displayed characters on current line.
 	Any_Nonspace : Boolean := False; -- Have we output any non-space on this line?
