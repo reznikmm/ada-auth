@@ -65,6 +65,7 @@ package ARM_HTML is
     --  8/22/00 - RLB - Added Revised_Clause_Header.
     --  9/27/00 - RLB - Added tab emulation when in the fixed font.
     --		- RLB - Added column emulation.
+    --  9/29/00 - RLB - Added Any_Nonspace flag.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -330,6 +331,7 @@ private
 	Section_Name : String(1..3);
 	Char_Count : Natural := 0; -- Characters on current line.
 	Disp_Char_Count : Natural := 0; -- Displayed characters on current line.
+	Any_Nonspace : Boolean := False; -- Have we output any non-space on this line?
 	Saw_Hang_End : Boolean := False; -- If we are in a hanging paragraph,
 			       -- have we seen the end of the hanging part yet?
 	Is_Bold : Boolean; -- Is the text currently bold?

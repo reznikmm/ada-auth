@@ -84,6 +84,8 @@ package body ARM_HTML is
     --  9/26/00 - RLB - Added Syntax_Summary style.
     --  9/27/00 - RLB - Added tab emulation when in the fixed font.
     --  9/28/00 - RLB - Added some style sheets.
+    --		- RLB - Updated to use absolute positioning for paragraph
+    --			numbers (this looks much better than floating).
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -653,12 +655,13 @@ package body ARM_HTML is
 	     -- The style sheet.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <STYLE type=""text/css"">");
 	    -- Element styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {float: left; font-size: 64%; font-family: Arial, Helvetica, sans-serif; width: 3em; margin-right: -3em}");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranumOuter {float: left; font-size: 64%; font-family: Arial, Helvetica, sans-serif; width: 1.2em}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5 em; top: auto}");
+		-- CSS2. See HTML_4_Compatible for comments.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.roman {font-family: ""Times New Roman"", Times, serif}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    TT {font-family: ""Courier New"", monospace; font-size: 90%}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    H4.centered {text-align: center}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DT {display: compact}"); -- CSS2. This doesn't seem to work on IE 4.01, but it is harmless.
 
 	    -- Paragraph styles:
 	    Make_Style ("Normal", ARM_Output.Normal);
@@ -715,9 +718,13 @@ package body ARM_HTML is
 	     -- The style sheet.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <STYLE type=""text/css"">");
 	    -- Element styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; width: 3em; margin-right: -3em}");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranumOuter {float: left; font-family: Arial, Helvetica, sans-serif; width: 1.2em}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5 em; top: auto}");
+		-- Uses absolute positioning (CSS2).
+		-- An alternative would be: "    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; width: 3em; margin-right: -3em}"
+		-- but this offsets the first line of each paragraph by a single space. Looks ugly.
+		-- If absolute positioning is not supported, the paragraph number will end up on a line by itself, which is fine.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    TT {font-family: ""Courier New"", monospace}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DT {display: compact}"); -- CSS2. This doesn't seem to work on IE 4.01, but it is harmless.
 
 	    -- Paragraph styles:
 	    Make_Style ("Normal", ARM_Output.Normal);
@@ -1185,6 +1192,7 @@ package body ARM_HTML is
 	Output_Object.Had_Prefix := not No_Prefix;
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
+	Output_Object.Any_Nonspace := False;
 	Output_Object.Saw_Hang_End := False;
 	Check_Clause_File (Output_Object);
 	-- Note: We only support Justification for the Normal and Wide styles.
@@ -1225,23 +1233,23 @@ package body ARM_HTML is
 		-- No tabs in HTML; we'll emulate them for fixed fonts.
 		-- We'll expand proportional stops here (text characters
 		-- are larger than the variable ones these are set up for).
+		Output_Object.Emulate_Tabs :=
+		    ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed);
 		for I in 1 .. Tab_Stops.Number loop
 		    if ARM_Output."=" (Tab_Stops.Stops(I).Kind,
 				       ARM_Output.Left_Proportional) then
-		        Output_Object.Tab_Stops.Stops(I).Stop :=
+		        if ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
+			    Output_Object.Tab_Stops.Stops(I).Stop :=
 				(Tab_Stops.Stops(I).Stop * 13 / 12);
+			else -- Proportional characters are smaller.
+			    Output_Object.Tab_Stops.Stops(I).Stop :=
+				(Tab_Stops.Stops(I).Stop * 5 / 4);
+			end if;
 		    else
 		        Output_Object.Tab_Stops.Stops(I).Stop :=
 				Tab_Stops.Stops(I).Stop;
 		    end if;
 		end loop;
-		case Format is
-		    when ARM_Output.Examples | ARM_Output.Small_Examples |
-			 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples =>
-			Output_Object.Emulate_Tabs := True;
-		    when others =>
-			Output_Object.Emulate_Tabs := False;
-		end case;
 
 	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
 		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
@@ -1536,19 +1544,14 @@ package body ARM_HTML is
 
 	elsif HTML_Kind = HTML_4_Compatible then
 	    if Number /= "" then -- Has paragraph number.
-		if ((not No_Prefix) and then Paragraph_Info(Format).Indent = 0) or else
-		     ARM_Output."=" (Format, ARM_Output.Normal) or else
-		     ARM_Output."=" (Format, ARM_Output.Wide) then -- No indent.
-		    Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""ParanumOuter"">");
-		else
-		    Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""Paranum"">");
-		end if;
+		Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""Paranum"">");
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-2>");
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
 	        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</DIV>");
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
+		Output_Object.Any_Nonspace := False;
 	    end if;
 
 	    case Format is
@@ -1782,19 +1785,28 @@ package body ARM_HTML is
 	    Output_Object.Is_Bold := False;
 	    Output_Object.Is_Italic := False;
 	    Output_Object.Size := 0;
-	else -- HTML_4_Only.
 	    if Number /= "" then -- Has paragraph number.
 		if ((not No_Prefix) and then Paragraph_Info(Format).Indent = 0) or else
 		     ARM_Output."=" (Format, ARM_Output.Normal) or else
 		     ARM_Output."=" (Format, ARM_Output.Wide) then -- No indent.
-		    Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""ParanumOuter"">");
-		else
-		    Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""Paranum"">");
+		    -- We have to make a space for the paragraph number,
+		    -- as absolute positioned items can overlap others.
+		    for I in 1 .. Number'Length+2 loop
+			Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		    end loop;
+		-- else is indented, so we don't need to make space.
 		end if;
+	    end if;
+	else -- HTML_4_Only.
+	    if Number /= "" then -- Has paragraph number.
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""Paranum"">");
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</DIV>");
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
+		Output_Object.Any_Nonspace := False;
 	    end if;
 
 	    case Format is
@@ -2028,6 +2040,20 @@ package body ARM_HTML is
 	    Output_Object.Is_Bold := False;
 	    Output_Object.Is_Italic := False;
 	    Output_Object.Size := 0;
+	    if Number /= "" then -- Has paragraph number.
+		if ((not No_Prefix) and then Paragraph_Info(Format).Indent = 0) or else
+		     ARM_Output."=" (Format, ARM_Output.Normal) or else
+		     ARM_Output."=" (Format, ARM_Output.Wide) then -- No indent.
+		    -- We have to make a space for the paragraph number,
+		    -- as absolute positioned items can overlap others.
+		    for I in 1 .. Number'Length+2 loop
+			Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		    end loop;
+		-- else is indented, so we don't need to make space.
+		end if;
+	    end if;
 	end if;
 
 	-- Note: No_Breaks and Keep_with_Next have no effect here, because
@@ -2099,6 +2125,7 @@ package body ARM_HTML is
 	    Output_Object.Current_Item := Output_Object.Current_Item + 2; -- Skip an item.
             Output_Object.Char_Count := 0;
             Output_Object.Disp_Char_Count := 0;
+	    Output_Object.Any_Nonspace := False;
 	    return; -- Nothing else to do here.
 	end if;
 
@@ -2281,6 +2308,7 @@ package body ARM_HTML is
 	end if;
         Output_Object.Char_Count := 0;
         Output_Object.Disp_Char_Count := 0;
+	Output_Object.Any_Nonspace := False;
     end End_Paragraph;
 
 
@@ -2308,6 +2336,7 @@ package body ARM_HTML is
 	end if;
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
+	Output_Object.Any_Nonspace := False;
     end Category_Header;
 
 
@@ -2349,6 +2378,7 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
 	    Output_Object.Char_Count := 0;
 	    Output_Object.Disp_Char_Count := 0;
+	    Output_Object.Any_Nonspace := False;
 	    return;
 	end if;
 
@@ -2381,6 +2411,7 @@ package body ARM_HTML is
 	end case;
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
+	Output_Object.Any_Nonspace := False;
 	-- No page breaks in HTML, so we don't need to look at No_Page_Break.
     end Clause_Header;
 
@@ -2449,6 +2480,7 @@ package body ARM_HTML is
 	end case;
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
+	Output_Object.Any_Nonspace := False;
 	-- No page breaks in HTML, so we don't need to look at No_Page_Break.
     end Revised_Clause_Header;
 
@@ -2550,6 +2582,7 @@ package body ARM_HTML is
         Ada.Text_IO.Put (Output_Object.Output_File, "<CAPTION>");
 	Output_Object.Char_Count := 9;
 	Output_Object.Disp_Char_Count := 0;
+	Output_Object.Any_Nonspace := False;
 
 	Output_Object.Is_In_Paragraph := True;
 	Output_Object.Is_In_Table := True;
@@ -2595,17 +2628,20 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TH align=""center"">");
 		Output_Object.Char_Count := 24;
 		Output_Object.Disp_Char_Count := 0;
+		Output_Object.Any_Nonspace := False;
 	    when ARM_Output.End_Header =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
 		Output_Object.Char_Count := 24;
 		Output_Object.Disp_Char_Count := 0;
+		Output_Object.Any_Nonspace := False;
 		Output_Object.In_Header := False;
 	    when ARM_Output.End_Row | ARM_Output.End_Row_Next_Is_Last =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
 		Output_Object.Char_Count := 24;
 		Output_Object.Disp_Char_Count := 0;
+		Output_Object.Any_Nonspace := False;
 	    when ARM_Output.End_Table =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</TABLE>");
@@ -2685,6 +2721,7 @@ package body ARM_HTML is
 	    else
 	        Output_Text (Output_Object, Text);
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + Text'Length;
+		Output_Object.Any_Nonspace := True;
 	    end if;
 	else
 	    for I in Text'range loop
@@ -2715,15 +2752,19 @@ package body ARM_HTML is
 	    if Char = '<' then
 	        Output_Text (Output_Object, "&lt;");
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		Output_Object.Any_Nonspace := True;
 	    elsif Char = '>' then
 	        Output_Text (Output_Object, "&gt;");
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		Output_Object.Any_Nonspace := True;
 	    elsif Char = '"' then
 	        Output_Text (Output_Object, "&quot;");
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		Output_Object.Any_Nonspace := True;
 	    elsif Char = '&' then
 	        Output_Text (Output_Object, "&amp;");
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		Output_Object.Any_Nonspace := True;
 	    elsif Char >= Character'Val(126) then -- All higher Latin-1 characters.
 		case Character'Pos(Char) is
 		    when 160 =>
@@ -2930,9 +2971,11 @@ package body ARM_HTML is
 			end;
 		end case;
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		Output_Object.Any_Nonspace := True;
 	    else
 	        Output_Text (Output_Object, Char & "");
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		Output_Object.Any_Nonspace := True;
 	    end if;
 	end if;
     end Ordinary_Character;
@@ -2951,6 +2994,7 @@ package body ARM_HTML is
 	end if;
         Output_Text (Output_Object, "&nbsp;");
         Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	-- Output_Object.Any_Nonspace := <unchanged>;
     end Hard_Space;
 
 
@@ -2975,10 +3019,12 @@ package body ARM_HTML is
 	    Output_Object.Current_Item := Output_Object.Current_Item + 1;
             Output_Object.Char_Count := 0;
             Output_Object.Disp_Char_Count := 0;
+	    Output_Object.Any_Nonspace := False;
 	else -- Normal.
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BR>");
             Output_Object.Char_Count := 0;
             Output_Object.Disp_Char_Count := 0;
+	    Output_Object.Any_Nonspace := False;
 	end if;
     end Line_Break;
 
@@ -3058,12 +3104,12 @@ package body ARM_HTML is
 	end if;
 
 	if Output_Object.Emulate_Tabs or else
-	    Output_Object.Disp_Char_Count = 0 then -- Always can emulate if they're first on a line.
+	    (not Output_Object.Any_Nonspace) then -- Always can emulate if they're first on a line.
 	    Output_Text (Output_Object, "&nbsp;");
 	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	    for I in 1 .. Output_Object.Tab_Stops.Number loop
-	        if Output_Object.Tab_Stops.Stops(I).Stop > Output_Object.Disp_Char_Count then
-		    for J in Output_Object.Disp_Char_Count+1 .. Output_Object.Tab_Stops.Stops(I).Stop-1 loop
+	        if Output_Object.Tab_Stops.Stops(I).Stop >= Output_Object.Disp_Char_Count then
+		    for J in Output_Object.Disp_Char_Count+1 .. Output_Object.Tab_Stops.Stops(I).Stop loop
 		        Output_Text (Output_Object, "&nbsp;");
 		        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		    end loop;
@@ -3103,7 +3149,7 @@ package body ARM_HTML is
 		if HTML_Kind > HTML_3 and Use_Unicode then
 	            Output_Text (Output_Object, "&mdash;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
-		else
+        	else
 	            Output_Text (Output_Object, "--");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
@@ -3220,6 +3266,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	end case;
+	Output_Object.Any_Nonspace := True;
     end Special_Character;
 
 
@@ -3275,6 +3322,7 @@ package body ARM_HTML is
 	end if;
         Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
+	Output_Object.Any_Nonspace := False;
     end End_Hang_Item;
 
 
