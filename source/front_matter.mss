@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.27 $ $Date: 2001/04/05 22:55:23 $}
+@comment{$Revision: 1.28 $ $Date: 2001/05/24 16:27:39 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -642,8 +642,10 @@ where @i(ss.ss) is the section, clause or subclause number,
 and @i(yy-mm-dd) is the date the comment was sent.
 The date is optional, as is the @b(!keywords) line.
 
-Multiple comments per e-mail message are acceptable.
-Please use a descriptive @lquotes@;Subject@rquotes@; in your e-mail message.
+@ChgRef{Version=[1],Kind=[Revised]}
+@Chg{New=[], Old=[Multiple comments per e-mail message are acceptable.]}
+Please use a descriptive @lquotes@;Subject@rquotes@; in your e-mail
+message@Chg{New=[, and limit each message to a single comment.], Old=[.]}
 
 When correcting typographical errors or making minor wording
 suggestions, please put the correction directly as the topic of the
