@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/18 06:37:17 $}
+@Comment{$Date: 2005/03/22 05:53:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3178,6 +3178,11 @@ of @i{T}.]}
 @end{Example}
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00412-01]}
+@ChgAdded{Version=[2],Text=[Similarly, if a @nt{subtype_mark} denotes a
+@nt{subtype_declaration} defining a subtype of an incomplete view @i<T>, the
+@nt{subtype_mark} denotes an incomplete view except under the same two
+circumstances given above, in which case it denotes the full view of @i<T>.]}
 @end{StaticSem}
 
 @begin{Legality}
@@ -3257,8 +3262,10 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
     In other words, we have effectively repealed AI83-00007.
   @end(ImplNote)
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}@ChgNote{Really moved}
-  @ChgDeleted{Version=[2],Text=[as the @nt{subtype_mark} defining the subtype
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01],ARef=[AI95-00412-01]}@ChgNote{The old rule is moved}
+  as the @nt{subtype_mark} @Chg{Version=[2],New=[in the @nt{subtype_indication}
+  of a @nt{subtype_declaration}; the @nt{subtype_indication} shall not have a
+  @nt{null_exclusion} or a @nt{constraint};],Old=[defining the subtype
   of a parameter or result of an @nt{access_to_@!subprogram_definition};]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}@ChgNote{Really moved}
@@ -3499,40 +3506,45 @@ not at all) for different designated subtypes.
 @end{DiffWord83}
 
 @begin{Incompatible95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
-It is now illegal to use an incomplete view (type) as the parameter or result
-of an access-to-subprogram type unless the incomplete view is completed in the
-same list of declarations as the use. This was allowed in Ada 95 for incomplete
-types where the completion was deferred to the body. By disallowing this rare
-use of incomplete views, we can allow the use of incomplete views in many more
-places, which is especially valuable for limited views.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  It is now illegal to use an incomplete view (type) as the parameter or result
+  of an access-to-subprogram type unless the incomplete view is completed in
+  the same list of declarations as the use. This was allowed in Ada 95 for
+  incomplete types where the completion was deferred to the body. By
+  disallowing this rare use of incomplete views, we can allow the use of
+  incomplete views in many more places, which is especially valuable for
+  limited views.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[
-It is now illegal to use an incomplete view (type} in a primitive subprogram
-of the type unless the incomplete view is completed in the package specification.
-This was allowed in Ada 95 for incomplete types where the completion was
-deferred to the body (the use would have to be in an access parameter).
-This incompatibility was caused by the fix for the hole noted in
-@LegalityTitle above.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+  @ChgAdded{Version=[2],Text=[It is now illegal to use an incomplete view
+  (type} in a primitive subprogram of the type unless the incomplete view is
+  completed in the package specification. This was allowed in Ada 95 for
+  incomplete types where the completion was deferred to the body (the use would
+  have to be in an access parameter). This incompatibility was caused by the
+  fix for the hole noted in @LegalityTitle above.]}
 @end{Incompatible95}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}Tagged incomplete types
-are new. They are allowed in parameter declarations as well as the usual
-places, as tagged types are always by-reference types (and thus there can
-be no code generation issue).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}Tagged incomplete types
+  are new. They are allowed in parameter declarations as well as the usual
+  places, as tagged types are always by-reference types (and thus there can
+  be no code generation issue).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00412-01]}
+  @ChgAdded{Version=[2],Text=[A @nt{subtype_declaration} can be used to
+  give a new name to an incomplete view of a type. This is valuable to
+  give shorter names to entities imported with a @nt{limited_with_clause}.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[The description of incomplete types as @i{incomplete
-views} is new. Ada 95 defined these as separate types, but neglected to
-give any rules for matching them with other types. Luckily, implementers
-did the right thing anyway. This change also makes it easier to describe
-the meaning of a limited view.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+  @ChgAdded{Version=[2],Text=[The description of incomplete types as
+  @i{incomplete views} is new. Ada 95 defined these as separate types, but
+  neglected to give any rules for matching them with other types. Luckily,
+  implementers did the right thing anyway. This change also makes it easier to
+  describe the meaning of a limited view.]}
 @end{DiffWord95}
 
 

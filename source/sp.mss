@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2005/03/10 06:20:00 $ $Author: Randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2005/03/22 05:53:18 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/03/10 06:20:00 $}
+@Comment{$Date: 2005/03/22 05:53:18 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1846,15 +1846,7 @@ a nonexistent task, the execution of the program is erroneous.
   finalized (whichever is sooner).]}
 @end{Diffword95}
 
-@LabeledAddedSubClause{Version=[2],Name=[Task Termination Procedures]}
-
-@begin{Intro}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
-  @ChgAdded{Version=[2],Text=[@Redundant[This clause specifies a package for
-  associating protected procedures with a task. One such procedure is invoked
-  when the task is about to terminate.@Defn{termination handler}
-  @Defn2{Term=[task],Sec=[termination handler]}]]}
-@end{Intro}
+@LabeledAddedSubClause{Version=[2],Name=[The Package Task_Termination]}
 
 @begin{StaticSem}
 
@@ -1863,30 +1855,30 @@ a nonexistent task, the execution of the program is erroneous.
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key<with> System;
-@key<with> Ada.Task_Identification;
+@ChgAdded{Version=[2],Text=[@key<with> Ada.Task_Identification;
 @key<with> Ada.Exceptions;
-@key<package> Ada.Task_Termination @key<is>@ChildUnit{Parent=[Ada],Child=[Task_Termination]}]}
+@key<package> Ada.Task_Termination @key<is>@ChildUnit{Parent=[Ada],Child=[Task_Termination]}
+  @key<pragma> Preelaborate(Task_Termination);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @key<type> @AdaTypeDefn{Cause_Of_Termination} @key<is> (Normal, Abnormal, Unhandled_Exception);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Termination_Handler} @key<is access protected procedure>(
-      Cause : @key<in> Cause_Of_Termination;
-      T     : @key<in> Ada.Task_Identification.Task_Id;
-      X     : @key<in> Ada.Exceptions.Exception_Occurrence);]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Termination_Handler} @key<is access protected procedure>
+    (Cause : @key<in> Cause_Of_Termination;
+     T     : @key<in> Ada.Task_Identification.Task_Id;
+     X     : @key<in> Ada.Exceptions.Exception_Occurrence);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Dependents_Fallback_Handler}(
-      Handler: @key<in> Termination_Handler);
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Dependents_Fallback_Handler}
+    (Handler: @key<in> Termination_Handler);
   @key<function> @AdaSubDefn{Current_Task_Fallback_Handler} return Termination_Handler;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Specific_Handler}(
-      T           : @key<in> Ada.Task_Identification.Task_Id;
-      Handler     : @key<in> Termination_Handler);
-  @key<function> @AdaSubDefn{Specific_Handler}(T : Ada.Task_Identification.Task_Id)
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Specific_Handler}
+    (T       : @key<in> Ada.Task_Identification.Task_Id;
+     Handler : @key<in> Termination_Handler);
+  @key<function> @AdaSubDefn{Specific_Handler} (T : Ada.Task_Identification.Task_Id)
       @key<return> Termination_Handler;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1898,52 +1890,74 @@ language-defined library package exists:]}
 @begin{RunTime}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
-@ChgAdded{Version=[2],Text=[@Defn{fall-back handler}@Defn2{Term=[termination handler],Sec=[fall-back]}
-A call of Set_Dependents_Fallback_Handler
-sets the @i<fall-back handler>
-for all dependent tasks. If a fall-back handler had previously been
-set it is replaced. A call with a null access parameter is
-equivalent to removing the fall-back handler. A call of
-Current_Task_Fallback_Handler returns the fall-back handler that is currently
-in effect for the calling task. If no fall-back handler has been set
-it returns @key{null}.]}
+@ChgAdded{Version=[2],Text=[@Defn{termination handler}@Defn2{Term=[handler],Sec=[termination]}
+The type Termination_Handler identifies a protected
+procedure to be executed by the implementation when a task terminates. Such a
+protected procedure is called a @i<handler>. In all cases T identifies the task
+that is terminating. If the task terminates due to completing the last
+statement of its body, or as a result of waiting on a terminate alternative,
+then Cause is set to Normal and X is set to Null_Occurrence. If the task
+terminates because it is being aborted, then Cause is set to Abnormal and X is
+set to Null_Occurrence. If the task terminates because of an exception raised
+by the execution of its @nt{task_body}, then Cause is set to
+Unhandled_Exception and X is set to the associated exception occurrence.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
-@ChgAdded{Version=[2],Text=[A call of Set_Specific_Handler sets a specific
-handler for the task identified by T. If a specific handler had previously been
-set it is replaced. A call with a null access parameter is equivalent to
-removing the specific handler. A call of Specific_Handler returns the specific
-handler if one has been set, otherwise the handler it returns @key{null}.]}
+@ChgAdded{Version=[2],Text=[@Defn{fall-back handler}@Defn2{Term=[termination handler],Sec=[fall-back]}
+@Defn{specific handler}@Defn2{Term=[termination handler],Sec=[specific]}
+@Defn2{Term=[set],Sec=[termination handler]}
+@Defn2{Term=[cleared],Sec=[termination handler]}
+Each task has two termination handlers, a @i<fall-back handler> and a
+@i<specific handler>. The specific handler applies only to the task itself,
+while the fall-back handler applies only to the dependent tasks of the task.
+A handler is said to be @i<set> if it is associated
+with a non-null value of type Termination_Handler, and @i<cleared> otherwise.
+When a task is created, its specific handler and fall-back handler are cleared.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[The function Current_Task_Fallback_Handler returns
+the fall-back handler that is currently set for the calling task, if one is
+set; otherwise it returns @key{null}.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[The procedure Set_Specific_Handler changes the
+specific handler for the task identified by T; if Handler is @key{null}, that
+specific handler is cleared, otherwise it is set to be Handler.@key{all}. If a
+specific handler had previously been set it is replaced.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[The function Specific_Handler returns the specific
+handler that is currently set for the task identified by T, if one is set;
+otherwise it returns @key{null}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
 @ChgAdded{Version=[2],Text=[As part of the finalization of a @nt{task_body},
 after performing the actions specified in
 @RefSecNum{User-Defined Assignment and Finalization} for finalization of a
-master, the task specific handler, if not @key{null}, is called. If there is no such
-specific handler, a fall-back handler is determined by recursively searching
-for a non-null fall-back handler in the tasks upon which it depends. If such a
-fall-back handler is determined it is executed; otherwise no handler is
-executed.]}
+master, the task specific handler, if one is set, is executed.
+If the specific handler is cleared, a search
+for a fall-back handler proceeds by recursively following the master
+relationship for the task. If a task is found whose fall-back handler is set,
+that handler is executed; otherwise, no handler is executed.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
-@ChgAdded{Version=[2],Text=[If the task completed due to completing the last
-statement of the task body, or as a result of waiting on a terminate
-alternative then Cause is set to Normal and X is set to Null_Occurrence. If
-completion is due to abort then Cause is set to Abnormal and X is set to
-Null_Occurrence. If completion is due to an unhandled exception then Cause is
-set to Unhandled_Exception and X is set to the associated exception
-occurrence.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
-@ChgAdded{Version=[2],Text=[For all the operations defined in this package,
-Tasking_Error is raised if the task identified by T has already terminated.
-Program_Error is raised if the value of T is Null_Task_ID.]}
+@ChgAdded{Version=[2],Text=[For Set_Specific_Handler or
+Specific_Handler, Tasking_Error is raised if the task identified by T has
+already terminated. Program_Error is raised if the value of T is
+Ada.Task_Identification.Null_Task_Id.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
 @ChgAdded{Version=[2],Text=[An exception propagated from a handler that is
 invoked as part of the termination of a task has no effect.]}
 
 @end{RunTime}
+
+@begin{Erron}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[For a call of Set_Specific_Handler or
+Specific_Handler, if the task identified by T no longer exists, the execution
+of the program is erroneous.]}
+@end{Erron}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}

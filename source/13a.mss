@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/02/03 07:11:17 $}
+@Comment{$Date: 2005/03/22 05:53:16 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1588,6 +1588,13 @@ the expression of such a clause shall be static and its value nonnegative.
 @end{StaticSem}
 
 @begin{ImplAdvice}
+@ChgNote{Moved from 13.9}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00051-02]}
+@ChgAdded{Version=[2],Text=[The size of an array object should not include
+its bounds.]}
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The Size of an array object should not include its bounds.]}]}
+
 @Leading@PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
 The recommended level of support for the Size attribute
 of objects is:

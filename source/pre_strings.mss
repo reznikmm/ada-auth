@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2005/03/01 06:05:12 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2005/03/22 05:53:19 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/03/01 06:05:12 $}
+@Comment{$Date: 2005/03/22 05:53:19 $}
 
 @LabeledClause{String Handling}
 
@@ -359,8 +359,8 @@ itself.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Added @nt{pragma} Preelaborable_Initialization to
-  types Character_Set and Character_Mapping, so that they can be used in
-  preelaborated units.]}
+  types Character_Set and Character_Mapping, so that they can be used
+  to declare default-initialized objects in preelaborated units.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
   @ChgAdded{Version=[2],Text=[Strings.Maps is now Pure,
@@ -2233,7 +2233,8 @@ the package and several of the subprograms appears in the Rationale.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Added a @nt{pragma} Preelaborable_Initialization to
-  type Unbounded_String, so that it can be used in preelaborated units.]}
+  type Unbounded_String, so that it can be used to declare default-initialized
+  objects in preelaborated units.]}
 @end{Extend95}
 
 
@@ -2513,7 +2514,7 @@ any element outside the Character portion of Wide_Character.
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Added @nt{pragma} Preelaborable_Initialization to
   types Wide_Character_Set and Wide_Character_Mapping, so that they can be
-  used in preelaborated units.]}
+  used to declare default-initialized objects in preelaborated units.]}
 @end{Extend95}
 
 @begin{DiffWord95}

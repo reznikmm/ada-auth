@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/03/10 06:19:57 $}
+@Comment{$Date: 2005/03/22 05:53:15 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -887,7 +887,7 @@ then it doesn't hide anything,
 and you can't denote it.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06],ARef=[AI95-00412-01]}
 @PDefn2{Term=[hidden from all visibility], Sec=(by lack of a
 @nt{with_clause})}
 The declaration of a library unit
@@ -901,13 +901,15 @@ is hidden from all visibility at places that are not within the scope
 of a @nt{limited_with_clause} that mentions it; in addition, the limited view
 is hidden from all visibility within the declarative region of the package, as
 well as within the scope of any @nt{nonlimited_with_clause} that
-mentions it.],Old=[]}
-@Redundant[For each declaration or renaming of a generic unit as a child of
+mentions it. Where the declaration of the limited view of a
+package is visible, any name that denotes the package denotes the
+limited view, including those provided by a package renaming.],Old=[@Redundant[For
+each declaration or renaming of a generic unit as a child of
 some parent generic package, there is a corresponding declaration nested
 immediately within each instance of the parent.]
 Such a nested declaration is hidden from all visibility
 except at places that are
-within the scope of a @nt{with_clause} that mentions the child.
+within the scope of a @nt{with_clause} that mentions the child.]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
@@ -916,6 +918,16 @@ transitive; the [immediate] scope includes indirect semantic dependents.
 @Chg{Version=[2],New=[This rule also prevents the limited view of a package
 from being visible in the same place as the full view of the package.],Old=[]}
 @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00412-01]}@ChgNote{Just moved from above}
+@ChgAdded{Version=[2],Text=[@Redundant[For each
+declaration or renaming of a generic unit as a child of
+some parent generic package, there is a corresponding declaration nested
+immediately within each instance of the parent.]
+Such a nested declaration is hidden from all visibility
+except at places that are
+within the scope of a @nt{with_clause} that mentions the child.]}
+
 @end{Itemize}
 
 @leading@Defn{directly visible}
@@ -2010,14 +2022,39 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @RI{-- see @Ref
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
-The renamed entity shall
-be @Chg{Version=[2],New=[a nonlimited view of ],Old=[]}a package.
+The renamed entity shall be a package.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00412-01]}
+@ChgAdded{Version=[2],Text=[If the @SynI{package_}@nt{name} of a
+@nt{package_renaming_declaration} denotes a limited view of a package @i{P},
+then a name that denotes the @nt{package_renaming_declaration} shall occur
+only within the immediate scope of the renaming or the scope of a
+@nt{with_clause} that mentions the package @i{P} or (if @i{P} is a nested
+package) the nearest library package enclosing @i{P}.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[The use of a renaming that designates a limited
+  view is restricted to locations where we know whether the view is limited
+  or non-limited (based on a @nt{with_clause}). We don't want to make an
+  implicit limited view, as those are not transitive like a regular view.
+  Implementations should be able to see all limited views needed based on the
+  @nt{context_clause}.]}
+@end{Discussion}
 @end{Legality}
 
 @begin{StaticSem}
 A @nt{package_renaming_declaration} declares a new view
 @Redundant{of the renamed package}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00412-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[At places where the declaration of the
+limited view of the renamed package is visible, a @nt{name} that denotes the
+@nt{package_renaming_declaration} denotes a limited view of the package (see
+@RefSecNum{Compilation Units - Library Units}).]]}
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[This rule is found in @RefSec{Visibility}.]}
+@end{TheProof}
 @end{StaticSem}
 
 @begin{Examples}
@@ -2028,8 +2065,9 @@ A @nt{package_renaming_declaration} declares a new view
 @end{Examples}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@Chg{Version=[2],New=[Limited views of packages cannot be renamed.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06],ARef=[AI95-00412-01]}
+  @ChgAdded{Version=[2],Text=[Uses of renamed limited views of packages can
+  only be used within the scope of a with_clause for the renamed package.]}
 @end{DiffWord95}
 
 

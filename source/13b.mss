@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:05 $}
+@Comment{$Date: 2005/03/22 05:53:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.6 $}
+@Comment{$Revision: 1.7 $}
 
 @LabeledClause{The Package System}
 
@@ -17,10 +17,13 @@ characteristics.]
 @Leading@;The following language-defined library package exists:
 @ImplDef{The contents of the visible part of package System
 and its language-defined children.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[The contents of the visible part
+of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]}.]}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @RootLibUnit{System}
 @key[package] System @key[is]
-   @key{pragma} Preelaborate(System);
+   @key{pragma} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(System);
 
    @key[type] @AdaTypeDefn{Name} @key[is] @RI{implementation-defined-enumeration-type};
    @AdaDefn{System_Name} : @key[constant] Name := @RI{implementation-defined};
@@ -45,7 +48,9 @@ and its language-defined children.}
 
    --@RI{ Storage-related Declarations:}
 
-   @key[type] @AdaTypeDefn{Address} @key[is] @RI{implementation-defined};
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+   @key[type] @AdaTypeDefn{Address} @key[is] @RI{implementation-defined};@Chg{Version=[2],New=[
+   @key[pragma] Preelaborable_Initialization(Address);],Old=[]}
    @AdaDefn{Null_Address} : @key[constant] Address;
 
    @AdaDefn{Storage_Unit} : @key[constant] := @RI{implementation-defined};
@@ -64,9 +69,10 @@ and its language-defined children.}
    ... --@RI{ and so on for all language-defined subprograms in this package}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00221-01]}
    --@RI{ Other System-Dependent Declarations:}
    @key[type] @AdaTypeDefn{Bit_Order} @key[is] (High_Order_First, Low_Order_First);
-   @AdaDefn{Default_Bit_Order} : @key[constant] Bit_Order;
+   @AdaDefn{Default_Bit_Order} : @key[constant] Bit_Order@Chg{Version=[2],New=[ := @RI{implementation-defined}],Old=[]};
 
 
    --@RI{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
@@ -194,18 +200,21 @@ it is important to be able to assign addresses,
 and to declare uninitialized address variables.
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00221-01]}
 See @RefSecNum{Bit Ordering} for an explanation of Bit_Order and
-Default_Bit_Order.
+Default_Bit_Order.@Chg{Version=[2],New=[ Default_Bit_Order shall
+be a static constant.],Old=[]}
 @end{StaticSem}
 
 @begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 An implementation may add additional implementation-defined
 declarations to package System and its children.
 @Redundant[However, it is usually better
 for the implementation to provide
 additional functionality via implementation-defined
-children of System.]
-Package System may be declared pure.
+children of System.]@Chg{Version=[2],New=[],Old=[
+Package System may be declared pure.]}
 @begin{Ramification}
 The declarations in package System and its children can be implicit.
 For example, since Address is not limited,
@@ -286,13 +295,34 @@ Priority semantics, including subtype Priority,
 have been moved to the Real Time Annex.
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Added @nt{pragma} Preelaborable_Initialization to
+  type Address, so that it can be used to declare default-initialized objects
+  in preelaborated units.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[Package System is now Pure, so it can be
+  portably used in more places. (Ada 95 allowed it to be Pure, but did not
+  require that.)]}
+@end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00221-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that Default_Bit_Order is a static
+  constant.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{The Package System.Storage_Elements}
 
 @begin{StaticSem}
 @Leading@;The following language-defined library package exists:
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @ChildUnit{Parent=[System],Child=[Storage_Elements]}@key[package] System.Storage_Elements @key[is]
-   @key{pragma} Preelaborate(System.Storage_Elements);
+   @key{pragma} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(System.Storage_Elements);
 
    @key[type] @AdaTypeDefn{Storage_Offset} @key[is] @key[range] @RI(implementation-defined);
 
@@ -340,6 +370,10 @@ the attribute Access is not allowed for those operations.
 The @key(mod) function is needed so that the
 definition of Alignment makes sense.
 @end{Reason}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The range of Storage_Elements.Storage_Offset, the modulus of
+Storage_Elements.Storage_Element, and the declaration of
+Storage_Elements.Integer_Address.]}.]}
 
 Storage_Element represents a storage element.
 Storage_Offset represents an offset in storage elements.
@@ -354,9 +388,10 @@ Most Storage_Arrays will probably have a lower bound of 0 or 1,
 but other lower bounds, including negative ones,
 make sense in some situations.
 
-Note that there are some language-defined subprograms that fill part of
-a Storage_Array, and return the index of the last element filled as a
-Storage_Offset.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
+@ChgDeleted{Version=[2],Text=[Note that there are some language-defined
+subprograms that fill part of a Storage_Array, and return the index of the
+last element filled as a Storage_Offset.
 The Read procedures in
 Streams (see @RefSecNum{The Package Streams}),
 Streams.Stream_IO (see @RefSecNum{The Package Streams.Stream_IO}),
@@ -367,7 +402,7 @@ Storage_Offset.
 This implies that the Storage_Array passed to these subprograms should
 not have a lower bound of Storage_Offset'First,
 because then a read of 0 elements would always raise Constraint_Error.
-A better choice of lower bound is 1.
+A better choice of lower bound is 1.]}
 @end{Reason}
 
 Integer_Address is a @Redundant[(signed or modular)] integer subtype.
@@ -383,7 +418,9 @@ Storage_Offset'First shall be <= (@en@;Storage_Offset'Last).
 @end{ImplReq}
 
 @begin{ImplPerm}
-Package System.Storage_Elements may be declared pure.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00362-01]}
+@ChgDeleted{Version=[2],Text=[Package System.Storage_Elements may be declared
+pure.]}
 @end{ImplPerm}
 
 @begin{ImplAdvice}
@@ -425,6 +462,16 @@ segment/offset pair, and have a To_Address conversion that
 converts from that record type to type Address.
 @end{ImplNote}
 @end{ImplAdvice}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Package System.Storage_Elements is now Pure, so it can be
+  portably used in more places. (Ada 95 allowed it to be Pure, but did not
+  require that.)]}
+@end{Extend95}
+
+
 
 @LabeledSubClause{The Package System.Address_To_Access_Conversions}
 
@@ -733,12 +780,11 @@ which unchecked conversion doesn't make sense may be disallowed.
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-The Size of an array object should not include its bounds;
-hence, the bounds should not be part of the converted data.
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[The Size of an array object should not include its bounds.]}]}
-@Comment{The above advice belongs in 13.3; I've asked permission to move it,
-and replace the above by the below.}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02]}
+@Chg{Version=[2],New=[Since the],Old=[The]} Size of an array object
+@Chg{Version=[2],New=[generally does],Old=[should]} include its
+bounds@Chg{Version=[2],New=[],Old=[; hence]}, the bounds should not be part
+of the converted data.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Since the Size of an array object generally does not include its bounds,
 the bounds should not be part of the converted data in an instance of
@@ -787,6 +833,14 @@ whose component subtypes are described in this paragraph.
 Text=[The recommended level of support for Unchecked_Conversion should be
 followed.]}]}
 @end{ImplAdvice}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00051-02]}
+  @ChgAdded{Version=[2],Text=[The implementation advice about the size of
+  array objects was moved to 13.3 so that all of the advice about Size is
+  in one place.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Data Validity}
 
@@ -907,10 +961,18 @@ execution, or to other objects becoming abnormal.
 @end{Bounded}
 
 @begin{Erron}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01]}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
 A call to an imported function or an instance of Unchecked_Conversion is
-erroneous if the result is scalar, and the result object has an invalid
-representation.
+erroneous if the result is scalar, @Chg{Version=[2],New=[],Old=[and ]}the
+result object has an invalid representation@Chg{Version=[2],New=[, and
+the result is used other than as the @nt{expression} of
+an @nt{assignment_statement} or an @nt{object_declaration}, or as the
+@nt{prefix} of a Valid attribute. If such a result object is used as the source
+of an assignment, and the assigned value is an invalid representation for the
+target of the assignment, then any use of the target object prior to a further
+assignment to the target object, other than as the @nt{prefix} of a Valid
+attribute reference, is erroneous],Old=[]}.
 @begin{Ramification}
 In a typical implementation, every bit pattern that fits in an object of
 an integer subtype will represent a value of the type,
@@ -941,22 +1003,33 @@ This depends on out-of-range values being checked before
 assignment (that is, checks are not optimized away unless they
 are proven redundant).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01]}
 @Leading@;Consider the following example:
 @begin{Example}
 @key[type] My_Int @key[is] @key[range] 0..99;
 @key[function] Safe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Integer);
 @key[function] Unsafe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Positive);
 X : Positive := Safe_Convert(0); --@RI{ Raises Constraint_Error.}
-Y : Positive := Unsafe_Convert(0); --@RI{ Erroneous.}
+Y : Positive := Unsafe_Convert(0); --@Chg{Version=[2],New=[@RI{ Invalid.}
+B : Boolean := Y'Valid; --@RI{ OK, B = False.}
+Z : Position := Y; --@RI{ Erroneous to use Y.}],Old=[@RI{ Erroneous.}]}
+
 @end{Example}
 
-The call to Unsafe_Convert causes erroneous execution.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01]}
+The call to Unsafe_Convert causes erroneous execution@Chg{Version=[2],New=[ as
+soon as Y is used],Old=[]}.
 The call to Safe_Convert is not erroneous.
-The result object is an object of subtype Integer containing the
-value 0.
+The result object is an object of subtype Integer containing the value 0.
 The assignment to X is required to do a constraint check;
 the fact that the conversion is unchecked does not obviate the need for
 subsequent checks required by the language rules.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00167-01]}
+@ChgAdded{Version=[2],Text=[The reason for delaying erroneous execution until
+the object is used is so that the invalid representation can be tested
+for validity using the Valid attribute (see @RefSecNum{The Valid Attribute})
+without causing execution to become erroneous.]}
 @end{Ramification}
 @begin{ImplNote}
   If an implementation wants to have a @lquotes@;friendly@rquotes@; mode, it
@@ -1026,6 +1099,14 @@ reading an abnormal object is still erroneous.
 In fact, the only safe thing to do to an abnormal object is
 to assign to the object as a whole.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00167-01]}
+  @ChgAdded{Version=[2],Text=[The description of erroneous execution for
+  Unchecked_Conversion and imported objects was tightened up so that
+  using the Valid attribute to test such a value is not erroneous.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{The Valid Attribute}
 
@@ -1156,9 +1237,13 @@ parameter.
 
 There is no Unchecked_Access attribute for subprograms.
 @begin{Reason}
-  Such an attribute would allow @lquotes@;downward closures,@rquotes@;
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
+  Such an attribute would allow @Chg{Version=[2],New=[unstructured ],
+  Old=[]}@lquotes@;downward closures@rquotes@;,
   where an access value designating a more nested subprogram is passed
-  to a less nested subprogram.
+  to a less nested subprogram.@Chg{Version=[2],New=[ (Anonymous
+  access-to-subprogram parameters provide a structured
+  @lquotes@;downward closures@rquotes@;._],Old=[]}
   This requires some means of reconstructing the global environment for
   the more nested subprogram,
   so that it can do up-level references to objects.
@@ -1167,9 +1252,12 @@ There is no Unchecked_Access attribute for subprograms.
   If downward closures were supported,
   each access-to-subprogram value would have to carry the static link
   or display with it.
-  In the case of displays, this was judged to be infeasible,
+  @Chg{Version=[2],New=[We don't want to require the space and time
+  overhead of requiring the extra information, especially as including it
+  would make interfacing to other languages (like C) harder],Old=[In the case
+  of displays, this was judged to be infeasible,
   and we don't want to disrupt implementations by forcing them
-  to use static links if they already use displays.
+  to use static links if they already use displays]}.
 
   If desired, an instance of Unchecked_Conversion can be used to create
   an access value of a global access-to-subprogram type that
@@ -2278,7 +2366,32 @@ only if the end of the stream is reached.
 
 The Write operation appends Item to the specified stream.
 
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
+@ChgNote{This was moved from 13.7.1.}
+@ChgAdded{Version=[2],Text=[The index subtype of Stream_Element_Array is
+Stream_Element_Offset because we wish to allow maximum flexibility. Most
+Stream_Element_Arrays will probably have a lower bound of 0 or 1, but other
+lower bounds, including negative ones, make sense in some situations.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
+@ChgNote{This was moved from 13.7.1, where it was totally bogus.}
+@ChgAdded{Version=[2],Text=[Note that there are some language-defined
+subprograms that fill part of a Stream_Element_Array, and return the index of the
+last element filled as a Stream_Element_Offset. The Read procedures declared
+here, Streams.Stream_IO (see @RefSecNum{The Package Streams.Stream_IO}),
+and System.RPC (see @RefSecNum{Partition Communication Subsystem})
+behave in this manner.
+These will raise Constraint_Error if the resulting Last value is not in
+Stream_Element_Offset.
+This implies that the Stream_Element_Array passed to these subprograms should
+not have a lower bound of Stream_Element_Offset'First,
+because then a read of 0 elements would always raise Constraint_Error.
+A better choice of lower bound is 1.]}
+@end{Discussion}
+
 @end{StaticSem}
+
 @begin{ImplPerm}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0044],ARef=[AI95-00181-01]}
 @ChgAdded{Version=[1],Text=[If Stream_Element'Size is not a multiple of

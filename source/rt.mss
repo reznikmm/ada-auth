@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2005/03/18 06:37:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2005/03/22 05:53:18 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/18 06:37:23 $}
+@Comment{$Date: 2005/03/22 05:53:18 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1345,12 +1345,12 @@ language-defined library package exists:]}
   @AdaDefn{Default_Deadline} : @key{constant} Deadline :=
               Ada.Real_Time.Time_Last;
   @key{procedure} @AdaSubDefn{Set_Deadline} (D : @key{in} Deadline;
-              T : @key{in} Ada.Task_Identification.Task_ID :=
+              T : @key{in} Ada.Task_Identification.Task_Id :=
               Ada.Task_Identification.Current_Task);
   @key{procedure} @AdaSubDefn{Delay_Until_And_Set_Deadline} (
               Delay_Until_Time : @key{in} Ada.Real_Time.Time;
               Deadline_Offset : @key{in} Ada.Real_Time.Time_Span);
-  @key{function} @AdaSubDefn{Get_Deadline} (T : @key{in} Ada.Task_Identification.Task_ID :=
+  @key{function} @AdaSubDefn{Get_Deadline} (T : @key{in} Ada.Task_Identification.Task_Id :=
               Ada.Task_Identification.Current_Task) @key{return} Deadline;
 @key{end} Ada.Dispatching.EDF;]}
 @end{Example}
@@ -1506,7 +1506,7 @@ priority when it no longer inherits the higher level.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[For all the operations defined in this package,
 Tasking_Error is raised if the task identified by T has terminated.
-Program_Error is raised if the value of T is Null_Task_ID.]}
+Program_Error is raised if the value of T is Null_Task_Id.]}
 
 @end{RunTime}
 
@@ -1526,7 +1526,7 @@ object is assigned the value @i<Low>+1.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
-If a value of Task_ID is passed as a parameter to any of the subprograms
+If a value of Task_Id is passed as a parameter to any of the subprograms
 of this package and the corresponding task object no longer exists,
 the execution of the program is erroneous.]}
 
@@ -2587,8 +2587,50 @@ No_Dynamic_Priorities @\There are no semantic dependences on the package
                 of the attribute Priority],Old=[]}.
 @Defn2{Term=[Restrictions],Sec=(No_Dynamic_Priorities)}
 
-@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\There are no semantic dependences on the package
-                Asynchronous_Task_Control.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00305-01],ARef=[AI95-00394-01]}
+@Chg{Version=[2],New=[@Defn2{Term=[Restrictions],Sec=(No_Dynamic_Attachment)}No_Dynamic_Attachment],
+Old=[@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control]}
+    @\There
+    @Chg{Version=[2],New=[is no call to any of the operations defined
+    in package Ada.Interrupts (Is_Reserved, Is_Attached, Current_Handler,
+    Attach_Handler, Exchange_Handler, Detach_Handler, and Reference).],
+    Old=[are no semantic dependences on the package Asynchronous_Task_Control.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Local_Protected_Objects)}No_Local_Protected_Objects @\Protected
+   objects shall be declared only at library level.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Local_Timing_Events)}No_Local_Timing_Events @\Timing_Events
+   shall be declared only at library level.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Protected_Type_Allocators)}No_Protected_Type_Allocators @\There
+   are no @nt{allocator}s for protected types or types
+   containing protected subcomponents.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Relative_Delay)}No_Relative_Delay @\There
+   are no @nt{delay_relative_statement}s.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Requeue_Statements)}No_Requeue_Statements @\There
+   are no @nt{requeue_statement}s.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Select_Statements)}No_Select_Statements @\There
+   are no @nt{select_statement}s.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00394-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Specific_Termination_Handlers)}No_Specific_Termination_Handlers @\There
+  are no calls to the Set_Specific_Handler and Specific_Handler subprograms
+  in Ada.Task_Termination.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(Simple_Barriers)}Simple_Barriers @\The
+   Boolean expression in an entry barrier shall be either a static Boolean
+   expression or a Boolean component of the enclosing protected object.]}
+
 @end{Description}
 
 @Leading@;The following @SynI{restriction_parameter_}@nt{identifier}s are
@@ -2618,12 +2660,27 @@ Max_Protected_Entries @\Specifies the maximum number of entries per
 @begin{RunTime}
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0076],ARef=[AI95-00067-01]}
-@ChgDeleted{Version=[1],Text=[If the following restrictions are violated,
-the behavior is implementation defined.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following
+@SynI{restriction_}@nt{identifier}s are language defined:]}@Comment{Use ChgAdded so
+we get conditional Leading.}@Chg{Version=[1],New=[],Old=[If the following restrictions
+are violated, the behavior is implementation defined.
 @IndexCheck{Storage_Check}
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 If an implementation chooses to detect such a violation,
 Storage_Error should be raised.]}
+
+@begin{Description}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01],ARef=[AI95-00394-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Task_Termination)}No_Task_Termination @\All
+   tasks are non-terminating. It is implementation-defined what happens if
+   a task attempts to terminate. If there is a fall-back handler (see C.7.3)
+   set for the partition it should be called when the first task attempts to
+   terminate.]}
+@ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[When restriction No_Task_Termination applies to a partition, what
+  happens when a task terminates.]}]}
+@end{Description}
 
 @Leading@;The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
@@ -2637,6 +2694,8 @@ language defined:
   @IndexCheck{Storage_Check}
   @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
   otherwise, the behavior is implementation defined],Old=[]}.
+@ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The behavior when restriction Max_Storage_At_Blocking is violated.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076],ARef=[AI95-00067-01]}
 @Defn2{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies
@@ -2650,6 +2709,8 @@ language defined:
   @IndexCheck{Storage_Check}
   @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
   otherwise, the behavior is implementation defined],Old=[]}.
+@ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The behavior when restriction Max_Asynchronous_Select_Nesting is violated.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076],ARef=[AI95-00067-01]}
 @Defn2{Term=[Restrictions],Sec=(Max_Tasks)}Max_Tasks @\Specifies the maximum
@@ -2670,6 +2731,16 @@ language defined:
      We envision an implementation approach that places TCBs or pointers
      to them in a fixed-size table, and never reuses table elements.
   @end{ImplNote}
+@ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The behavior when restriction Max_Tasks is violated.]}]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
+Sec=(Max_Entry_Queue_Length)}Max_Entry_Queue_Length @\Max_Entry_Queue_Length
+  defines the maximum number of calls
+  that are queued on an entry. Violation of this restriction
+  results in the raising of Program_Error at the point of the
+  call.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @end{Description}
 
 It is implementation defined whether the use of pragma Restrictions
@@ -2678,7 +2749,7 @@ or execution time. If possible, the implementation should provide
 quantitative descriptions of such effects for each restriction.
 @ChgImplDef{Version=[2],Kind=[Revised],Text=[@Chg{Version=[2],
 New=[Whether the use of],Old=[Implementation-defined aspects of]}
-pragma Restrictions@Chg{Version=[2],New=[results in a reduction in
+pragma Restrictions@Chg{Version=[2],New=[ results in a reduction in
 program code or data size or execution time],Old=[]}.]}
 @end{RunTime}
 
@@ -2709,6 +2780,16 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   illegal under the restriction.]}
 @end{Incompatible95}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01],ARef=[AI95-00305-01],ARef=[AI95-00394-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Restrictions No_Dynamic_Attachment, No_Local_Protected_Objects,
+  No_Protected_Type_Allocators, No_Local_Timing_Events, No_Relative_Delay,
+  No_Requeue_Statement, No_Select_Statements, No_Specific_Termination_Handlers,
+  No_Task_Termination, Max_Entry_Queue_Length, and Simple_Barriers are newly
+  added to Ada.]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that
@@ -2722,6 +2803,10 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
   @ChgAdded{Version=[2],Text=[Added using of the new Priority attribute to
   the restriction No_Dynamic_Priorities.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
+  @ChgAdded{Version=[2],Text=[Restriction No_Asynchronous_Control is now
+  obsolscent.]}
 @end{DiffWord95}
 
 
@@ -2789,9 +2874,13 @@ monotonic clock package.]
   @key[function] @AdaSubDefn{To_Time_Span} (D : Duration) @key[return] Time_Span;
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
   @key[function] @AdaSubDefn{Nanoseconds}  (NS : Integer) @key{return} Time_Span;
   @key[function] @AdaSubDefn{Microseconds} (US : Integer) @key{return} Time_Span;
-  @key[function] @AdaSubDefn{Milliseconds} (MS : Integer) @key{return} Time_Span;
+  @key[function] @AdaSubDefn{Milliseconds} (MS : Integer) @key{return} Time_Span;@Chg{Version=[2],New=[
+  @key[function] @AdaSubDefn{Seconds}      (S  : Integer) @key{return} Time_Span;
+  @key[function] @AdaSubDefn{Minutes}      (M  : Integer) @key{return} Time_Span;],Old=[]}
+
 
   @key[type] @AdaTypeDefn{Seconds_Count} @key[is] @key[range] @RI{implementation-defined};
 
@@ -2895,24 +2984,29 @@ halfway between two exactly representable values).
 To_Duration(Time_Span_Zero) returns 0.0,
 and To_Time_Span(0.0) returns Time_Span_Zero.
 
-The functions Nanoseconds, Microseconds, and Milliseconds convert the input
-parameter to a value of the type Time_Span. NS, US,
-and MS are interpreted as a number of nanoseconds, microseconds, and
-milliseconds respectively.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+The functions Nanoseconds, Microseconds, @Chg{Version=[2],New=[],
+Old=[and ]}Milliseconds@Chg{Version=[2],New=[, Seconds, and Minutes],Old=[]}
+convert the input
+parameter to a value of the type Time_Span. NS, US,@Chg{Version=[2],New=[],Old=[ and]}
+MS@Chg{Version=[2],New=[, S, and M],Old=[]} are interpreted as a number of
+nanoseconds, microseconds,@Chg{Version=[2],New=[],Old=[ and]}
+milliseconds@Chg{Version=[2],New=[, seconds, and minutes],Old=[]} respectively.
 The result is rounded to the nearest exactly
 representable value (away from zero if exactly halfway between two exactly
 representable values).
 @begin{Discussion}
-The above does not imply that the Time_Span type will have to
-accommodate Integer'Last of milliseconds;
-Constraint_Error is allowed to be raised.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+  The above does not imply that the Time_Span type will have to
+  accommodate Integer'Last of @Chg{Version=[2],New=[minutes],Old=[milliseconds]};
+  Constraint_Error is allowed to be raised.
 @end{Discussion}
 
 The effects of the operators on Time and Time_Span are as for the
 operators defined for integer types.
 @begin{ImplNote}
-Though time values are modeled by integers, the types Time and
-Time_Span need not be implemented as integers.
+  Though time values are modeled by integers, the types Time and
+  Time_Span need not be implemented as integers.
 @end{ImplNote}
 
 The function Clock returns
@@ -3116,6 +3210,18 @@ There is no requirement that these be the same.
 
 @end{Notes}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00386-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Functions Seconds and Minutes are newly added to Real_Time. If
+  Real_Time is referenced in a @nt{use_clause}, and an entity @i<E> with a
+  @nt{defining_identifier} of Seconds or Minutes is defined in a package that
+  is also referenced in a @nt{use_clause}, the entity @i<E> may no longer be
+  use-visible, resulting in errors. This should be rare and is easily fixed if
+  it does occur.]}
+@end{Incompatible95}
+
+
 @LabeledClause{Delay Accuracy}
 
 @begin{Intro}
@@ -3241,6 +3347,7 @@ the rendezvous is immediately possible.
 
 @end{DiffWord83}
 
+
 @LabeledClause{Synchronous Task Control}
 
 @begin{Intro}
@@ -3254,7 +3361,9 @@ queues.]
 
 @Leading@;The following language-defined package exists:
 @begin{example}
-@key{package} Ada.Synchronous_Task_Control @key{is}@ChildUnit{Parent=[Ada],Child=[Synchronous_Task_Control]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
+@key{package} Ada.Synchronous_Task_Control @key{is}@ChildUnit{Parent=[Ada],Child=[Synchronous_Task_Control]}@Chg{Version=[2],New=[
+  @key[pragma] Preelaborate(Synchronous_Task_Control);],Old=[]}
 
   @key{type} @AdaTypeDefn{Suspension_Object} @key{is} @key{limited} @key{private};
   @key{procedure} @AdaSubDefn{Set_True}(S : @key{in} @key{out} Suspension_Object);
@@ -3321,6 +3430,15 @@ in the Interrupt_Priority range.
 
 @end{ImplReq}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Synchronous_Task_Control is now Preelaborated,
+  so it can be used in preelaborated units.]}
+@end{Extend95}
+
+
+
 @LabeledClause{Asynchronous Task Control}
 
 @begin{Intro}
@@ -3334,8 +3452,10 @@ It uses a conceptual @i{held priority} value to represent the task's
 
 @Leading@;The following language-defined library package exists:
 @begin{example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @key{with} Ada.Task_Identification;
-@key{package} Ada.Asynchronous_Task_Control @key{is}@ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}
+@key{package} Ada.Asynchronous_Task_Control @key{is}@ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}@Chg{Version=[2],New=[
+  @key[pragma] Preelaborate(Asynchronous_Task_Control);],Old=[]}
   @key{procedure} @AdaSubDefn{Hold}(T : @key[in] Ada.Task_Identification.Task_Id);
   @key{procedure} @AdaSubDefn{Continue}(T : @key[in] Ada.Task_Identification.Task_Id);
   @key{function} @AdaSubDefn{Is_Held}(T : Ada.Task_Identification.Task_Id)
@@ -3465,6 +3585,13 @@ whose barrier becomes open. The corresponding entry body executes.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected to eliminate the
   use of the undefined term @lquotes@;accept body@rquotes@;.]}
 @end{DiffWord95}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Asynchronous_Task_Control is now Preelaborated,
+  so it can be used in preelaborated units.]}
+@end{Extend95}
 
 
 @LabeledClause{Other Optimizations and Determinism Rules}

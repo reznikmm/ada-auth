@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2005/03/01 06:05:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2005/03/22 05:53:17 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/03/01 06:05:06 $}
+@Comment{$Date: 2005/03/22 05:53:17 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -164,7 +164,7 @@ library-level declaration,
 excepting a declaration of or within a declared-pure library unit]},
 the following attribute is defined:
 @begin{Description}
-@Attribute{Prefix=<D>, AttrName=<Partition_ID>,
+@Attribute{Prefix=<D>, AttrName=<Partition_Id>,
   Text=[Denotes a value of the type @i{universal_integer} that
          identifies the partition in which D was elaborated.
          If D denotes the declaration of a remote call interface
@@ -228,7 +228,7 @@ At compile time, only the relevant library unit properties are
 identified using categorization pragmas.
 
 
-The value returned by the Partition_ID attribute can be used as a
+The value returned by the Partition_Id attribute can be used as a
 parameter to implementation-provided subprograms in order
 to query information about the partition.
 
@@ -1587,7 +1587,7 @@ and its acronym are more familiar.
 @b(with) Ada.Streams; @RI{-- see @RefSecNum[The Package Streams]}
 @key(package) System.RPC @key(is)@ChildUnit{Parent=[System],Child=[RPC]}
 
-   @key(type) @AdaTypeDefn{Partition_ID} @key(is range) 0 .. @RI(implementation-defined);
+   @key(type) @AdaTypeDefn{Partition_Id} @key(is range) 0 .. @RI(implementation-defined);
 
    @AdaDefn{Communication_Error} : @key(exception);
 
@@ -1607,13 +1607,13 @@ and its acronym are more familiar.
 
    @RI(-- Synchronous call)
    @key(procedure) @AdaSubDefn{Do_RPC}(
-      Partition  : @key(in) Partition_ID;
+      Partition  : @key(in) Partition_Id;
       Params     : @key(access) Params_Stream_Type;
       Result     : @key(access) Params_Stream_Type);
 
    @RI(-- Asynchronous call)
    @key(procedure) @AdaSubDefn{Do_APC}(
-      Partition  : @key(in) Partition_ID;
+      Partition  : @key(in) Partition_Id;
       Params     : @key(access) Params_Stream_Type);
 
    @RI(-- The handler for incoming RPCs)
@@ -1622,7 +1622,7 @@ and its acronym are more familiar.
       Result     : @key(access) Params_Stream_Type);
 
    @key(procedure) @AdaSubDefn{Establish_RPC_Receiver}(
-      Partition : @key(in) Partition_ID;
+      Partition : @key(in) Partition_Id;
       Receiver  : @key(in) RPC_Receiver);
 
 @key[private]
@@ -1630,7 +1630,9 @@ and its acronym are more familiar.
 @b(end) System.RPC;
 @end{example}
 
-A value of the type Partition_ID is used to identify a partition.
+A value of the type Partition_Id is used to identify a partition.
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
+The range of type System.RPC.Partition_Id.]}]}
 
 An object of the type Params_Stream_Type is used for identifying
 the particular remote subprogram that is being called, as
@@ -1678,7 +1680,7 @@ the library units of an active partition
 (that is, right after the @i{elaboration of the partition}) if the partition
 includes an RCI library unit, but prior to invoking the main
 subprogram, if any.
-The Partition parameter is the Partition_ID of the active partition
+The Partition parameter is the Partition_Id of the active partition
 being elaborated.
 @Defn{RPC-receiver}
 The Receiver parameter designates an
