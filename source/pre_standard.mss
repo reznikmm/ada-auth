@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2005/01/29 07:15:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2005/02/09 00:00:20 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:15:07 $}
+@Comment{$Date: 2005/02/09 00:00:20 $}
 
 @LabeledClause{The Package Standard}
 
@@ -230,13 +230,23 @@ the visible part of package Standard.}
 
    --@RI{ The predefined operators for the type Character are the same as for}
    --@RI{ any enumeration type.}
-@Softpage@;@comment[blank line]
-   --@RI{ The declaration of type Wide_Character is based on the standard ISO 10646 BMP character set.}
+@Softpage@;
+
+@ChgRef{Version=[2],Kind=[Added]}@Comment{Odd missing paragraph number here}
+@Chg{Version=[2],New=[],Old=[@noparanum@;]}   --@RI{ The declaration of type Wide_Character is based on the standard ISO 10646 BMP character set.}
    --@RI{ The first 256 positions have the same contents as type Character. See @refsecnum[Character types].}
 @comment[blank line]
    @key[type] @AdaTypeDefn{Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[FFFE], @RI[FFFF]);
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[   -- @RI[The declaration of type Wide_Wide_Character is based on the full]
+   -- @RI[ISO/IEC 10646:2003 character set. The first 65536 positions have the]
+   -- @RI[same contents as type Wide_Character. See @refsecnum[Character types].]
 @comment[blank line]
-   @key[package] ASCII @key[is] ... @key[end] ASCII;  @RI{--Obsolescent; see @RefSecNum[ASCII]}
+   @key[type] Wide_Wide_Character @key[is] (@RI[nul], @RI[soh] ... @RI[FFFE], @RI[FFFF], ...);]}
+
+@ChgRef{Version=[2],Kind=[Added]}@Comment{Odd missing paragraph number here}
+@Chg{Version=[2],New=[],Old=[@noparanum@;]}   @key[package] ASCII @key[is] ... @key[end] ASCII;  @RI{--Obsolescent; see @RefSecNum[ASCII]}
 @Defn2{Term=[ASCII], Sec=(package physically nested within the declaration of Standard)}
 @comment[blank line]
 
@@ -266,6 +276,14 @@ the visible part of package Standard.}
 
    --@RI{ The predefined operators for this type correspond to those for String}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[    @key[type] Wide_Wide_String @key[is array] (Positive @key[range] <>)
+      @key[of] Wide_Wide_Character;
+   @key[pragma] Pack (Wide_Wide_String);]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[    -- @RI[The predefined operators for this type correspond to those for String.]]}
+
 
    @key[type] @AdaTypeDefn{Duration} @key[is] @key[delta] @RI{implementation-defined} @key[range] @RI{implementation-defined};
 
@@ -285,11 +303,14 @@ the visible part of package Standard.}
 
 Standard has no private part.
 @begin{Reason}
-This is important for portability. All library packages
-are children of Standard, and if Standard had a private part then
-it would be visible to all of them.@end{reason}
+  This is important for portability. All library packages
+  are children of Standard, and if Standard had a private part then
+  it would be visible to all of them.
+@end{reason}
 
-In each of the types Character and Wide_Character,
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+In each of the types Character@Chg{Version=[2],New=[,],Old=[ and]}
+Wide_Character@Chg{Version=[2],New=[, and Wide_Wide_Character],Old=[]},
 the character literals for the space character (position 32)
 and the non-breaking
 space character (position 160)
@@ -416,6 +437,18 @@ forward reference.
 There's no real need to move Positive, too @em it just came along for
 the ride.
 @end{DiffWord83}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Types Wide_Wide_Character and Wide_Wide_String are new.]}
+  @begin{Discussion}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[The inconsistencies associated with these
+    types are documented in @RefSecNum{Character Types} and
+    @RefSecNum{String Types}.]}
+  @end{Discussion}
+@end{Extend95}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}

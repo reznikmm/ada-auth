@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2005/02/08 06:35:37 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2005/02/09 00:00:20 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/02/08 06:35:37 $}
+@Comment{$Date: 2005/02/09 00:00:20 $}
 
 @LabeledClause{String Handling}
 
@@ -363,8 +363,8 @@ itself.
   preelaborated units.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Strings.Maps is now Pure, so it can be used in pure units.]}
+  @ChgAdded{Version=[2],Text=[Strings.Maps is now Pure,
+  so it can be used in pure units.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -695,10 +695,8 @@ the order in COBOL's MOVE verb.@end{reason}
                 From    : @key[in] Positive;
                 Going   : @key[in] Direction := Forward;
                 Mapping : @key[in] Maps.Character_Mapping := Maps.Identity)
-   @key[return] Natural;]}
-
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@key[function] Index (Source  : @key[in] String;
+   @key[return] Natural;@*
+@key[function] Index (Source  : @key[in] String;
                 Pattern : @key[in] String;
                 From    : @key[in] Positive;
                 Going   : @key[in] Direction := Forward;
@@ -746,7 +744,8 @@ string then Pattern_Error is propagated.]}
    @key[return] Natural;
 @end{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00301-01]}
-@ChgDeleted{Version=[2],Type=[Trailing],Text=[]}@Comment{Fake to hold conditional format.}
+@Comment{@ChgDeleted{Version=[2],Type=[Trailing],Text=[]}@Comment{Fake to hold conditional format.}Can't have both.}
+@ChgAdded{Version=[2],Type=[Leading],Text=[]}@Comment{Fake to hold conditional format.}
 @Chg{Version=[2],New=[If Going = Forward, returns],
 Old=[Each Index function searches for a slice of Source, with length
 Pattern'Length, that matches Pattern
@@ -765,7 +764,7 @@ the parameter Going indicates the direction of the lookup.
 @ChgAdded{Version=[2],Text=[      Index (Source, Pattern, Source'First, Forward, Mapping);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[otherwise returns]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[otherwise returns]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[      Index (Source, Pattern, Source'Last, Backward, Mapping);]}
@@ -805,7 +804,8 @@ if there is no such Character in Source.]}
    @key[return] Natural;
 @end{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00301-01]}
-@ChgDeleted{Version=[2],Type=[Trailing],Text=[]}@Comment{Fake to hold conditional format.}
+@Comment{@ChgDeleted{Version=[2],Type=[Trailing],Text=[]}@Comment{Fake to hold conditional format.}Can't have both.}
+@ChgAdded{Version=[2],Type=[Leading],Text=[]}@Comment{Fake to hold conditional format.}
 @Chg{Version=[2],New=[If Going = Forward, returns],
 Old=[Index searches for the first or last occurrence of any of a set of
 characters (when Test=Inside),
@@ -819,7 +819,7 @@ it returns 0 if there is no such Character in Source.]}
 @ChgAdded{Version=[2],Text=[      Index (Source, Set, Source'First, Test, Forward);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[otherwise returns]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[otherwise returns]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[      Index (Source, Set, Source'Last, Test, Backward);]}
