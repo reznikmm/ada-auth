@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:41 $}
+@Comment{$Date: 2000/08/05 04:53:23 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @redundant[This section describes features for
@@ -3100,14 +3100,13 @@ have been moved to the Real Time Annex.
 @begin{StaticSem}
 The following language-defined library package exists:
 @begin{Example}
-@ChildUnit{Parent=[System],Child=[Storage_Elements]}
-@key[package] System.Storage_Elements @key[is]
+@ChildUnit{Parent=[System],Child=[Storage_Elements]}@key[package] System.Storage_Elements @key[is]
    @key{pragma} Preelaborate(System.Storage_Elements);
 
 @LangDefType{Package=[System.Storage_Elements],Type=[Storage_Offset]}
    @key[type] Storage_Offset @key[is] @key[range] @RI(implementation-defined);
-@Defn2{Term=[Storage_Count], Sec=(subtype in package System.Storage_Elements)}
 
+@Defn2{Term=[Storage_Count], Sec=(subtype in package System.Storage_Elements)}
    @key[subtype] Storage_Count @key[is] Storage_Offset @key[range] 0..Storage_Offset'Last;
 
 
@@ -3140,8 +3139,8 @@ The following language-defined library package exists:
 
 @LangDefType{Package=[System.Storage_Elements],Type=[Integer_Address]}
    @key[type] Integer_Address @key[is] @RI{implementation-defined};
-   @key[function] To_Address(Value : Integer_Address) @key[return] Address;
-   @key[function] To_Integer(Value : Address) @key[return] Integer_Address;
+   @key[function] @AdaSubDefn{To_Address}(Value : Integer_Address) @key[return] Address;
+   @key[function] @AdaSubDefn{To_Integer}(Value : Address) @key[return] Integer_Address;
 
 
    @key[pragma] Convention(Intrinsic, "+");
@@ -3248,15 +3247,14 @@ converts from that record type to type Address.
 
 The following language-defined generic library package exists:
 @begin{Example}
-@ChildUnit{Parent=[System],Child=[Address_To_Access_Conversions]}
-@key[generic]
+@ChildUnit{Parent=[System],Child=[Address_To_Access_Conversions]}@key[generic]
     @key[type] Object(<>) @key[is] @key[limited] @key[private];
 @key[package] System.Address_To_Access_Conversions @key[is]
    @key[pragma] Preelaborate(Address_To_Access_Conversions);
 
    @key[type] Object_Pointer @key[is] @key[access] @key[all] Object;
-   @key[function] To_Pointer(Value : Address) @key[return] Object_Pointer;
-   @key[function] To_Address(Value : Object_Pointer) @key[return] Address;
+   @key[function] @AdaSubDefn{To_Pointer}(Value : Address) @key[return] Object_Pointer;
+   @key[function] @AdaSubDefn{To_Address}(Value : Object_Pointer) @key[return] Address;
 
    @key[pragma] Convention(Intrinsic, To_Pointer);
    @key[pragma] Convention(Intrinsic, To_Address);
@@ -3465,8 +3463,7 @@ The following language-defined generic library function exists:
 @key[generic]
    @key[type] Source(<>) @key[is] @key[limited] @key[private];
    @key[type] Target(<>) @key[is] @key[limited] @key[private];
-@ChildUnit{Parent=[Ada],Child=[Unchecked_Conversion]}
-@key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target;
+@ChildUnit{Parent=[Ada],Child=[Unchecked_Conversion]}@key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target;
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Conversion);
 @key[pragma] Pure(Ada.Unchecked_Conversion);
 @end{Example}
@@ -3492,10 +3489,8 @@ same as that of the source object S:
 @begin{Itemize}
 S'Size = Target'Size.
 @begin{Ramification}
-
 Note that there is no requirement that the Sizes be known at compile
 time.
-
 @end{Ramification}
 
 S'Alignment = Target'Alignment.
@@ -4041,31 +4036,32 @@ For the same reason, @lquotes@;specified@rquotes@; means the same thing as
 @end{Legality}
 
 @begin{StaticSem}
+@begin{Leading}
 The following language-defined library package exists:
+@end{Leading}
 @begin{Example}
 @key[with] Ada.Finalization;
 @key[with] System.Storage_Elements;
-@ChildUnit{Parent=[System],Child=[Storage_Pools]}
-@key[package] System.Storage_Pools @key[is]
+@ChildUnit{Parent=[System],Child=[Storage_Pools]}@key[package] System.Storage_Pools @key[is]
     @key{pragma} Preelaborate(System.Storage_Pools);
 
 @LangDefType{Package=[System.Storage_Pools],Type=[Root_Storage_Pool]}
     @key[type] Root_Storage_Pool @key[is]
         @key[abstract] @key[new] Ada.Finalization.Limited_Controlled @key[with] @key[private];
 
-    @key[procedure] Allocate(
+    @key[procedure] @AdaSubDefn{Allocate}(
       Pool : @key[in] @key[out] Root_Storage_Pool;
       Storage_Address : @key[out] Address;
       Size_In_Storage_Elements : @key[in] Storage_Elements.Storage_Count;
       Alignment : @key[in] Storage_Elements.Storage_Count) @key[is] @key[abstract];
 
-    @key[procedure] Deallocate(
+    @key[procedure] @AdaSubDefn{Deallocate}(
       Pool : @key[in] @key[out] Root_Storage_Pool;
       Storage_Address : @key[in] Address;
       Size_In_Storage_Elements : @key[in] Storage_Elements.Storage_Count;
       Alignment : @key[in] Storage_Elements.Storage_Count) @key[is] @key[abstract];
 
-    @key[function] Storage_Size(Pool : Root_Storage_Pool)
+    @key[function] @AdaSubDefn{Storage_Size}(Pool : Root_Storage_Pool)
         @key[return] Storage_Elements.Storage_Count @key[is] @key[abstract];
 
 @key[private]
@@ -4515,8 +4511,7 @@ The following language-defined generic library procedure exists:
 @key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
    @key[type] Name   @key[is] @key[access]  Object;
-@ChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}
-@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name);
+@ChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name);
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);
 @key[pragma] Preelaborate(Ada.Unchecked_Deallocation);
 @end{Example}
@@ -4945,8 +4940,7 @@ calls on the Read and Write procedures of the Root_Stream_Type.
 (User-defined T'Read and T'Write attributes can also make such calls,
 or can call the Read and Write attributes of other types.)
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Streams]}
-@key[package] Ada.Streams @key[is]
+@ChildUnit{Parent=[Ada],Child=[Streams]}@key[package] Ada.Streams @key[is]
     @key[pragma] Pure(Streams)@Defn{unpolluted};
 
 @LangDefType{Package=[Ada.Streams],Type=[Root_Stream_Type]}
@@ -4954,17 +4948,17 @@ or can call the Read and Write attributes of other types.)
 
     @key[type] Stream_Element @key[is] @key[mod] @RI{implementation-defined};
     @key[type] Stream_Element_Offset @key[is] @key[range] @RI{implementation-defined};
-    @key[subtype] Stream_Element_Count @key[is]
+    @key[subtype] @AdaDefn{Stream_Element_Count} @key[is]
         Stream_Element_Offset @key[range] 0..Stream_Element_Offset'Last;
     @key[type] Stream_Element_Array @key[is]
         @key[array](Stream_Element_Offset @key[range] <>) @key[of] Stream_Element;
 
-    @key[procedure] Read(
+    @key[procedure] @AdaSubDefn{Read}(
       Stream : @key[in] @key[out] Root_Stream_Type;
       Item   : @key[out] Stream_Element_Array;
       Last   : @key[out] Stream_Element_Offset) @key[is abstract];
 
-    @key[procedure] Write(
+    @key[procedure] @AdaSubDefn{Write}(
       Stream : @key[in] @key[out] Root_Stream_Type;
       Item   : @key[in] Stream_Element_Array) @key[is abstract];
 
@@ -5414,7 +5408,7 @@ code-generation for a nonstatic expression of type @i(T) too early,
 even if we can prove that that expression will be erroneous,
 or will raise an exception.
 
-Here's an example (modified from AI-00039, Example 3):
+Here's an example (modified from AI83-00039, Example 3):
 @begin{example}
 @key[type] T @key[is]
     @key[record]
@@ -5429,11 +5423,11 @@ Y : Boolean := G(F); --@RI{ doesn't force T in Ada 83}
     @key[end] @key[record];
 @end{example}
 
-AI-00039 says this is legal.
+AI83-00039 says this is legal.
 Of course, it raises Program_Error because the function bodies aren't
 elaborated yet.  A one-pass compiler has to generate code for an expression of
 type T before it knows the representation of T.
-Here's a similar example, which AI-00039 also says is legal:
+Here's a similar example, which AI83-00039 also says is legal:
 @begin{example}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[private];
@@ -5613,7 +5607,7 @@ representation.
 @end{Reason}
 @begin{Ramification}
 The following pathological example was legal in Ada 83,
-but is illegal in Ada 9X:
+but is illegal in Ada 95:
 @begin{Example}
 @key[package] P1 @key[is]
     @key[type] T @key[is] @key[private];

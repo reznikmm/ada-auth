@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:36 $}
+@Comment{$Date: 2000/08/05 04:53:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @LabeledClause{Array Types}
 
@@ -57,7 +57,7 @@ its type (the @i(index type)) shall be discrete.
 @begin{Discussion}
 @Defn2{Term=[index], Sec=(of an array)}
 An @i(index) is a discrete quantity used to select along a given
-dimension of an array.  A component is selected by specifying corresponding
+dimension of an array. A component is selected by specifying corresponding
 values for each of the indices.
 @end{Discussion}
 
@@ -89,12 +89,14 @@ be constrained does not help @em that rule
 prevents assignments to the component itself from doing any harm,
 but not assignments to the containing object.
 
+@begin{Leading}
 We allow this for components within limited types since assignment to
-the enclosing object is not a problem.  Furthermore, it is
+the enclosing object is not a problem. Furthermore, it is
 important to be able to use a default expression for a discriminant
 in arrays of limited components, since that is the only way
 to give the components different values for their discriminants.
 For example:
+@end{Leading}
 @begin{Example}
 @key[protected] @key[type] Counter_Type(Initial_Value : Integer := 1) @key[is]
    @key[procedure] Get_Next(Next_Value : @key[out] Integer);
@@ -142,7 +144,7 @@ the subtype of the components.
 The order of the indices is significant.
 
 A one-dimensional array has a distinct component for each possible index
-value.  A multidimensional array has a distinct component for each possible
+value. A multidimensional array has a distinct component for each possible
 sequence of index values that can be formed by selecting one value for
 each index position (in the given order).
 The possible values for a given index are all the values between the
@@ -198,9 +200,11 @@ of the index ranges.
   This is also true for Ada 83.
 @end{Discussion}
 
+@begin{Leading}
 The discrete subtype defined by a @nt{discrete_subtype_definition} is
 either that defined by the @nt{subtype_indication}, or a subtype
 determined by the @nt{range} as follows:
+@end{Leading}
 @begin(itemize)
   If the type of the @nt{range} resolves to @i(root_integer), then
   the @nt{discrete_subtype_definition} defines a subtype of the
@@ -234,7 +238,7 @@ then each component of the array is aliased
 (see @RefSecNum{Access Types}).
 @begin(Ramification)
   In this case, the nominal subtype cannot be an unconstrained
-  discriminated subtype.  See @RefSecNum{Record Types}.
+  discriminated subtype. See @RefSecNum{Record Types}.
 @end(Ramification)
 
 @end{StaticSem}
@@ -261,18 +265,20 @@ and the elaboration of the
 @end{RunTime}
 
 @begin{Notes}
-All components of an array have the same subtype.  In particular, for an array
+All components of an array have the same subtype. In particular, for an array
 of components that are one-dimensional arrays, this means that all components
 have the same bounds and hence the same length.
 
 Each elaboration of an @nt<array_type_definition> creates
-a distinct array type.  A consequence of this is that each
+a distinct array type. A consequence of this is that each
 object whose @nt<object_declaration> contains an @nt<array_type_definition>
 is of its own unique type.
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i(Examples of type declarations with unconstrained array definitions: )
+@end{Leading}
 @begin(Example)
 @key(type) Vector     @key(is) @key(array)(Integer  @key(range) <>) @key(of) Real;
 @key(type) Matrix     @key(is) @key(array)(Integer  @key(range) <>, Integer @key(range) <>) @key(of) Real;
@@ -280,14 +286,18 @@ is of its own unique type.
 @key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; @RI[-- see @RefSecNum(Character Types)]
 @end(Example)
 
+@begin{WideLeading}
 @i(Examples of type declarations with constrained array definitions: )
+@end{WideLeading}
 @begin(Example)
 @key(type) Table    @key(is) @key(array)(1 .. 10) @key(of) Integer;
 @key(type) Schedule @key(is) @key(array)(Day) @key(of) Boolean;
 @key(type) Line     @key(is) @key(array)(1 .. Max_Line_Size) @key(of) Character;
 @end(Example)
 
+@begin{WideLeading}
 @i(Examples of object declarations with array type definitions: )
+@end{WideLeading}
 @begin(Example)
 Grid : @key(array)(1 .. 80, 1 .. 100) @key(of) Boolean;
 Mix  : @key(array)(Color @key(range) Red .. Green) @key(of) Boolean;
@@ -305,20 +315,20 @@ the reserved word @key{aliased}.
 The syntax rules for @nt{unconstrained_array_definition} and
 @nt{constrained_array_definition} are modified to use
 @nt{component_definition} (instead of
-@i(component_)@nt{subtype_indication}).  The effect of this change is to allow
+@i(component_)@nt{subtype_indication}). The effect of this change is to allow
 the reserved word @key{aliased} before the
 component @nt{subtype_indication}.
 
 A @nt{range} in a @nt{discrete_subtype_definition}
 may use arbitrary
 universal expressions for each bound (e.g. @en@;1 .. 3+5), rather
-than strictly "implicitly convertible" operands.  The subtype
+than strictly "implicitly convertible" operands. The subtype
 defined will still be a subtype of Integer.
 @end{Extend83}
 
 @begin{DiffWord83}
 We introduce a new syntactic category, @nt{discrete_subtype_definition},
-as distinct from @nt{discrete_range}.  These two constructs have
+as distinct from @nt{discrete_range}. These two constructs have
 the same syntax, but their semantics
 are quite different (one defines a subtype, with
 a preference for Integer subtypes, while the
@@ -358,7 +368,7 @@ For an @nt{index_constraint},
 each @nt{discrete_range} shall resolve to be of the type of the
 corresponding index.
 @begin(Discussion)
-  In Ada 9X, @nt{index_constraint}s only appear in
+  In Ada 95, @nt{index_constraint}s only appear in
   a @nt{subtype_indication}; they no longer appear in
   @nt<constrained_array_definition>s.
 @end(Discussion)
@@ -419,11 +429,13 @@ Even if an array value does not satisfy the index constraint
 of an array subtype, Constraint_Error is not
 raised on conversion to the array subtype, so long as
 the length of each dimension of the array value and the
-array subtype match.  See @RefSecNum(Type Conversions).
+array subtype match. See @RefSecNum(Type Conversions).
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i(Examples of array declarations including an index constraint: )
+@end{Leading}
 @begin(Example)
 Board     : Matrix(1 .. 8,  1 .. 8);  @RI[--  see @RefSecNum(Array Types)]
 Rectangle : Matrix(1 .. 20, 1 .. 30);
@@ -432,12 +444,16 @@ Inverse   : Matrix(1 .. N,  1 .. N);  @RI[--  N need not be static ]
 Filter    : Bit_Vector(0 .. 31);
 @end(Example)
 
+@begin{WideLeading}
 @i(Example of array declaration with a constrained array subtype: )
+@end{WideLeading}
 @begin(Example)
 My_Schedule : Schedule;  @RI[--  all arrays of type Schedule have the same bounds]
 @end(Example)
 
+@begin{WideLeading}
 @i(Example of record type with a component that is an array: )
+@end{WideLeading}
 @begin(Example)
 @key(type) Var_Line(Length : Natural) @key(is)
    @key(record)
@@ -487,7 +503,7 @@ The following attributes are defined for
 a constrained array subtype}:
 @begin{Ramification}
 These attributes are not defined if A is a subtype-mark
-  for an access-to-array subtype.  They are defined (by implicit
+  for an access-to-array subtype. They are defined (by implicit
   dereference) for access-to-array values.@end{ramification}
 @begin(description)
 @Attribute{Prefix=<A>, AttrName=<First>,
@@ -535,11 +551,13 @@ instead (see @RefSec{Interfacing with Fortran}).
 @end{ImplAdvice}
 
 @begin{Notes}
+@begin{NotesLeading}
 The @nt<attribute_reference>s A'First and A'First(1) denote the same value.
 A similar relation exists for the @nt<attribute_reference>s A'Last,
-A'Range, and A'Length.  The following relation is satisfied (except
+A'Range, and A'Length. The following relation is satisfied (except
 for a null array) by the above attributes if the index type is an
 integer type:
+@end{NotesLeading}
 @begin(example)
 A'Length(N) = A'Last(N) - A'First(N) + 1
 @end(example)
@@ -552,7 +570,7 @@ The predefined operations of an array type include the
 membership tests, qualification, and explicit conversion.
 If the array type is not limited, they also include assignment
 and the predefined
-equality operators.  For a one-dimensional array type,
+equality operators. For a one-dimensional array type,
 they include the predefined concatenation operators (if nonlimited) and,
 if the component type is discrete, the predefined relational operators;
 if the component type is boolean, the predefined
@@ -567,7 +585,9 @@ a character type.
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i{Examples (using arrays declared in the examples of subclause @RefSecNum(Index Constraints and Discrete Ranges)):}
+@end{Leading}
 @begin(Example)
 --  Filter'First      =   0   Filter'Last       =  31   Filter'Length =  32
 --  Rectangle'Last(1) =  20   Rectangle'Last(2) =  30
@@ -582,15 +602,17 @@ a character type.
 A one-dimensional array type whose component type is a character type
 is called a @i(string) type.
 
+@begin{Leading}
 @redundant[There are two predefined string types, String and Wide_String,
 each indexed by values of the predefined subtype Positive;
-these are declared in the visible part of package Standard:
+these are declared in the visible part of package Standard:]
+@end{Leading}
 @begin(example)
-@key(subtype) Positive @key(is) Integer @key(range) 1 .. Integer'Last;
+@redundant[@key(subtype) Positive @key(is) Integer @key(range) 1 .. Integer'Last;
 
 @key(type) String @key(is) @key(array)(Positive @key(range) <>) @key(of) Character;
 @key(type) Wide_String @key(is) @key(array)(Positive @key(range) <>) @key(of) Wide_Character;
-@end(example)]
+]@end(example)
 @end{StaticSem}
 
 @begin{Notes}
@@ -607,15 +629,18 @@ these ordering operators correspond to lexicographic order
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i(Examples of string objects:)
+@end{Leading}
 @begin(Example)
+@TabClear()@TabSet(P50)
 Stars      : String(1 .. 120) := (1 .. 120 => '*' );
 Question   : @key(constant) String  := "How many characters?";
-                                               @RI[--  Question'First = 1, Question'Last = 20]
-                                               @RI[--  Question'Length = 20 (the number of characters)]
+@\@RI[-- Question'First = 1, Question'Last = 20]
+@\@RI[-- Question'Length = 20 (the number of characters)]
 
-Ask_Twice  : String  := Question & Question;   @RI[--  constrained to (1..40)]
-Ninety_Six : @key(constant) Roman   := "XCVI";      @RI[--  see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
+Ask_Twice  : String  := Question & Question;  @RI[-- constrained to (1..40)]
+Ninety_Six : @key(constant) Roman   := "XCVI";@\@RI[-- see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
 @end(Example)
 @end{Examples}
 
@@ -623,7 +648,7 @@ Ninety_Six : @key(constant) Roman   := "XCVI";      @RI[--  see @RefSecNum(Chara
 The declaration of Wide_String in Standard hides a use-visible
 declaration with the same @nt<defining_identifier>.
 In rare cases, this might result in an inconsistency between
-Ada 83 and Ada 9X.
+Ada 83 and Ada 95.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
@@ -675,7 +700,7 @@ all subtypes of such a partial view are indefinite subtypes.]
 @PDefn2{Term=[discriminants], Sec=(unknown)}
 A type, and all of its subtypes, have @i(unknown discriminants)
 when the number or names of the discriminants, if any, are unknown at
-the point of the type declaration.  A @nt<discriminant_part> of
+the point of the type declaration. A @nt<discriminant_part> of
 (<>) is used to indicate unknown discriminants.
 @end{Discussion}
 @end{Intro}
@@ -735,7 +760,7 @@ and is of an anonymous general access-to-variable type
 whose designated subtype is
 denoted by the @nt<subtype_mark> of the @nt<access_definition>.
 @begin(Reason)
-  In an earlier version of Ada 9X,
+  In an early version of Ada 9X,
   we allowed access discriminants on nonlimited types,
   but this created unpleasant complexities.
   It turned out to be simpler and more uniform to allow discriminants
@@ -770,7 +795,9 @@ instance of a generic unit.
   This is important to avoid dangling references to local variables.
 @end{Ramification}
 @begin{Reason}
+  @begin{Leading}
   We also considered the following rules:
+  @end{Leading}
   @begin{Itemize}
     If a type has an access discriminant,
     this automatically makes it limited,
@@ -801,9 +828,9 @@ type @Redundant[or a generic formal type].
 @begin(Reason)
   The all-or-none rule
   is related to the rule that a discriminant constraint shall specify
-  values for all discriminants.  One could imagine a different rule
+  values for all discriminants. One could imagine a different rule
   that allowed a constraint to specify only some of the discriminants,
-  with the others provided by default.  Having defaults for discriminants
+  with the others provided by default. Having defaults for discriminants
   has a special significance @em it allows objects of the type to
   be unconstrained, with the discriminants alterable as part of
   assigning to the object.
@@ -815,14 +842,16 @@ type @Redundant[or a generic formal type].
   or by its initial discriminant values.
   This substantially simplifies the semantic rules
   and the implementation of inherited
-  dispatching operations.  For generic formal types,
+  dispatching operations. For generic formal types,
   the restriction simplifies the type matching rules.
   If one simply wants a "default" value for the discriminants,
   a constrained subtype can be declared for future use.
 @end(Reason)
 
+@begin{Leading}
 For a type defined by a @nt<derived_type_definition>,
 if a @nt<known_discriminant_part> is provided in its declaration, then:
+@end{Leading}
 @begin{Itemize}
 The parent subtype shall be constrained;
 
@@ -877,7 +906,7 @@ the parent discriminant and the discriminant of the derived type are said
 to @i(correspond).
 Two discriminants also correspond
 if there is some common discriminant to which they
-both correspond.  A discriminant corresponds to itself
+both correspond. A discriminant corresponds to itself
 as well.
 @Defn{specified discriminant}
 If a discriminant of a parent type is constrained to a specific value
@@ -887,7 +916,7 @@ by that @nt<derived_type_definition>.
 @begin{Ramification}
 
   The correspondence relationship is transitive, symmetric,
-  and reflexive.  That is,
+  and reflexive. That is,
   if A corresponds to B, and B corresponds to C, then
   A, B, and C each corresponds to A, B, and C in all combinations.@end{ramification}
 
@@ -903,12 +932,14 @@ that corresponds to it.
 @begin(Ramification)
   A @nt{constraint} in a @nt{task_body} is not considered to
   @i(depend) on a discriminant of the task type, even if it
-  names it.  It is only the @nt<constraint>s in the type definition
-  itself that are considered dependents.  Similarly for protected types.
+  names it. It is only the @nt<constraint>s in the type definition
+  itself that are considered dependents. Similarly for protected types.
 @end(Ramification)
 
+@begin{Leading}
 @Defn2{Term=[depend on a discriminant], Sec=(for a component)}
 A component @i(depends on a discriminant) if:
+@end{Leading}
 @begin(itemize)
   Its @nt{component_definition} depends on the discriminant; or
   @begin{Ramification}
@@ -941,10 +972,10 @@ A component does @i(not) depend on a discriminant just because
   certain discriminant-changing assignments are erroneous.
   The goal is to allow implementations to move around or change the size
   of discriminant-dependent subcomponents upon a discriminant-changing
-  assignment to an enclosing object.  The above definition specifies that
+  assignment to an enclosing object. The above definition specifies that
   all subcomponents of a discriminant-dependent component or parent part
   are themselves discriminant-dependent, even though their presence
-  or size does not in fact depend on a discriminant.  This is because
+  or size does not in fact depend on a discriminant. This is because
   it is likely that they will move in a discriminant-changing assignment
   if they are a component of one of several discriminant-dependent
   parts of the same record.
@@ -954,13 +985,13 @@ Each value of a discriminated type includes a value for
 each component
 of the type that does not depend
 on a discriminant@Redundant[; this includes the discriminants
-themselves].  The values
+themselves]. The values
 of discriminants determine which other component values are present
 in the value of the discriminated type.
 @begin{Honest}
 Which values are present might depend on discriminants of
   some ancestor type that are constrained in an intervening
-  @nt<derived_type_definition>.  That's why we say "values of discriminants"
+  @nt<derived_type_definition>. That's why we say "values of discriminants"
   instead of "values of @i(the) discriminants" @em a subtle point.@end{honest}
 
 @Defn{known discriminants}
@@ -992,7 +1023,7 @@ and @RefSecNum{Objects and Named Numbers}).]
   types can have unknown discriminants.
   An @nt<unknown_discriminant_part> is used to indicate that the corresponding
   actual or full type might have discriminants without defaults,
-  or be an unconstrained array subtype.  Tagged class-wide types
+  or be an unconstrained array subtype. Tagged class-wide types
   are also considered to have unknown discriminants because discriminants
   can be added by type extensions, so the total number of
   discriminants of any given value of a tagged class-wide type
@@ -1000,10 +1031,10 @@ and @RefSecNum{Objects and Named Numbers}).]
 
   A subtype with unknown discriminants
   is indefinite, and hence an object of such a subtype needs
-  explicit initialization.  If the subtype is limited, no (stand-alone) objects
+  explicit initialization. If the subtype is limited, no (stand-alone) objects
   can be declared since initialization is not permitted (though
   formal parameters are permitted, and objects of the actual/full type
-  will generally be declarable).  A limited private type with
+  will generally be declarable). A limited private type with
   unknown discriminants
   is @lquotes@;extremely@rquotes@; limited; such a type is useful for keeping complete control
   over object creation within the package declaring the type.
@@ -1020,7 +1051,7 @@ elaborated when the value of a corresponding access discriminant is defined,
 either by evaluation of its @nt<default_expression> or by
 elaboration of a @nt<discriminant_constraint>.
 @Redundant[The elaboration of an @nt<access_definition> creates the
-anonymous access type.  When the expression defining the
+anonymous access type. When the expression defining the
 access discriminant is evaluated, it is converted to this
 anonymous access type (see @RefSecNum{Type Conversions}).]
 @PDefn2{Term=[implicit subtype conversion],Sec=(access discriminant)}
@@ -1047,7 +1078,7 @@ constraint or by their initial value; the values of the discriminants
 of such a variable cannot be changed after initialization.
 @begin(Discussion)
   This connection between discriminant defaults and unconstrained variables
-  can be a source of confusion.  For Ada 9X, we considered various
+  can be a source of confusion. For Ada 95, we considered various
   ways to break the connection between defaults and unconstrainedness,
   but ultimately gave up for lack of a sufficiently simple and intuitive
   alternative.
@@ -1068,7 +1099,7 @@ of such a variable cannot be changed after initialization.
   Mutable tags would also require a way for the
   maximum possible size of such a class-wide subtype to be known.
   (In some implementations, all mutable variables are allocated
-  with the maximum possible size.  This approach is appropriate
+  with the maximum possible size. This approach is appropriate
   for real-time applications where implicit use of the heap
   is inappropriate.)
 
@@ -1102,7 +1133,7 @@ Note that (<>) allows unconstrained array bounds;
 those are somewhat like undefaulted discriminants.
 
 For a derived type, either the discriminants are inherited as is,
-or completely respecified in a new @nt<discriminant_part>.  In this
+or completely respecified in a new @nt<discriminant_part>. In this
 latter case, each discriminant of the parent type shall be constrained,
 either to a specific value, or to equal one of the new discriminants.
 Constraining a parent type's discriminant to equal one of the new
@@ -1119,7 +1150,9 @@ used only for discriminants defined by an @nt<access_definition>.
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i(Examples of discriminated types:)
+@end{Leading}
 @begin(Example)
 @key(type) Buffer(Size : Buffer_Size := 100)  @key(is)        @RI[-- see @RefSecNum(Integer Types)]
    @key(record)
@@ -1260,10 +1293,9 @@ discriminated subtype if each discriminant value belongs to the
 subtype of the corresponding discriminant.
 @begin{Ramification}
 The "dependent
-  compatibility check" has been eliminated in Ada 9X.  Any checking
+  compatibility check" has been eliminated in Ada 95. Any checking
   on subcomponents is performed when (and if) an object is created.@end{ramification}
 @begin{Discussion}
-
   There is no need to define compatibility with a constrained
   discriminated subtype, because one is not allowed to constrain it again.@end{discussion}
 
@@ -1307,7 +1339,9 @@ in extensions that are not constrained to any particular value.
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i{Examples (using types declared above in clause @RefSecNum(Discriminants)):}
+@end{Leading}
 @begin(Example)
 Large   : Buffer(200);  @RI[--  constrained, always 200 characters]
                         @RI[--   (explicit discriminant value)]
@@ -1320,7 +1354,7 @@ Illegal : Square;       @RI[--  illegal, a Square has to be constrained]
 
 @begin{Inconsistent83}
 Dependent compatibility checks are no longer performed on
-subtype declaration.  Instead they are deferred until
+subtype declaration. Instead they are deferred until
 object creation (see @RefSecNum(Object Declarations)).
 This is upward compatible for a program
 that does not raise Constraint_Error.
@@ -1329,8 +1363,8 @@ that does not raise Constraint_Error.
 @begin{DiffWord83}
 Everything in RM83-3.7.2(7-12), which specifies the
 initial values for discriminants, is now redundant
-with 3.3.1, 6.4.1, 8.5.1, and 12.4.  Therefore, we don't
-repeat it here.  Since the material is largely intuitive,
+with 3.3.1, 6.4.1, 8.5.1, and 12.4. Therefore, we don't
+repeat it here. Since the material is largely intuitive,
 but nevertheless complicated to state formally, it doesn't
 seem worth putting it in a "NOTE."
 @end{DiffWord83}
@@ -1341,7 +1375,7 @@ seem worth putting it in a "NOTE."
 @Redundant[If a discriminated type has @nt<default_expression>s for its
 discriminants, then unconstrained variables of the type are permitted,
 and the discriminants of such a variable can be changed by assignment to
-the variable.  For a formal parameter of such a type, an attribute
+the variable. For a formal parameter of such a type, an attribute
 is provided to determine whether the corresponding actual parameter
 is constrained or unconstrained.]
 @end{Intro}
@@ -1361,7 +1395,7 @@ the following attribute is defined:
  The Constrained attribute is statically True for @key(in) parameters.
  For @key(in out) and @key(out) parameters of a discriminated type,
  the value of this attribute needs to be passed as an implicit
- parameter, in general.  However, if the type does not have
+ parameter, in general. However, if the type does not have
  defaults for its discriminants, the attribute is statically True,
  so no implicit parameter is needed.
  Parameters of a limited type
@@ -1387,7 +1421,7 @@ execution) of the subcomponent denoted by the @nt<name>.
   calls (except when the discriminant-dependent subcomponent is
   an @key(in) parameter passed by copy),
   @nt<indexed_component>s, and @nt<slice>s.
-  Ada 83 only covered the first two cases.  AI-00585 pointed out
+  Ada 83 only covered the first two cases. AI83-00585 pointed out
   the situation with the last two cases.
   The cases of @nt<object_renaming_declaration>s and
   generic formal @key(in out) objects are handled differently,
@@ -1399,14 +1433,14 @@ execution) of the subcomponent denoted by the @nt<name>.
 For consistency with other attributes, we are allowing
 the prefix of Constrained to be a value as well as
 an object of a discriminated type, and also an implicit
-dereference.  These extensions are
+dereference. These extensions are
 not important capabilities, but there seems no
 reason to make this attribute different from
-other similar attributes.  We are curious what most
+other similar attributes. We are curious what most
 Ada 83 compilers do with F(1).X'Constrained.
 
 We now handle in a general way
-the cases of erroneousness identified by AI-585, where
+the cases of erroneousness identified by AI83-00585, where
 the @nt<prefix> of an @nt<indexed_component> or @nt<slice>
 is discriminant-dependent, and the evaluation of the index or
 discrete range changes the value of a discriminant.
@@ -1415,7 +1449,7 @@ discrete range changes the value of a discriminant.
 @begin{DiffWord83}
 We have moved all discussion of erroneous use of @nt<name>s
 that denote discriminant-dependent
-subcomponents to this subclause.  In Ada 83, it used to
+subcomponents to this subclause. In Ada 83, it used to
 appear separately under @nt{assignment_statement}s and
 subprogram calls.
 @end{DiffWord83}
@@ -1464,7 +1498,7 @@ of a limited type.
 
 @PDefn2{Term=[components], Sec=(of a record type)}
 Each @nt<component_declaration> declares a @i(component) of the
-record type.  Besides components declared by @nt<component_declaration>s,
+record type. Besides components declared by @nt<component_declaration>s,
 the components of a record type include any components declared by
 @nt<discriminant_specification>s of the record type declaration.
 @Redundant[The identifiers of all components of a record type shall
@@ -1473,7 +1507,7 @@ be distinct.]
 The identifiers of all
   components of a record type have to
   be distinct because they are all declared immediately
-  within the same declarative region.  See Section 8.@end{theproof}
+  within the same declarative region. See Section 8.@end{theproof}
 
 
 Within a @nt{type_declaration},
@@ -1596,7 +1630,7 @@ elaboration of the @nt{component_definition}.
   If the @nt<defining_identifier_list> has more than one
   @nt<defining_identifier>, we presume here that the transformation
   explained in @RefSecNum(Object Declarations) has already
-  taken place.  Alternatively, we could say that
+  taken place. Alternatively, we could say that
   the @nt<component_definition> is elaborated once for
   each @nt<defining_identifier> in the list.
 @end(Discussion)
@@ -1656,7 +1690,7 @@ limited (see @RefSecNum{Limited Types}).
 
 @PDefn2{Term=[predefined operations],Sec=(of a record type)}
 The predefined operations of a record type include membership
-tests, qualification, and explicit conversion.  If the
+tests, qualification, and explicit conversion. If the
 record type is nonlimited, they also include
 assignment and the predefined equality operators.
 
@@ -1667,7 +1701,9 @@ unless the record type is limited.
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i(Examples of record type declarations: )
+@end{Leading}
 @begin(Example)
 @key(type) Date @key(is)
    @key(record)
@@ -1683,7 +1719,9 @@ unless the record type is limited.
    @key(end) @key(record);
 @end(Example)
 
+@begin{WideLeading}
 @i(Examples of record variables: )
+@end{WideLeading}
 @begin(Example)
 Tomorrow, Yesterday : Date;
 A, B, C : Complex;
@@ -1695,7 +1733,7 @@ A, B, C : Complex;
 @begin{Extend83}
 The syntax rule for @nt<component_declaration> is modified
 to use @nt<component_definition> (instead of
-@nt<component_subtype_definition>).  The effect of this change
+@nt<component_subtype_definition>). The effect of this change
 is to allow the reserved word @key(aliased) before the
 @nt<component_subtype_definition>.
 
@@ -1730,7 +1768,7 @@ to be as similar as possible.
 
 @begin{Intro}
 A record type with a @nt<variant_part> specifies alternative
-lists of components.  Each @nt<variant> defines the components
+lists of components. Each @nt<variant> defines the components
 for the value or values of the discriminant
 covered by its @nt<discrete_choice_list>.
 @begin{Discussion}
@@ -1738,7 +1776,7 @@ covered by its @nt<discrete_choice_list>.
 @nt{Discrete_choice_list}s and @nt{discrete_choice}s are
 said to @i(cover) values as defined below; which
 @nt{discrete_choice_list} covers a value determines
-which of various alternatives is chosen.  These are used
+which of various alternatives is chosen. These are used
 in @nt{variant_part}s, @nt{array_aggregate}s, and
 @nt{case_statement}s.
 @end{Discussion}
@@ -1803,9 +1841,11 @@ The @nt{discrete_choice} @key(others) shall appear alone
 in a @nt{discrete_choice_list}, and such a @nt{discrete_choice_list},
 if it appears, shall be the last one in the enclosing construct.
 
+@begin{Leading}
 @PDefn2{Term=[cover a value], Sec=(by a @nt{discrete_choice})}
 A @nt<discrete_choice> is defined to @i(cover a value) in the
 following cases:
+@end{Leading}
 @begin(itemize)
   A @nt{discrete_choice} that is an @nt{expression} covers a value if
   the value equals the value of the @nt{expression}
@@ -1832,8 +1872,10 @@ following cases:
 A @nt{discrete_choice_list} covers a value if one of
 its @nt{discrete_choice}s covers the value.
 
+@begin{Leading}
 The possible values of the discriminant of a @nt{variant_part}
 shall be covered as follows:
+@end{Leading}
 @begin{itemize}
   If the discriminant is of a static constrained scalar subtype,
   then each non-@key{others} @nt{discrete_choice} shall cover only values in
@@ -1865,7 +1907,7 @@ the variant has no components.
 @Defn{govern a @nt{variant_part}}
 @Defn{govern a @nt{variant}}
 The discriminant of a @nt<variant_part> is said to @i(govern) the
-@nt<variant_part> and its @nt<variant>s.  In addition,
+@nt<variant_part> and its @nt<variant>s. In addition,
 the discriminant of a derived
 type governs a @nt<variant_part> and its @nt<variant>s if it
 corresponds (see @RefSecNum(Discriminants)) to the
@@ -1888,7 +1930,9 @@ of the elaboration of the @nt{component_list} of each
 @end{RunTime}
 
 @begin{Examples}
+@begin{Leading}
 @i(Example of record type with a variant part: )
+@end{Leading}
 @begin(Example)
 @key(type) Device @key(is) (Printer, Disk, Drum);
 @key(type) State  @key(is) (Open, Closed);
@@ -1906,13 +1950,17 @@ of the elaboration of the @nt{component_list} of each
       @key(end) @key(record);
 @end(Example)
 
+@begin{WideLeading}
 @i(Examples of record subtypes:)
+@end{WideLeading}
 @begin(Example)
 @key(subtype) Drum_Unit @key(is) Peripheral(Drum);
 @key(subtype) Disk_Unit @key(is) Peripheral(Disk);
 @end(Example)
 
+@begin{WideLeading}
 @i(Examples of constrained record variables:)
+@end{WideLeading}
 @begin(Example)
 Writer   : Peripheral(Unit  => Printer);
 Archive  : Disk_Unit;
@@ -1922,7 +1970,7 @@ Archive  : Disk_Unit;
 @begin{Extend83}
 In Ada 83, the discriminant of a @nt{variant_part} is not allowed to
 be of a generic formal type.
-This restriction is removed in Ada 9X; an @key{others} @nt{discrete_choice}
+This restriction is removed in Ada 95; an @key{others} @nt{discrete_choice}
 is required in this case.
 @end{Extend83}
 
@@ -1965,8 +2013,8 @@ inheritance with extension and run-time polymorphism via
 @begin{MetaRules}
 The intended implementation model is for a tag to be represented as a
 pointer to a statically allocated and link-time initialized type
-descriptor.  The type descriptor contains the address of the code for
-each primitive operation of the type.  It probably also contains
+descriptor. The type descriptor contains the address of the code for
+each primitive operation of the type. It probably also contains
 other information, such as might make membership tests convenient and
 efficient.
 
@@ -1979,15 +2027,15 @@ Other implementation models are possible.
 
 The rules ensure that @lquotes@;dangling dispatching@rquotes@; is impossible;
 that is, when a dispatching call is made, there is always a body to
-execute.  This is different from some other object-oriented
+execute. This is different from some other object-oriented
 languages, such as Smalltalk, where it is possible to get a run-time
 error from a missing method.
 
 Dispatching calls should be efficient, and should have a bounded
-worst-case execution time.  This is important in a language intended
-for real-time applications.  In the intended implementation model, a
+worst-case execution time. This is important in a language intended
+for real-time applications. In the intended implementation model, a
 dispatching call involves calling indirect through the appropriate
-slot in the dispatch table.  No complicated "method lookup" is
+slot in the dispatch table. No complicated "method lookup" is
 involved.
 
 The programmer should have the choice at each call site of a
@@ -1997,7 +2045,7 @@ determined at run time or at compile time).
 
 The same body should be executed for a call where the tag is
 statically determined to be T'Tag as for a dispatching call where the
-tag is found at run time to be T'Tag.  This allows one to test a
+tag is found at run time to be T'Tag. This allows one to test a
 given tagged type with statically determined calls, with some
 confidence that run-time dispatching will produce the same behavior.
 
@@ -2007,8 +2055,8 @@ same tag.
 The visibility rules determine what is legal at compile time; they
 have nothing to do with what bodies can be executed at run time.
 Thus, it is possible to dispatch to a subprogram whose declaration is
-not visible at the call site.  In fact, this is one of the primary
-facts that gives object-oriented programming its power.  The
+not visible at the call site. In fact, this is one of the primary
+facts that gives object-oriented programming its power. The
 subprogram that ends up being dispatched to by a given call might
 even be designed long after the call site has been coded and
 compiled.
@@ -2019,9 +2067,9 @@ profiles of the operations.
 
 When a type extension is declared, if there is any place within its
 immediate scope where a certain subprogram of the parent is visible,
-then a matching subprogram should override.  If there is no such
+then a matching subprogram should override. If there is no such
 place, then a matching subprogram should be totally unrelated, and
-occupy a different slot in the type descriptor.  This is important to
+occupy a different slot in the type descriptor. This is important to
 preserve the privacy of private parts; when an operation declared in
 a private part is inherited, the inherited version can be overridden
 only in that private part, in the package body, and in any children
@@ -2117,26 +2165,27 @@ of the generic body result in distinct tags.
 
   The language does not specify whether
   repeated elaborations of the same @nt<full_type_declaration>
-  correspond to distinct tags.  In most cases, we expect
+  correspond to distinct tags. In most cases, we expect
   that all elaborations will correspond to the same tag,
   since the tag will frequently be the address (or index) of a statically
-  allocated type descriptor.  However, with shared generics, the type
+  allocated type descriptor. However, with shared generics, the type
   descriptor might have to be allocated on a per-instance basis, which in some
   implementation models implies per-elaboration of the instantiation.
 @end{implnote}
 
+@begin{Leading}
 The following language-defined library package exists:
+@end{Leading}
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Tags]}
-@key[package] Ada.Tags @key[is]
+@ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @key[is]
 @LangDefType{Package=[Tags],Type=[Tag]}
     @key[type] Tag @key[is] @key[private];
 
-    @key[function] Expanded_Name(T : Tag) @key[return] String;
-    @key[function] External_Tag(T : Tag) @key[return] String;
-    @key[function] Internal_Tag(External : String) @key[return] Tag;
+    @key[function] @AdaSubDefn{Expanded_Name}(T : Tag) @key[return] String;
+    @key[function] @AdaSubDefn{External_Tag}(T : Tag) @key[return] String;
+    @key[function] @AdaSubDefn{Internal_Tag}(External : String) @key[return] Tag;
 
-    Tag_Error : @key[exception];
+    @AdaDefn{Tag_Error} : @key[exception];
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -2171,7 +2220,7 @@ does not denote a @nt{renaming_declaration}.
 an unnamed @nt{block_statement}.}
 
 The function External_Tag returns a string to be used in an
-external representation for the given tag.  The call External_Tag(S'Tag)
+external representation for the given tag. The call External_Tag(S'Tag)
 is equivalent to the @nt<attribute_reference> S'External_Tag
 (see @RefSecNum{Representation Attributes}).
 @begin{Reason}
@@ -2201,12 +2250,12 @@ defined:
 
   @Noprefix@;@Defn2{Term=[unconstrained], Sec=(subtype)}
   @Defn2{Term=[constrained], Sec=(subtype)}
-  S'Class is unconstrained.  However,
+  S'Class is unconstrained. However,
   if S is constrained, then the values of S'Class are only those
   that when converted to the type @i(T) belong to S.]}
   @begin{Ramification}
     This attribute is defined for both specific
-    and class-wide subtypes.  The definition is such
+    and class-wide subtypes. The definition is such
     that S'Class'Class is the same as S'Class.
 
     Note that if S is constrained, S'Class is only partially constrained,
@@ -2220,7 +2269,7 @@ defined:
     @em see @RefSecNum{Incomplete Type Declarations} and
     @RefSecNum{Private Operations})
     so as to preclude implicit conversion in the absence of run-time
-    type information.  If it were defined for untagged subtypes, it would
+    type information. If it were defined for untagged subtypes, it would
     correspond to the concept of universal types provided for the predefined
     numeric classes.
   @end{Reason}
@@ -2248,7 +2297,7 @@ the following attribute is defined:
     X'Tag is not defined if X is of a specific type.
     This is primarily to avoid confusion that might result
     about whether the Tag attribute should reflect the tag of
-    the type of X, or the tag of X.  No such
+    the type of X, or the tag of X. No such
     confusion is possible if X is of a class-wide type.
   @end(Reason)
 @end(description)
@@ -2256,8 +2305,10 @@ the following attribute is defined:
 @end{StaticSem}
 
 @begin{RunTime}
+@begin{Leading}
 The tag associated with an object of a tagged type is
 determined as follows:
+@end{Leading}
 @begin(Itemize)
 @PDefn2{Term=[tag of an object], Sec=(stand-alone object,
   component, or @nt<aggregate>)}
@@ -2347,7 +2398,7 @@ Once an object has been created,
 its tag never changes.
 
 Class-wide types are defined to have unknown discriminants
-(see @RefSecNum(Discriminants)).  This means that objects of a class-wide
+(see @RefSecNum(Discriminants)). This means that objects of a class-wide
 type have to be explicitly initialized (whether created by
 an @nt<object_declaration> or an @nt<allocator>),
 and that @nt<aggregate>s have to be explicitly qualified with a specific
@@ -2366,7 +2417,9 @@ the library unit in which the incomplete type is declared
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i(Examples of tagged record types:)
+@end{Leading}
 @begin(Example)
 @key(type) Point @key(is tagged)
   @key(record)
@@ -2449,6 +2502,7 @@ attempt to execute an inaccessible subprogram body.
 The part about generic bodies is necessary in order to preserve the
 contract model.
 
+@begin{Leading}
 Since a generic unit can be instantiated at a deeper accessibility level
 than the generic unit, it is necessary to prevent type extensions whose
 parent is declared outside the generic unit.
@@ -2461,6 +2515,7 @@ same accessibility level.
 However, we still have a problem in that case, because
 it might have an unknown number of abstract subprograms,
 as in the following example:
+@end{Leading}
 @begin{Example}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[tagged] @key[null] @key[record];
@@ -2533,7 +2588,7 @@ type extension has relative to its specified ancestor type.
 @begin(Discussion)
   We considered other terminology, such as @lquotes@;extended type.@rquotes@;
   However, the terms @lquotes@;private extended type@rquotes@; and @lquotes@;record extended type@rquotes@;
-  did not convey the proper meaning.  Hence, we have chosen
+  did not convey the proper meaning. Hence, we have chosen
   to uniformly use the term @lquotes@;extension@rquotes@; as the type resulting
   from extending a type, with @lquotes@;private extension@rquotes@; being one
   produced by privately extending the type, and @lquotes@;record extension@rquotes@;
@@ -2565,7 +2620,7 @@ a new @nt{known_discriminant_part} in the enclosing type declaration.
 @begin(Reason)
   The restriction against depending on
   discriminants of the parent is to simplify the definition of extension
-  aggregates.  The restriction against using parent components in other
+  aggregates. The restriction against using parent components in other
   ways is methodological; it presumably simplifies implementation as
   well.
 @end(Reason)
@@ -2577,9 +2632,9 @@ from the parent type or declared in the
 @end{Notes}
 
 @begin{Examples}
-
+@begin{Leading}
 @i{Examples of record extensions (of types defined above in @RefSecNum(Tagged Types and Type Extensions)):}
-
+@end{Leading}
 @begin(Example)
 @key(type) Painted_Point @key(is new) Point @key(with)
   @key(record)
@@ -2657,7 +2712,7 @@ by a dispatching call.]
 The controlling tag determination rules are analogous to the
 overload resolution rules, except they deal with run-time
 type identification (tags) rather than compile-time type
-resolution.  As with overload resolution, controlling tag determination
+resolution. As with overload resolution, controlling tag determination
 may depend on operands or result context.
 @end{MetaRules}
 
@@ -2690,6 +2745,7 @@ If the call is to a (primitive) function with result type @i(T),
 then the call has a @i(controlling result) @em
 the context of the call can control the dispatching.
 
+@begin{Leading}
 A @nt<name> or expression of a tagged type
 is either @i(statically) tagged,
 @i(dynamically) tagged, or @i(tag indeterminate), according
@@ -2700,8 +2756,9 @@ dynamically by its tag at run time,
 or from context.
 A @nt<qualified_expression> or parenthesized expression is
 statically, dynamically, or indeterminately tagged according
-to its operand.  For other kinds of @nt<name>s and expressions, this
+to its operand. For other kinds of @nt<name>s and expressions, this
 is determined as follows:
+@end{Leading}
 @begin(Itemize)
   @Defn{statically tagged}
   The @nt<name> or expression is @i(statically
@@ -2733,7 +2790,7 @@ or dynamically tagged according to whether the designated type of the
 actual parameter is specific or class-wide, respectively.
 @begin{Ramification}
   A @nt<type_conversion> is never tag indeterminate, even if its
-  operand is.  A designated object is never tag indeterminate.
+  operand is. A designated object is never tag indeterminate.
 @end{Ramification}
 @end{StaticSem}
 
@@ -2761,13 +2818,13 @@ operand in a call on a dispatching operation.
 @begin(Reason)
   This prevents implicit "truncation"
   of a dynamically-tagged value to the specific type of the
-  target object/formal.  An explicit conversion is required to request
+  target object/formal. An explicit conversion is required to request
   this truncation.
 @end(Reason)
 @begin(Ramification)
   This rule applies to all expressions
   or @nt<name>s with a specific expected type, not just those that
-  are actual parameters to a dispatching call.  This rule does not apply to
+  are actual parameters to a dispatching call. This rule does not apply to
   a membership test whose @nt<expression> is class-wide,
   since any type that covers the tested type is explicitly allowed.
   See @RefSecNum(Relational Operators and Membership Tests).
@@ -2791,7 +2848,7 @@ or by default @em see @RefSecNum{Conformance Rules})].
 These rules
   ensure that constraint checks can be performed by the
   caller in a dispatching call, and parameter passing conventions
-  match up properly.  A special rule on aggregates
+  match up properly. A special rule on aggregates
   prevents values of a tagged type from being created that
   are outside of its first subtype.@end{reason}
 
@@ -2804,7 +2861,7 @@ shall not have a @nt<default_expression>.
   The first part ensures that the @nt{default_expression}
   always produces the "correct"
   tag when called with or without dispatching,
-  or when inherited by a descendant.  If
+  or when inherited by a descendant. If
   it were statically tagged, the default would be useless for
   a dispatching call; if it were dynamically tagged, the default
   would be useless for a nondispatching call.
@@ -2818,7 +2875,7 @@ or more distinct tagged types.
 @begin{Reason}
 
   This restriction minimizes
-  confusion since multiple dispatching is not provided.  The normal
+  confusion since multiple dispatching is not provided. The normal
   solution is to replace all but one of the tagged types with their
   class-wide types.@end{reason}
 
@@ -2836,11 +2893,11 @@ This rule is needed
 because (1) we don't want people dispatching to things that haven't
 been declared yet, and (2) we want to allow tagged type descriptors
 to be static (allocated statically, and initialized to link-time-known
-symbols).  Suppose T2 inherits primitive P from T1, and then
-overrides P.  Suppose P is called @i{before} the declaration of the
-overriding P.  What should it dispatch to?  If the answer is the new
-P, we've violated the first principle above.  If the answer is the
-old P, we've violated the second principle.  (A call
+symbols). Suppose T2 inherits primitive P from T1, and then
+overrides P. Suppose P is called @i{before} the declaration of the
+overriding P. What should it dispatch to?  If the answer is the new
+P, we've violated the first principle above. If the answer is the
+old P, we've violated the second principle. (A call
 to the new one necessarily raises Program_Error, but that's
 beside the point.)
 
@@ -2870,12 +2927,14 @@ declared by a @nt{subprogram_body}.
 @end{Legality}
 
 @begin{RunTime}
+@begin{Leading}
 @PDefn2{Term=[execution], Sec=(call on a dispatching operation)}
 @Defn{controlling tag value}
 For the execution of a call on a dispatching operation of a type @i(T),
 the @i(controlling tag value) determines
 which subprogram body is executed.
 The controlling tag value is defined as follows:
+@end{Leading}
 @begin(itemize)
   @PDefn{statically determined tag}
   If one or more controlling operands are statically tagged, then
@@ -2912,7 +2971,9 @@ The controlling tag value is defined as follows:
     between objects with different constraints, never raise Constraint_Error.
   @end(Reason)
 
+@begin{Leading}
   If all of the controlling operands are tag-indeterminate, then:
+@end{Leading}
   @begin(itemize)
     If the call has a controlling result and is itself a (possibly
     parenthesized or qualified)
@@ -2955,6 +3016,7 @@ that is, the @lquotes@;corresponding explicit body@rquotes@; in the above rule i
 body itself.
 @end{Honest}
 @begin{Reason}
+@begin{Leading}
 The wording of the above rule is intended to ensure that the same body
 is executed for a given tag,
 whether that tag is determined statically or dynamically.
@@ -2963,6 +3025,7 @@ it doesn't matter whether a given subprogram is
 overridden in the visible part or the private part,
 and it doesn't matter whether the call is inside or outside the package.
 For example:
+@end{Leading}
 @begin{Example}
 @key[package] P1 @key[is]
     @key[type] T1 @key[is] @key[tagged] @key[null] @key[record];
@@ -3038,7 +3101,7 @@ not visible at the place of the call.
 
 A call through an access-to-subprogram value is never
 a dispatching call, even if the
-access value designates a dispatching operation.  Similarly
+access value designates a dispatching operation. Similarly
 a call whose @nt<prefix> denotes a @nt<subprogram_renaming_declaration>
 cannot be a dispatching call unless the renaming itself is the
 declaration of a primitive subprogram.
@@ -3108,9 +3171,10 @@ A subprogram declared by an @nt{abstract_subprogram_declaration}
 If it is a primitive subprogram of a tagged type,
 then the tagged type shall be abstract.
 @begin{Ramification}
-
+@begin{Leading}
   Note that for a private type, this applies to both views.
   The following is illegal:
+@end{Leading}
 @begin{Example}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[abstract] @key[tagged] @key[private];
@@ -3129,12 +3193,14 @@ The two lines marked "--@i{ Illegal!}" are illegal when taken together.
 
 @end{Ramification}
 @begin{Reason}
+@begin{Leading}
   We considered disallowing untagged types from having abstract
   primitive subprograms.
   However, we rejected that plan, because it introduced some silly
   anomalies, and because such subprograms are harmless (if not terribly
   useful).
   For example:
+@end{Leading}
 @begin{Example}
 @key[package] P @key[is]
    @key[type] Field_Size @key[is] @key[range] 0..100;
@@ -3154,9 +3220,11 @@ Other rules could be formulated to solve this problem,
 but the current ones seem like the simplest.
 @end{Reason}
 
+@begin{Leading}
 For a derived type, if the parent or ancestor type has an abstract
 primitive subprogram,
 or a primitive function with a controlling result, then:
+@end{Leading}
 @begin{Itemize}
   If the derived type is abstract or untagged,
   the inherited subprogram is @i{abstract}.
@@ -3178,12 +3246,14 @@ or a primitive function with a controlling result, then:
     for an abstract type extension (if not overridden)
     because conversion from a parent type to a type extension is
     not defined, and function return semantics is defined in terms
-    of conversion.  (Note that parameters of mode @key{in out} or
+    of conversion. (Note that parameters of mode @key{in out} or
     @key{out} do not have this problem, because the tag of the actual
     is not changed.)
 
+    @begin{Leading}
     Note that the overriding required above can be in the private
     part, which allows the following:
+    @end{Leading}
     @begin{Example}
 @key[package] Pack1 @key[is]
     @key[type] Ancestor @key[is] @key[abstract] ...;
@@ -3243,7 +3313,7 @@ then the function shall be abstract.
   will not try to execute the nonexistent body.
 
   Generic formal objects of mode @key[in] are like constants;
-  therefore they should be forbidden for abstract types.  Generic formal
+  therefore they should be forbidden for abstract types. Generic formal
   objects of mode @key[in out] are like renamings; therefore, abstract
   types are OK for them, though probably not terribly useful.
 @end{Reason}
@@ -3277,6 +3347,7 @@ shall not be declared in the private part,
 unless it is overriding a function
 implicitly declared in the visible part.
 @begin{Reason}
+@begin{Leading}
 The @lquotes@;visible part@rquotes@; could be that of a package or a generic package.
 This rule is needed because a non-abstract type extension declared
 outside the package would not know about any abstract primitive
@@ -3288,6 +3359,7 @@ in a visible part,
 just as to a tagged private type or private extension.
 The rule applies to explicitly and implicitly declared abstract
 subprograms:
+@end{Leading}
 @begin{Example}
 @key[package] Pack @key[is]
     @key[type] T @key[is] @key[abstract] @key[new] T1 @key[with] @key[private];
@@ -3330,7 +3402,7 @@ Similarly, an inherited concrete subprogram can be overridden with an
 abstract subprogram.
 @end{Ramification}
 
-A class-wide type is never abstract.  Even if a class
+A class-wide type is never abstract. Even if a class
 is rooted at an abstract type, the class-wide type for the
 class is not abstract, and an object of the class-wide type
 can be created; the tag of such an object will identify
@@ -3338,7 +3410,9 @@ some nonabstract type in the class.
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i(Example of an abstract type representing a set of natural numbers:)
+@end{Leading}
 @begin{Example}
 @key(package) Sets @key(is)
     @key(subtype) Element_Type @key(is) Natural;
@@ -3347,7 +3421,8 @@ some nonabstract type in the class.
     @key(function) Union(Left, Right : Set) @key(return) Set @key(is abstract);
     @key(function) Intersection(Left, Right : Set) @key(return) Set @key(is abstract);
     @key(function) Unit_Set(Element : Element_Type) @key(return) Set @key(is abstract);
-    @key(procedure) Take(Element : @key(out) Element_Type; From : @key(in out) Set) @key(is abstract);
+    @key(procedure) Take(Element : @key(out) Element_Type;
+                    From : @key(in out) Set) @key(is abstract);
 @key(end) Sets;
 @end{Example}
 @end{Examples}
@@ -3356,7 +3431,7 @@ some nonabstract type in the class.
 @i(Notes on the example:)
 Given the above abstract type, one could then derive
 various (nonabstract) extensions of the type, representing
-alternative implementations of a set.  One might use a bit
+alternative implementations of a set. One might use a bit
 vector, but impose an upper bound on the largest element representable,
 while another might use a hash table, trading off space for flexibility.
 @begin{Discussion}
@@ -3396,7 +3471,7 @@ but then clients of the package would not have visibility to T.
 @Defn{designate}
 A value of an access type (an @i(access value))
 provides indirect access to the object or subprogram
-it @i(designates).  Depending on its type, an access value
+it @i(designates). Depending on its type, an access value
 can designate either subprograms, objects created by allocators
 (see @RefSecNum(Allocators)), or more generally @i(aliased) objects of
 an appropriate type.
@@ -3404,7 +3479,7 @@ an appropriate type.
 @IndexSee{Term=[pointer type],See=(access type)}
 @begin(Discussion)
   A @nt<name> @i(denotes) an entity; an access value @i(designates) an
-  entity.  The @lquotes@;dereference@rquotes@; of an access value X, written
+  entity. The @lquotes@;dereference@rquotes@; of an access value X, written
   @lquotes@;X.@key[all]@rquotes@;, is a @nt<name> that denotes the entity designated by X.
 @end(Discussion)
 @end{Intro}
@@ -3473,7 +3548,7 @@ it is defined by an @nt<object_declaration> or @nt<component_definition>
 with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
-(see @RefSecNum{Type Conversions}) of an aliased view.  Finally,
+(see @RefSecNum{Type Conversions}) of an aliased view. Finally,
 the current instance of a limited type,
 and a formal parameter or generic formal object
 of a tagged type are defined to be aliased.
@@ -3517,16 +3592,18 @@ either by the designated subtype, or by its initial value.]
 
   A formal parameter of a tagged type is defined to be aliased
   so that a (tagged) parameter X may be passed to an access parameter P
-  by using P => X'Access.  Access parameters are most important
+  by using P => X'Access. Access parameters are most important
   for tagged types because of dispatching-on-access-parameters
   (see @RefSecNum(Dispatching Operations of Tagged Types)).
   By restricting this to formal parameters, we minimize problems
   associated with allowing components that are not declared aliased
   to be pointed-to from within the same record.
 
+@begin{Leading}
   A view conversion of an aliased view is aliased so that
   the type of an access parameter can be changed without
-  first converting to a named access type.  For example:
+  first converting to a named access type. For example:
+@end{Leading}
 @begin{Example}
 @key(type) T1 @key(is tagged) ...;
 @key(procedure) P(X : @key(access) T1);
@@ -3535,7 +3612,7 @@ either by the designated subtype, or by its initial value.]
 @key(procedure) P(X : @key(access) T2) @key(is)
 @key(begin)
     P(T1(X.@key(all))'Access);  @RI[-- hand off to T1's P]
-    . . .      @RI[-- now do extra T2-specific processing]
+    . . .     @RI[-- now do extra T2-specific processing]
 @key(end) P;
 @end{Example}
 
@@ -3557,7 +3634,7 @@ either by the designated subtype, or by its initial value.]
   In particular, any object of a by-reference type will pretty
   much have to be allocated at an addressable location,
   so it can be passed by reference without using bit-field
-  pointers.  Therefore, one might wish to allow the Access and
+  pointers. Therefore, one might wish to allow the Access and
   and Unchecked_Access attributes for such objects.
   However, private parts are transparent to the definition of
   @lquotes@;by-reference type@rquotes@;, so if we made all objects of a by-reference
@@ -3611,9 +3688,9 @@ pool-specific access-to-variable type.
 @end(Reason)
 @begin(ImplNote)
   The predefined generic Unchecked_Deallocation can be
-  instantiated for any named access-to-variable type.  There
+  instantiated for any named access-to-variable type. There
   is no (language-defined) support for deallocating objects
-  designated by a value of an access-to-constant type.  Because of this,
+  designated by a value of an access-to-constant type. Because of this,
   an allocator for an access-to-constant type can allocate
   out of a storage pool with no support for deallocation.
   Frequently, the allocation can be done at link-time,
@@ -3647,7 +3724,7 @@ for how to override this default.]
 @begin(Ramification)
   The calling convention @i(protected) is
   in italics to emphasize that it cannot be specified explicitly
-  by the user.  This is a consequence of it being a reserved word.
+  by the user. This is a consequence of it being a reserved word.
 @end(Ramification)
 @begin(ImplNote)
   For an access-to-subprogram type, the representation of an access
@@ -3658,13 +3735,13 @@ for how to override this default.]
   that in a "global-display-based" implementation model (as opposed to
   a static-link-based model), an access-to-(unprotected)-subprogram value
   need consist only of the address of the
-  subprogram.  The global display is guaranteed
+  subprogram. The global display is guaranteed
   to be properly set up any time the designated subprogram is called.
   Even in a static-link-based model, the only time a static link
   is definitely required is for an access-to-subprogram type declared
   in a scope nested at least two levels deep within subprogram or
   task bodies, since values of such a type might designate subprograms
-  nested a smaller number of levels.  For the normal case of
+  nested a smaller number of levels. For the normal case of
   an access-to-subprogram type declared at the outermost (library) level,
   a code address by itself should be sufficient to represent the
   access value in many implementations.
@@ -3673,7 +3750,7 @@ for how to override this default.]
   include both an address (or other identification) of the code of the
   subprogram, as well as the address of the associated protected object.
   This could be thought of as a static link, but it will be needed even
-  for global-display-based implementation models.  It corresponds
+  for global-display-based implementation models. It corresponds
   to the value of the @lquotes@;implicit parameter@rquotes@; that is passed into
   every call of a protected operation, to identify the current instance
   of the protected type on which they are to operate.
@@ -3683,7 +3760,7 @@ for how to override this default.]
   access value is first "created" via a 'Access.
   For implementation models that normally put that check at the
   call-site, an access value will have to point to a separate
-  entry point that does the check.  Alternatively, the
+  entry point that does the check. Alternatively, the
   access value could point to a "subprogram descriptor" that
   consisted of two words (or perhaps more), the first being
   the address of the code, the second being the elaboration bit.
@@ -3773,7 +3850,7 @@ array or discriminated type; otherwise it is constrained.
   (see @RefSecNum(Index Constraints and Discrete Ranges)) and
   @nt<discriminant_constraint>s (see @RefSecNum(Discriminant Constraints))
   both permit access-to-composite types in a @nt<subtype_indication>
-  with such @nt<_constraint>s.  Note that an access-to-access-to-composite
+  with such @nt<_constraint>s. Note that an access-to-access-to-composite
   is never permitted in a @nt<subtype_indication> with a @nt<constraint>.
 @end(TheProof)
 @begin(Reason)
@@ -3782,7 +3859,7 @@ array or discriminated type; otherwise it is constrained.
   on access-to-composite types.
   A constraint on an access-to-scalar or access-to-access type
   might be violated due to assignments
-  via other access paths that were not so constrained.  By contrast,
+  via other access paths that were not so constrained. By contrast,
   if the designated subtype is an array or discriminated type,
   the constraint could not be violated by unconstrained assignments,
   since array objects are always constrained, and
@@ -3835,19 +3912,25 @@ can be applied to access types
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i{Examples of access-to-object types:}
+@end{Leading}
 @begin{Example}
 @key[type] Peripheral_Ref @key[is access] Peripheral;  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
 @key[type] Binop_Ptr @key[is access all] Binary_Operation'Class;
                                            @RI[-- general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
 
+@begin{WideLeading}
 @i{Example of an access subtype:}
+@end{WideLeading}
 @begin{Example}
 @key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
 @end{Example}
 
+@begin{WideLeading}
 @i{Example of an access-to-subprogram type:}
+@end{WideLeading}
 @begin{Example}
 @key[type] Message_Procedure @key[is] @key[access] @key[procedure] (M : @key[in] String := "Error!");
 @key[procedure] Default_Message_Procedure(M : @key[in] String);
@@ -3884,9 +3967,9 @@ see @RefSecNum(Storage Management) for more discussion.)
 
 @begin{Intro}
 There are no particular limitations on the designated type of an
-access type.  In particular, the type of a component of the
+access type. In particular, the type of a component of the
 designated type can be another access type, or even the same access
-type.  This permits mutually dependent and recursive access types.
+type. This permits mutually dependent and recursive access types.
 An @nt<incomplete_type_declaration> can be used to introduce a type
 to be used as a designated type, while deferring its full definition
 to a subsequent @nt<full_type_declaration>.
@@ -3944,8 +4027,10 @@ then a corresponding @nt{full_type_declaration} is nevertheless allowed
 to have discriminants,
 either explicitly, or inherited via derivation.]
 
+@begin{Leading}
 The only allowed uses of a @nt{name} that denotes an
 @nt{incomplete_type_declaration} are as follows:
+@end{Leading}
 @begin(Discussion)
   No need
   to say "prior to the end of the @nt{full_type_declaration}" since
@@ -3962,10 +4047,10 @@ The only allowed uses of a @nt{name} that denotes an
   @nt{subtype_indication} is a @nt{discriminant_constraint};]
   @begin(ImplNote)
     We now allow @nt<discriminant_constraint>s even if the
-    full type is deferred to the package body.  However, there
+    full type is deferred to the package body. However, there
     is no particular implementation burden because we have
     dropped the concept of the dependent compatibility check.
-    In other words, we have effectively repealed AI-00007.
+    In other words, we have effectively repealed AI83-00007.
   @end(ImplNote)
 
 
@@ -4042,7 +4127,9 @@ all types declared prior to it in the same @nt<declarative_part>
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i(Example of a recursive type:)
+@end{Leading}
 @begin(Example)
 @key(type) Cell;  @RI[--  incomplete type declaration]
 @key(type) Link @key(is) @key(access) Cell;
@@ -4105,19 +4192,21 @@ deferred to the package body, because there is no
 @lquotes@;dependent compatibility check@rquotes@; required any more.
 Of course, the constraint can be specified only if
 a @nt<known_discriminant_part> was given in the
-@nt<incomplete_type_declaration>.  As mentioned in the previous
+@nt<incomplete_type_declaration>. As mentioned in the previous
 paragraph, that is no longer required even when the full type
 has discriminants.
 @end{Extend83}
 
 @begin{DiffWord83}
+@begin{Leading}
 Dereferences producing incomplete types
 were not explicitly disallowed in RM83, though
-AI-00039 indicated that it was not strictly necessary since
+AI83-00039 indicated that it was not strictly necessary since
 troublesome cases would result in Constraint_Error at run time,
 since the access value would necessarily be null.
 However, this introduces an undesirable implementation burden,
-as illustrated by Example 4 of AI-00039:
+as illustrated by Example 4 of AI83-00039:
+@end{Leading}
 @begin{example}
 @key[package] Pack @key[is]
     @key[type] Pri @key[is] @key[private];
@@ -4198,10 +4287,10 @@ designated profile of the access type.
   See @RefSecNum{Literals} and @RefSecNum{The Context of Overload Resolution}.
   Specifying the expected profile only implies type conformance.
   The more stringent subtype conformance is required by a Legality
-  Rule.  This is the only Resolution Rule that applies to the
+  Rule. This is the only Resolution Rule that applies to the
   @nt<name> in a @nt{prefix} of an @nt{attribute_reference}.
   In all other cases, the @nt{name} has to be resolved without
-  using context.  See @RefSecNum{Attributes}.
+  using context. See @RefSecNum{Attributes}.
 @end(Discussion)
 @end{Resolution}
 
@@ -4246,8 +4335,10 @@ Run-time accessibility checks are also used,
 since the @LegalityTitle do not cover
 certain cases involving access parameters and generic packages.]
 
+@begin{Leading}
 Each master, and each entity and view created by it,
 has an accessibility level:
+@end{Leading}
 @begin{Itemize}
 The accessibility level of a given master is deeper than
 that of each dynamically enclosing master,
@@ -4317,10 +4408,12 @@ is the same as that of
 @end{Itemize}
 
 
+@begin{Leading}
 @Defn{statically deeper}
 @Defn2{Term=[deeper],Sec=(statically)}
 One accessibility level is defined to be
 @i{statically deeper} than another in the following cases:
+@end{Leading}
 @begin{Itemize}
 For a master that is statically nested within another master,
 the accessibility level of the inner master is statically deeper than
@@ -4371,6 +4464,7 @@ is the library level.
   and not within subprograms, tasks, etc.
 @end{Ramification}
 @begin{Honest}
+  @begin{Leading}
   The definition of the accessibility level of the anonymous type of an
   access parameter cheats a bit, since it refers to the view designated by
   the actual, but access values designate objects, not views of objects.
@@ -4381,6 +4475,7 @@ is the library level.
   following more verbose version:
   The accessibility level of the anonymous type of an access parameter is
   as follows:
+  @end{Leading}
   @begin{Itemize}
   if the actual is
   an expression of a named access type @em
@@ -4404,7 +4499,7 @@ is the library level.
   the accessibility level of its type.
   @end{Itemize}
 
-  Note that the @nt{allocator} case is explicitly mentioned in the RM9X,
+  Note that the @nt{allocator} case is explicitly mentioned in the RM95,
   because otherwise the definition would be circular:
   the level of the anonymous type is that of the view designated by the
   actual, which is that of the access type.
@@ -4450,11 +4545,13 @@ is the library level.
   this implies that Y will be (dynamically) deeper than X in all
   possible executions.
 
+  @begin{Leading}
   Most accessibility checking is done at compile time;
   the rules are stated in terms of @lquotes@;statically deeper than@rquotes@;.
   The exceptions are:
+  @end{Leading}
   @begin{Itemize}
-  Checks involving access parameters.  The fact that @lquotes@;statically deeper
+  Checks involving access parameters. The fact that @lquotes@;statically deeper
   than@rquotes@; is not defined for the anonymous access type of an access
   parameter implies that any rule saying @lquotes@;shall not be statically
   deeper than@rquotes@; does not apply to such a type, nor to anything defined
@@ -4534,13 +4631,15 @@ is the library level.
   to subprograms that have no access parameters.
   For anything other than an access parameter and its anonymous type,
   the static nesting level is known at compile time,
-  and is defined analogously to the RM9X definition
+  and is defined analogously to the RM95 definition
   of accessibility level (e.g. derived access types
   get their nesting level from their parent).
   Checking @lquotes@;not deeper than@rquotes@; is a "<=" test on the levels.
 
+  @begin{Leading}
   For each access parameter, the static depth passed depends on the
   actual, as follows:
+  @end{Leading}
   @begin{Itemize}
   If the actual is
   an expression of a named access type,
@@ -4583,7 +4682,9 @@ is the library level.
   is efficient, and, more importantly, avoids distributed overhead.
 @end(ImplNote)
 @begin{Discussion}
+@begin{Leading}
 Examples of accessibility:
+@end{Leading}
 @begin{Example}
 @key[package] @key[body] Lib_Unit @key[is]
     @key[type] T @key[is] @key[tagged] ...;
@@ -4612,7 +4713,9 @@ unit, if P is called, the accessibility level of X will be
 (dynamically) deeper than that of A0.
 Note that the accessibility levels of X and Y are the same.
 
+@begin{Leading}
 Here's an example involving access parameters:
+@end{Leading}
 @begin{Example}
 @key[procedure] Main @key[is]
     @key[type] Level_1_Type @key[is] @key[access] @key[all] Integer;
@@ -4651,9 +4754,11 @@ and no code should be generated to check it.
 The check at (2) will fail when called from (3),
 but not when called from (4).
 
+@begin{Leading}
 Within a @nt{type_declaration}, the rules are checked in an
 assume-the-worst manner.
 For example:
+@end{Leading}
 @begin{Example}
 @key[package] P @key[is]
     @key[type] Int_Ptr @key[is] @key[access] @key[all] Integer;
@@ -4686,8 +4791,10 @@ which the compiler can't see while compiling an object creation.
 @end{Discussion}
 
 
+@begin{Leading}
 The following attribute is defined for @PrefixType{a @nt{prefix} X that
 denotes an aliased view of an object}:
+@end{Leading}
 @begin(description)
 @Attribute{Prefix=<X>, AttrName=<Access>,
   Text=<X'Access yields an access value that designates the object
@@ -4731,6 +4838,7 @@ The current instance of a limited type
     disappear or move or change constraints after creating the reference.
   @end{Reason}
   @begin{ImplNote}
+     @begin{Leading}
      There was some thought to making this restriction
      more stringent, roughly:
      "X shall not denote a subcomponent of a variable
@@ -4739,9 +4847,10 @@ The current instance of a limited type
      This was because in some implementations, it is not
      just the discriminant-dependent subcomponents that might
      move as the result of an assignment that changed the discriminants
-     of the enclosing object.  However, it was decided not to make
+     of the enclosing object. However, it was decided not to make
      this change because a reasonable implementation strategy was identified
      to avoid such problems, as follows:
+     @end{Leading}
      @begin(Itemize)
        Place non-discriminant-dependent components with any aliased parts
        at offsets preceding any discriminant-dependent components
@@ -4755,7 +4864,7 @@ The current instance of a limited type
 
      Note that for objects of a by-reference type, it is not an error
      for a programmer to take advantage of the fact that such objects
-     are passed by reference.  Therefore, the above approach is also
+     are passed by reference. Therefore, the above approach is also
      necessary for discriminated record types with components of
      a by-reference type.
 
@@ -4877,7 +4986,7 @@ denotes a subprogram}:
     This rule specifies that subtype conformance is required (which also
     requires matching calling conventions).
     P cannot denote an entry because access-to-subprogram types
-    never have the @i(entry) calling convention.  P cannot denote
+    never have the @i(entry) calling convention. P cannot denote
     an enumeration literal or an attribute function because
     these have intrinsic calling conventions.
   @end(Discussion)
@@ -4924,7 +5033,7 @@ resolution, but is disallowed by a Legality Rule of this subclause.
 
 The object or subprogram designated by an access value can be named
 with a dereference, either an @nt<explicit_dereference> or an
-@nt<implicit_dereference>.  See @RefSecNum{Names}.
+@nt<implicit_dereference>. See @RefSecNum{Names}.
 
 A call through the dereference of an access-to-subprogram
 value is never a dispatching call.
@@ -4950,7 +5059,7 @@ access-to-subprogram type.
 
 An implementation may consider
 two access-to-subprogram values to be unequal,
-even though they designate the same subprogram.  This might
+even though they designate the same subprogram. This might
 be because one points directly to the subprogram,
 while the other points to a special prologue that
 performs an Elaboration_Check and then jumps to the subprogram.
@@ -4966,7 +5075,9 @@ comparison.@end{ramification}
 @end{Notes}
 
 @begin{Examples}
+@begin{Leading}
 @i{Example of use of the Access attribute:}
+@end{Leading}
 @begin{Example}
 Martha : Person_Name := @key[new] Person(F);       @RI[-- see @RefSecNum{Incomplete Type Declarations}]
 Cars   : @key[array] (1..2) @key[of] @key[aliased] Car;
@@ -4979,10 +5090,10 @@ George.Vehicle := Cars(2)'Access;
 @begin{Extend83}
 We no longer make things like 'Last and ".component"
 (basic) operations of an access type that need to be "declared"
-somewhere.  Instead, implicit dereference
-in a @nt{prefix} takes care of them all.  This means that
+somewhere. Instead, implicit dereference
+in a @nt{prefix} takes care of them all. This means that
 there should never be a case when X.@key{all}'Last is legal
-while X'Last is not.  See AI-00154.
+while X'Last is not. See AI83-00154.
 @end{Extend83}
 
 @LabeledClause{Declarative Parts}
@@ -5042,12 +5153,12 @@ an explicit body, a check is made that the
 This check and the evaluations of any actual parameters of the call
 are done in an arbitrary order.
 @begin{Discussion}
-  AI-00180 specifies that there is no elaboration check for
+  AI83-00180 specifies that there is no elaboration check for
   a subprogram defined by a @nt{pragma} Interface (or equivalently,
-  @nt{pragma} Import).  AI-00430 specifies that there is no elaboration check
-  for an enumeration literal.  AI-00406 specifies that the evaluation
+  @nt{pragma} Import). AI83-00430 specifies that there is no elaboration check
+  for an enumeration literal. AI83-00406 specifies that the evaluation
   of parameters and the elaboration check occur in an arbitrary order.
-  AI-00406 applies to generic instantiation as well (see below).
+  AI83-00406 applies to generic instantiation as well (see below).
 @end{Discussion}
 
 For a call to a protected operation of a protected type
@@ -5060,14 +5171,14 @@ are done in an arbitrary order.
   A protected type has only one elaboration @lquotes@;bit,@rquotes@; rather than
   one for each operation, because one call may result in evaluating
   the barriers of other entries, and because there are no elaborable
-  declarations between the bodies of the operations.  In fact,
+  declarations between the bodies of the operations. In fact,
   the elaboration of a @nt<protected_body> does not elaborate
   the enclosed bodies, since they are not considered independently
   elaborable.
 
   Note that there is no elaboration check when calling a task entry.
   Task entry calls are permitted even before the associated @nt<task_body>
-  has been seen.  Such calls are simply queued until the task is
+  has been seen. Such calls are simply queued until the task is
   activated and reaches a corresponding @nt<accept_statement>.
   We considered a similar rule for protected entries @em simply
   queuing all calls until the @nt<protected_body> was seen, but felt
@@ -5085,8 +5196,8 @@ for the object created by an allocator,
 this check is done for all of them before activating any
 of them.
 @begin{Reason}
-  As specified by AI-00149, the check is done by the
-  activator, rather than by the task itself.  If it were
+  As specified by AI83-00149, the check is done by the
+  activator, rather than by the task itself. If it were
   done by the task itself, it would be turned into a Tasking_Error
   in the activator, and the other tasks would still be activated.
 @end{Reason}
@@ -5130,7 +5241,7 @@ In RM83, all uses of @nt{declarative_part} are optional
 which is sort of strange, since a @nt{declarative_part} can be empty,
 according to the syntax.
 That is, @nt{declarative_part}s are sort of @lquotes@;doubly optional@rquotes@;.
-In Ada 9X, these @nt{declarative_part}s are always required
+In Ada 95, these @nt{declarative_part}s are always required
 (but can still be empty).
 To simplify description, we go further and say
 (see @RefSec(Block Statements)) that a
@@ -5152,8 +5263,10 @@ and is either another declaration, a body, or a @nt<pragma>.
 @Chg{New=[A @i<body>@defn{body} is a @nt<body>,
 an @nt<entry_body>, or a renaming-as-body (see 8.5.4).],Old=[]}
 @begin{Discussion}
+@begin{Leading}
 Throughout the RM95, there are rules about completions that
 define the following:
+@end{Leading}
 @begin{Itemize}
 Which declarations require a corresponding completion.
 
@@ -5178,9 +5291,11 @@ Thus, a declaration can actually come in @i{three} parts.
 @end{Intro}
 
 @begin{Resolution}
+@begin{Leading}
 A construct that can be a completion
 is interpreted as the completion of a prior
 declaration only if:
+@end{Leading}
 @begin(itemize)
 The declaration and the completion occur immediately within
 the same declarative region;
@@ -5262,7 +5377,7 @@ every kind of entity.
   can have a completion.
   In any case, if an implementation chooses to support pragma Import for,
   say, types, it can place whatever restrictions on the feature it wants
-  to.  For example, it might want the @nt{pragma} to be a freezing point for
+  to. For example, it might want the @nt{pragma} to be a freezing point for
   the type.
 @end(Discussion)
 
@@ -5277,7 +5392,7 @@ such as private types and deferred constants.
 @end{Notes}
 
 @begin{DiffWord83}
-This subclause is new.  It is intended to cover all
+This subclause is new. It is intended to cover all
 kinds of completions of declarations, be they a body for a spec,
 a full type for an incomplete or private type, a full constant
 declaration for a deferred constant declaration, or a @nt{pragma} Import

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:36 $}
+@Comment{$Date: 2000/08/05 04:53:23 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -877,11 +877,11 @@ creates a distinct type and its first subtype.
 (White, Red, Yellow, Green, Blue, Brown, Black)
 @key(range) 1 .. 72
 @key(array)(1 .. 10) @key(of) Integer
-
 @end(Example)
-@begin{Leading}
+
+@begin{WideLeading}
 @keepnext@;@i(Examples of type declarations:)
-@end{Leading}
+@end{WideLeading}
 @begin(Example)
 @key(type) Color  @key(is) (White, Red, Yellow, Green, Blue, Brown, Black);
 @key(type) Column @key(is) @key(range) 1 .. 72;
@@ -971,6 +971,7 @@ type of the subtype denoted by the @nt{subtype_mark}.
 @end{Resolution}
 
 @begin{RunTime}
+@begin{Leading}
 @PDefn2{Term=[elaboration], Sec=(subtype_declaration)}
 The elaboration of a @nt{subtype_declaration} consists of the elaboration
 of the @nt{subtype_indication}.
@@ -981,6 +982,7 @@ If the @nt{subtype_indication} does not include a
 constraint as that denoted by the @nt{subtype_mark}.
 The elaboration of a @nt{subtype_indication} that includes a
 @nt<constraint> proceeds as follows:
+@end{Leading}
 @begin{itemize}
 The @nt<constraint> is first elaborated.
 
@@ -1711,11 +1713,11 @@ John, Paul : Person_Name := @key(new) Person(Sex => M);  @RI[--  see @RefSecNum(
 
 John : Person_Name := @key(new) Person(Sex => M);
 Paul : Person_Name := @key(new) Person(Sex => M);
-
 @end(Example)
-@begin{Leading}
+
+@begin{WideLeading}
 @keepnext@;@i(Examples of variable declarations:)
-@end{Leading}
+@end{WideLeading}
 @begin(Example)
 Count, Sum  : Integer;
 Size        : Integer @key(range) 0 .. 10_000 := 0;
@@ -1723,11 +1725,11 @@ Sorted      : Boolean := False;
 Color_Table : @key(array)(1 .. Max) @key(of) Color;
 Option      : Bit_Vector(1 .. 10) := (@key(others) => True);
 Hello       : @key(constant) String := "Hi, world.";
-
 @end(Example)
-@begin{Leading}
+
+@begin{WideLeading}
 @keepnext@;@i(Examples of constant declarations:)
-@end{Leading}
+@end{WideLeading}
 @begin(Example)
 Limit     : @key(constant) Integer := 10_000;
 Low_Limit : @key(constant) Integer := Limit/10;
@@ -4810,12 +4812,12 @@ of Float_IO).
 @end{ImplPerm}
 
 @begin{Notes}
-  @begin{Leading}
+  @begin{NotesLeading}
   The base range of
   an ordinary fixed point type need not include the specified bounds
   themselves
   so that the range specification can be given in a natural way, such as:
-  @end{Leading}
+  @end{NotesLeading}
   @begin(example)
 @b(type) Fraction @b(is delta) 2.0**(-15) @b(range) -1.0 .. 1.0;
   @end(example)

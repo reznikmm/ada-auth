@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/03 05:37:43 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/05 04:53:24 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:43 $}
+@Comment{$Date: 2000/08/05 04:53:24 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1886,6 +1886,9 @@ accuracy rule, which takes precedence over the maximum relative error bounds,
 is that the result interval is the model interval of @i{EF}.Float_Type
 associated with the exact mathematical result given in the table.
 
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number (12) from original RM}>]
+
 @Table[Columns=<5>,
 Caption=<@b{Tightly Approximated Elementary Function Results}>,
 Headers=<@b{Function}@\@b{Value of X}@\@b{Value of Y}@\@b{Exact Result @*when Cycle @*Specified}@\@b{Exact Result @*when Cycle @*Omitted}>,
@@ -2235,6 +2238,9 @@ otherwise,
 The error bounds for particular complex functions are tabulated below.
 In the table, the error bound is given as the coefficient of
 @i{CT}.Real'Model_Epsilon.
+
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number (12) from original RM}>]
 
 @Table[Columns=<4>,
 Caption=<@b{Error Bounds for Particular Complex Functions}>,

@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:45 $}
+@Comment{$Date: 2000/08/05 04:53:24 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -250,12 +250,12 @@ floating point types only as an obsolescent feature).
 
 @begin{StaticSem}
 For every private subtype S,
-@begin{Discussion}
-including a generic formal private subtype
-@end{Discussion}
 the following attribute is defined:
+@begin{Discussion}
+This includes generic formal private subtypes.
+@end{Discussion}
 @begin{Description}
-S'@attr{Constrained} @\Yields the value False if S denotes an unconstrained
+S'@attr{Constrained}@\Yields the value False if S denotes an unconstrained
               nonformal private subtype with discriminants; also yields the
               value False if S denotes a generic formal private subtype, and
               the associated actual subtype is either an unconstrained subtype
@@ -286,55 +286,54 @@ So one should think of its designator as being 'Constrained_Or_Elementary.
 @begin{StaticSem}
 The following declaration exists in the declaration of package Standard:
 @begin{example}
-   @key[package] ASCII @key[is]
+@key[package] ASCII @key[is]
 
 
-      --@RI{  Control characters:}
+  --@RI{  Control characters:}
 
 
-@tabclear()@tabset(P58)
-      NUL   : @key[constant] Character := @RI{nul}; @\SOH   : @key[constant] Character := @RI{soh};
-      STX   : @key[constant] Character := @RI{stx}; @\ETX   : @key[constant] Character := @RI{etx};
-      EOT   : @key[constant] Character := @RI{eot}; @\ENQ   : @key[constant] Character := @RI{enq};
-      ACK   : @key[constant] Character := @RI{ack}; @\BEL   : @key[constant] Character := @RI{bel};
-      BS    : @key[constant] Character := @RI{bs}; @\HT    : @key[constant] Character := @RI{ht};
-      LF    : @key[constant] Character := @RI{lf}; @\VT    : @key[constant] Character := @RI{vt};
-      FF    : @key[constant] Character := @RI{ff}; @\CR    : @key[constant] Character := @RI{cr};
-      SO    : @key[constant] Character := @RI{so}; @\SI    : @key[constant] Character := @RI{si};
-      DLE   : @key[constant] Character := @RI{dle}; @\DC1   : @key[constant] Character := @RI{dc1};
-      DC2   : @key[constant] Character := @RI{dc2}; @\DC3   : @key[constant] Character := @RI{dc3};
-      DC4   : @key[constant] Character := @RI{dc4}; @\NAK   : @key[constant] Character := @RI{nak};
-      SYN   : @key[constant] Character := @RI{syn}; @\ETB   : @key[constant] Character := @RI{etb};
-      CAN   : @key[constant] Character := @RI{can}; @\EM    : @key[constant] Character := @RI{em};
-      SUB   : @key[constant] Character := @RI{sub}; @\ESC   : @key[constant] Character := @RI{esc};
-      FS    : @key[constant] Character := @RI{fs}; @\GS    : @key[constant] Character := @RI{gs};
-      RS    : @key[constant] Character := @RI{rs}; @\US    : @key[constant] Character := @RI{us};
-      DEL   : @key[constant] Character := @RI{del};
+@tabclear()@tabset(P47)
+  NUL   : @key[constant] Character := @RI{nul}; @\SOH   : @key[constant] Character := @RI{soh};
+  STX   : @key[constant] Character := @RI{stx}; @\ETX   : @key[constant] Character := @RI{etx};
+  EOT   : @key[constant] Character := @RI{eot}; @\ENQ   : @key[constant] Character := @RI{enq};
+  ACK   : @key[constant] Character := @RI{ack}; @\BEL   : @key[constant] Character := @RI{bel};
+  BS    : @key[constant] Character := @RI{bs}; @\HT    : @key[constant] Character := @RI{ht};
+  LF    : @key[constant] Character := @RI{lf}; @\VT    : @key[constant] Character := @RI{vt};
+  FF    : @key[constant] Character := @RI{ff}; @\CR    : @key[constant] Character := @RI{cr};
+  SO    : @key[constant] Character := @RI{so}; @\SI    : @key[constant] Character := @RI{si};
+  DLE   : @key[constant] Character := @RI{dle}; @\DC1   : @key[constant] Character := @RI{dc1};
+  DC2   : @key[constant] Character := @RI{dc2}; @\DC3   : @key[constant] Character := @RI{dc3};
+  DC4   : @key[constant] Character := @RI{dc4}; @\NAK   : @key[constant] Character := @RI{nak};
+  SYN   : @key[constant] Character := @RI{syn}; @\ETB   : @key[constant] Character := @RI{etb};
+  CAN   : @key[constant] Character := @RI{can}; @\EM    : @key[constant] Character := @RI{em};
+  SUB   : @key[constant] Character := @RI{sub}; @\ESC   : @key[constant] Character := @RI{esc};
+  FS    : @key[constant] Character := @RI{fs}; @\GS    : @key[constant] Character := @RI{gs};
+  RS    : @key[constant] Character := @RI{rs}; @\US    : @key[constant] Character := @RI{us};
+  DEL   : @key[constant] Character := @RI{del};
 
 
-      --@RI{ Other characters:}
+  --@RI{ Other characters:}
 
-      Exclam    : @key[constant] Character:= '!'; @\Quotation : @key[constant] Character:= '"';
-      Sharp     : @key[constant] Character:= '#'; @\Dollar    : @key[constant] Character:= '$';
-      Percent   : @key[constant] Character:= '%'; @\Ampersand : @key[constant] Character:= '&';
-      Colon     : @key[constant] Character:= ':'; @\Semicolon : @key[constant] Character:= ';';
-      Query     : @key[constant] Character:= '?'; @\At_Sign   : @key[constant] Character:= '@@';
-      L_Bracket : @key[constant] Character:= '['; @\Back_Slash: @key[constant] Character:= '\';
-      R_Bracket : @key[constant] Character:= ']'; @\Circumflex: @key[constant] Character:= '^';
-      Underline : @key[constant] Character:= '_'; @\Grave     : @key[constant] Character:= '`';
-      L_Brace   : @key[constant] Character:= '{'; @\Bar       : @key[constant] Character:= '|';
-      R_Brace   : @key[constant] Character:= '}'; @\Tilde     : @key[constant] Character:= '~';
+  Exclam   : @key[constant] Character:= '!';@\Quotation : @key[constant] Character:= '"';
+  Sharp    : @key[constant] Character:= '#';@\Dollar    : @key[constant] Character:= '$';
+  Percent  : @key[constant] Character:= '%';@\Ampersand : @key[constant] Character:= '&';
+  Colon    : @key[constant] Character:= ':';@\Semicolon : @key[constant] Character:= ';';
+  Query    : @key[constant] Character:= '?';@\At_Sign   : @key[constant] Character:= '@@';
+  L_Bracket: @key[constant] Character:= '[';@\Back_Slash: @key[constant] Character:= '\';
+  R_Bracket: @key[constant] Character:= ']';@\Circumflex: @key[constant] Character:= '^';
+  Underline: @key[constant] Character:= '_';@\Grave     : @key[constant] Character:= '`';
+  L_Brace  : @key[constant] Character:= '{';@\Bar       : @key[constant] Character:= '|';
+  R_Brace  : @key[constant] Character:= '}';@\Tilde     : @key[constant] Character:= '~';
 
-
-      --@RI{ Lower case letters:}
-
-
-      LC_A: @key[constant] Character:= 'a';
-      ...
-      LC_Z: @key[constant] Character:= 'z';
+  --@RI{ Lower case letters:}
 
 
-   @key[end] ASCII;
+  LC_A: @key[constant] Character:= 'a';
+  ...
+  LC_Z: @key[constant] Character:= 'z';
+
+
+@key[end] ASCII;
 @end{example}
 @end{StaticSem}
 

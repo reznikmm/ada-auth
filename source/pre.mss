@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:43 $}
+@Comment{$Date: 2000/08/05 04:53:24 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.16 $}
+@comment{$Revision: 1.17 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -16,10 +16,10 @@ There are three root library units:
 Ada, Interfaces, and System;
 other library units are children of these:
 
-@ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047)}@ @;@comment{paragraph number here}
+@ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047)}@grow<@ >@;@comment{paragraph number here, "grow" because
+paragraph numbers seem to intrude on the RHS column, misaligning it.}
 @begin{DisplaywithoutParanum}
-@TabClear{}
-@TabSet{L2, L4, L6, L8, L10, L12, L14, L16}
+@TabClear{}@TabSet{L2, L4, L6, L8, L10, L12, L14, L16}
 @begin{TwoCol}
 @shrink<Standard @em @RefSecNum{The Package Standard}
 @\Ada @em @RefSecNum{The Package Ada}

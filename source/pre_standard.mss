@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/08/05 04:53:24 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:45 $}
+@Comment{$Date: 2000/08/05 04:53:24 $}
 
 @LabeledClause{The Package Standard}
 
@@ -30,8 +30,7 @@ The  library package Standard has the following declaration:
 @ImplDef{The names and characteristics of the numeric subtypes declared in
 the visible part of package Standard.}
 @begin{Example}
-@RootLibUnit{Standard}
-@key[package] Standard @key[is]
+@RootLibUnit{Standard}@key[package] Standard @key[is]
    @key[pragma] Pure(Standard);
 
 @LangDefType{Package=[Standard],Type=[Boolean]}
@@ -67,8 +66,8 @@ the visible part of package Standard.}
    @key[type] Integer @key[is] @key{range} @RI{implementation-defined};
 
 
-   @key[subtype] Natural  @key[is] Integer @key[range] 0 .. Integer'Last;
-   @key[subtype] Positive @key[is] Integer @key[range] 1 .. Integer'Last;
+   @key[subtype] @AdaDefn{Natural}  @key[is] Integer @key[range] 0 .. Integer'Last;
+   @key[subtype] @AdaDefn{Positive} @key[is] Integer @key[range] 1 .. Integer'Last;
 
 
 @Keepnext   --@RI{ The predefined operators for type Integer are as follows:}
@@ -281,10 +280,10 @@ the visible part of package Standard.}
 
 @Keepnext   --@RI{ The predefined exceptions:}
 
-   Constraint_Error: @key[exception];
-   Program_Error   : @key[exception];
-   Storage_Error   : @key[exception];
-   Tasking_Error   : @key[exception];
+   @AdaDefn{Constraint_Error}: @key[exception];
+   @AdaDefn{Program_Error}   : @key[exception];
+   @AdaDefn{Storage_Error}   : @key[exception];
+   @AdaDefn{Tasking_Error}   : @key[exception];
 
 @key[end] Standard;
 @end{Example}

@@ -11,8 +11,10 @@ I probably ought to add a style just for this purpose)
 @begin{WithoutParanum}
 @thickline
 
+@begin{WideLeading}
 @tabclear()@tabset(P45)
 @Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}]>
+@end{WideLeading}
 
 @thickline
 
@@ -32,10 +34,10 @@ I probably ought to add a style just for this purpose)
 @end{WithoutParanum}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/08/03 05:37:35 $}
+@Comment{$Date: 2000/08/05 04:53:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of

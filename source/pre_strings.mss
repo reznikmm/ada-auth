@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/08/05 04:53:24 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/05/29 05:47:23 $}
+@Comment{$Date: 2000/08/05 04:53:24 $}
 
 @LabeledClause{String Handling}
 
@@ -30,8 +30,7 @@ common to the string handling packages.
 @begin{StaticSem}
 The library package Strings has the following declaration:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Strings]}
-@key[package] Ada.Strings @key[is]
+@ChildUnit{Parent=[Ada],Child=[Strings]}@key[package] Ada.Strings @key[is]
    @key[pragma] Pure(Strings);
 
    Space      : @key[constant] Character      := ' ';
@@ -62,8 +61,7 @@ entities needed for character sets and character-to-character mappings.
 @begin{StaticSem}
 The library package Strings.Maps has the following declaration:
 @begin{example}
-@ChildUnit{Parent=[Ada.Strings],Child=[Maps]}
-@key[package] Ada.Strings.Maps @key[is]
+@ChildUnit{Parent=[Ada.Strings],Child=[Maps]}@key[package] Ada.Strings.Maps @key[is]
    @key[pragma] Preelaborate(Maps);
 
    --@RI{ Representation for a set of character values:}
@@ -373,8 +371,7 @@ procedures.
 The library package Strings.Fixed has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
-@ChildUnit{Parent=[Ada.Strings],Child=[Fixed]}
-@key[package] Ada.Strings.Fixed @key[is]
+@ChildUnit{Parent=[Ada.Strings],Child=[Fixed]}@key[package] Ada.Strings.Fixed @key[is]
    @key[pragma] Preelaborate(Fixed);
 
 
@@ -998,8 +995,7 @@ the copying and comparison of bounded strings.@end{reason}
 The library package Strings.Bounded has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
-@ChildUnit{Parent=[Ada.Strings],Child=[Bounded]}
-@key[package] Ada.Strings.Bounded @key[is]
+@ChildUnit{Parent=[Ada.Strings],Child=[Bounded]}@key[package] Ada.Strings.Bounded @key[is]
    @key[pragma] Preelaborate(Bounded);
 
 
@@ -1495,8 +1491,7 @@ as the length does not exceed the allocated length.
 The library package Strings.Unbounded has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
-@ChildUnit{Parent=[Ada.Strings],Child=[Unbounded]}
-@key[package] Ada.Strings.Unbounded @key[is]
+@ChildUnit{Parent=[Ada.Strings],Child=[Unbounded]}@key[package] Ada.Strings.Unbounded @key[is]
    @key[pragma] Preelaborate(Unbounded);
 
 @LangDefType{Package=[Ada.Strings.Unbounded],Type=[Unbounded_String]}
@@ -1861,8 +1856,7 @@ in a preelaborable way (i.e. via aggregates versus function calls).
 The library package Strings.Maps.Constants has the following declaration:
 
 @begin{example}
-@ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants]}
-@key[package] Ada.Strings.Maps.Constants @key[is]
+@ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants]}@key[package] Ada.Strings.Maps.Constants @key[is]
    @key[pragma] Preelaborate(Constants);
 
    Control_Set           : @key[constant] Character_Set;
@@ -1921,8 +1915,7 @@ strings of Character elements.
 @begin{StaticSem}
 The package Strings.Wide_Maps has the following declaration.
 @begin{example}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Maps]}
-@key[package] Ada.Strings.Wide_Maps @key[is]
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Maps]}@key[package] Ada.Strings.Wide_Maps @key[is]
    @key[pragma] Preelaborate(Wide_Maps);
 
    --@RI{ Representation for a set of Wide_Character values:}

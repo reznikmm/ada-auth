@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:36 $}
+@Comment{$Date: 2000/08/05 04:53:23 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3417,8 +3417,7 @@ shall be an access-to-object type.  Further:
   If the target type is an access-to-variable
   type, then the operand type shall be an access-to-variable type;
 @begin{Ramification}
-If
-  the target type is an access-to-constant type, then the operand type
+  If the target type is an access-to-constant type, then the operand type
   can be access-to-constant or access-to-variable.
 @end{Ramification}
 
@@ -3442,8 +3441,7 @@ These rules are designed to ensure that aliased array objects
   an access value as a single pointer.)
 @end{Reason}
 
-@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
-
+  @PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
 
@@ -3466,8 +3464,7 @@ type shall be an access-to-subprogram type.  Further:
   The designated profiles shall be subtype-conformant.
 @Defn2{Term=[subtype conformance],Sec=(required)}
 
-@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
-
+  @PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
   @PDefn{generic contract issue}

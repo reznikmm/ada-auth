@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/08/05 04:53:24 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:44 $}
+@Comment{$Date: 2000/08/05 04:53:24 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -855,7 +855,7 @@ is not defined by the language.], Old=[]}
 
 @Chg{New=[@f{To_Ada (Native_C_Char) = Character'Value(char'Image(Native_C_Char))}@*
 provided that Character'Value does not raise an exception;
-otherwise the result is not defined by the language., Old=[]}
+otherwise the result is not defined by the language.], Old=[]}
 @end{ImplNote}
 
 @begin{Example}
