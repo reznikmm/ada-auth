@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.1 $ $Date: 2000/04/14 23:50:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:04 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/14 23:50:03 $}
+@SetPageHeadings{$Date: 2000/04/15 00:44:04 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/14 23:50:02 $}
+@SetPageHeadings{$Date: 2000/04/15 00:44:01 $}
 @LabeledChapter{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @begin{Intro}
 @Defn{subprogram}

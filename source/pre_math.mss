@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.1 $ $Date: 2000/04/14 23:50:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:04 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/14 23:50:03 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:04 $}
 
 @LabeledAppendixSection{The Numerics Packages}
 

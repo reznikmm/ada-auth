@@ -1,11 +1,11 @@
 @Part(impldef, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/14 23:50:03 $}
+@SetPageHeadings{$Date: 2000/04/15 00:44:03 $}
 @LabeledInformativeAnnex{Implementation-Defined Characteristics}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/impldef.mss,v $}
-@comment{$Revision: 1.1 $}
+@comment{$Revision: 1.2 $}
 
 @begin{Intro}
 @Chg{}

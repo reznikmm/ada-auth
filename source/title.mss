@@ -20,7 +20,7 @@
     else=<@Modify(I2Copyright, Fill)>}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2000/04/14 23:50:02 $}
+@comment{$Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $}
 @begin(I2Title)
 @begin{FlushRight, Fixed 0.75inch}
 @HelveticaBold{INTERNATIONAL STANDARD} ISO/IEC 8652:@Value{StandardYear}(E)

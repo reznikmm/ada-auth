@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/14 23:50:03 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 @LabeledSection{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}

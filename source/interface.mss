@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.1 $ $Date: 2000/04/14 23:50:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/14 23:50:03 $}
+@SetPageHeadings{$Date: 2000/04/15 00:44:05 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}

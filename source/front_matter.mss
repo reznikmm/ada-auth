@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedB(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2000/04/14 23:50:03 $}
+@comment{$Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $}
 
 @begin{Intro}
 @begin{AARMandRM9XOnly}

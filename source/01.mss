@@ -1,6 +1,6 @@
 @Part(01, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/14 23:50:02 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:00 $}
 @PageOneFootings{}
 
 @PrefaceSection{} @Comment{Go to odd page.}
@@ -55,10 +55,10 @@ Languages @EmDash{} Ada
 @BlankSpace{0.5inch}
 
 @ChapterSamePage{General}
-@SetPageHeadingsNoPage{$Date: 2000/04/14 23:50:02 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of

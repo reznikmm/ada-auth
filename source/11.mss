@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/14 23:50:03 $}
+@SetPageHeadings{$Date: 2000/04/15 00:44:02 $}
 @LabeledChapter{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @begin{Intro}
 @begin{Redundant}

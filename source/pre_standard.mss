@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.1 $ $Date: 2000/04/14 23:50:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/14 23:50:03 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:05 $}
 
 @LabeledAppendixSection{The Package Standard}
 

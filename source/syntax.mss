@@ -1,11 +1,11 @@
 @Part(syntax, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/14 23:50:02 $}
+@SetPageHeadings{$Date: 2000/04/15 00:44:05 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.1 $}
+@comment{$Revision: 1.2 $}
 
 @begin{Intro}
 @Defn2{Term=[syntax], Sec=(complete listing)}
