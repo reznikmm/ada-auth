@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/09/17 04:56:26 $}
+@Comment{$Date: 2004/10/29 00:12:33 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -433,7 +433,7 @@ library @nt{package_declaration} is immediately preceded by the reserved word
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[@Redundant[There is no syntax for declaring limited views
 of packages, because they are always implicit.] The implicit declaration of a
-limited view of a package is @Redundant[@i{not} the declaration of a library
+limited view of a package is @Redundant[not the declaration of a library
 unit (the library package_declaration is); nonetheless, it is] a
 @nt{library_item}.],Old=[]}
 
