@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.26 $ $Date: 2000/11/10 20:26:23 $}
+@comment{$Revision: 1.27 $ $Date: 2001/04/05 22:55:23 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -18,7 +18,7 @@ the work item to interpret and maintain the International Standard and to
 produce Technical Corrigenda, as appropriate. The technical work on the
 International Standard is performed by the Ada Rapporteur Group (ARG) of WG 9.
 In September 2000, WG 9 approved and forwarded Technical Corrigendum 1 to
-SC 22 for ISO approval, anticipated by the end of year 2000.],Old=[]}
+SC 22 for ISO approval, which was granted in February 2001.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[The Technical Corrigendum lists the individual changes that need to be
@@ -123,7 +123,7 @@ J. Tokar (USA), and other members too numerous to mention.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[Special thanks go to R. Duff (USA) for his explanations of the
-previous system of formatting these documents during the tedious conversion
+previous system of formatting of these documents during the tedious conversion
 to more modern formats. Special thanks also go to the convener of
 ISO/IEC JTC 1/SC 22/WG 9, J. Moore (USA), without whose help and support
 the corrigendum and this consolidated reference manual would not have been possible.],Old=[]}
