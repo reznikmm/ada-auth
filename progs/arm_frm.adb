@@ -150,6 +150,7 @@ package body ARM_Format is
     --		- RLB - Added InnerInnerItemize == Nested_X2_Bulleted.
     -- 11/04/04 - RLB - Fixed a problem that reset the insertion number for
     --			paragraphs have a normal AARM para. was encountered.
+    -- 11/15/04 - RLB - Added Indented_Nested_Bulleted style.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1891,8 +1892,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			       Outer_Enclosing_Format = Bulleted then
 			       Format_Object.Format := ARM_Output.Code_Indented_Nested_Bulleted;
         		    elsif Outer_Enclosing_Format = Hanging_Indented then
-Ada.Text_IO.Put_Line ("%% Oops, Nested_Bulleted in Indented_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-			       Format_Object.Format := ARM_Output.Indented_Bulleted;
+			       Format_Object.Format := ARM_Output.Indented_Nested_Bulleted;
                             elsif Outer_Enclosing_Format = Syntax_Indented or else
 			          Outer_Enclosing_Format = Syntax then
 Ada.Text_IO.Put_Line ("%% Oops, Nested_Bulleted in Syntax_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
@@ -1959,6 +1959,10 @@ Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Notes paragraph, line " & 
 				    Format_Object.Format := ARM_Output.Indented;
 				        -- %%%% Not Indented enough!
 Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+				elsif Format_Object.Format = ARM_Output.Indented_Nested_Bulleted then
+				    Format_Object.Format := ARM_Output.Indented;
+				        -- %%%% Not Indented enough!
+Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Code_Indented_Bulleted then
 				    Format_Object.Format := ARM_Output.Indented;
 				        -- %%%% Not Indented further.
@@ -2093,6 +2097,10 @@ Ada.Text_IO.Put_Line ("%% Oops, Display in Nested_X2_Bulleted paragraph, line " 
 				        Format_Object.Format := ARM_Output.Indented;
 					    -- %%%% Not Indented enough!
 Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+				    when ARM_Output.Indented_Nested_Bulleted =>
+				        Format_Object.Format := ARM_Output.Indented;
+					    -- %%%% Not Indented enough!
+Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Code_Indented_Bulleted =>
 				        Format_Object.Format := ARM_Output.Indented;
 					    -- %%%% Not Indented further.
@@ -6061,8 +6069,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 		when Change_Attribute =>
 		     -- @ChgAttribute{Version=[<version>], Kind=(<kind>),
-		     --    {A}Ref=[<DR_Number],Chginannex=[T|F],Leading=[T|F],
-		     --    Prefix=<Prefix>,AttrName=<Name>,Text=<Text>}
+		     --    Chginannex=[T|F],Leading=[T|F],
+		     --    Prefix=<Prefix>,AttrName=<Name>,
+		     --    {A}Ref=[<DR_Number>],Text=<Text>}
 		     -- Defines a changed attribute.
 		    declare
 			Close_Ch : Character;

@@ -85,6 +85,7 @@ package ARM_Output is
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents to
     --			avoid circularities.
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
+    -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -139,7 +140,8 @@ package ARM_Output is
 	Small_Code_Indented, Indented, Small_Indented,
 	Bulleted, Nested_Bulleted, Nested_X2_Bulleted,
         Small_Bulleted, Small_Nested_Bulleted, Small_Nested_X2_Bulleted,
-	Indented_Bulleted, Code_Indented_Bulleted, Code_Indented_Nested_Bulleted,
+	Indented_Bulleted, Indented_Nested_Bulleted,
+	Code_Indented_Bulleted, Code_Indented_Nested_Bulleted,
         Syntax_Indented_Bulleted, Notes_Bulleted, Notes_Nested_Bulleted,
 	Hanging, Small_Hanging, Indented_Hanging, Small_Indented_Hanging,
 	Hanging_in_Bulleted, Small_Hanging_in_Bulleted,
@@ -193,6 +195,9 @@ package ARM_Output is
 	--     small bullet, and are in a smaller font (same as Notes).
 	-- Indented_Bulleted paragraphs are indented four units, with a right
 	--     indent of one unit, and each paragraph is preceeded by a bullet.
+	-- Indented_Nested_Bulleted paragraphs are indented five units, with a
+	--     right indent of one unit, and each paragraph is preceeded by a
+	--     bullet.
 	-- Code_Indented_Bulleted paragraphs are indented three units, and each
 	--     paragraph is preceeded by a bullet.
 	-- Code_Indented_Nested_Bulleted paragraphs are indented four units,

@@ -72,6 +72,7 @@ package ARM_Format is
     --  9/10/04 - RLB - Added support for nested changes.
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
+    -- 11/16/04 - RLB - Added Attr_Prefix_Text_Change_Kind.
 
     type Format_Type is tagged limited private;
 
@@ -291,8 +292,9 @@ private
 	Attr_Name_Len : Natural := 0;
 	Attr_Leading : Boolean := False; -- Attribute leading flag
 	Attr_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
+	Attr_Prefix_Text_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 	Attr_Version : ARM_Contents.Change_Version_Type;
-	    -- The above nine items are used only when processing Attribute
+	    -- The above ten items are used only when processing Attribute
 	    -- and Attribute_Leading commands.
 
 	Attr_DB : ARM_Database.Database_Type;

@@ -94,6 +94,9 @@ package body ARM_RTF is
     --  9/15/04 - RLB - Completely rewrote Text_Format to avoid problems
     --			with ordering of calls.
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
+    -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
+    -- 11/16/04 - RLB - Experimented with changes to avoid the hot pink
+    --			revision markers.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -781,6 +784,16 @@ package body ARM_RTF is
 		       Style_String =>
 			 "\s46\widctlpar\adjustright \li1800\fi-180\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1440 \snext46 ");
 			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Indented_Nested_Bulleted),
+		       Font_Size => 18,
+		       Style_Indent => 1800,
+		       Style_Hang_Width => 220,
+		       Style_Before => 0,
+		       Style_After => 100,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s47\widctlpar\adjustright \li1800\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx1080 \snext47 ");
+			  -- Note: Narrower space between and afterwards.
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -790,7 +803,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s47\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s48\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs20\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 17,
@@ -799,7 +812,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s48\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s49\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 17,
@@ -808,7 +821,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s49\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s50\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1252,6 +1265,16 @@ package body ARM_RTF is
 		       Style_String =>
 			 "\s46\widctlpar\adjustright \li1800\fi-180\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1440 \snext46 ");
 			  -- Note: Narrower space between.
+	    Set_Style (Paragraph_Info(ARM_Output.Indented_Nested_Bulleted),
+		       Font_Size => 22,
+		       Style_Indent => 1800,
+		       Style_Hang_Width => 230,
+		       Style_Before => 0,
+		       Style_After => 110,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s47\widctlpar\adjustright \li1800\fi-230\ri360\fs22\f0\cgrid\sa120\qj\sl-240\slmult0\tx1080 \snext47 ");
+			  -- Note: Narrower space between and afterwards.
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -1261,7 +1284,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s47\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s48\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs24\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 22,
@@ -1270,7 +1293,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s48\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s49\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 22,
@@ -1279,7 +1302,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s49\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s50\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1384,9 +1407,11 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested Enumerated;}");
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_X2_Bulleted));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Nested X2 Bulleted;}");
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested X2 Bulleted;}");
         if Output_Object.Big_Files then
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested X2 Bulleted;}");
+	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented_Nested_Bulleted));
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Nested Bulleted;}");
 	    -- Define the TOC styles:
 	    Write_Style (Output_Object.Output_File, TOC_1_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 1;}");
@@ -1395,8 +1420,8 @@ package body ARM_RTF is
 	    Write_Style (Output_Object.Output_File, TOC_3_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 3;}}");
 	else
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested X2 Bulleted;}}");
+	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented_Nested_Bulleted));
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Nested Bulleted;}}");
 	end if;
             -- \additive means that the style inherits from the previous style.
 	    -- \basedon defines the style that the style was inherited from.
@@ -1423,7 +1448,7 @@ package body ARM_RTF is
 	    -- \tqr - set following tab as a right tab.
 
 	-- Revision table:
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\*\revtbl {Original Text;}{Technical Corrigendum 1;}{Amendment 1;}}");
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\*\revtbl {Original Text;}{Technical Corrigendum 1;}{Unused Hot Pink;}{Amendment 1;}}");
 
 	-- Information (truncated):
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\info{\title " &
@@ -1721,7 +1746,8 @@ package body ARM_RTF is
 
 	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
 		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
-		 ARM_Output.Indented_Bulleted | ARM_Output.Code_Indented_Bulleted |
+		 ARM_Output.Indented_Bulleted | ARM_Output.Indented_Nested_Bulleted |
+		 ARM_Output.Code_Indented_Bulleted |
 		 ARM_Output.Code_Indented_Nested_Bulleted |
 		 ARM_Output.Syntax_Indented_Bulleted |
 		 ARM_Output.Notes_Bulleted | ARM_Output.Notes_Nested_Bulleted |
@@ -1822,7 +1848,8 @@ package body ARM_RTF is
 		    Output_Object.Char_Count);
 	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
 		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
-		 ARM_Output.Indented_Bulleted | ARM_Output.Code_Indented_Bulleted |
+		 ARM_Output.Indented_Bulleted | ARM_Output.Indented_Nested_Bulleted |
+		 ARM_Output.Code_Indented_Bulleted |
 		 ARM_Output.Code_Indented_Nested_Bulleted |
 		 ARM_Output.Syntax_Indented_Bulleted |
 		 ARM_Output.Notes_Bulleted | ARM_Output.Notes_Nested_Bulleted =>
@@ -2203,9 +2230,21 @@ package body ARM_RTF is
 	-- If No_Page_Break is True, suppress any page breaks.
 	-- Raises Not_Valid_Error if in a paragraph.
 	Count : Natural; -- Not used after being set.
+	function Adj_Version return ARM_Contents.Change_Version_Type is
+	   -- Adjust the version number.
+	   use type ARM_Contents.Change_Version_Type;
+        begin
+	    -- Code to skip over weirdly colored second revision.
+	    if Version = '0' or else Version = '1' then
+		return Version;
+	    else
+		return ARM_Contents.Change_Version_Type'Succ(Version);
+	    end if;
+	end Adj_Version;
+
 	function Header_Text return String is
 	begin
-	    return "{\revised\revauth" & Version & " " & New_Header_Text & "}{\deleted\revauthdel" & Version & " " & Old_Header_Text & "}";
+	    return "{\revised\revauth" & Adj_Version & " " & New_Header_Text & "}{\deleted\revauthdel" & Adj_Version & " " & Old_Header_Text & "}";
 	end Header_Text;
     begin
 	if not Output_Object.Is_Valid then
@@ -3343,6 +3382,17 @@ package body ARM_RTF is
 
 	procedure Make_Revision is
 	    -- Make any needed revision:
+	    function Adj (Version : ARM_Contents.Change_Version_Type) return ARM_Contents.Change_Version_Type is
+	       -- Adjust the version number.
+	       use type ARM_Contents.Change_Version_Type;
+            begin
+	        -- Code to skip over weirdly colored second revision.
+	        if Version = '0' or else Version = '1' then
+		    return Version;
+	        else
+		    return ARM_Contents.Change_Version_Type'Succ(Version);
+	        end if;
+	    end Adj;
 	begin
 	    -- We could "improve" this by keeping similar changes together,
 	    -- especially for changes to/from Both, but its a lot more work
@@ -3350,7 +3400,7 @@ package body ARM_RTF is
 	    case Change is
 		when ARM_Output.Insertion =>
 --Ada.Text_Io.Put (" Change ins");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Version & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Adj(Version) & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
 			-- Note: \revauthN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
@@ -3358,7 +3408,7 @@ package body ARM_RTF is
 			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.Deletion =>
 --Ada.Text_Io.Put (" Change del");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Version & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Adj(Version) & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 21;
 			-- Note: \revauthdelN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
@@ -3366,9 +3416,9 @@ package body ARM_RTF is
 			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.Both =>
 --Ada.Text_Io.Put (" Change both");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Added_Version & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Adj(Added_Version) & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Version & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Adj(Version) & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 21;
 			-- Note: \revauthdelN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.

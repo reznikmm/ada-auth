@@ -86,6 +86,7 @@ package body ARM_Text is
     --			replacement of changed text.
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
+    -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -348,6 +349,10 @@ package body ARM_Text is
                 Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 12;
+	    when ARM_Output.Indented_Nested_Bulleted => Output_Object.Indent_Amount := 22;
+                Ada.Text_IO.Put (Output_Object.Output_File, "                ");
+		-- No prefix in text mode.
+		Output_Object.Char_Count := 16;
 	    when ARM_Output.Code_Indented_Bulleted => Output_Object.Indent_Amount := 14;
                 Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		-- No prefix in text mode.
@@ -517,8 +522,8 @@ package body ARM_Text is
 		end loop;
 	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
 		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
-		 ARM_Output.Indented_Bulleted | ARM_Output.Code_Indented_Bulleted |
-		 ARM_Output.Code_Indented_Nested_Bulleted |
+		 ARM_Output.Indented_Bulleted | ARM_Output.Indented_Nested_Bulleted |
+		 ARM_Output.Code_Indented_Bulleted | ARM_Output.Code_Indented_Nested_Bulleted |
 		 ARM_Output.Syntax_Indented_Bulleted |
 		 ARM_Output.Notes_Bulleted | ARM_Output.Notes_Nested_Bulleted |
 		 ARM_Output.Hanging | ARM_Output.Indented_Hanging |

@@ -446,7 +446,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	on the handling of the arguments.
 @ChgAttribute{Version=[<version>],Kind=(<kind>),ChginAnnex=[T|F],
 	Leading=[T|F],Prefix=<Prefix>,AttrName=<Name>,
-	[Ref={<DR_Number>}|ARef={<AI_Number>}|],Text=<Text>}
+	[Ref={<DR_Number>}|ARef={<AI_Number>}],Text=<Text>}
 	Marks a changed attribute entry. (Essentially a combination of
 	ChgRef and Attribute.) ChginAnnex controls whether the change
 	is reflected in the Annex. (Set this to F when the change is in
