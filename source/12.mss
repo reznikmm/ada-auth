@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2004/12/12 05:36:21 $}
+@Comment{$Date: 2004/12/13 05:56:26 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -222,6 +222,8 @@ We can't do that for @nt{generic_formal_parameter_declaration},
 because of confusion with normal formal parameters of subprograms.
 @end{DiffWord83}
 
+
+
 @RmNewPage@Comment{Insert page break so printed RM's look better.}
 @LabeledClause{Generic Bodies}
 
@@ -307,6 +309,7 @@ is always the completion of a declaration.
 @end{Example}
 @end{Examples}
 
+
 @LabeledClause{Generic Instantiation}
 
 @begin{Intro}
@@ -339,12 +342,15 @@ Similarly, the contract model does not apply to @LinkTimeTitle.
 @end{MetaRules}
 
 @begin{Syntax}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
 @Syn{lhs=<generic_instantiation>,rhs="
      @key{package} @Syn2{defining_program_unit_name} @key{is}
          @key{new} @SynI{generic_package_}@Syn2{name} [@Syn2{generic_actual_part}];
-   | @key{procedure} @Syn2{defining_program_unit_name} @key{is}
+   | @Chg{Version=[2],New=<[@Syn2{overriding_indicator}]
+     >,Old=<>}@key{procedure} @Syn2{defining_program_unit_name} @key{is}
          @key{new} @SynI{generic_procedure_}@Syn2{name} [@Syn2{generic_actual_part}];
-   | @key{function} @Syn2{defining_designator} @key{is}
+   | @Chg{Version=[2],New=<[@Syn2{overriding_indicator}]
+     >,Old=<>}@key{function} @Syn2{defining_designator} @key{is}
          @key{new} @SynI{generic_function_}@Syn2{name} [@Syn2{generic_actual_part}];"}
 
 
@@ -438,8 +444,8 @@ without knowing anything about the actuals:
 A formal derived subtype is constrained if and only if the ancestor
 subtype is constrained.
 A formal array type is constrained if and only if the declarations
-say@Chg{New=[],Old=[s]} so.
-@Chg{New=[A formal private type is constrained if it does not have a
+@Chg{New=[say],Old=[says]}
+so.@Chg{New=[ A formal private type is constrained if it does not have a
 discriminant part.],Old=[]}
 Other formal subtypes are unconstrained,
 even though they might be constrained in an instance.
@@ -1187,6 +1193,13 @@ Besides, there's really no need to define the concept of matching for
 generic parameters.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+  @ChgAdded{Version=[2],Text=[An @nt{overriding_indicator} (see
+  @RefSecNum{Visibility}) is allowed on a subprogram instantiation.]}
+@end{DiffWord95}
+
+
 @LabeledClause{Formal Objects}
 
 @begin{Intro}
@@ -1251,19 +1264,22 @@ but that's too pedantic to worry about.
 is most certainly @i{not} a @ResolutionName.)
 @end{Honest}
 
-The type of a generic formal object of mode @key{in} shall be
-nonlimited.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@ChgDeleted{Version=[2],Text=[The type of a generic formal object of mode
+@key{in} shall be nonlimited.]}
 @begin{Reason}
-Since a generic formal object is like a constant of mode
-@key{in} initialized to the value of the actual,
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Since a generic formal object is like a
+constant of mode @key{in} initialized to the value of the actual,
 a limited type would not make sense, since initializing a constant is
 not allowed for a limited type.
 That is, generic formal objects of mode @key{in} are passed by copy,
-and limited types are not supposed to be copied.
+and limited types are not supposed to be copied.]}
 @end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00255-01]}
 A @nt{formal_object_declaration} declares a generic formal object.
 The default mode is @key{in}.
 @PDefn2{Term=[nominal subtype], Sec=(of a generic formal object)}
@@ -1274,20 +1290,40 @@ the nominal subtype is the one denoted by the
 For a formal object of mode @key{in out}, its type
 is determined by the @nt<subtype_mark> in the declaration;
 its nominal subtype is nonstatic, even if the
-@nt<subtype_mark> denotes a static subtype.
+@nt<subtype_mark> denotes a static subtype@Chg{Version=[2],
+New=[; for a composite type, its nominal subtype is unconstrained if the first
+subtype of the type is unconstrained@Redundant[, even if the @nt{subtype_mark}
+denotes a constrained subtype]],Old=[]}.
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00255-01]}
+  @ChgAdded{Version=[2],Text=[We require that the subtype is
+  unconstrained because a formal @key{in out} acts like a renaming, and
+  thus the given subtype is ignored for purposes of matching; any value of
+  the type can be passed. Thus we only can assume the object is constrained
+  if the first subtype is constrained (and thus there can be no unconstrained
+  subtypes for the type). If we didn't do this, it would be possible to
+  rename or take 'Access of components that could disappear due to an
+  assignment to the whole object.]}
+@end{Reason}
 
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00269-01]}
+@Chg{Version=[2],New=[@Defn2{Term=[full constant declaration],
+  Sec=(corresponding to a formal object of mode @key[in])}],Old=[]}
 @Defn2{Term=[stand-alone constant],
   Sec=(corresponding to a formal object of mode @key[in])}
 In an instance,
 a @nt{formal_object_declaration} of mode @key{in}
-declares a new stand-alone constant
-object whose initialization expression is the
-actual,
+@Chg{Version=[2],New=[is a @i<full constant declaration> and ],
+Old=[]}declares a new stand-alone constant
+object whose initialization expression is the actual,
 whereas a @nt{formal_object_declaration} of mode @key{in out}
 declares a view whose properties are identical to those of the actual.
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 These rules imply that generic formal objects of mode @key{in} are
-passed by copy,
+passed by copy@Chg{Version=[2],New=[ (or are built-in-place for
+a limited type)],Old=[]},
 whereas generic formal objects of mode @key{in out} are passed by
 reference.
 
@@ -1373,6 +1409,27 @@ We decided not to make this change, because it does not produce any
 important benefit, and any change has some cost.
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  A generic formal @key{in} object can have
+  a limited type. The actual for such an object must be built-in-place
+  via a @nt{function_call} or @nt{aggregate}, see @RefSecNum{Limited Types}.]}
+@end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00255-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that the nominal subtype of a
+  composite formal @key{in out} object is unconstrained if the first subtype
+  of the type is unconstrained.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that a formal @key{in} object can
+  be static when referenced from outside of the instance (by declaring
+  such an object to be a full constant declaration).]}
+@end{DiffWord95}
+
+
 @LabeledClause{Formal Types}
 
 @begin{Intro}
@@ -1397,6 +1454,7 @@ scheme very well.
     @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition};"}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Syn{lhs=<formal_type_definition>,rhs="
       @Syn2{formal_private_type_definition}
     | @Syn2{formal_derived_type_definition}
@@ -1407,7 +1465,8 @@ scheme very well.
     | @Syn2{formal_ordinary_fixed_point_definition}
     | @Syn2{formal_decimal_fixed_point_definition}
     | @Syn2{formal_array_type_definition}
-    | @Syn2{formal_access_type_definition}"}
+    | @Syn2{formal_access_type_definition}@Chg{Version=[2],New=[
+    | @Syn2{formal_interface_type_definition}],Old=[]}"}
 @end{Syntax}
 
 @begin{Legality}
@@ -1494,6 +1553,7 @@ so long as the formal has unknown discriminants.
 
 @begin{StaticSem}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0037],ARef=[AI95-00043-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01]}
 @Redundant[The formal type also belongs to each class that contains
 the determined class.]
 The primitive subprograms of the type are as for any
@@ -1502,7 +1562,9 @@ derived type, these are the predefined operators of the type@Chg{New=[.
 For an elementary formal type, the predefined operators are implicitly declared
 immediately after the declaration of the formal type. For a composite formal
 type, the predefined operators are implicitly declared either immediately after
-the declaration of the formal type, or later in its immediate scope according
+the declaration of the formal type, or later
+@Chg{Version=[2],New=[immediately within the declarative region in which the
+type is declared],Old=[in its immediate scope]} according
 to the rules of @RefSecNum(Private Operations).],
 Old=[; they are implicitly declared immediately after the declaration
 of the formal type.]} In an instance, the copy of such an
@@ -1525,6 +1587,7 @@ private type, or as a type derived from a (visibly) tagged type.
 not.)
 @end{Ramification}
 @end{StaticSem}
+
 
 @begin{Notes}
 Generic formal types, like all types, are not named.
@@ -1598,10 +1661,16 @@ had to.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0037],ARef=[AI95-00043-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the wording to properly
-define the location where operators are defined for formal array types.
-The word here was inconsistent with that in @RefSec{Private Operations}.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0037],ARef=[AI95-00043-01],ARef=[AI95-00233-01]}
+  @ChgAdded{Version=[2],Text=[Corrigendum 1 corrected the wording to properly
+  define the location where operators are defined for formal array types.
+  The wording here was inconsistent with that in @RefSec{Private Operations}.
+  For the Amendment, this wording was corrected again, because it didn't
+  reflect the Corrigendum 1 revisions in @RefSecNum{Private Operations}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[Formal interface types are defined; see
+  @RefSec{Formal Interface Types}.]}
 @end{DiffWord95}
 
 
@@ -1621,8 +1690,10 @@ rooted at the ancestor type.]
   rhs="[[@key{abstract}] @key{tagged}] [@key{limited}] @key{private}"}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Syn{lhs=<formal_derived_type_definition>,
-  rhs="[@key{abstract}] @key{new} @Syn2{subtype_mark} [@key{with} @key{private}]"}
+  rhs="@Chg{Version=[2],New=[
+     ],Old=[]}[@key{abstract}] @key{new} @Syn2{subtype_mark} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}]>,Old=<>}@key{with} @key{private}]"}
 @end{Syntax}
 
 @begin{Legality}
@@ -1697,6 +1768,21 @@ the actual can be either definite or indefinite.
   in a type extension. An @nt<unknown_discriminant_part> may be used
   to relax these matching requirements.
 @end{Reason}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[If the ancestor subtype is an access subtype, the
+  actual subtype shall exclude null if and only if the ancestor subtype
+  excludes null.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We require that the null exclusion property
+  match, because it would be difficult to write a correct generic for a formal
+  access type without knowing this property. Many typical algorithms and
+  techniques will not work for a null excluding subtype (setting an unused
+  component to @key{null}, default-initialized objects, and so on). We want this
+  sort of requirement be reflected in the contract of the generic.]}
+@end{Reason}
+
 @end(Itemize)
 
 @Leading@;The declaration of a formal derived type shall not have a
@@ -1725,6 +1811,10 @@ We rejected that idea, because it would require implicit (inherited)
 the actual may, but need not, have discriminants,
 and may be definite or indefinite.]
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Text=[The actual type for a generic formal derived type
+shall be a descendant of every ancestor of the formal type.]}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -1747,19 +1837,25 @@ A formal derived tagged type is a private extension.
 @Redundant[A formal private or derived type is abstract if the reserved
 word @key(abstract) appears in its declaration.]
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01]}
 If the ancestor type is a composite type that is not an
 array type, the formal type inherits components from the ancestor
 type (including
 discriminants if a new @nt<discriminant_part> is not specified),
 as for a derived type defined by a @nt<derived_type_definition>
-(see @RefSecNum(Derived Types and Classes)).
+(see @RefSecNum(Derived Types and Classes)@Chg{Version=[2],New=[ and
+@RefSecNum{Private Operations}],Old=[]}).
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0038],ARef=[AI95-00202]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01]}
 For a formal derived type, the predefined
 operators and inherited user-defined subprograms are determined
 by the ancestor type, and are implicitly declared
-at the earliest place, if any, within the immediate scope of the
-formal type, where the corresponding primitive subprogram
+at the earliest place, if any,
+@Chg{Version=[2],New=[immediately within the declarative region in which],
+Old=[within the immediate scope of]} the formal
+type@Chg{Version=[2],New=[ is declared],Old=[]}, where the corresponding
+primitive subprogram
 of the ancestor is visible (see @RefSecNum{Private Operations}).
 In an instance, the copy of such an implicit declaration declares a view
 of the corresponding primitive subprogram of the ancestor@Chg{New=[ of the
@@ -1811,6 +1907,75 @@ which is now considered obsolete.
 @EndPrefixType{}
 @end{StaticSem}
 
+@begin{RunTime}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00158-01]}
+@ChgAdded{Version=[2],Text=[
+In the case where a formal type is tagged with unknown
+discriminants, and the actual type is a class-wide type @i<T>'Class,
+each of the primitive operations of the actual type is considered to
+be a subprogram (with an intrinsic calling convention @em see
+@RefSecNum{Conformance Rules})
+whose body consists of a dispatching call upon the corresponding
+operation of @i<T>, with its formal parameters as the actual parameters.
+If it is a function, the result of the dispatching call is returned.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00158-01]}
+@ChgAdded{Version=[2],Text=[If the corresponding operation of @i<T>
+has no controlling formal
+parameters, then the controlling tag value is determined by the
+context of the call, according to the rules for tag-indeterminate
+calls (see @RefSecNum{Dispatching Operations of Tagged Types} and
+@RefSecNum{Assignment Statements}). In the case where the tag would be
+statically determined to be that of the actual type, the call raises
+Program_Error. If such a function is renamed, any call on the
+renaming raises Program_Error.]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[As it states in @RefSecNum{Conformance Rules},
+the convention of an inherited subprogram
+of a generic formal tagged type with unknown discriminants is intrinsic.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[In the case of a corresponding
+primitive of T with no controlling
+formal parameters, the context of the call provides the controlling
+tag value for the dispatch. If no tag is provided by context,
+Program_Error is raised rather than resorting to a non-dispatching
+call. For example:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{generic}
+   @key{type} NT(<>) @key{is new} T @key{with private};
+    -- @RI[Assume T has operation "]@key{function} Empty @key{return} T;@RI["]
+@key{package} G @key{is}
+   @key{procedure} Test(X : @key{in out} NT);
+@key{end} G;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package body} G @key{is}
+   @key{procedure} Test(X : @key{in out} NT) @key{is}
+   @key{begin}
+      X := Empty;  -- @RI[Dispatching takes place, based]
+                   -- @RI[on X'Tag if actual is class-wide.]
+      @key{declare}
+          Y : NT := Empty;
+                   -- @RI[If actual is class-wide, this raises Program_Error]
+                   -- @RI[as there is no tag provided by context.]
+      @key{begin}
+          X := Y;  -- @RI[We never get this far.]
+      @key{end};
+   @key{end} Test;
+@key{end} G;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} T1 @key{is new} T @key{with null record};
+@key{package} I @key{is new} G(T1'Class);]}
+@end{Example}
+@end{Discussion}
+@end{RunTime}
+
 @begin{Notes}
 @Leading@;In accordance with the general rule that the actual type shall
 belong to the class determined for the formal
@@ -1822,8 +1987,8 @@ belong to the class determined for the formal
   at the ancestor subtype.
 @end(itemize)
 
-@Redundant[The actual type can be abstract only if the formal type is abstract
-(see @RefSecNum{Abstract Types and Subprograms}).]
+The actual type can be abstract only if the formal type is abstract
+(see @RefSecNum{Abstract Types and Subprograms}).
 @begin{Reason}
 This is necessary to avoid contract model problems,
 since one or more of its primitive subprograms are abstract;
@@ -1860,11 +2025,32 @@ The check for discriminant subtype matching is changed from a
 run-time check to a compile-time check.
 @end{Incompatible83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  A generic formal derived type can include interface ancestors as well
+  as a primary ancestor.]}
+@end{Extend95}
+
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0038],ARef=[AI95-00202-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected wording define the
-operations that are inherited when the ancestor of a formal type is itself
-a formal type to avoid anomalies.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0038],ARef=[AI95-00202-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected wording define the
+  operations that are inherited when the ancestor of a formal type is itself
+  a formal type to avoid anomalies.]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00158-01]}
+  @ChgAdded{Version=[2],Text=[Added a semantic description of the meaning
+  of operations of an actual class-wide type, as such a type does not have
+  primitive operations of its own.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[Added a matching rule for access subtypes that
+  exclude null.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00233-01]}
+  @ChgAdded{Version=[2],Text=[The wording for the declaration on implicit
+  operations is corrected to be consistent with @RefSecNum{Private Operations}
+  as modified by Corrigendum 1.]}
 @end{DiffWord95}
 
 
@@ -2031,20 +2217,20 @@ the actual type may be either a pool-specific or a general
 access-to-variable type.
 @end{Ramification}
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0109],ARef=[AI95-00025]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0109],ARef=[AI95-00025-01]}
 @ChgAdded{Version=[1],Text=[Matching an access-to-variable to a formal
 access-to-constant type cannot be allowed. If it were allowed, it would
 be possible to create an access-to-variable value designating a constant.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
 @ChgAdded{Version=[2],Text=[We require that the null exclusion property
 match, because it would be difficult to write a correct generic for a formal
 access type without knowing this property. Many typical algorithms and
 techniques will not work for a null excluding subtype (setting an unused
-component to null, default-initialized objects, and so on). Even
+component to @key{null}, default-initialized objects, and so on). Even
 Ada.Unchecked_Deallocation would fail for a null excluding subtype. Most
 generics would end up with comments saying that they are not intended to work
-for null excluding subtypes. We would rather that this sort to requirement
+for null excluding subtypes. We would rather that this sort of requirement
 be reflected in the contract of the generic.]}
 @end{Reason}
 
@@ -2565,7 +2751,7 @@ statically matching subtypes.
 For other kinds of formals, the actuals match if they statically
 denote the same entity.
 @end{Itemize}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0039],ARef=[AI95-00213]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0039],ARef=[AI95-00213-01]}
 @ChgAdded{Version=[1],Text=[For the purposes of matching, any actual parameter
 that is the name
 of a formal object of mode @key{in} is replaced by the formal object's actual

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2004/12/08 01:09:46 $}
+@Comment{$Date: 2004/12/13 05:56:25 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 
@@ -171,14 +171,14 @@ it shall repeat the @nt{defining_identifier}.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
-@Chg{Version=[2],New=[],Old=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
+@ChgDeleted{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
 A task declaration requires a completion@redundant[,
 which shall be a @nt{task_body},]
 and every @nt{task_body} shall be the completion of some
 task declaration.]}
 @begin(Honest)
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[The completion can be a @nt{pragma} Import,
+  @ChgDeleted{Version=[2],Text=[The completion can be a @nt{pragma} Import,
   if the implementation supports it.]}
 @end(Honest)
 @end{Legality}
@@ -198,77 +198,79 @@ Private part is defined in Section 8.
 @end{theproof}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0029],ARef=[AI95-00116-01]}
-@Chg{New=[For a task declaration without a @nt{task_definition}, a
-@nt{task_definition} without @nt{task_item}s is assumed.],Old=[]}
+@ChgAdded{Version=[1],Text=[For a task declaration without a
+@nt{task_definition}, a
+@nt{task_definition} without @nt{task_item}s is assumed.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[If a @nt{task_type_declaration} includes an @nt{interface_list}, the task type
-is derived from each interface named in the @nt{interface_list}.],Old=[]}
+@ChgAdded{Version=[2],Text=[If a @nt{task_type_declaration} includes an @nt{interface_list}, the task type
+is derived from each interface named in the @nt{interface_list}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[For a @nt{task_type_declaration}, if the first parameter
+@ChgAdded{Version=[2],Text=[For a @nt{task_type_declaration}, if the first parameter
 of a primitive inherited subprogram is of the task type or an access parameter
 designating he task type, and there is an @nt{entry_declaration} for a single
 entry with the same identifier within the @nt{task_type_declaration}, having a
 profile that is type conformant with that of the inherited subprogram after
 omitting this first parameter, the inherited subprogram is said to be
 @i{implemented} by the conforming task entry.@PDefn2{Term=[implemented],
-Sec=[by a task entry]}],Old=[]}
+Sec=[by a task entry]}]}
 
 @end{StaticSem}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}@ChgNote{This was just moved, not changed}
-@Chg{Version=[2],New=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
 A task declaration requires a completion@redundant[,
 which shall be a @nt{task_body},]
 and every @nt{task_body} shall be the completion of some
-task declaration.],Old=[]}
+task declaration.]}
 @begin(Honest)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[The completion can be a @nt{pragma} Import,
-  if the implementation supports it.],Old=[]}
+  @ChgAdded{Version=[2],Text=[The completion can be a @nt{pragma} Import,
+  if the implementation supports it.]}
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Redundant[Each @nt{interface_subtype_mark} of an
+@ChgAdded{Version=[2],Text=[@Redundant[Each @nt{interface_subtype_mark} of an
 @nt{interface_list} appearing within a @nt{task_type_declaration} shall denote
-a limited interface type that is not a protected interface.]],Old=[]}
+a limited interface type that is not a protected interface.]]}
 @begin(TheProof)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[@RefSecNum{Interface Types} requires that an
+  @ChgAdded{Version=[2],Text=[@RefSecNum{Interface Types} requires that an
   @nt{interface_list} only name interfaces, and limits the descendants of
   the various kinds of interfaces. Only limited, task, or
   synchronized interface can have a task type descendant. Nonlimited or
   protected interfaces are not allowed, as they offer operations that a task
-  does not have.],Old=[]}
+  does not have.]}
 @end(TheProof)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Leading@;For each primitive subprogram inherited by the type declared by a
-@nt{task_type_declaration}, at most one of the following shall apply:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For each primitive subprogram
+inherited by the type declared by a
+@nt{task_type_declaration}, at most one of the following shall apply:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[the inherited subprogram shall be overridden with a
+@ChgAdded{Version=[2],Text=[the inherited subprogram shall be overridden with a
 primitive subprogram of the task type, in which case the overriding subprogram
 shall be subtype conformant with the inherited subprogram and not abstract;
-or],Old=[]}
+or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[the inherited subprogram is implemented by a single entry of the
+@ChgAdded{Version=[2],Text=[the inherited subprogram is implemented by a single entry of the
 task type; in which case its profile after omitting the first
-parameter shall be subtype conformant with that of the task entry.],Old=[]}
+parameter shall be subtype conformant with that of the task entry.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[If neither applies, the inherited subprogram shall be a
-null procedure.],Old=[]}
+@ChgAdded{Version=[2],Text=[If neither applies, the inherited subprogram shall be a
+null procedure.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Each inherited subprogram can only have a single
+@ChgAdded{Version=[2],Text=[Each inherited subprogram can only have a single
 implementation (either from overriding a subprogram or implementing an entry),
-and must have an implementation unless the subprogram is a null procedure.],Old=[]}
+and must have an implementation unless the subprogram is a null procedure.]}
 @end{Reason}
 
 @end{Legality}
@@ -445,26 +447,26 @@ because a @nt{declarative_part} can be empty.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Task types can be derived from one or more interfaces. Entries
-of the task type can implement the primitive operations of an interface.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Task types can be derived from one or more interfaces. Entries
+  of the task type can implement the primitive operations of an interface.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0029],ARef=[AI95-00116-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that a task type has an
-implicit empty @nt{task_definition} if none is given.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0029],ARef=[AI95-00116-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that a task type has an
+  implicit empty @nt{task_definition} if none is given.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Changed representation clauses to
-aspect clauses to reflect that they are used for more than just
-representation.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed representation clauses
+  to aspect clauses to reflect that they are used for more than just
+  representation.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[Revised the note on operations of task types to
-reflect that limited types do have an assignment operation, but not
-copying (@nt{assignment_statement}s).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[Revised the note on operations of task types to
+  reflect that limited types do have an assignment operation, but not
+  copying (@nt{assignment_statement}s).]}
 @end{DiffWord95}
 
 
@@ -758,9 +760,9 @@ selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
-@Chg{Version=[2],New=[Updated the wording to reflect the improved
-definition of masters.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
+  @ChgAdded{Version=[2],Text=[Updated the wording to reflect the improved
+  definition of masters.]}
 @end{DiffWord95}
 
 @LabeledClause{Protected Units and Protected Objects}
@@ -843,14 +845,14 @@ it shall repeat the @nt{defining_identifier}.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
-@Chg{Version=[2],New=[],Old=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
+@ChgDeleted{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
 A protected declaration requires a completion@redundant[,
 which shall be a @nt{protected_@!body},]
 and every @nt{protected_@!body} shall be the completion of some
 protected declaration.]}
 @begin(Honest)
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[The completion can be a @nt{pragma} Import,
+  @ChgDeleted{Version=[2],Text=[The completion can be a @nt{pragma} Import,
   if the implementation supports it.]}
 @end(Honest)
 @end{Legality}
@@ -875,7 +877,7 @@ Private part is defined in Section 8.
 @end{theproof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[For a @nt{protected_type_declaration}, the first
+@ChgAdded{Version=[2],Text=[For a @nt{protected_type_declaration}, the first
 parameter of a primitive inherited subprogram is of the protected type or an
 access parameter designating the protected type, and there is a
 @nt{protected_operation_declaration} for a protected subprogram or single entry
@@ -885,81 +887,82 @@ omitting this first parameter, the inherited subprogram is said to be
 @i{implemented} by the conforming protected subprogram or
 entry.@PDefn2{Term=[implemented],
 Sec=[by a protected subprogram]}@PDefn2{Term=[implemented],
-Sec=[by a protected entry]}],Old=[]}
+Sec=[by a protected entry]}]}
 
 @end{StaticSem}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}@ChgNote{This was just moved, not changed}
-@Chg{Version=[2],New=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
 A protected declaration requires a completion@redundant[,
 which shall be a @nt{protected_@!body},]
 and every @nt{protected_@!body} shall be the completion of some
-protected declaration.],Old=[]}
+protected declaration.]}
 @begin(Honest)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[The completion can be a @nt{pragma} Import,
-  if the implementation supports it.],Old=[]}
+  @ChgAdded{Version=[2],Text=[The completion can be a @nt{pragma} Import,
+  if the implementation supports it.]}
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Redundant[Each @nt{interface_subtype_mark} of an @nt{interface_list} appearing within a
+@ChgAdded{Version=[2],Text=[@Redundant[Each @nt{interface_subtype_mark} of an @nt{interface_list} appearing within a
 @nt{protected_type_declaration} shall denote a limited interface type that
-is not a task interface.]],Old=[]}
+is not a task interface.]]}
 @begin(TheProof)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[@RefSecNum{Interface Types} requires that an
+  @ChgAdded{Version=[2],Text=[@RefSecNum{Interface Types} requires that an
   @nt{interface_list} only name interfaces, and limits the descendants of
   the various kinds of interfaces. Only limited, protected, or
   synchronized interface can have a protected type descendant. Nonlimited or
   task interfaces are not allowed, as they offer operations that a protected
-  type does not have.],Old=[]}
+  type does not have.]}
 @end(TheProof)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Leading@;For each primitive subprogram inherited by the
+@ChgAdded{Version=[2],Type=[Leading],Text=[For each primitive subprogram
+inherited by the
 type declared by a @nt{protected_type_declaration}, at most one of the
-following shall apply:],Old=[]}
+following shall apply:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[the inherited subprogram is overridden with a primitive
-subprogram of the protected type, in which case the overriding
+@ChgAdded{Version=[2],Text=[the inherited subprogram is overridden with a
+primitive subprogram of the protected type, in which case the overriding
 subprogram shall be subtype conformant with the inherited
-subprogram and not abstract; or],Old=[]}
+subprogram and not abstract; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[the inherited subprogram is implemented by a protected
-subprogram or single entry of the protected type,
+@ChgAdded{Version=[2],Text=[the inherited subprogram is implemented by a
+protected subprogram or single entry of the protected type,
 in which case its profile after omitting the first parameter
 shall be subtype conformant with that of the protected
-subprogram or entry.],Old=[]}
+subprogram or entry.]}
 
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[If neither applies, the inherited subprogram is a
-null procedure.],Old=[]}
+@ChgAdded{Version=[2],Text=[If neither applies, the inherited subprogram is a
+null procedure.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Each inherited subprogram can only have a single
+@ChgAdded{Version=[2],Text=[Each inherited subprogram can only have a single
 implementation (either from overriding a subprogram, implementing a subprogram,
 or implementing an entry), and must have an implementation unless the
-subprogram is a null procedure.],Old=[]}
+subprogram is a null procedure.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[If an inherited subprogram is implemented by a
+@ChgAdded{Version=[2],Text=[If an inherited subprogram is implemented by a
 protected procedure or an entry, then the first parameter of the inherited
 subprogram shall be of mode @key{out} or @key{in out}, or an
-access-to-variable parameter.],Old=[]}
+access-to-variable parameter.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[For a protected procedure or entry, the protected
+@ChgAdded{Version=[2],Text=[For a protected procedure or entry, the protected
 object can be read or written (see
 @RefSecNum{Protected Subprograms and Protected Actions}}. A subprogram
 that is implemented by a protected procedure or entry must have a profile
-which reflects that in order to avoid confusion.],Old=[]}
+which reflects that in order to avoid confusion.]}
 @end{Reason}
 
 @end{Legality}
@@ -1071,26 +1074,27 @@ object for some useful purpose, so we didn't want to disallow this case.
 
 @begin{Bounded}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[@PDefn2{Term=(bounded error),Sec=(cause)}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error to call an entry or subprogram of a
 protected object after that object is finalized. If the error is detected,
 Program_Error is raised. Otherwise, the call proceeds normally, which may leave
-a task queued forever.],Old=[]}
+a task queued forever.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This very similar to the previous case. It is
+@ChgAdded{Version=[2],Text=[This very similar to the previous case. It is
 a bounded error so that implementations can avoid the overhead of the check
 if it can insure that the call still will operate properly. Such an
 implementation cannot need to return resources (such as locks) to an
-executive that it needs to execute calls.],Old=[]}
+executive that it needs to execute calls.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@leading@;This case can happen (and has happened in
+@ChgAdded{Version=[2],Type=[Leading],Text=[This case can happen (and has
+happened in
 production code) when a protected object is accessed from the Finalize routine
-of a type. For example:],Old=[]}
+of a type. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{with} Ada.Finalization.Controlled;
+@ChgAdded{Version=[2],Text=[@key{with} Ada.Finalization.Controlled;
 @key{package} Window_Manager @key{is}
     ...
     @key{type} Root_Window @key{is new} Ada.Finalization.Controlled @key{with private};
@@ -1100,21 +1104,21 @@ of a type. For example:],Old=[]}
     ...
     @key{procedure} Finalize (Object : @key{in out} Root_Window);
     ...
-@key{end} Window_Manager;],Old=[]}
+@key{end} Window_Manager;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{package body} Window_Manager @key{is}
+@ChgAdded{Version=[2],Text=[@key{package body} Window_Manager @key{is}
    @key{protected type} Lock @key{is}
        @key{entry} Get_Lock;
        @key{procedure} Free_Lock;
    ...
-   @key{end} Lock;],Old=[]}
+   @key{end} Lock;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   Window_Lock : Lock;],Old=[]}
+@ChgAdded{Version=[2],Text=[   Window_Lock : Lock;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key{procedure} Finalize (Object : @key{in out} Root_Window) @key{is}
+@ChgAdded{Version=[2],Text=[   @key{procedure} Finalize (Object : @key{in out} Root_Window) @key{is}
    @key{begin}
        Window_Lock.Get_Lock;
        ...
@@ -1122,14 +1126,15 @@ of a type. For example:],Old=[]}
    @key{end} Finalize;
    ...
    A_Window : Any_Window := @key{new} Root_Window;
-@key{end} Window_Manager;],Old=[]}
+@key{end} Window_Manager;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The environment task will call Window_Lock for the object
-allocated for A_Window when the collection for Any_Window is finalized, which
+@ChgAdded{Version=[2],Text=[The environment task will call Window_Lock for
+the object allocated for A_Window when the collection for Any_Window
+is finalized, which
 will happen after the finalization of Window_Lock (because finalization of the
-package body will occur before that of the package specification).],Old=[]}
+package body will occur before that of the package specification).]}
 @end{Reason}
 @end{Bounded}
 
@@ -1244,27 +1249,28 @@ protected units do not exist in Ada 83.
 @end{Extend83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Protected types can be derived from one or more interfaces. Operations
-declared in the protected type can implement the primitive operations of an
-interface.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Protected types can be derived from one or more interfaces. Operations
+  declared in the protected type can implement the primitive operations of an
+  interface.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Changed representation clauses to
-aspect clauses to reflect that they are used for more than just
-representation.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed representation clauses
+  to aspect clauses to reflect that they are used for more than just
+  representation.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[Revised the note on operations of protected types to
-reflect that limited types do have an assignment operation, but not
-copying (@nt{assignment_statement}s).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[Revised the note on operations of
+  protected types to
+  reflect that limited types do have an assignment operation, but not
+  copying (@nt{assignment_statement}s).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[Described what happens when an operation of a finalized
-protected object is called.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
+  @ChgAdded{Version=[2],Text=[Described what happens when an operation of a
+  finalized protected object is called.]}
 @end{DiffWord95}
 
 
@@ -1535,14 +1541,14 @@ When not specified as potentially blocking,
 a language-defined subprogram is nonblocking.
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00178-01]}
-@Chg{Version=[2],New=[Any subprogram in a language-defined input-output
+@ChgAdded{Version=[2],Text=[Any subprogram in a language-defined input-output
 package that has a file parameter or result or
 operates on a default file is considered to manipulate a file. An instance
 of a language-defined input-output provides subprograms that are covered
 by this rule. The only subprograms in language-defined input-output packages
 not covered by this rule (and thus not potentially blocking) are the Get and
 Put routines that take string parameters defined in the packages nested in
-Ada.Text_IO.],Old=[]}@ChgNote{This was the resolution of a ramification.}
+Ada.Text_IO.]}@ChgNote{This was the resolution of a ramification.}
 @end{Discussion}
 @end{Bounded}
 
@@ -2034,9 +2040,9 @@ The syntax rule for @nt{entry_body} is new.
 @end{Extend83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified the elaboration of per-object
-constraints.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the elaboration of
+  per-object constraints.]}
 @end{DiffWord95}
 
 @LabeledSubClause{Entry Calls}
@@ -3033,7 +3039,7 @@ be based on the local time zone, with the results of
 Year, Month, Day, and Seconds being pure functions of their input.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00351-01]}
-@Chg{Version=[2],New=[],Old=[We anticipate that implementations will provide
+@ChgDeleted{Version=[2],Text=[We anticipate that implementations will provide
 child packages of Calendar to provide more explicit control over time zones
 and other environment-dependent time-related issues.
 These would be appropriate for standardization in a given
@@ -3041,22 +3047,22 @@ environment (such as POSIX).]}
 @end{Extend83}
 
 @begin{Inconsistent95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}The upper bound
-of Year_Number has been changed to avoid an year 2100 problem. A program
-which expects years past 2099 to raise Constraint_Error will fail on Ada 2005.
-We don't expect there to be many programs which are depending on an exception
-to be raised. A program that uses Year_Number'Last as a magic number may also
-fail if values of Time are stored outside of the program.
-Note that the lower bound of Year_Number wasn't changed, because
-it is not unusual to use that value in a constant to represent an unknown
-time.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}The upper bound
+  of Year_Number has been changed to avoid an year 2100 problem. A program
+  which expects years past 2099 to raise Constraint_Error will fail on Ada 2005.
+  We don't expect there to be many programs which are depending on an exception
+  to be raised. A program that uses Year_Number'Last as a magic number may also
+  fail if values of Time are stored outside of the program.
+  Note that the lower bound of Year_Number wasn't changed, because
+  it is not unusual to use that value in a constant to represent an unknown
+  time.]}
 @end{Inconsistent95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that Month, Day, and
-Seconds can raise Time_Error.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Month, Day, and
+  Seconds can raise Time_Error.]}
 @end{DiffWord95}
 
 
@@ -3065,125 +3071,125 @@ Seconds can raise Time_Error.],Old=[]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-@Chg{Version=[2],New=[The following language-defined library packages exist:],Old=[]}
+@ChgAdded{Version=[2],Text=[The following language-defined library packages exist:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@ChildUnit{Parent=[Ada.Calendar],Child=[Time_Zones]}
-@key(package) Ada.Calendar.Time_Zones @key(is)],Old=[]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Calendar],Child=[Time_Zones]}
+@key(package) Ada.Calendar.Time_Zones @key(is)]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   -- @RI[Time zone manipulation:]],Old=[]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Time zone manipulation:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<type> @AdaTypeDefn{Time_Offset} @key<is range> -1440 .. 1440;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Time_Offset} @key<is range> -1440 .. 1440;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @AdaDefn{Unknown_Zone_Error} : @key<exception>;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{Unknown_Zone_Error} : @key<exception>;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{UTC_Time_Offset} (Date : Time := Clock) @key<return> Time_Offset;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{UTC_Time_Offset} (Date : Time := Clock) @key<return> Time_Offset;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key<end> Ada.Calendar.Time_Zones;],Old=[]}
+@ChgAdded{Version=[2],Text=[@key<end> Ada.Calendar.Time_Zones;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@ChildUnit{Parent=[Ada.Calendar],Child=[Arithmetic]}
-@key(package) Ada.Calendar.Arithmetic @key(is)],Old=[]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Calendar],Child=[Arithmetic]}
+@key(package) Ada.Calendar.Arithmetic @key(is)]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   -- @RI[Arithmetic on days:]],Old=[]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Arithmetic on days:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<type> @AdaTypeDefn{Day_Count} @key<is range>
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Day_Count} @key<is range>
      -366*(1+Year_Number'Last - Year_Number'First)
      ..
-     366*(1+Year_Number'Last - Year_Number'First);],Old=[]}
+     366*(1+Year_Number'Last - Year_Number'First);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<subtype> @AdaDefn{Leap_Seconds_Count} @key<is> Integer @key<range> -999 .. 999;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<subtype> @AdaDefn{Leap_Seconds_Count} @key<is> Integer @key<range> -999 .. 999;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Difference} (Left, Right : @key<in> Time;
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Difference} (Left, Right : @key<in> Time;
                          Days : @key<out> Day_Count;
                          Seconds : @key<out> Duration;
-                         Leap_Seconds : @key<out> Leap_Seconds_Count);],Old=[]}
+                         Leap_Seconds : @key<out> Leap_Seconds_Count);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> "+" (Left : Time; Right : Day_Count) @key<return> Time;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<function> "+" (Left : Time; Right : Day_Count) @key<return> Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> "+" (Left : Day_Count; Right : Time) @key<return> Time;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<function> "+" (Left : Day_Count; Right : Time) @key<return> Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> "@en" (Left : Time; Right : Day_Count) @key<return> Time;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<function> "@en" (Left : Time; Right : Day_Count) @key<return> Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> "@en" (Left, Right : Time) @key<return> Day_Count;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<function> "@en" (Left, Right : Time) @key<return> Day_Count;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key<end> Ada.Calendar.Arithmetic;],Old=[]}
+@ChgAdded{Version=[2],Text=[@key<end> Ada.Calendar.Arithmetic;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@ChildUnit{Parent=[Ada.Calendar],Child=[Formatting]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Calendar],Child=[Formatting]}
 @key<with> Ada.Calendar.Time_Zones;
-@key(package) Ada.Calendar.Formatting @key(is)],Old=[]}
+@key(package) Ada.Calendar.Formatting @key(is)]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   -- @RI[Day of the week:]],Old=[]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Day of the week:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<type> @AdaTypeDefn{Day_Name} @key<is> (@AdaDefn{Monday}, @AdaDefn{Tuesday}, @AdaDefn{Wednesday}, @AdaDefn{Thursday},
-       @AdaDefn{Friday}, @AdaDefn{Saturday}, @AdaDefn{Sunday});],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Day_Name} @key<is> (@AdaDefn{Monday}, @AdaDefn{Tuesday}, @AdaDefn{Wednesday}, @AdaDefn{Thursday},
+       @AdaDefn{Friday}, @AdaDefn{Saturday}, @AdaDefn{Sunday});]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Day_of_Week} (Date : Time) @key<return> Day_Name;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Day_of_Week} (Date : Time) @key<return> Day_Name;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   -- @RI[Hours:Minutes:Seconds access:]],Old=[]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Hours:Minutes:Seconds access:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<subtype> @AdaDefn{Hour_Number}         @key<is> Natural @key<range> 0 .. 23;
+@ChgAdded{Version=[2],Text=[   @key<subtype> @AdaDefn{Hour_Number}         @key<is> Natural @key<range> 0 .. 23;
    @key<subtype> @AdaDefn{Minute_Number}       @key<is> Natural @key<range> 0 .. 59;
    @key<subtype> @AdaDefn{Second_Number}       @key<is> Natural @key<range> 0 .. 59;
-   @key<subtype> @AdaDefn{Second_Duration}     @key<is> Day_Duration @key<range> 0.0 .. 1.0;],Old=[]}
+   @key<subtype> @AdaDefn{Second_Duration}     @key<is> Day_Duration @key<range> 0.0 .. 1.0;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Hour}       (Date : Time;
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Hour}       (Date : Time;
                         Time_Zone  : Time_Zones.Time_Offset := 0)
-                           @key<return> Hour_Number;],Old=[]}
+                           @key<return> Hour_Number;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Minute}     (Date : Time;
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Minute}     (Date : Time;
                         Time_Zone  : Time_Zones.Time_Offset := 0)
-                           @key<return> Minute_Number;],Old=[]}
+                           @key<return> Minute_Number;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Second}     (Date : Time;
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Second}     (Date : Time;
                         Time_Zone  : Time_Zones.Time_Offset := 0)
-                           @key<return> Second_Number;],Old=[]}
+                           @key<return> Second_Number;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Sub_Second} (Date : Time;
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Sub_Second} (Date : Time;
                         Time_Zone  : Time_Zones.Time_Offset := 0)
-                           @key<return> Second_Duration;],Old=[]}
+                           @key<return> Second_Duration;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Seconds_Of} (Hour   :  Hour_Number;
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Seconds_Of} (Hour   :  Hour_Number;
                         Minute : Minute_Number;
                         Second : Second_Number := 0;
                         Sub_Second : Second_Duration := 0.0)
-       @key<return> Day_Duration;],Old=[]}
+       @key<return> Day_Duration;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Split} (Seconds    : @key<in> Day_Duration;
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Split} (Seconds    : @key<in> Day_Duration;
                     Hour       : @key<out> Hour_Number;
                     Minute     : @key<out> Minute_Number;
                     Second     : @key<out> Second_Number;
-                    Sub_Second : @key<out> Second_Duration);],Old=[]}
+                    Sub_Second : @key<out> Second_Duration);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
                     Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
                     Year       : @key<out> Year_Number;
                     Month      : @key<out> Month_Number;
@@ -3191,10 +3197,10 @@ Seconds can raise Time_Error.],Old=[]}
                     Hour       : @key<out> Hour_Number;
                     Minute     : @key<out> Minute_Number;
                     Second     : @key<out> Second_Number;
-                    Sub_Second : @key<out> Second_Duration);],Old=[]}
+                    Sub_Second : @key<out> Second_Duration);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Time_Of} (Year       : Year_Number;
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Time_Of} (Year       : Year_Number;
                      Month      : Month_Number;
                      Day        : Day_Number;
                      Hour       : Hour_Number;
@@ -3203,19 +3209,19 @@ Seconds can raise Time_Error.],Old=[]}
                      Sub_Second : Second_Duration := 0.0;
                      Leap_Second: Boolean := False;
                      Time_Zone  : Time_Zones.Time_Offset := 0)
-                             @key<return> Time;],Old=[]}
+                             @key<return> Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Time_Of} (Year       : Year_Number;
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Time_Of} (Year       : Year_Number;
                      Month      : Month_Number;
                      Day        : Day_Number;
                      Seconds    : Day_Duration;
                      Leap_Second: Boolean := False;
                      Time_Zone  : Time_Zones.Time_Offset := 0)
-                             @key<return> Time;],Old=[]}
+                             @key<return> Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
                     Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
                     Year       : @key<out> Year_Number;
                     Month      : @key<out> Month_Number;
@@ -3224,189 +3230,189 @@ Seconds can raise Time_Error.],Old=[]}
                     Minute     : @key<out> Minute_Number;
                     Second     : @key<out> Second_Number;
                     Sub_Second : @key<out> Second_Duration;
-                    Leap_Second: @key<out> Boolean);],Old=[]}
+                    Leap_Second: @key<out> Boolean);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
                     Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
                     Year       : @key<out> Year_Number;
                     Month      : @key<out> Month_Number;
                     Day        : @key<out> Day_Number;
                     Seconds    : @key<out> Day_Duration;
-                    Leap_Second: @key<out> Boolean);],Old=[]}
+                    Leap_Second: @key<out> Boolean);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   -- @RI[Simple image and value:]
+@ChgAdded{Version=[2],Text=[   -- @RI[Simple image and value:]
    @key<function> @AdaSubDefn{Image} (Date : Time;
                    Include_Time_Fraction : Boolean := False;
-                   Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String;],Old=[]}
+                   Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Value} (Date : String;
-                   Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> Time;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Value} (Date : String;
+                   Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Image} (Elapsed_Time : Duration;
-                   Include_Time_Fraction : Boolean := False) @key<return> String;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Image} (Elapsed_Time : Duration;
+                   Include_Time_Fraction : Boolean := False) @key<return> String;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Value} (Elapsed_Time : String) @key<return> Duration;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Value} (Elapsed_Time : String) @key<return> Duration;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key<end> Ada.Calendar.Formatting;],Old=[]}
+@ChgAdded{Version=[2],Text=[@key<end> Ada.Calendar.Formatting;]}
 
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-@Chg{Version=[2],New=[Type Time_Offset represents the number of minutes
+@ChgAdded{Version=[2],Text=[Type Time_Offset represents the number of minutes
 difference between the implementation-defined time zone used by Ada.Calendar
-and another time zone.],Old=[]}
+and another time zone.]}
 
 @begin{DescribeCode}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> UTC_Time_Offset (Date : Time := Clock) @key<return> Time_Offset;],Old=[]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> UTC_Time_Offset (Date : Time := Clock) @key<return> Time_Offset;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns, as a number of minutes, the
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns, as a number of minutes, the
 difference between the implementation-defined time zone of Calendar, and
 UTC time, at the time Date. If the time zone of the Calendar implementation is
-unknown, then Unknown_Zone_Error is raised.],Old=[]}
+unknown, then Unknown_Zone_Error is raised.]}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[The Date parameter is needed to take
+    @ChgAdded{Version=[2],Text=[The Date parameter is needed to take
     into account time differences caused by daylight-savings time and other
-    time changes.],Old=[]}
+    time changes.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[Other time zones can be supported with a
+    @ChgAdded{Version=[2],Text=[Other time zones can be supported with a
     child package. We don't define one because of the lack of agreement
-    on the definition of a time zone.],Old=[]}
+    on the definition of a time zone.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[The accuracy of this routine is not specified; the
+    @ChgAdded{Version=[2],Text=[The accuracy of this routine is not specified; the
     intent is that the facilities of the underlying target operating system
-    are used to implement it.],Old=[]}
+    are used to implement it.]}
 @end{Discussion}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<procedure> Difference (Left, Right : @key<in> Time;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Difference (Left, Right : @key<in> Time;
                       Days : @key<out> Day_Count;
                       Seconds : @key<out> Duration;
-                      Leap_Seconds : @key<out> Leap_Seconds_Count);],Old=[]}
+                      Leap_Seconds : @key<out> Leap_Seconds_Count);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns the difference between Left and Right.
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the difference between Left and Right.
 Days is the number of days of difference, Seconds is the
 remainder seconds of difference, and Leap_Seconds is the number of leap
 seconds. If Left < Right, then Seconds <= 0.0, Days <= 0, and Leap_Seconds <=
 0. Otherwise, all values are non-negative. For the returned values, if Days =
-0, then Seconds + Duration(Leap_Seconds) = Calendar."@en" (Left, Right).],Old=[]}
+0, then Seconds + Duration(Leap_Seconds) = Calendar."@en" (Left, Right).]}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[The number of days is calculated midnight-to-midnight.
-    Leap_Seconds, if any, are not included in Seconds.],Old=[]}
+    @ChgAdded{Version=[2],Text=[The number of days is calculated midnight-to-midnight.
+    Leap_Seconds, if any, are not included in Seconds.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[Leap_Seconds should be included in calculations
-    using the operators defined in Calendar, as is specified for "@en" above.],Old=[]}
+    @ChgAdded{Version=[2],Text=[Leap_Seconds should be included in calculations
+    using the operators defined in Calendar, as is specified for "@en" above.]}
 @end{Discussion}
 
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> "+" (Left : Time; Right : Day_Count) @key<return> Time;
-@key<function> "+" (Left : Day_Count; Right : Time) @key<return> Time;],Old=[]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> "+" (Left : Time; Right : Day_Count) @key<return> Time;
+@key<function> "+" (Left : Day_Count; Right : Time) @key<return> Time;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Adds a number of days to a time value.
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Adds a number of days to a time value.
 Time_Error is raised if the result is not representable as a value of type
-Time.],Old=[]}
+Time.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> "@en" (Left : Time; Right : Day_Count) @key<return> Time;],Old=[]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> "@en" (Left : Time; Right : Day_Count) @key<return> Time;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Subtracts a number of days from a time value.
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Subtracts a number of days from a time value.
 Time_Error is raised if the result is not representable as a value of type
-Time.],Old=[]}
+Time.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> "@en" (Left, Right : Time) @key<return> Day_Count;],Old=[]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> "@en" (Left, Right : Time) @key<return> Day_Count;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Subtracts two time values, and returns the
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Subtracts two time values, and returns the
 number of days between them. This is the same value that Difference would
-return in Days.],Old=[]}
+return in Days.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Day_of_Week (Date : Time) @key<return> Day_Name;],Old=[]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Day_of_Week (Date : Time) @key<return> Day_Name;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns the day of the week for Time. This is
-based on the Year, Month, and Day values of Time.],Old=[]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the day of the week for Time. This is
+based on the Year, Month, and Day values of Time.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Hour       (Date : Time;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Hour       (Date : Time;
                      Time_Zone  : Time_Zones.Time_Offset := 0)
-                        @key<return> Hour_Number;],Old=[]}
+                        @key<return> Hour_Number;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns the hour for Date, as appropriate for
-the specified time zone offset.],Old=[]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the hour for Date, as appropriate for
+the specified time zone offset.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Minute     (Date : Time;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Minute     (Date : Time;
                      Time_Zone  : Time_Zones.Time_Offset := 0)
-                        @key<return> Minute_Number;],Old=[]}
+                        @key<return> Minute_Number;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns the minute within the hour for Date,
-as appropriate for the specified time zone offset.],Old=[]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the minute within the hour for Date,
+as appropriate for the specified time zone offset.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Second     (Date : Time;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Second     (Date : Time;
                      Time_Zone  : Time_Zones.Time_Offset := 0)
-                        @key<return> Second_Number;],Old=[]}
+                        @key<return> Second_Number;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns the second within the hour and minute
-for Date, as appropriate for the specified time zone offset.],Old=[]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the second within the hour and minute
+for Date, as appropriate for the specified time zone offset.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Sub_Second (Date : Time;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Sub_Second (Date : Time;
                      Time_Zone  : Time_Zones.Time_Offset := 0)
-                        @key<return> Second_Duration;],Old=[]}
+                        @key<return> Second_Duration;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns the fraction of second for Date (this
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the fraction of second for Date (this
 has the same accuracy as Day_Duration), as appropriate for the specified time
-zone offset.],Old=[]}
+zone offset.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Seconds_Of (Hour   : Hour_Number;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Seconds_Of (Hour   : Hour_Number;
                      Minute : Minute_Number;
                      Second : Second_Number := 0;
                      Sub_Second : Second_Duration := 0.0)
-    @key<return> Day_Duration;],Old=[]}
+    @key<return> Day_Duration;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns a Day_Duration value for the
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Day_Duration value for the
 Hour:Minute:Second.Sub_Second. This value can be used in Calendar.Time_Of as
-well as the argument to Calendar."+" and Calendar."@en".],Old=[]}
+well as the argument to Calendar."+" and Calendar."@en".]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<procedure> Split (Seconds    : @key<in> Day_Duration;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Seconds    : @key<in> Day_Duration;
                  Hour       : @key<out> Hour_Number;
                  Minute     : @key<out> Minute_Number;
                  Second     : @key<out> Second_Number;
-                 Sub_Second : @key<out> Second_Duration);],Old=[]}
+                 Sub_Second : @key<out> Second_Duration);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Splits Seconds into
-Hour:Minute:Second.Sub_Second.],Old=[]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Seconds into
+Hour:Minute:Second.Sub_Second.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<procedure> Split (Date       : @key<in> Time;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;
                  Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
                  Year       : @key<out> Year_Number;
                  Month      : @key<out> Month_Number;
@@ -3414,15 +3420,15 @@ Hour:Minute:Second.Sub_Second.],Old=[]}
                  Hour       : @key<out> Hour_Number;
                  Minute     : @key<out> Minute_Number;
                  Second     : @key<out> Second_Number;
-                 Sub_Second : @key<out> Second_Duration);],Old=[]}
+                 Sub_Second : @key<out> Second_Duration);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Splits Date into its constituent parts (Year,
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Date into its constituent parts (Year,
 Month, Day, Hour, Minute,
-Second, Sub_Second), relative to the specified time zone offset.],Old=[]}
+Second, Sub_Second), relative to the specified time zone offset.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Time_Of (Year       : Year_Number;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Time_Of (Year       : Year_Number;
                   Month      : Month_Number;
                   Day        : Day_Number;
                   Hour       : Hour_Number;
@@ -3431,38 +3437,38 @@ Second, Sub_Second), relative to the specified time zone offset.],Old=[]}
                   Sub_Second : Second_Duration := 0.0;
                   Leap_Second: Boolean := False;
                   Time_Zone  : Time_Zones.Time_Offset := 0)
-                          @key<return> Time;],Old=[]}
+                          @key<return> Time;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns a Time built from the date and time
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Time built from the date and time
 values, relative to the
 specified time zone offset. Time_Error is raised if Leap_Second is True,
-and Hour, Minute, and Second are not appropriate for a Leap_Second.],Old=[]}
+and Hour, Minute, and Second are not appropriate for a Leap_Second.]}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[A leap second always occurs at midnight UTC, and is
+    @ChgAdded{Version=[2],Text=[A leap second always occurs at midnight UTC, and is
     23:59:60 UTC in ISO notation. So, if the time zone is UTC, if any of
     Hour /= 23, Minute /= 59, or Second /= 59, then Time_Error should be raised.
     However, we do not say that, because other time zones will have different
-    values where a leap second is allowed.],Old=[]}
+    values where a leap second is allowed.]}
 @end{Discussion}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Time_Of (Year       : Year_Number;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Time_Of (Year       : Year_Number;
                   Month      : Month_Number;
                   Day        : Day_Number;
                   Seconds    : Day_Duration;
                   Leap_Second: Boolean := False;
                   Time_Zone  : Time_Zones.Time_Offset := 0)
-                          @key<return> Time;],Old=[]}
+                          @key<return> Time;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns a Time built from the date and time
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Time built from the date and time
 values, relative to the specified time zone offset. Time_Error is raised if
-Leap_Second is True, and Seconds is not appropriate for a Leap_Second.],Old=[]}
+Leap_Second is True, and Seconds is not appropriate for a Leap_Second.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<procedure> Split (Date       : @key<in> Time;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;
                  Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
                  Year       : @key<out> Year_Number;
                  Month      : @key<out> Month_Number;
@@ -3471,69 +3477,69 @@ Leap_Second is True, and Seconds is not appropriate for a Leap_Second.],Old=[]}
                  Minute     : @key<out> Minute_Number;
                  Second     : @key<out> Second_Number;
                  Sub_Second : @key<out> Second_Duration;
-                 Leap_Second: @key<out> Boolean);],Old=[]}
+                 Leap_Second: @key<out> Boolean);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Split Date into its constituent parts (Year,
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Split Date into its constituent parts (Year,
 Month, Day, Hour, Minute, Second, Sub_Second), relative to the specified time
-zone offset. Leap_Second is true if Date identifies a leap second.],Old=[]}
+zone offset. Leap_Second is true if Date identifies a leap second.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<procedure> Split (Date       : @key<in> Time;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;
                  Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
                  Year       : @key<out> Year_Number;
                  Month      : @key<out> Month_Number;
                  Day        : @key<out> Day_Number;
                  Seconds    : @key<out> Day_Duration;
-                 Leap_Second: @key<out> Boolean);],Old=[]}
+                 Leap_Second: @key<out> Boolean);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Split Date into its constituent parts (Year,
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Split Date into its constituent parts (Year,
 Month, Day, Seconds), relative to the specified time zone offset. Leap_Second
-is true if Date identifies a leap second.],Old=[]}
+is true if Date identifies a leap second.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Image (Date : Time;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Image (Date : Time;
                 Include_Time_Fraction : Boolean := False;
-                Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String;],Old=[]}
+                Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns a string form of the Date relative to
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a string form of the Date relative to
 the given Time_Zone.
 The format is "Year-Month-Day Hour:Minute:Second", where each value
 other than Year is a 2-digit form of the value of the functions
 defined in Calendar and Calendar.Formatting, including a leading '0',
 if needed. Year is a 4-digit value.
 If Include_Time_Fraction is True, Sub_Seconds*100 is suffixed to the
-string as a 2-digit value following a '.'.],Old=[]}
+string as a 2-digit value following a '.'.]}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[The Image provides a string in ISO 8601 format, the
+    @ChgAdded{Version=[2],Text=[The Image provides a string in ISO 8601 format, the
     international standard time format. Alternative representations allowed
-    in ISO 8601 are not supported here.],Old=[]}
+    in ISO 8601 are not supported here.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[ISO 8601 allows 24:00:00 for midnight; and a seconds
+    @ChgAdded{Version=[2],Text=[ISO 8601 allows 24:00:00 for midnight; and a seconds
     value of 60 for leap seconds. These are not allowed here (the routines
-    mentioned above cannot produce those results).],Old=[]}
+    mentioned above cannot produce those results).]}
 @end{Discussion}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Value (Date : String)
-                Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> Time;],Old=[]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Value (Date : String)
+                Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> Time;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns a Time value for the image given as
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Time value for the image given as
 Date, relative to the given time zone. Constraint_Error is raised if the string
 is not formatted as described for Image, or the function cannot interpret the
-given string as a Time value.],Old=[]}
+given string as a Time value.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Image (Elapsed_Time : Duration;
-                Include_Time_Fraction : Boolean := False) @key<return> String;],Old=[]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Image (Elapsed_Time : Duration;
+                Include_Time_Fraction : Boolean := False) @key<return> String;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns a string form of the Elapsed_Time.
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a string form of the Elapsed_Time.
 The format is "Hour:Minute:Second", where each value
 is a 2-digit form of the value, including a leading '0', if needed.
 If Include_Time_Fraction is True, Sub_Seconds*100 is suffixed to the
@@ -3541,29 +3547,29 @@ string as a 2-digit value following a '.'.
 If Elapsed_Time < 0.0, the result is Image (@key<abs> Elapsed_Time,
 Include_Time_Fraction) prefixed with "@en". If @key<abs> Elapsed_Time represents
 100 hours or more, the result is implementation-defined.
-],Old=[]}
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],
-New=[The result of Calendar.Formating.Image if its argument is represents more than
-100 hours.],Old=[]}]}
+]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The result of Calendar.Formating.Image if its argument is represents more than
+100 hours.]}]}
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This cannot be implemented (directly) by calling
+@ChgAdded{Version=[2],Text=[This cannot be implemented (directly) by calling
     Ada.Calendar.Formatting.Split, since it may be out of the range of
     Day_Duration, and thus the number of hours may be out of the range of
-    Hour_Number.],Old=[]}
+    Hour_Number.]}
 
-@Chg{Version=[2],New=[If a Duration value can represent more then 100 hours,
-    the implementation will need to define a format for the return of Image.],Old=[]}
+@ChgAdded{Version=[2],Text=[If a Duration value can represent more then 100 hours,
+    the implementation will need to define a format for the return of Image.]}
 @end{ImplNote}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Keepnext@key<function> Value (Elapsed_Time : String) @key<return> Duration;],Old=[]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Value (Elapsed_Time : String) @key<return> Duration;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Trailing@;Returns a Duration value for the image given
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Duration value for the image given
 as Elapsed_Time. Constraint_Error is raised if the string is not formatted as
 described for Image, or the function cannot interpret the given string as a
-Duration value.],Old=[]}
+Duration value.]}
 
 @end{DescribeCode}
 
@@ -3571,42 +3577,42 @@ Duration value.],Old=[]}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-@Chg{Version=[2],New=[An implementation should support leap seconds if the
+@ChgAdded{Version=[2],Text=[An implementation should support leap seconds if the
 target system supports them. If leap seconds are not supported, Difference
 should return zero for Leap_Seconds, Split should return False for Leap_Second,
-and Time_Of should raise Time_Error if Leap_Second is True.],Old=[]}
+and Time_Of should raise Time_Error if Leap_Second is True.]}
 @end{ImplAdvice}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The time in the time zone known as Greenwich Mean Time (GMT)
-is generally equivalent to UTC time.],Old=[]}
+@ChgAdded{Version=[2],Text=[The time in the time zone known as Greenwich Mean Time (GMT)
+is generally equivalent to UTC time.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The implementation-defined time zone of package Calendar
+@ChgAdded{Version=[2],Text=[The implementation-defined time zone of package Calendar
 may, but need not, be the local time zone. UTC_Time_Offset always returns the
 difference relative to the implementation-defined time zone of package
 Calendar. If UTC_Time_Offset does not raise Unknown_Zone_Error, UTC time
-can be safely calculated (within the accuracy of the underlying time-base).],Old=[]}
+can be safely calculated (within the accuracy of the underlying time-base).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Calling Split on the results of subtracting
+@ChgAdded{Version=[2],Text=[Calling Split on the results of subtracting
 Duration(UTC_Time_Offset*60) from Clock provides the components (hours,
 minutes, and so on) of the UTC time. In the United States, for example,
-UTC_Time_Offset will generally be negative.],Old=[]}
+UTC_Time_Offset will generally be negative.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[This is an illustration to help specify the value of
+  @ChgAdded{Version=[2],Text=[This is an illustration to help specify the value of
   UTC_Time_Offset. A user should pass UTC_Time_Offset as the Time_Zone
-  parameter of Split, rather than trying to make the above calculation.],Old=[]}
+  parameter of Split, rather than trying to make the above calculation.]}
 @end{Discussion}
 @end{Notes}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 Packages Calendar.Time_Zones, Calendar.Arithmetic, and Calendar.Formatting
-are new.],Old=[]}
+are new.]}
 @end{Extend95}
 
 
@@ -3864,35 +3870,34 @@ an entry.],Old=[]}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[If a @nt{procedure_call_statement} is used for a
+@ChgAdded{Version=[2],Text=[If a @nt{procedure_call_statement} is used for a
 @nt{procedure_or_entry_call}, the @SynI{procedure_}@nt{name} or
 @SynI{procedure_}@nt{prefix} of the @nt{procedure_call_statement} shall denote
 an entry renamed as a procedure, a formal subprogram, or (a view of) a
 primitive subprogram of a limited interface whose first parameter is a
-controlling parameter (see @RefSecNum{Dispatching Operations of Tagged Types}).],
-Old=[]}
+controlling parameter (see @RefSecNum{Dispatching Operations of Tagged Types}).]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This would be a confusing way to call a procedure, so we
-only allow it when it is possible that the procedure is actually an
-entry.],Old=[]}
+@ChgAdded{Version=[2],Text=[This would be a confusing way to call a procedure,
+so we only allow it when it is possible that the procedure is actually an
+entry.]}
 @end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[If a @nt{procedure_call_statement} is used for a
+@ChgAdded{Version=[2],Text=[If a @nt{procedure_call_statement} is used for a
 @nt{procedure_or_entry_call}, and the procedure is implemented by an entry,
 then the @SynI{procedure_}@nt{name}, or @SynI{procedure_}@nt{prefix} and
 possibly the first parameter of the @nt{procedure_call_statement}, determine
-the target object of the call and the entry to be called.],Old=[]}
+the target object of the call and the entry to be called.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[The above says @lquotes@;possibly the first
+  @ChgAdded{Version=[2],Text=[The above says @lquotes@;possibly the first
     parameter@rquotes@;, because Ada allows entries
     to be renamed and passed as formal subprograms. In those cases, the
     task or protected object is implicit in the name of the routine; otherwise
-    the object is an explicit parameter to the call.],Old=[]}
+    the object is an explicit parameter to the call.]}
 @end{Discussion}
 @end{StaticSem}
 
@@ -3955,10 +3960,10 @@ so we can define conditional entry calls in terms of timed entry calls.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-A procedure call that might be an entry can be used in a timed or
-conditional entry call.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  A procedure call that might be an entry can be used in a timed or
+  conditional entry call.]}
 @end{Extend95}
 
 
@@ -4181,10 +4186,10 @@ executed after the @nt<abortable_part> is left.
 @end{Extend83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-A procedure call that might be an entry can be used the
-@nt{triggering_statement} of an @nt<asynchronous_select>.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  A procedure call that might be an entry can be used the
+  @nt{triggering_statement} of an @nt<asynchronous_select>.]}
 @end{Extend95}
 
 
@@ -4412,9 +4417,9 @@ of aborting the execution of a construct, rather than just of a task.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Abort can be used on a task interface.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Abort can be used on a task interface.]}
 @end{Extend95}
 
 
@@ -4484,9 +4489,9 @@ and after queuing a given caller.
 @end{Notes}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Task attributes can be used on a task interface.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Task attributes can be used on a task interface.]}
 @end{Extend95}
 
 
@@ -4559,10 +4564,10 @@ circumstances:
   the action of waiting for the termination of the task;
 
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0031],ARef=[AI95-00118-01]}
-  @Chg{New=[If A1 is the termination of a task T, and A2 is either the
-  evaluation of the expression T'Terminated or a call to
+  @ChgAdded{Version=[1],Text=[If A1 is the termination of a task T, and A2 is
+  either the evaluation of the expression T'Terminated or a call to
   Ada.Task_Identification.Is_Terminated with an actual parameter that
-  identifies T (see @RefSecNum(The Package Task_Identification));],Old=[]}
+  identifies T (see @RefSecNum(The Package Task_Identification));]}
 
   If A1 is the action of issuing an entry call, and A2 is
   part of the corresponding execution of the appropriate
@@ -4682,10 +4687,10 @@ see @RefSecNum(Shared Variable Control).
 @end{Erron}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0031],ARef=[AI95-00118-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that A task T2 can rely on
-values of variables that are updated by another task T1, if task T2 first
-verifies that T1'Terminated is True.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0031],ARef=[AI95-00118-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that A task T2 can rely on
+  values of variables that are updated by another task T1, if task T2 first
+  verifies that T1'Terminated is True.]}
 @end{DiffWord95}
 
 

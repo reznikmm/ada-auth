@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2004/12/12 05:36:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2004/12/13 05:56:27 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2004/12/12 05:36:22 $}
+@Comment{$Date: 2004/12/13 05:56:27 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -171,6 +171,21 @@ are not special files or directories are called @i<ordinary files>.
 @Defn{directory}
 @Defn{special file}
 @Defn{ordinary file}]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[A directory is an external file, although it may
+  not have a name on some targets. A directory is not a special file, as it
+  can be created and read by Ada.Directories.]}
+@end{Ramification}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Devices and soft links are examples of
+  special files on Windows and Unix.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Even if an implementation provides a package
+  to create and read soft links, such links are still special files.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
 @ChgAdded{Version=[2],Text=[A @i<file name> is a string identifying an external
@@ -195,6 +210,21 @@ Ada input-output subprogram can be a full name, a simple name, or any other
 form of name supported by the implementation.
 @Defn2{Term=[full name],Sec=[of a file]}
 @Defn2{Term=[simple name],Sec=[of a file]}]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The full name on Unix is a complete path to the
+   root. For Windows, the full name includes a complete path, as well as a disk
+   name ("C:") or network share name. For both systems, the simple name is
+   the part of the name following the last '/' (or '\' for Windows). For
+   example, in the name "/usr/randy/ada-directories.ads",
+   "ada-directories.ads" is the simple name.]}
+@end{Discussion}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[It is possible for a file or directory name to be
+    neither a full name nor a simple name. For instance, the Unix name
+    "../parent/myfile" is neither a full name nor a simple name.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
 @ChgAdded{Version=[2],Text=[The @i<default directory> is the directory that is
@@ -202,6 +232,15 @@ used if a directory or
 file name is not a full name (that is, when the name does not fully identify
 all of the containing directories).
 @Defn{default directory}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The default directory is the one maintained by
+   the familiar @lquotes@;cd@rquotes@; command on Unix and Windows. Note that
+   Windows maintains
+   separate default directories for each disk drive; implementations should
+   use the natural implementation.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
 @ChgAdded{Version=[2],Text=[A @i<directory entry> is a single item in a
@@ -212,6 +251,109 @@ external file (including directories and special files).
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
 @ChgAdded{Version=[2],Text=[For each function that returns a string, the
 lower bound of the returned value is 1.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
+@ChgAdded{Version=[2],Type=[Leading],
+Text=[The following file and directory operations are provided:]}
+
+@begin{DescribeCode}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Current_Directory @key{return} String;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the full directory name
+for the current default directory.
+The name returned shall be suitable for a future call to Set_Directory.
+The exception Use_Error is propagated if a default directory is not
+supported by the external environment.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Set_Directory (Directory : @key{in} String);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Sets the current default directory.
+The exception Name_Error is
+propagated if the string given as Directory does not identify an existing
+directory. The exception Use_Error is propagated if the external environment
+does not support making Directory (in the absence of Name_Error) a default
+directory.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Create_Directory (New_Directory : @key{in} String;
+                            Form : @key{in} String := "");]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Creates a directory with name
+New_Directory. The Form parameter can be
+used to give system-dependent characteristics of the directory; the
+interpretation of the Form parameter is implementation-defined. A null string
+for Form specifies the use of the default options of the implementation of the
+new directory. The exception Name_Error is propagated if the string given as
+New_Directory does not allow the identification of a directory. The exception
+Use_Error is propagated if the external environment does not support the
+creation of a directory with the given name (in the absence of Name_Error) and
+form.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Delete_Directory (Directory : @key{in} String);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Deletes an existing empty directory
+with name Directory. The exception
+Name_Error is propagated if the string given as Directory does not identify an
+existing directory. The exception Use_Error is propagated if the external
+environment does not support the deletion of the directory (or some portion of
+its contents) with the given name (in the absence of Name_Error).]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Create_Path (New_Directory : @key{in} String;
+                       Form : @key{in} String := "");]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Creates zero or more directories with
+name New_Directory. Each
+non-existent directory named by New_Directory is created.@Redundant[ For example, on a
+typical Unix system, Create_Path ("/usr/me/my"); would create directory "me" in
+directory "usr", then create directory "my" in directory "me".] The Form can be
+used to give system-dependent characteristics of the directory; the
+interpretation of the Form parameter is implementation-defined. A null string
+for Form specifies the use of the default options of the implementation of the
+new directory. The exception Name_Error is propagated if the string given as
+New_Directory does not allow the identification of any directory. The exception
+Use_Error is propagated if the external environment does not support the
+creation of any directories with the given name (in the absence of Name_Error)
+and form.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Delete_Tree (Directory : @key{in} String);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Deletes an existing directory with
+name Directory. The directory and
+all of its contents (possibly including other directories) are deleted. The
+exception Name_Error is propagated if the string given as Directory does not
+identify an existing directory. The exception Use_Error is propagated if the
+external environment does not support the deletion of the directory or some
+portion of its contents with the given name (in the absence of Name_Error). If
+Use_Error is propagated, it is unspecified if a portion of the contents of the
+directory are deleted.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Delete_File (Name : @key{in} String);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Deletes an existing ordinary or
+special file with Name. The exception
+Name_Error is propagated if the string given as Name does not identify an
+existing ordinary or special external file. The exception Use_Error is
+propagated if the external environment does not support the deletion of the
+file with the given name (in the absence of Name_Error).]}
+
+
+
+
+@end{DescribeCode}
 
 **** The rest of this clause has yet to be inserted ****
 

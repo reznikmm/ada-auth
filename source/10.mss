@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/12/12 05:36:20 $}
+@Comment{$Date: 2004/12/13 05:56:26 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1573,6 +1573,10 @@ Instead, we require only that the full expanded names be distinct.
 @end{Extend83}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+  @ChgAdded{Version=[2],Text=[An @nt{overriding_indicator} (see
+  @RefSecNum{Visibility}) is allowed on a subprogram stub.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00243-01]}
   @ChgAdded{Version=[2],Text=[Clarified that a subunit of a subunit is still a
   subunit.]}
