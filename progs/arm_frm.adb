@@ -111,6 +111,7 @@ package body ARM_Format is
     --  9/ 8/00 - RLB - Added information about the language-defined
     --			subprograms to the index introduction.
     --  9/26/00 - RLB - Added Syntax_Display format.
+    --  9/28/00 - RLB - Added RefSecbyNum command.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -281,7 +282,7 @@ package body ARM_Format is
 	Preface_Section, Labeled_Informative_Annex, Labeled_Normative_Annex,
 	Unnumbered_Section, Subheading, Heading, Center, Right, Added_Subheading,
 	-- Clause references:
-	Ref_Section, Ref_Section_Number,
+	Ref_Section, Ref_Section_Number, Ref_Section_by_Number,
 	-- Information:
 	Syntax_Rule, Syntax_Rule_RHS, Syntax_Term, Syntax_Prefix,
 	Syntax_Summary, Syntax_Xref,
@@ -497,6 +498,8 @@ package body ARM_Format is
 	    return Ref_Section;
 	elsif Canonical_Name = "refsecnum" then
 	    return Ref_Section_Number;
+	elsif Canonical_Name = "refsecbynum" then
+	    return Ref_Section_By_Number;
 	elsif Canonical_Name = "chg" then
 	    return Change;
 	elsif Canonical_Name = "chgref" then
@@ -4855,6 +4858,34 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Section Reference)");
 
+		when Ref_Section_by_Number =>
+		    -- Load the number into the Number string:
+		    declare
+			Ch : Character;
+			Number : String(1..20);
+			Number_Length : Natural;
+		    begin
+		        ARM_Input.Get_Char (Input_Object, Ch);
+			Number_Length := 0;
+			while Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char loop
+			    Number_Length := Number_Length + 1;
+			    Number(Number_Length) := Ch;
+			    ARM_Input.Get_Char (Input_Object, Ch);
+			end loop;
+			Number(Number_Length+1 .. Number'Last) :=
+			    (others => ' ');
+
+		        Check_Paragraph;
+		        ARM_Output.Clause_Reference (Output_Object,
+			    Text => Number(1..Number_Length),
+			    Clause_Number => Number(1..Number_Length));
+		        Format_Object.Last_Non_Space := True;
+			-- No checking here.
+		    end;
+
+		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
+--Ada.Text_IO.Put_Line (" &Unstack (Section Num Reference)");
+
 		-- Change commands:
 
 		when Change =>
@@ -5513,7 +5544,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Labeled_Informative_Annex | Labeled_Normative_Annex |
 		     Unnumbered_Section | Subheading | Added_Subheading | Heading |
 		     Center | Right |
-		     Preface_Section | Ref_Section | Ref_Section_Number |
+		     Preface_Section | Ref_Section | Ref_Section_Number | Ref_Section_by_Number |
 		     Change | Change_Reference | Change_Note |
 		     Change_Implementation_Defined | Change_Attribute |
 		     Change_Prefix_Type |

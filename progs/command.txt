@@ -217,7 +217,9 @@ Text commands:
 @RefSecNum{<title>} - Generates a reference to the clause "title". (This must
 	match exactly except for case). The reference is of the form
 	"<clause number>".
-
+@RefSecbyNum{<num>} - Generates a reference to the clause with <num> as a
+	clause number. This is intended to be used internally to the tool,
+	not in document source (the tool assigns the clause numbers).
 
 -- Ada specific commands:
 @nt{<text>} - A non-terminal in normal text. This will be set in a Swiss

@@ -50,6 +50,7 @@ package body ARM_Syntax is
     --  9/26/00 - RLB - Revised to use SyntaxDisplay format to get more
     --			control over the formating of this section.
     --  9/27/00 - RLB - Revised XRef to decrease white space.
+    --  9/28/00 - RLB - Added code to make links in HTML version.
 
     type String_Ptr is access String;
     type Rule_Type;
@@ -207,14 +208,14 @@ package body ARM_Syntax is
 	Temp := Rule_List;
 	while Temp /= null loop
 	    if Ada.Strings.Fixed.Trim (Temp.Tabset, Ada.Strings.Right) = "" then
-	        Format_Text ("@noparanum@;" &
-		    Temp.Clause(1..Temp.Clause_Len) & ":" & Ascii.LF &
+	        Format_Text ("@noparanum@RefSecbyNum{" &
+		    Temp.Clause(1..Temp.Clause_Len) & "}:" & Ascii.LF &
 		    Temp.Rule.all & Ascii.LF & Ascii.LF,
 		    Temp.Clause(1..Temp.Clause_Len));
 	    else
 	        Format_Text ("@noparanum@tabclear{}@tabset{" &
 		    Ada.Strings.Fixed.Trim (Temp.Tabset, Ada.Strings.Right) &
-		    "}" & Temp.Clause(1..Temp.Clause_Len) & ":" & Ascii.LF &
+		    "}@RefSecbyNum{" & Temp.Clause(1..Temp.Clause_Len) & "}:" & Ascii.LF &
 		    Temp.Rule.all & Ascii.LF & Ascii.LF,
 		    Temp.Clause(1..Temp.Clause_Len));
 	    end if;
@@ -303,11 +304,11 @@ package body ARM_Syntax is
 		Temp.Name (1..Temp.Name_Len) /= Temp.Next.Name (1..Temp.Next.Name_Len) then
 		-- Last item of a set.
 	        Format_Text ("@\@nt{" & Temp.Used_In(1..Temp.Used_In_Len) & "}@\" &
-		    Temp.Clause(1..Temp.Clause_Len) & Ascii.LF & Ascii.LF,
+		    "@RefSecbyNum{" & Temp.Clause(1..Temp.Clause_Len) & '}' & Ascii.LF & Ascii.LF,
 	            Temp.Name (1..Temp.Name_Len) & " ref " & Temp.Clause(1..Temp.Clause_Len));
 	    else -- Not an end item.
 	        Format_Text ("@\@nt{" & Temp.Used_In(1..Temp.Used_In_Len) & "}@\" &
-		    Temp.Clause(1..Temp.Clause_Len) & Ascii.LF,
+		    "@RefSecbyNum{" & Temp.Clause(1..Temp.Clause_Len) & '}' & Ascii.LF,
 	            Temp.Name (1..Temp.Name_Len) & " ref " & Temp.Clause(1..Temp.Clause_Len));
 	    end if;
 	    Temp := Temp.Next;
