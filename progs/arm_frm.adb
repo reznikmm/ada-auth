@@ -170,6 +170,7 @@ package body ARM_Format is
     --			and to put out an error message if we exceed the maximum.
     --		- RLB - Added ChgDocReq and ChgImplAdvice.
     --		- RLB - Added AddedDocReqList and AddedImplAdviceList.
+    --  1/20/05 - RLB - Added debugging for stack overflows.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -827,11 +828,20 @@ package body ARM_Format is
 					   Param_Ch : in Character) is
 	    -- Push the command onto the nesting stack.
 	begin
-	    Nesting_Stack_Ptr := Nesting_Stack_Ptr + 1;
-	    Nesting_Stack (Nesting_Stack_Ptr) :=
-	        (Command => Command,
-		 Close_Char => ARM_Input.Get_Close_Char (Param_Ch));
+	    if Nesting_Stack_Ptr < Nesting_Stack'Last then
+	        Nesting_Stack_Ptr := Nesting_Stack_Ptr + 1;
+	        Nesting_Stack (Nesting_Stack_Ptr) :=
+	            (Command => Command,
+		     Close_Char => ARM_Input.Get_Close_Char (Param_Ch));
 --Ada.Text_IO.Put_Line (" &Stack (" & Name & ")");
+	    else
+		Ada.Text_IO.Put_Line ("** Nesting stack overflow on line" & ARM_File.Line_String (Input_Object));
+		for I in reverse Nesting_Stack'range loop
+		    Ada.Text_IO.Put_Line ("-- Command at" & Natural'Image(I) & " has a close char of '" &
+			Nesting_Stack (Nesting_Stack_Ptr).Close_Char & "' for " & Command_Type'Image(Nesting_Stack (Nesting_Stack_Ptr).Command));
+		end loop;
+		raise Program_Error;
+	    end if;
 	end Set_Nesting_for_Command;
 
 
