@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/09/29 05:34:31 $}
+@Comment{$Date: 2001/12/21 23:21:09 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -135,8 +135,8 @@ applied only to stand-alone objects.
 
 @begin{Legality}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
-The @nt{local_name} of a @Chg{New=[@nt<aspect_clause>],
-Old=[@nt<representation_clause>]} or representation pragma shall
+The @nt{local_name} of @Chg{New=[@nt<an aspect_clause>],
+Old=[@nt<a representation_clause>]} or representation pragma shall
 statically denote an entity (or, in the case of a @nt{pragma},
 one or more entities) declared immediately preceding it in a @nt<compilation>,
 or within the same @nt{declarative_@!part}, @nt{package_@!specification},
