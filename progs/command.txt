@@ -1,6 +1,6 @@
 Ada Reference Manual formatting tool.
 
-Copyright 2000, 2002, 2004 AXE Consultants.
+Copyright 2000, 2002, 2004, 2005 AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
 
@@ -275,6 +275,7 @@ Text commands:
 	<Non-terminal> for any following @Syn2 to use. The command also writes
 	    @nt<Non-Terminal> ::= <Production>
 	to the output.
+	Note: <Non-Terminal> and <Production> allow @Chg commands.
 @syni{<prefix>} - Generates <prefix> in the italics of a non-terminal prefix.
 @syn2{<name>} - Marks a non-terminal name in the production of a syntax rule.
 	If the current non-terminal is not null, generates a cross reference
@@ -286,6 +287,16 @@ Text commands:
 	numbers*!
 @syntaxxref -- Generate the syntax cross-reference at this point. *No paragraph
 	numbers*!
+@AddedSyn{Version=[<Version>],[Tabs=<Tabset>, ]LHS=<Non-terminal>, RHS=<Production>}
+	Add a syntax production for Version. Otherwise, the meaning is the
+	same as for @Syn, above. Note: <Non-terminal> and <Production> need
+	@Chg commands; this command only adds processing for "::=" and overall
+	inclusion or skipping when necessary.
+@DeletedSyn{Version=[<Version>],[Tabs=<Tabset>, ]LHS=<Non-terminal>, RHS=<Production>}
+	Delete a syntax production for version. Otherwise, the meaning is the
+	same as for @Syn, above. Note: <Non-terminal> and <Production> need
+	@Chg commands; this command only adds processing for "::=" and overall
+	inclusion or skipping when necessary.
 
 @Attribute{Prefix=<Prefix>,AttrName=<Name>,Text=<Text>}
 	Defines an attribute. Creates a hanging text item <Prefix>'<Name>,
