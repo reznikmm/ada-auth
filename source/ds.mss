@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2000/08/31 04:56:05 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2000/09/01 03:51:23 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/08/31 04:56:05 $}
+@Comment{$Date: 2000/09/01 03:51:23 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -860,7 +860,7 @@ result in the version of a compilation unit changing.
 @ChgImplDef{Version=[1],Kind=[Deleted],Text=[@Chg{New=[],Old=[Events that
 cause the version of a compilation unit to change.]}]}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0084]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0084]}
 @Chg{New=[If P is not a library unit, and P has no completion, then
 P'Body_Version returns the Body_Version of the innermost program unit
 enclosing the declaration of P. If P is a library unit, and P has no

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:01 $}
+@Comment{$Date: 2000/09/01 03:51:19 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1655,13 +1655,7 @@ language, but
 @Defn{controlled type}
 a @i{controlled} type gives the user additional
 control over parts of these operations.
-@ToGlossary{Term=<Controlled type>,
-  Text=<A controlled type supports user-defined assignment and
-  finalization.
-  Objects are always finalized before being destroyed.>}
-@Defn{Initialize}
-@Defn{Finalize}
-@Defn{Adjust}
+@Defn{Initialize}@Defn{Finalize}@Defn{Adjust}
 In particular, the user can define, for a controlled type,
 an Initialize procedure which is invoked immediately after
 the normal default initialization of a controlled object, a Finalize procedure
@@ -1669,6 +1663,10 @@ which is invoked immediately before finalization of any of the
 components of a controlled object, and an Adjust
 procedure which is invoked as the last step of an assignment to
 a (nonlimited) controlled object.]
+@ToGlossary{Term=<Controlled type>,
+  Text=<A controlled type supports user-defined assignment and
+  finalization.
+  Objects are always finalized before being destroyed.>}
 @begin{Ramification}
 Here's the basic idea of initialization, value adjustment, and finalization,
 whether or not user defined:

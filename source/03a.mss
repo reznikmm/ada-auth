@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:55:59 $}
+@Comment{$Date: 2000/09/01 03:51:18 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1794,9 +1794,9 @@ shall be a static expression, as defined by clause
 
 @begin{StaticSem}
 The named number denotes a value of type @i(universal_integer) if
-the type of the @i(static_)@nt{expression} is an integer type.
+the type of the @i(static_)@!@nt{expression} is an integer type.
 The named number denotes a value of type @i(universal_real) if
-the type of the @i(static_)@nt{expression} is a real type.
+the type of the @i(static_)@!@nt{expression} is a real type.
 
 The value denoted by the named number is the value of the
 @i(static_)@nt{expression}, converted to the corresponding

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.19 $ $Date: 2000/08/31 04:56:08 $ $Author: Randy $ }
+@Comment{ $Revision: 1.20 $ $Date: 2000/09/01 03:51:24 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:08 $}
+@Comment{$Date: 2000/09/01 03:51:24 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -504,7 +504,7 @@ been @lquotes@;unrolled@rquotes@; by an optimizer.
 @Chg{New=[The short form of the pragma is a convenient shorthand for
 listing all objects which could be explicitly made inspectable by the long
 form of the pragma, thus only visible objects are made inspectable by it.
-Objects which are not visible at the point of the pragma are not made
+Objects that are not visible at the point of the pragma are not made
 inspectable by the short form pragma. This is necessary so that implementations
 need not keep information about (or prevent optimizations on) a unit simply
 because some other unit @i<might> contain a short form Inspection_Point

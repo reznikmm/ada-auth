@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/31 04:56:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/09/01 03:51:24 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:10 $}
+@Comment{$Date: 2000/09/01 03:51:24 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -109,14 +109,11 @@ for the external execution environment.
 Argument_Count, Argument, and Command_Name
 correspond to the C language's argc, argv[n] (for n>0) and argv[0],
 respectively.
-@begin{Ramification}
-
+@begin{Honest}
 The correspondence of Argument_Count to argc is not direct @em
 argc would be one more than Argument_Count, since the argc count
-includes the command name,
-whereas Argument_Count does not.
-
-@end{Ramification}
+includes the command name, whereas Argument_Count does not.
+@end{Honest}
 @end{Notes}
 
 @begin{Extend83}

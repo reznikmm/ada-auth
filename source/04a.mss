@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:00 $}
+@Comment{$Date: 2000/09/01 03:51:19 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2764,8 +2764,8 @@ types and generic formal types.],Old=[]}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[If any language-defined types are implemented with a user-defined
 "=" operator, then either the full type must be tagged, or the compiler must
-use @lquotes@;magic@rquotes@; to implement equality if this type. A
-user-defined "=" operator for an untagged type does not meet this
+use @lquotes@;magic@rquotes@; to implement equality for this type. A normal
+user-defined "=" operator for an untagged type does @i{not} meet this
 requirement.],Old=[]}
 @end{Ramification}
 @end{ImplReq}
@@ -4199,7 +4199,7 @@ an access value that designates the object.
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
 @PDefn2{Term=[expected type],Sec=(allocator)}
 The expected type for an @nt<allocator> shall be a single access-to-object
 type @Chg{New=[with],Old=[whose]} designated type
@@ -4297,7 +4297,7 @@ uninitialized allocator)}
   If the designated type is elementary, an object of the
   designated subtype is created and any implicit initial value is assigned;
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0002]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
 @Defn2{Term=[assignment operation], Sec=(during evaluation of an
 uninitialized allocator)}
   If the designated type is composite, an object of the
@@ -4431,11 +4431,9 @@ Only scalar and string expressions are static.
 To be static, an expression cannot have any nonscalar, nonstring
 subexpressions (though it can have nonscalar constituent @nt<name>s).
 A static scalar expression cannot have any nonscalar subexpressions.
-
 There is one exception @em a membership test for a string subtype
 can be static, and the result is scalar, even though a subexpression
 is nonscalar.
-
 
 The rules for evaluating static expressions are designed
 to maximize portability of static calculations.

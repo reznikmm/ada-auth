@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:04 $}
+@Comment{$Date: 2000/09/01 03:51:20 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -33,7 +33,7 @@ generic unit.
   sometimes play in other languages.>}@ChgNote{Correction for AI-00024, no mechism to correct glossary entries.}
 
 @redundant[A generic unit is declared by a @nt{generic_declaration}. This form
-of declaration has a @nt{generic_formal_part} declaring any generic
+of declaration has a @nt{generic_@!formal_@!part} declaring any generic
 formal parameters. An instance of a generic unit is obtained as the
 result of a @nt{generic_instantiation} with appropriate
 generic actual parameters for the generic formal parameters. An
@@ -222,6 +222,7 @@ We can't do that for @nt{generic_formal_parameter_declaration},
 because of confusion with normal formal parameters of subprograms.
 @end{DiffWord83}
 
+@RmNewPage@Comment{Insert page break so printed RM's look better.}
 @LabeledClause{Generic Bodies}
 
 @begin{Intro}
@@ -437,7 +438,7 @@ without knowing anything about the actuals:
 A formal derived subtype is constrained if and only if the ancestor
 subtype is constrained.
 A formal array type is constrained if and only if the declarations
-says so.
+say@Chg{New=[],Old=[s]} so.
 @Chg{New=[A formal private type is constrained if it does not have a
 discriminant part.],Old=[]}
 Other formal subtypes are unconstrained,

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2000/08/31 04:56:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2000/09/01 03:51:24 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/08/31 04:56:10 $}
+@Comment{$Date: 2000/09/01 03:51:24 $}
 
 @LabeledClause{String Handling}
 
@@ -48,6 +48,7 @@ common to the string handling packages.
 @end{example}
 @end{StaticSem}
 
+@RmNewPage@Comment{Insert page break so printed RM's look better.}
 @LabeledSubClause{The Package Strings.Maps}
 @begin{Intro}
 The package Strings.Maps defines the types, operations, and other

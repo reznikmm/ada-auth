@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:04 $}
+@Comment{$Date: 2000/09/01 03:51:20 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -53,7 +53,7 @@ current declarative region, or a library unit declared immediately
 preceding a representation pragma in a @nt<compilation>.]}]
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[An @Defn{representation item}@i<operational item> is an
+@Chg{New=[An @Defn{operational item}@i<operational item> is an
 @nt<attribute_definition_clause> for an operational attribute.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
@@ -589,7 +589,7 @@ it is inherited by the record extension.
 @end{Honest}
 @begin{Ramification}
 If a representation item for the parent appears after the
-@nt{derived_type_declaration},
+@nt{derived_@!type_@!declaration},
 then inheritance does not happen for that representation item.
 @end{Ramification}
 
@@ -604,7 +604,7 @@ that specifies the same aspect of the type.],Old=[]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[As with representation items, if an operational item for the parent appears
-after the @nt{derived_type_declaration}, then inheritance does not happen for
+after the @nt{derived_@!type_@!declaration}, then inheritance does not happen for
 that operational item.],Old=[]}
 @end{Ramification}
 @begin{Discussion}
@@ -639,8 +639,8 @@ it is chosen by default in an unspecified manner.
 @end{Itemize}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
-Note that @Chg{New=[@nt{aspect_clause}s],Old=[@nt{representation_clause}s]} can
-affect the semantics of the entity.
+Note that @Chg{New=[representation items],Old=[@nt{representation_clause}s]}
+can affect the semantics of the entity.
 
 The rules forbid things like
 @lquotes@;@key[for] S'Base'Alignment @key[use] ...@rquotes@;
@@ -813,8 +813,8 @@ We have defined a new term @lquotes@;representation item,@rquotes@;
 which includes @Chg{New=[all representation clauses],
 Old=[@nt{representation_clause}s]} and representation pragmas, as well as
 @nt<component_clause>s.
-This is convenient because the rules are almost identical for all
-three. @Chg{New=[We have also defined the new terms
+This is convenient because the rules are almost identical for all @Chg{New=[of them],
+Old=[three]}. @Chg{New=[We have also defined the new terms
 @lquotes@;operational item@rquotes@; and @lquotes@;operational aspects@rquotes@;
 in order to conveniently handle new types of specifable entities.],Old=[]}
 
@@ -3249,7 +3249,7 @@ The declarations Max_Binary_Modulus, Max_Nonbinary_Modulus, Max_Base_Digits,
 Null_Address, Word_Size, Bit_Order, Default_Bit_Order, Any_Priority,
 Interrupt_Priority, and Default_Priority are added to System in Ada 95.
 The presence of ordering operators for type Address is also guaranteed (the
-existence of these depend on the definition of Address in an Ada 83
+existence of these depends on the definition of Address in an Ada 83
 implementation). We do not list these as incompatibilities, as the contents of
 System can vary between implementations anyway; thus a program that depends on
 the contents of System (by using @f{@key[use] System;} for example) is
@@ -3362,9 +3362,7 @@ because then a read of 0 elements would always raise Constraint_Error.
 A better choice of lower bound is 1.
 @end{Reason}
 
-
 Integer_Address is a @Redundant[(signed or modular)] integer subtype.
-
 To_Address and To_Integer convert back and forth between
 this type and Address.
 @end{StaticSem}
@@ -3403,11 +3401,9 @@ However, it is better to declare it as a modular type in the visible part,
 since code that uses it is already low level,
 and might as well have access to the underlying representation.
 We also considered allowing Storage_Element to be any
-integer type, signed integer or modular,
-but it is better to have uniformity across implementations
-in this regard,
-and viewing storage elements as unsigned seemed to make the most
-sense.
+integer type, signed integer or modular, but it is better to have
+uniformity across implementations in this regard, and viewing storage elements
+as unsigned seemed to make the most sense.
 @end{Reason}
 @begin{ImplNote}
 To_Address is intended for use in Address clauses.
@@ -3979,9 +3975,8 @@ For example, interfacing to other languages can also cause the problem.
 One obscure example is if the Adjust subprogram of a controlled type
 uses Unchecked_Access to create an access-to-variable value designating
 a subcomponent of its controlled parameter, and saves this access value
-in a global object.
-When Adjust is called during the initialization of a constant object of
-the type,
+in a global object. When Adjust is called during the initialization of a
+constant object of the type,
 the end result will be an access-to-variable value that designates a
 constant object.
 @end{Ramification}
@@ -4129,10 +4124,8 @@ The expected type for X'Unchecked_Access is as for X'Access.
 
 If an @nt<attribute_reference> with Unchecked_Access is used
 as the actual parameter for an access parameter,
-
 an Accessibility_Check can never fail on that access
 parameter.
-
 @end{Ramification}
 
 There is no Unchecked_Access attribute for subprograms.
@@ -5628,9 +5621,7 @@ the implementations of all the primitive subprograms of the type
 the contents of the type descriptor, which contains pointers to the code for
 each primitive subprogram.
 
-For a type,
-the full type declaration of any parts
-(including the type itself)
+For a type, the full type declaration of any parts (including the type itself)
 that are private.
 
 For a deferred constant,
@@ -5828,13 +5819,13 @@ but not the type.
 @end{Ramification}
 
 @begin{Itemize}
-@PDefn2{Term=[freezing], Sec=(generic_instantiation)}
+@Leading@PDefn2{Term=[freezing], Sec=(generic_instantiation)}
 The occurrence of a @nt{generic_instantiation} causes freezing;
 also, if a parameter of the instantiation is defaulted,
 the @nt{default_expression} or @nt{default_name} for that parameter
 causes freezing.
 
-@PDefn2{Term=[freezing], Sec=(object_declaration)}
+@Leading@PDefn2{Term=[freezing], Sec=(object_declaration)}
 The occurrence of an @nt<object_declaration> that has no corresponding
 completion causes freezing.
 @begin{Ramification}
@@ -5881,7 +5872,7 @@ then at the place where the expression causes freezing, @i(T) is frozen.],Old=[]
 @Leading@;The following rules define which entities are frozen at the place where
 a construct causes freezing:
 @begin{Itemize}
-@PDefn2{Term=[freezing], Sec=(type caused by an expression)}
+@Leading@PDefn2{Term=[freezing], Sec=(type caused by an expression)}
 At the place where an expression causes freezing,
 the type of the expression is frozen,
 unless the expression is an enumeration literal used as a
@@ -5928,7 +5919,7 @@ In Ada 83, on the other hand, there is no occurrence of the name T,
 hence no forcing occurrence of T.
 @end{Ramification}
 
-@PDefn2{Term=[freezing], Sec=(entity caused by a name)}
+@Leading@PDefn2{Term=[freezing], Sec=(entity caused by a name)}
 At the place where a @nt<name> causes freezing,
 the entity denoted by the @nt<name> is frozen, unless
 the @nt<name> is a @nt<prefix> of an expanded name;
@@ -5946,14 +5937,14 @@ subtype, plus all component junk.
 @Comment{This statement is just plain wrong.}
 @end{Ramification}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
+@Leading@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
 @Chg{New=[@PDefn2{Term=[freezing], Sec=(subtype caused by an implicit dereference)}
 At the place where an @nt{implicit_dereference} causes freezing,
 the nominal subtype associated with the @nt{implicit_dereference} is frozen.],
 Old=[]}
 
 
-@Redundant[@PDefn2{Term=[freezing], Sec=(type caused by a range)}
+@Leading@Redundant[@PDefn2{Term=[freezing], Sec=(type caused by a range)}
 At the place where a @nt{range} causes freezing, the type of the
 @nt<range> is frozen.]
 @begin{TheProof}
@@ -5962,7 +5953,7 @@ and the Range attribute is defined to be equivalent
 to a pair of expressions separated by @lquotes@;..@rquotes@;.}
 @end{TheProof}
 
-@PDefn2{Term=[freezing],
+@Leading@PDefn2{Term=[freezing],
   Sec=(designated subtype caused by an allocator)}
 At the place where an @nt<allocator> causes freezing,
 the designated subtype of its type is frozen.
@@ -5989,7 +5980,7 @@ then all ancestor types are also frozen.
   This is necessary because derived access types share their parent's pool.
 @end{Ramification}
 
-@PDefn2{Term=[freezing], Sec=(subtypes of the profile of a callable entity)}
+@Leading@PDefn2{Term=[freezing], Sec=(subtypes of the profile of a callable entity)}
 At the place where a callable entity is frozen,
 each subtype of its profile is frozen.
 If the callable entity is a member of an entry family, the
@@ -6005,7 +5996,7 @@ the @nt{default_@!expression} for that parameter causes freezing.
   part.
 @end{Discussion}
 
-@PDefn2{Term=[freezing],
+@Leading@PDefn2{Term=[freezing],
   Sec=[type caused by the freezing of a subtype]}
 At the place where a subtype is frozen,
 its type is frozen.
@@ -6039,7 +6030,8 @@ the corresponding specific type is frozen as well.
 
 @begin{Legality}
 
-@Redundant[The explicit declaration of a primitive subprogram of a
+@Comment{"Leading" below is to get the last paragraph onto the page with everything else.}
+@Leading@Redundant[The explicit declaration of a primitive subprogram of a
 tagged type shall occur before the type is frozen
 (see @RefSecNum{Dispatching Operations of Tagged Types}).]
 @begin{Reason}
@@ -6063,15 +6055,15 @@ As in Ada 83, for an untagged type, the above call upon P will call the
 old P (which is arguably confusing).
 @end{Reason}
 
-@Redundant[A type shall be completely defined before it is frozen
+@Leading@Redundant[A type shall be completely defined before it is frozen
 (see @RefSecNum{Completions of Declarations} and
 @RefSecNum{Private Types and Private Extensions}).]
 
-@Redundant[The completion of a deferred constant declaration shall occur
+@Leading@Redundant[The completion of a deferred constant declaration shall occur
 before the constant is frozen
 (see @RefSecNum{Deferred Constants}).]
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Leading@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @Chg{New=[An operational or],Old=[A]} representation item that
 directly specifies an aspect of an entity shall appear before the entity is
 frozen (see @RefSecNum{Operational and Representation Items}).
@@ -6081,6 +6073,9 @@ redundant, and I removed the @Redundant for it. I don't have a way to mark
 that as a change, so it is just gone. RLB-29-08-00}
 
 @begin{Discussion}
+
+@ChgRef{Version=[1],Kind=[Deleted]}
+@Chg{New=[],Old=[Old @b{Change}.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 From RM83-13.1(7). The wording here forbids freezing
@@ -6171,7 +6166,7 @@ accessing the size dope for a private type before it is initialized.
 unrecognized @nt{pragma}s.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
-A @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]} for
+@Chg{New=[An @nt{aspect_clause}],Old=[A @nt{representation_clause}]} for
 an entity should most certainly @i{not} be a freezing point for the entity.
 @end{ImplNote}
 @end{Legality}

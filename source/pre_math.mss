@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2000/08/31 04:56:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2000/09/01 03:51:24 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:07 $}
+@Comment{$Date: 2000/09/01 03:51:24 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -19,9 +19,10 @@ children are defined in @RefSec{Numerics}.
 @end{Intro}
 
 @begin{StaticSem}
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Numerics]}
-@key[package] Ada.Numerics @key[is]
+@key[package] Ada.Numerics @key[is]@ChildUnit{Parent=[Ada],Child=[Numerics]}
    @key[pragma] Pure(Numerics);
    @AdaDefn{Argument_Error} : @key[exception];
    @AdaDefn{Pi} : @key[constant] :=
@@ -60,7 +61,7 @@ Numerics and its children were not predefined in Ada 83.
 Implementation-defined
 approximations to the mathematical functions known as the @lquotes@;elementary
 functions@rquotes@; are provided by the subprograms in
-Numerics.Generic_Elementary_Functions. Nongeneric equivalents of this generic
+Numerics.@!Generic_@!Elementary_@!Functions. Nongeneric equivalents of this generic
 package for each of the predefined floating point types are also provided as
 children of Numerics.
 @ImplDef{The accuracy actually achieved by the elementary functions.}
@@ -128,7 +129,7 @@ The library package Numerics.Elementary_Functions
 Numerics.@!Generic_@!Elementary_@!Functions,
 except that the predefined type Float is systematically substituted for
 Float_Type'Base throughout. Nongeneric equivalents of
-Numerics.Generic_Elementary_Functions for each of the other predefined
+Numerics.@!Generic_@!Elementary_@!Functions for each of the other predefined
 floating point types are defined similarly, with the names
 Numerics.@!Short_@!Elementary_@!Functions, Numerics.@!Long_@!Elementary_@!Functions, etc.
 @begin{Reason}

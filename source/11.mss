@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:04 $}
+@Comment{$Date: 2000/09/01 03:51:20 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1218,13 +1218,10 @@ that have been suppressed.
 However, if a given check comes for free (for example, the hardware
 automatically performs the check in parallel with doing useful work)
 or nearly free (for example, the check is a tiny portion of an
-expensive run-time system call),
-the implementation should not bother to suppress the check.
-
-Similarly, if the implementation detects the failure at compile time
-and provides a warning message,
-there is no need to actually suppress the check.
-
+expensive run-time system call), the implementation should not bother to
+suppress the check. Similarly, if the implementation detects the failure at
+compile time and provides a warning message, there is no need to actually
+suppress the check.
 @end{ImplNote}
 @end{ImplAdvice}
 
@@ -1406,7 +1403,10 @@ This follows from the canonical semantics.
   @key[when] @key[others] =>
       Put_Line("X * Y overflowed");
 @end{Example}
-  If X*Y does overflow, you may not remove the raise of the exception
+  @ChgNote{The following paragraph is missing a number in the original version.
+  To give it a number in the new version, it is marked as an insertion.}
+  @ChgRef{Version=[0],Kind=[Added]}
+  @Chg{New=[],Old=[@Noparanum@;]}If X*Y does overflow, you may not remove the raise of the exception
   if the code that does the comparison against Integer'Last presumes
   that it is comparing it with an in-range Integer value, and hence
   always yields False.
@@ -1421,6 +1421,9 @@ This follows from the canonical semantics.
       Put_Line("Oops");
   @key[end] @key[if];
 @end{Example}
+  @ChgNote{The following paragraph is missing a number in the original version.
+  To give it a number in the new version, it is marked as an insertion.}
+  @ChgRef{Version=[0],Kind=[Added]}
   In the above code, it would be wrong to eliminate the
   raise of Constraint_Error on the "X.all" (since X is null),
   if the code to evaluate 'Last always yields 10 by presuming

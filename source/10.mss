@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:03 $}
+@Comment{$Date: 2000/09/01 03:51:19 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -625,26 +625,19 @@ or a deferred constant (RM83-7.4.3(2))
 do not apply to uses in child units, because they follow
 the full declaration.
 
-A library subprogram is never primitive,
-even if its profile includes a type declared immediately within the
-parent's @nt{package_specification},
+A library subprogram is never primitive, even if its profile includes a
+type declared immediately within the parent's @nt{package_specification},
 because the child is not declared immediately within the same
 @nt{package_specification} as the type (so it doesn't declare a new
-primitive subprogram),
-and because the child is forbidden from overriding
-an old primitive subprogram.
-It is immediately within the same declarative region,
-but not the same @nt{package_specification}.
-Thus, for a tagged type,
+primitive subprogram), and because the child is forbidden from overriding
+an old primitive subprogram. It is immediately within the same declarative
+region, but not the same @nt{package_specification}. Thus, for a tagged type,
 it is not possible to call a child subprogram in a dispatching manner.
-
 (This is also forbidden by the freezing rules.)
 Similarly, it is not possible for the user to declare primitive
 subprograms of the types declared in the declaration of Standard,
-such as Integer
-(even if the rules were changed to allow a library unit whose name is an
-operator symbol).
-
+such as Integer (even if the rules were changed to allow a library unit
+whose name is an operator symbol).
 
 When the parent unit is @lquotes@;used@rquotes@; the simple names of the
 with'd child units are directly visible (see @RefSec{Use Clauses}).
@@ -662,13 +655,11 @@ is different from @lquotes@;@nt{library_unit_declaration}@rquotes@;
 @em the former includes @nt{subprogram_body}.
 Also, we sometimes really mean @lquotes@;declaration of a view of a
 library unit@rquotes@;, which includes
-
-@nt{library_unit_renaming_declaration}s.
+@nt{library_@!unit_@!renaming_@!declaration}s.
 
 The visibility rules generally imply that the renamed view of a
 @nt{library_unit_renaming_declaration} has to be mentioned in a
-
-@nt{with_clause} of the @nt{library_unit_renaming_declaration}.
+@nt{with_@!clause} of the @nt{library_@!unit_@!renaming_@!declaration}.
 @end{Ramification}
 @begin{Honest}
 The real rule is that the renamed library unit

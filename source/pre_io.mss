@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:06 $}
+@Comment{$Date: 2000/09/01 03:51:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -155,6 +155,7 @@ Out_File. An implementation may restrict the number of files that may
 be associated with a given external file.
 @end{Notes}
 
+@RMNewPage@Comment{Break here so printed RM looks better.}
 @LabeledClause{Sequential and Direct Files}
 
 @begin{StaticSem}
@@ -825,7 +826,7 @@ standard error}
 @Chg{New=[The default input file and default output file are not the names
 of distinct file objects, but rather the @i<role> played by one or more
 (other) file object(s). Thus, they generally will be implemented as accesses
-to another file object. An implementation which implements them by copying
+to another file object. An implementation that implements them by copying
 them is incorrect.],Old=[]}
 @end{ImplNote}
 

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:02 $}
+@Comment{$Date: 2000/09/01 03:51:19 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 
@@ -1493,11 +1493,11 @@ because a task @nt{entry_declaration} is allowed to have zero, one, or more
 than one corresponding @nt{accept_statement}s.
 @end{Discussion}
 
-An @nt{entry_body_formal_part} shall have an @nt{entry_index_specification}
-if and only if the corresponding @nt{entry_declaration} has
-a @nt<discrete_subtype_definition>.
-In this case, the @nt<discrete_subtype_definition>s of the
-@nt<entry_declaration> and the @nt<entry_index_specification>
+An @nt{entry_body_formal_part} shall have an @nt{entry_@!index_@!specification}
+if and only if the corresponding @nt{entry_@!declaration} has
+a @nt<discrete_@!subtype_@!definition>.
+In this case, the @nt<discrete_@!subtype_@!definition>s of the
+@nt<entry_@!declaration> and the @nt<entry_@!index_@!specification>
 shall fully conform to one another (see @RefSecNum(Conformance Rules)).
 @Defn2{Term=[full conformance],Sec=(required)}
 
@@ -1522,7 +1522,7 @@ An @nt<entry_declaration> with a @nt<discrete_subtype_definition>
 (see @RefSecNum(Array Types)) declares a @i(family) of distinct
 entries having the same profile, with one such entry for each
 value of the @i(entry index subtype) defined
-by the @nt<discrete_subtype_definition>.
+by the @nt<discrete_@!subtype_@!definition>.
 @Redundant[A name for an entry of a family takes the form of
 an @nt<indexed_component>, where the @nt<prefix> denotes
 the @nt<entry_declaration> for the family, and the index value
@@ -1555,9 +1555,9 @@ is per-object.
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
 @PDefn2{Term=[elaboration], Sec=(entry_declaration)}
 @Chg{New=[The elaboration of an @nt<entry_declaration> for an entry family
-consists of the elaboration of the @nt<discrete_subtype_definition>, as
+consists of the elaboration of the @nt<discrete_@!subtype_@!definition>, as
 described in @RefSecNum(Record Types).],
-Old=[For the elaboration of an @nt<entry_declaration> for an
+Old=[For the elaboration of an @nt<entry_@!declaration> for an
 entry family, if the
 @nt{discrete_@!subtype_@!definition} contains no per-object expressions
 (see @RefSecNum(Record Types)), then the @nt<discrete_@!subtype_@!definition>
@@ -2507,15 +2507,13 @@ thereby completing the @nt<delay_statement>.
 @end(Reason)
 
 The time base associated with the type Time of package Calendar
-is implementation defined.
-@ImplDef{The time base of the type Calendar.Time.}
-The function Clock of package Calendar
-returns a value representing the current time for this
-time base.
+is implementation defined. The function Clock of package Calendar
+returns a value representing the current time for this time base.
 @Redundant[The implementation-defined value of the
 named number System.Tick (see @RefSecNum(The Package System))
 is an approximation of the length of the real-time
 interval during which the value of Calendar.Clock remains constant.]
+@ImplDef{The time base of the type Calendar.Time.}
 
 The functions Year,
 Month, Day, and Seconds return the corresponding values for
@@ -3612,13 +3610,14 @@ circumstances:
     shared variables.
   @end(Reason)
 
+  @Leading@Comment{This "Leading" is to help fit the next example on one page.}
   If A1 signals some action that in turn signals A2.
 @end(Itemize)
 
 @end{RunTime}
 
 @begin{Erron}
-@PDefn2{Term=(erroneous execution),Sec=(cause)}
+@Leading@;@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Given an action of assigning to an object,
 and an action of reading or updating a part of the same object
 (or of a neighboring object if the two are not
@@ -3708,14 +3707,12 @@ following structure:
 @key(end) Producer;
 @end(Example)
 
-@begin{Wide}
 @leading@keepnext@;and the consuming task might have the following structure:
-@end{Wide}
 
 @begin(Example)
 @key(task) Consumer;
 
-@key(task body) Consumer @key(is)
+@Trailing@key(task body) Consumer @key(is)
    Char : Character;
 @key(begin)
    @key(loop)
@@ -3726,12 +3723,10 @@ following structure:
 @key(end) Consumer;
 @end(Example)
 
-@begin{Wide}
 @leading@;The buffer object contains an internal pool of characters managed in a
 round-robin fashion. The pool has two indices, an In_Index denoting the
 space for the next input character and an Out_Index denoting the space for
 the next output character.
-@end{Wide}
 
 @begin(Example)
 @key(protected) Buffer @key(is)

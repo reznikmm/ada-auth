@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2000/08/31 04:56:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2000/09/01 03:51:24 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/08/31 04:56:07 $}
+@Comment{$Date: 2000/09/01 03:51:24 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -814,6 +814,7 @@ calls another protected operation on the same protected object).
 
 @end{Notes}
 
+@RMNewPage@Comment{Break here so printed RM looks better.}
 @LabeledClause{Entry Queuing Policies}
 
 @begin{Intro}
@@ -982,7 +983,7 @@ allows an implementation to limit the use of configuration pragmas to an
 empty environment. In that case, there would be no way to have multiple policies
 in a partition. In any case, the wording here really ought to be "...more than
 one queuing policy per partition.", since this part of the rule applies to
-all queuing policies.)],Old=[]}
+all queuing policies, not just implementation-defined ones.],Old=[]}
 @end{Discussion}
 @end{ImplPerm}
 
@@ -1388,8 +1389,8 @@ language defined:
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076]}
 @Defn2{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies
   the maximum dynamic nesting level of @nt{asynchronous_select}s.
-  A value of zero prevents the use of any @nt{asynchronous_select}@Chg{New=[ and,
-  if a program contains an @nt{asynchronous_select}, it is illegal.
+  A value of zero prevents the use of any @nt{asynchronous_@!select}@Chg{New=[ and,
+  if a program contains an @nt{asynchronous_@!select}, it is illegal.
   @ChgNote{Part of the previous rule is redundant, but it is a different part
   [all of it for Old; from "prevents" to "and," for New] for each. So we omit it.}
   If an implementation chooses to detect a violation of this

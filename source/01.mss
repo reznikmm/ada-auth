@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/08/30 00:23:08 $}
+@Comment{$Date: 2000/09/01 03:51:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1616,4 +1616,8 @@ recommendations intended to increase uniformity across Ada implementations.
 @Defn{Uniformity Issue (UI)}
 @Defn(UI)
 A Uniformity Issue (UI) @Chg{New=<was>,Old=<is>} a numbered recommendation from the URG.
+@Chg{New=<A Defect Report and Response is an official query to WG9 about an
+error in the standard. Defect Reports are processed by the ARG, and are
+referenced here by their ISO numbers: 8652/nnnn. Most changes to the Ada 95
+standard include reference(s) to the Defect Report(s) that prompted the change.>,Old=<>}
 @end{Discussion}

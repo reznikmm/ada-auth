@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:00 $}
+@Comment{$Date: 2000/09/01 03:51:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @LabeledClause{Array Types}
 
@@ -1259,7 +1259,7 @@ either an unconstrained discriminated subtype, or an
 unconstrained access subtype whose designated subtype is
 an unconstrained discriminated subtype.
 @Chg{New=[However, in the case of a general access subtype, a
-@nt{discriminant_constraint} is illegal if there is a place within the
+@nt{discriminant_@!constraint} is illegal if there is a place within the
 immediate scope of the designated subtype where its view is constrained.],
 Old=[]}
 @begin{Reason}
@@ -1660,13 +1660,13 @@ and the @Chg{New=[@nt{constraint} or @nt{range}],Old=[constraint]} being defined
 is called a @i(per-object constraint).
 @PDefn2{Term=[elaboration], Sec=(component_definition)}
 For the elaboration of a @nt{component_definition} of
-a @nt<component_declaration>@Chg{New=[ or the @nt{discrete_subtype_definition}
-of an @nt{entry_declaration} for an entry family (see
+a @nt<component_declaration>@Chg{New=[ or the @nt{discrete_@!subtype_@!definition}
+of an @nt{entry_@!declaration} for an entry family (see
 @RefSecNum{Entries and Accept Statements})],Old=[]}, if the @nt{constraint}
 @Chg{New=[or @nt{range}],Old=[]} of the @nt{subtype_indication}
-@Chg{New=[or @nt{discrete_subtype_definition}],Old=[]} is not a per-object
+@Chg{New=[or @nt{discrete_@!subtype_@!definition}],Old=[]} is not a per-object
 constraint, then the @nt{subtype_indication}
-@Chg{New=[or @nt{discrete_subtype_definition}],Old=[]} is elaborated.
+@Chg{New=[or @nt{discrete_@!subtype_@!definition}],Old=[]} is elaborated.
 On the other hand, if the @nt{constraint}
 @Chg{New=[or @nt{range}],Old=[]} is a per-object constraint,
 then the elaboration consists of the evaluation of any included
@@ -1680,7 +1680,7 @@ for each associated discriminant.],Old=[]}
 per-object constraint is elaborated @Redundant[(as part of creating an
 object)], each per-object expression of the constraint is evaluated. For other
 expressions, the values determined during the elaboration of the
-@nt{component_definition} or @nt{entry_declaration} are used. Any checks
+@nt{component_@!definition} or @nt{entry_@!declaration} are used. Any checks
 associated with the enclosing @nt{subtype_indication} or
 @nt{discrete_subtype_definition} are performed@Redundant[, including the subtype
 compatibility check (see @RefSecNum{Subtype Declarations}),] and the associated
@@ -2918,6 +2918,10 @@ objects or values of the type exist,
 nor after deriving a record extension from it,
 nor after a body.]
 
+@begin{Discussion}
+    @ChgRef{Version=[1],Kind=[Deleted]}
+    @Chg{New=[],Old=[Old @b{Change}.]}
+@end{Discussion}
 @begin{Reason}
 This rule is needed
 because (1) we don't want people dispatching to things that haven't
@@ -4822,6 +4826,9 @@ denotes an aliased view of an object}:
   or the variable is aliased.
 
   @begin(Discussion)
+    @ChgRef{Version=[1],Kind=[Deleted]}
+    @Chg{New=[],Old=[Old @b{Change}.]}
+
      This restriction is intended to be similar to the restriction
      on renaming discriminant-dependent subcomponents.
   @end{Discussion}
@@ -4965,14 +4972,12 @@ denotes a subprogram}:
     The part about generic bodies is worded in terms of the denoted
     subprogram, not the denoted view; this implies that renaming is
     invisible to this part of the rule.
-
     This rule is partly to prevent contract model problems
     with respect to the accessibility rules,
     and partly to ease shared-generic-body implementations,
     in which a subprogram declared in an instance needs to have a
     different calling convention from other subprograms with the same
     profile.
-
 
     Overload resolution ensures only that the profile
     is type-conformant.
@@ -5017,11 +5022,8 @@ well as the need for an implementer to insert an implicit
 declaration for "=", etc. at the appropriate place in their symbol table.
 Note that 'Access and ".@key[all]" are defined, and ":=" is defined though useless
 since all instances are constant.
-
 The literal @key(null) is also defined for the purposes of overload
 resolution, but is disallowed by a Legality Rule of this subclause.
-
-
 @end(Reason)
 
 The object or subprogram designated by an access value can be named
@@ -5259,7 +5261,7 @@ A declaration that requires a second part is said to @i(require completion).
 The second part is called the @i(completion) of the declaration (and of
 the entity declared),
 and is either another declaration, a body, or a @nt<pragma>.
-@Chg{New=[A @defn<body>@i<body>is a @nt<body>,
+@Chg{New=[A @defn<body>@i<body> is a @nt<body>,
 an @nt<entry_body>, or a renaming-as-body
 (see @RefSecNum<Subprogram Renaming Declarations>).],Old=[]}
 @begin{Discussion}
@@ -5348,8 +5350,10 @@ subcomponent types are completely defined.
 A type shall be completely defined before it is frozen
 (see @RefSecNum{Freezing Rules} and
 @RefSecNum{Private Types and Private Extensions}).
-
 @begin(Reason)
+  @ChgRef{Version=[1],Kind=[Deleted]}
+  @Chg{New=[],Old=[Old @b{Change}.]}
+
   Index types are always completely defined @em no need to mention them.
   There is no way for a completely defined type to depend on the value of
   a (still) deferred constant.

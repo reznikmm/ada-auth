@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.22 $ $Date: 2000/08/31 04:56:08 $}
+@comment{$Revision: 1.23 $ $Date: 2000/09/01 03:51:24 $}
 
 @begin{Intro}
 
@@ -734,8 +734,8 @@ whose hard work and assistance has made this revision possible.>,Old=[]}
 @Chg{New=[Thanks go out to all of the members of the ISO/IEC JTC 1/SC 22/WG 9
 Ada Rapporteur Group, whose work on creating and editing the wording
 corrections was critical to the entire process. Especially valuable
-contributions came from the chairman of the ARG, E. Ploderedere (Germany), who
-kept the process moving; J. Barnes (UK) and K. Istihata (Japan), whose
+contributions came from the chairman of the ARG, E. Ploedereder (Germany), who
+kept the process moving; J. Barnes (UK) and K. Ishihata (Japan), whose
 extremely detailed reviews kept the editor on his toes; G. Dismukes (USA),
 M. Kamrad (USA), P. Leroy (France), S. Michell (Canada), T. Taft (USA),
 J. Tokar (USA), and other members too numerous to mention.],Old=[]}

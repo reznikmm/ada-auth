@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:01 $}
+@Comment{$Date: 2000/09/01 03:51:19 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -420,23 +420,18 @@ is passed by copy or by reference.
 If one @nt<name> denotes a part of a formal parameter,
 and a second @nt<name> denotes a part of
 a distinct formal parameter or an object that is not
-part of a formal parameter,
-then the two @nt<name>s are
+part of a formal parameter, then the two @nt<name>s are
 considered @i(distinct access paths).
 If an object is of a type for which the parameter passing
 mechanism is not specified, then it is a bounded error to
 assign to the object via one access path,
-and then read the value of the object
-via a distinct access path,
-
+and then read the value of the object via a distinct access path,
 unless the first access path denotes a part of a formal parameter that
 no longer exists at the point of the second access
 @Redundant[(due to leaving the corresponding callable construct).]
-
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The possible consequences are that Program_Error is raised,
-or the newly assigned value is read,
-or some old value of the object is read.
+or the newly assigned value is read, or some old value of the object is read.
 @begin{Discussion}
 For example, if we call @lquotes@;P(X => Global_Variable, Y => Global_Variable)@rquotes@;,
 then within P, the names @lquotes@;X@rquotes@;, @lquotes@;Y@rquotes@;, and @lquotes@;Global_Variable@rquotes@;
@@ -1003,12 +998,9 @@ library unit to be intrinsic.
 @Defn{extensions to Ada 83}
 The rules for full conformance are relaxed @em they are now based on
 the structure of constructs, rather than the sequence of lexical
-elements.
-
-This implies, for example, that "(X, Y: T)"
+elements. This implies, for example, that "(X, Y: T)"
 conforms fully with "(X: T; Y: T)",
 and "(X: T)" conforms fully with "(X: @key[in] T)".
-
 @end{Extend83}
 
 @LabeledSubClause{Inline Expansion of Subprograms}
@@ -1833,10 +1825,10 @@ and hence may be overloaded with both one- and two-parameter functions.
 @begin{Example}
 @key[function] "+" (Left, Right : Matrix) @key[return] Matrix;
 @key[function] "+" (Left, Right : Vector) @key[return] Vector;
-
+@Comment{Blank line}
 --@RI{  assuming that A, B, and C are of the type Vector}
 --@RI{  the following two statements are equivalent:}
-
+@Comment{Blank line}
 A := B + C;
 A := "+"(B, C);
 @end{Example}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2000/08/31 04:56:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2000/09/01 03:51:23 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:06 $}
+@Comment{$Date: 2000/09/01 03:51:23 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -858,8 +858,8 @@ or always negative.
 @end{ImplAdvice}
 
 @begin{DiffWord83}
-@Leading@;The semantics of Numerics.Generic_Complex_Elementary_Functions
-differs from Generic_Complex_Elementary_Functions as defined in
+@Leading@;The semantics of Numerics.@!Generic_@!Complex_@!Elementary_@!Functions
+differs from Generic_@!Complex_@!Elementary_@!Functions as defined in
 ISO/IEC CD 13814 (for Ada 83) in the following ways:
 @begin{itemize}
    The generic package is a child unit of the package defining the
