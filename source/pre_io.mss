@@ -1,11 +1,12 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/01/22 02:25:16 $}
+@Comment{$Date: 2005/01/23 06:04:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Redundant[@Defn{input}@Defn{output}
 Input-output is provided through
 language-defined packages, each of which is a child of the root package Ada.
@@ -14,8 +15,9 @@ define input-output operations applicable to files containing elements
 of a given type. The generic package Storage_IO supports reading from and
 writing to an in-memory buffer.
 Additional operations for text input-output are
-supplied in the packages Text_IO and Wide_Text_IO. Heterogeneous
-input-output is provided through the child packages
+supplied in the packages Text_IO@Chg{Version=[2],New=[,],Old=[ and]}
+Wide_Text_IO@Chg{Version=[2],New=[, and Wide_Wide_Text_IO],Old=[]}.
+Heterogeneous input-output is provided through the child packages
 Streams.@!Stream_IO and Text_IO.@!Text_@!Streams
 (see also @RefSecNum{Streams}).
 The package IO_Exceptions defines the
@@ -46,6 +48,13 @@ nobody actually implemented it,
 and if they did, they can always provide it as a vendor-supplied
 package.
 @end{DiffWord83}
+
+@begin{Diffword95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[Included package Wide_Wide_Text_IO
+  in this description.]}
+@end{Diffword95}
+
 
 @LabeledClause{External Files and File Objects}
 
@@ -79,10 +88,13 @@ declaration of a file type (called File_Type) for files of such
 elements, as well as the operations applicable to these files, such as
 the Open, Read, and Write procedures.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 Input-output for direct access files is likewise defined by a generic
 package called Direct_IO. Input-output in human-readable form is
 defined by the (nongeneric) packages Text_IO for Character and String
-data, and Wide_Text_IO for Wide_Character and Wide_String data.
+data, @Chg{Version=[2],New=[],Old=[and ]}Wide_Text_IO for Wide_Character and
+Wide_String data@Chg{Version=[2],New=[ and Wide_Wide_Text_IO for
+Wide_Wide_Character and Wide_Wide_String data],Old=[]}.
 Input-output for files containing streams of
 elements representing values of possibly different types is defined by means of
 the (nongeneric) package Streams.Stream_IO.
@@ -111,8 +123,10 @@ following enumeration types:
 These values correspond respectively to the cases where only reading,
 both reading and writing, or only writing are to be performed.
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @key[type] File_Mode @key[is] (In_File, Out_File, Append_File);
---@RI{  for Sequential_IO, Text_IO, Wide_Text_IO, and Stream_IO}
+--@RI{  for Sequential_IO, Text_IO, Wide_Text_IO, @Chg{Version=[2],New=[Wide_Wide_Text_IO, ],
+Old=[]}and Stream_IO}
 @end{Example}
 
 These values correspond respectively to the cases where only reading,
@@ -121,8 +135,10 @@ only writing, or only appending are to be performed.
 @Trailing@;The mode of a file can be changed.
 @end{DescribeCode}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 Several file management operations are common to Sequential_IO,
-Direct_IO, Text_IO, and Wide_Text_IO.
+Direct_IO, Text_IO, @Chg{Version=[2],New=[],Old=[and ]}Wide_Text_IO@Chg{Version=[2],
+New=[, and Wide_Wide_Text_IO],Old=[]}.
 These operations are described in subclause
 @RefSecNum{File Management} for
 sequential and direct files.
@@ -151,15 +167,23 @@ the documentation summary item is provided there.]}
 @end{StaticSem}
 
 @begin{Notes}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 Each instantiation of the generic packages Sequential_IO and Direct_IO
 declares a different type File_Type. In the case of Text_IO, Wide_Text_IO,
-and Streams.Stream_IO, the corresponding type File_Type is unique.
+@Chg{Version=[2],New=[Wide_Wide_Text_IO, ],Old=[]}and Streams.Stream_IO,
+the corresponding type File_Type is unique.
 
 A bidirectional device can often be modeled as two sequential files
 associated with the device, one of mode In_File, and one of mode
 Out_File. An implementation may restrict the number of files that may
 be associated with a given external file.
 @end{Notes}
+
+@begin{Diffword95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[Included package Wide_Wide_Text_IO
+  in this description.]}
+@end{Diffword95}
 
 
 @RMNewPage@Comment{Break here so printed RM looks better.}
@@ -294,6 +318,12 @@ a property of a file object, not of an external file.
    ... -- @RI{not specified by the language}
 @key[end] Ada.Sequential_IO;
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+@ChgAdded{Version=[2],Text=[The type File_Type needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization})
+in every instantiation of Sequential_IO.]}
+
 @end{StaticSem}
 
 @begin{Incompatible83}
@@ -314,6 +344,14 @@ controlled type, as long as that type is declared in some other (non-generic)
 package.],Old=[]}]}@ChgNote{AI-344 allows controlled types to be declared at
 any nesting depth, so this note is obsolete.}
 @end{ImplNote}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[Added text to define that a Sequential_IO.File_Type
+  needs finalization. This is used by restriction No_Nested_Finalization (see
+  @RefSecNum{Tasking Restrictions}).]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{File Management}
 
@@ -422,6 +460,13 @@ additional effects described in subclause
     If no elements have been written and the file mode is Append_File,
     then the reset file is unchanged.
 
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00085-01]}
+  @ChgAdded{Version=[2],Text=[This is talking about the beginning of the
+  @i<external> file and the last element of the @i<external> file, as
+  opposed to the normal meaning of @lquotes@;file@rquotes in the Standard.]}
+@end{Honest}
+
     @Trailing@;The exception Status_Error is propagated if the file is not open.
     The exception Use_Error is propagated if the external environment
     does not support resetting for the external file and, also, if the
@@ -438,12 +483,25 @@ additional effects described in subclause
 @begin{Example}@Keepnext
 @key[function] Name(File : @key[in] File_Type) @key[return] String;
 @end{Example}
+    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00248-01]}
     Returns a string which uniquely identifies the external file
     currently associated with the given file (and may thus be used
-    in an Open operation). If an external environment allows alternative
+    in an Open operation).@Chg{Version=[2],New=[],Old=[ If an external
+    environment allows alternative
     specifications of the name (for example, abbreviations), the string
     returned by the function should correspond to a full specification of
-    the name.
+    the name.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
+  @ChgAdded{Version=[2],Text=[Retrieving the full path can be
+  accomplished by passing the result of Name to Directories.Full_Name
+  (see @RefSecNum{The Package Directories}). It is important to drop the
+  requirement on Name, as the only way to accomplish this requirement given
+  that the current directory can be changed with package Directories is to
+  store the full path when the file is opened. That's expensive, and it's
+  better for users that need the full path to explicitly request it.]}
+@end{Discussion}
 
     @Trailing@;The exception Status_Error is propagated if the given file is not
     open. The exception Use_Error is propagated if the associated
@@ -454,7 +512,8 @@ additional effects described in subclause
 @key[function] Form(File : @key[in] File_Type) @key[return] String;
 @end{Example}
     Returns the form string for the external file currently
-    associated with the given file. If an external environment allows
+    associated with the given file. If an
+    external environment allows
     alternative specifications of the form (for example,
     abbreviations using default options), the string returned by
     the function should correspond to a full specification (that
@@ -480,6 +539,11 @@ Any such restriction should be documented.
 @end{ImplPerm}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
+  @ChgAdded{Version=[2],Text=[Removed the requirement for Name to return
+  a full path; this is now accomplished by Directories.Full_Name(Name(File))
+  (see @RefSecNum{The Package Directories}).]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
   @ChgAdded{Version=[2],Text=[Added text to specific the default mode for
   a stream file.]}
@@ -628,6 +692,11 @@ so that the implementation can make use of the ability to declare
 uninitialized variables of the type.
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+@ChgAdded{Version=[2],Text=[The type File_Type needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization})
+in every instantiation of Direct_IO.]}
+
 @begin{ImplNote}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097],ARef=[AI95-00115-01]}
 @ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00344-01]}
@@ -639,6 +708,14 @@ declared in some other (non-generic) package.],Old=[]}]}
 @end{ImplNote}
 
 @end{StaticSem}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[Added text to define that a Direct_IO.File_Type
+  needs finalization. This is used by restriction No_Nested_Finalization (see
+  @RefSecNum{Tasking Restrictions}).]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Direct Input-Output Operations}
 
@@ -1310,6 +1387,11 @@ Append_File is new in Ada 95.
    ... -- @RI{not specified by the language}
 @key[end] Ada.Text_IO;
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+@ChgAdded{Version=[2],Text=[The type File_Type needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+
 @end{StaticSem}
 
 @begin{Incompatible83}
@@ -1329,6 +1411,15 @@ generic packages Modular_IO and Decimal_IO are new in Ada 95.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0051],ARef=[AI95-00057-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter mode
   of Flush; otherwise it could not be used on Standard_Output.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Text=[The Text_IO.Get_Line functions are new;
+  they are described in @RefSec{Input-Output of Characters and Strings}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[Added text to define that a Text_IO.File_Type
+  needs finalization. This is used by restriction No_Nested_Finalization (see
+  @RefSecNum{Tasking Restrictions}).]}
 @end{DiffWord95}
 
 
@@ -1887,12 +1978,14 @@ Several Get and Put procedures, for numeric and enumeration types, have
 @i{format} parameters which specify field lengths; these parameters are of
 the nonnegative subtype Field of the type Integer.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00223-01]}
 @Defn2{Term=[blank], Sec=(in text input for enumeration and numeric types)}
 Input-output of enumeration values uses the syntax of the corresponding
 lexical elements. Any Get procedure for an enumeration type begins by
-skipping any leading blanks, or line or page terminators. Get procedures
+skipping any leading blanks, or line or page terminators. @Chg{Version=[2],
+New=[A],Old=[Get procedures
 for numeric or enumeration types start by skipping leading blanks, where
-a @i{blank} is defined as a space or a horizontal tabulation character.
+a]} @i{blank} is defined as a space or a horizontal tabulation character.
 Next,
 characters are input only so long as the sequence input is an initial
 sequence of an identifier or of a character literal (in particular,
@@ -1978,6 +2071,13 @@ Put(Item => -23, Width => 2);  --@RI{  "@en@|23"}
 @end{Example}
 @end{Examples}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00223-01]}
+  @ChgAdded{Version=[2],Text=[Removed conflicting text describing the
+  skipping of blanks for a Get procedure.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Input-Output of Characters and Strings}
 
 @begin{StaticSem}
@@ -2052,7 +2152,10 @@ The current column, line and page numbers for the file are not affected.
 @Comment{The following paragraph was originally in a DescribeCode section; but
 that clearly was not intended; I've fixed it. (This changes the indentation of
 the paragraph in the old version too, but the change is harmless.) RLB-21-08-2000}
-@Leading@;For an item of type String the following procedures are provided:
+@Leading@;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00301-01]}
+For an item of type String the following @Chg{Version=[2],New=[subprograms],
+Old=[procedures]} are provided:
 @begin{DescribeCode}
 
 @begin{Example}@Keepnext
@@ -2070,6 +2173,23 @@ the paragraph in the old version too, but the change is harmless.) RLB-21-08-200
   @Trailing@;Determines the length of the given string and attempts that
   number of Put operations for successive characters of the
   string (in particular, no operation is performed if the string is null).
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Get_Line(File : @key{in}  File_Type) @key{return} String;
+@key{function} Get_Line @b<return> String;]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a result string
+  constructed by reading successive characters from the specified input file,
+  and assigning them to successive characters of the result string. The result
+  string has a lower bound of 1 and an upper bound of the number of characters
+  read. Reading stops when the end of the line is met; Skip_Line is then (in
+  effect) called with a spacing of 1.]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Type=[Trailing],Text=[The exception End_Error is
+  propagated if an attempt is made to skip a file terminator.]}
 
 @begin{Example}@Keepnext
 @key[procedure] Get_Line(File : @key[in] File_Type;
@@ -2130,6 +2250,13 @@ An implementation is allowed to assume that certain external files do
 not contain page terminators, in which case Get_Line and Skip_Line can
 return as soon as a line terminator is read.
 @end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The Text_IO.Get_Line functions are new.]}
+@end{Extend95}
+
 
 @LabeledSubClause{Input-Output for Integer Types}
 
@@ -2641,6 +2768,160 @@ instantiated for this type.
   say Enumeration_IO can be instantiated with an integer type, not a float
   type.]}
 @end{DiffWord95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Input-Output for Unbounded Strings]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[The package Text_IO.Unbounded_IO provides
+input-output in human-readable form for Unbounded_Strings.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The library package
+Text_IO.Unbounded_IO has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} Ada.Strings.Unbounded;
+@key{package} Ada.Text_IO.Unbounded_IO @key{is}@ChildUnit{Parent=[Ada.Text_IO],Child=[Unbounded_IO]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put}
+      (File : @key{in} File_Type;
+       Item : @key{in} Strings.Unbounded.Unbounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put}
+      (Item : @key{in} Strings.Unbounded.Unbounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put_Line}
+      (File : @key{in} Text_IO.File_Type;
+       Item : @key{in} Strings.Unbounded.Unbounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put_Line}
+      (Item : @key{in} Strings.Unbounded.Unbounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Get_Line}
+      (File : @key{in} File_Type)
+      @key{return} Strings.Unbounded.Unbounded_String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Get_Line}
+      @key{return} Strings.Unbounded.Unbounded_String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Get_Line}
+      (File : @key{in} File_Type; Item : @key{out} Strings.Unbounded.Unbounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Get_Line}
+      (Item : @key{out} Strings.Unbounded.Unbounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{end} Ada.Text_IO.Unbounded_IO;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For an item of type
+Unbounded_String, the following subprograms are provided:]}
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Put
+   (File : @key{in} File_Type;
+    Item : @key{in} Strings.Unbounded.Unbounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Text_IO.Put (File,
+Strings.Unbounded.To_String(Item));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Put
+   (Item : @key{in} Strings.Unbounded.Unbounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Text_IO.Put
+(Strings.Unbounded.To_String(Item));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Put_Line
+   (File : @key{in} Text_IO.File_Type;
+    Item : @key{in} Strings.Unbounded.Unbounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Text_IO.Put_Line (File,
+Strings.Unbounded.To_String(Item));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Put_Line
+   (Item : @key{in} Strings.Unbounded.Unbounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Text_IO.Put_Line
+(Strings.Unbounded.To_String(Item));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Get_Line
+   (File : @key{in} File_Type)
+   @key{return} Strings.Unbounded.Unbounded_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Returns
+Strings.Unbounded.To_Unbounded_String(Text_IO.Get_Line(File));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Get_Line
+   @key{return} Strings.Unbounded.Unbounded_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Returns
+Strings.Unbounded.To_Unbounded_String(Text_IO.Get_Line);]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Get_Line
+   (File : @key{in} File_Type; Item : @key{out} Strings.Unbounded.Unbounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Item := Get_Line (File);]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Get_Line
+   (Item : @key{out} Strings.Unbounded.Unbounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Item := Get_Line;]}
+@end{DescribeCode}
+@end{StaticSem}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Package Text_IO.Unbounded_IO is new.]}
+@end{Extend95}
 
 
 @LabeledRevisedClause{Version=[1],New=[Wide Text Input-Output and Wide Wide Text Input-Output],Old=[Wide Text Input-Output]}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.8 $ $Date: 2005/01/22 02:25:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.9 $ $Date: 2005/01/23 06:04:02 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/01/22 02:25:17 $}
+@Comment{$Date: 2005/01/23 06:04:02 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -620,133 +620,215 @@ package Containers.Vectors has the following declaration:]}
 
 @end{Example}
 
-**** The text below here still needs to be formatted ****
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The type Vector is used to represent vectors.
+The type Vector needs finalization (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Empty_Vector represents the empty vector object. It
+has a length of 0. If an object of type Vector is not otherwise initialized, it
+is initialized to the same value as Empty_Vector.]}
 
-The type Vector is used to represent vectors. The type Vector needs finalization
-(see 7.6).
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[No_Element represents a cursor that designates no
+element. If an object of type Cursor is not otherwise initialized, it is
+initialized to the same value as No_Element.]}
 
-Empty_Vector represents the empty vector object. It has a length of 0. If an
-object of type Vector is not otherwise initialized, it is initialized to the
-same value as Empty_Vector.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[No_Index represents a position that does not
+correspond to any element. The subtype Extended_Index includes the indices
+covered by Index_Type plus the value No_Index and, if it exists, the successor
+to the Index_Type'Last.]}
 
-No_Element represents a cursor that designates no element. If an object of type
-Cursor is not otherwise initialized, it is initialized to the same value as
-No_Element.
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+  @ChgAdded{Version=[2],Text=[We require the existence of Index_Type'First - 1,
+  so that No_Index and Last_Index of an empty vector is well-defined. We don't
+  require the existence of Index_Type'Last + 1, as it is only used as the
+  position of insertions (and needs to be allowed only when inserting an empty
+  vector).]}
+@end{Discussion}
 
-No_Index represents a position that does not correspond to any element. The
-subtype Extended_Index includes the indices covered by Index_Type plus the
-value No_Index and, if it exists, the successor to the Index_Type'Last.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[
+@Defn2{Term=[tamper with cursors],Sec=[vector]}
+Some operations are assumed to work on a constant
+set of elements. For such an operation, a subprogram is said to @i<tamper with
+cursors> of a vector object @i<V> if:]}
 
-AARM Note: We require the existence of Index_Type'First - 1, so that No_Index
-and Last_Index of an empty vector is well-defined. We don't require the
-existence of Index_Type'Last + 1, as it is only used as the position of
-insertions (and needs to be allowed only when inserting an empty vector).
+@begin{Itemize}
 
-Some operations are assumed to work on a constant set of elements. For such
-an operation, a subprogram is said to @i<tamper with cursors> of a vector
-object @i<V> if:
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it inserts or deletes elements of @i<V>, that is,
+it calls the Insert, Insert_Space, Clear, Delete, or Set_Length procedures with
+@i<V> as a parameter; or]}
 
-@xbullet<it inserts or deletes elements of @i<V>, that is, it calls the Insert,
-Insert_Space, Clear, Delete, or Set_Length procedures with @i<V> as a
-parameter; or>
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Operations which are defined to be equivalent to
+  a call on one of these operations also are included. Similarly, operations
+  which call one of these as part of their definition are included.]}
+@end{Honest}
 
-   AARM To Be Honest: Operations which are defined to be equivalent to
-   a call on one of these operations also are included. Similarly, operations
-   which call one of these as part of their definition are included.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it finalizes @i<V>; or]}
 
-@xbullet<it finalizes @i<V>; or>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<V> as
+a parameter.]}
 
-@xbullet<it calls the Move procedure with @i<V> as
-a parameter.>
+@end{Itemize}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[
+@Defn2{Term=[tamper with elements],Sec=[vector]}
 Some operations are assumed to not change elements.  For such an operation, a
-subprogram is said to @i<tamper with elements> of a vector object @i<V> if:
+subprogram is said to @i<tamper with elements> of a vector object @i<V> if:]}
 
-@xbullet<it tampers with cursors of @i<V>; or>
-@xbullet<it modifies one or more elements of @i<V>, that is, it calls the
-Replace_Element, Update_Element, or Swap procedures or an
-instance of Generic_Sort with @i<V> as a parameter.>
+@begin{Itemize}
 
-   AARM Note:
-   Swap and Generic_Sort copy elements rather than reordering them, so
-   they can be allowed for Iterate.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it tampers with cursors of @i<V>; or]}
 
-@xcode<@key{function} To_Vector (Length : Count_Type) @key{return} Vector;>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it modifies one or more elements of @i<V>, that is,
+it calls the Replace_Element, Update_Element, or Swap procedures or an instance
+of Generic_Sort with @i<V> as a parameter.]}
 
-@xindent<Returns a vector with a length of Length, filled with empty elements.>
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Swap and Generic_Sort copy elements rather
+  than reordering them, so they don't tamper with cursors, only with
+  elements.]}
+@end{Discussion}
 
-@xcode<@key{function} To_Vector
+@end{Itemize}
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} To_Vector (Length : Count_Type) @key{return} Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a vector with a length of
+Length, filled with empty elements.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} To_Vector
   (New_Item : Element_Type;
-   Length   : Count_Type) @key{return} Vector;>
+   Length   : Count_Type) @key{return} Vector;]}
+@end{Example}
 
-@xindent<Returns a vector with a length of Length, filled with elements initialized to
-the value New_Item.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a vector with a length of
+Length, filled with elements initialized to the value New_Item.]}
 
-@xcode<@key{function} "&" (Left, Right : Vector) @key{return} Vector;>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "&" (Left, Right : Vector) @key{return} Vector;]}
+@end{Example}
 
-@xindent<Returns a vector comprising the elements of Left followed by the
-elements of Right.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a vector comprising the
+elements of Left followed by the elements of Right.]}
 
-@xcode<@key{function} "&" (Left  : Vector;
-              Right : Element_Type) @key{return} Vector;>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "&" (Left  : Vector;
+              Right : Element_Type) @key{return} Vector;]}
+@end{Example}
 
-@xindent<Returns a vector comprising the elements of Left followed by the
-element Right.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a vector comprising the
+elements of Left followed by the element Right.]}
 
-@xcode<@key{function} "&" (Left  : Element_Type;
-              Right : Vector) @key{return} Vector;>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "&" (Left  : Element_Type;
+              Right : Vector) @key{return} Vector;]}
+@end{Example}
 
-@xindent<Returns a vector comprising the element Left followed by the elements of Right.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a vector comprising the
+element Left followed by the elements of Right.]}
 
-@xcode<@key{function} "&" (Left, Right  : Element_Type) @key{return} Vector;>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "&" (Left, Right  : Element_Type) @key{return} Vector;]}
+@end{Example}
 
-@xindent<Returns a vector comprising the element Left followed by the element Right.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a vector comprising the
+element Left followed by the element Right.]}
 
-@xcode<@key{function} "=" (Left, Right : Vector) @key{return} Boolean;>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "=" (Left, Right : Vector) @key{return} Boolean;]}
+@end{Example}
 
-@xindent<If Left and Right denote the same vector object, then the function returns
-True. If Left and Right have different lengths, then the function returns
-False. Otherwise, it compares each element in Left to the corresponding element
-in Right using the generic formal equality operator; if element equality
-returns False, then the function returns False. If the function has not
-returned a result after checking all of the elements, it returns True. Any
-exception raised during evaluation of element equality is propagated.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Left and Right denote the same
+vector object, then the function returns True. If Left and Right have different
+lengths, then the function returns False. Otherwise, it compares each element
+in Left to the corresponding element in Right using the generic formal equality
+operator; if element equality returns False, then the function returns False.
+If the function has not returned a result after checking all of the elements,
+it returns True. Any exception raised during evaluation of element equality is
+propagated.]}
 
-@xcode<@key{function} Capacity (Container : Vector) @key{return} Count_Type;>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Capacity (Container : Vector) @key{return} Count_Type;]}
+@end{Example}
 
-@xindent<Returns the capacity of Container.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the capacity of Container.]}
 
-@xcode<@key{procedure} Reserve_Capacity (Container : @key{in out} Vector;
-                            Capacity  : @key{in}     Count_Type);>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reserve_Capacity (Container : @key{in out} Vector;
+                            Capacity  : @key{in}     Count_Type);]}
+@end{Example}
 
-@xindent<Reserve_Capacity allocates new internal data structures such that the length of
-the resulting vector can become at least the value Capacity without requiring
-an additional call to Reserve_Capacity, and is large enough to hold the current
-length of Container. Reserve_Capacity then copies the elements into the new
-data structures and deallocates the old data structures. Any exception raised
-during allocation is propagated and Container is not modified.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Reserve_Capacity allocates new
+internal data structures such that the length of the resulting vector can
+become at least the value Capacity without requiring an additional call to
+Reserve_Capacity, and is large enough to hold the current length of Container.
+Reserve_Capacity then copies the elements into the new data structures and
+deallocates the old data structures. Any exception raised during allocation is
+propagated and Container is not modified.]}
 
-AARM Notes
+@begin{Discussion}
 
-Expanding the internal array can be done by allocating a new, longer array,
-copying the elements, and deallocating the original array. This may raise
-Storage_Error, or cause an exception from a controlled subprogram. We require
-that a failed Reserve_Capacity does not lose any elements if an exception
-occurs, but we do not require a specific order of evaluations or copying.
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Expanding the internal array can be done by
+  allocating a new, longer array, copying the elements, and deallocating the
+  original array. This may raise Storage_Error, or cause an exception from a
+  controlled subprogram. We require that a failed Reserve_Capacity does not
+  lose any elements if an exception occurs, but we do not require a specific
+  order of evaluations or copying.]}
 
-This routine is used to preallocate the internal array to the specified
-capacity such that future Inserts do not require memory allocation overhead.
-Therefore, the implementation should allocate the needed memory to make that
-true at this point, even though the visible semantics could be preserved by
-waiting until the memory is needed. This doesn't apply to the indefinite
-element container, because elements will have to be allocated individually.
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This routine is used to preallocate the internal
+  array to the specified capacity such that future Inserts do not require
+  memory allocation overhead. Therefore, the implementation should allocate the
+  needed memory to make that true at this point, even though the visible
+  semantics could be preserved by waiting until the memory is needed. This
+  doesn't apply to the indefinite element container, because elements will have
+  to be allocated individually.]}
 
-The implementation does not have to contract the internal array if the
-capacity is reduced, as any capacity greater than or equal to the specified
-capacity is allowed.
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The implementation does not have to contract the
+  internal array if the capacity is reduced, as any capacity greater than or
+  equal to the specified capacity is allowed.]}
 
-End AARM Notes
+@end{Discussion}
+
+**** The text below here still needs to be formatted ****
 
 @xcode<@key{function} Length (Container : Vector) @key{return} Count_Type;>
 
@@ -1287,6 +1369,8 @@ End AARM Notes.
 @xindent<Iterates over the nodes in Container as per Iterate, except that elements are
 traversed in reverse index order.>
 
+@end{DescribeCode}
+
 @end{StaticSem}
 
 @i<@s8<Bounded (Run-Time) Errors>>
@@ -1606,8 +1690,8 @@ declaration:
 
 @key{end} Ada.Containers.Doubly_Linked_Lists;>
 
-The type List is used to represent lists. The type List needs finalization (see
-7.6).
+The type List is used to represent lists. The type List
+needs finalization (see @RefSecNum{User-Defined Assignment and Finalization}).
 
 Empty_List represents the empty List object. It has a length of 0. If an object
 of type List is not otherwise initialized, it is initialized to the same value
@@ -2092,8 +2176,8 @@ semantics specific to Containers.Ordered_Maps.
 
 @i<@s8<Static Semantics>>
 
-The type Map is used to represent maps. The type Map needs finalization (see
-7.6).
+The type Map is used to represent maps. The type Map
+needs finalization (see @RefSecNum{User-Defined Assignment and Finalization}).
 
 A map contains pairs of keys and elements, called @i<nodes>. Map cursors
 designate nodes, but also can be thought of as designating an element (the
@@ -3112,8 +3196,8 @@ semantics specific to Containers.Ordered_Sets.
 
 @i<@s8<Static Semantics>>
 
-The type Set is used to represent sets. The type Set needs finalization (see
-7.6).
+The type Set is used to represent sets. The type Set
+needs finalization (see @RefSecNum{User-Defined Assignment and Finalization}).
 
 A set contains elements. Set cursors designate elements. There exists an
 equivalence relation on elements, whose definition is different for hashed sets
@@ -3743,9 +3827,10 @@ operation in this package such that at least one of Hash or Equivalent_Elements
 give different results, the behavior of this package is unspecified.
 
 AARM Note
-See Hashed_Maps for a suggested implementation, and for justification of the
-restrictions regarding Hash and Equivalent_Elements. Note that sets only need
-to store elements, not key/element pairs.
+See @RefSec{The Package Containers.Hashed_Maps} for a suggested implementation,
+and for justification of the restrictions regarding Hash and
+Equivalent_Elements. Note that sets only need to store elements, not
+key/element pairs.
 
 Which elements are the first element and the last element of a set, and which
 element is the successor of a given element, are unspecified, other than the
@@ -3829,30 +3914,39 @@ times they call it, is unspecified.
 
 @xindent<Equivalent to Equivalent_Keys (Left, Key (Right)).>
 
-@i<@s8<Implementation Advice>>
+@begin{ImplAdvice}
 
-If @i<N> is the length of a set, the average time complexity of the subprograms
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If @i<N> is the length of a set, the
+average time complexity of the subprograms
 Insert, Include, Replace, Delete, Exclude and Find that take an element
 parameter should be O(log @i<N>). The average time complexity of the
 subprograms that take a cursor parameter should be O(1). The average time
-complexity of Reserve_Capacity should be O(@i<N>).
+complexity of Reserve_Capacity should be O(@i<N>).]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The average time complexity of the Insert, Include, Replace, Delete, Exclude and
+Find operations of Containers.Hashed_Sets that take an element parameter
+should be O(log @i<N>). The average time complexity of the subprograms
+of Containers.Hashed_Sets that take a cursor parameter should be O(1). The
+average time complexity of Containers.Hashed_Sets.Reserve_Capacity should be
+O(@i<N>).]}]}
+@end{ImplAdvice}
 
-AARM Note:
-See @RefSec{The Package Containers.Hashed_Maps} for
-implementation notes regarding some
-of the operations of this package.
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+  @ChgAdded{Version=[2],Text=[See @RefSec{The Package Containers.Hashed_Maps}
+  for implementation notes regarding some of the operations of this package.]}
+@end{ImplNote}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Ada.Containers.Hashed_Sets is new.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The generic package Ada.Containers.Hashed_Sets is new.]}
 @end{Extend95}
 
-!corrigendum A.18.9
+@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Ordered_Sets]}
 
-@dinsc
-
-@i<@s8<Static Semantics>>
+@begin{StaticSem}
 
 The generic library package Containers.Ordered_Sets has the following
 declaration:
@@ -4097,9 +4191,9 @@ operation in this package such that at least one of "<" or "=" give different
 results, the behavior of this package is unspecified.
 
 AARM Note
-See Ordered_Maps for a suggested implementation, and for justification of the
-restrictions regarding "<" and "=". Note that sets only need to store elements,
-not key/element pairs.
+See @RefSec{The Package Containers.Ordered_Maps} for a suggested
+implementation, and for justification of the restrictions regarding "<" and
+"=". Note that sets only need to store elements, not key/element pairs.
 
 The first element of a nonempty set is the one which is less than all the other
 elements in the set. The last element of a nonempty set is the one which is
@@ -4108,122 +4202,204 @@ the smallest element that is larger than the given element. The predecessor of
 an element is the largest element that is smaller than the given element. All
 comparisons are done using the generic formal "<" operator for elements.
 
-@xcode<@key{procedure} Delete_First (Container : @key{in out} Set);>
-
-@xindent<If Container is empty, Delete_First has no effect. Otherwise the element
-designated by First (Container) is removed from Container. Delete_First
-tampers with the cursors of Container.>
-
-@xcode<@key{procedure} Delete_Last (Container : @key{in out} Set);>
-
-@xindent<If Container is empty, Delete_Last has no effect. Otherwise the
-element designated by Last (Container) is removed from Container. Delete_Last
-tampers with the cursors of Container.>
-
-@xcode<@key{function} Floor (Container : Set;
-                Item      : Element_Type) @key{return} Cursor;>
-
-@xindent<Floor searches for the last element which is not greater than Item. If
-such an element is found, a cursor that designates it is returned. Otherwise
-No_Element is returned.>
-
-@xcode<@key{function} Ceiling (Container : Set;
-                  Item      : Element_Type) @key{return} Cursor;>
-
-@xindent<Ceiling searches for the first element which is not less than Item. If
-such an element is found, a cursor that designates it is returned. Otherwise
-No_Element is returned.>
-
-@xcode<@key{function} First_Element (Container : Set) @key{return} Element_Type;>
-
-@xindent<Equivalent to Element (First (Container)).>
-
-@xcode<@key{function} Last (Container : Set) @key{return} Cursor;>
-
-@xindent<Returns a cursor that designates the last node in Container. If Container is
-empty, returns No_Element.>
-
-@xcode<@key{function} Last_Element (Container : Set) @key{return} Element_Type;>
-
-@xindent<Equivalent to Element (Last (Container)).>
-
-@xcode<@key{function} Previous (Position : Cursor) @key{return} Cursor;>
-
-@xindent<If Position equals No_Element, then Previous returns No_Element.
-Otherwise Previous returns a cursor designating the element that precedes the
-one designated by Position. If Position designates the first element, then
-Previous returns No_Element.>
-
-@xcode<@key{procedure} Previous (Position : @key{in out} Cursor);>
-
-@xindent<Equivalent to Position := Previous (Position).>
-
-@xcode<@key{function} "<" (Left, Right : Cursor) @key{return} Boolean;>
-
-@xindent<Equivalent to Element (Left) < Element (Right).>
-
-@xcode<@key{function} ">" (Left, Right : Cursor) @key{return} Boolean;>
-
-@xindent<Equivalent to Element (Right) < Element (Left).>
-
-@xcode<@key{function} "<" (Left : Cursor; Right : Element_Type) @key{return} Boolean;>
-
-@xindent<Equivalent to Element (Left) < Right.>
-
-@xcode<@key{function} ">" (Left : Cursor; Right : Element_Type) @key{return} Boolean;>
-
-@xindent<Equivalent to Right < Element (Left).>
-
-@xcode<@key{function} "<" (Left : Element_Type; Right : Cursor) @key{return} Boolean;>
-
-@xindent<Equivalent to Left < Element (Right).>
-
-@xcode<@key{function} ">" (Left : Element_Type; Right : Cursor) @key{return} Boolean;>
-
-@xindent<Equivalent to Element (Right) < Left.>
-
-@xcode<@key{procedure} Reverse_Iterate
-   (Container : @key{in} Set;
-    Process   : @key{not null access procedure} (Position : @key{in} Cursor));>
-
-@xindent<Iterates over the elements in Container as per Iterate, with the
-difference that the elements are traversed in predecessor order, starting with
-the last node.>
-
-For any two elements @i<E1> and @i<E2>, the boolean values (@i<E1> < @i<E2>),
-(Key(@i<E1>) < @i<E2>), and (Key(@i<E2>) > @i<E1>) are all expected to be equal.
-If Key, Generic_Keys."<", or Generic_Keys.">" behave in some other manner, the
-behavior of this package is unspecified. Which subprograms of this package
-call Key, Generic_Keys."<" and Generic_Keys.">", and how many times the
-functions are called, is unspecified.
-
-In addition to the semantics described in @RefSecNum{Sets}, the subprograms
-in package
-Generic_Keys named Floor, Ceiling, "<", and ">", are equivalent to the
-corresponding subprograms in the parent package, with the difference that the
-Key subprogram parameter is compared to elements in the container using the
-Generic_Keys generic formal relational operators.
-
-@i<@s8<Implementation Advice>>
-
-If @i<N> is the length of a set, then the worst-case time complexity of the
-Insert, Include, Replace, Delete, Exclude and Find operations that take an
-element parameter should be O((log @i<N>)**2) or better. The worst-case time
-complexity of the subprograms that take a cursor parameter should be O(1).
-
 **** The text above here still needs to be formatted ****
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete_First (Container : @key{in out} Set);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, Delete_First
+has no effect. Otherwise the element designated by First (Container) is removed
+from Container. Delete_First tampers with the cursors of Container.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete_Last (Container : @key{in out} Set);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, Delete_Last
+has no effect. Otherwise the element designated by Last (Container) is removed
+from Container. Delete_Last tampers with the cursors of Container.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Floor (Container : Set;
+                Item      : Element_Type) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Floor searches for the last element
+which is not greater than Item. If such an element is found, a cursor that
+designates it is returned. Otherwise No_Element is returned.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Ceiling (Container : Set;
+                  Item      : Element_Type) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Ceiling searches for the first
+element which is not less than Item. If such an element is found, a cursor that
+designates it is returned. Otherwise No_Element is returned.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Element (Container : Set) @key{return} Element_Type;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to
+Element (First (Container)).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last (Container : Set) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a cursor that designates
+the last node in Container. If Container is empty, returns No_Element.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Element (Container : Set) @key{return} Element_Type;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to
+Element (Last (Container)).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
+Previous returns No_Element. Otherwise Previous returns a cursor designating
+the element that precedes the one designated by Position. If Position
+designates the first element, then Previous returns No_Element.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Previous (Position : @key{in out} Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Previous (Position).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "<" (Left, Right : Cursor) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Element (Left) < Element (Right).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} ">" (Left, Right : Cursor) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Element (Right) < Element (Left).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "<" (Left : Cursor; Right : Element_Type) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Element (Left) < Right.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} ">" (Left : Cursor; Right : Element_Type) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Right < Element (Left).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "<" (Left : Element_Type; Right : Cursor) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Left < Element (Right).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} ">" (Left : Element_Type; Right : Cursor) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Element (Right) < Left.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reverse_Iterate
+   (Container : @key{in} Set;
+    Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Iterates over the elements in
+Container as per Iterate, with the difference that the elements are traversed
+in predecessor order, starting with the last node.]}
+
+@end{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[ For any two elements @i<E1> and @i<E2>, the
+boolean values (@i<E1> < @i<E2>), (Key(@i<E1>) < @i<E2>), and (Key(@i<E2>) >
+@i<E1>) are all expected to be equal. If Key, Generic_Keys."<", or
+Generic_Keys.">" behave in some other manner, the behavior of this package is
+unspecified. Which subprograms of this package call Key, Generic_Keys."<" and
+Generic_Keys.">", and how many times the functions are called, is
+unspecified.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[In addition to the semantics described in
+@RefSecNum{Sets}, the subprograms in package Generic_Keys named Floor, Ceiling,
+"<", and ">", are equivalent to the corresponding subprograms in the parent
+package, with the difference that the Key subprogram parameter is compared to
+elements in the container using the Generic_Keys generic formal relational
+operators.]}
+
+@end{StaticSem}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If @i<N> is the length of a set, then the
+worst-case time complexity of the Insert, Include, Replace, Delete, Exclude and
+Find operations that take an element parameter should be O((log @i<N>)**2) or
+better. The worst-case time complexity of the subprograms that take a cursor
+parameter should be O(1).]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The worst-case time complexity of the Insert, Include, Replace, Delete, Exclude and
+Find operations of Containers.Ordered_Sets that take an element parameter
+should be O((log @i<N>)**2). The worst-case time complexity of the subprograms
+of Containers.Ordered_Sets that take a cursor parameter should be O(1).]}]}
+@end{ImplAdvice}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-  @ChgAdded{Version=[2],Text=[AARM Note:
-  See @RefSec{The Package Containers.Ordered_Maps}
+  @ChgAdded{Version=[2],Text=[See @RefSec{The Package Containers.Ordered_Maps}
   for implementation notes regarding some of the operations of this package.]}
 @end{ImplNote}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Ada.Containers.Ordered_Sets is new.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The generic package Ada.Containers.Ordered_Sets is new.]}
 @end{Extend95}
 
 
@@ -4257,9 +4433,9 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @end{StaticSem}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Ada.Containers.Indefinite_Vectors is new.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The generic package Ada.Containers.Indefinite_Vectors is new.]}
 @end{Extend95}
 
 
