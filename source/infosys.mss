@@ -1,14 +1,14 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/08 22:56:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/12 00:40:17 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:19 $}
+@Comment{$Date: 2000/08/12 00:40:17 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
 @Defn{information systems}
-This Annex provides a set of facilities relevant to
-Information Systems programming.  These fall into several
+@Leading@;This Annex provides a set of facilities relevant to
+Information Systems programming. These fall into several
 categories:
 @begin{itemize}
 an attribute definition clause specifying Machine_Radix for a decimal subtype;
@@ -51,7 +51,7 @@ that language.
 @end{ImplAdvice}
 
 @begin{Extend83}
-This Annex is new to Ada 9X.
+This Annex is new to Ada 95.
 @end{Extend83}
 
 
@@ -95,7 +95,7 @@ instructions that exploit the packed decimal representation.
 @end{discussion}
 
 @begin{Examples}
-@i{Example of Machine_Radix attribute definition clause:}
+@Leading@Keepnext@i{Example of Machine_Radix attribute definition clause:}
 @begin{example}
 @key[type] Money @key[is] @key[delta] 0.01 @key[digits] 15;
 @key[for] Money'Machine_Radix @key[use] 10;
@@ -105,7 +105,7 @@ instructions that exploit the packed decimal representation.
 @LabeledClause{The Package Decimal}
 
 @begin{StaticSem}
-The library package Decimal has the following declaration:
+@Leading@Keepnext@;The library package Decimal has the following declaration:
 @begin{Example}
 @ChildUnit{Parent=[Ada],Child=[Decimal]}
 @key(package) Ada.Decimal @key(is)
@@ -135,19 +135,19 @@ The library package Decimal has the following declaration:
 @ImplDef{The values of named numbers in the package Decimal.}
 
 Max_Scale is the largest N such that 10.0**(-N) is allowed as a decimal
-  type's delta.  Its type is @i{universal_integer}.
+  type's delta. Its type is @i{universal_integer}.
 
 Min_Scale is the smallest N such that 10.0**(-N) is allowed as a decimal
   type's delta. Its type is @i{universal_integer}.
 
 Min_Delta is the smallest value allowed for @i{delta} in a
-@nt{decimal_fixed_point_definition}.  Its type is @i{universal_real}.
+@nt{decimal_fixed_point_definition}. Its type is @i{universal_real}.
 
 Max_Delta is the largest value allowed for @i{delta} in a
-@nt{decimal_fixed_point_definition}.  Its type is @i{universal_real}.
+@nt{decimal_fixed_point_definition}. Its type is @i{universal_real}.
 
 Max_Decimal_Digits is the largest value allowed for @i{digits} in a
-@nt{decimal_fixed_point_definition}.  Its type is @i{universal_integer}.
+@nt{decimal_fixed_point_definition}. Its type is @i{universal_integer}.
 @begin{reason}
 The name is Max_Decimal_Digits versus Max_Digits, in order to avoid
 confusion with the named number System.Max_Digits relevant to floating
@@ -180,13 +180,13 @@ to the expression Dividend/Divisor.
 
 @LabeledClause{Edited Output for Decimal Types}
 @begin{Intro}
-The child packages Text_IO.Editing and Wide_Text_IO.Editing
+@Leading@;The child packages Text_IO.Editing and Wide_Text_IO.Editing
 provide localizable formatted text
 output, known as @i{edited output} @Defn{edited output},
-for decimal types.  An edited
+for decimal types. An edited
 output string is a function of a numeric value, program-specifiable
-locale elements, and a format control value.  The numeric value is of
-some decimal type.  The locale elements are:
+locale elements, and a format control value. The numeric value is of
+some decimal type. The locale elements are:
 @begin{itemize}
     the currency string;
 
@@ -212,14 +212,14 @@ placement of the sign, the position of the locale elements and the
 decimal digits, the presence or absence of a radix mark, suppression
 of leading zeros, and insertion of particular character values.
 
-A Picture object is composed from a String value, known as a
+@Leading@;A Picture object is composed from a String value, known as a
 @i{picture String}, that serves as a template for the
 edited output string, and a
 Boolean value that controls whether a string of all space characters is
-produced when the number's value is zero.  A picture String comprises a
+produced when the number's value is zero. A picture String comprises a
 sequence of one- or two-Character symbols, each serving as a placeholder
 for a character or string at a corresponding position in the edited
-output string.  The picture String symbols fall into several categories
+output string. The picture String symbols fall into several categories
 based on their effect on the edited output string:
 @TabClear()
 @begin{Display}
@@ -232,7 +232,7 @@ based on their effect on the edited output string:
 @\Simple Insertion: @\'_' @\'B' @\'0' @\'/'
 @end{Display}
 
-The entries are not case-sensitive.  Mixed- or lower-case forms
+The entries are not case-sensitive. Mixed- or lower-case forms
 for "CR" and "DB", and lower-case forms for 'V', 'Z', and 'B',
 have the same effect as the upper-case symbols shown.
 
@@ -244,16 +244,16 @@ of the radix mark in the edited output string: an actual character
 position for '.', or an assumed position for 'V'.
 
 A sign control Character in the picture String affects the form of the
-sign in the edited output string.  The '<' and '>' Character values indicate
-parentheses for negative values.  A Character '+', '-', or '<' appears
+sign in the edited output string. The '<' and '>' Character values indicate
+parentheses for negative values. A Character '+', '-', or '<' appears
 either singly, signifying a fixed-position sign in the edited output,
 or repeated, signifying a floating-position sign that is preceded by
 zero or more space characters and that replaces a leading 0.
 
 A currency control Character in the picture String indicates an
-occurrence of the currency string in the edited output string.  The
+occurrence of the currency string in the edited output string. The
 '$' Character represents the complete currency string; the '#'
-Character represents one character of the currency string.  A '$'
+Character represents one character of the currency string. A '$'
 Character appears either singly, indicating a fixed-position currency
 string in the edited output, or repeated, indicating a
 floating-position currency string that occurs in place of a leading 0.
@@ -266,11 +266,11 @@ the fill character (for '*').
 
 A simple insertion Character in the picture String represents, in
 general, either itself (if '/' or '0'), the space character (if 'B'),
-or the digits group separator character (if '_').  In some contexts it
+or the digits group separator character (if '_'). In some contexts it
 is treated as part of a floating sign, floating currency, or zero
 suppression string.
 
-An example of a picture String is "<###Z_ZZ9.99>".  If the currency string
+An example of a picture String is "<###Z_ZZ9.99>". If the currency string
 is "FF", the separator character is ',', and the radix mark is '.' then
 the edited output string values for the decimal values 32.10 and @en@;5432.10 are
 "bbFFbbb32.10b" and "(bFF5,432.10)", respectively, where 'b' indicates
@@ -489,7 +489,7 @@ conventions specified in this clause.
 @nt{zero_suppression_char} ::= Z | *
 @end{Display}
 
-The following composition constraints apply to a picture String:
+@Leading@;The following composition constraints apply to a picture String:
 @begin{Itemize}
 A @nt{floating_LHS_sign} does not have occurrences of different @nt{LHS_Sign}
 Character values.
@@ -550,7 +550,7 @@ of the number is in a fixed position.
 
 @LabeledSubClause{Edited Output Generation}
 @begin{RunTime}
-The contents of an edited output string are based on:
+@Leading@;The contents of an edited output string are based on:
 @begin{Itemize}
      A value, Item, of some decimal type Num,
 
@@ -589,7 +589,7 @@ The edited output string has lower bound 1 and upper bound N where
            0 otherwise.
 @end{Itemize}
 
-@defn{displayed magnitude (of a decimal value)}
+@Leading@defn{displayed magnitude (of a decimal value)}
 Let the magnitude of Item be expressed as a base-10 number
 I@-(p)@Times@Times@Times@;I@-(1).F@-(1)@Times@Times@Times@;F@-(q),
 called the @i{displayed} @i{magnitude} of Item,
@@ -613,7 +613,7 @@ If n < Num'Scale, then the above number is the result of rounding
 If Blank_When_Zero = True and the displayed magnitude of Item
 is zero,
 then the edited output string
-comprises all space character values.  Otherwise, the picture String is
+comprises all space character values. Otherwise, the picture String is
 treated as a sequence of instances of syntactic categories based on
 the rules in @RefSecNum[Picture String Formation],
 and the edited output string is the concatenation of
@@ -621,7 +621,7 @@ string values derived from these categories according to the
 following mapping rules.
 
 Table F-1 shows the mapping from a sign control symbol to a
-corresponding character or string in the edited output.  In the
+corresponding character or string in the edited output. In the
 columns showing the edited output, a lower-case 'b' represents the
 space character.
 If there is no sign control symbol but the value of Item
@@ -648,7 +648,7 @@ An instance of @nt{direct_insertion} maps to
        the @nt{direct_insertion} Character otherwise.
 
 
-An instance of @nt{number} maps to a string
+@Leading@;An instance of @nt{number} maps to a string
    @i{integer_part} & @i{radix_part} & @i{fraction_part}
 where:
 @begin{Itemize}
@@ -674,7 +674,7 @@ where:
             occurs and no edited output string is produced.
 @end{Enumerate}
 
-   The @i{radix_part} is:
+   @leading@;The @i{radix_part} is:
 @begin{Itemize}
 "" if @nt{number} does not include a @nt{radix}, if @nt{radix} = 'V',
                       or if @nt{radix} = 'v'
@@ -682,7 +682,7 @@ where:
                 Radix_Mark if @nt{number} includes '.' as @nt{radix}
 @end{Itemize}
 
-The string for @i{fraction_part} is obtained as follows:
+@leading@;The string for @i{fraction_part} is obtained as follows:
 @begin{Enumerate}
                 Occurrences of '9'
                  in @nt{aft_digits} of @nt{number} are replaced
@@ -696,7 +696,7 @@ The string for @i{fraction_part} is obtained as follows:
 @end{Enumerate}
 @end{Itemize}
 
-An instance of @nt{zero_suppression} maps to the string obtained as follows:
+@leading@;An instance of @nt{zero_suppression} maps to the string obtained as follows:
 @begin{Enumerate}
                   The rightmost 'Z', 'z', or '*' Character values
                   are replaced
@@ -710,11 +710,11 @@ An instance of @nt{zero_suppression} maps to the string obtained as follows:
                    @nt{zero_suppression} that has been mapped to an excess
                    digit,
 
-                  Each Character to the left of the
+                  @leading@;Each Character to the left of the
                    leftmost Character replaced according to rule 1 above
                   is replaced by:
 @begin{InnerItemize}
-                     the space character  if the zero suppression Character is
+                     the space character if the zero suppression Character is
                          'Z' or 'z', or
 
                      the Fill character if the zero suppression Character is '*'.
@@ -757,13 +757,13 @@ An instance of @nt{fixed_#_currency} maps to the Currency string with n
 space character values concatenated on the left (if the instance does
 not follow a @nt{radix}) or on the right (if the instance does follow a
 @nt{radix}), where n is the difference between the length of the
-@nt{fixed_#_currency} instance and Currency'Length.  A layout error
+@nt{fixed_#_currency} instance and Currency'Length. A layout error
 occurs if Currency'Length exceeds the length of the
 @nt{fixed_#_currency} instance; no edited output string is produced.
 
 
-An instance of @nt{floating_$_currency} maps to the string obtained as
-follows:
+@Leading@;An instance of @nt{floating_$_currency} maps to the string
+obtained as follows:
 @begin{Enumerate}
                   Up to all but one of the rightmost '$'
                    Character values are replaced
@@ -786,7 +786,7 @@ follows:
                    produced.
 @end{Enumerate}
 
-An instance of @nt{floating_#_currency} maps to the string obtained
+@leading@;An instance of @nt{floating_#_currency} maps to the string obtained
 as follows:
 @begin{Enumerate}
                   Up to all but one of the rightmost '#'
@@ -813,7 +813,7 @@ as follows:
                    output string is produced.
 @end{Enumerate}
 
-An instance of @nt{all_zero_suppression_number} maps to:
+@leading@;An instance of @nt{all_zero_suppression_number} maps to:
 @begin{Itemize}
               a string of all spaces if
               the displayed magnitude of Item is zero,
@@ -836,7 +836,7 @@ An instance of @nt{all_zero_suppression_number} maps to:
               as @nt{zero_suppression} otherwise.
 @end{Itemize}
 
-An instance of @nt{all_sign_number} maps to:
+@leading@;An instance of @nt{all_sign_number} maps to:
 @begin{Itemize}
               a string of all spaces if
         the displayed magnitude of Item is zero and the
@@ -852,7 +852,7 @@ An instance of @nt{all_sign_number} maps to:
               as @nt{floating_LHS_sign} otherwise.
 @end{Itemize}
 
-An instance of @nt{all_currency_number} maps to:
+@leading@;An instance of @nt{all_currency_number} maps to:
 @begin{Itemize}
               a string of all spaces if
         the displayed magnitude of Item is zero and the
@@ -917,7 +917,7 @@ in @RefSecNum(Edited Output Generation).
 @end{Intro}
 
 @begin{StaticSem}
-The library package Text_IO.Editing has the following declaration:
+@leading@;The library package Text_IO.Editing has the following declaration:
 @begin{Example}
 @ChildUnit{Parent=[Ada.Text_IO],Child=[Editing]}
 @key(package) Ada.Text_IO.Editing @key(is)
@@ -1099,7 +1099,7 @@ Image returns the edited output String as defined in
 @RefSecNum(Edited Output Generation) for Item,
 Pic_String(Pic), Blank_When_Zero(Pic),
 Currency, Fill, Separator,
-and Radix_Mark.  If these rules identify a layout error, then Image
+and Radix_Mark. If these rules identify a layout error, then Image
 raises the exception Layout_Error.
 
 @begin{Example}
@@ -1135,8 +1135,8 @@ of bounded line length (see @RefSec{Get and Put Procedures}).
 @end{Example}
 
 Put copies Image(Item, Pic, Currency, Fill, Separator, Radix_Mark)
-to the given string, right justified.  Otherwise unassigned Character values
-in To are assigned the space character.  If To'Length is less than
+to the given string, right justified. Otherwise unassigned Character values
+in To are assigned the space character. If To'Length is less than
 the length of the string resulting from Image, then Layout_Error is raised.
 @end{DescribeCode}
 @end{StaticSem}
@@ -1155,14 +1155,14 @@ if its expanded form exceeds 30 characters.
 @end{ImplReq}
 
 @begin{Notes}
-The rules for edited output are based on COBOL (ANSI X3.23:1985, endorsed
-by ISO as ISO 1989-1985), with the
+@Leading@;The rules for edited output are based on COBOL (ANSI X3.23:1985,
+endorsed by ISO as ISO 1989-1985), with the
 following differences:
 @begin{Itemize}
    The COBOL provisions for picture string localization and for 'P' format
    are absent from Ada.
 
-   The following Ada facilities are not in COBOL:
+   @Leading@;The following Ada facilities are not in COBOL:
 @begin{InnerItemize}
       currency symbol placement after the number,
 
@@ -1196,9 +1196,9 @@ in real literals.
 The COBOL restriction for the currency symbol in a picture string to be
 replaced by
  a single character currency symbol is a compromise
-solution.  For general international usage
+solution. For general international usage
  a mechanism is needed to localize the edited output to
-be a multi-character currency string.  Allowing a single-Character
+be a multi-character currency string. Allowing a single-Character
 localization for the picture Character, and a multiple-character localization
 for the currency string, would be an unnecessary complication.
 @end{Itemize}
@@ -1207,14 +1207,12 @@ for the currency string, would be an unnecessary complication.
 @LabeledSubClause{The Package Wide_Text_IO.Editing}
 
 @begin{StaticSem}
-@Defn{Ada.Wide_Text_IO.Editing}
+@Leading@;@Defn{Ada.Wide_Text_IO.Editing}
 @ChildUnit{Parent=[Ada.Wide_Text_IO],Child=[Editing]}
 @LangDefType{Package=[Ada.Wide_Text_IO.Editing],
              Type=[Picture]}
 The child package Wide_Text_IO.Editing has
-the same contents as
-Text_IO.Editing, except
-that:
+the same contents as Text_IO.Editing, except that:
 @begin{Itemize}
 each occurrence of Character
 is replaced by Wide_Character,

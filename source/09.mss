@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:15 $}
+@Comment{$Date: 2000/08/12 00:40:17 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 
@@ -1323,9 +1323,9 @@ tasks and protected objects.
 
 @begin{SyntaxText}
 If an @SynI{entry_}@nt{identifier} appears at the end of an
-@nt{accept_statement}, it shall repeat the @SynI{entry_}@nt<direct_name>.
-If an @SynI{entry_}@nt{identifier} appears at the end of an @nt{entry_body}, it shall repeat the
-@nt{defining_identifier}.
+@nt{accept_statement}, it shall repeat the @SynI{entry_}@!@nt<direct_@!name>.
+If an @SynI{entry_}@!@nt{identifier} appears at the end of an @nt{entry_@!body}, it shall repeat the
+@nt{defining_@!identifier}.
 
 @Redundant[An @nt{entry_declaration} is allowed only in a protected or task
 declaration.]
@@ -1341,21 +1341,21 @@ declaration.]
   Sec=(accept_statement @i{entry_}@nt<direct_name>)}
 In an @nt<accept_statement>,
 the expected profile for the @SynI{entry_}@nt<direct_name>
-is that of the @nt<entry_declaration>;
+is that of the @nt<entry_@!declaration>;
 @PDefn2{Term=[expected type],
   Sec=(entry_index)}
 the expected type for an @nt<entry_index> is that
-of the subtype defined by the @nt<discrete_subtype_definition>
-of the corresponding @nt<entry_declaration>.
+of the subtype defined by the @nt<discrete_@!subtype_@!definition>
+of the corresponding @nt<entry_@!declaration>.
 
 Within the @nt<handled_sequence_of_statements> of an @nt<accept_statement>,
-if a @nt<selected_component> has a @nt<prefix> that denotes
-the corresponding @nt<entry_declaration>, then the
-entity denoted by the @nt<prefix> is the @nt<accept_statement>, and
-the @nt<selected_component> is interpreted as an expanded name
+if a @nt<selected_@!component> has a @nt<prefix> that denotes
+the corresponding @nt<entry_@!declaration>, then the
+entity denoted by the @nt<prefix> is the @nt<accept_@!statement>, and
+the @nt<selected_@!component> is interpreted as an expanded name
 (see @RefSecNum(Selected Components))@Redundant[; the @nt<selector_name>
-of the @nt<selected_component> has to be the @nt<identifier> for
-some formal parameter of the @nt<accept_statement>].
+of the @nt<selected_@!component> has to be the @nt<identifier> for
+some formal parameter of the @nt<accept_@!statement>].
 @begin{TheProof}
   The only declarations that occur immediately within the
   declarative region of an @nt<accept_statement> are those
@@ -1411,18 +1411,18 @@ a @nt<protected_body>).
 
 For an @nt<accept_statement>,
 the innermost enclosing body shall be a @nt<task_body>,
-and the @i(entry_)@nt<direct_name> shall
-denote an @nt<entry_declaration> in the corresponding task declaration;
-the profile of the @nt{accept_statement} shall
-conform fully to that of the corresponding @nt<entry_declaration>.
+and the @i(entry_)@!@nt<direct_@!name> shall
+denote an @nt<entry_@!declaration> in the corresponding task declaration;
+the profile of the @nt{accept_@!statement} shall
+conform fully to that of the corresponding @nt<entry_@!declaration>.
 @Defn2{Term=[full conformance],Sec=(required)}
-An @nt<accept_statement> shall have a parenthesized @nt<entry_index> if
-and only if the corresponding @nt<entry_declaration> has a
-@nt<discrete_subtype_definition>.
+An @nt<accept_@!statement> shall have a parenthesized @nt<entry_@!index> if
+and only if the corresponding @nt<entry_@!declaration> has a
+@nt<discrete_@!subtype_@!definition>.
 
 An @nt<accept_statement> shall not be within another
-@nt{accept_statement} that corresponds to the same @nt<entry_declaration>,
-nor within an @nt<asynchronous_select> inner to
+@nt{accept_statement} that corresponds to the same @nt<entry_@!declaration>,
+nor within an @nt<asynchronous_@!select> inner to
 the enclosing @nt<task_body>.
 @begin(Reason)
 @nt<Accept_statement>s are required to be immediately within
@@ -1458,15 +1458,15 @@ to rather unusual and possibly difficult-to-specify semantics.
 An @nt{entry_declaration} of a protected unit requires
 a completion@redundant[, which shall be an @nt{entry_body},]
 @PDefn2{Term=[only as a completion], Sec=(@nt<entry_body>)}
-and every @nt<entry_body> shall be the completion
-of an @nt<entry_declaration> of a protected unit.
+and every @nt<entry_@!body> shall be the completion
+of an @nt<entry_@!declaration> of a protected unit.
 @PDefn2{Term=[completion legality], Sec=(@nt<entry_body>)}
-The profile of the @nt<entry_body> shall conform fully to that
+The profile of the @nt<entry_@!body> shall conform fully to that
 of the corresponding declaration.
 @Defn2{Term=[full conformance],Sec=(required)}
 @begin{Ramification}
 An @nt<entry_declaration>, unlike a @nt<subprogram_declaration>,
-cannot be completed with a @nt<renaming_declaration>.
+cannot be completed with a @nt<renaming_@!declaration>.
 @end{Ramification}
 @begin(Honest)
   The completion can be a @nt{pragma} Import,
@@ -1544,13 +1544,13 @@ is per-object.
 @PDefn2{Term=[elaboration], Sec=(entry_declaration)}
 For the elaboration of an @nt<entry_declaration> for an
 entry family, if the
-@nt{discrete_subtype_definition} contains no per-object expressions
-(see @RefSecNum(Record Types)), then the @nt<discrete_subtype_definition>
+@nt{discrete_@!subtype_@!definition} contains no per-object expressions
+(see @RefSecNum(Record Types)), then the @nt<discrete_@!subtype_@!definition>
 is elaborated. Otherwise, the elaboration of the
-@nt<entry_declaration> consists of the evaluation of any
-expression of the @nt<discrete_subtype_definition>
+@nt<entry_@!declaration> consists of the evaluation of any
+expression of the @nt<discrete_@!subtype_@!definition>
 that is not a per-object expression (or part of one).
-The elaboration of an @nt<entry_declaration> for a single entry
+The elaboration of an @nt<entry_@!declaration> for a single entry
 has no effect.
 @begin{Discussion}
 The elaboration of the declaration of a protected subprogram has
@@ -1561,8 +1561,8 @@ type is covered in @RefSecNum(Object Declarations).
 
 @Redundant[The actions to be performed when
 an entry is called are specified by the
-corresponding @nt{accept_statement}s (if any) for an entry of a task unit,
-and by the corresponding @nt<entry_body> for an entry of a protected unit.]
+corresponding @nt{accept_@!statement}s (if any) for an entry of a task unit,
+and by the corresponding @nt<entry_@!body> for an entry of a protected unit.]
 
 @PDefn2{Term=[execution], Sec=(accept_statement)}
 For the execution of an @nt{accept_statement}, the @nt<entry_index>, if
@@ -1610,14 +1610,14 @@ their execution independently.]
 single entry, or entry of the corresponding entry family,
 has been selected (see @RefSecNum(Entry Calls)).]
 @PDefn2{Term=[execution], Sec=(entry_body)}
-For the execution of the @nt<entry_body>,
-the @nt<declarative_part> of the @nt<entry_body> is elaborated,
-and the @nt<handled_sequence_of_statements>
+For the execution of the @nt<entry_@!body>,
+the @nt<declarative_@!part> of the @nt<entry_@!body> is elaborated,
+and the @nt<handled_@!sequence_of_@!statements>
 of the body is executed, as for the execution
 of a @nt<subprogram_body>. The value of the named entry index, if any,
 is determined by the value of the entry index specified in the
 @i(entry_)@nt<name> of the selected entry call (or intermediate
-@nt<requeue_statement> @em see @RefSecNum(Requeue Statements)).
+@nt<requeue_@!statement> @em see @RefSecNum(Requeue Statements)).
 @begin(Honest)
 If the entry had been renamed as a subprogram,
 and the call was a @nt<procedure_call_statement> using
@@ -1886,10 +1886,9 @@ the protected action completes.
 @end(Discussion)
 
 @PDefn2{Term=[blocked], Sec=(during an entry call)}
-
 For an entry call that is added to a queue,
 and that is not the @nt<triggering_statement> of an
-@nt<asynchronous_select>
+@nt<asynchronous_@!select>
 (see @RefSecNum{Asynchronous Transfer of Control}),
 the calling task is blocked until the call is cancelled,
 or the call is selected and a corresponding @nt<accept_statement>
@@ -2132,8 +2131,8 @@ The @i(entry_)@nt{name} of a @nt{requeue_statement} shall resolve
 to denote an entry (the @i(target entry))
 that either has no parameters, or that has
 a profile that is type conformant (see @RefSecNum(Conformance Rules)) with
-the profile of the innermost enclosing @nt<entry_body> or
-@nt<accept_statement>.
+the profile of the innermost enclosing @nt<entry_@!body> or
+@nt<accept_@!statement>.
 @Defn2{Term=[type conformance],Sec=(required)}
 
 @end{Resolution}
@@ -2151,16 +2150,15 @@ the profile of the innermost enclosing callable construct.
 @Defn2{Term=[subtype conformance],Sec=(required)}
 
 @PDefn2{Term=[accessibility rule],Sec=(requeue statement)}
-
 In a @nt<requeue_statement> of an @nt<accept_statement> of
 some task unit, either the target object shall be a part of a
 formal parameter of the @nt<accept_statement>,
 or the accessibility level of the target object
 shall not be equal to or statically deeper than any
 enclosing @nt<accept_statement> of the task unit.
-In a @nt<requeue_statement> of an @nt<entry_body>
+In a @nt<requeue_@!statement> of an @nt<entry_@!body>
 of some protected unit, either the target object shall be
-a part of a formal parameter of the @nt<entry_body>,
+a part of a formal parameter of the @nt<entry_@!body>,
 or the accessibility level of the target object
 shall not be statically deeper than that
 of the @nt<entry_declaration>.
@@ -2324,8 +2322,8 @@ A @nt<delay_statement> is used to block further execution until
 a specified @i(expiration time) is reached.
 The expiration time
 can be specified either as a particular point in time (in a
-@nt<delay_until_statement>), or in seconds from the current time
-(in a @nt<delay_relative_statement>).
+@nt<delay_@!until_@!statement>), or in seconds from the current time
+(in a @nt<delay_@!relative_@!statement>).
 The language-defined
 package Calendar provides definitions for a type Time and associated
 operations, including a function Clock that returns the current time.
@@ -2479,7 +2477,7 @@ has already passed, the task is not blocked.
 
 @Defn2{Term=[cancellation], Sec=(of a @nt<delay_statement>)}
 If an attempt is made to @i(cancel) the @nt<delay_statement>
-@Redundant[(as part of an @nt<asynchronous_select> or abort @em
+@Redundant[(as part of an @nt<asynchronous_@!select> or abort @em
 see @RefSecNum{Asynchronous Transfer of Control} and
 @RefSecNum{Abort of a Task - Abort of a Sequence of Statements})],
 the @nt<_statement> is cancelled if
@@ -2792,8 +2790,8 @@ These three possibilities are mutually exclusive.
 @begin{Legality}
 
 If a @nt{selective_accept} contains more than one @nt{delay_alternative},
-then all shall be @nt<delay_relative_statement>s,
-or all shall be @nt<delay_until_statement>s for the same time type.
+then all shall be @nt<delay_@!relative_@!statement>s,
+or all shall be @nt<delay_@!until_@!statement>s for the same time type.
 @begin{Reason}
   This simplifies the implementation and the description of the semantics.
 @end{Reason}
@@ -2844,13 +2842,13 @@ as follows:
 @begin{itemize}
 
 An open @nt{delay_alternative} is selected when
-its expiration time is reached if no @nt{accept_alternative}
-or other @nt<delay_alternative> can be selected prior to the
+its expiration time is reached if no @nt{accept_@!alternative}
+or other @nt<delay_@!alternative> can be selected prior to the
 expiration time. If several
-@nt{delay_alternative}s have this same expiration time,
+@nt{delay_@!alternative}s have this same expiration time,
 one of them is selected according to the queuing policy in
 effect (see @RefSecNum{Entry Queuing Policies}); the default queuing
-policy chooses arbitrarily among the @nt<delay_alternative>s
+policy chooses arbitrarily among the @nt<delay_@!alternative>s
 whose expiration time has passed.
 
 The else part is selected and its @nt<sequence_of_statements> is executed
@@ -3021,9 +3019,9 @@ of the call is not selected immediately).]
 
 @PDefn2{Term=[execution], Sec=(conditional_entry_call)}
 The execution of a @nt<conditional_entry_call> is defined to be equivalent
-to the execution of a @nt<timed_entry_call> with a @nt<delay_alternative>
+to the execution of a @nt<timed_@!entry_@!call> with a @nt<delay_@!alternative>
 specifying an immediate expiration time and the
-same @nt<sequence_of_statements> as given after the reserved word @key(else).
+same @nt<sequence_of_@!statements> as given after the reserved word @key(else).
 @end{RunTime}
 
 @begin{Notes}
@@ -3245,8 +3243,8 @@ a single call to an @lquotes@;abort list of tasks@rquotes@; RTS primitive.
 @leading@PDefn2{Term=[execution], Sec=(aborting the execution of a construct)}
 @Defn2{Term=[abort], Sec=(of the execution of a construct)}
 When the execution of a construct
-is @i(aborted) (including that of a @nt<task_body> or of a
-@nt<sequence_of_statements>), the execution of every construct
+is @i(aborted) (including that of a @nt<task_@!body> or of a
+@nt<sequence_of_@!statements>), the execution of every construct
 included within the aborted execution is also aborted,
 except for executions included within the execution of an @i(abort-deferred)
 operation; the execution of an abort-deferred operation

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:30 $}
+@Comment{$Date: 2000/08/12 00:40:16 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -120,8 +120,8 @@ They are not the same characters as space and hyphen-minus.
 function,
 other than a @nt<format_effector>, that is allowed in a comment; the set of
 @nt<other_control_function>s allowed in comments is implementation defined.
-@ImplDef{The control functions allowed in comments.}
 @IndexSeeAlso{Term=[control character],See=(other_control_function)}
+@ImplDef{The control functions allowed in comments.}
 @end{Description}
 
 @Leading@Defn{names of @nt{special_character}s}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/08/05 04:53:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/12 00:40:18 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:24 $}
+@Comment{$Date: 2000/08/12 00:40:18 $}
 
 @LabeledClause{The Package Standard}
 
@@ -26,7 +26,7 @@ as @i{root_real}) and for undefined information (such as
 @end{Intro}
 
 @begin{StaticSem}
-The  library package Standard has the following declaration:
+@Leading@;The library package Standard has the following declaration:
 @ImplDef{The names and characteristics of the numeric subtypes declared in
 the visible part of package Standard.}
 @begin{Example}
@@ -100,7 +100,7 @@ the visible part of package Standard.}
    --@RI{ root_integer, or for any additional predefined integer}
    --@RI{ type, is obtained by replacing Integer by the name of the type}
    --@RI{ in the specification of the corresponding operator of the type}
-   --@RI{ Integer.  The right operand of the exponentiation operator}
+   --@RI{ Integer. The right operand of the exponentiation operator}
    --@RI{ remains as subtype Natural.}
 
 
@@ -136,13 +136,13 @@ the visible part of package Standard.}
    -- @key[function] "**"  (Left : Float; Right : Integer'Base) @key[return] Float;
 
 
-   --@RI{ The specification of each operator for the type  root_real,  or  for}
-   --@RI{ any  additional  predefined  floating  point  type,  is  obtained  by}
-   --@RI{ replacing  Float by the name of  the type in the specification of the}
-   --@RI{ corresponding  operator  of  the  type  Float.}
+   --@RI{ The specification of each operator for the type root_real, or for}
+   --@RI{ any additional predefined floating point type, is obtained by}
+   --@RI{ replacing Float by the name of the type in the specification of the}
+   --@RI{ corresponding operator of the type Float.}
 
 
-@Keepnext   --@RI{ In  addition,  the  following operators are predefined for the root}
+@Keepnext   --@RI{ In addition, the following operators are predefined for the root}
    --@RI{ numeric types:}
 
    @key[function] "*" (Left : @RI{root_integer}; Right : @RI{root_real})
@@ -172,7 +172,7 @@ the visible part of package Standard.}
       --@RI{ The declaration of type Character is based on the standard ISO 8859-1 character set.}
 @comment{blank line}
       --@RI{ There are no character literals corresponding to the positions for control characters.}
-      --@RI{ They are indicated in italics in this definition.  See @refsecnum[Character Types].}
+      --@RI{ They are indicated in italics in this definition. See @refsecnum[Character Types].}
 @comment[blank line]
 @LangDefType{Package=[Standard],Type=[Character]}
    @key[type] Character @key[is]
@@ -227,12 +227,12 @@ the visible part of package Standard.}
       '@latin1(248)',@\'@latin1(249)',@\'@latin1(250)',@\'@latin1(251)',@\'@latin1(252)',@\'@latin1(253)',@\'@latin1(254)',@\'@latin1(255)',@\--@RI{248 (16#F8#) .. 255 (16#FF#)}
 
 
-   --@RI{ The predefined operators for the type Character are the  same  as  for}
+   --@RI{ The predefined operators for the type Character are the same as for}
    --@RI{ any enumeration type.}
 @Softpage@;@comment[blank line]
 @comment[blank line]
    --@RI{ The declaration of type Wide_Character is based on the standard ISO 10646 BMP character set.}
-   --@RI{ The first 256 positions have the same contents as type Character.  See @refsecnum[Character types].}
+   --@RI{ The first 256 positions have the same contents as type Character. See @refsecnum[Character types].}
 @comment[blank line]
 @LangDefType{Package=[Standard],Type=[Wide_Character]}
    @key[type] Wide_Character @key[is] (@RI[nul], @RI[soh] ... @RI[FFFE], @RI[FFFF]);
@@ -274,7 +274,7 @@ the visible part of package Standard.}
 @LangDefType{Package=[Standard],Type=[Duration]}
    @key[type] Duration @key[is] @key[delta] @RI{implementation-defined} @key[range] @RI{implementation-defined};
 
-      --@RI{ The  predefined  operators for the type Duration are the same as for}
+      --@RI{ The predefined operators for the type Duration are the same as for}
       --@RI{ any fixed point type.}
 
 
@@ -290,7 +290,7 @@ the visible part of package Standard.}
 
 Standard has no private part.
 @begin{Reason}
-This is important for portability.  All library packages
+This is important for portability. All library packages
 are children of Standard, and if Standard had a private part then
 it would be visible to all of them.@end{reason}
 
@@ -337,15 +337,15 @@ this body appears in the environment @nt{declarative_part}
 
 @begin{ImplAdvice}
 If an implementation provides additional named predefined integer types,
-then  the names should end with @lquotes@;Integer@rquotes@; as in @lquotes@;Long_Integer@rquotes@;.
+then the names should end with @lquotes@;Integer@rquotes@; as in @lquotes@;Long_Integer@rquotes@;.
 If an implementation provides additional named predefined
 floating point types,
-then  the names should end with @lquotes@;Float@rquotes@; as in @lquotes@;Long_Float@rquotes@;.
+then the names should end with @lquotes@;Float@rquotes@; as in @lquotes@;Long_Float@rquotes@;.
 @end{ImplAdvice}
 
 @begin{Notes}
 Certain aspects of the predefined entities cannot be completely
-described in the language itself.  For example, although the
+described in the language itself. For example, although the
 enumeration type Boolean can be written showing the two enumeration
 literals False and True, the short-circuit control forms cannot be
 expressed in the language.
@@ -399,7 +399,7 @@ to Integer seems more readable than declaring them much later.
 Package Standard is declared to be pure.
 @begin{discussion}
 The introduction of the types Wide_Character and Wide_String is not
-an Ada 9X extension to Ada 83, since ISO WG9 has approved these as an
+an Ada 95 extension to Ada 83, since ISO WG9 has approved these as an
 authorized extension of the original Ada 83 standard that is part
 of that standard.
 @end{discussion}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/08/08 22:56:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/12 00:40:17 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/08/08 22:56:19 $}
+@Comment{$Date: 2000/08/12 00:40:17 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -15,7 +15,7 @@ cooperatively as part of a single Ada program.
 @end{Intro}
 
 @begin{Extend83}
-This Annex is new to Ada 9X.
+This Annex is new to Ada 95.
 @end{Extend83}
 
 @begin{LinkTime}
@@ -91,9 +91,9 @@ library units are all preelaborated, and whose data and subprograms are
 accessible to one or more active partitions.
 @begin{Discussion}
 In most situations, a passive partition does not execute, and does not have
-a @lquotes@;real@rquotes@; environment task.  Any execution involved in
+a @lquotes@;real@rquotes@; environment task. Any execution involved in
 its elaboration and initialization occurs before it comes into existence in a
-distributed program (like most preelaborated entities).  Likewise,
+distributed program (like most preelaborated entities). Likewise,
 there is no concrete meaning to passive partition termination.
 @end{Discussion}
 
@@ -120,7 +120,7 @@ partition has to be connected to that other partition by some sort
 of a message passing mechanism.
 
 A passive partition that is accessible to an active partition should have
-its storage addressable to the processor(s) of the active partition.  The
+its storage addressable to the processor(s) of the active partition. The
 processor(s) should be able to read and write from/to that
 storage, as well as
 to perform @lquotes@;read-modify-write@rquotes@; operations (in order to support entry-less
@@ -159,7 +159,7 @@ inaccessible.
 @ImplDef{Any events that can result in a partition becoming
 inaccessible.}
 
-For @PrefixType{a prefix D that denotes a
+@Leading@;For @PrefixType{a prefix D that denotes a
 library-level declaration,
 excepting a declaration of or within a declared-pure library unit},
 the following attribute is defined:
@@ -209,7 +209,7 @@ a consistent state of the partition to other active partitions.
 In an implementation, the partitions of a distributed
 program need not be loaded and elaborated all at the same time;
 they may be loaded and elaborated one at a time over an extended
-period of time.  An implementation may provide facilities to abort
+period of time. An implementation may provide facilities to abort
 and reload a partition during the execution of a distributed program.
 
 An implementation may allow the state of some of the partitions of
@@ -236,7 +236,7 @@ to query information about the partition.
 
 @begin{Intro}
 @redundant[Library units can be categorized according to the role
-they play in a distributed program.  Certain restrictions
+they play in a distributed program. Certain restrictions
 are associated with each category to ensure that the semantics
 of a distributed program remain close to the semantics for a nondistributed
 program.]
@@ -288,14 +288,13 @@ except that the body of a remote types or remote call interface library
 unit is unrestricted.
 
 
-The overall hierarchy (including declared pure) is as follows:
+@Leading@;The overall hierarchy (including declared pure) is as follows:
 @begin{Description}
 Declared Pure @\Can depend only on other declared
 pure library units;
 
 Shared Passive @\Can depend only on other shared passive or
     declared pure library units;
-
 
 Remote Types @\The declaration of the library unit can depend only
     on other remote types library units,
@@ -338,7 +337,7 @@ Implementations are allowed to define other categorization pragmas.
 @LabeledSubClause{Shared Passive Library Units}
 @begin{Intro}
 @redundant[A shared passive library unit is used for managing global data
-shared between active partitions.  The restrictions on shared passive
+shared between active partitions. The restrictions on shared passive
 library units prevent the data or tasks of one active partition
 from being accessible to another active partition through
 references implicit in objects declared in the shared passive library
@@ -356,7 +355,7 @@ live in different address spaces, and have separate run-time systems.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@PDefn2{Term=[categorization pragma], Sec=(Shared_Passive)}
+@Leading@PDefn2{Term=[categorization pragma], Sec=(Shared_Passive)}
 @PDefn2{Term=[pragma, categorization], Sec=(Shared_Passive)}
 The form of a @nt{pragma} Shared_Passive is as follows:
 @end{SyntaxText}
@@ -367,7 +366,7 @@ The form of a @nt{pragma} Shared_Passive is as follows:
 
 @begin{Legality}
 
-@Defn{shared passive library unit}
+@Leading@Defn{shared passive library unit}
 A @i{shared passive library unit} is a library unit to which
 a Shared_Passive pragma applies.
 The following restrictions apply to such a library unit:
@@ -375,7 +374,7 @@ The following restrictions apply to such a library unit:
 @Redundant[it shall be preelaborable (see @RefSecNum{Elaboration Control});]
 @begin{Ramification}
   It cannot contain library-level declarations of protected objects
-  with entries, nor of task objects.  Task objects are disallowed
+  with entries, nor of task objects. Task objects are disallowed
   because passive partitions don't have any threads of control of their
   own, nor any run-time system of their own.
   Protected objects with entries are disallowed because an entry queue
@@ -420,10 +419,10 @@ region of a shared passive library unit P2,
 unless the shared passive library unit
 P2 depends semantically on P1.
 @begin{Discussion}
-  We considered a more complex rule, but dropped it.  This is
+  We considered a more complex rule, but dropped it. This is
   the simplest rule that recognizes that a shared passive
   package may outlive some other library package, unless it
-  depends semantically on that package.  In a nondistributed
+  depends semantically on that package. In a nondistributed
   program, all library packages are presumed to have the same lifetime.
 
   Implementations may define additional pragmas that
@@ -479,7 +478,7 @@ outside the package.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@PDefn2{Term=[categorization pragma], Sec=(Remote_Types)}
+@Leading@PDefn2{Term=[categorization pragma], Sec=(Remote_Types)}
 @PDefn2{Term=[pragma, categorization], Sec=(Remote_Types)}
 The form of a @nt{pragma} Remote_Types is as follows:
 @end{SyntaxText}
@@ -490,10 +489,9 @@ The form of a @nt{pragma} Remote_Types is as follows:
 
 @begin{Legality}
 
-@Defn{remote types library unit}
+@Leading@Defn{remote types library unit}
 A @i{remote types library unit} is a library unit to which the pragma
-Remote_Types applies.
-The following restrictions apply to
+Remote_Types applies. The following restrictions apply to
 the declaration of such a library unit:
 @begin{itemize}
 @Redundant[it shall be preelaborable;]
@@ -537,7 +535,7 @@ Such a type shall be either an access-to-subprogram type
 or a general access type that designates a class-wide limited private
 type.
 
-The following restrictions apply to the use of a
+@Leading@;The following restrictions apply to the use of a
 remote access-to-subprogram type:
 @begin{Itemize}
 
@@ -550,7 +548,7 @@ a value of a remote access-to-subprogram type shall statically denote a
 (subtype-conformant) remote subprogram.
 @end{Itemize}
 
-The following restrictions apply to the use of a
+@Leading@;The following restrictions apply to the use of a
 remote access-to-class-wide type:
 @begin{Itemize}
 The primitive subprograms
@@ -612,7 +610,7 @@ sent between two active partitions.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@PDefn2{Term=[categorization pragma], Sec=(Remote_Call_Interface)}
+@Leading@PDefn2{Term=[categorization pragma], Sec=(Remote_Call_Interface)}
 @PDefn2{Term=[pragma, categorization], Sec=(Remote_Call_Interface)}
 The form of a @nt{pragma} Remote_Call_Interface is as follows:
 @end{SyntaxText}
@@ -620,7 +618,7 @@ The form of a @nt{pragma} Remote_Call_Interface is as follows:
 @PragmaSyn`@key{pragma} @prag(Remote_Call_Interface)[(@SynI{library_unit_}@Syn2{name})];'
 
 @begin{SyntaxText}
-The form of a @nt{pragma} All_Calls_Remote is as follows:
+@Leading@;The form of a @nt{pragma} All_Calls_Remote is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(All_Calls_Remote)[(@SynI{library_unit_}@Syn2{name})];'
@@ -652,13 +650,13 @@ The declaration of an RCI library unit shall be preelaborable
 only upon declared pure, shared passive,
 remote types, or other remote call interface library units.
 
-In addition, the following restrictions apply to the visible
+@Leading@;In addition, the following restrictions apply to the visible
 part of an RCI library unit:
 @begin{itemize}
 it shall not contain the declaration of a variable;
 @begin{Reason}
   Remote call interface packages do not provide remote data
-  access.  A shared passive package has to be used for that.
+  access. A shared passive package has to be used for that.
 @end{Reason}
 
 it shall not contain the declaration of a limited type;
@@ -761,7 +759,7 @@ the PCS.
 @begin{Discussion}
 Without this pragma, it is presumed that most implementations will
 make direct calls if the call originates in the same partition
-as that of the RCI package.  With this pragma, all calls from
+as that of the RCI package. With this pragma, all calls from
 outside the subsystem rooted at the RCI package are treated like
 calls from outside the
 partition, ensuring that the PCS is involved in all such calls
@@ -807,9 +805,8 @@ that the semantics of the distributed program are well defined.
 
 @begin{StaticSem}
 
-For @PrefixType{a prefix P that statically denotes a
-program unit},
-the following attributes are defined:
+@Leading@;For @PrefixType{a prefix P that statically denotes a
+program unit}, the following attributes are defined:
 @begin{Description}
 @Attribute{Prefix=<P>, AttrName=<Version>,
   Text=[Yields a value of the predefined type String
@@ -827,7 +824,7 @@ the following attributes are defined:
 The @i{version} of a compilation unit changes whenever the
 version changes for any compilation unit on which it depends semantically.
 The version also changes whenever the compilation unit itself changes in
-a semantically significant way.  It is implementation defined
+a semantically significant way. It is implementation defined
 whether there are other events (such as recompilation) that
 result in the version of a compilation unit changing.
 @ImplDef{Events that cause the version of a compilation unit to change.}
@@ -868,7 +865,7 @@ become inaccessible to one another.
   remote types packages from partition to partition, presuming
   that the differences are due to required error corrections
   that took place during the execution of a long-running distributed
-  program.  The Body_Version attribute provides a means
+  program. The Body_Version attribute provides a means
   for performing stricter consistency checks.
 @end{Ramification}
 
@@ -894,7 +891,7 @@ Some remote procedure calls are allowed to return prior to the completion of
 subprogram execution. These are called @i{asynchronous remote procedure
 calls}.
 
-There are three different ways of performing a remote subprogram call:
+@Leading@;There are three different ways of performing a remote subprogram call:
 @begin{Itemize}
   As a direct call on a (remote) subprogram explicitly declared in a
   remote call interface;
@@ -940,7 +937,7 @@ For the execution of a remote subprogram call, subprogram parameters
 (and later the results, if any) are passed using a stream-oriented
 representation
 (see @RefSecNum{The Package Streams}) @Redundant[which is
-suitable for transmission between partitions].  This action is called
+suitable for transmission between partitions]. This action is called
 @i{marshalling}. @i{Unmarshalling} is the reverse action of
 reconstructing the parameters or results from the stream-oriented
 representation.
@@ -959,7 +956,7 @@ receives a remote subprogram call on the called partition and invokes
 the appropriate subprogram body.
 @begin{Discussion}
 The use of the term @i{stub} in this annex should not be confused with
-@nt{body_stub} as defined in @RefSecNum{Subunits of Compilation Units}.  The
+@nt{body_stub} as defined in @RefSecNum{Subunits of Compilation Units}. The
 term @i{stub} is used here because it is a commonly understood term when
 talking about the RPC paradigm.
 @end{Discussion}
@@ -1021,23 +1018,23 @@ library unit.
 Program_Error is raised if this check fails.
 @begin{Discussion}
   This check makes certain that the specific type passed in an RPC
-  satisfies the rules for a "communicable" type.  Normally this
+  satisfies the rules for a "communicable" type. Normally this
   is guaranteed by the compile-time restrictions on remote call interfaces.
   However, with class-wide types, it is possible to pass an object
   whose tag identifies a type declared outside the "safe" packages.
 
   This is considered an accessibility_check since only the types
   declared in "safe" packages are considered truly "global" (cross-partition).
-  Other types are local to a single partition.  This is analogous
+  Other types are local to a single partition. This is analogous
   to the "accessibility" of global vs. local declarations in
   a single-partition program.
 
-  This rule replaces a rule from an earlier version of Ada 9X
+  This rule replaces a rule from an earlier version of Ada 95
   which was given in the subclause on Remote Types Library Units
-  (now @RefSec{Remote Types Library Units}).  That rule tried
+  (now @RefSec{Remote Types Library Units}). That rule tried
   to prevent "bad" types from being sent by arranging for their
-  tags to mismatch between partitions.  However, that interfered
-  with other uses of tags.  The new rule allows tags to agree
+  tags to mismatch between partitions. However, that interfered
+  with other uses of tags. The new rule allows tags to agree
   in all partitions, even for those types which are not "safe"
   to pass in an RPC.
 @end{Discussion}
@@ -1079,7 +1076,7 @@ package is generated
 normally, that is, the call-site is the same as for a
 local subprogram call.
 The code for the remotely callable subprogram bodies is also generated
-normally.  Subprogram's prologue and epilogue are the same as for a local call.
+normally. Subprogram's prologue and epilogue are the same as for a local call.
 
 When compiling the specification of an RCI package, the compiler
 generates calling stubs for each visible subprogram. Similarly, when
@@ -1090,7 +1087,7 @@ tables to allow the RPC-receiver to locate the correct receiving stub.
 For the statically bound remote calls, the identity of the remote
 partition is statically determined (it is resolved at configuration/link time).
 
-The calling stub operates as follows:
+@Leading@;The calling stub operates as follows:
 @begin(Itemize)
 It allocates (or reuses) a stream of Params_Stream_Type of Initial_Size,
 and initializes it by repeatedly calling Write operations,
@@ -1116,7 +1113,7 @@ Do_RPC blocks until a reply message arrives,
 and then returns to the calling stub.
 The stub returns after extracting
 from the Result stream, using Read operations, the @b(in out) and @b(out)
-parameters or the function result.  If the reply message
+parameters or the function result. If the reply message
 indicates that the execution of the remote subprogram propagated
 an exception, the exception is propagated from Do_RPC to the
 calling stub, and thence to the point of the original remote subprogram call.
@@ -1125,7 +1122,7 @@ failed, it propagates Communication_Error.
 
 @end(Itemize)
 
-On the receiving side, the RPC-receiver procedure operates as follows:
+@Leading@;On the receiving side, the RPC-receiver procedure operates as follows:
 @begin(Itemize)
 It is called from the PCS when a remote-subprogram-call message is received.
 The call originates in some remote call receiver task executed and
@@ -1139,12 +1136,12 @@ Read from the stream designated by the Params parameter.
 
 The receiving stub calls the actual subprogram body and, upon completion of
 the subprogram, uses Write to insert the results into the
-stream pointed to by the Result parameter.  The receiving stub returns to
+stream pointed to by the Result parameter. The receiving stub returns to
 the RPC-receiver procedure which in turn returns to the PCS.
 If the actual subprogram body propagates an exception, it is propagated
 by the RPC-receiver to the PCS, which handles the exception,
 and indicates in the reply message that the execution of the
-subprogram body propagated an exception.  The exception occurrence
+subprogram body propagated an exception. The exception occurrence
 can be represented in the reply message using the Write attribute
 of Ada.Exceptions.Exception_Occurrence.
 @end(Itemize)
@@ -1154,7 +1151,7 @@ For remote access-to-subprogram types:
 A value of a remote access-to-subprogram type can be
 represented by the following components: a reference to the remote partition,
 an index to the package containing the remote subprogram, and an index to
-the subprogram within the package.  The values of these components are
+the subprogram within the package. The values of these components are
 determined at run time when the remote access value is created.
 These three components serve the same purpose when calling Do_APC/RPC,
 as in the statically bound remote calls; the only difference is that they
@@ -1165,7 +1162,7 @@ For remote access-to-class-wide types:
 For each remote access-to-class-wide type,
 a calling stub is generated for each dispatching operation of
 the designated type. In addition, receiving stubs are generated to perform
-the remote dispatching operations in the called partition.  The appropriate
+the remote dispatching operations in the called partition. The appropriate
 @nt{subprogram_body} is determined as for a local
 dispatching call once the receiving stub has been reached.
 
@@ -1178,23 +1175,23 @@ object.
 
 Alternatively, a remote access-to-class-wide value can be represented as
 a normal access value, pointing to a "stub" object which in turn
-contains the information mentioned above.  A call on any
+contains the information mentioned above. A call on any
 dispatching operation of such a stub object does the remote call,
 if necessary, using the information in the stub object to locate
-the target partition, etc.  This approach has the advantage that
-less special-casing is required in the compiler.  All access values
+the target partition, etc. This approach has the advantage that
+less special-casing is required in the compiler. All access values
 can remain just a simple address.
 
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 For a call to Do_RPC or Do_APC: The partition ID of all controlling
 operands are checked for equality (a Constraint_Error is raised if this
 check fails). The partition ID value is used for the Partition parameter.
-An index into the @i{tagged-type-descriptor} is created.  This index
-points to the receiving stub of the class-wide operation.   This index and
+An index into the @i{tagged-type-descriptor} is created. This index
+points to the receiving stub of the class-wide operation. This index and
 the index to the table (described above) are
 written to the stream.
 Then, the actual parameters are marshalled into the message
-stream.  For a controlling operand, only the access value
+stream. For a controlling operand, only the access value
 designating the remote object is required (the other two
 components are already present in the other parameters).
 
@@ -1239,17 +1236,15 @@ of the corresponding remote subprogram body.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Asynchronous is as follows:
+@Leading@;The form of a @nt{pragma} Asynchronous is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Asynchronous)(@Syn2{local_name});'
 @end{Syntax}
 
 @begin{Legality}
-
-The @nt<local_name> of a pragma Asynchronous shall
+@Leading@;The @nt<local_name> of a pragma Asynchronous shall
 denote either:
-
 @begin{Itemize}
    One or more remote procedures;
    the formal parameters of the procedure(s) shall all be of
@@ -1300,7 +1295,7 @@ It is not clear that this rule can be tested or even defined formally.
 @LabeledSubClause{Example of Use of a Remote Access-to-Class-Wide Type}
 
 @begin{Examples}
-@i{Example of using a remote access-to-class-wide type to achieve dynamic binding
+@Leading@i{Example of using a remote access-to-class-wide type to achieve dynamic binding
 across active partitions:}
 @begin{example}
 @key{package} Tapes @key{is}
@@ -1366,11 +1361,11 @@ across active partitions:}
 @key{end} Tape_Client;
 @end{example}
 
-@i{Notes on the example}:
+@leading@keepnext@i{Notes on the example}:
 @begin{Discussion}
 The example does not show the case where tapes are removed from or added to
-the system.  In the former case, an appropriate exception needs to be defined
-to instruct the client to use another tape.  In the latter, the Name_Server
+the system. In the former case, an appropriate exception needs to be defined
+to instruct the client to use another tape. In the latter, the Name_Server
 should have a query function visible to the clients to inform them about the
 availability of the tapes in the system.
 @end{Discussion}
@@ -1394,7 +1389,7 @@ dynamically added, removed or replaced without requiring the modification of
 the clients' code.
 
 The Tape_Client procedure references only declarations in the Tapes and
-Name_Server  packages.  Before using a tape for the first time, it needs to
+Name_Server  packages. Before using a tape for the first time, it needs to
 query the Name_Server for a system-wide identity for that tape. From then on,
 it can use that identity to access the tape device.
 
@@ -1412,7 +1407,7 @@ dereferencing the controlling operands T1 and T2.
 @Defn{PCS (partition communication subsystem)}
 @redundant[The @i{Partition Communication Subsystem} (PCS) provides facilities for
 supporting communication between the active partitions of a distributed
-program.  The package System.RPC is a language-defined interface to the PCS.]
+program. The package System.RPC is a language-defined interface to the PCS.]
 @begin{Reason}
 The prefix RPC is used rather than RSC because the term remote procedure call
 and its acronym are more familiar.
@@ -1423,7 +1418,7 @@ interface to implement remote subprogram calls.
 
 @begin{StaticSem}
 
-The following language-defined library package exists:
+@leading@keepnext@;The following language-defined library package exists:
 @begin{example}
 @b(with) Ada.Streams; @RI{-- see @RefSecNum[The Package Streams]}
 @ChildUnit{Parent=[System],Child=[RPC]}
@@ -1503,10 +1498,10 @@ the underlying communication system in which case Communication_Error is
 raised at the point of the call to Do_RPC.
 @begin{Reason}
 Only one exception is defined in System.RPC, although many sources of errors
-might exist.  This is so because it is not always possible
-to distinguish among these errors.  In particular, it is often impossible to
+might exist. This is so because it is not always possible
+to distinguish among these errors. In particular, it is often impossible to
 tell the difference between a failing communication link and
-a failing processing node.  Additional information might be associated with
+a failing processing node. Additional information might be associated with
 a particular Exception_Occurrence for a Communication_Error.
 @end{Reason}
 
@@ -1545,7 +1540,7 @@ completion.
 @end{ImplNote}
 @begin{ImplNote}
 At link-time, the linker provides the RPC-receiver and the necessary tables
-to support it.  A call on Establish_RPC_Receiver is inserted just before
+to support it. A call on Establish_RPC_Receiver is inserted just before
 the call on the main subprogram.
 @end{ImplNote}
 @begin{Reason}
@@ -1586,7 +1581,7 @@ blocking operations.
 @begin{DocReq}
 
 The implementation of the PCS shall document whether
-the RPC-receiver is invoked from concurrent tasks.  If there is an
+the RPC-receiver is invoked from concurrent tasks. If there is an
 upper limit on the number of such tasks, this limit shall be documented as
 well, together with the mechanisms to configure it (if this is supported).
 @ImplDef{Implementation-defined aspects of the PCS.}
@@ -1600,7 +1595,7 @@ explicit message passing, broadcasting, etc. Similarly, it is allowed
 to provide additional
 interfaces to query the state of some remote partition (given its partition
 ID) or of the PCS itself, to set timeouts and retry parameters, to get more
-detailed error status, etc.  These
+detailed error status, etc. These
 additional interfaces should be provided in child packages of System.RPC.
 @ImplDef{Implementation-defined interfaces in the PCS.}
 
@@ -1608,8 +1603,8 @@ A body for the package System.RPC need not be supplied by the
 implementation.
 @begin{Reason}
   It is presumed that a body for the package System.RPC might be
-  extremely environment specific.  Therefore, we do not require
-  that a body be provided by the (compiler) implementation.  The user
+  extremely environment specific. Therefore, we do not require
+  that a body be provided by the (compiler) implementation. The user
   will have to write a body, or acquire one, appropriate for the
   target environment.
 @end{Reason}
@@ -1629,7 +1624,7 @@ into the stream.
 @begin{ImplNote}
   An implementation could also dynamically allocate more space
   as needed, only propagating Storage_Error if the @nt<allocator>
-  it calls raises Storage_Error.  This storage could be managed
+  it calls raises Storage_Error. This storage could be managed
   through a controlled component of the stream object, to
   ensure that it is reclaimed when the stream object
   is finalized.
@@ -1639,7 +1634,7 @@ into the stream.
 
 @begin{Notes}
   The package System.RPC is not designed for direct calls by user
-  programs.  It is instead designed for use in the implementation of remote
+  programs. It is instead designed for use in the implementation of remote
   subprograms calls, being called by the calling stubs generated for a
   remote call interface library unit to initiate a remote call,
   and in turn calling back to an

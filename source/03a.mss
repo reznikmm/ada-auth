@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:18 $}
+@Comment{$Date: 2000/08/12 00:40:16 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1551,10 +1551,11 @@ sequence of steps:
   raise Constraint_Error @em see @RefSecNum(Type Conversions)).
   @PDefn2{Term=[implicit subtype conversion],Sec=(initialization expression)}
 
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
   The object is created, and, if there is not an initialization expression,
   any per-object expressions (see @RefSecNum(Record Types)) are
-  evaluated and any implicit initial values for the object
-  or for its subcomponents are obtained as determined by
+  @Chg{New=[elaborated], Old=[evaluated]} and any implicit initial values for
+  the object or for its subcomponents are obtained as determined by
   the nominal subtype.
   @begin(Discussion)
     For a per-object constraint that contains some per-object
@@ -1565,9 +1566,15 @@ sequence of steps:
     expressions evaluated at the point of the creation of the
     object.
 
-    The elaboration of per-object constraints was
-    presumably performed as part of the dependent compatibility check
-    in Ada 83.
+    @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0002]}
+    @Chg{New=[We say @lquotes@;elaborated@rquotes@; rather than @lquotes@;evaluated@rquotes@;
+    in order to be consistent with other uses of per-object constraints and
+    to insure that the intent stated in the previous annotation is met by
+    using the definition of elaboration of a per-object constraint (now)
+    given in clause @RefSecNum(Record Types).],Old=[]}
+
+    The elaboration of per-object constraints was presumably performed
+    as part of the dependent compatibility check in Ada 83.
     If the object is of a limited type
     with an access discriminant, the @nt<access_definition> is elaborated
     at this time (see @RefSecNum(Discriminants)).
@@ -3839,6 +3846,20 @@ of a modular type whose modulus is one less than a power of 2
 may be equal to the modulus, rather than one less than the modulus.
 It is implementation defined for which powers of 2, if any, this
 permission is exercised.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0003]}
+@Chg{New=[For a one's complement machine, implementations may support non-binary
+modulus values greater than System.Max_Nonbinary_Modulus. It is implementation
+defined which specific values greater than System.Max_Nonbinary_Modulus, if
+any, are supported.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0003]}
+@Chg{New=[On a one's complement machine, the natural full word type would have
+a modulus of 2**Word_Size-1. However, we would want to allow the all-ones bit
+pattern (which represents negative zero as a number) in logical operations.
+These permissions are intended to allow that and the natural modulus value
+without burdening implementations with supporting expensive modulus values.],Old=[]}
+@end{Reason}
 @end{ImplPerm}
 
 @begin{ImplAdvice}
@@ -4488,6 +4509,7 @@ the definition of Succ and Pred for floating point numbers.
 @PrefixType{every floating point subtype S}:
 
 @begin(description)
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0004]}
 @Attribute{Prefix=<S>, AttrName=<Digits>,
   Text=[S'Digits
 denotes the requested decimal precision
@@ -4495,8 +4517,10 @@ for the subtype S. The value of this attribute
 is of the type @i(universal_integer).]}
 The requested decimal precision of the base subtype of a floating
 point type @i{T} is defined to be the largest value of @i{d} for which
-ceiling(@i{d} * log(10) / log(T'Machine_Radix)) + 1 <= T'Model_Mantissa.
-
+@chg{New=[@*
+ceiling(@i{d} * log(10) / log(T'Machine_Radix)) + @i{g} <= T'Model_Mantissa@*
+where g is 0 if Machine_Radix is a positive power of 10 and 1 otherwise.],
+Old=[ceiling(@i{d} * log(10) / log(T'Machine_Radix)) + 1 <= T'Model_Mantissa.]}
 @end(description)
 @EndPrefixType{}
 @end{StaticSem}
@@ -4809,6 +4833,7 @@ Obsolescent features (to be compatible with Ada 83's
 @Leading@;The following attributes are defined for
 @PrefixType{every fixed point subtype S}:
 @begin(description)
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0005]}
 @Attribute{Prefix=<S>, AttrName=<Small>,
   Text=[S'Small
      denotes the @i(small) of the type of S.
@@ -4816,7 +4841,7 @@ Obsolescent features (to be compatible with Ada 83's
      @PDefn2{Term=[specifiable], Sec=(of Small for fixed point types)}
      @Defn{Small clause}
      Small may be specified
-     for nonderived fixed point types
+     for nonderived@Chg{New=[ ordinary],Old=[]} fixed point types
      via an @nt{attribute_definition_clause}
      (see @RefSecNum{Representation Attributes});
      the expression of such a clause shall be static.

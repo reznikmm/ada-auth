@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:24 $}
+@Comment{$Date: 2000/08/12 00:40:18 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -17,14 +17,14 @@ These features are still part of the language,
 and have to be implemented by conforming implementations.
 The primary reason for putting these descriptions here
 is to get redundant features out of the way of most readers.
-The designers of the next version of Ada after Ada 9X will have to
+The designers of the next version of Ada after Ada 95 will have to
 assess whether or not it makes sense to drop these features from the
 language.
 @end{Ramification}
 @end{Intro}
 
 @begin{DiffWord83}
-The following features have been removed from the language,
+@Leading@;The following features have been removed from the language,
 rather than declared to be obsolescent:
 @begin{Itemize}
 The package Low_Level_IO
@@ -87,7 +87,7 @@ The implementation shall allow the user to replace these renamings.
 
 @begin{Syntax}
 @begin{SyntaxText}
-The following replacements are allowed for the vertical line, number sign,
+@Leading@;The following replacements are allowed for the vertical line, number sign,
 and quotation mark characters:
 @begin{Itemize}
 A vertical line character (|) can be replaced by an exclamation mark
@@ -106,7 +106,7 @@ occurrences.
 The quotation marks (") used as string brackets at both ends of
 a string literal can be replaced by percent signs (%) provided
 that the enclosed sequence of characters contains no quotation mark, and
-provided that both string brackets are replaced.  Any
+provided that both string brackets are replaced. Any
 percent sign within the sequence of characters shall then be
 doubled and each such doubled percent sign is interpreted as a
 single percent sign character value.
@@ -121,7 +121,7 @@ Another use of the feature has been to replace the vertical line
 character (|) when using certain hardware that treats that character
 as a (non-English) letter.
 The feature is no longer necessary for that reason, either,
-since Ada 9X has full support for international character sets.
+since Ada 95 has full support for international character sets.
 Therefore, we believe this feature is no longer necessary.
 
 Users of equipment that still uses | to represent a letter will
@@ -129,14 +129,14 @@ continue to do so.
 Perhaps by next the time Ada is revised,
 such equipment will no longer be in use.
 
-Note that it was never legal to use this feature as a convenient
+@Leading@;Note that it was never legal to use this feature as a convenient
 method of including double quotes in a string without doubling them
 @em the string literal:
 @begin{Example}
 %"This is quoted."%
 @end{Example}
 
-is not legal in Ada 83, nor will it be in Ada 9X.  One has to write:
+@Leading@;is not legal in Ada 83, nor will it be in Ada 95. One has to write:
 @begin{Example}
 """This is quoted."""
 @end{Example}
@@ -150,7 +150,7 @@ is not legal in Ada 83, nor will it be in Ada 9X.  One has to write:
 A @nt<digits_constraint> may be used to define
 a floating point subtype with a new
 value for its requested decimal precision, as reflected
-by its Digits attribute.  Similarly, a @nt<delta_constraint>
+by its Digits attribute. Similarly, a @nt<delta_constraint>
 may be used to define an ordinary fixed point subtype with
 a new value for its @i(delta), as reflected by its Delta
 attribute.
@@ -230,10 +230,10 @@ The elaboration of a @nt<delta_constraint> consists of the
 elaboration of the @nt<range_constraint>, if any.
 @begin{Reason}
 A numeric subtype is considered @lquotes@;constrained@rquotes@; only if a range constraint
-applies to it.  The only effect of a @nt<digits_constraint> or a
+applies to it. The only effect of a @nt<digits_constraint> or a
 @nt<delta_constraint> without a @nt<range_constraint> is to specify
 the value of the corresponding Digits or Delta attribute in
-the new subtype.  The set of values of the subtype is not @lquotes@;constrained@rquotes@;
+the new subtype. The set of values of the subtype is not @lquotes@;constrained@rquotes@;
 in any way by such @nt<_constraint>s.
 @end{Reason}
 @end{RunTime}
@@ -249,8 +249,7 @@ floating point types only as an obsolescent feature).
 @LabeledClause{The Constrained Attribute}
 
 @begin{StaticSem}
-For every private subtype S,
-the following attribute is defined:
+@Leading@;For every private subtype S, the following attribute is defined:
 @begin{Discussion}
 This includes generic formal private subtypes.
 @end{Discussion}
@@ -260,19 +259,19 @@ S'@attr{Constrained}@\Yields the value False if S denotes an unconstrained
               value False if S denotes a generic formal private subtype, and
               the associated actual subtype is either an unconstrained subtype
               with discriminants or an unconstrained array subtype; yields
-              the value True otherwise.  The value of this attribute is of
+              the value True otherwise. The value of this attribute is of
               the predefined subtype Boolean.
 @begin{Reason}
-Because Ada 9X has @nt{unknown_discriminant_part}s,
+Because Ada 95 has @nt{unknown_discriminant_part}s,
 the Constrained attribute of private subtypes is obsolete.
 This is fortunate, since its Ada 83 definition was confusing,
-as explained below.  Because this attribute is obsolete,
+as explained below. Because this attribute is obsolete,
 we do not bother to extend its definition to private extensions.
 
 The Constrained attribute of an object is @i(not) obsolete.
 
-Note well: S'Constrained matches the Ada 9X definition of @lquotes@;constrained@rquotes@;
-only for composite subtypes.  For elementary subtypes,
+Note well: S'Constrained matches the Ada 95 definition of @lquotes@;constrained@rquotes@;
+only for composite subtypes. For elementary subtypes,
 S'Constrained is always true, whether or not S is constrained.
 (The Constrained attribute of an object does not have this problem,
 as it is only defined for objects of a discriminated type.)
@@ -284,7 +283,8 @@ So one should think of its designator as being 'Constrained_Or_Elementary.
 @LabeledClause{ASCII}
 
 @begin{StaticSem}
-The following declaration exists in the declaration of package Standard:
+@Leading@;The following declaration exists in the declaration of package
+Standard:
 @begin{example}
 @key[package] ASCII @key[is]
 
@@ -341,7 +341,7 @@ The following declaration exists in the declaration of package Standard:
 @LabeledClause{Numeric_Error}
 
 @begin{StaticSem}
-The following declaration exists in the declaration
+@Leading@;The following declaration exists in the declaration
 of package Standard:
 @begin{Example}
 Numeric_Error : @key[exception] @key[renames] Constraint_Error;
@@ -357,7 +357,7 @@ The permissions of RM83-11.6 could often be used to allow
 the implementation to raise Constraint_Error in a situation
 where one would normally expect Numeric_Error.
 To avoid this confusion, all situations that raise Numeric_Error in
-Ada 83 are changed to raise Constraint_Error in Ada 9X.
+Ada 83 are changed to raise Constraint_Error in Ada 95.
 Numeric_Error is changed to be a renaming of Constraint_Error
 to avoid most of the upward compatibilities associated with
 this change.
@@ -406,25 +406,25 @@ confusion with the new term @lquotes@;Address clause@rquotes@; (that is, an
 
 @begin{Intro}
 @redundant[Implementations are permitted to allow the attachment of task entries to
-interrupts via the address clause.  Such an entry is referred to as an
+interrupts via the address clause. Such an entry is referred to as an
 @i{interrupt entry}.
 
 The address of the task entry corresponds to a hardware interrupt in an
-implementation-defined manner.  (See Ada.Interrupts.Reference in
+implementation-defined manner. (See Ada.Interrupts.Reference in
 @RefSecNum{The Package Interrupts}.)]
 @end{Intro}
 
 @begin{StaticSem}
-The following attribute is defined:
+@Leading@;The following attribute is defined:
 
-For any task entry X:
+@Leading@;For any task entry X:
 @begin{Description}
 @Defn{interrupt entry}
 X'@attr{Address} @\For a task entry whose address is specified
                (an @i{interrupt entry}), the value
-               refers to the corresponding hardware interrupt.  For such
+               refers to the corresponding hardware interrupt. For such
                an entry, as for any other task entry, the meaning of this
-               value is implementation defined.  The value of this attribute
+               value is implementation defined. The value of this attribute
                is of the type of the subtype System.Address.
 
 @PDefn2{Term=[specifiable], Sec=(of Address for entries)}
@@ -473,7 +473,7 @@ can depend on the specific interrupt.
 It is a bounded error to evaluate
 E'Caller (see @RefSecNum(The Package Task_Identification))
 in an @nt{accept_statement} for an interrupt
-entry.  The possible effects are
+entry. The possible effects are
 the same as for calling Current_Task from an entry body.
 @end{Bounded}
 
@@ -497,7 +497,7 @@ of program execution@Redundant[; that is, not just when they have an
 interrupt entry attached to them].
 
 Interrupt entry calls may be implemented by having the hardware execute
-directly the appropriate accept body.  Alternatively, the implementation is
+directly the appropriate accept body. Alternatively, the implementation is
 allowed to provide an internal interrupt handler to simulate the effect of
 a normal task calling the entry.
 
@@ -516,8 +516,8 @@ allowed to impose further requirements for the selection of the
 
 @begin{Notes}
 
-Queued interrupts correspond to ordinary entry calls.  Interrupts that are
-lost if not immediately processed correspond to conditional entry calls.  It
+Queued interrupts correspond to ordinary entry calls. Interrupts that are
+lost if not immediately processed correspond to conditional entry calls. It
 is a consequence of the priority rules that an accept body executed in
 response to an interrupt can be executed with the active priority at which the
 hardware generates the interrupt, taking precedence over lower priority tasks,
@@ -528,7 +528,7 @@ associated interrupt entry as one or more parameters of mode @key[in].
 @end{Notes}
 
 @begin{Examples}
-@i{Example of an interrupt entry:}
+@leading@keepnext@i{Example of an interrupt entry:}
 @begin{example}
 @key[task] Interrupt_Handler @key[is]
   @key[entry] Done;
@@ -541,7 +541,7 @@ associated interrupt entry as one or more parameters of mode @key[in].
 @begin{DiffWord83}
 
 RM83-13.5.1 did not adequately address the problems associate with
-interrupts.  This feature is now obsolescent and is replaced by the Ada 9X
+interrupts. This feature is now obsolescent and is replaced by the Ada 95
 interrupt model as specified in the Systems Programming Annex.
 @end{DiffWord83}
 
@@ -552,7 +552,7 @@ interrupt model as specified in the Systems Programming Annex.
 @end{Syntax}
 
 @begin{StaticSem}
-A @nt{record_representation_clause} of the form:
+@leading@keepnext@;A @nt{record_representation_clause} of the form:
 @begin{example}
 @key[for] @RI{r} @key[use]
     @key[record] @key[at] @key[mod] @RI{a}
@@ -560,7 +560,7 @@ A @nt{record_representation_clause} of the form:
     @key[end] @key[record];
 @end{example}
 
-is equivalent to:
+@leading@keepnext@;is equivalent to:
 @begin{example}
 @key[for] @RI{r}'Alignment @key[use] @RI{a};
 @key[for] @RI{r} @key[use]
@@ -590,8 +590,7 @@ confusion with the new term @lquotes@;Alignment clause@rquotes@; (that is, an
 @LabeledClause{The Storage_Size Attribute}
 
 @begin{StaticSem}
-For any task subtype T,
-the following attribute is defined:
+@Leading@;For any task subtype T, the following attribute is defined:
 @begin{Description}
 T'@attr{Storage_Size} @\Denotes an implementation-defined value
 of type @i{universal_integer}

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:15 $}
+@Comment{$Date: 2000/08/12 00:40:17 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -271,10 +271,10 @@ respectively, but we decided not to.
 @Defn2{Term=[parent declaration], Sec=(of a library unit)}
 The @i{parent declaration} of a @nt{library_item}
 (and of the library unit) is the declaration denoted
-by the @nt{parent_unit_name}, if any, of the
-@nt{defining_program_unit_name} of the @nt<library_item>.
+by the @nt{parent_@!unit_name}, if any, of the
+@nt{defining_@!program_@!unit_name} of the @nt<library_item>.
 @Defn{root library unit}
-If there is no @nt{parent_unit_name},
+If there is no @nt{parent_@!unit_name},
 the parent declaration is the declaration of Standard,
 the @nt{library_item} is a @i{root} @nt{library_item}, and
 the library unit (renaming) is a @i{root} library
@@ -524,9 +524,9 @@ renaming-as-declaration, not a renaming-as-body.
 
 
 @leading@keepnext@redundant[There are two kinds of dependences among
-compilation units:
+compilation units:]
 @begin{Itemize}
-The @i{semantic dependences}
+@redundant[The @i{semantic dependences}
 (see below)
 are the ones needed to check the
 compile-time rules across compilation unit boundaries;
@@ -536,8 +536,8 @@ The visibility rules are based on the semantic dependences.
 
 The @i{elaboration dependences}
 (see @RefSecNum{Program Execution})
-determine the order of elaboration of @nt{library_item}s.
-@end{Itemize}]
+determine the order of elaboration of @nt{library_item}s.]
+@end{Itemize}
 @begin{Discussion}
 Don't confuse these kinds of dependences with the run-time
 dependences among tasks and masters defined in
@@ -551,11 +551,6 @@ parent declaration.
 A subunit depends semantically upon its parent body.
 A @nt{library_unit_body} depends semantically upon the corresponding
 @nt{library_unit_declaration}, if any.
-@begin{Discussion}
-The @lquotes@;if any@rquotes@; is necessary
-because library subprograms are not required to have a
-@nt{subprogram_declaration}.
-@end{Discussion}
 A compilation unit depends semantically
 upon each @nt<library_item> mentioned in a
 @nt{with_clause} of the compilation unit.
@@ -565,6 +560,11 @@ of a type defined in another compilation unit,
 then the given compilation unit depends semantically upon the
 other compilation unit.
 The semantic dependence relationship is transitive.
+@begin{Discussion}
+The @lquotes@;if any@rquotes@; in the third sentence is necessary
+because library subprograms are not required to have a
+@nt{subprogram_declaration}.
+@end{Discussion}
 @begin{Honest}
 If a given compilation unit contains a
 @nt{choice_parameter_specification},
@@ -870,14 +870,12 @@ to which the @nt{context_clause} is attached.
 @begin{Resolution}
 @Defn2{Term=[scope], Sec=(of a @nt{with_clause})}
 The @i{scope} of a @nt{with_clause} that appears on a
-@nt{library_unit_declaration}
-or @nt{library_unit_renaming_declaration}
-consists of the entire declarative
-region of the declaration@Redundant[,
+@nt{library_@!unit_@!declaration}
+or @nt{library_@!unit_@!renaming_@!declaration}
+consists of the entire declarative region of the declaration@Redundant[,
 which includes all children and subunits].
 The scope of a @nt{with_clause} that appears on a
-body consists of the body@Redundant[,
-which includes all subunits].
+body consists of the body@Redundant[, which includes all subunits].
 @begin{Discussion}
 Suppose a @nt{with_clause} of a public library unit
 mentions one of its private siblings.
@@ -1014,9 +1012,7 @@ declaration, the name of a
 library package can be given in @nt{use_clause}s and can be used to
 form expanded names, a library subprogram can be called,
 and instances of a generic library unit can be declared.
-
-If a child of a parent generic package is mentioned in a
-@nt{with_clause},
+If a child of a parent generic package is mentioned in a @nt{with_clause},
 then the corresponding declaration nested within each visible instance
 is visible within the compilation unit.
 
@@ -1107,12 +1103,8 @@ that is disallowed by @RefSec{Compilation Units - Library Units}.
 @Defn2{Term=[parent body], Sec=(of a subunit)}
 The @i{parent body} of a subunit is the body of the program unit
 denoted by its @nt{parent_unit_name}.
-@Defn{subunit}
-
-The term @i{subunit} is used to refer to
-a @nt{subunit} and also to
-the @nt{proper_body} of a @nt{subunit}.
-
+@Defn{subunit} The term @i{subunit} is used to refer to
+a @nt{subunit} and also to the @nt{proper_body} of a @nt{subunit}.
 
 The parent body of a subunit shall be present in the current environment,
 and shall contain a corresponding @nt{body_stub}
@@ -1123,11 +1115,11 @@ complete context.
 @end{Discussion}
 
 A @nt{package_body_stub} shall be the completion of a
-@nt{package_declaration} or @nt{generic_package_declaration};
-a @nt{task_body_stub} shall be the completion of a
-@nt{task_declaration};
-a @nt{protected_body_stub} shall be the completion of a
-@nt{protected_declaration}.
+@nt{package_@!declaration} or @nt{generic_@!package_@!declaration};
+a @nt{task_@!body_@!stub} shall be the completion of a
+@nt{task_@!declaration};
+a @nt{protected_@!body_stub} shall be the completion of a
+@nt{protected_@!declaration}.
 
 In contrast,
 a @nt{subprogram_body_stub} need not be the completion of a previous
@@ -1290,7 +1282,7 @@ Each included subunit
 occurs in place of the corresponding stub.
 The visibility rules apply as if the environment were the outermost
 declarative region,
-except that @nt{with_clause}s are needed to make
+except that @nt{with_@!clause}s are needed to make
 declarations of library units visible
 (see @RefSecNum{Context Clauses - With Clauses}).
 
@@ -1395,7 +1387,7 @@ When a compilation unit that declares or renames a library unit
 is added to the environment,
 the implementation may remove from the environment
 any preexisting @nt<library_item>
-with the same @nt<defining_program_unit_name>.
+with the same @nt<defining_@!program_@!unit_name>.
 When a compilation unit that is a subunit or the body
 of a library unit is added to the environment,
 the implementation may remove from the environment
@@ -1529,8 +1521,8 @@ At the place of a @nt{compilation_unit},
 in which case the @nt<pragma>
 shall immediately follow in the same @nt<compilation> (except for
 other @nt{pragma}s)
-a @nt{library_unit_declaration} that is a @nt<subprogram_declaration>,
-@nt<generic_subprogram_declaration>, or @nt<generic_instantiation>, and
+a @nt{library_@!unit_@!declaration} that is a @nt<subprogram_@!declaration>,
+@nt<generic_@!subprogram_@!declaration>, or @nt<generic_@!instantiation>, and
 the @nt<pragma> shall have an argument that is a @nt<name> denoting
 that declaration.
 @begin{Ramification}
@@ -1554,8 +1546,8 @@ of a @nt{declarative_part} or program unit declaration,
 in which case the @nt{pragma} shall have an argument,
 which shall be a @nt{direct_name}
 that denotes one or more of the following (and nothing else):
-a @nt{subprogram_declaration}, a @nt{generic_subprogram_declaration},
-or a @nt{generic_instantiation}, of the same @nt<declarative_part> or
+a @nt{subprogram_@!declaration}, a @nt{generic_@!subprogram_@!declaration},
+or a @nt{generic_@!instantiation}, of the same @nt<declarative_@!part> or
 program unit declaration.
 @begin{Ramification}
 If you want to denote a @nt<subprogram_body> that is not a
@@ -1641,7 +1633,6 @@ and within a @nt{with_clause}, the only declarations
 that are visible are those that are @nt<library_item>s of the environment,
 and the only declarations that are directly visible are those that
 are root @nt<library_item>s of the environment.
-
 @Defn{notwithstanding}
 Notwithstanding the rules of @RefSecNum(Selected Components),
 an expanded name in a @nt{with_clause} may consist of a
@@ -1731,7 +1722,6 @@ Within a @nt{pragma} that appears at the place of a compilation unit,
 the immediately preceding @nt<library_item> and each of its
 ancestors is visible.
 The ancestor root @nt<library_item> is directly visible.
-
 
 @end{StaticSem}
 
@@ -2049,9 +2039,7 @@ above) consists of either:
   subprogram.}
 @end{Itemize}
 
-@begin{Wide}
 @leading@keepnext@;or:
-@end{Wide}
 @begin{Itemize}
   A @nt{null_statement}, if there is no main subprogram.
   @begin{Discussion}
@@ -2420,9 +2408,9 @@ The creation of a default-initialized object @Redundant[(including
 a component)] of a descendant of a private type,
 private extension, controlled type,
 task type, or protected type with
-@nt{entry_declaration}s; similarly the evaluation of
-an @nt<extension_aggregate> with
-an ancestor @nt<subtype_mark> denoting a subtype of such a type.
+@nt{entry_@!declaration}s; similarly the evaluation of
+an @nt<extension_@!aggregate> with
+an ancestor @nt<subtype_@!mark> denoting a subtype of such a type.
 @begin{Ramification}
 One can declare these kinds of types,
 but one cannot create objects of those types.

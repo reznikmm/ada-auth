@@ -1,13 +1,13 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_ada.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 00/03/08 Created by RLB to avoid Includes }
+@comment{ $Revision: 1.13 $ $Date: 00/03/08 Created by RLB to avoid Includes }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:01 $}
+@Comment{$Date: 2000/08/12 00:40:17 $}
 
 @LabeledClause{The Package Ada}
 
 @begin{StaticSem}
-The following language-defined library package exists:
+@Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @RootLibUnit{Ada}
 @key[package] Ada @key[is]
@@ -48,5 +48,5 @@ However, a programmer cannot compile such a library unit.
 @end{Legality}
 
 @begin{Extend83}
-This clause is new to Ada 9X.
+This clause is new to Ada 95.
 @end{Extend83}

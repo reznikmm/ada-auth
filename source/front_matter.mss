@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.20 $ $Date: 2000/08/08 04:35:32 $}
+@comment{$Revision: 1.21 $ $Date: 2000/08/12 00:40:18 $}
 
 @begin{Intro}
 
@@ -491,6 +491,7 @@ application areas:
 @begin{Intro}
 
 
+@ChgRef{Version=[1],Kind=[Revised]}
 @Defn{instructions for comment submission}
 @Defn{comments, instructions for submission}
 Informal comments on this International Standard may be sent via

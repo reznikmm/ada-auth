@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/08 22:56:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/12 00:40:17 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:19 $}
+@Comment{$Date: 2000/08/12 00:40:17 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -42,7 +42,7 @@ that language.
 @end{ImplAdvice}
 
 @begin{Extend83}
-This Annex is new to Ada 9X.
+This Annex is new to Ada 95.
 @end{Extend83}
 
 @LabeledClause{Complex Arithmetic}
@@ -53,7 +53,7 @@ Generic_Complex_Types, which is defined in @RefSecNum{Complex Types}.
 Implementation-defined approximations to the complex analogs of the mathematical
 functions known as the @lquotes@;elementary functions@rquotes@; are provided by the subprograms
 in Generic_Complex_Elementary_Functions, which is defined in
-@RefSecNum{Complex Elementary Functions}.  Both of these library units are generic
+@RefSecNum{Complex Elementary Functions}. Both of these library units are generic
 children of the predefined package Numerics (see @RefSecNum{The Numerics Packages}).
 Nongeneric equivalents of these generic packages for each of the predefined
 floating point types are also provided as children of Numerics.
@@ -70,7 +70,7 @@ operations.}
 @LabeledSubClause{Complex Types}
 
 @begin{StaticSem}
-The generic library package
+@Leading@;The generic library package
 Numerics.Generic_Complex_Types has the following declaration:
 @begin{Example}
 @key{generic}
@@ -199,7 +199,7 @@ Numerics.Generic_Complex_Types has the following declaration:
 The library package Numerics.Complex_Types
 defines the same types, constants, and subprograms as
 Numerics.Generic_Complex_Types, except that the predefined type Float is
-systematically substituted for Real'Base throughout.  Nongeneric
+systematically substituted for Real'Base throughout. Nongeneric
 equivalents of Numerics.Generic_Complex_Types for each of the other predefined
 floating point types are defined similarly, with the names
 Numerics.Short_Complex_Types, Numerics.Long_Complex_Types, etc.
@@ -220,27 +220,27 @@ Numerics.Short_Complex_Types, Numerics.Long_Complex_Types, etc.
 @Redundant{Complex is a visible type with cartesian components.}
 @begin{Reason}
    The cartesian representation is far more common than the polar
-   representation, in practice.  The accuracy of the results of the complex
+   representation, in practice. The accuracy of the results of the complex
    arithmetic operations and of the complex elementary functions
    is dependent on the representation; thus, implementers need to know that
-   representation.  The type is visible so that complex @lquotes@;literals@rquotes@; can be
+   representation. The type is visible so that complex @lquotes@;literals@rquotes@; can be
    written in aggregate notation, if desired.
 @end{Reason}
 
 @Redundant{Imaginary is a private type; its full type is derived from
 Real'Base.}
 @begin{Reason}
-   The Imaginary type and the constants i and j are provided for two reasons:
+   @Leading@;The Imaginary type and the constants i and j are provided for two reasons:
    @begin{itemize}
       They allow complex @lquotes@;literals@rquotes@; to be written in the alternate form of
-      @RI{a} + @RI{b}*i (or @RI{a} + @RI{b}*j), if desired.  Of course,
+      @RI{a} + @RI{b}*i (or @RI{a} + @RI{b}*j), if desired. Of course,
       in some contexts the sum will need to be parenthesized.
 
       When an Ada binding to IEC 559:1989 that provides (signed) infinities
       as the result of operations that overflow becomes available, it will be
       important to allow arithmetic between pure-imaginary and complex operands
       without requiring the former to be represented as (or promoted to)
-      complex values with a real component of zero.  For example, the
+      complex values with a real component of zero. For example, the
       multiplication of @RI{a} + @RI{b}*i by @RI{d}*i should yield
       -@RI{b}@Times @RI{d} + @RI{a}@Times @RI{d}*i, but if one cannot avoid representing the
       pure-imaginary value @RI{d}*i as the complex value
@@ -255,8 +255,8 @@ Real'Base.}
    @end{itemize}
 @end{Reason}
 @begin{Reason}
-   The Imaginary type is private, rather than being visibly derived from
-   Real'Base, for two reasons:
+   @Leading@;The Imaginary type is private, rather than being visibly derived
+   from Real'Base, for two reasons:
    @begin{itemize}
       to preclude implicit conversions of real literals to the Imaginary type
       (such implicit conversions would make many common arithmetic expressions
@@ -271,15 +271,15 @@ Real'Base.}
    The base subtype Real'Base is used for the component type of Complex, the
    parent type of Imaginary, and the parameter and result types of some of the
    subprograms to maximize the chances of being able to pass meaningful values
-   into the subprograms and receive meaningful results back.  The generic
+   into the subprograms and receive meaningful results back. The generic
    formal parameter Real therefore plays only one role, that of providing the
-   precision to be maintained in complex arithmetic calculations.  Thus, the
+   precision to be maintained in complex arithmetic calculations. Thus, the
    subprograms in Numerics.Generic_Complex_Types share with those in
    Numerics.Generic_Elementary_Functions, and indeed even with the predefined
    arithmetic operations (see @RefSecNum{Operators and Expression Evaluation}),
    the property of being free of range checks on input
    and output, i.e., of being able to exploit the base range of the relevant
-   floating point type fully.  As a result, the user loses the ability to
+   floating point type fully. As a result, the user loses the ability to
    impose application-oriented bounds on the range of values that the
    components of a complex variable can acquire; however, it can be argued that
    few, if any, applications have a naturally square domain (as opposed to a
@@ -287,14 +287,14 @@ Real'Base.}
 @end{Reason}
 
 The arithmetic operations and the Re, Im, Modulus, Argument, and Conjugate
-functions have their usual mathematical meanings.  When applied to a parameter
+functions have their usual mathematical meanings. When applied to a parameter
 of pure-imaginary type, the @lquotes@;imaginary-part@rquotes@; function Im yields the value of
 its parameter, as the corresponding real value.
 @begin{Reason}
    The latter case can be understood by considering the parameter of
    pure-imaginary type to represent a complex value with a zero real part.
 @end{Reason}
-The remaining subprograms have the following meanings:
+@Leading@;The remaining subprograms have the following meanings:
 @begin{Itemize}
    The Set_Re and Set_Im procedures replace the designated component of a
    complex parameter with the given real value; applied to a parameter of
@@ -302,11 +302,11 @@ The remaining subprograms have the following meanings:
    parameter with the imaginary value corresponding to the given real value.
 
    The Compose_From_Cartesian function constructs a complex value from the
-   given real and imaginary components.  If only one component is given, the
+   given real and imaginary components. If only one component is given, the
    other component is implicitly zero.
 
    The Compose_From_Polar function constructs a complex value from the given
-   modulus (radius) and argument (angle).  When the value of the parameter
+   modulus (radius) and argument (angle). When the value of the parameter
    Modulus is positive (resp., negative), the result is the complex value
    represented by the point in the complex plane lying at a distance from the
    origin given by the absolute value of Modulus and forming an angle measured
@@ -319,18 +319,18 @@ the parameter Argument of the Compose_From_Polar function are measured in units
 such that a full cycle of revolution has the given value; otherwise, they are
 measured in radians.
 
-The computed results of the mathematically multivalued functions are rendered
+@Leading@;The computed results of the mathematically multivalued functions are rendered
 single-valued by the following conventions, which are meant to imply the
 principal branch:
 @begin{Itemize}
    The result of the Modulus function is nonnegative.
 
    The result of the Argument function is in the quadrant containing the point
-   in the complex plane represented by the parameter X.  This may be any
+   in the complex plane represented by the parameter X. This may be any
    quadrant (I through IV); thus, the range of the Argument function is
    approximately -@Pi to @Pi
    (-@R[Cycle]/2.0 to @R[Cycle]/2.0, if the parameter Cycle is
-   specified).  When the point represented by the parameter X lies on the
+   specified). When the point represented by the parameter X lies on the
    negative real axis, the result approximates
    @begin{InnerItemize}
       @Pi (resp., -@Pi) when the sign of the imaginary
@@ -366,15 +366,15 @@ can also be raised when a finite result overflows
 (see @RefSecNum{Accuracy Requirements for Complex Arithmetic}).]
 @begin{Discussion}
    It is anticipated that an Ada binding to IEC 559:1989 will be developed in
-   the future.  As part of such a binding, the Machine_Overflows attribute of a
+   the future. As part of such a binding, the Machine_Overflows attribute of a
    conformant floating point type will be specified to yield False, which will
    permit implementations of the complex arithmetic operations to deliver
    results with an infinite component (and set the overflow flag defined by the
    binding) instead of raising Constraint_Error in overflow situations, when
-   traps are disabled.  Similarly, it is appropriate for the complex arithmetic
+   traps are disabled. Similarly, it is appropriate for the complex arithmetic
    operations to deliver results with infinite components (and set the
    zero-divide flag defined by the binding) instead of raising Constraint_Error
-   in the situations defined above, when traps are disabled.  Finally, such a
+   in the situations defined above, when traps are disabled. Finally, such a
    binding should also specify the behavior of the complex arithmetic
    operations, when sensible, given operands with infinite components.
 @end{Discussion}
@@ -391,6 +391,7 @@ range constraint of the subtype Real.
    Real'Base should be used instead.
 @end{ImplNote}
 
+@Leading
 @Defn2{Term=[prescribed result],
         Sec=[for the evaluation of a complex arithmetic operation]}
 In the following cases, evaluation of a complex arithmetic operation shall
@@ -405,7 +406,7 @@ raised:
    operands is of pure-imaginary (resp., real) type.
    @begin{Ramification}
       The result of the addition operator is exact when one of its operands is
-      of real type and the other is of pure-imaginary type.  In this particular
+      of real type and the other is of pure-imaginary type. In this particular
       case, the operator is analogous to the Compose_From_Cartesian function;
       it performs no arithmetic.
    @end{Ramification}
@@ -431,13 +432,13 @@ raised:
 
    When the value of the parameter Argument is equal to a multiple of the
    quarter cycle, the result of the Compose_From_Polar function with specified
-   cycle lies on one of the axes.  In this case, one of its components is zero,
+   cycle lies on one of the axes. In this case, one of its components is zero,
    and the other has the magnitude of the parameter Modulus.
 
-   Exponentiation by a zero exponent yields the value one.  Exponentiation by
-   a unit exponent yields the value of the left operand.  Exponentiation of
-   the value one yields the value one.  Exponentiation of the value zero
-   yields the value zero, provided that the exponent is nonzero.  When the
+   Exponentiation by a zero exponent yields the value one. Exponentiation by
+   a unit exponent yields the value of the left operand. Exponentiation of
+   the value one yields the value one. Exponentiation of the value zero
+   yields the value zero, provided that the exponent is nonzero. When the
    left operand is of pure-imaginary type, one component of the result of the
    exponentiation operator is zero.
 @end{Itemize}
@@ -468,14 +469,14 @@ Implementations may obtain the result of exponentiation of a complex
 or pure-imaginary
 operand by repeated complex multiplication, with arbitrary association
 of the factors and with a possible final complex reciprocation (when the
-exponent is negative).  Implementations are also permitted to obtain the result
+exponent is negative). Implementations are also permitted to obtain the result
 of exponentiation of a complex operand, but not of a pure-imaginary operand,
 by converting the left
 operand to a polar representation; exponentiating the
 modulus by the given exponent; multiplying the argument by the given exponent,
 when the exponent is positive, or dividing the argument by the absolute value
 of the given exponent, when the exponent is negative; and reconverting to a
-cartesian representation.  Because of this implementation freedom, no accuracy
+cartesian representation. Because of this implementation freedom, no accuracy
 requirement is imposed on complex exponentiation
 (except for the prescribed results given above, which apply
 regardless of the implementation method chosen).
@@ -486,11 +487,11 @@ Because the usual mathematical meaning of multiplication of a complex operand
 and a real operand is that of the scaling of both components of the former by
 the latter, an implementation should not perform this operation by first
 promoting the real operand to complex type and then performing a full complex
-multiplication.  In systems that, in the future, support an Ada binding to IEC
+multiplication. In systems that, in the future, support an Ada binding to IEC
 559:1989, the latter technique will not generate the required result when one
-of the components of the complex operand is infinite.  (Explicit multiplication
+of the components of the complex operand is infinite. (Explicit multiplication
 of the infinite component by the zero component obtained during promotion
-yields a NaN that propagates into the final result.)  Analogous advice applies
+yields a NaN that propagates into the final result.) Analogous advice applies
 in the case of multiplication of a complex operand and a pure-imaginary
 operand, and in the case of division of a complex operand by a real or
 pure-imaginary operand.
@@ -498,19 +499,19 @@ pure-imaginary operand.
 Likewise, because the usual mathematical meaning of addition of a complex
 operand and a real operand is that the imaginary operand remains unchanged, an
 implementation should not perform this operation by first promoting the real
-operand to complex type and then performing a full complex addition.  In
+operand to complex type and then performing a full complex addition. In
 implementations in which the Signed_Zeros attribute of the component type is
 True (and which therefore conform to IEC 559:1989 in regard to the handling of
 the sign of zero in predefined arithmetic operations), the latter technique
 will not generate the required result when the imaginary component of the
-complex operand is a negatively signed zero.  (Explicit addition of the
+complex operand is a negatively signed zero. (Explicit addition of the
 negative zero to the zero obtained during promotion yields a positive zero.)
 Analogous advice applies in the case of addition of a complex operand and a
 pure-imaginary operand, and in the case of subtraction of a complex operand and
 a real or pure-imaginary operand.
 
 Implementations in which Real'Signed_Zeros is True should attempt to provide a
-rational treatment of the signs of zero results and result components.  As one
+rational treatment of the signs of zero results and result components. As one
 example, the result of the Argument function should have the sign of the
 imaginary component of the parameter X when the point represented by that
 parameter lies on the positive real axis; as another, the sign of the imaginary
@@ -520,9 +521,8 @@ zero and the Modulus parameter has a nonnegative (resp., negative) value.
 @end{ImplAdvice}
 
 @begin{DiffWord83}
-The semantics of Numerics.Generic_Complex_Types differs from Generic_Complex_Types
-as defined in
-ISO/IEC CD 13813
+@Leading@;The semantics of Numerics.Generic_Complex_Types differs from
+Generic_Complex_Types as defined in ISO/IEC CD 13813
 (for Ada 83) in the following ways:
 @begin{itemize}
    The generic package is a child of the package defining the
@@ -533,7 +533,7 @@ ISO/IEC CD 13813
    the package.
 
    Implementations are not allowed to impose an optional restriction that the
-   generic actual parameter associated with Real be unconstrained.  (In view of
+   generic actual parameter associated with Real be unconstrained. (In view of
    the ability to declare variables of subtype Real'Base in implementations of
    Numerics.Generic_Complex_Types, this flexibility is no longer needed.)
 
@@ -547,7 +547,7 @@ ISO/IEC CD 13813
 @LabeledSubClause{Complex Elementary Functions}
 
 @begin{StaticSem}
-The generic library package
+@Leading@;The generic library package
 Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @begin{Example}
 @key[with] Ada.Numerics.Generic_Complex_Types;
@@ -612,7 +612,7 @@ Numerics.Long_Complex_Elementary_Functions, etc.
 
 The overloading of the Exp function for the pure-imaginary type is provided
 to give the user an alternate way to compose a complex value from a given
-modulus and argument.  In addition to Compose_From_Polar(Rho, Theta)
+modulus and argument. In addition to Compose_From_Polar(Rho, Theta)
 (see @RefSecNum{Complex Types}), the programmer may write Rho * Exp(i * Theta).
 
 The imaginary (resp., real) component of the parameter X of the forward
@@ -622,7 +622,7 @@ pure-imaginary type) represents an angle measured in radians, as does the
 imaginary (resp., real) component of the result of the Log and inverse
 hyperbolic (resp., trigonometric) functions.
 
-The functions have their usual mathematical meanings.  However, the
+@Leading@;The functions have their usual mathematical meanings. However, the
 arbitrariness inherent in the placement of branch cuts, across which some of
 the complex elementary functions exhibit discontinuities, is eliminated by the
 following conventions:
@@ -653,7 +653,7 @@ following conventions:
    and 1.0.
 @end{Itemize}
 
-The computed results of the mathematically multivalued functions are rendered
+@Leading@;The computed results of the mathematically multivalued functions are rendered
 single-valued by the following conventions, which are meant to imply the
 principal branch:
 @begin{Itemize}
@@ -687,7 +687,7 @@ mathematical function, when the value of the left operand is zero and the real
 component of the exponent (or the exponent itself, when it is of real type) is
 zero.
 
-@IndexCheck{Division_Check}
+@Leading@IndexCheck{Division_Check}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 The exception Constraint_Error is raised, signaling a pole of the mathematical
 function (analogous to dividing by zero), in the following cases, provided that
@@ -725,15 +725,15 @@ When Complex_Types.Real'Machine_Overflows is False, the result at poles is
 unspecified.
 @begin{Discussion}
    It is anticipated that an Ada binding to IEC 559:1989 will be developed
-   in the future.  As part of such a binding, the Machine_Overflows attribute
+   in the future. As part of such a binding, the Machine_Overflows attribute
    of a conformant floating point type will be specified to yield False, which
    will permit implementations of the complex elementary functions to deliver
    results with an infinite component (and set the overflow flag defined by the
    binding) instead of raising Constraint_Error in overflow situations, when
-   traps are disabled.  Similarly, it is appropriate for the complex elementary
+   traps are disabled. Similarly, it is appropriate for the complex elementary
    functions to deliver results with an infinite component (and set the
    zero-divide flag defined by the binding) instead of raising Constraint_Error
-   at poles, when traps are disabled.  Finally, such a binding should also
+   at poles, when traps are disabled. Finally, such a binding should also
    specify the behavior of the complex elementary functions, when sensible,
    given parameters with infinite components.
 @end{Discussion}
@@ -750,6 +750,7 @@ range constraint of the subtype Complex_Types.Real.
    subtype Complex_Types.Real'Base should be used instead.
 @end{ImplNote}
 
+@Leading
 @Defn2{Term=[prescribed result],
         Sec=[for the evaluation of a complex elementary function]}
 In the following cases, evaluation of a complex elementary function shall
@@ -783,15 +784,15 @@ raised:
    When the parameter X has the value @PorM @RI{i}, the Log function yields
    an imaginary result.
 
-   Exponentiation by a zero exponent yields the value one.  Exponentiation by
+   Exponentiation by a zero exponent yields the value one. Exponentiation by
    a unit exponent yields the value of the left operand (as a complex value).
-   Exponentiation of the value one yields the value one.  Exponentiation of
+   Exponentiation of the value one yields the value one. Exponentiation of
    the value zero yields the value zero.
 @end{Itemize}
 @begin{Discussion}
    It is possible to give many other prescribed results restricting the result
    to the real or imaginary axis when the parameter X is appropriately
-   restricted to easily testable portions of the domain.  We follow the
+   restricted to easily testable portions of the domain. We follow the
    proposed ISO/IEC standard for Generic_Complex_Elementary_Functions (for Ada
    83), CD 13813,
    in not doing so, however.
@@ -817,7 +818,7 @@ latter shall have been obtained by actual instantiation of
 Numerics.Generic_Complex_Types.
 
 The exponentiation operator may be implemented in terms of the Exp and Log
-functions.  Because this implementation yields poor accuracy in some parts of
+functions. Because this implementation yields poor accuracy in some parts of
 the domain, no accuracy requirement is imposed on complex exponentiation.
 
 @PDefn{unspecified}
@@ -829,7 +830,7 @@ is approximately
 This permission recognizes the impracticality of avoiding overflow in
 the marginal
 case that the exponential of the real component of X exceeds the safe range of
-Complex_Types.Real but both components of the final result do not.  Similarly,
+Complex_Types.Real but both components of the final result do not. Similarly,
 the Sin and Cos (resp., Sinh and Cosh) functions are allowed to raise the
 exception Constraint_Error, signaling overflow, when the absolute value of the
 imaginary (resp., real) component of the parameter X exceeds an
@@ -847,25 +848,24 @@ result do not.
 @begin{ImplAdvice}
 Implementations in which Complex_Types.Real'Signed_Zeros is True should attempt
 to provide a rational treatment of the signs of zero results and result
-components.  For example, many of the complex elementary functions have
+components. For example, many of the complex elementary functions have
 components that are odd functions of one of the parameter components; in these
 cases, the result component should have the sign of the parameter component at
-the origin.  Other complex elementary functions have zero components whose sign
+the origin. Other complex elementary functions have zero components whose sign
 is opposite that of a parameter component at the origin, or is always positive
 or always negative.
 @end{ImplAdvice}
 
 @begin{DiffWord83}
-The semantics of Numerics.Generic_Complex_Elementary_Functions differs from
-Generic_Complex_Elementary_Functions as defined in
-ISO/IEC CD 13814
-(for Ada 83) in the following ways:
+@Leading@;The semantics of Numerics.Generic_Complex_Elementary_Functions
+differs from Generic_Complex_Elementary_Functions as defined in
+ISO/IEC CD 13814 (for Ada 83) in the following ways:
 @begin{itemize}
    The generic package is a child unit of the package defining the
    Argument_Error exception.
 
    The proposed Generic_Complex_Elementary_Functions standard (for Ada 83)
-   specified names for the nongeneric equivalents, if provided.  Here, those
+   specified names for the nongeneric equivalents, if provided. Here, those
    nongeneric equivalents are required.
 
    The generic package imports an instance of Numerics.Generic_Complex_Types rather
@@ -884,9 +884,9 @@ ISO/IEC CD 13814
 
 @begin{Intro}
 The generic package Text_IO.Complex_IO defines procedures for the
-formatted input and output of complex values.  The generic actual parameter in
+formatted input and output of complex values. The generic actual parameter in
 an instantiation of Text_IO.Complex_IO is an instance of
-Numerics.Generic_Complex_Types for some floating point subtype.  Exceptional
+Numerics.Generic_Complex_Types for some floating point subtype. Exceptional
 conditions are reported by raising the appropriate exception defined in
 Text_IO.
 @begin{ImplNote}
@@ -900,7 +900,7 @@ Text_IO.
 @end{Intro}
 
 @begin{StaticSem}
-The generic library package
+@Leading@;The generic library package
 Text_IO.Complex_IO has the following declaration:
 @begin{Ramification}
   Because this is a child of Text_IO, the declarations of the visible
@@ -964,8 +964,8 @@ The input sequence is a pair of
 optionally signed real literals representing
 the real and imaginary components of a complex value; optionally, the pair of
 components may be separated by a comma and/or surrounded by a pair of
-parentheses.  Blanks are freely allowed before each of the components and
-before the parentheses and comma, if either is used.  If the value of the
+parentheses. Blanks are freely allowed before each of the components and
+before the parentheses and comma, if either is used. If the value of the
 parameter Width is zero, then
 @begin{Itemize}
    line and page terminators are also allowed in these places;
@@ -988,10 +988,10 @@ Width is supplied, then
 @end{Itemize}
 @begin{Reason}
    The parenthesized and comma-separated form is the form produced by Put
-   on output (see below), and also by list-directed output in Fortran.  The
+   on output (see below), and also by list-directed output in Fortran. The
    other allowed forms match several common styles of edit-directed output in
    Fortran, allowing most preexisting Fortran data files containing complex
-   data to be read easily.  When such files contain complex values with no
+   data to be read easily. When such files contain complex values with no
    separation between the real and imaginary components, the user will have to
    read those components separately, using an instance of
    Text_IO.Float_IO.
@@ -1059,7 +1059,7 @@ More specifically,
 
 Reads a complex value from the beginning of the given string, following the
 same rule as the Get procedure that reads a complex value from a file, but
-treating the end of the string as a line terminator.  Returns, in the parameter
+treating the end of the string as a line terminator. Returns, in the parameter
 Item, the value of type Complex that corresponds to the input sequence.
 Returns in Last the index value such that From(Last) is the last character
 read.
@@ -1095,17 +1095,17 @@ More specifically,
    the remainder of the string, together with the given values of Aft and Exp.
 @end{itemize}
 @begin{Reason}
-   This rule is the one proposed in LSN-1051.  Other rules were considered,
+   This rule is the one proposed in LSN-1051. Other rules were considered,
    including one that would have read @lquotes@;Outputs the value of the parameter Item
    to the given string, following the same rule as for output to a file, using
    a value for Fore such that the sequence of characters output exactly fills,
    or comes closest to filling, the string; in the latter case, the string is
-   filled by inserting one extra blank immediately after the comma.@rquotes@;  While
+   filled by inserting one extra blank immediately after the comma.@rquotes@; While
    this latter rule might be considered the closest analogue to the rule for
    output to a string in Text_IO.Float_IO, it requires a more difficult and
    inefficient implementation involving special cases when the integer part of
    one component is substantially longer than that of the other and the string
-   is too short to allow both to be preceded by blanks.  Unless such a special
+   is too short to allow both to be preceded by blanks. Unless such a special
    case applies, the latter rule might produce better columnar output if
    several such strings are ultimately output to a file, but very nearly the
    same output can be produced by outputting to the file directly, with the
@@ -1133,7 +1133,7 @@ procedures of Text_IO.Float_IO.
 @Defn{Ada.Wide_Text_IO.Complex_IO}
 @ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Complex_IO]}
 Implementations shall also provide the generic library package
-Wide_Text_IO.Complex_IO.  Its declaration is obtained from that of
+Wide_Text_IO.Complex_IO. Its declaration is obtained from that of
 Text_IO.Complex_IO by systematically replacing Text_IO by Wide_Text_IO and
 String by Wide_String; the description of its behavior is obtained by
 additionally replacing references to particular characters (commas,
@@ -1162,18 +1162,18 @@ Implementations shall also provide the opposing mode, which is known as the
    On the assumption that the users of an implementation that does not support
    the Numerics Annex have no particular need for numerical performance, such
    an implementation has no obligation to meet any particular requirements in
-   this area.  On the other hand, users of an implementation that does support
+   this area. On the other hand, users of an implementation that does support
    the Numerics Annex are provided with a way of ensuring that their programs
    achieve a known level of numerical performance and that the performance is
-   portable to other such implementations.  The relaxed mode is provided to
+   portable to other such implementations. The relaxed mode is provided to
    allow implementers to offer an efficient but not fully accurate alternative
    in the case that the strict mode entails a time overhead that some users may
-   find excessive.  In some of its areas of impact, the relaxed mode may be
+   find excessive. In some of its areas of impact, the relaxed mode may be
    fully equivalent to the strict mode.
 @end{Reason}
 @begin{ImplNote}
    The relaxed mode may, for example, be used to exploit the implementation of
-   (some of) the elementary functions in hardware, when available.  Such
+   (some of) the elementary functions in hardware, when available. Such
    implementations often do not meet the accuracy requirements of the strict
    mode, or do not meet them over the specified range of parameter values,
    but compensate in other ways that may be important to the user, such as
@@ -1205,14 +1205,14 @@ Ada 83.
 @begin{Intro}
 In the strict mode, the predefined operations of a floating point type shall
 satisfy the accuracy requirements specified here and shall avoid or signal
-overflow in the situations described.  This behavior is presented in terms of
+overflow in the situations described. This behavior is presented in terms of
 a model of floating point arithmetic that builds on the concept of the
 canonical form (see @RefSecNum{Attributes of Floating Point Types}).
 @end{Intro}
 
 @begin{StaticSem}
 Associated with each floating point type is an infinite set of
-model numbers.  The model numbers of a type are used to define the
+model numbers. The model numbers of a type are used to define the
 accuracy requirements that have to be satisfied by certain predefined
 operations of the type; through certain attributes of
 the model numbers, they are also used to explain
@@ -1230,9 +1230,9 @@ to T'Model_Emin.
 @RefSecNum{Model-Oriented Attributes of Floating Point Types}.)
 @begin{Discussion}
    The model is capable of describing the behavior of most existing hardware
-   that has a mantissa-exponent representation.  As applied to a type T, it is
+   that has a mantissa-exponent representation. As applied to a type T, it is
    parameterized by the values of T'Machine_Radix, T'Model_Mantissa,
-   T'Model_Emin, T'Safe_First, and T'Safe_Last.  The values of these
+   T'Model_Emin, T'Safe_First, and T'Safe_Last. The values of these
    attributes are determined by how, and how well, the hardware behaves.
    They in turn determine the set of model numbers and the safe range of the
    type, which figure in the accuracy and range (overflow avoidance)
@@ -1243,14 +1243,14 @@ to T'Model_Emin.
    T'Machine_Mantissa, T'Machine_Emin, T'Base'First, and T'Base'Last,
    respectively, and the
    model numbers in the safe range of the type T will coincide with the machine
-   numbers of the type T.  In less perfect hardware, it is not possible for the
+   numbers of the type T. In less perfect hardware, it is not possible for the
    model-oriented attributes to have these optimal values, since the hardware,
    by definition, and therefore the implementation, cannot conform to the
    stringencies of the resulting model; in this case, the values yielded by the
    model-oriented parameters have to be made more conservative (i.e., have to
    be penalized), with the result that the model numbers are more widely
    separated than the machine numbers, and the safe range is a subrange of the
-   base range.  The implementation will then be able to conform to the
+   base range. The implementation will then be able to conform to the
    requirements of the weaker model defined by the sparser set of model numbers
    and the smaller safe range.
 @end{Discussion}
@@ -1261,7 +1261,7 @@ are model numbers of the type.
 @Defn2{Term=[model interval],
         Sec=[associated with a value]}
 The @i{model interval} of a type T @i{associated with a value} @i{v} is the
-smallest model interval of T that includes @i{v}.  (The model interval
+smallest model interval of T that includes @i{v}. (The model interval
 associated with a model number of a type consists of that number only.)
 @end{StaticSem}
 
@@ -1284,7 +1284,7 @@ and @RefSecNum(Attributes of Floating Point Types)).
 An @i(operand interval) is the model interval, of the type specified for the
 operand of an operation, associated with the value of the operand.
 
-For any predefined arithmetic operation
+@Leading@;For any predefined arithmetic operation
 that yields a result of a
 floating point type T, the required bounds on the result are given by
 a model interval of T (called the @i(result interval)) defined in terms of the
@@ -1350,9 +1350,9 @@ multiplication by a reciprocal.}
 @end{ImplPerm}
 
 @begin{DiffWord83}
-The Ada 9X model numbers of a floating point type that are in the safe range of
-the type are comparable to the Ada 83 safe numbers of the type.  There is no
-analog of the Ada 83 model numbers.  The Ada 9X model numbers, when not
+The Ada 95 model numbers of a floating point type that are in the safe range of
+the type are comparable to the Ada 83 safe numbers of the type. There is no
+analog of the Ada 83 model numbers. The Ada 95 model numbers, when not
 restricted to the safe range, are an infinite set.
 @end{DiffWord83}
 
@@ -1360,14 +1360,14 @@ restricted to the safe range, are an infinite set.
 Giving the model numbers the hardware radix, instead of always a radix of two,
 allows (in conjunction with other changes) some borderline declared
 types to be represented with less precision than in Ada 83 (i.e., with single
-precision, whereas Ada 83 would have used double precision).  Because the lower
+precision, whereas Ada 83 would have used double precision). Because the lower
 precision satisfies the requirements of the model (and did so in Ada 83 as
 well), this change is viewed as a desirable correction of an anomaly, rather
-than a worrisome inconsistency.  (Of course, the wider representation chosen in
-Ada 83 also remains eligible for selection in Ada 9X.)
+than a worrisome inconsistency. (Of course, the wider representation chosen in
+Ada 83 also remains eligible for selection in Ada 95.)
 
 As an example of this phenomenon, assume that Float is represented in single
-precision and that a double precision type is also available.  Also assume
+precision and that a double precision type is also available. Also assume
 hexadecimal hardware with clean properties, for example certain IBM hardware.
 Then,
 @begin{Example}
@@ -1375,15 +1375,15 @@ Then,
 @end{Example}
 
 results in T being represented in double precision in Ada 83 and in single
-precision in Ada 9X.  The latter is intuitively correct; the former is
-counterintuitive.  The reason why the double precision type is used in Ada 83
+precision in Ada 95. The latter is intuitively correct; the former is
+counterintuitive. The reason why the double precision type is used in Ada 83
 is that Float has model and safe numbers (in Ada 83) with 21 binary digits in
 their mantissas, as is required to model the hypothesized
 hexadecimal hardware using a binary
 radix; thus Float'Last, which is not a model number, is slightly outside the
 range of safe numbers of the single precision type, making that type ineligible
 for selection as the representation of T even though it provides adequate
-precision.  In Ada 9X, Float'Last (the same value as before) is a model number
+precision. In Ada 95, Float'Last (the same value as before) is a model number
 and is in the safe range of Float on the hypothesized hardware, making Float
 eligible for the representation of T.
 @end{Inconsistent83}
@@ -1411,16 +1411,16 @@ These definitions add conditions to those in
 @end{Intro}
 
 @begin{StaticSem}
-For every subtype S of a floating point type @i{T}:
+@Leading@keepnext@;For every subtype S of a floating point type @i{T}:
 @begin{Description}
 S'@Attr{Model_Mantissa} @\Yields the number of digits in the mantissa of
 the canonical form of the model numbers of @i{T}
-(see @RefSecNum{Attributes of Floating Point Types}).  The
+(see @RefSecNum{Attributes of Floating Point Types}). The
 value of this attribute shall be greater than or equal to
 @Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + 1, where @RI{d}
-is the requested decimal precision of @i{T}.  In addition, it
+is the requested decimal precision of @i{T}. In addition, it
 shall be less than or equal to the value of
-@i{T}'Machine_Mantissa.  This attribute yields a value of the
+@i{T}'Machine_Mantissa. This attribute yields a value of the
 type @i{universal_integer}.
   @begin{Ramification}
      S'Model_Epsilon, which is defined in terms of S'Model_Mantissa
@@ -1434,9 +1434,9 @@ type @i{universal_integer}.
 
 S'@Attr{Model_Emin} @\Yields the minimum exponent of the canonical form
 of the model numbers of @i{T}
-(see @RefSecNum{Attributes of Floating Point Types}).  The value of this
+(see @RefSecNum{Attributes of Floating Point Types}). The value of this
 attribute shall be greater than or equal to the value of
-@i{T}'Machine_Emin.  This attribute yields a value of the type
+@i{T}'Machine_Emin. This attribute yields a value of the type
 @i{universal_integer}.
   @begin{Ramification}
      S'Model_Small, which is defined in terms of S'Model_Emin
@@ -1454,7 +1454,7 @@ and the @nt{floating_point_definition} includes a
 then the value of this attribute shall be less than or
 equal to @RI{lb}; otherwise, it shall be less than or equal to
 -10.0 @+[4 @Times @RI{d}], where @RI{d} is the requested decimal precision
-of @i{T}.  This attribute yields a value of the type
+of @i{T}. This attribute yields a value of the type
 @i{universal_real}.
 
 S'@Attr{Safe_Last} @\Yields the upper bound of the safe range of @i{T}.
@@ -1467,7 +1467,7 @@ and the @nt{floating_point_definition} includes a
 then the value of this attribute shall be greater than or
 equal to @RI{ub}; otherwise, it shall be greater than or equal
 to 10.0 @+[4 @Times @RI{d}], where d is the requested decimal
-precision of @i{T}.  This attribute yields a value of the type
+precision of @i{T}. This attribute yields a value of the type
 @i{universal_real}.
 
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}S'@Attr{Model} @\Denotes a function (of a parameter @i{X}) whose specification
@@ -1478,11 +1478,11 @@ function yields @i{X}; otherwise, it yields the value obtained
 by rounding or truncating @i{X} to either one of the adjacent
 model numbers of @i{T}.
 @IndexCheck{Overflow_Check}Constraint_Error is raised if the
-resulting model number is outside the safe range of S.  A
+resulting model number is outside the safe range of S. A
 zero result has the sign of @i{X} when S'Signed_Zeros is True.
 @end{Description}
 
-Subject to the constraints given above, the values of S'Model_Mantissa and
+@Leading@;Subject to the constraints given above, the values of S'Model_Mantissa and
 S'Safe_Last are to be maximized, and the values of S'Model_Emin and
 S'Safe_First minimized, by the implementation as follows:
 @begin{Itemize}
@@ -1575,7 +1575,7 @@ have to be evaluated exactly
 @end{Discussion}
 
 The operands of the fixed point adding operators, absolute value,
-and comparisons have the same type.  These operations are required to
+and comparisons have the same type. These operations are required to
 yield exact results, unless they overflow.
 
 Multiplications and divisions are allowed between operands of any two
@@ -1621,11 +1621,10 @@ operators are of a root numeric type) or it is considered to be an operation of
 a floating point type.
 @end{Discussion}
 
-For a fixed point multiplication or division whose (exact) mathematical result
-is @RI{v}, and for the conversion of a value
-@RI{v} to a fixed point type, the perfect
-result set and close result set are defined as
-follows:
+@Leading@;For a fixed point multiplication or division whose (exact)
+mathematical result is @RI{v}, and for the conversion of a value
+@RI{v} to a fixed point type, the perfect result set and close result set
+are defined as follows:
 @begin(itemize)
       If the result type is an ordinary fixed point type with a
       @i(small) of @RI{s},
@@ -1688,7 +1687,7 @@ follows:
 
 The result of a fixed point multiplication or division shall belong either to
 the perfect result set or to the close result set, as described below, if
-overflow does not occur.  In the following
+overflow does not occur. In the following
 cases, if the result type is a fixed point type,
 let @RI{s} be its @i(small);
 otherwise, i.e. when the result type is an integer type,
@@ -1697,11 +1696,11 @@ let @RI{s} be 1.0.
    For a multiplication or division neither of whose operands is of type
    @i(universal_real), let @RI{l} and @RI{r}
    be the @i(smalls) of the left and right
-   operands.  For a multiplication, if (@RI{l} @Times @RI{r}) / @RI{s}
+   operands. For a multiplication, if (@RI{l} @Times @RI{r}) / @RI{s}
    is an integer or the
    reciprocal of an integer (the @i(smalls) are said to be @lquotes@;compatible@rquotes@; in
    this case), the result shall belong to the perfect result set; otherwise, it
-   belongs to the close result set.  For a division, if
+   belongs to the close result set. For a division, if
    @RI{l} / (@RI{r} @Times @RI{s}) is an
    integer or the reciprocal of an integer (i.e., the @i(smalls) are
    compatible), the result shall belong to the perfect result set; otherwise,
@@ -1734,7 +1733,7 @@ fixed point type F by an operand of an integer type I, are also allowed.
 
 
 In these cases, the result has a type of F; explicit conversion of the
-result is never required.  The accuracy required in these cases is the same as
+result is never required. The accuracy required in these cases is the same as
 that required for a multiplication F(P * Q) or a division F(P / Q) obtained by
 interpreting the operand of the integer type to have a fixed point type with a
 @i(small) of 1.0.
@@ -1743,7 +1742,7 @@ The accuracy of the result of a conversion from an integer or fixed point type
 to a fixed point type, or from a fixed point type to an integer
 type, is the same as that of a fixed point multiplication of the source value
 by a fixed point operand having a @i(small) of 1.0 and a value of 1.0, as given
-by the foregoing rules.  The result of a conversion from a floating point type
+by the foregoing rules. The result of a conversion from a floating point type
 to a fixed point type shall belong to the close result set.
 The result of a conversion of a @i(universal_real) operand to a fixed point
 type shall belong to the perfect result set.
@@ -1772,23 +1771,23 @@ Since the values of a fixed point type are now just the integer multiples of
 its @i{small}, the possibility of using extra bits available in the chosen
 representation for extra accuracy rather than for increasing the base range
 would appear to be removed, raising the possibility that some fixed point
-expressions will yield less accurate results than in Ada 83.  However, this is
+expressions will yield less accurate results than in Ada 83. However, this is
 partially offset by the ability of an implementation to choose a smaller
-default @i{small} than before.  Of course, if it does so for a type T then
+default @i{small} than before. Of course, if it does so for a type T then
 T'Small will have a different value than it previously had.
 
 The accuracy requirements in the case of incompatible @i{smalls} are relaxed to
-foster wider support for non-binary @i{smalls}.  If this relaxation is
+foster wider support for non-binary @i{smalls}. If this relaxation is
 exploited for a type that was previously supported, lower accuracy could
 result; however, there is no particular incentive to exploit the relaxation in
 such a case.
 @end{Inconsistent83}
 
 @begin{DiffWord83}
-The fixed point accuracy requirements are now expressed without reference to
+@Leading@;The fixed point accuracy requirements are now expressed without reference to
 model or safe numbers, largely because the full generality of the former model
 was never exploited in the case of fixed point types (particularly in regard to
-operand perturbation).  Although the new formulation in terms of perfect result
+operand perturbation). Although the new formulation in terms of perfect result
 sets and close result sets is still verbose, it can be seen to distill down to
 two cases:
 @begin{Itemize}
@@ -1836,7 +1835,7 @@ its bounds belong to the safe range of @i{EF}.Float_Type; otherwise,
    False.}
 @end{Itemize}
 
-The maximum relative error exhibited by each function is as follows:
+@Leading@;The maximum relative error exhibited by each function is as follows:
 @begin{Itemize}
    2.0 @Times @RI{EF}@R[.Float_Type'Model_Epsilon], in the case of the Sqrt, Sin,
    and Cos functions;
@@ -1876,11 +1875,11 @@ angle threshold.}
 The prescribed results specified in @RefSecNum{Elementary Functions} for certain
 functions at particular parameter values take precedence over the maximum
 relative error bounds; effectively, they narrow to a single value the result
-interval allowed by the maximum relative error bounds.  Additional rules with a
+interval allowed by the maximum relative error bounds. Additional rules with a
 similar effect are given by the table below for the inverse trigonometric
 functions, at particular parameter values for which the mathematical result is
 possibly not a model number of @i{EF}.Float_Type (or is, indeed, even
-transcendental).  In each table entry, the values of the parameters are such
+transcendental). In each table entry, the values of the parameters are such
 that the result lies on the axis between two quadrants; the corresponding
 accuracy rule, which takes precedence over the maximum relative error bounds,
 is that the result interval is the model interval of @i{EF}.Float_Type
@@ -1912,11 +1911,11 @@ to spill over into a quadrant adjacent to the one corresponding to the
 principal branch, as given in @RefSecNum{Elementary Functions}, is limited.
 The rule is that the result belongs to the smallest model interval of
 @i{EF}.Float_Type that contains both boundaries of the quadrant corresponding
-to the principal branch.  This rule also takes precedence over the maximum
+to the principal branch. This rule also takes precedence over the maximum
 relative error bounds, effectively narrowing the result interval allowed by
 them.
 
-Finally, the following specifications also take precedence over the maximum
+@Leading@;Finally, the following specifications also take precedence over the maximum
 relative error bounds:
 @begin{Itemize}
    The absolute value of the result of the Sin, Cos, and Tanh functions never
@@ -1933,13 +1932,13 @@ relative error bounds:
 The versions of the forward trigonometric functions without a Cycle parameter
 should not be implemented by calling the corresponding version with a Cycle
 parameter of 2.0*Numerics.Pi, since this will not provide the required accuracy
-in some portions of the domain.  For the same reason, the version of Log
+in some portions of the domain. For the same reason, the version of Log
 without a Base parameter should not be implemented by calling the corresponding
 version with a Base parameter of Numerics.e.
 @end{ImplAdvice}
 
 @begin{DiffWord83}
-The semantics of Numerics.Generic_Elementary_Functions differs from
+@Leading@;The semantics of Numerics.Generic_Elementary_Functions differs from
 Generic_Elementary_Functions as defined in ISO/IEC DIS 11430 (for Ada 83) in
 the following ways related to the accuracy specified for strict mode:
 @begin{Itemize}
@@ -1947,7 +1946,7 @@ the following ways related to the accuracy specified for strict mode:
    the Base'Epsilon attribute.
 
    The accuracy requirements are expressed in terms of result intervals that
-   are model intervals.  On the one hand, this facilitates the description of
+   are model intervals. On the one hand, this facilitates the description of
    the required results in the presence of underflow; on the other hand, it
    slightly relaxes the requirements expressed in ISO/IEC DIS 11430.
 @end{Itemize}
@@ -1973,21 +1972,21 @@ much longer periods are desirable but not required.
 
 The implementations of Numerics.Float_Random.Random and
 Numerics.Discrete_Random.Random shall pass at least 85% of the individual
-trials in a suite of statistical tests.  For Numerics.Float_Random, the tests
+trials in a suite of statistical tests. For Numerics.Float_Random, the tests
 are applied directly to the floating point values generated (i.e., they are not
 converted to integers first), while for Numerics.Discrete_Random they are
-applied to the generated values of various discrete types.  Each test suite
+applied to the generated values of various discrete types. Each test suite
 performs 6 different tests, with each test repeated 10 times, yielding a total
-of 60 individual trials.  An individual trial is deemed to pass if the
+of 60 individual trials. An individual trial is deemed to pass if the
 chi-square value (or other statistic) calculated for the observed counts or
 distribution falls within the range of values corresponding to the 2.5 and 97.5
 percentage points for the relevant degrees of freedom (i.e., it shall be
-neither too high nor too low).  For the purpose of determining the degrees of
+neither too high nor too low). For the purpose of determining the degrees of
 freedom, measurement categories are combined whenever the expected counts are
 fewer than 5.
 @begin{ImplNote}
    In the floating point random number test suite, the generator is reset to a
-   time-dependent state at the beginning of the run.  The test suite
+   time-dependent state at the beginning of the run. The test suite
    incorporates the following tests, adapted from D. E. Knuth, @i{The Art of
    Computer Programming, vol. 2: Seminumerical Algorithms.}  In the
    descriptions below, the given number of degrees of freedom is the number
@@ -2000,57 +1999,57 @@ fewer than 5.
       @RI{K} is chosen randomly between 4 and 25 for each repetition of the
       test, along with the boundaries of the subintervals (subject to the
       constraint that at least 2 of the subintervals have a width of 0.001 or
-      more).  5000 random floating point numbers are generated.  The counts of
+      more). 5000 random floating point numbers are generated. The counts of
       random numbers falling into each subinterval are tallied and compared
       with the expected counts, which are proportional to the widths of the
-      subintervals.  The number of degrees of freedom for the chi-square test
+      subintervals. The number of degrees of freedom for the chi-square test
       is @RI{K}-1.
 
-      Gap Test.  The bounds of a range @RI{A} .. @RI{B}, with
+      Gap Test. The bounds of a range @RI{A} .. @RI{B}, with
       0.0 @leq @RI{A} @Lt @RI{B} @leq 1.0, are chosen randomly for each repetition
       of the test, subject to the constraint that 0.2 @leq @RI{B}-@RI{A} @leq 0.6.
       Random floating point numbers are generated until 5000 falling into the
-      range @RI{A} .. @RI{B} have been encountered.  Each of these 5000 is
+      range @RI{A} .. @RI{B} have been encountered. Each of these 5000 is
       preceded by a @lquotes@;gap@rquotes@; (of length greater than or equal to 0) of
       consecutive random numbers not falling into the range
-      @RI{A} .. @RI{B}.  The counts of gaps of each length from 0 to 15,
+      @RI{A} .. @RI{B}. The counts of gaps of each length from 0 to 15,
       and of all lengths greater than 15 lumped together, are tallied and
-      compared with the expected counts.  Let @RI{P} @Thin = @Thin @RI{B}-@RI{A}.  The
+      compared with the expected counts. Let @RI{P} @Thin = @Thin @RI{B}-@RI{A}. The
       probability that a gap has a length of @RI{L} is (1-@RI{P}) @+[@RI{L}]
       @Times @RI{P} for @RI{L} @leq 15, while the probability that a gap has a
-      length of 16 or more is (1-@RI{P}) @+[16].  The number of degrees of
+      length of 16 or more is (1-@RI{P}) @+[16]. The number of degrees of
       freedom for the chi-square test is 16.
 
-      Permutation Test.  5000 tuples of 4 different random floating point
-      numbers are generated.  (An entire 4-tuple is discarded in the unlikely
-      event that it contains any two exactly equal components.)  The counts of
+      Permutation Test. 5000 tuples of 4 different random floating point
+      numbers are generated. (An entire 4-tuple is discarded in the unlikely
+      event that it contains any two exactly equal components.) The counts of
       each of the 4! @Thin = @Thin 24 possible relative orderings of the
       components of the 4-tuples are tallied and compared with the expected
-      counts.  Each of the possible relative orderings has an equal
-      probability.  The number of degrees of freedom for the chi-square test
+      counts. Each of the possible relative orderings has an equal
+      probability. The number of degrees of freedom for the chi-square test
       is 23.
 
-      Increasing-Runs Test.  Random floating point numbers are generated until
-      5000 increasing runs have been observed.  An @lquotes@;increasing run@rquotes@; is a
+      Increasing-Runs Test. Random floating point numbers are generated until
+      5000 increasing runs have been observed. An @lquotes@;increasing run@rquotes@; is a
       sequence of random numbers in strictly increasing order; it is followed
       by a random number that is strictly smaller than the preceding random
-      number.  (A run under construction is entirely discarded in the unlikely
+      number. (A run under construction is entirely discarded in the unlikely
       event that one random number is followed immediately by an exactly equal
-      random number.)  The decreasing random number that follows an increasing
-      run is discarded and not included with the next increasing run.  The
+      random number.) The decreasing random number that follows an increasing
+      run is discarded and not included with the next increasing run. The
       counts of increasing runs of each length from 1 to 4, and of all lengths
       greater than 4 lumped together, are tallied and compared with the
-      expected counts.  The probability that an increasing run has a length of
+      expected counts. The probability that an increasing run has a length of
       @RI{L} is 1/@RI{L}! @Thin - @Thin 1/(@RI{L}+1)! for @RI{L} @leq 4, while
       the probability that an increasing run has a length of 5 or more is
-      1/5!.  The number of degrees of freedom for the chi-square test
+      1/5!. The number of degrees of freedom for the chi-square test
       is 4.
 
-      Decreasing-Runs Test.  The test is similar to the Increasing Runs Test,
+      Decreasing-Runs Test. The test is similar to the Increasing Runs Test,
       but with decreasing runs.
 
-      Maximum-of-@RI{t} Test (with @RI{t} @Thin = @Thin 5).  5000 tuples of
-      5 random floating point numbers are generated.  The maximum of the
+      Maximum-of-@RI{t} Test (with @RI{t} @Thin = @Thin 5). 5000 tuples of
+      5 random floating point numbers are generated. The maximum of the
       components of each 5-tuple is determined and raised to the 5th power.
       The uniformity of the resulting values over the range 0.0 .. 1.0 is
       tested as in the Proportional Distribution Test.
@@ -2058,61 +2057,61 @@ fewer than 5.
 @end{ImplNote}
 @begin{ImplNote}
    In the discrete random number test suite, Numerics.Discrete_Random is
-   instantiated as described below.  The generator is reset to a time-dependent
-   state after each instantiation.  The test suite incorporates the following
-   tests, adapted from D. E. Knuth (@i{op. cit.}) and other sources.  The given
+   instantiated as described below. The generator is reset to a time-dependent
+   state after each instantiation. The test suite incorporates the following
+   tests, adapted from D. E. Knuth (@i{op. cit.}) and other sources. The given
    number of degrees of freedom for the chi-square test is reduced by any
    necessary combination of measurement categories with small expected counts,
    as described above.
    @begin{Itemize}
-      Equidistribution Test.  In each repetition of the test, a number @RI{R}
+      Equidistribution Test. In each repetition of the test, a number @RI{R}
       between 2 and 30 is chosen randomly, and Numerics.Discrete_Random is
-      instantiated with an integer subtype whose range is 1 .. @RI{R}.  5000
-      integers are generated randomly from this range.  The counts of
+      instantiated with an integer subtype whose range is 1 .. @RI{R}. 5000
+      integers are generated randomly from this range. The counts of
       occurrences of each integer in the range are tallied and compared with
-      the expected counts, which have equal probabilities.  The number of
+      the expected counts, which have equal probabilities. The number of
       degrees of freedom for the chi-square test is @RI{R}-1.
 
-      Simplified Poker Test.  Numerics.Discrete_Random is instantiated once
+      Simplified Poker Test. Numerics.Discrete_Random is instantiated once
       with an enumeration subtype representing the 13 denominations (Two
       through Ten, Jack, Queen, King, and Ace) of an infinite deck of playing
-      cards.  2000 @lquotes@;poker@rquotes@; hands (5-tuples of values of this subtype) are
-      generated randomly.  The counts of hands containing exactly @RI{K}
+      cards. 2000 @lquotes@;poker@rquotes@; hands (5-tuples of values of this subtype) are
+      generated randomly. The counts of hands containing exactly @RI{K}
       different denominations (1 @leq @RI{K} @leq 5) are tallied and compared
-      with the expected counts.  The probability that a hand contains exactly
-      @RI{K} different denominations is given by a formula in Knuth.  The
+      with the expected counts. The probability that a hand contains exactly
+      @RI{K} different denominations is given by a formula in Knuth. The
       number of degrees of freedom for the chi-square test is 4.
 
-      Coupon Collector's Test.  Numerics.Discrete_Random is instantiated in
+      Coupon Collector's Test. Numerics.Discrete_Random is instantiated in
       each repetition of the test with an integer subtype whose range is
       1 .. @RI{R}, where @RI{R} varies systematically from 2 to 11.
       Integers are generated randomly from this range until each value in the
       range has occurred, and the number @RI{K} of integers generated is
-      recorded.  This constitutes a @lquotes@;coupon collector's segment@rquotes@; of length
-      @RI{K}.  2000 such segments are generated.  The counts of segments of
+      recorded. This constitutes a @lquotes@;coupon collector's segment@rquotes@; of length
+      @RI{K}. 2000 such segments are generated. The counts of segments of
       each length from @RI{R} to @RI{R}+29, and of all lengths greater than
       @RI{R}+29 lumped together, are tallied and compared with the expected
-      counts.  The probability that a segment has any given length is given by
-      formulas in Knuth.  The number of degrees of freedom for the chi-square
+      counts. The probability that a segment has any given length is given by
+      formulas in Knuth. The number of degrees of freedom for the chi-square
       test is 30.
 
-      Craps Test (Lengths of Games).  Numerics.Discrete_Random is instantiated
+      Craps Test (Lengths of Games). Numerics.Discrete_Random is instantiated
       once with an integer subtype whose range is 1 .. 6 (representing the six
-      numbers on a die).  5000 craps games are played, and their lengths are
-      recorded.  (The length of a craps game is the number of rolls of the pair
+      numbers on a die). 5000 craps games are played, and their lengths are
+      recorded. (The length of a craps game is the number of rolls of the pair
       of dice required to produce a win or a loss.
       A game is won on the first roll if
-      the dice show 7 or 11; it is lost if they show 2, 3, or 12.  If the dice
+      the dice show 7 or 11; it is lost if they show 2, 3, or 12. If the dice
       show some other sum on the first roll, it is called the @i{point}, and
       the game is won if and only if the point is rolled again before a 7 is
-      rolled.)  The counts of games of each length from 1 to 18, and of all
+      rolled.) The counts of games of each length from 1 to 18, and of all
       lengths greater than 18 lumped together, are tallied and compared with
-      the expected counts.  For 2 @leq @RI{S} @leq 12, let
+      the expected counts. For 2 @leq @RI{S} @leq 12, let
       @RI{D} @-{@RI{S}} be the probability that a roll of a pair of dice shows
       the sum @RI{S}, and let
       @RI{Q} @-[@RI{S}](@RI{L}) @Thin = @Thin @RI{D} @-[@RI{S}] @Times
       (1 @Thin - @Thin (@RI{D} @-[@RI{S}] @Thin + @Thin @RI{D} @-[7])) @+[@RI{L}-2] @Times
-      (@RI{D} @-[@RI{S}] @Thin + @Thin @RI{D} @-[7]).  Then, the probability that a
+      (@RI{D} @-[@RI{S}] @Thin + @Thin @RI{D} @-[7]). Then, the probability that a
       game has a length of 1 is @RI{D} @-[7] @Thin +
       @Thin @RI{D} @-[11] @Thin + @Thin @RI{D} @-[2] @Thin +
       @Thin @RI{D} @-[3] @Thin + @Thin @RI{D} @-[12]
@@ -2120,29 +2119,29 @@ fewer than 5.
       @RI{L} is @RI{Q} @-[4](@RI{L}) @Thin + @Thin
       @RI{Q} @-[5](@RI{L}) @Thin + @Thin @RI{Q} @-[6](@RI{L}) @Thin + @Thin @RI{Q} @-[8](@RI{L})
       @Thin + @Thin @RI{Q} @-[9](@RI{L}) @Thin + @Thin @RI{Q}
-      @-[10](@RI{L}).  The number of degrees of freedom for the chi-square test
+      @-[10](@RI{L}). The number of degrees of freedom for the chi-square test
       is 18.
 
-      Craps Test (Lengths of Passes).  This test is similar to the last, but
-      enough craps games are played for 3000 losses to occur.  A string of wins
+      Craps Test (Lengths of Passes). This test is similar to the last, but
+      enough craps games are played for 3000 losses to occur. A string of wins
       followed by a loss is called a @i{pass}, and its length is the
-      number of wins preceding the loss.  The counts of passes of each length
+      number of wins preceding the loss. The counts of passes of each length
       from 0 to 7, and of all lengths greater than 7 lumped together, are
-      tallied and compared with the expected counts.  For @RI{L} @geq 0, the
+      tallied and compared with the expected counts. For @RI{L} @geq 0, the
       probability that a pass has a length of @RI{L} is
       @RI{W} @+[@RI{L}] @Times (1-@RI{W}), where @RI{W}, the probability that a game
-      ends in a win, is 244.0/495.0.  The number of degrees of freedom for the
+      ends in a win, is 244.0/495.0. The number of degrees of freedom for the
       chi-square test is 8.
 
-      Collision Test.  Numerics.Discrete_Random is instantiated once with an
-      integer or enumeration type representing binary bits.  15 successive
+      Collision Test. Numerics.Discrete_Random is instantiated once with an
+      integer or enumeration type representing binary bits. 15 successive
       calls on the Random function are used to obtain the bits of a 15-bit
-      binary integer between 0 and 32767.  3000 such integers are generated,
+      binary integer between 0 and 32767. 3000 such integers are generated,
       and the number of collisions (integers previously generated) is counted
-      and compared with the expected count.  A chi-square test is not used to
+      and compared with the expected count. A chi-square test is not used to
       assess the number of collisions; rather, the limits on the number of
       collisions, corresponding to the 2.5 and 97.5 percentage points, are
-      (from formulas in Knuth) 112 and 154.  The test passes if and only if the
+      (from formulas in Knuth) 112 and 154. The test passes if and only if the
       number of collisions is in this range.
    @end{Itemize}
 @end{ImplNote}
@@ -2168,7 +2167,7 @@ When an exception is not raised, each component of the result of evaluating a
 complex function of such an instance, or of an instance of
 Numerics.Generic_Complex_Elementary_Functions obtained by instantiating the
 latter with @i{CT} (i.e., a function that yields a value of subtype
-@i{CT}.Complex), also belongs to a @i{result interval}.  The result intervals
+@i{CT}.Complex), also belongs to a @i{result interval}. The result intervals
 for the components of the result are either defined by a
 @i{maximum relative error} bound or by a @i{maximum box error} bound.
 @Defn2{Term=[maximum relative error],
@@ -2203,15 +2202,15 @@ to the given maximum box error.
 @end{Reason}
 @begin{Ramification}
    The components of a complex function that exhibits bounded relative error in
-   each component have to have the correct sign.  In contrast, one of
+   each component have to have the correct sign. In contrast, one of
    the components of a complex function that exhibits bounded box error may
    have the wrong sign, since the dimensions of the box containing the result
    are proportional to the modulus of the mathematical result and not to either
-   component of the mathematical result individually.  Thus, for example, the
+   component of the mathematical result individually. Thus, for example, the
    box containing the computed result of a complex function whose mathematical
    result has a large modulus but lies very close to the imaginary axis might
    well straddle that axis, allowing the real component of the computed result
-   to have the wrong sign.  In this case, the distance between the computed
+   to have the wrong sign. In this case, the distance between the computed
    result and the mathematical result is, nevertheless, a small fraction of the
    modulus of the mathematical result.
 @end{Ramification}
@@ -2260,7 +2259,7 @@ inverse trigonometric@\complex@\max. rel. error@\14.0@Last
 inverse hyperbolic@\complex@\max. rel. error@\14.0>]
 
 The maximum relative error given above applies throughout the domain of the
-Compose_From_Polar function when the Cycle parameter is specified.  When the
+Compose_From_Polar function when the Cycle parameter is specified. When the
 Cycle parameter is omitted, the maximum relative error applies only when the
 absolute value of the parameter Argument is less than or equal to the angle
 threshold (see @RefSecNum{Accuracy Requirements for the Elementary Functions}).
@@ -2269,23 +2268,23 @@ functions, the maximum relative error given above likewise applies only when
 the absolute value of the imaginary (resp., real) component of the parameter X
 (or the absolute value of the parameter itself, in the case of the Exp function
 with a parameter of pure-imaginary type) is less than or equal to the angle
-threshold.  For larger angles, the accuracy is
+threshold. For larger angles, the accuracy is
 implementation defined.
 @ImplDef{The accuracy of certain complex arithmetic operations and certain
 complex elementary functions for parameters (or components thereof) beyond
 the angle threshold.}
 
-The prescribed results specified in @RefSecNum{Complex Elementary Functions}
-for certain functions at particular parameter values
-take precedence over the error bounds;
+@Leading@;The prescribed results specified in
+@RefSecNum{Complex Elementary Functions} for certain functions at particular
+parameter values take precedence over the error bounds;
 effectively, they narrow to a single value the result interval allowed by
-the error bounds for a component of the result.  Additional rules with a similar
+the error bounds for a component of the result. Additional rules with a similar
 effect are given below for certain inverse trigonometric and inverse hyperbolic
 functions, at particular parameter values for which a component of the
-mathematical result is transcendental.  In each case, the accuracy rule,
+mathematical result is transcendental. In each case, the accuracy rule,
 which takes precedence over the error bounds, is that the result interval
 for the stated result component is the model interval of @i{CT}.Real
-associated with the component's exact mathematical value.  The cases in
+associated with the component's exact mathematical value. The cases in
 question are as follows:
 @begin{Itemize}
    When the parameter X has the value zero, the real (resp., imaginary)
@@ -2312,9 +2311,9 @@ question are as follows:
 The amount by which a component of the result of an inverse trigonometric or
 inverse hyperbolic function is allowed to spill over into a quadrant adjacent
 to the one corresponding to the principal branch, as given in
-@RefSecNum{Complex Elementary Functions}, is limited.  The rule is that the
+@RefSecNum{Complex Elementary Functions}, is limited. The rule is that the
 result belongs to the smallest model interval of @i{CT}.Real that contains both
-boundaries of the quadrant corresponding to the principal branch.  This rule
+boundaries of the quadrant corresponding to the principal branch. This rule
 also takes precedence to the maximum error bounds, effectively narrowing the
 result interval allowed by them.
 

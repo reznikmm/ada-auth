@@ -1,15 +1,15 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.14 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
+@Comment{ $Revision: 1.15 $ $Date: 2000/08/12 00:40:17 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:44 $}
+@Comment{$Date: 2000/08/12 00:40:17 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
-@Defn{safety-critical systems}
+@Leading@Defn{safety-critical systems}
 @Defn{secure systems}
 This Annex addresses requirements for systems that are safety critical
-or have security constraints.  It provides facilities and specifies
+or have security constraints. It provides facilities and specifies
 documentation requirements that relate to several needs:
 @begin{Itemize}
 Understanding program execution;
@@ -50,7 +50,7 @@ the documentation is @lquotes@;adequate@rquotes@;.
 @end{Notes}
 
 @begin{Extend83}
-This Annex is new to Ada 9X.
+This Annex is new to Ada 95.
 @end{Extend83}
 
 @LabeledClause{Pragma Normalize_Scalars}
@@ -68,7 +68,7 @@ Constraint_Error.
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Normalize_Scalars is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Normalize_Scalars is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Normalize_Scalars);'
@@ -78,7 +78,7 @@ The form of a @nt{pragma} Normalize_Scalars is as follows:
 @PDefn2{Term=[configuration pragma], Sec=(Normalize_Scalars)}
 @PDefn2{Term=[pragma, configuration], Sec=(Normalize_Scalars)}
 Pragma Normalize_Scalars is a configuration pragma.
-It  applies to all
+It applies to all
 @nt[compilation_unit]s included in a partition.
 @end{LinkTime}
 
@@ -128,8 +128,8 @@ In addition, it can be detected by the Valid attribute.
 @begin{Notes}
 The initialization requirement applies to
 uninitialized scalar objects that are subcomponents of composite
-objects, to allocated objects, and to stand-alone objects.  It also
-applies to scalar @key{out} parameters.  Scalar
+objects, to allocated objects, and to stand-alone objects. It also
+applies to scalar @key{out} parameters. Scalar
 subcomponents of composite @key{out} parameters are initialized to the
 corresponding part of the actual, by virtue of
 @RefSecNum(Parameter Associations).
@@ -140,7 +140,7 @@ since initialization of an imported object is performed
 solely by the foreign language environment
  (see @RefSecNum[Interfacing Pragmas]).
 
-The use of pragma Normalize_Scalars  in conjunction with
+The use of pragma Normalize_Scalars in conjunction with
 Pragma Restrictions(No_Exceptions) may result in erroneous execution
 (see @RefSecNum[Safety and Security Restrictions]).
 @begin{Discussion}
@@ -160,8 +160,8 @@ arbitrary store location, having unpredictable effects.
 @PDefn{unspecified}
 The implementation shall document the range of effects for each
 situation that the language rules identify as either a
-bounded error or  as having an unspecified effect.
-If the implementation can constrain the effects of  erroneous
+bounded error or as having an unspecified effect.
+If the implementation can constrain the effects of erroneous
 execution for a given construct,
 then it shall document such constraints.
 @Redundant[The documentation might be provided either
@@ -176,7 +176,7 @@ See also @RefSecNum(Conformity of an Implementation with the Standard), and
 @begin{Notes}
 Among the situations to be
 documented are the conventions
-chosen for parameter passing,  the methods used for the management of
+chosen for parameter passing, the methods used for the management of
 run-time storage, and the method used to evaluate numeric expressions if
 this involves extended range or extra precision.
 @begin{Discussion}
@@ -213,7 +213,7 @@ pragmas Reviewable and Inspection_Point.
 
 @LabeledSubClause{Pragma Reviewable}
 @begin{Intro}
-This pragma  directs the implementation to
+This pragma directs the implementation to
 provide information to
 facilitate analysis and review of a program's
 object code, in particular to allow determination of
@@ -231,7 +231,7 @@ of these properties can be easily measured.
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Reviewable is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Reviewable is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Reviewable);'
@@ -241,12 +241,12 @@ The form of a @nt{pragma} Reviewable is as follows:
 @PDefn2{Term=[configuration pragma], Sec=(Reviewable)}
 @PDefn2{Term=[pragma, configuration], Sec=(Reviewable)}
 Pragma Reviewable is a configuration pragma.
-It  applies to all
+It applies to all
 @nt[compilation_unit]s included in a partition.
 @end{LinkTime}
 
 @begin{ImplReq}
-The implementation shall provide the following
+@Leading@;The implementation shall provide the following
 information for any compilation unit to which such a
 pragma applies:
 @begin{Discussion}
@@ -283,8 +283,8 @@ situations. Of course, such events could well indicate a programmer error.
 
 @end{Discussion}
 
-For each reference to a scalar object, an identification of  the
-reference as either  @lquotes@;known to be initialized,@rquotes@; or @lquotes@;possibly uninitialized,@rquotes@;
+For each reference to a scalar object, an identification of the
+reference as either @lquotes@;known to be initialized,@rquotes@; or @lquotes@;possibly uninitialized,@rquotes@;
 independent of whether pragma Normalize_Scalars applies;
 @begin{Discussion}
 
@@ -309,7 +309,7 @@ particular time.
 
 @end{Discussion}
 
-An object code listing, including:
+@Leading@Keepnext@;An object code listing, including:
 @begin{itemize}
 Machine instructions, with relative offsets;
 @begin{Discussion}
@@ -370,9 +370,11 @@ which the internal checks for stack overflow are suppressed (perhaps by
 @end{Discussion}
 @end{itemize}
 
-The implementation shall provide  the following
-information  for any partition to which the
+@begin{Wide}
+@Leading@;The implementation shall provide the following
+information for any partition to which the
 pragma applies:
+@end{Wide}
 @begin{Itemize}
 An object code listing of the entire partition, including
 initialization and finalization code as well as
@@ -412,7 +414,7 @@ objects referred to above.
 @end{Discussion}
 @begin{ImplAdvice}
 The implementation should provide the above
-information in both  a human-readable
+information in both a human-readable
 and machine-readable form,
 and should document the latter so as to ease further
 processing by automated tools.
@@ -437,7 +439,7 @@ even in the absence of @nt[pragma] Reviewable
 
 @begin[discussion]
 There might be some interactions between pragma Reviewable and compiler
-optimizations.  For example,
+optimizations. For example,
 an implementation may disable some
 optimizations when pragma Reviewable is in force
 if it would be overly complicated to
@@ -463,7 +465,7 @@ debuggers.
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Inspection_Point is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Inspection_Point is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Inspection_Point)[(@SynI{object_}@Syn2{name} {, @SynI{object_}@Syn2{name}})];'
@@ -553,8 +555,8 @@ implicit reference to each of its inspectable objects.
 
 Inspection points are useful in maintaining a correspondence between the
 state of the program in source code terms, and the machine state during
-the program's execution.  Assertions about the values of program objects
-can be tested in machine terms at inspection points.  Object code between
+the program's execution. Assertions about the values of program objects
+can be tested in machine terms at inspection points. Object code between
 inspection points can be processed by automated tools to
 verify programs mechanically.
 @begin{Discussion}
@@ -610,19 +612,21 @@ Max_Asynchronous_Select_Nesting is 0, and
 The following additional restrictions apply in this Annex.
 
 
-@b{Tasking-related restriction:}
+@leading@b{Tasking-related restriction:}
 @begin{Description}
 @Defn2{Term=[Restrictions],Sec=(No_Protected_Types)}No_Protected_Types @\There are no declarations of protected types or
 protected objects.
 
-@b{Memory-management related restrictions:}
+@begin{Wide}
+@leading@b{Memory-management related restrictions:}
+@end{Wide}
 
 @Defn2{Term=[Restrictions],Sec=(No_Allocators)}No_Allocators @\There are no occurrences of an @nt{allocator}.
 
 @Defn2{Term=[Restrictions],Sec=(No_Local_Allocators)}No_Local_Allocators @\@nt{Allocator}s are prohibited in subprograms,
 generic subprograms,
 tasks, and entry bodies; instantiations of generic packages are
-also prohibited in these  contexts.
+also prohibited in these contexts.
 @begin[Ramification]
 Thus @nt{allocator}s are permitted only in expressions whose
 evaluation can only be performed before the main subprogram is invoked.
@@ -659,7 +663,9 @@ call site.
 
 @end{Discussion}
 
-@b{Exception-related restriction:}
+@begin{Wide}
+@leading@b{Exception-related restriction:}
+@end{Wide}
 
 @Defn2{Term=[Restrictions],Sec=(No_Exceptions)}No_Exceptions @\@nt{Raise_statement}s and @nt{exception_handler}s are not allowed.
 No language-defined run-time checks are generated;
@@ -678,7 +684,9 @@ programming at the assembler level.
 
 @end{Discussion}
 
-@b{Other restrictions:}
+@begin{Wide}
+@leading@b{Other restrictions:}
+@end{Wide}
 
 @Defn2{Term=[Restrictions],Sec=(No_Floating_Point)}No_Floating_Point @\Uses of predefined floating point types and
 operations, and declarations of new floating point types, are
@@ -735,7 +743,7 @@ subtype T.
 
 @Defn2{Term=[Restrictions],Sec=(No_IO)}No_IO @\Semantic dependence on
 any of the library units
-Sequential_IO, Direct_IO, Text_IO,  Wide_Text_IO, or Stream_IO
+Sequential_IO, Direct_IO, Text_IO, Wide_Text_IO, or Stream_IO
 is not allowed.
 @begin{Discussion}
 
@@ -782,7 +790,7 @@ in Ada.
 @begin{Discussion}
 
 The restrictions that are applied to the partition are also applied to the
-run-time system.  For example, if No_Floating_Point is specified,
+run-time system. For example, if No_Floating_Point is specified,
 then an implementation that uses floating point for implementing the delay
 statement (say) would require that No_Floating_Point is
 only used in conjunction with No_Delay. It is clearly important that
@@ -792,7 +800,7 @@ not used, even implicitly (for input-output, say).
 An implementation of tasking could be produced based upon a run-time
 system written in Ada in which the rendezvous was controlled by
 protected types. In this case, No_Protected_Types could only be used in
-conjunction with Max_Task_Entries=0.  Other implementation dependencies
+conjunction with Max_Task_Entries=0. Other implementation dependencies
 could be envisaged.
 
 If the run-time system is not written in Ada, then the wording needs to be

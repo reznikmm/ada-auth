@@ -34,10 +34,10 @@ I probably ought to add a style just for this purpose)
 @end{WithoutParanum}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/08/08 04:35:30 $}
+@Comment{$Date: 2000/08/12 00:40:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -172,6 +172,12 @@ follows from the other rules of the language.
 @begin{ImplNote}
 A hint about how to implement a feature, or a particular potential
 pitfall that an implementer needs to be aware of.
+
+@b{Change:} Change annotations are not used in this version. Changes from
+previous versions have been removed. Changes in this version are marked with
+versioned paragraph numbers, as explained in the
+@lquotes@;Corrigendum Changes@rquotes@; clause of the
+@lquotes@;Introduction@rquotes@;.
 @end{ImplNote}
 
 @begin{Discussion}
@@ -426,11 +432,11 @@ and does not appear in the RM95.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Defn2{Term=[syntax], Sec=(under @SyntaxTitle heading)}
-@Defn2{Term=[grammar], Sec=(under @SyntaxTitle heading)}
-@Defn2{Term=[context free grammar], Sec=(under @SyntaxTitle heading)}
-@Defn2{Term=[BNF (Backus-Naur Form)], Sec=(under @SyntaxTitle heading)}
-@Defn2{Term=[Backus-Naur Form (BNF)], Sec=(under @SyntaxTitle heading)}
+@Defn2{Term=[syntax], Sec=(under Syntax heading)}
+@Defn2{Term=[grammar], Sec=(under Syntax heading)}
+@Defn2{Term=[context free grammar], Sec=(under Syntax heading)}
+@Defn2{Term=[BNF (Backus-Naur Form)], Sec=(under Syntax heading)}
+@Defn2{Term=[Backus-Naur Form (BNF)], Sec=(under Syntax heading)}
 Syntax rules (indented).
 @end{SyntaxText}
 @end{Syntax}
@@ -1528,14 +1534,23 @@ ISO/IEC 8859-1:1987,
 ISO/IEC 9899:1990,
 @i{Programming languages @em C.}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001]}
 @Defn{ISO/IEC 10646-1:1993}
 @Defn{10646-1:1993, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(16-bit)}
 ISO/IEC 10646-1:1993,
 @i{Information technology @em Universal Multiple-Octet
     Coded Character Set (UCS) @em Part 1: Architecture and Basic
-    Multilingual Plane.}
+    Multilingual Plane}@Chg{New=[, supplemented by Technical Corrigendum
+    1:1996.], Old=[.]}
 
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0001]}
+@Chg{New=[The Technical Corrigendum 1:1996 is needed so that character
+codes C6 and E6 (Latin Letter AE) are considered letters. These were named
+Latin Ligature AE in the original 1993 version, which would exclude them
+from being letters as defined in @RefSec{Character Set}], Old=[]}
+@end{Reason}
 
 @begin{Discussion}
 @Defn{POSIX}
@@ -1576,6 +1591,7 @@ is marked like this.
 @end{Intro}
 
 @begin{Discussion}
+@ChgRef{Version=[1],Kind=[Revised]}
 Here are some AARM-only definitions:
 @Defn{Ada Rapporteur Group (ARG)}
 @Defn(ARG)
