@@ -110,6 +110,7 @@ package body ARM_HTML is
     --			can't misinterpret these documents.
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
     -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
+    -- 12/15/04 - RLB - Added wider columns.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.

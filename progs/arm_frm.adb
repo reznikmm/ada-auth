@@ -162,6 +162,9 @@ package body ARM_Format is
     --			text.
     --		- RLB - Implemented attribute adding in Change_Attribute.
     -- 12/13/04 - RLB - Fixed problems in the new change commands.
+    -- 12/15/04 - RLB - Fixed so a change is not left open across
+    --			an End_Hang_Item.
+    --		- RLB - Fixed glitches with deleted paragraphs.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -5892,7 +5895,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
 				    when ARM_Format.New_Only =>
 				        if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
-				           ARM_Database.Deleted) then
+				           ARM_Database.Deleted) or else
+				           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				           ARM_Database.Deleted_Inserted_Number) then
 					    -- In a deleted paragraph, call Check_Paragraph
 					    -- to trigger the "deleted paragraph" message.
 					    -- (Otherwise, this never happens.)
@@ -5907,7 +5912,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Format_Object.Changes = ARM_Format.Changes_Only then
 					    -- Just normal output text.
 				            if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
-				               ARM_Database.Deleted) then
+				               ARM_Database.Deleted) or else
+				               ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				               ARM_Database.Deleted_Inserted_Number) then
 					        -- In a deleted paragraph, call Check_Paragraph
 					        -- to trigger the "deleted paragraph" message.
 					        -- (Otherwise, this never happens.)
@@ -6071,6 +6078,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			   Close_Ch /= ' ' then
 			    -- Generate an insertion, there is a Text parameter.
 
+			    -- Note: We assume that this is not used in deleted text.
+
 			    -- Stack the parameter so we can process the end:
 			    Set_Nesting_for_Parameter
 			        (Command => Change_Added_Param,
@@ -6098,15 +6107,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					Format_Object.No_Prefix := NoPrefix;
 					Format_Object.Keep_with_Next := KeepNext;
 				        Format_Object.Space_After := Space_After;
-
-				        if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
-				           ARM_Database.Deleted) then
-					    -- In a deleted paragraph, call Check_Paragraph
-					    -- to trigger the "deleted paragraph" message.
-					    -- (Otherwise, this never happens.)
-				            Check_Paragraph;
-				        -- else null; -- Nothing special to do.
-				        end if;
 				    when ARM_Format.Changes_Only |
 					 ARM_Format.Show_Changes |
 					 ARM_Format.New_Changes =>
@@ -6117,14 +6117,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Format_Object.Change_Version and then
 					    Format_Object.Changes = ARM_Format.Changes_Only then
 					    -- Just normal output text.
-				            if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
-				               ARM_Database.Deleted) then
-					        -- In a deleted paragraph, call Check_Paragraph
-					        -- to trigger the "deleted paragraph" message.
-					        -- (Otherwise, this never happens.)
-				                Check_Paragraph;
-				            -- else null; -- Nothing special to do.
-				            end if;
+				            null;
 					else
 					    -- We assume non-empty text and no outer changes;
 					    -- set new change state:
@@ -6174,6 +6167,17 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        -- Skip the text:
 			                ARM_Input.Skip_until_Close_Char (Input_Object, Close_Ch);
 				        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+				        if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				           ARM_Database.Deleted) or else
+				           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				           ARM_Database.Deleted_Inserted_Number) then
+					    -- In a deleted paragraph, call Check_Paragraph
+					    -- to trigger the "deleted paragraph" message.
+					    -- (Otherwise, this may never happens.)
+				            Check_Paragraph;
+				        -- else null; -- Nothing special to do.
+				        end if;
+
 				    when ARM_Format.Changes_Only |
 					 ARM_Format.Show_Changes =>
 				        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
@@ -6183,6 +6187,16 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				            -- Skip the text:
 			                    ARM_Input.Skip_until_Close_Char (Input_Object, Close_Ch);
 				            ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+				            if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				               ARM_Database.Deleted) or else
+				               ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				               ARM_Database.Deleted_Inserted_Number) then
+					        -- In a deleted paragraph, call Check_Paragraph
+					        -- to trigger the "deleted paragraph" message.
+					        -- (Otherwise, this may never happens.)
+				                Check_Paragraph;
+				            -- else null; -- Nothing special to do.
+				            end if;
 					else
 					    -- We assume that the text is non-empty;
 					    -- set the new change state and formatting.
@@ -8400,7 +8414,31 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- Instead of a tab, just use this to mark the end
 		    -- of the hanging portion:
 		    Check_Paragraph;
+		    if Format_Object.In_Change then
+			-- Close all formatting:
+		        ARM_Output.Text_Format (Output_Object,
+			    Bold => False,
+			    Italic => False,
+			    Font => Format_Object.Font, -- No clear default for these.
+			    Size => Format_Object.Size,
+			    Change => ARM_Output.None,
+			    Version => '0',
+			    Added_Version => '0',
+			    Location => ARM_Output.Normal);
+		    end if;
 		    ARM_Output.End_Hang_Item (Output_Object);
+		    if Format_Object.In_Change then
+			-- Reset to the normal case:
+		        ARM_Output.Text_Format (Output_Object,
+			    Bold => Format_Object.Is_Bold,
+			    Italic => Format_Object.Is_Italic,
+			    Font => Format_Object.Font,
+			    Size => Format_Object.Size,
+			    Change => Format_Object.Change,
+			    Version => Format_Object.Current_Change_Version,
+			    Added_Version => Format_Object.Current_Old_Change_Version,
+			    Location => Format_Object.Location);
+		    end if;
 	        elsif Format_Object.Next_Paragraph_Format_Type = In_Table then
 		    -- If in a table, ends a item.
 		    ARM_Output.Table_Marker (Output_Object, ARM_Output.End_Item);

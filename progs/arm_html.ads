@@ -344,7 +344,7 @@ private
     type Column_Text_Item_Type;
     type Column_Text_Ptr is access Column_Text_Item_Type;
     type Column_Text_Item_Type is record
-	Text : String (1..80);
+	Text : String (1..120);
 	Length : Natural;
 	Item : Natural; -- Which item.
 	End_Para : Boolean; -- True if this item is an end paragraph.
