@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_ada.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 00/03/08 Created by RLB to avoid Includes }
+@comment{ $Revision: 1.5 $ $Date: 00/03/08 Created by RLB to avoid Includes }
 @Part(predefstandard, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/20 02:30:30 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/20 02:42:03 $}
 
 @LabeledClause{The Package Ada}
 

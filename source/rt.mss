@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.6 $ $Date: 2000/04/20 02:42:03 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/20 02:30:30 $}
+@SetPageHeadings{$Date: 2000/04/20 02:42:03 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 

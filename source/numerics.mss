@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.6 $ $Date: 2000/04/20 02:42:03 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/20 02:30:29 $}
+@SetPageHeadings{$Date: 2000/04/20 02:42:03 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
