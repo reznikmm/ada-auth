@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/10 06:19:55 $}
+@Comment{$Date: 2005/03/11 23:38:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @LabeledClause{Array Types}
 
@@ -771,6 +771,42 @@ are indefinite subtypes.]
 @end{Discussion}
 @end{Intro}
 
+@begin{Metarules}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00402-01]}
+  @ChgAdded{Version=[2],Text=[When an access discriminant
+  is initialized at the time of object creation with an allocator
+  of an anonymous type, the allocated object and the object
+  with the discriminant are tied together for their lifetime.
+  They should be allocated out of the same storage pool,
+  and then at the end of the lifetime of the enclosing object, finalized
+  and reclaimed together.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The above principles when applied to a
+  nonlimited type implies that such an object may be copied only to a
+  shorter-lived object, because attempting to assign it to a longer-lived
+  object would fail because the access discriminants would not match.
+  In a copy, the lifetime connection between the enclosing object
+  and the allocated object does not exist. The allocated object is
+  tied in the above sense only to the original object. Other copies
+  have only secondary references to it.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Note that when an @nt{allocator} appears as a
+  constraint on an access discriminant in a @nt{subtype_indication}
+  that is elaborated independently from object creation,
+  no such connection exists. For example, if a named constrained
+  subtype is declared via
+  "@key{subtype} Constr @key{is} Rec(Acc_Discrim => @key{new} T);"
+  or if such an @nt{allocator} appears in the @nt{subtype_indication} for
+  a component, the allocator is evaluated when the @nt{subtype_indication}
+  is elaborated, and hence its lifetime is typically longer then
+  the objects or components that will later be subject to the
+  constraint. In these cases, the allocated object should not
+  be reclaimed until the @nt{subtype_indication} goes out of scope.]}
+@end{Discussion}
+@end{Metarules}
+
 @begin{Syntax}
 @Syn{lhs=<discriminant_part>,rhs="@Syn2{unknown_discriminant_part} | @Syn2{known_discriminant_part}"}
 
@@ -854,26 +890,59 @@ denoted by the @nt<subtype_mark> of the @nt<access_definition>]}.
   only refers to a formal parameter defined by an @nt<access_definition>.
 @end(Reason)
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01]}
-@ChgDeleted{Version=[2],Text=[A @nt<discriminant_specification> for
+@ChgNote{This paragraph is just moved up}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00402-01]}
+@ChgAdded{Version=[2],Text=[@nt{Default_expression}s shall be provided either for all or for none
+of the discriminants of a @nt{known_@!discriminant_@!part}.
+No @nt<default_@!expression>s are permitted in a
+@nt<known_@!discriminant_@!part> in a declaration of a tagged
+type @Redundant[or a generic formal type].]}
+
+@begin(Reason)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The all-or-none rule
+  is related to the rule that a discriminant constraint shall specify
+  values for all discriminants. One could imagine a different rule
+  that allowed a constraint to specify only some of the discriminants,
+  with the others provided by default. Having defaults for discriminants
+  has a special significance @em it allows objects of the type to
+  be unconstrained, with the discriminants alterable as part of
+  assigning to the object.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Defaults for discriminants of tagged types
+  are disallowed so that every object of a
+  tagged type is constrained,
+  either by an explicit constraint,
+  or by its initial discriminant values.
+  This substantially simplifies the semantic rules
+  and the implementation of inherited
+  dispatching operations. For generic formal types,
+  the restriction simplifies the type matching rules.
+  If one simply wants a "default" value for the discriminants,
+  a constrained subtype can be declared for future use.]}
+@end(Reason)
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00402-01]}
+A @nt<discriminant_specification> for
 an access discriminant
-shall appear only in the declaration for a task or protected type,
+@Chg{Version=[2],New=[may have a @nt{default_expression}],Old=[shall appear]}
+only in the declaration for a task or protected type,
 or for a type with the reserved word @key[limited] in its
 @Redundant[(full)] definition
 or in that of one of its ancestors.
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 this rule applies also in the private part of an
-instance of a generic unit.@PDefn{generic contract issue}]}
+instance of a generic unit.@PDefn{generic contract issue}
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Deleted]}
-  @ChgDeleted{Version=[2],Text=[
-  This rule implies that a type can have an access discriminant
+  @ChgRef{Version=[2],Kind=[Revised]}
+  This rule implies that a type can have @Chg{Version=[2],
+  New=[a default for ],Old=[]}an access discriminant
   if the type is limited,
-  but not if the only reason it's limited is because of a limited
-  component.
+  but not if the only reason it's limited is because of a limited component.
   Compare with the definition of limited type in
-  @RefSecNum{Limited Types}.]}
+  @RefSecNum{Limited Types}.
 @end{Discussion}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted]}
@@ -918,7 +987,7 @@ instance of a generic unit.@PDefn{generic contract issue}]}
     discriminants; they're the same as any other anonymous access component.
     For a limited type, they have the special accessibility of Ada 95. However,
     this doesn't work because a limited partial view can have a nonlimited
-    full view -- giving the two view different accessibility.]}
+    full view -- giving the two views different accessibility.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
@@ -952,39 +1021,38 @@ instance of a generic unit.@PDefn{generic contract issue}]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
     but access discriminants may not have defaults. All types have special
     accessibility. This get rid of the problems on assignment (you couldn't
-    change such a discriminant), but it would be horribly incompatible.]}
+    change such a discriminant), but it would be horribly incompatible with
+    Ada 95.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[** Note to reviewers: The latter part of this
-    discussion came from a private e-mail discussion between Tucker, Pascal, and
-    Randy. @b<We need to chose one of these alternatives, or come up with
-    something else!!> The current choice is the fourth bullet, which does not
-    work! Mr. Private will not allow us to choose the fifth bullet. I'm
-    unconvinced that the second-last bullet will work; the other choices
-    are the sixth bullet (annoying because limited and nonlimited are very
-    different), and the Ada 95 rule (which would mean that a discriminant
-    of a nonlimited type is the @i<only> place where an anonymous access type
-    can't be used). So where are we going to put this bump??]}
+    @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
+    but access discriminants may have defaults only if they are a
+    @lquotes@;really@rquotes@; limited type. This is the rule chosen for
+    Ada 2005, as it is not incompatible, and it doesn't require weird
+    accessibility checks.]}
   @end{Itemize}
 @end{Reason}
 
-@nt{Default_expression}s shall be provided either for all or for none
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00402-01]}
+@ChgDeleted{Version=[2],Text=[@nt{Default_expression}s shall be provided either for all or for none
 of the discriminants of a @nt{known_@!discriminant_@!part}.
 No @nt<default_@!expression>s are permitted in a
 @nt<known_@!discriminant_@!part> in a declaration of a tagged
-type @Redundant[or a generic formal type].
+type @Redundant[or a generic formal type].]}
 @begin(Reason)
-  The all-or-none rule
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[The all-or-none rule
   is related to the rule that a discriminant constraint shall specify
   values for all discriminants. One could imagine a different rule
   that allowed a constraint to specify only some of the discriminants,
   with the others provided by default. Having defaults for discriminants
   has a special significance @em it allows objects of the type to
   be unconstrained, with the discriminants alterable as part of
-  assigning to the object.
+  assigning to the object.]}
 
-  Defaults for discriminants of tagged types are disallowed
-  so that every object of a
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[Defaults for discriminants of tagged types
+  are disallowed so that every object of a
   tagged type is constrained,
   either by an explicit constraint,
   or by its initial discriminant values.
@@ -993,7 +1061,7 @@ type @Redundant[or a generic formal type].
   dispatching operations. For generic formal types,
   the restriction simplifies the type matching rules.
   If one simply wants a "default" value for the discriminants,
-  a constrained subtype can be declared for future use.
+  a constrained subtype can be declared for future use.]}
 @end(Reason)
 
 @Leading@;For a type defined by a @nt<derived_type_definition>,
@@ -1363,9 +1431,11 @@ when the discriminant is initialized.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00402-01]}
   @ChgAdded{Version=[2],Text=[Access discriminants (anonymous access types
-  used as a discriminant) can be used on any type allowing discriminants.]}
+  used as a discriminant) can be used on any type allowing discriminants.
+  Defaults aren't allowed on discriminants of non-limited types, however, so
+  that accessibility problems don't happen on assignment.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[

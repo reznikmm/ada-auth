@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2005/03/11 05:49:18 $ $Author: Randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2005/03/11 23:38:23 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/11 05:49:18 $}
+@Comment{$Date: 2005/03/11 23:38:23 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -91,6 +91,7 @@ of an implementation for a particular real-time application.
 @Defn{extensions to Ada 83}
 This Annex is new to Ada 95.
 @end{Extend83}
+
 
 @LabeledClause{Task Priorities}
 @begin{Intro}
@@ -1006,6 +1007,7 @@ regardless of whether the active priority of the task actually changes.]}
   to be a task dispatching policy.]}
 @end{DiffWord95}
 
+
 @LabeledAddedSubClause{Version=[2],Name=[Non-Preemptive Dispatching]}
 
 @begin{Intro}
@@ -1109,14 +1111,338 @@ Interrupt_Handler, or Attach_Handler.]}
   Policy Non_Preemptive_FIFO_Within_Priorities is new.]}
 @end{Extend95}
 
-@begin{DiffWord95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
-  @ChgAdded{Version=[2],Text=[We require that implementations allow
-  this policy and Ceiling_Locking together.]}
-@end{DiffWord95}
+
+@LabeledAddedSubClause{Version=[2],Name=[Round Robin Dispatching]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[This clause defines the task dispatching
+policy Round_Robin_Within_Priorities and the package Round_Robin.]]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[The @SynI{policy}_@nt{identifier}
+Round_Robin_Within_Priorities is a task dispatching policy.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library package exists:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key{with} System;
+@key{with} Ada.Real_Time;
+@key{package} Ada.Dispatching.Round_Robin @key{is}@ChildUnit{Parent=[],Child=[Round_Robin]}
+  Default_Quantum : @key{constant} Ada.Real_Time.Time_Span :=
+             @RI[implementation-defined];
+  @key{procedure} Set_Quantum (Pri     : @key{in} System.Priority;
+                         Quantum : @key{in} Ada.Real_Time.Time_Span);
+  @key{procedure} Set_Quantum (Low, High : @key{in} System.Priority;
+                         Quantum   : @key{in} Ada.Real_Time.Time_Span);
+  @key{function} Actual_Quantum (Pri : System.Priority) @key{return} Ada.Real_Time.Time_Span;
+  @key{function} Is_Round_Robin (Pri : System.Priority) @key{return} Boolean;
+@key{end} Ada.Dispatching.Round_Robin;]}
+@end{Example}
+@ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The value of Default_Quantum in Dispatching.Round_Robin.]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[When task dispatching policy Round_Robin_Within_Priorities is the single
+policy in effect for a partition, each task with priority in the range of
+System.Interrupt_Priority is dispatched according to policy
+FIFO_Within_Priorities.]}
+
+@end{StaticSem}
+
+@begin{Runtime}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[The procedures Set_Quantum set the required Quantum
+value for a single level Pri or a range of levels Low .. High. If no quantum is
+set for a Round Robin priority level, Default_Quantum is used.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[The function Actual_Quantum returns the actual
+quantum used by the implementation for the priority level Pri.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[The function Is_Round_Robin returns True if
+priority Pri is covered by task dispatching policy
+Round_Robin_Within_Priorities; otherwise it returns False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[A call of Actual_Quantum or Set_Quantum raises
+exception Dispatching.Dispatching_Policy_Error if a predefined policy other
+than Round_Robin_Within_Priorities applies to the specified priority.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For Round_Robin_Within_Priorities,
+the dispatching rules for FIFO_Within_Priorities apply with the following
+additional rules:]}
+
+@begin{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[When a task is added or moved to the tail of the
+ready queue for its base priority, it has an execution time budget equal to the
+quantum for that priority level. This will also occur when a blocked task
+becomes executable again.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[When a task is preempted (by a higher priority
+task) and is added to the head of the ready queue for its priority level, it
+retains its remaining budget.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[While a task is executing, its budget is decreased
+by the amount of execution time it uses. The accuracy of this accounting is the
+same as that for execution time clocks (see @RefSecNum{Execution Time}).]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Note that this happens even when the task
+  is executing at a higher, inherited priority, and even if that higher
+  priority is dispatched by a different policy than round robin.]}
+@end{Ramification}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[A task that has its base priority set to a Round
+Robin priority is moved to the tail of the ready queue for its new priority
+level.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[When a task has exhausted its budget and is without
+an inherited priority (and is not executing within a protected operation), it
+is moved to the tail of the ready queue for its priority level. This is a task
+dispatching point.]}
+
+@end{Itemize}
+
+@end{Runtime}
+
+@begin{ImplReq}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[An implementation shall allow specifying both the
+task dispatching policy as Round_Robin_Within_Priorities and the
+locking policy (see @RefSecNum{Priority Ceiling Locking}) as Ceiling_Locking
+for a single partition.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is the standard combination of policies,
+  and we want that to be portable.]}
+@end{Reason}
+@end{ImplReq}
+
+@begin{DocReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[An implementation shall document the quantum values
+supported.]}
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The quantum values supported for round robin dispatching shall be documented.]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[An implementation shall document the accuracy with
+which it detects the exhaustion of the budget of a task.]}
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The accuracy of the detection of the exhaustion of the budget of a task
+for round robin dispatching shall be documented.]}]}
+
+@end{DocReq}
+
+@begin{Notes}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[Due to implementation constraints, the quantum
+value returned by Actual_Quantum might not be identical to that set with
+Set_Quantum.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[A task that executes continuously with an inherited
+priority will not be subject to round robin dispatching.]}
+
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Policy Round_Robin_Within_Priorities and package
+  Dispatching.Round_Robin are new.]}
+@end{Extend95}
 
 
-** More of new shit here **
+@LabeledAddedSubClause{Version=[2],Name=[Earliest Deadline First Dispatching]}
+
+The deadline of a task is an indication of the urgency of the task; it
+represents a point on an ideal physical time line. Unless otherwise specified,
+whenever tasks compete for processors or other implementation-defined
+resources, the resources are allocated to the task with the earliest deadline.
+
+This clause defines a package for representing a task's deadline
+and a dispatching policy that defines Earliest Deadline First (EDF)
+dispatching. A pragma is defined to assign an initial deadline to a task.
+
+@i<@s8<Static Semantics>>
+
+The @i<policy_>@fa<identifier> EDF_Across_Priorities is a task dispatching policy.
+
+The following language-defined library package exists:
+
+@xcode<@b<with> Ada.Real_Time;
+@b<with> Ada.Task_Identification;
+@b<package> Ada.Dispatching.EDF @b<is>
+  @b<subtype> Deadline @b<is> Ada.Real_Time.Time;
+  Default_Deadline : @b<constant> Deadline :=
+              Ada.Real_Time.Time_Last;
+  @b<procedure> Set_Deadline(D : @b<in> Deadline;
+              T : @b<in> Ada.Task_Identification.Task_ID :=
+              Ada.Task_Identification.Current_Task);
+  @b<procedure> Delay_Until_And_Set_Deadline(
+              Delay_Until_Time : @b<in> Ada.Real_Time.Time;
+              Deadline_Offset : @b<in> Ada.Real_Time.Time_Span);
+  @b<function> Get_Deadline(T : @b<in> Ada.Task_Identification.Task_ID :=
+              Ada.Task_Identification.Current_Task) @b<return> Deadline;
+@b<end> Ada.Dispatching.EDF;>
+
+@i<@s8<Syntax>>
+
+The form of a pragma Relative_Deadline is as follows:
+
+@xindent<@b<pragma> Relative_Deadline (@i<relative_deadline_>@fa<expression>);>
+
+@i<@s8<Name Resolution Rules>>
+
+The expected type for @i<relative_deadline_>@fa<expression> is
+Ada.Real_Time.Time_Span.
+
+@i<@s8<Legality Rules>>
+
+A Relative_Deadline pragma is allowed only immediately within a
+@fa<task_definition> or the @fa<declarative_part> of a @fa<subprogram_body>.
+At most one such pragma shall appear within a given construct.
+
+@i<@s8<Post-Compilation Rules>>
+
+If the EDF_Across_Priorities policy is specified for a partition,
+then the Ceiling_Locking policy (see D.3) shall also be specified for the
+partition.
+
+If the EDF_Across_Priorities policy appears in a
+Priority_Specific_Dispatching pragma (see D.2.2) in a partition, then the
+Ceiling_Locking policy (see D.3) shall also be specified for the
+partition.
+
+@i<@s8<Dynamic Semantics>>
+
+A Relative_Deadline pragma has no effect if it occurs in the declarative_part
+of the subprogram_body of a subprogram other than the main subprogram.
+
+The initial absolute deadline of a task containing pragma Relative_Deadline
+is the value of Ada.Real_Time.Clock + relative_deadline_expression, where
+the call of Ada.Real_Time.Clock is made between task creation and the
+start of its activation. If there is no Relative_Deadline pragma then the
+initial absolute deadline of a task is the value of Default_Deadline.
+The environment task is also given an initial deadline by this rule.
+
+The procedure Set_Deadline changes the absolute deadline of the task to D.
+The function Get_Deadline returns the absolute deadline of the task.
+
+The procedure Delay_Until_And_Set_Deadline delays the calling task until time
+Delay_Until_Time. When the task becomes runnable again it will have deadline
+Delay_Until_Time + Deadline_Offset.
+
+On a system with a single processor, the setting of a task's deadline
+to the new value occurs immediately at the first point that is outside the
+execution of an abort-deferred operation. If the task is currently on a ready
+queue it is removed and re-entered on to the ready queue determined by the
+rules defined below.
+
+When EDF_Across_Priorities is specified for priority range @i<Low>..@i<High>
+all ready queues in this range are ordered by deadline.
+The task at the head of a queue is the one with the earliest deadline.
+
+A task dispatching point occurs for the currently running task @i<T> to
+which policy EDF_Across_Priorities applies whenever:
+
+@xbullet<a change to the deadline of @i<T> occurs; or>
+
+@xbullet<a decrease to the deadline of any task on a ready queue for
+that processor occurs and the new deadline is earlier than
+that of the running task; or>
+
+@xbullet<there is a non-empty ready queue for that processor
+with a higher priority than the priority of the running task.>
+
+The currently running task is said to be preempted and is returned to
+the ready queue for its active priority.
+
+Whenever a task @i<T> to which policy EDF_Across_Priorities applies is
+added to a ready queue, other than when it is preempted, it is placed on
+the ready queue with the highest priority @i<P>, if one exists, such that:
+@xbullet<a task is executing within a protected object with ceiling
+priority @i<P>; and>
+@xbullet<task @i<T> has an earlier deadline than any task executing within
+a protected object with ceiling priority @i<P>; and>
+@xbullet<the base priority of task @i<T> is greater than @i<P>.>
+If no such ready queue exists the task is added to the ready
+queue for the lowest priority in the range specified as
+EDF_Across_Priorities.
+
+When the setting of the base priority of a task takes effect and the
+new priority is in the range specified as EDF_Across_Priorities,
+the task is added to the ready queue.
+
+When a task is chosen for execution it runs with the active priority
+of the ready queue from which the task was taken.
+If it inherits a higher active priority it will return to its
+original active priority when it no longer inherits the higher
+level.
+
+For all the operations defined in this package, Tasking_Error
+is raised if the task identified by T has terminated. Program_Error
+is raised if the value of T is Null_Task_ID.
+
+@i<@s8<Bounded (Run-Time) Errors>>
+
+If EDF_Across_Priorities is specified for priority range @i<Low>..@i<High>, it
+is a bounded error to declare a protected object with ceiling priority
+@i<Low> or to assign the value @i<Low> to attribute 'Priority. In either case
+either Program_Error is raised or the ceiling of the protected
+object is assigned the value @i<Low>+1.
+
+@i<@s8<Erroneous Execution>>
+
+If a value of Task_ID is passed as a parameter to any of the subprograms
+of this package and the corresponding task object no longer exists,
+the execution of the program is erroneous.
+
+@i<@s8<Documentation Requirements>>
+
+On a multiprocessor, the implementation shall document any conditions that
+cause the completion of the setting of a task's deadline to be delayed later
+than what is specified for a single procressor.
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[If two adjacent priority ranges, @i<A>..@i<B> and
+@i<B>+1..@i<C> are specified to have policy
+EDF_Across_Priorities then this is not equivalent to this policy being
+specified for the single range, @i<A>..@i<C>.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[The above rules implement the preemption-level
+protocol (also called Stack Resource Policy protocol) for resource sharing
+under EDF dispatching. The preemption-level for a task is denoted by its base
+priority. The definition of a ceiling preemption-level for a protected object
+follows the existing rules for ceiling locking.]}
+
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Policy EDF_Across_Priorities and package Dispatching.EDF are new.]}
+@end{Extend95}
 
 
 @LabeledClause{Priority Ceiling Locking}

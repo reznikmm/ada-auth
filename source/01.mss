@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/03/03 06:18:21 $}
+@Comment{$Date: 2005/03/11 23:38:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1771,12 +1771,16 @@ POSIX,
 @LabeledClause{Definitions}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
 @Defn2{Term=[italics],Sec=(terms introduced or defined)}
 Terms are defined throughout this International Standard,
 indicated by @i(italic) type.
 Terms explicitly defined in this International Standard are not to be presumed to
-refer implicitly to similar terms defined elsewhere. Terms not defined in
-this International Standard are to be interpreted according to
+refer implicitly to similar terms defined elsewhere.
+@Chg{Version=[2],New=[Mathematical terms not defined in this International
+Standard are to be interpreted according to the @i<CRC Concise Encyclopedia of
+Mathematics, Second Edition>. Other terms],Old=[Terms]} not defined in this
+International Standard are to be interpreted according to
 the @i(Webster's Third New International Dictionary of the
 English Language).
 Informal descriptions of some terms are also given in
@@ -1789,6 +1793,11 @@ they have to be somewhere.}
 @SeeOther{Primary=[predefined type], Other=(language-defined types)}
 @begin{Discussion}
 The index contains an entry for every defined term.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00415-01]}
+@ChgAdded{Version=[2],Text=[The contents of the @i<CRC Concise Encyclopedia of
+Mathematics, Second Edition> can be accessed on http://www.mathworld.com.
+The ISBN number of the book is ISBN 1584883472.]}
 @end{Discussion}
 @begin{GlossaryMarker}
 Each term defined in @RefSecNum{Glossary}

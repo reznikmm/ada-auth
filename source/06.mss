@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/03/11 05:49:18 $}
+@Comment{$Date: 2005/03/11 23:38:22 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2077,17 +2077,22 @@ The exception Program_Error is raised if this check fails.]}
   except for dereferences of an access parameter.]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01],ARef=[AI95-00402-01]}
 @ChgAdded{Version=[2],Text=[If the result type is class-wide, a check is made that
 the accessibility level of the type identified by the tag of the result is not
-deeper than that of the master that elaborated the function body. If this
-check fails, Program_Error is raised.
+deeper than that of the master that elaborated the function body.
+If the result expression is of a type with an access discriminant, a check is
+made that the accessibility level of the object associated with the value of
+the expression is not deeper than that of the master that elaborated the
+function body. If either of these checks fails, Program_Error is raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 @IndexCheck{Accessibility_Check}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The check prevents the returned object from
-  outliving its type.]}
+  @ChgAdded{Version=[2],Text=[The class-wide check prevents the returned object
+  from outliving its type. The access discriminant check prevents the returned
+  object (for a non-limited type) from outliving the object designated by one
+  of its discriminants.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
@@ -2207,12 +2212,18 @@ allows component-by-component construction of the return object.],Old=[]}
 @Chg{Version=[2],New=[The wording was updated to support anonymous access
 return subtypes.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
-@Chg{Version=[2],New=[Added accessibility checks to class-wide
-@nt{return_statement}s. These checks could not fail in Ada 95 (as all of the
-types had to be declared at the same level, so the access type would
-necessarily have been at the same level or more nested than the type of the
-object.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
+  @ChgAdded{Version=[2],Text=[Added accessibility checks to class-wide
+  @nt{return_statement}s. These checks could not fail in Ada 95 (as all of the
+  types had to be declared at the same level, so the access type would
+  necessarily have been at the same level or more nested than the type of the
+  object.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00402-01]}
+  @ChgAdded{Version=[2],Text=[Added accessibility checks to
+  @nt{return_statement}s for types with access discriminants. Since such
+  types have to be limited in Ada 95, the return expressions would have
+  been illegal in order for this check to fail.]}
 
 @end{DiffWord95}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2005/02/03 07:11:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2005/03/11 23:38:22 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/02/03 07:11:19 $}
+@Comment{$Date: 2005/03/11 23:38:22 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -2989,7 +2989,7 @@ of the absolute error of the inner product @i<X>*@i<Y> shall not exceed
 @i<g>*@b<abs>(@i<X>)*@b<abs>(@i<Y>) where @i<g> is defined as]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i<g> = @i<X>'Length * Real'Machine_Radix**(1-Real'Machine_Mantissa)]}
+@ChgAdded{Version=[2],Text=[@i<g> = @i<X>'Length * Real'Machine_Radix**(1-Real'Model_Mantissa)]}
 @end{Display}
 @end{ImplReq}
 
@@ -3983,10 +3983,10 @@ of the absolute error of the inner product @i{X}*@i{Y} shall not exceed
 @i{g}*@key{abs}(@i{X})*abs(@i{Y}) where @i{g} is defined as]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i{g} = @i{X}'Length * Real'Machine_Radix**(1-Real'Machine_Mantissa) for mixed complex and real operands]}
+@ChgAdded{Version=[2],Text=[@i{g} = @i{X}'Length * Real'Machine_Radix**(1-Real'Model_Mantissa) for mixed complex and real operands]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1-Real'Machine_Mantissa) for two complex operands]}
+@ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1-Real'Model_Mantissa) for two complex operands]}
 @end{Display}
 @end{ImplReq}
 
