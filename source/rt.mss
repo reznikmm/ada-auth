@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2005/03/25 07:16:01 $ $Author: Randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2005/03/29 06:32:54 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/25 07:16:01 $}
+@Comment{$Date: 2005/03/29 06:32:54 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1313,7 +1313,7 @@ task's deadline and a dispatching policy that defines Earliest Deadline First
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[The expected type for
-@SynI{relative_deadline_}@nt{expression} is Ada.Real_Time.Time_Span.]}
+@SynI{relative_deadline_}@nt{expression} is Real_Time.Time_Span.]}
 
 @end{Resolution}
 
@@ -1393,8 +1393,8 @@ subprogram other than the main subprogram.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[The initial absolute deadline of a task containing
-pragma Relative_Deadline is the value of Ada.Real_Time.Clock +
-@SynI{relative_deadline_}@nt{expression}, where the call of Ada.Real_Time.Clock is made
+pragma Relative_Deadline is the value of Real_Time.Clock +
+@SynI{relative_deadline_}@nt{expression}, where the call of Real_Time.Clock is made
 between task creation and the start of its activation. If there is no
 Relative_Deadline pragma then the initial absolute deadline of a task is the
 value of Default_Deadline. @Redundant[The environment task is also given
@@ -2592,7 +2592,7 @@ No_Dynamic_Priorities @\There are no semantic dependences on the package
 Old=[@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control]}
     @\There
     @Chg{Version=[2],New=[is no call to any of the operations defined
-    in package Ada.Interrupts (Is_Reserved, Is_Attached, Current_Handler,
+    in package Interrupts (Is_Reserved, Is_Attached, Current_Handler,
     Attach_Handler, Exchange_Handler, Detach_Handler, and Reference).],
     Old=[are no semantic dependences on the package Asynchronous_Task_Control.]}
 
@@ -2624,7 +2624,7 @@ Old=[@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Specific_Termination_Handlers)}No_Specific_Termination_Handlers @\There
   are no calls to the Set_Specific_Handler and Specific_Handler subprograms
-  in Ada.Task_Termination.]}
+  in Task_Termination.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(Simple_Barriers)}Simple_Barriers @\The
@@ -3827,8 +3827,8 @@ Max_Task_Entries => 0.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
-@ChgAdded{Version=[2],Text=[This clause specifies an
-execution-time clock package.]}
+@ChgAdded{Version=[2],Text=[This clause describes a language-defined package to
+measure execution time.]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -3848,18 +3848,626 @@ language-defined library exists:]}
    @AdaDefn{CPU_Time_Unit}  : @key{constant} := @RI{implementation-defined-real-number};
    @AdaDefn{CPU_Tick} : @key{constant} Time_Span;]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Clock}
+     (T : Ada.Task_Identification.Task_Id
+          := Ada.Task_Identification.Current_Task)
+     @key{return} CPU_Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+"  (Left : CPU_Time; Right : Time_Span) @key{return} CPU_Time;
+   @key{function} "+"  (Left : Time_Span; Right : CPU_Time) @key{return} CPU_Time;
+   @key{function} "-"  (Left : CPU_Time; Right : Time_Span) @key{return} CPU_Time;
+   @key{function} "-"  (Left : CPU_Time; Right : CPU_Time)  @key{return} Time_Span;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "<"  (Left, Right : CPU_Time) @key{return} Boolean;
+   @key{function} "<=" (Left, Right : CPU_Time) @key{return} Boolean;
+   @key{function} ">"  (Left, Right : CPU_Time) @key{return} Boolean;
+   @key{function} ">=" (Left, Right : CPU_Time) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Split}
+     (T : @key{in} CPU_Time; SC : @key{out} Seconds_Count; TS : @key{out} Time_Span);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Time_Of} (SC : Seconds_Count; TS : Time_Span) @key{return} CPU_Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{private}
+   ... -- @RI[not specified by the language]
+@key{end} Ada.Execution_Time;]}
 
 @end{Example}
 
-**** The rest of this clause (including two subclauses) has yet to be inserted ****
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[execution time],Sec=[of a task]}
+@Defn2{Term=[CPU time],Sec=[of a task]}
+The @i<execution time> or CPU time of a given task is defined as the time spent by
+the system executing that task, including the time spent executing run-time or
+system services on its behalf. The mechanism used to measure execution time is
+implementation defined. It is implementation defined which task, if any, is
+charged the execution time that is consumed by interrupt handlers and run-time
+services on behalf of the system.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The implementation-defined properties above
+  and of the values declared in the package are repeated in @DocReqTitle,
+  so we don't mark them as implementation-defined.]}
+@end{Discussion}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The type CPU_Time represents the execution time of
+a task. The set of values of this type corresponds one-to-one with an
+implementation-defined range of mathematical integers.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The CPU_Time value I represents the half-open
+execution-time interval that starts with I*CPU_Time_Unit and is limited by
+(I+1)*CPU_Time_Unit, where CPU_Time_Unit is an implementation-defined
+real number. For each task, the execution time value is set to zero at
+some unspecified point between the creation of the task and the start
+of the activation of the task.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[CPU_Time_First and CPU_Time_Last are the smallest
+and largest values of the CPU_Time type, respectively.]}
 @end{StaticSem}
 
+@begin{RunTime}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[@Defn{CPU clock tick}
+CPU_Time_Unit is the smallest amount of execution time representable
+by the CPU_Time type; it is expressed in seconds. A @i<CPU clock tick> is an
+execution time interval during which the clock value (as observed by
+calling the Clock function) remains constant. CPU_Tick is the average
+length of such intervals.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The effects of the operators on CPU_Time and
+Time_Span are as for the operators defined for integer types.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The function Clock returns the current execution
+time of the task identified by T; Tasking_Error is raised if that task has
+terminated; Program_Error is raised if the value of T is
+Task_Identification.Null_Task_Id.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The effects of the Split and Time_Of operations are defined as
+follows, treating values of type CPU_Time, Time_Span, and
+Seconds_Count as mathematical integers. The effect of Split (T, SC,
+TS) is to set SC and TS to values such that T*CPU_Time_Unit = SC*1.0 +
+TS*CPU_Time_Unit, and 0.0 <= TS*CPU_Time_Unit < 1.0. The value
+returned by Time_Of(SC,TS) is the execution-time value T such that
+T*CPU_Time_Unit=SC*1.0 + TS*CPU_Time_Unit.]}
+
+@end{RunTime}
+
+@begin{Erron}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+For a call of Clock, if the task identified by T no longer exists, the
+execution of the program is erroneous.]}
+@end{Erron}
+
+@begin{ImplReq}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The range of CPU_Time values shall be sufficient
+to uniquely represent the range of execution times from the task start-up to 50
+years of execution time later. CPU_Tick shall be no greater than 1
+millisecond.]}
+@end{ImplReq}
+
+@begin{DocReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The implementation shall document the values of
+CPU_Time_First, CPU_Time_Last, CPU_Time_Unit, and CPU_Tick.]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The values of CPU_Time_First, CPU_Time_Last, CPU_Time_Unit, and CPU_Tick
+of package Execution_Time shall be documented.]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The implementation shall document the properties of
+the underlying mechanism used to measure execution times, such as the range of
+values supported and any relevant aspects of the underlying hardware or
+operating system facilities used.]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The properties of the mechanism used to implement package Execution_Time
+shall be documented.]}]}
+
+@end{DocReq}
+
+@begin{Metrics}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The implementation
+shall document the following metrics:]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text={An upper bound on the execution-time duration of a
+clock tick. This is a value D such that if t1 and t2 are any execution times of
+a given task such that t1<t2 and Clock[t1]=Clock[t2] then t2-t1 <= D.}}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[An upper bound on the size of a clock jump. A clock
+jump is the difference between two successive distinct values of an execution
+-time clock (as observed by calling the Clock function with the same
+Task_Id).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[An upper bound on the execution time of a call to
+the Clock function, in processor clock cycles.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Upper bounds on the execution times of the
+operators of the type CPU_Time, in processor clock cycles.]}
+@end{Itemize}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The metrics for execution time.]}]}
+
+@end{Metrics}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[Implementations targeted to machines with word size
+smaller than 32 bits need not support the full range and granularity of the
+CPU_Time type.]}
+
+@end{ImplPerm}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[When appropriate, implementations should provide
+configuration mechanisms to change the value of CPU_Tick.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[When appropriate, implementations should provide
+configuration mechanisms to change the value of Execution_Time.CPU_Tick.]}]}
+
+@end{ImplAdvice}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The package Ada.Execution_Time is new.]}
+  The package Execution_Time is new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[Execution Time Timers]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[This clause describes a language-defined package
+that provides a facility for calling a handler when a task has used a defined
+amount of CPU time.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library exists:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} System;
+@key{package} Ada.Execution_Time.Timers @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Timers]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer} (T : @key{access} Ada.Task_Identification.Task_Id) @key{is}
+      @key{limited private};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer_Handler} @key{is}
+      @key{access protected procedure} (TM : @key{in out} Timer);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
+   @RI[implementation-defined];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Set_Handler} (TM      : @key{in out} Timer;
+                          In_Time : @key{in} Time_Span;
+                          Handler : @key{in} Timer_Handler);
+   @key{procedure} @AdaSubDefn{Set_Handler} (TM      : @key{in out} Timer;
+                          At_Time : @key{in} CPU_Time;
+                          Handler : @key{in} Timer_Handler);
+   @key{function} @AdaSubDefn{Current_Handler} (TM : Timer) @key{return} Timer_Handler;
+   @key{procedure} @AdaSubDefn{Cancel_Handler} (TM        : @key{in out} Timer;
+                             Cancelled : @key{in out} Boolean);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Time_Remaining} (TM : Timer) @key{return} Time_Span;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{Timer_Resource_Error} : @key{exception};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{private}
+   ... --  not specified by the language
+@key{end} Ada.Execution_Time.Timers;]}
+
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The type Timer represents an execution-time event
+for a single task and is capable of detecting execution time overruns. The
+access discriminant T identifies the task concerned. The type Timer needs
+finalization (see @RefSecNum{User-Defined Assignment and Finalization}).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[An object of type Timer is said to be @i<set> if it
+is associated with a non-null Timer_Handler and @i<cleared> otherwise. All
+Timer objects are initially cleared.
+@PDefn{Term=[set],Sec=[execution timer object]}
+@PDefn{Term=[clear],Sec=[execution timer object]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The type Timer_Handler identifies a protected
+procedure to be executed by the implementation when the timer expires. Such a
+protected procedure is called a @i<handler>.
+@PDefn{Term=[handler],Sec=[execution timer]}]}
+
+@end{StaticSem}
+
+@begin{Runtime}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[When a Timer object is created, or upon the first
+call of a Set_Handler procedure with the timer as parameter, the resources
+required to operate an execution-time timer based on the associated
+execution-time clock are allocated and initialized. If this operation would
+exceed the available resources, Timer_Resource_Error is raised.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The procedures Set_Handler associate the handler
+Handler with the timer TM; if Handler is @b<null>, the timer is cleared,
+otherwise it is set. The first procedure Set_Handler loads the timer TM with an
+interval specified by the Time_Span parameter. In this mode, when the execution
+time of the task identified by TM.T has increased by In_Time, the timer TM is
+said to have expired. The second procedure Set_Handler loads the timer TM with
+the absolute value specified by At_Time. In this mode, when the the execution
+time of the task identified by TM.T reaches At_Time, the timer TM is said to
+have @i<expired>; if the value of At_Time has already been reached when
+Set_Handler is called, the timer TM is said to be expired.@Defn2{Term=[expired],
+Sec=[execution timer]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[A call of a procedure Set_Handler for a timer that
+is already set replaces the handler and the (absolute or relative) execution
+time; if Handler is not @b<null>, the timer remains set.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[When a timer expires, the associated handler is
+executed, passing the timer as parameter. The initial action of the execution
+of the handler is to clear the event.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The function Current_Handler returns the handler
+associated with the timer TM if that timer is set; otherwise it returns
+@b<null>.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The procedure Cancel_Handler clears the timer if it
+is set. Cancelled is assigned True if the timer was set prior to it being
+cleared; otherwise it is assigned False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The function Time_Remaining returns the execution
+time interval that remains until the timer TM would expire, if that timer is
+set; otherwise it returns Time_Span_Zero.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[The constant Min_Handler_Ceiling is the priority
+value that ensures that no ceiling violation would occur, were a handler to be
+executed.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[For all the subprograms defined in this package,
+Tasking_Error is raised if the task identified by TM.T has terminated, and
+Program_Error is raised if the value of TM.T is
+Task_Identification.Null_Task_Id.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[An exception propagated from a handler invoked as
+part of the expiration of a timer has no effect.]}
+
+@end{Runtime}
+
+@begin{Erron}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+For a call of any of the subprograms defined in this package, if the task
+identified by TM.T no longer exists, the execution of the program is erroneous.]}
+
+@end{Erron}
+
+@begin{ImplReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[For a given Timer object, the implementation shall
+perform the operations declared in this package atomically with respect to any
+of these operations on the same Timer object. The replacement of a handler by a
+call of Set_Handler shall be performed atomically with respect to the execution
+of the handler.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This prevents various race conditions. In
+  particular it ensures that if an event occurs when Set_Handler is changing
+  the handler then either the new or old handler is executed in response to the
+  appropriate event. It is never possible for a new handler to be executed in
+  response to an old event]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[When an object of type Timer is finalized, the
+system resources used by the timer shall be deallocated.]}
+
+@end{ImplReq}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[Implementations may limit the number of timers that
+can be defined for each task. If this limit is exceeded then
+Timer_Resource_Error is raised.]}
+
+@end{ImplPerm}
+
+@begin{Notes}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[A Timer_Handler can be associated with several
+Timer objects.]}
+
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The package Execution_Time.Timers is new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[Group Execution Time Budgets]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[This clause describes a language-defined package to
+assign execution time budgets to groups of tasks.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library exists:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} System;
+@key{package} Ada.Execution_Time.Group_Budgets @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Group_Budgets]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget} @key{is limited private};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget_Handler} @key{is access}
+       @key{protected procedure} (GB : @key{in out} Group_Budget);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Task_Array} @key{is array} (Positive @key{range} <}) @key{of}
+                                  Ada.Task_Identification.Task_Id;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @AdaDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
+    @RI[implementation-defined];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key{procedure} @AdaSubDefn{Add_Task} (GB : @key{in out} Group_Budget;
+                      T  : @key{in} Ada.Task_Identification.Task_Id);
+  @key{procedure} @AdaSubDefn{Remove_Task} (GB: @key{in out} Group_Budget;
+                         T  : @key{in} Ada.Task_Identification.Task_Id);
+  @key{function} @AdaSubDefn{Is_Member} (GB : Group_Budget;
+                      T : Ada.Task_Identification.Task_Id) @key{return} Boolean;
+  @key{function} @AdaSubDefn{Is_A_Group_Member}
+     (T : Ada.Task_Identification.Task_Id) @key{return} Boolean;
+  @key{function} @AdaSubDefn{Members} (GB : Group_Budget) @key{return} Task_Array;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key{procedure} @AdaSubDefn{Replenish} (GB : @key{in out} Group_Budget; To : @key{in} Time_Span);
+  @key{procedure} @AdaSubDefn{Add} (GB : @key{in out} Group_Budget; Interval : @key{in} Time_Span);
+  @key{function} @AdaSubDefn{Budget_Has_Expired} (GB : Group_Budget) @key{return} Boolean;
+  @key{function} @AdaSubDefn{Budget_Remaining} (GB : Group_Budget) @key{return} Time_Span;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key{procedure} @AdaSubDefn{Set_Handler} (GB      : @key{in out} Group_Budget;
+                         Handler : @key{in} Group_Budget_Handler);
+  @key{function} @AdaSubDefn{Current_Handler} (GB : Group_Budget)
+     @key{return} Group_Budget_Handler;
+  @key{procedure} @AdaSubDefn{Cancel_Handler} (GB        : @key{in out} Group_Budget;
+                            Cancelled : @key{out} Boolean);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @AdaDefn{Group_Budget_Error} : @key{exception};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{private}
+    --  not specified by the language
+@key{end} Ada.Execution_Time.Group_Budgets;]}
+
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The type Group_Budget represents an execution time
+budget to be used by a group of tasks. The type Group_Budget needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization}). A task can belong
+to at most one group. Tasks of any priority can be added to a group.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[An object of type Group_Budget has an associated
+non-negative value of type Time_Span known as its @i<budget>.@Defn{budget}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The type Group_Budget_Handler identifies a
+protected procedure to be executed by the implementation when the budget is
+exhausted. Such a protected procedure is called a @i<handler>. The handler of
+an object of type Group_Budget is said to be @i<set> if it is associated with a
+non-null value of Group_Budget_Handler and @i<cleared> otherwise. The handler
+of all Group_Budget objects is initially cleared.
+@PDefn{Term=[handler],Sec=[group budget]}
+@PDefn{Term=[set],Sec=[group budget object]}
+@PDefn{Term=[clear],Sec=[group budget object]}]}
+@end{StaticSem}
+
+@begin{RunTime}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The procedure Add_Task adds the task identified by
+T to the group GB; if that task is already a member of some other group,
+Group_Budget_Error is raised.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The procedure Remove_Task removes the task
+identified by T from the group GB; if that task is not a member of the group
+GB, Group_Budget_Error is raised. After successful execution of this procedure,
+the task is no longer a member of any group.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The function Is_Member returns True if the task
+identified by T is a member of the group GB; otherwise it return False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The function Is_A_Group_Member returns True if the
+task identified by T is a member of some group; otherwise it returns False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The function Members returns an array of values of
+type Task_Identification.Task_Id identifying the members of the group GB. The
+order of the components of the array is unspecified.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The procedure Replenish loads the group budget GB
+with the Time_Span value To. Group_Budget_Error is raised if the Time_Span
+value To is non-positive. Any execution of any member of the group of tasks
+results in the budget counting down. When the budget becomes exhausted (goes to
+Time_Span_Zero), the associated handler is executed if the handler of group
+budget GB is set; the tasks continue to execute. An object of type Group_Budget
+is initially loaded with a budget of Time_Span_Zero.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The procedure Add modifies the budget of the group
+GB. A positive value for Interval increases the budget. A negative value for
+Interval reduces the budget, but never below Time_Span_Zero. A zero value for
+Interval has no effect. A call of procedure Add that results in the value of
+the budget going to Time_Span_Zero causes the associated handler to be executed
+if the handler of the group budget GB is set.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The function Budget_Has_Expired returns True if the
+budget of group GB is @i<exhausted> (equal to Time_Span_Zero); otherwise it
+returns False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The function Budget_Remaining returns the remaining
+budget for the group GB. If the budget is exhausted it returns Time_Span_Zero.
+This is the minimum value for a budget.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The procedure Set_Handler associates the handler
+Handler with the Group_Budget GB; if Handler is @b<null>, the handler of
+Group_Budget is cleared, otherwise it is set.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[A call of Set_Handler for a Group_Budget that
+already has a handler set replaces the handler; if Handler is not @b<null>, the
+handler for Group_Budget remains set.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The function Current_Handler returns the handler
+associated with the group budget GB if the handler for that group budget is
+set; otherwise it returns @b<null>.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The procedure Cancel_Handler clears the handler for
+the group budget if it is set. Cancelled is assigned True if the handler for
+the group budget was set prior to it being cleared; otherwise it is assigned
+False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The constant Min_Handler_Ceiling is the priority
+value that ensures that no ceiling violation would occur, were a handler to be
+executed.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[The precision of the accounting of task execution
+time to a Group_Budget is the same as that defined for execution-time clocks
+from the parent package.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[As part of the finalization of an object of type
+Group_Budget all member tasks are removed from the group identified by that
+object.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[If a task is a member of a Group_Budget when it
+terminates then as part of the finalization of the task it is removed from the
+group.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[For all the operations defined in this package,
+Tasking_Error is raised if the task identified by T has terminated, and
+Program_Error is raised if the value of T is
+Task_Identification.Null_Task_Id.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[An exception propagated from a handler invoked when
+the budget of a group of tasks becomes exhausted has no effect.]}
+
+@end{RunTime}
+
+@begin{Erron}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+For a call of any of the subprograms defined in this package, if the task
+identified by T no longer exists, the execution of the program is erroneous.]}
+@end{Erron}
+
+@begin{ImplReq}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[For a given Group_Budget object, the implementation
+shall perform the operations declared in this package atomically with respect
+to any of these operations on the same Group_Budget object. The replacement of
+a handler, by a call of Set_Handler, shall be performed atomically with respect
+to the execution of the handler.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This prevents various race conditions. In
+  particular it ensures that if the budget is exhausted when Set_Handler
+  is changing the handler then either the new or old handler is executed
+  and the exhausting event is not lost.]}
+@end{Reason}
+@end{ImplReq}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[Clearing or setting of the handler of a group
+budget does not change the current value of the budget. Exhaustion or loading
+of a budget does not change whether the handler of the group budget is set or
+cleared.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgAdded{Version=[2],Text=[A Group_Budget_Handler can be associated with
+several Group_Budget objects.]}
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The package Execution_Time.Group_Budgets is new.]}
 @end{Extend95}
 
 
@@ -3925,7 +4533,7 @@ occurs. Such a protected procedure is called a @i{handler}.
 Handler with the event Event; if Handler is @key{null}, the event is cleared,
 otherwise it is set. The first procedure Set_Handler sets the execution time
 for the event to be At_Time. The second  procedure Set_Handler sets the
-execution time for the event to be Ada.Real_Time.Clock + In_Time.]}
+execution time for the event to be Real_Time.Clock + In_Time.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[A call of a procedure Set_Handler for an event that
@@ -3971,7 +4579,7 @@ cleared; otherwise it is assigned False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[The function Time_Of_Event returns the time of the
-event if the event is set; otherwise it returns Ada.Real_Time.Time_First.]}
+event if the event is set; otherwise it returns Real_Time.Time_First.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[As the final step of the finalization of an object
@@ -4050,6 +4658,6 @@ Timing_Event objects.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The package Ada.Real_Time.Timing_Events is new.]}
+  The package Real_Time.Timing_Events is new.]}
 @end{Extend95}
 

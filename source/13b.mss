@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/03/25 07:16:00 $}
+@Comment{$Date: 2005/03/29 06:32:53 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.8 $}
+@Comment{$Revision: 1.9 $}
 
 @LabeledClause{The Package System}
 
@@ -2235,6 +2235,7 @@ This has the additional advantage of making our terminology more
 accessible to people outside the Ada world.
 @end{DiffWord83}
 
+
 @LabeledClause{Pragma Restrictions}
 
 @begin{Intro}
@@ -2253,6 +2254,7 @@ simpler run-time environments.]
 
 @Syn{lhs=(restriction), rhs="@SynI{restriction_}@Syn2{identifier}
     | @SynI{restriction_parameter_}@Syn2{identifier} => @Syn2{expression}"}
+
 @end{Syntax}
 
 @begin{Resolution}
@@ -2272,6 +2274,60 @@ and its value shall be nonnegative.
 The set of @nt{restrictions} is implementation defined.
 @ImplDef{The set of @nt{restrictions} allowed in a @nt{pragma}
 Restrictions.}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following
+@SynI{restriction_}@nt{identifier}s are language-defined (additional
+restrictions are defined in the Specialized Needs Annexes):]}
+
+@begin{Description}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Attributes)}No_Implementation_Attributes @\There
+   are no implementation-defined attributes. This restriction applies
+   only to the current compilation or environment, not the entire partition.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This restriction (as well as No_Implementation_Pragmas)
+  only applies to the current compilation, because it is likely that the
+  runtime (and possibly user-written low-level code) will need to use
+  implementation-defined entities. But a partition-wide restriction applies
+  everywhere, including the runtime.]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Pragmas)}No_Implementation_Pragmas @\There
+   are no implementation-defined pragmas or pragma arguments. This
+   restriction applies only to the current compilation or environment, not the
+   entire partition.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00368-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Obsolescent_Features)}No_Obsolescent_Features @\There
+   is no use of language features defined in Annex J. It is
+   implementation-defined if uses of the renamings of
+   @RefSecNum{Renamings of Ada 83 Library Units} are detected by this
+   restriction. This restriction applies only to the current compilation or
+   environment, not the entire partition.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[A user could compile a rename
+  like]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} Ada.Text_IO;
+@key{package} Text_IO @key{renames} Ada.Text_IO;]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Such a rename must not be disallowed
+  by this restriction, nor should the compilation of such a rename be
+  restricted by an implementation. Many implementations implement the renames
+  of @RefSecNum{Renamings of Ada 83 Library Units}
+  by compiling them normally; we do not want to require implementations to use
+  a special mechanism to implement these renames.]}
+@end{Reason}
+
+@end{Description}
+
 @end{StaticSem}
 
 @begin{LinkTime}
@@ -2354,9 +2410,17 @@ use of the more efficient and safe one.
 @end{Notes}
 
 @begin{Extend83}
-@Defn{extensions to Ada 83}
-Pragma Restrictions is new to Ada 95.
+  @Defn{extensions to Ada 83}
+  Pragma Restrictions is new to Ada 95.
 @end{Extend83}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01],ARef=[AI95-00368-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Restrictions No_Implementation_Attributes, No_Implementation_Pragmas, and
+  No_Obsolescent_Features are new.]}
+@end{Extend95}
+
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130-01]}
@@ -2373,9 +2437,55 @@ Pragma Restrictions is new to Ada 95.
   restrictions.]}
 @end{DiffWord95}
 
+
 @LabeledAddedSubclause{Version=[2], Name=[Restriction No_Dependence]}
 
-*** TBD ***
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following
+@SynI{restriction_parameter_}@nt{identifier} is language defined:]}
+
+@begin{Description}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Dependence)}No_Dependence @\Specifies
+   a library-unit on which there is no semantic dependence.]}
+@end{Description}
+
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+@ChgAdded{Version=[2],Text=[The @nt{expression} of the
+@nt{restriction_parameter_argument} of a No_Dependence restriction shall have
+the form of a full expanded name of a library unit.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This expression is not resolved; it is just a
+  sequence of identifiers. There is no requirement for any of the identifiers
+  to be defined in this unit or elsewhere.]}
+@end{Ramification}
+
+@end{Legality}
+
+@begin{LinkTime}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+@ChgAdded{Version=[2],Text=[No compilation unit included in the partition shall
+depend semantically on the library unit identified by the @nt{expression}.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[There is no requirement that the library unit
+  actually exist. One possible use of the pragma is to prevent the use of
+  implementation-defined units; when the program is posted to a different
+  compiler, it is perfectly reasonable that no unit with the name exist.]}
+@end{Ramification}
+
+@end{LinkTime}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
@@ -2424,9 +2534,11 @@ calls on the Read and Write procedures of the Root_Stream_Type.
 or can call the Read and Write attributes of other types.)
 @begin{example}
 @ChildUnit{Parent=[Ada],Child=[Streams]}@key[package] Ada.Streams @key[is]
-    @key[pragma] Pure(Streams)@Defn{unpolluted};
+    @key[pragma] Pure(Streams)@Defn{unpolluted};@Comment{This *must* be a Duff joke}
 
-    @key[type] @AdaTypeDefn{Root_Stream_Type} @key[is] @key[abstract tagged limited private];
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+    @key[type] @AdaTypeDefn{Root_Stream_Type} @key[is] @key[abstract tagged limited private];@Chg{Version=[2],New=[
+    @key[pragma] Preelaborable_Initialization(Root_Stream_Type);],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0044],ARef=[AI95-00181-01]}
     @key[type] @AdaTypeDefn{Stream_Element} @key[is] @key[mod] @RI{implementation-defined};
@@ -2450,10 +2562,15 @@ or can call the Read and Write attributes of other types.)
 @key[end] Ada.Streams;
 @end{example}
 
-The Read operation transfers Item'Length stream elements from
-the specified stream to fill the array Item. The index of the last stream
-element transferred is returned in Last. Last is less than Item'Last
-only if the end of the stream is reached.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00227-01]}
+The Read operation transfers @Chg{Version=[2],New=[],Old=[Item'Length ]}stream
+elements from the specified stream to fill the array Item.
+@Chg{Version=[2],New=[Elements are transferred until Item'Length elements have
+been transferred, or until the end of the stream is reached. If any elements
+are transferred, the],Old=[The]} index of the last stream element transferred is
+returned in Last. @Chg{Version=[2],New=[Otherwise, Item'First - 1 is returned
+in Last. ],Old=[]}Last is less than Item'Last only if the end of the stream is
+reached.
 
 The Write operation appends Item to the specified stream.
 
@@ -2501,12 +2618,33 @@ not be addressable on the target @Chg{Version=[2],New=[architecture],Old=[archit
 @begin{Notes}
 See @RefSec{The Package Streams.Stream_IO} for an example of extending
 type Root_Stream_Type.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00227-01]}
+@ChgAdded{Version=[2],Text=[If the end of stream has been reached, and
+Item'First is Stream_Element_Offset'First, Read will raise Constraint_Error.]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Thus, Stream_Element_Arrays should start at 0 or
+  1, not Stream_Element_Offset'First.]}
+@end{Ramification}
 @end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Added @nt{pragma} Preelaborable_Initialization to
+  type Address, so that it can be used to declare default-initialized objects
+  in preelaborated units.]}
+@end{Extend95}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0044],ARef=[AI95-00181-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Stream elements are aliased
   presuming that makes sense.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00227-01]}
+  @ChgAdded{Version=[2],Text=[Fixed the wording for Read to properly define
+  the result in Last when no stream elements are transfered.]}
 @end{DiffWord95}
 
 
@@ -2517,9 +2655,94 @@ type Root_Stream_Type.
 The @Chg{New=[operational attributes ],Old=[]}Write, Read, Output, and
 Input @Chg{New=[],Old=[attributes ]}convert values to a
 stream of elements and reconstruct values from a stream.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
+@ChgAdded{Version=[2],Text=[@Defn{support external streaming}
+@Defn2{Term=[external streaming],Sec={type supports}}
+A type is said to @i{support external streaming} if Read and Write attributes
+are available that provide for sending values of such a type between active
+partitions, with Write marshalling the representation, and Read unmarshalling
+the representation.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
+@ChgAdded{Version=[2],Text=[A limited type supports external streaming only if
+it has available Read and Write attributes. A type with a part that is of an
+access type supports external streaming only if that access type or the type of
+some part that includes the access type component, has Read and Write
+attributes that have been specified via an @nt{attribute_definition_clause},
+and that @nt{attribute_definition_clause} is visible. @Redundant[An anonymous
+access type does not support external streaming. ]All other types support
+external streaming.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[A limited type with a part that is of an access
+  type needs to satisfy both rules.]}
+@end{Ramification}
+
 @end{Intro}
 
 @begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For @PrefixType{every subtype S of
+an elementary type @i(T)}, the following operational attribute is defined:]}
+@begin{Description}
+
+@ChgAttribute{Version=[2],Kind=[Added],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Stream_Size>, ARef=[AI95-00270-01],
+  Text=[@Chg{Version=[2],New=[Denotes the number of bits occupied
+  in a stream by items of subtype S. Hence, the number of stream elements
+  required per item of elementary type @i<T> is:],Old=[]}
+
+@begin(Descexample)
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@i<T>'Stream_Size / Ada.Streams.Stream_Element'Size]}
+@end(Descexample)
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],NoPrefix=[T],Text=[The value of this attribute is of
+  type @i{universal_integer} and is a multiple of Stream_Element'Size.]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],NoPrefix=[T],Text=[Stream_Size may be specified for
+  first subtypes via an @nt{attribute_definition_clause}; the @nt{expression}
+  of such a clause shall be static, non-negative, and a multiple of
+  Stream_Element'Size.]}]}@Comment{end attribute Stream_Size}
+@end{Description}
+@EndPrefixType{}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Stream_Size is a type-related attribute (see
+  @RefSecNum{Operational and Representation Items}).]}
+@end{Discussion}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@PDefn2{Term=[recommended level of support],
+Sec=(Stream_Size attribute)}
+The recommended level of support for the Stream_Size attribute is:]}
+@begin{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
+@ChgAdded{Version=[2],Text=[A Stream_Size clause should be supported for an
+elementary type @i<T> if the specified Stream_Size is a multiple of
+Stream_Element'Size and is no less than the size of the first subtype of @i<T>,
+and no greater than the size of the largest type of the same elementary class
+(signed integer, modular integer, floating point, ordinary fixed point, decimal
+fixed point, or access).]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for the Stream_Size attribute should be
+followed.]}]}
+
+@end{Itemize}
+@end{ImplAdvice}
+
+@begin{StaticSem}
+
 For @PrefixType{every subtype S of a specific type @i(T)},
 the following attributes are defined.
 @begin{Description}
@@ -2554,6 +2777,7 @@ implementations of these attributes are used. The default implementations of
 Write and Read attributes execute as follows:]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
 For elementary types, the representation in terms of stream elements
 is implementation defined.
 For composite types, the Write or Read attribute for each component is
@@ -2566,10 +2790,14 @@ defaults. If @i(T) is a tagged type, the tag is not included.
 @Chg{New=[For type extensions, the Write or Read attribute for the parent type
 is called, followed by the Write or Read attribute of each component of the
 extension part, in canonical order. For a limited type extension, if the
-attribute of any ancestor type of @i(T) has been directly specified and the
-attribute of any ancestor type of the type of any of the extension components
-which are of a limited type has not been specified, the attribute of @i(T)
-shall be directly specified.],Old=[]}
+attribute of @Chg{Version=[2],New=[the parent],Old=[any ancestor]} type of
+@i(T) @Chg{Version=[2],New=[is available anywhere within the immediate scope
+of @i<T>,],Old=[has been directly specified]} and the attribute
+of @Chg{Version=[2],New=[],Old=[any ancestor type of]} the
+type of any of the extension components which are of a limited type@Chg{Version=[2],
+New=[, @i<L>, is not available at the freezing point of @i<T>, then],
+Old=[ has not been specified,]}
+the attribute of @i(T) shall be directly specified.],Old=[]}
 
 @ImplDef{The representation used by the Read and Write attributes of
 elementary types in terms of stream elements.}
@@ -2595,6 +2823,16 @@ elementary types in terms of stream elements.}
   Write or Read attribute of each component is called, whether it is the
   default or is user-specified.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
+@ChgAdded{Version=[2],Text=[Constraint_Error is raised by the predefined Write
+attribute if the value of the elementary item is outside the range of values
+representable using Stream_Size bits. For a signed integer type, an enumeration
+type, or a fixed point type, the range is unsigned only if the integer code for
+the lower bound of the first subtype is non-negative, and a (symmetric) signed
+range that covers all values of the first subtype would require more than
+Stream_Size bits; otherwise the range is signed.]}
+
 
 @Leading@;For @PrefixType{every subtype S'Class of a class-wide type
 @i(T)'Class}:
@@ -2633,20 +2871,30 @@ type is specific or class-wide.
 
 @begin{ImplAdvice}
 
-If a stream element is the same size as a storage element,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00270-01]}
+@Chg{Version=[2],New=[By default, the predefined stream-oriented attributes
+for an elementary type should only read or write the minimum],Old=[If a
+stream element is the same size as a storage element,
 then the normal in-memory representation should be used by Read and
 Write for scalar objects.
-Otherwise, Read and Write should use the smallest
-number of stream elements needed to represent all values in the base
-range of the scalar type.
+Otherwise, Read and Write should use the smallest]}
+number of stream elements
+@Chg{Version=[2],New=[required by the first subtype of the type, rounded
+up to the nearest factor or multiple of the
+word size that is also a multiple of the stream element size.],Old=[needed
+to represent all values in the base range of the scalar type.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[If a stream element is the same size as a storage element,
-then the normal in-memory representation should be used by Read and
-Write for scalar objects.
-Otherwise, Read and Write should use the smallest
-number of stream elements needed to represent all values in the base
-range of the scalar type.*** Changed]}]}
-
+Text=[The predefined stream-oriented attributes for an elementary type
+should only read or write the minimum number of stream elements required by the
+first subtype of the type, rounded up to the nearest factor or multiple of the
+word size that is also a multiple of the stream element size.]}]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00270-01]}
+  @ChgAdded{Version=[2],Text=[This remains @ImplAdviceTitle because we want to
+  allow implementations to remain compatible with their Ada 95 implementations,
+  which may be different. Users can always specify Stream_Size if they need
+  a specific number of stream elements.]}
+@end{Reason}
 @end{ImplAdvice}
 
 @begin{StaticSem}
@@ -2697,10 +2945,15 @@ If @i(T) has discriminants without defaults, S'Output first writes
 the discriminants (using S'Write for each), and S'Input first
 reads the discriminants (using S'Read for each).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
 S'Output then calls S'Write to write the value of @i{Item} to the stream.
 S'Input then creates an object (with the bounds or discriminants, if any,
-taken from the stream), initializes it with S'Read, and returns
-the value of the object.
+taken from the stream), @Chg{Version=[2],New=[passes],Old=[initializes]} it
+@Chg{Version=[2],New=[to],Old=[with]} S'Read, and returns
+the value of the object.@Chg{Version=[2],New=[ Normal default initialization
+and finalization take place for this object (see @RefSecNum{Object Declarations},
+@RefSecNum{User-Defined Assignment and Finalization}, and
+@RefSecNum{Completion and Finalization}).],Old=[]}
 @end(Itemize)
 
 @Leading@;For @PrefixType{every subtype S'Class of a class-wide type
@@ -2715,11 +2968,20 @@ specification:
    @RI{Item}   : @key{in} @RI(T)'Class)
 @end{DescExample}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 @noprefix@;First writes the external tag of @i{Item} to @i{Stream}
-(by calling String'Output(Tags.@!External_Tag(@i{Item}'Tag) @em
+(by calling String'Output(Tags.@!External_Tag(@Chg{Version=[2],New=[@I{Stream}, ],Old=[]}@i{Item}'Tag) @em
 see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Output attribute of
-the specific type identified by the tag.>}
+the specific type identified by the tag.@Chg{Version=[2],New=[ Tag_Error is
+raised if the tag of Item identifies a type declared at an accessibility
+level deeper than that of S.],Old=[]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
+  @ChgAdded{Version=[2],Text=[We raise Tag_Error here for nested types as
+  such a type cannot be successfully read with S'Input, and it doesn't make
+  sense to allow writing a value that cannot be read.]}
+@end{Reason}>}@Comment{End of S'Class'Output attribute}
 
 @AttributeLeading{Prefix=<S'Class>, AttrName=<Input>,
   Text=<S'Class'Input denotes a function with the following specification:
@@ -2729,17 +2991,22 @@ the specific type identified by the tag.>}
    @key{return} @RI(T)'Class
 @end{DescExample}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
 @noprefix@;First reads the external tag from @i{Stream} and determines
 the corresponding internal tag
-(by calling Tags.Internal_Tag(String'Input(@i{Stream})) @em
+(by calling Tags.@Chg{Version=[2],New=[Descendant_Tag],
+Old=[Internal_Tag]}(String'Input(@i{Stream})@Chg{Version=[2],New=[, S'Tag],Old=[]})
+@Chg{Version=[2],New=[which might raise Tag_Error ],Old=[]}@em
 see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Input attribute of
 the specific type identified by the internal tag;
-returns that result.>}
+returns that result.@Chg{Version=[2],New=[ If the specific type identified
+by the internal tag is not covered by T'Class or is abstract, Constraint_Error
+is raised.],Old=[]}>}@Comment{End S'Class'Input attribute}
 @end{Description}
 @EndPrefixType{}
 
-
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
 @IndexCheck{Range_Check}
 In the default implementation of Read and Input for a composite type,
 for each scalar component that is a discriminant or whose
@@ -2754,7 +3021,17 @@ detect that the value returned by Read for the component is not
 a value of its subtype, Constraint_Error is raised. If the value
 is not a value of its subtype and this error is not detected,
 the component has an abnormal value, and erroneous execution
-can result (see @RefSecNum{Data Validity}).
+can result (see @RefSecNum{Data Validity}).@Chg{Version=[2],New=[ In the
+default implementation of Read for a composite type with defaulted
+discriminants, if the actual parameter of Read is constrained, a check is made
+that the discriminants read from the stream are equal to those of the actual
+parameter. Constraint_Error is raised if this check fails.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01]}
+@ChgAdded{Version=[2],Text=[@PDefn{unspecified}It is unspecified at which point
+and in which order these checks are performed. In particular, if
+Constraint_Error is raised due to the failure of one of these checks, it is
+unspecified how many stream elements have been read from the stream.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0045],ARef=[AI95-00132-01]}
 @ChgAdded{Version=[1],Text=[@Defn2{Term=[End_Error],Sec=(raised by failure of run-time check)}
@@ -2798,6 +3075,20 @@ The same rule applies to the result of the Input function.
 @end{Discussion}
 @end{StaticSem}
 
+@begin{Erron}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+If the internal tag returned by Descendant_Tag to T'Class'Input identifies a
+specific type whose tag has not been created, or does not exist in the
+partition at the time of the call, execution is erroneous.]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The definition of Descendant_Tag prevents such
+  a tag from being provided to T'Class'Input if T is a library-level type.
+  However, this rule is needed for nested tagged types.]}
+@end{Ramification}
+@end{Erron}
+
 @begin{ImplReq}
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[1],Text=[For every subtype @i<S> of a language-defined
@@ -2805,7 +3096,26 @@ The same rule applies to the result of the Input function.
   shall be readable by S'Input or S'Read, respectively. This rule applies
   across partitions if the implementation conforms to the Distributed Systems
   Annex.]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01]}
+  @ChgAdded{Version=[2],Text=[If Constraint_Error is raised during a call to
+  Read because of failure of one the above checks, the implementation must
+  ensure that the discriminants of the actual parameter of Read are not
+  modified.]}
 @end{ImplReq}
+
+@begin{ImplPerm}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01]}
+  @ChgAdded{Version=[2],Text=[The number of calls performed by the predefined
+  implementation of the stream-oriented attributes on the Read and Write
+  operations of the stream type is unspecified. An implementation may take
+  advantage of this permission to perform internal buffering. However, all the
+  calls on the Read and Write operations of the stream type needed to implement
+  an explicit invocation of a stream-oriented attribute must take place before
+  this invocation returns. An explicit invocation is one appearing explicitly
+  in the program text, possibly through a generic instantiation (see
+  @RefSecNum{Generic Instantiation}).]}
+@end{ImplPerm}
 
 @begin{Notes}
 For a definite subtype S of a type @i(T), only @i(T)'Write and @i(T)'Read
@@ -2817,6 +3127,12 @@ pass bounds, discriminants, or tags.
 
 User-specified attributes of S'Class are not inherited by other
 class-wide types descended from S.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00279-01]}
+@ChgAdded{Version=[2],Text=[If the prefix subtype S of function S'Class'Input
+is a library-level subtype, then reading a value of a type which has not yet
+been frozen with the S'Class'Input function will always raise Tag_Error;
+execution cannot be erroneous.]}
 @end{Notes}
 
 @begin{Examples}
@@ -2877,7 +3193,31 @@ class-wide types descended from S.
   components if any. If a program was written assuming that the extension
   components were not included in the stream (as in original Ada 95), it
   would fail to work in the language as corrected by the Corrigendum.]}
+
+  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+  @ChgAdded{Version=[2],Text=[Explicitly provided a permission that the number
+  of calls to the underlying stream Read and Write operations may differ from
+  the number determined by the canonical operations. If Ada 95 code somehow
+  depended on the number of calls to Read or Write, it could fail with an
+  Ada 2005 implementation. Such code is likely to be very rare; moreover, such
+  code is really wrong, as the permission applies to Ada 95 as well (as it was
+  a Binding Interpretation).]}
 @end{Inconsistent95}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00270-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The Stream_Size attribute is new. It allows specifying the number of bits
+  that will be streamed for a type. The @ImplAdviceTitle involving this
+  also was changed; this is not incompatible because @ImplAdviceTitle does
+  not have to be followed.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01],ARef=[AI95-00195-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Limited types may have default
+  constructed attributes if all of the parent and (for extensions) extension
+  components have available attributes. Ada 2005 adds the notion of
+  availability to patch up some holes in the Corrigendum model.]}
+@end{Extend95}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2890,6 +3230,34 @@ class-wide types descended from S.
   the stream is reached. (The result could have been abnormal without this
   clarification, thus this is not an inconsistency, as the programmer could
   not have depended on the previous behavior.)]}
+
+  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that the default implementation of
+  S'Input does normal initialization on the object that it passes to S'Read.]}
+
+  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+  @ChgAdded{Version=[2],Text=[Explicitly stated that what is read from a
+  stream when a required check fails is unspecified.]}
+
+  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00279-01]}
+  @ChgAdded{Version=[2],Text=[Specified that Constraint_Error is raised if
+  the internal tag retrieved for S'Class'Input is for some type not covered
+  by S'Class or is abstract. We also explicitly state that the program is
+  erroneous if the tag has not been created or does not currently exist in
+  the partition. (Ada 95 did not specify what happened in these
+  cases; it's very unlikely to have provided some useful result, so this is
+  not considered an inconsistency.)]}
+
+  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00344-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to support nested type extensions.
+  S'Input and S'Output always raise Tag_Error for such extensions, and such
+  extensions were not permitted in Ada 95, so this is neither an extension
+  nor an incompatibility.]}
+
+  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgAdded{Version=[2],Text=[Defined @i<supports external streaming> to
+  put all of the rules about @lquotes@;good@rquotes stream attributes in one
+  place. This is used for distribution and for defining pragma Pure.]}
 @end{DiffWord95}
 
 
