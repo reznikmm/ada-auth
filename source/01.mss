@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/02/03 07:11:14 $}
+@Comment{$Date: 2005/03/03 06:18:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1642,26 +1642,33 @@ Standards.
 @Defn2{Term=[character set standard],Sec=(7-bit)}
 ISO/IEC 646:1991,
 @i{Information technology @em ISO 7-bit coded character
-    set for information interchange.}
+    set for information interchange}.
 
-@Defn{ISO/IEC 1539:1991}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
+@Chg{Version=[2],New=[@Defn{ISO/IEC 1539-1:2004}
+@Defn{1539-1:2004, ISO/IEC standard}
+@Defn{Fortran standard}],
+Old=[@Defn{ISO/IEC 1539:1991}
 @Defn{1539:1991, ISO/IEC standard}
-@Defn{FORTRAN standard}
-ISO/IEC 1539:1991,
-@i{Information technology @em Programming languages @em FORTRAN.}
+@Defn{FORTRAN standard}]}
+ISO/IEC @Chg{Version=[2],New=[1539-1:2004],Old=[1539:1991]},
+@i{Information technology @em Programming languages @em @Chg{Version=[2],
+New=[Fortran -- Part 1: Base language],Old=[FORTRAN]}}.
 
-@Defn{ISO 1989:1985}
-@Defn{1989:1985, ISO standard}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
+@Chg{Version=[2],New=[@Defn{ISO 1989:2002}
+@Defn{1989:2002, ISO standard}],Old=[@Defn{ISO 1989:1985}
+@Defn{1989:1985, ISO standard}]}
 @Defn{COBOL standard}
-ISO 1989:1985,
-@i{Programming languages @em COBOL.}
+ISO@Chg{Version=[2],New=[/IEC],Old=[]} 1989:@Chg{Version=[2],New=[2002],Old=[1985]},
+@i{@Chg{Version=[2],New=[Information technology @em ],Old=[]}Programming languages @em COBOL}.
 
 @Defn{ISO/IEC 6429:1992}
 @Defn{6429:1992, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(control functions)}
 ISO/IEC 6429:1992,
 @i{Information technology @em Control functions for coded
-    graphic character sets.}
+    graphic character sets}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00351-01]}
 @ChgAdded{Version=[2],Text=[@Defn{ISO 8601:2004}
@@ -1674,22 +1681,33 @@ interchange @em Representation of dates and times.}]}
 @Defn2{Term=[character set standard],Sec=(8-bit)}
 ISO/IEC 8859-1:1987,
 @i{Information processing @em 8-bit single-byte coded
-    character sets @em Part 1: Latin alphabet No. 1.}
+    character sets @em Part 1: Latin alphabet No. 1}.
 
-@Defn{ISO/IEC 9899:1990}
-@Defn{9899:1990, ISO/IEC standard}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
+@Chg{Version=[2],New=[@Defn{ISO/IEC 9899:1999}
+@Defn{9899:1999, ISO/IEC standard}],
+Old=[@Defn{ISO/IEC 9899:1990}
+@Defn{9899:1990, ISO/IEC standard}]}
 @Defn{C standard}
-ISO/IEC 9899:1990,
-@i{Programming languages @em C.}
+ISO/IEC 9899:@Chg{Version=[2],New=[1999],Old=[1990]},
+@i{Programming
+languages @em C}@Chg{Version=[2],New=[, supplemented by Technical
+Corrigendum 1:2001 and Technical Corrigendum 2:2004],Old=[]}.
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Unlike Fortran and COBOL, which added the
+  @i{Information technology} prefix to the titles of their standard, C did
+  not. This was confirmed in the list of standards titles on the ISO web site.
+  No idea why ISO allowed that, or whether C is planning to secede from SC22.]}
+@end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001],ARef=[AI95-00124-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[@Defn{ISO/IEC 10646-1:2003}
-@Defn{10646-1:2003, ISO/IEC standard}
-@Defn{10646-1:2003, ISO/IEC standard}
+@Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}
+@Defn{10646:2003, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(16 and 32-bit)}
 ISO/IEC 10646:2003, @i{Information technology @em Universal Multiple-Octet
-Coded Character Set (UCS)}],
+Coded Character Set (UCS)}.],
 Old=[@Defn{ISO/IEC 10646-1:1993}
 @Defn{10646-1:1993, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(16-bit)}
@@ -1709,8 +1727,27 @@ Unicode characterization now.}
 codes C6 and E6 (the ligatures @latin1(198) and @latin1(230)) are considered
 letters. These were named Latin Ligature AE in the original 1993 version,
 which would exclude them from being letters as defined in
-@RefSec{Character Set}], Old=[]}]}
+@RefSec{Character Set}.], Old=[]}]}
 @end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00376-01]}
+@ChgAdded{Version=[2],Text=[@Defn{ISO/IEC 14882:2003}
+@Defn{14882:2003, ISO/IEC standard}
+@Defn{C++ standard}
+ISO/IEC 14882:2003 @i{Programming languages @em C++}.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This title is also missing the
+  @i{Information technology} part. That was confirmed in the list of standards
+  titles on the ISO web site.]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@Defn{ISO/IEC TR 19769:2004}
+@Defn{19769:2004, ISO/IEC technical report}
+ISO/IEC TR 19769:2004, @i{Information technology @em Programming languages,
+their environments and system software inferfaces @em Extensions for the
+programming language C to support new character data types}.]}
 
 @begin{Discussion}
 @Defn{POSIX}
@@ -1721,6 +1758,15 @@ POSIX,
   1990.
 @end{Discussion}
 @end{Intro}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00376-01],ARef=[AI95-00415-01]}
+  @ChgAdded{Version=[2],Text=[Updated references to the most recent versions
+  of these standards. Added C++ and time standards. Added C character set technical
+  report.]}
+@end{DiffWord95}
+
+
 
 @LabeledClause{Definitions}
 

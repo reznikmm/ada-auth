@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:04:59 $}
+@Comment{$Date: 2005/03/03 06:18:22 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2168,7 +2168,7 @@ whose characteristics are @i(derived) from those of a @i(parent type).
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @Syn{lhs=<@Chg{Version=[2],New=<interface_list>,Old=<>}>,
-rhs="@Chg{Version=[2],New=<@SynI{interface_}@Syn2{subtype_indication} {@key{and} @SynI{interface_}@Syn2{subtype_indication}}>,Old=<>}"}
+rhs="@Chg{Version=[2],New=<@SynI{interface_}@Syn2{subtype_mark} {@key{and} @SynI{interface_}@Syn2{subtype_mark}}>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Syn{lhs=<derived_type_definition>,rhs="[@Chg{Version=[2],New=<

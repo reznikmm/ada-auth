@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2005/02/06 04:31:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2005/03/03 06:18:23 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/02/06 04:31:45 $}
+@Comment{$Date: 2005/03/03 06:18:23 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -459,7 +459,7 @@ a check is made that the ceiling priority defined in the
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If the check fails, Program_Error is raised.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068],ARef=[AI95-00121-01]}
 @Defn2{Term=[finalization], Sec=(of a protected object)}
 When a protected object is finalized, for any of its procedures that are
 attached to interrupts, the handler is detached. If the handler was
@@ -471,7 +471,7 @@ attached at the time the protected object was initialized],
 Old=[Otherwise, @Redundant[that is, if an Attach_@!Handler pragma was
 used]]}, the previous handler is restored.
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068],ARef=[AI95-00121-01]}
 @Chg{New=[If all protected objects for interrupt handlers are declared at the
 library-level],Old=[Since only library-level protected procedures can be attached as
 handlers using the Interrupts package]}, the finalization discussed above
@@ -496,7 +496,7 @@ in effect and an interrupt is delivered to a handler, and the interrupt
 hardware priority is higher than the ceiling priority of the corresponding
 protected object, the execution of the program is erroneous.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068],ARef=[AI95-00121-01]}
 @ChgAdded{Version=[1],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the handlers for a given interrupt attached via pragma
 Attach_Handler are not attached and detached in a stack-like (LIFO) order,
@@ -506,10 +506,10 @@ protected object are attached to interrupts via pragma Attach_@!Handler and
 the most recently attached handler for the same interrupt is not the same as
 the one that was attached at the time the protected object was initialized.]}
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068]}
-@ChgAdded{Version=[1],Text=[This simplifies implementation of the Attach_@!Handler pragma by not
-requiring a check that the current handler is the same as the one attached
-by the initialization of a protected object.]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068],ARef=[AI95-00121-01]}
+@ChgAdded{Version=[1],Text=[This simplifies implementation of the Attach_@!Handler
+pragma by not requiring a check that the current handler is the same as the
+one attached by the initialization of a protected object.]}
 @end{Discussion}
 @end{Erron}
 
@@ -602,6 +602,14 @@ a protected procedure that is an interrupt handler.
 
 @end{Notes}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0068],ARef=[AI95-00121-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the meaning of
+  @lquotes@;the previous handler@rquotes; when finalizing protected objects
+  containing interrupt handlers.]}
+@end{Diffword95}
+
+
 @LabeledSubClause{The Package Interrupts}
 
 @begin{StaticSem}
@@ -668,7 +676,7 @@ interrupt is reserved.
 The Is_Attached function returns True if and only if a user-specified
 interrupt handler is attached to the interrupt.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0069]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0069],ARef=[AI95-00166-01]}
 The Current_Handler function returns a value that represents the
 attached handler of the interrupt. If no user-defined handler is attached to
 the interrupt, Current_Handler returns @Chg{New=[@key{null}],
@@ -684,7 +692,7 @@ If New_Handler designates a protected procedure to which the pragma
 Interrupt_@!Handler does not apply, Program_Error is raised. In
 this case, the operation does not modify the existing interrupt treatment.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0069]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0069],ARef=[AI95-00166-01]}
 The Exchange_Handler procedure operates in the same manner as Attach_Handler
 with the addition that the value returned in Old_Handler designates the
 previous treatment for the specified interrupt.@Chg{New=[ If the previous
@@ -693,7 +701,7 @@ treatment is not a user-defined handler, @key[null] is returned.],Old=[]}
 Calling Attach_Handler or Exchange_Handler with this value for New_Handler
 restores the previous handler.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0069]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0069],ARef=[AI95-00166-01]}
 @ChgAdded{Version=[1],Text=[If the application uses only parameterless procedures as
 handlers (other types of handlers may be provided by the implementation, but are not
 required by the standard), then if Old_Handler is not @key(null), it may be
@@ -792,6 +800,14 @@ Device_5_Driver : Device_Interface(5);
   ...
 @end{example}
 @end{Examples}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0069],ARef=[AI95-00166-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the value
+  returned by Current_Handler and Exchange_Handler for the default treatment
+  is null.]}
+@end{Diffword95}
+
 
 @LabeledClause{Preelaboration Requirements}
 
@@ -1226,7 +1242,7 @@ defined.]
    @AdaSubDefn{Null_Task_Id} : @key{constant} Task_Id;
    @key{function}  "=" (Left, Right : Task_Id) @key{return} Boolean;
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0070]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0070],ARef=[AI95-00101-01]}
    @key{function}  @AdaSubDefn{Image}        (T : Task_Id) @key{return} String;
    @key[function]  @AdaSubDefn{Current_Task} @key[return] Task_Id;
    @Key[procedure] @AdaSubDefn{Abort_Task}   (T : @key[in] @Chg{New=[],Old=[@key[out] ]}Task_Id);
@@ -1261,7 +1277,7 @@ environment task, the entire partition is aborted, See @RefSecNum{Partitions}.]
 The functions Is_Terminated and Is_Callable return the value of the
 corresponding attribute of the task identified by T.
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0115]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0115],ARef=[AI95-00206-01]}
 @ChgAdded{Version=[1],Text=[These routines can be called with an argument
 identifying the environment task. Is_Terminated will always be False for such a
 call, but Is_Callable (usually True) could be False if the environment task is
@@ -1351,6 +1367,14 @@ Task_Id value that identifies the environment task.
 
 @end{Notes}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0070],ARef=[AI95-00101-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the mode of the
+  parameter to Abort_Task to @key{in}.]}
+@end{Diffword95}
+
+
+
 @LabeledSubClause{The Package Task_Attributes}
 
 @begin{StaticSem}
@@ -1417,7 +1441,7 @@ Program_Error is raised if the value of T is Null_Task_Id.
 @end{RunTime}
 
 @begin{Bounded}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0071]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0071],ARef=[AI95-00165-01]}
 @ChgAdded{Version=[1],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 If the package Ada.Task_Attributes is instantiated with a controlled type and
 the controlled type has user-defined Adjust or Finalize operations that in
@@ -1442,7 +1466,7 @@ If a value of Task_Id is passed as a parameter to any of the operations
 declared in this package and the corresponding task object no longer exists,
 the execution of the program is erroneous.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0071]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0071],ARef=[AI95-00165-01]}
 @ChgAdded{Version=[1],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Accesses to task attributes via a value of type Attribute_Handle are
 erroneous if executed concurrently with each other or with calls of any of the
@@ -1455,8 +1479,8 @@ via a value of type Attribute_Handle.]}
 @end{Erron}
 
 @begin{ImplReq}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0071]}
-@Chg{New=[For a given attribute of a given task, t],Old=[T]}he implementation
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0071],ARef=[AI95-00165-01]}
+@Chg{New=[For a given attribute of a given task, the],Old=[The]} implementation
 shall perform @Chg{New=[the operations declared in this package],
 Old=[each of the above operations for a given attribute of a given task]}
 atomically with respect to any @Chg{New=[of these operations of],
@@ -1596,3 +1620,10 @@ T (in a call on a subprogram of an instance of this package) identifies
 a nonexistent task, the execution of the program is erroneous.
 @end{Notes}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0071],ARef=[AI95-00165-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that use of task
+  attribute operations from within a task attribute operation (by a an Adjust
+  or Finalize call) is a bounded error, and that concurrent use of attribute
+  handles is erroneous.]}
+@end{Diffword95}

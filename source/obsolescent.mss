@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:12 $}
+@Comment{$Date: 2005/03/03 06:18:24 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -809,11 +809,6 @@ Text=[The following @Syni<restrictions_>@nt<identifiers> exist:]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
 Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\There are no
 semantic dependences on package Asynchronous_Task_Control.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
-Sec=(No_Dynamic_Priorities)}No_Dynamic_Priorities @\There are no
-semantic dependences on package Dynamic_Priorities.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],

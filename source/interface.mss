@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2005/03/01 06:05:11 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2005/03/03 06:18:24 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:11 $}
+@Comment{$Date: 2005/03/03 06:18:24 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -898,7 +898,7 @@ Old=[@RI{implementation-defined}]};
                      Trim_Nul : @key(in)  Boolean := True);
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   -- @RI[ISO/IEC 10646:2003 compatible types defined by SC22/WG14 document N1010.]]}
+@ChgAdded{Version=[2],Text=[   -- @RI[ISO/IEC 10646:2003 compatible types defined by ISO/IEC TR 19769:2004.]]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char16_t} @key<is> @RI{<implementation-defined character type>};]}
@@ -1306,11 +1306,13 @@ interface packages.
 
 @begin{ImplAdvice}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0060],ARef=[AI95-00037-01]}
-@ChgAdded{Version=[1],Text=[The constants nul and wide_nul should have a
-representation of zero.]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[1],Text=[The constants nul@Chg{Version=[2],New=[,],Old=[ and]}
+wide_nul@Chg{Version=[2],New=[, char16_nul, and char32_nul],Old=[]} should
+have a representation of zero.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The constants nul and wide_nul in package Interfaces.C should have a
-representation of zero.]}]}
+Text=[The constants nul, wide_nul, char16_nul, and char32_nul in package
+Interfaces.C should have a representation of zero.]}]}
 
 An implementation should support the following interface
 correspondences between Ada and C.
@@ -1346,7 +1348,7 @@ mode @key{in}, is passed as a t argument to a C function, where t is the
 C struct corresponding to the Ada type T.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
-@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00343-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00343-01]}
 An Ada parameter of a record type T, of any mode,
 @Chg{New=[other than an @key{in} parameter of a @Chg{Version=[2],
 New=[type of convention ],Old=[]}C_Pass_By_Copy@Chg{Version=[2],
@@ -1500,9 +1502,12 @@ declaration:
 
    @key(type) @AdaTypeDefn{char_array_access} @key(is) @key(access) @key(all) char_array;
 
-   @key(type) @AdaTypeDefn{chars_ptr} @key(is) @key(private);
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+   @key(type) @AdaTypeDefn{chars_ptr} @key(is) @key(private);@Chg{Version=[2],New=[
+   @key(pragma) Preelaborable_Initialization (chars_ptr);],Old=[]}
 
-   @key(type) @AdaTypeDefn{chars_ptr_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) chars_ptr;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00276-01]}
+   @key(type) @AdaTypeDefn{chars_ptr_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @Chg{Version=[2],New=[@key(aliased) ],Old=[]}chars_ptr;
 
    @AdaDefn{Null_Ptr} : @key(constant) chars_ptr;
 
@@ -1706,7 +1711,15 @@ to @lquotes@;shorten@rquotes@; the pointed-to char array.@end{ramification}
                   Str    : @key(in) String;
                   Check  : @key(in) Boolean := True);
 @end{Example}
-Equivalent to Update(Item, Offset, To_C(Str), Check).
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00242-01]}
+Equivalent to Update(Item, Offset, To_C(Str@Chg{Version=[2],
+New=[, Append_Nul => False],Old=[]}), Check).
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00242-01]}
+@ChgAdded{Version=[2],Text=[To truncate the Item to the length of Str, use
+Update(Item, Offset, To_C(Str), Check) instead of Update(Item, Offset, Str, Check).
+Note that when truncating Item, Item must be longer than Str.]}
+@end{Discussion}
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -1750,6 +1763,30 @@ Free, not by a called C function.
 @end{itemize}
 @end{Notes}
 
+@begin{Inconsistent95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00242-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  Update for a String parameter is now defined to not add a nul character.
+  It did add a nul in Ada 95. This means that programs which used
+  this behavior of Update to truncate a string will no longer work (the
+  string will not be truncated). This change makes Update for a string
+  consistent with Update for a char_array (no implicit nul is added to the
+  end of a char_array).]}
+@end{Inconsistent95}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Added @nt{pragma} Preelaborable_Initialization to
+  type chars_ptr, so that it can be used in preelaborated units.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00276-01]}
+  @ChgAdded{Version=[2],Text=[The components of chars_ptr_array are
+  aliased so that it can be used to instantiate Interfaces.C.Pointers
+  (that is its intended purpose, which is otherwise mysterious as it
+  has no operations).]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0061],ARef=[AI95-00140-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed the missing semantics
@@ -1766,7 +1803,6 @@ Free, not by a called C function.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0064],ARef=[AI95-00039-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed the missing semantics
   of Update whrn Item is Null_Ptr.]}
-
 @end{DiffWord95}
 
 
@@ -2019,6 +2055,235 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 @key(end) Test_Pointers;
 @end{Example}
 @end{Examples}
+
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Pragma Unchecked_Union]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[union],Sec=[C]}
+@Redundant[A pragma Unchecked_Union specifies an interface correspondence
+between a given discriminated type and some C union. The pragma
+specifies that the associated type shall be given a representation
+that leaves no space for its discriminant(s).]]}
+@end{Intro}
+
+@begin{Syntax}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],
+Text=[The form of a pragma Unchecked_Union is as follows:]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag{Unchecked_Union} (@Syni<first_subtype_>@Syn2<local_name>);''}
+
+@end{Syntax}
+
+@begin{Legality}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[Unchecked_Union is a representation pragma,
+specifying the unchecked union aspect of representation.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[The @SynI{first_subtype_local_}@nt{name} of a
+@nt{pragma} Unchecked_Union shall denote an unconstrained discriminated record
+subtype having a @nt{variant_part}.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[@Defn{unchecked union type}
+@Defn{unchecked union subtype}
+@Defn{unchecked union object}
+A type to which a pragma Unchecked_Union applies is called an
+@i<unchecked union type>. A subtype of an
+unchecked union type is defined to be an @i<unchecked union subtype>.
+An object of an unchecked union type is defined to be an @i<unchecked union
+object>.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[All component subtypes of an unchecked union type
+shall be C-compatible.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[If a component subtype of an unchecked union type
+is subject to a per-object constraint, then the component subtype shall be an
+unchecked union subtype.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[Any name that denotes a discriminant of an object
+of an unchecked union type shall occur within the declarative region of the
+type.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[A component declared in a @nt{variant_part} of an
+unchecked union type shall not have a controlled, protected, or task part.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[The completion of an incomplete or private type
+declaration having a @nt{known_discriminant_part} shall not be an unchecked
+union type.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[An unchecked union subtype shall only be passed as
+a generic actual parameter if the corresponding formal type has no known
+discriminants or is an unchecked union type.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This includes formal private types without a
+  @nt{known_discriminant_part}, formal derived types that do not inherit any
+  discriminants (formal derived types do not have @nt{known_discriminant_part}s),
+  and formal derived types that are unchecked union types.]}
+@end{Ramification}
+
+@end{Legality}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[An unchecked union type is eligible for convention
+C.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[All objects of an unchecked union type have the
+same size.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[Discriminants of objects of an unchecked union type
+are of size zero.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],
+Text=[Any check which would require reading a discriminant
+of an unchecked union object is suppressed (see @RefSecNum{Suppressing Checks}).
+These checks include:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The check performed when addressing a variant
+  component (i.e., a component that was declared in a variant part) of an
+  unchecked union object that the object has this component (see
+  @RefSecNum{Selected Components}).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Any checks associated with a type or subtype
+  conversion of a value of an unchecked union type (see
+  @RefSecNum{Type Conversions}). This includes, for example, the check
+  associated with the implicit subtype conversion of an assignment statement.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The subtype membership check associated with the
+  evaluation of a qualified expression (see @RefSecNum{Qualified Expressions})
+  or an uninitialized allocator (see @RefSecNum{Allocators}).]}
+@end{Itemize}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If a suppressed check would have failed,
+  execution is erroneous (see @RefSecNum{Suppressing Checks}). An
+  implementation is always allowed to make a suppressed check if it can
+  somehow determine the discriminant value.]}
+@end{Discussion}
+
+@end{StaticSem}
+
+@begin{RunTime}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[A view of an unchecked union object (including a
+type conversion or function call) has @i<inferable discriminants> if it has a
+constrained nominal subtype, unless the object is a component of an enclosing
+unchecked union object that is subject to a per-object constraint and the
+enclosing object lacks inferable discriminants.@Defn{inferable discriminants}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[An expression of an unchecked union type has
+inferable discriminants if it is either a name of an object with inferable
+discriminants or a qualified expression whose @nt{subtype_mark} denotes a
+constrained subtype.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],
+Text=[Program_Error is raised in the following
+cases:@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Evaluation of the predefined equality operator
+  for an unchecked union type if either of the operands lacks inferable
+  discriminants.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Evaluation of the predefined equality operator
+  for a type which has a subcomponent of an unchecked union type whose nominal
+  subtype is unconstrained.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Evaluation of a membership test if the
+  @nt{subtype_mark} denotes a constrained unchecked union subtype and the
+  expression lacks inferable discriminants.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Conversion from a derived unchecked union type to
+  an unconstrained non-unchecked-union type if the operand of the conversion
+  lacks inferable discriminants.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Execution of the default implementation of the
+  Write or Read attribute of an unchecked union type.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Execution of the default implementation of the
+  Output or Input attribute of an unchecked union type if the type lacks default
+  discriminant values.]}
+@end{Itemize}
+@end{RunTime}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Text=[An implementation may require that @nt{pragma}
+Controlled be specified for the type of an access subcomponent of an unchecked
+union type.]}
+
+@end{ImplPerm}
+
+@begin{Notes}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],
+Text=[The use of an unchecked union to obtain the effect of an
+unchecked conversion results in erroneous execution (see @RefSecNum{Suppressing Checks}).
+Execution of the following example is erroneous even if
+Float'Size = Integer'Size:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<type> T (Flag : Boolean := False) @key<is>
+   @key<record>
+       @key<case> Flag @key<is>
+           @key<when> False =>
+               F1 : Float := 0.0;
+           @key<when> True =>
+               F2 : Integer := 0;
+       @key<end case>;
+    @key<end record>;
+@key<pragma> Unchecked_Union (T);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[X : T;
+Y : Integer := X.F2; -- @RI[erroneous]]}
+@end{Example}
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @nt{Pragma} Unchecked_Union is new to Ada 2005.]}
+@end{Extend95}
+
+
 
 @LabeledClause{Interfacing with COBOL}
 @begin{Intro}

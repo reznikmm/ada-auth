@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2005/03/01 06:05:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2005/03/03 06:18:23 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/01 06:05:10 $}
+@Comment{$Date: 2005/03/03 06:18:23 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -242,13 +242,13 @@ other sources of priority inheritance.
 @end{Discussion}
 @begin{itemize}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0072]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0072],ARef=[AI95-00092-01]}
 During activation, a task being activated inherits the active priority
 @Chg{New=[that],Old=[of the]} its activator (see
 @RefSecNum{Task Execution - Task Activation})@Chg{New=[ had at the time
 the activation was initiated],Old=[]}.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0072]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0072],ARef=[AI95-00092-01]}
 During rendezvous, the task accepting the entry call inherits the
 @Chg{New=[],Old=[active ]}priority of the @Chg{New=[entry call],Old=[caller]}
 (see @RefSecNum{Entry Calls}@Chg{New=[ and @RefSecNum{Entry Queuing Policies}],Old=[]}).
@@ -307,6 +307,15 @@ Priorities need not be static anymore (except for the main subprogram).
 The description of the Priority pragma has been moved to this annex.
 
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0072],ARef=[AI95-00092-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that dynamic
+  priority changes are not transitive - that is, they don't apply to tasks
+  that are being activated by or in rendezvous with the task that had its
+  priority changed.]}
+@end{DiffWord95}
+
 
 @LabeledClause{Priority Scheduling}
 
@@ -673,7 +682,7 @@ A Locking_Policy pragma is a configuration pragma.
 
 @begin{RunTime}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0073]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0073],ARef=[AI95-00091-01]}
 @Defn{locking policy}
 @Redundant[A locking policy specifies the details of protected object
 locking. These rules specify whether or not protected objects have
@@ -830,11 +839,18 @@ calls another protected operation on the same protected object).
 
 @end{Notes}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0073],ARef=[AI95-00091-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the wording to
+  reflect that pragma Locking_Policy cannot be inside of a program unit.]}
+@end{DiffWord95}
+
+
 @RMNewPage@Comment{Break here so printed RM looks better.}
 @LabeledClause{Entry Queuing Policies}
 
 @begin{Intro}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0074]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0074],ARef=[AI95-00068-01]}
 @Redundant[@Defn{queuing policy}
 This clause specifies a mechanism for a user to choose an entry
 @i{queuing policy}. It also defines @Chg{New=[two],Old=[one]}
@@ -898,7 +914,7 @@ the call is made, but can change later. Within the same priority,
 the order is consistent with the calling (or requeuing,
 or priority setting) time (that is, a FIFO order).
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0075]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0075],ARef=[AI95-00205-01]}
 After a call is first queued, changes to the active priority of a task do
 not affect the priority of the call, unless the base priority of the task is
 set@Chg{New=[ while the task is blocked on an entry call],Old=[]}.
@@ -993,7 +1009,7 @@ is selected.
 Implementations are allowed to define other queuing policies, but
 need not support more than one such policy per partition.
 @begin{Discussion}
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0116]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0116],ARef=[AI95-00069-01]}
   @ChgAdded{Version=[1],Text=[This rule is really redundant, as
   @RefSecNum(Pragmas and Program Units) allows an implementation to limit the
   use of configuration pragmas to an empty environment. In that case, there
@@ -1014,6 +1030,18 @@ Text=[Names that end with @lquotes@;_Queuing@rquotes@; should be used for
 implementation-defined queuing policies.]}]}
 
 @end{ImplAdvice}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0074],ARef=[AI95-00068-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the number of
+  queuing policies defined.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0075],ARef=[AI95-00205-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected so that a call of
+  Set_Priority in an abortable part does not change the priority of the
+  triggering entry call.]}
+@end{DiffWord95}
+
 
 @LabeledClause{Dynamic Priorities}
 
@@ -1226,6 +1254,7 @@ affected tasks.
 
 @end{Notes}
 
+
 @LabeledClause{Preemptive Abort}
 
 @begin{Intro}
@@ -1328,6 +1357,7 @@ deferral of abortion during finalization and in protected actions.
 
 @end{Notes}
 
+
 @LabeledClause{Tasking Restrictions}
 
 @begin{Intro}
@@ -1342,13 +1372,13 @@ construction of highly efficient tasking run-time systems.]
 @Defn2{Term=[Restrictions],Sec=(No_Task_Hierarchy)}No_Task_Hierarchy @\All (nonenvironment) tasks depend directly on
                         the environment task of the partition.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @Defn2{Term=[Restrictions],Sec=(No_Nested_Finalization)}No_Nested_Finalization @\Objects
   with controlled@Chg{New=[, protected, or task],Old=[]} parts and
   access types that designate such objects@Chg{New=[,],Old=[]} shall be
   declared only at library level.
     @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042]}
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042],ARef=[AI95-00130-01]}
     @ChgNote{This is no longer true.}
     @ChgDeleted{Version=[1],Text=[Note that protected types with entries and
     interrupt-handling protected types have nontrivial finalization actions.
@@ -1406,7 +1436,7 @@ Max_Protected_Entries @\Specifies the maximum number of entries per
 
 @begin{RunTime}
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0076]}
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0076],ARef=[AI95-00067-01]}
 @ChgDeleted{Version=[1],Text=[If the following restrictions are violated,
 the behavior is implementation defined.
 @IndexCheck{Storage_Check}
@@ -1417,7 +1447,7 @@ Storage_Error should be raised.]}
 @Leading@;The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
 @begin{Description}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076],ARef=[AI95-00067-01]}
 @Defn2{Term=[Restrictions],Sec=(Max_Storage_At_Blocking)}Max_Storage_At_Blocking @\Specifies
   the maximum portion @redundant[(in storage elements)]
   of a task's Storage_Size that can be retained by a blocked task@Chg{New=[.
@@ -1427,7 +1457,7 @@ language defined:
   @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
   otherwise, the behavior is implementation defined],Old=[]}.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076],ARef=[AI95-00067-01]}
 @Defn2{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies
   the maximum dynamic nesting level of @nt{asynchronous_select}s.
   A value of zero prevents the use of any @nt{asynchronous_@!select}@Chg{New=[ and,
@@ -1440,7 +1470,7 @@ language defined:
   @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
   otherwise, the behavior is implementation defined],Old=[]}.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076],ARef=[AI95-00067-01]}
 @Defn2{Term=[Restrictions],Sec=(Max_Tasks)}Max_Tasks @\Specifies the maximum
   number of task creations that may be executed over the lifetime of a
   partition, not counting the creation of the environment task@Chg{New=[.
@@ -1483,6 +1513,17 @@ efficient implementation.]}]}
 @begin{Notes}
 The above Storage_Checks can be suppressed with pragma Suppress.
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that
+  No_Nested_Finalization covered task and protected parts as well.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0076],ARef=[AI95-00067-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed the description of
+  Max_Tasks and Max_Asynchronous_Select_Nested to eliminate conflicts with the
+  High Integrity Annex (see @RefSecNum{High Integrity Restrictions}).]}
+@end{DiffWord95}
 
 @LabeledClause{Monotonic Time}
 @begin{Intro}
@@ -2203,7 +2244,7 @@ construct.
 If a task becomes held while waiting (as a caller) for a rendezvous to
 complete, the active priority of the accepting task is not affected.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0077]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0077],ARef=[AI95-00111-01]}
 If a task becomes held while waiting in a @nt{selective_accept},
 and a@Chg{New=[n],Old=[]} entry call is issued to one of the open entries,
 the corresponding @Chg{New=[@nt{accept_@!alternative}],Old=[accept body]}
@@ -2218,6 +2259,13 @@ whose barrier becomes open. The corresponding entry body executes.
 @end{itemize}
 
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0077],ARef=[AI95-00111-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected to eliminate the
+  use of the undefined term @lquotes@;accept body@rquotes@;.]}
+@end{DiffWord95}
+
 
 @LabeledClause{Other Optimizations and Determinism Rules}
 
@@ -2397,6 +2445,7 @@ Ravenscar is equivalent to the following set of pragmas:]}
 @key{pragma} Restrictions (
                 No_Abort_Statements,
                 No_Dynamic_Attachment,
+                No_Dynamic_Priorities,
                 No_Implicit_Heap_Allocations,
                 No_Local_Protected_Objects,
                 No_Local_Timing_Events,
@@ -2414,7 +2463,6 @@ Ravenscar is equivalent to the following set of pragmas:]}
                 Max_Task_Entries => 0,
                 No_Dependence => Ada.Asynchronous_Task_Control,
                 No_Dependence => Ada.Calendar,
-                No_Dependence => Ada.Dynamic_Priorities,
                 No_Dependence => Ada.Execution_Time.Group_Budget,
                 No_Dependence => Ada.Execution_Time.Timers,
                 No_Dependence => Ada.Task_Attributes);]}
