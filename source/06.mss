@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2004/11/08 04:56:38 $}
+@Comment{$Date: 2004/11/25 03:12:18 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -46,10 +46,8 @@ since they don't have completions.
 @LabeledClause{Subprogram Declarations}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
 @Redundant[A @nt{subprogram_declaration} declares a procedure or
-function.@Chg{Version=[2],New=[ An @nt{overriding_clause} allows the programmer
-to specify whether overriding is intended (see @RefSecNum{Visibility}).],Old=[]}]
+function.]
 @end{Intro}
 
 @begin{Syntax}
@@ -257,6 +255,10 @@ The @i{types of a profile} are the types of those subtypes.]
 @nt<abstract_subprogram_declaration>
 is abstract; a subprogram declared by a @nt<subprogram_declaration>
 is not. See @RefSec{Abstract Types and Subprograms}.]
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
+@Chg{Version=[2],New=[@Redundant[An @nt{overriding_indicator} is used to
+indicate whether overriding is intended. See @RefSec{Visibility}.]],Old=[]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -341,7 +343,7 @@ The syntax rules for @nt{defining_designator} and
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-The syntax for @nt{overriding_clause} is new.],Old=[]}
+The syntax for @nt{overriding_indicator} is new.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
 @Chg{Version=[2],New=[An optional
@@ -743,7 +745,7 @@ RM83 forgot to restrict the definition of elaboration of a
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[@nt{Overriding_clause} is added to
+@Chg{Version=[2],New=[@nt{Overriding_indicator} is added to
 @nt{subprogram_body}.],Old=[]}
 @end{DiffWord95}
 

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/11/17 01:20:28 $}
+@Comment{$Date: 2004/11/25 03:12:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @LabeledClause{Array Types}
 
@@ -2653,9 +2653,19 @@ Unfortunately, that doesn't solve the part of the problem having to do
 with abstract types.
 
 @ChgRef{Version=[2],Kind=[Deleted]}
-@Chg{Version=[2],New=[],Old=[Children of generic units obviate the need for
-extension in the body somewhat.]}
+@Chg{Version=[2],New=[],Old=[Children of
+generic units obviate the need for extension in the body somewhat.]}
 @end{Reason}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00344]}
+@Chg{Version=[2],New=[This rule applies to types with ancestors (directly
+or indirectly) of formal interfaces
+(see @RefSecNum{Formal Interface Types}), formal tagged private types
+(see @RefSecNum{Formal Private and Derived Types}), and
+formal derived private types whose ancestor type is tagged
+(see @RefSecNum{Formal Private and Derived Types}).],Old=[]}
+@end{Ramification}
 @end{Legality}
 
 @begin{RunTime}
@@ -3754,18 +3764,6 @@ type shall be abstract subprograms or null procedures.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @Chg{Version=[2],New=[The type of a subtype named in an @nt{interface_list}
 shall be an interface type.],Old=[]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[If a type declaration names an interface type in an
-@nt{interface_list}, then the accessibility level of the declared type shall
-not be statically deeper than that of the interface type; also, the declared
-type shall not be declared in a generic body if the interface type is declared
-outside that body.],Old=[]}
-  @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[This probably should be deleted in favor of the AI-344
-   rules. But I don't know if there is any interface specific issues.],Old=[]}
-  @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
 @Chg{Version=[2],New=[A descendant of a nonlimited interface shall be
@@ -5769,9 +5767,9 @@ denotes a subprogram}:
   If the subprogram denoted by P is declared within a
   generic @Chg{Version=[2],New=[unit, and the expression P'Access occurs within
   the body of that generic unit or within the body of a generic unit declared
-  within the declarative region of the generic, then the ultimate ancestor of
-  @i{S} shall be either a non-formal type declared within the generic unit or
-  an anonymous access type of an access parameter.],
+  within the declarative region of the generic unit, then the ultimate ancestor
+  of @i{S} shall be either a non-formal type declared within the generic unit
+  or an anonymous access type of an access parameter.],
   Old=[body, @i{S} shall be declared within the generic body.]}
 
   @begin(Discussion)
@@ -5834,8 +5832,9 @@ we eliminate the need to specify exactly where the
 predefined operators for anonymous access types would be defined, as
 well as the need for an implementer to insert an implicit
 declaration for "=", etc. at the appropriate place in their symbol table.
-Note that 'Access and ".@key[all]" are defined, and ":=" is defined though useless
-since all instances are constant.
+Note that @Chg{Version=[2],New=[":=", ],Old=[]}'Access@Chg{Version=[2],New=[,],Old=[]} and
+".@key[all]" are defined@Chg{Version=[2],New=[],Old=[, and ":=" is defined
+though useless since all instances are constant]}.
 The literal @key(null) is also defined@Chg{Version=[2],New=[],Old=[ for the
 purposes of overload resolution, but is disallowed by a @LegalityTitle
 of this subclause]}.

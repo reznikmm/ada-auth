@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/11/17 01:20:30 $}
+@Comment{$Date: 2004/11/25 03:12:17 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -806,7 +806,8 @@ In general, the @nt<name> in a @nt<prefix> of an @nt<attribute_reference>
 (or a @nt<range_attribute_reference>) has to be resolved
 without using any context.
 However, in the case of the Access attribute,
-the expected type for the @Chg{New=[@nt{prefix}],Old=[prefix]} has to be a
+the expected type for the @Chg{Version=[2],New=[@nt{attribute_reference}],
+Old=[@Chg{New=[@nt{prefix}],Old=[prefix]}]} has to be a
 single access type, and@Chg{Version=[2],New=[],Old=[ if it is an
 access-to-subprogram type (see @RefSecNum(Operations of Access Types)) then]}
 the resolution of the @nt<name> can use the fact that
@@ -820,7 +821,7 @@ conformant with the designated profile of the access type.
   In the general case, there is no @lquotes@;expected type@rquotes@; for
   the @nt<prefix> of an @nt<attribute_reference>.
   In the special case of 'Access,
-  there is an @Chg{Version=[2],New=[@lquotes@;expected profile@rquotes@; or ],
+  there is an @Chg{Version=[2],New=[@lquotes@;expected type@rquotes@; or ],
   Old=[]}@lquotes@;expected profile@rquotes@; for the @nt<prefix>.
 @end(TheProof)
 @begin(Reason)
@@ -3872,7 +3873,8 @@ shall be a numeric type.]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-The entire @LegalityTitle section has been reorganized to eliminate an
+@Chg{Version=[2],New=[The entire @LegalityTitle section has been
+reorganized to eliminate an
 unintentional incompatibility with Ada 83. In rare cases, a type conversion
 between two types related by derivation is not allowed by Ada 95, while it is
 allowed in Ada 83. The reorganization fixes this.
@@ -3880,7 +3882,7 @@ Much of the wording of the legality section is unchanged, but it is reordered
 and reformatted. Because of the limitations of our tools, we had to delete and
 replace nearly the entire section. The text of Ada 95 paragraphs 8 through 12,
 14, 15, 17, 19, and 20 are unchanged; these are now 24.2 through 24.5, 24.11,
-24.12, 24.16, 24.18, and 24.19.
+24.12, 24.16, 24.18, and 24.19.],Old=[]}
 @end{Discussion}
 
 @Leading@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}

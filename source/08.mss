@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/11/17 01:20:31 $}
+@Comment{$Date: 2004/11/25 03:12:19 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -879,13 +879,16 @@ and you can't denote it.
 @nt{with_clause})}
 The declaration of a library unit
 (including a @nt{library_unit_renaming_declaration})
-is hidden from all visibility
-except at places that are within its declarative region
-or within the scope of a @nt{@Chg{Version=[2],New=[nonlimited_],Old=[]}with_clause} that
-mentions it.{@Chg{Version=[2],New=[ The limited view of a library package
-is hidden from all visibility except at places that are within the scope of a
-@nt{limited_with_clause} that mentions it but not within the scope of a
-@nt{nonlimited_with_clause} that mentions it.],Old=[]}
+is hidden from all visibility @Chg{Version=[2],New=[],Old=[except ]}at
+places @Chg{Version=[2],New=[outside],Old=[that are within]} its declarative
+region @Chg{Version=[2],New=[that are not],Old=[or]} within the scope
+of a @nt{@Chg{Version=[2],New=[nonlimited_],Old=[]}with_clause} that
+mentions it.@Chg{Version=[2],New=[ The limited view of a library package
+is hidden from all visibility at places that are not within the scope
+of a @nt{limited_with_clause} that mentions it; in addition, the limited view
+is hidden from all visibility within the declarative region of the package, as
+well as within the scope of any @nt{nonlimited_with_clause} that
+mentions it.],Old=[]}
 @Redundant[For each declaration or renaming of a generic unit as a child of
 some parent generic package, there is a corresponding declaration nested
 immediately within each instance of the parent.]
