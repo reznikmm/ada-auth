@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:01 $}
+@Comment{$Date: 2000/08/24 04:21:03 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1816,7 +1816,9 @@ predefined subprogram before later overriding it.
 
 @begin{Bounded}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027]}
-@Chg{New=[If a subprogram directly or indirectly renames itself, then it is a bounded
+@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+If a subprogram directly or indirectly renames itself, then it is a bounded
 error to call that subprogram. Possible consequences are that Program_Error or
 Storage_Error is raised, or that the call results in infinite recursion.],Old=[]}
 @begin{Reason}

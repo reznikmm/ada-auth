@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/08/24 04:21:04 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/08/18 01:10:08 $}
+@Comment{$Date: 2000/08/24 04:21:04 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -119,10 +119,12 @@ Numerics.Generic_Elementary_Functions has the following declaration:
 @key{end} Ada.Numerics.Generic_Elementary_Functions;
 @end{Example}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
 @Defn{Ada.Numerics.Elementary_Functions}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Elementary_@!Functions]}
 The library package Numerics.Elementary_Functions
-defines the same subprograms as Numerics.@!Generic_Elementary_Functions,
+@Chg{New=[is declared pure and ],Old=[]}defines the same subprograms as
+Numerics.@!Generic_@!Elementary_@!Functions,
 except that the predefined type Float is systematically substituted for
 Float_Type'Base throughout. Nongeneric equivalents of
 Numerics.Generic_Elementary_Functions for each of the other predefined
@@ -334,11 +336,11 @@ shall be as follows:
 
    @redundant[A zero result that is not a prescribed result
    (i.e., one that results from
-   rounding or underflow) has the correct mathematical sign.
+   rounding or underflow) has the correct mathematical sign.]
    @begin{Reason}
       This is a consequence of the rules specified in IEC 559:1989 as they
       apply to underflow situations with traps disabled.
-   @end{Reason}]
+   @end{Reason}
 @end{itemize}
 @end{ImplReq}
 
@@ -612,11 +614,26 @@ obtained from a generator by invoking Save.
 Instantiation of Numerics.Discrete_Random with a subtype having a null range
 raises Constraint_Error.
 
-@IndexCheck{Range_Check}
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0050]}
+@Chg{New=[],Old=[@IndexCheck{Range_Check}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 Invoking Value with a string that is not the image of any generator
-state raises Constraint_Error.
+state raises Constraint_Error.]}
 @end{RunTime}
+
+@begin{Bounded}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0050]}
+@Chg{New=[It is a bounded error to invoke Value with a string that is not the
+image of any generator state.
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+If the error is detected, Constraint_Error or
+Program_Error is raised. Otherwise, a call to Reset with the resulting state
+will produce a generator such that calls to Random with this generator will
+produce a sequence of values of the appropriate subtype, but which might not
+be random in character. That is, the sequence of values might not fulfill the
+implementation requirements of this subclause.],Old=[]}
+@end{Bounded}
 
 @begin{ImplReq}
 A sufficiently long sequence of random numbers obtained by successive calls to

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:25 $}
+@Comment{$Date: 2000/08/24 04:21:03 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -89,12 +89,12 @@ name begins @lquotes@;Latin Capital Letter@rquotes@;.
 @Defn{lower_case_identifier_letter}@nt<lower_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
 name begins @lquotes@;Latin Small Letter@rquotes@;.
 @begin{Honest}
-
-The above rules do not include the ligatures
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0001]}
+@Comment{The change in clause 1.3 for 8652/0001 handles this problem.}
+@Chg{New=[],Old=[The above rules do not include the ligatures
 @latin1(198) and @latin1(230).
 However, the intent is to include these characters as identifier letters.
-This problem was pointed out by a comment from the Netherlands.
-
+This problem was pointed out by a comment from the Netherlands.]}
 @end{Honest}
 
 @Defn{digit}@nt<digit> @\One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.
@@ -291,9 +291,9 @@ lexical elements that form its @nt{compilation}s, excluding
 The text of a @nt<compilation> is divided into @Defn{line}@i{lines}.
 @Defn{end of a line}
 In general, the representation for an end of line is implementation defined.
-@ImplDef{The representation for an end of line.}
 However, a sequence of one or more @nt<format_effector>s other
 than character tabulation (HT) signifies at least one end of line.
+@ImplDef{The representation for an end of line.}
 
 @Leading@Defn{separator}
 @Redundant[In some cases an explicit @i(separator) is required

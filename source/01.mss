@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/08/23 00:31:00 $}
+@Comment{$Date: 2000/08/24 04:21:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1544,9 +1544,10 @@ ISO/IEC 10646-1:1993,
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0001]}
 @Chg{New=[The Technical Corrigendum 1:1996 is needed so that character
-codes C6 and E6 (Latin Letter AE) are considered letters. These were named
-Latin Ligature AE in the original 1993 version, which would exclude them
-from being letters as defined in @RefSec{Character Set}], Old=[]}
+codes C6 and E6 (the ligatures @latin1(198) and @latin1(230)) are considered
+letters. These were named Latin Ligature AE in the original 1993 version,
+which would exclude them from being letters as defined in
+@RefSec{Character Set}], Old=[]}
 @end{Reason}
 
 @begin{Discussion}

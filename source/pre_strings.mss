@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/23 00:31:02 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/24 04:21:04 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/08/23 00:31:02 $}
+@Comment{$Date: 2000/08/24 04:21:04 $}
 
 @LabeledClause{String Handling}
 
@@ -291,10 +291,11 @@ The lower bound of D is 1.
 @begin{Example}@Keepnext
 @key[function] To_Range  (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
 @end{Example}
-@Trailing@;To_Range returns the Character_Sequence value R, with lower bound 1
-and upper bound Map'Length, such that if
-D = To_Domain(Map) then
-D(I) maps to R(I) for each I in D'Range.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0048]}
+@Trailing@;To_Range returns the Character_Sequence value R,
+@Chg{New=[],Old=[with lower bound 1 and upper bound Map'Length,]}
+such that if D = To_Domain(Map)@Chg{New=[, then R has the same bounds as D,
+and],Old=[ then]} D(I) maps to R(I) for each I in D'Range.
 @end{DescribeCode}
 
 An object F of type Character_Mapping_Function maps a Character
@@ -697,13 +698,17 @@ are in Set.
                       First  : @key[out] Positive;
                       Last   : @key[out] Natural);
 @end{Example}
-@Trailing@;Find_Token returns in First and Last the indices of the beginning and
- end of the first slice of Source all of whose elements
- satisfy the Test condition, and such that the elements
- (if any) immediately before and after the slice do not
- satisfy the Test condition.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
+@Trailing@;Find_Token returns in First and Last the indices of the beginning
+and end of the first slice of Source all of whose elements
+satisfy the Test condition, and such that the elements
+(if any) immediately before and after the slice do not
+satisfy the Test condition.
 If no such slice exists, then the value returned for Last is zero, and
-the value returned for First is Source'First.
+the value returned for First is Source'First@Chg{New=[; however, if
+Source'First is not in Positive then Constraint_Error
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+is raised],Old=[]}.
 
 @begin{Example}@Keepnext
 @key[function] Translate (Source  : @key[in] String;
@@ -732,13 +737,24 @@ element of Source, for I in 1..Source'Length.
                         By       : @key[in] String)
    @key[return] String;
 @end{Example}
-@Trailing@;If Low > Source'Last+1, or  High < Source'First@en@;1,
-then Index_Error is propagated.
-Otherwise, if High >= Low then the returned string
-comprises
-Source(Source'First..Low@en@;1) & By & Source(High+1..Source'Last),
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
+@Chg{New=[@Leading],Old=[@Trailing]}If Low > Source'Last+1, or
+High < Source'First@en@;1, then Index_Error is propagated.
+Otherwise@Chg{New=[:],Old=[, if High >= Low then the returned string
+comprises Source(Source'First..Low@en@;1) & By & Source(High+1..Source'Last),
 and if High < Low then the returned string is
-Insert(Source, Before=>Low, New_Item=>By).
+Insert(Source, Before=>Low, New_Item=>By).]}
+
+@begin{Itemize}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0049]}
+@Chg{New=[If High >= Low, then the returned string comprises
+Source(Source'First..Low-1) & By & Source(High+1..Source'Last), but with
+lower bound 1.@Trailing],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0049]}
+@Chg{New=[If High < Low, then the returned string is
+Insert(Source, Before=>Low, New_Item=>By).],Old=[]}
+@end{Itemize}
 
 @begin{Example}@Keepnext
 @key[procedure] Replace_Slice (Source   : @key[in] @key[out] String;
@@ -801,8 +817,9 @@ New_Item), Source, Drop).
                  Through : @key[in] Natural)
    @key[return] String;
 @end{Example}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
 @Trailing@;If From <= Through, the returned string is Replace_Slice(Source, From,
-Through, ""), otherwise it is Source.
+Through, ""), otherwise it is Source@Chg{New=[ with lower bound 1],Old=[]}.
 
 @begin{Example}@Keepnext
 @key[procedure] Delete (Source  : @key[in] @key[out] String;
@@ -895,12 +912,13 @@ Justify=>Justify, Pad=>Pad).
 @key[function] "*" (Left  : @key[in] Natural;
               Right : @key[in] String) @key[return] String;
 @end{Example}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
 These functions replicate a character or string a specified number
 of times. The first function returns a string whose length is Left and each
 of whose elements is Right. The second function returns a string whose
 length is Left*Right'Length and whose value is the null
-string if Left = 0 and is
-(Left@en@;1)*Right & Right otherwise.
+string if Left = 0 and @Chg{New=[otherwise ],Old=[]}is
+(Left@en@;1)*Right & Right @Chg{New=[with lower bound 1],Old=[otherwise]}.
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -1347,9 +1365,10 @@ propagates Index_Error if Index > Length(Source).
                 High   : @key[in] Natural)
    @key[return] String;
 @end{Example}
-@Trailing@;Returns the slice at positions Low through High in the string represented
-by Source; propagates Index_Error if
-Low > Length(Source)+1.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
+@Trailing@;Returns the slice at positions Low through High in the string
+represented by Source; propagates Index_Error if
+Low > Length(Source)+1@Chg{New=[ or High > Length(Source)],Old=[]}.
 @end{DescribeCode}
 
 Each of the functions "=", "<", ">","<=", and ">="
@@ -1373,16 +1392,20 @@ parameter after the translation is given by the Translate function for
 fixed-length strings applied to the string represented by the
 original value of the parameter.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
 Each of the transformation subprograms (Replace_Slice, Insert,
-Overwrite, Delete), selector subprograms
- (Trim, Head, Tail),
+Overwrite, Delete), selector subprograms (Trim, Head, Tail),
 and constructor functions ("*") has an effect based on its
 corresponding subprogram in Strings.Fixed, and Replicate is based on
-Fixed."*". For each of these subprograms, the corresponding
+Fixed."*". @Chg{New=[In the case of a function],
+Old=[For each of these subprograms]}, the corresponding
 fixed-length string subprogram is applied to the string represented by
 the Bounded_String parameter. To_Bounded_String is applied the result
 string, with Drop (or Error in the case of Generic_Bounded_Length."*")
 determining the effect when the string length exceeds Max_Length.
+@Chg{New=[In the case of a procedure, the corresponding function in
+Strings.@!Bounded.@!Generic_@!Bounded_@!Length is applied, with the result
+assigned into the Source parameter.],Old=[]}
 @begin{Ramification}
 The "/=" operations between Bounded_String and String, and between String
 and Bounded_String, are automatically defined based on the corrsponding

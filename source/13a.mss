@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:01 $}
+@Comment{$Date: 2000/08/24 04:21:04 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -22,27 +22,61 @@ given the new Ada 95 semantics given in this section.
 @LabeledRevisedClause{New=[Operational and Representation Items],Old=[Representation Items]}
 
 @begin{Intro}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
+@Chg{New=[@Redundant[Representation and operational items can be used to
+specify aspects of entities. Two kinds of aspects of entities can be specified:
+aspects of representation and operational aspects. Representation items specify
+how the types and other entities of the language are to be mapped onto the
+underlying machine. Operational items specify other properties of entities.
+]],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @Defn{representation item}
 @RootDefn{representation pragma}
 @RootDefn{pragma, representation}
-There are three kinds of @i{representation items}:
-@nt{representation_clause}s,
-@nt<component_clause>s, and @i{representation pragmas}.
-@Redundant[Representation items specify how the types and other entities of
-the language are to be mapped onto the underlying machine.
+There are @Chg{New=[six],Old=[three]} kinds of @i{representation items}:
+@Chg{New=[@nt{attribute_@!definition_@!clause}s for representation attributes,
+@nt{enumeration_@!representation_@!clause}s,
+@nt{record_@!representation_@!clause}s, @nt{at_clause}s, ],
+Old=[@nt{representation_@!clause}s, ]}@nt<component_clause>s, and
+@i{representation pragmas}.
+@Redundant[@Chg{New=[],Old=[Representation items specify how the types and other entities of
+the language are to be mapped onto the underlying machine.]}
 They can be provided to give more efficient representation or to
 interface with features that are outside the domain of the language
 (for example, peripheral hardware).
-Representation items also specify other specifiable
+@Chg{New=[],Old=[Representation items also specify other specifiable
 properties of entities.
 A representation item applies to an entity identified by
 a @nt<local_name>, which denotes an entity declared local to the
 current declarative region, or a library unit declared immediately
-preceding a representation pragma in a @nt<compilation>.]
+preceding a representation pragma in a @nt<compilation>.]}]
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
+@Chg{New=[An @Defn{representation item}@i<operational item> is an
+@nt<attribute_definition_clause> for an operational attribute.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
+@Chg{New=[@Redundant[An operational item or a representation item applies to
+an entity identified by a @nt<local_name>, which denotes an entity declared
+local to the current declarative region, or a library unit declared immediately
+preceding a representation pragma in a @nt<compilation>.]],Old=[]}
 @end{Intro}
 
+@begin{Metarules}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
+@Chg{New=[Aspects of representation are intended to refer to properties that
+need to be known before the compiler can generate code to create or access an
+entity. For instance, the size of an object needs to be known before the object
+can be created. Conversely, operational aspects are those that only need to be
+known before they can be used. For instance, how an object is read from a
+stream only needs to be known when an stream read is executed. Thus, aspects
+of representation have stricter rules as to when they can be specified.],Old=[]}
+@end{Metarules}
+
 @begin{Syntax}
-@Syn{lhs=<representation_clause>,rhs="@Syn2{attribute_definition_clause}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Syn{lhs=<@Chg{New=[aspect_clause],Old=[representation_clause]}>,rhs="@Syn2{attribute_definition_clause}
       | @Syn2{enumeration_representation_clause}
       | @Syn2{record_representation_clause}
       | @Syn2{at_clause}"}
@@ -52,57 +86,61 @@ preceding a representation pragma in a @nt<compilation>.]
       | @SynI{library_unit_}@Syn2{name}"}
 
 @begin{SyntaxText}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 A representation pragma is allowed only at places where a
-@nt{representation_clause}
+@Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]}
 or @nt{compilation_unit} is allowed.
 @end{SyntaxText}
 @end{Syntax}
 
 @begin{Resolution}
-In a representation item,
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+In @Chg{New=[an operational item or],Old=[a]} representation item,
 if the @nt<local_name> is a @nt<direct_name>, then it shall
 resolve to denote a declaration
 (or, in the case of a @nt{pragma}, one or more declarations)
 that occurs immediately within the same
-@nt{declarative_region} as the representation item.
+@nt{declarative_region} as the @Chg{New=[],Old=[representation ]}item.
 If the @nt<local_name> has an @nt<attribute_designator>, then it shall
 resolve to denote an implementation-defined
 component (see @RefSecNum{Record Representation Clauses})
 or a class-wide
 type implicitly declared immediately within the same
-@nt<declarative_region> as the representation item.
+@nt<declarative_region> as the @Chg{New=[],Old=[representation ]}item.
 A @nt<local_name> that is a @i{library_unit_}@nt<name> (only
 permitted in a representation pragma) shall resolve
 to denote the @nt<library_item> that immediately precedes
 (except for other pragmas) the representation pragma.
 @begin{Reason}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 This is a @ResolutionName,
-because we don't want a representation item for X to be ambiguous
-just because there's another X declared in an outer
+because we don't want @Chg{New=[an operational or],Old=[a]} representation
+item for X to be ambiguous just because there's another X declared in an outer
 declarative region.
 It doesn't make much difference, since most
-representation items are for types or subtypes, and type and
-subtype names can't be overloaded.
+@Chg{New=[operational or ],Old=[]}representation items are for types or
+subtypes, and type and subtype names can't be overloaded.
 @end{Reason}
 @begin{Ramification}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 The visibility rules imply that the declaration has to occur
-before the representation item.
+before the @Chg{New=[operational or ],Old=[]}representation item.
 
-For objects, this implies that representation items can be
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+For objects, this implies that @Chg{New=[operational or ],Old=[]}representation items can be
 applied only to stand-alone objects.
 @end{Ramification}
 @end{Resolution}
 
 @begin{Legality}
-The @nt{local_name} of a @nt<representation_clause> or representation
-pragma shall
-statically denote an entity
-(or, in the case of a @nt{pragma}, one or more entities)
-declared immediately preceding it in a @nt<compilation>,
-or within the same
-@nt{declarative_@!part}, @nt{package_@!specification}, @nt{task_@!definition},
-@nt{protected_@!definition}, or @nt{record_@!definition}
-as the representation item.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+The @nt{local_name} of a @Chg{New=[@nt<aspect_clause>],
+Old=[@nt<representation_clause>]} or representation pragma shall
+statically denote an entity (or, in the case of a @nt{pragma},
+one or more entities) declared immediately preceding it in a @nt<compilation>,
+or within the same @nt{declarative_@!part}, @nt{package_@!specification},
+@nt{task_@!definition}, @nt{protected_@!definition}, or
+@nt{record_@!definition} as the representation @Chg{New=[or operational ],Old=[]}item.
 If a @nt<local_name> denotes a @Redundant[local] callable entity,
 it may do so through a @Redundant[local]
 @nt<subprogram_@!renaming_@!declaration>
@@ -269,7 +307,8 @@ See @RefSec{At Clauses}, and @RefSec{Mod Clauses}.
 
 Component_Size clause
 
-External_Tag clause
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
+@Chg{New=[],Old=[External_Tag clause]}
 
 Small clause
 
@@ -279,13 +318,17 @@ Storage_Pool clause
 
 Storage_Size clause
 
-Read clause
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
+@Chg{New=[],Old=[Read clause]}
 
-Write clause
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
+@Chg{New=[],Old=[Write clause]}
 
-Input clause
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
+@Chg{New=[],Old=[Input clause]}
 
-Output clause
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
+@Chg{New=[],Old=[Output clause]}
 
 Machine_Radix clause
 
@@ -330,6 +373,48 @@ pragma Asynchronous (applies to procedures)
 @end{Itemize}
 @end{Ramification}
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
+@Chg{New=[An operational item @i<directly specifies> an @i<operational aspect>
+of the type of the subtype denoted by the @nt{local_name}. The @nt{local_name}
+of an operational item shall denote a first subtype. Operational items are
+type-related.
+@RootDefn{operational aspect}
+@Defn2{Term=[directly specified],
+  Sec=(of an operational aspect of an entity)}
+@RootDefn2{Term=[type-related], Sec=(operational item)}
+@PDefn2{Term=[type-related], Sec=(aspect)}],Old=[]}
+
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
+@Chg{New=[@Leading@;The following operational items are type-related:],Old=[]}
+@begin{Itemize}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[External_Tag clause],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Read clause],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Write clause],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Input clause],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Output clause],Old=[]}
+
+@end{Itemize}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Note that we don't have a provision for operational items that are
+applied to entities other than types or subtypes. This is a mistake that
+we'll probably have to repair someday. The Corrigendum wording probably ought
+to have been "Operational items that name a subtype are type-related." But
+it's too late to change it now.],Old=[]}
+@end{Ramification}
+
+
 A representation item that directly specifies an aspect of a subtype or
 type shall appear after the type is completely
 defined
@@ -340,23 +425,35 @@ If a representation item is given that directly specifies an aspect of an
 entity, then it is illegal to give another representation item that
 directly specifies the same aspect of the entity.
 @begin{Ramification}
-The fact that
-a representation item that directly specifies an aspect of an entity
-is required to appear before the entity is frozen
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+The fact that a representation item @Chg{New=[(or operational item,
+see next paragraph) ],Old=[]}that directly specifies
+an aspect of an entity is required to appear before the entity is frozen
 prevents changing the representation of an entity
-after using the entity in ways that require the
-representation to be known.
+after using the entity in ways that require the representation to be known.
 @end{Ramification}
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
+@Chg{New=[An operational item that directly specifies an aspect of a type
+shall appear before the type is frozen (see @RefSecNum{Freezing Rules}).
+If an operational item is given that directly specifies an aspect of a type,
+then it is illegal to give another operational item that directly specifies
+the same aspect of the type.],Old=[]}
+@begin{Ramification}
+  @ChgRef{Version=[1],Kind=[Added]}
+  @Chg{New=[Unlike representation items, operational items can be specified on
+  partial types. Since they don't affect the representation, the full
+  declaration need not be known to determine their legality.],Old=[]}
+@end{Ramification}
 
-For an untagged derived type,
-no type-related representation items
+For an untagged derived type, no type-related representation items
 are allowed if the parent type is a by-reference type,
 or has any user-defined primitive subprograms.
 @begin{Ramification}
-  On the other hand,
-  subtype-specific representation items may be given for the first
-  subtype of such a type.
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+  On the other hand, subtype-specific representation items may be given
+  for the first subtype of such a type@Chg{New=[, as can operational items],
+  Old=[]}.
 @end{Ramification}
 @begin{Reason}
   The reason for forbidding type-related representation items on
@@ -379,13 +476,19 @@ or has any user-defined primitive subprograms.
   part, but not of the parent part.
 @end{Reason}
 
-Representation aspects of a generic formal parameter are the same as
-those of the actual.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],Ref=[8652/0011]}
+@Chg{New=[Operational and r],Old=[R]}epresentation aspects of a generic formal
+parameter are the same as those of the actual.
+@Chg{New=[Operational and representation aspects of a partial view are the
+same as those of the full view.],Old=[]}
 A type-related representation item is not allowed for a
 descendant of a generic formal untagged type.
 @begin{Ramification}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 Representation items are allowed for types whose subcomponent types
 or index subtypes are generic formal types.
+@Chg{New=[Operational items and subtype-related representation items are
+allowed on descendants of generic formal types.],Old=[]}
 @end{Ramification}
 @begin{Reason}
 Since it is not known whether a formal type has
@@ -400,7 +503,8 @@ or the size or storage place for an object (including a component)
 of a given subtype, shall allow for enough storage space to
 accommodate any value of the subtype.
 
-A representation item that is not supported
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+A representation @Chg{New=[or operational ],Old=[]}item that is not supported
 by the implementation is illegal, or raises an exception
 at run time.
 @end{Legality}
@@ -467,11 +571,14 @@ The same issues apply to Alignment.
 
 @end{Reason}
 
-A derived type inherits each type-related aspect of its parent type that
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
+A derived type inherits each type-related aspect
+@Chg{New=[of representation ],Old=[]}of its parent type that
 was directly specified before the declaration of the derived type,
 or (in the case where the parent is derived)
 that was inherited by the parent type from the grandparent type.
-A derived subtype inherits each subtype-specific aspect of its parent subtype that
+A derived subtype inherits each subtype-specific aspect
+@Chg{New=[of representation ],Old=[]}of its parent subtype that
 was directly specified before the declaration of the derived type,
 or (in the case where the parent is derived)
 that was inherited by the parent subtype from the grandparent subtype,
@@ -491,6 +598,29 @@ If a representation item for the parent appears after the
 @nt{derived_type_declaration},
 then inheritance does not happen for that representation item.
 @end{Ramification}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+@Chg{New=[In contrast, whether operational aspects are inherited by a
+derived type depends on each specific aspect. When operational aspects are
+inherited by a derived type, aspects that were directly specified before the
+declaration of the derived type, or (in the case where the parent is derived)
+that were inherited by the parent type from the grandparent type are inherited.
+An inherited operational aspect is overridden by a subsequent operational item
+that specifies the same aspect of the type.],Old=[]}
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[As with representation items, if an operational item for the parent appears
+after the @nt{derived_type_declaration}, then inheritance does not happen for
+that operational item.],Old=[]}
+@end{Ramification}
+@begin{Discussion}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Currently, only untagged types inherit operational aspects. We
+considered writing this rule that way, but rejected it as that could be too
+specific for future operational aspects. (After all, that is precisely the
+problem that caused us to introduce @lquotes@;operational aspects@rquotes in
+the first place.)],Old=[]}
+@end{Discussion}
 
 @Leading@;Each aspect of representation of an entity is as follows:
 @begin{Itemize}
@@ -514,8 +644,9 @@ If an aspect of representation of an entity is not specified,
 it is chosen by default in an unspecified manner.
 @end{Itemize}
 @begin{Ramification}
-Note that @nt{representation_clause}s can affect the
-semantics of the entity.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+Note that @Chg{New=[@nt{aspect_clause}s],Old=[@nt{representation_clause}s]} can
+affect the semantics of the entity.
 
 The rules forbid things like
 @lquotes@;@key[for] S'Base'Alignment @key[use] ...@rquotes@;
@@ -528,11 +659,20 @@ components of a composite value in the same way for all subtypes of a
 given composite type.
 Hence, Component_Size and record layout are type-related aspects.
 @end{Discussion}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+@Chg{New=[@Defn2{Term=[specified], Sec=(of an operational aspect of an entity)}
+If an operational aspect is @i<specified> for an entity (meaning
+that it is either directly specified or inherited), then that aspect of the
+entity is as specified. Otherwise, the aspect of the entity has the default
+value for that aspect.],Old=[]}
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=[elaboration], Sec=(representation_clause)}
-For the elaboration of a @nt{representation_clause},
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Chg{New=[@PDefn2{Term=[elaboration], Sec=(aspect_clause)}],
+Old=[@PDefn2{Term=[elaboration], Sec=(representation_clause)}]}
+For the elaboration of a @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]},
 any evaluable constructs within it are evaluated.
 @begin{Ramification}
 Elaboration of representation pragmas is covered by the
@@ -560,6 +700,9 @@ There is no requirement that an implementation justify any such
 restrictions.
 They can be based on avoiding implementation complexity,
 or on avoiding excessive inefficiency, for example.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
+@Chg{New=[There is no such permission for operational aspects.],Old=[]}
 @end{Ramification}
 @end{ImplPerm}
 
@@ -652,24 +795,31 @@ it is illegal to apply a @nt{pragma} Pack to A2.
 @end{Incompatible83}
 
 @begin{Extend83}
-Ada 95 allows additional @nt{representation_clause}s for
-objects.
-
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+Ada 95 allows additional @Chg{New=[@nt{aspect_clause}s],
+Old=[@nt{representation_clause}s]} for objects.
 @end{Extend83}
 
 @begin{DiffWord83}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 The syntax rule for @nt{type_representation_clause} is removed;
 the right-hand side of that rule is moved up to where it was used,
-in @nt{representation_clause}.
+in @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]}.
 There are two references to @lquotes@;type representation clause@rquotes@; in RM83,
-both in Section 13;
-these have been reworded.
+both in Section 13; these have been reworded.
+@Chg{New=[Also, the @nt{representation_clause} has been renamed the
+@nt{aspect_clause} to reflect that it can be used to control more than just
+representation aspects.],Old=[]}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 We have defined a new term @lquotes@;representation item,@rquotes@;
-which includes both @nt{representation_clause}s
-and representation pragmas, as well as @nt<component_clause>s.
+which includes @Chg{New=[all representation clauses],
+Old=[@nt{representation_clause}s]} and representation pragmas, as well as
+@nt<component_clause>s.
 This is convenient because the rules are almost identical for all
-three.
+three. @Chg{New=[We have also defined the new terms
+@lquotes@;operational item@rquotes@; and @lquotes@;operational aspects@rquotes@;
+in order to conveniently handle new types of specifable entities.],Old=[]}
 
 All of the forcing occurrence stuff has been moved into its own
 subclause (see @RefSecNum{Freezing Rules}),
@@ -682,7 +832,8 @@ If the user specifies a junk (nonstatic) address in an address
 clause, and the implementation chooses to detect the error (for example,
 using hardware memory management with protected pages), then it's
 clearly going to be a run-time error.
-It seems silly to call that @lquotes@;semantics@rquotes@; rather than @lquotes@;a restriction.@rquotes@;
+It seems silly to call that @lquotes@;semantics@rquotes@; rather than
+@lquotes@;a restriction.@rquotes@;
 
 RM83-13.1(10) tries to pretend that @nt{representation_clause}s don't affect
 the semantics of the program.
@@ -784,10 +935,12 @@ so it probably won't get packed very tightly.
 @LabeledRevisedClause{New=[Operational and Representation Attributes], Old=[Representation Attributes]}
 
 @begin{Intro}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @redundant[@Defn{representation attribute}
 @Defn2{Term=[attribute], Sec=(representation)}
 The values of certain implementation-dependent characteristics can be
-obtained by interrogating appropriate representation attributes.
+obtained by interrogating appropriate
+@Chg{New=[operational or ],Old=[]}representation attributes.
 @RootDefn2{Term=[attribute], Sec=(specifying)}
 Some of these attributes are specifiable via an
 @nt{attribute_definition_clause}.]
@@ -850,6 +1003,7 @@ For example, the following kinds of things are allowed:
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @RootDefn{specifiable (of an attribute and for an entity)}
 @RootDefn2{Term=[attribute], Sec=(specifiable)}
 An @nt{attribute_designator} is allowed in an
@@ -858,7 +1012,9 @@ explicitly allows it,
 or for an implementation-defined attribute
 if the implementation allows it.
 @PDefn2{Term=[aspect of representation], Sec=(specifiable attributes)}
-Each specifiable attribute constitutes an aspect of representation.
+Each specifiable attribute constitutes an
+@Chg{New=[@PDefn2{Term=[operational aspect], Sec=(specifiable attributes)}
+operational aspect or ],Old=[]}aspect of representation.
 @begin{Discussion}
 For each specifiable attribute,
 we generally say something like,
@@ -954,7 +1110,10 @@ Storage elements may, but need not be, independently addressable
 Words are expected to be independently addressable.
 @end{Discussion}
 
-@Leading@;The following attributes are defined:
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Chg{New=[The following representation attributes are defined: Address,
+Alignment, Size, Storage_Size, and Component_Size.],
+Old=[@Leading@;The following attributes are defined:]}
 
 @Leading@;For @PrefixType{a prefix X that denotes an object, program unit,
 or label}:
@@ -973,12 +1132,11 @@ The value of this attribute is of type System.Address.>}
 
 @end{Ramification}
 
-@PDefn2{Term=[specifiable], Sec=(of Address for stand-alone
+@NoPrefix@;@PDefn2{Term=[specifiable], Sec=(of Address for stand-alone
 objects and for program units)}
 @Defn{Address clause}
-@NoPrefix@;Address may be specified for @Redundant[stand-alone] objects
-and for program units
-via an @nt{attribute_definition_clause}.
+Address may be specified for @Redundant[stand-alone] objects
+and for program units via an @nt{attribute_definition_clause}.
   @begin{Ramification}
   Address is not allowed for enumeration literals,
   predefined operators, derived task types,
@@ -1898,32 +2056,38 @@ or it might not have any internal gaps at all.
 
 @begin{StaticSem}
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
+@Chg{New=[The following operational attribute is defined: External_Tag.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @Leading@;For @PrefixType{every subtype S of a tagged type @i(T)
-(specific or class-wide)},
-the following attribute is defined:
+(specific or class-wide)}@Chg{New=[],Old=[, the following
+attribute is defined]}:
+
 @begin{Description}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
 @Attribute{Prefix=<S>, AttrName=<External_Tag>,
   Text=[@Defn{External_Tag clause}
   @PDefn2{Term=(specifiable), Sec=(of External_Tag for a tagged type)}
   S'External_Tag denotes an external string representation
   for S'Tag; it is of the predefined type String.
-  External_Tag may be specified
-  for a specific tagged type
+  External_Tag may be specified for a specific tagged type
   via an @nt{attribute_definition_clause};
   the expression of such a clause shall be static.
-  The default external
-  tag representation is implementation defined.
+  The default external tag representation is implementation defined.
   See @RefSecNum{Dispatching Operations of Tagged Types} and
   @RefSecNum{Stream-Oriented Attributes}.]}
+  @Chg{New=[The value of External_Tag is never inherited@Redundant[; the
+  default value is always used unless a new value is directly specified
+  for a type].],Old=[]}
   @ImplDef{The default external representation for a type tag.}
   @end{Description}
 @EndPrefixType()
 @end{StaticSem}
 
 @begin{ImplReq}
-In an implementation,
-the default external tag for each specific tagged type declared
-in a partition
+In an implementation, the default external tag for each specific tagged type
+declared in a partition
 shall be distinct, so long as the type is declared outside an
 instance of a generic body.
 If the compilation unit in which
@@ -1971,19 +2135,17 @@ Write, Output, Read, Input,
 and Machine_Radix.
 
 It follows from the general rules in @RefSecNum{Operational and Representation Items}
-that if one writes @lquotes@;@key[for] X'Size @key[use] Y;@rquotes@; then the X'Size
-@nt{attribute_reference} will return Y
+that if one writes @lquotes@;@key[for] X'Size @key[use] Y;@rquotes@; then
+the X'Size @nt{attribute_reference} will return Y
 (assuming the implementation allows the Size clause).
-The same is true for all of the specifiable attributes
-except Storage_Size.
+The same is true for all of the specifiable attributes except Storage_Size.
 @begin{Ramification}
-An implementation may specify that an
-implementation-defined attribute is specifiable
-for certain entities.
+An implementation may specify that an implementation-defined attribute is
+specifiable for certain entities.
 This follows from the fact that the semantics of
 implementation-defined attributes is implementation defined.
-An implementation is not allowed to make
-a language-defined attribute specifiable if it isn't.
+An implementation is not allowed to make a language-defined attribute
+specifiable if it isn't.
 @end{Ramification}
 @end{Notes}
 
@@ -2145,13 +2307,14 @@ It's implementable, but not worth it.
 @end{ImplAdvice}
 
 @begin{Notes}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 Unchecked_Conversion may be used to query the internal codes used
 for an enumeration type.
 The attributes of the type, such as Succ, Pred, and Pos,
-are unaffected by the @nt{representation_clause}.
+are unaffected by the @nt{@Chg{New=[enumeration_],Old=[]}representation_clause}.
 For example, Pos always returns the position number, @i{not} the
 internal integer code that might have been specified in a
-@nt{representation_clause}.
+@nt{@Chg{New=[enumeration_],Old=[]}representation_clause}.
 @begin{Discussion}
 @Leading@;Suppose the enumeration type in question is derived:
 @begin{Example}
@@ -2161,9 +2324,10 @@ internal integer code that might have been specified in a
 @key[for] S2 @key[use] (Red => 10, Green => 20, Blue => 30);
 @end{Example}
 
-@Leading@;The @nt{representation_clause} has to specify values for all
-enumerals, even ones that are not in S2 (such as Blue).
-The Base attribute can be used to get at these values.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Leading@;The @nt{@Chg{New=[enumeration_],Old=[]}representation_clause}
+has to specify values for all enumerals, even ones that are not in S2 (such as
+Blue). The Base attribute can be used to get at these values.
 For example:
 @begin{Example}
 @key[for] I @key[in] S2'Base @key[loop]
@@ -2484,13 +2648,15 @@ However, since the @nt{record_representation_clause} is part of the
 declarative region of the type declaration,
 the component names hide outer homographs throughout.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 A @nt{record_representation_clause} cannot be given for a protected type,
 even though protected types, like record types, have components.
 The primary reason for this rule is that there is likely to be too
 much dope in a protected type @em entry queues,
 bit maps for barrier values, etc.
 In order to control the representation of the user-defined components, simply
-declare a record type, give it a @nt{representation_clause}, and give the
+declare a record type, give it a
+@nt{@Chg{New=[record_],Old=[]}representation_clause}, and give the
 protected type one component whose type is the record type.
 Alternatively, if the protected object is protecting something like a
 device register, it makes more sense to keep the thing being
@@ -4073,8 +4239,9 @@ However, in some cases the implementation may choose to associate
 more than one memory block with a given pool element.
 @end{Discussion}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @Leading@;For @PrefixType{every access subtype S},
-the following attributes are defined:
+the following @Chg{New=[representation ],Old=[]}attributes are defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Storage_Pool>,
   Text=<Denotes the storage pool of the type of S.
@@ -4410,10 +4577,11 @@ operations. For example, presuming that Mark_Release_Pool_Type has
 two additional operations, Mark and Release,
 the following is a possible use:
 @begin{Example}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0041]}
 @key[type] Mark_Release_Pool_Type
    (Pool_Size : Storage_Elements.Storage_Count;
     Block_Size : Storage_Elements.Storage_Count)
-        @key[is] @key[new] Root_Storage_Pool @key[with limited private];
+        @key[is] @key[new] Root_Storage_Pool @key[with @Chg{New=[],Old=[limited ]}private];
 
 ...
 
@@ -4841,6 +5009,27 @@ unless otherwise specified for a particular restriction,
 a partition shall obey the restriction
 if a @nt{pragma} Restrictions applies to any compilation unit
 included in the partition.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@Chg{New=[@Leading@;For the purpose of checking whether a partition contains
+constructs that violate any restriction (unless specified otherwise for a
+particular restriction):],Old=[]}
+
+@begin{itemize}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@Chg{New=[Generic instances are logically expanded at the point of
+instantiation;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@Chg{New=[If an object of a type is declared or allocated and not explicitly
+initialized, then all expressions appearing in the definition for the type and
+any of its ancestors are presumed to be used;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@Chg{New=[A @nt{default_expression} for a formal parameter or a generic formal
+object is considered to be used if and only if the corresponding actual
+parameter is not provided in a given call or instantiation.],Old=[]}
+@end{itemize}
 @end{LinkTime}
 
 @begin{ImplPerm}
@@ -4856,6 +5045,19 @@ Such limitations may be enforced at compile time or at run time.
 Alternatively, the implementation is allowed to declare violations of
 the restrictions to be erroneous, and not enforce them at all.
 @end{Ramification}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@Chg{New=[An implementation is permitted to omit restriction checks for code
+that is recognized at compile time to be unreachable and for which no code is
+generated.@Comment{@ImplDef{Whether restriction checks are performed in unreachable code.}
+- we don't define the Impldef, because that would change the paragraph numbers
+in Annex L.}],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0043]}
+@Chg{New=[Whenever enforcement of a restriction is not required prior to
+execution, an implementation may nevertheless enforce the restriction prior to
+execution of a partition to which the restriction applies, provided that every
+execution of the partition would violate the restriction.],Old=[]}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -4926,12 +5128,13 @@ or can call the Read and Write attributes of other types.)
 
     @key[type] @AdaTypeDefn{Root_Stream_Type} @key[is] @key[abstract tagged limited private];
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0044]}
     @key[type] @AdaTypeDefn{Stream_Element} @key[is] @key[mod] @RI{implementation-defined};
     @key[type] @AdaTypeDefn{Stream_Element_Offset} @key[is] @key[range] @RI{implementation-defined};
     @key[subtype] @AdaDefn{Stream_Element_Count} @key[is]
         Stream_Element_Offset @key[range] 0..Stream_Element_Offset'Last;
     @key[type] @AdaTypeDefn{Stream_Element_Array} @key[is]
-        @key[array](Stream_Element_Offset @key[range] <>) @key[of] Stream_Element;
+        @key[array](Stream_Element_Offset @key[range] <>) @key[of]@Chg{New=[@key[ aliased]],Old=[]} Stream_Element;
 
     @key[procedure] @AdaSubDefn{Read}(
       Stream : @key[in] @key[out] Root_Stream_Type;
@@ -4955,6 +5158,18 @@ only if the end of the stream is reached.
 The Write operation appends Item to the specified stream.
 
 @end{StaticSem}
+@begin{ImplPerm}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0044]}
+@Chg{New=[If Stream_Element'Size is not a multiple of System.Storage_Unit,
+then the components of Stream_Element_Array need not be aliased.],Old=[]}
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[If the Stream_Element'Size is less than the size of
+System.Storage_Unit, then components of Stream_Element_Array need not be
+aliased. This is necessary as the components of type Stream_Element size may
+not be addressable on the target architechture.],Old=[]}
+@end{Ramification}
+@end{ImplPerm}
 
 @begin{Notes}
 See @RefSec{The Package Streams.Stream_IO} for an example of extending
@@ -4964,7 +5179,9 @@ type Root_Stream_Type.
 @LabeledSubClause{Stream-Oriented Attributes}
 
 @begin{Intro}
-The Write, Read, Output, and Input attributes convert values to a
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+The @Chg{New=[operational attributes ],Old=[]}Write, Read, Output, and
+Input @Chg{New=[],Old=[attributes ]}convert values to a
 stream of elements and reconstruct values from a stream.
 @end{Intro}
 
@@ -4995,21 +5212,29 @@ the following attributes are defined.
 @EndPrefixType{}
 
 
-For elementary types,
-the representation in terms of stream elements
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+@Chg{New=[For untagged derived types, the Write and Read attributes of the
+parent type are inherited as specified in @RefSecNum(Operational and Representation Items);
+otherwise, the default implementations of these attributes are used. The default
+implementations of Write and Read attributes execute as follows:],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
+For elementary types, the representation in terms of stream elements
 is implementation defined.
-For composite types,
-the Write or Read attribute for each component is called in a
-canonical order.
-The canonical order of components is last dimension varying fastest for
-an array,
-and positional aggregate order for a record.
-Bounds are not included in the
-stream if @i(T) is an array type.
-If @i(T) is a discriminated type,
-discriminants are included only if they have defaults.
-If @i(T) is a tagged type,
-the tag is not included.
+For composite types, the Write or Read attribute for each component is
+called in @Chg{New=[],Old=[a ]}canonical order@Chg{New=[, which],
+Old=[. The canonical order of components]} is last dimension varying
+fastest for an array, and positional aggregate order for a record.
+Bounds are not included in the stream if @i(T) is an array type.
+If @i(T) is a discriminated type, discriminants are included only if they have
+defaults. If @i(T) is a tagged type, the tag is not included.
+@Chg{New=[For type extensions, the Write or Read attribute for the parent type
+is called, followed by the Write or Read attribute of each component of the
+extension part, in canonical order. For a limited type extension, if the
+attribute of any ancestor type of @i(T) has been directly specified and the
+attribute of any ancestor type of the type of any of the extension components
+which are of a limited type has not been specified, the attribute of @i(T)
+shall be directly specified.],Old=[]}
 
 @ImplDef{The representation used by the Read and Write attributes of
 elementary types in terms of stream elements.}
@@ -5017,17 +5242,22 @@ elementary types in terms of stream elements.}
   A discriminant with a default value is treated simply as
   a component of the object. On the other hand,
   an array bound or a discriminant without a default value,
-  is treated as @lquotes@;descriptor@rquotes@; or @lquotes@;dope@rquotes@; that must be provided in order
-  to create the object and thus is logically separate from the regular
-  components. Such @lquotes@;descriptor@rquotes@; data are written by 'Output and
-  produced as part of the delivered result by the 'Input function,
-  but they are not written by 'Write nor read by 'Read.
+  is treated as @lquotes@;descriptor@rquotes@; or @lquotes@;dope@rquotes@;
+  that must be provided in order to create the object and thus is logically
+  separate from the regular components. Such @lquotes@;descriptor@rquotes@;
+  data are written by 'Output and produced as part of the delivered result by
+  the 'Input function, but they are not written by 'Write nor read by 'Read.
   A tag is like a discriminant without a default.
+
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+  @Chg{New=[For limited type extensions, we must have a definition of 'Read and
+  'Write if the parent type has one, as it is possible to make a dispatching
+  call through the attributes. The rule is designed to automatically do the
+  right thing in as many cases as possible.],Old=[]}
 @end{Reason}
 @begin{Ramification}
-  For a composite object,
-  the subprogram denoted by the Write or Read attribute of each
-  component is called,
+  For a composite object, the subprogram denoted by the Write or Read
+  attribute of each component is called,
   whether it is the default or is user-specified.
 @end{Ramification}
 
@@ -5110,8 +5340,14 @@ S'Output to determine how much to read.>}
 @end{Description}
 @EndPrefixType{}
 
-@Leading@;Unless overridden by an @nt<attribute_definition_clause>, these
-subprograms execute as follows:
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
+@Chg{New=[@Leading@;For untagged derived types, the Output and Input attributes
+of the parent type are inherited as specified in @RefSecNum(Operational and Representation Items);
+otherwise, the default implementations of these attributes are used. The
+default implementations of Output and Input attributes execute as follows:],
+Old=[@Leading@;Unless overridden by an @nt<attribute_definition_clause>, these
+subprograms execute as follows:]}
+
 @begin(Itemize)
 If @i(T) is an array type, S'Output first writes the bounds,
 and S'Input first reads the bounds.
@@ -5176,10 +5412,15 @@ detect that the value returned by Read for the component is not
 a value of its subtype, Constraint_Error is raised. If the value
 is not a value of its subtype and this error is not detected,
 the component has an abnormal value, and erroneous execution
-can result
-(see @RefSecNum{Data Validity}).
+can result (see @RefSecNum{Data Validity}).
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0045]}
+@Chg{New=[@Defn2{Term=[End_Error],Sec=(raised by failure of run-time check)}
+In the default implementation of Read and Input for a type, End_Error
+is raised if the end of the stream is reached before the reading of a value of
+the type is completed.],Old=[]}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Write for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Input for a type)}
@@ -5194,16 +5435,24 @@ All nonlimited types have default implementations
 for these operations. An @nt{attribute_reference} for one of
 these attributes is illegal if the type is limited,
 unless the attribute has been specified by an
-@nt{attribute_@!definition_@!clause}.
+@nt{attribute_@!definition_@!clause}@Chg{New=[ or (for a type extension) the
+attribute has been specified for an ancestor type],Old=[]}.
 For an @nt{attribute_@!definition_@!clause} specifying one of these
 attributes, the subtype of the Item parameter shall be the base subtype
 if scalar, and the first subtype otherwise.
 The same rule applies to the result of the Input function.
-
 @begin{Reason}
   This is to simplify implementation.
 @end{Reason}
 @end{StaticSem}
+
+@begin{ImplReq}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+@Chg{New=[For every subtype @i<S> of a language-defined nonlimited specific
+type @i<T>, the output generated by S'Output or S'Write shall be readable by
+S'Input or S'Read, respectively. This rule applies across partitions if the
+implementation conforms to the Distributed Systems Annex.],Old=[]}
+@end{ImplReq}
 
 @begin{Notes}
 For a definite subtype S of a type @i(T), only @i(T)'Write and @i(T)'Read
@@ -5439,8 +5688,6 @@ compile time, we might as well formulate the rule as a legality rule.
 Compilers should not be required to generate code to load the value
 of a variable before the address of the variable has been determined.
 
-
-
 After an entity has been frozen, no further requirements may be
 placed on its representation (such as by a representation item
 or a @nt{full_type_declaration}).
@@ -5464,16 +5711,17 @@ freezing point to the end of the program text
   address if a link-name is used to reference the body.
 @end{Ramification}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
 @Defn2{Term=[freezing],
   Sec=(entity caused by the end of an enclosing construct)}
-The end of a @nt{declarative_part},
-@nt{protected_body},
+The end of a @nt{declarative_part}, @nt{protected_body},
 or a declaration of a library package or generic library package,
 causes @i(freezing) of each entity declared within it,
 except for incomplete types.
 @Defn2{Term=[freezing], Sec=(entity caused by a body)}
-A noninstance body causes freezing of each entity declared
-before it within the same @nt{declarative_part}.
+A noninstance body@Chg{New=[ other than a renames-as-body],Old=[]} causes
+freezing of each entity declared before it within the same
+@nt{declarative_part}.
 @begin{Discussion}
   This is worded carefully to handle nested packages
   and private types.
@@ -5485,8 +5733,7 @@ before it within the same @nt{declarative_part}.
   can be completed in the body.
 @end{Discussion}
 @begin{Ramification}
-  The part about bodies does not say @i{immediately}
-  within.
+  The part about bodies does not say @i{immediately} within.
   A renaming-as-body does not have this property.
   Nor does a @nt{pragma} Import.
 @end{Ramification}
@@ -5511,14 +5758,16 @@ before it within the same @nt{declarative_part}.
   at the containing @nt{declarative_part}.
 @end{Reason}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046]}
 @Leading@RootDefn2{Term=[freezing], Sec=(entity caused by a construct)}
 A construct that (explicitly or implicitly) references an
 entity can cause the @i(freezing) of the entity, as defined by
 subsequent paragraphs.
 @PDefn2{Term=[freezing], Sec=(by a constituent of a construct)}
 At the place where a construct causes freezing,
-each @nt<name>, expression@Redundant[, or @nt{range}]
-within the construct causes freezing:
+each @nt<name>, @Chg{New=[@nt<expression>, @nt<implicit_dereference>],
+Old=[expression]}@Redundant[, or @nt{range}] within the construct causes
+freezing:
 @begin{Ramification}
 Note that in the sense of this paragraph,
 a @nt{subtype_mark} @lquotes@;references@rquotes@; the denoted subtype,
@@ -5555,16 +5804,26 @@ The declaration of a private
 @end{Ramification}
 @end{Itemize}
 
-
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046]}
 @PDefn2{Term=[freezing], Sec=(by an expression)}
 A static expression causes freezing where it occurs.
-A nonstatic expression
-causes freezing where it occurs, unless
-the expression is part of a
+@Chg{New=[@PDefn2{Term=[freezing], Sec=(by an object name)}
+An object name or],Old=[A]} nonstatic expression causes freezing where it
+occurs, unless the @Chg{New=[name or ],Old=[]}expression is part of a
 @nt<default_expression>, a @nt<default_name>, or a per-object expression
 of a component's @nt<constraint>, in which case,
 the freezing occurs later as part of another construct.
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
+@Chg{New=[@PDefn2{Term=[freezing], Sec=(by an implicit call)}
+An implicit call freezes the same entities that would be frozen by an
+explicit call. This is true even if the implicit call is removed via
+implementation permissions.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
+@Chg{New=[@PDefn2{Term=[freezing], Sec=(subtype caused by an implicit conversion)}
+If an expression is implicitly converted to a type or subtype @i(T),
+then at the place where the expression causes freezing, @i(T) is frozen.],Old=[]}
 
 @Leading@;The following rules define which entities are frozen at the place where
 a construct causes freezing:
@@ -5573,8 +5832,8 @@ a construct causes freezing:
 At the place where an expression causes freezing,
 the type of the expression is frozen,
 unless the expression is an enumeration literal used as a
-@nt{discrete_choice} of the @nt{array_aggregate} of an
-@nt{enumeration_representation_clause}.
+@nt{discrete_choice} of the @nt{array_@!aggregate} of an
+@nt{enumeration_@!representation_@!clause}.
 @begin{Reason}
 We considered making enumeration literals never cause freezing,
 which would be more upward compatible,
@@ -5629,15 +5888,23 @@ access types; an @nt{object_declaration} other than a
 @nt{deferred_constant_declaration} causes freezing of the nominal
 subtype, plus all component junk.
 
-@nt{Implicit_dereference}s are covered by @nt{expression}.
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0046]}
+@Chg{New=[],Old=[@nt{Implicit_dereference}s are covered by @nt{expression}.]}
+@Comment{This statement is just plain wrong.}
 @end{Ramification}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
+@Chg{New=[@PDefn2{Term=[freezing], Sec=(subtype caused by an implicit dereference)}
+At the place where an @nt{implicit_dereference} causes freezing,
+the nominal subtype associated with the @nt{implicit_dereference} is frozen.],
+Old=[]}
+
 
 @Redundant[@PDefn2{Term=[freezing], Sec=(type caused by a range)}
 At the place where a @nt{range} causes freezing, the type of the
 @nt<range> is frozen.]
 @begin{TheProof}
-This is consequence of the facts that
-expressions freeze their type,
+This is consequence of the facts that expressions freeze their type,
 and the Range attribute is defined to be equivalent
 to a pair of expressions separated by @lquotes@;..@rquotes@;.}
 @end{TheProof}
@@ -5753,20 +6020,20 @@ old P (which is arguably confusing).
 before the constant is frozen
 (see @RefSecNum{Deferred Constants}).]
 
-@Redundant[A representation item that directly specifies an aspect of an
-entity shall appear before the entity is frozen
-(see @RefSecNum{Operational and Representation Items}).]
-
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Redundant[@Chg{New=[An operational or],Old=[A]} representation item that
+directly specifies an aspect of an entity shall appear before the entity is
+frozen (see @RefSecNum{Operational and Representation Items}).]
 
 @begin{Discussion}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 From RM83-13.1(7). The wording here forbids freezing
-within the @nt{representation_clause} itself, which was not true of the Ada
-83 wording.
+within the @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]}
+itself, which was not true of the Ada 83 wording.
 The wording of this rule is carefully written to
 work properly for type-related representation items.
-For example, an @nt{enumeration_representation_clause} is illegal
-after the type is frozen, even though the @nt{_clause} refers to the
-first subtype.
+For example, an @nt{enumeration_@!representation_@!clause} is illegal after the
+type is frozen, even though the @nt{_clause} refers to the first subtype.
 @end{Discussion}
 @begin{TheProof}
 The above @LegalityTitle are stated @lquotes@;officially@rquotes@;
@@ -5847,8 +6114,9 @@ accessing the size dope for a private type before it is initialized.
 @RefSecNum{Pragmas} overrides the freezing rules in the case of
 unrecognized @nt{pragma}s.
 
-A @nt{representation_clause} for an entity should most certainly
-@i{not} be a freezing point for the entity.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+A @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]} for
+an entity should most certainly @i{not} be a freezing point for the entity.
 @end{ImplNote}
 @end{Legality}
 

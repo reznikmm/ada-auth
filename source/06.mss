@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:26 $}
+@Comment{$Date: 2000/08/24 04:21:03 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -715,9 +715,53 @@ The default calling convention is Intrinsic for the following:
   any other implicitly declared subprogram unless it is
   a dispatching operation of a tagged type;
 
-
   an inherited subprogram of a generic formal tagged type
   with unknown discriminants;
+@begin{Reason}
+@Comment{8652/0011 suggests that the reason for this rule be documented in
+         the AARM.}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Consider:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[package] P @key[is]
+    @key[type] Root @key[is tagged null record];
+    @key[procedure] Proc(X: Root);
+@key[end] P;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[generic]
+    @key[type] Formal(<>) @key[is new] Root @key[with private];
+@key[package] G @key[is]
+    ...
+@key[end] G;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[package body] G @key[is]
+    ...
+    X: Formal := ...;
+    ...
+    Proc(X); -- This is a dispatching call in Instance, because
+             -- the actual type for Formal is class-wide.
+    ...
+    -- Proc'Access would be illegal here, because it is of
+    -- convention Intrinsic, by the above rule.
+@key[end] G;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[type] Actual @key[is new] Root @key[with] ...;
+@key[procedure] Proc(X: Actual);
+@key[package] Instance @key[is new] G(Formal => Actual'Class);
+    -- It is legal to pass in a class-wide actual, because Formal
+    -- has unknown discriminants.],Old=[]}
+@end{Example}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Within Instance, all calls to Proc will be dispatching calls, so Proc doesn't
+really exist in machine code, so we wish to avoid taking 'Access of it.
+This rule applies to those cases where the actual type might be class-wide,
+and makes these Intrinsic, thus forbidding 'Access.],Old=[]}
+@end{Reason}
 
 
   an attribute that is a subprogram;

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:01 $}
+@Comment{$Date: 2000/08/24 04:21:04 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -836,10 +836,12 @@ the declaration of Foo for Derived_From_Formal
 overrides the Foo inherited from T2.
 @end{Ramification}
 @begin{ImplNote}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 For formal types,
 an implementation that shares the code among multiple instances of the
 same generic unit needs to beware that things like parameter passing
-mechanisms (by-copy vs. by-reference) and @nt{representation_clause}s are
+mechanisms (by-copy vs. by-reference) and
+@Chg{New=[@nt{aspect_clause}s],Old=[@nt{representation_clause}s]} are
 determined by the actual.
 @end{ImplNote}
 

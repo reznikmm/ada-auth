@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:00 $}
+@Comment{$Date: 2000/08/24 04:21:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @LabeledClause{Array Types}
 
@@ -1771,15 +1771,16 @@ and makes perfect sense for nonprivate types such as record types.
 @end{Extend83}
 
 @begin{DiffWord83}
-The syntax rules now allow @nt{representation_clause}s to appear in a
-@nt{record_definition}.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+The syntax rules now allow @Chg{New=[@nt{aspect_clause}s],
+Old=[@nt{representation_clause}s]} to appear in a @nt{record_definition}.
 This is not a language extension, because @LegalityName@;s prevent all
 language-defined representation clauses from appearing there.
 However, an implementation-defined @nt{attribute_definition_clause}
 could appear there.
 The reason for this change is to allow the rules for
-@nt{representation_clause}s and representation pragmas
-to be as similar as possible.
+@Chg{New=[@nt{aspect_clause}s],Old=[@nt{representation_clause}s]} and
+representation pragmas to be as similar as possible.
 @end{DiffWord83}
 
 @LabeledSubClause{Variant Parts and Discrete Choices}

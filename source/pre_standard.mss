@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/17 03:15:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/24 04:21:04 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:29 $}
+@Comment{$Date: 2000/08/24 04:21:04 $}
 
 @LabeledClause{The Package Standard}
 
@@ -38,23 +38,26 @@ the visible part of package Standard.}
 
 @Keepnext   --@RI{ The predefined relational operators for this type are as follows:}
 
-   -- @key[function] "="   (Left, Right : Boolean) @key[return] Boolean;
-   -- @key[function] "/="  (Left, Right : Boolean) @key[return] Boolean;
-   -- @key[function] "<"   (Left, Right : Boolean) @key[return] Boolean;
-   -- @key[function] "<="  (Left, Right : Boolean) @key[return] Boolean;
-   -- @key[function] ">"   (Left, Right : Boolean) @key[return] Boolean;
-   -- @key[function] ">="  (Left, Right : Boolean) @key[return] Boolean;
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028]}
+   -- @key[function] "="   (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
+   -- @key[function] "/="  (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
+   -- @key[function] "<"   (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
+   -- @key[function] "<="  (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
+   -- @key[function] ">"   (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
+   -- @key[function] ">="  (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
 
 
 @Keepnext   --@RI{ The predefined logical operators and the predefined logical}
    --@RI{ negation operator are as follows:}
 
-   -- @key[function] "@key[and]" (Left, Right : Boolean) @key[return] Boolean;
-   -- @key[function] "@key[or]"  (Left, Right : Boolean) @key[return] Boolean;
-   -- @key[function] "@key[xor]" (Left, Right : Boolean) @key[return] Boolean;
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028]}
+   -- @key[function] "@key[and]" (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
+   -- @key[function] "@key[or]"  (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
+   -- @key[function] "@key[xor]" (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
 
 
-   -- @key[function] "@key[not]" (Right : Boolean) @key[return] Boolean;
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028]}
+   -- @key[function] "@key[not]" (Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
 
 
    --@RI{ The integer type root_integer is predefined.}
