@@ -15,7 +15,7 @@ package body ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2003  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2003, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -99,6 +99,7 @@ package body ARM_HTML is
     --			here; make them by hand, it only needs to be done once).
     --		- RLB - Updated to insure that changes are separated by a space.
     --  4/11/03 - RLB - Changed some formats to meet WC3 validation requirements.
+    --  9/09/04 - RLB - Removed unused junk noted by Stephen Leake.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -481,8 +482,6 @@ package body ARM_HTML is
 				    Clause_Number : in String) return String is
 	-- Internal routine.
 	-- Returns the link name for a link to the given clause.
-        Clause_Name : String(1..7);
-        Clause_Name_Len : Natural;
     begin
 	if Output_Object.Big_Files then -- One big file.
 	    -- Note this is a self-reference, so the file name is not needed.
@@ -670,7 +669,7 @@ package body ARM_HTML is
 	-- File introduction:
 	if HTML_Kind > HTML_3 then
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """http://www.w3.org/TR/html4/loose.dtd"">"); -- HTML 4.01 (with depreciated features,
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """http://www.w3.org/TR/html4/loose.dtd"">"); -- HTML 4.01 (with depreciated features)
 	else
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 3.2//EN"">"); -- HTML 3.2
 	end if;
@@ -692,6 +691,17 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    TT {font-family: ""Courier New"", monospace; font-size: 90%}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    H4.centered {text-align: center}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DT {display: compact}"); -- CSS2. This doesn't seem to work on IE 4.01, but it is harmless.
+
+	    -- Revision styles:
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert0 {text-decoration: underline; color: black}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete0 {text-decoration: line-through; color: black }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: line-through, underline; color: black }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91)}"); -- Dark blue.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,0,91) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: line-through, underline; color: rgb(0,0,91) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0)"); -- Dark green.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,91,0) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: line-through, underline; color: rgb(0,91,0) }");
 
 	    -- Paragraph styles:
 	    Make_Style ("Normal", ARM_Output.Normal);
@@ -748,13 +758,24 @@ package body ARM_HTML is
 	     -- The style sheet.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <STYLE type=""text/css"">");
 	    -- Element styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5 em; top: auto}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5em; top: auto}");
 		-- Uses absolute positioning (CSS2).
 		-- An alternative would be: "    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; width: 3em; margin-right: -3em}"
 		-- but this offsets the first line of each paragraph by a single space. Looks ugly.
 		-- If absolute positioning is not supported, the paragraph number will end up on a line by itself, which is fine.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    TT {font-family: ""Courier New"", monospace}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DT {display: compact}"); -- CSS2. This doesn't seem to work on IE 4.01, but it is harmless.
+
+	    -- Revision styles:
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert0 {text-decoration: underline; color: black}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete0 {text-decoration: line-through; color: black }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: line-through, underline; color: black }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91)}"); -- Dark blue.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,0,91) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: line-through, underline; color: rgb(0,0,91) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0)"); -- Dark green.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,91,0) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: line-through, underline; color: rgb(0,91,0) }");
 
 	    -- Paragraph styles:
 	    Make_Style ("Normal", ARM_Output.Normal);
@@ -1143,20 +1164,20 @@ package body ARM_HTML is
 	        case Paragraph_Info(Format).Size is
 		    when 0 => null;
 		    when 1 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=+1>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=""+1"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 16;
 		    when 2 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=+2>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=""+2"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 16;
 		    when -1 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-1>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=""-1"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 16;
 		    when -2 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-2>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=""-2"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 16;
 		    when -3 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-3>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=""-3"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 16;
 		    when others => null; -- Not supported.
 	        end case;
 	    end if;
@@ -2537,10 +2558,11 @@ package body ARM_HTML is
 	-- Raises Not_Valid_Error if in a paragraph.
 	function Header_Text return String is
 	begin
-	    if HTML_Kind = HTML_4_Only then
-		return "<INS>" & New_Header_Text & "</INS> <DEL>" & Old_Header_Text & "</DEL>";
-	    else
+	    if HTML_Kind = HTML_3 then
 		return "<U>" & New_Header_Text & "</U> <S>" & Old_Header_Text & "</S>";
+	    else
+		return "<SPAN class=""insert" & Version & """>" & New_Header_Text &
+		  "</SPAN> <SPAN class=""delete" & Version & """>" & Old_Header_Text & "</SPAN>";
 	    end if;
 	end Header_Text;
     begin
@@ -3483,12 +3505,16 @@ package body ARM_HTML is
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
 			   Version : in ARM_Output.Change_Version_Type := '0';
+			   Added_Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
-	-- Note: Changes to these properties must be stack-like; that is,
+	-- Added_Version is only used when the change state is "Both"; it's
+	-- the version of the insertion; Version is the version of the (newer)
+	-- deletion.
+	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
-	-- Bold off, Italic off is not allowed (as separate commands).
+	-- Bold off, Italic off should be avoided (as separate commands).
 	use type ARM_Output.Change_Type;
 	use type ARM_Output.Location_Type;
 	use type ARM_Output.Size_Type;
@@ -3551,14 +3577,16 @@ package body ARM_HTML is
 	    end case;
 	end if;
 
-	if Change /= Output_Object.Change then
-	    -- Note: Version is not used.
+	if Change /= Output_Object.Change or else
+	   Version /= Output_Object.Version or else
+	   Added_Version /= Output_Object.Added_Version then
 	    case Output_Object.Change is
 		when ARM_Output.Insertion =>
-		    if HTML_Kind = HTML_4_Only then
-		        Output_Text (Output_Object, "</INS> ");
-		    else
+		    if HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "</U> ");
+		    else
+		        --Output_Text (Output_Object, "</INS> ");
+		        Output_Text (Output_Object, "</SPAN> ");
 		    end if;
 		    -- Note: We follow these with a space so that
 		    -- we don't get words running together for indexing
@@ -3575,33 +3603,51 @@ package body ARM_HTML is
 		    -- format change immediately following the insertion.
 		    -- Probably not worth worrying about.
 		when ARM_Output.Deletion =>
-		    if HTML_Kind = HTML_4_Only then
-			Output_Text (Output_Object, "</DEL>");
-		    else -- HTML 3.2
-			Output_Text (Output_Object, "</S>");
+		    if HTML_Kind = HTML_3 then
+		        Output_Text (Output_Object, "</S>");
+		    else
+		        --Output_Text (Output_Object, "</DEL>");
+		        Output_Text (Output_Object, "</SPAN>");
+		    end if;
+		when ARM_Output.Both =>
+		    if HTML_Kind = HTML_3 then
+		        Output_Text (Output_Object, "</S></U> ");
+		    else
+		        --Output_Text (Output_Object, "</DEL></INS> ");
+		        Output_Text (Output_Object, "</SPAN> ");
 		    end if;
 		when ARM_Output.None =>
 		    null;
 	    end case;
 	    case Change is
 		when ARM_Output.Insertion =>
-		    if HTML_Kind = HTML_4_Only then
-		        Output_Text (Output_Object, "<INS>");
-		    else -- HTML 3.2
+		    if HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "<U>");
+		    else
+		        --Output_Text (Output_Object, "<INS>");
+		        Output_Text (Output_Object, "<SPAN class=""insert" & Version & """>");
 		    end if;
 		when ARM_Output.Deletion =>
-		    if HTML_Kind = HTML_4_Only then
-		        Output_Text (Output_Object, "<DEL>");
-		    else -- HTML 3.2
+		    if HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "<S>");
+		    else
+		        --Output_Text (Output_Object, "<DEL>");
+		        Output_Text (Output_Object, "<SPAN class=""delete" & Version & """>");
+		    end if;
+		when ARM_Output.Both =>
+		    if HTML_Kind = HTML_3 then
+		        Output_Text (Output_Object, "<U><S>");
+		    else
+		        --Output_Text (Output_Object, "<INS><DEL>");
+		        Output_Text (Output_Object, "<SPAN class=""both" & Version & """>");
 		    end if;
 		when ARM_Output.None =>
 		    null;
 	    end case;
 	    Output_Object.Change := Change;
+	    Output_Object.Version := Version;
+	    Output_Object.Added_Version := Added_Version;
 	end if;
-
 
 	if ARM_Output."/=" (Font, Output_Object.Font) then
 	    case Font is
@@ -3631,9 +3677,9 @@ package body ARM_HTML is
 	    -- size.
 	    case Location is
 		when ARM_Output.Superscript =>
-		    Output_Text (Output_Object, "<SUP><FONT SIZE=+1>");
+		    Output_Text (Output_Object, "<SUP><FONT SIZE=""+1"">");
 		when ARM_Output.Subscript =>
-		    Output_Text (Output_Object, "<SUB><FONT SIZE=+1>");
+		    Output_Text (Output_Object, "<SUB><FONT SIZE=""+1"">");
 		when ARM_Output.Normal =>
 		    null;
 	    end case;
@@ -3644,17 +3690,17 @@ package body ARM_HTML is
 	    -- HTML sizes are 1..7, with a default of 3. So we limit the changes.
 	    if Size > 0 then
 		if Size > 5 then
-	            Output_Text (Output_Object, "<FONT SIZE=+5>");
+	            Output_Text (Output_Object, "<FONT SIZE=""+5"">");
 		else
-	            Output_Text (Output_Object, "<FONT SIZE=+" &
-		        Character'Val(Size + Character'Pos('0')) & ">");
+	            Output_Text (Output_Object, "<FONT SIZE=""+" &
+		        Character'Val(Size + Character'Pos('0')) & """>");
 		end if;
 	    elsif Size < 0 then
 		if Size < -4 then
-	            Output_Text (Output_Object, "<FONT SIZE=-4>");
+	            Output_Text (Output_Object, "<FONT SIZE=""-4"">");
 		else
-	            Output_Text (Output_Object, "<FONT SIZE=-" &
-		        Character'Val(abs Size + Character'Pos('0')) & ">");
+	            Output_Text (Output_Object, "<FONT SIZE=""-" &
+		        Character'Val(abs Size + Character'Pos('0')) & """>");
 		end if;
 	    -- else Size=0, nothing to do.
 	    end if;

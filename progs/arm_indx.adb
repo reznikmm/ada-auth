@@ -14,9 +14,9 @@ package body ARM_Index is
     -- This package contains the routines to manage and generate the index.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003 AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004 AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -50,6 +50,7 @@ package body ARM_Index is
     --  1/31/02 - RLB - Added missing with of Unchecked_Deallocation.
     --  4/11/03 - RLB - Added a hard space in the indexing routine, in order
     --			that the empty paragraph isn't ignored.
+    --  9/09/04 - RLB - Removed unused junk noted by Stephen Leake.
 
     Next_Index_Key : Index_Key;
 
@@ -582,8 +583,6 @@ package body ARM_Index is
 	    procedure Partition_Sort_Slice (Start_Index, End_Index : Natural) is
 	    	-- Use quicksort partition sort to sort the slice between
 		-- Start_Index and End_Index.
-	        Working_Left : Natural;  -- Working Left sorting stop
-	        Working_Right : Natural;  -- Working Right sorting stop
 		Temp_Item : Term_Ptr;
 	    begin
 		case ((End_Index - Start_Index) + 1) is

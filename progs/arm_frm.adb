@@ -18,7 +18,7 @@ package body ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003  AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -129,6 +129,10 @@ package body ARM_Format is
     --			for. Similarly, avoid changing the paragraph kind if
     --			we're not going to use the changes.
     --		- RLB - Fixed font for changing non-terminals in @Syn.
+    --  9/09/04 - RLB - Removed unused junk noticed by Stephen Leake.
+    --  9/10/04 - RLB - Added Version to many Text_Format commands.
+    --		- RLB - Fixed Get_NT to allow the Version parameter in @Chg.
+    --		- RLB - Updated to allow @Chg nesting.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1239,6 +1243,12 @@ package body ARM_Format is
 				 -- The command changes the PARAGRAPH format.
 				 -- Otherwise, it should be ignored when
 				 -- when determining the format.
+	-- The following are only used if Command = Change.
+	Change_Version : ARM_Output.Change_Version_Type;
+	Was_Text : Boolean; -- Did the current subcommand have text?
+	Prev_Change : ARM_Output.Change_Type;
+	Prev_Change_Version : ARM_Output.Change_Version_Type;
+	Prev_Old_Change_Version : ARM_Output.Change_Version_Type;
     end record;
     type Nesting_Stack_Type is array (1 .. 40) of Items;
     type Format_State_Type is record
@@ -1271,7 +1281,12 @@ package body ARM_Format is
 		 Old_Next_Subhead_Paragraph => Plain, -- Not used.
 		 Old_Next_Paragraph_Format => Plain, -- Not used.
 		 Old_Tab_Stops => ARM_Output.NO_TABS, -- Not used.
-		 Is_Formatting => False); -- Not used.
+		 Is_Formatting => False, -- Not used.
+		 Change_Version => '0', -- Not used.
+		 Was_Text => False, -- Not used.
+		 Prev_Change => ARM_Output.None, -- Not used.
+		 Prev_Change_Version => '0', -- Not used.
+		 Prev_Old_Change_Version => '0'); -- Not used.
 --Ada.Text_IO.Put_Line (" &Stack (" & Name & ")");
 	    Format_State.Nesting_Stack (Format_State.Nesting_Stack_Ptr).Close_Char := ARM_Input.Get_Close_Char (Param_Ch);
 	end Set_Nesting_for_Command;
@@ -1291,7 +1306,12 @@ package body ARM_Format is
 		 Old_Next_Subhead_Paragraph => Plain, -- Not used.
 		 Old_Next_Paragraph_Format => Plain, -- Not used.
 		 Old_Tab_Stops => ARM_Output.NO_TABS, -- Not used.
-		 Is_Formatting => False); -- Not used.
+		 Is_Formatting => False, -- Not used.
+		 Change_Version => '0', -- Not used.
+		 Was_Text => False, -- Not used.
+		 Prev_Change => ARM_Output.None, -- Not used.
+		 Prev_Change_Version => '0', -- Not used.
+		 Prev_Old_Change_Version => '0'); -- Not used.
 --Ada.Text_IO.Put_Line (" &Stack (Parameter)");
 	end Set_Nesting_for_Parameter;
 
@@ -2080,6 +2100,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 				    Italic => Format_Object.Is_Italic,
 				    Font => Format_Object.Font,
 				    Change => Format_Object.Change,
+				    Version => Format_Object.Current_Change_Version,
+				    Added_Version => Format_Object.Current_Old_Change_Version,
 				    Size => Format_Object.Size,
 				    Location => Format_Object.Location);
 		        ARM_Output.Ordinary_Text (Output_Object,
@@ -2090,6 +2112,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 				    Italic => Format_Object.Is_Italic,
 				    Font => Format_Object.Font,
 				    Change => Format_Object.Change,
+				    Version => Format_Object.Current_Change_Version,
+				    Added_Version => Format_Object.Current_Old_Change_Version,
 				    Size => Format_Object.Size,
 				    Location => Format_Object.Location);
 			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
@@ -2157,6 +2181,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 					        Font => Format_Object.Font,
 					        Change => Format_Object.Change,
 					        Version => Format_Object.Current_Change_Version,
+					        Added_Version => Format_Object.Current_Old_Change_Version,
 					        Size => ARM_Output."-"(Format_Object.Size, 1),
 					        Location => Format_Object.Location);
 			            ARM_Output.Ordinary_Text (Output_Object,
@@ -2167,6 +2192,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 					        Font => Format_Object.Font,
 					        Change => Format_Object.Change,
 					        Version => Format_Object.Current_Change_Version,
+					        Added_Version => Format_Object.Current_Old_Change_Version,
 					        Size => Format_Object.Size,
 					        Location => Format_Object.Location);
 			        when ARM_Format.Old_Only => null; -- Not deleted.
@@ -2272,6 +2298,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 		       Bold => False, Italic => False,
 		       Font => ARM_Output.Default, Size => -1,
 		       Change => Format_Object.Change,
+		       Version => Format_Object.Current_Change_Version,
+		       Added_Version => Format_Object.Current_Old_Change_Version,
 		       Location => ARM_Output.Normal);
 		end if;
 	        ARM_Output.Ordinary_Character (Output_Object, '{');
@@ -2280,12 +2308,16 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 		       Bold => False, Italic => True, Font => ARM_Output.Default,
 		       Size => -1,
 		       Change => Format_Object.Change,
+		       Version => Format_Object.Current_Change_Version,
+		       Added_Version => Format_Object.Current_Old_Change_Version,
 		       Location => ARM_Output.Normal);
 		else
 	            ARM_Output.Text_Format (Output_Object,
 		       Bold => False, Italic => True, Font => ARM_Output.Default,
 		       Size => 0,
 		       Change => Format_Object.Change,
+		       Version => Format_Object.Current_Change_Version,
+		       Added_Version => Format_Object.Current_Old_Change_Version,
 		       Location => ARM_Output.Normal);
 		end if;
 	        ARM_Output.Ordinary_Text (Output_Object, ARM_Index.Clean(Term_Text));
@@ -2294,12 +2326,16 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 		       Bold => False, Italic => False, Font => ARM_Output.Default,
 		       Size => -1,
 		       Change => Format_Object.Change,
+		       Version => Format_Object.Current_Change_Version,
+		       Added_Version => Format_Object.Current_Old_Change_Version,
 		       Location => ARM_Output.Normal);
 		else
 	            ARM_Output.Text_Format (Output_Object,
 		       Bold => False, Italic => False, Font => ARM_Output.Default,
 		       Size => 0,
 		       Change => Format_Object.Change,
+		       Version => Format_Object.Current_Change_Version,
+		       Added_Version => Format_Object.Current_Old_Change_Version,
 		       Location => ARM_Output.Normal);
 		end if;
 		case Special is
@@ -2313,6 +2349,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 		       Bold => False, Italic => False, Font => ARM_Output.Default,
 		       Size => 0,
 		       Change => Format_Object.Change,
+		       Version => Format_Object.Current_Change_Version,
+		       Added_Version => Format_Object.Current_Old_Change_Version,
 		       Location => ARM_Output.Normal);
 		end if;
 	        ARM_Output.Ordinary_Character (Output_Object, ' ');
@@ -2800,25 +2838,35 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 	        -- Local routine:
 	        -- Return the "current" non-terminal from
 	        -- the Syntax_NT string. Handles @Chg.
---*** But doesn't handle the optional Version parameter.
+		New_Pos : Natural;
 	        Close_Ch : Character;
 	        Open_Cnt : Natural;
 	    begin
 	        if Format_Object.Syntax_NT_Len < 11 or else
 		   Format_Object.Syntax_NT (1) /= '@' or else
-		   Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (2 .. 4)) /= "chg" or else
-		   Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (6 .. 8)) /= "new" or else
-		   Format_Object.Syntax_NT (9) /= '=' then
+		   Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (2 .. 4)) /= "chg" then
 		    -- No @Chg command here.
 		    return Format_Object.Syntax_NT (1 .. Format_Object.Syntax_NT_Len);
-	        elsif Format_Object.Changes = Old_Only then
+		end if;
+		if Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (6 .. 9)) = "new=" then
+		    -- No version parameter:
+		    New_Pos := 6;
+		elsif Format_Object.Syntax_NT_Len > 22 and then
+		    Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (6 .. 14)) = "version=[" and then
+		    Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (16 .. 21)) = "],new=" then
+		    New_Pos := 18;
+		else
+Ada.Text_IO.Put_Line ("%% Oops, can't either Version or New in NT chg command, line " & ARM_Input.Line_String (Input_Object));
+		    return Format_Object.Syntax_NT (1 .. Format_Object.Syntax_NT_Len);
+		end if;
+	        if Format_Object.Changes = Old_Only then
 		    -- Find the end of the "New" parameter, and
 		    -- return it.
 		    Close_Ch := ARM_Input.Get_Close_Char (
-		        Format_Object.Syntax_NT(10));
+		        Format_Object.Syntax_NT(New_Pos+4));
 		    Open_Cnt := 1;
-		    for I in 11 .. Format_Object.Syntax_NT_Len loop
-		        if Format_Object.Syntax_NT(I) = Format_Object.Syntax_NT(10) then
+		    for I in New_Pos+5 .. Format_Object.Syntax_NT_Len loop
+		        if Format_Object.Syntax_NT(I) = Format_Object.Syntax_NT(New_Pos+4) then
 			    Open_Cnt := Open_Cnt + 1;
 		        elsif Format_Object.Syntax_NT(I) = Close_Ch then
 			    if Open_Cnt <= 1 then
@@ -2853,19 +2901,19 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg old command, line " & A
 		        end if;
 		    end loop;
 Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & ARM_Input.Line_String (Input_Object));
-		    return Format_Object.Syntax_NT (11 .. Format_Object.Syntax_NT_Len);
+		    return Format_Object.Syntax_NT (New_Pos+5 .. Format_Object.Syntax_NT_Len);
 	        else -- Some new format, use the new name.
 		    -- Find the end of the "New" parameter, and
 		    -- return it.
 		    Close_Ch := ARM_Input.Get_Close_Char (
-		        Format_Object.Syntax_NT(10));
+		        Format_Object.Syntax_NT(New_Pos+4));
 		    Open_Cnt := 1;
-		    for I in 11 .. Format_Object.Syntax_NT_Len loop
-		        if Format_Object.Syntax_NT(I) = Format_Object.Syntax_NT(10) then
+		    for I in New_Pos+5 .. Format_Object.Syntax_NT_Len loop
+		        if Format_Object.Syntax_NT(I) = Format_Object.Syntax_NT(New_Pos+4) then
 			    Open_Cnt := Open_Cnt + 1;
 		        elsif Format_Object.Syntax_NT(I) = Close_Ch then
 			    if Open_Cnt <= 1 then
-			        return Format_Object.Syntax_NT (11 .. I - 1);
+			        return Format_Object.Syntax_NT (New_Pos+5 .. I - 1);
 			    else
 			        Open_Cnt := Open_Cnt - 1;
 			    end if;
@@ -2874,7 +2922,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    end loop;
 		    -- Weird if we get here, can't find end of parameter.
 Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & ARM_Input.Line_String (Input_Object));
-		    return Format_Object.Syntax_NT (11 .. Format_Object.Syntax_NT_Len);
+		    return Format_Object.Syntax_NT (New_Pos+5 .. Format_Object.Syntax_NT_Len);
 	        end if;
 	    end Get_NT;
 
@@ -3015,6 +3063,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 						    Font => Format_Object.Font,
 						    Size => Format_Object.Size,
 						    Change => Format_Object.Change,
+					            Version => Format_Object.Current_Change_Version,
+					            Added_Version => Format_Object.Current_Old_Change_Version,
 						    Location => Format_Object.Location);
 			    ARM_Output.DR_Reference (Output_Object,
 						     Text => Ref_Name(1..Len),
@@ -3025,6 +3075,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 						    Font => Format_Object.Font,
 						    Size => Format_Object.Size,
 						    Change => Format_Object.Change,
+					            Version => Format_Object.Current_Change_Version,
+					            Added_Version => Format_Object.Current_Old_Change_Version,
 						    Location => Format_Object.Location);
 			    ARM_Output.Ordinary_Character (Output_Object, '}');
 			    ARM_Output.Ordinary_Character (Output_Object, ' ');
@@ -3072,6 +3124,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 						    Font => Format_Object.Font,
 						    Size => Format_Object.Size,
 						    Change => Format_Object.Change,
+					            Version => Format_Object.Current_Change_Version,
+					            Added_Version => Format_Object.Current_Old_Change_Version,
 						    Location => Format_Object.Location);
 			    ARM_Output.AI_Reference (Output_Object,
 						     Text => Ref_Name(1..Len),
@@ -3082,6 +3136,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 						    Font => Format_Object.Font,
 						    Size => Format_Object.Size,
 						    Change => Format_Object.Change,
+					            Version => Format_Object.Current_Change_Version,
+					            Added_Version => Format_Object.Current_Old_Change_Version,
 						    Location => Format_Object.Location);
 			    ARM_Output.Ordinary_Character (Output_Object, '}');
 			    ARM_Output.Ordinary_Character (Output_Object, ' ');
@@ -3123,6 +3179,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size,
 					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Bold := True;
 
@@ -3134,6 +3192,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size,
 					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Italic := True;
 
@@ -3145,6 +3205,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Font => ARM_Output.Roman,
 					    Size => Format_Object.Size,
 					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Font := ARM_Output.Roman;
 
@@ -3156,6 +3218,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Font => ARM_Output.Swiss,
 					    Size => Format_Object.Size,
 					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Font := ARM_Output.Swiss;
 
@@ -3167,6 +3231,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Font => ARM_Output.Fixed,
 					    Size => Format_Object.Size,
 					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Font := ARM_Output.Fixed;
 
@@ -3178,6 +3244,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Font => ARM_Output.Roman,
 					    Size => Format_Object.Size,
 					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Font := ARM_Output.Roman;
 		    Format_Object.Is_Italic := True;
@@ -3193,6 +3261,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Font => Format_Object.Font,
 					        Size => Format_Object.Size-1,
 					        Change => Format_Object.Change,
+				                Version => Format_Object.Current_Change_Version,
+				                Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
 		        Format_Object.Size := Format_Object.Size - 1;
 		    end;
@@ -3208,6 +3278,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Font => Format_Object.Font,
 					        Size => Format_Object.Size+1,
 					        Change => Format_Object.Change,
+				                Version => Format_Object.Current_Change_Version,
+				                Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
 		        Format_Object.Size := Format_Object.Size + 1;
 		    end;
@@ -3220,6 +3292,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size,
 					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Bold := True;
 
@@ -3231,6 +3305,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Font => ARM_Output.Swiss,
 					    Size => Format_Object.Size,
 					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Font := ARM_Output.Swiss;
 
@@ -3253,7 +3329,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    My_Tabs : ARM_Output.Tab_Info := ARM_Output.NO_TABS;
 			    Stops : String(1..80);
 			    Len : Natural;
-			    Loc : Natural := 1;
 			begin
 		            ARM_Input.Copy_to_String_until_Close_Char (
 			        Input_Object,
@@ -3355,7 +3430,12 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				 Old_Next_Subhead_Paragraph => Format_Object.Next_Paragraph_Subhead_Type,
 				 Old_Next_Paragraph_Format => Format_Object.Next_Paragraph_Format_Type,
 				 Old_Tab_Stops => Format_Object.Paragraph_Tab_Stops,
-				 Is_Formatting => True); -- Reset if needed later.
+				 Is_Formatting => True, -- Reset if needed later.
+				 Change_Version => '0', -- Not used.
+				 Was_Text => False, -- Not used.
+				 Prev_Change => ARM_Output.None, -- Not used.
+				 Prev_Change_Version => '0', -- Not used.
+				 Prev_Old_Change_Version => '0'); -- Not used.
 
 		            Process_Begin;
 
@@ -3496,7 +3576,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- Note that there is no difference between these in terms
 		    -- of the index, so we do them together.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Term, Subterm : String(1..90);
 			TLen, SLen : Natural := 0;
 			Key : ARM_Index.Index_Key;
@@ -3555,7 +3635,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- Note that there is no difference between these in terms
 		    -- of the index, so we do them together.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Term, Subterm : String(1..90);
 			TLen, SLen : Natural := 0;
 			Key : ARM_Index.Index_Key;
@@ -3609,7 +3689,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		when Index_See =>
 		    -- @IndexSee[Term={term}, See={see}]. Index a See item.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Term, See : String(1..80);
 			TLen, SLen : Natural := 0;
 			Key : ARM_Index.Index_Key;
@@ -3662,7 +3742,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		when Index_See_Also =>
 		    -- @IndexSeeAlso[Term={term}, See={see}]. Index a See Also item.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Term, See : String(1..80);
 			TLen, SLen : Natural := 0;
 			Key : ARM_Index.Index_Key;
@@ -3716,7 +3796,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- @SeeOther[Primary={term}, Other={see}]. Generate a
 		    -- See {see} in the index, but no reference.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Term, See : String(1..80);
 			TLen, SLen : Natural := 0;
 			Key : ARM_Index.Index_Key;
@@ -3767,7 +3847,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- @SeeAlso[Primary={term}, Other={see}]. Generate a
 		    -- See also {see} in the index, but no reference.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Term, See : String(1..80);
 			TLen, SLen : Natural := 0;
 			Key : ARM_Index.Index_Key;
@@ -3862,7 +3942,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- Library Units" with a secondary entry of <parent>.<child>,
 		    -- and an index entry for <parent>.<child>.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Parent, Child : String(1..80);
 			PLen, CLen : Natural := 0;
 			Key : ARM_Index.Index_Key;
@@ -4251,6 +4331,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Font => ARM_Output.Swiss,
 					        Size => Format_Object.Size,
 					        Change => Format_Object.Change,
+				                Version => Format_Object.Current_Change_Version,
+				                Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
 
 			-- Index the non-terminal:
@@ -4268,6 +4350,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Font => Format_Object.Font,
 					        Size => Format_Object.Size,
 					        Change => Format_Object.Change,
+				                Version => Format_Object.Current_Change_Version,
+				                Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
 			Format_Object.Last_Non_Space := False;
 
@@ -4338,6 +4422,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Font => ARM_Output.Swiss,
 					        Size => Format_Object.Size,
 					        Change => Format_Object.Change,
+				                Version => Format_Object.Current_Change_Version,
+				                Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
 			ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
 		        ARM_Output.Text_Format (Output_Object,
@@ -4346,6 +4432,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Font => Format_Object.Font,
 					        Size => Format_Object.Size,
 					        Change => Format_Object.Change,
+				                Version => Format_Object.Current_Change_Version,
+				                Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
 			Format_Object.Last_Non_Space := True;
 		    end;
@@ -4364,6 +4452,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size,
 					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Italic := True;
 
@@ -4376,7 +4466,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- ToGlossaryAlso) or the AARM (for ToGlossary).
 
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Key : ARM_Index.Index_Key;
 		    begin
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -4499,6 +4589,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        Font => Format_Object.Font,
 				        Size => Format_Object.Size,
 				        Change => Format_Object.Change,
+			                Version => Format_Object.Current_Change_Version,
+			                Added_Version => Format_Object.Current_Old_Change_Version,
 				        Location => Format_Object.Location);
 			    ARM_Output.Ordinary_Text (Output_Object,
 				 Text => "Implementation defined: ");
@@ -4508,6 +4600,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        Font => Format_Object.Font,
 				        Size => Format_Object.Size,
 				        Change => Format_Object.Change,
+			                Version => Format_Object.Current_Change_Version,
+			                Added_Version => Format_Object.Current_Old_Change_Version,
 				        Location => Format_Object.Location);
 			    Format_Object.Last_Paragraph_Subhead_Type := Bare_Annotation;
 			    Format_Object.Last_Non_Space := False;
@@ -4541,7 +4635,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     --	attribute <Name> is indexed as by calling @Defn2{Term=[Attribute],
 		     --	Sec=<Name>}, and as by calling @Defn{<Name> attribute}.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Key : ARM_Index.Index_Key;
 		    begin
 			Check_End_Paragraph; -- This is always a paragraph end.
@@ -5192,15 +5286,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- optional (but highly recommended), and the curly and
 		    -- square brackets can be any of the allowed bracketing characters.
 		    -- We have to process this in parts, in order that the
-		    -- text can be handled normally. Nesting is not allowed.
-
-		    -- Check for nesting:
-		    for I in 1 .. Format_State.Nesting_Stack_Ptr - 1 loop
-			if Format_State.Nesting_Stack(I).Command = Change then
-			    Ada.Text_IO.Put_Line ("  ** Illegal nesting of Chg command on line " & ARM_Input.Line_String (Input_Object));
-			    exit;
-			end if;
-		    end loop;
+		    -- text can be handled normally.
 
 		    declare
 			Ch : Character;
@@ -5212,13 +5298,21 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			if Ch = 'V' or else Ch = 'v' then
 			    -- There is a Version parameter, grab it.
 			    Get_Change_Version (Is_First => True,
-			        Version => Format_Object.Current_Change_Version);
+			        Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version);
 			        -- Read a parameter named "Version".
 			    Saw_Version := True;
 			else
-			    Format_Object.Current_Change_Version := '1';
+			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version := '1';
 			    Saw_Version := False;
 			end if;
+
+		        -- Save the current state:
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Prev_Change :=
+			    Format_Object.Change;
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Prev_Change_Version :=
+			    Format_Object.Current_Change_Version;
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Prev_Old_Change_Version :=
+			    Format_Object.Current_Old_Change_Version;
 
 		        -- Check and handle the "New" parameter:
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -5236,7 +5330,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    Format_Object.In_Change := True;
 
 			    -- Now, handle the parameter:
-			    if Format_Object.Current_Change_Version > Format_Object.Change_Version then
+			    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version >
+			       Format_Object.Change_Version then
 				-- Ignore any changes with version numbers higher than
 				-- the current maximum.
 			        -- Skip the text:
@@ -5262,7 +5357,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    when ARM_Format.Changes_Only |
 					 ARM_Format.Show_Changes |
 					 ARM_Format.New_Changes =>
-					if Format_Object.Current_Change_Version < Format_Object.Change_Version and then
+					if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
+					    Format_Object.Change_Version and then
 					    Format_Object.Changes = ARM_Format.Changes_Only then
 					    -- Just normal output text.
 				            if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
@@ -5276,17 +5372,37 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					else
 				            ARM_Input.Get_Char (Input_Object, Ch);
 				            ARM_Input.Replace_Char (Input_Object);
-				            if Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char then
+					    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text :=
+					        Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char;
+				            if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text then
+						-- Non-empty text; Calculate new change state:
+					        case Format_Object.Change is
+					            when ARM_Output.Insertion | ARM_Output.None =>
+						        Format_Object.Change := ARM_Output.Insertion;
+						        Format_Object.Current_Change_Version :=
+						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+						        Format_Object.Current_Old_Change_Version := '0';
+					            when ARM_Output.Deletion =>
+						        Format_Object.Change := ARM_Output.Both;
+						        Format_Object.Current_Old_Change_Version :=
+						           Format_Object.Current_Change_Version;
+						        Format_Object.Current_Change_Version :=
+						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+					            when ARM_Output.Both =>
+						        Format_Object.Change := ARM_Output.Both;
+						        Format_Object.Current_Change_Version :=
+						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+					        end case;
 				                Check_Paragraph;
 				                ARM_Output.Text_Format (Output_Object,
 							                Bold => Format_Object.Is_Bold,
 							                Italic => Format_Object.Is_Italic,
 							                Font => Format_Object.Font,
 							                Size => Format_Object.Size,
-							                Change => ARM_Output.Insertion,
+							                Change => Format_Object.Change,
 							                Version => Format_Object.Current_Change_Version,
+							                Added_Version => Format_Object.Current_Old_Change_Version,
 							                Location => Format_Object.Location);
-				                Format_Object.Change := ARM_Output.Insertion;
 				            -- else no text, so don't bother.
 				            end if;
 					end if;
@@ -5405,7 +5521,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- by the text. As usual, any of the
 		    -- allowed bracketing characters can be used.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Kind : ARM_Database.Paragraph_Change_Kind_Type;
 			Version : ARM_Output.Change_Version_Type;
 			Display_It : Boolean;
@@ -5506,7 +5622,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     --    Prefix=<Prefix>,AttrName=<Name>,Text=<Text>}
 		     -- Defines a changed attribute.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 			Key : ARM_Index.Index_Key;
 			Chg_in_Annex : Boolean;
 			Is_Leading : Boolean;
@@ -5671,7 +5787,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- by the text. As usual, any of the
 		    -- allowed bracketing characters can be used.
 		    declare
-			Close_Ch, Ch : Character;
+			Close_Ch : Character;
 		    begin
 			Get_Change_Version (Is_First => True,
 					    Version => Format_Object.Attr_Prefix_Version);
@@ -6181,7 +6297,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Italic => Format_Object.Is_Italic,
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size,
-					    Change => Format_Object.Change,
+				            Change => Format_Object.Change,
+			                    Version => Format_Object.Current_Change_Version,
+			                    Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Bold := False;
 
@@ -6192,7 +6310,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Italic => False,
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size,
-					    Change => Format_Object.Change,
+				            Change => Format_Object.Change,
+			                    Version => Format_Object.Current_Change_Version,
+			                    Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Italic := False;
 
@@ -6203,7 +6323,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Italic => Format_Object.Is_Italic,
 					    Font => ARM_Output.Default,
 					    Size => Format_Object.Size,
-					    Change => Format_Object.Change,
+				            Change => Format_Object.Change,
+			                    Version => Format_Object.Current_Change_Version,
+			                    Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Font := ARM_Output.Default;
 
@@ -6214,7 +6336,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Italic => False,
 					    Font => ARM_Output.Default,
 					    Size => Format_Object.Size,
-					    Change => Format_Object.Change,
+				            Change => Format_Object.Change,
+			                    Version => Format_Object.Current_Change_Version,
+			                    Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Italic := False;
 		    Format_Object.Font := ARM_Output.Default;
@@ -6229,7 +6353,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Italic => Format_Object.Is_Italic,
 					        Font => Format_Object.Font,
 					        Size => Format_Object.Size+1,
-					        Change => Format_Object.Change,
+				                Change => Format_Object.Change,
+			                        Version => Format_Object.Current_Change_Version,
+			                        Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
 		        Format_Object.Size := Format_Object.Size + 1;
 		    end;
@@ -6244,7 +6370,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Italic => Format_Object.Is_Italic,
 					        Font => Format_Object.Font,
 					        Size => Format_Object.Size-1,
-					        Change => Format_Object.Change,
+				                Change => Format_Object.Change,
+			                        Version => Format_Object.Current_Change_Version,
+			                        Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
 		        Format_Object.Size := Format_Object.Size - 1;
 		    end;
@@ -6259,7 +6387,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Italic => Format_Object.Is_Italic,
 					        Font => Format_Object.Font,
 					        Size => Format_Object.Size+2,
-					        Change => Format_Object.Change,
+				                Change => Format_Object.Change,
+			                        Version => Format_Object.Current_Change_Version,
+			                        Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => ARM_Output.Normal);
 		        Format_Object.Location := ARM_Output.Normal;
 		        Format_Object.Size := Format_Object.Size+2;
@@ -6275,7 +6405,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Italic => Format_Object.Is_Italic,
 					        Font => Format_Object.Font,
 					        Size => Format_Object.Size+2,
-					        Change => Format_Object.Change,
+				                Change => Format_Object.Change,
+			                        Version => Format_Object.Current_Change_Version,
+			                        Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => ARM_Output.Normal);
 		        Format_Object.Location := ARM_Output.Normal;
 		        Format_Object.Size := Format_Object.Size+2;
@@ -6288,7 +6420,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Italic => Format_Object.Is_Italic,
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size,
-					    Change => Format_Object.Change,
+				            Change => Format_Object.Change,
+			                    Version => Format_Object.Current_Change_Version,
+			                    Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Bold := False;
 
@@ -6299,7 +6433,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Italic => Format_Object.Is_Italic,
 					    Font => ARM_Output.Default,
 					    Size => Format_Object.Size,
-					    Change => Format_Object.Change,
+				            Change => Format_Object.Change,
+			                    Version => Format_Object.Current_Change_Version,
+			                    Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Font := ARM_Output.Default;
 
@@ -6495,7 +6631,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Italic => False,
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size,
-					    Change => Format_Object.Change,
+				            Change => Format_Object.Change,
+			                    Version => Format_Object.Current_Change_Version,
+			                    Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Italic := False;
 
@@ -6615,9 +6753,13 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					return Text_Buffer(20 .. I-1);
 				    end if;
 				end loop;
+				Ada.Text_IO.Put_Line ("** Can't find argument for @prag: " & Text_Buffer(1..Text_Buffer_Len) &
+				    " on line " & ARM_Input.Line_String (Input_Object));
+			        return ""; -- Never found the end of the argument.
 			    else
 				Ada.Text_IO.Put_Line ("** Funny pragma format: " & Text_Buffer(1..Text_Buffer_Len) &
 				    " on line " & ARM_Input.Line_String (Input_Object));
+				return ""; -- Gotta return something.
 			    end if;
 			end My_Sort;
 
@@ -6768,7 +6910,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			Format_Object.Prefix_Text_Len - 1; -- Remove command close character.
 
 		when Change_Param_Old =>
-		    if Format_Object.Current_Change_Version > Format_Object.Change_Version then
+		    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version >
+		        Format_Object.Change_Version then
 			-- The new text was ignored, use the old only.
 		        null; -- Nothing special to do.
 		    else
@@ -6780,13 +6923,22 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    when ARM_Format.Changes_Only |
 				 ARM_Format.Show_Changes |
 				 ARM_Format.New_Changes =>
-				if Format_Object.Changes = ARM_Format.Changes_Only and then
-				   Format_Object.Current_Change_Version < Format_Object.Change_Version then
+				if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
+				    Format_Object.Change_Version and then
+				    Format_Object.Changes = ARM_Format.Changes_Only then
 				    -- Old enough that only the new text is shown.
 			            null; -- Nothing to do (we nulled out the text before we got here).
 				else
-			            if ARM_Output."=" (Format_Object.Change,
-					               ARM_Output.Deletion) then
+				    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text then
+					-- Non-empty text. Restore the previous
+					-- insertion state.
+					Format_Object.Change :=
+				            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Prev_Change;
+					Format_Object.Current_Change_Version :=
+				            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Prev_Change_Version;
+					Format_Object.Current_Old_Change_Version :=
+				            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Prev_Old_Change_Version;
+
 			                Check_Paragraph; -- We have to be in a paragraph
 				            -- in correct code, but this could happen
 				            -- if the user ended the paragraph by mistake
@@ -6796,8 +6948,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 						                Italic => Format_Object.Is_Italic,
 						                Font => Format_Object.Font,
 						                Size => Format_Object.Size,
-						                Change => ARM_Output.None,
-						                Version => '0',
+							        Change => Format_Object.Change,
+							        Version => Format_Object.Current_Change_Version,
+							        Added_Version => Format_Object.Current_Old_Change_Version,
 							        Location => Format_Object.Location);
 			                Format_Object.Change := ARM_Output.None;
 			            -- else not in an deletion. That could happen if there
@@ -6809,7 +6962,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Format_Object.In_Change := False;
 
 		when Change_Param_New =>
-		    if Format_Object.Current_Change_Version > Format_Object.Change_Version then
+		    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version >
+		       Format_Object.Change_Version then
 			-- The new text was ignored.
 		        null; -- Nothing to do (we nulled out the text before we got here).
 		    else
@@ -6821,13 +6975,22 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    when ARM_Format.Changes_Only |
 				 ARM_Format.Show_Changes |
 				 ARM_Format.New_Changes =>
-				if Format_Object.Changes = ARM_Format.Changes_Only and then
-				   Format_Object.Current_Change_Version < Format_Object.Change_Version then
+				if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
+				    Format_Object.Change_Version and then
+				    Format_Object.Changes = ARM_Format.Changes_Only then
 				    -- Old enough that only the new text is shown.
 			            null; -- Nothing special to do.
 				else
-			            if ARM_Output."=" (Format_Object.Change,
-					               ARM_Output.Insertion) then
+				    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text then
+					-- Non-empty text. Restore the previous
+					-- insertion state.
+					Format_Object.Change :=
+				            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Prev_Change;
+					Format_Object.Current_Change_Version :=
+				            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Prev_Change_Version;
+					Format_Object.Current_Old_Change_Version :=
+				            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Prev_Old_Change_Version;
+
 			                Check_Paragraph; -- We have to be in a paragraph
 				            -- in correct code, but this could happen
 				            -- if the user ended the paragraph by mistake
@@ -6837,8 +7000,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 						                Italic => Format_Object.Is_Italic,
 						                Font => Format_Object.Font,
 						                Size => Format_Object.Size,
-						                Change => ARM_Output.None,
-								Version => '0',
+							        Change => Format_Object.Change,
+							        Version => Format_Object.Current_Change_Version,
+							        Added_Version => Format_Object.Current_Old_Change_Version,
 						                Location => Format_Object.Location);
 			                Format_Object.Change := ARM_Output.None;
 			            -- else not in an insertion. That could happen if there
@@ -6868,7 +7032,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				 Close_Ch => Ch);
 
 			    -- Now, handle the parameter:
-			    if Format_Object.Current_Change_Version > Format_Object.Change_Version then
+			    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version >
+			        Format_Object.Change_Version then
 				-- The new text was ignored, show the old only.
 			        null; -- Nothing special to do.
 			    else
@@ -6881,8 +7046,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
 				    when ARM_Format.Changes_Only |
 					 ARM_Format.Show_Changes =>
-					if Format_Object.Changes = ARM_Format.Changes_Only and then
-					   Format_Object.Current_Change_Version < Format_Object.Change_Version then
+				        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
+				            Format_Object.Change_Version and then
+					    Format_Object.Changes = ARM_Format.Changes_Only then
 					    -- Old enough that only the new text is shown.
 				            -- Skip the text:
 			                    ARM_Input.Skip_until_Close_Char (Input_Object, Ch);
@@ -6890,32 +7056,73 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					else
 				            ARM_Input.Get_Char (Input_Object, Ch2);
 				            ARM_Input.Replace_Char (Input_Object);
-				            if Ch /= Ch2 then
+					    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text :=
+					        Ch /= Ch2;
+				            if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text then
+						-- Non-empty text; calculate new change state:
+					        case Format_Object.Change is
+					            when ARM_Output.Deletion | ARM_Output.None =>
+						        Format_Object.Change := ARM_Output.Deletion;
+						        Format_Object.Current_Change_Version :=
+						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+						        Format_Object.Current_Old_Change_Version := '0';
+					            when ARM_Output.Insertion =>
+						        Format_Object.Change := ARM_Output.Both;
+						        Format_Object.Current_Old_Change_Version :=
+						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+							-- Current_Version is unchanged.
+					            when ARM_Output.Both =>
+						        Format_Object.Change := ARM_Output.Both;
+						        Format_Object.Current_Old_Change_Version :=
+						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+							-- Current_Version is unchanged.
+					        end case;
 				                Check_Paragraph;
 				                ARM_Output.Text_Format (Output_Object,
 							                Bold => Format_Object.Is_Bold,
 							                Italic => Format_Object.Is_Italic,
 							                Font => Format_Object.Font,
 							                Size => Format_Object.Size,
-							                Change => ARM_Output.Deletion,
+								        Change => Format_Object.Change,
 								        Version => Format_Object.Current_Change_Version,
+								        Added_Version => Format_Object.Current_Old_Change_Version,
 							                Location => Format_Object.Location);
-				                Format_Object.Change := ARM_Output.Deletion;
 				            -- else no text, so don't emit a change area.
 				            end if;
 					end if;
 				    when ARM_Format.New_Changes =>
 				        ARM_Input.Get_Char (Input_Object, Ch2);
 				        ARM_Input.Replace_Char (Input_Object);
-				        if Ch /= Ch2 then
+				        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text :=
+					    Ch /= Ch2;
+				        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text then
+					    -- Non-empty text; calculate new change state:
+					    case Format_Object.Change is
+					        when ARM_Output.Deletion | ARM_Output.None =>
+						    Format_Object.Change := ARM_Output.Deletion;
+						    Format_Object.Current_Change_Version :=
+						       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+						    Format_Object.Current_Old_Change_Version := '0';
+					        when ARM_Output.Insertion =>
+						    Format_Object.Change := ARM_Output.Both;
+						    Format_Object.Current_Old_Change_Version :=
+						       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+						    -- Current_Version is unchanged.
+					        when ARM_Output.Both =>
+						    Format_Object.Change := ARM_Output.Both;
+						    Format_Object.Current_Old_Change_Version :=
+						       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+						    -- Current_Version is unchanged.
+					    end case;
 				            Check_Paragraph;
 				            ARM_Output.Text_Format (Output_Object,
 							            Bold => Format_Object.Is_Bold,
 							            Italic => Format_Object.Is_Italic,
 							            Font => Format_Object.Font,
 							            Size => Format_Object.Size,
-							            Change => ARM_Output.Deletion,
+								    Change => Format_Object.Change,
 								    Version => Format_Object.Current_Change_Version,
+								    Added_Version => Format_Object.Current_Old_Change_Version,
 							            Location => Format_Object.Location);
 				            Format_Object.Change := ARM_Output.Deletion;
 				            ARM_Output.Ordinary_Character (Output_Object, ' ');
@@ -7044,7 +7251,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Italic => Format_Object.Is_Italic,
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size-2,
-					    Change => Format_Object.Change,
+				            Change => Format_Object.Change,
+			                    Version => Format_Object.Current_Change_Version,
+			                    Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => ARM_Output.Subscript);
 		    Format_Object.Size := Format_Object.Size-2;
 		    Format_Object.Location := ARM_Output.Subscript;
@@ -7067,7 +7276,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Italic => Format_Object.Is_Italic,
 					    Font => Format_Object.Font,
 					    Size => Format_Object.Size-2,
-					    Change => Format_Object.Change,
+				            Change => Format_Object.Change,
+			                    Version => Format_Object.Current_Change_Version,
+			                    Added_Version => Format_Object.Current_Old_Change_Version,
 					    Location => ARM_Output.Superscript);
 		    Format_Object.Size := Format_Object.Size-2;
 		    Format_Object.Location := ARM_Output.Superscript;

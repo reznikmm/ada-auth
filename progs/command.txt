@@ -1,6 +1,6 @@
 Ada Reference Manual formatting tool.
 
-Copyright 2000, 2002 AXE Consultants.
+Copyright 2000, 2002, 2004 AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
 
@@ -38,7 +38,7 @@ assumed to be in the current directory. The tool is self-contained; it does
 not require any pre or post processing except to have Word create the real
 table of contents for the .RTF outout.
 
-Usage: Arm_Form <Document> [<Format>, [<Changes>, [<Options>]]]
+Usage: Arm_Form <Document> [<Format>, [<Changes>, [<Version>, [<Options>]]]
 
 The documents are:
    AARM: The Annotated Ada 95 Reference Manual. This is mainly intended for
@@ -57,19 +57,28 @@ The formats are:
    All:  (Default) Generate all of the above formats.
 
 <Changes> are:
-   No-Changes: The original RM 95 text.
-   Changes-Only: (Default) The RM 95 text with Corrigendum changes applied.
-   Show-Changes: The RM 95 text with Corrigendum changes applied, and
-		 changes marked. For HTML, the <INS> and <DEL> tags are used,
-		 which showed deleted text as struck-through and inserted text
-		 as underlined. (This can be different on a different browser.)
-		 For RTF, this uses Word's "changes" mechanisms.
-   New-Changes: The RM 95 text with Corrigendum changes applied, and
-		insertions marked. Deletions are marked by just a single
-                blank space. (See above for how these are marked). This form
-		is intended to be used with revision bars in Word (Word does
-		not reformat the document when deletions are hidden, leaving
-		unsightly blank spaces.)
+   No-Changes: The original (AA)RM 95 text.
+   New-Only: (AA)RM 95 text with changes applied through the specified version.
+   Show-Changes: The RM 95 text with changes up through the specified version
+                 applied, and changes marked. For HTML, deleted text is shown
+                 as struck-through and inserted text as underlined. Changes for
+		 different versions are in different colors.
+		 For RTF, this uses Word's "changes" mechanisms, which also
+                 shows changes in different colors.
+   Changes-Only: The RM 95 text with changes up through the specified version
+                 applied, and changes for the specified version only marked
+                 as described above.
+   New-Changes: The RM 95 text with changes up through the specified version
+                applied, and insertions marked. Deletions are marked by just a
+                single blank space. (See above for how these are marked). This
+                form is intended to be used with revision bars in Word (Word
+                does not reformat the document when deletions are hidden,
+                leaving unsightly blank spaces.)
+
+<Version> = a value in 0 .. 9 representing the change version desired
+   0-Original Ada 95 (equivalent to No-Changes)
+   1-Technical Corrigendum 1
+   2-Amendment 1
 
 <Options> are:
    Show-Index-Entries: Index and glossary entries are visibly displayed in the
@@ -142,7 +151,8 @@ Text commands:
 	     on output.
 @newpage   - Insert a page break. Ends a paragraph.
 @rmnewpage - Insert a page break in the RM, ignored in other documents. Ends a
-	     paragraph. Use to insert page breaks to make the printed RM look better.
+	     paragraph. Use to insert page breaks to make the printed RM
+             look better.
 @newcolumn - Insert a column break. Only allowed in a multi-column formats.
 	     Ends a paragraph.
 @softpage  - Insert a soft page break in a format that does not generally
@@ -380,8 +390,8 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 
 -- Changes:
 @chgref{Version=[<version>],Kind=(<kind>){,Ref=(<DR_Number>)}{,ARef=(<AI_Number>)}}
-	- Marks a paragraph changed in a corrigendum. This command precedes
-	any text of the paragraph. The version number of the change is
+	- Marks a paragraph changed in a corrigendu or amendment. This command
+        precedes any text of the paragraph. The version number of the change is
 	<version>. [This is "1" for technical corrigenum 1; "2" for amendment 1].
 	Kind is either "Revised" (an ordinary change), "Added" (for a paragraph
 	added by the change), or "Deleted" (for a paragraph deleted by
@@ -398,9 +408,10 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 @chg{[Version=[<Version>],]New=[<new text>],Old=[<old text>]}
 	Marks a particular change. The new text and the old text are given.
 	(We have both sets of text so we can generate useful differences).
-	Nesting of @chg commands is not allowed. The text may not contain any
-	command that ends the paragraph. The Version is assumed to be '1' if
-	that parameter is not given. Version is interpreted as for ChgRef.
+	@chg commands can be nested; it recommended that they be nested with
+        the newest changes inside of older changes. The text may not contain
+        any command that ends the paragraph. The Version is assumed to be '1'
+        if that parameter is not given. Version is interpreted as for ChgRef.
 @ChgImplDef{Version=[<version>],Kind=(<kind>),Text=<text>}
 	Marks a changed implementation-defined entry. (Essentially a
 	combination of ChgRef and Impldef.) <text> is the

@@ -1,5 +1,4 @@
-with Ada.Characters.Handling,
-     Ada.Strings.Fixed;
+with Ada.Characters.Handling;
 package body ARM_Contents is
 
     --
@@ -9,7 +8,7 @@ package body ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -45,6 +44,7 @@ package body ARM_Contents is
     --  5/15/00 - RLB - Added rules about unnumbered sections.
     --  5/22/00 - RLB - Added Unnumbered_Section level.
     --  8/22/00 - RLB - Added Old_Title handling.
+    --  9/ 9/04 - RLB - Removed unused with.
 
     type Title_Record is record
 	Title : Title_Type; -- Title in original format.

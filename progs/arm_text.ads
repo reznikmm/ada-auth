@@ -11,7 +11,7 @@ package ARM_Text is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002  AXE Consultants.
+    -- Copyright 2000, 2002, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -69,6 +69,8 @@ package ARM_Text is
     --			three strings and For_ISO boolean.
     --		- RLB - Added AI_Reference.
     --		- RLB - Added Change_Version_Type and uses.
+    --  9/10/04 - RLB - Added "Both" to possible changes to handle
+    --			replacement of changed text.
 
     type Text_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -279,12 +281,16 @@ package ARM_Text is
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
 			   Version : in ARM_Output.Change_Version_Type := '0';
+			   Added_Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type);
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
-	-- Note: Changes to these properties must be stack-like; that is,
+	-- Added_Version is only used when the change state is "Both"; it's
+	-- the version of the insertion; Version is the version of the (newer)
+	-- deletion.
+	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
-	-- Bold off, Italic off is not allowed (as separate commands).
+	-- Bold off, Italic off should be avoided (as separate commands).
 
     procedure Clause_Reference (Output_Object : in out Text_Output_Type;
 				Text : in String;

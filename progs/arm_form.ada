@@ -16,7 +16,7 @@ procedure ARM_Formatter is
     -- reference manual files (in various formats).
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002 AXE Consultants.
+    -- Copyright 2000, 2002, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -62,6 +62,7 @@ procedure ARM_Formatter is
     --		- RLB - Changed Creates to include title and header.
     --		- RLB - Added Version parameter to command line and formatting
     --			commands.
+    --  9/10/04 - RLB - Updated descriptions of standard commands.
 
     -- Standard commands:
     -- For Original RM:
@@ -80,6 +81,9 @@ procedure ARM_Formatter is
     -- For AARM with Corr and Amd:
     --     [HTML; RTF for display]:
     --	      Arm_Form RM <Format> Changes-Only 2 Show-Index-Entries
+    --        (for only Amd changes) or
+    --	      Arm_Form RM <Format> Show-Changes 2 Show-Index-Entries
+    --        (for all changes)
     --     [TXT; RTF for printing]:
     --	      Arm_Form RM <Format> New-Only 2 Show-Index-Entries
 

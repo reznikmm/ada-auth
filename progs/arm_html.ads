@@ -13,7 +13,7 @@ package ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002,  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -73,6 +73,8 @@ package ARM_HTML is
     --			three strings and For_ISO boolean.
     --		- RLB - Added AI_Reference.
     --		- RLB - Added Change_Version_Type and uses.
+    --  9/10/04 - RLB - Added "Both" to possible changes to handle
+    --			replacement of changed text.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -285,12 +287,16 @@ package ARM_HTML is
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
 			   Version : in ARM_Output.Change_Version_Type := '0';
+			   Added_Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type);
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
-	-- Note: Changes to these properties must be stack-like; that is,
+	-- Added_Version is only used when the change state is "Both"; it's
+	-- the version of the insertion; Version is the version of the (newer)
+	-- deletion.
+	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
-	-- Bold off, Italic off is not allowed (as separate commands).
+	-- Bold off, Italic off should be avoided (as separate commands).
 
     procedure Clause_Reference (Output_Object : in out HTML_Output_Type;
 				Text : in String;
@@ -367,6 +373,8 @@ private
 	Font : ARM_Output.Font_Family_Type; -- What is the current font family?
 	Size : ARM_Output.Size_Type; -- What is the current relative size?
 	Change : ARM_Output.Change_Type := ARM_Output.None;
+	Version : ARM_Output.Change_Version_Type := '0';
+	Added_Version : ARM_Output.Change_Version_Type := '0';
 	Location : ARM_Output.Location_Type := ARM_Output.Normal;
 	Tab_Stops : ARM_Output.Tab_Info := ARM_Output.NO_TABS;
 	Emulate_Tabs : Boolean := False; -- Can we emulate tabs in the current style?

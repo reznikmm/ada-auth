@@ -13,7 +13,7 @@ package ARM_Output is
     -- determines the details of the text.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002  AXE Consultants.
+    -- Copyright 2000, 2002, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -80,6 +80,8 @@ package ARM_Output is
     --			three strings and For_ISO boolean.
     --		- RLB - Added AI_Reference.
     --		- RLB - Added Change_Version_Type and uses.
+    --  9/10/04 - RLB - Added "Both" to possible changes to handle
+    --			replacement of changed text.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -257,8 +259,8 @@ package ARM_Output is
 	-- Defines the space following the paragraph. Narrow is about 30%
 	-- less than normal; Wide is about 50% more than normal.
 
-    type Change_Type is (None, Insertion, Deletion);
-	-- Defines the change state.
+    type Change_Type is (None, Insertion, Deletion, Both);
+	-- Defines the change state. Both means both an Insertion and Deletion.
 
     subtype Change_Version_Type is Character range '0' .. '9';
 	-- Defines the change version. Version 0 is the original text.
@@ -476,12 +478,16 @@ package ARM_Output is
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
 			   Version : in ARM_Output.Change_Version_Type := '0';
+			   Added_Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is abstract;
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
-	-- Note: Changes to these properties must be stack-like; that is,
+	-- Added_Version is only used when the change state is "Both"; it's
+	-- the version of the insertion; Version is the version of the (newer)
+	-- deletion.
+	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
-	-- Bold off, Italic off is not allowed (as separate commands).
+	-- Bold off, Italic off should be avoided (as separate commands).
 
     procedure Clause_Reference (Output_Object : in out Output_Type;
 				Text : in String;

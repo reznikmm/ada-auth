@@ -13,7 +13,7 @@ package body ARM_Text is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002  AXE Consultants.
+    -- Copyright 2000, 2002, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -82,6 +82,8 @@ package body ARM_Text is
     --			three strings and For_ISO boolean.
     --		- RLB - Added AI_Reference.
     --		- RLB - Added Change_Version_Type and uses.
+    --  9/10/04 - RLB - Added "Both" to possible changes to handle
+    --			replacement of changed text.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1230,14 +1232,16 @@ package body ARM_Text is
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
 			   Version : in ARM_Output.Change_Version_Type := '0';
+			   Added_Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
-	-- Change the text format so that Bold, Italics, and the font family
-	-- are as specified.
-	-- Note: Changes to these properties must be stack-like; that is,
+	-- Added_Version is only used when the change state is "Both"; it's
+	-- the version of the insertion; Version is the version of the (newer)
+	-- deletion.
+	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
-	-- Bold off, Italic off is not allowed (as separate commands).
+	-- Bold off, Italic off should be avoided (as separate commands).
 	use type ARM_Output.Change_Type;
 	use type ARM_Output.Location_Type;
     begin
@@ -1255,23 +1259,63 @@ package body ARM_Text is
 	    end if;
 	end if;
 	if Change /= Output_Object.Change then
-	    case Output_Object.Change is
-		when ARM_Output.Insertion =>
-		    Buffer(Output_Object, '}');
-		when ARM_Output.Deletion =>
-		    Buffer(Output_Object, ']');
-		when ARM_Output.None =>
-		    null;
-	    end case;
-	    case Change is
-		-- Note: Version is not used.
-		when ARM_Output.Insertion =>
-		    Buffer(Output_Object, '{');
-		when ARM_Output.Deletion =>
-		    Buffer(Output_Object, '[');
-		when ARM_Output.None =>
-		    null;
-	    end case;
+	    if Change = ARM_Output.Both then
+		-- Open only the one(s) needed:
+	        case Output_Object.Change is
+		    -- Note: Version is not used.
+		    when ARM_Output.Insertion =>
+			-- Open the deletion:
+		        Buffer(Output_Object, '[');
+		    when ARM_Output.Deletion =>
+			-- Open the insertion:
+		        Buffer(Output_Object, '{');
+		    when ARM_Output.None =>
+		        Buffer(Output_Object, '{');
+		        Buffer(Output_Object, '[');
+		    when ARM_Output.Both =>
+		        null;
+	        end case;
+	    elsif Output_Object.Change = ARM_Output.Both then
+		-- Close only the one(s) needed:
+	        case Change is
+		    -- Note: Version is not used.
+		    when ARM_Output.Insertion =>
+			-- Close the deletion:
+		        Buffer(Output_Object, ']');
+		    when ARM_Output.Deletion =>
+			-- Close the insertion:
+		        Buffer(Output_Object, '}');
+		    when ARM_Output.None =>
+		        Buffer(Output_Object, ']');
+		        Buffer(Output_Object, '}');
+		    when ARM_Output.Both =>
+		        null;
+	        end case;
+	    else -- Both can't get here.
+	        case Output_Object.Change is
+		    when ARM_Output.Insertion =>
+		        Buffer(Output_Object, '}');
+		    when ARM_Output.Deletion =>
+		        Buffer(Output_Object, ']');
+		    when ARM_Output.None =>
+		        null;
+		    when ARM_Output.Both =>
+		        Buffer(Output_Object, ']');
+		        Buffer(Output_Object, '}');
+	        end case;
+	        case Change is
+		    -- Note: Version is not used.
+		    when ARM_Output.Insertion =>
+		        Buffer(Output_Object, '{');
+		    when ARM_Output.Deletion =>
+		        Buffer(Output_Object, '[');
+		    when ARM_Output.None =>
+		        null;
+		    when ARM_Output.Both =>
+		        Buffer(Output_Object, '{');
+		        Buffer(Output_Object, '[');
+	        end case;
+	    end if;
 	    Output_Object.Change := Change;
 	end if;
 	if Location /= Output_Object.Location then

@@ -16,7 +16,7 @@ package body ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002  AXE Consultants.
+    -- Copyright 2000, 2002, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -88,6 +88,8 @@ package body ARM_RTF is
     --			strings.
     --		- RLB - Added AI_Reference.
     --		- RLB - Added Change_Version_Type and uses.
+    --  9/10/04 - RLB - Added "Both" to possible changes to handle
+    --			replacement of changed text.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -3157,13 +3159,18 @@ package body ARM_RTF is
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
 			   Version : in ARM_Output.Change_Version_Type := '0';
+			   Added_Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
-	-- Note: Changes to these properties must be stack-like; that is,
+	-- Added_Version is only used when the change state is "Both"; it's
+	-- the version of the insertion; Version is the version of the (newer)
+	-- deletion.
+	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
-	-- Bold off, Italic off is not allowed (as separate commands).
+	-- Bold off, Italic off should be avoided (as separate commands).
 	use type ARM_Output.Change_Type;
+	use type ARM_Output.Change_Version_Type;
 	use type ARM_Output.Location_Type;
 	use type ARM_Output.Size_Type;
 
@@ -3204,7 +3211,12 @@ package body ARM_RTF is
 
 --Ada.Text_Io.Put ("Text format");
 	-- We do these in this order so that the changes are stacked properly.
-	if Change /= Output_Object.Change then
+	if Change /= Output_Object.Change or else
+	    Version /= Output_Object.Version or else
+	    Added_Version /= Output_Object.Added_Version then
+	    -- We could "improve" this by keeping similar changes together,
+	    -- especially for changes to/from Both, but its a lot more work
+	    -- and unnecessary.
 	    case Output_Object.Change is
 		when ARM_Output.Insertion =>
 --Ada.Text_Io.Put (" Unchange ins");
@@ -3216,6 +3228,10 @@ package body ARM_RTF is
 		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
 		when ARM_Output.None =>
 		    null;
+		when ARM_Output.Both =>
+--Ada.Text_Io.Put (" Unchange both");
+	            Ada.Text_IO.Put (Output_Object.Output_File, "}}");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
 	    end case;
 	end if;
 
@@ -3338,7 +3354,12 @@ package body ARM_RTF is
 	    Output_Object.Location := Location;
 	end if;
 
-	if Change /= Output_Object.Change then
+	if Change /= Output_Object.Change or else
+	    Version /= Output_Object.Version or else
+	    Added_Version /= Output_Object.Added_Version then
+	    -- We could "improve" this by keeping similar changes together,
+	    -- especially for changes to/from Both, but its a lot more work
+	    -- and unnecessary.
 	    case Change is
 		when ARM_Output.Insertion =>
 --Ada.Text_Io.Put (" Change ins");
@@ -3356,10 +3377,22 @@ package body ARM_RTF is
 			-- that we'll use needs an entry in the \revtbl.
 			-- We could include a date with \revddtmdel??, but that's messy.
 			-- (And we don't know the date of the revision yet.)
+		when ARM_Output.Both =>
+--Ada.Text_Io.Put (" Change both");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Added_Version & ' ');
+		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Version & ' ');
+		    Output_Object.Char_Count := Output_Object.Char_Count + 21;
+			-- Note: \revauthdelN indicates the author. Each version
+			-- that we'll use needs an entry in the \revtbl.
+			-- We could include a date with \revddtmdel??, but that's messy.
+			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.None =>
 		    null;
 	    end case;
 	    Output_Object.Change := Change;
+	    Output_Object.Version := Version;
+	    Output_Object.Added_Version := Added_Version;
 	end if;
 --Ada.Text_Io.New_Line;
 

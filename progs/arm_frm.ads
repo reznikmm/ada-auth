@@ -10,7 +10,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, AXE Consultants.
+    -- Copyright 2000, 2002, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -69,6 +69,7 @@ package ARM_Format is
     --  6/17/02 - RLB - Added Ada95 changes sections.
     --  7/18/02 - RLB - Moved document type here.
     --          - RLB - Added Changes_Only and versioning for individual changes.
+    --  9/10/04 - RLB - Added support for nested changes.
 
     type Format_Type is tagged limited private;
 
@@ -183,7 +184,7 @@ private
     type Format_Type is tagged limited record
 	-- Document information:
 	Document : ARM_Format.Document_Type;
-	Changes : ARM_Format.Change_Kind;
+	Changes : ARM_Format.Change_Kind; -- No Both here.
 	Change_Version : ARM_Output.Change_Version_Type;
 	Display_Index_Entries : Boolean;
 
@@ -243,6 +244,7 @@ private
 	Size : ARM_Output.Size_Type; -- What is the current font size?
 	Change : ARM_Output.Change_Type; -- What is the current kind of change?
 	Current_Change_Version : ARM_Output.Change_Version_Type; -- What is the current version of change?
+	Current_Old_Change_Version : ARM_Output.Change_Version_Type; -- What is the current old version of change? (Only used if Change is Both).
 	Location : ARM_Output.Location_Type; -- What is the current (vertical) location?
 	Format : ARM_Output.Paragraph_Type; -- What is the current paragraph type?
 	In_Paragraph : Boolean; -- Are we currently in a paragraph?

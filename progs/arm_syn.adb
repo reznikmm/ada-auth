@@ -1,6 +1,5 @@
 with Ada.Unchecked_Deallocation,
-     Ada.Strings.Fixed,
-     Ada.Characters.Handling;
+     Ada.Strings.Fixed;
 package body ARM_Syntax is
 
     --
@@ -10,9 +9,9 @@ package body ARM_Syntax is
     -- cross-reference.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftare.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -51,6 +50,7 @@ package body ARM_Syntax is
     --			control over the formating of this section.
     --  9/27/00 - RLB - Revised XRef to decrease white space.
     --  9/28/00 - RLB - Added code to make links in HTML version.
+    --  9/09/04 - RLB - Removed unused junk noted by Stephen Leake.
 
     type String_Ptr is access String;
     type Rule_Type;
@@ -315,6 +315,8 @@ package body ARM_Syntax is
 	end loop;
 	Format_Text ("@end(twocol)" & Ascii.LF, "Suffix");
 	Format_Text ("@end(syntaxdisplay)" & Ascii.LF, "Suffix");
+	-- Probably should free the XRef list here, but we won't do anything
+	-- afterwards, so this doesn't matter.
     end XRef;
 
 end ARM_Syntax;
