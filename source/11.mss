@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/03/10 06:19:59 $}
+@Comment{$Date: 2005/03/18 06:37:20 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1089,7 +1089,7 @@ some implementation-defined manner.]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assertion_Policy>(@SynI{policy_}@Syn2{identifier});'>,Old=<>}
+@ChgAdded{Version=[2],Text=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assertion_Policy>(@SynI{policy_}@Syn2{identifier});'>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[configuration pragma], Sec=(Assertion_Policy)}

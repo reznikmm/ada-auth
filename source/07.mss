@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:03 $}
+@Comment{$Date: 2005/03/18 06:37:18 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1136,7 +1136,7 @@ in more than one place:
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0019],ARef=[AI95-00033-01]}
 @ChgAdded{Version=[1],Type=[Leading],Text=[We say @i<immediately> within
 the declarative region in order that
-types do not gain operations within a nested scope. Consider:],Old=[]}
+types do not gain operations within a nested scope. Consider:]}
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@Key[package] Outer @key[is]
@@ -1582,29 +1582,40 @@ and ]}the task.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
 @leading@keepnext@Defn{limited type}
 A type is @i{limited} if it
-is a descendant of one of the following:
+is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
 @begin(itemize)
-  a type with the reserved word @b(limited) in its definition;
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00411-01],ARef=[AI95-00419-01]}
+  a type with the reserved word @key(limited)@Chg{Version=[2],New=[,
+  @key(synchronized), @key(task), or @key(protected) ],Old=[]}
+  in its definition;
   @begin{Ramification}
   Note that there is always a @lquotes@;definition,@rquotes@; conceptually,
   even if there is no syntactic category called @lquotes@;..._definition@rquotes@;.
+
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[This includes interfaces of the above kinds,
+  as well as task and protected types.]}
   @end{Ramification}
 
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00411-01]}
-  @ChgAdded{Version=[2],Text=[a limited interface;]}
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00419-01]}
+  @ChgDeleted{Version=[2],Text=[a task or protected type;]}
 
-  @begin{Reason}
-    @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[This is needed to cover task and protected
-    interfaces, which neither contain @key{limited} nor are task or protected
-    types.]}
-  @end{Reason}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+  a composite type with a limited component@Chg{Version=[2],New=[;],Old=[.]}
 
-  a task or protected type;
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[a derived type whose parent is limited and is not an
+  interface.]}
 
-  a composite type with a limited component.
+  @begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[Limitedness is not inherited from interfaces;
+  it must be explicitly specified when the parent is an interface.]}
+  @end{Ramification}
+
 @end(itemize)
 
 @Defn{nonlimited type}
@@ -1772,18 +1783,23 @@ than being a subclause of
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-Limited types now have an assignment operation, but its use is restricted
-such that all uses are build-in-place. This is
-accomplished by restricting uses to @nt{aggregate}s and @nt{function_call}s.
-@nt{Aggregate}s were not allowed to have a limited type in Ada 95, which
-causes a compatibility issue discussed in @RefSec{Aggregates}.
-Compatibility issues with @nt{return_statement}s for limited
-@nt{function_call}s are discussed
-in @RefSec{Return Statements}.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Limited types now have an assignment operation, but its use is restricted
+  such that all uses are build-in-place. This is
+  accomplished by restricting uses to @nt{aggregate}s and @nt{function_call}s.
+  @nt{Aggregate}s were not allowed to have a limited type in Ada 95, which
+  causes a compatibility issue discussed in @RefSec{Aggregates}.
+  Compatibility issues with @nt{return_statement}s for limited
+  @nt{function_call}s are discussed
+  in @RefSec{Return Statements}.]}
 @end{Extend95}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00411-01],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[Rewrote the definition of limited to insure that
+  interfaces are covered, but that limitedness is not inherited from interfaces.]}
+@end{DiffWord95}
 
 @LabeledClause{User-Defined Assignment and Finalization}
 

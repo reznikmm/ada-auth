@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/03/10 06:19:59 $}
+@Comment{$Date: 2005/03/18 06:37:20 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -399,7 +399,7 @@ since child units are nested after their parent's declaration.)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[For each library @nt{package_declaration} in the
 environment, there is an implicit declaration of a
-@i{limited view}@Defn{limited view} of that library package. The
+@i{limited view} of that library package.@Defn{limited view} The
 limited view of a package contains:]}
 
 @begin(Itemize)
@@ -1104,20 +1104,20 @@ This rule violates the one-pass @nt{context_clause}s
 @key[package] A.B.C.D @key[is]
 @key[end] A.B.C.D;
 
-@key[with] A.B.C; -- (1)
+@key[with] A.B.C; -- @RI[(1)]
 @key[private] @key[package] A.B.X @key[is]
 @key[end] A.B.X;
 
 @key[package] A.B.Y @key[is]
 @key[end] A.B.Y;
 
-@key[with] A.B.C; -- (2)
+@key[with] A.B.C; -- @RI[(2)]
 @key[package] @key[body] A.B.Y @key[is]
 @key[end] A.B.Y;
 
-@ChgRef{Version=[2],Kind=[Revised]}@Chg{Version=[2],New=[@key[private] @key[with] A.B.C; -- (3)
+@ChgRef{Version=[2],Kind=[Added]}@ChgAdded{Version=[2],Text=[@key[private] @key[with] A.B.C; -- @RI[(3)]
 @key[package] A.B.Z @key[is]
-@key[end] A.B.Z;],Old=[]}
+@key[end] A.B.Z;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00262-01]}
@@ -1242,7 +1242,7 @@ entity declared within the declarative region of the @nt{library_item}; or]}
 @ChgAdded{Version=[2],Text=[This prevents visibility issues, where whether an entity
 is an incomplete or full view depends on how the name of the entity is written.
 The @nt{limited_with_clause} cannot be useful, as we must have the full view
-available in the parent in order for the @nt{use_clause} to be given.], Old=[]}
+available in the parent in order for the @nt{use_clause} to be given.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
@@ -2399,9 +2399,10 @@ structure:
 @begin{Example}
 @key[task] @RI{Environment_Task};
 
+@ChgRef{Version=[2],Kind=[Revised]}@Comment{The fonts corrected below}
 @key[task] @key[body] @RI{Environment_Task} @key[is]
     ... (1) --@RI{ The environment @nt{declarative_part}}
-            --@RI{ (that is, the sequence of @nt{library_item}s) goes here.}
+            --@RI{ (that is, the sequence of @nt{library_item}}@RI{s) goes here.}@ChgNote{Extra RI to fix bug}
 @key[begin]
     ... (2) --@RI{ Call the main subprogram, if there is one.}
 @key[end] @RI{Environment_Task};
@@ -2941,17 +2942,49 @@ even if the Initialize procedure is null.]}
 @end{Reason}
 @end{Itemize}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00403-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[]}@Comment{Phony addition to get conditional leading}
 A generic body is
 preelaborable only if elaboration of a corresponding
 instance body would not perform any such actions,
-presuming that the actual for each formal private type (or extension) is
+presuming that@Chg{Version=[2],New=[:],Old=[ the actual for each formal
+private type (or extension) is
 a private type (or extension), and the actual for each
-formal subprogram is a user-defined subprogram.
+formal subprogram is a user-defined subprogram.]}
 @Defn{generic contract issue}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
+@ChgAdded{Version=[2],Text=[the actual for each formal private type (or
+extension) declared within the formal part of the generic unit is a private
+type (or extension) that does not have preelaborable initialization;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
+@ChgAdded{Version=[2],Text=[the actual for each formal type is nonstatic;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
+@ChgAdded{Version=[2],Text=[the actual for each formal object is nonstatic; and]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
+@ChgAdded{Version=[2],Text=[the actual for each formal subprogram is a
+user-defined subprogram.]}
+@end{Itemize}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
+  @ChgAdded{Version=[2],Text=[This is an @lquotes@;assume-the-worst@rquotes
+  rule. The elaboration of a generic unit doesn't perform any of the actions
+  listed above, because its sole effect is to establish that the generic can
+  from now on be instantiated. So the elaboration of the generic itself is not
+  the interesting part when it comes to preelaboration rules. The interesting
+  part is what happens when you elaborate @lquotes@;any instantiation@rquotes
+  of the generic. For instance, declaring an object of a limited formal private
+  type might well start tasks, call functions, and do all sorts of
+  non-preelaborable things. We prevent these situations by assuming that the
+  actual parameters are as badly behaved as possible.]}
+@end{Discussion}
 @begin{Reason}
-Without this rule about generics, we would have to forbid
-instantiations in preelaborated library units,
-which would significantly reduce their usefulness.
+  Without this rule about generics, we would have to forbid
+  instantiations in preelaborated library units,
+  which would significantly reduce their usefulness.
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002-01]}
@@ -3351,4 +3384,8 @@ required to appear last.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00002-01]}
   @ChgAdded{Version=[2],Text=[@B<Corrigendum:> The wording was changed so that
   subunits of a preelaborated subprogram are also preelaborated.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00403-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to cover missing cases for
+  preelaborated generic units.]}
 @end{DiffWord95}

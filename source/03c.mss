@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/14 06:22:56 $}
+@Comment{$Date: 2005/03/18 06:37:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -126,8 +126,7 @@ declared in the specification of the generic unit.
 @Defn{tagged type}
 A record type or private type that has the reserved word @key(tagged)
 in its declaration is called a @i(tagged) type.@Chg{Version=[2],New=[ In
-addition, an interface type is tagged type (see @RefSecNum{Interface Types}),
-as is a task or protected type derived from an interface type.],Old=[]}
+addition, an interface type is tagged type (see @RefSecNum{Interface Types}).],Old=[]}
 @Redundant[When deriving
 from a tagged type, @Chg{Version=[2],New=[as],Old=[additional components
 may be defined. As]} for any derived type,
@@ -158,8 +157,9 @@ or in a generic formal part
 @Defn2{Term=[extension], Sec=(of a private type)}
 Every type extension is also a tagged type, and
 is either a @i(record extension) of some other
-tagged type, a @i(private extension), or a
-synchronized tagged type (see @RefSecNum{Interface Types}).
+tagged type, a @i(private extension), or a task or protected type
+derived from an interface type (a synchronized tagged type @em see
+@RefSecNum{Interface Types}).
 A record extension is defined by a @nt<derived_type_definition>
 with a @nt<record_extension_part> (see @RefSecNum{Type Extensions}).
 A private extension, which is a partial view of a record extension or
@@ -1360,6 +1360,13 @@ shall not have a @nt<default_expression>.
   since designated objects are never tag-indeterminate.
 @end(Reason)
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00404-01]}
+@ChgAdded{Version=[2],Text=[If a dispatching operation is defined by a
+@nt{subprogram_renaming_declaration} or the instantiation of a generic
+subprogram, any access parameter of the renamed subprogram or the generic
+subprogram that corresponds to a controlling access parameter of the
+dispatching operation, shall be null excluding.]}
+
 A given subprogram shall not be a dispatching operation of two
 or more distinct tagged types.
 @begin{Reason}
@@ -1648,33 +1655,45 @@ declaration of a primitive subprogram.
 The concept of dispatching operations is new.
 @end{Extend83}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00404-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Ada 2005 requires that subprograms that are renamed or instantiated to be
+  dispatching operations have all controlling access parameters be null
+  excluding. (Since Ada 95 didn't have the notion of null-excluding access
+  types, it had no such rule.) This rule will require the addition of an
+  explicit @key{not null} on non-dispatching operations that are later renamed
+  to be dispatching, or on a generic that is used to define a dispatching
+  operation.]}
+@end{Incompatible95}
+
 @begin{Diffword95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:>@ChgNote{This is documented as an extension in the two sections referenced below.}
-Allocators and access attributes of objects of class-wide types
-can be used as the controlling parameter in a dispatching calls. This
-was an oversight in the definition of Ada 95. (See @RefSecNum{Operations of Access Types} and
-@RefSecNum{Allocators}).]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:>@ChgNote{This is documented as an extension in the two sections referenced below.}
+  Allocators and access attributes of objects of class-wide types
+  can be used as the controlling parameter in a dispatching calls. This
+  was an oversight in the definition of Ada 95. (See @RefSecNum{Operations of Access Types} and
+  @RefSecNum{Allocators}).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Corrected the conventions of
-dispatching operations.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the conventions of
+  dispatching operations.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00196-01]}
-@Chg{Version=[2],New=[Clarified the wording to ensure that functions with
-no controlling operands are tag-indeterminate, and to describe that the
-controlling tag can come from the target of an @nt{assignment_statement}.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00196-01]}
+  @ChgAdded{Version=[2],Text=[Clarified the wording to ensure that functions with
+  no controlling operands are tag-indeterminate, and to describe that the
+  controlling tag can come from the target of an @nt{assignment_statement}.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00239-01]}
-@Chg{Version=[2],New=[Fixed the wording to cover default expressions
-inherited by derived subprograms. A literal reading of the old wording
-would have implied that operations would be called with objects of the
-wrong type.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00239-01]}
+  @ChgAdded{Version=[2],Text=[Fixed the wording to cover default expressions
+  inherited by derived subprograms. A literal reading of the old wording
+  would have implied that operations would be called with objects of the
+  wrong type.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
-@Chg{Version=[2],New=[An abstract formal subprogram is a dispatching
-operation, even though it is not a primitive operation. See
-@RefSec{Formal Subprograms}.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+  @ChgAdded{Version=[2],Text=[An abstract formal subprogram is a dispatching
+  operation, even though it is not a primitive operation. See
+  @RefSec{Formal Subprograms}.]}
 @end{Diffword95}
 
 
@@ -2455,9 +2474,9 @@ by compile-time rules.
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[null_exclusion],Old=[]}>,
 rhs="@Chg{Version=[2],New=[@key{not} @key{null}],Old=[]}"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01],ARef=[AI95-00404-01]}
 @Syn{lhs=<access_definition>,rhs="@Chg{Version=[2],New=<
-    [@Syn2{null_exclusion}] @key{access} [@Syn2{general_access_modifier}] @Syn2{subtype_mark}
+    [@Syn2{null_exclusion}] @key{access} [@key{constant}] @Syn2{subtype_mark}
   | [@Syn2{null_exclusion}] @key{access} [@key{protected}] @key{procedure} @Syn2{parameter_profile}
   | [@Syn2{null_exclusion}] @key{access} [@key{protected}] @key{function} @Syn2{parameter_and_result_profile}>,
 Old=[@key{access} @Syn2{subtype_mark}]}"}
@@ -3051,7 +3070,7 @@ new. It can be used in both anonymous and named access type definitions.
 It is most useful to declare that parameters cannot be @key{null},
 thus eliminating the need for checks on use.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00254-01],ARef=[AI95-00404-01]}
 @Chg{Version=[2],New=[The kinds of anonymous
 access types allowed were increased by adding anonymous access-to-constant
 and anonymous access-to-subprogram types. Anonymous access-to-subprogram

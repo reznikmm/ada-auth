@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2005/03/11 23:38:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2005/03/18 06:37:21 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/03/11 23:38:22 $}
+@Comment{$Date: 2005/03/18 06:37:21 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -2012,7 +2012,7 @@ its bounds belong to the safe range of @i{EF}.Float_Type; otherwise,
 
 The maximum relative error exhibited by the exponentiation operator, which
 depends on the values of the operands, is
-(4.0 @Thin + @Thin @Abs{@R[Right] @Times @Log(@R[Left])} @Thin / @Thin 32.0) @Times
+(4.0 + @Abs{@R[Right] @Times @Log(@R[Left])} / 32.0) @Times
 @RI{EF}@R[.Float_Type'Model_Epsilon].
 
 The maximum relative error given above applies throughout the domain of
@@ -2182,7 +2182,7 @@ fewer than 5.
       consecutive random numbers not falling into the range
       @RI{A} .. @RI{B}. The counts of gaps of each length from 0 to 15,
       and of all lengths greater than 15 lumped together, are tallied and
-      compared with the expected counts. Let @RI{P} @Thin = @Thin @RI{B}-@RI{A}. The
+      compared with the expected counts. Let @RI{P} = @RI{B}-@RI{A}. The
       probability that a gap has a length of @RI{L} is (1-@RI{P}) @+[@RI{L}]
       @Times @RI{P} for @RI{L} @leq 15, while the probability that a gap has a
       length of 16 or more is (1-@RI{P}) @+[16]. The number of degrees of
@@ -2191,7 +2191,7 @@ fewer than 5.
       Permutation Test. 5000 tuples of 4 different random floating point
       numbers are generated. (An entire 4-tuple is discarded in the unlikely
       event that it contains any two exactly equal components.) The counts of
-      each of the 4! @Thin = @Thin 24 possible relative orderings of the
+      each of the 4! = 24 possible relative orderings of the
       components of the 4-tuples are tallied and compared with the expected
       counts. Each of the possible relative orderings has an equal
       probability. The number of degrees of freedom for the chi-square test
@@ -2208,7 +2208,7 @@ fewer than 5.
       counts of increasing runs of each length from 1 to 4, and of all lengths
       greater than 4 lumped together, are tallied and compared with the
       expected counts. The probability that an increasing run has a length of
-      @RI{L} is 1/@RI{L}! @Thin - @Thin 1/(@RI{L}+1)! for @RI{L} @leq 4, while
+      @RI{L} is 1/@RI{L}! - 1/(@RI{L}+1)! for @RI{L} @leq 4, while
       the probability that an increasing run has a length of 5 or more is
       1/5!. The number of degrees of freedom for the chi-square test
       is 4.
@@ -2216,7 +2216,7 @@ fewer than 5.
       Decreasing-Runs Test. The test is similar to the Increasing Runs Test,
       but with decreasing runs.
 
-      Maximum-of-@RI{t} Test (with @RI{t} @Thin = @Thin 5). 5000 tuples of
+      Maximum-of-@RI{t} Test (with @RI{t} = 5). 5000 tuples of
       5 random floating point numbers are generated. The maximum of the
       components of each 5-tuple is determined and raised to the 5th power.
       The uniformity of the resulting values over the range 0.0 .. 1.0 is
@@ -2277,16 +2277,16 @@ fewer than 5.
       the expected counts. For 2 @leq @RI{S} @leq 12, let
       @RI{D} @-{@RI{S}} be the probability that a roll of a pair of dice shows
       the sum @RI{S}, and let
-      @RI{Q} @-[@RI{S}](@RI{L}) @Thin = @Thin @RI{D} @-[@RI{S}] @Times
-      (1 @Thin - @Thin (@RI{D} @-[@RI{S}] @Thin + @Thin @RI{D} @-[7])) @+[@RI{L}-2] @Times
-      (@RI{D} @-[@RI{S}] @Thin + @Thin @RI{D} @-[7]). Then, the probability that a
-      game has a length of 1 is @RI{D} @-[7] @Thin +
-      @Thin @RI{D} @-[11] @Thin + @Thin @RI{D} @-[2] @Thin +
-      @Thin @RI{D} @-[3] @Thin + @Thin @RI{D} @-[12]
+      @RI{Q} @-[@RI{S}](@RI{L}) = @RI{D} @-[@RI{S}] @Times
+      (1 - (@RI{D} @-[@RI{S}] + @RI{D} @-[7])) @+[@RI{L}-2] @Times
+      (@RI{D} @-[@RI{S}] + @RI{D} @-[7]). Then, the probability that a
+      game has a length of 1 is @RI{D} @-[7] +
+      @RI{D} @-[11] + @RI{D} @-[2] +
+      @RI{D} @-[3] + @RI{D} @-[12]
       and, for @RI{L} @Gt 1, the probability that a game has a length of
-      @RI{L} is @RI{Q} @-[4](@RI{L}) @Thin + @Thin
-      @RI{Q} @-[5](@RI{L}) @Thin + @Thin @RI{Q} @-[6](@RI{L}) @Thin + @Thin @RI{Q} @-[8](@RI{L})
-      @Thin + @Thin @RI{Q} @-[9](@RI{L}) @Thin + @Thin @RI{Q}
+      @RI{L} is @RI{Q} @-[4](@RI{L}) +
+      @RI{Q} @-[5](@RI{L}) + @RI{Q} @-[6](@RI{L}) + @RI{Q} @-[8](@RI{L})
+      + @RI{Q} @-[9](@RI{L}) + @RI{Q}
       @-[10](@RI{L}). The number of degrees of freedom for the chi-square test
       is 18.
 

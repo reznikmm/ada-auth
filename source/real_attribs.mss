@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2005/01/25 07:00:14 $}
+@Comment{$Date: 2005/03/18 06:37:24 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.22 $}
+@comment{$Revision: 1.23 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -379,7 +379,7 @@ S of a floating point type @i{T}.
    @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    For nonzero @i{Y}, let @RI{v} be the value
    @RI{X} - @RI{n} @Times @RI{Y}, where @RI{n} is the integer nearest to
-   the exact value of @RI{X}/@RI{Y}; if @Abs{@RI{n} - @RI{X}/@RI{Y}} @Thin = @Thin 1/2,
+   the exact value of @RI{X}/@RI{Y}; if @Abs{@RI{n} - @RI{X}/@RI{Y}} = 1/2,
    then @RI(n) is chosen to be even. If @RI{v} is a machine number of
    the type @i{T}, the function yields @RI{v}; otherwise, it yields zero.
 @IndexCheck{Division_Check}Constraint_Error is raised if @i{Y} is zero.
@@ -404,7 +404,7 @@ S of a floating point type @i{T}.
 @end{DescExample}
 
    @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   If @RI{Towards} @Thin = @Thin @RI{X}, the function yields @i{X}; otherwise, it
+   If @RI{Towards} = @RI{X}, the function yields @i{X}; otherwise, it
    yields the machine number of the type @i{T} adjacent to @i{X} in the
    direction of @i{Towards}, if that machine number exists.
    @IndexCheck{Range_Check}If the result would

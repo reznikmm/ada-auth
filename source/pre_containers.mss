@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2005/03/01 06:05:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2005/03/18 06:37:22 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:08 $}
+@Comment{$Date: 2005/03/18 06:37:22 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -2876,8 +2876,8 @@ instantiation of Containers.Doubly_Linked_Lists.Generic_Sort should be
 O(@i<N>**2), and the average time complexity should be better than O(@i<N>**2).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort
-should have an average time complexity better than O(N**2) and worst case no
-worse than O(N**2).]}]}
+should have an average time complexity better than O(@i{N}**2) and worst case no
+worse than O(@i{N}**2).]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6689,8 +6689,8 @@ should be O(@i<N>**2) or better, and the average time complexity should be bette
 than O(@i<N>**2), where @i<N> is the length of the Container parameter.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort
-should have an average time complexity better than O(N**2) and worst case no
-worse than O(N**2).]}]}
+should have an average time complexity better than O(@i{N}**2) and worst case no
+worse than O(@i{N}**2).]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/03/11 23:38:22 $}
+@Comment{$Date: 2005/03/18 06:37:18 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -839,23 +839,23 @@ The default calling convention is Intrinsic for the following:
 @key[end] G;],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@key[package body] G @key[is]
+@ChgAdded{Version=[1],Text=[@key[package body] G @key[is]
     ...
     X: Formal := ...;
     ...
-    Proc(X); -- This is a dispatching call in Instance, because
-             -- the actual type for Formal is class-wide.
+    Proc(X); -- @RI[This is a dispatching call in Instance, because]
+             -- @RI[the actual type for Formal is class-wide.]
     ...
-    -- Proc'Access would be illegal here, because it is of
-    -- convention Intrinsic, by the above rule.
-@key[end] G;],Old=[]}
+    -- @RI[Proc'Access would be illegal here, because it is of]
+    -- @RI[convention Intrinsic, by the above rule.]
+@key[end] G;]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@key[type] Actual @key[is new] Root @key[with] ...;
+@ChgAdded{Version=[1],Text=[@key[type] Actual @key[is new] Root @key[with] ...;
 @key[procedure] Proc(X: Actual);
 @key[package] Instance @key[is new] G(Formal => Actual'Class);
-    -- It is legal to pass in a class-wide actual, because Formal
-    -- has unknown discriminants.],Old=[]}
+    -- @RI[It is legal to pass in a class-wide actual, because Formal]
+    -- @RI[has unknown discriminants.]]}
 @end{Example}
 
 @ChgRef{Version=[1],Kind=[Added]}
@@ -1926,7 +1926,7 @@ with the given identifier, with nominal subtype defined by the
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[@PDefn2{Term=[execution], Sec=(extended_return_statement)}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[execution], Sec=(extended_return_statement)}
 For the execution of an @nt{extended_return_statement}, the
 @nt{subtype_indication} or @nt{access_definition} is elaborated. This creates
 the nominal subtype of the return object. If there is a return expression, it
@@ -1937,12 +1937,13 @@ the return object; otherwise, the return object is initialized by default as
 for a stand-alone object of its nominal subtype (see @RefSecNum{Object Declarations}).
 If the nominal subtype is indefinite, the return object is constrained by its
 initial value. The @nt{handled_@!sequence_@!of_@!statements}, if any, is then
-executed.],Old=[]}
+executed.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @PDefn2{Term=[execution], Sec=(return_statement)}
 @Chg{Version=[2],New=[@PDefn2{Term=[execution], Sec=(simple_return_statement)}],Old=[]}
-For the execution of a @nt{return_statement}, the @nt{expression}
+For the execution of a @Chg{Version=[2],New=[@nt{simple_return_statement}],
+Old=[@nt{return_statement}]}, the @nt{expression}
 (if any) is first evaluated and converted to the result subtype@Chg{Version=[2],
 New=[ to become the value of the anonymous @i{return object}
 @PDefn2{Term=[return object], Sec=(simple_return_statement)}],Old=[]}.
@@ -2233,9 +2234,10 @@ return subtypes.],Old=[]}
 @ChgNote{Putting @nt{pragma} in the syntax font is used for Assert and Pure,
 at least.}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgAdded{Version=[2],Text=[A @nt{pragma} No_Return indicates that a
-procedure can return only by propagating an exception.]}
+procedure cannot return normally@Redundant[; it may propagate an exception
+or loop forever].]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@nt{Pragma} No_Deposit will have to wait for Ada 2015. :-)]}
@@ -2243,45 +2245,111 @@ procedure can return only by propagating an exception.]}
 
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@ChgAdded{Version=[2],Text=[The form of a @nt{pragma} No_Return, which is a program unit
-pragma (see @RefSecNum{Pragmas and Program Units}), is as follows:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
+@ChgAdded{Version=[2],Text=[The form of a @nt{pragma} No_Return, which is a
+representation pragma (see @RefSecNum{Operational and Representation Items}),
+is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{local_}@Syn2{name}{, @SynI{local_}@Syn2{name}]);'',Old=<>}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{local_}@Syn2{name}{, @SynI{local_}@Syn2{name}]);''}
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@ChgAdded{Version=[2],Text=[The @nt{pragma} shall apply to one or more procedures or
-generic procedures.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
+@ChgAdded{Version=[2],Text=[@Defn{non-returning}Each
+@SynI{local_}@nt{name} shall denote one or
+more procedures or generic procedures; the denoted entities are
+@i<non-returning>. The local_name shall not denote a null procedure nor an
+instance of a generic unit.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@ChgAdded{Version=[2],Text=[If a @nt{pragma} No_Return applies to a procedure or a generic procedure, there
-shall be no @nt<return_statement>s that apply to that procedure.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[A null procedure cannot have the appropriate
+  non-returning semantics, as it does not raise an exception or loop forever.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The procedure can be abstract. The denoted
+  declaration can be a @nt{renaming_declaration} if it obeys the usual rules
+  for representation pragmas: the renaming has to occur immediately within the
+  same @nt{declarative_region} as the renamed subprogram. If a non-returning
+  procedure is renamed (anywhere) calls through the new name still have the
+  non-returning semantics.]}
+@end{Ramification}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
+@ChgAdded{Version=[2],Text=[A @nt{return_statement} shall not apply to a
+non-returning procedure or generic procedure.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
+@ChgAdded{Version=[2],Text=[A procedure shall be non-returning if it overrides
+a dispatching non-returning procedure.
+@PDefn{generic contract issue}
+In addition to the places where
+@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+this rule applies also in the private part of an instance of a generic unit.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This ensures that dispatching calls to
+  non-returning procedures will, in fact, not return.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
+@ChgAdded{Version=[2],Text=[If a renaming-as-body completes a non-returning
+procedure declaration, then the renamed procedure shall be non-returning.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This insures that no extra code is needed to
+  implement the renames (that is, no wrapper is needed) as the body has
+  the same property.]}
+@end{Reason}
+
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@ChgAdded{Version=[2],Text=[If a @nt{pragma} No_Return applies to a generic procedure, pragma No_Return
-applies to all instances of that generic procedure.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
+@ChgAdded{Version=[2],Text=[If a generic procedure is non-returning, then so
+are its instances. If a procedure declared within a generic unit is
+non-returning, then so are the corresponding copies of that procedure in
+instances.]}
 @end{StaticSem}
 
 @begin{RunTime}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@ChgAdded{Version=[2],Text=[If a @nt{pragma} No_Return applies to a procedure, then the exception
-Program_Error is raised at the point of the call of the procedure if the
-procedure body completes normally.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
+@ChgAdded{Version=[2],Text=[If the body of a non-returning procedure completes
+normally, Program_Error is raised at the point of the call.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @end{RunTime}
 @begin{Discussion}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Note that there is no name for suppressing
-this check, since the check represents a bug, imposes no time overhead,
-and minimal space overhead (since it can usually be statically eliminated
-as dead code).]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Note that there is no name for suppressing
+  this check, since the check represents a bug, imposes no time overhead,
+  and minimal space overhead (since it can usually be statically eliminated
+  as dead code).]}
 @end{Discussion}
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If a non-returning procedure tries to return, we
+  raise Program_Error. This is stated as happening at the call site, because we
+  do not wish to allow the procedure to handle the exception (and then,
+  perhaps, try to return again!). However, the expected run-time model is that
+  the compiler will generate @key{raise} Program_Error at the end of the
+  procedure body (but not handleable by the procedure itself), as opposed to
+  doing it at the call site. (This is just like the typical run-time model for
+  functions that fall off the end without returning a value). The reason is
+  indirect calls: in P.@key{all}(...);, the compiler cannot know whether P
+  designates a non-returning procedure or a normal one. Putting the @key{raise}
+  Program_Error in the procedure's generated code solves this problem neatly.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Similarly, if one passes a non-returning
+  procedure to a generic formal parameter, the compiler cannot know this at
+  call sites; the raise-in-body solution deals with this neatly.]}
+@end{ImplNote}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}

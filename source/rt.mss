@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2005/03/14 06:22:58 $ $Author: Randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2005/03/18 06:37:23 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/14 06:22:58 $}
+@Comment{$Date: 2005/03/18 06:37:23 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -851,8 +851,8 @@ regardless of whether the active priority of the task actually changes.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
-  @ChgAdded{Version=[2],Text=[Clarified that an implementation may support only
-  one task dispatching policy (of any kind, language-defined or otherwise)
+  @ChgAdded{Version=[2],Text=[Clarified that an implementation need support
+  only one task dispatching policy (of any kind, language-defined or otherwise)
   per partition.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
@@ -1671,6 +1671,58 @@ Program_Error is raised if this check fails.
 
 @end{RunTime}
 
+@begin{Bounded}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00327-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[Following any change of priority,
+it is a bounded error for the active priority of any task with a call queued on
+an entry of a protected object to be higher than the ceiling priority of the
+protected object.
+@PDefn2{Term=(bounded error),Sec=(cause)}
+In this case one of the following applies:]}
+
+@begin{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[at any time prior to executing the entry body
+Program_Error is raised in the calling task;
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[when the entry is open the entry body is executed
+at the ceiling priority of the protected object;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[when the entry is open the entry body is executed
+at the ceiling priority of the protected object and then Program_Error is
+raised in the calling task; or
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[when the entry is open the entry body
+is executed at the ceiling priority of the protected object that was in effect
+when the entry call was queued.]}
+@end{Itemize}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[Added]}@Comment{This note was moved along with the above rules}
+@ChgAdded{Version=[2],Text=[Note that the error is @lquotes@;blamed@rquotes@;
+on the task that did the entry call, not the task that changed the
+priority of the task or protected object.
+This seems to make sense for the case of changing the priority of a task
+blocked on a call, since if the Set_Priority had happened a
+little bit sooner, before the task queued a call,
+the entry-calling task would get the error.
+Similarly, there is no reason not to raise the priority of a
+task that is executing in an @nt{abortable_part}, so long as its
+priority is lowered before it gets to the end and needs to cancel the
+call.
+The priority might need to be lowered to allow it to remove the call
+from the entry queue,
+in order to avoid violating the ceiling.
+This seems relatively harmless, since there is an error,
+and the task is about to start raising an exception anyway.]}
+@end{Ramification}
+@end{Bounded}
+
 @begin{ImplPerm}
 
 The implementation is allowed to round all ceilings in a certain
@@ -1687,9 +1739,10 @@ Note that the implementation cannot choose a subrange that crosses the
 boundary between normal and interrupt priorities.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 Implementations are allowed to define other locking policies,
-but need not support more than one such policy per
-partition.
+but need not support more than one @Chg{Version=[2],New=[locking],Old=[such]}
+policy per partition.
 
 @Redundant[Since implementations are allowed to place restrictions
 on code that runs at an interrupt-level active priority
@@ -1769,6 +1822,17 @@ calls another protected operation on the same protected object).
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0073],ARef=[AI95-00091-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the wording to
   reflect that pragma Locking_Policy cannot be inside of a program unit.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that an implementation need support
+  only one locking policy (of any kind, language-defined or otherwise)
+  per partition.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+  @ChgAdded{Version=[2],Text=[The bounded error for the priority of a task
+  being higher than the ceiling of an object it is currently in was moved here
+  from @RefSecNum{Dynamic Priorities}, so that it applies no matter how the
+  situation arises.]}
 @end{DiffWord95}
 
 
@@ -1821,9 +1885,10 @@ and the choice among queued entry calls of
 a protected object when more than one @nt{entry_barrier} @nt{condition} is True.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00355-01]}
 Two queuing policies, FIFO_Queuing and Priority_Queuing,
-are language defined. If no Queuing_Policy pragma appears
-in any of the program units
+are language defined. If no Queuing_Policy pragma
+@Chg{Version=[2],New=[applies to],Old=[appears in]} any of the program units
 comprising the partition, the queuing policy for that partition
 is FIFO_Queuing. The rules for this policy are specified in
 @RefSecNum{Entry Calls} and @RefSecNum{Selective Accept}.
@@ -1932,17 +1997,37 @@ is selected.
 @end{RunTime}
 
 @begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 Implementations are allowed to define other queuing policies, but
-need not support more than one such policy per partition.
+need not support more than one @Chg{Version=[2],New=[queuing],Old=[such]}
+policy per partition.
 @begin{Discussion}
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0116],ARef=[AI95-00069-01]}
+  @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00256-01]}
   @ChgAdded{Version=[1],Text=[This rule is really redundant, as
   @RefSecNum(Pragmas and Program Units) allows an implementation to limit the
   use of configuration pragmas to an empty environment. In that case, there
-  would be no way to have multiple policies in a partition. In any case, the
+  would be no way to have multiple policies in a partition.@Chg{Version=[2],New=[],
+  Old=[ In any case, the
   wording here really ought to be "...more than one queuing policy per
   partition.", since this part of the rule applies to all queuing policies, not
-  just implementation-defined ones.]}
+  just implementation-defined ones.]}]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00188-02]}
+@ChgAdded{Version=[2],Text=[Implementations are allowed to defer the reordering
+of entry queues following a change of base priority of a task blocked on the
+entry call if it is not practical to reorder the queue immediately.]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Priority change is immediate, but the effect of the
+change on entry queues can be deferred. That is necessary in order to implement
+priority changes on top of a non-Ada kernel.]}
+@end{Reason}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[The reordering should occur as soon as the blocked
+task can itself perform the reinsertion into the entry queue.]}
 @end{Discussion}
 @end{ImplPerm}
 
@@ -1966,10 +2051,41 @@ implementation-defined queuing policies.]}]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected so that a call of
   Set_Priority in an abortable part does not change the priority of the
   triggering entry call.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00188-02]}
+  @ChgAdded{Version=[2],Text=[Added a permission to defer queue reordering
+  when the base priority of a task is changed. This is a counterpart to
+  stronger requirements on the implementation of priority change.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that an implementation need support
+  only one queuing policy (of any kind, language-defined or otherwise)
+  per partition.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+  @ChgAdded{Version=[2],Text=[Fixed wording to make clear that @nt{pragma}
+  never appears inside of a unit; rather it @lquotes@;applies to@rquotes the
+  unit.]}
 @end{DiffWord95}
 
 
 @LabeledClause{Dynamic Priorities}
+
+
+@begin{Intro}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+  @ChgAdded{Version=[2],Text=[@Redundant[This clause specifies how the
+  priority of an entity can be modified or queried at run time.]]}
+@end{Intro}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+  @ChgAdded{Version=[2],Text=[This clause is turned into two subclauses.
+  This clause introduction is new.]}
+@end{DiffWord95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Dynamic Priorities for Tasks]}
 
 @begin{Intro}
 @Redundant[This clause specifies how the base priority of a task can be
@@ -1979,9 +2095,11 @@ modified or queried at run time.]
 @begin{StaticSem}
 @Leading@Keepnext@;The following language-defined library package exists:
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @key[with] System;
 @key[with] Ada.Task_Identification; @RI{-- See @RefSecNum[The Package Task_Identification]}
-@key[package] Ada.Dynamic_Priorities @key[is]@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}
+@key[package] Ada.Dynamic_Priorities @key[is]@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}@Chg{Version=[2],New=[
+    @key[pragma] Preelaborate(Dynamic_Priorities);],Old=[]}
 
     @key[procedure] @AdaSubDefn{Set_Priority}(Priority : @key[in] System.Any_Priority;
                            T : @key[in] Ada.Task_Identification.Task_Id :=
@@ -2027,23 +2145,31 @@ that has terminated.
 Program_Error is raised by Set_Priority and Get_Priority if T is equal
 to Null_Task_Id.
 
-Setting the task's base priority to the new value takes place as soon
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00188-02]}
+@Chg{Version=[2],New=[On a system with a single processor, the setting of a],
+Old=[Setting the]} task's base priority to the new value @Chg{Version=[2],
+New=[occurs immediately at the first point that is outside the
+execution of an abort-deferred operation],Old=[takes place as soon
 as is practical but not while the task is performing a
 protected action.
 This setting occurs no later then the next abort completion point of
 the task T
-(see @RefSecNum{Abort of a Task - Abort of a Sequence of Statements}).
+(see @RefSecNum{Abort of a Task - Abort of a Sequence of Statements})]}.
 @begin{ImplNote}
-When Set_Priority is called by a task T1 to set the priority of T2,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00188-02]}
+@Chg{Version=[2],New=[The priority change is immediate if the target task
+is on a ready or delay queue. However, consider when],Old=[When]}
+Set_Priority is called by a task T1 to set the priority of T2,
 if T2 is blocked, waiting on an entry call queued on a protected object,
 the entry queue needs to be reordered.
 Since T1 might have a priority that is higher than the ceiling of the
-protected object,
-T1 cannot, in general, do the reordering.
+protected object, T1 cannot, in general, do the reordering.
 One way to implement this is to wake T2 up and have T2 do the work.
 This is similar to the disentangling of queues that needs to happen when
 a high-priority task aborts a lower-priority task,
-which might have a call queued on a protected object with a low ceiling.
+which might have a call queued on a protected object with a low
+ceiling.@Chg{Version=[2],New=[ We have an Implementation Permission in
+@RefSecNum{Entry Queuing Policies} to allow this implementation.],Old=[]}
 @end{ImplNote}
 @begin{Reason}
 @Leading@;A previous version of Ada 9X made it a run-time error
@@ -2072,7 +2198,8 @@ want the third task to have high priority.
 @end{RunTime}
 
 @begin{Bounded}
-@PDefn2{Term=(bounded error),Sec=(cause)}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00327-01]}
+@ChgDeleted{Version=[2],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 If a task is blocked on a protected entry call, and the call is queued,
 it is a bounded error to raise its base priority
 above the ceiling priority of the corresponding
@@ -2085,9 +2212,10 @@ protected object.
 In either of these cases,
 either Program_Error is raised in the task that called the entry,
 or its priority is temporarily lowered,
-or both, or neither.
+or both, or neither.]}
 @begin{Ramification}
-Note that the error is @lquotes@;blamed@rquotes@; on the task that did the entry call,
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Note that the error is @lquotes@;blamed@rquotes@; on the task that did the entry call,
 not the task that called Set_Priority.
 This seems to make sense for the case of a task blocked on a call,
 since if the Set_Priority had happened a
@@ -2101,8 +2229,7 @@ The priority might need to be lowered to allow it to remove the call
 from the entry queue,
 in order to avoid violating the ceiling.
 This seems relatively harmless, since there is an error,
-and the task is about to start raising an exception anyway.
-
+and the task is about to start raising an exception anyway.]}
 @end{Ramification}
 @end{Bounded}
 
@@ -2120,6 +2247,16 @@ However, if the task object no longer exists,
 calling Get_Priority causes erroneous execution.
 @end{Ramification}
 @end{Erron}
+
+@begin{DocReq}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00188-02]}
+@ChgAdded{Version=[2],Text=[On a multiprocessor, the implementation shall
+document any conditions that cause the completion of the setting of a task's
+priority to be delayed later than what is specified for a single processor.]}
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Any conditions that cause the completion of the setting of a task's
+priority to be delayed for a multiprocessor shall be documented.]}]}
+@end{DocReq}
 
 @begin{Metrics}
 @Leading@;The implementation shall document the following metric:
@@ -2157,12 +2294,9 @@ unless the call originated from the @nt{triggering_statement} of an
 The effect of two or more Set_Priority calls executed in parallel on
 the same task is defined as executing these calls in some serial order.
 
-
 @begin{TheProof}
-
 This follows from the general reentrancy requirements stated near the
 beginning of @RefSec{Predefined Language Environment}.
-
 @end{TheProof}
 
 The rule for when Tasking_Error is raised for Set_Priority or Get_Priority is
@@ -2179,6 +2313,121 @@ the operation completes without being preempted by any of the
 affected tasks.
 
 @end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Dynamic_Priorities is now Preelaborated,
+  so it can be used in preelaborated units.]}
+@end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+  @ChgAdded{Version=[2],Text=[This Ada 95 clause was turned into a subclause.
+  The paragraph numbers are the same as those for
+  @RefSecNum{Dynamic Priorities} in Ada 95.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00188-02]}
+  @ChgAdded{Version=[2],Text=[Priority changes are now required to be done
+  immediately so long as the target task is not on an entry queue.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+  @ChgAdded{Version=[2],Text=[The bounded error for the priority of a task
+  being higher than the ceiling of an object it is currently in was moved
+  to @RefSecNum{Priority Ceiling Locking}, so that it applies no matter how
+  the situation arises.]}
+@end{DiffWord95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Dynamic Priorities for Protected Objects]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+@ChgAdded{Version=[2],Text=[This clause specifies how the priority of a
+protected object can be modified or queried at run time.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The following attribute
+is defined for @PrefixType{a @nt{prefix} P that denotes a protected object}:]}
+
+@begin(description)
+@ChgAttribute{Version=[2],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<P>, AttrName=<Priority>, ARef=[AI95-00327-01],
+  Text=[@Chg{Version=[2],New=[Denotes a non-aliased component of the enclosing
+  protected object P. This component is of type System.Any_Priority and its
+  value is the priority of P. Reference to this attribute shall appear only
+  inside the body of P.],Old=[]}]}
+@EndPrefixType{}
+@end{Description}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+@ChgAdded{Version=[2],Text=[The initial value of this attribute is set by
+pragmas Priority or Interrupt_Priority, and can be changed by an assignment.]}
+@end{StaticSem}
+
+@begin{Runtime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+@ChgAdded{Version=[2],Text=[If the locking policy Ceiling_Locking is in effect
+then the ceiling priority of a protected object P is set to the value of
+P'Priority at the end of each protected action of P.]}
+@end{Runtime}
+
+@begin{Metrics}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The implementation shall document
+the following metric:]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The difference in execution time of
+calls to the following procedures in protected object P:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<protected> P @key<is>
+   @key<procedure> Do_Not_Set_Ceiling (Pr : System.Any_Priority);
+   @key<procedure> Set_Ceiling (Pr : System.Any_Priority);
+@key<private>
+   @key<null>;
+@key<end> P;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<protected body> P @key<is>
+   @key<procedure> Do_Not_Set_Ceiling (Pr : System.Any_Priority) @key<is>
+   @key<begin>
+      @key<null>;
+   @key<end>;
+   @key<procedure> Set_Ceiling (Pr : System.Any_Priority) @key<is>
+   @key<begin>
+      P'Priority := Pr;
+   @key<end>;
+@key<end> P;]}
+@end{Example}
+@end{Itemize}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The metrics for setting the priority of a protected object shall be
+documented.]}]}
+@end{Metrics}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+@ChgAdded{Version=[2],Text=[Since P'Priority is a normal variable, the value
+following an assignment to the attribute immediately reflects the new value
+even though its impact on the ceiling priority of P is postponed until
+completion of the protected action in which it is executed.]}
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The ability to dynamically change and query the priority of a protected
+  object is new to Ada 2005.]}
+@end{Extend95}
+
 
 
 @LabeledClause{Preemptive Abort}
@@ -2299,9 +2548,13 @@ construction of highly efficient tasking run-time systems.]
                         the environment task of the partition.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042],ARef=[AI95-00130-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00360-01]}
 @Defn2{Term=[Restrictions],Sec=(No_Nested_Finalization)}No_Nested_Finalization @\Objects
-  with controlled@Chg{New=[, protected, or task],Old=[]} parts and
-  access types that designate such objects@Chg{New=[,],Old=[]} shall be
+  @Chg{Version=[2],New=[of a type that needs finalization (see
+  @RefSecNum{User-Defined Assignment and Finalization})],Old=[with
+  controlled@Chg{New=[, protected, or task],Old=[]} parts]} and
+  access types that designate @Chg{Version=[2],New=[a type that needs
+  finalization],Old=[such objects@Chg{New=[,],Old=[]}]} shall be
   declared only at library level.
     @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042],ARef=[AI95-00130-01]}
@@ -2328,8 +2581,10 @@ calls on Task_Identification.Abort_Task.
 @ImplDef{Any operations that implicitly
 require heap storage allocation.}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
 No_Dynamic_Priorities @\There are no semantic dependences on the package
-                Dynamic_Priorities.
+                Dynamic_Priorities@Chg{Version=[2],New=[, and no occurrences
+                of the attribute Priority],Old=[]}.
 @Defn2{Term=[Restrictions],Sec=(No_Dynamic_Priorities)}
 
 @Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\There are no semantic dependences on the package
@@ -2440,6 +2695,20 @@ efficient implementation.]}]}
 The above Storage_Checks can be suppressed with pragma Suppress.
 @end{Notes}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  The No_Nested_Finalization is now defined in terms of type that need
+  finalization. These types include a variety of language-defined types that
+  @i<might> be implemented with a controlled type. If the
+  restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
+  applies to the partition, and one of these language-defined types does not
+  have a controlled part, it will not be allowed in local objects in Ada 2005
+  whereas it would be allowed in Ada 95. Such code is not portable, as other
+  Ada compilers may have had a controlled part, and thus would be
+  illegal under the restriction.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that
@@ -2449,7 +2718,12 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed the description of
   Max_Tasks and Max_Asynchronous_Select_Nested to eliminate conflicts with the
   High Integrity Annex (see @RefSecNum{High Integrity Restrictions}).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+  @ChgAdded{Version=[2],Text=[Added using of the new Priority attribute to
+  the restriction No_Dynamic_Priorities.]}
 @end{DiffWord95}
+
 
 @LabeledClause{Monotonic Time}
 @begin{Intro}

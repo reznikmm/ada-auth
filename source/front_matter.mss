@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.41 $ $Date: 2005/03/01 06:05:11 $}
+@comment{$Revision: 1.42 $ $Date: 2005/03/18 06:37:24 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -947,16 +947,20 @@ the corrigendum and this consolidated reference manual would not have been possi
 people whose hard work and assistance has made this revision possible.>,Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[Thanks go out to all of the members of the ISO/IEC JTC 1/SC 22/WG 9
+@ChgAdded{Version=[2],Text=[Thanks go out to all of the members of the
+ISO/IEC JTC 1/SC 22/WG 9
 Ada Rapporteur Group, whose work on creating and editing the wording
 corrections was critical to the entire process. Especially valuable
-contributions came from the chairman of the ARG, P. Leroy (France), who
-kept the process on schedule; J. Barnes (UK) and K. Ishihata (Japan), whose
-careful reviews found many typographical errors; T. Taft (USA), who always
-seemed to have a suggestion when we were stuck, and who also was usually able
-to provide the valuable service of explaining why things were as they are;
-S. Baird (USA), A. Burns (UK), G. Dismukes (USA), E. Ploedereder (Germany),
-and other members too numerous to mention.],Old=[]}
+contributions came from the chairman of the ARG, P. Leroy (France), who kept
+the process on schedule; J. Barnes (UK) whose careful reviews found many
+typographical errors; T. Taft (USA), who always seemed to have a suggestion
+when we were stuck, and who also was usually able to provide the valuable
+service of explaining why things were as they are; S. Baird (USA), who found
+many obscure problems with the proposals; and A. Burns (UK), who pushed many of
+the real-time proposals to completion. Other ARG members who contributed were:
+R. Dewar (USA), G. Dismukes (USA), R. Duff (USA), K. Ishihata (Japan), S.
+Michell (Canada), E. Ploedereder (Germany), J.P. Rosen (France), E. Schonberg
+(USA), J. Tokar (USA), and T. Vardanega (Italy).]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[Special thanks go to Ada Europe and the Ada Resource

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/03/10 06:19:58 $}
+@Comment{$Date: 2005/03/18 06:37:19 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 
@@ -1725,7 +1725,7 @@ a specification for an access parameter (see @RefSecNum(Access Types)).
       @key(end) Inner;
    @key(begin)
       @key(accept) E(Z : @key(access) Integer) @key(do)
-         X := A(Z); -- Accessibility_Check
+         X := A(Z); --@RI{ Accessibility_Check}
       @key(end) E;
    @key(end);
 @key(end) T;
