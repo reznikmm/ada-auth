@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/01/27 06:12:57 $}
+@Comment{$Date: 2005/01/28 06:27:27 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.8 $}
+@Comment{$Revision: 1.9 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4102,14 +4102,14 @@ denotes an aliased view of an object}:
   @PDefn2{Term=[statically matching],Sec=(required)}]}
   @begin{InnerItemize}
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00363-01]}
-    @Chg{Version=[2],New=[the designated subtype of @i{A} shall statically
+    @ChgAdded{Version=[2],Text=[the designated subtype of @i{A} shall statically
     match the nominal subtype of the view;
-    or@PDefn2{Term=[statically matching],Sec=(required)}],Old=[]}
+    or@PDefn2{Term=[statically matching],Sec=(required)}]}
 
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00363-01]}
-    @Chg{Version=[2],New=[@i{D} shall be discriminated in its full view and
-    unconstrained in any partial view, and the @i{A}'s designated subtype of
-    @i{A} shall be unconstrained.],Old=[]}
+    @ChgAdded{Version=[2],Text=[@i{D} shall be discriminated in its full view
+    and unconstrained in any partial view, and the @i{A}'s designated subtype of
+    @i{A} shall be unconstrained.]}
   @end{InnerItemize}
   @begin{ImplNote}
     This ensures
@@ -4357,7 +4357,7 @@ still constrained by their initial value (see @RefSecNum{Allocators}, and thus
 have no change in the legality of 'Access for them. For example:],Old=[]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{type} T1 (D1 : Boolean) @key{is}
+@Chg{Version=[2],New=[@key{type} T1 (D1 : Boolean := False) @key{is}
    @key{record}
       @key{case} D1 @key{is}
          @key{when} False =>
@@ -4378,7 +4378,7 @@ have no change in the legality of 'Access for them. For example:],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
 @Chg{Version=[2],New=[If a discriminated full type has a partial view (private
-type) that is constrained, we do not 'Access on objects for an
+type) that is constrained, we do not allow 'Access on objects for an
 access-to-unconstrained type. Ada 95 allowed this attribute and various
 access subtypes, requiring that the heap object be constrained and thus making
 details of the implementation of the private type visible to the client of
@@ -4405,28 +4405,28 @@ can be used as the controlling parameter in a dispatching calls (see
 Ada 95.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00235-01]}
-@Chg{Version=[2],New=[The type of the prefix can now be used in resolving
+@ChgAdded{Version=[2],Text=[The type of the prefix can now be used in resolving
 Access attributes. This allows more uses of the Access attribute to resolve.
-For example:],Old=[]}
+For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{type} Int_Ptr @key{is access all} Integer;
-@key{type} Float_Ptr @key{is access all} Float;],Old=[]}
+@ChgAdded{Version=[2],Text=[@key{type} Int_Ptr @key{is access all} Integer;
+@key{type} Float_Ptr @key{is access all} Float;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{function} Zap (Val : Int_Ptr) @key{return} Float;
-@key{function} Zap (Val : Float_Ptr) @key{return} Float;],Old=[]}
+@ChgAdded{Version=[2],Text=[@key{function} Zap (Val : Int_Ptr) @key{return} Float;
+@key{function} Zap (Val : Float_Ptr) @key{return} Float;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Value : @key{aliased} Integer := 10;],Old=[]}
+@ChgAdded{Version=[2],Text=[Value : @key{aliased} Integer := 10;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Result1 : Float := Zap (Value'access); -- @RI[Ambigious in Ada 95; resolves in Ada 2005.]
-Result2 : Float := Zap (Int_Ptr'(Value'access)); -- @RI[Resolves in Ada 95 and Ada 2005.]],Old=[]}
+@ChgAdded{Version=[2],Text=[Result1 : Float := Zap (Value'access); -- @RI[Ambigious in Ada 95; resolves in Ada 2005.]
+Result2 : Float := Zap (Int_Ptr'(Value'access)); -- @RI[Resolves in Ada 95 and Ada 2005.]]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This change is upward compatible; any expression that
-does not resolve by the new rules would have failed a @LegalityTitle.],Old=[]}
+@ChgAdded{Version=[2],Text=[This change is upward compatible; any expression
+that does not resolve by the new rules would have failed a Legality Rule.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -4507,9 +4507,9 @@ are done in an arbitrary order.
   AI83-00406 applies to generic instantiation as well (see below).
 
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0014],ARef=[AI95-00064-01]}
-  @Chg{New=[A subprogram can be completed by a renames-as-body, and we need
+  @ChgAdded{Version=[1],Text=[A subprogram can be completed by a renames-as-body, and we need
   to make an elaboration check on such a body, so we use
-  @lquotes@;body@rquotes@; rather than @nt{subprogram_body} above.],Old=[]}
+  @lquotes@;body@rquotes@; rather than @nt{subprogram_body} above.]}
 @end{Discussion}
 
 For a call to a protected operation of a protected type

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:06 $}
+@Comment{$Date: 2005/01/28 06:27:28 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -23,12 +23,12 @@ given the new Ada 95 semantics given in this section.
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[@Redundant[Representation and operational items can be used to
-specify aspects of entities. Two kinds of aspects of entities can be specified:
-aspects of representation and operational aspects. Representation items specify
-how the types and other entities of the language are to be mapped onto the
-underlying machine. Operational items specify other properties of entities.
-]],Old=[]}
+@ChgAdded{Version=[1],Text=[@Redundant[Representation and operational items can
+be used to specify aspects of entities. Two kinds of aspects of entities can be
+specified: aspects of representation and operational aspects. Representation
+items specify how the types and other entities of the language are to be mapped
+onto the underlying machine. Operational items specify other properties of
+entities. ]]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @Defn{representation item}
@@ -53,25 +53,27 @@ current declarative region, or a library unit declared immediately
 preceding a representation pragma in a @nt<compilation>.]}]
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[An @Defn{operational item}@i<operational item> is an
-@nt<attribute_definition_clause> for an operational attribute.],Old=[]}
+@ChgAdded{Version=[1],Text=[An @Defn{operational item}@i<operational item> is an
+@nt<attribute_definition_clause> for an operational attribute.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[@Redundant[An operational item or a representation item applies to
-an entity identified by a @nt<local_name>, which denotes an entity declared
-local to the current declarative region, or a library unit declared immediately
-preceding a representation pragma in a @nt<compilation>.]],Old=[]}
+@ChgAdded{Version=[1],Text=[@Redundant[An operational item or a representation
+item applies to an entity identified by a @nt<local_name>, which denotes an
+entity declared local to the current declarative region, or a library unit
+declared immediately preceding a representation pragma in a
+@nt<compilation>.]]}
 @end{Intro}
 
 @begin{Metarules}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[Aspects of representation are intended to refer to properties that
-need to be known before the compiler can generate code to create or access an
-entity. For instance, the size of an object needs to be known before the object
-can be created. Conversely, operational aspects are those that only need to be
-known before they can be used. For instance, how an object is read from a
-stream only needs to be known when a stream read is executed. Thus, aspects
-of representation have stricter rules as to when they can be specified.],Old=[]}
+@ChgAdded{Version=[1],Text=[Aspects of representation are intended to refer to
+properties that need to be known before the compiler can generate code to
+create or access an entity. For instance, the size of an object needs to be
+known before the object can be created. Conversely, operational aspects are
+those that only need to be known before they can be used. For instance, how an
+object is read from a stream only needs to be known when a stream read is
+executed. Thus, aspects of representation have stricter rules as to when they
+can be specified.]}
 @end{Metarules}
 
 @begin{Syntax}
@@ -309,7 +311,7 @@ See @RefSec{At Clauses}, and @RefSec{Mod Clauses}.
 Component_Size clause
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
-@Chg{New=[],Old=[External_Tag clause]}
+@ChgDeleted{Version=[1],Text=[External_Tag clause]}
 
 Small clause
 
@@ -320,16 +322,16 @@ Storage_Pool clause
 Storage_Size clause
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
-@Chg{New=[],Old=[Read clause]}
+@ChgDeleted{Version=[1],Text=[Read clause]}
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
-@Chg{New=[],Old=[Write clause]}
+@ChgDeleted{Version=[1],Text=[Write clause]}
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
-@Chg{New=[],Old=[Input clause]}
+@ChgDeleted{Version=[1],Text=[Input clause]}
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009]}
-@Chg{New=[],Old=[Output clause]}
+@ChgDeleted{Version=[1],Text=[Output clause]}
 
 Machine_Radix clause
 
@@ -375,7 +377,7 @@ pragma Asynchronous (applies to procedures)
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[An operational item @i<directly specifies> an @i<operational aspect>
+@ChgAdded{Version=[1],Text=[An operational item @i<directly specifies> an @i<operational aspect>
 of the type of the subtype denoted by the @nt{local_name}. The @nt{local_name}
 of an operational item shall denote a first subtype. An operational item that
 names a subtype is type-related.
@@ -383,27 +385,28 @@ names a subtype is type-related.
 @Defn2{Term=[directly specified],
   Sec=(of an operational aspect of an entity)}
 @RootDefn2{Term=[type-related], Sec=(operational item)}
-@PDefn2{Term=[type-related], Sec=(aspect)}],Old=[]}
+@PDefn2{Term=[type-related], Sec=(aspect)}]}
 
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[@Leading@;The following operational items are type-related:],Old=[]}
+@ChgAdded{Version=[1],Type=[Leading],Text=[The following operational items are
+type-related:]}
 @begin{Itemize}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[External_Tag clause],Old=[]}
+@ChgAdded{Version=[1],Text=[External_Tag clause]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[Read clause],Old=[]}
+@ChgAdded{Version=[1],Text=[Read clause]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[Write clause],Old=[]}
+@ChgAdded{Version=[1],Text=[Write clause]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[Input clause],Old=[]}
+@ChgAdded{Version=[1],Text=[Input clause]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[Output clause],Old=[]}
+@ChgAdded{Version=[1],Text=[Output clause]}
 
 @end{Itemize}
 @end{Ramification}
@@ -426,16 +429,18 @@ after using the entity in ways that require the representation to be known.
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[An operational item that directly specifies an aspect of a type
+@ChgAdded{Version=[1],Text=[An operational item that directly specifies an
+aspect of a type
 shall appear before the type is frozen (see @RefSecNum{Freezing Rules}).
 If an operational item is given that directly specifies an aspect of a type,
 then it is illegal to give another operational item that directly specifies
-the same aspect of the type.],Old=[]}
+the same aspect of the type.]}
 @begin{Ramification}
   @ChgRef{Version=[1],Kind=[Added]}
-  @Chg{New=[Unlike representation items, operational items can be specified on
+  @ChgAdded{Version=[1],Text=[Unlike representation items, operational
+  items can be specified on
   partial types. Since they don't affect the representation, the full
-  declaration need not be known to determine their legality.],Old=[]}
+  declaration need not be known to determine their legality.]}
 @end{Ramification}
 
 For an untagged derived type, no type-related representation items
@@ -594,26 +599,27 @@ then inheritance does not happen for that representation item.
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
-@Chg{New=[In contrast, whether operational aspects are inherited by a
+@ChgAdded{Version=[1],Text=[In contrast, whether operational aspects are
+inherited by a
 derived type depends on each specific aspect. When operational aspects are
 inherited by a derived type, aspects that were directly specified before the
 declaration of the derived type, or (in the case where the parent is derived)
 that were inherited by the parent type from the grandparent type are inherited.
 An inherited operational aspect is overridden by a subsequent operational item
-that specifies the same aspect of the type.],Old=[]}
+that specifies the same aspect of the type.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[As with representation items, if an operational item for the parent appears
-after the @nt{derived_@!type_@!declaration}, then inheritance does not happen for
-that operational item.],Old=[]}
+@ChgAdded{Version=[1],Text=[As with representation items, if an operational
+item for the parent appears after the @nt{derived_@!type_@!declaration}, then
+inheritance does not happen for that operational item.]}
 @end{Ramification}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[Currently, only untagged types inherit operational aspects. We
+@ChgAdded{Version=[1],Text=[Currently, only untagged types inherit operational aspects. We
 considered writing this rule that way, but rejected it as that could be too
 specific for future operational aspects. (After all, that is precisely the
 problem that caused us to introduce @lquotes@;operational aspects@rquotes in
-the first place.)],Old=[]}
+the first place.)]}
 @end{Discussion}
 
 @Leading@;Each aspect of representation of an entity is as follows:
@@ -655,11 +661,11 @@ Hence, Component_Size and record layout are type-related aspects.
 @end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
-@Chg{New=[@Defn2{Term=[specified], Sec=(of an operational aspect of an entity)}
+@ChgAdded{Version=[1],Text=[@Defn2{Term=[specified], Sec=(of an operational aspect of an entity)}
 If an operational aspect is @i<specified> for an entity (meaning
 that it is either directly specified or inherited), then that aspect of the
 entity is as specified. Otherwise, the aspect of the entity has the default
-value for that aspect.],Old=[]}
+value for that aspect.]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -696,7 +702,7 @@ They can be based on avoiding implementation complexity,
 or on avoiding excessive inefficiency, for example.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[There is no such permission for operational aspects.],Old=[]}
+@ChgAdded{Version=[1],Text=[There is no such permission for operational aspects.]}
 @end{Ramification}
 @end{ImplPerm}
 
@@ -774,6 +780,9 @@ typically b@Chg{New=[e],Old=[y]} illegal if it disobeys the above rule.
 Atomic components have similar restrictions
 (see @RefSec{Shared Variable Control}).
 @end{Ramification}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for all representation itemsshould be
+followed.]}]}
 @end{Itemize}
 @end{ImplAdvice}
 
@@ -927,6 +936,9 @@ its Size will generally be a multiple of Storage_Unit,
 so it probably won't get packed very tightly.
 @end{Ramification}
 @end{Itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for pragma Pack should be
+followed.]}]}
 @end{ImplAdvice}
 
 @LabeledRevisedClause{Version=[1],New=[Operational and Representation Attributes], Old=[Representation Attributes]}
@@ -1245,6 +1257,9 @@ or it is imported or exported,
 then the implementation should not perform optimizations based on
 assumptions of no aliases.
 @end{Itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for the Address attribute should be
+followed.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -1414,6 +1429,9 @@ subtypes, the implementation should support all Alignments
 supported by the target linker. For example, page alignment
 is likely to be supported for such objects, but not for subtypes.
 @end{Itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for the Alignment attribute should be
+followed.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -1558,6 +1576,7 @@ A Size clause should be supported for an object if the specified Size
 is at least as large as its subtype's Size, and corresponds to a size in
 storage elements that is a multiple of the object's Alignment (if the
 Alignment is nonzero).
+@Comment{No summary here; there is no reason to separately mention it}
 @end{Itemize}
 @end{ImplAdvice}
 
@@ -1893,6 +1912,9 @@ The Storage_Size, on the other hand,
 should include the size of the stack.
 @end{Ramification}
 @end{Itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for the Size attribute should be
+followed.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -2060,12 +2082,15 @@ or it might not have any internal gaps at all.
 (There can be gaps at either end of the array.)
 @end{Ramification}
 @end{Itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for the Component_Size attribute should
+be followed.]}]}
 @end{ImplAdvice}
 
 @begin{StaticSem}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
-@Chg{New=[The following operational attribute is defined: External_Tag.],Old=[]}
+@ChgAdded{Version=[1],Text=[The following operational attribute is defined: External_Tag.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @Leading@;For @PrefixType{every subtype S of a tagged type @i(T)
@@ -2313,6 +2338,9 @@ a packed array of booleans with strange internal codes.
 It's implementable, but not worth it.
 @end{Reason}
 @end{Itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for
+@nt{enumeration_representation_clause}s should be followed.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -2639,6 +2667,9 @@ type extension, then this won't work when a class-wide object is
 passed by reference, as is required.
 @end{Reason}
 @end{Itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for @nt{record_representation_clause}s
+should be followed.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -2919,6 +2950,9 @@ The recommended level of support for the nondefault bit ordering is:
   If Word_Size = Storage_Unit, then
   the implementation should support the nondefault bit ordering
   in addition to the default bit ordering.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for the nondefault bit ordering
+should be followed.]}]}
 @end{Itemize}
 @begin{Ramification}
 If Word_Size = Storage_Unit,

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:08 $}
+@Comment{$Date: 2005/01/28 06:27:29 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @LabeledClause{The Package System}
 
@@ -224,6 +224,8 @@ implementation-defined predefined operations for the type.
 We don't require it, because implementations may want to stick with
 what they have.
 @end{Reason}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Type System.Address should be a private type.]}]}
 @begin{ImplNote}
 It is not necessary for Address to be able to point at
 individual bits within a storage element.
@@ -236,8 +238,7 @@ be the same as that of Null_Address;
 instantiations of Unchecked_Conversion should work accordingly.
 If the implementation supports interfaces to other languages,
 the representation of the @key{null} value of a general access type
-should be the same as in those other languages,
-if appropriate.
+should be the same as in those other languages, if appropriate.
 
 Note that the children of the Interfaces package will generally provide
 foreign-language-specific null values where appropriate.
@@ -252,7 +253,7 @@ defined elsewhere.
 
 @begin{Extend83}
 @ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00114}
-@Chg{New=[@Defn{extensions to Ada 83}
+@ChgAdded{Version=[1],Text=[@Defn{extensions to Ada 83}
 The declarations Max_Binary_Modulus, Max_Nonbinary_Modulus, Max_Base_Digits,
 Null_Address, Word_Size, Bit_Order, Default_Bit_Order, Any_Priority,
 Interrupt_Priority, and Default_Priority are added to System in Ada 95.
@@ -261,8 +262,7 @@ existence of these depends on the definition of Address in an Ada 83
 implementation). We do not list these as incompatibilities, as the contents of
 System can vary between implementations anyway; thus a program that depends on
 the contents of System (by using @f{@key[use] System;} for example) is
-already at risk of being incompatible when moved between Ada implementations.
-],Old=[]}
+already at risk of being incompatible when moved between Ada implementations.]}
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -394,6 +394,9 @@ to @lquotes@;wrap around.@rquotes@;
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Operations that do not make sense should raise
 Program_Error.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Operations in System and its children should reflect the
+target environment; operations that do not make sense should raise Program_Error.]}]}
 @begin{Discussion}
 For example, on a segmented architecture,
 X < Y might raise Program_Error if X and Y do not point at the same
@@ -692,7 +695,9 @@ an object of the target subtype.
 Otherwise, the effect is implementation defined;
 in particular, the result can be abnormal
 (see @RefSecNum{Data Validity}).
-@ImplDef{The effect of unchecked conversion.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[The effect of unchecked
+conversion@Chg{Version=[2],New=[ for instances
+whose effect is not defined by the language],Old=[]}.]}
 @begin{Ramification}
 Whenever unchecked conversions are used, it is the programmer's
 responsibility to ensure that these conversions maintain the properties
@@ -730,6 +735,14 @@ which unchecked conversion doesn't make sense may be disallowed.
 @begin{ImplAdvice}
 The Size of an array object should not include its bounds;
 hence, the bounds should not be part of the converted data.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The Size of an array object should not include its bounds.]}]}
+@Comment{The above advice belongs in 13.3; I've asked permission to move it,
+and replace the above by the below.}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Since the Size of an array object generally does not include its bounds,
+the bounds should not be part of the converted data in an instance of
+Unchecked_Conversion.]}]}
 @begin{Ramification}
 On the other hand, we have no advice to offer about
 discriminants and tag fields.
@@ -742,16 +755,18 @@ It should take advantage of the permission to return by reference
 when possible.
 Restrictions on unchecked conversions should be avoided
 unless required by the target environment.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[There should not be unncessary run-time checks on the result of
+an Unchecked_Conversion; the result should be returned by reference when
+possible. Restrictions on Unchecked_Conversions should be avoided.]}]}
 @begin{ImplNote}
-
-As an example of an unnecessary run-time check,
-consider a record type with gaps between components.
-The compiler might assume that such gaps are always zero bits.
-If a value is produced that does not obey that assumption,
-then the program might misbehave.
-The implementation should not generate extra code to check for zero bits
-(except, perhaps, in a special error-checking mode).
-
+  As an example of an unnecessary run-time check,
+  consider a record type with gaps between components.
+  The compiler might assume that such gaps are always zero bits.
+  If a value is produced that does not obey that assumption,
+  then the program might misbehave.
+  The implementation should not generate extra code to check for zero bits
+  (except, perhaps, in a special error-checking mode).
 @end{ImplNote}
 
 @Leading@PDefn2{Term=[recommended level of support], Sec=(unchecked conversion)}
@@ -768,6 +783,9 @@ one of the subtypes described in this paragraph,
 and for record subtypes without discriminants
 whose component subtypes are described in this paragraph.
 @end{Itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for Unchecked_Conversion should be
+followed.]}]}
 @end{ImplAdvice}
 
 @LabeledSubClause{Data Validity}
@@ -1338,13 +1356,14 @@ Note that the implementation does not turn other exceptions into
 Storage_Error.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0111]}
-@Chg{New=[If D (the designated type of T) includes subcomponents of other
-access types, they will be allocated from the storage pools for those types,
-even if those @nt{allocator}s are executed as part of the @nt{allocator} of T
-(as part of the initialization of the object). For instance, an access-to-task
-type TT may allocate the data structures used to implement the task value from
-other storage pools. (In particular, the task stack does not necessarily need
-to be allocated from the storage pool for TT.)],Old=[]}
+@ChgAdded{Version=[1],Text=[If D (the designated type of T) includes
+subcomponents of other access types, they will be allocated from the storage
+pools for those types, even if those @nt{allocator}s are executed as part of
+the @nt{allocator} of T (as part of the initialization of the object). For
+instance, an access-to-task type TT may allocate the data structures used to
+implement the task value from other storage pools. (In particular, the task
+stack does not necessarily need to be allocated from the storage pool for
+TT.)]}
 @end{Ramification}
 
 @Defn{standard storage pool}
@@ -1359,8 +1378,14 @@ the exception Storage_Error is raised by an @nt{allocator}
 if there is not enough storage.
 It is implementation defined whether or not the implementation
 provides user-accessible names for the standard pool type(s).
-@ImplDef{The manner of choosing a storage pool for an access type when
-Storage_Pool is not specified for the type.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],Text=[The
+manner of choosing a storage pool for an access type when
+Storage_Pool is not specified for the type.]}]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[The manner of choosing a storage pool is
+  covered by a @DocReqName below, so it is not summarized here.]}
+@end{Discussion}
 @ImplDef{Whether or not the implementation
 provides user-accessible names for the standard pool type(s).}
 @begin{Ramification}
@@ -1389,7 +1414,9 @@ Storage_Error is raised at the point of the
 @nt{attribute_@!definition_@!clause}.
 If neither Storage_Pool nor Storage_Size are specified,
 then the meaning of Storage_Size is implementation defined.
-@ImplDef{The meaning of Storage_Size.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[The meaning of
+Storage_Size@Chg{Version=[2], New=[ when neither the
+Storage_Size nor. the Storage_Pool is specified],Old=[]}.]}
 @begin{Ramification}
 The Storage_Size function and attribute will return the actual
 size, rather than the requested size.
@@ -1453,13 +1480,22 @@ to accept for the Alignment parameter.
 An implementation shall document
 how the standard storage pool is chosen,
 and how storage is allocated by standard storage pools.
-@ImplDef{Implementation-defined aspects of storage pools.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of storage pools.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
+The set of values that a user-defined Allocate procedure needs
+to accept for the Alignment parameter shall be documented.
+How the standard storage pool is chosen, and how storage is allocated
+by standard storage pools shall be documented.]}]}
 @end{DocReq}
 
 @begin{ImplAdvice}
 An implementation should document any cases in which it dynamically
 allocates heap storage for a purpose other than the evaluation of an
 @nt{allocator}.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Any cases in which heap storage is dynamically allocated other than
+the evaluation of an @nt{allocator} should be documented.]}]}
 @begin{Reason}
 This is @lquotes@;@ImplAdviceTitle@rquotes@; because the term @lquotes@;heap storage@rquotes@;
 is not formally definable;
@@ -1469,6 +1505,9 @@ therefore, it is not testable whether the implementation obeys this advice.
 A default (implementation-provided) storage pool for an
 access-to-constant type should
 not have overhead to support deallocation of individual objects.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[A default storage pool for an access-to-constant type should
+not have overhead to support deallocation of individual objects.]}]}
 @begin{Ramification}
 Unchecked_Deallocation is not defined for
 such types. If the access-to-constant type is library-level,
@@ -1477,8 +1516,7 @@ ever be necessary, so if the size needed by an @nt{allocator}
 of the type is known at link-time, then the allocation
 should be performed statically.
 If, in addition, the initial value of the designated object is known
-at compile time,
-the object can be allocated to read-only memory.
+at compile time, the object can be allocated to read-only memory.
 @end{Ramification}
 @begin{ImplNote}
 If the Storage_Size for an access type is specified,
@@ -1491,10 +1529,8 @@ Storage_Size clause,
 so that @nt{allocator}s cannot raise Storage_Error due to running out
 of pool space until the appropriate number of storage elements has
 been used up.
-This approximate (possibly rounded-up) value should be used as a
-maximum;
-the implementation should not increase the size of the pool on the
-fly.
+This approximate (possibly rounded-up) value should be used as a maximum;
+the implementation should not increase the size of the pool on the fly.
 If the Storage_Size for an access type is specified as zero,
 then the pool should not take up any storage space,
 and any @nt{allocator} for the type should raise Storage_Error.
@@ -1511,6 +1547,10 @@ guaranteed to fail.
 A storage pool for an anonymous access type should be created
 at the point of an allocator for the type, and be reclaimed when
 the designated object becomes inaccessible.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[A storage pool for an anonymous access type should be created
+at the point of an allocator for the type, and be reclaimed when
+the designated object becomes inaccessible. *** Changed]}]}
 @begin{ImplNote}
   Normally the "storage pool" for an anonymous access type
   would not exist as a separate entity.
@@ -1815,6 +1855,9 @@ an access type whose pool is Name'Storage_Pool.
 @begin{ImplAdvice}
 For a standard storage pool,
 Free should actually reclaim the storage.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[For a standard storage pool, an instance of Unchecked_Deallocation
+should actually reclaim the storage.]}]}
 @begin{Ramification}
 This is not a testable property,
 since we do not how much storage is used by a given pool element,
@@ -2054,24 +2097,25 @@ if a @nt{pragma} Restrictions applies to any compilation unit
 included in the partition.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
-@Chg{New=[@Leading@;For the purpose of checking whether a partition contains
-constructs that violate any restriction (unless specified otherwise for a
-particular restriction):],Old=[]}
+@ChgAdded{Version=[1],Type=[Leading],Text=[For the purpose of checking whether
+a partition contains constructs that violate any restriction (unless specified
+otherwise for a particular restriction):]}
 
 @begin{itemize}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
-@Chg{New=[Generic instances are logically expanded at the point of
-instantiation;],Old=[]}
+@ChgAdded{Version=[1],Text=[Generic instances are logically expanded at the
+point of instantiation;]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
-@Chg{New=[If an object of a type is declared or allocated and not explicitly
-initialized, then all expressions appearing in the definition for the type and
-any of its ancestors are presumed to be used;],Old=[]}
+@ChgAdded{Version=[1],Text=[If an object of a type is declared or allocated and
+not explicitly initialized, then all expressions appearing in the definition
+for the type and any of its ancestors are presumed to be used;]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
-@Chg{New=[A @nt{default_expression} for a formal parameter or a generic formal
-object is considered to be used if and only if the corresponding actual
-parameter is not provided in a given call or instantiation.],Old=[]}
+@ChgAdded{Version=[1],Text=[A @nt{default_expression} for a formal parameter or
+a generic formal object is considered to be used if and only if the
+corresponding actual parameter is not provided in a given call or
+instantiation.]}
 @end{itemize}
 @end{LinkTime}
 
@@ -2090,17 +2134,15 @@ the restrictions to be erroneous, and not enforce them at all.
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
-@Chg{New=[An implementation is permitted to omit restriction checks for code
-that is recognized at compile time to be unreachable and for which no code is
-generated.@Comment{@ImplDef{Whether restriction checks are performed in unreachable code.}
-- we don't define the Impldef, because that would change the paragraph numbers
-in Annex L.}],Old=[]}
+@ChgAdded{Version=[1],Text=[An implementation is permitted to omit restriction
+checks for code that is recognized at compile time to be unreachable and for
+which no code is generated.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0043]}
-@Chg{New=[Whenever enforcement of a restriction is not required prior to
-execution, an implementation may nevertheless enforce the restriction prior to
-execution of a partition to which the restriction applies, provided that every
-execution of the partition would violate the restriction.],Old=[]}
+@ChgAdded{Version=[1],Text=[Whenever enforcement of a restriction is not
+required prior to execution, an implementation may nevertheless enforce the
+restriction prior to execution of a partition to which the restriction applies,
+provided that every execution of the partition would violate the restriction.]}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -2205,14 +2247,15 @@ The Write operation appends Item to the specified stream.
 @end{StaticSem}
 @begin{ImplPerm}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0044]}
-@Chg{New=[If Stream_Element'Size is not a multiple of System.Storage_Unit,
-then the components of Stream_@!Element_@!Array need not be aliased.],Old=[]}
+@ChgAdded{Version=[1],Text=[If Stream_Element'Size is not a multiple of
+System.Storage_Unit, then the components of Stream_@!Element_@!Array need
+not be aliased.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[If the Stream_Element'Size is less than the size of
+@ChgAdded{Version=[1],Text=[If the Stream_Element'Size is less than the size of
 System.Storage_Unit, then components of Stream_@!Element_@!Array need not be
 aliased. This is necessary as the components of type Stream_Element size might
-not be addressable on the target architechture.],Old=[]}
+not be addressable on the target architechture.]}
 @end{Ramification}
 @end{ImplPerm}
 
@@ -2258,10 +2301,11 @@ the following attributes are defined.
 
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
-@Chg{New=[For untagged derived types, the Write and Read attributes of the
-parent type are inherited as specified in @RefSecNum(Operational and Representation Items);
-otherwise, the default implementations of these attributes are used. The default
-implementations of Write and Read attributes execute as follows:],Old=[]}
+@ChgAdded{Version=[1],Text=[For untagged derived types, the Write and Read
+attributes of the parent type are inherited as specified in
+@RefSecNum(Operational and Representation Items); otherwise, the default
+implementations of these attributes are used. The default implementations of
+Write and Read attributes execute as follows:]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
 For elementary types, the representation in terms of stream elements
@@ -2295,15 +2339,15 @@ elementary types in terms of stream elements.}
   A tag is like a discriminant without a default.
 
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
-  @Chg{New=[For limited type extensions, we must have a definition of 'Read and
-  'Write if the parent type has one, as it is possible to make a dispatching
-  call through the attributes. The rule is designed to automatically do the
-  right thing in as many cases as possible.],Old=[]}
+  @ChgAdded{Version=[1],Text=[For limited type extensions, we must have a
+  definition of 'Read and 'Write if the parent type has one, as it is possible
+  to make a dispatching call through the attributes. The rule is designed to
+  automatically do the right thing in as many cases as possible.]}
 @end{Reason}
 @begin{Ramification}
-  For a composite object, the subprogram denoted by the Write or Read
-  attribute of each component is called,
-  whether it is the default or is user-specified.
+  For a composite object, the subprogram denoted by the
+  Write or Read attribute of each component is called, whether it is the
+  default or is user-specified.
 @end{Ramification}
 
 @Leading@;For @PrefixType{every subtype S'Class of a class-wide type
@@ -2349,6 +2393,13 @@ Write for scalar objects.
 Otherwise, Read and Write should use the smallest
 number of stream elements needed to represent all values in the base
 range of the scalar type.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If a stream element is the same size as a storage element,
+then the normal in-memory representation should be used by Read and
+Write for scalar objects.
+Otherwise, Read and Write should use the smallest
+number of stream elements needed to represent all values in the base
+range of the scalar type.*** Changed]}]}
 
 @end{ImplAdvice}
 
@@ -2460,10 +2511,10 @@ the component has an abnormal value, and erroneous execution
 can result (see @RefSecNum{Data Validity}).
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0045]}
-@Chg{New=[@Defn2{Term=[End_Error],Sec=(raised by failure of run-time check)}
+@ChgAdded{Version=[1],Text=[@Defn2{Term=[End_Error],Sec=(raised by failure of run-time check)}
 In the default implementation of Read and Input for a type, End_Error
 is raised if the end of the stream is reached before the reading of a value of
-the type is completed.],Old=[]}
+the type is completed.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
@@ -2490,22 +2541,24 @@ The same rule applies to the result of the Input function.
   This is to simplify implementation.
 @end{Reason}
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
-@Chg{New=[@lquotes@;Specified@rquotes includes inherited attributes, and
-default implementations are never inherited. So, for untagged limited types,
-the second part of the @nt{attribute_reference} rule has the same meaning as
-the first part. However, tagged types never inherit attributes, so the second
-rule is needed so that the default implementations for the attributes can be
-called when those are constructed from a directly specified ancestor.],Old=[]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+  @ChgAdded{Version=[1],Text=[@lquotes@;Specified@rquotes includes inherited
+  attributes, and default implementations are never inherited. So, for untagged
+  limited types, the second part of the @nt{attribute_reference} rule has the
+  same meaning as the first part. However, tagged types never inherit
+  attributes, so the second rule is needed so that the default implementations
+  for the attributes can be called when those are constructed from a directly
+  specified ancestor.]}
 @end{Discussion}
 @end{StaticSem}
 
 @begin{ImplReq}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
-@Chg{New=[For every subtype @i<S> of a language-defined nonlimited specific
-type @i<T>, the output generated by S'Output or S'Write shall be readable by
-S'Input or S'Read, respectively. This rule applies across partitions if the
-implementation conforms to the Distributed Systems Annex.],Old=[]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+  @ChgAdded{Version=[1],Text=[For every subtype @i<S> of a language-defined
+  nonlimited specific type @i<T>, the output generated by S'Output or S'Write
+  shall be readable by S'Input or S'Read, respectively. This rule applies
+  across partitions if the implementation conforms to the Distributed Systems
+  Annex.]}
 @end{ImplReq}
 
 @begin{Notes}
@@ -2867,15 +2920,15 @@ of a component's @nt<constraint>, in which case,
 the freezing occurs later as part of another construct.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
-@Chg{New=[@PDefn2{Term=[freezing], Sec=(by an implicit call)}
+@ChgAdded{Version=[1],Text=[@PDefn2{Term=[freezing], Sec=(by an implicit call)}
 An implicit call freezes the same entities that would be frozen by an
 explicit call. This is true even if the implicit call is removed via
-implementation permissions.],Old=[]}
+implementation permissions.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
-@Chg{New=[@PDefn2{Term=[freezing], Sec=(subtype caused by an implicit conversion)}
+@ChgAdded{Version=[1],Text=[@PDefn2{Term=[freezing], Sec=(subtype caused by an implicit conversion)}
 If an expression is implicitly converted to a type or subtype @i(T),
-then at the place where the expression causes freezing, @i(T) is frozen.],Old=[]}
+then at the place where the expression causes freezing, @i(T) is frozen.]}
 
 @Leading@;The following rules define which entities are frozen at the place where
 a construct causes freezing:
@@ -2941,15 +2994,15 @@ access types; an @nt{object_declaration} other than a
 subtype, plus all component junk.
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0046]}
-@Chg{New=[],Old=[@nt{Implicit_dereference}s are covered by @nt{expression}.]}
+@ChgDeleted{Version=[1],Text=[@nt{Implicit_dereference}s are covered by
+@nt{expression}.]}
 @Comment{This statement is just plain wrong.}
 @end{Ramification}
 
-@Leading@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
-@Chg{New=[@PDefn2{Term=[freezing], Sec=(subtype caused by an implicit dereference)}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
+@ChgAdded{Version=[1],Type=[Leading],Text=[@PDefn2{Term=[freezing], Sec=(subtype caused by an implicit dereference)}
 At the place where an @nt{implicit_dereference} causes freezing,
-the nominal subtype associated with the @nt{implicit_dereference} is frozen.],
-Old=[]}
+the nominal subtype associated with the @nt{implicit_dereference} is frozen.]}
 
 
 @Leading@Redundant[@PDefn2{Term=[freezing], Sec=(type caused by a range)}
@@ -3085,7 +3138,7 @@ that as a change, so it is just gone. RLB-29-08-00}
 @comment{The following is a "fix" to keep consistent with v. 5.95;
 appearently 6.0 is different.
 @ChgRef{Version=[1],Kind=[Deleted]}
-@Chg{New=[],Old=[Old @b{Change}.]}}
+@ChgDeleted{Version=[1],Text=[Old @b{Change}.]}}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 From RM83-13.1(7). The wording here forbids freezing

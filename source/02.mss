@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/01/27 06:12:56 $}
+@Comment{$Date: 2005/01/28 06:27:27 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -718,20 +718,22 @@ From URG recommendation.
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<identifier_start>,Old=<>}>,
-rhs="@Chg{Version=[2],New=<@Syn2{letter_uppercase} |
-                     @Syn2{letter_lowercase} |
-                     @Syn2{letter_titlecase} |
-                     @Syn2{letter_modifier} |
-                     @Syn2{letter_other} |
-                     @Syn2{number_letter}>,Old=<>}"}
+rhs="@Chg{Version=[2],New=<
+     @Syn2{letter_uppercase}
+   | @Syn2{letter_lowercase}
+   | @Syn2{letter_titlecase}
+   | @Syn2{letter_modifier}
+   | @Syn2{letter_other}
+   | @Syn2{number_letter}>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<identifier_extend>,Old=<>}>,
-rhs="@Chg{Version=[2],New=<@Syn2{identifier_start} |
-                      @Syn2{mark_non_spacing} |
-                      @Syn2{mark_spacing_combining} |
-                      @Syn2{number_decimal_digit} |
-                      @Syn2{other_format}>,Old=<>}"}
+rhs="@Chg{Version=[2],New=<
+     @Syn2{identifier_start}
+   | @Syn2{mark_non_spacing}
+   | @Syn2{mark_spacing_combining}
+   | @Syn2{number_decimal_digit}
+   | @Syn2{other_format}>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Syn{lhs=<identifier>,rhs="
