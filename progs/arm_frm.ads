@@ -12,7 +12,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -323,9 +323,15 @@ private
 	Glossary_Term_Len : Natural := 0; -- processing ToGlossary[Also] commands.
 	Glossary_DB : ARM_Database.Database_Type;
 
+	-- Implementation advice:
+	Impladv_DB : ARM_Database.Database_Type;
+
+	-- Documentation requirements:
+	Docreq_DB : ARM_Database.Database_Type;
+
 	-- Implementation-defined:
 	Impdef_DB : ARM_Database.Database_Type;
-	-- The next four are used only during processing of ImplDef and ChgImplDef.
+	-- The next four are used only during processing of ImplDef, ChgImplDef, ChgDocReq, and ChgImplAdv.
 	Impdef_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 			-- The change kind of the impldef.
 	Impdef_Version : ARM_Contents.Change_Version_Type;

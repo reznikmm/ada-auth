@@ -10,7 +10,7 @@ package body ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004  AXE Consultants.
+    -- Copyright 2000, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -47,6 +47,7 @@ package body ARM_Database is
     -- 11/02/04 - RLB - Added Deleted_Inserted_Number change kind.
     -- 12/06/04 - RLB - Added Revised_Inserted_Number change kind.
     -- 12/14/04 - RLB - Made the hang item bigger.
+    --  1/19/05 - RLB - Added Added_Version.
 
     type String_Ptr is access String;
     type Item is record
@@ -130,12 +131,15 @@ package body ARM_Database is
     --				    Text_Name : in String);
     procedure Report (Database_Object : in out Database_Type;
 		      In_Format : in Format_Type;
-		      Sorted : in Boolean) is
+		      Sorted : in Boolean;
+		      Added_Version : Character := '0') is
 	-- Output the items with the appropriate format to the
 	-- "Format_Text" routine. "Format_Text" allows all commands
 	-- for the full formatter. (Text_Name is an identifying name
-	-- for error messages).
-	-- (This is indented to be used to output the items to
+	-- for error messages). This is an added list for Added_Version
+	-- ('0' meaning it is not added); in that case, use normal numbers
+	-- for items with a version less than or equal to Added_Version.
+	-- (This is intended to be used to output the items to
 	-- appropriate Format and Output objects; but we can't do that
 	-- directly because that would make this unit recursive with
 	-- ARM_Format.
@@ -145,25 +149,28 @@ package body ARM_Database is
 	begin
 	    case Item.Change_Kind is
 		when None => return "";
-		when Inserted =>
-		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[Added]}";
-		when Inserted_Normal_Number =>
-		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[Added]}";
-		    -- Note: In the report, we always use a normal insert,
-		    -- because this is likely to be different than the place
-		    -- where this is defined.
+		when Inserted | Inserted_Normal_Number =>
+		    if Item.Version <= Added_Version then
+		        return "@ChgRef{Version=[" & Item.Version &
+			    "],Kind=[AddedNormal]}";
+		    else
+		        return "@ChgRef{Version=[" & Item.Version &
+			    "],Kind=[Added]}";
+		    end if;
+		    -- Note: In the report, we always use the insert determined
+		    -- by the version number, and not the original class.
 		when Revised =>
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[Revised]}";
 		when Revised_Inserted_Number =>
+		    -- Previously inserted.
 		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[RevisedAdded]}";
+			"],Kind=[RevisedInserted]}";
 		when Deleted =>
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[Deleted]}";
 		when Deleted_Inserted_Number =>
+		    -- Previously inserted.
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[DeletedInserted]}";
 	    end case;

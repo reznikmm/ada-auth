@@ -7,7 +7,7 @@ package ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004  AXE Consultants.
+    -- Copyright 2000, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -44,6 +44,7 @@ package ARM_Database is
     -- 10/28/04 - RLB - Added Inserted_Normal_Number change kind.
     -- 11/02/04 - RLB - Added Deleted_Inserted_Number change kind.
     -- 12/06/04 - RLB - Added Revised_Inserted_Number change kind.
+    --  1/19/05 - RLB - Added Added_Version.
 
     type Database_Type is tagged limited private;
 
@@ -79,12 +80,15 @@ package ARM_Database is
 				    Text_Name : in String);
     procedure Report (Database_Object : in out Database_Type;
 		      In_Format : in Format_Type;
-		      Sorted : in Boolean);
+		      Sorted : in Boolean;
+		      Added_Version : Character := '0');
 	-- Output the items with the appropriate format to the
 	-- "Format_Text" routine. "Format_Text" allows all commands
 	-- for the full formatter. (Text_Name is an identifying name
-	-- for error messages).
-	-- (This is indented to be used to output the items to
+	-- for error messages). This is an added list for Added_Version
+	-- ('0' meaning it is not added); in that case, use normal numbers
+	-- for items with a version less than or equal to Added_Version.
+	-- (This is intended to be used to output the items to
 	-- appropriate Format and Output objects; but we can't do that
 	-- directly because that would make this unit recursive with
 	-- ARM_Format.

@@ -199,6 +199,12 @@ Text commands:
         instead. (Note that annex references in commands always use the
         new_text name.) The formatter assigns annex letters. Version is the
         version number of the change (see @ChgRef for details).
+@LabeledRevisedInformativeAnnex{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+	Start a labeled informative annex. The title will be "new_text". If we
+        are generating an old version of the RM, the title is "old_text"
+        instead. (Note that annex references in commands always use the
+        new_text name.) The formatter assigns annex letters. Version is the
+        version number of the change (see @ChgRef for details).
 @@LabeledRevisedClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
         Start a labeled clause. The title will be "new_text". If we are
         generating an old version of the RM, the title is "old_text" instead.
@@ -406,7 +412,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 -- Implementation-defined annex:
 @ImplDef{<text>}
 	Creates an implementation-defined entry for <text>. The clause and
-	paragraph references are saved to create Annex M. For the AARM,
+	paragraph references are saved to create part of Annex M. For the AARM,
 	<text> is an annotation; otherwise, it is discarded. See also
 	ChgImplDef.
 @ImplDefList
@@ -462,12 +468,29 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	they're conditional on the paragraph text being included in the
 	document (even if it is marked as deleted).
 
-New=[<new text>],Old=[<old text>]}
 @ChgImplDef{Version=[<version>],Kind=(<kind>),Text=<text>}
 	Marks a changed implementation-defined entry. (Essentially a
 	combination of ChgRef and Impldef.) <text> is the
 	implementation-defined entry. See ChgRef and Impldef for details
 	on the handling of the arguments.
+@ChgImplAdvice{Version=[<version>],Kind=(<kind>),Text=<text>}
+	Marks a new or changed implementation advice entry. All IA entries
+	are new with version 2. The clause and paragraph references (along
+	with <text>) are saved to create part of Annex M. For the AARM,
+	<text> is an annotation; otherwise, it is discarded.
+	See ChgRef for details on the handling of Version and Kind arguments.
+@AddedImplAdviceList{Version=[2]}
+	Generates the implementation advice list; it is inserted with the
+	given version number.
+@ChgDocReq{Version=[<version>],Kind=(<kind>),Text=<text>}
+	Marks a new or changed documentation requirements entry. All DocReq
+	entries are new with version 2. The clause and paragraph references
+	(along with <text>) are saved to create part of Annex M. For the AARM,
+	<text> is an annotation; otherwise, it is discarded.
+	See ChgRef for details on the handling of Version and Kind arguments.
+@AddedDocReqList{Version=[2]}
+	Generates the documentation requirements list; it is inserted with the
+	given version number.
 @ChgAttribute{Version=[<version>],Kind=(<kind>),ChginAnnex=[T|F],
 	Leading=[T|F],Prefix=<Prefix>,AttrName=<Name>,
 	{[Ref={<DR_Number>}|ARef={<AI_Number>}]},Text=<Text>}

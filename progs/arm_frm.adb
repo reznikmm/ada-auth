@@ -18,7 +18,7 @@ package body ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003, 2004  AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -165,6 +165,11 @@ package body ARM_Format is
     -- 12/15/04 - RLB - Fixed so a change is not left open across
     --			an End_Hang_Item.
     --		- RLB - Fixed glitches with deleted paragraphs.
+    --  1/19/05 - RLB - Added LabeledRevisedInformativeAnnex.
+    --		- RLB - Fixed AARM paragraph numbers to allow more than 52,
+    --			and to put out an error message if we exceed the maximum.
+    --		- RLB - Added ChgDocReq and ChgImplAdvice.
+    --		- RLB - Added AddedDocReqList and AddedImplAdviceList.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -348,6 +353,8 @@ package body ARM_Format is
 	ARM_Database.Create (Format_Object.Pragma_DB);
 	ARM_Database.Create (Format_Object.Glossary_DB);
 	ARM_Database.Create (Format_Object.Impdef_DB);
+	ARM_Database.Create (Format_Object.Impladv_DB);
+	ARM_Database.Create (Format_Object.Docreq_DB);
 	ARM_Syntax.Create;
 	ARM_Index.Create;
     end Create;
@@ -360,6 +367,8 @@ package body ARM_Format is
 	ARM_Database.Destroy (Format_Object.Pragma_DB);
 	ARM_Database.Destroy (Format_Object.Glossary_DB);
 	ARM_Database.Destroy (Format_Object.Impdef_DB);
+	ARM_Database.Destroy (Format_Object.Impladv_DB);
+	ARM_Database.Destroy (Format_Object.Docreq_DB);
 	ARM_Syntax.Destroy;
 	ARM_Index.Destroy;
     end Destroy;
@@ -384,8 +393,9 @@ package body ARM_Format is
 	Labeled_Section, Labeled_Section_No_Break, Labeled_Clause,
 	Labeled_Subclause, Labeled_Revised_Clause, Labeled_Revised_Subclause,
         Labeled_Added_Clause, Labeled_Added_Subclause,
-	Preface_Section, Labeled_Informative_Annex, Labeled_Normative_Annex,
-        Labeled_Revised_Normative_Annex,
+	Preface_Section,
+	Labeled_Informative_Annex, Labeled_Revised_Informative_Annex,
+	Labeled_Normative_Annex, Labeled_Revised_Normative_Annex,
 	Unnumbered_Section, Subheading, Heading, Center, Right,
         Added_Subheading,
 	-- Clause references:
@@ -405,6 +415,12 @@ package body ARM_Format is
 	Change_Added, Change_Added_Param, Change_Deleted, Change_Deleted_Param,
 	Change_Implementation_Defined,
 	Change_Impdef_Text_Param, -- This is a parameter of the previous.
+	Change_Implementation_Advice,
+	Change_Impladv_Text_Param, -- This is a parameter of the previous.
+	Added_Implementation_Advice_List,
+	Change_Documentation_Requirement,
+	Change_DocReq_Text_Param, -- This is a parameter of the previous.
+	Added_Documentation_Requirements_List,
 	Change_Attribute, Change_Prefix_Type,
 	Change_Prefix_Text_Param, -- This is a parameter of the previous.
 	-- Text macros:
@@ -576,6 +592,14 @@ package body ARM_Format is
 	    return Change_Implementation_Defined;
 	elsif Canonical_Name = "impldeflist" then
 	    return Implementation_Defined_List;
+	elsif Canonical_Name = "chgimpladvice" then
+	    return Change_Implementation_Advice;
+	elsif Canonical_Name = "addedimpladvicelist" then
+	    return Added_Implementation_Advice_List;
+	elsif Canonical_Name = "chgdocreq" then
+	    return Change_Documentation_Requirement;
+	elsif Canonical_Name = "addeddocreqlist" then
+	    return Added_Documentation_Requirements_List;
 	elsif Canonical_Name = "labeledsection" then
 	    return Labeled_Section;
 	elsif Canonical_Name = "labeledsectionnobreak" then
@@ -590,6 +614,8 @@ package body ARM_Format is
 	    return Labeled_Normative_Annex;
 	elsif Canonical_Name = "unnumberedsection" then
 	    return Unnumbered_Section;
+	elsif Canonical_Name = "labeledrevisedinformativeannex" then
+	    return Labeled_Revised_Informative_Annex;
 	elsif Canonical_Name = "labeledrevisednormativeannex" then
 	    return Labeled_Revised_Normative_Annex;
 	elsif Canonical_Name = "labeledrevisedclause" then
@@ -917,7 +943,8 @@ package body ARM_Format is
 		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 
-		when Labeled_Revised_Normative_Annex |
+		when Labeled_Revised_Informative_Annex |
+		     Labeled_Revised_Normative_Annex |
 		     Labeled_Revised_Clause |
 		     Labeled_Revised_Subclause =>
 		    declare
@@ -997,13 +1024,21 @@ package body ARM_Format is
 					      ARM_Contents.Clause,
 					      Format_Object.Section,
 					      Format_Object.Clause);
-		        else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
+		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
 			    ARM_Contents.Add (Title,
 					      ARM_Contents.Normative_Annex,
 					      Format_Object.Section,
 					      Version => Version);
 			    ARM_Contents.Add_Old (Old_Title,
 					      ARM_Contents.Normative_Annex,
+					      Format_Object.Section);
+		        else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
+			    ARM_Contents.Add (Title,
+					      ARM_Contents.Informative_Annex,
+					      Format_Object.Section,
+					      Version => Version);
+			    ARM_Contents.Add_Old (Old_Title,
+					      ARM_Contents.Informative_Annex,
 					      Format_Object.Section);
 		        end if;
 
@@ -1741,13 +1776,31 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		        Sub_Letter;
 		    Format_Object.Current_Paragraph_Len :=
 			    PNum_Pred'Last + 1;
-	        else
+	        elsif Character'Val(Character'Pos(Sub_Letter) - 26) <= 'z' then
+		    -- Double letter.
 		    Format_Object.Current_Paragraph_String(PNum_Pred'Last+1) :=
 		        Character'Val(Character'Pos(Sub_Letter) - 26);
 		    Format_Object.Current_Paragraph_String(PNum_Pred'Last+2) :=
 		        Character'Val(Character'Pos(Sub_Letter) - 26);
 		    Format_Object.Current_Paragraph_Len :=
 			    PNum_Pred'Last + 2;
+	        elsif Character'Val(Character'Pos(Sub_Letter) - 52) <= 'z' then
+		    -- Triple letter.
+		    Format_Object.Current_Paragraph_String(PNum_Pred'Last+1) :=
+		        Character'Val(Character'Pos(Sub_Letter) - 52);
+		    Format_Object.Current_Paragraph_String(PNum_Pred'Last+2) :=
+		        Character'Val(Character'Pos(Sub_Letter) - 52);
+		    Format_Object.Current_Paragraph_String(PNum_Pred'Last+3) :=
+		        Character'Val(Character'Pos(Sub_Letter) - 52);
+		    Format_Object.Current_Paragraph_Len :=
+			    PNum_Pred'Last + 3;
+		else -- Doesn't fit!
+		    Ada.Text_IO.Put_Line ("** AARM paragraph number out of range, line " & ARM_Input.Line_String (Input_Object));
+		    Format_Object.Current_Paragraph_String(PNum_Pred'Last+1) := '$';
+		    Format_Object.Current_Paragraph_String(PNum_Pred'Last+2) := '$';
+		    Format_Object.Current_Paragraph_String(PNum_Pred'Last+3) := '$';
+		    Format_Object.Current_Paragraph_Len :=
+			    PNum_Pred'Last + 3;
 	        end if;
             end AARM_Sub_Num;
 
@@ -3478,6 +3531,168 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 	        -- else no parameter. Weird.
 	        end if;
 	    end Gen_Ref_or_ARef_Parameter;
+
+
+	    procedure Gen_Chg_xxxx (Param_Cmd : in Command_Type;
+				    AARM_Prefix : in String) is
+		-- Implement chgimpdef, chgimpladv, and chgdocreq commands.
+		-- The AARM prefix (if needed) is AARM_Prefix, and
+		-- the parameter command is Param_Cmd.
+
+	        -- This command is of the form:
+	        -- @chgxxxxx{Version=[<version>], Kind=(<kind>),
+	        --   Text=(<text>)}}
+	        -- where <version> is a single character, <Kind> is one
+	        -- of Revised, Added, or Deleted, and this is followed
+	        -- by the text. As usual, any of the
+	        -- allowed bracketing characters can be used.
+	        Close_Ch : Character;
+	        Kind : ARM_Database.Paragraph_Change_Kind_Type;
+	        Version : ARM_Contents.Change_Version_Type;
+	        Display_It : Boolean;
+		use type ARM_Database.Paragraph_Change_Kind_Type;
+	    begin
+	        Get_Change_Version (Is_First => True,
+		    Version => Version);
+		    -- Read a parameter named "Version".
+
+	        Get_Change_Kind (Kind);
+		    -- Read a parameter named "Kind".
+
+	        if Format_Object.Changes = ARM_Format.Old_Only and then
+		    Version > '0' then
+		    -- Old only, don't display it (and it won't be
+		    -- inserted, either).
+		    Display_It := False;
+	        elsif (Format_Object.Impdef_Change_Kind = ARM_Database.Inserted or else
+		       Format_Object.Impdef_Change_Kind = ARM_Database.Inserted_Normal_Number) then
+		    if Version <= Format_Object.Change_Version then
+		        Format_Object.Impdef_Version := Version;
+		        Format_Object.Impdef_Change_Kind := Kind;
+		        case Format_Object.Document is
+			    when ARM_Format.AARM =>
+			        Display_It := True;
+			    when ARM_Format.RM | ARM_Format.RM_ISO =>
+			        Display_It := False; -- No impldef notes in RM.
+		        end case;
+		    else --This reference is too new, ignore it.
+		        Display_It := False;
+		    end if;
+	        else -- we always display it.
+		    Format_Object.Impdef_Version := Version;
+		    Format_Object.Impdef_Change_Kind := Kind;
+		    case Format_Object.Document is
+		        when ARM_Format.AARM =>
+			    Display_It := True;
+		        when ARM_Format.RM | ARM_Format.RM_ISO =>
+			    Display_It := False; -- No impldef notes in RM.
+		    end case;
+	        end if;
+
+	        ARM_Input.Check_Parameter_Name (Input_Object,
+		    Param_Name => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+		    Is_First => False,
+		    Param_Close_Bracket => Close_Ch);
+	        if Close_Ch /= ' ' then
+		    -- Stack it so we can process the end:
+		    Set_Nesting_for_Parameter
+		        (Command => Param_Cmd,
+			 Close_Ch => Close_Ch);
+
+		    ARM_Input.Start_Recording (Input_Object);
+
+		    if Format_Object.In_Paragraph then
+		        -- Do this to preserve any inserted paragraph info.
+		        Format_Object.Impdef_Paragraph_String :=
+			    Format_Object.Current_Paragraph_String;
+		        Format_Object.Impdef_Paragraph_Len :=
+			    Format_Object.Current_Paragraph_Len;
+		    else
+		        declare
+			    PNum : constant String := Positive'Image (
+			        Format_Object.Next_Paragraph - 1);
+		        begin
+			    Format_Object.Impdef_Paragraph_Len := PNum'Length - 1;
+			    Format_Object.Impdef_Paragraph_String (1 .. PNum'Last-1) :=
+			        PNum (2 .. PNum'Last);
+		        end;
+		    end if;
+
+		    if Display_It then
+		        Check_End_Paragraph; -- End any paragraph that we're in.
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph := Format_Object.Next_Paragraph_Subhead_Type;
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format := Format_Object.Next_Paragraph_Format_Type;
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
+		        Format_Object.Next_Paragraph_Format_Type := Bare_Annotation;
+		        Format_Object.Next_Paragraph_Subhead_Type := Bare_Annotation;
+		        Format_Object.Next_Paragraph_Version := Format_Object.Impdef_Version;
+		        Format_Object.Next_Paragraph_Change_Kind := Format_Object.Impdef_Change_Kind;
+		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
+		        Check_Paragraph;
+
+		        if (Format_Object.Impdef_Change_Kind = ARM_Database.Inserted or else
+			    Format_Object.Impdef_Change_Kind = ARM_Database.Inserted_Normal_Number) and then
+            		    Format_Object.Impdef_Version <= Format_Object.Change_Version and then
+			    Format_Object.Changes /= ARM_Format.New_Only then
+			    ARM_Output.Text_Format (Output_Object,
+			        Bold => True,
+			        Italic => Format_Object.Is_Italic,
+			        Font => Format_Object.Font,
+			        Size => Format_Object.Size,
+			        Change => ARM_Output.Insertion,
+			        Version => Format_Object.Impdef_Version,
+			        Location => Format_Object.Location);
+		        else -- It's revised, or New_Only; no change markers needed. (If we don't
+			    -- want to display it at all, we didn't get here.
+			    ARM_Output.Text_Format (Output_Object,
+			        Bold => True,
+			        Italic => Format_Object.Is_Italic,
+			        Font => Format_Object.Font,
+			        Size => Format_Object.Size,
+			        Change => Format_Object.Change,
+			        Version => Format_Object.Impdef_Version,
+			        Location => Format_Object.Location);
+		        end if;
+		        ARM_Output.Ordinary_Text (Output_Object,
+			     Text => AARM_Prefix);
+		        ARM_Output.Text_Format (Output_Object,
+			    Bold => Format_Object.Is_Bold,
+			    Italic => Format_Object.Is_Italic,
+			    Font => Format_Object.Font,
+			    Size => Format_Object.Size,
+			    Change => Format_Object.Change,
+			    Version => Format_Object.Impdef_Version,
+			    Location => Format_Object.Location);
+		        Format_Object.Last_Paragraph_Subhead_Type := Bare_Annotation;
+		        Format_Object.Last_Non_Space := False;
+		    else -- Don't display, skip the text:
+		        ARM_Input.Skip_until_Close_Char (Input_Object,
+			    Close_Ch);
+		        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+		    end if;
+	        -- else no parameter. Weird.
+	        end if;
+	    end Gen_Chg_xxxx;
+
+	    procedure Format_Text (Text : in String;
+				   Text_Name : in String) is
+		-- Note: We use the state of the surrounding call.
+		Input_Object : Arm_String.String_Input_Type;
+		Real_Document : ARM_Format.Document_Type := Format_Object.Document;
+	    begin
+		-- No AARM text in this document.
+		if Real_Document = ARM_Format.AARM then
+		     Format_Object.Document := ARM_Format.RM;
+		end if;
+		Arm_String.Open (Input_Object, Text, Text_Name);
+		     -- Open the input object using a string for input.
+		Real_Process (Format_Object, Format_State, Input_Object, Output_Object);
+		Arm_String.Close (Input_Object);
+		Format_Object.Document := Real_Document;
+	    end Format_Text;
+
+	    procedure DB_Report is new ARM_Database.Report (Format_Text);
 
 	begin
 	    case Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command is
@@ -5249,7 +5464,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 
-		when Labeled_Revised_Normative_Annex |
+		when Labeled_Revised_Informative_Annex |
+		     Labeled_Revised_Normative_Annex |
 		     Labeled_Revised_Clause |
 		     Labeled_Revised_Subclause =>
 		    -- Load the title into the Title string:
@@ -5331,12 +5547,20 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				          ARM_Contents.Clause, Format_Object.Section, Format_Object.Clause)) then
 				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
 			            end if;
-				else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
+				elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
 				    Level := ARM_Contents.Normative_Annex;
 			            -- Check that the section numbers match the title:
 			            if Ada.Characters.Handling.To_Lower (New_Title) /=
 			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
 				          ARM_Contents.Normative_Annex, Format_Object.Section)) then
+				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
+			            end if;
+				else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
+				    Level := ARM_Contents.Informative_Annex;
+			            -- Check that the section numbers match the title:
+			            if Ada.Characters.Handling.To_Lower (New_Title) /=
+			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
+				          ARM_Contents.Informative_Annex, Format_Object.Section)) then
 				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
 			            end if;
 				end if;
@@ -6278,9 +6502,19 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Ada.Text_IO.Put_Line ("  ** Attribute parameter command?? on line " & ARM_Input.Line_String (Input_Object));
 
 		when Change_Impdef_Text_Param =>
-		    -- This can't get here; it represents the second parameter of
+		    -- This can't get here; it represents the third parameter of
 		    -- "ChgImpldef" and can't be generated explicitly.
 		    Ada.Text_IO.Put_Line ("  ** Impdef parameter command?? on line " & ARM_Input.Line_String (Input_Object));
+
+		when Change_Impladv_Text_Param =>
+		    -- This can't get here; it represents the third parameter of
+		    -- "ChgImpladvice" and can't be generated explicitly.
+		    Ada.Text_IO.Put_Line ("  ** Impladv parameter command?? on line " & ARM_Input.Line_String (Input_Object));
+
+		when Change_Docreq_Text_Param =>
+		    -- This can't get here; it represents the third parameter of
+		    -- "ChgImpladvice" and can't be generated explicitly.
+		    Ada.Text_IO.Put_Line ("  ** Docreq parameter command?? on line " & ARM_Input.Line_String (Input_Object));
 
 		when Change_Prefix_Text_Param =>
 		    -- This can't get here; it represents the second parameter of
@@ -6360,101 +6594,30 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- of Revised, Added, or Deleted, and this is followed
 		    -- by the text. As usual, any of the
 		    -- allowed bracketing characters can be used.
-		    declare
-			Close_Ch : Character;
-			Kind : ARM_Database.Paragraph_Change_Kind_Type;
-			Version : ARM_Contents.Change_Version_Type;
-			Display_It : Boolean;
-		    begin
-			Get_Change_Version (Is_First => True,
-			    Version => Version);
-			    -- Read a parameter named "Version".
+		    Gen_Chg_xxxx (Param_Cmd => Change_Impdef_Text_Param,
+				  AARM_Prefix => "Implementation defined: ");
 
-			Get_Change_Kind (Kind);
-			    -- Read a parameter named "Kind".
+		when Change_Implementation_Advice =>
+		    -- This command is of the form:
+		    -- @chgimpladvice{Version=[<version>], Kind=(<kind>),
+		    --   Text=(<text>)}}
+		    -- where <version> is a single character, <Kind> is one
+		    -- of Revised, Added, or Deleted, and this is followed
+		    -- by the text. As usual, any of the
+		    -- allowed bracketing characters can be used.
+		    Gen_Chg_xxxx (Param_Cmd => Change_Impladv_Text_Param,
+				  AARM_Prefix => "Implementation advice: ");
 
-			if Version <= Format_Object.Change_Version then
-			    Format_Object.Impdef_Version := Version;
-			    Format_Object.Impdef_Change_Kind := Kind;
-			    case Format_Object.Document is
-			        when ARM_Format.AARM =>
-				    Display_It := True;
-				when ARM_Format.RM | ARM_Format.RM_ISO =>
-				    Display_It := False; -- No impldef notes in RM.
-			    end case;
-			else --This reference is too new, ignore it.
-			    Display_It := False;
-			end if;
-
-			ARM_Input.Check_Parameter_Name (Input_Object,
-			    Param_Name => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
-			    Is_First => False,
-			    Param_Close_Bracket => Close_Ch);
-		        if Close_Ch /= ' ' then
-		            -- Stack it so we can process the end:
-			    Set_Nesting_for_Parameter
-			        (Command => Change_Impdef_Text_Param,
-				 Close_Ch => Close_Ch);
-
-			    ARM_Input.Start_Recording (Input_Object);
-
-			    if Format_Object.In_Paragraph then
-				-- Do this to preserve any inserted paragraph info.
-				Format_Object.Impdef_Paragraph_String :=
-				    Format_Object.Current_Paragraph_String;
-				Format_Object.Impdef_Paragraph_Len :=
-				    Format_Object.Current_Paragraph_Len;
-			    else
-				declare
-				    PNum : constant String := Positive'Image (
-					Format_Object.Next_Paragraph - 1);
-				begin
-				    Format_Object.Impdef_Paragraph_Len := PNum'Length - 1;
-				    Format_Object.Impdef_Paragraph_String (1 .. PNum'Last-1) :=
-					PNum (2 .. PNum'Last);
-				end;
-			    end if;
-
-			    if Display_It then
-			        Check_End_Paragraph; -- End any paragraph that we're in.
-			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
-			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph := Format_Object.Next_Paragraph_Subhead_Type;
-			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format := Format_Object.Next_Paragraph_Format_Type;
-			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
-			        Format_Object.Next_Paragraph_Format_Type := Bare_Annotation;
-			        Format_Object.Next_Paragraph_Subhead_Type := Bare_Annotation;
-			        Format_Object.Next_Paragraph_Version := Format_Object.Impdef_Version;
-			        Format_Object.Next_Paragraph_Change_Kind := Format_Object.Impdef_Change_Kind;
-			        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
-			        Check_Paragraph;
-			        ARM_Output.Text_Format (Output_Object,
-				    Bold => True,
-				    Italic => Format_Object.Is_Italic,
-				    Font => Format_Object.Font,
-				    Size => Format_Object.Size,
-				    Change => Format_Object.Change,
-				    Version => Format_Object.Impdef_Version,
-				    Location => Format_Object.Location);
-			        ARM_Output.Ordinary_Text (Output_Object,
-				     Text => "Implementation defined: ");
-			        ARM_Output.Text_Format (Output_Object,
-				    Bold => Format_Object.Is_Bold,
-				    Italic => Format_Object.Is_Italic,
-				    Font => Format_Object.Font,
-				    Size => Format_Object.Size,
-				    Change => Format_Object.Change,
-				    Version => Format_Object.Impdef_Version,
-				    Location => Format_Object.Location);
-			        Format_Object.Last_Paragraph_Subhead_Type := Bare_Annotation;
-			        Format_Object.Last_Non_Space := False;
-			    else -- Don't display, skip the text:
-			        ARM_Input.Skip_until_Close_Char (Input_Object,
-				    Close_Ch);
-			        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
-			    end if;
-		        -- else no parameter. Weird.
-		        end if;
-		    end;
+		when Change_Documentation_Requirement =>
+		    -- This command is of the form:
+		    -- @chgdocreq{Version=[<version>], Kind=(<kind>),
+		    --   Text=(<text>)}}
+		    -- where <version> is a single character, <Kind> is one
+		    -- of Revised, Added, or Deleted, and this is followed
+		    -- by the text. As usual, any of the
+		    -- allowed bracketing characters can be used.
+		    Gen_Chg_xxxx (Param_Cmd => Change_Docreq_Text_Param,
+				  AARM_Prefix => "Documentataion requirement: ");
 
 		when Change_Attribute =>
 		     -- @ChgAttribute{Version=[<version>], Kind=(<kind>),
@@ -6793,7 +6956,37 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        end if;
 		    end;
 
-		when Latin_1 =>
+		when Added_Implementation_Advice_List =>
+		    -- This command is of the form:
+		    -- @AddedImplAdvice{Version=[v]}
+		    declare
+			Version : ARM_Contents.Change_Version_Type;
+		    begin
+		        Get_Change_Version (Is_First => True,
+		            Version => Version);
+		            -- Read a parameter named "Version".
+		        DB_Report  (Format_Object.ImplAdv_DB,
+				    ARM_Database.Bullet_List,
+				    Sorted => True,
+				    Added_Version => Version);
+		    end;
+
+		when Added_Documentation_Requirements_List =>
+		    -- This command is of the form:
+		    -- @AddedDocReq{Version=[v]}
+		    declare
+			Version : ARM_Contents.Change_Version_Type;
+		    begin
+		        Get_Change_Version (Is_First => True,
+		            Version => Version);
+		            -- Read a parameter named "Version".
+		        DB_Report  (Format_Object.Docreq_DB,
+				    ARM_Database.Bullet_List,
+				    Sorted => True,
+				    Added_Version => Version);
+		    end;
+
+        	when Latin_1 =>
 		    -- The parameter is the decimal code for the Latin-1
 		    -- character to generate.
 		    declare
@@ -7033,14 +7226,19 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Labeled_Clause | Labeled_Subclause |
 		     Labeled_Revised_Clause | Labeled_Revised_Subclause |
 		     Labeled_Added_Clause | Labeled_Added_Subclause |
-		     Labeled_Informative_Annex | Labeled_Normative_Annex |
-		     Labeled_Revised_Normative_Annex |
+		     Labeled_Informative_Annex |  Labeled_Revised_Informative_Annex |
+		     Labeled_Normative_Annex | Labeled_Revised_Normative_Annex |
 		     Unnumbered_Section | Subheading | Added_Subheading | Heading |
 		     Center | Right |
 		     Preface_Section | Ref_Section | Ref_Section_Number | Ref_Section_by_Number |
 		     Change | Change_Reference | Change_Note |
 		     Change_Added | Change_Deleted |
-		     Change_Implementation_Defined | Change_Attribute |
+		     Change_Implementation_Defined |
+		     Change_Implementation_Advice |
+		     Change_Documentation_Requirement |
+		     Added_Implementation_Advice_List |
+		     Added_Documentation_Requirements_List |
+		     Change_Attribute |
 		     Change_Prefix_Type |
 		     Latin_1 | Ceiling | Floor | Absolute | Log =>
 		    -- These commands must have a parameter.
@@ -7077,6 +7275,16 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- This can't get here; it represents a parameter of
 		    -- "ChgImpldef" and can't be generated explicitly.
 		    Ada.Text_IO.Put_Line ("  ** Impdef parameter command?? on line " & ARM_Input.Line_String (Input_Object));
+
+		when Change_Impladv_Text_Param =>
+		    -- This can't get here; it represents a parameter of
+		    -- "ChgImpladv" and can't be generated explicitly.
+		    Ada.Text_IO.Put_Line ("  ** Impladv parameter command?? on line " & ARM_Input.Line_String (Input_Object));
+
+		when Change_Docreq_Text_Param =>
+		    -- This can't get here; it represents a parameter of
+		    -- "ChgDocreq" and can't be generated explicitly.
+		    Ada.Text_IO.Put_Line ("  ** DocReq parameter command?? on line " & ARM_Input.Line_String (Input_Object));
 
 		when Change_Prefix_Text_Param =>
 		    -- This can't get here; it represents a parameter of
@@ -7272,6 +7480,134 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 	procedure Handle_End_of_Command is
 	    -- Unstack and handle the end of Commands.
+
+	    procedure Finish_and_DB_Entry (DB : in out ARM_Database.Database_Type) is
+		-- Close the text parameter for a number of commands
+		-- (impdef, chgimpdef, chgimpladv, chgdocreg)
+		-- and insert the resulting string into the appropriate DB.
+		Text_Buffer : String (1..ARM_Input.MAX_RECORDING_SIZE);
+		Text_Buffer_Len : Natural;
+
+		function Clause_String return String is
+		    use type ARM_Contents.Section_Number_Type;
+		begin
+		    if Format_Object.Clause = 0 then
+			if Format_Object.Section in 0 .. 9 then
+			    return
+				Character'Val(Character'Pos('0') +
+				   Format_Object.Section) & "";
+			elsif Format_Object.Section in 10 .. 19 then
+			    return "1" &
+				Character'Val(Character'Pos('0') +
+				   Format_Object.Section - 10);
+			elsif Format_Object.Section = 20 then
+			    return "20";
+			else --if Format_Object.Section > 20 then
+			    return Character'Val (Character'Pos('A') +
+				 (Format_Object.Section - 21)) & "";
+			end if;
+		    elsif Format_Object.Subclause = 0 then
+			return ARM_Contents.Make_Clause_Number (
+			        ARM_Contents.Clause,
+				Format_Object.Section,
+				Format_Object.Clause);
+		    else
+			return ARM_Contents.Make_Clause_Number (
+			        ARM_Contents.SubClause,
+				Format_Object.Section,
+				Format_Object.Clause,
+				Format_Object.Subclause);
+		    end if;
+		end Clause_String;
+
+		function Sort_Clause_String return String is
+		    Res : String(1..9);
+		    -- Always use the paragraph for sorting:
+		begin
+		    -- The funny encoding to insure proper sorting.
+		    -- (Otherwise "10" sorts before "2".
+		    Res(1) := Character'Val (Natural(Format_Object.Section) + 16#30#);
+		    Res(2) := '.';
+		    Res(3) := Character'Val (Format_Object.Clause + 16#30#);
+		    Res(4) := '.';
+		    Res(5) := Character'Val (Format_Object.Subclause + 16#30#);
+		    Res(6) := '(';
+		    Res(7) := Character'Val ((Format_Object.Next_Paragraph / 10) + 16#30#);
+		    Res(8) := Character'Val ((Format_Object.Next_Paragraph mod 10) + 16#30#);
+		    Res(9) := ')';
+		    return Res;
+		end Sort_Clause_String;
+
+		function See_String return String is
+		begin
+		    case Format_Object.Impdef_Change_Kind is
+			when ARM_Database.None | ARM_Database.Revised |
+			     ARM_Database.Revised_Inserted_Number =>
+			    if Format_Object.Document = ARM_Format.RM_ISO then
+				return " See @RefSecbyNum{" & Clause_String & "}.";
+			    else
+				return " See @RefSecbyNum{" & Clause_String & "}(" &
+				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
+				    ").";
+			    end if;
+			when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
+			    if Format_Object.Document = ARM_Format.RM_ISO then
+				return "@Chg{Version=[" & Format_Object.Impdef_Version &
+				    "], New=[ See @RefSecbyNum{" & Clause_String & "}.],Old=[]}";
+			    else
+				return "@Chg{Version=[" & Format_Object.Impdef_Version &
+			            "], New=[ See @RefSecbyNum{" & Clause_String & "}(" &
+				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
+				    ").],Old=[]}";
+			    end if;
+			when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
+			    if Format_Object.Document = ARM_Format.RM_ISO then
+				return "@Chg{Version=[" & Format_Object.Impdef_Version &
+				    "], New=[],Old=[ See @RefSecbyNum{" & Clause_String & "}.]}";
+			    else
+				return "@Chg{Version=[" & Format_Object.Impdef_Version &
+				    "], New=[],Old=[ See @RefSecbyNum{" & Clause_String & "}(" &
+				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
+				    ").]}";
+			    end if;
+		    end case;
+		end See_String;
+
+	    begin
+		Arm_Input.Stop_Recording_and_Read_Result
+		    (Input_Object, Text_Buffer, Text_Buffer_Len);
+		Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
+	        ARM_Database.Insert (DB,
+		    Sort_Key => Sort_Clause_String,
+		    Hang_Item => "",
+		    Text => Text_Buffer(1..Text_Buffer_Len) &
+		       See_String,
+		    Change_Kind => Format_Object.Impdef_Change_Kind,
+		    Version => Format_Object.Impdef_Version);
+	        -- Finish the text processing:
+	        case Format_Object.Document is
+	            when ARM_Format.AARM =>
+		        -- End the annotation:
+		        Check_End_Paragraph;
+		        if Format_Object.Next_Paragraph_Subhead_Type /=
+			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph then
+		            Format_Object.Last_Paragraph_Subhead_Type :=
+			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph;
+		        -- else still in same subhead, leave alone. (If
+		        -- we didn't do this, we'd output the subhead
+		        -- multiple times).
+		        end if;
+		        Format_Object.Next_Paragraph_Subhead_Type :=
+ 			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph;
+		        Format_Object.Next_Paragraph_Format_Type :=
+			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format;
+		        Format_Object.Paragraph_Tab_Stops :=
+			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops;
+	            when others =>
+		        null; -- Nothing started, nothing to finish.
+	        end case;
+	    end Finish_and_DB_Entry;
+
 	begin
 	    case Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command is
 		when Redundant =>
@@ -7917,129 +8253,15 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 		when Implementation_Defined | Change_Impdef_Text_Param =>
 		    -- Save the implementation-defined entry in the database.
-		    declare
-			Text_Buffer : String (1..ARM_Input.MAX_RECORDING_SIZE);
-			Text_Buffer_Len : Natural;
+		    Finish_and_DB_Entry (Format_Object.Impdef_DB);
 
-			function Clause_String return String is
-			    use type ARM_Contents.Section_Number_Type;
-			begin
-			    if Format_Object.Clause = 0 then
-				if Format_Object.Section in 0 .. 9 then
-				    return
-					Character'Val(Character'Pos('0') +
-					   Format_Object.Section) & "";
-				elsif Format_Object.Section in 10 .. 19 then
-				    return "1" &
-					Character'Val(Character'Pos('0') +
-					   Format_Object.Section - 10);
-				elsif Format_Object.Section = 20 then
-				    return "20";
-				else --if Format_Object.Section > 20 then
-				    return Character'Val (Character'Pos('A') +
-					 (Format_Object.Section - 21)) & "";
-				end if;
-			    elsif Format_Object.Subclause = 0 then
-				return ARM_Contents.Make_Clause_Number (
-				        ARM_Contents.Clause,
-					Format_Object.Section,
-					Format_Object.Clause);
-			    else
-				return ARM_Contents.Make_Clause_Number (
-				        ARM_Contents.SubClause,
-					Format_Object.Section,
-					Format_Object.Clause,
-					Format_Object.Subclause);
-			    end if;
-			end Clause_String;
+		when Change_Impladv_Text_Param =>
+		    -- Save the implementation advice entry in the database.
+		    Finish_and_DB_Entry (Format_Object.Impladv_DB);
 
-			function Sort_Clause_String return String is
-			    Res : String(1..9);
-			    -- Always use the paragraph for sorting:
-			begin
-			    -- The funny encoding to insure proper sorting.
-			    -- (Otherwise "10" sorts before "2".
-			    Res(1) := Character'Val (Natural(Format_Object.Section) + 16#30#);
-			    Res(2) := '.';
-			    Res(3) := Character'Val (Format_Object.Clause + 16#30#);
-			    Res(4) := '.';
-			    Res(5) := Character'Val (Format_Object.Subclause + 16#30#);
-			    Res(6) := '(';
-			    Res(7) := Character'Val ((Format_Object.Next_Paragraph / 10) + 16#30#);
-			    Res(8) := Character'Val ((Format_Object.Next_Paragraph mod 10) + 16#30#);
-			    Res(9) := ')';
-			    return Res;
-			end Sort_Clause_String;
-
-			function See_String return String is
-			begin
-			    case Format_Object.Impdef_Change_Kind is
-				when ARM_Database.None | ARM_Database.Revised |
-				     ARM_Database.Revised_Inserted_Number =>
-				    if Format_Object.Document = ARM_Format.RM_ISO then
-					return " See @RefSecbyNum{" & Clause_String & "}.";
-				    else
-					return " See @RefSecbyNum{" & Clause_String & "}(" &
-					    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
-					    ").";
-				    end if;
-				when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
-				    if Format_Object.Document = ARM_Format.RM_ISO then
-					return "@Chg{Version=[" & Format_Object.Impdef_Version &
-					    "], New=[ See @RefSecbyNum{" & Clause_String & "}.],Old=[]}";
-				    else
-					return "@Chg{Version=[" & Format_Object.Impdef_Version &
-				            "], New=[ See @RefSecbyNum{" & Clause_String & "}(" &
-					    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
-					    ").],Old=[]}";
-				    end if;
-				when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
-				    if Format_Object.Document = ARM_Format.RM_ISO then
-					return "@Chg{Version=[" & Format_Object.Impdef_Version &
-					    "], New=[],Old=[ See @RefSecbyNum{" & Clause_String & "}.]}";
-				    else
-					return "@Chg{Version=[" & Format_Object.Impdef_Version &
-					    "], New=[],Old=[ See @RefSecbyNum{" & Clause_String & "}(" &
-					    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
-					    ").]}";
-				    end if;
-			    end case;
-			end See_String;
-
-		    begin
-			Arm_Input.Stop_Recording_and_Read_Result
-			    (Input_Object, Text_Buffer, Text_Buffer_Len);
-			Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
-		        ARM_Database.Insert (Format_Object.Impdef_DB,
-			    Sort_Key => Sort_Clause_String,
-			    Hang_Item => "",
-			    Text => Text_Buffer(1..Text_Buffer_Len) &
-			       See_String,
-			    Change_Kind => Format_Object.Impdef_Change_Kind,
-			    Version => Format_Object.Impdef_Version);
-		    end;
-		    -- Finish the text processing:
-		    case Format_Object.Document is
-		        when ARM_Format.AARM =>
-			    -- End the annotation:
-			    Check_End_Paragraph;
-			    if Format_Object.Next_Paragraph_Subhead_Type /=
-				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph then
-			        Format_Object.Last_Paragraph_Subhead_Type :=
-				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph;
-			    -- else still in same subhead, leave alone. (If
-			    -- we didn't do this, we'd output the subhead
-			    -- multiple times).
-			    end if;
-			    Format_Object.Next_Paragraph_Subhead_Type :=
-	 			Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph;
-			    Format_Object.Next_Paragraph_Format_Type :=
-				Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format;
-			    Format_Object.Paragraph_Tab_Stops :=
-				Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops;
-		        when others =>
-			    null; -- Nothing started, nothing to finish.
-		    end case;
+		when Change_Docreq_Text_Param =>
+		    -- Save the documentation requirement entry in the database.
+		    Finish_and_DB_Entry (Format_Object.Docreq_DB);
 
 		when Prefix_Type | Change_Prefix_Text_Param =>
 		    -- Copy the text into the Format_Object.Prefix_Text string.
@@ -8643,8 +8865,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			Labeled_Revised_Clause | Labeled_Revised_Subclause |
 			Labeled_Added_Clause | Labeled_Added_Subclause |
 			Preface_Section |
-			Labeled_Informative_Annex | Labeled_Normative_Annex |
-			Labeled_Revised_Normative_Annex |
+			Labeled_Informative_Annex | Labeled_Revised_Informative_Annex |
+			Labeled_Normative_Annex | Labeled_Revised_Normative_Annex |
 			Unnumbered_Section | Subheading | Heading | Center | Right =>
 			-- Ends a paragraph. No line break needed here (or
 			-- we'd end up with two).
