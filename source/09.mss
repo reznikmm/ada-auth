@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:26 $}
+@Comment{$Date: 2000/08/23 00:31:01 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 
@@ -147,7 +147,8 @@ a named task object of that type.
      {@Syn2{task_item}}]
   @key{end} [@SynI{task_}@Syn2{identifier}]"}
 
-@Syn{lhs=<task_item>,rhs="@Syn2{entry_declaration} | @Syn2{representation_clause}"}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Syn{lhs=<task_item>,rhs="@Syn2{entry_declaration} | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
 
 @Softpage
 @Syn{lhs=<task_body>,rhs="
@@ -189,6 +190,10 @@ word @key{private} is called the private part of the task unit.]
 @begin{TheProof}
 Private part is defined in Section 8.
 @end{theproof}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0029]}
+@Chg{New=[For a task declaration without a @nt{task_definition}, a
+@nt{task_definition} without @nt{task_items} is assumed.],Old=[]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -208,15 +213,16 @@ creates the task type and its first
 subtype;] it also includes the elaboration of the @nt<entry_declaration>s
 in the given order.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @PDefn2{Term=[initialization], Sec=(of a task object)}
 As part of the initialization of a task object, any
-@nt<representation_clause>s and any per-object
-constraints associated with @nt<entry_declaration>s
-of the corresponding @nt<task_definition>
-are elaborated in the given order.
+@Chg{New=[@nt<aspect_clause>s],Old=[@nt<representation_clause>s]} and
+any per-object constraints associated with @nt<entry_@!declaration>s
+of the corresponding @nt<task_@!definition> are elaborated in the given order.
 @begin{Reason}
-  The only @nt<representation_clause>s defined for task entries
-  are ones that specify the Address of an entry,
+@ChgRef{Version=[1],Kind=[Revised]}
+  The only @Chg{New=[@nt<aspect_clause>s],Old=[@nt<representation_clause>s]}
+  defined for task entries are ones that specify the Address of an entry,
   as part of defining an interrupt entry.
   These clearly need to be elaborated per-object, not per-type.
   Normally the address will be a function of a discriminant,
@@ -335,10 +341,11 @@ Terminal : Keyboard := @key(new) Keyboard_Driver(Term_ID);
 @end{Examples}
 
 @begin{Extend83}
+@ChgRef{Version=[1],Kind=[Revised]}
 The syntax rules for task declarations are modified to allow a
 @nt{known_discriminant_part}, and to allow a private part.
 They are also modified to allow @nt{entry_declaration}s and
-@nt{representation_clause}s to be mixed.
+@Chg{New=[@nt<aspect_clause>s],Old=[@nt<representation_clause>s]} to be mixed.
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -681,10 +688,11 @@ a named protected object of that type.
     { @Syn2{protected_element_declaration} } ]
   @key{end} [@SynI{protected_}@Syn2{identifier}]"}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @Syn{lhs=<protected_operation_declaration>,
   rhs="@Syn2{subprogram_declaration}
      | @Syn2{entry_declaration}
-     | @Syn2{representation_clause}"}
+     | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
 @Syn{lhs=<protected_element_declaration>,
   rhs="@Syn2<protected_operation_declaration>
      | @Syn2<component_declaration>"}
@@ -702,11 +710,12 @@ a named protected object of that type.
    { @Syn2{protected_operation_item} }
   @key{end} [@SynI{protected_}@Syn2{identifier}];"}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @Syn{lhs=<protected_operation_item>,
   rhs="@Syn2{subprogram_declaration}
      | @Syn2{subprogram_body}
      | @Syn2{entry_body}
-     | @Syn2{representation_clause}"}
+     | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
 
 @begin{SyntaxText}
 If a @SynI{protected_}@nt{identifier} appears at
@@ -1541,15 +1550,19 @@ is per-object.
 
 @begin{RunTime}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
 @PDefn2{Term=[elaboration], Sec=(entry_declaration)}
-For the elaboration of an @nt<entry_declaration> for an
+@Chg{New=[The elaboration of an @nt<entry_declaration> for an entry family
+consists of the elaboration of the @nt<discrete_subtype_definition>, as
+described in @RefSecNum(Record Types).],
+Old=[For the elaboration of an @nt<entry_declaration> for an
 entry family, if the
 @nt{discrete_@!subtype_@!definition} contains no per-object expressions
 (see @RefSecNum(Record Types)), then the @nt<discrete_@!subtype_@!definition>
 is elaborated. Otherwise, the elaboration of the
 @nt<entry_@!declaration> consists of the evaluation of any
 expression of the @nt<discrete_@!subtype_@!definition>
-that is not a per-object expression (or part of one).
+that is not a per-object expression (or part of one).]}
 The elaboration of an @nt<entry_@!declaration> for a single entry
 has no effect.
 @begin{Discussion}
@@ -2520,40 +2533,39 @@ The value returned by the function
 Seconds or through the Seconds parameter of the procedure
 Split is always less than 86_400.0.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0030]}
 The exception Time_Error is raised by the function Time_Of if the
 actual parameters do not form a proper date. This exception
 is also raised by the operators "+" and "@en@;" if the
-result is not representable in the type Time or
-Duration, as appropriate. This exception is
-also raised by the function Year or the procedure
-Split if the year number of the given date is outside of
-the range of the subtype Year_Number.
+result is not representable in the type Time or Duration, as appropriate.
+This exception is also raised by the function@Chg{New=[s],Old=[]} Year
+@Chg{New=[, Month, Day, and Seconds and],Old=[or]} the procedure Split
+if the year number of the given date is outside of the range of the
+subtype Year_Number.
 @begin(Honest)
   By "proper date" above we mean that the given year has
   a month with the given day. For example, February 29th is
   a proper date only for a leap year.
 @end(Honest)
 @begin(Reason)
-  We allow Year and Split to raise Time_Error because the
-  arithmetic operators are allowed (but not required) to produce times
-  that are outside the range of years from 1901 to 2099.
-  This is similar to the way integer operators may return
-  values outside the base range of their type
-  so long as the value is mathematically correct.
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0030]}
+  We allow Year and Split to raise Time_Error because the arithmetic operators
+  are allowed (but not required) to produce times that are outside the range
+  of years from 1901 to 2099. This is similar to the way integer operators may
+  return values outside the base range of their type so long as the value is
+  mathematically correct.
+  @Chg{New=[We allow the functions Month, Day and Seconds to raise Time_Error
+  so that they can be implemented in terms of Split.],Old=[]}
 @end(Reason)
-
 @end{RunTime}
 
 @begin{ImplReq}
-
-The implementation of the
-type Duration shall allow representation of
+The implementation of the type Duration shall allow representation of
 time intervals (both positive and negative) up to at least 86400 seconds (one
 day); Duration'Small shall not be greater than twenty milliseconds.
 The implementation of the type Time shall allow representation of
 all dates with year numbers in the range of Year_Number@Redundant[; it
 may allow representation of other dates as well (both earlier and later).]
-
 @end{ImplReq}
 
 @begin{ImplPerm}
@@ -3537,6 +3549,12 @@ circumstances:
 
   If A1 is part of the execution of a task, and A2 is
   the action of waiting for the termination of the task;
+
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0031]}
+  @Chg{New=[If A1 is the termination of a task T, and A2 is either the
+  evaluation of the expression T'Terminated or a call to
+  Ada.Task_Identification.Is_Terminated with an actual parameter that
+  identifies T (see @RefSecNum(The Package Task_Identification));],Old=[]}
 
   If A1 is the action of issuing an entry call, and A2 is
   part of the corresponding execution of the appropriate

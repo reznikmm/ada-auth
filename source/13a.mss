@@ -1,16 +1,16 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:26 $}
+@Comment{$Date: 2000/08/23 00:31:01 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @redundant[This section describes features for
-querying and controlling aspects of representation
-and for interfacing to hardware.
-]
+querying and controlling @Chg{New=[certain aspects of entities],
+Old=[aspects of representation]} and for interfacing to hardware.]
 @end{Intro}
 
 @begin{DiffWord83}
@@ -19,7 +19,7 @@ This was necessary to preserve a logical order,
 given the new Ada 95 semantics given in this section.
 @end{DiffWord83}
 
-@LabeledClause{Representation Items}
+@LabeledRevisedClause{New=[Operational and Representation Items],Old=[Representation Items]}
 
 @begin{Intro}
 @Defn{representation item}
@@ -781,7 +781,7 @@ so it probably won't get packed very tightly.
 @end{Itemize}
 @end{ImplAdvice}
 
-@LabeledClause{Representation Attributes}
+@LabeledRevisedClause{New=[Operational and Representation Attributes], Old=[Representation Attributes]}
 
 @begin{Intro}
 @redundant[@Defn{representation attribute}
@@ -1970,7 +1970,7 @@ Small, Bit_Order, Storage_Pool, Storage_Size,
 Write, Output, Read, Input,
 and Machine_Radix.
 
-It follows from the general rules in @RefSecNum{Representation Items}
+It follows from the general rules in @RefSecNum{Operational and Representation Items}
 that if one writes @lquotes@;@key[for] X'Size @key[use] Y;@rquotes@; then the X'Size
 @nt{attribute_reference} will return Y
 (assuming the implementation allows the Size clause).
@@ -4089,7 +4089,7 @@ The type of this attribute is @i{universal_integer}.>}
 @EndPrefixType{}
 @begin{Ramification}
 Storage_Size is also defined for task subtypes and objects
-@em see @RefSecNum{Representation Attributes}.
+@em see @RefSecNum{Operational and Representation Attributes}.
 
 Storage_Size is not a measure of how much un-allocated space is
 left in the pool.
@@ -5755,7 +5755,7 @@ before the constant is frozen
 
 @Redundant[A representation item that directly specifies an aspect of an
 entity shall appear before the entity is frozen
-(see @RefSecNum{Representation Items}).]
+(see @RefSecNum{Operational and Representation Items}).]
 
 
 @begin{Discussion}

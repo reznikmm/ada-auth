@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/08/23 00:31:01 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/18 01:10:08 $}
+@Comment{$Date: 2000/08/23 00:31:01 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -439,7 +439,7 @@ for example, requiring each exported entity to be declared
 at the library level.
 @begin{TheProof}
 Arbitrary restrictions are allowed by
-@RefSecNum{Representation Items}.
+@RefSecNum{Operational and Representation Items}.
 @end{TheProof}
 @begin{Ramification}
 Such a restriction might be to disallow them altogether.

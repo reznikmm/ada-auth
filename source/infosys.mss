@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2000/08/18 01:10:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2000/08/23 00:31:01 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/08/18 01:10:07 $}
+@Comment{$Date: 2000/08/23 00:31:01 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -26,7 +26,7 @@ support formatted and localized output of decimal data, based on
 
 See also: @RefSec{Fixed Point Types}; @RefSec{Operations of Fixed Point Types};
 @RefSec{Type Conversions};
-@RefSec{Representation Attributes};
+@RefSec{Operational and Representation Attributes};
 @RefSec(Input-Output for Real Types);
 @RefSec{Interfacing with COBOL};
 @RefSec{Interfacing with C};

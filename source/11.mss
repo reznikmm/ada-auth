@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:26 $}
+@Comment{$Date: 2000/08/23 00:31:01 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1324,7 +1324,7 @@ Unchecked_Access, or imported or exported entity
 @end{Discussion}
 
 @Redundant[As explained in
-@RefSec{Conformity of an Implementation With the Standard},
+@RefSec{Conformity of an Implementation with the Standard},
 the external effect of a program is defined in terms of its
 interactions with its external environment.
 Hence, the implementation can perform any internal

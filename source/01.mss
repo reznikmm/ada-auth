@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/08/17 03:15:25 $}
+@Comment{$Date: 2000/08/23 00:31:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -360,7 +360,7 @@ The Specialized Needs Annexes extend the core language only in ways that
 users, implementations, and standards bodies are allowed to extend the
 language;
 for example, via additional library units,
-attributes, representation items (see @RefSecNum{Representation Items}),
+attributes, representation items (see @RefSecNum{Operational and Representation Items}),
 @nt{pragma}s,
 and constraints on semantic details that are left unspecified by the
 core language.

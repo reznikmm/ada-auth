@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/23 00:31:01 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/08/17 03:15:28 $}
+@Comment{$Date: 2000/08/23 00:31:01 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -991,7 +991,7 @@ altered.
 @PDefn2{Term=[representation pragma], Sec=(Volatile_Components)}
 @PDefn2{Term=[pragma, representation], Sec=(Volatile_Components)}
 These @nt{pragma}s are representation pragmas
-(see @RefSecNum{Representation Items}).
+(see @RefSecNum{Operational and Representation Items}).
 
 @end{StaticSem}
 

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/08/19 01:17:21 $}
+@Comment{$Date: 2000/08/23 00:31:00 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1177,10 +1177,10 @@ discriminants and inherited components, qualification,
 and explicit conversion.
 
 For a subtype S of a partial view, S'Size is defined
-(see @RefSecNum{Representation Attributes}).
+(see @RefSecNum{Operational and Representation Attributes}).
 For an object A of a partial view,
 the attributes A'Size and A'Address are defined
-(see @RefSecNum{Representation Attributes}).
+(see @RefSecNum{Operational and Representation Attributes}).
 The Position, First_Bit, and Last_Bit attributes
 are also defined for discriminants and inherited components.
 @end{Notes}

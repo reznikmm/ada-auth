@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/19 01:17:21 $}
+@Comment{$Date: 2000/08/23 00:31:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @LabeledClause{Array Types}
 
@@ -2231,7 +2231,7 @@ an unnamed @nt{block_statement}.}
 The function External_Tag returns a string to be used in an
 external representation for the given tag. The call External_Tag(S'Tag)
 is equivalent to the @nt<attribute_reference> S'External_Tag
-(see @RefSecNum{Representation Attributes}).
+(see @RefSecNum{Operational and Representation Attributes}).
 @begin{Reason}
 It might seem redundant to provide both the function External_Tag and
 the attribute External_Tag.

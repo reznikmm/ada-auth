@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/08/19 01:17:21 $}
+@Comment{$Date: 2000/08/23 00:31:01 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1464,21 +1464,63 @@ That makes the rule different for @key[in] vs. @key[in out].
 @begin{Legality}
 The renamed entity shall be an object.
 
-The renamed entity shall not be a subcomponent that
-depends on discriminants of a variable whose
-nominal subtype is unconstrained,
-unless this subtype is indefinite,
-or the variable is aliased.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017]}
+The renamed entity shall not be a subcomponent that depends on
+discriminants of a variable whose nominal subtype is unconstrained,
+unless this subtype is indefinite, or the variable is aliased.
 A @nt{slice} of an array shall not be renamed if
 this restriction disallows renaming of the array.
+@Chg{New=[In addition to the places where Legality Rules normally apply, these
+rules apply also in the private part of an instance of a generic unit. These
+rules also apply for a renaming that appears in the body of a generic unit,
+with the additional requirement that even if the nominal subtype of the
+variable is indefinite, its type shall not be a descendant of an untagged
+generic formal derived type.],Old=[]}
 @begin{Reason}
 This prevents renaming of subcomponents that might
 disappear, which might leave dangling references.
 Similar restrictions exist for the Access attribute.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0017]}
+@Chg{New=[@Leading@;The "recheck on instantiation" and "assume-the-worst in the body"
+restrictions on generics are necessary to avoid renaming of components which
+could disappear even when the nominal subtype would prevent the problem:],Old=[]}
+
+@begin{Example}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key{type} T1 (D1 : Boolean) @key{is}
+   @key{record}
+      @key{case} D1 @key{is}
+         @key{when} False =>
+            C1 : Integer;
+         @key{when} True =>
+            @key{null};
+         @key{end} @key{case};
+      @key{end} @key{record};],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key{generic}
+   @key{type} F @key{is} @key{new} T1;
+   X : @key{in out} F;
+@key{package} G @key{is}
+   C1_Ren : Integer @key{renames} X.C1;
+@key{end} G;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key{type} T2 (D2 : Boolean := True) @key{is} @key{new} T1 (D1 => D2);
+@Comment{Blank line}
+Y : T2;
+@Comment{Blank line}
+@key{package} I @key{is new} G (T2, Y);
+@Comment{Blank line}
+Y := (D1 => True); -- Oops!  What happened to I.C1_Ren?],Old=[]}
+@end{Example}
+
+
 @end{Reason}
 @begin{ImplNote}
 Note that if an implementation chooses to deallocate-then-reallocate
-on @nt{assignment_statement}s assigning to unconstrained definite objects,
+on @nt{assignment_@!statement}s assigning to unconstrained definite objects,
 then it cannot represent renamings and access values as simple
 addresses, because the above rule does not apply to all components of
 such an object.
@@ -1615,46 +1657,70 @@ The profile of a renaming-as-declaration
 shall be mode-conformant with that of the renamed callable entity.
 @Defn2{Term=[mode conformance],Sec=(required)}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0027],Ref=[8652/0028]}
 The profile of a renaming-as-body
-shall be subtype-conformant with that of the renamed callable entity,
-and shall conform fully to that of the declaration it completes.
-@Defn2{Term=[subtype conformance],Sec=(required)}
+@Chg{New=[],Old=[shall be subtype-conformant with that of the renamed
+callable entity, and ]}shall conform fully to that of the declaration it
+completes.
 @Defn2{Term=[full conformance],Sec=(required)}
 If the renaming-as-body completes that declaration
-before the subprogram it declares is
-frozen, the subprogram it declares takes its convention
-from the renamed subprogram;
-otherwise the convention of the renamed subprogram shall not be
-Intrinsic.
+before the subprogram it declares is frozen,
+@Chg{New=[the profile shall be mode-conformant
+@Defn2{Term=[mode conformance],Sec=(required)}with that of the renamed
+callable entity and ],Old=[]}the subprogram it declares
+takes its convention from the renamed subprogram;
+otherwise@Chg{New=[, the profile shall be subtype-conformant with that of the
+renamed callable entity and],Old=[]} the convention of the renamed subprogram
+shall not be Intrinsic.
+@Defn2{Term=[subtype conformance],Sec=(required)}
+@Chg{New=[A renaming-as-body is illegal if the declaration occurs before the
+subprogram whose declaration it completes is frozen, and the renaming renames
+the subprogram itself, through one or more subprogram renaming declarations,
+none of whose subprograms has been frozen.],Old=[]}
 @begin{Reason}
-The first part of the first sentence is to allow an
-implementation of a renaming-as-body
+@ChgRef{Version=[1],Kind=[Revised]}
+The @Chg{New=[otherwise part of the second sentence],Old=[first part of the first sentence]}
+is to allow an implementation of a renaming-as-body
 as a single jump instruction to the target subprogram.
 Among other things, this prevents a subprogram from being completed with
 a renaming of an entry.
 (In most cases, the target of the jump can be filled in at link time.
-In some cases, such as a renaming of a name like
-"A(I).@key[all]", an indirect jump is needed.
-Note that the name is evaluated at renaming time, not at call
-time.)
+In some cases, such as a renaming of a name like "A(I).@key[all]", an indirect
+jump is needed. Note that the name is evaluated at renaming time, not at
+call time.)
 
-The second part of the first sentence is
-the normal rule for completions of
-@nt{subprogram_declaration}s.
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0028]}
+@Chg{New=[The first part of the second sentence is intended to allow
+renaming-as-body of predefined operators before the @nt{subprogram_declaration}
+is frozen. For some types (such as integer types), the parameter type for
+operators is the base type, and it would be very strange for@*
+@f{@ @ @ @key{function} Equal (A, B : @key{in} T) @key{return} Boolean;}@*
+@f{@ @ @ @key{function} Equal (A, B : @key{in} T) @key{return} Boolean @key{renames} "=";}@*
+to be illegal. (Note that predefined operators cannot be renamed this way
+after the @nt{subprogram_declaration} is frozen, as they have convention
+Intrinsic.)],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Revised]}
+The @Chg{New=[],Old=[second part of the ]}first sentence is
+the normal rule for completions of @nt{subprogram_declaration}s.
 @end{Reason}
 @begin{Ramification}
 An @nt{entry_declaration}, unlike a @nt{subprogram_declaration},
-cannot be completed with a @nt{renaming_declaration}.
-Nor can a @nt{generic_subprogram_declaration}.
-
+cannot be completed with a @nt{renaming_@!declaration}.
+Nor can a @nt{generic_@!subprogram_@!declaration}.
 
 The syntax rules prevent a protected subprogram declaration from being
 completed by a renaming.
 This is fortunate, because it allows us to avoid worrying about whether
 the implicit protected object parameter of a protected operation is
 involved in the conformance rules.
-
 @end{Ramification}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027]}
+@Chg{New=[Circular renames before freezing is illegal, as the compiler
+would not be able to determine the convention of the subprogram. Other
+circular renames are handled below, see @BoundedTitle.],Old=[]}
+@end{Reason}
 
 A @nt{name} that denotes a formal parameter
 of the @nt{subprogram_specification}
@@ -1700,12 +1766,22 @@ waiting.
 @end{StaticSem}
 
 @begin{RunTime}
-For a call on a renaming of a dispatching subprogram that is
-overridden,
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0014]}
+@Chg{New=[For a call to a subprogram whose body is given as a renaming-as-body,
+the execution of the renaming-as-body is equivalent to the execution of a
+@nt{subprogram_body} that simply calls the renamed subprogram with its formal
+parameters as the actual parameters and, if it is a function, returns the
+value of the call.],Old=[]}
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[This implies that the subprogram completed by the renames-as-body
+has its own elaboration check.],Old=[]}
+@end{Ramification}
+
+For a call on a renaming of a dispatching subprogram that is overridden,
 if the overriding occurred before the renaming, then the body executed
 is that of the overriding declaration,
-even if the overriding declaration is not visible at the place of the
-renaming;
+even if the overriding declaration is not visible at the place of the renaming;
 otherwise, the inherited or predefined subprogram is called.
 @begin{Discussion}
 Note that whether or not the renaming is itself primitive has
@@ -1737,6 +1813,19 @@ predefined subprogram before later overriding it.
 @Defn2{Term=[squirrel away],Sec=(included in fairness to alligators)}
 @end{Discussion}
 @end{RunTime}
+
+@begin{Bounded}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027]}
+@Chg{New=[If a subprogram directly or indirectly renames itself, then it is a bounded
+error to call that subprogram. Possible consequences are that Program_Error or
+Storage_Error is raised, or that the call results in infinite recursion.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027]}
+@Chg{New=[This has to be a bounded error, as it is possible for a
+renames-as-body appearing in a package body to cause this problem. Thus it is
+not possible in general to detect this problem at compile-time.],Old=[]}
+@end{Reason}
+@end{Bounded}
 
 @begin{Notes}
 A procedure can only be renamed as a procedure.
@@ -1777,13 +1866,11 @@ the subprogram name has to denote a primitive subprogram,
 not a non-primitive renaming of a primitive subprogram.
 @begin{Reason}
 A @nt{subprogram_renaming_declaration} could more properly be called
-@nt{renaming_as_subprogram_declaration}, since you're renaming something
+@nt{renaming_@!as_@!subprogram_@!declaration}, since you're renaming something
 as a subprogram, but you're not necessarily renaming a subprogram.
-But that's too much of a mouthful.
-Or, alternatively, we could call it a
-@nt{callable_entity_renaming_declaration}, but that's even worse.
-Not only is it a mouthful,
-it emphasizes the entity being renamed,
+But that's too much of a mouthful. Or, alternatively, we could call it a
+@nt{callable_@!entity_@!renaming_@!declaration}, but that's even worse.
+Not only is it a mouthful, it emphasizes the entity being renamed,
 rather than the new view, which we think is a bad idea.
 We'll live with the oddity.
 @end{Reason}

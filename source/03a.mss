@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:25 $}
+@Comment{$Date: 2000/08/23 00:31:00 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -4085,7 +4085,7 @@ The assignment operation is described in @RefSecNum(Assignment Statements).
 The other predefined operations are described in Section 4.
 
 As for all types, objects of a discrete type
-have Size and Address attributes (see @RefSecNum(Representation Attributes)).
+have Size and Address attributes (see @RefSecNum(Operational and Representation Attributes)).
 
 @Leading@;For a subtype of a discrete type, the result delivered by the
 attribute Val might not belong to the subtype; similarly, the actual parameter
@@ -4539,7 +4539,7 @@ and the exponentiation operator.
 
 As for all types, objects of a floating point type
 have Size and Address attributes
-(see @RefSecNum(Representation Attributes)).
+(see @RefSecNum(Operational and Representation Attributes)).
 Other attributes of floating point types are defined in
 @RefSecNum{Attributes of Floating Point Types}.
 @end{Notes}
@@ -4603,7 +4603,7 @@ of a number called the @i(small) of the type.
 For a type defined by an @nt<ordinary_fixed_point_definition>
 (an @i(ordinary) fixed point type), the @i(small) may be specified
 by an @nt<attribute_definition_clause>
-(see @RefSecNum{Representation Attributes});
+(see @RefSecNum{Operational and Representation Attributes});
 if so specified, it shall be no greater than the @i(delta) of the type.
 If not specified, the @i(small) of an ordinary fixed
 point type is an implementation-defined
@@ -4843,7 +4843,7 @@ Obsolescent features (to be compatible with Ada 83's
      Small may be specified
      for nonderived@Chg{New=[ ordinary],Old=[]} fixed point types
      via an @nt{attribute_definition_clause}
-     (see @RefSecNum{Representation Attributes});
+     (see @RefSecNum{Operational and Representation Attributes});
      the expression of such a clause shall be static.
 
 @Attribute{Prefix=<S>, AttrName=<Delta>,
@@ -4962,7 +4962,7 @@ operators, and the unary operator @key(abs).
 
 As for all types, objects of a fixed point type
 have Size and Address attributes
-(see @RefSecNum(Representation Attributes)).
+(see @RefSecNum(Operational and Representation Attributes)).
 Other attributes of fixed point types are defined in
 @RefSecNum{Attributes of Fixed Point Types}.
 @end{Notes}

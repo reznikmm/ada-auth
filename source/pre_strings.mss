@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/23 00:31:02 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/08/17 03:15:30 $}
+@Comment{$Date: 2000/08/23 00:31:02 $}
 
 @LabeledClause{String Handling}
 
@@ -148,9 +148,9 @@ union of the sets corresponding to Obj(I) for I in Obj'Range.
 @begin{Example}@Keepnext
 @key[function] To_Set (Ranges : @key[in] Character_Ranges) @key[return] Character_Set;
 @end{Example}
-
-If Ranges'Length=0 then Null_Set is returned;
+@Trailing@;If Ranges'Length=0 then Null_Set is returned;
 otherwise the returned value represents the set corresponding to Ranges.
+
 @begin{Example}@Keepnext
 @key[function] To_Set (Span : @key[in] Character_Range) @key[return] Character_Set;
 @end{Example}
@@ -159,48 +159,46 @@ The returned value represents the set containing each character in Span.
 @begin{Example}@Keepnext
 @key[function] To_Ranges (Set : @key[in] Character_Set) @key[return] Character_Ranges;
 @end{Example}
-
-If Set = Null_Set then an empty Character_Ranges array is returned;
-otherwise
-the shortest array of contiguous ranges of Character
+@Trailing@;If Set = Null_Set then an empty Character_Ranges array is returned;
+otherwise the shortest array of contiguous ranges of Character
 values in Set, in increasing order of Low, is returned.
+
 @begin{Example}@Keepnext
 @key[function] "=" (Left, Right : @key[in] Character_Set) @key[return] Boolean;
 @end{Example}
-
-The function "=" returns True if Left and Right represent identical sets,
+@Trailing@;The function "=" returns True if Left and Right represent identical sets,
 and False otherwise.
 @end{DescribeCode}
 
-Each of the logical operators "@key[not]", "@key[and]", "@key[or]", and
-"@key[xor]" returns
+@Trailing@;Each of the logical operators "@key[not]", "@key[and]", "@key[or]",
+and "@key[xor]" returns
 a Character_Set value that represents the set obtained by applying
 the corresponding operation to the set(s) represented by the parameter(s)
 of the operator.
 "@en"(Left, Right) is equivalent to "and"(Left, "not"(Right)).
 @begin{reason}
 The set minus operator is provided for efficiency.@end{reason}
+
 @begin{DescribeCode}
 @begin{Example}@Keepnext
 @key[function] Is_In (Element : @key[in] Character;
                 Set     : @key[in] Character_Set);
    @key[return] Boolean;
 @end{Example}
+@Trailing@;Is_In returns True if Element is in Set, and False otherwise.
 
-Is_In returns True if Element is in Set, and False otherwise.
 @begin{Example}@Keepnext
 @key[function] Is_Subset (Elements : @key[in] Character_Set;
                     Set      : @key[in] Character_Set)
    @key[return] Boolean;
 @end{Example}
-
-Is_Subset returns True if
+@Trailing@;Is_Subset returns True if
 Elements is a subset of Set, and False otherwise.
+
 @begin{Example}@Keepnext
 @key[subtype] Character_Sequence @key[is] String;
 @end{Example}
-
-The Character_Sequence subtype is used to portray a set of character
+@Trailing@;The Character_Sequence subtype is used to portray a set of character
 values and also to identify the domain and range of a character
 mapping.
 @begin{reason}
@@ -209,37 +207,37 @@ could have been used for the parameter to To_Set and To_Mapping
 below @em the use of a differently named subtype identifies the intended
 purpose of the parameter.
 @end{reason}
+
 @begin{Example}@Keepnext
 @key[function] To_Set (Sequence  : @key[in] Character_Sequence) @key[return] Character_Set;@*
 @key[function] To_Set (Singleton : @key[in] Character)          @key[return] Character_Set;
 @end{Example}
-
-Sequence portrays the set of character values that it explicitly
+@Trailing@;Sequence portrays the set of character values that it explicitly
 contains (ignoring duplicates).
 Singleton portrays the set comprising a single Character.
 Each of the To_Set functions
 returns a Character_Set value that represents
 the set portrayed by Sequence or Singleton.
+
 @begin{Example}@Keepnext
 @key[function] To_Sequence (Set : @key[in] Character_Set) @key[return] Character_Sequence;
 @end{Example}
-
-The function To_Sequence returns a Character_Sequence value
+@Trailing@;The function To_Sequence returns a Character_Sequence value
 containing each of the characters in the set represented by Set, in
 ascending order with no duplicates.
+
 @begin{Example}@Keepnext
 @key[type] Character_Mapping @key[is] @key[private];
 @end{Example}
-
-An object  of type Character_Mapping represents a
+@Trailing@;An object of type Character_Mapping represents a
 Character-to-Character mapping.
+
 @begin{Example}@Keepnext
 @key[function] Value (Map     : @key[in] Character_Mapping;
                 Element : @key[in] Character)
    @key[return] Character;
 @end{Example}
-
-The function Value returns the Character value to which Element maps
+@Trailing@;The function Value returns the Character value to which Element maps
 with respect to the mapping represented by Map.
 @end{DescribeCode}
 
@@ -269,32 +267,31 @@ parameters whose type is Character_Mapping.
 @begin{Example}@Keepnext
 Identity : @key[constant] Character_Mapping;
 @end{Example}
+  @Trailing@;Identity maps each Character to itself.
 
-   Identity maps each Character to itself.
 @begin{Example}@Keepnext
 @key[function] To_Mapping (From, To : @key[in] Character_Sequence)
     @key[return] Character_Mapping;
 @end{Example}
-
-To_Mapping produces a Character_Mapping such that
-each element of From maps to the corresponding element of To,
- and each other character maps to itself.
+  @Trailing@;To_Mapping produces a Character_Mapping such that
+  each element of From maps to the corresponding element of To,
+  and each other character maps to itself.
     If From'Length /= To'Length, or
      if some character is repeated in From, then Translation_Error
      is propagated.
+
 @begin{Example}@Keepnext
 @key[function] To_Domain (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
 @end{Example}
-
-To_Domain returns the shortest Character_Sequence value D such that
+@Trailing@;To_Domain returns the shortest Character_Sequence value D such that
 each character not in D maps to itself, and such that
 the characters in D are in ascending order.
 The lower bound of D is 1.
+
 @begin{Example}@Keepnext
 @key[function] To_Range  (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
 @end{Example}
-
-To_Range returns the Character_Sequence value R, with lower bound 1
+@Trailing@;To_Range returns the Character_Sequence value R, with lower bound 1
 and upper bound Map'Length, such that if
 D = To_Domain(Map) then
 D(I) maps to R(I) for each I in D'Range.
@@ -556,7 +553,6 @@ The effects of the above subprograms are as follows.
                 Justify : @key[in]  Alignment  := Left;
                 Pad     : @key[in]  Character  := Space);
 @end{Example}
-
 @Leading@;The Move procedure copies characters from Source to Target.
 If Source has the same length as Target, then the effect is
 to assign Source to Target.
@@ -598,7 +594,7 @@ If Justify=Right, and if each of the leftmost Source'Length-Target'Length
 characters in Source is Pad, then the rightmost Target'Length characters
 of Source are copied to Target.
 
-Otherwise, Length_Error is propagated.
+@Trailing@;Otherwise, Length_Error is propagated.
 @end{inneritemize}
 @end{itemize}
 @begin{ramification}
@@ -621,8 +617,7 @@ the order in COBOL's MOVE verb.@end{reason}
                 Mapping  : @key[in] Maps.Character_Mapping_Function)
    @key[return] Natural;
 @end{Example}
-
-Each Index function searches for a slice of Source, with length
+@Trailing@;Each Index function searches for a slice of Source, with length
 Pattern'Length, that matches Pattern
 with respect to Mapping;
 the parameter Going indicates the direction of the lookup.
@@ -648,8 +643,7 @@ the Mapping parameter that is a Character_Mapping.
                 Going  : @key[in] Direction  := Forward)
    @key[return] Natural;
 @end{Example}
-
-Index searches for the first or last occurrence of any of a set of
+@Trailing@;Index searches for the first or last occurrence of any of a set of
 characters (when Test=Inside),
 or any of the complement of a set of characters (when Test=Outside).
 It returns the smallest index I (if Going=Forward) or the largest index I
@@ -662,8 +656,7 @@ it returns 0 if there is no such Character in Source.
                           Going  : @key[in] Direction := Forward)
    @key[return] Natural;
 @end{Example}
-
-Returns Index(Source, Maps.To_Set(Space), Outside, Going)
+@Trailing@;Returns Index(Source, Maps.To_Set(Space), Outside, Going)
 
 @begin{Example}@Keepnext
 @key[function] Count (Source   : @key[in] String;
@@ -676,8 +669,7 @@ Returns Index(Source, Maps.To_Set(Space), Outside, Going)
                 Mapping  : @key[in] Maps.Character_Mapping_Function)
    @key[return] Natural;
 @end{Example}
-
-Returns the maximum number of nonoverlapping slices of Source that
+@Trailing@;Returns the maximum number of nonoverlapping slices of Source that
 match Pattern with respect to Mapping.
 If Pattern is the null string then Pattern_Error is propagated.
 @begin{reason}
@@ -695,8 +687,7 @@ position.
                 Set      : @key[in] Maps.Character_Set)
    @key[return] Natural;
 @end{Example}
-
-Returns the number of occurrences in Source of characters that
+@Trailing@;Returns the number of occurrences in Source of characters that
 are in Set.
 
 @begin{Example}@Keepnext
@@ -706,8 +697,7 @@ are in Set.
                       First  : @key[out] Positive;
                       Last   : @key[out] Natural);
 @end{Example}
-
-Find_Token returns in First and Last the indices of the beginning and
+@Trailing@;Find_Token returns in First and Last the indices of the beginning and
  end of the first slice of Source all of whose elements
  satisfy the Test condition, and such that the elements
  (if any) immediately before and after the slice do not
@@ -723,12 +713,9 @@ the value returned for First is Source'First.
                     Mapping : @key[in] Maps.Character_Mapping_Function)
    @key[return] String;
 @end{Example}
-
-Returns the string S whose length is Source'Length
- and such
+@Trailing@;Returns the string S whose length is Source'Length and such
 that S(I) is the character to which Mapping maps the corresponding
 element of Source, for I in 1..Source'Length.
-
 
 @begin{Example}@Keepnext
 @key[procedure] Translate (Source  : @key[in] @key[out] String;
@@ -736,8 +723,7 @@ element of Source, for I in 1..Source'Length.
 @key[procedure] Translate (Source  : @key[in] @key[out] String;
                      Mapping : @key[in] Maps.Character_Mapping_Function);
 @end{Example}
-
-Equivalent to Source := Translate(Source, Mapping).
+@Trailing@;Equivalent to Source := Translate(Source, Mapping).
 
 @begin{Example}@Keepnext
 @key[function] Replace_Slice (Source   : @key[in] String;
@@ -746,12 +732,11 @@ Equivalent to Source := Translate(Source, Mapping).
                         By       : @key[in] String)
    @key[return] String;
 @end{Example}
-
-If Low > Source'Last+1, or  High < Source'First@en@;1,
- then Index_Error is propagated.
+@Trailing@;If Low > Source'Last+1, or  High < Source'First@en@;1,
+then Index_Error is propagated.
 Otherwise, if High >= Low then the returned string
- comprises
- Source(Source'First..Low@en@;1) & By & Source(High+1..Source'Last),
+comprises
+Source(Source'First..Low@en@;1) & By & Source(High+1..Source'Last),
 and if High < Low then the returned string is
 Insert(Source, Before=>Low, New_Item=>By).
 
@@ -764,8 +749,7 @@ Insert(Source, Before=>Low, New_Item=>By).
                          Justify  : @key[in] Alignment  := Left;
                          Pad      : @key[in] Character  := Space);
 @end{Example}
-
-Equivalent to Move(Replace_Slice(Source, Low, High,
+@Trailing@;Equivalent to Move(Replace_Slice(Source, Low, High,
 By), Source, Drop, Justify, Pad).
 
 @begin{Example}@Keepnext
@@ -774,8 +758,7 @@ By), Source, Drop, Justify, Pad).
                  New_Item : @key[in] String)
    @key[return] String;
 @end{Example}
-
-Propagates Index_Error if Before is not in Source'First .. Source'Last+1;
+@Trailing@;Propagates Index_Error if Before is not in Source'First .. Source'Last+1;
 otherwise
 returns Source(Source'First..Before@en@;1) & New_Item &
 Source(Before..Source'Last), but with lower bound 1.
@@ -787,8 +770,7 @@ Source(Before..Source'Last), but with lower bound 1.
                   New_Item : @key[in] String;
                   Drop     : @key[in] Truncation := Error);
 @end{Example}
-
-Equivalent to Move(Insert(Source, Before, New_Item), Source, Drop).
+@Trailing@;Equivalent to Move(Insert(Source, Before, New_Item), Source, Drop).
 
 @begin{Example}@Keepnext
 @key[function] Overwrite (Source   : @key[in] String;
@@ -796,8 +778,7 @@ Equivalent to Move(Insert(Source, Before, New_Item), Source, Drop).
                     New_Item : @key[in] String)
    @key[return] String;
 @end{Example}
-
-Propagates Index_Error if Position is not in Source'First .. Source'Last+1;
+@Trailing@;Propagates Index_Error if Position is not in Source'First .. Source'Last+1;
 otherwise
 returns the string obtained from Source by consecutively replacing
 characters starting at Position with corresponding characters from
@@ -811,8 +792,7 @@ appended to the string.
                      New_Item : @key[in] String;
                      Drop     : @key[in] Truncation := Right);
 @end{Example}
-
-Equivalent to Move(Overwrite(Source, Position,
+@Trailing@;Equivalent to Move(Overwrite(Source, Position,
 New_Item), Source, Drop).
 
 @begin{Example}@Keepnext
@@ -821,8 +801,7 @@ New_Item), Source, Drop).
                  Through : @key[in] Natural)
    @key[return] String;
 @end{Example}
-
-If From <= Through, the returned string is Replace_Slice(Source, From,
+@Trailing@;If From <= Through, the returned string is Replace_Slice(Source, From,
 Through, ""), otherwise it is Source.
 
 @begin{Example}@Keepnext
@@ -832,8 +811,7 @@ Through, ""), otherwise it is Source.
                   Justify : @key[in] Alignment := Left;
                   Pad     : @key[in] Character := Space);
 @end{Example}
-
-Equivalent to Move(Delete(Source, From, Through),
+@Trailing@;Equivalent to Move(Delete(Source, From, Through),
 Source, Justify => Justify, Pad => Pad).
 
 @begin{Example}@Keepnext
@@ -841,9 +819,8 @@ Source, Justify => Justify, Pad => Pad).
                Side   : @key[in] Trim_End)
   @key[return] String;
 @end{Example}
-
-Returns the string obtained by removing from Source all leading Space
-characters (if Side = Left), all trailing Space characters
+@Trailing@;Returns the string obtained by removing from Source all leading
+Space characters (if Side = Left), all trailing Space characters
 (if Side = Right), or all leading and trailing Space characters
 (if Side = Both).
 
@@ -853,8 +830,7 @@ characters (if Side = Left), all trailing Space characters
                 Justify : @key[in] Alignment := Left;
                 Pad     : @key[in] Character := Space);
 @end{Example}
-
-Equivalent to Move(Trim(Source, Side), Source, Justify=>Justify, Pad=>Pad).
+@Trailing@;Equivalent to Move(Trim(Source, Side), Source, Justify=>Justify, Pad=>Pad).
 
 @begin{Example}@Keepnext
 @key[function] Trim (Source : @key[in] String;
@@ -862,10 +838,8 @@ Equivalent to Move(Trim(Source, Side), Source, Justify=>Justify, Pad=>Pad).
                Right  : @key[in] Maps.Character_Set)
    @key[return] String;
 @end{Example}
-
-Returns the string obtained by removing from Source all leading characters
-in Left and all
-trailing characters in Right.
+@Trailing@;Returns the string obtained by removing from Source all leading
+characters in Left and all trailing characters in Right.
 
 @begin{Example}@Keepnext
 @key[procedure] Trim (Source  : @key[in] @key[out] String;
@@ -874,8 +848,7 @@ trailing characters in Right.
                 Justify : @key[in] Alignment := Strings.Left;
                 Pad     : @key[in] Character := Space);
 @end{Example}
-
-Equivalent to Move(Trim(Source, Left, Right), Source,
+@Trailing@;Equivalent to Move(Trim(Source, Left, Right), Source,
 Justify => Justify, Pad=>Pad).
 
 @begin{Example}@Keepnext
@@ -884,9 +857,8 @@ Justify => Justify, Pad=>Pad).
                Pad    : @key[in] Character := Space)
    @key[return] String;
 @end{Example}
-
-Returns a string of length Count. If Count <= Source'Length, the string
-comprises the first Count characters of Source. Otherwise its contents
+@Trailing@;Returns a string of length Count. If Count <= Source'Length, the
+string comprises the first Count characters of Source. Otherwise its contents
 are Source concatenated with Count@en@;Source'Length Pad characters.
 
 @begin{Example}@Keepnext
@@ -895,8 +867,7 @@ are Source concatenated with Count@en@;Source'Length Pad characters.
                 Justify : @key[in] Alignment := Left;
                 Pad     : @key[in] Character := Space);
 @end{Example}
-
-Equivalent to Move(Head(Source, Count, Pad), Source, Drop=>Error,
+@Trailing@;Equivalent to Move(Head(Source, Count, Pad), Source, Drop=>Error,
 Justify=>Justify, Pad=>Pad).
 
 @begin{Example}@Keepnext
@@ -905,9 +876,8 @@ Justify=>Justify, Pad=>Pad).
                Pad    : @key[in] Character := Space)
    @key[return] String;
 @end{Example}
-
-Returns a string of length Count. If Count <= Source'Length, the string
-comprises the last Count characters of Source. Otherwise its contents
+@Trailing@;Returns a string of length Count. If Count <= Source'Length, the
+string comprises the last Count characters of Source. Otherwise its contents
 are Count-Source'Length Pad characters concatenated with Source.
 
 @begin{Example}@Keepnext
@@ -916,8 +886,7 @@ are Count-Source'Length Pad characters concatenated with Source.
                 Justify : @key[in] Alignment := Left;
                 Pad     : @key[in] Character := Space);
 @end{Example}
-
-Equivalent to Move(Tail(Source, Count, Pad), Source, Drop=>Error,
+@Trailing@;Equivalent to Move(Tail(Source, Count, Pad), Source, Drop=>Error,
 Justify=>Justify, Pad=>Pad).
 
 @begin{Example}@Keepnext
@@ -926,9 +895,8 @@ Justify=>Justify, Pad=>Pad).
 @key[function] "*" (Left  : @key[in] Natural;
               Right : @key[in] String) @key[return] String;
 @end{Example}
-
-These functions replicate a character or string a specified number of
-times. The first function returns a string whose length is Left and each
+These functions replicate a character or string a specified number
+of times. The first function returns a string whose length is Left and each
 of whose elements is Right. The second function returns a string whose
 length is Left*Right'Length and whose value is the null
 string if Left = 0 and is
@@ -1313,15 +1281,14 @@ will be initialized to the same value as Null_Bounded_String.
 @begin{Example}@Keepnext
 @key[function] Length (Source : @key[in] Bounded_String) @key[return] Length_Range;
 @end{Example}
-
-The Length function returns the length of the string represented by Source.
+@Trailing@;The Length function returns the length of the string represented by
+Source.
 
 @begin{Example}@Keepnext
 @key[function] To_Bounded_String (Source : @key[in] String;
                             Drop   : @key[in] Truncation := Error)
    @key[return] Bounded_String;
 @end{Example}
-
 @Leading@;If Source'Length <= Max_Length then this function
 returns a Bounded_String that represents Source.
 Otherwise the effect depends on the value of Drop:
@@ -1334,14 +1301,13 @@ the rightmost Max_Length characters of Source.
 the result is a Bounded_String that represents the string comprising
 the leftmost Max_Length characters of Source.
 
-If Drop=Error, then Strings.Length_Error is propagated.
+@Trailing@;If Drop=Error, then Strings.Length_Error is propagated.
 @end{itemize}
 
 @begin{Example}@Keepnext
 @key[function] To_String (Source : @key[in] Bounded_String) @key[return] String;
 @end{Example}
-
-To_String returns the String value with lower bound 1 represented by
+@Trailing@;To_String returns the String value with lower bound 1 represented by
 Source. If B is a Bounded_String, then B = To_Bounded_String(To_String(B)).
 @end{DescribeCode}
 
@@ -1363,18 +1329,16 @@ Append function, with Error as the Drop parameter.
                   Index  : @key[in] Positive)
    @key[return] Character;
 @end{Example}
-
-Returns the character at position Index in the string represented by Source;
-propagates Index_Error if Index > Length(Source).
+@Trailing@;Returns the character at position Index in the string represented
+by Source; propagates Index_Error if Index > Length(Source).
 
 @begin{Example}@Keepnext
 @key[procedure] Replace_Element (Source : @key[in] @key[out] Bounded_String;
                            Index  : @key[in] Positive;
                            By     : @key[in] Character);
 @end{Example}
-
-Updates Source such that the character at position Index in the string
-represented by Source is By;
+@Trailing@;Updates Source such that the character at position Index in the
+string represented by Source is By;
 propagates Index_Error if Index > Length(Source).
 
 @begin{Example}@Keepnext
@@ -1383,8 +1347,7 @@ propagates Index_Error if Index > Length(Source).
                 High   : @key[in] Natural)
    @key[return] String;
 @end{Example}
-
-Returns the slice at positions Low through High in the string represented
+@Trailing@;Returns the slice at positions Low through High in the string represented
 by Source; propagates Index_Error if
 Low > Length(Source)+1.
 @end{DescribeCode}

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:44 $}
+@Comment{$Date: 2000/08/23 00:31:01 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1482,13 +1482,19 @@ so long as the formal has unknown discriminants.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0037]}
 @Redundant[The formal type also belongs to each class that contains
 the determined class.]
 The primitive subprograms of the type are as for any
 type in the determined class. For a formal type other than a formal
-derived type, these are the predefined operators of the type;
-they are implicitly declared immediately after the declaration
-of the formal type. In an instance, the copy of such an
+derived type, these are the predefined operators of the type@Chg{New=[.
+For an elementary formal type, the predefined operators are implicitly declared
+immediately after the declaration of the formal type. For a composite formal
+type, the predefined operators are implicitly declared either immediately after
+the declaration of the formal type, or later in its immediate scope according
+to the rules of @RefSecNum(Private Operations).],
+Old=[; they are implicitly declared immediately after the declaration
+of the formal type.]} In an instance, the copy of such an
 implicit declaration declares a view of the predefined operator
 of the actual type, even if this operator has been overridden for
 the actual type.
@@ -1507,7 +1513,6 @@ private type, or as a type derived from a (visibly) tagged type.
 (Note that the actual type might be tagged even if the formal type is
 not.)
 @end{Ramification}
-
 @end{StaticSem}
 
 @begin{Notes}
@@ -1731,6 +1736,7 @@ discriminants if a new @nt<discriminant_part> is not specified),
 as for a derived type defined by a @nt<derived_type_definition>
 (see @RefSecNum(Derived Types and Classes)).
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0038]}
 For a formal derived type, the predefined
 operators and inherited user-defined subprograms are determined
 by the ancestor type, and are implicitly declared
@@ -1738,13 +1744,15 @@ at the earliest place, if any, within the immediate scope of the
 formal type, where the corresponding primitive subprogram
 of the ancestor is visible (see @RefSecNum{Private Operations}).
 In an instance, the copy of such an implicit declaration declares a view
-of the corresponding primitive subprogram of the ancestor,
+of the corresponding primitive subprogram of the ancestor@Chg{New=[ of the
+formal derived type],Old=[]},
 even if this primitive has been overridden for the actual type.
-@Redundant[In the case of a
-formal private extension, however,
+@Chg{New=[When the ancestor of the formal derived type is itself a formal type,
+the copy of the implicit declaration declares a view of the corresponding
+copied operation of the ancestor.],Old=[]}
+@Redundant[In the case of a formal private extension, however,
 the tag of the formal type is that of the actual type,
-so if the tag in a call is statically determined to be that of the
-formal type,
+so if the tag in a call is statically determined to be that of the formal type,
 the body executed will be that corresponding to the actual type.]
 @begin{Ramification}
 The above rule defining the properties of primitive subprograms in an
@@ -2257,6 +2265,10 @@ statically matching subtypes.
 For other kinds of formals, the actuals match if they statically
 denote the same entity.
 @end{Itemize}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0039]}
+@Chg{New=[For the purposes of matching, any actual parameter that is the name
+of a formal object of mode @key{in} is replaced by the formal object's actual
+expression (recursively).],Old=[]}
 @end{Legality}
 
 @begin{StaticSem}

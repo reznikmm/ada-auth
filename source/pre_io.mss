@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:27 $}
+@Comment{$Date: 2000/08/23 00:31:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -116,7 +116,7 @@ both reading and writing, or only writing are to be performed.
 These values correspond respectively to the cases where only reading,
 only writing, or only appending are to be performed.
 
-The mode of a file can be changed.
+@Trailing@;The mode of a file can be changed.
 @end{DescribeCode}
 
 Several file management operations are common to Sequential_IO,
@@ -262,7 +262,7 @@ a property of a file object, not of an external file.
 
    @key[function] @AdaSubDefn{End_Of_File}(File : @key[in] File_Type) @key[return] Boolean;
 
-   --@RI{ Exceptions}
+@keepnext   --@RI{ Exceptions}
 
    @AdaDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
    @AdaDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
@@ -319,7 +319,7 @@ additional effects described in subclause
     specifies the use of the default options of the implementation
     for the external file.
 
-    The exception Status_Error is propagated if the given file is
+    @Trailing@;The exception Status_Error is propagated if the given file is
     already open. The exception Name_Error is propagated if the
     string given as Name does not allow the identification of an
     external file. The exception Use_Error is propagated if, for the
@@ -337,7 +337,7 @@ additional effects described in subclause
     having the given name and form, and sets the current mode of
     the given file to the given mode. The given file is left open.
 
-    The exception Status_Error is propagated if the given file is
+    @Trailing@;The exception Status_Error is propagated if the given file is
     already open. The exception Name_Error is propagated if the
     string given as Name does not allow the identification of an
     external file; in particular, this exception is propagated if no
@@ -359,7 +359,7 @@ additional effects described in subclause
     If no elements have been written and the file mode is Append_File,
     then the closed file is unchanged.
 
-    The exception Status_Error is propagated if the given file is not open.
+    @Trailing@;The exception Status_Error is propagated if the given file is not open.
 
 @begin{Example}@Keepnext
 @key[procedure] Delete(File : @key[in] @key[out] File_Type);
@@ -367,7 +367,7 @@ additional effects described in subclause
     Deletes the external file associated with the given file. The
     given file is closed, and the external file ceases to exist.
 
-    The exception Status_Error is propagated if the given file is not
+    @Trailing@;The exception Status_Error is propagated if the given file is not
     open. The exception Use_Error is propagated if
     deletion of the external file is not supported
     by the external environment.
@@ -391,7 +391,7 @@ additional effects described in subclause
     If no elements have been written and the file mode is Append_File,
     then the reset file is unchanged.
 
-    The exception Status_Error is propagated if the file is not open.
+    @Trailing@;The exception Status_Error is propagated if the file is not open.
     The exception Use_Error is propagated if the external environment
     does not support resetting for the external file and, also, if the
     external environment does not support resetting to the specified mode
@@ -402,7 +402,7 @@ additional effects described in subclause
 @end{Example}
     Returns the current mode of the given file.
 
-    The exception Status_Error is propagated if the file is not open.
+    @Trailing@;The exception Status_Error is propagated if the file is not open.
 
 @begin{Example}@Keepnext
 @key[function] Name(File : @key[in] File_Type) @key[return] String;
@@ -414,7 +414,7 @@ additional effects described in subclause
     returned by the function should correspond to a full specification of
     the name.
 
-    The exception Status_Error is propagated if the given file is not
+    @Trailing@;The exception Status_Error is propagated if the given file is not
     open. The exception Use_Error is propagated if the associated
     external file is a temporary file that cannot be opened
     by any name.
@@ -430,7 +430,7 @@ additional effects described in subclause
     is, it should indicate explicitly all options selected,
     including default options).
 
-    The exception Status_Error is propagated if the given file is not open.
+    @Trailing@;The exception Status_Error is propagated if the given file is not open.
 
 @begin{Example}@Keepnext
 @key[function] Is_Open(File : @key[in] File_Type) @key[return] Boolean;
@@ -482,7 +482,7 @@ in the Item parameter.
   generic package Storage_IO (see @RefSecNum{The Generic Package Storage_IO}).
 @end{Discussion}
 
-The exception Mode_Error is propagated if the mode is not In_File.
+@Trailing@;The exception Mode_Error is propagated if the mode is not In_File.
 The exception End_Error is propagated if no more elements can be
 read from the given file.
 The exception Data_Error can be propagated if the element read cannot
@@ -492,13 +492,14 @@ be interpreted as a value of the subtype Element_Type
   Data_Error need not be propagated if the check is too complex.
   See @RefSec{Exceptions in Input-Output}.
 @end{Discussion}
+
 @begin{Example}@Keepnext
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type);
 @end{Example}
 Operates on a file of mode Out_File or Append_File.
 Writes the value of Item to the given file.
 
-The exception Mode_Error is propagated if the mode is not
+@Trailing@;The exception Mode_Error is propagated if the mode is not
 Out_File or Append_File. The exception Use_Error is propagated if the capacity
 of the external file is exceeded.
 
@@ -568,7 +569,7 @@ The exception Mode_Error is propagated if the mode is not In_File.
 
    @key[function] @AdaSubDefn{End_Of_File}(File : @key[in] File_Type) @key[return] Boolean;
 
-   --@RI{ Exceptions}
+@keepnext   --@RI{ Exceptions}
 
    @AdaDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
    @AdaDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
@@ -610,7 +611,7 @@ element whose position in the given file is specified by the
 current index of the file; finally, increases the current
 index by one.
 
-The exception Mode_Error is propagated if the mode of the given
+@Trailing@;The exception Mode_Error is propagated if the mode of the given
 file is Out_File. The exception End_Error is propagated if the
 index to be used exceeds the size of the external file. The
 exception Data_Error can be propagated if the element read cannot be
@@ -630,27 +631,27 @@ whose position in the given file is specified by the current
 index of the file; finally, increases the current index by
 one.
 
-The exception Mode_Error is propagated if the mode of the given
+@Trailing@;The exception Mode_Error is propagated if the mode of the given
 file is In_File. The exception Use_Error is propagated if the
 capacity of the external file is exceeded.
 
 @begin{Example}@Keepnext
 @key[procedure] Set_Index(File : @key[in] File_Type; To : @key[in] Positive_Count);
 @end{Example}
-Operates on a file of any mode. Sets the current index of the
+@Trailing@;Operates on a file of any mode. Sets the current index of the
 given file to the given index value (which may exceed the
 current size of the file).
 
 @begin{Example}@Keepnext
 @key[function] Index(File : @key[in] File_Type) @key[return] Positive_Count;
 @end{Example}
-Operates on a file of any mode. Returns the current index of
+@Trailing@;Operates on a file of any mode. Returns the current index of
 the given file.
 
 @begin{Example}@Keepnext
 @key[function] Size(File : @key[in] File_Type) @key[return] Count;
 @end{Example}
-Operates on a file of any mode. Returns the current size of
+@Trailing@;Operates on a file of any mode. Returns the current size of
 the external file that is associated with the given file.
 
 @begin{Example}@Keepnext
@@ -713,7 +714,7 @@ the construction of user-defined input-output packages.
 
    @key[procedure] @AdaSubDefn{Write}(Buffer : @key[out] Buffer_Type; Item : @key[in]  Element_Type);
 
-   --@RI{ Exceptions}
+@keepnext   --@RI{ Exceptions}
 
    @AdaDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 @key[end] Ada.Storage_IO;
@@ -850,7 +851,7 @@ is the number of the current page. These numbers are values of the
 subtype Positive_Count of the type Count (by convention, the value zero
 of the type Count is used to indicate special conditions).
 @begin{Example}
-@key[type] Count @key[is] @key[range] 0 .. @RI[implementation-defined];
+@Trailing@key[type] Count @key[is] @key[range] 0 .. @RI[implementation-defined];
 @key[subtype] Positive_Count @key[is] Count @key[range] 1 .. Count'Last;
 @end{Example}
 
@@ -1233,7 +1234,7 @@ Append_File is new in Ada 95.
                     Set  : @key[in]  Type_Set := Default_Setting);
    @key[end] Enumeration_IO;
 
---@RI{ Exceptions}
+@keepnext@;--@RI{ Exceptions}
 
    @AdaDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
    @AdaDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
@@ -1301,14 +1302,14 @@ implementation.
      page is already terminated; then outputs a file terminator.
 
 
-For the procedure Reset: If the file has the current mode Out_File
- or Append_File, has the effect of calling New_Page, unless the
-       current page is already terminated; then outputs a file terminator.
-       The current column, line, and page numbers are set to
-       one, and the line and page lengths to Unbounded.
-       If the new mode is Append_File, it is implementation defined whether
-       a page terminator will separate preexisting text in the file from the
-       new text to be written.
+  For the procedure Reset: If the file has the current mode Out_File
+  or Append_File, has the effect of calling New_Page, unless the
+  current page is already terminated; then outputs a file terminator.
+  The current column, line, and page numbers are set to
+  one, and the line and page lengths to Unbounded.
+  If the new mode is Append_File, it is implementation defined whether
+  a page terminator will separate preexisting text in the file from the
+  new text to be written.
 @begin{Reason}
 The behavior of Reset should be similar to closing a file and
        reopening it with the given mode@end{reason}
@@ -1344,76 +1345,77 @@ or when application-dependent error-related text is to be output.
 @begin{Example}@Keepnext
 @key[procedure] Set_Input(File : @key[in] File_Type);
 @end{Example}
+  Operates on a file of mode In_File. Sets the current default
+  input file to File.
 
-          Operates on a file of mode In_File. Sets the current default
-          input file to File.
+  @Trailing@;The exception Status_Error is propagated if the given file is not
+  open. The exception Mode_Error is propagated if the mode of the
+  given file is not In_File.
 
-          The exception Status_Error is propagated if the given file is not
-          open. The exception Mode_Error is propagated if the mode of the
-          given file is not In_File.
 @begin{Example}@Keepnext
 @key[procedure] Set_Output(File : @key[in] File_Type);
 @key[procedure] Set_Error (File : @key[in] File_Type);
 @end{Example}
+  @Trailing@;Each operates on a file of mode Out_File or Append_File.
+  Set_Output sets the current default output file to File.
+  Set_Error sets the current default error file to File.
+  The exception Status_Error is propagated if the given file is not
+  open. The exception Mode_Error is propagated if the mode of the
+  given file is not Out_File or Append_File.
 
-          Each operates on a file of mode Out_File or Append_File. Set_Output
-          sets the current default output file to File.
-          Set_Error sets the current default error file to File.
-          The exception Status_Error is propagated if the given file is not
-          open. The exception Mode_Error is propagated if the mode of the
-          given file is not Out_File or Append_File.
 @begin{Example}@Keepnext
 @key[function] Standard_Input @key[return] File_Type;
 @key[function] Standard_Input @key[return] File_Access;
 @end{Example}
-
-          Returns the standard input file (see @RefSecNum{Text Input-Output}),
-or an access value designating the standard input file, respectively.
+  @Trailing@;Returns the standard input file (see @RefSecNum{Text Input-Output}),
+  or an access value designating the standard input file, respectively.
 
 @begin{Example}@Keepnext
 @key[function] Standard_Output @key[return] File_Type;
 @key[function] Standard_Output @key[return] File_Access;
 @end{Example}
-
-          Returns the standard output file (see @RefSecNum{Text Input-Output})
-or an access value designating the standard output file, respectively.
+  @Trailing@;Returns the standard output file (see @RefSecNum{Text Input-Output})
+  or an access value designating the standard output file, respectively.
 
 @begin{Example}@Keepnext
 @key[function] Standard_Error @key[return] File_Type;
 @key[function] Standard_Error @key[return] File_Access;
 @end{Example}
+  @Trailing@;Returns the standard error file (see @RefSecNum{Text Input-Output}),
+  or an access value designating the standard output file, respectively.
 
-          Returns the standard error file (see @RefSecNum{Text Input-Output}),
-or an access value designating the standard output file, respectively.
-
-The Form strings implicitly associated with the opening of
+@end{DescribeCode}
+@Comment{The following paragraph was originally in a DescribeCode section; but
+that clearly was not intended; I've fixed it. (This changes the indentation of
+the paragraph in the old version too, but the change is harmless.) RLB-21-08-2000}
+@Trailing@;The Form strings implicitly associated with the opening of
 Standard_Input, Standard_Output, and
 Standard_Error at the start of program execution are implementation defined.
+@begin{DescribeCode}
+
 @begin{Example}@Keepnext
 @key[function] Current_Input @key[return] File_Type;
 @key[function] Current_Input @key[return] File_Access;
 @end{Example}
-
-          Returns the current default input file,
-or an access value designating the current default input file,
-respectively.
+  @Trailing@;Returns the current default input file,
+  or an access value designating the current default input file,
+  respectively.
 
 @begin{Example}@Keepnext
 @key[function] Current_Output @key[return] File_Type;
 @key[function] Current_Output @key[return] File_Access;
 @end{Example}
+  @Trailing@;Returns the current default output file,
+  or an access value designating the current default output file,
+  respectively.
 
-          Returns the current default output file,
-or an access value designating the current default output file,
-respectively.
 @begin{Example}@Keepnext
 @key[function] Current_Error @key[return] File_Type;
 @key[function] Current_Error @key[return] File_Access;
 @end{Example}
-
-          Returns the current default error file,
-or an access value designating the current default error file,
-respectively.
+  @Trailing@;Returns the current default error file,
+  or an access value designating the current default error file,
+  respectively.
 
 @begin{Example}@Keepnext
 @key[procedure] Flush (File : @key[in] @key[out] File_Type);
@@ -1469,47 +1471,41 @@ file is not Out_File or Append_File.
 @key[procedure] Set_Line_Length(File : @key[in] File_Type; To : @key[in] Count);
 @key[procedure] Set_Line_Length(To   : @key[in] Count);
 @end{Example}
-
-          Sets the maximum line length of the specified output or append file to
-          the number of characters specified by To. The value zero for
-          To specifies an unbounded line length.
+  Sets the maximum line length of the specified output or
+  append file to the number of characters specified by To. The value zero for
+  To specifies an unbounded line length.
 @begin{Ramification}
 The setting
 does not affect the lengths of lines in the existing file, rather it only
 influences subsequent output operations.@end{ramification}
 
-          The exception Use_Error is propagated if the specified line length
-          is inappropriate for the associated external file.
+  @Trailing@;The exception Use_Error is propagated if the specified line length
+  is inappropriate for the associated external file.
 
 @begin{Example}@Keepnext
 @key[procedure] Set_Page_Length(File : @key[in] File_Type; To : @key[in] Count);
 @key[procedure] Set_Page_Length(To   : @key[in] Count);
 @end{Example}
+  Sets the maximum page length of the specified output or append file to
+  the number of lines specified by To. The value zero for To
+  specifies an unbounded page length.
 
-          Sets the maximum page length of the specified output or append file to
-          the number of lines specified by To. The value zero for To
-          specifies an unbounded page length.
-
-          The exception Use_Error is propagated if the specified page length
-          is inappropriate for the associated external file.
+  @Trailing@;The exception Use_Error is propagated if the specified page length
+  is inappropriate for the associated external file.
 
 @begin{Example}@Keepnext
 @key[function] Line_Length(File : @key[in] File_Type) @key[return] Count;
 @key[function] Line_Length @key[return] Count;
 @end{Example}
-
-          Returns the maximum line length currently set for the
-          specified output or append file, or zero if the line length is
-          unbounded.
+  @Trailing@;Returns the maximum line length currently set for the
+  specified output or append file, or zero if the line length is unbounded.
 
 @begin{Example}@Keepnext
 @key[function] Page_Length(File : @key[in] File_Type) @key[return] Count;
 @key[function] Page_Length @key[return] Count;
 @end{Example}
-
-          Returns the maximum page length currently set for the
-          specified output or append file, or zero if the page length is
-          unbounded.
+  Returns the maximum page length currently set for the
+  specified output or append file, or zero if the page length is unbounded.
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -1528,119 +1524,119 @@ used is not open.
 @key[procedure] New_Line(Spacing : @key[in] Positive_Count := 1);
 @end{Example}
 
-          Operates on a file of mode Out_File or Append_File.
+  Operates on a file of mode Out_File or Append_File.
 
-          For a Spacing of one: Outputs a line terminator and sets the
-          current column number to one. Then increments the current
-          line number by one, except in the case that the current line
-          number is already greater than or equal to the maximum page
-          length, for a bounded page length; in that case a page
-          terminator is output, the current page number is incremented
-          by one, and the current line number is set to one.
+  For a Spacing of one: Outputs a line terminator and sets the
+  current column number to one. Then increments the current
+  line number by one, except in the case that the current line
+  number is already greater than or equal to the maximum page
+  length, for a bounded page length; in that case a page
+  terminator is output, the current page number is incremented
+  by one, and the current line number is set to one.
 
-          For a Spacing greater than one, the above actions are
-          performed Spacing times.
+  For a Spacing greater than one, the above actions are
+  performed Spacing times.
 
-          The exception Mode_Error is propagated if the mode is not
-          Out_File or Append_File.
+  @Trailing@;The exception Mode_Error is propagated if the mode is not
+  Out_File or Append_File.
 
 @begin{Example}@Keepnext
 @key[procedure] Skip_Line(File  : @key[in] File_Type; Spacing : @key[in] Positive_Count := 1);
 @key[procedure] Skip_Line(Spacing : @key[in] Positive_Count := 1);
 @end{Example}
 
-          Operates on a file of mode In_File.
+  Operates on a file of mode In_File.
 
-          For a Spacing of one: Reads and discards all characters until
-          a line terminator has been read, and then sets the current
-          column number to one. If the line terminator is not
-          immediately followed by a page terminator, the current line
-          number is incremented by one. Otherwise, if the line
-          terminator is immediately followed by a page terminator, then
-          the page terminator is skipped, the current page number is
-          incremented by one, and the current line number is set to one.
+  For a Spacing of one: Reads and discards all characters until
+  a line terminator has been read, and then sets the current
+  column number to one. If the line terminator is not
+  immediately followed by a page terminator, the current line
+  number is incremented by one. Otherwise, if the line
+  terminator is immediately followed by a page terminator, then
+  the page terminator is skipped, the current page number is
+  incremented by one, and the current line number is set to one.
 
-          For a Spacing greater than one, the above actions are
-          performed Spacing times.
+  For a Spacing greater than one, the above actions are
+  performed Spacing times.
 
-          The exception Mode_Error is propagated if the mode is not In_File.
-          The exception End_Error is propagated if an attempt is made to
-          read a file terminator.
+  @Trailing@;The exception Mode_Error is propagated if the mode is not In_File.
+  The exception End_Error is propagated if an attempt is made to
+  read a file terminator.
 
 @begin{Example}@Keepnext
 @key[function] End_Of_Line(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_Line @key[return] Boolean;
 @end{Example}
+  Operates on a file of mode In_File. Returns True if a line
+  terminator or a file terminator is next; otherwise returns False.
 
-          Operates on a file of mode In_File. Returns True if a line
-          terminator or a file terminator is next; otherwise returns
-          False.
-
-          The exception Mode_Error is propagated if the mode is not In_File.
+  @Trailing@;The exception Mode_Error is propagated if the mode is not In_File.
 
 @begin{Example}@Keepnext
 @key[procedure] New_Page(File : @key[in] File_Type);
 @key[procedure] New_Page;
 @end{Example}
 
-          Operates on a file of mode Out_File or Append_File. Outputs a line
-          terminator if the current line is not terminated, or if the
-          current page is empty (that is, if the current column and line
-          numbers are both equal to one). Then outputs a page
-          terminator, which terminates the current page. Adds one to
-          the current page number and sets the current column and line
-          numbers to one.
+  Operates on a file of mode Out_File or Append_File. Outputs a line
+  terminator if the current line is not terminated, or if the
+  current page is empty (that is, if the current column and line
+  numbers are both equal to one). Then outputs a page
+  terminator, which terminates the current page. Adds one to
+  the current page number and sets the current column and line
+  numbers to one.
 
-          The exception Mode_Error is propagated if the mode is not
-          Out_File or Append_File.
+  @Trailing@;The exception Mode_Error is propagated if the mode is not
+  Out_File or Append_File.
 
 @begin{Example}@Keepnext
 @key[procedure] Skip_Page(File : @key[in] File_Type);
 @key[procedure] Skip_Page;
 @end{Example}
+  Operates on a file of mode In_File. Reads and discards all
+  characters and line terminators until a page terminator has
+  been read. Then adds one to the current page number, and sets
+  the current column and line numbers to one.
 
-          Operates on a file of mode In_File. Reads and discards all
-          characters and line terminators until a page terminator has
-          been read. Then adds one to the current page number, and sets
-          the current column and line numbers to one.
-
-          The exception Mode_Error is propagated if the mode is not In_File.
-          The exception End_Error is propagated if an attempt is made to
-          read a file terminator.
+  @Trailing@;The exception Mode_Error is propagated if the mode is not In_File.
+  The exception End_Error is propagated if an attempt is made to
+  read a file terminator.
 
 @begin{Example}@Keepnext
 @key[function] End_Of_Page(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_Page @key[return] Boolean;
 @end{Example}
+  Operates on a file of mode In_File. Returns True if the
+  combination of a line terminator and a page terminator is
+  next, or if a file terminator is next; otherwise returns
+  False.
 
-          Operates on a file of mode In_File. Returns True if the
-          combination of a line terminator and a page terminator is
-          next, or if a file terminator is next; otherwise returns
-          False.
-
-          The exception Mode_Error is propagated if the mode is not In_File.
+  @Trailing@;The exception Mode_Error is propagated if the mode is not In_File.
 
 @begin{Example}@Keepnext
 @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_File @key[return] Boolean;
 @end{Example}
 
-          Operates on a file of mode In_File. Returns True if a file
-          terminator is next, or if the combination of a line, a page,
-          and a file terminator is next; otherwise returns False.
+  Operates on a file of mode In_File. Returns True if a file
+  terminator is next, or if the combination of a line, a page,
+  and a file terminator is next; otherwise returns False.
 
-          The exception Mode_Error is propagated if the mode is not In_File.
+  @Trailing@;The exception Mode_Error is propagated if the mode is not In_File.
 
+@end{DescribeCode}
+@Comment{The following paragraph was originally in a DescribeCode section; but
+that clearly was not intended; I've fixed it. (This changes the indentation of
+the paragraph in the old version too, but the change is harmless.) RLB-21-08-2000}
 The following subprograms provide for the control of the current
 position of reading or writing in a file. In all cases, the default
 file is the current output file.
+@begin{DescribeCode}
 
 @begin{Example}@Keepnext
 @key[procedure] Set_Col(File : @key[in] File_Type; To : @key[in] Positive_Count);
 @key[procedure] Set_Col(To   : @key[in] Positive_Count);
 @end{Example}
-
-          @Leading@;If the file mode is Out_File or Append_File:
+  @Leading@;If the file mode is Out_File or Append_File:
 @begin{itemize}
                If the value specified by To is greater than the current
                column number, outputs spaces, adding one to the current
@@ -1659,7 +1655,7 @@ file is the current output file.
                conventional value zero).
 @end{itemize}
 
-          @Leading@;If the file mode is In_File:
+  @Leading@;If the file mode is In_File:
 @begin{itemize}
                Reads (and discards) individual characters, line
                terminators, and page terminators, until the next
@@ -1673,15 +1669,16 @@ file is the current output file.
                until a line is reached that has a character at the
                specified column position.)
 
-               The exception End_Error is propagated if an attempt is made
-               to read a file terminator.
+    @Trailing@;The exception End_Error is propagated if an attempt is made
+    to read a file terminator.
 @end{itemize}
+
 @begin{Example}@Keepnext
 @key[procedure] Set_Line(File : @key[in] File_Type; To : @key[in] Positive_Count);
 @key[procedure] Set_Line(To   : @key[in] Positive_Count);
 @end{Example}
 
-          @Leading@;If the file mode is Out_File or Append_File:
+  @Leading@;If the file mode is Out_File or Append_File:
 @begin{itemize}
                If the value specified by To is greater than the current
                line number, has the effect of repeatedly calling
@@ -1699,7 +1696,7 @@ file is the current output file.
                conventional value zero).
 @end{itemize}
 
-          @Leading@;If the mode is In_File:
+  @Leading@;If the mode is In_File:
 @begin{itemize}
                Has the effect of repeatedly calling Skip_Line (with a
                spacing of one), until the current line number equals the
@@ -1708,18 +1705,18 @@ file is the current output file.
                be skipped until a page is reached that has a line at the
                specified line position.)
 
-               The exception End_Error is propagated if an attempt is made
-               to read a file terminator.
+    @Trailing@;The exception End_Error is propagated if an attempt is made
+    to read a file terminator.
 @end{itemize}
 @begin{Example}@Keepnext
 @key[function] Col(File : @key[in] File_Type) @key[return] Positive_Count;
 @key[function] Col @key[return] Positive_Count;
 @end{Example}
 
-          Returns the current column number.
+  Returns the current column number.
 
-          The exception Layout_Error is propagated if this number exceeds
-          Count'Last.
+  @Trailing@;The exception Layout_Error is propagated if this number exceeds
+  Count'Last.
 
 @begin{Example}@Keepnext
 @key[function] Line(File : @key[in] File_Type) @key[return] Positive_Count;
@@ -1728,18 +1725,18 @@ file is the current output file.
 
           Returns the current line number.
 
-          The exception Layout_Error is propagated if this number exceeds
-          Count'Last.
+  @Trailing@;The exception Layout_Error is propagated if this number exceeds
+  Count'Last.
 
 @begin{Example}@Keepnext
 @key[function] Page(File : @key[in] File_Type) @key[return] Positive_Count;
 @key[function] Page @key[return] Positive_Count;
 @end{Example}
+  Returns the current page number.
 
-          Returns the current page number.
+  @Trailing@;The exception Layout_Error is propagated if this number exceeds
+  Count'Last.
 
-          The exception Layout_Error is propagated if this number exceeds
-          Count'Last.
 @end{DescribeCode}
 
 The column number, line number, or page number are allowed to exceed
@@ -1897,23 +1894,23 @@ provided:
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Character);
 @key[procedure] Get(Item : @key[out] Character);
 @end{Example}
+  After skipping any line terminators and any page terminators,
+  reads the next character from the specified input file and
+  returns the value of this character in the out parameter Item.
 
-          After skipping any line terminators and any page terminators,
-          reads the next character from the specified input file and
-          returns the value of this character in the out parameter Item.
+  @Trailing@;The exception End_Error is propagated if an attempt is made to
+  skip a file terminator.
 
-          The exception End_Error is propagated if an attempt is made to
-          skip a file terminator.
 @begin{Example}@Keepnext
 @key[procedure] Put(File : @key[in] File_Type; Item : @key[in] Character);
 @key[procedure] Put(Item : @key[in] Character);
 @end{Example}
+  @Trailing@;If the line length of the specified output file is bounded
+  (that is, does not have the conventional value zero), and the
+  current column number exceeds it, has the effect of calling
+  New_Line with a spacing of one. Then, or otherwise, outputs
+  the given character to the file.
 
-          If the line length of the specified output file is bounded
-          (that is, does not have the conventional value zero), and the
-          current column number exceeds it, has the effect of calling
-          New_Line with a spacing of one. Then, or otherwise, outputs
-          the given character to the file.
 @begin{Example}@Keepnext
 @key[procedure] Look_Ahead (File        : @key[in]  File_Type;
                       Item        : @key[out] Character;
@@ -1921,22 +1918,21 @@ provided:
 @key[procedure] Look_Ahead (Item        : @key[out] Character;
                       End_Of_Line : @key[out] Boolean);
 @end{Example}
+  @Trailing@;Mode_Error is propagated if the mode of the file is not In_File.
+  Sets End_Of_Line to True if at end of line, including if at end of
+  page or at end of file; in each of these cases the value of
+  Item is not specified.
+  @PDefn{unspecified}
+  Otherwise End_Of_Line is set to
+  False and Item is set to the the next character (without consuming it)
+  from the file.
 
-Mode_Error is propagated if the mode of the file is not In_File.
-Sets End_Of_Line to True if at end of line, including if at end of
-page or at end of file; in each of these cases the value of
-Item is not specified.
-@PDefn{unspecified}
-Otherwise End_Of_Line is set to
-False and Item is set to the the next character (without consuming it)
-from the file.
 @begin{Example}@Keepnext
 @key[procedure] Get_Immediate(File : @key[in]  File_Type;
                         Item : @key[out] Character);
 @key[procedure] Get_Immediate(Item : @key[out] Character);
 @end{Example}
-
-Reads the next character, either control or graphic, from the specified
+@Trailing@;Reads the next character, either control or graphic, from the specified
 File or the default input file. Mode_Error is propagated if the mode of the
 file is not In_File. End_Error is propagated if at the end of the file.
 The current column, line and page numbers for the file are not affected.
@@ -1948,8 +1944,7 @@ The current column, line and page numbers for the file are not affected.
 @key[procedure] Get_Immediate(Item      : @key[out] Character;
                         Available : @key[out] Boolean);
 @end{Example}
-
-If a character, either control or graphic, is available from the
+@Trailing@;If a character, either control or graphic, is available from the
 specified File or the default input file, then the character is read;
 Available is True and Item contains the value of this character. If a character
 is not available, then Available is False and the value of
@@ -1959,27 +1954,28 @@ Mode_Error is propagated if the mode of the
 file is not In_File. End_Error is propagated if at the end of the file.
 The current column, line and page numbers for the file are not affected.
 
+@end{DescribeCode}
+@Comment{The following paragraph was originally in a DescribeCode section; but
+that clearly was not intended; I've fixed it. (This changes the indentation of
+the paragraph in the old version too, but the change is harmless.) RLB-21-08-2000}
 @Leading@;For an item of type String the following procedures are provided:
+@begin{DescribeCode}
 
 @begin{Example}@Keepnext
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] String);
 @key[procedure] Get(Item : @key[out] String);
 @end{Example}
-
-          Determines the length of the given string and attempts that
-          number of Get operations for successive characters of the
-          string (in particular, no operation is performed if the string
-          is null).
+  @Trailing@;Determines the length of the given string and attempts that
+  number of Get operations for successive characters of the
+  string (in particular, no operation is performed if the string is null).
 
 @begin{Example}@Keepnext
 @key[procedure] Put(File : @key[in] File_Type; Item : @key[in] String);
 @key[procedure] Put(Item : @key[in] String);
 @end{Example}
-
-          Determines the length of the given string and attempts that
-          number of Put operations for successive characters of the
-          string (in particular, no operation is performed if the string
-          is null).
+  @Trailing@;Determines the length of the given string and attempts that
+  number of Put operations for successive characters of the
+  string (in particular, no operation is performed if the string is null).
 
 @begin{Example}@Keepnext
 @key[procedure] Get_Line(File : @key[in] File_Type;
@@ -1987,29 +1983,27 @@ The current column, line and page numbers for the file are not affected.
                               Last : @key[out] Natural);
 @key[procedure] Get_Line(Item : @key[out] String;   Last : @key[out] Natural);
 @end{Example}
+  Reads successive characters from the specified input file and assigns
+  them to successive characters of the specified string.
+  Reading stops if the end of the string is met. Reading also stops if
+  the end of the line is met before meeting the end of the string;
+  in this case Skip_Line is (in effect) called with a spacing of 1.
+  @PDefn{unspecified}
+  The values of characters not assigned are not specified.
 
-Reads successive characters from the specified input file and assigns
-them to successive characters of the specified string.
-Reading stops if the end of the string is met. Reading also stops if
-the end of the line is met before meeting the end of the string;
-in this case Skip_Line is (in effect) called with a spacing of 1.
-@PDefn{unspecified}
-The values of characters not assigned are not specified.
-
-          If characters are read, returns in Last the index value such
-          that Item(Last) is the last character assigned (the index of
-          the first character assigned is Item'First). If no characters
-          are read, returns in Last an index value that is one less than
-          Item'First. The exception End_Error is propagated if an attempt
-          is made to skip a file terminator.
+  @Trailing@;If characters are read, returns in Last the index value such
+  that Item(Last) is the last character assigned (the index of
+  the first character assigned is Item'First). If no characters
+  are read, returns in Last an index value that is one less than
+  Item'First. The exception End_Error is propagated if an attempt
+  is made to skip a file terminator.
 
 @begin{Example}@Keepnext
 @key[procedure] Put_Line(File : @key[in] File_Type; Item : @key[in] String);
 @key[procedure] Put_Line(Item : @key[in] String);
 @end{Example}
-
-          Calls the procedure Put for the given string, and then the
-          procedure New_Line with a spacing of one.
+   Calls the procedure Put for the given string, and then the
+   procedure New_Line with a spacing of one.
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -2050,15 +2044,14 @@ integer or modular
 type respectively
 (indicated by Num in the specifications).
 
-Values are output as decimal or based literals, without low line
+@Leading@;Values are output as decimal or based literals, without low line
 characters or exponent, and, for Integer_IO, preceded by a minus sign if negative. The
 format (which includes any leading spaces and minus sign) can be
 specified by an optional field width parameter. Values of widths of
 fields in output formats are of the nonnegative integer subtype Field.
 Values of bases are of the integer subtype Number_Base.
-
 @begin{Example}
-@key[subtype] Number_Base @key[is] Integer @key[range] 2 .. 16;
+@Trailing@key[subtype] Number_Base @key[is] Integer @key[range] 2 .. 16;
 @end{Example}
 
 @Leading@;The default field width and base to be used by output procedures are
@@ -2066,19 +2059,16 @@ defined by the following variables that are declared in the generic
 packages Integer_IO and Modular_IO:
 
 @begin{Example}
-Default_Width : Field := Num'Width;
+@Trailing@;Default_Width : Field := Num'Width;
 Default_Base  : Number_Base := 10;
 @end{Example}
 
-@begin{Wide}
 @Leading@Keepnext@;The following procedures are provided:
-@end{Wide}
 @begin{DescribeCode}
 @begin{Example}@Keepnext
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Num; Width : @key[in] Field := 0);
 @key[procedure] Get(Item : @key[out] Num; Width : @key[in] Field := 0);
 @end{Example}
-
       If the value of the parameter Width is zero, skips any leading
       blanks, line terminators, or page terminators, then
       reads a plus sign if present or (for a signed type only)
@@ -2093,7 +2083,7 @@ Default_Base  : Number_Base := 10;
       Returns, in the parameter Item, the value of type Num
       that corresponds to the sequence input.
 
-      The exception Data_Error is propagated if the sequence of characters
+      @Trailing@;The exception Data_Error is propagated if the sequence of characters
       read does not form a legal integer literal or if the value obtained is
       not of the subtype Num (for Integer_IO) or is not in the base
       range of Num (for Modular_IO).
@@ -2108,7 +2098,6 @@ Default_Base  : Number_Base := 10;
               Width : @key[in] Field := Default_Width;
               Base  : @key[in] Number_Base := Default_Base);
 @end{Example}
-
           Outputs the value of the parameter Item as an integer literal,
           with no low lines, no exponent, and no leading zeros (but a
           single zero for the value zero), and a preceding minus sign
@@ -2118,7 +2107,7 @@ Default_Base  : Number_Base := 10;
           than Width characters, then leading spaces are first output to
           make up the difference.
 
-          Uses the syntax for decimal literal if the parameter Base has
+          @Trailing@;Uses the syntax for decimal literal if the parameter Base has
           the value ten (either explicitly or through Default_Base);
           otherwise, uses the syntax for based literal, with any letters
           in upper case.
@@ -2126,7 +2115,6 @@ Default_Base  : Number_Base := 10;
 @begin{Example}@Keepnext
 @key[procedure] Get(From : @key[in] String; Item : @key[out] Num; Last : @key[out] Positive);
 @end{Example}
-
           Reads an integer value from the beginning of the given string,
           following the same rules as the Get procedure that reads an
           integer value from a file, but treating the end of the string
@@ -2135,7 +2123,7 @@ Default_Base  : Number_Base := 10;
           Returns in Last the index value such that From(Last) is the
           last character read.
 
-          The exception Data_Error is propagated if the sequence input does
+          @Trailing@;The exception Data_Error is propagated if the sequence input does
           not have the required syntax or if the value obtained is not
           of the subtype Num.
 
@@ -2144,12 +2132,10 @@ Default_Base  : Number_Base := 10;
               Item : @key[in] Num;
               Base : @key[in] Number_Base := Default_Base);
 @end{Example}
-
-          Outputs the value of the parameter Item to the given string,
+          @Trailing@;Outputs the value of the parameter Item to the given string,
           following the same rule as for output to a file, using the
           length of the given string as the value for Width.
 @end{DescribeCode}
-
 
 @Leading@;Integer_Text_IO is a library package that is a nongeneric equivalent
 to Text_IO.Integer_IO for the predefined type Integer:
@@ -2229,7 +2215,7 @@ defined by the following variables that are declared in the generic
 package Float_IO:
 
 @begin{Example}
-Default_Fore : Field := 2;
+@Trailing@;Default_Fore : Field := 2;
 Default_Aft  : Field := Num'Digits-1;
 Default_Exp  : Field := 3;
 @end{Example}
@@ -2239,14 +2225,12 @@ fields are defined by the following variables that are declared in the
 generic packages Fixed_IO and Decimal_IO, respectively:
 
 @begin{Example}
-Default_Fore : Field := Num'Fore;
+@Trailing@;Default_Fore : Field := Num'Fore;
 Default_Aft  : Field := Num'Aft;
 Default_Exp  : Field := 0;
 @end{Example}
 
-@begin{Wide}
 @Leading@Keepnext@;The following procedures are provided:
-@end{Wide}
 @begin{DescribeCode}
 @begin{Example}@Keepnext
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Num; Width : @key[in] Field := 0);
@@ -2280,7 +2264,7 @@ possible sequence of characters matching the syntax of any of the following
           if none has been specified) of a zero value if Num is a floating
           point type and Num'Signed_Zeros is True.
 
-          The exception Data_Error is propagated if the sequence input does
+          @Trailing@;The exception Data_Error is propagated if the sequence input does
           not have the required syntax or if the value obtained is not
           of the subtype Num.
 
@@ -2296,7 +2280,6 @@ possible sequence of characters matching the syntax of any of the following
               Aft  : @key[in] Field := Default_Aft;
               Exp  : @key[in] Field := Default_Exp);
 @end{Example}
-
 Outputs the value of the parameter Item as a decimal literal
 with the format defined by Fore, Aft and Exp. If the value is
 negative, or if Num is a floating point type where Num'Signed_Zeros is True and
@@ -2319,7 +2302,7 @@ or is one if Aft equals zero.
 The value is rounded; a value of exactly one half in the last place
 is rounded away from zero.
 
-If Exp has the value zero, there is no exponent part. If Exp
+@Trailing@;If Exp has the value zero, there is no exponent part. If Exp
 has a value greater than zero, then the exponent part to be
 output has as many digits as are needed to represent the
 exponent part of the value of Item (for which a single digit
@@ -2332,7 +2315,6 @@ the exponent has the value zero.
 @begin{Example}@Keepnext
 @key[procedure] Get(From : @key[in] String; Item : @key[out] Num; Last : @key[out] Positive);
 @end{Example}
-
           Reads a real value from the beginning of the given string,
           following the same rule as the Get procedure that reads a real
           value from a file, but treating the end of the string as a
@@ -2341,7 +2323,7 @@ the exponent has the value zero.
           Last the index value such that From(Last) is the last
           character read.
 
-          The exception Data_Error is propagated if the sequence input does
+          @Trailing@;The exception Data_Error is propagated if the sequence input does
           not have the required syntax, or if the value obtained is not
           of the subtype Num.
 
@@ -2351,8 +2333,7 @@ the exponent has the value zero.
               Aft  : @key[in] Field := Default_Aft;
               Exp  : @key[in] Field := Default_Exp);
 @end{Example}
-
-          Outputs the value of the parameter Item to the given string,
+          @Trailing@;Outputs the value of the parameter Item to the given string,
           following the same rule as for output to a file, using a value
           for Fore such that the sequence of characters output exactly
           fills the string, including any leading spaces.
@@ -2446,7 +2427,7 @@ identifiers. This is specified by the parameter Set, which is of the
 enumeration type Type_Set.
 
 @begin{Example}
-@key[type] Type_Set @key[is] (Lower_Case, Upper_Case);
+@Trailing@key[type] Type_Set @key[is] (Lower_Case, Upper_Case);
 @end{Example}
 
 @Leading@;The format (which includes any trailing spaces) can be specified
@@ -2455,19 +2436,16 @@ are defined by the following variables that are declared in the generic
 package Enumeration_IO:
 
 @begin{Example}
-Default_Width   : Field := 0;
+@Trailing@;Default_Width   : Field := 0;
 Default_Setting : Type_Set := Upper_Case;
 @end{Example}
 
-@begin{Wide}
 @Leading@Keepnext@;The following procedures are provided:
-@end{Wide}
 @begin{DescribeCode}
 @begin{Example}@Keepnext
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Enum);
 @key[procedure] Get(Item : @key[out] Enum);
 @end{Example}
-
           After skipping any leading blanks, line terminators, or page
           terminators, reads an identifier according to the syntax of
           this lexical element (lower and upper case being considered
@@ -2476,7 +2454,7 @@ Default_Setting : Type_Set := Upper_Case;
           the parameter Item, the value of type Enum that corresponds to
           the sequence input.
 
-          The exception Data_Error is propagated if the sequence input does
+          @Trailing@;The exception Data_Error is propagated if the sequence input does
           not have the required syntax, or if the identifier or
           character literal does not correspond to a value of the
           subtype Enum.
@@ -2491,8 +2469,7 @@ Default_Setting : Type_Set := Upper_Case;
               Width : @key[in] Field := Default_Width;
               Set   : @key[in] Type_Set := Default_Setting);
 @end{Example}
-
-          Outputs the value of the parameter Item as an enumeration
+          @Trailing@;Outputs the value of the parameter Item as an enumeration
           literal (either an identifier or a character literal). The
           optional parameter Set indicates whether lower case or upper
           case is used for identifiers; it has no effect for character
@@ -2512,7 +2489,6 @@ Default_Setting : Type_Set := Upper_Case;
 @begin{Example}@Keepnext
 @key[procedure] Get(From : @key[in] String; Item : @key[out] Enum; Last : @key[out] Positive);
 @end{Example}
-
           Reads an enumeration value from the beginning of the given
           string, following the same rule as the Get procedure that
           reads an enumeration value from a file, but treating the end
@@ -2521,7 +2497,7 @@ Default_Setting : Type_Set := Upper_Case;
           input. Returns in Last the index value such that From(Last)
           is the last character read.
 
-          The exception Data_Error is propagated if the sequence input does
+          @Trailing@;The exception Data_Error is propagated if the sequence input does
           not have the required syntax, or if the identifier or
           character literal does not correspond to a value of the
           subtype Enum.
@@ -2536,8 +2512,7 @@ Default_Setting : Type_Set := Upper_Case;
               Item : @key[in] Enum;
               Set  : @key[in] Type_Set := Default_Setting);
 @end{Example}
-
-          Outputs the value of the parameter Item to the given string,
+          @Trailing@;Outputs the value of the parameter Item to the given string,
           following the same rule as for output to a file, using the
           length of the given string as the value for Width.
 @end{DescribeCode}
