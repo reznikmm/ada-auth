@@ -4,7 +4,8 @@ with ARM_Output,
      Ada.Characters.Handling,
      Ada.Strings.Fixed,
      Ada.Text_IO,
-     Ada.Calendar;
+     Ada.Calendar,
+     Ada.Unchecked_Deallocation;
 package body ARM_Index is
 
     --
@@ -46,6 +47,7 @@ package body ARM_Index is
     --
     --  5/28/00 - RLB - Created package.
     --  8/ 7/00 - RLB - Improved sorting of entries.
+    --  1/31/02 - RLB - Added missing with of Unchecked_Deallocation.
 
 
     Next_Index_Key : Index_Key;
