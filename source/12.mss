@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/03/08 06:44:26 $}
+@Comment{$Date: 2005/03/14 06:22:57 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2726,6 +2726,14 @@ The @i(generic_package_)@nt<name> shall denote a generic package
 (the @i(template) for the formal package);
 the formal package is an instance of the template.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00398-01]}
+@ChgAdded{Version=[2],Text=[A @nt<formal_package_actual_part> shall contain
+at most one @nt<formal_package_association> for each formal parameter. If the
+@nt<formal_package_actual_part> does not include
+@lquotes@key[others] => <>@rquotes, each
+formal parameter without an association shall have a @nt<default_expression>
+or @nt<subprogram_default>.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
 @Leading@;The actual shall be an instance of the template.
 If the @nt<formal_package_actual_part> is (<>)@Chg{Version=[2],
@@ -2840,7 +2848,7 @@ template included in the visible part of @i<A>.]}
 @end{Extend83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00317-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00317-01],ARef=[AI95-00398-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   It's now allowed to mix actuals of a formal package that are specified
   with those that are not specified.]}

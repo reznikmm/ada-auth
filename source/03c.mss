@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/11 05:49:16 $}
+@Comment{$Date: 2005/03/14 06:22:56 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -122,19 +122,23 @@ declared in the specification of the generic unit.
 @end{MetaRules}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @Defn{tagged type}
 A record type or private type that has the reserved word @key(tagged)
-in its declaration is called a @i(tagged) type.
+in its declaration is called a @i(tagged) type.@Chg{Version=[2],New=[ In
+addition, an interface type is tagged type (see @RefSecNum{Interface Types}),
+as is a task or protected type derived from an interface type.],Old=[]}
 @Redundant[When deriving
-from a tagged type, additional components may be defined.
-As for any derived type,
+from a tagged type, @Chg{Version=[2],New=[as],Old=[additional components
+may be defined. As]} for any derived type,
 additional primitive subprograms may be defined,
 and inherited primitive subprograms may be overridden.]
 @Defn{type extension}
 @Defn2{Term=[extension], Sec=(of a type)}
 The derived type is called an @i(extension)
-of the ancestor type, or simply a @i(type extension).
-@Defn2{Term=[extension], Sec=(of a record type)}
+of @Chg{Version=[2],New=[its],Old=[the]} ancestor
+@Chg{Version=[2],New=[types],Old=[type]}, or simply a @i(type
+extension).@Chg{Version=[2],New=[],Old=[ @Defn2{Term=[extension], Sec=(of a record type)}
 @Defn{private extension}
 @Defn2{Term=[extension], Sec=(of a private type)}
 Every type extension is also a tagged type, and
@@ -146,7 +150,24 @@ A private extension, which is a partial view of a record extension,
 can be declared in the visible part of a package
 (see @RefSecNum(Private Types and Private Extensions))
 or in a generic formal part
-(see @RefSecNum(Formal Private and Derived Types)).
+(see @RefSecNum(Formal Private and Derived Types)).]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[extension], Sec=(of a record type)}
+@Defn{private extension}
+@Defn2{Term=[extension], Sec=(of a private type)}
+Every type extension is also a tagged type, and
+is either a @i(record extension) of some other
+tagged type, a @i(private extension), or a
+synchronized tagged type (see @RefSecNum{Interface Types}).
+A record extension is defined by a @nt<derived_type_definition>
+with a @nt<record_extension_part> (see @RefSecNum{Type Extensions}).
+A private extension, which is a partial view of a record extension or
+of a synchronized tagged type,
+can be declared in the visible part of a package
+(see @RefSecNum(Private Types and Private Extensions))
+or in a generic formal part
+(see @RefSecNum(Formal Private and Derived Types)).]}
 @ToGlossary{Term=<Tagged type>,
   Text=<The objects of a tagged type have a run-time type tag,
   which indicates the specific type with which the object was originally
@@ -853,12 +874,12 @@ nonlimited.@Chg{Version=[2],New=[],Old=[
 The accessibility level
 (see @RefSecNum(Operations of Access Types))
 of a record extension shall not be statically deeper than that of its
-parent type.
+parent type.]}
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 these rules apply also in the private part of an
-instance of a generic unit.]}
+instance of a generic unit.
 @begin{Reason}
 If the parent is a limited formal type,
 then the actual might be nonlimited.
@@ -873,8 +894,8 @@ and for a generic formal private extension,
 the actual is all that matters.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[Synchronized tagged types cannot be extended. We have
-this limitation so that all of the data of a task or protected type is
+@ChgAdded{Version=[2],Text=[Synchronized tagged types cannot be extended. We
+have this limitation so that all of the data of a task or protected type is
 defined within the type. Data defined outside of the type wouldn't be
 subject to the mutual exclusion properties of a protected type, and couldn't
 be used by a task, and thus doesn't seem to be worth the potential impact
@@ -2137,9 +2158,10 @@ clearly applies to abstract predefined equality.],Old=[]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[An interface type is an abstract tagged type that
-provides a restricted form of multiple inheritance. A tagged type, task type,
-or protected type may have one or more interface types as ancestors.]}
+@ChgAdded{Version=[2],Text=[@Redundant[An interface type is an abstract tagged
+type that provides a restricted form of multiple inheritance. A tagged type,
+task type, or protected type may have one or more interface types as
+ancestors.]]}
 @end{Intro}
 
 @begin{Syntax}
@@ -2159,7 +2181,7 @@ a specific abstract tagged type that is defined by
 an @nt{interface_type_definition}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[An interface with the reserved word @key{limited},
+@ChgAdded{Version=[2],Text=[An interface with the reserved word @key{limited},
 @key{task}, @key{protected},
 or @key{synchronized} in its definition is termed, respectively, a @i{limited
 interface}, a @i{task interface}, a @i{protected interface}, or a
@@ -2179,18 +2201,26 @@ are synchronized interfaces, and all synchronized interfaces are limited
 interfaces. A view of an object that is of a task interface type (or of a
 corresponding class-wide type) is a task object. Similarly, a view of an
 object that is of a protected interface type (or of a corresponding
-class-wide type) is a protected object.],Old=[]}
+class-wide type) is a protected object.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Defn{synchronized type}
+@ChgAdded{Version=[2],Text=[@Defn{synchronized tagged type}
 @PDefn2{Term=[type],Sec=[synchronized]}
 @PDefn2{Term=[tagged type],Sec=[synchronized]}
 @Defn{task tagged type}
 @Defn{protected tagged type}
-A task or protected type derived from an interface is a tagged type. Such
-a tagged type is called a @i<synchronized> tagged
+@Redundant[A task or protected type derived from an interface is a tagged type.]
+Such a tagged type is called a @i<synchronized> tagged
 type as are synchronized interfaces and private extensions derived from
-synchronized interfaces.],Old=[]}
+synchronized interfaces.]}
+
+@begin{TheProof}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The full definition of tagged types given in
+@RefSecNum{Tagged Types and Type Extensions} includes task and protected types
+derived from interfaces.]}
+@end{TheProof}
+
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @Chg{Version=[2],New=[@Redundant[An interface type has no components.]],Old=[]}
@@ -2232,63 +2262,97 @@ type, a protected type, or a synchronized interface.],Old=[]}
    interface (see @RefSecNum{Formal Interface Types}).]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[A full view shall be a descendant of an interface type if
-and only if the corresponding partial view (if any) is also a descendant of the
-interface type.],Old=[]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00396-01]}
+@ChgAdded{Version=[2],Text=[A full view shall be a descendant of an interface
+type if and only if the corresponding partial view (if any) is also a
+descendant of the interface type, or if the partial view is untagged.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[Consider the following example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{package} P @key{is}
+@ChgAdded{Version=[2],Text=[@key{package} P @key{is}
    @key{package} Pkg @key{is}
       @key{type} Ifc @key{is interface};
       @key{procedure} Foo (X : Ifc) @key{is abstract};
-   @key{end} Pkg;],Old=[]}
+   @key{end} Pkg;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key{type} Parent_1 @key{is tagged null record};],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key{type} Parent_1 @key{is tagged null record};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key{type} T1 @key{is new} Parent_1 @key{with private};
+@ChgAdded{Version=[2],Text=[   @key{type} T1 @key{is new} Parent_1 @key{with private};
 @key{private}
    @key{type} Parent_2 @key{is new} Parent_1 @key{and} Pkg.Ifc @key{with null record}; -- @RI[Illegal.]
-   @key{procedure} Foo (X : Parent_2); -- @RI[Foo #1]],Old=[]}
+   @key{procedure} Foo (X : Parent_2); -- @RI[Foo #1]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key{type} T1 @key{is new} Parent_2 @key{with null record};
-@key{end} P;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key{type} T1 @key{is new} Parent_2 @key{with null record};
+@key{end} P;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{with} P;
+@ChgAdded{Version=[2],Text=[@key{with} P;
 @key{package} P_Client @key{is}
    @key{type} T2 @key{is new} P.T1 @key{and} P.Pkg.Ifc @key{with null record};
    @key{procedure} Foo (X : T2); -- @RI[Foo #2]
    X : T2;
-@key{end} P_Client;],Old=[]}
+@key{end} P_Client;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{with} P_Client;
+@ChgAdded{Version=[2],Text=[@key{with} P_Client;
 @key{package body} P @key{is}
-  ...
-@key{begin}
-   Pkg.Foo (Pkg.Ifc'Class (P_Client.X));      -- @RI[call Foo #2]
-   Pkg.Foo (Pkg.Ifc'Class (T1 (P_Client.X))); -- @RI[call Foo #1]
-@key{end} P;],Old=[]}
+   ...]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} Bar (X : T1'Class) @key{is}
+   @key{begin}
+      Pkg.Foo (X); -- @RI[should call Foo #1 or an override thereof]
+   @key{end};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{begin}
+   Pkg.Foo (Pkg.Ifc'Class (P_Client.X));      -- @RI[should call Foo #2]
+   Bar (T1'Class (P_Client.X));
+@key{end} P;]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[
-    If this example were legal (it is illegal because the completion of T1
-    is descended from an interface that the partial view is not descended
-    from), then we would have two dispatching calls to Pkg.Foo with the two
-    controlling operands having the same tag and yet the user might expect
-    that different bodies should be executed. More likely, they
-    would map to the same body, presumably Foo#2, in which
-    case we have privacy breakage as the body of P should be able to
-    expect that its private definitions are not tampered with by clients.
-    This property is guaranteed for ordinary tagged types, and it should be
-    for interfaces as well.]}
+  @ChgAdded{Version=[2],Text=[If this example were legal
+    (it is illegal because the completion of T1 is descended from an interface
+    that the partial view is not descended from), T2 would implement Ifc twice.
+    Once in the visible part of P, and once in the visible part of P_Client. We
+    would need to decide how Foo #1 and Foo #2 relate to each other. There are
+    two options: either Foo #2 overrides Foo #1, or it doesn't.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If Foo #2 overrides Foo #1,
+    we have a problem because the client redefines a behavior that it doesn't
+    know about, and we try to avoid this at all costs, as it would lead to a
+    breakdown of whatever abstraction was implemented. If the abstraction
+    didn't expose that it implements Ifc, there must be a reason, and it should
+    be able to depend on the fact that no overriding takes place in clients.
+    Also, during maintenance, things may change and the full view might
+    implement a different set of interfaces. Furthermore, the situation is even
+    worse if the full type implements another interface Ifc2 that happens to
+    have a conforming Foo (otherwise unrelated, except for its name and
+    profile).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If Foo #2 doesn't override Foo #1,
+    there is some similarity with the case of normal tagged private types,
+    where a client can declare an operation that happens to conform to some
+    private operation, and that's OK, it gets a different slot. The problem
+    here is that T2 would implement Ifc in two different ways, and through
+    conversions to Ifc'Class we could end up with visibility on these two
+    different implementations. This is the "diamond inheritance" problem of C++
+    all over again, and we would need some kind of a preference rule to pick
+    one implementation. We don't want to go there (if we did, we might as well
+    provide full-fledged multiple inheritance).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Note that there wouldn't be any difficulty to
+    implement the first option, so the restriction is essentially
+    methodological. The second option might be harder to implement, depending
+    on the language rules that we would choose.]}
 @end{Reason}
 
 @begin{Ramification}
@@ -2338,7 +2402,7 @@ an explicit overriding for any nonabstract descendant of the interface.]}
 @end{Notes}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01],ARef=[AI95-00396-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}Interface types
   are new. They provide multiple inheritance of interfaces, similar to the
   facility provided in Java and other recent language designs.]}

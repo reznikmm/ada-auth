@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2005/03/11 23:38:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2005/03/14 06:22:58 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/11 23:38:23 $}
+@Comment{$Date: 2005/03/14 06:22:58 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -588,7 +588,7 @@ policies.]]}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
-pragma Priority_Specific_Dispatching is as follows:]}
+@nt{pragma} Priority_Specific_Dispatching is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -1126,22 +1126,22 @@ policy Round_Robin_Within_Priorities and the package Round_Robin.]]}
 @ChgAdded{Version=[2],Text=[The @SynI{policy}_@nt{identifier}
 Round_Robin_Within_Priorities is a task dispatching policy.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
 language-defined library package exists:]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{with} System;
 @key{with} Ada.Real_Time;
-@key{package} Ada.Dispatching.Round_Robin @key{is}@ChildUnit{Parent=[],Child=[Round_Robin]}
-  Default_Quantum : @key{constant} Ada.Real_Time.Time_Span :=
+@key{package} Ada.Dispatching.Round_Robin @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[Round_Robin]}
+  @AdaDefn{Default_Quantum} : @key{constant} Ada.Real_Time.Time_Span :=
              @RI[implementation-defined];
-  @key{procedure} Set_Quantum (Pri     : @key{in} System.Priority;
+  @key{procedure} @AdaSubDefn{Set_Quantum} (Pri     : @key{in} System.Priority;
                          Quantum : @key{in} Ada.Real_Time.Time_Span);
-  @key{procedure} Set_Quantum (Low, High : @key{in} System.Priority;
+  @key{procedure} @AdaSubDefn{Set_Quantum} (Low, High : @key{in} System.Priority;
                          Quantum   : @key{in} Ada.Real_Time.Time_Span);
-  @key{function} Actual_Quantum (Pri : System.Priority) @key{return} Ada.Real_Time.Time_Span;
-  @key{function} Is_Round_Robin (Pri : System.Priority) @key{return} Boolean;
+  @key{function} @AdaSubDefn{Actual_Quantum} (Pri : System.Priority) @key{return} Ada.Real_Time.Time_Span;
+  @key{function} @AdaSubDefn{Is_Round_Robin} (Pri : System.Priority) @key{return} Boolean;
 @key{end} Ada.Dispatching.Round_Robin;]}
 @end{Example}
 @ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
@@ -1273,154 +1273,275 @@ priority will not be subject to round robin dispatching.]}
 
 @LabeledAddedSubClause{Version=[2],Name=[Earliest Deadline First Dispatching]}
 
-The deadline of a task is an indication of the urgency of the task; it
-represents a point on an ideal physical time line. Unless otherwise specified,
-whenever tasks compete for processors or other implementation-defined
-resources, the resources are allocated to the task with the earliest deadline.
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[The deadline of a task is an indication of the
+urgency of the task; it represents a point on an ideal physical time line.
+Unless otherwise specified, whenever tasks compete for processors or other
+implementation-defined resources, the resources are allocated to the task with
+the earliest deadline.]}
 
-This clause defines a package for representing a task's deadline
-and a dispatching policy that defines Earliest Deadline First (EDF)
-dispatching. A pragma is defined to assign an initial deadline to a task.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[This clause defines a package for representing a
+task's deadline and a dispatching policy that defines Earliest Deadline First
+(EDF) dispatching. A pragma is defined to assign an initial deadline to a task.]}
 
-@i<@s8<Static Semantics>>
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This pragma is the only way of assigning an
+  initial deadline to a task so that its activation can be controlled by EDF
+  scheduling. This is similar to the way pragma Priority is used to give an
+  initial priority to a task.]}
+@end{Discussion}
 
-The @i<policy_>@fa<identifier> EDF_Across_Priorities is a task dispatching policy.
+@end{Intro}
 
-The following language-defined library package exists:
+@begin{Syntax}
 
-@xcode<@b<with> Ada.Real_Time;
-@b<with> Ada.Task_Identification;
-@b<package> Ada.Dispatching.EDF @b<is>
-  @b<subtype> Deadline @b<is> Ada.Real_Time.Time;
-  Default_Deadline : @b<constant> Deadline :=
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Relative_Deadline is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@Syn2{expression});''}
+
+@end{Syntax}
+
+@begin{Resolution}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[The expected type for
+@SynI{relative_deadline_}@nt{expression} is Ada.Real_Time.Time_Span.]}
+
+@end{Resolution}
+
+@begin{Legality}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[A Relative_Deadline pragma is allowed only
+immediately within a @nt{task_definition} or the @nt{declarative_part} of a
+@nt{subprogram_body}. At most one such pragma shall appear within a given
+construct.]}
+
+@end{Legality}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[The @SynI{policy_}@nt{identifier}
+EDF_Across_Priorities is a task dispatching policy.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library package exists:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key{with} Ada.Real_Time;
+@key{with} Ada.Task_Identification;
+@key{package} Ada.Dispatching.EDF @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[EDF]}
+  @key{subtype} @AdaDefn{Deadline} @key{is} Ada.Real_Time.Time;
+  @AdaDefn{Default_Deadline} : @key{constant} Deadline :=
               Ada.Real_Time.Time_Last;
-  @b<procedure> Set_Deadline(D : @b<in> Deadline;
-              T : @b<in> Ada.Task_Identification.Task_ID :=
+  @key{procedure} @AdaSubDefn{Set_Deadline} (D : @key{in} Deadline;
+              T : @key{in} Ada.Task_Identification.Task_ID :=
               Ada.Task_Identification.Current_Task);
-  @b<procedure> Delay_Until_And_Set_Deadline(
-              Delay_Until_Time : @b<in> Ada.Real_Time.Time;
-              Deadline_Offset : @b<in> Ada.Real_Time.Time_Span);
-  @b<function> Get_Deadline(T : @b<in> Ada.Task_Identification.Task_ID :=
-              Ada.Task_Identification.Current_Task) @b<return> Deadline;
-@b<end> Ada.Dispatching.EDF;>
+  @key{procedure} @AdaSubDefn{Delay_Until_And_Set_Deadline} (
+              Delay_Until_Time : @key{in} Ada.Real_Time.Time;
+              Deadline_Offset : @key{in} Ada.Real_Time.Time_Span);
+  @key{function} @AdaSubDefn{Get_Deadline} (T : @key{in} Ada.Task_Identification.Task_ID :=
+              Ada.Task_Identification.Current_Task) @key{return} Deadline;
+@key{end} Ada.Dispatching.EDF;]}
+@end{Example}
 
-@i<@s8<Syntax>>
+@end{StaticSem}
 
-The form of a pragma Relative_Deadline is as follows:
+@begin{LinkTime}
 
-@xindent<@b<pragma> Relative_Deadline (@i<relative_deadline_>@fa<expression>);>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[If the EDF_Across_Priorities policy is specified
+for a partition, then the Ceiling_Locking policy (see
+@RefSecNum{Priority Ceiling Locking}) shall also be
+specified for the partition.]}
 
-@i<@s8<Name Resolution Rules>>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[If the EDF_Across_Priorities policy appears in a
+Priority_Specific_Dispatching pragma
+(see @RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching})
+in a partition, then the
+Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) shall also
+be specified for the partition.]}
 
-The expected type for @i<relative_deadline_>@fa<expression> is
-Ada.Real_Time.Time_Span.
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Unlike the other language-defined dispatching
+  policies, the semantic description of EDF_Across_Priorities assumes
+  Ceiling_Locking (and a ceiling priority) in order to make the mapping between
+  deadlines and priorities work. Thus, we require both policies to be specified
+  if EDF is used in the partition.]}
+@end{Reason}
 
-@i<@s8<Legality Rules>>
+@end{LinkTime}
 
-A Relative_Deadline pragma is allowed only immediately within a
-@fa<task_definition> or the @fa<declarative_part> of a @fa<subprogram_body>.
-At most one such pragma shall appear within a given construct.
+@begin{RunTime}
 
-@i<@s8<Post-Compilation Rules>>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[A Relative_Deadline pragma has no effect if it
+occurs in the @nt{declarative_part} of the @nt{subprogram_body} of a
+subprogram other than the main subprogram.]}
 
-If the EDF_Across_Priorities policy is specified for a partition,
-then the Ceiling_Locking policy (see D.3) shall also be specified for the
-partition.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[The initial absolute deadline of a task containing
+pragma Relative_Deadline is the value of Ada.Real_Time.Clock +
+@SynI{relative_deadline_}@nt{expression}, where the call of Ada.Real_Time.Clock is made
+between task creation and the start of its activation. If there is no
+Relative_Deadline pragma then the initial absolute deadline of a task is the
+value of Default_Deadline. @Redundant[The environment task is also given
+an initial deadline by this rule.]]}
 
-If the EDF_Across_Priorities policy appears in a
-Priority_Specific_Dispatching pragma (see D.2.2) in a partition, then the
-Ceiling_Locking policy (see D.3) shall also be specified for the
-partition.
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The environment task is a normal task by
+  @RefSecNum{Program Execution}, so of course this rule applies to it.]}
+@end{TheProof}
 
-@i<@s8<Dynamic Semantics>>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[The procedure Set_Deadline changes the absolute
+deadline of the task to D. The function Get_Deadline returns the absolute
+deadline of the task.]}
 
-A Relative_Deadline pragma has no effect if it occurs in the declarative_part
-of the subprogram_body of a subprogram other than the main subprogram.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[The procedure Delay_Until_And_Set_Deadline delays
+the calling task until time Delay_Until_Time. When the task becomes runnable
+again it will have deadline Delay_Until_Time + Deadline_Offset.]}
 
-The initial absolute deadline of a task containing pragma Relative_Deadline
-is the value of Ada.Real_Time.Clock + relative_deadline_expression, where
-the call of Ada.Real_Time.Clock is made between task creation and the
-start of its activation. If there is no Relative_Deadline pragma then the
-initial absolute deadline of a task is the value of Default_Deadline.
-The environment task is also given an initial deadline by this rule.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[On a system with a single processor, the setting of
+a task's deadline to the new value occurs immediately at the first point that
+is outside the execution of an abort-deferred operation. If the task is
+currently on a ready queue it is removed and re-entered on to the ready queue
+determined by the rules defined below.]}
 
-The procedure Set_Deadline changes the absolute deadline of the task to D.
-The function Get_Deadline returns the absolute deadline of the task.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[When EDF_Across_Priorities is specified for
+priority range @i<Low>..@i<High> all ready queues in this range are ordered by
+deadline. The task at the head of a queue is the one with the earliest
+deadline.]}
 
-The procedure Delay_Until_And_Set_Deadline delays the calling task until time
-Delay_Until_Time. When the task becomes runnable again it will have deadline
-Delay_Until_Time + Deadline_Offset.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[A task dispatching point occurs
+for the currently running task @i<T> to
+which policy EDF_Across_Priorities applies whenever:]}
 
-On a system with a single processor, the setting of a task's deadline
-to the new value occurs immediately at the first point that is outside the
-execution of an abort-deferred operation. If the task is currently on a ready
-queue it is removed and re-entered on to the ready queue determined by the
-rules defined below.
+@begin{Itemize}
 
-When EDF_Across_Priorities is specified for priority range @i<Low>..@i<High>
-all ready queues in this range are ordered by deadline.
-The task at the head of a queue is the one with the earliest deadline.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[a change to the deadline of @i<T> occurs; or]}
 
-A task dispatching point occurs for the currently running task @i<T> to
-which policy EDF_Across_Priorities applies whenever:
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[a decrease to the deadline of any task on a ready
+queue for that processor occurs and the new deadline is earlier than that of
+the running task; or]}
 
-@xbullet<a change to the deadline of @i<T> occurs; or>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[there is a non-empty ready queue for that processor
+with a higher priority than the priority of the running task.]}
 
-@xbullet<a decrease to the deadline of any task on a ready queue for
-that processor occurs and the new deadline is earlier than
-that of the running task; or>
+@end{Itemize}
 
-@xbullet<there is a non-empty ready queue for that processor
-with a higher priority than the priority of the running task.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[In these cases, the currently running task is said
+to be preempted and is returned to
+the ready queue for its active priority.]}
 
-The currently running task is said to be preempted and is returned to
-the ready queue for its active priority.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[Whenever a task @i<T> to which
+policy EDF_Across_Priorities applies is added to a ready queue, other than when
+it is preempted, it is placed on the ready queue with the highest priority
+@i<P>, if one exists, such that:]}
 
-Whenever a task @i<T> to which policy EDF_Across_Priorities applies is
-added to a ready queue, other than when it is preempted, it is placed on
-the ready queue with the highest priority @i<P>, if one exists, such that:
-@xbullet<a task is executing within a protected object with ceiling
-priority @i<P>; and>
-@xbullet<task @i<T> has an earlier deadline than any task executing within
-a protected object with ceiling priority @i<P>; and>
-@xbullet<the base priority of task @i<T> is greater than @i<P>.>
-If no such ready queue exists the task is added to the ready
-queue for the lowest priority in the range specified as
-EDF_Across_Priorities.
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[a task is executing within a protected object with
+ceiling priority @i<P>; and]}
 
-When the setting of the base priority of a task takes effect and the
-new priority is in the range specified as EDF_Across_Priorities,
-the task is added to the ready queue.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[task @i<T> has an earlier deadline than any task
+executing within a protected object with ceiling priority @i<P>; and]}
 
-When a task is chosen for execution it runs with the active priority
-of the ready queue from which the task was taken.
-If it inherits a higher active priority it will return to its
-original active priority when it no longer inherits the higher
-level.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[the base priority of task @i<T> is greater than
+@i<P>.]}
+@end{Itemize}
 
-For all the operations defined in this package, Tasking_Error
-is raised if the task identified by T has terminated. Program_Error
-is raised if the value of T is Null_Task_ID.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[If no such ready queue exists the task is added to
+the ready queue for the lowest priority in the range specified as
+EDF_Across_Priorities.]}
 
-@i<@s8<Bounded (Run-Time) Errors>>
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[These rules insure that a task executing in
+  a protected object is preempted only by a task with a shorter deadline and a
+  higher priority. This matches the traditional preemption level description
+  without the need to define a new kind of protected object locking.
+  [Note to reviewers: I sure wish the AI made it clearer what the preemption
+  level model was, and the explanation of how this meets that model was
+  written in English, rather than some inscrutable code. Improvements of
+  both the AI description and these AARM notes are welcome. - ED]]}
+@end{Discussion}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[When the setting of the base priority of a task
+takes effect and the new priority is in the range specified as
+EDF_Across_Priorities, the task is added to the ready queue.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[When a task is chosen for execution it runs with
+the active priority of the ready queue from which the task was taken. If it
+inherits a higher active priority it will return to its original active
+priority when it no longer inherits the higher level.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[For all the operations defined in this package,
+Tasking_Error is raised if the task identified by T has terminated.
+Program_Error is raised if the value of T is Null_Task_ID.]}
+
+@end{RunTime}
+
+@begin{Bounded}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 If EDF_Across_Priorities is specified for priority range @i<Low>..@i<High>, it
 is a bounded error to declare a protected object with ceiling priority
 @i<Low> or to assign the value @i<Low> to attribute 'Priority. In either case
 either Program_Error is raised or the ceiling of the protected
-object is assigned the value @i<Low>+1.
+object is assigned the value @i<Low>+1.]}
 
-@i<@s8<Erroneous Execution>>
+@end{Bounded}
 
+@begin{Erron}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If a value of Task_ID is passed as a parameter to any of the subprograms
 of this package and the corresponding task object no longer exists,
-the execution of the program is erroneous.
+the execution of the program is erroneous.]}
 
-@i<@s8<Documentation Requirements>>
+@end{Erron}
 
-On a multiprocessor, the implementation shall document any conditions that
-cause the completion of the setting of a task's deadline to be delayed later
-than what is specified for a single procressor.
+@begin{DocReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[On a multiprocessor, the implementation shall
+document any conditions that cause the completion of the setting of a task's
+deadline to be delayed later than what is specified for a single procressor.]}
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Any conditions that cause the completion of the setting of a task's
+deadline to be delayed for a multiprocessor shall be documented.]}]}
+@end{DocReq}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
@@ -1435,6 +1556,13 @@ protocol (also called Stack Resource Policy protocol) for resource sharing
 under EDF dispatching. The preemption-level for a task is denoted by its base
 priority. The definition of a ceiling preemption-level for a protected object
 follows the existing rules for ceiling locking.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+  @ChgAdded{Version=[2],Text=[An implementation may support additional
+  dispatching policies by replacing absolute deadline with an alternative
+  measure of urgency.]}
+@end{ImplNote}
 
 @end{Notes}
 
