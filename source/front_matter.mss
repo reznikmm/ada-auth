@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.19 $ $Date: 2000/08/03 05:37:44 $}
+@comment{$Revision: 1.20 $ $Date: 2000/08/08 04:35:32 $}
 
 @begin{Intro}
 
@@ -73,9 +73,7 @@ This is the Annotated Ada Reference Manual.
 This is the Ada Reference Manual.
 @end{RMOnly}
 
-@begin{Leading}
-Other available Ada documents include:
-@end{Leading}
+@Leading@;Other available Ada documents include:
 @comment{We have to put the itemize inside of the AARMOnly, because otherwise
 the formatter thinks this is a nested bullet, making a mess. Since this is
 the only place this is used, it is easier to fix the text than the program.
@@ -190,7 +188,7 @@ entities), task units (which define concurrent
 computations), protected units (which define operations for
 the coordinated sharing of data between tasks), or generic
 units (which define parameterized forms of packages and
-subprograms). Each program unit normally consists of two parts:  a
+subprograms). Each program unit normally consists of two parts: a
 specification, containing the information that must be
 visible to other units, and a body, containing the
 implementation details, which need not be visible to other
@@ -211,7 +209,7 @@ separately compiled program unit must name the library units
 it requires.
 
 
-@i(Program Units)
+@keepnext@i(Program Units)
 
 A subprogram is the basic unit for expressing an algorithm.
 There are two kinds of subprograms: procedures and
@@ -255,7 +253,7 @@ executed. A protected unit may define a single protected
 object or a protected type permitting the creation of
 several similar objects.
 
-@i(Declarations and Statements)
+@keepnext@i(Declarations and Statements)
 
 The body of a program unit generally contains two parts: a
 declarative part, which defines the logical entities to be
@@ -323,7 +321,7 @@ that specify the actions to be taken when the error
 situation arises. Exceptions can be raised explicitly by a
 raise statement.
 
-@i(Data Types)
+@keepnext@i(Data Types)
 
 Every object in the language has a type, which characterizes
 a set of values and a set of applicable operations. The
@@ -397,7 +395,7 @@ of scalar types, arrays with a limited set of index values,
 and records and private types with particular discriminant
 values.
 
-@i(Other Facilities)
+@keepnext@i(Other Facilities)
 
 Representation clauses can be used to specify the mapping
 between types and features of an underlying machine. For
@@ -431,10 +429,8 @@ applicable to all types of a given class.
 
 @begin{Intro}
 
-@begin{Leading}
-This International Standard replaces the first edition of 1987.
+@Leading@;This International Standard replaces the first edition of 1987.
 In this edition, the following major language changes have been incorporated:
-@end{Leading}
 @begin{Itemize}
 Support for standard 8-bit and 16-bit character sets.
 See Section 2,
@@ -470,7 +466,7 @@ See Section 10.
 Additional support has been added for interfacing to other languages.
 See @RefSecNum{Interface to Other Languages}.
 
-The Specialized Needs Annexes have been added
+@leading@;The Specialized Needs Annexes have been added
 to provide specific support for certain
 application areas:
 @begin{InnerItemize}
@@ -641,10 +637,8 @@ AFB, NM) was the project manager.
 
 @begin{Intro}
 
-@begin{Leading}
-The International Standard is the same as this version
+@Leading@;The International Standard is the same as this version
 of the Reference Manual, except:
-@end{Leading}
 @begin{Itemize}
 This list of Changes
 is not included in the International Standard.

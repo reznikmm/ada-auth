@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/08/05 04:53:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/08/08 04:35:32 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/08/05 04:53:24 $}
+@Comment{$Date: 2000/08/08 04:35:32 $}
 
 @LabeledClause{String Handling}
 
@@ -33,10 +33,10 @@ The library package Strings has the following declaration:
 @ChildUnit{Parent=[Ada],Child=[Strings]}@key[package] Ada.Strings @key[is]
    @key[pragma] Pure(Strings);
 
-   Space      : @key[constant] Character      := ' ';
-   Wide_Space : @key[constant] Wide_Character := ' ';
+   @AdaDefn{Space}      : @key[constant] Character      := ' ';
+   @AdaDefn{Wide_Space} : @key[constant] Wide_Character := ' ';
 
-   Length_Error, Pattern_Error, Index_Error, Translation_Error : @key[exception];
+   @AdaDefn{Length_Error}, @AdaDefn{Pattern_Error}, @AdaDefn{Index_Error}, @AdaDefn{Translation_Error} : @key[exception];
 
 @LangDefType{Package=[Ada.Strings],Type=[Alignment]}
    @key[type] Alignment  @key[is] (Left, Right, Center);
@@ -68,8 +68,9 @@ The library package Strings.Maps has the following declaration:
 @LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Set]}
    @key[type] Character_Set @key[is] @key[private];
 
-   Null_Set : @key[constant] Character_Set;
+   @AdaDefn{Null_Set} : @key[constant] Character_Set;
 
+@LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Range]}
    @key[type] Character_Range @key[is]
      @Key[record]
         Low  : Character;
@@ -77,13 +78,14 @@ The library package Strings.Maps has the following declaration:
      @key[end] @key[record];
    -- @RI[Represents Character range Low..High]
 
+@LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Ranges]}
    @key[type] Character_Ranges @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Range;
 
-   @key[function] To_Set    (Ranges : @key[in] Character_Ranges) @key[return] Character_Set;
+   @key[function] @AdaSubDefn{To_Set}    (Ranges : @key[in] Character_Ranges) @key[return] Character_Set;
 
-   @key[function] To_Set    (Span   : @key[in] Character_Range)  @key[return] Character_Set;
+   @key[function] @AdaSubDefn{To_Set}    (Span   : @key[in] Character_Range)  @key[return] Character_Set;
 
-   @key[function] To_Ranges (Set    : @key[in] Character_Set)    @key[return] Character_Ranges;
+   @key[function] @AdaSubDefn{To_Ranges} (Set    : @key[in] Character_Set)    @key[return] Character_Ranges;
 
    @key[function] "="   (Left, Right : @key[in] Character_Set) @key[return] Boolean;
 
@@ -93,11 +95,11 @@ The library package Strings.Maps has the following declaration:
    @key[function] "@key[xor]" (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
    @key[function] "@en"   (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
 
-   @key[function] Is_In (Element : @key[in] Character;
+   @key[function] @AdaSubDefn{Is_In} (Element : @key[in] Character;
                    Set     : @key[in] Character_Set)
       @key[return] Boolean;
 
-   @key[function] Is_Subset (Elements : @key[in] Character_Set;
+   @key[function] @AdaSubDefn{Is_Subset} (Elements : @key[in] Character_Set;
                        Set      : @key[in] Character_Set)
       @key[return] Boolean;
 
@@ -107,29 +109,31 @@ The library package Strings.Maps has the following declaration:
 
 
    --@RI{ Alternative representation for a set of character values:}
-   @key[subtype] Character_Sequence @key[is] String;
+   @key[subtype] @AdaDefn{Character_Sequence} @key[is] String;
 
-   @key[function] To_Set (Sequence  : @key[in] Character_Sequence) @key[return] Character_Set;
+   @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Character_Sequence) @key[return] Character_Set;
 
-   @key[function] To_Set (Singleton : @key[in] Character)          @key[return] Character_Set;
+   @key[function] @AdaSubDefn{To_Set} (Singleton : @key[in] Character)          @key[return] Character_Set;
 
-   @key[function] To_Sequence (Set  : @key[in] Character_Set)      @key[return] Character_Sequence;
+   @key[function] @AdaSubDefn{To_Sequence} (Set  : @key[in] Character_Set)      @key[return] Character_Sequence;
 
 
    --@RI{ Representation for a character to character mapping:}
+@LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Mapping]}
    @key[type] Character_Mapping @key[is] @key[private];
 
-   @key[function] Value (Map     : @key[in] Character_Mapping;
+   @key[function] @AdaSubDefn{Value} (Map     : @key[in] Character_Mapping;
                    Element : @key[in] Character)
       @key[return] Character;
 
-   Identity : @key[constant] Character_Mapping;
+   @AdaDefn{Identity} : @key[constant] Character_Mapping;
 
-   @key[function] To_Mapping (From, To : @key[in] Character_Sequence) @key[return] Character_Mapping;
+   @key[function] @AdaSubDefn{To_Mapping} (From, To : @key[in] Character_Sequence) @key[return] Character_Mapping;
 
-   @key[function] To_Domain (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
-   @key[function] To_Range  (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
+   @key[function] @AdaSubDefn{To_Domain} (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
+   @key[function] @AdaSubDefn{To_Range}  (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
 
+@LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Mapping_Function]}
    @key{type} Character_Mapping_Function @key{is}
       @key{access} @key{function} (From : @key{in} Character) @key{return} Character;
 
@@ -368,6 +372,7 @@ procedures.
 @end{Intro}
 
 @begin{StaticSem}
+@Leading@keepnext
 The library package Strings.Fixed has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
@@ -377,7 +382,7 @@ The library package Strings.Fixed has the following declaration:
 
 --@RI{ "Copy" procedure for strings of possibly different lengths}
 
-   @key[procedure] Move (Source  : @key[in]  String;
+   @key[procedure] @AdaSubDefn{Move} (Source  : @key[in]  String;
                    Target  : @key[out] String;
                    Drop    : @key[in]  Truncation := Error;
                    Justify : @key[in]  Alignment  := Left;
@@ -386,48 +391,48 @@ The library package Strings.Fixed has the following declaration:
 
 --@RI{ Search subprograms}
 
-   @key[function] Index (Source   : @key[in] String;
+   @key[function] @AdaSubDefn{Index} (Source   : @key[in] String;
                    Pattern  : @key[in] String;
                    Going    : @key[in] Direction := Forward;
                    Mapping  : @key[in] Maps.Character_Mapping
                                 := Maps.Identity)
       @key[return] Natural;
 
-   @key[function] Index (Source   : @key[in] String;
+   @key[function] @AdaSubDefn{Index} (Source   : @key[in] String;
                    Pattern  : @key[in] String;
                    Going    : @key[in] Direction := Forward;
                    Mapping  : @key[in] Maps.Character_Mapping_Function)
       @key[return] Natural;
 
-   @key[function] Index (Source : @key[in] String;
+   @key[function] @AdaSubDefn{Index} (Source : @key[in] String;
                    Set    : @key[in] Maps.Character_Set;
                    Test   : @key[in] Membership := Inside;
                    Going  : @key[in] Direction  := Forward)
       @key[return] Natural;
 
 
-   @key[function] Index_Non_Blank (Source : @key[in] String;
+   @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] String;
                              Going  : @key[in] Direction := Forward)
       @key[return] Natural;
 
 
-   @key[function] Count (Source   : @key[in] String;
+   @key[function] @AdaSubDefn{Count} (Source   : @key[in] String;
                    Pattern  : @key[in] String;
                    Mapping  : @key[in] Maps.Character_Mapping
                                  := Maps.Identity)
       @key[return] Natural;
 
-   @key[function] Count (Source   : @key[in] String;
+   @key[function] @AdaSubDefn{Count} (Source   : @key[in] String;
                    Pattern  : @key[in] String;
                    Mapping  : @key[in] Maps.Character_Mapping_Function)
       @key[return] Natural;
 
-   @key[function] Count (Source   : @key[in] String;
+   @key[function] @AdaSubDefn{Count} (Source   : @key[in] String;
                    Set      : @key[in] Maps.Character_Set)
       @key[return] Natural;
 
 
-   @key[procedure] Find_Token (Source : @key[in] String;
+   @key[procedure] @AdaSubDefn{Find_Token} (Source : @key[in] String;
                          Set    : @key[in] Maps.Character_Set;
                          Test   : @key[in] Membership;
                          First  : @key[out] Positive;
@@ -436,30 +441,30 @@ The library package Strings.Fixed has the following declaration:
 
 --@RI{ String translation subprograms}
 
-   @key[function] Translate (Source  : @key[in] String;
+   @key[function] @AdaSubDefn{Translate} (Source  : @key[in] String;
                        Mapping : @key[in] Maps.Character_Mapping)
       @key[return] String;
 
-   @key[procedure] Translate (Source  : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] String;
                         Mapping : @key[in] Maps.Character_Mapping);
 
 
-   @key[function] Translate (Source  : @key[in] String;
+   @key[function] @AdaSubDefn{Translate} (Source  : @key[in] String;
                        Mapping : @key[in] Maps.Character_Mapping_Function)
       @key[return] String;
 
-   @key[procedure] Translate (Source  : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] String;
                         Mapping : @key[in] Maps.Character_Mapping_Function);
 
 --@RI{ String transformation subprograms}
 
-   @key[function] Replace_Slice (Source   : @key[in] String;
+   @key[function] @AdaSubDefn{Replace_Slice} (Source   : @key[in] String;
                            Low      : @key[in] Positive;
                            High     : @key[in] Natural;
                            By       : @key[in] String)
       @key[return] String;
 
-   @key[procedure] Replace_Slice (Source   : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Replace_Slice} (Source   : @key[in] @key[out] String;
                             Low      : @key[in] Positive;
                             High     : @key[in] Natural;
                             By       : @key[in] String;
@@ -468,77 +473,77 @@ The library package Strings.Fixed has the following declaration:
                             Pad      : @key[in] Character  := Space);
 
 
-   @key[function] Insert (Source   : @key[in] String;
+   @key[function] @AdaSubDefn{Insert} (Source   : @key[in] String;
                     Before   : @key[in] Positive;
                     New_Item : @key[in] String)
       @key[return] String;
 
-   @key[procedure] Insert (Source   : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Insert} (Source   : @key[in] @key[out] String;
                      Before   : @key[in] Positive;
                      New_Item : @key[in] String;
                      Drop     : @key[in] Truncation := Error);
 
 
-   @key[function] Overwrite (Source   : @key[in] String;
+   @key[function] @AdaSubDefn{Overwrite} (Source   : @key[in] String;
                        Position : @key[in] Positive;
                        New_Item : @key[in] String)
       @key[return] String;
 
-   @key[procedure] Overwrite (Source   : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Overwrite} (Source   : @key[in] @key[out] String;
                         Position : @key[in] Positive;
                         New_Item : @key[in] String;
                         Drop     : @key[in] Truncation := Right);
 
 
-   @key[function] Delete (Source  : @key[in] String;
+   @key[function] @AdaSubDefn{Delete} (Source  : @key[in] String;
                     From    : @key[in] Positive;
                     Through : @key[in] Natural)
       @key[return] String;
 
-   @key[procedure] Delete (Source  : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Delete} (Source  : @key[in] @key[out] String;
                      From    : @key[in] Positive;
                      Through : @key[in] Natural;
                      Justify : @key[in] Alignment := Left;
                      Pad     : @key[in] Character := Space);
 
  --@RI{String selector subprograms}
-   @key[function] Trim (Source : @key[in] String;
+   @key[function] @AdaSubDefn{Trim} (Source : @key[in] String;
                   Side   : @key[in] Trim_End)
       @key[return] String;
 
-   @key[procedure] Trim (Source  : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Trim} (Source  : @key[in] @key[out] String;
                    Side    : @key[in] Trim_End;
                    Justify : @key[in] Alignment := Left;
                    Pad     : @key[in] Character := Space);
 
-   @key[function] Trim (Source : @key[in] String;
+   @key[function] @AdaSubDefn{Trim} (Source : @key[in] String;
                   Left   : @key[in] Maps.Character_Set;
                   Right  : @key[in] Maps.Character_Set)
       @key[return] String;
 
-   @key[procedure] Trim (Source  : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Trim} (Source  : @key[in] @key[out] String;
                    Left    : @key[in] Maps.Character_Set;
                    Right   : @key[in] Maps.Character_Set;
                    Justify : @key[in] Alignment := Strings.Left;
                    Pad     : @key[in] Character := Space);
 
 
-   @key[function] Head (Source : @key[in] String;
+   @key[function] @AdaSubDefn{Head} (Source : @key[in] String;
                   Count  : @key[in] Natural;
                   Pad    : @key[in] Character := Space)
       @key[return] String;
 
-   @key[procedure] Head (Source  : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Head} (Source  : @key[in] @key[out] String;
                    Count   : @key[in] Natural;
                    Justify : @key[in] Alignment := Left;
                    Pad     : @key[in] Character := Space);
 
-   @key[function] Tail (Source : @key[in] String;
+   @key[function] @AdaSubDefn{Tail} (Source : @key[in] String;
                   Count  : @key[in] Natural;
                   Pad    : @key[in] Character := Space)
       @key[return] String;
 
-   @key[procedure] Tail (Source  : @key[in] @key[out] String;
+   @key[procedure] @AdaSubDefn{Tail} (Source  : @key[in] @key[out] String;
                    Count   : @key[in] Natural;
                    Justify : @key[in] Alignment := Left;
                    Pad     : @key[in] Character := Space);
@@ -1003,60 +1008,60 @@ The library package Strings.Bounded has the following declaration:
       Max   : Positive;    --@RI{ Maximum length of a Bounded_String}
    @key[package] Generic_Bounded_Length @key[is]
 
-      Max_Length : @key[constant] Positive := Max;
+      @AdaDefn{Max_Length} : @key[constant] Positive := Max;
 
 @LangDefType{Package=[Ada.Strings.Bounded.Generic_Bounded_Length],Type=[Bounded_String]}
       @key[type] Bounded_String @key[is] @key[private];
 
-      Null_Bounded_String : @key[constant] Bounded_String;
+      @AdaDefn{Null_Bounded_String} : @key[constant] Bounded_String;
 
-      @key[subtype] Length_Range @key[is] Natural @key[range] 0 .. Max_Length;
+      @key[subtype] @AdaDefn{Length_Range} @key[is] Natural @key[range] 0 .. Max_Length;
 
-      @key[function] Length (Source : @key[in] Bounded_String) @key[return] Length_Range;
+      @key[function] @AdaSubDefn{Length} (Source : @key[in] Bounded_String) @key[return] Length_Range;
 
 
    --@RI{ Conversion, Concatenation, and Selection functions}
 
-      @key[function] To_Bounded_String (Source : @key[in] String;
+      @key[function] @AdaSubDefn{To_Bounded_String} (Source : @key[in] String;
                                   Drop   : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[function] To_String (Source : @key[in] Bounded_String) @key[return] String;
+      @key[function] @AdaSubDefn{To_String} (Source : @key[in] Bounded_String) @key[return] String;
 
 
-      @key[function] Append (Left, Right : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Append} (Left, Right : @key[in] Bounded_String;
                        Drop        : @key[in] Truncation  := Error)
          @key[return] Bounded_String;
 
-      @key[function] Append (Left  : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Append} (Left  : @key[in] Bounded_String;
                        Right : @key[in] String;
                        Drop  : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[function] Append (Left  : @key[in] String;
+      @key[function] @AdaSubDefn{Append} (Left  : @key[in] String;
                        Right : @key[in] Bounded_String;
                        Drop  : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[function] Append (Left  : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Append} (Left  : @key[in] Bounded_String;
                        Right : @key[in] Character;
                        Drop  : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[function] Append (Left  : @key[in] Character;
+      @key[function] @AdaSubDefn{Append} (Left  : @key[in] Character;
                        Right : @key[in] Bounded_String;
                        Drop  : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[procedure] Append (Source   : @key[in out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Append} (Source   : @key[in out] Bounded_String;
                         New_Item : @key[in] Bounded_String;
                         Drop     : @key[in] Truncation  := Error);
 
-      @key[procedure] Append (Source   : @key[in out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Append} (Source   : @key[in out] Bounded_String;
                         New_Item : @key[in] String;
                         Drop     : @key[in] Truncation  := Error);
 
-      @key[procedure] Append (Source   : @key[in out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Append} (Source   : @key[in out] Bounded_String;
                         New_Item : @key[in] Character;
                         Drop     : @key[in] Truncation  := Error);
 
@@ -1076,16 +1081,16 @@ The library package Strings.Bounded has the following declaration:
          @key[return] Bounded_String;
 
 
-      @key[function] Element (Source : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Element} (Source : @key[in] Bounded_String;
                         Index  : @key[in] Positive)
          @key[return] Character;
 
-      @key[procedure] Replace_Element (Source : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Replace_Element} (Source : @key[in] @key[out] Bounded_String;
                                  Index  : @key[in] Positive;
                                  By     : @key[in] Character);
 
 
-      @key[function] Slice (Source : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Slice} (Source : @key[in] Bounded_String;
                       Low    : @key[in] Positive;
                       High   : @key[in] Natural)
          @key[return] String;
@@ -1132,47 +1137,47 @@ The library package Strings.Bounded has the following declaration:
 
    --@RI{ Search functions}
 
-      @key[function] Index (Source   : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Index} (Source   : @key[in] Bounded_String;
                       Pattern  : @key[in] String;
                       Going    : @key[in] Direction := Forward;
                       Mapping  : @key[in] Maps.Character_Mapping
                                  := Maps.Identity)
          @key[return] Natural;
 
-      @key[function] Index (Source   : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Index} (Source   : @key[in] Bounded_String;
                       Pattern  : @key[in] String;
                       Going    : @key[in] Direction := Forward;
                       Mapping  : @key[in] Maps.Character_Mapping_Function)
          @key[return] Natural;
 
-      @key[function] Index (Source : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Index} (Source : @key[in] Bounded_String;
                       Set    : @key[in] Maps.Character_Set;
                       Test   : @key[in] Membership := Inside;
                       Going  : @key[in] Direction  := Forward)
          @key[return] Natural;
 
-      @key[function] Index_Non_Blank (Source : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Bounded_String;
                                 Going  : @key[in] Direction := Forward)
          @key[return] Natural;
 
 
-      @key[function] Count (Source   : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Count} (Source   : @key[in] Bounded_String;
                       Pattern  : @key[in] String;
                       Mapping  : @key[in] Maps.Character_Mapping
                                    := Maps.Identity)
          @key[return] Natural;
 
-      @key[function] Count (Source   : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Count} (Source   : @key[in] Bounded_String;
                       Pattern  : @key[in] String;
                       Mapping  : @key[in] Maps.Character_Mapping_Function)
          @key[return] Natural;
 
-      @key[function] Count (Source   : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Count} (Source   : @key[in] Bounded_String;
                       Set      : @key[in] Maps.Character_Set)
          @key[return] Natural;
 
 
-      @key[procedure] Find_Token (Source : @key[in] Bounded_String;
+      @key[procedure] @AdaSubDefn{Find_Token} (Source : @key[in] Bounded_String;
                             Set    : @key[in] Maps.Character_Set;
                             Test   : @key[in] Membership;
                             First  : @key[out] Positive;
@@ -1180,24 +1185,24 @@ The library package Strings.Bounded has the following declaration:
 
    --@RI{ String translation subprograms}
 
-      @key[function] Translate (Source  : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Translate} (Source  : @key[in] Bounded_String;
                           Mapping : @key[in] Maps.Character_Mapping)
          @key[return] Bounded_String;
 
-      @key[procedure] Translate (Source  : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] Bounded_String;
                            Mapping : @key[in] Maps.Character_Mapping);
 
 
-      @key[function] Translate (Source  : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Translate} (Source  : @key[in] Bounded_String;
                           Mapping : @key[in] Maps.Character_Mapping_Function)
          @key[return] Bounded_String;
 
-      @key[procedure] Translate (Source  : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] Bounded_String;
                            Mapping : @key[in] Maps.Character_Mapping_Function);
 
    --@RI{ String transformation subprograms}
 
-      @key[function] Replace_Slice (Source   : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Replace_Slice} (Source   : @key[in] Bounded_String;
                               Low      : @key[in] Positive;
                               High     : @key[in] Natural;
                               By       : @key[in] String;
@@ -1205,80 +1210,80 @@ The library package Strings.Bounded has the following declaration:
          @key[return] Bounded_String;
 
 
-      @key[procedure] Replace_Slice (Source   : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Replace_Slice} (Source   : @key[in] @key[out] Bounded_String;
                                Low      : @key[in] Positive;
                                High     : @key[in] Natural;
                                By       : @key[in] String;
                                Drop     : @key[in] Truncation := Error);
 
 
-      @key[function] Insert (Source   : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Insert} (Source   : @key[in] Bounded_String;
                        Before   : @key[in] Positive;
                        New_Item : @key[in] String;
                        Drop     : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[procedure] Insert (Source   : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Insert} (Source   : @key[in] @key[out] Bounded_String;
                         Before   : @key[in] Positive;
                         New_Item : @key[in] String;
                         Drop     : @key[in] Truncation := Error);
 
 
-      @key[function] Overwrite (Source    : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Overwrite} (Source    : @key[in] Bounded_String;
                           Position  : @key[in] Positive;
                           New_Item  : @key[in] String;
                           Drop      : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[procedure] Overwrite (Source    : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Overwrite} (Source    : @key[in] @key[out] Bounded_String;
                            Position  : @key[in] Positive;
                            New_Item  : @key[in] String;
                            Drop      : @key[in] Truncation := Error);
 
-      @key[function] Delete (Source  : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Delete} (Source  : @key[in] Bounded_String;
                        From    : @key[in] Positive;
                        Through : @key[in] Natural)
          @key[return] Bounded_String;
 
-      @key[procedure] Delete (Source  : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Delete} (Source  : @key[in] @key[out] Bounded_String;
                         From    : @key[in] Positive;
                         Through : @key[in] Natural);
 
 --@RI{String selector subprograms}
 
-      @key[function] Trim (Source : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Trim} (Source : @key[in] Bounded_String;
                      Side   : @key[in] Trim_End)
          @key[return] Bounded_String;
-      @key[procedure] Trim (Source : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Trim} (Source : @key[in] @key[out] Bounded_String;
                       Side   : @key[in] Trim_End);
 
-      @key[function] Trim (Source : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Trim} (Source : @key[in] Bounded_String;
                      Left   : @key[in] Maps.Character_Set;
                      Right  : @key[in] Maps.Character_Set)
          @key[return] Bounded_String;
 
-      @key[procedure] Trim (Source : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Trim} (Source : @key[in] @key[out] Bounded_String;
                       Left   : @key[in] Maps.Character_Set;
                       Right  : @key[in] Maps.Character_Set);
 
-      @key[function] Head (Source : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Head} (Source : @key[in] Bounded_String;
                      Count  : @key[in] Natural;
                      Pad    : @key[in] Character  := Space;
                      Drop   : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[procedure] Head (Source : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Head} (Source : @key[in] @key[out] Bounded_String;
                       Count  : @key[in] Natural;
                       Pad    : @key[in] Character  := Space;
                       Drop   : @key[in] Truncation := Error);
 
-      @key[function] Tail (Source : @key[in] Bounded_String;
+      @key[function] @AdaSubDefn{Tail} (Source : @key[in] Bounded_String;
                      Count  : @key[in] Natural;
                      Pad    : @key[in] Character  := Space;
                      Drop   : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[procedure] Tail (Source : @key[in] @key[out] Bounded_String;
+      @key[procedure] @AdaSubDefn{Tail} (Source : @key[in] @key[out] Bounded_String;
                       Count  : @key[in] Natural;
                       Pad    : @key[in] Character  := Space;
                       Drop   : @key[in] Truncation := Error);
@@ -1298,17 +1303,17 @@ The library package Strings.Bounded has the following declaration:
          @key[return] Bounded_String;
 
 
-      @key[function] Replicate (Count : @key[in] Natural;
+      @key[function] @AdaSubDefn{Replicate} (Count : @key[in] Natural;
                           Item  : @key[in] Character;
                           Drop  : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[function] Replicate (Count : @key[in] Natural;
+      @key[function] @AdaSubDefn{Replicate} (Count : @key[in] Natural;
                           Item  : @key[in] String;
                           Drop  : @key[in] Truncation := Error)
          @key[return] Bounded_String;
 
-      @key[function] Replicate (Count : @key[in] Natural;
+      @key[function] @AdaSubDefn{Replicate} (Count : @key[in] Natural;
                           Item  : @key[in] Bounded_String;
                           Drop  : @key[in] Truncation := Error)
          @key[return] Bounded_String;
@@ -1497,32 +1502,33 @@ The library package Strings.Unbounded has the following declaration:
 @LangDefType{Package=[Ada.Strings.Unbounded],Type=[Unbounded_String]}
    @key[type] Unbounded_String @key[is] @key[private];
 
-   Null_Unbounded_String : @key[constant] Unbounded_String;
+   @AdaDefn{Null_Unbounded_String} : @key[constant] Unbounded_String;
 
-   @key[function] Length (Source : @key[in] Unbounded_String) @key[return] Natural;
+   @key[function] @AdaSubDefn{Length} (Source : @key[in] Unbounded_String) @key[return] Natural;
 
 
+@LangDefType{Package=[Ada.Strings.Unbounded],Type=[Unbounded_String]}
    @key[type] String_Access @key[is] @key[access] @key[all] String;
-   @key[procedure] Free (X : @key[in] @key[out] String_Access);
+   @key[procedure] @AdaSubDefn{Free} (X : @key[in] @key[out] String_Access);
 
 --@RI{ Conversion, Concatenation, and Selection functions}
 
-   @key[function] To_Unbounded_String (Source : @key[in] String)
+   @key[function] @AdaSubDefn{To_Unbounded_String} (Source : @key[in] String)
       @key[return] Unbounded_String;
 
-   @key[function] To_Unbounded_String (Length : @key[in] Natural)
+   @key[function] @AdaSubDefn{To_Unbounded_String} (Length : @key[in] Natural)
       @key[return] Unbounded_String;
 
-   @key[function] To_String (Source : @key[in] Unbounded_String) @key[return] String;
+   @key[function] @AdaSubDefn{To_String} (Source : @key[in] Unbounded_String) @key[return] String;
 
 
-   @key[procedure] Append (Source   : @key[in out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Append} (Source   : @key[in out] Unbounded_String;
                      New_Item : @key[in] Unbounded_String);
 
-   @key[procedure] Append (Source   : @key[in out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Append} (Source   : @key[in out] Unbounded_String;
                      New_Item : @key[in] String);
 
-   @key[procedure] Append (Source   : @key[in out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Append} (Source   : @key[in out] Unbounded_String;
                      New_Item : @key[in] Character);
 
    @key[function] "&" (Left, Right : @key[in] Unbounded_String)
@@ -1541,16 +1547,16 @@ The library package Strings.Unbounded has the following declaration:
       @key[return] Unbounded_String;
 
 
-   @key[function] Element (Source : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Element} (Source : @key[in] Unbounded_String;
                      Index  : @key[in] Positive)
       @key[return] Character;
 
-   @key[procedure] Replace_Element (Source : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Replace_Element} (Source : @key[in] @key[out] Unbounded_String;
                               Index  : @key[in] Positive;
                               By     : @key[in] Character);
 
 
-   @key[function] Slice (Source : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Slice} (Source : @key[in] Unbounded_String;
                    Low    : @key[in] Positive;
                    High   : @key[in] Natural)
       @key[return] String;
@@ -1599,47 +1605,47 @@ The library package Strings.Unbounded has the following declaration:
 
 --@RI{ Search subprograms}
 
-   @key[function] Index (Source   : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Index} (Source   : @key[in] Unbounded_String;
                    Pattern  : @key[in] String;
                    Going    : @key[in] Direction := Forward;
                    Mapping  : @key[in] Maps.Character_Mapping
                                 := Maps.Identity)
       @key[return] Natural;
 
-   @key[function] Index (Source   : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Index} (Source   : @key[in] Unbounded_String;
                    Pattern  : @key[in] String;
                    Going    : @key[in] Direction := Forward;
                    Mapping  : @key[in] Maps.Character_Mapping_Function)
       @key[return] Natural;
 
-   @key[function] Index (Source : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Index} (Source : @key[in] Unbounded_String;
                    Set    : @key[in] Maps.Character_Set;
                    Test   : @key[in] Membership := Inside;
                    Going  : @key[in] Direction  := Forward) @key[return] Natural;
 
 
-   @key[function] Index_Non_Blank (Source : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Unbounded_String;
                              Going  : @key[in] Direction := Forward)
       @key[return] Natural;
 
 
-   @key[function] Count (Source   : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Count} (Source   : @key[in] Unbounded_String;
                    Pattern  : @key[in] String;
                    Mapping  : @key[in] Maps.Character_Mapping
                                 := Maps.Identity)
       @key[return] Natural;
 
-   @key[function] Count (Source   : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Count} (Source   : @key[in] Unbounded_String;
                    Pattern  : @key[in] String;
                    Mapping  : @key[in] Maps.Character_Mapping_Function)
       @key[return] Natural;
 
-   @key[function] Count (Source   : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Count} (Source   : @key[in] Unbounded_String;
                    Set      : @key[in] Maps.Character_Set)
       @key[return] Natural;
 
 
-   @key[procedure] Find_Token (Source : @key[in] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Find_Token} (Source : @key[in] Unbounded_String;
                          Set    : @key[in] Maps.Character_Set;
                          Test   : @key[in] Membership;
                          First  : @key[out] Positive;
@@ -1648,92 +1654,92 @@ The library package Strings.Unbounded has the following declaration:
 
 --@RI{ String translation subprograms}
 
-   @key[function] Translate (Source  : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Translate} (Source  : @key[in] Unbounded_String;
                        Mapping : @key[in] Maps.Character_Mapping)
       @key[return] Unbounded_String;
 
-   @key[procedure] Translate (Source  : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] Unbounded_String;
                         Mapping : @key[in] Maps.Character_Mapping);
 
-   @key[function] Translate (Source  : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Translate} (Source  : @key[in] Unbounded_String;
                        Mapping : @key[in] Maps.Character_Mapping_Function)
       @key[return] Unbounded_String;
 
-   @key[procedure] Translate (Source  : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] Unbounded_String;
                         Mapping : @key[in] Maps.Character_Mapping_Function);
 
 --@RI{ String transformation subprograms}
 
-   @key[function] Replace_Slice (Source   : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Replace_Slice} (Source   : @key[in] Unbounded_String;
                            Low      : @key[in] Positive;
                            High     : @key[in] Natural;
                            By       : @key[in] String)
       @key[return] Unbounded_String;
 
-   @key[procedure] Replace_Slice (Source   : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Replace_Slice} (Source   : @key[in] @key[out] Unbounded_String;
                             Low      : @key[in] Positive;
                             High     : @key[in] Natural;
                             By       : @key[in] String);
 
-   @key[function] Insert (Source   : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Insert} (Source   : @key[in] Unbounded_String;
                     Before   : @key[in] Positive;
                     New_Item : @key[in] String)
       @key[return] Unbounded_String;
 
-   @key[procedure] Insert (Source   : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Insert} (Source   : @key[in] @key[out] Unbounded_String;
                      Before   : @key[in] Positive;
                      New_Item : @key[in] String);
 
-   @key[function] Overwrite (Source    : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Overwrite} (Source    : @key[in] Unbounded_String;
                        Position  : @key[in] Positive;
                        New_Item  : @key[in] String)
       @key[return] Unbounded_String;
 
-   @key[procedure] Overwrite (Source    : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Overwrite} (Source    : @key[in] @key[out] Unbounded_String;
                         Position  : @key[in] Positive;
                         New_Item  : @key[in] String);
 
-   @key[function] Delete (Source  : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Delete} (Source  : @key[in] Unbounded_String;
                     From    : @key[in] Positive;
                     Through : @key[in] Natural)
       @key[return] Unbounded_String;
 
-   @key[procedure] Delete (Source  : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Delete} (Source  : @key[in] @key[out] Unbounded_String;
                      From    : @key[in] Positive;
                      Through : @key[in] Natural);
 
-   @key[function] Trim (Source : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Trim} (Source : @key[in] Unbounded_String;
                   Side   : @key[in] Trim_End)
       @key[return] Unbounded_String;
 
-   @key[procedure] Trim (Source : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Trim} (Source : @key[in] @key[out] Unbounded_String;
                    Side   : @key[in] Trim_End);
 
-   @key[function] Trim (Source : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Trim} (Source : @key[in] Unbounded_String;
                   Left   : @key[in] Maps.Character_Set;
                   Right  : @key[in] Maps.Character_Set)
       @key[return] Unbounded_String;
 
-   @key[procedure] Trim (Source : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Trim} (Source : @key[in] @key[out] Unbounded_String;
                    Left   : @key[in] Maps.Character_Set;
                    Right  : @key[in] Maps.Character_Set);
 
 
-   @key[function] Head (Source : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Head} (Source : @key[in] Unbounded_String;
                   Count  : @key[in] Natural;
                   Pad    : @key[in] Character := Space)
       @key[return] Unbounded_String;
 
-   @key[procedure] Head (Source : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Head} (Source : @key[in] @key[out] Unbounded_String;
                    Count  : @key[in] Natural;
                    Pad    : @key[in] Character := Space);
 
-   @key[function] Tail (Source : @key[in] Unbounded_String;
+   @key[function] @AdaSubDefn{Tail} (Source : @key[in] Unbounded_String;
                   Count  : @key[in] Natural;
                   Pad    : @key[in] Character := Space)
       @key[return] Unbounded_String;
 
-   @key[procedure] Tail (Source : @key[in] @key[out] Unbounded_String;
+   @key[procedure] @AdaSubDefn{Tail} (Source : @key[in] @key[out] Unbounded_String;
                    Count  : @key[in] Natural;
                    Pad    : @key[in] Character := Space);
 
@@ -1859,23 +1865,23 @@ The library package Strings.Maps.Constants has the following declaration:
 @ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants]}@key[package] Ada.Strings.Maps.Constants @key[is]
    @key[pragma] Preelaborate(Constants);
 
-   Control_Set           : @key[constant] Character_Set;
-   Graphic_Set           : @key[constant] Character_Set;
-   Letter_Set            : @key[constant] Character_Set;
-   Lower_Set             : @key[constant] Character_Set;
-   Upper_Set             : @key[constant] Character_Set;
-   Basic_Set             : @key[constant] Character_Set;
-   Decimal_Digit_Set     : @key[constant] Character_Set;
-   Hexadecimal_Digit_Set : @key[constant] Character_Set;
-   Alphanumeric_Set      : @key[constant] Character_Set;
-   Special_Set           : @key[constant] Character_Set;
-   ISO_646_Set           : @key[constant] Character_Set;
+   @AdaDefn{Control_Set}           : @key[constant] Character_Set;
+   @AdaDefn{Graphic_Set}           : @key[constant] Character_Set;
+   @AdaDefn{Letter_Set}            : @key[constant] Character_Set;
+   @AdaDefn{Lower_Set}             : @key[constant] Character_Set;
+   @AdaDefn{Upper_Set}             : @key[constant] Character_Set;
+   @AdaDefn{Basic_Set}             : @key[constant] Character_Set;
+   @AdaDefn{Decimal_Digit_Set}     : @key[constant] Character_Set;
+   @AdaDefn{Hexadecimal_Digit_Set} : @key[constant] Character_Set;
+   @AdaDefn{Alphanumeric_Set}      : @key[constant] Character_Set;
+   @AdaDefn{Special_Set}           : @key[constant] Character_Set;
+   @AdaDefn{ISO_646_Set}           : @key[constant] Character_Set;
 
-   Lower_Case_Map        : @key[constant] Character_Mapping;
+   @AdaDefn{Lower_Case_Map}        : @key[constant] Character_Mapping;
      --@RI{Maps to lower case for letters, else identity}
-   Upper_Case_Map        : @key[constant] Character_Mapping;
+   @AdaDefn{Upper_Case_Map}        : @key[constant] Character_Mapping;
      --@RI{Maps to upper case for letters, else identity}
-   Basic_Map             : @key[constant] Character_Mapping;
+   @AdaDefn{Basic_Map}             : @key[constant] Character_Mapping;
      --@RI{Maps to basic letter for letters, else identity}
 
 @key[private]
@@ -1903,13 +1909,11 @@ They provide the same string-handling operations
 as the corresponding packages for
 strings of Character elements.
 @Defn{Ada.Strings.Wide_Fixed}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Fixed]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Fixed]}
 @Defn{Ada.Strings.Wide_Bounded}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Bounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Bounded]}
 @Defn{Ada.Strings.Wide_Unbounded}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Unbounded]}
-@Defn{Ada.Strings.Wide_Maps.Wide_Constants}
-@ChildUnit{Parent=[Ada.Strings.Wide_Maps],Child=[Wide_Constants]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Unbounded]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -1922,8 +1926,9 @@ The package Strings.Wide_Maps has the following declaration.
 @LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Set]}
    @key[type] Wide_Character_Set @key[is] @key[private];
 
-   Null_Set : @key[constant] Wide_Character_Set;
+   @AdaDefn{Null_Set} : @key[constant] Wide_Character_Set;
 
+@LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Range]}
    @key[type] Wide_Character_Range @key[is]
      @key[record]
          Low  : Wide_Character;
@@ -1931,13 +1936,14 @@ The package Strings.Wide_Maps has the following declaration.
      @key[end] @key[record];
    -- @RI{Represents Wide_Character range Low..High}
 
+@LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Ranges]}
    @key[type] Wide_Character_Ranges @key[is] @key[array] (Positive @key[range] <>) @key[of] Wide_Character_Range;
 
-   @key[function] To_Set    (Ranges : @key[in] Wide_Character_Ranges) @key[return] Wide_Character_Set;
+   @key[function] @AdaSubDefn{To_Set}    (Ranges : @key[in] Wide_Character_Ranges) @key[return] Wide_Character_Set;
 
-   @key[function] To_Set    (Span   : @key[in] Wide_Character_Range)  @key[return] Wide_Character_Set;
+   @key[function] @AdaSubDefn{To_Set}    (Span   : @key[in] Wide_Character_Range)  @key[return] Wide_Character_Set;
 
-   @key[function] To_Ranges (Set    : @key[in] Wide_Character_Set)    @key[return] Wide_Character_Ranges;
+   @key[function] @AdaSubDefn{To_Ranges} (Set    : @key[in] Wide_Character_Set)    @key[return] Wide_Character_Ranges;
 
    @key[function] "="   (Left, Right : @key[in] Wide_Character_Set) @key[return] Boolean;
 
@@ -1947,11 +1953,11 @@ The package Strings.Wide_Maps has the following declaration.
    @key[function] "@key[xor]" (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
    @key[function] "@key[@en]"   (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
 
-   @key[function] Is_In (Element : @key[in] Wide_Character;
+   @key[function] @AdaSubDefn{Is_In} (Element : @key[in] Wide_Character;
                    Set     : @key[in] Wide_Character_Set)
       @key[return] Boolean;
 
-   @key[function] Is_Subset (Elements : @key[in] Wide_Character_Set;
+   @key[function] @AdaSubDefn{Is_Subset} (Elements : @key[in] Wide_Character_Set;
                        Set      : @key[in] Wide_Character_Set)
       @key[return] Boolean;
 
@@ -1961,34 +1967,36 @@ The package Strings.Wide_Maps has the following declaration.
 
 
    --@RI{ Alternative representation for a set of Wide_Character values:}
-   @key[subtype] Wide_Character_Sequence @key[is] Wide_String;
+   @key[subtype] @AdaDefn{Wide_Character_Sequence} @key[is] Wide_String;
 
-   @key[function] To_Set (Sequence  : @key[in] Wide_Character_Sequence) @key[return] Wide_Character_Set;
+   @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Wide_Character_Sequence) @key[return] Wide_Character_Set;
 
-   @key[function] To_Set (Singleton : @key[in] Wide_Character) @key[return] Wide_Character_Set;
+   @key[function] @AdaSubDefn{To_Set} (Singleton : @key[in] Wide_Character) @key[return] Wide_Character_Set;
 
-   @key[function] To_Sequence (Set  : @key[in] Wide_Character_Set) @key[return] Wide_Character_Sequence;
+   @key[function] @AdaSubDefn{To_Sequence} (Set  : @key[in] Wide_Character_Set) @key[return] Wide_Character_Sequence;
 
 
    --@RI{ Representation for a Wide_Character to Wide_Character mapping:}
+@LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Mapping]}
    @key[type] Wide_Character_Mapping @key[is] @key[private];
 
-   @key[function] Value (Map     : @key[in] Wide_Character_Mapping;
+   @key[function] @AdaSubDefn{Value} (Map     : @key[in] Wide_Character_Mapping;
                    Element : @key[in] Wide_Character)
       @key[return] Wide_Character;
 
-   Identity : @key[constant] Wide_Character_Mapping;
+   @AdaDefn{Identity} : @key[constant] Wide_Character_Mapping;
 
-   @key[function] To_Mapping (From, To : @key[in] Wide_Character_Sequence)
+   @key[function] @AdaSubDefn{To_Mapping} (From, To : @key[in] Wide_Character_Sequence)
       @key[return] Wide_Character_Mapping;
 
-   @key[function] To_Domain (Map : @key[in] Wide_Character_Mapping)
+   @key[function] @AdaSubDefn{To_Domain} (Map : @key[in] Wide_Character_Mapping)
       @key[return] Wide_Character_Sequence;
 
-   @key[function] To_Range  (Map : @key[in] Wide_Character_Mapping)
+   @key[function] @AdaSubDefn{To_Range}  (Map : @key[in] Wide_Character_Mapping)
       @key[return] Wide_Character_Sequence;
 
 
+@LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Mapping_Function]}
    @key{type} Wide_Character_Mapping_Function @key{is}
       @key{access} @key{function} (From : @key{in} Wide_Character) @key{return} Wide_Character;
 
@@ -1997,17 +2005,13 @@ The package Strings.Wide_Maps has the following declaration.
 @key[end] Ada.Strings.Wide_Maps;
 @end{example}
 
+@Defn{Ada.Strings.Wide_Maps.Wide_Constants}
+@ChildUnit{Parent=[Ada.Strings.Wide_@!Maps],Child=[Wide_@!Constants]}
 The context clause for each of the packages Strings.Wide_Fixed,
-
 Strings.Wide_Bounded, and Strings.Wide_Unbounded
-
 identifies Strings.Wide_Maps instead of Strings.Maps.
-
 For each of the packages  Strings.Fixed, Strings.Bounded,
-Strings.Unbounded, and
-
-Strings.Maps.Constants
-
+Strings.Unbounded, and Strings.Maps.Constants
 the corresponding wide string package has
 the same contents except that
 @begin{itemize}
@@ -2042,10 +2046,10 @@ Wide_String_Access replaces String_Access
 To_Unbounded_Wide_String replaces To_Unbounded_String
 @end{Itemize}
 
-The following additional declaration is present in
+@Leading@keepnext@;The following additional declaration is present in
 Strings.Wide_Maps.Wide_Constants:
 @begin{example}
-Character_Set : @key[constant] Wide_Maps.Wide_Character_Set;
+@AdaDefn{Character_Set} : @key[constant] Wide_Maps.Wide_Character_Set;
 --@RI{Contains each Wide_Character value WC such that Characters.Is_Character(WC) is True}
 @end{example}
 @end{StaticSem}

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:23 $}
+@Comment{$Date: 2000/08/08 04:35:30 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -21,9 +21,9 @@ by declarations.
 @PDefn{name}
 The entity's @i(name)
 is defined by the declaration, usually by a
-@nt<defining_identifier>,
-but sometimes by a @nt{defining_character_literal}
-or @nt{defining_operator_symbol}.
+@nt<defining_@!identifier>,
+but sometimes by a @nt{defining_@!character_@!literal}
+or @nt{defining_@!operator_@!symbol}.
 
 There are several forms of declaration. A @nt<basic_declaration>
 is a form of declaration defined as follows.
@@ -285,11 +285,9 @@ The syntax rule for @nt{defining_identifier} is new.
 It is used for the defining occurrence of an @nt{identifier}.
 Usage occurrences use the @nt{direct_name} or @nt{selector_name}
 syntactic categories.
-@begin{Leading}
-Each occurrence of an @nt{identifier} (or @nt{simple_name}), @nt{character_literal}, or
+@Leading@;Each occurrence of an @nt{identifier} (or @nt{simple_name}), @nt{character_literal}, or
 @nt{operator_symbol} in the Ada 83 syntax rules is handled as follows in Ada
-9X:
-@end{Leading}
+95:
 @begin{itemize}
 It becomes a @nt{defining_identifier}, @nt{defining_character_literal}, or
 @nt{defining_operator_symbol} (or some syntactic category composed of these), to
@@ -323,10 +321,10 @@ Considering the statement name itself to be the defining occurrence would
 complicate the visibility rules.
 
 The phrase @lquotes@;visible by selection@rquotes@;
-is not used in Ada 9X. It is subsumed by simply @lquotes@;visible@rquotes@; and
+is not used in Ada 95. It is subsumed by simply @lquotes@;visible@rquotes@; and
 the Name Resolution Rules for @nt<selector_name>s.
 
-(Note that in Ada 9X, a declaration is visible at all
+(Note that in Ada 95, a declaration is visible at all
 places where one could have used a @nt{selector_name},
 not just at places where a @nt{selector_name} was actually used.
 Thus, the places where a declaration is directly visible are a
@@ -343,7 +341,7 @@ it defines "elaborated" for declarations,
 @nt{declarative_part}s, @nt{declarative_item}s
 and @nt{compilation_unit}s,
 but "elaboration" is defined elsewhere for various other constructs.
-To make matters worse, Ada 9X has a different set of elaborable
+To make matters worse, Ada 95 has a different set of elaborable
 constructs.
 Instead of correcting the list, it is more maintainable to
 refer to the term "elaborable," which is defined in a distributed
@@ -353,7 +351,7 @@ RM83 uses the term @lquotes@;has no other effect@rquotes@; to describe an elabor
 doesn't do anything except change the state from not-yet-elaborated to
 elaborated. This was a confusing wording, because the answer to @lquotes@;other than
 what?@rquotes@; was to be found many pages away.
-In Ada 9X, we change this wording to @lquotes@;has no effect@rquotes@; (for things that truly
+In Ada 95, we change this wording to @lquotes@;has no effect@rquotes@; (for things that truly
 do nothing at run time), and @lquotes@;has no effect other than to establish that
 so-and-so can happen without failing the
 Elaboration_Check@rquotes@; (for things where it matters).
@@ -584,7 +582,7 @@ Such values @i(belong) to the subtype.
 @begin{Discussion}
   We no longer use the term "base type."
   All types were "base types" anyway in Ada 83, so the term was redundant,
-  and occasionally confusing. In the RM9X we
+  and occasionally confusing. In the RM95 we
   say simply "the type @i(of) the subtype" instead of "the base type
   of the subtype."
 @end{Discussion}
@@ -620,7 +618,7 @@ otherwise, the subtype is called a @i(constrained) subtype
 @begin{Discussion}
   In an earlier version of Ada 9X,
   "constrained" meant "has a non-null
-  constraint."  However, we changed to this definition
+  constraint." However, we changed to this definition
   since we kept having to special
   case composite non-array/non-discriminated types. It also corresponds
   better to the (now obsolescent) attribute 'Constrained.
@@ -767,15 +765,15 @@ type itself.
 
 @begin{StaticSem}
 @Defn{first subtype}
-The @nt{defining_identifier} of a @nt{type_declaration} denotes
+The @nt{defining_@!identifier} of a @nt{type_@!declaration} denotes
 the @i(first subtype) of the type.
-The @nt<known_discriminant_part>, if any,
+The @nt<known_@!discriminant_@!part>, if any,
 defines the discriminants of the type (see @RefSec(Discriminants)).
-The remainder of the @nt<type_declaration> defines the
+The remainder of the @nt<type_@!declaration> defines the
 remaining characteristics of (the view of) the type.
 
 @Defn{named type}
-A type defined by a @nt<type_declaration> is a @i(named) type;
+A type defined by a @nt<type_@!declaration> is a @i(named) type;
 such a type has one or more nameable subtypes.
 @Defn{anonymous type}
 Certain other forms of declaration also include type
@@ -799,14 +797,14 @@ this International Standard sometimes refers to the type of T as simply @lquotes
 @end{Ramification}
 
 @Defn{full type}
-A named type that is declared by a @nt<full_type_declaration>,
+A named type that is declared by a @nt<full_type_@!declaration>,
 or an anonymous type that is defined as part of declaring
 an object of the type, is called a @i(full type).
 @Defn{full type definition}
-The @nt<type_definition>, @nt<task_definition>, @nt<protected_definition>,
-or @nt<access_definition> that defines a full type is called
+The @nt<type_@!definition>, @nt<task_@!definition>, @nt<protected_@!definition>,
+or @nt<access_@!definition> that defines a full type is called
 a @i(full type definition).
-@redundant[Types declared by other forms of @nt<type_declaration> are
+@redundant[Types declared by other forms of @nt<type_@!declaration> are
 not separate types; they are partial or incomplete views
 of some full type.]
 @begin{Honest}
@@ -870,18 +868,16 @@ creates a distinct type and its first subtype.
 @end{RunTime}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of type definitions:)
-@end{Leading}
+@Leading@keepnext@i(Examples of type definitions:)
 @begin(Example)
 (White, Red, Yellow, Green, Blue, Brown, Black)
 @key(range) 1 .. 72
 @key(array)(1 .. 10) @key(of) Integer
 @end(Example)
 
-@begin{WideLeading}
-@keepnext@;@i(Examples of type declarations:)
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Examples of type declarations:)
+@end{Wide}
 @begin(Example)
 @key(type) Color  @key(is) (White, Red, Yellow, Green, Blue, Brown, Black);
 @key(type) Column @key(is) @key(range) 1 .. 72;
@@ -911,14 +907,14 @@ called simply @lquotes@;first subtype@rquotes@;) to cover all kinds of types, fo
 of description elsewhere.
 RM83 defined first-named subtype in Section 13.
 We define first subtype here, because it is now a more fundamental concept.
-We renamed the term, because in Ada 9X some first subtypes have no
+We renamed the term, because in Ada 95 some first subtypes have no
 name.
 
 We no longer elaborate @nt{discriminant_part}s, because
 there is nothing to do, and it was complex to say that you only wanted
 to elaborate it once for a private or incomplete type. This is also
 consistent with the fact that subprogram specifications are not
-elaborated (neither in Ada 83 nor in Ada 9X). Note, however, that an
+elaborated (neither in Ada 83 nor in Ada 95). Note, however, that an
 @nt<access_definition> appearing in a @nt<discriminant_part> is
 elaborated when an object with such a discriminant is created.
 @end{DiffWord83}
@@ -971,8 +967,7 @@ type of the subtype denoted by the @nt{subtype_mark}.
 @end{Resolution}
 
 @begin{RunTime}
-@begin{Leading}
-@PDefn2{Term=[elaboration], Sec=(subtype_declaration)}
+@Leading@PDefn2{Term=[elaboration], Sec=(subtype_declaration)}
 The elaboration of a @nt{subtype_declaration} consists of the elaboration
 of the @nt{subtype_indication}.
 @PDefn2{Term=[elaboration], Sec=(subtype_indication)}
@@ -982,7 +977,6 @@ If the @nt{subtype_indication} does not include a
 constraint as that denoted by the @nt{subtype_mark}.
 The elaboration of a @nt{subtype_indication} that includes a
 @nt<constraint> proceeds as follows:
-@end{Leading}
 @begin{itemize}
 The @nt<constraint> is first elaborated.
 
@@ -1031,9 +1025,7 @@ only if the composite subtype is unconstrained
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of subtype declarations:)
-@end{Leading}
+@Leading@keepnext@i(Examples of subtype declarations:)
 @begin(Example)
 @key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        @RI[--  see @RefSecNum(Type Declarations)]
 @key(subtype) Red_Blue  @key(is) Rainbow;
@@ -1047,7 +1039,7 @@ only if the composite subtype is unconstrained
 @end{Examples}
 
 @begin{Incompatible83}
-In Ada 9X, all @nt<range_constraint>s cause freezing of their type.
+In Ada 95, all @nt<range_constraint>s cause freezing of their type.
 Hence, a type-related representation item for a scalar type has to
 precede any @nt<range_constraint>s whose type is the scalar type.
 @end{Incompatible83}
@@ -1057,7 +1049,7 @@ precede any @nt<range_constraint>s whose type is the scalar type.
 types are never directly named.
 There is no need for RM83-3.3.2(3), which says a
 @nt{subtype_mark} can denote both the type and the subtype;
-in Ada 9X, you denote an unconstrained (base) subtype if you want,
+in Ada 95, you denote an unconstrained (base) subtype if you want,
 but never the type.
 
 The syntactic category @nt{type_mark} is now called @nt{subtype_mark},
@@ -1113,11 +1105,9 @@ primitive subprograms.
   discussions.
 @end{Discussion}
 
-@begin{Leading}
-@Defn2{Term=[primitive subprograms], Sec=(of a type)}
+@Leading@Defn2{Term=[primitive subprograms], Sec=(of a type)}
 The @i(primitive subprograms) of a
 specific type are defined as follows:
-@end{Leading}
 @begin{Itemize}
   The predefined operators of the
   type (see @RefSecNum{Operators and Expression Evaluation});
@@ -1145,7 +1135,7 @@ specific type are defined as follows:
 @begin{Discussion}
   In Ada 83, only subprograms
   declared in the visible part were @lquotes@;primitive@rquotes@; (i.e.
-  derivable). In Ada 9X, mostly because of child library units,
+  derivable). In Ada 95, mostly because of child library units,
   we include all operations declared in the private part as well,
   and all operations that override implicit declarations.
 @end{Discussion}
@@ -1209,8 +1199,7 @@ necessary (see @RefSecNum(Completion and Finalization)).]
 
 @begin{StaticSem}
 
-@begin{Leading}
-@Defn{object}
+@Leading@keepnext@Defn{object}
 All of the following are objects:
 @ToGlossary{Term=<Object>,
   Text=<An object is either a constant or a variable.
@@ -1219,7 +1208,6 @@ All of the following are objects:
   or by an @nt(allocator).
   A formal parameter is (a view of) an object.
   A subcomponent of an object is an object.>}
-@end{Leading}
 @begin(itemize)
   the entity declared by
   an @nt<object_declaration>;
@@ -1287,11 +1275,9 @@ Unchecked_Deallocation, we want the execution of the final read to be
 erroneous.
 @end{Ramification}
 
-@begin{Leading}
-Whether a view of an object is constant or variable is determined
+@Leading@;Whether a view of an object is constant or variable is determined
 by the definition of the view.
 The following (and no others) represent constants:
-@end{Leading}
 @begin(itemize)
   an object declared by an @nt<object_declaration> with the
   reserved word @key(constant);
@@ -1448,7 +1434,7 @@ An @nt<object_declaration> without the reserved word @key(constant)
 declares a variable object. If it has a @nt<subtype_indication> or
 an @nt<array_type_definition> that defines an indefinite subtype,
 then there shall be an initialization expression.
-An initialization expression  shall not be given if the object is
+An initialization expression shall not be given if the object is
 of a limited type.
 @end{Legality}
 
@@ -1510,13 +1496,11 @@ subtypes of the object are the same.
 If its actual subtype is constrained, the object
 is called a @i(constrained object).
 
-@begin{Leading}
-@Defn2{Term=[implicit initial values], Sec=(for a subtype)}
+@Leading@Defn2{Term=[implicit initial values], Sec=(for a subtype)}
 For an @nt<object_declaration> without an initialization expression,
 any initial values for the object or its subcomponents
 are determined by the @i(implicit initial values) defined for
 its nominal subtype, as follows:
-@end{Leading}
 @begin(itemize)
   The implicit initial value for an access subtype is the
   null value of the access type.
@@ -1551,14 +1535,12 @@ its nominal subtype, as follows:
 @end(ImplNote)
 @end(itemize)
 
-@begin{Leading}
-@PDefn2{Term=[elaboration], Sec=(object_declaration)}
+@Leading@PDefn2{Term=[elaboration], Sec=(object_declaration)}
 The elaboration of an @nt{object_declaration} proceeds in the following
 sequence of steps:
-@end{Leading}
 @begin(enumerate)
-  The @nt{subtype_indication}, @nt<array_type_definition>,
-  @nt{single_task_declaration}, or @nt{single_protected_declaration}
+  The @nt{subtype_@!indication}, @nt<array_@!type_@!definition>,
+  @nt{single_@!task_@!declaration}, or @nt{single_@!protected_@!declaration}
   is first elaborated.
   This creates the nominal subtype (and the anonymous type in the latter
   three cases).
@@ -1632,9 +1614,7 @@ are performed in an arbitrary order,
 except that each evaluation is performed before the resulting value is
 assigned.
 @begin{Reason}
-@begin{Leading}
-@keepnext@;For example:
-@end{Leading}
+@Leading@keepnext@;For example:
 @begin{Example}
 @key[type] R(D : Integer := F) @key[is]
     @key[record]
@@ -1701,9 +1681,7 @@ be abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Example of a multiple object declaration:)
-@end{Leading}
+@Leading@keepnext@i(Example of a multiple object declaration:)
 @begin(Example)
 @RI[--  the multiple object declaration ]
 
@@ -1715,9 +1693,9 @@ John : Person_Name := @key(new) Person(Sex => M);
 Paul : Person_Name := @key(new) Person(Sex => M);
 @end(Example)
 
-@begin{WideLeading}
-@keepnext@;@i(Examples of variable declarations:)
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Examples of variable declarations:)
+@end{Wide}
 @begin(Example)
 Count, Sum  : Integer;
 Size        : Integer @key(range) 0 .. 10_000 := 0;
@@ -1727,9 +1705,9 @@ Option      : Bit_Vector(1 .. 10) := (@key(others) => True);
 Hello       : @key(constant) String := "Hi, world.";
 @end(Example)
 
-@begin{WideLeading}
-@keepnext@;@i(Examples of constant declarations:)
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Examples of constant declarations:)
+@end{Wide}
 @begin(Example)
 Limit     : @key(constant) Integer := 10_000;
 Low_Limit : @key(constant) Integer := Limit/10;
@@ -1831,9 +1809,7 @@ The elaboration of a @nt<number_declaration> has no effect.
 @end{RunTime}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of number declarations:)
-@end{Leading}
+@Leading@keepnext@i(Examples of number declarations:)
 @begin(Example)
 Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   @RI[-- a real number (see @RefSecNum{The Numerics Packages})]
 
@@ -1858,7 +1834,7 @@ the operators of the root numeric types.
 @begin{DiffWord83}
 We have moved the syntax rule into this subclause.
 
-AI-00263 describes the elaboration of a number declaration
+AI83-00263 describes the elaboration of a number declaration
 in words similar to that of an @nt{object_declaration}. However, since
 there is no expression to be evaluated and no object to be created,
 it seems simpler to say that the elaboration has no effect.
@@ -1957,9 +1933,7 @@ of the derived type.
   See @RefSec(Fixed Point Types).
 @end(Discussion)
 
-@begin{Leading}
-The characteristics of the derived type are defined as follows:
-@end{Leading}
+@Leading@keepnext@;The characteristics of the derived type are defined as follows:
 @begin(itemize)
 
 Each class of types that includes the parent type also includes
@@ -2202,9 +2176,9 @@ or not at all,
 as explained in @RefSecNum{Private Operations}.
 
 @PDefn{derived type}
-A derived type can also be defined by a @nt<private_extension_declaration>
+A derived type can also be defined by a @nt<private_@!extension_@!declaration>
 (see @RefSecNum(Private Types and Private Extensions))
-or a @nt<formal_derived_type_definition>
+or a @nt<formal_@!derived_@!type_@!definition>
 (see @RefSecNum(Formal Private and Derived Types)).
 Such a derived type is a partial
 view of the corresponding full or actual type.
@@ -2219,9 +2193,9 @@ root numeric type (see @RefSecNum(Integer Types) and @RefSecNum(Real Types)).
 @PDefn2{Term=[elaboration], Sec=(derived_type_definition)}
 The elaboration of a @nt<derived_type_definition>
 creates the derived type and its first subtype,
-and consists of the elaboration of the @nt<subtype_indication>
-and the @nt<record_extension_part>, if any.
-If the @nt{subtype_indication} depends on a discriminant,
+and consists of the elaboration of the @nt<subtype_@!indication>
+and the @nt<record_@!extension_@!part>, if any.
+If the @nt{subtype_@!indication} depends on a discriminant,
 then only those expressions that do not depend on a discriminant
 are evaluated.
 
@@ -2284,13 +2258,11 @@ For an inherited subprogram, the subtype of a formal parameter
 of the derived type need not have any value in common with the first
 subtype of the derived type.
 @begin(TheProof)
-@begin(Leading)
-  This happens when the parent subtype is constrained to a range
+  @Leading@;This happens when the parent subtype is constrained to a range
   that does not overlap with the range of a subtype of the parent
   type that appears in the profile of
   some primitive subprogram of the parent type.
   For example:
-@end(Leading)
 @begin(example)
 @key(type) T1 @key(is range) 1..100;
 @key(subtype) S1 @key(is) T1 @key(range) 1..10;
@@ -2307,9 +2279,7 @@ type, the type is abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of derived type declarations:)
-@end{Leading}
+@Leading@keepnext@i(Examples of derived type declarations:)
 @begin(Example)
 @key(type) Local_Coordinate @key(is) @key(new) Coordinate;   @RI[--  two different types]
 @key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu;  @RI[--  see @RefSecNum(Enumeration Types)]
@@ -2334,13 +2304,11 @@ derived type prior to the overriding of any predefined operators.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
-@begin{Leading}
-When deriving from a (nonprivate, nonderived) type in the same
+@Leading@;When deriving from a (nonprivate, nonderived) type in the same
 visible part in which it is defined, a primitive subprogram of the
 parent type declared before the derived type will be inherited by the
 derived type. This can cause upward incompatibilities in cases like
 this:
-@end{Leading}
 @begin{Example}
    @key[package] P @key[is]
       @key[type] T @key[is] (A, B, C, D);
@@ -2348,16 +2316,16 @@ this:
       @key[type] NT @key[is] @key[new] T;
       --@RI{ inherits F as}
       --@RI{ function F( X : NT := A ) return Integer;}
-      --@RI{ in Ada 9X only}
+      --@RI{ in Ada 95 only}
       ...
    @key[end] P;
    ...
    @key[use] P;  --@RI{ Only one declaration of F from P is use-visible in}
            --@RI{ Ada 83;  two declarations of F are use-visible in}
-           --@RI{ Ada 9X.}
+           --@RI{ Ada 95.}
 @key[begin]
    ...
-   @key[if] F > 1 @key[then] ... --@RI{ legal in Ada 83, ambiguous in Ada 9X}
+   @key[if] F > 1 @key[then] ... --@RI{ legal in Ada 83, ambiguous in Ada 95}
 @end{Example}
 @end{Incompatible83}
 
@@ -2468,7 +2436,7 @@ then S'Class is a first subtype.
 @begin{Reason}
 We want S'Class to be a first subtype when S is,
 so that an @nt{attribute_definition_clause} like
-@lquotes@;@key[for] S'Class'Output @key[use] ...;@rquotes@;
+@lquotes@key[for] S'Class'Output @key[use] ...;@rquotes@;
 will be legal.
 @end{Reason}
 
@@ -2564,16 +2532,14 @@ a descendant of any other type.
   class, including any class-wide types in the class.
 @end{Ramification}
 @begin(Discussion)
-  @begin(Leading)
-  The terms root, parent, ancestor, and ultimate ancestor
+  @Leading@keepnext@;The terms root, parent, ancestor, and ultimate ancestor
   are all related. For example:
-  @end(Leading)
   @begin(Itemize)
     Each type has at most one parent, and one
     or more ancestor types; each type has exactly one ultimate ancestor.
     In Ada 83, the term @lquotes@;parent type@rquotes@; was sometimes used
     more generally to include any ancestor type
-    (e.g. RM83-9.4(14)). In Ada 9X, we restrict
+    (e.g. RM83-9.4(14)). In Ada 95, we restrict
     parent to mean the immediate ancestor.
 
     A class of types has at most one root type; a derivation class
@@ -2694,7 +2660,7 @@ the @nt<simple_expression>s of the @nt<range> (likewise, the
 @nt<range_attribute_reference>)
 are expected to be of the type of the @nt<range>.
 @begin(Discussion)
-  In Ada 9X, @nt<constraint>s
+  In Ada 95, @nt<constraint>s
   only appear within @nt<subtype_indication>s; things that look
   like constraints that appear in type declarations are called
   something else like @nt<range_specification>s.
@@ -2803,12 +2769,10 @@ If a @nt<range_attribute_reference> is given, the evaluation
 of the @nt<range>
 consists of the evaluation of the @nt<range_attribute_reference>.
 
-@i(Attributes)
+@keepnext@i(Attributes)
 
-@begin{Leading}
-For @PrefixType{every scalar subtype S},
+@Leading@keepnext@;For @PrefixType{every scalar subtype S},
 the following attributes are defined:
-@end{Leading}
 @begin(description)
 @Attribute{Prefix=<S>, AttrName=<First>,
   Text=[S'First denotes the lower bound of
@@ -2827,13 +2791,14 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
 @Attribute{Prefix=<S>, AttrName=<Range>,
   Text=[S'Range is equivalent to the @nt<range> S'First .. S'Last.]}
 
-@Defn2{Term=(base subtype), Sec=(of a type)}@Attribute{Prefix=<S>, AttrName=<Base>,
+@Attribute{Prefix=<S>, AttrName=<Base>,
   Text=[S'Base denotes an
      unconstrained subtype of the type of S.
-     This unconstrained subtype is called the @i(base subtype) of the type.]}
+     This unconstrained subtype is called the @i(base subtype) of the type.
+     ]}@Defn2{Term=(base subtype), Sec=(of a type)}
 
 @Attribute{Prefix=<S>, AttrName=<Min>,
-  Text=[S'Min denotes a function with the following specification:
+  Text=[@leading@;S'Min denotes a function with the following specification:
 @begin(Descexample)
 @b(function) S'Min(@RI(Left), @RI(Right) : S'Base)
   @b(return) S'Base
@@ -2853,7 +2818,7 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
      @end{Discussion}
 
 @Attribute{Prefix=<S>, AttrName=<Max>,
-  Text=[S'Max denotes a function with the following specification:
+  Text=[@leading@;S'Max denotes a function with the following specification:
 @begin(Descexample)
 @b(function) S'Max(@RI(Left), @RI(Right) : S'Base)
   @b(return) S'Base
@@ -2862,13 +2827,13 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
      @NoPrefix@;The function returns the greater of the values of the two parameters.]}
 
 @Attribute{Prefix=<S>, AttrName=<Succ>,
-  Text=[S'Succ denotes a function with the following specification:
+  Text=[@leading@;S'Succ denotes a function with the following specification:
 @begin(Descexample)
 @b(function) S'Succ(@RI(Arg) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
-     @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+     @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
      For an enumeration type, the function returns the value
      whose position number is one more than that of the value of @i(Arg);
      @IndexCheck{Range_Check}
@@ -2891,14 +2856,14 @@ S'Succ for a modular integer subtype wraps around
        S'Base'Last+1, as is permitted for all predefined numeric operations.@end{ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Pred>,
-  Text=[S'Pred denotes a function with
+  Text=[@leading@;S'Pred denotes a function with
      the following specification:
 @begin(Descexample)
 @b(function) S'Pred(@RI(Arg) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
-     @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+     @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
      For an enumeration type, the function returns the value
      whose position number is one less than that of the value of @i(Arg);
      @IndexCheck{Range_Check}
@@ -2921,7 +2886,7 @@ S'Pred for a modular integer subtype wraps around
        S'Base'First@en@;1, as is permitted for all predefined numeric operations.@end{ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Wide_Image>,
-  Text=[S'Wide_Image denotes a function
+  Text=[@leading@;S'Wide_Image denotes a function
      with the following specification:
 @begin(Descexample)
 @b(function) S'Wide_Image(@RI(Arg) : S'Base)
@@ -3017,7 +2982,7 @@ For a machine that supports negative zeros,
        signed zeros.@end{implnote}
 
 @Attribute{Prefix=<S>, AttrName=<Image>,
-  Text=[S'Image denotes a function with
+  Text=[@leading@;S'Image denotes a function with
     the following specification:
 @begin(Descexample)
 @b(function) S'Image(@RI(Arg) : S'Base)
@@ -3047,7 +3012,7 @@ For a machine that supports negative zeros,
      a null range. Its type is @i(universal_integer).]}
 
 @Attribute{Prefix=<S>, AttrName=<Wide_Value>,
-  Text=[S'Wide_Value denotes a function with
+  Text=[@leading@;S'Wide_Value denotes a function with
      the following specification:
 @begin(Descexample)
 @b(function) S'Wide_Value(@RI(Arg) : Wide_String)
@@ -3057,7 +3022,7 @@ For a machine that supports negative zeros,
     @NoPrefix@;This function returns a value given an image of the value
     as a Wide_String, ignoring any leading or trailing spaces.]}
 
-    @NoPrefix@;@PDefn2{Term=[evaluation], Sec=(Wide_Value)}
+    @NoPrefix@PDefn2{Term=[evaluation], Sec=(Wide_Value)}
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
     For the evaluation of a call on S'Wide_Value
     for an enumeration subtype S,
@@ -3076,7 +3041,7 @@ For a machine that supports negative zeros,
       just for this weird case, so we decided to lump it in with
       Range_Check.@end{discussion}
 
-    @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+    @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
     For the evaluation of a call on S'Wide_Value (or S'Value) for an integer
     subtype S, if the sequence of characters of the
     parameter (ignoring leading and trailing spaces)
@@ -3101,7 +3066,7 @@ For a machine that supports negative zeros,
       literals (since overflow never occurs for modular types).
     @end(Discussion)
 
-    @NoPrefix@;For the evaluation of a call on S'Wide_Value (or S'Value) for a
+    @NoPrefix@Leading@;For the evaluation of a call on S'Wide_Value (or S'Value) for a
     real subtype S, if the sequence of characters of the
     parameter (ignoring leading and trailing spaces)
     has the syntax of one of the following:
@@ -3117,7 +3082,7 @@ For a machine that supports negative zeros,
 @nt[base]#.@nt[based_numeral]#[@nt[exponent]]
 @end{Itemize}
 
-    @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+    @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
     with an optional leading sign character (plus or minus), and if the
     corresponding numeric value belongs to the base range of the
     type of S, then that value is the result;
@@ -3128,7 +3093,7 @@ For a machine that supports negative zeros,
     if S'Signed_Zeros is True.
 
 @Attribute{Prefix=<S>, AttrName=<Value>,
-  Text=[S'Value denotes a function with
+  Text=[@leading@;S'Value denotes a function with
      the following specification:
 @begin(Descexample)
 @b(function) S'Value(@RI(Arg) : String)
@@ -3138,7 +3103,7 @@ For a machine that supports negative zeros,
     @NoPrefix@;This function returns a value given an image of the value
     as a String, ignoring any leading or trailing spaces.]}
 
-    @NoPrefix@;@PDefn2{Term=[evaluation], Sec=(Value)}
+    @NoPrefix@PDefn2{Term=[evaluation], Sec=(Value)}
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
     For the evaluation of a call on S'Value
     for an enumeration subtype S,
@@ -3218,9 +3183,7 @@ ever raises Constraint_Error.
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of ranges:)
-@end{Leading}
+@Leading@keepnext@i(Examples of ranges:)
 @begin{Example}
 -10 .. 10
 X .. X + 1
@@ -3230,9 +3193,7 @@ Red .. Green     @RI[-- see @RefSecNum{Enumeration Types}]
 Table'Range      @RI[-- a range attribute reference (see @RefSecNum{Array Types})]
 
 @end{Example}
-@begin{Leading}
-@keepnext@;@i(Examples of range constraints:)
-@end{Leading}
+@Leading@keepnext@i(Examples of range constraints:)
 @begin{Example}
 @key(range) -999.0 .. +999.0
 @key(range) S'First+1 .. S'Last-1
@@ -3325,8 +3286,8 @@ This is a ramification of the normal disallowance
 Each @nt<enumeration_literal_specification> is the explicit declaration
 of the corresponding @i(enumeration literal): it declares
 a parameterless function,
-whose defining name is the @nt<defining_identifier>
-or @nt<defining_character_literal>, and whose result type
+whose defining name is the @nt<defining_@!identifier>
+or @nt<defining_@!character_@!literal>, and whose result type
 is the enumeration type.
 @begin{Reason}
   This rule defines the profile of the enumeration literal,
@@ -3355,7 +3316,7 @@ order of corresponding position numbers.]
 @redundant[@PDefn2{Term=[overloaded], Sec=(enumeration literal)}
 If the same @nt<defining_identifier> or
 @nt<defining_character_literal> is specified in more than one
-@nt<enumeration_type_definition>, the corresponding enumeration literals
+@nt<enumeration_@!type_@!definition>, the corresponding enumeration literals
 are said to be @i(overloaded). At any place where an overloaded
 enumeration literal occurs in the text of a program, the type
 of the enumeration literal has to be determinable from the context
@@ -3387,9 +3348,7 @@ the ambiguity (see @RefSecNum(Qualified Expressions)).
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of enumeration types and subtypes: )
-@end{Leading}
+@Leading@keepnext@i(Examples of enumeration types and subtypes: )
 @begin(Example)
 @key(type) Day    @key(is) (Mon, Tue, Wed, Thu, Fri, Sat, Sun);
 @key(type) Suit   @key(is) (Clubs, Diamonds, Hearts, Spades);
@@ -3519,9 +3478,7 @@ clause @RefSecNum(Enumeration Representation Clauses).
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Example of a character type: )
-@end{Leading}
+@Leading@keepnext@i(Example of a character type: )
 @begin(Example)
 @key(type) Roman_Digit @key(is) ('I', 'V', 'X', 'L', 'C', 'D', 'M');
 @end(Example)
@@ -3543,7 +3500,7 @@ an expression such as
 'a' = 'b'
 @end(Example)
 
-is ambiguous in Ada 9X, whereas in Ada 83 both
+is ambiguous in Ada 95, whereas in Ada 83 both
 literals could be resolved to be of type Character.
 
 The change in visibility rules (see @RefSecNum(Literals))
@@ -3720,7 +3677,7 @@ It is constrained to the base range of its type.
   of the predefined integer operators are of such unconstrained subtypes,
   allowing extended-length registers to be used as operands or
   for the result.
-  In an earlier version of Ada 9X, Integer was unconstrained. However,
+  In an earlier version of Ada 95, Integer was unconstrained. However,
   the fact that certain Constraint_Errors might be omitted or appear
   elsewhere was felt to be an undesirable upward inconsistency in this case.
   Note that for Float, the opposite conclusion was reached, partly because
@@ -3729,12 +3686,10 @@ It is constrained to the base range of its type.
   overflow checks, are performed for them.
 @end{Reason}
 
-@begin{Leading}
-@Defn{Natural}
+@Leading@Defn{Natural}
 @Defn{Positive}
 Integer has two predefined subtypes,
 @Redundant[declared in the visible part of package Standard:]
-@end{Leading}
 @begin{Example}
 @key[subtype] Natural  @key[is] Integer @key[range] 0 .. Integer'Last;
 @key[subtype] Positive @key[is] Integer @key[range] 1 .. Integer'Last;
@@ -3784,10 +3739,10 @@ the operations of any integer type.]
 @PDefn2{Term=[position number], Sec=(of an integer value)}
 The @i(position number) of an integer value is equal to the value.
 
-@begin{Leading}
-For @PrefixType{every modular subtype S},
+@begin{Wide}
+@Leading@keepnext@;For @PrefixType{every modular subtype S},
 the following attribute is defined:
-@end{Leading}
+@end{Wide}
 @begin(description)
 @Attribute{Prefix=<S>, AttrName=<Modulus>,
   Text=[S'Modulus yields the modulus of the type of S, as a value of the
@@ -3961,9 +3916,7 @@ signed integer types match "@key(type) T @key(is range) <>;"
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of integer types and subtypes: )
-@end{Leading}
+@Leading@keepnext@i(Examples of integer types and subtypes: )
 @begin(Example)
 @key(type) Page_Num  @key(is) @key(range) 1 .. 2_000;
 @key(type) Line_Size @key(is) @key(range) 1 .. Max_Line_Size;
@@ -3991,7 +3944,7 @@ to contrast them with "modular" integer types.
 
 Standard.Integer, Standard.Long_Integer, etc., denote
 constrained subtypes of predefined integer types, consistent
-with the Ada 9X model that only subtypes have names.
+with the Ada 95 model that only subtypes have names.
 
 We now impose minimum requirements on the base range of
 Integer and Long_Integer.
@@ -4003,7 +3956,7 @@ This is for various reasons.
 
 First of all, the equivalence with a type derivation and a subtype
 declaration was not perfect, and was the source of various AIs (for example,
-is the conversion of the bounds static?  Is a numeric type a derived
+is the conversion of the bounds static? Is a numeric type a derived
 type with respect to other rules of the language?)
 
 Secondly, we don't want to require that every integer size supported
@@ -4031,10 +3984,8 @@ definition and normal type derivation.
 @LabeledSubClause{Operations of Discrete Types}
 
 @begin{StaticSem}
-@begin{Leading}
-For @PrefixType{every discrete subtype S},
+@Leading@;For @PrefixType{every discrete subtype S},
 the following attributes are defined:
-@end{Leading}
 @begin(description)
 @Attribute{Prefix=<S>, AttrName=<Pos>,
   Text=[S'Pos denotes a function with the following specification:
@@ -4115,22 +4066,18 @@ The other predefined operations are described in Section 4.
 As for all types, objects of a discrete type
 have Size and Address attributes (see @RefSecNum(Representation Attributes)).
 
-@begin{Leading}
-For a subtype of a discrete type, the result delivered by the attribute
-Val might not belong to the subtype; similarly, the actual parameter
+@Leading@;For a subtype of a discrete type, the result delivered by the
+attribute Val might not belong to the subtype; similarly, the actual parameter
 of the attribute Pos need not belong to the subtype. The following relations
 are satisfied (in the absence of an exception) by these attributes:
-@end{Leading}
 @begin(Example)
-S'Val(S'Pos(X)) = X
-S'Pos(S'Val(N)) = N
+   S'Val(S'Pos(X)) = X
+   S'Pos(S'Val(N)) = N
 @end(Example)
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of attributes of discrete subtypes: )
-@end{Leading}
+@Leading@keepnext@i(Examples of attributes of discrete subtypes: )
 @begin(Example)
 @RI[--  For the types and subtypes declared in subclause @RefSecNum(Enumeration Types) the following hold: ]
 
@@ -4382,8 +4329,6 @@ In most cases,
 A @nt<floating_point_definition> defines a floating point type
 whose base decimal precision is no less than the requested
 decimal precision.
-
-
 @PDefn2{Term=[safe range], Sec=(of a floating point type)}
 @PDefn2{Term=[base range], Sec=(of a floating point type)}
 If a @nt<real_range_specification> is given,
@@ -4482,9 +4427,7 @@ Overflow_Checks, never Range_Checks.
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of floating point types and subtypes:)
-@end{Leading}
+@Leading@keepnext@i(Examples of floating point types and subtypes:)
 @begin(Example)
 @key(type) Coefficient @key(is) @key(digits) 10 @key(range) -1.0 .. 1.0;
 
@@ -4541,10 +4484,8 @@ the definition of Succ and Pred for floating point numbers.
 @LabeledSubClause{Operations of Floating Point Types}
 
 @begin{StaticSem}
-@begin{Leading}
-The following attribute is defined for
+@Leading@;The following attribute is defined for
 @PrefixType{every floating point subtype S}:
-@end{Leading}
 
 @begin(description)
 @Attribute{Prefix=<S>, AttrName=<Digits>,
@@ -4552,7 +4493,6 @@ The following attribute is defined for
 denotes the requested decimal precision
 for the subtype S. The value of this attribute
 is of the type @i(universal_integer).]}
-
 The requested decimal precision of the base subtype of a floating
 point type @i{T} is defined to be the largest value of @i{d} for which
 ceiling(@i{d} * log(10) / log(T'Machine_Radix)) + 1 <= T'Model_Mantissa.
@@ -4674,8 +4614,7 @@ The base range (see @RefSecNum{Scalar Types}) of a fixed point type
 is symmetric around zero, except possibly for an extra negative
 value in some implementations.
 
-@begin{Leading}
-@PDefn2{Term=[base range], Sec=(of an ordinary fixed point type)}
+@Leading@PDefn2{Term=[base range], Sec=(of an ordinary fixed point type)}
 An @nt<ordinary_fixed_point_definition> defines an
 ordinary fixed point type whose base range
 includes at least all multiples of @i(small) that are between the
@@ -4684,10 +4623,9 @@ in the @nt<real_range_specification>. The base range of the
 type does not necessarily include the specified bounds themselves.
 @Defn2{Term=[constrained], Sec=(subtype)}
 @Defn2{Term=[unconstrained], Sec=(subtype)}
-An @nt<ordinary_fixed_point_definition> also defines a constrained first
+An @nt<ordinary_@!fixed_@!point_@!definition> also defines a constrained first
 subtype of the type, with each bound of its range
 given by the closer to zero of:
-@end{Leading}
 @begin(itemize)
   the value of the conversion to the fixed point type
   of the corresponding @nt<expression> of the
@@ -4737,9 +4675,7 @@ or implicitly) a range that is compatible with the subtype.
   constrained, a @nt<digits_constraint> is essentially
   equivalent to a @nt<range_constraint>.
 
-  @begin{Leading}
-  @keepnext@;Consider the following example:
-  @end{Leading}
+  @Leading@keepnext@;Consider the following example:
 @begin{Example}
 @key[type] D @key[is] @key[delta] 0.01 @key[digits] 7 @key[range] -0.00 .. 9999.99;
 @end{Example}
@@ -4759,7 +4695,7 @@ or implicitly) a range that is compatible with the subtype.
   called @lquotes@;accuracy constraints@rquotes@; in RM83 don't really
   represent constraints on the values of the subtype, but rather primarily
   affect compatibility of the @lquotes@;constraint@rquotes@; with the subtype
-  being @lquotes@;constrained.@rquotes@;  In this sense, they might better
+  being @lquotes@;constrained.@rquotes@; In this sense, they might better
   be called @lquotes@;subtype assertions@rquotes@; rather than @lquotes@;constraints.@rquotes@;
 
   Note that the @nt<digits_constraint> on a decimal fixed point subtype
@@ -4812,14 +4748,12 @@ of Float_IO).
 @end{ImplPerm}
 
 @begin{Notes}
-  @begin{NotesLeading}
-  The base range of
+  @Leading@;The base range of
   an ordinary fixed point type need not include the specified bounds
   themselves
   so that the range specification can be given in a natural way, such as:
-  @end{NotesLeading}
   @begin(example)
-@b(type) Fraction @b(is delta) 2.0**(-15) @b(range) -1.0 .. 1.0;
+   @b(type) Fraction @b(is delta) 2.0**(-15) @b(range) -1.0 .. 1.0;
   @end(example)
 
   @NoPrefix@;With 2's complement hardware, such a type could have a
@@ -4829,9 +4763,7 @@ of Float_IO).
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i(Examples of fixed point types and subtypes:)
-@end{Leading}
+@Leading@keepnext@i(Examples of fixed point types and subtypes:)
 @begin(Example)
 @key(type) Volt @key(is) @key(delta) 0.125 @key(range) 0.0 .. 255.0;
 
@@ -4847,9 +4779,9 @@ of Float_IO).
 @end{Examples}
 
 @begin{Inconsistent83}
-In Ada 9X, S'Small always equals S'Base'Small,
+In Ada 95, S'Small always equals S'Base'Small,
 so if an implementation chooses a @i(small) for a fixed point type smaller
-than required by the @i(delta), the value of S'Small in Ada 9X might not be
+than required by the @i(delta), the value of S'Small in Ada 95 might not be
 the same as it was in Ada 83.
 @end{Inconsistent83}
 
@@ -4874,10 +4806,8 @@ Obsolescent features (to be compatible with Ada 83's
 @LabeledSubClause{Operations of Fixed Point Types}
 
 @begin{StaticSem}
-@begin{Leading}
-The following attributes are defined for
+@Leading@;The following attributes are defined for
 @PrefixType{every fixed point subtype S}:
-@end{Leading}
 @begin(description)
 @Attribute{Prefix=<S>, AttrName=<Small>,
   Text=[S'Small
@@ -4908,7 +4838,7 @@ The following attributes are defined for
      that the representation does not include an exponent, but includes
      a one-character prefix that is either a minus sign or a space.
      (This minimum number does not include superfluous zeros or
-     underlines, and is at least 2.)  The value of this attribute
+     underlines, and is at least 2.) The value of this attribute
      is of the type @i(universal_integer).]}
 
 @Attribute{Prefix=<S>, AttrName=<Aft>,
@@ -4917,15 +4847,15 @@ The following attributes are defined for
      S, unless the @i(delta) of the subtype S is greater than 0.1,
      in which case the attribute yields the value one. @Redundant[(S'Aft
      is the smallest positive integer N for which (10**N)*S'Delta is
-     greater than or equal to one.)]  The value of this attribute is of
+     greater than or equal to one.)] The value of this attribute is of
      the type @i(universal_integer).>}
 @end(description)
 @EndPrefixType{}
 
-@begin{Leading}
-The following additional attributes are defined for
+@begin{Wide}
+@Leading@;The following additional attributes are defined for
 @PrefixType{every decimal fixed point subtype S}:
-@end{Leading}
+@end{Wide}
 @begin(description)
 @Attribute{Prefix=<S>, AttrName=<Digits>,
   Text=[S'Digits denotes the @i(digits) of the decimal

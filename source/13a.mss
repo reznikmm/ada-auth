@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:23 $}
+@Comment{$Date: 2000/08/08 04:35:31 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 @redundant[This section describes features for
@@ -3247,7 +3247,7 @@ converts from that record type to type Address.
 
 The following language-defined generic library package exists:
 @begin{Example}
-@ChildUnit{Parent=[System],Child=[Address_To_Access_Conversions]}@key[generic]
+@ChildUnit{Parent=[System],Child=[Address_@!To_@!Access_@!Conversions]}@key[generic]
     @key[type] Object(<>) @key[is] @key[limited] @key[private];
 @key[package] System.Address_To_Access_Conversions @key[is]
    @key[pragma] Preelaborate(Address_To_Access_Conversions);
@@ -4036,9 +4036,7 @@ For the same reason, @lquotes@;specified@rquotes@; means the same thing as
 @end{Legality}
 
 @begin{StaticSem}
-@begin{Leading}
-The following language-defined library package exists:
-@end{Leading}
+@Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @key[with] Ada.Finalization;
 @key[with] System.Storage_Elements;

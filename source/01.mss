@@ -11,10 +11,10 @@ I probably ought to add a style just for this purpose)
 @begin{WithoutParanum}
 @thickline
 
-@begin{WideLeading}
-@tabclear()@tabset(P45)
+@begin{Wide}
+@leading@tabclear()@tabset(P45)
 @Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}]>
-@end{WideLeading}
+@end{Wide}
 
 @thickline
 
@@ -34,10 +34,10 @@ I probably ought to add a style just for this purpose)
 @end{WithoutParanum}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/08/05 04:53:23 $}
+@Comment{$Date: 2000/08/08 04:35:30 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -58,7 +58,7 @@ The language includes a complete facility for
 the support of real-time, concurrent programming.
 Errors can be signaled as exceptions and handled explicitly.
 The language also
-covers  systems  programming;   this  requires  precise  control  over  the
+covers systems programming; this requires precise control over the
 representation of data and access to system-dependent properties. Finally,
 a predefined environment of standard packages is provided, including
 facilities for, among others, input-output, string manipulation,
@@ -82,9 +82,7 @@ so we can more easily detect language bugs.
 The RM95, on the other hand, is intended to be a more
 readable document for programmers.
 
-@begin{Leading}
-The annotations in the AARM are as follows:
-@end{Leading}
+@Leading@keepnext@;The annotations in the AARM are as follows:
 @begin{Itemize}
 Text that is logically redundant is shown
 @Redundant[in square brackets, like this].
@@ -225,9 +223,7 @@ of data processing systems.
 @LabeledSubClause{Extent}
 
 @begin{Intro}
-@begin{Leading}
-This International Standard specifies:
-@end{Leading}
+@Leading@keepnext@;This International Standard specifies:
 @begin(Itemize)
      The form of a program written in Ada;
 
@@ -250,9 +246,9 @@ This International Standard specifies:
      is not required to detect.
 @end(Itemize)
 
-@begin{Leading}
-This International Standard does not specify:
-@end{Leading}
+@begin{Wide}
+@Leading@keepnext@;This International Standard does not specify:
+@end{Wide}
 @begin(Itemize)
      The means whereby a program written in Ada is transformed into
      object code executable by a processor;
@@ -280,10 +276,8 @@ This International Standard contains thirteen sections,
 fourteen annexes,
 and an index.
 
-@begin{Leading}
-@Defn{core language}
+@Leading@Defn{core language}
 The @i{core} of the Ada language consists of:
-@end{Leading}
 @begin{Itemize}
 Sections 1 through 13
 
@@ -294,14 +288,14 @@ Sections 1 through 13
 @RefSec{Obsolescent Features}
 @end{Itemize}
 
-@begin{Leading}
-@Defn{Specialized Needs Annexes}
+@begin{Wide}
+@Leading@Defn{Specialized Needs Annexes}
 @Defn2{Term=[Annex],Sec=(Specialized Needs)}
 @Defn{application areas}
 The following @i{Specialized Needs Annexes}
 define features that are needed by certain
 application areas:
-@end{Leading}
+@end{Wide}
 @begin{Itemize}
 @RefSec{Systems Programming}
 
@@ -316,13 +310,13 @@ application areas:
 @RefSec{Safety and Security}
 @end{Itemize}
 
-@begin{Leading}
-@Defn{normative}
+@begin{Wide}
+@Leading@Defn{normative}
 @Defn2{Term=[Annex],Sec=(normative)}
 The core language and the Specialized Needs Annexes are normative,
 except that the material in each of the items listed below
 is informative:
-@end{Leading}
+@end{Wide}
 @begin(Itemize)
     Text under a NOTES or Examples heading.
 
@@ -334,12 +328,12 @@ All implementations shall conform to the core language.
 In addition, an implementation may conform separately to one or more
 Specialized Needs Annexes.
 
-@begin{Leading}
-@Defn{informative}
+@begin{Wide}
+@Leading@Keepnext@Defn{informative}
 @IndexSee{Term=[non-normative],See=(informative)}
 @Defn2{Term=[Annex],Sec=(informative)}
 The following Annexes are informative:
-@end{Leading}
+@end{Wide}
 @begin{Itemize}
 @RefSec{Language-Defined Attributes}
 
@@ -411,11 +405,13 @@ other; it is the intent that a single implementation can conform
 to all of them.
 @end(Discussion)
 
+@begin{Wide}
 Each section is divided into clauses and subclauses that have a
 common structure.
 Each section, clause, and subclause first introduces its subject.
 After the introductory text,
 text is labeled with the following headings:
+@end{Wide}
 @end{Intro}
 
 @begin{MetaRules}
@@ -736,10 +732,8 @@ and does not appear in the RM95.
 
 @begin{ImplReq}
 
-@begin{Leading}
-@Defn2{Term=[conformance],Sec=(of an implementation with the Standard)}
+@Leading@Keepnext@Defn2{Term=[conformance],Sec=(of an implementation with the Standard)}
 A conforming implementation shall:
-@end{Leading}
 @begin{Discussion}
 @Defn{implementation}
 The @i{implementation} is the software and hardware that implements
@@ -845,15 +839,15 @@ the Specialized Needs Annexes.
      by this International Standard.
 @end(Itemize)
 
-@begin{Leading}
-@Defn2{Term=[external effect], Sec=(of the execution of an Ada program)}
+@begin{Wide}
+@Leading@keepnext@Defn2{Term=[external effect], Sec=(of the execution of an Ada program)}
 @Defn2{Term=[effect], Sec=(external)}
 The @i(external effect) of the execution of an Ada program is
 defined in terms of its interactions
 with its external environment.
 @Defn{external interaction}
 The following are defined as @i(external interactions):
-@end{Leading}
+@end{Wide}
 @begin(Itemize)
   Any interaction with an external file
   (see @RefSecNum(External Files and File Objects));
@@ -892,12 +886,14 @@ The following are defined as @i(external interactions):
     @end{Honest}
 @end(Itemize)
 
+@begin{Wide}
 A conforming implementation
 of this International Standard shall produce for the
 execution of a given Ada program
 a set of interactions with the external environment whose
 order and timing are consistent with the definitions and requirements of this
 International Standard for the semantics of the given program.
+@end{Wide}
 @begin{Ramification}
   There is no need to produce any of the @lquotes@;internal effects@rquotes@;
   defined for the semantics of the program @em all of these
@@ -1127,36 +1123,34 @@ The meaning of Ada programs is described by means of narrative
 rules defining both the effects of each construct and the composition
 rules for constructs.
 
-@begin{Leading}
-@keepnext@;@Defn2{Term=[syntax], Sec=(notation)}
+@Leading@keepnext@;@Defn2{Term=[syntax], Sec=(notation)}
 @Defn2{Term=[grammar], Sec=(notation)}
 @Defn2{Term=[context free grammar], Sec=(notation)}
 @Defn2{Term=[BNF (Backus-Naur Form)], Sec=(notation)}
 @Defn2{Term=[Backus-Naur Form (BNF)], Sec=(notation)}
 The context-free syntax of the language is described using a simple variant
 of Backus-Naur Form. In particular:
-@end{Leading}
 @begin(Itemize)
-@keepnext@;Lower case words in a sans-serif font,
+@leading@keepnext@;Lower case words in a sans-serif font,
 some containing embedded underlines, are used to
 denote syntactic categories, for example:
 @begin(Display)
 @nt<case_statement>
 @end(Display)
 
-@keepnext@;Boldface words are used to denote reserved words, for example:
+@leading@keepnext@;Boldface words are used to denote reserved words, for example:
 @begin(Display)
 @key(array)
 @end(Display)
 
-@keepnext@;Square brackets enclose optional items. Thus the two following
+@leading@keepnext@;Square brackets enclose optional items. Thus the two following
 rules are equivalent.
 @begin(Display)
 @nt<return_statement> ::= @key(return) [@nt<expression>];
 @nt<return_statement> ::= @key(return); | @key(return) @nt<expression>;
 @end(Display)
 
-@keepnext@;Curly brackets enclose a repeated item. The item may appear zero
+@leading@keepnext@;Curly brackets enclose a repeated item. The item may appear zero
 or more times; the repetitions occur from left to right as with an
 equivalent left-recursive rule. Thus the two following rules are
 equivalent.
@@ -1165,7 +1159,7 @@ equivalent.
 @nt<term> ::= @nt<factor> | @nt<term> @nt<multiplying_operator> @nt<factor>
 @end(Display)
 
-@keepnext@;A vertical line separates alternative items unless it occurs
+@leading@keepnext@;A vertical line separates alternative items unless it occurs
 immediately after an opening curly bracket, in which case it stands
 for itself:
 @begin(Display)
@@ -1217,11 +1211,13 @@ type Duration that is declared in Standard, not some type
 Duration the user might have declared.
 @end(Discussion)
 
+@begin{Wide}
 @Defn{syntactic category}
 A @i{syntactic category} is
 a nonterminal in the grammar defined in BNF under @lquotes@;@SyntaxTitle.@rquotes@;
 Names of syntactic categories are set in a different font,
 @nt{like_this}.
+@end{Wide}
 
 @ToGlossaryAlso{Term=<Construct>,
   Text=<A @i(construct) is a piece of text
@@ -1234,7 +1230,7 @@ whereas the thing declared by a declaration is an @lquotes@;entity.@rquotes@;
 @end{Ramification}
 @begin{Discussion}
 @lquotes@;Explicit@rquotes@; and @lquotes@;implicit@rquotes@; don't mean exactly what you might think
-they mean:  The text of an instance of a generic is
+they mean: The text of an instance of a generic is
 considered explicit, even though it does not appear explicitly (in
 the non-technical sense) in the program text,
 and even though its meaning is not defined entirely in terms of that
@@ -1314,10 +1310,8 @@ The preferred places for other line breaks are after semicolons.
 @LabeledSubClause{Classification of Errors}
 
 @begin{ImplReq}
-@begin{Leading}
-The language definition classifies errors into several different
-categories:
-@end{Leading}
+@Leading@Keepnext@;The language definition classifies errors into several
+different categories:
 @begin(Itemize)
      @Keepnext@;Errors that are required to be detected prior to run time by every
      Ada implementation;

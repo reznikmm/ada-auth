@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/08 04:35:32 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:44 $}
+@Comment{$Date: 2000/08/08 04:35:32 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -23,10 +23,10 @@ children are defined in @RefSec{Numerics}.
 @ChildUnit{Parent=[Ada],Child=[Numerics]}
 @key[package] Ada.Numerics @key[is]
    @key[pragma] Pure(Numerics);
-   Argument_Error : @key[exception];
-   Pi : @key[constant] :=
+   @AdaDefn{Argument_Error} : @key[exception];
+   @AdaDefn{Pi} : @key[constant] :=
           3.14159_26535_89793_23846_26433_83279_50288_41971_69399_37511;
-   e  : @key[constant] :=
+   @AdaDefn{e}  : @key[constant] :=
           2.71828_18284_59045_23536_02874_71352_66249_77572_47093_69996;
 @key[end] Ada.Numerics;
 @end{Example}
@@ -71,54 +71,54 @@ Numerics.Generic_Elementary_Functions has the following declaration:
 @begin{Example}
 @key{generic}
    @key{type} Float_Type @key{is} @key{digits} <>;
-@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Elementary_Functions]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Elementary_@!Functions]}
 @key{package} Ada.Numerics.Generic_Elementary_Functions @key{is}
    @key[pragma] Pure(Generic_Elementary_Functions);
 
-   @key{function} Sqrt    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Log     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Log     (X, Base     : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Exp     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Sqrt}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Log}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Log}     (X, Base     : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Exp}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} "**"    (Left, Right : Float_Type'Base)        @key{return} Float_Type'Base;
 
-   @key{function} Sin     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Sin     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Cos     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Cos     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Tan     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Tan     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Cot     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Cot     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Sin}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Sin}     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cos}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cos}     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Tan}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Tan}     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cot}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cot}     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
 
-   @key{function} Arcsin  (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Arcsin  (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Arccos  (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Arccos  (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Arctan  (Y           : Float_Type'Base;
+   @key{function} @AdaSubDefn{Arcsin}  (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arcsin}  (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccos}  (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccos}  (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arctan}  (Y           : Float_Type'Base;
                            X           : Float_Type'Base := 1.0) @key{return} Float_Type'Base;
-   @key{function} Arctan  (Y           : Float_Type'Base;
+   @key{function} @AdaSubDefn{Arctan}  (Y           : Float_Type'Base;
                            X           : Float_Type'Base := 1.0;
                            Cycle       : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Arccot  (X           : Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccot}  (X           : Float_Type'Base;
                            Y           : Float_Type'Base := 1.0) @key{return} Float_Type'Base;
-   @key{function} Arccot  (X           : Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccot}  (X           : Float_Type'Base;
                            Y           : Float_Type'Base := 1.0;
                            Cycle       : Float_Type'Base)        @key{return} Float_Type'Base;
 
-   @key{function} Sinh    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Cosh    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Tanh    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Coth    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Arcsinh (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Arccosh (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Arctanh (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} Arccoth (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Sinh}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cosh}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Tanh}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Coth}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arcsinh} (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccosh} (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arctanh} (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccoth} (X           : Float_Type'Base)        @key{return} Float_Type'Base;
 
 @key{end} Ada.Numerics.Generic_Elementary_Functions;
 @end{Example}
 
 @Defn{Ada.Numerics.Elementary_Functions}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Elementary_Functions]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Elementary_@!Functions]}
 The library package Numerics.Elementary_Functions
 defines the same subprograms as Numerics.Generic_Elementary_Functions,
 except that the predefined type Float is systematically substituted for
@@ -415,7 +415,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
 @begin{StaticSem}
 The library package Numerics.Float_Random has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Float_Random]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Float_@!Random]}
 @key[package] Ada.Numerics.Float_Random @key[is]
 
    -- @RI{Basic facilities}
@@ -424,13 +424,13 @@ The library package Numerics.Float_Random has the following declaration:
    @key[type] Generator @key[is] @key[limited] @key[private];
 
 
-   @key[subtype] Uniformly_Distributed @key[is] Float @key[range] 0.0 .. 1.0;
-   @key[function] Random (Gen : Generator) @key[return] Uniformly_Distributed;
+   @key[subtype] @AdaDefn{Uniformly_Distributed} @key[is] Float @key[range] 0.0 .. 1.0;
+   @key[function] @AdaSubDefn{Random} (Gen : Generator) @key[return] Uniformly_Distributed;
 
 
-   @key[procedure] Reset (Gen       : @key[in] Generator;
+   @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator;
                     Initiator : @key[in] Integer);
-   @key[procedure] Reset (Gen       : @key[in] Generator);
+   @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator);
 
 
    -- @RI{Advanced facilities}
@@ -439,17 +439,17 @@ The library package Numerics.Float_Random has the following declaration:
    @key[type] State @key[is] @key[private];
 
 
-   @key[procedure] Save  (Gen        : @key[in]  Generator;
+   @key[procedure] @AdaSubDefn{Save}  (Gen        : @key[in]  Generator;
                     To_State   : @key[out] State);
-   @key[procedure] Reset (Gen        : @key[in]  Generator;
+   @key[procedure] @AdaSubDefn{Reset} (Gen        : @key[in]  Generator;
                     From_State : @key[in]  State);
 
 
-   Max_Image_Width : @key[constant] := @RI{implementation-defined integer value};
+   @AdaDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};
 
 
-   @key[function] Image (Of_State    : State)  @key[return] String;
-   @key[function] Value (Coded_State : String) @key[return] State;
+   @key[function] @AdaSubDefn{Image} (Of_State    : State)  @key[return] String;
+   @key[function] @AdaSubDefn{Value} (Coded_State : String) @key[return] State;
 
 
 @key[private]
@@ -460,7 +460,7 @@ The library package Numerics.Float_Random has the following declaration:
 The generic library package Numerics.Discrete_Random has the following
 declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Discrete_Random]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Discrete_@!Random]}
 @key[generic]
    @key[type] Result_Subtype @key[is] (<>);
 @key[package] Ada.Numerics.Discrete_Random @key[is]
@@ -471,12 +471,12 @@ declaration:
    @key[type] Generator @key[is] @key[limited] @key[private];
 
 
-   @key[function] Random (Gen : Generator) @key[return] Result_Subtype;
+   @key[function] @AdaSubDefn{Random} (Gen : Generator) @key[return] Result_Subtype;
 
 
-   @key[procedure] Reset (Gen       : @key[in] Generator;
+   @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator;
                     Initiator : @key[in] Integer);
-   @key[procedure] Reset (Gen       : @key[in] Generator);
+   @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator);
 
 
    -- @RI{Advanced facilities}
@@ -485,17 +485,17 @@ declaration:
    @key[type] State @key[is] @key[private];
 
 
-   @key[procedure] Save  (Gen        : @key[in]  Generator;
+   @key[procedure] @AdaSubDefn{Save}  (Gen        : @key[in]  Generator;
                     To_State   : @key[out] State);
-   @key[procedure] Reset (Gen        : @key[in]  Generator;
+   @key[procedure] @AdaSubDefn{Reset} (Gen        : @key[in]  Generator;
                     From_State : @key[in]  State);
 
 
-   Max_Image_Width : @key[constant] := @RI{implementation-defined integer value};
+   @AdaDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};
 
 
-   @key[function] Image (Of_State    : State)  @key[return] String;
-   @key[function] Value (Coded_State : String) @key[return] State;
+   @key[function] @AdaSubDefn{Image} (Of_State    : State)  @key[return] String;
+   @key[function] @AdaSubDefn{Value} (Coded_State : String) @key[return] State;
 
 
 @key[private]
@@ -505,6 +505,7 @@ declaration:
 @ImplDef{The value of Numerics.Float_Random.Max_Image_Width.}
 @ImplDef{The value of Numerics.Discrete_Random.Max_Image_Width.}
 @begin{ImplNote}
+@Leading@;
 The following is a possible implementation of the private part of each
 package (assuming the presence of @lquotes@;@key[with] Ada.Finalization;@rquotes@; as
 a context clause):

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:23 $}
+@Comment{$Date: 2000/08/08 04:35:31 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @LabeledClause{Array Types}
 
@@ -89,14 +89,13 @@ be constrained does not help @em that rule
 prevents assignments to the component itself from doing any harm,
 but not assignments to the containing object.
 
-@begin{Leading}
+@Leading@;
 We allow this for components within limited types since assignment to
 the enclosing object is not a problem. Furthermore, it is
 important to be able to use a default expression for a discriminant
 in arrays of limited components, since that is the only way
 to give the components different values for their discriminants.
 For example:
-@end{Leading}
 @begin{Example}
 @key[protected] @key[type] Counter_Type(Initial_Value : Integer := 1) @key[is]
    @key[procedure] Get_Next(Next_Value : @key[out] Integer);
@@ -200,11 +199,9 @@ of the index ranges.
   This is also true for Ada 83.
 @end{Discussion}
 
-@begin{Leading}
-The discrete subtype defined by a @nt{discrete_subtype_definition} is
+@Leading@;The discrete subtype defined by a @nt{discrete_subtype_definition} is
 either that defined by the @nt{subtype_indication}, or a subtype
 determined by the @nt{range} as follows:
-@end{Leading}
 @begin(itemize)
   If the type of the @nt{range} resolves to @i(root_integer), then
   the @nt{discrete_subtype_definition} defines a subtype of the
@@ -276,9 +273,7 @@ is of its own unique type.
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i(Examples of type declarations with unconstrained array definitions: )
-@end{Leading}
+@Leading@keepnext@i(Examples of type declarations with unconstrained array definitions: )
 @begin(Example)
 @key(type) Vector     @key(is) @key(array)(Integer  @key(range) <>) @key(of) Real;
 @key(type) Matrix     @key(is) @key(array)(Integer  @key(range) <>, Integer @key(range) <>) @key(of) Real;
@@ -286,18 +281,18 @@ is of its own unique type.
 @key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; @RI[-- see @RefSecNum(Character Types)]
 @end(Example)
 
-@begin{WideLeading}
-@i(Examples of type declarations with constrained array definitions: )
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Examples of type declarations with constrained array definitions: )
+@end{Wide}
 @begin(Example)
 @key(type) Table    @key(is) @key(array)(1 .. 10) @key(of) Integer;
 @key(type) Schedule @key(is) @key(array)(Day) @key(of) Boolean;
 @key(type) Line     @key(is) @key(array)(1 .. Max_Line_Size) @key(of) Character;
 @end(Example)
 
-@begin{WideLeading}
-@i(Examples of object declarations with array type definitions: )
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Examples of object declarations with array type definitions: )
+@end{Wide}
 @begin(Example)
 Grid : @key(array)(1 .. 80, 1 .. 100) @key(of) Boolean;
 Mix  : @key(array)(Color @key(range) Red .. Green) @key(of) Boolean;
@@ -433,9 +428,7 @@ array subtype match. See @RefSecNum(Type Conversions).
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i(Examples of array declarations including an index constraint: )
-@end{Leading}
+@leading@keepnext@i(Examples of array declarations including an index constraint: )
 @begin(Example)
 Board     : Matrix(1 .. 8,  1 .. 8);  @RI[--  see @RefSecNum(Array Types)]
 Rectangle : Matrix(1 .. 20, 1 .. 30);
@@ -444,16 +437,16 @@ Inverse   : Matrix(1 .. N,  1 .. N);  @RI[--  N need not be static ]
 Filter    : Bit_Vector(0 .. 31);
 @end(Example)
 
-@begin{WideLeading}
-@i(Example of array declaration with a constrained array subtype: )
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Example of array declaration with a constrained array subtype: )
+@end{Wide}
 @begin(Example)
 My_Schedule : Schedule;  @RI[--  all arrays of type Schedule have the same bounds]
 @end(Example)
 
-@begin{WideLeading}
-@i(Example of record type with a component that is an array: )
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Example of record type with a component that is an array: )
+@end{Wide}
 @begin(Example)
 @key(type) Var_Line(Length : Natural) @key(is)
    @key(record)
@@ -551,13 +544,11 @@ instead (see @RefSec{Interfacing with Fortran}).
 @end{ImplAdvice}
 
 @begin{Notes}
-@begin{NotesLeading}
-The @nt<attribute_reference>s A'First and A'First(1) denote the same value.
+@Leading@;The @nt<attribute_reference>s A'First and A'First(1) denote the same value.
 A similar relation exists for the @nt<attribute_reference>s A'Last,
 A'Range, and A'Length. The following relation is satisfied (except
 for a null array) by the above attributes if the index type is an
 integer type:
-@end{NotesLeading}
 @begin(example)
 A'Length(N) = A'Last(N) - A'First(N) + 1
 @end(example)
@@ -585,9 +576,7 @@ a character type.
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i{Examples (using arrays declared in the examples of subclause @RefSecNum(Index Constraints and Discrete Ranges)):}
-@end{Leading}
+@Leading@keepnext@i{Examples (using arrays declared in the examples of subclause @RefSecNum(Index Constraints and Discrete Ranges)):}
 @begin(Example)
 --  Filter'First      =   0   Filter'Last       =  31   Filter'Length =  32
 --  Rectangle'Last(1) =  20   Rectangle'Last(2) =  30
@@ -602,11 +591,9 @@ a character type.
 A one-dimensional array type whose component type is a character type
 is called a @i(string) type.
 
-@begin{Leading}
-@redundant[There are two predefined string types, String and Wide_String,
+@Leading@redundant[There are two predefined string types, String and Wide_String,
 each indexed by values of the predefined subtype Positive;
 these are declared in the visible part of package Standard:]
-@end{Leading}
 @begin(example)
 @redundant[@key(subtype) Positive @key(is) Integer @key(range) 1 .. Integer'Last;
 
@@ -629,9 +616,7 @@ these ordering operators correspond to lexicographic order
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i(Examples of string objects:)
-@end{Leading}
+@Leading@keepnext@i(Examples of string objects:)
 @begin(Example)
 @TabClear()@TabSet(P50)
 Stars      : String(1 .. 120) := (1 .. 120 => '*' );
@@ -795,9 +780,7 @@ instance of a generic unit.
   This is important to avoid dangling references to local variables.
 @end{Ramification}
 @begin{Reason}
-  @begin{Leading}
-  We also considered the following rules:
-  @end{Leading}
+  @Leading@keepnext@;We also considered the following rules:
   @begin{Itemize}
     If a type has an access discriminant,
     this automatically makes it limited,
@@ -813,7 +796,7 @@ instance of a generic unit.
     if it is limited just because of a limited component.
     For example, any record containing a task would be allowed to have
     an access discriminant, whereas the actual rule requires
-    @lquotes@;@key[limited] @key[record]@rquotes@;.
+    @lquotes@key[limited] @key[record]@rquotes@;.
     This rule was also rejected due to readability concerns,
     and because would interact badly with the rules for
     limited types that @lquotes@;become nonlimited@rquotes@;.
@@ -848,10 +831,8 @@ type @Redundant[or a generic formal type].
   a constrained subtype can be declared for future use.
 @end(Reason)
 
-@begin{Leading}
-For a type defined by a @nt<derived_type_definition>,
+@Leading@;For a type defined by a @nt<derived_type_definition>,
 if a @nt<known_discriminant_part> is provided in its declaration, then:
-@end{Leading}
 @begin{Itemize}
 The parent subtype shall be constrained;
 
@@ -936,10 +917,8 @@ that corresponds to it.
   itself that are considered dependents. Similarly for protected types.
 @end(Ramification)
 
-@begin{Leading}
-@Defn2{Term=[depend on a discriminant], Sec=(for a component)}
+@Leading@keepnext@Defn2{Term=[depend on a discriminant], Sec=(for a component)}
 A component @i(depends on a discriminant) if:
-@end{Leading}
 @begin(itemize)
   Its @nt{component_definition} depends on the discriminant; or
   @begin{Ramification}
@@ -1150,9 +1129,7 @@ used only for discriminants defined by an @nt<access_definition>.
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i(Examples of discriminated types:)
-@end{Leading}
+@Leading@keepnext@i(Examples of discriminated types:)
 @begin(Example)
 @key(type) Buffer(Size : Buffer_Size := 100)  @key(is)        @RI[-- see @RefSecNum(Integer Types)]
    @key(record)
@@ -1339,9 +1316,7 @@ in extensions that are not constrained to any particular value.
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i{Examples (using types declared above in clause @RefSecNum(Discriminants)):}
-@end{Leading}
+@Leading@keepnext@i{Examples (using types declared above in clause @RefSecNum(Discriminants)):}
 @begin(Example)
 Large   : Buffer(200);  @RI[--  constrained, always 200 characters]
                         @RI[--   (explicit discriminant value)]
@@ -1701,9 +1676,7 @@ unless the record type is limited.
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i(Examples of record type declarations: )
-@end{Leading}
+@Leading@keepnext@i(Examples of record type declarations: )
 @begin(Example)
 @key(type) Date @key(is)
    @key(record)
@@ -1719,9 +1692,9 @@ unless the record type is limited.
    @key(end) @key(record);
 @end(Example)
 
-@begin{WideLeading}
-@i(Examples of record variables: )
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Examples of record variables: )
+@end{Wide}
 @begin(Example)
 Tomorrow, Yesterday : Date;
 A, B, C : Complex;
@@ -1841,11 +1814,9 @@ The @nt{discrete_choice} @key(others) shall appear alone
 in a @nt{discrete_choice_list}, and such a @nt{discrete_choice_list},
 if it appears, shall be the last one in the enclosing construct.
 
-@begin{Leading}
-@PDefn2{Term=[cover a value], Sec=(by a @nt{discrete_choice})}
+@Leading@PDefn2{Term=[cover a value], Sec=(by a @nt{discrete_choice})}
 A @nt<discrete_choice> is defined to @i(cover a value) in the
 following cases:
-@end{Leading}
 @begin(itemize)
   A @nt{discrete_choice} that is an @nt{expression} covers a value if
   the value equals the value of the @nt{expression}
@@ -1872,10 +1843,8 @@ following cases:
 A @nt{discrete_choice_list} covers a value if one of
 its @nt{discrete_choice}s covers the value.
 
-@begin{Leading}
-The possible values of the discriminant of a @nt{variant_part}
+@Leading@keepnext@;The possible values of the discriminant of a @nt{variant_part}
 shall be covered as follows:
-@end{Leading}
 @begin{itemize}
   If the discriminant is of a static constrained scalar subtype,
   then each non-@key{others} @nt{discrete_choice} shall cover only values in
@@ -1930,9 +1899,7 @@ of the elaboration of the @nt{component_list} of each
 @end{RunTime}
 
 @begin{Examples}
-@begin{Leading}
-@i(Example of record type with a variant part: )
-@end{Leading}
+@Leading@keepnext@i(Example of record type with a variant part: )
 @begin(Example)
 @key(type) Device @key(is) (Printer, Disk, Drum);
 @key(type) State  @key(is) (Open, Closed);
@@ -1950,17 +1917,17 @@ of the elaboration of the @nt{component_list} of each
       @key(end) @key(record);
 @end(Example)
 
-@begin{WideLeading}
-@i(Examples of record subtypes:)
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Examples of record subtypes:)
+@end{Wide}
 @begin(Example)
 @key(subtype) Drum_Unit @key(is) Peripheral(Drum);
 @key(subtype) Disk_Unit @key(is) Peripheral(Disk);
 @end(Example)
 
-@begin{WideLeading}
-@i(Examples of constrained record variables:)
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i(Examples of constrained record variables:)
+@end{Wide}
 @begin(Example)
 Writer   : Peripheral(Unit  => Printer);
 Archive  : Disk_Unit;
@@ -2173,9 +2140,7 @@ of the generic body result in distinct tags.
   implementation models implies per-elaboration of the instantiation.
 @end{implnote}
 
-@begin{Leading}
-The following language-defined library package exists:
-@end{Leading}
+@Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @key[is]
 @LangDefType{Package=[Tags],Type=[Tag]}
@@ -2248,7 +2213,7 @@ defined:
   rooted at @i(T) (or if S already denotes a class-wide subtype,
   then S'Class is the same as S).
 
-  @Noprefix@;@Defn2{Term=[unconstrained], Sec=(subtype)}
+  @Noprefix@Defn2{Term=[unconstrained], Sec=(subtype)}
   @Defn2{Term=[constrained], Sec=(subtype)}
   S'Class is unconstrained. However,
   if S is constrained, then the values of S'Class are only those
@@ -2305,10 +2270,8 @@ the following attribute is defined:
 @end{StaticSem}
 
 @begin{RunTime}
-@begin{Leading}
-The tag associated with an object of a tagged type is
+@Leading@keepnext@;The tag associated with an object of a tagged type is
 determined as follows:
-@end{Leading}
 @begin(Itemize)
 @PDefn2{Term=[tag of an object], Sec=(stand-alone object,
   component, or @nt<aggregate>)}
@@ -2417,9 +2380,7 @@ the library unit in which the incomplete type is declared
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i(Examples of tagged record types:)
-@end{Leading}
+@Leading@keepnext@i(Examples of tagged record types:)
 @begin(Example)
 @key(type) Point @key(is tagged)
   @key(record)
@@ -2502,9 +2463,8 @@ attempt to execute an inaccessible subprogram body.
 The part about generic bodies is necessary in order to preserve the
 contract model.
 
-@begin{Leading}
-Since a generic unit can be instantiated at a deeper accessibility level
-than the generic unit, it is necessary to prevent type extensions whose
+@Leading@;Since a generic unit can be instantiated at a deeper accessibility
+level than the generic unit, it is necessary to prevent type extensions whose
 parent is declared outside the generic unit.
 The same is true if the parent is a formal of the generic unit.
 If the parent is declared in the @nt{generic_declaration}
@@ -2515,7 +2475,6 @@ same accessibility level.
 However, we still have a problem in that case, because
 it might have an unknown number of abstract subprograms,
 as in the following example:
-@end{Leading}
 @begin{Example}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[tagged] @key[null] @key[record];
@@ -2532,7 +2491,7 @@ as in the following example:
 @key[package] @key[body] Gp @key[is]
     @key[type] NT2 @key[is] @key[new] NT @key[with] @key[null] @key[record]; --@RI{ Illegal!}
     @key[procedure] Q(X : @key[in] NT2) @key[is] @key[begin] @key[null]; @key[end] Q;
-    --@RI{ Is this legal or not?  Can't decide because}
+    --@RI{ Is this legal or not? Can't decide because}
     --@RI{ we don't know whether TT had any functions that go abstract}
     --@RI{ on extension.}
 @key[end] Gp;
@@ -2632,9 +2591,7 @@ from the parent type or declared in the
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i{Examples of record extensions (of types defined above in @RefSecNum(Tagged Types and Type Extensions)):}
-@end{Leading}
+@Leading@keepnext@i{Examples of record extensions (of types defined above in @RefSecNum(Tagged Types and Type Extensions)):}
 @begin(Example)
 @key(type) Painted_Point @key(is new) Point @key(with)
   @key(record)
@@ -2745,8 +2702,7 @@ If the call is to a (primitive) function with result type @i(T),
 then the call has a @i(controlling result) @em
 the context of the call can control the dispatching.
 
-@begin{Leading}
-A @nt<name> or expression of a tagged type
+@Leading@;A @nt<name> or expression of a tagged type
 is either @i(statically) tagged,
 @i(dynamically) tagged, or @i(tag indeterminate), according
 to whether, when used as a controlling operand, the tag
@@ -2758,7 +2714,6 @@ A @nt<qualified_expression> or parenthesized expression is
 statically, dynamically, or indeterminately tagged according
 to its operand. For other kinds of @nt<name>s and expressions, this
 is determined as follows:
-@end{Leading}
 @begin(Itemize)
   @Defn{statically tagged}
   The @nt<name> or expression is @i(statically
@@ -2895,7 +2850,7 @@ been declared yet, and (2) we want to allow tagged type descriptors
 to be static (allocated statically, and initialized to link-time-known
 symbols). Suppose T2 inherits primitive P from T1, and then
 overrides P. Suppose P is called @i{before} the declaration of the
-overriding P. What should it dispatch to?  If the answer is the new
+overriding P. What should it dispatch to? If the answer is the new
 P, we've violated the first principle above. If the answer is the
 old P, we've violated the second principle. (A call
 to the new one necessarily raises Program_Error, but that's
@@ -2927,14 +2882,12 @@ declared by a @nt{subprogram_body}.
 @end{Legality}
 
 @begin{RunTime}
-@begin{Leading}
-@PDefn2{Term=[execution], Sec=(call on a dispatching operation)}
+@Leading@PDefn2{Term=[execution], Sec=(call on a dispatching operation)}
 @Defn{controlling tag value}
 For the execution of a call on a dispatching operation of a type @i(T),
 the @i(controlling tag value) determines
 which subprogram body is executed.
 The controlling tag value is defined as follows:
-@end{Leading}
 @begin(itemize)
   @PDefn{statically determined tag}
   If one or more controlling operands are statically tagged, then
@@ -2971,9 +2924,7 @@ The controlling tag value is defined as follows:
     between objects with different constraints, never raise Constraint_Error.
   @end(Reason)
 
-@begin{Leading}
-  If all of the controlling operands are tag-indeterminate, then:
-@end{Leading}
+@Leading@keepnext@;If all of the controlling operands are tag-indeterminate, then:
   @begin(itemize)
     If the call has a controlling result and is itself a (possibly
     parenthesized or qualified)
@@ -3016,16 +2967,14 @@ that is, the @lquotes@;corresponding explicit body@rquotes@; in the above rule i
 body itself.
 @end{Honest}
 @begin{Reason}
-@begin{Leading}
-The wording of the above rule is intended to ensure that the same body
-is executed for a given tag,
+@Leading@;The wording of the above rule is intended to ensure that the same
+body is executed for a given tag,
 whether that tag is determined statically or dynamically.
 For a type declared in a package,
 it doesn't matter whether a given subprogram is
 overridden in the visible part or the private part,
 and it doesn't matter whether the call is inside or outside the package.
 For example:
-@end{Leading}
 @begin{Example}
 @key[package] P1 @key[is]
     @key[type] T1 @key[is] @key[tagged] @key[null] @key[record];
@@ -3171,10 +3120,8 @@ A subprogram declared by an @nt{abstract_subprogram_declaration}
 If it is a primitive subprogram of a tagged type,
 then the tagged type shall be abstract.
 @begin{Ramification}
-@begin{Leading}
-  Note that for a private type, this applies to both views.
+@Leading@keepnext@;Note that for a private type, this applies to both views.
   The following is illegal:
-@end{Leading}
 @begin{Example}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[abstract] @key[tagged] @key[private];
@@ -3193,14 +3140,12 @@ The two lines marked "--@i{ Illegal!}" are illegal when taken together.
 
 @end{Ramification}
 @begin{Reason}
-@begin{Leading}
-  We considered disallowing untagged types from having abstract
+@Leading@;We considered disallowing untagged types from having abstract
   primitive subprograms.
   However, we rejected that plan, because it introduced some silly
   anomalies, and because such subprograms are harmless (if not terribly
   useful).
   For example:
-@end{Leading}
 @begin{Example}
 @key[package] P @key[is]
    @key[type] Field_Size @key[is] @key[range] 0..100;
@@ -3220,11 +3165,9 @@ Other rules could be formulated to solve this problem,
 but the current ones seem like the simplest.
 @end{Reason}
 
-@begin{Leading}
-For a derived type, if the parent or ancestor type has an abstract
+@Leading@;For a derived type, if the parent or ancestor type has an abstract
 primitive subprogram,
 or a primitive function with a controlling result, then:
-@end{Leading}
 @begin{Itemize}
   If the derived type is abstract or untagged,
   the inherited subprogram is @i{abstract}.
@@ -3250,10 +3193,8 @@ or a primitive function with a controlling result, then:
     @key{out} do not have this problem, because the tag of the actual
     is not changed.)
 
-    @begin{Leading}
-    Note that the overriding required above can be in the private
+    @Leading@keepnext@;Note that the overriding required above can be in the private
     part, which allows the following:
-    @end{Leading}
     @begin{Example}
 @key[package] Pack1 @key[is]
     @key[type] Ancestor @key[is] @key[abstract] ...;
@@ -3347,10 +3288,9 @@ shall not be declared in the private part,
 unless it is overriding a function
 implicitly declared in the visible part.
 @begin{Reason}
-@begin{Leading}
-The @lquotes@;visible part@rquotes@; could be that of a package or a generic package.
-This rule is needed because a non-abstract type extension declared
-outside the package would not know about any abstract primitive
+@Leading@;The @lquotes@;visible part@rquotes@; could be that of a package
+or a generic package. This rule is needed because a non-abstract type extension
+declared outside the package would not know about any abstract primitive
 subprograms or primitive functions with controlling results
 declared in the private part, and wouldn't know that they
 need to be overridden with non-abstract subprograms.
@@ -3359,7 +3299,6 @@ in a visible part,
 just as to a tagged private type or private extension.
 The rule applies to explicitly and implicitly declared abstract
 subprograms:
-@end{Leading}
 @begin{Example}
 @key[package] Pack @key[is]
     @key[type] T @key[is] @key[abstract] @key[new] T1 @key[with] @key[private];
@@ -3410,9 +3349,7 @@ some nonabstract type in the class.
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i(Example of an abstract type representing a set of natural numbers:)
-@end{Leading}
+@Leading@keepnext@i(Example of an abstract type representing a set of natural numbers:)
 @begin{Example}
 @key(package) Sets @key(is)
     @key(subtype) Element_Type @key(is) Natural;
@@ -3599,11 +3536,9 @@ either by the designated subtype, or by its initial value.]
   associated with allowing components that are not declared aliased
   to be pointed-to from within the same record.
 
-@begin{Leading}
-  A view conversion of an aliased view is aliased so that
+@Leading@;A view conversion of an aliased view is aliased so that
   the type of an access parameter can be changed without
   first converting to a named access type. For example:
-@end{Leading}
 @begin{Example}
 @key(type) T1 @key(is tagged) ...;
 @key(procedure) P(X : @key(access) T1);
@@ -3717,7 +3652,7 @@ There is a @i(calling convention) associated with the designated
 profile@Redundant[; only subprograms with this
 calling convention can be designated by
 values of the access type.]
-By default, the calling convention is @lquotes@;@i(protected)@rquotes@; if the reserved
+By default, the calling convention is @lquotes@i(protected)@rquotes@; if the reserved
 word @key(protected) appears, and @lquotes@;Ada@rquotes@; otherwise.
 @Redundant[See @RefSecNum{Interface to Other Languages}
 for how to override this default.]
@@ -3838,7 +3773,7 @@ the actual parameter is null.
 @PDefn2{Term=[constrained],Sec=(subtype)}
 @PDefn2{Term=[unconstrained],Sec=(subtype)}
 @Redundant[All subtypes of an access-to-subprogram type
-are constrained.]  The first subtype of a type defined by
+are constrained.] The first subtype of a type defined by
 an @nt<access_type_definition> or an @nt<access_to_object_definition>
 is unconstrained if the designated subtype is an unconstrained
 array or discriminated type; otherwise it is constrained.
@@ -3912,25 +3847,23 @@ can be applied to access types
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i{Examples of access-to-object types:}
-@end{Leading}
+@Leading@keepnext@i{Examples of access-to-object types:}
 @begin{Example}
 @key[type] Peripheral_Ref @key[is access] Peripheral;  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
 @key[type] Binop_Ptr @key[is access all] Binary_Operation'Class;
                                            @RI[-- general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
 
-@begin{WideLeading}
-@i{Example of an access subtype:}
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i{Example of an access subtype:}
+@end{Wide}
 @begin{Example}
 @key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
 @end{Example}
 
-@begin{WideLeading}
-@i{Example of an access-to-subprogram type:}
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@i{Example of an access-to-subprogram type:}
+@end{Wide}
 @begin{Example}
 @key[type] Message_Procedure @key[is] @key[access] @key[procedure] (M : @key[in] String := "Error!");
 @key[procedure] Default_Message_Procedure(M : @key[in] String);
@@ -4027,10 +3960,8 @@ then a corresponding @nt{full_type_declaration} is nevertheless allowed
 to have discriminants,
 either explicitly, or inherited via derivation.]
 
-@begin{Leading}
-The only allowed uses of a @nt{name} that denotes an
+@Leading@keepnext@;The only allowed uses of a @nt{name} that denotes an
 @nt{incomplete_type_declaration} are as follows:
-@end{Leading}
 @begin(Discussion)
   No need
   to say "prior to the end of the @nt{full_type_declaration}" since
@@ -4127,9 +4058,7 @@ all types declared prior to it in the same @nt<declarative_part>
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i(Example of a recursive type:)
-@end{Leading}
+@Leading@keepnext@i(Example of a recursive type:)
 @begin(Example)
 @key(type) Cell;  @RI[--  incomplete type declaration]
 @key(type) Link @key(is) @key(access) Cell;
@@ -4198,15 +4127,13 @@ has discriminants.
 @end{Extend83}
 
 @begin{DiffWord83}
-@begin{Leading}
-Dereferences producing incomplete types
+@Leading@;Dereferences producing incomplete types
 were not explicitly disallowed in RM83, though
 AI83-00039 indicated that it was not strictly necessary since
 troublesome cases would result in Constraint_Error at run time,
 since the access value would necessarily be null.
 However, this introduces an undesirable implementation burden,
 as illustrated by Example 4 of AI83-00039:
-@end{Leading}
 @begin{example}
 @key[package] Pack @key[is]
     @key[type] Pri @key[is] @key[private];
@@ -4335,10 +4262,8 @@ Run-time accessibility checks are also used,
 since the @LegalityTitle do not cover
 certain cases involving access parameters and generic packages.]
 
-@begin{Leading}
-Each master, and each entity and view created by it,
+@Leading@;Each master, and each entity and view created by it,
 has an accessibility level:
-@end{Leading}
 @begin{Itemize}
 The accessibility level of a given master is deeper than
 that of each dynamically enclosing master,
@@ -4408,12 +4333,10 @@ is the same as that of
 @end{Itemize}
 
 
-@begin{Leading}
-@Defn{statically deeper}
+@Leading@Defn{statically deeper}
 @Defn2{Term=[deeper],Sec=(statically)}
 One accessibility level is defined to be
 @i{statically deeper} than another in the following cases:
-@end{Leading}
 @begin{Itemize}
 For a master that is statically nested within another master,
 the accessibility level of the inner master is statically deeper than
@@ -4464,10 +4387,9 @@ is the library level.
   and not within subprograms, tasks, etc.
 @end{Ramification}
 @begin{Honest}
-  @begin{Leading}
-  The definition of the accessibility level of the anonymous type of an
-  access parameter cheats a bit, since it refers to the view designated by
-  the actual, but access values designate objects, not views of objects.
+  @Leading@;The definition of the accessibility level of the anonymous type
+  of an access parameter cheats a bit, since it refers to the view designated
+  by the actual, but access values designate objects, not views of objects.
   What we really mean is the view that @lquotes@;would be@rquotes@; denoted by an
   expression @lquotes@;X.@key[all]@rquotes@;, where X is the actual, even though such
   an expression is a figment of our imagination.
@@ -4475,7 +4397,6 @@ is the library level.
   following more verbose version:
   The accessibility level of the anonymous type of an access parameter is
   as follows:
-  @end{Leading}
   @begin{Itemize}
   if the actual is
   an expression of a named access type @em
@@ -4545,11 +4466,9 @@ is the library level.
   this implies that Y will be (dynamically) deeper than X in all
   possible executions.
 
-  @begin{Leading}
-  Most accessibility checking is done at compile time;
+  @Leading@;Most accessibility checking is done at compile time;
   the rules are stated in terms of @lquotes@;statically deeper than@rquotes@;.
   The exceptions are:
-  @end{Leading}
   @begin{Itemize}
   Checks involving access parameters. The fact that @lquotes@;statically deeper
   than@rquotes@; is not defined for the anonymous access type of an access
@@ -4636,10 +4555,8 @@ is the library level.
   get their nesting level from their parent).
   Checking @lquotes@;not deeper than@rquotes@; is a "<=" test on the levels.
 
-  @begin{Leading}
-  For each access parameter, the static depth passed depends on the
+  @Leading@keepnext@;For each access parameter, the static depth passed depends on the
   actual, as follows:
-  @end{Leading}
   @begin{Itemize}
   If the actual is
   an expression of a named access type,
@@ -4682,9 +4599,7 @@ is the library level.
   is efficient, and, more importantly, avoids distributed overhead.
 @end(ImplNote)
 @begin{Discussion}
-@begin{Leading}
-Examples of accessibility:
-@end{Leading}
+@Leading@keepnext@;Examples of accessibility:
 @begin{Example}
 @key[package] @key[body] Lib_Unit @key[is]
     @key[type] T @key[is] @key[tagged] ...;
@@ -4713,9 +4628,7 @@ unit, if P is called, the accessibility level of X will be
 (dynamically) deeper than that of A0.
 Note that the accessibility levels of X and Y are the same.
 
-@begin{Leading}
-Here's an example involving access parameters:
-@end{Leading}
+@Leading@keepnext@;Here's an example involving access parameters:
 @begin{Example}
 @key[procedure] Main @key[is]
     @key[type] Level_1_Type @key[is] @key[access] @key[all] Integer;
@@ -4754,11 +4667,9 @@ and no code should be generated to check it.
 The check at (2) will fail when called from (3),
 but not when called from (4).
 
-@begin{Leading}
-Within a @nt{type_declaration}, the rules are checked in an
+@Leading@;Within a @nt{type_declaration}, the rules are checked in an
 assume-the-worst manner.
 For example:
-@end{Leading}
 @begin{Example}
 @key[package] P @key[is]
     @key[type] Int_Ptr @key[is] @key[access] @key[all] Integer;
@@ -4791,10 +4702,8 @@ which the compiler can't see while compiling an object creation.
 @end{Discussion}
 
 
-@begin{Leading}
-The following attribute is defined for @PrefixType{a @nt{prefix} X that
+@Leading@;The following attribute is defined for @PrefixType{a @nt{prefix} X that
 denotes an aliased view of an object}:
-@end{Leading}
 @begin(description)
 @Attribute{Prefix=<X>, AttrName=<Access>,
   Text=<X'Access yields an access value that designates the object
@@ -4838,8 +4747,7 @@ The current instance of a limited type
     disappear or move or change constraints after creating the reference.
   @end{Reason}
   @begin{ImplNote}
-     @begin{Leading}
-     There was some thought to making this restriction
+     @Leading@;There was some thought to making this restriction
      more stringent, roughly:
      "X shall not denote a subcomponent of a variable
      with discriminant-dependent subcomponents, if the nominal
@@ -4850,7 +4758,6 @@ The current instance of a limited type
      of the enclosing object. However, it was decided not to make
      this change because a reasonable implementation strategy was identified
      to avoid such problems, as follows:
-     @end{Leading}
      @begin(Itemize)
        Place non-discriminant-dependent components with any aliased parts
        at offsets preceding any discriminant-dependent components
@@ -5075,9 +4982,7 @@ comparison.@end{ramification}
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@i{Example of use of the Access attribute:}
-@end{Leading}
+@Leading@keepnext@i{Example of use of the Access attribute:}
 @begin{Example}
 Martha : Person_Name := @key[new] Person(F);       @RI[-- see @RefSecNum{Incomplete Type Declarations}]
 Cars   : @key[array] (1..2) @key[of] @key[aliased] Car;
@@ -5263,10 +5168,8 @@ and is either another declaration, a body, or a @nt<pragma>.
 @Chg{New=[A @i<body>@defn{body} is a @nt<body>,
 an @nt<entry_body>, or a renaming-as-body (see 8.5.4).],Old=[]}
 @begin{Discussion}
-@begin{Leading}
-Throughout the RM95, there are rules about completions that
+@Leading@keepnext@;Throughout the RM95, there are rules about completions that
 define the following:
-@end{Leading}
 @begin{Itemize}
 Which declarations require a corresponding completion.
 
@@ -5291,11 +5194,9 @@ Thus, a declaration can actually come in @i{three} parts.
 @end{Intro}
 
 @begin{Resolution}
-@begin{Leading}
-A construct that can be a completion
+@Leading@keepnext@;A construct that can be a completion
 is interpreted as the completion of a prior
 declaration only if:
-@end{Leading}
 @begin(itemize)
 The declaration and the completion occur immediately within
 the same declarative region;

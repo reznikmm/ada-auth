@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:36 $}
+@Comment{$Date: 2000/08/08 04:35:30 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -74,9 +74,7 @@ for the visual representation of
 the text of an Ada program is not specified.
 @PDefn{unspecified}
 
-@begin{Leading}
-@keepnext@;The categories of characters are defined as follows:
-@end{Leading}
+@Leading@keepnext@;The categories of characters are defined as follows:
 @begin{Description}
 @Defn{identifier_letter}@nt<identifier_letter> @\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}
 @begin{Discussion}
@@ -126,8 +124,7 @@ other than a @nt<format_effector>, that is allowed in a comment; the set of
 @IndexSeeAlso{Term=[control character],See=(other_control_function)}
 @end{Description}
 
-@begin{Leading}
-@Defn{names of @nt{special_character}s}
+@Leading@Defn{names of @nt{special_character}s}
 @Defn2{Term=[special_character],Sec=(names)}
 The following names are used when referring to certain
 @nt{special_character}s:
@@ -161,7 +158,6 @@ The following names are used when referring to certain
 @Defn{right square bracket}
 @Defn{left curly bracket}
 @Defn{right curly bracket}
-@end{Leading}
 @begin{Discussion}
 These are the ones that play a special role in the syntax of Ada 95,
 or in the syntax rules;
@@ -299,14 +295,12 @@ In general, the representation for an end of line is implementation defined.
 However, a sequence of one or more @nt<format_effector>s other
 than character tabulation (HT) signifies at least one end of line.
 
-@begin{Leading}
-@Defn{separator}
+@Leading@Defn{separator}
 @Redundant[In some cases an explicit @i(separator) is required
 to separate adjacent lexical elements.]
 A separator is
 any of a space character, a format
 effector, or the end of a line, as follows:
-@end{Leading}
 @begin(Discussion)
 It might be useful to define @lquotes@;white space@rquotes@; and use it here.
 @end(Discussion)
@@ -346,10 +340,8 @@ of a compound delimiter, or as a character of a @nt{comment},
 @nt{string_literal}, @nt{character_literal}, or
 @nt{numeric_literal}.
 
-@begin{Leading}
-The following names are used when referring to compound
+@Leading@keepnext@;The following names are used when referring to compound
 delimiters:
-@end{Leading}
 @begin{Display}
 @TabClear()@TabSet(P11)delimiter @\name
 @comment{Blank line}
@@ -406,7 +398,7 @@ corresponding upper and lower case letters are considered the
 same.
 @begin(Discussion)
   Two of the letters of ISO 8859-1 appear only as lower case,
-  "sharp s" and "y with diaeresis."  These two letters have
+  "sharp s" and "y with diaeresis." These two letters have
   no corresponding upper case letter (in particular, they
   are not considered equivalent to one another).
 @end(Discussion)
@@ -420,9 +412,7 @@ to accommodate local conventions].
 @end{ImplPerm}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i{Examples of identifiers:}
-@end{Leading}
+@Leading@keepnext@i{Examples of identifiers:}
 @begin{Display}
 Count      X    Get_Symbol   Ethelyn   Marion
 @Comment{Blank line}
@@ -510,9 +500,7 @@ obtain the value of the @nt{decimal_literal} with the @nt{exponent}.
 @end{StaticSem}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i{Examples of decimal literals:}
-@end{Leading}
+@Leading@keepnext@i{Examples of decimal literals:}
 @begin{Display}
 @tabclear()@tabset(P31)
 12        0      1E6    123_456 @\--@i{  integer literals}
@@ -584,9 +572,7 @@ lower case or in upper case, with the same meaning.
 @end{StaticSem}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i{Examples of based literals:}
-@end{Leading}
+@Leading@keepnext@i{Examples of based literals:}
 @begin{Display}
 @tabclear()@tabset(P16, P45)
 2#1111_1111# @\16#FF#       016#0ff# @\--@i{  integer literals of value 255}
@@ -618,9 +604,7 @@ of a character type. See @RefSecNum(Character Types).
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i{Examples of character literals:}
-@end{Leading}
+@Leading@keepnext@i{Examples of character literals:}
 @begin{Display}
 'A'@ @ @ @ @ '*'@ @ @ @ @ @rquotes@;'@ @ @ @ @ '@ '
 @end{Display}
@@ -677,9 +661,7 @@ An end of line cannot appear in a @nt{string_literal}.
 @end{Notes}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i{Examples of string literals:}
-@end{Leading}
+@Leading@keepnext@i{Examples of string literals:}
 @begin{Display}
 @tabclear()@tabset(P16)
 "Message of the day:"
@@ -723,9 +705,7 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @end{StaticSem}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i{Examples of comments:}
-@end{Leading}
+@Leading@keepnext@i{Examples of comments:}
 @begin{Display}
 --@i{  the last sentence above echoes the Algol 68 report }
 @comment{Blank line}
@@ -764,9 +744,7 @@ In a @nt<pragma>, any @nt<pragma_argument_association>s without a
 associations with a
 @i{pragma_argument_}@nt<identifier>.
 
-@begin{SyntaxTextLeading}
-@keepnext@;@nt{Pragma}s are only allowed at the following places in a program:
-@end{SyntaxTextLeading}
+@Leading@keepnext@nt{Pragma}s are only allowed at the following places in a program:
 @begin{Itemize}
 After a semicolon delimiter, but not within a
 @nt{formal_part}
@@ -850,7 +828,7 @@ Inline(Foo) and freeze things accordingly, even if they choose to never
 do inlining.
 
 Obviously, the contradiction needs to be resolved one way or the
-other. The reasons for resolving it this way are:  The
+other. The reasons for resolving it this way are: The
 implementation is simple @em the compiler can just ignore the
 @nt{pragma} altogether.
 The interpretation of constructs appearing inside
@@ -975,11 +953,9 @@ and that have real semantics; thus,
 this paragraph is merely a recommendation.
 @end{Ramification}
 
-@begin{Leading}
-Normally,
+@Leading@;Normally,
 an implementation should not define pragmas that can make an illegal
 program legal, except as follows:
-@end{Leading}
 @begin(Itemize)
   A @nt<pragma> used to complete a declaration, such as a @nt{pragma} Import;
 
@@ -1025,9 +1001,7 @@ RM83), but it was not clear, because there was no definition of
 @end{DiffWord83}
 
 @begin{Syntax}
-@begin{SyntaxTextLeading}
-@keepnext@;The forms of List, Page, and Optimize @nt{pragma}s are as follows:
-@end{SyntaxTextLeading}
+@Leading@keepnext@;The forms of List, Page, and Optimize @nt{pragma}s are as follows:
 
 @PragmaSyn`@key{pragma} @prag(List)(@Syn2{identifier});'
 
@@ -1097,9 +1071,7 @@ Some compilers might even ignore the pragma altogether.
 @end{StaticSem}
 
 @begin{Examples}
-@begin{Leading}
-@keepnext@;@i{Examples of pragmas:}
-@end{Leading}
+@Leading@keepnext@i{Examples of pragmas:}
 @begin{Example}
 @key[pragma] List(Off); --@RI{ turn off listing generation}
 @key[pragma] Optimize(Off); --@RI{ turn off optional optimizations}
@@ -1127,14 +1099,13 @@ informative annex.
 
 @begin{Syntax}
 @begin{Bundle}
-@begin{SyntaxTextLeading}
+@Leading
 @ChgRef{Version=[1], Kind=[Deleted]}
 @Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @Defn{reserved word}
 The following are the @i{reserved words}
 (ignoring upper/lower case distinctions):
-@end{SyntaxTextLeading}
 @begin{Discussion}
   Reserved words have special meaning in the syntax.
   In addition, certain reserved words are used as attribute names.

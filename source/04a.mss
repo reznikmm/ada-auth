@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:23 $}
+@Comment{$Date: 2000/08/08 04:35:31 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -15,7 +15,7 @@ expression, and to their evaluation, are given in this section.]
 
 @begin{Intro}
 @redundant[@nt<Name>s can denote declared entities, whether declared explicitly
-or implicitly (see @RefSecNum(Declarations)).  @nt<Name>s can also
+or implicitly (see @RefSecNum(Declarations)). @nt<Name>s can also
 denote objects or subprograms designated by access values; the
 results of @nt<type_conversion>s or @nt<function_call>s; subcomponents
 and slices of objects and values; protected subprograms,
@@ -38,7 +38,7 @@ rhs="@Syn2{identifier} | @Syn2{operator_symbol}"}
 @begin{Discussion}
   @nt<character_literal> is no longer a @nt<direct_name>.
   @nt<character_literal>s are usable even when the corresponding
-  @nt<enumeration_type_declaration> is not visible.  See @RefSecNum(Literals).
+  @nt<enumeration_type_declaration> is not visible. See @RefSecNum(Literals).
 @end{Discussion}
 
 @Syn{lhs=<prefix>,rhs="@Syn2{name} | @Syn2{implicit_dereference}"}
@@ -105,7 +105,7 @@ This means
 @begin{RunTime}
 @PDefn2{Term=[evaluation], Sec=(name)}
 The evaluation of a @nt<name> determines the entity denoted by the
-name.  This evaluation has no other effect for a @nt<name> that
+name. This evaluation has no other effect for a @nt<name> that
 is a @nt<direct_name> or a @nt<character_literal>.
 
 @PDefn2{Term=[evaluation], Sec=(name that has a prefix)}
@@ -132,7 +132,7 @@ denotes the object or subprogram designated by the value of the @nt{name}.
 @end{RunTime}
 
 @begin{Examples}
-@i(Examples of direct names:)
+@Leading@keepnext@i(Examples of direct names:)
 @begin(Example)
 @tabclear()@tabset(P9, P47)
 Pi @\@RI(-- the direct name of a number) @\(see @RefSecNum(Number Declarations))
@@ -144,9 +144,10 @@ Random @\@RI(-- the direct name of a function) @\(see @RefSecNum(Subprogram Decl
 Error @\@RI(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
 @end(Example)
 
-@i{Examples of dereferences:}
-@tabclear()@tabset(P16)
-@begin{Example}
+@begin{Wide}
+@leading@keepnext@i{Examples of dereferences:}
+@end{Wide}
+@begin{Example}@tabclear()@tabset(P16)
 Next_Car.@key[all]@\@RI[--  explicit dereference denoting the object designated by]
                @\@RI[--  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
 Next_Car.Owner @\@RI[--  selected component with implicit dereference;]
@@ -173,7 +174,7 @@ and can be used anywhere such a name is permitted.
 See @RefSecNum(Return Statements).
 
 Type conversions of a tagged type are permitted anywhere
-their operand is permitted.  That is, if the operand
+their operand is permitted. That is, if the operand
 is a variable, then the type conversion can appear on the
 left-hand side of an @nt{assignment_statement}.
 If the operand is an object,
@@ -184,17 +185,17 @@ See @RefSecNum(Type Conversions).
 
 @begin{DiffWord83}
 Everything of the general syntactic form @nt{name}(...) is
-now syntactically a @nt{name}.  In any realistic parser,
+now syntactically a @nt{name}. In any realistic parser,
 this would be a necessity since distinguishing among the various
 @nt{name}(...) constructs inevitably requires name resolution.
 In cases where the construct yields a value rather than an object,
-the name denotes the value rather than an object.  Names already denote
+the name denotes the value rather than an object. Names already denote
 values in Ada 83 with named numbers, components of the result
-of a function call, etc.  This is partly just a wording change,
+of a function call, etc. This is partly just a wording change,
 and partly an extension of functionality (see Extensions heading
 above).
 
-The syntax rule for @nt{direct_name} is new.  It is used in places where
+The syntax rule for @nt{direct_name} is new. It is used in places where
 direct visibility is required.
 It's kind of like Ada 83's @nt{simple_name}, but @nt{simple_name} applied
 to both direct visibility and visibility by selection,
@@ -220,7 +221,7 @@ this makes other rules simpler, since dereferencing an access value has
 substantially different semantics from @nt{selected_component}s.
 We also use @nt{name} instead of @nt{prefix} in the
 @nt{explicit_dereference} rule
-since that seems clearer.  Note that these rules rely on the
+since that seems clearer. Note that these rules rely on the
 fact that function calls are now names, so we don't need to
 use prefix to allow functions calls in front of .@key{all}.
 @begin{Discussion}
@@ -287,7 +288,7 @@ the individual entry of the entry family with the specified index value.
 @begin{RunTime}
 @PDefn2{Term=[evaluation], Sec=(indexed_component)}
 For the evaluation of an @nt<indexed_component>, the @nt{prefix} and the
-@nt{expression}s are evaluated in an arbitrary order.  The value of
+@nt{expression}s are evaluated in an arbitrary order. The value of
 each @nt<expression> is converted to the corresponding index type.
 @PDefn2{Term=[implicit subtype conversion],Sec=(array index)}
 @IndexCheck{Index_Check}
@@ -300,7 +301,7 @@ Constraint_Error is raised if this check fails.
 @end{RunTime}
 
 @begin{Examples}
-@i(Examples of indexed components:)
+@Leading@keepnext@i(Examples of indexed components:)
 @begin{Example}
 @tabclear()@tabset(P56)
  My_Schedule(Sat)     @RI[--  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
@@ -315,10 +316,10 @@ Constraint_Error is raised if this check fails.
 @begin{Notes}
 @i(Notes on the examples:)
 Distinct notations are used for components of multidimensional arrays (such
-as  Board) and arrays of arrays (such as Page).  The components of an array
-of arrays are arrays and  can  therefore  be  indexed.   Thus  Page(10)(20)
-denotes  the 20th component of Page(10).  In the last example Next_Frame(L)
-is  a  function  call  returning  an  access  value  that   designates   a
+as Board) and arrays of arrays (such as Page). The components of an array
+of arrays are arrays and can therefore be indexed. Thus Page(10)(20)
+denotes the 20th component of Page(10). In the last example Next_Frame(L)
+is a function call returning an access value that designates a
 two-dimensional array.
 
 @end{Notes}
@@ -328,7 +329,7 @@ two-dimensional array.
 @begin{Intro}
 @redundant[@Defn{array slice}
 A @nt<slice> denotes a one-dimensional array formed by a sequence of
-consecutive components of a one-dimensional array.  A @nt<slice> of
+consecutive components of a one-dimensional array. A @nt<slice> of
 a variable is a variable; a @nt<slice> of a constant is a constant;]
 a @nt<slice> of a value is a value.
 @end{Intro}
@@ -389,14 +390,14 @@ See @RefSecNum(Operations of Access Types).
   given access-to-incomplete types completed in a package body.
 @end(Reason)
 
-For  a  one-dimensional  array  A,  the  @nt<slice>  A(N  .. N) denotes
+For a one-dimensional array A, the @nt<slice> A(N .. N) denotes
 an array that has only one component;
-its type is the type of A.  On the other hand, A(N)  denotes  a
+its type is the type of A. On the other hand, A(N) denotes a
 component of the array A and has the corresponding component type.
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of slices:)
+@Leading@keepnext@i(Examples of slices:)
 @begin{Example}
 @tabclear()@tabset(P50)
   Stars(1 .. 15)        @RI[--  a slice of 15 characters @\(see @RefSecNum{String Types})]
@@ -435,7 +436,7 @@ a package or an enclosing named construct (directly, not through
 a @nt<subprogram_renaming_declaration>
 or @nt<generic_renaming_declaration>).
 @begin{Discussion}
-See AI-00187.
+See AI83-00187.
 @end{Discussion}
 
 A @nt{selected_component} that is not an expanded name
@@ -455,7 +456,7 @@ non-array composite type
 The @nt{selector_name} shall resolve to denote a
 @nt{discriminant_specification} of the type, or, unless the type is
 a protected type, a @nt<component_declaration>
-of the type.  The @nt{selected_component} denotes the
+of the type. The @nt{selected_component} denotes the
 corresponding component of the object or value.
 @begin{Reason}
   The components of a protected object cannot be named except
@@ -542,7 +543,7 @@ The exception Constraint_Error is raised if this check fails.
 @end{RunTime}
 
 @begin{Examples}
-@i(Examples of selected components:)
+@Leading@keepnext@i(Examples of selected components:)
 @begin{Example}
 @tabclear()@tabset(P50)
   Tomorrow.Month     @RI[--  a record component @\(see @RefSecNum{Record Types})]
@@ -556,7 +557,9 @@ The exception Constraint_Error is raised if this check fails.
   Pool(K).Write      @RI[--  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
 @end{Example}
 
-@i(Examples of expanded names:)
+@begin{Wide}
+@leading@keepnext@i(Examples of expanded names:)
+@end{Wide}
 @begin{Example}
 @tabclear()@tabset(P58)
   Key_Manager."<"      @RI[--  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
@@ -573,7 +576,7 @@ We now allow an expanded name to use a prefix
 that denotes a rename of a package, even if the
 selector is for an entity local to the body or private
 part of the package, so long as the entity is visible
-at the place of the reference.  This eliminates
+at the place of the reference. This eliminates
 a preexisting anomaly where references in a package
 body may refer to declarations of its visible part
 but not those of its private part or body when the
@@ -581,7 +584,7 @@ prefix is a rename of the package.
 @end{Extend83}
 
 @begin{DiffWord83}
-The syntax rule for @nt{selector_name} is new.  It is used in places where
+The syntax rule for @nt{selector_name} is new. It is used in places where
 visibility, but not necessarily direct visibility, is required.
 See @RefSec{Names} for more information.
 
@@ -746,7 +749,7 @@ access type.
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of attributes:)
+@Leading@keepnext@i(Examples of attributes:)
 @begin{Example}
 @tabclear()@tabset(P58)
 Color'First        @RI[-- minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
@@ -766,7 +769,7 @@ allowing its use with scalar subtypes.
 
 We allow any integer type in the @SynI{static_}@nt{expression}
 of an attribute designator, not
-just a value of @i(universal_integer).  The preference rules
+just a value of @i(universal_integer). The preference rules
 ensure upward compatibility.
 @end{Extend83}
 
@@ -787,15 +790,15 @@ designators.
 We do this because @nt{identifier} no longer includes reserved
 words.
 
-The Ada 9X name resolution rules are a bit more explicit than in Ada 83.
+The Ada 95 name resolution rules are a bit more explicit than in Ada 83.
 The Ada 83 rule said that the
   "meaning of the prefix of an attribute must be determinable
   independently of the attribute designator and independently
   of the fact that it is the prefix of an attribute."  That isn't
   quite right since the meaning even in Ada 83 embodies whether or not
   the prefix is interpreted as a parameterless function call,
-  and in Ada 9X, it also embodies whether or not the prefix is interpreted
-  as an implicit_dereference.  So the attribute designator does
+  and in Ada 95, it also embodies whether or not the prefix is interpreted
+  as an implicit_dereference. So the attribute designator does
   make a difference @em just not much.
 
   Note however that if the attribute designator is Access,
@@ -931,7 +934,7 @@ rules for expanded names (see @RefSecNum{Selected Components}).
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of literals:)
+@Leading@keepnext@i(Examples of literals:)
 @begin{Example}
 @tabclear()@tabset(P16)
 3.14159_26536 @\@RI[--  a real literal]
@@ -998,7 +1001,7 @@ so that the expected type for the aggregate itself is specific.
 @end{Ramification}
 @begin{Discussion}
   We used to disallow @nt<aggregate>s of a type with unknown
-  discriminants.  However, that was unnecessarily restrictive
+  discriminants. However, that was unnecessarily restrictive
   in the case of an extension aggregate, and irrelevant to
   a record aggregate (since a type that is legal for a record
   aggregate could not possibly have unknown discriminants) and
@@ -1023,7 +1026,7 @@ arbitrary order.
 The value of the @nt{aggregate} is the value of this object.
 @begin{Discussion}
   The ancestor part is the set of components inherited from the
-  ancestor type.  The syntactic category @nt<ancestor_part> is
+  ancestor type. The syntactic category @nt<ancestor_part> is
   the @nt<expression> or @nt<subtype_mark> that specifies
   how the ancestor part of the anonymous object should be initialized.
 @end{Discussion}
@@ -1055,7 +1058,7 @@ Constraint_Error is raised if this check fails.
 This check ensures that no values of a tagged type are
 ever outside the first subtype, as required
 for inherited dispatching operations to work properly
-(see @RefSecNum(Derived Types and Classes)).  This check will always
+(see @RefSecNum(Derived Types and Classes)). This check will always
 succeed if the first subtype is unconstrained.
 This check is not extended to untagged types
 to preserve upward compatibility.
@@ -1129,7 +1132,7 @@ if there is only one association, it shall be a named association.
   Otherwise the construct would be interpreted as a parenthesized
   expression.
   This is considered a syntax rule, since it is relevant to
-  overload resolution.  We choose not to express it with BNF so we
+  overload resolution. We choose not to express it with BNF so we
   can share the definition of @nt<record_component_association_list>
   in both @nt<record_aggregate> and @nt<extension_aggregate>.
 @end{Reason}
@@ -1167,7 +1170,7 @@ a needed component @Redundant[(including possibly a discriminant)].
 @begin{Ramification}
 For the association list of a @nt{record_aggregate},
 @lquotes@;needed components@rquotes@; includes every component of the composite value, but
-does not include those in unchosen @nt{variant}s (see AI-309).
+does not include those in unchosen @nt{variant}s (see AI83-309).
 If there are @nt<variant>s, then
 the value specified for
 the discriminant that governs them
@@ -1186,7 +1189,7 @@ are well defined, and that discriminants that govern @nt{variant_part}s
 can be given by static expressions.
 @end{Ramification}
 
-@PDefn2{Term=[expected type],
+@Leading@Keepnext@PDefn2{Term=[expected type],
   Sec=(record_component_association expression)}
 The expected type for the @nt<expression> of a
 @nt<record_component_association> is the type
@@ -1229,7 +1232,7 @@ then the reserved words @key(null record) shall appear rather
 than a list of @nt<record_component_association>s.
 @begin{Ramification}
   For example, "(@key(null record))" is a @nt<record_aggregate>
-  for a null record type.  Similarly, "(T'(A) @key(with null record))" is
+  for a null record type. Similarly, "(T'(A) @key(with null record))" is
   an @nt<extension_aggregate> for a type defined as a null
   record extension of T.
 @end{Ramification}
@@ -1250,18 +1253,18 @@ components, all of them shall be of the same type.
   association.
 @end{Reason}
 @begin{Discussion}
-  AI-00244 also
+  AI83-00244 also
   requires that the @nt{expression} shall
-  be legal for each associated component.  This is because
+  be legal for each associated component. This is because
   even though two components have the same type, they might have
-  different subtypes.  Therefore, the legality of the
+  different subtypes. Therefore, the legality of the
   @nt<expression>, particularly if it is an array aggregate,
   might differ depending on the associated component's subtype.
   However, we have relaxed the rules on array aggregates slightly for
-  Ada 9X,
+  Ada 95,
   so the staticness of an applicable index constraint has no
   effect on the legality of the array aggregate to which it applies.
-  See @RefSecNum{Array Aggregates}.  This was the only case (that we know of)
+  See @RefSecNum{Array Aggregates}. This was the only case (that we know of)
   where a subtype provided by context affected the legality
   of an @nt{expression}.
 @end{Discussion}
@@ -1330,12 +1333,14 @@ be in the same order as in the @nt<known_discriminant_part>.
 @end{Notes}
 
 @begin{Examples}
-@i(Example of a record aggregate with positional associations:)
+@Leading@keepnext@i(Example of a record aggregate with positional associations:)
 @begin{Example}
 (4, July, 1776)                                       @RI[--  see @RefSecNum{Record Types} ]
 @end{Example}
 
-@i(Examples of record aggregates with named associations:)
+@begin{Wide}
+@leading@keepnext@i(Examples of record aggregates with named associations:)
+@end{Wide}
 @begin{Example}
 (Day => 4, Month => July, Year => 1776)
 (Month => July, Day => 4, Year => 1776)
@@ -1344,16 +1349,20 @@ be in the same order as in the @nt<known_discriminant_part>.
 (Unit => Disk, Status => Closed, Cylinder => 9, Track => 1)
 @end{Example}
 
-@i(Example of component association with several choices:)
+@begin{Wide}
+@leading@keepnext@i(Example of component association with several choices:)
+@end{Wide}
 @begin{Example}
 (Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null)))   @RI[--  see @RefSecNum{Incomplete Type Declarations}]
 
- @RI[--  The allocator is evaluated twice:  Succ and Pred designate different cells]
+ @RI[--  The allocator is evaluated twice: Succ and Pred designate different cells]
 @end{Example}
 
-@i{Examples of record aggregates for tagged types
+@begin{Wide}
+@leading@keepnext@i{Examples of record aggregates for tagged types
 (see @RefSecNum(Tagged Types and Type Extensions)
 and @RefSecNum{Type Extensions}):}
+@end{Wide}
 @begin{Example}
 Expression'(@key{null record})
 Literal'(Value => 0.0)
@@ -1369,9 +1378,9 @@ extension aggregates.
 @end{Extend83}
 
 @begin{DiffWord83}
-Various AIs have been incorporated (AI-189, AI-244, and AI-309).
+Various AIs have been incorporated (AI83-00189, AI83-00244, and AI83-00309).
 In particular, Ada 83 did not explicitly disallow extra values in
-a record aggregate.  Now we do.
+a record aggregate. Now we do.
 @end{DiffWord83}
 
 @LabeledSubClause{Extension Aggregates}
@@ -1415,7 +1424,7 @@ it is expected to be of any nonlimited tagged type.
 We could have made
 the expected type @i(T')Class where @i(T) is the ultimate ancestor of
 the type of the aggregate, or we could have made it even more
-specific than that.  However, if the overload resolution rules
+specific than that. However, if the overload resolution rules
 get too complicated, the implementation gets more difficult and
 it becomes harder to produce good error messages.
 @end{Reason}
@@ -1487,7 +1496,7 @@ the @nt<record_component_association_list> is required to be
 simply @key(null record).
 
 If the @nt<ancestor_part> is a @nt<subtype_mark>,
-then its type can be abstract.  If its type is controlled,
+then its type can be abstract. If its type is controlled,
 then as the last step of evaluating the aggregate,
 the Initialize procedure of the ancestor type is called,
 unless the Initialize procedure is abstract
@@ -1495,7 +1504,7 @@ unless the Initialize procedure is abstract
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of extension aggregates (for types defined in @RefSecNum{Type Extensions}):}
+@Leading@keepnext@i{Examples of extension aggregates (for types defined in @RefSecNum{Type Extensions}):}
 @begin(example)
 Painted_Point'(Point @key{with} Red)
 (Point'(P) @key{with} Paint => Black)
@@ -1569,8 +1578,8 @@ The @nt<expression>s of the bottom level subaggregates (or of the
 are called the @i(array component expressions) of the enclosing
 n-dimensional @nt<array_aggregate>.
 @begin(Ramification)
-  Subaggregates do not have a type.  They correspond to part of
-  an array.  For example, with a matrix, a subaggregate would correspond to
+  Subaggregates do not have a type. They correspond to part of
+  an array. For example, with a matrix, a subaggregate would correspond to
   a single row of the matrix.
   The definition of "n-dimensional" @nt<array_aggregate>
   applies to subaggregates as well
@@ -1626,7 +1635,7 @@ where m >= 2, each of the @nt<expression>s
 has to be an (m@en@;1)-dimensional subaggregate.
 @end(Ramification)
 
-An @key(others) choice is allowed for an @nt<array_aggregate>
+@Leading@;An @key(others) choice is allowed for an @nt<array_aggregate>
 only if an @i(applicable index
 constraint) applies to the @nt{array_aggregate}.
 @Defn{applicable index constraint}
@@ -1676,7 +1685,7 @@ defines an applicable index constraint:
   @nt{expression}.
 @begin{Discussion}
 RM83 omitted this
-  case, presumably as an oversight.  We want to minimize situations
+  case, presumably as an oversight. We want to minimize situations
   where an @nt{expression} becomes illegal if parenthesized.
 @end{Discussion}
 @end(itemize)
@@ -1713,7 +1722,7 @@ together shall
 exactly cover a contiguous sequence of values of the corresponding index type.
 @begin{Ramification}
   This implies that each component must be
-  specified exactly once.  See AI-309.
+  specified exactly once. See AI83-309.
 @end{Ramification}
 
 A bottom level subaggregate of a multidimensional @nt<array_aggregate>
@@ -1732,7 +1741,7 @@ for the corresponding character of the @nt<string_literal>.
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=[evaluation], Sec=(array_aggregate)}
+@Leading@PDefn2{Term=[evaluation], Sec=(array_aggregate)}
 The evaluation of an @nt{array_aggregate} of a given array type
 proceeds in two steps:
 @begin(enumerate)
@@ -1754,7 +1763,7 @@ proceeds in two steps:
   to the component subtype might raise Constraint_Error.
 @end(Ramification)
 
-@Defn2{Term=[bounds],
+@Leading@Defn2{Term=[bounds],
   Sec=(of the index range of an @nt{array_aggregate})}
 The bounds of the index range of an @nt{array_aggregate} @Redundant[(including
 a subaggregate)]
@@ -1797,7 +1806,7 @@ take advantage of that definition.
 @begin(Ramification)
   The definition of compatibility handles the special case
   of a null range, which is always compatible with
-  a subtype.  See AI-00313.
+  a subtype. See AI83-00313.
 @end(Ramification)
 
 @IndexCheck{Index_Check}
@@ -1807,12 +1816,12 @@ for an index value outside the bounds determined by the
 applicable index constraint.
 @begin{Discussion}
 RM83 omitted this case,
-apparently through an oversight.  AI-309 defines this
+apparently through an oversight. AI83-00309 defines this
 as a dynamic check, even though other Ada 83 rules ensured
 that this check could be performed statically. We now allow
 an @key(others) choice to be dynamic, even if
 it is not the only choice, so this check now needs to be
-dynamic, in some cases.  Also, within a generic unit,
+dynamic, in some cases. Also, within a generic unit,
 this would be a nonstatic check in some cases.
 @end{Discussion}
 
@@ -1841,13 +1850,15 @@ an array with a single component.
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of array aggregates with positional associations:)
+@Leading@keepnext@i(Examples of array aggregates with positional associations:)
 @begin{Example}
 (7, 9, 5, 1, 3, 2, 4, 8, 6, 0)
 Table'(5, 8, 4, 1, @key(others) => 0)  @RI[--  see @RefSecNum{Array Types} ]
 @end{Example}
 
-@i(Examples of array aggregates with named associations:)
+@begin{Wide}
+@leading@keepnext@i(Examples of array aggregates with named associations:)
+@end{Wide}
 @begin{Example}
 (1 .. 5 => (1 .. 8 => 0.0))      @RI[--  two-dimensional]
 (1 .. N => @key(new) Cell)             @RI[--  N new cells, in particular for N = 0]
@@ -1858,7 +1869,9 @@ Schedule'(Wed | Sun  => False, @key(others) => True)
 Vector'(1 => 2.5)                                @RI[--  single-component vector]
 @end{Example}
 
-@i(Examples of two-dimensional array aggregates:)
+@begin{Wide}
+@leading@keepnext@i(Examples of two-dimensional array aggregates:)
+@end{Wide}
 @begin{Example}
 @RI[-- Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
 
@@ -1867,7 +1880,9 @@ Vector'(1 => 2.5)                                @RI[--  single-component vector
 (1 => (1 => 1.1, 2 => 1.2, 3 => 1.3), 2 => (1 => 2.1, 2 => 2.2, 3 => 2.3))
 @end{Example}
 
-@i(Examples of aggregates as initial values:)
+@begin{Wide}
+@leading@keepnext@i(Examples of aggregates as initial values:)
+@end{Wide}
 @begin{Example}
 A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        @RI[-- A(1)=7, A(10)=0]
 B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        @RI[-- B(1)=0, B(10)=1]
@@ -1882,7 +1897,7 @@ F : String(1 .. 1) := (1 => 'F');  @RI[-- a one component aggregate: same as "F"
 @begin{Extend83}
 We now allow "named with others" aggregates in all contexts
 where there is an applicable index constraint, effectively
-eliminating what was RM83-4.3.2(6).  Sliding never occurs
+eliminating what was RM83-4.3.2(6). Sliding never occurs
 on an aggregate with others, because its bounds come from
 the applicable index constraint, and therefore already match
 the bounds of the target.
@@ -1890,13 +1905,13 @@ the bounds of the target.
 The legality of an @key(others) choice is no longer affected
 by the staticness of the applicable index constraint.
 This substantially simplifies several rules, while being slightly
-more flexible for the user.  It obviates the rulings
-of AI-244 and AI-310, while taking advantage of the dynamic nature
-of the "extra values" check required by AI-309.
+more flexible for the user. It obviates the rulings
+of AI83-00244 and AI83-00310, while taking advantage of the dynamic nature
+of the "extra values" check required by AI83-00309.
 
 Named array aggregates are permitted even if the
 index type is descended from a formal scalar type.
-See @RefSecNum(Static Expressions and Static Subtypes) and AI-00190.
+See @RefSecNum(Static Expressions and Static Subtypes) and AI83-00190.
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -1907,7 +1922,7 @@ that an @key(others) choice is allowed in a positional array aggregate).
 
 We have also reorganized the presentation to handle
 multidimensional and one-dimensional aggregates more uniformly,
-and to incorporate the rulings of AI-19, AI-309, etc.
+and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 @end{DiffWord83}
 
 @LabeledClause{Expressions}
@@ -1990,7 +2005,7 @@ of any of the other five syntactic categories defined below.
 A @nt<name> used as a @nt<primary> shall resolve to denote an object
 or a value.
 @begin{Discussion}
-This replaces RM83-4.4(3).  We don't need to mention named numbers
+This replaces RM83-4.4(3). We don't need to mention named numbers
 explicitly, because the name of a named number denotes a value.
 We don't need to mention attributes explicitly, because
 attributes now denote (rather than yield) values in general.
@@ -2000,7 +2015,7 @@ have such a thing).
 @end{Discussion}
 @begin{Reason}
   It might seem odd that this is an overload resolution rule,
-  but it is relevant during overload resolution.  For example,
+  but it is relevant during overload resolution. For example,
   it helps ensure that a @nt<primary> that consists of only
   the identifier of a parameterless function is interpreted as a
   @nt<function_call> rather than directly as a @nt<direct_name>.
@@ -2031,11 +2046,11 @@ or return the value of the object.
   This means that if extra-range intermediates are used to
   hold the value of an object of an unconstrained numeric subtype,
   a Constraint_Error can be raised on a read of the object, rather than
-  only on an assignment to it.  Similarly, it means that
+  only on an assignment to it. Similarly, it means that
   computing the value of an object of such a subtype
   can be deferred until the first read of the object
   (presuming no side-effects other than failing an Overflow_Check
-  are possible).  This permission is over and above that provided
+  are possible). This permission is over and above that provided
   by clause @RefSecNum(Exceptions and Optimization), since
   this allows the Constraint_Error to move to a different handler.
 @end{Ramification}
@@ -2053,7 +2068,7 @@ or return the value of the object.
 @end{ImplPerm}
 
 @begin{Examples}
-@i(Examples of primaries:)
+@Leading@keepnext@i(Examples of primaries:)
 @begin{Example}
 4.0                @RI[--  real literal]
 Pi                 @RI[--  named number]
@@ -2066,7 +2081,9 @@ Real(M*N)          @RI[--  conversion]
 (Line_Count + 10)  @RI[--  parenthesized expression ]
 @end{Example}
 
-@i(Examples of expressions:)
+@begin{Wide}
+@leading@keepnext@i(Examples of expressions:)
+@end{Wide}
 @begin{Example}
 Volume                      @RI[-- primary]
 @key(not) Destroyed               @RI[-- factor]
@@ -2086,11 +2103,11 @@ A**(B**C)                   @RI[-- expression (parentheses are required)]
 @begin{Extend83}
 In Ada 83, @key{out} parameters and their nondiscriminant
 subcomponents are not allowed as @nt{primaries}.
-These restrictions are eliminated in Ada 9X.
+These restrictions are eliminated in Ada 95.
 
 In various contexts throughout the language where Ada 83 syntax rules
-had @nt<simple_expression>, the corresponding Ada 9X syntax
-rule has @nt<expression> instead.  This reflects the inclusion
+had @nt<simple_expression>, the corresponding Ada 95 syntax
+rule has @nt<expression> instead. This reflects the inclusion
 of modular integer types, which makes the logical operators
 "@key[and]", "@key[or]", and "@key[xor]" more useful in expressions of
 an integer type.
@@ -2111,9 +2128,9 @@ still have to be parenthesized when used in a bound of a range.
 @Defn{operator precedence}
 The language defines the following six categories
 of operators (given in order of increasing
-precedence).  The corresponding @nt<operator_symbol>s,
+precedence). The corresponding @nt<operator_symbol>s,
 and only those, can be used as @nt<designator>s in declarations
-of functions for user-defined operators.  See @RefSec(Overloading of Operators).]
+of functions for user-defined operators. See @RefSec(Overloading of Operators).]
 @end{Intro}
 
 @begin{Syntax}
@@ -2126,7 +2143,7 @@ of functions for user-defined operators.  See @RefSec(Overloading of Operators).
 @Syn{tabs=[P36], lhs=<highest_precedence_operator>,rhs="@\ **  | @key{abs} | @key{not}"}
 @begin(Discussion)
   Some of the above syntactic categories are not used in other
-  syntax rules.  They are just used for classification.
+  syntax rules. They are just used for classification.
   The others are used for both classification and parsing.
 @end(Discussion)
 @end{Syntax}
@@ -2141,7 +2158,7 @@ Parentheses can be used to impose specific associations.
   @RefSecNum{Expressions},
   though in @RefSecNum{Method of Description and Syntax Notation}
   the definition of the metasymbols @b({}) implies left
-  associativity.  So this could be seen as redundant, depending on
+  associativity. So this could be seen as redundant, depending on
   how literally one interprets the definition of the @b({}) metasymbols.
 
   See the Implementation Permissions below regarding flexibility
@@ -2220,7 +2237,7 @@ left-to-right or chosen order of association.
   for most floating point operators, since reassociation may
   introduce significantly different round-off errors, delivering
   a result that is outside the model interval for the left-to-right
-  association.  Similar problems arise for division with
+  association. Similar problems arise for division with
   integer or fixed point operands.
 
   Note that this permission does not apply to user-defined
@@ -2235,7 +2252,7 @@ as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of precedence:)
+@Leading@keepnext@i(Examples of precedence:)
 @begin{Example}
 @key(not) Sunny @key(or) Warm    @RI[--  same as (not Sunny) or Warm]
 X > 4.0 @key(and) Y > 0.0  @RI[--  same as (X > 4.0) and (Y > 0.0)]
@@ -2278,7 +2295,7 @@ is that same boolean type.
 @end{Resolution}
 
 @begin{StaticSem}
-@Defn{logical operator}@Defn2{Term=[operator],Sec=(logical)}
+@Leading@Defn{logical operator}@Defn2{Term=[operator],Sec=(logical)}
 @Defn{and operator}@Defn2{Term=[operator],Sec=(and)}
 @Defn{or operator}@Defn2{Term=[operator],Sec=(or)}
 @Defn{xor operator}@Defn2{Term=[operator],Sec=(xor)}
@@ -2317,7 +2334,7 @@ The logical operators on arrays are performed on a
 component-by-component basis on
 matching components (as for equality @em
 see @RefSecNum{Relational Operators and Membership Tests}),
-using the predefined logical operator for the component type.  The bounds of
+using the predefined logical operator for the component type. The bounds of
 the resulting array are those of the left operand.
 
 @end{StaticSem}
@@ -2342,13 +2359,13 @@ of the result belongs to the component subtype.
 The exception Constraint_Error is raised if
 either of the above checks fails.
 @begin{Discussion}
-  The check against the component subtype is per AI-00535.
+  The check against the component subtype is per AI83-00535.
 @end{Discussion}
 
 @end{RunTime}
 
 @begin{Notes}
-The conventional meaning of the logical operators is given by the
+@Leading@;The conventional meaning of the logical operators is given by the
 following truth table:
 @begin(Display)
 @TabClear()
@@ -2363,13 +2380,15 @@ following truth table:
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of logical operators:)
+@Leading@keepnext@i(Examples of logical operators:)
 @begin{Example}
 Sunny @key(or) Warm
 Filter(1 .. 10) @key(and) Filter(15 .. 24)   @RI[--   see @RefSecNum{Index Constraints and Discrete Ranges} ]
 @end{Example}
 
-@i(Examples of short-circuit control forms:)
+@begin{Wide}
+@leading@keepnext@i(Examples of short-circuit control forms:)
+@end{Wide}
 @begin{Example}
 Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   @RI[--   see @RefSecNum{Incomplete Type Declarations}]
 N = 0 @key(or) @key(else) A(N) = Hit_Value
@@ -2452,7 +2471,7 @@ if the @nt<simple_expression> is of a tagged class-wide type,
 then the tested type shall be (visibly) tagged.
 @begin{Ramification}
 Untagged types covered by the tagged class-wide type
-  are not permitted.  Such types can exist if they are
+  are not permitted. Such types can exist if they are
   descendants of a private type whose full type is tagged.
   This rule is intended to avoid confusion since such derivatives
   don't have their @lquotes@;own@rquotes@; tag, and hence are indistinguishable
@@ -2464,7 +2483,7 @@ Untagged types covered by the tagged class-wide type
 @begin{StaticSem}
 The result type of a membership test is the predefined type Boolean.
 
-The equality operators are predefined for every specific
+@Leading@;The equality operators are predefined for every specific
 type @i(T) that is not limited,
 and not an anonymous access type,
 with the following specifications:
@@ -2473,7 +2492,7 @@ with the following specifications:
 @key(function) "/="(Left, Right : @RI(T)) @key(return) Boolean
 @end(example)
 
-The ordering operators are predefined for every specific
+@Leading@;The ordering operators are predefined for every specific
 scalar type @i(T), and for every discrete array type
 @i(T), with the following specifications:
 @begin(example)
@@ -2513,7 +2532,7 @@ object, or if both are equal to the null value of the access type.
 Two access-to-subprogram values are equal if they are the
 result of the same evaluation of an Access @nt<attribute_reference>,
 or if both
-are equal to the null value of the access type.  Two
+are equal to the null value of the access type. Two
 access-to-subprogram values are unequal if they designate
 different subprograms.
 @PDefn{unspecified}
@@ -2542,7 +2561,7 @@ for any other components not inherited from the parent type.
   This is a ramification of the requirement that a
   discriminant governing such a @nt<variant_part> has to be a @lquotes@;new@rquotes@;
   discriminant, and so has to be equal in the two values for
-  the values to be equal.  Note that @nt<variant_part>s in
+  the values to be equal. Note that @nt<variant_part>s in
   the parent part need not match if the primitive equals operator
   for the parent type considers them equal.
 @end{Ramification}
@@ -2552,7 +2571,7 @@ equality is defined in terms of the primitive equals operator of the
 full type; if the full type is untagged, predefined equality
 for the private type is that of its full type.
 
-@Defn{matching components}
+@Leading@Defn{matching components}
 For other composite types, the predefined equality operators
 @Redundant[(and
 certain other predefined operations on composite types @em
@@ -2579,10 +2598,10 @@ are convertible, rather than being the same.
 @begin{Discussion}
   Ada 83 seems to
   omit this part of the definition, though it is used in array type
-  conversions.  See @RefSecNum{Type Conversions}.
+  conversions. See @RefSecNum{Type Conversions}.
 @end{Discussion}
 
-Given the above definition of matching components,
+@Leading@;Given the above definition of matching components,
 the result of the predefined equals operator for composite types (other than
 for those composite types covered earlier) is defined as follows:
 @begin(Itemize)
@@ -2601,12 +2620,12 @@ for those composite types covered earlier) is defined as follows:
     necessary to preserve upward compatibility and corresponds
     with the corresponding situation with generics, where the
     predefined operations @lquotes@;reemerge@rquotes@; in a generic for
-    untagged types, but do not for tagged types.  Also, only
+    untagged types, but do not for tagged types. Also, only
     tagged types support user-defined assignment
     (see @RefSecNum{User-Defined Assignment and Finalization}),
     so only tagged types
     can fully handle levels of indirection in the implementation
-    of the type.  For untagged types, one reason for
+    of the type. For untagged types, one reason for
     a user-defined equals operator might be to allow values with different
     bounds or discriminants to compare equal in certain cases.
     When such values are matching components, the bounds or discriminants
@@ -2638,13 +2657,13 @@ Furthermore,
   if the user defines an "=" operator that returns Boolean,
   then a "/=" operator is implicitly declared in terms of
   the user-defined "=" operator so as to give the complementary
-  result.  See @RefSecNum(Overloading of Operators).
+  result. See @RefSecNum(Overloading of Operators).
 @end{Ramification}
 
 @Defn{lexicographic order}
 For a discrete array type, the predefined ordering operators
 correspond to @i(lexicographic order) using the predefined order
-relation of the component type:  A null array is lexicographically
+relation of the component type: A null array is lexicographically
 less than any array having at least one component.
 In the case of nonnull arrays, the left operand is lexicographically
 less than the right operand if the first component of
@@ -2660,7 +2679,7 @@ For the evaluation of a membership test,
 the @nt<simple_expression> and the @nt<range> (if any) are evaluated
 in an arbitrary order.
 
-A membership test using
+@Leading@;A membership test using
 @key(in) yields the result True if:
 @begin(itemize)
   The tested type is scalar, and the value of
@@ -2700,18 +2719,18 @@ No exception is ever raised by a membership test, by a predefined
 ordering operator,
 or by a predefined equality operator for an elementary type,
 but an exception can be raised by the evaluation of
-the operands.  A predefined equality operator for a composite
+the operands. A predefined equality operator for a composite
 type can only raise an exception if the type has a tagged part
 whose primitive equals operator propagates an exception.
 
 If a composite type has components that depend on discriminants, two values
 of this type have matching components if and only if their
-discriminants are equal.  Two nonnull arrays have matching components
+discriminants are equal. Two nonnull arrays have matching components
 if and only if the length of each dimension is the same for both.
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of expressions involving relational operators and
+@Leading@keepnext@i(Examples of expressions involving relational operators and
 membership tests:)
 @begin{Example}
 X /= Y
@@ -2746,7 +2765,7 @@ to simply the reserved word @key(in) or @key(not in).
 We use the term @lquotes@;equality operator@rquotes@; to refer to both
 the = (equals) and /= (not equals) operators.
 Ada 83 referred to = as @i(the) equality operator, and
-/= as the inequality operator.  The new wording is more
+/= as the inequality operator. The new wording is more
 consistent with the ISO 10646 name for "=" (equals sign) and provides a
 category similar to @lquotes@;ordering operator@rquotes@; to refer to both
 = and /=.
@@ -2757,7 +2776,7 @@ We have changed the term @lquotes@;catenate@rquotes@; to @lquotes@;concatenate@r
 @LabeledSubClause{Binary Adding Operators}
 
 @begin{StaticSem}
-@Defn{binary adding operator}@Defn2{Term=[operator],Sec=(binary adding)}
+@Leading@Defn{binary adding operator}@Defn2{Term=[operator],Sec=(binary adding)}
 @Defn{+ operator}@Defn2{Term=[operator],Sec=(+)}
 @Defn{plus operator}@Defn2{Term=[operator],Sec=(plus)}
 @Defn{- operator}@Defn2{Term=[operator],Sec=(-)}
@@ -2771,7 +2790,7 @@ They have the following specifications:
 @key(function) "-"(Left, Right : @RI(T)) @key(return) @RI(T)
 @end(example)
 
-@Defn{& operator}@Defn2{Term=[operator],Sec=(&)}
+@Leading@Defn{& operator}@Defn2{Term=[operator],Sec=(&)}
 @Defn{ampersand operator}@Defn2{Term=[operator],Sec=(ampersand)}
 @Defn{concatenation operator}@Defn2{Term=[operator],Sec=(concatenation)}
 @IndexSee{Term=[catenation operator],See=(concatenation operator)}
@@ -2789,7 +2808,7 @@ They have the following specifications:
 
 @begin{RunTime}
 
-@PDefn2{Term=[evaluation], Sec=(concatenation)}
+@Leading@PDefn2{Term=[evaluation], Sec=(concatenation)}
 For the evaluation of a concatenation with result type @i(T),
 if both operands are of type @i(T), the result of the concatenation
 is a one-dimensional array whose length is the sum of the lengths
@@ -2832,7 +2851,7 @@ of the index subtype of the array type as its lower bound.
   The conversion might raise Constraint_Error.
   The conversion provides @lquotes@;sliding@rquotes@;
   for the component in the case of an array-of-arrays, consistent with
-  the normal Ada 9X rules that allow sliding during parameter passing.
+  the normal Ada 95 rules that allow sliding during parameter passing.
 @end{Ramification}
 
 @Defn2{Term=[assignment operation], Sec=(during evaluation of concatenation)}
@@ -2856,8 +2875,8 @@ reduction modulo the modulus if the result is outside
 the base range of the type.
 @begin{ImplNote}
 A full "modulus" operation need not be performed after
-addition or subtraction of modular types.  For binary moduli,
-a simple mask is sufficient.  For nonbinary moduli, a check after
+addition or subtraction of modular types. For binary moduli,
+a simple mask is sufficient. For nonbinary moduli, a check after
 addition to see if the value is greater than the high bound of
 the base range can be followed by a conditional subtraction of the modulus.
 Conversely, a check after subtraction to see if a "borrow" was
@@ -2866,7 +2885,7 @@ performed can be followed by a conditional addition of the modulus.
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of expressions involving binary adding operators:)
+@Leading@keepnext@i(Examples of expressions involving binary adding operators:)
 @begin{Example}
 Z + 0.1      @RI[--  Z has to be of a real type ]
 
@@ -2879,7 +2898,7 @@ Z + 0.1      @RI[--  Z has to be of a real type ]
 @begin{Inconsistent83}
 The lower bound of the result of concatenation,
 for a type whose first subtype is constrained, is
-now that of the index subtype.  This is inconsistent with Ada 83,
+now that of the index subtype. This is inconsistent with Ada 83,
 but generally only for Ada 83 programs that raise Constraint_Error.
 For example, the concatenation operator in
 @begin(Example)
@@ -2891,7 +2910,7 @@ X := X(6..10) & X(1..5);
 would raise Constraint_Error in Ada 83 (because
 the bounds of the result of the concatenation would be 6..15, which is outside
 of 1..10),
-but would succeed and swap the halves of X (as expected) in Ada 9X.
+but would succeed and swap the halves of X (as expected) in Ada 95.
 @end{Inconsistent83}
 
 @begin{Extend83}
@@ -2907,7 +2926,7 @@ its lower bound is that of the index subtype.
 @LabeledSubClause{Unary Adding Operators}
 
 @begin{StaticSem}
-@Defn{unary adding operator}@Defn2{Term=[operator],Sec=(unary adding)}
+@Leading@Defn{unary adding operator}@Defn2{Term=[operator],Sec=(unary adding)}
 @Defn{+ operator}@Defn2{Term=[operator],Sec=(+)}
 @Defn{plus operator}@Defn2{Term=[operator],Sec=(plus)}
 @Defn{- operator}@Defn2{Term=[operator],Sec=(-)}
@@ -2932,8 +2951,7 @@ for a zero operand, the result is zero.
 @LabeledSubClause{Multiplying Operators}
 
 @begin{StaticSem}
-
-@Defn{multiplying operator}@Defn2{Term=[operator],Sec=(multiplying)}
+@Leading@Defn{multiplying operator}@Defn2{Term=[operator],Sec=(multiplying)}
 @Defn{* operator}@Defn2{Term=[operator],Sec=(*)}
 @Defn{multiply operator}@Defn2{Term=[operator],Sec=(multiply)}
 @Defn{times operator}@Defn2{Term=[operator],Sec=(times)}
@@ -2953,18 +2971,18 @@ are predefined for every specific integer type @i(T):
 
 Signed integer multiplication has its conventional meaning.
 
-Signed integer division and remainder are defined by the relation:
+@Leading@keepnext@;Signed integer division and remainder are defined by the relation:
 @begin(example)
 A = (A/B)*B + (A @key(rem) B)
 @end(example)
 
-where (A @key(rem) B) has the sign of A and an absolute value less than
-the absolute value of B.  Signed integer division satisfies the identity:
+@Leading@;where (A @key(rem) B) has the sign of A and an absolute value less than
+the absolute value of B. Signed integer division satisfies the identity:
 @begin(example)
 (-A)/B = -(A/B) = A/(-B)
 @end(example)
 
-The signed integer modulus operator is defined such
+@Leading@;The signed integer modulus operator is defined such
 that the result of A @key(mod) B has
 the sign of B and an absolute value less than the absolute value
 of B; in addition, for some signed integer value N, this result
@@ -2984,14 +3002,14 @@ division is not satisfied by modular division
 because of the difference in effect of negation.
 @end{Ramification}
 
-Multiplication and division operators are predefined for
+@Leading@;Multiplication and division operators are predefined for
 every specific floating point type @i(T):
 @begin(example)
 @key(function) "*"(Left, Right : @RI(T)) @key(return) @RI(T)
 @key(function) "/"(Left, Right : @RI(T)) @key(return) @RI(T)
 @end(example)
 
-The following multiplication and division operators, with
+@Leading@;The following multiplication and division operators, with
 an operand of the predefined type Integer, are predefined
 for every specific fixed point type @i(T):
 @begin(example)
@@ -3000,7 +3018,7 @@ for every specific fixed point type @i(T):
 @key(function) "/"(Left : @RI(T); Right : Integer) @key(return) @RI(T)
 @end(example)
 
-@Redundant[All of the above multiplying operators
+@Leading@Redundant[All of the above multiplying operators
 are usable with an operand
 of an appropriate universal numeric type.]  The following additional
 multiplying operators for @i(root_real) are predefined@Redundant[,
@@ -3029,7 +3047,7 @@ root numeric types.
 @key(function) "/"(Left : @RI(root_real); Right : @RI(root_integer)) @key(return) @RI(root_real)
 @end(example)
 
-Multiplication and division between any two fixed point types are
+@Leading@;Multiplication and division between any two fixed point types are
 provided by the following two predefined operators:
 @begin{Ramification}
 @i(Universal_fixed) is the universal type for the class of
@@ -3091,20 +3109,20 @@ True, division by zero raises Constraint_Error.]
 @end{RunTime}
 
 @begin{Notes}
-For positive A and B, A/B is the quotient and A @key(rem) B is the remainder when
-A  is  divided  by  B.   The  following  relations are satisfied by the rem
-operator:
+@Leading@;For positive A and B, A/B is the quotient and A @key(rem) B is
+the remainder when A is divided by B. The following relations are satisfied
+by the rem operator:
 @begin{Example}
   A  @key(rem) (-B) =   A @key(rem) B
 (-A) @key(rem)   B  = -(A @key(rem) B)
 @end{Example}
 
-For any signed integer K, the following identity holds:
+@Leading@keepnext@;For any signed integer K, the following identity holds:
 @begin{Example}
 A @key(mod) B   =   (A + K*B) @key(mod) B
 @end{Example}
 @begin{Bundle}
-The relations between signed integer
+@Leading@;The relations between signed integer
 division, remainder, and modulus are
 illustrated by the following table:
 @begin{Example}
@@ -3127,7 +3145,7 @@ A      B   A/B   A @key(rem) B  A @key(mod) B     A     B    A/B   A @key(rem) B
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of expressions involving multiplying operators:)
+@Leading@keepnext@i(Examples of expressions involving multiplying operators:)
 @begin{Example}
 I : Integer := 1;
 J : Integer := 2;
@@ -3181,7 +3199,7 @@ rather than a tabular format.
 @LabeledSubClause{Highest Precedence Operators}
 
 @begin{StaticSem}
-@Defn{highest precedence operator}@Defn2{Term=[operator],Sec=(highest precedence)}
+@Leading@Defn{highest precedence operator}@Defn2{Term=[operator],Sec=(highest precedence)}
 @Defn{abs operator}@Defn2{Term=[operator],Sec=(abs)}
 @Defn{absolute value}
 The highest precedence unary operator @key(abs) (absolute value)
@@ -3191,7 +3209,7 @@ with the following specification:
 @key(function) "@key(abs)"(Right : @RI(T)) @key(return) @RI(T)
 @end(example)
 
-@Defn{not operator}@Defn2{Term=[operator],Sec=(not)}
+@Leading@Defn{not operator}@Defn2{Term=[operator],Sec=(not)}
 @IndexSeeAlso{Term=[logical operator],See=(not operator)}
 The highest precedence unary operator @key(not) (logical negation) is
 predefined for every boolean type @i(T),
@@ -3205,7 +3223,7 @@ with the following specification:
 
 The result of the operator @key(not) for a modular type is
 defined as the difference between the high bound of the base range
-of the type and the value of the operand.  @Redundant[For
+of the type and the value of the operand. @Redundant[For
 a binary modulus, this corresponds to a bit-wise complement
 of the binary
 representation of the value
@@ -3223,10 +3241,10 @@ A check is made that each component of the result belongs to the
 component subtype; the exception Constraint_Error is raised if this
 check fails.
 @begin{Discussion}
-  The check against the component subtype is per AI-00535.
+  The check against the component subtype is per AI83-00535.
 @end{Discussion}
 
-@Defn{exponentiation operator}@Defn2{Term=[operator],Sec=(exponentiation)}
+@Leading@Defn{exponentiation operator}@Defn2{Term=[operator],Sec=(exponentiation)}
 @Defn{** operator}@Defn2{Term=[operator],Sec=(**)}
 The highest precedence @i(exponentiation) operator ** is predefined
 for every specific integer type @i(T)
@@ -3235,7 +3253,7 @@ with the following specification:
 @key(function) "**"(Left : @RI(T); Right : Natural) @key(return) @RI(T)
 @end(example)
 
-Exponentiation is also predefined for
+@Leading@;Exponentiation is also predefined for
 every specific floating point type
 as well as @i{root_real},
 with the following specification (where @i(T) is @i{root_real}
@@ -3249,14 +3267,14 @@ The right operand of an exponentiation is the @i(exponent).
 The expression X**N with the value of the exponent
 N positive is equivalent to the
 expression X*X*...X (with N@en@;1 multiplications) except that the multiplications
-are associated in an arbitrary order.  With N equal to zero, the result is one.
+are associated in an arbitrary order. With N equal to zero, the result is one.
 With the value of N negative
 @Redundant[(only defined for a floating point operand)],
 the result is the reciprocal of the result using the absolute value of
 N as the exponent.
 @begin{Ramification}
   The language does not specify the order of association of the multiplications
-  inherent in an exponentiation.  For a floating point type,
+  inherent in an exponentiation. For a floating point type,
   the accuracy of the result might depend on the particular
   association order chosen.
 @end{Ramification}
@@ -3298,7 +3316,7 @@ a negative value is provided for the exponent.
 @Redundant[Explicit type conversions, both
 value conversions and view conversions, are
 allowed between closely related
-types as defined below.  This clause also
+types as defined below. This clause also
 defines rules for value and view
 conversions to a particular subtype of a type,
 both explicit ones and those implicit in other constructs.
@@ -3334,7 +3352,7 @@ is legal according to the rules of this clause.
 Two types are convertible if each is convertible to the other.
 @begin{Ramification}
   Note that @lquotes@;convertible@rquotes@; is defined in terms of legality
-  of the conversion.  Whether the conversion would raise an exception
+  of the conversion. Whether the conversion would raise an exception
   at run time is irrelevant to this definition.
 @end{Ramification}
 
@@ -3353,8 +3371,8 @@ other @nt<type_conversion>s are called @i(value conversions).
   any context that requires an object @nt<name>, including in
   an object renaming, the @nt<prefix> of a @nt<selected_component>,
   and if the operand is a variable, on the left side of an
-  @nt<assignment_statement>.  View conversions to other types only
-  occur as actual parameters.  Allowing view conversions of untagged
+  @nt<assignment_statement>. View conversions to other types only
+  occur as actual parameters. Allowing view conversions of untagged
   types in all contexts seemed to incur an undue implementation burden.
 @end{Ramification}
 @end{Intro}
@@ -3387,10 +3405,10 @@ is interpreted as an @nt<expression>.
 If the target type is a numeric type, then the operand type
 shall be a numeric type.
 
-@Defn2{Term=[type conversion],sec=(array)}
+@Leading@Defn2{Term=[type conversion],sec=(array)}
 @Defn2{Term=[conversion],sec=(array)}
 If the target type is an array type, then the operand type shall
-be an array type.  Further:
+be an array type. Further:
 @begin(itemize)
   The types shall have the same dimensionality;
 
@@ -3401,10 +3419,10 @@ be an array type.  Further:
   @PDefn2{Term=[statically matching],Sec=(required)}
 @end(itemize)
 
-@Defn2{Term=[type conversion],sec=(access)}
+@Leading@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is a general access type, then the operand type
-shall be an access-to-object type.  Further:
+shall be an access-to-object type. Further:
 @begin{Discussion}
   The @LegalityTitle and @RunTimeTitle are worded so that a
   @nt{type_conversion} T(X) (where T is an access type) is
@@ -3456,10 +3474,10 @@ These rules are designed to ensure that aliased array objects
   @end{Ramification}
 @end(itemize)
 
-@Defn2{Term=[type conversion],sec=(access)}
+@Leading@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is an access-to-subprogram type, then the operand
-type shall be an access-to-subprogram type.  Further:
+type shall be an access-to-subprogram type. Further:
 @begin(itemize)
   The designated profiles shall be subtype-conformant.
 @Defn2{Term=[subtype conformance],Sec=(required)}
@@ -3488,7 +3506,7 @@ type shall be an access-to-subprogram type.  Further:
 @end{Reason}
 @end(itemize)
 
-@Defn2{Term=[type conversion],sec=(enumeration)}
+@Leading@Defn2{Term=[type conversion],sec=(enumeration)}
 @Defn2{Term=[conversion],sec=(enumeration)}
 @Defn2{Term=[type conversion],sec=[composite (non-array)]}
 @Defn2{Term=[conversion],sec=[composite (non-array)]}
@@ -3508,14 +3526,14 @@ then either:
   The operand type shall be a class-wide type that covers the target type.
   @begin{Ramification}
     This is a conversion of a class-wide type toward the leaves,
-    which requires a tag check.  See @RunTimeTitle.
+    which requires a tag check. See @RunTimeTitle.
 
     These two rules imply that a conversion from a parent type
     to a type extension is not permitted, as this would require
     specifying the values for additional components, in general,
-    and changing the tag.  An @nt<extension_aggregate> has to be used
+    and changing the tag. An @nt<extension_aggregate> has to be used
     instead, constructing a new value, rather than converting an
-    existing value.  However, a conversion
+    existing value. However, a conversion
     from the class-wide type rooted at the parent type is permitted;
     such a conversion just verifies that the operand's tag is
     a descendant of the target.
@@ -3539,7 +3557,7 @@ that is
 the result of converting the value of the operand to the target subtype.
 
 A @nt{type_conversion} that is a view conversion
-denotes a view of the object denoted by the operand.  This
+denotes a view of the object denoted by the operand. This
 view is a variable of the target type if the operand denotes
 a variable; otherwise it is a constant of
 the target type.
@@ -3549,7 +3567,7 @@ The nominal subtype of a @nt<type_conversion> is its target subtype.
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=[evaluation], Sec=(value conversion)}
+@Leading@PDefn2{Term=[evaluation], Sec=(value conversion)}
 @Defn2{Term=[corresponding value],
   Sec=(of the target type of a conversion)}
 @Defn{conversion}
@@ -3596,14 +3614,14 @@ Numeric Type Conversion
 @begin{Discussion}
   This was implementation defined in Ada 83.
     There seems no reason to preserve the nonportability
-    in Ada 9X.  Round-away-from-zero is the conventional
+    in Ada 95. Round-away-from-zero is the conventional
     definition of rounding, and standard Fortran and COBOL both specify
     rounding away from zero, so for interoperability, it seems important
-    to pick this.  This is also the most easily @lquotes@;undone@rquotes@; by hand.
+    to pick this. This is also the most easily @lquotes@;undone@rquotes@; by hand.
     Round-to-nearest-even is an alternative, but that is quite complicated
-    if not supported by the hardware.  In any case, this operation is not
+    if not supported by the hardware. In any case, this operation is not
     expected to be part of an inner loop, so predictability and portability
-    are judged most important.  We anticipate that
+    are judged most important. We anticipate that
     a floating point attribute function Unbiased_Rounding will be provided
     for those applications that require round-to-nearest-even.
     @lquotes@;Deterministic@rquotes@; rounding is required for static conversions to
@@ -3639,7 +3657,7 @@ Array Type Conversion
   For each nonnull index range, a check is made that the
   bounds of the range belong to the corresponding index subtype.
   @begin(Discussion)
-    Only nonnull index ranges are checked, per AI-00313.
+    Only nonnull index ranges are checked, per AI83-00313.
   @end(Discussion)
 
   In either array case, the value of each component of the result is that
@@ -3694,7 +3712,7 @@ Composite (Non-Array) Type Conversion
 It
   is a ramification of the rules for the discriminants of derived types
   that each discriminant of the result is covered either by this
-  paragraph or the previous one.  See @RefSecNum(Discriminants).
+  paragraph or the previous one. See @RefSecNum(Discriminants).
 @end{Ramification}
 
   @IndexCheck{Discriminant_Check}
@@ -3786,7 +3804,7 @@ target type;
 if the target type is composite, checks are
 performed as above for a value conversion.
 
-The properties of this new view are as follows:
+@Leading@;The properties of this new view are as follows:
 @begin(itemize)
   If the target type is composite, the bounds or discriminants (if any)
   of the view are as defined above for a value conversion;
@@ -3876,12 +3894,12 @@ the literal @key(null), an @nt<allocator>, an @nt<aggregate>, a
 a @nt<character_literal>, or an @nt<attribute_reference>
 for an Access or Unchecked_Access attribute.
 Similarly, such an @nt{expression} enclosed by parentheses is not
-allowed.  A @nt<qualified_expression> (see @RefSecNum(Qualified Expressions))
+allowed. A @nt<qualified_expression> (see @RefSecNum(Qualified Expressions))
 can be used instead of such a @nt<type_conversion>.
 
 The constraint of the target subtype has no effect
 for a @nt<type_conversion> of an elementary type passed
-as an @key(out) parameter.  Hence, it is recommended
+as an @key(out) parameter. Hence, it is recommended
 that the first subtype be specified
 as the target to minimize confusion
 (a similar recommendation applies to renaming and
@@ -3889,14 +3907,16 @@ generic formal @key(in out) objects).
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of numeric type conversion:)
+@Leading@keepnext@i(Examples of numeric type conversion:)
 @begin{Example}
 Real(2*J)      @RI[--  value is converted to floating point]
 Integer(1.6)   @RI[--  value is 2]
 Integer(-0.4)  @RI[--  value is 0]
 @end{Example}
 
-@i(Example of conversion between derived types:)
+@begin{Wide}
+@leading@keepnext@i(Example of conversion between derived types:)
+@end{Wide}
 @begin{Example}
 @key(type) A_Form @key(is) @key(new) B_Form;
 
@@ -3907,7 +3927,10 @@ X := A_Form(Y);
 Y := B_Form(X);  @RI[--  the reverse conversion ]
 @end{Example}
 
-@i(Examples of conversions between array types:)
+@begin{Wide}
+@leading@keepnext@i(Examples of conversions between array types:)
+@end{Wide}
+
 @begin{Example}
 @key(type) Sequence @key(is) @key(array) (Integer @key(range) <>) @key(of) Integer;
 @key(subtype) Dozen @key(is) Sequence(1 .. 12);
@@ -3940,17 +3963,17 @@ in certain circumstances (such a @nt<type_conversion>
 is called a view conversion).
 In particular, as in Ada 83,
 a @nt<type_conversion> can appear as an @key(in out) or @key(out)
-actual parameter.  In addition, if the target type is tagged
+actual parameter. In addition, if the target type is tagged
 and the operand is the @nt<name> of an object, then so
 is the @nt<type_conversion>, and it can be used as the @nt<prefix>
 to a @nt<selected_component>, in an @nt<object_renaming_declaration>, etc.
 
 We no longer require type-mark conformance between
 a parameter of the form of a type conversion, and the corresponding
-formal parameter.  This had caused some problems for
+formal parameter. This had caused some problems for
 inherited subprograms (since there isn't really a type-mark
 for converted formals), as well as for renamings, formal subprograms,
-etc.  See AI-245, AI-318, AI-547.
+etc. See AI83-00245, AI83-00318, AI83-00547.
 
 We now specify @lquotes@;deterministic@rquotes@; rounding from real to integer types
 when the value of the operand is exactly between two integers
@@ -3958,13 +3981,13 @@ when the value of the operand is exactly between two integers
 
 @lquotes@;Sliding@rquotes@; of array bounds
 (which is part of conversion to an array subtype)
-is performed in more cases in Ada 9X than in Ada 83.
+is performed in more cases in Ada 95 than in Ada 83.
 Sliding is not performed on
 the operand of a membership test,
 nor on the operand of a @nt{qualified_expression}.
 It wouldn't make sense on a membership test,
 and we wish to retain a connection between subtype membership
-and subtype qualification.  In general, a subtype membership test returns
+and subtype qualification. In general, a subtype membership test returns
 True if and only if a corresponding subtype qualification
 succeeds without raising an exception.
 Other operations that take arrays perform sliding.
@@ -4015,7 +4038,7 @@ the @nt{subtype_mark}.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 The exception Constraint_Error is raised if this check fails.
 @begin{Ramification}
-  This is one of the few contexts in Ada 9X where implicit subtype conversion
+  This is one of the few contexts in Ada 95 where implicit subtype conversion
   is not performed prior to a constraint check, and hence no
   @lquotes@;sliding@rquotes@; of array bounds is provided.
 @end{Ramification}
@@ -4023,7 +4046,7 @@ The exception Constraint_Error is raised if this check fails.
   Implicit subtype conversion is not provided because a
   @nt<qualified_expression> with a constrained target subtype is
   essentially an assertion about the subtype of the operand, rather
-  than a request for conversion.  An explicit @nt<type_conversion> can
+  than a request for conversion. An explicit @nt<type_conversion> can
   be used rather than a @nt<qualified_expression> if subtype
   conversion is desired.
 @end{Reason}
@@ -4038,7 +4061,7 @@ might be necessary to qualify the operand to resolve its type.
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of disambiguating expressions using qualification:)
+@Leading@keepnext@i(Examples of disambiguating expressions using qualification:)
 @begin{Example}
 @key(type) Mask @key(is) (Fix, Dec, Exp, Signif);
 @key(type) Code @key(is) (Fix, Cla, Dec, Tnz, Sub);
@@ -4125,7 +4148,7 @@ otherwise, the object is constrained by its initial value
 @Redundant[(even if the designated subtype is unconstrained with defaults)].
 @PDefn{constrained by its initial value}
 @begin{Discussion}
-  See AI-00331.
+  See AI83-00331.
 @end{Discussion}
 @begin{Reason}
   All objects created by an allocator are aliased, and all
@@ -4153,7 +4176,7 @@ and assigned to the object.
 @end{Ramification}
 
 @PDefn2{Term=[evaluation], Sec=(uninitialized allocator)}
-For the evaluation of an uninitialized allocator:
+@Leading@keepnext@;For the evaluation of an uninitialized allocator:
 @begin(itemize)
 @Defn2{Term=[assignment operation], Sec=(during evaluation of an
 uninitialized allocator)}
@@ -4178,7 +4201,7 @@ uninitialized allocator)}
   This check and the initialization of the object are performed in
   an arbitrary order.
 @begin{Discussion}
-AI-00150.
+AI83-00150.
 @end{Discussion}
 @end(itemize)
 
@@ -4222,7 +4245,7 @@ to provide garbage collection (see @RefSecNum{Pragma Controlled}).
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of allocators:}
+@Leading@keepnext@i{Examples of allocators:}
 @begin{Example}
 @key(new) Cell'(0, @key(null), @key(null))                          @RI[-- initialized explicitly, see @RefSecNum{Incomplete Type Declarations}]
 @key(new) Cell'(Value => 0, Succ => @key(null), Pred => @key(null)) @RI[-- initialized explicitly]
@@ -4301,18 +4324,16 @@ to maximize portability of static calculations.
 @end{MetaRules}
 
 @begin{Intro}
-@Defn2{Term=[static], Sec=(expression)}
-
+@Leading@Defn2{Term=[static], Sec=(expression)}
 A static expression is
 @Redundant[a scalar or string expression that is]
 one of the following:
-
 
 @begin{Itemize}
 a @nt{numeric_literal};
 @begin{Ramification}
   A @nt<numeric_literal> is always a static expression, even if
-  its expected type is not that of a static subtype.  However, if its value
+  its expected type is not that of a static subtype. However, if its value
   is explicitly converted to, or qualified by, a nonstatic subtype,
   the resulting expression is nonstatic.
 @end{Ramification}
@@ -4320,7 +4341,7 @@ a @nt{numeric_literal};
 a @nt{string_literal} of a static string subtype;
 @begin(Ramification)
   That is, the constrained subtype defined by the index range
-  of the string is static.  Note that elementary values don't
+  of the string is static. Note that elementary values don't
   generally have subtypes, while composite values do (since
   the bounds or discriminants are inherent in the value).
 @end(Ramification)
@@ -4398,7 +4419,7 @@ a static expression enclosed in parentheses.
 @end{Itemize}
 @begin(Discussion)
   @Defn2{Term=[static], Sec=(value)}
-  Informally, we talk about a @i(static value).  When we do,
+  Informally, we talk about a @i(static value). When we do,
   we mean a value specified by a static expression.
 @end(Discussion)
 @begin{Ramification}
@@ -4411,7 +4432,7 @@ a static expression enclosed in parentheses.
   in a @nt<record_aggregate> or @nt<extension_aggregate>.
 @end{Ramification}
 
-@Defn2{Term=[statically], Sec=(denote)}
+@Leading@Defn2{Term=[statically], Sec=(denote)}
 A @nt{name} @i(statically denotes) an entity if it
 denotes the entity and:
 @begin(itemize)
@@ -4431,7 +4452,7 @@ denotes the entity and:
 and @nt{indexed_component}s do not statically denote things.
 @end{Ramification}
 
-@Defn2{Term=[static], Sec=(function)}
+@Leading@Defn2{Term=[static], Sec=(function)}
 A @i{static function} is one of the following:
 @begin{Ramification}
   These are the functions whose calls can be static expressions.
@@ -4525,7 +4546,7 @@ are not static.
   String subtypes are the only composite subtypes that can be static.
 @end{Ramification}
 @begin{Reason}
-The part about generic formal objects of mode @key[in out]
+@Leading@;The part about generic formal objects of mode @key[in out]
 is necessary because the subtype of the formal is not required
 to have anything to do with the subtype of the actual.
 For example:
@@ -4555,7 +4576,7 @@ A similar issue arises for generic formal functions,
 now that function calls are object names.
 @end{Reason}
 
-@Defn2{Term=[static], Sec=(constraint)}
+@Leading@Defn2{Term=[static], Sec=(constraint)}
 The different kinds of @i(static constraint) are defined as follows:
 @begin(itemize)
   A null constraint is always static;
@@ -4587,8 +4608,7 @@ or if it is a static string constant.
 @end{Intro}
 
 @begin{Legality}
-
-A static expression is evaluated at compile time except when it is part
+@Leading@;A static expression is evaluated at compile time except when it is part
 of the right operand of a static short-circuit control form whose value
 is determined by its left operand.
 This evaluation is performed exactly,
@@ -4624,8 +4644,7 @@ descendant of a formal scalar type
   not the value after any rounding or truncation.
   (See below for the rounding and truncation requirements.)
 
-
-  Short-circuit control forms are a special case:
+  @Leading@;Short-circuit control forms are a special case:
 @begin{Example}
 N: @key[constant] := 0.0;
 X: @key[constant] Boolean := (N = 0.0) @key[or] @key[else] (1.0/N > 0.5); --@RI{ Static.}
@@ -4666,7 +4685,7 @@ accuracy rules apply (see @RefSecNum(Numerics)).
   extended precision (beyond that of the machine numbers)
   can be retained when evaluating
   a static expression, to ease code sharing for generic
-  instantiations.  For similar reasons,
+  instantiations. For similar reasons,
   normal (nondeterministic) rounding or truncating rules apply
   for descendants of a formal fixed point type.
 @end{Reason}
@@ -4691,7 +4710,7 @@ An expression can be static even if it occurs in a context where
 staticness is not required.
 @begin{Ramification}
 
-For example:
+@Leading@keepnext@;For example:
 @begin{Example}
 X : Float := Float'(1.0E+400) + 1.0 - Float'(1.0E+400);
 @end{Example}
@@ -4700,7 +4719,6 @@ The expression is static,
 which means that the value of X must be exactly 1.0,
 independent of the accuracy or range of the run-time floating point
 implementation.
-
 
 The following kinds of expressions are never static:
 @nt{explicit_dereference},
@@ -4712,10 +4730,10 @@ The following kinds of expressions are never static:
 @end{Ramification}
 
 A static (or run-time) @nt<type_conversion> from a real type to
-an integer type performs rounding.  If the operand value is exactly half-way
+an integer type performs rounding. If the operand value is exactly half-way
 between two integers, the rounding is performed away from zero.
 @begin{Reason}
-  We specify this for portability.  The reason for not choosing
+  We specify this for portability. The reason for not choosing
   round-to-nearest-even, for example, is that this method is easier
   to undo.
 @end{Reason}
@@ -4736,7 +4754,7 @@ between two integers, the rounding is performed away from zero.
 @end{Notes}
 
 @begin{Examples}
-@i(Examples of static expressions:)
+@Leading@keepnext@i(Examples of static expressions:)
 @begin{Example}
 1 + 1       @RI[-- 2]
 @key(abs)(-10)*3  @RI[-- 30]
@@ -4788,9 +4806,9 @@ descendants of a formal scalar type,
 to simplify generic code sharing and to avoid generic
 contract model problems.
 
-Static expressions are legal even if an intermediate
-in the expression goes outside the base range of the type.  Therefore, the
-following will succeed in Ada 9X, whereas it might raise an
+@Leading@;Static expressions are legal even if an intermediate
+in the expression goes outside the base range of the type. Therefore, the
+following will succeed in Ada 95, whereas it might raise an
 exception in Ada 83:
 @begin{Example}
 @key[type] Short_Int @key[is] @key[range] -32_768 .. 32_767;
@@ -4798,12 +4816,12 @@ I : Short_Int := -32_768;
 @end{Example}
 
 This might raise an exception in Ada 83 because "32_768" is out of range,
-even though "@en@;32_768" is not.  In Ada 9X, this will always succeed.
+even though "@en@;32_768" is not. In Ada 95, this will always succeed.
 
 
 Certain expressions involving string operations
 (in particular concatenation and membership tests)
-are considered static in Ada 9X.
+are considered static in Ada 95.
 
 
 The reason for this change is to simplify the rule requiring
@@ -4813,7 +4831,7 @@ pragma, and to simplify the preelaborability rules.
 
 @begin{Incompatible83}
 An Ada 83 program that uses an out-of-range static value
-is illegal in Ada 9X, unless the expression is part of a larger
+is illegal in Ada 95, unless the expression is part of a larger
 static expression, or the expression is not evaluated due to being on
 the right-hand side of a short-circuit control form.
 @end{Incompatible83}
@@ -4838,7 +4856,7 @@ in order to clarify the meaning for those who have gotten used to the
 Ada 83 terminology.
 
 
-In Ada 83, an expression was considered nonstatic if it raised an
+@Leading@;In Ada 83, an expression was considered nonstatic if it raised an
 exception.
 Thus, for example:
 @begin{Example}
@@ -4846,7 +4864,7 @@ Bad: @key[constant] := 1/0; --@RI{ Illegal!}
 @end{Example}
 
 was illegal because 1/0 was not static.
-In Ada 9X, the above example is still illegal,
+In Ada 95, the above example is still illegal,
 but for a different reason:
 1/0 is static, but there's a separate rule forbidding the exception
 raising.
@@ -4868,7 +4886,7 @@ of a @nt<discrete_subtype_definition>.
 @Defn2{Term=[statically matching], Sec=(for subtypes)}
 A subtype @i(statically matches) another subtype of the same type
 if they
-have statically matching constraints.  Two anonymous access subtypes
+have statically matching constraints. Two anonymous access subtypes
 statically match
 if their designated subtypes statically match.
 @begin{Ramification}
@@ -4905,16 +4923,16 @@ second subtype.
 @begin{Discussion}
   Static compatibility is required when constraining a parent subtype
   with a discriminant from a new @nt<discriminant_part>.
-  See @RefSecNum{Discriminants}.  Static compatibility is also used
+  See @RefSecNum{Discriminants}. Static compatibility is also used
   in matching generic formal derived types.
 
   Note that
   statically compatible with a subtype does not imply
-  compatible with a type.  It is OK since the terms are
+  compatible with a type. It is OK since the terms are
   used in different contexts.
 @end{Discussion}
 @end{StaticSem}
 
 @begin{DiffWord83}
-This subclause is new to Ada 9X.
+This subclause is new to Ada 95.
 @end{DiffWord83}

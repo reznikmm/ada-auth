@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:23 $}
+@Comment{$Date: 2000/08/08 04:35:31 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 
@@ -3652,13 +3652,11 @@ see @RefSecNum(Shared Variable Control).
 
 @begin{Examples}
 
-@begin{Leading}
-The following example defines a buffer protected object
+@Leading@;The following example defines a buffer protected object
 to smooth variations between
 the  speed  of  output  of  a producing task and the speed of input of some
 consuming  task.   For  instance,  the  producing  task  might have the
 following structure:
-@end{Leading}
 
 @begin(Example)
 @key(task) Producer;
@@ -3674,9 +3672,9 @@ following structure:
 @key(end) Producer;
 @end(Example)
 
-@begin{WideLeading}
-and the consuming task might have the following structure:
-@end{WideLeading}
+@begin{Wide}
+@leading@keepnext@;and the consuming task might have the following structure:
+@end{Wide}
 
 @begin(Example)
 @key(task) Consumer;
@@ -3692,12 +3690,12 @@ and the consuming task might have the following structure:
 @key(end) Consumer;
 @end(Example)
 
-@begin{WideLeading}
-The  buffer object contains an internal pool of characters managed in a
+@begin{Wide}
+@leading@;The  buffer object contains an internal pool of characters managed in a
 round-robin fashion.  The pool has two indices, an  In_Index  denoting  the
 space  for the next input character and an Out_Index denoting the space for
 the next output character.
-@end{WideLeading}
+@end{Wide}
 
 @begin(Example)
 @key(protected) Buffer @key(is)

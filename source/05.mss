@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:37 $}
+@Comment{$Date: 2000/08/08 04:35:31 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -37,7 +37,7 @@ description of subprograms.
 @begin{Intro}
 @Redundant[A @nt<statement> is either simple or compound.
 A @nt<simple_statement> encloses
-no other @nt<statement>.  A @nt<compound_statement> can enclose
+no other @nt<statement>. A @nt<compound_statement> can enclose
 @nt<simple_statement>s and other @nt<compound_statement>s.]
 @end{Intro}
 
@@ -115,19 +115,19 @@ or @nt<block_statement> with the given @nt<statement_identifier>.
   starts before the first explicit occurrence of the corresponding
   name, since this occurrence is either in a statement label, a
   @nt{loop_statement}, a @nt{block_statement}, or a
-  @nt{goto_statement}.  An implicit
+  @nt{goto_statement}. An implicit
   declaration in a @nt{block_statement} may hide a declaration given in an
   outer program unit or @nt{block_statement} (according to the usual rules
   of hiding explained in @RefSecNum{Visibility}).
 
   The syntax rule for @nt{label} uses @nt{statement_identifier} which
   is a @nt<direct_name> (not a @nt{defining_identifier}),
-  because labels are implicitly declared.  The same applies to loop and
+  because labels are implicitly declared. The same applies to loop and
   block names.
   In other words, the @nt{label} itself is not the defining occurrence;
   the implicit declaration is.
 
-  We cannot consider the @nt{label} to be a defining occurrence.
+  @Leading@;We cannot consider the @nt{label} to be a defining occurrence.
   An example that can tell the difference is this:
   @begin{example}
 @key[declare]
@@ -194,7 +194,7 @@ a named loop or an @nt<accept_statement> @em only nesting
 within @nt<block_statement>s is relevant to the form of its
 expanded name.
 @begin{Discussion}
-Each comment in the following example gives the
+@Leading@keepnext@;Each comment in the following example gives the
 expanded name associated with an entity declared in the task body:
 @begin{Example}
 @key(task body) Compute @key(is)
@@ -225,7 +225,7 @@ expanded name associated with an entity declared in the task body:
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of labeled statements:}
+@Leading@keepnext@i{Examples of labeled statements:}
 @begin{Example}
 <<Here>> <<Ici>> <<Aqui>> <<Hier>> @key[null];
 
@@ -239,7 +239,7 @@ The @nt{requeue_statement} is new.
 
 @begin{DiffWord83}
 We define the syntactic category @nt<statement_identifier> to simplify
-the description.  It is used for labels, loop names, and block names.
+the description. It is used for labels, loop names, and block names.
 We define the entity associated with the implicit declarations
 of statement names.
 
@@ -304,7 +304,7 @@ is expected to be of any nonlimited type.
 The expected type for the @nt<expression> is
 the type of the target.
 @begin{ImplNote}
-An @nt<assignment_statement> as a whole is a "complete context,"
+@Leading@keepnext@;An @nt<assignment_statement> as a whole is a "complete context,"
 so if the @i{variable_}@nt<name> of an @nt<assignment_statement> is
 overloaded, the @nt<expression> can be used to help disambiguate it.
 For example:
@@ -333,7 +333,7 @@ or of type @i(T) and tag-indeterminate
 @begin{Reason}
   This is consistent with the general rule that a single
   dispatching operation shall not have both dynamically tagged and
-  statically tagged operands.  Note that for an object
+  statically tagged operands. Note that for an object
   initialization (as opposed to the @nt{assignment_statement}),
   a statically tagged initialization expression is permitted,
   since there is no chance for confusion (or Tag_Check failure).
@@ -357,7 +357,7 @@ are first evaluated in an arbitrary order.
   evaluation of the @i(variable_)@nt<name>, as pointed out by the ACID.
 @end{Ramification}
 
-When the type of the target is class-wide:
+@Leading@keepnext@;When the type of the target is class-wide:
 @begin(itemize)
   @PDefn2{Term=[controlling tag value], Sec=(for the @nt{expression}
     in an @nt{assignment_statement})}
@@ -378,7 +378,7 @@ When the type of the target is class-wide:
 @end(itemize)
 
 The value of the @nt<expression> is converted to the subtype of the
-target.  @Redundant[The conversion might raise an exception
+target. @Redundant[The conversion might raise an exception
 (see @RefSecNum{Type Conversions}).]
 @PDefn2{Term=[implicit subtype conversion],Sec=(assignment_statement)}
 @begin{Ramification}
@@ -454,7 +454,7 @@ component or slice of such a variable
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of assignment statements:}
+@Leading@keepnext@i{Examples of assignment statements:}
 @begin{Example}
 Value := Max_Value - 1;
 Shade := Blue;
@@ -466,7 +466,9 @@ Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@RI{ see @RefS
 Next_Car.@key[all] := (72074, @key[null]);    --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
-@i{Examples involving scalar subtype conversions:}
+@begin{Wide}
+@Leading@keepnext@i{Examples involving scalar subtype conversions:}
+@end{Wide}
 @begin{Example}
 I, J : Integer @key[range] 1 .. 10 := 5;
 K    : Integer @key[range] 1 .. 20 := 15;
@@ -477,7 +479,9 @@ K := J;  --@RI{  compatible ranges}
 J := K;  --@RI{  will raise Constraint_Error if K > 10}
 @end{Example}
 
-@i{Examples involving array subtype conversions:}
+@begin{Wide}
+@leading@keepnext@i{Examples involving array subtype conversions:}
+@end{Wide}
 @begin{Example}
 A : String(1 .. 31);
 B : String(3 .. 33);
@@ -510,9 +514,9 @@ as part of @nt{assignment_statement}s
 @begin{DiffWord83}
 The special case of array assignment is subsumed by the concept
 of a subtype conversion, which is applied for all kinds of types,
-not just arrays.  For arrays it provides @lquotes@;sliding.@rquotes@;  For numeric
+not just arrays. For arrays it provides @lquotes@;sliding@rquotes@;. For numeric
 types it provides conversion of a value of a universal type to
-the specific type of the target.  For other types,
+the specific type of the target. For other types,
 it generally has no run-time effect, other than a constraint
 check.
 
@@ -569,7 +573,7 @@ them is executed.
 @end{RunTime}
 
 @begin{Examples}
-@i{Examples of if statements:}
+@Leading@keepnext@i{Examples of if statements:}
 @begin{Example}
 @key[if] Month = December @key[and] Day = 31 @key[then]
    Month := January;
@@ -696,7 +700,7 @@ It can only happen if there is no @key{others} @nt{discrete_choice}.
 @end{Itemize}
 
 In the uninitialized variable case, the value might be anything; hence, any
-alternative can be chosen, or Constraint_Error can be raised.  (We intend to
+alternative can be chosen, or Constraint_Error can be raised. (We intend to
 prevent, however, jumping to random memory locations and the like.)
 In the out-of-range case, the behavior is more sensible: if there is an
 @key{others}, then the implementation may choose to raise Constraint_Error
@@ -748,7 +752,7 @@ given explicitly.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of case statements:}
+@Leading@keepnext@i{Examples of case statements:}
 @begin{Example}
 @tabclear()@tabset(P22)
 @key[case] Sensor @key[is]
@@ -781,10 +785,10 @@ given explicitly.
 @begin{Extend83}
 In Ada 83, the @nt{expression} in a @nt{case_statement} is not allowed to
 be of a generic formal type.
-This restriction is removed in Ada 9X; an @key{others} @nt{discrete_choice}
+This restriction is removed in Ada 95; an @key{others} @nt{discrete_choice}
 is required instead.
 
-In Ada 9X, a function call is the name of an object;
+In Ada 95, a function call is the name of an object;
 this was not true in Ada 83 (see @RefSec{Names}).
 This change makes the following @nt{case_statement} legal:
 @begin{Example}
@@ -890,13 +894,13 @@ if False, the execution of the @nt{loop_statement} is complete.
 @PDefn2{Term=[elaboration], Sec=(loop_parameter_specification)}
 For the execution of a @nt{loop_statement} with a @key{for}
 @nt{iteration_scheme},
-the @nt{loop_parameter_specification} is first elaborated.  This
+the @nt{loop_parameter_specification} is first elaborated. This
 elaboration creates the loop parameter and elaborates the
 @nt{discrete_subtype_definition}.
 If the @nt{discrete_subtype_definition} defines a subtype
 with a null range,
 the execution of the
-@nt{loop_statement} is complete.  Otherwise, the
+@nt{loop_statement} is complete. Otherwise, the
 @nt{sequence_of_statements} is executed once for each value of the
 discrete subtype defined by the
 @nt{discrete_subtype_definition} (or until the loop is left as a
@@ -904,7 +908,7 @@ consequence of a transfer of control).
 @Defn2{Term=[assignment operation], Sec=(during execution of a @key{for} loop)}
 Prior to each such iteration,
 the corresponding value of the discrete subtype is assigned to the
-loop parameter.  These values are assigned in increasing order unless
+loop parameter. These values are assigned in increasing order unless
 the reserved word @key{reverse} is present, in which case the values
 are assigned in decreasing order.
 @begin{Ramification}
@@ -936,12 +940,12 @@ An implementation could give a warning if a variable is hidden by a
 @end{ImplNote}
 
 The @nt<discrete_subtype_definition> of a for loop is elaborated
-just once.  Use of the
+just once. Use of the
 reserved word @key[reverse] does not alter the discrete subtype defined,
 so that the following @nt{iteration_scheme}s are not equivalent; the
 first has a null range.
 @begin{Example}
-@key[for] J @key[in] @key[reverse] 1 ..  0
+@key[for] J @key[in] @key[reverse] 1 .. 0
 @key[for] J @key[in] 0 .. 1
 @end{Example}
 @begin{Ramification}
@@ -951,7 +955,7 @@ the subtype of the loop parameter is static.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a loop statement without an iteration scheme:}
+@Leading@keepnext@i{Example of a loop statement without an iteration scheme:}
 @begin{Example}
 @key[loop]
    Get(Current_Character);
@@ -959,7 +963,9 @@ the subtype of the loop parameter is static.
 @key[end] @key[loop];
 @end{Example}
 
-@i{Example of a loop statement with a @key[while] iteration scheme:}
+@begin{Wide}
+@leading@keepnext@i{Example of a loop statement with a @key[while] iteration scheme:}
+@end{Wide}
 @begin{Example}
 @key[while] Bid(N).Price < Cut_Off.Price @key[loop]
    Record_Bid(Bid(N).Price);
@@ -967,7 +973,9 @@ the subtype of the loop parameter is static.
 @key[end] @key[loop];
 @end{Example}
 
-@i{Example of a loop statement with a @key[for] iteration scheme:}
+@begin{Wide}
+@leading@keepnext@i{Example of a loop statement with a @key[for] iteration scheme:}
+@end{Wide}
 @begin{Example}
 @key[for] J @key[in] Buffer'Range @key[loop]     --@RI{  works even with a null range}
    @key[if] Buffer(J) /= Space @key[then]
@@ -976,7 +984,9 @@ the subtype of the loop parameter is static.
 @key[end] @key[loop];
 @end{Example}
 
-@i{Example of a loop statement with a name:}
+@begin{Wide}
+@leading@keepnext@i{Example of a loop statement with a name:}
+@end{Wide}
 @begin{Example}
 Summation:
    @key[while] Next /= Head @key[loop]       --@RI{ see @RefSecNum{Incomplete Type Declarations}}
@@ -1033,7 +1043,7 @@ its @nt{handled_sequence_of_statements}.
 @end{RunTime}
 
 @begin{Examples}
-@i{Example of a block statement with a local variable:}
+@Leading@keepnext@i{Example of a block statement with a local variable:}
 @begin{Example}
 Swap:
    @key[declare]
@@ -1174,7 +1184,7 @@ but does not enclose the target.
 
 @begin{Notes}
 The above rules allow transfer of control to a @nt{statement} of an
-enclosing @nt{sequence_of_statements} but not the reverse.  Similarly,
+enclosing @nt{sequence_of_statements} but not the reverse. Similarly,
 they prohibit transfers of control such as between alternatives of a
 @nt{case_statement}, @nt{if_statement}, or @nt{select_statement};
 between @nt{exception_handler}s; or from an @nt{exception_handler} of
@@ -1183,7 +1193,7 @@ back to its @nt{sequence_of_statements}.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a loop containing a goto statement:}
+@Leading@keepnext@i{Example of a loop containing a goto statement:}
 @begin{Example}
 <<Sort>>
 @key[for] I @key[in] 1 .. N-1 @key[loop]

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:37 $}
+@Comment{$Date: 2000/08/08 04:35:31 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -192,7 +192,7 @@ general access-to-variable type (see @RefSecNum{Access Types}).
 @Redundant[Access parameters allow dispatching calls
 to be controlled by access values.]
 
-@Defn2{Term=[subtypes], Sec=(of a profile)}
+@leading@keepnext@Defn2{Term=[subtypes], Sec=(of a profile)}
 The @i(subtypes of a profile) are:
 @begin{Itemize}
   For any non-access parameters, the nominal subtype of the parameter.
@@ -209,7 +209,7 @@ The @i{types of a profile} are the types of those subtypes.]
 @Redundant[A subprogram declared by an
 @nt<abstract_subprogram_declaration>
 is abstract; a subprogram declared by a @nt<subprogram_declaration>
-is not.  See @RefSec{Abstract Types and Subprograms}.]
+is not. See @RefSec{Abstract Types and Subprograms}.]
 @end{StaticSem}
 
 @begin{RunTime}
@@ -237,7 +237,7 @@ concurrently from multiple tasks.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of subprogram declarations:}
+@leading@keepnext@i{Examples of subprogram declarations:}
 @begin{Example}
 @key[procedure] Traverse_Tree;
 @key[procedure] Increment(X : @key[in] @key[out] Integer);
@@ -253,7 +253,9 @@ concurrently from multiple tasks.
 @key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@RI{  see @RefSecNum{Array Types}}
 @end{Example}
 
-@i{Examples of @key[in] parameters with default expressions:}
+@begin{wide}
+@leading@keepnext@i{Examples of @key[in] parameters with default expressions:}
+@end{wide}
 @begin{Example}
 @key[procedure] Print_Header(Pages  : @key[in] Natural;
             Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@RI{  see @RefSecNum{Array Types}}
@@ -318,7 +320,7 @@ or if it is a descendant of a private type whose full type is a
 by-copy type.
 A parameter of a by-copy type is passed by copy.
 
-@Defn{by-reference type}
+@leading@keepnext@Defn{by-reference type}
 A type is a @i(by-reference type) if it
 is a descendant of one of the following:
 @begin(itemize)
@@ -351,13 +353,13 @@ object to reference; hence, we define such an object for each
 case.
 
 Since tagged types are by-reference types, this implies that every value
-of a tagged type has an associated object.  This simplifies things,
+of a tagged type has an associated object. This simplifies things,
 because we can define the tag to be a property of the object, and not of
 the value of the object, which makes it clearer that object tags never
 change.
 
 We considered simplifying things even more by making every value (and
-therefore every expression) have an associated object.  After all,
+therefore every expression) have an associated object. After all,
 there is little semantic difference between a constant object and a
 value.
 However, this would cause problems for untagged types.
@@ -395,7 +397,7 @@ For parameters of other types,
 it is unspecified whether the parameter
 is passed by copy or by reference.
 @begin{Discussion}
-  There is no need to incorporate the discussion of AI-00178,
+  There is no need to incorporate the discussion of AI83-00178,
   which requires pass-by-copy for certain kinds of actual parameters,
   while allowing pass-by-reference for others.
   This is because we explicitly indicate that a function
@@ -440,9 +442,9 @@ are all distinct access paths.
 If Global_Variable's type is neither pass-by-copy nor pass-by-reference,
 then it is a bounded error to assign to Global_Variable and
 then read X or Y, since the language does not specify whether the
-old or the new value would be read.  On the other hand, if
+old or the new value would be read. On the other hand, if
 Global_Variable's type is pass-by-copy, then the old value would
-always be read, and there is no error.  Similarly, if Global_Variable's
+always be read, and there is no error. Similarly, if Global_Variable's
 type is defined by the language to be pass-by-reference, then the
 new value would always be read, and again there is no error.
 @end{Discussion}
@@ -490,7 +492,7 @@ equivalently, to pass part of the parameter by reference and another
 part by copy.
 @end{ImplNote}
 @begin{Reason}
-We do not want to go so far as to say that the mere presence
+@leading@;We do not want to go so far as to say that the mere presence
 of aliasing is wrong.
 We wish to be able to write the following sorts of things
 in standard Ada:
@@ -515,7 +517,7 @@ the local copy is safe @em it is known to have the old value.
 For example, the above-mentioned Move subprogram can be implemented
 by copying Source into a local variable before assigning into Target.
 
-For an @nt{assignment_statement} assigning one array parameter to another,
+@leading@;For an @nt{assignment_statement} assigning one array parameter to another,
 the implementation has to check which direction to copy
 at run time, in general, in case the actual parameters are
 overlapping slices.
@@ -548,7 +550,7 @@ variable without an explicit initial expression.
 Discussion of copy-in for parts of out parameters is now
 covered in @RefSec{Parameter Associations}.
 
-The concept of a by-reference type is new to Ada 9X.
+The concept of a by-reference type is new to Ada 95.
 
 We now cover in a general way in @RefSecNum{Operations of Discriminated Types}
 the rule regarding erroneous execution when a discriminant
@@ -615,7 +617,7 @@ For this execution the @nt{declarative_part} is elaborated, and the
 @end{RunTime}
 
 @begin{Examples}
-@i{Example of procedure body:}
+@leading@keepnext@i{Example of procedure body:}
 @begin{Example}
 @key[procedure] Push(E : @key[in] Element_Type; S : @key[in] @key[out] Stack) @key[is]
 @key[begin]
@@ -628,7 +630,9 @@ For this execution the @nt{declarative_part} is elaborated, and the
 @key[end] Push;
 @end{Example}
 
-@i{Example of a function body:}
+@begin{Wide}
+@leading@keepnext@i{Example of a function body:}
+@end{Wide}
 @begin{Example}
 @key[function] Dot_Product(Left, Right : Vector) @key[return] Real @key[is]
    Sum : Real := 0.0;
@@ -674,7 +678,7 @@ conformance, subtype conformance, or full conformance.]
 @end{Intro}
 
 @begin{StaticSem}
-@Defn{convention}
+@leading@Defn{convention}
 @Defn{calling convention}
 @Redundant[As explained in @RefSec{Interfacing Pragmas},
 a @i{convention} can be specified for an entity.
@@ -693,7 +697,7 @@ See also the rule about renamings-as-body
 in @RefSecNum{Subprogram Renaming Declarations}.
 @end{Ramification}
 
-@Defn{Intrinsic calling convention}
+@leading@Defn{Intrinsic calling convention}
 @Defn2{Term=[calling convention], Sec=(Intrinsic)}
 The @i{Intrinsic} calling convention represents
 subprograms that are @lquotes@;built in@rquotes@; to the compiler.
@@ -827,9 +831,8 @@ However, the calling convention of the declaration and body of a
 subprogram or entry are always the same by definition.
 @end{Ramification}
 
-@Defn2{Term=[full conformance], Sec=(for expressions)}
+@leading@Defn2{Term=[full conformance], Sec=(for expressions)}
 Two expressions are @i(fully conformant) if,
-
 @Redundant[after replacing each use of an operator with the equivalent
 @nt{function_call}:]
 @begin{Itemize}
@@ -859,7 +862,7 @@ of expanded names).
 Note that calls using operator notation
 are equivalent to calls using prefix notation.
 
-Given the following declarations:
+@leading@keepnext@;Given the following declarations:
 @begin{Example}
 @key[package] A @key[is]
     @key[function] F(X : Integer := 1) @key[return] Boolean;
@@ -947,7 +950,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 
 @begin{Syntax}
 @begin{SyntaxText}
-@PDefn2{Term=[program unit pragma], Sec=(Inline)}
+@leading@keepnext@PDefn2{Term=[program unit pragma], Sec=(Inline)}
 @PDefn2{Term=[pragma, program unit], Sec=(Inline)}
 The form of a @nt{pragma} Inline,
 which is a program unit pragma (see @RefSecNum{Pragmas and Program Units}),
@@ -970,7 +973,7 @@ If a @nt{pragma} Inline applies to a generic subprogram,
 this indicates that inline expansion is desired for all calls
 to all instances of that generic subprogram.
 @begin{Ramification}
-Note that inline expansion is desired no matter what
+@leading@;Note that inline expansion is desired no matter what
 name is used in the call.
 This allows one to request inlining for only one of several
 overloaded subprograms as follows:
@@ -1147,7 +1150,7 @@ if the function
 completes normally without executing a @nt{return_statement}.
 @begin{Discussion}
 We are committing to raising the exception at the point
-of call, for uniformity @em see AI-00152.
+of call, for uniformity @em see AI83-00152.
 This happens after the function is left, of course.
 
 Note that there is no name for suppressing this check,
@@ -1164,7 +1167,7 @@ constant is given by the result subtype of the function.
 @end{RunTime}
 
 @begin{Examples}
-@i{Examples of procedure calls:}
+@leading@keepnext@i{Examples of procedure calls:}
 @begin{Example}
 Traverse_Tree;                                               --@RI{  see @RefSecNum{Subprogram Declarations}}
 Print_Header(128, Title, True);                              --@RI{  see @RefSecNum{Subprogram Declarations}}
@@ -1174,14 +1177,18 @@ Print_Header(128, Header => Title, Center => True);          --@RI{  see @RefSec
 Print_Header(Header => Title, Center => True, Pages => 128); --@RI{  see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
-@i{Examples of function calls:}
+@begin{Wide}
+@leading@keepnext@i{Examples of function calls:}
+@end{Wide}
 @begin{Example}
 Dot_Product(U, V)   --@RI{  see @RefSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
 Clock               --@RI{  see @RefSecNum{Delay Statements, Duration, and Time}}
 F.@key[all]               --@RI{  presuming F is of an access-to-subprogram type @em see @RefSecNum{Access Types}}
 @end{Example}
 
-@i{Examples of procedures with default expressions:}
+@begin{Wide}
+@leading@keepnext@i{Examples of procedures with default expressions:}
+@end{Wide}
 @begin{Example}
 @key[procedure] Activate(Process : @key[in] Process_Name;
                    After   : @key[in] Process_Name := No_Process;
@@ -1191,7 +1198,9 @@ F.@key[all]               --@RI{  presuming F is of an access-to-subprogram type
 @key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person);   --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
-@i{Examples of their calls:}
+@begin{Wide}
+@leading@keepnext@i{Examples of their calls:}
+@end{Wide}
 @begin{Example}
 Activate(X);
 Activate(X, After => Y);
@@ -1206,12 +1215,12 @@ Pair(Left => @key[new] Person, Right => @key[new] Person);
 @begin{Notes}
 If a @nt{default_expression} is used for two or more parameters in a
 multiple @nt{parameter_specification}, the @nt{default_expression} is
-evaluated once for each omitted parameter.  Hence in the above
+evaluated once for each omitted parameter. Hence in the above
 examples, the two calls of Pair are equivalent.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of overloaded subprograms:}
+@leading@keepnext@i{Examples of overloaded subprograms:}
 @begin{Example}
 @key[procedure] Put(X : @key[in] Integer);
 @key[procedure] Put(X : @key[in] String);
@@ -1220,7 +1229,9 @@ examples, the two calls of Pair are equivalent.
 @key[procedure] Set(Signal : @key[in] Light);
 @end{Example}
 
-@i{Examples of their calls:}
+@begin{Wide}
+@leading@keepnext@i{Examples of their calls:}
+@end{Wide}
 @begin{Example}
 Put(28);
 Put("no possible ambiguity here");
@@ -1288,7 +1299,7 @@ the actual is interpreted as an @nt{expression};
 otherwise, the actual is interpreted only as a @nt{name}, if possible.
 @begin{Ramification}
   This formally resolves the ambiguity present in the syntax rule
-  for @nt<explicit_actual_parameter>.  Note that we don't actually require
+  for @nt<explicit_actual_parameter>. Note that we don't actually require
   that the actual be a @nt<name> if the mode is not @key(in);
   we do that below.
 @end{Ramification}
@@ -1304,7 +1315,7 @@ the actual shall be a @nt<name> that denotes a variable.
   @nt{type_conversion} of a variable is a variable.
 @end{Discussion}
 @begin{Reason}
-  The requirement that the actual be a (variable) @nt<name> is not
+  @leading@;The requirement that the actual be a (variable) @nt<name> is not
   an overload resolution rule, since
   we don't want the difference between @nt<expression> and
   @nt{name} to be used to resolve overloading.
@@ -1319,7 +1330,7 @@ Print(3); --@RI{ Ambiguous!}
   The above call to Print is ambiguous even though the call is
   not compatible with the second Print which requires an actual
   that is a (variable) @nt<name> (@lquotes@;3@rquotes@; is an @nt<expression>, not
-  a @nt<name>).  This requirement is a legality rule, so overload
+  a @nt<name>). This requirement is a legality rule, so overload
   resolution fails before it is considered, meaning that the call
   is ambiguous.
 @end{Reason}
@@ -1331,7 +1342,7 @@ to its anonymous access type.
 @end{Legality}
 
 @begin{RunTime}
-@PDefn2{Term=[evaluation], Sec=(parameter_association)}
+@leading@keepnext@PDefn2{Term=[evaluation], Sec=(parameter_association)}
 For the evaluation of a @nt{parameter_association}:
 @begin{Itemize}
 The actual parameter is first evaluated.
@@ -1364,7 +1375,7 @@ and assigned to the formal.
 The conversion mentioned here is a value conversion.
 @end{Ramification}
 
-For an @key(out) parameter that is passed by copy,
+@leading@keepnext@;For an @key(out) parameter that is passed by copy,
 the formal parameter object is created, and:
 @begin(itemize)
   For an access type, the formal parameter is initialized
@@ -1395,7 +1406,7 @@ the formal parameter object is created, and:
   parameter to the nominal subtype of the formal is evaluated
   @Redundant[(which might raise Constraint_Error)],
   and the actual subtype of the formal is that of the
-  view conversion.  If elementary, the actual subtype of the formal
+  view conversion. If elementary, the actual subtype of the formal
   is given by its nominal subtype.
 @begin{Ramification}
   This case covers scalar types, and composite types whose
@@ -1456,7 +1467,7 @@ S1.
 @end{RunTime}
 
 @begin{Extend83}
-In Ada 9X, a program can rely on the fact that passing an object as
+In Ada 95, a program can rely on the fact that passing an object as
 an @key[out] parameter does not @lquotes@;de-initialize@rquotes@; any parts of the
 object whose subtypes have implicit initial values.
 (This generalizes the RM83 rule that required copy-in for parts that
@@ -1534,7 +1545,7 @@ If the result type is class-wide, then
 the tag of the result is the tag of the value
 of the @nt<expression>.
 
-If the result type is a specific tagged type:
+@leading@keepnext@;If the result type is a specific tagged type:
 @begin(itemize)
   @IndexCheck{Tag_Check}
   If it is limited, then
@@ -1561,7 +1572,7 @@ If the result type is a specific tagged type:
 @end{Reason}
 @end(itemize)
 
-@Defn{return-by-reference type}
+@leading@keepnext@Defn{return-by-reference type}
 A type is a @i(return-by-reference) type if it
 is a descendant of one of the following:
 @begin(itemize)
@@ -1578,11 +1589,11 @@ is a descendant of one of the following:
 @end(itemize)
 @begin{Ramification}
   The above rules are such that there are no "Ada 83" types other than
-  those containing tasks that are return-by-reference.  This helps
+  those containing tasks that are return-by-reference. This helps
   to minimize upward incompatibilities relating to return-by-reference.
 @end{Ramification}
 
-@IndexCheck{Accessibility_Check}
+@leading@IndexCheck{Accessibility_Check}
 If the result type is a return-by-reference type,
 then a check is made that the return expression is one of the
 following:
@@ -1611,9 +1622,9 @@ The exception Program_Error is raised if this check fails.
 @begin{Reason}
   @PDefn{generic contract issue}
 
-  This check can often be performed at compile time.  It is
+  This check can often be performed at compile time. It is
   defined to be a run-time check to avoid generic contract model
-  problems.  In a future version of the standard, we anticipate
+  problems. In a future version of the standard, we anticipate
   that function return of a local variable will be illegal for all
   limited types, eliminating the need for the run-time check
   except for dereferences of an access parameter.
@@ -1646,7 +1657,7 @@ and returns to the caller.
 @end{RunTime}
 
 @begin{Examples}
-@i{Examples of return statements:}
+@leading@keepnext@i{Examples of return statements:}
 @begin{Example}
 @key[return];                         --@RI{ in a procedure body, @nt{entry_body}, or @nt{accept_statement}}
 @key[return] Key_Value(Last_Index);   --@RI{ in a function body}
@@ -1654,10 +1665,10 @@ and returns to the caller.
 @end{Examples}
 
 @begin{Incompatible83}
-In Ada 9X, if the result type of a function has a part that is a task,
+In Ada 95, if the result type of a function has a part that is a task,
 then an attempt to return a local variable will raise Program_Error.
 In Ada 83, if a function returns a local variable containing a task,
-execution is erroneous according to AI-00867.  However,
+execution is erroneous according to AI83-00867. However,
 there are other situations where functions that return tasks
 (or that return a variant record only one of whose variants
 includes a task)
@@ -1665,7 +1676,7 @@ are correct in Ada 83 but will raise Program_Error according
 to the new rules.
 
 The rule change was made because there will be more types (protected types,
-limited controlled types) in Ada 9X for which
+limited controlled types) in Ada 95 for which
 it will be meaningless to return a local variable, and making
 all of these erroneous is unacceptable.
 The current rule was felt to be the simplest that kept
@@ -1749,7 +1760,8 @@ and hence may be overloaded with both one- and two-parameter functions.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of user-defined operators:}@begin{Example}
+@leading@keepnext@i{Examples of user-defined operators:}
+@begin{Example}
 @key[function] "+" (Left, Right : Matrix) @key[return] Matrix;
 @key[function] "+" (Left, Right : Vector) @key[return] Vector;
 
