@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2005/02/09 00:00:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2005/04/05 06:38:03 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2005/02/09 00:00:20 $}
+@Comment{$Date: 2005/04/05 06:38:03 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -801,3 +801,8 @@ An implementation may provide additional packages as children of
 Ada.Characters, to declare names for the symbols of the local character set
 or other character sets.
 @end{ImplPerm}
+
+@LabeledAddedSubClause{Version=[2],Name=[The Package Characters.Conversions]}
+
+*** TBD: Added by AI-395.
+

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2005/03/18 06:37:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2005/04/05 06:38:01 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/03/18 06:37:21 $}
+@Comment{$Date: 2005/04/05 06:38:01 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -201,7 +201,6 @@ Numerics.Generic_Complex_Types has the following declaration:
 @end{Example}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
-@Defn{Ada.Numerics.Complex_Types}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Types]}
 The library package Numerics.Complex_Types
 @Chg{New=[is declared pure and ],Old=[]}defines the same types, constants,
@@ -622,7 +621,6 @@ Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @end{Example}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
-@Defn{Ada.Numerics.Complex_Elementary_Functions}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Elementary_@!Functions]}
 The library package Numerics.Complex_Elementary_Functions
 @Chg{New=[is declared pure and ],Old=[]}defines the same subprograms as
@@ -1037,7 +1035,6 @@ Text_IO.Complex_IO has the following declaration:
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00328-01]}
 @ChgAdded{Version=[2],Text=[
-@Defn{Ada.Complex_Text_IO}
 @ChildUnit{Parent=[Ada],Child=[Complex_@!Text_IO]}
 The library package Complex_Text_IO defines the
 same subprograms as Text_IO.Complex_IO, except that the predefined type Float
@@ -2659,8 +2656,8 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
-@ChgAdded{Version=[2],Text=[The library package Numerics.Real_Arrays is
-declared pure and defines the
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Numerics],Child=[Real_@!Arrays]}
+The library package Numerics.Real_Arrays is declared pure and defines the
 same types and subprograms as Numerics.Generic_Real_Arrays, except that
 the predefined type Float is systematically substituted for Real'Base
 throughout. Nongeneric equivalents for each of the other predefined floating
@@ -3337,8 +3334,8 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
-@ChgAdded{Version=[2],Text=[The library package Numerics.Complex_Arrays is
-declared pure and defines
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Arrays]}
+The library package Numerics.Complex_Arrays is declared pure and defines
 the same types and subprograms as Numerics.Generic_Complex_Arrays, except
 that the predefined type Float is systematically substituted for Real'Base,
 and the Real_Vector and Real_Matrix types exported by Numerics.Real_Arrays

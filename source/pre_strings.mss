@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2005/03/24 06:43:11 $ $Author: Randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2005/04/05 06:38:03 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/03/24 06:43:11 $}
+@Comment{$Date: 2005/04/05 06:38:03 $}
 
 @LabeledClause{String Handling}
 
@@ -2319,13 +2319,14 @@ for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Bounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Unbounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Unbounded],Child=[Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_@!Unbounded],Child=[Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_@!Maps],Child=[Wide_@!Constants]}
 @end{Intro}
 
 @begin{StaticSem}
 The package Strings.Wide_Maps has the following declaration.
 @begin{example}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Maps]}@key[package] Ada.Strings.Wide_Maps @key[is]
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Maps]}@key[package] Ada.Strings.Wide_Maps @key[is]
    @key[pragma] Preelaborate(Wide_Maps);
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
@@ -2422,7 +2423,6 @@ The package Strings.Wide_Maps has the following declaration.
 @key[end] Ada.Strings.Wide_Maps;
 @end{example}
 
-@ChildUnit{Parent=[Ada.Strings.Wide_@!Maps],Child=[Wide_@!Constants]}
 The context clause for each of the packages Strings.Wide_Fixed,
 Strings.Wide_Bounded, and Strings.Wide_Unbounded
 identifies Strings.Wide_Maps instead of Strings.Maps.
@@ -2548,6 +2548,7 @@ for strings of Character components.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Unbounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Hash]}
 @ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Maps],Child=[Wide_Wide_@!Constants]}
 
 @begin{StaticSem}
 
@@ -2556,7 +2557,7 @@ for strings of Character components.
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key<package> Ada.Strings.Wide_Wide_Maps @key<is>@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Maps]}
+@ChgAdded{Version=[2],Text=[@key<package> Ada.Strings.Wide_Wide_Maps @key<is>@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Maps]}
    @key<pragma> Preelaborate(Wide_Wide_Maps);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

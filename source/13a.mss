@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/04/04 04:38:45 $}
+@Comment{$Date: 2005/04/05 06:38:00 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1653,12 +1653,14 @@ by default.]}
 Alignment specified for a derived tagged type which is not a multiple of the
 Alignment of the parent type. An implementation need not support a
 nonconfirming Alignment specified for a derived untagged by-reference type.]}
-@begin{Discussion}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[Remember that
-@RefSecNum{Operational and Representation Items} requires support for
-confirming alignment clauses for all types.]}
-@end{Discussion}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+  @ChgAdded{Version=[2],Text=[There is no recommendation to support any
+  nonconfirming Alignment clauses for types not mentioned above.
+  Remember that
+  @RefSecNum{Operational and Representation Items} requires support for
+  confirming Alignment clauses for all types.]}
+@end{Ramification}
 @end{Itemize}
 
 @Leading@PDefn2{Term=[recommended level of support], Sec=(Alignment attribute
@@ -1666,18 +1668,24 @@ for objects)}
 The recommended level of support for the Alignment attribute for
 objects is:
 @begin{Itemize}
-Same as above, for subtypes, but in addition:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00291-02]}
+@ChgDeleted{Version=[2],Text=[Same as above, for subtypes, but in addition:]}
+
+For stand-alone library-level objects of statically constrained
+subtypes, the implementation should support all Alignments
+supported by the target linker. For example, page alignment
+is likely to be supported for such objects, but not for subtypes.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[For other objects, an implementation should at
+least support the alignments that supported for their
+subtype, subject to the following:]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
 @ChgAdded{Version=[2],Text=[An implementation need not support Alignments
 specified for objects of a by-reference type or for objects of types containing
 aliased subcomponents if the specified Alignment is not a multiple of the
 Alignment of the object's subtype.]}
-
-For stand-alone library-level objects of statically constrained
-subtypes, the implementation should support all Alignments
-supported by the target linker. For example, page alignment
-is likely to be supported for such objects, but not for subtypes.
 @end{Itemize}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The recommended level of support for the Alignment attribute should be
@@ -2224,12 +2232,14 @@ of a derived untagged by-reference type need not be supported.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The recommended level of support for the Size attribute should be
 followed.]}]}
-@begin{Discussion}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[Remember that
-@RefSecNum{Operational and Representation Items} requires support for
-confirming size clauses for all types.]}
-@end{Discussion}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+  @ChgAdded{Version=[2],Text=[There is no recommendation to support any
+  nonconfirming Size clauses for types not mentioned above.
+  Remember that
+  @RefSecNum{Operational and Representation Items} requires support for
+  confirming Size clauses for all types.]}
+@end{Ramification}
 @end{ImplAdvice}
 
 @begin{Notes}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2005/01/25 07:00:12 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2005/04/05 06:38:02 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/01/25 07:00:12 $}
+@Comment{$Date: 2005/04/05 06:38:02 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -131,7 +131,6 @@ Numerics.Generic_Elementary_Functions has the following declaration:
 @end{Example}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
-@Defn{Ada.Numerics.Elementary_Functions}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Elementary_@!Functions]}
 The library package Numerics.Elementary_Functions
 @Chg{New=[is declared pure and ],Old=[]}defines the same subprograms as

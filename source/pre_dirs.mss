@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.10 $ $Date: 2005/02/04 06:36:43 $ $Author: Randy $ }
+@comment{ $Revision: 1.11 $ $Date: 2005/04/05 06:38:02 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/02/04 06:36:43 $}
+@Comment{$Date: 2005/04/05 06:38:02 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -644,7 +644,8 @@ component is True, directory entries representing special files are provided.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[The type Search_Type contains the
 state of a directory search. A
 default-initialized Search_Type object has no entries available (More_Entries
-returns False).]}
+returns False). Type Search_Type needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Start_Search (Search : @key{in out} Search_Type;
