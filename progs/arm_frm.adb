@@ -108,6 +108,8 @@ package body ARM_Format is
     --  9/ 1/00 - RLB - Fixed bugs that prevented "deleted paragraph" messages
     --			from appearing and caused junk headers to appear for
     --			sections not appearing in the old document.
+    --  9/ 8/00 - RLB - Added information about the language-defined
+    --			subprograms to the index introduction.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1109,15 +1111,40 @@ package body ARM_Format is
 	    ARM_Output.Ordinary_Text (Output_Object,
 		"Index entries are given by paragraph number. A list of all " &
 		"language-defined library units may be found under " &
-		"Language-Defined Library Units. A list of all language defined " &
+		"Language-Defined Library Units. A list of all language-defined " &
 		"types may be found under Language-Defined Types.");
 	else -- ISO: No paragraph numbers!
 	    ARM_Output.Ordinary_Text (Output_Object,
 		"Index entries are given by subclause. A list of all " &
 		"language-defined library units may be found under " &
-		"Language-Defined Library Units. A list of all language defined " &
+		"Language-Defined Library Units. A list of all language-defined " &
 		"types may be found under Language-Defined Types.");
 	end if;
+        case Format_Object.Changes is
+	    when ARM_Format.Old_Only =>
+		null;
+	    when ARM_Format.New_Only =>
+	        ARM_Output.Ordinary_Text (Output_Object,
+		    " A list of all language-defined subprograms " &
+		    "may be found under Language-Defined Subprograms.");
+	    when ARM_Format.Show_Changes | ARM_Format.New_Changes =>
+		ARM_Output.Text_Format (Output_Object,
+		       Bold => False, Italic => False,
+		       Font => ARM_Output.Default,
+		       Size => 0,
+		       Change => ARM_Output.Insertion,
+		       Location => ARM_Output.Normal);
+	        ARM_Output.Ordinary_Text (Output_Object,
+		    " A list of all language-defined subprograms " &
+		    "may be found under Language-Defined Subprograms.");
+		ARM_Output.Text_Format (Output_Object,
+		       Bold => False, Italic => False,
+		       Font => ARM_Output.Default,
+		       Size => 0,
+		       Change => ARM_Output.None,
+		       Location => ARM_Output.Normal);
+	end case;
+
         ARM_Output.End_Paragraph (Output_Object);
 	-- Insert a blank paragraph:
         ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Normal, Number => "");

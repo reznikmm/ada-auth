@@ -78,6 +78,8 @@ package body ARM_HTML is
     --  8/17/00 - RLB - Replaced "Leading" by "Space_After".
     -- 		- RLB - Added Nested_Enumerated.
     --  8/22/00 - RLB - Added Revised_Clause_Header.
+    --  9/ 8/00 - RLB - Removed soft hyphen, as this does not work on either
+    --			browser I tried.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1652,8 +1654,11 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-        Ada.Text_IO.Put (Output_Object.Output_File, "&shy;"); -- A Latin-1 char.
-        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+        null; -- Soft hyphens exist, but don't work on either Internet Exploder 4
+	      -- or Netcrash 3. That is, they are always displayed. (They should
+	      -- only be displayed at the location of a line break).
+        --Ada.Text_IO.Put (Output_Object.Output_File, "&shy;"); -- A Latin-1 char.
+        --Output_Object.Char_Count := Output_Object.Char_Count + 5;
     end Soft_Hyphen_Break;
 
 
