@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/03/22 05:53:16 $}
+@Comment{$Date: 2005/03/31 06:13:15 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2322,7 +2322,11 @@ As for all type-related representation items,
 the @nt{local_name} is required to denote a first subtype.
 @end{Ramification}
 
-The expressions given in the @nt{array_aggregate} shall be static,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[Each component of the @nt{array_aggregate} shall be
+given by an @nt{expression} rather than a <>. ],Old=[]}The
+@Chg{Version=[2],New=[@nt{expression}s],Old=[expressions]} given in the
+@nt{array_aggregate} shall be static,
 and shall specify distinct integer codes for each value
 of the enumeration type; the associated integer codes shall
 satisfy the predefined ordering relation of the type.
@@ -2330,9 +2334,9 @@ satisfy the predefined ordering relation of the type.
   Each value of the enumeration type has to be given an internal code,
   even if the first subtype of the enumeration type is constrained
   to only a subrange (this is only possible if the enumeration type
-  is a derived type). This @lquotes@;full coverage@rquotes@; requirement is important
-  because one may refer to Enum'Base'First and Enum'Base'Last, which
-  need to have defined representations.
+  is a derived type). This @lquotes@;full coverage@rquotes@; requirement
+  is important because one may refer to Enum'Base'First and Enum'Base'Last,
+  which need to have defined representations.
 @end{Reason}
 @end{Legality}
 
@@ -2401,10 +2405,10 @@ Text=[The recommended level of support for
 Unchecked_Conversion may be used to query the internal codes used
 for an enumeration type.
 The attributes of the type, such as Succ, Pred, and Pos,
-are unaffected by the @nt{@Chg{New=[enumeration_],Old=[]}representation_clause}.
+are unaffected by the @nt{@Chg{New=[enumeration_representation_clause],Old=[representation_clause]}}.
 For example, Pos always returns the position number, @i{not} the
 internal integer code that might have been specified in a
-@nt{@Chg{New=[enumeration_],Old=[]}representation_clause}.
+@nt{@Chg{New=[enumeration_representation_clause],Old=[representation_clause]}}.
 @begin{Discussion}
 @Leading@;Suppose the enumeration type in question is derived:
 @begin{Example}
@@ -2415,7 +2419,7 @@ internal integer code that might have been specified in a
 @end{Example}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@Leading@;The @nt{@Chg{New=[enumeration_],Old=[]}representation_clause}
+@Leading@;The @nt{@Chg{New=[enumeration_representation_clause],Old=[representation_clause]}}
 has to specify values for all enumerals, even ones that are not in S2 (such as
 Blue). The Base attribute can be used to get at these values.
 For example:
@@ -2458,7 +2462,13 @@ This is satisfied by all known implementations.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Updated to reflect that we
   no longer have something called @nt{representation_clause}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to prevent the use of <> in a
+  @nt{enumeration_representation_clause}. (<> is newly added to
+  @nt{array_aggregate}s.)]}
 @end{DiffWord95}
+
 
 
 @LabeledClause{Record Layout}
@@ -2475,6 +2485,7 @@ consists of the @i{storage places} for some or all components,
 that is, storage place attributes of the components.
 The layout can be specified with a @nt{record_@!representation_@!clause}.
 @end{Intro}
+
 
 @LabeledSubClause{Record Representation Clauses}
 
@@ -2562,6 +2573,19 @@ A @nt{component_clause} such as
 is allowed if X can fit in zero bits.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[If the
+nondefault bit ordering applies to the type, then either:]}
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[the value of @nt{last_bit} shall be
+  less than the size of the largest machine scalar; or]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[the value of @nt{first_bit} shall be zero and the
+  value of @nt{last_bit} + 1 shall be a multiple of System.Storage_Unit.]}
+@end{Itemize}
+
 At most one @nt{component_clause} is allowed for each component of
 the type, including for each discriminant
 (@nt{component_clauses} may be given for some, all, or none of the
@@ -2605,27 +2629,54 @@ X : @key[constant] := 31; --@RI{ Same defining name as the component.}
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00133-01]}
 A @nt{record_representation_clause}
 (without the @nt{mod_clause})
-specifies the layout.
+specifies the layout.@Chg{Version=[2],New=[],Old=[
 The storage place
 attributes (see @RefSecNum{Storage Place Attributes})
 are taken from the
 values of the @nt{position}, @nt{first_bit},
 and @nt{last_bit} expressions
 after normalizing those values so that
-@nt{first_bit} is less than Storage_Unit.
+@nt{first_bit} is less than Storage_Unit.]}
 @begin{Ramification}
-For example,
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00133-01]}
+@ChgDeleted{Version=[2],Text=[For example,
 if Storage_Unit is 8, then
 @lquotes@;C @key[at] 0 @key[range] 24..31;@rquotes@;
 defines C'Position = 3, C'First_Bit = 0, and C'Last_Bit = 7.
-This is true of machines with either bit ordering.
+This is true of machines with either bit ordering.]}
 
 A @nt{component_clause} also determines the value of the Size
 attribute of the component,
 since this attribute is related to First_Bit and Last_Bit.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
+@ChgAdded{Version=[2],Text=[If the default bit ordering applies to the type,
+the @nt{position}, @nt{first_bit}, and @nt{last_bit} of each
+@nt{component_clause} directly specify
+the position and size of the corresponding component.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If the nondefault bit ordering
+applies to the type then the layout is determined as follows:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the @nt{component_clause}s for which the value of
+@nt{last_bit} is greater than or equal to the size of the largest machine scalar
+directly specify the position and size of the corresponding component;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[for other @nt{component_clause}s, all the
+components having the same value of @nt{position} are considered to be part of
+a single machine scalar, located at that @nt{position}; this machine scalar
+has a size which is the smallest machine scalar size larger than the largest
+@nt{last_bit} for all @nt{component_clause}s at that @nt{position}; the
+@nt{first_bit} and @nt{last_bit} of each @nt{component_clause} are then
+interpreted as bit offsets in this machine scalar.]}
+@end{Itemize}
 
 @Redundant[A @nt{record_representation_clause} for a record extension
 does not override the layout of the parent part;]
@@ -2680,6 +2731,11 @@ place is not specified explicitly in the @nt<record_@!representation_@!clause>.
 @Leading@PDefn2{Term=[recommended level of support], Sec=(@nt{record_representation_clause})}
 The recommended level of support for @nt{record_representation_clause}s is:
 @begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
+@ChgAdded{Version=[2],Text=[An implementation should support machine scalars
+that correspond to all the integer, floating point, and address formats
+supported by the machine.]}
+
 An implementation should support storage places that can be extracted
 with a load, mask, shift sequence of machine code,
 and set with a load, shift, mask, store sequence,
@@ -2757,8 +2813,8 @@ much dope in a protected type @em entry queues,
 bit maps for barrier values, etc.
 In order to control the representation of the user-defined components, simply
 declare a record type, give it a
-@nt{@Chg{New=[record_],Old=[]}representation_clause}, and give the
-protected type one component whose type is the record type.
+@nt{@Chg{New=[record_representation_clause],Old=[representation_clause]}},
+and give the protected type one component whose type is the record type.
 Alternatively, if the protected object is protecting something like a
 device register, it makes more sense to keep the thing being
 protected outside the protected object (possibly with a pointer to it
@@ -2832,6 +2888,21 @@ non-variant records to overlap.
 We have corrected that oversight.
 @end{DiffWord83}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  The meaning of a @nt{record_representation_clause} for the non-default
+  bit order is now clearly defined. Thus, such clauses can be portably
+  written. In order to do that though, the equivalence of bit 1 in word 1 to
+  bit 9 in word 0 (for a machine with Storage_Unit = 8) had to be dropped for
+  the non-default bit order. Any @nt{record_representation_clause}s which
+  depends on that equivalence will break (although such code would imply a
+  non-contiguous representation for a component, and it seems unlikely that
+  compilers were supporting that anyway).]}
+@end{Incompatible95}
+
+
+
 @LabeledSubClause{Storage Place Attributes}
 
 @begin{StaticSem}
@@ -2845,12 +2916,19 @@ but the user may control their values by giving a
 @nt{record_representation_clause}.
 @end{Ramification}
 @begin{Description}
-@Attribute{Prefix=<R.C>, AttrName=<Position>,
-  Text=<Denotes the same value as R.C'Address @en@; R'Address.
-The value of this attribute is of the type
-@i{universal_integer}.>}
+@ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
+  Leading=<F>, Prefix=<R.C>, AttrName=<Position>,
+  ARef=[AI95-00133-01],
+  Text=<@Chg{Version=[2],New=[If the nondefault bit ordering applies to the
+  composite type, and if a @nt{component_clause} specifies the placement of C,
+  denotes the value given for the position of the @nt{component_clause};
+  otherwise, denotes],Old=[Denotes]} the same value as R.C'Address @en@;
+  R'Address. The value of this attribute is of the type
+  @i{universal_integer}.>}
 @begin{Ramification}
-Thus, R.C'Position is the offset of C in storage
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00133-01]}
+Thus, @Chg{Version=[2],New=[for the default bit order, ],Old=[]}R.C'Position
+is the offset of C in storage
 elements from the beginning of the object,
 where the first storage element of an object is numbered zero.
 R'Address + R.C'Position = R.C'Address.
@@ -2863,19 +2941,29 @@ the "@en@;" operator is the one in System.Storage_Elements
 that takes two Addresses and returns a Storage_Offset.
 @end{Ramification}
 
-@Attribute{Prefix=<R.C>, AttrName=<First_Bit>,
-  Text=<Denotes the offset, from the start of the first of the
-storage elements occupied by C, of the first bit occupied by C.
-This offset is measured in bits.
-The first bit of a storage element is numbered zero.
-The value of this attribute is of the type
-@i{universal_integer}.>}
+@ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
+  Leading=<F>, Prefix=<R.C>, AttrName=<First_Bit>,
+  ARef=[AI95-00133-01],
+  Text=<@Chg{Version=[2],New=[If the nondefault bit ordering applies to the
+  composite type, and if a @nt{component_clause} specifies the placement of C,
+  denotes the value given for the @nt{first_bit} of the @nt{component_clause};
+  otherwise, denotes],Old=[Denotes]} the offset, from the start of the first
+  of the storage elements occupied by C, of the first bit occupied by C.
+  This offset is measured in bits.
+  The first bit of a storage element is numbered zero.
+  The value of this attribute is of the type
+  @i{universal_integer}.>}
 
-@Attribute{Prefix=<R.C>, AttrName=<Last_Bit>,
-  Text=<Denotes the offset, from the start of the first of the
-storage elements occupied by C, of the last bit occupied by C.
-This offset is measured in bits. The value of this attribute
-is of the type @i{universal_integer}.>}
+@ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
+  Leading=<F>, Prefix=<R.C>, AttrName=<Last_Bit>,
+  ARef=[AI95-00133-01],
+  Text=<@Chg{Version=[2],New=[If the nondefault bit ordering applies to the
+  composite type, and if a @nt{component_clause} specifies the placement of C,
+  denotes the value given for the @nt{last_bit} of the @nt{component_clause};
+  otherwise, denotes],Old=[Denotes]} the offset, from the start of the first
+  of the storage elements occupied by C, of the last bit occupied by C.
+  This offset is measured in bits. The value of this attribute
+  is of the type @i{universal_integer}.>}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The ordering of bits in a storage element is
@@ -2923,6 +3011,18 @@ If a component is allocated discontiguously from the rest of the object,
 then a warning should be generated upon reference to one
 of its storage place attributes.]}]}
 @end{ImplAdvice}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  The meaning of the storage place attribute for the non-default
+  bit order is now clearly defined, and can be different than that given by
+  strictly following the Ada 95 wording. Any code which depends on the
+  Ada 95 values for a type using the non-default bit order where they are
+  different will break.]}
+@end{Incompatible95}
+
+
 
 @LabeledSubClause{Bit Ordering}
 
@@ -3016,35 +3116,49 @@ representation item.
 @Leading@PDefn2{Term=[recommended level of support], Sec=(bit ordering)}
 The recommended level of support for the nondefault bit ordering is:
 @begin{Itemize}
-  If Word_Size = Storage_Unit, then
-  the implementation should support the nondefault bit ordering
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00133-01]}
+  @Chg{Version=[2],New=[The],Old=[If Word_Size = Storage_Unit, then
+  the]} implementation should support the nondefault bit ordering
   in addition to the default bit ordering.
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[The recommended level of support for the nondefault bit ordering
-should be followed.]}]}
 @end{Itemize}
 @begin{Ramification}
-If Word_Size = Storage_Unit,
-the implementation should support both bit orderings.
-We don't push for support of the nondefault bit ordering when
-Word_Size > Storage_Unit (except
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00133-01]}
+@Chg{Version=[2],New=[The],Old=[If Word_Size = Storage_Unit,
+the]} implementation should support both bit orderings.
+@Chg{Version=[2],New=[Implementations],Old=[We don't push for support of
+the nondefault bit ordering when Word_Size > Storage_Unit (except
 of course for upward compatibility with a preexisting implementation
 whose Ada 83 bit order did not correspond to the required Ada 95
 default bit order), because
-implementations are required to support storage positions that cross
-storage element boundaries when Word_Size > Storage_Unit.
-Such storage positions will be split into two or three pieces if the
+implementations]} are required to support storage positions that cross
+storage element boundaries when Word_Size > Storage_Unit@Chg{Version=[2],
+New=[but the definition of the storage place attributes for the non-default
+bit order insures that such],Old=[. Such]} storage positions will @Chg{Version=[2],
+New=[not ],Old=[]}be split into two or three pieces@Chg{Version=[2],New=[. Thus,
+there is no significant implementation burden to supporting the non-default
+bit order],Old=[ if the
 nondefault bit ordering is used, which could be onerous to support.
 However, if Word_Size = Storage_Unit,
 there might not be a natural bit ordering,
-but the splitting problem need not occur.
+but the splitting problem need not occur]}.
 @end{Ramification}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for the nondefault bit ordering
+should be followed.]}]}
 @end{ImplAdvice}
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
 The Bit_Order attribute is new to Ada 95.
 @end{Extend83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
+  @ChgAdded{Version=[2],Text=[We now suggest that all implementations
+  support the non-default bit order.]}
+@end{Diffword95}
+
+
 
 @LabeledClause{Change of Representation}
 

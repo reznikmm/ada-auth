@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/03/30 00:54:07 $}
+@Comment{$Date: 2005/03/31 06:13:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.10 $}
+@Comment{$Revision: 1.11 $}
 
 @LabeledClause{The Package System}
 
@@ -2722,6 +2722,27 @@ an elementary type @i(T)}, the following operational attribute is defined:]}
 @begin{ImplAdvice}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
+@ChgAdded{Version=[2],Text=[If not specified, the value of Stream_Size for an
+elementary type should be the number of bits that corresponds to the
+minimum number of stream elements required by the
+first subtype of the type, rounded up to the nearest factor or multiple of the
+word size that is also a multiple of the stream element size.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If not specified, the value of Stream_Size for an
+elementary type should be the number of bits that corresponds to the
+minimum number of stream elements required by the
+first subtype of the type, rounded up to the nearest factor or multiple of the
+word size that is also a multiple of the stream element size.]}]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00270-01]}
+  @ChgAdded{Version=[2],Text=[This is @ImplAdviceTitle because we want to
+  allow implementations to remain compatible with their Ada 95 implementations,
+  which may have a different handling of the number of stream elements. Users
+  can always specify Stream_Size if they need a specific number of stream
+  elements.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@PDefn2{Term=[recommended level of support],
 Sec=(Stream_Size attribute)}
 The recommended level of support for the Stream_Size attribute is:]}
@@ -2777,9 +2798,11 @@ implementations of these attributes are used. The default implementations of
 Write and Read attributes execute as follows:]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
-For elementary types, the representation in terms of stream elements
-is implementation defined.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00270-01]}
+For elementary types, @Chg{Version=[2],New=[Read reads (and Write writes) the
+number of stream elements implied by the Stream_Size for the type @i<T>;],
+Old=[]} the representation @Chg{Version=[2],New=[],Old=[in terms ]}of@Chg{Version=[2],
+New=[ those],Old=[]} stream elements is implementation defined.
 For composite types, the Write or Read attribute for each component is
 called in @Chg{New=[],Old=[a ]}canonical order@Chg{New=[, which],
 Old=[. The canonical order of components]} is last dimension varying
@@ -2799,8 +2822,10 @@ type of any of the extension components which are of a limited type
 Old=[has not been specified,]}
 the attribute of @i(T) shall be directly specified.],Old=[]}
 
-@ImplDef{The representation used by the Read and Write attributes of
-elementary types in terms of stream elements.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[The @Chg{Version=[2],New=[contents
+of the stream elements read and written],Old=[representation used]} by the
+Read and Write attributes of elementary types@Chg{Version=[2],New=[],Old=[ in
+terms of stream elements]}.]}
 @begin{Reason}
   A discriminant with a default value is treated simply as
   a component of the object. On the other hand,
@@ -2819,9 +2844,12 @@ elementary types in terms of stream elements.}
   automatically do the right thing in as many cases as possible.]}
 @end{Reason}
 @begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
   For a composite object, the subprogram denoted by the
   Write or Read attribute of each component is called, whether it is the
-  default or is user-specified.
+  default or is user-specified.@Chg{Version=[2],New=[ Implementations are
+  allowed to optimize these calls (see below), presuming the properties
+  of the attributes are preserved.],Old=[]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
@@ -2871,30 +2899,15 @@ type is specific or class-wide.
 
 @begin{ImplAdvice}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00270-01]}
-@Chg{Version=[2],New=[By default, the predefined stream-oriented attributes
-for an elementary type should only read or write the minimum],Old=[If a
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00270-01]}
+@ChgDeleted{Version=[2],Text=[If a
 stream element is the same size as a storage element,
 then the normal in-memory representation should be used by Read and
 Write for scalar objects.
-Otherwise, Read and Write should use the smallest]}
-number of stream elements
-@Chg{Version=[2],New=[required by the first subtype of the type, rounded
-up to the nearest factor or multiple of the
-word size that is also a multiple of the stream element size.],Old=[needed
+Otherwise, Read and Write should use the smallest
+number of stream elements needed
 to represent all values in the base range of the scalar type.]}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The predefined stream-oriented attributes for an elementary type
-should only read or write the minimum number of stream elements required by the
-first subtype of the type, rounded up to the nearest factor or multiple of the
-word size that is also a multiple of the stream element size.]}]}
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00270-01]}
-  @ChgAdded{Version=[2],Text=[This remains @ImplAdviceTitle because we want to
-  allow implementations to remain compatible with their Ada 95 implementations,
-  which may be different. Users can always specify Stream_Size if they need
-  a specific number of stream elements.]}
-@end{Reason}
+@ChgNote{We don't add an Implementation Advice tag here, as we're deleting this.}
 @end{ImplAdvice}
 
 @begin{StaticSem}
@@ -3682,10 +3695,13 @@ that primitive subprogram declarations shall precede freezing
 ensures that all descendants of a tagged type implement all of
 its dispatching operations.
 
-The declaration of a private
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+  The declaration of a private
   extension does not cause freezing. The freezing is deferred
   until the full type declaration, which will necessarily be
-  for a record extension.
+  for a record extension@Chg{Version=[2],New=[, task, or protected type (the
+  latter only for a limited private extension derived from an interface)],
+  Old=[]}.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
@@ -3794,6 +3810,13 @@ subtype, plus all component junk.
 At the place where an @nt{implicit_dereference} causes freezing,
 the nominal subtype associated with the @nt{implicit_dereference} is frozen.]}
 
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This rule insures that X.D freezes the same
+  entities that X.@key{all}.D does. Note that an @nt{implicit_dereference} is
+  neither a @nt{name} nor @nt{expression} by itself, so it isn't covered by
+  other rules.]}
+@end{Discussion}
 
 @Leading@Redundant[@PDefn2{Term=[freezing], Sec=(type caused by a range)}
 At the place where a @nt{range} causes freezing, the type of the
@@ -3933,6 +3956,12 @@ old P (which is arguably confusing).
 before the constant is frozen
 (see @RefSecNum{Deferred Constants}).]
 
+@begin{TheProof}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
+@ChgAdded{Version=[2],Text=[The above @LegalityTitle are stated
+@lquotes@;officially@rquotes@; in the referenced clauses.]}
+@end{TheProof}
+
 @Leading@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Chg{New=[An operational or],Old=[A]} representation item that
 directly specifies an aspect of an entity shall appear before the entity is
@@ -3957,10 +3986,17 @@ The wording of this rule is carefully written to
 work properly for type-related representation items.
 For example, an @nt{enumeration_@!representation_@!clause} is illegal after the
 type is frozen, even though the @nt{_clause} refers to the first subtype.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00114-01]}
+@ChgAdded{Version=[2],Text=[The above Legality Rule is stated
+for types and subtypes in @RefSecNum{Operational and Representation Items},
+but the rule here covers all other entities as well.]}
 @end{Discussion}
 @begin{TheProof}
-The above @LegalityTitle are stated @lquotes@;officially@rquotes@;
-in the referenced clauses.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
+@ChgDeleted{Version=[2],Text=[The above @LegalityTitle
+are stated @lquotes@;officially@rquotes@;
+in the referenced clauses]}.
 @end{TheProof}
 @begin{Discussion}
 @Leading@;Here's an example that illustrates when freezing occurs in the
@@ -4044,7 +4080,8 @@ an entity should most certainly @i{not} be a freezing point for the entity.
 @end{Legality}
 
 @begin{RunTime}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00279-01]}
+@ChgNote{This is the last normative paragraph in the clause}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
 @ChgAdded{Version=[2],Text=[The tag (see
 @RefSecNum{Tagged Types and Type Extensions}) of a tagged type T
 is created at the point where T is frozen.]}
@@ -4128,7 +4165,7 @@ forcing occurrence rules.
 @Leading@;The Ada 83 rules are changed in Ada 95 for the following reasons:
 @begin{Itemize}
 The Ada 83 rules do not work right for subtype-specific aspects.
-In an earlier version of Ada 95, we considered allowing representation
+In an earlier version of Ada 9X, we considered allowing representation
 items to apply to subtypes other than the first subtype.
 This was part of the reason for changing the Ada 83 rules.
 However, now that we have dropped that functionality,
@@ -4161,13 +4198,13 @@ because the @nt{attribute_representation_clause} has been generalized.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0046],ARef=[AI95-00106-01],ARef=[AI95-00341-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Various freezing rules were added to fix holes in the rules.
-  Implicit calls are now freezing, which make some representation
-  clauses illegal in Ada 2005 that were legal (but dubious) in Ada 95.
-  Similarly, the primitive subprograms of a specific tagged type are frozen
-  when type is frozen, preventing dubious convention changes (and address
-  clauses) after the freezing point. In both cases, the code is dubious
-  and the workaround is easy.]}
+  @b<Corrigendum:> Various freezing rules were added to fix holes in the rules.
+  Most importantly, implicit calls are now freezing, which make some
+  representation clauses illegal in Ada 2005 that were legal (but dubious) in
+  Ada 95. Similarly, Ada 2005 says that the primitive subprograms of a specific
+  tagged type are frozen when type is frozen, preventing dubious convention
+  changes (and address clauses) after the freezing point. In both cases, the
+  code is dubious and the workaround is easy.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
