@@ -91,6 +91,8 @@ package body ARM_RTF is
     --  9/10/04 - RLB - Added "Both" to possible changes to handle
     --			replacement of changed text.
     --  9/14/04 - RLB - Moved Change_Version_Type to contents.
+    --  9/15/04 - RLB - Completely rewrote Text_Format to avoid problems
+    --			with ordering of calls.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -3175,189 +3177,126 @@ package body ARM_RTF is
 	use type ARM_Output.Location_Type;
 	use type ARM_Output.Size_Type;
 
-	procedure Make_Size (Size : in Natural) is
+	procedure Make_Size_Command (Size : in Natural) is
 	    -- Write a \fs command to the file for Size.
 	    -- Max 29.5 pt, min 5 pt.
 	begin
 	    if Output_Object.Real_Size >= 50 then
 		Ada.Text_IO.Put (Output_Object.Output_File, "\fs5" &
-		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')) & ' ');
+		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')));
 	    elsif Output_Object.Real_Size >= 40 then
 		Ada.Text_IO.Put (Output_Object.Output_File, "\fs4" &
-		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')) & ' ');
+		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')));
 	    elsif Output_Object.Real_Size >= 30 then
 		Ada.Text_IO.Put (Output_Object.Output_File, "\fs3" &
-		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')) & ' ');
+		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')));
 	    elsif Output_Object.Real_Size >= 20 then
 		Ada.Text_IO.Put (Output_Object.Output_File, "\fs2" &
-		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')) & ' ');
+		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')));
 	    elsif Output_Object.Real_Size >= 10 then
 		Ada.Text_IO.Put (Output_Object.Output_File, "\fs1" &
-		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')) & ' ');
+		    Character'Val(Output_Object.Real_Size mod 10 + Character'Pos('0')));
 	    else
-		Ada.Text_IO.Put (Output_Object.Output_File, "\fs10 ");
+		Ada.Text_IO.Put (Output_Object.Output_File, "\fs10");
 	    end if;
-	    Output_Object.Char_Count := Output_Object.Char_Count + 7;
-	end Make_Size;
+	    Output_Object.Char_Count := Output_Object.Char_Count + 6;
+	end Make_Size_Command;
 
-    begin
-	if not Output_Object.Is_Valid then
-	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
-		"Not valid object");
-	end if;
-	if not Output_Object.Is_In_Paragraph then
-	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
-		"Not in paragraph");
-	end if;
 
---Ada.Text_Io.Put ("Text format");
-	-- We do these in this order so that the changes are stacked properly.
-	if Change /= Output_Object.Change or else
-	    Version /= Output_Object.Version or else
-	    Added_Version /= Output_Object.Added_Version then
-	    -- We could "improve" this by keeping similar changes together,
-	    -- especially for changes to/from Both, but its a lot more work
-	    -- and unnecessary.
-	    case Output_Object.Change is
-		when ARM_Output.Insertion =>
---Ada.Text_Io.Put (" Unchange ins");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
-		when ARM_Output.Deletion =>
---Ada.Text_Io.Put (" Unchange del");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
-		when ARM_Output.None =>
-		    null;
-		when ARM_Output.Both =>
---Ada.Text_Io.Put (" Unchange both");
-	            Ada.Text_IO.Put (Output_Object.Output_File, "}}");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
-	    end case;
-	end if;
-
-	if Location /= Output_Object.Location then
-	    case Output_Object.Location is
-		when ARM_Output.Subscript =>
---Ada.Text_Io.Put (" Unchange sub");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
-		when ARM_Output.Superscript =>
---Ada.Text_Io.Put (" Unchange sup");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
-		when ARM_Output.Normal =>
-		    null;
-	    end case;
-	end if;
-
-	if not Bold and Output_Object.Is_Bold then
---Ada.Text_Io.Put (" Unchange bold");
+	procedure Close_Basic_Format is
+	    -- Close any open basic format (Bold/Italic/Size/Font) command.
+	begin
+	    if (not Output_Object.Is_Bold) and (not Output_Object.Is_Italic) and
+		ARM_Output."=" (Output_Object.Font, ARM_Output.Default) and
+	        Output_Object.Size = 0 then
+		-- No format was, so none to close (default).
+		return;
+	    end if;
+--Ada.Text_Io.Put (" Close basic format");
 	    Ada.Text_IO.Put (Output_Object.Output_File, "}");
 	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	    Output_Object.Real_Size := Output_Object.Real_Size -
+				    (Integer(Output_Object.Size)*2);
+	    Output_Object.Size := 0;
 	    Output_Object.Is_Bold := False;
-	end if;
-
-	if not Italic and Output_Object.Is_Italic then
---Ada.Text_Io.Put (" Unchange italics");
-	    Ada.Text_IO.Put (Output_Object.Output_File, "}");
-	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
 	    Output_Object.Is_Italic := False;
-	end if;
-
-	if Size /= Output_Object.Size then
-	    if Output_Object.Size /= 0 then
---Ada.Text_Io.Put (" Unchange size " & ARM_Output.Size_Type'Image(Output_Object.Size));
-	        Ada.Text_IO.Put (Output_Object.Output_File, "}");
-	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
-	        Output_Object.Real_Size := Output_Object.Real_Size -
-					(Integer(Output_Object.Size)*2);
-	    end if;
-	end if;
-
-	if ARM_Output."/=" (Font, Output_Object.Font) then
 	    case Output_Object.Font is
 		when ARM_Output.Default => null;
-		when ARM_Output.Fixed =>
---Ada.Text_Io.Put (" Unchange font fixed");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
-		when ARM_Output.Roman =>
---Ada.Text_Io.Put (" Unchange font roman");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		when ARM_Output.Fixed => null;
+		when ARM_Output.Roman => null;
 		when ARM_Output.Swiss =>
---Ada.Text_Io.Put (" Unchange font swiss");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
 		    -- Undo the size adjustment.
 		    Output_Object.Real_Size := Output_Object.Real_Size + 1;
 	    end case;
-	    case Font is
-		when ARM_Output.Default => null;
-		when ARM_Output.Fixed =>
---Ada.Text_Io.Put (" Change font fixed");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\f2 ");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 5;
-		when ARM_Output.Roman =>
---Ada.Text_Io.Put (" Change font roman");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\f0 ");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 5;
-		when ARM_Output.Swiss =>
---Ada.Text_Io.Put (" Change font swiss");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\f1");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 4;
-		    -- Swiss fonts always appear too large, so shrink it a bit.
-		    Output_Object.Real_Size := Output_Object.Real_Size - 1;
-		    Make_Size (Output_Object.Real_Size);
-	    end case;
-	    Output_Object.Font := Font;
-	end if;
+	    Output_Object.Font := ARM_Output.Default;
+	end Close_Basic_Format;
 
-	if Size /= Output_Object.Size then
+
+	procedure Make_Basic_Format is
+	    -- Make any needed Bold/Italic/Size/Font command.
+	begin
+	    if (not Bold) and (not Italic) and
+		ARM_Output."=" (Font, ARM_Output.Default) and
+		Size = 0 then
+		-- No format needed (default).
+		return;
+	    end if;
+	    Ada.Text_IO.Put (Output_Object.Output_File, "{");
+	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+
+	    -- Bold:
+	    if Bold then
+--Ada.Text_Io.Put (" Change bold");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "\b");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	        Output_Object.Is_Bold := True;
+	    end if;
+	    -- Italic:
+	    if Italic then
+--Ada.Text_Io.Put (" Change italics");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "\i");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	        Output_Object.Is_Italic := True;
+	    end if;
+	    -- Size:
 	    if Size /= 0 then
 --Ada.Text_Io.Put (" Change size " & ARM_Output.Size_Type'Image(Size));
 	        Output_Object.Real_Size := Output_Object.Real_Size +
 						    Integer(Size)*2;
-	        Ada.Text_IO.Put (Output_Object.Output_File, "{");
-	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
-	        Make_Size (Output_Object.Real_Size);
+		if ARM_Output."/=" (Font, ARM_Output.Swiss) then
+	            Make_Size_Command (Output_Object.Real_Size);
+		-- else it will be done by the Font, below.
+		end if;
 	    end if;
 	    Output_Object.Size := Size;
-	end if;
-
-	if Italic and (not Output_Object.Is_Italic) then
---Ada.Text_Io.Put (" Change italics");
-	    Ada.Text_IO.Put (Output_Object.Output_File, "{\i ");
-	    Output_Object.Char_Count := Output_Object.Char_Count + 4;
-	    Output_Object.Is_Italic := True;
-	end if;
-	if Bold and (not Output_Object.Is_Bold) then
---Ada.Text_Io.Put (" Change bold");
-	    Ada.Text_IO.Put (Output_Object.Output_File, "{\b ");
-	    Output_Object.Char_Count := Output_Object.Char_Count + 4;
-	    Output_Object.Is_Bold := True;
-	end if;
-
-	if Location /= Output_Object.Location then
-	    case Location is
-		when ARM_Output.Subscript =>
---Ada.Text_Io.Put (" Change sub");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\sub ");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 6;
-		when ARM_Output.Superscript =>
---Ada.Text_Io.Put (" Change sup");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\super ");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 8;
-		when ARM_Output.Normal =>
-		    null;
+	    -- Font:
+	    case Font is
+		when ARM_Output.Default => null;
+		when ARM_Output.Fixed =>
+--Ada.Text_Io.Put (" Change font fixed");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "\f2");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 4;
+		when ARM_Output.Roman =>
+--Ada.Text_Io.Put (" Change font roman");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "\f0");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 4;
+		when ARM_Output.Swiss =>
+--Ada.Text_Io.Put (" Change font swiss");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "\f1");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 3;
+		    -- Swiss fonts always appear too large, so shrink it a bit.
+		    Output_Object.Real_Size := Output_Object.Real_Size - 1;
+		    Make_Size_Command (Output_Object.Real_Size);
 	    end case;
-	    Output_Object.Location := Location;
-	end if;
+	    Ada.Text_IO.Put (Output_Object.Output_File, " ");
+	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	    Output_Object.Font := Font;
+	end Make_Basic_Format;
 
-	if Change /= Output_Object.Change or else
-	    Version /= Output_Object.Version or else
-	    Added_Version /= Output_Object.Added_Version then
+
+	procedure Make_Revision is
+	    -- Make any needed revision:
+	begin
 	    -- We could "improve" this by keeping similar changes together,
 	    -- especially for changes to/from Both, but its a lot more work
 	    -- and unnecessary.
@@ -3394,9 +3333,114 @@ package body ARM_RTF is
 	    Output_Object.Change := Change;
 	    Output_Object.Version := Version;
 	    Output_Object.Added_Version := Added_Version;
+	end Make_Revision;
+
+
+	procedure Close_Revision is
+	    -- Close any open revision:
+	begin
+	    -- We could "improve" this by keeping similar changes together,
+	    -- especially for changes to/from Both, but its a lot more work
+	    -- and unnecessary.
+	    case Output_Object.Change is
+		when ARM_Output.Insertion =>
+--Ada.Text_Io.Put (" Unchange ins");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		when ARM_Output.Deletion =>
+--Ada.Text_Io.Put (" Unchange del");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		when ARM_Output.None =>
+		    null;
+		when ARM_Output.Both =>
+--Ada.Text_Io.Put (" Unchange both");
+	            Ada.Text_IO.Put (Output_Object.Output_File, "}}");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	    end case;
+	end Close_Revision;
+
+
+	procedure Make_Location is
+	    -- Make any needed location:
+	begin
+	    case Location is
+		when ARM_Output.Subscript =>
+--Ada.Text_Io.Put (" Change sub");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\sub ");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		when ARM_Output.Superscript =>
+--Ada.Text_Io.Put (" Change sup");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\super ");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		when ARM_Output.Normal =>
+		    null;
+	    end case;
+	    Output_Object.Location := Location;
+	end Make_Location;
+
+
+	procedure Close_Location is
+	    -- Close any open location:
+	begin
+	    case Output_Object.Location is
+		when ARM_Output.Subscript =>
+--Ada.Text_Io.Put (" Unchange sub");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		when ARM_Output.Superscript =>
+--Ada.Text_Io.Put (" Unchange sup");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		when ARM_Output.Normal =>
+		    null;
+	    end case;
+	end Close_Location;
+
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if not Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in paragraph");
+	end if;
+
+--Ada.Text_Io.Put ("Text format");
+	-- We always make changes in the order:
+	-- Revision;
+	-- Location;
+	-- Basic_Format (Bold, Italic, Font, Size).
+	-- Thus, we have to unstack them in the reverse order. And, if we want
+	-- to change an outer one, we have to close and redo any inner
+	-- ones.
+
+	-- We do these in this order so that the changes are stacked properly.
+	if Change /= Output_Object.Change or else
+	    Version /= Output_Object.Version or else
+	    Added_Version /= Output_Object.Added_Version then
+	    Close_Basic_Format;
+	    Close_Location;
+	    Close_Revision;
+	    Make_Revision;
+	    Make_Location;
+	    Make_Basic_Format;
+	elsif Location /= Output_Object.Location then
+	    -- We don't need to change the revision, leave it alone.
+	    Close_Basic_Format;
+	    Close_Location;
+	    Make_Location;
+	    Make_Basic_Format;
+	elsif Size /= Output_Object.Size or else
+	   ARM_Output."/=" (Font, Output_Object.Font) or else
+	   Bold /= Output_Object.Is_Bold or else
+	   Italic /= Output_Object.Is_Italic then
+	    Close_Basic_Format;
+	    Make_Basic_Format;
+	-- else no change at all.
 	end if;
 --Ada.Text_Io.New_Line;
-
     end Text_Format;
 
 

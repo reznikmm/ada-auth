@@ -138,6 +138,8 @@ package body ARM_Format is
     --			commands; added additional header commands.
     --		- RLB - Added code so that section references in Annex L and M
     --			are links.
+    --  9/15/04 - RLB - Fixed incorrect name for LabeledAddedSubClause command.
+    --		- RLB - Fixed to lift limit on number of inserted paragraphs.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -534,7 +536,7 @@ package body ARM_Format is
 	    return Labeled_Revised_Subclause;
 	elsif Canonical_Name = "labeledaddedclause" then
 	    return Labeled_Added_Clause;
-	elsif Canonical_Name = "labeledaddedclause" then
+	elsif Canonical_Name = "labeledaddedsubclause" then
 	    return Labeled_Added_Subclause;
 	elsif Canonical_Name = "subheading" then
 	    return Subheading;
@@ -988,7 +990,7 @@ package body ARM_Format is
 					      Format_Object.SubClause,
 					      Version => Version);
 			    ARM_Contents.Add_Old ((others => ' '),
-					      ARM_Contents.Clause,
+					      ARM_Contents.Subclause,
 					      Format_Object.Section,
 					      Format_Object.Clause,
 					      Format_Object.SubClause);
@@ -1624,7 +1626,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    Format_Object.Next_Insert_Para := 1;
 		end if;
 	    elsif Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Inserted then
-	        -- We'll assume that there are no more than 19 inserted
+	        -- We'll assume that there are no more than 99 inserted
 		-- paragraphs in a row.
 	        Format_Object.Current_Paragraph_String(1 .. PNum_Pred'Last-1) :=
 		    PNum_Pred(2..PNum_Pred'Last);
@@ -1638,9 +1640,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 1) :=
 		        '.';
 		    if Format_Object.Next_AARM_Insert_Para >= 10 then
-	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) := '1';
+			Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) :=
+			    Character'Val((Format_Object.Next_AARM_Insert_Para/10) + Character'Pos('0'));
 	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 3) :=
-		            Character'Val(Format_Object.Next_AARM_Insert_Para + Character'Pos('0'));
+		            Character'Val((Format_Object.Next_AARM_Insert_Para mod 10) + Character'Pos('0'));
 			Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len + 1;
 			    -- Make this consistent with the other cases.
 		    else
@@ -1656,9 +1659,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 1) :=
 		        '.';
 		    if Format_Object.Next_Insert_Para >= 10 then
-	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) := '1';
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) :=
+			    Character'Val((Format_Object.Next_Insert_Para/10) + Character'Pos('0'));
 	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 3) :=
-		            Character'Val((Format_Object.Next_Insert_Para-10) + Character'Pos('0'));
+		            Character'Val((Format_Object.Next_Insert_Para mod 10) + Character'Pos('0'));
 			Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len + 1;
 			    -- Make this consistent with the other cases.
 		    else
@@ -5739,7 +5743,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text :=
 					        Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char;
 				            if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text then
-						-- Non-empty text; Calculate new change state:
+						-- Non-empty text; Calculate new change state (current is insertion):
 					        case Format_Object.Change is
 					            when ARM_Output.Insertion | ARM_Output.None =>
 						        Format_Object.Change := ARM_Output.Insertion;
@@ -5748,14 +5752,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 						        Format_Object.Current_Old_Change_Version := '0';
 					            when ARM_Output.Deletion =>
 						        Format_Object.Change := ARM_Output.Both;
-						        Format_Object.Current_Old_Change_Version :=
-						           Format_Object.Current_Change_Version;
-						        Format_Object.Current_Change_Version :=
+						        Format_Object.Current_Old_Change_Version := -- The insertion should be older.
 						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+						        -- Current_Version is unchanged.
 					            when ARM_Output.Both =>
 						        Format_Object.Change := ARM_Output.Both;
-						        Format_Object.Current_Change_Version :=
+						        Format_Object.Current_Old_Change_Version := -- The insertion should be older.
 						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
+						        -- Current_Version is unchanged.
 					        end case;
 				                Check_Paragraph;
 				                ARM_Output.Text_Format (Output_Object,
@@ -7480,7 +7484,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text :=
 					        Ch /= Ch2;
 				            if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text then
-						-- Non-empty text; calculate new change state:
+						-- Non-empty text; calculate new change state: (current is deletion)
 					        case Format_Object.Change is
 					            when ARM_Output.Deletion | ARM_Output.None =>
 						        Format_Object.Change := ARM_Output.Deletion;
@@ -7490,13 +7494,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					            when ARM_Output.Insertion =>
 						        Format_Object.Change := ARM_Output.Both;
 						        Format_Object.Current_Old_Change_Version :=
+						           Format_Object.Current_Change_Version; -- Old is the insertion.
+						        Format_Object.Current_Change_Version :=
 						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
-							-- Current_Version is unchanged.
 					            when ARM_Output.Both =>
 						        Format_Object.Change := ARM_Output.Both;
-						        Format_Object.Current_Old_Change_Version :=
+							-- Current_Old_Version is unchanged.
+						        Format_Object.Current_Change_Version :=
 						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
-							-- Current_Version is unchanged.
 					        end case;
 				                Check_Paragraph;
 				                ARM_Output.Text_Format (Output_Object,
@@ -7517,7 +7522,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text :=
 					    Ch /= Ch2;
 				        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text then
-					    -- Non-empty text; calculate new change state:
+					    -- Non-empty text; calculate new change state: (current is deletion)
 					    case Format_Object.Change is
 					        when ARM_Output.Deletion | ARM_Output.None =>
 						    Format_Object.Change := ARM_Output.Deletion;
@@ -7527,13 +7532,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        when ARM_Output.Insertion =>
 						    Format_Object.Change := ARM_Output.Both;
 						    Format_Object.Current_Old_Change_Version :=
+						       Format_Object.Current_Change_Version; -- Old is the insertion.
+						    Format_Object.Current_Change_Version :=
 						       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
-						    -- Current_Version is unchanged.
 					        when ARM_Output.Both =>
 						    Format_Object.Change := ARM_Output.Both;
-						    Format_Object.Current_Old_Change_Version :=
+						    -- Current_Old_Version is unchanged.
+						    Format_Object.Current_Change_Version :=
 						       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
-						    -- Current_Version is unchanged.
 					    end case;
 				            Check_Paragraph;
 				            ARM_Output.Text_Format (Output_Object,
@@ -8051,6 +8057,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 	Arm_File.Close (Input_Object);
 	if Format_State.Nesting_Stack_Ptr /= 0 then
 	    Ada.Text_IO.Put_Line ("   ** Unfinished commands detected.");
+	    for I in reverse 1 .. Format_State.Nesting_Stack_Ptr loop
+	        Ada.Text_IO.Put_Line ("      Open command=" &
+		    Format_State.Nesting_Stack(I).Name);
+	    end loop;
 	end if;
     end Process;
 

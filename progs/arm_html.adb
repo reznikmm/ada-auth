@@ -106,6 +106,8 @@ package body ARM_HTML is
     --		- RLB - Changed to use left/right quotes whether or not Unicode
     --			is being used. (These work on IE, but not on old
     --			Netscape.)
+    --  9/16/04 - RLB - Added a charset meta in the header, so that browsers
+    --			can't misinterpret these documents.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -684,6 +686,7 @@ package body ARM_HTML is
 	-- Header information:
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HEAD>");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <TITLE>" & Title & "</TITLE>");
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <META http-equiv=""Content-Type"" content=""text/html; charset=iso-8859-1"">");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <META NAME=""Author"" CONTENT=""JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor"">");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <META NAME=""GENERATOR"" CONTENT=""Arm_Form.Exe, Ada Reference Manual generator"">");
 	if HTML_Kind = HTML_4_Only then
@@ -701,13 +704,13 @@ package body ARM_HTML is
 	    -- Revision styles:
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert0 {text-decoration: underline; color: black}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete0 {text-decoration: line-through; color: black }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: line-through, underline; color: black }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: underline, line-through; color: black }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91) }"); -- Dark blue.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,0,91) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: line-through, underline; color: rgb(0,0,91) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: underline, line-through; color: rgb(0,0,91) }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0) }"); -- Dark green.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,91,0) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: line-through, underline; color: rgb(0,91,0) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(0,91,0) }");
 
 	    -- Paragraph styles:
 	    Make_Style ("Normal", ARM_Output.Normal);
@@ -775,13 +778,13 @@ package body ARM_HTML is
 	    -- Revision styles:
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert0 {text-decoration: underline; color: black}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete0 {text-decoration: line-through; color: black }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: line-through, underline; color: black }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: underline, line-through; color: black }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91) }"); -- Dark blue.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,0,91) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: line-through, underline; color: rgb(0,0,91) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: underline, line-through; color: rgb(0,0,91) }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0) }"); -- Dark green.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,91,0) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: line-through, underline; color: rgb(0,91,0) }");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(0,91,0) }");
 
 	    -- Paragraph styles:
 	    Make_Style ("Normal", ARM_Output.Normal);
@@ -3620,7 +3623,10 @@ package body ARM_HTML is
 		        Output_Text (Output_Object, "</S></U> ");
 		    else
 		        --Output_Text (Output_Object, "</DEL></INS> ");
-		        Output_Text (Output_Object, "</SPAN> ");
+		        --Output_Text (Output_Object, "</SPAN> ");
+			-- CSS2 doesn't allow multiple decorations in a single definition, so we have
+			-- to nest them. But that might not be right, either (it works on IE).
+		        Output_Text (Output_Object, "</SPAN></SPAN> ");
 		    end if;
 		when ARM_Output.None =>
 		    null;
@@ -3645,7 +3651,11 @@ package body ARM_HTML is
 		        Output_Text (Output_Object, "<U><S>");
 		    else
 		        --Output_Text (Output_Object, "<INS><DEL>");
-		        Output_Text (Output_Object, "<SPAN class=""both" & Version & """>");
+		        --Output_Text (Output_Object, "<SPAN class=""both" & Version & """>");
+			-- CSS2 doesn't allow multiple decorations in a single definition, so we have
+			-- to nest them. But that might not be right, either (it works on IE).
+		        Output_Text (Output_Object, "<SPAN class=""insert" & Added_Version & """>");
+		        Output_Text (Output_Object, "<SPAN class=""delete" & Version & """>");
 		    end if;
 		when ARM_Output.None =>
 		    null;
