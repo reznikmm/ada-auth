@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/11/08 04:56:35 $}
+@Comment{$Date: 2004/11/12 06:10:15 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @LabeledClause{Array Types}
 
@@ -247,7 +247,7 @@ creates the array type and its first subtype,
 and consists of the elaboration of any @nt{discrete_@!subtype_@!definition}s
 and the @nt{component_@!definition}.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI-00171-01]}
 @PDefn2{Term=[elaboration], Sec=(discrete_subtype_definition)}
 The elaboration of a @nt{discrete_subtype_definition}
 @Chg{New=[that does not contain any per-object expressions],Old=[]}
@@ -344,6 +344,13 @@ The syntax rule for @nt{component_definition} (formerly
 @nt<component_subtype_definition>) is moved here from
 RM83-3.7.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to allow
+the elaboration of per-object constraints for constrained arrays.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Index Constraints and Discrete Ranges}
 
@@ -496,7 +503,7 @@ and no greater than the dimensionality of the array.
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0006]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0006],ARef=[AI95-00030-01]}
 The following attributes are defined for
 @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a @Chg{New=[@nt{prefix}],
 Old=[prefix]} A that is of an array type
@@ -668,6 +675,7 @@ We define the term @i(string type) as a natural analogy
 to the term @i(character type).
 @end{DiffWord83}
 
+
 @LabeledClause{Discriminants}
 
 @begin{Intro}
@@ -704,7 +712,6 @@ the point of the type declaration. A @nt<discriminant_part> of
 @begin{Syntax}
 @Syn{lhs=<discriminant_part>,rhs="@Syn2{unknown_discriminant_part} | @Syn2{known_discriminant_part}"}
 
-
 @Syn{lhs=<unknown_discriminant_part>,rhs="(<>)"}
 
 @Syn{lhs=<known_discriminant_part>,rhs="
@@ -725,7 +732,7 @@ discriminant.
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0007]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0007],ARef=[AI95-00098-01]}
 A @Chg{New=[@nt{discriminant_part}],Old=[@nt{known_discriminant_part}]} is only
 permitted in a declaration for a composite type that is not an array type
 @Redundant[(this includes generic formal types)]@Chg{New=[. A],Old=[; a]}
@@ -744,7 +751,7 @@ a @i(discriminated) type,@Defn{discriminated type} as is a type that inherits
   Furthermore, the full type for a type with unknown discriminants
   need not even be composite, much less have any discriminants.
 
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0007]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0007],ARef=[AI95-00098-01]}
   @Chg{New=[On the other hand, @nt<unknown_discriminant_part>s cannot be
   applied to type declarations that cannot have a @nt<known_discriminant_part>.
   There is no point in having unknown discriminants on a type that can never
@@ -1198,6 +1205,14 @@ when the discriminant is initialized.
 
 @end{DiffWord83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0007],ARef=[AI95-00098-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> The wording was clarified so that
+types that cannot have discriminants cannot have a
+@nt{unknown_discriminant_part}.],Old=[]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Discriminant Constraints}
 
 @begin{Intro}
@@ -1253,7 +1268,7 @@ is that of the associated discriminant(s).
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008],ARef=[AI95-00168-01]}
 A @nt{discriminant_constraint} is only allowed in a
 @nt{subtype_indication} whose @nt{subtype_mark} denotes
 either an unconstrained discriminated subtype, or an
@@ -1265,7 +1280,7 @@ immediate scope of the designated subtype where the designated subtype's view
 is constrained.],
 Old=[]}
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008],ARef=[AI95-00168-01]}
 @Chg{New=[The second rule is necessary to prevent assignments that change the
 discriminant of a constrained object. See the defect report for examples.],Old=[]}
 @end{Reason}
@@ -1377,6 +1392,19 @@ but nevertheless complicated to state formally, it doesn't
 seem worth putting it in a "NOTE."
 @end{DiffWord83}
 
+@begin{Incompatible95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0008],ARef=[AI95-00168-01],ARef=[AI95-00363-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> @Defn{incompatibilities with Ada 95}
+For general access subtypes, @nt{discriminant_constraint}s are prohibited
+if the designated type can be treated as constrained somewhere in the program.
+Ada 2005 goes further and prohibits such @nt{discriminant_constraint}s if
+the designated type has (or might have, in the case of a formal type)
+defaults for its discriminants. The use of general access subtypes is rare,
+and this eliminates a boatload of problems which can cause programs to
+misbehave.],Old=[]}
+@end{Incompatible95}
+
+
 @LabeledSubClause{Operations of Discriminated Types}
 
 @begin{Intro}
@@ -1465,6 +1493,7 @@ appear separately under @nt{assignment_statement}s and
 subprogram calls.
 @end{DiffWord83}
 
+
 @LabeledClause{Record Types}
 
 @begin{Intro}
@@ -1490,7 +1519,7 @@ values of the components.
    | {@Syn2{component_item}} @Syn2{variant_part}
    |  @key{null};"}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Syn{lhs=<component_item>,rhs="@Syn2{component_declaration} | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
 
 @Syn{lhs=<component_declaration>,rhs="
@@ -1647,7 +1676,7 @@ elaboration of the @nt{component_definition}.
   each @nt<defining_identifier> in the list.
 @end(Discussion)
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
 @Defn{per-object expression}
 @Defn{per-object constraint}
 @Defn{entry index subtype}
@@ -1677,7 +1706,7 @@ expression that is not part of a per-object expression.
 association in a discriminant constraint, in which case it is evaluated once
 for each associated discriminant.],Old=[]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0002]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0002],ARef=[AI95-00171-01]}
 @Chg{New=[@PDefn2{Term=[Elaboration],Sec=(per-object constraint)}When a
 per-object constraint is elaborated @Redundant[(as part of creating an
 object)], each per-object expression of the constraint is evaluated. For other
@@ -1785,7 +1814,7 @@ and makes perfect sense for nonprivate types such as record types.
 @end{Extend83}
 
 @begin{DiffWord83}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 The syntax rules now allow @Chg{New=[@nt{aspect_clause}s],
 Old=[@nt{representation_clause}s]} to appear in a @nt{record_definition}.
 This is not a language extension, because @LegalityName@;s prevent all
@@ -1796,6 +1825,18 @@ The reason for this change is to allow the rules for
 @Chg{New=[@nt{aspect_clause}s],Old=[@nt{representation_clause}s]} and
 representation pragmas to be as similar as possible.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Improved the description of the
+elaboration of per-object constraints.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Changed representation clauses to
+aspect clauses to reflect that they are used for more than just
+representation.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Variant Parts and Discrete Choices}
 
@@ -2796,7 +2837,7 @@ It is illegal to have both statically tagged and
   controlling operands (if any) are tag indeterminate.
 @end(itemize)
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010],ARef=[AI95-00127-01]}
 @Redundant[A @nt<type_conversion> is statically or dynamically
 tagged according to whether the type determined by the @nt<subtype_mark>
 is specific or class-wide, respectively.]
@@ -2813,8 +2854,8 @@ Old=[of the actual parameter]} is specific or class-wide, respectively.
   A @nt<type_conversion> is never tag indeterminate, even if its
   operand is. A designated object is never tag indeterminate.
 
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
-  @Chg{New=[Allocators and access attributes of specific types can be used as
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010],ARef=[AI95-00127-01]}
+  @Chg{New=[Allocators and access attributes of class-wide types can be used as
   the controlling parameters of dispatching calls.],Old=[]}
 @end{Ramification}
 @end{StaticSem}
@@ -2829,7 +2870,7 @@ have both dynamically tagged and statically tagged controlling operands.
   specific type of the statically tagged operand(s).
 @end{Reason}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010],ARef=[AI95-00127-01]}
 If the expected type for an expression or @nt<name>
 is some specific tagged type, then the expression or @nt<name>
 shall not be dynamically tagged unless it is a controlling operand in a call
@@ -2855,7 +2896,7 @@ operand in a call on a dispatching operation.
   See @RefSecNum(Relational Operators and Membership Tests).
 @end(Ramification)
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011],ARef=[AI95-00117-01]}
 In the declaration of a dispatching operation of a tagged type,
 everywhere a subtype of the tagged type appears as a
 subtype of the profile (see @RefSecNum(Subprogram Declarations)),
@@ -2904,7 +2945,7 @@ or more distinct tagged types.
   class-wide types.
 @end{reason}
 @begin{ramification}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0098]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0098],ARef=[AI95-00183]}
   @Chg{New=[This restriction applies even if the partial view (see
   @RefSecNum{Private Types and Private Extensions}) of one or both
   of the types is untagged. This follows from the definition of dispatching
@@ -3144,6 +3185,20 @@ declaration of a primitive subprogram.
 @Defn{extensions to Ada 83}
 The concept of dispatching operations is new.
 @end{Extend83}
+
+@begin{Diffword95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:>@ChgNote{This is documented as an extension in the two sections referenced below.}
+Allocators and access attributes of objects of class-wide types
+can be used as the controlling parameter in a dispatching calls. This
+was an oversight in the definition of Ada 95. (See @RefSecNum{Operations of Access Types} and
+@RefSecNum{Allocators}).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Corrected the conventions of
+dispatching operations.],Old=[]}
+@end{Diffword95}
+
 
 @LabeledSubClause{Abstract Types and Subprograms}
 
@@ -3533,7 +3588,7 @@ by compile-time rules.
 @end{Syntax}
 
 @begin{StaticSem}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0012]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0012],ARef=[AI95-00062-01]}
 @Defn{access-to-object type}
 @Defn{access-to-subprogram type}
 @Defn{pool-specific access type}
@@ -3859,7 +3914,7 @@ Hence, the type conversion will raise Constraint_Error if the value of
 the actual parameter is null.
 @end{Reason}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0013]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0013],ARef=[AI95-00012-01]}
 @PDefn2{Term=[constrained],Sec=(subtype)}
 @PDefn2{Term=[unconstrained],Sec=(subtype)}
 @Redundant[All subtypes of an access-to-subprogram type
@@ -3987,6 +4042,20 @@ because multiple unrelated access types can share the
 same storage pool;
 see @RefSecNum(Storage Management) for more discussion.)
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0012],ARef=[AI95-00062-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Added accidentally omitted wording
+that says that a derived access type shares its storage pool with its
+parent type. This was clearly intended, both because of a note in
+@RefSecNum{Derived Types and Classes}, and because anything else would
+have been incompatible with Ada 83.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0013],ARef=[AI95-00012-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Fixed typographical errors in
+the description of when access types are constrained.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Incomplete Type Declarations}
 
@@ -4802,7 +4871,7 @@ denotes an aliased view of an object}:
   Text=<X'Access yields an access value that designates the object
   denoted by X. The type of X'Access is an access-to-object type,
   as determined by the expected type.
-  The expected type shall be a general access type.>}
+  The expected type shall be a general access type.>}@ChgNote{Should have ARef=[AI95-00127-01], but not allowed yet.}
 @IndexSeeAlso{Term=[Unchecked_Access attribute],See=(Access attribute)}
 @EndPrefixType{}
   X shall denote an aliased view of an object@Redundant[, including possibly the
@@ -4878,7 +4947,7 @@ denotes an aliased view of an object}:
      (see @RefSecNum(Discriminants)).
   @end{ImplNote}
 
-  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010],ARef=[AI95-00127-01]}
   If @Chg{New=[@i(A) is a named access type and @i(D) is a tagged type],
   Old=[the designated type of @i(A) is tagged]}, then the type of the view
   shall be covered by @Chg{New=[@i(D)],Old=[the designated type]};
@@ -4899,7 +4968,7 @@ denotes an aliased view of an object}:
     with it, but need not be if its nominal subtype is constrained.
   @end{implnote}
   @begin{Ramification}
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010],ARef=[AI95-00127-01]}
   @Chg{New=[An access attribute can be used as the controlling operand in a
   dispatching call; see @RefSecNum{Dispatching Operations of Tagged Types}.],
   Old=[]}
@@ -5097,6 +5166,17 @@ there should never be a case when X.@key{all}'Last is legal
 while X'Last is not. See AI83-00154.
 @end{Extend83}
 
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> @Defn{extensions to Ada 95}
+Access attributes of objects of class-wide types
+can be used as the controlling parameter in a dispatching calls (see
+@RefSecNum{Dispatching Operations of Tagged Types}). This was an oversight in
+Ada 95.],Old=[]}
+@end{Extend95}
+
+
+
 @LabeledClause{Declarative Parts}
 
 @begin{Intro}
@@ -5111,7 +5191,7 @@ while X'Last is not. See AI83-00154.
 @Syn{lhs=<declarative_item>,rhs="
     @Syn2{basic_declarative_item} | @Syn2{body}"}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Syn{lhs=<basic_declarative_item>,rhs="
     @Syn2{basic_declaration} | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]} | @Syn2{use_clause}"}
 
@@ -5149,7 +5229,7 @@ Prior to that, it is @i(not yet elaborated).
 For a construct that attempts to use a body,
 a check (Elaboration_Check) is performed, as follows:
 @begin{Itemize}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014],ARef=[AI95-00064-01]}
 For a call to a (non-protected) subprogram that has
 an explicit body, a check is made that the
 @Chg{New=[body],Old=[@nt{subprogram_body}]} is already elaborated.
@@ -5163,7 +5243,7 @@ are done in an arbitrary order.
   of parameters and the elaboration check occur in an arbitrary order.
   AI83-00406 applies to generic instantiation as well (see below).
 
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0014]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0014],ARef=[AI95-00064-01]}
   @Chg{New=[A subprogram can be completed by a renames-as-body, and we need
   to make an elaboration check on such a body, so we use
   @lquotes@;body@rquotes@; rather than @nt{subprogram_body} above.],Old=[]}
@@ -5257,10 +5337,22 @@ To simplify description, we go further and say
 is equivalent to one with an empty one.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Changed representation clauses to
+aspect clauses to reflect that they are used for more than just
+representation.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0014],ARef=[AI95-00064-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that the elaboration check
+applies to all kinds of subprogram bodies.],Old=[]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Completions of Declarations}
 
 @begin{Intro}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014],ARef=[AI95-00064-01]}
 Declarations sometimes come in two parts.
 @Defn{requires a completion}
 A declaration that requires a second part is said to @i(require completion).
@@ -5404,3 +5496,10 @@ a full type for an incomplete or private type, a full constant
 declaration for a deferred constant declaration, or a @nt{pragma} Import
 for any kind of entity.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0014],ARef=[AI95-00064-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Added a definition of @i{body}, which
+is different than @nt{body} or @key{body}. At least @i{body} is the same as
+body. We wouldn't want it to be too easy to understand!],Old=[]}
+@end{DiffWord95}

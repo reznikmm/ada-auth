@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/11/10 00:57:19 $}
+@Comment{$Date: 2004/11/12 06:10:16 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -5254,7 +5254,8 @@ program.],Old=[]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95} @b<Corrigendum:> An
-@nt{allocator} can be a controlling parameter of a dispatching call.],Old=[]}
+@nt{allocator} can be a controlling parameter of a dispatching call. This
+was an oversight in Ada 95.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}@nt{Allocator}s can be for a

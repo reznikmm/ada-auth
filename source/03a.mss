@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2001/04/05 22:35:56 $}
+@Comment{$Date: 2004/11/12 06:10:14 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1554,7 +1554,7 @@ sequence of steps:
   raise Constraint_Error @em see @RefSecNum(Type Conversions)).
   @PDefn2{Term=[implicit subtype conversion],Sec=(initialization expression)}
 
-  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
   The object is created, and, if there is not an initialization expression,
   any per-object expressions (see @RefSecNum(Record Types)) are
   @Chg{New=[elaborated], Old=[evaluated]} and any implicit initial values for
@@ -1756,6 +1756,13 @@ Deferred constants no longer have a separate syntax rule, but rather
 are incorporated in @nt<object_declaration> as constants declared
 without an initialization expression.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Corrected wording to say that
+per-object constraints are elaborated (not evaluated).],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Number Declarations}
 
@@ -3048,7 +3055,7 @@ For a machine that supports negative zeros,
       Range_Check.
     @end{discussion}
     @begin{Honest}
-      @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0096]}
+      @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0096],ARef=[AI95-00053-01]}
       @Chg{New=[A sequence of characters corresponds to the result of
       S'Wide_Image if it is the same ignoring case. Thus, the case of an
       image of a nongraphic character does not matter. For example,
@@ -3670,7 +3677,7 @@ the values of the @nt<simple_expression>s, converted to the type being defined.
   necessary to satisfy the aboved requirements.
 @end{ImplNote}
 @begin{Honest}
-  @ChgRef{Version=[1],Kind=[Added]}
+  @ChgRef{Version=[1],Kind=[Added]}@ChgNote{This is discussed in AC-00002, which we can't reference here}
   @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
   conversion} (which is something that happens at overload resolution, see
   @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
@@ -3750,7 +3757,7 @@ the operations of any integer type.]
   @i(root_integer) is direct or indirect, not that it really matters.
   All we want is for all integer types to be descendants of @i(root_integer).
 
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0099]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0099],ARef=[AI95-00152-01]}
   @Chg{New=[Note that this derivation does not imply any inheritance of
   subprograms. Subprograms are inherited only for types derived by a
   @nt{derived_@!type_@!definition} (see @RefSecNum{Derived Types and Classes}),
@@ -3874,7 +3881,7 @@ may be equal to the modulus, rather than one less than the modulus.
 It is implementation defined for which powers of 2, if any, this
 permission is exercised.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0003]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0003],ARef=[AI95-00095-01]}
 @Chg{New=[For a one's complement machine, implementations may support non-binary
 modulus values greater than System.Max_Nonbinary_Modulus. It is implementation
 defined which specific values greater than System.Max_Nonbinary_Modulus, if
@@ -4030,6 +4037,13 @@ to pushing an explicit equivalence between integer type
 definition and normal type derivation.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0003],ARef=[AI95-00095-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Added additional permissions for
+modular types on one's complement machines.],Old=[]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Operations of Discrete Types}
 
 @begin{StaticSem}
@@ -4172,7 +4186,7 @@ are in the derivation class rooted at @i(root_real).]
   direct or indirect, not that it really matters.
   All we want is for all real types to be descendants of @i(root_real).
 
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0099]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0099],ARef=[AI95-00152-01]}
   @Chg{New=[Note that this derivation does not imply any inheritance of
   subprograms. Subprograms are inherited only for types derived by a
   @nt{derived_@!type_@!definition} (see @RefSecNum{Derived Types and Classes}),
@@ -4413,7 +4427,7 @@ of the @nt<real_range_specification> to the type being defined.
 Otherwise, the subtype is unconstrained.
 
 @begin{Honest}
-  @ChgRef{Version=[1],Kind=[Added]}
+  @ChgRef{Version=[1],Kind=[Added]}@ChgNote{This is discussed in AC-00002, which we can't reference here}
   @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
   conversion} (which is something that happens at overload resolution, see
   @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
@@ -4549,6 +4563,7 @@ The concept of machine numbers is new, and is relevant to
 the definition of Succ and Pred for floating point numbers.
 @end{DiffWord83}
 
+
 @LabeledSubClause{Operations of Floating Point Types}
 
 @begin{StaticSem}
@@ -4560,7 +4575,7 @@ the definition of Succ and Pred for floating point numbers.
   Prefix=<S>, AttrName=<Digits>, Ref=[8652/0004],
   Text=[S'Digits denotes the requested decimal precision
   for the subtype S. The value of this attribute
-  is of the type @i(universal_integer).]}
+  is of the type @i(universal_integer).]}@ChgNote{Should be ARef=[AI-00203-01], but not allowed now.}
 The requested decimal precision of the base subtype of a floating
 point type @i{T} is defined to be the largest value of @i{d} for which
 @chg{New=[@*],Old=[]}
@@ -4589,6 +4604,13 @@ have Size and Address attributes
 Other attributes of floating point types are defined in
 @RefSecNum{Attributes of Floating Point Types}.
 @end{Notes}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0004],ARef=[AI95-00203-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Corrected the formula for Digits when
+the Machine_Radix is 10.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Fixed Point Types}
 
@@ -4703,7 +4725,7 @@ given by the closer to zero of:
   @PDefn2{Term=[implicit subtype conversion],Sec=(bounds of a fixed point type)}
 
   @begin{Honest}
-    @ChgRef{Version=[1],Kind=[Added]}
+    @ChgRef{Version=[1],Kind=[Added]}@ChgNote{This is discussed in AC-00002, which we can't reference here}
     @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
     conversion} (which is something that happens at overload resolution, see
     @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
@@ -4731,7 +4753,7 @@ Otherwise, the range of the first subtype is
 @en@;(10**@i(digits)@en@;1)*@i(delta) .. +(10**@i(digits)@en@;1)*@i(delta).
 
 @begin{Honest}
-  @ChgRef{Version=[1],Kind=[Added]}
+  @ChgRef{Version=[1],Kind=[Added]}@ChgNote{This is discussed in AC-00002, which we can't reference here}
   @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
   conversion} (which is something that happens at overload resolution, see
   @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
@@ -4895,6 +4917,7 @@ Obsolescent features (to be compatible with Ada 83's
 @nt<fixed_point_constraint>).
 @end{DiffWord83}
 
+
 @LabeledSubClause{Operations of Fixed Point Types}
 
 @begin{StaticSem}
@@ -4906,6 +4929,7 @@ Obsolescent features (to be compatible with Ada 83's
   Text=[S'Small
      denotes the @i(small) of the type of S.
      The value of this attribute is of the type @i(universal_real).]}
+@ChgNote{Should be ARef=[AI-00054-01], but not allowed now.}
      @PDefn2{Term=[specifiable], Sec=(of Small for fixed point types)}
      @Defn{Small clause}
      Small may be specified
@@ -4981,7 +5005,6 @@ Obsolescent features (to be compatible with Ada 83's
   @en@;(10**@i(D)@en@;1)*@i(delta) .. +(10**@i(D)@en@;1)*@i(delta)
   is included in the base range of the type.
 
-
 @end(itemize)
 
 @Attribute{Prefix=<S>, AttrName=<Scale>,
@@ -5034,3 +5057,9 @@ have Size and Address attributes
 Other attributes of fixed point types are defined in
 @RefSecNum{Attributes of Fixed Point Types}.
 @end{Notes}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0005],ARef=[AI95-00054-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that @i<small> may be
+specified only for ordinary fixed point types.],Old=[]}
+@end{DiffWord95}

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2004/09/17 04:56:25 $}
+@Comment{$Date: 2004/11/12 06:10:17 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 
@@ -121,6 +121,7 @@ The term "parallel" is reserved for referring to the
 situation where multiple physical processors run simultaneously.
 @end{DiffWord83}
 
+
 @LabeledClause{Task Units and Task Objects}
 
 @begin{Intro}
@@ -134,8 +135,11 @@ a named task object of that type.
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @Syn{lhs=<task_type_declaration>,rhs="
-   @key{task} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] [@key{is} @Syn2{task_definition}];"}
+   @key{task} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] [@key{is}@Chg{Version=[2],New=<
+     [@key{new} @Syn2{interface_list} @key{with}]
+    >,Old=<>} @Syn2{task_definition}];"}
 
 @Syn{lhs=<single_task_declaration>,rhs="
    @key{task} @Syn2{defining_identifier} [@key{is} @Syn2{task_definition}];"}
@@ -147,7 +151,7 @@ a named task object of that type.
      {@Syn2{task_item}}]
   @key{end} [@SynI{task_}@Syn2{identifier}]"}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Syn{lhs=<task_item>,rhs="@Syn2{entry_declaration} | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
 
 @Softpage
@@ -166,14 +170,16 @@ it shall repeat the @nt{defining_identifier}.
 @end{Syntax}
 
 @begin{Legality}
-@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
+@Chg{Version=[2],New=[],Old=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
 A task declaration requires a completion@redundant[,
 which shall be a @nt{task_body},]
 and every @nt{task_body} shall be the completion of some
-task declaration.
+task declaration.]}
 @begin(Honest)
-  The completion can be a @nt{pragma} Import,
-  if the implementation supports it.
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @Chg{Version=[2],New=[],Old=[The completion can be a @nt{pragma} Import,
+  if the implementation supports it.]}
 @end(Honest)
 @end{Legality}
 
@@ -191,10 +197,78 @@ word @key{private} is called the private part of the task unit.]
 Private part is defined in Section 8.
 @end{theproof}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0029]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0029],ARef=[AI95-00116-01]}
 @Chg{New=[For a task declaration without a @nt{task_definition}, a
 @nt{task_definition} without @nt{task_item}s is assumed.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[If a @nt{task_type_declaration} includes an @nt{interface_list}, the task type
+is derived from each interface named in the @nt{interface_list}.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[For a @nt{task_type_declaration}, if the first parameter
+of a primitive inherited subprogram is of the task type or an access parameter
+designating he task type, and there is an @nt{entry_declaration} for a single
+entry with the same identifier within the @nt{task_type_declaration}, having a
+profile that is type conformant with that of the inherited subprogram after
+omitting this first parameter, the inherited subprogram is said to be
+@i{implemented} by the conforming task entry.@PDefn2{Term=[implemented],
+Sec=[by a task entry]}],Old=[]}
+
 @end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}@ChgNote{This was just moved, not changed}
+@Chg{Version=[2],New=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
+A task declaration requires a completion@redundant[,
+which shall be a @nt{task_body},]
+and every @nt{task_body} shall be the completion of some
+task declaration.],Old=[]}
+@begin(Honest)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[The completion can be a @nt{pragma} Import,
+  if the implementation supports it.],Old=[]}
+@end(Honest)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[Each @nt{interface_subtype_mark} of an
+@nt{interface_list} appearing within a @nt{task_type_declaration} shall denote
+a limited interface type that is not a protected interface.],Old=[]}
+@begin(Discussion)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[The interface can be a limited, task, or
+  synchronized interface, but not a nonlimited or protected interface (which
+  offer operations that a task does not have).],Old=[]}
+@end(Discussion)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[@Leading@;For each primitive subprogram inherited by the type declared by a
+@nt{task_type_declaration}, at most one of the following shall apply:],Old=[]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the inherited subprogram shall be overridden with a
+primitive subprogram of the task type, in which case the overriding subprogram
+shall be subtype conformant with the inherited subprogram and not abstract;
+or],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the inherited subprogram is implemented by a single entry of the
+task type; in which case its profile after omitting the first
+parameter shall be subtype conformant with that of the task entry.],Old=[]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[If neither applies, the inherited subprogram shall be a
+null procedure.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[Each inherited subprogram can only have a single
+implementation (either from overriding a subprogram or implementing an entry),
+and must have an implementation unless the subprogram is a null procedure.],Old=[]}
+@end{Reason}
+
+@end{Legality}
 
 @begin{RunTime}
 @redundant[@PDefn2{Term=[elaboration], Sec=(task declaration)}
@@ -213,7 +287,7 @@ creates the task type and its first
 subtype;] it also includes the elaboration of the @nt<entry_declaration>s
 in the given order.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @PDefn2{Term=[initialization], Sec=(of a task object)}
 As part of the initialization of a task object, any
 @Chg{New=[@nt<aspect_clause>s],Old=[@nt<representation_clause>s]} and
@@ -278,9 +352,10 @@ Within a task unit, the name of a discriminant of the task type
 denotes the corresponding discriminant of the current instance
 of the unit.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 A task type is a limited type (see @RefSecNum(Limited Types)),
-and hence has neither
-an assignment operation nor predefined equality operators.
+and hence has neither @Chg{Version=[2],New=[@nt{assignment_statement}s],
+Old=[an assignment operation]} nor predefined equality operators.
 If an application needs to store and exchange task identities, it
 can do so by defining an access type designating the corresponding
 task objects and by using access values for identification purposes.
@@ -365,6 +440,30 @@ The @nt{declarative_part} of a @nt{task_body} is now required;
 that doesn't make any real difference,
 because a @nt{declarative_part} can be empty.
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Task types can be derived from one or more interfaces. Entries
+of the task type can implement the primitive operations of an interface.],Old=[]}
+@end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0029],ARef=[AI95-00116-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that a task type has an
+implicit empty @nt{task_definition} if none is given.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Changed representation clauses to
+aspect clauses to reflect that they are used for more than just
+representation.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[Revised the note on operations of task types to
+reflect that limited types do have an assignment operation, but not
+copying (@nt{assignment_statement}s).],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledClause{Task Execution - Task Activation}
 
@@ -499,6 +598,7 @@ on some processor, due to the lack of resources.
 
 This clause has been rewritten in an attempt to improve presentation.
 @end{DiffWord83}
+
 
 @LabeledClause{Task Dependence - Termination of Tasks}
 
@@ -651,6 +751,7 @@ finalization still occurs for such tasks, and this happens after
 selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord83}
 
+
 @LabeledClause{Protected Units and Protected Objects}
 
 @begin{Intro}
@@ -676,8 +777,11 @@ a named protected object of that type.
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @Syn{lhs=<protected_type_declaration>,rhs="
-  @key{protected} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] @key{is} @Syn2{protected_definition};"}
+  @key{protected} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] @key{is}@Chg{Version=[2],New=<
+     [@key{new} @Syn2{interface_list} @key{with}]
+    >,Old=<>} @Syn2{protected_definition}];"}
 
 
 @Syn{lhs=<single_protected_declaration>,rhs="
@@ -690,7 +794,7 @@ a named protected object of that type.
     { @Syn2{protected_element_declaration} } ]
   @key{end} [@SynI{protected_}@Syn2{identifier}]"}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Syn{lhs=<protected_operation_declaration>,
   rhs="@Syn2{subprogram_declaration}
      | @Syn2{entry_declaration}
@@ -712,7 +816,7 @@ a named protected object of that type.
    { @Syn2{protected_operation_item} }
   @key{end} [@SynI{protected_}@Syn2{identifier}];"}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Syn{lhs=<protected_operation_item>,
   rhs="@Syn2{subprogram_declaration}
      | @Syn2{subprogram_body}
@@ -727,19 +831,22 @@ it shall repeat the @nt{defining_identifier}.
 @end{Syntax}
 
 @begin{Legality}
-@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
+@Chg{Version=[2],New=[],Old=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
 A protected declaration requires a completion@redundant[,
 which shall be a @nt{protected_@!body},]
 and every @nt{protected_@!body} shall be the completion of some
-protected declaration.
+protected declaration.]}
 @begin(Honest)
-  The completion can be a @nt{pragma} Import,
-  if the implementation supports it.
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @Chg{Version=[2],New=[],Old=[The completion can be a @nt{pragma} Import,
+  if the implementation supports it.]}
 @end(Honest)
 @end{Legality}
 
 @begin{StaticSem}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 A @nt<protected_definition> defines a protected type and its first subtype.
 @PDefn2{Term=[visible part], Sec=(of a protected unit)}
 The list of @nt{protected_@!operation_@!declaration}s of a
@@ -748,11 +855,100 @@ together with the @nt{known_@!discriminant_@!part}, if any,
 is called the visible part of the protected unit.
 @Redundant[@PDefn2{Term=[private part], Sec=(of a protected unit)}
 The optional list of @nt{protected_@!element_@!declaration}s after the reserved
-word @key{private} is called the private part of the protected unit.]
+word @key{private} is called the private part of the protected
+unit.]@Chg{Version=[2],New=[ If a @nt{protected_type_declaration} includes
+an @nt{interface_list}, the protected type is derived from each interface
+named in the @nt{interface_list}.],Old=[]}
 @begin{TheProof}
 Private part is defined in Section 8.
 @end{theproof}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[For a @nt{protected_type_declaration}, the first
+parameter of a primitive inherited subprogram is of the protected type or an
+access parameter designating the protected type, and there is a
+@nt{protected_operation_declaration} for a protected subprogram or single entry
+with the same identifier within the @nt{protected_type_declaration}, having a
+profile that is type conformant with that of the inherited subprogram after
+omitting this first parameter, the inherited subprogram is said to be
+@i{implemented} by the conforming protected subprogram or
+entry.@PDefn2{Term=[implemented],
+Sec=[by a protected subprogram]}@PDefn2{Term=[implemented],
+Sec=[by a protected entry]}],Old=[]}
+
 @end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}@ChgNote{This was just moved, not changed}
+@Chg{Version=[2],New=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
+A protected declaration requires a completion@redundant[,
+which shall be a @nt{protected_@!body},]
+and every @nt{protected_@!body} shall be the completion of some
+protected declaration.],Old=[]}
+@begin(Honest)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[The completion can be a @nt{pragma} Import,
+  if the implementation supports it.],Old=[]}
+@end(Honest)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[Each @nt{interface_subtype_mark} of an @nt{interface_list} appearing within a
+@nt{protected_type_declaration} shall denote a limited interface type that
+is not a task interface.],Old=[]}
+@begin(Discussion)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[The interface can be a limited, protected, or
+  synchronized interface, but not a nonlimited or task interface (which offer
+  operations that a protected object does not have).],Old=[]}
+@end(Discussion)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[@Leading@;For each primitive subprogram inherited by the
+type declared by a @nt{protected_type_declaration}, at most one of the
+following shall apply:],Old=[]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the inherited subprogram is overridden with a primitive
+subprogram of the protected type, in which case the overriding
+subprogram shall be subtype conformant with the inherited
+subprogram and not abstract; or],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the inherited subprogram is implemented by a protected
+subprogram or single entry of the protected type,
+in which case its profile after omitting the first parameter
+shall be subtype conformant with that of the protected
+subprogram or entry.],Old=[]}
+
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[If neither applies, the inherited subprogram is a
+null procedure.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[Each inherited subprogram can only have a single
+implementation (either from overriding a subprogram, implementing a subprogram,
+or implementing an entry), and must have an implementation unless the
+subprogram is a null procedure.],Old=[]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[If an inherited subprogram is implemented by a
+protected procedure or an entry, then the first parameter of the inherited
+subprogram shall be of mode @key{out} or @key{in out}, or an
+access-to-variable parameter.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[For a protected procedure or entry, the protected
+object can be read or written (see
+@RefSecNum{Protected Subprograms and Protected Actions}}. A subprogram
+that is implemented by a protected procedure or entry must have a profile
+which reflects that in order to avoid confusion.],Old=[]}
+@end{Reason}
+
+@end{Legality}
 
 @begin{RunTime}
 @redundant[@PDefn2{Term=[elaboration], Sec=(protected declaration)}
@@ -820,10 +1016,10 @@ Program_Error is raised at the place of the corresponding
 @begin(Reason)
   @leading@;This is analogous to the raising of Tasking_Error in callers
   of a task that completes before accepting the calls.
-  This situation can only occur due to a requeue (ignoring premature
-  unchecked_deallocation), since any task that has accessibility to
-  a protected object is awaited before finalizing the protected
-  object.
+  This situation can only occur due to a
+  requeue (ignoring premature unchecked_deallocation), since any task that
+  has accessibility to a protected object is awaited before finalizing
+  the protected object.
   For example:
 @begin{Example}
 @key[procedure] Main @key[is]
@@ -859,6 +1055,69 @@ object for some useful purpose, so we didn't want to disallow this case.
 @end(Reason)
 @end{RunTime}
 
+@begin{Bounded}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
+@Chg{Version=[2],New=[It is a bounded error to call an entry or subprogram of a
+protected object after that object is finalized. If the error is detected,
+Program_Error is raised. Otherwise, the call proceeds normally, which may leave
+a task queued forever.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This very similar to the previous case. It is
+a bounded error so that implementations can avoid the overhead of the check
+if it can insure that the call still will operate properly. Such an
+implementation cannot need to return resources (such as locks) to an
+executive that it needs to execute calls.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@leading@;This case can happen (and has happened in
+production code) when a protected object is accessed from the Finalize routine
+of a type. For example:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{with} Ada.Finalization.Controlled;
+@key{package} Window_Manager @key{is}
+    ...
+    @key{type} Root_Window @key{is new} Ada.Finalization.Controlled @key{with private};
+    @key{type} Any_Window @key{is access all} Root_Window;
+    ...
+@key{private}
+    ...
+    @key{procedure} Finalize (Object : @key{in out} Root_Window);
+    ...
+@key{end} Window_Manager;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{package body} Window_Manager @key{is}
+   @key{protected type} Lock @key{is}
+       @key{entry} Get_Lock;
+       @key{procedure} Free_Lock;
+   ...
+   @key{end} Lock;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   Window_Lock : Lock;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key{procedure} Finalize (Object : @key{in out} Root_Window) @key{is}
+   @key{begin}
+       Window_Lock.Get_Lock;
+       ...
+       Window_Lock.Free_Lock;
+   @key{end} Finalize;
+   ...
+   A_Window : Any_Window := @key{new} Root_Window;
+@key{end} Window_Manager;],Old=[]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The environment task will call Window_Lock for the object
+allocated for A_Window when the collection for Any_Window is finalized, which
+will happen after the finalization of Window_Lock (because finalization of the
+package body will occur before that of the package specification).],Old=[]}
+@end{Reason}
+@end{Bounded}
+
 @begin{Notes}
 
 Within the declaration or body of a protected unit, the name of
@@ -880,9 +1139,10 @@ Within a protected unit, the name of a discriminant of the protected type
 denotes the corresponding discriminant of the current instance
 of the unit.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 A protected type is a limited type (see @RefSecNum(Limited Types)),
-and hence has neither
-an assignment operation nor predefined equality operators.
+and hence has neither @Chg{Version=[2],New=[@nt{assignment_statement}s],
+Old=[an assignment operation]} nor predefined equality operators.
 
 The bodies of the protected operations given in the @nt<protected_body>
 define the actions that take place upon calls to the protected operations.
@@ -967,6 +1227,31 @@ Flags    : @key(array)(1 .. 100) @key(of) Resource;
 This entire clause is new;
 protected units do not exist in Ada 83.
 @end{Extend83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Protected types can be derived from one or more interfaces. Operations
+declared in the protected type can implement the primitive operations of an
+interface.],Old=[]}
+@end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Changed representation clauses to
+aspect clauses to reflect that they are used for more than just
+representation.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[Revised the note on operations of protected types to
+reflect that limited types do have an assignment operation, but not
+copying (@nt{assignment_statement}s).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
+@Chg{Version=[2],New=[Described what happens when an operation of a finalized
+protected object is called.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledClause{Intertask Communication}
 
@@ -1233,6 +1518,17 @@ Other potentially blocking subprograms are identified
 where they are defined.
 When not specified as potentially blocking,
 a language-defined subprogram is nonblocking.
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00178-01]}
+@Chg{Version=[2],New=[Any subprogram in a language-defined input-output
+package that has a file parameter or result or
+operates on a default file is considered to manipulate a file. An instance
+of a language-defined input-output provides subprograms that are covered
+by this rule. The only subprograms in language-defined input-output packages
+not covered by this rule (and thus not potentially blocking) are the Get and
+Put routines that take string parameters defined in the packages nested in
+Ada.Text_IO.],Old=[]}@ChgNote{This was the resolution of a ramification.}
+@end{Discussion}
 @end{Bounded}
 
 @begin{Notes}
@@ -1553,7 +1849,7 @@ is per-object.
 
 @begin{RunTime}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI-00171-01]}
 @PDefn2{Term=[elaboration], Sec=(entry_declaration)}
 @Chg{New=[The elaboration of an @nt<entry_declaration> for an entry family
 consists of the elaboration of the @nt<discrete_@!subtype_@!definition>, as
@@ -1720,8 +2016,13 @@ when its parameters indicate that it cannot be handled immediately.
 The syntax rule for @nt{entry_body} is new.
 
 @nt{Accept_statement}s can now have @nt{exception_handler}s.
-
 @end{Extend83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified the elaboration of per-object
+constraints.],Old=[]}
+@end{DiffWord95}
 
 @LabeledSubClause{Entry Calls}
 
@@ -2535,7 +2836,7 @@ The value returned by the function
 Seconds or through the Seconds parameter of the procedure
 Split is always less than 86_400.0.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0030]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0030],ARef=[AI95-00113-01]}
 The exception Time_Error is raised by the function Time_Of if the
 actual parameters do not form a proper date. This exception
 is also raised by the operators "+" and "@en@;" if the
@@ -2545,7 +2846,7 @@ function@Chg{New=[s],Old=[]} Year@Chg{New=[, Month, Day, and Seconds and],
 Old=[or]} the procedure Split if the year number of the given date is
 outside of the range of the subtype Year_Number.
 @begin(Honest)
-  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0106]}
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0106],ARef=[AI95-00160-01]}
   By "proper date" above we mean that the given year has
   a month with the given day. For example, February 29th is
   a proper date only for a leap year. @Chg{New=[We do not mean to include
@@ -2554,7 +2855,7 @@ outside of the range of the subtype Year_Number.
   when Daylight Savings Time starts in the spring.],Old=[]}
 @end(Honest)
 @begin(Reason)
-  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0030]}
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0030],ARef=[AI95-00113-01]}
   We allow Year and Split to raise Time_Error because the arithmetic operators
   are allowed (but not required) to produce times that are outside the range
   of years from 1901 to 2099. This is similar to the way integer operators may
@@ -2715,6 +3016,13 @@ and other environment-dependent time-related issues.
 These would be appropriate for standardization in a given
 environment (such as POSIX).
 @end{Extend83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that Month, Day, and
+Seconds can raise Time_Error.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledClause{Select Statements}
 
@@ -3561,7 +3869,7 @@ circumstances:
   If A1 is part of the execution of a task, and A2 is
   the action of waiting for the termination of the task;
 
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0031]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0031],ARef=[AI95-00118-01]}
   @Chg{New=[If A1 is the termination of a task T, and A2 is either the
   evaluation of the expression T'Terminated or a call to
   Ada.Task_Identification.Is_Terminated with an actual parameter that
@@ -3684,6 +3992,14 @@ see @RefSecNum(Shared Variable Control).
 @end(Discussion)
 @end{Erron}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0031],ARef=[AI95-00118-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that A task T2 can rely on
+values of variables that are updated by another task T1, if task T2 first
+verifies that T1'Terminated is True.],Old=[]}
+@end{DiffWord95}
+
+
 @LabeledClause{Example of Tasking and Synchronization}
 
 @begin{Examples}
@@ -3759,3 +4075,4 @@ the next output character.
 @end(Example)
 
 @end{Examples}
+
