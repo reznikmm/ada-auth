@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:07 $}
+@Comment{$Date: 2005/04/02 07:09:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2845,7 +2845,7 @@ Text_IO.Unbounded_IO has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put_Line}
-      (File : @key{in} Text_IO.File_Type;
+      (File : @key{in} File_Type;
        Item : @key{in} Strings.Unbounded.Unbounded_String);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2903,7 +2903,7 @@ Strings.Unbounded.To_String(Item));]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Put_Line
-   (File : @key{in} Text_IO.File_Type;
+   (File : @key{in} File_Type;
     Item : @key{in} Strings.Unbounded.Unbounded_String);]}
 @end{Example}
 

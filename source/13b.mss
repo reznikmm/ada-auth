@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/03/31 06:13:16 $}
+@Comment{$Date: 2005/04/02 07:09:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @LabeledClause{The Package System}
 
@@ -15,8 +15,6 @@ characteristics.]
 
 @begin{StaticSem}
 @Leading@;The following language-defined library package exists:
-@ImplDef{The contents of the visible part of package System
-and its language-defined children.}
 @ChgImplDef{Version=[2],Kind=[Revised],Text=[The contents of the visible part
 of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]}.]}
 @begin{Example}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/03/31 06:13:15 $}
+@Comment{$Date: 2005/04/02 07:09:37 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -74,6 +74,13 @@ those that only need to be known before they can be used. For instance, how an
 object is read from a stream only needs to be known when a stream read is
 executed. Thus, aspects of representation have stricter rules as to when they
 can be specified.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[Confirming the value of an aspect with an
+operational or representation item should never change the semantics of
+the aspect. Thus Size = 8 (for example) means the same thing whether it
+was specified with a representation item or whether the compiler chose this
+value by default.]}
 @end{Metarules}
 
 @begin{Syntax}
@@ -180,28 +187,60 @@ This is subtle, but it seems like the least confusing set of rules.
   See @RefSec{Record Representation Clauses}.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
 @Defn{representation of an object}
 @Defn2{Term=[size], Sec=(of an object)}The @i{representation} of an
 object consists of a certain
 number of bits (the @i(size) of
 the object).
-These are the bits that are normally read
+@Chg{Version=[2],New=[For an object of an elementary type, these],Old=[These]}
+are the bits that are normally read
 or updated by the machine code
 when loading, storing, or operating-on the value of the object.
-This includes some padding bits, when the size of the object
-is greater than the size of its subtype.
-@Defn{gaps}
+@Chg{Version=[2],New=[For an object of a composite type, these
+are the bits reserved for this object, and include bits occupied by
+subcomponents of the object. If],Old=[This includes some padding bits, when]}
+the size of @Chg{Version=[2],New=[an],Old=[the]} object
+is greater than @Chg{Version=[2],New=[that],Old=[the size]} of its subtype@Chg{Version=[2],
+New=[, the additional bits are padding bits.],Old=[.
+@Defn{gaps}]}
 @Defn{padding bits}
-Such padding bits are considered to be part of the representation of the
+@Chg{Version=[2],New=[For an elementary object, these],Old=[Such]} padding bits
+@Chg{Version=[2],New=[],Old=[are considered to be part of the representation of the
 object, rather than being gaps between objects,
-if these bits are normally read and updated.
+if these bits]} are normally read and updated@Chg{Version=[2],New=[ along
+with the others. For a
+composite object padding bits might not be read or updated in any given
+composite operation, depending on the implementation],Old=[]}.
+
 @begin{Honest}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
 @PDefn{contiguous representation}
 @PDefn{discontiguous representation}
 Discontiguous representations are allowed,
 but the ones we're interested in here are generally contiguous
-sequences of bits.
+sequences of bits.@Chg{Version=[2],New=[ For a discontiguous representation,
+the size doesn't necessarily describe the @lquotes@;footprint@rquotes of
+the object in memory (that is, the amount of space taken in the address space
+for the object).],Old=[]}
 @end{Honest}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[In the case of composite objects, we want the
+implementation to have the flexibility to either do operations
+component-by-component, or with a block operation covering all of the bits. We
+carefully avoid giving a preference in the wording. There is no requirement
+for the choice to be documented, either, as the implementation can make that
+choice based on many factors, and could make a different choice for different
+operations on the same object.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[In the case of a properly aligned, contiguous
+object whose size is a multiple of the storage unit size, no other bits should
+be read or updated as part of operating on the object. We don't say this
+normatively because it would be difficult to normatively define
+@lquotes@;properly aligned@rquotes or @lquotes@;contiguous@rquotes.]}
+@end{Discussion}
 @begin{Ramification}
 @Leading@;Two objects with the same value do not necessarily have the same
 representation.
@@ -373,6 +412,9 @@ array object)
 pragma Discard_Names (when applied to an exception)
 
 pragma Asynchronous (applies to procedures)
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
+@ChgAdded{Version=[2],Text=[pragma No_Return (applies to procedures)]}
 @end{Itemize}
 @end{Ramification}
 
@@ -388,25 +430,28 @@ names a subtype is type-related.
 @PDefn2{Term=[type-related], Sec=(aspect)}]}
 
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009],ARef=[AI95-00137-01]}
+@ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgAdded{Version=[1],Type=[Leading],Text=[The following operational items are
 type-related:]}
 @begin{Itemize}
 
-@ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[1],Kind=[AddedNormal]}
 @ChgAdded{Version=[1],Text=[External_Tag clause]}
 
-@ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[1],Kind=[AddedNormal]}
 @ChgAdded{Version=[1],Text=[Read clause]}
 
-@ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[1],Kind=[AddedNormal]}
 @ChgAdded{Version=[1],Text=[Write clause]}
 
-@ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[1],Kind=[AddedNormal]}
 @ChgAdded{Version=[1],Text=[Input clause]}
 
-@ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[1],Kind=[AddedNormal]}
 @ChgAdded{Version=[1],Text=[Output clause]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00270-01]}
+@ChgAdded{Version=[2],Text=[Stream_Size clause]}
 
 @end{Itemize}
 @end{Ramification}
@@ -439,7 +484,7 @@ the same aspect of the type.]}
   @ChgRef{Version=[1],Kind=[Added]}
   @ChgAdded{Version=[1],Text=[Unlike representation items, operational
   items can be specified on
-  partial types. Since they don't affect the representation, the full
+  partial views. Since they don't affect the representation, the full
   declaration need not be known to determine their legality.]}
 @end{Ramification}
 
@@ -473,11 +518,13 @@ or has any user-defined primitive subprograms.
   part, but not of the parent part.
 @end{Reason}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01],Ref=[8652/0011]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01],Ref=[8652/0011],ARef=[AI95-00117-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
 @Chg{New=[Operational and r],Old=[R]}epresentation aspects of a generic formal
 parameter are the same as those of the actual.
-@Chg{New=[Operational and representation aspects of a partial view are the
-same as those of the full view.],Old=[]}
+@Chg{New=[Operational and representation aspects @Chg{Version=[2],New=[],
+Old=[of a partial view ]}are the
+same @Chg{Version=[2],New=[same for all views of a type],Old=[as those of the full view]}.],Old=[]}
 A type-related representation item is not allowed for a
 descendant of a generic formal untagged type.
 @begin{Ramification}
@@ -494,6 +541,14 @@ type-related representation items for them
 is not allowed, unless they are tagged (in which case only
 the extension part is affected in any case).
 @end{Reason}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+@ChgAdded{Version=[2],Text=[All views of a type, including the incomplete
+and partial views, have the same operational and representation aspects.
+That's important so that the properties don't change when changing views.
+While most aspects are not available for an incomplete view, we don't want
+to leave any holes by not saying that they are the same.]}
+@end{Ramification}
 
 A representation item that specifies the Size for a given subtype,
 or the size or storage place for an object (including a component)
@@ -666,6 +721,11 @@ If an operational aspect is @i<specified> for an entity (meaning
 that it is either directly specified or inherited), then that aspect of the
 entity is as specified. Otherwise, the aspect of the entity has the default
 value for that aspect.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[A representation item that specifies an aspect of
+representation that would have been chosen in the absence of the representation
+item is said to be @i{confirming}.@Defn2{Term=[confirming], Sec=(representation item)}]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -712,6 +772,16 @@ nonstatic expressions)}
 The recommended level of support for all representation items
 is qualified as follows:
 @begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[A confirming representation item should
+be supported.]}
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[A confirming representation item not not be
+  possible for some entities. For instance, consider an unconstrained array.
+  The size of such a type is implementation-defined, and may not actually
+  be a representable value, or may not be static.]}
+@end{Honest}
 An implementation need not support representation items containing
 nonstatic expressions,
 except that an implementation should support a representation item
@@ -755,8 +825,15 @@ Size for a given composite subtype, nor the size or storage place for an object
 on the subtype and its composite subcomponents (if any)
 are all static constraints.
 
-An aliased component, or a component whose type is by-reference,
-should always be allocated at an addressable location.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
+@Chg{Version=[2],New=[An implementation need not support a nonconfirming
+representation item if it could cause an aliased object or an object of a
+by-reference type to be allocated at a nonaddressable location or, when the
+alignment attribute of the subtype of such an object is nonzero, at an address
+that is not an integral multiple of that alignment.],Old=[An aliased component,
+or a component whose type is by-reference, should always be allocated at an
+addressable location.]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-0079}
 The intent is that access types, type System.Address,
@@ -764,26 +841,77 @@ and the pointer used for a by-reference parameter should
 be implementable as a single machine address @em bit-field pointers
 should not be required.
 (There is no requirement that this implementation be used @em we just
-want to make sure it@Chg{New=['],Old=[]}s feasible.)
+want to make sure @Chg{New=[it's],Old=[its]} feasible.)
 @end{Reason}
 @begin{ImplNote}
-Note that the above rule does not apply to types that merely allow
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
+@Chg{Version=[2],New=[We want subprograms to able to assume the properties of
+the types of their parameters inside of subprograms. While many objects can be
+copied to allow this
+(and thus do not need limitations), aliased or by-reference objects cannot
+be copied (their memory location is part of their identity). Thus,],
+Old=[Note that]}
+the above rule does not apply to types that merely allow
 by-reference parameter passing;
 for such types, a copy typically needs to be made at the call site
 when a bit-aligned component is passed as a parameter.
 @end{ImplNote}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[An implementation need not support a nonconfirming
+representation item if it could cause an aliased object of an elementary type
+to have a size other than that which would have been chosen by default.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Since all bits of elementary objects participate
+  in operations, aliased objects must not have a different size than that
+  assumed by users of the access type.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[An implementation need not support a nonconfirming
+representation item if it could cause an aliased object of a composite type, or
+an object whose type is by-reference, to have a size smaller than that which
+would have been chosen by default.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Unlike elementary objects, there is no
+  requirement that all bits participate in operations. Thus, as long as the
+  object is the same or larger in size than that expected by the access type,
+  all is well.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[An implementation need not support a nonconfirming
+subtype-specific representation item specifying an aspect of representation of
+an indefinite or abstract subtype.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Aspects of representations are often not
+  well-defined for such types.]}
+@end{Reason}
+
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00075}
-A pragma Pack will typically not pack so tightly as to disobey the above rule.
-A Component_Size clause or @nt{record_representation_clause} will
-typically b@Chg{New=[e],Old=[y]} illegal if it disobeys the above rule.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
+A pragma Pack will typically not pack so tightly as to disobey the above
+@Chg{Version=[2],New=[rules],Old=[rule]}. A Component_Size clause or
+@nt{record_representation_clause} will typically @Chg{New=[be],Old=[by]}
+illegal if it disobeys the above @Chg{Version=[2],New=[rules],Old=[rule]}.
 Atomic components have similar restrictions
 (see @RefSec{Shared Variable Control}).
 @end{Ramification}
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[For purposes of these rules, the determination of
+whether a representation item applied to a type could cause an object to have
+some property is based solely on the properties of the type itself, not on any
+available information about how the type is used. In particular, it presumes
+that minimally aligned objects of this type might be declared at some point.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The recommended level of support for all representation items should be
 followed.]}]}
-@end{Itemize}
 @end{ImplAdvice}
 
 @begin{Incompatible83}
@@ -859,9 +987,22 @@ Some of the more stringent requirements are moved to
   stream attributes. As part of this, @nt{representation_clause} was
   renamed to @nt{aspect_clause}.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01],ARef=[AI95-00326-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Add wording to say that the
+  partial and full views have the same operational and representation aspects.
+  Ada 2005 extends this to cover all views, including the incomplete view.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed operational items
   to have inheritance specified for each such aspect.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+  @ChgAdded{Version=[2],Text=[Added wording to define confirming representation
+  items, and to suggest that they should always be supported. Clarified the
+  representation of an object (with great difficulty reaching agreement).
+  Added wording to say that representation items on aliased and by-reference
+  objects never need be supported if they would not be implementable even
+  if other recommended level of support says otherwise.]}
 @end{DiffWord95}
 
 
@@ -1129,12 +1270,24 @@ intended to imply that, for example, on an 80386 running MS-DOS,
 the word might be 16 bits, even though the hardware can support 32
 bits.
 
-A word is what ACID refers to as a @lquotes@;natural hardware boundary@rquotes@;.
+A word is what ACID refers to as a @lquotes@;natural hardware
+boundary@rquotes@;.
 
 Storage elements may, but need not be, independently addressable
 (see @RefSec{Shared Variables}).
 Words are expected to be independently addressable.
 @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
+@ChgAdded{Version=[2],Text=[@Defn{machine scalar}
+A @i{machine scalar} is an amount of storage that can be conveniently and
+efficiently loaded, stored, or operated upon by the hardware. Machine scalars
+consist of an integral number of storage elements. The set of machine scalars
+is implementation defined, but must include at least the storage element and
+the word. Machine scalars are used to interpret @nt{component_clause}s when the
+nondefault bit ordering applies.]}
+@ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The set of machine scalars.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Chg{New=[The following representation attributes are defined: Address,
@@ -2283,6 +2436,9 @@ except for certain explicit exceptions.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
   External_Tag is never inherited.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
+  @ChgAdded{Version=[2],Text=[Added the definition of machine scalar.]}
 @end{DiffWord95}
 
 
