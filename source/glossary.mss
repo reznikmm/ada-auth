@@ -1,20 +1,19 @@
 @Part(glossary, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:03 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 @LabeledInformativeAnnex{Glossary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/glossary.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @begin{Intro}
 @Defn{Glossary}
 This Annex contains informal descriptions of some terms used in this
 @SelfRef.
 To find more formal definitions, look the term up in the index.
-@Chg{}
-@EndChg{}
-@oChgRef{94-4693.r}
+
+
 
 @EvilInclude{ada.glo_sorted}
 @end{Intro}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:01 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
 @LabeledChapter{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -343,11 +343,8 @@ A parameter of a by-reference type is passed by reference.
 Each value of a by-reference type has an associated object.
 For a parenthesized expression, @nt{qualified_expression},
 or @nt{type_conversion}, this object is the one associated with the
-operand.@oChg{}@oEndChg{}
-@oChgRef{94-4774.a}
-@begin{oChgNote}
-  Moved rule about tags to @RefSecNum{Tagged Types and Type Extensions}.
-@end{oChgNote}
+operand.
+
 @begin{Ramification}
 By-reference parameter passing makes sense only if there is an
 object to reference; hence, we define such an object for each
@@ -419,7 +416,7 @@ is passed by copy or by reference.
 If one @nt<name> denotes a part of a formal parameter,
 and a second @nt<name> denotes a part of
 a distinct formal parameter or an object that is not
-@oBigChg{}part of@oEndBigChg{} a formal parameter,
+part of a formal parameter,
 then the two @nt<name>s are
 considered @i(distinct access paths).
 If an object is of a type for which the parameter passing
@@ -427,18 +424,11 @@ mechanism is not specified, then it is a bounded error to
 assign to the object via one access path,
 and then read the value of the object
 via a distinct access path,
-@oBigChg{}
+
 unless the first access path denotes a part of a formal parameter that
 no longer exists at the point of the second access
 @Redundant[(due to leaving the corresponding callable construct).]
-@oEndBigChg{}
-@oChgRef{94-4573.a}
-@oChgRef{94-4572.a}
-@oChgRef{94-4751.a}
-@oChgRef{94-4572.b}
-@oChgRef{94-4751.b}
-@oChgRef{94-4572.c}
-@oChgRef{94-4751.c}
+
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The possible consequences are that Program_Error is raised,
 or the newly assigned value is read,
@@ -473,13 +463,13 @@ being visible through some other access path,
 just as if the parameter were of an access type.
 @end{Reason}
 @begin{ImplNote}
-The implementation can keep a copy @oChg{}in a register of a parameter
-whose parameter-passing mechanism is not specified.@oEndChg{}
+The implementation can keep a copy in a register of a parameter
+whose parameter-passing mechanism is not specified.
 If a different access path is used to update the object (creating
 a bounded error situation),
 then the implementation can still use the value of the register,
 even though the in-memory version of the object has been changed.
-However, to @oChg{}@oEndChg{}keep the error properly bounded,
+However, to keep the error properly bounded,
 if the implementation chooses to read the in-memory version,
 it has to be consistent -- it cannot then assume that something it has
 proven about the register is true of the memory location.
@@ -492,7 +482,7 @@ the range 1..3, then it need not perform the constraint check if it
 uses the register value.
 However, if the memory value of L(6) has been changed to 4,
 and the implementation uses that memory value,
-then it had better not @oChg{}alter@oEndChg{} memory outside of A.
+then it had better not alter memory outside of A.
 
 Note that the rule allows the implementation to pass a parameter by
 reference and then keep just part of it in a register, or,
@@ -507,9 +497,9 @@ in standard Ada:
 @begin{Example}
 @key[procedure] Move ( Source  : @key[in]  String;
                  Target  : @key[out] String;
-                 @chg[]Drop    : @key[in]  Truncation := Error;
+                 Drop    : @key[in]  Truncation := Error;
                  Justify : @key[in]  Alignment  := Left;
-                 Pad     : @key[in]  Character  := Space);@endchg{}
+                 Pad     : @key[in]  Character  := Space);
 --@i{ Copies elements from Source to Target (safely if they overlap)}
 @end{Example}
 
@@ -517,7 +507,7 @@ This is from the standard string handling package.
 It would be embarrassing if this couldn't be written in Ada!
 
 The ``then'' before ``read'' in the rule implies that the implementation
-can move a read to an earlier place in the code, but not to a @oChg{}later@oEndChg{}
+can move a read to an earlier place in the code, but not to a later
 place after a potentially aliased assignment.
 Thus, if the subprogram reads one of its parameters into a local
 variable, and then updates another potentially aliased one,
@@ -718,11 +708,10 @@ The default calling convention is Intrinsic for the following:
   any other implicitly declared subprogram unless it is
   a dispatching operation of a tagged type;
 
-@oBigChg{}
+
   an inherited subprogram of a generic formal tagged type
   with unknown discriminants;
-@oEndBigChg{}
-@oChgRef{94-4774.b}
+
 
   an attribute that is a subprogram;
 
@@ -730,9 +719,8 @@ The default calling convention is Intrinsic for the following:
   within a @nt{protected_body}.
 @end{Itemize}
 
-@Redundant[@oBigChg{}The@oEndBigChg{} Access attribute is not allowed for
+@Redundant[The Access attribute is not allowed for
 Intrinsic subprograms.]
-@oChgRef{94-4774.b}
 @begin{Ramification}
   The Intrinsic calling convention really represents any number of
   calling conventions at the machine code level;
@@ -764,7 +752,7 @@ Intrinsic subprograms.]
   The ``implicitly declared subprogram'' above refers to
   predefined operators (other than the "=" of a tagged type) and
   the inherited subprograms of
-  untagged types.@oChg{}@oEndChg{}
+  untagged types.
 @end{Ramification}
 @end{Multiple}
 
@@ -819,26 +807,13 @@ parameters, the designated subtypes statically match.
 @Defn2{Term=[profile],Sec=(subtype conformant)}
 Two profiles are @i{subtype conformant} if they are mode-conformant,
 corresponding subtypes of the profile statically match,
-and the associated calling conventions are the @oBigChg{}same.@oEndBigChg{}
-@oChgRef{94-4774.b}
+and the associated calling conventions are the same.
 The profile of a generic formal subprogram is not subtype-conformant
 with any other profile.
 @PDefn2{Term=[statically matching],Sec=(required)}
-@begin{oBigChgNote}
-  In version 5.0, two profiles could not be subtype conformant
-  if they were intrinsic; this is no longer true.
-  Instead, each rule that required subtype conformance has been
-  modified, if necessary, to explicitly disallow intrinsics.
-  We also added an index entry, "subtype conformance, required"
-  which refers to each rule that requires subtype conformance.
 
-  There is no change in the intent of the rules,
-  but this change fixes the anomaly that an intrinsic
-  subprogram could never have a body, since the body
-  has to be fully conformant (and therefore subtype conformant).
-@end{oBigChgNote}
 @begin{Ramification}
-@PDefn{generic contract issue}@oBigChg{}@oEndBigChg{}
+@PDefn{generic contract issue}
 @end{Ramification}
 
 @Defn2{Term=[full conformance], Sec=(for profiles)}
@@ -856,7 +831,7 @@ subprogram or entry are always the same by definition.
 
 @Defn2{Term=[full conformance], Sec=(for expressions)}
 Two expressions are @i(fully conformant) if,
-@oBigChg{}
+
 @Redundant[after replacing each use of an operator with the equivalent
 @nt{function_call}:]
 @begin{Itemize}
@@ -870,10 +845,8 @@ or to a different expanded name in the other; and
 each @nt{direct_name}, @nt{character_literal}, and @nt{selector_name}
 that is not part of the @nt{prefix} of an expanded name in one
 denotes the same declaration as the corresponding
-@nt{direct_name}, @nt{character_literal},@oEndBigChg{}
+@nt{direct_name}, @nt{character_literal},
 or @nt{selector_name} in the other; and
-@oChgRef{94-4718.c}
-@oChgRef{94-4752.a}
 @begin{Ramification}
 Note that it doesn't say ``respectively''
 because a @nt{direct_name} can correspond to a @nt{selector_name},
@@ -951,22 +924,21 @@ fully conform.
 @end{StaticSem}
 
 @begin{ImplPerm}
-@BigChg{}
+
 An implementation may declare an operator declared in a language-defined
 library unit to be intrinsic.
-@EndBigChg{}
+
 @end{ImplPerm}
 
 @begin{Extend83}
 The rules for full conformance are relaxed @em they are now based on
 the structure of constructs, rather than the sequence of lexical
 elements.
-@oChg{}
+
 This implies, for example, that "(X, Y: T)"
 conforms fully with "(X: T; Y: T)",
 and "(X: T)" conforms fully with "(X: @key[in] T)".
-@oEndChg{}
-@oChgRef{94-4718.c}
+
 @end{Extend83}
 
 @LabeledSubSection{Inline Expansion of Subprograms}
@@ -1041,9 +1013,8 @@ Note, in particular, that the recommendation
 cannot always be followed for a recursive call,
 and is often infeasible for entries.
 Note also that the implementation can inline calls even
-@oChg{}when@oEndChg{} no such desire was expressed by a pragma,
+when no such desire was expressed by a pragma,
 so long as the semantics of the program remains unchanged.
-@oChgRef{94-4477.a}
 @end{Ramification}
 @end{ImplPerm}
 
@@ -1054,11 +1025,11 @@ Such a @nt{pragma} applies to all of the denoted entities.
 @end{NotesNotes}
 
 @begin{Extend83}
-@oChg{}
+
 A @nt{pragma} Inline is allowed inside a @nt{subprogram_body} if there
 is no corresponding @nt{subprogram_declaration}.
 This is for uniformity with other program unit pragmas.
-@oEndChg{}
+
 @end{Extend83}
 
 @LabeledSection{Subprogram Calls}
@@ -1406,22 +1377,19 @@ the formal parameter object is created, and:
 @end{Reason}
 
   For a composite type with discriminants or
-  @oBigChg{}that has implicit initial values for any subcomponents@oEndBigChg{}
+  that has implicit initial values for any subcomponents
   (@lSeeSecNum{Object Declarations}),
   the behavior is as for an @key[in out] parameter
   passed by copy.
-@oChgRef{94-4783.a}
-@oChgRef{94-4785.a}
 @begin{Reason}
-  @oBigChg{}This ensures that no part of an object of such a type
-  can@oEndBigChg{} become ``de-initialized'' by being part of an @b(out)
+  This ensures that no part of an object of such a type
+  can become ``de-initialized'' by being part of an @b(out)
   parameter.
-@oChgRef{94-4783.b}
 @end{Reason}
 @begin{Ramification}
-  @oChg{}This includes an array type whose component type is an access type,
+  This includes an array type whose component type is an access type,
   and a record type with a component that has a @nt{default_expression},
-  among other things.@oEndChg{}
+  among other things.
 @end{Ramification}
 
   For any other type, the formal parameter is uninitialized.
@@ -1621,19 +1589,15 @@ If the result type is a return-by-reference type,
 then a check is made that the return expression is one of the
 following:
 @begin(itemize)
-@oBigChg{}
+
   a @nt{name} that denotes an object view whose accessibility level is
   not deeper than that of the master that elaborated the function body;
   or
 
   a parenthesized expression or @nt{qualified_expression}
   whose operand is one of these kinds of expressions.
-@oEndBigChg{}
-@oChgRef{94-4715.a}
-@begin{oChgNote}
-  Function calls and @nt{type_conversions} are names,
-  so there's no need to mention them separately.
-@end{oChgNote}
+
+
 @end(itemize)
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -1771,15 +1735,14 @@ generic function has the corresponding number of parameters.
 (whether the operator is declared with an explicit
 @nt{subprogram_specification} or by a @nt{generic_instantiation}).
 
-An explicit @oChg{}declaration@oEndChg{} of "/=" shall not have a result
+An explicit declaration of "/=" shall not have a result
 type of the predefined type Boolean.
 @end{Legality}
 
 @begin{StaticSem}
-A @oChg{}declaration of "=" whose result type is
-Boolean implicitly declares a declaration@oEndChg{} of "/=" that
+A declaration of "=" whose result type is
+Boolean implicitly declares a declaration of "/=" that
 gives the complementary result.
-@oChgRef{94-4701.a}
 @end{StaticSem}
 
 @begin{NotesNotes}
@@ -1801,9 +1764,9 @@ A := "+"(B, C);
 @end{Examples}
 
 @begin{Extend83}
-Explicit @oChg{}declarations@oEndChg{} of "=" are now permitted for any
+Explicit declarations of "=" are now permitted for any
 combination of parameter and result types.
 
-Explicit @oChg{}declarations@oEndChg{} of "/=" are now permitted, so long
+Explicit declarations of "/=" are now permitted, so long
 as the result type is not Boolean.
 @end{Extend83}

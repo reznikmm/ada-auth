@@ -1,11 +1,11 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedB(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $}
+@comment{$Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $}
 
 @begin{Intro}
 @begin{AARMandRM9XOnly}
-@oChg{}
+
 ISO (the International Organization for Standardization)
 and IEC (the International Electrotechnical Commission)
 form the specialized system for worldwide standardization.
@@ -35,23 +35,18 @@ Joint Technical Committee ISO/IEC JTC 1,
 This second edition cancels and replaces the first edition
 (ISO 8652:1987),
 of which it constitutes a technical revision.
-@oEndChg{}
 
-@Chg{}Annexes A to J form an integral part of this
+
+Annexes A to J form an integral part of this
 International Standard.
-Annexes K to P are for information only.@EndChg{}
-@begin{oChgNote}
-  Changed Preface as per instructions from
-  Keith Brannon at ISO.
-@end{oChgNote}
-@begin{ChgNote}
-  Changed Annex letters as per instructions from ISO.
-@end{ChgNote}
+Annexes K to P are for information only.
+
+
 @end{AARMandRM9XOnly}
 @begin{Discussion}
 This document is the @Value{DocumentName} (@Value{ReadableNickname}).
 It contains the entire text of the Ada 9X standard
-@Chg{}(ISO/IEC 8652:@Value{StandardYear}(E)),@EndChg{} plus various annotations.
+(ISO/IEC 8652:@Value{StandardYear}(E)), plus various annotations.
 It is intended primarily for compiler writers,
 validation test writers,
 and other language lawyers.
@@ -64,21 +59,21 @@ rules.
 This document lists the syntax rules of Ada 9X.
 @end{Syntax9XOnly}
 @begin{Chg839XOnly}
-@Chg{}
+
 This document lists in detail the changes introduced in the second
 (Ada 9X) edition of the Ada standard (ISO/IEC 8652:1995)
 with respect to the first (Ada 83) edition (ISO 8652:1987).
-@EndChg{}
+
 @end{Chg839XOnly}
 
 @begin{AARMandRM9XOnly}
 @UnNumberedB{Introduction}
 
 @begin{Intro}
-@Chg{}
+
 This is the
 @Value{DocumentName}.
-@EndChg{}
+
 
 Other available Ada documents include:
 @begin{Itemize}
@@ -93,7 +88,7 @@ Programmers should read this first.
   else=<
 
 The @Value{RM9XDocumentName} (RM).
-This is the International Standard @Chg{}@em ISO/IEC 8652:@Value{StandardYear}(E).@EndChg{}>}
+This is the International Standard @em ISO/IEC 8652:@Value{StandardYear}(E).>}
 
 @Case{DocumentNickname,
   Chg83=<>,
@@ -429,10 +424,10 @@ applicable to all types of a given class.
 @SubHeading{Language Changes}
 
 @begin{Intro}
-@Chg{}
+
 This @SelfRef replaces the first edition of 1987.
 In this edition,
-@EndChg{}
+
 the following major language changes have been incorporated:
 @begin{Itemize}
 Support for standard 8-bit and 16-bit character sets.
@@ -493,39 +488,37 @@ application areas:
 
 @begin{Intro}
 
-@BigChg{}
+
 @Defn{instructions for comment submission}
 @Defn{comments, instructions for submission}
 Informal comments on this International Standard may be sent via
 e-mail to @b(ada-comment@@sw-eng.falls-church.va.us).
 If appropriate, the Project Editor will initiate
 the defect correction procedure.
-@EndBigChg{}
+
 
 Comments should use the following format:
 @begin(display)
 @TabSet(0.5in)
 @\@b(!topic) @i[Title summarizing comment]
-@Chg{}@\@b(!reference) RM95-@i{ss.ss(pp)}@EndChg{}
+@\@b(!reference) RM95-@i{ss.ss(pp)}
 @\@b(!from) @i{Author Name yy-mm-dd}
 @\@b(!keywords) @i{keywords related to topic}
 @\@b(!discussion)
 
-@Chg{}@\@i{text of discussion}@EndChg{}
+@\@i{text of discussion}
 @end(display)
-@begin{ChgNote}
-Removed ";@Value(Version)" from the !reference line.
-@end{ChgNote}
+
 
 where @i(ss.ss) is the section, clause or subclause number,
 @i(pp) is the paragraph number where applicable,
 and @i(yy-mm-dd) is the date the comment was sent.
 The date is optional, as is the @b(!keywords) line.
-@Chg{}
+
 
 Multiple comments per e-mail message are acceptable.
 Please use a descriptive ``Subject'' in your e-mail message.
-@EndChg{}
+
 
 When correcting typographical errors or making minor wording
 suggestions, please put the correction directly as the topic of the
@@ -539,7 +532,7 @@ additional information in the body of the comment, for example:
 @\@b(!topic) it[']s meaning is not defined
 @end{Display}
 
-@Chg{}
+
 Formal requests for interpretations and for reporting defects in this
 International Standard may be made in accordance with the ISO/IEC
 JTC1 Directives and the ISO/IEC JTC1/SC22 policy for interpretations.
@@ -548,7 +541,7 @@ under the JTC1 procedures.
 A response will be provided and, if appropriate,
 a Technical Corrigendum will be issued
 in accordance with the procedures.
-@EndChg{}
+
 
 @end{Intro}
 
@@ -594,7 +587,7 @@ B. Brosgol (consultant);
 R. Brukardt (RR Software);
 N. Cohen (IBM);
 R. Dewar (NYU);
-@Chg{}G. Dismukes (TeleSoft);@EndChg{}
+G. Dismukes (TeleSoft);
 A. Evans (consultant);
 A. Gargaro (Computer Sciences);
 M. Gerhardt (ESL);
@@ -605,7 +598,7 @@ P. Hilfinger (UC/Berkeley); @Comment{No longer a DR.}
               else= "B. Kaellberg"} (CelsiusTech: Sweden);
                    @Comment{XRG - Sweden}
                    @Comment{"ae" should be "o" with a slash throught it.}
-M. Kamrad II @oChg{}(Unisys);@oEndChg{}
+M. Kamrad II (Unisys);
 J. van Katwijk (Delft University of Technology: The Netherlands); @Comment{XRG - The Netherlands}
 V. Kaufman (Russia); @Comment{XRG - Russia}
 P. Kruchten (Rational); @Comment{Also XRG - France}
@@ -624,23 +617,20 @@ E. Vasilescu (Grumman);
 J. Vladik (Prospeks s.r.o.:
    Czech Republic); @Comment{XRG - Czech Republic}
 S. Van Vlierberghe (OFFIS: Belgium).  @Comment{XRG - Belgium}
-@begin{ChgNote}
-  Various changes at the request of some people mentioned above,
-  and Chris Anderson.
-@end{ChgNote}
+
 
 Other valuable feedback influencing the revision
 process was provided by
 the Ada 9X Language Precision
-Team (Odyssey Research Associates), the Ada 9X @Chg{}User/Implementer
-Teams (AETECH, Tartan, TeleSoft),@EndChg{} the Ada 9X Implementation
+Team (Odyssey Research Associates), the Ada 9X User/Implementer
+Teams (AETECH, Tartan, TeleSoft), the Ada 9X Implementation
 Analysis Team (New York University) and the Ada community-at-large.
 
-@Chg{}
+
 Special thanks go to R. Mathis,
 Convenor of ISO/IEC JTC1/SC22 Working Group 9.
 @Comment{Also XRG - U.S.}
-@EndChg{}
+
 
 The Ada 9X Project was sponsored by the Ada Joint Program Office.
 Christine M. Anderson at the Air Force Phillips Laboratory (Kirtland

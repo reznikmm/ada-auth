@@ -1,16 +1,16 @@
 @Part(11, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:02 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
 @LabeledChapter{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 This section defines the facilities for dealing with errors or other
 exceptional situations that arise during program execution.
-@end{Redundant}
+]
 @Defn{exception occurrence}
 @IndexSeeAlso{Term=[condition],See=(exception)}
 @IndexSee{Term=[signal (an exception)],See=(raise)}
@@ -20,7 +20,7 @@ exceptional situations that arise during program execution.
   Text=<An @i(exception) represents a kind of exceptional situation;
   an occurrence of such a situation (at run time)
   is called an @i(exception occurrence).
-  @begin{Redundant}
+  @redundant[
   @PDefn2{Term=[raise], Sec=(an exception)}
   To @i{raise} an exception is to abandon normal program execution so
   as to draw attention to the fact that the corresponding situation has
@@ -28,7 +28,7 @@ exceptional situations that arise during program execution.
   @PDefn2{Term=[handle], Sec=(an exception)}
   Performing some actions in response to the arising of an exception
   is called @i{handling} the exception.
-  @end{Redundant}>}
+  ]>}
 @begin{Honest}
 @PDefn2{Term=[handle], Sec=(an exception occurrence)}
 ...or handling the exception occurrence.
@@ -46,7 +46,7 @@ we sometimes use ``@i{occurrence}'' as a
 short-hand for ``exception occurrence.''
 @end{Honest}
 
-@begin{Redundant}
+@redundant[
 An @nt{exception_declaration} declares a name for an exception.
 An exception is raised initially either by a @nt{raise_statement}
 or by the failure of a language-defined check.
@@ -54,7 +54,7 @@ When an exception arises, control can be transferred to a
 user-provided @nt{exception_handler} at the end of a
 @nt{handled_sequence_of_statements},
 or it can be propagated to a dynamically enclosing execution.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{DiffWord83}
@@ -187,10 +187,10 @@ We explicitly define elaboration for @nt{exception_declaration}s.
 @LabeledSection{Exception Handlers}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 The response to one or more exceptions is specified by an
 @nt{exception_handler}.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -274,8 +274,7 @@ that are propagated by the @nt{sequence_of_statement}s.]
 @end{RunTime}
 
 @begin{Examples}
-@i{Example of @oChg{}an@oEndChg{} exception handler:}
-@oChgRef{94-4771.a}
+@i{Example of an exception handler:}
 @begin{Example}
 @key[begin]
    Open(File, In_File, "input.txt");   @i[-- @lSeeSecNum{File Management}]
@@ -317,9 +316,9 @@ The syntax rule for @nt{choice_parameter_specification} is new.
 @LabeledSection{Raise Statements}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{raise_statement} raises an exception.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -378,7 +377,7 @@ any force.
 @LabeledSection{Exception Handling}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 When an exception occurrence is raised,
 normal program execution is abandoned
 and control is transferred to an applicable @nt{exception_handler},
@@ -390,7 +389,7 @@ exceptional event.
 To @i(propagate) an exception occurrence is to raise it again in
 another context; that is,
 to fail to respond to the exceptional event in the present context.
-@end{Redundant}
+]
 @begin{Ramification}
 In other words, if the execution of a given construct raises an exception,
 but does not handle it,
@@ -634,10 +633,8 @@ occurrence.
 The Exception_Name functions return the full expanded name of the
 exception, in upper case,
 starting with a root library unit.
-@oBigChg{}For an exception declared immediately within package Standard,
-the @nt{defining_identifier} is returned.@oEndBigChg{}
-@oChgRef{94-4774.d}
-@oChgRef{94-4828.d}
+For an exception declared immediately within package Standard,
+the @nt{defining_identifier} is returned.
 The result is implementation defined if the exception is declared within
 an unnamed @nt{block_statement}.
 @begin{Ramification}
@@ -738,10 +735,9 @@ Exception_Message (by default) and Exception_Information should produce
 information useful for debugging.
 Exception_Message should be short (about one line),
 whereas Exception_Information can be long.
-@oBigChg{}Exception_Message should not include the Exception_Name.
+Exception_Message should not include the Exception_Name.
 Exception_Information should include both the Exception_Name and the
-Exception_Message.@oEndBigChg{}
-@oChgRef{94-4912.a}
+Exception_Message.
 @begin{Reason}
 It may seem strange to define two subprograms whose semantics is
 implementation defined.
@@ -754,7 +750,7 @@ debugging/error analysis on that system.
 @end{Reason}
 @begin{ImplNote}
 As an example, Exception_Information might include
-@oChg{}@oEndChg{}information identifying the location where the exception
+information identifying the location where the exception
 occurred, and, for predefined exceptions, the specific kind of
 language-defined check that failed.
 There is an implementation trade-off here, between how much
@@ -765,8 +761,7 @@ The string returned should be in a form suitable for printing to an
 error log file.
 This means that it might need to contain line-termination control
 characters with implementation-defined I/O semantics.
-@oChg{}The string should neither start nor end with a newline.@oEndChg{}
-@oChgRef{94-4912.a}
+The string should neither start nor end with a newline.
 
 If an implementation chooses to provide additional functionality
 related to exceptions and their occurrences,
@@ -905,7 +900,7 @@ Exceptions.
 @begin{Examples}
 Exception handling may be used to separate the detection of an error
 from the response to that error:
-@Chg{}
+
 @begin{Example}
 @key[with] Ada.Exceptions;
 @key[use] Ada;
@@ -972,11 +967,7 @@ from the response to that error:
         @key[raise];
 @key[end] Main;
 @end{Example}
-@EndChg{}
-@oChgRef{94-4556.a}
-@oChgRef{94-4561.a}
-@ChgRef{94-5000.g}
-@ChgRef{94-5001.i}
+
 
 In the above example, the File_System package contains information about
 detecting certain exceptional situations,
@@ -1144,11 +1135,10 @@ or a generic instantiation is elaborated, check that the body
 of the corresponding unit has already been elaborated.]
 
 @RootDefnNext{Accessibility_Check}
-@oBigChg{}
+
 Accessibility_Check @\@Redundant[Check the accessibility level of an
 entity or view.]
-@oEndBigChg{}
-@oChgRef{94-4715.a}
+
 @end{Description}
 
 @Redundant[The following check corresponds to situations in which the
@@ -1229,12 +1219,11 @@ automatically performs the check in parallel with doing useful work)
 or nearly free (for example, the check is a tiny portion of an
 expensive run-time system call),
 the implementation should not bother to suppress the check.
-@oChg{}
+
 Similarly, if the implementation detects the failure at compile time
 and provides a warning message,
 there is no need to actually suppress the check.
-@oEndChg{}
-@oChgRef{94-4501.a}
+
 @end{ImplNote}
 @end{ImplAdvice}
 
@@ -1301,7 +1290,7 @@ which was included in @nt{selected_component} in RM83.
 @LabeledSection{Exceptions and Optimization}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{language-defined check}
 @Defn2{Term=[check], Sec=(language-defined)}
 @Defn{run-time error}
@@ -1311,7 +1300,7 @@ which was included in @nt{selected_component} in RM83.
 This clause gives permission to the implementation to perform
 certain ``optimizations'' that do not necessarily preserve the canonical
 semantics.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{RunTime}
@@ -1507,7 +1496,7 @@ It sounds like a disaster from the efficiency point of view,
 but in practice, implementations would provide modes
 in which less predictability but more efficiency would be achieved.
 Such a mode could even be the out-of-the-box mode.
-In practice, @Chg{}implementers@EndChg{} would provide a compromise based on their
+In practice, implementers would provide a compromise based on their
 customer's needs.
 Therefore, we view this as one viable alternative.
 
@@ -1527,7 +1516,7 @@ punish their customers too much in terms of predictability.
 
 The most important thing about this clause
 is that users understand what they can expect at run time,
-and @Chg{}implementers@EndChg{} understand what optimizations are allowed.
+and implementers understand what optimizations are allowed.
 Any solution that makes this clause contain rules that can
 interpreted in more than one way is unacceptable.
 

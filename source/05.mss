@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:01 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
 @LabeledChapter{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -730,16 +730,15 @@ executed.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 Otherwise (the value is not covered by any
 @nt{discrete_choice_list},
-@oChg{}
+
 perhaps due to being outside the base range),
-@oEndChg{}
+
 Constraint_Error is raised.
-@oChgRef{94-4768.e}
 @begin{Ramification}
-@oChg{}
+
 In this case, the value is outside the base range of its type,
 or is an invalid representation.
-@oEndChg{}
+
 @end{Ramification}
 @end{RunTime}
 
@@ -925,10 +924,8 @@ than possibly raising Storage_Error, but anything can do that).
 A loop parameter is a constant;
 it cannot be updated within the
 @nt{sequence_of_statements} of the loop
-@oChg{}(@lSeeSecNum{Objects and Named Numbers}).@oEndChg{}
-@begin{oChgNote}
-Added reference to where it says this officially.
-@end{oChgNote}
+(@lSeeSecNum{Objects and Named Numbers}).
+
 
 An @nt{object_declaration} should not be given for a loop parameter,
 since the loop parameter is automatically declared by
@@ -1072,11 +1069,9 @@ The syntax rule for @nt{block_statement} now uses the syntactic category
 
 @begin{Intro}
 @Redundant[An @nt{exit_statement} is used to complete the execution
-of an enclosing @nt{loop_statement};@oChg{}@oEndChg{} the
+of an enclosing @nt{loop_statement}; the
 completion is conditional if the @nt{exit_statement} includes a
 @nt{condition}.]
-@oChgRef{94-4605.a}
-@oChgRef{94-4560.a}
 @end{Intro}
 
 @begin{Syntax}

@@ -1,11 +1,11 @@
 @Part(predef, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:03 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 @comment{$RLB: Eliminated includes. $}
 
 @Define{TwoColRW, use=Display}
@@ -14,7 +14,7 @@
 @Comment{Beware: formatting the table below is pretty tricky.}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{Language-Defined Library Units}
 @Defn{predefined environment}
 This Annex contains the specifications of library units that shall be
@@ -101,7 +101,7 @@ Standard (@i{...continued})
 @\@\Storage_Pools @em @RefSecNum{Storage Management}
 @end{TwoColRW}
 @end{Multiple}
-@end{Redundant}
+]
 @begin{Discussion}
 In running text, we generally leave out the ``Ada.'' when referring to a
 child of Ada.
@@ -132,9 +132,9 @@ denote nonoverlapping objects.
   Here, ``language defined subprogram'' means a language defined library
   subprogram, a subprogram declared in the visible part of a language
   defined library package, an instance of a language defined
-  @oChg{}generic library@oEndChg{} subprogram,
+  generic library subprogram,
   or a subprogram declared in the visible part
-  of an instance of a language defined @oChg{}generic library@oEndChg{} package.
+  of an instance of a language defined generic library package.
 @end{Honest}
 @begin{Ramification}
   The rule implies that any data local to the private part or

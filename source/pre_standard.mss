@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:05 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:29 $}
 
 @LabeledAppendixSection{The Package Standard}
 
@@ -104,7 +104,7 @@ the visible part of package Standard.}
    --@i{ @i{root_integer}, or for any additional predefined integer}
    --@i{ type, is obtained by replacing Integer by the name of the type}
    --@i{ in the specification of the corresponding operator of the type}
-   --@i{ Integer.  The right operand of the @oChg{}exponentiation operator@oChgRef{94-4693.v}@oEndChg{}}
+   --@i{ Integer.  The right operand of the exponentiation operator}
    --@i{ remains as subtype Natural.}
 @Hinge{}
 
@@ -200,29 +200,29 @@ the visible part of package Standard.}
       'H',  'I',  'J',  'K',     'L',  'M',  'N',  'O', @\@charnote[--@i{72 (16#48#) .. 79 (16#4F#)}]
 @comment{blank line}
       'P',  'Q',  'R',  'S',     'T',  'U',  'V',  'W', @\@charnote[--@i{80 (16#50#) .. 87 (16#57#)}]
-      @oChg{}'X',  'Y',  'Z',  '[',     '\',  ']',  '^',  '_',  @\@charnote[--@i{88 (16#58#) .. 95 (16#5F#)}]
+      'X',  'Y',  'Z',  '[',     '\',  ']',  '^',  '_',  @\@charnote[--@i{88 (16#58#) .. 95 (16#5F#)}]
 @comment{blank line}
-      '`',  'a',  'b',  'c',     'd',  'e',  'f',  'g', @\@charnote[--@i{96 (16#60#) .. 103 (16#67#)}]@oEndChg{}
+      '`',  'a',  'b',  'c',     'd',  'e',  'f',  'g', @\@charnote[--@i{96 (16#60#) .. 103 (16#67#)}]
       'h',  'i',  'j',  'k',     'l',  'm',  'n',  'o', @\@charnote[--@i{104 (16#68#) .. 111 (16#6F#)}]
 @comment{blank line}
       'p',  'q',  'r',  's',     't',  'u',  'v',  'w', @\@charnote[--@i{112 (16#70#) .. 119 (16#77#)}]
       'x',  'y',  'z',  '{',     '|',  '}',  '~',  @i[del], @\@charnote[--@i{120 (16#78#) .. 127 (16#7F#)}]
 @Comment{Blank line}
-@oChg{}
+
       @i[reserved_128], @\@i[reserved_129], @\@i[bph], @\@i[nbh], @\ @\ @\@charnote[--@i{128 (16#80#) .. 131 (16#83#)}]
       @i[reserved_132], @\@i[nel], @\@i[ssa], @\@i[esa], @\ @\ @\ @\@charnote[--@i{132 (16#84#) .. 135 (16#87#)}]
-@oEndChg{}
+
       @i[hts], @\@i[htj], @\@i[vts], @\@i[pld], @\@i[plu], @\@i[ri], @\@i[ss2], @\@i[ss3], @\@charnote[--@i{136 (16#88#) .. 143 (16#8F#)}]
 @comment{blank line}
       @i[dcs], @\@i[pu1], @\@i[pu2], @\@i[sts], @\@i[cch], @\@i[mw], @\@i[spa], @\@i[epa], @\@charnote[--@i{144 (16#90#) .. 151 (16#97#)}]
-@oChg{}
+
 @case{Device, Postscript=
 "      @i[sos], @\@i[reserved_153], @\@i[sci], @\@i[csi], @\ @\ @\",
      else=
 "      @i[sos], @i[reserved_153], @i[sci], @i[csi],"}
 @\@charnote[--@i{152 (16#98#) .. 155 (16#9B#)}]
       @i[st], @\@i[osc], @\@i[pm], @\@i[apc], @\ @\ @\ @\ @\@charnote[--@i{156 (16#9C#) .. 159 (16#9F#)}]
-@oEndChg{}
+
 @comment{blank line}
 @case{Device, Postscript=
 "      ' ',  '@a9x(A)',  '@a9x(B)',  '@a9x(C)',     '@a9x(D)',  '@a9x(E)',  '@a9x(F)',  '@a9x(G)', @\--@i{160 (16#A0#) .. 167 (16#A7#)}
@@ -341,10 +341,6 @@ We can get some of the Latin-1 characters out of Scribe:
 
 @key[end] Standard;
 @end{Example}
-@oChgRef{94-4487.a}
-@oChgRef{94-4704.a}
-@oChgRef{94-4510.a}
-@oChgRef{94-4709.a}
 
 Standard has no private part.
 @Reason{This is important for portability.  All library packages
@@ -384,12 +380,11 @@ this body appears in the environment @nt{declarative_part}
  types and additional predefined floating point types.
   Not all of these types need have names.
 @begin{Honest}
-@oBigChg{}
+
   An implementation may add representation items to package Standard, for
   example to specify the internal codes of type Boolean,
   or the Small of type Duration.
-@oEndBigChg{}
-@oChgRef{94-4693.i}
+
 @end{Honest}
 @end{ImplPerm}
 

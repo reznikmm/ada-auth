@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:05 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:29 $}
 @LabeledAppendixSection{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program
@@ -25,19 +25,17 @@ The library package Ada.Command_Line has the following declaration:
 
   @key[function] Command_Name @key[return] String;
 
-  @oBigChg{}@key[type] Exit_Status @key[is] @i{implementation-defined integer type};@oEndBigChg{}
+  @key[type] Exit_Status @key[is] @i{implementation-defined integer type};
 
-  @oBigChg{}Success : @key[constant] Exit_Status;
-  Failure : @key[constant] Exit_Status;@oEndBigChg{}
+  Success : @key[constant] Exit_Status;
+  Failure : @key[constant] Exit_Status;
 
-  @oBigChg{}@key[procedure] Set_Exit_Status (Code : @key[in] Exit_Status);@oEndBigChg{}
+  @key[procedure] Set_Exit_Status (Code : @key[in] Exit_Status);
 
 @key[private]
   ... -- @i{not specified by the language}
 @key[end] Ada.Command_Line;
 @end{example}
-@oChgRef{94-4758.a}
-@oChgRef{94-4976.a}
 @begin{DescribeCode}
 @begin{CodeExample}
 @key[function] Argument_Count @key[return] Natural;
@@ -75,28 +73,27 @@ Command_Name returns an implementation-defined value corresponding to
 the name of the command invoking the program;
 otherwise Command_Name returns the null string.
 
-The type @oBigChg{}Exit_Status@oEndBigChg{} represents the range of exit
+The type Exit_Status represents the range of exit
 status values supported by the external execution environment.
 The constants Success and Failure correspond to success and failure,
 respectively.
 
 @begin{CodeExample}
-@oBigChg{}@key[procedure] Set_Exit_Status (Code : @key[in] Exit_Status);@oEndBigChg{}
+@key[procedure] Set_Exit_Status (Code : @key[in] Exit_Status);
 @end{CodeExample}
 
 If the external execution environment supports returning an exit status
-from a program, then @oBigChg{}Set_Exit_Status sets Code as the status.  Normal
+from a program, then Set_Exit_Status sets Code as the status.  Normal
 termination of a program returns as the exit status the value most
 recently set by Set_Exit_Status, or, if no such value has been set, then the
 value Success.  If a program terminates abnormally, the status set by
-Set_Exit_Status@oEndBigChg{} is ignored, and an implementation-defined exit status value
+Set_Exit_Status is ignored, and an implementation-defined exit status value
 is set.
 
 @PDefn{unspecified}
 If the external execution environment does not support returning
 an exit value from a program,
-then @oBigChg{}Set_Exit_Status does nothing.@oEndBigChg{}
-@oChgRef{94-4984.a}
+then Set_Exit_Status does nothing.
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -107,17 +104,17 @@ for the external execution environment.
 @end{ImplPerm}
 
 
-@Begin{NotesNotes}
+@begin{NotesNotes}
 Argument_Count, Argument, and Command_Name
 correspond to the C language's argc, argv[n] (for n>0) and argv[0],
 respectively.
 @begin{Ramification}
-@Chg{}
+
 The correspondence of Argument_Count to argc is not direct @em
 argc would be one more than Argument_Count, since the argc count
 includes the command name,
 whereas Argument_Count does not.
-@EndChg{}
+
 @end{Ramification}
 @end{NotesNotes}
 

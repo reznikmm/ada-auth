@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/15 00:44:04 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -143,7 +143,7 @@ The following declarations exist in package System:
 @key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @i{implementation-defined};
 @key{subtype} Interrupt_Priority @key{is} Any_Priority @key{range} Priority'Last+1 .. Any_Priority'Last;
 
-Default_Priority : @key{constant} Priority := (Priority'First + Priority'Last)/2;@oChg{}@oChgRef{94-4661.a}@oEndChg{}
+Default_Priority : @key{constant} Priority := (Priority'First + Priority'Last)/2;
 @end{example}
 @ImplDef{The declarations of Any_Priority and Priority.}
 
@@ -427,11 +427,10 @@ priority.
 
 An implementation is allowed to define additional resources as execution
 resources, and to define the corresponding allocation policies for them.
-@BigChg{}
+
 Such resources may have an implementation defined effect on
 task dispatching (@lSeeSecNum{The Standard Task Dispatching Policy}).
-@EndBigChg{}
-@oChgRef{94-4967.a}
+
 @ImplDef{The affect of implementation defined execution resources on
 task dispatching.}
 
@@ -592,14 +591,13 @@ expirations for lower priority tasks, and if so, for how long.
 Implementations are allowed to define other task dispatching policies, but
 need not support more than one such policy per partition.
 
-@BigChg{}
+
 @Redundant[For optimization purposes,]
 an implementation may alter the points at which task dispatching occurs,
 in an implementation defined manner.
 However, a @nt{delay_statement} always corresponds to at least one task
 dispatching point.
-@EndBigChg{}
-@oChgRef{94-4967.a}
+
 @ImplDef{Implementation defined task dispatching.}
 
 @end{ImplPerm}
@@ -1092,9 +1090,8 @@ want the third task to have high priority.
 If a task is blocked on a protected entry call,
 and the call is queued,
 it is a bounded error to raise its base priority
-@oChg{}above@oEndChg{} the ceiling priority of the corresponding
+above the ceiling priority of the corresponding
 protected object.
-@oChgRef{94-4768.t}
 When an entry call is cancelled, it is a bounded error
 if the priority of the calling task is higher than
 the ceiling priority of the corresponding
@@ -1119,10 +1116,8 @@ The priority might need to be lowered to allow it to remove the call
 from the entry queue,
 in order to avoid violating the ceiling.
 This seems relatively harmless, since there is an error,
-and the task is about to start raising an exception anyway.@oChg{}@oEndChg{}
-@begin{oChgNote}
-  Removed obsolete Discussion (was D.5(11.b);5.0).
-@end{oChgNote}
+and the task is about to start raising an exception anyway.
+
 @end{Ramification}
 @end{Bounded}
 
@@ -1175,14 +1170,13 @@ unless the call originated from the @nt{triggering_statement} of an
 
 The effect of two or more Set_Priority calls executed in parallel on
 the same task is defined as executing these calls in some serial order.
-@oChg{}
-@oEndChg{}
-@oChgRef{94-4761.u}
+
+
 @begin{TheProof}
-@oChg{}
+
 This follows from the general reentrancy requirements stated near the
 beginning of @RefSec{Predefined Language Environment}.
-@oEndChg{}
+
 @end{TheProof}
 
 The rule for when Tasking_Error is raised for Set_Priority or Get_Priority is
@@ -1380,12 +1374,11 @@ language defined:
 
 @Defn2Next{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies the maximum dynamic nesting level of
                                 @nt{asynchronous_select}s.
-@oChg{}
+
                                 @Redundant[A value of zero prevents
                                 the use of any
                                 @nt{asynchronous_select}.]
-@oEndChg{}
-@oChgRef{94-4567.a}
+
 
 @Defn2Next{Term=[Restrictions],Sec=(Max_Tasks)}Max_Tasks @\Specifies the maximum number of task creations
     that may be executed over the lifetime of a partition,

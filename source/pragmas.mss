@@ -1,18 +1,17 @@
 @Part(pragmas, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:03 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 @LabeledInformativeAnnex{Language-Defined Pragmas}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pragmas.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @begin{Intro}
 @Defn{pragma}
 This Annex summarizes the definitions given elsewhere of the
 language-defined pragmas.
-@Chg{}
-@EndChg{}
-@oChgRef{94-4693.p}
+
+
 
 @EvilInclude{ada.prag_sorted}
 @end{Intro}

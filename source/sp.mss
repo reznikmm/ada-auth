@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/15 00:44:04 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -266,9 +266,8 @@ are held for later delivery, or all are lost.
 
 Whether predefined or implementation-defined exceptions are raised as a
 result of the occurrence of any interrupt, and the mapping between the
-machine interrupts (or traps) and the @oChg{}predefined@oEndChg{}
+machine interrupts (or traps) and the predefined
 exceptions.
-@oChgRef{94-4768.l}
 
 On a multi-processor, the rules governing the delivery of an interrupt
 to a particular processor.
@@ -283,10 +282,9 @@ subprograms of a protected object whose one of its
 subprograms is an interrupt handler].
 
 In a multi-processor with more than one interrupt subsystem, it is
-implementation defined whether (and how) @oChg{}interrupt sources from
+implementation defined whether (and how) interrupt sources from
 separate subsystems share the same Interrupt_ID type
-(@lSeeSecNum{The Package Interrupts}).@oEndChg{}
-@oChgRef{94-4761.q}
+(@lSeeSecNum{The Package Interrupts}).
 @begin{discussion}
 This issue is tightly related to the issue of scheduling on a
 multi-processor.  In a sense, if a particular interrupt source is not
@@ -823,16 +821,15 @@ or as a configuration pragma.
 @end{Syntax}
 
 @begin{Legality}
-The @nt{local_name} (if present) shall denote a @oBigChg{}non-derived
+The @nt{local_name} (if present) shall denote a non-derived
 enumeration @Redundant[first] subtype,
 a tagged @Redundant[first] subtype, or an exception.
-The pragma applies to the type or exception.@oEndBigChg{}
+The pragma applies to the type or exception.
 Without a @nt{local_name}, the pragma applies to all such entities
 declared after the pragma, within the same declarative region.
 Alternatively, the pragma can be used as a configuration pragma.
-If the pragma applies to a @oBigChg{}@oEndBigChg{}type,
+If the pragma applies to a type,
 then it applies also to all descendants of the type.
-@oChgRef{94-4894.a}
 @end{Legality}
 
 @begin{StaticSem}
@@ -841,7 +838,7 @@ then it applies also to all descendants of the type.
 If a @nt{local_name} is given, then
 a @nt{pragma} Discard_Names is a representation pragma.
 
-@oBigChg{}
+
 If the pragma applies to an enumeration type,
 then the semantics of the Wide_Image and Wide_Value attributes
 are implementation defined for that type;
@@ -855,20 +852,15 @@ are implementation defined for that type.
 If the pragma applies to an exception,
 then the semantics of the Exceptions.Exception_Name function
 are implementation defined for that exception.
-@oEndBigChg{}
-@oChgRef{94-4894.a}
-@oChgRef{94-4902.a}
-@oChgRef{94-4904.a}
-@oChgRef{94-4905.a}
-@oChgRef{94-4906.a}
+
 @ImplDef{The semantics of pragma Discard_Names.}
 @begin{Ramification}
-  @oChg{}The Width attribute is still defined in terms of Image.
+  The Width attribute is still defined in terms of Image.
 
   The semantics of S'Wide_Image and S'Wide_Value are
   implementation defined for any subtype of an enumeration type to which
   the pragma applies.  (The pragma actually names the first subtype,
-  of course.)@oEndChg{}
+  of course.)
 @end{Ramification}
 @end{StaticSem}
 

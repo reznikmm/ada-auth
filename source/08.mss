@@ -1,13 +1,13 @@
 @Part(08, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:01 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
 @LabeledChapter{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 The rules defining the scope of declarations and the rules defining
 which @nt{identifier}s, @nt{character_literal}s, and
 @nt{operator_symbol}s are visible at (or from) various places in the text of
@@ -24,7 +24,7 @@ It also denotes the view declared by that declaration,
 and denotes the entity of that view.
 Thus, two different usage names might denote two different views of
 the same entity; in this case they denote the same entity.
-@end{Redundant}
+]
 @begin{Honest}
 In some cases, a usage name that denotes a declaration
 does not denote the view declared by that declaration,
@@ -129,20 +129,20 @@ Don't confuse the declarative region of a declaration
 with the declarative region in which it immediately occurs.
 @end{Discussion}
 
-@begin{Redundant}
+@redundant[
 @Defn{local to}
 A declaration is @i{local} to a declarative region if
 the declaration occurs immediately within the declarative region.
-@end{Redundant}
+]
 @begin{Ramification}
 That is,
 "occurs immediately within" and "local to" are synonyms
 (when referring to declarations).
 @end{Ramification}
-@begin{Redundant}
+@redundant[
 An entity is @i{local} to a declarative region if the entity is
 declared by a declaration that is local to the declarative region.
-@end{Redundant}
+]
 @begin{Ramification}
 Thus, ``local to'' applies to both declarations and entities,
 whereas ``occurs immediately within'' only applies to declarations.
@@ -281,7 +281,7 @@ region, but not within either the declaration or the body.
 @LabeledSection{Scope of Declarations}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 For each declaration, the language rules define a certain
 portion of the program text called the @i{scope} of the declaration.
 The scope of a declaration is also called the scope of any view
@@ -290,7 +290,7 @@ Within the scope of an entity, and only there,
 there are places where it is legal to refer
 to the declared entity.
 These places are defined by the rules of visibility and overloading.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{StaticSem}
@@ -593,13 +593,13 @@ because R does not mention Q in a @nt{with_clause}.
 @LabeledSection{Visibility}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{visibility rules}
 The @i{visibility rules},
 given below, determine which declarations are
 visible and directly visible at each place within a program.
 The visibility rules apply to both explicit and implicit declarations.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{StaticSem}
@@ -648,12 +648,12 @@ nor a @nt<selector_name>).
 Where @i{hidden from direct visibility}, only direct visibility is lost;
 visibility using a @nt<selector_name> is still possible.
 
-@begin{Redundant}
+@redundant[
 @Defn{overloaded}
 Two or more declarations are @i{overloaded} if
 they all have the same defining name
 and there is a place where they are all directly visible.
-@end{Redundant}
+]
 @begin{Ramification}
 Note that a @nt{name} can have more than one possible interpretation
 even if it denotes a non-overloadable entity.
@@ -686,9 +686,9 @@ if they have the same defining name,
 and, if both are overloadable,
 their profiles are type conformant.
 @PDefn{type conformance}
-@begin{Redundant}
+@redundant[
 An inner declaration hides any outer homograph from direct visibility.
-@end{Redundant}
+]
 
 @Redundant[Two homographs are not generally allowed
 immediately within the same declarative region unless one
@@ -791,12 +791,11 @@ declaration, except:
   until the reserved word @b(record);
 
   For a @nt{package_declaration}, task declaration,
-  protected declaration, @oChg{}@nt{generic_package_declaration},@oEndChg{}
+  protected declaration, @nt{generic_package_declaration},
   or @nt{subprogram_body},
   the declaration is
   hidden from all visibility only until the reserved word @b(is)
   of the declaration.
-@oChgRef{94-4942.a}
 @begin{Ramification}
 We're talking about the @key{is} of the construct itself, here,
 not some random @key{is} that might appear in a
@@ -832,15 +831,14 @@ The declaration of a library unit
 is hidden from all visibility
 except at places that are within its declarative region
 or within the scope of a @nt{with_clause} that mentions it.
-@BigChg{}
+
 @Redundant[For each declaration or renaming of a generic unit as a child of
 some parent generic package, there is a corresponding declaration nested
 immediately within each instance of the parent.]
 Such a nested declaration is hidden from all visibility
 except at places that are
 within the scope of a @nt{with_clause} that mentions the child.
-@EndBigChg{}
-@oChgRef{94-4933.a}
+
 @begin{Discussion}
 This is the rule that prevents @nt{with_clause}s from being
 transitive;
@@ -1004,9 +1002,8 @@ or @nt{library_unit_renaming_declaration}.
 In addition to the visibility rules given above,
 the meaning of the occurrence of a @nt{direct_name} or
 @nt{selector_name} at a given place in the text can depend on
-@oChg{}@oEndChg{}the overloading rules
+the overloading rules
 (@lSeeSecNum{The Context of Overload Resolution}).
-@oChgRef{94-4666.a}
 
 Not all contexts where an @nt<identifier>, @nt<character_literal>,
 or @nt<operator_symbol> are allowed require visibility of a corresponding
@@ -1057,9 +1054,9 @@ Thus, the following is legal:
 @begin{Example}
 X : @key[constant] Integer := 17;
 ...
-@oChg{}@key[package] P @key[is]
+@key[package] P @key[is]
     @key[procedure] X(Y : @key[in] Integer := X);
-@key[end] P;@oEndChg{}
+@key[end] P;
 @end{Example}
 
 The body of the subprogram will probably be illegal,
@@ -1070,13 +1067,12 @@ since they are not overloadable;
 the following is illegal:
 @begin{Example}
 X : @key[constant] Integer := 17;
-@oChg{}@key[package] P @key[is]
+@key[package] P @key[is]
     @key[generic]
       Z : Integer := X; --@i{ Illegal!}
     @key[procedure] X(Y : @key[in] Integer := X); --@i{ Illegal!}
-@key[end] P;@oEndChg{}
+@key[end] P;
 @end{Example}
-@oChgRef{94-4942.a}
 
 The constant X is hidden from direct visibility by the generic
 declaration.
@@ -1103,12 +1099,12 @@ Visibility is defined only for declarations.
 @LabeledSection{Use Clauses}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{use_package_clause} achieves direct visibility of declarations that
 appear in the visible part of a package;
 a @nt{use_type_clause} achieves direct visibility of the primitive
 operators of a type.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -1203,11 +1199,10 @@ For each package denoted by a @SynI{package_}@nt{name}
 of a @nt{use_package_clause} whose scope encloses a place,
 each declaration that occurs immediately within
 the declarative region of the package is
-@oChg{}@i(potentially) @i(use-visible)@oEndChg{} at this place
+@i(potentially) @i(use-visible) at this place
 if the declaration is visible at this place.
 @Comment{potentially and use-visible get separate i commands,
 to prevent a Scribe bug that causes use-visible to not be italicized.}
-@oChgRef{94-4666.b}
 For each type @i(T) or @i(T)'Class determined by a @nt<subtype_mark>
 of a @nt{use_type_clause} whose scope encloses a place,
 the declaration of each primitive operator of type @i(T)
@@ -1274,7 +1269,7 @@ The elaboration of a @nt{use_clause} has no effect.
 @end{RunTime}
 
 @begin{Examples}
-@oChg{}
+
 @i{Example of a use clause in a context clause:}
 @begin{Example}
 @key[with] Ada.Calendar; @key[use] Ada;
@@ -1285,8 +1280,7 @@ The elaboration of a @nt{use_clause} has no effect.
 @key[use type] Rational_Numbers.Rational; --@i{ @lSeeSecNum{Package Specifications and Declarations}}
 Two_Thirds: Rational_Numbers.Rational := 2/3;
 @end{Example}
-@oEndChg{}
-@oChgRef{94-4774.c}
+
 @begin{Ramification}
 In ``@key[use] X, Y;'', Y cannot refer to something made visible by the
 ``@key[use]'' of X.
@@ -1343,13 +1337,13 @@ potentially use-visible.
 @LabeledSection{Renaming Declarations}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{renaming_declaration} declares another name for an entity,
 such as an object, exception, package, subprogram, entry,
 or generic unit.
 Alternatively, a @nt{subprogram_renaming_declaration} can be the
 completion of a previous @nt{subprogram_declaration}.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -1416,9 +1410,9 @@ since failing these tests is highly unlikely.
 @LabeledSubSection{Object Renaming Declarations}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 An @nt{object_renaming_declaration} is used to rename an object.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -1426,18 +1420,12 @@ An @nt{object_renaming_declaration} is used to rename an object.
 @end{Syntax}
 
 @begin{Resolution}
-@oBigChg{}
+
 The type of the @SynI{object_}@nt{name} shall resolve to
 the type determined by the @nt{subtype_mark}.
-@oChgRef{94-4500.a}
-@oChgRef{94-4505.a}
-@oChgRef{94-4506.a}
-@oChgRef{94-4507.a}
-@oChgRef{94-4509.a}
-@oChgRef{94-4532.a}
-@oEndBigChg{}
+
 @begin{Reason}
-@BigChg{}
+
 A previous version of Ada 9X used the usual ``expected type''
 wording:
 ``The expected type for the @SynI{object_}@nt{name} is
@@ -1463,9 +1451,8 @@ Note that the matching rule for generic formal parameters of mode
 @key[in out] was changed to keep it consistent with the rule
 for renaming.
 That makes the rule different for @key[in] vs. @key[in out].
-@EndBigChg{}
+
 @end{Reason}
-@ChgRef{94-5001.h}
 @end{Resolution}
 
 @begin{Legality}
@@ -1539,9 +1526,9 @@ unconstrained nominal subtype.
 @LabeledSubSection{Exception Renaming Declarations}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 An @nt{exception_renaming_declaration} is used to rename an exception.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -1567,9 +1554,9 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error;@i{-- @lSeeSecNu
 @LabeledSubSection{Package Renaming Declarations}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{package_renaming_declaration} is used to rename a package.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -1635,9 +1622,8 @@ If the renaming-as-body completes that declaration
 before the subprogram it declares is
 frozen, the subprogram it declares takes its convention
 from the renamed subprogram;
-@oBigChg{}otherwise the convention of the renamed subprogram shall not be
-Intrinsic.@oEndBigChg{}
-@oChgRef{94-4774.b}
+otherwise the convention of the renamed subprogram shall not be
+Intrinsic.
 @begin{Reason}
 The first part of the first sentence is to allow an
 implementation of a renaming-as-body
@@ -1659,13 +1645,13 @@ An @nt{entry_declaration}, unlike a @nt{subprogram_declaration},
 cannot be completed with a @nt{renaming_declaration}.
 Nor can a @nt{generic_subprogram_declaration}.
 
-@oChg{}
+
 The syntax rules prevent a protected subprogram declaration from being
 completed by a renaming.
 This is fortunate, because it allows us to avoid worrying about whether
 the implicit protected object parameter of a protected operation is
 involved in the conformance rules.
-@oEndChg{}
+
 @end{Ramification}
 
 A @nt{name} that denotes a formal parameter
@@ -1765,12 +1751,11 @@ as functions.  An entry can only be renamed as a procedure; the new
 procedure @nt{name}.  An entry of a family can be renamed, but an
 entry family cannot be renamed as a whole.
 
-@oChg{}
+
 The operators of the root numeric types cannot be renamed because the
 types in the profile are anonymous, so the corresponding specifications
 cannot be written; the same holds for certain attributes, such as Pos.
-@oEndChg{}
-@oChgRef{94-4666.c}
+
 
 Calls with the new @nt{name} of a renamed entry are
 @nt{procedure_call_statement}s and are not allowed at places
@@ -1829,9 +1814,9 @@ We'll live with the oddity.
 @LabeledSubSection{Generic Renaming Declarations}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{generic_renaming_declaration} is used to rename a generic unit.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -1887,7 +1872,7 @@ which has been moved to @RefSecNum{Type Declarations}.
 @LabeledSection{The Context of Overload Resolution}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{overload resolution}
 Because declarations can be overloaded,
 it is possible for an occurrence of a usage name
@@ -1922,7 +1907,7 @@ for example)
 are overloading rules.
 Various rules for the matching of formal and actual parameters are
 overloading rules.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -2445,7 +2430,7 @@ Therefore, the complete context is ambiguous, and therefore illegal.
 @PDefn{Beaujolais effect}
 It is the intent that the Ada 9X preference rule for root numeric
 operators is more locally enforceable than that of RM83-4.6(15).
-It should also @Chg{}eliminate@EndChg{} interpretation shifts due to the
+It should also eliminate interpretation shifts due to the
 addition or removal of a @nt{use_clause}
 (the so called @i{Beaujolais} effect).
 

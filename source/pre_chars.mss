@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:05 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:29 $}
 
 @LabeledAppendixSection{Character Handling}
 @begin{Intro}
@@ -40,7 +40,7 @@ The library package Characters.Handling has the following declaration:
 @begin{example}
 @key[package] Ada.Characters.Handling @key[is]
 @ChildUnit{Parent=[Ada.Characters],Child=[Handling],Expanded=[Ada.Characters.Handling]}
-  @oBigChg{}@key[pragma] Preelaborate(Handling);@oEndBigChg{}
+  @key[pragma] Preelaborate(Handling);
 
 --@i{Character classification functions}
 
@@ -106,8 +106,6 @@ The library package Characters.Handling has the following declaration:
 
 @key[end] Ada.Characters.Handling;
 @end{Example}
-@oChgRef{94-4469.a}
-@oChgRef{94-4884.a}
 
 In the description below for each function that returns a Boolean
 result, the effect is described in terms of the conditions under which
@@ -228,10 +226,9 @@ Item.
 @end{description}
 
 The following set of functions test Wide_Character values
-for membership in @oBigChg{}Character,
-or convert between corresponding characters of@oEndBigChg{}
+for membership in Character,
+or convert between corresponding characters of
 Wide_Character and Character.
-@oChgRef{94-4913.a}
 @begin{description}
 Is_Character@\Returns True if Wide_Character'Pos(Item) <=
 Character'Pos(Character'Last).
@@ -390,7 +387,7 @@ sec=[a category of Character]}
     Circumflex           : @key[constant] Character := '^';  @i{-- Character'Val(94)}
     Low_Line             : @key[constant] Character := '_';  @i{-- Character'Val(95)}
 
-    @oChg{}Grave                : @key[constant] Character := '`';  @i{-- Character'Val(96)}@oEndChg{}
+    Grave                : @key[constant] Character := '`';  @i{-- Character'Val(96)}
     LC_A                 : @key[constant] Character := 'a';  @i{-- Character'Val(97)}
     LC_B                 : @key[constant] Character := 'b';  @i{-- Character'Val(98)}
     LC_C                 : @key[constant] Character := 'c';  @i{-- Character'Val(99)}
@@ -435,9 +432,9 @@ sec=[a category of Character]}
 
     Reserved_128         : @key[constant] Character := Character'Val(128);
     Reserved_129         : @key[constant] Character := Character'Val(129);
-    @oBigChg{}BPH                  : @key[constant] Character := Character'Val(130);
+    BPH                  : @key[constant] Character := Character'Val(130);
     NBH                  : @key[constant] Character := Character'Val(131);
-    Reserved_132         : @key[constant] Character := Character'Val(132);@oEndBigChg{}
+    Reserved_132         : @key[constant] Character := Character'Val(132);
     NEL                  : @key[constant] Character := Character'Val(133);
     SSA                  : @key[constant] Character := Character'Val(134);
     ESA                  : @key[constant] Character := Character'Val(135);
@@ -459,9 +456,9 @@ sec=[a category of Character]}
     SPA                  : @key[constant] Character := Character'Val(150);
     EPA                  : @key[constant] Character := Character'Val(151);
 
-    @oBigChg{}SOS                  : @key[constant] Character := Character'Val(152);@oEndBigChg{}
+    SOS                  : @key[constant] Character := Character'Val(152);
     Reserved_153         : @key[constant] Character := Character'Val(153);
-    @oBigChg{}SCI                  : @key[constant] Character := Character'Val(154);@oEndBigChg{}
+    SCI                  : @key[constant] Character := Character'Val(154);
     CSI                  : @key[constant] Character := Character'Val(155);
     ST                   : @key[constant] Character := Character'Val(156);
     OSC                  : @key[constant] Character := Character'Val(157);
@@ -470,7 +467,7 @@ sec=[a category of Character]}
 
 @i{-- Other graphic characters:}
 
-@oChg{}@i{-- Character positions 160 (16#A0#) .. 175 (16#AF#):}
+@i{-- Character positions 160 (16#A0#) .. 175 (16#AF#):}
     No_Break_Space              : @key[constant] Character := ' ';  @i{--Character'Val(160)}
     NBSP                        : Character @key[renames] No_Break_Space;
     Inverted_Exclamation        : @key[constant] Character := @case{Device, Postscript= "'@a9x(A)';  @i{--Character'Val(161)}", else="Character'Val(161);"}
@@ -579,13 +576,9 @@ sec=[a category of Character]}
     LC_U_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@uum()';  @i{--Character'Val(252)}",  else="Character'Val(252);"}
     LC_Y_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@a9x(m)';  @i{--Character'Val(253)}", else="Character'Val(253);"}
     LC_Icelandic_Thorn          : @key[constant] Character := @case{Device, Postscript= "'@a9x(n)';  @i{--Character'Val(254)}", else="Character'Val(254);"}
-    LC_Y_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@a9x(o)';  @i{--Character'Val(255)}", else="Character'Val(255);"}@oEndChg{}
+    LC_Y_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@a9x(o)';  @i{--Character'Val(255)}", else="Character'Val(255);"}
 @key[end] Ada.Characters.Latin_1;
 @end{Example}
-@oChgRef{94-4488.a}
-@oChgRef{94-4709.a}
-@oChgRef{94-4726.a}
-@oChgRef{94-4982.a}
 
 @end{StaticSem}
 

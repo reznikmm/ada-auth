@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:01 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
 @LabeledChapter{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
 
@@ -166,9 +166,9 @@ it shall repeat the @nt{defining_identifier}.
 
 @begin{Legality}
 @PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
-A task declaration requires a completion@begin{Redundant},
+A task declaration requires a completion@redundant[,
 which shall be a @nt{task_body},
-@end{Redundant}
+]
 and every @nt{task_body} shall be the completion of some
 task declaration.
 @begin(Honest)
@@ -182,13 +182,10 @@ task declaration.
 A @nt<task_definition> defines a task type and its first subtype.
 @PDefn2{Term=[visible part], Sec=(of a task unit)}
 The first list of @nt{task_item}s of a @nt{task_definition},
-@oBigChg{}
+
 together with the @nt{known_discriminant_part}, if any,
-@oEndBigChg{}
+
 is called the visible part of the task unit.
-@oChgRef{94-4426.a}
-@oChgRef{94-4873.a}
-@oChgRef{94-4881.a}
 @Redundant[@PDefn2{Term=[private part], Sec=(of a task unit)}
 The optional list of @nt{task_item}s after the reserved
 word @key{private} is called the private part of the task unit.]
@@ -198,13 +195,13 @@ word @key{private} is called the private part of the task unit.]
 
 @begin{RunTime}
 
-@begin(Redundant)
+@redundant[
 @PDefn2{Term=[elaboration], Sec=(task declaration)}
 The elaboration of a task declaration elaborates the @nt<task_definition>.
 @PDefn2{Term=[elaboration], Sec=(single_task_declaration)}
 The elaboration of a @nt<single_task_declaration> also creates
 an object of an (anonymous) task type.
-@end(Redundant)
+]
 @begin(TheProof)
   This is redundant with the general rules for the elaboration
   of a @nt<full_type_declaration> and an @nt<object_declaration>.
@@ -241,11 +238,11 @@ The elaboration of a @nt{task_body} has no effect other than to establish
 that tasks of the type can from then on be activated without
 failing the Elaboration_Check.
 
-@begin(Redundant)
+@redundant[
 The execution of a @nt<task_body> is invoked by the activation of a
 task of the corresponding type
 (@lSeeSecNum(Task Execution - Task Activation)).
-@end(Redundant)
+]
 
 The content of a task object of a given task type includes:
 @begin(itemize)
@@ -512,18 +509,17 @@ Each task (other than an environment task  @em @lSeeSecNum(Program Execution))
 @begin(itemize)
 If the task is created by the evaluation of an @nt<allocator>
 for a given access type,
-it depends on each master @oBigChg{}that@oEndBigChg{} includes the
+it depends on each master that includes the
 elaboration of the declaration of the ultimate ancestor of the given
 access type.
 
 If the task is created by the elaboration of an @nt<object_declaration>,
-it depends on each master @oBigChg{}that@oEndBigChg{} includes this elaboration.
-@oChgRef{94-4715.a}
+it depends on each master that includes this elaboration.
 @end(itemize)
 
 @Defn2{term=dependence, Sec=(of a task on another task)}
 Furthermore, if a task depends on a given master, it is defined
-to @oChg{}depend@oEndChg{} on the task that executes the master, and (recursively)
+to depend on the task that executes the master, and (recursively)
 on any master of that task.
 @begin{Discussion}
 Don't confuse these kinds of dependences with the
@@ -549,8 +545,7 @@ an open @nt<terminate_alternative>
 (@lSeeSecNum(Selective Accept)); the open @nt<terminate_alternative>
 is selected if and only if the following conditions are satisfied:
 @begin{itemize}
-  The task depends on some @oBigChg{}completed master;@oEndBigChg{}
-@oChgRef{94-4715.a}
+  The task depends on some completed master;
 
   Each task that depends on the master considered is either already
   terminated or similarly blocked at a @nt<select_statement>
@@ -727,9 +722,9 @@ it shall repeat the @nt{defining_identifier}.
 
 @begin{Legality}
 @PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
-A protected declaration requires a completion@begin{Redundant},
+A protected declaration requires a completion@redundant[,
 which shall be a @nt{protected_body},
-@end{Redundant}
+]
 and every @nt{protected_body} shall be the completion of some
 protected declaration.
 @begin(Honest)
@@ -744,13 +739,10 @@ A @nt<protected_definition> defines a protected type and its first subtype.
 @PDefn2{Term=[visible part], Sec=(of a protected unit)}
 The list of @nt{protected_operation_declaration}s of a
 @nt{protected_definition},
-@oBigChg{}
+
 together with the @nt{known_discriminant_part}, if any,
-@oEndBigChg{}
+
 is called the visible part of the protected unit.
-@oChgRef{94-4426.a}
-@oChgRef{94-4873.a}
-@oChgRef{94-4881.a}
 @Redundant[@PDefn2{Term=[private part], Sec=(of a protected unit)}
 The optional list of @nt{protected_element_declaration}s after the reserved
 word @key{private} is called the private part of the protected unit.]
@@ -760,14 +752,14 @@ word @key{private} is called the private part of the protected unit.]
 
 @begin{RunTime}
 
-@begin(Redundant)
+@redundant[
 @PDefn2{Term=[elaboration], Sec=(protected declaration)}
 The elaboration of a protected declaration
 elaborates the @nt<protected_definition>.
 @PDefn2{Term=[elaboration], Sec=(single_protected_declaration)}
 The elaboration of a @nt<single_protected_declaration> also creates
 an object of an (anonymous) protected type.
-@end(Redundant)
+]
 @begin(TheProof)
   This is redundant with the general rules for the elaboration
   of a @nt<full_type_declaration> and an @nt<object_declaration>.
@@ -780,11 +772,11 @@ subtype;] it also includes the elaboration of the
 @nt<component_declaration>s and @nt<protected_operation_declaration>s
 in the given order.
 
-@begin(Redundant)
+@redundant[
 @PDefn2{Term=[initialization], Sec=(of a protected object)}
 As part of the initialization of a protected object,
 any per-object constraints (@lSeeSecNum{Record Types}) are elaborated.
-@end(Redundant)
+]
 @begin{Discussion}
   We do not mention pragmas since each pragma has its
   own elaboration rules.
@@ -881,7 +873,7 @@ thus the name cannot be used as a @nt<subtype_mark>).
   presuming such a subtype has been
   declared between the @nt<protected_type_declaration>
   and the @nt<protected_body>.
-@End(Discussion)
+@end(Discussion)
 
 A @nt<selected_component> can be used to denote a discriminant
 of a protected object (@lSeeSecNum(Selected Components)).
@@ -1472,8 +1464,8 @@ to rather unusual and possibly difficult-to-specify semantics.
 
 @PDefn2{Term=[requires a completion], Sec=(protected @nt{entry_declaration})}
 An @nt{entry_declaration} of a protected unit requires
-a completion@begin{Redundant}, which shall be an @nt{entry_body},
-@end{Redundant}
+a completion@redundant[, which shall be an @nt{entry_body},
+]
 @PDefn2{Term=[only as a completion], Sec=(@nt<entry_body>)}
 and every @nt<entry_body> shall be the completion
 of an @nt<entry_declaration> of a protected unit.
@@ -1904,7 +1896,7 @@ the protected action completes.
 @end(Discussion)
 
 @PDefn2{Term=blocked, Sec=(during an entry call)}
-@oBigChg{}
+
 For an entry call that is added to a queue,
 and that is not the @nt<triggering_statement> of an
 @nt<asynchronous_select>
@@ -1913,14 +1905,13 @@ the calling task is blocked until the call is cancelled,
 or the call is selected and a corresponding @nt<accept_statement>
 or @nt<entry_body> completes without requeuing.
 In addition, the calling task is blocked during a rendezvous.
-@oEndBigChg{}
-@oChgRef{94-4776.d}
+
 @begin{Ramification}
-@oBigChg{}
+
 For a call on a protected entry,
 the caller is not blocked if the call is selected immediately,
 unless a requeue causes the call to be queued.
-@oEndBigChg{}
+
 @end{Ramification}
 
 @Defn2{Term=[cancellation], Sec=(of an entry call)}
@@ -2127,7 +2118,7 @@ Flags(3).Seize;                       @i[--  @lSeeSecNum(Protected Units and Pro
 @LabeledSubSection{Requeue Statements}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt<requeue_statement>
 can be used to complete an @nt<accept_statement> or @nt<entry_body>,
 while redirecting the corresponding entry call to a new (or the same)
@@ -2138,7 +2129,7 @@ an intermediate cancellation of the call, due to an abort or
 the expiration of a delay.
 @IndexSee{Term=[preference control],See=(requeue)}
 @IndexSee{Term=[broadcast signal],See=(requeue)}
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -2172,7 +2163,7 @@ the profile of the innermost enclosing callable construct.
 @Defn2{Term=[subtype conformance],Sec=(required)}
 
 @PDefn2{Term=[accessibility rule],Sec=(requeue statement)}
-@oBigChg{}
+
 In a @nt<requeue_statement> of an @nt<accept_statement> of
 some task unit, either the target object shall be a part of a
 formal parameter of the @nt<accept_statement>,
@@ -2185,9 +2176,7 @@ a part of a formal parameter of the @nt<entry_body>,
 or the accessibility level of the target object
 shall not be statically deeper than that
 of the @nt<entry_declaration>.
-@oEndBigChg{}
-@oChgRef{94-4715.a}
-@oChgRef{94-4828.c}
+
 @begin{Ramification}
   In the @nt{entry_body} case, the intent is that the target object can
   be global,
@@ -2215,7 +2204,7 @@ of the @nt<entry_declaration>.
   we ensure that the normal @nt<terminate_alternative> rules remain
   sensible, and that explicit clearing of the entry queues of a protected
   object during finalization is rarely necessary.  In particular, such
-  clearing of the entry queues is @oChg{}necessary only@oEndChg{} (ignoring premature
+  clearing of the entry queues is necessary only (ignoring premature
   Unchecked_Deallocation) for protected objects declared in a
   @nt<task_body> (or created by an allocator for an access type declared
   in such a body) containing one or more @nt<requeue_statement>s.
@@ -2342,7 +2331,7 @@ The @nt<requeue_statement> is new.
 @LabeledSection{Delay Statements, Duration, and Time}
 
 @begin{Intro}
-@begin(Redundant)
+@redundant[
 @PDefn{expiration time}
 A @nt<delay_statement> is used to block further execution until
 a specified @i(expiration time) is reached.
@@ -2354,7 +2343,7 @@ The language-defined
 package Calendar provides definitions for a type Time and associated
 operations, including a function Clock that returns the current time.
 @IndexSee{Term=[timing],See=(delay_statement)}
-@end(Redundant)
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -2731,12 +2720,12 @@ environment (such as POSIX).
 @LabeledSection{Select Statements}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 There are four forms of the @nt{select_statement}.  One form provides a
 selective wait for one or more @nt{select_alternative}s.  Two provide
 timed and conditional entry calls.  The fourth provides asynchronous
 transfer of control.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -2767,13 +2756,13 @@ transfer of control.
 @LabeledSubSection{Selective Accept}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 This form of the @nt{select_statement} allows a combination of waiting for,
 and selecting from, one or more alternatives.  The
 selection may depend on conditions associated with each alternative of the
 @nt{selective_accept}.
 @IndexSee{Term=[time-out],See=(selective_accept)}
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -2956,12 +2945,12 @@ with @nt<accept_alternative>.
 @LabeledSubSection{Timed Entry Calls}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{timed_entry_call} issues an entry call that is
 cancelled if the call (or a requeue-with-abort of the call)
 is not selected before the expiration time is reached.
 @IndexSee{Term=[time-out],See=(timed_entry_call)}
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -3097,11 +3086,11 @@ a requeue-with-abort.
 @LabeledSubSection{Asynchronous Transfer of Control}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 An asynchronous @nt{select_statement} provides
 asynchronous transfer of control
 upon completion of an entry call or the expiration of a delay.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -3233,12 +3222,12 @@ executed after the @nt<abortable_part> is left.
 @LabeledSection{Abort of a Task - Abort of a Sequence of Statements}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 An @nt{abort_statement} causes one or more tasks to become abnormal, thus
 preventing any further interaction with such tasks.  The completion
 of the @nt<triggering_statement> of an @nt<asynchronous_select>
 causes a @nt{sequence_of_statements} to be aborted.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -3335,9 +3324,8 @@ not abort-deferred.
 @end(Ramification)
 
 
-When @oBigChg{}a@oEndBigChg{} master is aborted, all tasks
+When a master is aborted, all tasks
 that depend on that master are aborted.
-@oChgRef{94-4715.a}
 
 @PDefn{unspecified}
 The order in which tasks become abnormal as the result
@@ -3399,9 +3387,8 @@ the following are abort completion points for an execution:
 An attempt to execute an @nt<asynchronous_select> as
 part of the execution of an abort-deferred operation is a bounded error.
 Similarly, an attempt to create a task that depends on a master
-@oBigChg{}that@oEndBigChg{} is included entirely within the execution of
+that is included entirely within the execution of
 an abort-deferred operation is a bounded error.
-@oChgRef{94-4715.a}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 In both cases, Program_Error is raised if the error is detected
 by the implementation; otherwise the operations proceed
@@ -3554,13 +3541,13 @@ hardware efficiently supports it.
 @end{StaticSem}
 
 @begin{RunTime}
-@begin{Redundant}
+@redundant[
 Separate tasks normally proceed independently and concurrently
 with one another.  However, task interactions can be used
 to synchronize the actions of two or more tasks to allow,
 for example, meaningful communication by the direct updating and
 reading of variables shared between the tasks.
-@end{Redundant}
+]
 The actions of two different tasks are synchronized in this
 sense when an
 action of one task @i(signals) an action of the other task;

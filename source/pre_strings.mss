@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:05 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:29 $}
 
 @LabeledAppendixSection{String Handling}
 
@@ -87,13 +87,13 @@ The library package Strings.Maps has the following declaration:
 
    @key[function] To_Ranges (Set    : @key[in] Character_Set)    @key[return] Character_Ranges;
 
-   @oChg{}@key[function] "="   (Left, Right : @key[in] Character_Set) @key[return] Boolean;
+   @key[function] "="   (Left, Right : @key[in] Character_Set) @key[return] Boolean;
 
    @key[function] "@key[not]" (Right : @key[in] Character_Set)       @key[return] Character_Set;
    @key[function] "@key[and]" (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
    @key[function] "@key[or]"  (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
    @key[function] "@key[xor]" (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
-   @key[function] "@en"   (Left, Right : @key[in] Character_Set) @key[return] Character_Set;@oEndChg{}
+   @key[function] "@en"   (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
 
    @key[function] Is_In (Element : @key[in] Character;
                    Set     : @key[in] Character_Set)
@@ -139,7 +139,6 @@ The library package Strings.Maps has the following declaration:
    ... -- @i{not specified by the language}
 @key[end] Ada.Strings.Maps;
 @end{example}
-@oChgRef{94-4606.a}
 
 An object of type Character_Set represents a set of
 characters.
@@ -155,11 +154,7 @@ union of the sets corresponding to Obj(I) for I in Obj'Range.
 @begin{CodeExample}
 @key[function] To_Set (Ranges : @key[in] Character_Ranges) @key[return] Character_Set;
 @end{CodeExample}
-@begin{oChgNote}
-The formatting of this kind of description has been changed throughout
-the Annexes to more closely match the RM83 style.
-These formatting changes are not marked with change bars.
-@end{oChgNote}
+
 
 If Ranges'Length=0 then Null_Set is returned;
 otherwise the returned value represents the set corresponding to Ranges.
@@ -177,9 +172,8 @@ otherwise
 the shortest array of contiguous ranges of Character
 values in Set, in increasing order of Low, is returned.
 @begin{CodeExample}
-@oChg{}@key[function] "=" (Left, Right : @key[in] Character_Set) @key[return] Boolean;@oEndChg{}
+@key[function] "=" (Left, Right : @key[in] Character_Set) @key[return] Boolean;
 @end{CodeExample}
-@oChgRef{94-4606.a}
 
 The function "=" returns True if Left and Right represent identical sets,
 and False otherwise.
@@ -285,9 +279,8 @@ Identity : @key[constant] Character_Mapping;
 
    Identity maps each Character to itself.
 @begin{CodeExample}
-@oChg{}@key[function] To_Mapping (From, To : @key[in] Character_Sequence) @key[return] Character_Mapping;@oEndChg{}
+@key[function] To_Mapping (From, To : @key[in] Character_Sequence) @key[return] Character_Mapping;
 @end{CodeExample}
-@oChgRef{94-4606.a}
 
 To_Mapping produces a Character_Mapping such that
 each element of From maps to the corresponding element of To,
@@ -308,10 +301,9 @@ The lower bound of D is 1.
 @end{CodeExample}
 
 To_Range returns the Character_Sequence value R, with lower bound 1
-@oChg{}
+
 and upper bound Map'Length,
-@oEndChg{}
-@oChgRef{94-4497.a}
+
 such that if
 D = To_Domain(Map) then
 D(I) maps to R(I) for each I in D'Range.
@@ -335,7 +327,6 @@ To_Domain(Identity) and To_Range(Identity) each returns the null string.
 Package Strings.Maps is not pure, since it declares an
 access-to-subprogram type.
 @end{Reason}
-@oChgRef{94-4970.a}
 @end{NotesNotes}
 
 @begin{Examples}
@@ -529,7 +520,7 @@ The library package Strings.Fixed has the following declaration:
    @key[procedure] Trim (Source  : @key[in] @key[out] String;
                    Left    : @key[in] Maps.Character_Set;
                    Right   : @key[in] Maps.Character_Set;
-                   @oChg{}Justify : @key[in] Alignment := Strings.Left;@oEndChg{}
+                   Justify : @key[in] Alignment := Strings.Left;
                    Pad     : @key[in] Character := Space);
 
 
@@ -563,7 +554,6 @@ The library package Strings.Fixed has the following declaration:
 
 @key[end] Ada.Strings.Fixed;
 @end{example}
-@oChgRef{94-4471.a}
 
 The effects of the above subprograms are as follows.
 @begin{DescribeCode}
@@ -644,10 +634,10 @@ Each
 Pattern'Length, that matches Pattern
 with respect to Mapping;
 the parameter Going indicates the direction of the lookup.
- If Going = Forward, then @chg{}Index@endchg{}
+ If Going = Forward, then Index
  returns the smallest index I such that
     the slice of Source starting at I matches Pattern.
-  If Going = Backward, then @chg{}Index@endchg{}
+  If Going = Backward, then Index
  returns the largest index I such that
     the slice of Source starting at I matches Pattern.
   If there is no such slice, then 0 is returned.
@@ -869,16 +859,11 @@ characters (if Side = Left), all trailing Space characters
 (if Side = Both).
 
 @begin{CodeExample}
-@oChg{}@key[procedure] Trim (Source  : @key[in] @key[out] String;@oEndChg{}
+@key[procedure] Trim (Source  : @key[in] @key[out] String;
                 Side    : @key[in] Trim_End;
                 Justify : @key[in] Alignment := Left;
                 Pad     : @key[in] Character := Space);
 @end{CodeExample}
-@oChgRef{94-4498.b}
-@oChgRef{94-4768.q}
-@oChgRef{94-4852.a}
-@oChgRef{94-4876.a}
-@oChgRef{94-4883.a}
 
 Equivalent to Move(Trim(Source, Side), Source, Justify=>Justify, Pad=>Pad).
 
@@ -984,11 +969,10 @@ string handling subprograms, Constraint_Error is propagated.
 The language-defined package Strings.Bounded provides a generic package
 each of whose instances yields a private type Bounded_String and a
 set of operations.  An object of a particular Bounded_String type
-represents a String whose @oChg{}low bound is 1 and whose length@oEndChg{}
+represents a String whose low bound is 1 and whose length
 can vary conceptually
 between 0 and a maximum size established at the
 generic instantiation.
-@oChgRef{94-4971.a}
 The subprograms for fixed-length string handling
 are either overloaded directly  for Bounded_String, or are modified as
 needed to reflect the variability in length.  Additionally, since the
@@ -1484,9 +1468,8 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 The language-defined package Strings.Unbounded provides a
  private type Unbounded_String and a
 set of operations.  An object of type Unbounded_String represents a String
-whose @oChg{}low bound is 1 and whose length@oEndChg{}
+whose low bound is 1 and whose length
 can vary conceptually between 0 and Natural'Last.
-@oChgRef{94-4971.a}
 The subprograms for fixed-length string handling
 are either overloaded directly  for Unbounded_String, or are modified as
 needed to reflect the flexibility in length.  Since the
@@ -1508,7 +1491,7 @@ The library package Strings.Unbounded has the following declaration:
 @key[with] Ada.Strings.Maps;
 @ChildUnit{Parent=[Ada.Strings],Child=[Unbounded],Expanded=[Ada.Strings.Unbounded]}
 @key[package] Ada.Strings.Unbounded @key[is]
-   @oBigChg{}@key[pragma] Preelaborate(Unbounded);@oEndBigChg{}
+   @key[pragma] Preelaborate(Unbounded);
 
 @LangDefType{Package=[Ada.Strings.Unbounded],Type=[Unbounded_String]}
    @key[type] Unbounded_String @key[is] @key[private];
@@ -1544,7 +1527,7 @@ The library package Strings.Unbounded has the following declaration:
    @key[function] "&" (Left, Right : @key[in] Unbounded_String)
       @key[return] Unbounded_String;
 
-   @oChg{}@key[function] "&" (Left : @key[in] Unbounded_String; Right : @key[in] String)
+   @key[function] "&" (Left : @key[in] Unbounded_String; Right : @key[in] String)
       @key[return] Unbounded_String;
 
    @key[function] "&" (Left : @key[in] String; Right : @key[in] Unbounded_String)
@@ -1554,7 +1537,7 @@ The library package Strings.Unbounded has the following declaration:
       @key[return] Unbounded_String;
 
    @key[function] "&" (Left : @key[in] Character; Right : @key[in] Unbounded_String)
-      @key[return] Unbounded_String;@oEndChg{}
+      @key[return] Unbounded_String;
 
 
    @key[function] Element (Source : @key[in] Unbounded_String;
@@ -1769,10 +1752,6 @@ The library package Strings.Unbounded has the following declaration:
    ... -- @i{not specified by the language}
 @key[end] Ada.Strings.Unbounded;
 @end{example}
-@oChgRef{94-4528.a}
-@oChgRef{94-4811.a}
-@oChgRef{94-4884.a}
-@oChgRef{94-4606.a}
 
 Null_Unbounded_String represents the null String.
 If an object of type Unbounded_String is not otherwise initialized, it
@@ -1847,17 +1826,17 @@ No storage associated
 with an Unbounded_String object shall be
 lost upon assignment or scope exit.
 @begin{ImplNote}
-@oChg{}
+
 A sample implementation of the private part of
 the package and several of the subprograms appears in the Rationale.
-@oEndChg{}
+
 @end{ImplNote}
 @end{ImplReq}
 
 @LabeledAppendixSubSection{String-Handling Sets and Mappings}
 
 @begin{Intro}
-@oBigChg{}
+
 The language-defined package Strings.Maps.Constants declares
 Character_Set
 and Character_Mapping
@@ -1869,14 +1848,12 @@ visibility of the private part of Strings.Maps in order to
 initialize the constants
 in a preelaborable way (i.e. via aggregates versus function calls).
 @end{discussion}
-@oEndBigChg{}
-@oChgRef{94-4469.a}
-@oChgRef{94-4884.a}
+
 @end{Intro}
 
 @begin{StaticSem}
 The library package Strings.Maps.Constants has the following declaration:
-@BigChg{}
+
 @begin{example}
 @ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants],Expanded=[Ada.Strings.Maps.Constants]}
 @key[package] Ada.Strings.Maps.Constants @key[is]
@@ -1905,8 +1882,7 @@ The library package Strings.Maps.Constants has the following declaration:
    ... -- @i{not specified by the language}
 @key[end] Ada.Strings.Maps.Constants;
 @end{example}
-@EndBigChg{}
-@oChgRef{94-4469.a}
+
 
 Each of these constants represents a correspondingly named
 set of characters or
@@ -1920,10 +1896,9 @@ character mapping in Characters.Handling
 Facilities for handling strings of Wide_Character elements are
 found in the packages Strings.Wide_Maps, Strings.Wide_Fixed,
 Strings.Wide_Bounded, Strings.Wide_Unbounded,
-@oBigChg{}
+
 and Strings.Wide_Maps.Wide_Constants.
-@oEndBigChg{}
-@oChgRef{94-4469.a}
+
 They provide the same string-handling operations
 as the corresponding packages for
 strings of Character elements.
@@ -1957,7 +1932,7 @@ The package Strings.Wide_Maps has the following declaration.
      @key[end] @key[record];
    -- @i{Represents Wide_Character range Low..High}
 
-   @oBigChg{}@key[type] Wide_Character_Ranges @key[is] @key[array] (Positive @key[range] <>) @key[of] Wide_Character_Range;
+   @key[type] Wide_Character_Ranges @key[is] @key[array] (Positive @key[range] <>) @key[of] Wide_Character_Range;
 
    @key[function] To_Set    (Ranges : @key[in] Wide_Character_Ranges) @key[return] Wide_Character_Set;
 
@@ -1971,7 +1946,7 @@ The package Strings.Wide_Maps has the following declaration.
    @key[function] "@key[and]" (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
    @key[function] "@key[or]"  (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
    @key[function] "@key[xor]" (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
-   @key[function] "@key[@en]"   (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;@oEndBigChg{}
+   @key[function] "@key[@en]"   (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
 
    @key[function] Is_In (Element : @key[in] Wide_Character;
                    Set     : @key[in] Wide_Character_Set)
@@ -1999,9 +1974,9 @@ The package Strings.Wide_Maps has the following declaration.
    --@i{ Representation for a Wide_Character to Wide_Character mapping:}
    @key[type] Wide_Character_Mapping @key[is] @key[private];
 
-   @oBigChg{}@key[function] Value (Map     : @key[in] Wide_Character_Mapping;
+   @key[function] Value (Map     : @key[in] Wide_Character_Mapping;
                    Element : @key[in] Wide_Character)
-      @key[return] Wide_Character;@oEndBigChg{}
+      @key[return] Wide_Character;
 
    Identity : @key[constant] Wide_Character_Mapping;
 
@@ -2022,25 +1997,18 @@ The package Strings.Wide_Maps has the following declaration.
    ... -- @i{not specified by the language}
 @key[end] Ada.Strings.Wide_Maps;
 @end{example}
-@oChgRef{94-4606.a}
-@oChgRef{94-4465.a}
-@oChgRef{94-4818.a}
-@oChgRef{94-4728.a}
-@oChgRef{94-4913.b}
 
 The context clause for each of the packages Strings.Wide_Fixed,
-@oChg{}
+
 Strings.Wide_Bounded, and Strings.Wide_Unbounded
-@oEndChg{}
-@oChgRef{94-4469.a}
+
 identifies Strings.Wide_Maps instead of Strings.Maps.
 
 For each of the packages  Strings.Fixed, Strings.Bounded,
 Strings.Unbounded, and
-@oChg{}
+
 Strings.Maps.Constants
-@oEndChg{}
-@oChgRef{94-4469.a}
+
 the corresponding wide string package has
 the same contents except that
 @begin{itemize}
@@ -2076,12 +2044,11 @@ To_Unbounded_Wide_String replaces To_Unbounded_String
 @end{Itemize}
 
 The following additional declaration is present in
-@oChg{}Strings.Wide_Maps.Wide_Constants:@oEndChg{}
+Strings.Wide_Maps.Wide_Constants:
 @begin{example}
 Character_Set : @key[constant] Wide_Maps.Wide_Character_Set;
-@oChg{}--@i{Contains each Wide_Character value WC such that Characters.Is_Character(WC) is True}@oEndChg{}
+--@i{Contains each Wide_Character value WC such that Characters.Is_Character(WC) is True}
 @end{example}
-@oChgRef{94-4768.s}
 @end{StaticSem}
 
 @begin{NotesNotes}
@@ -2089,10 +2056,10 @@ Character_Set : @key[constant] Wide_Maps.Wide_Character_Set;
 If a null Wide_Character_Mapping_Function is passed to any of the
 Wide_String handling subprograms, Constraint_Error is propagated.
 
-@chg{}Each Wide_Character_Set constant in the package
+Each Wide_Character_Set constant in the package
 Strings.Wide_Maps.Wide_Constants contains no values outside the Character
 portion of Wide_Character.  Similarly, each Wide_Character_Mapping
 constant in this package is the identity mapping when applied to
-any element outside the Character portion of Wide_Character. @endchg{}
+any element outside the Character portion of Wide_Character. 
 @end{NotesNotes}
 

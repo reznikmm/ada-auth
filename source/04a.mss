@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:01 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
 @LabeledChapter{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -14,7 +14,7 @@ expression, and to their evaluation, are given in this section.]
 @LabeledSection{Names}
 
 @begin{Intro}
-@begin(Redundant)
+@redundant[
 @nt<Name>s can denote declared entities, whether declared explicitly
 or implicitly (@lSeeSecNum(Declarations)).  @nt<Name>s can also
 denote objects or subprograms designated by access values; the
@@ -23,7 +23,7 @@ and slices of objects and values; protected subprograms,
 single entries, entry families,
 and entries in families of entries.
 Finally, @nt<name>s can denote attributes of any of the foregoing.
-@end(Redundant)
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -329,12 +329,12 @@ two-dimensional array.
 @LabeledSubSection{Slices}
 
 @begin{Intro}
-@begin(Redundant)
+@redundant[
 @Defn{array slice}
 A @nt<slice> denotes a one-dimensional array formed by a sequence of
 consecutive components of a one-dimensional array.  A @nt<slice> of
 a variable is a variable; a @nt<slice> of a constant is a constant;
-@end(Redundant)
+]
 a @nt<slice> of a value is a value.
 @end{Intro}
 
@@ -417,13 +417,13 @@ component of the array A and has the corresponding component type.
 @LabeledSubSection{Selected Components}
 
 @begin{Intro}
-@begin(Redundant)
+@redundant[
 @nt{Selected_component}s are used to denote components (including
 discriminants),
 entries, entry families, and protected subprograms; they are
 also used as expanded names as described below.
 @IndexSee{Term=[dot selection],See=(selected_component)}
-@end(Redundant)
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -458,9 +458,8 @@ shall resolve to denote one of the following:
 A component @Redundant[(including a discriminant)]:
 
 The @nt{prefix} shall resolve to denote an object or value of some
-@oChg{}non-array@oEndChg{} composite type
+non-array composite type
 (after any implicit dereference).
-@oChgRef{94-4493.c}
 The @nt{selector_name} shall resolve to denote a
 @nt{discriminant_specification} of the type, or, unless the type is
 a protected type, a @nt<component_declaration>
@@ -716,14 +715,13 @@ attribute shall differ from those of the language-defined attributes.
 They cannot be reserved words because reserved words are not legal
 identifiers.
 
-@oChg{}
+
 The semantics of implementation-defined attributes,
 and any associated rules,
 are, of course, implementation defined.
 For example, the implementation defines whether a given
 implementation-defined attribute can be used in a static expression.
-@oEndChg{}
-@oChgRef{94-4539.b}
+
 @end{Ramification}
 @end{ImplPerm}
 
@@ -1527,7 +1525,7 @@ The extension aggregate syntax is new.
 @LabeledSubSection{Array Aggregates}
 
 @begin{Intro}
-@oChg{}
+
 @Redundant[In an @nt<array_aggregate>, a value is specified
 for each component of an array, either positionally or by
 its index.]
@@ -1538,8 +1536,7 @@ representing any remaining components.
 For a @nt{named_array_aggregate},
 the components are identified by the values covered by the
 @nt{discrete_choice}s.
-@oEndChg{}
-@oChgRef{94-4603.a}
+
 @end{Intro}
 
 @begin{MetaRules}
@@ -1883,7 +1880,7 @@ Vector'(1 => 2.5)                                @i[--  single-component vector]
 
 @i(Examples of aggregates as initial values:)
 @begin{Example}
-A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        @i[-- A(1)=7, A(10)=@oChg{}0@oChgRef{94-4667.c}@oEndChg{}]
+A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        @i[-- A(1)=7, A(10)=0]
 B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        @i[-- B(1)=0, B(10)=1]
 C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); @i[-- C'Last(1)=5, C'Last(2)=8]
 
@@ -2173,7 +2170,7 @@ that is, they are implicitly declared immediately after the type definition.
 For each such implicit operator declaration, the
 parameters are called Left and Right for @i(binary) operators;
 the single parameter is called Right for @i(unary) operators.
-@begin(Redundant)
+@redundant[
 An expression of the form X op Y,
 where op is a binary operator,
 is equivalent to a @nt<function_call> of the form "op"(X, Y).
@@ -2183,20 +2180,19 @@ is equivalent to a @nt<function_call> of the form "op"(Y).
 The predefined operators and their effects are described
 in subclauses @RefSecNum(Logical Operators and Short-Circuit Control Forms)
 through @RefSecNum(Highest Precedence Operators).
-@end(Redundant)
+]
 @end{StaticSem}
 
 @begin{RunTime}
-@begin{Redundant}
+@redundant[
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 The predefined operations on integer types either yield the mathematically
 correct result or raise the exception Constraint_Error.
-@oChg{}For implementations that support the Numerics Annex,@oEndChg{}
+For implementations that support the Numerics Annex,
 the predefined operations on real types yield results whose
 accuracy is defined in @RefSecNum(Numerics), or
 raise the exception Constraint_Error.
-@oChgRef{94-4481.a}
-@end{Redundant}
+]
 @begin{Honest}
   Predefined operations on real types can ``silently'' give wrong results
   when the Machine_Overflows attribute is false, and the
@@ -2218,10 +2214,10 @@ that delivers a result of a floating point type may raise Constraint_Error
 only if the result is outside the safe range of the
 result type.
 @begin{Honest}
-@Chg{}
+
 An exception is made for exponentiation by a negative exponent in
 @RefSecNum{Highest Precedence Operators}.
-@EndChg{}
+
 @end{Honest}
 @end{ImplReq}
 
@@ -2399,7 +2395,7 @@ N = 0 @key(or) @key(else) A(N) = Hit_Value
 @LabeledSubSection{Relational Operators and Membership Tests}
 
 @begin{Intro}
-@begin(Redundant)
+@redundant[
 @Defn{relational operator}@Defn2{Term=[operator],Sec=(relational)}
 @IndexSee{Term=[comparison operator],See=(relational operator)}
 @Defn{equality operator}@Defn2{Term=[operator],Sec=(equality)}
@@ -2439,7 +2435,7 @@ determines whether or not a value
 belongs to a given subtype or range, or has a tag that identifies
 a type that is covered by a given type.
 Membership tests are allowed for all types.
-@end(Redundant)
+]
 
 @end{Intro}
 
@@ -2520,15 +2516,13 @@ type.
   @i(nearly) equal values depends on the accuracy of
   the implementation
   (@lSeeSec{Model of Floating Point Arithmetic}
-  @oChg{}for implementations that support the Numerics Annex).@oEndChg{}
-@oChgRef{94-4481.a}
+  for implementations that support the Numerics Annex).
 @end{Ramification}
 @begin{ImplNote}
-  On a machine with signed @oChg{}zeros,@oEndChg{}
+  On a machine with signed zeros,
   if the generated code generates both plus zero and minus zero,
   plus and minus zero must be equal
   by the predefined equality operators.
-@oChgRef{94-4539.c}
 @end{ImplNote}
 
 Two access-to-object values are equal if they designate the same
@@ -2587,8 +2581,7 @@ in terms of the corresponding operation on
 @begin(itemize)
   For two composite objects or values of the same non-array type,
   matching components are those that correspond to the
-  same @nt<component_declaration> or @oChg{}@nt<discriminant_specification>;@oEndChg{}
-@oChgRef{94-4667.f}
+  same @nt<component_declaration> or @nt<discriminant_specification>;
 
   For two one-dimensional arrays of the same type, matching components are
   those (if any) whose index values match in the following sense: the
@@ -3096,7 +3089,7 @@ not @i(universal_fixed).
 @begin{RunTime}
 The multiplication and division operators for real types have
 their conventional meaning.
-@begin{Redundant}
+@redundant[
 For floating point types, the accuracy of the result is
 determined by the precision of the result type.
 For decimal fixed point types, the result is truncated toward zero
@@ -3106,7 +3099,7 @@ for ordinary fixed point types, if the mathematical result is
 between two multiples of the @i(small), it is unspecified
 which of the two is the result.
 @PDefn{unspecified}
-@end{Redundant}
+]
 
 @IndexCheck{Division_Check}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
@@ -3255,10 +3248,9 @@ check fails.
 
 @Defn{exponentiation operator}@Defn2{Term=[operator],Sec=(exponentiation)}
 @Defn{** operator}@Defn2{Term=[operator],Sec=(**)}
-The highest precedence @oChg{}@i(exponentiation)@oEndChg{} operator ** is predefined
+The highest precedence @i(exponentiation) operator ** is predefined
 for every specific integer type @i(T)
 with the following specification:
-@oChgRef{94-4693.v}
 @begin(example)
 @key(function) "**"(Left : @i(T); Right : Natural) @key(return) @i(T)
 @end(example)
@@ -3471,11 +3463,10 @@ These rules are designed to ensure that aliased array objects
 @end{Reason}
 
 @PDefn2{Term=[accessibility rule],Sec=(type conversion)}
-@oBigChg{}
+
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
-@oEndBigChg{}
-@oChgRef{94-4715.a}
+
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (@lSeeSecNum{Generic Instantiation}),
@@ -3496,10 +3487,9 @@ type shall be an access-to-subprogram type.  Further:
 @Defn2{Term=[subtype conformance],Sec=(required)}
 
 @PDefn2{Term=[accessibility rule],Sec=(type conversion)}
-@oBigChg{}
+
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
-@oChgRef{94-4715.a}
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (@lSeeSecNum{Generic Instantiation}),
@@ -3507,13 +3497,9 @@ type shall be an access-to-subprogram type.  Further:
   instance of a generic unit.
   If the operand type is declared within a generic body,
   the target type shall be declared within the generic body.
-@oEndBigChg{}
-@oChgRef{94-4692.a}
-@oChgRef{94-4702.a}
-@oChgRef{94-4706.a}
-@oChgRef{94-4708.a}
+
 @begin{Reason}
-  @oChg{}The reason it is illegal to convert from an access-to-subprogram type
+  The reason it is illegal to convert from an access-to-subprogram type
   declared in a generic body to one declared outside that body
   is that in an implementation that shares generic bodies,
   procedures declared inside the generic need to have a different
@@ -3521,7 +3507,7 @@ type shall be an access-to-subprogram type.  Further:
   data declared in the current instance.
   For procedures declared in the spec,
   that's OK, because the compiler can know about them at compile time of
-  the instantiation.@oEndChg{}
+  the instantiation.
 @end{Reason}
 @end(itemize)
 
@@ -3602,8 +3588,7 @@ Constraint_Error is raised@Redundant[; this can only
 happen on conversion to a modular type,
 and only when the operand value is outside the base range of
 the modular type.]
-Additional rules @oChg{}@oEndChg{}follow:
-@oChgRef{94-4667.l}
+Additional rules follow:
 @begin(itemize)
 @Defn2{Term=[type conversion],sec=(numeric)}
 @Defn2{Term=[conversion],sec=(numeric)}
@@ -3622,8 +3607,7 @@ Numeric Type Conversion
   If the target type is some other real type,
   then the result is within the accuracy of the target type
   (@lSeeSec{Numeric Performance Requirements},
-  @oChg{}for implementations that support the Numerics Annex).@oEndChg{}
-@oChgRef{94-4481.a}
+  for implementations that support the Numerics Annex).
   @begin(Discussion)
     An integer type might have more bits of precision than a real type,
     so on conversion (of a large integer), some precision might be lost.
@@ -3753,22 +3737,20 @@ It
 Access Type Conversion
 @begin(itemize)
   @IndexCheck{Accessibility_Check}
-@oBigChg{}
+
   For an access-to-object type,
   a check is made that the accessibility level of the operand
   type is not deeper than that of the target type.
-@oEndBigChg{}
-@oChgRef{94-4715.a}
+
   @begin{Ramification}
-  This check is needed for @oChg{}operands that are@oEndChg{} access
+  This check is needed for operands that are access
   parameters and in instance bodies.
 
-@oBigChg{}
+
   Note that this check can never fail for the implicit conversion
   to the anonymous type of an access parameter that is done when
   calling a subprogram with an access parameter.
-@oEndBigChg{}
-@oChgRef{94-4715.a}
+
   @end{Ramification}
 
   @IndexCheck{Access_Check}
@@ -4133,10 +4115,9 @@ An @i(uninitialized) allocator is one with
 a @nt{subtype_indication}.
 In the @nt<subtype_indication> of an uninitialized allocator, a
 @nt<constraint> is permitted only if the @nt<subtype_mark> denotes an
-@Redundant[unconstrained] composite @oChg{}subtype;
-if@oEndChg{} there is no @nt<constraint>, then the @nt<subtype_mark>
+@Redundant[unconstrained] composite subtype;
+if there is no @nt<constraint>, then the @nt<subtype_mark>
 shall denote a definite subtype.
-@oChgRef{94-4759.a}
 @IndexSee{Term=[constructor],See=[initialized alligator]}
 @begin{Ramification}
   For example, ... @key[new] S'Class ... (with no initialization
@@ -4334,14 +4315,11 @@ Only scalar and string expressions are static.
 To be static, an expression cannot have any nonscalar, nonstring
 subexpressions (though it can have nonscalar constituent @nt<name>s).
 A static scalar expression cannot have any nonscalar subexpressions.
-@oChg{}
+
 There is one exception @em a membership test for a string subtype
 can be static, and the result is scalar, even though a subexpression
 is nonscalar.
-@oEndChg{}
-@oChgRef{94-4679.a}
-@oChgRef{94-4684.a}
-@oChgRef{94-4687.a}
+
 
 The rules for evaluating static expressions are designed
 to maximize portability of static calculations.
@@ -4349,34 +4327,19 @@ to maximize portability of static calculations.
 
 @begin{Intro}
 @Defn2{Term=[static], Sec=(expression)}
-@oBigChg{}
+
 A static expression is
 @Redundant[a scalar or string expression that is]
 one of the following:
-@oEndBigChg{}
-@oChgRef{94-4679.a}
-@oChgRef{94-4684.a}
-@oChgRef{94-4687.a}
-@oChgRef{94-4738.a}
-@oChgRef{94-4926.a}
-@oChgRef{94-4929.a}
-@oChgRef{94-4950.a}
-@begin{oChgNote}
-  Removed the term ``potentially static'',
-  as suggested by 94-4929.a.
-  Modified the terminology so that a static expression is defined
-  independently of exceptions.
-  Below, there's a rule making a static expression illegal
-  if it is evaluated at compile time and that evaluation raises an
-  exception (except that overflows can't happen).
-@end{oChgNote}
+
+
 @begin{Itemize}
 a @nt{numeric_literal};
 @begin{Ramification}
   A @nt<numeric_literal> is always a static expression, even if
   its expected type is not that of a static subtype.  However, if its value
   is explicitly converted to, or qualified by, a nonstatic subtype,
-  the resulting @oChg{}expression@oEndChg{} is nonstatic.
+  the resulting expression is nonstatic.
 @end{Ramification}
 
 a @nt{string_literal} of a static string subtype;
@@ -4399,18 +4362,16 @@ a @nt{function_call}
 whose @SynI{function_}@nt{name} or
 @SynI{function_}@nt{prefix} statically denotes a static function,
 and whose actual parameters, if any (whether given explicitly or by default),
-are all @oChg{}static@oEndChg{} expressions;
+are all static expressions;
 @begin{Ramification}
 This includes uses of operators that are equivalent to
 @nt{function_call}s.
 @end{Ramification}
 
-@oChg{}
+
 an @nt{attribute_reference} that denotes a scalar value,
 and whose @nt{prefix} denotes a static scalar subtype;
-@oEndChg{}
-@oChgRef{94-4679.c}
-@oChgRef{94-4684.c}
+
 @begin{Ramification}
   Note that this does not include the case of an attribute
 that is a function;
@@ -4426,19 +4387,17 @@ an @nt{attribute_reference} whose
 @nt{prefix} statically denotes a statically constrained array
 object or array subtype,
 and whose @nt<attribute_designator>
-@oChg{}is First, Last, or Length,
-with an optional dimension;@oEndChg{}
-@oChgRef{94-4968.a}
+is First, Last, or Length,
+with an optional dimension;
 
 a @nt{type_conversion}
 whose @nt{subtype_mark} denotes a static scalar subtype,
-and whose operand is a @oChg{}static@oEndChg{} expression;
+and whose operand is a static expression;
 
-a @oChg{}@nt{qualified_expression}
+a @nt{qualified_expression}
 whose @nt{subtype_mark} denotes a
 static @Redundant[(scalar or string)] subtype,
-and whose operand is a static@oEndChg{} expression;
-@oChgRef{94-4667.p}
+and whose operand is a static expression;
 @begin{Ramification}
 This rules out the @nt{subtype_mark}'@nt{aggregate} case.
 @end{Ramification}
@@ -4448,8 +4407,8 @@ for strings.
 @end{Reason}
 
 a membership test
-whose @nt{simple_expression} is a @oChg{}static@oEndChg{} expression,
-and whose @nt{range} is a @oChg{}static@oEndChg{} range
+whose @nt{simple_expression} is a static expression,
+and whose @nt{range} is a static range
 or whose @nt{subtype_mark} denotes a
 static @Redundant[(scalar or string)] subtype;
 @begin{Reason}
@@ -4458,9 +4417,9 @@ where we allow @nt{qualified_expression}s.
 @end{Reason}
 
 a short-circuit control form
-both of whose @nt{relation}s are @oChg{}static@oEndChg{} expressions;
+both of whose @nt{relation}s are static expressions;
 
-a @oChg{}static@oEndChg{} expression enclosed in parentheses.
+a static expression enclosed in parentheses.
 @end{Itemize}
 @begin(Discussion)
   @Defn2{Term=static, Sec=(value)}
@@ -4468,7 +4427,7 @@ a @oChg{}static@oEndChg{} expression enclosed in parentheses.
   we mean a value specified by a static expression.
 @end(Discussion)
 @begin{Ramification}
-  @oChg{}@oEndChg{}The language requires a static
+  The language requires a static
   expression in a @nt<number_declaration>,
   a numeric type definition, a @nt<discrete_choice> (sometimes),
   certain representation items, an @nt<attribute_designator>,
@@ -4508,13 +4467,9 @@ types are all scalar types none of which are descendants of
 formal scalar types;
 
 a predefined concatenation operator
-@oBigChg{}
+
 whose result type is a string type;
-@oEndBigChg{}
-@oChgRef{94-4679.a}
-@oChgRef{94-4684.a}
-@oChgRef{94-4687.a}
-@oChgRef{94-4738.a}
+
 
 an enumeration literal;
 
@@ -4529,7 +4484,7 @@ In any case, a generic formal subprogram is not a static function.
 A @i(static constant) is
 a constant view declared by a full constant declaration
 or an @nt<object_renaming_declaration> with a static nominal subtype,
-@Chg{}having a value defined by a static scalar expression or by@EndChg{}
+having a value defined by a static scalar expression or by
 a static string expression whose value has a length not exceeding
 the maximum length of a @nt{string_literal} in the implementation.
 @begin{Ramification}
@@ -4545,25 +4500,22 @@ from @nt{string_literal}s, the length limit seems pretty natural.
 The reason for avoiding nonstring types is also to save symbol table
 space.
 We're trying to keep it cheap and simple
-(from the @Chg{}implementer's@EndChg{} viewpoint),
+(from the implementer's viewpoint),
 while still allowing, for example,
 the link name of a pragma Import to contain
 a concatenation.
 
-@oChg{}
+
 The length we're talking about is the maximum number of characters in
 the value represented by a @nt{string_literal},
 not the number of characters in the source representation;
 the quotes don't count.
-@oEndChg{}
-@oChgRef{94-4747.b}
-@oChgRef{94-4748.b}
-@oChgRef{94-4754.b}
+
 @end{Reason}
 
 @Defn2{Term=[static], Sec=(range)}
-@oChg{}A @i(static range) is a @nt{range} whose bounds are
-static expressions,@oEndChg{}
+A @i(static range) is a @nt{range} whose bounds are
+static expressions,
 @Redundant[or a @nt<range_attribute_reference> that is equivalent to
 such a @nt<range>.]
 @Defn2{Term=static, Sec=(discrete_range)}
@@ -4584,13 +4536,12 @@ static scalar subtype.
 @Defn2{Term=static, Sec=(string subtype)}
 A static string subtype is an unconstrained string subtype
 whose index subtype and component subtype are static
-@oChg{}
+
 (and whose type is not a descendant of a formal array type),
-@oEndChg{}
+
 or a constrained string subtype
 formed by imposing a compatible static
 constraint on a static string subtype.
-@oChgRef{94-4539.a}
 In any case, the subtype of a generic formal object of mode
 @key[in out],
 and the result subtype of a generic formal function,
@@ -4657,12 +4608,11 @@ A subtype is @i(statically constrained) if it is constrained,
 and its constraint is static.
 An object is @i(statically constrained) if its nominal subtype is
 statically constrained,
-@oBigChg{}or if it is a static string constant.@oEndBigChg{}
-@oChgRef{94-4776.c}
+or if it is a static string constant.
 @end{Intro}
 
 @begin{Legality}
-@oBigChg{}
+
 A static expression is evaluated at compile time except when it is part
 of the right operand of a static short-circuit control form whose value
 is determined by its left operand.
@@ -4689,10 +4639,7 @@ then its value shall be a multiple of the @i<small> of the decimal type.
 The last two restrictions above do not apply if the expected type is a
 descendant of a formal scalar type
 (or a corresponding actual type in an instance).
-@oEndBigChg{}
-@oChgRef{94-4926.a}
-@oChgRef{94-4929.a}
-@oChgRef{94-4950.a}
+
 @begin{Discussion}
   Values outside the base range are not permitted
   when crossing from the ``static'' domain to the ``dynamic'' domain.
@@ -4702,7 +4649,7 @@ descendant of a formal scalar type
   not the value after any rounding or truncation.
   (See below for the rounding and truncation requirements.)
 
-@Chg{}
+
   Short-circuit control forms are a special case:
 @begin{Example}
 N: @key[constant] := 0.0;
@@ -4712,7 +4659,7 @@ X: @key[constant] Boolean := (N = 0.0) @key[or] @key[else] (1.0/N > 0.5); --@i{ 
 The declaration of X is legal, since the divide-by-zero part of the
 expression is not evaluated.
 X is a static constant equal to True.
-@EndChg{}
+
 @end{Discussion}
 @begin{Reason}
   There is no requirement to recheck these rules
@@ -4722,9 +4669,9 @@ X is a static constant equal to True.
 @end{Legality}
 
 @begin{ImplReq}
-@oChg{}For a real static expression that is not part of a larger static
+For a real static expression that is not part of a larger static
 expression,
-and whose@oEndChg{} expected type is not a descendant of a formal scalar type,
+and whose expected type is not a descendant of a formal scalar type,
 the implementation shall round or truncate
 the value (according to the Machine_Rounds
 attribute of the expected type) to the nearest machine
@@ -4749,27 +4696,26 @@ accuracy rules apply (@lSeeSecNum(Numerics)).
   for descendants of a formal fixed point type.
 @end{Reason}
 @begin{ImplNote}
-@Chg{}
+
   Note that the implementation of static expressions has to keep track
   of plus and minus zero for a type whose Signed_Zeros attribute is
   True.
-@oChgRef{94-4539.c}
 
   Note that the only values of a fixed point type are the multiples of
   the small, so a static conversion to a fixed-point type, or division
   by an integer, must do truncation to a multiple of small.
   It is not correct for the implementation to do all static calculations
   in infinite precision.
-@EndChg{}
+
 @end{ImplNote}
 
 @end{ImplReq}
 
 @begin{NotesNotes}
-An expression can be static @oChg{}even if it occurs in a context where
-staticness is not required.@oEndChg{}
+An expression can be static even if it occurs in a context where
+staticness is not required.
 @begin{Ramification}
-@oChg{}
+
 For example:
 @begin{Example}
 X : Float := Float'(1.0E+400) + 1.0 - Float'(1.0E+400);
@@ -4779,7 +4725,7 @@ The expression is static,
 which means that the value of X must be exactly 1.0,
 independent of the accuracy or range of the run-time floating point
 implementation.
-@oEndChg{}
+
 
 The following kinds of expressions are never static:
 @nt{explicit_dereference},
@@ -4805,14 +4751,12 @@ between two integers, the rounding is performed away from zero.
   to prevent rounding.
 @end{Ramification}
 @begin{ImplNote}
-@Chg{}
+
   The value of the literal
   0E999999999999999999999999999999999999999999999
   is zero.
   The implementation must take care to evaluate such literals properly.
-@EndChg{}
-@ChgRef{94-5001.d}
-@ChgRef{94-5005.c}
+
 @end{ImplNote}
 @end{NotesNotes}
 
@@ -4860,16 +4804,16 @@ types with an index type that is a formal scalar type.
 @end(itemize)
 
 The rules for the evaluation of static expressions
-are revised to require exact evaluation @oChg{}at compile time,
+are revised to require exact evaluation at compile time,
 and force a machine number result when crossing from the static realm
 to the dynamic realm,
 to enhance portability and predictability.
 Exact evaluation is not required for
-descendants of a formal scalar type,@oEndChg{}
+descendants of a formal scalar type,
 to simplify generic code sharing and to avoid generic
 contract model problems.
 
-@oChg{}Static expressions are legal@oEndChg{} even if an intermediate
+Static expressions are legal even if an intermediate
 in the expression goes outside the base range of the type.  Therefore, the
 following will succeed in Ada 9X, whereas it might raise an
 exception in Ada 83:
@@ -4881,11 +4825,11 @@ I : Short_Int := -32_768;
 This might raise an exception in Ada 83 because "32_768" is out of range,
 even though "@en@;32_768" is not.  In Ada 9X, this will always succeed.
 
-@oChg{}
+
 Certain expressions involving string operations
 (in particular concatenation and membership tests)
 are considered static in Ada 9X.
-@oEndChg{}
+
 
 The reason for this change is to simplify the rule requiring
 compile-time-known string expressions as the link name in an interfacing
@@ -4894,16 +4838,16 @@ pragma, and to simplify the preelaborability rules.
 
 @begin{Incompatible83}
 An Ada 83 program that uses an out-of-range static value
-is illegal in Ada 9X, @oChg{}unless the expression is part of a larger
+is illegal in Ada 9X, unless the expression is part of a larger
 static expression, or the expression is not evaluated due to being on
-the right-hand side of a short-circuit control form.@oEndChg{}
+the right-hand side of a short-circuit control form.
 @end{Incompatible83}
 
 @begin{DiffWord83}
 This clause (and @RefSec{Multiplying Operators})
 subsumes the RM83 section on Universal Expressions.
 
-@oChg{}The existence of static string expressions@oEndChg{}
+The existence of static string expressions
 necessitated changing the definition of static subtype to
 include string subtypes.
 Most occurrences of "static subtype" have been changed to "static scalar
@@ -4918,7 +4862,7 @@ or "static (scalar or string) subtype",
 in order to clarify the meaning for those who have gotten used to the
 Ada 83 terminology.
 
-@oChg{}
+
 In Ada 83, an expression was considered nonstatic if it raised an
 exception.
 Thus, for example:
@@ -4931,7 +4875,7 @@ In Ada 9X, the above example is still illegal,
 but for a different reason:
 1/0 is static, but there's a separate rule forbidding the exception
 raising.
-@oEndChg{}
+
 @end{DiffWord83}
 
 @LabeledSubSection{Statically Matching Constraints and Subtypes}

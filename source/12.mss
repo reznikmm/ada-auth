@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:02 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
 @LabeledChapter{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -32,7 +32,7 @@ generic unit.
   Generic units can be used to perform the role that macros
   sometimed play in other languages.>}
 
-@begin{Redundant}
+@redundant[
 A generic unit is declared by a @nt{generic_declaration}.  This form
 of declaration has a @nt{generic_formal_part} declaring any generic
 formal parameters.  An instance of a generic unit is obtained as the
@@ -47,20 +47,20 @@ example, a generic subprogram can be instantiated but it cannot be
 called.  In contrast, an instance of a generic subprogram is a
 (nongeneric) subprogram; hence, this instance can be called but it
 cannot be used to produce further instances.
-@end{Redundant}
+]
 @end{Intro}
 
 @LabeledSection{Generic Declarations}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{generic_declaration} declares a generic unit, which is either a
 generic subprogram or a generic package.  A @nt{generic_declaration}
 includes a @nt{generic_formal_part} declaring any generic formal
 parameters.  A generic formal parameter can be an object;
 alternatively (unlike a parameter of a subprogram), it can be a type,
 a subprogram, or a package.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -239,14 +239,13 @@ We also use terms like ``generic function body'' and
 The elaboration of a generic body has no other effect than to
 establish that the generic unit can from then on be instantiated without
 failing the Elaboration_Check.
-@BigChg{}
+
 If the generic body is a child of a generic package,
 then its elaboration establishes that each corresponding
 declaration nested in an instance of the parent
 (@lSeeSecNum{Compilation Units - Library Units})
 can from then on be instantiated without failing the Elaboration_Check.
-@EndBigChg{}
-@oChgRef{94-4933.a}
+
 @end{RunTime}
 
 @begin{NotesNotes}
@@ -307,11 +306,11 @@ is always the completion of a declaration.
 @LabeledSection{Generic Instantiation}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn2{Term=[instance], Sec=(of a generic unit)}
 An instance of a generic unit is declared by a
 @nt{generic_instantiation}.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -408,12 +407,10 @@ In a generic unit @LegalityName@;s
 are enforced at compile time of the
 @nt{generic_declaration} and generic body,
 given the properties of the formals.
-In the visible part @oBigChg{}and formal part@oEndBigChg{} of an instance,
+In the visible part and formal part of an instance,
 @LegalityName@;s are enforced at
 compile time of the @nt{generic_instantiation},
 given the properties of the actuals.
-@oChgRef{94-4804.a}
-@oChgRef{94-4808.a}
 In other parts of an instance, @LegalityName@;s
 are not enforced;
 this rule does not apply when a given rule
@@ -465,8 +462,7 @@ provide an applicable index constraint.
 
 The profile of a formal subprogram is not subtype-conformant
 with any other profile.
-@Defn{subtype conformance}@oBigChg{}@oEndBigChg{}
-@oChgRef{94-4774.b}
+@Defn{subtype conformance}
 
 A generic formal function is not static.
 @end{Itemize}
@@ -853,7 +849,7 @@ mechanisms (by-copy vs. by-reference) and @nt{representation_clause}s are
 determined by the actual.
 @end{ImplNote}
 
-@begin{Redundant}
+@redundant[
 Implicit declarations are also copied,
 and a name that denotes an implicit declaration in the generic
 denotes the corresponding copy in the instance.
@@ -875,7 +871,7 @@ can be called only from within the instance; the new
 ones can be called only from outside the instance, although
 for tagged types, the
 body of a new one can be executed by a call to an old one.
-@end{Redundant}
+]
 @begin{TheProof}
 This rule is stated officially in @RefSec{Visibility}.
 @end{TheProof}
@@ -1189,12 +1185,12 @@ generic parameters.
 @LabeledSection{Formal Objects}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{generic formal object}
 @Defn{formal object, generic}
 A generic formal object can be used to pass a value or variable
 to a generic unit.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -1216,24 +1212,18 @@ of the @nt{explicit_generic_actual_parameter}.
 The expected type for the @nt{default_expression}, if any, of a formal
 object is the type of the formal object.
 
-@oBigChg{}
+
 @PDefn2{Term=[expected type], Sec=(generic formal in object actual)}
 For a generic formal object of mode @key[in],
 the expected type for the actual is the type of the formal.
 
 For a generic formal object of mode @key[in out],
 the type of the actual shall resolve to the type of the formal.
-@oChgRef{94-4500.a}
-@oChgRef{94-4505.a}
-@oChgRef{94-4506.a}
-@oChgRef{94-4507.a}
-@oChgRef{94-4509.a}
-@oChgRef{94-4532.a}
 @begin{Reason}
 See the corresponding rule for @nt{object_renaming_declaration}s for a
 discussion of the reason for this rule.
 @end{Reason}
-@oEndBigChg{}
+
 @end{Resolution}
 
 @begin{Legality}
@@ -1382,10 +1372,10 @@ important benefit, and any change has some cost.
 @LabeledSection{Formal Types}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A generic formal subtype can be used to pass to a generic unit
 a subtype whose type is in a certain class of types.
-@end{Redundant}
+]
 @begin{Reason}
 We considered having intermediate syntactic categories
 @nt{formal_integer_type_definition},
@@ -1679,12 +1669,11 @@ For a generic formal derived type with no
   If the ancestor subtype is an unconstrained discriminated
   subtype, then the actual shall have the same number of
   discriminants,
-@oBigChg{}
+
   and each discriminant of the actual shall correspond to
   a discriminant of the ancestor,
   in the sense of @RefSecNum{Discriminants}.
-@oEndBigChg{}
-@oChgRef{94-4777.a}
+
 @begin{Reason}
   This ensures that if a discriminant constraint is given on
   the formal subtype, the corresponding constraint in the instance
@@ -1696,11 +1685,10 @@ For a generic formal derived type with no
 @end{Reason}
 @end(Itemize)
 
-@oBigChg{}The declaration of a formal derived type shall not have a
+The declaration of a formal derived type shall not have a
 @nt{known_discriminant_part}.
-For a generic formal private@oEndBigChg{} type with a
+For a generic formal private type with a
 @nt{known_discriminant_part}:
-@oChgRef{94-4777.a}
 @begin{Itemize}
 The actual type shall be a type with the same number of discriminants.
 
@@ -1718,13 +1706,12 @@ We rejected that idea, because it would require implicit (inherited)
 @end{Reason}
 @end{Itemize}
 
-@oChg{}
+
 @Redundant[For a generic formal type with an
 @nt{unknown_discriminant_part},
 the actual may, but need not, have discriminants,
 and may be definite or indefinite.]
-@oEndChg{}
-@oChgRef{94-4474.a}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -2076,12 +2063,12 @@ types are new concepts.
 @LabeledSection{Formal Subprograms}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{generic formal subprogram}
 @Defn{formal subprogram, generic}
 Formal subprograms can be used to pass callable entities to a generic
 unit.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -2230,7 +2217,7 @@ The actual subprogram cannot be abstract
 @LabeledSection{Formal Packages}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{generic formal package}
 @Defn{formal package, generic}
 Formal packages can be used to pass packages to a generic unit.
@@ -2238,7 +2225,7 @@ The @nt{formal_package_declaration} declares that the formal package
 is an instance of a given generic package.
 Upon instantiation, the actual package has to be an instance
 of that generic package.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}

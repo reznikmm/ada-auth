@@ -1,6 +1,6 @@
 @Part(01, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:00 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:25 $}
 @PageOneFootings{}
 
 @PrefaceSection{} @Comment{Go to odd page.}
@@ -55,10 +55,10 @@ Languages @EmDash{} Ada
 @BlankSpace{0.5inch}
 
 @ChapterSamePage{General}
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:00 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -100,7 +100,7 @@ readability and understandability.
 We're not trying to make the language ``appear'' simple here;
 on the contrary, we're trying to expose hidden complexities,
 so we can more easily detect language bugs.
-The RM9X, on the other hand, is intended to be a @Chg{}more@EndChg{}
+The RM9X, on the other hand, is intended to be a more
 readable document for programmers.
 
 The annotations in the AARM are as follows:
@@ -194,21 +194,7 @@ follows from the other rules of the language.
 A hint about how to implement a feature, or a particular potential
 pitfall that an implementer needs to be aware of.
 @end{ImplNote}
-@begin{BigChgNote}
-Changes to the @Value{RM9XDocumentName} are annotated
-with one of these when more explanation is needed than the comment that
-triggered the change.
-Changes are also marked with the database number of the comment that
-triggered the change, like this: @ChgRef{95-9999.a},
-unless the change is a spelling or grammar correction,
-a correction of Ada syntax in an example,
-a font change, a change to the index or other summary material,
-or a change that appears only in the AARM.
-Changes are also marked with change bars, even if there is no
-corresponding comment in the database.
-However, changes to the index or other summary material are not always
-marked with change bars.
-@end{BigChgNote}
+
 @begin{Discussion}
 Other annotations not covered by the above.
 @end{Discussion}
@@ -245,11 +231,8 @@ to.
 @end{Discussion}
 @end{Intro}
 
-@oChg{}@LabeledSection{Scope}@oEndChg{}
-@begin{oChgNote}
-  Changed this and other titles in Section 1 as per instructions from
-  Keith Brannon at ISO.
-@end{oChgNote}
+@LabeledSection{Scope}
+
 
 @begin{Intro}
 This @SelfRef specifies the form and meaning of programs
@@ -258,7 +241,7 @@ Its purpose is to promote the portability of Ada programs to a variety
 of data processing systems.
 @end{Intro}
 
-@oChg{}@LabeledSubSection{Extent}@oEndChg{}
+@LabeledSubSection{Extent}
 
 @begin{Intro}
 This @SelfRef specifies:
@@ -305,7 +288,7 @@ This @SelfRef does not specify:
 @end(Itemize)
 @end{Intro}
 
-@oChg{}@LabeledSubSection{Structure}@oEndChg{}
+@LabeledSubSection{Structure}
 
 @begin{Intro}
 This @SelfRef contains thirteen sections,
@@ -805,11 +788,10 @@ the Specialized Needs Annexes.
        We do not disallow such techniques from being used across
        @nt{compilation_unit} or @nt{compilation} boundaries.
 
-@oChg{}
+
        See also the @ImplReqTitle of @RefSecNum{Program Execution},
        which disallow the execution of illegal partitions.
-@oChgRef{94-4712.a}
-@oEndChg{}
+
      @end{Discussion}
 
      Supply all language-defined library units required by this
@@ -863,10 +845,8 @@ the Specialized Needs Annexes.
      so we have to make the rule vague.
      @end{Reason}
 
-     @oChg{}Specify@oEndChg{} all such variations in the manner prescribed
+     Specify all such variations in the manner prescribed
      by this @SelfRef.
-@oChgRef{94-4485.d}
-@oChgRef{94-4749.a}
 @end(Itemize)
 
 @Defn2{Term=[external effect], Sec=(of the execution of an Ada program)}
@@ -1378,12 +1358,11 @@ categories:
      the predefined exceptions.  Every Ada compiler is required to
      generate code that raises the corresponding exception if such an
      error situation arises during program execution.
-@oChg{}
+
      @Redundant[If such an error situation is certain to arise in every
      execution of a construct, then an implementation is allowed
      (although not required) to report this fact at compilation time.]
-@oEndChg{}
-@oChgRef{94-4776.a}
+
   @end(Multiple)
 
   @begin(Multiple)
@@ -1522,7 +1501,7 @@ of applying the most recent editions of the standards indicated below.
 Members of IEC and ISO maintain registers of currently valid International
 Standards.
 
-@oChg{}
+
 @Defn{ISO/IEC 646:1991}
 @Defn{646:1991, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(7-bit)}
@@ -1569,12 +1548,8 @@ ISO/IEC 10646-1:1993,
 @i{Information technology @em Universal Multiple-Octet
     Coded Character Set (UCS) @em Part 1: Architecture and Basic
     Multilingual Plane.}
-@oEndChg{}
-@oChgRef{94-4485.f}
-@begin{oChgNote}
-  Changed references as per instructions from
-  Keith Brannon at ISO.
-@end{oChgNote}
+
+
 @begin{Discussion}
 @Defn{POSIX}
 POSIX,

@@ -1,9 +1,9 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:04 $ $Author: Randy $ }
+@Comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:04 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -39,14 +39,14 @@ also useful in addressing these needs,
 to avoid problems that could otherwise arise from scalars
 that have values outside their declared range constraints.
 @begin{Discussion}
-@Chg{}
+
 The Annex tries to provide high assurance rather than language features.
 However, it is not possible, in general, to test for high assurance. For any
 specific language feature, it is possible to demonstrate its presence by a
 functional test, as in the ACVC. One can also check for the presence of some
 documentation requirements, but it is not easy to determine objectively that
 the documentation is ``adequate''.
-@EndChg{}
+
 @end{Discussion}
 @end{NotesNotes}
 
@@ -95,7 +95,7 @@ It's slightly inaccurate to say that the value is a
 the point should be clear anyway.
 @end{Honest}
 @begin{Discussion}
-@Chg{}
+
 By providing a type with a size specification so that spare bits are
 present, it is possible to force an implementation of Normalize_Scalars to use
 an out of range value. This can be tested for by ensuring that
@@ -109,7 +109,7 @@ of range value.
 If it is difficult to document the general rule for the implicit initial
 value, the implementation might choose instead to record the value on
 the object code listing or similar output produced during compilation.
-@EndChg{}
+
 @end{Discussion}
 @end{DocReq}
 
@@ -118,11 +118,11 @@ Whenever possible, the implicit initial value for a scalar subtype
 should be an invalid representation
 (@lSeeSecNum{Data Validity}).
 @begin{Discussion}
-@Chg{}
+
 When an out of range value is used for the initialization,
 it is likely that constraint checks will detect it.
 In addition, it can be detected by the Valid attribute.
-@EndChg{}
+
 @end{Discussion}
 @end{ImplAdvice}
 
@@ -145,13 +145,13 @@ The use of pragma Normalize_Scalars  in conjunction with
 Pragma Restrictions(No_Exceptions) may result in erroneous execution
 (@lSeeSecNum[Safety and Security Restrictions]).
 @begin{Discussion}
-@Chg{}
+
 Since the effect of an access to an out of range value will often be to
 raise Constraint_Error, it is clear that suppressing the exception mechanism
 could result in erroneous execution. In particular, the assignment to an
 array, with the array index out of range, will result in a write to an
 arbitrary store location, having unpredictable effects.
-@EndChg{}
+
 @end{Discussion}
 @end{NotesNotes}
 
@@ -181,7 +181,7 @@ chosen for parameter passing,  the methods used for the management of
 run-time storage, and the method used to evaluate numeric expressions if
 this involves extended range or extra precision.
 @begin{Discussion}
-@Chg{}
+
 Look up ``unspecified'' and ``erroneous execution''
 in the index for a list of the cases.
 
@@ -200,7 +200,7 @@ program
 For this reason documentation linked to an actual compilation may be
 most useful. Similarly, an implementation may be able to take into
 account use of the Restrictions pragma.
-@EndChg{}
+
 @end{Discussion}
 @end{NotesNotes}
 
@@ -221,12 +221,12 @@ object code, in particular to allow determination of
  execution time and storage usage and to identify the
 correspondence between the source and object programs.
 @begin{Discussion}
-@Chg{}
+
 Since the purpose of this pragma is to provide information to the user,
 it is hard to objectively test for conformity. In practice, users want
 the information in an easily understood and convenient form, but neither
 of these properties can be easily measured.
-@EndChg{}
+
 @end{Discussion}
 @end{Intro}
 
@@ -251,22 +251,22 @@ The implementation shall provide the following
 information for any compilation unit to which such a
 pragma applies:
 @begin{Discussion}
-@Chg{}
+
 The list of requirements can be checked for, even if issues like
 intelligibility are not addressed.
-@EndChg{}
+
 @end{Discussion}
 @begin{itemize}
 Where compiler-generated run-time checks remain;
 @begin{Discussion}
-@Chg{}
+
 A constraint check which is implemented via a check on the upper and lower
 bound should clearly be indicated. If a check is implicit in the form of
 machine instructions used (such an overflow checking), this should also be
 covered by the documentation. It is particularly important to cover those
 checks which are not obvious from the source code, such as that for stack
 overflow.
-@EndChg{}
+
 @end{Discussion}
 
 An identification of any construct with a language-defined check
@@ -274,21 +274,21 @@ that is recognized prior to run time as certain to fail
 if executed
 (even if the generation of run-time checks has been suppressed);
 @begin{Discussion}
-@Chg{}
+
 In this case, if the compiler determines that a check must fail, the user
 should be informed of this. However, since it is not in general possible to
 know what the compiler will detect, it is not easy to test for this. In
 practice, it is thought that compilers claiming conformity to this Annex
 will perform significant optimizations and therefore @i{will} detect such
 situations. Of course, such events could well indicate a programmer error.
-@EndChg{}
+
 @end{Discussion}
 
 For each reference to a scalar object, an identification of  the
 reference as either  ``known to be initialized,'' or ``possibly uninitialized,''
 independent of whether pragma Normalize_Scalars applies;
 @begin{Discussion}
-@Chg{}
+
 This issue again raises the question as to what the compiler has determined.
 A lazy implementation could clearly mark all scalars as ``possibly
 uninitialized'', but this would be very unhelpful to the user. It should be
@@ -297,61 +297,61 @@ class. Note that an access marked ``known to be initialized'' does not imply
 that the value is in range, since the initialization could be from an
 (erroneous) call of unchecked conversion, or by means external to the Ada
 program.
-@EndChg{}
+
 @end{Discussion}
 
 Where run-time support routines are implicitly invoked;
 @begin{Discussion}
-@Chg{}
+
 Validators will need to know the calls invoked in order to check for the
 correct functionality. For instance, for some safety applications, it may be
 necessary to ensure that certain sections of code can execute in a
 particular time.
-@EndChg{}
+
 @end{Discussion}
 
 An object code listing, including:
 @begin{itemize}
 Machine instructions, with relative offsets;
 @begin{Discussion}
-@Chg{}
+
 The machine instructions should be in a format that is easily understood,
 such as the symbolic format of the assembler. The relative offsets are
 needed in numeric format, to check any alignment restrictions that the
 architecture might impose.
-@EndChg{}
+
 @end{Discussion}
 
 Where each data object is stored during its lifetime;
 @begin{Discussion}
-@Chg{}
+
 This requirement implies that if the optimizer assigns a variable to a
 register, this needs to be evident.
-@EndChg{}
+
 @end{Discussion}
 
 Correspondence with the source program, including an identification of the
  code produced per declaration and per statement.
 @begin{Discussion}
-@Chg{}
+
 This correspondence will be quite complex when extensive optimization is
 performed. In particular, address calculation to access some data structures
 could be moved from the actual access. However, when all the machine code
 arising from a statement or declaration is in one basic block, this must be
 indicated by the implementation.
-@EndChg{}
+
 @end{Discussion}
 @end{itemize}
 
 An identification of each construct for which the implementation detects
 the possibility of erroneous execution;
 @begin{Discussion}
-@Chg{}
+
 This requirement is quite vague. In general, it is hard for compilers to detect
 erroneous execution and therefore the requirement will be rarely invoked. However,
 if the pragma Suppress is used and the compiler can show that a predefined
 exception will be raised, then such an identification would be useful.
-@EndChg{}
+
 @end{Discussion}
 
 For each subprogram, block, task,
@@ -362,12 +362,12 @@ of the length of the fixed-size portion of the area and an indication
 of whether the non-fixed size portion is reserved on the stack
 or in a dynamically-managed storage region.
 @begin{Discussion}
-@Chg{}
+
 This requirement is vital for those requiring to show that the storage
 available to a program is sufficient. This is crucial in those cases in
 which the internal checks for stack overflow are suppressed (perhaps by
 @key[pragma] Restrictions(No_Exceptions)).
-@EndChg{}
+
 @end{Discussion}
 @end{itemize}
 
@@ -389,11 +389,11 @@ manner.}
 
 A description of the run-time model relevant to the partition.
 @begin{Discussion}
-@Chg{}
+
 For example,
 a description of the storage model is vital,
 since the Ada language does not explicitly define such a model.
-@EndChg{}
+
 @end{Discussion}
 @end{itemize}
 @end{ImplReq}
@@ -402,13 +402,13 @@ The implementation shall provide control- and data-flow
 information, both within each compilation unit and across
 the compilation units of the partition.
 @begin{Discussion}
-@Chg{}
+
 This requirement is quite vague, since it is unclear what control and data
 flow information the compiler has produced. It is really a plea not to throw
 away information that could be useful to the validator. Note that the data
 flow information is relevant to the detection of ``possibly uninitialized''
 objects referred to above.
-@EndChg{}
+
 @end{Discussion}
 @begin{ImplAdvice}
 The implementation should provide the above
@@ -421,19 +421,18 @@ Object code listings should be provided both in a symbolic
 format and also in an appropriate numeric format (such as
 hexadecimal or octal).
 @begin{Reason}
-@Chg{}
+
 This is to enable other tools to perform any analysis that the user
 needed to aid validation.
 The format should be in some agreed form.
-@EndChg{}
+
 @end{Reason}
 @end{ImplAdvice}
 
 @begin{NotesNotes}
 The order of elaboration of library units will be documented
 even in the absence of @nt[pragma] Reviewable
-@oChg{}(@lSeeSecNum{Program Execution}).@oEndChg{}
-@oChgRef{94-4898.b}
+(@lSeeSecNum{Program Execution}).
 @end{NotesNotes}
 
 @begin[discussion]
@@ -455,10 +454,10 @@ available at the point(s) during program execution corresponding to the
 position of the pragma in the compilation unit.
 The purpose of such a pragma is to facilitate code validation.
 @begin{Discussion}
-@Chg{}
+
 Inspection points are a high level equivalent of break points used by
 debuggers.
-@EndChg{}
+
 @end{Discussion}
 @end{Intro}
 
@@ -476,10 +475,10 @@ A pragma Inspection_Point is allowed wherever a
 or @nt[statement] is allowed.
 Each @SynI{object_}name shall statically denote the declaration of an object.
 @begin{Discussion}
-@Chg{}
+
 The static denotation is required, since no dynamic evaluation of a name
 is involved in this pragma.
-@EndChg{}
+
 @end{Discussion}
 @end{Legality}
 
@@ -499,7 +498,7 @@ An object is @i{inspectable} at an inspection point if the corresponding
 pragma Inspection_Point either has an argument denoting that object,
 or has no arguments.
 @begin{Discussion}
-@Chg{}
+
 If the short form of the pragma is used, then all objects are inspectable.
 This implies that objects out of scope at the point of the pragma are
 inspectable. A good interactive debugging system could provide information
@@ -507,18 +506,18 @@ similar to a post-mortem dump at such inspection points. The annex does
 not require that any inspection facility is provided, merely that the
 information is available to understand the state of the machine at those
 points.
-@EndChg{}
+
 @end{Discussion}
 @end{StaticSem}
 
 @begin{RunTime}
 Execution of a pragma Inspection_Point has no effect.
 @begin{Discussion}
-@Chg{}
+
 Although an inspection point has no (semantic) effect,
 the removal or adding a new point could change the machine code
 generated by the compiler.
-@EndChg{}
+
 @end{Discussion}
 @end{RunTime}
 
@@ -557,23 +556,23 @@ can be tested in machine terms at inspection points.  Object code between
 inspection points can be processed by automated tools to
 verify programs mechanically.
 @begin{Discussion}
-@Chg{}
+
 Although it is not a requirement of the annex, it would be useful if the
 state of the stack and heap could be interrogated. This would allow users
 to check that a program did not have a `storage leak'.
-@EndChg{}
+
 @end{Discussion}
 
 The identification of the mapping from source program objects to machine
 resources is allowed to be in the form of an
 annotated object listing, in human-readable or tool-processable form.
 @begin{Discussion}
-@Chg{}
+
 In principle, it is easy to check an implementation for this pragma, since
 one merely needs to check the content of objects against those values
 known from the source listing. In practice, one needs a tool similar
 to an interactive debugger to perform the check.
-@EndChg{}
+
 @end{Discussion}
 @end{NotesNotes}
 
@@ -584,14 +583,14 @@ Restrictions (see @RefSecNum(Pragma Restrictions)); these facilitate
 the demonstration of program correctness by allowing
 tailored versions of the run-time system.
 @begin{Discussion}
-@Chg{}
+
 Note that the restrictions are absolute. If a partition has 100 library
 units and just one needs Unchecked_Conversion, then the pragma cannot be
 used to ensure the other 99 units do not use Unchecked_Conversion. Note also
 that these are restrictions on all Ada code within a partition, and
 therefore it may not be evident from the specification of a package whether
 a restriction can be imposed.
-@EndChg{}
+
 @end{Discussion}
 @end{Intro}
 
@@ -638,11 +637,11 @@ liberalizing where they can be instantiated.
 
 @Defn2Next{Term=[Restrictions],Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic dependence on Unchecked_Deallocation is not allowed.
 @begin{Discussion}
-@Chg{}
+
 This restriction would be useful in those contexts in which heap storage is
 needed on program start-up, but need not be increased subsequently. The
 danger of a dangling pointer can therefore be avoided.
-@EndChg{}
+
 @end{Discussion}
 
 Immediate_Reclamation @\Except for storage occupied by objects created by
@@ -651,11 +650,11 @@ reserved at run time for an object is immediately reclaimed when the
 object no longer exists.
 @Defn2{Term=[Restrictions],Sec=(Immediate_Reclamation)}
 @begin{Discussion}
-@Chg{}
+
 Immediate reclamation would apply to storage created by the compiler, such
 as for a return value from a function whose size is not known at the
 call site.
-@EndChg{}
+
 @end{Discussion}
 
 @b{Exception-related restriction:}
@@ -665,7 +664,7 @@ No language-defined run-time checks are generated;
 however, a run-time check performed automatically by the hardware
 is permitted.
 @begin{Discussion}
-@Chg{}
+
 This restriction mirrors a method of working that is quite common in the
 safety area. The programmer is required to show that exceptions cannot be
 raised. Then a simplified run-time system is used without exception
@@ -674,7 +673,7 @@ software check would have failed, or if the hardware check actually fails,
 then the execution of the program is unpredictable.
 There are obvious dangers in this approach, but it is similar to
 programming at the assembler level.
-@EndChg{}
+
 @end{Discussion}
 
 @b{Other restrictions:}
@@ -683,7 +682,7 @@ programming at the assembler level.
 operations, and declarations of new floating point types, are
 not allowed.
 @begin{Discussion}
-@Chg{}
+
 The intention is to avoid the use of floating point hardware at run time,
 but this is expressed in
 language terms. It is conceivable that floating point is used implicitly in
@@ -692,33 +691,33 @@ the @ImplReqTitle below make it clear that the restriction would apply
 to the ``run-time system'' and hence not be allowed.
 This parameter could be used to inform a compiler that a variant of the
 architecture is being used which does not have floating point instructions.
-@EndChg{}
+
 @end{Discussion}
 
 @Defn2Next{Term=[Restrictions],Sec=(No_Fixed_Point)}No_Fixed_Point @\Uses of predefined fixed point types and
 operations, and declarations of new fixed point types, are
 not allowed.
 @begin{Discussion}
-@Chg{}
+
 This restriction would have the side-effect of prohibiting the
 @nt{delay_relative_statement}.
 As with the No_Floating_Point restriction, this might be used to
 avoid any question of rounding errors. Unless an Ada run-time is written in
 Ada, it seems hard to rule out implicit use of fixed point, since at the
 machine level, fixed point is virtually the same as integer arithmetic.
-@EndChg{}
+
 @end{Discussion}
 
 @Defn2Next{Term=[Restrictions],Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic dependence on the
  predefined generic Unchecked_Conversion is not allowed.
 @begin{Discussion}
-@Chg{}
+
 Most critical applications would require some restrictions or additional
 validation checks on uses of unchecked conversion. If the application does
 not require the functionality, then this restriction provides a means of
 ensuring the design requirement has been satisfied.
 The same applies to several of the following restrictions.
-@EndChg{}
+
 @end{Discussion}
 
 No_Access_Subprograms @\The declaration of access-to-subprogram types
@@ -737,12 +736,12 @@ any of the library units
 Sequential_IO, Direct_IO, Text_IO,  Wide_Text_IO, or Stream_IO
 is not allowed.
 @begin{Discussion}
-@Chg{}
+
 Excluding the input-output facilities of an implementation may be needed
 in those environments which cannot support the supplied functionality.
 A program in such an environment is likely to require some low level
 facilities or a call on a non-Ada feature.
-@EndChg{}
+
 @end{Discussion}
 
 @Defn2Next{Term=[Restrictions],Sec=(No_Delay)}No_Delay @\@nt[Delay_Statement]s
@@ -751,10 +750,10 @@ are not allowed.
 @begin[Ramification]
 This implies that @nt[delay_alternative]s in a
 @nt[select_statement] are prohibited.
-@Chg{}
+
 The purpose of this restriction is to avoid the need for timing facilities
 within the run-time system.
-@EndChg{}
+
 @end[ramification]
 
 @Defn2Next{Term=[Restrictions],Sec=(No_Recursion)}No_Recursion @\As part of the execution of a subprogram, the same
@@ -779,7 +778,7 @@ simplify the run-time system by allowing more of it to be written
 in Ada.
 @end[reason]
 @begin{Discussion}
-@Chg{}
+
 The restrictions that are applied to the partition are also applied to the
 run-time system.  For example, if No_Floating_Point is specified,
 then an implementation that uses floating point for implementing the delay
@@ -796,7 +795,7 @@ could be envisaged.
 
 If the run-time system is not written in Ada, then the wording needs to be
 applied in an appropriate fashion.
-@EndChg{}
+
 @end{Discussion}
 @end{ImplReq}
 
@@ -807,7 +806,7 @@ still performed automatically (for example, an overflow check performed
 by the processor).
 @ImplDef{Implementation-defined aspects of pragma Restrictions.}
 @begin{Discussion}
-@Chg{}
+
 The documentation requirements here are quite difficult to satisfy. One
 method is to review the object code generated and determine the checks that
 are still present, either explicitly, or implicitly within the architecture.
@@ -816,7 +815,7 @@ deferencing a null pointer. This could be undertaken by a memory access trap
 when checks are performed. When checks are suppressed via the argument
 No_Exceptions, it would not be necessary to have the memory access trap
 mechanism enabled.
-@EndChg{}
+
 @end{Discussion}
 @end{DocReq}
 
@@ -825,27 +824,26 @@ Program execution is erroneous if pragma Restrictions(No_Exceptions)
 has been specified and the conditions arise under which a generated
 language-defined run-time check would fail.
 @begin{Discussion}
-@Chg{}
+
 The situation here is very similar to the application of pragma Suppress.
 Since users are removing some of the protection the language
 provides, they had better be careful!
-@EndChg{}
+
 @end{Discussion}
 
 Program execution is erroneous if pragma Restrictions(No_Recursion)
 has been specified and a subprogram is invoked as part of its
-@oChg{}own@oEndChg{} execution,
+own execution,
 or if pragma Restrictions(No_Reentrancy) has been specified and
 during the execution of a subprogram by a task, another task invokes
 the same subprogram.
-@oChgRef{94-4859.c}
 @begin{Discussion}
-@Chg{}
+
 In practice, many implementations may not exploit the absence of recursion
 or need for reentrancy, in which case the program execution would be
 unaffected by the use of recursion or reentrancy, even though the program is
 still formally erroneous.
-@EndChg{}
+
 @end{Discussion}
 @end{Erron}
 

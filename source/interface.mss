@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:05 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:29 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -529,7 +529,7 @@ types that are  useful across more than one language
 (in particular for interfacing to assembly
 language).
 @ImplDef{The contents of the visible part of package Interfaces
-and its language-defined @chg{}descendants.@endchg{}}
+and its language-defined descendants.}
 @end{Intro}
 
 @begin{StaticSem}
@@ -540,7 +540,7 @@ declaration:
 @key[package] Interfaces @key[is]
    @key[pragma] Pure(Interfaces);
 
-   @oChg{}@key[type] Integer_@i{n} @key[is] @key[range] -2**(@i{n}-1) .. 2**(@i{n}-1) - 1;  --@i{2's complement}@oChgRef{94-4816.a}@oEndChg{}
+   @key[type] Integer_@i{n} @key[is] @key[range] -2**(@i{n}-1) .. 2**(@i{n}-1) - 1;  --@i{2's complement}
 
    @key[type] Unsigned_@i{n} @key[is] @key[mod] 2**@i{n};
 
@@ -614,15 +614,13 @@ which seemed like too much mechanism.
 Floating point types corresponding to each floating point format
 fully supported by the hardware.
 @begin{ImplNote}
-@oBigChg{}
+
 The names for these floating point types are not specified.
 @Defn{IEEE floating point arithmetic}
 However, if IEEE arithmetic is supported, then the names
 should be IEEE_Float_32 and IEEE_Float_64 for single and double
 precision, respectively.
-@oEndBigChg{}
-@oChgRef{94-4438.a}
-@oChgRef{94-4889.q}
+
 @end{ImplNote}
 @end{Itemize}
 @end{ImplReq}
@@ -760,7 +758,7 @@ The library package Interfaces.C has the following declaration:
    @key[pragma] Pack(char_array);
    @key(for) char_array'Component_Size @key(use) CHAR_BIT;
 
-   @oBigChg{}@key(function) Is_Nul_Terminated (Item : @key(in) char_array) @key(return) Boolean;@oEndBigChg{}
+   @key(function) Is_Nul_Terminated (Item : @key(in) char_array) @key(return) Boolean;
 
    @key(function) To_C   (Item       : @key(in) String;
                     Append_Nul : @key(in) Boolean := True)
@@ -772,12 +770,12 @@ The library package Interfaces.C has the following declaration:
 
    @key(procedure) To_C (Item       : @key(in) String;
                    Target     : @key(out) char_array;
-                   @oBigChg{}Count      : @key(out) size_t;@oEndBigChg{}
+                   Count      : @key(out) size_t;
                    Append_Nul : @key(in) Boolean := True);
 
    @key(procedure) To_Ada (Item     : @key(in) char_array;
                      Target   : @key(out) String;
-                     @oBigChg{}Count    : @key(out) Natural;@oEndBigChg{}
+                     Count    : @key(out) Natural;
                      Trim_Nul : @key(in) Boolean := True);
 
    @i{-- Wide Character and Wide String}
@@ -791,11 +789,11 @@ The library package Interfaces.C has the following declaration:
    @key(function) To_Ada (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
 
 @LangDefType{Package=[Interfaces.C],Type=[wchar_array]}
-   @oBigChg{}@key(type) wchar_array @key(is) @key(array) (size_t @key(range) <>) @key(of) @key(aliased) wchar_t;@oEndBigChg{}
+   @key(type) wchar_array @key(is) @key(array) (size_t @key(range) <>) @key(of) @key(aliased) wchar_t;
 
    @key(pragma) Pack(wchar_array);
 
-   @oBigChg{}@key(function) Is_Nul_Terminated (Item : @key(in) wchar_array) @key(return) Boolean;@oEndBigChg{}
+   @key(function) Is_Nul_Terminated (Item : @key(in) wchar_array) @key(return) Boolean;
 
    @key(function) To_C   (Item       : @key(in) Wide_String;
                     Append_Nul : @key(in) Boolean := True)
@@ -812,20 +810,13 @@ The library package Interfaces.C has the following declaration:
 
    @key(procedure) To_Ada (Item     : @key(in)  wchar_array;
                      Target   : @key(out) Wide_String;
-                     @oBigChg{}Count    : @key(out) Natural;@oEndBigChg{}
+                     Count    : @key(out) Natural;
                      Trim_Nul : @key(in)  Boolean := True);
 
    Terminator_Error : @key(exception);
 
 @key(end) Interfaces.C;
 @end{Example}
-@oChgRef{94-4697.a}
-@oChgRef{94-4491.a}
-@oChgRef{94-4571.a}
-@oChgRef{94-4737.a}
-@oChgRef{94-4913.d}
-@oChgRef{94-4815.a}
-@oChgRef{94-4697.a}
 
 Each of the types declared in Interfaces.C is C-compatible.
 
@@ -850,14 +841,13 @@ The functions To_C and To_Ada map between the Ada type Character
 and the C type char.
 
 @begin{CodeExample}
-@oBigChg{}@key(function) Is_Nul_Terminated (Item : @key(in) char_array) @key(return) Boolean;@oEndBigChg{}
+@key(function) Is_Nul_Terminated (Item : @key(in) char_array) @key(return) Boolean;
 @end{CodeExample}
 
-@oBigChg{}
+
 The result of Is_Nul_Terminated is True if Item contains nul, and is
 False otherwise.
-@oEndBigChg{}
-@oChgRef{94-4697.a}
+
 
 @begin{CodeExample}
 @key(function) To_C   (Item : @key(in) String;     Append_Nul : @key(in) Boolean := True)
@@ -899,13 +889,9 @@ Item does not contain nul.
 
 @key(procedure) To_Ada (Item     : @key(in) char_array;
                   Target   : @key(out) String;
-                  @oBigChg{}Count    : @key(out) Natural;@oEndBigChg{}
+                  Count    : @key(out) Natural;
                   Trim_Nul : @key(in) Boolean := True);
 @end{CodeExample}
-@oChgRef{94-4491.a}
-@oChgRef{94-4571.a}
-@oChgRef{94-4737.a}
-@oChgRef{94-4913.d}
 
 For procedure To_C, each element of Item is converted (via the
 To_C function)
@@ -930,14 +916,13 @@ If Trim_Nul is True and Item does not contain nul,
 then Terminator_Error is propagated.
 
 @begin{CodeExample}
-@oBigChg{}@key(function) Is_Nul_Terminated (Item : @key(in) wchar_array) @key(return) Boolean;@oEndBigChg{}
+@key(function) Is_Nul_Terminated (Item : @key(in) wchar_array) @key(return) Boolean;
 @end{CodeExample}
 
-@oBigChg{}
+
 The result of Is_Nul_Terminated is True if Item contains wide_nul, and is
 False otherwise.
-@oEndBigChg{}
-@oChgRef{94-4697.a}
+
 
 @begin{CodeExample}
 @key(function) To_C   (Item : @key(in) Wide_Character) @key(return) wchar_t;
@@ -963,13 +948,9 @@ character types.
 
 @key(procedure) To_Ada (Item     : @key(in) wchar_array;
                   Target   : @key(out) Wide_String;
-                  @oBigChg{}Count    : @key(out) Natural;@oEndBigChg{}
+                  Count    : @key(out) Natural;
                   Trim_Nul : @key(in) Boolean := True);
 @end{CodeExample}
-@oChgRef{94-4491.a}
-@oChgRef{94-4571.a}
-@oChgRef{94-4737.a}
-@oChgRef{94-4913.d}
 
 The To_C and To_Ada subprograms that convert between Wide_String and
 wchar_array have analogous effects to the To_C and To_Ada
@@ -1031,13 +1012,12 @@ C-eligible type  (see
 @refsecnum(Interfacing Pragmas))
 @end{ImplReq}
 
-@oChg{}
+
 @begin{ImplPerm}
 An implementation may provide additional declarations in the C
 interface packages.
 @end{ImplPerm}
-@oEndChg{}
-@oChgRef{94-4809.b}
+
 
 @begin{ImplAdvice}
 An implementation should support the following interface
@@ -1063,13 +1043,10 @@ or an Ada @key[out] or @key[in out]  parameter of an elementary type T,
  is passed as
  a t* argument
 to a C function, where t is the C type corresponding to the
-Ada type T.  In the case of @Chg{}an elementary@EndChg{} @key[out] or @key[in out]
+Ada type T.  In the case of an elementary @key[out] or @key[in out]
 parameter, a pointer to a temporary copy is used to preserve
 by-copy semantics.
-@begin{ChgNote}
-  Changed ``scalar'' to ``elementary'' in second sentence;
-  the by-copy types are elementary, not just scalars.
-@end{ChgNote}
+
 
 An Ada parameter of a record type T, of any mode, is passed as
  a t* argument to a C function,
@@ -1165,17 +1142,17 @@ declaration:
    @key[pragma] Preelaborate(Strings);
 
 @LangDefType{Package=[Interfaces.C],Type=[char_array_access]}
-   @oBigChg{}@key(type) char_array_access @key(is) @key(access) @key(all) char_array;@oEndBigChg{}
+   @key(type) char_array_access @key(is) @key(access) @key(all) char_array;
 
 @LangDefType{Package=[Interfaces.C],Type=[chars_ptr]}
    @key(type) chars_ptr @key(is) @key(private);
 
 @LangDefType{Package=[Interfaces.C],Type=[chars_ptr_array]}
-   @oBigChg{}@key(type) chars_ptr_array @key(is) @key(array) (size_t @key(range) <>) @key(of) chars_ptr;@oEndBigChg{}
+   @key(type) chars_ptr_array @key(is) @key(array) (size_t @key(range) <>) @key(of) chars_ptr;
 
    Null_Ptr : @key(constant) chars_ptr;
 
-   @oBigChg{}@key(function) To_Chars_Ptr (Item      : @key(in) char_array_access;@oEndBigChg{}
+   @key(function) To_Chars_Ptr (Item      : @key(in) char_array_access;
                           Nul_Check : @key(in) Boolean := False)
       @key(return) chars_ptr;
 
@@ -1217,7 +1194,6 @@ declaration:
    ... -- @i{not specified by the language}
 @key(end) Interfaces.C.Strings;
 @end{Example}
-@oChgRef{94-4697.a}
 @begin{discussion}
 The string manipulation types and subprograms appear in a
 child of Interfaces.C versus being there directly, since it is
@@ -1242,11 +1218,10 @@ The programmer should convert from char_array_access to chars_ptr
 for objects imported from, exported to, or passed to C.}
 @begin{DescribeCode}
 @begin{CodeExample}
-@oBigChg{}@key(function) To_Chars_Ptr (Item      : @key(in) char_array_access;@oEndBigChg{}
+@key(function) To_Chars_Ptr (Item      : @key(in) char_array_access;
                        Nul_Check : @key(in) Boolean := False)
    @key(return) chars_ptr;
 @end{CodeExample}
-@oChgRef{94-4697.a}
 
 If Item is @key(null), then To_Chars_Ptr returns Null_Ptr.
 Otherwise, if Nul_Check is True and Item.@key(all) does not contain nul,
@@ -1263,13 +1238,11 @@ This function returns a pointer to an allocated
 @begin{itemize}
 Index = Chars'Last if Chars does not contain nul, or
 
-Index is the smallest @chg{}size_t value@endchg{} I such that Chars(I+1) = nul.
+Index is the smallest size_t value I such that Chars(I+1) = nul.
 @end{itemize}
-@oChg{}
+
 Storage_Error is propagated if the allocation fails.
-@oEndChg{}
-@oChgRef{94-4805.b}
-@oChgRef{94-4807.b}
+
 
 @begin{CodeExample}
 @key(function) New_String (Str : @key(in) String) @key(return) chars_ptr;
@@ -1315,22 +1288,22 @@ up to and including the first nul.
 @key(function) Value (Item : @key(in) chars_ptr) @key(return) String;
 @end{CodeExample}
 
-@chg{}Equivalent to@endchg{} To_Ada(Value(Item), Trim_Nul=>True).
+Equivalent to To_Ada(Value(Item), Trim_Nul=>True).
 
 @begin{CodeExample}
 @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
    @key(return) String;
 @end{CodeExample}
 
-@chg{}Equivalent to@endchg{} To_Ada(Value(Item, Length), Trim_Nul=>True).
+Equivalent to To_Ada(Value(Item, Length), Trim_Nul=>True).
 
 @begin{CodeExample}
 @key(function) Strlen (Item : @key(in) chars_ptr) @key(return) size_t;
 @end{CodeExample}
 
 Returns @i[Val]'Length@en@;1 where @i[Val] = Value(Item);
-@chg{}propagates Dereference_Error if Item = Null_Ptr.@endchg{}
-@Begin{ramification}
+propagates Dereference_Error if Item = Null_Ptr.
+@begin{ramification}
 Strlen returns the number of chars in the array pointed to by Item, up to
 and including the char immediately before the first nul.
 
@@ -1469,13 +1442,13 @@ following declaration:
    @key(procedure) Increment (Ref : @key(in) @key(out) Pointer);
    @key(procedure) Decrement (Ref : @key(in) @key(out) Pointer);
 
-   @oBigChg{}@key(pragma) Convention (Intrinsic, "+");@oEndBigChg{}
-   @oBigChg{}@key(pragma) Convention (Intrinsic, "-");@oEndBigChg{}
-   @oBigChg{}@key(pragma) Convention (Intrinsic, Increment);@oEndBigChg{}
-   @oBigChg{}@key(pragma) Convention (Intrinsic, Decrement);@oEndBigChg{}
+   @key(pragma) Convention (Intrinsic, "+");
+   @key(pragma) Convention (Intrinsic, "-");
+   @key(pragma) Convention (Intrinsic, Increment);
+   @key(pragma) Convention (Intrinsic, Decrement);
 
    @key(function) Virtual_Length (Ref        : @key(in) Pointer;
-                            Terminator : @key(in) @oChg{}Element@oEndChg{} := Default_Terminator)
+                            Terminator : @key(in) Element := Default_Terminator)
       @key(return) ptrdiff_t;
 
    @key(procedure) Copy_Terminated_Array (Source     : @key(in) Pointer;
@@ -1489,7 +1462,6 @@ following declaration:
 
 @key(end) Interfaces.C.Pointers;
 @end{Example}
-@oChgRef{94-4981.a}
 
 The type Pointer is C-compatible and
 corresponds to one use of C's ``Element *''.
@@ -1525,8 +1497,7 @@ This function returns an Element_Array whose value is the array pointed
 This function returns an Element_Array comprising the first Length
 elements pointed to by Ref.  The exception
 Interfaces.C.Strings.Dereference_Error is
-propagated if Ref @oChg{}is@oEndChg{} @key(null).
-@oChgRef{94-4965.a}
+propagated if Ref is @key(null).
 @end{DescribeCode}
 
 The "+" and "@en@;" functions perform arithmetic on Pointer values, based on
@@ -1570,8 +1541,8 @@ Dereference_Error is propagated if either Source or Target is @key(null).
 @ramification{It is the programmer's responsibility to ensure that
 elements are not copied beyond the logical length of the target array.}
 @begin{ImplNote}
-  @oChg{}The implementation has to take care to check the Limit
-  first.@oEndChg{}
+  The implementation has to take care to check the Limit
+  first.
 @end{ImplNote}
 
 @begin{CodeExample}
@@ -1634,11 +1605,11 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 @i{Example of Interfaces.C.Pointers:}
 @begin{Example}
 @key(with) Interfaces.C.Pointers;
-@chg{}@key(with) Interfaces.C.Strings;@endchg{}
+@key(with) Interfaces.C.Strings;
 @key(procedure) Test_Pointers @key(is)
    @key(package) C @key(renames) Interfaces.C;
    @key(package) Char_Ptrs @key(is)
-      @key(new) C.Pointers (Index              => @chg{}C.size_t,@endchg{}
+      @key(new) C.Pointers (Index              => C.size_t,
                       Element            => C.char,
                       Element_Array      => C.char_array,
                       Default_Terminator => C.nul);
@@ -1809,7 +1780,7 @@ The library package Interfaces.COBOL has the following declaration:
       @i{-- Packed Formats: data values are represented as Packed_Decimal}
 
       @key(function) Valid (Item   : @key(in) Packed_Decimal;
-                      Format : @key(in) @oBigChg{}Packed_Format) @key(return) Boolean;@oEndBigChg{}
+                      Format : @key(in) Packed_Format) @key(return) Boolean;
 
       @key(function) Length (Format : @key(in) Packed_Format) @key(return) Natural;
 
@@ -1829,7 +1800,7 @@ The library package Interfaces.COBOL has the following declaration:
       @key(function) To_Decimal (Item   : @key(in) Byte_Array;
                            Format : @key(in) Binary_Format) @key(return) Num;
 
-      @key(function) To_Binary (Item   : @key(in) Num;@bigchg{} @endbigchg{}
+      @key(function) To_Binary (Item   : @key(in) Num; 
                         Format : @key(in) Binary_Format) @key(return) Byte_Array;
 
       @i{-- Internal Binary formats: data values are of type Binary or Long_Binary}
@@ -1846,7 +1817,6 @@ The library package Interfaces.COBOL has the following declaration:
    ... -- @i{not specified by the language}
 @key(end) Interfaces.COBOL;
 @end{Example}
-@oChgRef{94-4980.a}
 @ImplDef[The types Floating, Long_Floating, Binary, Long_Binary,
 Decimal_Element, and COBOL_Character; and the initializations
 of the variables Ada_To_COBOL and COBOL_To_Ada, in Interfaces.COBOL]
@@ -1966,9 +1936,8 @@ and Format is Unsigned.
 
 @begin{CodeExample}
 @key(function) Valid (Item   : @key(in) Packed_Decimal;
-                Format : @key(in) @oBigChg{}Packed_Format) @key(return) Boolean;@oEndBigChg{}
+                Format : @key(in) Packed_Format) @key(return) Boolean;
 @end{CodeExample}
-@oChgRef{94-4980.a}
 
 This function returns True if Item has a value consistent with Format,
 and False otherwise.  The rules for the formation of Packed_Decimal

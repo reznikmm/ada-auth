@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:04 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:28 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @LabeledAppendixSubSection{Attributes of Floating Point Types}
 
@@ -63,14 +63,12 @@ where
    (@lSeeSecNum{Floating Point Types}) of the type @i{T}.  This attribute
    yields a value of the type @i{universal_integer}.]}
 @begin{Ramification}
-@oChg{}
+
   Note that the above definitions do not determine unique values for the
   representation-oriented attributes of floating point types.
   The implementation may choose any set of values that collectively
   satisfies the definitions.
-@oEndChg{}
-@oChgRef{94-4737.b}
-@oChgRef{94-4889.c}
+
 @end{Ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Denorm>,
@@ -283,14 +281,11 @@ S of a floating point type @i{T}.
 @end{Example}
 
    The function yields the value @Math{@Flore{X}},
-   i.e., the largest @oChg{}(most positive)@oEndChg{} integral value less than or equal to
+   i.e., the largest (most positive) integral value less than or equal to
    @i{X}.
    When @i{X} is zero, the
    result has the sign of @i{X}; a zero result otherwise has a positive
    sign.@end{Multiple}]}
-@oChgRef{94-4630.e}
-@oChgRef{94-4889.m}
-@oChgRef{94-4983.a}
 
 @Attribute{Prefix=<S>, AttrName=<Ceiling>,
   Text=[@begin{Multiple}S'Ceiling denotes a function with the following
@@ -301,14 +296,11 @@ S of a floating point type @i{T}.
 @end{Example}
 
    The function yields the value @Math{@Ceil{X}},
-   i.e., the smallest @oChg{}(most negative)@oEndChg{} integral value greater than or equal to
+   i.e., the smallest (most negative) integral value greater than or equal to
    @i{X}.
    When @i{X} is zero, the
    result has the sign of @i{X}; a zero result otherwise has a negative sign
    when S'Signed_Zeros is True.@end{Multiple}]}
-@oChgRef{94-4630.f}
-@oChgRef{94-4889.m}
-@oChgRef{94-4983.b}
 
 @Attribute{Prefix=<S>, AttrName=<Rounding>,
   Text=[@Multiple(S'Rounding denotes a function with the following
@@ -512,7 +504,7 @@ a floating point type @i{T}.
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Model_Mantissa>,
   Text=[If the Numerics Annex is not supported,
-   @oBigChg{}this attribute yields an implementation defined value that is
+   this attribute yields an implementation defined value that is
    greater than or equal to
    @Math{@ceil{d @Times @Log(10) / @Log(T'@r{Machine_Radix})} + 1}, where
    @Math{d} is the requested decimal precision of @i{T},
@@ -521,25 +513,21 @@ a floating point type @i{T}.
    @SeeSecNum{Model-Oriented Attributes of Floating Point Types}
    for further requirements
    that apply to implementations supporting the Numerics
-   Annex.@oEndBigChg{}
+   Annex.
    The value of this attribute is of the type
    @i{universal_integer}.]}
-@oChgRef{94-4587.a}
-@oChgRef{94-4889.h}
 
 @Attribute{Prefix=<S>, AttrName=<Model_Emin>,
   Text=[If the Numerics Annex is not supported,
-  @oBigChg{}this attribute yields an implementation defined value
+  this attribute yields an implementation defined value
   that is greater than or equal to the value
   of @i{T}'Machine_Emin.
   @SeeSecNum{Model-Oriented Attributes of Floating Point Types}
   for further requirements
   that apply to implementations supporting the Numerics
-  Annex.@oEndBigChg{}
+  Annex.
   The value of this attribute is of the type
   @i{universal_integer}.]}
-@oChgRef{94-4587.a}
-@oChgRef{94-4889.h}
 
 @Attribute{Prefix=<S>, AttrName=<Model_Epsilon>,
   Text=[Yields the value
@@ -578,13 +566,11 @@ a floating point type @i{T}.
 @end{Example}
 
    If the Numerics Annex is not supported,
-   @oBigChg{}the meaning of this attribute is implementation
-   defined;@oEndBigChg{}
+   the meaning of this attribute is implementation
+   defined;
    @lSeeSecNum{Model-Oriented Attributes of Floating Point Types}
    for the definition that applies to implementations supporting
    the Numerics Annex.)]}
-@oChgRef{94-4587.a}
-@oChgRef{94-4889.h}
 
 @Attribute{Prefix=<S>, AttrName=<Safe_First>,
   Text=[Yields the lower bound of the safe range
@@ -610,10 +596,10 @@ a floating point type @i{T}.
    safe range of its result type is guaranteed not to overflow.
 @end{Discussion}
 @begin{Honest}
-@Chg{}
+
 An exception is made for exponentiation by a negative exponent in
 @RefSecNum{Highest Precedence Operators}.
-@EndChg{}
+
 @end{Honest}
 @ImplDef{The values of the Model_Mantissa, Model_Emin, Model_Epsilon,
 Model, Safe_First, and Safe_Last attributes, if the Numerics

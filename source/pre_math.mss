@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:04 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:28 $}
 
 @LabeledAppendixSection{The Numerics Packages}
 
@@ -242,12 +242,12 @@ Float_Type'Machine_Overflows is True:
 @end{Itemize}
 
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
-@begin{Redundant}Constraint_Error can also be raised
+@redundant[Constraint_Error can also be raised
 when a finite result overflows
 (@lSeeSecNum{Accuracy Requirements for the Elementary Functions}); this may
 occur for parameter values sufficiently @i{near} poles, and, in the case of
 some of the functions, for parameter values with sufficiently large
-magnitudes.@end{Redundant}
+magnitudes.]
 @begin{Reason}
    The purpose of raising Constraint_Error (rather than
    Numerics.Argument_Error) at the poles of a function, when
@@ -337,13 +337,13 @@ follows:
    in Numerics.Generic_Elementary_Functions, when Float_Type'Signed_Zeros is
    True.}
 
-   @begin{Redundant}A zero result that is not a prescribed result
+   @redundant[A zero result that is not a prescribed result
    (i.e., one that results from
    rounding or underflow) has the correct mathematical sign.
    @begin{Reason}
       This is a consequence of the rules specified in IEC 559:1989 as they
       apply to underflow situations with traps disabled.
-   @end{Reason}@end{Redundant}
+   @end{Reason}]
 @end{itemize}
 @end{ImplReq}
 
@@ -388,7 +388,7 @@ in the following ways:
 @LabeledAppendixSubSection{Random Number Generation}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 Facilities for the generation of pseudo-random floating point numbers are
 provided in the package Numerics.Float_Random; the generic package
 Numerics.Discrete_Random provides similar facilities for the generation of
@@ -412,7 +412,7 @@ private type whose objects can be used to hold the saved state of a
 generator;
 and subprograms to obtain a string representation of a given generator state,
 or, given such a string representation, the corresponding state.
-@end{Redundant}
+]
 @begin{Discussion}
 These facilities support a variety of requirements ranging from repeatable
 sequences (for debugging) to unique sequences in each execution of a program.
@@ -652,15 +652,15 @@ are given in @RefSecNum{Performance Requirements for Random Number Generation}.
 @begin{DocReq}
 No one algorithm for random number generation is best for all applications.  To
 enable the user to determine the suitability of the random number generators
-for the intended application, the implementation @chg{}shall@endchg{} describe the algorithm
-used and @chg{}shall@endchg{} give its period, if known exactly, or a lower bound on the
+for the intended application, the implementation shall describe the algorithm
+used and shall give its period, if known exactly, or a lower bound on the
 period, if the exact period is unknown.  Periods that are so long that the
 periodicity is unobservable in practice can be described in such terms, without
 giving a numerical bound.
 
-The implementation also @chg{}shall@endchg{} document the minimum time interval between calls
+The implementation also shall document the minimum time interval between calls
 to the time-dependent Reset procedure that are guaranteed to initiate
-different sequences, and it @chg{}shall@endchg{} document
+different sequences, and it shall document
 the nature of the strings that
 Value will accept without raising Constraint_Error.
 @ImplDef{The minimum time interval between calls to the time-dependent Reset

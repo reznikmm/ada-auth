@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:03 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -222,7 +222,7 @@ Numerics.Short_Complex_Types, Numerics.Long_Complex_Types, etc.
    The cartesian representation is far more common than the polar
    representation, in practice.  The accuracy of the results of the complex
    arithmetic operations and of the complex elementary functions
-   is dependent on the representation; thus, @Chg{}implementers@EndChg{} need to know that
+   is dependent on the representation; thus, implementers need to know that
    representation.  The type is visible so that complex ``literals'' can be
    written in aggregate notation, if desired.
 @end{Reason}
@@ -707,12 +707,12 @@ Complex_Types.Real'Machine_Overflows is True:
    @Math{@PorM 1.0}.
 @end{Itemize}
 
-@begin{Redundant}Constraint_Error can also be raised
+@redundant[Constraint_Error can also be raised
 when a finite result overflows
 (@lSeeSecNum{Accuracy Requirements for Complex Arithmetic}); this may
 occur for parameter values sufficiently @i{near} poles, and, in the case of
 some of the functions, for parameter values having components of sufficiently
-large magnitude.@end{Redundant}
+large magnitude.]
 @begin{Reason}
    The purpose of raising Constraint_Error (rather than
    Numerics.Argument_Error) at the poles of a function, when
@@ -1122,12 +1122,12 @@ too short to hold the formatted output.
 
 @begin{ImplPerm}
 Other exceptions declared (by renaming)
-in Text_IO @oChg{}may be raised by the preceding procedures
+in Text_IO may be raised by the preceding procedures
 in the appropriate circumstances, as for the corresponding
-procedures of Text_IO.Float_IO.@oEndChg{}
+procedures of Text_IO.Float_IO.
 @end{ImplPerm}
 
-@oChg{}@LabeledAppendixSubSection{The Package Wide_Text_IO.Complex_IO}@oEndChg{}
+@LabeledAppendixSubSection{The Package Wide_Text_IO.Complex_IO}
 
 @begin{StaticSem}
 @Defn{Ada.Wide_Text_IO.Complex_IO}
@@ -1139,13 +1139,7 @@ String by Wide_String; the description of its behavior is obtained by
 additionally replacing references to particular characters (commas,
 parentheses, etc.) by those for the corresponding wide characters.
 @end{StaticSem}
-@oChgRef{94-4574.c}
-@oChgRef{94-4889.i}
-@begin{oChgNote}
-  Split out Wide_Text_IO.Complex_IO into its own subclause,
-  for consistency of style with
-  @RefSecNum{The Package Wide_Text_IO.Editing}.
-@end{oChgNote}
+
 
 @LabeledAppendixSection{Numeric Performance Requirements}
 
@@ -1159,9 +1153,8 @@ This mode,
 referred to as the @i{strict mode}, may or may not be the default mode;
 it directly affects the results of the predefined arithmetic operations of real
 types and the results of the subprograms in
-@oChg{}children of the Numerics package, and indirectly affects the operations in
-other language defined@oEndChg{} packages.
-@oChgRef{94-4983.c}
+children of the Numerics package, and indirectly affects the operations in
+other language defined packages.
 @Defn{relaxed mode}
 Implementations shall also provide the opposing mode, which is known as the
 @i{relaxed mode}.
@@ -1173,7 +1166,7 @@ Implementations shall also provide the opposing mode, which is known as the
    the Numerics Annex are provided with a way of ensuring that their programs
    achieve a known level of numerical performance and that the performance is
    portable to other such implementations.  The relaxed mode is provided to
-   allow @Chg{}implementers@EndChg{} to offer an efficient but not fully accurate alternative
+   allow implementers to offer an efficient but not fully accurate alternative
    in the case that the strict mode entails a time overhead that some users may
    find excessive.  In some of its areas of impact, the relaxed mode may be
    fully equivalent to the strict mode.
@@ -1412,7 +1405,7 @@ large extent.
 In implementations that support the Numerics Annex, the model-oriented
 attributes of floating point types shall yield the values defined here,
 in both the strict and the relaxed modes.
-@oBigChg{}
+
 These definitions add conditions to those in
 @RefSecNum{Attributes of Floating Point Types}.
 @end{Intro}
@@ -1514,13 +1507,9 @@ terms of the model numbers and safe range induced by these attributes
 and the previously determined values of S'Model_Mantissa and
 S'Model_Emin.
 @end{Itemize}
-@oEndBigChg{}
-@oChgRef{94-4934.a}
-@oChgRef{94-4878.a}
-@oChgRef{94-4455.a}
-@oChgRef{94-4889.a}
+
 @begin{Ramification}
-@oChg{}
+
 @Defn{IEEE floating point arithmetic}
 @Defn{IEC 559:1989}
 The following table shows appropriate attribute values for IEEE basic
@@ -1561,9 +1550,7 @@ Attribute                        IEEE_Float_32                 IEEE_Float_64
 Note: 'Machine_Overflows can be True or False, depending on whether the Ada
 implementation raises Constraint_Error or delivers a signed infinity in
 overflow and zerodivide situations (and at poles of the elementary functions).
-@oEndChg{}
-@oChgRef{94-4893.c}
-@oChgRef{94-4900.a}
+
 @end{Ramification}
 @end{StaticSem}
 
@@ -1697,8 +1684,7 @@ follows:
          otherwise, it contains the integer nearest to the value
          @Math{v} (if @Math{v} lies
          equally distant from two consecutive integers, the perfect result set
-         contains @oBigChg{}the one that is further from zero).@oEndBigChg{}
-@oChgRef{94-4920.a}
+         contains the one that is further from zero).
       @end(itemize)
 
       The close result set is an implementation-defined set of consecutive
@@ -1738,12 +1724,11 @@ let @Math{s} be 1.0.
    @Math{v} as an integer
    multiple of a ``compatible'' @i(small), but the integer multiple may be
    ``too big.''
-@oChg{}
+
    If there exists a factorization in which that multiple is less than some
    implementation-defined limit, the result shall belong to the perfect result
    set; otherwise, it belongs to the close result set.
-@oEndChg{}
-@oChgRef{94-4952.a}
+
    @ImplDef{Conditions on a @i{universal_real} operand of a fixed point
    multiplication or division for which the result shall be in the @i{perfect
    result set}.}
@@ -1752,10 +1737,8 @@ let @Math{s} be 1.0.
 A multiplication P * Q of an operand of a fixed point type F by an operand of
 an integer type I, or vice-versa, and a division P / Q of an operand of a
 fixed point type F by an operand of an integer type I, are also allowed.
-@oChg{}
-@oEndChg{}
-@oChgRef{94-4768.r}
-@oChgRef{94-4889.l}
+
+
 In these cases, the result has a type of F; explicit conversion of the
 result is never required.  The accuracy required in these cases is the same as
 that required for a multiplication F(P * Q) or a division F(P / Q) obtained by
@@ -1783,17 +1766,15 @@ then the implementation shall deliver one of the permitted results; otherwise,
    if T'Machine_Overflows is True, the implementation shall either deliver one
    of the permitted results or raise Constraint_Error;
 
-   if T'Machine_Overflows is False, the result is implementation defined.@oChg{}@oEndChg{}
+   if T'Machine_Overflows is False, the result is implementation defined.
    @ImplDef{The result of a fixed point arithmetic operation in overflow
    situations, when the Machine_Overflows attribute of the result type is
    False.}
 @end(itemize)
-@oChgRef{94-4774.e}
-@oChgRef{94-4889.k}
 @end{ImplReq}
 
 @begin{Inconsistent83}
-@oChg{}@oEndChg{}Since the values of a fixed point type are now just the integer multiples of
+Since the values of a fixed point type are now just the integer multiples of
 its @i{small}, the possibility of using extra bits available in the chosen
 representation for extra accuracy rather than for increasing the base range
 would appear to be removed, raising the possibility that some fixed point

@@ -1,22 +1,18 @@
 @Part(13, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:02 $}
-@Chg{}@LabeledChapter{Representation Issues}@EndChg{}
+@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
+@LabeledChapter{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
-@begin{Redundant}
-@Chg{}This section describes features for
+@redundant[
+This section describes features for
 querying and controlling aspects of representation
-and for interfacing to hardware.@EndChg{}
-@begin{ChgNote}
-Changed the name of Section 13,
-and reworded the introductory paragraph,
-as per WG9 resolution.
-@end{ChgNote}
-@end{Redundant}
+and for interfacing to hardware.
+
+]
 @end{Intro}
 
 @begin{DiffWord83}
@@ -204,8 +200,7 @@ Such tricks are not required, but are allowed.
 For example, suppose S'Size = 2, and an object X is of subtype S.
 If the machine code typically uses a 32-bit load instruction to load the
 value of X, then X'Size should be 32, even though 30 bits of the value
-are just @oChg{}zeros or sign-extension bits.@oEndChg{}
-@oChgRef{94-4539.c}
+are just zeros or sign-extension bits.
 On the other hand, if the machine code typically masks out those 30
 bits, then X'Size should be 2.
 Usually, such masking only happens for components of a composite type
@@ -419,7 +414,7 @@ are the same.
 @PDefn2{Term=[statically matching],Sec=(effect on subtype-specific aspects)}
 @begin{Reason}
 This is necessary because we allow (for example)
-conversion between access types whose @Chg{}designated subtypes
+conversion between access types whose designated subtypes
 statically match.
 Note that it is illegal to specify an aspect
 (including a subtype-specific one)
@@ -471,8 +466,7 @@ Furthermore, the compiler is forbidden from choosing different
 Sizes by default, for the same reason.
 
 The same issues apply to Alignment.
-@EndChg{}
-@ChgRef{94-5001.k}
+
 @end{Reason}
 
 A derived type inherits each type-related aspect of its parent type that
@@ -706,11 +700,11 @@ Some of the more stringent requirements are moved to
 @LabeledSection{Pragma Pack}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{pragma} Pack specifies that storage
 minimization should be the main criterion when
 selecting the representation of a composite type.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -767,16 +761,11 @@ subject to the Sizes of the component subtypes,
 and subject to any @nt{record_representation_clause} that applies to
 the type; the implementation may, but need not, reorder components
 or cross aligned word boundaries to improve the packing.
-@oBigChg{}A component whose Size is greater than the word size
-may be allocated an integral number of words.@oEndBigChg{}
-@oChgRef{94-4856.a}
-@oChgRef{94-4860.a}
-@oChgRef{94-4863.a}
-@oChgRef{94-4885.a}
-@oChgRef{94-4893.b}
+A component whose Size is greater than the word size
+may be allocated an integral number of words.
 @begin{Ramification}
 The implementation can always allocate an integral number of
-words for a component that will not fit in a word.@BigChg{}@EndBigChg{}
+words for a component that will not fit in a word.
 The rule also allows small component sizes to be rounded up if such
 rounding does not waste space.
 For example, if Storage_Unit = 8, then a component of size 8 is
@@ -800,7 +789,7 @@ so it probably won't get packed very tightly.
 @LabeledSection{Representation Attributes}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{representation attribute}
 @Defn2{Term=[attribute], Sec=(representation)}
 The values of certain implementation-dependent characteristics can be
@@ -808,7 +797,7 @@ obtained by interrogating appropriate representation attributes.
 @RootDefn2{Term=[attribute], Sec=(specifying)}
 Some of these attributes are specifiable via an
 @nt{attribute_definition_clause}.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -897,11 +886,10 @@ because Component_Size is a type-related aspect.
 
 For an @nt{attribute_definition_clause} that specifies
 an attribute that denotes a subprogram,
-the profile shall be @oBigChg{}mode conformant with the one
+the profile shall be mode conformant with the one
 required for the attribute,
 and the convention shall be Ada.
-Additional requirements are defined for particular attributes.@oEndBigChg{}
-@oChgRef{94-4774.b}
+Additional requirements are defined for particular attributes.
 @Defn2{Term=[subtype conformance],Sec=(required)}
 @begin{Ramification}
 This implies, for example, that if one writes:
@@ -986,11 +974,11 @@ label, this value refers to the machine code associated with
 the corresponding body or @nt{statement}.
 The value of this attribute is of type System.Address.>}
 @begin{Ramification}
-@oChg{}
+
   Here, the ``first of the storage elements'' is intended to mean
   the one with the lowest address;
   the endianness of the machine doesn't matter.
-@oEndChg{}
+
 @end{Ramification}
 
 @PDefn2Next{Term=[specifiable], Sec=(of Address for stand-alone
@@ -1202,17 +1190,12 @@ the implementation has to choose a value such that if the address
 returned by Allocate is aligned as requested,
 the generated code can correctly access the object.
 
-@oChg{}
+
 The above mention of ``modulo'' is referring to the "@key[mod]"
 operator declared in System.Storage_Elements;
 if X @key[mod] N = 0, then X is by definition aligned on an
 N-storage-element boundary.
-@oEndChg{}
-@oChgRef{94-4768.n}
-@oChgRef{94-4822.a}
-@oChgRef{94-4825.a}
-@oChgRef{94-4835.a}
-@oChgRef{94-4909.a}
+
 @end{Ramification}
 
 @PDefn2Next{Term=[specifiable], Sec=(of Alignment for first subtypes and objects)}
@@ -1456,16 +1439,11 @@ The value of this attribute is of the type
 @i{universal_integer}.>}
 @PDefn2{Term=[specifiable], Sec=(of Size for first subtypes)}
 @Defn{Size clause}
-@oBigChg{}
+
 The Size of an object is at least as large as that of its subtype,
 unless the object's Size is determined by a Size clause,
 a component_clause, or a Component_Size clause.
-@oEndBigChg{}
-@oChgRef{94-4856.a}
-@oChgRef{94-4860.a}
-@oChgRef{94-4863.a}
-@oChgRef{94-4885.a}
-@oChgRef{94-4893.b}
+
 Size may be specified for first subtypes
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static
@@ -1536,33 +1514,27 @@ and its value nonnegative.
 @end{StaticSem}
 
 @begin{ImplReq}
-@oChg{}In an implementation,@oEndChg{} Boolean'Size shall be 1.
-@oChgRef{94-4776.e}
+In an implementation, Boolean'Size shall be 1.
 @end{ImplReq}
 
 @begin{ImplAdvice}
-If the Size of a subtype @oBigChg{}is specified,
-and allows for efficient@oEndBigChg{} independent addressability
+If the Size of a subtype is specified,
+and allows for efficient independent addressability
 (@lSeeSecNum{Shared Variables}) on the target architecture,
 then the Size of the following objects of the subtype should equal the
 Size of the subtype:
 @begin{Itemize}
-@oBigChg{}Aliased objects (including components).@oEndBigChg{}
+Aliased objects (including components).
 
-@oBigChg{}Unaliased@oEndBigChg{} components, unless the Size of the
+Unaliased components, unless the Size of the
 component is determined by a @nt{component_clause} or Component_Size
 clause.
-@oChgRef{94-4856.a}
-@oChgRef{94-4860.a}
-@oChgRef{94-4863.a}
-@oChgRef{94-4885.a}
-@oChgRef{94-4893.b}
 @end{Itemize}
 @begin{Ramification}
 Thus, on a typical 32-bit machine,
 ``@key[for] S'Size @key[use] 32;''
-will guarantee that @BigChg{}aliased objects of subtype S,
-and components whose subtype is S,@EndBigChg{} will have Size
+will guarantee that aliased objects of subtype S,
+and components whose subtype is S, will have Size
 = 32 (assuming the implementation chooses to obey this @ImplAdviceTitle).
 On the other hand, if one writes,
 ``@key[for] S2'Size @key[use] 5;''
@@ -1576,7 +1548,7 @@ bits, for example.
 
 Note that
 ``@key[for] S2'Size @key[use] 5;''
-requires record components @Chg{}whose subtype is@EndChg{} S2 to be exactly 5 bits
+requires record components whose subtype is S2 to be exactly 5 bits
 if the record type is packed.
 The same is not true of array components;
 their Size may be rounded up to the nearest factor of the word size.
@@ -1614,7 +1586,7 @@ and Component_Size clauses are for.
 The recommended level of support for the Size attribute
 of subtypes is:
 @begin{Itemize}
-@oBigChg{}
+
 The Size (if not specified) of a static discrete or fixed point subtype
 should be the number of bits needed to represent each value belonging to
 the subtype using an unbiased representation,
@@ -1623,14 +1595,9 @@ values.
 If such a subtype is a first subtype,
 then an implementation should support a specified Size for it that
 reflects this representation.
-@oEndBigChg{}
-@oChgRef{94-4856.a}
-@oChgRef{94-4860.a}
-@oChgRef{94-4863.a}
-@oChgRef{94-4885.a}
-@oChgRef{94-4893.b}
+
 @begin{ImplNote}
-  @oBigChg{}This applies@oEndBigChg{} to static enumeration subtypes,
+  This applies to static enumeration subtypes,
   using the internal codes used to represent the values.
 
   For a two's-complement machine, this implies that
@@ -1643,11 +1610,11 @@ reflects this representation.
   it is the same except that in the second range,
   the lower bound ``@en@;2@+{@i{n@en@;1}}'' is replaced by ``@en@;2@+{@i{n@en@;1}}+1''.
 
-@oBigChg{}
+
   If an integer subtype (whether signed or unsigned)
   contains no negative values, the Size should not include space
   for a sign bit.
-@oEndBigChg{}
+
 
   Typically, the implementation will choose to make the Size of a
   subtype be exactly the smallest such @i{n}.
@@ -1843,11 +1810,11 @@ the value specified in the @nt{pragma}.
 @end{StaticSem}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @IndexSeeAlso{Term=[Storage_Size clause],See=[pragma Storage_Size]}
 A @nt{pragma} Storage_Size specifies the amount of storage to be
 reserved for the execution of a task.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -2101,10 +2068,10 @@ except for certain explicit exceptions.
 @LabeledSection{Enumeration Representation Clauses}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 An @nt{enumeration_representation_clause} specifies the internal
 codes for enumeration literals.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -2281,12 +2248,12 @@ The layout can be specified with a @nt{record_representation_clause}.
 @LabeledSubSection{Record Representation Clauses}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{record_representation_clause} specifies the storage representation
 of records and record extensions, that is, the order, position, and size
 of components (including discriminants, if any).
 @IndexSee{Term=[bit field],See=(record_representation_clause)}
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -2337,9 +2304,8 @@ These need not have the same integer type.
 
 @begin{Legality}
 The @SynI{first_subtype_}@nt{local_name} of a
-@nt{record_representation_clause} shall denote a @oChg{}specific
-nonlimited record or @oEndChg{}record extension subtype.
-@oChgRef{94-4776.f}
+@nt{record_representation_clause} shall denote a specific
+nonlimited record or record extension subtype.
 @begin{Ramification}
 As for all type-related representation items,
 the @nt{local_name} is required to denote a first subtype.
@@ -2455,7 +2421,7 @@ attributes is implementation defined, the implementation need not
 support these names in all situations.
 They might be purely for the purpose of @nt{component_clause}s,
 for example.
-The visibility rules for such names are @Chg{}up to the@EndChg{} implementation.
+The visibility rules for such names are up to the implementation.
 
 We do not allow such component names to be normal identifiers
 @em that would constitute blanket permission to do all kinds of evil
@@ -2636,10 +2602,9 @@ We have corrected that oversight.
 
 @begin{StaticSem}
 @Defn2{Term=[storage place attributes], Sec=(of a component)}
-For @PrefixType{a component C of a composite, @oChg{}non-array@oEndChg{}
+For @PrefixType{a component C of a composite, non-array
 object R},
 the @i{storage place attributes} are defined:
-@oChgRef{94-4493.c}
 @begin{Ramification}
 The storage place attributes are not (individually) specifiable,
 but the user may control their values by giving a
@@ -2703,7 +2668,7 @@ Otherwise, there is no such requirement.
 @begin{ImplAdvice}
 @PDefn{contiguous representation}
 @PDefn{discontiguous representation}
-If a component is represented @Chg{}using@EndChg{} some form of pointer (such as an
+If a component is represented using some form of pointer (such as an
 offset) to the actual data of the component, and this data is contiguous with
 the rest of the object, then the storage place attributes should reflect
 the place of the actual data, not the pointer.
@@ -2725,10 +2690,10 @@ for that component.
 @LabeledSubSection{Bit Ordering}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 The Bit_Order attribute specifies the interpretation of the storage
 place attributes.
-@end{Redundant}
+]
 @begin{Reason}
 The intention is to provide uniformity in the
 interpretation of storage places across implementations on a
@@ -2845,7 +2810,7 @@ The Bit_Order attribute is new to Ada 9X.
 @LabeledSection{Change of Representation}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{change of representation}
 @Defn2{Term=[representation], Sec=(change of)}
 A @nt{type_conversion} (@lSeeSecNum{Type Conversions})
@@ -2862,7 +2827,7 @@ two record types with a common ancestor type need to be declared,
 with no inherited subprograms.  Distinct representations can then
 be specified for the record types, and explicit conversion between
 the types can be used to effect a change in representation.
-@end{Redundant}
+]
 @begin{Ramification}
 This technique does not work if the first type is an
 untagged type with user-defined primitive subprograms.
@@ -2902,11 +2867,11 @@ D := Descriptor(P);         --@i{ unpack P}
 @LabeledSection{The Package System}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 For each implementation there is a library package called System
 which includes the definitions of certain configuration-dependent
 characteristics.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{StaticSem}
@@ -2988,15 +2953,13 @@ and its language-defined children.}
    @key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @i{implementation-defined};
    @key{subtype} Interrupt_Priority @key{is} Any_Priority @key{range} Priority'Last+1 .. Any_Priority'Last;
 
-   Default_Priority : @key{constant} @oChg{}Priority := (Priority'First + Priority'Last)/2;@oEndChg{}
+   Default_Priority : @key{constant} Priority := (Priority'First + Priority'Last)/2;
 
 @key[private]
    ... -- @i{not specified by the language}
 @key[end] System;
 @end{Example}
-@begin{oChgNote}
-  Fixed syntax error in Default_Priority.
-@end{oChgNote}
+
 
 Name is an enumeration subtype.
 Values of type Name are the names of alternative machine
@@ -3118,8 +3081,7 @@ declarations to package System and its children.
 for the implementation to provide
 additional functionality via implementation-defined
 children of System.]
-@oBigChg{}Package System may be declared pure.@oEndBigChg{}
-@oChgRef{94-4776.g}
+Package System may be declared pure.
 @begin{Ramification}
 The declarations in package System and its children can be implicit.
 For example, since Address is not limited,
@@ -3274,10 +3236,9 @@ because then a read of 0 elements would always raise Constraint_Error.
 A better choice of lower bound is 1.
 @end{Reason}
 
-@oChg{}
+
 Integer_Address is a @Redundant[(signed or modular)] integer subtype.
-@oEndChg{}
-@oChgRef{94-4445.a}
+
 To_Address and To_Integer convert back and forth between
 this type and Address.
 @end{StaticSem}
@@ -3290,13 +3251,12 @@ Storage_Offset'First shall be <= (@en@;Storage_Offset'Last).
 @end{ImplReq}
 
 @begin{ImplPerm}
-@oBigChg{}Package System.Storage_Elements may be declared pure.@oEndBigChg{}
-@oChgRef{94-4921.a}
+Package System.Storage_Elements may be declared pure.
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-Operations in System and @oChg{}its children should reflect the
-target environment@oEndChg{} semantics as closely as is reasonable.
+Operations in System and its children should reflect the
+target environment semantics as closely as is reasonable.
 For example, on most machines, it makes sense for address arithmetic
 to ``wrap around.''
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -3324,8 +3284,8 @@ and viewing storage elements as unsigned seemed to make the most
 sense.
 @end{Reason}
 @begin{ImplNote}
-@oChg{}To_Address is intended for use in Address clauses.
-Implementations should overload To_Address@oEndChg{} if appropriate.
+To_Address is intended for use in Address clauses.
+Implementations should overload To_Address if appropriate.
 For example, on a segmented architecture,
 it might make sense to have a record type representing a
 segment/offset pair, and have a To_Address conversion that
@@ -3336,7 +3296,7 @@ converts from that record type to type Address.
 @LabeledSubSection{The Package System.Address_To_Access_Conversions}
 
 @begin{StaticSem}
-@oBigChg{}
+
 The following language-defined generic library package exists:
 @begin{Example}
 @ChildUnit{Parent=[System],Child=[Address_To_Access_Conversions],Expanded=[System.Address_To_Access_Conversions]}
@@ -3353,14 +3313,11 @@ The following language-defined generic library package exists:
    @key[pragma] Convention(Intrinsic, To_Address);
 @key[end] System.Address_To_Access_Conversions;
 @end{Example}
-@oEndBigChg{}
-@begin{oBigChgNote}
-  In version 5.0, Address_To_Access_Conversions was nested in
-  System.Storage_Elements; it is now a library unit.
-@end{oBigChgNote}
+
+
 
 The To_Pointer and To_Address subprograms
-@oChg{}@oEndChg{}convert back and forth between
+convert back and forth between
 values of types Object_Pointer and Address.
 To_Pointer(X'Address) is equal to X'Unchecked_Access
 for any X that allows Unchecked_Access.
@@ -3423,16 +3380,15 @@ To avoid generic contract model violations,
 the restriction might have to be detected at run time in some cases.
 @end{Ramification}
 @end{ImplPerm}
-@oChgRef{94-4921.a}
 
 @LabeledSection{Machine Code Insertions}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{machine code insertion}
 A machine code insertion can be achieved by a call to a subprogram whose
 @nt{sequence_of_statements} contains @nt{code_statement}s.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -3547,7 +3503,7 @@ overspecification.
 @LabeledSection{Unchecked Type Conversions}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{unchecked type conversion}
 @Defn2{Term=[type conversion], Sec=(unchecked)}
 @Defn2{Term=[conversion], Sec=(unchecked)}
@@ -3555,7 +3511,7 @@ overspecification.
 @IndexSee{Term=[cast],See=(unchecked type conversion)}
 An unchecked type conversion can be achieved by a call to an instance
 of the generic function Unchecked_Conversion.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{StaticSem}
@@ -3567,9 +3523,8 @@ The following language-defined generic library function exists:
 @ChildUnit{Parent=[Ada],Child=[Unchecked_Conversion],Expanded=[Ada.Unchecked_Conversion]}
 @key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target;
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Conversion);
-@oBigChg{}@key[pragma] Pure(Ada.Unchecked_Conversion);@oEndBigChg{}
+@key[pragma] Pure(Ada.Unchecked_Conversion);
 @end{Example}
-@oChgRef{94-4528.a}
 @begin{Reason}
 The @nt{pragma} Convention implies that
 the attribute Access is not allowed
@@ -3592,10 +3547,10 @@ same as that of the source object S:
 @begin{Itemize}
 S'Size = Target'Size.
 @begin{Ramification}
-@Chg{}
+
 Note that there is no requirement that the Sizes be known at compile
 time.
-@EndChg{}
+
 @end{Ramification}
 
 S'Alignment = Target'Alignment.
@@ -3657,17 +3612,15 @@ On the other hand, we have no advice to offer about
 discriminants and tag fields.
 @end{Ramification}
 
-@Chg{}The implementation should not generate unnecessary run-time checks
+The implementation should not generate unnecessary run-time checks
 to ensure that the representation of S is a representation of the target
 type.
 It should take advantage of the permission to return by reference
 when possible.
 Restrictions on unchecked conversions should be avoided
-unless required by the target environment.@EndChg{}
-@oChgRef{94-4954.a}
-@oChgRef{94-4966.a}
+unless required by the target environment.
 @begin{ImplNote}
-@Chg{}
+
 As an example of an unnecessary run-time check,
 consider a record type with gaps between components.
 The compiler might assume that such gaps are always zero bits.
@@ -3675,7 +3628,7 @@ If a value is produced that does not obey that assumption,
 then the program might misbehave.
 The implementation should not generate extra code to check for zero bits
 (except, perhaps, in a special error-checking mode).
-@EndChg{}
+
 @end{ImplNote}
 
 @PDefn2{Term=[recommended level of support], Sec=(unchecked conversion)}
@@ -3781,9 +3734,8 @@ If the representation of a scalar object does not represent a value of
 the object's subtype
 (perhaps because the object was not initialized),
 the object is said to have an @i{invalid representation}.
-It is a bounded error to @oBigChg{}evaluate@oEndBigChg{} the value of such
+It is a bounded error to evaluate the value of such
 an object.
-@oChgRef{94-4796.a}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If the error is detected, either Constraint_Error or Program_Error is
@@ -3791,21 +3743,13 @@ raised.
 Otherwise, execution continues using the invalid representation.
 The rules of the language outside this subclause assume that all objects
 have valid representations.
-@oChgRef{94-4768.e}
-@oChgRef{94-4843.b}
 The semantics of operations on invalid representations are as follows:
-@begin{oChgNote}
-Since 94-4843.b didn't like the wording of the change made
-(in version 5.3)
-in response to 94-4768.e, we put it back the way it was in version 5.0.
-(The wording suggested by 94-4843.b didn't seem quite right, either,
-since it missed the point of ``outside this subclause''.)
-@end{oChgNote}
+
 @begin{Discussion}
-@oChg{}
+
 The AARM is more explicit about what happens when
 the value of the case expression is an invalid representation.
-@oEndChg{}
+
 @end{Discussion}
 @begin{Itemize}
 If the representation of the object represents a value of the object's
@@ -4028,11 +3972,11 @@ X'Valid is new in Ada 9X.
 @LabeledSection{Unchecked Access Value Creation}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 The attribute Unchecked_Access is used to create access values
 in an unsafe manner @em the programmer is responsible for preventing
 ``dangling references.''
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{StaticSem}
@@ -4065,10 +4009,10 @@ The expected type for X'Unchecked_Access is as for X'Access.
 
 If an @nt<attribute_reference> with Unchecked_Access is used
 as the actual parameter for an access parameter,
-@oChg{}
+
 an Accessibility_Check can never fail on that access
 parameter.
-@oEndChg{}
+
 @end{Ramification}
 
 There is no Unchecked_Access attribute for subprograms.
@@ -4589,10 +4533,10 @@ objects incorrectly by missing various cases.
 @LabeledSubSection{The Max_Size_In_Storage_Elements Attribute}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 The Max_Size_In_Storage_Elements attribute is useful in writing user-defined pool
 types.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{StaticSem}
@@ -4616,7 +4560,7 @@ S'Max_Size_In_Storage_Elements might be very large.
 @LabeledSubSection{Unchecked Storage Deallocation}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{unchecked storage deallocation}
 @Defn2{Term=[storage deallocation], Sec=(unchecked)}
 @Defn{deallocation of storage}
@@ -4625,7 +4569,7 @@ S'Max_Size_In_Storage_Elements might be very large.
 Unchecked storage deallocation of an object designated by a value of an
 access type is achieved by a call to an instance of
 the generic procedure Unchecked_Deallocation.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{StaticSem}
@@ -4637,9 +4581,8 @@ The following language-defined generic library procedure exists:
 @ChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation],Expanded=[Ada.Unchecked_Deallocation]}
 @key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name);
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);
-@oBigChg{}@key[pragma] Preelaborate(Ada.Unchecked_Deallocation);@oEndBigChg{}
+@key[pragma] Preelaborate(Ada.Unchecked_Deallocation);
 @end{Example}
-@oChgRef{94-4893.a}
 @begin{Reason}
 The @nt{pragma} Convention implies that
 the attribute Access is not allowed
@@ -4740,10 +4683,9 @@ is not reclaimed prior to task termination.
 
 @begin{Erron}
 @Defn{nonexistent}
-@oBigChg{}
+
 Evaluating a name that denotes a nonexistent object is erroneous.
-@oEndBigChg{}
-@oChgRef{94-4791.a}
+
 The execution of a call to an instance of Unchecked_Deallocation is
 erroneous if
 the object was created other than by an @nt<allocator> for
@@ -4913,10 +4855,10 @@ with a standard storage pool,
 then garbage collection is not performed for objects in that pool.
 @begin{Ramification}
 If Controlled is not specified,
-@Chg{}the implementation may, but need not, perform garbage
-collection.@EndChg{}
+the implementation may, but need not, perform garbage
+collection.
 If Storage_Pool is specified,
-then @Chg{}a@EndChg{} @nt{pragma} Controlled for that type is ignored.
+then a @nt{pragma} Controlled for that type is ignored.
 @end{Ramification}
 @begin{Reason}
 Controlled means that implementation-provided garbage collection is
@@ -4947,12 +4889,12 @@ accessible to people outside the Ada world.
 @LabeledSection{Pragma Restrictions}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{pragma} Restrictions expresses the user's intent to abide by
 certain restrictions.
 This may facilitate the construction of
 simpler run-time environments.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -5124,8 +5066,7 @@ stream of elements and reconstruct values from a stream.
 
 @begin{StaticSem}
 For @PrefixType{every subtype S of a specific type @i(T)},
-the following attributes are defined.@oChg{}@oEndChg{}
-@oChgRef{94-4810.a}
+the following attributes are defined.
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Write>,
   Text=<S'Write denotes a procedure with the following specification:
@@ -5149,7 +5090,7 @@ S'Read reads the value of @i{Item} from @i{Stream}.>}
 @end{Description}
 @EndPrefixType{}
 
-@oBigChg{}
+
 For elementary types,
 the representation in terms of stream elements
 is implementation defined.
@@ -5165,8 +5106,7 @@ If @i(T) is a discriminated type,
 discriminants are included only if they have defaults.
 If @i(T) is a tagged type,
 the tag is not included.
-@oEndBigChg{}
-@oChgRef{94-4855.a}
+
 @ImplDef{The representation used by the Read and Write attributes of
 elementary types in terms of stream elements.}
 @begin{Reason}
@@ -5177,11 +5117,11 @@ elementary types in terms of stream elements.}
   to create the object and thus is logically separate from the regular
   components.  Such ``descriptor'' data are written by 'Output and
   produced as part of the delivered result by the 'Input function,
-  but they are not@oBigChg{} written by 'Write nor read by 'Read.
-  A tag is like a discriminant without a default.@oEndBigChg{}
+  but they are not written by 'Write nor read by 'Read.
+  A tag is like a discriminant without a default.
 @end{Reason}
 @begin{Ramification}
-  @oBigChg{}For a composite object,@oEndBigChg{}
+  For a composite object,
   the subprogram denoted by the Write or Read attribute of each
   component is called,
   whether it is the default or is user-specified.
@@ -5200,8 +5140,7 @@ specification:
 @end{Example}
 
 Dispatches to the subprogram denoted by the Write attribute of
-the specific type identified by the tag @oChg{}of Item.@oEndChg{}>}
-@oChgRef{94-4810.a}
+the specific type identified by the tag of Item.>}
 
 @Attribute{Prefix=<S'Class>, AttrName=<Read>,
   Text=<S'Class'Read denotes a procedure with the following specification:
@@ -5212,8 +5151,7 @@ the specific type identified by the tag @oChg{}of Item.@oEndChg{}>}
 @end{Example}
 
 Dispatches to the subprogram denoted by the Read attribute of
-the specific type identified by @oChg{}the tag of Item.@oEndChg{}>}
-@oChgRef{94-4810.a}
+the specific type identified by the tag of Item.>}
 @begin{Reason}
 It is necessary to have class-wide versions of Read and Write
 in order to avoid generic contract model violations;
@@ -5225,21 +5163,19 @@ type is specific or class-wide.
 @end{StaticSem}
 
 @begin{ImplAdvice}
-@oBigChg{}
+
 If a stream element is the same size as a storage element,
 then the normal in-memory representation should be used by Read and
 Write for scalar objects.
 Otherwise, Read and Write should use the smallest
 number of stream elements needed to represent all values in the base
 range of the scalar type.
-@oEndBigChg{}
-@oChgRef{94-4855.a}
+
 @end{ImplAdvice}
 
 @begin{StaticSem}
-@oChg{}For @PrefixType{every subtype S of a specific type @i(T)},
-the following attributes are defined.@oEndChg{}
-@oChgRef{94-4810.a}
+For @PrefixType{every subtype S of a specific type @i(T)},
+the following attributes are defined.
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Output>,
   Text=<S'Output denotes a procedure with the following specification:
@@ -5270,9 +5206,8 @@ S'Output to determine how much to read.>}
 @end{Description}
 @EndPrefixType{}
 
-@oChg{}Unless@oEndChg{} overridden by an @nt<attribute_definition_clause>, these
+Unless overridden by an @nt<attribute_definition_clause>, these
 subprograms execute as follows:
-@oChgRef{94-4810.a}
 @begin(Itemize)
 If @i(T) is an array type, S'Output first writes the bounds,
 and S'Input first reads the bounds.
@@ -5308,10 +5243,9 @@ the specific type identified by the tag.>}
   Text=<S'Class'Input denotes a function with the following specification:
 @begin{Example}
 @key(function) S'Class'Input(
-   @oChg{}@i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)@oEndChg{}
+   @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)
    @key{return} @i(T)'Class
 @end{Example}
-@oChgRef{94-4768.u}
 
 First reads the external tag from @i{Stream} and determines
 the corresponding internal tag
@@ -5323,7 +5257,7 @@ returns that result.>}
 @end{Description}
 @EndPrefixType{}
 
-@oBigChg{}
+
 @IndexCheck{Range_Check}
 In the default implementation of Read and Input for a composite type,
 for each scalar component that is a discriminant or whose
@@ -5340,7 +5274,7 @@ is not a value of its subtype and this error is not detected,
 the component has an abnormal value, and erroneous execution
 can result
 (@lSeeSecNum{Data Validity}).
-@oEndBigChg{}
+
 
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Write for a type)}
@@ -5354,7 +5288,7 @@ The stream-oriented attributes may be specified
 for any type via an @nt{attribute_definition_clause}.
 All nonlimited types have default implementations
 for these operations.
-@oBigChg{}
+
 An @nt{attribute_reference} for one of these attributes is
 illegal if the type is limited,
 unless the attribute has been specified by an
@@ -5363,10 +5297,9 @@ For an @nt{attribute_definition_clause} specifying one of these
 attributes, the subtype of the Item parameter shall be the base subtype
 if scalar, and the first subtype otherwise.
 The same rule applies to the result of the Input function.
-@oEndBigChg{}
-@oChgRef{94-4810.a}
+
 @begin{Reason}
-  @oChg{}This is to simplify implementation.@oEndChg{}
+  This is to simplify implementation.
 @end{Reason}
 @end{StaticSem}
 
@@ -5376,20 +5309,18 @@ are needed to pass
 an arbitrary value of the subtype through a stream.
 For an indefinite subtype S of a type @i(T), @i(T)'Output and @i(T)'Input
 will normally be needed, since @i(T)'Write and @i(T)'Read do not
-pass bounds, @oBigChg{}discriminants, or tags.@oEndBigChg{}
-@oChgRef{94-4855.a}
+pass bounds, discriminants, or tags.
 
-@oChg{}User-specified attributes of S'Class are not inherited by other
-class-wide types descended from S.@oEndChg{}
-@oChgRef{94-4969.a}
+User-specified attributes of S'Class are not inherited by other
+class-wide types descended from S.
 @end{NotesNotes}
 
 @begin{Examples}
 @i{Example of user-defined Write attribute:}
 @begin{Example}
 @key[procedure] My_Write(
-  @oChg{}Stream : @key[access] Ada.Streams.Root_Stream_Type'Class; Item : My_Integer'Base);
-@key(for) My_Integer'Write @key(use) My_Write;@oEndChg{}
+  Stream : @key[access] Ada.Streams.Root_Stream_Type'Class; Item : My_Integer'Base);
+@key(for) My_Integer'Write @key(use) My_Write;
 @end{Example}
 @begin{Discussion}
 @i{Example of network input/output using input output attributes:}
@@ -5435,7 +5366,7 @@ class-wide types descended from S.@oEndChg{}
 @LabeledSection{Freezing Rules}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 This clause defines
 a place in the program text where each declared entity becomes
 ``frozen.''
@@ -5445,7 +5376,7 @@ causes freezing of the entity in some contexts,
 as described below.
 The @LegalityTitle forbid certain kinds of uses of an entity
 in the region of text where it is frozen.
-@end{Redundant}
+]
 @begin{Reason}
 This concept has two purposes: a compile-time one and a run-time one.
 
@@ -5589,7 +5520,7 @@ Here's a similar example, which AI-00039 also says is legal:
 @key[end] P;
 @end{example}
 
-If T's size were dynamic, @oChg{}that size@oEndChg{} would be stored in some
+If T's size were dynamic, that size would be stored in some
 compiler-generated dope; this dope would be initialized at the place
 of the full type declaration.
 However, the generated code for the function calls
@@ -5606,8 +5537,8 @@ compile time, we might as well formulate the rule as a legality rule.
 
 Compilers should not be required to generate code to load the value
 of a variable before the address of the variable has been determined.
-@oChg{}
-@oEndChg{}
+
+
 
 After an entity has been frozen, no further requirements may be
 placed on its representation (such as by a representation item
@@ -5692,7 +5623,7 @@ Note that in the sense of this paragraph,
 a @nt{subtype_mark} ``references'' the denoted subtype,
 but not the type.
 @end{Ramification}
-@Chg{}
+
 @begin{Itemize}
 @PDefn2{Term=[freezing], Sec=(generic_instantiation)}
 The occurrence of a @nt{generic_instantiation} causes freezing;
@@ -5722,7 +5653,7 @@ The declaration of a private
   for a record extension.
 @end{Ramification}
 @end{Itemize}
-@EndChg{}
+
 
 @PDefn2{Term=[freezing], Sec=(by an expression)}
 A static expression causes freezing where it occurs.
@@ -5733,7 +5664,7 @@ the expression is part of a
 of a component's @nt<constraint>, in which case,
 the freezing occurs later as part of another construct.
 
-@Chg{}
+
 The following rules define which entities are frozen at the place where
 a construct causes freezing:
 @begin{Itemize}
@@ -5883,11 +5814,11 @@ the corresponding specific type is frozen as well.
   Freezing an access type does not freeze its designated subtype.
 @end{Ramification}
 @end{Itemize}
-@EndChg{}
+
 @end{Intro}
 
 @begin{Legality}
-@Chg{}
+
 @Redundant[The explicit declaration of a primitive subprogram of a
 tagged type shall occur before the type is frozen
 (@lSeeSecNum{Dispatching Operations of Tagged Types}).]
@@ -5925,12 +5856,8 @@ before the constant is frozen
 @Redundant[A representation item that directly specifies an aspect of an
 entity shall appear before the entity is frozen
 (@lSeeSecNum{Representation Items}).]
-@EndChg{}
-@begin{ChgNote}
-  The above rules are now officially stated elsewhere,
-  as per WG9 resolution,
-  so the ones here are marked as @Redundant[redundant].
-@end{ChgNote}
+
+
 @begin{Discussion}
 From RM83-13.1(7).  The wording here forbids freezing
 within the @nt{representation_clause} itself, which was not true of the Ada

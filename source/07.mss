@@ -1,13 +1,13 @@
 @Part(07, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:01 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
 @LabeledChapter{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @ToGlossaryAlso{Term=<Package>,
   Text=<Packages are program units that allow the specification of groups of
   logically related entities.
@@ -20,18 +20,18 @@
 @IndexSee{Term=[encapsulation],See=(package)}
 @IndexSee{Term=[module],See=(package)}
 @IndexSeeAlso{Term=[class],See=(package)}
-@end{Redundant}
+]
 @end{Intro}
 
 @LabeledSection{Package Specifications and Declarations}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A package is generally provided in two parts: a
 @nt{package_specification} and a @nt{package_body}.
 Every package has a @nt{package_specification}, but not all packages
 have a @nt{package_body}.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -93,7 +93,7 @@ in children of the child package.
 @SeeSecNum(Compilation Units - Library Units).
 @end{Ramification}
 
-@begin{Redundant}
+@redundant[
 An entity declared in the private part of a package is visible
 only within the declarative region of the package itself
 (including any child units @em
@@ -103,7 +103,7 @@ entities declared in the visible part can be used even outside the
 package; furthermore, direct visibility of such entities can be
 achieved by means of @nt{use_clause}s
 (@lSeeSecNum{Selected Components} and @RefSecNum{Use Clauses}).
-@end{Redundant}
+]
 @end{StaticSem}
 
 @begin{RunTime}
@@ -189,7 +189,7 @@ well.
 @LabeledSection{Package Bodies}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 In contrast to the entities declared in the visible part of a
 package, the entities declared in the @nt{package_body} are
 visible only
@@ -199,7 +199,7 @@ package with a @nt{package_body} can be used for the construction of
 a group of related subprograms in
 which the logical operations available to clients are clearly
 isolated from the internal entities.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -228,8 +228,7 @@ unless it requires a body@Redundant[;
 @key<pragma> Elaborate_Body can be used to require
 a @nt<library_unit_declaration> to have a body
 (@lSeeSecNum{Elaboration Control})
-if it would not otherwise @oChg{}require@oEndChg{} one].
-@oChgRef{94-4409.a}
+if it would not otherwise require one].
 @begin{Ramification}
 The first part of the rule forbids a @nt{package_body} from
 standing alone @em it has to belong to some previous
@@ -362,7 +361,7 @@ is moved here, since it is more generally applicable.
 @LabeledSection{Private Types and Private Extensions}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 The declaration (in the visible part of a
 package) of a type as a private type or private extension
 serves to separate the characteristics that can be used
@@ -375,7 +374,7 @@ package (the details of the definition of the type itself).
 @IndexSee{Term=[opaque type],See=(private types and private extensions)}
 @IndexSee{Term=[abstract data type (ADT)],See=(private types and private extensions)}
 @IndexSee{Term=[ADT (abstract data type)],See=(private types and private extensions)}
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -424,7 +423,7 @@ generic formal private extension is also a partial view.
   full view.
 @end{Reason}
 
-@Chg{}
+
 @Redundant[A type shall be completely defined before it is frozen
 (@lSeeSecNum{Completions of Declarations} and
 @RefSecNum{Freezing Rules}).
@@ -439,26 +438,20 @@ representation item.]
   This rule is stated officially in
   @RefSec{Completions of Declarations}.
 @end{TheProof}
-@EndChg{}
-@begin{ChgNote}
-  Rule moved here from @RefSec{Freezing Rules},
-  as per WG9 resolution.
-@end{ChgNote}
+
+
 
 @Redundant[A private type is limited if its declaration includes
 the reserved word @key[limited];
 a private extension is limited if its ancestor type is limited.]
 If the partial view is nonlimited, then
 the full view shall be nonlimited.
-@oBigChg{}
+
 If a tagged partial view is limited,
 then the full view shall be limited.
 @Redundant[On the other hand,
-if an untagged partial view@oEndBigChg{} is limited,
+if an untagged partial view is limited,
 the full view may be limited or nonlimited.]
-@oChgRef{94-4662.a}
-@oChgRef{94-4665.a}
-@oChgRef{94-4828.b}
 
 If the partial view is tagged,
 then the full view shall be tagged.
@@ -473,11 +466,10 @@ scope of the partial view;
 Note that deriving from a partial view within its immediate scope
 can only occur in a package that is a child of the one where the partial
 view is declared.
-The rule implies that in @oChg{}the visible part of a public child package,
+The rule implies that in the visible part of a public child package,
 it is impossible to derive from an untagged private type declared in the
-visible part of the parent package in the case where@oEndChg{} the full
+visible part of the parent package in the case where the full
 view of the parent type turns out to be tagged.
-@oChgRef{94-4443.a}
 We considered a model in which the derived type was implicitly
 redeclared at the earliest place within its immediate scope where
 characteristics needed to be added.
@@ -559,7 +551,7 @@ that seemed like too much mechanism.
   corresponding record extension if the parent is nonlimited.
 @end{Reason}
 @begin{Ramification}
-@Chg{}
+
 A type derived from an untagged private type is untagged,
 even if the full view of the parent is tagged,
 and even at places that can see the parent:
@@ -592,10 +584,7 @@ it would be illegal to extend T, and so forth.
 The component name X is never visible for this view,
 although the component is still there @em one
 can get one's hands on it via a @nt{type_conversion}.
-@EndChg{}
-@oChgRef{94-4941.a}
-@oChgRef{94-4946.a}
-@ChgRef{94-5001.g}
+
 @end{Ramification}
 
 @Defn2{Term=[ancestor subtype], Sec=(of a @nt<private_extension_declaration>)}
@@ -615,7 +604,7 @@ private part of an instance of a generic unit.
   @nt{generic_instantiation}s.
 @end{Reason}
 
-@oBigChg{}
+
 If the declaration of a partial view includes
 a @nt{known_discriminant_part}, then
 the @nt{full_type_declaration} shall have a fully conforming
@@ -630,12 +619,11 @@ the parent subtype of the full view is required to be constrained
   If the ancestor subtype has discriminants,
   then it is usually best to make it unconstrained.
 @end{Discussion}
-@oEndBigChg{}
+
 @begin{Ramification}
   If the partial view has a @nt<known_discriminant_part>,
-  then the full view has to be a composite, @oChg{}non-array@oEndChg{} type,
+  then the full view has to be a composite, non-array type,
   since only such types may have known discriminants.
-@oChgRef{94-4493.c}
   Also, the full view cannot inherit the discriminants in this case;
   the @nt{known_discriminant_part} has to be explicit.
 
@@ -656,7 +644,7 @@ the parent subtype of the full view is required to be constrained
   @nt{unknown_discriminant_part}.
 @end{Ramification}
 
-@oBigChg{}
+
 If a private extension inherits known discriminants from the ancestor
 subtype,
 then the full view shall also inherit its discriminants from the
@@ -676,16 +664,12 @@ if and only if the ancestor subtype is constrained.
 then the @nt{full_type_declaration} may define
 a definite or an indefinite subtype,
 with or without discriminants.]
-@oEndBigChg{}
-@oChgRef{94-4474.a}
-@oChgRef{94-4886.a}
 
-@oBigChg{}
+
+
 If a partial view has neither known nor unknown discriminants,
 then the @nt{full_type_declaration} shall define a definite subtype.
-@oEndBigChg{}
-@oChgRef{94-4886.a}
-@oChgRef{94-4947.a}
+
 
 If the ancestor subtype of a private extension has constrained
 discriminants,
@@ -695,7 +679,7 @@ matching constraint on those discriminants.
 @begin{Ramification}
   If the parent type of the full view is not the ancestor type,
   but is rather some descendant thereof, the constraint on
-  the discriminants of the @oChg{}parent@oEndChg{} type might come from
+  the discriminants of the parent type might come from
   the declaration of some intermediate type in the derivation
   chain between the ancestor type and the parent type.
 @end{Ramification}
@@ -712,7 +696,7 @@ This prevents the following:
 
 The constraints in this example do not statically match.
 
-@oBigChg{}
+
 If the constraint on the parent subtype of the full view depends on
 discriminants of the full view, then the ancestor subtype has to be
 unconstrained:
@@ -733,7 +717,7 @@ The above example would be illegal if the private extension said
 ``is new One_Discrim(A => C);'',
 because then the constraints would not statically match.
 (Constraints that depend on discriminants are not static.)
-@oEndBigChg{}
+
 @end{Reason}
 @end{Legality}
 
@@ -797,11 +781,11 @@ view of a type.
 @PDefn2{Term=[elaboration], Sec=(private_extension_declaration)}
 The elaboration of a @nt{private_extension_declaration} elaborates
 the @i(ancestor_)@nt<subtype_indication>, and creates a
-partial view of a type.@Chg{}
+partial view of a type.
 @end{RunTime}
 
 @begin{NotesNotes}
-@EndChg{}The partial view of a type as declared by a @nt<private_type_declaration>
+The partial view of a type as declared by a @nt<private_type_declaration>
 is defined to be a composite view (in @RefSecNum{Types and Subtypes}).
 The full view of the type might or might not be composite.
 A private extension is also composite,
@@ -982,12 +966,10 @@ but after the @nt{type_declaration},
 where the corresponding declaration from the parent is
 visible.
 If there is no such place, then the inherited subprogram
-is not declared @oChg{}at all.
-@Redundant[An inherited subprogram that is not declared at all@oEndChg{}
+is not declared at all.
+@Redundant[An inherited subprogram that is not declared at all
 cannot be named in a call and cannot be overridden,
 but for a tagged type, it is possible to dispatch to it.]
-@oChgRef{94-4678.a}
-@oChgRef{94-4683.a}
 
 For a @nt{private_extension_declaration},
 each inherited subprogram is declared immediately after
@@ -1080,7 +1062,7 @@ If T3 or T4 were to declare a type-conformant Op2,
 this would override the one inherited from Root.
 This is different from the situation with T2.
 
-@oChg{}
+
 T5 inherits Op1 and two Op2's from T2.
 Op1 is implicitly declared immediately after the declaration of T5,
 as is the Op2 that came from Unrelated.Op2.
@@ -1088,17 +1070,14 @@ However, the Op2 that originally came from Parent.Op2 is never
 implicitly declared for T5,
 since T2's version of that Op2 is never visible (anywhere @em it never
 got declared either).
-@oEndChg{}
-@oChgRef{94-4677.a}
-@oChgRef{94-4682.a}
-@oChgRef{94-4439.a}
+
 
 For all of these rules, implicit private parts and bodies are assumed as
 needed.
 
 It is possible for characteristics of a type to be revealed in more than
 one place:
-@oChg{}
+
 @begin{Example}
 @key[package] P @key[is]
     @key[type] Comp1 @key[is] @key[private];
@@ -1130,8 +1109,7 @@ one place:
     @key[end] R;
 @key[end] P.Q;
 @end{Example}
-@oEndChg{}
-@oChgRef{94-4444.a}
+
 @end{Discussion}
 
 @Redundant[The Class attribute is defined for tagged subtypes in
@@ -1256,13 +1234,13 @@ has been moved to ``Obsolescent Features.''
 @LabeledSection{Deferred Constants}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 Deferred constant declarations may be used to declare constants
 in the visible part of a package,
 but with the value of the constant given in the private part.
 They may also be used to declare constants imported from other
 languages (@lSeeSecNum{Interface to Other Languages}).
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Legality}
@@ -1323,15 +1301,12 @@ corresponding full declaration:
   the visible part of a @nt{package_specification},
   and has no full constant declaration.]
 
-@Chg{}
+
 The completion of a deferred constant declaration shall occur
 before the constant is frozen
 (@lSeeSecNum{Deferred Constants}).
-@EndChg{}
-@begin{ChgNote}
-  Rule moved here from @RefSec{Freezing Rules},
-  as per WG9 resolution.
-@end{ChgNote}
+
+
 @end{Legality}
 
 @begin{RunTime}
@@ -1346,7 +1321,7 @@ The full constant declaration for a deferred constant that is of a given
 private type or private extension is not allowed before the corresponding
 @nt{full_type_declaration}.  This is a consequence of the freezing
 rules for types
-@Chg{}(@lSeeSecNum{Freezing Rules}).@EndChg{}
+(@lSeeSecNum{Freezing Rules}).
 @begin{Ramification}
 Multiple or single declarations are allowed for the
 deferred and the full declarations, provided that the
@@ -1430,13 +1405,13 @@ they are simply a special case of @nt<object_declaration>s.
 @LabeledSection{Limited Types}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @ToGlossaryAlso{Term=<Limited type>,
   Text=<A limited type is (a view of) a type for which
   the assignment operation is not allowed.
   A nonlimited type is a (view of a) type for which the assignment
   operation is allowed.>}
-@end{Redundant}
+]
 @begin{Discussion}
 The concept of the @i(value) of a limited type is difficult
 to define, since the abstract value of a limited type often
@@ -1638,7 +1613,7 @@ than being a subclause of
 @LabeledSection{User-Defined Assignment and Finalization}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{user-defined assignment}
 @Defn2{Term=[assignment], Sec=(user-defined)}
 Three kinds of actions are
@@ -1677,7 +1652,7 @@ which is invoked immediately before finalization of any of the
 components of a controlled object, and an Adjust
 procedure which is invoked as the last step of an assignment to
 a (nonlimited) controlled object.
-@end{Redundant}
+]
 @begin{Ramification}
 Here's the basic idea of initialization, value adjustment, and finalization,
 whether or not user defined:
@@ -1705,7 +1680,7 @@ The following language-defined library package exists:
 @tabclear()
 @ChildUnit{Parent=[Ada],Child=[Finalization],Expanded=[Ada.Finalization]}
 @key[package] Ada.Finalization @key[is]
-    @oBigChg{}@key[pragma] Preelaborate(Finalization);@oChgRef{94-4528.a}@oEndBigChg{}
+    @key[pragma] Preelaborate(Finalization);
 
 @LangDefType{Package=[Ada.Finalization],Type=[Controlled]}
     @key[type] Controlled @key[is abstract tagged private];
@@ -1733,15 +1708,13 @@ about descendants of Controlled only.
 @end{Discussion}
 The (default) implementations of
 Initialize, Adjust, and Finalize have no effect.
-@oChg{}
+
 The predefined "=" operator of type Controlled always returns True,
 @Redundant[since this operator is incorporated into
 the implementation of the predefined equality operator of types derived
 from Controlled, as explained in
 @RefSecNum(Relational Operators and Membership Tests).]
-@oEndChg{}
-@oChgRef{94-4619.a}
-@oChgRef{94-4843.a}
+
 The type Limited_Controlled is like Controlled, except
 that it is limited and it lacks the primitive subprogram Adjust.
 @begin{Reason}
@@ -1960,9 +1933,8 @@ for limited controlled types.
 @end{TheProof}
 @begin{Itemize}
 For an @nt{assignment_statement} that assigns to an object the value
-@oBigChg{}of that same object,@oEndBigChg{}
+of that same object,
 the implementation need not do anything.
-@oChgRef{94-4495.a}
 @begin{Ramification}
   In other words, even if an object is controlled and a combination
   of Finalize and Adjust on the object might have a net
@@ -2028,19 +2000,18 @@ Controlled types and user-defined finalization are new to Ada 9X.
 @LabeledSubSection{Completion and Finalization}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 This subclause defines @i{completion} and @i{leaving} of the execution
 of constructs and entities.
-A @i{master} is @oBigChg{}the execution of a construct that@oEndBigChg{}
+A @i{master} is the execution of a construct that
 includes finalization of local objects after it is complete
 (and after waiting for any local tasks
 @em @lSeeSecNum(Task Dependence - Termination of Tasks)),
 but before leaving.
-@oChgRef{94-4715.a}
 Other constructs and entities are left immediately upon completion.
 @IndexSee{Term=[cleanup],See=(finalization)}
 @IndexSee{Term=[destructor],See=(finalization)}
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{RunTime}
@@ -2080,20 +2051,12 @@ as defined for the execution that is taking place.
 @Defn{master}
 Leaving an execution happens immediately after its completion,
 except in the case of a @i{master}:
-@oBigChg{}the execution of
+the execution of
 a @nt{task_body}, a @nt{block_statement},
 a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}.
-A master@oEndBigChg{} is finalized after it is
+A master is finalized after it is
 complete, and before it is left.
-@oChgRef{94-4715.a}
-@begin{oBigChgNote}
-  A master is now officially defined to be the @i{execution of} a
-  @nt{subprogram_body}, etc,
-  instead of being the @nt{subprogram_body} (or whatever) itself.
-  This simplifies some of the rules, such as the accessibility rules.
-  We still allow ourselves some sloppiness when the meaning is clear
-  from context; we have always used the term in both senses.
-@end{oBigChgNote}
+
 @begin{Reason}
   Note that although an @nt{accept_statement} has no
   @nt{declarative_part}, it can call functions and evaluate
@@ -2104,19 +2067,18 @@ complete, and before it is left.
 @end{Reason}
 
 @Defn2{Term=[finalization], Sec=(of a master)}
-@oBigChg{}
+
 For the @i{finalization} of a master,
 dependent tasks are first awaited,
 as explained in @RefSecNum{Task Dependence - Termination of Tasks}.
 Then each object whose accessibility level is
 the same as that of the master is finalized
 if the object was successfully initialized and still exists.
-@oEndBigChg{}
-@oChgRef{94-4715.a}
+
 @Redundant[These actions are performed whether the master is left
   by reaching the last statement or via a transfer of control.]
 @begin{Ramification}
-@oBigChg{}
+
   As explained in @RefSecNum{Operations of Access Types},
   the set of objects with the same accessibility level
   as that of the master
@@ -2134,8 +2096,7 @@ if the object was successfully initialized and still exists.
   Thus, after leaving a master, the only objects yet to be
   finalized are those whose accessibility level is less deep than that
   of the master.
-@oEndBigChg{}
-@oChgRef{94-4715.a}
+
 @end{Ramification}
 @begin{Honest}
 Subcomponents of objects due to be finalized are not finalized
@@ -2149,7 +2110,7 @@ initialized.
 But if the containing object is finalized, we don't want to require
 repeated finalization of the subcomponents,
 as might normally be implied by the recursion in finalization of a
-master and the recursion in finalization of an object.@oChg{}@oEndChg{}
+master and the recursion in finalization of an object.
 @end{Reason}
 When a transfer of control causes completion of an execution, each
 included master is finalized in order, from

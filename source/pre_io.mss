@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:03 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 @LabeledSection{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -53,9 +53,8 @@ package.
 @Defn2{Term=[name], Sec=(of an external file)}
 @Defn2{Term=[form], Sec=(of an external file)}
 Values input from the external environment of the program, or output to
-the @oChg{}external environment,@oEndChg{}
+the external environment,
 are considered to occupy @i{external files}.
-@oChgRef{94-4845.a}
 An external file can be anything external to the program that can
 produce a value to be read or receive a value to be written.  An
 external file is identified by a string (the @i{name}).  A second string
@@ -179,8 +178,7 @@ Access to stream files is described in
 @Defn{sequential access}
 For sequential access, the file is viewed as a sequence of values that
 are transferred in the order of their appearance (as produced by the
-program or by the @oChg{}external environment).@oEndChg{}
-@oChgRef{94-4845.a}
+program or by the external environment).
 When the file is opened with mode
 In_File or Out_File, transfer starts respectively
 from or to the beginning of the file.  When the file is opened with mode
@@ -339,13 +337,12 @@ additional effects described in subclause
           external file.  The exception Use_Error is
           propagated if, for the
           specified mode, the
-@oChg{}
+
 external environment
-@oEndChg{}
+
  does not support creation of
           an external file with the given name (in the absence of
           Name_Error) and form.
-@oChgRef{94-4845.a}
 @begin{CodeExample}
 @key[procedure] Open(File : @key[in] @key[out] File_Type;
                Mode : @key[in] File_Mode;
@@ -364,12 +361,11 @@ external environment
           external file; in particular, this exception is propagated if no
           external file with the given name exists.  The exception
           Use_Error is propagated if, for the specified mode, the
-@oChg{}
+
 external environment
-@oEndChg{}
+
  does not support opening for an external file with
           the given name (in the absence of Name_Error) and form.
-@oChgRef{94-4845.a}
 @begin{CodeExample}
 @key[procedure] Close(File : @key[in] @key[out] File_Type);
 @end{CodeExample}
@@ -396,8 +392,7 @@ then the closed file is unchanged.
           The exception Status_Error is propagated if the given file is not
           open.  The exception Use_Error is propagated if
           deletion of the external file is not supported
-          by the @oChg{}external environment.@oEndChg{}
-@oChgRef{94-4845.a}
+          by the external environment.
 @begin{CodeExample}
 @key[procedure] Reset(File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
 @key[procedure] Reset(File : @key[in] @key[out] File_Type);
@@ -423,17 +418,16 @@ then the reset file is unchanged.
 
           The exception Status_Error is propagated if the file is not open.
           The exception Use_Error is propagated if the
-@oChg{}
+
 external environment
-@oEndChg{}
+
  does not
           support resetting for the external file and, also, if the
-@oChg{}
+
 external environment
-@oEndChg{}
+
  does not support resetting to the specified mode
           for the external file.
-@oChgRef{94-4845.a}
 @begin{CodeExample}
 @key[function] Mode(File : @key[in] File_Type) @key[return] File_Mode;
 @end{CodeExample}
@@ -448,14 +442,13 @@ external environment
           Returns a string which uniquely identifies the external file
           currently associated with the given file (and may thus be used
           in an Open operation).  If an
-@oChg{}
+
 external environment
-@oEndChg{}
+
  allows alternative
           specifications of the name (for example, abbreviations), the
           string returned by the function should correspond to a full
           specification of the name.
-@oChgRef{94-4845.a}
 
           The exception Status_Error is propagated if the given file is not
           open.  The exception Use_Error is propagated if the associated
@@ -467,16 +460,15 @@ external environment
 
           Returns the form string for the external file currently
           associated with the given file.  If an
-@oChg{}
+
 external environment
-@oEndChg{}
+
  allows
           alternative specifications of the form (for example,
           abbreviations using default options), the string returned by
           the function should correspond to a full specification (that
           is, it should indicate explicitly all options selected,
           including default options).
-@oChgRef{94-4845.a}
 
           The exception Status_Error is propagated if the given file is not
           open.
@@ -494,10 +486,9 @@ An implementation may propagate
 Name_Error or Use_Error if an attempt is
 made to use an I/O feature that cannot be supported by the
 implementation due to limitations in the
-@oChg{}
+
 external environment.
-@oEndChg{}
-@oChgRef{94-4845.a}
+
 Any such restriction should be documented.
 @end{ImplPerm}
 
@@ -676,12 +667,11 @@ operations is attempted for a file that is not open.
           file is Out_File.  The exception End_Error is propagated if the
           index to be used exceeds the size of the external file.  The
           exception Data_Error
-@oChg{}
+
 can be propagated if the element read cannot be
           interpreted as a value of the subtype Element_Type
-@oEndChg{}
+
 (@lSeeSecNum{Exceptions in Input-Output}).
-@oChgRef{94-4768.c}
 @begin{CodeExample}
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type;
                                      To   : @key[in] Positive_Count);
@@ -784,15 +774,12 @@ The generic library package Storage_IO has the following declaration:
 @key[end] Ada.Storage_IO;
 @end{Example}
 
-@oChg{}In each instance,@oEndChg{}
+In each instance,
 the constant Buffer_Size has a value that is the size (in storage elements)
 of the buffer required to represent the content of an object of
 subtype Element_Type,
 including any implicit levels of indirection used by the implementation.
-@begin{oChgNote}
-  Added "In each instance", to emphasize the fact that the value of
-  Buffer_Size is different for different Element_Types.
-@end{oChgNote}
+
 @begin{Reason}
 As with Direct_IO, the Element_Type formal of Storage_IO does not have an
 @nt{unknown_discriminant_part}
@@ -1006,9 +993,9 @@ The library package Text_IO has the following declaration:
    @key[function] Current_Output  @key[return] File_Type;
    @key[function] Current_Error   @key[return] File_Type;
 
-   @key[type] File_Access @key[is] @key[access] @key[constant] @oBigChg{}File_Type;
+   @key[type] File_Access @key[is] @key[access] @key[constant] File_Type;
 
-   @key[function] Standard_Input  @key[return] File_Access;@oChgRef{94-4527.a}@oEndBigChg{}
+   @key[function] Standard_Input  @key[return] File_Access;
    @key[function] Standard_Output @key[return] File_Access;
    @key[function] Standard_Error  @key[return] File_Access;
 
@@ -1423,22 +1410,18 @@ or when application-dependent error-related text is to be output.
 
           The exception Status_Error is propagated if the given file is not
           open.  The exception Mode_Error is propagated if the mode of the
-          given file is not @oBigChg{}In_File.@oEndBigChg{}
-@oChgRef{94-4527.a}
-@oChgRef{94-4972.a}
+          given file is not In_File.
 @begin{CodeExample}
 @key[procedure] Set_Output(File : @key[in] File_Type);
 @key[procedure] Set_Error (File : @key[in] File_Type);
 @end{CodeExample}
 
-          Each operates on a file of mode Out_File @oChg{}or Append_File.@oEndChg{}  Set_Output
+          Each operates on a file of mode Out_File or Append_File.  Set_Output
         sets the current default output file to File.
           Set_Error sets the current default error file to File.
           The exception Status_Error is propagated if the given file is not
           open.  The exception Mode_Error is propagated if the mode of the
-          given file is not @oBigChg{}Out_File or Append_File.@oEndBigChg{}
-@oChgRef{94-4527.a}
-@oChgRef{94-4972.a}
+          given file is not Out_File or Append_File.
 @begin{CodeExample}
 @key[function] Standard_Input @key[return] File_Type;
 @key[function] Standard_Input @key[return] File_Access;
@@ -1489,9 +1472,8 @@ respectively.
 @end{CodeExample}
 
           Returns the current default error file,
-or an access value designating the current default @oChg{}error@oEndChg{} file,
+or an access value designating the current default error file,
 respectively.
-@oChgRef{94-4975.a}
 
 @begin{CodeExample}
 @key[procedure] Flush (File : @key[in] @key[out] File_Type);
@@ -2159,11 +2141,10 @@ The following procedures are provided:
           If the value of the parameter Width is zero, skips any leading
           blanks, line terminators, or page terminators, then
           reads a plus sign if present or
-          @oBigChg{}(for a signed type only)@oEndBigChg{}
+          (for a signed type only)
           a minus sign if present, then reads the longest possible
           sequence of characters matching the syntax of a numeric
           literal without a point.
-@oChgRef{94-4526.d}
           If a nonzero value of Width is supplied, then exactly Width
           characters are input, or the characters (possibly none) up to
           a line terminator, whichever comes first; any skipped leading
@@ -2230,7 +2211,7 @@ read does not form a legal integer literal or if the value obtained is not
           length of the given string as the value for Width.
 @end{DescribeCode}
 
-@BigChg{}
+
 Integer_Text_IO is a library package that is a nongeneric equivalent
 to Text_IO.Integer_IO for the predefined type Integer:
 @ChildUnit{Parent=[Ada],Child=[Integer_Text_IO],Expanded=[Ada.Integer_Text_IO]}
@@ -2242,19 +2223,16 @@ to Text_IO.Integer_IO for the predefined type Integer:
 For each predefined signed integer type,
 a nongeneric equivalent to Text_IO.Integer_IO is provided,
 with names such as Ada.Long_Integer_Text_IO.
-@EndBigChg{}
-@begin{BigChgNote}
-  Preinstantiations of Text_IO.Integer_IO added,
-  as per WG9 resolution.
-@end{BigChgNote}
+
+
 @end{StaticSem}
 
 @begin{ImplPerm}
-@BigChg{}
+
 The nongeneric equivalent packages may, but need not,
 be actual instantiations of the generic package for the appropriate
 predefined type.
-@EndBigChg{}
+
 @end{ImplPerm}
 
 @begin{NotesNotes}
@@ -2334,7 +2312,7 @@ The following procedures are provided:
 
           If the value of the parameter Width is zero, skips any leading
           blanks, line terminators, or page terminators,
-@oChg{}
+
           then reads the longest possible sequence of characters
           matching the syntax of any of the following
           (see @RefSecNum(Numeric Literals)):
@@ -2349,22 +2327,20 @@ The following procedures are provided:
 
 [+|@en]@nt[base]#.@nt[based_numeral]#[@nt[exponent]]
 @end{Itemize}
-@oEndChg{}
-@oChgRef{94-4526.e}
+
 
           If a nonzero value of Width is supplied, then exactly Width
           characters are input, or the characters (possibly none) up to
           a line terminator, whichever comes first; any skipped leading
           blanks are included in the count.
 
-@oBigChg{}
+
           Returns in the parameter Item the value of type Num that
           corresponds to the sequence input,
 preserving the sign (positive if none has been specified)
 of a zero value if Num is a floating point type and Num'Signed_Zeros is
 True.
-@oEndBigChg{}
-@oChgRef{94-4526.b}
+
 
           The exception Data_Error is propagated if the sequence input does
           not have the required syntax or if the value obtained is not
@@ -2386,12 +2362,11 @@ True.
           Outputs the value of the parameter Item as a decimal literal
           with the format defined by Fore, Aft and Exp.  If the value is
           negative,
-@oBigChg{}
+
 or if Num is a floating point type where Num'Signed_Zeros is True and
 the value is a negatively signed zero, then
 a minus sign is included in the integer part.
-@oEndBigChg{}
-@oChgRef{94-4526.b}
+
           If Exp has the value zero, then the integer part to be output has
           as many digits as are needed to represent the integer part of
           the value of Item, overriding Fore if necessary, or consists
@@ -2406,12 +2381,11 @@ a minus sign is included in the integer part.
           leading spaces are first output to make up the difference.
           The number of digits of the fractional part is given by Aft,
           or is one if Aft equals zero.
-@oBigChg{}
+
 The value is rounded; a value
           of exactly one half in the last place
           is rounded away from zero.
-@oEndBigChg{}
-@oChgRef{94-4932.a}
+
 
           If Exp has the value zero, there is no exponent part.  If Exp
           has a value greater than zero, then the exponent part to be
@@ -2452,7 +2426,7 @@ The value is rounded; a value
           fills the string, including any leading spaces.
 @end{DescribeCode}
 
-@BigChg{}
+
 Float_Text_IO is a library package that is a nongeneric equivalent
 to Text_IO.Float_IO for the predefined type Float:
 @ChildUnit{Parent=[Ada],Child=[Float_Text_IO],Expanded=[Ada.Float_Text_IO]}
@@ -2464,27 +2438,21 @@ to Text_IO.Float_IO for the predefined type Float:
 For each predefined floating point type,
 a nongeneric equivalent to Text_IO.Float_IO is provided,
 with names such as Ada.Long_Float_Text_IO.
-@EndBigChg{}
-@begin{BigChgNote}
-  Preinstantiations of Text_IO.Float_IO added,
-  as per WG9 resolution.
-@end{BigChgNote}
+
+
 @end{StaticSem}
 
 @begin{ImplPerm}
-@oBigChg{}
+
 An implementation may extend Get @Redundant[and Put] for floating point
 types to support special values such as infinities and NaNs.
-@oEndBigChg{}
-@oChgRef{94-4526.c}
-@oChgRef{94-4893.d}
-@oChgRef{94-4901.a}
+
 @begin{Discussion}
-@oChg{}See also the similar permission for the Wide_Value attribute in
-@RefSecNum{Scalar Types}.@oEndChg{}
+See also the similar permission for the Wide_Value attribute in
+@RefSecNum{Scalar Types}.
 @end{Discussion}
 
-@oBigChg{}
+
 The implementation of Put need not produce an output value with greater
 accuracy than is supported for the base subtype.
 The additional accuracy, if any,
@@ -2492,21 +2460,20 @@ of the value produced by Put when the number of
 requested digits in the integer and fractional parts exceeds
 the required accuracy
 is implementation defined.
-@oChgRef{94-4526.a}
 @begin{Discussion}
 The required accuracy is thus Num'Base'Digits digits if Num is
 a floating point subtype.
 For a fixed point subtype the required accuracy is a function
 of the subtype's Fore, Aft, and Delta attributes.
 @end{Discussion}
-@oEndBigChg{}
+
 @ImplDef{The accuracy of the value produced by Put.}
 
-@BigChg{}
+
 The nongeneric equivalent packages may, but need not,
 be actual instantiations of the generic package for the appropriate
 predefined type.
-@EndBigChg{}
+
 @end{ImplPerm}
 
 @begin{NotesNotes}
@@ -2596,17 +2563,16 @@ The following procedures are provided:
           literals.  If the sequence of characters produced has fewer
           than Width characters, then trailing spaces are finally output
           to make up the difference.
-@oBigChg{}
+
           If Enum is a character type,
           the sequence of characters produced is as for
           Enum'Image(Item), as modified by the Width
-          and Set parameters.@oEndBigChg{}
-@oChgRef{94-4913.c}
+          and Set parameters.
 @begin{Discussion}
-  @oBigChg{}For a character type, the literal might be a Wide_Character
+  For a character type, the literal might be a Wide_Character
   or a control character.
   Whatever Image does for these things is appropriate here,
-  too.@oEndBigChg{}
+  too.
 @end{Discussion}
 
 @begin{CodeExample}
@@ -2626,9 +2592,9 @@ The following procedures are provided:
           character literal does not correspond to a value of the
           subtype Enum.
 @begin{Honest}
-  @oBigChg{}For a character type, it is permissible for the implementation to make
+  For a character type, it is permissible for the implementation to make
   Get do the inverse of what Put does,
-  in the case of wide @nt{character_literal}s and control characters.@oEndBigChg{}
+  in the case of wide @nt{character_literal}s and control characters.
 @end{Honest}
 
 @begin{CodeExample}
@@ -2665,10 +2631,10 @@ instantiated for this type.
 @LabeledSection{Wide Text Input-Output}
 
 @begin{Intro}
-@chg{}The package Wide_Text_IO provides facilities
+The package Wide_Text_IO provides facilities
 for input and output in human-readable form.  Each file is read or
 written sequentially, as a sequence of wide characters grouped into lines,
-and as a sequence of lines grouped into pages.@endchg{}
+and as a sequence of lines grouped into pages.
 @end{Intro}
 
 @begin{StaticSem}
@@ -2681,7 +2647,7 @@ Get_Line, Put, and Put_Line procedure,
 any occurrence of Character is replaced by Wide_Character, and any
 occurrence of String is replaced by Wide_String.
 
-@BigChg{}
+
 @Defn{Ada.Integer_Wide_Text_IO}
 @ChildUnit{Parent=[Ada],Child=[Integer_Wide_Text_IO],Expanded=[Ada.Integer_Wide_Text_IO]}
 @Defn{Ada.Float_Wide_Text_IO}
@@ -2693,12 +2659,8 @@ with names such as Ada.Integer_Wide_Text_IO,
 Ada.Long_Integer_Wide_Text_IO,
 Ada.Float_Wide_Text_IO,
 Ada.Long_Float_Wide_Text_IO.
-@EndBigChg{}
-@begin{BigChgNote}
-Preinstantiations of Wide_Text_IO.Integer_IO
-and Wide_Text_IO.Float_IO added,
-as per WG9 resolution.
-@end{BigChgNote}
+
+
 @end{StaticSem}
 
 @begin{Extend83}
@@ -2707,12 +2669,11 @@ Support for Wide_Character and Wide_String I/O is new in Ada 9X.
 
 @LabeledSection{Stream Input-Output}
 @begin{Intro}
-@oChg{}
+
 The packages Streams.Stream_IO, Text_IO.Text_Streams, and
 Wide_Text_IO.Text_Streams
-@oEndChg{}
+
 provide stream-oriented operations on files.
-@oChgRef{94-4817.a}
 @end{Intro}
 
 @LabeledSubSection{The Package Streams.Stream_IO}
@@ -2810,7 +2771,7 @@ The library package Streams.Stream_IO has the following declaration:
     @key[procedure] Set_Index(File : @key[in] File_Type; To : @key[in] Positive_Count);
 
     @key[function] Index(File : @key[in] File_Type) @key[return] Positive_Count;
-    @key[function] Size (File : @key[in] File_Type) @key[return] @oChg{}Count;@oEndChg{}
+    @key[function] Size (File : @key[in] File_Type) @key[return] Count;
 
     @key(procedure) Set_Mode(File : @key(in) @key(out) File_Type; Mode : @key(in) File_Mode);
 
@@ -2830,9 +2791,6 @@ The library package Streams.Stream_IO has the following declaration:
    ... -- @i{not specified by the language}
 @key(end) Ada.Streams.Stream_IO;
 @end(example)
-@oChgRef{94-4757.a}
-@oChgRef{94-4770.a}
-@oChgRef{94-4819.a}
 
 The subprograms Create, Open, Close, Delete, Reset, Mode, Name, Form,
 Is_Open, and End_of_File have the same effect as the corresponding
@@ -2912,7 +2870,7 @@ Performing operations on the stream associated with a text file does not
 affect the column, line, or page counts.
 @end[NotesNotes]
 
-@oBigChg{}
+
 @LabeledSubsection{The Package Wide_Text_IO.Text_Streams}
 @begin{Intro}
 The package Wide_Text_IO.Text_Streams provides a function for treating
@@ -2935,8 +2893,7 @@ has the following declaration:
 The Stream function has the same effect as the corresponding function
 in Streams.Stream_IO.
 @end{StaticSem}
-@oEndBigChg{}
-@oChgRef{94-4817.a}
+
 
 @LabeledSection{Exceptions in Input-Output}
 @begin{Intro}
@@ -3016,13 +2973,12 @@ respectively (excluding the unbounded cases).  It is also propagated by an
 attempt to Put too many characters to a string.
 @end{StaticSem}
 
-@oChg{}
+
 @begin{DocReq}
 The implementation shall document the conditions under which
 Name_Error, Use_Error and Device_Error are propagated.
 @end{DocReq}
-@oEndChg{}
-@oChgRef{94-4761.o}
+
 
 @begin{ImplPerm}
 If the associated check is too complex, an implementation need

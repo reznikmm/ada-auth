@@ -1,16 +1,15 @@
 @Part(impldef, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:03 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 @LabeledInformativeAnnex{Implementation-Defined Characteristics}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/impldef.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @begin{Intro}
-@Chg{}
-@EndChg{}
-@oChgRef{94-4693.q}
+
+
 @Defn2{Term=[implementation defined], Sec=(summary of characteristics)}
 The Ada language allows for certain machine dependences in a controlled
 manner.

@@ -1,20 +1,20 @@
 @Part(02, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:00 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:25 $}
 @LabeledChapter{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
-@begin(Redundant)
+@redundant[
 The text of a program consists of the texts of one or more
 @nt<compilation>s.  The text of a @nt<compilation> is a sequence of
 lexical elements, each composed of characters; the rules of
 composition are given in this section.
 @nt{Pragma}s, which provide certain information for the compiler, are also
 described in this section.
-@end(Redundant)
+]
 @end{Intro}
 
 @LabeledSection{Character Set}
@@ -91,12 +91,12 @@ name begins ``Latin Capital Letter''.
 @DefnNext{lower_case_identifier_letter}@nt<lower_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
 name begins ``Latin Small Letter''.
 @begin{Honest}
-@BigChg{}
+
 The above rules do not include the ligatures
 @case{Device, Postscript= "@a9x(b) and @a9x(j)", else="AE and ae"}.
 However, the intent is to include these characters as identifier letters.
 This problem was pointed out by a comment from the Netherlands.
-@EndBigChg{}
+
 @end{Honest}
 
 @DefnNext{digit}@nt<digit> @\One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.
@@ -628,7 +628,7 @@ since it requires knowledge of types.
 @LabeledSection{String Literals}
 
 @begin{Intro}
-@begin(Redundant)
+@redundant[
 A @nt<string_literal> is formed by a sequence of graphic characters
 (possibly none) enclosed between two quotation marks used as
 string brackets.  They are used to represent @nt<operator_symbol>s
@@ -636,7 +636,7 @@ string brackets.  They are used to represent @nt<operator_symbol>s
 (@lSeeSecNum(Literals)), and array subaggregates
 (@lSeeSecNum(Array Aggregates)).
 @IndexSee{Term=[quoted string],See=(string_literal)}
-@end(Redundant)
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -1058,20 +1058,19 @@ takes one of the @nt{identifier}s Time, Space, or Off as the
 single argument.  This @nt{pragma} is allowed anywhere a @nt<pragma>
 is allowed, and it applies until the end of the immediately enclosing
 declarative region,
-@oChg{}or for a @nt{pragma} at the place of a @nt{compilation_unit},
-to the end of the @nt<compilation>.@oEndChg{}
-@oChgRef{94-4761.d}
+or for a @nt{pragma} at the place of a @nt{compilation_unit},
+to the end of the @nt<compilation>.
 It gives advice to the implementation as to
 whether time or space is the primary optimization criterion, or
 that optional optimizations should be turned off.
 @Redundant[It is implementation defined how this advice is followed.]
 @ImplDef{Effect of pragma Optimize.}
 @begin{Discussion}
-@oChg{}
+
 For example, a compiler might use Time vs. Space to control whether
 generic instantiations are implemented with a macro-expansion model,
 versus a shared-generic-body model.
-@oEndChg{}
+
 
 We don't define what constitutes an ``optimization''
 @em in fact, it cannot be formally defined in the context of Ada.
@@ -1236,14 +1235,13 @@ The reserved words appear in @key{lower case boldface}
 in this @SelfRef,
 except when used in the @nt{designator} of an attribute
 (@lSeeSecNum(Attributes)).
-@oChg{}
+
 Lower case boldface is also used
-@oEndChg{}
+
 for a reserved word in a
 @nt{string_literal} used as an @nt{operator_symbol}.
 This is merely a convention @em programs may be written in whatever
 typeface is desired and available.
-@oChgRef{94-4493.d}
 @end{NotesNotes}
 
 @begin{Incompatible83}

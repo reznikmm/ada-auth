@@ -1,13 +1,13 @@
 @Part(10, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:02 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
 @LabeledChapter{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 The overall structure of programs and the facilities for separate
 compilation are described in this section.
 A @i(program) is a set of @i(partitions), each of which
@@ -37,12 +37,11 @@ as is the body of a library unit.
 An implementation may support a concept of a @i{program library}
 (or simply, a ``library''),
 which contains @nt{library_item}s
-@oChg{}and their subunits.@oEndChg{}
-@oChgRef{94-4599.a}
+and their subunits.
 @IndexSee{Term=[program library],See=(library)}
 Library units may be organized into a hierarchy of
 children, grandchildren, and so on.
-@end{Redundant}
+]
 
 This section has two clauses:
 @RefSec{Separate Compilation}
@@ -98,7 +97,7 @@ RM83.
 @LabeledSection{Separate Compilation}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 @Defn{separate compilation}
 @Defn2{Term=[compilation], Sec=(separate)}
 @ToGlossaryAlso{Term=<Program unit>,
@@ -116,7 +115,7 @@ RM83.
   Each @nt(compilation) is a succession of @nt(compilation_unit)s.
   A @nt(compilation_unit) contains either
   the declaration, the body, or a renaming of a program unit.>}
-@end{Redundant}
+]
 The representation for a @nt<compilation> is implementation-defined.
 @ImplDef{The representation for a @nt{compilation}.}
 @begin{Ramification}
@@ -138,20 +137,15 @@ but protected entries cannot be separately compiled.
 @end{Ramification}
 
 @ToGlossaryAlso{Term=<Library unit>,
-  Text=<A library unit is a@oChg{}@oEndChg{} separately compiled
+  Text=<A library unit is a separately compiled
   program unit,
   and is always a package, subprogram, or generic unit.
-@oChgRef{94-4599.f}
   Library units may have other (logically nested) library units as children,
   and may have other program units physically nested within them.
   @Defn(subsystem)
   A root library unit, together with its children and grandchildren
   and so on, form a @i(subsystem).>}
-@begin{oChgNote}
-  Removed ``top-level'' since it was confusing in the presence of child
-  units.  It was there to distinguish library units from subunits,
-  but that distinction doesn't seem so important.
-@end{oChgNote}
+
 @end{Intro}
 
 @begin{ImplPerm}
@@ -189,12 +183,12 @@ since a program unit is sort of a potential compilation unit.
 @LabeledSubSection{Compilation Units - Library Units}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{library_item} is a compilation unit that is the declaration, body,
 or renaming of a library unit.
 Each library unit (except Standard) has a @i{parent unit},
 which is a library package or generic library package.
-@end{Redundant}
+]
 @Defn2{Term=[child], Sec=(of a library unit)}
 A library unit is a @i{child} of its parent unit.
 The @i{root} library units are the children of
@@ -463,9 +457,9 @@ semantics of children of generic packages.
 A child of a generic library package shall either be itself a generic unit
 or be a renaming of some other child of the same generic unit.
 The renaming of a child of a generic package shall occur
-only within the declarative region of the generic @oChg{}package.@oEndChg{}
+only within the declarative region of the generic package.
 
-@BigChg{}
+
 A child of a parent generic package shall be
 instantiated or renamed only within the declarative region
 of the parent generic.
@@ -476,9 +470,7 @@ nested immediately within each instance of the parent.
 @Redundant[This declaration is visible only within the
 scope of a @nt{with_clause} that mentions
 the child generic unit.]
-@EndBigChg{}
-@oChgRef{94-4933.a}
-@oChgRef{94-4944.a}
+
 @begin{ImplNote}
 Within the child, like anything nested in a generic unit,
 one can make up-level references to the current instance of its
@@ -489,7 +481,7 @@ This ``nesting'' model applies even within the
 as it does for a generic child of a nongeneric unit.
 @end{ImplNote}
 @begin{Ramification}
-@oBigChg{}
+
   Suppose P is a generic library package,
   and P.C is a generic child of P.
   P.C can be instantiated inside the declarative region of P.
@@ -501,7 +493,7 @@ as it does for a generic child of a nongeneric unit.
   and the instantiation of I.C need not be a library unit.
   If I is a library unit, and an instance of I.C is a child of I,
   then this instance has to be called something other than C.
-@oEndBigChg{}
+
 @end{Ramification}
 
 A library subprogram shall not override a primitive subprogram.
@@ -529,18 +521,14 @@ shall not be an @nt{operator_symbol}.
 @end{Legality}
 
 @begin{StaticSem}
-@oBigChg{}
+
 A @nt<subprogram_renaming_declaration>
 that is a @nt{library_unit_renaming_declaration} is a
 renaming-as-declaration, not a renaming-as-body.
-@oEndBigChg{}
-@oChgRef{94-4625.a}
-@oChgRef{94-4626.a}
-@begin{oChgNote}
-Promoted this from the AARM.
-@end{oChgNote}
 
-@begin{Redundant}
+
+
+@redundant[
 There are two kinds of dependences among compilation units:
 @begin{Itemize}
 The @i{semantic dependences}
@@ -555,7 +543,7 @@ The @i{elaboration dependences}
 (@lSeeSecNum{Program Execution})
 determine the order of elaboration of @nt{library_item}s.
 @end{Itemize}
-@end{Redundant}
+]
 @begin{Discussion}
 Don't confuse these kinds of dependences with the run-time
 dependences among tasks and masters defined in
@@ -657,14 +645,14 @@ It is immediately within the same declarative region,
 but not the same @nt{package_specification}.
 Thus, for a tagged type,
 it is not possible to call a child subprogram in a dispatching manner.
-@oChg{}
+
 (This is also forbidden by the freezing rules.)
 Similarly, it is not possible for the user to declare primitive
 subprograms of the types declared in the declaration of Standard,
 such as Integer
 (even if the rules were changed to allow a library unit whose name is an
 operator symbol).
-@oEndChg{}
+
 
 When the parent unit is ``used'' the simple names of the
 with'd child units are directly visible (@lSeeSec{Use Clauses}).
@@ -682,14 +670,12 @@ is different from ``@nt{library_unit_declaration}''
 @em the former includes @nt{subprogram_body}.
 Also, we sometimes really mean ``declaration of a view of a
 library unit'', which includes
-@oBigChg{}
+
 @nt{library_unit_renaming_declaration}s.
-@oChgRef{94-4625.a}
-@oChgRef{94-4626.a}
 
 The visibility rules generally imply that the renamed view of a
 @nt{library_unit_renaming_declaration} has to be mentioned in a
-@oEndBigChg{}
+
 @nt{with_clause} of the @nt{library_unit_renaming_declaration}.
 @end{Ramification}
 @begin{Honest}
@@ -712,10 +698,9 @@ and cannot be renamed as a library unit.
 The @nt{designator} of a library function cannot be an @nt{operator_symbol},
 but a nonlibrary @nt{renaming_declaration} is allowed to rename a library
 function as an operator.
-@BigChg{}Within a partition,
-two@EndBigChg{} library subprograms are required to have distinct
+Within a partition,
+two library subprograms are required to have distinct
 names and hence cannot overload each other.
-@ChgRef{94-5002.a}
 However,
 @nt{renaming_declaration}s are allowed to define overloaded names for
 such subprograms, and a locally declared subprogram is allowed to
@@ -762,7 +747,7 @@ Each of the above @nt{library_item}s can be submitted to the compiler
 separately.
 @begin{Discussion}
 @i{Example of a generic package with children:}
-@oBigChg{}
+
 @begin{Example}
 @key[generic]
    @key[type] Element @key[is] @key[private];
@@ -833,8 +818,7 @@ children:
    @key[end] Bag_Image;
 @key[end] Generic_Bags;
 @end{Example}
-@oEndBigChg{}
-@oChgRef{94-4933.a}
+
 @end{Discussion}
 @end{Examples}
 
@@ -864,11 +848,11 @@ Standard.Standard.
 @LabeledSubSection{Context Clauses - With Clauses}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A @nt{context_clause} is used to specify
 the @nt<library_item>s whose
 names are needed within a compilation unit.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -952,7 +936,7 @@ Visibility holes would cause semantic complexity and implementation
 difficulty.
 @end{Discussion}
 
-@begin{Redundant}
+@redundant[
 Outside its own declarative region,
 the declaration or renaming of
 a library unit can be visible only within the scope of a
@@ -960,7 +944,7 @@ a library unit can be visible only within the scope of a
 The visibility of the declaration or renaming of a
 library unit otherwise
 follows from its placement in the environment.
-@end{Redundant}
+]
 @end{Resolution}
 
 @begin{Legality}
@@ -1017,7 +1001,7 @@ so ``@key[with] A.B.C.D;'' is illegal in the same places as
 ``@key[with] A.B.C;''.
 @end{Discussion}
 @begin{Honest}
-@oBigChg{}
+
 For the purposes of this rule,
 if a @nt{subprogram_body} has no preceding @nt{subprogram_declaration},
 the @nt{subprogram_body} should be considered a declaration and not a
@@ -1025,9 +1009,7 @@ body.
 Thus, it is illegal for such a @nt{subprogram_body} to mention one of
 its siblings in a @nt{with_clause} if the sibling is a private library
 unit.
-@oEndBigChg{}
-@oChgRef{94-4625.a}
-@oChgRef{94-4626.a}
+
 @end{Honest}
 @end{Legality}
 
@@ -1042,13 +1024,12 @@ declaration, the name of a
 library package can be given in @nt{use_clause}s and can be used to
 form expanded names, a library subprogram can be called,
 and instances of a generic library unit can be declared.
-@oBigChg{}
+
 If a child of a parent generic package is mentioned in a
 @nt{with_clause},
 then the corresponding declaration nested within each visible instance
 is visible within the compilation unit.
-@oEndBigChg{}
-@oChgRef{94-4933.a}
+
 @begin{Ramification}
 The rules given for @nt{with_clause}s are such that the same effect
 is obtained whether the name of a library unit is mentioned once or
@@ -1100,7 +1081,7 @@ definition in @RefSecNum{Use Clauses}.
 @LabeledSubSection{Subunits of Compilation Units}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 Subunits are like child units, with these (important) differences:
 subunits support the separate compilation of bodies
 only (not declarations);
@@ -1108,7 +1089,7 @@ the parent contains a @nt{body_stub}
 to indicate the existence and place of each of its subunits;
 declarations appearing in the parent's body
 can be visible within the subunits.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -1139,12 +1120,11 @@ that is disallowed by @RefSec{Compilation Units - Library Units}.
 The @i{parent body} of a subunit is the body of the program unit
 denoted by its @nt{parent_unit_name}.
 @Defn{subunit}
-@oChg{}
+
 The term @i{subunit} is used to refer to
 a @nt{subunit} and also to
 the @nt{proper_body} of a @nt{subunit}.
-@oEndChg{}
-@oChgRef{94-4768.b}
+
 
 The parent body of a subunit shall be present in the current environment,
 and shall contain a corresponding @nt{body_stub}
@@ -1540,10 +1520,9 @@ in which the @nt<pragma> immediately occurs, or it shall resolve to denote
 the declaration of the immediately enclosing program unit (if any);
 the @nt{pragma} applies to the denoted program
 unit(s).
-If there are no @oChg{}@nt{name}s given as@oEndChg{} arguments,
+If there are no @nt{name}s given as arguments,
 the @nt{pragma} applies to the immediately
 enclosing program unit.
-@oChgRef{94-4973.a}
 @begin{Ramification}
 The fact that this is a @ResolutionName means that the @nt{pragma}
 will not apply to declarations from outer declarative regions.
@@ -1638,7 +1617,7 @@ so long as it allows them when the environment contains no
 @nt{parent_unit_name} or a @nt{context_clause},
 nor within a @nt{pragma} that appears at the place of a compilation unit.
 The special visibility rules for those contexts
-are given here.]@Chg{}@EndChg{}
+are given here.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -1653,7 +1632,7 @@ and within a @nt{with_clause}, the only declarations
 that are visible are those that are @nt<library_item>s of the environment,
 and the only declarations that are directly visible are those that
 are root @nt<library_item>s of the environment.
-@BigChg{}
+
 @Defn{notwithstanding}
 Notwithstanding the rules of @RefSecNum(Selected Components),
 an expanded name in a @nt{with_clause} may consist of a
@@ -1661,8 +1640,7 @@ an expanded name in a @nt{with_clause} may consist of a
 denotes a child of that generic package.
 @Redundant[(The child is necessarily a generic unit;
 @lSeeSecNum{Compilation Units - Library Units}.)]
-@EndBigChg{}
-@oChgRef{94-4933.a}
+
 @begin{Ramification}
 In ``@key{package} P.Q.R @key{is} ... @key{end} P.Q.R;'',
 this rule requires P to be a root library unit,
@@ -1680,13 +1658,13 @@ since it is not directly visible,
 and it has no parent.
 @end{Reason}
 @begin{Reason}
-@oChg{}
+
 The ``notwithstanding'' part allows ``@key[with] A.B;''
 where A is a generic library package and B is one of its
 (generic) children.
 This is necessary because it is not normally legal to use an expanded
 name to reach inside a generic package.
-@oEndChg{}
+
 @end{Reason}
 
 @PDefn2{Term=[directly visible], Sec=(within a @nt{use_clause} in a
@@ -1744,8 +1722,8 @@ Within a @nt{pragma} that appears at the place of a compilation unit,
 the immediately preceding @nt<library_item> and each of its
 ancestors is visible.
 The ancestor root @nt<library_item> is directly visible.
-@oBigChg{}
-@oEndBigChg{}
+
+
 @end{StaticSem}
 
 @begin{DiffWord83}
@@ -2040,23 +2018,18 @@ Rules requiring the completion to have certain properties,
 on the other hand, are checked at compile time of the completion.
 @end{Discussion}
 
-@oBigChg{}
+
 The full expanded names of the library units and subunits included in a
 given partition shall be distinct.
-@oEndBigChg{}
-@oChgRef{94-4599.c}
-@oChgRef{94-4577.a}
-@oChgRef{94-4460.a}
-@oChgRef{94-4461.a}
-@oChgRef{94-4753.a}
+
 @begin{Reason}
 This is a @LinkTimeName because making it a @LegalityName
 would violate the @MetaRulesName labeled
 ``legality determinable via semantic dependences.''
 @end{Reason}
 
-The @nt{sequence_of_statement}s @Chg{}of the environment task (see (2)
-above)@EndChg{} consists of either:
+The @nt{sequence_of_statement}s of the environment task (see (2)
+above) consists of either:
 @begin{Itemize}
   A call to the main subprogram,
   if the partition has one.
@@ -2094,7 +2067,7 @@ The execution of a partition starts with the execution
 of its environment task,
 ends when the environment task terminates,
 and includes the executions of all tasks of the partition.
-@Redundant[The @oBigChg{}execution of the@oEndBigChg{} (implicit) @nt<task_body> of the
+@Redundant[The execution of the (implicit) @nt<task_body> of the
 environment task acts as a master
 for all other tasks created as part of the execution of the partition.
 When the environment task completes (normally or abnormally),
@@ -2211,10 +2184,9 @@ However, an implementation is required to support all main
 subprograms that are public parameterless library procedures.
 @begin{Ramification}
 The implementation is required to support main subprograms that are
-procedures @oChg{}@oEndChg{}declared by @nt{generic_instantiation}s,
+procedures declared by @nt{generic_instantiation}s,
 as well as those
 that are children of library units other than Standard.
-@oChgRef{94-4908.a}
 Generic units are, of course, not allowed to be main subprograms,
 since they are not subprograms.
 
@@ -2375,8 +2347,8 @@ However, it is not true of the Elaboration_Check on instantiations.
 
 A static expression should never prevent a library unit from being
 preelaborable.
-@oChg{}
-@oEndChg{}
+
+
 @end{MetaRules}
 
 @begin{Syntax}
@@ -2615,11 +2587,10 @@ Elaborate_Body is as follows:
 A @nt{pragma} Elaborate or Elaborate_All is only allowed within a
 @nt{context_clause}.
 @begin{Ramification}
-  @oChg{}``Within a @nt{context_clause}'' allows it to be the last
+  ``Within a @nt{context_clause}'' allows it to be the last
   item in the @nt{context_clause}.
   It can't be first, because the @nt{name} has to denote something
-  mentioned earlier.@oEndChg{}
-@oChgRef{94-4910.a}
+  mentioned earlier.
 @end{Ramification}
 
 @PDefn2{Term=[library unit pragma], Sec=(Elaborate_Body)}
@@ -2643,7 +2614,7 @@ then the declaration requires a completion @Redundant[(a body)].
 @end{Legality}
 
 @begin{StaticSem}
-@begin{Redundant}
+@redundant[
 A @nt{pragma} Elaborate specifies that the body of the named library
 unit is elaborated before the current @nt{library_item}.
 A @nt{pragma} Elaborate_All specifies that each @nt{library_item} that is
@@ -2651,7 +2622,7 @@ needed by the named library unit declaration
 is elaborated before the current @nt{library_item}.
 A @nt{pragma} Elaborate_Body specifies that the body
 of the library unit is elaborated immediately after its declaration.
-@end{Redundant}
+]
 @begin{TheProof}
 The official statement of the semantics of these @nt{pragma}s is given in
 @RefSecNum{Program Execution}.

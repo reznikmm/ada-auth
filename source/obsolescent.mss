@@ -1,11 +1,11 @@
 @Part(obsolescent, Root="ada.mss")
 
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/15 00:44:05 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:29 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -99,9 +99,9 @@ The number sign characters (#) of a @nt{based_literal} can be replaced
 by colons (:) provided that the replacement is done for both
 occurrences.
 @begin{Honest}
-  @oChg{}The intent is that such a replacement works in the Value and
+  The intent is that such a replacement works in the Value and
   Wide_Value attributes, and in the Get procedures of Text_IO,
-  so that things like ``16:.123:'' is acceptable.@oEndChg{}
+  so that things like ``16:.123:'' is acceptable.
 @end{Honest}
 
 The quotation marks (") used as string brackets at both ends of
@@ -170,8 +170,7 @@ attribute.
 @begin{Resolution}
 @PDefn2{Term=[expected type], Sec=(delta_constraint expression)}
 The @nt<expression> of a @nt<delta_constraint> is expected to be of
-any @oBigChg{}real@oEndBigChg{} type.
-@oChgRef{94-4774.f}
+any real type.
 @end{Resolution}
 
 @begin{Legality}
@@ -198,8 +197,7 @@ A @nt<subtype_indication> with a @nt<subtype_mark> that
 denotes an ordinary fixed point subtype and a @nt<delta_constraint>
 defines an ordinary fixed point subtype with a @i(delta)
 given by the value of the @nt<expression> of the
-@oChg{}@nt<delta_constraint>.@oEndChg{}
-@oChgRef{94-4774.f}
+@nt<delta_constraint>.
 If the @nt<delta_constraint> includes a @nt<range_constraint>, then
 the ordinary fixed point subtype is constrained by the @nt<range_constraint>.
 
@@ -286,7 +284,7 @@ So one should think of its designator as being 'Constrained_Or_Elementary.
 
 @LabeledSection{ASCII}
 
-@Begin{StaticSem}
+@begin{StaticSem}
 The following declaration exists in the declaration of package Standard:
 @begin{example}
    @key[package] ASCII @key[is]
@@ -321,9 +319,9 @@ The following declaration exists in the declaration of package Standard:
       Sharp     : @key[constant] Character:= '#';  Dollar    : @key[constant] Character:= '$';
       Percent   : @key[constant] Character:= '%';  Ampersand : @key[constant] Character:= '&';
       Colon     : @key[constant] Character:= ':';  Semicolon : @key[constant] Character:= ';';
-      Query     : @key[constant] Character:= '?';  At_Sign   : @key[constant] @oChg{}Character:= '@@';@oEndChg{}
+      Query     : @key[constant] Character:= '?';  At_Sign   : @key[constant] Character:= '@@';
       L_Bracket : @key[constant] Character:= '[';  Back_Slash: @key[constant] Character:= '\';
-      R_Bracket : @key[constant] Character:= ']';  Circumflex: @key[constant] @oBigChg{}Character:= '^';@oEndBigChg{}
+      R_Bracket : @key[constant] Character:= ']';  Circumflex: @key[constant] Character:= '^';
       Underline : @key[constant] Character:= '_';  Grave     : @key[constant] Character:= '`';
       L_Brace   : @key[constant] Character:= '{';  Bar       : @key[constant] Character:= '|';
       R_Brace   : @key[constant] Character:= '}';  Tilde     : @key[constant] Character:= '~';
@@ -339,7 +337,6 @@ The following declaration exists in the declaration of package Standard:
 
    @key[end] ASCII;
 @end{example}
-@oChgRef{94-4977.a}
 @end{StaticSem}
 
 
@@ -410,7 +407,7 @@ confusion with the new term ``Address clause'' (that is, an
 @LabeledSubSection{Interrupt Entries}
 
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 Implementations are permitted to allow the attachment of task entries to
 interrupts via the address clause.  Such an entry is referred to as an
 @i{interrupt entry}.
@@ -418,7 +415,7 @@ interrupts via the address clause.  Such an entry is referred to as an
 The address of the task entry corresponds to a hardware interrupt in an
 implementation-defined manner.  (See Ada.Interrupts.Reference in
 @RefSecNum{The Package Interrupts}.)
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{StaticSem}
@@ -439,7 +436,7 @@ X'@attr{Address} @\For a task entry whose address is specified
                Address may be specified for single entries
                via an @nt{attribute_definition_clause}.
 @end{Multiple}
-@Begin{Reason}
+@begin{Reason}
 Because of the equivalence of @nt{at_clause}s and
 @nt{attribute_definition_clause}s, an interrupt entry may be
 specified via either notation.
@@ -541,13 +538,10 @@ associated interrupt entry as one or more parameters of mode @key[in].
 @begin{example}
 @key[task] Interrupt_Handler @key[is]
   @key[entry] Done;
-  @oChg{}@key[for] Done'Address @key[use] Ada.Interrupts.Reference(Ada.Interrupts.Names.Device_Done);@oEndChg{}
+  @key[for] Done'Address @key[use] Ada.Interrupts.Reference(Ada.Interrupts.Names.Device_Done);
 @key[end] Interrupt_Handler;
 
 @end{example}
-@oChgRef{94-4761.zb}
-@oChgRef{94-4765.a}
-@oChgRef{94-4846.d}
 @end{Examples}
 
 @begin{DiffWord83}

@@ -1,20 +1,19 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:02 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/15 00:44:02 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
 @begin{Intro}
-@begin{redundant}
+@redundant[
 This Annex defines facilities for supporting the implementation
 of distributed systems using multiple partitions working
 cooperatively as part of a single Ada program.
-@oChg{}
-@oEndChg{}
-@oChgRef{94-4472.a}
-@end{redundant}
+
+
+]
 @end{Intro}
 
 @begin{Extend83}
@@ -61,38 +60,28 @@ a distributed system be homogeneous.
 
 @begin{NotesNotes}
 
-@oChg{}
+
 The partitions comprising a program may be executed on differently
 configured distributed systems or on a non-distributed system without
 requiring recompilation.
 A distributed program may be partitioned differently from the same set of
 library units without recompilation.
 The resulting execution is semantically equivalent.
-@oChgRef{94-4890.a}
 
 A distributed program retains the same type safety
 as the equivalent single partition program.
-@oEndChg{}
-@oChgRef{94-4784.a}
-@oChgRef{94-4788.b}
-@oChgRef{94-4846.a}
-@begin{oChgNote}
-The above NOTES used to be @MetaRulesTitle.
 
-Removed the comment about unit consistency,
-since the rules for unit consistency are different for distributed
-versus single partition programs.
-@end{oChgNote}
+
 
 @end{NotesNotes}
 
 @LabeledSection{Partitions}
 
 @begin{Intro}
-@begin{redundant}
+@redundant[
 The partitions of a distributed program are classified as either
 active or passive.
-@end{redundant}
+]
 @end{Intro}
 
 @begin{LinkTime}
@@ -137,10 +126,9 @@ of a message passing mechanism.
 A passive partition that is accessible to an active partition should have
 its storage addressable to the processor(s) of the active partition.  The
 processor(s) should be able to read and write from/to that
-@oChg{}storage,@oEndChg{} as well as
+storage, as well as
 to perform ``read-modify-write'' operations (in order to support entry-less
 protected objects).
-@oChgRef{94-4472.f}
 
 @end{Discussion}
 
@@ -155,9 +143,8 @@ If a normal library unit
 (@lSeeSecNum{Categorization of Library Units}) has state, then a separate
 copy of the state exists in each active partition that elaborates it.
 @Redundant[The state evolves independently in each such partition.]
-@oChg{}
-@oEndChg{}
-@oChgRef{94-4472.g}
+
+
 @begin{Ramification}
 Normal library units cannot be included in passive partitions.
 @end{Ramification}
@@ -209,8 +196,7 @@ a single processing node, and multiple passive partitions to be
 configured on a single storage node.
 In these cases, the scheduling policies, treatment
 of priorities, and management of shared resources between
-these partitions @oChg{}are@oEndChg{} implementation defined.
-@oChgRef{94-4472.i}
+these partitions are implementation defined.
 @ImplDef{The scheduling policies, treatment
 of priorities, and management of shared resources between
 partitions in certain cases.}
@@ -237,15 +223,12 @@ terminate and are later reinvoked.
 
 @begin{NotesNotes}
 
-@oChg{}
+
 Library units are grouped into partitions after compile time,
 but before run time.
-@oChgRef{94-4472.d}
 At compile time, only the relevant library unit properties are
 identified using categorization pragmas.
-@oEndChg{}
-@oChgRef{94-4784.a}
-@oChgRef{94-4788.b}
+
 
 The value returned by the Partition_ID attribute can be used as a
 parameter to implementation-provided subprograms in order
@@ -256,13 +239,13 @@ to query information about the partition.
 @LabeledSection{Categorization of Library Units}
 
 @begin{Intro}
-@begin{redundant}
+@redundant[
 Library units can be categorized according to the role
 they play in a distributed program.  Certain restrictions
 are associated with each category to ensure that the semantics
 of a distributed program remain close to the semantics for a nondistributed
 program.
-@end{Redundant}
+]
 
 @RootDefn{categorization pragma}
 @RootDefn{pragma, categorization}
@@ -295,24 +278,22 @@ A library package or generic library package is called
 a @i{remote call interface} if a Remote_Call_Interface
 pragma applies to it.
 @Defn{normal library unit}
-@oChg{}
+
 A @i{normal library unit} is one to which no categorization pragma
 applies.
-@oEndChg{}
-@oChgRef{94-4472.l}
 
-@begin{Redundant}
+
+@redundant[
 The various categories of library units
 and the associated restrictions are
 described in this clause and its subclauses.
 The categories are related
 hierarchically in that the library units of one category can depend
 semantically only on library units of that category or an earlier one,
-@oBigChg{}
+
 except that the body of a remote types or remote call interface library
 unit is unrestricted.
-@oEndBigChg{}
-@oChgRef{94-4846.b}
+
 
 The overall hierarchy (including declared pure) is as follows:
 @begin{Description}
@@ -322,19 +303,12 @@ pure library units;
 Shared Passive @\Can depend only on other shared passive or
     declared pure library units;
 
-@oBigChg{}
+
 Remote Types @\The declaration of the library unit can depend only
     on other remote types library units,
     or one of the above;
     the body of the library unit is unrestricted;
-@oEndBigChg{}
-@oChgRef{94-4657.a}
-@oChgRef{94-4658.a}
-@oChgRef{94-4672.a}
-@oChgRef{94-4674.a}
-@oChgRef{94-4723.a}
-@oChgRef{94-3786.a}
-@oChgRef{94-4824.a}
+
 
 Remote Call Interface @\The declaration of the library unit can depend only
     on other remote call interfaces, or one of the above;
@@ -343,19 +317,12 @@ Remote Call Interface @\The declaration of the library unit can depend only
 Normal @\Unrestricted.
 @end{Description}
 
-@oBigChg{}
+
 Declared pure and shared passive library units are preelaborated.
 The declaration of a remote types or remote call interface library unit
 is required to be preelaborable.
-@oEndBigChg{}
-@oChgRef{94-4657.a}
-@oChgRef{94-4658.a}
-@oChgRef{94-4672.a}
-@oChgRef{94-4674.a}
-@oChgRef{94-4723.a}
-@oChgRef{94-3786.a}
-@oChgRef{94-4824.a}
-@end{Redundant}
+
+]
 
 @end{Intro}
 
@@ -363,17 +330,10 @@ is required to be preelaborable.
 For a given library-level type
 declared in a preelaborated library unit
 or in the declaration of a
-@oBigChg{}remote types or remote call interface library unit,@oEndBigChg{}
+remote types or remote call interface library unit,
 the implementation shall choose the same representation for the type
 upon each elaboration of the type's declaration for different
 partitions of the same program.
-@oChgRef{94-4657.a}
-@oChgRef{94-4658.a}
-@oChgRef{94-4672.a}
-@oChgRef{94-4674.a}
-@oChgRef{94-4723.a}
-@oChgRef{94-3786.a}
-@oChgRef{94-4824.a}
 @end{ImplReq}
 
 @begin{ImplPerm}
@@ -384,14 +344,14 @@ Implementations are allowed to define other categorization pragmas.
 
 @LabeledSubSection{Shared Passive Library Units}
 @begin{Intro}
-@begin{Redundant}
+@redundant[
 A shared passive library unit is used for managing global data
 shared between active partitions.  The restrictions on shared passive
 library units prevent the data or tasks of one active partition
 from being accessible to another active partition through
 references implicit in objects declared in the shared passive library
 unit.
-@end{Redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -426,8 +386,7 @@ The following restrictions apply to such a library unit:
   It cannot contain library-level declarations of protected objects
   with entries, nor of task objects.  Task objects are disallowed
   because passive partitions don't have any threads of control of their
-  own, nor any @oChg{}run-time@oEndChg{} system of their own.
-@oChgRef{94-4472.n}
+  own, nor any run-time system of their own.
   Protected objects with entries are disallowed because an entry queue
   contains references to calling tasks, and that would require in
   effect a pointer from a passive partition back to a task in
@@ -506,22 +465,19 @@ does not @i{need} (in the
 sense of @RefSecNum{Program Execution})
 the shared passive library units
 on which it depends semantically to be included in that same
-partition; they @oChg{}will typically@oEndChg{} reside in separate passive
+partition; they will typically reside in separate passive
 partitions.
-@oChgRef{94-4768.v}
-@oChgRef{94-4673.a}
-@oChgRef{94-4769.a}
 
 @end{LinkTime}
 
 @LabeledSubSection{Remote Types Library Units}
 
 @begin{Intro}
-@begin{redundant}
+@redundant[
 A remote types library unit supports the definition of types
 intended for use in communication between active
 partitions.
-@end{redundant}
+]
 @end{Intro}
 @begin{MetaRules}
 The restrictions governing a remote types package are similar to those for
@@ -549,14 +505,7 @@ The form of a @nt{pragma} Remote_Types is as follows:
 A @i{remote types library unit} is a library unit to which the pragma
 Remote_Types applies.
 The following restrictions apply to
-@oBigChg{}the declaration of@oEndBigChg{} such a library unit:
-@oChgRef{94-4657.a}
-@oChgRef{94-4658.a}
-@oChgRef{94-4672.a}
-@oChgRef{94-4674.a}
-@oChgRef{94-4723.a}
-@oChgRef{94-3786.a}
-@oChgRef{94-4824.a}
+the declaration of such a library unit:
 @begin{itemize}
 @Redundant[it shall be preelaborable;]
 
@@ -564,14 +513,7 @@ it shall depend semantically only on declared pure, shared passive,
 or other remote types library units;
 
 it shall not contain the declaration of any variable
-@oBigChg{}@oEndBigChg{}within the visible part of the library unit;
-@oChgRef{94-4657.a}
-@oChgRef{94-4658.a}
-@oChgRef{94-4672.a}
-@oChgRef{94-4674.a}
-@oChgRef{94-4723.a}
-@oChgRef{94-3786.a}
-@oChgRef{94-4824.a}
+within the visible part of the library unit;
 @begin{Reason}
   This is essentially a ``methodological'' restriction.
   A separate copy of a remote types package is included
@@ -580,10 +522,10 @@ it shall not contain the declaration of any variable
   an ``essentially pure'' package for defining types to be used
   for interpartition communication,
   and it could be misleading to declare visible objects
-  @oBigChg{}@oEndBigChg{}when no remote data access is actually being provided.
+  when no remote data access is actually being provided.
 @end{Reason}
 
-@oBigChg{}
+
 if the full view of a type declared in the visible part of the
 library unit has a part that
 is of a non-remote access type,
@@ -605,13 +547,6 @@ call interface library unit is called a @i{remote access type}.
 Such a type shall be either an access-to-subprogram type
 or a general access type that designates a class-wide limited private
 type.
-@oChgRef{94-4657.a}
-@oChgRef{94-4658.a}
-@oChgRef{94-4672.a}
-@oChgRef{94-4674.a}
-@oChgRef{94-4723.a}
-@oChgRef{94-3786.a}
-@oChgRef{94-4824.a}
 
 The following restrictions apply to the use of a
 remote access-to-subprogram type:
@@ -634,7 +569,7 @@ of the corresponding specific limited private type
 shall only have access parameters if they are controlling formal parameters;
 the types of all the non-controlling formal parameters shall
 have Read and Write attributes.
-@oEndBigChg{}
+
 
 A value of a remote access-to-class-wide type shall be
 explicitly converted only to another remote access-to-class-wide type;
@@ -674,11 +609,11 @@ indirection.
 @LabeledSubSection{Remote Call Interface Library Units}
 
 @begin{Intro}
-@begin{redundant}
+@redundant[
 A remote call interface library unit can be
 used as an interface for remote procedure calls (RPCs) (or remote
 function calls) between active partitions.
-@end{redundant}
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -706,10 +641,7 @@ The form of a @nt{pragma} All_Calls_Remote is as follows:
 @begin{SyntaxText}
 @PDefn2{Term=[library unit pragma], Sec=(All_Calls_Remote)}
 @PDefn2{Term=[pragma, library unit], Sec=(All_Calls_Remote)}
-@oChg{}A @nt{pragma} All_Calls_Remote is a library unit pragma.@oEndChg{}
-@oChgRef{94-4786.a}
-@oChgRef{94-4787.a}
-@oChgRef{94-4788.c}
+A @nt{pragma} All_Calls_Remote is a library unit pragma.
 @end{SyntaxText}
 
 @end{Syntax}
@@ -723,17 +655,10 @@ The form of a @nt{pragma} All_Calls_Remote is as follows:
 @Defn{remote subprogram}
 A @i{remote call interface (RCI)} is a library unit to which the
 pragma Remote_Call_Interface applies.
-@oBigChg{}
+
 A subprogram declared in the visible part of such a library unit is
 called a @i{remote subprogram}.
-@oEndBigChg{}
-@oChgRef{94-4657.a}
-@oChgRef{94-4658.a}
-@oChgRef{94-4672.a}
-@oChgRef{94-4674.a}
-@oChgRef{94-4723.a}
-@oChgRef{94-3786.a}
-@oChgRef{94-4824.a}
+
 
 The declaration of an RCI library unit shall be preelaborable
 (@lSeeSecNum{Elaboration Control}), and shall depend semantically
@@ -776,24 +701,16 @@ it shall not contain a subprogram (or access-to-subprogram) declaration
 whose profile has an access parameter,
 or a formal parameter of a limited type
 unless that limited type has user-specified
-Read and Write @oBigChg{}attributes;
-@oChgRef{94-4657.a}
-@oChgRef{94-4658.a}
-@oChgRef{94-4672.a}
-@oChgRef{94-4674.a}
-@oChgRef{94-4723.a}
-@oChgRef{94-3786.a}
-@oChgRef{94-4824.a}
+Read and Write attributes;
 
-any@oEndBigChg{} public child of the library unit shall
+any public child of the library unit shall
 be a remote call interface library unit.
 @begin{Reason}
   No restrictions apply to the private part of an RCI package,
   and since a public child can ``see'' the private part
-  of its parent, such @oChg{}a@oEndChg{} child must itself have a
+  of its parent, such a child must itself have a
   Remote_Call_Interface pragma, and be assigned to the same partition
   (see below).
-@oChgRef{94-4472.q}
 @end{Reason}
 @begin{Discussion}
   We considered making the public child of an RCI package
@@ -851,11 +768,9 @@ call to a subprogram of the RCI package from outside the
 declarative region of the package
 through the Partition Communication Subsystem
 (PCS); @lSeeSecNum{Partition Communication Subsystem}.
-Calls @oChg{}to such subprograms from within the declarative region of
-the package are defined to be local and shall not go through@oEndChg{}
+Calls to such subprograms from within the declarative region of
+the package are defined to be local and shall not go through
 the PCS.
-@oChgRef{94-4472.r}
-@oChgRef{94-4887.a}
 @begin{Discussion}
 Without this pragma, it is presumed that most implementations will
 make direct calls if the call originates in the same partition
@@ -889,11 +804,10 @@ be supported as an alternative to RPC.]
 @LabeledSection{Consistency of a Distributed System}
 
 @begin{Intro}
-@begin{redundant}
+@redundant[
 This clause defines attributes and rules associated with verifying
-the consistency of a distributed @oChg{}program.@oEndChg{}
-@oChgRef{94-4472.s}
-@end{redundant}
+the consistency of a distributed program.
+]
 @end{Intro}
 
 @begin{MetaRules}
@@ -1021,8 +935,7 @@ remote subprogram calls.
 Remote subprogram calls are standardized since the RPC paradigm is
 widely-used, and establishing an interface to it in the annex will
 increase the portability and reusability of distributed
-@oChg{}programs.@oEndChg{}
-@oChgRef{94-4472.v}
+programs.
 
 @end{MetaRules}
 
@@ -1045,13 +958,13 @@ suitable for transmission between partitions].  This action is called
 @i{marshalling}. @i{Unmarshalling} is the reverse action of
 reconstructing the parameters or results from the stream-oriented
 representation.
-@begin{Redundant}
+@redundant[
 Marshalling is performed initially as part of the remote subprogram call in
 the calling partition; unmarshalling is done in the called partition.
 After the remote subprogram completes, marshalling is performed in the
 called partition, and finally unmarshalling is done in the calling
 partition.
-@end{Redundant}
+]
 
 @Defn{calling stub}
 @Defn{receiving stub}
@@ -1117,10 +1030,9 @@ to initiate the remote call.
 @IndexCheck{Accessibility_Check}
 In a remote subprogram call with a formal parameter of a class-wide
 type, a check is made that the tag of the actual parameter identifies
-a tagged type declared in a declared-pure or shared@oChg{} @oEndChg{}passive library
+a tagged type declared in a declared-pure or shared passive library
 unit, or in the visible part of a remote types or remote call interface
 library unit.
-@oChgRef{94-4472.z}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if this check fails.
 @begin{Discussion}
@@ -1142,9 +1054,8 @@ Program_Error is raised if this check fails.
   to prevent "bad" types from being sent by arranging for their
   tags to mismatch between partitions.  However, that interfered
   with other uses of tags.  The new rule allows tags to agree
-  in all @oChg{}partitions,@oEndChg{} even for those types which are not "safe"
+  in all partitions, even for those types which are not "safe"
   to pass in an RPC.
-@oChgRef{94-4472.za}
 @end{Discussion}
 
 @IndexCheck{Partition_Check}
@@ -1203,25 +1114,22 @@ first to identify which remote subprogram in the receiving partition
 is being called, and then to pass the incoming value of each of the
 @b(in) and @b(in out) parameters of the call.
 
-@oBigChg{}
+
 It allocates (or reuses) a stream for the Result,
 unless a pragma Asynchronous is applied to the procedure.
-@oEndBigChg{}
-@oChgRef{94-4472.zb}
+
 
 It calls Do_RPC unless a pragma Asynchronous is applied to the procedure
 in which case it calls Do_APC. An access value designating the message
 stream allocated and initialized above is passed as the Params parameter.
-@oBigChg{}
+
 An access value designating the Result stream is passed as the Result
 parameter.
-@oEndBigChg{}
-@oChgRef{94-4472.zb}
+
 
 If the pragma Asynchronous is not specified for the procedure,
 Do_RPC blocks until a reply message arrives,
-@oBigChg{}and then returns to the calling stub.@oEndBigChg{}
-@oChgRef{94-4472.zc}
+and then returns to the calling stub.
 The stub returns after extracting
 from the Result stream, using Read operations, the @b(in out) and @b(out)
 parameters or the function result.  If the reply message
@@ -1259,7 +1167,7 @@ of Ada.Exceptions.Exception_Occurrence.
 
 For remote access-to-subprogram types:
 
-A value of a @oBigChg{}remote access-to-subprogram type@oEndBigChg{} can be
+A value of a remote access-to-subprogram type can be
 represented by the following components: a reference to the remote partition,
 an index to the package containing the remote subprogram, and an index to
 the subprogram within the package.  The values of these components are
@@ -1270,15 +1178,14 @@ are evaluated dynamically.
 
 For remote access-to-class-wide types:
 
-For @oBigChg{}each remote access-to-class-wide type,@oEndBigChg{}
+For each remote access-to-class-wide type,
 a calling stub is generated for each dispatching operation of
 the designated type. In addition, receiving stubs are generated to perform
 the remote dispatching operations in the called partition.  The appropriate
-@oChg{}@nt{subprogram_body}@oEndChg{} is determined as for a local
+@nt{subprogram_body} is determined as for a local
 dispatching call once the receiving stub has been reached.
-@oChgRef{94-4472.zf}
 
-@oBigChg{}A value of a remote access-to-class-wide type@oEndBigChg{}
+A value of a remote access-to-class-wide type
 can be represented with the following components:
 a reference to the remote partition, an index to a table (created one per
 each such access type) containing addresses of all the dispatching operations
@@ -1301,7 +1208,7 @@ check fails). The partition ID value is used for the Partition parameter.
 An index into the @i{tagged-type-descriptor} is created.  This index
 points to the receiving stub of the class-wide operation.   This index and
 the index to the table (described above) are
-@oBigChg{}written to the stream.@oEndBigChg{}
+written to the stream.
 Then, the actual parameters are marshalled into the message
 stream.  For a controlling operand, only the access value
 designating the remote object is required (the other two
@@ -1341,11 +1248,11 @@ not include the library unit that defines the exception.
 @LabeledSubSection{Pragma Asynchronous}
 
 @begin{Intro}
-@begin{redundant}
+@redundant[
 This subclause introduces the pragma Asynchronous which allows a
 remote subprogram call to return prior to completion of the execution
 of the corresponding remote subprogram body.
-@end{redundant}
+]
 @end{Intro}
 
 @begin{Syntax}
@@ -1358,13 +1265,9 @@ The form of a @nt{pragma} Asynchronous is as follows:
 
 @begin{Legality}
 
-@oBigChg{}The @nt<local_name> of a pragma Asynchronous shall
+The @nt<local_name> of a pragma Asynchronous shall
 denote either:
-@begin{oChgNoteNoBars}
-Removed rule requiring pragma Asynchronous to appear only in an RCI
-library unit; it can now appear in either RCI or remote types library
-units, but this is implied by the rules below.
-@end{oChgNoteNoBars}
+
 @begin{Itemize}
    One or more remote procedures;
    the formal parameters of the procedure(s) shall all be of
@@ -1375,7 +1278,7 @@ units, but this is implied by the rules below.
    of the designated profile of
    the type shall all be of mode @key{in};
 
-   The first subtype of a remote access-to-class-wide type.@oEndBigChg{}
+   The first subtype of a remote access-to-class-wide type.
 @end{Itemize}
 
 @end{Legality}
@@ -1398,10 +1301,9 @@ a pragma Asynchronous applies.
 In addition, if a pragma Asynchronous applies to a remote
 access-to-class-wide type, then
 a dispatching call on a procedure
-with a controlling operand designated by a value of the type@oChg{}@oEndChg{}
+with a controlling operand designated by a value of the type
 is asynchronous if the
 formal parameters of the procedure are all of mode @key{in}.
-@oChgRef{94-4768.h}
 @end{RunTime}
 
 @begin{ImplReq}
@@ -1526,11 +1428,11 @@ dereferencing the controlling operands T1 and T2.
 @begin{Intro}
 @Defn{partition communication subsystem (PCS)}
 @Defn{PCS (partition communication subsystem)}
-@begin{redundant}
+@redundant[
 The @i{Partition Communication Subsystem} (PCS) provides facilities for
 supporting communication between the active partitions of a distributed
 program.  The package System.RPC is a language-defined interface to the PCS.
-@end{redundant}
+]
 @begin{Reason}
 The prefix RPC is used rather than RSC because the term remote procedure call
 and its acronym are more familiar.
@@ -1583,7 +1485,7 @@ The following language-defined library package exists:
       Result     : @key(access) Params_Stream_Type);
 
    @key(procedure) Establish_RPC_Receiver(
-      @oBigChg{}Partition : @key(in) Partition_ID;@oChgRef{94-4553.a}@oEndBigChg{}
+      Partition : @key(in) Partition_ID;
       Receiver  : @key(in) RPC_Receiver);
 
 @key[private]
@@ -1599,10 +1501,10 @@ well as marshalling and
 unmarshalling the parameters or result of a remote
 subprogram call, as part of sending them between partitions.
 
-@begin{Redundant}
+@redundant[
 The Read and Write procedures override the corresponding abstract operations
 for the type Params_Stream_Type.
-@end{Redundant}
+]
 
 @end{StaticSem}
 
@@ -1641,15 +1543,10 @@ the library units of an active partition
 (that is, right after the @i{elaboration of the partition}) if the partition
 includes an RCI library unit, but prior to invoking the main
 subprogram, if any.
-@oBigChg{}
+
 The Partition parameter is the Partition_ID of the active partition
 being elaborated.
-@oEndBigChg{}
-@oChgRef{94-4553.a}
-@oChgRef{94-4523.a}
-@oChgRef{94-4540.a}
-@oChgRef{94-4541.a}
-@oChgRef{94-4542.a}
+
 @Defn{RPC-receiver}
 The Receiver parameter designates an
 implementation-provided procedure called the
@@ -1690,9 +1587,8 @@ the PCS.
 
 @PDefn2{Term=[potentially blocking operation],Sec=(RPC operations)}
 @PDefn2{Term=[blocking, potentially],Sec=(RPC operations)}
-The subprograms declared in @oChg{}System.RPC@oEndChg{} are potentially
+The subprograms declared in System.RPC are potentially
 blocking operations.
-@oChgRef{94-4472.zj}
 @end{RunTime}
 
 @begin{ImplReq}
@@ -1743,10 +1639,9 @@ implementation.
 @begin{ImplAdvice}
 
 Whenever possible, the PCS on the called partition should
-allow for multiple tasks to call the @oChg{}RPC-receiver@oEndChg{} with
+allow for multiple tasks to call the RPC-receiver with
 different messages and should allow them to block until the corresponding
 subprogram body returns.
-@oChgRef{94-4472.zk}
 
 The Write operation on a stream of type Params_Stream_Type should raise
 Storage_Error if it runs out of space trying to write the Item

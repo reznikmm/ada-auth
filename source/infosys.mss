@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2000/04/15 00:44:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:03 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -62,12 +62,10 @@ This Annex is new to Ada 9X.
 @PDefn2{Term=[specifiable], Sec=(of Machine_Radix for decimal first subtypes)}
 @Defn{Machine_Radix clause}
 Machine_Radix may be specified for a decimal first subtype
-@oChg{}(@lSeeSecNum{Fixed Point Types})@oEndChg{}
+(@lSeeSecNum{Fixed Point Types})
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static,
 and its value shall be 2 or 10.
-@oChgRef{94-4827.b}
-@oChgRef{94-4827.a}
 A value of 2 implies a binary base range; a
 value of 10 implies a decimal base range.
 @begin{Ramification}
@@ -82,7 +80,7 @@ for objects of subtype S when S'Machine_Radix = 10.
 @end{ImplAdvice}
 
 @begin{Discussion}
-@oBigChg{}
+
 The intent of a decimal Machine_Radix attribute definition clause
 is to allow the programmer to declare an Ada decimal data object
 whose representation matches a particular COBOL implementation's
@@ -94,7 +92,7 @@ object's type in a @nt[pragma] Convention.
 
 Additionally, the Ada compiler may choose to generate arithmetic
 instructions that exploit the packed decimal representation.
-@oEndBigChg{}
+
 @end{discussion}
 
 @begin{Examples}
@@ -131,7 +129,7 @@ The library package Decimal has the following declaration:
                      Divisor   : @key(in) Divisor_Type;
                      Quotient  : @key(out) Quotient_Type;
                      Remainder : @key(out) Remainder_Type);
-   @BigChg{}@key[pragma] Convention(Intrinsic, Divide);@EndBigChg{}
+   @key[pragma] Convention(Intrinsic, Divide);
 
 @key(end) Ada.Decimal;
 @end{Example}
@@ -321,12 +319,12 @@ conventions specified in this clause.
  | @nt{floating_LHS_sign} @nt{number} @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
 
  | [@nt{fixed_LHS_sign}] @nt{fixed_$_char} {@nt{direct_insertion}}
-     @nt{all_zero_suppression_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{}  [@nt{RHS_sign}]
+     @nt{all_zero_suppression_number} {@nt{direct_insertion}}  [@nt{RHS_sign}]
 
- | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{}
+ | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}}
      @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
 
- | @nt{all_sign_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{} @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
+ | @nt{all_sign_number} {@nt{direct_insertion}} @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
 
 @end{display}
 @begin{display}
@@ -343,30 +341,30 @@ conventions specified in this clause.
  | @nt{floating_LHS_sign} @nt{number} @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
 
  | [@nt{fixed_LHS_sign}] @nt{single_#_currency} {@nt{direct_insertion}}
-     @nt{all_zero_suppression_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{} [@nt{RHS_sign}]
+     @nt{all_zero_suppression_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
 
  | [@nt{fixed_LHS_sign}] @nt{multiple_#_currency} {@nt{direct_insertion}}
-     @nt{all_zero_suppression_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{} [@nt{RHS_sign}]
+     @nt{all_zero_suppression_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
 
- | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{}
+ | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}}
      @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
 
- | @nt{all_sign_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{} @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
+ | @nt{all_sign_number} {@nt{direct_insertion}} @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
 
 @end{display}
 @begin{display}
 @nt{floating_currency_picture_string} ::=
    [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{floating_$_currency} @nt{number} [@nt{RHS_sign}]
  | [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{floating_#_currency} @nt{number} [@nt{RHS_sign}]
- | [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{all_currency_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{} [@nt{RHS_sign}]
+ | [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{all_currency_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
 
 @end{display}
 @begin{display}
 @nt{non_currency_picture_string} ::=
    [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{zero_suppression} @nt{number} [@nt{RHS_sign}]
  | [@nt{floating_LHS_sign}] @nt{number} [@nt{RHS_sign}]
- | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{} [@nt{RHS_sign}]
- | @nt{all_sign_number} @oBigChg{}{@nt{direct_insertion}}@oEndBigChg{}
+ | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
+ | @nt{all_sign_number} {@nt{direct_insertion}}
  | @nt{fixed_LHS_sign} @nt{direct_insertion} {@nt{direct_insertion}} @nt{number} [@nt{RHS_sign}]
 
 @end{display}
@@ -452,7 +450,7 @@ conventions specified in this clause.
    @nt{sign_char} {@nt{context_sensitive_insertion}} @nt{sign_char} {@nt{sign_char} | @nt{context_sensitive_insertion}}
 @end{display}
 @begin{display}
-@nt{all_sign_aft} ::= {@nt{all_sign_aft_char}} @oBigChg{}@nt{sign_char}@oEndBigChg{}
+@nt{all_sign_aft} ::= {@nt{all_sign_aft_char}} @nt{sign_char}
 
 @nt{all_sign_aft_char} ::=  @nt{sign_char} | @nt{context_sensitive_insertion}
 @end{display}
@@ -469,7 +467,7 @@ conventions specified in this clause.
      @nt{currency_char} {@nt{currency_char} | @nt{context_sensitive_insertion}}
 @end{display}
 @begin{display}
-@nt{all_currency_aft} ::= {@nt{all_currency_aft_char}} @oBigChg{}@nt{currency_char}@oEndBigChg{}
+@nt{all_currency_aft} ::= {@nt{all_currency_aft_char}} @nt{currency_char}
 
 @nt{all_currency_aft_char} ::= @nt{currency_char} | @nt{context_sensitive_insertion}
 @end{display}
@@ -485,14 +483,13 @@ conventions specified in this clause.
    @nt{zero_suppression_char} {@nt{zero_suppression_char} | @nt{context_sensitive_insertion}}
 @end{display}
 @begin{display}
-@nt{all_zero_suppression_aft} ::= {@nt{all_zero_suppression_aft_char}} @oBigChg{}@nt{zero_suppression_char}@oEndBigChg{}
+@nt{all_zero_suppression_aft} ::= {@nt{all_zero_suppression_aft_char}} @nt{zero_suppression_char}
 
 @nt{all_zero_suppression_aft_char} ::=  @nt{zero_suppression_char} | @nt{context_sensitive_insertion}
 @end{display}
 @begin{display}
 @nt{zero_suppression_char} ::= Z | *
 @end{Display}
-@oChgRef{94-4985.e}
 
 The following composition constraints apply to a picture String:
 @begin{Itemize}
@@ -503,13 +500,11 @@ If a picture String has '<' as @nt{fixed_LHS_sign}, then it has '>' as
 @nt{RHS_sign}.
 
 If a picture String has '<' in a @nt{floating_LHS_sign} or in an
-@nt{all_sign_number}, then it has @oChg{}an occurrence of '>'.@oEndChg{}
-@oChgRef{94-4985.a}
+@nt{all_sign_number}, then it has an occurrence of '>'.
 
 If a picture String has '+' or '-' as @nt{fixed_LHS_sign}, in a
 @nt{floating_LHS_sign}, or in an @nt{all_sign_number}, then it has no
-@oBigChg{}@nt{RHS_sign}.@oEndBigChg{}
-@oChgRef{94-4974.a}
+@nt{RHS_sign}.
 
 An instance of @nt{all_sign_number} does not have occurrences of
 different @nt{sign_char} Character values.
@@ -562,8 +557,7 @@ The contents of an edited output string are based on:
 
      An expanded picture String Pic_String,
 
-     A Boolean value, @oBigChg{}Blank_When_Zero,@oEndBigChg{}
-@oChgRef{94-4985.f}
+     A Boolean value, Blank_When_Zero,
 
      A Currency string,
 
@@ -574,14 +568,13 @@ The contents of an edited output string are based on:
      A Radix_Mark character.
 @end{Itemize}
 
-The combination of a True value for @oBigChg{}Blank_When_Zero@oEndBigChg{} and a '*' character
+The combination of a True value for Blank_When_Zero and a '*' character
 in Pic_String is inconsistent; no edited output string is defined.
 
-A layout error is identified in the rules below if @oBigChg{}leading
+A layout error is identified in the rules below if leading
 non-zero digits of Item, character values of the Currency string,
-or a negative sign@oEndBigChg{} would be
+or a negative sign would be
 truncated; in such cases no edited output string is defined.
-@oChgRef{94-4985.b}
 
 The edited output string has lower bound 1 and upper bound N where
      N = Pic_String'Length + Currency_Length_Adjustment -
@@ -600,27 +593,26 @@ The edited output string has lower bound 1 and upper bound N where
 @defn{displayed magnitude (of a decimal value)}
 Let the magnitude of Item be expressed as a base-10 number
 I@-(p)@Math[@Times@Times@Times]I@-(1).F@-(1)@Math[@Times@Times@Times]F@-(q),
-@oChg{}called the @i{displayed} @i{magnitude} of Item,@oEndChg{}
+called the @i{displayed} @i{magnitude} of Item,
 where:
 @begin{Itemize}
      q = Min(Max(Num'Scale, 0), n) where n is 0 if Pic_String
-         has no @nt{radix} and is otherwise the number of @oBigChg{}digit
+         has no @nt{radix} and is otherwise the number of digit
          positions following @nt{radix} in Pic_String,
          where a digit position corresponds to an occurrence of
          '9', a @nt{zero_suppression_char} (for an
          @nt{all_zero_suppression_number}), a @nt{currency_char}
          (for an @nt{all_currency_number}), or a @nt{sign_char}
-         (for an @nt{all_sign_number}).@oEndBigChg{}
+         (for an @nt{all_sign_number}).
 
      I@-(p) /= 0 if p>0.
 @end{Itemize}
-@oChgRef{94-4985.d}
 
 If n < Num'Scale, then the above number is the result of rounding
 (away from 0 if exactly midway between values).
 
-If @oBigChg{}Blank_When_Zero@oEndBigChg{} = True and @oBigChg{}the displayed magnitude of Item
-is zero,@oEndBigChg{}
+If Blank_When_Zero = True and the displayed magnitude of Item
+is zero,
 then the edited output string
 comprises all space character values.  Otherwise, the picture String is
 treated as a sequence of instances of syntactic categories based on
@@ -633,10 +625,9 @@ Table F-1 shows the mapping from a sign control symbol to a
 corresponding character or string in the edited output.  In the
 columns showing the edited output, a lower-case 'b' represents the
 space character.
-@oBigChg{}If there is no sign control symbol but the value of Item
+If there is no sign control symbol but the value of Item
 is negative, a layout error occurs and no edited output string
-is produced.@oEndBigChg{}
-@oChgRef{94-4985.b}
+is produced.
 @StandardTable{Name=EdOut, Columns=3, AllColumns=Center,
    HeadingBoxed, ColumnLined}
 @begin{EdOut, Float}
@@ -818,14 +809,12 @@ as follows:
                    Character values are replaced
                   with the excess digits (if any)
                    from the @i{integer_part} of the mapping of the @nt{number}
-                   to the right of the @oChg{}
-                   @nt{floating_#_currency}@oEndChg{} instance.
-@oChgRef{94-4979.b}
+                   to the right of the 
+                   @nt{floating_#_currency} instance.
 
-@oChg{}  The substring whose last Character occurs at the position immediately
+  The substring whose last Character occurs at the position immediately
    preceding the leftmost Character replaced via rule 1, and whose
-   length is Currency'Length, is replaced by the Currency string. @oEndChg{}
-@oChgRef{94-4979.a}
+   length is Currency'Length, is replaced by the Currency string. 
 
                   A @nt{context_sensitive_insertion} Character is replaced
                    as though it were a @nt{direct_insertion} Character, if
@@ -843,52 +832,50 @@ as follows:
 An instance of @nt{all_zero_suppression_number} maps to:
 @begin{Itemize}
               a string of all spaces if
-              @oBigChg{}the displayed magnitude of Item is zero,
+              the displayed magnitude of Item is zero,
               the @nt{zero_suppression_char}
               is 'Z' or 'z', and the instance of
               @nt{all_zero_suppression_number} does not have
-              a @nt{radix} at its last character position;@oEndBigChg{}
+              a @nt{radix} at its last character position;
 
               a string containing the Fill character in each position except
               for the character (if any) corresponding to @nt{radix}, if
               @nt{zero_suppression_char} = '*' and the
-              @oChg{}displayed magnitude@oEndChg{} of Item is zero;
+              displayed magnitude of Item is zero;
 
-              @oBigChg{}otherwise,
+              otherwise,
               the same result as if each @nt{zero_suppression_char} in
               @nt{all_zero_suppression_aft} were '9', interpreting
               the instance of @nt{all_zero_suppression_number} as
               either @nt{zero_suppression} @nt{number} (if a @nt{radix}
               and @nt{all_zero_suppression_aft} are present), or
-              as @nt{zero_suppression} otherwise.@oEndBigChg{}
+              as @nt{zero_suppression} otherwise.
 @end{Itemize}
-@oChgRef{94-4985.e}
 
 An instance of @nt{all_sign_number} maps to:
 @begin{Itemize}
               a string of all spaces if
-        @oBigChg{}the displayed magnitude of Item is zero and the
+        the displayed magnitude of Item is zero and the
         instance of @nt{all_sign_number} does not have a @nt{radix}
-        at its last character position;@oEndBigChg{}
+        at its last character position;
 
-              @oBigChg{}otherwise,
+              otherwise,
               the same result as if each @nt{sign_char} in
               @nt{all_sign_number_aft} were '9', interpreting
               the instance of @nt{all_sign_number} as
               either @nt{floating_LHS_sign} @nt{number} (if a @nt{radix}
               and @nt{all_sign_number_aft} are present), or
-              as @nt{floating_LHS_sign} otherwise.@oEndBigChg{}
+              as @nt{floating_LHS_sign} otherwise.
 @end{Itemize}
-@oChgRef{94-4985.e}
 
 An instance of @nt{all_currency_number} maps to:
 @begin{Itemize}
               a string of all spaces if
-        @oBigChg{}the displayed magnitude of Item is zero and the
+        the displayed magnitude of Item is zero and the
         instance of @nt{all_currency_number} does not have a @nt{radix}
-        at its last character position;@oEndBigChg{}
+        at its last character position;
 
-              @oBigChg{}otherwise,
+              otherwise,
               the same result as if each @nt{currency_char} in
               @nt{all_currency_number_aft} were '9', interpreting
               the instance of @nt{all_currency_number} as
@@ -897,9 +884,8 @@ An instance of @nt{all_currency_number} maps to:
               (if a @nt{radix}
               and @nt{all_currency_number_aft} are present), or
               as @nt{floating_$_currency} or @nt{floating_#_currency}
-              otherwise.@oEndBigChg{}
+              otherwise.
 @end{Itemize}
-@oChgRef{94-4985.e}
 @end{RunTime}
 
 @begin{Examples}
@@ -957,16 +943,16 @@ The library package Text_IO.Editing has the following declaration:
              Type=[Picture]}
 
    @key(function) Valid (Pic_String      : @key(in) String;
-                   @oBigChg{}Blank_When_Zero : @key(in) Boolean := False) @key(return) Boolean;@oEndBigChg{}
+                   Blank_When_Zero : @key(in) Boolean := False) @key(return) Boolean;
 
    @key(function) To_Picture (Pic_String      : @key(in) String;
-                        @oBigChg{}Blank_When_Zero : @key(in) Boolean := False)@oEndBigChg{}
+                        Blank_When_Zero : @key(in) Boolean := False)
       @key(return) Picture;
 
    @key(function) Pic_String      (Pic : @key(in) Picture) @key(return) String;
-   @key(function) @oBigChg{}Blank_When_Zero (Pic : @key(in) Picture) @key(return) Boolean;@oEndBigChg{}
+   @key(function) Blank_When_Zero (Pic : @key(in) Picture) @key(return) Boolean;
 
-   @oBigChg{}Max_Picture_Length  : @key(constant) := @i{implementation_defined};@oEndBigChg{}
+   Max_Picture_Length  : @key(constant) := @i{implementation_defined};
 
    Picture_Error       : @key(exception);
 
@@ -1026,42 +1012,40 @@ The library package Text_IO.Editing has the following declaration:
    ... @i{-- not specified by the language}
 @key(end) Ada.Text_IO.Editing;
 @end{Example}
-@oChgRef{94-4480.f}
 @ImplDef{The value of Max_Picture_Length in the package Text_IO.Editing}
 
-@BigChg{}The exception Constraint_Error is raised
+The exception Constraint_Error is raised
 if the Image function or any of the
-Put procedures is invoked with a null string for Currency.@EndBigChg{}
-@oChgRef{94-4985.c}
+Put procedures is invoked with a null string for Currency.
 @begin{DescribeCode}
 @begin{CodeExample}
 @key(function) Valid (Pic_String      : @key(in) String;
-                @oBigChg{}Blank_When_Zero : @key(in) Boolean := False) @key(return) Boolean;@oEndBigChg{}
+                Blank_When_Zero : @key(in) Boolean := False) @key(return) Boolean;
 @end{CodeExample}
 
 Valid returns True if Pic_String is a well-formed picture String
 (@lSeeSecNum(Picture String Formation)) the
 length of whose expansion does not exceed Max_Picture_Length, and if
-either @oBigChg{}Blank_When_Zero@oEndBigChg{} is False or Pic_String contains no '*'.
+either Blank_When_Zero is False or Pic_String contains no '*'.
 
 @begin{CodeExample}
 @key(function) To_Picture (Pic_String      : @key(in) String;
-                     @oBigChg{}Blank_When_Zero : @key(in) Boolean := False)@oEndBigChg{}
+                     Blank_When_Zero : @key(in) Boolean := False)
    @key(return) Picture;
 @end{CodeExample}
 
 To_Picture returns a result Picture such that the application of the
 function Pic_String to this result
 yields an expanded picture String equivalent to Pic_String, and such
-that @oBigChg{}Blank_When_Zero@oEndBigChg{} applied to the result Picture is the same value as the
-parameter @oBigChg{}Blank_When_Zero.@oEndBigChg{}
+that Blank_When_Zero applied to the result Picture is the same value as the
+parameter Blank_When_Zero.
  Picture_Error is raised if not
-@oBigChg{}Valid(Pic_String, Blank_When_Zero).@oEndBigChg{}
+Valid(Pic_String, Blank_When_Zero).
 
 @begin{CodeExample}
 @key(function) Pic_String      (Pic : @key(in) Picture) @key(return) String;
 
-@key(function) @oBigChg{}Blank_When_Zero (Pic : @key(in) Picture) @key(return) Boolean;@oEndBigChg{}
+@key(function) Blank_When_Zero (Pic : @key(in) Picture) @key(return) Boolean;
 @end{CodeExample}
 
 If Pic is To_Picture(String_Item, Boolean_Item) for some String_Item and
@@ -1071,7 +1055,7 @@ Pic_String(Pic) returns an expanded picture String
 equivalent to String_Item and with any lower-case letter
 replaced with its corresponding upper-case form, and
 
-@oBigChg{}Blank_When_Zero(Pic)@oEndBigChg{} returns Boolean_Item.
+Blank_When_Zero(Pic) returns Boolean_Item.
 @end[Itemize]
 
 If Pic_1 and Pic_2 are objects of type Picture, then "="(Pic_1, Pic_2)
@@ -1079,7 +1063,7 @@ is True when
 @begin[itemize]
 Pic_String(Pic_1) = Pic_String(Pic_2), and
 
-@oBigChg{}Blank_When_Zero(Pic_1) = Blank_When_Zero(Pic_2).@oEndBigChg{}
+Blank_When_Zero(Pic_1) = Blank_When_Zero(Pic_2).
 @end[Itemize]
 
 @begin{CodeExample}
@@ -1129,7 +1113,7 @@ Layout_Error, and returns False otherwise.
 
 Image returns the edited output String as defined in
 @RefSecNum(Edited Output Generation) for Item,
-Pic_String(Pic), @oBigChg{}Blank_When_Zero(Pic),@oEndBigChg{}
+Pic_String(Pic), Blank_When_Zero(Pic),
 Currency, Fill, Separator,
 and Radix_Mark.  If these rules identify a layout error, then Image
 raises the exception Layout_Error.
@@ -1175,11 +1159,10 @@ the length of the string resulting from Image, then Layout_Error is raised.
 
 @begin{ImplReq}
 Max_Picture_Length shall be at least 30.
-@oBigChg{}The implementation shall support currency strings of length
+The implementation shall support currency strings of length
 up to at least 10, both for Default_Currency in an instantiation of
 Decimal_Output, and for Currency in an invocation of Image or any
-of the Put procedures.@oEndBigChg{}
-@oChgRef{94-4480.f}
+of the Put procedures.
 @begin{Discussion}
 This implies that a picture string with character replications
 need not be supported (i.e., To_Picture will raise Picture_Error)
@@ -1252,7 +1235,7 @@ that:
 each occurrence of Character
 is replaced by Wide_Character,
 
-@chg{}each occurrence of Text_IO is replaced by Wide_Text_IO,@endchg{}
+each occurrence of Text_IO is replaced by Wide_Text_IO,
 
 the subtype of Default_Currency is Wide_String rather than String, and
 

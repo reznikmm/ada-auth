@@ -1,11 +1,11 @@
 @Part(syntax, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 00:44:05 $}
+@SetPageHeadings{$Date: 2000/04/15 21:58:29 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @begin{Intro}
 @Defn2{Term=[syntax], Sec=(complete listing)}
@@ -16,9 +16,8 @@
 This Annex summarizes the complete syntax of the language.
 @SeeSecNum{Method of Description and Syntax Notation}
 for a description of the notation used.
-@Chg{}
-@EndChg{}
-@oChgRef{94-4693.s}
+
+
 @end{Intro}
 
 @Case{Device,
