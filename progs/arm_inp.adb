@@ -10,7 +10,7 @@ package body ARM_Input is
     -- or other entity, and routines to lex the input entities.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002  AXE Consultants.
+    -- Copyright 2000, 2002, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -339,10 +339,33 @@ package body ARM_Input is
 	    end if;
 	    Param_Found := 5;
         else
-	    Ada.Text_IO.Put_Line ("  ** Bad parameter name: " & Ada.Strings.Fixed.Trim (Our_Param_Name, Ada.Strings.Right) &
-				  ", " & Ada.Strings.Fixed.Trim (Param_Name_1, Ada.Strings.Right) & " or " &
-				  Ada.Strings.Fixed.Trim (Param_Name_2, Ada.Strings.Right) & " expected on line " &
-				  ARM_Input.Line_String (Input_Object));
+            if Param_Name_5 /= ARM_Input.Command_Name_Type'(others => ' ') then
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter name: " & Ada.Strings.Fixed.Trim (Our_Param_Name, Ada.Strings.Right) &
+				      "; but " & Ada.Strings.Fixed.Trim (Param_Name_1, Ada.Strings.Right) & ", " &
+				      Ada.Strings.Fixed.Trim (Param_Name_2, Ada.Strings.Right) & ", " &
+				      Ada.Strings.Fixed.Trim (Param_Name_3, Ada.Strings.Right) & ", " &
+				      Ada.Strings.Fixed.Trim (Param_Name_4, Ada.Strings.Right) & ", or " &
+				      Ada.Strings.Fixed.Trim (Param_Name_5, Ada.Strings.Right) & " expected on line " &
+				      ARM_Input.Line_String (Input_Object));
+            elsif Param_Name_4 /= ARM_Input.Command_Name_Type'(others => ' ') then
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter name: " & Ada.Strings.Fixed.Trim (Our_Param_Name, Ada.Strings.Right) &
+				      "; but " & Ada.Strings.Fixed.Trim (Param_Name_1, Ada.Strings.Right) & ", " &
+				      Ada.Strings.Fixed.Trim (Param_Name_2, Ada.Strings.Right) & ", " &
+				      Ada.Strings.Fixed.Trim (Param_Name_3, Ada.Strings.Right) & ", or " &
+				      Ada.Strings.Fixed.Trim (Param_Name_4, Ada.Strings.Right) & " expected on line " &
+				      ARM_Input.Line_String (Input_Object));
+            elsif Param_Name_3 /= ARM_Input.Command_Name_Type'(others => ' ') then
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter name: " & Ada.Strings.Fixed.Trim (Our_Param_Name, Ada.Strings.Right) &
+				      "; but " & Ada.Strings.Fixed.Trim (Param_Name_1, Ada.Strings.Right) & ", " &
+				      Ada.Strings.Fixed.Trim (Param_Name_2, Ada.Strings.Right) & ", or " &
+				      Ada.Strings.Fixed.Trim (Param_Name_3, Ada.Strings.Right) & " expected on line " &
+				      ARM_Input.Line_String (Input_Object));
+            else
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter name: " & Ada.Strings.Fixed.Trim (Our_Param_Name, Ada.Strings.Right) &
+				      "; but " & Ada.Strings.Fixed.Trim (Param_Name_1, Ada.Strings.Right) & " or " &
+				      Ada.Strings.Fixed.Trim (Param_Name_2, Ada.Strings.Right) & " expected on line " &
+				      ARM_Input.Line_String (Input_Object));
+	    end if;
 	    Param_Found := 0;
         end if;
         -- Now, open the parameter section:
