@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2005/01/18 05:34:46 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2005/01/20 06:32:03 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/01/18 05:34:46 $}
+@Comment{$Date: 2005/01/20 06:32:03 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -39,6 +39,11 @@ Fortran (respectively, C) in the interfacing pragmas
 (see @RefSecNum{Interface to Other Languages}),
 thus allowing Ada programs to interface with programs written in
 that language.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If Fortran (respectively, C) is supported in the target environment,
+then interfacing to Fortran (respectively, C) should be supported as
+specified in @RefSecNum{Interface to Other Languages}.]}]}
+
 @end{ImplAdvice}
 
 @begin{Extend83}
@@ -496,6 +501,10 @@ yields a NaN that propagates into the final result.) Analogous advice applies
 in the case of multiplication of a complex operand and a pure-imaginary
 operand, and in the case of division of a complex operand by a real or
 pure-imaginary operand.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Mixed real and complex operations (as well as pure-imaginary and complex
+operations) should not be performed by converting
+the real (resp. pure-imaginary) operand to complex.]}]}
 
 Likewise, because the usual mathematical meaning of addition of a complex
 operand and a real operand is that the imaginary operand remains unchanged, an
@@ -519,6 +528,10 @@ parameter lies on the positive real axis; as another, the sign of the imaginary
 component of the Compose_@!From_@!Polar function should be the same as (resp., the
 opposite of) that of the Argument parameter when that parameter has a value of
 zero and the Modulus parameter has a nonnegative (resp., negative) value.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If Real'Signed_Zeros is true for Numerics.Generic_Complex_Types,
+a rational treatment of the signs of
+zero results and result components should be provided.]}]}
 @end{ImplAdvice}
 
 @begin{DiffWord83}
@@ -907,6 +920,11 @@ cases, the result component should have the sign of the parameter component at
 the origin. Other complex elementary functions have zero components whose sign
 is opposite that of a parameter component at the origin, or is always positive
 or always negative.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If Complex_Types.Real'Signed_Zeros is true for
+Numerics.Generic_Complex_Elementary_Functions,
+a rational treatment of the signs of
+zero results and result components should be provided.]}]}
 @end{ImplAdvice}
 
 @begin{DiffWord83}
@@ -1551,7 +1569,7 @@ shall be less than or equal to the value of
 type @i{universal_integer}.]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[    @Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + @RI{g}]}
+@ChgAdded{Version=[2],Text=[@Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + @RI{g}]}
 @end{Display}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],NoPrefix=[T],Text=[where @RI{d}
@@ -2077,6 +2095,11 @@ parameter of 2.0*Numerics.Pi, since this will not provide the required accuracy
 in some portions of the domain. For the same reason, the version of Log
 without a Base parameter should not be implemented by calling the corresponding
 version with a Base parameter of Numerics.e.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[For elementary functions, the forward trigonometric functions without a
+Cycle parameter should not be implemented by calling the corresponding version
+with a Cycle parameter. Log without a Base parameter should not be implemented
+by calling Log with a Base parameter.]}]}
 @end{ImplAdvice}
 
 @begin{DiffWord83}
@@ -2469,6 +2492,10 @@ The version of the Compose_From_Polar function without a Cycle parameter should
 not be implemented by calling the corresponding version with a Cycle parameter
 of 2.0*Numerics.Pi, since this will not provide the required accuracy in some
 portions of the domain.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[For complex arithmetic, the Compose_From_Polar function without a Cycle
+parameter should not be implemented by calling Compose_From_Polar with a Cycle
+parameter.]}]}
 @end{ImplAdvice}
 
 @begin{DiffWord83}
@@ -2733,7 +2760,7 @@ scalar Right. The index range of the result is Left'Range.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
-@ChgAdded{Version=[2],Text=[This function returns a @i<unit vector>@Defn{unit vector}
+@ChgAdded{Version=[2],Text=[This function returns a @i<unit vector>@Defn2{Term=[unit vector],Sec=[real vector]}
 with Order components and a lower bound of First. All components are set to 0.0
 except for the Index component which is set to 1.0. Constraint_Error is raised
 if Index < First, Index > First + Order - 1 or if First + Order - 1 >
@@ -2925,7 +2952,8 @@ Argument_Error is raised if the matrix A is not symmetric.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This function returns a square
-@i{unit matrix}@Defn{unit matrix} with Order**2 components and lower bounds of
+@i{unit matrix}@Defn2{Term=[unit matrix],Sec=[real matrix]}
+with Order**2 components and lower bounds of
 First_1 and First_2 (for the first and second index ranges respectively). All
 components are set to 0.0 except for the main diagonal, whose components are
 set to 1.0. Constraint_Error is raised if First_1 + Order - 1 > Integer'Last or
@@ -2940,14 +2968,15 @@ First_2 + Order - 1 > Integer'Last.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Accuracy requirements for the subprograms Solve,
 Inverse, Determinant, Eigenvalues and Eigensystem are implementation defined.]}
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[The
 accuracy requirements for the subprograms Solve,
-Inverse, Determinant, Eigenvalues and Eigensystem.],Old=[]}]}
+Inverse, Determinant, Eigenvalues and Eigensystem for type Real_Matrix.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[For operations not involving an inner product, the
 accuracy requirements are those of the corresponding operations of the type
-Real in both the strict mode and the relaxed mode (see G.2).]}
+Real in both the strict mode and the relaxed mode
+(see @RefSecNum{Numeric Performance Requirements}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For operations involving an inner
@@ -2966,15 +2995,19 @@ of the absolute error of the inner product @i<X>*@i<Y> shall not exceed
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Implementations shall document any techniques used
 to reduce cancellation errors such as extended precision arithmetic.]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[Any
+techniques used to reduce cancellation errors in
+Numerics.Generic_Real_Arrays shall be documented.]}]}
 @begin{ImplNote}
-  The above accuracy requirement is met by the canonical implementation of the
-  inner product by multiplication and addition using the corresponding
-  operations of type Real'Base and performing the cumulative addition using
-  ascending indices. Note however, that some hardware provides special
-  operations for the computation of the inner product and although these may be
-  fast they may not meet the accuracy requirement specified. See Accuracy and
-  Stability of Numerical Algorithms By N J Higham (ISBN 0-89871-355-2),
-  Section 3.1.
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The above accuracy requirement is met by the
+  canonical implementation of the inner product by multiplication and addition
+  using the corresponding operations of type Real'Base and performing the
+  cumulative addition using ascending indices. Note however, that some hardware
+  provides special operations for the computation of the inner product and
+  although these may be fast they may not meet the accuracy requirement
+  specified. See Accuracy and Stability of Numerical Algorithms By N J Higham
+  (ISBN 0-89871-355-2), Section 3.1.]}
 @end{ImplNote}
 @end{DocReq}
 
@@ -2995,6 +3028,10 @@ Inverse functions using established techniques such as LU decomposition with
 row interchanges followed by back and forward substitution. Implementations are
 recommended to refine the result by performing an iteration on the residuals;
 if this is done then it should be documented.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Solve and Inverse for Numerics.Generic_Real_Arrays should be
+implemented using established techniques such as LU decomposition and
+the result should be refined by iteration on the residuals.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[It is not the intention that any special provision
@@ -3002,10 +3039,18 @@ should be made to determine whether a matrix is ill-conditioned or not. The
 naturally occurring overflow (including division by zero) which will result
 from executing these functions with an ill-conditioned matrix and thus raise
 Constraint_Error is sufficient.]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[There isn't any advice for the implementation to
+document with this paragraph.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The test that a matrix is symmetric may be
 performed by using the equality operator to compare the relevant components.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The equality operator may be used to test that a matrix in
+Numerics.Generic_Real_Matrix is symmetric.]}]}
 
 @end{ImplAdvice}
 
@@ -3052,13 +3097,973 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Re} (X : Complex_Vector) @key{return} Real_Vector;
    @key{function} @AdaSubDefn{Im} (X : Complex_Vector) @key{return} Real_Vector;]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Set_Re} (X  : @key{in out} Complex_Vector;
+                     Re : @key{in}     Real_Vector);
+   @key{procedure} @AdaSubDefn{Set_Im} (X  : @key{in out} Complex_Vector;
+                     Im : @key{in}     Real_Vector);]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Compose_From_Cartesian} (Re     : Real_Vector)
+      @key{return} Complex_Vector;
+   @key{function} @AdaSubDefn{Compose_From_Cartesian} (Re, Im : Real_Vector)
+      @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Modulus}  (X     : Complex_Vector) @key{return} Real_Vector;
+   @key{function} "@key{abs}"    (Right : Complex_Vector) @key{return} Real_Vector
+                                                 @key{renames} Modulus;
+   @key{function} @AdaSubDefn{Argument} (X     : Complex_Vector) @key{return} Real_Vector;
+   @key{function} @AdaSubDefn{Argument} (X     : Complex_Vector;
+                      Cycle : Real'Base)      @key{return} Real_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument : Real_Vector)
+                                                    @key{return} Complex_Vector;
+   @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument : Real_Vector;
+                                Cycle             : Real'Base)
+                                                    @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Vector arithmetic operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+"       (Right  : Complex_Vector) @key{return} Complex_Vector;
+   @key{function} "-"       (Right  : Complex_Vector) @key{return} Complex_Vector;
+   @key{function} @AdaSubDefn{Conjugate} (X      : Complex_Vector) @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+"  (Left, Right : Complex_Vector) @key{return} Complex_Vector;
+   @key{function} "-"  (Left, Right : Complex_Vector) @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left, Right : Complex_Vector) @key{return} Complex;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Mixed Real_Vector and Complex_Vector arithmetic operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+" (Left  : Real_Vector;
+                 Right : Complex_Vector) @key{return} Complex_Vector;
+   @key{function} "+" (Left  : Complex_Vector;
+                 Right : Real_Vector)    @key{return} Complex_Vector;
+   @key{function} "-" (Left  : Real_Vector;
+                 Right : Complex_Vector) @key{return} Complex_Vector;
+   @key{function} "-" (Left  : Complex_Vector;
+                 Right : Real_Vector)    @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Real_Vector;    Right : Complex_Vector)
+      @key{return} Complex;
+   @key{function} "*" (Left  : Complex_Vector; Right : Real_Vector)
+      @key{return} Complex;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Vector scaling operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Complex;
+                 Right : Complex_Vector) @key{return} Complex_Vector;
+   @key{function} "*" (Left  : Complex_Vector;
+                 Right : Complex)        @key{return} Complex_Vector;
+   @key{function} "/" (Left  : Complex_Vector;
+                 Right : Complex)        @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Real'Base;
+                 Right : Complex_Vector) @key{return} Complex_Vector;
+   @key{function} "*" (Left  : Complex_Vector;
+                 Right : Real'Base)      @key{return} Complex_Vector;
+   @key{function} "/" (Left  : Complex_Vector;
+                 Right : Real'Base)      @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Other Complex_Vector operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Unit_Vector} (Index : Integer;
+                         Order : Positive;
+                         First : Integer := 1) @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Subprograms for Complex_Matrix types}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix selection, conversion and composition operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Re} (X : Complex_Matrix) @key{return} Real_Matrix;
+   @key{function} @AdaSubDefn{Im} (X : Complex_Matrix) @key{return} Real_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Set_Re} (X  : @key{in out} Complex_Matrix;
+                     Re : @key{in}     Real_Matrix);
+   @key{procedure} @AdaSubDefn{Set_Im} (X  : @key{in out} Complex_Matrix;
+                     Im : @key{in}     Real_Matrix);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Compose_From_Cartesian} (Re     : Real_Matrix)
+      @key{return} Complex_Matrix;
+   @key{function} @AdaSubDefn{Compose_From_Cartesian} (Re, Im : Real_Matrix)
+      @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Modulus}  (X     : Complex_Matrix) @key{return} Real_Matrix;
+   @key{function} "@key{abs}"    (Right : Complex_Matrix) @key{return} Real_Matrix
+                                                 @key{renames} Modulus;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Argument} (X     : Complex_Matrix) @key{return} Real_Matrix;
+   @key{function} @AdaSubDefn{Argument} (X     : Complex_Matrix;
+                      Cycle : Real'Base)      @key{return} Real_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument : Real_Matrix)
+                                                    @key{return} Complex_Matrix;
+   @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument : Real_Matrix;
+                                Cycle             : Real'Base)
+                                                    @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix arithmetic operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+"       (Right : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} "-"       (Right : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} @AdaSubDefn{Conjugate} (X     : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} @AdaSubDefn{Transpose} (X     : Complex_Matrix) @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+" (Left, Right : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} "-" (Left, Right : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} "*" (Left, Right : Complex_Matrix) @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left, Right : Complex_Vector) @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Complex_Vector;
+                 Right : Complex_Matrix) @key{return} Complex_Vector;
+   @key{function} "*" (Left  : Complex_Matrix;
+                 Right : Complex_Vector) @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Mixed Real_Matrix and Complex_Matrix arithmetic operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+" (Left  : Real_Matrix;
+                 Right : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} "+" (Left  : Complex_Matrix;
+                 Right : Real_Matrix)    @key{return} Complex_Matrix;
+   @key{function} "-" (Left  : Real_Matrix;
+                 Right : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} "-" (Left  : Complex_Matrix;
+                 Right : Real_Matrix)    @key{return} Complex_Matrix;
+   @key{function} "*" (Left  : Real_Matrix;
+                 Right : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} "*" (Left  : Complex_Matrix;
+                 Right : Real_Matrix)    @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Real_Vector;
+                 Right : Complex_Vector) @key{return} Complex_Matrix;
+   @key{function} "*" (Left  : Complex_Vector;
+                 Right : Real_Vector)    @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Real_Vector;
+                 Right : Complex_Matrix) @key{return} Complex_Vector;
+   @key{function} "*" (Left  : Complex_Vector;
+                 Right : Real_Matrix)    @key{return} Complex_Vector;
+   @key{function} "*" (Left  : Real_Matrix;
+                 Right : Complex_Vector) @key{return} Complex_Vector;
+   @key{function} "*" (Left  : Complex_Matrix;
+                 Right : Real_Vector)    @key{return} Complex_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix scaling operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Complex;
+                 Right : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} "*" (Left  : Complex_Matrix;
+                 Right : Complex)        @key{return} Complex_Matrix;
+   @key{function} "/" (Left  : Complex_Matrix;
+                 Right : Complex)        @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left  : Real'Base;
+                 Right : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} "*" (Left  : Complex_Matrix;
+                 Right : Real'Base)      @key{return} Complex_Matrix;
+   @key{function} "/" (Left  : Complex_Matrix;
+                 Right : Real'Base)      @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix inversion and related operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Solve} (A : Complex_Matrix; X: Complex_Vector)
+      @key{return} Complex_Vector;
+   @key{function} @AdaSubDefn{Solve} (A, X : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} @AdaSubDefn{Inverse} (A : Complex_Matrix) @key{return} Complex_Matrix;
+   @key{function} @AdaSubDefn{Determinant} (A : Complex_Matrix) @key{return} Complex;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Eigenvalues and vectors of a Hermitian matrix}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Eigenvalues}(A : Complex_Matrix) @key{return} Real_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Eigensystem}(A       : @key{in}  Complex_Matrix;
+                         Values  : @key{out} Real_Vector;
+                         Vectors : @key{out} Complex_Matrix);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Other Complex_Matrix operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Unit_Matrix} (Order            : Positive;
+                         First_1, First_2 : Integer := 1)
+                                            @key{return} Complex_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{end} Ada.Numerics.Generic_Complex_Arrays;]}
 
 @end{Example}
 
-**** The rest of this subclause has yet to be inserted ****
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[The library package Numerics.Complex_Arrays is
+declared pure and defines
+the same types and subprograms as Numerics.Generic_Complex_Arrays, except
+that the predefined type Float is systematically substituted for Real'Base,
+and the Real_Vector and Real_Matrix types exported by Numerics.Real_Arrays
+are systematically substituted for Real_Vector and Real_Matrix, and the
+Complex type exported by Numerics.Complex_Types is systematically
+substituted for Complex, throughout. Nongeneric equivalents for each of
+the other predefined floating point types are defined similarly, with the
+names Numerics.Short_Complex_Arrays, Numerics.Long_Complex_Arrays, etc.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Two types are defined and exported by
+Ada.Numerics.Generic_Complex_Arrays. The composite type Complex_Vector is
+provided to represent a vector with components of type Complex; it is defined
+as an unconstrained one-dimensional array with an index of type Integer. The
+composite type Complex_Matrix is provided to represent a matrix with components
+of type Complex; it is defined as an unconstrained, two-dimensional array with
+indices of type Integer.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[The effect of the various subprograms is as
+described below. In many cases they are described in terms of corresponding
+scalar operations in Numerics.Generic_Complex_Types. Any exception raised by
+those operations is propagated by the array subprogram. Moreover, any
+constraints on the parameters and the accuracy of the result for each
+individual component are as defined for the scalar operation.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[In the case of those operations which are defined
+to involve an inner product, Constraint_Error may be raised if an intermediate
+result has a component outside the range of Real'Base even though the final
+mathematical result would not.]}
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Re (X : Complex_Vector) @key{return} Real_Vector;
+@key{function} Im (X : Complex_Vector) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each function returns a vector of the specified
+cartesian components of X. The index range of the result is X'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Set_Re (X  : @key{in out} Complex_Vector; Re : @key{in} Real_Vector);
+@key{procedure} Set_Im (X  : @key{in out} Complex_Vector; Im : @key{in} Real_Vector);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each procedure replaces the specified (cartesian)
+component of each of the components of X by the value of the matching component
+of Re or Im; the other (cartesian) component of each of the components is
+unchanged. Constraint_Error is raised if X'Length is not equal to Re'Length or
+Im'Length.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Cartesian (Re     : Real_Vector) @key{return} Complex_Vector;
+@key{function} Compose_From_Cartesian (Re, Im : Real_Vector) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each function constructs a vector of Complex
+results (in cartesian representation) formed from given vectors of cartesian
+components; when only the real components are given, imaginary components of
+zero are assumed. The index range of the result is Re'Range. Constraint_Error
+is raised if Re'Length is not equal to Im'Length.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Modulus  (X     : Complex_Vector) @key{return} Real_Vector;
+@key{function} "@key{abs}"    (Right : Complex_Vector) @key{return} Real_Vector @key{renames} Modulus;
+@key{function} Argument (X     : Complex_Vector) @key{return} Real_Vector;
+@key{function} Argument (X     : Complex_Vector;
+                   Cycle : Real'Base)      @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each function calculates and returns a vector of
+the specified polar components of X or Right using the corresponding function
+in Numerics.Generic_Complex_Types. The index range of the result is X'Range or
+Right'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Polar (Modulus, Argument : Real_Vector)
+                                                 @key{return} Complex_Vector;
+@key{function} Compose_From_Polar (Modulus, Argument : Real_Vector;
+                             Cycle             : Real'Base)
+                                                 @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each function constructs a vector of Complex
+results (in cartesian representation) formed from given vectors of polar
+components using the corresponding function in Numerics.Generic_Complex_Types
+on matching components of Modulus and Argument. The index range of the result
+is Modulus'Range. Constraint_Error is raised if Modulus'Length is not equal to
+Argument'Length.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+" (Right : Complex_Vector) @key{return} Complex_Vector;
+@key{function} "-" (Right : Complex_Vector) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+Right. The index range of the result is Right'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Conjugate (X : Complex_Vector) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns the result of applying the
+appropriate function Conjugate in Numerics.Generic_Complex_Types to each
+component of X. The index range of the result is X'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+" (Left, Right : Complex_Vector) @key{return} Complex_Vector;
+@key{function} "-" (Left, Right : Complex_Vector) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+Left and the matching component of Right. The index range of the result is
+Left'Range. Constraint_Error is raised if Left'Length is not equal to
+Right'Length.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left, Right : Complex_Vector) @key{return} Complex;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the inner product of Left
+and Right. Constraint_Error is raised if Left'Length is not equal to
+Right'Length. This operation involves an inner product.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+" (Left  : Real_Vector;
+              Right : Complex_Vector) @key{return} Complex_Vector;
+@key{function} "+" (Left  : Complex_Vector;
+              Right : Real_Vector)    @key{return} Complex_Vector;
+@key{function} "-" (Left  : Real_Vector;
+              Right : Complex_Vector) @key{return} Complex_Vector;
+@key{function} "-" (Left  : Complex_Vector;
+              Right : Real_Vector)    @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+Left and the matching component of Right. The index range of the result is
+Left'Range. Constraint_Error is raised if Left'Length is not equal to
+Right'Length.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real_Vector;    Right : Complex_Vector) @key{return} Complex;
+@key{function} "*" (Left : Complex_Vector; Right : Real_Vector)    @key{return} Complex;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the inner product of Left
+and Right. Constraint_Error is raised if Left'Length is not equal to
+Right'Length. These operations involve an inner product.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex; Right : Complex_Vector) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
+each component of Right by the complex number Left using the appropriate
+operation "*" in Numerics.Generic_Complex_Types. The index range of the result
+is Right'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex_Vector; Right : Complex) @key{return} Complex_Vector;
+@key{function} "/" (Left : Complex_Vector; Right : Complex) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+the vector Left and the complex number Right. The index range of the result is
+Left'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real'Base; Right : Complex_Vector) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
+each component of Right by the real number Left using the appropriate operation
+"*" in Numerics.Generic_Complex_Types. The index range of the result is
+Right'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex_Vector; Right : Real'Base) @key{return} Complex_Vector;
+@key{function} "/" (Left : Complex_Vector; Right : Real'Base) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+the vector Left and the real number Right. The index range of the result is
+Left'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Unit_Vector (Index : Integer;
+                      Order : Positive;
+                      First : Integer := 1) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a @i{unit
+vector}@Defn2{Term=[unit vector],Sec=[complex vector]} with Order components
+and a lower bound of First. All components are set to (0.0,0.0) except for the
+Index component which is set to (1.0,0.0). Constraint_Error is raised if Index
+< First, Index > First + Order - 1, or if First + Order - 1 > Integer'Last.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Re (X : Complex_Matrix) @key{return} Real_Matrix;
+@key{function} Im (X : Complex_Matrix) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each function returns a matrix of the specified
+cartesian components of X. The index ranges of the result are those of X.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Set_Re (X : @key{in out} Complex_Matrix; Re : @key{in} Real_Matrix);
+@key{procedure} Set_Im (X : @key{in out} Complex_Matrix; Im : @key{in} Real_Matrix);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each procedure replaces the specified (cartesian)
+component of each of the components of X by the value of the matching component
+of Re or Im; the other (cartesian) component of each of the components is
+unchanged. Constraint_Error is raised if X'Length(1) is not equal to
+Re'Length(1) or Im'Length(1) or if X'Length(2) is not equal to Re'Length(2) or
+Im'Length(2).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Cartesian (Re     : Real_Matrix) @key{return} Complex_Matrix;
+@key{function} Compose_From_Cartesian (Re, Im : Real_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each function constructs a matrix of Complex
+results (in cartesian representation) formed from given matrices of cartesian
+components; when only the real components are given, imaginary components of
+zero are assumed. The index ranges of the result are those of Re.
+Constraint_Error is raised if Re'Length(1) is not equal to Im'Length(1) or
+Re'Length(2) is not equal to Im'Length(2).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Modulus  (X     : Complex_Matrix) @key{return} Real_Matrix;
+@key{function} "@key{abs}"    (Right : Complex_Matrix) @key{return} Real_Matrix @key{renames} Modulus;
+@key{function} Argument (X     : Complex_Matrix) @key{return} Real_Matrix;
+@key{function} Argument (X     : Complex_Matrix;
+                   Cycle : Real'Base)      @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each function calculates and returns a matrix of
+the specified polar components of X or Right using the corresponding function
+in Numerics.Generic_Complex_Types. The index ranges of the result are those of
+X or Right.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Polar (Modulus, Argument : Real_Matrix)
+                                                 @key{return} Complex_Matrix;
+@key{function} Compose_From_Polar (Modulus, Argument : Real_Matrix;
+                             Cycle             : Real'Base)
+                                                 @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each function constructs a matrix of Complex
+results (in cartesian representation) formed from given matrices of polar
+components using the corresponding function in Numerics.Generic_Complex_Types
+on matching components of Modulus and Argument. The index ranges of the result
+are those of Modulus. Constraint_Error is raised if Modulus'Length(1) is not
+equal to Argument'Length(1) or Modulus'Length(2) is not equal to
+Argument'Length(2).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+" (Right : Complex_Matrix) @key{return} Complex_Matrix;
+@key{function} "-" (Right : Complex_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+Right. The index ranges of the result are those of Right.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Conjugate (X : Complex_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns the result of applying the
+appropriate function Conjugate in Numerics.Generic_Complex_Types to each
+component of X. The index ranges of the result are those of X.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Transpose (X : Complex_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns the transpose of a matrix X.
+The first and second index ranges of the result are X'Range(2) and X'Range(1)
+respectively.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+" (Left, Right : Complex_Matrix) @key{return} Complex_Matrix;
+@key{function} "-" (Left, Right : Complex_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+Left and the matching component of Right. The index ranges of the result are
+those of Left. Constraint_Error is raised if Left'Length(1) is not equal to
+Right'Length(1) or Left'Length(2) is not equal to Right'Length(2).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left, Right : Complex_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation provides the standard mathematical
+operation for matrix multiplication. The first and second index ranges of the
+result are Left'Range(1) and Right'Range(2) respectively. Constraint_Error is
+raised if Left'Length(2) is not equal to Right'Length(1). This operation
+involves inner products.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left, Right : Complex_Vector) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the outer product of a
+(column) vector Left by a (row) vector Right using the appropriate operation
+"*" in Numerics.Generic_Complex_Types for computing the individual components.
+The first and second index ranges of the matrix result are Left'Range and
+Right'Range respectively.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left  : Complex_Vector;
+              Right : Complex_Matrix) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation provides the standard mathematical
+operation for multiplication of a (row) vector Left by a matrix Right. The
+index range of the (row) vector result is Right'Range(2). Constraint_Error is
+raised if Left'Length is not equal to Right'Length(1). This operation involves
+inner products.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left  : Complex_Matrix;
+              Right : Complex_Vector) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation provides the standard mathematical
+operation for multiplication of a matrix Left by a (column) vector Right. The
+index range of the (column) vector result is Left'Range(1). Constraint_Error is
+raised if Left'Length(2) is not equal to Right'Length. This operation involves
+inner products.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+" (Left  : Real_Matrix;
+              Right : Complex_Matrix) @key{return} Complex_Matrix;
+@key{function} "+" (Left  : Complex_Matrix;
+              Right : Real_Matrix)    @key{return} Complex_Matrix;
+@key{function} "-" (Left  : Real_Matrix;
+              Right : Complex_Matrix) @key{return} Complex_Matrix;
+@key{function} "-" (Left  : Complex_Matrix;
+              Right : Real_Matrix)    @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+Left and the matching component of Right. The index ranges of the result are
+those of Left. The exception Constraint_Error is raised if Left'Length(1) is
+not equal to Right'Length(1) or Left'Length(2) is not equal to
+Right'Length(2).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left  : Real_Matrix;
+              Right : Complex_Matrix) @key{return} Complex_Matrix;
+@key{function} "*" (Left  : Complex_Matrix;
+              Right : Real_Matrix)    @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation provides the standard mathematical
+operation for matrix multiplication. The first and second index ranges of the
+result are Left'Range(1) and Right'Range(2) respectively. Constraint_Error is
+raised if Left'Length(2) is not equal to Right'Length(1). These operations
+involve inner products.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left  : Real_Vector;
+              Right : Complex_Vector) @key{return} Complex_Matrix;
+@key{function} "*" (Left  : Complex_Vector;
+              Right : Real_Vector)    @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the outer product of a
+(column) vector Left by a (row) vector Right using the appropriate operation
+"*" in Numerics.Generic_Complex_Types for computing the individual components.
+The first and second index ranges of the matrix result are Left'Range and
+Right'Range respectively.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left  : Real_Vector;
+              Right : Complex_Matrix) @key{return} Complex_Vector;
+@key{function} "*" (Left  : Complex_Vector;
+              Right : Real_Matrix)    @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation provides the standard mathematical
+operation for multiplication of a (row) vector Left by a matrix Right. The
+index range of the (row) vector result is Right'Range(2). Constraint_Error is
+raised if Left'Length is not equal to Right'Length(1). These operations involve
+inner products.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left  : Real_Matrix;
+              Right : Complex_Vector) @key{return} Complex_Vector;
+@key{function} "*" (Left  : Complex_Matrix;
+              Right : Real_Vector)    @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation provides the standard mathematical
+operation for multiplication of a matrix Left by a (column) vector Right. The
+index range of the (column) vector result is Left'Range(1). Constraint_Error is
+raised if Left'Length(2) is not equal to Right'Length. These operations involve
+inner products.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex; Right : Complex_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
+each component of Right by the complex number Left using the appropriate
+operation "*" in Numerics.Generic_Complex_Types. The index ranges of the result
+are those of Right.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex_Matrix; Right : Complex) @key{return} Complex_Matrix;
+@key{function} "/" (Left : Complex_Matrix; Right : Complex) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+the matrix Left and the complex number Right. The index ranges of the result
+are those of Left.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real'Base; Right : Complex_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
+each component of Right by the real number Left using the appropriate operation
+"*" in Numerics.Generic_Complex_Types. The index ranges of the result are those
+of Right.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex_Matrix; Right : Real'Base) @key{return} Complex_Matrix;
+@key{function} "/" (Left : Complex_Matrix; Right : Real'Base) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation in Numerics.Generic_Complex_Types to each component of
+the matrix Left and the real number Right. The index ranges of the result are
+those of Left.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Solve (A : Complex_Matrix; X: Complex_Vector) @key{return} Complex_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a vector Y such that X is
+(nearly) equal to A * Y. This is the standard mathematical operation for
+solving a single set of linear equations. The index range of the result is
+X'Range. Constraint_Error is raised if A'Length(1), A'Length(2) and X'Length
+are not equal. Constraint_Error is raised if the matrix A is ill-conditioned.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Solve (A, X : Complex_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a matrix Y such that X is
+(nearly) equal to A * Y. This is the standard mathematical operation for
+solving several sets of linear equations. The index ranges of the result are
+those of X. Constraint_Error is raised if A'Length(1), A'Length(2) and
+X'Length(1) are not equal. Constraint_Error is raised if the matrix A is
+ill-conditioned.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Inverse (A : Complex_Matrix) @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a matrix B such that A * B is
+(nearly) equal to the unit matrix. The index ranges of the result are those of
+A. Constraint_Error is raised if A'Length(1) is not equal to A'Length(2).
+Constraint_Error is raised if the matrix A is ill-conditioned.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Determinant (A : Complex_Matrix) @key{return} Complex;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns the determinant of the matrix
+A. Constraint_Error is raised if A'Length(1) is not equal to A'Length(2).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Eigenvalues(A : Complex_Matrix) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns the eigenvalues of the
+Hermitian matrix A as a vector sorted into order with the largest first.
+Constraint_Error is raised if A'Length(1) is not equal to A'Length(2). The
+index range of the result is A'Range(1). Argument_Error is raised if the matrix
+A is not Hermitian.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Eigensystem(A       : @key{in}  Complex_Matrix;
+                      Values  :  @key{out} Real_Vector;
+                      Vectors :  @key{out} Complex_Matrix);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This procedure computes both the eigenvalues and
+eigenvectors of the Hermitian matrix A. The out parameter Values is the same as
+that obtained by calling the function Eigenvalues. The out parameter Vectors is
+a matrix whose columns are the eigenvectors of the matrix A. The order of the
+columns corresponds to the order of the eigenvalues. The eigenvectors are
+mutually orthonormal, including when there are repeated eigenvalues.
+Constraint_Error is raised if A'Length(1) is not equal to A'Length(2). The
+index ranges of the parameter Vectors are those of A. Argument_Error is raised
+if the matrix A is not Hermitian.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Unit_Matrix (Order            : Positive;
+                      First_1, First_2 : Integer := 1)
+                                         @key{return} Complex_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a square
+@i{unit matrix}@Defn2{Term=[unit matrix],Sec=[complex matrix]}
+with Order**2 components and
+lower bounds of First_1 and First_2 (for the first and second index ranges
+respectively). All components are set to (0.0,0.0) except for the main diagonal,
+whose components are set to (1.0,0.0). Constraint_Error is raised
+if First_1 + Order - 1 > Integer'Last or First_2 + Order - 1 > Integer'Last.]}
+
+@end{DescribeCode}
 
 @end{StaticSem}
+
+@begin{ImplReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Accuracy requirements for the subprograms Solve,
+Inverse, Determinant, Eigenvalues and Eigensystem are implementation defined.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[The
+accuracy requirements for the subprograms Solve,
+Inverse, Determinant, Eigenvalues and Eigensystem for type Complex_Matrix.]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[For operations not involving an inner product, the
+accuracy requirements are those of the corresponding operations of the type
+Real'Base and Complex in both the strict mode and the relaxed mode
+(see @RefSecNum{Numeric Performance Requirements}).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[For operations involving an inner product, no
+requirements are specified in the relaxed mode. In the strict mode the modulus
+of the absolute error of the inner product @i{X}*@i{Y} shall not exceed
+@i{g}*@key{abs}(@i{X})*abs(@i{Y}) where @i{g} is defined as]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@i{g} = @i{X}'Length * Real'Machine_Radix**(1-Real'Machine_Mantissa) for mixed complex and real operands]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1-Real'Machine_Mantissa) for two complex operands]}
+@end{Display}
+@end{ImplReq}
+
+@begin{DocReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Implementations shall document any techniques used
+to reduce cancellation errors such as extended precision arithmetic.]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[Any
+techniques used to reduce cancellation errors in
+Ada.Numerics.Generic_Complex_Arrays shall be documented.]}]}
+@begin{ImplNote}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The above accuracy requirement is met by the
+  canonical implementation of the
+  inner product by multiplication and addition using the corresponding
+  operations of type Complex and performing the cumulative addition using
+  ascending indices. Note however, that some hardware provides special
+  operations for the computation of the inner product and although these may be
+  fast they may not meet the accuracy requirement specified. See Accuracy and
+  Stability of Numerical Algorithms by N J Higham (ISBN 0-89871-355-2),
+  Sections 3.1 and 3.6.]}
+@end{ImplNote}
+@end{DocReq}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[The nongeneric equivalent packages may, but need
+not, be actual instantiations of the generic package for the appropriate
+predefined type.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Although many operations are defined in terms of
+operations from Numerics.Generic_Complex_Types, they need not be implemented by
+calling those operations provided that the effect is the same.]}
+@end{ImplPerm}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Implementations should implement the Solve and
+Inverse functions using established techniques. Implementations are recommended
+to refine the result by performing an iteration on the residuals; if this is
+done then it should be documented.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Solve and Inverse for Numerics.Generic_Complex_Arrays should be
+implemented using established techniques and the result should be refined
+by an iteration on the residuals.]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[It is not the intention that any special provision
+should be made to determine whether a matrix is ill-conditioned or not. The
+naturally occurring overflow (including division by zero) which will result
+from executing these functions with an ill-conditioned matrix and thus raise
+Constraint_Error is sufficient.]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[There isn't any advice for the implementation to
+document with this paragraph.]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[The test that a matrix is Hermitian may use the
+equality operator to compare the real components and negation followed by
+equality to compare the imaginary components
+(see @RefSecNum{Model of Floating Point Arithmetic}).]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The equality and negation operators may be used to test that a matrix is
+Hermitian.]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Implementations should not perform operations on
+mixed complex and real operands by first converting the real operand to
+complex. See @RefSecNum{Complex Types}.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Mixed real and complex operations should not be performed by converting
+the real operand to complex.]}]}
+
+@end{ImplAdvice}
 
 
 @begin{Extend95}

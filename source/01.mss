@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/01/13 05:06:13 $}
+@Comment{$Date: 2005/01/20 06:32:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -643,7 +643,7 @@ a recommendation, not a requirement.
 It is implementation defined
 whether or not a given recommendation is obeyed.
 @ImplDef{Whether or not each recommendation given in @ImplAdviceTitle
-is followed.}
+is followed - see @RefSecNum{Implementation Advice}.}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Revised]}
 The advice generally shows the intended implementation, but

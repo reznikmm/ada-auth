@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2005/01/18 05:34:46 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2005/01/20 06:32:02 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/01/18 05:34:46 $}
+@Comment{$Date: 2005/01/20 06:32:02 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1559,13 +1559,14 @@ dereferencing the controlling operands T1 and T2.
 @LabeledClause{Partition Communication Subsystem}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00273-01]}
 @Defn{partition communication subsystem (PCS)}
 @Defn{PCS (partition communication subsystem)}
 @redundant[The @i{Partition Communication Subsystem} (PCS) provides facilities for
 supporting communication between the active partitions of a distributed
-program. The package System.RPC is a language-defined interface to the PCS.]
-An implementation conforming to this Annex shall use the RPC
-interface to implement remote subprogram calls.
+program. The package System.RPC is a language-defined interface to the
+PCS.]@Chg{Version=[2],New=[],Old=[ An implementation conforming to this
+Annex shall use the RPC interface to implement remote subprogram calls.]}
 @begin{Reason}
 The prefix RPC is used rather than RSC because the term remote procedure call
 and its acronym are more familiar.
@@ -1744,6 +1745,15 @@ This requirement overrides that permission for System.RPC.]}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0087],ARef=[AI95-00082-01]}
 @ChgAdded{Version=[1],Text=[If the implementation of System.RPC is provided by
 the user, an implementation shall support remote subprogram calls as specified.]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00273-01]}
+@ChgAdded{Version=[2],Text=[If the implementation takes advantage of the
+implementation permission to use a different specification for System.RPC,
+it still needs to use it for remote subprogram calls, and allow the user
+to replace the body of System.RPC. It just isn't guaranteed to be portable
+to do so in Ada 2005 - an advantage which was more theoretical than real
+anyway.]}
+@end{Discussion}
 @end{ImplReq}
 
 @begin{DocReq}
@@ -1777,6 +1787,37 @@ implementation.
   target environment.
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00273-01]}
+@ChgAdded{Version=[2],Text=[An alternative declaration is allowed for
+package System.RPC as long as it provides a set of operations that is
+substantially equivalent to the specification defined in this clause.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Experience has proved that the definition
+  of System.RPC given here is inadequate for interfacing to to existing
+  distribution mechanisms (such as CORBA), especially on heterogeneous
+  systems. Rather than mandate a change in the mechanism (which would
+  break existing systems), require implementations to support multiple
+  mechanisms (which is impractical), or prevent the use of Annex E facilities
+  with existing systems (which would be silly), we simply make this facility
+  optional.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[One of the purposes behind System.RPC was
+  that knowledgeable users, rather than compiler vendors, could create
+  this package tailored to their networks. Experience has shown that
+  users get their RPC from vendors anyway; users have not taken advantage
+  of the flexibility provided by this defined interface. Moreover, one
+  could compare this defined interface to requiring Ada compilers to use
+  a defined interface to implement tasking. No one thinks that the latter is
+  a good idea, why should anyone believe that the former is?]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Therefore, this clause is made optional.
+  We considered deleting the clause outright, but we still require that
+  users may replace the package (whatever its interface). Also, it still
+  provides a useful guide to the implementation of this feature.]}
+@end{Reason}
 @end{ImplPerm}
 
 @begin{ImplAdvice}
@@ -1815,4 +1856,8 @@ into the stream.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0087],ARef=[AI95-00082-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the user can
   replace System.RPC.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00273-01]}
+  @ChgAdded{Version=[2],Text=[The specification of System.RPC can now be
+  tailored for an implementation.]}
 @end{DiffWord95}
