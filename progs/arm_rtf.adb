@@ -82,6 +82,7 @@ package body ARM_RTF is
     --  8/22/00 - RLB - Added Revised_Clause_Header.
     --  8/23/00 - RLB - Revised widths of AARM text to be more like RM.
     --  8/31/00 - RLB - Moved paragraphs in again.
+    --  9/26/00 - RLB - Added Syntax_Summary style.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -696,6 +697,15 @@ package body ARM_RTF is
 		       Style_String =>
 			 "\s39\widctlpar\adjustright \li1440\fi-200\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx1440 \snext39 ");
 			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Summary),
+		       Font_Size => 15,
+		       Style_Indent => 360,
+		       Style_Before => 0,
+		       Style_After => 65,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s40\widctlpar\adjustright \fs15\f0\cgrid\ql\li360\sa65\sl-170\slmult0 \snext40 ");
+			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Enumerated),
 		       Font_Size => 18,
 		       Style_Indent => 360,
@@ -704,7 +714,7 @@ package body ARM_RTF is
 		       Style_After => 100,
 		       Style_Justified => TRUE,
 		       Style_String =>
-			 "\s40\widctlpar\adjustright \li360\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx360 \snext40 ");
+			 "\s41\widctlpar\adjustright \li360\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx360 \snext41 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated),
 		       Font_Size => 15,
@@ -714,7 +724,7 @@ package body ARM_RTF is
 		       Style_After => 80,
 		       Style_Justified => TRUE,
 		       Style_String =>
-			 "\s41\widctlpar\adjustright \li1080\fi-200\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1080 \snext41 ");
+			 "\s42\widctlpar\adjustright \li1080\fi-200\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1080 \snext42 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Nested_Enumerated),
 		       Font_Size => 18,
@@ -724,7 +734,7 @@ package body ARM_RTF is
 		       Style_After => 100,
 		       Style_Justified => TRUE,
 		       Style_String =>
-			 "\s42\widctlpar\adjustright \li720\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx360 \snext42 ");
+			 "\s43\widctlpar\adjustright \li720\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx360 \snext43 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Enumerated),
 		       Font_Size => 15,
@@ -734,7 +744,7 @@ package body ARM_RTF is
 		       Style_After => 80,
 		       Style_Justified => TRUE,
 		       Style_String =>
-			 "\s43\widctlpar\adjustright \li1440\fi-200\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1080 \snext43 ");
+			 "\s44\widctlpar\adjustright \li1440\fi-200\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1080 \snext44 ");
 			  -- Note: Narrower space between and afterwards.
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -745,7 +755,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s44\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s45\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs20\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 17,
@@ -754,7 +764,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s45\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s46\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 17,
@@ -763,7 +773,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s46\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s47\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1138,6 +1148,15 @@ package body ARM_RTF is
 		       Style_String =>
 			 "\s39\widctlpar\adjustright \li1440\fi-200\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx1440 \snext39 ");
 			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Summary),
+		       Font_Size => 18,
+		       Style_Indent => 360,
+		       Style_Before => 0,
+		       Style_After => 90,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s40\widctlpar\adjustright \fs18\f0\cgrid\ql\li360\sa90\sl-200\slmult0 \snext40 ");
+			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Enumerated),
 		       Font_Size => 22,
 		       Style_Indent => 360,
@@ -1146,7 +1165,7 @@ package body ARM_RTF is
 		       Style_After => 110,
 		       Style_Justified => TRUE,
 		       Style_String =>
-			 "\s40\widctlpar\adjustright \li360\fi-230\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx360 \snext40 ");
+			 "\s41\widctlpar\adjustright \li360\fi-230\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx360 \snext41 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated),
 		       Font_Size => 18,
@@ -1156,7 +1175,7 @@ package body ARM_RTF is
 		       Style_After => 90,
 		       Style_Justified => TRUE,
 		       Style_String =>
-			 "\s41\widctlpar\adjustright \li1080\fi-200\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1080 \snext41 ");
+			 "\s42\widctlpar\adjustright \li1080\fi-200\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1080 \snext42 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Nested_Enumerated),
 		       Font_Size => 22,
@@ -1166,7 +1185,7 @@ package body ARM_RTF is
 		       Style_After => 110,
 		       Style_Justified => TRUE,
 		       Style_String =>
-			 "\s42\widctlpar\adjustright \li720\fi-230\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx360 \snext42 ");
+			 "\s43\widctlpar\adjustright \li720\fi-230\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx360 \snext43 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Enumerated),
 		       Font_Size => 18,
@@ -1176,7 +1195,7 @@ package body ARM_RTF is
 		       Style_After => 90,
 		       Style_Justified => TRUE,
 		       Style_String =>
-			 "\s43\widctlpar\adjustright \li1440\fi-200\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1080 \snext43 ");
+			 "\s44\widctlpar\adjustright \li1440\fi-200\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1080 \snext44 ");
 			  -- Note: Narrower space between.
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -1187,7 +1206,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s44\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s45\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs24\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 22,
@@ -1196,7 +1215,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s45\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s46\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 22,
@@ -1205,7 +1224,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s46\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s47\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1298,6 +1317,8 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Hanging in Bulleted;}");
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Code_Indented_Nested_Bulleted));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Code Indented Bulleted;}");
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Syntax_Summary));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Syntax Summary;}");
         Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Enumerated));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Enumerated;}");
         Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Enumerated));
@@ -1598,7 +1619,7 @@ package body ARM_RTF is
 	    when ARM_Output.Normal | ARM_Output.Wide |
 		 ARM_Output.Notes | ARM_Output.Notes_Header |
 		 ARM_Output.Annotations | ARM_Output.Wide_Annotations |
-		 ARM_Output.Index |
+		 ARM_Output.Index | ARM_Output.Syntax_Summary |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
 		 ARM_Output.Syntax_Indented |
@@ -1742,7 +1763,7 @@ package body ARM_RTF is
 	    when ARM_Output.Normal | ARM_Output.Wide |
 		 ARM_Output.Notes | ARM_Output.Notes_Header |
 		 ARM_Output.Annotations | ARM_Output.Wide_Annotations |
-		 ARM_Output.Index | ARM_Output.Examples |
+		 ARM_Output.Index | ARM_Output.Syntax_Summary | ARM_Output.Examples |
 		 ARM_Output.Small_Examples | ARM_Output.Indented_Examples |
 		 ARM_Output.Small_Indented_Examples | ARM_Output.Syntax_Indented |
 		 ARM_Output.Indented | ARM_Output.Small_Indented |

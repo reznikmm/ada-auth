@@ -75,6 +75,7 @@ package ARM_Output is
     --  8/17/00 - RLB - Replaced "Leading" by "Space_After".
     -- 		- RLB - Added Nested_Enumerated.
     --  8/22/00 - RLB - Added Revised_Clause_Header.
+    --  9/26/00 - RLB - Added Syntax_Summary style.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -116,7 +117,7 @@ package ARM_Output is
 	-- Raises Not_Valid_Error if in a paragraph.
 
     type Paragraph_Type is (Normal, Wide,
-	Notes, Notes_Header, Annotations, Wide_Annotations, Index,
+	Notes, Notes_Header, Annotations, Wide_Annotations, Index, Syntax_Summary,
 	Examples, Small_Examples,
 	Indented_Examples, Small_Indented_Examples,
 	Syntax_Indented, Code_Indented,
@@ -137,6 +138,8 @@ package ARM_Output is
 	--     as Notes).
 	-- Index paragraphs are not indented, and are in a smaller font. If
 	--     possible, lines that wrap are indented.
+	-- Syntax_Summary paragraphs are indented one unit, and are in a
+	--     smaller font.
 	-- Examples are indented one unit, and are in a fixed font.
 	-- Small_Examples are indented three units, and are in a smaller
 	--     fixed font.

@@ -110,6 +110,7 @@ package body ARM_Format is
     --			sections not appearing in the old document.
     --  9/ 8/00 - RLB - Added information about the language-defined
     --			subprograms to the index introduction.
+    --  9/26/00 - RLB - Added Syntax_Display format.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -158,6 +159,7 @@ package body ARM_Format is
 	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Syntax_Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
@@ -205,6 +207,7 @@ package body ARM_Format is
 	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Syntax_Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
@@ -1287,7 +1290,7 @@ package body ARM_Format is
 			    -- AARM for formatting purposes, even when they are.
 	        when Wide | Example_Text | Indented_Example_Text |
 		     Bulleted | Code_Indented |
-		     Nested_Bulleted | Display |
+		     Nested_Bulleted | Display | Syntax_Display |
 		     Syntax_Indented | Syntax_Production |
 		     Enumerated | Hanging_Indented =>
 		    -- This depends on the containing paragraph kind;
@@ -1299,6 +1302,7 @@ package body ARM_Format is
 		       Format_Object.Last_Paragraph_Subhead_Type = Code_Indented or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Nested_Bulleted or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Display or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Display or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Indented or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Production or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Enumerated or else
@@ -1728,6 +1732,9 @@ Ada.Text_IO.Put_Line ("%% Oops, Display in Wide_Annotated paragraph, line " & AR
 				    when ARM_Output.Index =>
 					Format_Object.Format := ARM_Output.Index;
 Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph in Index, line " & ARM_Input.Line_String (Input_Object));
+				    when ARM_Output.Syntax_Summary =>
+					Format_Object.Format := ARM_Output.Syntax_Summary;
+Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph in Syntax Summary, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Examples =>
 					Format_Object.Format := ARM_Output.Code_Indented;
 				    when ARM_Output.Small_Examples =>
@@ -1813,6 +1820,9 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 			    end if;
 			    Format_Object.No_Breaks := True;
 			end;
+        	    when Syntax_Display =>
+			Format_Object.Format := ARM_Output.Syntax_Summary;
+			Format_Object.No_Breaks := True;
         	    when Enumerated =>
         		if Enclosing_Format = Enumerated then
 			    -- Nesting of enumerated lists should be discouraged,
@@ -1922,7 +1932,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 			 Honest | Glossary_Marker | Bare_Annotation |
 			 Wide | Example_Text |
 			 Indented_Example_Text | Code_Indented | Bulleted |
-			 Nested_Bulleted | Display |
+			 Nested_Bulleted | Display | Syntax_Display |
 			 Syntax_Indented | Syntax_Production |
 			 Hanging_Indented | Enumerated | In_Table =>
 			null; -- No subheader. We don't change the last
@@ -1982,7 +1992,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 		    when Wide |
 			 Example_Text | Indented_Example_Text |
 			 Code_Indented | Bulleted | Nested_Bulleted |
-			 Display |
+			 Display | Syntax_Display |
 			 Syntax_Indented | Syntax_Production |
 			 Hanging_Indented | Enumerated | In_Table =>
 			null; -- Just a format.
@@ -2356,6 +2366,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "display" then
 		Format_Object.Next_Paragraph_Format_Type := Display;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "syntaxdisplay" then
+		Format_Object.Next_Paragraph_Format_Type := Syntax_Display;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "syntaxtext" then
@@ -6689,6 +6703,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    if Format_Object.Next_Paragraph_Format_Type = Example_Text or else
 			       Format_Object.Next_Paragraph_Format_Type = Indented_Example_Text or else
 			       Format_Object.Next_Paragraph_Format_Type = Display or else
+			       Format_Object.Next_Paragraph_Format_Type = Syntax_Display or else
 			       Format_Object.Next_Paragraph_Format_Type = Syntax_Production then
 			        -- These formats preserves all line breaks, but a
 			        -- "soft" break does not end a paragraph.
@@ -6738,6 +6753,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    if Format_Object.Next_Paragraph_Format_Type = Example_Text or else
 			       Format_Object.Next_Paragraph_Format_Type = Indented_Example_Text or else
 			       Format_Object.Next_Paragraph_Format_Type = Display or else
+			       Format_Object.Next_Paragraph_Format_Type = Syntax_Display or else
 			       Format_Object.Next_Paragraph_Format_Type = Syntax_Production then
 			        null; -- In these formats, blanks remain.
 			    else
@@ -6754,6 +6770,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        if Format_Object.Next_Paragraph_Format_Type = Example_Text or else
 			   Format_Object.Next_Paragraph_Format_Type = Indented_Example_Text or else
 			   Format_Object.Next_Paragraph_Format_Type = Display or else
+			   Format_Object.Next_Paragraph_Format_Type = Syntax_Display or else
 			   Format_Object.Next_Paragraph_Format_Type = Syntax_Production then
 			    -- Spaces are significant these formats.
 			    Check_Paragraph;

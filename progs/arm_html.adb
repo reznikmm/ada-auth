@@ -80,6 +80,7 @@ package body ARM_HTML is
     --  8/22/00 - RLB - Added Revised_Clause_Header.
     --  9/ 8/00 - RLB - Removed soft hyphen, as this does not work on either
     --			browser I tried.
+    --  9/26/00 - RLB - Added Syntax_Summary style.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -466,8 +467,13 @@ package body ARM_HTML is
 		Output_Object.Char_Count := 22;
 		-- Note: In HTML 4, we might be able to control the space above.
 	    when ARM_Output.Index =>
+		-- Note: We don't put this in a smaller font.
 		Ada.Text_IO.Put (Output_Object.Output_File, "<P>");
 		Output_Object.Char_Count := 3;
+	    when ARM_Output.Syntax_Summary =>
+		-- Note: We don't put this in a smaller font.
+		Ada.Text_IO.Put (Output_Object.Output_File, "<UL>");
+		Output_Object.Char_Count := 4;
 	    when ARM_Output.Examples =>
 	    	Ada.Text_IO.Put (Output_Object.Output_File, "<UL><TT>");
 		Output_Object.Char_Count := 8;
@@ -685,7 +691,8 @@ package body ARM_HTML is
 	    when ARM_Output.Normal | ARM_Output.Wide |
 		 ARM_Output.Notes | ARM_Output.Notes_Header |
 		 ARM_Output.Annotations | ARM_Output.Wide_Annotations |
-		 ARM_Output.Index | ARM_Output.Examples | ARM_Output.Small_Examples |
+		 ARM_Output.Index | ARM_Output.Syntax_Summary |
+		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
 		 ARM_Output.Syntax_Indented |
 		 ARM_Output.Indented |
@@ -735,8 +742,12 @@ package body ARM_HTML is
 	end if;
 	Output_Object.Is_In_Paragraph := False;
 	case Output_Object.Paragraph_Format is
-	    when ARM_Output.Normal | ARM_Output.Wide | ARM_Output.Index =>
+	    when ARM_Output.Normal | ARM_Output.Wide |
+	         ARM_Output.Index =>
 		Ada.Text_IO.Put_Line (Output_Object.Output_File, "</P>");
+		Ada.Text_IO.New_Line (Output_Object.Output_File);
+	    when ARM_Output.Syntax_Summary =>
+	    	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</UL>");
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 	    when ARM_Output.Notes | ARM_Output.Notes_Header =>
 	    	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL>");

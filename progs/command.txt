@@ -471,6 +471,9 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		  that spaces and breaks are preserved. The text preserves the
 		  size of its parent (if any). No page breaks are allowed
 		  within a paragraph.
+	SyntaxDisplay - The text is in a smaller font, is indented one level,
+		  and spaces and breaks are preserved. No page breaks are
+		  allowed within a paragraph.
 	Description - A paragraph with text indented 3 units; but the item
 		  is a hanging undent to the normal paragraph level. Usually
 		  used for attributes, but sometimes used for other items.

@@ -47,6 +47,8 @@ package body ARM_Syntax is
     --  8/ 4/00 - RLB - Changed style to make font smaller (per Duff).
     --  8/16/00 - RLB - Added NoParaNum; removed junk space (which caused
     --			blank lines and paragraph numbers).
+    --  9/26/00 - RLB - Revised to use SyntaxDisplay format to get more
+    --			control over the formating of this section.
 
     type String_Ptr is access String;
     type Rule_Type;
@@ -200,24 +202,24 @@ package body ARM_Syntax is
 	-- for error messages).
 	Temp : Rule_Ptr;
     begin
-	Format_Text ("@begin(display)" & Ascii.LF, "Prefix");
+	Format_Text ("@begin(syntaxdisplay)" & Ascii.LF, "Prefix");
 	Temp := Rule_List;
 	while Temp /= null loop
 	    if Ada.Strings.Fixed.Trim (Temp.Tabset, Ada.Strings.Right) = "" then
-	        Format_Text ("@noparanum@shrink<" &
+	        Format_Text ("@noparanum@;" &
 		    Temp.Clause(1..Temp.Clause_Len) & ":" & Ascii.LF &
-		    Temp.Rule.all & '>' & Ascii.LF & Ascii.LF,
+		    Temp.Rule.all & Ascii.LF & Ascii.LF,
 		    Temp.Clause(1..Temp.Clause_Len));
 	    else
 	        Format_Text ("@noparanum@tabclear{}@tabset{" &
 		    Ada.Strings.Fixed.Trim (Temp.Tabset, Ada.Strings.Right) &
-		    "}@shrink<" & Temp.Clause(1..Temp.Clause_Len) & ":" & Ascii.LF &
-		    Temp.Rule.all & '>' & Ascii.LF & Ascii.LF,
+		    "}" & Temp.Clause(1..Temp.Clause_Len) & ":" & Ascii.LF &
+		    Temp.Rule.all & Ascii.LF & Ascii.LF,
 		    Temp.Clause(1..Temp.Clause_Len));
 	    end if;
 	    Temp := Temp.Next;
 	end loop;
-	Format_Text ("@end(display)" & Ascii.LF, "Suffix");
+	Format_Text ("@end(syntaxdisplay)" & Ascii.LF, "Suffix");
     end Report;
 
 
@@ -283,7 +285,7 @@ package body ARM_Syntax is
         end if;
 
 
-	Format_Text ("@begin(display)" & Ascii.LF, "Prefix");
+	Format_Text ("@begin(syntaxdisplay)" & Ascii.LF, "Prefix");
 	Format_Text ("@tabclear()@tabset(P4, P32)" & Ascii.LF, "Prefix");
 	Format_Text ("@begin(twocol)" & Ascii.LF, "Prefix");
 	Temp := XRef_List;
@@ -292,23 +294,24 @@ package body ARM_Syntax is
 		Last.Name (1..Last.Name_Len) /= Temp.Name (1..Temp.Name_Len) then
 		-- New header:
 		if Last = null then
-		    Format_Text ("@noparanum@shrink{@nt{" & Temp.Name (1..Temp.Name_Len) &
-		         "}}" & Ascii.LF,
+		    Format_Text ("@noparanum@nt{" & Temp.Name (1..Temp.Name_Len) &
+		         "}" & Ascii.LF,
 		         Temp.Name (1..Temp.Name_Len) & " header");
 		else -- End the last item.
-		    Format_Text (Ascii.LF & Ascii.LF & "@noparanum@shrink{@nt{" & Temp.Name (1..Temp.Name_Len) &
-		         "}}" & Ascii.LF,
+		    Format_Text ("@shrink{@ }" & Ascii.LF & Ascii.LF & -- The "shrink" here to decrease the space between.
+			 "@noparanum@nt{" & Temp.Name (1..Temp.Name_Len) &
+		         "}" & Ascii.LF,
 		         Temp.Name (1..Temp.Name_Len) & " header");
 		end if;
 		Last := Temp;
 	    end if;
-	    Format_Text ("@\@shrink{@nt{" & Temp.Used_In(1..Temp.Used_In_Len) & "}@\" &
-		Temp.Clause(1..Temp.Clause_Len) & '}' & Ascii.LF,
+	    Format_Text ("@\@nt{" & Temp.Used_In(1..Temp.Used_In_Len) & "}@\" &
+		Temp.Clause(1..Temp.Clause_Len) & Ascii.LF,
 	        Temp.Name (1..Temp.Name_Len) & " ref " & Temp.Clause(1..Temp.Clause_Len));
 	    Temp := Temp.Next;
 	end loop;
 	Format_Text ("@end(twocol)" & Ascii.LF, "Suffix");
-	Format_Text ("@end(display)" & Ascii.LF, "Suffix");
+	Format_Text ("@end(syntaxdisplay)" & Ascii.LF, "Suffix");
     end XRef;
 
 end ARM_Syntax;

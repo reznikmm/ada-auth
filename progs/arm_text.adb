@@ -76,6 +76,7 @@ package body ARM_Text is
     -- 		- RLB - Added Nested_Enumerated.
     --  8/22/00 - RLB - Added Revised_Clause_Header.
     --  8/23/00 - RLB - Fixed a problem with long lines in examples.
+    --  9/26/00 - RLB - Added Syntax_Summary style.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -286,6 +287,7 @@ package body ARM_Text is
 		Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		Output_Object.Char_Count := 4;
 	    when ARM_Output.Index => Output_Object.Indent_Amount := 0;
+	    when ARM_Output.Syntax_Summary => Output_Object.Indent_Amount := 6;
 	    when ARM_Output.Examples => Output_Object.Indent_Amount := 6;
 	    when ARM_Output.Small_Examples => Output_Object.Indent_Amount := 10;
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
@@ -474,7 +476,7 @@ package body ARM_Text is
 	    when ARM_Output.Normal | ARM_Output.Wide |
 		 ARM_Output.Notes | ARM_Output.Notes_Header |
 		 ARM_Output.Annotations | ARM_Output.Wide_Annotations |
-		 ARM_Output.Index |
+		 ARM_Output.Index | ARM_Output.Syntax_Summary |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
 		 ARM_Output.Syntax_Indented |

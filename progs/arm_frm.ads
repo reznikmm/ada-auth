@@ -65,6 +65,7 @@ package ARM_Format is
     --  8/17/00 - RLB - Changed Leading flag to Space_After.
     --  8/28/00 - RLB - Added flags for ChgAttribute and ChgImpldef commands.
     --  8/31/00 - RLB - Added the New_Changes change kind.
+    --  9/26/00 - RLB - Added Syntax_Display format.
 
     type Format_Type is tagged limited private;
 
@@ -157,8 +158,8 @@ private
 	-- Format only:
 	Wide, Example_Text,
 	Indented_Example_Text, Code_Indented, Bulleted, Nested_Bulleted,
-	Display, Syntax_Indented, Syntax_Production, Enumerated,
-	Hanging_Indented, In_Table);
+	Display, Syntax_Display, Syntax_Indented, Syntax_Production,
+	Enumerated, Hanging_Indented, In_Table);
 
     type Format_Type is tagged limited record
 	-- Document information:
