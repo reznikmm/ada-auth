@@ -140,6 +140,9 @@ package body ARM_Format is
     --			are links.
     --  9/15/04 - RLB - Fixed incorrect name for LabeledAddedSubClause command.
     --		- RLB - Fixed to lift limit on number of inserted paragraphs.
+    -- 10/28/04 - RLB - Replaced double single quotes with double quotes,
+    --			as directed by the ARG.
+    --		- RLB - Added "AddedNormal" ChgRef kind.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1691,7 +1694,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	            Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len + 2;
                 end if;
 	    else --if Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Revised or else
-		 --   Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Deleted then
+		 --   Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Deleted or else
+		 --   Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Inserted_Normal_Number then
 	        if Is_AARM_Paragraph (Format_Object.Next_Paragraph_Subhead_Type) then
 	            Format_Object.Current_Paragraph_String(1 .. PNum_Pred'Last-1) :=
 		        PNum_Pred(2..PNum_Pred'Last);
@@ -3129,6 +3133,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right)) =
 			"added" then
 			Kind := ARM_Database.Inserted;
+		    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right)) =
+			"addednormal" then
+			Kind := ARM_Database.Inserted_Normal_Number;
 		    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right)) =
 			"deleted" then
 			Kind := ARM_Database.Deleted;
@@ -5570,8 +5577,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        Text => Clause_Number_Text,
 					Clause_Number => Clause_Number_Text);
 				    ARM_Output.Ordinary_Text (Output_Object, ", ");
-				    ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Quote);
-				    ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Quote);
+				    -- Was: (To match the Ada 95 Standard)
+				    --ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Quote);
+				    --ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Quote);
+				    ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Double_Quote);
 				    if Format_Object.Change_Version < '1' or else
 				       Format_Object.Changes = ARM_Format.Old_Only then
 					-- Use original version:
@@ -5597,8 +5606,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Text => Title(1..Title_Length),
 					    Clause_Number => Clause_Number_Text);
 				    end if;
-				    ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
-				    ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
+				    -- Was: (To match the Ada 95 Standard)
+				    --ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
+				    --ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
+				    ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Double_Quote);
 			        else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Ref_Section_Number then
 				    Check_Paragraph;
 				    ARM_Output.Clause_Reference (Output_Object,
@@ -6104,7 +6115,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    -- Read (and possibly generate) a "Ref" or "ARef" parameter.
 				    -- (Note: we put it here so it appears after the hang item.)
 
-			    when ARM_Database.Inserted =>
+			    when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
 			        Gen_Ref_or_ARef_Parameter(Display_Ref);
 				    -- Read (and possibly generate) a "Ref" or "ARef" parameter.
 				    -- (Note: we put it here so it appears before the hang item.)
@@ -6634,13 +6645,17 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Format_Object.Last_Non_Space := True;
 		when Left_Quote_Pair =>
 		    Check_Paragraph;
-		    ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Quote);
-		    ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Quote);
+		    -- Was: To match the Ada 95 standard:
+		    --ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Quote);
+		    --ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Quote);
+		    ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Double_Quote);
 		    Format_Object.Last_Non_Space := True;
 		when Right_Quote_Pair =>
 		    Check_Paragraph;
-		    ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
-		    ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
+		    -- Was: To match the Ada 95 standard:
+		    --ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
+		    --ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Quote);
+		    ARM_Output.Special_Character (Output_Object, ARM_Output.Right_Double_Quote);
 		    Format_Object.Last_Non_Space := True;
 
 		when Unknown =>
@@ -7057,7 +7072,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    case Kind is
 				when ARM_Database.None =>
 				    return "";
-				when ARM_Database.Inserted =>
+				when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
 				    return "@Chgref{Version=[" & Version &
 					"],Kind=[Added]}";
 				when ARM_Database.Deleted =>
@@ -7267,7 +7282,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
 					    ").";
 				    end if;
-				when ARM_Database.Inserted =>
+				when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
 				    if Format_Object.Document = ARM_Format.RM_ISO then
 					return "@Chg{Version=[" & Format_Object.Impdef_Version &
 					    "], New=[ See @RefSecbyNum{" & Clause_String & "}.],Old=[]}";

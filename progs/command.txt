@@ -242,7 +242,8 @@ Text commands:
 
 @RefSec{<title>} - Generates a reference to the clause "title". (This must
 	match exactly except for case). The reference is of the form
-	"<clause number>, ``<title>''".
+	"<clause number>, ``<title>''". (The ARG has directed that this be
+	changed to '<clause number>, "<title>"').
 @RefSecNum{<title>} - Generates a reference to the clause "title". (This must
 	match exactly except for case). The reference is of the form
 	"<clause number>".
@@ -417,15 +418,17 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
         precedes any text of the paragraph. The version number of the change is
 	<version>. [This is "1" for technical corrigenum 1; "2" for amendment 1].
 	Kind is either "Revised" (an ordinary change), "Added" (for a paragraph
-	added by the change), or "Deleted" (for a paragraph deleted by
-	by the change) [These control the paragraph numbering of the
-	following paragraph.] The <DR_Number>(s) and/or <AI_Number>(s) that
-	triggered the change are given. As many references as necessary can be
-	given. (Zero is allowed).
+	added by the change), "AddedNormal" (for a paragraph added by the
+	change which gets a normal paragraph number - used for insertions at
+	the end of clauses and added to new clauses), or "Deleted" (for a
+	paragraph deleted by by the change) [These control the paragraph
+	numbering of the following paragraph.] The <DR_Number>(s) and/or
+	<AI_Number>(s) that triggered the change are given. As many references
+	as necessary can be given. (Zero is allowed).
 	Note: If there are changes to the same paragraph in multiple versions,
-	each version should have their own chgref. The Kind should be the same
-	for all chgrefs - the numbering is the same no matter when the paragraph
-	was added or deleted.
+	each version should have their own chgref. *** THIS DOESN'T WORK ***
+	The Kind should be the same for all chgrefs - the numbering is the
+	same no matter when the paragraph was added or deleted.
 @chgnote{<text>} Notes on particular change. This is treated as a comment; it
 	has a separate command solely so that stripped easily in the future.
 @chg{[Version=[<Version>],]New=[<new text>],Old=[<old text>]}
@@ -618,8 +621,12 @@ various mathematical symbols.
 @rquote - Right (directed) single quote.
 @ldquote - Left (directed) double quote.
 @rdquote - Right (directed) double quote.
-@lquotes - Pair of left (directed) single quotes.
-@rquotes - Pair of rright (directed) single quotes.
+@lquotes - Pair of left (directed) single quotes. (Note: The ARG has directed
+	   that these be changed to a left double quote, so this is now the
+	   same as ldquote.)
+@rquotes - Pair of right (directed) single quotes. (Note: The ARG has directed
+	   that these be changed to a right double quote, so this is now the
+	   same as rdquote.)
 
 -- Tables:
 @table(Columns=<number>,

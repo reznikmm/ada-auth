@@ -10,9 +10,9 @@ package body ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -43,6 +43,7 @@ package body ARM_Database is
     --
     --  5/16/00 - RLB - Created package.
     --  8/28/00 - RLB - Added revision info to database.
+    -- 10/28/04 - RLB - Added Inserted_Normal_Number change kind.
 
     type String_Ptr is access String;
     type Item is record
@@ -144,6 +145,9 @@ package body ARM_Database is
 		when Inserted =>
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[Added]}";
+		when Inserted_Normal_Number =>
+		    return "@ChgRef{Version=[" & Item.Version &
+			"],Kind=[Added-Normal]}";
 		when Revised =>
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[Revised]}";
