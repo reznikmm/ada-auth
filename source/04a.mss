@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/11/08 04:56:36 $}
+@Comment{$Date: 2004/11/10 00:57:19 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2799,8 +2799,9 @@ for @i<universal_access> shall be of a specific anonymous access type.],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This prevents compatibility problems by insuring that
-these operators are not used for named access types. Note that @key{null}
-doesn't count, as its type is not specific.],Old=[]}
+these operators are not used for named access types. Also, universal access
+types do not count for the purposes of this rule. Otherwise, equality
+expressions like (X = @key{null}) would be ambiguous for normal access types.],Old=[]}
 @end{Reason}
 @end{Resolution}
 

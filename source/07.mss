@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2004/11/08 04:56:38 $}
+@Comment{$Date: 2004/11/10 00:57:20 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1186,10 +1186,13 @@ finalization is still done for controlled components of the full view;
 task dependence rules still apply to components that are task
 objects.
 
-Partial views provide assignment (unless the view is limited),
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+Partial views provide @Chg{Version=[2],New=[initialization],
+Old=[assignment (unless the view is limited)]},
 membership tests, selected components for the selection of
 discriminants and inherited components, qualification,
-and explicit conversion.
+and explicit conversion.@Chg{Version=[2],New=[ Nonlimited partial views
+also provide @nt{assignment_statement}s.],Old=[]}
 
 For a subtype S of a partial view, S'Size is defined
 (see @RefSecNum{Operational and Representation Attributes}).
@@ -1265,6 +1268,11 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0018],ARef=[AI95-00033-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Clarified when additional operations
 are declared.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[Revised the note on operations of partial views to
+reflect that limited types do have an assignment operation, but not
+@nt{assignment_statement}s.],Old=[]}
 @end{DiffWord95}
 
 

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/11/08 04:56:39 $}
+@Comment{$Date: 2004/11/10 00:57:20 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1664,13 +1664,22 @@ irrelevant, since failing these tests is highly unlikely.
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<object_renaming_declaration>,rhs="@Syn2{defining_identifier} : @Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name};"}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+@Syn{lhs=<object_renaming_declaration>,rhs="@Chg{Version=[2],New=[
+    ],Old=[]}@Syn2{defining_identifier} : @Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name};@Chg{Version=[2],New=[
+    @Syn2{defining_identifier} : @Syn2{access_definition} @key{renames} @SynI{object_}@Syn2{name};],Old=[]}"}
 @end{Syntax}
 
 @begin{Resolution}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00254-01]}
 The type of the @SynI{object_}@nt{name} shall resolve to
-the type determined by the @nt{subtype_mark}.
+the type determined by the @nt{subtype_mark}@Chg{Version=[2],New=[,
+or in the case where the type is defined by an @nt{access_definition}, to a
+specific anonymous access type which in the case of an access-to-object type
+shall have the same designated type as that of the @nt{access_definition} and
+in the case of an access-to-subprogram type shall have a designated profile
+which is subtype conformant with that of the @nt{access_definition}],Old=[]}.
 
 @begin{Reason}
 @leading@;A previous version of Ada 9X used the usual
@@ -1703,12 +1712,20 @@ That makes the rule different for @key[in] vs. @key[in out].
 @end{Resolution}
 
 @begin{Legality}
-The renamed entity shall be an object.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+The renamed entity shall be an object.@Chg{Version=[2],New=[ In the case
+where the type is defined by an @nt{access_definition} of an access-to-object
+type, the renamed entity shall be of an access-to-constant
+type if and only if the @nt{access_definition} defines an access-to-constant
+type.],Old=[]}
 
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
 The renamed entity shall not be a subcomponent that depends on
 discriminants of a variable whose nominal subtype is unconstrained,
-unless this subtype is indefinite, or the variable is aliased.
+unless this subtype is indefinite, or the variable is @Chg{Version=[2],
+New=[is constrained by its initial value],Old=[aliased]}.
 A @nt{slice} of an array shall not be renamed if
 this restriction disallows renaming of the array.
 @Chg{New=[In addition to the places where Legality Rules normally apply, these
@@ -1748,13 +1765,13 @@ could disappear even when the nominal subtype would prevent the problem:],Old=[]
 @key{end} G;],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@key{type} T2 (D2 : Boolean := True) @key{is} @key{new} T1 (D1 => D2);
+@Chg{New=[@key{type} T2 (D2 : Boolean := False) @key{is} @key{new} T1 (D1 => D2);
 @Comment{Blank line}
 Y : T2;
 @Comment{Blank line}
 @key{package} I @key{is new} G (T2, Y);
 @Comment{Blank line}
-Y := (D1 => True); -- Oops!  What happened to I.C1_Ren?],Old=[]}
+Y := (D1 => True); -- @RI[Oops!  What happened to I.C1_Ren?]],Old=[]}
 @end{Example}
 
 
@@ -1774,6 +1791,7 @@ appropriate.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 An @nt{object_renaming_declaration} declares a new view
 @Redundant{of the renamed object} whose
 properties are identical to those of the renamed view.
@@ -1782,8 +1800,8 @@ properties are identical to those of the renamed view.
 In particular, its value and whether or not it is a constant
 are unaffected; similarly, the constraints that apply to an object are
 not affected by renaming (any constraint implied by the
-@nt{subtype_mark} of the @nt{object_renaming_declaration}
-is ignored).]
+@nt{subtype_mark} @Chg{Version=[2],New=[or @nt{access_definition} ],Old=[]}of
+the @nt{object_renaming_declaration} is ignored).]
 @begin{Discussion}
 Because the constraints are ignored,
 it is a good idea
@@ -1812,11 +1830,40 @@ It is incorrect in the case of an object with an indefinite
 unconstrained nominal subtype.
 @end{DiffWord83}
 
+@begin{Incompatible95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+@Chg{Version=[2],New=[@Leading@;@Defn{incompatibilities with Ada 95}
+Aliased variables are not necessarily constrained in Ada
+2005 (see @RefSecNum{Array Types}). Therefore, renaming a subcomponent of
+an aliased variable is no longer necessarily safe, and thus may be illegal
+if the component may disappear or change shape, while the same renaming
+would have been legal in Ada 95. Note that most allocated
+objects are still constrained by their initial value (see @RefSecNum{Allocators},
+and thus have no change in the legality of renaming. For example, using the
+type T2 of the previous example:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+@Chg{Version=[2],New=[   AT : @key{aliased} T2;
+   C1_Ren : Integer @key{renames} AT.C1; -- @RI[Legal in Ada 2005, illegal in Ada 95]
+   AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95, but does not in Ada 2005,]
+                                   -- @RI[so C1_Ren becomes invalid when assigned.]],Old=[]}
+@end{Example}
+@end{Incompatible95}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+A renaming can have an anonymous access type. In that case, the accessibility
+of the renaming is that of the original object (accessibility is not
+lost as it is for a component or stand-alone object).],Old=[]}
+@end{Extend95}
+
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0017],ARef=[AI95-00184-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Fixed to forbid renamings of
 depends-on-discriminant components if the type @i{might} be definite.],Old=[]}
 @end{DiffWord95}
+
 
 @LabeledSubClause{Exception Renaming Declarations}
 
@@ -1844,6 +1891,7 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @RI{-- see @Ref
 @end{Example}
 @end{Examples}
 
+
 @LabeledSubClause{Package Renaming Declarations}
 
 @begin{Intro}
@@ -1855,7 +1903,9 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @RI{-- see @Ref
 @end{Syntax}
 
 @begin{Legality}
-The renamed entity shall be a package.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
+The renamed entity shall
+be @Chg{Version=[2],New=[a nonlimited view of ],Old=[]}a package.
 @end{Legality}
 
 @begin{StaticSem}
@@ -1869,6 +1919,12 @@ A @nt{package_renaming_declaration} declares a new view
 @key[package] TM @key[renames] Table_Manager;
 @end{Example}
 @end{Examples}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@Chg{Version=[2],New=[Limited views of packages cannot be renamed.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Subprogram Renaming Declarations}
 
@@ -1889,7 +1945,10 @@ as defined in Section 3.
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<subprogram_renaming_declaration>,rhs="@Syn2{subprogram_specification} @key{renames} @SynI{callable_entity_}@Syn2{name};"}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
+@Syn{lhs=<subprogram_renaming_declaration>,rhs="@Chg{Version=[2],New=<
+    [@Syn2{overriding_indicator}]
+    >,Old=<>}@Syn2{subprogram_specification} @key{renames} @SynI{callable_entity_}@Syn2{name};"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -1969,9 +2028,24 @@ would not be able to determine the convention of the subprogram. Other
 circular renames are handled below; see @BoundedTitle.],Old=[]}
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00228-01]}
+@Chg{Version=[2],New=[If the @Syni{callable_entity_}@nt{name} of a renaming
+denotes a subprogram which shall be overridden
+(see @RefSecNum{Abstract Types and Subprograms}), then the renaming is
+illegal.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00228-01]}
+@Chg{Version=[2],New=[Such a rename cannot be of the inherited subprogram
+(which is shall-be-overridden because it cannot be called),
+and thus cannot squirrel away a subprogram (see below). That would be
+confusing, so we make it illegal. The renaming is allowed after the
+overriding, as then the @nt{name} will denote the overriding subprogram,
+not the inherited one.],Old=[]}
+@end{Reason}
+
 A @nt{name} that denotes a formal parameter
 of the @nt{subprogram_specification}
-is not allowed within the @i{callable_entity_}@nt{name}.
+is not allowed within the @Syni{callable_entity_}@nt{name}.
 @begin{Reason}
 @leading@keepnext@;This is to prevent things like this:
 @begin{Example}
@@ -2008,13 +2082,15 @@ For example, it is illegal for the @nt{entry_call_statement} of a
 But what looks like a procedure call will do things like barrier
 waiting.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00228-01]}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0105],ARef=[AI95-00211-01]}
 @Chg{New=[All properties of the renamed entity are inherited by the new view
-unless otherwise stated by this International Standard.
-In particular, if the renamed entity is abstract or requires overridding
-(see @RefSecNum{Abstract Types and Subprograms}), the new view also is
-abstract or requires overridding. (The renaming will often be illegal in
-these cases, as a renaming cannot be overridden.)],Old=[]}
+unless otherwise stated by this International Standard. In particular, if the
+renamed entity is abstract@Chg{Version=[2],New=[],Old=[ or requires
+overridding (see @RefSecNum{Abstract Types and Subprograms})]}, the new view
+also is abstract @Chg{Version=[2],New=[],Old=[or requires overridding ]}. (The renaming
+will often be illegal in @Chg{Version=[2],New=[this case],Old=[these cases]},
+as a renaming cannot be overridden.)],Old=[]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -2175,6 +2251,14 @@ renames-as-body, so that the location of elaboration checks is clear.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0027],ARef=[AI95-00135-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Clarified that circular renames-as-body
 is illegal (if it can be detected in time) or a bounded error.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@Chg{Version=[2],New=[@nt{Overriding_indicator} (see @RefSecNum{Subprogram Declarations}
+and @RefSecNum{Visibility}) is optionally added to subprogram renamings.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00228-01]}
+@Chg{Version=[2],New=[Clarified that renaming a shall-be-overridden subprogram
+is illegal.],Old=[]}
 @end{DiffWord95}
 
 
@@ -2511,7 +2595,7 @@ of the construct shall resolve either to @i(T), or:
 This rule is @i{not} intended to create a preference for the specific
 type @em such a preference would cause Beaujolais effects.
 @end{Ramification}
-@begin(itemize)
+@begin(Inneritemize)
     to @i(T)'Class; or
 @begin{Ramification}
       This will only be legal as part of a call on a dispatching operation;
@@ -2521,23 +2605,38 @@ type @em such a preference would cause Beaujolais effects.
 
     to a universal type that covers @i(T); or
 
-    when @i(T) is an anonymous access type
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+    when @i(T) is @Chg{Version=[2],New=[a specific],Old=[an]} anonymous
+    access@Chg{Version=[2],New=[-to-object],Old=[]} type
     (see @RefSecNum{Access Types}) with designated type @i(D),
-    to an access-to-variable type
-    whose designated type is @i(D)'Class or is covered by @i(D).
+    to an access-to-@Chg{Version=[2],New=[object],Old=[variable]} type
+    whose designated type is @i(D)'Class or is covered by
+    @i(D)@Chg{Version=[2],New=[, and that is access-to-constant only if
+    @i(T) is access-to-constant; or],Old=[.]}
+
 @begin{Ramification}
-      Because it says @lquotes@;access-to-variable@rquotes@; instead of @lquotes@;access-to-object,@rquotes@;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+      Because @Chg{Version=[2],New=[access-to-constant is included in this rule,],
+      Old=[it says @lquotes@;access-to-variable@rquotes@; instead of @lquotes@;access-to-object,@rquotes@;]}
       two subprograms that differ only in that one has a parameter
       of an access-to-constant type,
-      and the other has an access parameter, are distinguishable
-      during overload resolution.
+      and the other has an
+      access@Chg{Version=[2],New=[-to-variable],Old=[]} parameter,
+      are distinguishable during overload resolution.
 
       The case where the actual is access-to-@i(D)'Class will only
       be legal as part of a call on a dispatching operation;
       see @RefSec(Dispatching Operations of Tagged Types).
       Note that that rule is not a @ResolutionName.
 @end{Ramification}
-@end(itemize)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
+@Chg{Version=[2],New=[when @i(T) is an anonymous access-to-subprogram type
+     (see @RefSecNum{Access Types}), to an access-to-subprogram type whose
+     designated profile is subtype-conformant with that of @i{T}.],Old=[]}
+
+
+@end(Inneritemize)
 @end{Itemize}
 
 @RootDefn[expected profile]
@@ -2808,3 +2907,11 @@ Cases like the Val attribute are now handled using the normal type
 resolution rules, instead of having special cases that explicitly allow
 things like @lquotes@;any integer type.@rquotes@;
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Generalized the anonymous access resolution rules to support the new
+capabilities of anonymous access types (that is, access-to-subprogram and
+access-to-constant).],Old=[]}
+@end{Extend95}

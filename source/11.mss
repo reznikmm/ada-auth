@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2004/11/05 05:47:51 $}
+@Comment{$Date: 2004/11/10 00:57:21 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1007,7 +1007,7 @@ string-returning functions in Ada.],Old=[]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[Pragma Assert is used to assert the truth of a boolean
+@Chg{Version=[2],New=[Pragma Assert is used to assert the truth of a Boolean
 expression at any point within a sequence of declarations or statements. Pragma
 Assertion_Policy is used to control whether such assertions@Defn{Assertions}
 are to be ignored by the implementation, checked at run-time, or handled in
@@ -1096,7 +1096,7 @@ the policy that applies within the generic unit.],Old=[]}
 is interpreted by the implementation. If the assertion policy is Ignore at the
 point of a pragma Assert, the pragma is ignored. If the assertion policy is
 Check at the point of a @nt{pragma} Assert, the elaboration of the pragma
-consists of evaluating the boolean expression, and if it evaluates to False,
+consists of evaluating the Boolean expression, and if it evaluates to False,
 evaluating the Message string, if any, and raising the exception
 Ada.Assertions.Assertion_Error, with a message if the Message argument is
 provided.],Old=[]}
@@ -1124,8 +1124,8 @@ Ada.Assertions.Assert with a Message parameter is equivalent to:],Old=[]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[The procedures Assertions.Assert have these effects independent of the
-assertion policy in effect.],Old=[]}
+@Chg{Version=[2],New=[The procedures Assertions.Assert have these
+effects independently of the assertion policy in effect.],Old=[]}
 
 @end{RunTime}
 
@@ -1144,7 +1144,7 @@ would be incorrect, as Exception_Name would return the wrong name.],Old=[]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[Normally, the boolean expression in an Assert pragma
+@Chg{Version=[2],New=[Normally, the Boolean expression in an Assert pragma
 should not call functions that have significant side-effects when the result of
 the expression is True, so that the particular assertion policy in effect will
 not affect normal operation of the program.],Old=[]}
