@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2005/03/03 06:18:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2005/03/04 06:44:25 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/03/03 06:18:23 $}
+@Comment{$Date: 2005/03/04 06:44:25 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -422,12 +422,15 @@ an @nt{object_declaration} of an object of that type
 need not be at library level.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00253-01],ARef=[AI95-00303-01]}
 The Interrupt_Handler pragma is only allowed immediately within a
-@nt{protected_definition}.
-The cor@!responding @nt{protected_type_declaration} shall
-be a library level declaration.
-In addition, any @nt{object_@!declaration} of such a type shall be a
-library level declaration.
+@nt{protected_definition}@Chg{Version=[2],New=[ where the
+corresponding subprogram is declared],Old=[]}.
+The cor@!responding @nt{protected_type_declaration} @Chg{Version=[2],New=[or
+@nt{single_protected_declaration} ],Old=[]}shall
+be a library level declaration.@Chg{Version=[2],New=[],Old=[ In addition, any
+@nt{object_@!declaration} of such a type shall be a library level
+declaration.]}
 @end{Legality}
 
 @begin{RunTime}
@@ -471,7 +474,7 @@ attached at the time the protected object was initialized],
 Old=[Otherwise, @Redundant[that is, if an Attach_@!Handler pragma was
 used]]}, the previous handler is restored.
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068],ARef=[AI95-00121-01]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068],ARef=[AI95-00121-01],ARef=[AI95-00303-01]}
 @Chg{New=[If all protected objects for interrupt handlers are declared at the
 library-level],Old=[Since only library-level protected procedures can be attached as
 handlers using the Interrupts package]}, the finalization discussed above
@@ -479,7 +482,11 @@ occurs only as part of the finalization of all library-level packages in
 a partition.
 @Chg{New=[However, objects of a protected type containing an Attach_@!Handler
 pragma need not be at the library level. Thus, an implementation needs to be
-able to restore handlers during the execution of the program.],Old=[]}
+able to restore handlers during the execution of the program.@Chg{Version=[2],
+New=[ (An object with an Interrupt_@!Handler pragma also need not be at the
+library-level, but such
+a handler cannot be attached to an interrupt usign the Interrupts package.)],
+Old=[]}],Old=[]}
 @end{Discussion}
 
 When a handler is attached to an interrupt, the interrupt is blocked
@@ -545,6 +552,9 @@ The restrictions may be on the constructs that are allowed within them,
 and on ordinary calls (i.e. not via interrupts) on protected operations in
 these protected objects.
 @end{Ramification}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+New=[Any restrictions on a protected procedure or its containing type when
+a @nt{pragma} Attach_handler or Interrupt_Handler applies.],Old=[]}]}
 
 An implementation may use a different mechanism for invoking a protected
 procedure in response to a hardware interrupt than is used for a call
@@ -564,6 +574,9 @@ For example, if an implementation wishes to allow interrupt
 handlers to have parameters, it is allowed to do so via these pragmas;
 it need not invent implementation-defined pragmas for the purpose.
 @end{Ramification}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+New=[Any other forms of interrupt handler supported by the
+Attach_Handler and Interrupt_Handler pragmas.],Old=[]}]}
 
 @end{ImplPerm}
 
@@ -607,6 +620,20 @@ a protected procedure that is an interrupt handler.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the meaning of
   @lquotes@;the previous handler@rquotes; when finalizing protected objects
   containing interrupt handlers.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00253-01]}
+  @ChgAdded{Version=[2],Text=[Corrected the wording so that the rules for the
+  use of Attach_Handler and Interrupt_Handler are identical.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00303-01]}
+  @ChgAdded{Version=[2],Text=[Dropped the requirement that an object of a
+  type containing an Interrupt_Handler pragma must be declared at the library
+  level. This was a generic contract model violation. This change is not
+  an extension as an attempt to attach such a handler with a routine in
+  package Interrupts will fail an accessibility check anyway. Moreover,
+  implementations can retain the rule as an implementation-defined
+  restriction on the use of the type, as permitted by the @ImplPermTitle
+  above.]}
 @end{Diffword95}
 
 
@@ -843,6 +870,22 @@ On other systems, load time and run time might actually be interspersed.
 Any @nt<subtype_mark> denotes a statically constrained subtype, with
 statically constrained subcomponents, if any;
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
+@ChgAdded{Version=[2],Text=[no @nt{subtype_mark} denotes a controlled type, a
+private type, a private extension, a generic formal private type, a generic
+formal derived type, or a descendant of such a type;]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[For an
+  implementation that uses the registration method of finalization, a
+  controlled object will require some code executed to register the object
+  at the appropriate point. The other types are those that @i{might} have a
+  controlled component. None of these types were allowed in preelaborated
+  units in Ada 95. These types are covered by the @ImplAdviceTitle, of course,
+  so they should still execute as little code as possible.]}
+@end{Reason}
+
 any @nt<constraint> is a static constraint;
 
 any @nt<allocator> is for an access-to-constant type;
@@ -908,8 +951,15 @@ elaboration of entities not already covered by the @ImplReqName@;s.
 
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Preelaborated packages should be implemented such that little or no
-code executed is at run time for the elaboration of entities.]}]}
+code is executed at run time for the elaboration of entities.]}]}
 @end{ImplAdvice}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to exclude the additional kinds
+  of types allowed in preelaborated units by Ada 2005 from the @ImplReqTitle.]}
+@end{DiffWord95}
+
 
 @LabeledClause{Pragma Discard_Names}
 
@@ -951,25 +1001,37 @@ If a @nt{local_name} is given, then
 a @nt{pragma} Discard_Names is a representation pragma.
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI-00400-01]}
 If the pragma applies to an enumeration type,
-then the semantics of the Wide_Image and Wide_Value attributes
-are implementation defined for that type;
-@Redundant[the semantics of Image and Value are still defined in terms
-of Wide_Image and Wide_Value.]
+then the semantics of the @Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]}
+and @Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]} attributes
+are implementation defined for that type@Redundant[; the
+semantics of Image@Chg{Version=[2],New=[, Wide_Image,],Old=[ and]}
+Value@Chg{Version=[2],New=[, and Wide_Value],Old=[]} are still defined in
+terms of @Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]}
+and @Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]}].
 In addition, the semantics of Text_IO.Enumeration_IO are implementation
 defined.
 If the pragma applies to a tagged type,
-then the semantics of the Tags.@!Expanded_@!Name function
-are implementation defined for that type.
+then the semantics of the Tags.@!@Chg{Version=[2],New=[Wide_Wide_@!Expanded_@!Name],
+Old=[Expanded_@!Name]} function
+are implementation defined for that type@Chg{Version=[2],New=[@Redundant[; the
+semantics of Tags.@!Expanded_@!Name and Tags.@!Wide_@!Expanded_@!Name are still
+defined in terms of Tags.@!Wide_Wide_@!Expanded_@!Name]], Old=[]}.
 If the pragma applies to an exception,
-then the semantics of the Exceptions.Exception_Name function
-are implementation defined for that exception.
+then the semantics of the Exceptions.@!@Chg{Version=[2],New=[Wide_Wide_@!Exception_@!Name],
+Old=[Exception_@!Name]} function
+are implementation defined for that exception@Chg{Version=[2],New=[@Redundant[; the
+semantics of Exceptions.@!Exception_@!Name and Exceptions.@!Wide_@!Exception_@!Name
+are still defined in terms of Exceptions.@!Wide_Wide_@!Exception_@!Name]], Old=[]}.
 
 @ImplDef{The semantics of pragma Discard_Names.}
 @begin{Ramification}
   The Width attribute is still defined in terms of Image.
 
-  The semantics of S'Wide_Image and S'Wide_Value are
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+  The semantics of S'@Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]}
+  and S'@Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]} are
   implementation defined for any subtype of an enumeration type to which
   the pragma applies. (The pragma actually names the first subtype,
   of course.)
@@ -1008,6 +1070,14 @@ The same applies to the Tags.Expanded_Name and Exceptions.Exception_Name
 functions.
 @end{Reason}
 @end{ImplAdvice}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00400-01]}
+  @ChgAdded{Version=[2],Text=[Updated the wording to reflect that the double
+  wide image and value functions are now the master versions that the others
+  are defined from.]}
+@end{DiffWord95}
+
 
 @LabeledClause{Shared Variable Control}
 
