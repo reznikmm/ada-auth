@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:25 $}
+@Comment{$Date: 2000/08/19 01:17:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @LabeledClause{Array Types}
 
@@ -741,8 +741,8 @@ a @i(discriminated) type@Defn{discriminated type}, as is a type that inherits
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0007]}
   @Chg{New=[On the other hand, @nt<unknown_discriminant_part>s cannot be
   applied to types that cannot have a @nt<known_discriminant_part>. There
-  is no point in having unknown discriminants on a type that cannot have
-  discriminants at all.],Old=[]}
+  is no point in having unknown discriminants on a type that can never have
+  discriminants.],Old=[]}
 @end(Discussion)
 
 The subtype of a discriminant may be defined by
@@ -2794,13 +2794,11 @@ Old=[of the actual parameter]} is specific or class-wide, respectively.
 @begin{Ramification}
   A @nt<type_conversion> is never tag indeterminate, even if its
   operand is. A designated object is never tag indeterminate.
+
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
+  @Chg{New=[Allocators and access attributes of specific types can be used as
+  the controlling parameters of dispatching calls.],Old=[]}
 @end{Ramification}
-@begin{Reason}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
-  @Chg{New=[The wording change for Defect Report 8652/0010 allows allocators
-  and access attributes as the controlling parameters of dispatching calls.],
-  Old=[]}
-@end{Reason}
 @end{StaticSem}
 
 @begin{Legality}
@@ -5228,7 +5226,7 @@ A declaration that requires a second part is said to @i(require completion).
 The second part is called the @i(completion) of the declaration (and of
 the entity declared),
 and is either another declaration, a body, or a @nt<pragma>.
-@Chg{New=[A @i<body>@defn<body> is a @nt<body>,
+@Chg{New=[A @defn<body>@i<body>is a @nt<body>,
 an @nt<entry_body>, or a renaming-as-body
 (see @RefSecNum<Subprogram Renaming Declarations>).],Old=[]}
 @begin{Discussion}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:15 $}
+@Comment{$Date: 2000/08/19 01:17:21 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -671,26 +671,33 @@ their profiles are type conformant.
 @PDefn{type conformance}
 @redundant[An inner declaration hides any outer homograph from direct visibility.]
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025]}
 @leading@Redundant[Two homographs are not generally allowed
 immediately within the same declarative region unless one
 @i{overrides} the other (see Legality Rules below).]
 @Defn{override}
+@Chg{New=[The only declarations that are @Defn{overridable}@i{overridable} are
+the implicit declarations for predefined operators and inherited primitive
+subprograms.],Old=[]}
 A declaration overrides another homograph that occurs
 immediately within the same declarative region in the
 following cases:
 @begin{Itemize}
-An explicit declaration overrides an implicit declaration of a primitive
-subprogram, @Redundant[regardless of which declaration occurs first];
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025]}
+@Chg{New=[A declaration that is not overridable overrides one that is overridable],
+Old=[An explicit declaration overrides an implicit declaration of a primitive
+subprogram]}, @Redundant[regardless of which declaration occurs first];
 @begin{Ramification}
-And regardless of whether the explicit
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025]}
+And regardless of whether the @Chg{New=[non-overriddable],Old=[explicit]}
 declaration is overloadable or not.
+@Chg{New=[For example, @nt{statement_identifier}s are covered by this rule.],Old=[]}
 
 The @lquotes@;regardless of which declaration occurs first@rquotes@;
 is there because the explicit declaration could be a primitive subprogram
 of a partial view, and then the full view might inherit a homograph.
 We are saying that the explicit one wins
-(within its scope), even though the implicit one
-comes later.
+(within its scope), even though the implicit one comes later.
 
 If the overriding declaration is also a subprogram,
 then it is a primitive subprogram.
@@ -727,11 +734,8 @@ subprogram.
 
 @Redundant[For an implicit declaration of a primitive subprogram in a
 generic unit, there is a copy of this declaration in an instance.]
-However,
-a whole new set of primitive
-subprograms is implicitly
-declared for
-each type declared within the visible part of the instance.
+However, a whole new set of primitive subprograms is implicitly
+declared for each type declared within the visible part of the instance.
 These new declarations occur immediately after the type
 declaration, and override the copied ones.
 @Redundant[The copied ones can be called only from within the instance;
@@ -881,11 +885,14 @@ hiding, since there is no way to declare homographs.
 @end{Resolution}
 
 @begin{Legality}
-An explicit declaration is illegal if there is a
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],Ref=[8652/0026]}
+@Chg{New=[A non-overridable],Old=[An explicit]} declaration is illegal if there is a
 homograph occurring immediately within the same
 declarative region that is visible at the place of the
-declaration, and is not hidden from all visibility by the explicit
-declaration.
+declaration, and is not hidden from all visibility by the
+@Chg{New=[non-overridable],Old=[explicit]} declaration.
+@Chg{New=[In addition, a type extension is illegal if somewhere within its
+immediate scope it has two visible components with the same name.],Old=[]}
 Similarly, the @nt<context_clause> for a
 @nt<subunit> is illegal if it mentions (in a
 @nt<with_clause>) some library unit, and there is a homograph
@@ -947,6 +954,38 @@ However, that was a bad idea, because it requires overload resolution
 to resolve references to directly visible non-overloadable
 homographs, which is something compilers have never before been
 required to do.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0026]}
+@Chg{New=[@Leading@;If a @nt{type_extension} contains a component with
+the same name as a complete in an ancestor type, there must be no place
+where both components are visible. For instance:],Old=[]}
+@begin{Example}@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[package] A @key[is]
+   @key[type] T @key[is tagged private];
+   @key[package] B @key[is]
+       @key[type] NT @key[is new] T @key[with record]
+           I: Integer; -- Illegal because T.I is visible in the body.
+       @key[end record]; -- T.I is not visible here.
+    @key[end] B;
+@key[end] A;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[package] A @key[is]
+@key[package] @key[body] A @key[is]
+    @key[package] @key[body] B @key[is]
+        -- T.I becomes visible here.
+    @key[end] B;
+@key[end] A;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[package] A.C @key[is]
+    @key[type] NT2 @key[is new] A.T @key[with record]
+       I: Integer; -- Illegal because T.I is visible in the private part.
+    @key[end record]; -- T.I is not visible here.
+@key[private]
+    -- T.I is visible here.
+@key[end] A.C;],Old=[]}
+@end{Example}
 @end{Itemize}
 
 Note that we need to be careful which things we make "hidden from all

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:26 $}
+@Comment{$Date: 2000/08/19 01:17:21 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -912,6 +912,7 @@ Inherited subprograms are also implicitly declared
 immediately after the definition of the type,
 except as stated below.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019]}
 For a composite type, the characteristics
 (see @RefSecNum{Private Types and Private Extensions})
 of the type are determined in part by the
@@ -919,32 +920,41 @@ characteristics of its component types.
 At the place where the composite type is declared,
 the only characteristics of component types used are those
 characteristics visible at that place.
-If later within the immediate scope of the composite type additional
+If later @Chg{New=[immediately within the declarative region in which the
+composite type is declared],
+Old=[within the immediate scope of the composite type]} additional
 characteristics become visible for a component type,
 then any corresponding characteristics become visible for the composite
 type.
 Any additional predefined operators are implicitly declared at that place.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019]}
 The corresponding rule applies to a type defined by a
 @nt{derived_type_definition},
-if there is a place within its immediate scope where additional
+if there is a place @Chg{New=[immediately within the declarative region in which
+the type is declared],
+Old=[within its immediate scope]} where additional
 characteristics of its parent type become visible.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019]}
 @Defn{become nonlimited}
 @Defn2{Term=[nonlimited type],Sec=(becoming nonlimited)}
 @Defn2{Term=[limited type],Sec=(becoming nonlimited)}
 @Redundant[For example, an array type whose component type is limited
 private becomes nonlimited if the full view of the component type is
-nonlimited and visible at some later place within the immediate scope of
-the array type.
+nonlimited and visible at some later place @Chg{New=[immediately within the declarative region in which
+the array type is declared.],
+Old=[within the immediate scope of the array type.]}
 In such a case, the predefined "=" operator is implicitly declared at
 that place, and assignment is allowed after that place.]
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019]}
 Inherited primitive subprograms follow a different rule.
 For a @nt{derived_type_definition},
 each inherited primitive subprogram
 is implicitly declared at the earliest place, if any,
-within the immediate scope of the @nt{type_declaration},
+@Chg{New=[immediately within the declarative region in which],
+Old=[within the immediate scope of]} the @nt{type_declaration}@Chg{New=[ occurs],Old=[]},
 but after the @nt{type_declaration},
 where the corresponding declaration from the parent is
 visible.
@@ -954,20 +964,20 @@ is not declared at all.
 cannot be named in a call and cannot be overridden,
 but for a tagged type, it is possible to dispatch to it.]
 
-For a @nt{private_extension_declaration},
-each inherited subprogram is declared immediately after
-the @nt{private_extension_declaration}
+For a @nt{private_extension_declaration}, each inherited subprogram is
+declared immediately after the @nt{private_extension_declaration}
 if the corresponding declaration from the ancestor is visible at that
 place.
 Otherwise, the inherited subprogram is not declared for the private
-extension,
-@Redundant[though it might be for the full type].
+extension, @Redundant[though it might be for the full type].
 @begin{Reason}
-  There is no need for the @lquotes@;earliest place within the immediate scope@rquotes@;
+  @ChgRef{Version=[1],Kind=[Revised]}
+  There is no need for the @lquotes@;earliest place
+  @Chg{New=[immediately within the declarative region],
+  Old=[within the immediate scope]}@rquotes@;
   business here, because a @nt{private_extension_declaration} will be
   completed with a @nt{full_type_declaration}, so we can hang the
-  necessary private implicit declarations on the
-  @nt{full_type_declaration}.
+  necessary private implicit declarations on the @nt{full_type_declaration}.
 @end{Reason}
 @begin{Discussion}
 The above rules matter only when the component type (or parent type) is
@@ -1023,9 +1033,11 @@ Another_Int does not inherit Int_Op,
 because Int_Op does not @lquotes@;exist@rquotes@; at the place
 where Another_Int is declared.
 
+@ChgRef{Version=[1],Kind=[Revised]}
 Type T2 inherits Op1 and Op2 from Root.
 However, the inherited Op2 is never declared,
-because Parent.Op2 is never visible within the immediate scope of T2.
+because Parent.Op2 is never visible @Chg{New=[immediately within the declarative region],
+Old=[within the immediate scope]} of T2.
 T2 explicitly declares its own Op2,
 but this is unrelated to the inherited one @em it
 does not override the inherited one,
@@ -1038,8 +1050,11 @@ Note that if Child were a private child of Parent,
 then Op1 and Op2 would both be implicitly declared immediately after the
 type declaration.
 
-T4 is similar to T3, except that the earliest place within T4's
-immediate scope where Root's Op2 is visible is in the body of Nested.
+@ChgRef{Version=[1],Kind=[Revised]}
+T4 is similar to T3, except that the earliest place
+@Chg{New=[immediately within the declarative region containing T4],
+Old=[within T4's immediate scope]}
+where Root's Op2 is visible is in the body of Nested.
 
 If T3 or T4 were to declare a type-conformant Op2,
 this would override the one inherited from Root.
@@ -1092,6 +1107,28 @@ in more than one place:
 @key[end] P.Q;
 @end{Example}
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0019]}
+@Chg{New=[We say @i<immediately> within the declarative region in order that
+types do not gain operations within a nested scope. Consider:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@Key[package] Outer @key[is]
+    @key[package] Inner @key[is]
+	@key[type] Inner_Type @key[is] @key[private];
+    @key[private]
+        @key[type] Inner_Type @key[is] @key[new] Boolean;
+    @key[end] Inner;
+    @key[type] Outer_Type @key[is] @key[array](Natural @key[range] <>) @key[of] Inner.Inner_Type;
+@key[end] Outer;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[package] @key[body] Outer @key[is]
+    @key[package] @key[body] Inner @key[is]
+        -- At this point, we can see that Inner_Type is a Boolean type.
+        -- But we don't want Outer_Type to gain an "and" operator here.
+    @key[end] Inner;
+@key[end] Outer;],Old=[]}
+@end{Example}
 @end{Discussion}
 
 @leading@Redundant[The Class attribute is defined for tagged subtypes in
@@ -1647,11 +1684,10 @@ or Finalize is applied to the containing object.
 
 @begin{StaticSem}
 @leading@keepnext@;The following language-defined library package exists:
-@begin{Example}
-@tabclear()@tabset(P22)
-@ChildUnit{Parent=[Ada],Child=[Finalization]}
-@key[package] Ada.Finalization @key[is]
-    @key[pragma] Preelaborate(Finalization);
+@begin{Example}@tabclear()@tabset(P22)@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
+@key[package] Ada.Finalization @key[is]@ChildUnit{Parent=[Ada],Child=[Finalization]}
+    @key[pragma] Preelaborate(Finalization);@Chg{New=[
+    @key[pragma] Remote_Types(Finalization);],Old=[]}
 
     @key[type] @AdaTypeDefn{Controlled} @key[is abstract tagged private];
 
@@ -1718,9 +1754,12 @@ Initialize is called on the object.
 The same applies to the evaluation of an @nt{allocator},
 as explained in @RefSecNum{Allocators}.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021]}
 For an @nt{extension_aggregate} whose @nt{ancestor_part} is a
 @nt{subtype_mark},
-Initialize is called on all controlled subcomponents of the ancestor part;
+@Chg{New=[for each controlled subcomponent of the ancestor part, either
+Initialize is called, or its initial value is assigned, as appropriate],
+Old=[Initialize is called on all controlled subcomponents of the ancestor part]};
 if the type of the ancestor part is itself controlled,
 the Initialize procedure of the ancestor type is called,
 unless that Initialize procedure is abstract.
@@ -1750,9 +1789,12 @@ assigned an initial value.
 The assignment to A.Y is not considered an assignment to A.
 
 For the elaboration of B's declaration, Initialize is not called at
-all.
-Instead the assignment adjusts B's value;
+all. Instead the assignment adjusts B's value;
 that is, it applies Adjust to B.X, B.Y, and B.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0021]}
+@Chg{New=[The @nt{ancestor_part} of an @nt{extension_aggregate} is handled similarly.],
+Old=[]}
 @end{Discussion}
 
 Initialize and other initialization
@@ -1885,6 +1927,41 @@ Forbidding such cases is not an option @em it would cause generic
 contract model violations.
 @end{Reason}
 @end{RunTime}
+
+@begin{ImplReq}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0022]}
+@Chg{New=[For an @nt{aggregate} of a controlled type whose value is assigned,
+other than by an @nt{assignment_statement} or a @nt{return_statement}, the
+implementation shall not create a separate anonymous object for the
+@nt{aggregate}. The aggregate value shall be constructed directly in the target
+of the assignment operation and Adjust is not called on the target object.],
+Old=[]}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[This is necessary to prevent elaboration problems with deferred
+constants of controlled types. Consider:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[package] P @key[is]
+   @key[type] Dyn_String @key[is private];
+   Null_String : @key[constant] Dyn_String;
+   ...
+@key[private]
+   @key[type] Dyn_String @key[is new] Ada.Finalization.Controlled @key[with] ...
+   @key[procedure] Finalize(X : @key[in out] Dyn_String);
+   @key[procedure] Adjust(X : @key[in out] Dyn_String);
+@comment{Blank Line}
+   Null_String : @key[constant] Dyn_String :=
+      (Ada.Finalization.Controlled @key[with] ...);
+   ...
+@key[end] P;],Old=[]}
+@end{Example}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[When Null_String is elaborated, the bodies of Finalize and Adjust
+clearly have not been elaborated. Without this rule, this declaration would
+necessarily raise Program_Error.],Old=[]}
+@end{Reason}
+@end{ImplReq}
 
 @begin{ImplPerm}
 An implementation is allowed to relax the above rules
@@ -2189,12 +2266,20 @@ The target of an assignment statement is finalized before copying in the
 new value, as explained
 in @RefSecNum{User-Defined Assignment and Finalization}.
 
-The anonymous objects created by function calls and by @nt{aggregate}s
-are finalized no later than the end of the innermost enclosing
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021]}
+@Chg{New=[If the @nt{object_name} in an @nt{object_renaming_declaration}, or
+the actual parameter for a generic formal @key[in out] parameter in a
+@nt{generic_instantiation}, denotes any part of an anonymous object created by
+a function call, the anonymous object is not finalized until after it is no
+longer accessible via any name. Otherwise, an],
+Old=[The]} anonymous object@Chg{New=[],Old=[s]} created by
+@Chg{New=[a ],Old=[]}function @Chg{New=[call or],Old=[calls and]} by
+@Chg{New=[an ],Old=[]}@nt{aggregate}@Chg{New=[ is],Old=[s are]}
+finalized no later than the end of the innermost enclosing
 @nt{declarative_item} or @nt{statement};
 if that is a @nt{compound_statement},
-they are finalized before starting the execution of any
-@nt{statement} within the @nt{compound_statement}.
+@Chg{New=[the object is],Old=[they are]} finalized before starting the
+execution of any @nt{statement} within the @nt{compound_statement}.
 @begin{Honest}
 @leading@;This is not to be construed as permission to call Finalize
 asynchronously with respect to normal user code.
@@ -2223,11 +2308,19 @@ value of F into X, especially if the size of the result
 is not known at the call site.
 @end{Reason}
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023]}
+@Chg{New=[If a transfer of control or raising of an exception occurs prior to
+performing a finalization of an anonymous object, the anonymous object is
+finalized as part of the finalizations due to be performed for the object's
+innermost enclosing master.],Old=[]}
+
 @end{RunTime}
 
 @begin{Bounded}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0023]}
 @leading@;It is a bounded error for a call on
-Finalize or Adjust to propagate an exception.
+Finalize or Adjust @Chg{New=[that occurs as part of object finalization or
+assignment ], Old=[]}to propagate an exception.
 The possible consequences depend on what action invoked the Finalize or
 Adjust operation:
 @begin{Ramification}
@@ -2237,25 +2330,68 @@ Adjust operation:
   and those components that have already been initialized
   (either explicitly or by default)
   are finalized in the usual way.
+
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023]}
+  @Chg{New=[It also is not a bounded error for an explicit call to Finalize or
+  Adjust to propagate an exception. We do not want implementations to have to
+  treat explicit calls to these routines specially.],Old=[]}
 @end{Ramification}
 @begin{Itemize}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 For a Finalize invoked as part of an @nt<assignment_statement>,
 Program_Error is raised at that point.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0024]}
+@Chg{New=[For an Adjust invoked as part of the initialization of a controlled
+object, other adjustments due to be performed might or might not be performed,
+and then Program_Error is raised. During its propagation, finalization might or
+might not be applied to objects whose Adjust failed.],Old=[]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 For an Adjust invoked as part of an assignment operation,
 any other adjustments due to be performed are performed,
 and then Program_Error is raised.
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024]}
+@Chg{New=[In the case of assignments that are part of initialization, there is
+no need to complete all adjustments if one propagates an exception, as the
+object will immediately be finalized. So long as a subcomponent is not going
+to be finalized, it need not be adjusted, even if it is initialized as part of
+an enclosing composite assignment operation for which some adjustments are
+performed. However, there is no harm in an implementation making additional
+Adjust calls (as long as any additional components that are adjusted are also
+finalized), so we allow the implementation flexibility here.
+On the other hand, for an assignment statement, it is important that all
+adjustments be performed, even if one fails, because all controlled
+subcomponents are going to be finalized.],Old=[]}
+@end{Reason}
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024]}
+@Chg{New=[Even if an Adjust invoked as part of the initialization of a
+controlled object propagates an exception, objects whose initialization
+(including any Adjust or Initialize calls) successfully completed will be
+finalized. The permission above only applies to objects whose Adjust failed.
+Objects for which Adjust was never even invoked must not be finalized.],Old=[]}
+@end{Ramification}
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 For a Finalize invoked as part of a call on an instance of
 Unchecked_Deallocation, any other finalizations due to
 be performed are performed, and then Program_Error is raised.
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023]}
+@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+For a Finalize invoked as part of the finalization of the anonymous
+object created by a function call or @nt{aggregate}, any other finalizations
+due to be performed are performed, and then Program_Error is raised.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023]}
+@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+For a Finalize invoked due to reaching the end of the execution of a
+master, any other finalizations associated with the master are performed, and
+Program_Error is raised immediately after leaving the master.],Old=[]}
+
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-For a Finalize invoked
-by the transfer of control of
+For a Finalize invoked by the transfer of control of
 an @nt{exit_}, @nt{return_}, @nt{goto_},
 or @nt{requeue_@!statement},
 Program_Error is raised no earlier than after the finalization of the
