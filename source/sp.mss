@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/08/29 04:22:23 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/08/25 04:02:56 $}
+@Comment{$Date: 2000/08/29 04:22:23 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1375,6 +1375,9 @@ atomically with respect to any @Chg{New=[of these operations of],
 Old=[other of the above operations for]} the same attribute of the same task.
 @Chg{New=[The granularity of any locking mechanism necessary to achieve such
 atomicity is implementation defined.],Old=[]}
+@ChgImplDef{Version=[1],Kind=[Added],Text=[@Chg{New=[Granularity of
+locking for Task_Attributes.],Old=[]}]}
+
 @begin{Ramification}
 Hence, other than by dereferencing an access value returned by
 Reference, an attribute of a given task can be safely read and updated
@@ -1394,7 +1397,8 @@ per task, if such a limit exists.
 
 In addition, if these limits can be configured, the implementation shall
 document how to configure them.
-@ImplDef{Implementation-defined aspects of Task_Attributes.}
+@ChgImplDef{Version=[1],Kind=[Revised],Text=[@Chg{New=[Limits on the number and size of task attributes.],
+Old=[Implementation-defined aspects of Task_Attributes.]}]}
 
 @end{DocReq}
 
@@ -1494,3 +1498,4 @@ As specified in @RefSecNum{The Package Task_Identification}, if the parameter
 T (in a call on a subprogram of an instance of this package) identifies
 a nonexistent task, the execution of the program is erroneous.
 @end{Notes}
+

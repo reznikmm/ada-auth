@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:55 $}
+@Comment{$Date: 2000/08/29 04:22:21 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1566,13 +1566,6 @@ sequence of steps:
     expressions evaluated at the point of the creation of the
     object.
 
-    @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0002]}
-    @Chg{New=[We say @lquotes@;elaborated@rquotes@; rather than @lquotes@;evaluated@rquotes@;
-    in order to be consistent with other uses of per-object constraints and
-    to insure that the intent stated in the previous annotation is met by
-    using the definition of elaboration of a per-object constraint (now)
-    given in clause @RefSecNum(Record Types).],Old=[]}
-
     The elaboration of per-object constraints was presumably performed
     as part of the dependent compatibility check in Ada 83.
     If the object is of a limited type
@@ -2442,7 +2435,7 @@ If S is a first subtype,
 then S'Class is a first subtype.
 @begin{Reason}
 We want S'Class to be a first subtype when S is,
-so that an @nt{attribute_definition_clause} like
+so that an @nt{attribute_@!definition_@!clause} like
 @lquotes@key[for] S'Class'Output @key[use] ...;@rquotes@;
 will be legal.
 @end{Reason}
@@ -3208,6 +3201,7 @@ Table'Range      @RI[-- a range attribute reference (see @RefSecNum{Array Types}
 @end{Examples}
 
 @begin{Incompatible83}
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
 S'Base is no longer defined for nonscalar types.
 One conceivable existing use of S'Base for nonscalar types is
 S'Base'Size where S is a generic formal private type.
@@ -3222,7 +3216,7 @@ some amount of normally required @lquotes@;dope@rquotes@; to have been squeezed 
 in the packing. Hence our conclusion is that S'Base'Size is
 not generally useful in a generic, and does not justify keeping
 the attribute Base for nonscalar types just so it can be used
-as a prefix.
+as a @Chg{New=[@nt{prefix}],Old=[prefix]}.
 
 @end{Incompatible83}
 
@@ -3231,7 +3225,7 @@ The attribute S'Base for a scalar subtype is now permitted
 anywhere a @nt{subtype_mark} is permitted.
 S'Base'First .. S'Base'Last
 is the base range of the type.
-Using an @nt{attribute_definition_clause},
+Using an @nt{attribute_@!definition_@!clause},
 one cannot specify any subtype-specific attributes
 for the subtype denoted by S'Base
 (the base subtype).
@@ -4196,7 +4190,6 @@ is produced, or the Machine_Overflows attribute of the type is false
 (see @RefSecNum{Numeric Performance Requirements}).]
 
 @Defn{nonstandard real type}
-@ImplDef{Any nonstandard real types and the operators defined for them.}
 An implementation may provide @i(nonstandard real types),
 descendants of @i(root_real) that are
 declared outside of the specification of package Standard,
@@ -4213,6 +4206,7 @@ An implementation may place arbitrary restrictions on the use of such types;
 it is implementation defined whether operators that are predefined
 for @lquotes@;any real type@rquotes@; are defined for a particular nonstandard real type.
 @Redundant[In any case, such types are not permitted as @nt{explicit_generic_actual_parameter}s for formal scalar types @em see @RefSecNum(Formal Scalar Types).]
+@ImplDef{Any nonstandard real types and the operators defined for them.}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -4509,12 +4503,11 @@ the definition of Succ and Pred for floating point numbers.
 @PrefixType{every floating point subtype S}:
 
 @begin(description)
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0004]}
-@Attribute{Prefix=<S>, AttrName=<Digits>,
-  Text=[S'Digits
-denotes the requested decimal precision
-for the subtype S. The value of this attribute
-is of the type @i(universal_integer).]}
+@ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<S>, AttrName=<Digits>, Ref=[8652/0004],
+  Text=[S'Digits denotes the requested decimal precision
+  for the subtype S. The value of this attribute
+  is of the type @i(universal_integer).]}
 The requested decimal precision of the base subtype of a floating
 point type @i{T} is defined to be the largest value of @i{d} for which
 @chg{New=[@*
@@ -4602,7 +4595,7 @@ of a number called the @i(small) of the type.
 @Defn{ordinary fixed point type}
 For a type defined by an @nt<ordinary_fixed_point_definition>
 (an @i(ordinary) fixed point type), the @i(small) may be specified
-by an @nt<attribute_definition_clause>
+by an @nt<attribute_@!definition_@!clause>
 (see @RefSecNum{Operational and Representation Attributes});
 if so specified, it shall be no greater than the @i(delta) of the type.
 If not specified, the @i(small) of an ordinary fixed
@@ -4833,8 +4826,8 @@ Obsolescent features (to be compatible with Ada 83's
 @Leading@;The following attributes are defined for
 @PrefixType{every fixed point subtype S}:
 @begin(description)
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0005]}
-@Attribute{Prefix=<S>, AttrName=<Small>,
+@ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<S>, AttrName=<Small>, Ref=[8652/0005],
   Text=[S'Small
      denotes the @i(small) of the type of S.
      The value of this attribute is of the type @i(universal_real).]}
@@ -4842,7 +4835,7 @@ Obsolescent features (to be compatible with Ada 83's
      @Defn{Small clause}
      Small may be specified
      for nonderived@Chg{New=[ ordinary],Old=[]} fixed point types
-     via an @nt{attribute_definition_clause}
+     via an @nt{attribute_@!definition_@!clause}
      (see @RefSecNum{Operational and Representation Attributes});
      the expression of such a clause shall be static.
 

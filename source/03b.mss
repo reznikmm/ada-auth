@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:55 $}
+@Comment{$Date: 2000/08/29 04:22:22 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @LabeledClause{Array Types}
 
@@ -496,9 +496,10 @@ and no greater than the dimensionality of the array.
 @begin{StaticSem}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0006]}
 The following attributes are defined for
-@PrefixType{a @Chg{New=[@nt{prefix}],Old=[prefix]} A that is of an array type
+@ChgPrefixType{Version=[1],Kind=[Revised],Text=[a @Chg{New=[@nt{prefix}],
+Old=[prefix]} A that is of an array type
 @Redundant[(after any implicit dereference)], or denotes
-a constrained array subtype}:
+a constrained array subtype]}:
 @begin{Ramification}
 These attributes are not defined if A is a subtype-mark
   for an access-to-array subtype. They are defined (by implicit
@@ -1429,9 +1430,10 @@ execution) of the subcomponent denoted by the @nt<name>.
 @end{Erron}
 
 @begin{Extend83}
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
 For consistency with other attributes, we are allowing
-the prefix of Constrained to be a value as well as
-an object of a discriminated type, and also an implicit
+the @Chg{New=[@nt{prefix}],Old=[prefix]} of Constrained to be a value as well
+as an object of a discriminated type, and also an implicit
 dereference. These extensions are
 not important capabilities, but there seems no
 reason to make this attribute different from
@@ -4460,9 +4462,10 @@ is the library level.
   the accessibility level of the execution of the called
   subprogram;
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
   if the actual is
   a reference to the Access attribute @em
-  the accessibility level of the view denoted by the prefix;
+  the accessibility level of the view denoted by the @Chg{New=[@nt{prefix}],Old=[prefix]};
 
   if the actual is
   a reference to the Unchecked_Access attribute @em
@@ -4620,9 +4623,10 @@ is the library level.
   pass the static nesting level of the caller,
   plus one.
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
   If the actual is
   a reference to the Access attribute,
-  pass the level of the view denoted by the prefix.
+  pass the level of the view denoted by the @Chg{New=[@nt{prefix}],Old=[prefix]}.
 
   If the actual is
   a reference to the Unchecked_Access attribute,
@@ -4759,8 +4763,8 @@ which the compiler can't see while compiling an object creation.
 denotes an aliased view of an object}:
 @end{Wide}
 @begin(description)
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
-@Attribute{Prefix=<X>, AttrName=<Access>,
+@ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<X>, AttrName=<Access>, Ref=[8652/0010],
   Text=<X'Access yields an access value that designates the object
   denoted by X. The type of X'Access is an access-to-object type,
   as determined by the expected type.

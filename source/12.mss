@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/08/24 04:21:04 $}
+@Comment{$Date: 2000/08/29 04:22:22 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1773,7 +1773,9 @@ by those of the primitive subprograms of the specified
 ancestor type.
 @end{Ramification}
 
-@Leading@;For @PrefixType{a prefix S that denotes a formal indefinite subtype},
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
+@Chg{New=[@nt{prefix}],Old=[prefix]} S that denotes a formal indefinite subtype]},
 the following attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Definite>,

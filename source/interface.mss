@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2000/08/29 04:22:23 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:56 $}
+@Comment{$Date: 2000/08/29 04:22:23 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -806,6 +806,8 @@ Old=[@RI{implementation-defined}]};
 
 @key(end) Interfaces.C;
 @end{Example}
+@ChgImplDef{Version=[1],Kind=[Added],Text=[@Chg{New=[The definitions of types
+and constants in Interfaces.C.],Old=[]}]}
 
 Each of the types declared in Interfaces.C is C-compatible.
 
@@ -1818,9 +1820,9 @@ either an internal or external COBOL representation
    ... -- @RI{not specified by the language}
 @key(end) Interfaces.COBOL;
 @end{Example}
-@ImplDef[The types Floating, Long_Floating, Binary, Long_Binary,
+@ChgImplDef{Version=[1],Kind=[Revised],Text=[The types Floating, Long_Floating, Binary, Long_Binary,
 Decimal_Element, and COBOL_Character; and the initializations
-of the variables Ada_To_COBOL and COBOL_To_Ada, in Interfaces.COBOL]
+of the variables Ada_To_COBOL and COBOL_To_Ada, in Interfaces.COBOL@Chg{New=[.],Old=[]}]}
 
 Each of the types in Interfaces.COBOL is COBOL-compatible.
 
@@ -1839,8 +1841,7 @@ numeric value that is represented as Long_Binary.
 The type Packed_Decimal corresponds to COBOL's packed-decimal
 usage.
 
-The type COBOL_Character
- defines the run-time character set used in the
+The type COBOL_Character defines the run-time character set used in the
 COBOL implementation.
 Ada_To_COBOL and COBOL_To_Ada are the mappings between the Ada and
 COBOL run-time character sets.
@@ -2344,6 +2345,8 @@ declaration:
 
 @key[end] Interfaces.Fortran;
 @end{Example}
+@ChgImplDef{Version=[1],Kind=[Added],Text=[@Chg{New=[The types Fortran_Integer,
+Real, Double_Precision, and Character_Set in Interfaces.Fortran.],Old=[]}]}
 @begin{Ramification}
    The means by which the Complex type is provided in Interfaces.Fortran
    creates a dependence of Interfaces.Fortran on Numerics.Generic_Complex_Types

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2000/08/26 04:13:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2000/08/29 04:22:23 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/08/26 04:13:56 $}
+@Comment{$Date: 2000/08/29 04:22:23 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -156,9 +156,11 @@ inaccessible.
 @ImplDef{Any events that can result in a partition becoming
 inaccessible.}
 
-@Leading@;For @PrefixType{a prefix D that denotes a
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
+@Chg{New=[@nt{prefix}],Old=[prefix]} D that denotes a
 library-level declaration,
-excepting a declaration of or within a declared-pure library unit},
+excepting a declaration of or within a declared-pure library unit]},
 the following attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<D>, AttrName=<Partition_ID>,
@@ -825,8 +827,10 @@ that the semantics of the distributed program are well defined.
 
 @begin{StaticSem}
 
-@Leading@;For @PrefixType{a prefix P that statically denotes a
-program unit}, the following attributes are defined:
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
+@Chg{New=[@nt{prefix}],Old=[prefix]} P that statically denotes a
+program unit]}, the following attributes are defined:
 @begin{Description}
 @Attribute{Prefix=<P>, AttrName=<Version>,
   Text=[Yields a value of the predefined type String
@@ -852,8 +856,8 @@ It is @Chg{New=[unspecified],Old=[implementation defined]}
 whether there are other events (such as recompilation) that
 result in the version of a compilation unit changing.
 @Chg{New=[@PDefn{unspecified}],Old=[]}
-@ChgNote{The following ImplDef ought to be deleted from the new version.}
-@ImplDef{Events that cause the version of a compilation unit to change.}
+@ChgImplDef{Version=[1],Kind=[Deleted],Text=[@Chg{New=[],Old=[Events that
+cause the version of a compilation unit to change.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0084]}
 @Chg{New=[If P is not a library unit, and P has no completion, then

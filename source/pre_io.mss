@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/08/26 04:13:56 $}
+@Comment{$Date: 2000/08/29 04:22:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -2597,11 +2597,9 @@ Wide_Text_IO.Text_Streams provide stream-oriented operations on files.
 @Defn{heterogeneous input-output}
 @Redundant[The subprograms in the child package Streams.Stream_IO provide control
 over stream files. Access to a stream file is either sequential,
-via a call on Read or Write to transfer an array of stream
-elements,
+via a call on Read or Write to transfer an array of stream elements,
 or positional (if supported by the implementation for the given file),
-by specifying a relative index for an element.
-Since a stream
+by specifying a relative index for an element. Since a stream
 file can be converted to a Stream_Access value, calling stream-oriented
 attribute subprograms of different element types with the same
 Stream_Access value provides heterogeneous input-output.]
@@ -2617,6 +2615,7 @@ If positioning is not supported, a current index is not maintained, and the
 current size is implementation defined.@Defn2{Term=(Current index),
 Sec=(of an open stream file)}@Defn2{Term=(Current size),Sec=(of a stream file)}
 ],Old=[]}
+@ChgImpldef{Version=[1],Kind=[Added],Text=[@Chg{New=[Current size for a stream file for which positioning is not supported.],Old=[]}]}
 
 @Leading@;The library package Streams.Stream_IO has the following declaration:
 @begin(example)

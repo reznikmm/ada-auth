@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/08/24 04:21:03 $}
+@Comment{$Date: 2000/08/29 04:22:22 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2496,13 +2496,15 @@ I : Integer := 3;
 Y : A := F(I); --@RI{ Ambiguous? (We hope so.)}
 @end{Example}
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
 @NoPrefix@;Consider the declaration of Y (a complete context).
 In the above example, overload resolution can easily determine the
 declaration, and therefore the entity,
 denoted by Y, A, F, and I.
 However, given all of that information,
 we still don't know whether F(I) is a @nt{function_call}
-or an @nt{indexed_component} whose prefix is a @nt{function_call}.
+or an @nt{indexed_component} whose @Chg{New=[@nt{prefix}],Old=[prefix]} is
+a @nt{function_call}.
 (In the latter case, it is equivalent to F(7).@key[all](I).)
 
 @NoPrefix@;It seems clear that the declaration of Y ought to be considered

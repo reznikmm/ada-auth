@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:56 $}
+@Comment{$Date: 2000/08/29 04:22:22 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -562,7 +562,9 @@ value of type Exception_Occurrence.
 Null_Occurrence does not represent any exception occurrence,
 and is the default initial value of type Exception_Occurrence.
 
-@Leading@Keepnext@;For @PrefixType{a prefix E that denotes an exception},
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
+@Chg{New=[@nt{prefix}],Old=[prefix]} E that denotes an exception]},
 the following attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<E>, AttrName=<Identity>,

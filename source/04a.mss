@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/26 04:13:55 $}
+@Comment{$Date: 2000/08/29 04:22:22 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -173,13 +173,14 @@ A function call is considered the name of a constant,
 and can be used anywhere such a name is permitted.
 See @RefSecNum(Return Statements).
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
 Type conversions of a tagged type are permitted anywhere
 their operand is permitted. That is, if the operand
 is a variable, then the type conversion can appear on the
 left-hand side of an @nt{assignment_statement}.
 If the operand is an object,
 then the type conversion can appear in an object renaming
-or as a prefix.
+or as a @Chg{New=[@nt{prefix}],Old=[prefix]}.
 See @RefSecNum(Type Conversions).
 @end{Extend83}
 
@@ -649,10 +650,11 @@ as a parameterless @nt<function_call>.
   F'Address is the address of F, whereas
   F'Size is the size of the anonymous constant returned by F.
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
   We normally talk in terms of expected type or profile for
   name resolution rules, but we don't do this for attributes
   because certain attributes are legal independent of the type
-  or the profile of the prefix.
+  or the profile of the @Chg{New=[@nt{prefix}],Old=[prefix]}.
 @end{Discussion}
 
 @PDefn2{Term=[expected type],
@@ -725,13 +727,14 @@ Attributes are defined throughout this International Standard,
 and are summarized in
 @RefSecNum{Language-Defined Attributes}.
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
 In general,
 the @nt<name> in a @nt<prefix> of an @nt<attribute_reference>
 (or a @nt<range_attribute_reference>) has to be resolved
 without using any context.
 However, in the case of the Access attribute,
-the expected type for the prefix has to be a single access type,
-and if it is an access-to-subprogram type
+the expected type for the @Chg{New=[@nt{prefix}],Old=[prefix]} has to be a
+single access type, and if it is an access-to-subprogram type
 (see @RefSecNum(Operations of Access Types))
 then the resolution of the @nt<name> can use the fact that
 the profile of the callable entity denoted by the @nt<prefix>

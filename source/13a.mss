@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/26 04:13:56 $}
+@Comment{$Date: 2000/08/29 04:22:23 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -1116,8 +1116,10 @@ Words are expected to be independently addressable.
 Alignment, Size, Storage_Size, and Component_Size.],
 Old=[@Leading@;The following attributes are defined:]}
 
-@Leading@;For @PrefixType{a prefix X that denotes an object, program unit,
-or label}:
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
+@Chg{New=[@nt{prefix}],Old=[prefix]} X that
+denotes an object, program unit, or label]}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Address>,
   Text=<Denotes the address of the first of the storage elements
@@ -1305,8 +1307,9 @@ than that.
 @end{MetaRules}
 
 @begin{StaticSem}
-@Leading@;For @PrefixType{a prefix X that denotes a subtype or
-object}:
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
+@Chg{New=[@nt{prefix}],Old=[prefix]} X that denotes a subtype or object]}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Alignment>,
   Text=<The Address of an object that is allocated under
@@ -1525,7 +1528,9 @@ which are an obsolete version of Alignment clauses).
 @end{DiffWord83}
 
 @begin{StaticSem}
-@Leading@;For @PrefixType{a prefix X that denotes an object}:
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
+@Chg{New=[@nt{prefix}],Old=[prefix]} X that denotes an object]}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Size>,
   Text=<Denotes the size in bits of
@@ -1909,8 +1914,10 @@ rather than letting implementations define their meaning.
 @end{DiffWord83}
 
 @begin{StaticSem}
-@Leading@;For @PrefixType{a prefix T that denotes a task
-object @Redundant[(after any implicit dereference)]}:
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
+@Chg{New=[@nt{prefix}],Old=[prefix]} T that denotes a task
+object @Redundant[(after any implicit dereference)]]}:
 @begin{Description}
 @Attribute{Prefix=<T>, AttrName=<Storage_Size>,
   Text=<Denotes the number of storage elements reserved for
@@ -1998,8 +2005,10 @@ accommodate the requested Storage_Size.
 @end{RunTime}
 
 @begin{StaticSem}
-@Leading@;For @PrefixType{a prefix X that denotes an array subtype or array
-object @Redundant[(after any implicit dereference)]}:
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
+@Chg{New=[@nt{prefix}],Old=[prefix]} X that denotes an array subtype or
+array object @Redundant[(after any implicit dereference)]]}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Component_Size>,
   Text=<Denotes the size in bits of
@@ -2067,8 +2076,8 @@ or it might not have any internal gaps at all.
 attribute is defined]}:
 
 @begin{Description}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
-@Attribute{Prefix=<S>, AttrName=<External_Tag>,
+@ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<S>, AttrName=<External_Tag>, Ref=[8652/0040],
   Text=[@Defn{External_Tag clause}
   @PDefn2{Term=(specifiable), Sec=(of External_Tag for a tagged type)}
   S'External_Tag denotes an external string representation
