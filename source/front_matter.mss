@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.23 $ $Date: 2000/09/01 03:51:24 $}
+@comment{$Revision: 1.24 $ $Date: 2000/09/01 22:49:02 $}
 
 @begin{Intro}
 
@@ -687,12 +687,13 @@ At the conclusion of this process, the corrections become an approved part of
 this International Standard. Thus, the corrections in Technical Corrigendum 1
 now have replaced the corresponding parts of the original Ada Reference Manual.],Old=[]}
 
+@Comment{Jim doesn't want this paragraph.
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[At this time, this revised document is an unofficial version of this
 International Standard. That is, in the case of a conflict between this document
 and Technical Corrigendum 1 (or between this document and the original 8652:1995
 in the case of paragraphs not changed by Technical Corrigendum 1), the other
-document contains the official text of this International Standard.],Old=[]}
+document contains the official text of this International Standard.],Old=[]}}
 
 @begin{RMOnly}
 @ChgRef{Version=[1],Kind=[Added]}
@@ -743,7 +744,7 @@ J. Tokar (USA), and other members too numerous to mention.],Old=[]}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[Special thanks go to R. Duff (USA) for his explanations of the previous system
 of formatting these documents during the tedious conversion to more modern
-formats. Special thanks also go to the convenor of ISO/IEC JTC 1/SC 22/WG 9,
+formats. Special thanks also go to the convener of ISO/IEC JTC 1/SC 22/WG 9,
 J. Moore (USA), without whose help and support the corrigendum and this
 revised reference manual would not have been possible.],Old=[]}
 @end{Intro}

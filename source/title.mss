@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2000/08/17 03:15:28 $}
+@comment{$Revision: 1.12 $ $Date: 2000/09/01 22:49:02 $}
 
 @Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}}}
 
@@ -20,7 +20,9 @@
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@Swiss{[Revision of first edition (ISO 8652:1987)]}
+@Comment{Jim Moore wants this deleted, as it is confusing.}
+@Noparanum@Chg{New=[@ @*@Comment{Dummy paragraph}],
+               Old=[@Swiss{[Revision of first edition (ISO 8652:1987)]}]}
 
 @Noparanum@ @*
 
@@ -32,9 +34,7 @@
 @Noparanum@Heading{Annotated Ada Reference Manual}
 @end{AARMOnly}
 
-@Noparanum@ @;@comment{A dummy paragraph containing just a blank}
-
-@Noparanum@center{@Chg{New=[@Swiss<with Technical Corrigendum 1>], Old=[]}}
+@Noparanum@Heading{@Chg{New=[with Technical Corrigendum 1], Old=[]}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
@@ -56,6 +56,8 @@ probably is changed by now.}
 @Comment{The following puts the copyright near the bottom of the page}
 @Noparanum@ @*@*@*@*@*
 
+@Noparanum@;@b{Ada Reference Manual - Language and Standard Libraries}
+
 @Noparanum@;Copyright @Latin1(169) 1992, 1993, 1994, 1995, Intermetrics, Inc.
 
 @Noparanum@;This copyright is assigned to the U.S. Government.  All rights reserved.
@@ -71,7 +73,9 @@ and documentation.
 
 @Noparanum@;@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@;Alterations copyright @Latin1(169) 2000, The MITRE Corporation.  All Rights Reserved.
+@Noparanum@;@b{Technical Corrigendum 1}
+
+@Noparanum@;Copyright @Latin1(169) 2000, The MITRE Corporation.  All Rights Reserved.
 
 @Noparanum@;This document may be copied, in whole or in part, in any form or by any means,
 as is, or with alterations, provided that (1) alterations are clearly marked as
