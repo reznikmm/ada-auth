@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/17 03:15:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/31 04:56:10 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:29 $}
+@Comment{$Date: 2000/08/31 04:56:10 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -17,6 +17,7 @@ constants initialized to values of type Character.
 @end{Intro}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This clause is new to Ada 95.
 @end{Extend83}
 

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:09 $}
+@Comment{$Date: 2000/08/31 04:56:02 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -324,10 +324,11 @@ to semantic dependents.
     I : Integer := 0;
 @key[end] P.Q;
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00080 - syntax error}
 @key[with] P;
 @key[package] R @key[is]
     @key[package] X @key[renames] P;
-    X.Q.I := 17; --@RI{ Illegal!}
+    @Chg{New=[J : Integer := ],Old=[]}X.Q.I@Chg{New=[],Old=[ := 17]}; --@RI{ Illegal!}
 @key[end] R;
 @end{Example}
 
@@ -523,6 +524,7 @@ See Section 12.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The fact that the immediate scope of an overloadable declaration does
 not include its profile is new to Ada 95. It replaces
 RM83-8.3(16), which said that within
@@ -957,7 +959,7 @@ required to do.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0026],Ref=[8652/0102]}
 @Chg{New=[@Leading@;If a @nt{type_extension} contains a component with
-the same name as a complete in an ancestor type, there must be no place
+the same name as a component in an ancestor type, there must be no place
 where both components are visible. For instance:],Old=[]}
 @begin{Example}@ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@key[package] A @key[is]
@@ -1132,6 +1134,7 @@ declaration.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Declarations with the same defining
 name as that of a subprogram or entry being defined
 are nevertheless visible within
@@ -1375,6 +1378,7 @@ and the case of @nt{subtype_declaration}s
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The @nt{use_type_clause} is new to Ada 95.
 @end{Extend83}
 
@@ -1989,6 +1993,7 @@ in particular if the renamed generic unit is a library unit
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Renaming of generic units is new to Ada 95.
 It is particularly important for renaming child library
 units that are generic units. For example, it might
@@ -2265,11 +2270,11 @@ This matching rule handles (among other things) cases like the
 Val attribute, which denotes a function that takes a parameter of type
 @i(universal_integer).
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00021 - Quoted text doesn't match}
 The last part of the rule,
-@lquotes@;or to a universal type that includes the class@rquotes@;
-implies that if the expected type for an expression
-is @i{universal_fixed},
-then an expression whose type is @i{universal_real}
+@lquotes@;or to a universal type that @Chg{New=[covers],Old=[includes]} the
+class@rquotes implies that if the expected type for an expression is
+@i{universal_fixed}, then an expression whose type is @i{universal_real}
 (such as a real literal) is OK.
 @end{Ramification}
 
@@ -2385,8 +2390,9 @@ of the root numeric type is @i{preferred}.
 literals and named numbers can be unambiguous.
 For example, without the preference rule, the following would be ambiguous:
 @begin{Example}
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00022}
 N : @key[constant] := 123;
-@key[if] N > 100 @key[then] --@RI{ Preference for root_integer "<" operator.}
+@key[if] N > 100 @key[then] --@RI{ Preference for root_integer "@Chg{New=[>],Old=[<]}" operator.}
     ...
 @key[end] @key[if];
 @end{Example}
@@ -2398,8 +2404,7 @@ is the same as or preferred (in the
 above sense) over those in all other overall acceptable interpretations, then
 that one overall acceptable interpretation is chosen.
 @Defn{ambiguous}
-Otherwise,
-the complete context is @i{ambiguous}.
+Otherwise, the complete context is @i{ambiguous}.
 
 A complete context other than a @nt{pragma_argument_association}
 shall not be ambiguous.
@@ -2457,6 +2462,7 @@ exception during program execution).
 @end{Notes}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 @PDefn{Beaujolais effect}
 The new preference rule for operators of root numeric types
 is upward incompatible,
@@ -2465,6 +2471,7 @@ Such cases are ambiguous in Ada 95.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The rule that allows an expected type to match an actual expression of a
 universal type,
 in combination with the new preference rule for operators of root numeric

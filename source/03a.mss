@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:08 $}
+@Comment{$Date: 2000/08/31 04:55:59 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1039,6 +1039,7 @@ only if the composite subtype is unconstrained
 @end{Examples}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 In Ada 95, all @nt<range_constraint>s cause freezing of their type.
 Hence, a type-related representation item for a scalar type has to
 precede any @nt<range_constraint>s whose type is the scalar type.
@@ -1157,6 +1158,7 @@ is called a @i(primitive operator).
 @end{StaticSem}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 The attribute S'Base is no longer defined for
 non-scalar subtypes. Since this was only permitted
 as the prefix of another attribute, and there are no
@@ -1166,6 +1168,7 @@ existing programs.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The primitive subprograms (derivable subprograms) include
 subprograms declared in the private part of a package
 specification as well, and those that override implicitly declared
@@ -1344,6 +1347,7 @@ subtype.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 There are additional kinds of objects (choice parameters and
 entry indices of entry bodies).
 
@@ -1715,6 +1719,7 @@ Tolerance : @key(constant) Real := Dispersion(1.15);
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{object_declaration} is modified to allow the
 @key{aliased} reserved word.
 
@@ -1820,6 +1825,7 @@ One, Un, Eins : @key(constant) := 1;                     @RI[-- three different 
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 We now allow a static expression of any numeric type
 to initialize a named
 number. For integer types, it was possible in Ada 83
@@ -2291,6 +2297,7 @@ type, the type is abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 When deriving from a (nonprivate, nonderived) type in the same
 visible part in which it is defined, if a predefined
 operator had been overridden prior to the derivation,
@@ -2302,6 +2309,7 @@ derived type prior to the overriding of any predefined operators.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 @Leading@;When deriving from a (nonprivate, nonderived) type in the same
 visible part in which it is defined, a primitive subprogram of the
 parent type declared before the derived type will be inherited by the
@@ -2328,6 +2336,7 @@ this:
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax for a @nt{derived_type_definition} is amended to
 include an optional @nt{record_extension_part}
 (see @RefSecNum(Type Extensions)).
@@ -3208,6 +3217,7 @@ Table'Range      @RI[-- a range attribute reference (see @RefSecNum{Array Types}
 
 @begin{Incompatible83}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Defn{incompatibilities with Ada 83}
 S'Base is no longer defined for nonscalar types.
 One conceivable existing use of S'Base for nonscalar types is
 S'Base'Size where S is a generic formal private type.
@@ -3227,6 +3237,7 @@ as a @Chg{New=[@nt{prefix}],Old=[prefix]}.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The attribute S'Base for a scalar subtype is now permitted
 anywhere a @nt{subtype_mark} is permitted.
 S'Base'First .. S'Base'Last
@@ -3492,6 +3503,7 @@ clause @RefSecNum(Enumeration Representation Clauses).
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 The declaration of Wide_Character in package Standard hides
 use-visible declarations with the same defining identifier.
 In the unlikely event that an Ada 83 program had depended on
@@ -3501,6 +3513,7 @@ the meaning of the program will be different.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 The presence of Wide_Character in package Standard means that
 an expression such as
 @begin(Example)
@@ -3518,6 +3531,7 @@ character literals.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The type Character has been extended to have 256 positions,
 and the type Wide_Character has been added.
 Note that this change was already approved by the ARG
@@ -3958,6 +3972,7 @@ signed integer types match "@key(type) T @key(is range) <>;"
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 An implementation is allowed to support any number of distinct
 base ranges for integer types, even if fewer
 integer types are explicitly declared in Standard.
@@ -4118,6 +4133,7 @@ are satisfied (in the absence of an exception) by these attributes:
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The attributes S'Succ, S'Pred, S'Width, S'Image, and S'Value have
 been generalized to apply to real types as well
 (see @RefSec{Scalar Types}).
@@ -4475,6 +4491,7 @@ Overflow_Checks, never Range_Checks.
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 No Range_Checks, only Overflow_Checks, are performed on
 variables (or parameters) of an
 unconstrained floating point subtype. This is upward
@@ -4531,10 +4548,10 @@ the definition of Succ and Pred for floating point numbers.
   is of the type @i(universal_integer).]}
 The requested decimal precision of the base subtype of a floating
 point type @i{T} is defined to be the largest value of @i{d} for which
-@chg{New=[@*
-ceiling(@i{d} * log(10) / log(T'Machine_Radix)) + @i{g} <= T'Model_Mantissa@*
-where g is 0 if Machine_Radix is a positive power of 10 and 1 otherwise.],
-Old=[ceiling(@i{d} * log(10) / log(T'Machine_Radix)) + 1 <= T'Model_Mantissa.]}
+@chg{New=[@*],Old=[]}
+ceiling(@i{d} * log(10) / log(T'Machine_Radix)) + @Chg{New=[@i{g}],Old=[1]}
+<= T'Model_Mantissa@Chg{New=[@*
+where g is 0 if Machine_Radix is a positive power of 10 and 1 otherwise],Old=[]}.
 @end(description)
 @EndPrefixType{}
 @end{StaticSem}
@@ -4718,12 +4735,12 @@ or implicitly) a range that is compatible with the subtype.
 @key[type] D @key[is] @key[delta] 0.01 @key[digits] 7 @key[range] -0.00 .. 9999.99;
 @end{Example}
 
-  The compatibility rule implies that the
-  @nt{digits_constraint} "@key[digits] 6" specifies an implicit range of
-  "@en 99.9999 .. 99.9999". Thus, "@key[digits] 6" is not compatible
-  with the constraint of D, but "@key[digits] 6 range 0.00 .. 9999.99"
-  is compatible.
-
+  @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00008}
+  The compatibility rule implies that the @nt{digits_constraint}
+  "@key[digits] 6" specifies an implicit range of
+  "@en@;@Chg{New=[9999.99],Old=[99.9999]} .. @Chg{New=[9999.99],Old=[99.9999]}".
+  Thus, "@key[digits] 6" is not compatible with the constraint of D, but
+  "@key[digits] 6 range 0.00 .. 9999.99" is compatible.
 
   A value of a scalar type
   belongs to a constrained subtype of the type if it belongs to the
@@ -4817,6 +4834,7 @@ of Float_IO).
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 In Ada 95, S'Small always equals S'Base'Small,
 so if an implementation chooses a @i(small) for a fixed point type smaller
 than required by the @i(delta), the value of S'Small in Ada 95 might not be
@@ -4824,6 +4842,7 @@ the same as it was in Ada 83.
 @end{Inconsistent83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Decimal fixed point types are new, though their
 capabilities are essentially similar to that available
 in Ada 83 with a fixed point type whose @i(small) equals its @i(delta) equals

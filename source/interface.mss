@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2000/08/29 04:22:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2000/08/31 04:56:09 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/29 04:22:23 $}
+@Comment{$Date: 2000/08/31 04:56:09 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -26,6 +26,7 @@ Ada should have strong support for mixed-language programming.
 @end{MetaRules}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Much of the functionality in this Annex is new to Ada 95.
 @end{Extend83}
 
@@ -400,6 +401,12 @@ precedence.
     Adafinal should contain the finalization code.
     These subprograms should have no effect the second and subsequent
     time they are called.
+    @Chg{New=[@Defn{adainit}@Defn{adafinal}@Defn2{Term=[Elaboration],
+    Sec=[of library units for a foreign language main subprogram]}
+    @Defn2{Term=[Finalization],
+    Sec=[of environment task for a foreign language main subprogram]}],
+    Old=[]}@ChgNote{Presentation AI-00052. Index entries only; no
+      real change, so no Chgref}
 @begin{ramification}
 For example, if the main subprogram is written in C,
 it can call adainit before the first call to an Ada subprogram,
@@ -516,6 +523,7 @@ Ada semantics.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Interfacing pragmas are new to Ada 95.
 Pragma Import replaces Ada 83's pragma Interface.
 Existing implementations can continue to support pragma Interface for

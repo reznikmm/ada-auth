@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2000/08/26 04:13:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2000/08/31 04:56:06 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/08/26 04:13:56 $}
+@Comment{$Date: 2000/08/31 04:56:06 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -42,6 +42,7 @@ that language.
 @end{ImplAdvice}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This Annex is new to Ada 95.
 @end{Extend83}
 
@@ -1200,6 +1201,7 @@ The two modes need not actually be different.
 @end{ImplPerm}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The choice between strict and relaxed numeric performance was not available in
 Ada 83.
 @end{Extend83}
@@ -1362,6 +1364,7 @@ restricted to the safe range, are an infinite set.
 @end{DiffWord83}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 Giving the model numbers the hardware radix, instead of always a radix of two,
 allows (in conjunction with other changes) some borderline declared
 types to be represented with less precision than in Ada 83 (i.e., with single
@@ -1394,6 +1397,7 @@ eligible for the representation of T.
 @end{Inconsistent83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Giving the model numbers the hardware radix allows for practical
 implementations on decimal hardware.
 @end{Extend83}
@@ -1767,6 +1771,7 @@ then the implementation shall deliver one of the permitted results; otherwise,
 @end{ImplReq}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 Since the values of a fixed point type are now just the integer multiples of
 its @i{small}, the possibility of using extra bits available in the chosen
 representation for extra accuracy rather than for increasing the base range
@@ -1893,6 +1898,15 @@ The last line of the table is meant to apply when
 @i{EF}.Float_Type'Signed_Zeros is True and the parameter Y has a zero value
 with the indicated sign.
 
+The amount by which the result of an inverse trigonometric function is allowed
+to spill over into a quadrant adjacent to the one corresponding to the
+principal branch, as given in @RefSecNum{Elementary Functions}, is limited.
+The rule is that the result belongs to the smallest model interval of
+@i{EF}.Float_Type that contains both boundaries of the quadrant corresponding
+to the principal branch. This rule also takes precedence over the maximum
+relative error bounds, effectively narrowing the result interval allowed by
+them.
+
 @Table[Columns=<5>,
 Caption=<@b{Tightly Approximated Elementary Function Results}>,
 Headers=<@b{Function}@\@b{Value of X}@\@b{Value of Y}@\@b{Exact Result @*when Cycle @*Specified}@\@b{Exact Result @*when Cycle @*Omitted}>,
@@ -1905,15 +1919,6 @@ Arctan and Arccot@\0.0@\negative@\-@R[Cycle]/4.0@\-@Pi/2.0
 Arctan and Arccot@\negative@\+0.0@\Cycle/2.0@\@Pi
 Arctan and Arccot@\negative@\-0.0@\-@R[Cycle]/2.0@\-@Pi@Last
 Arctan and Arccot@\negative@\0.0@\Cycle/2.0@\@Pi>]
-
-The amount by which the result of an inverse trigonometric function is allowed
-to spill over into a quadrant adjacent to the one corresponding to the
-principal branch, as given in @RefSecNum{Elementary Functions}, is limited.
-The rule is that the result belongs to the smallest model interval of
-@i{EF}.Float_Type that contains both boundaries of the quadrant corresponding
-to the principal branch. This rule also takes precedence over the maximum
-relative error bounds, effectively narrowing the result interval allowed by
-them.
 
 @Leading@;Finally, the following specifications also take precedence over the maximum
 relative error bounds:

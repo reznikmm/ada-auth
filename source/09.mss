@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:09 $}
+@Comment{$Date: 2000/08/31 04:56:02 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 
@@ -342,6 +342,7 @@ Terminal : Keyboard := @key(new) Keyboard_Driver(Term_ID);
 
 @begin{Extend83}
 @ChgRef{Version=[1],Kind=[Revised]}
+@Defn{extensions to Ada 83}
 The syntax rules for task declarations are modified to allow a
 @nt{known_discriminant_part}, and to allow a private part.
 They are also modified to allow @nt{entry_declaration}s and
@@ -961,6 +962,7 @@ Flags    : @key(array)(1 .. 100) @key(of) Resource;
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This entire clause is new;
 protected units do not exist in Ada 83.
 @end{Extend83}
@@ -1713,7 +1715,7 @@ when its parameters indicate that it cannot be handled immediately.
 @end{Examples}
 
 @begin{Extend83}
-
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{entry_body} is new.
 
 @nt{Accept_statement}s can now have @nt{exception_handler}s.
@@ -2324,6 +2326,7 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The @nt<requeue_statement> is new.
 @end{Extend83}
 
@@ -2675,6 +2678,7 @@ are given in @RefSec(Delay Accuracy).
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 For programs that raise Time_Error on "+" or "@en@;" in Ada 83,the exception
 might be deferred until a call on Split or Year_Number, or might
 not be raised at all (if the offending time is never Split after being
@@ -2684,7 +2688,7 @@ recent past or near future.
 @end{Inconsistent83}
 
 @begin{Extend83}
-
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{delay_statement} is modified to allow
 @nt{delay_until_statement}s.
 
@@ -2743,6 +2747,7 @@ transfer of control.]
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 @nt{Asynchronous_select} is new.
 @end{Extend83}
 
@@ -3205,6 +3210,7 @@ executed after the @nt<abortable_part> is left.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 @nt<Asynchronous_select> is new.
 @end{Extend83}
 

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:09 $}
+@Comment{$Date: 2000/08/31 04:56:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @LabeledClause{Array Types}
 
@@ -308,6 +308,7 @@ Page : @key(array)(Positive @key(range) <>) @key(of) Line :=  @RI[--  an array o
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{component_definition} is modified to allow
 the reserved word @key{aliased}.
 
@@ -462,6 +463,7 @@ Null_Line : Var_Line(0);  @RI[--  Null_Line.Image is a null array]
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 We allow the declaration of a variable with
 a nominally unconstrained array subtype, so long as
 it has an initialization expression to determine
@@ -636,6 +638,7 @@ Ninety_Six : @key(constant) Roman   := "XCVI";@\@RI[-- see @RefSecNum(Character 
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 The declaration of Wide_String in Standard hides a use-visible
 declaration with the same @nt<defining_identifier>.
 In rare cases, this might result in an inconsistency between
@@ -643,6 +646,7 @@ Ada 83 and Ada 95.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 Because both String and Wide_String are always directly visible,
 an expression like
 @begin(Example)
@@ -654,6 +658,7 @@ be resolved to type String.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The type Wide_String is new (though it was approved by
 ARG for Ada 83 compilers as well).
 @end{Extend83}
@@ -1173,6 +1178,7 @@ used only for discriminants defined by an @nt<access_definition>.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax for a @nt{discriminant_specification}
 is modified to allow an @i{access discriminant},
 with a type specified by an @nt{access_definition}
@@ -1352,6 +1358,7 @@ Illegal : Square;       @RI[--  illegal, a Square has to be constrained]
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 Dependent compatibility checks are no longer performed on
 subtype declaration. Instead they are deferred until
 object creation (see @RefSecNum(Object Declarations)).
@@ -1431,6 +1438,7 @@ execution) of the subcomponent denoted by the @nt<name>.
 
 @begin{Extend83}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@Defn{extensions to Ada 83}
 For consistency with other attributes, we are allowing
 the @Chg{New=[@nt{prefix}],Old=[prefix]} of Constrained to be a value as well
 as an object of a discriminated type, and also an implicit
@@ -1752,6 +1760,7 @@ A, B, C : Complex;
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax rule for @nt<component_declaration> is modified
 to use @nt<component_definition> (instead of
 @nt<component_subtype_definition>). The effect of this change
@@ -1984,6 +1993,7 @@ Archive  : Disk_Unit;
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 In Ada 83, the discriminant of a @nt{variant_part} is not allowed to
 be of a generic formal type.
 This restriction is removed in Ada 95; an @key{others} @nt{discrete_choice}
@@ -2441,6 +2451,7 @@ the library unit in which the incomplete type is declared
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Tagged types are a new concept.
 @end{Extend83}
 
@@ -2675,6 +2686,7 @@ Tree : Expr_Ptr :=         @RI[-- A tree representation of @lquotes@;5.0 + (13.0
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Type extension is a new concept.
 @end{Extend83}
 
@@ -3053,14 +3065,15 @@ For example:
     @key[procedure] Op_B(Param : @key[in] T2);
 @key[end] P2;
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00009 & AI-00114}
 @key[with] P1; @key[with] P2;
 @key[procedure] Main @key[is]
-    X : T2;
-    Y : T1'Class := X;
+    X : @Chg{New=[P2.],Old=[]}T2;
+    Y : @Chg{New=[P1.],Old=[]}T1'Class := X;
 @key[begin]
-    P2.Op_A(Param => X); --@RI{ Nondispatching call.}
+    P2.Op_A(Param => X); --@RI{ Nondispatching call@Chg{New=[ to a dispatching operation],Old=[]}.}
     P1.Op_A(Arg => Y); --@RI{ Dispatching call.}
-    P2.Op_B(Arg => X); --@RI{ Nondispatching call.}
+    P2.Op_B(Arg => X); --@RI{ Nondispatching call@Chg{New=[ to a dispatching operation],Old=[]}.}
     P1.Op_B(Arg => Y); --@RI{ Dispatching call.}
 @key[end] Main;
 @end{Example}
@@ -3120,6 +3133,7 @@ declaration of a primitive subprogram.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The concept of dispatching operations is new.
 @end{Extend83}
 
@@ -3210,14 +3224,15 @@ The two lines marked "--@i{ Illegal!}" are illegal when taken together.
   useful).
   For example:
 @begin{Example}
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00010}
 @key[package] P @key[is]
    @key[type] Field_Size @key[is] @key[range] 0..100;
    @key[type] T @key[is] @key[abstract tagged] @key[null] @key[record];
-   @key[procedure] Print(X : @key[in] T; F : @key[in] Field_Size := 0) @key[is] abstract;
+   @key[procedure] Print(X : @key[in] T; F : @key[in] Field_Size := 0) @key[is] @Chg{New=[@key[abstract]],Old=[abstract]};
   . . .
 @key[package] Q @key[is]
    @key[type] My_Field_Size @key[is] @key[new] Field_Size;
-   --@RI{ implicit declaration of Print(X : T; F : My_Field_Size := 0) is abstract;}
+   --@RI{ implicit declaration of Print(X : T; F : My_Field_Size := 0) @Chg{New=[@key[is abstract]],Old=[is abstract]};}
 @key[end] Q;
 @end{Example}
 
@@ -3283,8 +3298,9 @@ or a primitive function with a controlling result, then:
 @key[end] Pack3;
     @end{Example}
 
-    T2 inherits an abstract Do_Something, but T is not abstract,
-    so Do_Something has to be overridden.
+    @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00011}
+    T2 inherits an abstract Do_Something, but T@Chg{New=[2],Old=[]} is not
+    abstract, so Do_Something has to be overridden.
     However, it is OK to override it in the private part.
     In this case, we override it by inheriting a concrete version
     from a different type.
@@ -3946,6 +3962,7 @@ Give_Message.@key[all];                 --@RI{ call with no parameters}
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax for @nt{access_type_definition} is
 changed to support general access
 types (including access-to-constants) and access-to-subprograms.
@@ -4177,13 +4194,15 @@ George.Vehicle := Your_Car;
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The @nt{full_type_declaration} that completes an
 @nt{incomplete_type_declaration} may have a
 @nt{known_discriminant_part} even if the
 @nt{incomplete_type_declaration} does not.
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00013}
 A @nt<discriminant_constraint> may be applied
-to an incomplete type, even if it its completion is
+to an incomplete type, even if @Chg{New=[],Old=[it ]}its completion is
 deferred to the package body, because there is no
 @lquotes@;dependent compatibility check@rquotes@; required any more.
 Of course, the constraint can be specified only if
@@ -5060,6 +5079,7 @@ George.Vehicle := Cars(2)'Access;
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 We no longer make things like 'Last and ".component"
 (basic) operations of an access type that need to be "declared"
 somewhere. Instead, implicit dereference
@@ -5192,6 +5212,7 @@ The exception Program_Error is raised if any of these checks fails.
 @end{RunTime}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax for @nt{declarative_part} is modified to remove the ordering
 restrictions of Ada 83; that is, the distinction between
 @nt{basic_declarative_item}s and @nt{later_declarative_item}s
@@ -5206,8 +5227,7 @@ protected operations.
 @end{Extend83}
 
 @begin{DiffWord83}
-The syntax rule for
-@nt{later_declarative_item} is removed;
+The syntax rule for @nt{later_declarative_item} is removed;
 the syntax rule for @nt{declarative_item} is new.
 
 RM83 defines @lquotes@;elaborated@rquotes@; and @lquotes@;not yet elaborated@rquotes@; for

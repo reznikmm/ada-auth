@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2000/08/30 00:23:11 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2000/08/31 04:56:08 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/08/30 00:23:11 $}
+@Comment{$Date: 2000/08/31 04:56:08 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -18,6 +18,7 @@ required in many real-time, embedded, distributed, and information systems.]
 @end{Intro}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This Annex is new to Ada 95.
 @end{Extend83}
 
@@ -1126,6 +1127,7 @@ still be modified by an @lquotes@;external source.@rquotes@;
 @end{Notes}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 Pragma Atomic replaces Ada 83's pragma Shared.
 The name @lquotes@;Shared@rquotes@; was confusing,
 because the pragma was not used to mark variables as shared.

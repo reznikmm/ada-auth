@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2000/08/30 00:23:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2000/08/31 04:56:07 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:10 $}
+@Comment{$Date: 2000/08/31 04:56:07 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -50,6 +50,7 @@ significant digits.
 @end{ImplPerm}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Numerics and its children were not predefined in Ada 83.
 @end{Extend83}
 

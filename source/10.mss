@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:09 $}
+@Comment{$Date: 2000/08/31 04:56:03 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -817,6 +817,7 @@ children:
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{library_item} is modified to allow the
 reserved word @key{private} before a @nt{library_unit_declaration}.
 
@@ -1037,6 +1038,7 @@ above.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{with_clause} is modified to allow expanded name
 notation.
 
@@ -1246,6 +1248,7 @@ the same):
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Subunits of the same ancestor library unit are no longer restricted
 to have distinct identifiers.
 Instead, we require only that the full expanded names be distinct.
@@ -2303,6 +2306,7 @@ time and at partition-construction time/run time.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The concept of partitions is new to Ada 95.
 
 A main subprogram is now optional.
@@ -2704,6 +2708,7 @@ In such cases, Elaborate_All sometimes won't work.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The concepts of preelaborability
 and purity are new to Ada 95.
 The Elaborate_All, Elaborate_Body, Preelaborate,

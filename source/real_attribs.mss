@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:28 $}
+@Comment{$Date: 2000/08/31 04:56:07 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.19 $}
+@comment{$Revision: 1.20 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -610,6 +610,7 @@ Annex is not supported.}
 @end{StaticSem}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 The Epsilon and Mantissa attributes of floating point types are removed
 from the language and replaced by Model_Epsilon and
 Model_Mantissa, which may have different values (as a result of changes in the
@@ -635,6 +636,7 @@ in the form of implementation-defined attributes with their former values.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The Model_Emin attribute is new. It is conceptually similar to the negation of
 Safe_Emax attribute of Ada 83, adjusted for the fact that the model numbers now
 have the hardware radix. It is a fundamental determinant, along with
@@ -676,6 +678,7 @@ The following @i{representation-oriented} attributes are defined for
 @end{StaticSem}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 The Mantissa, Large, Safe_Small, and Safe_Large attributes of fixed
 point types are removed from the language.
 
@@ -685,6 +688,7 @@ in the form of implementation-defined attributes with their former values.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The Machine_Radix attribute
 is now allowed for fixed point types. It is
 also specifiable in an attribute definition clause

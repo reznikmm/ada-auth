@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.21 $ $Date: 2000/08/12 00:40:18 $}
+@comment{$Revision: 1.22 $ $Date: 2000/08/31 04:56:08 $}
 
 @begin{Intro}
 
@@ -658,5 +658,93 @@ the International Standard is formatted for A4 paper
 (210-by-297mm);
 thus, the page breaks are in different places.
 @end{Itemize}
+@end{Intro}
+
+@ChgNote{Following is an introduction to the revised edition of the RM/AARM.}
+@NewPage
+@AddedSubHeading{Revised Edition for Technical Corrigendum 1}
+
+@begin{Intro}
+@begin{RMOnly}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
+(ISO/IEC 8652:1995/COR1:2000).],Old=[]}
+@end{RMOnly}
+@begin{AARMOnly}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
+(ISO/IEC 8652:1995/COR1:2000). In addition, additional annotations have been added and
+a variety of typographical errors have been corrected.],Old=[]}
+@end{AARMOnly}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Technical Corrigendum 1 was developed by the Ada Rapporteur Group
+(ARG) of ISO/IEC JTC 1/SC 22/WG 9, the Ada working group. The ARG is the
+language maintenance subgroup of WG 9, meaning that it is responsible for
+determining needed corrections to the standard. The ARG developed the
+corrections through a lengthy process of formulation, discussion, and approval.
+At the conclusion of this process, the corrections become an approved part of
+this International Standard. Thus, the corrections in Technical Corrigendum 1
+now have replaced the corresponding parts of the original Ada Reference Manual.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[At this time, this revised document is an unofficial version of this
+International Standard. That is, in the case of a conflict between this document
+and Technical Corrigendum 1 (or between this document and the original 8652:1995
+in the case of paragraphs not changed by Technical Corrigendum 1), the other
+document contains the official text of this International Standard.],Old=[]}
+
+@begin{RMOnly}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[
+Changes to the original 8652:1995 can be identified by the version number /1
+following the paragraph number. Paragraphs not so marked are unchanged by
+Technical Corrigendum 1. Paragraph numbers of unchanged paragraphs should be
+the same as in the original International Standard. In addition, some versions
+of this document include revision bars near the paragraph numbers. Where
+paragraphs are inserted, the paragraph numbers are of the form pp.nn, where pp
+is the number of the preceding paragraph, and nn is an insertion number. For
+instance, the first paragraph inserted after paragraph 8 is numbered 8.1, the
+second paragraph inserted is numbered 8.2, and so on. Deleted paragraphs are
+indicated by the text @i{@shrink{This paragraph was deleted.}}],Old=[]}
+@end{RMOnly}
+@begin{AARMOnly}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[
+Changes to the original 8652:1995 can be identified by the version number /1
+following the paragraph number. Paragraphs not so marked are unchanged by
+Technical Corrigendum 1. Paragraph numbers of unchanged paragraphs should be
+the same as in the original International Standard. Inserted text is indicated
+by underlining, and deleted text is indicated by strikethroughs. Where
+paragraphs are inserted, the paragraph numbers are of the form pp.nn, where pp
+is the number of the preceding paragraph, and nn is an insertion number. For
+instance, the first paragraph inserted after paragraph 8 is numbered 8.1, the
+second paragraph inserted is numbered 8.2, and so on. Deleted paragraphs are
+indicated by the text @i{@shrink{This paragraph was deleted.}} Similar markings
+and numbering is used for changes to annotations.],Old=[]}
+@end{AARMOnly}
+
+@AddedSubHeading{Acknowledgements for the Revised Edition}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=<The editor [R. Brukardt (USA)] would like to thank the many people
+whose hard work and assistance has made this revision possible.>,Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Thanks go out to all of the members of the ISO/IEC JTC 1/SC 22/WG 9
+Ada Rapporteur Group, whose work on creating and editing the wording
+corrections was critical to the entire process. Especially valuable
+contributions came from the chairman of the ARG, E. Ploderedere (Germany), who
+kept the process moving; J. Barnes (UK) and K. Istihata (Japan), whose
+extremely detailed reviews kept the editor on his toes; G. Dismukes (USA),
+M. Kamrad (USA), P. Leroy (France), S. Michell (Canada), T. Taft (USA),
+J. Tokar (USA), and other members too numerous to mention.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[Special thanks go to R. Duff (USA) for his explanations of the previous system
+of formatting these documents during the tedious conversion to more modern
+formats. Special thanks also go to the convenor of ISO/IEC JTC 1/SC 22/WG 9,
+J. Moore (USA), without whose help and support the corrigendum and this
+revised reference manual would not have been possible.],Old=[]}
 @end{Intro}
 @end{NotISO}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2000/08/30 00:23:11 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2000/08/31 04:56:10 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/08/30 00:23:11 $}
+@Comment{$Date: 2000/08/31 04:56:10 $}
 
 @LabeledClause{String Handling}
 
@@ -18,6 +18,7 @@ translation (via a character-to-character mapping), and transformation
 @end{Intro}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This clause is new to Ada 95.
 @end{Extend83}
 

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:09 $}
+@Comment{$Date: 2000/08/31 04:56:01 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -154,6 +154,7 @@ language environment
 @end{Examples}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 In Ada 83, a library package is allowed to have a body even if
 it doesn't need one.
 In Ada 95, a library package body is either
@@ -498,6 +499,7 @@ that seemed like too much mechanism.
         --@RI{ This should say @lquotes@;@key[tagged limited null record]@rquotes@;.}
 @key[end] P1;
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
 @key[package] @key[body] P1 @key[is]
     @key[type] A @key[is] @key[access] T1'Class;
     Global : A;
@@ -506,7 +508,7 @@ that seemed like too much mechanism.
         Global := @key[new] T1'Class'(X);
             --@RI{ This would be illegal if the full view of}
             --@RI{ T1 were limited, like it's supposed to be.}
-    @key[end] A;
+    @key[end] @Chg{New=[Foo],Old=[A]};
 @key[end] P1;
 
 @key[with] P1;
@@ -518,11 +520,12 @@ that seemed like too much mechanism.
         @key[end] @key[record];
 @key[end] P2;
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
 @key[with] P1;
 @key[with] P2;
 @key[procedure] Main @key[is]
     Local : @key[aliased] Integer;
-    Y : P2.T2(A => Local'Access);
+    Y : P2.T2(@Chg{New=[D],Old=[A]} => Local'Access);
 @key[begin]
     P1.Foo(Y);
 @key[end] Main;
@@ -553,8 +556,10 @@ and even at places that can see the parent:
         @key[end] @key[record];
 @key[end] P;
 
-@key[package] Q @key[is]
-    @key[type] T @key[is] @key[new] Parent;
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
+@Chg{New=[@key[with] P;
+],Old=[]}@key[package] Q @key[is]
+    @key[type] T @key[is] @key[new] @Chg{New=[P.],Old=[]}Parent;
 @key[end] Q;
 
 @key[with] Q; @key[use] Q;
@@ -855,6 +860,7 @@ See @RefSecNum{Dispatching Operations of Tagged Types}.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax for a @nt{private_type_declaration} is augmented to
 allow the reserved word @key{tagged}.
 
@@ -1361,6 +1367,7 @@ CPU_Identifier : @key[constant] String(1..8);
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 In Ada 83, a deferred constant is required to be of a private type
 declared in the same visible part.
 This restriction is removed for Ada 95;
@@ -1608,6 +1615,7 @@ parameter passing and function return will always be by reference
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The restrictions in RM83-7.4.4(4),
 which disallowed @key[out] parameters of limited types in certain
 cases, are removed.
@@ -2035,6 +2043,7 @@ subcomponents may be self-referential or otherwise position-dependent.
 @end{ImplPerm}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Controlled types and user-defined finalization are new to Ada 95.
 (Ada 83 had finalization semantics only for masters of tasks.)
 @end{Extend83}

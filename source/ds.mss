@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2000/08/29 04:22:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2000/08/31 04:56:05 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/08/29 04:22:23 $}
+@Comment{$Date: 2000/08/31 04:56:05 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -12,6 +12,7 @@ cooperatively as part of a single Ada program.]
 @end{Intro}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This Annex is new to Ada 95.
 @end{Extend83}
 

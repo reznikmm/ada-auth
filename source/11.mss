@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/08/29 04:22:22 $}
+@Comment{$Date: 2000/08/31 04:56:04 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -155,6 +155,7 @@ Overflow, Underflow : @key[exception];
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 The exception Numeric_Error is now defined in the Obsolescent
 features Annex, as a rename of Constraint_Error.
 All checks that raise Numeric_Error in Ada 83
@@ -280,6 +281,7 @@ that are propagated by the @nt{sequence_of_@!statement}s.]
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{exception_handler} is modified to
 allow a @nt{choice_parameter_specification}.
 
@@ -384,9 +386,10 @@ but does not handle it,
 the exception is propagated to an enclosing execution
 (except in the case of a @nt{task_body}).
 
-Propagation involves re-raising the same exception occurrence
-(assuming the implementation has not taken advantage of the
-@ImplPermName of @RefSecNum{Raise Statements}).
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00023}
+Propagation involves re-raising the same exception occurrence@Chg{New=[],
+Old=[(assuming the implementation has not taken advantage of the
+@ImplPermName of @RefSecNum{Raise Statements})]}.
 For example, calling an entry of an uncallable task raises
 Tasking_Error; this is not propagation.
 @end{Ramification}
@@ -885,6 +888,7 @@ contains such a character.
 @end{ImplAdvice}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The Identity attribute of exceptions is new, as is the package
 Exceptions.
 @end{Extend83}
@@ -1240,6 +1244,7 @@ hence a @nt{pragma} Suppress should be used only for efficiency reasons.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 A @nt{pragma} Suppress is allowed as a configuration pragma.
 A @nt{pragma} Suppress without a @nt<name> is allowed in a
 @nt{package_specification}.

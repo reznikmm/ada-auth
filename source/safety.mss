@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.18 $ $Date: 2000/08/26 04:13:57 $ $Author: Randy $ }
+@Comment{ $Revision: 1.19 $ $Date: 2000/08/31 04:56:08 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/08/26 04:13:57 $}
+@Comment{$Date: 2000/08/31 04:56:08 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -50,6 +50,7 @@ the documentation is @lquotes@;adequate@rquotes@;.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This Annex is new to Ada 95.
 @end{Extend83}
 

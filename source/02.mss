@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/08/24 04:21:03 $}
+@Comment{$Date: 2000/08/31 04:55:59 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -242,6 +242,7 @@ and that should be irrelevant to the semantics.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Ada 95 allows 8-bit and 16-bit characters,
 as well as implementation-specified character sets.
 @end{Extend83}
@@ -982,6 +983,7 @@ it is best if the user gets an error message.
 @end{ImplAdvice}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 In Ada 83, @lquotes@;bad@rquotes@; @nt{pragma}s are ignored.
 In Ada 95, they are illegal,
 except in the case where the name of the @nt{pragma} itself
@@ -989,6 +991,7 @@ is not recognized by the implementation.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Implementation-defined @nt{pragma}s may affect the legality of a program.
 @end{Extend83}
 
@@ -1081,6 +1084,7 @@ Some compilers might even ignore the pragma altogether.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The Optimize @nt<pragma> now allows the identifier Off
 to request that normal optimization be turned off.
 
@@ -1232,6 +1236,7 @@ typeface is desired and available.
 @end{Notes}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 The following words are not reserved in Ada 83, but are reserved in Ada
 95: @key{abstract}, @key{aliased}, @key{protected}, @key{requeue},
 @key{tagged}, @key{until}.

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:10 $}
+@Comment{$Date: 2000/08/31 04:56:04 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -30,7 +30,7 @@ generic unit.
   That is, the declaration of a generic unit represents a contract
   between the body of the generic and instances of the generic.
   Generic units can be used to perform the role that macros
-  sometimed play in other languages.>}
+  sometimes play in other languages.>}@ChgNote{Correction for AI-00024, no mechism to correct glossary entries.}
 
 @redundant[A generic unit is declared by a @nt{generic_declaration}. This form
 of declaration has a @nt{generic_formal_part} declaring any generic
@@ -197,6 +197,7 @@ Exchange and Squaring:}
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{generic_formal_parameter_declaration} is modified
 to allow the reserved words @key{tagged} and @key{abstract}, to allow
 formal derived types, and to allow formal packages.
@@ -574,12 +575,12 @@ components of the @nt{record_extension_part} shall be nonlimited.@rquotes@;
 @key[end] G1;
 @end{Example}
 
-The parent type is nonlimited,
-and the component type is limited,
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
+The parent type is nonlimited, and the component type is limited,
 which is illegal.
-It doesn't matter that an one could imagine writing an instantiation
-with the actual for Comp being nonlimited @em we never get to the
-instance, because the generic itself is illegal.
+It doesn't matter that @Chg{New=[],Old=[an ]}one could imagine writing an
+instantiation with the actual for Comp being nonlimited @em we never get to
+the instance, because the generic itself is illegal.
 
 @leading@;On the other hand:
 @begin{Example}
@@ -1121,6 +1122,7 @@ M : Integer := Sigma(T);  --@RI{  150}
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 In Ada 83, all explicit actuals are evaluated before all defaults,
 and the defaults are evaluated in the order of the formal
 declarations.
@@ -1128,6 +1130,7 @@ This ordering requirement is relaxed in Ada 95.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 We have attempted to remove every violation of the contract model.
 Any remaining contract model violations should be considered bugs in
 the RM95.
@@ -1138,6 +1141,7 @@ However, tagged types do not revert in this sense.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{explicit_generic_actual_parameter} is modified to allow a
 @SynI{package_instance_}@nt{name}.
 @end{Extend83}
@@ -1341,6 +1345,7 @@ but not for formal objects of mode @key{in out}.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 In Ada 83, it is forbidden to pass a (nongeneric) formal parameter
 of mode @key{out}, or a subcomponent thereof, to a generic formal
 object of mode @key{in out}.
@@ -1829,6 +1834,7 @@ Otherwise, the actual has to be definite.
 @end{Notes}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 Ada 83 does not have
 @nt{unknown_discriminant_part}s, so it allows indefinite
 subtypes to be passed to definite formals,
@@ -1967,6 +1973,7 @@ then the actual's components can be either aliased or not.
 @end{Examples}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 The check for matching of component subtypes and index subtypes or
 index ranges is changed from a
 run-time check to a compile-time check.
@@ -2057,6 +2064,7 @@ the formal.
 @end{Examples}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 The check for matching of designated subtypes is changed from a
 run-time check to a compile-time check.
 The Ada 83 rule that @lquotes@;If the
@@ -2066,6 +2074,7 @@ removed, since it is subsumed by static matching.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Formal access-to-subprogram subtypes and formal general access
 types are new concepts.
 @end{Extend83}
@@ -2314,6 +2323,7 @@ as an actual to another generic formal package.
 @end{StaticSem}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Formal packages are new to Ada 95.
 @end{Extend83}
 

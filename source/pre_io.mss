@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:10 $}
+@Comment{$Date: 2000/08/31 04:56:06 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -23,6 +23,7 @@ exceptions needed by the predefined input-output packages.]
 @end{Intro}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 The introduction of Append_File as a new element of the enumeration type
 File_Mode in Sequential_IO and Text_IO, and the introduction of
 several new declarations
@@ -31,6 +32,7 @@ presence of @key[use] clauses.
 @end{Inconsistent83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Text_IO enhancements
 (Get_Immediate, Look_Ahead, Standard_Error, Modular_IO, Decimal_IO),
 Wide_Text_IO, and the stream input-output facilities are new in Ada 95.
@@ -279,6 +281,7 @@ a property of a file object, not of an external file.
 @end{StaticSem}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 The new enumeration element Append_File may introduce upward incompatibilities.
 It is possible that a program based on the assumption that File_Mode'Last = Out_File
 will be illegal (e.g., case statement choice coverage)
@@ -898,6 +901,7 @@ are not used.) The constant Unbounded is provided for this purpose.
 @end{StaticSem}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Append_File is new in Ada 95.
 @end{Extend83}
 
@@ -1277,10 +1281,12 @@ Append_File is new in Ada 95.
 @end{StaticSem}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 Append_File is a new element of enumeration type File_Mode.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Get_Immediate, Look_Ahead, the subprograms for dealing with
 standard error, the type File_Access and its associated subprograms,
 and the
@@ -2606,6 +2612,7 @@ Ada.Long_@!Float_@!Wide_Text_IO.
 @end{StaticSem}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Support for Wide_Character and Wide_String I/O is new in Ada 95.
 @end{Extend83}
 

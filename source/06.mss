@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:55 $}
+@Comment{$Date: 2000/08/31 04:56:01 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -264,6 +264,7 @@ concurrently from multiple tasks.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax for @nt{abstract_subprogram_declaration} is added.
 The syntax for @nt{parameter_specification} is revised to allow
 for access parameters (see @RefSecNum{Access Types})
@@ -542,6 +543,7 @@ it cannot be updated within the @nt{subprogram_body}.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The value of an @key(out) parameter may be read.
 An @key(out) parameter is treated like a declared
 variable without an explicit initial expression.
@@ -648,6 +650,7 @@ For this execution the @nt{declarative_part} is elaborated, and the
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 A @nt{renaming_declaration} may be used instead of a @nt{subprogram_body}.
 @end{Extend83}
 
@@ -997,6 +1000,7 @@ library unit to be intrinsic.
 @end{ImplPerm}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The rules for full conformance are relaxed @em they are now based on
 the structure of constructs, rather than the sequence of lexical
 elements.
@@ -1091,7 +1095,7 @@ Such a @nt{pragma} applies to all of the denoted entities.
 @end{Notes}
 
 @begin{Extend83}
-
+@Defn{extensions to Ada 83}
 A @nt{pragma} Inline is allowed inside a @nt{subprogram_body} if there
 is no corresponding @nt{subprogram_declaration}.
 This is for uniformity with other program unit pragmas.
@@ -1530,6 +1534,7 @@ S1.
 @end{RunTime}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 In Ada 95, a program can rely on the fact that passing an object as
 an @key[out] parameter does not @lquotes@;de-initialize@rquotes@; any parts of the
 object whose subtypes have implicit initial values.
@@ -1728,6 +1733,7 @@ and returns to the caller.
 @end{Examples}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 In Ada 95, if the result type of a function has a part that is a task,
 then an attempt to return a local variable will raise Program_Error.
 In Ada 83, if a function returns a local variable containing a task,
@@ -1837,6 +1843,7 @@ A := "+"(B, C);
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Explicit declarations of "=" are now permitted for any
 combination of parameter and result types.
 

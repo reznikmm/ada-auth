@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:10 $}
+@Comment{$Date: 2000/08/31 04:56:04 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -377,8 +377,8 @@ pragma Asynchronous (applies to procedures)
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
 @Chg{New=[An operational item @i<directly specifies> an @i<operational aspect>
 of the type of the subtype denoted by the @nt{local_name}. The @nt{local_name}
-of an operational item shall denote a first subtype. Operational items are
-type-related.
+of an operational item shall denote a first subtype. An operational item that
+names a subtype is type-related.
 @RootDefn{operational aspect}
 @Defn2{Term=[directly specified],
   Sec=(of an operational aspect of an entity)}
@@ -406,22 +406,13 @@ type-related.
 @Chg{New=[Output clause],Old=[]}
 
 @end{Itemize}
-
-@ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[Note that we don't have a provision for operational items that are
-applied to entities other than types or subtypes. This is a mistake that
-we'll probably have to repair someday. The Corrigendum wording probably ought
-to have been "Operational items that name a subtype are type-related." But
-it's too late to change it now.],Old=[]}
 @end{Ramification}
 
 
 A representation item that directly specifies an aspect of a subtype or
-type shall appear after the type is completely
-defined
+type shall appear after the type is completely defined
 (see @RefSecNum{Completions of Declarations}),
-and before the subtype or type is frozen
-(see @RefSecNum{Freezing Rules}).
+and before the subtype or type is frozen (see @RefSecNum{Freezing Rules}).
 If a representation item is given that directly specifies an aspect of an
 entity, then it is illegal to give another representation item that
 directly specifies the same aspect of the entity.
@@ -519,27 +510,29 @@ are the same.
 This is necessary because we allow (for example)
 conversion between access types whose designated subtypes
 statically match.
-Note that it is illegal to specify an aspect
-(including a subtype-specific one)
+Note that it is illegal to specify an aspect (including a subtype-specific one)
 for a nonfirst subtype.
 
 @Leading@Keepnext@;Consider, for example:
 @begin{Example}
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
 @key[package] P1 @key[is]
     @key[subtype] S1 @key[is] Integer @key[range] 0..2**16-1;
     @key[for] S1'Size @key[use] 16; --@RI{ Illegal!}
         --@RI{ S1'Size would be 16 by default.}
-    @key[type] A1 @key[is] @key[access] S1;
+    @key[type] A1 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S1;
     X1: A1;
 @key[end] P1;
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
 @key[package] P2 @key[is]
     @key[subtype] S2 @key[is] Integer @key[range] 0..2**16-1;
     @key[for] S2'Size @key[use] 32; --@RI{ Illegal!}
-    @key[type] A2 @key[is] @key[access] S2;
+    @key[type] A2 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S2;
     X2: A2;
 @key[end] P2;
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
 @key[procedure] Q @key[is]
     @key[use] P1, P2;
     @key[type] Array1 @key[is] @key[array](Integer @key[range] <>) @key[of] @key[aliased] S1;
@@ -549,8 +542,8 @@ for a nonfirst subtype.
     @key[pragma] Pack(Array2);
     Obj2: Array2(1..100);
 @key[begin]
-    X1 := Obj2(17)'Access;
-    X2 := Obj1(17)'Access;
+    X1 := Obj2(17)'@Chg{New=[Unchecked_],Old=[]}Access;
+    X2 := Obj1(17)'@Chg{New=[Unchecked_],Old=[]}Access;
 @key[end] Q;
 @end{Example}
 
@@ -759,12 +752,13 @@ are all static constraints.
 An aliased component, or a component whose type is by-reference,
 should always be allocated at an addressable location.
 @begin{Reason}
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-0079}
 The intent is that access types, type System.Address,
 and the pointer used for a by-reference parameter should
 be implementable as a single machine address @em bit-field pointers
 should not be required.
 (There is no requirement that this implementation be used @em we just
-want to make sure its feasible.)
+want to make sure it@Chg{New=['],Old=[]}s feasible.)
 @end{Reason}
 @begin{ImplNote}
 Note that the above rule does not apply to types that merely allow
@@ -773,10 +767,10 @@ for such types, a copy typically needs to be made at the call site
 when a bit-aligned component is passed as a parameter.
 @end{ImplNote}
 @begin{Ramification}
-A pragma Pack will typically not pack so tightly as to disobey the
-above rule.
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00075}
+A pragma Pack will typically not pack so tightly as to disobey the above rule.
 A Component_Size clause or @nt{record_representation_clause} will
-typically by illegal if it disobeys the above rule.
+typically b@Chg{New=[e],Old=[y]} illegal if it disobeys the above rule.
 Atomic components have similar restrictions
 (see @RefSec{Shared Variable Control}).
 @end{Ramification}
@@ -784,6 +778,7 @@ Atomic components have similar restrictions
 @end{ImplAdvice}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 It is now illegal for a representation item to cause a derived
 by-reference type to have a different record layout from its
 parent.
@@ -797,6 +792,7 @@ it is illegal to apply a @nt{pragma} Pack to A2.
 
 @begin{Extend83}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Defn{extensions to Ada 83}
 Ada 95 allows additional @Chg{New=[@nt{aspect_clause}s],
 Old=[@nt{representation_clause}s]} for objects.
 @end{Extend83}
@@ -1138,13 +1134,14 @@ The value of this attribute is of type System.Address.>}
 @NoPrefix@;@PDefn2{Term=[specifiable], Sec=(of Address for stand-alone
 objects and for program units)}
 @Defn{Address clause}
-Address may be specified for @Redundant[stand-alone] objects
-and for program units via an @nt{attribute_definition_clause}.
+@ChgNote{Removed Redundant here, as per AI-00114. Did not mark change, as it is
+AARM-only, not to the text of the item.}Address may be specified for
+stand-alone objects and for program units via an
+@nt{attribute_definition_clause}.
   @begin{Ramification}
   Address is not allowed for enumeration literals,
   predefined operators, derived task types,
-  or derived protected types,
-  since they are not program units.
+  or derived protected types, since they are not program units.
 
   The validity of a given address depends on the run-time model;
   thus, in order to use Address clauses correctly,
@@ -2193,6 +2190,7 @@ since the type definition requires Short'Small <= 2**(@en@;7).
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The syntax rule for @nt{length_clause} is replaced with the new syntax rule
 for @nt{attribute_definition_clause}, and it is modified to allow a
 @nt{name} (as well as an expression).
@@ -2363,6 +2361,7 @@ but it didn't seem worth the trouble.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 As in other similar contexts, Ada 95 allows expressions of any integer type,
 not just expressions of type @i{universal_integer}, for the component
 expressions in the @nt<enumeration_aggregate>. The preference rules
@@ -2940,6 +2939,7 @@ but the splitting problem need not occur.
 @end{ImplAdvice}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The Bit_Order attribute is new to Ada 95.
 @end{Extend83}
 
@@ -3241,6 +3241,21 @@ See UI-0065 regarding Null_Address.
 There are also some language-defined child packages of System
 defined elsewhere.
 @end{Notes}
+
+@begin{Extend83}
+@ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00114}
+@Chg{New=[@Defn{extensions to Ada 83}
+The declarations Max_Binary_Modulus, Max_Nonbinary_Modulus, Max_Base_Digits,
+Null_Address, Word_Size, Bit_Order, Default_Bit_Order, Any_Priority,
+Interrupt_Priority, and Default_Priority are added to System in Ada 95.
+The presence of ordering operators for type Address is also guaranteed (the
+existence of these depend on the definition of Address in an Ada 83
+implementation). We do not list these as incompatibilities, as the contents of
+System can vary between implementations anyway; thus a program that depends on
+the contents of System (by using @f{@key[use] System;} for example) is
+already at risk of being incompatible when moved between Ada implementations.
+],Old=[]}
+@end{Extend83}
 
 @begin{DiffWord83}
 Much of the content of System is standardized,
@@ -3596,6 +3611,7 @@ M : Mask;
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Machine code functions are allowed in Ada 95;
 in Ada 83, only procedures were allowed.
 @end{Extend83}
@@ -4071,6 +4087,7 @@ causes erroneous execution (see @RefSecNum{Names}).
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 X'Valid is new in Ada 95.
 @end{Extend83}
 
@@ -4622,6 +4639,7 @@ Release(MR_Pool); --@RI{ Reclaim the storage.}
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 User-defined storage pools are new to Ada 95.
 @end{Extend83}
 
@@ -5106,6 +5124,7 @@ use of the more efficient and safe one.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Pragma Restrictions is new to Ada 95.
 @end{Extend83}
 
@@ -5128,6 +5147,7 @@ but that is not required.
 @end{Intro}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Streams are new in Ada 95.
 @end{Extend83}
 
@@ -5185,11 +5205,11 @@ The Write operation appends Item to the specified stream.
 @begin{ImplPerm}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0044]}
 @Chg{New=[If Stream_Element'Size is not a multiple of System.Storage_Unit,
-then the components of Stream_Element_Array need not be aliased.],Old=[]}
+then the components of Stream_@!Element_@!Array need not be aliased.],Old=[]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[If the Stream_Element'Size is less than the size of
-System.Storage_Unit, then components of Stream_Element_Array need not be
+System.Storage_Unit, then components of Stream_@!Element_@!Array need not be
 aliased. This is necessary as the components of type Stream_Element size may
 not be addressable on the target architechture.],Old=[]}
 @end{Ramification}
@@ -6037,10 +6057,8 @@ beside the point.)
 
 Note that a call upon a dispatching operation of type @i(T) will freeze @i(T).
 
-We considered applying this rule to all derived types,
-for uniformity.
-However, that would be upward incompatible,
-so we rejected the idea.
+We considered applying this rule to all derived types, for uniformity.
+However, that would be upward incompatible, so we rejected the idea.
 As in Ada 83, for an untagged type, the above call upon P will call the
 old P (which is arguably confusing).
 @end{Reason}
@@ -6159,6 +6177,7 @@ an entity should most certainly @i{not} be a freezing point for the entity.
 @end{Legality}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 RM83 defines a forcing occurrence of a type as follows:
 @lquotes@;A forcing occurrence is any occurrence [of the name of the type,
 subtypes of the type, or types or subtypes with subcomponents of the type]
@@ -6180,7 +6199,8 @@ this will probably fix more bugs than it causes.)
 @end{Incompatible83}
 
 @begin{Extend83}
-@Leading@;In Ada 95, @nt{generic_formal_parameter_declaration}s
+@Leading@;@Defn{extensions to Ada 83}
+In Ada 95, @nt{generic_formal_parameter_declaration}s
 do not normally freeze the entities from which they are defined.
 For example:
 @begin{example}

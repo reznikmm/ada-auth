@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/30 00:23:09 $}
+@Comment{$Date: 2000/08/31 04:56:00 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -156,6 +156,7 @@ Next_Car.Owner @\@RI[--  selected component with implicit dereference;]
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Type conversions and function calls are now considered names
 that denote the result of the operation.
 In the case of a type conversion used as an actual
@@ -460,10 +461,11 @@ a protected type, a @nt<component_declaration>
 of the type. The @nt{selected_component} denotes the
 corresponding component of the object or value.
 @begin{Reason}
+  @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00015}
   The components of a protected object cannot be named except
   by an expanded name, even from within the corresponding protected body.
-  The protected body may not reference the
-  the private components of some arbitrary object of the protected
+  The protected body may not reference @Chg{New=[],Old=[the ]}the private
+  components of some arbitrary object of the protected
   type; the protected body may reference components of the current
   instance only (by an expanded name or a @nt<direct_name>).
 @end{Reason}
@@ -572,6 +574,7 @@ The exception Constraint_Error is raised if this check fails.
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 We now allow an expanded name to use a prefix
 that denotes a rename of a package, even if the
 selector is for an entity local to the body or private
@@ -770,6 +773,7 @@ Message'Address    @RI[-- address of the record variable Message @\(see @RefSecN
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 We now uniformly treat X'Range as X'First..X'Last,
 allowing its use with scalar subtypes.
 
@@ -951,6 +955,7 @@ rules for expanded names (see @RefSecNum{Selected Components}).
 @end{Examples}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 Because @nt<character_literal>s are now treated like
 other literals, in that they are resolved using context
 rather than depending on direct visibility, additional
@@ -959,6 +964,7 @@ to an overloaded subprogram.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 @nt<Character_literal>s are now treated
 analogously to @key(null) and @nt<string_literal>s, in that
 they are resolved using context, rather than their content;
@@ -1072,6 +1078,7 @@ to preserve upward compatibility.
 @end{RunTime}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 We now allow @nt{extension_aggregate}s.
 @end{Extend83}
 
@@ -1112,7 +1119,7 @@ using either a named or a positional association.]
 
 @begin(SyntaxText)
 @Defn{named component association}
-A @nt<record_component_association> is a @i(named component association)
+A @nt<record_@!component_@!association> is a @i(named component association)
 if it has a @nt<component_choice_list>;
 @Defn{positional component association}
 otherwise, it is a @i(positional component association).
@@ -1132,7 +1139,7 @@ These rules were
   end), or all named.
 @end{Discussion}
 
-In the @nt<record_component_association_list> for a @nt<record_aggregate>,
+In the @nt<record_@!component_@!association_@!list> for a @nt<record_@!aggregate>,
 if there is only one association, it shall be a named association.
 @begin{Reason}
   Otherwise the construct would be interpreted as a parenthesized
@@ -1162,15 +1169,15 @@ a @nt{record_aggregate} and an @nt{extension_aggregate}.
 
 @Defn2{Term=[needed component],
   Sec=(@nt<record_aggregate> @nt<record_component_association_list>)}
-For the @nt<record_component_association_list>
-of a @nt<record_aggregate>,
+For the @nt<record_@!component_@!association_@!list>
+of a @nt<record_@!aggregate>,
 all components of the composite value defined by
 the aggregate are @i(needed)@Redundant[; for the association list of
 an @nt<extension_aggregate>,
 only those components not determined by the ancestor expression or
 subtype are needed
 (see @RefSecNum{Extension Aggregates}).]
-Each @nt{selector_@!name} in a @nt{record_component_association} shall denote
+Each @nt{selector_@!name} in a @nt{record_@!component_@!association} shall denote
 a needed component @Redundant[(including possibly a discriminant)].
 @begin{Ramification}
 For the association list of a @nt{record_aggregate},
@@ -1189,7 +1196,7 @@ aggregate for that type, even if the discriminants have the same
 names and types as discriminants of the type of the ancestor
 expression.
 This is necessary to ensure that the positions in
-the @nt<record_component_association_list>
+the @nt<record_@!component_@!association_@!list>
 are well defined, and that discriminants that govern @nt{variant_part}s
 can be given by static expressions.
 @end{Ramification}
@@ -1197,7 +1204,7 @@ can be given by static expressions.
 @Leading@Keepnext@PDefn2{Term=[expected type],
   Sec=(record_component_association expression)}
 The expected type for the @nt<expression> of a
-@nt<record_component_association> is the type
+@nt<record_@!component_@!association> is the type
 of the @i(associated) component(s);
 @Defn2{Term=[associated components],
   Sec=(of a @nt<record_component_association>)}
@@ -1232,9 +1239,9 @@ then it shall be a descendant of a record type, through one
 or more record extensions (and no private extensions).
 
 If there are no components needed in a given
-@nt<record_component_association_list>,
+@nt<record_@!component_@!association_@!list>,
 then the reserved words @key(null record) shall appear rather
-than a list of @nt<record_component_association>s.
+than a list of @nt<record_@!component_@!association>s.
 @begin{Ramification}
   For example, "(@key(null record))" is a @nt<record_aggregate>
   for a null record type. Similarly, "(T'(A) @key(with null record))" is
@@ -1302,7 +1309,7 @@ The evaluation of a @nt<record_aggregate> consists of the
 evaluation of the @nt<record_@!component_@!association_@!list>.
 
 @PDefn2{Term=[evaluation], Sec=(record_component_association_list)}
-For the evaluation of a @nt{record_component_association_list},
+For the evaluation of a @nt{record_@!component_@!association_@!list},
 any per-object constraints (see @RefSecNum(Record Types))
 for components specified in the association list are elaborated and
 any @nt<expression>s are evaluated and converted to the subtype of the
@@ -1375,6 +1382,7 @@ Painted_Point'(0.0, Pi/2.0, Paint => Red)
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Null record aggregates may now be specified, via "(@key(null record))".
 However, this syntax is more useful for null record extensions in
 extension aggregates.
@@ -1400,7 +1408,7 @@ any components not determined by the @nt<ancestor_part>.]
 @begin{MetaRules}
 The model underlying this syntax is that a record extension
 can also be viewed as a regular record type with an ancestor "prefix."
-The @nt<record_component_association_list> corresponds to
+The @nt<record_@!component_@!association_@!list> corresponds to
 exactly what would be needed
 if there were no ancestor/prefix type.
 The @nt{ancestor_part}
@@ -1445,8 +1453,8 @@ or more record extensions
 @begin{StaticSem}
 @Defn2{Term=[needed component],
   Sec=(@nt<extension_aggregate> @nt<record_component_association_list>)}
-For the @nt{record_component_association_list}
-of an @nt{extension_aggregate},
+For the @nt{record_@!component_@!association_@!list}
+of an @nt{extension_@!aggregate},
 the only components @i(needed) are those of the composite value defined
 by the aggregate that are not inherited from the type of
 the @nt<ancestor_@!part>, plus any inherited discriminants
@@ -1457,11 +1465,11 @@ denotes an unconstrained subtype.
 @begin{RunTime}
 @PDefn2{Term=[evaluation], Sec=(extension_aggregate)}
 For the evaluation of an @nt{extension_aggregate},
-the @nt{record_component_association_list} is evaluated.
+the @nt{record_@!component_@!association_@!list} is evaluated.
 If the @nt<ancestor_part> is an @nt<expression>, it is also evaluated;
 if the @nt<ancestor_part> is a @nt<subtype_mark>,
 the components of the value of the aggregate not given by the
-@nt<record_component_association_list> are initialized by default
+@nt<record_@!component_@!association_@!list> are initialized by default
 as for an object of the ancestor type.
 Any implicit initializations or evaluations are performed
 in an arbitrary order, except that the @nt<expression>
@@ -1476,7 +1484,7 @@ then, unless the @nt<ancestor_part> is a @nt<subtype_mark> that
 denotes an unconstrained subtype,
 a check is made that each discriminant of the ancestor
 has the value specified for a corresponding discriminant,
-either in the @nt{record_component_association_list}, or in
+either in the @nt{record_@!component_@!association_@!list}, or in
 the @nt<derived_type_definition> for some ancestor of the type of
 the @nt{extension_aggregate}.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
@@ -1495,7 +1503,7 @@ of the ancestor expression.
 @begin{Notes}
 If all components of the value of the @nt<extension_aggregate>
 are determined by the @nt<ancestor_part>, then
-the @nt<record_component_association_list> is required to be
+the @nt<record_@!component_@!association_@!list> is required to be
 simply @key(null record).
 
 If the @nt<ancestor_part> is a @nt<subtype_mark>,
@@ -1520,6 +1528,7 @@ Addition'(Binop @key{with null record})
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The extension aggregate syntax is new.
 @end{Extend83}
 
@@ -1901,7 +1910,29 @@ F : String(1 .. 1) := (1 => 'F');  @RI[-- a one component aggregate: same as "F"
 @end{Example}
 @end{Examples}
 
+@begin{Incompatible83}
+@ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00016}
+@Chg{New=[@Defn{incompatibilities with Ada 83}
+In Ada 95, no applicable index constraint is defined for a parameter
+in a call to a generic formal subprogram; thus, some aggregates that are
+legal in Ada 83 are illegal in Ada 95. For example:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00016}
+@Chg{New=[@key[subtype] S3 @key[is] String (1 .. 3);
+...
+@key[generic]
+   @key[with function] F (The_S3 : @key[in] S3) @key[return] Integer;
+@key[package] Gp @key[is]
+   I : constant Integer := F ((1 => '!', others => '?'));
+       -- @RI{The aggregate is legal in Ada 83, illegal in Ada 95.}
+@key[end] Gp;],Old=[]}
+@end{Example}
+@ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00016}
+@Chg{New=[This change eliminates generic contract model problems.],Old=[]}
+@end{Incompatible83}
+
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 We now allow "named with others" aggregates in all contexts
 where there is an applicable index constraint, effectively
 eliminating what was RM83-4.3.2(6). Sliding never occurs
@@ -2077,7 +2108,7 @@ or return the value of the object.
 @begin{Examples}
 @Leading@keepnext@i(Examples of primaries:)
 @begin{Example}
-4.0                @RI[--  real literal]
+@Trailing@;4.0                @RI[--  real literal]
 Pi                 @RI[--  named number]
 (1 .. 10 => 0)     @RI[--  array aggregate]
 Sum                @RI[--  variable]
@@ -2088,9 +2119,7 @@ Real(M*N)          @RI[--  conversion]
 (Line_Count + 10)  @RI[--  parenthesized expression ]
 @end{Example}
 
-@begin{Wide}
 @leading@keepnext@i(Examples of expressions:)
-@end{Wide}
 @begin{Example}
 Volume                      @RI[-- primary]
 @key(not) Destroyed               @RI[-- factor]
@@ -2108,6 +2137,7 @@ A**(B**C)                   @RI[-- expression (parentheses are required)]
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 In Ada 83, @key{out} parameters and their nondiscriminant
 subcomponents are not allowed as @nt{primaries}.
 These restrictions are eliminated in Ada 95.
@@ -2777,6 +2807,7 @@ Tree.@key(all) @key(in) Addition'Class  @RI[-- class membership test (see @RefSe
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Membership tests can be used to test the tag of a class-wide value.
 
 Predefined equality for a composite type
@@ -2922,6 +2953,7 @@ Z + 0.1      @RI[--  Z has to be of a real type ]
 @end{Examples}
 
 @begin{Inconsistent83}
+@Defn{inconsistencies with Ada 83}
 The lower bound of the result of concatenation,
 for a type whose first subtype is constrained, is
 now that of the index subtype. This is inconsistent with Ada 83,
@@ -2940,6 +2972,7 @@ but would succeed and swap the halves of X (as expected) in Ada 95.
 @end{Inconsistent83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Concatenation is now useful for array types whose
 first subtype is constrained.
 When the result type of a concatenation
@@ -3203,6 +3236,7 @@ G : Fraction := 0.5;
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Explicit conversion of the result of multiplying
 or dividing two fixed point numbers is no longer required,
 provided the context uniquely determines some specific
@@ -3330,10 +3364,11 @@ Constraint_Error is raised if this check fails.
 
 @begin{Inconsistent83}
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0100]}
-  @Chg{New=[The definition of "**" allows arbitrary association of the
+  @Chg{New=[@Defn{inconsistencies with Ada 83}
+  The definition of "**" allows arbitrary association of the
   multiplications which make up the result. Ada 83 required left-to-right
   associations (confirmed by AI83-00137). Thus it is possible that "**"
-  would provide a slightly different answer in Ada 95 than in the same Ada 84
+  would provide a slightly different answer in Ada 95 than in the same Ada 83
   program.],Old=[]}
 @end{Inconsistent83}
 
@@ -3461,8 +3496,8 @@ be an array type. Further:
 both or neither have aliased components.],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
-Without this rule, it is possible to violate the constrained status of
-aliased array components. Consider:
+@Chg{New=[Without this rule, it is possible to violate the constrained status
+of aliased array components. Consider:],Old=[]}
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@key[package] P @key[is]
@@ -4012,6 +4047,7 @@ Dozen(Ledger(31 .. 42))     @RI[--  bounds are those of Dozen ]
 @end{Examples}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 A @nt<character_literal> is not allowed as the
 operand of a @nt<type_conversion>,
 since there are now two character types in package Standard.
@@ -4027,6 +4063,7 @@ This is likely to fix more bugs than it creates.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 A @nt<type_conversion> is considered the name of an object
 in certain circumstances (such a @nt<type_conversion>
 is called a view conversion).
@@ -4342,13 +4379,16 @@ Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5))      @RI[-- initialized
 @end{Examples}
 
 @begin{Incompatible83}
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00019}
+@Defn{incompatibilities with Ada 83}
 The @nt<subtype_indication> of an uninitialized allocator may
 not have an explicit @nt<constraint> if the designated type is an access type.
 In Ada 83, this was permitted even though the @nt<constraint> had
-no affect on the subtype of the created object.
+no @Chg{New=[e],Old=[a]}ffect on the subtype of the created object.
 @end{Incompatible83}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Allocators creating objects of type @i(T)
 are now overloaded on access types designating
 @i(T')Class and all class-wide types that cover @i(T).
@@ -4839,6 +4879,7 @@ Rad_To_Deg : @key(constant) := 1.0/Deg_To_Rad; @RI[-- equivalent to 1.0/((3.1415
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The rules for static expressions and static subtypes are generalized
 to allow more kinds of compile-time-known expressions to be used
 where compile-time-known values are required, as follows:
@@ -4899,6 +4940,7 @@ pragma, and to simplify the preelaborability rules.
 @end{Extend83}
 
 @begin{Incompatible83}
+@Defn{incompatibilities with Ada 83}
 An Ada 83 program that uses an out-of-range static value
 is illegal in Ada 95, unless the expression is part of a larger
 static expression, or the expression is not evaluated due to being on

@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/08/26 04:13:57 $}
+@Comment{$Date: 2000/08/31 04:56:09 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -390,6 +390,7 @@ and an @nt{attribute_definition_clause} specifying the Address attribute.
 @end{StaticSem}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 We now allow to define the address of an entity using an
 @nt{attribute_definition_clause}.
 This is because Ada 83's @nt{at_clause} is so hard to

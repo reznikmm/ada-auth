@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/24 04:21:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/08/31 04:56:10 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/08/24 04:21:04 $}
+@Comment{$Date: 2000/08/31 04:56:10 $}
 
 @LabeledClause{The Package Standard}
 
@@ -391,6 +391,7 @@ to Integer seems more readable than declaring them much later.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 Package Standard is declared to be pure.
 @begin{discussion}
 The introduction of the types Wide_Character and Wide_String is not

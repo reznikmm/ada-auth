@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2000/08/26 04:13:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2000/08/31 04:56:05 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/08/26 04:13:56 $}
+@Comment{$Date: 2000/08/31 04:56:05 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -51,6 +51,7 @@ that language.
 @end{ImplAdvice}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This Annex is new to Ada 95.
 @end{Extend83}
 

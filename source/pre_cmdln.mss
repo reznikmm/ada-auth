@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/31 04:56:10 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/08/18 01:10:08 $}
+@Comment{$Date: 2000/08/31 04:56:10 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -91,10 +91,10 @@ value Success. If a program terminates abnormally, the status set by
 Set_Exit_Status is ignored, and an implementation-defined exit status value
 is set.
 
-@PDefn{unspecified}
+@ChgNote{An incorrect index entry; presentation AI-00005}
+@Chg{New=[],Old=[@PDefn{unspecified}]}
 If the external execution environment does not support returning
-an exit value from a program,
-then Set_Exit_Status does nothing.
+an exit value from a program, then Set_Exit_Status does nothing.
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -120,5 +120,6 @@ whereas Argument_Count does not.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This clause is new in Ada 95.
 @end{Extend83}

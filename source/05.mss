@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:15 $}
+@Comment{$Date: 2000/08/31 04:56:01 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -234,6 +234,7 @@ expanded name associated with an entity declared in the task body:
 @end{Examples}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 The @nt{requeue_statement} is new.
 @end{Extend83}
 
@@ -506,6 +507,7 @@ incorrect.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 We now allow user-defined finalization and value adjustment actions
 as part of @nt{assignment_statement}s
 (see @RefSec{User-Defined Assignment and Finalization}).
@@ -782,7 +784,29 @@ given explicitly.
 @end{Example}
 @end{Examples}
 
+@begin{Incompatible83}
+@ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00020}
+@Chg{New=[@Defn{incompatibilities with Ada 83}
+In Ada 95, @nt{function_call}s and @nt{type_conversion}s are @nt{name}s, while
+in Ada 83, they were @nt{expression}s. Therefore, if the @nt{expression} of a
+@nt{case_statement} is a @nt{function_call} or @nt{type_conversion}, and the
+result subtype is static, it is illegal to specify a choice outside the bounds
+of the subtype. For this case in Ada 83 choices only are required to be in the
+base range of the type.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00020}
+@Chg{New=[In addition, the rule about which choices must be covered is
+unchanged in Ada 95. Therefore, for a @nt{case_statement} whose @nt{expression}
+is a @nt{function_call} or @nt{type_conversion}, Ada 83 required covering all
+choices in the base range, while Ada 95 only requires covering choices in the
+bounds of the subtype. If the @nt{case_statement} does not include an @key{others}
+@nt{discrete_choice}, then a legal Ada 83 @nt{case_statement} will be illegal
+in Ada 95 if the bounds of the subtype are different than the bounds of the
+base type.],Old=[]}
+@end{Incompatible83}
+
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 In Ada 83, the @nt{expression} in a @nt{case_statement} is not allowed to
 be of a generic formal type.
 This restriction is removed in Ada 95; an @key{others} @nt{discrete_choice}

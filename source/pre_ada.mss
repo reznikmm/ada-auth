@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_ada.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 00/03/08 Created by RLB to avoid Includes }
+@comment{ $Revision: 1.15 $ $Date: 00/03/08 Created by RLB to avoid Includes }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:44 $}
+@Comment{$Date: 2000/08/31 04:56:06 $}
 
 @LabeledClause{The Package Ada}
 
@@ -47,5 +47,6 @@ However, a programmer cannot compile such a library unit.
 @end{Legality}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This clause is new to Ada 95.
 @end{Extend83}

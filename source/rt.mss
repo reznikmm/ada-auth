@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2000/08/30 00:23:11 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2000/08/31 04:56:07 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/08/30 00:23:11 $}
+@Comment{$Date: 2000/08/31 04:56:07 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -83,6 +83,7 @@ of an implementation for a particular real-time application.
 @end{Notes}
 
 @begin{Extend83}
+@Defn{extensions to Ada 83}
 This Annex is new to Ada 95.
 @end{Extend83}
 
@@ -289,7 +290,7 @@ enclosing @nt{compilation_unit}.
 @end{Notes}
 
 @begin{Extend83}
-
+@Defn{extensions to Ada 83}
 The priority of a task is per-object and not per-type.
 
 Priorities need not be static anymore (except for the main subprogram).
