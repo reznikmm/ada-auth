@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2001/04/05 19:16:40 $}
+@Comment{$Date: 2004/10/30 21:51:41 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -217,7 +217,7 @@ For example, there is no need to syntactically forbid (say) @lquotes@;X: "Rem";@
 because it is impossible to declare a type whose name is an
 @nt{operator_symbol} in the first place.
 
-The  syntax rules for @nt{explicit_dereference}
+The syntax rules for @nt{explicit_dereference}
 and @nt{implicit_dereference} are new;
 this makes other rules simpler, since dereferencing an access value has
 substantially different semantics from @nt{selected_component}s.
@@ -491,6 +491,24 @@ corresponding entry, entry family, or protected subprogram.
   type, only those of the current instance (and expanded name notation
   has to be used for that).
 @end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
+@Chg{Version=[2],New=[A view of a subprogram whose first formal parameter is of
+a tagged or is an access parameter whose designated type is tagged:],Old=[]}
+
+@NoPrefix@;@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[The @nt<prefix> (after any implicit
+dereference) shall resolve to denote an object or value of a specific tagged
+type @i<T> or class-wide type @i<T>'Class. The @nt<selector_name> shall resolve
+to denote a view of a subprogram declared immediately within the region in
+which an ancestor of the type @i<T> is declared. The first formal parameter of
+the subprogram shall be of type @i<T>, or a class-wide type that covers @i<T>,
+or an access parameter designating one of these types. The designator of the
+subprogram shall not be the same as that of a component of the tagged type
+visible at the point of the @nt<selected_component>. The
+@nt<selected_component> denotes a view of this subprogram that omits the first
+formal parameter.],Old=[]}
+
 @end{Itemize}
 
 An expanded name shall resolve to denote a declaration that
@@ -530,6 +548,21 @@ then the expanded name is ambiguous, independently of the @nt<selector_name>.
 
 @end{Resolution}
 
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
+@Chg{Version=[2],New=[If a @nt<selected_component> resolves to a view of a
+subprogram whose first parameter is an access parameter, the @nt<prefix> shall
+denote an aliased view of an object.],Old=[]}
+
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[We want calls in both this new notation and the
+traditional notation to have the same legality. Thus, the implicit 'Access in
+this new notation needs the same legality check that an explicit 'Access
+would make.],Old=[]}
+@end{Reason}
+@end{Legality}
+
 @begin{RunTime}
 @PDefn2{Term=[evaluation], Sec=(selected_component)}
 The evaluation of a @nt{selected_component} includes the
@@ -542,12 +575,22 @@ the value or object denoted by the @nt<prefix> has this component.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 The exception Constraint_Error is raised if this check fails.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
+@Chg{Version=[2],New=[ For a @nt<selected_component> with a tagged @nt<prefix>
+and @nt<selector_name> that denotes a view of a subprogram, a call on the view
+denoted by the @nt<selected_component> is equivalent to a call on the
+underlying subprogram with the first actual parameter being provided by the
+object or value denoted by the @nt<prefix> (or the Access attribute of this
+object or value if the first formal is an access parameter), and the remaining
+actual parameters given by the @nt<actual_parameter_part>, if any.],Old=[]}
 @end{RunTime}
 
 @begin{Examples}
 @Leading@keepnext@i(Examples of selected components:)
 @begin{Example}
 @tabclear()@tabset(P60)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01]}
   Tomorrow.Month     @RI[--  a record component @\(see @RefSecNum{Record Types})]
   Next_Car.Owner     @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
   Next_Car.Owner.Age @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
@@ -555,7 +598,9 @@ The exception Constraint_Error is raised if this check fails.
   Writer.Unit        @RI[--  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
   Min_Cell(H).Value  @RI[--  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
                      @RI[--  of the function call Min_Cell(H)]
-  Control.Seize      @RI[--  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
+@Chg{Version=[2],New=<  X.Activate         @RI[--  a procedure call assuming X has @\(see @RefSecNum{Subprogram Calls})]
+                     @RI[--  a tagged type]
+>,Old=<>}  Control.Seize      @RI[--  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
   Pool(K).Write      @RI[--  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
 @end{Example}
 
@@ -563,7 +608,7 @@ The exception Constraint_Error is raised if this check fails.
 @leading@keepnext@i(Examples of expanded names:)
 @end{Wide}
 @begin{Example}
-@tabclear()@tabset(P66)
+@tabclear()@tabset(P67)
   Key_Manager."<"      @RI[--  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
   Dot_Product.Sum      @RI[--  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
   Buffer.Pool          @RI[--  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
@@ -598,6 +643,29 @@ a @nt<selected_component>.
 The rules have been restated to be consistent with our
 new terminology, to accommodate class-wide types, etc.
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}The prefix call notation for
+tagged objects is new. This provides a similar notation to that used in other
+popular languages, and also reduces the need for @nt{use_clause}s.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[Given the following definitions for a tagged type T:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{procedure} Do_Something (Obj : in out T; Count : in Natural);
+My_Object : T;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[the following calls are equivalent:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[Do_Something (My_Object, 10);
+My_Object.Do_Something (10);],Old=[]}
+@end{Example}
+@end{Extend95}
+
 
 @LabeledSubClause{Attributes}
 
@@ -702,7 +770,7 @@ of the evaluation of the @nt{prefix}.
 @end{RunTime}
 
 @begin{ImplPerm}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0015]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0015],ARef=[AI95-00093-01]}
 An implementation may provide implementation-defined attributes;
 the @nt{identifier} for an implementation-defined
 attribute shall differ from those of the language-defined
@@ -718,7 +786,7 @@ and any associated rules, are, of course, implementation defined.
 For example, the implementation defines whether a given
 implementation-defined attribute can be used in a static expression.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0015]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0015],ARef=[AI95-00093-01]}
 @Chg{New=[Implementations are allowed to support the Small attribute for
 floating types, as this was defined in Ada 83, even though the name would
 conflict with a language-defined attribute.],Old=[]}
@@ -815,6 +883,14 @@ The Ada 83 rule said that the
   it makes a big difference in the interpretation of the
   prefix (see @RefSecNum(Operations of Access Types)).
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0015],ARef=[AI95-00093-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> The wording
+was changed to allow implementations to continue to implement the Ada 83 Small
+attribute. This was always intended to be allowed (and never was
+disallowed).],Old=[]}
+@end{DiffWord95}
 
 @LabeledClause{Literals}
 
@@ -2684,7 +2760,7 @@ for those composite types covered earlier) is defined as follows:
   typically have both a plus and minus (integer) zero.
 @end{Ramification}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016],ARef=[AI95-00123-01]}
 @Chg{New=[For any composite type, the order in which "=" is called for
 components is unspecified. Furthermore, if the result can be determined
 before calling "=" on some components, it is unspecified whether "=" is called
@@ -2755,7 +2831,7 @@ the corresponding membership test using @key(in).
 @end{RunTime}
 
 @begin{ImplReq}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016],ARef=[AI95-00123-01]}
 @Chg{New=[For all nonlimited types declared in language-defined packages,
 the "=" and "/=" operators of the type shall behave as if they were the
 predefined equality operators for the purposes of the equality of composite
@@ -2829,6 +2905,15 @@ category similar to @lquotes@;ordering operator@rquotes@; to refer to both
 
 We have changed the term @lquotes@;catenate@rquotes@; to @lquotes@;concatenate@rquotes@;.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0016],ARef=[AI95-00123-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Wording was added to clarify that
+the order of calls (and whether the calls are made at all) on "=" for
+components is unspecified. Also clarified that "=" must compose properly for
+language-defined types.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Binary Adding Operators}
 
@@ -3363,7 +3448,7 @@ Constraint_Error is raised if this check fails.
 @end{Notes}
 
 @begin{Inconsistent83}
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0100]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0100],ARef=[AI95-00018-01]}
   @Chg{New=[@Defn{inconsistencies with Ada 83}
   The definition of "**" allows arbitrary association of the
   multiplications which make up the result. Ada 83 required left-to-right
@@ -3425,7 +3510,7 @@ Two types are convertible if each is convertible to the other.
   at run time is irrelevant to this definition.
 @end{Ramification}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI-00184-01]}
 @Defn{view conversion}
 @Defn2{Term=[conversion],Sec=(view)}
 A @nt{type_conversion} whose operand is the
@@ -3483,15 +3568,15 @@ be an array type. Further:
 @begin(itemize)
   The types shall have the same dimensionality;
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008],ARef=[AI95-00168-01]}
   Corresponding index types shall be convertible;@Chg{New=[],Old=[ and]}
   @PDefn2{Term=[convertible],Sec=(required)}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008],ARef=[AI95-00168-01]}
   The component subtypes shall statically match@Chg{New=[; and],Old=[.]}
   @PDefn2{Term=[statically matching],Sec=(required)}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008],ARef=[AI95-00168-01]}
 @Chg{New=[In a view conversion, the target type and the operand type shall
 both or neither have aliased components.],Old=[]}
 @begin{Reason}
@@ -3908,7 +3993,7 @@ performed as above for a value conversion.
 
 @Leading@;The properties of this new view are as follows:
 @begin(itemize)
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
   If the target type is composite, the bounds or discriminants (if any)
   of the view are as defined above for a value conversion;
   each nondiscriminant component of the view denotes the matching
@@ -4109,6 +4194,23 @@ and have been generalized to cover the use of a type conversion
 as a @nt<name>.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0017],ARef=[AI95-00184-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Wording was added to insure that
+view conversions are constrained, and that a tagged view conversion has a
+tagged object. Both rules are needed to avoid having a way to change the
+discriminants of a constrained object.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0008],ARef=[AI95-00168-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Wording was added to insure that the
+aliased status of array components cannot change in a view conversion. This
+rule was needed to avoid having a way to change the discriminants of an
+aliased object. This rule was repealed later, as Ada 2005 allows changing
+the discriminants of an aliased object.],Old=[]}
+@end{DiffWord95}
+
+
+
 @LabeledClause{Qualified Expressions}
 
 @begin{Intro}
@@ -4199,7 +4301,7 @@ an access value that designates the object.
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010],ARef=[AI95-00127-01]}
 @PDefn2{Term=[expected type],Sec=(allocator)}
 The expected type for an @nt<allocator> shall be a single access-to-object
 type @Chg{New=[with],Old=[whose]} designated type
@@ -4212,7 +4314,7 @@ the determined type is @i<D>'Class],Old=[]}.
   of @lquotes@;shall be a single ... type whose ...@rquotes@;
 @end{Discussion}
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010],ARef=[AI95-00127-01]}
 @Chg{New=[An allocator is allowed as a controlling parameter of a dispatching
 call (see @RefSecNum{Dispatching Operations of Tagged Types}).],Old=[]}
 @end{Ramification}
@@ -4297,7 +4399,7 @@ uninitialized allocator)}
   If the designated type is elementary, an object of the
   designated subtype is created and any implicit initial value is assigned;
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
 @Defn2{Term=[assignment operation], Sec=(during evaluation of an
 uninitialized allocator)}
   If the designated type is composite, an object of the
@@ -4406,6 +4508,18 @@ Discussion of storage management issues,
 such as garbage collection and the raising of Storage_Error,
 has been moved to @RefSec{Storage Management}.
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95} @b<Corrigendum:> An allocator
+can be a controlling parameter of a dispatching call.],Old=[]}
+@end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified the elaboration of per-object
+constraints for an uninitialized allocator.],Old=[]}
+@end{DiffWord95}
 
 @LabeledClause{Static Expressions and Static Subtypes}
 

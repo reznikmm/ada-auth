@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:09 $}
+@Comment{$Date: 2004/10/30 21:51:42 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -678,7 +678,7 @@ conformance, subtype conformance, or full conformance.]
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011],ARef=[AI95-00117-01]}
 @leading@Defn{convention}
 @Defn{calling convention}
 @Redundant[As explained in @RefSec{Interfacing Pragmas},
@@ -816,7 +816,7 @@ the reserved word @key(protected) in its definition.
 @Defn2{Term=[calling convention], Sec=(entry)}
 The default calling convention is @i{entry} for an entry.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0011]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0011],ARef=[AI95-00117-01]}
 @Chg{New=[@Redundant[If not specified above as Intrinsic, the calling convention for any
 inherited or overriding dispatching operation of a tagged type is that of the
 corresponding subprogram of the parent type.] The default calling convention
@@ -945,7 +945,7 @@ If they were, it would be bad news, since the two denoted views have
 different @nt{default_expression}s.
 @end{Ramification}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0018]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0018],ARef=[AI95-00175-01]}
 @Chg{New=[each @nt{attribute_designator} in one must be the same as the
 corresponding @nt{attribute_designator} in the other; and],Old=[]}
 
@@ -1003,6 +1003,17 @@ elements. This implies, for example, that "(X, Y: T)"
 conforms fully with "(X: T; Y: T)",
 and "(X: T)" conforms fully with "(X: @key[in] T)".
 @end{Extend83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that the default convention is
+Ada. Also clarified that the convention of a primitive operation of a tagged
+type is the same as that of the type.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0018],ARef=[AI95-00175-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to insure that two
+attributes conform only if they have the same @nt{attribute_designator}.],Old=[]}
+@end{DiffWord95}
 
 @LabeledSubClause{Inline Expansion of Subprograms}
 

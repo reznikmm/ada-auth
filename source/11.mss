@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2004/10/29 04:22:49 $}
+@Comment{$Date: 2004/10/30 21:51:44 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -332,8 +332,8 @@ but not within a body enclosed by that handler.
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
-The @nt<expression>, if any, in a @nt<raise_statement>, is expected
-to be of type String.
+@Chg{Version=[2],New=[The @nt<expression>, if any, in a @nt<raise_statement>,
+is expected to be of type String.],Old=[]}
 @end{Resolution}
 
 @begin{RunTime}
@@ -386,7 +386,7 @@ any force.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}The syntax of a
 @nt{raise_statement} is extended to include a string message. This is more
 convinient than calling Ada.Exceptions.Exception_Message
@@ -962,7 +962,7 @@ Exceptions.
 @end{Extend83}
 
 @begin{Inconsistent95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00241-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00241-01]}
 @Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
 Exception_Identity of an Exception_Occurrence now is
 defined to return Null_Id for Null_Occurrence, rather than raising
@@ -971,7 +971,7 @@ We expect that programs that need Constraint_Error raised will be very rare;
 they can be easily fixed by explicitly testing for Null_Id or by using
 Exception_Name instead.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00329-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
 @Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
 Raise_Exception now raises Constraint_Error if passed Null_Id. This means
 that it always raises an exception, and thus we can apply pragma No_Return to
@@ -982,7 +982,7 @@ before calling Raise_Exception.],Old=[]}
 @end{Inconsistent95}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00362-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
 The package Ada.Exceptions is preelaborated, and types Exception_Id and
 Exception_Occurrence have preelaboratable initialization, allowing this package
@@ -990,12 +990,12 @@ to be used in preelaborated units.],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
 @Chg{Version=[2],New=[The meaning of Exception_Message is reworded to reflect
 that the string can come from a @nt{raise_statement} as well as a call of
 Raise_Exception.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00378-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00378-01]}
 @Chg{Version=[2],New=[We now define the lower bound of the string returned from
 Exception_Name, Exception_Message, and Exception_Information. This makes
 working with the returned string easier, and is consistent with many other
@@ -1280,7 +1280,7 @@ in clauses and subclauses throughout the standard.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
 @PragmaSyn`@key{pragma} @prag(Suppress)(@Syn2{identifier}@Chg{Version=[2],New=<>,Old=( [, [On =>] @Syn2{name}])});'
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
 @Chg{Version=[2],New=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag(Unsuppress)(@Syn2{identifier});'>,Old=<>}
 
 @begin{SyntaxText}
@@ -1362,7 +1362,7 @@ can renew the permission.],Old=[]}
 exception Constraint_Error is raised upon failure.]
 @begin{Description}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0036],ARef=[AI95-00176-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @RootDefn{Access_Check}
 Access_Check @\@Redundant[When evaluating a dereference (explicit
 or implicit),
@@ -1611,19 +1611,19 @@ which was included in @nt{selected_component} in RM83.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}Pragma Unsuppress is new.],
 Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],Ref=[8652/0036],ARef=[AI95-00176-01],ARef=[AI95-00224-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0036],ARef=[AI95-00176-01],ARef=[AI95-00224-01]}
 @Chg{Version=[2],New=[The description of Access_Check was corrected by the
 Corrigendum to include the discriminant case. This change was then replaced
 by the more general notion of checking conversions to null-excluding subtypes
 in the Amendment.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @Chg{Version=[2],New=[The On parameter of pragma Suppress was moved to Annex J.
 This feature's effect is inherently non-portable, depending on the
 implementation's model of computation. Compiler surveys demonstrated this,

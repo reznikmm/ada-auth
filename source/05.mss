@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/09/28 02:57:09 $}
+@Comment{$Date: 2004/10/30 21:51:42 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -296,10 +296,11 @@ so-and-so is the target of the assignment operation.
 @end{Intro}
 
 @begin{Resolution}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @PDefn2{Term=[expected type],
   Sec=(assignment_statement variable_name)}
 The @i(variable_)@nt<name> of an @nt<assignment_statement>
-is expected to be of any nonlimited type.
+is expected to be of any @Chg{Version=[2],New=[],Old=[nonlimited ]}type.
 @PDefn2{Term=[expected type],
   Sec=(assignment_statement expression)}
 The expected type for the @nt<expression> is
@@ -324,8 +325,10 @@ For example:
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 The target @Redundant[denoted by the
-@i(variable_)@nt<name>] shall be a variable.
+@i(variable_)@nt<name>] shall be a variable@Chg{Version=[2],New=[ of a
+nonlimited type],Old=[]}.
 
 If the target is of a tagged class-wide type @i(T)'Class, then
 the @nt<expression> shall either be dynamically tagged,
@@ -528,6 +531,28 @@ changing the value of a discriminant when
 the variable in an @nt<assignment_statement> is a subcomponent
 that depends on discriminants.
 @end{DiffWord83}
+
+@begin{Incompatible95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+The change of the limited check from a resolution rule to
+a legality rule is not quite upward compatible. For example],Old=[]}.
+@begin{Example}
+@Chg{Version=[2],New=[@key{type} AccNonLim @key{is} @key{access} NonLim;
+@key{function} Foo (Arg : in Integer) @key{return} AccNonLim;
+@key{type} AccLim @key{is} @key{access} Lim;
+@key{function} Foo (Arg : in Integer) @key{return} AccLim;
+Foo(2).@key{all} := Foo(1).@key{all};],Old=[]}.
+@end{Example}
+@Chg{Version=[2],New=[where NonLim is a nonlimited type and Lim is a limited
+type. The assignment is legal in Ada 95 (only the first Foo would be considered),
+and is ambiguous in Ada 2005. We make the change because limited expressions
+are now allowed in all other contexts (with a similar incompatibility), and it
+would be odd if assignments had different resolution rules. Moreover, examples
+like this one are rare, as they depend on assigning into overloaded function
+calls.],Old=[]}.
+@end{Incompatible95}
+
 
 @LabeledClause{If Statements}
 

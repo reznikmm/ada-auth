@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/09/28 02:57:09 $}
+@Comment{$Date: 2004/10/30 21:51:41 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -89,7 +89,7 @@ name begins @lquotes@;Latin Capital Letter@rquotes@;.
 @Defn{lower_case_identifier_letter}@nt<lower_case_identifier_letter>@\Any character of Row 00 of ISO 10646 BMP whose
 name begins @lquotes@;Latin Small Letter@rquotes@;.
 @begin{Honest}
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0001]}
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0001],ARef=[AI95-00124-01]}
 @Comment{The change in clause 1.3 for 8652/0001 handles this problem.}
 @Chg{New=[],Old=[The above rules do not include the ligatures
 @latin1(198) and @latin1(230).
@@ -331,6 +331,7 @@ We use @nt<identifier_letter> rather than @nt<letter> since
 ISO 10646 BMP includes many "letters' that are not permitted in
 identifiers (in the standard mode).
 @end{DiffWord83}
+
 
 @LabeledClause{Lexical Elements, Separators, and Delimiters}
 

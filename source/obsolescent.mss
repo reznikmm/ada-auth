@@ -1,17 +1,21 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:09 $}
+@Comment{$Date: 2004/10/30 21:51:45 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
 @Redundant[@Defn{obsolescent feature}
 This Annex contains descriptions of features of the
 language whose functionality is largely redundant with other features
 defined by this International Standard.
-Use of these features is not recommended in newly written programs.]
+Use of these features is not recommended in newly written programs.
+@Chg{Version=[2],New=[Use of these features can be prevented by using pragma
+Restrictions(No_Obsolescent_Features), see @RefSecNum{Pragma Restrictions}.],
+Old=[]}]
 @begin{Ramification}
 These features are still part of the language,
 and have to be implemented by conforming implementations.
@@ -34,8 +38,9 @@ The Epsilon, Mantissa, Emax, Small, Large, Safe_Emax, Safe_Small, and
 Safe_Large attributes of floating point types
 (see @RefSecNum{Attributes of Floating Point Types}).
 
-The pragma Interface
-(see @RefSecNum{Interfacing Pragmas}).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00284-02]}
+@Chg{Version=[2],New=[],Old=[The pragma Interface
+(see @RefSecNum{Interfacing Pragmas}).]}
 
 The pragmas System_Name, Storage_Unit, and Memory_Size
 (see @RefSecNum{The Package System}).
@@ -47,6 +52,12 @@ The pragma Shared
 Implementations can continue to support the above features for upward
 compatibility.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00368-01]}
+@Chg{Version=[2],New=[A mention of the No_Obsolescent_Features restriction was
+added.], Old=[]}
+@end{DiffWord95}
 
 @LabeledClause{Renamings of Ada 83 Library Units}
 
@@ -498,7 +509,7 @@ attached may be designated as reserved for the entire duration
 of program execution@Redundant[; that is, not just when they have an
 interrupt entry attached to them].
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0077]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0077],ARef=[AI95-00111-01]}
 Interrupt entry calls may be implemented by having the hardware execute
 directly the appropriate @Chg{New=[@nt{accept_statement}],Old=[accept body]}.
 Alternatively, the implementation is allowed to provide an internal interrupt
@@ -518,7 +529,7 @@ allowed to impose further requirements for the selection of the
 @end{ImplPerm}
 
 @begin{Notes}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0077]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0077],ARef=[AI95-00111-01]}
 Queued interrupts correspond to ordinary entry calls. Interrupts that are
 lost if not immediately processed correspond to conditional entry calls. It
 is a consequence of the priority rules that an @Chg{New=[@nt{accept_statement}],
@@ -547,6 +558,12 @@ RM83-13.5.1 did not adequately address the problems associate with
 interrupts. This feature is now obsolescent and is replaced by the Ada 95
 interrupt model as specified in the Systems Programming Annex.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0077],ARef=[AI95-00111-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> The undefined term @i{accept body}
+was replaced by @nt{accept_statement}.], Old=[]}
+@end{DiffWord95}
 
 @LabeledClause{Mod Clauses}
 
@@ -616,3 +633,145 @@ first subtype)}
 via an @nt{attribute_definition_clause}.
 @end{Description}
 @end{StaticSem}
+
+@LabeledAddedClause{Version=[2],Name=[Specific Suppression of Checks]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
+@Chg{Version=[2],New=[Pragma Suppress can be used to suppress checks on
+specific entities.],Old=[]}
+@end{Intro}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
+@Leading@Keepnext@;@Chg{Version=[2],New=[The form of a specific Suppress pragma
+is as follows:],Old=[]}
+@end{SyntaxText}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],
+New=`@ @ @key{pragma} @prag{Suppress}(@Syn2{identifier} [, [On =>] @Syn2{name}]);',
+Old=<>}
+@end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
+@Chg{Version=[2],New=[The identifier shall be the name of a check (see
+@RefSecNum{Suppressing Checks}). The name shall
+statically denote some entity.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
+@Chg{Version=[2],New=[For a specific Suppress pragma that is immediately within
+a @nt{package_specification}, the name shall denote an entity (or several
+overloaded subprograms) declared immediately within the
+@nt{package_specification}.],Old=[]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
+@Chg{Version=[2],New=[A specific Suppress pragma applies to the named check
+from the place of the pragma to the end of the innermost enclosing declarative
+region, or, if the pragma is given in a package_specification, to the end of
+the scope of the named entity. The pragma applies only to the named entity, or,
+for a subtype, on objects and values of its type. A specific Suppress pragma
+suppresses the named check for any entities to which it applies (see
+@RefSecNum{Suppressing Checks}). Which checks are associated with a specific
+entity is not defined by this International Standard.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@begin{Discussion}
+@Chg{Version=[2],New=[The language doesn't specify exactly which entities
+control whether a check is performed. For example, in],Old=[]}
+@begin{Example}
+@Chg{Version=[2],New=[@key{pragma} Suppress (Range_Check, On => A);
+A := B;],Old=[]}
+@end{Example}
+@Chg{Version=[2],New=[whether or not the range check is performed is not
+specified. The compiler may require that checks are suppressed on B or on the
+type of A in order to omit the range check.],Old=[]}
+@end{Discussion}
+@end{StaticSem}
+
+@begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
+@Chg{Version=[2],New=[An implementation is allowed to place restrictions on
+specific Suppress pragmas.],Old=[]}
+@end{ImplPerm}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
+@Chg{Version=[2],New=[An implementation may support a similar On parameter on
+pragma Unsuppress (see @RefSecNum{Suppressing Checks}).],Old=[]}
+@end{Notes}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
+@Chg{Version=[2],New=[This clause is new. This feature was moved here
+because it is important for pragma Unsuppress that there be an unambiguous
+meaning for each checking pragma. For instance, in the example],Old=[]}
+@begin{Example}
+@Chg{Version=[2],New=[@key{pragma} Suppress (Range_Check);
+@key{pragma} Unsuppress (Range_Check, On => A);
+A := B;],Old=[]}
+@end{Example}
+@Chg{Version=[2],New=[the user needs to be able to depend on the range check
+being made on the assignment. But a compiler survey showed that the
+interpretation of this feature varied widely; trying to define this carefully
+was likely to cause a lot of user and implementer pain. Thus the feature was
+moved here, to emphasize that its use is not portable.],Old=[]}
+@end{DiffWord95}
+
+@LabeledAddedClause{Version=[2],Name=[The Class Attribute of Untagged Incomplete Types]}
+
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[@Leading@;For the first subtype S of a type @i<T>
+declared by an @nt<incomplete_type_declaration> that is not tagged, the
+following attribute is defined:],Old=[]}
+@begin{Description}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[S'@attr{Class} @\Denotes the first subtype of the
+incomplete class-wide type rooted at @i<T>. The completion of @i<T> shall
+declare a tagged type. Such an attribute reference shall occur in the same
+library unit as the @nt<incomplete_type_declaration>.],Old=[]}
+@end{Description}
+@end{StaticSem}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[This clause is new. This feature was moved here
+because the tagged incomplete type provides a better way to provide this
+capability (it doesn't put requirements on the completion based on uses that
+could be anywhere). Pity we didn't think of it in 1994.],Old=[]}
+@end{DiffWord95}
+
+@LabeledAddedClause{Version=[2],Name=[Pragma Interface]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
+@Chg{Version=[2],New=[In addition to an identifier, the reserved word
+@key{interface} is allowed as a pragma name, to provide compatibility with a prior
+edition of the International Standard.],Old=[]}
+@end{SyntaxText}
+@end{Syntax}
+
+@begin{ImplNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
+@Chg{Version=[2],New=[All implementations need to at least recognize and
+ignore this pragma. A syntax error is not an acceptable implementation of
+this pragma.],Old=[]}
+@end{ImplNote}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[This clause is new. This is necessary as @key{interface}
+is now a reserved word, which would prevent pragma Interface from being an
+implementation-defined pragma. We don't define any semantics for this
+pragma, as we expect that implementations will continue to use whatever they
+currently implement - requiring any changes would be counter-productive.],
+Old=[]}
+@end{DiffWord95}
+

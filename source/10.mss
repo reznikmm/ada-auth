@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/10/29 04:22:48 $}
+@Comment{$Date: 2004/10/30 21:51:43 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -903,7 +903,7 @@ Standard.Standard.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
 The concept of a limited view is new. Combined with @nt{limited_with_clause}s
 (see @RefSecNum{Context Clauses - With Clauses}), they facilitate
@@ -1558,7 +1558,7 @@ Instead, we require only that the full expanded names be distinct.
 @end{Extend83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00243-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00243-01]}
 @Chg{Version=[2],New=[Clarified that a subunit of a subunit is still a subunit.],Old=[]}
 @end{DiffWord95}
 
@@ -1826,17 +1826,17 @@ containing the instantiation.
 
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],Ref=[8652/0032],ARef=[AI95-00192-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0032],ARef=[AI95-00192-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> The wording was clarified to insure that a
 @nt{subprogram_body} is not considered a completion of an instance of a
 generic subprogram.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00214-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00214-01]}
 @Chg{Version=[2],New=[The permissions to remove a unit from the environment were clarified
 to insure that it is never necessary to keep multiple (sub)units with the same
 full expanded name in the environment.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[Units mentioned in a @nt{limited_with_clause} were added to several
 rules; limited views have the same presence in the environment as the
 corresponding full views.],Old=[]}
@@ -1968,7 +1968,7 @@ selected partition-wide or system-wide options.],Old=[]}
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041-01]}
+@ChgRef{Version=[1], Kind=[AddedNormal], Ref=[8652/0034], ARef=[AI95-00041-01]}
 @Chg{New=[When applied to a generic unit, a program unit pragma that
 is not a library unit pragma should apply to each instance of the generic unit
 for which there is not an overriding pragma applied directly to the instance.],
@@ -1977,29 +1977,29 @@ Old=[]}
 
 
 @begin{DiffWord95}
-@ChgRef{Version=[2], Kind=[Added], Ref=[8652/0033], ARef=[AI95-00136-01]}
+@ChgRef{Version=[2], Kind=[AddedNormal], Ref=[8652/0033], ARef=[AI95-00136-01]}
 @Chg{Version=[2], New=[@B<Corrigendum:> The wording was corrected to insure
 that a program unit pragma cannot appear in private parts or generic formal
 parts.], Old=[]}
 
-@ChgRef{Version=[2], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041-01]}
+@ChgRef{Version=[2], Kind=[AddedNormal], Ref=[8652/0034], ARef=[AI95-00041-01]}
 @Chg{Version=[2], New=[@B<Corrigendum:> The wording was clarified to explain
 the meaning of program unit and library unit pragmas in generic units.], Old=[]}
 
-@ChgRef{Version=[2], Kind=[Added]}
+@ChgRef{Version=[2], Kind=[AddedNormal]}
 @Chg{Version=[2], New=[The Implementation Advice added by the Corrigendum was moved,
 as it was not in the normal order. (This changes the paragraph number.)
 It originally was directly after the new Static Semantics rule.], Old=[]}
 
-@ChgRef{Version=[2], Kind=[Added], ARef=[AI95-00212-01]}
+@ChgRef{Version=[2], Kind=[AddedNormal], ARef=[AI95-00212-01]}
 @Chg{Version=[2], New=[The permission to place restrictions was clarified to], Old=[]}
 @begin{itemize}
-@ChgRef{Version=[2], Kind=[Added]}
+@ChgRef{Version=[2], Kind=[AddedNormal]}
 @Chg{Version=[2], New=[Insure that it applies only to partition-wide configuration pragmas, not
 ones like Assertion_Policy (see @RefSecNum{Pragmas Assert and Assertion_Policy}),
 which can be different in different units; and], Old=[]}
 
-@ChgRef{Version=[2], Kind=[Added]}
+@ChgRef{Version=[2], Kind=[AddedNormal]}
 @Chg{Version=[2], New=[Insure that confirming pragmas are always allowed.], Old=[]}
 @end{itemize}
 
@@ -2723,11 +2723,11 @@ The program as a whole is an entirely different thing.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00256-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
 @Chg{Version=[2],New=[The mistaken use of @lquotes@;mentions@rquotes@; in the
 elaboration dependence rule was fixed.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[The @i<needs> relationship was extended to include
 limited views.],Old=[]}
 @end{DiffWord95}
@@ -3208,7 +3208,7 @@ required to appear last.
 @end{Extend83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
 The concept of preelaborable initialization and @nt{pragma}
 Preelaborable_Initialization are new. These allow more types of objects to be
@@ -3216,7 +3216,7 @@ created in preelaborable units, and fix holes in the old rules.],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00002-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00002-01]}
 @Chg{Version=[2],New=[@B<Corrigendum:> The wording was changed so that
 subunits of a preelaborated subprogram are also preelaborated.],Old=[]}
 @end{DiffWord95}

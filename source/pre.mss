@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:27 $}
+@Comment{$Date: 2004/10/30 21:51:44 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.19 $}
+@comment{$Revision: 1.20 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -18,7 +18,7 @@ Ada, Interfaces, and System;
 other library units are children of these:]
 
 @Leading@Keepnext
-@ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047)}
+@ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047),ARef=(AI95-00081-01)}
 @ @*@ @;@comment{paragraph number here, paragraph numbers seem to intrude on
 the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @begin{Display}
@@ -167,3 +167,9 @@ For upward compatibility, these are renamed as root library units
 
 The order and lettering of the annexes has been changed.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0047],ARef=[AI95-00081-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Units missing from the list of
+predefined units were added.],Old=[]}
+@end{DiffWord95}

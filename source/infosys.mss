@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2000/09/27 00:15:09 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2004/10/30 21:51:44 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:09 $}
+@Comment{$Date: 2004/10/30 21:51:44 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -503,7 +503,7 @@ If a picture String has '<' as @nt{fixed_LHS_sign}, then it has '>' as
 If a picture String has '<' in a @nt{floating_LHS_sign} or in an
 @nt{all_sign_number}, then it has an occurrence of '>'.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0088]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0088],ARef=[AI95-00153]}
 If a picture String has '+' or '-' as @nt{fixed_LHS_sign}, in a
 @nt{floating_LHS_sign}, or in an @nt{all_sign_number}, then it has no
 @nt{RHS_sign}@Chg{New=[ or '>' character],Old=[]}.
@@ -881,7 +881,7 @@ Item:         Picture and Result Strings:
                                              separator = '.',
                                              radix mark = ',')
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0089]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0089],ARef=[AI95-00070]}
 123456.78     Picture:  "-@Chg{New=[],Old=[$$]}$**_***_**9.99"
               Result:   "@Chg{New=[],Old=[bb]}b$***123,456.78"
                        "b@Chg{New=[],Old=[bb]}FF***123.456,78" (currency = "FF",
@@ -901,6 +901,13 @@ Item:         Picture and Result Strings:
              Result:  "bbCHF12,345.67"   (currency = "CHF")
 @end{Example}
 @end{Examples}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0088],ARef=[AI95-00153-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> The picture string rules for numbers
+were tightened.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{The Package Text_IO.Editing}
 @begin{Intro}

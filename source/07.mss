@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2001/03/22 18:14:23 $}
+@Comment{$Date: 2004/10/30 21:51:43 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -918,7 +918,7 @@ Inherited subprograms are also implicitly declared
 immediately after the definition of the type,
 except as stated below.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019],ARef=[AI95-00033-01]}
 For a composite type, the characteristics
 (see @RefSecNum{Private Types and Private Extensions})
 of the type are determined in part by the
@@ -934,7 +934,7 @@ then any corresponding characteristics become visible for the composite
 type.
 Any additional predefined operators are implicitly declared at that place.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019],ARef=[AI95-00033-01]}
 The corresponding rule applies to a type defined by a
 @nt{derived_type_definition},
 if there is a place @Chg{New=[immediately within the declarative region in which
@@ -942,7 +942,7 @@ the type is declared],
 Old=[within its immediate scope]} where additional
 characteristics of its parent type become visible.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019],ARef=[AI95-00033-01]}
 @Defn{become nonlimited}
 @Defn2{Term=[nonlimited type],Sec=(becoming nonlimited)}
 @Defn2{Term=[limited type],Sec=(becoming nonlimited)}
@@ -954,7 +954,7 @@ Old=[within the immediate scope of the array type.]}
 In such a case, the predefined "=" operator is implicitly declared at
 that place, and assignment is allowed after that place.]
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019],ARef=[AI95-00033-01]}
 Inherited primitive subprograms follow a different rule.
 For a @nt{derived_type_definition},
 each inherited primitive subprogram
@@ -1113,7 +1113,7 @@ in more than one place:
 @key[end] P.Q;
 @end{Example}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0019]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0019],ARef=[AI95-00033-01]}
 @Chg{New=[We say @i<immediately> within the declarative region in order that
 types do not gain operations within a nested scope. Consider:],Old=[]}
 @begin{Example}
@@ -1251,6 +1251,13 @@ The definition of the Constrained attribute for private types
 has been moved to @lquotes@;Obsolescent Features.@rquotes@;
 (The Constrained attribute of an object has not been moved there.)
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0018],ARef=[AI95-00033-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified when additional operations
+are declared.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledClause{Deferred Constants}
 
@@ -1690,7 +1697,7 @@ or Finalize is applied to the containing object.
 
 @begin{StaticSem}
 @leading@keepnext@;The following language-defined library package exists:
-@begin{Example}@tabclear()@tabset(P22)@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
+@begin{Example}@tabclear()@tabset(P22)@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
 @key[package] Ada.Finalization @key[is]@ChildUnit{Parent=[Ada],Child=[Finalization]}
     @key[pragma] Preelaborate(Finalization);@Chg{New=[
     @key[pragma] Remote_Types(Finalization);],Old=[]}
@@ -1760,7 +1767,7 @@ Initialize is called on the object.
 The same applies to the evaluation of an @nt{allocator},
 as explained in @RefSecNum{Allocators}.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
 For an @nt{extension_aggregate} whose @nt{ancestor_part} is a
 @nt{subtype_mark},
 @Chg{New=[for each controlled subcomponent of the ancestor part, either
@@ -1798,7 +1805,7 @@ For the elaboration of B's declaration, Initialize is not called at
 all. Instead the assignment adjusts B's value;
 that is, it applies Adjust to B.X, B.Y, and B.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0021]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0021],ARef=[AI95-00182-01]}
 @Chg{New=[The @nt{ancestor_part} of an @nt{extension_aggregate} is handled similarly.],
 Old=[]}
 @end{Discussion}
@@ -1935,7 +1942,7 @@ contract model violations.
 @end{RunTime}
 
 @begin{ImplReq}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0022]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0022],ARef=[AI95-00083-01]}
 @Chg{New=[For an @nt{aggregate} of a controlled type whose value is assigned,
 other than by an @nt{assignment_statement} or a @nt{return_statement}, the
 implementation shall not create a separate anonymous object for the
@@ -2046,6 +2053,21 @@ subcomponents may be self-referential or otherwise position-dependent.
 Controlled types and user-defined finalization are new to Ada 95.
 (Ada 83 had finalization semantics only for masters of tasks.)
 @end{Extend83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that Ada.Finalization is
+a remote types package.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0021],ARef=[AI95-00182-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to clarify that the
+default initialization (whatever that is) of an ancestor part is used.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0022],ARef=[AI95-00083-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that Adjust is never called
+on an aggregate used for the initialization of an object or subaggregate,
+or passed as a parameter.],Old=[]}
+@end{DiffWord95}
 
 @LabeledSubClause{Completion and Finalization}
 
@@ -2274,7 +2296,7 @@ The target of an assignment statement is finalized before copying in the
 new value, as explained
 in @RefSecNum{User-Defined Assignment and Finalization}.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
 @Chg{New=[If the @nt{object_name} in an @nt{object_renaming_declaration}, or
 the actual parameter for a generic formal @key[in out] parameter in a
 @nt{generic_instantiation}, denotes any part of an anonymous object created by
@@ -2316,7 +2338,7 @@ value of F into X, especially if the size of the result
 is not known at the call site.
 @end{Reason}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @Chg{New=[If a transfer of control or raising of an exception occurs prior to
 performing a finalization of an anonymous object, the anonymous object is
 finalized as part of the finalizations due to be performed for the object's
@@ -2325,7 +2347,7 @@ innermost enclosing master.],Old=[]}
 @end{RunTime}
 
 @begin{Bounded}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0023]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @leading@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error for a call on Finalize or Adjust @Chg{New=[that occurs as
 part of object finalization or assignment ], Old=[]}to propagate an exception.
@@ -2339,7 +2361,7 @@ Adjust operation:
   (either explicitly or by default)
   are finalized in the usual way.
 
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
   @Chg{New=[It also is not a bounded error for an explicit call to Finalize or
   Adjust to propagate an exception. We do not want implementations to have to
   treat explicit calls to these routines specially.],Old=[]}
@@ -2349,7 +2371,7 @@ Adjust operation:
 For a Finalize invoked as part of an @nt<assignment_statement>,
 Program_Error is raised at that point.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0024]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0024],ARef=[AI95-00193-01]}
 @Chg{New=[For an Adjust invoked as part of the initialization of a controlled
 object, other adjustments due to be performed might or might not be performed,
 and then Program_Error is raised. During its propagation, finalization might or
@@ -2359,7 +2381,7 @@ For an Adjust invoked as part of an assignment @Chg{New=[statement],
 Old=[operation]}, any other adjustments due to be performed are performed,
 and then Program_Error is raised.
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024],ARef=[AI95-00193-01]}
 @Chg{New=[In the case of assignments that are part of initialization, there is
 no need to complete all adjustments if one propagates an exception, as the
 object will immediately be finalized. So long as a subcomponent is not going
@@ -2373,7 +2395,7 @@ adjustments be performed, even if one fails, because all controlled
 subcomponents are going to be finalized.],Old=[]}
 @end{Reason}
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024],ARef=[AI95-00193-01]}
 @Chg{New=[Even if an Adjust invoked as part of the initialization of a
 controlled object propagates an exception, objects whose initialization
 (including any Adjust or Initialize calls) successfully completed will be
@@ -2386,20 +2408,20 @@ For a Finalize invoked as part of a call on an instance of
 Unchecked_Deallocation, any other finalizations due to
 be performed are performed, and then Program_Error is raised.
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0104]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0104],ARef=[AI95-00179-01]}
 @Chg{New=[The standard does not specify if storage is recovered in this case.
 If storage is not recovered (and the object continues to exist), Finalize
 may be called on the object again (when the @nt<allocator>'s master is
 finalized).],Old=[]}
 @end{Discussion}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 For a Finalize invoked as part of the finalization of the anonymous
 object created by a function call or @nt{aggregate}, any other finalizations
 due to be performed are performed, and then Program_Error is raised.],Old=[]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 For a Finalize invoked due to reaching the end of the execution of a
 master, any other finalizations associated with the master are performed, and
@@ -2688,3 +2710,17 @@ These concepts also needed to be generalized somewhat.
 Task waiting is closely related to user-defined finalization;
 the rules here refer to the task-waiting rules of Section 9.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0021],ARef=[AI95-00182-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Fixed the wording to say that anonymous
+objects aren't finalized until the object can't be used anymore.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0023],ARef=[AI95-00169-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to clarify what happens
+when Adjust or Finalize raises an exception; some cases had been omitted.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0024],ARef=[AI95-00193-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Stated that if Adjust raises an
+exception during initialization, nothing further is required.],Old=[]}
+@end{DiffWord95}
