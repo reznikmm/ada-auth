@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:56 $}
+@Comment{$Date: 2000/08/26 04:13:56 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -2749,7 +2749,7 @@ Old=[, as a count (in stream elements) from the beginning of the file.
 The position of the first element in the file is 1]}.
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Deleted]}
-@Comment{This ramification is now part of the official wording.}
+@ChgNote{This ramification is now part of the official wording.}
 @Chg{New=[],Old=[The notion of Index for Stream_IO is analogous to that of
 Index in Direct_IO, except that the former is measured in Stream_Element
 units, whereas the latter is in terms of Element_Type values.]}

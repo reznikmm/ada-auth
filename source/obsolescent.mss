@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:56 $}
+@Comment{$Date: 2000/08/26 04:13:57 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -497,10 +497,11 @@ attached may be designated as reserved for the entire duration
 of program execution@Redundant[; that is, not just when they have an
 interrupt entry attached to them].
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0077]}
 Interrupt entry calls may be implemented by having the hardware execute
-directly the appropriate accept body. Alternatively, the implementation is
-allowed to provide an internal interrupt handler to simulate the effect of
-a normal task calling the entry.
+directly the appropriate @Chg{New=[@nt{accept_statement}],Old=[accept body]}.
+Alternatively, the implementation is allowed to provide an internal interrupt
+handler to simulate the effect of a normal task calling the entry.
 
 The implementation is allowed to impose restrictions on the specifications
 and bodies of tasks that have interrupt entries.
@@ -516,13 +517,13 @@ allowed to impose further requirements for the selection of the
 @end{ImplPerm}
 
 @begin{Notes}
-
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0077]}
 Queued interrupts correspond to ordinary entry calls. Interrupts that are
 lost if not immediately processed correspond to conditional entry calls. It
-is a consequence of the priority rules that an accept body executed in
-response to an interrupt can be executed with the active priority at which the
-hardware generates the interrupt, taking precedence over lower priority tasks,
-without a scheduling action.
+is a consequence of the priority rules that an @Chg{New=[@nt{accept_statement}],
+Old=[accept body]} executed in response to an interrupt can be executed with
+the active priority at which the hardware generates the interrupt, taking
+precedence over lower priority tasks, without a scheduling action.
 
 Control information that is supplied upon an interrupt can be passed to an
 associated interrupt entry as one or more parameters of mode @key[in].

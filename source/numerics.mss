@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2000/08/18 01:10:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2000/08/26 04:13:56 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/08/18 01:10:07 $}
+@Comment{$Date: 2000/08/26 04:13:56 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -73,10 +73,11 @@ operations.}
 @Leading@;The generic library package
 Numerics.Generic_Complex_Types has the following declaration:
 @begin{Example}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
 @key{generic}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Types]}
    @key{type} Real @key{is} @key{digits} <>;
 @key{package} Ada.Numerics.Generic_Complex_Types @key{is}
-   pragma Pure(Generic_Complex_Types);
+   @Chg{New=[@key{pragma}],Old=[pragma]} Pure(Generic_Complex_Types);
 
    @key{type} @AdaTypeDefn{Complex} @key{is}
       @key{record}
@@ -191,15 +192,16 @@ Numerics.Generic_Complex_Types has the following declaration:
 @key{end} Ada.Numerics.Generic_Complex_Types;
 @end{Example}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
 @Defn{Ada.Numerics.Complex_Types}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Types]}
 The library package Numerics.Complex_Types
-defines the same types, constants, and subprograms as
-Numerics.Generic_Complex_Types, except that the predefined type Float is
-systematically substituted for Real'Base throughout. Nongeneric
-equivalents of Numerics.Generic_Complex_Types for each of the other predefined
-floating point types are defined similarly, with the names
-Numerics.Short_Complex_Types, Numerics.Long_Complex_Types, etc.
+@Chg{New=[is declared pure and ],Old=[]}defines the same types, constants,
+and subprograms as Numerics.Generic_Complex_Types, except that the
+predefined type Float is systematically substituted for Real'Base throughout.
+Nongeneric equivalents of Numerics.Generic_Complex_Types for each of the other
+predefined floating point types are defined similarly, with the names
+Numerics.@!Short_@!Complex_@!Types, Numerics.@!Long_@!Complex_@!Types, etc.
 @begin{Reason}
    The nongeneric equivalents are provided to allow the programmer to
    construct simple mathematical applications without being required to
@@ -462,20 +464,19 @@ or function in Numerics.Generic_Complex_Types, when Real'Signed_Zeros is True.}
 The nongeneric equivalent packages may, but need not, be actual
 instantiations of the generic package for the appropriate predefined type.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0091]}
 Implementations may obtain the result of exponentiation of a complex
-or pure-imaginary
-operand by repeated complex multiplication, with arbitrary association
-of the factors and with a possible final complex reciprocation (when the
-exponent is negative). Implementations are also permitted to obtain the result
-of exponentiation of a complex operand, but not of a pure-imaginary operand,
-by converting the left
-operand to a polar representation; exponentiating the
-modulus by the given exponent; multiplying the argument by the given exponent,
-when the exponent is positive, or dividing the argument by the absolute value
-of the given exponent, when the exponent is negative; and reconverting to a
-cartesian representation. Because of this implementation freedom, no accuracy
-requirement is imposed on complex exponentiation
-(except for the prescribed results given above, which apply
+or pure-imaginary operand by repeated complex multiplication, with arbitrary
+association of the factors and with a possible final complex reciprocation
+(when the exponent is negative). Implementations are also permitted to obtain
+the result of exponentiation of a complex operand, but not of a pure-imaginary
+operand, by converting the left operand to a polar representation;
+exponentiating the modulus by the given exponent; multiplying the argument by
+the given exponent@Chg{New=[],Old=[, when the exponent is positive, or dividing
+the argument by the absolute value of the given exponent, when the exponent is
+negative]}; and reconverting to a cartesian representation. Because of this
+implementation freedom, no accuracy requirement is imposed on complex
+exponentiation (except for the prescribed results given above, which apply
 regardless of the implementation method chosen).
 @end{ImplPerm}
 
@@ -590,10 +591,12 @@ Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @key[end] Ada.Numerics.Generic_Complex_Elementary_Functions;
 @end{Example}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
 @Defn{Ada.Numerics.Complex_Elementary_Functions}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Elementary_@!Functions]}
 The library package Numerics.Complex_Elementary_Functions
-defines the same subprograms as Numerics.@!Generic_@!Complex_@!Elementary_@!Functions,
+@Chg{New=[is declared pure and ],Old=[]}defines the same subprograms as
+Numerics.@!Generic_@!Complex_@!Elementary_@!Functions,
 except that the predefined type Float is systematically substituted for
 Real'Base, and the Complex and Imaginary types exported by Numerics.@!Complex_@!Types
 are systematically substituted for Complex and Imaginary, throughout.
@@ -956,13 +959,17 @@ The semantics of the Get and Put procedures are as follows:
 @key[procedure] Get (Item  : @key[out] Complex;
                Width : @key[in]  Field := 0);
 @end{Example}
-The input sequence is a pair of
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0092]}
+@Leading@;The input sequence is a pair of
 optionally signed real literals representing
-the real and imaginary components of a complex value; optionally, the pair of
-components may be separated by a comma and/or surrounded by a pair of
-parentheses. Blanks are freely allowed before each of the components and
-before the parentheses and comma, if either is used. If the value of the
-parameter Width is zero, then
+the real and imaginary components of a complex value@Chg{New=[ These components
+have the format defined for the corresponding Get procedure of an instance of
+Text_IO.Float_IO (see @RefSecNum{Input-Output for Real Types}) for the base
+subtype of Complex_Types.Real. T],Old=[; optionally, t]}he pair of components
+may be separated by a comma @Chg{New=[],Old=[and/]}or surrounded by a pair of
+parentheses@Chg{New=[ or both],Old=[]}. Blanks are freely allowed before each
+of the components and before the parentheses and comma, if either is used.
+If the value of the parameter Width is zero, then
 @begin{Itemize}
    line and page terminators are also allowed in these places;
 

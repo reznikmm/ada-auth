@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:56 $}
+@Comment{$Date: 2000/08/26 04:13:56 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -5441,8 +5441,8 @@ All nonlimited types have default implementations
 for these operations. An @nt{attribute_reference} for one of
 these attributes is illegal if the type is limited,
 unless the attribute has been specified by an
-@nt{attribute_@!definition_@!clause}@Chg{New=[ or (for a type extension) the
-attribute has been specified for an ancestor type],Old=[]}.
+@nt{attribute_@!definition_@!clause}@Chg{New=[ or @Redundant[(for a type extension)]
+the attribute has been specified for an ancestor type],Old=[]}.
 For an @nt{attribute_@!definition_@!clause} specifying one of these
 attributes, the subtype of the Item parameter shall be the base subtype
 if scalar, and the first subtype otherwise.
@@ -5450,6 +5450,15 @@ The same rule applies to the result of the Input function.
 @begin{Reason}
   This is to simplify implementation.
 @end{Reason}
+@begin{Discussion}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+@Chg{New=[@lquotes@;Specified@rquotes includes inherited attributes, and
+default implementations are never inherited. So, for untagged limited types,
+the second part of the @nt{attribute_reference} rule has the same meaning as
+the first part. However, tagged types never inherit attributes, so the second
+rule is needed so that the default implementations for the attributes can be
+called when those are constructed from a directly specified ancestor.],Old=[]}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{ImplReq}

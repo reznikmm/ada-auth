@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/18 01:10:07 $}
+@Comment{$Date: 2000/08/26 04:13:55 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1538,9 +1538,13 @@ the components are identified by the values covered by the
 @end{Intro}
 
 @begin{MetaRules}
+@ChgRef{Version=[1],Kind=[Revised]}
 The rules in this subclause are based on
 terms and rules for @nt{discrete_choice_list}s
 defined in @RefSec{Variant Parts and Discrete Choices}.
+@Chg{New=[For example, the requirements that @key(others) come last and stand
+alone are found there.],Old=[]}@Comment{This question is asked periodically, so
+we answer it explicitly.}
 @end{MetaRules}
 
 @begin{Syntax}

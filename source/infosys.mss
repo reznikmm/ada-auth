@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2000/08/23 00:31:01 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2000/08/26 04:13:56 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:01 $}
+@Comment{$Date: 2000/08/26 04:13:56 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -502,9 +502,10 @@ If a picture String has '<' as @nt{fixed_LHS_sign}, then it has '>' as
 If a picture String has '<' in a @nt{floating_LHS_sign} or in an
 @nt{all_sign_number}, then it has an occurrence of '>'.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0088]}
 If a picture String has '+' or '-' as @nt{fixed_LHS_sign}, in a
 @nt{floating_LHS_sign}, or in an @nt{all_sign_number}, then it has no
-@nt{RHS_sign}.
+@nt{RHS_sign}@Chg{New=[ or '>' character],Old=[]}.
 
 An instance of @nt{all_sign_number} does not have occurrences of
 different @nt{sign_char} Character values.
@@ -879,11 +880,12 @@ Item:         Picture and Result Strings:
                                              separator = '.',
                                              radix mark = ',')
 
-123456.78     Picture:  "-$$$**_***_**9.99"
-              Result:   "bbb$***123,456.78"
-                       "bbbFF***123.456,78" (currency = "FF",
-                                             separator = '.',
-                                             radix mark = ',')
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0089]}
+123456.78     Picture:  "-@Chg{New=[],Old=[$$]}$**_***_**9.99"
+              Result:   "@Chg{New=[],Old=[bb]}b$***123,456.78"
+                       "b@Chg{New=[],Old=[bb]}FF***123.456,78" (currency = "FF",
+                         @Chg{New=[],Old=[  ]}                  separator = '.',
+                         @Chg{New=[],Old=[  ]}                  radix mark = ',')
 
 0.0          Picture: "-$$$$$$.$$"
              Result:  "bbbbbbbbbb"

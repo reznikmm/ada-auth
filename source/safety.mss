@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.17 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
+@Comment{ $Revision: 1.18 $ $Date: 2000/08/26 04:13:57 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:56 $}
+@Comment{$Date: 2000/08/26 04:13:57 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -482,6 +482,7 @@ is involved in this pragma.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0093]}
 @Defn{inspection point}
 An @i{inspection point} is a point in the object code
 corresponding to the occurrence of a pragma Inspection_@!Point in the
@@ -489,19 +490,32 @@ compilation unit.
 @Defn{inspectable object}
 An object is @i{inspectable} at an inspection point if the corresponding
 pragma Inspection_Point either has an argument denoting that object,
-or has no arguments.
+or has no arguments@Chg{New=[ and the object is visible at the
+inspection point],Old=[]}.
 @begin{ramification}
 If a pragma Inspection_Point is in an in-lined subprogram, there
 might be numerous inspection points in the object code corresponding to
 the single occurrence of the pragma in the source; similar considerations
-apply if such a
-pragma is in a generic, or in a loop that has been @lquotes@;unrolled@rquotes@; by an
-optimizer.
+apply if such a pragma is in a generic, or in a loop that has
+been @lquotes@;unrolled@rquotes@; by an optimizer.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0093]}
+@Chg{New=[The short form of the pragma is a convenient shorthand for
+listing all objects which could be explicitly made inspectable by the long
+form of the pragma, thus only visible objects are made inspectable by it.
+Objects which are not visible at the point of the pragma are not made
+inspectable by the short form pragma. This is necessary so that implementations
+need not keep information about (or prevent optimizations on) a unit simply
+because some other unit @i<might> contain a short form Inspection_Point
+pragma.],Old=[]}
 @end{ramification}
 @begin{Discussion}
-If the short form of the pragma is used, then all objects are inspectable.
-This implies that objects out of scope at the point of the pragma are
-inspectable. A good interactive debugging system could provide information
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0093]}
+If the short form of the pragma is used, then all@Chg{New=[ visible],Old=[]}
+objects are inspectable.
+This implies that @Chg{New=[global objects from other compilation units],
+Old=[objects out of scope at the point of the pragma]} are inspectable. A good
+interactive debugging system could provide information
 similar to a post-mortem dump at such inspection points. The annex does
 not require that any inspection facility is provided, merely that the
 information is available to understand the state of the machine at those
@@ -618,22 +632,25 @@ are no declarations of protected types or protected objects.
 @Defn2{Term=[Restrictions],Sec=(No_Allocators)}No_Allocators @\There are no
 occurrences of an @nt{allocator}.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042]}
 @Defn2{Term=[Restrictions],Sec=(No_Local_Allocators)}No_Local_Allocators @\@nt{Allocator}s
 are prohibited in subprograms, generic subprograms,
-tasks, and entry bodies; instantiations of generic packages are
-also prohibited in these contexts.
+tasks, and entry bodies@Chg{New=[],Old=[; instantiations of generic packages
+are also prohibited in these contexts]}.
 @begin[Ramification]
 Thus @nt{allocator}s are permitted only in expressions whose
 evaluation can only be performed before the main subprogram is invoked.
 @end[Ramification]
 @begin[Reason]
-The reason for the prohibition against instantiations of
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042]}
+@ChgNote{The associated rule has been deleted.}
+@Chg{New=[],Old=[The reason for the prohibition against instantiations of
 generic packages is to avoid contract model violations.
 An alternative would be to prohibit @nt{allocator}s from generic
 packages, but it seems preferable to allow generality on the
 defining side and then place the restrictions on the usage (instantiation),
 rather than inhibiting what can be in the generic while
-liberalizing where they can be instantiated.
+liberalizing where they can be instantiated.]}
 @end[Reason]
 
 @Defn2{Term=[Restrictions],Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic dependence on Unchecked_Deallocation is not allowed.

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/08/26 04:13:56 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/08/25 04:02:56 $}
+@Comment{$Date: 2000/08/26 04:13:56 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -236,11 +236,16 @@ other sources of priority inheritance.
 @end{Discussion}
 @begin{itemize}
 
-During activation, a task being activated inherits the active priority of the
-its activator (see @RefSecNum{Task Execution - Task Activation}).
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0072]}
+During activation, a task being activated inherits the active priority
+@Chg{New=[that],Old=[of the]} its activator (see
+@RefSecNum{Task Execution - Task Activation})@Chg{New=[ had at the time
+the activation was initiated],Old=[]}.
 
-During rendezvous, the task accepting the entry call inherits the active
-priority of the caller (see @RefSecNum{Entry Calls}).
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0072]}
+During rendezvous, the task accepting the entry call inherits the
+@Chg{New=[],Old=[active ]}priority of the @Chg{New=[entry call],Old=[caller]}
+(see @RefSecNum{Entry Calls}@Chg{New=[ and @RefSecNum{Entry Queuing Policies}],Old=[]}).
 
 During a protected action on a protected object, a task inherits the ceiling
 priority of the protected object (see @RefSecNum{Intertask Communication} and
@@ -655,6 +660,7 @@ A Locking_Policy pragma is a configuration pragma.
 
 @begin{RunTime}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0073]}
 @Defn{locking policy}
 @Redundant[A locking policy specifies the details of protected object
 locking. These rules specify whether or not protected objects have
@@ -666,10 +672,10 @@ The @i{locking policy} is specified by a Locking_Policy pragma. For
 implementation-defined locking policies, the effect of a Priority or
 Interrupt_Priority pragma on a protected object is
 implementation defined.
-If no Locking_Policy pragma appears in any of the program units comprising a
-partition, the locking policy for that partition, as well as the effect
-of specifying either a Priority or Interrupt_Priority pragma for a
-protected object, are implementation defined.
+If no Locking_Policy pragma @Chg{New=[applies to],Old=[appears in]} any
+of the program units comprising a partition, the locking policy for that
+partition, as well as the effect of specifying either a Priority or
+Interrupt_Priority pragma for a protected object, are implementation defined.
 
 @Leading@;There is one predefined locking policy, Ceiling_Locking; this policy is
 defined as follows:
@@ -810,10 +816,11 @@ calls another protected operation on the same protected object).
 @LabeledClause{Entry Queuing Policies}
 
 @begin{Intro}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0074]}
 @Redundant[@Defn{queuing policy}
 This clause specifies a mechanism for a user to choose an entry
-@i{queuing policy}. It also defines one such policy. Other
-policies are implementation defined.]
+@i{queuing policy}. It also defines @Chg{New=[two],Old=[one]}
+such polic@Chg{New=[ies],Old=[y]}. Other policies are implementation defined.]
 @ImplDef{Implementation-defined queuing policies.}
 @end{Intro}
 
@@ -873,17 +880,16 @@ the call is made, but can change later. Within the same priority,
 the order is consistent with the calling (or requeuing,
 or priority setting) time (that is, a FIFO order).
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0075]}
 After a call is first queued, changes to the active priority of a task do
 not affect the priority of the call, unless the base priority of the task is
-set.
+set@Chg{New=[ while the task is blocked on an entry call],Old=[]}.
 
 When the base priority of a task is set (see @RefSecNum{Dynamic Priorities}),
-if the task is blocked on an entry call,
-and the call is queued,
-the priority of the call is updated to the new
-active priority of the calling task.
-This causes the call to be removed from and then reinserted in the queue
-at the new active priority.
+if the task is blocked on an entry call, and the call is queued,
+the priority of the call is updated to the new active priority of the
+calling task. This causes the call to be removed from and then reinserted in
+the queue at the new active priority.
 @begin{Reason}
 A task is blocked on an entry call if the entry call is simple,
 conditional, or timed.
@@ -951,8 +957,7 @@ If the expiration time of two or more open
 @nt{delay_alternative}s is the same and no other
 @nt{accept_alternative}s are open, the
 @nt{sequence_of_statements} of the @nt{delay_alternative} that is
-first in textual order in the @nt{selective_accept} is
-executed.
+first in textual order in the @nt{selective_accept} is executed.
 
 When more than one alternative of a @nt{selective_accept} is
 open and has queued calls, an alternative whose queue has the highest-priority
@@ -1287,13 +1292,17 @@ construction of highly efficient tasking run-time systems.]
 @Defn2{Term=[Restrictions],Sec=(No_Task_Hierarchy)}No_Task_Hierarchy @\All (nonenvironment) tasks depend directly on
                         the environment task of the partition.
 
-@Defn2{Term=[Restrictions],Sec=(No_Nested_Finalization)}No_Nested_Finalization @\Objects with controlled parts and
-                              access types that designate such
-                              objects shall be declared only at library level.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042]}
+@Defn2{Term=[Restrictions],Sec=(No_Nested_Finalization)}No_Nested_Finalization @\Objects
+  with controlled@Chg{New=[, protected, or task],Old=[]} parts and
+  access types that designate such objects@Chg{New=[,],Old=[]} shall be
+  declared only at library level.
     @begin{Ramification}
-    Note that protected types with entries and interrupt-handling
-    protected types have nontrivial finalization actions.
-    However, this restriction does not restrict those things.
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042]}
+    @ChgNote{This is no longer true.}
+    @Chg{New=[],Old=[Note that protected types with entries and
+    interrupt-handling protected types have nontrivial finalization actions.
+    However, this restriction does not restrict those things.]}
     @end{Ramification}
 
 @Defn2{Term=[Restrictions],Sec=(No_Abort_Statements)}No_Abort_Statements @\There are no @nt{abort_statement}s, and there are no
@@ -1347,28 +1356,50 @@ Max_Protected_Entries @\Specifies the maximum number of entries per
 
 @begin{RunTime}
 
-If the following restrictions are violated,
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0076]}
+@Chg{New=[],Old=[If the following restrictions are violated,
 the behavior is implementation defined.
 @IndexCheck{Storage_Check}
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 If an implementation chooses to detect such a violation,
-Storage_Error should be raised.
+Storage_Error should be raised.]}
 
 @Leading@;The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
 @begin{Description}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076]}
 @Defn2{Term=[Restrictions],Sec=(Max_Storage_At_Blocking)}Max_Storage_At_Blocking @\Specifies
   the maximum portion @redundant[(in storage elements)]
-  of a task's Storage_Size that can be retained by a blocked task.
+  of a task's Storage_Size that can be retained by a blocked task@Chg{New=[.
+  If an implementation chooses to detect a violation of this
+  restriction, Storage_Error should be raised;
+  @IndexCheck{Storage_Check}
+  @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+  otherwise, the behavior is implementation defined],Old=[]}.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076]}
 @Defn2{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies
   the maximum dynamic nesting level of @nt{asynchronous_select}s.
-  @Redundant[A value of zero prevents the use of any @nt{asynchronous_select}.]
+  A value of zero prevents the use of any @nt{asynchronous_select}@Chg{New=[ and,
+  if a program contains an @nt{asynchronous_select}, it is illegal.
+  @ChgNote{Part of the previous rule is redundant, but it is a different part
+  [all of it for Old; from "prevents" to "and," for New] for each. So we omit it.}
+  If an implementation chooses to detect a violation of this
+  restriction for values other than zero, Storage_Error should be raised;
+  @IndexCheck{Storage_Check}
+  @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+  otherwise, the behavior is implementation defined],Old=[]}.
 
-
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076]}
 @Defn2{Term=[Restrictions],Sec=(Max_Tasks)}Max_Tasks @\Specifies the maximum
   number of task creations that may be executed over the lifetime of a
-  partition, not counting the creation of the environment task.
+  partition, not counting the creation of the environment task@Chg{New=[.
+  A value of zero prevents any task creation and, if a program contains a
+  task creation, it is illegal. If an implementation chooses to detect a
+  violation of this restriction, Storage_Error should be raised;
+  @IndexCheck{Storage_Check}
+  @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+  otherwise, the behavior is implementation defined],Old=[]}.
   @begin{Ramification}
      Note that this is not a limit on the
      number of tasks active at a given time;
@@ -1385,7 +1416,6 @@ results in a reduction in executable program size, storage requirements,
 or execution time. If possible, the implementation should provide
 quantitative descriptions of such effects for each restriction.
 @ImplDef{Implementation-defined aspects of pragma Restrictions.}
-
 @end{RunTime}
 
 @begin{ImplAdvice}
@@ -2072,9 +2102,11 @@ construct.
 If a task becomes held while waiting (as a caller) for a rendezvous to
 complete, the active priority of the accepting task is not affected.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0077]}
 If a task becomes held while waiting in a @nt{selective_accept},
-and a entry call is issued to one of the open entries, the corresponding
-accept body executes. When the rendezvous completes, the active
+and a@Chg{New=[n],Old=[]} entry call is issued to one of the open entries,
+the corresponding @Chg{New=[@nt{accept_@!alternative}],Old=[accept body]}
+executes. When the rendezvous completes, the active
 priority of the accepting task is lowered to the held priority
 (unless it is still inheriting from other sources), and the task does
 not execute until another Continue.

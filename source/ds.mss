@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/08/26 04:13:56 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/08/25 04:02:56 $}
+@Comment{$Date: 2000/08/26 04:13:56 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -257,21 +257,24 @@ In addition, for the purposes of this Annex, the pragma Pure
 (see @RefSecNum{Elaboration Control}) is
 considered a categorization pragma.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
 @Defn{shared passive library unit}
 A library package or generic library package is called a
-@i{shared passive} library unit if a Shared_Passive
-pragma applies to it.
+@i{shared passive} library unit if a Shared_Passive pragma applies to it.
 @Defn{remote types library unit}
 A library package or generic library package is
-called a @i{remote types} library unit if a Remote_Types
-pragma applies to it.
+called a @i{remote types} library unit if a Remote_Types pragma applies to it.
 @Defn{remote call interface}
-A library package or generic library package is called
-a @i{remote call interface} if a Remote_Call_Interface
-pragma applies to it.
+A library @Chg{New=[unit],Old=[package or generic library package]} is called
+a @i{remote call interface} if a Remote_Call_Interface pragma applies to it.
 @Defn{normal library unit}
 A @i{normal library unit} is one to which no categorization pragma
 applies.
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0078]}
+@Chg{New=[A library subprogram can be a remote call interface, but it cannot be
+a remote types or shared passive library unit.],Old=[]}
+@end{Ramification}
 
 @redundant[The various categories of library units
 and the associated restrictions are
@@ -303,23 +306,20 @@ Remote Call Interface @\The declaration of the library unit can depend only
 Normal @\Unrestricted.
 @end{Description}
 
-
 Declared pure and shared passive library units are preelaborated.
 The declaration of a remote types or remote call interface library unit
 is required to be preelaborable.
-
 ]
 
 @end{Intro}
 
 @begin{ImplReq}
-For a given library-level type
-declared in a preelaborated library unit
-or in the declaration of a
-remote types or remote call interface library unit,
-the implementation shall choose the same representation for the type
-upon each elaboration of the type's declaration for different
-partitions of the same program.
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0079]}
+@Chg{New=[],Old=[For a given library-level type declared in a preelaborated library
+unit or in the declaration of a remote types or remote call interface library
+unit, the implementation shall choose the same representation for the type
+upon each elaboration of the type's declaration for different partitions of
+the same program.]}
 @end{ImplReq}
 
 @begin{ImplPerm}
@@ -380,20 +380,20 @@ The following restrictions apply to such a library unit:
 it shall depend semantically only upon
 declared pure or shared passive library units;
 @begin{reason}
-Shared passive packages cannot depend semantically upon
-remote types packages
+Shared passive packages cannot depend semantically upon remote types packages
 because the values of an access type declared in a remote types package
 refer to the local heap of the active partition including the
 remote types package.
 @end{reason}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0080]}
 it shall not contain a library-level declaration of an access type
 that designates a class-wide type,
-task type, or protected type with @nt{entry_declaration}s;
-if the shared passive library unit is generic, it shall
+task type, or protected type with @nt{entry_declaration}s@Chg{New=[],
+Old=[; if the shared passive library unit is generic, it shall
 not contain a declaration for such an access type unless the
 declaration is nested within a body other than
-a @nt<package_body>.
+a @nt<package_body>]}.
 @begin{Reason}
   These kinds of access types are disallowed because the object
   designated by an access value of
@@ -520,14 +520,29 @@ shall have user-specified Read and Write attributes.
 @end{Reason}
 @end{itemize}
 
-@Defn{remote access type}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0082]}
+@Chg{New=[@Leading],Old=[]}@Defn{remote access type}
 An access type declared in the visible part of a remote types or remote
 call interface library unit is called a @i{remote access type}.
 @Defn{remote access-to-subprogram type}
 @Defn{remote access-to-class-wide type}
-Such a type shall be either an access-to-subprogram type
+Such a type shall be@Chg{New=[:],Old=[ either an access-to-subprogram type
 or a general access type that designates a class-wide limited private
-type.
+type.]}
+
+@begin{Itemize}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0082]}
+@Chg{New=[An access-to-subprogram type, or],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0082]}
+@Chg{New=[A general access type that designates a class-wide limited private
+type or a class-wide private type extension all of whose ancestors are either
+private type extensions or limited private types.],Old=[]}
+@end{Itemize}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0081]}
+@Chg{New=[A type that is derived from a remote access type is also a
+remote access type.],Old=[]}
 
 @Leading@;The following restrictions apply to the use of a
 remote access-to-subprogram type:
@@ -545,12 +560,13 @@ a value of a remote access-to-subprogram type shall statically denote a
 @Leading@;The following restrictions apply to the use of a
 remote access-to-class-wide type:
 @begin{Itemize}
-The primitive subprograms
-of the corresponding specific limited private type
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0083]}
+The primitive subprograms of the corresponding specific limited private type
 shall only have access parameters if they are controlling formal parameters;
-the types of all the non-controlling formal parameters shall
-have Read and Write attributes.
-
+@Chg{New=[each non-controlling formal parameter shall have either a nonlimited
+type or a type with],Old=[the types of all the non-controlling formal
+parameters shall have]} Read and Write attributes@Chg{New=[specified via an
+@nt{attribute_definition_clause};],Old=[.]}
 
 A value of a remote access-to-class-wide type shall be
 explicitly converted only to another remote access-to-class-wide type;
@@ -627,6 +643,7 @@ A @nt{pragma} All_Calls_Remote is a library unit pragma.
 
 @begin{Legality}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
 @Defn{remote call interface}
 @Defn2{Term=[RCI],Sec=(library unit)}
 @Defn2{Term=[RCI],Sec=(package)}
@@ -634,25 +651,30 @@ A @nt{pragma} All_Calls_Remote is a library unit pragma.
 @Defn{remote subprogram}
 A @i{remote call interface (RCI)} is a library unit to which the
 pragma Remote_Call_Interface applies.
-A subprogram declared in the visible part of such a library unit is
-called a @i{remote subprogram}.
-
+A subprogram declared in the visible part of such a library unit@Chg{New=[,
+or declared by such a library unit,],Old=[]} is called a @i{remote subprogram}.
 
 The declaration of an RCI library unit shall be preelaborable
 (see @RefSecNum{Elaboration Control}), and shall depend semantically
 only upon declared pure, shared passive,
 remote types, or other remote call interface library units.
 
-@Leading@;In addition, the following restrictions apply to the visible
-part of an RCI library unit:
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
+@Leading@;In addition, the following restrictions apply to @Chg{New=[],Old=[the
+visible part ]}of an RCI library unit:
 @begin{itemize}
-it shall not contain the declaration of a variable;
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
+it@Chg{New=[s visible part],Old=[]} shall not contain the declaration of a
+variable;
 @begin{Reason}
-  Remote call interface packages do not provide remote data
-  access. A shared passive package has to be used for that.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
+  Remote call interface @Chg{New=[units],Old=[packages]} do not provide remote
+  data access. A shared passive package has to be used for that.
 @end{Reason}
 
-it shall not contain the declaration of a limited type;
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
+it@Chg{New=[s visible part],Old=[]} shall not contain the declaration of a
+limited type;
 @begin{Reason}
   We disallow the declaration of task and protected types,
   since calling an entry or a protected subprogram implicitly passes
@@ -664,7 +686,9 @@ it shall not contain the declaration of a limited type;
   value for remote calls).
 @end{Reason}
 
-it shall not contain a nested @nt{generic_declaration};
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
+it@Chg{New=[s visible part],Old=[]} shall not contain a nested
+@nt{generic_declaration};
 @begin{Reason}
   This is disallowed because the body of the nested generic
   would presumably have access to data inside the body of the
@@ -672,14 +696,16 @@ it shall not contain a nested @nt{generic_declaration};
   data access might result, which is not supported.
 @end{Reason}
 
-it shall not contain the declaration of
-a subprogram to which a pragma Inline applies;
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
+it shall not @Chg{New=[be, nor shall its visible part],Old=[]} contain@Chg{New=[,],Old=[]} the
+declaration of a subprogram to which a pragma Inline applies;
 
-it shall not contain a subprogram (or access-to-subprogram) declaration
-whose profile has an access parameter,
-or a formal parameter of a limited type
-unless that limited type has user-specified
-Read and Write attributes;
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
+it shall not @Chg{New=[be, nor shall its visible part],Old=[]} contain@Chg{New=[,],Old=[]} a
+subprogram (or access-to-subprogram) declaration
+whose profile has an access parameter, or a formal parameter of a
+limited type unless that limited type has user-specified Read and Write
+attributes;
 
 any public child of the library unit shall
 be a remote call interface library unit.
@@ -715,8 +741,9 @@ interface library unit whose parent is also an RCI library unit
 shall be
 assigned only to the same partition as its parent.
 @begin{ImplNote}
-  The declaration of an RCI package, with a calling-stub body,
-  is automatically included in all active
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
+  The declaration of an RCI @Chg{New=[unit],Old=[package]}, with a calling-stub
+  body, is automatically included in all active
   partitions with compilation units that depend on it.
   However the whole RCI library unit, including its
   (non-stub) body, will only be in one of the active partitions.
@@ -738,23 +765,23 @@ explicitly assigned.]
 @end{LinkTime}
 
 @begin{ImplReq}
-
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
 If a pragma All_Calls_Remote applies to a
-given RCI library package, then the
-implementation shall route any
-call to a subprogram of the RCI package from outside the
-declarative region of the package
-through the Partition Communication Subsystem
+given RCI library @Chg{New=[unit],Old=[package]}, then the
+implementation shall route any call to a subprogram of the RCI
+@Chg{New=[unit],Old=[package]} from outside the declarative region of the
+@Chg{New=[unit],Old=[package]} through the Partition Communication Subsystem
 (PCS); see @RefSecNum{Partition Communication Subsystem}.
 Calls to such subprograms from within the declarative region of
-the package are defined to be local and shall not go through
-the PCS.
+the @Chg{New=[unit],Old=[package]} are defined to be local and shall
+not go through the PCS.
 @begin{Discussion}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
 Without this pragma, it is presumed that most implementations will
 make direct calls if the call originates in the same partition
-as that of the RCI package. With this pragma, all calls from
-outside the subsystem rooted at the RCI package are treated like
-calls from outside the
+as that of the RCI @Chg{New=[unit],Old=[package]}. With this pragma, all calls
+from outside the subsystem rooted at the RCI @Chg{New=[unit],Old=[package]} are
+treated like calls from outside the
 partition, ensuring that the PCS is involved in all such calls
 (for debugging, redundancy, etc.).
 @end{Discussion}
@@ -813,14 +840,27 @@ program unit}, the following attributes are defined:
 @end{Description}
 @EndPrefixType{}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0084]}
 @Defn2{Term=[version], Sec=(of a compilation unit)}
 The @i{version} of a compilation unit changes whenever the
-version changes for any compilation unit on which it depends semantically.
-The version also changes whenever the compilation unit itself changes in
-a semantically significant way. It is implementation defined
+@Chg{New=[],Old=[version changes for any ]}compilation unit
+@Chg{New=[changes in a semantically significant way. This International
+Standard does not define the exact meaning of "semantically significant"],
+Old=[on which it depends semantically. The version also changes whenever the
+compilation unit itself changes in a semantically significant way]}.
+It is @Chg{New=[unspecified],Old=[implementation defined]}
 whether there are other events (such as recompilation) that
 result in the version of a compilation unit changing.
+@Chg{New=[@PDefn{unspecified}],Old=[]}
+@ChgNote{The following ImplDef ought to be deleted from the new version.}
 @ImplDef{Events that cause the version of a compilation unit to change.}
+
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0084]}
+@Chg{New=[If P is not a library unit, and P has no completion, then
+P'Body_Version returns the Body_Version of the innermost program unit
+enclosing the declaration of P. If P is a library unit, and P has no
+completion, then P'Body_Version returns a value that is different from
+Body_Version of any version of P that has a completion.],Old=[]}
 @end{StaticSem}
 
 @begin{Bounded}
@@ -1001,6 +1041,7 @@ implementation may require waiting for the availability of shared resources
 to initiate the remote call.
 @end{Reason}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0085]}
 @IndexCheck{Accessibility_Check}
 In a remote subprogram call with a formal parameter of a class-wide
 type, a check is made that the tag of the actual parameter identifies
@@ -1009,8 +1050,12 @@ unit, or in the visible part of a remote types or remote call interface
 library unit.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if this check fails.
+@Chg{New=[In a remote function call which returns a class-wide type, the same
+check is made on the function result.],Old=[]}
 @begin{Discussion}
-  This check makes certain that the specific type passed in an RPC
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0085]}
+  This check makes certain that the specific type passed@Chg{New=[ or returned],
+  Old=[]} in an RPC
   satisfies the rules for a "communicable" type. Normally this
   is guaranteed by the compile-time restrictions on remote call interfaces.
   However, with class-wide types, it is possible to pass an object
@@ -1022,7 +1067,7 @@ Program_Error is raised if this check fails.
   to the "accessibility" of global vs. local declarations in
   a single-partition program.
 
-  This rule replaces a rule from an earlier version of Ada 95
+  This rule replaces a rule from an early version of Ada 9X
   which was given in the subclause on Remote Types Library Units
   (now @RefSec{Remote Types Library Units}). That rule tried
   to prevent "bad" types from being sent by arranging for their
@@ -1201,6 +1246,14 @@ in an RCI package, no specific stub is generated for it, it is called
 normally from the @i{dispatching stub}.
 
 @end{ImplNote}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0086]}
+@Chg{New=[With respect to shared variables in shared passive library units, the
+execution of the corresponding subprogram body of a synchronous remote
+procedure call is considered to be part of the execution of the calling task.
+The execution of the corresponding subprogram body of an asynchronous remote
+procedure call proceeds in parallel with the calling task and does not signal
+the next action of the calling task (see @RefSecNum{Shared Variables}).],Old=[]}
 @end{ImplReq}
 
 @begin{Notes}
@@ -1557,15 +1610,31 @@ blocking operations.
 @end{RunTime}
 
 @begin{ImplReq}
-  The implementation of the RPC-receiver shall be reentrant@Redundant[,
-  thereby allowing concurrent calls on it from the PCS to service
-  concurrent remote subprogram calls into the partition].
-  @begin{Reason}
-    There seems no reason to allow the implementation of RPC-receiver
-    to be nonreentrant, even though we don't require that every
-    implementation of the PCS actually perform concurrent calls
-    on the RPC-receiver.
-  @end{Reason}
+The implementation of the RPC-receiver shall be reentrant@Redundant[,
+thereby allowing concurrent calls on it from the PCS to service
+concurrent remote subprogram calls into the partition].
+@begin{Reason}
+  There seems no reason to allow the implementation of RPC-receiver
+  to be nonreentrant, even though we don't require that every
+  implementation of the PCS actually perform concurrent calls
+  on the RPC-receiver.
+@end{Reason}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0087]}
+@Chg{New=[An implementation shall not restrict the replacement of the body of
+System.RPC. An implementation shall not restrict children of System.RPC.
+@Redundant[The related implementation permissions in the introduction to
+Annex A do not apply.]],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[The point of System.RPC is to let the user tailor the communications
+mechanism without requiring changes to or other cooperation from the compiler.
+However, implementations can restrict the replacement of language-defined units.
+This requirement overrides that permission for System.RPC.],Old=[]}
+@end{Reason}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0087]}
+@Chg{New=[If the implementation of System.RPC is provided by the user, an
+implementation shall support remote subprogram calls as specified.],Old=[]}
 @end{ImplReq}
 
 @begin{DocReq}
