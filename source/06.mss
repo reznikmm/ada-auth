@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2004/12/01 01:09:22 $}
+@Comment{$Date: 2004/12/06 03:57:38 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -105,9 +105,9 @@ defined in clause @RefSecNum{Operators and Expression Evaluation}
 
 @Syn{lhs=<parameter_profile>,rhs="[@Syn2{formal_part}]"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00318-02]}
 @Syn{lhs=<parameter_and_result_profile>,rhs="@Chg{Version=[2],New=[
-    ],Old=[]}[@Syn2{formal_part}] @key{return} @Syn2{subtype_mark}]@Chg{Version=[2],New=<
+    ],Old=[]}[@Syn2{formal_part}] @key{return}@Chg{Version=[2],New=< [@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark}]@Chg{Version=[2],New=<
     [@Syn2{formal_part}] @key{return} @Syn2{access_definition}>,Old=<>}"}
 
 @Syn{lhs=<formal_part>,rhs="
@@ -202,13 +202,18 @@ A @nt<subprogram_declaration> declares a procedure or a function, as
 indicated by the initial reserved word, with name and profile as given by
 its specification.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00318-02]}
 @PDefn2{Term=[nominal subtype], Sec=(of a formal parameter)}
 The nominal subtype of a formal parameter is
 the subtype @Chg{Version=[2],New=[determined],Old=[denoted]} by
 @Chg{Version=[2],New=[the optional @nt{null_exclusion} and ], Old=[]}the
 @nt{subtype_mark}, or defined by the @nt{access_definition}, in the
-@nt{parameter_specification}.
+@nt{parameter_specification}.@Chg{Version=[2],New=[ The nominal
+subtype of a function result is the subtype
+determined by the optional @nt{null_exclusion} and the @nt{subtype_mark}, or
+defined by the @nt{access_definition}, in the
+@nt{parameter_and_result_profile}.
+@PDefn2{Term=[nominal subtype], Sec=(of a function result)}], Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02]}
 @Defn{access parameter}
@@ -245,7 +250,18 @@ The @i(subtypes of a profile) are:
   @Chg{Version=[2],New=[For any access parameters of an access-to-subprogram
   type, the subtypes of the profile of the parameter type.],Old=[]}
 
-  For any result, the result subtype.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00318-02]}
+  @Chg{Version=[2],New=[For any non-access result, the nominal subtype of the
+  function result.],Old=[For any result, the result subtype.]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+  @Chg{Version=[2],New=[For any access result type of an access-to-object type,
+  the designated subtype of the result type.],Old=[]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+  @Chg{Version=[2],New=[For any access result type of an access-to-subprogram
+  type, the subtypes of the profile of the result type.],Old=[]}
+
 @end{Itemize}
 
 @Redundant[@Defn2{Term=[types], Sec=(of a profile)}
@@ -346,8 +362,9 @@ The syntax rules for @nt{defining_designator} and
 The syntax for @nt{overriding_indicator} is new.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[An optional
-@nt{null_exclusion} can be used in a formal parameter declaration.],Old=[]}
+@Chg{Version=[2],New=[An optional @nt{null_exclusion} can be used in a formal
+parameter declaration. Similarly, an optional @nt{null_exclusion} can be used
+in a function result.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
 @Chg{Version=[2],New=[The return type of a function can be an
@@ -1422,9 +1439,11 @@ space overhead (since it can usually be statically eliminated
 as dead code).
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
 A @nt{function_call} denotes a constant, as defined in
-@RefSecNum{Return Statements}; the nominal subtype of the
-constant is given by the result subtype of the function.
+@RefSecNum{Return Statements}; the nominal subtype of the constant is
+given by the @Chg{Version=[2],New=[nominal],Old=[result]} subtype of the
+function@Chg{Version=[2],New=[ result],Old=[]}.
 @PDefn2{Term=[nominal subtype], Sec=(of the result of a @nt<function_call>)}
 @PDefn2{Term=[constant], Sec=(result of a @nt<function_call>)}
 @end{RunTime}
@@ -1529,6 +1548,13 @@ resolving a subprogram call. That makes it possible to use @key{abstract}
 to @lquotes@;undefine@rquotes@; a predefined operation. That's especially
 helpful when defining custom arithmetic packages.],Old=[]}
 @end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+@Chg{Version=[2],New=[Changed the definition of the nominal subtype of a
+@nt{function_call} to use the nominal subtype wording of 6.1, to take into
+account @nt{null_exclusion}s and access result types.],Old=[]}
+@end{DiffWord95}
 
 @LabeledSubClause{Parameter Associations}
 
@@ -1870,7 +1896,7 @@ operand is one of these.],Old=[]}
 @Chg{Version=[2],New=[@PDefn2{Term=[return object], Sec=(extended_return_statement)}
 Within an @nt{extended_return_statement}, the @i{return object} is declared
 with the given identifier, with nominal subtype defined by the
-@nt{eturn_subtype_indication}.],Old=[]}
+@nt{return_subtype_indication}.],Old=[]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -2075,7 +2101,7 @@ the @nt{function_call} denotes a constant view of the return object.],Old=[]}
 @key[return] Key_Value(Last_Index);   --@RI{ in a function body}@Chg{Version=[2],New=<
 @key[return] Node : Cell @key{do}           --@RI{ in a function body, see @RefSecNum{Incomplete Type Declarations} for Cell}
    Node.Value := Result;
-   Node.Succ := Next_Mode;
+   Node.Succ := Next_Node;
 @key{end} @key{return};>,Old=<>}
 @end{Example}
 @end{Examples}

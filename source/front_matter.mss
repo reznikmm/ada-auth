@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.34 $ $Date: 2004/12/02 05:47:58 $}
+@comment{$Revision: 1.35 $ $Date: 2004/12/06 03:57:42 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -111,9 +111,20 @@ International Standard ISO/IEC 8652 was prepared by
 Joint Technical Committee ISO/IEC JTC 1,
 @i{Information Technology}.
 
-This second edition cancels and replaces the first edition
-(ISO 8652:1987),
-of which it constitutes a technical revision.
+@ChgRef{Version=[2],Kind=[Revised]}
+This @Chg{Version=[2],New=[consolidated],Old=[second]} edition @Chg{Version=[2],
+New=[updates],Old=[cancels and replaces]} the @Chg{Version=[2],New=[second],Old=[first]}
+edition (ISO 8652:@Chg{Version=[2],New=[1995)],Old=[1987), of which it constitutes
+a technical revision]}.
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The above is unofficial wording added just to avoid
+confusion. If ISO decides
+to publish a new standard, the above would be replaced by @ldquote@;This third
+edition cancels and replaces the second edition (ISO 8652:1995), of which it
+constitutes a technical revision@rdquote. The first three paragraphs in this
+section also would be replaced by the current ISO boilerplate.],Old=[]}
+@end{Discussion}
 
 
 Annexes A to J form an integral part of this
@@ -164,11 +175,12 @@ RLB - 2000-05-17}
 @Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
 Programming Language @em 1995 edition, which]} gives an introduction to the
 new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition of this Standard],Old=[]},
-and explains the rationale behind them. Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],
-Old=[]} read this first.
+and explains the rationale behind them.
+Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],Old=[]}should
+read this first.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[Ada 2005 Rationale. This give an introduction to the
+@Chg{Version=[2],New=[Ada 2005 Rationale. This gives an introduction to the
 changes and new features in Ada 2005 (compared with the 1995 edition), and
 explains the rationale behind them. Programmers should read this rationale
 before reading this Standard in depth.],Old=[]}
@@ -185,7 +197,7 @@ This is the International Standard @em ISO/IEC 8652:1995.
 This document lists corrections to the International Standard.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[Amendment 1 @em ISO/IEC 8652:1995:AMD.1:200x.. This
+@Chg{Version=[2],New=[Amendment 1 @em ISO/IEC 8652:1995:AMD.1:200x. This
 document outlines additional features and corrections to the International
 Standard.],Old=[]}
 
@@ -514,7 +526,7 @@ based on the tag of the operand.
 Interface types provide abstract models from which other interfaces and
 types may be composed and derived. This provides a reliable form of multiple
 inheritance. Interface types may also be implemented by synchronized types
-(task types and protected types) thereby enabling task-safe programming and
+(task types and protected types) thereby enabling concurrent programming and
 inheritance to be merged.],Old=[]}
 
 The concept of a type is further refined by the concept of a
@@ -557,7 +569,7 @@ to the execution environment.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[The specialized annexes define further predefined library
-packages and facilities with especial emphasis on areas such as real-time
+packages and facilities with emphasis on areas such as real-time
 scheduling, interrupt handling, distributed systems, numerical computation, and
 high-integrity systems.],Old=[]}
 
@@ -574,10 +586,10 @@ applicable to all types of a given class.
 @begin{Intro}
 
 @Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
-This @Chg{Version=[2],New=[revised ],Old=[]}International
-Standard @Chg{Version=[2],New=[modifies the edition of 1995 which ],
-Old=[]}replace@Chg{Version=[2],New=[d],Old=[s]} the first edition of 1987.
-In th@Chg{Version=[2],New=[e 1995],Old=[is]} edition, the following major
+This @Chg{Version=[2],New=[amended edition modifies the edition of 1995 which
+replaced],
+Old=[International Standard replaces]} the first edition of 1987.
+In @Chg{Version=[2],New=[the 1995],Old=[this]} edition, the following major
 language changes have been incorporated:
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
@@ -609,7 +621,8 @@ Old=[by @RefSec{Formal Private and Derived Types} and @RefSec{Formal Packages}]}
 Access types @Chg{Version=[2],New=[were],Old=[have been]} extended to allow
 an access value to designate a subprogram or an object declared by an
 object declaration @Chg{Version=[2],New=[],Old=[(]}as opposed to just
-a@Chg{Version=[2],New=[n object ],Old=[ heap-]}allocated a@Chg{Version=[2],New=[on a heap],Old=[object)]}.
+@Chg{Version=[2],New=[an object ],Old=[a heap-]}allocated
+@Chg{Version=[2],New=[on a heap],Old=[object)]}.
 See @Chg{Version=[2],New=[clause ],Old=[]}@RefSecNum{Access Types}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
@@ -619,10 +632,11 @@ Old=[via]} protected types. See @Chg{Version=[2],
 New=[clause @RefSecNum{Protected Units and Protected Objects}],Old=[Section 9]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
-The library@Chg{Version=[2],New=[-level structure was extended to allow
-library units to], Old=[units of a library may]} be organized into a
+The library @Chg{Version=[2],New=[structure was extended to allow
+library units to],Old=[units of a library may]} be organized into a
 hierarchy of parent and child units.
-See @Chg{Version=[2], New=[clause @RefSecNum{Separate Compilation}],Old=[Section 10]}.
+See @Chg{Version=[2], New=[clause @RefSecNum{Separate Compilation}],
+Old=[Section 10]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 Additional support @Chg{Version=[2],New=[was],Old=[has been]} added for
@@ -647,16 +661,15 @@ application areas:
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[This Amended language (incorporating Amendment 1)
-modifies the 1995 International Standard by making changes and additions that
-improve the capability of the language and the reliability of programs written
-in the language. In particular the changes were designed to improve the
-portability of programs, interfacing to other languages, and both the
-object-oriented and real-time capabilities.],Old=[]}
+@Chg{Version=[2],New=[Amendment 1 modifies the 1995 International Standard by
+making changes and additions that improve the capability of the language and
+the reliability of programs written in the language. In particular the changes
+were designed to improve the portability of programs, interfacing to other
+languages, and both the object-oriented and real-time capabilities.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[@Leading@;The following major changes with respect to the
-1995 edition are incorporated:],Old=[]}
+@Chg{Version=[2],New=[@Leading@;The following significant changes with respect
+to the 1995 edition are incorporated:],Old=[]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
@@ -684,8 +697,7 @@ other languages has also been added. See clause @RefSecNum{Selected Components}.
 Access types have been further extended to unify properties such as
 the ability to access constants and to exclude null values. See clause
 @RefSecNum{Access Types}. Anonymous access types are now permitted more
-freely and anonymous access-to-subprogram subtypes are introduced to
-support @lquotes@;downward closures@rquotes@;. See clauses
+freely and anonymous access-to-subprogram types are introduced. See clauses
 @RefSecNum{Objects and Named Numbers}, @RefSecNum{Array Types},
 @RefSecNum{Access Types}, and @RefSecNum{Object Renaming Declarations}.],Old=[]}
 
@@ -695,34 +707,33 @@ The control of structure and visibility has been enhanced to
 permit mutually dependent references between units and finer control
 over access from the private part of a package. See clauses
 @RefSecNum{Incomplete Type Declarations} and @RefSecNum{Context Clauses - With Clauses}.
-In addition limited types have been made more useful by the
-provision of aggregates, constants and constructor functions. See clauses
+In addition, limited types have been made more useful by the
+provision of aggregates, constants, and constructor functions. See clauses
 @RefSecNum{Aggregates}, @RefSecNum{Return Statements},
 and @RefSecNum{Limited Types}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[
-The predefined library has been extended to include better string
-handling, a major container library, file directory and name management,
-and access to the execution environment. See clauses @RefSecNum{String Handling},
-@RefSecNum{The Package Directories}, @RefSecNum{The Package Environment_Variables},
+The predefined environment has been extended to include additional time
+and calendar operations,
+improved string handling, a comprehensive container library, file and
+directory management, and access to environment variables. See clauses
+@RefSecNum{Formatting, Time Zones, and other operations for Time},
+@RefSecNum{String Handling},
+@RefSecNum{The Package Directories},
+@RefSecNum{The Package Environment_Variables},
 and @RefSecNum{Containers}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[
-Interfaces to other languages have been improved by the inclusion of
-a pragma for C unions. See clause @RefSecNum{Pragma Unchecked_Union}.],Old=[]}
-
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[
-Two of the Specialized Needs Annexes have been considerably enhanced.],Old=[]}
+Two of the Specialized Needs Annexes have been considerably enhanced:],Old=[]}
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[
-The Real-Time Systems Annex now includes: The Ravenscar profile for
+The Real-Time Systems Annex now includes the Ravenscar profile for
 high-integrity systems, further dispatching policies such as Round Robin
-and Earliest Deadline First, and various timing mechanisms for the
-control of CPU budgets etc. See clauses @RefSecNum{Priority Scheduling},
+and Earliest Deadline First, support for timing events, and support for
+control of CPU time utilization. See clauses @RefSecNum{Priority Scheduling},
 @RefSecNum{Run-time Profiles and the Ravenscar Profile},
 @RefSecNum{Execution Time}, and
 @RefSecNum{Timing Events}.],Old=[]}
@@ -730,15 +741,15 @@ control of CPU budgets etc. See clauses @RefSecNum{Priority Scheduling},
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[
 The Numerics Annex now includes support for real and complex vectors
-and matrices as previously defined in ISO/IEC 13813 plus further basic
+and matrices as previously defined in ISO/IEC 13813:1997 plus further basic
 operations for linear algebra.
 See clause @RefSecNum{Vector and Matrix Manipulation}.],Old=[]}
 @end{InnerItemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[
-Finally, the overall reliability of the language has been improved by
-a number of introductions. These include new syntax which detects
+The overall reliability of the language has been enhanced by
+a number of improvements. These include new syntax which detects
 accidental overloading, as well as pragmas for making assertions and
 giving better control over the suppression of checks. See clauses
 @RefSecNum{Subprogram Declarations},
@@ -814,12 +825,12 @@ a Technical Corrigendum will be issued in accordance with the procedures.
 
 @begin{NotISO}
 @NewPage
-@SubHeading(Acknowledgements)
+@SubHeading(Acknowledgements@Chg{Version=[2],New=[ for the Ada 95 edition of the Ada Reference Manual],Old=[]})
 
 @begin{Intro}
 
-This International Standard was prepared by the Ada 9X Mapping/Revision Team based
-at Intermetrics, Inc., which has included:
+This International Standard was prepared by the Ada 9X Mapping/Revision
+Team based at Intermetrics, Inc., which has included:
 W. Carlson, Program Manager;
 T. Taft, Technical Director;
 J. Barnes (consultant);
@@ -926,8 +937,8 @@ the corrigendum and this consolidated reference manual would not have been possi
 @AddedSubHeading{Version=[2],Acknowledgements for the Amendment version of the Ada Reference Manual}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=<The editor [R. Brukardt (USA)] would like to thank the many people
-whose hard work and assistance has made this revision possible.>,Old=[]}
+@Chg{Version=[2],New=<The editor [R. Brukardt (USA)] would like to thank the many
+people whose hard work and assistance has made this revision possible.>,Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[Thanks go out to all of the members of the ISO/IEC JTC 1/SC 22/WG 9
@@ -935,17 +946,19 @@ Ada Rapporteur Group, whose work on creating and editing the wording
 corrections was critical to the entire process. Especially valuable
 contributions came from the chairman of the ARG, P. Leroy (France), who
 kept the process on schedule; J. Barnes (UK) and K. Ishihata (Japan), whose
-extremely detailed reviews kept the editor on his toes; S. Baird (USA),
-A. Burns (UK), G. Dismukes (USA), E. Ploedereder (Germany), T. Taft (USA),
+careful reviews found many typographical errors; T. Taft (USA), who always
+seemed to have a suggestion when we were stuck, and who also was usually able
+to provide the valuable service of explaining why things were as they are;
+S. Baird (USA), A. Burns (UK), G. Dismukes (USA), E. Ploedereder (Germany),
 and other members too numerous to mention.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[Special thanks go to Ada Europe and the Ada Resource Association,
-without whose help and support the Amendment and this consolidated reference
-manual would not have been possible. M. Heaney (USA) requires special
+@Chg{Version=[2],New=[Special thanks go to Ada Europe and the Ada Resource
+Association, without whose help and support the Amendment and this consolidated
+reference manual would not have been possible. M. Heaney (USA) requires special
 thanks for his tireless work on the containers packages. Finally, special
 thanks go to the convener of ISO/IEC JTC 1/SC 22/WG 9, J. Moore (USA), who
-guided the documents through the standardization process.],Old=[]}
+guided the document through the standardization process.],Old=[]}
 
 @end{Intro}
 

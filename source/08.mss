@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/12/02 05:47:56 $}
+@Comment{$Date: 2004/12/06 03:57:39 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1378,7 +1378,7 @@ complex than they already are.],Old=[]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-The rules for @nt{overriding_clause} are new. These rules let the programmer
+The rules for @nt{overriding_indicator} are new. These rules let the programmer
 state her overriding intentions to the compiler; if the compiler disagrees,
 an error will be produced rather than a hard to find bug.],Old=[]}
 @end{Extend95}
@@ -2748,35 +2748,49 @@ conformant with the expected profile.
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00332-01]}
 @Defn2{Term=[single], Sec=[class expected type]}
-When the expected type for a construct is required
-to be a @i(single) type in a given class,
-the type expected for the construct shall be determinable solely
+When @Chg{Version=[2],New=[],Old=[the expected type for ]}a construct is
+@Chg{Version=[2],New=[one that requires that its expected type],
+Old=[required to]}
+be a @i<single> type in a given class, the type
+@Chg{Version=[2],New=[of],Old=[expected for]}
+the construct shall be determinable solely
 from the context in which the construct appears,
 excluding the construct itself,
-but using the requirement that it be in the given class;
-the type of the construct is then this single expected type.
+but using the requirement that it be in the given class@Chg{Version=[2],
+New=[],Old=[; the type of the construct is then this single expected type]}.
 Furthermore, the context shall not be one that expects any type in
 some class that contains types of the given class;
 in particular, the construct shall not be the operand of a
 @nt{type_conversion}.
+
 @begin{Ramification}
-For example, the expected type for the literal @key{null} is required to be a
-single access type.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}@ChgNote{Null no longer requires a single type}
+For example, the expected type for @Chg{Version=[2],New=[a string literal],
+Old=[the literal @key{null}]} is required to be a
+single @Chg{Version=[2],New=[string],Old=[access]} type.
 But the expected type for the operand of a @nt{type_conversion} is
 any type.
-Therefore, the literal @key{null} is not allowed as the operand of a
+Therefore, @Chg{Version=[2],New=[a string literal],
+Old=[the literal @key{null}]} is not allowed as the operand of a
 @nt{type_conversion}.
-This is true even if there is only one access type in scope.
+This is true even if there is only one @Chg{Version=[2],New=[string],
+Old=[access]} type in scope.
 The reason for these rules is so that the compiler will not have to
-search @lquotes@;everywhere@rquotes@; to see if there is exactly one type in a class
-in scope.
+search @lquotes@;everywhere@rquotes@; to see if there is exactly one type
+in a class in scope.
 @end{Ramification}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00332-01]}
+@Chg{Version=[2],New=[The part of the first sentence after the semicolon
+serves to define the "expected type" for constructs that don't have one (like
+qualified expressions and object renames). Otherwise, such constructs
+wouldn't allow @nt{aggregate}s, 'Access, and so on.],Old=[]}
+@end{Discussion}
 
-A complete context shall have at least one acceptable
-interpretation;
-if there is exactly one,
-then that one is chosen.
+A complete context shall have at least one acceptable interpretation;
+if there is exactly one, then that one is chosen.
 @begin{Ramification}
 This, and the rule below
 about ambiguity, are the ones that suck in all the @SyntaxName@;s and
@@ -3021,3 +3035,13 @@ legal in Ada 2005. For example:],Old=[]}
 @key{end} T;],Old=[]}
 @end{Example}
 @end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00332-01]}
+@Chg{Version=[2],New=[Corrected the @lquotes@;single expected type@rquotes@;
+so that it works in contexts that don't have expected types (like
+object renames and qualified expressions). This fixes a hole in Ada 95 that
+appears to prohibit using aggregates, 'Access, character literals, string
+literals, and allocators in qualified expressions.],Old=[]}
+@end{DiffWord95}
+

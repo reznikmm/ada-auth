@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2004/11/10 00:57:20 $}
+@Comment{$Date: 2004/12/06 03:57:39 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2348,6 +2348,7 @@ the compile-time concept of completion
 defined in @RefSecNum{Completions of Declarations}.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
 @Defn{leaving}
 @Defn{left}
 After execution of a construct or entity is complete,
@@ -2358,18 +2359,29 @@ as defined for the execution that is taking place.
 Leaving an execution happens immediately after its completion,
 except in the case of a @i{master}:
 the execution of
-a @nt{task_body}, a @nt{block_statement},
-a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}.
+a @Chg{Version=[2],New=[body other than a @nt{package_body};
+the elaboration of a declaration other than the declaration of a package;
+the execution of an @nt{accept_statement}, a
+@nt{block_statement}, or a @nt{simple_statement};
+or the evaluation of an @nt{expression} or @nt{range} that is not part
+of an enclosing @nt{expression}, @nt{range}, or @nt{simple_statement}],
+Old=[@nt{task_body}, a @nt{block_statement},
+a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}]}.
 A master is finalized after it is
 complete, and before it is left.
 
 @begin{Reason}
   Note that although an @nt{accept_statement} has no
-  @nt{declarative_part}, it can call functions and evaluate
-  @nt{aggregate}s,
-  possibly causing anonymous controlled objects
-  to be created,
+  @nt{declarative_part}, it can call functions and evaluate @nt{aggregate}s,
+  possibly causing anonymous controlled objects to be created,
   and we don't want those objects to escape outside the rendezvous.
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
+  @Chg{Version=[2],New=[Similarly, @nt{expression}s and @nt{simple_statement}s
+  are masters so that objects created by subprogram calls (in @nt{aggregate}s,
+  @nt{allocator}s for anonymous access-to-object types, and so on) are
+  finalized and have their tasks awaited before the @nt{expression}s or
+  @nt{simple_statement}s is left.],Old=[]}
 @end{Reason}
 
 @Defn2{Term=[finalization], Sec=(of a master)}
@@ -2539,7 +2551,11 @@ new value, as explained
 in @RefSecNum{User-Defined Assignment and Finalization}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
-@Chg{New=[If the @nt{object_name} in an @nt{object_renaming_declaration}, or
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}@ChgNote{Should be RevisedAdded}
+@Chg{Version=[2],New=[The master of an object is the master enclosing its
+creation whose accessibility level (see @RefSecNum{Operations of Access Types})
+is equal to that of the object.],
+Old=[@Chg{New=[If the @nt{object_name} in an @nt{object_renaming_declaration}, or
 the actual parameter for a generic formal @key[in out] parameter in a
 @nt{generic_instantiation}, denotes any part of an anonymous object created by
 a function call, the anonymous object is not finalized until after it is no
@@ -2551,40 +2567,57 @@ finalized no later than the end of the innermost enclosing
 @nt{declarative_item} or @nt{statement};
 if that is a @nt{compound_statement},
 @Chg{New=[the object is],Old=[they are]} finalized before starting the
-execution of any @nt{statement} within the @nt{compound_statement}.
+execution of any @nt{statement} within the @nt{compound_statement}.]}
 @begin{Honest}
-@leading@;This is not to be construed as permission to call Finalize
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00162-01]}@ChgNote{Should be ChgDeleted}
+@Chg{Version=[2],New=[],Old=[@leading@;This is not to be construed as permission to call Finalize
 asynchronously with respect to normal user code.
-For example,
+For example,]}
 @begin{Example}
-@key[declare]
+@ChgRef{Version=[2],Kind=[Deleted]}
+@Chg{Version=[2],New=[],Old=[@key[declare]
     X : Some_Controlled_Type := F(G(...));
     --@RI{ The anonymous objects created for F and G are finalized}
     --@RI{ no later than this point.}
     Y : ...
 @key[begin]
     ...
-@key[end];
+@key[end];]}
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Deleted]}
+@Chg{Version=[2],New=[],Old=[
 The anonymous object for G should not be finalized at some random
 point in the middle of the body of F,
 because F might manipulate the same data structures as
 the Finalize operation, resulting in erroneous access
-to shared variables.
+to shared variables.]}
 @end{Honest}
 @begin{Reason}
-It might be quite inconvenient for the implementation to defer
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
+@Chg{Version=[2],New=[This effectively imports all of the special rules for
+the accessibility level of renames, @nt{allocator}s, and so on, and applies
+them to determine where objects created in them are finalized. For instance,
+the master of a rename of a subprogram is that of the renamed subprogram.],
+Old=[It might be quite inconvenient for the implementation to defer
 finalization of the anonymous object for G until after copying the
 value of F into X, especially if the size of the result
-is not known at the call site.
+is not known at the call site.]}
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
-@Chg{New=[If a transfer of control or raising of an exception occurs prior to
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}@ChgNote{Should be RevisedAdded}
+@Chg{Version=[2],New=[In the case of a potentially blocking operation which is
+a master, finalization of an (anonymous) object occurs before blocking if the
+last use of the object occurs before blocking. In particular, for
+a @nt{delay_statement}, any finalization occurs before delaying the task.
+In the case of an @nt{expression} which is a master,
+finalization of any (anonymous) objects occurs as the final part of
+evaluation of the @nt{expression}.],
+Old=[@Chg{New=[If a transfer of control or raising of an exception occurs prior to
 performing a finalization of an anonymous object, the anonymous object is
 finalized as part of the finalizations due to be performed for the object's
-innermost enclosing master.],Old=[]}
+innermost enclosing master.],Old=[]}]}
 
 @end{RunTime}
 
@@ -2969,12 +3002,19 @@ objects aren't finalized until the object can't be used anymore.],Old=[]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Added wording to clarify what happens
 when Adjust or Finalize raises an exception; some cases had been omitted.],Old=[]}
 
+@ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0024],ARef=[AI95-00193-01]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0024],ARef=[AI95-00193-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Stated that if Adjust raises an
 exception during initialization, nothing further is required. This is
 corrected in Ada 2005 to include all kinds of assignment other than
 @nt{assignment_statement}s.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
+@Chg{Version=[2],New=[Revised the definition of master to include
+@nt{expression}s and @nt{simple_statement}s, in order to cleanly define what
+happens for tasks and controlled objects created as part of a subprogram call.
+Having do that, all of the special wording to cover those cases is
+eliminated (at least until the Ada comments start rolling in).],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
 @Chg{Version=[2],New=[We define @i{finalization of the collection} here,

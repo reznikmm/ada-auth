@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2004/11/04 05:41:07 $}
+@Comment{$Date: 2004/12/06 03:57:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1317,12 +1317,19 @@ Duration the user might have declared.
 
 @begin{Wide}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[The terminals of the grammar, including reserved words,
-punctuation and components of lexical elements, are exclusively made of the
+@Chg{Version=[2],New=[The delimiters, compound delimiters, reserved words, and
+@nt{numeric_literal}s are exclusively made of the
 characters whose code position is between 16#20# and 16#7E#, inclusively.
+The special characters for which names are defined in this
+International Standard (see @RefSecNum{Character Set}) belong to the same range.
 @Redundant[For example, the character E in the definition of exponent is the
 character whose name is @lquotes@;LATIN CAPITAL LETTER E@rquotes@;, not
 @lquotes@;GREEK CAPITAL LETTER EPSILON@rquotes@;.]],Old=[]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This just means that programs can be written in plain
+ASCII characters; no characters outside of the 7-bit range are required.],Old=[]}
+@end{Discussion}
 @end{Wide}
 
 @begin{Wide}
@@ -1652,22 +1659,32 @@ ISO/IEC 9899:1990,
 @i{Programming languages @em C.}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001],ARef=[AI95-00124-01]}
-@Defn{ISO/IEC 10646-1:1993}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Chg{Version=[2],New=[@Defn{ISO/IEC 10646-1:2003}
+@Defn{10646-1:2003, ISO/IEC standard}
+@Defn2{Term=[character set standard],Sec=(16 and 32-bit)}
+ISO/IEC 10646:2003, @i{Information technology @em Universal Multiple-Octet
+Coded Character Set (UCS)}],
+Old=[@Defn{ISO/IEC 10646-1:1993}
 @Defn{10646-1:1993, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(16-bit)}
 ISO/IEC 10646-1:1993,
 @i{Information technology @em Universal Multiple-Octet
     Coded Character Set (UCS) @em Part 1: Architecture and Basic
     Multilingual Plane}@Chg{Version=[1],New=[, supplemented by Technical Corrigendum
-    1:1996.], Old=[.]}
+    1:1996], Old=[]}.]}
 
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0001],ARef=[AI95-00124-01]}
+@ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00285-01]}
+@ChgNote{This is of only historical interest, so it was deleted; we use the
+Unicode characterization now.}
+@Chg{Version=[2],New=[],Old=[
 @Chg{Version=[1],New=[The Technical Corrigendum 1:1996 is needed so that character
 codes C6 and E6 (the ligatures @latin1(198) and @latin1(230)) are considered
 letters. These were named Latin Ligature AE in the original 1993 version,
 which would exclude them from being letters as defined in
-@RefSec{Character Set}], Old=[]}
+@RefSec{Character Set}], Old=[]}]}
 @end{Reason}
 
 @begin{Discussion}

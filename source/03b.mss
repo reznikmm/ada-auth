@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/02 05:47:55 $}
+@Comment{$Date: 2004/12/06 03:57:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @LabeledClause{Array Types}
 
@@ -2580,11 +2580,17 @@ Old=[in a generic body if the parent type is declared outside that body]}.
 This paragraph ensures that a dispatching call will never
 attempt to execute an inaccessible subprogram body.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
+@Chg{Version=[2],New=[The convoluted wording (@ldquote@;formal type declared
+within the formal part@rdquote@;) is necessary to include tagged types that
+are formal parameters of formal packages of the generic unit, as well as
+formal tagged and tagged formal derived types of the generic unit.],Old=[]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 @ChgNote{This rule is only about generic bodies (and always was only
 about generic bodies. So we drop the extra text.}
-@Chg{Version=[2],New=[This],Old=[The part about generic bodies]} is necessary
-in order to preserve the contract model.
+@Chg{Version=[2],New=[This rule],Old=[The part about generic bodies]} is
+necessary in order to preserve the contract model.
 
 @Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 @Chg{Version=[2],New=[If an ancestor],Old=[Since a generic unit can be instantiated at a
@@ -2670,6 +2676,14 @@ formal derived private types whose ancestor type is tagged
 (see @RefSecNum{Formal Private and Derived Types}).],Old=[]}
 @end{Ramification}
 @end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00391-01]}
+@Chg{Version=[2],New=[@defn{null extension}
+A record extension is a @i{null extension} if its declaration
+has no @nt{known_discriminant_part} and its @nt{record_extension_part}
+includes no @nt{component_declaration}s.],Old=[]}
+@end{StaticSem}
 
 @begin{RunTime}
 @PDefn2{Term=[elaboration], Sec=(record_extension_part)}
@@ -2785,6 +2799,9 @@ objects from outliving their type.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[Added wording to prevent extending synchronized
 tagged types.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
+@Chg{Version=[2],New=[Defined null extension for use elsewhere.],Old=[]}
 @end{DiffWord95}
 
 
@@ -3050,11 +3067,13 @@ As in Ada 83, for an untagged type, the above call upon P will call the
 old P (which is arguably confusing).
 @end{Reason}
 @begin{ImplNote}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326]}@ChgNote{We have tagged incomplete types now, and they don't freeze}
 Because of this rule,
 the type descriptor can be created (presumably containing linker
 symbols pointing at the not-yet-compiled bodies) at the first
 freezing point of the type.
-It also prevents, for a tagged type declared in a
+It also prevents, for a @Chg{Version=[2],New=[(non-incomplete) ],Old=[]}tagged
+type declared in a
 @nt{package_specification}, overriding in the body or by a child subprogram.
 @end{ImplNote}
 @begin{Ramification}
@@ -3119,6 +3138,26 @@ tag-indeterminate, then:
     of @Chg{Version=[2],New=[a descendant of ],Old=[]}type @i(T),
     then its controlling tag value is determined by the controlling tag
     value of this enclosing call;
+
+    @begin{Discussion}
+    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00239-01]}
+    @Chg{Version=[2],New=[For code that a user can write explicitly, the only
+    contexts that can control dispatching of a function with a controlling
+    result of type T are those that involve controlling operands of the same
+    type T: if the two types differ there is an illegality and the dynamic
+    semantics are irrelevant.],Old=[]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[In the case of an inherited subprogram however, if a
+    default expression is a function call, it may be of type T while the
+    parameter is of a type derived from T. To cover this case, we talk about "a
+    descendant of T" above. This is safe, because if the type of the parameter
+    is descended from the type of the function result, it is guaranteed to
+    inherit or override the function, and this ensures that there will be an
+    appropriate body to dispatch to. Note that abstract functions are not an
+    issue here because the call to the function is a dispatching call, so it is
+    guaranteed to always land on a concrete body.],Old=[]}
+    @end{Discussion}
 
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00196-01]}
     @Chg{Version=[2],New=[If the call has a controlling result and is the
@@ -3269,7 +3308,7 @@ dispatching operations.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00196-01]}
 @Chg{Version=[2],New=[Clarified the wording to insure that functions with
-no controlling operands are tag-indeterminate, and describe that the
+no controlling operands are tag-indeterminate, and to describe that the
 controlling tag can come from the target of an @nt{assignment_statement}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00239-01]}
@@ -3293,7 +3332,7 @@ operation, even though it is not a primitive operation. See
 @IndexSeeAlso{Term=[abstract data type (ADT)],See=(abstract type)}
 @IndexSeeAlso{Term=[ADT (abstract data type)],See=(abstract type)}
 @IndexSee{Term=[concrete type],See=(nonabstract type)}
-An @i(abstract type) is a @Chg{Version=[2],New=[],Old=[tagged ]}type intended
+An @i(abstract type) is a tagged type intended
 for use as @Chg{Version=[2],New=[as an ancestor of other types],Old=[a parent
 type for type extensions]}, but which is not allowed to have objects of its own.
 @Defn{abstract subprogram}
@@ -3382,11 +3421,12 @@ which is illegal.
 The two lines marked "--@i{ Illegal!}" are illegal when taken together.
 @end{Ramification}
 @begin{Reason}
-@Leading@;We considered disallowing untagged types from having abstract
+@Leading@;@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-02]}
+  We considered disallowing untagged types from having abstract
   primitive subprograms.
   However, we rejected that plan, because it introduced some silly
-  anomalies, and because such subprograms are harmless (if not terribly
-  useful).
+  anomalies, and because such subprograms are harmless@Chg{Version=[2],
+  New=[],Old=[ (if not terribly useful)]}.
   For example:
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00010}
@@ -3406,6 +3446,10 @@ just because there was an implicitly declared abstract subprogram
 that was not primitive on some tagged type.
 Other rules could be formulated to solve this problem,
 but the current ones seem like the simplest.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-02]}
+@Chg{Version=[2],New=[In Ada 2005, abstract primitive subprograms of an
+untagged type may be used to @lquotes@;undefine@rquotes@; an operation.],Old=[]}
 @end{Reason}
 
 @begin{Ramification}
@@ -3415,12 +3459,13 @@ abstract formal subprograms, as they are never primitive operations of
 a type.],Old=[]}
 @end{Ramification}
 
-@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00334-01]}
+@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00334-01],ARef=[AI95-00391-01]}
 @Chg{Version=[2],New=[If a type has an implicitly declared primitive subprogram
 that is inherited or is the predefined equality operator, and the corresponding
 primitive subprogram of],Old=[For a derived type, if]}
 the parent or ancestor type
-@Chg{Version=[2],New=[is abstract or is a],
+@Chg{Version=[2],New=[is abstract, or a type other than a null extension
+inherits a],
 Old=[has an abstract primitive subprogram, or a primitive]}
 function with a controlling result, then:
 @begin{Itemize}
@@ -3433,9 +3478,13 @@ function with a controlling result, then:
     with an abstract one.
   @end{Ramification}
 
-  Otherwise, the subprogram shall be overridden with a nonabstract subprogram;
-  @Redundant[for a type declared in the visible part of a package,
-  the overriding may be either in the visible or the private part.]
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00391-01]}
+  Otherwise, the subprogram shall be overridden with a nonabstract
+  subprogram@Chg{Version=[2],New=[ or, in the case of a private extension
+  inheriting a function with a controlling result, have a full type that is
+  a null extension],Old=[]}@Redundant[;
+  for a type declared in the visible part of a package,
+  the overriding may be either in the visible or the private part].
   However, if the type is a generic formal type,
   the subprogram need not be overridden for the formal type itself;
   @Redundant[a nonabstract version will necessarily be provided by the
@@ -3444,10 +3493,10 @@ function with a controlling result, then:
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00228-01]}
     A function that returns the parent type @Chg{Version=[2],New=[requires
     overriding],Old=[becomes abstract]}@ChgNote{Can't leave this ancient and broken terminology around here!!}
-    for @Chg{Version=[2],New=[a],Old=[an abstract]} type extension
-    @Chg{Version=[2],New=[(or becomes abstract for an abstract type)],
-    Old=[(if not overridden) ]}
-    because conversion from a parent type to a type extension is
+    for @Chg{Version=[2],New=[a],Old=[an abstract]} type
+    extension @Chg{Version=[2],New=[(or becomes abstract for an abstract type)],
+    Old=[(if not overridden)]} because conversion
+    from a parent type to a type extension is
     not defined, and function return semantics is defined in terms
     of conversion. (Note that parameters of mode @key{in out} or
     @key{out} do not have this problem, because the tag of the actual
@@ -3482,7 +3531,7 @@ function with a controlling result, then:
 
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00228-01]}
     @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00011}
-    T2 inherits an abstract Do_Something, but T@Chg{New=[2],Old=[]} is not
+    T2 inherits an abstract Do_Something, but @Chg{New=[T2],Old=[T]} is not
     abstract, so Do_Something has to be overridden.
     However, it is OK to override it in the private part.
     In this case, we override it by inheriting a concrete version
@@ -3498,8 +3547,11 @@ A call on an abstract subprogram shall be a dispatching call;
 @Redundant[nondispatching calls to an abstract subprogram are not
 allowed.]
 @begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00310-01]}
   If an abstract subprogram is not a dispatching operation of
-  some tagged type, then it cannot be called at all.
+  some tagged type, then it cannot be called at
+  all.@Chg{Version=[2],New=[ In Ada 2005, such subprograms are not
+  even considered by name resolution (see @RefSecNum{Subprogram Calls}).],Old=[]}
 @end{Ramification}
 
 The type of an @nt{aggregate}, or of an object created by an
@@ -3567,7 +3619,7 @@ end P2;],Old=[]}
 @key{procedure} G (X : D);],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{procedure} I @key{is new} G (P2.T2);],Old=[]}
+@Chg{Version=[2],New=[@key{procedure} I @key{is new} G (P2.T2); -- @RI[Illegal.]],Old=[]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3705,6 +3757,14 @@ but then clients of the package would not have visibility to T.
 @end{Discussion}
 @end{Notes}
 
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+It is not necessary to override functions with a controlling result
+for a null extension. This makes it easier to derive a tagged type
+to complete a private type.],Old=[]}
+@end{Extend95}
+
 @begin{Diffword95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[Updated the wording to reflect the addition of
@@ -3769,11 +3829,15 @@ object that is of a protected interface type (or of a corresponding
 class-wide type) is a protected object.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345]}
-@Chg{Version=[2],New=[A task or protected type derived from an interface is a tagged type. Such
+@Chg{Version=[2],New=[@Defn{synchronized type}
+@PDefn2{Term=[type],Sec=[synchronized]}
+@PDefn2{Term=[tagged type],Sec=[synchronized]}
+@Defn{task tagged type}
+@Defn{protected tagged type}
+A task or protected type derived from an interface is a tagged type. Such
 a tagged type is called a @i<synchronized> tagged
-type@Defn{synchronized type}@PDefn2{Term=[type],Sec=[synchronized]} as are
-synchronized interfaces and private extensions derived from synchronized
-interfaces.@PDefn2{Term=[interface],Sec=[synchronized]}],Old=[]}
+type as are synchronized interfaces and private extensions derived from
+synchronized interfaces.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @Chg{Version=[2],New=[@Redundant[An interface type has no components.]],Old=[]}
@@ -3836,7 +3900,7 @@ interface type.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[   @key{type} T1 @key{is new} Parent_1 @key{with private};
 @key{private}
-   @key{type} Parent_2 @key{is new} Parent_1 @key{and} Pkg.Ifc @key{with null record};
+   @key{type} Parent_2 @key{is new} Parent_1 @key{and} Pkg.Ifc @key{with null record}; -- @RI[Illegal.]
    @key{procedure} Foo (X : Parent_2); -- @RI[Foo #1]],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4043,9 +4107,12 @@ either by the designated subtype, or by its initial value.]]}
   See @RefSecNum{Slices} for more discussion.
 @end(Ramification)
 @begin(Reason)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00225-01]}
   The current instance of a limited type is defined to be aliased
   so that an access discriminant of a component can be initialized
-  with T'Access inside the definition of T.
+  with T'Access inside the definition of T.@Chg{Version=[2],New=[ Note that
+  we don't want this to apply to a type that could become nonlimited later
+  within its immediate scope, so we require the full definition to be limited.],Old=[]}
 
   A formal parameter of a tagged type is defined to be aliased
   so that a (tagged) parameter X may be passed to an access parameter P
@@ -4186,22 +4253,24 @@ for how to override this default.]
   by the user. This is a consequence of it being a reserved word.
 @end(Ramification)
 @begin(ImplNote)
-  For an access-to-subprogram type, the representation of an access
-  value might include
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
+  For @Chg{Version=[2],New=[a named],Old=[an]} access-to-subprogram type, the
+  representation of an access value might include
   implementation-defined information needed to support
   up-level references @em for example, a static link.
   The accessibility rules (see @RefSecNum(Operations of Access Types)) ensure
   that in a "global-display-based" implementation model (as opposed to
-  a static-link-based model), an access-to-(unprotected)-subprogram value
-  need consist only of the address of the
-  subprogram. The global display is guaranteed
+  a static-link-based model), @Chg{Version=[2],New=[a named],Old=[an]}
+  access-to-(unprotected)-subprogram value need consist only of the
+  address of the subprogram. The global display is guaranteed
   to be properly set up any time the designated subprogram is called.
   Even in a static-link-based model, the only time a static link
   is definitely required is for an access-to-subprogram type declared
   in a scope nested at least two levels deep within subprogram or
   task bodies, since values of such a type might designate subprograms
   nested a smaller number of levels. For the normal case of
-  an access-to-subprogram type declared at the outermost (library) level,
+  @Chg{Version=[2],New=[a named],Old=[an]} access-to-subprogram type
+  declared at the outermost (library) level,
   a code address by itself should be sufficient to represent the
   access value in many implementations.
 
@@ -4240,9 +4309,12 @@ for how to override this default.]
   data area can be retrieved out of the subprogram descriptor,
   by indexing off the "known" register.
 
-  Essentially the same implementation issues arise for calls on
-  dispatching operations of tagged types, except that the static
-  link is always known "statically."
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00344-01]}
+  @ChgNote{This is not remotely true with nested extensions and with
+  interfaces. I don't much feel like trying to explain this properly.}
+  @Chg{Version=[2],New=[],Old=[Essentially the same implementation issues
+  arise for calls on dispatching operations of tagged types, except that
+  the static link is always known "statically."]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
   Note that access parameters of an
@@ -4266,8 +4338,9 @@ An @nt{access_definition} defines an anonymous
 general @Chg{Version=[2],New=[access type or an
 anonymous access-to-subprogram type. For a general access type,],
 Old=[access-to-variable type;]} the @nt<subtype_mark> denotes
-its @i(designated subtype)@Chg{Version=[2],New=[; if the reserved word
-@key{constant} appears, the type is an access-to-constant type; otherwise it is
+its @i(designated subtype)@Chg{Version=[2],New=[; if the
+@nt{general_access_modifier} @key{constant} appears, the type is an
+access-to-constant type; otherwise it is
 an access-to-variable type. For an access-to-subprogram type, the
 @nt{parameter_profile} or @nt{parameter_and_result_profile} denotes its
 @i{designated profile}.@Defn2{Term=[designated profile], Sec=(of an anonymous access type)}
@@ -4298,7 +4371,9 @@ access value designating no entity at all.
 type is the default initial value of the type.]
 Other values of an access type are obtained by evaluating
 an @nt<attribute_reference> for the Access or Unchecked_Access
-attribute of an aliased view of an object or non-intrinsic subprogram, or,
+attribute of@Chg{Version=[2],New=[ a non-intrinsic subprogram or],Old=[]}
+an aliased view of an object@Chg{Version=[2],New=[],Old=[ or non-intrinsic
+subprogram]}, or,
 in the case of @Chg{Version=[2],New=[an],Old=[a named]} access-to-object type,
 an @nt<allocator>@Redundant[, which
 returns an access value designating a newly created object
@@ -4361,8 +4436,8 @@ null value.],Old=[]}
   also constrained @Chg{Version=[2],New=[when the type does not have defaults
   for its discriminants. Constraints are not allowed on general access-to-unconstrained
   discriminated types if the type has defaults for its discriminants;
-  pool-specific constraints are allowed because allocated objects are
-  always constrained by their initial value.],Old=[(by fiat, see @StaticSemTitle).]}
+  pool-specific constraints are usually allowed because allocated objects are
+  usually constrained by their initial value.],Old=[(by fiat, see @StaticSemTitle).]}
 @end(Reason)
 @end{StaticSem}
 
@@ -4401,10 +4476,11 @@ For an access-to-object type,
 this elaboration includes the elaboration of the @nt{subtype_indication},
 which creates the designated subtype.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00254-01]}
 @PDefn2{Term=[elaboration], Sec=(access_definition)}
 The elaboration of an @nt{access_definition} creates
-an anonymous general access-to-variable type@Chg{Version=[2],New=[],
+an anonymous@Chg{Version=[2],New=[],Old=[ general]} access@Chg{Version=[2],
+New=[],Old=[-to-variable]} type@Chg{Version=[2],New=[],
 Old=[ @Redundant[(this happens as part of the initialization of
 an access parameter or access discriminant)]]}.
 @end{RunTime}
@@ -4480,9 +4556,19 @@ see @RefSecNum(Storage Management) for more discussion.)
 @end{DiffWord83}
 
 @begin{Inconsistent95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
 @Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
-Most unconstrained aliased objects with discriminants are no longer
+Access discriminants and non-controlling access parameters are no longer
+null excluding. A program which passed @key{null} to such an access
+discriminant or access parameter and expected it to raise Constraint_Error
+may fail @ChgNote{but not if the parameter is dereferenced in the subprogram or
+record }when compiled with Ada 2005. One hopes that there no such programs
+outside of the ACATS. (Of course, a program which actually wants to pass
+@key{null} will work, which is far more likely.)],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+@Chg{Version=[2],New=[Most unconstrained aliased objects
+with discriminants are no longer
 constrained by their initial values. This means that a program that
 raised Constraint_Error from an attempt to change the discriminants
 will no longer do so. The change only affects programs that depended
@@ -4729,9 +4815,9 @@ shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
-@Defn{incomplete type}
+@Defn{incomplete type}@Chg{Version=[2],New=[@Defn{incomplete view}],Old=[]}
 An @nt{incomplete_type_declaration} declares
-an @Chg{Version=[2],New=[@i{incomplete view} of a@Defn{incomplete view}],Old=[incomplete]}
+an @Chg{Version=[2],New=[@i{incomplete view} of a],Old=[incomplete]}
 type and its first subtype; the first subtype is unconstrained if
 a @nt<known_discriminant_part> appears.@Chg{Version=[2],New=[ If the
 @nt{incomplete_type_declaration} includes the reserved word @key{tagged}, it
@@ -5059,6 +5145,7 @@ is the expected type or profile for the @nt{prefix}.],Old=[]}
 
 @begin{StaticSem}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
 @Defn{accessibility level}
 @Defn2{Term=[level],Sec=(accessibility)}
 @Defn2{Term=[deeper],Sec=(accessibility level)}
@@ -5068,10 +5155,11 @@ is the expected type or profile for the @nt{prefix}.],Old=[]}
 @Redundant[The accessibility rules,
 which prevent dangling references,
 are written in terms of @i{accessibility levels},
-which reflect the run-time nesting of @i{masters}.
-As explained in @RefSecNum{Completion and Finalization},
+which reflect the run-time nesting of @i{masters}@Chg{Version=[2],New=[ (see],
+Old=[. As explained in]}
+@RefSecNum{Completion and Finalization}@Chg{Version=[2],New=[],Old=[,
 a master is the execution of a @nt{task_body}, a @nt{block_statement},
-a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}.
+a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}]}.
 An accessibility level is @i{deeper than} another if it is more
 deeply nested at run time.
 For example, an object declared local to a called subprogram has a deeper
@@ -5107,11 +5195,12 @@ and deeper than that of each master upon which the task executing the
 given master directly depends
 (see @RefSecNum{Task Dependence - Termination of Tasks}).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
 An entity or view created by a declaration
 has the same accessibility level
-as the innermost enclosing master,
-except in the cases of renaming and derived access types
-described below.
+as the innermost enclosing master@Chg{Version=[2],
+New=[ other than the declaration itself],Old=[]} except in the
+cases of renaming and derived access types described below.
 A parameter of a master has the same
 accessibility level as the master.
 
@@ -5126,10 +5215,12 @@ a view conversion
 is the same as that of
 the operand.
 
-For a function whose result type is a return-by-reference type,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=[],Old=[For a function whose result type is a
+return-by-reference type,
 the accessibility level of the result object is the same as
-that of the master that elaborated the function body.
-For any other function,
+that of the master that elaborated the function body. ]}For
+any@Chg{Version=[2],New=[],Old=[ other]} function,
 the accessibility level of the result object is that of the execution of
 the called function.
 
@@ -5146,7 +5237,7 @@ the same as that of the declared object.],Old=[]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
 @Chg{Version=[2],New=[The accessibility level of the anonymous access type
 defined by an @nt{access_definition} of an @nt{object_renaming_declaration} is
-the same as that of the renamed object (view).],Old=[]}
+the same as that of the renamed view.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 The accessibility level of the anonymous access type of an access
@@ -5157,15 +5248,15 @@ type, the accessibility level of the access type is the same as the level of
 the containing composite type.],Old=[]}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00254-01]}
 The accessibility level of
 the anonymous access type of an access
 parameter@Chg{Version=[2],New=[ specifying an access-to-object type],Old=[]}
 is the same as that of
-the view designated by the actual.
-If the actual is an @nt{allocator},
+the view designated by the actual.@Chg{Version=[2],New=[],Old=[ If the
+actual is an @nt{allocator},
 this is the accessibility level of the execution of the called
-subprogram.
+subprogram.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
 @Chg{Version=[2],New=[The accessibility level of the anonymous access type
@@ -5227,8 +5318,10 @@ level is statically deeper than each level defined to be the same as
 the other level.
 @end{Honest}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
 The statically deeper relationship does not apply to the accessibility
-level of the anonymous type of an access parameter;
+level of the anonymous type of an access parameter@Chg{Version=[2],
+New=[ specifying an access-to-object type],Old=[]};
 that is, such an accessibility level is not considered to be statically
 deeper, nor statically shallower, than any other.
 
@@ -5370,7 +5463,9 @@ is the library level.
   determined statically by the accessibility level of the enclosing
   object.
 
-  This The accessibility level of the result object of a function reflects
+  @ChgRef{Version=[2],Kind=[Revised]}
+  @Chg{Version=[2],New=[],Old=[This ]}The accessibility level of the result
+  object of a function reflects
   the time when that object will be finalized;
   we don't allow pointers to the object to survive beyond that time.
 
@@ -5697,13 +5792,14 @@ denotes an aliased view of an object}:
   @PDefn2{Term=[statically matching],Sec=(required)}]}
   @begin{InnerItemize}
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00363-01]}
-    @Chg{Version=[2],New=[@i{A}'s designated subtype shall statically match
-    the nominal subtype of the view; or @PDefn2{Term=[statically matching],Sec=(required)}],Old=[]}
+    @Chg{Version=[2],New=[the designated subtype of @i{A} shall statically
+    match the nominal subtype of the view;
+    or@PDefn2{Term=[statically matching],Sec=(required)}],Old=[]}
 
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00363-01]}
     @Chg{Version=[2],New=[@i{D} shall be discriminated in its full view and
-    unconstrained in any partial view, and @i{A}'s designated subtype shall
-    be unconstrained.],Old=[]}
+    unconstrained in any partial view, and the @i{A}'s designated subtype of
+    @i{A} shall be unconstrained.],Old=[]}
   @end{InnerItemize}
   @begin{ImplNote}
     This ensures
@@ -5759,8 +5855,8 @@ denotes an aliased view of an object}:
   @begin(ImplNote)
     @ChgRef{Version=[2],Kind=[Revised]}
     This check requires that some indication of lifetime is
-    passed as an implicit parameter along with access parameters
-    @Chg{Version=[2],New=[ specifying an access-to-object type],Old=[]}.
+    passed as an implicit parameter along with access parameters@Chg{Version=[2],
+    New=[ specifying an access-to-object type],Old=[]}.
     No such requirement applies to @Chg{Version=[2],New=[other anonymous
     access types],Old=[access discriminants]}, since
     the checks associated with them are all compile-time checks.
@@ -5942,12 +6038,12 @@ while X'Last is not. See AI83-00154.
 
 @begin{Incompatible95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[@Leading@;@Defn{incompatibilities with Ada 95}
-Aliased variables are not necessarily constrained in Ada
-2005 (see @RefSecNum{Array Types}). Therefore, taking 'Access of a
-subcomponent of an aliased variable is no longer necessarily safe, and thus
-may be illegal if the component may disappear or change shape, while the same
-renaming would have been legal in Ada 95. Note that most allocated objects are
+@Chg{Version=[2],New=[@Leading@;@Defn{incompatibilities with Ada 95} Aliased
+variables are not necessarily constrained in Ada 2005 (see
+@RefSecNum{Array Types}). Therefore, a subcomponent of an aliased variable
+may disappear or change shape, and taking 'Access of such a subcomponent
+thus is illegal, while the same operation would have been legal in Ada 95.
+Note that most allocated objects are
 still constrained by their initial value (see @RefSecNum{Allocators}, and thus
 have no change in the legality of 'Access for them. For example:],Old=[]}
 @begin{Example}
@@ -6025,6 +6121,10 @@ does not resolve by the new rules would have failed a @LegalityTitle.],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
+@Chg{Version=[2],New=[Adjusted the wording to reflect the fact that expressions
+and declarations are masters.],Old=[]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02],ARef=[AI95-00385-01]}
 @Chg{Version=[2],New=[Defined the accessibility of the various new kinds and
 uses of anonymous access types.],Old=[]}
@@ -6240,6 +6340,10 @@ Note that the declaration of a private type (if limited) can be
 completed with the declaration of a task type, which is then completed
 with a body.
 Thus, a declaration can actually come in @i{three} parts.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@Chg{Version=[2],New=[In Ada 2005 the limited view of the package contains
+an incomplete view of the private type, so we can have @i{four} parts now.],Old=[]}
 @end{Discussion}
 @end{Intro}
 
@@ -6269,6 +6373,15 @@ An implicit declaration shall not have a completion.
 For any explicit declaration that is specified
 to @i(require completion), there shall be a corresponding explicit
 completion.
+@begin(Honest)
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@Chg{Version=[2],New=[The implicit declarations occurring in a
+limited view do have a completion (the explicit declaration occurring in the
+full view) but that's a special case, since the implicit declarations are
+actually built from the explicit ones. So they do not @i{require} a
+completion, they have one by @i{fiat}.],Old=[]}
+@end{Honest}
+
 @begin(Discussion)
   The implicit declarations of predefined operators are not allowed to
   have a completion.

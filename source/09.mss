@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2004/11/17 01:20:31 $}
+@Comment{$Date: 2004/12/06 03:57:40 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 
@@ -615,14 +615,17 @@ Each task (other than an environment task  @em see @RefSecNum(Program Execution)
 @i(depends) on one or more masters
 (see @RefSecNum(Completion and Finalization)), as follows:
 @begin(itemize)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
 If the task is created by the evaluation of an @nt<allocator>
 for a given access type,
 it depends on each master that includes the
 elaboration of the declaration of the ultimate ancestor of the given
-access type.
+access type@Chg{Version=[2],New=[ other than the declaration itself],Old=[]}.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
 If the task is created by the elaboration of an @nt<object_declaration>,
-it depends on each master that includes this elaboration.
+it depends on each master that includes this elaboration@Chg{Version=[2],
+New=[ other than the declaration itself],Old=[]}.
 @end(itemize)
 
 @Defn2{term=[dependence], Sec=(of a task on another task)}
@@ -754,6 +757,11 @@ finalization still occurs for such tasks, and this happens after
 selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
+@Chg{Version=[2],New=[Updated the wording to reflect the improved
+definition of masters.],Old=[]}
+@end{DiffWord95}
 
 @LabeledClause{Protected Units and Protected Objects}
 

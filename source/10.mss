@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/12/02 05:47:57 $}
+@Comment{$Date: 2004/12/06 03:57:41 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3045,20 +3045,29 @@ A @nt{pragma} Pure is a library unit pragma.
 @end{Syntax}
 
 @begin{Legality}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 @Defn{pure}
 A @i{pure} @nt{library_item} is a preelaborable @nt{library_item}
 that does not contain the declaration of any
-variable or named access type,
-except within a subprogram, generic subprogram,
+variable or named access@Chg{Version=[2],New=[-to-object
+type for which the Storage_Size has not been specified by a static
+expression with value zero (0) and is not defined to be zero (0),
+excepting declarations],Old=[ type, except]} within a
+subprogram, generic
+subprogram,@Chg{Version=[2],New=[ generic formal part,],Old=[]}
 task unit, or protected unit.
 
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 @Defn{declared pure}
 A @nt{pragma} Pure is used to declare that a library unit is pure.
 If a @nt{pragma} Pure applies to a library unit,
 then its compilation units shall be pure,
 and they shall depend semantically only on
 compilation units of other library units that are
-declared pure.
+declared pure.@Chg{Version=[2],New=[ Furthermore, the full view of any private
+type declared in the visible part of the library unit shall support external
+streaming (see @RefSecNum{Stream-Oriented Attributes}).],Old=[]}
 @begin{Honest}
 A @i{declared-pure} library unit is one to which a
 @nt{pragma} Pure applies.
@@ -3076,49 +3085,75 @@ allowable in library units that are declared pure;
 that isn't true of Ada 83's deferred constants.
 @end{Reason}
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 Anonymous access types
-(that is, access discriminants and access parameters) are allowed.
+(@Chg{Version=[2],New=[including],Old=[that is,]} access discriminants and
+access parameters) are allowed.
 @end{Ramification}
 @begin{Reason}
-The primary reason for disallowing named access types is that an
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
+The primary reason for disallowing named
+access@Chg{Version=[2],New=[-to-object],Old=[]} types is that an
 @nt{allocator} has a side effect;
 the pool constitutes variable data.
-We considered somehow allowing @nt{allocator}-less access types.
-However, these (including access-to-subprogram types)
-would cause trouble for @RefSec{Distributed Systems},
-because such types would allow access values in a shared passive
+@Chg{Version=[2],New=[We allow access-to-subprogram types because they
+don't have @nt{allocator}s. We even allow access-to-object types if they have
+an empty predefined pool (they can't have a user-defined pool as
+System.Storage_Pools is not pure). In this case, any attempt to use an
+@nt{allocator} will raise Storage_Error. (We can't make this illegal without
+causing generic contract model problems.) Ada 95 didn't allow any access types
+as],Old=[We considered somehow allowing @nt{allocator}-less access types.
+However,]} these (including access-to-subprogram types)
+@Chg{Version=[2],New=[],Old=[would ]}cause trouble
+for @RefSec{Distributed Systems}, because such types @Chg{Version=[2],New=[],
+Old=[would ]} allow access values in a shared passive
 partition to designate objects in an active partition,
-thus allowing inter-address space references.
-Furthermore, a named access-to-object type without a pool would be a new
-concept, adding complexity from the user's point of view.
-Finally, the prevention of @nt{allocator}s would have to be
+thus allowing inter-address space references.@Chg{Version=[2],New=[ We decided
+to disallow such uses in the relatively rare cases where they cause problems,
+rather than making life harder for the majority of users. Types declared
+in a pure package can be used in remote operations only if they are externally
+streamable. That simply means that there is a means to transport values of the
+type; that's automatically true for non-limited types that don't have an
+access part. The only tricky part about this is to avoid privacy leakage; that
+was handled by insuring that any private types declared in a pure package have
+to be externally streamable.],
+Old=[Furthermore, a named access-to-object type without a pool would be a new
+concept, adding complexity from the user's point of view. Finally, the
+prevention of @nt{allocator}s would have to be
 a run-time check, in order to avoid violations of the generic contract
-model.
+model.]}
 @end{Reason}
 @end{Legality}
 
 @begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 If a library unit is declared pure, then the implementation
 is permitted to omit a call on a library-level
 subprogram of the library unit if the
-results are not needed after the call. Similarly, it may
-omit such a call
-and simply reuse the results produced by an earlier call on
-the same subprogram, provided that none of the parameters are of
+results are not needed after the call. @Chg{Version=[2],New=[In addition,
+the implementation],Old=[Similarly, it]}, may omit @Chg{Version=[2],New=[],
+Old=[such ]}a call@Chg{Version=[2],New=[ on such a subprogram],Old=[]} and
+simply reuse the results produced by an earlier call on
+the same subprogram, provided that none of the
+parameters @Chg{Version=[2],New=[nor any object accessible via access
+values from the parameters ],Old=[]}are of
 a limited type, and the addresses and values of all by-reference
-actual parameters, and the values of all
-by-copy-in actual parameters, are the same as they were at the
-earlier call.
+actual parameters, @Chg{Version=[2],New=[],Old=[and ]}the values of all
+by-copy-in actual parameters, @Chg{Version=[2],New=[and the values of all
+objects accessible via access values from the parameters, ],Old=[]}are
+the same as they were at the earlier call.
 @Redundant[This permission applies even if the subprogram
 produces other side effects when called.]
 @begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 A declared-pure @nt{library_item} has no variable state.
-Hence, a call on one of its (nonnested) subprograms cannot @lquotes@;normally@rquotes@;
+Hence, a call on one of its (nonnested) subprograms cannot
+@Chg{Version=[2],New=[normally],Old=[@lquotes@;normally@rquotes]}
 have side effects.
 The only possible side effects from such a call would be
-through machine code insertions,
-unchecked conversion to an access type declared within the subprogram,
-and similar features.
+through machine code insertions,@Chg{Version=[2],New=[ imported subprograms,],
+Old=[]}unchecked conversion to an access type declared within the
+subprogram, and similar features.
 The compiler may omit a call to such a subprogram even if such
 side effects exist, so the writer of such a subprogram
 has to keep this in mind.
@@ -3247,12 +3282,32 @@ things in the @nt{context_clause} @em in Ada 83, they were
 required to appear last.
 @end{Extend83}
 
+@begin{Incompatible95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+If the full type for a private type declared in a pure package does not
+support external streaming, the package is now illegal. The only way that
+can happen for an Ada 95 pure package would be for the full type to be a
+limited record type, a protected type without entries, or to be visibly
+derived from one of them. (Access discriminants also could cause trouble, but
+they are only allowed on the listed types in a pure package.) The problem
+can be eliminated by declaring user-defined Read and Write attributes for the
+offending type.],Old=[]}
+@end{Incompatible95}
+
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
 The concept of preelaborable initialization and @nt{pragma}
 Preelaborable_Initialization are new. These allow more types of objects to be
 created in preelaborable units, and fix holes in the old rules.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+@Chg{Version=[2],New=[Access-to-subprogram types and access-to-object types
+with a Storage_Size of 0 are allowed in pure units. The permission to omit
+calls was adjusted accordingly (which also fixes a hole in Ada 95, as
+access parameters are allowed, and changes in the values accessed by them
+must be taken into account).],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
