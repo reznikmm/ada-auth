@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:27 $}
+@Comment{$Date: 2000/05/27 04:44:00 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -14,27 +14,24 @@ expression, and to their evaluation, are given in this section.]
 @LabeledClause{Names}
 
 @begin{Intro}
-@redundant[
-@nt<Name>s can denote declared entities, whether declared explicitly
+@redundant[@nt<Name>s can denote declared entities, whether declared explicitly
 or implicitly (see @RefSecNum(Declarations)).  @nt<Name>s can also
 denote objects or subprograms designated by access values; the
 results of @nt<type_conversion>s or @nt<function_call>s; subcomponents
 and slices of objects and values; protected subprograms,
 single entries, entry families,
 and entries in families of entries.
-Finally, @nt<name>s can denote attributes of any of the foregoing.
-]
+Finally, @nt<name>s can denote attributes of any of the foregoing.]
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()@tabset(P22)
-@Syn{lhs=<name>,rhs="
+@Syn{tabs=[P22], lhs=<name>,rhs="
      @Syn2{direct_name} @\| @Syn2{explicit_dereference}
    | @Syn2{indexed_component} @\| @Syn2{slice}
    | @Syn2{selected_component} @\| @Syn2{attribute_reference}
    | @Syn2{type_conversion} @\| @Syn2{function_call}
    | @Syn2{character_literal}"}
-@Hinge{}
+
 
 @Syn{lhs=<direct_name>,
 rhs="@Syn2{identifier} | @Syn2{operator_symbol}"}
@@ -138,22 +135,22 @@ denotes the object or subprogram designated by the value of the @nt{name}.
 @i(Examples of direct names:)
 @begin(Example)
 @tabclear()@tabset(P9, P47)
-Pi @\@i(-- the direct name of a number) @\(see @RefSecNum(Number Declarations))
-Limit @\@i(-- the direct name of a constant) @\(see @RefSecNum(Object Declarations))
-Count @\@i(-- the direct name of a scalar variable) @\(see @RefSecNum(Object Declarations))
-Board @\@i(-- the direct name of an array variable) @\(see @RefSecNum(Index Constraints and Discrete Ranges))
-Matrix @\@i(-- the direct name of a type) @\(see @RefSecNum(Array Types))
-Random @\@i(-- the direct name of a function) @\(see @RefSecNum(Subprogram Declarations))
-Error @\@i(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
+Pi @\@RI(-- the direct name of a number) @\(see @RefSecNum(Number Declarations))
+Limit @\@RI(-- the direct name of a constant) @\(see @RefSecNum(Object Declarations))
+Count @\@RI(-- the direct name of a scalar variable) @\(see @RefSecNum(Object Declarations))
+Board @\@RI(-- the direct name of an array variable) @\(see @RefSecNum(Index Constraints and Discrete Ranges))
+Matrix @\@RI(-- the direct name of a type) @\(see @RefSecNum(Array Types))
+Random @\@RI(-- the direct name of a function) @\(see @RefSecNum(Subprogram Declarations))
+Error @\@RI(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
 @end(Example)
 
 @i{Examples of dereferences:}
-@begin{Example}
 @tabclear()@tabset(P16)
-Next_Car.@key[all]@\@i[--  explicit dereference denoting the object designated by]
-               @\@i[--  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
-Next_Car.Owner @\@i[--  selected component with implicit dereference;]
-               @\@i[--  same as Next_Car.@key[all].Owner]
+@begin{Example}
+Next_Car.@key[all]@\@RI[--  explicit dereference denoting the object designated by]
+               @\@RI[--  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
+Next_Car.Owner @\@RI[--  selected component with implicit dereference;]
+               @\@RI[--  same as Next_Car.@key[all].Owner]
 @end{Example}
 @end{Examples}
 
@@ -306,12 +303,12 @@ Constraint_Error is raised if this check fails.
 @i(Examples of indexed components:)
 @begin{Example}
 @tabclear()@tabset(P56)
- My_Schedule(Sat)     @i[--  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
- Page(10)             @i[--  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
- Board(M, J + 1)      @i[--  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
- Page(10)(20)         @i[--  a component of a component @\(see @RefSecNum{Array Types})]
- Request(Medium)      @i[--  an entry in a family of entries @\(see @RefSecNum{Task Units and Task Objects})]
- Next_Frame(L)(M, N)  @i[--  a component of a function call @\(see @RefSecNum{Subprogram Declarations})]
+ My_Schedule(Sat)     @RI[--  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)             @RI[--  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
+ Board(M, J + 1)      @RI[--  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)(20)         @RI[--  a component of a component @\(see @RefSecNum{Array Types})]
+ Request(Medium)      @RI[--  an entry in a family of entries @\(see @RefSecNum{Task Units and Task Objects})]
+ Next_Frame(L)(M, N)  @RI[--  a component of a function call @\(see @RefSecNum{Subprogram Declarations})]
 @end{Example}
 @end{Examples}
 
@@ -329,12 +326,10 @@ two-dimensional array.
 @LabeledSubClause{Slices}
 
 @begin{Intro}
-@redundant[
-@Defn{array slice}
+@redundant[@Defn{array slice}
 A @nt<slice> denotes a one-dimensional array formed by a sequence of
 consecutive components of a one-dimensional array.  A @nt<slice> of
-a variable is a variable; a @nt<slice> of a constant is a constant;
-]
+a variable is a variable; a @nt<slice> of a constant is a constant;]
 a @nt<slice> of a value is a value.
 @end{Intro}
 
@@ -404,31 +399,29 @@ component of the array A and has the corresponding component type.
 @i(Examples of slices:)
 @begin{Example}
 @tabclear()@tabset(P50)
-  Stars(1 .. 15)        @i[--  a slice of 15 characters @\(@lSeeSecNum{String Types})]
-  Page(10 .. 10 + Size) @i[--  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
-  Page(L)(A .. B)       @i[--  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
-  Stars(1 .. 0)         @i[--  a null slice @\(see @RefSecNum{String Types})]
-  My_Schedule(Weekday)  @i[--  bounds given by subtype @\(see @RefSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
-  Stars(5 .. 15)(K)     @i[--  same as Stars(K) @\(see @RefSecNum{String Types})]
-                        @i[--  provided that K is in 5 .. 15]
+  Stars(1 .. 15)        @RI[--  a slice of 15 characters @\(see @RefSecNum{String Types})]
+  Page(10 .. 10 + Size) @RI[--  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
+  Page(L)(A .. B)       @RI[--  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
+  Stars(1 .. 0)         @RI[--  a null slice @\(see @RefSecNum{String Types})]
+  My_Schedule(Weekday)  @RI[--  bounds given by subtype @\(see @RefSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
+  Stars(5 .. 15)(K)     @RI[--  same as Stars(K) @\(see @RefSecNum{String Types})]
+                        @RI[--  provided that K is in 5 .. 15]
 @end{Example}
 @end{Examples}
 
 @LabeledSubClause{Selected Components}
 
 @begin{Intro}
-@redundant[
-@nt{Selected_component}s are used to denote components (including
+@redundant[@nt{Selected_component}s are used to denote components (including
 discriminants),
 entries, entry families, and protected subprograms; they are
 also used as expanded names as described below.
-@IndexSee{Term=[dot selection],See=(selected_component)}
-]
+@IndexSee{Term=[dot selection],See=(selected_component)}]
 @end{Intro}
 
 @begin{Syntax}
 @Syn{lhs=<selected_component>,rhs="@Syn2{prefix} . @Syn2{selector_name}"}
-@Hinge{}
+
 
 @Syn{lhs=<selector_name>,rhs="@Syn2{identifier} | @Syn2{character_literal} | @Syn2{operator_symbol}"}
 @end{Syntax}
@@ -552,26 +545,26 @@ The exception Constraint_Error is raised if this check fails.
 @i(Examples of selected components:)
 @begin{Example}
 @tabclear()@tabset(P50)
-  Tomorrow.Month     @i[--  a record component @\(see @RefSecNum{Record Types})]
-  Next_Car.Owner     @i[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
-  Next_Car.Owner.Age @i[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
-                     @i[--  the previous two lines involve implicit dereferences]
-  Writer.Unit        @i[--  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
-  Min_Cell(H).Value  @i[--  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
-                     @i[--  of the function call Min_Cell(H)]
-  Control.Seize      @i[--  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
-  Pool(K).Write      @i[--  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
+  Tomorrow.Month     @RI[--  a record component @\(see @RefSecNum{Record Types})]
+  Next_Car.Owner     @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
+  Next_Car.Owner.Age @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
+                     @RI[--  the previous two lines involve implicit dereferences]
+  Writer.Unit        @RI[--  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
+  Min_Cell(H).Value  @RI[--  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
+                     @RI[--  of the function call Min_Cell(H)]
+  Control.Seize      @RI[--  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
+  Pool(K).Write      @RI[--  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
 @end{Example}
 
 @i(Examples of expanded names:)
 @begin{Example}
 @tabclear()@tabset(P58)
-  Key_Manager."<"      @i[--  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
-  Dot_Product.Sum      @i[--  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
-  Buffer.Pool          @i[--  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
-  Buffer.Read          @i[--  an entry of a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
-  Swap.Temp            @i[--  a variable declared in a block statement @\(see @RefSecNum{Block Statements})]
-  Standard.Boolean     @i[--  the name of a predefined type @\(see @RefSecNum{The Package Standard})]
+  Key_Manager."<"      @RI[--  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
+  Dot_Product.Sum      @RI[--  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
+  Buffer.Pool          @RI[--  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
+  Buffer.Read          @RI[--  an entry of a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
+  Swap.Temp            @RI[--  a variable declared in a block statement @\(see @RefSecNum{Block Statements})]
+  Standard.Boolean     @RI[--  the name of a predefined type @\(see @RefSecNum{The Package Standard})]
 @end{Example}
 @end{Examples}
 
@@ -617,7 +610,7 @@ or a @nt<range_attribute_reference>.]
     @Syn2{identifier}[(@SynI{static_}@Syn2{expression})]
   | Access | Delta | Digits"}
 
-@hinge()
+
 @Syn{lhs=<range_attribute_reference>,
   rhs="@Syn2{prefix}@SingleQuote@Syn2{range_attribute_designator}"}
 
@@ -756,14 +749,14 @@ access type.
 @i(Examples of attributes:)
 @begin{Example}
 @tabclear()@tabset(P58)
-Color'First        @i[-- minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
-Rainbow'Base'First @i[-- same as Color'First @\(see @RefSecNum{Enumeration Types})]
-Real'Digits        @i[-- precision of the type Real @\(see @RefSecNum{Floating Point Types})]
-Board'Last(2)      @i[-- upper bound of the second dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
-Board'Range(1)     @i[-- index range of the first dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
-Pool(K)'Terminated @i[-- True if task Pool(K) is terminated @\(see @RefSecNum{Task Units and Task Objects})]
-Date'Size          @i[-- number of bits for records of type Date @\(see @RefSecNum{Record Types})]
-Message'Address    @i[-- address of the record variable Message @\(see @RefSecNum{Discriminant Constraints})]
+Color'First        @RI[-- minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
+Rainbow'Base'First @RI[-- same as Color'First @\(see @RefSecNum{Enumeration Types})]
+Real'Digits        @RI[-- precision of the type Real @\(see @RefSecNum{Floating Point Types})]
+Board'Last(2)      @RI[-- upper bound of the second dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Board'Range(1)     @RI[-- index range of the first dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Pool(K)'Terminated @RI[-- True if task Pool(K) is terminated @\(see @RefSecNum{Task Units and Task Objects})]
+Date'Size          @RI[-- number of bits for records of type Date @\(see @RefSecNum{Record Types})]
+Message'Address    @RI[-- address of the record variable Message @\(see @RefSecNum{Discriminant Constraints})]
 @end{Example}
 @end{Examples}
 
@@ -941,10 +934,10 @@ rules for expanded names (see @RefSecNum{Selected Components}).
 @i(Examples of literals:)
 @begin{Example}
 @tabclear()@tabset(P16)
-3.14159_26536 @\@i[--  a real literal]
-1_345 @\@i[--  an integer literal]
-'A' @\@i[--  a character literal]
-"Some Text" @\@i[--  a string literal ]
+3.14159_26536 @\@RI[--  a real literal]
+1_345 @\@RI[--  an integer literal]
+'A' @\@RI[--  a character literal]
+"Some Text" @\@RI[--  a string literal ]
 @end{Example}
 @end{Examples}
 
@@ -1099,7 +1092,7 @@ using either a named or a positional association.]
 @Syn{lhs=<record_component_association_list>,rhs="
     @Syn2{record_component_association} {, @Syn2{record_component_association}}
   | @key<null record>"}
-@Hinge{}
+
 
 @Syn{lhs=<record_component_association>,rhs="
    [ @Syn2{component_choice_list} => ] @Syn2{expression}"}
@@ -1339,7 +1332,7 @@ be in the same order as in the @nt<known_discriminant_part>.
 @begin{Examples}
 @i(Example of a record aggregate with positional associations:)
 @begin{Example}
-(4, July, 1776)                                       @i[--  see @RefSecNum{Record Types} ]
+(4, July, 1776)                                       @RI[--  see @RefSecNum{Record Types} ]
 @end{Example}
 
 @i(Examples of record aggregates with named associations:)
@@ -1347,15 +1340,15 @@ be in the same order as in the @nt<known_discriminant_part>.
 (Day => 4, Month => July, Year => 1776)
 (Month => July, Day => 4, Year => 1776)
 
-(Disk, Closed, Track => 5, Cylinder => 12)            @i[--  see @RefSecNum{Variant Parts and Discrete Choices}]
+(Disk, Closed, Track => 5, Cylinder => 12)            @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
 (Unit => Disk, Status => Closed, Cylinder => 9, Track => 1)
 @end{Example}
 
 @i(Example of component association with several choices:)
 @begin{Example}
-(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null)))   @i[--  see @RefSecNum{Incomplete Type Declarations}]
+(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null)))   @RI[--  see @RefSecNum{Incomplete Type Declarations}]
 
- @i[--  The allocator is evaluated twice:  Succ and Pred designate different cells]
+ @RI[--  The allocator is evaluated twice:  Succ and Pred designate different cells]
 @end{Example}
 
 @i{Examples of record aggregates for tagged types
@@ -1509,7 +1502,7 @@ Painted_Point'(Point @key{with} Red)
 
 (Expression @key{with} Left => 1.2, Right => 3.4)
 Addition'(Binop @key{with null record})
-             @i[-- presuming Binop is of type Binary_Operation]
+             @RI[-- presuming Binop is of type Binary_Operation]
 @end(example)
 
 @end{Examples}
@@ -1544,16 +1537,16 @@ defined in @RefSec{Variant Parts and Discrete Choices}.
 @begin{Syntax}
 @Syn{lhs=<array_aggregate>,rhs="
   @Syn2{positional_array_aggregate} | @Syn2{named_array_aggregate}"}
-@hinge()
+
 
 @Syn{lhs=<positional_array_aggregate>,rhs="
     (@Syn2{expression}, @Syn2{expression} {, @Syn2{expression}})
   | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => @Syn2{expression})"}
-@hinge()
+
 
 @Syn{lhs=<named_array_aggregate>,rhs="
     (@Syn2{array_component_association} {, @Syn2{array_component_association}})"}
-@Hinge{}
+
 
 @Syn{lhs=<array_component_association>,rhs="
     @Syn2{discrete_choice_list} => @Syn2{expression}"}
@@ -1851,23 +1844,23 @@ an array with a single component.
 @i(Examples of array aggregates with positional associations:)
 @begin{Example}
 (7, 9, 5, 1, 3, 2, 4, 8, 6, 0)
-Table'(5, 8, 4, 1, @key(others) => 0)  @i[--  see @RefSecNum{Array Types} ]
+Table'(5, 8, 4, 1, @key(others) => 0)  @RI[--  see @RefSecNum{Array Types} ]
 @end{Example}
 
 @i(Examples of array aggregates with named associations:)
 @begin{Example}
-(1 .. 5 => (1 .. 8 => 0.0))      @i[--  two-dimensional]
-(1 .. N => @key(new) Cell)             @i[--  N new cells, in particular for N = 0]
+(1 .. 5 => (1 .. 8 => 0.0))      @RI[--  two-dimensional]
+(1 .. N => @key(new) Cell)             @RI[--  N new cells, in particular for N = 0]
 
 Table'(2 | 4 | 10 => 1, @key(others) => 0)
-Schedule'(Mon .. Fri => True,  @key(others) => False)  @i[--  see @RefSecNum{Array Types}]
+Schedule'(Mon .. Fri => True,  @key(others) => False)  @RI[--  see @RefSecNum{Array Types}]
 Schedule'(Wed | Sun  => False, @key(others) => True)
-Vector'(1 => 2.5)                                @i[--  single-component vector]
+Vector'(1 => 2.5)                                @RI[--  single-component vector]
 @end{Example}
 
 @i(Examples of two-dimensional array aggregates:)
 @begin{Example}
-@i[-- Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
+@RI[-- Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
 
 ((1.1, 1.2, 1.3), (2.1, 2.2, 2.3))
 (1 => (1.1, 1.2, 1.3), 2 => (2.1, 2.2, 2.3))
@@ -1876,13 +1869,13 @@ Vector'(1 => 2.5)                                @i[--  single-component vector]
 
 @i(Examples of aggregates as initial values:)
 @begin{Example}
-A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        @i[-- A(1)=7, A(10)=0]
-B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        @i[-- B(1)=0, B(10)=1]
-C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); @i[-- C'Last(1)=5, C'Last(2)=8]
+A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        @RI[-- A(1)=7, A(10)=0]
+B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        @RI[-- B(1)=0, B(10)=1]
+C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); @RI[-- C'Last(1)=5, C'Last(2)=8]
 
-D : Bit_Vector(M .. N) := (M .. N => True);         @i[-- see @RefSecNum{Array Types}]
+D : Bit_Vector(M .. N) := (M .. N => True);         @RI[-- see @RefSecNum{Array Types}]
 E : Bit_Vector(M .. N) := (@key(others) => True);
-F : String(1 .. 1) := (1 => 'F');  @i[-- a one component aggregate: same as "F"]
+F : String(1 .. 1) := (1 => 'F');  @RI[-- a one component aggregate: same as "F"]
 @end{Example}
 @end{Examples}
 
@@ -1968,24 +1961,23 @@ of any of the other five syntactic categories defined below.
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()@tabset(P23)
-@Syn{lhs=<expression>,rhs="
+@Syn{tabs=[P23], lhs=<expression>,rhs="
      @Syn2{relation} {@key{and} @Syn2{relation}} @\| @Syn2{relation} {@key{and} @key{then} @Syn2{relation}}
    | @Syn2{relation} {@key{or} @Syn2{relation}} @\| @Syn2{relation} {@key{or} @key{else} @Syn2{relation}}
    | @Syn2{relation} {@key{xor} @Syn2{relation}}"}
-@Hinge{}
+
 
 @Syn{lhs=<relation>,rhs="
      @Syn2{simple_expression} [@Syn2{relational_operator} @Syn2{simple_expression}]
    | @Syn2{simple_expression} [@key{not}] @key{in} @Syn2{range}
    | @Syn2{simple_expression} [@key{not}] @key{in} @Syn2{subtype_mark}"}
-@Hinge{}
+
 
 @Syn{lhs=<simple_expression>,rhs="[@Syn2{unary_adding_operator}] @Syn2{term} {@Syn2{binary_adding_operator} @Syn2{term}}"}
-@Hinge{}
+
 
 @Syn{lhs=<term>,rhs="@Syn2{factor} {@Syn2{multiplying_operator} @Syn2{factor}}"}
-@Hinge{}
+
 
 @Syn{lhs=<factor>,rhs="@Syn2{primary} [** @Syn2{primary}] | @key{abs} @Syn2{primary} | @key{not} @Syn2{primary}"}
 
@@ -2063,31 +2055,31 @@ or return the value of the object.
 @begin{Examples}
 @i(Examples of primaries:)
 @begin{Example}
-4.0                @i[--  real literal]
-Pi                 @i[--  named number]
-(1 .. 10 => 0)     @i[--  array aggregate]
-Sum                @i[--  variable]
-Integer'Last       @i[--  attribute]
-Sine(X)            @i[--  function call]
-Color'(Blue)       @i[--  qualified expression]
-Real(M*N)          @i[--  conversion]
-(Line_Count + 10)  @i[--  parenthesized expression ]
+4.0                @RI[--  real literal]
+Pi                 @RI[--  named number]
+(1 .. 10 => 0)     @RI[--  array aggregate]
+Sum                @RI[--  variable]
+Integer'Last       @RI[--  attribute]
+Sine(X)            @RI[--  function call]
+Color'(Blue)       @RI[--  qualified expression]
+Real(M*N)          @RI[--  conversion]
+(Line_Count + 10)  @RI[--  parenthesized expression ]
 @end{Example}
 
 @i(Examples of expressions:)
 @begin{Example}
-Volume                      @i[-- primary]
-@key(not) Destroyed               @i[-- factor]
-2*Line_Count                @i[-- term  ]
--4.0                        @i[-- simple expression]
--4.0 + A                    @i[-- simple expression]
-B**2 - 4.0*A*C              @i[-- simple expression]
-Password(1 .. 3) = "Bwv"    @i[-- relation]
-Count @key(in) Small_Int          @i[-- relation]
-Count @key(not) @key(in) Small_Int      @i[-- relation]
-Index = 0 @key(or) Item_Hit       @i[-- expression]
-(Cold @key(and) Sunny) @key(or) Warm    @i[-- expression (parentheses are required)]
-A**(B**C)                   @i[-- expression (parentheses are required)]
+Volume                      @RI[-- primary]
+@key(not) Destroyed               @RI[-- factor]
+2*Line_Count                @RI[-- term  ]
+-4.0                        @RI[-- simple expression]
+-4.0 + A                    @RI[-- simple expression]
+B**2 - 4.0*A*C              @RI[-- simple expression]
+Password(1 .. 3) = "Bwv"    @RI[-- relation]
+Count @key(in) Small_Int          @RI[-- relation]
+Count @key(not) @key(in) Small_Int      @RI[-- relation]
+Index = 0 @key(or) Item_Hit       @RI[-- expression]
+(Cold @key(and) Sunny) @key(or) Warm    @RI[-- expression (parentheses are required)]
+A**(B**C)                   @RI[-- expression (parentheses are required)]
 @end{Example}
 @end{Examples}
 
@@ -2125,14 +2117,13 @@ of functions for user-defined operators.  See @RefSec(Overloading of Operators).
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()@tabset(P36)
-@Syn{lhs=<logical_operator>,
+@Syn{tabs=[P36], lhs=<logical_operator>,
     rhs="@\ @key{and} | @key{or}  | @key{xor}"}
-@Syn{lhs=<relational_operator>,rhs="@\ =   | /=  | <   | <= | > | >="}
-@Syn{lhs=<binary_adding_operator>,rhs="@\ +   | @en   | &"}
-@Syn{lhs=<unary_adding_operator>,rhs="@\ +   | @en"}
-@Syn{lhs=<multiplying_operator>,rhs="@\ *   | /   | @key{mod} | @key{rem}"}
-@Syn{lhs=<highest_precedence_operator>,rhs="@\ **  | @key{abs} | @key{not}"}
+@Syn{tabs=[P36], lhs=<relational_operator>,rhs="@\ =   | /=  | <   | <= | > | >="}
+@Syn{tabs=[P36], lhs=<binary_adding_operator>,rhs="@\ +   | @en   | &"}
+@Syn{tabs=[P36], lhs=<unary_adding_operator>,rhs="@\ +   | @en"}
+@Syn{tabs=[P36], lhs=<multiplying_operator>,rhs="@\ *   | /   | @key{mod} | @key{rem}"}
+@Syn{tabs=[P36], lhs=<highest_precedence_operator>,rhs="@\ **  | @key{abs} | @key{not}"}
 @begin(Discussion)
   Some of the above syntactic categories are not used in other
   syntax rules.  They are just used for classification.
@@ -2166,8 +2157,7 @@ that is, they are implicitly declared immediately after the type definition.
 For each such implicit operator declaration, the
 parameters are called Left and Right for @i(binary) operators;
 the single parameter is called Right for @i(unary) operators.
-@redundant[
-An expression of the form X op Y,
+@redundant[An expression of the form X op Y,
 where op is a binary operator,
 is equivalent to a @nt<function_call> of the form "op"(X, Y).
 An expression of the form op Y,
@@ -2175,13 +2165,11 @@ where op is a unary operator,
 is equivalent to a @nt<function_call> of the form "op"(Y).
 The predefined operators and their effects are described
 in subclauses @RefSecNum(Logical Operators and Short-Circuit Control Forms)
-through @RefSecNum(Highest Precedence Operators).
-]
+through @RefSecNum(Highest Precedence Operators).]
 @end{StaticSem}
 
 @begin{RunTime}
-@redundant[
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@redundant[@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 The predefined operations on integer types either yield the mathematically
 correct result or raise the exception Constraint_Error.
 For implementations that support the Numerics Annex,
@@ -2249,14 +2237,14 @@ as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
 @begin{Examples}
 @i(Examples of precedence:)
 @begin{Example}
-@key(not) Sunny @key(or) Warm    @i[--  same as (not Sunny) or Warm]
-X > 4.0 @key(and) Y > 0.0  @i[--  same as (X > 4.0) and (Y > 0.0)]
+@key(not) Sunny @key(or) Warm    @RI[--  same as (not Sunny) or Warm]
+X > 4.0 @key(and) Y > 0.0  @RI[--  same as (X > 4.0) and (Y > 0.0)]
 
--4.0*A**2            @i[--  same as @en@;(4.0 * (A**2))]
-@key(abs)(1 + A) + B       @i[--  same as (abs (1 + A)) + B]
-Y**(-3)              @i[--  parentheses are necessary]
-A / B * C            @i[--  same as (A/B)*C]
-A + (B + C)          @i[--  evaluate B + C before adding it to A ]
+-4.0*A**2            @RI[--  same as @en@;(4.0 * (A**2))]
+@key(abs)(1 + A) + B       @RI[--  same as (abs (1 + A)) + B]
+Y**(-3)              @RI[--  parentheses are necessary]
+A / B * C            @RI[--  same as (A/B)*C]
+A + (B + C)          @RI[--  evaluate B + C before adding it to A ]
 @end{Example}
 @end{Examples}
 
@@ -2302,9 +2290,9 @@ component type is a boolean type:
 @IndexSee{Term=[bit string],See=(logical operators on boolean arrays)}
 @begin{example}
 @tabclear()
-@key[function] "@key(and)"(Left, Right : @i(T)) @key[return] @i(T)
-@key[function] "@key(or)" (Left, Right : @i(T)) @key[return] @i(T)
-@key[function] "@key(xor)"(Left, Right : @i(T)) @key[return] @i(T)
+@key[function] "@key(and)"(Left, Right : @RI(T)) @key[return] @RI(T)
+@key[function] "@key(or)" (Left, Right : @RI(T)) @key[return] @RI(T)
+@key[function] "@key(xor)"(Left, Right : @RI(T)) @key[return] @RI(T)
 @end{example}
 @begin{Honest}
   For predefined operators, the parameter and result subtypes
@@ -2378,12 +2366,12 @@ following truth table:
 @i(Examples of logical operators:)
 @begin{Example}
 Sunny @key(or) Warm
-Filter(1 .. 10) @key(and) Filter(15 .. 24)   @i[--   see @RefSecNum{Index Constraints and Discrete Ranges} ]
+Filter(1 .. 10) @key(and) Filter(15 .. 24)   @RI[--   see @RefSecNum{Index Constraints and Discrete Ranges} ]
 @end{Example}
 
 @i(Examples of short-circuit control forms:)
 @begin{Example}
-Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   @i[--   see @RefSecNum{Incomplete Type Declarations}]
+Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   @RI[--   see @RefSecNum{Incomplete Type Declarations}]
 N = 0 @key(or) @key(else) A(N) = Hit_Value
 @end{Example}
 @end{Examples}
@@ -2391,8 +2379,7 @@ N = 0 @key(or) @key(else) A(N) = Hit_Value
 @LabeledSubClause{Relational Operators and Membership Tests}
 
 @begin{Intro}
-@redundant[
-@Defn{relational operator}@Defn2{Term=[operator],Sec=(relational)}
+@redundant[@Defn{relational operator}@Defn2{Term=[operator],Sec=(relational)}
 @IndexSee{Term=[comparison operator],See=(relational operator)}
 @Defn{equality operator}@Defn2{Term=[operator],Sec=(equality)}
 The @i(equality operators)
@@ -2430,8 +2417,7 @@ A @i(membership test), using @key(in) or @key(not in),
 determines whether or not a value
 belongs to a given subtype or range, or has a tag that identifies
 a type that is covered by a given type.
-Membership tests are allowed for all types.
-]
+Membership tests are allowed for all types.]
 
 @end{Intro}
 
@@ -2483,18 +2469,18 @@ type @i(T) that is not limited,
 and not an anonymous access type,
 with the following specifications:
 @begin(example)
-@key(function) "=" (Left, Right : @i(T)) @key(return) Boolean
-@key(function) "/="(Left, Right : @i(T)) @key(return) Boolean
+@key(function) "=" (Left, Right : @RI(T)) @key(return) Boolean
+@key(function) "/="(Left, Right : @RI(T)) @key(return) Boolean
 @end(example)
 
 The ordering operators are predefined for every specific
 scalar type @i(T), and for every discrete array type
 @i(T), with the following specifications:
 @begin(example)
-@key(function) "<" (Left, Right : @i(T)) @key(return) Boolean
-@key(function) "<="(Left, Right : @i(T)) @key(return) Boolean
-@key(function) ">" (Left, Right : @i(T)) @key(return) Boolean
-@key(function) ">="(Left, Right : @i(T)) @key(return) Boolean
+@key(function) "<" (Left, Right : @RI(T)) @key(return) Boolean
+@key(function) "<="(Left, Right : @RI(T)) @key(return) Boolean
+@key(function) ">" (Left, Right : @RI(T)) @key(return) Boolean
+@key(function) ">="(Left, Right : @RI(T)) @key(return) Boolean
 @end(example)
 @end{StaticSem}
 
@@ -2730,18 +2716,18 @@ membership tests:)
 @begin{Example}
 X /= Y
 
-"" < "A" @key(and) "A" < "Aa"     @i[--  True]
-"Aa" < "B" @key(and) "A" < "A  "  @i[--  True]
+"" < "A" @key(and) "A" < "Aa"     @RI[--  True]
+"Aa" < "B" @key(and) "A" < "A  "  @RI[--  True]
 
-My_Car = @key(null)               @i[-- true if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
-My_Car = Your_Car           @i[-- true if we both share the same car]
-My_Car.@key[all] = Your_Car.@key[all]   @i[-- true if the two cars are identical]
+My_Car = @key(null)               @RI[-- true if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
+My_Car = Your_Car           @RI[-- true if we both share the same car]
+My_Car.@key[all] = Your_Car.@key[all]   @RI[-- true if the two cars are identical]
 
-N @key(not) @key(in) 1 .. 10            @i[-- range membership test]
-Today @key(in) Mon .. Fri         @i[-- range membership test]
-Today @key(in) Weekday            @i[-- subtype membership test (see @RefSecNum{Enumeration Types})]
-Archive @key(in) Disk_Unit        @i[-- subtype membership test (see @RefSecNum{Variant Parts and Discrete Choices})]
-Tree.@key(all) @key(in) Addition'Class  @i[-- class membership test (see @RefSecNum{Type Extensions})]
+N @key(not) @key(in) 1 .. 10            @RI[-- range membership test]
+Today @key(in) Mon .. Fri         @RI[-- range membership test]
+Today @key(in) Weekday            @RI[-- subtype membership test (see @RefSecNum{Enumeration Types})]
+Archive @key(in) Disk_Unit        @RI[-- subtype membership test (see @RefSecNum{Variant Parts and Discrete Choices})]
+Tree.@key(all) @key(in) Addition'Class  @RI[-- class membership test (see @RefSecNum{Type Extensions})]
 @end{Example}
 @end{Examples}
 
@@ -2781,8 +2767,8 @@ for every specific numeric type @i(T) with their
 conventional meaning.
 They have the following specifications:
 @begin(example)
-@key(function) "+"(Left, Right : @i(T)) @key(return) @i(T)
-@key(function) "-"(Left, Right : @i(T)) @key(return) @i(T)
+@key(function) "+"(Left, Right : @RI(T)) @key(return) @RI(T)
+@key(function) "-"(Left, Right : @RI(T)) @key(return) @RI(T)
 @end(example)
 
 @Defn{& operator}@Defn2{Term=[operator],Sec=(&)}
@@ -2794,10 +2780,10 @@ every nonlimited,
 one-dimensional array type @i(T) with component type @i(C).
 They have the following specifications:
 @begin(example)
-@key(function) "&"(Left : @i(T); Right : @i(T)) @key(return) @i(T)
-@key(function) "&"(Left : @i(T); Right : @i(C)) @key(return) @i(T)
-@key(function) "&"(Left : @i(C); Right : @i(T)) @key(return) @i(T)
-@key(function) "&"(Left : @i(C); Right : @i(C)) @key(return) @i(T)
+@key(function) "&"(Left : @RI(T); Right : @RI(T)) @key(return) @RI(T)
+@key(function) "&"(Left : @RI(T); Right : @RI(C)) @key(return) @RI(T)
+@key(function) "&"(Left : @RI(C); Right : @RI(T)) @key(return) @RI(T)
+@key(function) "&"(Left : @RI(C); Right : @RI(C)) @key(return) @RI(T)
 @end(example)
 @end{StaticSem}
 
@@ -2882,11 +2868,11 @@ performed can be followed by a conditional addition of the modulus.
 @begin{Examples}
 @i(Examples of expressions involving binary adding operators:)
 @begin{Example}
-Z + 0.1      @i[--  Z has to be of a real type ]
+Z + 0.1      @RI[--  Z has to be of a real type ]
 
-"A" & "BCD"  @i[--  concatenation of two string literals]
-'A' & "BCD"  @i[--  concatenation of a character literal and a string literal]
-'A' & 'A'    @i[--  concatenation of two character literals ]
+"A" & "BCD"  @RI[--  concatenation of two string literals]
+'A' & "BCD"  @RI[--  concatenation of a character literal and a string literal]
+'A' & 'A'    @RI[--  concatenation of two character literals ]
 @end{Example}
 @end{Examples}
 
@@ -2931,8 +2917,8 @@ for every specific numeric type @i(T) with their
 conventional meaning.
 They have the following specifications:
 @begin(example)
-@key(function) "+"(Right : @i(T)) @key(return) @i(T)
-@key(function) "-"(Right : @i(T)) @key(return) @i(T)
+@key(function) "+"(Right : @RI(T)) @key(return) @RI(T)
+@key(function) "-"(Right : @RI(T)) @key(return) @RI(T)
 @end(example)
 @end{StaticSem}
 
@@ -2959,10 +2945,10 @@ The multiplying operators * (multiplication), / (division),
 @key(mod) (modulus), and @key(rem) (remainder)
 are predefined for every specific integer type @i(T):
 @begin(example)
-@key(function) "*"  (Left, Right : @i(T)) @key(return) @i(T)
-@key(function) "/"  (Left, Right : @i(T)) @key(return) @i(T)
-@key(function) "@key(mod)"(Left, Right : @i(T)) @key(return) @i(T)
-@key(function) "@key(rem)"(Left, Right : @i(T)) @key(return) @i(T)
+@key(function) "*"  (Left, Right : @RI(T)) @key(return) @RI(T)
+@key(function) "/"  (Left, Right : @RI(T)) @key(return) @RI(T)
+@key(function) "@key(mod)"(Left, Right : @RI(T)) @key(return) @RI(T)
+@key(function) "@key(rem)"(Left, Right : @RI(T)) @key(return) @RI(T)
 @end(example)
 
 Signed integer multiplication has its conventional meaning.
@@ -3001,17 +2987,17 @@ because of the difference in effect of negation.
 Multiplication and division operators are predefined for
 every specific floating point type @i(T):
 @begin(example)
-@key(function) "*"(Left, Right : @i(T)) @key(return) @i(T)
-@key(function) "/"(Left, Right : @i(T)) @key(return) @i(T)
+@key(function) "*"(Left, Right : @RI(T)) @key(return) @RI(T)
+@key(function) "/"(Left, Right : @RI(T)) @key(return) @RI(T)
 @end(example)
 
 The following multiplication and division operators, with
 an operand of the predefined type Integer, are predefined
 for every specific fixed point type @i(T):
 @begin(example)
-@key(function) "*"(Left : @i(T); Right : Integer) @key(return) @i(T)
-@key(function) "*"(Left : Integer; Right : @i(T)) @key(return) @i(T)
-@key(function) "/"(Left : @i(T); Right : Integer) @key(return) @i(T)
+@key(function) "*"(Left : @RI(T); Right : Integer) @key(return) @RI(T)
+@key(function) "*"(Left : Integer; Right : @RI(T)) @key(return) @RI(T)
+@key(function) "/"(Left : @RI(T); Right : Integer) @key(return) @RI(T)
 @end(example)
 
 @Redundant[All of the above multiplying operators
@@ -3035,12 +3021,12 @@ operands of a universal type, or the specified
 root numeric types.
 @end{Ramification}
 @begin(example)
-@key(function) "*"(Left, Right : @i(root_real)) @key(return) @i(root_real)
-@key(function) "/"(Left, Right : @i(root_real)) @key(return) @i(root_real)
+@key(function) "*"(Left, Right : @RI(root_real)) @key(return) @RI(root_real)
+@key(function) "/"(Left, Right : @RI(root_real)) @key(return) @RI(root_real)
 
-@key(function) "*"(Left : @i(root_real); Right : @i(root_integer)) @key(return) @i(root_real)
-@key(function) "*"(Left : @i(root_integer); Right : @i(root_real)) @key(return) @i(root_real)
-@key(function) "/"(Left : @i(root_real); Right : @i(root_integer)) @key(return) @i(root_real)
+@key(function) "*"(Left : @RI(root_real); Right : @RI(root_integer)) @key(return) @RI(root_real)
+@key(function) "*"(Left : @RI(root_integer); Right : @RI(root_real)) @key(return) @RI(root_real)
+@key(function) "/"(Left : @RI(root_real); Right : @RI(root_integer)) @key(return) @RI(root_real)
 @end(example)
 
 Multiplication and division between any two fixed point types are
@@ -3053,8 +3039,8 @@ and return a result that is implicitly (or explicitly) convertible to
 any fixed point type.
 @end{Ramification}
 @begin(example)
-@key(function) "*"(Left, Right : @i(universal_fixed)) @key(return) @i(universal_fixed)
-@key(function) "/"(Left, Right : @i(universal_fixed)) @key(return) @i(universal_fixed)
+@key(function) "*"(Left, Right : @RI(universal_fixed)) @key(return) @RI(universal_fixed)
+@key(function) "/"(Left, Right : @RI(universal_fixed)) @key(return) @RI(universal_fixed)
 @end(example)
 @end{StaticSem}
 
@@ -3085,8 +3071,7 @@ not @i(universal_fixed).
 @begin{RunTime}
 The multiplication and division operators for real types have
 their conventional meaning.
-@redundant[
-For floating point types, the accuracy of the result is
+@redundant[For floating point types, the accuracy of the result is
 determined by the precision of the result type.
 For decimal fixed point types, the result is truncated toward zero
 if the mathematical result is between two multiples of the @i(small)
@@ -3094,8 +3079,7 @@ of the specific result type (possibly determined by context);
 for ordinary fixed point types, if the mathematical result is
 between two multiples of the @i(small), it is unspecified
 which of the two is the result.
-@PDefn{unspecified}
-]
+@PDefn{unspecified}]
 
 @IndexCheck{Division_Check}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
@@ -3149,29 +3133,29 @@ I : Integer := 1;
 J : Integer := 2;
 K : Integer := 3;
 
-X : Real := 1.0;                      @i[--     see @RefSecNum{Floating Point Types}]
+X : Real := 1.0;                      @RI[--     see @RefSecNum{Floating Point Types}]
 Y : Real := 2.0;
 
-F : Fraction := 0.25;                 @i[--     see @RefSecNum{Fixed Point Types}]
+F : Fraction := 0.25;                 @RI[--     see @RefSecNum{Fixed Point Types}]
 G : Fraction := 0.5;
 @end{Example}
 @begin{Example}
 @tabclear()@tabset(P19, P31)
-@i(Expression)  @\@i(Value)  @\@i(Result Type)
+@RI(Expression)  @\@RI(Value)  @\@RI(Result Type)
 
-I*J            @\2      @\@i(same as I and J, that is, Integer)
-K/J            @\1      @\@i(same as K and J, that is, Integer)
-K @key(mod) J  @\1      @\@i(same as K and J, that is, Integer)
+I*J            @\2      @\@RI(same as I and J, that is, Integer)
+K/J            @\1      @\@RI(same as K and J, that is, Integer)
+K @key(mod) J  @\1      @\@RI(same as K and J, that is, Integer)
 
-X/Y            @\0.5    @\@i(same as X and Y, that is, Real)
-F/2            @\0.125  @\@i(same as F, that is, Fraction)
+X/Y            @\0.5    @\@RI(same as X and Y, that is, Real)
+F/2            @\0.125  @\@RI(same as F, that is, Fraction)
 
-3*F            @\0.75   @\@i(same as F, that is, Fraction)
-0.75*G         @\0.375  @\@i(universal_fixed, implicitly convertible)
-               @\       @\@i(to any fixed point type)
-Fraction(F*G)  @\0.125  @\@i(Fraction, as stated by the conversion)
-Real(J)*Y      @\4.0    @\@i(Real, the type of both operands after)
-               @\       @\@i(conversion of J)
+3*F            @\0.75   @\@RI(same as F, that is, Fraction)
+0.75*G         @\0.375  @\@RI(universal_fixed, implicitly convertible)
+               @\       @\@RI(to any fixed point type)
+Fraction(F*G)  @\0.125  @\@RI(Fraction, as stated by the conversion)
+Real(J)*Y      @\4.0    @\@RI(Real, the type of both operands after)
+               @\       @\@RI(conversion of J)
 @end{Example}
 @end{Examples}
 
@@ -3204,7 +3188,7 @@ The highest precedence unary operator @key(abs) (absolute value)
 is predefined for every specific numeric type @i(T),
 with the following specification:
 @begin(example)
-@key(function) "@key(abs)"(Right : @i(T)) @key(return) @i(T)
+@key(function) "@key(abs)"(Right : @RI(T)) @key(return) @RI(T)
 @end(example)
 
 @Defn{not operator}@Defn2{Term=[operator],Sec=(not)}
@@ -3216,7 +3200,7 @@ and for every one-dimensional array type @i(T) whose
 components are of a boolean type,
 with the following specification:
 @begin(example)
-@key(function) "@key(not)"(Right : @i(T)) @key(return) @i(T)
+@key(function) "@key(not)"(Right : @RI(T)) @key(return) @RI(T)
 @end(example)
 
 The result of the operator @key(not) for a modular type is
@@ -3248,7 +3232,7 @@ The highest precedence @i(exponentiation) operator ** is predefined
 for every specific integer type @i(T)
 with the following specification:
 @begin(example)
-@key(function) "**"(Left : @i(T); Right : Natural) @key(return) @i(T)
+@key(function) "**"(Left : @RI(T); Right : Natural) @key(return) @RI(T)
 @end(example)
 
 Exponentiation is also predefined for
@@ -3257,7 +3241,7 @@ as well as @i{root_real},
 with the following specification (where @i(T) is @i{root_real}
 or the floating point type):
 @begin(example)
-@key(function) "**"(Left : @i(T); Right : Integer'Base) @key(return) @i(T)
+@key(function) "**"(Left : @RI(T); Right : Integer'Base) @key(return) @RI(T)
 @end(example)
 
 @Defn{exponent}
@@ -3910,9 +3894,9 @@ generic formal @key(in out) objects).
 @begin{Examples}
 @i(Examples of numeric type conversion:)
 @begin{Example}
-Real(2*J)      @i[--  value is converted to floating point]
-Integer(1.6)   @i[--  value is 2]
-Integer(-0.4)  @i[--  value is 0]
+Real(2*J)      @RI[--  value is converted to floating point]
+Integer(1.6)   @RI[--  value is 2]
+Integer(-0.4)  @RI[--  value is 0]
 @end{Example}
 
 @i(Example of conversion between derived types:)
@@ -3923,7 +3907,7 @@ X : A_Form;
 Y : B_Form;
 
 X := A_Form(Y);
-Y := B_Form(X);  @i[--  the reverse conversion ]
+Y := B_Form(X);  @RI[--  the reverse conversion ]
 @end{Example}
 
 @i(Examples of conversions between array types:)
@@ -3932,9 +3916,9 @@ Y := B_Form(X);  @i[--  the reverse conversion ]
 @key(subtype) Dozen @key(is) Sequence(1 .. 12);
 Ledger : @key(array)(1 .. 100) @key(of) Integer;
 
-Sequence(Ledger)            @i[--  bounds are those of Ledger]
-Sequence(Ledger(31 .. 42))  @i[--  bounds are 31 and 42]
-Dozen(Ledger(31 .. 42))     @i[--  bounds are those of Dozen ]
+Sequence(Ledger)            @RI[--  bounds are those of Ledger]
+Sequence(Ledger(31 .. 42))  @RI[--  bounds are 31 and 42]
+Dozen(Ledger(31 .. 42))     @RI[--  bounds are those of Dozen ]
 @end{Example}
 @end{Examples}
 
@@ -4062,14 +4046,14 @@ might be necessary to qualify the operand to resolve its type.
 @key(type) Mask @key(is) (Fix, Dec, Exp, Signif);
 @key(type) Code @key(is) (Fix, Cla, Dec, Tnz, Sub);
 
-Print (Mask'(Dec));  @i[--  Dec is of type Mask]
-Print (Code'(Dec));  @i[--  Dec is of type Code ]
+Print (Mask'(Dec));  @RI[--  Dec is of type Mask]
+Print (Code'(Dec));  @RI[--  Dec is of type Code ]
 
-@key(for) J @key(in) Code'(Fix) .. Code'(Dec) @key(loop) ... @i[-- qualification needed for either Fix or Dec]
-@key(for) J @key(in) Code @key(range) Fix .. Dec @key(loop) ...    @i[-- qualification unnecessary]
-@key(for) J @key(in) Code'(Fix) .. Dec @key(loop) ...        @i[-- qualification unnecessary for Dec]
+@key(for) J @key(in) Code'(Fix) .. Code'(Dec) @key(loop) ... @RI[-- qualification needed for either Fix or Dec]
+@key(for) J @key(in) Code @key(range) Fix .. Dec @key(loop) ...    @RI[-- qualification unnecessary]
+@key(for) J @key(in) Code'(Fix) .. Dec @key(loop) ...        @RI[-- qualification unnecessary for Dec]
 
-Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @i[-- see @RefSecNum{Type Conversions} ]
+Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @RI[-- see @RefSecNum{Type Conversions} ]
 @end{Example}
 @end{Examples}
 
@@ -4243,18 +4227,18 @@ to provide garbage collection (see @RefSecNum{Pragma Controlled}).
 @begin{Examples}
 @i{Examples of allocators:}
 @begin{Example}
-@key(new) Cell'(0, @key(null), @key(null))                          @i[-- initialized explicitly, see @RefSecNum{Incomplete Type Declarations}]
-@key(new) Cell'(Value => 0, Succ => @key(null), Pred => @key(null)) @i[-- initialized explicitly]
-@key(new) Cell                                          @i[-- not initialized]
+@key(new) Cell'(0, @key(null), @key(null))                          @RI[-- initialized explicitly, see @RefSecNum{Incomplete Type Declarations}]
+@key(new) Cell'(Value => 0, Succ => @key(null), Pred => @key(null)) @RI[-- initialized explicitly]
+@key(new) Cell                                          @RI[-- not initialized]
 
-@key(new) Matrix(1 .. 10, 1 .. 20)                      @i[-- the bounds only are given]
-@key(new) Matrix'(1 .. 10 => (1 .. 20 => 0.0))          @i[-- initialized explicitly]
+@key(new) Matrix(1 .. 10, 1 .. 20)                      @RI[-- the bounds only are given]
+@key(new) Matrix'(1 .. 10 => (1 .. 20 => 0.0))          @RI[-- initialized explicitly]
 
-@key(new) Buffer(100)                                   @i[-- the discriminant only is given]
-@key(new) Buffer'(Size => 80, Pos => 0, Value => (1 .. 80 => 'A')) @i[-- initialized explicitly]
+@key(new) Buffer(100)                                   @RI[-- the discriminant only is given]
+@key(new) Buffer'(Size => 80, Pos => 0, Value => (1 .. 80 => 'A')) @RI[-- initialized explicitly]
 
-Expr_Ptr'(@key(new) Literal)                        @i[-- allocator for access-to-class-wide type, see @RefSecNum{Type Extensions}]
-Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5)) @i[-- initialized explicitly]
+Expr_Ptr'(@key(new) Literal)                        @RI[-- allocator for access-to-class-wide type, see @RefSecNum{Type Extensions}]
+Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5)) @RI[-- initialized explicitly]
 
 @end{Example}
 @end{Examples}
@@ -4559,12 +4543,12 @@ For example:
 @key[begin]
     @key[case] F @key[is]
         @key[when] 1..10 => @key[null];
-        --@i{ Illegal!}
+        --@RI{ Illegal!}
     @key[end] @key[case];
 @key[end] G;
 
 X : Integer @key[range] 1..20;
-@key[procedure] I @key[is] @key[new] G(F => X); --@i{ OK.}
+@key[procedure] I @key[is] @key[new] G(F => X); --@RI{ OK.}
 @end{Example}
 
 The @nt{case_statement} is illegal, because the subtype of F is not
@@ -4647,7 +4631,7 @@ descendant of a formal scalar type
   Short-circuit control forms are a special case:
 @begin{Example}
 N: @key[constant] := 0.0;
-X: @key[constant] Boolean := (N = 0.0) @key[or] @key[else] (1.0/N > 0.5); --@i{ Static.}
+X: @key[constant] Boolean := (N = 0.0) @key[or] @key[else] (1.0/N > 0.5); --@RI{ Static.}
 @end{Example}
 
 The declaration of X is legal, since the divide-by-zero part of the
@@ -4757,16 +4741,16 @@ between two integers, the rounding is performed away from zero.
 @begin{Examples}
 @i(Examples of static expressions:)
 @begin{Example}
-1 + 1       @i[-- 2]
-@key(abs)(-10)*3  @i[-- 30]
+1 + 1       @RI[-- 2]
+@key(abs)(-10)*3  @RI[-- 30]
 
 Kilo : @key(constant) := 1000;
-Mega : @key(constant) := Kilo*Kilo;   @i[-- 1_000_000]
+Mega : @key(constant) := Kilo*Kilo;   @RI[-- 1_000_000]
 Long : @key(constant) := Float'Digits*2;
 
-Half_Pi    : @key(constant) := Pi/2;           @i[-- see @RefSecNum(Number Declarations)]
+Half_Pi    : @key(constant) := Pi/2;           @RI[-- see @RefSecNum(Number Declarations)]
 Deg_To_Rad : @key(constant) := Half_Pi/90;
-Rad_To_Deg : @key(constant) := 1.0/Deg_To_Rad; @i[-- equivalent to 1.0/((3.14159_26536/2)/90)]
+Rad_To_Deg : @key(constant) := 1.0/Deg_To_Rad; @RI[-- equivalent to 1.0/((3.14159_26536/2)/90)]
 @end{Example}
 @end{Examples}
 
@@ -4861,7 +4845,7 @@ In Ada 83, an expression was considered nonstatic if it raised an
 exception.
 Thus, for example:
 @begin{Example}
-Bad: @key[constant] := 1/0; --@i{ Illegal!}
+Bad: @key[constant] := 1/0; --@RI{ Illegal!}
 @end{Example}
 
 was illegal because 1/0 was not static.

@@ -1,17 +1,15 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:27 $}
+@Comment{$Date: 2000/05/27 04:44:01 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
-@redundant[
-This section describes features for
+@redundant[This section describes features for
 querying and controlling aspects of representation
 and for interfacing to hardware.
-
 ]
 @end{Intro}
 
@@ -424,15 +422,15 @@ Consider, for example:
 @begin{Example}
 @key[package] P1 @key[is]
     @key[subtype] S1 @key[is] Integer @key[range] 0..2**16-1;
-    @key[for] S1'Size @key[use] 16; --@i{ Illegal!}
-        --@i{ S1'Size would be 16 by default.}
+    @key[for] S1'Size @key[use] 16; --@RI{ Illegal!}
+        --@RI{ S1'Size would be 16 by default.}
     @key[type] A1 @key[is] @key[access] S1;
     X1: A1;
 @key[end] P1;
 
 @key[package] P2 @key[is]
     @key[subtype] S2 @key[is] Integer @key[range] 0..2**16-1;
-    @key[for] S2'Size @key[use] 32; --@i{ Illegal!}
+    @key[for] S2'Size @key[use] 32; --@RI{ Illegal!}
     @key[type] A2 @key[is] @key[access] S2;
     X2: A2;
 @key[end] P2;
@@ -700,11 +698,9 @@ Some of the more stringent requirements are moved to
 @LabeledClause{Pragma Pack}
 
 @begin{Intro}
-@redundant[
-A @nt{pragma} Pack specifies that storage
+@redundant[A @nt{pragma} Pack specifies that storage
 minimization should be the main criterion when
-selecting the representation of a composite type.
-]
+selecting the representation of a composite type.]
 @end{Intro}
 
 @begin{Syntax}
@@ -789,15 +785,13 @@ so it probably won't get packed very tightly.
 @LabeledClause{Representation Attributes}
 
 @begin{Intro}
-@redundant[
-@Defn{representation attribute}
+@redundant[@Defn{representation attribute}
 @Defn2{Term=[attribute], Sec=(representation)}
 The values of certain implementation-dependent characteristics can be
 obtained by interrogating appropriate representation attributes.
 @RootDefn2{Term=[attribute], Sec=(specifying)}
 Some of these attributes are specifiable via an
-@nt{attribute_definition_clause}.
-]
+@nt{attribute_definition_clause}.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -1677,7 +1671,7 @@ reflects this representation.
   subtype can be confusing:
   @begin{Example}
 @key[type] Device_Register @key[is] @key[range] 0..2**8 - 1;
-@key[for] Device_Register'Size @key[use] 8; --@i{ Confusing!}
+@key[for] Device_Register'Size @key[use] 8; --@RI{ Confusing!}
 My_Device : Device_Register;
 @key[for] My_Device'Address @key[use] To_Address(16#FF00#);
   @end{Example}
@@ -1800,11 +1794,9 @@ the value specified in the @nt{pragma}.
 @end{StaticSem}
 
 @begin{Intro}
-@redundant[
-@IndexSeeAlso{Term=[Storage_Size clause],See=[pragma Storage_Size]}
+@redundant[@IndexSeeAlso{Term=[Storage_Size clause],See=[pragma Storage_Size]}
 A @nt{pragma} Storage_Size specifies the amount of storage to be
-reserved for the execution of a task.
-]
+reserved for the execution of a task.]
 @end{Intro}
 
 @begin{Syntax}
@@ -2019,12 +2011,12 @@ Device_Register : Medium;
 @key[type] Short @key[is] @key[delta] 0.01 @key[range] -100.0 .. 100.0;
 @key[for] Short'Size @key[use] 15;
 
-@key[for] Car_Name'Storage_Size @key[use] --@i{ specify access type's storage pool size}
-        2000*((Car'Size/System.Storage_Unit) +1); --@i{ approximately 2000 cars}
+@key[for] Car_Name'Storage_Size @key[use] --@RI{ specify access type's storage pool size}
+        2000*((Car'Size/System.Storage_Unit) +1); --@RI{ approximately 2000 cars}
 
 @key[function] My_Read(Stream : @key[access] Ada.Streams.Root_Stream_Type'Class)
   @key[return] T;
-@key(for) T'Read @key(use) My_Read; --@i{ see @RefSecNum{Stream-Oriented Attributes}}
+@key(for) T'Read @key(use) My_Read; --@RI{ see @RefSecNum{Stream-Oriented Attributes}}
 @end{Example}
 @end{Examples}
 
@@ -2056,10 +2048,8 @@ except for certain explicit exceptions.
 @LabeledClause{Enumeration Representation Clauses}
 
 @begin{Intro}
-@redundant[
-An @nt{enumeration_representation_clause} specifies the internal
-codes for enumeration literals.
-]
+@redundant[An @nt{enumeration_representation_clause} specifies the internal
+codes for enumeration literals.]
 @end{Intro}
 
 @begin{Syntax}
@@ -2186,7 +2176,7 @@ The Base attribute can be used to get at these values.
 For example:
 @begin{Example}
 @key[for] I @key[in] S2'Base @key[loop]
-    ... --@i{ When I equals Blue, the internal code is 30.}
+    ... --@RI{ When I equals Blue, the internal code is 30.}
 @key[end] @key[loop];
 @end{Example}
 
@@ -2236,12 +2226,10 @@ The layout can be specified with a @nt{record_representation_clause}.
 @LabeledSubClause{Record Representation Clauses}
 
 @begin{Intro}
-@redundant[
-A @nt{record_representation_clause} specifies the storage representation
+@redundant[A @nt{record_representation_clause} specifies the storage representation
 of records and record extensions, that is, the order, position, and size
 of components (including discriminants, if any).
-@IndexSee{Term=[bit field],See=(record_representation_clause)}
-]
+@IndexSee{Term=[bit field],See=(record_representation_clause)}]
 @end{Intro}
 
 @begin{MetaRules}
@@ -2259,7 +2247,7 @@ Therefore, negative offsets should be disallowed in
       @key{record} [@Syn2{mod_clause}]
         {@Syn2{component_clause}}
       @key{end} @key{record};"}
-@Hinge{}
+
 
 @Syn{lhs=<component_clause>,rhs="
     @SynI{component_}@Syn2{local_name} @key{at} @Syn2{position} @key{range} @Syn2{first_bit} .. @Syn2{last_bit};"}
@@ -2351,10 +2339,10 @@ of a @nt{component_clause}.
     @key[record]
         X : Integer;
     @key[end] @key[record];
-X : @key[constant] := 31; --@i{ Same defining name as the component.}
+X : @key[constant] := 31; --@RI{ Same defining name as the component.}
 @key[for] T @key[use]
     @key[record]
-        X @key[at] 0 @key[range] 0..X; --@i{ Illegal!}
+        X @key[at] 0 @key[range] 0..X; --@RI{ Illegal!}
     @key[end] @key[record];
     @end{Example}
 
@@ -2524,7 +2512,7 @@ components out of the way.
 @begin{Examples}
 @i{Example of specifying the layout of a record type:}
 @begin{Example}
-Word : @key[constant] := 4;  --@i{  storage element is byte, 4 bytes per word}
+Word : @key[constant] := 4;  --@RI{  storage element is byte, 4 bytes per word}
 
 @key[type] State         @key[is] (A,M,W,P);
 @key[type] Mode          @key[is] (Fix, Dec, Exp, Signif);
@@ -2548,10 +2536,10 @@ Word : @key[constant] := 4;  --@i{  storage element is byte, 4 bytes per word}
 @key[for] Program_Status_Word @key[use]
   @key[record]
       System_Mask      @key[at] 0*Word @key[range] 0  .. 7;
-      Protection_Key   @key[at] 0*Word @key[range] 10 .. 11; --@i{ bits 8,9 unused}
+      Protection_Key   @key[at] 0*Word @key[range] 10 .. 11; --@RI{ bits 8,9 unused}
       Machine_State    @key[at] 0*Word @key[range] 12 .. 15;
       Interrupt_Cause  @key[at] 0*Word @key[range] 16 .. 31;
-      Ilc              @key[at] 1*Word @key[range] 0  .. 1;  --@i{ second word}
+      Ilc              @key[at] 1*Word @key[range] 0  .. 1;  --@RI{ second word}
       Cc               @key[at] 1*Word @key[range] 2  .. 3;
       Program_Mask     @key[at] 1*Word @key[range] 4  .. 7;
       Inst_Address     @key[at] 1*Word @key[range] 8  .. 31;
@@ -2672,10 +2660,8 @@ for that component.
 @LabeledSubClause{Bit Ordering}
 
 @begin{Intro}
-@redundant[
-The Bit_Order attribute specifies the interpretation of the storage
-place attributes.
-]
+@redundant[The Bit_Order attribute specifies the interpretation of the storage
+place attributes.]
 @begin{Reason}
 The intention is to provide uniformity in the
 interpretation of storage places across implementations on a
@@ -2792,8 +2778,7 @@ The Bit_Order attribute is new to Ada 9X.
 @LabeledClause{Change of Representation}
 
 @begin{Intro}
-@redundant[
-@Defn{change of representation}
+@redundant[@Defn{change of representation}
 @Defn2{Term=[representation], Sec=(change of)}
 A @nt{type_conversion} (see @RefSecNum{Type Conversions})
 can be used to convert between two different
@@ -2808,8 +2793,7 @@ To convert a record from one representation to another,
 two record types with a common ancestor type need to be declared,
 with no inherited subprograms.  Distinct representations can then
 be specified for the record types, and explicit conversion between
-the types can be used to effect a change in representation.
-]
+the types can be used to effect a change in representation.]
 @begin{Ramification}
 This technique does not work if the first type is an
 untagged type with user-defined primitive subprograms.
@@ -2820,40 +2804,38 @@ It does not work at all for tagged types.
 @begin{Examples}
 @i{Example of change of representation:}
 @begin{Example}
---@i{ Packed_Descriptor and Descriptor are two different types}
---@i{ with identical characteristics, apart from their}
---@i{ representation}
+--@RI{ Packed_Descriptor and Descriptor are two different types}
+--@RI{ with identical characteristics, apart from their}
+--@RI{ representation}
 
 @key[type] Descriptor @key[is]
     @key[record]
-      --@i{ components of a descriptor}
+      --@RI{ components of a descriptor}
     @key[end] @key[record];
 
 @key[type] Packed_Descriptor @key[is] @key[new] Descriptor;
 
 @key[for] Packed_Descriptor @key[use]
     @key[record]
-      --@i{ component clauses for some or for all components}
+      --@RI{ component clauses for some or for all components}
     @key[end] @key[record];
 
-@i{-- Change of representation can now be accomplished by explicit type conversions:}
+@RI{-- Change of representation can now be accomplished by explicit type conversions:}
 
 D : Descriptor;
 P : Packed_Descriptor;
 
-P := Packed_Descriptor(D);  --@i{ pack D}
-D := Descriptor(P);         --@i{ unpack P}
+P := Packed_Descriptor(D);  --@RI{ pack D}
+D := Descriptor(P);         --@RI{ unpack P}
 @end{Example}
 @end{Examples}
 
 @LabeledClause{The Package System}
 
 @begin{Intro}
-@redundant[
-For each implementation there is a library package called System
+@redundant[For each implementation there is a library package called System
 which includes the definitions of certain configuration-dependent
-characteristics.
-]
+characteristics.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -2866,79 +2848,79 @@ and its language-defined children.}
    @key{pragma} Preelaborate(System);
 
 @LangDefType{Package=[System],Type=[Name]}
-   @key[type] Name @key[is] @i{implementation-defined-enumeration-type};
-   System_Name : @key[constant] Name := @i{implementation-defined};
-@Hinge{}
+   @key[type] Name @key[is] @RI{implementation-defined-enumeration-type};
+   System_Name : @key[constant] Name := @RI{implementation-defined};
 
 
-   --@i{ System-Dependent Named Numbers:}
 
-   Min_Int               : @key[constant] := @i{root_integer}'First;
-   Max_Int               : @key[constant] := @i{root_integer}'Last;
+   --@RI{ System-Dependent Named Numbers:}
+
+   Min_Int               : @key[constant] := @RI{root_integer}'First;
+   Max_Int               : @key[constant] := @RI{root_integer}'Last;
 @Defn2{Term=[Min_Int], Sec=(named number in package System)}
 @Defn2{Term=[Max_Int], Sec=(named number in package System)}
 
-   Max_Binary_Modulus    : @key[constant] := @i{implementation-defined};
-   Max_Nonbinary_Modulus : @key[constant] := @i{implementation-defined};
+   Max_Binary_Modulus    : @key[constant] := @RI{implementation-defined};
+   Max_Nonbinary_Modulus : @key[constant] := @RI{implementation-defined};
 @Defn2{Term=[Max_Binary_Modulus], Sec=(named number in package System)}
 @Defn2{Term=[Max_Nonbinary_Modulus], Sec=(named number in package System)}
 
-   Max_Base_Digits       : @key[constant] := @i{root_real}'Digits;
-   Max_Digits            : @key[constant] := @i{implementation-defined};
+   Max_Base_Digits       : @key[constant] := @RI{root_real}'Digits;
+   Max_Digits            : @key[constant] := @RI{implementation-defined};
 @Defn2{Term=[Max_Base_Digits], Sec=(named number in package System)}
 @Defn2{Term=[Max_Digits], Sec=(named number in package System)}
 
-   Max_Mantissa          : @key[constant] := @i{implementation-defined};
-   Fine_Delta            : @key[constant] := @i{implementation-defined};
+   Max_Mantissa          : @key[constant] := @RI{implementation-defined};
+   Fine_Delta            : @key[constant] := @RI{implementation-defined};
 @Defn2{Term=[Max_Mantissa], Sec=(named number in package System)}
 @Defn2{Term=[Fine_Delta], Sec=(named number in package System)}
 
-   Tick                  : @key[constant] := @i{implementation-defined};
+   Tick                  : @key[constant] := @RI{implementation-defined};
 @Defn2{Term=[Tick], Sec=(named number in package System)}
 
-   --@i{ Storage-related Declarations:}
+   --@RI{ Storage-related Declarations:}
 
-   @key[type] Address @key[is] @i{implementation-defined};
+   @key[type] Address @key[is] @RI{implementation-defined};
    Null_Address : @key[constant] Address;
 @LangDefType{Package=[System],Type=[Address]}
 @Defn2{Term=[address], Sec=(null)}
 @Defn2{Term=[Null_Address], Sec=(constant in System)}
 
-   Storage_Unit : @key[constant] := @i{implementation-defined};
-   Word_Size    : @key[constant] := @i{implementation-defined} * Storage_Unit;
-   Memory_Size  : @key[constant] := @i{implementation-defined};
+   Storage_Unit : @key[constant] := @RI{implementation-defined};
+   Word_Size    : @key[constant] := @RI{implementation-defined} * Storage_Unit;
+   Memory_Size  : @key[constant] := @RI{implementation-defined};
 @Defn2{Term=[Storage_Unit], Sec=(named number in package System)}
 @Defn2{Term=[Word_Size], Sec=(named number in package System)}
-@Hinge{}
 
-   --@i{ @Defn2{Term=[address], Sec=(comparison)}Address Comparison:}
+
+   --@RI{ @Defn2{Term=[address], Sec=(comparison)}Address Comparison:}
    @key(function) "<" (Left, Right : Address) @key(return) Boolean;
    @key(function) "<="(Left, Right : Address) @key(return) Boolean;
    @key(function) ">" (Left, Right : Address) @key(return) Boolean;
    @key(function) ">="(Left, Right : Address) @key(return) Boolean;
    @key(function) "=" (Left, Right : Address) @key(return) Boolean;
 -- @key(function) "/=" (Left, Right : Address) @key(return) Boolean;
-   --@i{ "/=" is implicitly defined}
+   --@RI{ "/=" is implicitly defined}
    @key[pragma] Convention(Intrinsic, "<");
-   ... --@i{ and so on for all language-defined subprograms in this package}
-@Hinge{}
+   ... --@RI{ and so on for all language-defined subprograms in this package}
 
 
-   --@i{ Other System-Dependent Declarations:}
+
+   --@RI{ Other System-Dependent Declarations:}
 @LangDefType{Package=[System],Type=[Bit_Order]}
    @key[type] Bit_Order @key[is] (High_Order_First, Low_Order_First);
    Default_Bit_Order : @key[constant] Bit_Order;
 
 
-   --@i{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
-   @key{subtype} Any_Priority @key{is} Integer @key{range} @i{implementation-defined};
-   @key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @i{implementation-defined};
+   --@RI{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
+   @key{subtype} Any_Priority @key{is} Integer @key{range} @RI{implementation-defined};
+   @key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @RI{implementation-defined};
    @key{subtype} Interrupt_Priority @key{is} Any_Priority @key{range} Priority'Last+1 .. Any_Priority'Last;
 
    Default_Priority : @key{constant} Priority := (Priority'First + Priority'Last)/2;
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] System;
 @end{Example}
 
@@ -3138,22 +3120,22 @@ The following language-defined library package exists:
    @key{pragma} Preelaborate(System.Storage_Elements);
 
 @LangDefType{Package=[System.Storage_Elements],Type=[Storage_Offset]}
-   @key[type] Storage_Offset @key[is] @key[range] @i(implementation-defined);
+   @key[type] Storage_Offset @key[is] @key[range] @RI(implementation-defined);
 @Defn2{Term=[Storage_Count], Sec=(subtype in package System.Storage_Elements)}
 
    @key[subtype] Storage_Count @key[is] Storage_Offset @key[range] 0..Storage_Offset'Last;
-@Hinge{}
+
 
 @LangDefType{Package=[System.Storage_Elements],Type=[Storage_Element]}
-   @key[type] Storage_Element @key[is] @key[mod] @i{implementation-defined};
+   @key[type] Storage_Element @key[is] @key[mod] @RI{implementation-defined};
    @key[for] Storage_Element'Size @key[use] Storage_Unit;
 @LangDefType{Package=[System.Storage_Elements],Type=[Storage_Array]}
    @key[type] Storage_Array @key[is] @key[array]
      (Storage_Offset @key[range] <>) @key[of] @key[aliased] Storage_Element;
    @key[for] Storage_Array'Component_Size @key[use] Storage_Unit;
-@Hinge{}
 
-   --@i{ @Defn2{Term=[address], Sec=(arithmetic)}Address Arithmetic:}
+
+   --@RI{ @Defn2{Term=[address], Sec=(arithmetic)}Address Arithmetic:}
 
    @key(function) "+"(Left : Address; Right : Storage_Offset)
      @key(return) Address;
@@ -3163,22 +3145,22 @@ The following language-defined library package exists:
      @key(return) Address;
    @key(function) "-"(Left, Right : Address)
      @key(return) Storage_Offset;
-@Hinge{}
+
 
    @key(function) "@key(mod)"(Left : Address; Right : Storage_Offset)
      @key(return) Storage_Offset;
-@Hinge{}
 
-   --@i{ Conversion to/from integers:}
+
+   --@RI{ Conversion to/from integers:}
 
 @LangDefType{Package=[System.Storage_Elements],Type=[Integer_Address]}
-   @key[type] Integer_Address @key[is] @i{implementation-defined};
+   @key[type] Integer_Address @key[is] @RI{implementation-defined};
    @key[function] To_Address(Value : Integer_Address) @key[return] Address;
    @key[function] To_Integer(Value : Address) @key[return] Integer_Address;
-@Hinge{}
+
 
    @key[pragma] Convention(Intrinsic, "+");
-      @i(-- ...and so on for all language-defined subprograms declared in this package.)
+      @RI(-- ...and so on for all language-defined subprograms declared in this package.)
 @key[end] System.Storage_Elements;
 @end{Example}
 @begin{Reason}
@@ -3366,11 +3348,9 @@ the restriction might have to be detected at run time in some cases.
 @LabeledClause{Machine Code Insertions}
 
 @begin{Intro}
-@redundant[
-@Defn{machine code insertion}
+@redundant[@Defn{machine code insertion}
 A machine code insertion can be achieved by a call to a subprogram whose
-@nt{sequence_of_statements} contains @nt{code_statement}s.
-]
+@nt{sequence_of_statements} contains @nt{code_statement}s.]
 @end{Intro}
 
 @begin{Syntax}
@@ -3461,10 +3441,10 @@ M : Mask;
 @key[procedure] Set_Mask; @key[pragma] Inline(Set_Mask);
 
 @key[procedure] Set_Mask @key[is]
-  @key[use] System.Machine_Code; --@i{ assume ``@key[with] System.Machine_Code;'' appears somewhere above}
+  @key[use] System.Machine_Code; --@RI{ assume ``@key[with] System.Machine_Code;'' appears somewhere above}
 @key[begin]
   SI_Format'(Code => SSM, B => M'Base_Reg, D => M'Disp);
-  --@i{  Base_Reg and Disp are implementation-defined attributes}
+  --@RI{  Base_Reg and Disp are implementation-defined attributes}
 @key[end] Set_Mask;
 @end{Example}
 @end{Examples}
@@ -3485,15 +3465,13 @@ overspecification.
 @LabeledClause{Unchecked Type Conversions}
 
 @begin{Intro}
-@redundant[
-@Defn{unchecked type conversion}
+@redundant[@Defn{unchecked type conversion}
 @Defn2{Term=[type conversion], Sec=(unchecked)}
 @Defn2{Term=[conversion], Sec=(unchecked)}
 @IndexSeeAlso{Term=[type_conversion],See=(unchecked type conversion)}
 @IndexSee{Term=[cast],See=(unchecked type conversion)}
 An unchecked type conversion can be achieved by a call to an instance
-of the generic function Unchecked_Conversion.
-]
+of the generic function Unchecked_Conversion.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -3786,8 +3764,8 @@ Consider the following example:
 @key[type] My_Int @key[is] @key[range] 0..99;
 @key[function] Safe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Integer);
 @key[function] Unsafe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Positive);
-X : Positive := Safe_Convert(0); --@i{ Raises Constraint_Error.}
-Y : Positive := Unsafe_Convert(0); --@i{ Erroneous.}
+X : Positive := Safe_Convert(0); --@RI{ Raises Constraint_Error.}
+Y : Positive := Unsafe_Convert(0); --@RI{ Erroneous.}
 @end{Example}
 
 The call to Unsafe_Convert causes erroneous execution.
@@ -3954,11 +3932,9 @@ X'Valid is new in Ada 9X.
 @LabeledClause{Unchecked Access Value Creation}
 
 @begin{Intro}
-@redundant[
-The attribute Unchecked_Access is used to create access values
+@redundant[The attribute Unchecked_Access is used to create access values
 in an unsafe manner @em the programmer is responsible for preventing
-``dangling references.''
-]
+``dangling references.'']
 @end{Intro}
 
 @begin{StaticSem}
@@ -4108,7 +4084,7 @@ The following language-defined library package exists:
         @key[return] Storage_Elements.Storage_Count @key[is] @key[abstract];
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] System.Storage_Pools;
 @end{Example}
 @begin{Reason}
@@ -4484,8 +4460,8 @@ MR_Pool : Mark_Release_Pool_Type (Pool_Size => 2000,
 ...
 
 Mark(MR_Pool);
-... --@i{ Allocate objects using ``@key[new] Designated(...)''.}
-Release(MR_Pool); --@i{ Reclaim the storage.}
+... --@RI{ Allocate objects using ``@key[new] Designated(...)''.}
+Release(MR_Pool); --@RI{ Reclaim the storage.}
 @end{Example}
 @end{Examples}
 
@@ -4513,10 +4489,8 @@ objects incorrectly by missing various cases.
 @LabeledSubClause{The Max_Size_In_Storage_Elements Attribute}
 
 @begin{Intro}
-@redundant[
-The Max_Size_In_Storage_Elements attribute is useful in writing user-defined pool
-types.
-]
+@redundant[The Max_Size_In_Storage_Elements attribute is useful in writing user-defined pool
+types.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -4540,16 +4514,14 @@ S'Max_Size_In_Storage_Elements might be very large.
 @LabeledSubClause{Unchecked Storage Deallocation}
 
 @begin{Intro}
-@redundant[
-@Defn{unchecked storage deallocation}
+@redundant[@Defn{unchecked storage deallocation}
 @Defn2{Term=[storage deallocation], Sec=(unchecked)}
 @Defn{deallocation of storage}
 @Defn{reclamation of storage}
 @Defn{freeing storage}
 Unchecked storage deallocation of an object designated by a value of an
 access type is achieved by a call to an instance of
-the generic procedure Unchecked_Deallocation.
-]
+the generic procedure Unchecked_Deallocation.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -4576,7 +4548,7 @@ declared as follows:
 @begin{Example}
 @key[procedure] Free @key[is]
     @key[new] Ada.Unchecked_Deallocation(
-        @i[object_subtype_name], @i[access_to_variable_subtype_name]);
+        @RI[object_subtype_name], @RI[access_to_variable_subtype_name]);
 @end{Example}
 
 Procedure Free has the following effect:
@@ -4782,13 +4754,13 @@ those controlled objects.
     @key[procedure] Non_Reentrant @key[is]
     @key[begin]
         X := X + 1;
-        --@i{ If the system decides to do a garbage collection here,}
-        --@i{ then we're in trouble, because it will call Finalize on}
-        --@i{ the collected objects; we essentially have two threads}
-        --@i{ of control erroneously accessing shared variables.}
-        --@i{ The garbage collector behaves like a separate thread}
-        --@i{ of control, even though the user hasn't declared}
-        --@i{ any tasks.}
+        --@RI{ If the system decides to do a garbage collection here,}
+        --@RI{ then we're in trouble, because it will call Finalize on}
+        --@RI{ the collected objects; we essentially have two threads}
+        --@RI{ of control erroneously accessing shared variables.}
+        --@RI{ The garbage collector behaves like a separate thread}
+        --@RI{ of control, even though the user hasn't declared}
+        --@RI{ any tasks.}
         A(X) := ...;
     @key[end] Non_Reentrant;
 
@@ -4801,8 +4773,8 @@ those controlled objects.
 @key[with] P; @key[use] P;
 @key[procedure] Main @key[is]
 @key[begin]
-    ... @key[new] My_Controlled ... --@i{ allocate some objects}
-    ... @i{ forget the pointers to some of them, so they become garbage}
+    ... @key[new] My_Controlled ... --@RI{ allocate some objects}
+    ... @RI{ forget the pointers to some of them, so they become garbage}
     Non_Reentrant;
 @key[end] Main;
   @end{Example}
@@ -4864,12 +4836,10 @@ accessible to people outside the Ada world.
 @LabeledClause{Pragma Restrictions}
 
 @begin{Intro}
-@redundant[
-A @nt{pragma} Restrictions expresses the user's intent to abide by
+@redundant[A @nt{pragma} Restrictions expresses the user's intent to abide by
 certain restrictions.
 This may facilitate the construction of
-simpler run-time environments.
-]
+simpler run-time environments.]
 @end{Intro}
 
 @begin{Syntax}
@@ -4997,8 +4967,8 @@ or can call the Read and Write attributes of other types.)
 @LangDefType{Package=[Ada.Streams],Type=[Root_Stream_Type]}
     @key[type] Root_Stream_Type @key[is] @key[abstract tagged limited private];
 
-    @key[type] Stream_Element @key[is] @key[mod] @i{implementation-defined};
-    @key[type] Stream_Element_Offset @key[is] @key[range] @i{implementation-defined};
+    @key[type] Stream_Element @key[is] @key[mod] @RI{implementation-defined};
+    @key[type] Stream_Element_Offset @key[is] @key[range] @RI{implementation-defined};
     @key[subtype] Stream_Element_Count @key[is]
         Stream_Element_Offset @key[range] 0..Stream_Element_Offset'Last;
     @key[type] Stream_Element_Array @key[is]
@@ -5014,7 +4984,7 @@ or can call the Read and Write attributes of other types.)
       Item   : @key[in] Stream_Element_Array) @key[is abstract];
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Streams;
 @end{example}
 
@@ -5047,8 +5017,8 @@ the following attributes are defined.
   Text=<S'Write denotes a procedure with the following specification:
 @begin{DescExample}
 @key(procedure) S'Write(
-   @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
-   @i{Item} : @key{in} @i(T))
+   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Item} : @key{in} @RI(T))
 @end{DescExample}
 
 @noprefix@;S'Write writes the value of @i{Item} to @i{Stream}.>}
@@ -5057,8 +5027,8 @@ the following attributes are defined.
   Text=<S'Read denotes a procedure with the following specification:
 @begin{DescExample}
 @key(procedure) S'Read(
-   @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
-   @i{Item} : @key{out} @i(T))
+   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Item} : @key{out} @RI(T))
 @end{DescExample}
 
 @noprefix@;S'Read reads the value of @i{Item} from @i{Stream}.>}
@@ -5110,8 +5080,8 @@ For @PrefixType{every subtype S'Class of a class-wide type
 specification:
 @begin{DescExample}
 @key(procedure) S'Class'Write(
-   @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
-   @i{Item}   : @key{in} @i(T)'Class)
+   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Item}   : @key{in} @RI(T)'Class)
 @end{DescExample}
 
 @noprefix@;Dispatches to the subprogram denoted by the Write attribute of
@@ -5121,8 +5091,8 @@ the specific type identified by the tag of Item.>}
   Text=<S'Class'Read denotes a procedure with the following specification:
 @begin{DescExample}
 @key(procedure) S'Class'Read(
-   @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
-   @i{Item} : @key{out} @i(T)'Class)
+   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Item} : @key{out} @RI(T)'Class)
 @end{DescExample}
 
 @noprefix@;Dispatches to the subprogram denoted by the Read attribute of
@@ -5156,8 +5126,8 @@ the following attributes are defined.
   Text=<S'Output denotes a procedure with the following specification:
 @begin{DescExample}
 @key(procedure) S'Output(
-   @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
-   @i{Item} : @key{in} @i(T))
+   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Item} : @key{in} @RI(T))
 @end{DescExample}
 
 @noprefix@;S'Output writes the value of @i{Item} to @i{Stream}, including
@@ -5171,8 +5141,8 @@ first subtype is constrained.
   Text=<S'Input denotes a function with the following specification:
 @begin{DescExample}
 @key(function) S'Input(
-   @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)
-   @key(return) @i(T)
+   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)
+   @key(return) @RI(T)
 @end{DescExample}
 
 @noprefix@;S'Input reads and returns one value from
@@ -5204,8 +5174,8 @@ For @PrefixType{every subtype S'Class of a class-wide type
 specification:
 @begin{DescExample}
 @key(procedure) S'Class'Output(
-   @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
-   @i{Item}   : @key{in} @i(T)'Class)
+   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Item}   : @key{in} @RI(T)'Class)
 @end{DescExample}
 
 @noprefix@;First writes the external tag of @i{Item} to @i{Stream}
@@ -5218,8 +5188,8 @@ the specific type identified by the tag.>}
   Text=<S'Class'Input denotes a function with the following specification:
 @begin{DescExample}
 @key(function) S'Class'Input(
-   @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)
-   @key{return} @i(T)'Class
+   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)
+   @key{return} @RI(T)'Class
 @end{DescExample}
 
 @noprefix@;First reads the external tag from @i{Stream} and determines
@@ -5304,16 +5274,16 @@ class-wide types descended from S.
 @key(generic)
     @key(type) Msg_Type(<>) @key(is private);
 @key(package) Network_IO @key(is)
-    @i[-- Connect/Disconnect are used to establish the stream]
+    @RI[-- Connect/Disconnect are used to establish the stream]
     @key(procedure) Connect(...);
     @key(procedure) Disconnect(...);
 
-    @i[-- Send/Receive transfer messages across the network]
+    @RI[-- Send/Receive transfer messages across the network]
     @key(procedure) Send(X : @key[in] Msg_Type);
     @key(function) Receive @key(return) Msg_Type;
 @key(private)
     @key(type) Network_Stream @key(is new) Root_Stream_Type @key(with) ...
-    @key(procedure) Read(...);  @i[-- define Read/Write for Network_Stream]
+    @key(procedure) Read(...);  @RI[-- define Read/Write for Network_Stream]
     @key(procedure) Write(...);
 @key(end) Network_IO;
 
@@ -5341,8 +5311,7 @@ class-wide types descended from S.
 @LabeledClause{Freezing Rules}
 
 @begin{Intro}
-@redundant[
-This clause defines
+@redundant[This clause defines
 a place in the program text where each declared entity becomes
 ``frozen.''
 A use of an entity, such as a reference to it by name,
@@ -5350,8 +5319,7 @@ or (for a type) an expression of the type,
 causes freezing of the entity in some contexts,
 as described below.
 The @LegalityTitle forbid certain kinds of uses of an entity
-in the region of text where it is frozen.
-]
+in the region of text where it is frozen.]
 @begin{Reason}
 This concept has two purposes: a compile-time one and a run-time one.
 
@@ -5469,7 +5437,7 @@ Here's an example (modified from AI-00039, Example 3):
     @key[end] @key[record];
 @key[function] F @key[return] T;
 @key[function] G(X : T) @key[return] Boolean;
-Y : Boolean := G(F); --@i{ doesn't force T in Ada 83}
+Y : Boolean := G(F); --@RI{ doesn't force T in Ada 83}
 @key[for] T @key[use]
     @key[record]
         ...
@@ -5486,7 +5454,7 @@ Here's a similar example, which AI-00039 also says is legal:
     @key[type] T @key[is] @key[private];
     @key[function] F @key[return] T;
     @key[function] G(X : T) @key[return] Boolean;
-    Y : Boolean := G(F); --@i{ doesn't force T in Ada 83}
+    Y : Boolean := G(F); --@RI{ doesn't force T in Ada 83}
 @key[private]
     @key[type] T @key[is]
         @key[record]
@@ -5735,7 +5703,7 @@ then all ancestor types are also frozen.
     @key[type] A1 @key[is] @key[access] Boolean;
     @key[type] A2 @key[is] @key[new] A1;
     @key[type] A3 @key[is] @key[new] A2;
-    X : A3 := @key[new] Boolean; --@i{ Don't know what pool yet!}
+    X : A3 := @key[new] Boolean; --@RI{ Don't know what pool yet!}
     @key[for] A1'Storage_Pool @key[use] F.all;
 @key[end] P;
 @end{Example}
@@ -5940,7 +5908,7 @@ It seems like the wording allows things like this:
 @begin{Example}
 @key[type] A @key[is] @key[array](Integer @key[range] 1..10) @key[of] Boolean;
 @key[subtype] S @key[is] Integer @key[range] A'Range;
-    --@i{ not forcing for A}
+    --@RI{ not forcing for A}
 @end{Example}
 
 Occurrences within @nt{pragma}s can cause freezing in Ada 9X.
@@ -5957,8 +5925,8 @@ For example:
     @key[type] T @key[is] @key[tagged] @key[limited] @key[private];
     @key[generic]
         @key[type] T2 @key[is]
-            @key[new] T @key[with] @key[private]; --@i{ Does not freeze T}
-                                --@i{ in Ada 9X.}
+            @key[new] T @key[with] @key[private]; --@RI{ Does not freeze T}
+                                --@RI{ in Ada 9X.}
     @key[package] Inner @key[is]
         ...
     @key[end] Inner;

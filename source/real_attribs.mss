@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:28 $}
+@Comment{$Date: 2000/05/27 04:44:02 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.13 $}
+@comment{$Revision: 1.14 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -24,8 +24,8 @@ The values of other representation-oriented attributes of a floating point
 subtype, and of the ``primitive function'' attributes of a floating point
 subtype described later, are defined in terms of a particular representation
 of nonzero values called the @i{canonical form}.
-The canonical form (for the type @i{T}) is the form
-@MathDisplay{@PorM mantissa @Times T@r['Machine_Radix]@Up{exponent}}
+The canonical form (for the type @i{T}) is the form@*
+@ @ @ @ @PorM @RI{mantissa} @Times @RI{T}@R['Machine_Radix]@+{@RI{exponent}}@*
 where
 @begin{Itemize}
    @i{mantissa} is a fraction in the number base @i{T}'Machine_Radix,
@@ -35,8 +35,8 @@ where
 @end{Itemize}
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Machine_Mantissa>,
-  Text=[Yields the largest value of @Math{p} such that every value expressible
-   in the canonical form (for the type @i{T}), having a @Math{p}-digit
+  Text=[Yields the largest value of @RI{p} such that every value expressible
+   in the canonical form (for the type @i{T}), having a @RI{p}-digit
    @i{mantissa} and an @i{exponent} between @i{T}'Machine_Emin and
    @i{T}'Machine_Emax, is a machine number (see @RefSecNum{Floating Point Types})
    of the type @i{T}.  This attribute yields a value of the type
@@ -72,8 +72,8 @@ where
 @end{Ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Denorm>,
-  Text=[Yields the value True if every value expressible in the form
-   @MathDisplay{@PorM mantissa @Times T@r{'Machine_Radix}@Up{T@r{'Machine_Emin}}}
+  Text=[Yields the value True if every value expressible in the form@*
+   @ @ @ @ @PorM @RI{mantissa} @Times @RI{T}@R{'Machine_Radix}@+{@RI{T}@R{'Machine_Emin}}@*
    where @i{mantissa} is a nonzero @i{T}'Machine_Mantissa-digit fraction in the
    number base @i{T}'Machine_Radix, the first digit of which is zero,
    is a machine number (see @RefSecNum{Floating Point Types}) of the type
@@ -95,11 +95,11 @@ A nonzero machine number that is not a denormalized number is a
 @end{Discussion}
 @Defn{represented in canonical form}
 @Defn{canonical-form representation}
-A normalized number @Math{x} of a given type @i{T} is said to be
+A normalized number @RI{x} of a given type @i{T} is said to be
 @i{represented in canonical form} when it is expressed in the
 canonical form (for the type @i{T}) with a @i{mantissa}
 having @i{T}'Machine_Mantissa digits;
-the resulting form is the @i{canonical-form representation} of @Math{x}.
+the resulting form is the @i{canonical-form representation} of @RI{x}.
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Machine_Rounds>,
   Text=[Yields the value True if rounding is performed on inexact
@@ -149,19 +149,19 @@ the resulting form is the @i{canonical-form representation} of @Math{x}.
 @end{Description}
 
 @Defn{normalized exponent}
-For every value @Math{x} of a floating point type @i{T}, the
-@i{normalized exponent} of @Math{x} is defined as follows:
+For every value @RI{x} of a floating point type @i{T}, the
+@i{normalized exponent} of @RI{x} is defined as follows:
 @begin{Itemize}
    the normalized exponent of zero is (by convention) zero;
 
-   for nonzero @Math{x}, the normalized exponent of @Math{x} is the unique
-   integer @Math{k} such that
-   @Math{T@r['Machine_Radix]@Up{k-1} @leq @Abs{x} @Lt
-   T@r['Machine_Radix]@Up{k}}.
+   for nonzero @RI{x}, the normalized exponent of @RI{x} is the unique
+   integer @RI{k} such that
+   @RI{T}@R['Machine_Radix]@+{@RI{k}-1} @leq @Abs{@RI{x}} @Lt
+   @RI{T}@R['Machine_Radix]@+{@RI{k}}.
 @end{Itemize}
 @begin{Ramification}
-   The normalized exponent of a normalized number @Math{x} is the value
-   of @i{exponent} in the canonical-form representation of @Math{x}.
+   The normalized exponent of a normalized number @RI{x} is the value
+   of @i{exponent} in the canonical-form representation of @RI{x}.
 
    The normalized exponent of a denormalized number is less than the value of
    @i{T}'Machine_Emin.
@@ -175,8 +175,8 @@ S of a floating point type @i{T}.
   Text=[S'Exponent denotes a function with the following
    specification:
 @begin(DescExample)
-@key(function) S'Exponent (@i(X) : @i(T))
-  @key(return) @i(universal_integer)
+@key(function) S'Exponent (@RI(X) : @RI(T))
+  @key(return) @RI(universal_integer)
 @end(DescExample)
 
    @NoPrefix@;The function yields the normalized exponent of @i{X}.]}
@@ -185,12 +185,12 @@ S of a floating point type @i{T}.
   Text=[S'Fraction denotes a function with the following
    specification:
 @begin(DescExample)
-@key(function) S'Fraction (@i(X) : @i(T))
-  @key(return) @i(T)
+@key(function) S'Fraction (@RI(X) : @RI(T))
+  @key(return) @RI(T)
 @end(DescExample)
 
-   @NoPrefix@;The function yields the value @Math(X @Times T@r('Machine_Radix)@Up(-k)), where
-   @Math(k) is the normalized exponent of @i(X).  A zero result@Redundant(, which
+   @NoPrefix@;The function yields the value @RI(X) @Times @RI(T)@R('Machine_Radix)@+(-@RI(k)), where
+   @RI(k) is the normalized exponent of @i(X).  A zero result@Redundant(, which
    can only occur when @i(X) is zero,) has the sign of @i(X).]}
 @begin{Discussion}
    Informally, when @i{X} is a normalized number, the result is the value
@@ -213,25 +213,25 @@ S of a floating point type @i{T}.
   Text=[S'Compose denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Compose (@i{Fraction} : @i{T};
-                    @i{Exponent} : @i{universal_integer})
-  @key(return) @i{T}
+@key(function) S'Compose (@RI{Fraction} : @RI{T};
+                    @RI{Exponent} : @RI{universal_integer})
+  @key(return) @RI{T}
 @end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;Let @Math{v} be the value @Math{Fraction @Times
-   T@r('Machine_Radix)@Up{Exponent-k}},
-   where @Math{k} is the normalized exponent of @i{Fraction}.
-   If @Math{v} is a machine number of the type @i{T}, or if
-   @Math{@Abs{v} @geq T@r('Model_Small)}, the function yields @Math{v};
+   @NoPrefix@;Let @RI{v} be the value @RI{Fraction} @Times
+   @RI{T}@R('Machine_Radix)@+{@RI{Exponent}-@RI{k}},
+   where @RI{k} is the normalized exponent of @i{Fraction}.
+   If @RI{v} is a machine number of the type @i{T}, or if
+   @Abs{@RI{v}} @geq @RI{T}@R('Model_Small), the function yields @RI{v};
    otherwise,
    it yields either one of the machine numbers of the type @i{T} adjacent to
-   @Math{v}.
+   @RI{v}.
    @IndexCheck{Range_Check}Constraint_Error is optionally raised if
-   @Math{v} is outside the base range of S.
+   @RI{v} is outside the base range of S.
    A zero result has the sign of @i{Fraction} when S'Signed_Zeros is True.]}
 @begin{Discussion}
-   Informally, when @i{Fraction} and @Math{v} are both normalized numbers, the
+   Informally, when @i{Fraction} and @RI{v} are both normalized numbers, the
    result is the value obtained by replacing the @i{exponent} by @i{Exponent}
    in the canonical-form representation of @i{Fraction}.
 @end{Discussion}
@@ -245,23 +245,23 @@ S of a floating point type @i{T}.
   Text=[S'Scaling denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Scaling (@i{X} : @i{T};
-                    @i{Adjustment} : @i{universal_integer})
-  @key(return) @i{T}
+@key(function) S'Scaling (@RI{X} : @RI{T};
+                    @RI{Adjustment} : @RI{universal_integer})
+  @key(return) @RI{T}
 @end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;Let @Math{v} be the value @Math{X @Times T@r('Machine_Radix)@Up{Adjustment}}.
-   If @Math{v} is a machine number of the type @i{T}, or if
-   @Math{@Abs{v} @geq T@r('Model_Small)}, the function yields @Math{v};
+   @NoPrefix@;Let @RI{v} be the value @RI{X} @Times @RI{T}@R('Machine_Radix)@+{@RI{Adjustment}}.
+   If @RI{v} is a machine number of the type @i{T}, or if
+   @Abs{@RI{v}} @geq @RI{T}@R('Model_Small), the function yields @RI{v};
    otherwise,
    it yields either one of the machine numbers of the type @i{T} adjacent to
-   @Math{v}.
+   @RI{v}.
 @IndexCheck{Range_Check}Constraint_Error is optionally raised if
-@Math{v} is outside the base range of S.
+@RI{v} is outside the base range of S.
    A zero result has the sign of @i{X} when S'Signed_Zeros is True.]}
 @begin{Discussion}
-   Informally, when @i{X} and @Math{v} are both normalized numbers, the result
+   Informally, when @i{X} and @RI{v} are both normalized numbers, the result
    is the value obtained by increasing the @i{exponent} by @i{Adjustment} in the
    canonical-form representation of @i{X}.
 @end{Discussion}
@@ -276,11 +276,11 @@ S of a floating point type @i{T}.
   Text=[S'Floor denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Floor (@i{X} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Floor (@RI{X} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@;The function yields the value @Math{@Floor{X}},
+   @NoPrefix@;The function yields the value @Floor{@RI{X}},
    i.e., the largest (most positive) integral value less than or equal to
    @i{X}.
    When @i{X} is zero, the
@@ -291,11 +291,11 @@ S of a floating point type @i{T}.
   Text=[S'Ceiling denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Ceiling (@i{X} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Ceiling (@RI{X} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@;The function yields the value @Math{@Ceiling{X}},
+   @NoPrefix@;The function yields the value @Ceiling{@RI{X}},
    i.e., the smallest (most negative) integral value greater than or equal to
    @i{X}.
    When @i{X} is zero, the
@@ -306,8 +306,8 @@ S of a floating point type @i{T}.
   Text=[S'Rounding denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Rounding (@i{X} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Rounding (@RI{X} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
    @NoPrefix@;The function yields the integral value nearest to @i{X},
@@ -318,8 +318,8 @@ S of a floating point type @i{T}.
   Text=[S'Unbiased_Rounding denotes a function with
    the following specification:
 @begin{DescExample}
-@key(function) S'Unbiased_Rounding (@i{X} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Unbiased_Rounding (@RI{X} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
    @NoPrefix@;The function yields the integral value nearest to @i{X},
@@ -331,28 +331,28 @@ S of a floating point type @i{T}.
   Text=[S'Truncation denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Truncation (@i{X} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Truncation (@RI{X} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@;The function yields the value @Math{@Ceiling{X}} when @i{X} is negative,
-   and @Math{@Floor{X}} otherwise.  A zero result has the sign of @i{X} when
+   @NoPrefix@;The function yields the value @Ceiling{@RI{X}} when @i{X} is negative,
+   and @Floor{@RI{X}} otherwise.  A zero result has the sign of @i{X} when
    S'Signed_Zeros is True.]}
 
 @Attribute{Prefix=<S>, AttrName=<Remainder>,
   Text=[S'Remainder denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Remainder (@i{X}, @i{Y} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Remainder (@RI{X}, @RI{Y} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;For nonzero @i{Y}, let @Math{v} be the value
-   @Math{X - n @Times Y}, where @Math{n} is the integer nearest to
-   the exact value of @Math{X/Y}; if @Math{@Abs{n - X/Y} @Thin = @Thin 1/2},
-   then @Math(n) is chosen to be even.  If @Math{v} is a machine number of
-   the type @i{T}, the function yields @Math{v}; otherwise, it yields zero.
+   @NoPrefix@;For nonzero @i{Y}, let @RI{v} be the value
+   @RI{X} - @RI{n} @Times @RI{Y}, where @RI{n} is the integer nearest to
+   the exact value of @RI{X}/@RI{Y}; if @Abs{@RI{n} - @RI{X}/@RI{Y}} @Thin = @Thin 1/2,
+   then @RI(n) is chosen to be even.  If @RI{v} is a machine number of
+   the type @i{T}, the function yields @RI{v}; otherwise, it yields zero.
 @IndexCheck{Division_Check}Constraint_Error is raised if @i{Y} is zero.
    A zero result has the sign of @i{X} when S'Signed_Zeros is True.]}
 @begin{Ramification}
@@ -360,7 +360,7 @@ S of a floating point type @i{T}.
    of @i{Y}.
 @end{Ramification}
 @begin{Discussion}
-   Given machine numbers @i{X} and @i{Y} of the type @i{T}, @Math{v} is
+   Given machine numbers @i{X} and @i{Y} of the type @i{T}, @RI{v} is
    necessarily a machine number of the type @i{T}, except when @i{Y} is in the
    neighborhood of zero, @i{X} is sufficiently close to a multiple of @i{Y},
    and @i{T}'Denorm is False.
@@ -370,12 +370,12 @@ S of a floating point type @i{T}.
   Text=[S'Adjacent denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Adjacent (@i{X}, @i{Towards} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Adjacent (@RI{X}, @RI{Towards} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;If @Math{Towards @Thin = @Thin X}, the function yields @i{X}; otherwise, it
+   @NoPrefix@;If @RI{Towards} @Thin = @Thin @RI{X}, the function yields @i{X}; otherwise, it
    yields the machine number of the type @i{T} adjacent to @i{X} in the
    direction of @i{Towards}, if that machine number exists.
    @IndexCheck{Range_Check}If the result would
@@ -392,8 +392,8 @@ S of a floating point type @i{T}.
   Text=[S'Copy_Sign denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Copy_Sign (@i{Value}, @i{Sign} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Copy_Sign (@RI{Value}, @RI{Sign} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
@@ -418,19 +418,19 @@ is outside the base range of S.
   Text=[S'Leading_Part denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Leading_Part (@i{X} : @i{T};
-                         @i{Radix_Digits} : @i{universal_integer})
-  @key(return) @i{T}
+@key(function) S'Leading_Part (@RI{X} : @RI{T};
+                         @RI{Radix_Digits} : @RI{universal_integer})
+  @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@;Let @Math{v} be the value @Math{T@r('Machine_Radix)@Up{k-Radix_Digits}},
-   where @Math{k} is the normalized exponent of @i{X}.  The function yields
+   @NoPrefix@;Let @RI{v} be the value @RI{T}@R('Machine_Radix)@+{@RI{k}-@RI{Radix_Digits}},
+   where @RI{k} is the normalized exponent of @i{X}.  The function yields
    the value
    @begin{Itemize}
-      @Math{@Floor{X/v} @Times v},
+      @Floor{@RI{X}/@RI{v}} @Times @RI{v},
       when @i{X} is nonnegative and @i{Radix_Digits} is positive;
 
-      @Math{@Ceiling{X/v} @Times v},
+      @Ceiling{@RI{X}/@RI{v}} @Times @RI{v},
       when @i{X} is negative and @i{Radix_Digits} is positive.
    @end{Itemize}
 
@@ -455,8 +455,8 @@ is outside the base range of S.
   Text=[S'Machine denotes a function with the following
    specification:
 @begin{DescExample}
-@key(function) S'Machine (@i{X} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Machine (@RI{X} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
@@ -506,8 +506,8 @@ a floating point type @i{T}.
   Text=[If the Numerics Annex is not supported,
    this attribute yields an implementation defined value that is
    greater than or equal to
-   @Math{@Ceiling{d @Times @Log(10) / @Log(T'@r{Machine_Radix})} + 1}, where
-   @Math{d} is the requested decimal precision of @i{T},
+   @Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + 1, where
+   @RI{d} is the requested decimal precision of @i{T},
    and less than or equal to the value of
    @i{T}'Machine_Mantissa.
    See @RefSecNum{Model-Oriented Attributes of Floating Point Types}
@@ -531,7 +531,7 @@ a floating point type @i{T}.
 
 @Attribute{Prefix=<S>, AttrName=<Model_Epsilon>,
   Text=[Yields the value
-   @Math{T@r('Machine_Radix)@Up{1 - T@r('Model_Mantissa)}}.  The value of this
+   @RI{T}@R('Machine_Radix)@+{1 - @RI{T}@R('Model_Mantissa)}.  The value of this
    attribute is of the type @i{universal_real}.]}
 @begin{Discussion}
    In most implementations, this attribute yields the absolute value of the
@@ -543,7 +543,7 @@ a floating point type @i{T}.
 
 @Attribute{Prefix=<S>, AttrName=<Model_Small>,
   Text=[Yields the value
-   @Math{T@r('Machine_Radix)@Up{T@r('Model_Emin) - 1}}.  The value of this
+   @RI{T}@R('Machine_Radix)@+{@RI{T}@R('Model_Emin) - 1}.  The value of this
    attribute is of the type @i{universal_real}.]}
 @begin{Discussion}
    In most implementations, this attribute yields the
@@ -561,8 +561,8 @@ a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Model>,
   Text=[S'Model denotes a function with the following specification:
 @begin{DescExample}
-@key(function) S'Model (@i{X} : @i{T})
-  @key(return) @i{T}
+@key(function) S'Model (@RI{X} : @RI{T})
+  @key(return) @RI{T}
 @end{DescExample}
 
    @NoPrefix@;If the Numerics Annex is not supported,

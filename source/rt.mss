@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:02 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/27 04:44:02 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -138,8 +138,8 @@ starts executing.
 
 The following declarations exist in package System:
 @begin{example}
-@key{subtype} Any_Priority @key{is} Integer @key{range} @i{implementation-defined};
-@key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @i{implementation-defined};
+@key{subtype} Any_Priority @key{is} Integer @key{range} @RI{implementation-defined};
+@key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @RI{implementation-defined};
 @key{subtype} Interrupt_Priority @key{is} Any_Priority @key{range} Priority'Last+1 .. Any_Priority'Last;
 
 Default_Priority : @key{constant} Priority := (Priority'First + Priority'Last)/2;
@@ -626,7 +626,7 @@ regardless of whether the active priority of the task actually changes.
 @begin{Intro}
 @Redundant[This clause specifies the interactions between priority task
 scheduling and protected object ceilings.  This interaction is based on
-the concept of the @I{ceiling priority} of a protected object.]
+the concept of the @i{ceiling priority} of a protected object.]
 @end{Intro}
 
 @begin{Syntax}
@@ -813,7 +813,7 @@ calls another protected operation on the same protected object).
 @begin{Intro}
 @Redundant[@Defn{queuing policy}
 This clause specifies a mechanism for a user to choose an entry
-@I{queuing policy}.  It also defines one such policy.  Other
+@i{queuing policy}.  It also defines one such policy.  Other
 policies are implementation defined.]
 @ImplDef{Implementation-defined queuing policies.}
 @end{Intro}
@@ -993,17 +993,17 @@ modified or queried at run time.]
 The following language-defined library package exists:
 @begin{Example}
 @key[with] System;
-@key[with] Ada.Task_Identification; @i{-- See @RefSecNum[The Package Task_Identification]}
+@key[with] Ada.Task_Identification; @RI{-- See @RefSecNum[The Package Task_Identification]}
 @ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities],Expanded=[Ada.Dynamic_Priorities]}
 @key[package] Ada.Dynamic_Priorities @key[is]
 
-    @key[procedure] Set_Priority(@^Priority : @key[in] System.Any_Priority;
-       @\T : @key[in] Ada.Task_Identification.Task_ID :=
-       @\Ada.Task_Identification.Current_Task);
+    @key[procedure] Set_Priority(Priority : @key[in] System.Any_Priority;
+                           T : @key[in] Ada.Task_Identification.Task_ID :=
+                           Ada.Task_Identification.Current_Task);
 
-    @key[function] Get_Priority (@^T : Ada.Task_Identification.Task_ID :=
-       @\Ada.Task_Identification.Current_Task)
-       @\@key[return] System.Any_Priority;
+    @key[function] Get_Priority (T : Ada.Task_Identification.Task_ID :=
+                           Ada.Task_Identification.Current_Task)
+                           @key[return] System.Any_Priority;
 
 @key[end] Ada.Dynamic_Priorities;
 @end{example}
@@ -1424,9 +1424,9 @@ The following language-defined library package exists:
   @key[type] Time @key[is] @key[private];
   Time_First : @key[constant] Time;
   Time_Last : @key[constant] Time;
-  Time_Unit : @key[constant] := @i{implementation-defined-real-number};
+  Time_Unit : @key[constant] := @RI{implementation-defined-real-number};
 
-@hinge()
+
 
 @LangDefType{Package=[Ada.Real_Time],Type=[Time_Span]}
   @key[type] Time_Span @key[is] @key[private];
@@ -1435,23 +1435,23 @@ The following language-defined library package exists:
   Time_Span_Zero : @key[constant] Time_Span;
   Time_Span_Unit : @key[constant] Time_Span;
 
-@hinge()
+
   Tick : @key[constant] Time_Span;
   @key[function] Clock @key[return] Time;
 
-@hinge()
+
   @key[function] "+" (Left : Time; Right : Time_Span) @key[return] Time;
   @key[function] "+" (Left : Time_Span; Right : Time) @key[return] Time;
   @key[function] "-" (Left : Time; Right : Time_Span) @key[return] Time;
   @key[function] "-" (Left : Time; Right : Time) @key[return] Time_Span;
 
-@hinge()
+
   @key[function] "<" (Left, Right : Time) @key[return] Boolean;
   @key[function] "<="(Left, Right : Time) @key[return] Boolean;
   @key[function] ">" (Left, Right : Time) @key[return] Boolean;
   @key[function] ">="(Left, Right : Time) @key[return] Boolean;
 
-@hinge()
+
   @key[function] "+" (Left, Right : Time_Span) @key[return] Time_Span;
   @key[function] "-" (Left, Right : Time_Span) @key[return] Time_Span;
   @key[function] "-" (Right : Time_Span) @key[return] Time_Span;
@@ -1462,29 +1462,29 @@ The following language-defined library package exists:
 
   @key[function] "@key[abs]"(Right : Time_Span) @key[return] Time_Span;
 
-@hinge()
+
   @key[function] "<" (Left, Right : Time_Span) @key[return] Boolean;
   @key[function] "<="(Left, Right : Time_Span) @key[return] Boolean;
   @key[function] ">" (Left, Right : Time_Span) @key[return] Boolean;
   @key[function] ">="(Left, Right : Time_Span) @key[return] Boolean;
 
-@hinge()
+
   @key[function] To_Duration (TS : Time_Span) @key[return] Duration;
   @key[function] To_Time_Span (D : Duration) @key[return] Time_Span;
 
-@hinge()
+
   @key[function] Nanoseconds  (NS : Integer) @key{return} Time_Span;
   @key[function] Microseconds (US : Integer) @key{return} Time_Span;
   @key[function] Milliseconds (MS : Integer) @key{return} Time_Span;
 
 @LangDefType{Package=[Ada.Real_Time],Type=[Seconds_Count]}
-  @key[type] Seconds_Count @key[is] @key[range] @I{implementation-defined};
+  @key[type] Seconds_Count @key[is] @key[range] @RI{implementation-defined};
 
   @key{procedure} Split(T : @key{in} Time; SC : @key{out} Seconds_Count; TS : @key{out} Time_Span);
   @key{function} Time_Of(SC : Seconds_Count; TS : Time_Span) @key{return} Time;
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Real_Time;
 @end{example}
 @ImplDef{Implementation-defined aspects of package Real_Time.}
@@ -1626,7 +1626,7 @@ used as the representation.
 Time_Span_First shall be no greater than @en@;3600 seconds, and
 Time_Span_Last shall be no less than 3600 seconds.
 @begin{Reason}
-This is equivalent to @Math{@PorM} one hour and there is still room for
+This is equivalent to @PorM one hour and there is still room for
 a two-microsecond resolution.
 @end{Reason}
 
@@ -1910,7 +1910,7 @@ The following language-defined package exists:
   @key{function} Current_State(S : Suspension_Object) @key{return} Boolean;
   @key{procedure} Suspend_Until_True(S : @key{in} @key{out} Suspension_Object);
 @key{private}
-     ... -- @i{not specified by the language}
+     ... -- @RI{not specified by the language}
 @key{end} Ada.Synchronous_Task_Control;
 @end{example}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/26 05:03:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/27 04:44:01 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:28 $}
+@Comment{$Date: 2000/05/27 04:44:01 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -90,7 +90,7 @@ Numerics.Generic_Complex_Types has the following declaration:
 
    i : @key{constant} Imaginary;
    j : @key{constant} Imaginary;
-@Hinge{}
+
 
    @key{function} Re (X : Complex)   @key{return} Real'Base;
    @key{function} Im (X : Complex)   @key{return} Real'Base;
@@ -118,42 +118,42 @@ Numerics.Generic_Complex_Types has the following declaration:
       @key{return} Complex;
    @key{function} Compose_From_Polar (Modulus, Argument, Cycle : Real'Base)
       @key{return} Complex;
-@Hinge{}
+
 
    @key{function} "+"       (Right : Complex) @key{return} Complex;
    @key{function} "-"       (Right : Complex) @key{return} Complex;
    @key{function} Conjugate (X     : Complex) @key{return} Complex;
-@Hinge{}
+
 
    @key{function} "+" (Left, Right : Complex) @key{return} Complex;
    @key{function} "-" (Left, Right : Complex) @key{return} Complex;
    @key{function} "*" (Left, Right : Complex) @key{return} Complex;
    @key{function} "/" (Left, Right : Complex) @key{return} Complex;
-@Hinge{}
+
 
    @key{function} "**" (Left : Complex; Right : Integer) @key{return} Complex;
-@Hinge{}
+
 
    @key{function} "+"       (Right : Imaginary) @key{return} Imaginary;
    @key{function} "-"       (Right : Imaginary) @key{return} Imaginary;
    @key{function} Conjugate (X     : Imaginary) @key{return} Imaginary @key{renames} "-";
    @key{function} "@key{abs}"     (Right : Imaginary) @key{return} Real'Base;
-@Hinge{}
+
 
    @key{function} "+" (Left, Right : Imaginary) @key{return} Imaginary;
    @key{function} "-" (Left, Right : Imaginary) @key{return} Imaginary;
    @key{function} "*" (Left, Right : Imaginary) @key{return} Real'Base;
    @key{function} "/" (Left, Right : Imaginary) @key{return} Real'Base;
-@Hinge{}
+
 
    @key{function} "**" (Left : Imaginary; Right : Integer) @key{return} Complex;
-@Hinge{}
+
 
    @key{function} "<"  (Left, Right : Imaginary) @key{return} Boolean;
    @key{function} "<=" (Left, Right : Imaginary) @key{return} Boolean;
    @key{function} ">"  (Left, Right : Imaginary) @key{return} Boolean;
    @key{function} ">=" (Left, Right : Imaginary) @key{return} Boolean;
-@Hinge{}
+
 
    @key{function} "+" (Left : Complex;   Right : Real'Base) @key{return} Complex;
    @key{function} "+" (Left : Real'Base; Right : Complex)   @key{return} Complex;
@@ -163,7 +163,7 @@ Numerics.Generic_Complex_Types has the following declaration:
    @key{function} "*" (Left : Real'Base; Right : Complex)   @key{return} Complex;
    @key{function} "/" (Left : Complex;   Right : Real'Base) @key{return} Complex;
    @key{function} "/" (Left : Real'Base; Right : Complex)   @key{return} Complex;
-@Hinge{}
+
 
    @key{function} "+" (Left : Complex;   Right : Imaginary) @key{return} Complex;
    @key{function} "+" (Left : Imaginary; Right : Complex)   @key{return} Complex;
@@ -173,7 +173,7 @@ Numerics.Generic_Complex_Types has the following declaration:
    @key{function} "*" (Left : Imaginary; Right : Complex)   @key{return} Complex;
    @key{function} "/" (Left : Complex;   Right : Imaginary) @key{return} Complex;
    @key{function} "/" (Left : Imaginary; Right : Complex)   @key{return} Complex;
-@Hinge{}
+
 
    @key{function} "+" (Left : Imaginary; Right : Real'Base) @key{return} Complex;
    @key{function} "+" (Left : Real'Base; Right : Imaginary) @key{return} Complex;
@@ -183,7 +183,7 @@ Numerics.Generic_Complex_Types has the following declaration:
    @key{function} "*" (Left : Real'Base; Right : Imaginary) @key{return} Imaginary;
    @key{function} "/" (Left : Imaginary; Right : Real'Base) @key{return} Imaginary;
    @key{function} "/" (Left : Real'Base; Right : Imaginary) @key{return} Imaginary;
-@Hinge{}
+
 
 @key[private]
 
@@ -233,7 +233,7 @@ Real'Base.}
    The Imaginary type and the constants i and j are provided for two reasons:
    @begin{itemize}
       They allow complex ``literals'' to be written in the alternate form of
-      @Math{a} + @Math{b}*i (or @Math{a} + @Math{b}*j), if desired.  Of course,
+      @RI{a} + @RI{b}*i (or @RI{a} + @RI{b}*j), if desired.  Of course,
       in some contexts the sum will need to be parenthesized.
 
       When an Ada binding to IEC 559:1989 that provides (signed) infinities
@@ -241,11 +241,11 @@ Real'Base.}
       important to allow arithmetic between pure-imaginary and complex operands
       without requiring the former to be represented as (or promoted to)
       complex values with a real component of zero.  For example, the
-      multiplication of @Math{a} + @Math{b}*i by @Math{d}*i should yield
-      @Math{-b@Times d} + @Math{a@Times d}*i, but if one cannot avoid representing the
-      pure-imaginary value @Math{d}*i as the complex value
-      0.0 + @Math{d}*i, then a NaN ("Not-a-Number") could be produced
-      as the result of multiplying @Math{a} by 0.0 (e.g., when @Math{a} is
+      multiplication of @RI{a} + @RI{b}*i by @RI{d}*i should yield
+      -@RI{b}@Times @RI{d} + @RI{a}@Times @RI{d}*i, but if one cannot avoid representing the
+      pure-imaginary value @RI{d}*i as the complex value
+      0.0 + @RI{d}*i, then a NaN ("Not-a-Number") could be produced
+      as the result of multiplying @RI{a} by 0.0 (e.g., when @RI{a} is
       infinite); the NaN could later trigger an exception.
       Providing the Imaginary type and overloadings of the
       arithmetic operators for mixtures of Imaginary and Complex operands
@@ -328,16 +328,16 @@ principal branch:
    The result of the Argument function is in the quadrant containing the point
    in the complex plane represented by the parameter X.  This may be any
    quadrant (I through IV); thus, the range of the Argument function is
-   approximately @Math{-@Pi} to @Math{@Pi}
-   (@Math{-@r[Cycle]/2.0} to @Math{@r[Cycle]/2.0}, if the parameter Cycle is
+   approximately -@Pi to @Pi
+   (-@R[Cycle]/2.0 to @R[Cycle]/2.0, if the parameter Cycle is
    specified).  When the point represented by the parameter X lies on the
    negative real axis, the result approximates
    @begin{InnerItemize}
-      @Math{@Pi} (resp., @Math{-@Pi}) when the sign of the imaginary
+      @Pi (resp., -@Pi) when the sign of the imaginary
       component of X is positive (resp., negative), if Real'Signed_Zeros is
       True;
 
-      @Math{@Pi}, if Real'Signed_Zeros is False.
+      @Pi, if Real'Signed_Zeros is False.
    @end{InnerItemize}
 
    Because a result lying on or near one of the axes may not be exactly
@@ -565,25 +565,25 @@ Numerics.Generic_Complex_Elementary_Functions has the following declaration:
    @key[function] "**" (Left : Complex;   Right : Complex)   @key[return] Complex;
    @key[function] "**" (Left : Complex;   Right : Real'Base) @key[return] Complex;
    @key[function] "**" (Left : Real'Base; Right : Complex)   @key[return] Complex;
-@Hinge{}
+
 
    @key[function] Sin (X : Complex) @key[return] Complex;
    @key[function] Cos (X : Complex) @key[return] Complex;
    @key[function] Tan (X : Complex) @key[return] Complex;
    @key[function] Cot (X : Complex) @key[return] Complex;
-@Hinge{}
+
 
    @key[function] Arcsin (X : Complex) @key[return] Complex;
    @key[function] Arccos (X : Complex) @key[return] Complex;
    @key[function] Arctan (X : Complex) @key[return] Complex;
    @key[function] Arccot (X : Complex) @key[return] Complex;
-@Hinge{}
+
 
    @key[function] Sinh (X : Complex) @key[return] Complex;
    @key[function] Cosh (X : Complex) @key[return] Complex;
    @key[function] Tanh (X : Complex) @key[return] Complex;
    @key[function] Coth (X : Complex) @key[return] Complex;
-@Hinge{}
+
 
    @key[function] Arcsinh (X : Complex) @key[return] Complex;
    @key[function] Arccosh (X : Complex) @key[return] Complex;
@@ -636,20 +636,20 @@ following conventions:
 
    The real (resp., imaginary) component of the result of the Arcsin and Arccos
    (resp., Arctanh) functions is discontinuous as the parameter X crosses the
-   real axis to the left of @Math{-1.0} or the right of 1.0.
+   real axis to the left of -1.0 or the right of 1.0.
 
    The real (resp., imaginary) component of the result of the Arctan (resp.,
    Arcsinh) function is discontinuous as the parameter X crosses the imaginary
-   axis below @Math{-i} or above @Math{i}.
+   axis below -@RI{i} or above @RI{i}.
 
    The real component of the result of the Arccot function is discontinuous as
-   the parameter X crosses the imaginary axis between @Math{-i} and @Math{i}.
+   the parameter X crosses the imaginary axis between -@RI{i} and @RI{i}.
 
    The imaginary component of the Arccosh function is discontinuous as the
    parameter X crosses the real axis to the left of 1.0.
 
    The imaginary component of the result of the Arccoth function is
-   discontinuous as the parameter X crosses the real axis between @Math{-1.0}
+   discontinuous as the parameter X crosses the real axis between -1.0
    and 1.0.
 @end{Itemize}
 
@@ -667,13 +667,13 @@ principal branch:
 
    The range of the real (resp., imaginary) component of the result of the
    Arcsin and Arctan (resp., Arcsinh and Arctanh) functions is
-   approximately @Math{-@Pi/2.0} to @Math{@Pi/2.0}.
+   approximately -@Pi/2.0 to @Pi/2.0.
 
    The real (resp., imaginary) component of the result of the Arccos and Arccot
-   (resp., Arccoth) functions ranges from 0.0 to approximately @Math{@Pi}.
+   (resp., Arccoth) functions ranges from 0.0 to approximately @Pi.
 
    The range of the imaginary component of the result of the Arccosh function
-   is approximately @Math{-@Pi} to @Math{@Pi}.
+   is approximately -@Pi to @Pi.
 @end{Itemize}
 
 In addition, the exponentiation operator inherits the single-valuedness of the
@@ -701,10 +701,10 @@ Complex_Types.Real'Machine_Overflows is True:
    of real type) is negative;
 
    by the Arctan and Arccot functions, when the value of the parameter X is
-   @Math{@PorM i};
+   @PorM @RI{i};
 
    by the Arctanh and Arccoth functions, when the value of the parameter X is
-   @Math{@PorM 1.0}.
+   @PorM 1.0.
 @end{Itemize}
 
 @redundant[Constraint_Error can also be raised
@@ -767,20 +767,20 @@ raised:
    of one; the Log, Arccos, and Arccosh functions yield a result of zero; and
    the Arcsin function yields a real result.
 
-   When the parameter X has the value @Math{-1.0}, the Sqrt function yields the
+   When the parameter X has the value -1.0, the Sqrt function yields the
    result
    @begin{InnerItemize}
-      @Math{i} (resp., @Math{-i}), when the sign of the imaginary component of
+      @RI{i} (resp., -@RI{i}), when the sign of the imaginary component of
       X is positive (resp., negative), if Complex_Types.Real'Signed_Zeros is
       True;
 
-      @Math{i}, if Complex_Types.Real'Signed_Zeros is False;
+      @RI{i}, if Complex_Types.Real'Signed_Zeros is False;
    @end{InnerItemize}
 
    the Log function yields an imaginary result; and the Arcsin and Arccos
    functions yield a real result.
 
-   When the parameter X has the value @Math{@PorM i}, the Log function yields
+   When the parameter X has the value @PorM @RI{i}, the Log function yields
    an imaginary result.
 
    Exponentiation by a zero exponent yields the value one.  Exponentiation by
@@ -825,7 +825,7 @@ The implementation of the Exp function of a complex parameter X is allowed to
 raise the exception Constraint_Error, signaling overflow, when the real
 component of X exceeds an unspecified threshold that
 is approximately
-@Math{@Log(@r[Complex_Types.Real'Safe_Last])}.
+@Log(@R[Complex_Types.Real'Safe_Last]).
 This permission recognizes the impracticality of avoiding overflow in
 the marginal
 case that the exponential of the real component of X exceeds the safe range of
@@ -834,8 +834,8 @@ the Sin and Cos (resp., Sinh and Cosh) functions are allowed to raise the
 exception Constraint_Error, signaling overflow, when the absolute value of the
 imaginary (resp., real) component of the parameter X exceeds an
 unspecified threshold that is approximately
-@Math{@Log(@r[Complex_Types.Real'Safe_Last]) +
-@Log(2.0)}.
+@Log(@R[Complex_Types.Real'Safe_Last]) +
+@Log(2.0).
 @PDefn{unspecified}
 This permission
 recognizes the impracticality of avoiding overflow in the marginal case that
@@ -912,21 +912,21 @@ Text_IO.Complex_IO has the following declaration:
    @key[with] @key[package] Complex_Types @key[is] @key[new] Ada.Numerics.Generic_Complex_Types (<>);
 @ChildUnit{Parent=[Ada.Text_IO],Child=[Complex_IO],Expanded=[Ada.Text_IO.Complex_IO]}
 @key[package] Ada.Text_IO.Complex_IO @key[is]
-@Hinge{}
+
 
    @key[use] Complex_Types;
 
    Default_Fore : Field := 2;
    Default_Aft  : Field := Real'Digits - 1;
    Default_Exp  : Field := 3;
-@Hinge{}
+
 
    @key[procedure] Get (File  : @key[in]  File_Type;
                   Item  : @key[out] Complex;
                   Width : @key[in]  Field := 0);
    @key[procedure] Get (Item  : @key[out] Complex;
                   Width : @key[in]  Field := 0);
-@Hinge{}
+
 
    @key[procedure] Put (File : @key[in] File_Type;
                   Item : @key[in] Complex;
@@ -937,7 +937,7 @@ Text_IO.Complex_IO has the following declaration:
                   Fore : @key[in] Field := Default_Fore;
                   Aft  : @key[in] Field := Default_Aft;
                   Exp  : @key[in] Field := Default_Exp);
-@Hinge{}
+
 
    @key[procedure] Get (From : @key[in]  String;
                   Item : @key[out] Complex;
@@ -1417,7 +1417,7 @@ S'@Attr{Model_Mantissa} @\Yields the number of digits in the mantissa of
 the canonical form of the model numbers of @i{T}
 (see @RefSecNum{Attributes of Floating Point Types}).  The
 value of this attribute shall be greater than or equal to
-@Math{@Ceiling{d @Times @Log(10) / @Log(T'@r{Machine_Radix})} + 1}, where @Math{d}
+@Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + 1, where @RI{d}
 is the requested decimal precision of @i{T}.  In addition, it
 shall be less than or equal to the value of
 @i{T}'Machine_Mantissa.  This attribute yields a value of the
@@ -1450,10 +1450,10 @@ than or equal to the lower bound of the base range of @i{T}.
 In addition, if @i{T} is declared by a
 @nt{floating_point_definition} or is derived from such a type,
 and the @nt{floating_point_definition} includes a
-@nt{real_range_specification} specifying a lower bound of @Math{lb},
+@nt{real_range_specification} specifying a lower bound of @RI{lb},
 then the value of this attribute shall be less than or
-equal to @Math{lb}; otherwise, it shall be less than or equal to
-@Math{-10.0 @Up[4 @Times d]}, where @Math{d} is the requested decimal precision
+equal to @RI{lb}; otherwise, it shall be less than or equal to
+-10.0 @+[4 @Times @RI{d}], where @RI{d} is the requested decimal precision
 of @i{T}.  This attribute yields a value of the type
 @i{universal_real}.
 
@@ -1463,10 +1463,10 @@ than or equal to the upper bound of the base range of @i{T}.
 In addition, if @i{T} is declared by a
 @nt{floating_point_definition} or is derived from such a type,
 and the @nt{floating_point_definition} includes a
-@nt{real_range_specification} specifying an upper bound of @Math{ub},
+@nt{real_range_specification} specifying an upper bound of @RI{ub},
 then the value of this attribute shall be greater than or
-equal to @Math{ub}; otherwise, it shall be greater than or equal
-to @Math{10.0 @Up[4 @Times d]}, where d is the requested decimal
+equal to @RI{ub}; otherwise, it shall be greater than or equal
+to 10.0 @+[4 @Times @RI{d}], where d is the requested decimal
 precision of @i{T}.  This attribute yields a value of the type
 @i{universal_real}.
 
@@ -1622,48 +1622,48 @@ a floating point type.
 @end{Discussion}
 
 For a fixed point multiplication or division whose (exact) mathematical result
-is @Math{v}, and for the conversion of a value
-@Math{v} to a fixed point type, the perfect
+is @RI{v}, and for the conversion of a value
+@RI{v} to a fixed point type, the perfect
 result set and close result set are defined as
 follows:
 @begin(itemize)
       If the result type is an ordinary fixed point type with a
-      @i(small) of @Math{s},
+      @i(small) of @RI{s},
       @begin(InnerItemize)
-         if @Math{v} is an integer multiple of
-         @Math{s},
+         if @RI{v} is an integer multiple of
+         @RI{s},
          then the perfect result set contains only the value
-         @Math{v};
+         @RI{v};
 
          otherwise, it contains the integer multiple of
-         @Math{s} just below
-         @Math{v} and the
-         integer multiple of @Math{s} just above
-         @Math{v}.
+         @RI{s} just below
+         @RI{v} and the
+         integer multiple of @RI{s} just above
+         @RI{v}.
       @end(InnerItemize)
 
       @NoPrefix@;The close result set is an implementation-defined set of consecutive
-      integer multiples of @Math{s} containing the perfect
+      integer multiples of @RI{s} containing the perfect
       result set as a subset.
 
       If the result type is a decimal type with a @i(small) of
-      @Math{s},
+      @RI{s},
       @begin(InnerItemize)
-         if @Math{v} is an integer multiple of
-         @Math{s},
+         if @RI{v} is an integer multiple of
+         @RI{s},
          then the perfect result set contains
-         only the value @Math{v};
+         only the value @RI{v};
 
          otherwise, if truncation applies then it contains only the integer
-         multiple of @Math{s} in the direction toward zero,
+         multiple of @RI{s} in the direction toward zero,
          whereas if rounding
          applies then it contains only the nearest integer multiple of
-         @Math{s} (with
+         @RI{s} (with
          ties broken by rounding away from zero).
       @end(InnerItemize)
 
       @NoPrefix@;The close result set is an implementation-defined set of consecutive
-      integer multiples of @Math{s} containing the perfect
+      integer multiples of @RI{s} containing the perfect
       result set as a subset.
       @begin{Ramification}
         As a consequence of subsequent rules, this case does not arise
@@ -1672,12 +1672,12 @@ follows:
 
       If the result type is an integer type,
       @begin(InnerItemize)
-         if @Math{v} is an integer,
+         if @RI{v} is an integer,
          then the perfect result set contains only the
-         value @Math{v};
+         value @RI{v};
 
          otherwise, it contains the integer nearest to the value
-         @Math{v} (if @Math{v} lies
+         @RI{v} (if @RI{v} lies
          equally distant from two consecutive integers, the perfect result set
          contains the one that is further from zero).
       @end(InnerItemize)
@@ -1690,19 +1690,19 @@ The result of a fixed point multiplication or division shall belong either to
 the perfect result set or to the close result set, as described below, if
 overflow does not occur.  In the following
 cases, if the result type is a fixed point type,
-let @Math{s} be its @i(small);
+let @RI{s} be its @i(small);
 otherwise, i.e. when the result type is an integer type,
-let @Math{s} be 1.0.
+let @RI{s} be 1.0.
 @begin(itemize)
    For a multiplication or division neither of whose operands is of type
-   @i(universal_real), let @Math{l} and @Math{r}
+   @i(universal_real), let @RI{l} and @RI{r}
    be the @i(smalls) of the left and right
-   operands.  For a multiplication, if @Math{(l @Times r) / s}
+   operands.  For a multiplication, if (@RI{l} @Times @RI{r}) / @RI{s}
    is an integer or the
    reciprocal of an integer (the @i(smalls) are said to be ``compatible'' in
    this case), the result shall belong to the perfect result set; otherwise, it
    belongs to the close result set.  For a division, if
-   @Math{l / (r @Times s)} is an
+   @RI{l} / (@RI{r} @Times @RI{s}) is an
    integer or the reciprocal of an integer (i.e., the @i(smalls) are
    compatible), the result shall belong to the perfect result set; otherwise,
    it belongs to the close result set.
@@ -1713,9 +1713,9 @@ let @Math{s} be 1.0.
    @end{Ramification}
 
    For a multiplication or division having one @i(universal_real) operand with
-   a value of @Math{v},
+   a value of @RI{v},
    note that it is always possible to factor
-   @Math{v} as an integer
+   @RI{v} as an integer
    multiple of a ``compatible'' @i(small), but the integer multiple may be
    ``too big.''
 
@@ -1816,9 +1816,9 @@ shall be as specified here.
 When an exception is not raised, the result of evaluating a function in an
 instance @i{EF} of Numerics.Generic_Elementary_Functions belongs to a @i{result
 interval}, defined as the smallest model interval of @i{EF}.Float_Type that
-contains all the values of the form @Math{f @Times (1.0 + d)}, where @Math{f} is the
+contains all the values of the form @RI{f} @Times (1.0 + @RI{d}), where @RI{f} is the
 exact value of the corresponding mathematical function at the given parameter
-values, @Math{d} is a real number, and @Math{@Abs[d]} is less than or equal to
+values, @RI{d} is a real number, and @Abs[@RI{d}] is less than or equal to
 the function's @i{maximum relative error}.
 @IndexCheck{Overflow_Check}
 The function delivers a value that belongs to the result interval when both of
@@ -1838,20 +1838,20 @@ its bounds belong to the safe range of @i{EF}.Float_Type; otherwise,
 
 The maximum relative error exhibited by each function is as follows:
 @begin{Itemize}
-   @Math{2.0 @Times EF@r[.Float_Type'Model_Epsilon]}, in the case of the Sqrt, Sin,
+   2.0 @Times @RI{EF}@R[.Float_Type'Model_Epsilon], in the case of the Sqrt, Sin,
    and Cos functions;
 
-   @Math{4.0 @Times EF@r[.Float_Type'Model_Epsilon]}, in the case of the Log, Exp,
+   4.0 @Times @RI{EF}@R[.Float_Type'Model_Epsilon], in the case of the Log, Exp,
    Tan, Cot, and inverse trigonometric functions; and
 
-   @Math{8.0 @Times EF@r[.Float_Type'Model_Epsilon]}, in the case of the forward and
+   8.0 @Times @RI{EF}@R[.Float_Type'Model_Epsilon], in the case of the forward and
    inverse hyperbolic functions.
 @end{Itemize}
 
 The maximum relative error exhibited by the exponentiation operator, which
 depends on the values of the operands, is
-@Math{(4.0 @Thin + @Thin @Abs{@r[Right] @Times @Log(@r[Left])} @Thin / @Thin 32.0) @Times
-EF@r[.Float_Type'Model_Epsilon]}.
+(4.0 @Thin + @Thin @Abs{@R[Right] @Times @Log(@R[Left])} @Thin / @Thin 32.0) @Times
+@RI{EF}@R[.Float_Type'Model_Epsilon].
 
 The maximum relative error given above applies throughout the domain of
 the forward trigonometric functions when the Cycle parameter is specified.
@@ -1860,7 +1860,7 @@ When the Cycle parameter is omitted, the maximum relative error given above
 applies only when the absolute value of the angle parameter X is less than or
 equal to some implementation-defined @i{angle threshold}, which shall be at
 least
-@Math{EF@r[.Float_Type'Machine_Radix] @Up<@Floor(EF@r[.Float_Type'Machine_Mantissa]/2)>}.
+@RI{EF}@R[.Float_Type'Machine_Radix] @+<@Floor(@RI{EF}@R[.Float_Type'Machine_Mantissa]/2)>.
 Beyond the angle threshold, the accuracy of the forward trigonometric functions
 is implementation defined.
 @ImplDef{The value of the @i{angle threshold}, within which certain elementary
@@ -1886,37 +1886,18 @@ accuracy rule, which takes precedence over the maximum relative error bounds,
 is that the result interval is the model interval of @i{EF}.Float_Type
 associated with the exact mathematical result given in the table.
 
-@StandardTable{Name=GEFPrescribed, Columns=5, AllColumns=Center,
-   HeadingBoxed, ColumnLined}
-@begin{GEFPrescribed, Float}
-@TableId{GEFPrescribed}
-@TableHeading{Immediate, RowFormat=GEFPrescribedTopHeading,
-   Line="Tightly Approximated Elementary Function Results"}
-@TableHeading{Immediate, RowFormat=GEFPrescribedColumnHeadings,
-   Line="Function@\Value of X@\Value of Y@\Exact Result
-   when Cycle
-   Specified@\Exact Result
-   when Cycle
-   Omitted"}
-
-Arcsin@\1.0@\n.a.@\Cycle/4.0@\@Math{@Pi/2.0}
-
-Arcsin@\@Math{-1.0}@\n.a.@\@Math{-@r[Cycle]/4.0}@\@Math{-@Pi/2.0}
-
-Arccos@\0.0@\n.a.@\Cycle/4.0@\@Math{@Pi/2.0}
-
-Arccos@\@Math{-1.0}@\n.a.@\Cycle/2.0@\@Math{@Pi}
-
-Arctan and Arccot@\0.0@\positive@\Cycle/4.0@\@Math{@Pi/2.0}
-
-Arctan and Arccot@\0.0@\negative@\@Math{-@r[Cycle]/4.0}@\@Math{-@Pi/2.0}
-
-Arctan and Arccot@\negative@\@Math{+0.0}@\Cycle/2.0@\@Math{@Pi}
-
-Arctan and Arccot@\negative@\@Math{-0.0}@\@Math{-@r[Cycle]/2.0}@\@Math{-@Pi}
-
-Arctan and Arccot@\negative@\0.0@\Cycle/2.0@\@Math{@Pi}
-@end{GEFPrescribed}
+@Table[Columns=<5>,
+Caption=<@b{Tightly Approximated Elementary Function Results}>,
+Headers=<@b{Function}@\@b{Value of X}@\@b{Value of Y}@\@b{Exact Result @*when Cycle @*Specified}@\@b{Exact Result @*when Cycle @*Omitted}>,
+Body=<Arcsin@\1.0@\n.a.@\Cycle/4.0@\@Pi/2.0
+Arcsin@\-1.0@\n.a.@\-@R[Cycle]/4.0@\-@Pi/2.0
+Arccos@\0.0@\n.a.@\Cycle/4.0@\@Pi/2.0
+Arccos@\-1.0@\n.a.@\Cycle/2.0@\@Pi
+Arctan and Arccot@\0.0@\positive@\Cycle/4.0@\@Pi/2.0
+Arctan and Arccot@\0.0@\negative@\-@R[Cycle]/4.0@\-@Pi/2.0
+Arctan and Arccot@\negative@\+0.0@\Cycle/2.0@\@Pi
+Arctan and Arccot@\negative@\-0.0@\-@R[Cycle]/2.0@\-@Pi
+Arctan and Arccot@\negative@\0.0@\Cycle/2.0@\@Pi>]
 
 The last line of the table is meant to apply when
 @i{EF}.Float_Type'Signed_Zeros is False; the two lines just above it, when
@@ -1984,7 +1965,7 @@ at least one second and not more than fifty
 years.
 
 The implementation's representations of generator states and its algorithms for
-generating random numbers shall yield a period of at least @Math{2@Up{31}-2};
+generating random numbers shall yield a period of at least 2@+{31}-2;
 much longer periods are desirable but not required.
 
 The implementations of Numerics.Float_Random.Random and
@@ -2012,35 +1993,35 @@ fewer than 5.
    categories.
    @begin{itemize}
       Proportional Distribution Test (a variant of the Equidistribution Test).
-      The interval 0.0 .. 1.0 is partitioned into @Math{K} subintervals.
-      @Math{K} is chosen randomly between 4 and 25 for each repetition of the
+      The interval 0.0 .. 1.0 is partitioned into @RI{K} subintervals.
+      @RI{K} is chosen randomly between 4 and 25 for each repetition of the
       test, along with the boundaries of the subintervals (subject to the
       constraint that at least 2 of the subintervals have a width of 0.001 or
       more).  5000 random floating point numbers are generated.  The counts of
       random numbers falling into each subinterval are tallied and compared
       with the expected counts, which are proportional to the widths of the
       subintervals.  The number of degrees of freedom for the chi-square test
-      is @Math{K-1}.
+      is @RI{K}-1.
 
-      Gap Test.  The bounds of a range @Math{A} .. @Math{B}, with
-      @Math{0.0 @leq A @Lt B @leq 1.0}, are chosen randomly for each repetition
-      of the test, subject to the constraint that @Math{0.2 @leq B-A @leq 0.6}.
+      Gap Test.  The bounds of a range @RI{A} .. @RI{B}, with
+      0.0 @leq @RI{A} @Lt @RI{B} @leq 1.0, are chosen randomly for each repetition
+      of the test, subject to the constraint that 0.2 @leq @RI{B}-@RI{A} @leq 0.6.
       Random floating point numbers are generated until 5000 falling into the
-      range @Math{A} .. @Math{B} have been encountered.  Each of these 5000 is
+      range @RI{A} .. @RI{B} have been encountered.  Each of these 5000 is
       preceded by a ``gap'' (of length greater than or equal to 0) of
       consecutive random numbers not falling into the range
-      @Math{A} .. @Math{B}.  The counts of gaps of each length from 0 to 15,
+      @RI{A} .. @RI{B}.  The counts of gaps of each length from 0 to 15,
       and of all lengths greater than 15 lumped together, are tallied and
-      compared with the expected counts.  Let @Math{P @Thin = @Thin B-A}.  The
-      probability that a gap has a length of @Math{L} is @Math{(1-P) @Up[L]
-      @Times P} for @Math{L @leq 15}, while the probability that a gap has a
-      length of 16 or more is @Math{(1-P) @Up[16]}.  The number of degrees of
+      compared with the expected counts.  Let @RI{P} @Thin = @Thin @RI{B}-@RI{A}.  The
+      probability that a gap has a length of @RI{L} is (1-@RI{P}) @+[@RI{L}]
+      @Times @RI{P} for @RI{L} @leq 15, while the probability that a gap has a
+      length of 16 or more is (1-@RI{P}) @+[16].  The number of degrees of
       freedom for the chi-square test is 16.
 
       Permutation Test.  5000 tuples of 4 different random floating point
       numbers are generated.  (An entire 4-tuple is discarded in the unlikely
       event that it contains any two exactly equal components.)  The counts of
-      each of the @Math{4! @Thin = @Thin 24} possible relative orderings of the
+      each of the 4! @Thin = @Thin 24 possible relative orderings of the
       components of the 4-tuples are tallied and compared with the expected
       counts.  Each of the possible relative orderings has an equal
       probability.  The number of degrees of freedom for the chi-square test
@@ -2057,15 +2038,15 @@ fewer than 5.
       counts of increasing runs of each length from 1 to 4, and of all lengths
       greater than 4 lumped together, are tallied and compared with the
       expected counts.  The probability that an increasing run has a length of
-      @Math{L} is @Math{1/L! @Thin - @Thin 1/(L+1)!} for @Math{L @leq 4}, while
+      @RI{L} is 1/@RI{L}! @Thin - @Thin 1/(@RI{L}+1)! for @RI{L} @leq 4, while
       the probability that an increasing run has a length of 5 or more is
-      @Math{1/5!}.  The number of degrees of freedom for the chi-square test
+      1/5!.  The number of degrees of freedom for the chi-square test
       is 4.
 
       Decreasing-Runs Test.  The test is similar to the Increasing Runs Test,
       but with decreasing runs.
 
-      Maximum-of-@Math{t} Test (with @Math{t @Thin = @Thin 5}).  5000 tuples of
+      Maximum-of-@RI{t} Test (with @RI{t} @Thin = @Thin 5).  5000 tuples of
       5 random floating point numbers are generated.  The maximum of the
       components of each 5-tuple is determined and raised to the 5th power.
       The uniformity of the resulting values over the range 0.0 .. 1.0 is
@@ -2081,33 +2062,33 @@ fewer than 5.
    necessary combination of measurement categories with small expected counts,
    as described above.
    @begin{Itemize}
-      Equidistribution Test.  In each repetition of the test, a number @Math{R}
+      Equidistribution Test.  In each repetition of the test, a number @RI{R}
       between 2 and 30 is chosen randomly, and Numerics.Discrete_Random is
-      instantiated with an integer subtype whose range is 1 .. @Math{R}.  5000
+      instantiated with an integer subtype whose range is 1 .. @RI{R}.  5000
       integers are generated randomly from this range.  The counts of
       occurrences of each integer in the range are tallied and compared with
       the expected counts, which have equal probabilities.  The number of
-      degrees of freedom for the chi-square test is @Math{R-1}.
+      degrees of freedom for the chi-square test is @RI{R}-1.
 
       Simplified Poker Test.  Numerics.Discrete_Random is instantiated once
       with an enumeration subtype representing the 13 denominations (Two
       through Ten, Jack, Queen, King, and Ace) of an infinite deck of playing
       cards.  2000 ``poker'' hands (5-tuples of values of this subtype) are
-      generated randomly.  The counts of hands containing exactly @Math{K}
-      different denominations (@Math{1 @leq K @leq 5}) are tallied and compared
+      generated randomly.  The counts of hands containing exactly @RI{K}
+      different denominations (1 @leq @RI{K} @leq 5) are tallied and compared
       with the expected counts.  The probability that a hand contains exactly
-      @Math{K} different denominations is given by a formula in Knuth.  The
+      @RI{K} different denominations is given by a formula in Knuth.  The
       number of degrees of freedom for the chi-square test is 4.
 
       Coupon Collector's Test.  Numerics.Discrete_Random is instantiated in
       each repetition of the test with an integer subtype whose range is
-      1 .. @Math{R}, where @Math{R} varies systematically from 2 to 11.
+      1 .. @RI{R}, where @RI{R} varies systematically from 2 to 11.
       Integers are generated randomly from this range until each value in the
-      range has occurred, and the number @Math{K} of integers generated is
+      range has occurred, and the number @RI{K} of integers generated is
       recorded.  This constitutes a ``coupon collector's segment'' of length
-      @Math{K}.  2000 such segments are generated.  The counts of segments of
-      each length from @Math{R} to @Math{R+29}, and of all lengths greater than
-      @Math{R+29} lumped together, are tallied and compared with the expected
+      @RI{K}.  2000 such segments are generated.  The counts of segments of
+      each length from @RI{R} to @RI{R}+29, and of all lengths greater than
+      @RI{R}+29 lumped together, are tallied and compared with the expected
       counts.  The probability that a segment has any given length is given by
       formulas in Knuth.  The number of degrees of freedom for the chi-square
       test is 30.
@@ -2123,20 +2104,20 @@ fewer than 5.
       the game is won if and only if the point is rolled again before a 7 is
       rolled.)  The counts of games of each length from 1 to 18, and of all
       lengths greater than 18 lumped together, are tallied and compared with
-      the expected counts.  For @Math{2 @leq S @leq 12}, let
-      @Math{D @Down{S}} be the probability that a roll of a pair of dice shows
-      the sum @Math{S}, and let
-      @Math{Q @Down[S](L) @Thin = @Thin D @Down[S] @Times
-      (1 @Thin - @Thin (D @Down[S] @Thin + @Thin D @Down[7])) @Up[L-2] @Times
-      (D @Down[S] @Thin + @Thin D @Down[7])}.  Then, the probability that a
-      game has a length of 1 is @Math{D @Down[7] @Thin +
-      @Thin D @Down[11] @Thin + @Thin D @Down[2] @Thin +
-      @Thin D @Down[3] @Thin + @Thin D @Down[12]}
-      and, for @Math{L @Gt 1}, the probability that a game has a length of
-      @Math{L} is @Math{Q @Down[4](L) @Thin + @Thin
-      Q @Down[5](L) @Thin + @Thin Q @Down[6](L) @Thin + @Thin Q @Down[8](L)
-      @Thin + @Thin Q @Down[9](L) @Thin + @Thin Q
-      @Down[10](L)}.  The number of degrees of freedom for the chi-square test
+      the expected counts.  For 2 @leq @RI{S} @leq 12, let
+      @RI{D} @-{@RI{S}} be the probability that a roll of a pair of dice shows
+      the sum @RI{S}, and let
+      @RI{Q} @-[@RI{S}](@RI{L}) @Thin = @Thin @RI{D} @-[@RI{S}] @Times
+      (1 @Thin - @Thin (@RI{D} @-[@RI{S}] @Thin + @Thin @RI{D} @-[7])) @+[@RI{L}-2] @Times
+      (@RI{D} @-[@RI{S}] @Thin + @Thin @RI{D} @-[7]).  Then, the probability that a
+      game has a length of 1 is @RI{D} @-[7] @Thin +
+      @Thin @RI{D} @-[11] @Thin + @Thin @RI{D} @-[2] @Thin +
+      @Thin @RI{D} @-[3] @Thin + @Thin @RI{D} @-[12]
+      and, for @RI{L} @Gt 1, the probability that a game has a length of
+      @RI{L} is @RI{Q} @-[4](@RI{L}) @Thin + @Thin
+      @RI{Q} @-[5](@RI{L}) @Thin + @Thin @RI{Q} @-[6](@RI{L}) @Thin + @Thin @RI{Q} @-[8](@RI{L})
+      @Thin + @Thin @RI{Q} @-[9](@RI{L}) @Thin + @Thin @RI{Q}
+      @-[10](@RI{L}).  The number of degrees of freedom for the chi-square test
       is 18.
 
       Craps Test (Lengths of Passes).  This test is similar to the last, but
@@ -2144,9 +2125,9 @@ fewer than 5.
       followed by a loss is called a @i{pass}, and its length is the
       number of wins preceding the loss.  The counts of passes of each length
       from 0 to 7, and of all lengths greater than 7 lumped together, are
-      tallied and compared with the expected counts.  For @Math{L @geq 0}, the
-      probability that a pass has a length of @Math{L} is
-      @Math{W @Up[L] @Times (1-W)}, where @Math{W}, the probability that a game
+      tallied and compared with the expected counts.  For @RI{L} @geq 0, the
+      probability that a pass has a length of @RI{L} is
+      @RI{W} @+[@RI{L}] @Times (1-@RI{W}), where @RI{W}, the probability that a game
       ends in a win, is 244.0/495.0.  The number of degrees of freedom for the
       chi-square test is 8.
 
@@ -2201,14 +2182,14 @@ corresponding mathematical function.
         Sec=[for a component of the result of evaluating a complex function]}
 When defined by maximum box error, the result interval for a component of the
 result is the smallest model interval of @i{CT}.Real that contains all the
-values of the corresponding part of @Math{f @Times (1.0 + d)}, where @Math{f} is the
+values of the corresponding part of @RI{f} @Times (1.0 + @RI{d}), where @RI{f} is the
 exact complex value of the corresponding mathematical function at the given
-parameter values, @Math{d} is complex, and @Math{@Abs{d}} is less than or equal
+parameter values, @RI{d} is complex, and @Abs{@RI{d}} is less than or equal
 to the given maximum box error.
 @begin{Discussion}
   Note that
-  @Math{f @Times (1.0 + d)} defines a small circular region of the complex
-  plane centered at @Math{f}, and the result intervals for
+  @RI{f} @Times (1.0 + @RI{d}) defines a small circular region of the complex
+  plane centered at @RI{f}, and the result intervals for
   the real and imaginary
   components of the result define a small rectangular box containing that
   circle.
@@ -2255,43 +2236,22 @@ The error bounds for particular complex functions are tabulated below.
 In the table, the error bound is given as the coefficient of
 @i{CT}.Real'Model_Epsilon.
 
-@StandardTable{Name=CXAccy, Columns=4, AllColumns=Center,
-   HeadingBoxed, ColumnLined}
-@begin{CXAccy, Float}
-@TableId{CXAccy}
-@TableHeading{Immediate, RowFormat=CXAccyTopHeading,
-   Line="Error Bounds for Particular Complex Functions"}
-@TableHeading{Immediate, RowFormat=CXAccyColumnHeadings,
-   Line="Function or Operator@\Nature of
-   Result@\Nature of
-   Bound@\Error Bound"}
-
-Modulus@\real@\max. rel. error@\3.0
-
+@Table[Columns=<3>,
+Caption=<@b{Error Bounds for Particular Complex Functions}>,
+Headers=<@b{Function or Operator}@\@b{Nature of @*Result}@\@b{Nature of @*Bound}@\@b{Error Bound}>,
+Body=<Modulus@\real@\max. rel. error@\3.0
 Argument@\real@\max. rel. error@\4.0
-
 Compose_From_Polar@\complex@\max. rel. error@\3.0
-
 "*" (both operands complex)@\complex@\max. box error@\5.0
-
 "/" (right operand complex)@\complex@\max. box error@\13.0
-
 Sqrt@\complex@\max. rel. error@\6.0
-
 Log@\complex@\max. box error@\13.0
-
 Exp (complex parameter)@\complex@\max. rel. error@\7.0
-
 Exp (imaginary parameter)@\complex@\max. rel. error@\2.0
-
 Sin, Cos, Sinh, and Cosh@\complex@\max. rel. error@\11.0
-
 Tan, Cot, Tanh, and Coth@\complex@\max. rel. error@\35.0
-
 inverse trigonometric@\complex@\max. rel. error@\14.0
-
-inverse hyperbolic@\complex@\max. rel. error@\14.0
-@end{CXAccy}
+inverse hyperbolic@\complex@\max. rel. error@\14.0>]
 
 The maximum relative error given above applies throughout the domain of the
 Compose_From_Polar function when the Cycle parameter is specified.  When the
@@ -2324,16 +2284,16 @@ question are as follows:
 @begin{Itemize}
    When the parameter X has the value zero, the real (resp., imaginary)
    component of the result of the Arccot (resp., Arccoth) function is in the
-   model interval of @i{CT}.Real associated with the value @Math{@Pi/2.0}.
+   model interval of @i{CT}.Real associated with the value @Pi/2.0.
 
    When the parameter X has the value one, the real component of the result of
    the Arcsin function is in the model interval of @i{CT}.Real associated with
-   the value @Math{@Pi/2.0}.
+   the value @Pi/2.0.
 
-   When the parameter X has the value @Math{-1.0}, the real component of the
+   When the parameter X has the value -1.0, the real component of the
    result of the Arcsin (resp., Arccos) function is in the model interval of
-   @i{CT}.Real associated with the value @Math{-@Pi/2.0} (resp.,
-   @Math{@Pi}).
+   @i{CT}.Real associated with the value -@Pi/2.0 (resp.,
+   @Pi).
 @end{Itemize}
 @begin{Discussion}
    It is possible to give many other prescribed results in which a component of

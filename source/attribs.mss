@@ -1,10 +1,10 @@
 @Part(attribs, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/27 04:44:01 $}
 @LabeledInformativeAnnex{Language-Defined Attributes}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/attribs.mss,v $}
-@comment{$Revision: 1.12 $}
+@comment{$Revision: 1.13 $}
 
 @begin{Intro}
 @Defn{attribute}

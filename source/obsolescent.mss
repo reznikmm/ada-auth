@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:07 $}
+@Comment{$Date: 2000/05/27 04:44:03 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -75,7 +75,7 @@ The following @nt{library_unit_renaming_declaration}s exist:
 @key[package] Calendar @key[renames] Ada.Calendar;
 
 @key[with] System.Machine_Code;
-@key[package] Machine_Code @key[renames] System.Machine_Code; --@i{ If supported.}
+@key[package] Machine_Code @key[renames] System.Machine_Code; --@RI{ If supported.}
 @end{Example}
 @end{StaticSem}
 
@@ -92,7 +92,7 @@ and quotation mark characters:
 @begin{Itemize}
 A vertical line character (|) can be replaced by an exclamation mark
 (!) where used as a delimiter.
-@Hinge{}
+
 
 The number sign characters (#) of a @nt{based_literal} can be replaced
 by colons (:) provided that the replacement is done for both
@@ -287,52 +287,52 @@ So one should think of its designator as being 'Constrained_Or_Elementary.
 The following declaration exists in the declaration of package Standard:
 @begin{example}
    @key[package] ASCII @key[is]
-@Hinge{}
 
-      --@i{  Control characters:}
-@Hinge{}
 
-@tabclear()
-      NUL   : @key[constant] Character := @i{nul};     @^SOH   : @key[constant] Character := @i{soh};
-      STX   : @key[constant] Character := @i{stx}; @\ETX   : @key[constant] Character := @i{etx};
-      EOT   : @key[constant] Character := @i{eot}; @\ENQ   : @key[constant] Character := @i{enq};
-      ACK   : @key[constant] Character := @i{ack}; @\BEL   : @key[constant] Character := @i{bel};
-      BS    : @key[constant] Character := @i{bs}; @\HT    : @key[constant] Character := @i{ht};
-      LF    : @key[constant] Character := @i{lf}; @\VT    : @key[constant] Character := @i{vt};
-      FF    : @key[constant] Character := @i{ff}; @\CR    : @key[constant] Character := @i{cr};
-      SO    : @key[constant] Character := @i{so}; @\SI    : @key[constant] Character := @i{si};
-      DLE   : @key[constant] Character := @i{dle}; @\DC1   : @key[constant] Character := @i{dc1};
-      DC2   : @key[constant] Character := @i{dc2}; @\DC3   : @key[constant] Character := @i{dc3};
-      DC4   : @key[constant] Character := @i{dc4}; @\NAK   : @key[constant] Character := @i{nak};
-      SYN   : @key[constant] Character := @i{syn}; @\ETB   : @key[constant] Character := @i{etb};
-      CAN   : @key[constant] Character := @i{can}; @\EM    : @key[constant] Character := @i{em};
-      SUB   : @key[constant] Character := @i{sub}; @\ESC   : @key[constant] Character := @i{esc};
-      FS    : @key[constant] Character := @i{fs}; @\GS    : @key[constant] Character := @i{gs};
-      RS    : @key[constant] Character := @i{rs}; @\US    : @key[constant] Character := @i{us};
-      DEL   : @key[constant] Character := @i{del};
-@hinge{}
+      --@RI{  Control characters:}
 
-      --@i{ Other characters:}
 
-      Exclam    : @key[constant] Character:= '!';  Quotation : @key[constant] Character:= '"';
-      Sharp     : @key[constant] Character:= '#';  Dollar    : @key[constant] Character:= '$';
-      Percent   : @key[constant] Character:= '%';  Ampersand : @key[constant] Character:= '&';
-      Colon     : @key[constant] Character:= ':';  Semicolon : @key[constant] Character:= ';';
-      Query     : @key[constant] Character:= '?';  At_Sign   : @key[constant] Character:= '@@';
-      L_Bracket : @key[constant] Character:= '[';  Back_Slash: @key[constant] Character:= '\';
-      R_Bracket : @key[constant] Character:= ']';  Circumflex: @key[constant] Character:= '^';
-      Underline : @key[constant] Character:= '_';  Grave     : @key[constant] Character:= '`';
-      L_Brace   : @key[constant] Character:= '{';  Bar       : @key[constant] Character:= '|';
-      R_Brace   : @key[constant] Character:= '}';  Tilde     : @key[constant] Character:= '~';
-      @Hinge{}
+@tabclear()@tabset(P58)
+      NUL   : @key[constant] Character := @RI{nul}; @\SOH   : @key[constant] Character := @RI{soh};
+      STX   : @key[constant] Character := @RI{stx}; @\ETX   : @key[constant] Character := @RI{etx};
+      EOT   : @key[constant] Character := @RI{eot}; @\ENQ   : @key[constant] Character := @RI{enq};
+      ACK   : @key[constant] Character := @RI{ack}; @\BEL   : @key[constant] Character := @RI{bel};
+      BS    : @key[constant] Character := @RI{bs}; @\HT    : @key[constant] Character := @RI{ht};
+      LF    : @key[constant] Character := @RI{lf}; @\VT    : @key[constant] Character := @RI{vt};
+      FF    : @key[constant] Character := @RI{ff}; @\CR    : @key[constant] Character := @RI{cr};
+      SO    : @key[constant] Character := @RI{so}; @\SI    : @key[constant] Character := @RI{si};
+      DLE   : @key[constant] Character := @RI{dle}; @\DC1   : @key[constant] Character := @RI{dc1};
+      DC2   : @key[constant] Character := @RI{dc2}; @\DC3   : @key[constant] Character := @RI{dc3};
+      DC4   : @key[constant] Character := @RI{dc4}; @\NAK   : @key[constant] Character := @RI{nak};
+      SYN   : @key[constant] Character := @RI{syn}; @\ETB   : @key[constant] Character := @RI{etb};
+      CAN   : @key[constant] Character := @RI{can}; @\EM    : @key[constant] Character := @RI{em};
+      SUB   : @key[constant] Character := @RI{sub}; @\ESC   : @key[constant] Character := @RI{esc};
+      FS    : @key[constant] Character := @RI{fs}; @\GS    : @key[constant] Character := @RI{gs};
+      RS    : @key[constant] Character := @RI{rs}; @\US    : @key[constant] Character := @RI{us};
+      DEL   : @key[constant] Character := @RI{del};
 
-      --@i{ Lower case letters:}
-@Hinge{}
+
+      --@RI{ Other characters:}
+
+      Exclam    : @key[constant] Character:= '!'; @\Quotation : @key[constant] Character:= '"';
+      Sharp     : @key[constant] Character:= '#'; @\Dollar    : @key[constant] Character:= '$';
+      Percent   : @key[constant] Character:= '%'; @\Ampersand : @key[constant] Character:= '&';
+      Colon     : @key[constant] Character:= ':'; @\Semicolon : @key[constant] Character:= ';';
+      Query     : @key[constant] Character:= '?'; @\At_Sign   : @key[constant] Character:= '@@';
+      L_Bracket : @key[constant] Character:= '['; @\Back_Slash: @key[constant] Character:= '\';
+      R_Bracket : @key[constant] Character:= ']'; @\Circumflex: @key[constant] Character:= '^';
+      Underline : @key[constant] Character:= '_'; @\Grave     : @key[constant] Character:= '`';
+      L_Brace   : @key[constant] Character:= '{'; @\Bar       : @key[constant] Character:= '|';
+      R_Brace   : @key[constant] Character:= '}'; @\Tilde     : @key[constant] Character:= '~';
+      
+
+      --@RI{ Lower case letters:}
+
 
       LC_A: @key[constant] Character:= 'a';
       ...
       LC_Z: @key[constant] Character:= 'z';
-@Hinge{}
+
 
    @key[end] ASCII;
 @end{example}
@@ -406,15 +406,13 @@ confusion with the new term ``Address clause'' (that is, an
 @LabeledSubClause{Interrupt Entries}
 
 @begin{Intro}
-@redundant[
-Implementations are permitted to allow the attachment of task entries to
+@redundant[Implementations are permitted to allow the attachment of task entries to
 interrupts via the address clause.  Such an entry is referred to as an
 @i{interrupt entry}.
 
 The address of the task entry corresponds to a hardware interrupt in an
 implementation-defined manner.  (See Ada.Interrupts.Reference in
-@RefSecNum{The Package Interrupts}.)
-]
+@RefSecNum{The Package Interrupts}.)]
 @end{Intro}
 
 @begin{StaticSem}
@@ -557,16 +555,16 @@ interrupt model as specified in the Systems Programming Annex.
 @begin{StaticSem}
 A @nt{record_representation_clause} of the form:
 @begin{example}
-@key[for] @i{r} @key[use]
-    @key[record] @key[at] @key[mod] @i{a}
+@key[for] @RI{r} @key[use]
+    @key[record] @key[at] @key[mod] @RI{a}
         ...
     @key[end] @key[record];
 @end{example}
 
 is equivalent to:
 @begin{example}
-@key[for] @i{r}'Alignment @key[use] @i{a};
-@key[for] @i{r} @key[use]
+@key[for] @RI{r}'Alignment @key[use] @RI{a};
+@key[for] @RI{r} @key[use]
     @key[record]
         ...
     @key[end] @key[record];

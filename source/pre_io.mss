@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/27 04:44:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -104,14 +104,14 @@ An open file has a @i{current mode}, which is a value of one of the
 following enumeration types:
 @begin{DescribeCode}
 @begin{Example}
-@key[type] File_Mode @key[is] (In_File, Inout_File, Out_File);  --@i{  for Direct_IO}
+@key[type] File_Mode @key[is] (In_File, Inout_File, Out_File);  --@RI{  for Direct_IO}
 @end{Example}
 
 These values correspond respectively to the cases where only reading,
 both reading and writing, or only writing are to be performed.
 @begin{Example}
 @key[type] File_Mode @key[is] (In_File, Out_File, Append_File);
---@i{  for Sequential_IO, Text_IO, Wide_Text_IO, and Stream_IO}
+--@RI{  for Sequential_IO, Text_IO, Wide_Text_IO, and Stream_IO}
 @end{Example}
 
 These values correspond respectively to the cases where only reading,
@@ -242,7 +242,7 @@ The generic library package Sequential_IO has the following declaration:
 @LangDefType{Package=[Ada.Sequential_IO],Type=[File_Mode]}
    @key[type] File_Mode @key[is] (In_File, Out_File, Append_File);
 
-   @i{-- File management}
+   @RI{-- File management}
 
    @key[procedure] Create(File : @key[in] @key[out] File_Type;
                     Mode : @key[in] File_Mode := Out_File;
@@ -265,14 +265,14 @@ The generic library package Sequential_IO has the following declaration:
 
    @key[function] Is_Open(File : @key[in] File_Type) @key[return] Boolean;
 
-   --@i{ Input and output operations}
+   --@RI{ Input and output operations}
 
    @key[procedure] Read  (File : @key[in] File_Type; Item : @key[out] Element_Type);
    @key[procedure] Write (File : @key[in] File_Type; Item : @key[in] Element_Type);
 
    @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
 
-   --@i{ Exceptions}
+   --@RI{ Exceptions}
 
    Status_Error : @key[exception] @key[renames] IO_Exceptions.Status_Error;
    Mode_Error   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
@@ -283,7 +283,7 @@ The generic library package Sequential_IO has the following declaration:
    Data_Error   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Sequential_IO;
 @end{Example}
 @end{StaticSem}
@@ -310,7 +310,7 @@ additional effects described in subclause
 @begin{DescribeCode}
 @begin{Example}
 @key[procedure] Create(File : @key[in] @key[out] File_Type;
-                 Mode : @key[in] File_Mode := @i{default_mode};
+                 Mode : @key[in] File_Mode := @RI{default_mode};
                  Name : @key[in] String := "";
                  Form : @key[in] String := "");
 @end{Example}
@@ -578,10 +578,10 @@ The generic library package Direct_IO has the following declaration:
 @LangDefType{Package=[Ada.Direct_IO],Type=[File_Mode]}
    @key[type] File_Mode @key[is] (In_File, Inout_File, Out_File);
 @LangDefType{Package=[Ada.Direct_IO],Type=[Count]}
-   @key[type] Count     @key[is] @key[range] 0 .. @i[implementation-defined];
+   @key[type] Count     @key[is] @key[range] 0 .. @RI[implementation-defined];
    @key[subtype] Positive_Count @key[is] Count @key[range] 1 .. Count'Last;
 
-   --@i{ File management}
+   --@RI{ File management}
 
    @key[procedure] Create(File : @key[in] @key[out] File_Type;
                     Mode : @key[in] File_Mode := Inout_File;
@@ -604,7 +604,7 @@ The generic library package Direct_IO has the following declaration:
 
    @key[function] Is_Open(File : @key[in] File_Type) @key[return] Boolean;
 
-   --@i{ Input and output operations}
+   --@RI{ Input and output operations}
 
    @key[procedure] Read (File : @key[in] File_Type; Item : @key[out] Element_Type;
                                         From : @key[in] Positive_Count);
@@ -621,7 +621,7 @@ The generic library package Direct_IO has the following declaration:
 
    @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
 
-   --@i{ Exceptions}
+   --@RI{ Exceptions}
 
    Status_Error : @key[exception] @key[renames] IO_Exceptions.Status_Error;
    Mode_Error   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
@@ -632,7 +632,7 @@ The generic library package Direct_IO has the following declaration:
    Data_Error   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Direct_IO;
 @end{Example}
 @begin{Reason}
@@ -760,16 +760,16 @@ The generic library package Storage_IO has the following declaration:
 @key[package] Ada.Storage_IO @key[is]
    @key[pragma] Preelaborate(Storage_IO);
 
-   Buffer_Size : @key(constant) System.Storage_Elements.Storage_Count := @i(implementation-defined);
+   Buffer_Size : @key(constant) System.Storage_Elements.Storage_Count := @RI(implementation-defined);
    @key(subtype) Buffer_Type @key(is) System.Storage_Elements.Storage_Array(1..Buffer_Size);
 
-   --@i{ Input and output operations}
+   --@RI{ Input and output operations}
 
    @key[procedure] Read (Buffer : @key[in]  Buffer_Type; Item : @key[out] Element_Type);
 
    @key[procedure] Write(Buffer : @key[out] Buffer_Type; Item : @key[in]  Element_Type);
 
-   --@i{ Exceptions}
+   --@RI{ Exceptions}
 
    Data_Error   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 @key[end] Ada.Storage_IO;
@@ -906,7 +906,7 @@ is the number of the current page.  These numbers are values of the
 subtype Positive_Count of the type Count (by convention, the value zero
 of the type Count is used to indicate special conditions).
 @begin{Example}
-@key[type] Count @key[is] @key[range] 0 .. @i[implementation-defined];
+@key[type] Count @key[is] @key[range] 0 .. @RI[implementation-defined];
 @key[subtype] Positive_Count @key[is] Count @key[range] 1 .. Count'Last;
 @end{Example}
 
@@ -947,17 +947,17 @@ The library package Text_IO has the following declaration:
    @key[type] File_Mode @key[is] (In_File, Out_File, Append_File);
 
 @LangDefType{Package=[Ada.Text_IO],Type=[Count]}
-   @key[type] Count @key[is] @key[range] 0 .. @i[implementation-defined];
+   @key[type] Count @key[is] @key[range] 0 .. @RI[implementation-defined];
    @key[subtype] Positive_Count @key[is] Count @key[range] 1 .. Count'Last;
-   Unbounded : @key[constant] Count := 0; --@i{ line and page length}
+   Unbounded : @key[constant] Count := 0; --@RI{ line and page length}
 
-   @key[subtype] Field       @key[is] Integer @key[range] 0 .. @i[implementation-defined];
+   @key[subtype] Field       @key[is] Integer @key[range] 0 .. @RI[implementation-defined];
    @key[subtype] Number_Base @key[is] Integer @key[range] 2 .. 16;
 
 @LangDefType{Package=[Ada.Text_IO],Type=[Type_Set]}
    @key[type] Type_Set @key[is] (Lower_Case, Upper_Case);
 
-   --@i{ File Management}
+   --@RI{ File Management}
 
    @key[procedure] Create (File : @key[in] @key[out] File_Type;
                      Mode : @key[in] File_Mode := Out_File;
@@ -980,7 +980,7 @@ The library package Text_IO has the following declaration:
 
    @key[function]  Is_Open(File : @key[in] File_Type) @key[return] Boolean;
 
-   --@i{ Control of default input and output files}
+   --@RI{ Control of default input and output files}
 
    @key[procedure] Set_Input (File : @key[in] File_Type);
    @key[procedure] Set_Output(File : @key[in] File_Type);
@@ -1005,12 +1005,12 @@ The library package Text_IO has the following declaration:
    @key[function] Current_Error   @key[return] File_Access;
 
 
---@i{Buffer control}
+--@RI{Buffer control}
    @key[procedure] Flush (File : @key[in] @key[out] File_Type);
    @key[procedure] Flush;
 
 
-   --@i{ Specification of line and page lengths}
+   --@RI{ Specification of line and page lengths}
 
    @key[procedure] Set_Line_Length(File : @key[in] File_Type; To : @key[in] Count);
    @key[procedure] Set_Line_Length(To   : @key[in] Count);
@@ -1024,7 +1024,7 @@ The library package Text_IO has the following declaration:
    @key[function]  Page_Length(File : @key[in] File_Type) @key[return] Count;
    @key[function]  Page_Length @key[return] Count;
 
-   --@i{ Column, Line, and Page Control}
+   --@RI{ Column, Line, and Page Control}
 
    @key[procedure] New_Line   (File    : @key[in] File_Type;
                          Spacing : @key[in] Positive_Count := 1);
@@ -1064,7 +1064,7 @@ The library package Text_IO has the following declaration:
    @key[function] Page(File : @key[in] File_Type) @key[return] Positive_Count;
    @key[function] Page @key[return] Positive_Count;
 
-   --@i{ Character Input-Output}
+   --@RI{ Character Input-Output}
 
    @key[procedure] Get(File : @key[in]  File_Type; Item : @key[out] Character);
    @key[procedure] Get(Item : @key[out] Character);
@@ -1088,7 +1088,7 @@ The library package Text_IO has the following declaration:
    @key[procedure] Get_Immediate(Item      : @key[out] Character;
                            Available : @key[out] Boolean);
 
-   --@i{ String Input-Output}
+   --@RI{ String Input-Output}
 
    @key[procedure] Get(File : @key[in]  File_Type; Item : @key[out] String);
    @key[procedure] Get(Item : @key[out] String);
@@ -1104,7 +1104,7 @@ The library package Text_IO has the following declaration:
    @key[procedure] Put_Line(File : @key[in]  File_Type; Item : @key[in] String);
    @key[procedure] Put_Line(Item : @key[in]  String);
 
---@i{ Generic packages for Input-Output of Integer Types}
+--@RI{ Generic packages for Input-Output of Integer Types}
 
    @key[generic]
       @key[type] Num @key[is] @key[range] <>;
@@ -1164,7 +1164,7 @@ The library package Text_IO has the following declaration:
 
    @key[end] Modular_IO;
 
-   --@i{ Generic packages for Input-Output of Real Types}
+   --@RI{ Generic packages for Input-Output of Real Types}
 
    @key[generic]
       @key[type] Num @key[is] @key[digits] <>;
@@ -1265,7 +1265,7 @@ The library package Text_IO has the following declaration:
                     Exp  : @key[in] Field := Default_Exp);
    @key[end] Decimal_IO;
 
-   --@i{ Generic package for Input-Output of Enumeration Types}
+   --@RI{ Generic package for Input-Output of Enumeration Types}
 
    @key[generic]
       @key[type] Enum @key[is] (<>);
@@ -1294,7 +1294,7 @@ The library package Text_IO has the following declaration:
                     Set  : @key[in]  Type_Set := Default_Setting);
    @key[end] Enumeration_IO;
 
---@i{ Exceptions}
+--@RI{ Exceptions}
 
    Status_Error : @key[exception] @key[renames] IO_Exceptions.Status_Error;
    Mode_Error   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
@@ -1305,7 +1305,7 @@ The library package Text_IO has the following declaration:
    Data_Error   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
    Layout_Error : @key[exception] @key[renames] IO_Exceptions.Layout_Error;
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Text_IO;
 @end{Example}
 @end{StaticSem}
@@ -1936,18 +1936,18 @@ N : Integer;
    ...
 Get(N);
 
-@tabclear()
-@i[--      @^Characters at input       @^Sequence input            @^Value of N]
+@tabclear()@tabset(P4, P22, P38)
+@RI[--  @\Characters at input @\Sequence input @\Value of N]
 @Comment{Blank line.}
-@i[--    @\bb@en@|12535b @\@en@|12535 @\@en@|12535]
-@i[--    @\bb12_535e1b @\12_535e1 @\125350]
-@i[--    @\bb12_535e; @\12_535e @\(none) Data_Error raised]
+@RI[--  @\bb@en@|12535b @\@en@|12535 @\@en@|12535]
+@RI[--  @\bb12_535e1b @\12_535e1 @\125350]
+@RI[--  @\bb12_535e; @\12_535e @\(none) Data_Error raised]
 @end{Example}
 
 Example of overridden width parameter:
 
 @begin{Example}
-Put(Item => -23, Width => 2);  --@i{  "@en@|23"}
+Put(Item => -23, Width => 2);  --@RI{  "@en@|23"}
 @end{Example}
 @end{Examples}
 
@@ -2248,12 +2248,12 @@ characters read forms an integer literal outside the range
 @begin{Examples}
 @begin{Example}
 @key[package] Int_IO @key[is] @key[new] Integer_IO(Small_Int); @key[use] Int_IO;
---@i{ default format used at instantiation,}
---@i{ Default_Width = 4, Default_Base = 10}
+--@RI{ default format used at instantiation,}
+--@RI{ Default_Width = 4, Default_Base = 10}
 
-Put(126);                            --@i{ "b126"}
-Put(-126, 7);                        --@i{ "bbb@en@|126"}
-Put(126, Width => 13, Base => 2);    --@i{ "bbb2#1111110#"}
+Put(126);                            --@RI{ "b126"}
+Put(-126, 7);                        --@RI{ "bbb@en@|126"}
+Put(126, Width => 13, Base => 2);    --@RI{ "bbb2#1111110#"}
 @end{Example}
 @end{Examples}
 
@@ -2492,14 +2492,14 @@ same set of formats.
 @begin{Examples}
 @begin{Example}
 @key[package] Real_IO @key[is] @key[new] Float_IO(Real); @key[use] Real_IO;
---@i{ default format used at instantiation, Default_Exp = 3}
+--@RI{ default format used at instantiation, Default_Exp = 3}
 
-X : Real := -123.4567;  --@i{  digits 8      (see @RefSecNum{Floating Point Types})}
+X : Real := -123.4567;  --@RI{  digits 8      (see @RefSecNum{Floating Point Types})}
 
-@tabclear()
-Put(X);  @i[-- default format]                          @i[@^"@en@|1.2345670E+02"]
-Put(X, Fore => 5, Aft => 3, Exp => 2); @\@i[-- "bbb@en@|1.235E+2"]
-Put(X, 5, 3, 0);             @\@i[-- "b@en@|123.457"]
+@tabclear()@tabset(P50)
+Put(X);  @RI[-- default format] @\@RI["@en@|1.2345670E+02"]
+Put(X, Fore => 5, Aft => 3, Exp => 2); @\@RI[-- "bbb@en@|1.235E+2"]
+Put(X, 5, 3, 0);             @\@RI[-- "b@en@|123.457"]
 @end{Example}
 @end{Examples}
 
@@ -2621,10 +2621,10 @@ defined by the language.
 There is a difference between Put defined for characters, and for
 enumeration values.  Thus
 @begin{Example}
-Ada.Text_IO.Put('A');  --@i{  outputs the character A}
+Ada.Text_IO.Put('A');  --@RI{  outputs the character A}
 
 @key[package] Char_IO @key[is] @key[new] Ada.Text_IO.Enumeration_IO(Character);
-Char_IO.Put('A');  --@i{  outputs the character 'A', between apostrophes}
+Char_IO.Put('A');  --@RI{  outputs the character 'A', between apostrophes}
 @end{Example}
 
 The type Boolean is an enumeration type, hence Enumeration_IO can be
@@ -2710,9 +2710,9 @@ The library package Streams.Stream_IO has the following declaration:
 
     @key(type) File_Mode @key(is) (In_File, Out_File, Append_File);
 
-    @key[type]    Count          @key[is] @key[range] 0 .. @i[implementation-defined];
+    @key[type]    Count          @key[is] @key[range] 0 .. @RI[implementation-defined];
     @key[subtype] Positive_Count @key[is] Count @key[range] 1 .. Count'Last;
-      -- @i(Index into file, in stream elements.)
+      -- @RI(Index into file, in stream elements.)
 
     @key(procedure) Create (File : @key(in) @key(out) File_Type;
                       Mode : @key(in) File_Mode := Out_File;
@@ -2723,30 +2723,30 @@ The library package Streams.Stream_IO has the following declaration:
                     Mode : @key(in) File_Mode;
                     Name : @key(in) String;
                     Form : @key(in) String := "");
-@hinge()
+
 
     @key(procedure) Close  (File : @key(in) @key(out) File_Type);
     @key(procedure) Delete (File : @key(in) @key(out) File_Type);
     @key(procedure) Reset  (File : @key(in) @key(out) File_Type; Mode : @key(in) File_Mode);
     @key(procedure) Reset  (File : @key(in) @key(out) File_Type);
-@hinge()
+
 
     @key(function) Mode (File : @key(in) File_Type) @key(return) File_Mode;
     @key(function) Name (File : @key(in) File_Type) @key(return) String;
     @key(function) Form (File : @key(in) File_Type) @key(return) String;
-@hinge()
+
 
     @key(function) Is_Open     (File : @key(in) File_Type) @key(return) Boolean;
     @key(function) End_Of_File (File : @key(in) File_Type) @key(return) Boolean;
-@hinge()
+
 
     @key(function) Stream (File : @key(in) File_Type) @key(return) Stream_Access;
-        -- @i(Return stream access for use with T'Input and T'Output)
-@hinge()
+        -- @RI(Return stream access for use with T'Input and T'Output)
 
-@hinge()
 
-    -- @i(Read array of stream elements from file)
+
+
+    -- @RI(Read array of stream elements from file)
     @key(procedure) Read (File : @key(in)  File_Type;
                     Item : @key(out) Stream_Element_Array;
                     Last : @key(out) Stream_Element_Offset;
@@ -2756,9 +2756,9 @@ The library package Streams.Stream_IO has the following declaration:
                     Item : @key(out) Stream_Element_Array;
                     Last : @key(out) Stream_Element_Offset);
 
-@hinge()
 
-    -- @i(Write array of stream elements into file)
+
+    -- @RI(Write array of stream elements into file)
     @key(procedure) Write (File : @key(in) File_Type;
                      Item : @key(in) Stream_Element_Array;
                      To   : @key(in) Positive_Count);
@@ -2766,10 +2766,10 @@ The library package Streams.Stream_IO has the following declaration:
     @key(procedure) Write (File : @key(in) File_Type;
                            Item : @key(in) Stream_Element_Array);
 
-@hinge()
 
-    -- @i(Operations on position within file)
-@hinge()
+
+    -- @RI(Operations on position within file)
+
 
     @key[procedure] Set_Index(File : @key[in] File_Type; To : @key[in] Positive_Count);
 
@@ -2779,9 +2779,9 @@ The library package Streams.Stream_IO has the following declaration:
     @key(procedure) Set_Mode(File : @key(in) @key(out) File_Type; Mode : @key(in) File_Mode);
 
     @key(procedure) Flush(File : @key(in) @key(out) File_Type);
-@hinge()
 
-    -- @i(exceptions)
+
+    -- @RI(exceptions)
     Status_Error : @key(exception) @key(renames) IO_Exceptions.Status_Error;
     Mode_Error   : @key(exception) @key(renames) IO_Exceptions.Mode_Error;
     Name_Error   : @key(exception) @key(renames) IO_Exceptions.Name_Error;
@@ -2791,7 +2791,7 @@ The library package Streams.Stream_IO has the following declaration:
     Data_Error   : @key(exception) @key(renames) IO_Exceptions.Data_Error;
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key(end) Ada.Streams.Stream_IO;
 @end(example)
 

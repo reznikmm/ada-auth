@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/26 05:03:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/27 04:44:02 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:28 $}
+@Comment{$Date: 2000/05/27 04:44:02 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -150,14 +150,14 @@ principal branch:
    The result of the Arcsin function is in the quadrant containing the point
    (1.0, @i[x]), where @i[x] is the value of the parameter X.  This quadrant is
    I or IV; thus, the range of the Arcsin function is approximately
-   @Math{-@Pi/2.0} to @Math{@Pi/2.0}
-   (@Math{-@r[Cycle]/4.0} to @Math{@r[Cycle]/4.0},
+   -@Pi/2.0 to @Pi/2.0
+   (-@R[Cycle]/4.0 to @R[Cycle]/4.0,
    if the parameter Cycle is specified).
 
    The result of the Arccos function is in the quadrant containing the point
    (@i{x}, 1.0), where @i[x] is the value of the parameter X.  This quadrant is
    I or II; thus, the Arccos function ranges from 0.0 to approximately
-   @Math{@Pi} (@Math{@r[Cycle]/2.0}, if the parameter Cycle is specified).
+   @Pi (@R[Cycle]/2.0, if the parameter Cycle is specified).
 
    The results of the Arctan and Arccot functions are in the quadrant
    containing the point (@i[x], @i[y]), where @i[x] and @i[y] are the values of
@@ -165,16 +165,16 @@ principal branch:
    IV) when the parameter X (resp., Y) of Arctan (resp., Arccot) is specified,
    but it is restricted to quadrants I and IV (resp., I and II) when that
    parameter is omitted.  Thus, the range when that parameter is specified is
-   approximately @Math{-@Pi} to @Math{@Pi}
-   (@Math{-@r[Cycle]/2.0} to @Math{@r[Cycle]/2.0},
+   approximately -@Pi to @Pi
+   (-@R[Cycle]/2.0 to @R[Cycle]/2.0,
    if the parameter Cycle is specified); when omitted, the range of Arctan
    (resp., Arccot) is that of Arcsin (resp., Arccos), as given above.  When the
    point (@i[x], @i[y]) lies on the negative x-axis, the result approximates
    @begin{Itemize}
-      @Math{@Pi} (resp., @Math{-@Pi}) when the sign of the parameter Y is
+      @Pi (resp., -@Pi) when the sign of the parameter Y is
       positive (resp., negative), if Float_Type'Signed_Zeros is True;
 
-      @Math{@Pi}, if Float_Type'Signed_Zeros is False.
+      @Pi, if Float_Type'Signed_Zeros is False.
    @end{Itemize}
 @end{Itemize}
 
@@ -303,7 +303,7 @@ raised:
 
    The results of the Sin, Cos, Tan, and Cot functions with specified cycle are
    exact when the mathematical result is zero; those of the first two are also
-   exact when the mathematical result is @Math{@PorM 1.0}.
+   exact when the mathematical result is @PorM 1.0.
 
    Exponentiation by a zero exponent yields the value one.  Exponentiation by
    a unit exponent yields the value of the left operand.  Exponentiation of
@@ -383,8 +383,7 @@ in the following ways:
 @LabeledSubClause{Random Number Generation}
 
 @begin{Intro}
-@redundant[
-Facilities for the generation of pseudo-random floating point numbers are
+@redundant[Facilities for the generation of pseudo-random floating point numbers are
 provided in the package Numerics.Float_Random; the generic package
 Numerics.Discrete_Random provides similar facilities for the generation of
 pseudo-random integers and pseudo-random values of enumeration
@@ -406,8 +405,7 @@ include subprograms to save and restore the state of a given generator; a
 private type whose objects can be used to hold the saved state of a
 generator;
 and subprograms to obtain a string representation of a given generator state,
-or, given such a string representation, the corresponding state.
-]
+or, given such a string representation, the corresponding state.]
 @begin{Discussion}
 These facilities support a variety of requirements ranging from repeatable
 sequences (for debugging) to unique sequences in each execution of a program.
@@ -420,42 +418,42 @@ The library package Numerics.Float_Random has the following declaration:
 @ChildUnit{Parent=[Ada.Numerics],Child=[Float_Random],Expanded=[Ada.Numerics.Float_Random]}
 @key[package] Ada.Numerics.Float_Random @key[is]
 
-   -- @i{Basic facilities}
+   -- @RI{Basic facilities}
 
 @LangDefType{Package=[Ada.Numerics.Float_Random],Type=[Generator]}
    @key[type] Generator @key[is] @key[limited] @key[private];
-@Hinge{}
+
 
    @key[subtype] Uniformly_Distributed @key[is] Float @key[range] 0.0 .. 1.0;
    @key[function] Random (Gen : Generator) @key[return] Uniformly_Distributed;
-@Hinge{}
+
 
    @key[procedure] Reset (Gen       : @key[in] Generator;
                     Initiator : @key[in] Integer);
    @key[procedure] Reset (Gen       : @key[in] Generator);
-@Hinge{}
 
-   -- @i{Advanced facilities}
+
+   -- @RI{Advanced facilities}
 
 @LangDefType{Package=[Ada.Numerics.Float_Random],Type=[State]}
    @key[type] State @key[is] @key[private];
-@Hinge{}
+
 
    @key[procedure] Save  (Gen        : @key[in]  Generator;
                     To_State   : @key[out] State);
    @key[procedure] Reset (Gen        : @key[in]  Generator;
                     From_State : @key[in]  State);
-@Hinge{}
 
-   Max_Image_Width : @key[constant] := @i{implementation-defined integer value};
-@Hinge{}
+
+   Max_Image_Width : @key[constant] := @RI{implementation-defined integer value};
+
 
    @key[function] Image (Of_State    : State)  @key[return] String;
    @key[function] Value (Coded_State : String) @key[return] State;
-@Hinge{}
+
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Numerics.Float_Random;
 @end{Example}
 
@@ -467,41 +465,41 @@ declaration:
    @key[type] Result_Subtype @key[is] (<>);
 @key[package] Ada.Numerics.Discrete_Random @key[is]
 
-   -- @i{Basic facilities}
+   -- @RI{Basic facilities}
 
 @LangDefType{Package=[Ada.Numerics.Discrete_Random],Type=[Generator]}
    @key[type] Generator @key[is] @key[limited] @key[private];
-@Hinge{}
+
 
    @key[function] Random (Gen : Generator) @key[return] Result_Subtype;
-@Hinge{}
+
 
    @key[procedure] Reset (Gen       : @key[in] Generator;
                     Initiator : @key[in] Integer);
    @key[procedure] Reset (Gen       : @key[in] Generator);
-@Hinge{}
 
-   -- @i{Advanced facilities}
+
+   -- @RI{Advanced facilities}
 
 @LangDefType{Package=[Ada.Numerics.Discrete_Random],Type=[State]}
    @key[type] State @key[is] @key[private];
-@Hinge{}
+
 
    @key[procedure] Save  (Gen        : @key[in]  Generator;
                     To_State   : @key[out] State);
    @key[procedure] Reset (Gen        : @key[in]  Generator;
                     From_State : @key[in]  State);
-@Hinge{}
 
-   Max_Image_Width : @key[constant] := @i{implementation-defined integer value};
-@Hinge{}
+
+   Max_Image_Width : @key[constant] := @RI{implementation-defined integer value};
+
 
    @key[function] Image (Of_State    : State)  @key[return] String;
    @key[function] Value (Coded_State : String) @key[return] State;
-@Hinge{}
+
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Numerics.Discrete_Random;
 @end{Example}
 @ImplDef{The value of Numerics.Float_Random.Max_Image_Width.}
@@ -636,7 +634,7 @@ subtype.
 The Random function in an instantiation of Numerics.Discrete_Random is
 guaranteed to yield each value in its result subtype in a finite number of
 calls, provided that the number of such values does not exceed
-@Math{2 @Up[15]}.
+2 @+[15].
 
 Other performance requirements for the random number generator, which apply
 only in implementations conforming to the Numerics Annex, and then only in the
@@ -702,13 +700,13 @@ transforming the result of the Random function in Numerics.Float_Random.
 However, some applications with unusual requirements, such as for a sequence of
 random integers each drawn from a different range, will find it more convenient
 to transform the result of the floating point Random function.  For
-@Math{@r[M] @geq 1}, the expression
+@R[M] @geq 1, the expression
 @begin{Example}
 Integer(Float(M) * Random(G)) mod M
 @end{Example}
 
 @NoPrefix@;transforms the result of Random(G) to an integer uniformly distributed over the
-range 0 .. @Math{@r[M]-1}; it is valid even if Random delivers 0.0 or 1.0.
+range 0 .. @R[M]-1; it is valid even if Random delivers 0.0 or 1.0.
 Each value of the result range is possible, provided that M is not too large.
 Exponentially distributed (floating point) random numbers with mean and
 standard deviation 1.0 can be obtained by the transformation
@@ -728,42 +726,35 @@ value.
 @i{Example of a program that plays a simulated dice game:}
 @begin{Example}
 @key[with] Ada.Numerics.Discrete_Random;
-@key[procedure] Dice_Game @key[is]
-@Hinge{}
+@key[procedure] Dice_Game @key[is]@Softpage
    @key[subtype] Die @key[is] Integer @key[range] 1 .. 6;
    @key[subtype] Dice @key[is] Integer @key[range] 2*Die'First .. 2*Die'Last;
    @key[package] Random_Die @key[is] @key[new] Ada.Numerics.Discrete_Random (Die);
    @key[use] Random_Die;
    G : Generator;
-   D : Dice;
-@Hinge{}
-@key[begin]
-@Hinge{}
-   Reset (G);  -- @i{Start the generator in a unique state in each run}
+   D : Dice;@Softpage
+@key[begin]@Softpage
+   Reset (G);  -- @RI{Start the generator in a unique state in each run}
    @key[loop]
-      -- @i{Roll a pair of dice; sum and process the results}
+      -- @RI{Roll a pair of dice; sum and process the results}
       D := Random(G) + Random(G);
       ...
-   @key[end] @key[loop];
-@Hinge{}
+   @key[end] @key[loop];@Softpage
 @key[end] Dice_Game;
 @end{Example}
 
 @i{Example of a program that simulates coin tosses:}
 @begin{Example}
 @key[with] Ada.Numerics.Discrete_Random;
-@key[procedure] Flip_A_Coin @key[is]
-@Hinge{}
+@key[procedure] Flip_A_Coin @key[is]@Softpage
    @key[type] Coin @key[is] (Heads, Tails);
    @key[package] Random_Coin @key[is] @key[new] Ada.Numerics.Discrete_Random (Coin);
    @key[use] Random_Coin;
-   G : Generator;
-@Hinge{}
-@key[begin]
-@Hinge{}
-   Reset (G);  -- @i{Start the generator in a unique state in each run}
+   G : Generator;@Softpage
+@key[begin]@Softpage
+   Reset (G);  -- @RI{Start the generator in a unique state in each run}
    @key[loop]
-      -- @i{Toss a coin and process the result}
+      -- @RI{Toss a coin and process the result}
       @key[case] Random(G) @key[is]
           @key[when] Heads =>
              ...
@@ -771,8 +762,7 @@ value.
              ...
       @key[end] @key[case];
    ...
-   @key[end] @key[loop];
-@Hinge{}
+   @key[end] @key[loop];@Softpage
 @key[end] Flip_A_Coin;
 @end{Example}
 
@@ -780,20 +770,17 @@ value.
 generator of event probabilities in each task:}
 @begin{Example}
 @key[with] Ada.Numerics.Float_Random;
-@key[procedure] Parallel_Simulation @key[is]
-@Hinge{}
+@key[procedure] Parallel_Simulation @key[is]@Softpage
    @key[use] Ada.Numerics.Float_Random;
    @key[task] @key[type] Worker @key[is]
       @key[entry] Initialize_Generator (Initiator : @key[in] Integer);
       ...
    @key[end] Worker;
-   W : @key[array] (1 .. 10) @key[of] Worker;
-@Hinge{}
+   W : @key[array] (1 .. 10) @key[of] Worker;@Softpage
    @key[task] @key[body] Worker @key[is]
       G : Generator;
       Probability_Of_Event : Uniformly_Distributed;
-   @key[begin]
-@Hinge{}
+   @key[begin]@Softpage
       @key[accept] Initialize_Generator (Initiator : @key[in] Integer) @key[do]
          Reset (G, Initiator);
       @key[end] Initialize_Generator;
@@ -802,16 +789,13 @@ generator of event probabilities in each task:}
          Probability_Of_Event := Random(G);
          ...
       @key[end] @key[loop];
-   @key[end] Worker;
-@Hinge{}
-@key[begin]
-@Hinge{}
-   -- @i{Initialize the generators in the Worker tasks to different states}
+   @key[end] Worker;@Softpage
+@key[begin]@Softpage
+   -- @RI{Initialize the generators in the Worker tasks to different states}
    @key[for] I @key[in] W'Range @key[loop]
       W(I).Initialize_Generator (I);
    @key[end] @key[loop];
-   ... -- @i{Wait for the Worker tasks to terminate}
-@Hinge{}
+   ... -- @RI{Wait for the Worker tasks to terminate}@Softpage
 @key[end] Parallel_Simulation;
 @end{Example}
 @end{Examples}

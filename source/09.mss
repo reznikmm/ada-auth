@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/27 04:44:00 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 
@@ -140,7 +140,7 @@ a named task object of that type.
 @Syn{lhs=<single_task_declaration>,rhs="
    @key{task} @Syn2{defining_identifier} [@key{is} @Syn2{task_definition}];"}
 
-@Hinge{}
+
 @Syn{lhs=<task_definition>,rhs="
      {@Syn2{task_item}}
   [ @key{private}
@@ -149,7 +149,7 @@ a named task object of that type.
 
 @Syn{lhs=<task_item>,rhs="@Syn2{entry_declaration} | @Syn2{representation_clause}"}
 
-@Hinge{}
+@Softpage
 @Syn{lhs=<task_body>,rhs="
    @key{task} @key{body} @Syn2{defining_identifier} @key{is}
      @Syn2{declarative_part}
@@ -167,8 +167,7 @@ it shall repeat the @nt{defining_identifier}.
 @begin{Legality}
 @PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
 A task declaration requires a completion@redundant[,
-which shall be a @nt{task_body},
-]
+which shall be a @nt{task_body},]
 and every @nt{task_body} shall be the completion of some
 task declaration.
 @begin(Honest)
@@ -196,13 +195,11 @@ Private part is defined in Section 8.@end{theproof}
 
 @begin{RunTime}
 
-@redundant[
-@PDefn2{Term=[elaboration], Sec=(task declaration)}
+@redundant[@PDefn2{Term=[elaboration], Sec=(task declaration)}
 The elaboration of a task declaration elaborates the @nt<task_definition>.
 @PDefn2{Term=[elaboration], Sec=(single_task_declaration)}
 The elaboration of a @nt<single_task_declaration> also creates
-an object of an (anonymous) task type.
-]
+an object of an (anonymous) task type.]
 @begin(TheProof)
   This is redundant with the general rules for the elaboration
   of a @nt<full_type_declaration> and an @nt<object_declaration>.
@@ -239,11 +236,9 @@ The elaboration of a @nt{task_body} has no effect other than to establish
 that tasks of the type can from then on be activated without
 failing the Elaboration_Check.
 
-@redundant[
-The execution of a @nt<task_body> is invoked by the activation of a
+@redundant[The execution of a @nt<task_body> is invoked by the activation of a
 task of the corresponding type
-(see @RefSecNum(Task Execution - Task Activation)).
-]
+(see @RefSecNum(Task Execution - Task Activation)).]
 
 The content of a task object of a given task type includes:
 @begin(itemize)
@@ -312,7 +307,7 @@ can be used for task identification
 @i{Examples of declarations of single tasks:}
 @begin{Example}
 @key(task) Controller @key(is)
-   @key(entry) Request(Level)(D : Item);  @i[--  a family of entries]
+   @key(entry) Request(Level)(D : Item);  @RI[--  a family of entries]
 @key(end) Controller;
 
 @key(task) Parser @key(is)
@@ -320,7 +315,7 @@ can be used for task identification
    @key(entry) Next_Action(A : @key(out) Parser_Action);
 @key(end);
 
-@key(task) User;  @i[--  has no entries]
+@key(task) User;  @RI[--  has no entries]
 @end{Example}
 
 @i{Examples of task objects:}
@@ -475,10 +470,10 @@ exception or because it is aborted
 @i{Example of task activation:}
 @begin{Example}
 @key(procedure) P @key(is)
-   A, B : Server;    @i[--  elaborate the task objects A, B]
-   C    : Server;    @i[--  elaborate the task object C]
+   A, B : Server;    @RI[--  elaborate the task objects A, B]
+   C    : Server;    @RI[--  elaborate the task object C]
 @key(begin)
-   @i[--  the tasks A, B, C are activated together before the first statement]
+   @RI[--  the tasks A, B, C are activated together before the first statement]
    ...
 @key(end);
 @end{Example}
@@ -606,25 +601,23 @@ the abort of the task.
 @i{Example of task dependence:}
 @begin{Example}
 @key(declare)
-   @key(type) Global @key(is) @key(access) Server;        @i[--  see @RefSecNum(Task Units and Task Objects)]
+   @key(type) Global @key(is) @key(access) Server;        @RI[--  see @RefSecNum(Task Units and Task Objects)]
    A, B : Server;
-   G    : Global;
-@hinge{}
+   G    : Global;@Softpage
 @key(begin)
-   @i[--  activation of A and B]
+   @RI[--  activation of A and B]
    @key(declare)
       @key(type) Local @key(is) @key(access) Server;
-      X : Global := @key(new) Server;  @i[--  activation of X.@key{all}]
-      L : Local  := @key(new) Server;  @i[--  activation of L.@key{all}]
-      C : Server;
-@hinge{}
+      X : Global := @key(new) Server;  @RI[--  activation of X.@key{all}]
+      L : Local  := @key(new) Server;  @RI[--  activation of L.@key{all}]
+      C : Server;@Softpage
    @key(begin)
-      @i[--  activation of C]
-      G := X;  @i[--  both G and X designate the same task object]
+      @RI[--  activation of C]
+      G := X;  @RI[--  both G and X designate the same task object]
       ...
-   @key(end;)  @i[--  await termination of C and L.@key{all} (but not X.@key{all})]
+   @key(end;)  @RI[--  await termination of C and L.@key{all} (but not X.@key{all})]
    ...
-@key(end;)  @i[--  await termination of A, B, and G.@key{all}]
+@key(end;)  @RI[--  await termination of A, B, and G.@key{all}]
 @end{Example}
 
 @end{Examples}
@@ -675,12 +668,12 @@ a named protected object of that type.
 @begin{Syntax}
 @Syn{lhs=<protected_type_declaration>,rhs="
   @key{protected} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] @key{is} @Syn2{protected_definition};"}
-@Hinge{}
+
 
 @Syn{lhs=<single_protected_declaration>,rhs="
   @key{protected} @Syn2{defining_identifier} @key{is} @Syn2{protected_definition};"}
 
-@hinge()
+
 @Syn{lhs=<protected_definition>,rhs="
     { @Syn2{protected_operation_declaration} }
 [ @key{private}
@@ -701,7 +694,7 @@ a named protected object of that type.
      ordering rules for the items inside @nt{declarative_part}s and
      @nt{task_definition}s as well.
 @end{Reason}
-@hinge()
+
 
 @Syn{lhs=<protected_body>,rhs="
   @key{protected} @key{body} @Syn2{defining_identifier} @key{is}
@@ -724,8 +717,7 @@ it shall repeat the @nt{defining_identifier}.
 @begin{Legality}
 @PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
 A protected declaration requires a completion@redundant[,
-which shall be a @nt{protected_body},
-]
+which shall be a @nt{protected_body},]
 and every @nt{protected_body} shall be the completion of some
 protected declaration.
 @begin(Honest)
@@ -754,14 +746,12 @@ Private part is defined in Section 8.@end{theproof}
 
 @begin{RunTime}
 
-@redundant[
-@PDefn2{Term=[elaboration], Sec=(protected declaration)}
+@redundant[@PDefn2{Term=[elaboration], Sec=(protected declaration)}
 The elaboration of a protected declaration
 elaborates the @nt<protected_definition>.
 @PDefn2{Term=[elaboration], Sec=(single_protected_declaration)}
 The elaboration of a @nt<single_protected_declaration> also creates
-an object of an (anonymous) protected type.
-]
+an object of an (anonymous) protected type.]
 @begin(TheProof)
   This is redundant with the general rules for the elaboration
   of a @nt<full_type_declaration> and an @nt<object_declaration>.
@@ -774,11 +764,9 @@ subtype;] it also includes the elaboration of the
 @nt<component_declaration>s and @nt<protected_operation_declaration>s
 in the given order.
 
-@redundant[
-@PDefn2{Term=[initialization], Sec=(of a protected object)}
+@redundant[@PDefn2{Term=[initialization], Sec=(of a protected object)}
 As part of the initialization of a protected object,
-any per-object constraints (see @RefSecNum{Record Types}) are elaborated.
-]
+any per-object constraints (see @RefSecNum{Record Types}) are elaborated.]
 @begin{Discussion}
   We do not mention pragmas since each pragma has its
   own elaboration rules.
@@ -934,7 +922,7 @@ since an entry involves an implicit component @em the entry queue.
 @i{Example of a single protected declaration and corresponding body:}
 @begin{Example}
 @key(protected) Shared_Array @key(is)
-   @i[--  Index, Item, and Item_Array are global types]
+   @RI[--  Index, Item, and Item_Array are global types]
    @key(function)  Component    (N : @key(in) Index) return Item;
    @key(procedure) Set_Component(N : @key(in) Index; E : @key(in)  Item);
 @key(private)
@@ -1026,11 +1014,11 @@ Other_Object : Some_Other_Protected_Type;
 
   @key[procedure] Op2 @key[is]
   @key[begin]
-    Op1; --@i{ An internal call.}
-    Pt.Op1; --@i{ Another internal call.}
-    PO.Op1; --@i{ An external call.  It the current instance is PO, then}
-            --@i{ this is a bounded error (see @RefSecNum{Protected Subprograms and Protected Actions}).}
-    Other_Object.Some_Op; --@i{ An external call.}
+    Op1; --@RI{ An internal call.}
+    Pt.Op1; --@RI{ Another internal call.}
+    PO.Op1; --@RI{ An external call.  It the current instance is PO, then}
+            --@RI{ this is a bounded error (see @RefSecNum{Protected Subprograms and Protected Actions}).}
+    Other_Object.Some_Op; --@RI{ An external call.}
   @key[end] Op2;
 @key[end] Pt;
 @end{Example}
@@ -1297,7 +1285,7 @@ tasks and protected objects.
 @Syn{lhs=<entry_declaration>,rhs="
    @key{entry} @Syn2{defining_identifier} [(@Syn2{discrete_subtype_definition})] @Syn2{parameter_profile};"}
 
-@Hinge{}
+
 @Syn{lhs=<accept_statement>,rhs="
    @key{accept} @SynI{entry_}@Syn2{direct_name} [(@Syn2{entry_index})] @Syn2{parameter_profile} [@key{do}
      @Syn2{handled_sequence_of_statements}
@@ -1311,7 +1299,7 @@ tasks and protected objects.
 
 @Syn{lhs=<entry_index>,rhs="@Syn2{expression}"}
 
-@Hinge{}
+
 @Syn{lhs=<entry_body>,rhs="
   @key{entry} @Syn2{defining_identifier}  @Syn2{entry_body_formal_part}  @Syn2{entry_barrier} @key{is}
     @Syn2{declarative_part}
@@ -1319,15 +1307,15 @@ tasks and protected objects.
     @Syn2{handled_sequence_of_statements}
   @key{end} [@SynI{entry_}@Syn2{identifier}];"}
 
-@Hinge{}
+
 @Syn{lhs=<entry_body_formal_part>,
   rhs="[(@Syn2{entry_index_specification})] @Syn2{parameter_profile}"}
 
-@Hinge{}
+
 @Syn{lhs=<entry_barrier>,
   rhs="@key{when} @Syn2{condition}"}
 
-@Hinge{}
+
 @Syn{lhs=<entry_index_specification>,
   rhs="@key{for} @Syn2{defining_identifier} @key{in} @Syn2{discrete_subtype_definition}"}
 
@@ -1382,7 +1370,7 @@ a specification for an access parameter (see @RefSecNum(Access Types)).
   For example:
   @begin(Example)
 @key(task) T @key(is)
-   @key(entry) E(Z : @key(access) Integer); --@i{ Illegal!}
+   @key(entry) E(Z : @key(access) Integer); --@RI{ Illegal!}
 @key(end) T;
 
 @key(task body) T @key(is)
@@ -1466,8 +1454,7 @@ to rather unusual and possibly difficult-to-specify semantics.
 
 @PDefn2{Term=[requires a completion], Sec=(protected @nt{entry_declaration})}
 An @nt{entry_declaration} of a protected unit requires
-a completion@redundant[, which shall be an @nt{entry_body},
-]
+a completion@redundant[, which shall be an @nt{entry_body},]
 @PDefn2{Term=[only as a completion], Sec=(@nt<entry_body>)}
 and every @nt<entry_body> shall be the completion
 of an @nt<entry_declaration> of a protected unit.
@@ -1690,7 +1677,7 @@ when its parameters indicate that it cannot be handled immediately.
 @begin{Example}
 @key(entry) Read(V : @key(out) Item);
 @key(entry) Seize;
-@key(entry) Request(Level)(D : Item);  @i[--  a family of entries]
+@key(entry) Request(Level)(D : Item);  @RI[--  a family of entries]
 @end{Example}
 
 @i{Examples of accept statements:}
@@ -2106,19 +2093,18 @@ have been updated by an action performed from outside of a protected action.
 @begin{Examples}
 @i{Examples of entry calls:}
 @begin{Example}
-Agent.Shut_Down;                      @i[--  see @RefSecNum(Task Units and Task Objects)]
-Parser.Next_Lexeme(E);                @i[--  see @RefSecNum(Task Units and Task Objects)]
-Pool(5).Read(Next_Char);              @i[--  see @RefSecNum(Task Units and Task Objects)]
-Controller.Request(Low)(Some_Item);   @i[--  see @RefSecNum(Task Units and Task Objects)]
-Flags(3).Seize;                       @i[--  see @RefSecNum(Protected Units and Protected Objects)]
+Agent.Shut_Down;                      @RI[--  see @RefSecNum(Task Units and Task Objects)]
+Parser.Next_Lexeme(E);                @RI[--  see @RefSecNum(Task Units and Task Objects)]
+Pool(5).Read(Next_Char);              @RI[--  see @RefSecNum(Task Units and Task Objects)]
+Controller.Request(Low)(Some_Item);   @RI[--  see @RefSecNum(Task Units and Task Objects)]
+Flags(3).Seize;                       @RI[--  see @RefSecNum(Protected Units and Protected Objects)]
 @end{Example}
 @end{Examples}
 
 @LabeledSubClause{Requeue Statements}
 
 @begin{Intro}
-@redundant[
-A @nt<requeue_statement>
+@redundant[A @nt<requeue_statement>
 can be used to complete an @nt<accept_statement> or @nt<entry_body>,
 while redirecting the corresponding entry call to a new (or the same)
 entry queue.
@@ -2127,8 +2113,7 @@ Such a @i(requeue) can be performed with or without allowing
 an intermediate cancellation of the call, due to an abort or
 the expiration of a delay.
 @IndexSee{Term=[preference control],See=(requeue)}
-@IndexSee{Term=[broadcast signal],See=(requeue)}
-]
+@IndexSee{Term=[broadcast signal],See=(requeue)}]
 @end{Intro}
 
 @begin{Syntax}
@@ -2316,10 +2301,10 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 @i{Examples of requeue statements:}
 @begin{Example}
 @key[requeue] Request(Medium) @key[with abort];
-                    @i[-- requeue on a member of an entry family of the current task, see @RefSecNum{Task Units and Task Objects}]
+                    @RI[-- requeue on a member of an entry family of the current task, see @RefSecNum{Task Units and Task Objects}]
 
 @key[requeue] Flags(I).Seize;
-                    @i[-- requeue on an entry of an array component, see @RefSecNum{Protected Units and Protected Objects}]
+                    @RI[-- requeue on an entry of an array component, see @RefSecNum{Protected Units and Protected Objects}]
 @end{Example}
 @end{Examples}
 
@@ -2330,8 +2315,7 @@ The @nt<requeue_statement> is new.
 @LabeledClause{Delay Statements, Duration, and Time}
 
 @begin{Intro}
-@redundant[
-@PDefn{expiration time}
+@redundant[@PDefn{expiration time}
 A @nt<delay_statement> is used to block further execution until
 a specified @i(expiration time) is reached.
 The expiration time
@@ -2341,14 +2325,13 @@ can be specified either as a particular point in time (in a
 The language-defined
 package Calendar provides definitions for a type Time and associated
 operations, including a function Clock that returns the current time.
-@IndexSee{Term=[timing],See=(delay_statement)}
-]
+@IndexSee{Term=[timing],See=(delay_statement)}]
 @end{Intro}
 
 @begin{Syntax}
 @Syn{lhs=<delay_statement>,
   rhs="@Syn2{delay_until_statement} | @Syn2{delay_relative_statement}"}
-@Hinge{}
+
 
 @Syn{lhs=<delay_until_statement>,
   rhs="@key{delay until} @SynI(delay_)@Syn2{expression};"}
@@ -2408,7 +2391,7 @@ The following language-defined library package exists:
   @key(subtype) Month_Number @key(is) Integer @key(range) 1 ..  12;
   @key(subtype) Day_Number   @key(is) Integer @key(range) 1 ..  31;
   @key(subtype) Day_Duration @key(is) Duration @key(range) 0.0 ..  86_400.0;
-@Hinge()
+
 
   @key(function) Clock @key(return) Time;
 
@@ -2416,27 +2399,27 @@ The following language-defined library package exists:
   @key(function) Month  (Date : Time) @key(return) Month_Number;
   @key(function) Day    (Date : Time) @key(return) Day_Number;
   @key(function) Seconds(Date : Time) @key(return) Day_Duration;
-@Hinge()
+
 
   @key(procedure) Split (Date  : @key(in) Time;
                    Year    : @key(out) Year_Number;
                    Month   : @key(out) Month_Number;
                    Day     : @key(out) Day_Number;
                    Seconds : @key(out) Day_Duration);
-@Hinge()
+
 
   @key(function) Time_Of(Year  : Year_Number;
                    Month   : Month_Number;
                    Day     : Day_Number;
                    Seconds : Day_Duration := 0.0)
    @key(return) Time;
-@Hinge()
+
 
   @key(function) "+" (Left : Time;   Right : Duration) @key(return) Time;
   @key(function) "+" (Left : Duration; Right : Time) @key(return) Time;
   @key(function) "-" (Left : Time;   Right : Duration) @key(return) Time;
   @key(function) "-" (Left : Time;   Right : Time) @key(return) Duration;
-@Hinge()
+
 
   @key(function) "<" (Left, Right : Time) @key(return) Boolean;
   @key(function) "<="(Left, Right : Time) @key(return) Boolean;
@@ -2446,7 +2429,7 @@ The following language-defined library package exists:
   Time_Error : @key(exception;)
 
 @key(private)
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key(end) Ada.Calendar;
 
 @end{Example}
@@ -2608,7 +2591,7 @@ Duration'Small should be no greater than 100 microseconds.
 @begin(ImplNote)
   This can be satisfied using a 32-bit 2's complement representation
   with a @i(small) of 2.0**(@en@;14) @em that is, 61 microseconds @em and a
-  range of @Math{@PorM} 2.0**17 @em that is, 131_072.0.
+  range of @PorM 2.0**17 @em that is, 131_072.0.
 @end(ImplNote)
 
 The time base for @nt{delay_relative_statement}s should be
@@ -2656,7 +2639,7 @@ are given in @RefSec(Delay Accuracy).
 @begin{Examples}
 @i{Example of a relative delay statement:}
 @begin{example}
-@key(delay) 3.0;  @i[-- delay 3.0 seconds]
+@key(delay) 3.0;  @RI[-- delay 3.0 seconds]
 @end{example}
 
 @Defn2{Term=[periodic task],Sec=(example)}
@@ -2666,11 +2649,11 @@ are given in @RefSec(Delay Accuracy).
 @key(declare)
    @key(use) Ada.Calendar;
    Next_Time : Time := Clock + Period;
-                      @i[-- Period is a global constant of type Duration]
+                      @RI[-- Period is a global constant of type Duration]
 @key(begin)
-   @key(loop)               @i[-- repeated every Period seconds]
+   @key(loop)               @RI[-- repeated every Period seconds]
       @key(delay) @key(until) Next_Time;
-      ... @i[-- perform some actions]
+      ... @RI[-- perform some actions]
       Next_Time := Next_Time + Period;
    @key(end) @key(loop;)
 @key(end;)
@@ -2719,12 +2702,10 @@ environment (such as POSIX).
 @LabeledClause{Select Statements}
 
 @begin{Intro}
-@redundant[
-There are four forms of the @nt{select_statement}.  One form provides a
+@redundant[There are four forms of the @nt{select_statement}.  One form provides a
 selective wait for one or more @nt{select_alternative}s.  Two provide
 timed and conditional entry calls.  The fourth provides asynchronous
-transfer of control.
-]
+transfer of control.]
 @end{Intro}
 
 @begin{Syntax}
@@ -2733,7 +2714,6 @@ transfer of control.
   | @Syn2{timed_entry_call}
   | @Syn2{conditional_entry_call}
   | @Syn2{asynchronous_select}"}
-@Hinge{}
 @end{Syntax}
 
 @begin{Examples}
@@ -2755,13 +2735,11 @@ transfer of control.
 @LabeledSubClause{Selective Accept}
 
 @begin{Intro}
-@redundant[
-This form of the @nt{select_statement} allows a combination of waiting for,
+@redundant[This form of the @nt{select_statement} allows a combination of waiting for,
 and selecting from, one or more alternatives.  The
 selection may depend on conditions associated with each alternative of the
 @nt{selective_accept}.
-@IndexSee{Term=[time-out],See=(selective_accept)}
-]
+@IndexSee{Term=[time-out],See=(selective_accept)}]
 @end{Intro}
 
 @begin{Syntax}
@@ -2777,14 +2755,14 @@ selection may depend on conditions associated with each alternative of the
   @key{end select};"}
 
 @Syn{lhs=<guard>,rhs="@key{when} @Syn2{condition} =>"}
-@Hinge{}
+
 
 @Syn{lhs=<select_alternative>,rhs="
    @Syn2{accept_alternative}
   | @Syn2{delay_alternative}
   | @Syn2{terminate_alternative}"}
 
-@hinge()
+
 @Syn{lhs=<accept_alternative>,rhs="
   @Syn2{accept_statement} [@Syn2{sequence_of_statements}]"}
 
@@ -2924,9 +2902,9 @@ to have several open
           Process_Work_Item(Current_Work_Item);
       @key(or)
          @key(accept) Shut_Down;
-         @key(exit);       @i[-- Premature shut down requested]
+         @key(exit);       @RI[-- Premature shut down requested]
       @key(or)
-         @key(terminate);  @i[-- Normal shutdown at end of scope]
+         @key(terminate);  @RI[-- Normal shutdown at end of scope]
       @key(end) @key(select);
    @key(end) @key(loop);
 @key(end) Server;
@@ -2944,12 +2922,10 @@ with @nt<accept_alternative>.
 @LabeledSubClause{Timed Entry Calls}
 
 @begin{Intro}
-@redundant[
-A @nt{timed_entry_call} issues an entry call that is
+@redundant[A @nt{timed_entry_call} issues an entry call that is
 cancelled if the call (or a requeue-with-abort of the call)
 is not selected before the expiration time is reached.
-@IndexSee{Term=[time-out],See=(timed_entry_call)}
-]
+@IndexSee{Term=[time-out],See=(timed_entry_call)}]
 @end{Intro}
 
 @begin{Syntax}
@@ -3005,7 +2981,7 @@ meant.
    Controller.Request(Medium)(Some_Item);
 @key(or)
    @key(delay) 45.0;
-   @i[--  controller too busy, try something else]
+   @RI[--  controller too busy, try something else]
 @key(end) @key(select);
 @end{Example}
 @end{Examples}
@@ -3066,7 +3042,7 @@ the entry, even if the conditional call is not selected.
          R.Seize;
          @key(return);
       @key(else)
-         @key(null);  @i[--  busy waiting]
+         @key(null);  @RI[--  busy waiting]
       @key(end) @key(select);
    @key(end) @key(loop);
 @key(end);
@@ -3085,11 +3061,9 @@ a requeue-with-abort.
 @LabeledSubClause{Asynchronous Transfer of Control}
 
 @begin{Intro}
-@redundant[
-An asynchronous @nt{select_statement} provides
+@redundant[An asynchronous @nt{select_statement} provides
 asynchronous transfer of control
-upon completion of an entry call or the expiration of a delay.
-]
+upon completion of an entry call or the expiration of a delay.]
 @end{Intro}
 
 @begin{Syntax}
@@ -3101,7 +3075,7 @@ upon completion of an entry call or the expiration of a delay.
   @key{end select};"}
 
 @Syn{lhs=<triggering_alternative>,rhs="@Syn2{triggering_statement} [@Syn2{sequence_of_statements}]"}
-@Hinge{}
+
 
 @Syn{lhs=<triggering_statement>,rhs="@Syn2{entry_call_statement} | @Syn2{delay_statement}"}
 
@@ -3187,7 +3161,7 @@ executed after the @nt<abortable_part> is left.
         Terminal.Wait_For_Interrupt;
         Put_Line("Interrupted");
     @key(then abort)
-        -- @i(This will be abandoned upon terminal interrupt)
+        -- @RI(This will be abandoned upon terminal interrupt)
         Put_Line("-> ");
         Get_Line(Command, Last);
         Process_Command(Command(1..Last));
@@ -3206,8 +3180,8 @@ executed after the @nt<abortable_part> is left.
    @key(delay) 5.0;
    Put_Line("Calculation does not converge");
 @key(then abort)
-   -- @i(This calculation should finish in 5.0 seconds;)
-   -- @i( if not, it is assumed to diverge.)
+   -- @RI(This calculation should finish in 5.0 seconds;)
+   -- @RI( if not, it is assumed to diverge.)
    Horribly_Complicated_Recursive_Function(X, Y);
 @key(end) @key(select);
 @end(Example)
@@ -3221,12 +3195,10 @@ executed after the @nt<abortable_part> is left.
 @LabeledClause{Abort of a Task - Abort of a Sequence of Statements}
 
 @begin{Intro}
-@redundant[
-An @nt{abort_statement} causes one or more tasks to become abnormal, thus
+@redundant[An @nt{abort_statement} causes one or more tasks to become abnormal, thus
 preventing any further interaction with such tasks.  The completion
 of the @nt<triggering_statement> of an @nt<asynchronous_select>
-causes a @nt{sequence_of_statements} to be aborted.
-]
+causes a @nt{sequence_of_statements} to be aborted.]
 @end{Intro}
 
 @begin{Syntax}
@@ -3540,13 +3512,11 @@ hardware efficiently supports it.
 @end{StaticSem}
 
 @begin{RunTime}
-@redundant[
-Separate tasks normally proceed independently and concurrently
+@redundant[Separate tasks normally proceed independently and concurrently
 with one another.  However, task interactions can be used
 to synchronize the actions of two or more tasks to allow,
 for example, meaningful communication by the direct updating and
-reading of variables shared between the tasks.
-]
+reading of variables shared between the tasks.]
 The actions of two different tasks are synchronized in this
 sense when an
 action of one task @i(signals) an action of the other task;
@@ -3700,7 +3670,7 @@ following structure:
    Char : Character;
 @key(begin)
    @key(loop)
-      ... @i[--  produce the next character Char]
+      ... @RI[--  produce the next character Char]
       Buffer.Write(Char);
       @key(exit) @key(when) Char = ASCII.EOT;
    @key(end) @key(loop);
@@ -3718,7 +3688,7 @@ and the consuming task might have the following structure:
    @key(loop)
       Buffer.Read(Char);
       @key(exit) @key(when) Char = ASCII.EOT;
-      ... @i[--  consume the character Char]
+      ... @RI[--  consume the character Char]
    @key(end) @key(loop);
 @key(end) Consumer;
 @end(Example)

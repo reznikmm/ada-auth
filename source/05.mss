@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:27 $}
+@Comment{$Date: 2000/05/27 04:44:00 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -43,13 +43,12 @@ no other @nt<statement>.  A @nt<compound_statement> can enclose
 
 @begin{Syntax}
 @Syn{lhs=<sequence_of_statements>,rhs="@Syn2{statement} {@Syn2{statement}}"}
-@Hinge{}
+
 
 @Syn{lhs=<statement>,rhs="
    {@Syn2{label}} @Syn2{simple_statement} | {@Syn2{label}} @Syn2{compound_statement}"}
 
-@tabclear()@tabset(P31)
-@Syn{lhs=<simple_statement>,rhs="@Syn2{null_statement}
+@Syn{tabs=[P31], lhs=<simple_statement>,rhs="@Syn2{null_statement}
    | @Syn2{assignment_statement} @\| @Syn2{exit_statement}
    | @Syn2{goto_statement} @\| @Syn2{procedure_call_statement}
    | @Syn2{return_statement} @\| @Syn2{entry_call_statement}
@@ -57,8 +56,7 @@ no other @nt<statement>.  A @nt<compound_statement> can enclose
    | @Syn2{abort_statement} @\| @Syn2{raise_statement}
    | @Syn2{code_statement}"}
 
-@tabclear()@tabset(P31)
-@Syn{lhs=<compound_statement>,rhs="
+@Syn{tabs=[P31], lhs=<compound_statement>,rhs="
      @Syn2{if_statement} @\| @Syn2{case_statement}
    | @Syn2{loop_statement}  @\| @Syn2{block_statement}
    | @Syn2{accept_statement} @\| @Syn2{select_statement}"}
@@ -133,11 +131,11 @@ or @nt<block_statement> with the given @nt<statement_identifier>.
   An example that can tell the difference is this:
   @begin{example}
 @key[declare]
-    --@i{ Label Foo is implicitly declared here.}
+    --@RI{ Label Foo is implicitly declared here.}
 @key[begin]
     @key[for] Foo @key[in] ... @key[loop]
         ...
-        <<Foo>> --@i{ Illegal.}
+        <<Foo>> --@RI{ Illegal.}
         ...
     @key[end] @key[loop];
 @key[end];
@@ -200,20 +198,20 @@ Each comment in the following example gives the
 expanded name associated with an entity declared in the task body:
 @begin{Example}
 @key(task body) Compute @key(is)
-   Sum : Integer := 0;                       @i[-- Compute.Sum]
+   Sum : Integer := 0;                       @RI[-- Compute.Sum]
 @key(begin)
- Outer:                                      @i[-- Compute.Outer]
-   @key(for) I @key(in) 1..10 @key(loop)     @i[-- Compute.Outer.I]
-    Blk:                                     @i[-- Compute.Blk]
+ Outer:                                      @RI[-- Compute.Outer]
+   @key(for) I @key(in) 1..10 @key(loop)     @RI[-- Compute.Outer.I]
+    Blk:                                     @RI[-- Compute.Blk]
       @key(declare)
-         Sum : Integer := 0;                 @i[-- Compute.Blk.Sum]
+         Sum : Integer := 0;                 @RI[-- Compute.Blk.Sum]
       @key(begin)
          @key(accept) Ent(I : out Integer; J : in Integer) @key(do)
-                                             @i[-- Compute.Ent.I, Compute.Ent.J]
+                                             @RI[-- Compute.Ent.I, Compute.Ent.J]
             Compute.Ent.I := Compute.Outer.I;
-          Inner:                             @i[-- Compute.Blk.Inner]
+          Inner:                             @RI[-- Compute.Blk.Inner]
             @key(for) J @key(in) 1..10 @key(loop)
-                                             @i[-- Compute.Blk.Inner.J]
+                                             @RI[-- Compute.Blk.Inner.J]
                Sum := Sum + Compute.Blk.Inner.J * Compute.Ent.J;
             @key(end loop) Inner;
          @key(end) Ent;
@@ -319,7 +317,7 @@ For example:
 
   X : R1;
 @key[begin]
-  F.all := X;  @i[-- Right hand side helps resolve left hand side]
+  F.all := X;  @RI[-- Right hand side helps resolve left hand side]
 @end{Example}
 @end{ImplNote}
 @end{Resolution}
@@ -461,11 +459,11 @@ component or slice of such a variable
 Value := Max_Value - 1;
 Shade := Blue;
 
-Next_Frame(F)(M, N) := 2.5;        --@i{  see @RefSecNum{Indexed Components}}
-U := Dot_Product(V, W);            --@i{  see @RefSecNum{Subprogram Bodies}}
+Next_Frame(F)(M, N) := 2.5;        --@RI{  see @RefSecNum{Indexed Components}}
+U := Dot_Product(V, W);            --@RI{  see @RefSecNum{Subprogram Bodies}}
 
-Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@i{ see @RefSecNum{Variant Parts and Discrete Choices}}
-Next_Car.@key[all] := (72074, @key[null]);    --@i{  see @RefSecNum{Incomplete Type Declarations}}
+Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@RI{ see @RefSecNum{Variant Parts and Discrete Choices}}
+Next_Car.@key[all] := (72074, @key[null]);    --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
 @i{Examples involving scalar subtype conversions:}
@@ -474,9 +472,9 @@ I, J : Integer @key[range] 1 .. 10 := 5;
 K    : Integer @key[range] 1 .. 20 := 15;
  ...
 
-I := J;  --@i{  identical ranges}
-K := J;  --@i{  compatible ranges}
-J := K;  --@i{  will raise Constraint_Error if K > 10}
+I := J;  --@RI{  identical ranges}
+K := J;  --@RI{  compatible ranges}
+J := K;  --@RI{  will raise Constraint_Error if K > 10}
 @end{Example}
 
 @i{Examples involving array subtype conversions:}
@@ -485,10 +483,10 @@ A : String(1 .. 31);
 B : String(3 .. 33);
  ...
 
-A := B;  --@i{  same number of components}
+A := B;  --@RI{  same number of components}
 
 A(1 .. 9)  := "tar sauce";
-A(4 .. 12) := A(1 .. 9);  --@i{  A(1 .. 12) = "tartar sauce"}
+A(4 .. 12) := A(1 .. 9);  --@RI{  A(1 .. 12) = "tartar sauce"}
 @end{Example}
 @end{Examples}
 
@@ -542,7 +540,7 @@ value of one or more corresponding @nt{condition}s.]
    [@key{else}
       @Syn2{sequence_of_statements}]
     @key{end} @key{if};"}
-@Hinge{}
+
 
 @Syn{lhs=<condition>,rhs="@SynI{boolean_}@Syn2{expression}"}
 @end{Syntax}
@@ -588,7 +586,7 @@ them is executed.
    Put(Item);
 @key[end] @key[if];
 
-@key[if] My_Car.Owner.Vehicle /= My_Car @key[then]            --@i{  see @RefSecNum{Incomplete Type Declarations}}
+@key[if] My_Car.Owner.Vehicle /= My_Car @key[then]            --@RI{  see @RefSecNum{Incomplete Type Declarations}}
    Report ("Incorrect data");
 @key[end] @key[if];
 @end{Example}
@@ -608,7 +606,7 @@ alternative is defined by the value of an expression.]
        @Syn2{case_statement_alternative}
       {@Syn2{case_statement_alternative}}
    @key{end} @key{case};"}
-@Hinge{}
+
 
 @Syn{lhs=<case_statement_alternative>,rhs="
    @key{when} @Syn2{discrete_choice_list} =>
@@ -756,7 +754,7 @@ given explicitly.
 @begin{Example}
 @tabclear()@tabset(P22)
 @key[case] Sensor @key[is]
-   @key[when] Elevation @\=> Record_Elevation(Sensor_Value);
+   @key[when] Elevation@\=> Record_Elevation(Sensor_Value);
    @key[when] Azimuth@\=> Record_Azimuth  (Sensor_Value);
    @key[when] Distance@\=> Record_Distance (Sensor_Value);
    @key[when] @key[others]@\=> @key[null];
@@ -797,7 +795,7 @@ This change makes the following @nt{case_statement} legal:
 @key[case] F @key[is]
    @key[when] 1 => ...;
    @key[when] 2 => ...;
-   --@i{ No @key{others} needed.}
+   --@RI{ No @key{others} needed.}
 @key[end] @key[case];
 @end{Example}
 
@@ -848,7 +846,7 @@ zero or more times.]
       [@Syn2{iteration_scheme}] @key{loop}
          @Syn2{sequence_of_statements}
        @key{end} @key{loop} [@SynI{loop_}@Syn2{identifier}];"}
-@Hinge{}
+
 
 @Syn{lhs=<iteration_scheme>,rhs="@key{while} @Syn2{condition}
    | @key{for} @Syn2{loop_parameter_specification}"}
@@ -973,7 +971,7 @@ the subtype of the loop parameter is static.
 
 @i{Example of a loop statement with a @key[for] iteration scheme:}
 @begin{Example}
-@key[for] J @key[in] Buffer'Range @key[loop]     --@i{  works even with a null range}
+@key[for] J @key[in] Buffer'Range @key[loop]     --@RI{  works even with a null range}
    @key[if] Buffer(J) /= Space @key[then]
       Put(Buffer(J));
    @key[end] @key[if];
@@ -983,7 +981,7 @@ the subtype of the loop parameter is static.
 @i{Example of a loop statement with a name:}
 @begin{Example}
 Summation:
-   @key[while] Next /= Head @key[loop]       --@i{ see @RefSecNum{Incomplete Type Declarations}}
+   @key[while] Next /= Head @key[loop]       --@RI{ see @RefSecNum{Incomplete Type Declarations}}
       Sum  := Sum + Next.Value;
       Next := Next.Succ;
    @key[end] @key[loop] Summation;
@@ -1126,9 +1124,9 @@ the outer loop.
 
 Main_Cycle:
    @key[loop]
-      --@i{  initial statements}
+      --@RI{  initial statements}
       @key[exit] Main_Cycle @key[when] Found;
-      --@i{  final statements}
+      --@RI{  final statements}
    @key[end] @key[loop] Main_Cycle;
 @end{Example}
 @end{Examples}

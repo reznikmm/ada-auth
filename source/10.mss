@@ -1,15 +1,14 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:27 $}
+@Comment{$Date: 2000/05/27 04:44:00 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
-@redundant[
-The overall structure of programs and the facilities for separate
+@redundant[The overall structure of programs and the facilities for separate
 compilation are described in this section.
 A @i(program) is a set of @i(partitions), each of which
 may execute in a separate address space, possibly on a separate
@@ -97,8 +96,7 @@ RM83.
 @LabeledClause{Separate Compilation}
 
 @begin{Intro}
-@redundant[
-@Defn{separate compilation}
+@redundant[@Defn{separate compilation}
 @Defn2{Term=[compilation], Sec=(separate)}
 @ToGlossaryAlso{Term=<Program unit>,
   Text=<A @i(program unit) is either a package, a task unit,
@@ -114,8 +112,7 @@ RM83.
   more @nt(compilation)s.
   Each @nt(compilation) is a succession of @nt(compilation_unit)s.
   A @nt(compilation_unit) contains either
-  the declaration, the body, or a renaming of a program unit.>}
-]
+  the declaration, the body, or a renaming of a program unit.>}]
 The representation for a @nt<compilation> is implementation-defined.
 @ImplDef{The representation for a @nt{compilation}.}
 @begin{Ramification}
@@ -183,12 +180,10 @@ since a program unit is sort of a potential compilation unit.
 @LabeledSubClause{Compilation Units - Library Units}
 
 @begin{Intro}
-@redundant[
-A @nt{library_item} is a compilation unit that is the declaration, body,
+@redundant[A @nt{library_item} is a compilation unit that is the declaration, body,
 or renaming of a library unit.
 Each library unit (except Standard) has a @i{parent unit},
-which is a library package or generic library package.
-]
+which is a library package or generic library package.]
 @Defn2{Term=[child], Sec=(of a library unit)}
 A library unit is a @i{child} of its parent unit.
 The @i{root} library units are the children of
@@ -200,32 +195,31 @@ Standard is a library unit.
 
 @begin{Syntax}
 @Syn{lhs=<compilation>,rhs="{@Syn2{compilation_unit}}"}
-@Hinge{}
+
 
 @Syn{lhs=<compilation_unit>,rhs="
     @Syn2{context_clause} @Syn2{library_item}
   | @Syn2{context_clause} @Syn2{subunit}"}
-@Hinge{}
+
 
 @Syn{lhs=<library_item>,rhs="[@key{private}] @Syn2{library_unit_declaration}
   | @Syn2{library_unit_body}
   | [@key{private}] @Syn2{library_unit_renaming_declaration}"}
-@Hinge{}
 
-@tabclear()@tabset(P25)
-@Syn{lhs=<library_unit_declaration>,rhs="
+
+@Syn{tabs=[P25], lhs=<library_unit_declaration>,rhs="
      @Syn2{subprogram_declaration} @\| @Syn2{package_declaration}
    | @Syn2{generic_declaration} @\| @Syn2{generic_instantiation}"}
-@Hinge{}
+
 
 @Syn{lhs=<library_unit_renaming_declaration>,rhs="
    @Syn2{package_renaming_declaration}
  | @Syn2{generic_renaming_declaration}
  | @Syn2{subprogram_renaming_declaration}"}
-@Hinge{}
+
 
 @Syn{lhs=<library_unit_body>,rhs="@Syn2{subprogram_body} | @Syn2{package_body}"}
-@Hinge{}
+
 
 @Syn{lhs=<parent_unit_name>,rhs="@Syn2{name}"}
 @end{Syntax}
@@ -529,8 +523,7 @@ renaming-as-declaration, not a renaming-as-body.
 
 
 
-@redundant[
-There are two kinds of dependences among compilation units:
+@redundant[There are two kinds of dependences among compilation units:
 @begin{Itemize}
 The @i{semantic dependences}
 (see below)
@@ -543,8 +536,7 @@ The visibility rules are based on the semantic dependences.
 The @i{elaboration dependences}
 (see @RefSecNum{Program Execution})
 determine the order of elaboration of @nt{library_item}s.
-@end{Itemize}
-]
+@end{Itemize}]
 @begin{Discussion}
 Don't confuse these kinds of dependences with the run-time
 dependences among tasks and masters defined in
@@ -713,25 +705,25 @@ declarative region of package Standard.
 @begin{Examples}
 @i{Examples of library units:}
 @begin{Example}
-@key[package] Rational_Numbers.IO @key[is]  @i[-- public child of Rational_Numbers, see @RefSecNum{Package Specifications and Declarations}]
+@key[package] Rational_Numbers.IO @key[is]  @RI[-- public child of Rational_Numbers, see @RefSecNum{Package Specifications and Declarations}]
    @key[procedure] Put(R : @key[in]  Rational);
    @key[procedure] Get(R : @key[out] Rational);
 @key[end] Rational_Numbers.IO;
 
 @key[private procedure] Rational_Numbers.Reduce(R : @key[in out] Rational);
-                                @i[-- private child of Rational_Numbers]
+                                @RI[-- private child of Rational_Numbers]
 
-@key[with] Rational_Numbers.Reduce;   @i[-- refer to a private child]
+@key[with] Rational_Numbers.Reduce;   @RI[-- refer to a private child]
 @key[package body] Rational_Numbers @key[is]
    ...
 @key[end] Rational_Numbers;
 
 @key[with] Rational_Numbers.IO; @key[use] Rational_Numbers;
-@key[with] Ada.Text_io;               @i[-- see @RefSecNum{Text Input-Output}]
-@key[procedure] Main @key[is]               @i[-- a root library procedure]
+@key[with] Ada.Text_io;               @RI[-- see @RefSecNum{Text Input-Output}]
+@key[procedure] Main @key[is]               @RI[-- a root library procedure]
    R : Rational;
 @key[begin]
-   R := 5/3;                    @i[-- construct a rational number, see @RefSecNum{Package Specifications and Declarations}]
+   R := 5/3;                    @RI[-- construct a rational number, see @RefSecNum{Package Specifications and Declarations}]
    Ada.Text_IO.Put("The answer is: ");
    IO.Put(R);
    Ada.Text_IO.New_Line;
@@ -739,7 +731,7 @@ declarative region of package Standard.
 
 @key[with] Rational_Numbers.IO;
 @key[package] Rational_IO @key[renames] Rational_Numbers.IO;
-                                @i[-- a library unit renaming declaration]
+                                @RI[-- a library unit renaming declaration]
 @end{Example}
 
 Each of the above @nt{library_item}s can be submitted to the compiler
@@ -752,7 +744,7 @@ separately.
    @key[type] Element @key[is] @key[private];
    @key[with] @key[function] Image(E : Element) @key[return] String;
 @key[package] Generic_Bags @key[is]
-   @key[type] Bag @key[is] @key[limited] @key[private]; --@i{ A bag of Elements.}
+   @key[type] Bag @key[is] @key[limited] @key[private]; --@RI{ A bag of Elements.}
    @key[procedure] Add(B : @key[in] @key[out] Bag; E : Element);
    @key[function] Bag_Image(B : Bag) @key[return] String;
 @key[private]
@@ -761,11 +753,11 @@ separately.
 
 @key[generic]
 @key[package] Generic_Bags.Generic_Iterators @key[is]
-   ... --@i{ various additional operations on Bags.}
+   ... --@RI{ various additional operations on Bags.}
 
    @key[generic]
       @key[with] @key[procedure] Use_Element(E : @key[in] Element);
-         --@i{ Called once per bag element.}
+         --@RI{ Called once per bag element.}
    @key[procedure] Iterate(B : @key[in] Bag);
 @key[end] Generic_Bags.Generic_Iterators;
 @end{Example}
@@ -802,7 +794,7 @@ children:
       @key[procedure] Append_Image(E : @key[in] Element) @key[is]
          Im : @key[constant] String := Image(E);
       @key[begin]
-         @key[if] Last /= 0 @key[then] --@i{ Insert a comma.}
+         @key[if] Last /= 0 @key[then] --@RI{ Insert a comma.}
             Last := Last + 1;
             Buffer(Last) := ',';
          @key[end] @key[if];
@@ -847,11 +839,9 @@ Standard.Standard.
 @LabeledSubClause{Context Clauses - With Clauses}
 
 @begin{Intro}
-@redundant[
-A @nt{context_clause} is used to specify
+@redundant[A @nt{context_clause} is used to specify
 the @nt<library_item>s whose
-names are needed within a compilation unit.
-]
+names are needed within a compilation unit.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -867,7 +857,7 @@ to which the @nt{context_clause} is attached.
 
 @begin{Syntax}
 @Syn{lhs=<context_clause>,rhs="{@Syn2{context_item}}"}
-@Hinge{}
+
 
 @Syn{lhs=<context_item>,rhs="@Syn2{with_clause} | @Syn2{use_clause}"}
 
@@ -935,15 +925,13 @@ Visibility holes would cause semantic complexity and implementation
 difficulty.
 @end{Discussion}
 
-@redundant[
-Outside its own declarative region,
+@redundant[Outside its own declarative region,
 the declaration or renaming of
 a library unit can be visible only within the scope of a
 @nt{with_clause} that mentions it.
 The visibility of the declaration or renaming of a
 library unit otherwise
-follows from its placement in the environment.
-]
+follows from its placement in the environment.]
 @end{Resolution}
 
 @begin{Legality}
@@ -1080,36 +1068,34 @@ definition in @RefSecNum{Use Clauses}.
 @LabeledSubClause{Subunits of Compilation Units}
 
 @begin{Intro}
-@redundant[
-Subunits are like child units, with these (important) differences:
+@redundant[Subunits are like child units, with these (important) differences:
 subunits support the separate compilation of bodies
 only (not declarations);
 the parent contains a @nt{body_stub}
 to indicate the existence and place of each of its subunits;
 declarations appearing in the parent's body
-can be visible within the subunits.
-]
+can be visible within the subunits.]
 @end{Intro}
 
 @begin{Syntax}
 @Syn{lhs=<body_stub>,rhs="@Syn2{subprogram_body_stub} | @Syn2{package_body_stub} | @Syn2{task_body_stub} | @Syn2{protected_body_stub}"}
-@Hinge{}
+
 
 @Syn{lhs=<subprogram_body_stub>,rhs="@Syn2{subprogram_specification} @key{is} @key{separate};"}
 @begin{Discussion}
 Although this syntax allows a @nt{parent_unit_name},
 that is disallowed by @RefSec{Compilation Units - Library Units}.
 @end{Discussion}
-@Hinge{}
+
 
 @Syn{lhs=<package_body_stub>,rhs="@key{package} @key{body} @Syn2{defining_identifier} @key{is} @key{separate};"}
-@Hinge{}
+
 
 @Syn{lhs=<task_body_stub>,rhs="@key{task} @key{body} @Syn2{defining_identifier} @key{is} @key{separate};"}
-@Hinge{}
+
 
 @Syn{lhs=<protected_body_stub>,rhs="@key{protected} @key{body} @Syn2{defining_identifier} @key{is} @key{separate};"}
-@Hinge{}
+
 
 @Syn{lhs=<subunit>,rhs="@key{separate} (@Syn2{parent_unit_name}) @Syn2{proper_body}"}
 @end{Syntax}
@@ -1926,14 +1912,14 @@ because that can never happen.
 
 The environment task for a partition has the following structure:
 @begin{Example}
-@key[task] @i{Environment_Task};
+@key[task] @RI{Environment_Task};
 
-@key[task] @key[body] @i{Environment_Task} @key[is]
-    ... (1) --@i{ The environment @nt{declarative_part}}
-            --@i{ (that is, the sequence of @nt{library_item}s) goes here.}
+@key[task] @key[body] @RI{Environment_Task} @key[is]
+    ... (1) --@RI{ The environment @nt{declarative_part}}
+            --@RI{ (that is, the sequence of @nt{library_item}s) goes here.}
 @key[begin]
-    ... (2) --@i{ Call the main subprogram, if there is one.}
-@key[end] @i{Environment_Task};
+    ... (2) --@RI{ Call the main subprogram, if there is one.}
+@key[end] @RI{Environment_Task};
 @end{Example}
 @begin{Ramification}
 The name of the environment task is written in italics here to indicate
@@ -2138,7 +2124,7 @@ same full expanded name, nor two different bodies for the same
 program unit.
 For example, suppose we compile the following:
 @begin{Example}
-@key[package] A @key[is] --@i{ Version 1.}
+@key[package] A @key[is] --@RI{ Version 1.}
     ...
 @key[end] A;
 
@@ -2146,7 +2132,7 @@ For example, suppose we compile the following:
 @key[package] B @key[is]
 @key[end] B;
 
-@key[package] A @key[is] --@i{ Version 2.}
+@key[package] A @key[is] --@RI{ Version 2.}
     ...
 @key[end] A;
 
@@ -2641,15 +2627,13 @@ then the declaration requires a completion @Redundant[(a body)].
 @end{Legality}
 
 @begin{StaticSem}
-@redundant[
-A @nt{pragma} Elaborate specifies that the body of the named library
+@redundant[A @nt{pragma} Elaborate specifies that the body of the named library
 unit is elaborated before the current @nt{library_item}.
 A @nt{pragma} Elaborate_All specifies that each @nt{library_item} that is
 needed by the named library unit declaration
 is elaborated before the current @nt{library_item}.
 A @nt{pragma} Elaborate_Body specifies that the body
-of the library unit is elaborated immediately after its declaration.
-]
+of the library unit is elaborated immediately after its declaration.]
 @begin{TheProof}
 The official statement of the semantics of these @nt{pragma}s is given in
 @RefSecNum{Program Execution}.

@@ -1,15 +1,14 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:28 $}
+@Comment{$Date: 2000/05/27 04:44:01 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.14 $}
+@comment{$Revision: 1.15 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
-@redundant[
-@Defn{Language-Defined Library Units}
+@redundant[@Defn{Language-Defined Library Units}
 @Defn{predefined environment}
 This Annex contains the specifications of library units that shall be
 provided by every implementation.
@@ -17,7 +16,7 @@ There are three root library units:
 Ada, Interfaces, and System;
 other library units are children of these:
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0047]}@ @;@comment{paragraph number here}
+@ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047)}@ @;@comment{paragraph number here}
 @begin{DisplaywithoutParanum}
 @TabClear{}
 @TabSet{L2, L4, L6, L8, L10, L12, L14, L16}
@@ -35,11 +34,11 @@ other library units are children of these:
 @\@\Dynamic_Priorities @em @RefSecNum{Dynamic Priorities}
 @\@\Exceptions @em @RefSecNum{The Package Exceptions}
 @\@\Finalization @em @RefSecNum{User-Defined Assignment and Finalization}
-@Chg{New=[@\@\Float_Text_IO @em @RefSecNum{Input-Output for Real Types}
+@Chg{New=(@\@\Float_Text_IO @em @RefSecNum{Input-Output for Real Types}
 @\@\Float_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output}
 @\@\Integer_Text_IO @em @RefSecNum{Input-Output for Integer Types}
 @\@\Integer_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output}
-], Old=[]}@\@\Interrupts @em @RefSecNum{The Package Interrupts}
+), Old=()}@\@\Interrupts @em @RefSecNum{The Package Interrupts}
 @\@\@\Names @em @RefSecNum{The Package Interrupts}
 @\@\IO_Exceptions @em @RefSecNum{Exceptions in Input-Output}
 @\@\Numerics @em @RefSecNum{The Numerics Packages}
@@ -100,8 +99,7 @@ other library units are children of these:
 @\@\Storage_Elements @em @RefSecNum{The Package System.Storage_Elements}
 @\@\Storage_Pools @em @RefSecNum{Storage Management}>
 @end{TwoCol}
-@end{DisplaywithoutParanum}
-]
+@end{DisplaywithoutParanum}]
 @begin{Discussion}
 In running text, we generally leave out the ``Ada.'' when referring to a
 child of Ada.
@@ -166,4 +164,3 @@ For upward compatibility, these are renamed as root library units
 
 The order and lettering of the annexes has been changed.
 @end{DiffWord83}
-

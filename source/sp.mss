@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:03 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/05/19 04:12:07 $}
+@Comment{$Date: 2000/05/27 04:44:03 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -109,7 +109,7 @@ include:
 Atomic read-modify-write operations @em e.g., test and set, compare and swap,
 decrement and test, enqueue/dequeue.
 
-Standard numeric functions @em e.g., @I{sin}, @I{log}.
+Standard numeric functions @em e.g., @i{sin}, @i{log}.
 
 String manipulation operations @em e.g., translate and test.
 
@@ -538,29 +538,29 @@ The following language-defined packages exist:
 @key{with} System;
 @key[package] Ada.Interrupts @key[is]
 @LangDefType{Package=[Ada.Interrupts],Type=[Interrupt_ID]}
-   @key[type] Interrupt_ID @key[is] @i{implementation-defined};
+   @key[type] Interrupt_ID @key[is] @RI{implementation-defined};
 @LangDefType{Package=[Ada.Interrupts],Type=[Parameterless_Handler]}
    @key[type] Parameterless_Handler @key[is]
       @key[access] @key[protected] @key[procedure];
 
-@hinge{}
+
 
    @key[function] Is_Reserved (Interrupt : Interrupt_ID)
       @key[return] Boolean;
-@hinge{}
+
 
    @key[function] Is_Attached (Interrupt : Interrupt_ID)
       @key[return] Boolean;
-@hinge{}
+
 
    @key[function] Current_Handler (Interrupt : Interrupt_ID)
       @key[return] Parameterless_Handler;
-@hinge{}
+
 
    @key[procedure] Attach_Handler
       (New_Handler : @key[in] Parameterless_Handler;
        Interrupt   : @key[in] Interrupt_ID);
-@hinge{}
+
 
    @key[procedure] Exchange_Handler
       (Old_Handler : @key[out] Parameterless_Handler;
@@ -574,17 +574,17 @@ The following language-defined packages exist:
       @key{return} System.Address;
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Interrupts;
 
-@hinge{}
+
 @ChildUnit{Parent=[Ada.Interrupts],Child=[Names],Expanded=[Ada.Interrupts.Names]}
 @key[package] Ada.Interrupts.Names @key[is]
-   @i{implementation-defined} : @key[constant] Interrupt_ID :=
-     @I{implementation-defined};
+   @RI{implementation-defined} : @key[constant] Interrupt_ID :=
+     @RI{implementation-defined};
       . . .
-   @I{implementation-defined} : @key[constant] Interrupt_ID :=
-     @I{implementation-defined};
+   @RI{implementation-defined} : @key[constant] Interrupt_ID :=
+     @RI{implementation-defined};
 @key[end] Ada.Interrupts.Names;
 @end{example}
 
@@ -688,16 +688,14 @@ the implementation.
 @i{Example of interrupt handlers:}
 @begin{example}
 Device_Priority : @key[constant]
-  @key[array] (1..5) of System.Interrupt_Priority := ( ... );
-@hinge()
+  @key[array] (1..5) of System.Interrupt_Priority := ( ... );@Softpage
 @key[protected] @key[type] Device_Interface
   (Int_ID : Ada.Interrupts.Interrupt_ID) @key[is]
   @key[procedure] Handler;
   @key[pragma] Attach_Handler(Handler, Int_ID);
   ...
   @key[pragma] Interrupt_Priority(Device_Priority(Int_ID));
-@key[end] Device_Interface;
-@hinge()
+@key[end] Device_Interface;@Softpage
   ...
 Device_1_Driver : Device_Interface(1);
   ...
@@ -1134,7 +1132,7 @@ The following language-defined library package exists:
    @key[function]  Is_Terminated(T : Task_ID) @key{return} Boolean;
    @key[function]  Is_Callable  (T : Task_ID) @key{return} Boolean;
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Task_Identification;
 @end{example}
 @end{StaticSem}

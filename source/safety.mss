@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:06 $ $Author: Randy $ }
+@Comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:02 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/27 04:44:02 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}

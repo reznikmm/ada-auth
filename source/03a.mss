@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:26 $}
+@Comment{$Date: 2000/05/27 04:43:59 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.10 $}
+@Comment{$Revision: 1.11 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -30,15 +30,14 @@ is a form of declaration defined as follows.
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()@tabset(P27)
-@Syn{lhs=<basic_declaration>,rhs="
+@Syn{tabs=[P27], lhs=<basic_declaration>,rhs="
      @Syn2{type_declaration} @\| @Syn2{subtype_declaration}
    | @Syn2{object_declaration} @\| @Syn2{number_declaration}
    | @Syn2{subprogram_declaration} @\| @Syn2{abstract_subprogram_declaration}
    | @Syn2{package_declaration} @\| @Syn2{renaming_declaration}
    | @Syn2{exception_declaration} @\| @Syn2{generic_declaration}
    | @Syn2{generic_instantiation}"}
-@Hinge{}
+
 
 @Syn{lhs=<defining_identifier>,rhs="@Syn2{identifier}"}
 @end{Syntax}
@@ -745,18 +744,17 @@ A @nt<type_declaration> declares a type and its first subtype.
    | @Syn2{incomplete_type_declaration}
    | @Syn2{private_type_declaration}
    | @Syn2{private_extension_declaration}"}
-@Hinge{}
+
 
 @Syn{lhs=<full_type_declaration>,rhs="
      @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] @key{is} @Syn2{type_definition};
    | @Syn2{task_type_declaration}
    | @Syn2{protected_type_declaration}"}
 
-@tabclear()@tabset(P29)
-@Syn{lhs=<type_definition>,rhs="
+@Syn{tabs=[P29], lhs=<type_definition>,rhs="
      @Syn2{enumeration_type_definition}@\| @Syn2{integer_type_definition}
-   | @Syn2{real_type_definition}  @\| @Syn2{array_type_definition}
-   | @Syn2{record_type_definition} @\| @Syn2{access_type_definition}
+   | @Syn2{real_type_definition}    @\| @Syn2{array_type_definition}
+   | @Syn2{record_type_definition}  @\| @Syn2{access_type_definition}
    | @Syn2{derived_type_definition}"}
 @end{Syntax}
 
@@ -806,11 +804,9 @@ an object of the type, is called a @i(full type).
 The @nt<type_definition>, @nt<task_definition>, @nt<protected_definition>,
 or @nt<access_definition> that defines a full type is called
 a @i(full type definition).
-@redundant[
-Types declared by other forms of @nt<type_declaration> are
+@redundant[Types declared by other forms of @nt<type_declaration> are
 not separate types; they are partial or incomplete views
-of some full type.
-]
+of some full type.]
 @begin{Honest}
   Class-wide, universal, and root numeric types are full types.
 @end{Honest}
@@ -931,7 +927,7 @@ declared type, as defined by a @nt<subtype_indication>.
 @begin{Syntax}
 @Syn{lhs=<subtype_declaration>,rhs="
    @key{subtype} @Syn2{defining_identifier} @key{is} @Syn2{subtype_indication};"}
-@Hinge{}
+
 
 @Syn{lhs=<subtype_indication>,rhs=" @Syn2{subtype_mark} [@Syn2{constraint}]"}
 
@@ -1029,13 +1025,13 @@ only if the composite subtype is unconstrained
 @begin{Examples}
 @i(Examples of subtype declarations:)
 @begin(Example)
-@key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        @i[--  see @RefSecNum(Type Declarations)]
+@key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        @RI[--  see @RefSecNum(Type Declarations)]
 @key(subtype) Red_Blue  @key(is) Rainbow;
 @key(subtype) Int       @key(is) Integer;
 @key(subtype) Small_Int @key(is) Integer @key(range) -10 .. 10;
-@key(subtype) Up_To_K   @key(is) Column @key(range) 1 .. K;            @i[--  see @RefSecNum(Type Declarations)]
-@key(subtype) Square    @key(is) Matrix(1 .. 10, 1 .. 10);       @i[--  see @RefSecNum(Array Types)]
-@key(subtype) Male      @key(is) Person(Sex => M);               @i[--  see @RefSecNum(Incomplete Type Declarations)]
+@key(subtype) Up_To_K   @key(is) Column @key(range) 1 .. K;            @RI[--  see @RefSecNum(Type Declarations)]
+@key(subtype) Square    @key(is) Matrix(1 .. 10, 1 .. 10);       @RI[--  see @RefSecNum(Array Types)]
+@key(subtype) Male      @key(is) Person(Sex => M);               @RI[--  see @RefSecNum(Incomplete Type Declarations)]
 @end(Example)
 
 @end{Examples}
@@ -1190,8 +1186,7 @@ The description of S'Base has been moved to
 @LabeledClause{Objects and Named Numbers}
 
 @begin{Intro}
-@redundant[
-Objects are created at run time
+@redundant[Objects are created at run time
 and contain a value of a given type.
 @Defn2{Term=[creation], Sec=(of an object)}
 An object can be created and
@@ -1199,8 +1194,7 @@ initialized as part of elaborating a
 declaration, evaluating an @nt<allocator>, @nt<aggregate>,
 or @nt<function_call>, or passing a parameter by copy.
 Prior to reclaiming the storage for an object, it is finalized if
-necessary (see @RefSecNum(Completion and Finalization)).
-]
+necessary (see @RefSecNum(Completion and Finalization)).]
 @end{Intro}
 
 @begin{StaticSem}
@@ -1324,8 +1318,7 @@ subtype, or if it has unknown discriminants or unconstrained
 discriminants without defaults (see @RefSecNum(Discriminants));
 otherwise the subtype is a @i{definite} subtype @Redundant[(all
 elementary subtypes are definite subtypes)].
-@redundant[
-A class-wide subtype is defined to have unknown discriminants,
+@redundant[A class-wide subtype is defined to have unknown discriminants,
 and is therefore an indefinite subtype.
 An indefinite subtype does not by itself
 provide enough information to create an object;
@@ -1691,11 +1684,11 @@ be abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @begin{Examples}
 @i(Example of a multiple object declaration:)
 @begin(Example)
-@i[--  the multiple object declaration ]
+@RI[--  the multiple object declaration ]
 
-John, Paul : Person_Name := @key(new) Person(Sex => M);  @i[--  see @RefSecNum(Incomplete Type Declarations)]
+John, Paul : Person_Name := @key(new) Person(Sex => M);  @RI[--  see @RefSecNum(Incomplete Type Declarations)]
 
-@i[--  is equivalent to the two single object declarations in the order given]
+@RI[--  is equivalent to the two single object declarations in the order given]
 
 John : Person_Name := @key(new) Person(Sex => M);
 Paul : Person_Name := @key(new) Person(Sex => M);
@@ -1815,12 +1808,12 @@ The elaboration of a @nt<number_declaration> has no effect.
 @begin{Examples}
 @i(Examples of number declarations:)
 @begin(Example)
-Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   @i[-- a real number (see @RefSecNum{The Numerics Packages})]
+Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   @RI[-- a real number (see @RefSecNum{The Numerics Packages})]
 
-Max           : @key(constant) := 500;                   @i[-- an integer number]
-Max_Line_Size : @key(constant) := Max/6                  @i[-- the integer 83]
-Power_16      : @key(constant) := 2**16;                 @i[-- the integer 65_536]
-One, Un, Eins : @key(constant) := 1;                     @i[-- three different names for 1]
+Max           : @key(constant) := 500;                   @RI[-- an integer number]
+Max_Line_Size : @key(constant) := Max/6                  @RI[-- the integer 83]
+Power_16      : @key(constant) := 2**16;                 @RI[-- the integer 65_536]
+One, Un, Eins : @key(constant) := 1;                     @RI[-- three different names for 1]
 @end(Example)
 @end{Examples}
 
@@ -2272,11 +2265,11 @@ subtype of the derived type.
 @begin(example)
 @key(type) T1 @key(is range) 1..100;
 @key(subtype) S1 @key(is) T1 @key(range) 1..10;
-@key(procedure) P(X : @key[in] S1);  @i{-- P is a primitive subprogram}
+@key(procedure) P(X : @key[in] S1);  @RI{-- P is a primitive subprogram}
 @key(type) T2 @key(is new) T1 @key(range) 11..20;
-@i(-- implicitly declared:)
-@i{-- @key(procedure) P(X : @key[in] T2'Base @key(range) 1..10);}
-@i{--      X cannot be in T2'First .. T2'Last}
+@RI(-- implicitly declared:)
+@RI{-- @key(procedure) P(X : @key[in] T2'Base @key(range) 1..10);}
+@RI{--      X cannot be in T2'First .. T2'Last}
 @end(example)
 @end(TheProof)
 
@@ -2287,14 +2280,14 @@ type, the type is abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @begin{Examples}
 @i(Examples of derived type declarations:)
 @begin(Example)
-@key(type) Local_Coordinate @key(is) @key(new) Coordinate;   @i[--  two different types]
-@key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu;  @i[--  see @RefSecNum(Enumeration Types)]
-@key(type) Counter @key(is) @key(new) Positive;              @i[--  same range as Positive ]
+@key(type) Local_Coordinate @key(is) @key(new) Coordinate;   @RI[--  two different types]
+@key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu;  @RI[--  see @RefSecNum(Enumeration Types)]
+@key(type) Counter @key(is) @key(new) Positive;              @RI[--  same range as Positive ]
 
-@key(type) Special_Key @key(is) @key(new) Key_Manager.Key;   @i[--  see @RefSecNum(Private Operations)]
-  @i[-- the inherited subprograms have the following specifications: ]
-  @i[--         procedure Get_Key(K : out Special_Key);]
-  @i[--         function "<"(X,Y : Special_Key) return Boolean;]
+@key(type) Special_Key @key(is) @key(new) Key_Manager.Key;   @RI[--  see @RefSecNum(Private Operations)]
+  @RI[-- the inherited subprograms have the following specifications: ]
+  @RI[--         procedure Get_Key(K : out Special_Key);]
+  @RI[--         function "<"(X,Y : Special_Key) return Boolean;]
 @end(Example)
 @end{Examples}
 
@@ -2320,18 +2313,18 @@ this:
       @key[type] T @key[is] (A, B, C, D);
       @key[function] F( X : T := A ) @key[return] Integer;
       @key[type] NT @key[is] @key[new] T;
-      --@i{ inherits F as}
-      --@i{ function F( X : NT := A ) return Integer;}
-      --@i{ in Ada 9X only}
+      --@RI{ inherits F as}
+      --@RI{ function F( X : NT := A ) return Integer;}
+      --@RI{ in Ada 9X only}
       ...
    @key[end] P;
    ...
-   @key[use] P;  --@i{ Only one declaration of F from P is use-visible in}
-           --@i{ Ada 83;  two declarations of F are use-visible in}
-           --@i{ Ada 9X.}
+   @key[use] P;  --@RI{ Only one declaration of F from P is use-visible in}
+           --@RI{ Ada 83;  two declarations of F are use-visible in}
+           --@RI{ Ada 9X.}
 @key[begin]
    ...
-   @key[if] F > 1 @key[then] ... --@i{ legal in Ada 83, ambiguous in Ada 9X}
+   @key[if] F > 1 @key[then] ... --@RI{ legal in Ada 83, ambiguous in Ada 9X}
 @end{Example}
 @end{Incompatible83}
 
@@ -2614,7 +2607,7 @@ relational operators are predefined for their values.]
 
 @begin{Syntax}
 @Syn{lhs=<range_constraint>,rhs=" @key{range} @Syn2{range}"}
-@Hinge{}
+
 
 @Syn{lhs=<range>,rhs=" @Syn2{range_attribute_reference}
    | @Syn2{simple_expression} .. @Syn2{simple_expression}"}
@@ -2806,7 +2799,7 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
   Text=[S'Min denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Min(@i(Left), @i(Right) : S'Base)
+@b(function) S'Min(@RI(Left), @RI(Right) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
@@ -2827,7 +2820,7 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
   Text=[S'Max denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Max(@i(Left), @i(Right) : S'Base)
+@b(function) S'Max(@RI(Left), @RI(Right) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
@@ -2837,7 +2830,7 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
   Text=[S'Succ denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Succ(@i(Arg) : S'Base)
+@b(function) S'Succ(@RI(Arg) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
@@ -2867,7 +2860,7 @@ S'Succ for a modular integer subtype wraps around
   Text=[S'Pred denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Pred(@i(Arg) : S'Base)
+@b(function) S'Pred(@RI(Arg) : S'Base)
   @b(return) S'Base
 @end(Descexample)
 
@@ -2897,7 +2890,7 @@ S'Pred for a modular integer subtype wraps around
   Text=[S'Wide_Image denotes a function
      with the following specification:
 @begin(Descexample)
-@b(function) S'Wide_Image(@i(Arg) : S'Base)
+@b(function) S'Wide_Image(@RI(Arg) : S'Base)
   @b(return) Wide_String
 @end(Descexample)
 
@@ -2993,7 +2986,7 @@ For a machine that supports negative zeros,
   Text=[S'Image denotes a function with
     the following specification:
 @begin(Descexample)
-@b(function) S'Image(@i(Arg) : S'Base)
+@b(function) S'Image(@RI(Arg) : S'Base)
   @b(return) String
 @end(Descexample)
 
@@ -3026,7 +3019,7 @@ For a machine that supports negative zeros,
   Text=[S'Wide_Value denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Wide_Value(@i(Arg) : Wide_String)
+@b(function) S'Wide_Value(@RI(Arg) : Wide_String)
   @b(return) S'Base
 @end(Descexample)
 
@@ -3108,7 +3101,7 @@ For a machine that supports negative zeros,
   Text=[S'Value denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Value(@i(Arg) : String)
+@b(function) S'Value(@RI(Arg) : String)
   @b(return) S'Base
 @end(Descexample)
 
@@ -3200,9 +3193,9 @@ ever raises Constraint_Error.
 -10 .. 10
 X .. X + 1
 0.0 .. 2.0*Pi
-Red .. Green     @i[-- see @RefSecNum{Enumeration Types}]
-1 .. 0           @i[-- a null range]
-Table'Range      @i[-- a range attribute reference (see @RefSecNum{Array Types})]
+Red .. Green     @RI[-- see @RefSecNum{Enumeration Types}]
+1 .. 0           @RI[-- a null range]
+Table'Range      @RI[-- a range attribute reference (see @RefSecNum{Array Types})]
 @end{Example}
 
 @i(Examples of range constraints:)
@@ -3275,7 +3268,7 @@ An @nt<enumeration_type_definition> defines an enumeration type.]
 @begin{Syntax}
 @Syn{lhs=<enumeration_type_definition>,rhs="
    (@Syn2{enumeration_literal_specification} {, @Syn2{enumeration_literal_specification}})"}
-@Hinge{}
+
 
 @Syn{lhs=<enumeration_literal_specification>,
   rhs=" @Syn2{defining_identifier} | @Syn2{defining_character_literal}"}
@@ -3321,22 +3314,18 @@ is zero; the position number of the value of each
 subsequent enumeration literal
 is one more than that of its predecessor in the list.
 
-@redundant[
-The predefined order relations between values of
+@redundant[The predefined order relations between values of
 the enumeration type follow the
-order of corresponding position numbers.
-]
+order of corresponding position numbers.]
 
-@redundant[
-@PDefn2{Term=overloaded, Sec=(enumeration literal)}
+@redundant[@PDefn2{Term=overloaded, Sec=(enumeration literal)}
 If the same @nt<defining_identifier> or
 @nt<defining_character_literal> is specified in more than one
 @nt<enumeration_type_definition>, the corresponding enumeration literals
 are said to be @i(overloaded).  At any place where an overloaded
 enumeration literal occurs in the text of a program, the type
 of the enumeration literal has to be determinable from the context
-(see @RefSecNum(The Context of Overload Resolution)).
-]
+(see @RefSecNum(The Context of Overload Resolution)).]
 @end{StaticSem}
 
 @begin{RunTime}
@@ -3371,14 +3360,14 @@ the ambiguity (see @RefSecNum(Qualified Expressions)).
 @key(type) Gender @key(is) (M, F);
 @key(type) Level  @key(is) (Low, Medium, Urgent);
 @key(type) Color  @key(is) (White, Red, Yellow, Green, Blue, Brown, Black);
-@key(type) Light  @key(is) (Red, Amber, Green); @i[-- Red and Green are overloaded]
+@key(type) Light  @key(is) (Red, Amber, Green); @RI[-- Red and Green are overloaded]
 
 @key(type) Hexa   @key(is) ('A', 'B', 'C', 'D', 'E', 'F');
 @key(type) Mixed  @key(is) ('A', 'B', '*', B, None, '?', '%');
 
 @key(subtype) Weekday @key(is) Day   @key(range) Mon .. Fri;
 @key(subtype) Major   @key(is) Suit  @key(range) Hearts .. Spades;
-@key(subtype) Rainbow @key(is) Color @key(range) Red .. Blue;  @i[--  the Color Red, not the Light]
+@key(subtype) Rainbow @key(is) Color @key(range) Red .. Blue;  @RI[--  the Color Red, not the Light]
 @end(Example)
 @end{Examples}
 
@@ -3782,12 +3771,10 @@ For a signed integer type,
 the exception Constraint_Error is raised by the execution of
 an operation that cannot deliver the correct result because
 it is outside the base range of the type.
-@redundant[
-@IndexCheck{Division_Check}
+@redundant[@IndexCheck{Division_Check}
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
 For any integer type, Constraint_Error is raised by the operators
-"/", "@key(rem)", and "@key(mod)" if the right operand is zero.
-]
+"/", "@key(rem)", and "@key(mod)" if the right operand is zero.]
 
 @end{RunTime}
 
@@ -3941,8 +3928,8 @@ signed integer types match "@key(type) T @key(is range) <>;"
 @key(subtype) Column_Ptr  @key(is) Line_Size @key(range) 1 .. 10;
 @key(subtype) Buffer_Size @key(is) Integer   @key(range) 0 .. Max;
 
-@key(type) Byte        @key(is) @key(mod) 256; @i[-- an unsigned byte]
-@key(type) Hash_Index  @key(is) @key(mod) 97;  @i[-- modulus is prime]
+@key(type) Byte        @key(is) @key(mod) 256; @RI[-- an unsigned byte]
+@key(type) Hash_Index  @key(is) @key(mod) 97;  @RI[-- modulus is prime]
 @end(Example)
 @end{Examples}
 
@@ -4006,17 +3993,17 @@ the following attributes are defined:
 @Attribute{Prefix=<S>, AttrName=<Pos>,
   Text=[S'Pos denotes a function with the following specification:
 @begin(Descexample)
-@b(function) S'Pos(@i(Arg) : S'Base)
-  @b(return) @i(universal_integer)
+@b(function) S'Pos(@RI(Arg) : S'Base)
+  @b(return) @RI(universal_integer)
 @end(Descexample)
 
-     @NoPrefix@;This function returns the position number of the value of
-     @i(Arg), as a value of type @i(universal_integer).]}
+     @NoPrefix@;This function returns the position number of the value
+     of @i(Arg), as a value of type @i(universal_integer).]}
 
 @Attribute{Prefix=<S>, AttrName=<Val>,
   Text=[S'Val denotes a function with the following specification:
 @begin(Descexample)
-@b(function) S'Val(@i(Arg) : @i(universal_integer))
+@b(function) S'Val(@RI(Arg) : @RI(universal_integer))
   @b(return) S'Base
 @end(Descexample)
 
@@ -4095,7 +4082,7 @@ S'Pos(S'Val(N)) = N
 @begin{Examples}
 @i(Examples of attributes of discrete subtypes: )
 @begin(Example)
-@i[--  For the types and subtypes declared in subclause @RefSecNum(Enumeration Types) the following hold: ]
+@RI[--  For the types and subtypes declared in subclause @RefSecNum(Enumeration Types) the following hold: ]
 
 --  Color'First   = White,   Color'Last   = Black
 --  Rainbow'First = Red,     Rainbow'Last = Blue
@@ -4139,8 +4126,7 @@ are in the derivation class rooted at @i(root_real).]
   All we want is for all real types to be descendants of @i(root_real).
 @end{Ramification}
 
-@redundant[
-@PDefn{universal_real}
+@redundant[@PDefn{universal_real}
 @Defn{real literals}
 Real literals are all of the type @i(universal_real),
 the universal type (see @RefSecNum(Derivation Classes)) for the
@@ -4151,8 +4137,7 @@ Certain multiplying operators have a result type of @i(universal_fixed)
 (see @RefSecNum{Multiplying Operators}),
 the universal type for the class of fixed point types, allowing
 the result of the multiplication or division to be used where any
-specific fixed point type is expected.
-]
+specific fixed point type is expected.]
 @end{StaticSem}
 
 @begin{RunTime}
@@ -4292,7 +4277,7 @@ the requested decimal precision shall be no greater than System.Max_Digits.
   corresponds to the maximum value for Digits that may be specified
   in the absence of a @nt<real_range_specification>, for upward
   compatibility.  These might not be the same if @nt<root_real>
-  has a base range that does not include @Math{@PorM} 10.0**(4*Max_Base_Digits).
+  has a base range that does not include @PorM 10.0**(4*Max_Base_Digits).
 @end(Reason)
 
 A @nt<floating_point_definition> is illegal if the
@@ -4454,7 +4439,7 @@ Overflow_Checks, never Range_Checks.
 @key(type) Real @key(is) @key(digits) 8;
 @key(type) Mass @key(is) @key(digits) 7 @key(range) 0.0 .. 1.0E35;
 
-@key(subtype) Probability @key(is) Real @key(range) 0.0 .. 1.0;   @i[--   a subtype with a smaller range]
+@key(subtype) Probability @key(is) Real @key(range) 0.0 .. 1.0;   @RI[--   a subtype with a smaller range]
 @end(Example)
 @end{Examples}
 
@@ -4556,7 +4541,7 @@ absolute value, called the @i(delta) of the fixed point type.
 
 @begin{Syntax}
 @Syn{lhs=<fixed_point_definition>,rhs="@Syn2{ordinary_fixed_point_definition} | @Syn2{decimal_fixed_point_definition}"}
-@Hinge{}
+
 
 @Syn{lhs=<ordinary_fixed_point_definition>,rhs="
    @key{delta} @SynI{static_}@Syn2{expression}  @Syn2{real_range_specification}"}
@@ -4790,14 +4775,14 @@ of Float_IO).
 @begin(Example)
 @key(type) Volt @key(is) @key(delta) 0.125 @key(range) 0.0 .. 255.0;
 
-  @i[--  A pure fraction which requires all the available]
-  @i[--  space in a word can be declared as the type Fraction:]
+  @RI[--  A pure fraction which requires all the available]
+  @RI[--  space in a word can be declared as the type Fraction:]
 @key(type) Fraction @key(is) @key(delta) System.Fine_Delta @key(range) -1.0 .. 1.0;
-  @i[--  Fraction'Last = 1.0 - System.Fine_Delta]
+  @RI[--  Fraction'Last = 1.0 - System.Fine_Delta]
 
-@key(type) Money @key(is) @key(delta) 0.01 @key(digits) 15;  @i[-- decimal fixed point]
+@key(type) Money @key(is) @key(delta) 0.01 @key(digits) 15;  @RI[-- decimal fixed point]
 @key(subtype) Salary @key(is) Money @key(digits) 10;
-  @i[-- Money'Last = 10.0**13 - 0.01, Salary'Last = 10.0**8 - 0.01]
+  @RI[-- Money'Last = 10.0**13 - 0.01, Salary'Last = 10.0**8 - 0.01]
 @end(Example)
 @end{Examples}
 
@@ -4928,7 +4913,7 @@ The following additional attributes are defined for
   Text=[S'Round denotes a function with
      the following specification:
 @begin(Descexample)
-@b(function) S'Round(@i(X) : @i(universal_real))
+@b(function) S'Round(@RI(X) : @RI(universal_real))
   @b(return) S'Base
 @end(Descexample)
 
@@ -4962,4 +4947,3 @@ have Size and Address attributes
 Other attributes of fixed point types are defined in
 @RefSecNum{Attributes of Fixed Point Types}.
 @end{Notes}
-

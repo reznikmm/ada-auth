@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:03 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:07 $}
+@Comment{$Date: 2000/05/27 04:44:03 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -541,16 +541,16 @@ declaration:
 @key[package] Interfaces @key[is]
    @key[pragma] Pure(Interfaces);
 
-   @key[type] Integer_@i{n} @key[is] @key[range] -2**(@i{n}-1) .. 2**(@i{n}-1) - 1;  --@i{2's complement}
+   @key[type] Integer_@RI{n} @key[is] @key[range] -2**(@RI{n}-1) .. 2**(@RI{n}-1) - 1;  --@RI{2's complement}
 
-   @key[type] Unsigned_@i{n} @key[is] @key[mod] 2**@i{n};
+   @key[type] Unsigned_@RI{n} @key[is] @key[mod] 2**@RI{n};
 
-   @key[function] Shift_Left  (Value : Unsigned_@i{n}; Amount : Natural) @key[return] Unsigned_@i{n};
-   @key[function] Shift_Right (Value : Unsigned_@i{n}; Amount : Natural) @key[return] Unsigned_@i{n};
-   @key[function] Shift_Right_Arithmetic (Value : Unsigned_@i{n}; Amount : Natural)
-      @key[return] Unsigned_@i{n};
-   @key[function] Rotate_Left  (Value : Unsigned_@i{n}; Amount : Natural) @key[return] Unsigned_@i{n};
-   @key[function] Rotate_Right (Value : Unsigned_@i{n}; Amount : Natural) @key[return] Unsigned_@i{n};
+   @key[function] Shift_Left  (Value : Unsigned_@RI{n}; Amount : Natural) @key[return] Unsigned_@RI{n};
+   @key[function] Shift_Right (Value : Unsigned_@RI{n}; Amount : Natural) @key[return] Unsigned_@RI{n};
+   @key[function] Shift_Right_Arithmetic (Value : Unsigned_@RI{n}; Amount : Natural)
+      @key[return] Unsigned_@RI{n};
+   @key[function] Rotate_Left  (Value : Unsigned_@RI{n}; Amount : Natural) @key[return] Unsigned_@RI{n};
+   @key[function] Rotate_Right (Value : Unsigned_@RI{n}; Amount : Natural) @key[return] Unsigned_@RI{n};
    ...
 @key[end] Interfaces;
 @end{Example}
@@ -690,61 +690,61 @@ The library package Interfaces.C has the following declaration:
 @key(package) Interfaces.C @key(is)
    @key(pragma) Pure(C);
 
-   @i{-- Declarations based on C's <limits.h>}
+   @RI{-- Declarations based on C's <limits.h>}
 
-   CHAR_BIT  : @key(constant) := @i{implementation-defined};  @i{-- typically 8}
-   SCHAR_MIN : @key(constant) := @i{implementation-defined};  @i{-- typically -128}
-   SCHAR_MAX : @key(constant) := @i{implementation-defined};  @i{-- typically 127}
-   UCHAR_MAX : @key(constant) := @i{implementation-defined};  @i{-- typically 255}
+   CHAR_BIT  : @key(constant) := @RI{implementation-defined};  @RI{-- typically 8}
+   SCHAR_MIN : @key(constant) := @RI{implementation-defined};  @RI{-- typically -128}
+   SCHAR_MAX : @key(constant) := @RI{implementation-defined};  @RI{-- typically 127}
+   UCHAR_MAX : @key(constant) := @RI{implementation-defined};  @RI{-- typically 255}
 
-   @i{-- Signed and Unsigned Integers}
+   @RI{-- Signed and Unsigned Integers}
 @LangDefType{Package=[Interfaces.C],Type=[int]}
-   @key(type) int   @key(is) @key(range) @i{implementation-defined};
+   @key(type) int   @key(is) @key(range) @RI{implementation-defined};
 @LangDefType{Package=[Interfaces.C],Type=[short]}
-   @key(type) short @key(is) @key(range) @i{implementation-defined};
+   @key(type) short @key(is) @key(range) @RI{implementation-defined};
 @LangDefType{Package=[Interfaces.C],Type=[long]}
-   @key(type) long  @key(is) @key(range) @i{implementation-defined};
+   @key(type) long  @key(is) @key(range) @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.C],Type=[signed_char]}
    @key(type) signed_char @key(is) @key(range) SCHAR_MIN .. SCHAR_MAX;
    @key(for) signed_char'Size @key(use) CHAR_BIT;
 
 @LangDefType{Package=[Interfaces.C],Type=[unsigned]}
-   @key(type) unsigned       @key(is) @key(mod) @i{implementation-defined};
+   @key(type) unsigned       @key(is) @key(mod) @RI{implementation-defined};
 @LangDefType{Package=[Interfaces.C],Type=[unsigned_short]}
-   @key(type) unsigned_short @key(is) @key(mod) @i{implementation-defined};
+   @key(type) unsigned_short @key(is) @key(mod) @RI{implementation-defined};
 @LangDefType{Package=[Interfaces.C],Type=[unsigned_long]}
-   @key(type) unsigned_long  @key(is) @key(mod) @i{implementation-defined};
+   @key(type) unsigned_long  @key(is) @key(mod) @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.C],Type=[unsigned_char]}
    @key(type) unsigned_char @key(is) @key(mod) (UCHAR_MAX+1);
    @key(for) unsigned_char'Size @key(use) CHAR_BIT;
 
 @LangDefType{Package=[Interfaces.C],Type=[plain_char]}
-   @key(subtype) plain_char @key(is) @i{implementation-defined};
+   @key(subtype) plain_char @key(is) @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.C],Type=[ptrdiff_t]}
-   @key(type) ptrdiff_t @key(is) @key(range) @i{implementation-defined};
+   @key(type) ptrdiff_t @key(is) @key(range) @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.C],Type=[size_t]}
-   @key(type) size_t @key(is) @key(mod) @i{implementation-defined};
+   @key(type) size_t @key(is) @key(mod) @RI{implementation-defined};
 
-   @i{-- Floating Point}
+   @RI{-- Floating Point}
 
 @LangDefType{Package=[Interfaces.C],Type=[C_float]}
-   @key(type) C_float     @key(is) @key(digits) @i{implementation-defined};
+   @key(type) C_float     @key(is) @key(digits) @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.C],Type=[double]}
-   @key(type) double      @key(is) @key(digits) @i{implementation-defined};
+   @key(type) double      @key(is) @key(digits) @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.C],Type=[long_double]}
-   @key(type) long_double @key(is) @key(digits) @i{implementation-defined};
+   @key(type) long_double @key(is) @key(digits) @RI{implementation-defined};
 
 
-   @i{-- Characters and Strings }
+   @RI{-- Characters and Strings }
 
 @LangDefType{Package=[Interfaces.C],Type=[char]}
-   @key(type) char @key(is) @i{<implementation-defined character type>};
+   @key(type) char @key(is) @RI{<implementation-defined character type>};
 
    nul : @key(constant) char := char'First;
 
@@ -777,10 +777,10 @@ The library package Interfaces.C has the following declaration:
                      Count    : @key(out) Natural;
                      Trim_Nul : @key(in) Boolean := True);
 
-   @i{-- Wide Character and Wide String}
+   @RI{-- Wide Character and Wide String}
 
 @LangDefType{Package=[Interfaces.C],Type=[wchar_t]}
-   @key(type) wchar_t @key(is) @i{implementation-defined};
+   @key(type) wchar_t @key(is) @RI{implementation-defined};
 
    wide_nul : @key(constant) wchar_t := wchar_t'First;
 
@@ -1088,18 +1088,18 @@ specific numbers and types of parameters.
 @begin{Examples}
 @i{Example of using the Interfaces.C package:}
 @begin{Example}
-@i{--Calling the C Library Function strcpy}
+@RI{--Calling the C Library Function strcpy}
 @key(with) Interfaces.C;
 @key(procedure) Test @key(is)
    @key(package) C @key(renames) Interfaces.C;
    @key(use) @key(type) C.char_array;
-   @i{-- Call <string.h>strcpy:}
-   @i{-- C definition of strcpy:  char *strcpy(char *s1, const char *s2);}
-   @i{--    This function copies the string pointed to by s2 (including the terminating null character)}
-   @i{--     into the array pointed to by s1.  If copying takes place between objects that overlap, }
-   @i{--     the behavior is undefined.  The strcpy function returns the value of s1.}
+   @RI{-- Call <string.h>strcpy:}
+   @RI{-- C definition of strcpy:  char *strcpy(char *s1, const char *s2);}
+   @RI{--    This function copies the string pointed to by s2 (including the terminating null character)}
+   @RI{--     into the array pointed to by s1.  If copying takes place between objects that overlap, }
+   @RI{--     the behavior is undefined.  The strcpy function returns the value of s1.}
 
-   @i{-- Note: since the C function's return value is of no interest, the Ada interface is a procedure}
+   @RI{-- Note: since the C function's return value is of no interest, the Ada interface is a procedure}
    @key(procedure) Strcpy (Target : @key(out) C.char_array;
                      Source : @key(in)  C.char_array);
 
@@ -1113,7 +1113,7 @@ specific numbers and types of parameters.
 
    Strcpy(Chars1, Chars2);
 
-@i{-- Now Chars1(1..6) = "qwert" & C.Nul}
+@RI{-- Now Chars1(1..6) = "qwert" & C.Nul}
 
 @key(end) Test;
 @end{Example}
@@ -1191,7 +1191,7 @@ declaration:
 
 
 @key(private)
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key(end) Interfaces.C.Strings;
 @end{Example}
 @begin{discussion}
@@ -1434,7 +1434,7 @@ following declaration:
 
    Pointer_Error : @key(exception);
 
-   @i{-- C-style Pointer arithmetic}
+   @RI{-- C-style Pointer arithmetic}
 
    @key(function) "+" (Left : @key(in) Pointer;   Right : @key(in) ptrdiff_t) @key(return) Pointer;
    @key(function) "+" (Left : @key(in) ptrdiff_t; Right : @key(in) Pointer)   @key(return) Pointer;
@@ -1679,34 +1679,34 @@ The library package Interfaces.COBOL has the following declaration:
 @key(package) Interfaces.COBOL @key(is)
    @key[pragma] Preelaborate(COBOL);
 
-@i{-- Types and operations for internal data representations}
+@RI{-- Types and operations for internal data representations}
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Floating]}
-   @key(type) Floating      @key(is) @key(digits) @i{implementation-defined};
+   @key(type) Floating      @key(is) @key(digits) @RI{implementation-defined};
 @LangDefType{Package=[Interfaces.COBOL],Type=[Long_Floating]}
-   @key(type) Long_Floating @key(is) @key(digits) @i{implementation-defined};
+   @key(type) Long_Floating @key(is) @key(digits) @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Binary]}
-   @key(type) Binary      @key(is) @key(range) @i{implementation-defined};
+   @key(type) Binary      @key(is) @key(range) @RI{implementation-defined};
 @LangDefType{Package=[Interfaces.COBOL],Type=[Long_Binary]}
-   @key(type) Long_Binary @key(is) @key(range) @i{implementation-defined};
+   @key(type) Long_Binary @key(is) @key(range) @RI{implementation-defined};
 
-   Max_Digits_Binary      : @key(constant) := @i{implementation-defined};
-   Max_Digits_Long_Binary : @key(constant) := @i{implementation-defined};
+   Max_Digits_Binary      : @key(constant) := @RI{implementation-defined};
+   Max_Digits_Long_Binary : @key(constant) := @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Decimal_Element]}
-   @key(type) Decimal_Element  @key(is) @key(mod) @i{implementation-defined};
+   @key(type) Decimal_Element  @key(is) @key(mod) @RI{implementation-defined};
 @LangDefType{Package=[Interfaces.COBOL],Type=[Packed_Decimal]}
    @key(type) Packed_Decimal @key(is) @key(array) (Positive @key(range) <>) @key(of) Decimal_Element;
    @key(pragma) Pack(Packed_Decimal);
 
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[COBOL_Character]}
-   @key(type) COBOL_Character @key(is) @i{implementation-defined character type};
+   @key(type) COBOL_Character @key(is) @RI{implementation-defined character type};
 
-   Ada_To_COBOL : @key(array) (Character) @key(of) COBOL_Character := @i{implementation-defined};
+   Ada_To_COBOL : @key(array) (Character) @key(of) COBOL_Character := @RI{implementation-defined};
 
-   COBOL_To_Ada : @key(array) (COBOL_Character) @key(of) Character := @i{implementation-defined};
+   COBOL_To_Ada : @key(array) (COBOL_Character) @key(of) Character := @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Alphanumeric]}
    @key(type) Alphanumeric @key(is) @key(array) (Positive range <>) @key(of) COBOL_Character;
@@ -1727,7 +1727,7 @@ The library package Interfaces.COBOL has the following declaration:
    @key(type) Numeric @key(is) @key(array) (Positive @key[range] <>) @key(of) COBOL_Character;
    @key(pragma) Pack(Numeric);
 
-@i{-- Formats for COBOL data representations}
+@RI{-- Formats for COBOL data representations}
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Display_Format]}
    @key(type) Display_Format @key(is) @key(private);
@@ -1752,7 +1752,7 @@ The library package Interfaces.COBOL has the following declaration:
    Packed_Signed     : @key(constant) Packed_Format;
 
 
-@i{-- Types for external representation of COBOL binary data}
+@RI{-- Types for external representation of COBOL binary data}
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Byte]}
    @key(type) Byte @key(is) @key(mod) 2**COBOL_Character'Size;
@@ -1766,7 +1766,7 @@ The library package Interfaces.COBOL has the following declaration:
       @key(type) Num @key(is) @key(delta) <> @key(digits) <>;
    @key(package) Decimal_Conversions @key(is)
 
-      @i{-- Display Formats: data values are represented as Numeric}
+      @RI{-- Display Formats: data values are represented as Numeric}
 
       @key(function) Valid (Item   : @key(in) Numeric;
                       Format : @key(in) Display_Format) @key(return) Boolean;
@@ -1781,7 +1781,7 @@ The library package Interfaces.COBOL has the following declaration:
                            Format : @key(in) Display_Format) @key(return) Numeric;
 
 
-      @i{-- Packed Formats: data values are represented as Packed_Decimal}
+      @RI{-- Packed Formats: data values are represented as Packed_Decimal}
 
       @key(function) Valid (Item   : @key(in) Packed_Decimal;
                       Format : @key(in) Packed_Format) @key(return) Boolean;
@@ -1795,7 +1795,7 @@ The library package Interfaces.COBOL has the following declaration:
                           Format : @key(in) Packed_Format) @key(return) Packed_Decimal;
 
 
-      @i{-- Binary Formats: external data values are represented as Byte_Array}
+      @RI{-- Binary Formats: external data values are represented as Byte_Array}
 
       @key(function) Valid (Item   : @key(in) Byte_Array;
                       Format : @key(in) Binary_Format) @key(return) Boolean;
@@ -1807,7 +1807,7 @@ The library package Interfaces.COBOL has the following declaration:
       @key(function) To_Binary (Item   : @key(in) Num; 
                         Format : @key(in) Binary_Format) @key(return) Byte_Array;
 
-      @i{-- Internal Binary formats: data values are of type Binary or Long_Binary}
+      @RI{-- Internal Binary formats: data values are of type Binary or Long_Binary}
 
       @key(function) To_Decimal (Item : @key(in) Binary)      @key(return) Num;
       @key(function) To_Decimal (Item : @key(in) Long_Binary) @key(return) Num;
@@ -1818,7 +1818,7 @@ The library package Interfaces.COBOL has the following declaration:
    @key(end) Decimal_Conversions;
 
 @key(private)
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key(end) Interfaces.COBOL;
 @end{Example}
 @ImplDef[The types Floating, Long_Floating, Binary, Long_Binary,
@@ -2174,14 +2174,14 @@ call may specify
 @key(with) Interfaces.COBOL;
 @key(procedure) Test_Call @key(is)
 
-   @i{-- Calling a foreign COBOL program}
-   @i{-- Assume that a COBOL program PROG has the following declaration}
-   @i{--  in its LINKAGE section:}
-   @i{--  01 Parameter-Area}
-   @i{--     05 NAME   PIC X(20).}
-   @i{--     05 SSN    PIC X(9).}
-   @i{--     05 SALARY PIC 99999V99 USAGE COMP.}
-   @i{-- The effect of PROG is to update SALARY based on some algorithm}
+   @RI{-- Calling a foreign COBOL program}
+   @RI{-- Assume that a COBOL program PROG has the following declaration}
+   @RI{--  in its LINKAGE section:}
+   @RI{--  01 Parameter-Area}
+   @RI{--     05 NAME   PIC X(20).}
+   @RI{--     05 SSN    PIC X(9).}
+   @RI{--     05 SALARY PIC 99999V99 USAGE COMP.}
+   @RI{-- The effect of PROG is to update SALARY based on some algorithm}
 
    @key(package) COBOL @key(renames) Interfaces.COBOL;
 
@@ -2191,7 +2191,7 @@ call may specify
       @key(record)
          Name   : COBOL.Numeric(1..20);
          SSN    : COBOL.Numeric(1..9);
-         Salary : COBOL.Binary;  @i{-- Assume Binary = 32 bits}
+         Salary : COBOL.Binary;  @RI{-- Assume Binary = 32 bits}
       @key(end) @key(record);
    @key(pragma) Convention (COBOL, COBOL_Record);
 
@@ -2215,31 +2215,31 @@ call may specify
 
 @begin{Example}
 @key(with) Interfaces.COBOL;
-@key(with) COBOL_Sequential_IO; @i{-- Assumed to be supplied by implementation}
+@key(with) COBOL_Sequential_IO; @RI{-- Assumed to be supplied by implementation}
 @key(procedure) Test_External_Formats @key(is)
 
-   @i{-- Using data created by a COBOL program}
-   @i{-- Assume that a COBOL program has created a sequential file with}
-   @i{--  the following record structure, and that we need to}
-   @i{--  process the records in an Ada program}
-   @i{--  01 EMPLOYEE-RECORD}
-   @i{--     05 NAME    PIC X(20).}
-   @i{--     05 SSN     PIC X(9).}
-   @i{--     05 SALARY  PIC 99999V99 USAGE COMP.}
-   @i{--     05 ADJUST  PIC S999V999 SIGN LEADING SEPARATE.}
-   @i{-- The COMP data is binary (32 bits), high-order byte first}
+   @RI{-- Using data created by a COBOL program}
+   @RI{-- Assume that a COBOL program has created a sequential file with}
+   @RI{--  the following record structure, and that we need to}
+   @RI{--  process the records in an Ada program}
+   @RI{--  01 EMPLOYEE-RECORD}
+   @RI{--     05 NAME    PIC X(20).}
+   @RI{--     05 SSN     PIC X(9).}
+   @RI{--     05 SALARY  PIC 99999V99 USAGE COMP.}
+   @RI{--     05 ADJUST  PIC S999V999 SIGN LEADING SEPARATE.}
+   @RI{-- The COMP data is binary (32 bits), high-order byte first}
 
    @key(package) COBOL @key(renames) Interfaces.COBOL;
 
    @key(type) Salary_Type      @key(is) @key(delta) 0.01  @key(digits) 7;
    @key(type) Adjustments_Type @key(is) @key(delta) 0.001 @key(digits) 6;
 
-   @key(type) COBOL_Employee_Record_Type @key(is)  @i{-- External representation}
+   @key(type) COBOL_Employee_Record_Type @key(is)  @RI{-- External representation}
       @key(record)
          Name    : COBOL.Alphanumeric(1..20);
          SSN     : COBOL.Alphanumeric(1..9);
          Salary  : COBOL.Byte_Array(1..4);
-         Adjust  : COBOL.Numeric(1..7);  @i{-- Sign and 6 digits}
+         Adjust  : COBOL.Numeric(1..7);  @RI{-- Sign and 6 digits}
       @key(end) @key(record);
    @key(pragma) Convention (COBOL, COBOL_Employee_Record_Type);
 
@@ -2249,7 +2249,7 @@ call may specify
 
    COBOL_File : File_Type;
 
-   @key(type) Ada_Employee_Record_Type @key(is)  @i{-- Internal representation}
+   @key(type) Ada_Employee_Record_Type @key(is)  @RI{-- Internal representation}
       @key(record)
          Name    : String(1..20);
          SSN     : String(1..9);
@@ -2280,7 +2280,7 @@ call may specify
         To_Decimal(COBOL_Record.Salary, COBOL.High_Order_First);
      Ada_Record.Adjust :=
         To_Decimal(COBOL_Record.Adjust, COBOL.Leading_Separate);
-     ... @i{-- Process Ada_Record}
+     ... @RI{-- Process Ada_Record}
    @key(end) @key(loop);
 @key(exception)
    @key[when] End_Error => ...
@@ -2310,21 +2310,21 @@ pass objects between Ada and Fortran programs.
 @begin{StaticSem}
 The library package Interfaces.Fortran has the following declaration:
 @begin{Example}
-@key[with] Ada.Numerics.Generic_Complex_Types;  @i{-- see @RefSecNum{Complex Types}}
+@key[with] Ada.Numerics.Generic_Complex_Types;  @RI{-- see @RefSecNum{Complex Types}}
 @key[pragma] Elaborate_All(Ada.Numerics.Generic_Complex_Types);
 @ChildUnit{Parent=[Interfaces],Child=[Fortran],Expanded=[Interfaces.Fortran]}
 @key[package] Interfaces.Fortran @key[is]
    @key[pragma] Pure(Fortran);
 
-   @key[type] Fortran_Integer @key[is] @key[range] @i{implementation-defined};
-@Hinge{}
+   @key[type] Fortran_Integer @key[is] @key[range] @RI{implementation-defined};
 
-   @key[type] Real             @key[is] @key[digits] @i{implementation-defined};
-   @key[type] Double_Precision @key[is] @key[digits] @i{implementation-defined};
-@Hinge{}
+
+   @key[type] Real             @key[is] @key[digits] @RI{implementation-defined};
+   @key[type] Double_Precision @key[is] @key[digits] @RI{implementation-defined};
+
 
    @key[type] Logical @key[is] @key[new] Boolean;
-@Hinge{}
+
 
    @key[package] Single_Precision_Complex_Types @key[is]
       @key[new] Ada.Numerics.Generic_Complex_Types (Real);
@@ -2335,8 +2335,8 @@ The library package Interfaces.Fortran has the following declaration:
    i : Imaginary @key[renames] Single_Precision_Complex_Types.i;
    j : Imaginary @key[renames] Single_Precision_Complex_Types.j;
 
-@Hinge{}
-   @key[type] Character_Set @key[is] @i{implementation-defined character type};
+
+   @key[type] Character_Set @key[is] @RI{implementation-defined character type};
 
    @key[type] Fortran_Character @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Set;
    @key[pragma] Pack (Fortran_Character);
@@ -2457,14 +2457,14 @@ a Fortran ``derived type''.
 
    @key[type] Fortran_Matrix @key[is] @key[array] (Integer @key[range] <>,
                                  Integer @key[range] <>) @key[of] Double_Precision;
-   @key[pragma] Convention (Fortran, Fortran_Matrix);    @i{-- stored in Fortran's}
-                                                   @i{-- column-major order}
+   @key[pragma] Convention (Fortran, Fortran_Matrix);    @RI{-- stored in Fortran's}
+                                                   @RI{-- column-major order}
    @key[procedure] Invert (Rank : @key[in] Fortran_Integer; X : @key[in] @key[out] Fortran_Matrix);
-   @key[pragma] Import (Fortran, Invert);                @i{-- a Fortran subroutine}
+   @key[pragma] Import (Fortran, Invert);                @RI{-- a Fortran subroutine}
 
    Rank      : @key[constant] Fortran_Integer := 100;
    My_Matrix : Fortran_Matrix (1 .. Rank, 1 .. Rank);
-@Hinge{}
+
 
 @key[begin]
 

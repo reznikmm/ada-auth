@@ -12,7 +12,7 @@ I probably ought to add a style just for this purpose)
 @thickline
 
 @tabclear()@tabset(P45)
-@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@chg{New=[ with COR.1:2000], Old=[]}}]>
+@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}]>
 
 @thickline
 
@@ -32,10 +32,10 @@ I probably ought to add a style just for this purpose)
 @end{WithoutParanum}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/05/26 05:03:26 $}
+@Comment{$Date: 2000/05/27 04:43:59 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -641,8 +641,8 @@ This material is informative.
 Examples illustrate the possible forms of the constructs described.
 This material is informative.
 @begin{Discussion}
-@ @*@comment{Insert blanklines, because the original author's want it}
-@ @*
+@ @* @Comment{Two blank lines: why? Because it was in the original.}
+@*
 The next three headings list all language changes between Ada 83
 and Ada 95.  Language changes are any change that changes the set of
 text strings that are legal Ada programs, or changes the meaning of
@@ -700,8 +700,8 @@ The vast majority of language changes fall into this category.
 This is not part of the definition of the language,
 and does not appear in the RM95.
 
-@ @*@comment{Insert blanklines, because the original author's want it}
-@ @*
+@ @* @Comment{Two blank lines: why? Because it was in the original.}
+@*
 As explained above,
 the next heading does not represent any language change:
 @end{Extend83}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/27 04:44:00 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -52,7 +52,7 @@ function.]
 
 @begin{Syntax}
 @Syn{lhs=<subprogram_declaration>,rhs="@Syn2{subprogram_specification};"}
-@Hinge{}
+
 
 @Syn{lhs=<abstract_subprogram_declaration>,rhs="@Syn2{subprogram_specification} @key{is} @key{abstract};"}
 
@@ -241,22 +241,22 @@ concurrently from multiple tasks.
 @begin{Example}
 @key[procedure] Traverse_Tree;
 @key[procedure] Increment(X : @key[in] @key[out] Integer);
-@key[procedure] Right_Indent(Margin : @key[out] Line_Size);          --@i{  see @RefSecNum{Integer Types}}
-@key[procedure] Switch(From, To : @key[in] @key[out] Link);                --@i{  see @RefSecNum{Incomplete Type Declarations}}
+@key[procedure] Right_Indent(Margin : @key[out] Line_Size);          --@RI{  see @RefSecNum{Integer Types}}
+@key[procedure] Switch(From, To : @key[in] @key[out] Link);                --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 
-@key[function] Random @key[return] Probability;                      --@i{  see @RefSecNum{Floating Point Types}}
+@key[function] Random @key[return] Probability;                      --@RI{  see @RefSecNum{Floating Point Types}}
 
-@key[function] Min_Cell(X : Link) @key[return] Cell;                 --@i{  see @RefSecNum{Incomplete Type Declarations}}
-@key[function] Next_Frame(K : Positive) @key[return] Frame;          --@i{  see @RefSecNum{Access Types}}
-@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@i{  see @RefSecNum{Array Types}}
+@key[function] Min_Cell(X : Link) @key[return] Cell;                 --@RI{  see @RefSecNum{Incomplete Type Declarations}}
+@key[function] Next_Frame(K : Positive) @key[return] Frame;          --@RI{  see @RefSecNum{Access Types}}
+@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@RI{  see @RefSecNum{Array Types}}
 
-@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@i{  see @RefSecNum{Array Types}}
+@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@RI{  see @RefSecNum{Array Types}}
 @end{Example}
 
 @i{Examples of @key[in] parameters with default expressions:}
 @begin{Example}
 @key[procedure] Print_Header(Pages  : @key[in] Natural;
-            Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@i{  see @RefSecNum{Array Types}}
+            Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@RI{  see @RefSecNum{Array Types}}
             Center : @key[in] Boolean := True);
 @end{Example}
 @end{Examples}
@@ -500,7 +500,7 @@ in standard Ada:
                  Drop    : @key[in]  Truncation := Error;
                  Justify : @key[in]  Alignment  := Left;
                  Pad     : @key[in]  Character  := Space);
---@i{ Copies elements from Source to Target (safely if they overlap)}
+--@RI{ Copies elements from Source to Target (safely if they overlap)}
 @end{Example}
 
 This is from the standard string handling package.
@@ -990,8 +990,8 @@ overloaded subprograms as follows:
    C : Character;
 @key[begin]
    ...
-   Put(C); --@i{ Inline expansion is desired.}
-   Put(I); --@i{ Inline expansion is NOT desired.}
+   Put(C); --@RI{ Inline expansion is desired.}
+   Put(I); --@RI{ Inline expansion is NOT desired.}
 @key[end] Main;
 @end{Example}
 @end{Ramification}
@@ -1045,7 +1045,7 @@ with formal parameters of the subprogram.]
 @Syn{lhs=<procedure_call_statement>,rhs="
     @SynI{procedure_}@Syn2{name};
   | @SynI{procedure_}@Syn2{prefix} @Syn2{actual_parameter_part};"}
-@Hinge{}
+
 
 @Syn{lhs=<function_call>,rhs="
     @SynI{function_}@Syn2{name}
@@ -1166,19 +1166,19 @@ constant is given by the result subtype of the function.
 @begin{Examples}
 @i{Examples of procedure calls:}
 @begin{Example}
-Traverse_Tree;                                               --@i{  see @RefSecNum{Subprogram Declarations}}
-Print_Header(128, Title, True);                              --@i{  see @RefSecNum{Subprogram Declarations}}
+Traverse_Tree;                                               --@RI{  see @RefSecNum{Subprogram Declarations}}
+Print_Header(128, Title, True);                              --@RI{  see @RefSecNum{Subprogram Declarations}}
 
-Switch(From => X, To => Next);                               --@i{  see @RefSecNum{Subprogram Declarations}}
-Print_Header(128, Header => Title, Center => True);          --@i{  see @RefSecNum{Subprogram Declarations}}
-Print_Header(Header => Title, Center => True, Pages => 128); --@i{  see @RefSecNum{Subprogram Declarations}}
+Switch(From => X, To => Next);                               --@RI{  see @RefSecNum{Subprogram Declarations}}
+Print_Header(128, Header => Title, Center => True);          --@RI{  see @RefSecNum{Subprogram Declarations}}
+Print_Header(Header => Title, Center => True, Pages => 128); --@RI{  see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
 @i{Examples of function calls:}
 @begin{Example}
-Dot_Product(U, V)   --@i{  see @RefSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
-Clock               --@i{  see @RefSecNum{Delay Statements, Duration, and Time}}
-F.@key[all]               --@i{  presuming F is of an access-to-subprogram type @em see @RefSecNum{Access Types}}
+Dot_Product(U, V)   --@RI{  see @RefSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
+Clock               --@RI{  see @RefSecNum{Delay Statements, Duration, and Time}}
+F.@key[all]               --@RI{  presuming F is of an access-to-subprogram type @em see @RefSecNum{Access Types}}
 @end{Example}
 
 @i{Examples of procedures with default expressions:}
@@ -1188,7 +1188,7 @@ F.@key[all]               --@i{  presuming F is of an access-to-subprogram type 
                    Wait    : @key[in] Duration := 0.0;
                    Prior   : @key[in] Boolean := False);
 
-@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person);   --@i{  see @RefSecNum{Incomplete Type Declarations}}
+@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person);   --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
 @i{Examples of their calls:}
@@ -1229,8 +1229,8 @@ Set(Tint   => Red);
 Set(Signal => Red);
 Set(Color'(Red));
 
---@i{  Set(Red) would be ambiguous since Red may}
---@i{  denote a value either of type Color or of type Light}
+--@RI{  Set(Red) would be ambiguous since Red may}
+--@RI{  denote a value either of type Color or of type Light}
 @end{Example}
 @end{Examples}
 
@@ -1313,7 +1313,7 @@ the actual shall be a @nt<name> that denotes a variable.
 procedure Print(X : @key[in] Integer; Y : @key[in] Boolean := True);
 procedure Print(Z : @key[in out] Integer);
 . . .
-Print(3); --@i{ Ambiguous!}
+Print(3); --@RI{ Ambiguous!}
   @end{Example}
 
   The above call to Print is ambiguous even though the call is
@@ -1648,8 +1648,8 @@ and returns to the caller.
 @begin{Examples}
 @i{Examples of return statements:}
 @begin{Example}
-@key[return];                         --@i{ in a procedure body, @nt{entry_body}, or @nt{accept_statement}}
-@key[return] Key_Value(Last_Index);   --@i{ in a function body}
+@key[return];                         --@RI{ in a procedure body, @nt{entry_body}, or @nt{accept_statement}}
+@key[return] Key_Value(Last_Index);   --@RI{ in a function body}
 @end{Example}
 @end{Examples}
 
@@ -1753,8 +1753,8 @@ and hence may be overloaded with both one- and two-parameter functions.
 @key[function] "+" (Left, Right : Matrix) @key[return] Matrix;
 @key[function] "+" (Left, Right : Vector) @key[return] Vector;
 
---@i{  assuming that A, B, and C are of the type Vector}
---@i{  the following two statements are equivalent:}
+--@RI{  assuming that A, B, and C are of the type Vector}
+--@RI{  the following two statements are equivalent:}
 
 A := B + C;
 A := "+"(B, C);

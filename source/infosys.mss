@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/26 05:03:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/27 04:44:01 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:28 $}
+@Comment{$Date: 2000/05/27 04:44:01 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -111,13 +111,13 @@ The library package Decimal has the following declaration:
 @key(package) Ada.Decimal @key(is)
    @key(pragma) Pure(Decimal);
 
-   Max_Scale : @key(constant) := @i{implementation-defined};
-   Min_Scale : @key(constant) := @i{implementation-defined};
+   Max_Scale : @key(constant) := @RI{implementation-defined};
+   Min_Scale : @key(constant) := @RI{implementation-defined};
 
    Min_Delta : @key(constant) := 10.0**(-Max_Scale);
    Max_Delta : @key(constant) := 10.0**(-Min_Scale);
 
-   Max_Decimal_Digits : @key(constant) := @i{implementation-defined};
+   Max_Decimal_Digits : @key(constant) := @RI{implementation-defined};
 
    @key(generic)
       @key(type) Dividend_Type  @key(is) @key(delta) <> @key(digits) <>;
@@ -520,7 +520,7 @@ above rules, can occur in two consecutive positions in a picture String.
 
 A @i{Character replication} is a String
 @begin{example}
-@i{char} & '(' & @i{spaces} & @i{count_string} & ')'
+@RI{char} & '(' & @RI{spaces} & @RI{count_string} & ')'
 @end{example}
 
 where @i{char} is a replicable Character,
@@ -591,7 +591,7 @@ The edited output string has lower bound 1 and upper bound N where
 
 @defn{displayed magnitude (of a decimal value)}
 Let the magnitude of Item be expressed as a base-10 number
-I@-(p)@Math[@Times@Times@Times]I@-(1).F@-(1)@Math[@Times@Times@Times]F@-(q),
+I@-(p)@Times@Times@Times@;I@-(1).F@-(1)@Times@Times@Times@;F@-(q),
 called the @i{displayed} @i{magnitude} of Item,
 where:
 @begin{Itemize}
@@ -627,31 +627,16 @@ space character.
 If there is no sign control symbol but the value of Item
 is negative, a layout error occurs and no edited output string
 is produced.
-@StandardTable{Name=EdOut, Columns=3, AllColumns=Center,
-   HeadingBoxed, ColumnLined}
-@begin{EdOut, Float}
-@TableId{EdOut}
-@TableHeading{Immediate, RowFormat=EdOutTopHeading,
-   Line="Table F-1: Edited Output for Sign Control Symbols"}
-@TableHeading{Immediate, RowFormat=EdOutColumnHeadings,
-   Line="Sign Control Symbol
- @ @;
-@\Edited Output for
-Non-Negative Number@\Edited Output for
-Negative Number"}
 
-'+'@\'+'@\'-'
-
+@Table{Columns=<3>,
+Caption=<@b{Table F-1: Edited Output for Sign Control Symbols}>,
+Headers=<@b{Sign Control Symbol}@\@b{Edited Output for @*Non-Negative Number}@\@b{Edited Output for @*Negative Number}>,
+Body=['+'@\'+'@\'-'
 '-'@\'b'@\'-'
-
 '<'@\'b'@\'('
-
 '>'@\'b'@\')'
-
 "CR"@\"bb"@\"CR"
-
-"DB"@\"bb"@\"DB"
-@end{EdOut}
+"DB"@\"bb"@\"DB"]}
 
 An instance of @nt{fixed_LHS_sign} maps to a character as shown in
 Table F-1.
@@ -951,7 +936,7 @@ The library package Text_IO.Editing has the following declaration:
    @key(function) Pic_String      (Pic : @key(in) Picture) @key(return) String;
    @key(function) Blank_When_Zero (Pic : @key(in) Picture) @key(return) Boolean;
 
-   Max_Picture_Length  : @key(constant) := @i{implementation_defined};
+   Max_Picture_Length  : @key(constant) := @RI{implementation_defined};
 
    Picture_Error       : @key(exception);
 
@@ -1008,7 +993,7 @@ The library package Text_IO.Editing has the following declaration:
                      Radix_Mark : @key(in) Character := Default_Radix_Mark);
    @key(end) Decimal_Output;
 @key(private)
-   ... @i{-- not specified by the language}
+   ... @RI{-- not specified by the language}
 @key(end) Ada.Text_IO.Editing;
 @end{Example}
 @ImplDef{The value of Max_Picture_Length in the package Text_IO.Editing}
@@ -1250,4 +1235,3 @@ Each of the functions Wide_Text_IO.Editing.Valid, To_Picture, and Pic_String has
 Wide_String) as its parameter or result subtype, since a picture String
 is not localizable.
 @end{Notes}
-

@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2000/05/26 05:03:28 $}
+@comment{$Revision: 1.16 $ $Date: 2000/05/27 04:44:03 $}
 
 @begin{Intro}
 
@@ -655,4 +655,3 @@ thus, the page breaks are in different places.
 @end{Itemize}
 @end{Intro}
 @end{NotISO}
-

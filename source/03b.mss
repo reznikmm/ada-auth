@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/23 04:52:38 $}
+@Comment{$Date: 2000/05/27 04:43:59 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.8 $}
+@Comment{$Revision: 1.9 $}
 
 @LabeledClause{Array Types}
 
@@ -21,7 +21,7 @@ value consisting of the values of the components.
 @begin{Syntax}
 @Syn{lhs=<array_type_definition>,rhs="
    @Syn2{unconstrained_array_definition} | @Syn2{constrained_array_definition}"}
-@Hinge{}
+
 
 @Syn{lhs=<unconstrained_array_definition>,rhs="
    @key{array}(@Syn2{index_subtype_definition} {, @Syn2{index_subtype_definition}}) @key{of} @Syn2{component_definition}"}
@@ -98,8 +98,8 @@ For example:
 @begin{Example}
 @key[protected] @key[type] Counter_Type(Initial_Value : Integer := 1) @key[is]
    @key[procedure] Get_Next(Next_Value : @key[out] Integer);
-     --@i{ Returns the next value on each call, bumping Count}
-     --@i{ before returning.}
+     --@RI{ Returns the next value on each call, bumping Count}
+     --@RI{ before returning.}
 @key[private]
    Count : Integer := Initial_Value;
 @key[end] Counter_Type;
@@ -117,11 +117,11 @@ C : @key[aliased] Counter_Type;
 @key[task] @key[body] T @key[is] ...
 
 Task_Array : @key[array](1..100) @key[of] @key[aliased] T;
-  --@i{ Array of task elements, each with its own unique ID.}
-  --@i{ We specify "aliased" so we can use Task_Array(I)'Access.}
-  --@i{ This is safe because Task_Array is of a limited type,}
-  --@i{ so there is no way an assignment to it could change}
-  --@i{ the discriminants of one of its components.}
+  --@RI{ Array of task elements, each with its own unique ID.}
+  --@RI{ We specify "aliased" so we can use Task_Array(I)'Access.}
+  --@RI{ This is safe because Task_Array is of a limited type,}
+  --@RI{ so there is no way an assignment to it could change}
+  --@RI{ the discriminants of one of its components.}
 @end{Example}
 @end{Reason}
 @begin{Ramification}
@@ -174,12 +174,10 @@ an unconstrained first subtype.
 Each @nt{index_subtype_definition} defines the
 corresponding index subtype to be the subtype denoted
 by the @nt{subtype_mark}.
-@redundant[
-@PDefn2{Term=box, Sec=(compound delimiter)}
+@redundant[@PDefn2{Term=box, Sec=(compound delimiter)}
 The compound delimiter <> (called a @i(box)) of an
 @nt<index_subtype_definition> stands for an undefined range
-(different objects of the type need not have the same bounds).
-]
+(different objects of the type need not have the same bounds).]
 
 @Defn2{Term=constrained, Sec=(subtype)}
 @Defn2{Term=unconstrained, Sec=(subtype)}
@@ -279,7 +277,7 @@ is of its own unique type.
 @key(type) Vector     @key(is) @key(array)(Integer  @key(range) <>) @key(of) Real;
 @key(type) Matrix     @key(is) @key(array)(Integer  @key(range) <>, Integer @key(range) <>) @key(of) Real;
 @key(type) Bit_Vector @key(is) @key(array)(Integer  @key(range) <>) @key(of) Boolean;
-@key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; @i[-- see @RefSecNum(Character Types)]
+@key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; @RI[-- see @RefSecNum(Character Types)]
 @end(Example)
 
 @i(Examples of type declarations with constrained array definitions: )
@@ -293,10 +291,10 @@ is of its own unique type.
 @begin(Example)
 Grid : @key(array)(1 .. 80, 1 .. 100) @key(of) Boolean;
 Mix  : @key(array)(Color @key(range) Red .. Green) @key(of) Boolean;
-Page : @key(array)(Positive @key(range) <>) @key(of) Line :=  @i[--  an array of arrays]
-  (1 | 50  => Line'(1 | Line'Last => '+', others => '-'),  @i[-- see @RefSecNum(Array Aggregates)]
+Page : @key(array)(Positive @key(range) <>) @key(of) Line :=  @RI[--  an array of arrays]
+  (1 | 50  => Line'(1 | Line'Last => '+', others => '-'),  @RI[-- see @RefSecNum(Array Aggregates)]
    2 .. 49 => Line'(1 | Line'Last => '|', others => ' '));
-    @i[-- Page is constrained by its initial value to (1..50)]
+    @RI[-- Page is constrained by its initial value to (1..50)]
 @end(Example)
 @end{Examples}
 
@@ -427,16 +425,16 @@ array subtype match.  See @RefSecNum(Type Conversions).
 @begin{Examples}
 @i(Examples of array declarations including an index constraint: )
 @begin(Example)
-Board     : Matrix(1 .. 8,  1 .. 8);  @i[--  see @RefSecNum(Array Types)]
+Board     : Matrix(1 .. 8,  1 .. 8);  @RI[--  see @RefSecNum(Array Types)]
 Rectangle : Matrix(1 .. 20, 1 .. 30);
-Inverse   : Matrix(1 .. N,  1 .. N);  @i[--  N need not be static ]
+Inverse   : Matrix(1 .. N,  1 .. N);  @RI[--  N need not be static ]
 
 Filter    : Bit_Vector(0 .. 31);
 @end(Example)
 
 @i(Example of array declaration with a constrained array subtype: )
 @begin(Example)
-My_Schedule : Schedule;  @i[--  all arrays of type Schedule have the same bounds]
+My_Schedule : Schedule;  @RI[--  all arrays of type Schedule have the same bounds]
 @end(Example)
 
 @i(Example of record type with a component that is an array: )
@@ -446,7 +444,7 @@ My_Schedule : Schedule;  @i[--  all arrays of type Schedule have the same bounds
       Image : String(1 .. Length);
    @key(end) @key(record);
 
-Null_Line : Var_Line(0);  @i[--  Null_Line.Image is a null array]
+Null_Line : Var_Line(0);  @RI[--  Null_Line.Image is a null array]
 @end(Example)
 @end{Examples}
 
@@ -584,8 +582,7 @@ a character type.
 A one-dimensional array type whose component type is a character type
 is called a @i(string) type.
 
-@redundant[
-There are two predefined string types, String and Wide_String,
+@redundant[There are two predefined string types, String and Wide_String,
 each indexed by values of the predefined subtype Positive;
 these are declared in the visible part of package Standard:
 @begin(example)
@@ -593,8 +590,7 @@ these are declared in the visible part of package Standard:
 
 @key(type) String @key(is) @key(array)(Positive @key(range) <>) @key(of) Character;
 @key(type) Wide_String @key(is) @key(array)(Positive @key(range) <>) @key(of) Wide_Character;
-@end(example)
-]
+@end(example)]
 @end{StaticSem}
 
 @begin{Notes}
@@ -615,11 +611,11 @@ these ordering operators correspond to lexicographic order
 @begin(Example)
 Stars      : String(1 .. 120) := (1 .. 120 => '*' );
 Question   : @key(constant) String  := "How many characters?";
-                                               @i[--  Question'First = 1, Question'Last = 20]
-                                               @i[--  Question'Length = 20 (the number of characters)]
+                                               @RI[--  Question'First = 1, Question'Last = 20]
+                                               @RI[--  Question'Length = 20 (the number of characters)]
 
-Ask_Twice  : String  := Question & Question;   @i[--  constrained to (1..40)]
-Ninety_Six : @key(constant) Roman   := "XCVI";      @i[--  see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
+Ask_Twice  : String  := Question & Question;   @RI[--  constrained to (1..40)]
+Ninety_Six : @key(constant) Roman   := "XCVI";      @RI[--  see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
 @end(Example)
 @end{Examples}
 
@@ -654,8 +650,7 @@ to the term @i(character type).
 @LabeledClause{Discriminants}
 
 @begin{Intro}
-@redundant[
-@Defn{discriminant}
+@redundant[@Defn{discriminant}
 @IndexSee{Term=[type parameter],See=(discriminant)}
 @IndexSeeAlso{Term=[parameter],See=(discriminant)}
 A composite type (other than an array type) can have discriminants,
@@ -668,8 +663,7 @@ An @nt<unknown_discriminant_part> in the declaration of a
 partial view of a type
 specifies that the discriminants of the type are unknown
 for the given view;
-all subtypes of such a partial view are indefinite subtypes.
-]
+all subtypes of such a partial view are indefinite subtypes.]
 @ToGlossary{Term=<Discriminant>,
   Text=<A discriminant is a parameter of a composite type.
   It can control, for example, the bounds of a component
@@ -688,7 +682,7 @@ the point of the type declaration.  A @nt<discriminant_part> of
 
 @begin{Syntax}
 @Syn{lhs=<discriminant_part>,rhs="@Syn2{unknown_discriminant_part} | @Syn2{known_discriminant_part}"}
-@Hinge{}
+
 
 @Syn{lhs=<unknown_discriminant_part>,rhs="(<>)"}
 
@@ -963,10 +957,11 @@ on a discriminant@Redundant[; this includes the discriminants
 themselves].  The values
 of discriminants determine which other component values are present
 in the value of the discriminated type.
-@Honest{Which values are present might depend on discriminants of
+@begin{Honest}
+Which values are present might depend on discriminants of
   some ancestor type that are constrained in an intervening
   @nt<derived_type_definition>.  That's why we say "values of discriminants"
-  instead of "values of @i(the) discriminants" @em a subtle point.}
+  instead of "values of @i(the) discriminants" @em a subtle point.@end{honest}
 
 @Defn{known discriminants}
 @Defn2{Term=[discriminants], Sec=(known)}
@@ -1126,7 +1121,7 @@ used only for discriminants defined by an @nt<access_definition>.
 @begin{Examples}
 @i(Examples of discriminated types:)
 @begin(Example)
-@key(type) Buffer(Size : Buffer_Size := 100)  @key(is)        @i[-- see @RefSecNum(Integer Types)]
+@key(type) Buffer(Size : Buffer_Size := 100)  @key(is)        @RI[-- see @RefSecNum(Integer Types)]
    @key(record)
       Pos   : Buffer_Size := 0;
       Value : String(1 .. Size);
@@ -1134,7 +1129,7 @@ used only for discriminants defined by an @nt<access_definition>.
 
 @key(type) Matrix_Rec(Rows, Columns : Integer) @key(is)
    @key(record)
-      Mat : Matrix(1 .. Rows, 1 .. Columns);       @i[-- see @RefSecNum(Array Types)]
+      Mat : Matrix(1 .. Rows, 1 .. Columns);       @RI[-- see @RefSecNum(Array Types)]
    @key(end) @key(record);
 
 @key(type) Square(Side : Integer) @key(is) @key(new) Matrix_Rec(Rows => Side, Columns => Side);
@@ -1148,7 +1143,7 @@ used only for discriminants defined by an @nt<access_definition>.
 @key(type) Item(Number : Positive) @key(is)
    @key(record)
       Content : Integer;
-      @i[--  no component depends on the discriminant]
+      @RI[--  no component depends on the discriminant]
    @key(end) @key(record);
 @end(Example)
 @end{Examples}
@@ -1187,7 +1182,7 @@ to those given in Record Aggregates.
 @begin{Syntax}
 @Syn{lhs=<discriminant_constraint>,rhs="
    (@Syn2{discriminant_association} {, @Syn2{discriminant_association}})"}
-@Hinge{}
+
 
 @Syn{lhs=<discriminant_association>,rhs="
    [@SynI{discriminant_}@Syn2{selector_name} {| @SynI{discriminant_}@Syn2{selector_name}} =>] @Syn2{expression}"}
@@ -1314,12 +1309,12 @@ in extensions that are not constrained to any particular value.
 @begin{Examples}
 @i{Examples (using types declared above in clause @RefSecNum(Discriminants)):}
 @begin(Example)
-Large   : Buffer(200);  @i[--  constrained, always 200 characters]
-                        @i[--   (explicit discriminant value)]
-Message : Buffer;       @i[--  unconstrained, initially 100 characters]
-                        @i[--   (default discriminant value)]
-Basis   : Square(5);    @i[--  constrained, always 5 by 5]
-Illegal : Square;       @i[--  illegal, a Square has to be constrained]
+Large   : Buffer(200);  @RI[--  constrained, always 200 characters]
+                        @RI[--   (explicit discriminant value)]
+Message : Buffer;       @RI[--  unconstrained, initially 100 characters]
+                        @RI[--   (default discriminant value)]
+Basis   : Square(5);    @RI[--  constrained, always 5 by 5]
+Illegal : Square;       @RI[--  illegal, a Square has to be constrained]
 @end(Example)
 @end{Examples}
 
@@ -1443,7 +1438,7 @@ values of the components.
        @Syn2{component_list}
     @key{end} @key{record}
   | @key{null record}"}
-@Hinge{}
+
 
 @Syn{lhs=<component_list>,rhs="
       @Syn2{component_item} {@Syn2{component_item}}
@@ -1693,7 +1688,7 @@ unless the record type is limited.
 Tomorrow, Yesterday : Date;
 A, B, C : Complex;
 
-@i[-- both components of A, B, and C are implicitly initialized to zero ]
+@RI[-- both components of A, B, and C are implicitly initialized to zero ]
 @end(Example)
 @end{Examples}
 
@@ -1765,12 +1760,12 @@ parallel those for case statements.
        @Syn2{variant}
       {@Syn2{variant}}
    @key{end} @key{case};"}
-@Hinge{}
+
 
 @Syn{lhs=<variant>,rhs="
    @key{when} @Syn2{discrete_choice_list} =>
       @Syn2{component_list}"}
-@Hinge{}
+
 
 @Syn{lhs=<discrete_choice_list>,rhs="@Syn2{discrete_choice} {| @Syn2{discrete_choice}}"}
 
@@ -1953,8 +1948,7 @@ left implicit in RM83.
 @LabeledClause{Tagged Types and Type Extensions}
 
 @begin{Intro}
-@redundant[
-@PDefn{dispatching operation}
+@redundant[@PDefn{dispatching operation}
 @Defn{polymorphism}
 @IndexSee{Term=[dynamic binding],See=(dispatching operation)}
 @IndexSeeAlso{Term=[generic unit],See=(dispatching operation)}
@@ -1965,8 +1959,7 @@ inheritance with extension and run-time polymorphism via
 @i(dispatching operations).
 @IndexSee{Term=[object-oriented programming (OOP)],See=[tagged types and type extensions]}
 @IndexSee{Term=[OOP (object-oriented programming)],See=[tagged types and type extensions]}
-@IndexSeeAlso{Term=[inheritance],See=[tagged types and type extension]}
-]
+@IndexSeeAlso{Term=[inheritance],See=[tagged types and type extension]}]
 @end{Intro}
 
 @begin{MetaRules}
@@ -2146,7 +2139,7 @@ The following language-defined library package exists:
     Tag_Error : @key[exception];
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Tags;
 @end{Example}
 @begin{Reason}
@@ -2381,7 +2374,7 @@ the library unit in which the incomplete type is declared
   @key(end record);
 
 @key(type) Expression @key(is tagged null record);
-  @i[-- Components will be added by each extension]
+  @RI[-- Components will be added by each extension]
 @end(Example)
 @end{Examples}
 
@@ -2471,7 +2464,7 @@ as in the following example:
 @begin{Example}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[tagged] @key[null] @key[record];
-    @key[function] F @key[return] T; --@i{ Inherited versions will be abstract.}
+    @key[function] F @key[return] T; --@RI{ Inherited versions will be abstract.}
 @key[end] P;
 
 @key[generic]
@@ -2482,11 +2475,11 @@ as in the following example:
 @key[end] Gp;
 
 @key[package] @key[body] Gp @key[is]
-    @key[type] NT2 @key[is] @key[new] NT @key[with] @key[null] @key[record]; --@i{ Illegal!}
+    @key[type] NT2 @key[is] @key[new] NT @key[with] @key[null] @key[record]; --@RI{ Illegal!}
     @key[procedure] Q(X : @key[in] NT2) @key[is] @key[begin] @key[null]; @key[end] Q;
-    --@i{ Is this legal or not?  Can't decide because}
-    --@i{ we don't know whether TT had any functions that go abstract}
-    --@i{ on extension.}
+    --@RI{ Is this legal or not?  Can't decide because}
+    --@RI{ we don't know whether TT had any functions that go abstract}
+    --@RI{ on extension.}
 @key[end] Gp;
 
 @key[package] I @key[is] @key[new] Gp(TT => P.T);
@@ -2592,28 +2585,28 @@ from the parent type or declared in the
   @key(record)
     Paint : Color := White;
   @key(end record);
-    @i[-- Components X and Y are inherited]
+    @RI[-- Components X and Y are inherited]
 
 Origin : @key(constant) Painted_Point := (X | Y => 0.0, Paint => Black);
 
 @key(type) Literal @key(is new) Expression @key(with)
-  @key(record)                 @i[-- a leaf in an Expression tree]
+  @key(record)                 @RI[-- a leaf in an Expression tree]
     Value : Real;
   @key(end record);
 
 @key(type) Expr_Ptr @key(is access all) Expression'Class;
-                               @i[-- see @RefSecNum(Access Types)]
+                               @RI[-- see @RefSecNum(Access Types)]
 
 @key(type) Binary_Operation @key(is new) Expression @key(with)
-  @key(record)                 @i[-- an internal node in an Expression tree]
+  @key(record)                 @RI[-- an internal node in an Expression tree]
     Left, Right : Expr_Ptr;
   @key(end record);
 
 @key(type) Addition @key(is new) Binary_Operation @key(with null record);
 @key(type) Subtraction @key(is new) Binary_Operation @key(with null record);
-  @i[-- No additional components needed for these extensions]
+  @RI[-- No additional components needed for these extensions]
 
-Tree : Expr_Ptr :=         @i[-- A tree representation of ``5.0 + (13.0-7.0)'']
+Tree : Expr_Ptr :=         @RI[-- A tree representation of ``5.0 + (13.0-7.0)'']
    @key(new) Addition'(
       Left  => @key(new) Literal'(Value => 5.0),
       Right => @key(new) Subtraction'(
@@ -2990,10 +2983,10 @@ For example:
     X : T2;
     Y : T1'Class := X;
 @key[begin]
-    P2.Op_A(Param => X); --@i{ Nondispatching call.}
-    P1.Op_A(Arg => Y); --@i{ Dispatching call.}
-    P2.Op_B(Arg => X); --@i{ Nondispatching call.}
-    P1.Op_B(Arg => Y); --@i{ Dispatching call.}
+    P2.Op_A(Param => X); --@RI{ Nondispatching call.}
+    P1.Op_A(Arg => Y); --@RI{ Dispatching call.}
+    P2.Op_B(Arg => X); --@RI{ Nondispatching call.}
+    P1.Op_B(Arg => Y); --@RI{ Dispatching call.}
 @key[end] Main;
 @end{Example}
 
@@ -3058,8 +3051,7 @@ The concept of dispatching operations is new.
 @LabeledSubClause{Abstract Types and Subprograms}
 
 @begin{Intro}
-@redundant[
-@Defn{abstract type}
+@redundant[@Defn{abstract type}
 @IndexSeeAlso{Term=[abstract data type (ADT)],See=(abstract type)}
 @IndexSeeAlso{Term=[ADT (abstract data type)],See=(abstract type)}
 @IndexSee{Term=[concrete type],See=(nonabstract type)}
@@ -3072,8 +3064,7 @@ An @i(abstract subprogram) is a subprogram that has no body,
 but is intended to be overridden at some point when inherited.
 Because objects of an abstract type cannot be created,
 a dispatching call to an abstract subprogram always
-dispatches to some overriding body.
-]
+dispatches to some overriding body.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -3123,9 +3114,9 @@ then the tagged type shall be abstract.
 @begin{Example}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[abstract] @key[tagged] @key[private];
-    @key[function] Foo (X : T) @key[return] Boolean @key[is] @key[abstract]; --@i{ Illegal!}
+    @key[function] Foo (X : T) @key[return] Boolean @key[is] @key[abstract]; --@RI{ Illegal!}
 @key[private]
-    @key[type] T @key[is] @key[tagged] @key[null] @key[record]; --@i{ Illegal!}
+    @key[type] T @key[is] @key[tagged] @key[null] @key[record]; --@RI{ Illegal!}
     X : T;
     Y : Boolean := Foo (T'Class (X));
 @key[end] P;
@@ -3152,7 +3143,7 @@ The two lines marked "--@i{ Illegal!}" are illegal when taken together.
   . . .
 @key[package] Q @key[is]
    @key[type] My_Field_Size @key[is] @key[new] Field_Size;
-   --@i{ implicit declaration of Print(X : T; F : My_Field_Size := 0) is abstract;}
+   --@RI{ implicit declaration of Print(X : T; F : My_Field_Size := 0) is abstract;}
 @key[end] Q;
 @end{Example}
 
@@ -3202,19 +3193,19 @@ or a primitive function with a controlling result, then:
 @key[with] Pack1; @key[use] Pack1;
 @key[package] Pack2 @key[is]
     @key[type] T1 @key[is] @key[new] Ancestor @key[with] @key[record] ...;
-        --@i{ A concrete type.}
-    @key[procedure] Do_Something(X : @key[in] T1); --@i{ Have to override.}
+        --@RI{ A concrete type.}
+    @key[procedure] Do_Something(X : @key[in] T1); --@RI{ Have to override.}
 @key[end] Pack2;
 
 @key[with] Pack1; @key[use] Pack1;
 @key[with] Pack2; @key[use] Pack2;
 @key[package] Pack3 @key[is]
     @key[type] T2 @key[is] @key[new] Ancestor @key[with] @key[private];
-        --@i{ A concrete type.}
+        --@RI{ A concrete type.}
 @key[private]
-    @key[type] T2 @key[is] @key[new] T1 @key[with] --@i{ Parent different from ancestor.}
+    @key[type] T2 @key[is] @key[new] T1 @key[with] --@RI{ Parent different from ancestor.}
       @key[record] ... @key[end] @key[record];
-    --@i{ Here, we inherit Pack2.Do_Something.}
+    --@RI{ Here, we inherit Pack2.Do_Something.}
 @key[end] Pack3;
     @end{Example}
 
@@ -3429,7 +3420,7 @@ by compile-time rules.
 @Syn{lhs=<access_type_definition>,rhs="
     @Syn2{access_to_object_definition}
   | @Syn2{access_to_subprogram_definition}"}
-@Hinge{}
+
 
 @Syn{lhs=<access_to_object_definition>,rhs="
     @key{access} [@Syn2{general_access_modifier}] @Syn2{subtype_indication}"}
@@ -3543,8 +3534,8 @@ either by the designated subtype, or by its initial value.]
 @key(type) T2 @key(is new) T1 @key(with) ...;
 @key(procedure) P(X : @key(access) T2) @key(is)
 @key(begin)
-    P(T1(X.@key(all))'Access);  @i[-- hand off to T1's P]
-    . . .      @i[-- now do extra T2-specific processing]
+    P(T1(X.@key(all))'Access);  @RI[-- hand off to T1's P]
+    . . .      @RI[-- now do extra T2-specific processing]
 @key(end) P;
 @end{Example}
 
@@ -3846,14 +3837,14 @@ can be applied to access types
 @begin{Examples}
 @i{Examples of access-to-object types:}
 @begin{Example}
-@key[type] Peripheral_Ref @key[is access] Peripheral;  @i[--  see @RefSecNum{Variant Parts and Discrete Choices}]
+@key[type] Peripheral_Ref @key[is access] Peripheral;  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
 @key[type] Binop_Ptr @key[is access all] Binary_Operation'Class;
-                                           @i[-- general access-to-class-wide, see @RefSecNum{Type Extensions}]
+                                           @RI[-- general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
 
 @i{Example of an access subtype:}
 @begin{Example}
-@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  @i[--  see @RefSecNum{Variant Parts and Discrete Choices}]
+@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
 @end{Example}
 
 @i{Example of an access-to-subprogram type:}
@@ -3866,8 +3857,8 @@ Give_Message : Message_Procedure := Default_Message_Procedure'Access;
 ...
 Give_Message := Other_Procedure'Access;
 ...
-Give_Message("File not found.");  --@i{ call with parameter (.@key[all] is optional)}
-Give_Message.@key[all];                 --@i{ call with no parameters}
+Give_Message("File not found.");  --@RI{ call with parameter (.@key[all] is optional)}
+Give_Message.@key[all];                 --@RI{ call with no parameters}
 @end{Example}
 @end{Examples}
 
@@ -4053,7 +4044,7 @@ all types declared prior to it in the same @nt<declarative_part>
 @begin{Examples}
 @i(Example of a recursive type:)
 @begin(Example)
-@key(type) Cell;  @i[--  incomplete type declaration]
+@key(type) Cell;  @RI[--  incomplete type declaration]
 @key(type) Link @key(is) @key(access) Cell;
 
 @key(type) Cell @key(is)
@@ -4069,8 +4060,8 @@ Next   : Link  := Head.Succ;
 
 @i(Examples of mutually dependent access types:)
 @begin(Example)
-@key(type) Person(<>);    @i[-- incomplete type declaration]
-@key(type) Car;           @i[-- incomplete type declaration]
+@key(type) Person(<>);    @RI[-- incomplete type declaration]
+@key(type) Car;           @RI[-- incomplete type declaration]
 
 @key(type) Person_Name @key(is) @key(access) Person;
 @key(type) Car_Name    @key(is) @key(access) @key(all) Car;
@@ -4080,7 +4071,7 @@ Next   : Link  := Head.Succ;
       Number  : Integer;
       Owner   : Person_Name;
    @key(end) @key(record);
-@Hinge()
+
 
 @key(type) Person(Sex : Gender) @key(is)
    @key(record)
@@ -4094,7 +4085,7 @@ Next   : Link  := Head.Succ;
       @key(end) @key(case);
    @key(end) @key(record);
 
-My_Car, Your_Car, Next_Car : Car_Name := @key[new] Car;  @i[-- see @RefSecNum{Allocators}]
+My_Car, Your_Car, Next_Car : Car_Name := @key[new] Car;  @RI[-- see @RefSecNum{Allocators}]
 George : Person_Name := @key[new] Person(M);
    ...
 George.Vehicle := Your_Car;
@@ -4136,14 +4127,14 @@ as illustrated by Example 4 of AI-00039:
     X : Pri;
 @key[end] Pack;
 
-@key[package] @key[body] Pack @key[is] --@i{ Could be separately compiled!}
+@key[package] @key[body] Pack @key[is] --@RI{ Could be separately compiled!}
     @key[type] Sep @key[is] ...;
     X := @key[new] Sep;
 @key[end] Pack;
 
 @key[pragma] Elaborate(Pack);
 @key[private] @key[package] Pack.Child @key[is]
-    I : Integer := X.@key{all}'Size; --@i{ Legal, by AI-00039.}
+    I : Integer := X.@key{all}'Size; --@RI{ Legal, by AI-00039.}
 @key[end] Pack.Child;
 @end{example}
 
@@ -4601,14 +4592,14 @@ Examples of accessibility:
     @key[procedure] P(X: T) @key[is]
         Y: @key[aliased] T;
         @key[type] A1 @key[is] @key[access] @key[all] T;
-        Ptr0: A0 := Global; --@i{ OK.}
-        Ptr1: A1 := X'Access; --@i{ OK.}
+        Ptr0: A0 := Global; --@RI{ OK.}
+        Ptr1: A1 := X'Access; --@RI{ OK.}
     @key[begin]
-        Ptr1 := Y'Access; --@i{ OK;}
-        Ptr0 := A0(Ptr1); --@i{ Illegal type conversion!}
-        Ptr0 := X'Access; --@i{ Illegal reference to Access attribute!}
-        Ptr0 := Y'Access; --@i{ Illegal reference to Access attribute!}
-        Global := Ptr0; --@i{ OK.}
+        Ptr1 := Y'Access; --@RI{ OK;}
+        Ptr0 := A0(Ptr1); --@RI{ Illegal type conversion!}
+        Ptr0 := X'Access; --@RI{ Illegal reference to Access attribute!}
+        Ptr0 := Y'Access; --@RI{ Illegal reference to Access attribute!}
+        Global := Ptr0; --@RI{ OK.}
     @key[end] P;
 @key[end] Lib_Unit;
 @end{Example}
@@ -4629,8 +4620,8 @@ Here's an example involving access parameters:
     @key[procedure] P(X: @key[access] Integer) @key[is]
         @key[type] Nested_Type @key[is] @key[access] @key[all] Integer;
     @key[begin]
-        ... Nested_Type(X) ... --@i{ (1)}
-        ... Level_1_Type(X) ... --@i{ (2)}
+        ... Nested_Type(X) ... --@RI{ (1)}
+        ... Level_1_Type(X) ... --@RI{ (2)}
     @key[end] P;
 
     @key[procedure] Q(X: @key[access] Integer) @key[is]
@@ -4645,12 +4636,12 @@ Here's an example involving access parameters:
     @key[procedure] R @key[is]
         Level_2: @key[aliased] Integer;
     @key[begin]
-        Q(Level_2'Access); --@i{ (3)}
+        Q(Level_2'Access); --@RI{ (3)}
     @key[end] R;
 
     Level_1: @key[aliased] Integer;
 @key[begin]
-    Q(Level_1'Access); --@i{ (4)}
+    Q(Level_1'Access); --@RI{ (4)}
     R;
 @key[end] Main;
 @end{Example}
@@ -4673,9 +4664,9 @@ For example:
     @key[function] G(X: @key[access] Rec) @key[return] Boolean;
     @key[type] Rec(D: @key[access] Integer) @key[is]
         @key[record]
-            C1: Int_Ptr := Int_Ptr(D); --@i{ Illegal!}
-            C2: Rec_Ptr := Rec'Access; --@i{ Illegal!}
-            C3: Boolean := F(Rec'Access); --@i{ Illegal!}
+            C1: Int_Ptr := Int_Ptr(D); --@RI{ Illegal!}
+            C2: Rec_Ptr := Rec'Access; --@RI{ Illegal!}
+            C3: Boolean := F(Rec'Access); --@RI{ Illegal!}
             C4: Boolean := G(Rec'Access);
         @key[end] @key[record];
 @key[end] P;
@@ -4730,7 +4721,7 @@ The current instance of a limited type
   nominal subtype is unconstrained,
   unless this subtype is indefinite,
   or the variable is aliased.
-
+  
   @begin(Discussion)
      This restriction is intended to be similar to the restriction
      on renaming discriminant-dependent subcomponents.
@@ -4977,7 +4968,7 @@ comparison.@end{ramification}
 @begin{Examples}
 @i{Example of use of the Access attribute:}
 @begin{Example}
-Martha : Person_Name := @key[new] Person(F);       @i[-- see @RefSecNum{Incomplete Type Declarations}]
+Martha : Person_Name := @key[new] Person(F);       @RI[-- see @RefSecNum{Incomplete Type Declarations}]
 Cars   : @key[array] (1..2) @key[of] @key[aliased] Car;
    ...
 Martha.Vehicle := Cars(1)'Access;
@@ -5003,7 +4994,7 @@ while X'Last is not.  See AI-00154.
 
 @begin{Syntax}
 @Syn{lhs=<declarative_part>,rhs="{@Syn2{declarative_item}}"}
-@Hinge{}
+
 
 @Syn{lhs=<declarative_item>,rhs="
     @Syn2{basic_declarative_item} | @Syn2{body}"}

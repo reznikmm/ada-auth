@@ -1,16 +1,14 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/27 04:44:00 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
-@redundant[
-This section defines the facilities for dealing with errors or other
-exceptional situations that arise during program execution.
-]
+@redundant[This section defines the facilities for dealing with errors or other
+exceptional situations that arise during program execution.]
 @Defn{exception occurrence}
 @IndexSeeAlso{Term=[condition],See=(exception)}
 @IndexSee{Term=[signal (an exception)],See=(raise)}
@@ -20,8 +18,7 @@ exceptional situations that arise during program execution.
   Text=<An @i(exception) represents a kind of exceptional situation;
   an occurrence of such a situation (at run time)
   is called an @i(exception occurrence).
-  @redundant[
-  @PDefn2{Term=[raise], Sec=(an exception)}
+  @redundant[  @PDefn2{Term=[raise], Sec=(an exception)}
   To @i{raise} an exception is to abandon normal program execution so
   as to draw attention to the fact that the corresponding situation has
   arisen.
@@ -46,15 +43,13 @@ we sometimes use ``@i{occurrence}'' as a
 short-hand for ``exception occurrence.''
 @end{Honest}
 
-@redundant[
-An @nt{exception_declaration} declares a name for an exception.
+@redundant[An @nt{exception_declaration} declares a name for an exception.
 An exception is raised initially either by a @nt{raise_statement}
 or by the failure of a language-defined check.
 When an exception arises, control can be transferred to a
 user-provided @nt{exception_handler} at the end of a
 @nt{handled_sequence_of_statements},
-or it can be propagated to a dynamically enclosing execution.
-]
+or it can be propagated to a dynamically enclosing execution.]
 @end{Intro}
 
 @begin{DiffWord83}
@@ -187,10 +182,8 @@ We explicitly define elaboration for @nt{exception_declaration}s.
 @LabeledClause{Exception Handlers}
 
 @begin{Intro}
-@redundant[
-The response to one or more exceptions is specified by an
-@nt{exception_handler}.
-]
+@redundant[The response to one or more exceptions is specified by an
+@nt{exception_handler}.]
 @end{Intro}
 
 @begin{Syntax}
@@ -199,7 +192,7 @@ The response to one or more exceptions is specified by an
   [@key{exception}
      @Syn2{exception_handler}
     {@Syn2{exception_handler}}]"}
-@Hinge{}
+
 
 @Syn{lhs=<exception_handler>,rhs="
   @key{when} [@Syn2{choice_parameter_specification}:] @Syn2{exception_choice} {| @Syn2{exception_choice}} =>
@@ -277,11 +270,11 @@ that are propagated by the @nt{sequence_of_statement}s.]
 @i{Example of an exception handler:}
 @begin{Example}
 @key[begin]
-   Open(File, In_File, "input.txt");   @i[-- see @RefSecNum{File Management}]
+   Open(File, In_File, "input.txt");   @RI[-- see @RefSecNum{File Management}]
 @key[exception]
    @key[when] E : Name_Error =>
       Put("Cannot open input file : ");
-      Put_Line(Exception_Message(E));  @i[-- see @RefSecNum{The Package Exceptions}]
+      Put_Line(Exception_Message(E));  @RI[-- see @RefSecNum{The Package Exceptions}]
       @key[raise];
 @key[end];
 @end{Example}
@@ -316,9 +309,7 @@ The syntax rule for @nt{choice_parameter_specification} is new.
 @LabeledClause{Raise Statements}
 
 @begin{Intro}
-@redundant[
-A @nt{raise_statement} raises an exception.
-]
+@redundant[A @nt{raise_statement} raises an exception.]
 @end{Intro}
 
 @begin{Syntax}
@@ -358,9 +349,9 @@ This allows the original cause of the exception to be determined.
 @begin{Examples}
 @i{Examples of raise statements:}
 @begin{Example}
-@key[raise] Ada.IO_Exceptions.Name_Error;   @i[-- see @RefSecNum{Exceptions In Input-Output}]
+@key[raise] Ada.IO_Exceptions.Name_Error;   @RI[-- see @RefSecNum{Exceptions In Input-Output}]
 
-@key[raise];                                @i[-- re-raise the current exception]
+@key[raise];                                @RI[-- re-raise the current exception]
 @end{Example}
 @end{Examples}
 
@@ -377,8 +368,7 @@ any force.
 @LabeledClause{Exception Handling}
 
 @begin{Intro}
-@redundant[
-When an exception occurrence is raised,
+@redundant[When an exception occurrence is raised,
 normal program execution is abandoned
 and control is transferred to an applicable @nt{exception_handler},
 if any.
@@ -388,8 +378,7 @@ exceptional event.
 @Defn{propagate}
 To @i(propagate) an exception occurrence is to raise it again in
 another context; that is,
-to fail to respond to the exceptional event in the present context.
-]
+to fail to respond to the exceptional event in the present context.]
 @begin{Ramification}
 In other words, if the execution of a given construct raises an exception,
 but does not handle it,
@@ -555,7 +544,7 @@ The following language-defined library package exists:
 
     @key[function] Exception_Identity(X : Exception_Occurrence) @key[return] Exception_Id;
     @key[function] Exception_Name(X : Exception_Occurrence) @key[return] String;
-        --@i{ Same as Exception_Name(Exception_Identity(X)).}
+        --@RI{ Same as Exception_Name(Exception_Identity(X)).}
     @key[function] Exception_Information(X : Exception_Occurrence) @key[return] String;
 
     @key[procedure] Save_Occurrence(Target : @key[out] Exception_Occurrence;
@@ -563,7 +552,7 @@ The following language-defined library package exists:
     @key[function] Save_Occurrence(Source : Exception_Occurrence)
                              @key[return] Exception_Occurrence_Access;
 @key[private]
-   ... --@i{ @i{not specified by the language}}
+   ... --@RI{ @RI{not specified by the language}}
 @key[end] Ada.Exceptions;
 @end{Example}
 
@@ -608,7 +597,7 @@ Given an exception E, the @nt{raise_statement}:
 
 is equivalent to this call to Raise_Exception:
 @begin{Example}
-Raise_Exception(E'Identity, Message => @i{implementation-defined-string});
+Raise_Exception(E'Identity, Message => @RI{implementation-defined-string});
 @end{Example}
 
 The following handler:
@@ -798,7 +787,7 @@ can be allocated on the stack with exactly the right amount of space
 for the message @em none for an empty message.  This is just like
 declaring a constrained object of the type:
 @begin{Example}
-Temp : Exception_Occurrence(10); --@i{ for a 10-character message}
+Temp : Exception_Occurrence(10); --@RI{ for a 10-character message}
 @end{Example}
 
 After finding the appropriate handler, the stack can be cut back,
@@ -849,9 +838,9 @@ variant record:
     @key[limited] @key[record]
         @key[case] Kind @key[is]
             @key[when] Normal =>
-                ... --@i{ space for 200 characters}
+                ... --@RI{ space for 200 characters}
             @key[when] As_Choice_Param =>
-                ... --@i{ pointer to heap string}
+                ... --@RI{ pointer to heap string}
         @key[end] @key[case];
     @key[end] @key[record];
 @end{Example}
@@ -909,15 +898,15 @@ from the response to that error:
 
     File_Not_Found : @key[exception];
     @key[procedure] Open(F : @key[in] @key[out] File_Handle; Name : String);
-        --@i{ raises File_Not_Found if named file does not exist}
+        --@RI{ raises File_Not_Found if named file does not exist}
 
     End_Of_File : @key[exception];
     @key[procedure] Read(F : @key[in] @key[out] File_Handle; Data : @key[out] Data_Type);
-        --@i{ raises End_Of_File if the file is not open}
+        --@RI{ raises End_Of_File if the file is not open}
 
     ...
 @key[end] File_System;
-@Hinge{}
+
 
 @key[package] @key[body] File_System @key[is]
     @key[procedure] Open(F : @key[in] @key[out] File_Handle; Name : String) @key[is]
@@ -942,7 +931,7 @@ from the response to that error:
     ...
 
 @key[end] File_System;
-@Hinge{}
+
 
 @key[with] Ada.Text_IO;
 @key[with] Ada.Exceptions;
@@ -950,7 +939,7 @@ from the response to that error:
 @key[use] Ada;
 @key[procedure] Main @key[is]
 @key[begin]
-    ... --@i{ call operations in File_System}
+    ... --@RI{ call operations in File_System}
 @key[exception]
     @key[when] End_Of_File =>
         Close(Some_File);
@@ -1290,8 +1279,7 @@ which was included in @nt{selected_component} in RM83.
 @LabeledClause{Exceptions and Optimization}
 
 @begin{Intro}
-@redundant[
-@Defn{language-defined check}
+@redundant[@Defn{language-defined check}
 @Defn2{Term=[check], Sec=(language-defined)}
 @Defn{run-time error}
 @Defn2{Term=[error], Sec=(run-time)}
@@ -1299,8 +1287,7 @@ which was included in @nt{selected_component} in RM83.
 @Defn{efficiency}
 This clause gives permission to the implementation to perform
 certain ``optimizations'' that do not necessarily preserve the canonical
-semantics.
-]
+semantics.]
 @end{Intro}
 
 @begin{RunTime}

@@ -1,20 +1,18 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/05/25 00:56:00 $}
+@Comment{$Date: 2000/05/27 04:43:59 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
-@redundant[
-The text of a program consists of the texts of one or more
+@redundant[The text of a program consists of the texts of one or more
 @nt<compilation>s.  The text of a @nt<compilation> is a sequence of
 lexical elements, each composed of characters; the rules of
 composition are given in this section.
 @nt{Pragma}s, which provide certain information for the compiler, are also
-described in this section.
-]
+described in this section.]
 @end{Intro}
 
 @LabeledClause{Character Set}
@@ -47,7 +45,7 @@ inclusive than that of ISO 10646-1.
 @begin{Syntax}
 @Syn{lhs=<character>,
   rhs="@Syn2{graphic_character} | @Syn2{format_effector} | @Syn2{other_control_function}"}
-@Hinge{}
+
 
 @Syn{lhs=<graphic_character>,rhs="@Syn2{identifier_letter} | @Syn2{digit} | @Syn2{space_character} | @Syn2{special_character}"}
 
@@ -471,7 +469,7 @@ decimal notation (that is, the base is ten).
 
 @begin{Syntax}
 @Syn{lhs=<decimal_literal>,rhs="@Syn2{numeral} [.@Syn2{numeral}] [@Syn2{exponent}]"}
-@Hinge{}
+
 
 @Syn{lhs=<numeral>,rhs="@Syn2{digit} {[@Syn2{underline}] @Syn2{digit}}"}
 
@@ -540,7 +538,7 @@ that specifies the base explicitly.]
 @begin{Syntax}
 @Syn{lhs=<based_literal>,rhs="
    @Syn2{base} # @Syn2{based_numeral} [.@Syn2{based_numeral}] # [@Syn2{exponent}]"}
-@Hinge{}
+
 
 @Syn{lhs=<base>,rhs="@Syn2{numeral}"}
 
@@ -577,8 +575,8 @@ lower case or in upper case, with the same meaning.
 @i{Examples of based literals:}
 @begin{Display}
 @tabclear()@tabset(P16, P45)
-2#1111_1111#@\16#FF#      016#0ff#  @\--@i{  integer literals of value 255}
-16#E#E1     @\2#1110_0000#  @\--@i{  integer literals of value 224}
+2#1111_1111# @\16#FF#       016#0ff# @\--@i{  integer literals of value 255}
+16#E#E1     @\2#1110_0000#     @\--@i{  integer literals of value 224}
 16#F.FF#E+2 @\2#1.1111_1111_1110#E11 @\--@i{  real literals of value 4095.0}
 @end{Display}
 @end{Examples}
@@ -621,15 +619,13 @@ since it requires knowledge of types.
 @LabeledClause{String Literals}
 
 @begin{Intro}
-@redundant[
-A @nt<string_literal> is formed by a sequence of graphic characters
+@redundant[A @nt<string_literal> is formed by a sequence of graphic characters
 (possibly none) enclosed between two quotation marks used as
 string brackets.  They are used to represent @nt<operator_symbol>s
 (see @RefSecNum(Subprogram Declarations)), values of a string type
 (see @RefSecNum(Literals)), and array subaggregates
 (see @RefSecNum(Array Aggregates)).
-@IndexSee{Term=[quoted string],See=(string_literal)}
-]
+@IndexSee{Term=[quoted string],See=(string_literal)}]
 @end{Intro}
 
 @begin{Syntax}
@@ -736,7 +732,7 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @begin{Syntax}
 @Syn{lhs=<pragma>,rhs="
    @key{pragma} @Syn2{identifier} [(@Syn2{pragma_argument_association} {, @Syn2{pragma_argument_association}})];"}
-@Hinge{}
+
 
 @Syn{lhs=<pragma_argument_association>,rhs="
      [@SynI{pragma_argument_}@Syn2{identifier} =>] @Syn2{name}
@@ -753,7 +749,7 @@ associations with a
 After a semicolon delimiter, but not within a
 @nt{formal_part}
 or @nt{discriminant_part}.
-@Hinge()
+
 
 At any place where the syntax rules allow a construct defined by a
 syntactic category whose name ends with "@nt{declaration}", "@nt{statement}",
@@ -1079,10 +1075,10 @@ Some compilers might even ignore the pragma altogether.
 @begin{Examples}
 @i{Examples of pragmas:}
 @begin{Example}
-@key[pragma] List(Off); --@i{ turn off listing generation}
-@key[pragma] Optimize(Off); --@i{ turn off optional optimizations}
-@key[pragma] Inline(Set_Mask); --@i{ generate code for Set_Mask inline}
-@key[pragma] Suppress(Range_Check, On => Index); --@i{ turn off range checking on Index}
+@key[pragma] List(Off); --@RI{ turn off listing generation}
+@key[pragma] Optimize(Off); --@RI{ turn off optional optimizations}
+@key[pragma] Inline(Set_Mask); --@RI{ generate code for Set_Mask inline}
+@key[pragma] Suppress(Range_Check, On => Index); --@RI{ turn off range checking on Index}
 @end{Example}
 @end{Examples}
 
@@ -1106,8 +1102,8 @@ informative annex.
 @begin{Syntax}
 @begin{Bundle}
 @begin{SyntaxText}
-@chgref{Version=[1], Kind=[Deleted]}
-@chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk number from original RM}>]
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @Defn{reserved word}
 The following are the @i{reserved words}
@@ -1124,6 +1120,7 @@ The following are the @i{reserved words}
   of confusion for some users, and differs from the way they
   are treated in the C and Pascal language definitions.
 @end{Discussion}
+@*
 
 @begin{DisplayWithoutParanum}
 @begin{FourCol}

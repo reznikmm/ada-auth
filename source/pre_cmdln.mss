@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:03 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:07 $}
+@Comment{$Date: 2000/05/27 04:44:03 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program
@@ -25,7 +25,7 @@ The library package Ada.Command_Line has the following declaration:
 
   @key[function] Command_Name @key[return] String;
 
-  @key[type] Exit_Status @key[is] @i{implementation-defined integer type};
+  @key[type] Exit_Status @key[is] @RI{implementation-defined integer type};
 
   Success : @key[constant] Exit_Status;
   Failure : @key[constant] Exit_Status;
@@ -33,7 +33,7 @@ The library package Ada.Command_Line has the following declaration:
   @key[procedure] Set_Exit_Status (Code : @key[in] Exit_Status);
 
 @key[private]
-  ... -- @i{not specified by the language}
+  ... -- @RI{not specified by the language}
 @key[end] Ada.Command_Line;
 @end{example}
 @begin{DescribeCode}

@@ -1,13 +1,12 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:01 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/27 04:44:01 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
 @begin{Intro}
-@redundant[
-This Annex defines facilities for supporting the implementation
+@redundant[This Annex defines facilities for supporting the implementation
 of distributed systems using multiple partitions working
 cooperatively as part of a single Ada program.
 
@@ -77,10 +76,8 @@ as the equivalent single partition program.
 @LabeledClause{Partitions}
 
 @begin{Intro}
-@redundant[
-The partitions of a distributed program are classified as either
-active or passive.
-]
+@redundant[The partitions of a distributed program are classified as either
+active or passive.]
 @end{Intro}
 
 @begin{LinkTime}
@@ -238,13 +235,11 @@ to query information about the partition.
 @LabeledClause{Categorization of Library Units}
 
 @begin{Intro}
-@redundant[
-Library units can be categorized according to the role
+@redundant[Library units can be categorized according to the role
 they play in a distributed program.  Certain restrictions
 are associated with each category to ensure that the semantics
 of a distributed program remain close to the semantics for a nondistributed
-program.
-]
+program.]
 
 @RootDefn{categorization pragma}
 @RootDefn{pragma, categorization}
@@ -282,8 +277,7 @@ A @i{normal library unit} is one to which no categorization pragma
 applies.
 
 
-@redundant[
-The various categories of library units
+@redundant[The various categories of library units
 and the associated restrictions are
 described in this clause and its subclauses.
 The categories are related
@@ -343,14 +337,12 @@ Implementations are allowed to define other categorization pragmas.
 
 @LabeledSubClause{Shared Passive Library Units}
 @begin{Intro}
-@redundant[
-A shared passive library unit is used for managing global data
+@redundant[A shared passive library unit is used for managing global data
 shared between active partitions.  The restrictions on shared passive
 library units prevent the data or tasks of one active partition
 from being accessible to another active partition through
 references implicit in objects declared in the shared passive library
-unit.
-]
+unit.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -472,11 +464,9 @@ partitions.
 @LabeledSubClause{Remote Types Library Units}
 
 @begin{Intro}
-@redundant[
-A remote types library unit supports the definition of types
+@redundant[A remote types library unit supports the definition of types
 intended for use in communication between active
-partitions.
-]
+partitions.]
 @end{Intro}
 @begin{MetaRules}
 The restrictions governing a remote types package are similar to those for
@@ -608,11 +598,9 @@ indirection.
 @LabeledSubClause{Remote Call Interface Library Units}
 
 @begin{Intro}
-@redundant[
-A remote call interface library unit can be
+@redundant[A remote call interface library unit can be
 used as an interface for remote procedure calls (RPCs) (or remote
-function calls) between active partitions.
-]
+function calls) between active partitions.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -803,8 +791,7 @@ be supported as an alternative to RPC.]
 @LabeledClause{Consistency of a Distributed System}
 
 @begin{Intro}
-@redundant[
-This clause defines attributes and rules associated with verifying
+@redundant[This clause defines attributes and rules associated with verifying
 the consistency of a distributed program.
 ]
 @end{Intro}
@@ -957,13 +944,11 @@ suitable for transmission between partitions].  This action is called
 @i{marshalling}. @i{Unmarshalling} is the reverse action of
 reconstructing the parameters or results from the stream-oriented
 representation.
-@redundant[
-Marshalling is performed initially as part of the remote subprogram call in
+@redundant[Marshalling is performed initially as part of the remote subprogram call in
 the calling partition; unmarshalling is done in the called partition.
 After the remote subprogram completes, marshalling is performed in the
 called partition, and finally unmarshalling is done in the calling
-partition.
-]
+partition.]
 
 @Defn{calling stub}
 @Defn{receiving stub}
@@ -1247,11 +1232,9 @@ not include the library unit that defines the exception.
 @LabeledSubClause{Pragma Asynchronous}
 
 @begin{Intro}
-@redundant[
-This subclause introduces the pragma Asynchronous which allows a
+@redundant[This subclause introduces the pragma Asynchronous which allows a
 remote subprogram call to return prior to completion of the execution
-of the corresponding remote subprogram body.
-]
+of the corresponding remote subprogram body.]
 @end{Intro}
 
 @begin{Syntax}
@@ -1323,11 +1306,11 @@ across active partitions:}
 @key{package} Tapes @key{is}
    @key{pragma} Pure(Tapes);
    @key{type} Tape @key{is abstract tagged limited private};
-   @i{-- Primitive dispatching operations where}
-   @i{-- Tape is controlling operand}
+   @RI{-- Primitive dispatching operations where}
+   @RI{-- Tape is controlling operand}
    @key{procedure} Copy (From, To : @key{access} Tape; Num_Recs : @key[in] Natural) @key{is} @key{abstract};
    @key{procedure} Rewind (T : @key{access} Tape) @key{is} @key{abstract};
-   @i{-- More operations}
+   @RI{-- More operations}
 @key{private}
    @key{type} Tape @key{is} ...
 @key{end} Tapes;
@@ -1335,19 +1318,19 @@ across active partitions:}
 @key{with} Tapes;
 @key{package} Name_Server @key{is}
    @key{pragma} Remote_Call_Interface;
-   @i{-- Dynamic binding to remote operations is achieved}
-   @i{-- using the access-to-limited-class-wide type Tape_Ptr}
+   @RI{-- Dynamic binding to remote operations is achieved}
+   @RI{-- using the access-to-limited-class-wide type Tape_Ptr}
    @key{type} Tape_Ptr @key{is access all} Tapes.Tape'Class;
-   @i{-- The following statically bound remote operations}
-   @i{-- allow for a name-server capability in this example}
+   @RI{-- The following statically bound remote operations}
+   @RI{-- allow for a name-server capability in this example}
    @key{function}  Find     (Name : String) @key{return} Tape_Ptr;
    @key{procedure} Register (Name : @key[in] String; T : @key[in] Tape_Ptr);
    @key{procedure} Remove   (T : @key[in] Tape_Ptr);
-   @i{-- More operations}
+   @RI{-- More operations}
 @key{end} Name_Server;
 
 @key{package} Tape_Driver @key{is}
-  @i{-- Declarations are not shown, they are irrelevant here}
+  @RI{-- Declarations are not shown, they are irrelevant here}
 @key{end} Tape_Driver;
 
 @key{with} Tapes, Name_Server;
@@ -1362,8 +1345,8 @@ across active partitions:}
    @key{begin}
       . . .
    @key{end} Rewind;
-   @i{-- Objects remotely accessible through use}
-   @i{-- of Name_Server operations}
+   @RI{-- Objects remotely accessible through use}
+   @RI{-- of Name_Server operations}
    Tape1, Tape2 : @key[aliased] New_Tape;
 @key{begin}
    Name_Server.Register ("NINE-TRACK",  Tape1'Access);
@@ -1371,7 +1354,7 @@ across active partitions:}
 @key{end} Tape_Driver;
 
 @key{with} Tapes, Name_Server;
-@i{-- Tape_Driver is not needed and thus not mentioned in the @nt{with_clause}}
+@RI{-- Tape_Driver is not needed and thus not mentioned in the @nt{with_clause}}
 @key{procedure} Tape_Client @key{is}
    T1, T2 : Name_Server.Tape_Ptr;
 @key{begin}
@@ -1427,11 +1410,9 @@ dereferencing the controlling operands T1 and T2.
 @begin{Intro}
 @Defn{partition communication subsystem (PCS)}
 @Defn{PCS (partition communication subsystem)}
-@redundant[
-The @i{Partition Communication Subsystem} (PCS) provides facilities for
+@redundant[The @i{Partition Communication Subsystem} (PCS) provides facilities for
 supporting communication between the active partitions of a distributed
-program.  The package System.RPC is a language-defined interface to the PCS.
-]
+program.  The package System.RPC is a language-defined interface to the PCS.]
 @begin{Reason}
 The prefix RPC is used rather than RSC because the term remote procedure call
 and its acronym are more familiar.
@@ -1444,12 +1425,12 @@ interface to implement remote subprogram calls.
 
 The following language-defined library package exists:
 @begin{example}
-@b(with) Ada.Streams; @i{-- see @RefSecNum[The Package Streams]}
+@b(with) Ada.Streams; @RI{-- see @RefSecNum[The Package Streams]}
 @ChildUnit{Parent=[System],Child=[RPC],Expanded=[System.RPC]}
 @key(package) System.RPC @key(is)
 
 @LangDefType{Package=[System.RPC],Type=[Partition_ID]}
-   @key(type) Partition_ID @key(is range) 0 .. @i(implementation-defined);
+   @key(type) Partition_ID @key(is range) 0 .. @RI(implementation-defined);
 
    Communication_Error : @key(exception);
 
@@ -1467,18 +1448,18 @@ The following language-defined library package exists:
       Item : @key(in) Ada.Streams.Stream_Element_Array);
 
 
-   @i(-- Synchronous call)
+   @RI(-- Synchronous call)
    @key(procedure) Do_RPC(
       Partition  : @key(in) Partition_ID;
       Params     : @key(access) Params_Stream_Type;
       Result     : @key(access) Params_Stream_Type);
 
-   @i(-- Asynchronous call)
+   @RI(-- Asynchronous call)
    @key(procedure) Do_APC(
       Partition  : @key(in) Partition_ID;
       Params     : @key(access) Params_Stream_Type);
 
-   @i(-- The handler for incoming RPCs)
+   @RI(-- The handler for incoming RPCs)
    @key(type) RPC_Receiver @key(is access procedure)(
       Params     : @key(access) Params_Stream_Type;
       Result     : @key(access) Params_Stream_Type);
@@ -1488,7 +1469,7 @@ The following language-defined library package exists:
       Receiver  : @key(in) RPC_Receiver);
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @b(end) System.RPC;
 @end{example}
 
@@ -1500,10 +1481,8 @@ well as marshalling and
 unmarshalling the parameters or result of a remote
 subprogram call, as part of sending them between partitions.
 
-@redundant[
-The Read and Write procedures override the corresponding abstract operations
-for the type Params_Stream_Type.
-]
+@redundant[The Read and Write procedures override the corresponding abstract operations
+for the type Params_Stream_Type.]
 
 @end{StaticSem}
 

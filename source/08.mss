@@ -1,14 +1,13 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:27 $}
+@Comment{$Date: 2000/05/27 04:44:00 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
-@redundant[
-The rules defining the scope of declarations and the rules defining
+@redundant[The rules defining the scope of declarations and the rules defining
 which @nt{identifier}s, @nt{character_literal}s, and
 @nt{operator_symbol}s are visible at (or from) various places in the text of
 the program are described in this section.  The formulation of these
@@ -23,8 +22,7 @@ A usage name denotes a declaration.
 It also denotes the view declared by that declaration,
 and denotes the entity of that view.
 Thus, two different usage names might denote two different views of
-the same entity; in this case they denote the same entity.
-]
+the same entity; in this case they denote the same entity.]
 @begin{Honest}
 In some cases, a usage name that denotes a declaration
 does not denote the view declared by that declaration,
@@ -129,20 +127,16 @@ Don't confuse the declarative region of a declaration
 with the declarative region in which it immediately occurs.
 @end{Discussion}
 
-@redundant[
-@Defn{local to}
+@redundant[@Defn{local to}
 A declaration is @i{local} to a declarative region if
-the declaration occurs immediately within the declarative region.
-]
+the declaration occurs immediately within the declarative region.]
 @begin{Ramification}
 That is,
 "occurs immediately within" and "local to" are synonyms
 (when referring to declarations).
 @end{Ramification}
-@redundant[
-An entity is @i{local} to a declarative region if the entity is
-declared by a declaration that is local to the declarative region.
-]
+@redundant[An entity is @i{local} to a declarative region if the entity is
+declared by a declaration that is local to the declarative region.]
 @begin{Ramification}
 Thus, ``local to'' applies to both declarations and entities,
 whereas ``occurs immediately within'' only applies to declarations.
@@ -281,16 +275,14 @@ region, but not within either the declaration or the body.
 @LabeledClause{Scope of Declarations}
 
 @begin{Intro}
-@redundant[
-For each declaration, the language rules define a certain
+@redundant[For each declaration, the language rules define a certain
 portion of the program text called the @i{scope} of the declaration.
 The scope of a declaration is also called the scope of any view
 or entity declared by the declaration.
 Within the scope of an entity, and only there,
 there are places where it is legal to refer
 to the declared entity.
-These places are defined by the rules of visibility and overloading.
-]
+These places are defined by the rules of visibility and overloading.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -336,7 +328,7 @@ Consider also examples like this:
 @key[with] P;
 @key[package] R @key[is]
     @key[package] X @key[renames] P;
-    X.Q.I := 17; --@i{ Illegal!}
+    X.Q.I := 17; --@RI{ Illegal!}
 @key[end] R;
 @end{Example}
 
@@ -578,7 +570,7 @@ We have clarified that the following is illegal
 
 @key[package] R @key[is]
     @key[package] X @key[renames] Standard;
-    X.Q.I := 17; --@i{ Illegal!}
+    X.Q.I := 17; --@RI{ Illegal!}
 @key[end] R;
 @end{Example}
 
@@ -589,13 +581,11 @@ because R does not mention Q in a @nt{with_clause}.
 @LabeledClause{Visibility}
 
 @begin{Intro}
-@redundant[
-@Defn{visibility rules}
+@redundant[@Defn{visibility rules}
 The @i{visibility rules},
 given below, determine which declarations are
 visible and directly visible at each place within a program.
-The visibility rules apply to both explicit and implicit declarations.
-]
+The visibility rules apply to both explicit and implicit declarations.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -644,12 +634,10 @@ nor a @nt<selector_name>).
 Where @i{hidden from direct visibility}, only direct visibility is lost;
 visibility using a @nt<selector_name> is still possible.
 
-@redundant[
-@Defn{overloaded}
+@redundant[@Defn{overloaded}
 Two or more declarations are @i{overloaded} if
 they all have the same defining name
-and there is a place where they are all directly visible.
-]
+and there is a place where they are all directly visible.]
 @begin{Ramification}
 Note that a @nt{name} can have more than one possible interpretation
 even if it denotes a non-overloadable entity.
@@ -682,9 +670,7 @@ if they have the same defining name,
 and, if both are overloadable,
 their profiles are type conformant.
 @PDefn{type conformance}
-@redundant[
-An inner declaration hides any outer homograph from direct visibility.
-]
+@redundant[An inner declaration hides any outer homograph from direct visibility.]
 
 @Redundant[Two homographs are not generally allowed
 immediately within the same declarative region unless one
@@ -941,13 +927,13 @@ Here's an example:
 @key[end] P.Q;
 
 @key[package] @key[body] P @key[is]
-    Q : Integer; --@i{ OK; we cannot see package P.Q here.}
+    Q : Integer; --@RI{ OK; we cannot see package P.Q here.}
     @key[procedure] Sub @key[is] @key[separate];
 @key[end] P;
 
 @key[with] P.Q;
 @key[separate](P)
-@key[procedure] Sub @key[is] --@i{ Illegal.}
+@key[procedure] Sub @key[is] --@RI{ Illegal.}
 @key[begin]
     @key[null];
 @key[end] Sub;
@@ -1063,8 +1049,8 @@ the following is illegal:
 X : @key[constant] Integer := 17;
 @key[package] P @key[is]
     @key[generic]
-      Z : Integer := X; --@i{ Illegal!}
-    @key[procedure] X(Y : @key[in] Integer := X); --@i{ Illegal!}
+      Z : Integer := X; --@RI{ Illegal!}
+    @key[procedure] X(Y : @key[in] Integer := X); --@RI{ Illegal!}
 @key[end] P;
 @end{Example}
 
@@ -1093,12 +1079,10 @@ Visibility is defined only for declarations.
 @LabeledClause{Use Clauses}
 
 @begin{Intro}
-@redundant[
-A @nt{use_package_clause} achieves direct visibility of declarations that
+@redundant[A @nt{use_package_clause} achieves direct visibility of declarations that
 appear in the visible part of a package;
 a @nt{use_type_clause} achieves direct visibility of the primitive
-operators of a type.
-]
+operators of a type.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -1122,7 +1106,7 @@ change the meaning of a program from one legal interpretation to another.
 
 @begin{Syntax}
 @Syn{lhs=<use_clause>,rhs="@Syn2{use_package_clause} | @Syn2{use_type_clause}"}
-@Hinge{}
+
 
 @Syn{lhs=<use_package_clause>,rhs="@key{use} @SynI{package_}@Syn2{name} {, @SynI{package_}@Syn2{name}};"}
 
@@ -1176,7 +1160,7 @@ It makes @nt{use_clause}s work like this:
 @key[end] Parent;
 
 @key[package] Parent.Child @key[is]
-    Y : T; --@i{ Illegal!}
+    Y : T; --@RI{ Illegal!}
     Z : P.T;
 @key[private]
     W : T;
@@ -1271,7 +1255,7 @@ The elaboration of a @nt{use_clause} has no effect.
 
 @i{Example of a use type clause:}
 @begin{Example}
-@key[use type] Rational_Numbers.Rational; --@i{ see @RefSecNum{Package Specifications and Declarations}}
+@key[use type] Rational_Numbers.Rational; --@RI{ see @RefSecNum{Package Specifications and Declarations}}
 Two_Thirds: Rational_Numbers.Rational := 2/3;
 @end{Example}
 
@@ -1331,13 +1315,11 @@ potentially use-visible.
 @LabeledClause{Renaming Declarations}
 
 @begin{Intro}
-@redundant[
-A @nt{renaming_declaration} declares another name for an entity,
+@redundant[A @nt{renaming_declaration} declares another name for an entity,
 such as an object, exception, package, subprogram, entry,
 or generic unit.
 Alternatively, a @nt{subprogram_renaming_declaration} can be the
-completion of a previous @nt{subprogram_declaration}.
-]
+completion of a previous @nt{subprogram_declaration}.]
 @end{Intro}
 
 @begin{Syntax}
@@ -1404,9 +1386,7 @@ since failing these tests is highly unlikely.
 @LabeledSubClause{Object Renaming Declarations}
 
 @begin{Intro}
-@redundant[
-An @nt{object_renaming_declaration} is used to rename an object.
-]
+@redundant[An @nt{object_renaming_declaration} is used to rename an object.]
 @end{Intro}
 
 @begin{Syntax}
@@ -1427,7 +1407,7 @@ that determined by the @nt{subtype_mark}.''
 We changed it so that this would be illegal:
 @begin{Example}
 X: T;
-Y: T'Class @key[renames] X; --@i{ Illegal!}
+Y: T'Class @key[renames] X; --@RI{ Illegal!}
 @end{Example}
 
 When the above was legal, it was unclear whether Y
@@ -1501,7 +1481,7 @@ when writing an @nt{object_renaming_declaration}.
 @i{Example of renaming an object:}
 @begin{Example}
 @key[declare]
-   L : Person @key[renames] Leftmost_Person; --@i{ see @RefSecNum{Incomplete Type Declarations}}
+   L : Person @key[renames] Leftmost_Person; --@RI{ see @RefSecNum{Incomplete Type Declarations}}
 @key[begin]
    L.Age := L.Age + 1;
 @key[end];
@@ -1520,9 +1500,7 @@ unconstrained nominal subtype.
 @LabeledSubClause{Exception Renaming Declarations}
 
 @begin{Intro}
-@redundant[
-An @nt{exception_renaming_declaration} is used to rename an exception.
-]
+@redundant[An @nt{exception_renaming_declaration} is used to rename an exception.]
 @end{Intro}
 
 @begin{Syntax}
@@ -1541,16 +1519,14 @@ An @nt{exception_renaming_declaration} declares a new view
 @begin{Examples}
 @i{Example of renaming an exception:}
 @begin{Example}
-EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error;@i{-- see @RefSecNum{Exceptions in Input-Output}}
+EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error;@RI{-- see @RefSecNum{Exceptions in Input-Output}}
 @end{Example}
 @end{Examples}
 
 @LabeledSubClause{Package Renaming Declarations}
 
 @begin{Intro}
-@redundant[
-A @nt{package_renaming_declaration} is used to rename a package.
-]
+@redundant[A @nt{package_renaming_declaration} is used to rename a package.]
 @end{Intro}
 
 @begin{Syntax}
@@ -1709,7 +1685,7 @@ Consider the following example:
     @key[type] T @key[is] @key[tagged] @key[null] @key[record];
     @key[function] Predefined_Equal(X, Y : T) @key[return] Boolean @key[renames] "=";
 @key[private]
-    @key[function] "="(X, Y : T) @key[return] Boolean; --@i{ Override predefined "=".}
+    @key[function] "="(X, Y : T) @key[return] Boolean; --@RI{ Override predefined "=".}
 @key[end] P;
 
 @key[with] P; @key[use] P;
@@ -1782,40 +1758,37 @@ We'll live with the oddity.
 @begin{Examples}
 @i{Examples of subprogram renaming declarations:}
 @begin{Example}
-@key[procedure] My_Write(C : @key[in] Character) @key[renames] Pool(K).Write; --@i{  see @RefSecNum{Selected Components}}
+@key[procedure] My_Write(C : @key[in] Character) @key[renames] Pool(K).Write; --@RI{  see @RefSecNum{Selected Components}}
 
 @key[function] Real_Plus(Left, Right : Real   ) @key[return] Real    @key[renames] "+";
 @key[function] Int_Plus (Left, Right : Integer) @key[return] Integer @key[renames] "+";
 
-@key[function] Rouge @key[return] Color @key[renames] Red;  --@i{  see @RefSecNum{Enumeration Types}}
+@key[function] Rouge @key[return] Color @key[renames] Red;  --@RI{  see @RefSecNum{Enumeration Types}}
 @key[function] Rot   @key[return] Color @key[renames] Red;
 @key[function] Rosso @key[return] Color @key[renames] Rouge;
 
-@key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@i{ see @RefSecNum{Enumeration Types}}
+@key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@RI{ see @RefSecNum{Enumeration Types}}
 @end{Example}
 
 @i{Example of a subprogram renaming declaration with new parameter names:}
 @begin{Example}
-@key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@i{ see @RefSecNum{Subprogram Declarations}}
+@key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@RI{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
 @i{Example of a subprogram renaming declaration with a new default expression:}
 @begin{Example}
-@key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@i{ see @RefSecNum{Subprogram Declarations}}
+@key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@RI{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 @end{Examples}
 
 @LabeledSubClause{Generic Renaming Declarations}
 
 @begin{Intro}
-@redundant[
-A @nt{generic_renaming_declaration} is used to rename a generic unit.
-]
+@redundant[A @nt{generic_renaming_declaration} is used to rename a generic unit.]
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()@tabset(P22)
-@Syn{lhs=<generic_renaming_declaration>,rhs="
+@Syn{tabs=[P22], lhs=<generic_renaming_declaration>,rhs="
     @key{generic package}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_package_}@Syn2{name};
   | @key{generic procedure}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_procedure_}@Syn2{name};
   | @key{generic function}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_function_}@Syn2{name};"}
@@ -1842,7 +1815,7 @@ in particular if the renamed generic unit is a library unit
 @begin{Examples}
 @i{Example of renaming a generic unit:}
 @begin{Example}
-@key[generic package] Enum_IO @key[renames] Ada.Text_IO.Enumeration_IO;  @i{-- see @RefSecNum{Input-Output for Enumeration Types}}
+@key[generic package] Enum_IO @key[renames] Ada.Text_IO.Enumeration_IO;  @RI{-- see @RefSecNum{Input-Output for Enumeration Types}}
 @end{Example}
 @end{Examples}
 
@@ -1866,8 +1839,7 @@ which has been moved to @RefSecNum{Type Declarations}.
 @LabeledClause{The Context of Overload Resolution}
 
 @begin{Intro}
-@redundant[
-@Defn{overload resolution}
+@redundant[@Defn{overload resolution}
 Because declarations can be overloaded,
 it is possible for an occurrence of a usage name
 to have more than one possible interpretation;
@@ -1900,8 +1872,7 @@ or a particular class of types,
 for example)
 are overloading rules.
 Various rules for the matching of formal and actual parameters are
-overloading rules.
-]
+overloading rules.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -2247,7 +2218,7 @@ For example, without the preference rule,
 the following would be ambiguous:
 @begin{Example}
 N : @key[constant] := 123;
-@key[if] N > 100 @key[then] --@i{ Preference for root_integer "<" operator.}
+@key[if] N > 100 @key[then] --@RI{ Preference for root_integer "<" operator.}
     ...
 @key[end] @key[if];
 @end{Example}
@@ -2397,7 +2368,7 @@ Here's an example:
 @key[type] T @key[is] @key[array](Integer @key[range] 1..10) @key[of] A;
 I : Integer := 3;
 @key[function] F(X : Integer := 7) @key[return] A;
-Y : A := F(I); --@i{ Ambiguous?  (We hope so.)}
+Y : A := F(I); --@RI{ Ambiguous?  (We hope so.)}
 @end{Example}
 
 @NoPrefix@;Consider the declaration of Y (a complete context).

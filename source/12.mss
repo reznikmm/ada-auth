@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:27 $}
+@Comment{$Date: 2000/05/27 04:44:00 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -32,8 +32,7 @@ generic unit.
   Generic units can be used to perform the role that macros
   sometimed play in other languages.>}
 
-@redundant[
-A generic unit is declared by a @nt{generic_declaration}.  This form
+@redundant[A generic unit is declared by a @nt{generic_declaration}.  This form
 of declaration has a @nt{generic_formal_part} declaring any generic
 formal parameters.  An instance of a generic unit is obtained as the
 result of a @nt{generic_instantiation} with appropriate
@@ -46,26 +45,23 @@ properties that are specific to their nongeneric counterparts.  For
 example, a generic subprogram can be instantiated but it cannot be
 called.  In contrast, an instance of a generic subprogram is a
 (nongeneric) subprogram; hence, this instance can be called but it
-cannot be used to produce further instances.
-]
+cannot be used to produce further instances.]
 @end{Intro}
 
 @LabeledClause{Generic Declarations}
 
 @begin{Intro}
-@redundant[
-A @nt{generic_declaration} declares a generic unit, which is either a
+@redundant[A @nt{generic_declaration} declares a generic unit, which is either a
 generic subprogram or a generic package.  A @nt{generic_declaration}
 includes a @nt{generic_formal_part} declaring any generic formal
 parameters.  A generic formal parameter can be an object;
 alternatively (unlike a parameter of a subprogram), it can be a type,
-a subprogram, or a package.
-]
+a subprogram, or a package.]
 @end{Intro}
 
 @begin{Syntax}
 @Syn{lhs=<generic_declaration>,rhs="@Syn2{generic_subprogram_declaration} | @Syn2{generic_package_declaration}"}
-@Hinge{}
+
 
 @Syn{lhs=<generic_subprogram_declaration>,rhs="
      @Syn2{generic_formal_part}  @Syn2{subprogram_specification};"}
@@ -152,21 +148,21 @@ expression.)
 @begin{Examples}
 @i{Examples of generic formal parts:}
 @begin{Example}
-@key[generic]     --@i{  parameterless }
+@key[generic]     --@RI{  parameterless }
 
 @key[generic]
-   Size : Natural;  --@i{  formal object }
+   Size : Natural;  --@RI{  formal object }
 
 @key[generic]
-   Length : Integer := 200;          --@i{ formal object with a default expression}
+   Length : Integer := 200;          --@RI{ formal object with a default expression}
 
-   Area   : Integer := Length*Length; --@i{ formal object with a default expression}
+   Area   : Integer := Length*Length; --@RI{ formal object with a default expression}
 
 @key[generic]
-   @key[type] Item  @key[is] @key[private];                       --@i{ formal type}
-   @key[type] Index @key[is] (<>);                          --@i{ formal type}
-   @key[type] Row   @key[is] @key[array](Index @key[range] <>) @key[of] Item; --@i{ formal type}
-   @key[with] @key[function] "<"(X, Y : Item) @key[return] Boolean;    --@i{ formal subprogram }
+   @key[type] Item  @key[is] @key[private];                       --@RI{ formal type}
+   @key[type] Index @key[is] (<>);                          --@RI{ formal type}
+   @key[type] Row   @key[is] @key[array](Index @key[range] <>) @key[of] Item; --@RI{ formal type}
+   @key[with] @key[function] "<"(X, Y : Item) @key[return] Boolean;    --@RI{ formal subprogram }
 @end{Example}
 
 @i{Examples of generic declarations declaring generic subprograms
@@ -256,8 +252,8 @@ is always the completion of a declaration.
 @begin{Examples}
 @i{Example of a generic procedure body:}
 @begin{Example}
-@key[procedure] Exchange(U, V : @key[in] @key[out] Elem) @key[is]  --@i{ see @RefSecNum{Generic Declarations}}
-   T : Elem;  --@i{  the generic formal type}
+@key[procedure] Exchange(U, V : @key[in] @key[out] Elem) @key[is]  --@RI{ see @RefSecNum{Generic Declarations}}
+   T : Elem;  --@RI{  the generic formal type}
 @key[begin]
    T := U;
    U := V;
@@ -267,18 +263,18 @@ is always the completion of a declaration.
 
 @i{Example of a generic function body:}
 @begin{Example}
-@key[function] Squaring(X : Item) @key[return] Item @key[is]  --@i{  see @RefSecNum{Generic Declarations}}
+@key[function] Squaring(X : Item) @key[return] Item @key[is]  --@RI{  see @RefSecNum{Generic Declarations}}
 @key[begin]
-   @key[return] X*X;  --@i{  the formal operator "*"}
+   @key[return] X*X;  --@RI{  the formal operator "*"}
 @key[end] Squaring;
 @end{Example}
 
 @i{Example of a generic package body:}
 @begin{Example}
-@key[package] @key[body] On_Vectors @key[is]  --@i{  see @RefSecNum{Generic Declarations}}
+@key[package] @key[body] On_Vectors @key[is]  --@RI{  see @RefSecNum{Generic Declarations}}
 
    @key[function] Sum(A, B : Vector) @key[return] Vector @key[is]
-      Result : Vector(A'Range); --@i{  the formal type Vector}
+      Result : Vector(A'Range); --@RI{  the formal type Vector}
       Bias   : @key[constant] Integer := B'First - A'First;
    @key[begin]
       @key[if] A'Length /= B'Length @key[then]
@@ -286,16 +282,16 @@ is always the completion of a declaration.
       @key[end] @key[if];
 
       @key[for] N @key[in] A'Range @key[loop]
-         Result(N) := Sum(A(N), B(N + Bias)); --@i{ the formal function Sum}
+         Result(N) := Sum(A(N), B(N + Bias)); --@RI{ the formal function Sum}
       @key[end] @key[loop];
       @key[return] Result;
    @key[end] Sum;
 
    @key[function] Sigma(A : Vector) @key[return] Item @key[is]
-      Total : Item := A(A'First); --@i{  the formal type Item}
+      Total : Item := A(A'First); --@RI{  the formal type Item}
    @key[begin]
       @key[for] N @key[in] A'First + 1 .. A'Last @key[loop]
-         Total := Sum(Total, A(N)); --@i{  the formal function Sum}
+         Total := Sum(Total, A(N)); --@RI{  the formal function Sum}
       @key[end] @key[loop];
       @key[return] Total;
    @key[end] Sigma;
@@ -306,11 +302,9 @@ is always the completion of a declaration.
 @LabeledClause{Generic Instantiation}
 
 @begin{Intro}
-@redundant[
-@Defn2{Term=[instance], Sec=(of a generic unit)}
+@redundant[@Defn2{Term=[instance], Sec=(of a generic unit)}
 An instance of a generic unit is declared by a
-@nt{generic_instantiation}.
-]
+@nt{generic_instantiation}.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -344,7 +338,7 @@ Similarly, the contract model does not apply to @LinkTimeTitle.
          @key{new} @SynI{generic_procedure_}@Syn2{name} [@Syn2{generic_actual_part}];
    | @key{function} @Syn2{defining_designator} @key{is}
          @key{new} @SynI{generic_function_}@Syn2{name} [@Syn2{generic_actual_part}];"}
-@Hinge{}
+
 
 @Syn{lhs=<generic_actual_part>,rhs="
    (@Syn2{generic_association} {, @Syn2{generic_association}})"}
@@ -568,7 +562,7 @@ components of the @nt{record_extension_part} shall be nonlimited.''
 @key[package] G1 @key[is]
     @key[type] Extension @key[is] @key[new] Parent @key[with]
         @key[record]
-            C : Comp; --@i{ Illegal!}
+            C : Comp; --@RI{ Illegal!}
         @key[end] @key[record];
 @key[end] G1;
 @end{Example}
@@ -583,12 +577,12 @@ instance, because the generic itself is illegal.
 On the other hand:
 @begin{Example}
 @key[generic]
-    @key[type] Parent @key[is] @key[tagged] @key[limited] @key[private]; --@i{ Parent is limited.}
+    @key[type] Parent @key[is] @key[tagged] @key[limited] @key[private]; --@RI{ Parent is limited.}
     @key[type] Comp @key[is] @key[limited] @key[private];
 @key[package] G2 @key[is]
     @key[type] Extension @key[is] @key[new] Parent @key[with]
         @key[record]
-            C : Comp; --@i{ OK.}
+            C : Comp; --@RI{ OK.}
         @key[end] @key[record];
 @key[end] G2;
 
@@ -603,7 +597,7 @@ On the other hand:
 @key[package] Good_2 @key[is] @key[new] G2(Parent => Non_Limited_Tagged,
                          Comp => Non_Limited_Untagged);
 @key[package] Bad  @key[is] @key[new] G2(Parent => Non_Limited_Tagged,
-                         Comp => Limited_Untagged); --@i{ Illegal!}
+                         Comp => Limited_Untagged); --@RI{ Illegal!}
 @end{Example}
 
 The first instantiation is legal,
@@ -826,7 +820,7 @@ declaration of the actual.
     @key[type] Formal @key[is] @key[new] T1;
 @key[package] G @key[is]
     @key[type] Derived_From_Formal @key[is] @key[new] Formal @key[with] @key[record] ... @key[end] @key[record];
-    @key[procedure] Foo(X : @key[in] Derived_From_Formal); --@i{ Does not override anything.}
+    @key[procedure] Foo(X : @key[in] Derived_From_Formal); --@RI{ Does not override anything.}
 @key[end] G;
 
 @key[type] T2 @key[is] @key[new] T1 @key[with] @key[record] ... @key[end] @key[record];
@@ -847,8 +841,7 @@ mechanisms (by-copy vs. by-reference) and @nt{representation_clause}s are
 determined by the actual.
 @end{ImplNote}
 
-@redundant[
-Implicit declarations are also copied,
+@redundant[Implicit declarations are also copied,
 and a name that denotes an implicit declaration in the generic
 denotes the corresponding copy in the instance.
 However, for a type declared within the visible part of the
@@ -868,8 +861,7 @@ the copied ones.  The copied ones
 can be called only from within the instance; the new
 ones can be called only from outside the instance, although
 for tagged types, the
-body of a new one can be executed by a call to an old one.
-]
+body of a new one can be executed by a call to an old one.]
 @begin{TheProof}
 This rule is stated officially in @RefSec{Visibility}.
 @end{TheProof}
@@ -923,9 +915,9 @@ For example:
     @key[type] Formal @key[is] @key[new] Ancestor @key[with] @key[private];
 @key[package] G @key[is]
     @key[type] T @key[is] @key[new] Formal @key[with] @key[null] @key[record];
-    @key[procedure] P(X : @key[in] T); --@i{ (1)}
+    @key[procedure] P(X : @key[in] T); --@RI{ (1)}
 @key[private]
-    @key[procedure] Q(X : @key[in] T); --@i{ (2)}
+    @key[procedure] Q(X : @key[in] T); --@RI{ (2)}
 @key[end] G;
 
 @key[type] Actual @key[is] @key[new] Ancestor @key[with] @key[null] @key[record];
@@ -1014,7 +1006,7 @@ these subprograms from outside the instance are ambiguous.  For example:
 @key[end] G;
 
 @key[package] P @key[is] @key[new] G(A => Boolean, B => Boolean);
---@i{ All calls of P.Next are ambiguous.}
+--@RI{ All calls of P.Next are ambiguous.}
 @end{Example}
 @end{Ramification}
 @begin{Ramification}
@@ -1023,16 +1015,16 @@ substitution of formals and actuals:
 @begin{Example}
 @key[generic]
     @key[type] T1 @key[is] @key[private];
-    --@i{ A predefined "=" operator is implicitly declared here:}
-    --@i{ function "="(Left, Right : T1) return Boolean;}
-    --@i{ Call this "="@-{1}.}
+    --@RI{ A predefined "=" operator is implicitly declared here:}
+    --@RI{ function "="(Left, Right : T1) return Boolean;}
+    --@RI{ Call this "="@-{1}.}
 @key[package] G @key[is]
-    @key[subtype] S1 @key[is] T1; --@i{ So we can get our hands on the type from}
-                      --@i{ outside an instance.}
+    @key[subtype] S1 @key[is] T1; --@RI{ So we can get our hands on the type from}
+                      --@RI{ outside an instance.}
     @key[type] T2 @key[is] @key[new] T1;
-    --@i{ An inherited "=" operator is implicitly declared here:}
-    --@i{ function "="(Left, Right : T2) return Boolean;}
-    --@i{ Call this "="@-{2}.}
+    --@RI{ An inherited "=" operator is implicitly declared here:}
+    --@RI{ function "="(Left, Right : T2) return Boolean;}
+    --@RI{ Call this "="@-{2}.}
 
     T1_Obj : T1 := ...;
     Bool_1 : Boolean := T1_Obj = T1_Obj;
@@ -1044,20 +1036,20 @@ substitution of formals and actuals:
 
 @key[package] P @key[is]
     @key[type] My_Int @key[is] @key[new] Integer;
-    --@i{ A predefined "=" operator is implicitly declared here:}
-    --@i{ function "="(Left, Right : My_Int) return Boolean;}
-    --@i{ Call this "="@-{3}.}
+    --@RI{ A predefined "=" operator is implicitly declared here:}
+    --@RI{ function "="(Left, Right : My_Int) return Boolean;}
+    --@RI{ Call this "="@-{3}.}
     @key[function] "="(X, Y : My_Int) @key[return] Boolean;
-    --@i{ Call this "="@-{4}.}
-    --@i{ "="@-{3} is hidden from all visibility by "="@-{4}.}
-    --@i{ Nonetheless, "="@-{3} can ``reemerge'' in certain circumstances.}
+    --@RI{ Call this "="@-{4}.}
+    --@RI{ "="@-{3} is hidden from all visibility by "="@-{4}.}
+    --@RI{ Nonetheless, "="@-{3} can ``reemerge'' in certain circumstances.}
 @key[end] P;
 @key[use] P;
 ...
-@key[package] I @key[is] @key[new] G(T1 => My_Int); --@i{ "="@-{5} is declared in I (see below).}
+@key[package] I @key[is] @key[new] G(T1 => My_Int); --@RI{ "="@-{5} is declared in I (see below).}
 @key[use] I;
 
-Another_T1_Obj : S1 := 13; --@i{ Can't denote T1, but S1 will do.}
+Another_T1_Obj : S1 := 13; --@RI{ Can't denote T1, but S1 will do.}
 Bool_3 : Boolean := Another_T1_Obj = Another_T1_Obj;
 
 Another_T2_Obj : T2 := 45;
@@ -1097,10 +1089,10 @@ but the declaration of Bool_4 calls "="@-{5}.
 @begin{Example}
 @tabclear()@tabset(P49)
 @key[procedure] Swap @key[is] @key[new] Exchange(Elem => Integer);
-@key[procedure] Swap @key[is] @key[new] Exchange(Character); @\--@i{  Swap is overloaded }
-@key[function] Square @key[is] @key[new] Squaring(Integer); @\--@i{  "*" of Integer used by default}
+@key[procedure] Swap @key[is] @key[new] Exchange(Character);  @\--@RI{  Swap is overloaded }
+@key[function] Square @key[is] @key[new] Squaring(Integer); @\--@RI{  "*" of Integer used by default}
 @key[function] Square @key[is] @key[new] Squaring(Item => Matrix, "*" => Matrix_Product);
-@key[function] Square @key[is] @key[new] Squaring(Matrix, Matrix_Product); --@i{ same as previous    }
+@key[function] Square @key[is] @key[new] Squaring(Matrix, Matrix_Product); --@RI{ same as previous    }
 
 @key[package] Int_Vectors @key[is] @key[new] On_Vectors(Integer, Table, "+");
 @end{Example}
@@ -1111,10 +1103,10 @@ Swap(A, B);
 A := Square(A);
 
 T : Table(1 .. 5) := (10, 20, 30, 40, 50);
-N : Integer := Int_Vectors.Sigma(T);  --@i{  150 (see @RefSec{Generic Bodies} for the body of Sigma)}
+N : Integer := Int_Vectors.Sigma(T);  --@RI{  150 (see @RefSec{Generic Bodies} for the body of Sigma)}
 
 @key[use] Int_Vectors;
-M : Integer := Sigma(T);  --@i{  150}
+M : Integer := Sigma(T);  --@RI{  150}
 @end{Example}
 @end{Examples}
 
@@ -1183,12 +1175,10 @@ generic parameters.
 @LabeledClause{Formal Objects}
 
 @begin{Intro}
-@redundant[
-@Defn{generic formal object}
+@redundant[@Defn{generic formal object}
 @Defn{formal object, generic}
 A generic formal object can be used to pass a value or variable
-to a generic unit.
-]
+to a generic unit.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -1370,10 +1360,8 @@ important benefit, and any change has some cost.
 @LabeledClause{Formal Types}
 
 @begin{Intro}
-@redundant[
-A generic formal subtype can be used to pass to a generic unit
-a subtype whose type is in a certain class of types.
-]
+@redundant[A generic formal subtype can be used to pass to a generic unit
+a subtype whose type is in a certain class of types.]
 @begin{Reason}
 We considered having intermediate syntactic categories
 @nt{formal_integer_type_definition},
@@ -1391,7 +1379,7 @@ scheme very well.
 @begin{Syntax}
 @Syn{lhs=<formal_type_declaration>,rhs="
     @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition};"}
-@Hinge{}
+
 
 @Syn{lhs=<formal_type_definition>,rhs="
       @Syn2{formal_private_type_definition}
@@ -1559,7 +1547,7 @@ Similar terminology applies to the other kinds of
 @key[generic]
    @key[type] Rank @key[is] @key[range] <>;
    First  : Rank := Rank'First;
-   Second : Rank := First + 1;  --@i{  the operator "+" of the type Rank  }
+   Second : Rank := First + 1;  --@RI{  the operator "+" of the type Rank  }
 @end{Example}
 @end{Examples}
 
@@ -1599,7 +1587,8 @@ rooted at the ancestor type.]
 @begin{Syntax}
 @Syn{lhs=<formal_private_type_definition>,
   rhs="[[@key{abstract}] @key{tagged}] [@key{limited}] @key{private}"}
-@Hinge{}
+
+
 @Syn{lhs=<formal_derived_type_definition>,
   rhs="[@key{abstract}] @key{new} @Syn2{subtype_mark} [@key{with} @key{private}]"}
 @end{Syntax}
@@ -1852,14 +1841,14 @@ ordinary fixed point, or decimal.]
 
 @begin{Syntax}
 @Syn{lhs=<formal_discrete_type_definition>,rhs="(<>)"}
-@Hinge{}
+
 
 @Syn{lhs=<formal_signed_integer_type_definition>,rhs="@key{range} <>"}
 @Syn{lhs=<formal_modular_type_definition>,rhs="@key{mod} <>"}
-@Hinge{}
+
 
 @Syn{lhs=<formal_floating_point_definition>,rhs="@key{digits} <>"}
-@Hinge{}
+
 
 @Syn{lhs=<formal_ordinary_fixed_point_definition>,rhs="@key{delta} <>"}
 @Syn{lhs=<formal_decimal_fixed_point_definition>,rhs="@key{delta} <> @key{digits} <>"}
@@ -1935,7 +1924,7 @@ then the actual's components can be either aliased or not.
 @begin{Examples}
 @i{Example of formal array types:}
 @begin{Example}
---@i{  given the generic package }
+--@RI{  given the generic package }
 
 @key[generic]
    @key[type] Item   @key[is] @key[private];
@@ -1946,17 +1935,17 @@ then the actual's components can be either aliased or not.
    ...
 @key[end] P;
 
---@i{  and the types }
+--@RI{  and the types }
 
 @key[type] Mix    @key[is] @key[array] (Color @key[range] <>) @key[of] Boolean;
 @key[type] Option @key[is] @key[array] (Color) @key[of] Boolean;
 
---@i{  then Mix can match Vector and Option can match Table }
+--@RI{  then Mix can match Vector and Option can match Table }
 
 @key[package] R @key[is] @key[new] P(Item   => Boolean, Index => Color,
                    Vector => Mix,     Table => Option);
 
---@i{  Note that Mix cannot match Table and Option cannot match Vector}
+--@RI{  Note that Mix cannot match Table and Option cannot match Vector}
 @end{Example}
 @end{Examples}
 
@@ -2017,7 +2006,7 @@ the formal.
 @begin{Examples}
 @i{Example of formal access types:}
 @begin{Example}
---@i{  the formal types of the generic package }
+--@RI{  the formal types of the generic package }
 
 @key[generic]
    @key[type] Node @key[is] @key[private];
@@ -2026,7 +2015,7 @@ the formal.
    ...
 @key[end] P;
 
---@i{  can be matched by the actual types }
+--@RI{  can be matched by the actual types }
 
 @key[type] Car;
 @key[type] Car_Name @key[is] @key[access] Car;
@@ -2038,7 +2027,7 @@ the formal.
       Owner      : Person;
    @key[end] @key[record];
 
---@i{  in the following generic instantiation }
+--@RI{  in the following generic instantiation }
 
 @key[package] R @key[is] @key[new] P(Node => Car, Link => Car_Name);
 @end{Example}
@@ -2061,12 +2050,10 @@ types are new concepts.
 @LabeledClause{Formal Subprograms}
 
 @begin{Intro}
-@redundant[
-@Defn{generic formal subprogram}
+@redundant[@Defn{generic formal subprogram}
 @Defn{formal subprogram, generic}
 Formal subprograms can be used to pass callable entities to a generic
-unit.
-]
+unit.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -2196,17 +2183,17 @@ The actual subprogram cannot be abstract
 @key[with] @key[function] Image(X : Enum) @key[return] String @key[is] Enum'Image;
 @key[with] @key[procedure] Update @key[is] Default_Update;
 
---@i{  given the generic procedure declaration }
+--@RI{  given the generic procedure declaration }
 
 @key[generic]
    @key[with] @key[procedure] Action (X : @key[in] Item);
 @key[procedure] Iterate(Seq : @key[in] Item_Sequence);
 
---@i{  and the procedure }
+--@RI{  and the procedure }
 
 @key[procedure] Put_Item(X : @key[in] Item);
 
---@i{  the following instantiation is possible }
+--@RI{  the following instantiation is possible }
 
 @key[procedure] Put_List @key[is] @key[new] Iterate(Action => Put_Item);
 @end{Example}
@@ -2215,15 +2202,13 @@ The actual subprogram cannot be abstract
 @LabeledClause{Formal Packages}
 
 @begin{Intro}
-@redundant[
-@Defn{generic formal package}
+@redundant[@Defn{generic formal package}
 @Defn{formal package, generic}
 Formal packages can be used to pass packages to a generic unit.
 The @nt{formal_package_declaration} declares that the formal package
 is an instance of a given generic package.
 Upon instantiation, the actual package has to be an instance
-of that generic package.
-]
+of that generic package.]
 @end{Intro}
 
 @begin{Syntax}

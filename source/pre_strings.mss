@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:04 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/05/19 04:12:07 $}
+@Comment{$Date: 2000/05/27 04:44:04 $}
 
 @LabeledClause{String Handling}
 
@@ -66,7 +66,7 @@ The library package Strings.Maps has the following declaration:
 @key[package] Ada.Strings.Maps @key[is]
    @key[pragma] Preelaborate(Maps);
 
-   --@i{ Representation for a set of character values:}
+   --@RI{ Representation for a set of character values:}
 @LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Set]}
    @key[type] Character_Set @key[is] @key[private];
 
@@ -77,7 +77,7 @@ The library package Strings.Maps has the following declaration:
         Low  : Character;
         High : Character;
      @key[end] @key[record];
-   -- @i[Represents Character range Low..High]
+   -- @RI[Represents Character range Low..High]
 
    @key[type] Character_Ranges @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Range;
 
@@ -108,7 +108,7 @@ The library package Strings.Maps has the following declaration:
       @key[return] Boolean @key[renames] Is_Subset;
 
 
-   --@i{ Alternative representation for a set of character values:}
+   --@RI{ Alternative representation for a set of character values:}
    @key[subtype] Character_Sequence @key[is] String;
 
    @key[function] To_Set (Sequence  : @key[in] Character_Sequence) @key[return] Character_Set;
@@ -118,7 +118,7 @@ The library package Strings.Maps has the following declaration:
    @key[function] To_Sequence (Set  : @key[in] Character_Set)      @key[return] Character_Sequence;
 
 
-   --@i{ Representation for a character to character mapping:}
+   --@RI{ Representation for a character to character mapping:}
    @key[type] Character_Mapping @key[is] @key[private];
 
    @key[function] Value (Map     : @key[in] Character_Mapping;
@@ -136,7 +136,7 @@ The library package Strings.Maps has the following declaration:
       @key{access} @key{function} (From : @key{in} Character) @key{return} Character;
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Strings.Maps;
 @end{example}
 
@@ -378,7 +378,7 @@ The library package Strings.Fixed has the following declaration:
    @key[pragma] Preelaborate(Fixed);
 
 
---@i{ "Copy" procedure for strings of possibly different lengths}
+--@RI{ "Copy" procedure for strings of possibly different lengths}
 
    @key[procedure] Move (Source  : @key[in]  String;
                    Target  : @key[out] String;
@@ -387,7 +387,7 @@ The library package Strings.Fixed has the following declaration:
                    Pad     : @key[in]  Character  := Space);
 
 
---@i{ Search subprograms}
+--@RI{ Search subprograms}
 
    @key[function] Index (Source   : @key[in] String;
                    Pattern  : @key[in] String;
@@ -437,7 +437,7 @@ The library package Strings.Fixed has the following declaration:
                          Last   : @key[out] Natural);
 
 
---@i{ String translation subprograms}
+--@RI{ String translation subprograms}
 
    @key[function] Translate (Source  : @key[in] String;
                        Mapping : @key[in] Maps.Character_Mapping)
@@ -454,7 +454,7 @@ The library package Strings.Fixed has the following declaration:
    @key[procedure] Translate (Source  : @key[in] @key[out] String;
                         Mapping : @key[in] Maps.Character_Mapping_Function);
 
---@i{ String transformation subprograms}
+--@RI{ String transformation subprograms}
 
    @key[function] Replace_Slice (Source   : @key[in] String;
                            Low      : @key[in] Positive;
@@ -504,7 +504,7 @@ The library package Strings.Fixed has the following declaration:
                      Justify : @key[in] Alignment := Left;
                      Pad     : @key[in] Character := Space);
 
- --@i{String selector subprograms}
+ --@RI{String selector subprograms}
    @key[function] Trim (Source : @key[in] String;
                   Side   : @key[in] Trim_End)
       @key[return] String;
@@ -546,7 +546,7 @@ The library package Strings.Fixed has the following declaration:
                    Justify : @key[in] Alignment := Left;
                    Pad     : @key[in] Character := Space);
 
---@i{String constructor functions}
+--@RI{String constructor functions}
 
    @key[function] "*" (Left  : @key[in] Natural;
                  Right : @key[in] Character) @key[return] String;
@@ -1004,7 +1004,7 @@ The library package Strings.Bounded has the following declaration:
 
 
    @key[generic]
-      Max   : Positive;    --@i{ Maximum length of a Bounded_String}
+      Max   : Positive;    --@RI{ Maximum length of a Bounded_String}
    @key[package] Generic_Bounded_Length @key[is]
 
       Max_Length : @key[constant] Positive := Max;
@@ -1019,7 +1019,7 @@ The library package Strings.Bounded has the following declaration:
       @key[function] Length (Source : @key[in] Bounded_String) @key[return] Length_Range;
 
 
-   --@i{ Conversion, Concatenation, and Selection functions}
+   --@RI{ Conversion, Concatenation, and Selection functions}
 
       @key[function] To_Bounded_String (Source : @key[in] String;
                                   Drop   : @key[in] Truncation := Error)
@@ -1134,7 +1134,7 @@ The library package Strings.Bounded has the following declaration:
       @key[function] ">="  (Left : @key[in] String; Right : @key[in] Bounded_String)
         @key[return] Boolean;
 
-   --@i{ Search functions}
+   --@RI{ Search functions}
 
       @key[function] Index (Source   : @key[in] Bounded_String;
                       Pattern  : @key[in] String;
@@ -1182,7 +1182,7 @@ The library package Strings.Bounded has the following declaration:
                             First  : @key[out] Positive;
                             Last   : @key[out] Natural);
 
-   --@i{ String translation subprograms}
+   --@RI{ String translation subprograms}
 
       @key[function] Translate (Source  : @key[in] Bounded_String;
                           Mapping : @key[in] Maps.Character_Mapping)
@@ -1199,7 +1199,7 @@ The library package Strings.Bounded has the following declaration:
       @key[procedure] Translate (Source  : @key[in] @key[out] Bounded_String;
                            Mapping : @key[in] Maps.Character_Mapping_Function);
 
-   --@i{ String transformation subprograms}
+   --@RI{ String transformation subprograms}
 
       @key[function] Replace_Slice (Source   : @key[in] Bounded_String;
                               Low      : @key[in] Positive;
@@ -1248,7 +1248,7 @@ The library package Strings.Bounded has the following declaration:
                         From    : @key[in] Positive;
                         Through : @key[in] Natural);
 
---@i{String selector subprograms}
+--@RI{String selector subprograms}
 
       @key[function] Trim (Source : @key[in] Bounded_String;
                      Side   : @key[in] Trim_End)
@@ -1287,7 +1287,7 @@ The library package Strings.Bounded has the following declaration:
                       Pad    : @key[in] Character  := Space;
                       Drop   : @key[in] Truncation := Error);
 
---@i{String constructor subprograms}
+--@RI{String constructor subprograms}
 
       @key[function] "*" (Left  : @key[in] Natural;
                     Right : @key[in] Character)
@@ -1318,7 +1318,7 @@ The library package Strings.Bounded has the following declaration:
          @key[return] Bounded_String;
 
    @key[private]
-       ... -- @i{not specified by the language}
+       ... -- @RI{not specified by the language}
    @key[end] Generic_Bounded_Length;
 
 @key[end] Ada.Strings.Bounded;
@@ -1459,7 +1459,7 @@ of the package:
 
 @key[type] Bounded_String @key[is]
    @key[record]
-      Data : Bounded_String_Internals;  --@i{ Unconstrained}
+      Data : Bounded_String_Internals;  --@RI{ Unconstrained}
    @key[end] @key[record];
 
 Null_Bounded_String : @key[constant] Bounded_String :=
@@ -1510,7 +1510,7 @@ The library package Strings.Unbounded has the following declaration:
    @key[type] String_Access @key[is] @key[access] @key[all] String;
    @key[procedure] Free (X : @key[in] @key[out] String_Access);
 
---@i{ Conversion, Concatenation, and Selection functions}
+--@RI{ Conversion, Concatenation, and Selection functions}
 
    @key[function] To_Unbounded_String (Source : @key[in] String)
       @key[return] Unbounded_String;
@@ -1602,7 +1602,7 @@ The library package Strings.Unbounded has the following declaration:
      @key[return] Boolean;
 
 
---@i{ Search subprograms}
+--@RI{ Search subprograms}
 
    @key[function] Index (Source   : @key[in] Unbounded_String;
                    Pattern  : @key[in] String;
@@ -1651,7 +1651,7 @@ The library package Strings.Unbounded has the following declaration:
                          Last   : @key[out] Natural);
 
 
---@i{ String translation subprograms}
+--@RI{ String translation subprograms}
 
    @key[function] Translate (Source  : @key[in] Unbounded_String;
                        Mapping : @key[in] Maps.Character_Mapping)
@@ -1667,7 +1667,7 @@ The library package Strings.Unbounded has the following declaration:
    @key[procedure] Translate (Source  : @key[in] @key[out] Unbounded_String;
                         Mapping : @key[in] Maps.Character_Mapping_Function);
 
---@i{ String transformation subprograms}
+--@RI{ String transformation subprograms}
 
    @key[function] Replace_Slice (Source   : @key[in] Unbounded_String;
                            Low      : @key[in] Positive;
@@ -1755,7 +1755,7 @@ The library package Strings.Unbounded has the following declaration:
       @key[return] Unbounded_String;
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Strings.Unbounded;
 @end{example}
 
@@ -1878,14 +1878,14 @@ The library package Strings.Maps.Constants has the following declaration:
    ISO_646_Set           : @key[constant] Character_Set;
 
    Lower_Case_Map        : @key[constant] Character_Mapping;
-     --@i{Maps to lower case for letters, else identity}
+     --@RI{Maps to lower case for letters, else identity}
    Upper_Case_Map        : @key[constant] Character_Mapping;
-     --@i{Maps to upper case for letters, else identity}
+     --@RI{Maps to upper case for letters, else identity}
    Basic_Map             : @key[constant] Character_Mapping;
-     --@i{Maps to basic letter for letters, else identity}
+     --@RI{Maps to basic letter for letters, else identity}
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Strings.Maps.Constants;
 @end{example}
 
@@ -1925,7 +1925,7 @@ The package Strings.Wide_Maps has the following declaration.
 @key[package] Ada.Strings.Wide_Maps @key[is]
    @key[pragma] Preelaborate(Wide_Maps);
 
-   --@i{ Representation for a set of Wide_Character values:}
+   --@RI{ Representation for a set of Wide_Character values:}
 @LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Set]}
    @key[type] Wide_Character_Set @key[is] @key[private];
 
@@ -1936,7 +1936,7 @@ The package Strings.Wide_Maps has the following declaration.
          Low  : Wide_Character;
          High : Wide_Character;
      @key[end] @key[record];
-   -- @i{Represents Wide_Character range Low..High}
+   -- @RI{Represents Wide_Character range Low..High}
 
    @key[type] Wide_Character_Ranges @key[is] @key[array] (Positive @key[range] <>) @key[of] Wide_Character_Range;
 
@@ -1967,7 +1967,7 @@ The package Strings.Wide_Maps has the following declaration.
       @key[return] Boolean @key[renames] Is_Subset;
 
 
-   --@i{ Alternative representation for a set of Wide_Character values:}
+   --@RI{ Alternative representation for a set of Wide_Character values:}
    @key[subtype] Wide_Character_Sequence @key[is] Wide_String;
 
    @key[function] To_Set (Sequence  : @key[in] Wide_Character_Sequence) @key[return] Wide_Character_Set;
@@ -1977,7 +1977,7 @@ The package Strings.Wide_Maps has the following declaration.
    @key[function] To_Sequence (Set  : @key[in] Wide_Character_Set) @key[return] Wide_Character_Sequence;
 
 
-   --@i{ Representation for a Wide_Character to Wide_Character mapping:}
+   --@RI{ Representation for a Wide_Character to Wide_Character mapping:}
    @key[type] Wide_Character_Mapping @key[is] @key[private];
 
    @key[function] Value (Map     : @key[in] Wide_Character_Mapping;
@@ -2000,7 +2000,7 @@ The package Strings.Wide_Maps has the following declaration.
       @key{access} @key{function} (From : @key{in} Wide_Character) @key{return} Wide_Character;
 
 @key[private]
-   ... -- @i{not specified by the language}
+   ... -- @RI{not specified by the language}
 @key[end] Ada.Strings.Wide_Maps;
 @end{example}
 
@@ -2053,7 +2053,7 @@ The following additional declaration is present in
 Strings.Wide_Maps.Wide_Constants:
 @begin{example}
 Character_Set : @key[constant] Wide_Maps.Wide_Character_Set;
---@i{Contains each Wide_Character value WC such that Characters.Is_Character(WC) is True}
+--@RI{Contains each Wide_Character value WC such that Characters.Is_Character(WC) is True}
 @end{example}
 @end{StaticSem}
 
@@ -2068,4 +2068,3 @@ portion of Wide_Character.  Similarly, each Wide_Character_Mapping
 constant in this package is the identity mapping when applied to
 any element outside the Character portion of Wide_Character. 
 @end{Notes}
-

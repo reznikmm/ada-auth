@@ -1,14 +1,13 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/05/26 05:03:27 $}
+@Comment{$Date: 2000/05/27 04:44:00 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
-@redundant[
-@ToGlossaryAlso{Term=<Package>,
+@redundant[@ToGlossaryAlso{Term=<Package>,
   Text=<Packages are program units that allow the specification of groups of
   logically related entities.
   Typically, a package contains the declaration of a type
@@ -19,24 +18,21 @@
 @IndexSee{Term=[information hiding],See=(package)}
 @IndexSee{Term=[encapsulation],See=(package)}
 @IndexSee{Term=[module],See=(package)}
-@IndexSeeAlso{Term=[class],See=(package)}
-]
+@IndexSeeAlso{Term=[class],See=(package)}]
 @end{Intro}
 
 @LabeledClause{Package Specifications and Declarations}
 
 @begin{Intro}
-@redundant[
-A package is generally provided in two parts: a
+@redundant[A package is generally provided in two parts: a
 @nt{package_specification} and a @nt{package_body}.
 Every package has a @nt{package_specification}, but not all packages
-have a @nt{package_body}.
-]
+have a @nt{package_body}.]
 @end{Intro}
 
 @begin{Syntax}
 @Syn{lhs=<package_declaration>,rhs="@Syn2{package_specification};"}
-@Hinge{}
+
 
 @Syn{lhs=<package_specification>,rhs="
     @key{package} @Syn2{defining_program_unit_name} @key{is}
@@ -93,8 +89,7 @@ in children of the child package.
 See @RefSecNum(Compilation Units - Library Units).
 @end{Ramification}
 
-@redundant[
-An entity declared in the private part of a package is visible
+@redundant[An entity declared in the private part of a package is visible
 only within the declarative region of the package itself
 (including any child units @em
 see @RefSecNum{Compilation Units - Library Units}).
@@ -102,8 +97,7 @@ In contrast, expanded names denoting
 entities declared in the visible part can be used even outside the
 package; furthermore, direct visibility of such entities can be
 achieved by means of @nt{use_clause}s
-(see @RefSecNum{Selected Components} and @RefSecNum{Use Clauses}).
-]
+(see @RefSecNum{Selected Components} and @RefSecNum{Use Clauses}).]
 @end{StaticSem}
 
 @begin{RunTime}
@@ -145,7 +139,7 @@ whose bodies can occur in @nt{package_specification}s.
 
    @key[function] "="(X,Y : Rational) @key[return] Boolean;
 
-   @key[function] "/"  (X,Y : Integer)  @key[return] Rational;  --@i{  to construct a rational number}
+   @key[function] "/"  (X,Y : Integer)  @key[return] Rational;  --@RI{  to construct a rational number}
 
    @key[function] "+"  (X,Y : Rational) @key[return] Rational;
    @key[function] "-"  (X,Y : Rational) @key[return] Rational;
@@ -189,8 +183,7 @@ well.
 @LabeledClause{Package Bodies}
 
 @begin{Intro}
-@redundant[
-In contrast to the entities declared in the visible part of a
+@redundant[In contrast to the entities declared in the visible part of a
 package, the entities declared in the @nt{package_body} are
 visible only
 within the @nt{package_body} itself.
@@ -198,8 +191,7 @@ As a consequence, a
 package with a @nt{package_body} can be used for the construction of
 a group of related subprograms in
 which the logical operations available to clients are clearly
-isolated from the internal entities.
-]
+isolated from the internal entities.]
 @end{Intro}
 
 @begin{Syntax}
@@ -308,7 +300,7 @@ takes place before the elaboration of the
 
    @key[procedure] Same_Denominator (X,Y : @key[in] @key[out] Rational) @key[is]
    @key[begin]
-      --@i{  reduces X and Y to the same denominator:}
+      --@RI{  reduces X and Y to the same denominator:}
       ...
    @key[end] Same_Denominator;
 
@@ -361,8 +353,7 @@ is moved here, since it is more generally applicable.
 @LabeledClause{Private Types and Private Extensions}
 
 @begin{Intro}
-@redundant[
-The declaration (in the visible part of a
+@redundant[The declaration (in the visible part of a
 package) of a type as a private type or private extension
 serves to separate the characteristics that can be used
 directly by outside program units (that is, the logical properties)
@@ -373,8 +364,7 @@ See @RefSecNum(Type Extensions) for an overview of type extensions.
 @IndexSee{Term=[information hiding],See=(private types and private extensions)}
 @IndexSee{Term=[opaque type],See=(private types and private extensions)}
 @IndexSee{Term=[abstract data type (ADT)],See=(private types and private extensions)}
-@IndexSee{Term=[ADT (abstract data type)],See=(private types and private extensions)}
-]
+@IndexSee{Term=[ADT (abstract data type)],See=(private types and private extensions)}]
 @end{Intro}
 
 @begin{MetaRules}
@@ -505,8 +495,8 @@ that seemed like too much mechanism.
     @key[type] T1 @key[is] @key[tagged] @key[limited] @key[private];
     @key[procedure] Foo(X : @key[in] T1'Class);
 @key[private]
-    @key[type] T1 @key[is] @key[tagged] @key[null] @key[record]; --@i{ Illegal!}
-        --@i{ This should say ``@key[tagged limited null record]''.}
+    @key[type] T1 @key[is] @key[tagged] @key[null] @key[record]; --@RI{ Illegal!}
+        --@RI{ This should say ``@key[tagged limited null record]''.}
 @key[end] P1;
 
 @key[package] @key[body] P1 @key[is]
@@ -515,17 +505,17 @@ that seemed like too much mechanism.
     @key[procedure] Foo(X : @key[in] T1'Class) @key[is]
     @key[begin]
         Global := @key[new] T1'Class'(X);
-            --@i{ This would be illegal if the full view of}
-            --@i{ T1 were limited, like it's supposed to be.}
+            --@RI{ This would be illegal if the full view of}
+            --@RI{ T1 were limited, like it's supposed to be.}
     @key[end] A;
 @key[end] P1;
 
 @key[with] P1;
 @key[package] P2 @key[is]
-    @key[type] T2(D : @key[access] Integer) --@i{ Trouble!}
+    @key[type] T2(D : @key[access] Integer) --@RI{ Trouble!}
             @key[is] @key[new] P1.T1 @key[with]
         @key[record]
-            My_Task : Some_Task_Type; --@i{ More trouble!}
+            My_Task : Some_Task_Type; --@RI{ More trouble!}
         @key[end] @key[record];
 @key[end] P2;
 
@@ -571,10 +561,10 @@ and even at places that can see the parent:
 
 @key[with] Q; @key[use] Q;
 @key[package] @key[body] P @key[is]
-    ... T'Class ... --@i{ Illegal!}
+    ... T'Class ... --@RI{ Illegal!}
     Object: T;
-    ... Object.X ... --@i{ Illegal!}
-    ... Parent(Object).X ... --@i{ OK.}
+    ... Object.X ... --@RI{ Illegal!}
+    ... Parent(Object).X ... --@RI{ OK.}
 @key[end] P;
 @end{Example}
 
@@ -632,7 +622,7 @@ the parent subtype of the full view is required to be constrained
 @key[package] P @key[is]
     @key[type] T(D : Integer) @key[is] @key[private];
 @key[private]
-    @key[type] T @key[is] @key[new] Some_Other_Type; --@i{ Illegal!}
+    @key[type] T @key[is] @key[new] Some_Other_Type; --@RI{ Illegal!}
 @key[end] P;
   @end{Example}
 
@@ -689,7 +679,7 @@ This prevents the following:
 @key[package] P @key[is]
     @key[type] T2 @key[is] @key[new] T1(Discrim => 3) @key[with] @key[private];
 @key[private]
-    @key[type] T2 @key[is] @key[new] T1(Discrim => 999) --@i{ Illegal!}
+    @key[type] T2 @key[is] @key[new] T1(Discrim => 999) --@RI{ Illegal!}
         @key[with] @key[record] ...;
 @key[end] P;
 @end{Example}
@@ -1014,7 +1004,7 @@ Consider:
 
 @key[package] Parent.Child @key[is]
     @key[type] T3 @key[is] @key[new] Root @key[with] @key[null] @key[record];
-    --@i{ Op1(T3) implicitly declared here.}
+    --@RI{ Op1(T3) implicitly declared here.}
 
     @key[package] Nested @key[is]
         @key[type] T4 @key[is] @key[new] Root @key[with] @key[null] @key[record];
@@ -1022,14 +1012,14 @@ Consider:
         ...
     @key[end] Nested;
 @key[private]
-    --@i{ Op2(T3) implicitly declared here.}
+    --@RI{ Op2(T3) implicitly declared here.}
     ...
 @key[end] Parent.Child;
 
 @key[with] Unrelated; @key[use] Unrelated;
 @key[package] @key[body] Parent.Child @key[is]
     @key[package] @key[body] Nested @key[is]
-        --@i{ Op2(T4) implicitly declared here.}
+        --@RI{ Op2(T4) implicitly declared here.}
     @key[end] Nested;
 
     @key[type] T5 @key[is] @key[new] T2 @key[with] @key[null] @key[record];
@@ -1091,21 +1081,21 @@ one place:
         @key[type] A @key[is] @key[array](Integer @key[range] <>) @key[of] Comp2;
     @key[private]
         @key[type] Comp2 @key[is] @key[new] Comp1;
-        --@i{ A becomes nonlimited here.}
-        --@i{ "="(A, A) return Boolean is implicitly declared here.}
+        --@RI{ A becomes nonlimited here.}
+        --@RI{ "="(A, A) return Boolean is implicitly declared here.}
         ...
     @key[end] R;
 @key[private]
-    --@i{ Now we find out what Comp1 really is, which reveals}
-    --@i{ more information about Comp2, but we're not within}
-    --@i{ the immediate scope of Comp2, so we don't do anything}
-    --@i{ about it yet.}
+    --@RI{ Now we find out what Comp1 really is, which reveals}
+    --@RI{ more information about Comp2, but we're not within}
+    --@RI{ the immediate scope of Comp2, so we don't do anything}
+    --@RI{ about it yet.}
 @key[end] P.Q;
 
 @key[package] @key[body] P.Q @key[is]
     @key[package] @key[body] R @key[is]
-        --@i{ Things like "@key[xor]"(A,A) return A are implicitly}
-        --@i{ declared here.}
+        --@RI{ Things like "@key[xor]"(A,A) return A are implicitly}
+        --@RI{ declared here.}
     @key[end] R;
 @key[end] P.Q;
 @end{Example}
@@ -1171,14 +1161,14 @@ are also defined for discriminants and inherited components.
 @begin{Example}
 @key[package] Key_Manager @key[is]
    @key[type] Key @key[is] @key[private];
-   Null_Key : @key[constant] Key; --@i{ a deferred constant declaration (see @RefSecNum{Deferred Constants})}
+   Null_Key : @key[constant] Key; --@RI{ a deferred constant declaration (see @RefSecNum{Deferred Constants})}
    @key[procedure] Get_Key(K : @key[out] Key);
    @key[function] "<" (X, Y : Key) @key[return] Boolean;
 @key[private]
    @key[type] Key @key[is] @key[new] Natural;
    Null_Key : @key[constant] Key := Key'First;
 @key[end] Key_Manager;
-@Hinge{}
+
 
 @key[package] @key[body] Key_Manager @key[is]
    Last_Key : Key := Null_Key;
@@ -1230,13 +1220,11 @@ has been moved to ``Obsolescent Features.''
 @LabeledClause{Deferred Constants}
 
 @begin{Intro}
-@redundant[
-Deferred constant declarations may be used to declare constants
+@redundant[Deferred constant declarations may be used to declare constants
 in the visible part of a package,
 but with the value of the constant given in the private part.
 They may also be used to declare constants imported from other
-languages (see @RefSecNum{Interface to Other Languages}).
-]
+languages (see @RefSecNum{Interface to Other Languages}).]
 @end{Intro}
 
 @begin{Legality}
@@ -1334,11 +1322,11 @@ variables declared in the private part of a package.
 @begin{Examples}
 @i{Examples of deferred constant declarations:}
 @begin{Example}
-Null_Key : @key[constant] Key;      @i[-- see @RefSecNum{Private Operations}]
+Null_Key : @key[constant] Key;      @RI[-- see @RefSecNum{Private Operations}]
 
 CPU_Identifier : @key[constant] String(1..8);
 @key[pragma] Import(Assembler, CPU_Identifier, Link_Name => "CPU_ID");
-                              @i[-- see @RefSecNum{Interfacing Pragmas}]
+                              @RI[-- see @RefSecNum{Interfacing Pragmas}]
 @end{Example}
 @end{Examples}
 
@@ -1401,13 +1389,11 @@ they are simply a special case of @nt<object_declaration>s.
 @LabeledClause{Limited Types}
 
 @begin{Intro}
-@redundant[
-@ToGlossaryAlso{Term=<Limited type>,
+@redundant[@ToGlossaryAlso{Term=<Limited type>,
   Text=<A limited type is (a view of) a type for which
   the assignment operation is not allowed.
   A nonlimited type is a (view of a) type for which the assignment
-  operation is allowed.>}
-]
+  operation is allowed.>}]
 @begin{Discussion}
 The concept of the @i(value) of a limited type is difficult
 to define, since the abstract value of a limited type often
@@ -1442,12 +1428,12 @@ Otherwise, the following could happen:
 @key[package] P @key[is]
     @key[type] T @key[is] @key[limited] @key[private];
     @key[type] R @key[is] @key[tagged]
-        @key[record] --@i{ Illegal!}
-               --@i{ This should say ``@key[limited record]''.}
+        @key[record] --@RI{ Illegal!}
+               --@RI{ This should say ``@key[limited record]''.}
             X : T;
         @key[end] @key[record];
 @key[private]
-    @key[type] T @key[is] @key[new] Integer; --@i{ R becomes nonlimited here.}
+    @key[type] T @key[is] @key[new] Integer; --@RI{ R becomes nonlimited here.}
 @key[end] P;
 
 @key[package] Q @key[is]
@@ -1549,7 +1535,7 @@ circumstances.
          Internal_Name : Integer := 0;
       @key[end] @key[record];
 @key[end] IO_Package;
-@Hinge{}
+
 
 @key[package] @key[body] IO_Package @key[is]
    Limit : @key[constant] := 200;
@@ -1607,8 +1593,7 @@ than being a subclause of
 @LabeledClause{User-Defined Assignment and Finalization}
 
 @begin{Intro}
-@redundant[
-@Defn{user-defined assignment}
+@redundant[@Defn{user-defined assignment}
 @Defn2{Term=[assignment], Sec=(user-defined)}
 Three kinds of actions are
 fundamental to the manipulation of objects:
@@ -1645,8 +1630,7 @@ the normal default initialization of a controlled object, a Finalize procedure
 which is invoked immediately before finalization of any of the
 components of a controlled object, and an Adjust
 procedure which is invoked as the last step of an assignment to
-a (nonlimited) controlled object.
-]
+a (nonlimited) controlled object.]
 @begin{Ramification}
 Here's the basic idea of initialization, value adjustment, and finalization,
 whether or not user defined:
@@ -1679,7 +1663,6 @@ The following language-defined library package exists:
 @LangDefType{Package=[Ada.Finalization],Type=[Controlled]}
     @key[type] Controlled @key[is abstract tagged private];
 
-@tabclear()@tabset(P22)
     @key(procedure) Initialize@\(Object : @key(in out) Controlled);
     @key(procedure) Adjust@\(Object : @key(in out) Controlled);
     @key(procedure) Finalize@\(Object : @key(in out) Controlled);
@@ -1690,7 +1673,7 @@ The following language-defined library package exists:
     @key(procedure) Initialize@\(Object : @key(in out) Limited_Controlled);
     @key(procedure) Finalize@\(Object : @key(in out) Limited_Controlled);
 @key(private)
-    ... -- @i{not specified by the language}
+    ... -- @RI{not specified by the language}
 @key[end] Ada.Finalization;
 @end{Example}
 
@@ -1757,13 +1740,13 @@ Example:
 @begin{Example}
 @key[type] T1 @key[is] @key[new] Controlled @key[with]
     @key[record]
-        ... --@i{ some components might have defaults}
+        ... --@RI{ some components might have defaults}
     @key[end] @key[record];
 
 @key[type] T2 @key[is] @key[new] Controlled @key[with]
     @key[record]
-        X : T1; --@i{ no default}
-        Y : T1 := ...; --@i{ default}
+        X : T1; --@RI{ no default}
+        Y : T1 := ...; --@RI{ default}
     @key[end] @key[record];
 
 A : T2;
@@ -1994,8 +1977,7 @@ Controlled types and user-defined finalization are new to Ada 9X.
 @LabeledSubClause{Completion and Finalization}
 
 @begin{Intro}
-@redundant[
-This subclause defines @i{completion} and @i{leaving} of the execution
+@redundant[This subclause defines @i{completion} and @i{leaving} of the execution
 of constructs and entities.
 A @i{master} is the execution of a construct that
 includes finalization of local objects after it is complete
@@ -2004,8 +1986,7 @@ includes finalization of local objects after it is complete
 but before leaving.
 Other constructs and entities are left immediately upon completion.
 @IndexSee{Term=[cleanup],See=(finalization)}
-@IndexSee{Term=[destructor],See=(finalization)}
-]
+@IndexSee{Term=[destructor],See=(finalization)}]
 @end{Intro}
 
 @begin{RunTime}
@@ -2237,8 +2218,8 @@ For example,
 @begin{Example}
 @key[declare]
     X : Some_Controlled_Type := F(G(...));
-    --@i{ The anonymous objects created for F and G are finalized}
-    --@i{ no later than this point.}
+    --@RI{ The anonymous objects created for F and G are finalized}
+    --@RI{ no later than this point.}
     Y : ...
 @key[begin]
     ...
@@ -2319,13 +2300,13 @@ For example,
         @key[begin]
             @key[goto] The_Label;
         @key[exception]
-            @key[when] Program_Error => ... --@i{ Handler number 1.}
+            @key[when] Program_Error => ... --@RI{ Handler number 1.}
         @key[end];
     @key[exception]
-        @key[when] Program_Error => ... --@i{ Handler number 2.}
+        @key[when] Program_Error => ... --@RI{ Handler number 2.}
     @key[end];
 @key[exception]
-    @key[when] Program_Error => ... --@i{ Handler number 3.}
+    @key[when] Program_Error => ... --@RI{ Handler number 3.}
 @key[end] Main;
 @end{Example}
 
