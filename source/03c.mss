@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/01/18 05:34:44 $}
+@Comment{$Date: 2005/01/27 06:12:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2066,7 +2066,7 @@ protected type may be derived from one or more interface types.],Old=[]}
 @begin{Syntax}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
-@Syn{lhs=<@Chg{Version=[2],New=<interface_type_definition>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<interface_type_definition>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
     [@key{limited} | @key{task} | @key{protected} | @key{synchronized}] @key{interface} [@key{and} @Syn2{interface_list}]>,Old=<>}"}
 @end{Syntax}
@@ -2285,7 +2285,7 @@ by compile-time rules.
   | @key{access} [@key{protected}] @key{function}  @Syn2{parameter_and_result_profile}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
-@Syn{lhs=<@Chg{Version=[2],New=[null_exclusion],Old=[]}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[null_exclusion],Old=[]}>,
 rhs="@Chg{Version=[2],New=[@key{not} @key{null}],Old=[]}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}

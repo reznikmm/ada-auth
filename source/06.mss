@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2004/12/16 06:31:49 $}
+@Comment{$Date: 2005/01/27 06:12:58 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -52,7 +52,7 @@ function.]
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
-@Syn{lhs=<@Chg{Version=[2],New=<overriding_indicator>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<overriding_indicator>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<[@key{not}] @key{overriding}>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
@@ -66,11 +66,11 @@ rhs="@Chg{Version=[2],New=<[@key{not}] @key{overriding}>,Old=<>}"}
     >,Old=<>}@Syn2{subprogram_specification} @key{is} @key{abstract};"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<procedure_specification>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<procedure_specification>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<@key{procedure} @Syn2{defining_program_unit_name} @Syn2{parameter_profile}>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<function_specification>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<function_specification>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<@key{function} @Syn2{defining_designator} @Syn2{parameter_and_result_profile}>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
@@ -1794,18 +1794,18 @@ New=[@Syn2{simple_return_statement} | @Syn2{extended_return_statement}],
 Old=<@key{return} [@Syn2{expression}];>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@Syn{lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[]}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[]}>,
 rhs="@Chg{Version=[2],New=<@key{return} [@Syn2{expression}];>,Old=[]}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@Syn{lhs=<@Chg{Version=[2],New=[extended_return_statement],Old=[]}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[extended_return_statement],Old=[]}>,
 rhs="@Chg{Version=[2],New=<
     @key{return} @Syn2{identifier} : [@Key{aliased}] @Syn2{return_subtype_indication} [:= @Syn2{expression}] [@Key{do}
         @Syn2{handled_sequence_of_statements}
     @key{end} @key{return}];>,Old=[]}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@Syn{lhs=<@Chg{Version=[2],New=[return_subtype_indication],Old=[]}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[return_subtype_indication],Old=[]}>,
 rhs="@Chg{Version=[2],New=<@Syn2{subtype_indication} | @Syn2{access_definition}>,Old=[]}"}
 
 @end{Syntax}
@@ -2346,7 +2346,7 @@ to declare a procedure with an empty body.]}
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<null_procedure_declaration>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<null_procedure_declaration>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<@Syn2{procedure_specification} @key{is} @key{null};>,Old=<>}"}
 @end{Syntax}
 

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/12/13 05:56:26 $}
+@Comment{$Date: 2005/01/27 06:12:59 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -952,10 +952,10 @@ to which the @nt{context_clause} is attached.
 @Syn{lhs=<with_clause>,rhs="@Chg{Version=[2],New=<@Syn2{limited_with_clause} | @Syn2{nonlimited_with_clause}>,Old=<@key{with} @SynI{library_unit_}@Syn2{name} {, @SynI{library_unit_}@Syn2{name}};>}"}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Syn{lhs=<@Chg{Version=[2],New=<limited_with_clause>,Old=<>}>,rhs="@Chg{Version=[2],New=<@key{limited} [@key{private}] @key{with} @SynI{library_unit_}@Syn2{name} {, @SynI{library_unit_}@Syn2{name}};>,Old=<>}"}
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<limited_with_clause>,Old=<>}>,rhs="@Chg{Version=[2],New=<@key{limited} [@key{private}] @key{with} @SynI{library_unit_}@Syn2{name} {, @SynI{library_unit_}@Syn2{name}};>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Syn{lhs=<@Chg{Version=[2],New=<nonlimited_with_clause>,Old=<>}>,rhs="@Chg{Version=[2],New=<[@key{private}] @key{with} @SynI{library_unit_}@Syn2{name} {, @SynI{library_unit_}@Syn2{name}};>,Old=<>}"}
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<nonlimited_with_clause>,Old=<>}>,rhs="@Chg{Version=[2],New=<[@key{private}] @key{with} @SynI{library_unit_}@Syn2{name} {, @SynI{library_unit_}@Syn2{name}};>,Old=<>}"}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}

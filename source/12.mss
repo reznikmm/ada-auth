@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2004/12/16 06:31:50 $}
+@Comment{$Date: 2005/01/27 06:13:00 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2313,7 +2313,7 @@ interface type is the class of all interface types.]]}
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<formal_interface_type_definition>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<formal_interface_type_definition>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<@Syn2{interface_type_definition}>,Old=<>}"}
 @end{Syntax}
 
@@ -2374,12 +2374,12 @@ New=<@Syn2{formal_abstract_subprogram_declaration}
 Old=<@key{with} @Syn2{subprogram_specification} [@key{is} @Syn2{subprogram_default}];>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
-@Syn{lhs=<@Chg{Version=[2],New=<formal_concrete_subprogram_declaration>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<formal_concrete_subprogram_declaration>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
      @key{with} @Syn2{subprogram_specification} [@key{is} @Syn2{subprogram_default}];>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
-@Syn{lhs=<@Chg{Version=[2],New=<formal_abstract_subprogram_declaration>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<formal_abstract_subprogram_declaration>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
      @key{with} @Syn2{subprogram_specification} @key{is abstract} [@Syn2{subprogram_default}];>,Old=<>}"}
 
@@ -2700,7 +2700,7 @@ of that generic package.]
 Old=[(<>) | [@Syn2{generic_actual_part}]]}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<formal_package_association>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<formal_package_association>,Old=<>}>,
 rhs="@Chg{Version=[2],New={
     @Syn2{generic_association}
   | @SynI{generic_formal_parameter_}@Syn2{selector_name} => <>},Old={}}"}

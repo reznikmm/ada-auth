@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2004/12/13 05:56:25 $}
+@Comment{$Date: 2005/01/27 06:12:58 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 
@@ -3864,7 +3864,7 @@ an entry.],Old=[]}
   @Chg{Version=[2],New=[@Syn2{procedure_or_entry_call}],Old=[@Syn2{entry_call_statement}]} [@Syn2{sequence_of_statements}]"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@Syn{lhs=<@Chg{Version=[2],New=[procedure_or_entry_call],Old=[]}>,rhs="
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[procedure_or_entry_call],Old=[]}>,rhs="
   @Chg{Version=[2],New=[@Syn2{procedure_call_statement} | @Syn2{entry_call_statement}],Old=[]}"}
 @end{Syntax}
 

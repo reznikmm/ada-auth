@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2004/12/16 06:31:46 $}
+@Comment{$Date: 2005/01/27 06:12:56 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -55,11 +55,11 @@ New=[],Old=[Note that our definition for
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<>,Old=<character>}>,
+@DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<character>}>,
 rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{graphic_character} | @Syn2{format_effector} | @Syn2{other_control_function}>}"}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<>,Old=<graphic_character>}>,
+@DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<graphic_character>}>,
 rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{identifier_letter} | @Syn2{digit} | @Syn2{space_character} | @Syn2{special_character}>}"}
 
 @end{Syntax}
@@ -717,7 +717,7 @@ From URG recommendation.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<identifier_start>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<identifier_start>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<@Syn2{letter_uppercase} |
                      @Syn2{letter_lowercase} |
                      @Syn2{letter_titlecase} |
@@ -726,7 +726,7 @@ rhs="@Chg{Version=[2],New=<@Syn2{letter_uppercase} |
                      @Syn2{number_letter}>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<identifier_extend>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<identifier_extend>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<@Syn2{identifier_start} |
                       @Syn2{mark_non_spacing} |
                       @Syn2{mark_spacing_combining} |
@@ -739,7 +739,7 @@ rhs="@Chg{Version=[2],New=<@Syn2{identifier_start} |
    Old=<@Syn2{identifier_letter} {[@Syn2{underline}] @Syn2{letter_or_digit}}>}"}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<>,Old=<letter_or_digit>}>,
+@DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<letter_or_digit>}>,
 rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{identifier_letter} | @Syn2{digit}>}"}
 
 @begin{SyntaxText}

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/01/25 07:00:11 $}
+@Comment{$Date: 2005/01/27 06:13:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -456,7 +456,8 @@ additional effects described in subclause
     modes In_File and Inout_File), and so that writing to its elements can be
     restarted at the beginning of the
     @Chg{Version=[2],New=[external ],Old=[]}file (for modes Out_File and Inout_File)
-    or after the last element of the @Chg{Version=[2],New=[external ],Old=[]}file (for mode Append_File).
+    or after the last element of the @Chg{Version=[2],New=[external ],Old=[]}file
+    (for mode Append_File).
     In particular, for direct access this means that the current
     index is set to one. If a Mode parameter is supplied, the
     current mode of the given file is set to the given mode. In addition, for
