@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:43 $}
+@Comment{$Date: 2000/05/19 04:12:04 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.6 $}
+@Comment{$Revision: 1.7 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2594,17 +2594,6 @@ of other specific integer types, thereby resolving the ambiguity.
   (implicitly convertible) even if both operands were.
 @end(Ramification)
 @end{Notes}
-
-    @begin{Comment}
-        RLB - 00-12-05 - I hope this sillyness isn't needed anymore!
-@begin{ISOonly}
-@InsertTOCCopyright{}
-@Send(Contents "@NewPage()")
-@end{ISOonly}
-        This inserts the copyright notice at this point in the table of
-        contents.
-        See adalib.lib for explanation.
-    @end{Comment}
 
 @LabeledClause{Scalar Types}
 

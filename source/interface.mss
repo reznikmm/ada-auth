@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.11 $ $Date: 2000/05/17 00:17:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:07 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:45 $}
+@Comment{$Date: 2000/05/19 04:12:07 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:44 $}
+@Comment{$Date: 2000/05/19 04:12:06 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}

@@ -1,6 +1,6 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2000/05/18 05:37:04 $}
+@Comment{$Date: 2000/05/19 04:12:04 $}
 @PageOneFootings{}
 
 @PrefaceSection{} @Comment{Go to odd page.}
@@ -55,10 +55,10 @@ Languages @Em Ada
 @BlankSpace{0.5inch}
 
 @LabeledSection{General}
-@Comment{$Date: 2000/05/18 05:37:04 $}
+@Comment{$Date: 2000/05/19 04:12:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -85,14 +85,14 @@ a predefined environment of standard packages is provided, including
 facilities for, among others, input-output, string manipulation,
 numeric elementary functions, and random number generation.
 @begin{Discussion}
-This @Value{AARMDocumentName} (AARM) contains the entire text of
-the @Value{RM9XDocumentName} (RM9X), plus certain annotations.
+This Annotated Ada Reference Manual (AARM) contains the entire text of
+the Ada Reference Manual (RM95), plus certain annotations.
 The annotations give a more in-depth analysis of the language.
 They describe the reason for each non-obvious rule,
 and point out interesting ramifications of the rules
 and interactions among the rules
 (interesting to language lawyers, that is).
-Differences between Ada 83 and Ada 9X are listed.
+Differences between Ada 83 and Ada 95 are listed.
 (The text you are reading now is an annotation.)
 
 The AARM stresses detailed correctness and uniformity over
@@ -100,7 +100,7 @@ readability and understandability.
 We're not trying to make the language ``appear'' simple here;
 on the contrary, we're trying to expose hidden complexities,
 so we can more easily detect language bugs.
-The RM9X, on the other hand, is intended to be a more
+The RM95, on the other hand, is intended to be a more
 readable document for programmers.
 
 The annotations in the AARM are as follows:
@@ -108,9 +108,9 @@ The annotations in the AARM are as follows:
 Text that is logically redundant is shown
 @Redundant[in square brackets, like this].
 Technically, such text could be written as a @NotesName
-in the RM9X, since it is really a theorem that can be proven from the
+in the RM95, since it is really a theorem that can be proven from the
 non-redundant rules of the language.
-We use the square brackets instead when it seems to make the RM9X
+We use the square brackets instead when it seems to make the RM95
 more readable.
 
 The rules of the language (and some AARM-only text) are categorized,
@@ -156,7 +156,7 @@ The unlabeled text at the beginning of each clause or subclause,
 @end(Inneritemize)
 
 Text under the following sub-headings
-does not appear in the RM9X:
+does not appear in the RM95:
 @begin(Inneritemize)
 @MetaRulesTitle,
 
@@ -210,7 +210,7 @@ The text of a Glossary entry @em this text will also appear
 in @RefSec{Glossary}.
 @end{GlossaryMarker}
 @begin{Discussion}
-In general, RM9X text appears in the normal font,
+In general, RM95 text appears in the normal font,
 whereas AARM-only text appears in a smaller font.
 @NotesName@;s also appear in the smaller font,
 as recommended by ISO/IEC style guidelines.
@@ -432,7 +432,7 @@ In some cases, the goal is only partially met;
 such cases are explained.
 
 This is not part of the definition of the language,
-and does not appear in the RM9X.
+and does not appear in the RM95.
 @end{MetaRules}
 
 @begin{Syntax}
@@ -666,7 +666,7 @@ This material is informative.
 @begin{Discussion}
 @BlankSpace(0.25 inch)
 The next three headings list all language changes between Ada 83
-and Ada 9X.  Language changes are any change that changes the set of
+and Ada 95.  Language changes are any change that changes the set of
 text strings that are legal Ada programs, or changes the meaning of
 any legal program.
 Wording changes, such as changes in terminology, are not language
@@ -681,7 +681,7 @@ categories:
 This heading lists all of the upward inconsistencies between Ada 83 and Ada
 9X.
 Upward inconsistencies are situations in which a legal Ada 83 program
-is a legal Ada 9X program with different semantics.
+is a legal Ada 95 program with different semantics.
 This type of upward incompatibility is the worst type for users,
 so we only tolerate it in rare situations.
 
@@ -695,32 +695,32 @@ Thus, when we ask whether the semantics changes,
 we are asking whether the set of behaviors changes.)
 
 This is not part of the definition of the language,
-and does not appear in the RM9X.
+and does not appear in the RM95.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
 @Defn{incompatibilities with Ada 83}
 This heading lists all of the upward incompatibilities between Ada 83
-and Ada 9X, except for the ones listed under ``@Inconsistent83Title''
+and Ada 95, except for the ones listed under ``@Inconsistent83Title''
 above.  These are the situations in which a legal Ada 83 program is
-illegal in Ada 9X.
+illegal in Ada 95.
 We do not generally consider a change that turns erroneous execution
 into an exception, or into an illegality, to be upwardly incompatible.
 
 This is not part of the definition of the language,
-and does not appear in the RM9X.
+and does not appear in the RM95.
 @end{Incompatible83}
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
 This heading is used to list all upward compatible language changes;
 that is, language extensions.
-These are the situations in which a legal Ada 9X program is not a
+These are the situations in which a legal Ada 95 program is not a
 legal Ada 83 program.
 The vast majority of language changes fall into this category.
 
 This is not part of the definition of the language,
-and does not appear in the RM9X.
+and does not appear in the RM95.
 
 @BlankSpace(0.25 inch)
 As explained above,
@@ -730,12 +730,12 @@ the next heading does not represent any language change:
 @begin{DiffWord83}
 @Defn{wording changes from Ada 83}
 This heading lists some of the non-semantic changes between RM83 and
-the RM9X.
+the RM95.
 It is incomplete; we have not attempted to list all wording
 changes, but only the ``interesting'' ones.
 
 This is not part of the definition of the language,
-and does not appear in the RM9X.
+and does not appear in the RM95.
 @end{DiffWord83}
 
 @LabeledSubClause{Conformity of an Implementation with the Standard}
@@ -1185,7 +1185,7 @@ information.  For example @i(subtype_)@nt<name> and
 @Defn{ambiguous grammar}
 @Defn2{Term=[grammar],Sec=(resolution of ambiguity)}
 @Defn2{Term=[grammar],Sec=(ambiguous)}
-The grammar given in the RM9X is not LR(1).
+The grammar given in the RM95 is not LR(1).
 In fact, it is ambiguous; the ambiguities are resolved
 by the overload resolution rules
 (see @RefSecNum{The Context of Overload Resolution}).
@@ -1578,7 +1578,7 @@ is marked like this.
 Here are some AARM-only definitions:
 @Defn{Ada Rapporteur Group (ARG)}
 @Defn(ARG)
-The Ada Rapporteur Group (ARG) interprets the @chg{New=<Ada Reference Manual>,Old=<RM83>}.
+The Ada Rapporteur Group (ARG) interprets the @Chg{New=<Ada Reference Manual>,Old=<RM83>}.
 @Defn{Ada Issue (AI)}
 @Defn(AI)
 An Ada Issue (AI) is a numbered ruling from the ARG.
@@ -1589,12 +1589,12 @@ is an edition of RM83 in which clearly marked insertions
 and deletions indicate the effect of integrating the approved AIs.
 @Defn{Uniformity Rapporteur Group (URG)}
 @Defn(URG)
-The Uniformity Rapporteur Group (URG) @chg{New=<issued>,Old=<issues>}
+The Uniformity Rapporteur Group (URG) @Chg{New=<issued>,Old=<issues>}
 recommendations intended to increase uniformity across Ada implementations.
-@chg{New=<The functions of the URG have been assumed by the ARG.>,Old=<>}
+@Chg{New=<The functions of the URG have been assumed by the ARG.>,Old=<>}
 @Defn{Uniformity Issue (UI)}
 @Defn(UI)
-A Uniformity Issue (UI) @chg{New=<was>,Old=<is>} a numbered recommendation from the URG.
+A Uniformity Issue (UI) @Chg{New=<was>,Old=<is>} a numbered recommendation from the URG.
 @end{Discussion}
 @SeeAlso{Primary=[library unit], Other=(language-defined library units)}
 @SeeOther{Primary=[predefined library unit], Other=(language-defined library units)}

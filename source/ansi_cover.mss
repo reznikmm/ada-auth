@@ -8,7 +8,7 @@
         AfterExit "Reprinting permitted if accompanied by this statement")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/ansi_cover.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2000/05/17 00:17:45 $}
+@comment{$Revision: 1.11 $ $Date: 2000/05/19 04:12:07 $}
 @begin(I2Title)
 @begin{FlushRight, Fixed 0.75inch}
 @Case{DocumentNickname,
@@ -65,7 +65,7 @@ use the reprinting permitted copyright.  Otherwise use the restricted
 copyright.}
 
 @Case{Draft, 2="
-@PrefaceClause()
+@PrefaceSection()
 @begin(center)
 @BlankSpace(4in)
 @i(Published by)
@@ -81,7 +81,7 @@ FOR OFFICIAL USE ONLY in performance of Contract F08635-90-C-0066.
 This report has been produced under the sponsorship of the Ada 9X
 Project Office under contract F08635-90-C-0066.",
 else="
-@PrefaceClause()
+@PrefaceSection()
 @begin(center)
 @BlankSpace(4in)
 @i(Published by)

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.11 $ $Date: 2000/05/17 00:17:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:06 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:44 $}
+@Comment{$Date: 2000/05/19 04:12:06 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -636,7 +636,7 @@ is produced.
    Line="Table F-1: Edited Output for Sign Control Symbols"}
 @TableHeading{Immediate, RowFormat=EdOutColumnHeadings,
    Line="Sign Control Symbol
- @
+ @ @;
 @\Edited Output for
 Non-Negative Number@\Edited Output for
 Negative Number"}
@@ -809,12 +809,12 @@ as follows:
                    Character values are replaced
                   with the excess digits (if any)
                    from the @i{integer_part} of the mapping of the @nt{number}
-                   to the right of the 
+                   to the right of the
                    @nt{floating_#_currency} instance.
 
   The substring whose last Character occurs at the position immediately
    preceding the leftmost Character replaced via rule 1, and whose
-   length is Currency'Length, is replaced by the Currency string. 
+   length is Currency'Length, is replaced by the Currency string.
 
                   A @nt{context_sensitive_insertion} Character is replaced
                    as though it were a @nt{direct_insertion} Character, if

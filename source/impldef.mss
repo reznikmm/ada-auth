@@ -1,10 +1,10 @@
 @Part(impldef, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:44 $}
+@Comment{$Date: 2000/05/19 04:12:06 $}
 @LabeledInformativeAnnex{Implementation-Defined Characteristics}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/impldef.mss,v $}
-@comment{$Revision: 1.11 $}
+@comment{$Revision: 1.12 $}
 
 @begin{Intro}
 

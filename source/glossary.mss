@@ -1,10 +1,10 @@
 @Part(glossary, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:44 $}
+@Comment{$Date: 2000/05/19 04:12:06 $}
 @LabeledInformativeAnnex{Glossary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/glossary.mss,v $}
-@comment{$Revision: 1.11 $}
+@comment{$Revision: 1.12 $}
 
 @begin{Intro}
 @Defn{Glossary}

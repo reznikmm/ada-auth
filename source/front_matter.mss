@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2000/05/18 05:37:05 $}
+@comment{$Revision: 1.13 $ $Date: 2000/05/19 04:12:07 $}
 
 @begin{Intro}
 
@@ -66,14 +66,12 @@ with respect to the first (Ada 83) edition (ISO 8652:1987).
 @UnNumberedSection{Introduction}
 
 @begin{Intro}
-
 @begin{AARMOnly}
 This is the Annotated Ada Reference Manual.
 @end{AARMOnly}
 @begin{RMOnly}
 This is the Ada Reference Manual.
 @end{RMOnly}
-
 
 Other available Ada documents include:
 @comment{We have to put the itemize inside of the AARMOnly, because otherwise

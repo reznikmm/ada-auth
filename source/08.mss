@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:43 $}
+@Comment{$Date: 2000/05/19 04:12:05 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @begin{Intro}
 @redundant[

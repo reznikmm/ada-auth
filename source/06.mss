@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/05/18 05:37:05 $}
+@Comment{$Date: 2000/05/19 04:12:05 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 @Defn{subprogram}

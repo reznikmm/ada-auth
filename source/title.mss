@@ -20,10 +20,10 @@
     else=<@Modify(I2Copyright, Fill)>}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2000/05/17 00:17:45 $}
+@comment{$Revision: 1.5 $ $Date: 2000/05/19 04:12:07 $}
 @begin(I2Title)
 @begin{FlushRight, Fixed 0.75inch}
-@HelveticaBold{INTERNATIONAL STANDARD} ISO/IEC 8652:@Value{StandardYear}(E)
+@HelveticaBold{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)
 @end{FlushRight}
 
 @begin{I2ISO}
@@ -32,9 +32,7 @@ INTERNATIONAL ELECTROTECHNICAL COMMISSION
 @end{I2ISO}
 
 @begin(I2TBox)
-@Case{DocumentNickname,
-    Chg839X=<>,
-    else=<@begin{MajorHeading, FlushLeft}
+@begin{MajorHeading, FlushLeft}
 Information technology @Em Programming languages @Em Ada
 @end{MajorHeading}
 @begin{FlushLeft}
