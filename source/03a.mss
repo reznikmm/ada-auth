@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/09/28 02:57:09 $}
+@Comment{$Date: 2001/04/05 22:35:56 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -3663,14 +3663,21 @@ is symmetric about zero, excepting possibly an extra negative value.
 @Defn2{Term=[constrained], Sec=(subtype)}
 @Defn2{Term=[unconstrained], Sec=(subtype)}
 A @nt<signed_integer_type_definition> also defines a constrained first
-subtype of the type,
-with a range whose bounds are given by
+subtype of the type, with a range whose bounds are given by
 the values of the @nt<simple_expression>s, converted to the type being defined.
-@PDefn2{Term=[implicit subtype conversion],Sec=(bounds of signed integer type)}
 @begin{ImplNote}
   The base range of a signed integer type might be much larger than is
   necessary to satisfy the aboved requirements.
 @end{ImplNote}
+@begin{Honest}
+  @ChgRef{Version=[1],Kind=[Added]}
+  @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
+  conversion} (which is something that happens at overload resolution, see
+  @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
+  the freezing rules are not invoked on the type (which is important so that
+  representation items can be given for the type).
+  @PDefn2{Term=[subtype conversion],Sec=(bounds of signed integer type)}],Old=[]}
+@end{Honest}
 
 @PDefn2{Term=[base range], Sec=(of a modular type)}
 A @nt<modular_type_definition> defines a modular type whose base range
@@ -4403,9 +4410,17 @@ If a @nt<real_range_specification> is given, then
 the subtype is constrained to a range whose bounds are
 given by a conversion of the values of the @nt<simple_expression>s
 of the @nt<real_range_specification> to the type being defined.
-@PDefn2{Term=[implicit subtype conversion],Sec=(bounds of a floating point type)}
-Otherwise, the subtype
-is unconstrained.
+Otherwise, the subtype is unconstrained.
+
+@begin{Honest}
+  @ChgRef{Version=[1],Kind=[Added]}
+  @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
+  conversion} (which is something that happens at overload resolution, see
+  @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
+  the freezing rules are not invoked on the type (which is important so that
+  representation items can be given for the type).
+  @PDefn2{Term=[subtype conversion],Sec=(bounds of a floating point type)}],Old=[]}
+@end{Honest}
 
 @Defn{Float}
 There is a predefined, unconstrained, floating point subtype
@@ -4687,6 +4702,16 @@ given by the closer to zero of:
   @nt<real_range_specification>;
   @PDefn2{Term=[implicit subtype conversion],Sec=(bounds of a fixed point type)}
 
+  @begin{Honest}
+    @ChgRef{Version=[1],Kind=[Added]}
+    @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
+    conversion} (which is something that happens at overload resolution, see
+    @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
+    the freezing rules are not invoked on the type (which is important so that
+    representation items can be given for the type).
+    @PDefn2{Term=[subtype conversion],Sec=(bounds of a fixed point type)}],Old=[]}
+  @end{Honest}
+
   the corresponding bound of the base range.
 @end(itemize)
 
@@ -4704,6 +4729,16 @@ of the values of the @nt<expression>s of the
 @PDefn2{Term=[implicit subtype conversion],Sec=(bounds of a decimal fixed point type)}
 Otherwise, the range of the first subtype is
 @en@;(10**@i(digits)@en@;1)*@i(delta) .. +(10**@i(digits)@en@;1)*@i(delta).
+
+@begin{Honest}
+  @ChgRef{Version=[1],Kind=[Added]}
+  @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
+  conversion} (which is something that happens at overload resolution, see
+  @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
+  the freezing rules are not invoked on the type (which is important so that
+  representation items can be given for the type).
+  @PDefn2{Term=[subtype conversion],Sec=(bounds of a decimal fixed point type)}],Old=[]}
+@end{Honest}
 
 @end{StaticSem}
 
