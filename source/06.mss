@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:42 $}
+@Comment{$Date: 2004/11/05 05:47:50 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -46,19 +46,41 @@ since they don't have completions.
 @LabeledClause{Subprogram Declarations}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
 @Redundant[A @nt{subprogram_declaration} declares a procedure or
-function.]
+function.@Chg{Version=[2],New=[ An @nt{overriding_clause} allows the programmer
+to specify whether overriding is intended (see @RefSecNum{Visibility}).],Old=[]}]
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<subprogram_declaration>,rhs="@Syn2{subprogram_specification};"}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
+@Syn{lhs=<@Chg{Version=[2],New=<overriding_indicator>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<[@key{not}] @key{overriding}>,Old=<>}"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
+@Syn{lhs=<subprogram_declaration>,rhs="@Chg{Version=[2],New=<
+    [@Syn2{overriding_indicator}]
+    >,Old=<>}@Syn2{subprogram_specification};"}
 
-@Syn{lhs=<abstract_subprogram_declaration>,rhs="@Syn2{subprogram_specification} @key{is} @key{abstract};"}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
+@Syn{lhs=<abstract_subprogram_declaration>,rhs="@Chg{Version=[2],New=<
+    [@Syn2{overriding_indicator}]
+    >,Old=<>}@Syn2{subprogram_specification} @key{is} @key{abstract};"}
 
-@Syn{lhs=<subprogram_specification>,rhs="
-     @key{procedure} @Syn2{defining_program_unit_name}  @Syn2{parameter_profile}
-   | @key{function} @Syn2{defining_designator}  @Syn2{parameter_and_result_profile}"}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<procedure_specification>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<@key{procedure} @Syn2{defining_program_unit_name} @Syn2{parameter_profile}>,Old=<>}"}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<function_specification>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<@key{function} @Syn2{defining_designator} @Syn2{parameter_and_result_profile}>,Old=<>}"}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+@Syn{lhs=<subprogram_specification>,rhs="@Chg{Version=[2],New=[
+    @Syn2{procedure_specification}
+  | @Syn2{function_specification}],Old=[
+    @key{procedure} @Syn2{defining_program_unit_name} @Syn2{parameter_profile}
+  | @key{function} @Syn2{defining_designator} @Syn2{parameter_and_result_profile}]}"}
 
 @Syn{lhs=<designator>,rhs="[@Syn2{parent_unit_name} . ]@Syn2{identifier} | @Syn2{operator_symbol}"}
 
@@ -85,13 +107,17 @@ defined in clause @RefSecNum{Operators and Expression Evaluation}
 
 @Syn{lhs=<parameter_profile>,rhs="[@Syn2{formal_part}]"}
 
-@Syn{lhs=<parameter_and_result_profile>,rhs="[@Syn2{formal_part}] @key{return} @Syn2{subtype_mark}"}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@Syn{lhs=<parameter_and_result_profile>,rhs="@Chg{Version=[2],New=[
+    ],Old=[]}[@Syn2{formal_part}] @key{return} @Syn2{subtype_mark}]@Chg{Version=[2],New=<
+    [@Syn2{formal_part}] @key{return} @Syn2{access_definition}>,Old=<>}"}
 
 @Syn{lhs=<formal_part>,rhs="
    (@Syn2{parameter_specification} {; @Syn2{parameter_specification}})"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @Syn{lhs=<parameter_specification>,rhs="
-    @Syn2{defining_identifier_list} : @Syn2{mode}  @Syn2{subtype_mark} [:= @Syn2{default_expression}]
+    @Syn2{defining_identifier_list} : @Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark} [:= @Syn2{default_expression}]
   | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]"}
 
 @Syn{lhs=<mode>,rhs="[@key{in}] | @key{in} @key{out} | @key{out}"}
@@ -178,27 +204,48 @@ A @nt<subprogram_declaration> declares a procedure or a function, as
 indicated by the initial reserved word, with name and profile as given by
 its specification.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @PDefn2{Term=[nominal subtype], Sec=(of a formal parameter)}
 The nominal subtype of a formal parameter is
-the subtype denoted by the @nt{subtype_mark}, or
-defined by the @nt{access_definition}, in the
+the subtype @Chg{Version=[2],New=[determined],Old=[denoted]} by
+@Chg{Version=[2],New=[the optional @nt{null_exclusion} and ], Old=[]}the
+@nt{subtype_mark}, or defined by the @nt{access_definition}, in the
 @nt{parameter_specification}.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02]}
 @Defn{access parameter}
 An @i(access parameter) is a formal @key[in] parameter
 specified by an @nt{access_definition}.
-An access parameter is of an anonymous
-general access-to-variable type (see @RefSecNum{Access Types}).
-@Redundant[Access parameters allow dispatching calls
-to be controlled by access values.]
+@Defn{access result type}
+@Chg{Version=[2],New=[An @i(access result type) is a function result type specified by
+an @nt{access_definition}.],Old=[]}
+An access parameter @Chg{Version=[2],New=[or result type ],Old=[]}is of an
+anonymous
+@Chg{Version=[2],New=[access],Old=[general access-to-variable]} type (see
+@RefSecNum{Access Types}). @Redundant[Access parameters
+@Chg{Version=[2],New=[of an access-to-object type],Old=[]} allow dispatching
+calls to be controlled by access values.@Chg{Version=[2],New=[ Access
+parameters of an access-to-subprogram type permit calls to subprograms passed
+as parameters irrespective of their accessibility level.],Old=[]}]
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=[Access result types have normal accessibility and
+thus don't have any special properties worth noting here.],Old=[]}
+@end{Discussion}
 
 @leading@keepnext@Defn2{Term=[subtypes], Sec=(of a profile)}
 The @i(subtypes of a profile) are:
 @begin{Itemize}
   For any non-access parameters, the nominal subtype of the parameter.
 
-  For any access parameters, the designated subtype of the parameter
-  type.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
+  For any access parameters@Chg{Version=[2],New=[ of an access-to-object type],Old=[]},
+  the designated subtype of the parameter type.
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
+  @Chg{Version=[2],New=[For any access parameters of an access-to-subprogram
+  type, the subtypes of the profile of the parameter type.],Old=[]}
 
   For any result, the result subtype.
 @end{Itemize}
@@ -290,6 +337,34 @@ syntactic categories.
 The syntax rules for @nt{defining_designator} and
 @nt{defining_program_unit_name} are new.
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+The syntax for @nt{overriding_clause} is new.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+@Chg{Version=[2],New=[An optional
+@nt{null_exclusion} can be used in a formal parameter declaration.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=[The return type of a function can be an
+anonymous access type.],Old=[]}
+@end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+@Chg{Version=[2],New=[Split the production for @nt{subprogram_specification}
+in order to make the declaration of null procedures (see
+@RefSecNum{Null Procedures}) easier.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00254-01]}
+@Chg{Version=[2],New=[A description of the purpose of anonymous
+access-to-subprogram parameters and the definition of the profile of
+subprograms containing them was added.],Old=[]}
+
+@end{DiffWord95}
+
 
 @LabeledClause{Formal Parameter Modes}
 
@@ -555,6 +630,7 @@ the rule regarding erroneous execution when a discriminant
 is changed and one of the parameters depends on the discriminant.
 @end{DiffWord83}
 
+
 @LabeledClause{Subprogram Bodies}
 
 @begin{Intro}
@@ -563,7 +639,9 @@ subprogram.]
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<subprogram_body>,rhs="
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
+@Syn{lhs=<subprogram_body>,rhs="@Chg{Version=[2],New=<
+    [@Syn2{overriding_indicator}]>,Old=<>}
     @Syn2{subprogram_specification} @key{is}
        @Syn2{declarative_part}
     @key{begin}
@@ -662,6 +740,12 @@ We have incorporated some rules from RM83-6.5 here.
 RM83 forgot to restrict the definition of elaboration of a
 @nt{subprogram_body} to non-generics.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@Chg{Version=[2],New=[@nt{Overriding_clause} is added to
+@nt{subprogram_body}.],Old=[]}
+@end{DiffWord95}
 
 
 @LabeledSubClause{Conformance Rules}
@@ -765,8 +849,23 @@ and makes these Intrinsic, thus forbidding 'Access.],Old=[]}
 
   an attribute that is a subprogram;
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01]}
   a subprogram declared immediately
-  within a @nt{protected_body}.
+  within a @nt{protected_body}@Chg{Version=[2],New=[;],Old=[.]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
+  @Chg{Version=[2],New=[the view of a subprogram denoted by a
+  @nt{selected_component} whose @nt{prefix} denotes an object or value of a
+  tagged type, and whose @nt{selector_name} denotes a subprogram operating on
+  the type (see @RefSecNum{Selected Components}).],Old=[]}
+  @begin{Reason}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[The profile of the @nt{selected_component} is
+    different than the @lquotes@;real@rquotes profile of the subprogram, so
+    we don't want to be able to take 'Access of it,
+    as that would require generating a wrapper of some sort.],Old=[]}
+  @end{Reason}
+
 @end{InnerItemize}
 
 @NoPrefix@Redundant[The Access attribute is not allowed
@@ -816,8 +915,19 @@ the reserved word @key(protected) in its definition.
 @Defn2{Term=[calling convention], Sec=(entry)}
 The default calling convention is @i{entry} for an entry.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
+@Chg{Version=[2],New=[The calling convention for an access parameter of an
+access-to-subprogram type is @i<protected> if the reserved word @key{protected}
+appears in its definition and otherwise is the convention of the subprogram
+that contains the parameter.],Old=[]}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The calling convention for other access-to-subprogram
+types is Ada.],Old=[]}
+@end{Ramification}
+
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0011],ARef=[AI95-00117-01]}
-@Chg{New=[@Redundant[If not specified above as Intrinsic, the calling convention for any
+@Chg{Version=[1],New=[@Redundant[If not specified above as Intrinsic, the calling convention for any
 inherited or overriding dispatching operation of a tagged type is that of the
 corresponding subprogram of the parent type.] The default calling convention
 for a new dispatching operation of a tagged type is the convention of the type.],
@@ -858,11 +968,13 @@ Of course, corresponding parameters have to be either both access
 parameters or both not access parameters.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Defn{mode conformance}
 @Defn2{Term=[profile],Sec=(mode conformant)}
 Two profiles are @i{mode conformant} if they are type-conformant, and
 corresponding parameters have identical modes, and, for access
-parameters, the designated subtypes statically match.
+parameters@Chg{Version=[2],New=[ or access result types],Old=[]}, the
+designated subtypes statically match.
 @PDefn2{Term=[statically matching],Sec=(required)}
 
 @Defn{subtype conformance}
@@ -986,6 +1098,27 @@ fully conform.
   of an @nt<entry_declaration> for a family of entries and the
   corresponding @nt<entry_index_specification> of the @nt<entry_body>.
 @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[Two subprograms or entries are @i<type conformant>
+(respectively @i<mode conformant>, @i<subtype conformant>, or @i<fully
+conformant>) if their profiles are type conformant (respectively mode
+conformant, subtype conformant, or fully conformant).
+@Defn2{Term=[type conformance], Sec=(for subprograms)}
+@Defn2{Term=[type conformance], Sec=(for entries)}
+@Defn2{Term=[mode conformance], Sec=(for subprograms)}
+@Defn2{Term=[mode conformance], Sec=(for entries)}
+@Defn2{Term=[subtype conformance], Sec=(for subprograms)}
+@Defn2{Term=[subtype conformance], Sec=(for entries)}
+@Defn2{Term=[full conformance], Sec=(for subprograms)}
+@Defn2{Term=[full conformance], Sec=(for entries)}],Old=[]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @Chg{Version=[2],New=[This definition is used to define the conformance
+  required for interfaces used in task and protected type definitions (see
+  @RefSecNum{Task Units and Task Objects} and
+  @RefSecNum{Protected Units and Protected Objects}).],Old=[]}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{ImplPerm}
@@ -1013,7 +1146,21 @@ type is the same as that of the type.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0018],ARef=[AI95-00175-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Added wording to insure that two
 attributes conform only if they have the same @nt{attribute_designator}.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01],ARef=[AI95-00254-01]}
+@Chg{Version=[2],New=[Defined the calling convention for anonymous
+access-to-subprogram types and for the @nt{selected_component} whose @nt{prefix}
+denotes an object or value, and whose @nt{selector_name} denotes a subprogram (see
+@RefSecNum{Selected Components}).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=[Defined the conformance of access result types (see
+@RefSecNum{Subprogram Declarations}).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[Defined the conformance of subprograms and entries.],Old=[]}
 @end{DiffWord95}
+
 
 @LabeledSubClause{Inline Expansion of Subprograms}
 
@@ -1154,15 +1301,26 @@ for use in actual calls.
 @end{Syntax}
 
 @begin{Resolution}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00310-01]}
 The @nt{name} or @nt{prefix} given in a @nt{procedure_call_statement}
 shall resolve to denote
 a callable entity that is a procedure, or an entry renamed
 as (viewed as) a procedure.
 The @nt{name} or @nt{prefix} given in a @nt{function_call}
 shall resolve to denote
-a callable entity that is a function.
+a callable entity that is a
+function.@Chg{Version=[2],New=[ The @nt{name} or @nt{prefix} shall not
+resolve to denote an abstract subprogram unless it is also a
+dispatching subprogram.],Old=[]}
 @Redundant[When there is an @nt<actual_@!parameter_@!part>, the @nt<prefix>
-can be an @nt<implicit_@!dereference> of an access-to-subprogram value.]
+can be an @nt<implicit_@!dereference> of an access-to-subprogram
+value.]
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00310-01]}
+@Chg{Version=[2],New=[This rule is talking about dispatching operations
+(which is a static concept) and not about dispatching calls (which is a
+dynamic concept).],Old=[]}
+@end{Discussion}
 @begin{Ramification}
 The function can be an operator,
 enumeration literal, attribute that is a function, etc.
@@ -1328,6 +1486,15 @@ to @RefSecNum{Parameter Associations}.
 We have moved wording about raising Program_Error for a function
 that falls off the end to here from RM83-6.5.
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Non-dispatching abstract operations are no longer considered when
+resolving a subprogram call. That makes it possible to use @key{abstract}
+to @lquotes@;undefine@rquotes@; a predefined operation. That's especially
+helpful when defining custom arithmetic packages.],Old=[]}
+@end{Extend95}
 
 @LabeledSubClause{Parameter Associations}
 
@@ -1774,6 +1941,60 @@ the phrase @lquotes@;body of a subprogram or generic subprogram@rquotes@; is
 syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{DiffWord83}
 
+@LabeledAddedSubClause{Version=[2],Name=[Pragma No_Return]}
+
+@ChgNote{Putting @nt{pragma} in the syntax font is used for Assert and Pure,
+at least.}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
+@Chg{Version=[2],New=[A @nt{pragma} No_Return indicates that a
+procedure can return only by propagating an exception.],Old=[]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@nt{Pragma} No_Deposit will have to wait for Ada 2015. :-)],Old=[]}
+@end{Discussion}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
+@Chg{Version=[2],New=[The form of a @nt{pragma} No_Return, which is a program unit
+pragma (see @RefSecNum{Pragmas and Program Units}), is as follows:],Old=[]}
+@end{SyntaxText}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{local_}@Syn2{name}{, @SynI{local_}@Syn2{name}]);'',Old=<>}
+@end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
+@Chg{Version=[2],New=[The @nt{pragma} shall apply to one or more procedures or
+generic procedures.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
+@Chg{Version=[2],New=[If a @nt{pragma} No_Return applies to a procedure or a generic procedure, there
+shall be no @nt<return_statement>s that apply to that procedure.],Old=[]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
+@Chg{Version=[2],New=[If a @nt{pragma} No_Return applies to a generic procedure, pragma No_Return
+applies to all instances of that generic procedure.],Old=[]}
+@end{StaticSem}
+
+@begin{RunTime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
+@Chg{Version=[2],New=[If a @nt{pragma} No_Return applies to a procedure, then the exception
+Program_Error is raised at the point of the call of the procedure if the
+procedure body completes normally.],Old=[]}
+@end{RunTime}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+@nt{Pragma} No_Return is new.],Old=[]}
+@end{Extend95}
+
+
 @LabeledClause{Overloading of Operators}
 
 @begin{Intro}
@@ -1854,3 +2075,52 @@ combination of parameter and result types.
 Explicit declarations of "/=" are now permitted, so long
 as the result type is not Boolean.
 @end{Extend83}
+
+
+@LabeledAddedClause{Version=[2],Name=[Null Procedures]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+@Chg{Version=[2],New=[A @nt<null_procedure_declaration> provides a shorthand
+to declare a procedure with an empty body.],Old=[]}
+@end{Intro}
+
+@begin{Syntax}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<null_procedure_declaration>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<procedure_specification @key{is} @key{null};>,Old=<>}"}
+@end{Syntax}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+@Chg{Version=[2],New=[A @nt<null_procedure_declaration> declares a @i<null
+procedure>.@Defn{null procedure}@Defn2{Term=[procedure],Sec=[null]}
+A completion is not allowed for a @nt<null_procedure_declaration>.],Old=[]}
+@end{StaticSem}
+
+@begin{RunTime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@Chg{Version=[2],New=[The execution of a null procedure is invoked by a subprogram call.
+For the execution of a subprogram call on a null procedure, the execution of
+the @nt<subprogram_body> has no effect.],Old=[]}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[Thus, a null procedure is equivalent to the body],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{begin}
+   @key{null};
+@key{end};],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[with the exception that a null procedure can be used in
+place of a procedure specification.],Old=[]}
+@end{Ramification}
+@end{RunTime}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Null procedures are new.],Old=[]}
+@end{Extend95}
+

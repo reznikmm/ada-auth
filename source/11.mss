@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:44 $}
+@Comment{$Date: 2004/11/05 05:47:51 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1021,7 +1021,7 @@ some implementation-defined manner.],Old=[]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assert>([Check =>] @SynI{Boolean_}@Syn2{expression}[, [Message =>] @SynI{string_}@Syn2{expression}]);'>,Old=<>}
+@Chg{Version=[2],New=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assert>([Check =>] @SynI{Boolean_}@Syn2{expression}[, [Message =>] @SynI{string_}@Syn2{expression}]);'',Old=<>}
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1432,16 +1432,28 @@ and when returning a tagged limited object from a function.]
 @Leading@Redundant[The following checks correspond to situations in which the
 exception Program_Error is raised upon failure.]
 @begin{Description}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
+@Chg{Version=[2],New=[@RootDefn{Accessibility_Check}
+Accessibility_Check @\@Redundant[Check the accessibility level of an
+entity or view.]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
+@Chg{Version=[2],New=[@RootDefn{Allocation_Check}
+Allocation_Check @\@Redundant[For an @nt<allocator>, check that the master of
+any tasks has not yet finished waiting for dependents, and that the
+finalization of the collection has not started.]],Old=[]}
+
 @RootDefn{Elaboration_Check}
 Elaboration_Check @\@Redundant[When a subprogram or protected entry is
-called,
-a task activation is accomplished,
+called, a task activation is accomplished,
 or a generic instantiation is elaborated, check that the body
 of the corresponding unit has already been elaborated.]
 
-@RootDefn{Accessibility_Check}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00280]}
+@ChgNote{This item is not in alphabetical order}
+@Chg{Version=[2],New=[],Old=[@RootDefn{Accessibility_Check}
 Accessibility_Check @\@Redundant[Check the accessibility level of an
-entity or view.]
+entity or view.]]}
 
 @end{Description}
 
@@ -1614,6 +1626,11 @@ which was included in @nt{selected_component} in RM83.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}Pragma Unsuppress is new.],
 Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
+@Chg{Version=[2],New=[Allocation_Check was added to support suppressing the
+new check on @nt{allocator}s (see @RefSecNum{Allocators}. The order of the
+Program_Error checks was corrected to be alphabetical.],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}

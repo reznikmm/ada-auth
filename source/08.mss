@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2001/04/05 22:12:03 $}
+@Comment{$Date: 2004/11/05 05:47:50 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -673,7 +673,7 @@ their profiles are type conformant.
 @PDefn{type conformance}
 @redundant[An inner declaration hides any outer homograph from direct visibility.]
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044]}
 @leading@Redundant[Two homographs are not generally allowed
 immediately within the same declarative region unless one
 @i{overrides} the other (see Legality Rules below).]
@@ -685,12 +685,12 @@ A declaration overrides another homograph that occurs
 immediately within the same declarative region in the
 following cases:
 @begin{Itemize}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044]}
 @Chg{New=[A declaration that is not overridable overrides one that is overridable],
 Old=[An explicit declaration overrides an implicit declaration of a primitive
 subprogram]}, @Redundant[regardless of which declaration occurs first];
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044]}
 And regardless of whether the @Chg{New=[non-overriddable],Old=[explicit]}
 declaration is overloadable or not.
 @Chg{New=[For example, @nt{statement_identifier}s are covered by this rule.],Old=[]}
@@ -887,7 +887,7 @@ hiding, since there is no way to declare homographs.
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],Ref=[8652/0026]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],Ref=[8652/0026],ARef=[AI95-00044],ARef=[AI95-00150]}
 @Chg{New=[A non-overridable],Old=[An explicit]} declaration is illegal if there is a
 homograph occurring immediately within the same
 declarative region that is visible at the place of the
@@ -957,7 +957,7 @@ to resolve references to directly visible non-overloadable
 homographs, which is something compilers have never before been
 required to do.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0026],Ref=[8652/0102]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0026],Ref=[8652/0102],ARef=[AI95-00150-01],ARef=[AI95-00157-01]}
 @Chg{New=[@Leading@;If a @nt{type_extension} contains a component with
 the same name as a component in an ancestor type, there must be no place
 where both components are visible. For instance:],Old=[]}
@@ -1010,7 +1010,7 @@ where both components are visible. For instance:],Old=[]}
    I3 : Integer := A.T(X).I;   -- @RI{A.T.I}
 @key[end] A.E;],Old=[]}
 @end{Example}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0102]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0102],ARef=[AI95-00157-01]}
 @Chg{New=[@Noprefix@;D.NT3 can have a component I because the component I of
 the parent type is never visible. The parent component exists, of course, but
 is never declared for the type D.NT3. In the child package A.E, the component
@@ -1150,6 +1150,18 @@ and the region in which it is directly visible.
 
 Visibility is defined only for declarations.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0025],ARef=[AI95-00044-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified the overriding rules so that
+"/=" and @nt{statement_identifier}s are covered.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0026],ARef=[AI95-00150-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that is it never possible
+for two components with the same name to be visible; any such program is
+illegal.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledClause{Use Clauses}
 
@@ -1457,6 +1469,7 @@ For language lawyers, these facts are obvious; for programmers, they are
 irrelevant, since failing these tests is highly unlikely.
 @end{DiffWord83}
 
+
 @LabeledSubClause{Object Renaming Declarations}
 
 @begin{Intro}
@@ -1505,7 +1518,7 @@ That makes the rule different for @key[in] vs. @key[in out].
 @begin{Legality}
 The renamed entity shall be an object.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184]}
 The renamed entity shall not be a subcomponent that depends on
 discriminants of a variable whose nominal subtype is unconstrained,
 unless this subtype is indefinite, or the variable is aliased.
@@ -1522,7 +1535,7 @@ This prevents renaming of subcomponents that might
 disappear, which might leave dangling references.
 Similar restrictions exist for the Access attribute.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0017]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0017],ARef=[AI95-00184]}
 @Chg{New=[@Leading@;The "recheck on instantiation" and "assume-the-worst in the body"
 restrictions on generics are necessary to avoid renaming of components which
 could disappear even when the nominal subtype would prevent the problem:],Old=[]}
@@ -1612,6 +1625,12 @@ It is incorrect in the case of an object with an indefinite
 unconstrained nominal subtype.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0017],ARef=[AI95-00184-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Fixed to forbid renamings of
+depends-on-discriminant components if the type @i{might} be definite.],Old=[]}
+@end{DiffWord95}
+
 @LabeledSubClause{Exception Renaming Declarations}
 
 @begin{Intro}
@@ -1698,7 +1717,7 @@ The profile of a renaming-as-declaration
 shall be mode-conformant with that of the renamed callable entity.
 @Defn2{Term=[mode conformance],Sec=(required)}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0027],Ref=[8652/0028]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0027],Ref=[8652/0028],ARef=[AI95-00135-01],ARef=[AI95-00145-01]}
 The profile of a renaming-as-body
 @Chg{New=[],Old=[shall be subtype-conformant with that of the renamed
 callable entity, and ]}shall conform fully to that of the declaration it
@@ -1730,7 +1749,7 @@ In some cases, such as a renaming of a name like "A(I).@key[all]", an indirect
 jump is needed. Note that the name is evaluated at renaming time, not at
 call time.)
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0028]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0028],ARef=[AI95-00145-01]}
 @Chg{New=[The first part of the second sentence is intended to allow
 renaming-as-body of predefined operators before the @nt{subprogram_declaration}
 is frozen. For some types (such as integer types), the parameter type for
@@ -1757,7 +1776,7 @@ the implicit protected object parameter of a protected operation is
 involved in the conformance rules.
 @end{Ramification}
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027],ARef=[AI95-00135-01]}
 @Chg{New=[Circular renames before freezing is illegal, as the compiler
 would not be able to determine the convention of the subprogram. Other
 circular renames are handled below; see @BoundedTitle.],Old=[]}
@@ -1802,7 +1821,7 @@ For example, it is illegal for the @nt{entry_call_statement} of a
 But what looks like a procedure call will do things like barrier
 waiting.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0105]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0105],ARef=[AI95-00211-01]}
 @Chg{New=[All properties of the renamed entity are inherited by the new view
 unless otherwise stated by this International Standard.
 In particular, if the renamed entity is abstract or requires overridding
@@ -1813,7 +1832,7 @@ these cases, as a renaming cannot be overridden.)],Old=[]}
 @end{StaticSem}
 
 @begin{RunTime}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0014]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0014],ARef=[AI95-00064-01]}
 @Chg{New=[For a call to a subprogram whose body is given as a renaming-as-body,
 the execution of the renaming-as-body is equivalent to the execution of a
 @nt{subprogram_body} that simply calls the renamed subprogram with its formal
@@ -1861,14 +1880,14 @@ predefined subprogram before later overriding it.
 @end{RunTime}
 
 @begin{Bounded}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027],ARef=[AI95-00135-01]}
 @Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 If a subprogram directly or indirectly renames itself, then it is a bounded
 error to call that subprogram. Possible consequences are that Program_Error or
 Storage_Error is raised, or that the call results in infinite recursion.],Old=[]}
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027],ARef=[AI95-00135-01]}
 @Chg{New=[This has to be a bounded error, as it is possible for a
 renames-as-body appearing in a package body to cause this problem. Thus it is
 not possible in general to detect this problem at compile time.],Old=[]}
@@ -1953,6 +1972,24 @@ We'll live with the oddity.
 @key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@RI{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 @end{Examples}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+@b<Corrigendum:> Allowed a renames-as-body to be just
+mode conformant with the specification if the subprogram is not yet frozen.],Old=[]}
+@end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0014],ARef=[AI95-00064-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Described the semantics of
+renames-as-body, so that the location of elaboration checks is clear.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0027],ARef=[AI95-00135-01]}
+@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that circular renames-as-body
+is illegal (if it can be detected in time) or a bounded error.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Generic Renaming Declarations}
 
