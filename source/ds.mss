@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2000/09/01 03:51:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2000/09/09 01:16:21 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/09/01 03:51:23 $}
+@Comment{$Date: 2000/09/09 01:16:21 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -568,16 +568,17 @@ The primitive subprograms of the corresponding specific limited private type
 shall only have access parameters if they are controlling formal parameters;
 @Chg{New=[each non-controlling formal parameter shall have either a nonlimited
 type or a type with],Old=[the types of all the non-controlling formal
-parameters shall have]} Read and Write attributes@Chg{New=[specified via an
+parameters shall have]} Read and Write attributes@Chg{New=[ specified via an
 @nt{attribute_definition_clause};],Old=[.]}
 
 A value of a remote access-to-class-wide type shall be
 explicitly converted only to another remote access-to-class-wide type;
 
+@ChgRef{Version=[1],Kind=[Revised]}
 A value of a remote access-to-class-wide type shall be dereferenced
 (or implicitly converted to an anonymous access type)
 only as part of a dispatching call where the value designates
-a controlling operand of the call (see @RefSec{Remote Subprogram Calls});
+a controlling operand of the call (see @RefSec{Remote Subprogram Calls})@Chg{New=[.],Old=[;]}
 
 The Storage_Pool and
 Storage_Size attributes are not defined for
@@ -1146,7 +1147,6 @@ unless a pragma Asynchronous is applied to the procedure.
 It calls Do_RPC unless a pragma Asynchronous is applied to the procedure
 in which case it calls Do_APC. An access value designating the message
 stream allocated and initialized above is passed as the Params parameter.
-
 An access value designating the Result stream is passed as the Result
 parameter.
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2000/08/31 04:56:09 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2000/09/09 01:16:21 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:09 $}
+@Comment{$Date: 2000/09/09 01:16:21 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2400,7 +2400,7 @@ and Character_Kind_@i{n}.
 @begin[discussion]
 Implementations may add auxiliary declarations as needed to assist in the
 declarations of additional Fortran-compatible types. For example, if a double
-precision complex type is defined, then Numerics.Generic_Complex_Types may be
+precision complex type is defined, then Numerics.@!Generic_@!Complex_@!Types may be
 instantiated for the double precision type. Similarly, if a wide character
 type is defined to match a Fortran 90 wide character type (accessible in
 Fortran 90 with the Kind modifier), then an auxiliary character set may be
