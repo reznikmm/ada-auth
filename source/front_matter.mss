@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.17 $ $Date: 2000/05/29 21:33:47 $}
+@comment{$Revision: 1.18 $ $Date: 2000/06/03 02:02:34 $}
 
 @begin{Intro}
 
@@ -105,8 +105,8 @@ Programmers should read this first.
 @Chg{New=[], Old=[Changes to Ada @em 1987 to 1995. This document lists in detail the changes made
 to the 1987 edition of the standard.]}
 
-The Annotated Ada Reference Manual (AARM).
-The AARM contains all of the text in the RM95,
+The Annotated Ada Reference Manual (AARM).@Defn{Annotated Ada Reference Manual}
+@Defn{AARM}The AARM contains all of the text in the RM95,
 plus various annotations.
 It is intended primarily for compiler writers,
 validation test writers,

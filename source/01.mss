@@ -32,10 +32,10 @@ I probably ought to add a style just for this purpose)
 @end{WithoutParanum}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/05/29 21:33:47 $}
+@Comment{$Date: 2000/06/03 02:02:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1108,7 +1108,7 @@ The meaning of Ada programs is described by means of narrative
 rules defining both the effects of each construct and the composition
 rules for constructs.
 
-@Defn2{Term=[syntax], Sec=(notation)}
+@keepnext@;@Defn2{Term=[syntax], Sec=(notation)}
 @Defn2{Term=[grammar], Sec=(notation)}
 @Defn2{Term=[context free grammar], Sec=(notation)}
 @Defn2{Term=[BNF (Backus-Naur Form)], Sec=(notation)}
@@ -1116,26 +1116,26 @@ rules for constructs.
 The context-free syntax of the language is described using a simple variant
 of Backus-Naur Form.  In particular:
 @begin(Itemize)
-Lower case words in a sans-serif font,
+@keepnext@;Lower case words in a sans-serif font,
 some containing embedded underlines, are used to
 denote syntactic categories, for example:
 @begin(Display)
 @nt<case_statement>
 @end(Display)
 
-Boldface words are used to denote reserved words, for example:
+@keepnext@;Boldface words are used to denote reserved words, for example:
 @begin(Display)
 @key(array)
 @end(Display)
 
-Square brackets enclose optional items.  Thus the two following
+@keepnext@;Square brackets enclose optional items.  Thus the two following
 rules are equivalent.
 @begin(Display)
 @nt<return_statement> ::= @key(return) [@nt<expression>];
 @nt<return_statement> ::= @key(return); | @key(return) @nt<expression>;
 @end(Display)
 
-Curly brackets enclose a repeated item.  The item may appear zero
+@keepnext@;Curly brackets enclose a repeated item.  The item may appear zero
 or more times; the repetitions occur from left to right as with an
 equivalent left-recursive rule.  Thus the two following rules are
 equivalent.
@@ -1144,7 +1144,7 @@ equivalent.
 @nt<term> ::= @nt<factor> | @nt<term> @nt<multiplying_operator> @nt<factor>
 @end(Display)
 
-A vertical line separates alternative items unless it occurs
+@keepnext@;A vertical line separates alternative items unless it occurs
 immediately after an opening curly bracket, in which case it stands
 for itself:
 @begin(Display)
@@ -1296,7 +1296,7 @@ The preferred places for other line breaks are after semicolons.
 The language definition classifies errors into several different
 categories:
 @begin(Itemize)
-     Errors that are required to be detected prior to run time by every
+     @Keepnext@;Errors that are required to be detected prior to run time by every
      Ada implementation;
 
      @NoPrefix@;These errors correspond to any violation of a rule given in this
@@ -1325,7 +1325,7 @@ categories:
        compilation rules at compile time when possible.
      @end{Ramification}
 
-     Errors that are required to be detected at run time by the
+     @Keepnext@;Errors that are required to be detected at run time by the
      execution of an Ada program;
 
      @NoPrefix@Defn{run-time error}
@@ -1339,7 +1339,7 @@ categories:
      (although not required) to report this fact at compilation time.]
 
 
-     Bounded errors;
+     @Keepnext@;Bounded errors;
 
      @NoPrefix@;The language rules define certain kinds of errors that need not be
      detected either prior to or during run time, but if not detected,
@@ -1351,7 +1351,7 @@ categories:
      each such error, but in any case one possible effect of a bounded
      error is the raising of the exception Program_Error.
 
-     Erroneous execution.
+     @Keepnext@;Erroneous execution.
 
      @NoPrefix@Defn{erroneous execution}
      In addition to bounded errors, the language rules define certain

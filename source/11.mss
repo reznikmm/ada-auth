@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:20 $}
+@Comment{$Date: 2000/06/03 02:02:34 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -528,27 +528,27 @@ The following language-defined library package exists:
 @key[package] Ada.Exceptions @key[is]
 @LangDefType{Package=[Ada.Exceptions],Type=[Exception_Id]}
     @key[type] Exception_Id @key[is] @key[private];
-    Null_Id : @key[constant] Exception_Id;
-    @key[function] Exception_Name(Id : Exception_Id) @key[return] String;
+    @AdaDefn{Null_Id} : @key[constant] Exception_Id;
+    @key[function] @AdaSubDefn{Exception_Name}(Id : Exception_Id) @key[return] String;
 
 @LangDefType{Package=[Ada.Exceptions],Type=[Exception_Occurrence]}
     @key[type] Exception_Occurrence @key[is] @key[limited] @key[private];
 @LangDefType{Package=[Ada.Exceptions],Type=[Exception_Occurrence_Access]}
     @key[type] Exception_Occurrence_Access @key[is] @key[access] @key[all] Exception_Occurrence;
-    Null_Occurrence : @key[constant] Exception_Occurrence;
+    @AdaDefn{Null_Occurrence} : @key[constant] Exception_Occurrence;
 
-    @key[procedure] Raise_Exception(E : @key[in] Exception_Id; Message : @key[in] String := "");
-    @key[function] Exception_Message(X : Exception_Occurrence) @key[return] String;
-    @key[procedure] Reraise_Occurrence(X : @key[in] Exception_Occurrence);
+    @key[procedure] @AdaSubDefn{Raise_Exception}(E : @key[in] Exception_Id; Message : @key[in] String := "");
+    @key[function] @AdaSubDefn{Exception_Message}(X : Exception_Occurrence) @key[return] String;
+    @key[procedure] @AdaSubDefn{Reraise_Occurrence}(X : @key[in] Exception_Occurrence);
 
-    @key[function] Exception_Identity(X : Exception_Occurrence) @key[return] Exception_Id;
-    @key[function] Exception_Name(X : Exception_Occurrence) @key[return] String;
+    @key[function] @AdaSubDefn{Exception_Identity}(X : Exception_Occurrence) @key[return] Exception_Id;
+    @key[function] @AdaSubDefn{Exception_Name}(X : Exception_Occurrence) @key[return] String;
         --@RI{ Same as Exception_Name(Exception_Identity(X)).}
-    @key[function] Exception_Information(X : Exception_Occurrence) @key[return] String;
+    @key[function] @AdaSubDefn{Exception_Information}(X : Exception_Occurrence) @key[return] String;
 
-    @key[procedure] Save_Occurrence(Target : @key[out] Exception_Occurrence;
+    @key[procedure] @AdaSubDefn{Save_Occurrence}(Target : @key[out] Exception_Occurrence;
                               Source : @key[in] Exception_Occurrence);
-    @key[function] Save_Occurrence(Source : Exception_Occurrence)
+    @key[function] @AdaSubDefn{Save_Occurrence}(Source : Exception_Occurrence)
                              @key[return] Exception_Occurrence_Access;
 @key[private]
    ... --@RI{ @RI{not specified by the language}}

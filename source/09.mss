@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:20 $}
+@Comment{$Date: 2000/06/03 02:02:34 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 
@@ -2387,46 +2387,41 @@ The following language-defined library package exists:
 @LangDefType{Package=[Ada.Calendar],Type=[Time]}
   @key(type) Time @key(is) @key(private;)
 
-  @key(subtype) Year_Number  @key(is) Integer @key(range) 1901 ..  2099;
-  @key(subtype) Month_Number @key(is) Integer @key(range) 1 ..  12;
-  @key(subtype) Day_Number   @key(is) Integer @key(range) 1 ..  31;
-  @key(subtype) Day_Duration @key(is) Duration @key(range) 0.0 ..  86_400.0;
+  @key(subtype) @AdaDefn{Year_Number}  @key(is) Integer @key(range) 1901 ..  2099;
+  @key(subtype) @AdaDefn{Month_Number} @key(is) Integer @key(range) 1 ..  12;
+  @key(subtype) @AdaDefn{Day_Number}   @key(is) Integer @key(range) 1 ..  31;
+  @key(subtype) @AdaDefn{Day_Duration} @key(is) Duration @key(range) 0.0 ..  86_400.0;
 
+  @key(function) @AdaSubDefn{Clock} @key(return) Time;
 
-  @key(function) Clock @key(return) Time;
+  @key(function) @AdaSubDefn{Year}   (Date : Time) @key(return) Year_Number;
+  @key(function) @AdaSubDefn{Month}  (Date : Time) @key(return) Month_Number;
+  @key(function) @AdaSubDefn{Day}    (Date : Time) @key(return) Day_Number;
+  @key(function) @AdaSubDefn{Seconds}(Date : Time) @key(return) Day_Duration;
 
-  @key(function) Year   (Date : Time) @key(return) Year_Number;
-  @key(function) Month  (Date : Time) @key(return) Month_Number;
-  @key(function) Day    (Date : Time) @key(return) Day_Number;
-  @key(function) Seconds(Date : Time) @key(return) Day_Duration;
-
-
-  @key(procedure) Split (Date  : @key(in) Time;
+  @key(procedure) @AdaSubDefn{Split} (Date  : @key(in) Time;
                    Year    : @key(out) Year_Number;
                    Month   : @key(out) Month_Number;
                    Day     : @key(out) Day_Number;
                    Seconds : @key(out) Day_Duration);
 
-
-  @key(function) Time_Of(Year  : Year_Number;
+  @key(function) @AdaSubDefn{Time_Of}(Year  : Year_Number;
                    Month   : Month_Number;
                    Day     : Day_Number;
                    Seconds : Day_Duration := 0.0)
    @key(return) Time;
-
 
   @key(function) "+" (Left : Time;   Right : Duration) @key(return) Time;
   @key(function) "+" (Left : Duration; Right : Time) @key(return) Time;
   @key(function) "-" (Left : Time;   Right : Duration) @key(return) Time;
   @key(function) "-" (Left : Time;   Right : Time) @key(return) Duration;
 
-
   @key(function) "<" (Left, Right : Time) @key(return) Boolean;
   @key(function) "<="(Left, Right : Time) @key(return) Boolean;
   @key(function) ">" (Left, Right : Time) @key(return) Boolean;
   @key(function) ">="(Left, Right : Time) @key(return) Boolean;
 
-  Time_Error : @key(exception;)
+  @AdaDefn{Time_Error} : @key(exception;)
 
 @key(private)
    ... -- @RI{not specified by the language}

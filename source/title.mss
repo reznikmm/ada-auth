@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2000/05/27 04:44:03 $}
+@comment{$Revision: 1.9 $ $Date: 2000/06/03 02:02:34 $}
 
 @begin{WithoutParanum}
 @Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}}}
@@ -61,7 +61,7 @@ probably is changed by now.}
 
 Copyright @Latin1(169) 1992, 1993, 1994, 1995, Intermetrics, Inc.
 
-This copyright is assigned to the U.S. Government.  All rights reversed.
+This copyright is assigned to the U.S. Government.  All rights reserved.
 
 This document may be copied, in whole or in part, in any form or by any means,
 as is or with alterations, provided that (1) alterations are clearly marked as
@@ -71,6 +71,8 @@ copyright notice so long as the notice is included in all copies of source code
 and documentation.
 
 @ThinLine
+
+@ @;@comment{A dummy paragraph containing just a blank}
 
 Alterations copyright @Latin1(169) 2000, The MITRE Corporation.  All Rights Reserved.
 

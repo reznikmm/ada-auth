@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:21 $}
+@Comment{$Date: 2000/06/03 02:02:34 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @redundant[This section describes features for
@@ -2849,49 +2849,35 @@ and its language-defined children.}
 
 @LangDefType{Package=[System],Type=[Name]}
    @key[type] Name @key[is] @RI{implementation-defined-enumeration-type};
-   System_Name : @key[constant] Name := @RI{implementation-defined};
-
+   @AdaDefn{System_Name} : @key[constant] Name := @RI{implementation-defined};
 
 
    --@RI{ System-Dependent Named Numbers:}
 
-   Min_Int               : @key[constant] := @RI{root_integer}'First;
-   Max_Int               : @key[constant] := @RI{root_integer}'Last;
-@Defn2{Term=[Min_Int], Sec=(named number in package System)}
-@Defn2{Term=[Max_Int], Sec=(named number in package System)}
+   @AdaDefn{Min_Int}               : @key[constant] := @RI{root_integer}'First;
+   @AdaDefn{Max_Int}               : @key[constant] := @RI{root_integer}'Last;
 
-   Max_Binary_Modulus    : @key[constant] := @RI{implementation-defined};
-   Max_Nonbinary_Modulus : @key[constant] := @RI{implementation-defined};
-@Defn2{Term=[Max_Binary_Modulus], Sec=(named number in package System)}
-@Defn2{Term=[Max_Nonbinary_Modulus], Sec=(named number in package System)}
+   @AdaDefn{Max_Binary_Modulus}    : @key[constant] := @RI{implementation-defined};
+   @AdaDefn{Max_Nonbinary_Modulus} : @key[constant] := @RI{implementation-defined};
 
-   Max_Base_Digits       : @key[constant] := @RI{root_real}'Digits;
-   Max_Digits            : @key[constant] := @RI{implementation-defined};
-@Defn2{Term=[Max_Base_Digits], Sec=(named number in package System)}
-@Defn2{Term=[Max_Digits], Sec=(named number in package System)}
+   @AdaDefn{Max_Base_Digits}       : @key[constant] := @RI{root_real}'Digits;
+   @AdaDefn{Max_Digits}            : @key[constant] := @RI{implementation-defined};
 
-   Max_Mantissa          : @key[constant] := @RI{implementation-defined};
-   Fine_Delta            : @key[constant] := @RI{implementation-defined};
-@Defn2{Term=[Max_Mantissa], Sec=(named number in package System)}
-@Defn2{Term=[Fine_Delta], Sec=(named number in package System)}
+   @AdaDefn{Max_Mantissa}          : @key[constant] := @RI{implementation-defined};
+   @AdaDefn{Fine_Delta}            : @key[constant] := @RI{implementation-defined};
 
-   Tick                  : @key[constant] := @RI{implementation-defined};
-@Defn2{Term=[Tick], Sec=(named number in package System)}
+   @AdaDefn{Tick}                  : @key[constant] := @RI{implementation-defined};
+
 
    --@RI{ Storage-related Declarations:}
 
    @key[type] Address @key[is] @RI{implementation-defined};
-   Null_Address : @key[constant] Address;
+   @AdaDefn{Null_Address} : @key[constant] Address;
 @LangDefType{Package=[System],Type=[Address]}
-@Defn2{Term=[address], Sec=(null)}
-@Defn2{Term=[Null_Address], Sec=(constant in System)}
 
-   Storage_Unit : @key[constant] := @RI{implementation-defined};
-   Word_Size    : @key[constant] := @RI{implementation-defined} * Storage_Unit;
-   Memory_Size  : @key[constant] := @RI{implementation-defined};
-@Defn2{Term=[Storage_Unit], Sec=(named number in package System)}
-@Defn2{Term=[Word_Size], Sec=(named number in package System)}
-
+   @AdaDefn{Storage_Unit} : @key[constant] := @RI{implementation-defined};
+   @AdaDefn{Word_Size}    : @key[constant] := @RI{implementation-defined} * Storage_Unit;
+   @AdaDefn{Memory_Size}  : @key[constant] := @RI{implementation-defined};
 
    --@RI{ @Defn2{Term=[address], Sec=(comparison)}Address Comparison:}
    @key(function) "<" (Left, Right : Address) @key(return) Boolean;
@@ -2905,19 +2891,18 @@ and its language-defined children.}
    ... --@RI{ and so on for all language-defined subprograms in this package}
 
 
-
    --@RI{ Other System-Dependent Declarations:}
 @LangDefType{Package=[System],Type=[Bit_Order]}
    @key[type] Bit_Order @key[is] (High_Order_First, Low_Order_First);
-   Default_Bit_Order : @key[constant] Bit_Order;
+   @AdaDefn{Default_Bit_Order} : @key[constant] Bit_Order;
 
 
    --@RI{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
-   @key{subtype} Any_Priority @key{is} Integer @key{range} @RI{implementation-defined};
-   @key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @RI{implementation-defined};
-   @key{subtype} Interrupt_Priority @key{is} Any_Priority @key{range} Priority'Last+1 .. Any_Priority'Last;
+   @key{subtype} @AdaDefn{Any_Priority} @key{is} Integer @key{range} @RI{implementation-defined};
+   @key{subtype} @AdaDefn{Priority} @key{is} Any_Priority @key{range} Any_Priority'First .. @RI{implementation-defined};
+   @key{subtype} @AdaDefn{Interrupt_Priority} @key{is} Any_Priority @key{range} Priority'Last+1 .. Any_Priority'Last;
 
-   Default_Priority : @key{constant} Priority := (Priority'First + Priority'Last)/2;
+   @AdaDefn{Default_Priority} : @key{constant} Priority := (Priority'First + Priority'Last)/2;
 
 @key[private]
    ... -- @RI{not specified by the language}

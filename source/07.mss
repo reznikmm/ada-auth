@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:20 $}
+@Comment{$Date: 2000/06/03 02:02:34 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1663,15 +1663,15 @@ The following language-defined library package exists:
 @LangDefType{Package=[Ada.Finalization],Type=[Controlled]}
     @key[type] Controlled @key[is abstract tagged private];
 
-    @key(procedure) Initialize@\(Object : @key(in out) Controlled);
-    @key(procedure) Adjust@\(Object : @key(in out) Controlled);
-    @key(procedure) Finalize@\(Object : @key(in out) Controlled);
+    @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Controlled);
+    @key(procedure) @AdaSubDefn{Adjust}@\(Object : @key(in out) Controlled);
+    @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Controlled);
 
 @LangDefType{Package=[Ada.Finalization],Type=[Limited_Controlled]}
     @key[type] Limited_Controlled @key[is abstract tagged limited private];
 
-    @key(procedure) Initialize@\(Object : @key(in out) Limited_Controlled);
-    @key(procedure) Finalize@\(Object : @key(in out) Limited_Controlled);
+    @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Limited_Controlled);
+    @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Limited_Controlled);
 @key(private)
     ... -- @RI{not specified by the language}
 @key[end] Ada.Finalization;

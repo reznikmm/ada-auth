@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:00 $}
+@Comment{$Date: 2000/06/03 02:02:34 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -729,9 +729,7 @@ executed.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 Otherwise (the value is not covered by any
 @nt{discrete_choice_list},
-
 perhaps due to being outside the base range),
-
 Constraint_Error is raised.
 @begin{Ramification}
 

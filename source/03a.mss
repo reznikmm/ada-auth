@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 21:33:47 $}
+@Comment{$Date: 2000/06/03 02:02:34 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -63,17 +63,17 @@ declaration).>}
 
 @Defn{declaration}
 Each of the following is defined to be a declaration:
-any @nt{basic_declaration};
-an @nt{enumeration_literal_specification};
-a @nt{discriminant_specification};
-a @nt{component_declaration};
-a @nt{loop_parameter_specification};
-a @nt{parameter_specification};
-a @nt{subprogram_body};
-an @nt{entry_declaration};
-an @nt{entry_index_specification};
-a @nt{choice_parameter_specification};
-a @nt{generic_formal_parameter_declaration}.
+any @nt{basic_@|declaration};
+an @nt{enumeration_@|literal_@|specification};
+a @nt{discriminant_@|specification};
+a @nt{component_@|declaration};
+a @nt{loop_@|parameter_@|specification};
+a @nt{parameter_@|specification};
+a @nt{subprogram_@|body};
+an @nt{entry_@|declaration};
+an @nt{entry_@|index_@|specification};
+a @nt{choice_@|parameter_@|specification};
+a @nt{generic_@|formal_@|parameter_@|declaration}.
 @begin(Discussion)
   This list (when @nt<basic_declaration> is expanded out)
   contains all syntactic categories that end in "_declaration"
@@ -145,7 +145,7 @@ as its name (see @RefSecNum(Subprogram Declarations)).
 
 @Defn{defining name}
 The syntax rules use the terms @nt<defining_identifier>,
-@nt<defining_character_literal>, and @nt<defining_operator_symbol>
+@nt<defining_@|character_@|literal>, and @nt<defining_@|operator_@|symbol>
 for the defining occurrence of a name; these are collectively
 called @i(defining names).
 @Defn{usage name}
