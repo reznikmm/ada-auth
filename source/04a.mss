@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/03/11 05:49:17 $}
+@Comment{$Date: 2005/03/24 06:43:08 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2733,9 +2733,41 @@ component type is a boolean type:
 @key[function] "@key(xor)"(Left, Right : @RI(T)) @key[return] @RI(T)
 @end{example}
 @begin{Honest}
-  For predefined operators, the parameter and result subtypes
-  shown as @i(T) are actually the unconstrained subtype of the type.
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00145-01]}
+  @ChgDeleted{Version=[2],Text=[For predefined operators, the parameter
+  and result subtypes shown as @i(T) are actually the unconstrained
+  subtype of the type.]}
+  @ChgNote{Sorry, Bob, but there is no "honesty" issue here.}
 @end{Honest}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00145-01]}
+  @ChgAdded{Version=[2],Text=[For these operators, we are talking about
+  the type itself, and not some subtype of it. Since it's possible that the
+  type itself cannot be named, we denote the type with an italized @i(T).
+  This applies to the italized @i(T) in many other predefined operators and
+  attributes as well.@Defn2{Term=[T],Sec=[italized]}]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00145-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[In many cases, there is a subtype
+  with the correct properties available. The italized @i(T) means:]}
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[@i(T)'Base, for scalars;]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[the first subtype of @i(T), for tagged types;]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[the type @i(T) without any constraint or
+  null exclusion, in other cases.]}
+@end{Itemize}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Note that the last case often is the same as
+  the first subtype of @i(T), but that isn't the case for constrained array
+  types (where the type is unconstrained) and for access types with a null
+  exclusion (where the type does not have a null exclusion).]}
+@end{Ramification}
 
 For boolean types, the predefined logical operators
 @key{and}, @key{or}, and @key{xor}

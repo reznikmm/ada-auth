@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2005/03/22 05:53:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2005/03/24 06:43:11 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/03/22 05:53:19 $}
+@Comment{$Date: 2005/03/24 06:43:11 $}
 
 @LabeledClause{String Handling}
 
@@ -2813,7 +2813,7 @@ Text=[The values returned by Strings.Hash.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The library
-function Strings.Umbounded.Hash has the following declaration:]}
+function Strings.Unbounded.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;

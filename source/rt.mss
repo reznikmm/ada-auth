@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2005/03/22 05:53:18 $ $Author: Randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2005/03/24 06:43:11 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/22 05:53:18 $}
+@Comment{$Date: 2005/03/24 06:43:11 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -329,7 +329,7 @@ Old=[@RefSecNum{Task Execution - Task Activation}]}).@Chg{Version=[2],
 New=[],Old=[ The rules have two parts: the task dispatching model
 (see @RefSecNum{The Task Dispatching Model}),
 and a specific task dispatching policy
-(see @RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching}).]}]
+(see @RefSecNum{Task Dispatching Pragmas}).]}]
 @end{Intro}
 
 @begin{DiffWord95}
@@ -490,7 +490,7 @@ An implementation is allowed to define additional resources as execution
 resources, and to define the corresponding allocation policies for them.
 Such resources may have an implementation defined effect on
 task dispatching@Chg{Version=[2],New=[],
-Old=[ (see @RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching})]}.
+Old=[ (see @RefSecNum{Task Dispatching Pragmas})]}.
 @ImplDef{The affect of implementation defined execution resources on
 task dispatching.}
 
@@ -567,7 +567,7 @@ deferred while the affected task performs a protected action.]}
 
 
 @LabeledRevisedSubClause{Version=[2],
-New=[Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching],
+New=[Task Dispatching Pragmas],
 Old=[The Standard Task Dispatching Policy]}
 
 @begin{Intro}
@@ -995,7 +995,7 @@ regardless of whether the active priority of the task actually changes.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
   @ChgAdded{Version=[2],Text=[This subclause is new; it mainly consists of
   text that was found in @RefSecNum{The Task Dispatching Model} and
-  @RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching} in Ada 95. This was
+  @RefSecNum{Task Dispatching Pragmas} in Ada 95. This was
   separated out so the definition of additional policies was easier.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
@@ -1029,7 +1029,7 @@ Non_Preemptive_FIFO_Within_Priorities is a task dispatching policy.]}
 @ChgAdded{Version=[2],Text=[Non_Preemptive_FIFO_Within_Priorities shall not be
 specified as the @SynI{policy_}@nt{identifier} of @nt{pragma}
 Priority_Specific_Dispatching (see
-@RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching}).]}
+@RefSecNum{Task Dispatching Pragmas}).]}
 
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1368,7 +1368,7 @@ specified for the partition.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[If the EDF_Across_Priorities policy appears in a
 Priority_Specific_Dispatching pragma
-(see @RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching})
+(see @RefSecNum{Task Dispatching Pragmas})
 in a partition, then the
 Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) shall also
 be specified for the partition.]}

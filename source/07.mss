@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/03/18 06:37:18 $}
+@Comment{$Date: 2005/03/24 06:43:09 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1325,20 +1325,26 @@ corresponding full declaration:
   The full declaration shall occur immediately
   within the private part of the same package;
 
-  The deferred and full constants shall have the same type;
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01]}
+  The deferred and full constants shall have the same type@Chg{Version=[2],
+  New=[, or shall have statically matching anonymous access subtypes],Old=[]};
   @begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01]}
   This implies that
   both the deferred declaration and the full declaration
-  have to have a @nt<subtype_indication> rather than an
+  have to have a @nt<subtype_indication>@Chg{Version=[2],New=[ or
+  @nt{access_definition}],Old=[]} rather than an
   @nt<array_type_definition>, because each @nt{array_type_definition}
   would define a new type.
   @end{Ramification}
 
-  If the subtype defined by the @nt<subtype_indication> in
-  the deferred declaration is constrained,
-  then the subtype defined by the @nt<subtype_indication> in
-  the full declaration shall match it statically.
-@Redundant[On the other hand,
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01]}
+  If the @Chg{Version=[2],New=[deferred constant declaration includes
+  a],Old=[subtype defined by the]} @nt<subtype_indication> @Chg{Version=[2],
+  New=[that defines a],Old=[in the deferred declaration is]}
+  constrained@Chg{Version=[2],New=[ subtype],Old=[]}, then the subtype defined
+  by the @nt<subtype_indication> in the full declaration shall match it
+  statically.@Redundant[ On the other hand,
   if the subtype of the deferred constant is unconstrained,
   then the full declaration is still allowed to impose a constraint.
   The constant itself will be constrained, like all constants;]
@@ -1460,6 +1466,13 @@ a subclause of @RefSec{Private Types and Private Extensions}.
 Deferred constant declarations used to have their own syntax, but now
 they are simply a special case of @nt<object_declaration>s.
 @end{DiffWord83}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00385-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Deferred constants were enhanced to allow
+  the use of anonymous access types in them.]}
+@end{Extend95}
 
 
 @LabeledClause{Limited Types}

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/03/18 06:37:20 $}
+@Comment{$Date: 2005/03/24 06:43:10 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1214,9 +1214,21 @@ If the user really meant A.B, they still can say that.]}
 @nt{generic_declaration}, @nt{generic_instantiation}, or
 @nt{package_renaming_declaration}].]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06],ARef=[AI95-00412-06]}
 @ChgAdded{Version=[2],Text=[A @nt{limited_with_clause} shall not appear on a
-@nt{library_unit_body} or @nt{subunit}.]}
+@nt{library_unit_body}, @nt{subunit}, or @nt{library_unit_renaming_declaration}.]}
+
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00412-01]}
+@ChgAdded{Version=[2],Text=[We don't allow a @nt{limited_with_clause} on a
+@nt{library_unit_renaming_declaration} because it would be useless. A
+renaming cannot appear in a @nt{limited_with_clause} (by the rule above), and
+a renaming cannot appear in a @nt{nonlimited_with_clause} (because the name
+would not be within the scope of a @nt{with_clause} denoting the package, see
+@RefSecNum{Package Renaming Declarations}). Nor could it be the parent of
+another unit. That doesn't leave anywhere that the name of such a renaming
+@b<could> appear.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[A
