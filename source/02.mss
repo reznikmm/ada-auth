@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:41 $}
+@Comment{$Date: 2004/12/09 06:13:21 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -91,7 +91,7 @@ name begins @lquotes@;Latin Small Letter@rquotes@;.
 @begin{Honest}
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0001],ARef=[AI95-00124-01]}
 @Comment{The change in clause 1.3 for 8652/0001 handles this problem.}
-@Chg{New=[],Old=[The above rules do not include the ligatures
+@ChgDeleted{Version=[1],Text=[The above rules do not include the ligatures
 @latin1(198) and @latin1(230).
 However, the intent is to include these characters as identifier letters.
 This problem was pointed out by a comment from the Netherlands.]}
@@ -1203,10 +1203,10 @@ informative annex.
 
 @begin{Syntax}
 @begin{Bundle}
-@Leading
 @ChgRef{Version=[1], Kind=[Deleted]}
-@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+@ChgDeleted[Version=[1],Type=[Leading],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
+@Leading
 @Defn{reserved word}
 The following are the @i{reserved words}
 (ignoring upper/lower case distinctions):

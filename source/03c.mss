@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:03 $}
+@Comment{$Date: 2004/12/09 06:13:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -23,17 +23,42 @@ inheritance with extension and run-time polymorphism via
 @end{Intro}
 
 @begin{MetaRules}
-The intended implementation model is for a tag to be represented as a
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+The intended implementation model is for @Chg{Version=[2],New=[the static
+portion of ],Old=[]}a tag to be represented as a
 pointer to a statically allocated and link-time initialized type
 descriptor. The type descriptor contains the address of the code for
 each primitive operation of the type. It probably also contains
 other information, such as might make membership tests convenient and
-efficient.
+efficient.@Chg{Version=[2],New=[ Tags for nested type extensions must also have
+a dynamic part that identifies the particular elaboration of the type.],Old=[]}
 
 The primitive operations of a tagged type are known at its first
 freezing point; the type descriptor is laid out at that point.
 It contains linker symbols for each primitive operation; the linker
 fills in the actual addresses.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Text=[Primitive operations of type extensions that are
+declared at a level deeper than the level of the ultimate ancestor from which
+they are derived can
+be represented by wrappers that use the dynamic part of the tag to call the
+actual primitive operation. The dynamic part would generally be some way to
+represent the static link or display necessary for making a nested call. One
+implementation strategy would be to store that information in the extension
+part of such nested type extensions, and use the dynamic part of the tag to
+point at it. (That way, the @lquotes@;dynamic@rquotes@; part of the tag could
+be static, at the cost of indirect access.)]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Text=[If the tagged type is descended from any interfaces,
+it also will need to include a @lquotes@;subtag@rquotes@; that describes the
+mapping of the primitive operations of the interface to the primitives of
+the type. These subtags could directly reference the primitive operations
+(for faster performance), or simply provide the tag @lquotes@;slot@rquotes@;
+numbers for the primitive operations (for easier derivation). In either case,
+the subtags would be used for calls that dispatch through a class-wide type
+of the interface.]}
 
 Other implementation models are possible.
 
@@ -43,12 +68,14 @@ execute. This is different from some other object-oriented
 languages, such as Smalltalk, where it is possible to get a run-time
 error from a missing method.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 Dispatching calls should be efficient, and should have a bounded
 worst-case execution time. This is important in a language intended
 for real-time applications. In the intended implementation model, a
 dispatching call involves calling indirect through the appropriate
 slot in the dispatch table. No complicated "method lookup" is
-involved.
+involved@Chg{Version=[2],New=[ although a call which is dispatching on
+an interface may require a lookup of the appropriate interface subtag],Old=[]}.
 
 The programmer should have the choice at each call site of a
 dispatching operation whether to do a dispatching call or a
@@ -131,17 +158,24 @@ or in a generic formal part
   is determined at compile time, are also allowed.
   Tagged types may be extended with additional components.>}
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
 If a tagged type is declared other than in a @nt{package_specification},
 it is impossible to add new primitive subprograms for that type,
 although it can inherit primitive subprograms,
 and those can be overridden.
 If the user incorrectly thinks a certain subprogram is primitive when it
 is not, and tries to call it with a dispatching call, an error message
-will be given at the call site.
+will be given at the call site.@Chg{Version=[2],New=[ Similarly, by using
+an @nt{overriding_indicator} (see @RefSecNum{Subprogram Declarations}),
+the user can declare that a subprogram is intended to be overriding, and
+get an error message when they made a mistake. The use of
+@nt{overriding_indicator}s is highly recommended in new code that does not
+need to be compatible with Ada 95.],Old=[]}
 
-Note that the accessibility rules imply that a tagged type declared
-in a library @nt{package_specification} cannot be extended in a
-nested subprogram or task body.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00344-01]}
+@ChgDeleted{Version=[2],Text=[Note that the accessibility rules imply that a
+tagged type declared in a library @nt{package_specification} cannot be
+extended in a nested subprogram or task body.]}
 @end{Ramification}
 
 @Defn{tag of an object}
@@ -161,38 +195,87 @@ using a tag to control which body to execute is called @i(dispatching).]
 @IndexSeeAlso{Term=[type],See=[tag]}
 @IndexSeeAlso{Term=[class],See=[tag]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 The tag of a specific tagged type identifies
-the @nt<full_type_declaration> of the type.
+the @nt<full_type_declaration> of the type@Chg{Version=[2],New=[, and
+for a type extension, is sufficient to uniquely identify the type among
+all descendants of the same ancestor],Old=[]}.
 If a declaration for a tagged type occurs within a
 @nt{generic_package_declaration},
 then the corresponding type declarations in distinct
 instances of the generic package are associated with distinct tags.
-For a tagged type that is local to a generic package body,
+For a tagged type that is local to a generic package body@Chg{Version=[2],
+New=[ and with any ancestors also local to the generic body],Old=[]},
 the language does not specify whether repeated instantiations
 of the generic body result in distinct tags.
 @begin{Reason}
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00344-01]}
+  @ChgDeleted{Version=[2],Text=[This eases generic code sharing.]}
+@end{reason}
 
-  This eases generic code sharing.@end{reason}
 @begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
+  @ChgAdded{Version=[2],Text=[In most cases, a tag need only identify a particular
+    tagged type declaration, and can therefore be a simple link-time-known
+    address. However, for tag checks
+    (see @RefSecNum{Dispatching Operations of Tagged Types}) it is essential
+    that each descendant (that currently exists) of a given type have
+    a unique tag. Hence, for types declared in shared generic bodies
+    where an ancestor comes from outside the generic, or for types
+    declared at a deeper level than an ancestor, the tag needs to be
+    augmented with some kind of dynamic descriptor (which may be a
+    static link, global display, instance descriptor pointer, or combination).
+    This implies that type Tag may need to be two words, the second of which
+    is normally null, but in these identified special cases needs to
+    include a static link or equivalent. Within an object of one of
+    these types with a two-word tag, the two parts of the tag would
+    typically be separated, one part as the first word of the object,
+    the second placed in the first extension part that corresponds to a
+    type declared more nested than its parent or declared in a shared
+    generic body when the parent is declared outside. Alternatively,
+    by using an extra level of indirection, the type Tag could remain
+    a single-word.]}
 
-  The language does not specify whether
-  repeated elaborations of the same @nt<full_type_declaration>
-  correspond to distinct tags. In most cases, we expect
-  that all elaborations will correspond to the same tag,
-  since the tag will frequently be the address (or index) of a statically
-  allocated type descriptor. However, with shared generics, the type
-  descriptor might have to be allocated on a per-instance basis, which in some
-  implementation models implies per-elaboration of the instantiation.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
+  @Chg{Version=[2],New=[For types that are not type extensions (even
+    for ones declared in nested scopes), we do not require that],
+    Old=[The language does not specify whether]}
+    repeated elaborations of the same @nt<full_type_declaration>
+    correspond to distinct tags. @Chg{Version=[2],New=[This was done so that
+    that Ada 2005 implementations of tagged types could maintain representation
+    compatibility with Ada 95 implementations. Only type extensions that were
+    not allowed in Ada 95 require additional information with the tag.],
+    Old=[In most cases, we
+    expect that all elaborations will correspond to the same tag,
+    since the tag will frequently be the address (or index) of a statically
+    allocated type descriptor. However, with shared
+    generics, the type descriptor might have to be allocated on a per-instance
+    basis, which in some implementation models implies per-elaboration of the
+    instantiation.]}
+
 @end{implnote}
 
 @Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @key[is]
-    @key[type] @AdaTypeDefn{Tag} @key[is] @key[private];
+    @Chg{Version=[2],New=[@key[pragma] Preelaborate (Tags);
+    ],Old=[]}@key[type] @AdaTypeDefn{Tag} @key[is] @key[private];
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[    @AdaDefn{No_Tag} : @key[constant] Tag;]}
 
     @key[function] @AdaSubDefn{Expanded_Name}(T : Tag) @key[return] String;
     @key[function] @AdaSubDefn{External_Tag}(T : Tag) @key[return] String;
     @key[function] @AdaSubDefn{Internal_Tag}(External : String) @key[return] Tag;
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
+@ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Descendant_Tag}(External : String; Ancestor : Tag) @key[return] Tag;
+    @key[function] @AdaSubDefn{Is_Descendant_At_Same_Level}(Descendant, Ancestor : Tag)
+        @key[return] Boolean;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Parent_Tag} (T : Tag) @key[return] Tag;]}
 
     @AdaDefn{Tag_Error} : @key[exception];
 
@@ -213,6 +296,14 @@ because a membership test can be used.
 However, comparing the tags of two objects
 cannot be done via membership.
 This is one reason to allow equality for type Tag.
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[No_Tag is the default initial value of type Tag.]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[This is similar to the requirement that all
+access values be initialized to @key[null].]}
 @end{Reason}
 
 The function Expanded_Name returns the full expanded name of the
@@ -241,10 +332,72 @@ The attribute is needed so that it can be specifiable
 via an @nt{attribute_definition_clause}.
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01]}
 The function Internal_Tag returns the tag that corresponds
 to the given external tag, or raises Tag_Error if the given string
 is not the external tag for any specific
-type of the partition.
+type of the partition.@Chg{Version=[2],New=[ Tag_Error is also raised
+if the specific type identified is a library-level type whose tag
+has not yet been created.],Old=[]}
+
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
+@ChgAdded{Version=[2],Text=[The check for uncreated library-level types
+prevents a reference to the type before it reaches the freezing point of
+the type. This is important so that T'Class'Input or an instance of
+Tags.Generic_Dispatching_Constructor do not try to create an object of a type
+that hasn't been frozen (which may not have yet elaborated its constraints).]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
+@ChgAdded{Version=[2],Text=[The function Descendant_Tag returns the (internal)
+tag for the type that corresponds to the given external tag and is both a
+descendant of the type identified by the Ancestor tag and has the same
+accessibility level as the identified ancestor. Tag_Error is raised if External
+is not the external tag for such a type. Tag_Error is also raised if the
+specific type identified is a library-level type whose tag has not yet been
+created.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Descendant_Tag is used by T'Class'Input to
+    identify the type identified by an external tag. Because there can be
+    multiple elaborations of a given type declaration, Internal_Tag does not
+    have enough information to choose a unique such type. Descendant_Tag does
+    not return the tag for types declared at deeper accessibility levels than
+    the ancestor because there could be ambiguity in the presence of
+    recursion or multiple tasks. Descendant_Tag can
+    be used in constructing a user-defined replacement for T'Class'Input.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
+@ChgAdded{Version=[2],Text=[The function Is_Descendant_At_Same_Level returns
+True if Descendant tag identifies a type that is both a descendant of the type
+identified by Ancestor and at the same accessibility level. If not, it returns
+False.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Is_Descendant_At_Same_Level is used
+    by T'Class'Output to determine whether the item being written is at
+    the same accessibility level as T. It may be used to determine prior to
+    using T'Class'Output whether Tag_Error will be raised, and also can
+    be used in constructing a user-defined replacement for T'Class'Output.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[The function Parent_Tag returns the tag of the
+parent type of the type whose tag is T. If the type does not have a parent type
+(that is, it was not declared by a derived_type_declaration), then No_Tag is
+returned.]}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The parent type is always the parent of the full
+type; a private extension appears to define a parent type, but it does not
+(only the various forms of derivation do that). As this is a run-time
+operation, ignoring privateness is OK.]}
+@end{Ramification}
 
 For @PrefixType{every subtype S of a tagged type @i(T)
 (specific or class-wide)}, the following attributes are
@@ -311,6 +464,51 @@ the following attribute is defined:
   @end(Reason)
 @end(description)
 @EndPrefixType{}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following language-defined
+generic functions exist:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Tags],Child=[Generic_Dispatching_Constructor]}@key{generic}
+    @key{type} T (<>) @key{is abstract tagged private};
+    @key{type} Parameters (<>) @key{is limited private};
+    @key{with function} Constructor (Params : @key{access} Parameters)
+        @key{return} T @key{is abstract};
+@key{function} Ada.Tags.Generic_Dispatching_Constructor
+   (The_Tag : Tag;
+    Params : @key{access} Parameters) @key{return} T'Class;
+@key{pragma} Preelaborate (Generic_Dispatching_Constructor);
+@key{pragma} Convention (Intrinsic, Generic_Dispatching_Constructor);]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Tags],Child=[Generic_Limited_Dispatching_Constructor]}@key{generic}
+    @key{type} T (<>) @key{is abstract tagged limited private};
+    @key{type} Parameters (<>) @key{is limited private};
+    @key{with function} Constructor (Params : @key{access} Parameters)
+        @key{return} T @key{is abstract};
+@key{function} Ada.Tags.Generic_Limited_Dispatching_Constructor
+   (The_Tag : Tag;
+    Params : @key{access} Parameters) @key{return} T'Class;
+@key{pragma} Preelaborate (Generic_Limited_Dispatching_Constructor);
+@key{pragma} Convention (Intrinsic, Generic_Limited_Dispatching_Constructor);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[Tags.Generic_Dispatching_Constructor and
+Tags.Generic_Limited_Dispatching_Constructor provide a mechanism to create an
+object of an appropriate type from just a tag value. The function Constructor
+is expected to create the object given a reference to an object of type
+Parameters.]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This specification is designed to make it easy to
+create dispatching constructors for streams; in particular, this can be used to
+construct overridings for T'Class'Input.]}
+@end{Discussion}
+
 @end{StaticSem}
 
 @begin{RunTime}
@@ -352,8 +550,13 @@ is that of its initialization expression.
 The tag of the result returned by a function whose
 result type is a specific tagged type @i(T) identifies @i(T).
 @begin{ImplNote}
-  This requires a run-time check for limited tagged types,
-  since they are returned "by-reference."  For a nonlimited
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+  @Chg{Version=[2],New=[For a limited tagged type, the return object is
+  @lquotes@;built in place@rquotes in the ultimate result object with the
+  appropriate tag.], Old=[This requires
+  a run-time check for limited tagged types, since they are
+  returned "by-reference."]}
+  For a nonlimited
   type, a new anonymous object with the appropriate tag
   is created as part of the function
   return, and then assigned the value of the
@@ -373,26 +576,75 @@ The tag is preserved by type conversion and by parameter passing.
 The tag of a value is the tag of the associated object
 (see @RefSecNum{Formal Parameter Modes}).
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02],ARef=[AI95-00344-01]}
+@ChgAdded{Version=[2],Text=[Tag_Error is raised by a call of Descendant_Tag,
+Expanded_Name, External_Tag, Is_Descendant_At_Same_Level, or Parent_Tag if any
+tag passed is No_Tag.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[An instance of Tags.Generic_Dispatching_Constructor
+or Tags.Generic_Limited_Dispatching_Constructor raises Tag_Error if The_Tag
+does not represent a concrete descendant of T. Otherwise, it dispatches to the
+primitive function denoted by the formal Constructor for the type identified by
+the tag The_Tag, passing Params, and returns the result. Any exception raised
+by the function is propagated.]}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The tag check checks both that The_Tag is in
+T'Class, and that it is not abstract. These checks are similar to the ones
+required by streams for T'Class'Input
+(see @RefSecNum{Stream-Oriented Attributes}).]}
+@end{Ramification}
+
 @end{RunTime}
 
+@begin{Erron}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+If the internal tag provided to an instance of
+Tags.Generic_Dispatching_Constructor or
+Tags.Generic_Limited_Dispatching_Constructor identifies a specific type whose
+tag has not been elaborated, or does not exist in the partition at the time of
+the call, execution is erroneous.]}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[For a library-level type, this shouldn't be
+possible presuming that the tag value came from the current execution
+of the partition. T'Tag freezes the type (and thus creates the tag), and
+Internal_Tag and Descendant_Tag
+cannot return the tag of a library-level type that has not been created.
+Finally, library-level types never cease to exist. Thus, if the tag comes from
+a library-level type, there cannot be erroneous execution (the use of
+Descendant_Tag rather than Internal_Tag can help insure that the tag is
+of a library-level type). This is also similar to the rules for T'Class'Input
+(see @RefSecNum{Stream-Oriented Attributes}).]}
+@end{Ramification}
+@end{Erron}
+
 @begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01]}
 The implementation of the functions in
 Ada.Tags may raise Tag_Error if no specific type
-corresponding to the tag passed as a parameter
-exists in the partition at the time the function is called.
+corresponding to the tag@Chg{Version=[2],New=[ or external tag],Old=[]} passed
+as a parameter exists in the partition at the time the function is called.
 @begin{Reason}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-01],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
 In most implementations,
-repeated elaborations of the same @nt{type_declaration}
-will all produce the same tag.
+repeated elaborations of the same@Chg{Version=[2],New=[ non-extension],Old=[]}
+@nt{type_declaration} will all produce the same tag.
 In such an implementation, Tag_Error will be raised in cases where the
-internal or external tag was passed from a different partition.
+internal or external tag was passed from a different partition@Chg{Version=[2],
+New=[, or when a library-level type hasn't yet been created],Old=[]}.
 However, some implementations might create a new tag value at run time
-for each elaboration of a @nt{type_declaration}.
-In that case, Tag_Error could also be raised if the created type no
+for each elaboration of a @nt{type_declaration}.@Chg{Version=[2],New=[ (This is
+required if the type is derived from a type at a shallower level.)],Old=[]}
+In that case, Tag_Error could also be raised if the created type
 longer exists because the subprogram containing it has returned,
 for example.
-We don't require the latter behavior; hence the word @lquotes@;may@rquotes@; in this
-rule.
+We don't require the latter behavior@Chg{Version=[2],New=[ for non-library-level
+types],Old=[]}; hence the word @lquotes@;may@rquotes@; in this rule.
 @end{Reason}
 @end{ImplPerm}
 
@@ -421,6 +673,11 @@ for incomplete types whose full type is tagged, but only within
 the library unit in which the incomplete type is declared
 (see @RefSecNum(Incomplete Type Declarations)).
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[The capability provided by
+Tags.Generic_Dispatching_Constructor and
+Tags.Generic_Limited_Dispatching_Constructor is sometimes known as a
+@i<factory>.@Defn{factory}@Defn{class factory}]}
 @end{Notes}
 
 @begin{Examples}
@@ -441,6 +698,45 @@ the library unit in which the incomplete type is declared
 Tagged types are a new concept.
 @end{Extend83}
 
+@begin{Inconsistent95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  Added wording specifying that Internal_Tag
+  must raise Tag_Error if the tag of a library-level type has not yet been
+  created. Ada 95 gave an Implementation Permission to do this; we require
+  it to avoid erroneous execution when streaming in an object of a
+  library-level type that has not yet been elaborated. This technically
+  inconsistent; a program that used Internal_Tag outside of streaming and
+  used a compiler that didn't take advantage of the Implementation Permission
+  would not have raised Tag_Error, and may have returned a useful tag. (If
+  the tag was used in streaming, the program would have been erroneous.)
+  Since such a program would not have been portable to a compiler that did
+  take advantage of the Implementation Permission, this is not a significant
+  inconsistency.]}
+@end{Inconsistent95}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Constant No_Tag, and functions Parent_Tag, Descendant_Tag, and
+  Is_Descendant_At_Same_Level are newly added to Ada.Tags.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[Ada.Tags is now defined to be preelaborated.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+  @ChgAdded{Version=[2],Text=[
+  Generic functions Tags.Generic_Dispatching_Constructor and
+  Tags.Generic_Limited_Dispatching_Constructor are new.]}
+@end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to define that tags for all
+  descendants of a tagged type must be distinct. This is needed to insure
+  that more nested type extensions will work properly. The wording does not
+  require implementation changes for types that were allowed in Ada 95.]}
+@end{DiffWord95}
 
 @LabeledSubClause{Type Extensions}
 
@@ -503,12 +799,12 @@ and for a generic formal private extension,
 the actual is all that matters.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[Synchronized tagged types cannot be extended. We have
+@ChgAdded{Version=[2],Text=[Synchronized tagged types cannot be extended. We have
 this limitation so that all of the data of a task or protected type is
 defined within the type. Data defined outside of the type wouldn't be
 subject to the mutual exclusion properties of a protected type, and couldn't
 be used by a task, and thus doesn't seem to be worth the potential impact
-on implementations.],Old=[]}
+on implementations.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
@@ -524,10 +820,10 @@ This paragraph ensures that a dispatching call will never
 attempt to execute an inaccessible subprogram body.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
-@Chg{Version=[2],New=[The convoluted wording (@ldquote@;formal type declared
+@ChgAdded{Version=[2],Text=[The convoluted wording (@ldquote@;formal type declared
 within the formal part@rdquote@;) is necessary to include tagged types that
 are formal parameters of formal packages of the generic unit, as well as
-formal tagged and tagged formal derived types of the generic unit.],Old=[]}
+formal tagged and tagged formal derived types of the generic unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 @ChgNote{This rule is only about generic bodies (and always was only
@@ -605,27 +901,27 @@ Unfortunately, that doesn't solve the part of the problem having to do
 with abstract types.
 
 @ChgRef{Version=[2],Kind=[Deleted]}
-@Chg{Version=[2],New=[],Old=[Children of
+@ChgDeleted{Version=[2],Text=[Children of
 generic units obviate the need for extension in the body somewhat.]}
 @end{Reason}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00344]}
-@Chg{Version=[2],New=[This rule applies to types with ancestors (directly
+@ChgAdded{Version=[2],Text=[This rule applies to types with ancestors (directly
 or indirectly) of formal interfaces
 (see @RefSecNum{Formal Interface Types}), formal tagged private types
 (see @RefSecNum{Formal Private and Derived Types}), and
 formal derived private types whose ancestor type is tagged
-(see @RefSecNum{Formal Private and Derived Types}).],Old=[]}
+(see @RefSecNum{Formal Private and Derived Types}).]}
 @end{Ramification}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00391-01]}
-@Chg{Version=[2],New=[@defn{null extension}
+@ChgAdded{Version=[2],Text=[@defn{null extension}
 A record extension is a @i{null extension} if its declaration
 has no @nt{known_discriminant_part} and its @nt{record_extension_part}
-includes no @nt{component_declaration}s.],Old=[]}
+includes no @nt{component_declaration}s.]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -797,7 +1093,7 @@ may depend on operands or result context.
 @Defn{dispatching operation}
 A @i{call on a dispatching operation} is a call whose @nt<name> or
 @nt<prefix> denotes the declaration of@Chg{Version=[2],New=[],
-Old=[ a primitive subprogram of a tagged type that is,]} a dispatching
+Old=[ a primitive subprogram of a tagged type, that is,]} a dispatching
 operation.
 @Defn{controlling operand}
 A @i{controlling operand} in a call on a dispatching operation of a tagged
@@ -874,8 +1170,8 @@ Old=[of the actual parameter]} is specific or class-wide, respectively.
   operand is. A designated object is never tag indeterminate.
 
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010],ARef=[AI95-00127-01]}
-  @Chg{New=[Allocators and access attributes of class-wide types can be used as
-  the controlling parameters of dispatching calls.],Old=[]}
+  @ChgAdded{Version=[1],Text=[Allocators and access attributes of class-wide types can be used as
+  the controlling parameters of dispatching calls.]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -965,11 +1261,11 @@ or more distinct tagged types.
 @end{reason}
 @begin{ramification}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0098],ARef=[AI95-00183]}
-  @Chg{New=[This restriction applies even if the partial view (see
+  @ChgAdded{Version=[1],Text=[This restriction applies even if the partial view (see
   @RefSecNum{Private Types and Private Extensions}) of one or both
   of the types is untagged. This follows from the definition of dispatching
   operation: the operation is a dispatching operation anywhere the full
-  views of the (tagged) types are visible.],Old=[]}
+  views of the (tagged) types are visible.]}
 @end{ramification}
 
 The explicit declaration of a primitive subprogram of a
@@ -984,7 +1280,7 @@ nor after a body.]
 appearently 6.0 is different.
 @begin{Discussion}
     @ChgRef{Version=[1],Kind=[Deleted]}
-    @Chg{New=[],Old=[Old @b{Change}.]}
+    @ChgDeleted{Version=[1],Text=[Old @b{Change}.]}
 @end{Discussion}}
 @begin{Reason}
 This rule is needed
@@ -1083,14 +1379,14 @@ tag-indeterminate, then:
 
     @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00239-01]}
-    @Chg{Version=[2],New=[For code that a user can write explicitly, the only
+    @ChgAdded{Version=[2],Text=[For code that a user can write explicitly, the only
     contexts that can control dispatching of a function with a controlling
     result of type T are those that involve controlling operands of the same
     type T: if the two types differ there is an illegality and the dynamic
-    semantics are irrelevant.],Old=[]}
+    semantics are irrelevant.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[In the case of an inherited subprogram however, if a
+    @ChgAdded{Version=[2],Text=[In the case of an inherited subprogram however, if a
     default expression is a function call, it may be of type T while the
     parameter is of a type derived from T. To cover this case, we talk about "a
     descendant of T" above. This is safe, because if the type of the parameter
@@ -1098,14 +1394,14 @@ tag-indeterminate, then:
     inherit or override the function, and this ensures that there will be an
     appropriate body to dispatch to. Note that abstract functions are not an
     issue here because the call to the function is a dispatching call, so it is
-    guaranteed to always land on a concrete body.],Old=[]}
+    guaranteed to always land on a concrete body.]}
     @end{Discussion}
 
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00196-01]}
-    @Chg{Version=[2],New=[If the call has a controlling result and is the
+    @ChgAdded{Version=[2],Text=[If the call has a controlling result and is the
     (possibly parenthesized or qualified) expression of an
     @nt{assignment_statement} whose target is of a class-wide type, then its
-    controlling tag value is determined by the target;],Old=[]}
+    controlling tag value is determined by the target;]}
 
     @PDefn{statically determined tag}
     Otherwise, the controlling tag value is statically determined to be
@@ -1363,7 +1659,7 @@ which is illegal.
 The two lines marked "--@i{ Illegal!}" are illegal when taken together.
 @end{Ramification}
 @begin{Reason}
-@Leading@;@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-02]}
+@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00310-02]}
   We considered disallowing untagged types from having abstract
   primitive subprograms.
   However, we rejected that plan, because it introduced some silly
@@ -1390,15 +1686,15 @@ Other rules could be formulated to solve this problem,
 but the current ones seem like the simplest.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-02]}
-@Chg{Version=[2],New=[In Ada 2005, abstract primitive subprograms of an
-untagged type may be used to @lquotes@;undefine@rquotes@; an operation.],Old=[]}
+@ChgAdded{Version=[2],Text=[In Ada 2005, abstract primitive subprograms of
+an untagged type may be used to @lquotes@;undefine@rquotes@; an operation.]}
 @end{Reason}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
-@Chg{Version=[2],New=[Note that the second sentence does not apply to
+@ChgAdded{Version=[2],Text=[Note that the second sentence does not apply to
 abstract formal subprograms, as they are never primitive operations of
-a type.],Old=[]}
+a type.]}
 @end{Ramification}
 
 @Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00334-01],ARef=[AI95-00391-01]}
@@ -1536,10 +1832,11 @@ not be abstract.
 @end{Discussion}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00294-01]}
-  @Chg{Version=[2],New=[@Leading@;In the sentence about primitive subprograms
-  above, there is some ambiguity as to what is meant by "corresponding" in the
+  @ChgAdded{Version=[2],Type=[Leading],Text=[In the sentence about primitive
+  subprograms above, there is some ambiguity as to what is meant by
+  @lquotes@;corresponding@rquotes@; in the
   case where an inherited operation is overridden.  This is best explained by
-  an example, where the implicit declarations are shown as comments:],Old=[]}
+  an example, where the implicit declarations are shown as comments:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{package} P1 @key{is}
@@ -1785,7 +2082,7 @@ synchronized interfaces.],Old=[]}
 @Chg{Version=[2],New=[@Redundant[An interface type has no components.]],Old=[]}
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-   @Chg{Version=[2],New=[This follows from the syntax.],Old=[]}
+   @ChgAdded{Version=[2],Text=[This follows from the syntax.]}
 @end{TheProof}
 
 @end{StaticSem}
@@ -1808,7 +2105,7 @@ protected interface. A descendant of a synchronized interface shall be a task
 type, a protected type, or a synchronized interface.],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-   @Chg{Version=[2],New=[We require that a descendant of a task, protected, or
+   @ChgAdded{Version=[2],Text=[We require that a descendant of a task, protected, or
    synchronized interface repeat the explicit kind of interface it will be,
    rather than simply inheriting it, so that a reader is always aware of
    whether the interface provides synchronization and whether it may be
@@ -1818,7 +2115,7 @@ type, a protected type, or a synchronized interface.],Old=[]}
    that is low because you cannot implement an interface properly if you don't
    know whether it is a task, protected, or synchronized interface. Hence, we
    require the kind of the actual interface to match the kind of the formal
-   interface (see @RefSecNum{Formal Interface Types}).],Old=[]}
+   interface (see @RefSecNum{Formal Interface Types}).]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
@@ -1827,7 +2124,7 @@ and only if the corresponding partial view (if any) is also a descendant of the
 interface type.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[@Leading@;Consider the following example:],Old=[]}
+  @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[Consider the following example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{package} P @key{is}
@@ -1882,8 +2179,8 @@ interface type.],Old=[]}
 primitive subprogram shall not be declared in the private part.],Old=[]}
   @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[A dispatching call to a primitive of an interface type
-   will execute the body of a corresponding routine associated with the
+  @ChgAdded{Version=[2],Text=[A dispatching call to a primitive of an interface
+   type will execute the body of a corresponding routine associated with the
    specific type of the controlling operand. Without this restriction, it is
    possible that the specific type might provide no such routine. It would be
    OK to follow the example of the rules in @RefSecNum{Abstract Types and Subprograms}
@@ -1891,7 +2188,7 @@ primitive subprogram shall not be declared in the private part.],Old=[]}
    @lquotes@;is overriding an abstract subprogram implicitly declared in the
    visible part@rquotes, but this doesn't seem to be worth the bother because
    this could only be used to override an abstract procedure with a
-   null procedure.],Old=[]}
+   null procedure.]}
   @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
@@ -2081,7 +2378,7 @@ either by the designated subtype, or by its initial value.]]}
 @end{Example}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
-  @Chg{Version=[2],New=[],Old=[The rule about objects with discriminants is
+  @ChgDeleted{Version=[2],Text=[The rule about objects with discriminants is
   necessary because values of a constrained access subtype
   can designate an object whose nominal subtype is unconstrained;
   without this rule, a check on every use of such values would
@@ -2254,7 +2551,7 @@ for how to override this default.]
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00344-01]}
   @ChgNote{This is not remotely true with nested extensions and with
   interfaces. I don't much feel like trying to explain this properly.}
-  @Chg{Version=[2],New=[],Old=[Essentially the same implementation issues
+  @ChgDeleted{Version=[2],Text=[Essentially the same implementation issues
   arise for calls on dispatching operations of tagged types, except that
   the static link is always known "statically."]}
 
@@ -2297,11 +2594,11 @@ specification of an access discriminant
 parameter (see @RefSecNum(Subprogram Declarations)).]]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-   @Chg{Version=[2],New=[An @nt{access_definition} used in a controlling
+   @ChgAdded{Version=[2],Text=[An @nt{access_definition} used in a controlling
    parameter is null-excluding because it is necessary to read the tag to
    dispatch, and null has no tag. We would have preferred to
    require @key{not null} to be specified for such
-   parameters, but that would have been too incompatible with Ada 95.],Old=[]}
+   parameters, but that would have been too incompatible with Ada 95.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
@@ -2322,13 +2619,13 @@ returns an access value designating a newly created object
 (see @RefSecNum(Operations of Access Types))].
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[],Old=[A value of an anonymous access type
+@ChgDeleted{Version=[2],Text=[A value of an anonymous access type
 (that is, the value of an access parameter or access discriminant)
 cannot be null.]}
 @end{ramification}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[],Old=[Access parameters allow dispatching on the
+@ChgDeleted{Version=[2],Text=[Access parameters allow dispatching on the
 tag of the object designated
 by the actual parameter (which gets converted to the anonymous access
 type as part of the call).
@@ -2385,13 +2682,13 @@ null value.],Old=[]}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[A @nt{null_exclusion} is only allowed in a
+@ChgAdded{Version=[2],Text=[A @nt{null_exclusion} is only allowed in a
 @nt{subtype_indication} whose @nt{subtype_mark} denotes an access subtype that
-includes a null value.],Old=[]}
+includes a null value.]}
 @begin(Reason)
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
-  @Chg{Version=[2],New=[This is similar to doubly constraining a subtype,
-  which we don't allow either.],Old=[]}
+  @ChgAdded{Version=[2],Text=[This is similar to doubly constraining a subtype,
+  which we don't allow either.]}
 @end(Reason)
 @end{Legality}
 
@@ -2647,7 +2944,7 @@ denotes an @Chg{Version=[2],New=[incomplete view of a type may be used],
 Old=[@nt{incomplete_type_declaration} are]} as follows:
 @begin(Discussion)
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}
-  @Chg{Version=[2],New=[],Old=[No need to say "prior to the end of the
+  @ChgDeleted{Version=[2],Text=[No need to say "prior to the end of the
   @nt{full_type_declaration}" since the name would not denote the
   @nt{incomplete_type_declaration} after the end of the
   @nt{full_type_declaration}. Also, with child library units, it would not be
@@ -2668,11 +2965,11 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
   @end(ImplNote)
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}@ChgNote{Really moved}
-  @Chg{Version=[2],New=[],Old=[as the @nt{subtype_mark} defining the subtype
+  @ChgDeleted{Version=[2],Text=[as the @nt{subtype_mark} defining the subtype
   of a parameter or result of an @nt{access_to_@!subprogram_definition};]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}@ChgNote{Really moved}
-    @Chg{Version=[2],New=[],Old=[This allows, for example, a record to have a
+    @ChgDeleted{Version=[2],Text=[This allows, for example, a record to have a
     component designating a subprogram that takes that same record
     type as a parameter.]}
   @end{Reason}
@@ -2682,8 +2979,8 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[@leading@keepnext@;If such a name denotes a tagged
-incomplete view, it may also be used:],Old=[]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[If such a name denotes a
+tagged incomplete view, it may also be used:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
@@ -2703,42 +3000,42 @@ incomplete view, it may also be used:],Old=[]}
   the @nt<incomplete_@!type_@!declaration>]}.
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}
-    @Chg{Version=[2],New=[],Old=[This is to prevent
+    @ChgDeleted{Version=[2],Text=[This is to prevent
     children from imposing requirements on their ancestor library
     units for deferred incomplete types.]}
   @end{reason}
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[@Leading@;If such a name occurs within the list of
-declarative_items containing the completion of the incomplete view, it may
-also be used:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If such a name occurs within the
+list of @nt{declarative_item}s containing the completion of the
+incomplete view, it may also be used:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}@ChgNote{Really moved}
-@Chg{Version=[2],New=[as the @nt{subtype_mark} defining the subtype of a
-parameter or result of an @nt{access_to_subprogram_definition}.],Old=[]}
+@ChgAdded{Version=[2],Text=[as the @nt{subtype_mark} defining the subtype of a
+parameter or result of an @nt{access_to_subprogram_definition}.]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Added]}
-    @Chg{Version=[2],New=[This allows, for example, a record to have a
+    @ChgAdded{Version=[2],Text=[This allows, for example, a record to have a
     component designating a subprogram that takes that same record
-    type as a parameter.],Old=[]}
+    type as a parameter.]}
   @end{Reason}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[If any of the above uses occurs as part of the
+@ChgAdded{Version=[2],Text=[If any of the above uses occurs as part of the
 declaration of a primitive subprogram of the incomplete view, and the
 declaration occurs immediately within the private part of a package, then
 the completion of the incomplete view shall also occur immediately within
-the private part; it may not be deferred to the package body.],Old=[]}
+the private part; it may not be deferred to the package body.]}
   @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[This fixes a hole in Ada 95 where a dispatching operation
-  with an access parameter could be declared in a private part and a dispatching
-  call on it could occur in a child even though there is no visibility on the
-  full type, requiring access to the controlling tag without access to the
-  representation of the type.],Old=[]}
+  @ChgAdded{Version=[2],Text=[This fixes a hole in Ada 95 where a dispatching
+  operation with an access parameter could be declared in a private part
+  and a dispatching call on it could occur in a child even though there is
+  no visibility on the full type, requiring access to the controlling tag
+  without access to the representation of the type.],Old=[]}
   @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
@@ -2747,7 +3044,7 @@ Old=[A dereference (whether implicit or explicit @em see @RefSecNum(Names))]}
 shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.
   @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[We used to disallow all dereferences of an incomplete
+  @ChgAdded{Version=[2],Text=[We used to disallow all dereferences of an incomplete
   type. Now we only disallow such dereferences when used as a @nt{prefix}.
   Dereferences used in other contexts do not pose a problem since normal type
   matching will preclude their use except when the full type is @lquotes@;nearby@rquotes@;
@@ -2775,9 +3072,9 @@ the incomplete type.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[@Leading@;Given an access type @i{A} whose designated
+@ChgAdded{Version=[2],Type=[Leading],Text=[Given an access type @i{A} whose designated
 type @i{T} is an incomplete view, a dereference of a value of type @i{A} also
-has this incomplete view except when:],Old=[]}
+has this incomplete view except when:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[it occurs in the immediate scope of the completion
@@ -2793,9 +3090,9 @@ is declared.],Old=[]}
 @Chg{Version=[2],New=[In these cases, the dereference has the full view of @i{T}.],Old=[]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[@Leading@;We need the @lquotes@;in whose visible
-  part@rquotes@; rule so that the second rule doesn't trigger in the body
-  of a package with a @key{with} of a child unit:],Old=[]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[We need the @lquotes@;in
+  whose visible part@rquotes@; rule so that the second rule doesn't trigger
+  in the body of a package with a @key{with} of a child unit:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@Key{package} P @Key{is}
@@ -3061,12 +3358,13 @@ is the expected type or profile for the @nt{prefix}.],Old=[]}
   using context. See @RefSecNum{Attributes}.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00235-01]}
-  @Chg{Version=[2],New=[@Leading@;Saying "single access type" is a bit of a
-  fudge. Both the context and the @nt{prefix} may provide both multiple
-  types; "single" only means that a single, specific interpretation must remain
-  after resolution. We say "single" here to trigger the @LegalityTitle of
+  @ChgAdded{Version=[2],Type=[Leading],Text=[Saying @lquotes@;single access
+  type@rquotes@; is a bit of a fudge. Both the context and the @nt{prefix} may
+  provide both multiple types; @lquotes@;single@rquotes@; only means that a
+  single, specific interpretation must remain after resolution. We say
+  @lquotes@;single@rquotes@; here to trigger the @LegalityTitle of
   @RefSecNum{The Context of Overload Resolution}. The resolution of an access
-  attribute is similar to that of an @nt{assignment_statement}. For example:],Old=[]}
+  attribute is similar to that of an @nt{assignment_statement}. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{type} Int_Ptr @key{is access all} Integer;
@@ -3670,7 +3968,7 @@ denotes an aliased view of an object}:
     @comment{The following is a "fix" to keep consistent with v. 5.95;
     appearently 6.0 is different.
     @ChgRef{Version=[1],Kind=[Deleted]}
-    @Chg{New=[],Old=[Old @b{Change}.]}}
+    @ChgDeleted{Version=[1],Text=[Old @b{Change}.]}}
 
      This restriction is intended to be similar to the restriction
      on renaming discriminant-dependent subcomponents.
@@ -4361,7 +4659,7 @@ A type shall be completely defined before it is frozen
   @comment{The following is a "fix" to keep consistent with v. 5.95;
   appearently 6.0 is different.
   @ChgRef{Version=[1],Kind=[Deleted]}
-  @Chg{New=[],Old=[Old @b{Change}.]}}
+  @ChgDeleted{Version=[1],Text=[Old @b{Change}.]}}
 
   Index types are always completely defined @em no need to mention them.
   There is no way for a completely defined type to depend on the value of

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:01 $}
+@Comment{$Date: 2004/12/09 06:13:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @LabeledClause{Array Types}
 
@@ -1534,21 +1534,24 @@ component.
 @end{Resolution}
 
 @begin{Legality}
-A @nt<default_expression> is not permitted if the component is
-of a limited type.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@ChgDeleted{Version=[2],Text=[A @nt<default_expression> is not permitted if
+the component is of a limited type.]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}@ChgNote{This is not THE definition of component}
 @PDefn2{Term=[components], Sec=(of a record type)}
-Each @nt<component_declaration> declares a @i(component) of the
-record type. Besides components declared by @nt<component_declaration>s,
-the components of a record type include any components declared by
-@nt<discriminant_specification>s of the record type declaration.
-@Redundant[The identifiers of all components of a record type shall
-be distinct.]
+Each @nt<component_declaration> declares a
+@Chg{Version=[2],New=[component],Old=[@i(component)]} of the record type.
+Besides components declared by @nt<component_declaration>s, the components of a
+record type include any components declared by @nt<discriminant_specification>s
+of the record type declaration. @Redundant[The identifiers of all components of
+a record type shall be distinct.]
 @begin{TheProof}
-The identifiers of all
+  The identifiers of all
   components of a record type have to
   be distinct because they are all declared immediately
-  within the same declarative region. See Section 8.@end{theproof}
+  within the same declarative region. See Section 8.
+@end{theproof}
 
 
 Within a @nt{type_declaration},
@@ -1626,6 +1629,10 @@ and the @nt{attribute_reference} shall appear alone.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgAdded{Version=[2],Text=[If a @nt{record_type_declaration} includes the
+reserved word @key{limited}, the type is called a @i<limited record> type.]}
+
 @PDefn2{Term=[nominal subtype], Sec=(of a record component)}
 The @nt{component_definition} of a @nt<component_declaration>
 defines the (nominal) subtype of the component.
@@ -1677,6 +1684,7 @@ elaboration of the @nt{component_definition}.
 @end(Discussion)
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 @Defn{per-object expression}
 @Defn{per-object constraint}
 @Defn{entry index subtype}
@@ -1693,10 +1701,12 @@ is called a @i(per-object constraint).
 For the elaboration of a @nt{component_definition} of
 a @nt<component_declaration>@Chg{New=[ or the @nt{discrete_@!subtype_@!definition}
 of an @nt{entry_@!declaration} for an entry family (see
-@RefSecNum{Entries and Accept Statements})],Old=[]}, if the @nt{constraint}
+@RefSecNum{Entries and Accept Statements})],Old=[]},@Chg{Version=[2],
+New=[ if the component subtype is defined by an @nt{access_definition} or],
+Old=[]} if the @nt{constraint}
 @Chg{New=[or @nt{range}],Old=[]} of the @nt{subtype_indication}
 @Chg{New=[or @nt{discrete_@!subtype_@!definition}],Old=[]} is not a per-object
-constraint, then the @nt{subtype_indication}
+constraint, then the@Chg{Version=[2],New=[ @nt{access_definition},],Old=[]} @nt{subtype_indication}
 @Chg{New=[or @nt{discrete_@!subtype_@!definition}],Old=[]} is elaborated.
 On the other hand, if the @nt{constraint}
 @Chg{New=[or @nt{range}],Old=[]} is a per-object constraint,
@@ -1756,9 +1766,10 @@ tests, qualification, and explicit conversion. If the
 record type is nonlimited, they also include
 assignment and the predefined equality operators.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 A component of a record can be named with a @nt<selected_component>.
-A value of a record can be specified with a @nt<record_aggregate>,
-unless the record type is limited.
+A value of a record can be specified with a @nt<record_aggregate>@Chg{Version=[2],
+New=[],Old=[, unless the record type is limited]}.
 
 @end{Notes}
 
@@ -1826,15 +1837,31 @@ The reason for this change is to allow the rules for
 representation pragmas to be as similar as possible.
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Limited components can be initialized, so long as the expression is
+  one that allows building the object in place (such as an @nt{aggregate} or
+  @nt{function_call}).]}
+@end{Extend95}
+
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Improved the description of the
-elaboration of per-object constraints.],Old=[]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Improved the description of the
+elaboration of per-object constraints.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Changed representation clauses to
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed representation clauses to
 aspect clauses to reflect that they are used for more than just
-representation.],Old=[]}
+representation.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+@ChgAdded{Version=[2],Text=[Changed the description of component elaboration
+to allow anonymous access components.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+@ChgAdded{Version=[2],Text=[Defined @i{limited record} type to use in
+other rules.]}
 @end{DiffWord95}
 
 

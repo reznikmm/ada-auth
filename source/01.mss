@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2004/12/06 03:57:35 $}
+@Comment{$Date: 2004/12/09 06:13:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -740,7 +740,7 @@ The vast majority of language changes fall into this category.
 This is not part of the definition of the language,
 and does not appear in the RM95@Chg{Version=[2],New=[ or RM2005],Old=[]}.
 
-@ @* @Comment{Two blank lines: why? Because it was in the original.}
+@Leading@ @* @Comment{Two blank lines: why? Because it was in the original.}
 @*
 As explained above,
 the next heading does not represent any language change:
@@ -760,13 +760,13 @@ and does not appear in the RM95@Chg{Version=[2],New=[ or RM2005],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @begin{Discussion}
-@Chg{Version=[2],New=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
 @*
 The next three headings list all language changes between Ada 95
 and Ada 2005 (the language defined by the Ada 95 standard plus
 Technical Corrigendum 1 plus Amendment 1).
 Each language change falls into one of the following three
-categories:],Old=[]}
+categories:]}
 @end{Discussion}
 
 @begin{Inconsistent95}
@@ -808,10 +808,10 @@ The vast majority of language changes fall into this category.],Old=[]}
 and does not appear in the RM2005.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
 @*
 As explained above,
-the next heading does not represent any language change:],Old=[]}
+the next heading does not represent any language change:]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -1317,18 +1317,18 @@ Duration the user might have declared.
 
 @begin{Wide}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[The delimiters, compound delimiters, reserved words, and
+@ChgAdded{Version=[2],Text=[The delimiters, compound delimiters, reserved words, and
 @nt{numeric_literal}s are exclusively made of the
 characters whose code position is between 16#20# and 16#7E#, inclusively.
 The special characters for which names are defined in this
 International Standard (see @RefSecNum{Character Set}) belong to the same range.
 @Redundant[For example, the character E in the definition of exponent is the
 character whose name is @lquotes@;LATIN CAPITAL LETTER E@rquotes@;, not
-@lquotes@;GREEK CAPITAL LETTER EPSILON@rquotes@;.]],Old=[]}
+@lquotes@;GREEK CAPITAL LETTER EPSILON@rquotes@;.]]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This just means that programs can be written in plain
-ASCII characters; no characters outside of the 7-bit range are required.],Old=[]}
+@ChgAdded{Version=[2],Text=[This just means that programs can be written in plain
+ASCII characters; no characters outside of the 7-bit range are required.]}
 @end{Discussion}
 @end{Wide}
 
@@ -1679,7 +1679,7 @@ ISO/IEC 10646-1:1993,
 @ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00285-01]}
 @ChgNote{This is of only historical interest, so it was deleted; we use the
 Unicode characterization now.}
-@Chg{Version=[2],New=[],Old=[
+@ChgDeleted{Version=[2],Text=[
 @Chg{Version=[1],New=[The Technical Corrigendum 1:1996 is needed so that character
 codes C6 and E6 (the ligatures @latin1(198) and @latin1(230)) are considered
 letters. These were named Latin Ligature AE in the original 1993 version,

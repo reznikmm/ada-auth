@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:00 $}
+@Comment{$Date: 2004/12/09 06:13:22 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -3056,11 +3056,11 @@ For a machine that supports negative zeros,
     @end{discussion}
     @begin{Honest}
       @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0096],ARef=[AI95-00053-01]}
-      @Chg{New=[A sequence of characters corresponds to the result of
+      @ChgAdded{Version=[1],Text=[A sequence of characters corresponds to the result of
       S'Wide_Image if it is the same ignoring case. Thus, the case of an
       image of a nongraphic character does not matter. For example,
       Character'Wide_Value("nul") does not raise Constraint_Error, even though
-      Character'Wide_Image returns "NUL" for the nul character.],Old=[]}
+      Character'Wide_Image returns "NUL" for the nul character.]}
     @end{Honest}
 
     @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
@@ -3678,12 +3678,13 @@ the values of the @nt<simple_expression>s, converted to the type being defined.
 @end{ImplNote}
 @begin{Honest}
   @ChgRef{Version=[1],Kind=[Added]}@ChgNote{This is discussed in AC-00002, which we can't reference here}
-  @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
-  conversion} (which is something that happens at overload resolution, see
+  @ChgAdded{Version=[1],Text=[The conversion mentioned above is not
+  an @i{implicit subtype conversion} (which is something that happens at
+  overload resolution, see
   @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
   the freezing rules are not invoked on the type (which is important so that
   representation items can be given for the type).
-  @PDefn2{Term=[subtype conversion],Sec=(bounds of signed integer type)}],Old=[]}
+  @PDefn2{Term=[subtype conversion],Sec=(bounds of signed integer type)}]}
 @end{Honest}
 
 @PDefn2{Term=[base range], Sec=(of a modular type)}
@@ -3888,11 +3889,12 @@ defined which specific values greater than System.Max_Nonbinary_Modulus, if
 any, are supported.],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[On a one's complement machine, the natural full word type would have
+@ChgAdded{Version=[1],Text=[On a one's complement machine, the natural full word
+type would have
 a modulus of 2**Word_Size-1. However, we would want to allow the all-ones bit
 pattern (which represents negative zero as a number) in logical operations.
 These permissions are intended to allow that and the natural modulus value
-without burdening implementations with supporting expensive modulus values.],Old=[]}
+without burdening implementations with supporting expensive modulus values.]}
 @end{Reason}
 @end{ImplPerm}
 
@@ -4428,12 +4430,12 @@ Otherwise, the subtype is unconstrained.
 
 @begin{Honest}
   @ChgRef{Version=[1],Kind=[Added]}@ChgNote{This is discussed in AC-00002, which we can't reference here}
-  @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
+  @ChgAdded{Version=[1],Text=[The conversion mentioned above is not an @i{implicit subtype
   conversion} (which is something that happens at overload resolution, see
   @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
   the freezing rules are not invoked on the type (which is important so that
   representation items can be given for the type).
-  @PDefn2{Term=[subtype conversion],Sec=(bounds of a floating point type)}],Old=[]}
+  @PDefn2{Term=[subtype conversion],Sec=(bounds of a floating point type)}]}
 @end{Honest}
 
 @Defn{Float}
@@ -4726,12 +4728,12 @@ given by the closer to zero of:
 
   @begin{Honest}
     @ChgRef{Version=[1],Kind=[Added]}@ChgNote{This is discussed in AC-00002, which we can't reference here}
-    @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
+    @ChgAdded{Version=[1],Text=[The conversion mentioned above is not an @i{implicit subtype
     conversion} (which is something that happens at overload resolution, see
     @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
     the freezing rules are not invoked on the type (which is important so that
     representation items can be given for the type).
-    @PDefn2{Term=[subtype conversion],Sec=(bounds of a fixed point type)}],Old=[]}
+    @PDefn2{Term=[subtype conversion],Sec=(bounds of a fixed point type)}]}
   @end{Honest}
 
   the corresponding bound of the base range.
@@ -4754,12 +4756,12 @@ Otherwise, the range of the first subtype is
 
 @begin{Honest}
   @ChgRef{Version=[1],Kind=[Added]}@ChgNote{This is discussed in AC-00002, which we can't reference here}
-  @Chg{New=[The conversion mentioned above is not an @i{implicit subtype
+  @ChgAdded{Version=[1],Text=[The conversion mentioned above is not an @i{implicit subtype
   conversion} (which is something that happens at overload resolution, see
   @RefSecNum{Type Conversions}), although it happens implicitly. Therefore,
   the freezing rules are not invoked on the type (which is important so that
   representation items can be given for the type).
-  @PDefn2{Term=[subtype conversion],Sec=(bounds of a decimal fixed point type)}],Old=[]}
+  @PDefn2{Term=[subtype conversion],Sec=(bounds of a decimal fixed point type)}]}
 @end{Honest}
 
 @end{StaticSem}
