@@ -145,6 +145,9 @@ package body ARM_Format is
     --		- RLB - Added "AddedNormal" ChgRef kind.
     -- 10/29/04 - RLB - Added code so that section references in Annex K are
     --			links.
+    -- 11/02/04 - RLB - Added "DeletedAdded" ChgRef kind.
+    -- 11/03/04 - RLB - Fixed @Chg nesting glitch.
+    --		- RLB - Added InnerInnerItemize == Nested_X2_Bulleted.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -198,6 +201,7 @@ package body ARM_Format is
 	 Code_Indented	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Nested_X2_Bulleted=>(Length=>  0, Str => (others => ' ')), -- Not used.
 	 Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
@@ -252,6 +256,7 @@ package body ARM_Format is
 	 Code_Indented	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Nested_X2_Bulleted=>(Length=>  0, Str => (others => ' ')), -- Not used.
 	 Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
@@ -1529,7 +1534,8 @@ package body ARM_Format is
 			    -- AARM for formatting purposes, even when they are.
 	        when Wide | Example_Text | Indented_Example_Text |
 		     Bulleted | Code_Indented |
-		     Nested_Bulleted | Display | Syntax_Display |
+		     Nested_Bulleted | Nested_X2_Bulleted |
+		     Display | Syntax_Display |
 		     Syntax_Indented | Syntax_Production |
 		     Enumerated | Hanging_Indented =>
 		    -- This depends on the containing paragraph kind;
@@ -1540,6 +1546,7 @@ package body ARM_Format is
 		       Format_Object.Last_Paragraph_Subhead_Type = Bulleted or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Code_Indented or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Nested_Bulleted or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Nested_X2_Bulleted or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Display or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Display or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Indented or else
@@ -1630,7 +1637,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	        if Update_Numbers then
 		    Format_Object.Next_Insert_Para := 1;
 		end if;
-	    elsif Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Inserted then
+	    elsif Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Inserted or else
+	          Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Deleted_Inserted_Number then
 	        -- We'll assume that there are no more than 99 inserted
 		-- paragraphs in a row.
 	        Format_Object.Current_Paragraph_String(1 .. PNum_Pred'Last-1) :=
@@ -1903,6 +1911,35 @@ Ada.Text_IO.Put_Line ("%% Oops, Nested_Bulleted in Syntax_Bulleted paragraph, li
 			end if;
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
+        	    when Nested_X2_Bulleted =>
+			if Enclosing_Format = Nested_Bulleted then
+			    -- The normal case. The format depends on the
+			    -- outer format:
+        		    if Outer_Enclosing_Format = Code_Indented then
+Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Code_Indented paragraph, line " & ARM_Input.Line_String (Input_Object));
+			       Format_Object.Format := ARM_Output.Code_Indented_Nested_Bulleted;
+        		    elsif Outer_Enclosing_Format = Hanging_Indented then
+Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Indented_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+			       Format_Object.Format := ARM_Output.Indented_Bulleted;
+                            elsif Outer_Enclosing_Format = Syntax_Indented or else
+			          Outer_Enclosing_Format = Syntax then
+Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Syntax_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+			       Format_Object.Format := ARM_Output.Syntax_Indented_Bulleted;
+                            elsif Outer_Enclosing_Format = Notes then
+Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Notes paragraph, line " & ARM_Input.Line_String (Input_Object));
+			       Format_Object.Format := ARM_Output.Notes_Nested_Bulleted;
+                            elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			       Format_Object.Format := ARM_Output.Small_Nested_X2_Bulleted;
+			    else
+			       Format_Object.Format := ARM_Output.Nested_X2_Bulleted;
+			    end if;
+			elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			   Format_Object.Format := ARM_Output.Small_Nested_X2_Bulleted;
+			else
+			   Format_Object.Format := ARM_Output.Nested_X2_Bulleted;
+			end if;
+		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
+			Format_Object.No_Breaks := False;
         	    when Display =>
 			declare
 			    EF : Paragraph_Type := Enclosing_Format;
@@ -1912,7 +1949,8 @@ Ada.Text_IO.Put_Line ("%% Oops, Nested_Bulleted in Syntax_Bulleted paragraph, li
 				null; -- The existing format ought to be correct.
 				    -- But we'll go infinitely recursive in any
 				    -- case, so forget it.
-			    elsif EF = Bulleted or else EF = Nested_Bulleted then
+			    elsif EF = Bulleted or else EF = Nested_Bulleted or else
+				  EF = Nested_X2_Bulleted then
 				-- Formats that depend on Enclosing_Format can't
 				-- be recursively call Set_Format. However,
 				-- Display is never bulleted, so we can tell between
@@ -1933,11 +1971,19 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 				    Format_Object.Format := ARM_Output.Small_Code_Indented;
 				elsif Format_Object.Format = ARM_Output.Nested_Bulleted then
 				    Format_Object.Format := ARM_Output.Indented;
+				elsif Format_Object.Format = ARM_Output.Nested_Bulleted then
+				    Format_Object.Format := ARM_Output.Indented;
+				        -- %%%% Not Indented enough!
+Ada.Text_IO.Put_Line ("%% Oops, Display in Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Code_Indented_Nested_Bulleted then
 				    Format_Object.Format := ARM_Output.Indented;
 				        -- %%%% Not Indented enough!
 Ada.Text_IO.Put_Line ("%% Oops, Display in Code_Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Small_Nested_Bulleted then
+				    Format_Object.Format := ARM_Output.Small_Indented;
+				elsif Format_Object.Format = ARM_Output.Small_Nested_Bulleted then
+				        -- %%%% Not Indented enough!
+Ada.Text_IO.Put_Line ("%% Oops, Display in Small_Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    Format_Object.Format := ARM_Output.Small_Indented;
 				else
 				    null; -- Probably ourselves.
@@ -2039,6 +2085,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 				        Format_Object.Format := ARM_Output.Code_Indented;
 				    when ARM_Output.Nested_Bulleted =>
 				        Format_Object.Format := ARM_Output.Indented;
+				    when ARM_Output.Nested_X2_Bulleted =>
+				        Format_Object.Format := ARM_Output.Indented;
+					    -- %%%% Not Indented enough!
+Ada.Text_IO.Put_Line ("%% Oops, Display in Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Indented_Bulleted =>
 				        Format_Object.Format := ARM_Output.Indented;
 					    -- %%%% Not Indented enough!
@@ -2063,6 +2113,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 				        Format_Object.Format := ARM_Output.Small_Code_Indented;
 				    when ARM_Output.Small_Nested_Bulleted =>
 				        Format_Object.Format := ARM_Output.Small_Indented;
+				    when ARM_Output.Small_Nested_X2_Bulleted =>
+				        Format_Object.Format := ARM_Output.Small_Indented;
+					    -- %%%% Not Indented enough!
+Ada.Text_IO.Put_Line ("%% Oops, Display in Small_Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Hanging =>
 				        Format_Object.Format := ARM_Output.Indented;
 					    -- %%%% Not Indented further.
@@ -2215,8 +2269,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 			 Honest | Glossary_Marker | Bare_Annotation |
 			 Wide | Example_Text |
 			 Indented_Example_Text | Code_Indented | Bulleted |
-			 Nested_Bulleted | Display | Syntax_Display |
-			 Syntax_Indented | Syntax_Production |
+			 Nested_Bulleted | Nested_X2_Bulleted | Display |
+			 Syntax_Display | Syntax_Indented | Syntax_Production |
 			 Hanging_Indented | Enumerated | In_Table =>
 			null; -- No subheader. We don't change the last
 			    -- subheader generated, either.
@@ -2282,7 +2336,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 			null; -- Header (if any) is generated elsewhere.
 		    when Wide |
 			 Example_Text | Indented_Example_Text |
-			 Code_Indented | Bulleted | Nested_Bulleted |
+			 Code_Indented | Bulleted | Nested_Bulleted | Nested_X2_Bulleted |
 			 Display | Syntax_Display |
 			 Syntax_Indented | Syntax_Production |
 			 Hanging_Indented | Enumerated | In_Table =>
@@ -2674,6 +2728,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "inneritemize" then
 		Format_Object.Next_Paragraph_Format_Type := Nested_Bulleted;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "innerinneritemize" then
+		Format_Object.Next_Paragraph_Format_Type := Nested_X2_Bulleted;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "display" then
@@ -3141,6 +3199,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right)) =
 			"deleted" then
 			Kind := ARM_Database.Deleted;
+		    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right)) =
+			"deletedadded" then
+			Kind := ARM_Database.Deleted_Inserted_Number;
 		    else
 			Ada.Text_IO.Put_Line ("  ** Bad kind for change kind: " &
 				Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right) &
@@ -3480,6 +3541,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		when Tab_Set =>
 		    if Format_Object.Next_Paragraph_Format_Type = Bulleted or else
 		       Format_Object.Next_Paragraph_Format_Type = Nested_Bulleted or else
+		       Format_Object.Next_Paragraph_Format_Type = Nested_X2_Bulleted or else
 		       Format_Object.Next_Paragraph_Format_Type = Enumerated or else
 		       Format_Object.Next_Paragraph_Format_Type = Hanging_Indented then
 		        Ada.Text_IO.Put_Line ("  ** Tab set in hang or bulleted format: " &
@@ -6131,7 +6193,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				-- if it is added and we're not adding
 				-- it because of the version being generated.
 
-			    when ARM_Database.Deleted =>
+			    when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
 			        Gen_Ref_or_ARef_Parameter(Display_Ref);
 				    -- Read (and possibly generate) a "Ref" or "ARef" parameter.
 				    -- (Note: we put it here so it appears before the hang item.)
@@ -7077,7 +7139,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
 				    return "@Chgref{Version=[" & Version &
 					"],Kind=[Added]}";
-				when ARM_Database.Deleted =>
+				when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
 				    return "@Chgref{Version=[" & Version &
 					"],Kind=[Deleted]}";
 				when ARM_Database.Revised =>
@@ -7294,7 +7356,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
 					    ").],Old=[]}";
 				    end if;
-				when ARM_Database.Deleted =>
+				when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
 				    if Format_Object.Document = ARM_Format.RM_ISO then
 					return "@Chg{Version=[" & Format_Object.Impdef_Version &
 					    "], New=[],Old=[ See @RefSecbyNum{" & Clause_String & "}.]}";
@@ -7394,7 +7456,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 							        Version => Format_Object.Current_Change_Version,
 							        Added_Version => Format_Object.Current_Old_Change_Version,
 							        Location => Format_Object.Location);
-			                Format_Object.Change := ARM_Output.None;
 			            -- else not in an deletion. That could happen if there
 			            -- was no text (then we never entered an change).
 			            end if;
@@ -7446,7 +7507,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 							        Version => Format_Object.Current_Change_Version,
 							        Added_Version => Format_Object.Current_Old_Change_Version,
 						                Location => Format_Object.Location);
-			                Format_Object.Change := ARM_Output.None;
 			            -- else not in an insertion. That could happen if there
 			            -- was no text (then we never entered an change).
 			            end if;

@@ -85,6 +85,7 @@ package body ARM_Text is
     --  9/10/04 - RLB - Added "Both" to possible changes to handle
     --			replacement of changed text.
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
+    -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -327,6 +328,10 @@ package body ARM_Text is
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 4;
+	    when ARM_Output.Nested_X2_Bulleted => Output_Object.Indent_Amount := 14;
+                Ada.Text_IO.Put (Output_Object.Output_File, "        ");
+		-- No prefix in text mode.
+		Output_Object.Char_Count := 8;
 	    when ARM_Output.Small_Bulleted => Output_Object.Indent_Amount := 10;
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		-- No prefix in text mode.
@@ -335,6 +340,10 @@ package body ARM_Text is
                 Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 8;
+	    when ARM_Output.Small_Nested_X2_Bulleted => Output_Object.Indent_Amount := 18;
+                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
+		-- No prefix in text mode.
+		Output_Object.Char_Count := 12;
 	    when ARM_Output.Indented_Bulleted => Output_Object.Indent_Amount := 18;
                 Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		-- No prefix in text mode.
@@ -506,8 +515,8 @@ package body ARM_Text is
 				Tab_Stops.Stops(I).Stop + Output_Object.Indent_Amount;
 		    end if;
 		end loop;
-	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
-		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
+	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
+		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
 		 ARM_Output.Indented_Bulleted | ARM_Output.Code_Indented_Bulleted |
 		 ARM_Output.Code_Indented_Nested_Bulleted |
 		 ARM_Output.Syntax_Indented_Bulleted |

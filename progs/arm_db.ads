@@ -42,11 +42,12 @@ package ARM_Database is
     --  8/10/00 - RLB - Added Normal_Indexed_List to fix glossary problems.
     --  8/28/00 - RLB - Added revision info to database.
     -- 10/28/04 - RLB - Added Inserted_Normal_Number change kind.
+    -- 11/02/04 - RLB - Added Deleted_Inserted_Number change kind.
 
     type Database_Type is tagged limited private;
 
     type Paragraph_Change_Kind_Type is (None, Inserted, Inserted_Normal_Number,
-	Deleted, Revised);
+	Deleted, Deleted_Inserted_Number, Revised);
 
     Not_Valid_Error : exception;
 

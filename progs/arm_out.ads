@@ -84,6 +84,7 @@ package ARM_Output is
     --			replacement of changed text.
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents to
     --			avoid circularities.
+    -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -136,7 +137,8 @@ package ARM_Output is
 	Indented_Examples, Small_Indented_Examples,
 	Syntax_Indented, Code_Indented,
 	Small_Code_Indented, Indented, Small_Indented,
-	Bulleted, Nested_Bulleted, Small_Bulleted, Small_Nested_Bulleted,
+	Bulleted, Nested_Bulleted, Nested_X2_Bulleted,
+        Small_Bulleted, Small_Nested_Bulleted, Small_Nested_X2_Bulleted,
 	Indented_Bulleted, Code_Indented_Bulleted, Code_Indented_Nested_Bulleted,
         Syntax_Indented_Bulleted, Notes_Bulleted, Notes_Nested_Bulleted,
 	Hanging, Small_Hanging, Indented_Hanging, Small_Indented_Hanging,
@@ -176,10 +178,17 @@ package ARM_Output is
 	--     indent of one unit, and each paragraph is preceeded by a small
 	--     bullet (a solid circle). [These are intended to be used inside
 	--     of an outer bulleted or enumerated list.]
+	-- Nested X2 Bulleted paragraphs are indented three units, with a right
+	--     indent of one unit, and each paragraph is preceeded by a small
+	--     bullet (a solid circle). [These are intended to be used inside
+	--     of an outer nested bulleted or enumerated list.]
 	-- Small_Bulleted paragraphs are indented three units, with a right
 	--     indent of one unit, each paragraph is preceeded by a bullet,
 	--     and are in a smaller font (same as Notes).
 	-- Small Nested Bulleted paragraphs are indented four units, with a
+	--     right indent of one unit, each paragraph is preceeded by a
+	--     small bullet, and are in a smaller font (same as Notes).
+	-- Small Nested X2 Bulleted paragraphs are indented five units, with a
 	--     right indent of one unit, each paragraph is preceeded by a
 	--     small bullet, and are in a smaller font (same as Notes).
 	-- Indented_Bulleted paragraphs are indented four units, with a right

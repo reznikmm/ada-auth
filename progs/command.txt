@@ -420,8 +420,9 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Kind is either "Revised" (an ordinary change), "Added" (for a paragraph
 	added by the change), "AddedNormal" (for a paragraph added by the
 	change which gets a normal paragraph number - used for insertions at
-	the end of clauses and added to new clauses), or "Deleted" (for a
-	paragraph deleted by by the change) [These control the paragraph
+	the end of clauses and added to new clauses), "Deleted" (for a
+	paragraph deleted by the change), or "DeletedAdded" (for an
+        added paragraph which is later deleted). [These control the paragraph
 	numbering of the following paragraph.] The <DR_Number>(s) and/or
 	<AI_Number>(s) that triggered the change are given. As many references
 	as necessary can be given. (Zero is allowed).
@@ -510,6 +511,8 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	InnerItemize - The text is indented to fit inside an Itemize or
 		  Enumerate paragraph, and bulleted (with [smaller] solid
 		  circle bullets).
+	InnerInnerItemize - The text is indented to fit inside an InnerItemize
+		  paragraph, and bulleted (with [smaller] solid circle bullets).
 	Enumerate - The text is indented and numbered (that is, each paragraph
 		  has a prefix number). The text preserves the size and
 		  indenting of its parent (if any).

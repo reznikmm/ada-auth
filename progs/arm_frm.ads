@@ -71,6 +71,7 @@ package ARM_Format is
     --          - RLB - Added Changes_Only and versioning for individual changes.
     --  9/10/04 - RLB - Added support for nested changes.
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
+    -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
 
     type Format_Type is tagged limited private;
 
@@ -179,6 +180,7 @@ private
 	-- Format only:
 	Wide, Example_Text,
 	Indented_Example_Text, Code_Indented, Bulleted, Nested_Bulleted,
+        Nested_X2_Bulleted,
 	Display, Syntax_Display, Syntax_Indented, Syntax_Production,
 	Enumerated, Hanging_Indented, In_Table);
 

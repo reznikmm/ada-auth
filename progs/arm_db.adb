@@ -44,6 +44,7 @@ package body ARM_Database is
     --  5/16/00 - RLB - Created package.
     --  8/28/00 - RLB - Added revision info to database.
     -- 10/28/04 - RLB - Added Inserted_Normal_Number change kind.
+    -- 11/02/04 - RLB - Added Deleted_Inserted_Number change kind.
 
     type String_Ptr is access String;
     type Item is record
@@ -157,6 +158,9 @@ package body ARM_Database is
 		when Deleted =>
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[Deleted]}";
+		when Deleted_Inserted_Number =>
+		    return "@ChgRef{Version=[" & Item.Version &
+			"],Kind=[DeletedInserted]}";
 	    end case;
 	end Change_if_Needed;
 

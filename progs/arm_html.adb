@@ -108,6 +108,7 @@ package body ARM_HTML is
     --			Netscape.)
     --  9/16/04 - RLB - Added a charset meta in the header, so that browsers
     --			can't misinterpret these documents.
+    -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -345,6 +346,14 @@ package body ARM_HTML is
 		 Right_Indent => 1,
 		 Before => 0,
 		 After => 5),
+	    ARM_Output.Nested_X2_Bulleted =>
+		(Tag  => UL,
+		 Size => 0,
+		 Font => ARM_Output.Roman,
+		 Indent => 3,
+		 Right_Indent => 1,
+		 Before => 0,
+		 After => 5),
 	    ARM_Output.Small_Bulleted =>
 		(Tag  => UL,
 		 Size => -1,
@@ -358,6 +367,14 @@ package body ARM_HTML is
 		 Size => -1,
 		 Font => ARM_Output.Roman,
 		 Indent => 4,
+		 Right_Indent => 1,
+		 Before => 0,
+		 After => 5),
+	    ARM_Output.Small_Nested_X2_Bulleted =>
+		(Tag  => UL,
+		 Size => -1,
+		 Font => ARM_Output.Roman,
+		 Indent => 5,
 		 Right_Indent => 1,
 		 Before => 0,
 		 After => 5),
@@ -735,6 +752,8 @@ package body ARM_HTML is
 	    Make_Style ("SmallBulleted", ARM_Output.Small_Bulleted);
 	    Make_Style ("NestedBulleted", ARM_Output.Nested_Bulleted);
 	    Make_Style ("SmallNestedBulleted", ARM_Output.Small_Nested_Bulleted);
+	    Make_Style ("NestedX2Bulleted", ARM_Output.Nested_X2_Bulleted);
+	    Make_Style ("SmallNestedX2Bulleted", ARM_Output.Small_Nested_X2_Bulleted);
 	    Make_Style ("IndentedBulleted", ARM_Output.Indented_Bulleted);
 	    Make_Style ("CodeIndentedBulleted", ARM_Output.Code_Indented_Bulleted);
 	    Make_Style ("CodeIndentedNestedBulleted", ARM_Output.Code_Indented_Nested_Bulleted);
@@ -809,6 +828,8 @@ package body ARM_HTML is
 	    Make_Style ("SmallBulleted", ARM_Output.Small_Bulleted);
 	    Make_Style ("NestedBulleted", ARM_Output.Nested_Bulleted);
 	    Make_Style ("SmallNestedBulleted", ARM_Output.Small_Nested_Bulleted);
+	    Make_Style ("NestedX2Bulleted", ARM_Output.Nested_X2_Bulleted);
+	    Make_Style ("SmallNestedX2Bulleted", ARM_Output.Small_Nested_X2_Bulleted);
 	    Make_Style ("IndentedBulleted", ARM_Output.Indented_Bulleted);
 	    Make_Style ("CodeIndentedBulleted", ARM_Output.Code_Indented_Bulleted);
 	    Make_Style ("CodeIndentedNestedBulleted", ARM_Output.Code_Indented_Nested_Bulleted);
@@ -1376,8 +1397,8 @@ package body ARM_HTML is
 		    end if;
 		end loop;
 
-	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
-		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
+	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
+		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
 		 ARM_Output.Indented_Bulleted | ARM_Output.Code_Indented_Bulleted |
 		 ARM_Output.Code_Indented_Nested_Bulleted |
 		 ARM_Output.Syntax_Indented_Bulleted |
@@ -1488,6 +1509,14 @@ package body ARM_HTML is
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><LI TYPE=DISC>");
 		        Output_Object.Char_Count := 22;
 		    end if;
+	        when ARM_Output.Nested_X2_Bulleted =>
+		    if No_Prefix then
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL>");
+		        Output_Object.Char_Count := 12;
+		    else
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><LI TYPE=DISC>");
+		        Output_Object.Char_Count := 26;
+		    end if;
 	        when ARM_Output.Small_Bulleted =>
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><FONT SIZE=-1>");
@@ -1503,6 +1532,14 @@ package body ARM_HTML is
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><LI TYPE=DISC><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 44;
+		    end if;
+	        when ARM_Output.Small_Nested_X2_Bulleted =>
+		    if No_Prefix then
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><UL><FONT SIZE=-1>");
+		        Output_Object.Char_Count := 34;
+		    else
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><UL><LI TYPE=DISC><FONT SIZE=-1>");
+		        Output_Object.Char_Count := 48;
 		    end if;
 	        when ARM_Output.Indented_Bulleted =>
 		    if No_Prefix then
@@ -1732,6 +1769,15 @@ package body ARM_HTML is
 			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 		    Put_Compatibility_Font_Info (Output_Object, Format);
+	        when ARM_Output.Nested_X2_Bulleted =>
+		    Put_Style ("NestedX2Bulleted", Include_Compatibility => False);
+		    if No_Prefix then
+			null;
+		    else
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Small_Bulleted =>
 		    Put_Style ("SmallBulleted", Include_Compatibility => False);
 		    if No_Prefix then
@@ -1743,6 +1789,15 @@ package body ARM_HTML is
 		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Small_Nested_Bulleted =>
 		    Put_Style ("SmallNestedBulleted", Include_Compatibility => False);
+		    if No_Prefix then
+			null;
+		    else
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
+	        when ARM_Output.Small_Nested_X2_Bulleted =>
+		    Put_Style ("SmallNestedX2Bulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
@@ -2005,6 +2060,14 @@ package body ARM_HTML is
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
 			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+	        when ARM_Output.Nested_X2_Bulleted =>
+		    Put_Style ("NestedBulleted");
+		    if No_Prefix then
+			null;
+		    else
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		    end if;
 	        when ARM_Output.Small_Bulleted =>
 		    Put_Style ("SmallBulleted");
 		    if No_Prefix then
@@ -2015,6 +2078,14 @@ package body ARM_HTML is
 		    end if;
 	        when ARM_Output.Small_Nested_Bulleted =>
 		    Put_Style ("SmallNestedBulleted");
+		    if No_Prefix then
+			null;
+		    else
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		    end if;
+	        when ARM_Output.Small_Nested_X2_Bulleted =>
+		    Put_Style ("SmallNestedX2Bulleted");
 		    if No_Prefix then
 			null;
 		    else
@@ -2306,6 +2377,13 @@ package body ARM_HTML is
 	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</UL></UL>");
 		    end if;
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        when ARM_Output.Nested_X2_Bulleted =>
+		    if Output_Object.Had_Prefix then
+	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</LI></UL></UL></UL>");
+		    else
+	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</UL></UL></UL>");
+		    end if;
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Bulleted =>
 		    if Output_Object.Had_Prefix then
 	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></LI></UL></UL></UL>");
@@ -2318,6 +2396,13 @@ package body ARM_HTML is
 	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></LI></UL></UL></UL></UL>");
 		    else
 	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL>");
+		    end if;
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        when ARM_Output.Small_Nested_X2_Bulleted =>
+		    if Output_Object.Had_Prefix then
+	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></LI></UL></UL></UL></UL></UL>");
+		    else
+	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL></UL>");
 		    end if;
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Indented_Bulleted =>
@@ -2406,8 +2491,8 @@ package body ARM_HTML is
 	             ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented |
 	             ARM_Output.Indented | ARM_Output.Small_Indented =>
 		    Put_End_Style (Output_Object.Paragraph_Format);
-	        when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
-	             ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
+	        when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
+	             ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
 		     ARM_Output.Indented_Bulleted | ARM_Output.Code_Indented_Bulleted |
 	             ARM_Output.Code_Indented_Nested_Bulleted |
 	             ARM_Output.Syntax_Indented_Bulleted |

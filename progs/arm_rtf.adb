@@ -93,6 +93,7 @@ package body ARM_RTF is
     --  9/14/04 - RLB - Moved Change_Version_Type to contents.
     --  9/15/04 - RLB - Completely rewrote Text_Format to avoid problems
     --			with ordering of calls.
+    -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -760,6 +761,26 @@ package body ARM_RTF is
 		       Style_String =>
 			 "\s44\widctlpar\adjustright \li1440\fi-200\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1080 \snext44 ");
 			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_X2_Bulleted),
+		       Font_Size => 18,
+		       Style_Indent => 1080,
+		       Style_Hang_Width => 200,
+		       Style_Before => 0,
+		       Style_After => 100,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s45\widctlpar\adjustright \li1080\fi-200\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx720 \snext45 ");
+			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted),
+		       Font_Size => 15,
+		       Style_Indent => 1800,
+		       Style_Hang_Width => 180,
+		       Style_Before => 0,
+		       Style_After => 80,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s46\widctlpar\adjustright \li1800\fi-180\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1440 \snext46 ");
+			  -- Note: Narrower space between and afterwards.
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -769,7 +790,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s45\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s47\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs20\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 17,
@@ -778,7 +799,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s46\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s48\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 17,
@@ -787,7 +808,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s47\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s49\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1211,6 +1232,26 @@ package body ARM_RTF is
 		       Style_String =>
 			 "\s44\widctlpar\adjustright \li1440\fi-200\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1080 \snext44 ");
 			  -- Note: Narrower space between.
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_X2_Bulleted),
+		       Font_Size => 22,
+		       Style_Indent => 1080,
+		       Style_Hang_Width => 200,
+		       Style_Before => 0,
+		       Style_After => 110,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s45\widctlpar\adjustright \li1080\fi-200\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx720 \snext45 ");
+			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted),
+		       Font_Size => 18,
+		       Style_Indent => 1800,
+		       Style_Hang_Width => 180,
+		       Style_Before => 0,
+		       Style_After => 90,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s46\widctlpar\adjustright \li1800\fi-180\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1440 \snext46 ");
+			  -- Note: Narrower space between.
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -1220,7 +1261,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s45\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s47\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs24\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 22,
@@ -1229,7 +1270,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s46\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s48\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 22,
@@ -1238,7 +1279,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s47\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s49\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1339,9 +1380,13 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Enumerated;}");
         Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_Enumerated));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Nested Enumerated;}");
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_Enumerated));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested Enumerated;}");
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_X2_Bulleted));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Nested X2 Bulleted;}");
         if Output_Object.Big_Files then
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_Enumerated));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested Enumerated;}");
+	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted));
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested X2 Bulleted;}");
 	    -- Define the TOC styles:
 	    Write_Style (Output_Object.Output_File, TOC_1_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 1;}");
@@ -1350,8 +1395,8 @@ package body ARM_RTF is
 	    Write_Style (Output_Object.Output_File, TOC_3_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 3;}}");
 	else
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Enumerated));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Enumerated;}}");
+	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted));
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested X2 Bulleted;}}");
 	end if;
             -- \additive means that the style inherits from the previous style.
 	    -- \basedon defines the style that the style was inherited from.
@@ -1674,8 +1719,8 @@ package body ARM_RTF is
 		-- else no tabs defined.
 		end if;
 
-	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
-		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
+	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
+		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
 		 ARM_Output.Indented_Bulleted | ARM_Output.Code_Indented_Bulleted |
 		 ARM_Output.Code_Indented_Nested_Bulleted |
 		 ARM_Output.Syntax_Indented_Bulleted |
@@ -1775,8 +1820,8 @@ package body ARM_RTF is
 		Write_Style_for_Paragraph (Output_Object.Output_File,
 		    Paragraph_Info(Format),
 		    Output_Object.Char_Count);
-	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
-		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
+	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
+		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
 		 ARM_Output.Indented_Bulleted | ARM_Output.Code_Indented_Bulleted |
 		 ARM_Output.Code_Indented_Nested_Bulleted |
 		 ARM_Output.Syntax_Indented_Bulleted |
@@ -1789,9 +1834,11 @@ package body ARM_RTF is
 		    Output_Object.Char_Count := Output_Object.Char_Count + 5;
 		else
 		    if ARM_Output."=" (Format, ARM_Output.Nested_Bulleted) or else
+		       ARM_Output."=" (Format, ARM_Output.Nested_X2_Bulleted) or else
 		       ARM_Output."=" (Format, ARM_Output.Code_Indented_Nested_Bulleted) or else
 		       ARM_Output."=" (Format, ARM_Output.Notes_Nested_Bulleted) or else
-		       ARM_Output."=" (Format, ARM_Output.Small_Nested_Bulleted) then
+		       ARM_Output."=" (Format, ARM_Output.Small_Nested_Bulleted) or else
+		       ARM_Output."=" (Format, ARM_Output.Small_Nested_X2_Bulleted) then
 			-- Make a smaller bullet.
 		        if Paragraph_Info(Format).Size = 15 then
 	    	            Ada.Text_IO.Put (Output_Object.Output_File, "{\f3\fs12\'b7}\tab ");
