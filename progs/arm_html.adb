@@ -15,7 +15,7 @@ package body ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2001 AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -86,6 +86,9 @@ package body ARM_HTML is
     --  9/28/00 - RLB - Added some style sheets.
     --		- RLB - Updated to use absolute positioning for paragraph
     --			numbers (this looks much better than floating).
+    --  7/18/01 - RLB - Added "Indented" style to supported styles for
+    --			multi-column.
+    --		- RLB - Implemented single "Big-File" support.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -422,38 +425,75 @@ package body ARM_HTML is
 
     procedure Free is new Ada.Unchecked_Deallocation (Column_Text_Item_Type, Column_Text_Ptr);
 
+    function Make_Clause_Anchor_Name (Output_Object : in HTML_Output_Type;
+				      Clause_Number : in String) return String is
+	-- Internal routine.
+	-- Returns the Clause anchor name for the current output object and
+	-- Clause_Number.
+        Clause_Name : String(1..7);
+        Clause_Name_Len : Natural;
+    begin
+        if Clause_Number'Length >= 7 and then
+	   Clause_Number(Clause_Number'First .. Clause_Number'First + 5) =
+	   "Annex " then
+	    Clause_Name(1) := Clause_Number(Clause_Number'First + 6);
+	        -- We only want the letter.
+	    Clause_Name_Len := 1;
+        else
+	    Clause_Name_Len := Clause_Number'Length;
+	    Clause_Name(1..Clause_Name_Len) := Clause_Number;
+	    for I in 1 .. Clause_Name_Len loop
+	        if Clause_Name(I) = '.' then
+		    Clause_Name(I) := '-';
+	        end if;
+	    end loop;
+        end if;
+	return Clause_Name(1..Clause_Name_Len);
+    end Make_Clause_Anchor_Name;
+
+
     function Make_Clause_File_Name (Output_Object : in HTML_Output_Type;
 				    Clause_Number : in String) return String is
 	-- Internal routine.
 	-- Returns the Clause file name for the current output object and
 	-- Clause_Number. This does not include any path or extension.
+    begin
+	if Output_Object.Big_Files then -- One big file.
+            case Output_Object.Document is
+	        when ARM_Output.RM =>
+		    return "RM";
+		when ARM_Output.RM_ISO =>
+		    return "RMI";
+		when ARM_Output.AARM =>
+		    return "AARM";
+	    end case;
+	else -- Clause files.
+            case Output_Object.Document is
+	        when ARM_Output.RM =>
+		    return "RM-" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
+	        when ARM_Output.RM_ISO =>
+		    return "RMI-" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
+	        when ARM_Output.AARM =>
+		    return "AA-" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
+            end case;
+	end if;
+    end Make_Clause_File_Name;
+
+
+    function Make_Clause_Link_Name (Output_Object : in HTML_Output_Type;
+				    Clause_Number : in String) return String is
+	-- Internal routine.
+	-- Returns the link name for a link to the given clause.
         Clause_Name : String(1..7);
         Clause_Name_Len : Natural;
     begin
-	if Clause_Number'Length >= 7 and then
-	   Clause_Number(Clause_Number'First .. Clause_Number'First + 5) =
-	   "Annex " then
-	    Clause_Name(1) := Clause_Number(Clause_Number'First + 6);
-		-- We only want the letter.
-	    Clause_Name_Len := 1;
-	else
-	    Clause_Name_Len := Clause_Number'Length;
-	    Clause_Name(1..Clause_Name_Len) := Clause_Number;
-	    for I in 1 .. Clause_Name_Len loop
-		if Clause_Name(I) = '.' then
-		    Clause_Name(I) := '-';
-		end if;
-	    end loop;
+	if Output_Object.Big_Files then -- One big file.
+	    -- Note this is a self-reference, so the file name is not needed.
+	    return "#" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
+	else -- Clause files.
+	    return Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
 	end if;
-        case Output_Object.Document is
-	    when ARM_Output.RM =>
-		return "RM-" & Clause_Name(1..Clause_Name_Len);
-	    when ARM_Output.RM_ISO =>
-		return "RMI-" & Clause_Name(1..Clause_Name_Len);
-	    when ARM_Output.AARM =>
-		return "AA-" & Clause_Name(1..Clause_Name_Len);
-        end case;
-    end Make_Clause_File_Name;
+    end Make_Clause_Link_Name;
 
 
     procedure Put_EMs (Fyle : in Ada.Text_IO.File_Type;
@@ -782,33 +822,41 @@ package body ARM_HTML is
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BODY TEXT=""#000000"" BGCOLOR=""#FFFFF0"" LINK=""#0000FF"" VLINK=""#800080"" ALINK=""#FF0000"">");
 
 	Ada.Text_IO.Put (Output_Object.Output_File, "<P><A HREF=""");
-	case Output_Object.Document is
-	    when ARM_Output.RM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RM-TOC.html");
-	    when ARM_Output.RM_ISO =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RMI-TOC.html");
-	    when ARM_Output.AARM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "AA-TOC.html");
-        end case;
+        if Output_Object.Big_Files then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
+	else
+	    case Output_Object.Document is
+	        when ARM_Output.RM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-TOC.html");
+	        when ARM_Output.RM_ISO =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-TOC.html");
+	        when ARM_Output.AARM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-TOC.html");
+            end case;
+	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Contents</A>");
 	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
 	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-	case Output_Object.Document is
-	    when ARM_Output.RM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RM-0-29.html");
-	    when ARM_Output.RM_ISO =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RMI-0-29.html");
-	    when ARM_Output.AARM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "AA-0-29.html");
-        end case;
+        if Output_Object.Big_Files then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "#0-29");
+	else
+	    case Output_Object.Document is
+	        when ARM_Output.RM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-0-29.html");
+	        when ARM_Output.RM_ISO =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-0-29.html");
+	        when ARM_Output.AARM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-0-29.html");
+            end case;
+	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
 	if Clause /= "" then
 	    begin
 		-- Note: We do the following in one big glup so that if
 		-- Not_Found_Error is raised, nothing is output.
 		Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		    Make_Clause_File_Name (Output_Object,
-			ARM_Contents.Previous_Clause(Clause)) & ".html");
+		    Make_Clause_Link_Name (Output_Object,
+			ARM_Contents.Previous_Clause(Clause)));
 		Ada.Text_IO.Put (Output_Object.Output_File, """>Previous</A>");
 	    exception
 	        when ARM_Contents.Not_Found_Error =>
@@ -818,8 +866,8 @@ package body ARM_HTML is
 		-- Note: We do the following in one big glup so that if
 		-- Not_Found_Error is raised, nothing is output.
 		Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		    Make_Clause_File_Name (Output_Object,
-			ARM_Contents.Next_Clause(Clause)) & ".html");
+		    Make_Clause_Link_Name (Output_Object,
+			ARM_Contents.Next_Clause(Clause)));
 		Ada.Text_IO.Put (Output_Object.Output_File, """>Next</A>");
 	    exception
 	        when ARM_Contents.Not_Found_Error =>
@@ -845,52 +893,64 @@ package body ARM_HTML is
 
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HR>"); -- Horizontal line (rule).
 	Ada.Text_IO.Put (Output_Object.Output_File, "<P><A HREF=""");
-	case Output_Object.Document is
-	    when ARM_Output.RM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RM-TOC.html");
-	    when ARM_Output.RM_ISO =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RMI-TOC.html");
-	    when ARM_Output.AARM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "AA-TOC.html");
-        end case;
+        if Output_Object.Big_Files then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
+	else
+	    case Output_Object.Document is
+	        when ARM_Output.RM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-TOC.html");
+	        when ARM_Output.RM_ISO =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-TOC.html");
+	        when ARM_Output.AARM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-TOC.html");
+            end case;
+	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Contents</A>");
 	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
 	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-	case Output_Object.Document is
-	    when ARM_Output.RM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RM-0-29.html");
-	    when ARM_Output.RM_ISO =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RMI-0-29.html");
-	    when ARM_Output.AARM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "AA-0-29.html");
-        end case;
+        if Output_Object.Big_Files then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "#0-29");
+	else
+	    case Output_Object.Document is
+	        when ARM_Output.RM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-0-29.html");
+	        when ARM_Output.RM_ISO =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-0-29.html");
+	        when ARM_Output.AARM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-0-29.html");
+            end case;
+	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
 	if Clause /= "" then
 	    begin
 		-- Note: We do the following in one big glup so that if
 		-- Not_Found_Error is raised, nothing is output.
 		Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		    Make_Clause_File_Name (Output_Object,
+		    Make_Clause_Link_Name (Output_Object,
 			ARM_Contents.Previous_Clause(
-			    ARM_Contents.Previous_Clause(Clause))) & ".html");
+			    ARM_Contents.Previous_Clause(Clause))));
 		Ada.Text_IO.Put (Output_Object.Output_File, """>Previous</A>");
 	    exception
 	        when ARM_Contents.Not_Found_Error =>
 		    null; -- Probably the first section.
 	    end;
 	    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-	        Make_Clause_File_Name (Output_Object, Clause) & ".html");
+	        Make_Clause_Link_Name (Output_Object, Clause));
 	    Ada.Text_IO.Put (Output_Object.Output_File, """>Next</A>");
 	end if;
         Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""");
-	case Output_Object.Document is
-	    when ARM_Output.RM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RM-TTL.html");
-	    when ARM_Output.RM_ISO =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "RMI-TTL.html");
-	    when ARM_Output.AARM =>
-		Ada.Text_IO.Put (Output_Object.Output_File, "AA-TTL.html");
-        end case;
+        if Output_Object.Big_Files then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "#TTL");
+	else
+	    case Output_Object.Document is
+	        when ARM_Output.RM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-TTL.html");
+	        when ARM_Output.RM_ISO =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-TTL.html");
+	        when ARM_Output.AARM =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-TTL.html");
+            end case;
+	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Legal</A>");
 
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</P>");
@@ -917,8 +977,20 @@ package body ARM_HTML is
 	end if;
 	Output_Object.Is_Valid := True;
 	Output_Object.Document := Document;
-	-- We don't use the page size or changes flag. We could use the
-	-- Big files flag, but for now we don't.
+	-- We don't use the page size or changes flag.
+	Output_Object.Big_Files := Big_Files;
+	if Output_Object.Big_Files then
+	     case Output_Object.Document is
+		when ARM_Output.RM =>
+		    Start_HTML_File (Output_Object, "RM", "Ada Reference Manual", Clause => "");
+		when ARM_Output.RM_ISO =>
+		    Start_HTML_File (Output_Object, "RMI", "Ada Reference Manual", Clause => "");
+		when ARM_Output.AARM =>
+		    Start_HTML_File (Output_Object, "AARM", "Annotated Ada Reference Manual", Clause => "");
+	     end case;
+	    -- Insert an anchor for the title page:
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<A NAME=""TTL""></A>");
+	end if;
     end Create;
 
 
@@ -1204,7 +1276,7 @@ package body ARM_HTML is
 	    end if;
 	    case Format is
 	        when ARM_Output.Normal | ARM_Output.Syntax_Indented |
-		     ARM_Output.Code_Indented =>
+		     ARM_Output.Code_Indented | ARM_Output.Indented =>
 		    null;
 		when others =>
 	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -2361,30 +2433,47 @@ package body ARM_HTML is
 		"Header in paragraph");
 	end if;
 
-	if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
-	    End_HTML_File (Output_Object, Clause_Number);
-	end if;
+	if not Output_Object.Big_Files then
+	    if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
+	        End_HTML_File (Output_Object, Clause_Number);
+	    end if;
 
-	-- Special for table of contents:
-	if Clause_Number = "" and then Header_Text = "Table of Contents" then
-	    case Output_Object.Document is
-	        when ARM_Output.RM =>
-	            Start_HTML_File (Output_Object, "RM-TOC", Header_Text, "");
-	        when ARM_Output.RM_ISO =>
-	            Start_HTML_File (Output_Object, "RMI-TOC", Header_Text, "");
-	        when ARM_Output.AARM =>
-	            Start_HTML_File (Output_Object, "AA-TOC", Header_Text, "");
-	    end case;
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
-	    Output_Object.Char_Count := 0;
-	    Output_Object.Disp_Char_Count := 0;
-	    Output_Object.Any_Nonspace := False;
-	    return;
-	end if;
+	    -- Special for table of contents:
+	    if Clause_Number = "" and then Header_Text = "Table of Contents" then
+	        case Output_Object.Document is
+	            when ARM_Output.RM =>
+	                Start_HTML_File (Output_Object, "RM-TOC", Header_Text, "");
+	            when ARM_Output.RM_ISO =>
+	                Start_HTML_File (Output_Object, "RMI-TOC", Header_Text, "");
+	            when ARM_Output.AARM =>
+	                Start_HTML_File (Output_Object, "AA-TOC", Header_Text, "");
+	        end case;
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
+	        Output_Object.Char_Count := 0;
+	        Output_Object.Disp_Char_Count := 0;
+	        Output_Object.Any_Nonspace := False;
+	        return;
+	    end if;
 
-	Start_HTML_File (Output_Object,
-		Make_Clause_File_Name (Output_Object, Clause_Number),
-		Header_Text, Clause_Number);
+	    Start_HTML_File (Output_Object,
+		    Make_Clause_File_Name (Output_Object, Clause_Number),
+		    Header_Text, Clause_Number);
+	else -- Big Files:
+	    if Clause_Number = "" and then Header_Text = "Table of Contents" then
+	        -- Insert an anchor:
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<A NAME=""TOC""></A>");
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
+	        Output_Object.Char_Count := 0;
+	        Output_Object.Disp_Char_Count := 0;
+	        Output_Object.Any_Nonspace := False;
+	        return;
+	    end if;
+	    -- Insert an anchor:
+	    Ada.Text_IO.Put (Output_Object.Output_File, "<A NAME=""");
+	    Ada.Text_IO.Put (Output_Object.Output_File,
+	        Make_Clause_Anchor_Name (Output_Object, Clause_Number));
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """></A>");
+	end if;
 
 	case Level is
 	    when ARM_Contents.Normative_Annex =>
@@ -2447,13 +2536,21 @@ package body ARM_HTML is
 		"Header in paragraph");
 	end if;
 
-	if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
-	    End_HTML_File (Output_Object, Clause_Number);
-	end if;
+	if not Output_Object.Big_Files then
+	    if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
+	        End_HTML_File (Output_Object, Clause_Number);
+	    end if;
 
-	Start_HTML_File (Output_Object,
-		Make_Clause_File_Name (Output_Object, Clause_Number),
-		New_Header_Text, Clause_Number);
+	    Start_HTML_File (Output_Object,
+		    Make_Clause_File_Name (Output_Object, Clause_Number),
+		    New_Header_Text, Clause_Number);
+	else -- Big Files:
+	    -- Insert an anchor:
+	    Ada.Text_IO.Put (Output_Object.Output_File, "<A NAME=""");
+	    Ada.Text_IO.Put (Output_Object.Output_File,
+	        Make_Clause_Anchor_Name (Output_Object, Clause_Number));
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """></A>");
+	end if;
 
 	case Level is
 	    when ARM_Contents.Normative_Annex =>
@@ -3549,7 +3646,7 @@ package body ARM_HTML is
 	Output_Text (Output_Object, "<A HREF=""");
 	declare
 	    Name : constant String :=
-		Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
+		Make_Clause_Link_Name (Output_Object, Clause_Number);
 	begin
 	    Output_Text (Output_Object, Name);
 	end;
@@ -3575,8 +3672,7 @@ package body ARM_HTML is
 		"Not in paragraph");
 	end if;
 	-- Insert an anchor:
-	Output_Text (Output_Object, "<A NAME=""");
-	Output_Text (Output_Object, "I");
+	Output_Text (Output_Object, "<A NAME=""I");
 	declare
 	    Key_Name : constant String := Natural'Image(Index_Key);
 	begin
@@ -3604,12 +3700,16 @@ package body ARM_HTML is
 		"Not in paragraph");
 	end if;
 	Output_Text (Output_Object, "<A HREF=""");
-	declare
-	    Name : constant String :=
-		Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
-	begin
-	    Output_Text (Output_Object, Name);
-	end;
+	if Output_Object.Big_Files then
+	    null; -- No file name needed, this is a self-reference.
+	else
+	    declare
+	        Name : constant String :=
+		    Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
+	    begin
+	        Output_Text (Output_Object, Name);
+	    end;
+	end if;
 	Output_Text (Output_Object, "#I");
 	declare
 	    Key_Name : constant String := Natural'Image(Index_Key);
