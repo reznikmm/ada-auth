@@ -64,6 +64,7 @@ procedure ARM_Formatter is
     --			commands.
     --  9/10/04 - RLB - Updated descriptions of standard commands.
     --  9/14/04 - RLB - Moved version to ARM_Contents.
+    -- 12/05/04 - RLB - Split/added various source files.
 
     -- Standard commands:
     -- For Original RM:
@@ -279,8 +280,12 @@ procedure ARM_Formatter is
 	    Starts_New_Section => True);
 	ARM_Format.Scan (Format, "03B.MSS", Section_Number => 3,
 	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "04.MSS", Section_Number => 4,
+	ARM_Format.Scan (Format, "03C.MSS", Section_Number => 3,
+	    Starts_New_Section => False);
+	ARM_Format.Scan (Format, "04A.MSS", Section_Number => 4,
 	    Starts_New_Section => True);
+	ARM_Format.Scan (Format, "04B.MSS", Section_Number => 4,
+	    Starts_New_Section => False);
 	ARM_Format.Scan (Format, "05.MSS", Section_Number => 5,
 	    Starts_New_Section => True);
 	ARM_Format.Scan (Format, "06.MSS", Section_Number => 6,
@@ -297,8 +302,10 @@ procedure ARM_Formatter is
 	    Starts_New_Section => True);
 	ARM_Format.Scan (Format, "12.MSS", Section_Number => 12,
 	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "13.MSS", Section_Number => 13,
+	ARM_Format.Scan (Format, "13A.MSS", Section_Number => 13,
 	    Starts_New_Section => True);
+	ARM_Format.Scan (Format, "13B.MSS", Section_Number => 13,
+	    Starts_New_Section => False);
 
 	-- Library separator page:
 	ARM_Format.Scan (Format, "LIBRARY.MSS", Section_Number => 20, -- Not a real section number.
@@ -331,6 +338,15 @@ procedure ARM_Formatter is
 	    Section_Number => 21,
 	    Starts_New_Section => False);
 	ARM_Format.Scan (Format, "PRE_Cmdln.MSS",
+	    Section_Number => 21,
+	    Starts_New_Section => False);
+	ARM_Format.Scan (Format, "PRE_Dirs.MSS",
+	    Section_Number => 21,
+	    Starts_New_Section => False);
+	ARM_Format.Scan (Format, "PRE_Environ.MSS",
+	    Section_Number => 21,
+	    Starts_New_Section => False);
+	ARM_Format.Scan (Format, "PRE_Containers.MSS",
 	    Section_Number => 21,
 	    Starts_New_Section => False);
 
@@ -426,9 +442,15 @@ procedure ARM_Formatter is
 	ARM_Format.Process (Format, "03B.MSS", Output_Object,
 	    Section_Name => "03", Section_Number => 3,
 	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "04.MSS", Output_Object,
+	ARM_Format.Process (Format, "03C.MSS", Output_Object,
+	    Section_Name => "03", Section_Number => 3,
+	    Starts_New_Section => False);
+	ARM_Format.Process (Format, "04A.MSS", Output_Object,
 	    Section_Name => "04", Section_Number => 4,
 	    Starts_New_Section => True);
+	ARM_Format.Process (Format, "04B.MSS", Output_Object,
+	    Section_Name => "04", Section_Number => 4,
+	    Starts_New_Section => False);
 	ARM_Format.Process (Format, "05.MSS", Output_Object,
 	    Section_Name => "05", Section_Number => 5,
 	    Starts_New_Section => True);
@@ -453,9 +475,12 @@ procedure ARM_Formatter is
 	ARM_Format.Process (Format, "12.MSS", Output_Object,
 	    Section_Name => "12", Section_Number => 12,
 	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "13.MSS", Output_Object,
+	ARM_Format.Process (Format, "13A.MSS", Output_Object,
 	    Section_Name => "13", Section_Number => 13,
 	    Starts_New_Section => True);
+	ARM_Format.Process (Format, "13B.MSS", Output_Object,
+	    Section_Name => "13", Section_Number => 13,
+	    Starts_New_Section => False);
 
 	-- The "standard libraries" separator page:
 	ARM_Format.Process (Format, "LIBRARY.MSS", Output_Object,
@@ -490,6 +515,15 @@ procedure ARM_Formatter is
 	    Section_Name => "A", Section_Number => 21,
 	    Starts_New_Section => False);
 	ARM_Format.Process (Format, "PRE_Cmdln.MSS", Output_Object,
+	    Section_Name => "A", Section_Number => 21,
+	    Starts_New_Section => False);
+	ARM_Format.Process (Format, "PRE_Dirs.MSS", Output_Object,
+	    Section_Name => "A", Section_Number => 21,
+	    Starts_New_Section => False);
+	ARM_Format.Process (Format, "PRE_Environ.MSS", Output_Object,
+	    Section_Name => "A", Section_Number => 21,
+	    Starts_New_Section => False);
+	ARM_Format.Process (Format, "PRE_Containers.MSS", Output_Object,
 	    Section_Name => "A", Section_Number => 21,
 	    Starts_New_Section => False);
 

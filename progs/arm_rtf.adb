@@ -1531,6 +1531,20 @@ package body ARM_RTF is
     end Start_RTF_File;
 
 
+    function Adj (Version : ARM_Contents.Change_Version_Type) return ARM_Contents.Change_Version_Type is
+       -- Adjust the revision version number to match the revision table.
+       use type ARM_Contents.Change_Version_Type;
+    begin
+        -- Code to skip over weirdly colored second revision (mostly a problem
+	-- on Word 98).
+        if Version = '0' or else Version = '1' then
+	    return Version;
+        else
+	    return ARM_Contents.Change_Version_Type'Succ(Version);
+        end if;
+    end Adj;
+
+
     procedure End_RTF_File (Output_Object : in out RTF_Output_Type) is
 	-- Internal routine.
 	-- Generate the needed text to end an RTF file. Also closes the file.
@@ -2230,21 +2244,9 @@ package body ARM_RTF is
 	-- If No_Page_Break is True, suppress any page breaks.
 	-- Raises Not_Valid_Error if in a paragraph.
 	Count : Natural; -- Not used after being set.
-	function Adj_Version return ARM_Contents.Change_Version_Type is
-	   -- Adjust the version number.
-	   use type ARM_Contents.Change_Version_Type;
-        begin
-	    -- Code to skip over weirdly colored second revision.
-	    if Version = '0' or else Version = '1' then
-		return Version;
-	    else
-		return ARM_Contents.Change_Version_Type'Succ(Version);
-	    end if;
-	end Adj_Version;
-
 	function Header_Text return String is
 	begin
-	    return "{\revised\revauth" & Adj_Version & " " & New_Header_Text & "}{\deleted\revauthdel" & Adj_Version & " " & Old_Header_Text & "}";
+	    return "{\revised\revauth" & Adj(Version) & " " & New_Header_Text & "}{\deleted\revauthdel" & Adj(Version) & " " & Old_Header_Text & "}";
 	end Header_Text;
     begin
 	if not Output_Object.Is_Valid then
@@ -3382,17 +3384,6 @@ package body ARM_RTF is
 
 	procedure Make_Revision is
 	    -- Make any needed revision:
-	    function Adj (Version : ARM_Contents.Change_Version_Type) return ARM_Contents.Change_Version_Type is
-	       -- Adjust the version number.
-	       use type ARM_Contents.Change_Version_Type;
-            begin
-	        -- Code to skip over weirdly colored second revision.
-	        if Version = '0' or else Version = '1' then
-		    return Version;
-	        else
-		    return ARM_Contents.Change_Version_Type'Succ(Version);
-	        end if;
-	    end Adj;
 	begin
 	    -- We could "improve" this by keeping similar changes together,
 	    -- especially for changes to/from Both, but its a lot more work
