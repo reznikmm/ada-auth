@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:44 $}
+@Comment{$Date: 2004/11/11 05:59:04 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.20 $}
+@comment{$Revision: 1.21 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -119,8 +119,8 @@ non-portable under System.
 
 @begin{ImplReq}
 The implementation shall ensure that each language defined subprogram is
-reentrant in the sense that concurrent calls on the same subprogram
-perform as specified,
+reentrant@Chg{Version=[2],New=[@Defn{reentrant}],Old=[]}@ChgNote{Suggested by Gary Dismukes} in
+the sense that concurrent calls on the same subprogram perform as specified,
 so long as all parameters that could be passed by reference
 denote nonoverlapping objects.
 @begin{Ramification}
