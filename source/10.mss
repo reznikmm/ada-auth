@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/09/28 02:57:09 $}
+@Comment{$Date: 2002/07/19 05:48:18 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1302,7 +1302,7 @@ unit.
 @end{Intro}
 
 @begin{Resolution}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0032]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0032],ARef=[AI95-00192]}
 If a @nt<library_unit_body> that is a @nt<subprogram_body> is
 submitted to the compiler, it is interpreted only as a completion
 if a @nt<library_unit_declaration> @Chg{New=[], Old=[for a subprogram
@@ -1428,7 +1428,7 @@ turned off, or it has to automatically regenerate code for the inlined
 calls without requiring the user to resubmit them to the compiler.
 @end{Ramification}
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0108]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0108],ARef=[AI95-00077]}
 @Chg{New=[In the standard mode, implementations may only remove units from
 the environment for one of the reasons listed here, or in response to an
 explicit user command to modify the environment. It is not intended that the
@@ -1532,7 +1532,7 @@ The @nt{name} has to denote the immediately preceding
 @nt{library_unit_declaration}.
 @end{Ramification}
 
-@ChgRef{Version=[1], Kind=[Revised], Ref=[8652/0033]}
+@ChgRef{Version=[1], Kind=[Revised], Ref=[8652/0033], ARef=[AI95-00136]}
 Immediately within the declaration of a program unit and
 before any nested declaration@Chg{New=[ (but not within a
 generic formal part)], Old=[]}, in which case the argument,
@@ -1579,14 +1579,14 @@ completion (and similar things), it has to appear inside, as the first
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034]}
+@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041]}
 @Chg{New=[A library unit pragma that applies to a generic unit does
 not apply to its instances, unless a specific rule for the pragma specifies the
 contrary.], Old=[]}
 @end{StaticSem}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034]}
+@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041]}
 @Chg{New=[When applied to a generic unit, a program unit pragma that
 is not a library unit pragma should apply to each instance of the generic unit
 for which there is not an overriding pragma applied directly to the instance.],
@@ -1890,7 +1890,7 @@ and, for Elaborate_All only, upon
 each @nt{library_item} needed by
 the declaration of the other library unit.
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0107]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0107],ARef=[AI95-00180]}
 @Chg{New=[@Lquotes@;Mentions@rquotes is used informally in the above rule; it is
 not intended to refer to the definition of @i{mentions} in
 @RefSecNum{Context Clauses - With Clauses}. It would have been better to use
@@ -2449,7 +2449,7 @@ instantiations in preelaborated library units,
 which would significantly reduce their usefulness.
 @end{Reason}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002]}
 @PDefn{preelaborated}
 If a @nt{pragma} Preelaborate (or @nt<pragma> Pure @em see below)
 applies to a library unit, then it is @i{preelaborated}.
@@ -2474,7 +2474,7 @@ compilation units of other preelaborated library units.
 In a generic body, we assume the worst about
 formal private types and extensions.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0035]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0035],ARef=[AI95-00002]}
 @Chg{New=[Subunits of a preelaborated subprogram unit do not need
 to be preelaborable. This is needed in order to be consistent with units
 nested in a subprogram body, which do not need to be preelaborable even if
@@ -2677,7 +2677,7 @@ previous @nt{with_clause} of the same @nt{context_clause}.
 A preelaborated library unit is allowed to have non-preelaborable
 children.
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002]}
 But @Chg{New=[generally ], Old=[]}not non-preelaborated subunits.
 @Chg{New=[(Non-preelaborated subunits of subprograms are allowed as
 discussed above.)], Old=[]}
@@ -2686,7 +2686,7 @@ discussed above.)], Old=[]}
 A library unit that is declared pure is allowed to have impure
 children.
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002]}
 But @Chg{New=[generally ], Old=[]}not impure subunits.
 @Chg{New=[(Impure subunits of subprograms are allowed as discussed above.)],
 Old=[]}

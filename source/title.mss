@@ -1,13 +1,13 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2002/06/18 03:56:20 $}
+@comment{$Revision: 1.15 $ $Date: 2002/07/19 05:48:18 $}
 
 @begin{ISOOnly}
-@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}@Chg{New=[ and AMD.1:200y], Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2000], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}}}
 @end{ISOOnly}
 @begin{NotISO}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]@Chg{New=[ and AMD.1:200y], Old=[]}}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2000], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}}}
 @end{NotISO}
 
 @Noparanum@ @*
@@ -56,8 +56,8 @@
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
 @Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:1995(E)}}}
-@Noparanum@Center{@Swiss{@Chg{New=[@Grow{with Technical Corrigendum 1}], Old=[]}}}
-@Noparanum@Center{@Swiss{@Chg{New=[@Grow{and Amendment 1}], Old=[]}}}
+@Noparanum@Center{@Swiss{@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}}}
+@Noparanum@Center{@Swiss{@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
