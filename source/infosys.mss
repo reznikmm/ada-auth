@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:03 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -56,7 +56,7 @@ This Annex is new to Ada 9X.
 @end{Extend83}
 
 
-@LabeledSection{Machine_Radix Attribute Definition Clause}
+@LabeledClause{Machine_Radix Attribute Definition Clause}
 
 @begin{StaticSem}
 @PDefn2{Term=[specifiable], Sec=(of Machine_Radix for decimal first subtypes)}
@@ -103,7 +103,7 @@ instructions that exploit the packed decimal representation.
 @end{example}
 @end{Examples}
 
-@LabeledSection{The Package Decimal}
+@LabeledClause{The Package Decimal}
 
 @begin{StaticSem}
 The library package Decimal has the following declaration:
@@ -179,7 +179,7 @@ function attribute Quotient_Type'Round or the conversion Quotient_Type
 to the expression Dividend/Divisor.
 @end(NotesNotes)
 
-@LabeledSection{Edited Output for Decimal Types}
+@LabeledClause{Edited Output for Decimal Types}
 @begin{Intro}
 The child packages Text_IO.Editing and Wide_Text_IO.Editing
 provide localizable formatted text
@@ -288,7 +288,7 @@ A picture String is of type Standard.String, both for Text_IO.Editing
 and Wide_Text_IO.Editing.
 @end{NotesNotes}
 
-@LabeledSubSection{Picture String Formation}
+@LabeledSubClause{Picture String Formation}
 @begin{Intro}
 @Defn2{term=[picture String],sec=[for edited output]}
 @Defn2{term=[well-formed picture String],sec=[for edited output]}
@@ -549,7 +549,7 @@ Although a sign to the left of the number can float, a sign to the right
 of the number is in a fixed position.
 @end{NotesNotes}
 
-@LabeledSubSection{Edited Output Generation}
+@LabeledSubClause{Edited Output Generation}
 @begin{RunTime}
 The contents of an edited output string are based on:
 @begin{Itemize}
@@ -919,7 +919,7 @@ Item:         Picture and Result Strings:
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{The Package Text_IO.Editing}
+@LabeledSubClause{The Package Text_IO.Editing}
 @begin{Intro}
 The package Text_IO.Editing provides a private type Picture with associated
 operations, and a generic package Decimal_Output.
@@ -1220,7 +1220,7 @@ for the currency string, would be an unnecessary complication.
 @end{Itemize}
 @end{Reason}
 
-@LabeledSubSection{The Package Wide_Text_IO.Editing}
+@LabeledSubClause{The Package Wide_Text_IO.Editing}
 
 @begin{StaticSem}
 @Defn{Ada.Wide_Text_IO.Editing}

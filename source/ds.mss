@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:03 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -75,7 +75,7 @@ as the equivalent single partition program.
 
 @end{NotesNotes}
 
-@LabeledSection{Partitions}
+@LabeledClause{Partitions}
 
 @begin{Intro}
 @redundant[
@@ -236,7 +236,7 @@ to query information about the partition.
 
 @end{NotesNotes}
 
-@LabeledSection{Categorization of Library Units}
+@LabeledClause{Categorization of Library Units}
 
 @begin{Intro}
 @redundant[
@@ -342,7 +342,7 @@ Implementations are allowed to define other categorization pragmas.
 
 @end{ImplPerm}
 
-@LabeledSubSection{Shared Passive Library Units}
+@LabeledSubClause{Shared Passive Library Units}
 @begin{Intro}
 @redundant[
 A shared passive library unit is used for managing global data
@@ -470,7 +470,7 @@ partitions.
 
 @end{LinkTime}
 
-@LabeledSubSection{Remote Types Library Units}
+@LabeledSubClause{Remote Types Library Units}
 
 @begin{Intro}
 @redundant[
@@ -606,7 +606,7 @@ representation, and Read unmarshalling any levels of
 indirection.
 @end{NotesNotes}
 
-@LabeledSubSection{Remote Call Interface Library Units}
+@LabeledSubClause{Remote Call Interface Library Units}
 
 @begin{Intro}
 @redundant[
@@ -801,7 +801,7 @@ be supported as an alternative to RPC.]
 
 @end{ImplPerm}
 
-@LabeledSection{Consistency of a Distributed System}
+@LabeledClause{Consistency of a Distributed System}
 
 @begin{Intro}
 @redundant[
@@ -890,7 +890,7 @@ become inaccessible to one another.
 @end{Bounded}
 
 
-@LabeledSection{Remote Subprogram Calls}
+@LabeledClause{Remote Subprogram Calls}
 
 @begin{Intro}
 @Defn{remote subprogram call}
@@ -1245,7 +1245,7 @@ not include the library unit that defines the exception.
 @end{Discussion}
 @end{NotesNotes}
 
-@LabeledSubSection{Pragma Asynchronous}
+@LabeledSubClause{Pragma Asynchronous}
 
 @begin{Intro}
 @redundant[
@@ -1315,7 +1315,7 @@ It is not clear that this rule can be tested or even defined formally.
 @end{Honest}
 @end{ImplReq}
 
-@LabeledSubSection{Example of Use of a Remote Access-to-Class-Wide Type}
+@LabeledSubClause{Example of Use of a Remote Access-to-Class-Wide Type}
 
 @begin{Examples}
 @i{Example of using a remote access-to-class-wide type to achieve dynamic binding
@@ -1423,7 +1423,7 @@ dereferencing the controlling operands T1 and T2.
 @end{itemize}
 @end{Examples}
 
-@LabeledSection{Partition Communication Subsystem}
+@LabeledClause{Partition Communication Subsystem}
 
 @begin{Intro}
 @Defn{partition communication subsystem (PCS)}

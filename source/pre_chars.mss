@@ -1,10 +1,10 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:29 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
 
-@LabeledAppendixSection{Character Handling}
+@LabeledClause{Character Handling}
 @begin{Intro}
 This clause presents the packages related to character processing:
 an empty pure package Characters and child packages
@@ -21,7 +21,7 @@ constants initialized to values of type Character.
 This clause is new to Ada 9X.
 @end{Extend83}
 
-@LabeledAppendixSubSection(The Package Characters)
+@LabeledSubClause(The Package Characters)
 
 @begin{StaticSem}
 The library package Characters has the following declaration:
@@ -34,7 +34,7 @@ The library package Characters has the following declaration:
 
 @end{StaticSem}
 
-@LabeledAppendixSubSection{The Package Characters.Handling}
+@LabeledSubClause{The Package Characters.Handling}
 @begin{StaticSem}
 The library package Characters.Handling has the following declaration:
 @begin{example}
@@ -115,30 +115,30 @@ function returns False.
 Each of the following classification functions has a formal Character
 parameter, Item, and returns a Boolean result.
 @begin{description}
-@Defn2Next{term=[control character], sec=[a category of Character]}Is_Control @\True if Item is a control character.
+@Defn2{term=[control character], sec=[a category of Character]}Is_Control @\True if Item is a control character.
 A @i{control character} is a character whose position is
 in one of the ranges 0..31 or 127..159.
 
-@Defn2Next{term=[graphic character], sec=[a category of Character]}Is_Graphic @\True if Item is a graphic character.  A @i[graphic character]
+@Defn2{term=[graphic character], sec=[a category of Character]}Is_Graphic @\True if Item is a graphic character.  A @i[graphic character]
 is a character whose position is in one of the ranges
 32..126 or 160..255.
 
-@Defn2Next{term=[letter], sec=[a category of Character]}Is_Letter @\True if Item is a letter.
+@Defn2{term=[letter], sec=[a category of Character]}Is_Letter @\True if Item is a letter.
 A @i[letter] is a character that is in one of the ranges
 'A'..'Z' or 'a'..'z', or whose position is in one of the ranges
 192..214, 216..246, or 248..255.
 
-@Defn2Next{term=[lower-case letter], sec=[a category of Character]}Is_Lower @\True if Item is a lower-case letter.
+@Defn2{term=[lower-case letter], sec=[a category of Character]}Is_Lower @\True if Item is a lower-case letter.
 A @i[lower-case letter] is a character that is in
 the range 'a'..'z', or whose position is in one of the ranges
 223..246 or 248..255.
 
-@Defn2Next{term=[upper-case letter], sec=[a category of Character]}Is_Upper@\True if Item is an upper-case letter.
+@Defn2{term=[upper-case letter], sec=[a category of Character]}Is_Upper@\True if Item is an upper-case letter.
 An @i[upper-case letter] is a character that is in the range
 'A'..'Z' or whose position is in one of the ranges
 192..214 or 216.. 222.
 
-@Defn2Next{term=[basic letter], sec=[a category of Character]}Is_Basic @\True if Item is a basic letter.
+@Defn2{term=[basic letter], sec=[a category of Character]}Is_Basic @\True if Item is a basic letter.
 A @i[basic letter] is a character that is in one of the
 ranges 'A'..'Z' and 'a'..'z', or that is one of the
 following:
@@ -154,20 +154,20 @@ following:
 @comment[These characters are at the positions
 198 and 230, 208 and 240, 222 and 254, and 223.]
 
-@Defn2Next{term=[decimal digit], sec=[a category of Character]}Is_Digit @\True if Item is a decimal digit.
+@Defn2{term=[decimal digit], sec=[a category of Character]}Is_Digit @\True if Item is a decimal digit.
 A @i[decimal digit] is a character in the range '0'..'9'.
 
 Is_Decimal_Digit @\A renaming of Is_Digit.
 
-@Defn2Next{term=[hexadecimal digit], sec=[a category of Character]}Is_Hexadecimal_Digit @\True if Item is a hexadecimal digit.
+@Defn2{term=[hexadecimal digit], sec=[a category of Character]}Is_Hexadecimal_Digit @\True if Item is a hexadecimal digit.
 A @i[hexadecimal digit] is a character that is either a
 decimal digit or that is in one of the ranges 'A' .. 'F' or 'a' .. 'f'.
 
-@Defn2Next{term=[alphanumeric character], sec=[a category of Character]}Is_Alphanumeric @\True if Item is an alphanumeric character.
+@Defn2{term=[alphanumeric character], sec=[a category of Character]}Is_Alphanumeric @\True if Item is an alphanumeric character.
 An @i[alphanumeric character] is a character that is either
 a letter or a  decimal digit.
 
-@Defn2Next{term=[special graphic character], sec=[a category of Character]}Is_Special @\True if Item is a special graphic character.
+@Defn2{term=[special graphic character], sec=[a category of Character]}Is_Special @\True if Item is a special graphic character.
 A @i[special graphic character] is a  graphic character that is
 not alphanumeric.
 @end{description}
@@ -293,7 +293,7 @@ is either a letter or decimal digit but not both; each letter is
 either upper case or lower case but not both.}
 @end{NotesNotes}
 
-@LabeledAppendixSubSection{The Package Characters.Latin_1}
+@LabeledSubClause{The Package Characters.Latin_1}
 @begin{Intro}
 The package Characters.Latin_1 declares constants for
 characters in ISO 8859-1.

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
-@LabeledChapter{Packages}
+@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @redundant[
@@ -23,7 +23,7 @@
 ]
 @end{Intro}
 
-@LabeledSection{Package Specifications and Declarations}
+@LabeledClause{Package Specifications and Declarations}
 
 @begin{Intro}
 @redundant[
@@ -186,7 +186,7 @@ declaration, the completion rules need to take this into account as
 well.
 @end{DiffWord83}
 
-@LabeledSection{Package Bodies}
+@LabeledClause{Package Bodies}
 
 @begin{Intro}
 @redundant[
@@ -358,7 +358,7 @@ The rule about implicit bodies (from RM83-9.3(5))
 is moved here, since it is more generally applicable.
 @end{DiffWord83}
 
-@LabeledSection{Private Types and Private Extensions}
+@LabeledClause{Private Types and Private Extensions}
 
 @begin{Intro}
 @redundant[
@@ -906,7 +906,7 @@ and the rule that the parent type of a derived type declaration shall be
 completely defined, unless the derived type is a private extension.
 @end{DiffWord83}
 
-@LabeledSubSection{Private Operations}
+@LabeledSubClause{Private Operations}
 
 @begin{Intro}
 @Redundant[For a type declared in the visible part of a package
@@ -1231,7 +1231,7 @@ has been moved to ``Obsolescent Features.''
 (The Constrained attribute of an object has not been moved there.)
 @end{DiffWord83}
 
-@LabeledSection{Deferred Constants}
+@LabeledClause{Deferred Constants}
 
 @begin{Intro}
 @redundant[
@@ -1402,7 +1402,7 @@ Deferred constant declarations used to have their own syntax, but now
 they are simply a special case of @nt<object_declaration>s.
 @end{DiffWord83}
 
-@LabeledSection{Limited Types}
+@LabeledClause{Limited Types}
 
 @begin{Intro}
 @redundant[
@@ -1610,7 +1610,7 @@ than being a subclause of
 @RefSec{Private Types and Private Extensions}.
 @end{DiffWord83}
 
-@LabeledSection{User-Defined Assignment and Finalization}
+@LabeledClause{User-Defined Assignment and Finalization}
 
 @begin{Intro}
 @redundant[
@@ -1997,7 +1997,7 @@ Controlled types and user-defined finalization are new to Ada 9X.
 (Ada 83 had finalization semantics only for masters of tasks.)
 @end{Extend83}
 
-@LabeledSubSection{Completion and Finalization}
+@LabeledSubClause{Completion and Finalization}
 
 @begin{Intro}
 @redundant[

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -87,7 +87,7 @@ of an implementation for a particular real-time application.
 This Annex is new to Ada 9X.
 @end{Extend83}
 
-@LabeledSection{Task Priorities}
+@LabeledClause{Task Priorities}
 @begin{Intro}
 @Redundant[This clause specifies the priority model for real-time systems.
 In addition, the methods for specifying priorities are defined.]
@@ -296,7 +296,7 @@ The description of the Priority pragma has been moved to this annex.
 
 @end{DiffWord83}
 
-@LabeledSection{Priority Scheduling}
+@LabeledClause{Priority Scheduling}
 
 @begin{Intro}
 @Redundant[This clause describes the rules that determine which task is
@@ -308,7 +308,7 @@ and a specific task dispatching policy
 (@lSeeSecNum{The Standard Task Dispatching Policy}).]
 @end{Intro}
 
-@LabeledSubSection{The Task Dispatching Model}
+@LabeledSubClause{The Task Dispatching Model}
 
 @begin{Intro}
 @Redundant[The task dispatching model specifies preemptive
@@ -483,7 +483,7 @@ under @RefSec{Task Priorities}, @RefSec{Priority Ceiling Locking}, and
 
 @end{NotesNotes}
 
-@LabeledSubSection{The Standard Task Dispatching Policy}
+@LabeledSubClause{The Standard Task Dispatching Policy}
 
 @begin{Syntax}
 @begin{SyntaxText}
@@ -622,7 +622,7 @@ regardless of whether the active priority of the task actually changes.
 
 @end{NotesNotes}
 
-@LabeledSection{Priority Ceiling Locking}
+@LabeledClause{Priority Ceiling Locking}
 
 @begin{Intro}
 @Redundant[This clause specifies the interactions between priority task
@@ -809,7 +809,7 @@ calls another protected operation on the same protected object).
 
 @end{NotesNotes}
 
-@LabeledSection{Entry Queuing Policies}
+@LabeledClause{Entry Queuing Policies}
 
 @begin{Intro}
 @Redundant[@Defn{queuing policy}
@@ -982,7 +982,7 @@ The implementation should use names that end with
 
 @end{ImplAdvice}
 
-@LabeledSection{Dynamic Priorities}
+@LabeledClause{Dynamic Priorities}
 
 @begin{Intro}
 @Redundant[This clause specifies how the base priority of a task can be
@@ -1194,7 +1194,7 @@ affected tasks.
 
 @end{NotesNotes}
 
-@LabeledSection{Preemptive Abort}
+@LabeledClause{Preemptive Abort}
 
 @begin{Intro}
 @Redundant[This clause specifies requirements on the immediacy with
@@ -1278,7 +1278,7 @@ deferral of abortion during finalization and in protected actions.
 
 @end{NotesNotes}
 
-@LabeledSection{Tasking Restrictions}
+@LabeledClause{Tasking Restrictions}
 
 @begin{Intro}
 @Redundant[This clause defines restrictions that can be used with a
@@ -1290,10 +1290,10 @@ construction of highly efficient tasking run-time systems.]
 @begin{multiple}
 The following @SynI{restriction_}@nt{identifier}s are language defined:
 @begin{Description}
-@Defn2Next{Term=[Restrictions],Sec=(No_Task_Hierarchy)}No_Task_Hierarchy @\All (nonenvironment) tasks depend directly on
+@Defn2{Term=[Restrictions],Sec=(No_Task_Hierarchy)}No_Task_Hierarchy @\All (nonenvironment) tasks depend directly on
                         the environment task of the partition.
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Nested_Finalization)}No_Nested_Finalization @\Objects with controlled parts and
+@Defn2{Term=[Restrictions],Sec=(No_Nested_Finalization)}No_Nested_Finalization @\Objects with controlled parts and
                               access types that designate such
                               objects shall be declared only at library level.
     @begin{Ramification}
@@ -1302,16 +1302,16 @@ The following @SynI{restriction_}@nt{identifier}s are language defined:
     However, this restriction does not restrict those things.
     @end{Ramification}
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Abort_Statements)}No_Abort_Statements @\There are no @nt{abort_statement}s, and there are no
+@Defn2{Term=[Restrictions],Sec=(No_Abort_Statements)}No_Abort_Statements @\There are no @nt{abort_statement}s, and there are no
 calls on Task_Identification.Abort_Task.
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Terminate_Alternatives)}No_Terminate_Alternatives @\There are no @nt{selective_accept}s with
+@Defn2{Term=[Restrictions],Sec=(No_Terminate_Alternatives)}No_Terminate_Alternatives @\There are no @nt{selective_accept}s with
                         @nt{terminate_alternative}s.
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Task_Allocators)}No_Task_Allocators @\There are no @nt{allocator}s for task types or types
+@Defn2{Term=[Restrictions],Sec=(No_Task_Allocators)}No_Task_Allocators @\There are no @nt{allocator}s for task types or types
                         containing task subcomponents.
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Implicit_Heap_Allocations)}No_Implicit_Heap_Allocations @\There are no operations that implicitly require
+@Defn2{Term=[Restrictions],Sec=(No_Implicit_Heap_Allocations)}No_Implicit_Heap_Allocations @\There are no operations that implicitly require
                         heap storage allocation to be performed by the
                         implementation.  The operations that implicitly
                         require heap storage allocation are
@@ -1323,7 +1323,7 @@ No_Dynamic_Priorities @\There are no semantic dependences on the package
                 Dynamic_Priorities.
 @Defn2{Term=[Restrictions],Sec=(No_Dynamic_Priorities)}
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\There are no semantic dependences on the package
+@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\There are no semantic dependences on the package
                 Asynchronous_Task_Control.
 @end{Description}
 @end{Multiple}
@@ -1332,10 +1332,10 @@ No_Dynamic_Priorities @\There are no semantic dependences on the package
 The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
 @begin{Description}
-@Defn2Next{Term=[Restrictions],Sec=(Max_Select_Alternatives)}Max_Select_Alternatives @\Specifies the maximum number of alternatives
+@Defn2{Term=[Restrictions],Sec=(Max_Select_Alternatives)}Max_Select_Alternatives @\Specifies the maximum number of alternatives
                 in a @nt{selective_accept}.
 
-@Defn2Next{Term=[Restrictions],Sec=(Max_Task_Entries)}Max_Task_Entries @\Specifies the maximum number of entries per task.
+@Defn2{Term=[Restrictions],Sec=(Max_Task_Entries)}Max_Task_Entries @\Specifies the maximum number of entries per task.
     The bounds of every entry family
     of a task unit shall be static,
     or shall be defined by a discriminant of a subtype whose
@@ -1367,12 +1367,12 @@ Storage_Error should be raised.
 The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
 @begin{Description}
-@Defn2Next{Term=[Restrictions],Sec=(Max_Storage_At_Blocking)}Max_Storage_At_Blocking @\Specifies the maximum portion
+@Defn2{Term=[Restrictions],Sec=(Max_Storage_At_Blocking)}Max_Storage_At_Blocking @\Specifies the maximum portion
                           @redundant[(in storage elements)]
                           of a task's Storage_Size
                           that can be retained by a blocked task.
 
-@Defn2Next{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies the maximum dynamic nesting level of
+@Defn2{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies the maximum dynamic nesting level of
                                 @nt{asynchronous_select}s.
 
                                 @Redundant[A value of zero prevents
@@ -1380,7 +1380,7 @@ language defined:
                                 @nt{asynchronous_select}.]
 
 
-@Defn2Next{Term=[Restrictions],Sec=(Max_Tasks)}Max_Tasks @\Specifies the maximum number of task creations
+@Defn2{Term=[Restrictions],Sec=(Max_Tasks)}Max_Tasks @\Specifies the maximum number of task creations
     that may be executed over the lifetime of a partition,
     not counting the creation of the environment task.
                                 @begin{Ramification}
@@ -1415,7 +1415,7 @@ restrictions to produce a more efficient implementation.
 The above Storage_Checks can be suppressed with pragma Suppress.
 @end{NotesNotes}
 
-@LabeledSection{Monotonic Time}
+@LabeledClause{Monotonic Time}
 @begin{Intro}
 @Redundant[This clause specifies a high-resolution,
 monotonic clock package.]
@@ -1780,7 +1780,7 @@ There is no requirement that these be the same.
 
 @end{NotesNotes}
 
-@LabeledSection{Delay Accuracy}
+@LabeledClause{Delay Accuracy}
 
 @begin{Intro}
 @Redundant[This clause specifies performance requirements for the
@@ -1899,7 +1899,7 @@ the rendezvous is immediately possible.
 
 @end{DiffWord83}
 
-@LabeledSection{Synchronous Task Control}
+@LabeledClause{Synchronous Task Control}
 
 @begin{Intro}
 @Redundant[This clause describes a language-defined private semaphore
@@ -1973,7 +1973,7 @@ in the Interrupt_Priority range.
 
 @end{ImplReq}
 
-@LabeledSection{Asynchronous Task Control}
+@LabeledClause{Asynchronous Task Control}
 
 @begin{Intro}
 @Redundant[This clause introduces a language-defined package to do
@@ -2113,7 +2113,7 @@ whose barrier becomes open.  The corresponding entry body executes.
 
 @end{NotesNotes}
 
-@LabeledSection{Other Optimizations and Determinism Rules}
+@LabeledClause{Other Optimizations and Determinism Rules}
 
 @begin{Intro}
 @Redundant[This clause describes various requirements for

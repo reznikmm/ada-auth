@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
-@LabeledChapter{Generic Units}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -50,7 +50,7 @@ cannot be used to produce further instances.
 ]
 @end{Intro}
 
-@LabeledSection{Generic Declarations}
+@LabeledClause{Generic Declarations}
 
 @begin{Intro}
 @redundant[
@@ -221,7 +221,7 @@ We can't do that for @nt{generic_formal_parameter_declaration},
 because of confusion with normal formal parameters of subprograms.
 @end{DiffWord83}
 
-@LabeledSection{Generic Bodies}
+@LabeledClause{Generic Bodies}
 
 @begin{Intro}
 @Defn{generic body}
@@ -303,7 +303,7 @@ is always the completion of a declaration.
 @end{Example}
 @end{Examples}
 
-@LabeledSection{Generic Instantiation}
+@LabeledClause{Generic Instantiation}
 
 @begin{Intro}
 @redundant[
@@ -1182,7 +1182,7 @@ Besides, there's really no need to define the concept of matching for
 generic parameters.
 @end{DiffWord83}
 
-@LabeledSection{Formal Objects}
+@LabeledClause{Formal Objects}
 
 @begin{Intro}
 @redundant[
@@ -1369,7 +1369,7 @@ We decided not to make this change, because it does not produce any
 important benefit, and any change has some cost.
 @end{DiffWord83}
 
-@LabeledSection{Formal Types}
+@LabeledClause{Formal Types}
 
 @begin{Intro}
 @redundant[
@@ -1587,7 +1587,7 @@ package Standard.  Therefore, we need not mention them here as RM83
 had to.
 @end{DiffWord83}
 
-@LabeledSubSection{Formal Private and Derived Types}
+@LabeledSubClause{Formal Private and Derived Types}
 
 @begin{Intro}
 @Redundant[The class determined for a formal private type
@@ -1842,7 +1842,7 @@ The check for discriminant subtype matching is changed from a
 run-time check to a compile-time check.
 @end{Incompatible83}
 
-@LabeledSubSection{Formal Scalar Types}
+@LabeledSubClause{Formal Scalar Types}
 
 @begin{Intro}
 A @i{formal scalar type} is one defined by any of the
@@ -1888,7 +1888,7 @@ by the syntactic category of the formal type definition
 @nt<formal_modular_type_definition> shall be a modular type.
 @end{NotesNotes}
 
-@LabeledSubSection{Formal Array Types}
+@LabeledSubClause{Formal Array Types}
 
 @begin{Intro}
 @Redundant[The class determined for a formal array type
@@ -1973,7 +1973,7 @@ Likewise, the rules requiring that component types be
 the same is subsumed.
 @end{Incompatible83}
 
-@LabeledSubSection{Formal Access Types}
+@LabeledSubClause{Formal Access Types}
 
 @begin{Intro}
 @Redundant[The class determined for a formal access type
@@ -2060,7 +2060,7 @@ Formal access-to-subprogram subtypes and formal general access
 types are new concepts.
 @end{Extend83}
 
-@LabeledSection{Formal Subprograms}
+@LabeledClause{Formal Subprograms}
 
 @begin{Intro}
 @redundant[
@@ -2214,7 +2214,7 @@ The actual subprogram cannot be abstract
 @end{Example}
 @end{Examples}
 
-@LabeledSection{Formal Packages}
+@LabeledClause{Formal Packages}
 
 @begin{Intro}
 @redundant[
@@ -2308,7 +2308,7 @@ as an actual to another generic formal package.
 Formal packages are new to Ada 9X.
 @end{Extend83}
 
-@LabeledSection{Example of a Generic Package}
+@LabeledClause{Example of a Generic Package}
 
 @begin{Intro}
 The following example provides a possible formulation of stacks by means

@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:29 $}
+@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -35,7 +35,7 @@ Much of the functionality in this Annex is new to Ada 9X.
 This Annex contains what used to be RM83-13.8.
 @end{DiffWord83}
 
-@LabeledSection{Interfacing Pragmas}
+@LabeledClause{Interfacing Pragmas}
 
 @begin{Intro}
 A @nt{pragma} Import is used to import an entity defined in a foreign
@@ -355,7 +355,7 @@ defined.
 @begin{RunTime}
 @PDefn2{Term=[elaboration], Sec=(declaration named by a @nt{pragma} Import)}
 @Defn{notwithstanding}
-Notwithstanding what this @SelfRef says elsewhere,
+Notwithstanding what this International Standard says elsewhere,
 the elaboration of a declaration denoted by the
 @nt{local_name} of
 a @nt{pragma} Import does not create the entity.
@@ -518,7 +518,7 @@ Existing implementations can continue to support pragma Interface for
 upward compatibility.
 @end{Extend83}
 
-@LabeledSection{The Package Interfaces}
+@LabeledClause{The Package Interfaces}
 @begin{Intro}
 Package Interfaces is  the parent of several library
 packages that declare
@@ -668,7 +668,7 @@ should be declared as a renaming:
 @end{ImplNote}
 @end{ImplAdvice}
 
-@LabeledSection{Interfacing with C}
+@LabeledClause{Interfacing with C}
 @begin{Intro}
 @Defn{interface to C}
 @Defn{C interface}
@@ -1119,7 +1119,7 @@ specific numbers and types of parameters.
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{The Package Interfaces.C.Strings}
+@LabeledSubClause{The Package Interfaces.C.Strings}
 
 @begin{Intro}
 The package Interfaces.C.Strings declares types and subprograms
@@ -1388,7 +1388,7 @@ Free, not by a called C function.
 @end{itemize}
 @end{NotesNotes}
 
-@LabeledSubSection{The Generic Package Interfaces.C.Pointers}
+@LabeledSubClause{The Generic Package Interfaces.C.Pointers}
 @begin{Intro}
 The generic package Interfaces.C.Pointers allows the Ada programmer to
 perform C-style operations on pointers.  It includes an access type
@@ -1640,7 +1640,7 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 @end{Example}
 @end{Examples}
 
-@LabeledSection{Interfacing with COBOL}
+@LabeledClause{Interfacing with COBOL}
 @begin{Intro}
 @Defn{interface to COBOL}
 @Defn{COBOL interface}
@@ -2283,7 +2283,7 @@ call may specify
 @end{Example}
 @end{Examples}
 
-@LabeledAppendixSection{Interfacing with Fortran}
+@LabeledClause{Interfacing with Fortran}
 
 @begin{Intro}
 @Defn{interface to Fortran}

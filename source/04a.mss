@@ -1,17 +1,17 @@
 @Part(04, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
-@LabeledChapter{Names and Expressions}
+@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
 expression, and to their evaluation, are given in this section.]
 @end{Intro}
 
-@LabeledSection{Names}
+@LabeledClause{Names}
 
 @begin{Intro}
 @redundant[
@@ -237,7 +237,7 @@ since we now describe the semantics of a prefix in terms
 of implicit dereference.
 @end{DiffWord83}
 
-@LabeledSubSection{Indexed Components}
+@LabeledSubClause{Indexed Components}
 
 @begin{Intro}
 @Redundant[An @nt<indexed_component> denotes either
@@ -326,7 +326,7 @@ two-dimensional array.
 
 @end{NotesNotes}
 
-@LabeledSubSection{Slices}
+@LabeledSubClause{Slices}
 
 @begin{Intro}
 @redundant[
@@ -414,7 +414,7 @@ component of the array A and has the corresponding component type.
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{Selected Components}
+@LabeledSubClause{Selected Components}
 
 @begin{Intro}
 @redundant[
@@ -604,7 +604,7 @@ The rules have been restated to be consistent with our
 new terminology, to accommodate class-wide types, etc.
 @end{DiffWord83}
 
-@LabeledSubSection{Attributes}
+@LabeledSubClause{Attributes}
 
 @begin{Intro}
 @Defn{attribute}
@@ -726,7 +726,7 @@ implementation-defined attribute can be used in a static expression.
 @end{ImplPerm}
 
 @begin{NotesNotes}
-Attributes are defined throughout this @SelfRef,
+Attributes are defined throughout this International Standard,
 and are summarized in
 @RefSecNum{Language-Defined Attributes}.
 
@@ -814,7 +814,7 @@ The Ada 83 rule said that the
   prefix (@lSeeSecNum(Operations of Access Types)).
 @end{DiffWord83}
 
-@LabeledSection{Literals}
+@LabeledClause{Literals}
 
 @begin{Intro}
 @Redundant[@Defn{literal}
@@ -976,7 +976,7 @@ nor semantically "literals" but are rather names of parameterless
 functions.
 @end{DiffWord83}
 
-@LabeledSection{Aggregates}
+@LabeledClause{Aggregates}
 
 @begin{Intro}
 @Redundant[@Defn{aggregate}
@@ -1089,7 +1089,7 @@ This is necessary so that controlled types
 will work (@lSeeSecNum{User-Defined Assignment and Finalization}).
 @end{DiffWord83}
 
-@LabeledSubSection{Record Aggregates}
+@LabeledSubClause{Record Aggregates}
 
 @begin{Intro}
 @Redundant[In a @nt<record_aggregate>, a value is specified for
@@ -1385,7 +1385,7 @@ In particular, Ada 83 did not explicitly disallow extra values in
 a record aggregate.  Now we do.
 @end{DiffWord83}
 
-@LabeledSubSection{Extension Aggregates}
+@LabeledSubClause{Extension Aggregates}
 
 @begin{Intro}
 @Redundant[An @nt<extension_aggregate> specifies a value
@@ -1522,7 +1522,7 @@ Addition'(Binop @key{with null record})
 The extension aggregate syntax is new.
 @end{Extend83}
 
-@LabeledSubSection{Array Aggregates}
+@LabeledSubClause{Array Aggregates}
 
 @begin{Intro}
 
@@ -1921,13 +1921,13 @@ multidimensional and one-dimensional aggregates more uniformly,
 and to incorporate the rulings of AI-19, AI-309, etc.
 @end{DiffWord83}
 
-@LabeledSection{Expressions}
+@LabeledClause{Expressions}
 
 @begin{Intro}
 @Defn{expression}
 An @i(expression) is a formula that defines the computation or retrieval
 of a value.
-In this @SelfRef, the term ``expression'' refers to a construct
+In this International Standard, the term ``expression'' refers to a construct
 of the syntactic category @nt<expression> or
 of any of the other five syntactic categories defined below.
 @Defn{and operator}@Defn2{Term=[operator],Sec=(and)}
@@ -2116,7 +2116,7 @@ logical operators, and hence uses of logical operators
 still have to be parenthesized when used in a bound of a range.
 @end{Extend83}
 
-@LabeledSection{Operators and Expression Evaluation}
+@LabeledClause{Operators and Expression Evaluation}
 
 @begin{Intro}
 @Redundant[@Defn{precedence of operators}
@@ -2272,7 +2272,7 @@ The permission to reassociate is moved here from RM83-11.6(5), so
 it is closer to the rules defining operator association.
 @end{DiffWord83}
 
-@LabeledSubSection{Logical Operators and Short-circuit Control Forms}
+@LabeledSubClause{Logical Operators and Short-circuit Control Forms}
 
 @begin{Resolution}
 @Defn{short-circuit control form}
@@ -2392,7 +2392,7 @@ N = 0 @key(or) @key(else) A(N) = Hit_Value
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{Relational Operators and Membership Tests}
+@LabeledSubClause{Relational Operators and Membership Tests}
 
 @begin{Intro}
 @redundant[
@@ -2772,7 +2772,7 @@ category similar to ``ordering operator'' to refer to both
 We have changed the term ``catenate'' to ``concatenate''.
 @end{DiffWord83}
 
-@LabeledSubSection{Binary Adding Operators}
+@LabeledSubClause{Binary Adding Operators}
 
 @begin{StaticSem}
 @Defn{binary adding operator}@Defn2{Term=[operator],Sec=(binary adding)}
@@ -2922,7 +2922,7 @@ first sliding the left operand (if nonnull) so that
 its lower bound is that of the index subtype.
 @end{Extend83}
 
-@LabeledSubSection{Unary Adding Operators}
+@LabeledSubClause{Unary Adding Operators}
 
 @begin{StaticSem}
 @Defn{unary adding operator}@Defn2{Term=[operator],Sec=(unary adding)}
@@ -2947,7 +2947,7 @@ the value of the operand from the modulus;
 for a zero operand, the result is zero.
 @end{NotesNotes}
 
-@LabeledSubSection{Multiplying Operators}
+@LabeledSubClause{Multiplying Operators}
 
 @begin{StaticSem}
 
@@ -3198,7 +3198,7 @@ We have used the normal syntax for function definition
 rather than a tabular format.
 @end{DiffWord83}
 
-@LabeledSubSection{Highest Precedence Operators}
+@LabeledSubClause{Highest Precedence Operators}
 
 @begin{StaticSem}
 @Defn{highest precedence operator}@Defn2{Term=[operator],Sec=(highest precedence)}
@@ -3312,7 +3312,7 @@ This reflects the fact that Constraint_Error is raised if
 a negative value is provided for the exponent.
 @end{DiffWord83}
 
-@LabeledSection{Type Conversions}
+@LabeledClause{Type Conversions}
 
 @begin{Intro}
 @Redundant[Explicit type conversions, both
@@ -4005,7 +4005,7 @@ and have been generalized to cover the use of a type conversion
 as a @nt<name>.
 @end{DiffWord83}
 
-@LabeledSection{Qualified Expressions}
+@LabeledClause{Qualified Expressions}
 
 @begin{Intro}
 @Redundant[A @nt<qualified_expression> is used to state explicitly the type,
@@ -4079,7 +4079,7 @@ Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @i[-- @lSeeSecNum{Type Conversions
 @end{Example}
 @end{Examples}
 
-@LabeledSection{Allocators}
+@LabeledClause{Allocators}
 
 @begin{Intro}
 @Redundant[The evaluation of an @nt<allocator> creates an object and yields
@@ -4291,7 +4291,7 @@ such as garbage collection and the raising of Storage_Error,
 has been moved to @RefSec{Storage Management}.
 @end{DiffWord83}
 
-@LabeledSection{Static Expressions and Static Subtypes}
+@LabeledClause{Static Expressions and Static Subtypes}
 
 @begin{Intro}
 Certain expressions of a scalar or string type are defined to be static.
@@ -4878,7 +4878,7 @@ raising.
 
 @end{DiffWord83}
 
-@LabeledSubSection{Statically Matching Constraints and Subtypes}
+@LabeledSubClause{Statically Matching Constraints and Subtypes}
 
 @begin{StaticSem}
 @Defn2{Term=[statically matching], Sec=(for constraints)}

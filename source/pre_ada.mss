@@ -1,10 +1,10 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_ada.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 00/03/08 Created by RLB to avoid Includes }
+@comment{ $Revision: 1.3 $ $Date: 00/03/08 Created by RLB to avoid Includes }
 @Part(predefstandard, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 00:44:03 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
 
-@LabeledAppendixSection{The Package Ada}
+@LabeledClause{The Package Ada}
 
 @begin{StaticSem}
 The following language-defined library package exists:

@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedB(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $}
+@comment{$Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $}
 
 @begin{Intro}
 @begin{AARMandRM9XOnly}
@@ -425,7 +425,7 @@ applicable to all types of a given class.
 
 @begin{Intro}
 
-This @SelfRef replaces the first edition of 1987.
+This International Standard replaces the first edition of 1987.
 In this edition,
 
 the following major language changes have been incorporated:
@@ -551,7 +551,7 @@ in accordance with the procedures.
 
 @begin{Intro}
 
-This @SelfRef was prepared by the Ada 9X Mapping/Revision Team based
+This International Standard was prepared by the Ada 9X Mapping/Revision Team based
 at Intermetrics, Inc., which has included:
 W. Carlson, Program Manager;
 T. Taft, Technical Director;

@@ -1,10 +1,10 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
 
-@LabeledAppendixSection{The Numerics Packages}
+@LabeledClause{The Numerics Packages}
 
 @begin{Intro}
 The library package Numerics is the parent of several child units that provide
@@ -53,7 +53,7 @@ significant digits.
 Numerics and its children were not predefined in Ada 83.
 @end{Extend83}
 
-@LabeledAppendixSubSection{Elementary Functions}
+@LabeledSubClause{Elementary Functions}
 
 @begin{Intro}
 Implementation-defined
@@ -385,7 +385,7 @@ in the following ways:
 @end{itemize}
 @end{DiffWord83}
 
-@LabeledAppendixSubSection{Random Number Generation}
+@LabeledSubClause{Random Number Generation}
 
 @begin{Intro}
 @redundant[

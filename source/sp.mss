@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -22,7 +22,7 @@ required in many real-time, embedded, distributed, and information systems.]
 This Annex is new to Ada 9X.
 @end{Extend83}
 
-@LabeledSection{Access to Machine Operations}
+@LabeledClause{Access to Machine Operations}
 
 @begin{Intro}
 @Redundant[This clause specifies rules regarding access to machine instructions
@@ -122,7 +122,7 @@ Direct operations on I/O ports.
 
 @end{ImplAdvice}
 
-@LabeledSection{Required Representation Support}
+@LabeledClause{Required Representation Support}
 
 @begin{Intro}
 This clause specifies minimal requirements on the
@@ -137,7 +137,7 @@ The implementation shall support at least the functionality
 defined by the recommended levels of support in Section 13.
 @end{ImplReq}
 
-@LabeledSection{Interrupt Support}
+@LabeledClause{Interrupt Support}
 
 @begin{Intro}
 @Redundant[This clause specifies the language-defined model for hardware interrupts
@@ -339,7 +339,7 @@ is modeled after the rule about exceptions propagated out of task bodies.
 
 @end{NotesNotes}
 
-@LabeledSubSection{Protected Procedure Handlers}
+@LabeledSubClause{Protected Procedure Handlers}
 
 @begin{Syntax}
 @begin{SyntaxText}
@@ -529,7 +529,7 @@ a protected procedure that is an interrupt handler.
 
 @end{NotesNotes}
 
-@LabeledSubSection{The Package Interrupts}
+@LabeledSubClause{The Package Interrupts}
 
 @begin{StaticSem}
 
@@ -707,7 +707,7 @@ Device_5_Driver : Device_Interface(5);
 @end{example}
 @end{Examples}
 
-@LabeledSection{Preelaboration Requirements}
+@LabeledClause{Preelaboration Requirements}
 
 @begin{Intro}
 @Redundant[This clause specifies additional implementation and documentation
@@ -799,7 +799,7 @@ elaboration of entities not already covered by the @ImplReqName@;s.
 
 @end{ImplAdvice}
 
-@LabeledSection{Pragma Discard_Names}
+@LabeledClause{Pragma Discard_Names}
 
 @begin{Intro}
 @Redundant[A @nt{pragma} Discard_Names may be used to request a
@@ -894,7 +894,7 @@ functions.
 @end{Reason}
 @end{ImplAdvice}
 
-@LabeledSection{Shared Variable Control}
+@LabeledClause{Shared Variable Control}
 
 @begin{Intro}
 @Redundant[This clause specifies representation pragmas that control the use of
@@ -1107,7 +1107,7 @@ The name ``Shared'' was confusing,
 because the pragma was not used to mark variables as shared.
 @end{Incompatible83}
 
-@LabeledSection{Task Identification and Attributes}
+@LabeledClause{Task Identification and Attributes}
 
 @begin{Intro}
 @Redundant[This clause describes operations and attributes that can be
@@ -1116,7 +1116,7 @@ a package that associates user-defined information with a task is
 defined.]
 @end{Intro}
 
-@LabeledSubSection{The Package Task_Identification}
+@LabeledSubClause{The Package Task_Identification}
 
 @begin{StaticSem}
 The following language-defined library package exists:
@@ -1245,7 +1245,7 @@ Task_ID value that identifies the environment task.
 
 @end{NotesNotes}
 
-@LabeledSubSection{The Package Task_Attributes}
+@LabeledSubClause{The Package Task_Attributes}
 
 @begin{StaticSem}
 The following language-defined generic library package exists:

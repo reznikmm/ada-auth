@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
-@LabeledChapter{Exceptions}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @redundant[
@@ -71,7 +71,7 @@ In order to understand these semantics,
 we have to make this distinction.
 @end{DiffWord83}
 
-@LabeledSection{Exception Declarations}
+@LabeledClause{Exception Declarations}
 
 @begin{Intro}
 @Defn{exception}
@@ -184,7 +184,7 @@ the exception will now be caught by that handler.
 We explicitly define elaboration for @nt{exception_declaration}s.
 @end{DiffWord83}
 
-@LabeledSection{Exception Handlers}
+@LabeledClause{Exception Handlers}
 
 @begin{Intro}
 @redundant[
@@ -313,7 +313,7 @@ Note that there are more such cases in Ada 9X.
 The syntax rule for @nt{choice_parameter_specification} is new.
 @end{DiffWord83}
 
-@LabeledSection{Raise Statements}
+@LabeledClause{Raise Statements}
 
 @begin{Intro}
 @redundant[
@@ -374,7 +374,7 @@ RM83-1.5(11) doesn't seem to give the italicized parts of the syntax
 any force.
 @end{DiffWord83}
 
-@LabeledSection{Exception Handling}
+@LabeledClause{Exception Handling}
 
 @begin{Intro}
 @redundant[
@@ -408,7 +408,7 @@ Tasking_Error; this is not propagation.
 @Defn2{Term=[dynamically enclosing], Sec=(of one execution by another)}
 @Defn2{Term=[execution], Sec=(dynamically enclosing)}
 Within a given task, if the
-execution of construct @i{a} is defined by this @SelfRef
+execution of construct @i{a} is defined by this International Standard
 to consist (in part) of the
 execution of construct @i{b}, then while @i{b} is executing, the
 execution of @i{a} is said to @i(dynamically enclose) the execution of
@@ -531,7 +531,7 @@ are not handled by the handlers of the
 @nt{handled_sequence_of_statements} of that body.
 @end{NotesNotes}
 
-@LabeledSubSection{The Package Exceptions}
+@LabeledSubClause{The Package Exceptions}
 
 @begin{StaticSem}
 The following language-defined library package exists:
@@ -895,7 +895,7 @@ The Identity attribute of exceptions is new, as is the package
 Exceptions.
 @end{Extend83}
 
-@LabeledSubSection{Example of Exception Handling}
+@LabeledSubClause{Example of Exception Handling}
 
 @begin{Examples}
 Exception handling may be used to separate the detection of an error
@@ -983,7 +983,7 @@ are subsumed by this clause,
 and by parts of Section 9.
 @end{DiffWord83}
 
-@LabeledSection{Suppressing Checks}
+@LabeledClause{Suppressing Checks}
 
 @begin{Intro}
 A @nt{pragma} Suppress gives permission to an
@@ -995,7 +995,7 @@ implementation to omit certain language-defined checks.
 @Defn{run-time error}
 @Defn2{Term=[error], Sec=(run-time)}
 A @i{language-defined check} (or simply, a ``check'') is
-one of the situations defined by this @SelfRef that requires a check to
+one of the situations defined by this International Standard that requires a check to
 be made at run time to determine whether some
 condition is true.
 @Defn2{Term=[failure],Sec=(of a language-defined check)}
@@ -1063,26 +1063,26 @@ The following are the language-defined checks:
 @Redundant[The following checks correspond to situations in which the
 exception Constraint_Error is raised upon failure.]
 @begin{Description}
-@RootDefnNext{Access_Check}
+@RootDefn{Access_Check}
 Access_Check @\@Redundant[When evaluating a dereference (explicit
 or implicit),
 check that the value of the @nt{name} is not @key{null}.
 When passing an actual parameter to a formal access parameter,
 check that the value of the actual parameter is not @key{null}.]
 
-@RootDefnNext{Discriminant_Check}
+@RootDefn{Discriminant_Check}
 Discriminant_Check @\@Redundant[Check that the discriminants of a
 composite value
 have the values imposed by a discriminant constraint.  Also, when
 accessing a record component, check that it exists for the current
 discriminant values.]
 
-@RootDefnNext{Division_Check}
+@RootDefn{Division_Check}
 Division_Check @\@Redundant[Check that the second operand is not zero
 for the
 operations /, rem and mod.]
 
-@RootDefnNext{Index_Check}
+@RootDefn{Index_Check}
 Index_Check @\@Redundant[Check that the bounds of an array value are
 equal to the
 corresponding bounds of an index constraint.  Also, when accessing a
@@ -1092,19 +1092,19 @@ object.  Also, when accessing a slice of an array object, check that
 the given discrete range is compatible with the range defined by the
 bounds of the array object.]
 
-@RootDefnNext{Length_Check}
+@RootDefn{Length_Check}
 Length_Check @\@Redundant[Check that two arrays have matching
 components,
 in the case of array subtype conversions,
 and logical operators for arrays of boolean components.]
 
-@RootDefnNext{Overflow_Check}
+@RootDefn{Overflow_Check}
 Overflow_Check @\@Redundant[Check that a scalar value is within the
 base range of
 its type, in cases where the implementation chooses to raise an
 exception instead of returning the correct mathematical result.]
 
-@RootDefnNext{Range_Check}
+@RootDefn{Range_Check}
 Range_Check @\@Redundant[Check that a scalar value satisfies a range
 constraint.
 Also, for the elaboration of a @nt<subtype_indication>, check that
@@ -1115,7 +1115,7 @@ discriminant value belongs to the corresponding subtype.  Also, check
 that when the result of an operation yields an array, the value of
 each component belongs to the component subtype.]
 
-@RootDefnNext{Tag_Check}
+@RootDefn{Tag_Check}
 Tag_Check @\@Redundant[Check that operand tags in a dispatching call
 are all equal.
 Check for the correct tag on tagged type conversions,
@@ -1127,14 +1127,14 @@ and when returning a tagged limited object from a function.]
 @Redundant[The following checks correspond to situations in which the
 exception Program_Error is raised upon failure.]
 @begin{Description}
-@RootDefnNext{Elaboration_Check}
+@RootDefn{Elaboration_Check}
 Elaboration_Check @\@Redundant[When a subprogram or protected entry is
 called,
 a task activation is accomplished,
 or a generic instantiation is elaborated, check that the body
 of the corresponding unit has already been elaborated.]
 
-@RootDefnNext{Accessibility_Check}
+@RootDefn{Accessibility_Check}
 
 Accessibility_Check @\@Redundant[Check the accessibility level of an
 entity or view.]
@@ -1144,8 +1144,8 @@ entity or view.]
 @Redundant[The following check corresponds to situations in which the
 exception Storage_Error is raised upon failure.]
 @begin{Description}
-@RootDefnNext{Storage_Check}
-@Defn2Next{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+@RootDefn{Storage_Check}
+@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 Storage_Check @\@Redundant[Check that evaluation of an @nt{allocator}
 does not require
 more space than is available for a storage pool.  Check
@@ -1165,7 +1165,7 @@ given that it is not feasible to split Storage_Error.
 @Redundant[The following check corresponds to all situations in which
 any predefined exception is raised.]
 @begin{Description}
-@RootDefnNext{All_Checks}
+@RootDefn{All_Checks}
 All_Checks @\Represents the union of all checks;
 @Redundant[suppressing All_Checks suppresses all checks.]
 @begin{Ramification}
@@ -1287,7 +1287,7 @@ as well as the new @nt{explicit_dereference},
 which was included in @nt{selected_component} in RM83.
 @end{DiffWord83}
 
-@LabeledSection{Exceptions and Optimization}
+@LabeledClause{Exceptions and Optimization}
 
 @begin{Intro}
 @redundant[
@@ -1305,7 +1305,7 @@ semantics.
 
 @begin{RunTime}
 @Defn{canonical semantics}
-The rest of this @SelfRef (outside this clause)
+The rest of this International Standard (outside this clause)
 defines the @i{canonical semantics} of the language.
 @Redundant[The canonical semantics of a given (legal) program determines a
 set of possible external effects that can result from the execution of

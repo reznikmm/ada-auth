@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:03 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -45,7 +45,7 @@ that language.
 This Annex is new to Ada 9X.
 @end{Extend83}
 
-@LabeledAppendixSection{Complex Arithmetic}
+@LabeledClause{Complex Arithmetic}
 
 @begin{Intro}
 Types and arithmetic operations for complex arithmetic are provided in
@@ -67,7 +67,7 @@ operations.}
 @end{Discussion}
 @end{Intro}
 
-@LabeledAppendixSubSection{Complex Types}
+@LabeledSubClause{Complex Types}
 
 @begin{StaticSem}
 The generic library package
@@ -544,7 +544,7 @@ ISO/IEC CD 13813
 @end{itemize}
 @end{DiffWord83}
 
-@LabeledAppendixSubSection{Complex Elementary Functions}
+@LabeledSubClause{Complex Elementary Functions}
 
 @begin{StaticSem}
 The generic library package
@@ -880,7 +880,7 @@ ISO/IEC CD 13814
 @end{itemize}
 @end{DiffWord83}
 
-@LabeledAppendixSubSection{Complex Input-Output}
+@LabeledSubClause{Complex Input-Output}
 
 @begin{Intro}
 The generic package Text_IO.Complex_IO defines procedures for the
@@ -1127,7 +1127,7 @@ in the appropriate circumstances, as for the corresponding
 procedures of Text_IO.Float_IO.
 @end{ImplPerm}
 
-@LabeledAppendixSubSection{The Package Wide_Text_IO.Complex_IO}
+@LabeledSubClause{The Package Wide_Text_IO.Complex_IO}
 
 @begin{StaticSem}
 @Defn{Ada.Wide_Text_IO.Complex_IO}
@@ -1141,7 +1141,7 @@ parentheses, etc.) by those for the corresponding wide characters.
 @end{StaticSem}
 
 
-@LabeledAppendixSection{Numeric Performance Requirements}
+@LabeledClause{Numeric Performance Requirements}
 
 @begin{ImplReq}
 @Defn{accuracy}
@@ -1200,7 +1200,7 @@ Ada 83.
 @end{Extend83}
 
 
-@LabeledAppendixSubSection{Model of Floating Point Arithmetic}
+@LabeledSubClause{Model of Floating Point Arithmetic}
 
 @begin{Intro}
 In the strict mode, the predefined operations of a floating point type shall
@@ -1399,7 +1399,7 @@ large extent.
 @end{DiffWord83}
 
 
-@LabeledAppendixSubSection{Model-Oriented Attributes of Floating Point Types}
+@LabeledSubClause{Model-Oriented Attributes of Floating Point Types}
 
 @begin{Intro}
 In implementations that support the Numerics Annex, the model-oriented
@@ -1470,7 +1470,7 @@ to @Math{10.0 @Up[4 @Times d]}, where d is the requested decimal
 precision of @i{T}.  This attribute yields a value of the type
 @i{universal_real}.
 
-@Defn2Next{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}S'@Attr{Model} @\Denotes a function (of a parameter @i{X}) whose specification
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}S'@Attr{Model} @\Denotes a function (of a parameter @i{X}) whose specification
 is given in
 @RefSecNum{Attributes of Floating Point Types}.
 If @i{X} is a model number of @i{T}, the
@@ -1555,7 +1555,7 @@ overflow and zerodivide situations (and at poles of the elementary functions).
 @end{StaticSem}
 
 
-@LabeledAppendixSubSection{Model of Fixed Point Arithmetic}
+@LabeledSubClause{Model of Fixed Point Arithmetic}
 
 @begin{Intro}
 In the strict mode, the predefined arithmetic operations of a fixed point type
@@ -1807,7 +1807,7 @@ two cases:
 @end{DiffWord83}
 
 
-@LabeledAppendixSubSection{Accuracy Requirements for the Elementary Functions}
+@LabeledSubClause{Accuracy Requirements for the Elementary Functions}
 
 @begin{Intro}
 In the strict mode, the performance of Numerics.Generic_Elementary_Functions
@@ -1976,7 +1976,7 @@ the following ways related to the accuracy specified for strict mode:
 @end{DiffWord83}
 
 
-@LabeledAppendixSubSection{Performance Requirements for Random Number Generation}
+@LabeledSubClause{Performance Requirements for Random Number Generation}
 
 @begin{Intro}
 In the strict mode, the performance of Numerics.Float_Random and
@@ -2170,7 +2170,7 @@ fewer than 5.
 @end{ImplNote}
 @end{ImplReq}
 
-@LabeledAppendixSubSection{Accuracy Requirements for Complex Arithmetic}
+@LabeledSubClause{Accuracy Requirements for Complex Arithmetic}
 
 @begin{Intro}
 In the strict mode, the performance of Numerics.Generic_Complex_Types and

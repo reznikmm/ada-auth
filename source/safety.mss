@@ -1,9 +1,9 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:28 $ $Author: Randy $ }
+@Comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -54,7 +54,7 @@ the documentation is ``adequate''.
 This Annex is new to Ada 9X.
 @end{Extend83}
 
-@LabeledSection{Pragma Normalize_Scalars}
+@LabeledClause{Pragma Normalize_Scalars}
 @begin{Intro}
 This pragma ensures that an otherwise
 uninitialized scalar object is set to a
@@ -155,7 +155,7 @@ arbitrary store location, having unpredictable effects.
 @end{Discussion}
 @end{NotesNotes}
 
-@LabeledSection{Documentation of Implementation Decisions}
+@LabeledClause{Documentation of Implementation Decisions}
 
 @begin{DocReq}
 @PDefn{unspecified}
@@ -205,14 +205,14 @@ account use of the Restrictions pragma.
 @end{NotesNotes}
 
 
-@LabeledSection{Reviewable Object Code}
+@LabeledClause{Reviewable Object Code}
 
 @begin{Intro}
 Object code review and validation are supported by
 pragmas Reviewable and Inspection_Point.
 @end{Intro}
 
-@LabeledSubSection{Pragma Reviewable}
+@LabeledSubClause{Pragma Reviewable}
 @begin{Intro}
 This pragma  directs the implementation to
 provide information to
@@ -446,7 +446,7 @@ the detailed information to allow review of the optimized object code.
 See also @nt<pragma> Optimize (@RefSecNum{Pragmas}).
 @end[discussion]
 
-@LabeledSubSection{Pragma Inspection_Point}
+@LabeledSubClause{Pragma Inspection_Point}
 @begin{Intro}
 An occurrence of a pragma Inspection_Point identifies a set of objects each of
 whose values is to be
@@ -576,7 +576,7 @@ to an interactive debugger to perform the check.
 @end{Discussion}
 @end{NotesNotes}
 
-@LabeledSection{Safety and Security Restrictions}
+@LabeledClause{Safety and Security Restrictions}
 @begin{Intro}
 This clause defines restrictions that can be used with pragma
 Restrictions (see @RefSecNum(Pragma Restrictions)); these facilitate
@@ -610,14 +610,14 @@ The following additional restrictions apply in this Annex.
 
 @b{Tasking-related restriction:}
 @begin{Description}
-@Defn2Next{Term=[Restrictions],Sec=(No_Protected_Types)}No_Protected_Types @\There are no declarations of protected types or
+@Defn2{Term=[Restrictions],Sec=(No_Protected_Types)}No_Protected_Types @\There are no declarations of protected types or
 protected objects.
 
 @b{Memory-management related restrictions:}
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Allocators)}No_Allocators @\There are no occurrences of an @nt{allocator}.
+@Defn2{Term=[Restrictions],Sec=(No_Allocators)}No_Allocators @\There are no occurrences of an @nt{allocator}.
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Local_Allocators)}No_Local_Allocators @\@nt{Allocator}s are prohibited in subprograms,
+@Defn2{Term=[Restrictions],Sec=(No_Local_Allocators)}No_Local_Allocators @\@nt{Allocator}s are prohibited in subprograms,
 generic subprograms,
 tasks, and entry bodies; instantiations of generic packages are
 also prohibited in these  contexts.
@@ -635,7 +635,7 @@ rather than inhibiting what can be in the generic while
 liberalizing where they can be instantiated.
 @end[Reason]
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic dependence on Unchecked_Deallocation is not allowed.
+@Defn2{Term=[Restrictions],Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic dependence on Unchecked_Deallocation is not allowed.
 @begin{Discussion}
 
 This restriction would be useful in those contexts in which heap storage is
@@ -659,7 +659,7 @@ call site.
 
 @b{Exception-related restriction:}
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Exceptions)}No_Exceptions @\@nt{Raise_statement}s and @nt{exception_handler}s are not allowed.
+@Defn2{Term=[Restrictions],Sec=(No_Exceptions)}No_Exceptions @\@nt{Raise_statement}s and @nt{exception_handler}s are not allowed.
 No language-defined run-time checks are generated;
 however, a run-time check performed automatically by the hardware
 is permitted.
@@ -678,7 +678,7 @@ programming at the assembler level.
 
 @b{Other restrictions:}
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Floating_Point)}No_Floating_Point @\Uses of predefined floating point types and
+@Defn2{Term=[Restrictions],Sec=(No_Floating_Point)}No_Floating_Point @\Uses of predefined floating point types and
 operations, and declarations of new floating point types, are
 not allowed.
 @begin{Discussion}
@@ -694,7 +694,7 @@ architecture is being used which does not have floating point instructions.
 
 @end{Discussion}
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Fixed_Point)}No_Fixed_Point @\Uses of predefined fixed point types and
+@Defn2{Term=[Restrictions],Sec=(No_Fixed_Point)}No_Fixed_Point @\Uses of predefined fixed point types and
 operations, and declarations of new fixed point types, are
 not allowed.
 @begin{Discussion}
@@ -708,7 +708,7 @@ machine level, fixed point is virtually the same as integer arithmetic.
 
 @end{Discussion}
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic dependence on the
+@Defn2{Term=[Restrictions],Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic dependence on the
  predefined generic Unchecked_Conversion is not allowed.
 @begin{Discussion}
 
@@ -724,14 +724,14 @@ No_Access_Subprograms @\The declaration of access-to-subprogram types
 is not allowed.
 @Defn2{Term=[Restrictions],Sec=(No_Access_Subprograms)}
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Unchecked_Access)}No_Unchecked_Access @\The @attr[Unchecked_Access] attribute
+@Defn2{Term=[Restrictions],Sec=(No_Unchecked_Access)}No_Unchecked_Access @\The @attr[Unchecked_Access] attribute
 is not allowed.
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Dispatch)}No_Dispatch @\Occurrences of T'Class are not allowed, for any
+@Defn2{Term=[Restrictions],Sec=(No_Dispatch)}No_Dispatch @\Occurrences of T'Class are not allowed, for any
 (tagged)
 subtype T.
 
-@Defn2Next{Term=[Restrictions],Sec=(No_IO)}No_IO @\Semantic dependence on
+@Defn2{Term=[Restrictions],Sec=(No_IO)}No_IO @\Semantic dependence on
 any of the library units
 Sequential_IO, Direct_IO, Text_IO,  Wide_Text_IO, or Stream_IO
 is not allowed.
@@ -744,7 +744,7 @@ facilities or a call on a non-Ada feature.
 
 @end{Discussion}
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Delay)}No_Delay @\@nt[Delay_Statement]s
+@Defn2{Term=[Restrictions],Sec=(No_Delay)}No_Delay @\@nt[Delay_Statement]s
 and semantic dependence on package Calendar
 are not allowed.
 @begin[Ramification]
@@ -756,10 +756,10 @@ within the run-time system.
 
 @end[ramification]
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Recursion)}No_Recursion @\As part of the execution of a subprogram, the same
+@Defn2{Term=[Restrictions],Sec=(No_Recursion)}No_Recursion @\As part of the execution of a subprogram, the same
 subprogram is not invoked.
 
-@Defn2Next{Term=[Restrictions],Sec=(No_Reentrancy)}No_Reentrancy @\During the execution of a subprogram by a task, no other
+@Defn2{Term=[Restrictions],Sec=(No_Reentrancy)}No_Reentrancy @\During the execution of a subprogram by a task, no other
 task invokes the same subprogram.
 
 @end{description}

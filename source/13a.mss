@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
-@LabeledChapter{Representation Issues}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @redundant[
@@ -21,7 +21,7 @@ This was necessary to preserve a logical order,
 given the new Ada 9X semantics given in this section.
 @end{DiffWord83}
 
-@LabeledSection{Representation Items}
+@LabeledClause{Representation Items}
 
 @begin{Intro}
 @Defn{representation item}
@@ -697,7 +697,7 @@ Some of the more stringent requirements are moved to
 @RefSec{Required Representation Support}.
 @end{DiffWord83}
 
-@LabeledSection{Pragma Pack}
+@LabeledClause{Pragma Pack}
 
 @begin{Intro}
 @redundant[
@@ -786,7 +786,7 @@ so it probably won't get packed very tightly.
 @end{Itemize}
 @end{ImplAdvice}
 
-@LabeledSection{Representation Attributes}
+@LabeledClause{Representation Attributes}
 
 @begin{Intro}
 @redundant[
@@ -860,7 +860,7 @@ For example, the following kinds of things are allowed:
 @RootDefn{specifiable (of an attribute and for an entity)}
 @RootDefn2{Term=[attribute], Sec=(specifiable)}
 An @nt{attribute_designator} is allowed in an
-@nt{attribute_definition_clause} only if this @SelfRef
+@nt{attribute_definition_clause} only if this International Standard
 explicitly allows it,
 or for an implementation-defined attribute
 if the implementation allows it.
@@ -981,9 +981,9 @@ The value of this attribute is of type System.Address.>}
 
 @end{Ramification}
 
-@PDefn2Next{Term=[specifiable], Sec=(of Address for stand-alone
+@PDefn2{Term=[specifiable], Sec=(of Address for stand-alone
 objects and for program units)}
-@DefnNext{Address clause}
+@Defn{Address clause}
 Address may be specified for @Redundant[stand-alone] objects
 and for program units
 via an @nt{attribute_definition_clause}.
@@ -1198,8 +1198,8 @@ N-storage-element boundary.
 
 @end{Ramification}
 
-@PDefn2Next{Term=[specifiable], Sec=(of Alignment for first subtypes and objects)}
-@DefnNext{Alignment clause}
+@PDefn2{Term=[specifiable], Sec=(of Alignment for first subtypes and objects)}
+@Defn{Alignment clause}
 Alignment may be specified for first subtypes and
 @Redundant[stand-alone] objects
 via an @nt{attribute_definition_clause};
@@ -1394,8 +1394,8 @@ Each decimal digit (and the sign) is presumably represented
 as some number of bits.
 @end{Ramification}
 
-@PDefn2Next{Term=[specifiable], Sec=(of Size for stand-alone objects)}
-@DefnNext{Size clause}
+@PDefn2{Term=[specifiable], Sec=(of Size for stand-alone objects)}
+@Defn{Size clause}
 Size may be specified for @Redundant[stand-alone] objects
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static
@@ -1873,9 +1873,9 @@ components of the type of X.
 The value of this attribute is of type @i{universal_integer}.>}
 @EndPrefixType{}
 
-@PDefn2Next{Term=[specifiable], Sec=(of Component_Size for
+@PDefn2{Term=[specifiable], Sec=(of Component_Size for
 array types)}
-@DefnNext{Component_Size clause}
+@Defn{Component_Size clause}
 Component_Size may be specified for array types
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static,
@@ -1931,8 +1931,8 @@ For @PrefixType{every subtype S of a tagged type @i(T)
 the following attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<External_Tag>,
-  Text=[@DefnNext{External_Tag clause}
-  @PDefn2Next{Term=(specifiable), Sec=(of External_Tag for a tagged type)}
+  Text=[@Defn{External_Tag clause}
+  @PDefn2{Term=(specifiable), Sec=(of External_Tag for a tagged type)}
   S'External_Tag denotes an external string representation
   for S'Tag; it is of the predefined type String.
   External_Tag may be specified
@@ -2065,7 +2065,7 @@ In Ada 9X, they are the same,
 except for certain explicit exceptions.
 @end{DiffWord83}
 
-@LabeledSection{Enumeration Representation Clauses}
+@LabeledClause{Enumeration Representation Clauses}
 
 @begin{Intro}
 @redundant[
@@ -2230,7 +2230,7 @@ type be the ``obvious'' coding using position numbers.
 This is satisfied by all known implementations.
 @end{Extend83}
 
-@LabeledSection{Record Layout}
+@LabeledClause{Record Layout}
 
 @begin{Intro}
 @PDefn2{Term=[aspect of representation], Sec=(layout)}
@@ -2245,7 +2245,7 @@ that is, storage place attributes of the components.
 The layout can be specified with a @nt{record_representation_clause}.
 @end{Intro}
 
-@LabeledSubSection{Record Representation Clauses}
+@LabeledSubClause{Record Representation Clauses}
 
 @begin{Intro}
 @redundant[
@@ -2598,7 +2598,7 @@ non-variant records to overlap.
 We have corrected that oversight.
 @end{DiffWord83}
 
-@LabeledSubSection{Storage Place Attributes}
+@LabeledSubClause{Storage Place Attributes}
 
 @begin{StaticSem}
 @Defn2{Term=[storage place attributes], Sec=(of a component)}
@@ -2687,7 +2687,7 @@ for that component.
 @end{Reason}
 @end{ImplAdvice}
 
-@LabeledSubSection{Bit Ordering}
+@LabeledSubClause{Bit Ordering}
 
 @begin{Intro}
 @redundant[
@@ -2807,7 +2807,7 @@ but the splitting problem need not occur.
 The Bit_Order attribute is new to Ada 9X.
 @end{Extend83}
 
-@LabeledSection{Change of Representation}
+@LabeledClause{Change of Representation}
 
 @begin{Intro}
 @redundant[
@@ -2864,7 +2864,7 @@ D := Descriptor(P);         --@i{ unpack P}
 @end{Example}
 @end{Examples}
 
-@LabeledSection{The Package System}
+@LabeledClause{The Package System}
 
 @begin{Intro}
 @redundant[
@@ -3146,7 +3146,7 @@ Priority semantics, including subtype Priority,
 have been moved to the Real Time Annex.
 @end{DiffWord83}
 
-@LabeledSubSection{The Package System.Storage_Elements}
+@LabeledSubClause{The Package System.Storage_Elements}
 
 @begin{StaticSem}
 The following language-defined library package exists:
@@ -3293,7 +3293,7 @@ converts from that record type to type Address.
 @end{ImplNote}
 @end{ImplAdvice}
 
-@LabeledSubSection{The Package System.Address_To_Access_Conversions}
+@LabeledSubClause{The Package System.Address_To_Access_Conversions}
 
 @begin{StaticSem}
 
@@ -3381,7 +3381,7 @@ the restriction might have to be detected at run time in some cases.
 @end{Ramification}
 @end{ImplPerm}
 
-@LabeledSection{Machine Code Insertions}
+@LabeledClause{Machine Code Insertions}
 
 @begin{Intro}
 @redundant[
@@ -3500,7 +3500,7 @@ Requiring the type of each instruction to be a record type is
 overspecification.
 @end{DiffWord83}
 
-@LabeledSection{Unchecked Type Conversions}
+@LabeledClause{Unchecked Type Conversions}
 
 @begin{Intro}
 @redundant[
@@ -3647,7 +3647,7 @@ whose component subtypes are described in this paragraph.
 @end{Itemize}
 @end{ImplAdvice}
 
-@LabeledSubSection{Data Validity}
+@LabeledSubClause{Data Validity}
 
 @begin{Intro}
 Certain actions that can potentially lead to erroneous execution are not
@@ -3885,7 +3885,7 @@ In fact, the only safe thing to do to an abnormal object is
 to assign to the object as a whole.
 @end{DiffWord83}
 
-@LabeledSubSection{The Valid Attribute}
+@LabeledSubClause{The Valid Attribute}
 
 @begin{Intro}
 The Valid attribute can be used to check the validity of data produced
@@ -3969,7 +3969,7 @@ causes erroneous execution (@lSeeSecNum{Names}).
 X'Valid is new in Ada 9X.
 @end{Extend83}
 
-@LabeledSection{Unchecked Access Value Creation}
+@LabeledClause{Unchecked Access Value Creation}
 
 @begin{Intro}
 @redundant[
@@ -4045,7 +4045,7 @@ There is no Unchecked_Access attribute for subprograms.
 
 @end{NotesNotes}
 
-@LabeledSection{Storage Management}
+@LabeledClause{Storage Management}
 
 @begin{Intro}
 @Redundant[
@@ -4530,7 +4530,7 @@ RM83 states the erroneousness of reading or updating deallocated
 objects incorrectly by missing various cases.
 @end{DiffWord83}
 
-@LabeledSubSection{The Max_Size_In_Storage_Elements Attribute}
+@LabeledSubClause{The Max_Size_In_Storage_Elements Attribute}
 
 @begin{Intro}
 @redundant[
@@ -4557,7 +4557,7 @@ S'Max_Size_In_Storage_Elements might be very large.
 @end{Description}
 @end{StaticSem}
 
-@LabeledSubSection{Unchecked Storage Deallocation}
+@LabeledSubClause{Unchecked Storage Deallocation}
 
 @begin{Intro}
 @redundant[
@@ -4711,7 +4711,7 @@ access-to-constant type.
 This is implied by the rules of @RefSecNum{Formal Access Types}.
 @end{NotesNotes}
 
-@LabeledSubSection{Pragma Controlled}
+@LabeledSubClause{Pragma Controlled}
 
 @begin{Intro}
 @Redundant[Pragma Controlled is used to prevent any automatic
@@ -4886,7 +4886,7 @@ This has the additional advantage of making our terminology more
 accessible to people outside the Ada world.
 @end{DiffWord83}
 
-@LabeledSection{Pragma Restrictions}
+@LabeledClause{Pragma Restrictions}
 
 @begin{Intro}
 @redundant[
@@ -4977,7 +4977,7 @@ use of the more efficient and safe one.
 Pragma Restrictions is new to Ada 9X.
 @end{Extend83}
 
-@LabeledSection{Streams}
+@LabeledClause{Streams}
 
 @begin{Intro}
 @Defn{stream}
@@ -4999,7 +4999,7 @@ but that is not required.
 Streams are new in Ada 9X.
 @end{Extend83}
 
-@LabeledSubSection{The Package Streams}
+@LabeledSubClause{The Package Streams}
 
 @begin{StaticSem}
 The abstract type Root_Stream_Type is the root type of the class of
@@ -5057,7 +5057,7 @@ The Write operation appends Item to the specified stream.
 type Root_Stream_Type.
 @end{NotesNotes}
 
-@LabeledSubSection{Stream-Oriented Attributes}
+@LabeledSubClause{Stream-Oriented Attributes}
 
 @begin{Intro}
 The Write, Read, Output, and Input attributes convert values to a
@@ -5363,7 +5363,7 @@ class-wide types descended from S.
 @end{Discussion}
 @end{Examples}
 
-@LabeledSection{Freezing Rules}
+@LabeledClause{Freezing Rules}
 
 @begin{Intro}
 @redundant[

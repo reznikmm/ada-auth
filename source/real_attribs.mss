@@ -1,11 +1,11 @@
 @Part(realattribs, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.3 $}
+@comment{$Revision: 1.4 $}
 
-@LabeledAppendixSubSection{Attributes of Floating Point Types}
+@LabeledSubClause{Attributes of Floating Point Types}
 
 @begin{StaticSem}
 @Defn2{Term=[representation-oriented attributes],
@@ -218,7 +218,7 @@ S of a floating point type @i{T}.
   @key(return) @i{T}
 @end{Example}
 
-@Defn2Next{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    Let @Math{v} be the value @Math{Fraction @Times
    T@r('Machine_Radix)@Up{Exponent-k}},
    where @Math{k} is the normalized exponent of @i{Fraction}.
@@ -250,7 +250,7 @@ S of a floating point type @i{T}.
   @key(return) @i{T}
 @end{Example}
 
-@Defn2Next{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    Let @Math{v} be the value @Math{X @Times T@r('Machine_Radix)@Up{Adjustment}}.
    If @Math{v} is a machine number of the type @i{T}, or if
    @Math{@Abs{v} @geq T@r('Model_Small)}, the function yields @Math{v};
@@ -347,7 +347,7 @@ S of a floating point type @i{T}.
   @key(return) @i{T}
 @end{Example}
 
-@Defn2Next{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    For nonzero @i{Y}, let @Math{v} be the value
    @Math{X - n @Times Y}, where @Math{n} is the integer nearest to
    the exact value of @Math{X/Y}; if @Math{@Abs{n - X/Y} @Thin = @Thin 1/2},
@@ -374,7 +374,7 @@ S of a floating point type @i{T}.
   @key(return) @i{T}
 @end{Example}
 
-@Defn2Next{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    If @Math{Towards @Thin = @Thin X}, the function yields @i{X}; otherwise, it
    yields the machine number of the type @i{T} adjacent to @i{X} in the
    direction of @i{Towards}, if that machine number exists.
@@ -396,7 +396,7 @@ S of a floating point type @i{T}.
   @key(return) @i{T}
 @end{Example}
 
-@Defn2Next{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    If the value of @i{Value} is nonzero, the function yields a result whose
    magnitude is that of @i{Value} and whose sign is that of @i{Sign};
    otherwise, it yields the value zero.
@@ -434,7 +434,7 @@ is outside the base range of S.
       when @i{X} is negative and @i{Radix_Digits} is positive.
    @end{Itemize}
 
-@Defn2Next{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
 @IndexCheck{Range_Check}Constraint_Error is raised when @i{Radix_Digits}
    is zero or negative.
    A zero result@Redundant{, which can only occur when @i{X} is zero,} has the
@@ -459,7 +459,7 @@ is outside the base range of S.
   @key(return) @i{T}
 @end{Example}
 
-@Defn2Next{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    If @i{X} is a machine number of the type @i{T}, the function yields @i{X};
    otherwise, it yields the value obtained by rounding or truncating @i{X} to
    either one of the adjacent machine numbers of the type @i(T).
@@ -644,7 +644,7 @@ The Denorm and Signed_Zeros attributes are new, as are all of the
 primitive function attributes.
 @end{Extend83}
 
-@LabeledAppendixSubSection{Attributes of Fixed Point Types}
+@LabeledSubClause{Attributes of Fixed Point Types}
 
 @begin{StaticSem}
 @Defn2{Term=[representation-oriented attributes],

@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:29 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
 
-@LabeledAppendixSection{String Handling}
+@LabeledClause{String Handling}
 
 @begin{Intro}
 This clause presents the specifications of the package Strings and
@@ -21,7 +21,7 @@ translation (via a character-to-character mapping), and transformation
 This clause is new to Ada 9X.
 @end{Extend83}
 
-@LabeledAppendixSubSection{The Package Strings}
+@LabeledSubClause{The Package Strings}
 @begin{Intro}
 The package Strings provides declarations
 common to the string handling packages.
@@ -53,7 +53,7 @@ The library package Strings has the following declaration:
 @end{example}
 @end{StaticSem}
 
-@LabeledAppendixSubSection{The Package Strings.Maps}
+@LabeledSubClause{The Package Strings.Maps}
 @begin{Intro}
 The package Strings.Maps defines the types, operations, and other
 entities needed for character sets and character-to-character mappings.
@@ -335,7 +335,7 @@ and 'B' to 'Z', 'C' to 'A', 'D' to 'B', and each other Character to
 itself.
 @end{Examples}
 
-@LabeledAppendixSubSection{Fixed-Length String Handling}
+@LabeledSubClause{Fixed-Length String Handling}
 @begin{Intro}
 The language-defined package Strings.Fixed provides string-handling subprograms
  for fixed-length strings;
@@ -964,7 +964,7 @@ string handling subprograms, Constraint_Error is propagated.
 
 
 
-@LabeledAppendixSubSection{Bounded-Length String Handling}
+@LabeledSubClause{Bounded-Length String Handling}
 @begin{Intro}
 The language-defined package Strings.Bounded provides a generic package
 each of whose instances yields a private type Bounded_String and a
@@ -1463,7 +1463,7 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 @end{ImplNote}
 @end{ImplAdvice}
 
-@LabeledAppendixSubSection{Unbounded-Length String Handling}
+@LabeledSubClause{Unbounded-Length String Handling}
 @begin{Intro}
 The language-defined package Strings.Unbounded provides a
  private type Unbounded_String and a
@@ -1833,7 +1833,7 @@ the package and several of the subprograms appears in the Rationale.
 @end{ImplNote}
 @end{ImplReq}
 
-@LabeledAppendixSubSection{String-Handling Sets and Mappings}
+@LabeledSubClause{String-Handling Sets and Mappings}
 
 @begin{Intro}
 
@@ -1890,7 +1890,7 @@ character mapping in Characters.Handling
 (see @refsecnum(The Package Characters.Handling)).
 @end{StaticSem}
 
-@LabeledAppendixSubSection{Wide_String Handling}
+@LabeledSubClause{Wide_String Handling}
 
 @begin{Intro}
 Facilities for handling strings of Wide_Character elements are

@@ -1,10 +1,10 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:29 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
 
-@LabeledAppendixSection{The Package Standard}
+@LabeledClause{The Package Standard}
 
 @begin{Intro}
 This clause outlines the specification of the package Standard
@@ -354,14 +354,14 @@ space character (position 160)
 correspond to different values. Unless
 indicated otherwise, each occurrence of
 the character literal
-' ' in this @SelfRef
+' ' in this International Standard
 refers to the space character.
 Similarly, the character literals
 for hyphen (position 45)
 and soft hyphen (position 173) correspond to different values.
 Unless indicated otherwise, each occurrence of
 the character literal
-'-' in this @SelfRef
+'-' in this International Standard
 refers to the hyphen character.
 @end{StaticSem}
 

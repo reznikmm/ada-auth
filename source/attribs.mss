@@ -1,11 +1,11 @@
 @Part(attribs, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
 @LabeledInformativeAnnex{Language-Defined Attributes}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/attribs.mss,v $}
-@comment{$Revision: 1.3 $}
+@comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @Defn{attribute}

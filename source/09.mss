@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
-@LabeledChapter{Tasks and Synchronization}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 
@@ -121,7 +121,7 @@ The term "parallel" is reserved for referring to the
 situation where multiple physical processors run simultaneously.
 @end{DiffWord83}
 
-@LabeledSection{Task Units and Task Objects}
+@LabeledClause{Task Units and Task Objects}
 
 @begin{Intro}
 @Defn{task declaration}
@@ -361,7 +361,7 @@ that doesn't make any real difference,
 because a @nt{declarative_part} can be empty.
 @end{DiffWord83}
 
-@LabeledSection{Task Execution - Task Activation}
+@LabeledClause{Task Execution - Task Activation}
 
 @begin{RunTime}
 
@@ -495,7 +495,7 @@ on some processor, due to the lack of resources.
 This clause has been rewritten in an attempt to improve presentation.
 @end{DiffWord83}
 
-@LabeledSection{Task Dependence - Termination of Tasks}
+@LabeledClause{Task Dependence - Termination of Tasks}
 
 @begin{RunTime}
 
@@ -647,7 +647,7 @@ finalization still occurs for such tasks, and this happens after
 selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord83}
 
-@LabeledSection{Protected Units and Protected Objects}
+@LabeledClause{Protected Units and Protected Objects}
 
 @begin{Intro}
 @Defn{protected object}
@@ -964,7 +964,7 @@ This entire clause is new;
 protected units do not exist in Ada 83.
 @end{Extend83}
 
-@LabeledSection{Intertask Communication}
+@LabeledClause{Intertask Communication}
 
 @begin{Intro}
 @Defn{intertask communication}
@@ -1085,7 +1085,7 @@ as is a requeue on such an entry.
 @end(Reason)
 @end{RunTime}
 
-@LabeledSubSection{Protected Subprograms and Protected Actions}
+@LabeledSubClause{Protected Subprograms and Protected Actions}
 
 @begin{Intro}
 @Defn{protected subprogram}
@@ -1282,7 +1282,7 @@ Control.Release;
 
 @end{Examples}
 
-@LabeledSubSection{Entries and Accept Statements}
+@LabeledSubClause{Entries and Accept Statements}
 
 @begin{Intro}
 @nt<Entry_declaration>s, with the corresponding @nt<entry_bodies>
@@ -1717,7 +1717,7 @@ The syntax rule for @nt{entry_body} is new.
 
 @end{Extend83}
 
-@LabeledSubSection{Entry Calls}
+@LabeledSubClause{Entry Calls}
 
 @begin{Intro}
 @Defn{entry call}
@@ -2115,7 +2115,7 @@ Flags(3).Seize;                       @i[--  @lSeeSecNum(Protected Units and Pro
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{Requeue Statements}
+@LabeledSubClause{Requeue Statements}
 
 @begin{Intro}
 @redundant[
@@ -2328,7 +2328,7 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 The @nt<requeue_statement> is new.
 @end{Extend83}
 
-@LabeledSection{Delay Statements, Duration, and Time}
+@LabeledClause{Delay Statements, Duration, and Time}
 
 @begin{Intro}
 @redundant[
@@ -2717,7 +2717,7 @@ These would be appropriate for standardization in a given
 environment (such as POSIX).
 @end{Extend83}
 
-@LabeledSection{Select Statements}
+@LabeledClause{Select Statements}
 
 @begin{Intro}
 @redundant[
@@ -2753,7 +2753,7 @@ transfer of control.
 @nt{Asynchronous_select} is new.
 @end{Extend83}
 
-@LabeledSubSection{Selective Accept}
+@LabeledSubClause{Selective Accept}
 
 @begin{Intro}
 @redundant[
@@ -2942,7 +2942,7 @@ We kept @nt{select_alternative} as is, because
 with @nt<accept_alternative>.
 @end{DiffWord83}
 
-@LabeledSubSection{Timed Entry Calls}
+@LabeledSubClause{Timed Entry Calls}
 
 @begin{Intro}
 @redundant[
@@ -3016,7 +3016,7 @@ This clause comes before the one for Conditional Entry Calls,
 so we can define conditional entry calls in terms of timed entry calls.
 @end{DiffWord83}
 
-@LabeledSubSection{Conditional Entry Calls}
+@LabeledSubClause{Conditional Entry Calls}
 
 @begin{Intro}
 
@@ -3083,7 +3083,7 @@ thereby simplifying the definition of what happens on
 a requeue-with-abort.
 @end{DiffWord83}
 
-@LabeledSubSection{Asynchronous Transfer of Control}
+@LabeledSubClause{Asynchronous Transfer of Control}
 
 @begin{Intro}
 @redundant[
@@ -3219,7 +3219,7 @@ executed after the @nt<abortable_part> is left.
 @nt<Asynchronous_select> is new.
 @end{Extend83}
 
-@LabeledSection{Abort of a Task - Abort of a Sequence of Statements}
+@LabeledClause{Abort of a Task - Abort of a Sequence of Statements}
 
 @begin{Intro}
 @redundant[
@@ -3440,7 +3440,7 @@ This clause has been rewritten to accommodate the concept
 of aborting the execution of a construct, rather than just of a task.
 @end{DiffWord83}
 
-@LabeledSection{Task and Entry Attributes}
+@LabeledClause{Task and Entry Attributes}
 
 @begin{RunTime}
 
@@ -3500,7 +3500,7 @@ allow for the evaluation of the @nt<condition> of the barrier both before
 and after queuing a given caller.
 @end{NotesNotes}
 
-@LabeledSection{Shared Variables}
+@LabeledClause{Shared Variables}
 
 @begin{StaticSem}
 @Defn2{Term=[shared variable], Sec=(protection of)}
@@ -3684,7 +3684,7 @@ ensure that certain reads and updates are sequential @em
 @end(Discussion)
 @end{Erron}
 
-@LabeledSection{Example of Tasking and Synchronization}
+@LabeledClause{Example of Tasking and Synchronization}
 
 @begin{Examples}
 

@@ -1,10 +1,10 @@
 @Part(predefio, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:28 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.3 $}
-@LabeledSection{Input-Output}
+@Comment{$Revision: 1.4 $}
+@LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
 Input-output is provided through
@@ -46,7 +46,7 @@ and if they did, they can always provide it as a vendor-supplied
 package.
 @end{DiffWord83}
 
-@LabeledSection{External Files and File Objects}
+@LabeledClause{External Files and File Objects}
 
 @begin{StaticSem}
 @Defn{external file}
@@ -160,7 +160,7 @@ Out_File.  An implementation may restrict the number of files that may
 be associated with a given external file.
 @end{NotesNotes}
 
-@LabeledSection{Sequential and Direct Files}
+@LabeledClause{Sequential and Direct Files}
 
 @begin{StaticSem}
 @Defn{sequential file}
@@ -224,7 +224,7 @@ the current index is set to one.  The current index of a direct file is
 a property of a file object, not of an external file.
 @end{StaticSem}
 
-@LabeledSubSection{The Generic Package Sequential_IO}
+@LabeledSubClause{The Generic Package Sequential_IO}
 
 @begin{StaticSem}
 The generic library package Sequential_IO has the following declaration:
@@ -294,7 +294,7 @@ will be illegal (e.g., case statement choice coverage)
 or execute with a different effect in Ada 9X.
 @end{Incompatible83}
 
-@LabeledSubSection{File Management}
+@LabeledSubClause{File Management}
 
 @begin{StaticSem}
 
@@ -492,7 +492,7 @@ external environment.
 Any such restriction should be documented.
 @end{ImplPerm}
 
-@LabeledSubSection{Sequential Input-Output Operations}
+@LabeledSubClause{Sequential Input-Output Operations}
 
 @begin{StaticSem}
 The operations available for  sequential input and output are described
@@ -560,7 +560,7 @@ Out_File or Append_File.  The exception Use_Error is propagated if the capacity
 @end{DescribeCode}
 @end{StaticSem}
 
-@LabeledSubSection{The Generic Package Direct_IO}
+@LabeledSubClause{The Generic Package Direct_IO}
 
 @begin{StaticSem}
 The generic library package Direct_IO has the following declaration:
@@ -642,7 +642,7 @@ uninitialized variables of the type.
 @end{Reason}
 @end{StaticSem}
 
-@LabeledSubSection{Direct Input-Output Operations}
+@LabeledSubClause{Direct Input-Output Operations}
 
 @begin{StaticSem}
 The operations available for direct input and output are described in
@@ -725,7 +725,7 @@ can be propagated if the element read cannot be
 Append_File mode is not supported for the generic package Direct_IO.
 @end{NotesNotes}
 
-@LabeledSection{The Generic Package Storage_IO}
+@LabeledClause{The Generic Package Storage_IO}
 
 @begin{Intro}
 The generic package Storage_IO provides for reading from and
@@ -803,7 +803,7 @@ A buffer used for Storage_IO holds only one element at a time; an external
 file used for Direct_IO holds a sequence of elements.
 @end{NotesNotes}
 
-@LabeledSection{Text Input-Output}
+@LabeledClause{Text Input-Output}
 
 @begin{StaticSem}
 This clause describes the package Text_IO, which provides facilities
@@ -930,7 +930,7 @@ are not used.)  The constant Unbounded is provided for this purpose.
 Append_File is new in Ada 9X.
 @end{Extend83}
 
-@LabeledSubSection{The Package Text_IO}
+@LabeledSubClause{The Package Text_IO}
 
 @begin{StaticSem}
 The library package Text_IO has the following declaration:
@@ -1320,7 +1320,7 @@ and the
 generic packages Modular_IO and Decimal_IO are new in Ada 9X.
 @end{Extend83}
 
-@LabeledSubSection{Text File Management}
+@LabeledSubClause{Text File Management}
 
 @begin{StaticSem}
 The only allowed file modes for text files are the modes In_File,
@@ -1393,7 +1393,7 @@ a file created by a foreign program.
 @end{itemize}
 @end{NotesNotes}
 
-@LabeledSubSection{Default Input, Output, and Error Files}
+@LabeledSubClause{Default Input, Output, and Error Files}
 
 @begin{StaticSem}
 The following subprograms provide for the control of the particular
@@ -1509,7 +1509,7 @@ error files are different
 file objects, but not necessarily different external files.
 @end{NotesNotes}
 
-@LabeledSubSection{Specification of Line and Page Lengths}
+@LabeledSubClause{Specification of Line and Page Lengths}
 
 @begin{StaticSem}
 The subprograms described in this subclause are concerned with the line
@@ -1575,7 +1575,7 @@ influences subsequent output operations.}
 @end{DescribeCode}
 @end{StaticSem}
 
-@LabeledSubSection{Operations on Columns, Lines, and Pages}
+@LabeledSubClause{Operations on Columns, Lines, and Pages}
 
 @begin{StaticSem}
 The subprograms described in this subclause provide for explicit control
@@ -1819,7 +1819,7 @@ of these terminators by a single character, provided that it is properly
 recognized on input.
 @end{NotesNotes}
 
-@LabeledSubSection{Get and Put Procedures}
+@LabeledSubClause{Get and Put Procedures}
 
 @begin{StaticSem}
 The procedures Get and Put for items of the type Character,  String,
@@ -1948,7 +1948,7 @@ Put(Item => -23, Width => 2);  --@i{  "@en@|23"}
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{Input-Output of Characters and Strings}
+@LabeledSubClause{Input-Output of Characters and Strings}
 
 @begin{StaticSem}
 For an item of type Character the following procedures are provided:
@@ -2101,7 +2101,7 @@ not contain page terminators, in which case Get_Line and Skip_Line can
 return as soon as a line terminator is read.
 @end{NotesNotes}
 
-@LabeledSubSection{Input-Output for Integer Types}
+@LabeledSubClause{Input-Output for Integer Types}
 
 @begin{StaticSem}
 The following procedures are defined in the generic packages Integer_IO
@@ -2254,7 +2254,7 @@ Put(126, Width => 13, Base => 2);    --@i{ "bbb2#1111110#"}
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{Input-Output for Real Types}
+@LabeledSubClause{Input-Output for Real Types}
 
 @begin{StaticSem}
 The following procedures are defined in the generic packages Float_IO,
@@ -2500,7 +2500,7 @@ Put(X, 5, 3, 0);             @\@i[-- "b@en@|123.457"]
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{Input-Output for Enumeration Types}
+@LabeledSubClause{Input-Output for Enumeration Types}
 
 @begin{StaticSem}
 The following procedures are defined in the generic package
@@ -2628,7 +2628,7 @@ The type Boolean is an enumeration type, hence Enumeration_IO can be
 instantiated for this type.
 @end{NotesNotes}
 
-@LabeledSection{Wide Text Input-Output}
+@LabeledClause{Wide Text Input-Output}
 
 @begin{Intro}
 The package Wide_Text_IO provides facilities
@@ -2667,7 +2667,7 @@ Ada.Long_Float_Wide_Text_IO.
 Support for Wide_Character and Wide_String I/O is new in Ada 9X.
 @end{Extend83}
 
-@LabeledSection{Stream Input-Output}
+@LabeledClause{Stream Input-Output}
 @begin{Intro}
 
 The packages Streams.Stream_IO, Text_IO.Text_Streams, and
@@ -2676,7 +2676,7 @@ Wide_Text_IO.Text_Streams
 provide stream-oriented operations on files.
 @end{Intro}
 
-@LabeledSubSection{The Package Streams.Stream_IO}
+@LabeledSubClause{The Package Streams.Stream_IO}
 
 @begin{Intro}
 @Defn{heterogeneous input-output}
@@ -2839,7 +2839,7 @@ the file or changing the position.
 Mode_Error is propagated if the mode of the file is In_File.
 @end{StaticSem}
 
-@LabeledSubsection{The Package Text_IO.Text_Streams}
+@LabeledSubClause{The Package Text_IO.Text_Streams}
 @begin{Intro}
 The package Text_IO.Text_Streams provides a function for treating
 a text file as a stream.
@@ -2871,7 +2871,7 @@ affect the column, line, or page counts.
 @end[NotesNotes]
 
 
-@LabeledSubsection{The Package Wide_Text_IO.Text_Streams}
+@LabeledSubClause{The Package Wide_Text_IO.Text_Streams}
 @begin{Intro}
 The package Wide_Text_IO.Text_Streams provides a function for treating
 a wide text file as a stream.
@@ -2895,7 +2895,7 @@ in Streams.Stream_IO.
 @end{StaticSem}
 
 
-@LabeledSection{Exceptions in Input-Output}
+@LabeledClause{Exceptions in Input-Output}
 @begin{Intro}
 The package IO_Exceptions defines the exceptions needed by the
 predefined input-output packages.
@@ -3003,7 +3003,7 @@ as explained in @RefSecNum{Data Validity}.
 @PDefn{abnormal state of an object}]
 @end{Erron}
 
-@LabeledSection{File Sharing}
+@LabeledClause{File Sharing}
 
 @begin{RunTime}
 @PDefn{unspecified}

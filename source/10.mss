@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:27 $}
-@LabeledChapter{Program Structure and Compilation Issues}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @redundant[
@@ -94,7 +94,7 @@ The section organization mentioned above is different from that of
 RM83.
 @end{DiffWord83}
 
-@LabeledSection{Separate Compilation}
+@LabeledClause{Separate Compilation}
 
 @begin{Intro}
 @redundant[
@@ -180,7 +180,7 @@ Placing it here seems logical,
 since a program unit is sort of a potential compilation unit.
 @end{DiffWord83}
 
-@LabeledSubSection{Compilation Units - Library Units}
+@LabeledSubClause{Compilation Units - Library Units}
 
 @begin{Intro}
 @redundant[
@@ -845,7 +845,7 @@ an attempt to compile a package Standard would result in
 Standard.Standard.
 @end{DiffWord83}
 
-@LabeledSubSection{Context Clauses - With Clauses}
+@LabeledSubClause{Context Clauses - With Clauses}
 
 @begin{Intro}
 @redundant[
@@ -1078,7 +1078,7 @@ Their semantics are fully covered by the ``scope (of a @nt{use_clause})''
 definition in @RefSecNum{Use Clauses}.
 @end{DiffWord83}
 
-@LabeledSubSection{Subunits of Compilation Units}
+@LabeledSubClause{Subunits of Compilation Units}
 
 @begin{Intro}
 @redundant[
@@ -1269,7 +1269,7 @@ to have distinct identifiers.
 Instead, we require only that the full expanded names be distinct.
 @end{Extend83}
 
-@LabeledSubSection{The Compilation Process}
+@LabeledSubClause{The Compilation Process}
 
 @begin{Intro}
 @Defn{environment}
@@ -1501,7 +1501,7 @@ containing the instantiation.
 @end{ImplNote}
 @end{NotesNotes}
 
-@LabeledSubSection{Pragmas and Program Units}
+@LabeledSubClause{Pragmas and Program Units}
 
 @begin{Intro}
 @Redundant[This subclause discusses pragmas related to program units,
@@ -1610,7 +1610,7 @@ so long as it allows them when the environment contains no
 @nt{library_item}s other than those of the predefined environment.
 @end{ImplPerm}
 
-@LabeledSubSection{Environment-Level Visibility Rules}
+@LabeledSubClause{Environment-Level Visibility Rules}
 
 @begin{Intro}
 @Redundant[The normal visibility rules do not apply within a
@@ -1747,7 +1747,7 @@ that were with-ed by our parent, etc.
 @end{DiffWord83}
 
 @NewPage{}
-@LabeledSection{Program Execution}
+@LabeledClause{Program Execution}
 
 @begin{Intro}
 @Defn{program}
@@ -2305,7 +2305,7 @@ program.
 The program as a whole is an entirely different thing.
 @end{DiffWord83}
 
-@LabeledSubSection{Elaboration Control}
+@LabeledSubClause{Elaboration Control}
 
 @begin{Intro}
 @Redundant[@Defn{elaboration control}

@@ -1,17 +1,17 @@
 @Part(obsolescent, Root="ada.mss")
 
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/15 21:58:29 $}
+@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
 This Annex contains descriptions of features of the
 language whose functionality is largely redundant with other features
-defined by this @SelfRef.
+defined by this International Standard.
 Use of these features is not recommended in newly written programs.]
 @begin{Ramification}
 These features are still part of the language,
@@ -49,7 +49,7 @@ Implementations can continue to support the above features for upward
 compatibility.
 @end{DiffWord83}
 
-@LabeledSection{Renamings of Ada 83 Library Units}
+@LabeledClause{Renamings of Ada 83 Library Units}
 
 @begin{StaticSem}
 The following @nt{library_unit_renaming_declaration}s exist:
@@ -84,7 +84,7 @@ The following @nt{library_unit_renaming_declaration}s exist:
 The implementation shall allow the user to replace these renamings.
 @end{ImplReq}
 
-@LabeledSection{Allowed Replacements of Characters}
+@LabeledClause{Allowed Replacements of Characters}
 
 @begin{Syntax}
 @begin{SyntaxText}
@@ -145,7 +145,7 @@ is not legal in Ada 83, nor will it be in Ada 9X.  One has to write:
 @end{SyntaxText}
 @end{Syntax}
 
-@LabeledSection{Reduced Accuracy Subtypes}
+@LabeledClause{Reduced Accuracy Subtypes}
 
 @begin{Intro}
 A @nt<digits_constraint> may be used to define
@@ -247,7 +247,7 @@ primarily to decimal fixed point types now (they apply to
 floating point types only as an obsolescent feature).
 @end{DiffWord83}
 
-@LabeledSection{The Constrained Attribute}
+@LabeledClause{The Constrained Attribute}
 
 @begin{StaticSem}
 For every private subtype S,
@@ -282,7 +282,7 @@ So one should think of its designator as being 'Constrained_Or_Elementary.
 @end{Description}
 @end{StaticSem}
 
-@LabeledSection{ASCII}
+@LabeledClause{ASCII}
 
 @begin{StaticSem}
 The following declaration exists in the declaration of package Standard:
@@ -340,7 +340,7 @@ The following declaration exists in the declaration of package Standard:
 @end{StaticSem}
 
 
-@LabeledSection{Numeric_Error}
+@LabeledClause{Numeric_Error}
 
 @begin{StaticSem}
 The following declaration exists in the declaration
@@ -368,7 +368,7 @@ In new code, Constraint_Error should be used instead of Numeric_Error.
 @end{Reason}
 @end{StaticSem}
 
-@LabeledSection{At Clauses}
+@LabeledClause{At Clauses}
 
 @begin{Syntax}
 @Syn{lhs=<at_clause>,rhs="@key{for} @Syn2{direct_name} @key{use} @key{at} @Syn2{expression};"}
@@ -404,7 +404,7 @@ confusion with the new term ``Address clause'' (that is, an
 @nt{attribute_definition_clause} for the Address attribute).
 @end{DiffWord83}
 
-@LabeledSubSection{Interrupt Entries}
+@LabeledSubClause{Interrupt Entries}
 
 @begin{Intro}
 @redundant[
@@ -424,7 +424,7 @@ The following attribute is defined:
 For any task entry X:
 @begin{Description}
 @begin{Multiple}
-@DefnNext{interrupt entry}
+@Defn{interrupt entry}
 X'@attr{Address} @\For a task entry whose address is specified
                (an @i{interrupt entry}), the value
                refers to the corresponding hardware interrupt.  For such
@@ -432,7 +432,7 @@ X'@attr{Address} @\For a task entry whose address is specified
                value is implementation defined.  The value of this attribute
                is of the type of the subtype System.Address.
 
-@PDefn2Next{Term=[specifiable], Sec=(of Address for entries)}
+@PDefn2{Term=[specifiable], Sec=(of Address for entries)}
                Address may be specified for single entries
                via an @nt{attribute_definition_clause}.
 @end{Multiple}
@@ -551,7 +551,7 @@ interrupts.  This feature is now obsolescent and is replaced by the Ada 9X
 interrupt model as specified in the Systems Programming Annex.
 @end{DiffWord83}
 
-@LabeledSection{Mod Clauses}
+@LabeledClause{Mod Clauses}
 
 @begin{Syntax}
 @Syn{lhs=<mod_clause>,rhs="@key{at} @key{mod} @SynI{static_}@Syn2{expression};"}
@@ -593,7 +593,7 @@ confusion with the new term ``Alignment clause'' (that is, an
 @nt{attribute_definition_clause} for the Alignment attribute).
 @end{DiffWord83}
 
-@LabeledSection{The Storage_Size Attribute}
+@LabeledClause{The Storage_Size Attribute}
 
 @begin{StaticSem}
 For any task subtype T,
@@ -615,7 +615,7 @@ and in any case, the value is implementation defined.
 Hence, it is always implementation defined.
 @end{Honest}
 
-@PDefn2Next{Term=[specifiable], Sec=(of Storage_Size for a task
+@PDefn2{Term=[specifiable], Sec=(of Storage_Size for a task
 first subtype)}
 Storage_Size may be specified for a task first subtype
 via an @nt{attribute_definition_clause}.

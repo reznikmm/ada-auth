@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:25 $}
-@LabeledChapter{Lexical Elements}
+@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @redundant[
@@ -17,7 +17,7 @@ described in this section.
 ]
 @end{Intro}
 
-@LabeledSection{Character Set}
+@LabeledClause{Character Set}
 
 @begin{Intro}
 @Defn{character set}
@@ -66,10 +66,10 @@ representation defined within ISO-10646-1)].
 @ImplDef{The coded representation for the text of an Ada program.}
 
 The description of the
-language definition in this @SelfRef uses the graphic symbols
+language definition in this International Standard uses the graphic symbols
 defined for Row 00: Basic Latin and Row 00: Latin-1 Supplement
 of the ISO 10646 BMP; these correspond to the graphic symbols of
-ISO 8859-1 (Latin-1); no graphic symbols are used in this @SelfRef for
+ISO 8859-1 (Latin-1); no graphic symbols are used in this International Standard for
 characters outside of Row 00 of the BMP.
 The actual set of graphic symbols used by an implementation
 for the visual representation of
@@ -78,17 +78,17 @@ the text of an Ada program is not specified.
 
 The categories of characters are defined as follows:
 @begin{Description}
-@DefnNext{identifier_letter}@nt<identifier_letter> @\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}
+@Defn{identifier_letter}@nt<identifier_letter> @\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}
 @begin{Discussion}
   We use @nt<identifier_letter> instead of simply @nt<letter> because
   ISO 10646 BMP includes many other characters that would generally
   be considered "letters."
 @end{Discussion}
 
-@DefnNext{upper_case_identifier_letter}@nt<upper_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
+@Defn{upper_case_identifier_letter}@nt<upper_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
 name begins ``Latin Capital Letter''.
 
-@DefnNext{lower_case_identifier_letter}@nt<lower_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
+@Defn{lower_case_identifier_letter}@nt<lower_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
 name begins ``Latin Small Letter''.
 @begin{Honest}
 
@@ -99,12 +99,12 @@ This problem was pointed out by a comment from the Netherlands.
 
 @end{Honest}
 
-@DefnNext{digit}@nt<digit> @\One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.
+@Defn{digit}@nt<digit> @\One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.
 
-@DefnNext{space_character}@nt<space_character> @\The character of ISO
+@Defn{space_character}@nt<space_character> @\The character of ISO
 10646 BMP named ``Space''.
 
-@DefnNext{special_character}@nt<special_character> @\Any character of
+@Defn{special_character}@nt<special_character> @\Any character of
   the ISO 10646 BMP that is not reserved for a control function, and
   is not the @nt<space_character>, an @nt<identifier_letter>, or a @nt<digit>.
 @begin{Ramification}
@@ -113,12 +113,12 @@ and therefore @nt<graphic_character>s.
 They are not the same characters as space and hyphen-minus.
 @end{Ramification}
 
-@DefnNext{format_effector}@nt<format_effector> @\The control functions of ISO 6429 called
+@Defn{format_effector}@nt<format_effector> @\The control functions of ISO 6429 called
   character tabulation (HT), line tabulation (VT), carriage return (CR),
   line feed (LF), and form feed (FF).
 @IndexSeeAlso{Term=[control character],See=(format_effector)}
 
-@DefnNext{other_control_function}@nt<other_control_function> @\Any control
+@Defn{other_control_function}@nt<other_control_function> @\Any control
 function,
 other than a @nt<format_effector>, that is allowed in a comment; the set of
 @nt<other_control_function>s allowed in comments is implementation defined.
@@ -225,7 +225,7 @@ such as which characters are allowed in the text of a program.
 
 @begin{NotesNotes}
 Every code position of ISO 10646 BMP that is not reserved for a control
-function is defined to be a @nt<graphic_character> by this @SelfRef.
+function is defined to be a @nt<graphic_character> by this International Standard.
 This includes all code positions other than 0000 - 001F, 007F - 009F,
 and FFFE - FFFF.
 
@@ -276,9 +276,7 @@ ISO 10646 BMP includes many "letters' that are not permitted in
 identifiers (in the standard mode).
 @end{DiffWord83}
 
-@Section{Lexical Elements, Separators, and Delimiters}
-@Comment{This is not a LabeledSection because it seems to conflict with
-the section title, `Lexical Elements'.}
+@LabeledClause{Lexical Elements, Separators, and Delimiters}
 
 @begin{StaticSem}
 @Defn{text of a program}
@@ -381,7 +379,7 @@ From URG recommendation.
 @end{Discussion}
 @end{ImplReq}
 
-@LabeledSection{Identifiers}
+@LabeledClause{Identifiers}
 
 @begin{Intro}
 @nt<Identifier>s are used as names.
@@ -447,7 +445,7 @@ implementation-defined attributes or pragma names.
 @end{Ramification}
 @end{DiffWord83}
 
-@LabeledSection{Numeric Literals}
+@LabeledClause{Numeric Literals}
 
 @begin{Intro}
 @Defn2{Term=[literal], Sec=(numeric)}
@@ -468,7 +466,7 @@ The type of an integer literal is @i{universal_integer}.
 The type of a real literal is @i{universal_real}.
 @end{NotesNotes}
 
-@LabeledSubSection{Decimal Literals}
+@LabeledSubClause{Decimal Literals}
 
 @begin{Intro}
 @Defn2{Term=[literal], Sec=(decimal)}
@@ -526,7 +524,7 @@ It avoids the confusion between this and integers.
 For example, a @nt{string_literal} is different from a string.)
 @end{DiffWord83}
 
-@LabeledSubSection{Based Literals}
+@LabeledSubClause{Based Literals}
 
 @begin{Intro}
 @Redundant[
@@ -596,7 +594,7 @@ as suggested by Mike Woodger.
 This is clearly more readable.
 @end{DiffWord83}
 
-@LabeledSection{Character Literals}
+@LabeledClause{Character Literals}
 
 @begin{Intro}
 @Redundant[A @nt<character_literal> is formed by enclosing a graphic
@@ -625,7 +623,7 @@ Sections 3 and 4, rather than here,
 since it requires knowledge of types.
 @end{DiffWord83}
 
-@LabeledSection{String Literals}
+@LabeledClause{String Literals}
 
 @begin{Intro}
 @redundant[
@@ -693,7 +691,7 @@ which don't have a defined value.
 The syntax is described differently.
 @end{DiffWord83}
 
-@LabeledSection{Comments}
+@LabeledClause{Comments}
 
 @begin{Intro}
 A @nt{comment} starts with two adjacent hyphens and extends up to the end
@@ -729,7 +727,7 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @end{Display}
 @end{Examples}
 
-@LabeledSection{Pragmas}
+@LabeledClause{Pragmas}
 
 @begin{Intro}
 @ToGlossaryAlso{Term=<Pragma>,
@@ -1023,7 +1021,7 @@ The forms of List, Page, and Optimize @nt{pragma}s are as follows:
 @PragmaSyn`@key{pragma} @prag(Optimize)(@Syn2{identifier});'
 
 @begin{SyntaxText}
-@Redundant[Other pragmas are defined throughout this @SelfRef,
+@Redundant[Other pragmas are defined throughout this International Standard,
 and are summarized in
 @RefSecNum{Language-Defined Pragmas}.]
 @begin{Ramification}
@@ -1108,7 +1106,7 @@ informative annex.
 @end{DiffWord83}
 
 @NewPage{}
-@LabeledSection{Reserved Words}
+@LabeledClause{Reserved Words}
 
 @Define{FourColRW, Columns=4, Boxed, ColumnBalance, NoFill, ColumnWidth=1.5in, LeftMargin=+.5in}
 @begin{Syntax}
@@ -1232,7 +1230,7 @@ The following are the @i{reserved words}
 
 @begin{NotesNotes}
 The reserved words appear in @key{lower case boldface}
-in this @SelfRef,
+in this International Standard,
 except when used in the @nt{designator} of an attribute
 (@lSeeSecNum(Attributes)).
 

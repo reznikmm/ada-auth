@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
-@LabeledChapter{Visibility Rules}
+@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @redundant[
@@ -49,7 +49,7 @@ operation to be ``inherent in'' something.
 Finally, this fixes the problem addressed by AI-00027/07.
 @end{DiffWord83}
 
-@LabeledSection{Declarative Region}
+@LabeledClause{Declarative Region}
 
 @begin{StaticSem}
 @Defn2{Term=[declarative region], Sec=(of a construct)}
@@ -278,7 +278,7 @@ region, but not within either the declaration or the body.
 (See RM83-8.6(2) and RM83-10.1.1(5).)
 @end{DiffWord83}
 
-@LabeledSection{Scope of Declarations}
+@LabeledClause{Scope of Declarations}
 
 @begin{Intro}
 @redundant[
@@ -590,7 +590,7 @@ even though Q is declared in the declarative region of Standard,
 because R does not mention Q in a @nt{with_clause}.
 @end{DiffWord83}
 
-@LabeledSection{Visibility}
+@LabeledClause{Visibility}
 
 @begin{Intro}
 @redundant[
@@ -1096,7 +1096,7 @@ and the region in which it is directly visible.
 Visibility is defined only for declarations.
 @end{DiffWord83}
 
-@LabeledSection{Use Clauses}
+@LabeledClause{Use Clauses}
 
 @begin{Intro}
 @redundant[
@@ -1334,7 +1334,7 @@ declaration has to be visible in order to be
 potentially use-visible.
 @end{DiffWord83}
 
-@LabeledSection{Renaming Declarations}
+@LabeledClause{Renaming Declarations}
 
 @begin{Intro}
 @redundant[
@@ -1407,7 +1407,7 @@ for programmers, they are irrelevant,
 since failing these tests is highly unlikely.
 @end{DiffWord83}
 
-@LabeledSubSection{Object Renaming Declarations}
+@LabeledSubClause{Object Renaming Declarations}
 
 @begin{Intro}
 @redundant[
@@ -1523,7 +1523,7 @@ It is incorrect in the case of an object with an indefinite
 unconstrained nominal subtype.
 @end{DiffWord83}
 
-@LabeledSubSection{Exception Renaming Declarations}
+@LabeledSubClause{Exception Renaming Declarations}
 
 @begin{Intro}
 @redundant[
@@ -1551,7 +1551,7 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error;@i{-- @lSeeSecNu
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{Package Renaming Declarations}
+@LabeledSubClause{Package Renaming Declarations}
 
 @begin{Intro}
 @redundant[
@@ -1579,7 +1579,7 @@ A @nt{package_renaming_declaration} declares a new view
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{Subprogram Renaming Declarations}
+@LabeledSubClause{Subprogram Renaming Declarations}
 
 @begin{Intro}
 A @nt{subprogram_renaming_declaration} can serve as the completion of
@@ -1811,7 +1811,7 @@ We'll live with the oddity.
 @end{Example}
 @end{Examples}
 
-@LabeledSubSection{Generic Renaming Declarations}
+@LabeledSubClause{Generic Renaming Declarations}
 
 @begin{Intro}
 @redundant[
@@ -1869,7 +1869,7 @@ except for the definition of ``predefined type,''
 which has been moved to @RefSecNum{Type Declarations}.
 @end{DiffWord83}
 
-@LabeledSection{The Context of Overload Resolution}
+@LabeledClause{The Context of Overload Resolution}
 
 @begin{Intro}
 @redundant[

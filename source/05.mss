@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
-@LabeledChapter{Statements}
+@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -32,7 +32,7 @@ The description of @nt<return_statement>s has been moved to
 description of subprograms.
 @end{DiffWord83}
 
-@LabeledSection{Simple and Compound Statements - Sequences of Statements}
+@LabeledClause{Simple and Compound Statements - Sequences of Statements}
 
 @begin{Intro}
 @Redundant[A @nt<statement> is either simple or compound.
@@ -248,7 +248,7 @@ Completion includes completion caused by a transfer of control,
 although RM83-5.1(6) did not take this view.
 @end{DiffWord83}
 
-@LabeledSection{Assignment Statements}
+@LabeledClause{Assignment Statements}
 
 @begin{Intro}
 @Redundant[An @nt{assignment_statement}
@@ -524,7 +524,7 @@ the variable in an @nt<assignment_statement> is a subcomponent
 that depends on discriminants.
 @end{DiffWord83}
 
-@LabeledSection{If Statements}
+@LabeledClause{If Statements}
 
 @begin{Intro}
 @Redundant[An @nt{if_statement} selects for execution at most one of
@@ -593,7 +593,7 @@ them is executed.
 @end{Example}
 @end{Examples}
 
-@LabeledSection{Case Statements}
+@LabeledClause{Case Statements}
 
 @begin{Intro}
 @Redundant[A @nt{case_statement} selects for execution one of a
@@ -833,7 +833,7 @@ for @nt<name>s, rather than being separated out along with
 @nt<qualified_expression>s.
 @end{DiffWord83}
 
-@LabeledSection{Loop Statements}
+@LabeledClause{Loop Statements}
 
 @begin{Intro}
 @Redundant[A @nt{loop_statement} includes a
@@ -996,7 +996,7 @@ The constant-ness of loop parameters is specified in
 @RefSec{Objects and Named Numbers}.
 @end{DiffWord83}
 
-@LabeledSection{Block Statements}
+@LabeledClause{Block Statements}
 
 @begin{Intro}
 @Redundant[A @nt{block_statement} encloses a
@@ -1065,7 +1065,7 @@ The syntax rule for @nt{block_statement} now uses the syntactic category
 @nt{handled_sequence_of_statements}.
 @end{DiffWord83}
 
-@LabeledSection{Exit Statements}
+@LabeledClause{Exit Statements}
 
 @begin{Intro}
 @Redundant[An @nt{exit_statement} is used to complete the execution
@@ -1134,7 +1134,7 @@ Main_Cycle:
 @end{Example}
 @end{Examples}
 
-@LabeledSection{Goto Statements}
+@LabeledClause{Goto Statements}
 
 @begin{Intro}
 @Redundant[A @nt{goto_statement} specifies an explicit transfer of control

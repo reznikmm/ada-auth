@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2000/04/15 21:58:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:29 $}
-@LabeledAppendixSection{The Package Command_Line}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
+@LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program
 to obtain the values of its arguments and to set

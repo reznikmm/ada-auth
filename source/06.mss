@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/15 21:58:26 $}
-@LabeledChapter{Subprograms}
+@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -43,7 +43,7 @@ since they don't have completions.
 @end{Ramification}
 @end{Intro}
 
-@LabeledSection{Subprogram Declarations}
+@LabeledClause{Subprogram Declarations}
 
 @begin{Intro}
 @Redundant[A @nt{subprogram_declaration} declares a procedure or
@@ -288,7 +288,7 @@ The syntax rules for @nt{defining_designator} and
 @nt{defining_program_unit_name} are new.
 @end{DiffWord83}
 
-@LabeledSection{Formal Parameter Modes}
+@LabeledClause{Formal Parameter Modes}
 
 @begin{Intro}
 @Redundant[A @nt{parameter_specification} declares a formal parameter of
@@ -555,7 +555,7 @@ the rule regarding erroneous execution when a discriminant
 is changed and one of the parameters depends on the discriminant.
 @end{DiffWord83}
 
-@LabeledSection{Subprogram Bodies}
+@LabeledClause{Subprogram Bodies}
 
 @begin{Intro}
 @Redundant[A @nt{subprogram_body} specifies the execution of a
@@ -660,7 +660,7 @@ RM83 forgot to restrict the definition of elaboration of a
 @nt{subprogram_body} to non-generics.
 @end{DiffWord83}
 
-@LabeledSubSection{Conformance Rules}
+@LabeledSubClause{Conformance Rules}
 
 @begin{Intro}
 @Defn{conformance}
@@ -941,7 +941,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 
 @end{Extend83}
 
-@LabeledSubSection{Inline Expansion of Subprograms}
+@LabeledSubClause{Inline Expansion of Subprograms}
 
 @begin{Intro}
 @Redundant[Subprograms may be expanded in line at the call site.]
@@ -1032,7 +1032,7 @@ This is for uniformity with other program unit pragmas.
 
 @end{Extend83}
 
-@LabeledSection{Subprogram Calls}
+@LabeledClause{Subprogram Calls}
 
 @begin{Intro}
 @Defn{subprogram call}
@@ -1249,7 +1249,7 @@ We have moved wording about raising Program_Error for a function
 that falls off the end to here from RM83-6.5.
 @end{DiffWord83}
 
-@LabeledSubSection{Parameter Associations}
+@LabeledSubClause{Parameter Associations}
 
 @begin{Intro}
 @Redundant[@Defn{parameter passing}
@@ -1470,7 +1470,7 @@ We have eliminated the subclause on Default Parameters,
 as it is subsumed by earlier clauses and subclauses.
 @end{DiffWord83}
 
-@LabeledSection{Return Statements}
+@LabeledClause{Return Statements}
 
 @begin{Intro}
 A @nt{return_statement} is used to complete the execution of the
@@ -1692,7 +1692,7 @@ the phrase ``body of a subprogram or generic subprogram'' is
 syntactic, and refers exactly to ``@nt{subprogram_body}''.
 @end{DiffWord83}
 
-@LabeledSection{Overloading of Operators}
+@LabeledClause{Overloading of Operators}
 
 @begin{Intro}
 @Defn{operator}

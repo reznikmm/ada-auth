@@ -1,9 +1,9 @@
 @Part(01, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:25 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:02 $}
 @PageOneFootings{}
 
-@PrefaceSection{} @Comment{Go to odd page.}
+@PrefaceClause{} @Comment{Go to odd page.}
 
 @begin{Comment}
 The following stuff is to get the "INTERNATIONAL STANDARD" title between
@@ -54,11 +54,11 @@ Languages @EmDash{} Ada
 @end{StandardTitle}
 @BlankSpace{0.5inch}
 
-@ChapterSamePage{General}
-@SetPageHeadingsNoPage{$Date: 2000/04/15 21:58:25 $}
+@LabeledSection{General}
+@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -231,20 +231,20 @@ to.
 @end{Discussion}
 @end{Intro}
 
-@LabeledSection{Scope}
+@LabeledClause{Scope}
 
 
 @begin{Intro}
-This @SelfRef specifies the form and meaning of programs
+This International Standard specifies the form and meaning of programs
 written in Ada.
 Its purpose is to promote the portability of Ada programs to a variety
 of data processing systems.
 @end{Intro}
 
-@LabeledSubSection{Extent}
+@LabeledSubClause{Extent}
 
 @begin{Intro}
-This @SelfRef specifies:
+This International Standard specifies:
 @begin(Itemize)
      The form of a program written in Ada;
 
@@ -267,7 +267,7 @@ This @SelfRef specifies:
      is not required to detect.
 @end(Itemize)
 
-This @SelfRef does not specify:
+This International Standard does not specify:
 @begin(Itemize)
      The means whereby a program written in Ada is transformed into
      object code executable by a processor;
@@ -288,10 +288,10 @@ This @SelfRef does not specify:
 @end(Itemize)
 @end{Intro}
 
-@LabeledSubSection{Structure}
+@LabeledSubClause{Structure}
 
 @begin{Intro}
-This @SelfRef contains thirteen sections,
+This International Standard contains thirteen sections,
 fourteen annexes,
 and an index.
 
@@ -738,7 +738,7 @@ This is not part of the definition of the language,
 and does not appear in the RM9X.
 @end{DiffWord83}
 
-@LabeledSubSection{Conformity of an Implementation with the Standard}
+@LabeledSubClause{Conformity of an Implementation with the Standard}
 
 @begin{ImplReq}
 
@@ -775,7 +775,7 @@ the Specialized Needs Annexes.
 
      Identify all programs or program units that contain
      errors whose detection is required by this
-     @SelfRef;
+     International Standard;
      @begin{Discussion}
        Note that we no longer use the term ``rejection'' of programs
        or program units.
@@ -795,7 +795,7 @@ the Specialized Needs Annexes.
      @end{Discussion}
 
      Supply all language-defined library units required by this
-     @SelfRef;
+     International Standard;
      @begin{ImplNote}
        An implementation cannot add to or modify the visible part of
        a language-defined library unit,
@@ -831,7 +831,7 @@ the Specialized Needs Annexes.
 
      Contain no variations except
      those explicitly permitted by this
-     @SelfRef, or those that are impossible or impractical
+     International Standard, or those that are impossible or impractical
      to avoid given the implementation's execution environment;
      @ImplDef{Variations from the standard that are impractical to avoid
      given the implementation's execution environment.}
@@ -846,7 +846,7 @@ the Specialized Needs Annexes.
      @end{Reason}
 
      Specify all such variations in the manner prescribed
-     by this @SelfRef.
+     by this International Standard.
 @end(Itemize)
 
 @Defn2{Term=[external effect], Sec=(of the execution of an Ada program)}
@@ -895,11 +895,11 @@ The following are defined as @i(external interactions):
 @end(Itemize)
 
 A conforming implementation
-of this @SelfRef shall produce for the
+of this International Standard shall produce for the
 execution of a given Ada program
 a set of interactions with the external environment whose
 order and timing are consistent with the definitions and requirements of this
-@SelfRef for the semantics of the given program.
+International Standard for the semantics of the given program.
 @begin{Ramification}
   There is no need to produce any of the ``internal effects''
   defined for the semantics of the program @em all of these
@@ -958,7 +958,7 @@ required by the Annex is provided as specified.
   by supporting all capabilities required by the Annex.
 @end{Discussion}
 
-An implementation conforming to this @SelfRef
+An implementation conforming to this International Standard
 may provide additional
 attributes, library units, and pragmas.
 However, it shall not provide any attribute,
@@ -1118,7 +1118,7 @@ capabilities.
 @end{Discussion}
 @end{NotesNotes}
 
-@LabeledSubSection{Method of Description and Syntax Notation}
+@LabeledSubClause{Method of Description and Syntax Notation}
 
 @begin{Intro}
 The form of an Ada program is described by means of a context-free
@@ -1311,7 +1311,7 @@ recommended line breaks and indentation in the corresponding constructs.
 The preferred places for other line breaks are after semicolons.
 @end{NotesNotes}
 
-@LabeledSubSection{Classification of Errors}
+@LabeledSubClause{Classification of Errors}
 
 @begin{ImplReq}
 The language definition classifies errors into several different
@@ -1322,7 +1322,7 @@ categories:
      Ada implementation;
 
      These errors correspond to any violation of a rule given in this
-     @SelfRef, other than those listed below.
+     International Standard, other than those listed below.
      In particular, violation of any rule that uses the
      terms shall, allowed, permitted, legal, or illegal belongs to this
      category.  Any program that contains such an error is not a legal
@@ -1433,7 +1433,7 @@ satisfy certain criteria specified by the implementation.
 @Defn2{Term={mode of operation}, Sec=(standard)}
 @Defn{standard mode}
 In any case, an implementation shall support a @i(standard) mode that
-conforms to the requirements of this @SelfRef; in particular, in the standard
+conforms to the requirements of this International Standard; in particular, in the standard
 mode, all legal @nt<compilation_unit>s shall be accepted.]
 @begin{Discussion}
   These permissions are designed to authorize explicitly the
@@ -1487,16 +1487,16 @@ might be appropriate, but raising of Program_Error at
 run time would not be.
 @end{DiffWord83}
 
-@LabeledSection{Normative References}
+@LabeledClause{Normative References}
 
 @begin{Intro}
 @Defn{references}
 @Defn{bibliography}
 The following standards contain provisions which, through reference in
-this text, constitute provisions of this @SelfRef.  At the
+this text, constitute provisions of this International Standard.  At the
 time of publication, the editions indicated were valid.  All standards
 are subject to revision, and parties to agreements based on this
-@SelfRef are encouraged to investigate the possibility
+International Standard are encouraged to investigate the possibility
 of applying the most recent editions of the standards indicated below.
 Members of IEC and ISO maintain registers of currently valid International
 Standards.
@@ -1560,15 +1560,15 @@ POSIX,
 @end{Discussion}
 @end{Intro}
 
-@LabeledSection{Definitions}
+@LabeledClause{Definitions}
 
 @begin{Intro}
 @Defn2{Term=[italics],Sec=(terms introduced or defined)}
-Terms are defined throughout this @SelfRef,
+Terms are defined throughout this International Standard,
 indicated by @i(italic) type.
-Terms explicitly defined in this @SelfRef are not to be presumed to
+Terms explicitly defined in this International Standard are not to be presumed to
 refer implicitly to similar terms defined elsewhere.  Terms not defined in
-this @SelfRef are to be interpreted according to
+this International Standard are to be interpreted according to
 the @i(Webster's Third New International Dictionary of the
 English Language).
 Informal descriptions of some terms are also given in
