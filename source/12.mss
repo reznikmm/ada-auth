@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:41 $}
+@Comment{$Date: 2000/08/11 00:09:15 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -22,7 +22,7 @@ generic unit.
 @ToGlossary{Term=<Generic unit>,
   Text=<A generic unit is a template for a (nongeneric) program unit;
   the template can be parameterized by objects, types, subprograms, and
-  packages.  An instance of a generic unit is created by a
+  packages. An instance of a generic unit is created by a
   @nt(generic_instantiation).
   The rules of the language are enforced when a generic unit is compiled,
   using a generic contract model; additional checks are
@@ -32,18 +32,18 @@ generic unit.
   Generic units can be used to perform the role that macros
   sometimed play in other languages.>}
 
-@redundant[A generic unit is declared by a @nt{generic_declaration}.  This form
+@redundant[A generic unit is declared by a @nt{generic_declaration}. This form
 of declaration has a @nt{generic_formal_part} declaring any generic
-formal parameters.  An instance of a generic unit is obtained as the
+formal parameters. An instance of a generic unit is obtained as the
 result of a @nt{generic_instantiation} with appropriate
-generic actual parameters for the generic formal parameters.  An
-instance of a generic subprogram is a subprogram.  An instance of a
+generic actual parameters for the generic formal parameters. An
+instance of a generic subprogram is a subprogram. An instance of a
 generic package is a package.
 
-Generic units are templates.  As templates they do not have the
-properties that are specific to their nongeneric counterparts.  For
+Generic units are templates. As templates they do not have the
+properties that are specific to their nongeneric counterparts. For
 example, a generic subprogram can be instantiated but it cannot be
-called.  In contrast, an instance of a generic subprogram is a
+called. In contrast, an instance of a generic subprogram is a
 (nongeneric) subprogram; hence, this instance can be called but it
 cannot be used to produce further instances.]
 @end{Intro}
@@ -52,9 +52,9 @@ cannot be used to produce further instances.]
 
 @begin{Intro}
 @redundant[A @nt{generic_declaration} declares a generic unit, which is either a
-generic subprogram or a generic package.  A @nt{generic_declaration}
+generic subprogram or a generic package. A @nt{generic_declaration}
 includes a @nt{generic_formal_part} declaring any generic formal
-parameters.  A generic formal parameter can be an object;
+parameters. A generic formal parameter can be an object;
 alternatively (unlike a parameter of a subprogram), it can be a type,
 a subprogram, or a package.]
 @end{Intro}
@@ -104,7 +104,7 @@ as appropriate.
 
 @Defn{generic formal}
 An entity is a @i{generic formal} entity if it is declared
-by a @nt<generic_formal_parameter_declaration>.  @lquotes@;Generic formal,@rquotes@;
+by a @nt<generic_formal_parameter_declaration>. @lquotes@;Generic formal,@rquotes@;
 or simply @lquotes@;formal,@rquotes@; is used as a prefix in referring
 to objects, subtypes (and types), functions, procedures and packages,
 that are generic formal entities, as well as to their respective
@@ -132,8 +132,8 @@ See also @RefSec{Generic Instantiation}.
 @end{TheProof}
 
 Within a generic @nt{subprogram_body}, the name of this program unit
-acts as the name of a subprogram.  Hence this name can be overloaded,
-and it can appear in a recursive call of the current instance.  For the
+acts as the name of a subprogram. Hence this name can be overloaded,
+and it can appear in a recursive call of the current instance. For the
 same reason, this name cannot appear after the reserved word @key{new}
 in a (recursive) @nt{generic_instantiation}.
 
@@ -146,7 +146,7 @@ expression.)
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of generic formal parts:}
+@leading@keepnext@i{Examples of generic formal parts:}
 @begin{Example}
 @key[generic]     --@RI{  parameterless }
 
@@ -165,8 +165,10 @@ expression.)
    @key[with] @key[function] "<"(X, Y : Item) @key[return] Boolean;    --@RI{ formal subprogram }
 @end{Example}
 
-@i{Examples of generic declarations declaring generic subprograms
+@begin{Wide}
+@leading@keepnext@i{Examples of generic declarations declaring generic subprograms
 Exchange and Squaring:}
+@end{Wide}
 @begin{Example}
 @key[generic]
    @key[type] Elem @key[is] @key[private];
@@ -178,7 +180,9 @@ Exchange and Squaring:}
 @key[function] Squaring(X : Item) @key[return] Item;
 @end{Example}
 
-@i{Example of a generic declaration declaring a generic package:}
+@begin{Wide}
+@leading@keepnext@i{Example of a generic declaration declaring a generic package:}
+@end{Wide}
 @begin{Example}
 @key[generic]
    @key[type] Item   @key[is] @key[private];
@@ -250,7 +254,7 @@ is always the completion of a declaration.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a generic procedure body:}
+@leading@keepnext@i{Example of a generic procedure body:}
 @begin{Example}
 @key[procedure] Exchange(U, V : @key[in] @key[out] Elem) @key[is]  --@RI{ see @RefSecNum{Generic Declarations}}
    T : Elem;  --@RI{  the generic formal type}
@@ -261,7 +265,9 @@ is always the completion of a declaration.
 @key[end] Exchange;
 @end{Example}
 
-@i{Example of a generic function body:}
+@begin{Wide}
+@leading@keepnext@i{Example of a generic function body:}
+@end{Wide}
 @begin{Example}
 @key[function] Squaring(X : Item) @key[return] Item @key[is]  --@RI{  see @RefSecNum{Generic Declarations}}
 @key[begin]
@@ -269,7 +275,9 @@ is always the completion of a declaration.
 @key[end] Squaring;
 @end{Example}
 
-@i{Example of a generic package body:}
+@begin{Wide}
+@leading@keepnext@i{Example of a generic package body:}
+@end{Wide}
 @begin{Example}
 @key[package] @key[body] On_Vectors @key[is]  --@RI{  see @RefSecNum{Generic Declarations}}
 
@@ -355,7 +363,7 @@ Similarly, the contract model does not apply to @LinkTimeTitle.
 @Defn{positional association}
 A @nt{generic_association} is @i{named} or @i{positional}
 according to whether or not the @i{generic_formal_parameter_}@nt<selector_name>
-is specified.  Any positional associations shall precede any
+is specified. Any positional associations shall precede any
 named associations.
 @end{SyntaxText}
 @end{Syntax}
@@ -415,8 +423,8 @@ and since these properties do not always carry over to the actuals,
 we need to check the rules again in the visible part of the instance.
 For example, only if a tagged type is limited may
 an extension of it have limited components in
-the @nt<extension_part>.  A formal tagged limited type
-is limited, but the actual might be nonlimited.  Hence
+the @nt<extension_part>. A formal tagged limited type
+is limited, but the actual might be nonlimited. Hence
 any rule that requires a tagged type to be limited
 runs into this problem.
 Such rules are rare; in most cases, the rules for matching of formals
@@ -424,8 +432,8 @@ and actuals guarantee that if the rule is obeyed in the generic unit,
 then it has to be obeyed in the instance.
 @end{Reason}
 @begin{Ramification}
-The @lquotes@;properties@rquotes@; of the formals are determined without knowing
-anything about the actuals:
+@leading@;The @lquotes@;properties@rquotes@; of the formals are determined
+without knowing anything about the actuals:
 @begin{Itemize}
 A formal derived subtype is constrained if and only if the ancestor
 subtype is constrained.
@@ -448,7 +456,7 @@ even though the actual can be class-wide.
 
 The subtype of a formal object of mode @key[in out]
 is not static.
-(This covers the case of AI-00878.)
+(This covers the case of AI83-00878.)
 
 The subtype of a formal parameter of
 a formal subprogram does not
@@ -462,11 +470,10 @@ A generic formal function is not static.
 @end{Itemize}
 @end{Ramification}
 @begin{Ramification}
-The exceptions to the above rule about when legality rules are
+@leading@;The exceptions to the above rule about when legality rules are
 enforced fall into these categories:
 @begin{Itemize}
-Some rules are checked in the generic declaration,
-and then again
+@leading@;Some rules are checked in the generic declaration, and then again
 in both the visible and private parts of the instance:
 @begin{InnerItemize}
 The parent type of a record extension has to be specific
@@ -523,7 +530,7 @@ region does not apply in an instance of a generic unit,
 except that it @i{does} apply in the declaration of a record extension
 that appears in the visible part of an instance.
 
-Some rules do not apply at all in an instance,
+@leading@;Some rules do not apply at all in an instance,
 not even in the visible part:
 @begin{InnerItemize}
 @nt{Body_stub}s are not normally allowed to be multiply nested,
@@ -574,7 +581,7 @@ It doesn't matter that an one could imagine writing an instantiation
 with the actual for Comp being nonlimited @em we never get to the
 instance, because the generic itself is illegal.
 
-On the other hand:
+@leading@;On the other hand:
 @begin{Example}
 @key[generic]
     @key[type] Parent @key[is] @key[tagged] @key[limited] @key[private]; --@RI{ Parent is limited.}
@@ -799,16 +806,16 @@ declaration of the actual.
   if a generic actual is a static @Redundant[(scalar or string)] subtype,
   then each use of the corresponding formal parameter within the
   specification of the instance is considered to be static.
-  (See AI-00409.)
+  (See AI83-00409.)
 
   Similarly, if a generic actual is a static expression and
   the corresponding formal parameter has a
   static @Redundant[(scalar or string)] subtype,
   then each use of the formal parameter in the specification of the
   instance is considered to be static.
-  (See AI-00505.)
+  (See AI83-00505.)
 
-  If a primitive subprogram of a type derived from a generic formal
+  @leading@;If a primitive subprogram of a type derived from a generic formal
   derived tagged type is not overriding (that is, it is a new
   subprogram), it is possible for the copy of that subprogram in
   an instance to override a subprogram inherited from the actual.
@@ -857,7 +864,7 @@ will inherit subprograms from the corresponding actual type.
 @Defn{override}
 These new implicit declarations occur immediately after the type
 declaration in the instance, and override
-the copied ones.  The copied ones
+the copied ones. The copied ones
 can be called only from within the instance; the new
 ones can be called only from outside the instance, although
 for tagged types, the
@@ -873,7 +880,7 @@ if the actual is Integer, then the copy of T in the instance has a
 which can be called from outside the instance
 (assuming T is declared in the visible part of the instance).
 
-AI-00398.
+AI83-00398.
 
 Since an actual type is always in the class determined for the formal,
 the new subprograms hide all of the copied ones,
@@ -907,7 +914,7 @@ implicit declaration in the generic.
 Corresponding rules apply to the other kinds of overriding
 described in @RefSecNum{Visibility}.
 @begin{Ramification}
-For example:
+@leading@;For example:
 @begin{Example}
 @key[type] Ancestor @key[is] @key[tagged] @key[null] @key[record];
 
@@ -995,7 +1002,7 @@ from outside the instance.
 If two overloaded subprograms declared in a generic package
 specification differ only by the (formal) type of their parameters and
 results, then there exist legal instantiations for which all calls of
-these subprograms from outside the instance are ambiguous.  For example:
+these subprograms from outside the instance are ambiguous. For example:
 @begin{Example}
 @key[generic]
    @key[type] A @key[is] (<>);
@@ -1010,7 +1017,7 @@ these subprograms from outside the instance are ambiguous.  For example:
 @end{Example}
 @end{Ramification}
 @begin{Ramification}
-The following example illustrates some of the subtleties of the
+@leading@;The following example illustrates some of the subtleties of the
 substitution of formals and actuals:
 @begin{Example}
 @key[generic]
@@ -1085,7 +1092,8 @@ but the declaration of Bool_4 calls "="@-{5}.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of generic instantiations (see @RefSecNum{Generic Declarations}):}
+@leading@keepnext@i{Examples of generic instantiations (see
+@RefSecNum{Generic Declarations}):}
 @begin{Example}
 @tabclear()@tabset(P49)
 @key[procedure] Swap @key[is] @key[new] Exchange(Elem => Integer);
@@ -1097,7 +1105,9 @@ but the declaration of Bool_4 calls "="@-{5}.
 @key[package] Int_Vectors @key[is] @key[new] On_Vectors(Integer, Table, "+");
 @end{Example}
 
-@i{Examples of uses of instantiated units:}
+@begin{Wide}
+@leading@keepnext@i{Examples of uses of instantiated units:}
+@end{Wide}
 @begin{Example}
 Swap(A, B);
 A := Square(A);
@@ -1114,13 +1124,13 @@ M : Integer := Sigma(T);  --@RI{  150}
 In Ada 83, all explicit actuals are evaluated before all defaults,
 and the defaults are evaluated in the order of the formal
 declarations.
-This ordering requirement is relaxed in Ada 9X.
+This ordering requirement is relaxed in Ada 95.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
 We have attempted to remove every violation of the contract model.
 Any remaining contract model violations should be considered bugs in
-the RM9X.
+the RM95.
 The unfortunate property of reverting to the predefined operators of
 the actual types is retained for upward compatibility.
 (Note that fixing this would require subtype conformance rules.)
@@ -1334,7 +1344,7 @@ but not for formal objects of mode @key{in out}.
 In Ada 83, it is forbidden to pass a (nongeneric) formal parameter
 of mode @key{out}, or a subcomponent thereof, to a generic formal
 object of mode @key{in out}.
-This restriction is removed in Ada 9X.
+This restriction is removed in Ada 95.
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -1343,14 +1353,14 @@ RM83 refers to the mode without saying what it is.
 This is also more uniform with the way (nongeneric) formal parameters
 are defined.
 
-We considered allowing mode @key{out} in Ada 9X,
+We considered allowing mode @key{out} in Ada 95,
 for uniformity with (nongeneric) formal parameters.
 The semantics would be identical for modes @key{in out} and
 @key{out}.
 (Note that generic formal objects of mode @key{in out} are passed by
-reference.  Note that for (nongeneric) formal parameters that are
+reference. Note that for (nongeneric) formal parameters that are
 allowed to be passed by reference, the semantics of @key{in out} and
-@key{out} is the same.  The difference might serve as documentation.
+@key{out} is the same. The difference might serve as documentation.
 The same would be true for generic formal objects, if @key{out} were
 allowed, so it would be consistent.)
 We decided not to make this change, because it does not produce any
@@ -1480,10 +1490,10 @@ so long as the formal has unknown discriminants.
 @Redundant[The formal type also belongs to each class that contains
 the determined class.]
 The primitive subprograms of the type are as for any
-type in the determined class.  For a formal type other than a formal
+type in the determined class. For a formal type other than a formal
 derived type, these are the predefined operators of the type;
 they are implicitly declared immediately after the declaration
-of the formal type.  In an instance, the copy of such an
+of the formal type. In an instance, the copy of such an
 implicit declaration declares a view of the predefined operator
 of the actual type, even if this operator has been overridden for
 the actual type.
@@ -1529,7 +1539,7 @@ Similar terminology applies to the other kinds of
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of generic formal types:}
+@leading@keepnext@i{Examples of generic formal types:}
 @begin{Example}
 @key[type] Item @key[is] @key[private];
 @key[type] Buffer(Length : Natural) @key[is] @key[limited] @key[private];
@@ -1542,7 +1552,10 @@ Similar terminology applies to the other kinds of
 @key[type] Table @key[is] @key[array] (Enum) @key[of] Item;
 @end{Example}
 
-@i{Example of a generic formal part declaring a formal integer type:}
+@begin{Wide}
+@leading@keepnext@i{Example of a generic formal part declaring a
+formal integer type:}
+@end{Wide}
 @begin{Example}
 @key[generic]
    @key[type] Rank @key[is] @key[range] <>;
@@ -1569,7 +1582,7 @@ The matching rules are stated more concisely.
 We no longer consider the multiplying
 operators that deliver a result of type @i{universal_fixed} to be
 predefined for the various types; there is only one of each in
-package Standard.  Therefore, we need not mention them here as RM83
+package Standard. Therefore, we need not mention them here as RM83
 had to.
 @end{DiffWord83}
 
@@ -1631,7 +1644,7 @@ On the other hand, for an indefinite formal subtype,
 the actual can be either definite or indefinite.
 @end{Ramification}
 
-For a generic formal derived type with no
+@leading@;For a generic formal derived type with no
 @nt<discriminant_part>:
 @begin(Itemize)
   If the ancestor subtype is constrained,
@@ -1672,7 +1685,7 @@ For a generic formal derived type with no
 @end{Reason}
 @end(Itemize)
 
-The declaration of a formal derived type shall not have a
+@Leading@;The declaration of a formal derived type shall not have a
 @nt{known_discriminant_part}.
 For a generic formal private type with a
 @nt{known_discriminant_part}:
@@ -1702,7 +1715,7 @@ and may be definite or indefinite.]
 @end{Legality}
 
 @begin{StaticSem}
-The class determined for a formal private type is as follows:
+@leading@;The class determined for a formal private type is as follows:
 @TabClear{}@Tabset(P32)
 @begin{Display}
 @i(Type Definition) @\@i(Determined Class)
@@ -1761,12 +1774,12 @@ by those of the primitive subprograms of the specified
 ancestor type.
 @end{Ramification}
 
-For @PrefixType{a prefix S that denotes a formal indefinite subtype},
+@Leading@;For @PrefixType{a prefix S that denotes a formal indefinite subtype},
 the following attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Definite>,
   Text=[S'Definite yields True if the actual subtype corresponding
-    to S is definite; otherwise it yields False.  The value of this
+    to S is definite; otherwise it yields False. The value of this
     attribute is of the predefined type Boolean.]}
 @begin{Discussion}
 Whether an actual subtype is definite or indefinite may
@@ -1782,7 +1795,7 @@ which is now considered obsolete.
 @end{StaticSem}
 
 @begin{Notes}
-In accordance with the general rule that the actual type shall
+@Leading@;In accordance with the general rule that the actual type shall
 belong to the class determined for the formal
 (see @RefSec(Formal Types)):
 @begin(itemize)
@@ -1817,7 +1830,7 @@ Ada 83 does not have
 subtypes to be passed to definite formals,
 and applies a legality rule to the instance body.
 This is a contract model violation.
-Ada 9X disallows such cases at the point of the instantiation.
+Ada 95 disallows such cases at the point of the instantiation.
 The workaround is to add (<>)
 as the @nt{discriminant_part} of
 any formal subtype if it is intended
@@ -1860,7 +1873,7 @@ shall not be a nonstandard numeric type.
 @begin{Reason}
 This restriction is necessary because nonstandard numeric
 types have some number of restrictions on their use, which could cause
-contract model problems in a generic body.  Note that nonstandard
+contract model problems in a generic body. Note that nonstandard
 numeric types can be passed to formal derived and formal private
 subtypes, assuming they obey all the other rules, and assuming the
 implementation allows it (being nonstandard means the implementation
@@ -1871,7 +1884,7 @@ might disallow anything).
 @begin{Notes}
 The actual type shall be in the class of types implied
 by the syntactic category of the formal type definition
-(see @RefSec(Formal Types)).  For example, the actual for a
+(see @RefSec(Formal Types)). For example, the actual for a
 @nt<formal_modular_type_definition> shall be a modular type.
 @end{Notes}
 
@@ -1895,7 +1908,7 @@ The reason is the same as for forbidding @nt{constraint}s in
 @nt{subtype_indication}s (see @RefSecNum{Generic Declarations}).
 @end{Reason}
 
-For a formal array subtype, the actual subtype shall satisfy the
+@Leading@;For a formal array subtype, the actual subtype shall satisfy the
 following conditions:
 @begin{Itemize}
 The formal array type and the actual array type shall have the same
@@ -1922,7 +1935,7 @@ then the actual's components can be either aliased or not.
 @end{Legality}
 
 @begin{Examples}
-@i{Example of formal array types:}
+@Leading@Keepnext@i{Example of formal array types:}
 @begin{Example}
 --@RI{  given the generic package }
 
@@ -2010,7 +2023,7 @@ the formal.
 @end{Legality}
 
 @begin{Examples}
-@i{Example of formal access types:}
+@Leading@keepnext@i{Example of formal access types:}
 @begin{Example}
 --@RI{  the formal types of the generic package }
 
@@ -2154,8 +2167,8 @@ correspond.
 The constraints that apply to a parameter of a formal subprogram are
 those of the corresponding formal parameter of the matching actual
 subprogram (not those implied by the corresponding @nt{subtype_mark} in
-the @nt{_specification} of the formal subprogram).  A similar remark
-applies to the result of a function.  Therefore, to avoid confusion, it
+the @nt{_specification} of the formal subprogram). A similar remark
+applies to the result of a function. Therefore, to avoid confusion, it
 is recommended that the @nt{name} of a first subtype
 be used in any declaration of a formal subprogram.
 
@@ -2183,7 +2196,7 @@ The actual subprogram cannot be abstract
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of generic formal subprograms:}
+@Leading@Keepnext@i{Examples of generic formal subprograms:}
 @begin{Example}
 @key[with] @key[function] "+"(X, Y : Item) @key[return] Item @key[is] <>;
 @key[with] @key[function] Image(X : Enum) @key[return] String @key[is] Enum'Image;
@@ -2231,10 +2244,9 @@ The @i(generic_package_)@nt<name> shall denote a generic package
 (the @i(template) for the formal package);
 the formal package is an instance of the template.
 
-The actual shall be an instance of the template.
+@Leading@;The actual shall be an instance of the template.
 If the @nt<formal_package_actual_part> is (<>),
-@Redundant[then the actual may be any instance of the template];
-otherwise,
+@Redundant[then the actual may be any instance of the template]; otherwise,
 each actual parameter of the actual instance shall match the corresponding
 actual parameter of the formal package @Redundant[(whether the
 actual parameter is given explicitly or by default)], as follows:
@@ -2281,8 +2293,8 @@ or the formals of an instance to be namable from outside, but never both.
 If both were namable, one would get some funny anomalies since
 they denote the same entity, but, in the case of types at least,
 they might have different and inconsistent sets of primitive operators
-due to predefined operator @lquotes@;reemergence.@rquotes@;  Formal derived types
-exacerbate the difference.  We want the implicit declarations
+due to predefined operator @lquotes@;reemergence.@rquotes@; Formal derived types
+exacerbate the difference. We want the implicit declarations
 of the @nt<generic_formal_part> as well as the explicit
 declarations, so we get operations on the formal types.
 @end{Reason}
@@ -2294,7 +2306,7 @@ as an actual to another generic formal package.
 @end{StaticSem}
 
 @begin{Extend83}
-Formal packages are new to Ada 9X.
+Formal packages are new to Ada 95.
 @end{Extend83}
 
 @LabeledClause{Example of a Generic Package}
@@ -2344,21 +2356,27 @@ as generic formal parameters.
 @key[end] Stack;
 @end{Example}
 
-Instances of this generic package can be obtained as follows:
+@begin{Wide}
+@Leading@Keepnext@;Instances of this generic package can be obtained as follows:
+@end{Wide}
 @begin{Example}
 @key[package] Stack_Int  @key[is] @key[new] Stack(Size => 200, Item => Integer);
 @key[package] Stack_Bool @key[is] @key[new] Stack(100, Boolean);
 @end{Example}
 
-Thereafter, the procedures of the instantiated packages can be called as
+@begin{Wide}
+@Leading@Keepnext@;Thereafter, the procedures of the instantiated packages can be called as
 follows:
+@end{Wide}
 @begin{Example}
 Stack_Int.Push(N);
 Stack_Bool.Push(True);
 @end{Example}
 
-Alternatively, a generic formulation of the type Stack can be given as
+@begin{Wide}
+@Leading@Keepnext@;Alternatively, a generic formulation of the type Stack can be given as
 follows (package body omitted):
+@end{Wide}
 @begin{Example}
 @key[generic]
    @key[type] Item @key[is] @key[private];
@@ -2377,8 +2395,10 @@ follows (package body omitted):
 @key[end] On_Stacks;
 @end{Example}
 
-In order to use such a package, an instance has to be created and
+@begin{Wide}
+@Leading@Keepnext@;In order to use such a package, an instance has to be created and
 thereafter stacks of the corresponding type can be declared:
+@end{Wide}
 @begin{Example}
 @key[declare]
    @key[package] Stack_Real @key[is] @key[new] On_Stacks(Real); @key[use] Stack_Real;

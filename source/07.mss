@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:19 $}
+@Comment{$Date: 2000/08/11 00:09:15 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -212,13 +212,13 @@ then this sequence of lexical elements shall repeat the
 
 @begin{Legality}
 A @nt{package_body} shall be the completion of a previous
-@nt{package_declaration} or @nt{generic_package_declaration}.
-A library @nt{package_declaration} or
-library @nt{generic_package_declaration}
+@nt{package_@!declaration} or @nt{generic_@!package_@!declaration}.
+A library @nt{package_@!declaration} or
+library @nt{generic_@!package_@!declaration}
 shall not have a body
 unless it requires a body@Redundant[;
 @key<pragma> Elaborate_Body can be used to require
-a @nt<library_unit_declaration> to have a body
+a @nt<library_@!unit_@!declaration> to have a body
 (see @RefSecNum{Elaboration Control})
 if it would not otherwise require one].
 @begin{Ramification}
@@ -235,18 +235,18 @@ have a corresponding body anyway.
 
 @begin{StaticSem}
 In any @nt{package_body} without @nt{statement}s
-there is an implicit @nt{null_statement}.
-For any @nt{package_declaration} without an explicit completion,
-there is an implicit @nt{package_body} containing a single
+there is an implicit @nt{null_@!statement}.
+For any @nt{package_@!declaration} without an explicit completion,
+there is an implicit @nt{package_@!body} containing a single
 @nt{null_statement}.
 For a noninstance, nonlibrary package,
 this body occurs at the end of the
-@nt{declarative_part} of the innermost enclosing program unit or
-@nt{block_statement};
+@nt{declarative_@!part} of the innermost enclosing program unit or
+@nt{block_@!statement};
 if there are several such packages,
-the order of the implicit @nt{package_bodies} is unspecified.
+the order of the implicit @nt{package_@!bodies} is unspecified.
 @PDefn{unspecified}
-@Redundant[(For an instance, the implicit @nt{package_body}
+@Redundant[(For an instance, the implicit @nt{package_@!body}
 occurs at the place of the instantiation
 (see @RefSecNum{Generic Instantiation}).
 For a library package, the place is partially determined by the
@@ -271,8 +271,8 @@ This is a bit strange, but not harmful.
 @begin{RunTime}
 @PDefn2{Term=[elaboration], Sec=(nongeneric package_body)}
 For the elaboration of a nongeneric @nt{package_body},
-its @nt{declarative_part} is first
-elaborated, and its @nt{handled_sequence_of_statements} is then executed.
+its @nt{declarative_@!part} is first
+elaborated, and its @nt{handled_@!sequence_of_@!statements} is then executed.
 @end{RunTime}
 
 @begin{Notes}
@@ -436,7 +436,6 @@ the reserved word @key[limited];
 a private extension is limited if its ancestor type is limited.]
 If the partial view is nonlimited, then
 the full view shall be nonlimited.
-
 If a tagged partial view is limited,
 then the full view shall be limited.
 @Redundant[On the other hand,
@@ -578,7 +577,7 @@ can get one's hands on it via a @nt{type_conversion}.
 
 @Defn2{Term=[ancestor subtype], Sec=(of a @nt<private_extension_declaration>)}
 The @i(ancestor subtype) of a @nt<private_extension_declaration>
-is the subtype defined by the @i(ancestor_)@nt<subtype_indication>;
+is the subtype defined by the @i(ancestor_)@!@nt<subtype_@!indication>;
 the ancestor type shall be a specific tagged type.
 The full view of a private extension shall be derived
 (directly or indirectly) from the ancestor type.
@@ -624,7 +623,6 @@ the parent subtype of the full view is required to be constrained
     @key[type] T @key[is] @key[new] Some_Other_Type; --@RI{ Illegal!}
 @key[end] P;
   @end{Example}
-
   even if Some_Other_Type has an integer discriminant called D.
 
   It is a ramification of this and other rules that in order for
@@ -634,8 +632,7 @@ the parent subtype of the full view is required to be constrained
 @end{Ramification}
 
 
-If a private extension inherits known discriminants from the ancestor
-subtype,
+If a private extension inherits known discriminants from the ancestor subtype,
 then the full view shall also inherit its discriminants from the
 ancestor subtype,
 and the parent subtype of the full view shall be constrained
@@ -651,14 +648,10 @@ if and only if the ancestor subtype is constrained.
 
 @Redundant[If a partial view has unknown discriminants,
 then the @nt{full_type_declaration} may define
-a definite or an indefinite subtype,
-with or without discriminants.]
-
-
+a definite or an indefinite subtype, with or without discriminants.]
 
 If a partial view has neither known nor unknown discriminants,
 then the @nt{full_type_declaration} shall define a definite subtype.
-
 
 If the ancestor subtype of a private extension has constrained
 discriminants,
@@ -714,7 +707,7 @@ because then the constraints would not statically match.
 A @nt{private_type_declaration} declares a private type
 and its first subtype.
 @PDefn{private extension}
-Similarly, a @nt{private_extension_declaration} declares a private
+Similarly, a @nt{private_@!extension_@!declaration} declares a private
 extension and its first subtype.
 @begin{Discussion}
 @Defn{package-private type}
@@ -1230,9 +1223,6 @@ languages (see @RefSecNum{Interface to Other Languages}).]
 @Redundant[@Defn{deferred constant declaration}
 A @i(deferred constant declaration) is an @nt<object_declaration>
 with the reserved word @key(constant) but no initialization expression.]
-@begin{TheProof}
-This is stated officially in Section 3.
-@end{TheProof}
 @Defn{deferred constant}
 The constant declared by a deferred constant declaration is called
 a @i{deferred constant}.
@@ -1242,6 +1232,10 @@ which shall be a full constant declaration
 (called the @i{full declaration} of the deferred constant),
 or a @nt{pragma} Import (see @RefSecNum(Interface to Other Languages)).
 @Defn{full declaration}
+@begin{TheProof}
+The first sentence is redundant, as it is stated officially in
+@RefSecNum(Object Declarations).
+@end{TheProof}
 
 @leading@;A deferred constant declaration that is completed
 by a full constant declaration shall occur immediately
@@ -1678,21 +1672,20 @@ or Finalize is applied to the containing object.
 
 @Defn{controlled type}
 A controlled type is a descendant of Controlled or Limited_Controlled.
-@begin{Discussion}
-We say @lquotes@;nonlimited controlled types@rquotes@; when we want to talk
-about descendants of Controlled only.
-@end{Discussion}
 The (default) implementations of
 Initialize, Adjust, and Finalize have no effect.
-
 The predefined "=" operator of type Controlled always returns True,
 @Redundant[since this operator is incorporated into
 the implementation of the predefined equality operator of types derived
 from Controlled, as explained in
 @RefSecNum(Relational Operators and Membership Tests).]
-
 The type Limited_Controlled is like Controlled, except
 that it is limited and it lacks the primitive subprogram Adjust.
+@begin{Discussion}
+We say @lquotes@;nonlimited controlled type@rquotes@ (rather than just
+@lquotes@;controlled type@rquotes@;; when we want to talk about descendants
+of Controlled only.
+@end{Discussion}
 @begin{Reason}
   We considered making Adjust and Finalize abstract.
   However, a reasonable coding convention is e.g. for Finalize to
@@ -1718,8 +1711,7 @@ that it is limited and it lacks the primitive subprogram Adjust.
 @PDefn2{Term=[elaboration], Sec=(object_declaration)}
 During the elaboration of an @nt{object_declaration},
 for every controlled subcomponent of
-the object that is not assigned an
-initial value
+the object that is not assigned an initial value
 (as defined in @RefSecNum{Object Declarations}),
 Initialize is called on that subcomponent.
 Similarly, if the object as a whole is controlled
@@ -1937,7 +1929,7 @@ the implementation need not create a separate anonymous object if
 it can safely create the value of
 the @nt{aggregate} or function call
 directly in the target object.
-Similarly, for an @nt{assignment_statement},
+Similarly, for an @nt{assignment_@!statement},
 the implementation need not create an anonymous object if
 the value being assigned is the result of evaluating a @nt{name}
 denoting an object (the source object) whose storage cannot overlap
@@ -1953,8 +1945,7 @@ the implementation may move its value to the target object as part of
 the assignment without re-adjusting so long as the
 anonymous object has no aliased subcomponents.
 @begin{Ramification}
-In the @nt{aggregate} case,
-only one value adjustment is necessary,
+In the @nt{aggregate} case, only one value adjustment is necessary,
 and there is no anonymous object to be finalized.
 
 In the @nt{assignment_statement} case as well,
@@ -2040,18 +2031,17 @@ complete, and before it is left.
 @end{Reason}
 
 @Defn2{Term=[finalization], Sec=(of a master)}
-
 For the @i{finalization} of a master,
 dependent tasks are first awaited,
 as explained in @RefSecNum{Task Dependence - Termination of Tasks}.
 Then each object whose accessibility level is
 the same as that of the master is finalized
 if the object was successfully initialized and still exists.
-
 @Redundant[These actions are performed whether the master is left
   by reaching the last statement or via a transfer of control.]
+When a transfer of control causes completion of an execution, each
+included master is finalized in order, from innermost outward.
 @begin{Ramification}
-
   As explained in @RefSecNum{Operations of Access Types},
   the set of objects with the same accessibility level
   as that of the master
@@ -2085,9 +2075,6 @@ repeated finalization of the subcomponents,
 as might normally be implied by the recursion in finalization of a
 master and the recursion in finalization of an object.
 @end{Reason}
-When a transfer of control causes completion of an execution, each
-included master is finalized in order, from
-innermost outward.
 @begin{Honest}
 Formally, completion and leaving refer to executions of constructs or
 entities.
@@ -2272,7 +2259,7 @@ be performed are performed, and then Program_Error is raised.
 For a Finalize invoked
 by the transfer of control of
 an @nt{exit_}, @nt{return_}, @nt{goto_},
-or @nt{requeue_statement},
+or @nt{requeue_@!statement},
 Program_Error is raised no earlier than after the finalization of the
 master being finalized when the exception occurred,
 and no later than the point where normal execution would have continued.

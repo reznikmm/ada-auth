@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:39 $}
+@Comment{$Date: 2000/08/11 00:09:15 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -161,7 +161,7 @@ where P1 precedes P2 in the @nt<compilation> but P1 has a
 
 @begin{DiffWord83}
 The interactions between language issues and environmental issues
-are left open in Ada 95.  The environment concept is new.
+are left open in Ada 95. The environment concept is new.
 In Ada 83, the concept of the program library, for example,
 appeared to be quite concrete,
 although the rules had no force,
@@ -244,7 +244,7 @@ or to the @nt{proper_body} of a @nt{subunit}
 @Redundant[(that is, the @nt{compilation_unit} without the
 @nt{context_clause} and the @key[separate] (@nt{parent_unit_name}))].
 @begin{Discussion}
-In this example:
+@leading@keepnext@;In this example:
 @begin{Example}
 @key[with] Ada.Text_IO;
 @key[package] P @key[is]
@@ -254,7 +254,7 @@ In this example:
 
 the term @lquotes@;compilation unit@rquotes@; can refer to this text: @lquotes@;@key[with] Ada.Text_IO;
 @key[package] P @key[is] ... @key[end] P;@rquotes@; or to this text:
-@lquotes@;@key[package] P @key[is] ... @key[end] P;@rquotes@;.  We use this shorthand
+@lquotes@;@key[package] P @key[is] ... @key[end] P;@rquotes@;. We use this shorthand
 because it corresponds to common usage.
 
 We like to use the word @lquotes@;unit@rquotes@; for declaration-plus-body things,
@@ -313,7 +313,7 @@ its parent's parent, and so on.
 The @i{descendant} relation is the inverse of the ancestor relation.
 @begin{Reason}
 These definitions are worded carefully to avoid defining subunits as
-children.  Only library units can be children.
+children. Only library units can be children.
 
 We use the unadorned term @lquotes@;ancestors@rquotes@; here to concisely define both
 @lquotes@;ancestor unit@rquotes@; and @lquotes@;ancestor declaration.@rquotes@;
@@ -327,7 +327,7 @@ A @nt<library_unit_declaration>
 or a @nt<library_unit_renaming_declaration> is @i{private}
 if the declaration is immediately preceded
 by the reserved word @key{private};
-it is otherwise @i{public}.  A library unit is private or public
+it is otherwise @i{public}. A library unit is private or public
 according to its declaration.
 @Defn2{Term=[public descendant], Sec=(of a library unit)}
 The @i{public descendants} of a library unit are the library unit
@@ -365,7 +365,7 @@ another environment, treating children of Standard in the imported environment
 as children of the imported package.
 @end{Discussion}
 @begin{Ramification}
-Suppose we have a public library unit A,
+@leading@;Suppose we have a public library unit A,
 a private library unit A.B, and a public library unit A.B.C.
 A.B.C is a public descendant of itself and of A.B,
 but a private descendant of A;
@@ -434,7 +434,7 @@ generic unit.
 This is not required, however.
 @end{Discussion}
 @begin{Reason}
-Instances are forbidden from having noninstance children for two reasons:
+@leading@;Instances are forbidden from having noninstance children for two reasons:
 @begin(Enumerate)
 We want all source code that can depend on information from
 the private part of a library unit to be inside the "subsystem"
@@ -509,7 +509,7 @@ shall not be an @nt{operator_symbol}.
 @begin{Reason}
   Since overloading is not permitted among compilation units,
   it seems unlikely that it would be useful to define one as
-  an operator.  Note that a subunit could be renamed within its
+  an operator. Note that a subunit could be renamed within its
   parent to be an operator.
 @end{Reason}
 
@@ -523,7 +523,8 @@ renaming-as-declaration, not a renaming-as-body.
 
 
 
-@redundant[There are two kinds of dependences among compilation units:
+@leading@keepnext@redundant[There are two kinds of dependences among
+compilation units:
 @begin{Itemize}
 The @i{semantic dependences}
 (see below)
@@ -614,7 +615,7 @@ compilation units appear in the environment at compile time.
 At run time, the order is partly determined by the elaboration
 dependences.
 
-The model whereby a child is inside its parent's declarative region,
+@leading@;The model whereby a child is inside its parent's declarative region,
 after the parent's declaration,
 as explained in @RefSecNum{Declarative Region},
 has the following ramifications:
@@ -695,7 +696,7 @@ names and hence cannot overload each other.
 However,
 @nt{renaming_declaration}s are allowed to define overloaded names for
 such subprograms, and a locally declared subprogram is allowed to
-overload a library subprogram.  The expanded name Standard.L can be
+overload a library subprogram. The expanded name Standard.L can be
 used to denote a root library unit L (unless the declaration of
 Standard is hidden)
 since root library unit declarations occur immediately within the
@@ -703,7 +704,7 @@ declarative region of package Standard.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of library units:}
+@leading@keepnext@i{Examples of library units:}
 @begin{Example}
 @key[package] Rational_Numbers.IO @key[is]  @RI[-- public child of Rational_Numbers, see @RefSecNum{Package Specifications and Declarations}]
    @key[procedure] Put(R : @key[in]  Rational);
@@ -737,7 +738,7 @@ declarative region of package Standard.
 Each of the above @nt{library_item}s can be submitted to the compiler
 separately.
 @begin{Discussion}
-@i{Example of a generic package with children:}
+@leading@keepnext@i{Example of a generic package with children:}
 
 @begin{Example}
 @key[generic]
@@ -762,7 +763,9 @@ separately.
 @key[end] Generic_Bags.Generic_Iterators;
 @end{Example}
 
-A package that instantiates the above generic units:
+@begin{Wide}
+@leading@keepnext@;A package that instantiates the above generic units:
+@end{Wide}
 @begin{Example}
 @key[with] Generic_Bags;
 @key[with] Generic_Bags.Generic_Iterators;
@@ -778,7 +781,7 @@ In the above example, Bags_Of_My_Type has a nested generic unit called
 Generic_Iterators.
 The second @nt{with_clause} makes that nested unit visible.
 
-Here we show how the generic body could depend on one of its own
+@leading@;Here we show how the generic body could depend on one of its own
 children:
 @begin{Example}
 @key[with] Generic_Bags.Generic_Iterators;
@@ -948,10 +951,10 @@ the subsystem rooted at its parent.
 @end{Reason}
 @begin{Discussion}
 This rule violates the one-pass @nt{context_clause}s
-@MetaRulesName.  We rationalize this by saying that at least that
+@MetaRulesName. We rationalize this by saying that at least that
 @MetaRulesName works for legal compilation units.
 
-Example:
+@leading@keepnext@;Example:
 @begin{Example}
 @key[package] A @key[is]
 @key[end] A;
@@ -1170,9 +1173,9 @@ the corresponding @nt{proper_body}.
 @end{LinkTime}
 
 @begin{Notes}
-The rules in @RefSec{The Compilation Process}
+@leading@;The rules in @RefSec{The Compilation Process}
 say that a @nt{body_stub} is equivalent to the corresponding
-@nt{proper_body}.  This implies:
+@nt{proper_body}. This implies:
 @begin{Itemize}
 Visibility within a subunit is the
 visibility that would be obtained at the place of the corresponding
@@ -1214,7 +1217,7 @@ The body of a protected unit can be a subunit.
 @end{Notes}
 
 @begin{Examples}
-The package Parent is first written without subunits:
+@leading@keepnext@;The package Parent is first written without subunits:
 @begin{Example}
 @key[package] Parent @key[is]
     @key[procedure] Inner;
@@ -1230,9 +1233,11 @@ The package Parent is first written without subunits:
 @key[end] Parent;
 @end{Example}
 
-The body of procedure Inner may be turned into a subunit by rewriting
+@begin{Wide}
+@leading@;The body of procedure Inner may be turned into a subunit by rewriting
 the package body as follows (with the declaration of Parent remaining
 the same):
+@end{Wide}
 @begin{Example}
 @key[package] @key[body] Parent @key[is]
     Variable : String := "Hello, there.";
@@ -1363,8 +1368,8 @@ same version of X.
 @end{Discussion}
 @begin{Ramification}
   What it means to be a @lquotes@;different version@rquotes@; is not specified by the
-  language.  In some implementations, it means that the compilation
-  unit has been recompiled.  In others, it means that the
+  language. In some implementations, it means that the compilation
+  unit has been recompiled. In others, it means that the
   source of the compilation unit has been edited in some significant way.
 
 Note that an implementation cannot require the existence of
@@ -1479,7 +1484,7 @@ does not result in the removal of the compilation unit
 containing the instantiation.
 @begin{ImplNote}
   Therefore, implementations have to be prepared to automatically
-  instantiate generic bodies at link-time, as needed.  This might
+  instantiate generic bodies at link-time, as needed. This might
   imply a complete automatic recompilation, but it is the intent
   of the language that generic bodies can be (re)instantiated without
   forcing all of the compilation units that semantically depend
@@ -1518,7 +1523,7 @@ will not apply to declarations from outer declarative regions.
 @end{Resolution}
 
 @begin{Legality}
-A program unit pragma shall appear in one of these places:
+@leading@keepnext@;A program unit pragma shall appear in one of these places:
 @begin{Itemize}
 At the place of a @nt{compilation_unit},
 in which case the @nt<pragma>
@@ -1803,7 +1808,7 @@ semantics.
 compilation units are needed by a given compilation unit.}
 @begin{Discussion}
 There are no pragmas that @lquotes@;specify otherwise@rquotes@; defined by the
-core language.  However, an implementation is allowed to provide such
+core language. However, an implementation is allowed to provide such
 pragmas, and in fact @RefSec{Distributed Systems} defines some
 pragmas whose semantics includes reducing the set of
 compilation units described here.
@@ -1844,7 +1849,7 @@ But we would like to have every error message that might be generated
 explicitly stated @lquotes@;shall@rquotes@; rule.
 
 Of course, this does not mean that the @lquotes@;shall@rquotes@; rules correspond
-one-to-one with an implementation's error messages.  For example,
+one-to-one with an implementation's error messages. For example,
 the rule that says overload resolution @lquotes@;shall@rquotes@; succeed in producing a
 single interpretation would correspond to many error messages in a good
 implementation @em the implementation would want to explain to the user
@@ -1910,7 +1915,8 @@ upon a subunit of a different library unit,
 because that can never happen.
 @end{Discussion}
 
-The environment task for a partition has the following structure:
+@leading@keepnext@;The environment task for a partition has the following
+structure:
 @begin{Example}
 @key[task] @RI{Environment_Task};
 
@@ -1932,7 +1938,7 @@ that this task is anonymous.
   is an infinite loop rather than a call on a main subprogram.
 @end{Discussion}
 
-@PDefn2{Term=[environment @nt<declarative_part>], Sec=(for the
+@leading@PDefn2{Term=[environment @nt<declarative_part>], Sec=(for the
 environment task of a partition)}
 The environment @nt{declarative_part} at (1) is a sequence of
 @nt{declarative_item}s consisting of copies of
@@ -1947,7 +1953,7 @@ the order in which they appear in the environment
   @begin{Ramification}
     This rule is written so that if a @nt{library_item}
     depends on itself, we don't require it to be elaborated
-    before itself.  See AI83-00113/12.
+    before itself. See AI83-00113/12.
     This can happen only in pathological circumstances.
     For example, if a library @nt{subprogram_body}
     has no corresponding @nt{subprogram_declaration},
@@ -2030,7 +2036,7 @@ would violate the @MetaRulesName labeled
 @lquotes@;legality determinable via semantic dependences.@rquotes@;
 @end{Reason}
 
-The @nt{sequence_of_statement}s of the environment task (see (2)
+@leading@;The @nt{sequence_of_statement}s of the environment task (see (2)
 above) consists of either:
 @begin{Itemize}
   A call to the main subprogram,
@@ -2043,7 +2049,9 @@ above) consists of either:
   subprogram.}
 @end{Itemize}
 
-or:
+@begin{Wide}
+@leading@keepnext@;or:
+@end{Wide}
 @begin{Itemize}
   A @nt{null_statement}, if there is no main subprogram.
   @begin{Discussion}
@@ -2063,7 +2071,7 @@ as, for example, in dynamic linking, or @lquotes@;load-and-go@rquotes@; systems.
 @begin{RunTime}
 @PDefn2{Term=[execution], Sec=(program)}
 The execution of a program consists of the execution of a set of
-partitions.  Further details are implementation defined.
+partitions. Further details are implementation defined.
 @PDefn2{Term=[execution], Sec=(partition)}
 The execution of a partition starts with the execution
 of its environment task,
@@ -2112,7 +2120,7 @@ environment task.
 @end{Bounded}
 
 @begin{ImplReq}
-The implementation shall ensure that all compilation units
+@Leading@;The implementation shall ensure that all compilation units
 included in a partition are consistent with one another,
 and are legal according to the rules of the language.
 @begin{Discussion}
@@ -2355,7 +2363,7 @@ preelaborable.
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Preelaborate is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Preelaborate is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Preelaborate)[(@SynI{library_unit_}@Syn2{name})];'
@@ -2368,7 +2376,7 @@ A @nt{pragma} Preelaborate is a library unit pragma.
 @end{Syntax}
 
 @begin{Legality}
-@RootDefn2{Term=[preelaborable], Sec=(of an elaborable construct)}
+@Leading@RootDefn2{Term=[preelaborable], Sec=(of an elaborable construct)}
 An elaborable construct is preelaborable unless its
 elaboration performs any of the following actions:
 @begin{Ramification}
@@ -2490,7 +2498,7 @@ that include the given version.
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Pure is as follows:
+@leading@keepnext@;The form of a @nt{pragma} Pure is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Pure)[(@SynI{library_unit_}@Syn2{name})];'
@@ -2559,7 +2567,7 @@ model.
 If a library unit is declared pure, then the implementation
 is permitted to omit a call on a library-level
 subprogram of the library unit if the
-results are not needed after the call.  Similarly, it may
+results are not needed after the call. Similarly, it may
 omit such a call
 and simply reuse the results produced by an earlier call on
 the same subprogram, provided that none of the parameters are of
@@ -2586,7 +2594,7 @@ has to keep this in mind.
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Elaborate, Elaborate_All, or
+@Leading@Keepnext@;The form of a @nt{pragma} Elaborate, Elaborate_All, or
 Elaborate_Body is as follows:
 @end{SyntaxText}
 

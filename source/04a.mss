@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:19 $}
+@Comment{$Date: 2000/08/11 00:09:15 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2365,9 +2365,8 @@ either of the above checks fails.
 following truth table:
 @begin(Display)
 @TabClear()
-@TabSet(P16, P32, P48, P64, P80)
-@\@ @ A@\@ @ B@\(A @key(and) B)@\(A @key(or) B)@\(A @key(xor) B)
-
+@TabSet(P4, P20, P36, P52, P68)
+@\@ @ A@\@ @ B@\(A @key(and) B)@\(A @key(or) B)@\(A @key(xor) B)@*
 @\True  @\True  @\True  @\True  @\False
 @\True  @\False @\False @\True  @\True
 @\False @\True  @\False @\True  @\True
@@ -2978,6 +2977,7 @@ the absolute value of B. Signed integer division satisfies the identity:
 (-A)/B = -(A/B) = A/(-B)
 @end(example)
 
+@begin{Wide}
 @Leading@;The signed integer modulus operator is defined such
 that the result of A @key(mod) B has
 the sign of B and an absolute value less than the absolute value
@@ -2987,16 +2987,17 @@ satisfies the relation:
 A = B*N + (A @key(mod) B)
 @end(example)
 
-@Redundant[The multiplying operators on modular types are defined in terms
-of the corresponding signed integer operators, followed by a reduction
+The multiplying operators on modular types are defined in terms
+of the corresponding signed integer operators@Redundant[, followed by a reduction
 modulo the modulus if the result is outside
-the base range of the type @Redundant[(which is only possible for the "*"
-operator)].]
+the base range of the type] @Redundant[(which is only possible for the "*"
+operator)].
 @begin{Ramification}
 The above identity satisfied by signed integer
 division is not satisfied by modular division
 because of the difference in effect of negation.
 @end{Ramification}
+@end{Wide}
 
 @Leading@;Multiplication and division operators are predefined for
 every specific floating point type @i(T):
@@ -3109,33 +3110,33 @@ True, division by zero raises Constraint_Error.]
 the remainder when A is divided by B. The following relations are satisfied
 by the rem operator:
 @begin{Example}
-  A  @key(rem) (-B) =   A @key(rem) B
-(-A) @key(rem)   B  = -(A @key(rem) B)
+     A  @key(rem) (-B) =   A @key(rem) B
+   (-A) @key(rem)   B  = -(A @key(rem) B)
 @end{Example}
 
 @Leading@keepnext@;For any signed integer K, the following identity holds:
 @begin{Example}
-A @key(mod) B   =   (A + K*B) @key(mod) B
+   A @key(mod) B   =   (A + K*B) @key(mod) B
 @end{Example}
 @begin{Bundle}
-@Leading@;The relations between signed integer
+@NoPrefix@Leading@;The relations between signed integer
 division, remainder, and modulus are
 illustrated by the following table:
 @begin{Example}
-A      B   A/B   A @key(rem) B  A @key(mod) B     A     B    A/B   A @key(rem) B   A @key(mod) B
+   A      B   A/B   A @key(rem) B  A @key(mod) B     A     B    A/B   A @key(rem) B   A @key(mod) B
 
-10     5    2       0        0       -10    5    -2       0         0
-11     5    2       1        1       -11    5    -2      -1         4
-12     5    2       2        2       -12    5    -2      -2         3
-13     5    2       3        3       -13    5    -2      -3         2
-14     5    2       4        4       -14    5    -2      -4         1
+   10     5    2       0        0       -10    5    -2       0         0
+   11     5    2       1        1       -11    5    -2      -1         4
+   12     5    2       2        2       -12    5    -2      -2         3
+   13     5    2       3        3       -13    5    -2      -3         2
+   14     5    2       4        4       -14    5    -2      -4         1
 
-A      B   A/B   A @key(rem) B  A @key(mod) B     A     B    A/B   A @key(rem) B   A @key(mod) B
-10    -5   -2       0        0       -10   -5     2       0         0
-11    -5   -2       1       -4       -11   -5     2      -1        -1
-12    -5   -2       2       -3       -12   -5     2      -2        -2
-13    -5   -2       3       -2       -13   -5     2      -3        -3
-14    -5   -2       4       -1       -14   -5     2      -4        -4
+   A      B   A/B   A @key(rem) B  A @key(mod) B     A     B    A/B   A @key(rem) B   A @key(mod) B@*
+   10    -5   -2       0        0       -10   -5     2       0         0
+   11    -5   -2       1       -4       -11   -5     2      -1        -1
+   12    -5   -2       2       -3       -12   -5     2      -2        -2
+   13    -5   -2       3       -2       -13   -5     2      -3        -3
+   14    -5   -2       4       -1       -14   -5     2      -4        -4
 @end{Example}
 @end{Bundle}
 @end{Notes}
@@ -3155,20 +3156,17 @@ G : Fraction := 0.5;
 @end{Example}
 @begin{Example}
 @tabclear()@tabset(P19, P31)
-@RI(Expression)  @\@RI(Value)  @\@RI(Result Type)
-
-I*J            @\2      @\@RI(same as I and J, that is, Integer)
-K/J            @\1      @\@RI(same as K and J, that is, Integer)
-K @key(mod) J  @\1      @\@RI(same as K and J, that is, Integer)
-
-X/Y            @\0.5    @\@RI(same as X and Y, that is, Real)
-F/2            @\0.125  @\@RI(same as F, that is, Fraction)
-
-3*F            @\0.75   @\@RI(same as F, that is, Fraction)
-0.75*G         @\0.375  @\@RI(universal_fixed, implicitly convertible)
+@RI(Expression)  @\@RI(Value)  @\@RI(Result Type)@*
+@R{I*J}            @\@R{2}      @\@RI(same as I and J, that is, Integer)
+@R{K/J}            @\@R{1}      @\@RI(same as K and J, that is, Integer)
+@R{K @key(mod) J}  @\@R{1}      @\@RI(same as K and J, that is, Integer)@*
+@R{X/Y}            @\@R{0.5}    @\@RI(same as X and Y, that is, Real)
+@R{F/2}            @\@R{0.125}  @\@RI(same as F, that is, Fraction)@*
+@R{3*F}            @\@R{0.75}   @\@RI(same as F, that is, Fraction)
+@R{0.75*G}         @\@R{0.375}  @\@RI(universal_fixed, implicitly convertible)
                @\       @\@RI(to any fixed point type)
-Fraction(F*G)  @\0.125  @\@RI(Fraction, as stated by the conversion)
-Real(J)*Y      @\4.0    @\@RI(Real, the type of both operands after)
+@R{Fraction(F*G)}  @\@R{0.125}  @\@RI(Fraction, as stated by the conversion)
+@R{Real(J)*Y}      @\@R{4.0}    @\@RI(Real, the type of both operands after)
                @\       @\@RI(conversion of J)
 @end{Example}
 @end{Examples}
@@ -3458,7 +3456,6 @@ These rules are designed to ensure that aliased array objects
   @PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
-
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
@@ -3584,7 +3581,7 @@ Additional rules follow:
 @Defn2{Term=[type conversion],sec=(numeric)}
 @Defn2{Term=[conversion],sec=(numeric)}
 Numeric Type Conversion
-@begin(itemize)
+@begin(inneritemize)
   If the target and the operand types are both integer types, then
   the result is the value of the target type that corresponds
   to the same mathematical integer as the operand.
@@ -3624,20 +3621,20 @@ Numeric Type Conversion
     integer as well.
     See @RefSecNum{Static Expressions and Static Subtypes}.
 @end{Discussion}
-@end(itemize)
+@end(inneritemize)
 
 @Defn2{Term=[type conversion],sec=(enumeration)}
 @Defn2{Term=[conversion],sec=(enumeration)}
 Enumeration Type Conversion
-@begin(itemize)
+@begin(inneritemize)
   The result is the value of the target type with the same
   position number as that of the operand value.
-@end(itemize)
+@end(inneritemize)
 
 @Defn2{Term=[type conversion],sec=(array)}
 @Defn2{Term=[conversion],sec=(array)}
 Array Type Conversion
-@begin(itemize)
+@begin(inneritemize)
   @IndexCheck{Length_Check}
   If the target subtype is a constrained array subtype, then
   a check is made that the length of each dimension of the value of
@@ -3662,12 +3659,12 @@ Array Type Conversion
   @begin{Ramification}
     This applies whether or not the component is initialized.
   @end{Ramification}
-@end(itemize)
+@end(inneritemize)
 
 @Defn2{Term=[type conversion],sec=[composite (non-array)]}
 @Defn2{Term=[conversion],sec=[composite (non-array)]}
 Composite (Non-Array) Type Conversion
-@begin(itemize)
+@begin(inneritemize)
   The value of each nondiscriminant component of the result
   is that of the matching component of the operand value.
   @begin{Ramification}
@@ -3721,34 +3718,31 @@ It
   @IndexCheck{Range_Check}
   For each discriminant of the result, a check is made that its
   value belongs to its subtype.
-@end(itemize)
+@end(inneritemize)
 
 @Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
 Access Type Conversion
-@begin(itemize)
-  @IndexCheck{Accessibility_Check}
-
+@begin(inneritemize)
   For an access-to-object type,
   a check is made that the accessibility level of the operand
   type is not deeper than that of the target type.
+  @IndexCheck{Accessibility_Check}
 
   @begin{Ramification}
   This check is needed for operands that are access
   parameters and in instance bodies.
 
-
   Note that this check can never fail for the implicit conversion
   to the anonymous type of an access parameter that is done when
   calling a subprogram with an access parameter.
-
   @end{Ramification}
 
-  @IndexCheck{Access_Check}
   If the target type is an anonymous access type, a check
   is made that the value of the operand is not null;
   if the target is not an anonymous access type, then the
   result is null if the operand value is null.
+  @IndexCheck{Access_Check}
   @begin{Ramification}
     A conversion to an anonymous access type
     happens implicitly as part of initializing
@@ -3770,7 +3764,7 @@ Access Type Conversion
   The checks are certain to succeed if
   the target and operand designated subtypes statically match.
 @end{Ramification}
-@end(itemize)
+@end(inneritemize)
 @end(itemize)
 
 @IndexCheck{Range_Check}
@@ -4016,7 +4010,7 @@ or an @nt<aggregate>.
 @begin{Resolution}
 @PDefn2{Term=[operand], Sec=(of a @nt{qualified_expression})}
 The @i(operand) (the @nt{expression} or @nt{aggregate})
-shall resolve to be of the type determined by the @nt{subtype_mark},
+shall resolve to be of the type determined by the @nt{subtype_@!mark},
 or a universal type that covers it.
 @end{Resolution}
 
@@ -4253,8 +4247,8 @@ to provide garbage collection (see @RefSecNum{Pragma Controlled}).
 @key(new) Buffer(100)                                   @RI[-- the discriminant only is given]
 @key(new) Buffer'(Size => 80, Pos => 0, Value => (1 .. 80 => 'A')) @RI[-- initialized explicitly]
 
-Expr_Ptr'(@key(new) Literal)                        @RI[-- allocator for access-to-class-wide type, see @RefSecNum{Type Extensions}]
-Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5)) @RI[-- initialized explicitly]
+Expr_Ptr'(@key(new) Literal)                  @RI[-- allocator for access-to-class-wide type, see @RefSecNum{Type Extensions}]
+Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5))      @RI[-- initialized explicitly]
 
 @end{Example}
 @end{Examples}
@@ -4458,10 +4452,7 @@ a predefined operator whose parameter and result
 types are all scalar types none of which are descendants of
 formal scalar types;
 
-a predefined concatenation operator
-
-whose result type is a string type;
-
+a predefined concatenation operator whose result type is a string type;
 
 an enumeration literal;
 
@@ -4475,10 +4466,10 @@ In any case, a generic formal subprogram is not a static function.
 @Defn2{Term=[static], Sec=(constant)}
 A @i(static constant) is
 a constant view declared by a full constant declaration
-or an @nt<object_renaming_declaration> with a static nominal subtype,
+or an @nt<object_@!renaming_@!declaration> with a static nominal subtype,
 having a value defined by a static scalar expression or by
 a static string expression whose value has a length not exceeding
-the maximum length of a @nt{string_literal} in the implementation.
+the maximum length of a @nt{string_@!literal} in the implementation.
 @begin{Ramification}
 A deferred constant is not static;
 the view introduced by the corresponding full constant declaration
@@ -4497,7 +4488,6 @@ while still allowing, for example,
 the link name of a pragma Import to contain
 a concatenation.
 
-
 The length we're talking about is the maximum number of characters in
 the value represented by a @nt{string_literal},
 not the number of characters in the source representation;
@@ -4508,11 +4498,11 @@ the quotes don't count.
 @Defn2{Term=[static], Sec=(range)}
 A @i(static range) is a @nt{range} whose bounds are
 static expressions,
-@Redundant[or a @nt<range_attribute_reference> that is equivalent to
+@Redundant[or a @nt<range_@!attribute_@!reference> that is equivalent to
 such a @nt<range>.]
 @Defn2{Term=[static], Sec=(discrete_range)}
-A @i(static @nt<discrete_range>) is one that is a static range
-or is a @nt<subtype_indication> that defines a static scalar subtype.
+A @i(static @nt<discrete_@!range>) is one that is a static range
+or is a @nt<subtype_@!indication> that defines a static scalar subtype.
 The base range of a scalar type is a static range, unless the
 type is a descendant of a formal scalar type.
 
@@ -4528,16 +4518,11 @@ static scalar subtype.
 @Defn2{Term=[static], Sec=(string subtype)}
 A static string subtype is an unconstrained string subtype
 whose index subtype and component subtype are static
-
 (and whose type is not a descendant of a formal array type),
-
-or a constrained string subtype
-formed by imposing a compatible static
+or a constrained string subtype formed by imposing a compatible static
 constraint on a static string subtype.
-In any case, the subtype of a generic formal object of mode
-@key[in out],
-and the result subtype of a generic formal function,
-are not static.
+In any case, the subtype of a generic formal object of mode @key[in out],
+and the result subtype of a generic formal function, are not static.
 @begin{Ramification}
   String subtypes are the only composite subtypes that can be static.
 @end{Ramification}
@@ -4612,7 +4597,7 @@ without performing Overflow_Checks.
 For a static expression that is evaluated:
 @begin{Itemize}
 The expression is illegal if its evaluation fails a language-defined
-check other than Overflow_Check.
+check other than Overflow_@!Check.
 
 If the expression is not part of a larger static expression,
 then its value shall be within the base range of its expected type.
@@ -4876,8 +4861,8 @@ constraint if both are null constraints, both are
 static and have equal corresponding bounds or discriminant values,
 or both are nonstatic and result from the same elaboration of
 a @nt<constraint>
-of a @nt<subtype_indication> or the same evaluation of a @nt<range>
-of a @nt<discrete_subtype_definition>.
+of a @nt<subtype_@!indication> or the same evaluation of a @nt<range>
+of a @nt<discrete_@!subtype_@!definition>.
 
 @Defn2{Term=[statically matching], Sec=(for subtypes)}
 A subtype @i(statically matches) another subtype of the same type

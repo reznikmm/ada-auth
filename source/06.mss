@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:31 $}
+@Comment{$Date: 2000/08/11 00:09:15 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1067,10 +1067,10 @@ with formal parameters of the subprogram.]
 @Defn{positional association}
 A @nt{parameter_association} is @i{named} or @i{positional}
 according to whether or not the
-@SynI{formal_parameter_}@nt{selector_name} is specified.
+@SynI{formal_@!parameter_}@!@nt{selector_@!name} is specified.
 Any positional associations shall precede any named associations.
 Named associations are not allowed if the @nt{prefix} in
-a subprogram call is an @nt{attribute_reference}.
+a subprogram call is an @nt{attribute_@!reference}.
 @begin{Ramification}
 This means that the formal parameter names used in
 describing predefined attributes are
@@ -1088,15 +1088,14 @@ as (viewed as) a procedure.
 The @nt{name} or @nt{prefix} given in a @nt{function_call}
 shall resolve to denote
 a callable entity that is a function.
-@Redundant[When there is an @nt<actual_parameter_part>, the @nt<prefix>
-can be an @nt<implicit_dereference> of an access-to-subprogram value.]
+@Redundant[When there is an @nt<actual_@!parameter_@!part>, the @nt<prefix>
+can be an @nt<implicit_@!dereference> of an access-to-subprogram value.]
 @begin{Ramification}
 The function can be an operator,
 enumeration literal, attribute that is a function, etc.
 @end{Ramification}
 
-A subprogram call shall contain at most one
-association for each
+A subprogram call shall contain at most one association for each
 formal parameter.
 Each formal parameter without an association shall have a
 @nt{default_expression} (in the profile of the view denoted
@@ -1109,14 +1108,13 @@ This rule is an overloading rule
 @PDefn2{Term=[execution], Sec=(subprogram call)}
 For the execution of a subprogram call,
 the @nt{name} or @nt{prefix} of the call is evaluated,
-and each @nt{parameter_association} is evaluated
+and each @nt{parameter_@!association} is evaluated
 (see @RefSecNum{Parameter Associations}).
-If a @nt{default_expression} is used,
-an implicit @nt{parameter_association} is assumed for this rule.
+If a @nt{default_@!expression} is used,
+an implicit @nt{parameter_@!association} is assumed for this rule.
 These evaluations are done in an arbitrary order.
-The @nt{subprogram_body} is then executed.
-Finally, if the subprogram completes normally,
-then after it is left,
+The @nt{subprogram_@!body} is then executed.
+Finally, if the subprogram completes normally, then after it is left,
 any necessary assigning back of formal to actual parameters occurs
 (see @RefSecNum{Parameter Associations}).
 @begin{Discussion}
@@ -1214,7 +1212,7 @@ Pair(Left => @key[new] Person, Right => @key[new] Person);
 
 @begin{Notes}
 If a @nt{default_expression} is used for two or more parameters in a
-multiple @nt{parameter_specification}, the @nt{default_expression} is
+multiple @nt{parameter_@!specification}, the @nt{default_@!expression} is
 evaluated once for each omitted parameter. Hence in the above
 examples, the two calls of Pair are equivalent.
 @end{Notes}
@@ -1276,8 +1274,8 @@ being passed as an @b(out) parameter.
 
 @begin{Resolution}
 The @SynI{formal_parameter_}@nt{selector_name} of a
-@nt{parameter_association} shall resolve to denote a
-@nt{parameter_specification} of the view being called.
+@nt{parameter_@!association} shall resolve to denote a
+@nt{parameter_@!specification} of the view being called.
 
 @Defn2{Term=[actual parameter], Sec=(for a formal parameter)}
 The @i(actual parameter) is either the @nt<explicit_actual_parameter>
@@ -1483,8 +1481,8 @@ as it is subsumed by earlier clauses and subclauses.
 
 @begin{Intro}
 A @nt{return_statement} is used to complete the execution of the
-innermost enclosing @nt{subprogram_body},
-@nt{entry_body}, or @nt{accept_statement}.
+innermost enclosing @nt{subprogram_@!body},
+@nt{entry_@!body}, or @nt{accept_@!statement}.
 @end{Intro}
 
 @begin{Syntax}
@@ -1511,8 +1509,8 @@ The same applies to generic functions.
 @Defn2{Term=[apply], Sec=(to a callable construct by a @nt{return_statement})}
 A @nt{return_statement} shall be within a callable construct,
 and it @i{applies to} the innermost one.
-A @nt{return_statement} shall not be within a body
-that is within the construct to which the @nt{return_statement}
+A @nt{return_@!statement} shall not be within a body
+that is within the construct to which the @nt{return_@!statement}
 applies.
 
 A function body shall contain at least one @nt{return_statement} that

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:31 $}
+@Comment{$Date: 2000/08/11 00:09:15 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -13,14 +13,14 @@ its execution.]
 @Redundant[This section describes the general rules applicable to all
 @nt{statement}s.
 Some @nt{statement}s are discussed in later sections:
-@nt{Procedure_call_statement}s and @nt{return_statement}s are
+@nt{Procedure_@!call_@!statement}s and @nt{return_@!statement}s are
 described in @RefSec{Subprograms}.
-@nt{Entry_call_statement}s, @nt{requeue_statement}s,
-@nt{delay_statement}s, @nt{accept_statement}s,
-@nt{select_statement}s, and @nt{abort_statement}s are described in
+@nt{Entry_@!call_@!statement}s, @nt{requeue_@!statement}s,
+@nt{delay_@!statement}s, @nt{accept_@!statement}s,
+@nt{select_@!statement}s, and @nt{abort_@!statement}s are described in
 @RefSec{Tasks and Synchronization}.
-@nt{Raise_statement}s are described in @RefSec{Exceptions},
-and @nt{code_statement}s in
+@nt{Raise_@!statement}s are described in @RefSec{Exceptions},
+and @nt{code_@!statement}s in
 @RefSecNum{Representation Issues}.
 The remaining forms of @nt{statement}s are presented in this
 section.]
@@ -268,14 +268,14 @@ of the value of the @nt<expression> into the @i(target).
 @RootDefn{assignment operation}
 @IndexSee{Term=[assign], See=(assignment operation)}
 @Redundant[An assignment operation (as opposed to
-an @nt<assignment_statement>) is performed in other contexts
+an @nt<assignment_@!statement>) is performed in other contexts
 as well, including object initialization and by-copy parameter
 passing.]
 @Defn2{Term=[target], Sec=(of an assignment operation)}
 @Defn2{Term=[target], Sec=(of an @nt{assignment_statement})}
 The @i{target} of an assignment operation
 is the view of the object to which a value is being assigned;
-the target of an @nt{assignment_statement} is the variable denoted by
+the target of an @nt{assignment_@!statement} is the variable denoted by
 the @SynI{variable_}@nt{name}.
 @begin{Discussion}
 Don't confuse this notion of the @lquotes@;target@rquotes@; of an assignment
@@ -724,9 +724,9 @@ For the execution of a @nt{case_statement} the
 @nt{expression} is first evaluated.
 
 If the value of the @nt{expression} is covered by the
-@nt{discrete_choice_list} of some
-@nt{case_statement_alternative}, then the
-@nt{sequence_of_statements} of the @nt{_alternative} is
+@nt{discrete_@!choice_@!list} of some
+@nt{case_@!statement_@!alternative}, then the
+@nt{sequence_of_@!statements} of the @nt{_alternative} is
 executed.
 
 @IndexCheck{Overflow_Check}
@@ -885,25 +885,25 @@ case of an @nt{iteration_scheme}, as specified below.
   Sec=(loop_statement with a while iteration_scheme)}
 For the execution of a @nt{loop_statement} with a @key{while}
 @nt{iteration_scheme}, the condition is evaluated before each
-execution of the @nt{sequence_of_statements}; if the value of the
-@nt{condition} is True, the @nt{sequence_of_statements} is executed;
-if False, the execution of the @nt{loop_statement} is complete.
+execution of the @nt{sequence_of_@!statements}; if the value of the
+@nt{condition} is True, the @nt{sequence_of_@!statements} is executed;
+if False, the execution of the @nt{loop_@!statement} is complete.
 
 @PDefn2{Term=[execution],
   Sec=(loop_statement with a for iteration_scheme)}
 @PDefn2{Term=[elaboration], Sec=(loop_parameter_specification)}
 For the execution of a @nt{loop_statement} with a @key{for}
 @nt{iteration_scheme},
-the @nt{loop_parameter_specification} is first elaborated. This
+the @nt{loop_@!parameter_@!specification} is first elaborated. This
 elaboration creates the loop parameter and elaborates the
-@nt{discrete_subtype_definition}.
-If the @nt{discrete_subtype_definition} defines a subtype
+@nt{discrete_@!subtype_@!definition}.
+If the @nt{discrete_@!subtype_@!definition} defines a subtype
 with a null range,
 the execution of the
 @nt{loop_statement} is complete. Otherwise, the
-@nt{sequence_of_statements} is executed once for each value of the
+@nt{sequence_of_@!statements} is executed once for each value of the
 discrete subtype defined by the
-@nt{discrete_subtype_definition} (or until the loop is left as a
+@nt{discrete_@!subtype_@!definition} (or until the loop is left as a
 consequence of a transfer of control).
 @Defn2{Term=[assignment operation], Sec=(during execution of a @key{for} loop)}
 Prior to each such iteration,
@@ -1091,17 +1091,15 @@ denote a @nt{loop_statement}.
 
 @begin{Legality}
 @Defn2{Term=[apply], Sec=(to a @nt{loop_statement} by an @nt{exit_statement})}
-Each @nt{exit_statement} @i{applies to} a
-@nt{loop_statement}; this is the @nt{loop_statement} being exited.
-An @nt{exit_statement} with a @nt{name} is only allowed within the
-@nt{loop_statement} denoted by the @nt{name},
-and applies to that @nt{loop_statement}.
-An @nt{exit_statement} without a @nt{name} is only allowed within a
-@nt{loop_statement},
-and applies to the innermost enclosing one.
-An @nt{exit_statement} that applies to a given @nt{loop_statement}
-shall not appear within a body
-or @nt{accept_statement}, if
+Each @nt{exit_@!statement} @i{applies to} a
+@nt{loop_@!statement}; this is the @nt{loop_@!statement} being exited.
+An @nt{exit_@!statement} with a @nt{name} is only allowed within the
+@nt{loop_@!statement} denoted by the @nt{name},
+and applies to that @nt{loop_@!statement}.
+An @nt{exit_@!statement} without a @nt{name} is only allowed within a
+@nt{loop_@!statement}, and applies to the innermost enclosing one.
+An @nt{exit_@!statement} that applies to a given @nt{loop_@!statement}
+shall not appear within a body or @nt{accept_@!statement}, if
 this construct is itself enclosed by the given @nt{loop_statement}.
 @end{Legality}
 
@@ -1109,9 +1107,8 @@ this construct is itself enclosed by the given @nt{loop_statement}.
 @PDefn2{Term=[execution], Sec=(exit_statement)}
 For the execution of an @nt{exit_statement}, the @nt{condition}, if
 present, is first evaluated.
-If the value of the @nt{condition} is True,
-or if there is no @nt{condition},
-a transfer of control is done to complete the @nt{loop_statement}.
+If the value of the @nt{condition} is True, or if there is no @nt{condition},
+a transfer of control is done to complete the @nt{loop_@!statement}.
 If the value of the @nt{condition} is False, no transfer of control takes
 place.
 @end{RunTime}
@@ -1160,15 +1157,14 @@ the @nt{statement} with that @nt{label} is the @i(target statement).
 @begin{Legality}
 The innermost @nt{sequence_of_statements} that encloses the target
 statement shall also enclose the @nt{goto_statement}.
-@begin{Ramification}
-The @nt{goto_statement} can be a @nt{statement} of an inner
-@nt{sequence_}.
-@end{Ramification}
 Furthermore, if a @nt{goto_statement} is enclosed by an
 @nt{accept_statement} or a body, then the target
 statement shall not be outside this enclosing construct.
 @begin{Ramification}
-It follows from the previous rule that if the target @nt{statement}
+The @nt{goto_statement} can be a @nt{statement} of an inner
+@nt{sequence_}.
+
+It follows from the second rule that if the target @nt{statement}
 is enclosed by such a construct, then the @nt{goto_statement}
 cannot be outside.
 @end{Ramification}

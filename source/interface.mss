@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/08/05 04:53:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/11 00:09:16 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:24 $}
+@Comment{$Date: 2000/08/11 00:09:16 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -692,10 +692,10 @@ The library package Interfaces.C has the following declaration:
 
    @RI{-- Declarations based on C's <limits.h>}
 
-   CHAR_BIT  : @key(constant) := @RI{implementation-defined};  @RI{-- typically 8}
-   SCHAR_MIN : @key(constant) := @RI{implementation-defined};  @RI{-- typically -128}
-   SCHAR_MAX : @key(constant) := @RI{implementation-defined};  @RI{-- typically 127}
-   UCHAR_MAX : @key(constant) := @RI{implementation-defined};  @RI{-- typically 255}
+   @AdaDefn{CHAR_BIT}  : @key(constant) := @RI{implementation-defined};  @RI{-- typically 8}
+   @AdaDefn{SCHAR_MIN} : @key(constant) := @RI{implementation-defined};  @RI{-- typically -128}
+   @AdaDefn{SCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 127}
+   @AdaDefn{UCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 255}
 
    @RI{-- Signed and Unsigned Integers}
 @LangDefType{Package=[Interfaces.C],Type=[int]}
@@ -746,33 +746,33 @@ The library package Interfaces.C has the following declaration:
 @LangDefType{Package=[Interfaces.C],Type=[char]}
    @key(type) char @key(is) @RI{<implementation-defined character type>};
 
-   nul : @key(constant) char := char'First;
+   @AdaDefn{nul} : @key(constant) char := char'First;
 
-   @key[function] To_C   (Item : @key[in] Character) @key[return] char;
+   @key[function] @AdaSubDefn{To_C}   (Item : @key[in] Character) @key[return] char;
 
-   @key[function] To_Ada (Item : @key[in] char) @key[return] Character;
+   @key[function] @AdaSubDefn{To_Ada} (Item : @key[in] char) @key[return] Character;
 
 @LangDefType{Package=[Interfaces.C],Type=[char_array]}
    @key(type) char_array @key(is) @key(array) (size_t @key(range) <>) @key(of) @key[aliased] char;
    @key[pragma] Pack(char_array);
    @key(for) char_array'Component_Size @key(use) CHAR_BIT;
 
-   @key(function) Is_Nul_Terminated (Item : @key(in) char_array) @key(return) Boolean;
+   @key(function) @AdaSubDefn{Is_Nul_Terminated} (Item : @key(in) char_array) @key(return) Boolean;
 
-   @key(function) To_C   (Item       : @key(in) String;
+   @key(function) @AdaSubDefn{To_C}   (Item       : @key(in) String;
                     Append_Nul : @key(in) Boolean := True)
       @key(return) char_array;
 
-   @key(function) To_Ada (Item     : @key(in) char_array;
+   @key(function) @AdaSubDefn{To_Ada} (Item     : @key(in) char_array;
                     Trim_Nul : @key(in) Boolean := True)
       @key(return) String;
 
-   @key(procedure) To_C (Item       : @key(in) String;
+   @key(procedure) @AdaSubDefn{To_C} (Item       : @key(in) String;
                    Target     : @key(out) char_array;
                    Count      : @key(out) size_t;
                    Append_Nul : @key(in) Boolean := True);
 
-   @key(procedure) To_Ada (Item     : @key(in) char_array;
+   @key(procedure) @AdaSubDefn{To_Ada} (Item     : @key(in) char_array;
                      Target   : @key(out) String;
                      Count    : @key(out) Natural;
                      Trim_Nul : @key(in) Boolean := True);
@@ -782,37 +782,37 @@ The library package Interfaces.C has the following declaration:
 @LangDefType{Package=[Interfaces.C],Type=[wchar_t]}
    @key(type) wchar_t @key(is) @RI{implementation-defined};
 
-   wide_nul : @key(constant) wchar_t := wchar_t'First;
+   @AdaDefn{wide_nul} : @key(constant) wchar_t := wchar_t'First;
 
-   @key(function) To_C   (Item : @key(in) Wide_Character) @key(return) wchar_t;
-   @key(function) To_Ada (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
+   @key(function) @AdaSubDefn{To_C}   (Item : @key(in) Wide_Character) @key(return) wchar_t;
+   @key(function) @AdaSubDefn{To_Ada} (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
 
 @LangDefType{Package=[Interfaces.C],Type=[wchar_array]}
    @key(type) wchar_array @key(is) @key(array) (size_t @key(range) <>) @key(of) @key(aliased) wchar_t;
 
    @key(pragma) Pack(wchar_array);
 
-   @key(function) Is_Nul_Terminated (Item : @key(in) wchar_array) @key(return) Boolean;
+   @key(function) @AdaSubDefn{Is_Nul_Terminated} (Item : @key(in) wchar_array) @key(return) Boolean;
 
-   @key(function) To_C   (Item       : @key(in) Wide_String;
+   @key(function) @AdaSubDefn{To_C}   (Item       : @key(in) Wide_String;
                     Append_Nul : @key(in) Boolean := True)
       @key(return) wchar_array;
 
-   @key(function) To_Ada (Item     : @key(in) wchar_array;
+   @key(function) @AdaSubDefn{To_Ada} (Item     : @key(in) wchar_array;
                     Trim_Nul : @key(in) Boolean := True)
       @key(return) Wide_String;
 
-   @key(procedure) To_C (Item       : @key(in)  Wide_String;
+   @key(procedure) @AdaSubDefn{To_C} (Item       : @key(in)  Wide_String;
                    Target     : @key(out) wchar_array;
                    Count      : @key(out) size_t;
                    Append_Nul : @key(in)  Boolean := True);
 
-   @key(procedure) To_Ada (Item     : @key(in)  wchar_array;
+   @key(procedure) @AdaSubDefn{To_Ada} (Item     : @key(in)  wchar_array;
                      Target   : @key(out) Wide_String;
                      Count    : @key(out) Natural;
                      Trim_Nul : @key(in)  Boolean := True);
 
-   Terminator_Error : @key(exception);
+   @AdaDefn{Terminator_Error} : @key(exception);
 
 @key(end) Interfaces.C;
 @end{Example}
@@ -1169,44 +1169,44 @@ declaration:
 @LangDefType{Package=[Interfaces.C],Type=[chars_ptr_array]}
    @key(type) chars_ptr_array @key(is) @key(array) (size_t @key(range) <>) @key(of) chars_ptr;
 
-   Null_Ptr : @key(constant) chars_ptr;
+   @AdaDefn{Null_Ptr} : @key(constant) chars_ptr;
 
-   @key(function) To_Chars_Ptr (Item      : @key(in) char_array_access;
+   @key(function) @AdaSubDefn{To_Chars_Ptr} (Item      : @key(in) char_array_access;
                           Nul_Check : @key(in) Boolean := False)
       @key(return) chars_ptr;
 
-   @key(function) New_Char_Array (Chars   : @key(in) char_array) @key(return) chars_ptr;
+   @key(function) @AdaSubDefn{New_Char_Array} (Chars   : @key(in) char_array) @key(return) chars_ptr;
 
-   @key(function) New_String (Str : @key(in) String) @key(return) chars_ptr;
+   @key(function) @AdaSubDefn{New_String} (Str : @key(in) String) @key(return) chars_ptr;
 
-   @key(procedure) Free (Item : @key(in) @key(out) chars_ptr);
+   @key(procedure) @AdaSubDefn{Free} (Item : @key(in) @key(out) chars_ptr);
 
-   Dereference_Error : @key(exception);
+   @AdaSubDefn{Dereference_Error} : @key(exception);
 
 
-   @key(function) Value (Item : @key(in) chars_ptr) @key(return) char_array;
+   @key(function) @AdaSubDefn{Value} (Item : @key(in) chars_ptr) @key(return) char_array;
 
-   @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
+   @key(function) @AdaSubDefn{Value} (Item : @key(in) chars_ptr; Length : @key(in) size_t)
       @key(return) char_array;
 
-   @key(function) Value (Item : @key(in) chars_ptr) @key(return) String;
+   @key(function) @AdaSubDefn{Value} (Item : @key(in) chars_ptr) @key(return) String;
 
-   @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
+   @key(function) @AdaSubDefn{Value} (Item : @key(in) chars_ptr; Length : @key(in) size_t)
       @key(return) String;
 
-   @key(function) Strlen (Item : @key(in) chars_ptr) @key(return) size_t;
+   @key(function) @AdaSubDefn{Strlen} (Item : @key(in) chars_ptr) @key(return) size_t;
 
-   @key(procedure) Update (Item   : @key(in) chars_ptr;
+   @key(procedure) @AdaSubDefn{Update} (Item   : @key(in) chars_ptr;
                      Offset : @key(in) size_t;
                      Chars  : @key(in) char_array;
                      Check  : @key(in) Boolean := True);
 
-   @key(procedure) Update (Item   : @key(in) chars_ptr;
+   @key(procedure) @AdaSubDefn{Update} (Item   : @key(in) chars_ptr;
                      Offset : @key(in) size_t;
                      Str    : @key(in) String;
                      Check  : @key(in) Boolean := True);
 
-   Update_Error : @key(exception);
+   @AdaSubDefn{Update_Error} : @key(exception);
 
 
 @key(private)
@@ -1442,16 +1442,16 @@ following declaration:
 @LangDefType{Package=[Interfaces.C.Pointers],Type=[Pointer]}
    @key(type) Pointer @key(is) @key(access) @key(all) Element;
 
-   @key(function) Value(Ref        : @key(in) Pointer;
+   @key(function) @AdaSubDefn{Value}(Ref        : @key(in) Pointer;
                   Terminator : @key(in) Element := Default_Terminator)
       @key(return) Element_Array;
 
-   @key(function) Value(Ref    : @key(in) Pointer;
+   @key(function) @AdaSubDefn{Value}(Ref    : @key(in) Pointer;
                   Length : @key(in) ptrdiff_t)
       @key(return) Element_Array;
 
 
-   Pointer_Error : @key(exception);
+   @AdaDefn{Pointer_Error} : @key(exception);
 
    @RI{-- C-style Pointer arithmetic}
 
@@ -1460,24 +1460,24 @@ following declaration:
    @key(function) "-" (Left : @key(in) Pointer;   Right : @key(in) ptrdiff_t) @key(return) Pointer;
    @key(function) "-" (Left : @key(in) Pointer;   Right : @key(in) Pointer)   @key(return) ptrdiff_t;
 
-   @key(procedure) Increment (Ref : @key(in) @key(out) Pointer);
-   @key(procedure) Decrement (Ref : @key(in) @key(out) Pointer);
+   @key(procedure) @AdaSubDefn{Increment} (Ref : @key(in) @key(out) Pointer);
+   @key(procedure) @AdaSubDefn{Decrement} (Ref : @key(in) @key(out) Pointer);
 
    @key(pragma) Convention (Intrinsic, "+");
    @key(pragma) Convention (Intrinsic, "-");
    @key(pragma) Convention (Intrinsic, Increment);
    @key(pragma) Convention (Intrinsic, Decrement);
 
-   @key(function) Virtual_Length (Ref        : @key(in) Pointer;
+   @key(function) @AdaSubDefn{Virtual_Length} (Ref        : @key(in) Pointer;
                             Terminator : @key(in) Element := Default_Terminator)
       @key(return) ptrdiff_t;
 
-   @key(procedure) Copy_Terminated_Array (Source     : @key(in) Pointer;
+   @key(procedure) @AdaSubDefn{Copy_Terminated_Array} (Source     : @key(in) Pointer;
                                     Target     : @key(in) Pointer;
                                     Limit      : @key(in) ptrdiff_t := ptrdiff_t'Last;
                                     Terminator : @key(in) Element :=  Default_Terminator);
 
-   @key(procedure) Copy_Array (Source  : @key(in) Pointer;
+   @key(procedure) @AdaSubDefn{Copy_Array} (Source  : @key(in) Pointer;
                          Target  : @key(in) Pointer;
                          Length  : @key(in) ptrdiff_t);
 
@@ -1710,8 +1710,8 @@ The library package Interfaces.COBOL has the following declaration:
 @LangDefType{Package=[Interfaces.COBOL],Type=[Long_Binary]}
    @key(type) Long_Binary @key(is) @key(range) @RI{implementation-defined};
 
-   Max_Digits_Binary      : @key(constant) := @RI{implementation-defined};
-   Max_Digits_Long_Binary : @key(constant) := @RI{implementation-defined};
+   @AdaDefn{Max_Digits_Binary}      : @key(constant) := @RI{implementation-defined};
+   @AdaDefn{Max_Digits_Long_Binary} : @key(constant) := @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Decimal_Element]}
    @key(type) Decimal_Element  @key(is) @key(mod) @RI{implementation-defined};
@@ -1723,22 +1723,22 @@ The library package Interfaces.COBOL has the following declaration:
 @LangDefType{Package=[Interfaces.COBOL],Type=[COBOL_Character]}
    @key(type) COBOL_Character @key(is) @RI{implementation-defined character type};
 
-   Ada_To_COBOL : @key(array) (Character) @key(of) COBOL_Character := @RI{implementation-defined};
+   @AdaDefn{Ada_To_COBOL} : @key(array) (Character) @key(of) COBOL_Character := @RI{implementation-defined};
 
-   COBOL_To_Ada : @key(array) (COBOL_Character) @key(of) Character := @RI{implementation-defined};
+   @AdaDefn{COBOL_To_Ada} : @key(array) (COBOL_Character) @key(of) Character := @RI{implementation-defined};
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Alphanumeric]}
    @key(type) Alphanumeric @key(is) @key(array) (Positive range <>) @key(of) COBOL_Character;
    @key(pragma) Pack(Alphanumeric);
 
-   @key(function) To_COBOL (Item : @key(in) String) @key(return) Alphanumeric;
-   @key(function) To_Ada   (Item : @key(in) Alphanumeric) @key(return) String;
+   @key(function) @AdaSubDefn{To_COBOL} (Item : @key(in) String) @key(return) Alphanumeric;
+   @key(function) @AdaSubDefn{To_Ada}   (Item : @key(in) Alphanumeric) @key(return) String;
 
-   @key(procedure) To_COBOL (Item       : @key(in) String;
+   @key(procedure) @AdaSubDefn{To_COBOL} (Item       : @key(in) String;
                        Target     : @key(out) Alphanumeric;
                        Last       : @key(out) Natural);
 
-   @key(procedure) To_Ada (Item     : @key(in) Alphanumeric;
+   @key(procedure) @AdaSubDefn{To_Ada} (Item     : @key(in) Alphanumeric;
                      Target   : @key(out) String;
                      Last     : @key(out) Natural);
 
@@ -1751,24 +1751,24 @@ The library package Interfaces.COBOL has the following declaration:
 @LangDefType{Package=[Interfaces.COBOL],Type=[Display_Format]}
    @key(type) Display_Format @key(is) @key(private);
 
-   Unsigned             : @key(constant) Display_Format;
-   Leading_Separate     : @key(constant) Display_Format;
-   Trailing_Separate    : @key(constant) Display_Format;
-   Leading_Nonseparate  : @key(constant) Display_Format;
-   Trailing_Nonseparate : @key(constant) Display_Format;
+   @AdaDefn{Unsigned}             : @key(constant) Display_Format;
+   @AdaDefn{Leading_Separate}     : @key(constant) Display_Format;
+   @AdaDefn{Trailing_Separate}    : @key(constant) Display_Format;
+   @AdaDefn{Leading_Nonseparate}  : @key(constant) Display_Format;
+   @AdaDefn{Trailing_Nonseparate} : @key(constant) Display_Format;
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Binary_Format]}
    @key(type) Binary_Format @key(is) @key(private);
 
-   High_Order_First  : @key(constant) Binary_Format;
-   Low_Order_First   : @key(constant) Binary_Format;
-   Native_Binary     : @key(constant) Binary_Format;
+   @AdaDefn{High_Order_First}  : @key(constant) Binary_Format;
+   @AdaDefn{Low_Order_First}   : @key(constant) Binary_Format;
+   @AdaDefn{Native_Binary}     : @key(constant) Binary_Format;
 
 @LangDefType{Package=[Interfaces.COBOL],Type=[Packed_Format]}
    @key(type) Packed_Format @key(is) @key(private);
 
-   Packed_Unsigned   : @key(constant) Packed_Format;
-   Packed_Signed     : @key(constant) Packed_Format;
+   @AdaDefn{Packed_Unsigned}   : @key(constant) Packed_Format;
+   @AdaDefn{Packed_Signed}     : @key(constant) Packed_Format;
 
 
 @RI{-- Types for external representation of COBOL binary data}
@@ -1779,7 +1779,7 @@ The library package Interfaces.COBOL has the following declaration:
    @key(type) Byte_Array @key(is) @key(array) (Positive @key(range) <>) @key(of) Byte;
    @key(pragma) Pack (Byte_Array);
 
-   Conversion_Error : @key(exception);
+   @AdaDefn{Conversion_Error} : @key(exception);
 
    @key(generic)
       @key(type) Num @key(is) @key(delta) <> @key(digits) <>;
@@ -1787,52 +1787,52 @@ The library package Interfaces.COBOL has the following declaration:
 
       @RI{-- Display Formats: data values are represented as Numeric}
 
-      @key(function) Valid (Item   : @key(in) Numeric;
+      @key(function) @AdaSubDefn{Valid} (Item   : @key(in) Numeric;
                       Format : @key(in) Display_Format) @key(return) Boolean;
 
-      @key(function) Length (Format : @key(in) Display_Format) @key(return) Natural;
+      @key(function) @AdaSubDefn{Length} (Format : @key(in) Display_Format) @key(return) Natural;
 
 
-      @key(function) To_Decimal (Item   : @key(in) Numeric;
+      @key(function) @AdaSubDefn{To_Decimal} (Item   : @key(in) Numeric;
                            Format : @key(in) Display_Format) @key(return) Num;
 
-      @key(function) To_Display (Item   : @key(in) Num;
+      @key(function) @AdaSubDefn{To_Display} (Item   : @key(in) Num;
                            Format : @key(in) Display_Format) @key(return) Numeric;
 
 
       @RI{-- Packed Formats: data values are represented as Packed_Decimal}
 
-      @key(function) Valid (Item   : @key(in) Packed_Decimal;
+      @key(function) @AdaSubDefn{Valid} (Item   : @key(in) Packed_Decimal;
                       Format : @key(in) Packed_Format) @key(return) Boolean;
 
-      @key(function) Length (Format : @key(in) Packed_Format) @key(return) Natural;
+      @key(function) @AdaSubDefn{Length} (Format : @key(in) Packed_Format) @key(return) Natural;
 
-      @key(function) To_Decimal (Item   : @key(in) Packed_Decimal;
+      @key(function) @AdaSubDefn{To_Decimal} (Item   : @key(in) Packed_Decimal;
                            Format : @key(in) Packed_Format) @key(return) Num;
 
-      @key(function) To_Packed (Item   : @key(in) Num;
+      @key(function) @AdaSubDefn{To_Packed} (Item   : @key(in) Num;
                           Format : @key(in) Packed_Format) @key(return) Packed_Decimal;
 
 
       @RI{-- Binary Formats: external data values are represented as Byte_Array}
 
-      @key(function) Valid (Item   : @key(in) Byte_Array;
+      @key(function) @AdaSubDefn{Valid} (Item   : @key(in) Byte_Array;
                       Format : @key(in) Binary_Format) @key(return) Boolean;
 
-      @key(function) Length (Format : @key(in) Binary_Format) @key(return) Natural;
-      @key(function) To_Decimal (Item   : @key(in) Byte_Array;
+      @key(function) @AdaSubDefn{Length} (Format : @key(in) Binary_Format) @key(return) Natural;
+      @key(function) @AdaSubDefn{To_Decimal} (Item   : @key(in) Byte_Array;
                            Format : @key(in) Binary_Format) @key(return) Num;
 
-      @key(function) To_Binary (Item   : @key(in) Num;
+      @key(function) @AdaSubDefn{To_Binary} (Item   : @key(in) Num;
                         Format : @key(in) Binary_Format) @key(return) Byte_Array;
 
       @RI{-- Internal Binary formats: data values are of type Binary or Long_Binary}
 
-      @key(function) To_Decimal (Item : @key(in) Binary)      @key(return) Num;
-      @key(function) To_Decimal (Item : @key(in) Long_Binary) @key(return) Num;
+      @key(function) @AdaSubDefn{To_Decimal} (Item : @key(in) Binary)      @key(return) Num;
+      @key(function) @AdaSubDefn{To_Decimal} (Item : @key(in) Long_Binary) @key(return) Num;
 
-      @key(function) To_Binary      (Item : @key(in) Num)  @key(return) Binary;
-      @key(function) To_Long_Binary (Item : @key(in) Num)  @key(return) Long_Binary;
+      @key(function) @AdaSubDefn{To_Binary}      (Item : @key(in) Num)  @key(return) Binary;
+      @key(function) @AdaSubDefn{To_Long_Binary} (Item : @key(in) Num)  @key(return) Long_Binary;
 
    @key(end) Decimal_Conversions;
 
@@ -2335,43 +2335,45 @@ The library package Interfaces.Fortran has the following declaration:
 @key[package] Interfaces.Fortran @key[is]
    @key[pragma] Pure(Fortran);
 
+@LangDefType{Package=[Interfaces.Fortran],Type=[Fortran_Integer]}
    @key[type] Fortran_Integer @key[is] @key[range] @RI{implementation-defined};
 
-
+@LangDefType{Package=[Interfaces.Fortran],Type=[Real]}
    @key[type] Real             @key[is] @key[digits] @RI{implementation-defined};
+@LangDefType{Package=[Interfaces.Fortran],Type=[Double_Precision]}
    @key[type] Double_Precision @key[is] @key[digits] @RI{implementation-defined};
 
-
+@LangDefType{Package=[Interfaces.Fortran],Type=[Logical]}
    @key[type] Logical @key[is] @key[new] Boolean;
 
-
-   @key[package] Single_Precision_Complex_Types @key[is]
+   @key[package] @AdaDefn{Single_Precision_Complex_Types} @key[is]
       @key[new] Ada.Numerics.Generic_Complex_Types (Real);
 
+@LangDefType{Package=[Interfaces.Fortran],Type=[Complex]}
    @key[type] Complex @key[is] @key[new] Single_Precision_Complex_Types.Complex;
 
-@key[subtype] Imaginary @key[is] Single_Precision_Complex_Types.Imaginary;
-   i : Imaginary @key[renames] Single_Precision_Complex_Types.i;
-   j : Imaginary @key[renames] Single_Precision_Complex_Types.j;
+   @key[subtype] @AdaDefn{Imaginary} @key[is] Single_Precision_Complex_Types.Imaginary;
+   @AdaDefn{i} : Imaginary @key[renames] Single_Precision_Complex_Types.i;
+   @AdaDefn{j} : Imaginary @key[renames] Single_Precision_Complex_Types.j;
 
-
+@LangDefType{Package=[Interfaces.Fortran],Type=[Character_Set]}
    @key[type] Character_Set @key[is] @RI{implementation-defined character type};
 
+@LangDefType{Package=[Interfaces.Fortran],Type=[Fortran_Character]}
    @key[type] Fortran_Character @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Set;
    @key[pragma] Pack (Fortran_Character);
 
+   @key[function] @AdaSubDefn{To_Fortran} (Item : @key[in] Character) @key[return] Character_Set;
+   @key[function] @AdaSubDefn{To_Ada} (Item : @key[in] Character_Set) @key[return] Character;
 
-@key[function] To_Fortran (Item : @key[in] Character) @key[return] Character_Set;
-   @key[function] To_Ada (Item : @key[in] Character_Set) @key[return] Character;
+   @key(function) @AdaSubDefn{To_Fortran} (Item : @key(in) String) @key(return) Fortran_Character;
+   @key(function) @AdaSubDefn{To_Ada}     (Item : @key(in) Fortran_Character) @key(return) String;
 
-   @key(function) To_Fortran (Item : @key(in) String) @key(return) Fortran_Character;
-   @key(function) To_Ada     (Item : @key(in) Fortran_Character) @key(return) String;
-
-   @key(procedure) To_Fortran (Item       : @key(in) String;
+   @key(procedure) @AdaSubDefn{To_Fortran} (Item       : @key(in) String;
                          Target     : @key(out) Fortran_Character;
                          Last       : @key(out) Natural);
 
-   @key(procedure) To_Ada (Item     : @key(in) Fortran_Character;
+   @key(procedure) @AdaSubDefn{To_Ada} (Item     : @key(in) Fortran_Character;
                      Target   : @key(out) String;
                      Last     : @key(out) Natural);
 
@@ -2386,9 +2388,8 @@ The library package Interfaces.Fortran has the following declaration:
    without duplicating facilities defined elsewhere.
 @end{Ramification}
 
-The types
-   Fortran_Integer, Real, Double_Precision, Logical,
-   Complex, and Fortran_Character are Fortran-compatible.
+The types Fortran_Integer, Real, Double_Precision, Logical,
+Complex, and Fortran_Character are Fortran-compatible.
 
 The To_Fortran and To_Ada functions map between the
 Ada  type Character and the Fortran type Character_Set,

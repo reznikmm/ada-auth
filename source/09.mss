@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:31 $}
+@Comment{$Date: 2000/08/11 00:09:15 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 
@@ -104,7 +104,7 @@ While ready, a task competes for the available
 
 Concurrent task execution may be implemented on
 multicomputers, multiprocessors, or with interleaved execution on a single
-physical processor.  On the other hand, whenever an implementation can
+physical processor. On the other hand, whenever an implementation can
 determine that the required semantic effects can be achieved when
 parts of the execution of a
 given task are performed by different physical processors acting in
@@ -126,7 +126,7 @@ situation where multiple physical processors run simultaneously.
 @begin{Intro}
 @Defn{task declaration}
 A task unit is declared by a @i(task declaration), which has
-a corresponding @nt<task_body>.  A task declaration may be
+a corresponding @nt<task_body>. A task declaration may be
 a @nt<task_type_declaration>, in which case it declares
 a named task type; alternatively, it may be a @nt<single_task_declaration>,
 in which case it defines an anonymous task type, as well as declaring
@@ -180,25 +180,22 @@ task declaration.
 
 A @nt<task_definition> defines a task type and its first subtype.
 @PDefn2{Term=[visible part], Sec=(of a task unit)}
-The first list of @nt{task_item}s of a @nt{task_definition},
-
-together with the @nt{known_discriminant_part}, if any,
-
+The first list of @nt{task_item}s of a @nt{task_@!definition},
+together with the @nt{known_@!discriminant_@!part}, if any,
 is called the visible part of the task unit.
 @Redundant[@PDefn2{Term=[private part], Sec=(of a task unit)}
 The optional list of @nt{task_item}s after the reserved
 word @key{private} is called the private part of the task unit.]
 @begin{TheProof}
-Private part is defined in Section 8.@end{theproof}
-
+Private part is defined in Section 8.
+@end{theproof}
 @end{StaticSem}
 
 @begin{RunTime}
-
 @redundant[@PDefn2{Term=[elaboration], Sec=(task declaration)}
 The elaboration of a task declaration elaborates the @nt<task_definition>.
 @PDefn2{Term=[elaboration], Sec=(single_task_declaration)}
-The elaboration of a @nt<single_task_declaration> also creates
+The elaboration of a @nt<single_@!task_@!declaration> also creates
 an object of an (anonymous) task type.]
 @begin(TheProof)
   This is redundant with the general rules for the elaboration
@@ -240,7 +237,7 @@ failing the Elaboration_Check.
 task of the corresponding type
 (see @RefSecNum(Task Execution - Task Activation)).]
 
-The content of a task object of a given task type includes:
+@leading@;The content of a task object of a given task type includes:
 @begin(itemize)
   The values of the discriminants of the task object, if any;
 
@@ -291,7 +288,7 @@ can be used for task identification
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of declarations of task types:}
+@leading@keepnext@i{Examples of declarations of task types:}
 @begin{Example}
 @key(task) @key(type) Server @key(is)
    @key(entry) Next_Work_Item(WI : @key(in) Work_Item);
@@ -318,14 +315,18 @@ can be used for task identification
 @key(task) User;  @RI[--  has no entries]
 @end{Example}
 
-@i{Examples of task objects:}
+@begin{wide}
+@leading@keepnext@i{Examples of task objects:}
+@end{wide}
 @begin{Example}
 Agent    : Server;
 Teletype : Keyboard_Driver(TTY_ID);
 Pool     : @key(array)(1 .. 10) @key(of) Keyboard_Driver;
 @end{Example}
 
-@i{Example of access type designating task objects:}
+@begin{wide}
+@leading@keepnext@i{Example of access type designating task objects:}
+@end{wide}
 @begin{Example}
 @key(type) Keyboard @key(is) @key(access) Keyboard_Driver;
 Terminal : Keyboard := @key(new) Keyboard_Driver(Term_ID);
@@ -345,7 +346,7 @@ The syntax rules for tasks have been split up according to task types and
 single tasks.
 In particular:
 The syntax rules for @nt{task_declaration} and @nt{task_specification} are
-removed.  The syntax rules for
+removed. The syntax rules for
 @nt{task_type_declaration}, @nt{single_task_declaration}, @nt{task_definition}
 and @nt{task_item} are new.
 
@@ -379,38 +380,38 @@ and it becomes a completed task.
 
 A task object (which represents one task)
 can be created either as part of the elaboration
-of an @nt<object_declaration> occurring immediately within some
+of an @nt<object_@!declaration> occurring immediately within some
 declarative region,
 or as part of the evaluation of an @nt<allocator>.
-All tasks created by the elaboration of @nt<object_declaration>s
+All tasks created by the elaboration of @nt<object_@!declaration>s
 of a single declarative region (including subcomponents
-of the declared objects) are activated together.  Similarly,
+of the declared objects) are activated together. Similarly,
 all tasks created by the evaluation of a single @nt<allocator>
-are activated together.  The activation of a task is associated
-with the innermost @nt<allocator> or @nt<object_declaration>
+are activated together. The activation of a task is associated
+with the innermost @nt<allocator> or @nt<object_@!declaration>
 that is responsible for its creation.
 @begin{Discussion}
 The initialization of an @nt{object_declaration} or @nt{allocator} can
 indirectly include the creation of other objects that contain tasks.
 For example, the default expression for a subcomponent of an object
 created by an @nt{allocator} might call a function that evaluates a
-completely different @nt{allocator}.  Tasks created by the two
+completely different @nt{allocator}. Tasks created by the two
 allocators are @i{not} activated together.
 @end{Discussion}
 
 For tasks created by the elaboration of @nt<object_declaration>s
 of a given declarative region, the activations are initiated
-within the context of the @nt<handled_sequence_of_statements>
-(and its associated @nt<exception_handler>s if any @em
+within the context of the @nt<handled_@!sequence_of_@!statements>
+(and its associated @nt<exception_@!handler>s if any @em
 see @RefSecNum{Exception Handlers}), just prior to executing the
 statements of the @nt<_sequence>.
 @Redundant[For a package without an explicit body or an explicit
-@nt<handled_sequence_of_statements>,
-an implicit body or an implicit @nt<null_statement> is assumed,
+@nt<handled_@!sequence_of_@!statements>,
+an implicit body or an implicit @nt<null_@!statement> is assumed,
 as defined in @RefSecNum(Package Bodies).]
 @begin(Ramification)
   If Tasking_Error is raised, it can be handled by handlers of
-  the @nt<handled_sequence_of_statements>.
+  the @nt<handled_@!sequence_of_@!statements>.
 @end(Ramification)
 
 For tasks created by the evaluation of an @nt<allocator>,
@@ -432,8 +433,8 @@ if the activation
 of any of the tasks has failed
 @Redundant[(due to the propagation of an exception)],
 Tasking_Error is raised in the activator, at the place at which
-it initiated the activations.  Otherwise, the activator
-proceeds with its execution normally.  Any tasks that are aborted
+it initiated the activations. Otherwise, the activator
+proceeds with its execution normally. Any tasks that are aborted
 prior to completing their activation are ignored when determining
 whether to raise Tasking_Error.
 @begin(Ramification)
@@ -467,7 +468,7 @@ exception or because it is aborted
 @end{Notes}
 
 @begin{Examples}
-@i{Example of task activation:}
+@leading@keepnext@i{Example of task activation:}
 @begin{Example}
 @key(procedure) P @key(is)
    A, B : Server;    @RI[--  elaborate the task objects A, B]
@@ -484,7 +485,7 @@ exception or because it is aborted
 
 We have replaced the term @i{suspended} with @i{blocked},
 since we didn't want to consider a task blocked when it was
-simply competing for execution resources.  "Suspended" is sometimes
+simply competing for execution resources. "Suspended" is sometimes
 used more generally to refer to tasks that are not actually running
 on some processor, due to the lack of resources.
 
@@ -495,7 +496,7 @@ This clause has been rewritten in an attempt to improve presentation.
 
 @begin{RunTime}
 
-@Defn2{Term=[dependence], Sec=(of a task on a master)}
+@leading@Defn2{Term=[dependence], Sec=(of a task on a master)}
 @Defn2{Term=[task], Sec=(dependence)}
 @Defn2{Term=[task], Sec=(completion)}
 @Defn2{Term=[task], Sec=(termination)}
@@ -524,7 +525,7 @@ dependences among compilation units defined in
 @end{Discussion}
 
 A task is said to be @i(completed) when the execution of its corresponding
-@nt<task_body> is completed.  A task is said to be @i(terminated) when
+@nt<task_body> is completed. A task is said to be @i(terminated) when
 any finalization of the @nt<task_body> has been performed
 (see @RefSecNum(Completion and Finalization)).
 @Redundant[The first step of finalizing a master
@@ -532,11 +533,11 @@ any finalization of the @nt<task_body> has been performed
 wait for the termination of any tasks dependent on the master.]
 @PDefn2{Term=[blocked], Sec=(waiting for dependents to terminate)}
 The task executing the master is blocked until all the dependents
-have terminated.  @Redundant[Any remaining finalization is then performed
+have terminated. @Redundant[Any remaining finalization is then performed
 and the master is left.]
 
-Completion of a task (and the corresponding @nt<task_body>) can occur when
-the task is blocked at a @nt<select_statement> with an
+@leading@;Completion of a task (and the corresponding @nt<task_body>) can
+occur when the task is blocked at a @nt<select_@!statement> with an
 an open @nt<terminate_alternative>
 (see @RefSecNum(Selective Accept)); the open @nt<terminate_alternative>
 is selected if and only if the following conditions are satisfied:
@@ -553,8 +554,8 @@ completed, together with all tasks that depend on the master
 considered that are not yet completed.
 @begin(Ramification)
   Any required finalization is performed after the selection
-  of @nt<terminate_alternative>s.  The tasks are not callable
-  during the finalization.  In some ways it is as though they were
+  of @nt<terminate_alternative>s. The tasks are not callable
+  during the finalization. In some ways it is as though they were
   aborted.
 @end(Ramification)
 
@@ -563,7 +564,7 @@ considered that are not yet completed.
 @begin{Notes}
 
 The full view of a limited private type can be a task type, or
-can have subcomponents of a task type.  Creation of an object of
+can have subcomponents of a task type. Creation of an object of
 such a type creates dependences according to the full type.
 
 An @nt<object_renaming_declaration> defines a new view of an
@@ -579,7 +580,7 @@ If two or more tasks are blocked on @nt<select_statement>s
 with open @nt{terminate_alternative}s, and become
 completed collectively, their finalization actions proceed concurrently.
 
-The completion of a task can occur due to any of the following:
+@leading@keepnext@;The completion of a task can occur due to any of the following:
 @begin{itemize}
 the raising of an exception during the elaboration of the
 @nt{declarative_part} of the corresponding @nt{task_body};
@@ -598,7 +599,7 @@ the abort of the task.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of task dependence:}
+@leading@keepnext@i{Example of task dependence:}
 @begin{Example}
 @key(declare)
    @key(type) Global @key(is) @key(access) Server;        @RI[--  see @RefSecNum(Task Units and Task Objects)]
@@ -636,7 +637,7 @@ In Ada 83 the requirement to wait for tasks that depended
 on library packages was not as clear.
 
 What was "collective termination" is now "collective completion"
-resulting from selecting @nt<terminate_alternative>s.  This is because
+resulting from selecting @nt<terminate_alternative>s. This is because
 finalization still occurs for such tasks, and this happens after
 selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord83}
@@ -690,7 +691,7 @@ a named protected object of that type.
 @begin{Reason}
      We allow the operations and components to be mixed because that's how
      other things work (for example, package
-     declarations).  We have relaxed the
+     declarations). We have relaxed the
      ordering rules for the items inside @nt{declarative_part}s and
      @nt{task_definition}s as well.
 @end{Reason}
@@ -717,8 +718,8 @@ it shall repeat the @nt{defining_identifier}.
 @begin{Legality}
 @PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
 A protected declaration requires a completion@redundant[,
-which shall be a @nt{protected_body},]
-and every @nt{protected_body} shall be the completion of some
+which shall be a @nt{protected_@!body},]
+and every @nt{protected_@!body} shall be the completion of some
 protected declaration.
 @begin(Honest)
   The completion can be a @nt{pragma} Import,
@@ -730,27 +731,24 @@ protected declaration.
 
 A @nt<protected_definition> defines a protected type and its first subtype.
 @PDefn2{Term=[visible part], Sec=(of a protected unit)}
-The list of @nt{protected_operation_declaration}s of a
-@nt{protected_definition},
-
-together with the @nt{known_discriminant_part}, if any,
-
+The list of @nt{protected_@!operation_@!declaration}s of a
+@nt{protected_@!definition},
+together with the @nt{known_@!discriminant_@!part}, if any,
 is called the visible part of the protected unit.
 @Redundant[@PDefn2{Term=[private part], Sec=(of a protected unit)}
-The optional list of @nt{protected_element_declaration}s after the reserved
+The optional list of @nt{protected_@!element_@!declaration}s after the reserved
 word @key{private} is called the private part of the protected unit.]
 @begin{TheProof}
-Private part is defined in Section 8.@end{theproof}
-
+Private part is defined in Section 8.
+@end{theproof}
 @end{StaticSem}
 
 @begin{RunTime}
-
 @redundant[@PDefn2{Term=[elaboration], Sec=(protected declaration)}
 The elaboration of a protected declaration
 elaborates the @nt<protected_definition>.
 @PDefn2{Term=[elaboration], Sec=(single_protected_declaration)}
-The elaboration of a @nt<single_protected_declaration> also creates
+The elaboration of a @nt<single_@!protected_@!declaration> also creates
 an object of an (anonymous) protected type.]
 @begin(TheProof)
   This is redundant with the general rules for the elaboration
@@ -777,7 +775,7 @@ The elaboration of a @nt{protected_body} has no other effect than to establish
 that protected operations of the type can from then on be called without
 failing the Elaboration_Check.
 
-The content of an object of a given protected type includes:
+@leading@keepnext@;The content of an object of a given protected type includes:
 @begin(itemize)
   The values of the components of the
   protected object, including (implicitly)
@@ -807,9 +805,9 @@ As the first step of the @i{finalization} of a protected object,
 each call remaining on any entry queue of the object
 is removed from its queue and
 Program_Error is raised at the place of the corresponding
-@nt<entry_call_statement>.
+@nt<entry_@!call_@!statement>.
 @begin(Reason)
-  This is analogous to the raising of Tasking_Error in callers
+  @leading@;This is analogous to the raising of Tasking_Error in callers
   of a task that completes before accepting the calls.
   This situation can only occur due to a requeue (ignoring premature
   unchecked_deallocation), since any task that has accessibility to
@@ -897,7 +895,7 @@ since an entry involves an implicit component @em the entry queue.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of declaration of protected type and corresponding body:}
+@leading@keepnext@i{Example of declaration of protected type and corresponding body:}
 @begin{Example}
 @key(protected) @key(type) Resource @key(is)
    @key(entry) Seize;
@@ -919,7 +917,9 @@ since an entry involves an implicit component @em the entry queue.
 @key(end) Resource;
 @end{Example}
 
-@i{Example of a single protected declaration and corresponding body:}
+@begin{wide}
+@leading@keepnext@i{Example of a single protected declaration and corresponding body:}
+@end{wide}
 @begin{Example}
 @key(protected) Shared_Array @key(is)
    @RI[--  Index, Item, and Item_Array are global types]
@@ -942,7 +942,9 @@ since an entry involves an implicit component @em the entry queue.
 @key(end) Shared_Array;
 @end{Example}
 
-@i{Examples of protected objects:}
+@begin{wide}
+@leading@keepnext@i{Examples of protected objects:}
+@end{wide}
 @begin{Example}
 Control  : Resource;
 Flags    : @key(array)(1 .. 100) @key(of) Resource;
@@ -974,7 +976,7 @@ indirectly via a shared protected object.
 @end{Intro}
 
 @begin{StaticSem}
-@Defn2{Term=[target object],
+@leading@Defn2{Term=[target object],
   Sec=(of a call on an entry or a protected subprogram)}
 Any call on an entry or on a protected subprogram
 identifies a @i(target object) for the operation,
@@ -992,7 +994,7 @@ and is determined by the operation
   @Defn{internal call}
   such a call is defined to be an @i(internal call);
 
-  If it is a @nt<selected_component> that is not
+  @leading@;If it is a @nt<selected_component> that is not
   an expanded name, then the target object is explicitly
   specified to be the task or protected object
   denoted by the @nt<prefix> of the @nt<name>;
@@ -1016,7 +1018,7 @@ Other_Object : Some_Other_Protected_Type;
   @key[begin]
     Op1; --@RI{ An internal call.}
     Pt.Op1; --@RI{ Another internal call.}
-    PO.Op1; --@RI{ An external call.  It the current instance is PO, then}
+    PO.Op1; --@RI{ An external call. It the current instance is PO, then}
             --@RI{ this is a bounded error (see @RefSecNum{Protected Subprograms and Protected Actions}).}
     Other_Object.Some_Op; --@RI{ An external call.}
   @key[end] Op2;
@@ -1131,7 +1133,7 @@ subprogram is executed.
 @Redundant[A protected action can also be started by an entry call
 (see @RefSecNum{Entry Calls}).]
 
-@Defn{protected action}
+@leading@Defn{protected action}
 A new protected action is not started on a protected object
 while another protected action on the same protected object is underway,
 unless both actions are the result of a call on a protected function.
@@ -1161,7 +1163,7 @@ serviced (see @RefSecNum(Entry Calls)).]
 @end{RunTime}
 
 @begin{Bounded}
-During a protected action,
+@leading@;During a protected action,
 it is a bounded error to invoke an operation that
 is @i(potentially blocking).
 @Defn{potentially blocking operation}
@@ -1227,7 +1229,7 @@ on a protected object, and at most one is calling
 a protected function, then only one of the tasks can proceed.
 Although the other task cannot proceed, it is not considered
 blocked, and it might be consuming processing resources while it
-awaits its turn.  There is no language-defined ordering or queuing
+awaits its turn. There is no language-defined ordering or queuing
 presumed for tasks competing to start a protected action @em
 on a multiprocessor such tasks might use busy-waiting; for
 monoprocessor considerations, see @RefSec{Priority Ceiling Locking}.
@@ -1237,7 +1239,7 @@ The intended implementation on a multi-processor is in terms of
 @end{Discussion}
 
 The body of a protected unit may contain declarations and bodies for local
-subprograms.  These are not visible outside the protected unit.
+subprograms. These are not visible outside the protected unit.
 
 The body of a protected function can contain internal calls
 on other protected functions, but not protected procedures,
@@ -1252,7 +1254,7 @@ target object is not considered a potentially blocking operation.
 @begin(Reason)
   This is because a task is not considered blocked
   while attempting to acquire the execution resource associated with
-  a protected object.  The acquisition of such a resource
+  a protected object. The acquisition of such a resource
   is rather considered part of the normal competition for execution
   resources between the various tasks that are ready.
   External calls that turn out to be on the same target
@@ -1262,7 +1264,7 @@ target object is not considered a potentially blocking operation.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of protected subprogram calls
+@leading@i{Examples of protected subprogram calls
 (see @RefSecNum(Protected Units and Protected Objects)):}
 @begin{Example}
 Shared_Array.Set_Component(N, E);
@@ -1366,8 +1368,8 @@ some formal parameter of the @nt<accept_statement>].
 An @nt<entry_declaration> in a task declaration shall not contain
 a specification for an access parameter (see @RefSecNum(Access Types)).
 @begin(Reason)
-  Access parameters for task entries would require a complex implementation.
-  For example:
+  @leading@;Access parameters for task entries would require a complex
+  implementation. For example:
   @begin(Example)
 @key(task) T @key(is)
    @key(entry) E(Z : @key(access) Integer); --@RI{ Illegal!}
@@ -1395,7 +1397,7 @@ a specification for an access parameter (see @RefSecNum(Access Types)).
 Implementing the Accessibility_Check inside the @nt<accept_statement> for
 E is difficult, since one does not know whether the entry caller
 is calling from inside the immediately enclosing declare block or from
-outside it.  This means that the lexical nesting level associated with
+outside it. This means that the lexical nesting level associated with
 the designated object is not sufficient to determine whether the
 Accessibility_Check should pass or fail.
 
@@ -1426,18 +1428,18 @@ the enclosing @nt<task_body>.
 @nt<Accept_statement>s are required to be immediately within
 the enclosing @nt<task_body> (as opposed to being in a nested
 subprogram) to ensure that a nested task does not
-attempt to accept the entry of its enclosing task.  We considered
+attempt to accept the entry of its enclosing task. We considered
 relaxing this restriction, either by making the check a run-time
 check, or by allowing a nested task to accept an entry of its
-enclosing task.  However, neither change seemed to provide sufficient
+enclosing task. However, neither change seemed to provide sufficient
 benefit to justify the additional implementation burden.
 
 Nested @nt<accept_statement>s for the same entry (or entry family)
 are prohibited to ensure that there is no ambiguity in the
 resolution of an expanded name for a formal parameter of the
-entry.  This could be relaxed by allowing the inner
+entry. This could be relaxed by allowing the inner
 one to hide the outer one from all visibility, but again the
-small added benefit didn't seem to justify making the change for Ada 9X.
+small added benefit didn't seem to justify making the change for Ada 95.
 
 @nt<Accept_statement>s are not permitted within @nt<asynchronous_select>
 statements to simplify the semantics and implementation:
@@ -1544,7 +1546,7 @@ For the elaboration of an @nt<entry_declaration> for an
 entry family, if the
 @nt{discrete_subtype_definition} contains no per-object expressions
 (see @RefSecNum(Record Types)), then the @nt<discrete_subtype_definition>
-is elaborated.  Otherwise, the elaboration of the
+is elaborated. Otherwise, the elaboration of the
 @nt<entry_declaration> consists of the evaluation of any
 expression of the @nt<discrete_subtype_definition>
 that is not a per-object expression (or part of one).
@@ -1612,7 +1614,7 @@ For the execution of the @nt<entry_body>,
 the @nt<declarative_part> of the @nt<entry_body> is elaborated,
 and the @nt<handled_sequence_of_statements>
 of the body is executed, as for the execution
-of a @nt<subprogram_body>.  The value of the named entry index, if any,
+of a @nt<subprogram_body>. The value of the named entry index, if any,
 is determined by the value of the entry index specified in the
 @i(entry_)@nt<name> of the selected entry call (or intermediate
 @nt<requeue_statement> @em see @RefSecNum(Requeue Statements)).
@@ -1642,13 +1644,13 @@ may be used to complete the execution of
 an @nt<accept_statement> or an @nt<entry_body>.
 @begin{Ramification}
 An @nt<accept_statement> need not have a @nt<handled_sequence_of_statements>
-even if the corresponding entry has parameters.  Equally, it can have
+even if the corresponding entry has parameters. Equally, it can have
 a @nt<handled_sequence_of_statements> even if the corresponding entry
 has no parameters.
 @end{Ramification}
 @begin{Ramification}
 A single entry overloads a subprogram, an enumeration literal, or another
-single entry if they have the same @nt{defining_identifier}.  Overloading is
+single entry if they have the same @nt{defining_identifier}. Overloading is
 not allowed for entry family names.
 A single entry or an entry of an entry family
 can be renamed as a procedure as explained in
@@ -1673,14 +1675,16 @@ when its parameters indicate that it cannot be handled immediately.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of entry declarations:}
+@leading@keepnext@i{Examples of entry declarations:}
 @begin{Example}
 @key(entry) Read(V : @key(out) Item);
 @key(entry) Seize;
 @key(entry) Request(Level)(D : Item);  @RI[--  a family of entries]
 @end{Example}
 
-@i{Examples of accept statements:}
+@begin{Wide}
+@leading@keepnext@i{Examples of accept statements:}
+@end{Wide}
 @begin{Example}
 @key(accept) Shut_Down;
 
@@ -1725,7 +1729,7 @@ as part of @nt<select_statement>s
 
 @begin{Resolution}
 The @i(entry_)@nt<name> given in an @nt<entry_call_statement> shall resolve
-to denote an entry.  The rules for parameter
+to denote an entry. The rules for parameter
 associations are the same as for subprogram calls (see @RefSecNum(Subprogram Calls)
 and @RefSecNum(Parameter Associations)).
 @end{Resolution}
@@ -1738,7 +1742,7 @@ the entry or entry family, and the entry index, if any
 @end{StaticSem}
 
 @begin{RunTime}
-@Defn{open entry}
+@leading@Defn{open entry}
 @Defn2{Term=[entry], Sec=(open)}
 @Defn{closed entry}
 @Defn2{Term=[entry], Sec=(closed)}
@@ -1767,7 +1771,7 @@ exception Program_Error is propagated
 to all current callers of all entries of the protected object.
 @begin(Reason)
   An exception during barrier evaluation is considered essentially
-  a fatal error.  All current entry callers are notified with a Program_Error.
+  a fatal error. All current entry callers are notified with a Program_Error.
   In a fault-tolerant system, a protected object might provide a Reset
   protected procedure, or equivalent, to support attempts to restore such
   a "broken" protected object to a reasonable state.
@@ -1778,13 +1782,13 @@ to all current callers of all entries of the protected object.
   based on the state of the (accepting) task, whereas the
   "openness" of a protected entry is defined only
   when it is explicitly checked, since the barrier expression needs to
-  be evaluated.  Implementation permissions are given (below) to
+  be evaluated. Implementation permissions are given (below) to
   allow implementations to evaluate the barrier expression more or
   less often than it is checked, but the basic semantic model presumes
   it is evaluated at the times when it is checked.
 @end(Discussion)
 
-@PDefn2{Term=[execution], Sec=(entry_call_statement)}
+@leading@PDefn2{Term=[execution], Sec=(entry_call_statement)}
 For the execution of an @nt{entry_call_statement},
 evaluation of the @nt<name>
 and of the parameter associations
@@ -1830,7 +1834,7 @@ there is a separate (logical) entry queue for each entry of a
 given task or protected object
 @Redundant[(including each entry of an entry family)].
 
-@Defn2{Term=[service], Sec=(an entry queue)}
+@Leading@Defn2{Term=[service], Sec=(an entry queue)}
 @Defn2{Term=[select an entry call], Sec=(from an entry queue)}
 When a queued call is @i{selected}, it is removed from its entry queue.
 Selecting a queued call from a particular entry queue is
@@ -1861,7 +1865,7 @@ both for task and protected entry queues.
 @Defn{default entry queuing policy}
 @Defn2{Term=[entry queuing policy], Sec=(default policy)}
 The default entry queuing policy is to select calls on a given entry
-queue in order of arrival.  If calls from two or more queues are
+queue in order of arrival. If calls from two or more queues are
 simultaneously eligible for selection, the default entry queuing policy
 does not specify which queue is serviced first.
 Other entry queuing policies can be specified by @nt{pragma}s
@@ -1947,7 +1951,7 @@ corresponding calling task may be made ready
 without waiting for the entire protected action to complete.
 @begin(Reason)
   These permissions are intended to allow flexibility for implementations
-  on multiprocessors.  On a monoprocessor, which thread of control executes
+  on multiprocessors. On a monoprocessor, which thread of control executes
   the protected action is essentially invisible, since the thread is
   not abortable in any case, and the "current_task" function is not
   guaranteed to work during a protected action
@@ -1965,7 +1969,7 @@ on the object since the @nt<condition> was last evaluated.
 @begin(Ramification)
   Changes to variables referenced by an entry barrier that
   result from actions outside of a protected procedure or entry call on the
-  protected object need not be "noticed."  For example, if
+  protected object need not be "noticed." For example, if
   a global variable is referenced by an entry barrier, it should not
   be altered (except as part of a protected action on the object) any
   time after the barrier is first evaluated.
@@ -1993,10 +1997,10 @@ is checked to see if it is open.
 @begin(ImplNote)
   It is anticipated that when the number of entries is known to be small,
   all barriers will be evaluated any time one of them needs to be,
-  to produce an "entry-open bit-vector."  The appropriate bit will
+  to produce an "entry-open bit-vector." The appropriate bit will
   be tested when the entry is called, and only if the bit is false
   will a check be made to see whether the bit-vector might need to
-  be recomputed.  This should allow an implementation to maximize
+  be recomputed. This should allow an implementation to maximize
   the performance of a call on an open entry, which seems like the
   most important case.
 
@@ -2007,7 +2011,7 @@ is checked to see if it is open.
   The "is-valid" bit is set to false
   (as are all the bits of the bit-vector) when the protected object is first
   created, as well as any time an exception is propagated from computing
-  the bit-vector.  Is-valid would also be set false any time the
+  the bit-vector. Is-valid would also be set false any time the
   Count is changed and
   "depends-on-Count-attribute" is true for the type, or a
   protected procedure or entry returns indicating it might have updated a
@@ -2020,9 +2024,9 @@ is checked to see if it is open.
 
   For protected types where the number of entries is not known to be
   small, it makes more sense to evaluate a barrier only when the
-  corresponding entry is checked to see if it is open.  It isn't worth
+  corresponding entry is checked to see if it is open. It isn't worth
   saving the state of the entry between checks, because of the space
-  that would be required.  Furthermore, the entry queues probably want
+  that would be required. Furthermore, the entry queues probably want
   to take up space only when there is actually a caller on them, so
   rather than an array of all entry queues, a linked list of nonempty
   entry queues make the most sense in this case, with the first caller
@@ -2040,11 +2044,11 @@ selected in the interim.
   action (which helps make the Count attribute of a protected
   entry meaningful), it might
   not be practical to attempt the cancellation from the thread
-  of control that initiated the cancellation.  For example,
+  of control that initiated the cancellation. For example,
   if the cancellation is due to the expiration of a delay,
   it is unlikely that the handler of the timer interrupt could
   perform the necessary protected action itself (due to being
-  on the interrupt level).  Similarly, if the cancellation
+  on the interrupt level). Similarly, if the cancellation
   is due to an abort, it is possible that the task initiating
   the abort has a priority higher than the ceiling priority of the
   protected object (for implementations that support ceiling priorities).
@@ -2083,7 +2087,7 @@ the task will deadlock if the call is a simple entry call.
 
 The @nt<condition> of an @nt<entry_barrier> is allowed to be evaluated by
 an implementation more often than strictly necessary, even if the
-evaluation might have side effects.  On the other hand, an implementation
+evaluation might have side effects. On the other hand, an implementation
 need not reevaluate the @nt<condition> if nothing it references was
 updated by an intervening protected action on the protected object,
 even if the @nt<condition> references some global variable that might
@@ -2091,7 +2095,7 @@ have been updated by an action performed from outside of a protected action.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of entry calls:}
+@leading@keepnext@i{Examples of entry calls:}
 @begin{Example}
 Agent.Shut_Down;                      @RI[--  see @RefSecNum(Task Units and Task Objects)]
 Parser.Next_Lexeme(E);                @RI[--  see @RefSecNum(Task Units and Task Objects)]
@@ -2178,7 +2182,7 @@ of the @nt<entry_declaration>.
   Note that in the strange case where a @nt<task_body> is nested inside
   an @nt<accept_statement>, it is permissible to requeue from an
   @nt<accept_statement> of the inner @nt<task_body> on parameters of
-  the outer @nt<accept_statement>.  This is not
+  the outer @nt<accept_statement>. This is not
   a problem because all calls on the inner task have to complete before
   returning from the outer @nt<accept_statement>, meaning no "dangling
   calls" will be created.
@@ -2187,7 +2191,7 @@ of the @nt<entry_declaration>.
   By disallowing certain requeues,
   we ensure that the normal @nt<terminate_alternative> rules remain
   sensible, and that explicit clearing of the entry queues of a protected
-  object during finalization is rarely necessary.  In particular, such
+  object during finalization is rarely necessary. In particular, such
   clearing of the entry queues is necessary only (ignoring premature
   Unchecked_Deallocation) for protected objects declared in a
   @nt<task_body> (or created by an allocator for an access type declared
@@ -2219,7 +2223,7 @@ is checked to see if it is open and the requeued call is either
 selected immediately or queued, as for a normal entry call
 (see @RefSecNum(Entry Calls)).
 
-@PDefn2{Term=[execution], Sec=(requeue protected entry)}
+@leading@PDefn2{Term=[execution], Sec=(requeue protected entry)}
 For the execution of a requeue on an entry of a target protected
 object, after leaving the enclosing callable construct:
 @begin(Itemize)
@@ -2253,7 +2257,7 @@ of the callable construct completed by the requeue.
 @Redundant[In any case, no parameters are specified in a
 @nt<requeue_statement>; any parameter passing is implicit.]
 
-@Defn{requeue-with-abort}
+@leading@Defn{requeue-with-abort}
 If the @nt<requeue_statement> includes the reserved words @key(with abort)
 (it is a @i(requeue-with-abort)), then:
 @begin(Itemize)
@@ -2280,7 +2284,7 @@ of the @nt<requeue_statement>.
   We chose to protect a requeue, by default, against abort or cancellation.
   This seemed safer, since it is likely that extra steps need to be taken
   to allow for possible cancellation once the servicing of an entry
-  call has begun.  This also means that in the absence of @key(with abort)
+  call has begun. This also means that in the absence of @key(with abort)
   the usual Ada 83 behavior is preserved, namely that once an
   entry call is accepted, it cannot be cancelled until it completes.
 @end(Reason)
@@ -2289,7 +2293,7 @@ of the @nt<requeue_statement>.
 @begin{Notes}
 
 A requeue is permitted from a single entry to an entry of
-an entry family, or vice-versa.  The entry index, if any,
+an entry family, or vice-versa. The entry index, if any,
 plays no part in the subtype conformance check between the
 profiles of the two entries; an entry index
 is part of the @i(entry_)@nt<name> for an entry of a family.
@@ -2298,7 +2302,7 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of requeue statements:}
+@leading@keepnext@i{Examples of requeue statements:}
 @begin{Example}
 @key[requeue] Request(Medium) @key[with abort];
                     @RI[-- requeue on a member of an entry family of the current task, see @RefSecNum{Task Units and Task Objects}]
@@ -2380,17 +2384,17 @@ A value of the type Time in package Calendar, or of some other
 implementation-defined time type, represents a time as reported
 by a corresponding clock.
 
-The following language-defined library package exists:
+@leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChildUnit{Parent=[Ada],Child=[Calendar]}
 @key(package) Ada.Calendar @key(is)
 @LangDefType{Package=[Ada.Calendar],Type=[Time]}
   @key(type) Time @key(is) @key(private;)
 
-  @key(subtype) @AdaDefn{Year_Number}  @key(is) Integer @key(range) 1901 ..  2099;
-  @key(subtype) @AdaDefn{Month_Number} @key(is) Integer @key(range) 1 ..  12;
-  @key(subtype) @AdaDefn{Day_Number}   @key(is) Integer @key(range) 1 ..  31;
-  @key(subtype) @AdaDefn{Day_Duration} @key(is) Duration @key(range) 0.0 ..  86_400.0;
+  @key(subtype) @AdaDefn{Year_Number}  @key(is) Integer @key(range) 1901 .. 2099;
+  @key(subtype) @AdaDefn{Month_Number} @key(is) Integer @key(range) 1 .. 12;
+  @key(subtype) @AdaDefn{Day_Number}   @key(is) Integer @key(range) 1 .. 31;
+  @key(subtype) @AdaDefn{Day_Duration} @key(is) Duration @key(range) 0.0 .. 86_400.0;
 
   @key(function) @AdaSubDefn{Clock} @key(return) Time;
 
@@ -2461,7 +2465,7 @@ implementation defined.
 @PDefn2{Term=[blocked], Sec=(on a @nt<delay_statement>)}
 The task executing a @nt<delay_statement> is blocked
 until the expiration time is reached, at which point it
-becomes ready again.  If the expiration time
+becomes ready again. If the expiration time
 has already passed, the task is not blocked.
 @begin(Discussion)
   For a @nt<delay_relative_statement>, this case corresponds to
@@ -2505,9 +2509,9 @@ Month, Day, and Seconds return the corresponding values for
 a given value of the type Time,
 as appropriate to an implementation-defined timezone;
 the procedure Split returns all four
-corresponding values.  Conversely, the function Time_Of combines a
+corresponding values. Conversely, the function Time_Of combines a
 year number, a month number, a day number, and a duration, into
-a value of type Time.  The operators "+" and "@en@;" for addition
+a value of type Time. The operators "+" and "@en@;" for addition
 and subtraction of times and durations, and the relational operators
 for times, have the conventional meaning.
 @ImplDef{The timezone used for package Calendar operations.}
@@ -2520,16 +2524,16 @@ Seconds or through the Seconds parameter of the procedure
 Split is always less than 86_400.0.
 
 The exception Time_Error is raised by the function Time_Of if the
-actual parameters do not form a proper date.  This exception
+actual parameters do not form a proper date. This exception
 is also raised by the operators "+" and "@en@;" if the
 result is not representable in the type Time or
-Duration, as appropriate.  This exception is
+Duration, as appropriate. This exception is
 also raised by the function Year or the procedure
 Split if the year number of the given date is outside of
 the range of the subtype Year_Number.
 @begin(Honest)
   By "proper date" above we mean that the given year has
-  a month with the given day.  For example, February 29th is
+  a month with the given day. For example, February 29th is
   a proper date only for a leap year.
 @end(Honest)
 @begin(Reason)
@@ -2563,7 +2567,7 @@ types (see @RefSecNum{Monotonic Time}).
 An implementation may raise Time_Error if the
 value of a @i{delay_}@nt<expression> in a @nt<delay_until_statement>
 of a @nt<select_statement> represents a time more than 90 days past the
-current time.  The actual limit, if any, is implementation-defined.
+current time. The actual limit, if any, is implementation-defined.
 @ImplDef{Any limit on @nt<delay_until_statement>s of @nt<select_statement>s.}
 @begin{ImplNote}
   This allows an implementation to implement @nt<select_statement>
@@ -2632,14 +2636,16 @@ are given in @RefSec(Delay Accuracy).
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a relative delay statement:}
+@leading@keepnext@i{Example of a relative delay statement:}
 @begin{example}
 @key(delay) 3.0;  @RI[-- delay 3.0 seconds]
 @end{example}
 
-@Defn2{Term=[periodic task],Sec=(example)}
+@begin{Wide}
+@leading@keepnext@Defn2{Term=[periodic task],Sec=(example)}
 @IndexSee{Term=[periodic task],See=(delay_until_statement)}
 @i{Example of a periodic task:}
+@end{Wide}
 @begin{example}
 @key(declare)
    @key(use) Ada.Calendar;
@@ -2659,7 +2665,7 @@ are given in @RefSec(Delay Accuracy).
 For programs that raise Time_Error on "+" or "@en@;" in Ada 83,the exception
 might be deferred until a call on Split or Year_Number, or might
 not be raised at all (if the offending time is never Split after being
-calculated).  This should not affect typical programs,
+calculated). This should not affect typical programs,
 since they deal only with times corresponding to the relatively
 recent past or near future.
 @end{Inconsistent83}
@@ -2679,7 +2685,7 @@ of "+" and "@en@;" (allowing them to depend on overflow for
 detecting when to raise Time_Error) and to allow local
 timezone information to be
 considered at the time of Split rather than Clock (depending on
-the implementation approach).  For example, in a POSIX environment,
+the implementation approach). For example, in a POSIX environment,
 it is natural for the type Time to be based on GMT, and
 the results of procedure Split (and the functions
 Year, Month, Day, and Seconds) to depend on local time zone information.
@@ -2697,9 +2703,9 @@ environment (such as POSIX).
 @LabeledClause{Select Statements}
 
 @begin{Intro}
-@redundant[There are four forms of the @nt{select_statement}.  One form provides a
-selective wait for one or more @nt{select_alternative}s.  Two provide
-timed and conditional entry calls.  The fourth provides asynchronous
+@redundant[There are four forms of the @nt{select_statement}. One form provides a
+selective wait for one or more @nt{select_alternative}s. Two provide
+timed and conditional entry calls. The fourth provides asynchronous
 transfer of control.]
 @end{Intro}
 
@@ -2712,7 +2718,7 @@ transfer of control.]
 @end{Syntax}
 
 @begin{Examples}
-@i{Example of a select statement:}
+@leading@keepnext@i{Example of a select statement:}
 @begin{Example}
 @key(select)
    @key(accept) Driver_Awake_Signal;
@@ -2731,7 +2737,7 @@ transfer of control.]
 
 @begin{Intro}
 @redundant[This form of the @nt{select_statement} allows a combination of waiting for,
-and selecting from, one or more alternatives.  The
+and selecting from, one or more alternatives. The
 selection may depend on conditions associated with each alternative of the
 @nt{selective_accept}.
 @IndexSee{Term=[time-out],See=(selective_accept)}]
@@ -2767,7 +2773,7 @@ selection may depend on conditions associated with each alternative of the
 @Syn{lhs=<terminate_alternative>,rhs="@key{terminate};"}
 
 @begin(SyntaxText)
-A @nt{selective_accept} shall contain at least one @nt{accept_alternative}.
+@leading@;A @nt{selective_accept} shall contain at least one @nt{accept_alternative}.
 In addition, it can contain:
 @begin{itemize}
 a @nt{terminate_alternative} (only one); or
@@ -2799,14 +2805,14 @@ or all shall be @nt<delay_until_statement>s for the same time type.
 @Defn{open alternative}
 A @nt<select_alternative> is said to be @i(open) if
 it is not immediately preceded by a @nt<guard>, or if
-the @nt<condition> of its @nt<guard> evaluates to True.  It
+the @nt<condition> of its @nt<guard> evaluates to True. It
 is said to be @i(closed) otherwise.
 
 @PDefn2{Term=[execution], Sec=(selective_accept)}
 For the execution of a @nt{selective_accept}, any @nt{guard}
 @nt{condition}s are evaluated; open alternatives are
-thus determined.  For an open @nt{delay_alternative}, the
-@i(delay_)@nt<expression> is also evaluated.  Similarly, for an open
+thus determined. For an open @nt{delay_alternative}, the
+@i(delay_)@nt<expression> is also evaluated. Similarly, for an open
 @nt{accept_alternative} for
 an entry of a family, the @nt{entry_index} is also evaluated.
 These evaluations are performed in an arbitrary order, except that
@@ -2816,9 +2822,9 @@ Selection and execution of one open alternative, or of the else part, then
 completes the execution of the @nt{selective_accept}; the rules for
 this selection are described below.
 
-Open @nt{accept_alternative}s are first considered.  Selection of one such
+Open @nt{accept_alternative}s are first considered. Selection of one such
 alternative takes place immediately if the corresponding
-entry already has queued calls.  If several alternatives
+entry already has queued calls. If several alternatives
 can thus be selected, one of them is selected according to the
 entry queuing policy in effect (see @RefSecNum(Entry Calls) and
 @RefSecNum(Entry Queuing Policies)).
@@ -2833,14 +2839,14 @@ If no selection is immediately possible (in the above sense)
 and there is no else part, the task
 blocks until an open alternative can be selected.
 
-Selection of the other forms of alternative or of an else part is performed
+@leading@;Selection of the other forms of alternative or of an else part is performed
 as follows:
 @begin{itemize}
 
 An open @nt{delay_alternative} is selected when
 its expiration time is reached if no @nt{accept_alternative}
 or other @nt<delay_alternative> can be selected prior to the
-expiration time.  If several
+expiration time. If several
 @nt{delay_alternative}s have this same expiration time,
 one of them is selected according to the queuing policy in
 effect (see @RefSecNum{Entry Queuing Policies}); the default queuing
@@ -2861,7 +2867,7 @@ are satisfied.
   In the presence of requeues from a task to one of its subtasks,
   it is possible that when a @nt<terminate_alternative> of the
   subtask is selected, requeued calls (for closed entries only) might still
-  be queued on some entry of the subtask.  Tasking_Error will
+  be queued on some entry of the subtask. Tasking_Error will
   be propagated to such callers, as is usual when a task completes
   while queued callers remain.
 @end(Ramification)
@@ -2877,14 +2883,14 @@ there is no else part.
 @begin{Notes}
 
 A @nt{selective_accept} is allowed to have several open
-@nt{delay_alternative}s.  A @nt{selective_accept} is allowed
+@nt{delay_alternative}s. A @nt{selective_accept} is allowed
 to have several open
 @nt{accept_alternative}s for the same entry.
 
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a task body with a selective accept:}
+@leading@keepnext@i{Example of a task body with a selective accept:}
 @begin{Example}
 @key(task) @key(body) Server @key(is)
    Current_Work_Item : Work_Item;
@@ -2970,7 +2976,7 @@ meant.
 @end{RunTime}
 
 @begin{Examples}
-@i{Example of a timed entry call:}
+@leading@keepnext@i{Example of a timed entry call:}
 @begin{Example}
 @key(select)
    Controller.Request(Medium)(Some_Item);
@@ -3028,7 +3034,7 @@ the entry, even if the conditional call is not selected.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a conditional entry call:}
+@leading@keepnext@i{Example of a conditional entry call:}
 @begin{Example}
 @key(procedure) Spin(R : @key[in] Resource) @key(is)
 @key(begin)
@@ -3119,9 +3125,9 @@ If the @nt<triggering_statement> completes normally, the optional
 executed after the @nt<abortable_part> is left.
 @begin(Discussion)
   We currently don't specify when the by-copy [@key(in)] @key(out)
-  parameters are assigned back into the actuals.  We considered
+  parameters are assigned back into the actuals. We considered
   requiring that to happen after the @nt<abortable_part> is
-  left.  However, that doesn't seem useful enough
+  left. However, that doesn't seem useful enough
   to justify possibly overspecifying the implementation approach,
   since some of the parameters are passed by reference anyway.
 
@@ -3129,15 +3135,15 @@ executed after the @nt<abortable_part> is left.
   of the @nt<triggering_alternative> execute after aborting
   the @nt<abortable_part>, but before waiting for it to complete
   and finalize, to provide more rapid response to the triggering event
-  in case the finalization was unbounded.  However, various reviewers felt
+  in case the finalization was unbounded. However, various reviewers felt
   that this created unnecessary complexity in the description,
   and a potential for undesirable concurrency (and nondeterminism)
-  within a single task.  We have now reverted to simpler, more
+  within a single task. We have now reverted to simpler, more
   deterministic semantics,
   but anticipate that further discussion of this issue might be
   appropriate during subsequent reviews.
   One possibility is to leave this area implementation defined,
-  so as to encourage experimentation.  The user would then have
+  so as to encourage experimentation. The user would then have
   to assume the worst about what kinds of actions are appropriate
   for the @nt<sequence_of_statements> of the @nt<triggering_alternative>
   to achieve portability.
@@ -3146,7 +3152,7 @@ executed after the @nt<abortable_part> is left.
 @end{RunTime}
 
 @begin{Examples}
-@Defn2{Term=[signal handling], Sec=(example)}
+@leading@keepnext@Defn2{Term=[signal handling], Sec=(example)}
 @Defn2{Term=[interrupt],Sec=(example using @nt<asynchronous_select>)}
 @Defn2{Term=[terminal interrupt], Sec=(example)}
 @i(Example of a main command loop for a command interpreter:)
@@ -3164,12 +3170,14 @@ executed after the @nt<abortable_part> is left.
 @key(end) @key(loop);
 @end(Example)
 
-@i(Example of a time-limited calculation:)
+@begin{Wide}
+@leading@keepnext@i(Example of a time-limited calculation:)
 @IndexSee{Term=[time-out],See=(asynchronous_select)}
 @Defn2{Term=[time-out],Sec=(example)}
 @Defn2{Term=[time limit],Sec=(example)}
 @Defn2{Term=[interrupt],Sec=(example using @nt<asynchronous_select>)}
 @Defn2{Term=[timer interrupt],Sec=(example)}
+@end{Wide}
 @begin(Example)
 @key(select)
    @key(delay) 5.0;
@@ -3191,7 +3199,7 @@ executed after the @nt<abortable_part> is left.
 
 @begin{Intro}
 @redundant[An @nt{abort_statement} causes one or more tasks to become abnormal, thus
-preventing any further interaction with such tasks.  The completion
+preventing any further interaction with such tasks. The completion
 of the @nt<triggering_statement> of an @nt<asynchronous_select>
 causes a @nt{sequence_of_statements} to be aborted.]
 @end{Intro}
@@ -3234,7 +3242,7 @@ This allows the implementation to use either a sequence of calls to an
 a single call to an @lquotes@;abort list of tasks@rquotes@; RTS primitive.
 @end{Ramification}
 
-@PDefn2{Term=[execution], Sec=(aborting the execution of a construct)}
+@leading@PDefn2{Term=[execution], Sec=(aborting the execution of a construct)}
 @Defn2{Term=[abort], Sec=(of the execution of a construct)}
 When the execution of a construct
 is @i(aborted) (including that of a @nt<task_body> or of a
@@ -3298,7 +3306,7 @@ The order in which tasks become abnormal as the result
 of an @nt<abort_statement> or the abort of a @nt<sequence_of_statements>
 is not specified by the language.
 
-If the execution of an entry call is aborted,
+@leading@;If the execution of an entry call is aborted,
 an immediate attempt is made to cancel the entry call
 (see @RefSecNum(Entry Calls)).
 If the execution of a construct
@@ -3364,16 +3372,16 @@ or the created task might or might not have an effect.
 @begin(Reason)
   An @nt<asynchronous_select> relies on an abort of the
   @nt<abortable_part> to effect the
-  asynchronous transfer of control.  For an @nt<asynchronous_select>
+  asynchronous transfer of control. For an @nt<asynchronous_select>
   within an abort-deferred operation, the abort might
   have no effect.
 
   Creating a task dependent on a master included within an abort-deferred
   operation is considered an error, because such tasks could be aborted while
   the abort-deferred operation was still progressing, undermining the
-  purpose of abort-deferral.  Alternatively, we could say that such
+  purpose of abort-deferral. Alternatively, we could say that such
   tasks are abort-deferred for their entire execution, but that seems
-  too easy to abuse.  Note that task creation is already a bounded error
+  too easy to abuse. Note that task creation is already a bounded error
   in protected actions, so this additional rule only applies to local task
   creation as part of Initialize, Finalize, or Adjust.
 @end(Reason)
@@ -3410,7 +3418,7 @@ of aborting the execution of a construct, rather than just of a task.
 
 @begin{RunTime}
 
-For @PrefixType{a @nt<prefix> T that is of a task type
+@leading@;For @PrefixType{a @nt<prefix> T that is of a task type
 @Redundant[(after any implicit dereference)]},
 the following attributes are defined:
 @begin{Description}
@@ -3425,7 +3433,7 @@ the following attributes are defined:
 
 @Attribute{Prefix=<T>, AttrName=<Terminated>,
   Text=<Yields the value True if the task denoted by T is
-                terminated, and False otherwise.  The value of this
+                terminated, and False otherwise. The value of this
                 attribute is of the predefined type Boolean.>}
 @end{Description}
 @EndPrefixType{}
@@ -3451,13 +3459,13 @@ program unit that is, itself, inner to the body of the task unit.
 @begin{Notes}
 
 For the Count attribute, the entry can be either a single entry or an
-entry of a family.  The name of the entry or entry
+entry of a family. The name of the entry or entry
 family can be either a @nt<direct_name> or an expanded name.
 
 Within task units, algorithms interrogating the attribute E'Count should
 take precautions to allow for the increase of the value of this attribute
 for incoming entry calls, and its decrease, for example with
-@nt{timed_entry_calls}.  Also, a @nt{conditional_entry_call} may briefly
+@nt{timed_entry_calls}. Also, a @nt{conditional_entry_call} may briefly
 increase this value, even if the conditional call is not accepted.
 
 Within protected units, algorithms interrogating the attribute E'Count
@@ -3507,8 +3515,8 @@ hardware efficiently supports it.
 @end{StaticSem}
 
 @begin{RunTime}
-@redundant[Separate tasks normally proceed independently and concurrently
-with one another.  However, task interactions can be used
+@leading@redundant[Separate tasks normally proceed independently and concurrently
+with one another. However, task interactions can be used
 to synchronize the actions of two or more tasks to allow,
 for example, meaningful communication by the direct updating and
 reading of variables shared between the tasks.]
@@ -3637,7 +3645,7 @@ see @RefSecNum(Shared Variable Control).
   reason this situation is not considered erroneous nor even a bounded error.
   In Ada 83, this was considered an @lquotes@;incorrect order dependence@rquotes@; if
   the @lquotes@;effect@rquotes@; of the program was affected, but @lquotes@;effect@rquotes@; was never
-  fully defined.  In Ada 9X, this situation represents a potential
+  fully defined. In Ada 95, this situation represents a potential
   nonportability, and a friendly compiler might want to warn the
   programmer about the situation, but it is not considered an error.
   An example where this would come up would be in gathering statistics
@@ -3654,8 +3662,8 @@ see @RefSecNum(Shared Variable Control).
 
 @Leading@;The following example defines a buffer protected object
 to smooth variations between
-the  speed  of  output  of  a producing task and the speed of input of some
-consuming  task.   For  instance,  the  producing  task  might have the
+the speed of output of a producing task and the speed of input of some
+consuming task. For instance, the producing task might have the
 following structure:
 
 @begin(Example)
@@ -3691,9 +3699,9 @@ following structure:
 @end(Example)
 
 @begin{Wide}
-@leading@;The  buffer object contains an internal pool of characters managed in a
-round-robin fashion.  The pool has two indices, an  In_Index  denoting  the
-space  for the next input character and an Out_Index denoting the space for
+@leading@;The buffer object contains an internal pool of characters managed in a
+round-robin fashion. The pool has two indices, an In_Index denoting the
+space for the next input character and an Out_Index denoting the space for
 the next output character.
 @end{Wide}
 

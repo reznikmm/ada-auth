@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/08/11 00:09:16 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/08/03 05:37:44 $}
+@Comment{$Date: 2000/08/11 00:09:16 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -544,33 +544,28 @@ The following language-defined packages exist:
       @key[access] @key[protected] @key[procedure];
 
 
-
-   @key[function] Is_Reserved (Interrupt : Interrupt_ID)
+   @key[function] @AdaSubDefn{Is_Reserved} (Interrupt : Interrupt_ID)
       @key[return] Boolean;
 
-
-   @key[function] Is_Attached (Interrupt : Interrupt_ID)
+   @key[function] @AdaSubDefn{Is_Attached} (Interrupt : Interrupt_ID)
       @key[return] Boolean;
 
-
-   @key[function] Current_Handler (Interrupt : Interrupt_ID)
+   @key[function] @AdaSubDefn{Current_Handler} (Interrupt : Interrupt_ID)
       @key[return] Parameterless_Handler;
 
-
-   @key[procedure] Attach_Handler
+   @key[procedure] @AdaSubDefn{Attach_Handler}
       (New_Handler : @key[in] Parameterless_Handler;
        Interrupt   : @key[in] Interrupt_ID);
 
-
-   @key[procedure] Exchange_Handler
+   @key[procedure] @AdaSubDefn{Exchange_Handler}
       (Old_Handler : @key[out] Parameterless_Handler;
        New_Handler : @key[in] Parameterless_Handler;
        Interrupt   : @key[in] Interrupt_ID);
 
-   @key[procedure] Detach_Handler
+   @key[procedure] @AdaSubDefn{Detach_Handler}
       (Interrupt : @key[in] Interrupt_ID);
 
-   @key[function] Reference(Interrupt : Interrupt_ID)
+   @key[function] @AdaSubDefn{Reference}(Interrupt : Interrupt_ID)
       @key{return} System.Address;
 
 @key[private]
@@ -1122,15 +1117,15 @@ The following language-defined library package exists:
 @key[package] Ada.Task_Identification @key[is]
 @LangDefType{Package=[Ada.Task_Identification],Type=[Task_ID]}
    @key[type] Task_ID @key[is] @key{private};
-   Null_Task_ID : @key{constant} Task_ID;
+   @AdaSubDefn{Null_Task_ID} : @key{constant} Task_ID;
    @key{function}  "=" (Left, Right : Task_ID) @key{return} Boolean;
 
-   @key{function}  Image        (T : Task_ID) @key{return} String;
-   @key[function]  Current_Task @key[return] Task_ID;
-   @Key[procedure] Abort_Task   (T : @key[in] @key[out] Task_ID);
+   @key{function}  @AdaSubDefn{Image}        (T : Task_ID) @key{return} String;
+   @key[function]  @AdaSubDefn{Current_Task} @key[return] Task_ID;
+   @Key[procedure] @AdaSubDefn{Abort_Task}   (T : @key[in] @key[out] Task_ID);
 
-   @key[function]  Is_Terminated(T : Task_ID) @key{return} Boolean;
-   @key[function]  Is_Callable  (T : Task_ID) @key{return} Boolean;
+   @key[function]  @AdaSubDefn{Is_Terminated}(T : Task_ID) @key{return} Boolean;
+   @key[function]  @AdaSubDefn{Is_Callable}  (T : Task_ID) @key{return} Boolean;
 @key[private]
    ... -- @RI{not specified by the language}
 @key[end] Ada.Task_Identification;
@@ -1253,15 +1248,15 @@ The following language-defined generic library package exists:
 @LangDefType{Package=[Ada.Task_Attributes],Type=[Attribute_Handle]}
    @key{type} Attribute_Handle @key{is} @key{access} @key{all} Attribute;
 
-   @key{function} Value(T : Task_ID := Current_Task)
+   @key{function} @AdaSubDefn{Value}(T : Task_ID := Current_Task)
      @key{return} Attribute;
 
-   @key{function} Reference(T : Task_ID := Current_Task)
+   @key{function} @AdaSubDefn{Reference}(T : Task_ID := Current_Task)
      @key{return} Attribute_Handle;
 
-   @key{procedure} Set_Value(Val : @key[in] Attribute;
+   @key{procedure} @AdaSubDefn{Set_Value}(Val : @key[in] Attribute;
                              T : @key[in] Task_ID := Current_Task);
-   @key{procedure} Reinitialize(T : @key[in] Task_ID := Current_Task);
+   @key{procedure} @AdaSubDefn{Reinitialize}(T : @key[in] Task_ID := Current_Task);
 
 @key{end} Ada.Task_Attributes;
 @end{example}

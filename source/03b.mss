@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:18 $}
+@Comment{$Date: 2000/08/11 00:09:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @LabeledClause{Array Types}
 
@@ -2921,7 +2921,7 @@ The controlling tag value is defined as follows:
   @end(Reason)
 
 @Leading@keepnext@;If all of the controlling operands are tag-indeterminate, then:
-  @begin(itemize)
+  @begin(inneritemize)
     If the call has a controlling result and is itself a (possibly
     parenthesized or qualified)
     controlling operand of an enclosing call on a
@@ -2939,7 +2939,7 @@ The controlling tag value is defined as follows:
         used to initialize a class-wide formal parameter or class-wide
         object.
       @end{Ramification}
-  @end(itemize)
+  @end(inneritemize)
 @end(itemize)
 
 For the execution of a call on a dispatching operation,

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:19 $}
+@Comment{$Date: 2000/08/11 00:09:15 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 @redundant[This section describes features for
@@ -16,7 +16,7 @@ and for interfacing to hardware.
 @begin{DiffWord83}
 The clauses of this section have been reorganized.
 This was necessary to preserve a logical order,
-given the new Ada 9X semantics given in this section.
+given the new Ada 95 semantics given in this section.
 @end{DiffWord83}
 
 @LabeledClause{Representation Items}
@@ -162,7 +162,7 @@ but the ones we're interested in here are generally contiguous
 sequences of bits.
 @end{Honest}
 @begin{Ramification}
-Two objects with the same value do not necessarily have the same
+@Leading@;Two objects with the same value do not necessarily have the same
 representation.
 For example, an implementation might represent False as zero and True
 as any odd value.
@@ -261,7 +261,7 @@ because these are equivalent to @nt{attribute_definition_clause}s.
 See @RefSec{At Clauses}, and @RefSec{Mod Clauses}.
 @end{Reason}
 @begin{Ramification}
-The following representation items are type-related:
+@Leading@;The following representation items are type-related:
 @begin{Itemize}
 @nt{enumeration_representation_clause}
 
@@ -300,14 +300,14 @@ pragmas Atomic_Components and Volatile_Components (when applied to an array type
 pragma Discard_Names (when applied to an enumeration or tagged type)
 @end{Itemize}
 
-The following representation items are subtype-specific:
+@Leading@;The following representation items are subtype-specific:
 @begin{Itemize}
 Alignment clause (when applied to a first subtype)
 
 Size clause (when applied to a first subtype)
 @end{Itemize}
 
-The following representation items do not apply to subtypes,
+@Leading@;The following representation items do not apply to subtypes,
 so they are neither type-related nor subtype-specific:
 @begin{Itemize}
 Address clause (applies to objects and program units)
@@ -418,7 +418,7 @@ Note that it is illegal to specify an aspect
 (including a subtype-specific one)
 for a nonfirst subtype.
 
-Consider, for example:
+@Leading@Keepnext@;Consider, for example:
 @begin{Example}
 @key[package] P1 @key[is]
     @key[subtype] S1 @key[is] Integer @key[range] 0..2**16-1;
@@ -492,8 +492,7 @@ If a representation item for the parent appears after the
 then inheritance does not happen for that representation item.
 @end{Ramification}
 
-
-Each aspect of representation of an entity is as follows:
+@Leading@;Each aspect of representation of an entity is as follows:
 @begin{Itemize}
 @Defn2{Term=[specified],
   Sec=(of an aspect of representation of an entity)}
@@ -505,7 +504,7 @@ except in the case of Storage_Size,
 which specifies a minimum.
 @begin{Ramification}
 This rule implies that queries of the aspect return the
-specified value.  For example, if the user writes @lquotes@;@key{for}
+specified value. For example, if the user writes @lquotes@;@key{for}
 X'Size @key{use} 32;@rquotes@;,
 then a query of X'Size will return 32.
 @end{Ramification}
@@ -565,7 +564,7 @@ or on avoiding excessive inefficiency, for example.
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-@PDefn2{Term=[recommended level of support], Sec=(with respect to
+@Leading@PDefn2{Term=[recommended level of support], Sec=(with respect to
 nonstatic expressions)}
 The recommended level of support for all representation items
 is qualified as follows:
@@ -578,7 +577,7 @@ if each nonstatic expression in the representation item
 is a name that statically denotes a constant declared
 before the entity.
 @begin{Reason}
-This is to avoid the following sort of thing:
+@Leading@;This is to avoid the following sort of thing:
 @begin{Example}
 X : Integer := F(...);
 Y : Address := G(...);
@@ -589,7 +588,7 @@ In the above, we have to evaluate the initialization expression for X
 before we know where to put the result.
 This seems like an unreasonable implementation burden.
 
-The above code should instead be written like this:
+@Leading@;The above code should instead be written like this:
 @begin{Example}
 Y : @key[constant] Address := G(...);
 X : Integer := F(...);
@@ -602,7 +601,7 @@ created.
 The constant could be a formal parameter of mode @key[in].
 
 An implementation can support other nonstatic expressions if it wants
-to.  Expressions of type Address are hardly ever static,
+to. Expressions of type Address are hardly ever static,
 but their value might be known at compile time anyway
 in many cases.
 @end{Reason}
@@ -647,13 +646,13 @@ parent.
 This is necessary for by-reference parameter passing to be feasible.
 This only affects programs that specify the representation of types
 derived from types containing tasks;
-most by-reference types are new to Ada 9X.
+most by-reference types are new to Ada 95.
 For example, if A1 is an array of tasks, and A2 is derived from A1,
 it is illegal to apply a @nt{pragma} Pack to A2.
 @end{Incompatible83}
 
 @begin{Extend83}
-Ada 9X allows additional @nt{representation_clause}s for
+Ada 95 allows additional @nt{representation_clause}s for
 objects.
 
 @end{Extend83}
@@ -688,7 +687,7 @@ It seems silly to call that @lquotes@;semantics@rquotes@; rather than @lquotes@;
 RM83-13.1(10) tries to pretend that @nt{representation_clause}s don't affect
 the semantics of the program.
 One counter-example is the Small clause.
-Ada 9X has more counter-examples.
+Ada 95 has more counter-examples.
 We have noted the opposite above.
 
 Some of the more stringent requirements are moved to
@@ -705,7 +704,7 @@ selecting the representation of a composite type.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Pack is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Pack is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Pack)(@SynI{first_subtype_}@Syn2{local_name});'
@@ -748,7 +747,7 @@ or in addition to,
 a @nt{pragma} Pack.
 @end{Ramification}
 
-@PDefn2{Term=[recommended level of support], Sec=(pragma Pack)}
+@Leading@PDefn2{Term=[recommended level of support], Sec=(pragma Pack)}
 The recommended level of support for pragma Pack is:
 @begin{Itemize}
 For a packed record type,
@@ -840,7 +839,7 @@ an attribute that denotes some other kind of entity,
 the @nt{name} shall resolve to denote an entity of the appropriate
 kind.
 @begin{Ramification}
-For an @nt{attribute_definition_clause} with a @nt{name},
+@Leading@;For an @nt{attribute_definition_clause} with a @nt{name},
 the @nt{name} need not statically denote the entity it denotes.
 For example, the following kinds of things are allowed:
 @begin{Example}
@@ -886,7 +885,7 @@ and the convention shall be Ada.
 Additional requirements are defined for particular attributes.
 @Defn2{Term=[subtype conformance],Sec=(required)}
 @begin{Ramification}
-This implies, for example, that if one writes:
+@Leading@;This implies, for example, that if one writes:
 @begin{Example}
 @key[for] T'Read @key[use] R;
 @end{Example}
@@ -955,14 +954,14 @@ Storage elements may, but need not be, independently addressable
 Words are expected to be independently addressable.
 @end{Discussion}
 
-The following attributes are defined:
+@Leading@;The following attributes are defined:
 
-For @PrefixType{a prefix X that denotes an object, program unit,
+@Leading@;For @PrefixType{a prefix X that denotes an object, program unit,
 or label}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Address>,
   Text=<Denotes the address of the first of the storage elements
-allocated to X.  For a program unit or
+allocated to X. For a program unit or
 label, this value refers to the machine code associated with
 the corresponding body or @nt{statement}.
 The value of this attribute is of type System.Address.>}
@@ -1008,7 +1007,7 @@ via an @nt{attribute_definition_clause}.
   it would violate the @lquotes@;legality determinable via semantic
   dependences@rquotes@; @MetaRulesName.
 
-  AI-00305 @em If X is a task type,
+  AI83-00305 @em If X is a task type,
   then within the body of X,
   X denotes the current task object;
   thus, X'Address denotes the object's address.
@@ -1047,7 +1046,7 @@ or might raise an exception.
 @end{Ramification}
 
 @PDefn2{Term=[recommended level of support], Sec=(Address attribute)}
-The recommended level of support for the Address attribute is:
+@Leading@;The recommended level of support for the Address attribute is:
 @begin{Itemize}
 X'Address should produce a useful result if X is an
 object that is aliased or of a by-reference
@@ -1056,7 +1055,7 @@ type, or is an entity whose Address has been specified.
   Aliased objects are the ones for which the
   Unchecked_Access attribute is allowed;
   hence, these have to be allocated on an addressable
-  boundary anyway.  Similar considerations apply to objects
+  boundary anyway. Similar considerations apply to objects
   of a by-reference type.
 
   An implementation need not go to any trouble
@@ -1148,7 +1147,7 @@ than that.
 @end{MetaRules}
 
 @begin{StaticSem}
-For @PrefixType{a prefix X that denotes a subtype or
+@Leading@;For @PrefixType{a prefix X that denotes a subtype or
 object}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Alignment>,
@@ -1226,7 +1225,7 @@ Alignment.
 @begin{ImplAdvice}
 @PDefn2{Term=[recommended level of support], Sec=(Alignment attribute
 for subtypes)}
-The recommended level of support for the Alignment attribute for
+@Leading@;The recommended level of support for the Alignment attribute for
 subtypes is:
 @begin{Itemize}
 An implementation should support specified
@@ -1245,7 +1244,7 @@ Alignment the implementation ever returns
 by default.
 @end{Itemize}
 
-@PDefn2{Term=[recommended level of support], Sec=(Alignment attribute
+@Leading@PDefn2{Term=[recommended level of support], Sec=(Alignment attribute
 for objects)}
 The recommended level of support for the Alignment attribute for
 objects is:
@@ -1254,7 +1253,7 @@ Same as above, for subtypes, but in addition:
 
 For stand-alone library-level objects of statically constrained
 subtypes, the implementation should support all Alignments
-supported by the target linker.  For example, page alignment
+supported by the target linker. For example, page alignment
 is likely to be supported for such objects, but not for subtypes.
 @end{Itemize}
 @end{ImplAdvice}
@@ -1274,7 +1273,7 @@ A @nt{component_clause}, Component_Size clause, or a @nt{pragma} Pack
 can override a specified Alignment.
 @begin{Discussion}
 Most objects are allocated by the implementation; for these, the
-implementation obeys the Alignment.  The implementation is of course
+implementation obeys the Alignment. The implementation is of course
 allowed to make an object @i{more} aligned than its Alignment requires
 @em an object whose Alignment is 4 might just happen to land at an
 address that's a multiple of 4096.
@@ -1285,14 +1284,14 @@ parameters to 4 storage elements.
 
 Hence, one might initially assume that the implementation could
 evilly make all Alignments 1 by default, even though integers, say,
-are normally aligned on a 4-storage-element boundary.  However, the
+are normally aligned on a 4-storage-element boundary. However, the
 implementation cannot get away with that @em if the Alignment is 1,
 the generated code cannot assume an Alignment of 4, at least not for
 objects allocated outside the control of the implementation.
 
 Of course implementations can assume anything they can prove, but
 typically an implementation will be unable to prove much about the
-alignment of, say, an imported object.  Furthermore, the information
+alignment of, say, an imported object. Furthermore, the information
 about where an address @lquotes@;came from@rquotes@; can be lost to the compiler due to
 separate compilation.
 
@@ -1319,9 +1318,9 @@ However, it might be taken as advice on some implementations.
 It is an error for an Address clause to disobey the object's Alignment.
 The error cannot be detected at compile time, in general, because the
 Address is not necessarily known at compile time (and is almost
-certainly not static).  We do not require a run-time check, since
+certainly not static). We do not require a run-time check, since
 efficiency seems paramount here, and Address clauses are treading on
-thin ice anyway.  Hence, this misuse of Address clauses is just like any
+thin ice anyway. Hence, this misuse of Address clauses is just like any
 other misuse of Address clauses @em it's erroneous.
 
 A type extension can have a stricter Alignment than its parent.
@@ -1331,31 +1330,31 @@ The Alignment of a class-wide type or object will have to be the
 maximum possible Alignment of any extension.
 
 The recommended level of support for the Alignment attribute is
-intended to reflect a minimum useful set of capabilities.  An
+intended to reflect a minimum useful set of capabilities. An
 implementation can assume that all Alignments are multiples of each
 other @em 1, 2, 4, and 8 might be the only supported Alignments for
-subtypes.  An Alignment of 3 or 6 is unlikely to be useful.
+subtypes. An Alignment of 3 or 6 is unlikely to be useful.
 For objects that can be allocated statically, we recommend that
-the implementation support larger alignments, such as 4096.  We do
+the implementation support larger alignments, such as 4096. We do
 not recommend such large alignments for subtypes, because the maximum
 subtype alignment will also have to be used as the alignment of stack
-frames, heap objects, and class-wide objects.  Similarly, we do not
+frames, heap objects, and class-wide objects. Similarly, we do not
 recommend such large alignments for stack-allocated objects.
 
 If the maximum default Alignment is 8
 (say, Long_Float'Alignment = 8),
 then the implementation can refuse to accept stricter alignments
-for subtypes.  This simplifies the generated code, since the compiler
+for subtypes. This simplifies the generated code, since the compiler
 can align the stack and class-wide types to this maximum without a
 substantial waste of space (or time).
 
 Note that the recommended level of support takes into account
-interactions between Size and Alignment.  For example, on a 32-bit
+interactions between Size and Alignment. For example, on a 32-bit
 machine with 8-bit storage elements, where load and store
 instructions have to be aligned according to the size of the thing
 being loaded or stored, the implementation might accept an Alignment
 of 1 if the Size is 8, but might reject an Alignment of 1 if the Size
-is 32.  On a machine where unaligned loads and stores are merely
+is 32. On a machine where unaligned loads and stores are merely
 inefficient (as opposed to causing hardware traps),
 we would expect an Alignment of 1 to be supported for any Size.
 @end{Discussion}
@@ -1368,8 +1367,7 @@ which are an obsolete version of Alignment clauses).
 @end{DiffWord83}
 
 @begin{StaticSem}
-For @PrefixType{a prefix X that denotes an
-object}:
+@Leading@;For @PrefixType{a prefix X that denotes an object}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Size>,
   Text=<Denotes the size in bits of
@@ -1393,7 +1391,7 @@ and its value nonnegative.
 @end{StaticSem}
 
 @begin{ImplAdvice}
-@PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
+@Leading@PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
 The recommended level of support for the Size attribute
 of objects is:
 @begin{Itemize}
@@ -1405,9 +1403,9 @@ Alignment is nonzero).
 @end{ImplAdvice}
 
 @begin{StaticSem}
-For @PrefixType{every subtype S}:
+@Leading@Keepnext@;For @PrefixType{every subtype S}:
 @begin{Description}
-@Attribute{Prefix=<S>, AttrName=<Size>,
+@AttributeLeading{Prefix=<S>, AttrName=<Size>,
   Text=<If S is definite,
 denotes the size @Redundant{(in bits)}
 that the implementation would choose for
@@ -1437,7 +1435,7 @@ the expression of such a clause shall be static
 and its value nonnegative.
 @ImplDef{The meaning of Size for indefinite subtypes.}
   @begin{Reason}
-  The effects of specifying the Size of a subtype are:
+  @Leading@;The effects of specifying the Size of a subtype are:
   @begin{Itemize}
     Unchecked_Conversion works in a predictable manner.
 
@@ -1467,7 +1465,7 @@ and its value nonnegative.
   It might raise an exception on some implementations.
   @end{Reason}
   @begin{Ramification}
-  A Size clause for a numeric subtype need not
+  @Leading@;A Size clause for a numeric subtype need not
   affect the underlying numeric type.
   For example, if I say:
   @begin{Example}
@@ -1504,7 +1502,7 @@ In an implementation, Boolean'Size shall be 1.
 @end{ImplReq}
 
 @begin{ImplAdvice}
-If the Size of a subtype is specified,
+@Leading@;If the Size of a subtype is specified,
 and allows for efficient independent addressability
 (see @RefSecNum{Shared Variables}) on the target architecture,
 then the Size of the following objects of the subtype should equal the
@@ -1568,7 +1566,7 @@ That's what Pack @nt{pragma}s, @nt{record_representation_clause}s,
 and Component_Size clauses are for.
 @end{Reason}
 
-@PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
+@Leading@PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
 The recommended level of support for the Size attribute
 of subtypes is:
 @begin{Itemize}
@@ -1667,8 +1665,8 @@ reflects this representation.
   then the implementation will not be able to perform the checking
   (not using this method, anyway).
 
-  The fact that the size of an object is not necessarily the same as its
-  subtype can be confusing:
+  @Leading@;The fact that the size of an object is not necessarily the same
+  as its subtype can be confusing:
   @begin{Example}
 @key[type] Device_Register @key[is] @key[range] 0..2**8 - 1;
 @key[for] Device_Register'Size @key[use] 8; --@RI{ Confusing!}
@@ -1679,7 +1677,7 @@ My_Device : Device_Register;
   The programmer might think that My_Device'Size is 8,
   and that My_Device'Address points at an 8-bit location.
   However, this is not true.
-  In Ada 83 (and in Ada 9X), My_Device'Size might well be 32,
+  In Ada 83 (and in Ada 95), My_Device'Size might well be 32,
   and My_Device'Address might well point at the high-order 8 bits of
   the 32-bit object, which are always all zero bits.
   If My_Device'Address is passed to an assembly language subprogram,
@@ -1697,7 +1695,7 @@ My_Device : Device_Register;
   8 bits to all components of subtype Device_Register, if packed.)
   @end{Reason}
   @begin{Ramification}
-  The correct way to write the above code is like this:
+  @Leading@;The correct way to write the above code is like this:
   @begin{Example}
 @key[type] Device_Register @key[is] @key[range] 0..2**8 - 1;
 My_Device : Device_Register;
@@ -1709,13 +1707,13 @@ My_Device : Device_Register;
   then this will be illegal.
   However, on a machine where an 8-bit device register exists,
   the implementation will probably be able to accept 8-bit stand-alone
-  objects.  Therefore, My_Device'Size will be 8,
+  objects. Therefore, My_Device'Size will be 8,
   and My_Device'Address will point at those 8 bits,
   as desired.
 
   If an object of subtype Device_Register is passed to a foreign
   language subprogram, it will be passed according to that subprogram's
-  conventions.  Most foreign language implementations have similar
+  conventions. Most foreign language implementations have similar
   run-time model restrictions.
   For example, when passing to a C function,
   where the argument is of
@@ -1756,7 +1754,7 @@ rather than letting implementations define their meaning.
 @end{DiffWord83}
 
 @begin{StaticSem}
-For @PrefixType{a prefix T that denotes a task
+@Leading@;For @PrefixType{a prefix T that denotes a task
 object @Redundant[(after any implicit dereference)]}:
 @begin{Description}
 @Attribute{Prefix=<T>, AttrName=<Storage_Size>,
@@ -1765,7 +1763,7 @@ object @Redundant[(after any implicit dereference)]}:
 The value of this attribute is of the type
 @i{universal_integer}.
 The Storage_Size includes the size of the task's stack,
-if any.  The language does not specify whether or
+if any. The language does not specify whether or
 not it includes other storage associated with the task
 (such as the @lquotes@;task control block@rquotes@; used by some
 implementations.)>}
@@ -1801,7 +1799,7 @@ reserved for the execution of a task.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Storage_Size is as follows:
+@Leading@;The form of a @nt{pragma} Storage_Size is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Storage_Size)(@Syn2{expression});'
@@ -1832,7 +1830,7 @@ is at least the value of the @nt<expression>.
   amount.
   For example, if the implementation always allocates in
   chunks of 4096 bytes, the number 200 might be rounded
-  up to 4096.  Also, if the user specifies a negative
+  up to 4096. Also, if the user specifies a negative
   number, the implementation has to normalize this to 0,
   or perhaps to a positive number.
 @end{Ramification}
@@ -1845,7 +1843,7 @@ accommodate the requested Storage_Size.
 @end{RunTime}
 
 @begin{StaticSem}
-For @PrefixType{a prefix X that denotes an array subtype or array
+@Leading@;For @PrefixType{a prefix X that denotes an array subtype or array
 object @Redundant[(after any implicit dereference)]}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Component_Size>,
@@ -1874,7 +1872,7 @@ For an array object A, A'Component_Size = A(I)'Size for any index I.
 @end{StaticSem}
 
 @begin{ImplAdvice}
-@PDefn2{Term=[recommended level of support], Sec=(Component_Size attribute)}
+@Leading@PDefn2{Term=[recommended level of support], Sec=(Component_Size attribute)}
 The recommended level of support for the Component_Size attribute is:
 @begin{Itemize}
 An implementation need not support specified Component_Sizes that
@@ -1906,7 +1904,7 @@ or it might not have any internal gaps at all.
 
 @begin{StaticSem}
 
-For @PrefixType{every subtype S of a tagged type @i(T)
+@Leading@;For @PrefixType{every subtype S of a tagged type @i(T)
 (specific or class-wide)},
 the following attribute is defined:
 @begin{Description}
@@ -1948,7 +1946,7 @@ unit is considered the same in the two partitions.
 same in two different partitions.}
 @begin{Reason}
   These requirements are important because external tags are used
-  for input/output of class-wide types.  These requirements ensure
+  for input/output of class-wide types. These requirements ensure
   that what is written by one program can be read back by some other
   program so long as they share the same declaration for the
   type (and everything it depends on).
@@ -1996,7 +1994,7 @@ a language-defined attribute specifiable if it isn't.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of attribute definition clauses:}
+@leading@keepnext@i{Examples of attribute definition clauses:}
 @begin{Example}
 Byte : @key[constant] := 8;
 Page : @key[constant] := 2**12;
@@ -2041,7 +2039,7 @@ in Ada 83 this rule was stated in the text.
 In Ada 83, the relationship between a @nt{representation_clause}
 specifying a certain aspect and an attribute that queried that
 aspect was unclear.
-In Ada 9X, they are the same,
+In Ada 95, they are the same,
 except for certain explicit exceptions.
 @end{DiffWord83}
 
@@ -2089,7 +2087,7 @@ satisfy the predefined ordering relation of the type.
   Each value of the enumeration type has to be given an internal code,
   even if the first subtype of the enumeration type is constrained
   to only a subrange (this is only possible if the enumeration type
-  is a derived type).  This @lquotes@;full coverage@rquotes@; requirement is important
+  is a derived type). This @lquotes@;full coverage@rquotes@; requirement is important
   because one may refer to Enum'Base'First and Enum'Base'Last, which
   need to have defined representations.
 @end{Reason}
@@ -2114,7 +2112,7 @@ for each value of the type, the internal code shall be equal to
 its position number.
 @begin{Reason}
   This default representation is already used by all known
-  Ada compilers for nonboolean enumeration types.  Therefore,
+  Ada compilers for nonboolean enumeration types. Therefore,
   we make it a requirement so users can depend on it, rather
   than feeling obliged to supply for every enumeration type
   an enumeration representation clause that is equivalent
@@ -2123,7 +2121,7 @@ its position number.
 @begin{Discussion}
   For boolean types, it is relatively common to use all ones for
   True, and all zeros for False, since some hardware supports
-  that directly.  Of course, for a one-bit Boolean object
+  that directly. Of course, for a one-bit Boolean object
   (like in a packed array), False is presumably zero and True
   is presumably one (choosing the reverse would be extremely
   unfriendly!).
@@ -2131,7 +2129,7 @@ its position number.
 @end{ImplReq}
 
 @begin{ImplAdvice}
-@PDefn2{Term=[recommended level of support], Sec=(@nt{enumeration_representation_clause})}
+@Leading@PDefn2{Term=[recommended level of support], Sec=(@nt{enumeration_representation_clause})}
 The recommended level of support for @nt{enumeration_representation_clause}s is:
 @begin{Itemize}
 An implementation should support at least the internal codes in the
@@ -2141,7 +2139,7 @@ An implementation need not support
 @begin{Ramification}
 The implementation may support numbers outside the above
 range, such as numbers greater than System.Max_Int.
-See AI-00564.
+See AI83-00564.
 @end{Ramification}
 @begin{Reason}
 The benefits of specifying the internal coding of a boolean type do
@@ -2162,7 +2160,7 @@ For example, Pos always returns the position number, @i{not} the
 internal integer code that might have been specified in a
 @nt{representation_clause}.
 @begin{Discussion}
-Suppose the enumeration type in question is derived:
+@Leading@;Suppose the enumeration type in question is derived:
 @begin{Example}
 @key[type] T1 @key[is] (Red, Green, Blue);
 @key[subtype] S1 @key[is] T1 @key[range] Red .. Green;
@@ -2170,7 +2168,7 @@ Suppose the enumeration type in question is derived:
 @key[for] S2 @key[use] (Red => 10, Green => 20, Blue => 30);
 @end{Example}
 
-The @nt{representation_clause} has to specify values for all
+@Leading@;The @nt{representation_clause} has to specify values for all
 enumerals, even ones that are not in S2 (such as Blue).
 The Base attribute can be used to get at these values.
 For example:
@@ -2187,7 +2185,7 @@ but it didn't seem worth the trouble.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of an enumeration representation clause:}
+@leading@keepnext@i{Example of an enumeration representation clause:}
 @begin{Example}
 @key[type] Mix_Code @key[is] (ADD, SUB, MUL, LDA, STA, STZ);
 
@@ -2197,9 +2195,9 @@ but it didn't seem worth the trouble.
 @end{Examples}
 
 @begin{Extend83}
-As in other similar contexts, Ada 9X allows expressions of any integer type,
+As in other similar contexts, Ada 95 allows expressions of any integer type,
 not just expressions of type @i{universal_integer}, for the component
-expressions in the @nt<enumeration_aggregate>.  The preference rules
+expressions in the @nt<enumeration_aggregate>. The preference rules
 for the predefined operators of @i{root_integer} eliminate
 any ambiguity.
 
@@ -2322,7 +2320,7 @@ a @nt{record_representation_clause} for the type,
 except as the @SynI{component_}@nt<local_name>
 of a @nt{component_clause}.
 @begin{Reason}
-    It might seem strange to make the
+    @Leading@;It might seem strange to make the
     @nt{record_representation_clause} part of the declarative region,
     and then disallow mentions of the components within almost all of
     the @nt{record_representation_clause}.
@@ -2424,7 +2422,7 @@ place is not specified explicitly in the @nt<record_representation_clause>.
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-@PDefn2{Term=[recommended level of support], Sec=(@nt{record_representation_clause})}
+@Leading@PDefn2{Term=[recommended level of support], Sec=(@nt{record_representation_clause})}
 The recommended level of support for @nt{record_representation_clause}s is:
 @begin{Itemize}
 An implementation should support storage places that can be extracted
@@ -2479,7 +2477,7 @@ passed by reference, as is required.
 @begin{Notes}
 If no @nt{component_clause} is given for a component, then the
 choice of the storage place for the component is left to the
-implementation.  If @nt{component_clause}s are given for all components,
+implementation. If @nt{component_clause}s are given for all components,
 the @nt{record_representation_clause} completely specifies the
 representation of the type and will be obeyed exactly by the
 implementation.
@@ -2510,7 +2508,7 @@ components out of the way.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of specifying the layout of a record type:}
+@leading@keepnext@i{Example of specifying the layout of a record type:}
 @begin{Example}
 Word : @key[constant] := 4;  --@RI{  storage element is byte, 4 bytes per word}
 
@@ -2552,9 +2550,9 @@ Word : @key[constant] := 4;  --@RI{  storage element is byte, 4 bytes per word}
 
 @begin{Notes}
 @i{Note on the example:}
-The @nt{record_representation_clause} defines the record layout.  The
+The @nt{record_representation_clause} defines the record layout. The
 Size clause guarantees that (at least) eight storage elements are used
-for objects of the type.  The Alignment clause guarantees that
+for objects of the type. The Alignment clause guarantees that
 aliased, imported, or exported objects of the type will have
 addresses divisible by eight.
 @end{Notes}
@@ -2577,7 +2575,7 @@ We have corrected that oversight.
 @LabeledSubClause{Storage Place Attributes}
 
 @begin{StaticSem}
-@Defn2{Term=[storage place attributes], Sec=(of a component)}
+@Leading@Defn2{Term=[storage place attributes], Sec=(of a component)}
 For @PrefixType{a component C of a composite, non-array
 object R},
 the @i{storage place attributes} are defined:
@@ -2694,7 +2692,7 @@ bits that represent a component as an unsigned integer value).
 Low_Order_First @Redundant[(known in the vernacular as @lquotes@;little endian@rquotes@;)]
 means the opposite: the first bit is the least significant.
 
-For @PrefixType{every specific record subtype S},
+@Leading@;For @PrefixType{every specific record subtype S},
 the following attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Bit_Order>,
@@ -2746,7 +2744,7 @@ representation item.
 @end{StaticSem}
 
 @begin{ImplAdvice}
-@PDefn2{Term=[recommended level of support], Sec=(bit ordering)}
+@Leading@PDefn2{Term=[recommended level of support], Sec=(bit ordering)}
 The recommended level of support for the nondefault bit ordering is:
 @begin{Itemize}
   If Word_Size = Storage_Unit, then
@@ -2759,7 +2757,7 @@ the implementation should support both bit orderings.
 We don't push for support of the nondefault bit ordering when
 Word_Size > Storage_Unit (except
 of course for upward compatibility with a preexisting implementation
-whose Ada 83 bit order did not correspond to the required Ada 9X
+whose Ada 83 bit order did not correspond to the required Ada 95
 default bit order), because
 implementations are required to support storage positions that cross
 storage element boundaries when Word_Size > Storage_Unit.
@@ -2772,7 +2770,7 @@ but the splitting problem need not occur.
 @end{ImplAdvice}
 
 @begin{Extend83}
-The Bit_Order attribute is new to Ada 9X.
+The Bit_Order attribute is new to Ada 95.
 @end{Extend83}
 
 @LabeledClause{Change of Representation}
@@ -2791,7 +2789,7 @@ then explicit conversion can be used to pack or unpack an array.
 
 To convert a record from one representation to another,
 two record types with a common ancestor type need to be declared,
-with no inherited subprograms.  Distinct representations can then
+with no inherited subprograms. Distinct representations can then
 be specified for the record types, and explicit conversion between
 the types can be used to effect a change in representation.]
 @begin{Ramification}
@@ -2802,7 +2800,7 @@ It does not work at all for tagged types.
 @end{Intro}
 
 @begin{Examples}
-@i{Example of change of representation:}
+@leading@keepnext@i{Example of change of representation:}
 @begin{Example}
 --@RI{ Packed_Descriptor and Descriptor are two different types}
 --@RI{ with identical characteristics, apart from their}
@@ -2839,7 +2837,7 @@ characteristics.]
 @end{Intro}
 
 @begin{StaticSem}
-The following language-defined library package exists:
+@Leading@;The following language-defined library package exists:
 @ImplDef{The contents of the visible part of package System
 and its language-defined children.}
 @begin{Example}
@@ -2918,7 +2916,7 @@ System_Name represents the current machine configuration.
 The named numbers Fine_Delta and Tick are of the type
 @i{universal_real}; the others are of the type @i{universal_integer}.
 
-The meanings of the named numbers are:
+@Leading@;The meanings of the named numbers are:
 @begin{Description}
 @Redundant[
 Min_Int @\The smallest (most negative) value
@@ -3098,7 +3096,7 @@ have been moved to the Real Time Annex.
 @LabeledSubClause{The Package System.Storage_Elements}
 
 @begin{StaticSem}
-The following language-defined library package exists:
+@Leading@;The following language-defined library package exists:
 @begin{Example}
 @ChildUnit{Parent=[System],Child=[Storage_Elements]}@key[package] System.Storage_Elements @key[is]
    @key{pragma} Preelaborate(System.Storage_Elements);
@@ -3245,7 +3243,7 @@ converts from that record type to type Address.
 
 @begin{StaticSem}
 
-The following language-defined generic library package exists:
+@Leading@;The following language-defined generic library package exists:
 @begin{Example}
 @ChildUnit{Parent=[System],Child=[Address_@!To_@!Access_@!Conversions]}@key[generic]
     @key[type] Object(<>) @key[is] @key[limited] @key[private];
@@ -3297,10 +3295,10 @@ exist, when passing an address that did not come from the Address
 attribute of an object of type Object.
 
 One might wonder why To_Pointer and To_Address are any better than
-unchecked conversions.  The answer is that Address does not necessarily
-have the same representation as an access type.  For example, an access
+unchecked conversions. The answer is that Address does not necessarily
+have the same representation as an access type. For example, an access
 value might point at the bounds of an array when an address would point
-at the first element.  Or an access value might be an offset in words
+at the first element. Or an access value might be an offset in words
 from someplace, whereas an address might be an offset in bytes from the
 beginning of memory.
 @end{Reason}
@@ -3418,7 +3416,7 @@ using the features in @RefSec{Interface to Other Languages}.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a code statement:}
+@leading@keepnext@i{Example of a code statement:}
 @begin{Example}
 M : Mask;
 @key[procedure] Set_Mask; @key[pragma] Inline(Set_Mask);
@@ -3433,7 +3431,7 @@ M : Mask;
 @end{Examples}
 
 @begin{Extend83}
-Machine code functions are allowed in Ada 9X;
+Machine code functions are allowed in Ada 95;
 in Ada 83, only procedures were allowed.
 @end{Extend83}
 
@@ -3458,7 +3456,7 @@ of the generic function Unchecked_Conversion.]
 @end{Intro}
 
 @begin{StaticSem}
-The following language-defined generic library function exists:
+@Leading@keepnext@;The following language-defined generic library function exists:
 @begin{Example}
 @key[generic]
    @key[type] Source(<>) @key[is] @key[limited] @key[private];
@@ -3482,7 +3480,7 @@ except when the actual is an unconstrained composite subtype,
 in which case the subtype is constrained by the bounds or
 discriminants of the value of the actual expression passed to S.]
 
-If all of the following are true,
+@Leading@;If all of the following are true,
 the effect of an unchecked conversion is to return the
 value of an object of the target subtype whose representation is the
 same as that of the source object S:
@@ -3571,7 +3569,7 @@ The implementation should not generate extra code to check for zero bits
 
 @end{ImplNote}
 
-@PDefn2{Term=[recommended level of support], Sec=(unchecked conversion)}
+@Leading@PDefn2{Term=[recommended level of support], Sec=(unchecked conversion)}
 The recommended level of support for unchecked conversions is:
 @begin{Itemize}
 Unchecked conversions should be supported and should be reversible in
@@ -3606,7 +3604,7 @@ subclause.
 @end{Intro}
 
 @begin{RunTime}
-@RootDefn{normal state of an object}
+@Leading@RootDefn{normal state of an object}
 @RootDefn{abnormal state of an object}
 When an object is first created, and any explicit or default
 initializations have been performed, the object
@@ -3669,7 +3667,7 @@ The same is true if the discriminants have been destroyed.
 @end{Erron}
 
 @begin{Bounded}
-@Defn{invalid representation}
+@Leading@Defn{invalid representation}
 If the representation of a scalar object does not represent a value of
 the object's subtype
 (perhaps because the object was not initialized),
@@ -3739,7 +3737,7 @@ This depends on out-of-range values being checked before
 assignment (that is, checks are not optimized away unless they
 are proven redundant).
 
-Consider the following example:
+@Leading@;Consider the following example:
 @begin{Example}
 @key[type] My_Int @key[is] @key[range] 0..99;
 @key[function] Safe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Integer);
@@ -3834,7 +3832,7 @@ and the like.
 @end{Intro}
 
 @begin{StaticSem}
-For @PrefixType{a
+@Leading@;For @PrefixType{a
 @nt<prefix> X that denotes a scalar object
 @Redundant[(after any implicit dereference)]},
 the following attribute is defined:
@@ -3856,7 +3854,7 @@ The value of this attribute is of the predefined type Boolean.>}
 @end{StaticSem}
 
 @begin{Notes}
-Invalid data can be created in the following cases
+@Leading@;Invalid data can be created in the following cases
 (not counting erroneous or unpredictable execution):
 @begin{Itemize}
 an uninitialized scalar object,
@@ -3906,7 +3904,7 @@ causes erroneous execution (see @RefSecNum{Names}).
 @end{Notes}
 
 @begin{Extend83}
-X'Valid is new in Ada 9X.
+X'Valid is new in Ada 95.
 @end{Extend83}
 
 @LabeledClause{Unchecked Access Value Creation}
@@ -3918,7 +3916,7 @@ in an unsafe manner @em the programmer is responsible for preventing
 @end{Intro}
 
 @begin{StaticSem}
-The following attribute is defined for @PrefixType{a @nt{prefix} X that
+@Leading@;The following attribute is defined for @PrefixType{a @nt{prefix} X that
 denotes an aliased view of an object}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Unchecked_Access>,
@@ -3937,7 +3935,7 @@ it is as if X were declared immediately within a library package.>}
 This attribute is provided to support the situation where a local
 object is to be inserted into a global linked data structure, when the
 programmer knows that it will always be removed from the data structure prior
-to exiting the object's scope.  The Access attribute would
+to exiting the object's scope. The Access attribute would
 be illegal in this case
 (see @RefSec{Operations of Access Types}).
 @begin{Ramification}
@@ -3972,7 +3970,7 @@ There is no Unchecked_Access attribute for subprograms.
 
   If desired, an instance of Unchecked_Conversion can be used to create
   an access value of a global access-to-subprogram type that
-  designates a local subprogram.  The semantics of using
+  designates a local subprogram. The semantics of using
   such a value are not specified by the language.
   In particular, it is not specified what happens if such
   subprograms make up-level references; even if the frame
@@ -4088,7 +4086,7 @@ However, in some cases the implementation may choose to associate
 more than one memory block with a given pool element.
 @end{Discussion}
 
-For @PrefixType{every access subtype S},
+@Leading@;For @PrefixType{every access subtype S},
 the following attributes are defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Storage_Pool>,
@@ -4203,7 +4201,7 @@ The Storage_Size function and attribute will return the actual
 size, rather than the requested size.
 Comments about rounding up, zero, and negative
 on task Storage_Size apply here, as well.
-See also AI-00557, AI-00558, and AI-00608.
+See also AI83-00557, AI83-00558, and AI83-00608.
 
 The expression in a Storage_Size clause
 need not be static.
@@ -4278,7 +4276,7 @@ access-to-constant type should
 not have overhead to support deallocation of individual objects.
 @begin{Ramification}
 Unchecked_Deallocation is not defined for
-such types.  If the access-to-constant type is library-level,
+such types. If the access-to-constant type is library-level,
 then no deallocation (other than at partition completion) will
 ever be necessary, so if the size needed by an @nt{allocator}
 of the type is known at link-time, then the allocation
@@ -4344,10 +4342,10 @@ pool type.
 For example, Finalize might reclaim blocks of storage that are allocated
 separately from the pool object itself.
 
-The writer of the user-defined allocation and deallocation
+@Leading@;The writer of the user-defined allocation and deallocation
 procedures, and users of @nt{allocator}s for the associated access
 type, are responsible for dealing with any interactions with
-tasking.  In particular:
+tasking. In particular:
 @begin{itemize}
   If the @nt{allocator}s are used in different tasks, they require
 mutual exclusion.
@@ -4370,7 +4368,7 @@ which is somewhat unusual for attributes.
 
 The calls to Allocate, Deallocate, and Storage_Size are dispatching
 calls @em this follows from the fact that the actual parameter for
-Pool is T'Storage_Pool, which is of type Root_Storage_Pool'Class.  In
+Pool is T'Storage_Pool, which is of type Root_Storage_Pool'Class. In
 many cases (including all cases in which Storage_Pool is not
 specified), the compiler can determine the tag statically.
 However, it is possible to construct cases where it cannot.
@@ -4393,9 +4391,9 @@ code.
 @end{Notes}
 
 @begin{Examples}
-To associate an access type with a storage pool object, the user
+@Leading@;To associate an access type with a storage pool object, the user
 first declares a pool object of some type derived from
-Root_Storage_Pool.  Then, the user defines its Storage_Pool
+Root_Storage_Pool. Then, the user defines its Storage_Pool
 attribute, as follows:
 
 @begin{Example}
@@ -4405,7 +4403,9 @@ Pool_Object : Some_Storage_Pool_Type;
 @key[for] T'Storage_Pool @key[use] Pool_Object;
 @end{Example}
 
-Another access type may be added to an existing storage pool, via:
+@begin{Wide}
+@Leading@;Another access type may be added to an existing storage pool, via:
+@end{Wide}
 @begin{Example}
 @key[for] T2'Storage_Pool @key[use] T'Storage_Pool;
 @end{Example}
@@ -4418,11 +4418,10 @@ for T that takes advantage of the fact that T is of a certain size.
 If T2 is not of that size, then the above will probably not work.
 @end{Reason}
 
-As usual, a derivative of Root_Storage_Pool may define additional
-operations.  For example, presuming that Mark_Release_Pool_Type has
+@Leading@;As usual, a derivative of Root_Storage_Pool may define additional
+operations. For example, presuming that Mark_Release_Pool_Type has
 two additional operations, Mark and Release,
 the following is a possible use:
-
 @begin{Example}
 @key[type] Mark_Release_Pool_Type
    (Pool_Size : Storage_Elements.Storage_Count;
@@ -4445,7 +4444,7 @@ Release(MR_Pool); --@RI{ Reclaim the storage.}
 @end{Examples}
 
 @begin{Extend83}
-User-defined storage pools are new to Ada 9X.
+User-defined storage pools are new to Ada 95.
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -4453,7 +4452,7 @@ Ada 83 had a concept called a @lquotes@;collection,@rquotes@;
 which is similar to what we call a storage pool.
 All access types in the same derivation class
 shared the same collection.
-In Ada 9X, all access types in the same derivation class
+In Ada 95, all access types in the same derivation class
 share the same storage pool,
 but other (unrelated) access types can also share the same storage pool,
 either by default, or as specified by the user.
@@ -4473,7 +4472,7 @@ types.]
 @end{Intro}
 
 @begin{StaticSem}
-For @PrefixType{every subtype S},
+@Leading@;For @PrefixType{every subtype S},
 the following attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Max_Size_In_Storage_Elements>,
@@ -4504,7 +4503,7 @@ the generic procedure Unchecked_Deallocation.]
 @end{Intro}
 
 @begin{StaticSem}
-The following language-defined generic library procedure exists:
+@leading@keepnext@;The following language-defined generic library procedure exists:
 @begin{Example}
 @key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
@@ -4521,7 +4520,7 @@ for instances of Unchecked_Deallocation.
 @end{StaticSem}
 
 @begin{RunTime}
-Given an instance of Unchecked_Deallocation
+@Leading@;Given an instance of Unchecked_Deallocation
 declared as follows:
 @begin{Example}
 @key[procedure] Free @key[is]
@@ -4529,7 +4528,9 @@ declared as follows:
         @RI[object_subtype_name], @RI[access_to_variable_subtype_name]);
 @end{Example}
 
-Procedure Free has the following effect:
+@begin{Wide}
+@Leading@Keepnext@;Procedure Free has the following effect:
+@end{Wide}
 @begin{Enumerate}
 After executing Free(X), the value of X is @key{null}.
 
@@ -4570,9 +4571,8 @@ their storage can be reused for other purposes.
 @end{RunTime}
 
 @begin{Bounded}
-It is a bounded error to free a discriminated, unterminated
-task object.
-The possible consequences are:
+@Leading@;It is a bounded error to free a discriminated, unterminated
+task object. The possible consequences are:
 @begin{Reason}
   This is an error because the task might refer to its discriminants,
   and the discriminants might be deallocated by freeing the task object.
@@ -4646,7 +4646,7 @@ created by @nt<allocator>s of a given access type.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Controlled is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Controlled is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Controlled)(@SynI{first_subtype_}@Syn2{local_name});'
@@ -4699,9 +4699,8 @@ then it should provide a means for deferring garbage collection of
 those controlled objects.
 @end{ImplNote}
 @begin{Reason}
-  This allows the manager of a resource released
-  by a Finalize operation to defer garbage collection
-  during its critical regions;
+  @Leading@;This allows the manager of a resource released by a
+  Finalize operation to defer garbage collection during its critical regions;
   it is up to the author of the Finalize operation to do so.
   Garbage collection, at least in some systems,
   can happen asynchronously with respect to normal user code.
@@ -4822,7 +4821,7 @@ simpler run-time environments.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Restrictions is as follows:
+@Leading@keepnext@;The form of a @nt{pragma} Restrictions is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Restrictions)(@Syn2{restriction}{, @Syn2{restriction}});'
@@ -4897,7 +4896,7 @@ use of the more efficient and safe one.
 @end{Notes}
 
 @begin{Extend83}
-Pragma Restrictions is new to Ada 9X.
+Pragma Restrictions is new to Ada 95.
 @end{Extend83}
 
 @LabeledClause{Streams}
@@ -4919,15 +4918,15 @@ but that is not required.
 @end{Intro}
 
 @begin{Extend83}
-Streams are new in Ada 9X.
+Streams are new in Ada 95.
 @end{Extend83}
 
 @LabeledSubClause{The Package Streams}
 
 @begin{StaticSem}
 The abstract type Root_Stream_Type is the root type of the class of
-stream types.  The types in this class represent different kinds of
-streams.  A new stream type is defined by extending the root type
+stream types. The types in this class represent different kinds of
+streams. A new stream type is defined by extending the root type
 (or some other stream type), overriding the Read and Write
 operations, and optionally defining additional primitive
 subprograms,
@@ -4966,8 +4965,8 @@ or can call the Read and Write attributes of other types.)
 @end{example}
 
 The Read operation transfers Item'Length stream elements from
-the specified stream to fill the array Item.  The index of the last stream
-element transferred is returned in Last.  Last is less than Item'Last
+the specified stream to fill the array Item. The index of the last stream
+element transferred is returned in Last. Last is less than Item'Last
 only if the end of the stream is reached.
 
 The Write operation appends Item to the specified stream.
@@ -5033,11 +5032,11 @@ the tag is not included.
 elementary types in terms of stream elements.}
 @begin{Reason}
   A discriminant with a default value is treated simply as
-  a component of the object.  On the other hand,
+  a component of the object. On the other hand,
   an array bound or a discriminant without a default value,
   is treated as @lquotes@;descriptor@rquotes@; or @lquotes@;dope@rquotes@; that must be provided in order
   to create the object and thus is logically separate from the regular
-  components.  Such @lquotes@;descriptor@rquotes@; data are written by 'Output and
+  components. Such @lquotes@;descriptor@rquotes@; data are written by 'Output and
   produced as part of the delivered result by the 'Input function,
   but they are not written by 'Write nor read by 'Read.
   A tag is like a discriminant without a default.
@@ -5049,7 +5048,7 @@ elementary types in terms of stream elements.}
   whether it is the default or is user-specified.
 @end{Ramification}
 
-For @PrefixType{every subtype S'Class of a class-wide type
+@Leading@;For @PrefixType{every subtype S'Class of a class-wide type
 @i(T)'Class}:
 @begin{Description}
 @AttributeLeading{Prefix=<S'Class>, AttrName=<Write>,
@@ -5128,7 +5127,7 @@ S'Output to determine how much to read.>}
 @end{Description}
 @EndPrefixType{}
 
-Unless overridden by an @nt<attribute_definition_clause>, these
+@Leading@;Unless overridden by an @nt<attribute_definition_clause>, these
 subprograms execute as follows:
 @begin(Itemize)
 If @i(T) is an array type, S'Output first writes the bounds,
@@ -5143,7 +5142,7 @@ taken from the stream), initializes it with S'Read, and returns
 the value of the object.
 @end(Itemize)
 
-For @PrefixType{every subtype S'Class of a class-wide type
+@Leading@;For @PrefixType{every subtype S'Class of a class-wide type
 @i(T)'Class}:
 @begin{Description}
 @AttributeLeading{Prefix=<S'Class>, AttrName=<Output>,
@@ -5191,7 +5190,7 @@ Constraint_Error is raised if this check fails.
 For other scalar components, no check is made.
 For each component that is of an access type, if the implementation can
 detect that the value returned by Read for the component is not
-a value of its subtype, Constraint_Error is raised.  If the value
+a value of its subtype, Constraint_Error is raised. If the value
 is not a value of its subtype and this error is not detected,
 the component has an abnormal value, and erroneous execution
 can result
@@ -5238,14 +5237,14 @@ class-wide types descended from S.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of user-defined Write attribute:}
+@leading@keepnext@i{Example of user-defined Write attribute:}
 @begin{Example}
 @key[procedure] My_Write(
   Stream : @key[access] Ada.Streams.Root_Stream_Type'Class; Item : My_Integer'Base);
 @key(for) My_Integer'Write @key(use) My_Write;
 @end{Example}
 @begin{Discussion}
-@i{Example of network input/output using input output attributes:}
+@leading@keepnext@i{Example of network input/output using input output attributes:}
 @begin{Example}
 @key(with) Ada.Streams; @key(use) Ada.Streams;
 @key(generic)
@@ -5305,9 +5304,9 @@ the evaluation of static expressions depends on overload resolution,
 and overload resolution sometimes depends on the value of a
 static expression.
 (The dependence of static evaluation upon overload resolution is
-obvious.  The dependence in the other direction is more subtle.
+obvious. The dependence in the other direction is more subtle.
 There are three rules that require static expressions in contexts that
-can appear in declarative places:  The expression in an
+can appear in declarative places: The expression in an
 @nt{attribute_designator} shall be static.
 In a record aggregate, variant-controlling discriminants shall be static.
 In an array aggregate with more than one named association,
@@ -5337,7 +5336,8 @@ generally refer to places in the program text,
 as opposed to times at run time.)
 @end{Reason}
 @begin{Discussion}
-The @lquotes@;implementation details@rquotes@; we're talking about above are:
+@leading@;The @lquotes@;implementation details@rquotes@; we're talking
+about above are:
 @begin{Itemize}
 For a tagged type,
 the implementations of all the primitive subprograms of the type
@@ -5386,7 +5386,7 @@ This is the case for @nt{default_expression}s and @nt{default_name}s.
 @nt{default_expression}s or @nt{default_name}s.)
 
 The compiler should be allowed to evaluate static expressions without
-knowledge of their context.  (I.e. there should not be any special
+knowledge of their context. (I.e. there should not be any special
 rules for static expressions that happen to occur in a context that
 requires a static expression.)
 
@@ -5406,7 +5406,7 @@ code-generation for a nonstatic expression of type @i(T) too early,
 even if we can prove that that expression will be erroneous,
 or will raise an exception.
 
-Here's an example (modified from AI83-00039, Example 3):
+@Leading@;Here's an example (modified from AI83-00039, Example 3):
 @begin{example}
 @key[type] T @key[is]
     @key[record]
@@ -5421,9 +5421,9 @@ Y : Boolean := G(F); --@RI{ doesn't force T in Ada 83}
     @key[end] @key[record];
 @end{example}
 
-AI83-00039 says this is legal.
+@Leading@;AI83-00039 says this is legal.
 Of course, it raises Program_Error because the function bodies aren't
-elaborated yet.  A one-pass compiler has to generate code for an expression of
+elaborated yet. A one-pass compiler has to generate code for an expression of
 type T before it knows the representation of T.
 Here's a similar example, which AI83-00039 also says is legal:
 @begin{example}
@@ -5452,7 +5452,7 @@ To avoid doing that,
 the compiler would have to determine,
 at compile time, that the expression will raise Program_Error.
 
-This is silly.  If we're going to require compilers to detect the exception at
+This is silly. If we're going to require compilers to detect the exception at
 compile time, we might as well formulate the rule as a legality rule.
 
 Compilers should not be required to generate code to load the value
@@ -5471,14 +5471,14 @@ or a @nt{full_type_declaration}).
 The @i(freezing) of an entity occurs at one or more places
 (@i{freezing points}) in the program
 text where the representation for the entity has to be
-fully determined.  Each entity is frozen from its first
+fully determined. Each entity is frozen from its first
 freezing point to the end of the program text
 (given the ordering of compilation units defined in
 @RefSecNum{The Compilation Process}).
 @begin{Ramification}
   The @lquotes@;representation@rquotes@; for a subprogram includes its calling convention
   and means for referencing the subprogram body, either a @lquotes@;link-name@rquotes@; or
-  specified address.  It does
+  specified address. It does
   not include the code for the subprogram body itself, nor its
   address if a link-name is used to reference the body.
 @end{Ramification}
@@ -5530,7 +5530,7 @@ before it within the same @nt{declarative_part}.
   at the containing @nt{declarative_part}.
 @end{Reason}
 
-@RootDefn2{Term=[freezing], Sec=(entity caused by a construct)}
+@Leading@RootDefn2{Term=[freezing], Sec=(entity caused by a construct)}
 A construct that (explicitly or implicitly) references an
 entity can cause the @i(freezing) of the entity, as defined by
 subsequent paragraphs.
@@ -5568,7 +5568,7 @@ ensures that all descendants of a tagged type implement all of
 its dispatching operations.
 
 The declaration of a private
-  extension does not cause freezing.  The freezing is deferred
+  extension does not cause freezing. The freezing is deferred
   until the full type declaration, which will necessarily be
   for a record extension.
 @end{Ramification}
@@ -5585,7 +5585,7 @@ of a component's @nt<constraint>, in which case,
 the freezing occurs later as part of another construct.
 
 
-The following rules define which entities are frozen at the place where
+@Leading@;The following rules define which entities are frozen at the place where
 a construct causes freezing:
 @begin{Itemize}
 @PDefn2{Term=[freezing], Sec=(type caused by an expression)}
@@ -5604,7 +5604,7 @@ so the implementation should be allowed to represent it using its
 representation.
 @end{Reason}
 @begin{Ramification}
-The following pathological example was legal in Ada 83,
+@Leading@;The following pathological example was legal in Ada 83,
 but is illegal in Ada 95:
 @begin{Example}
 @key[package] P1 @key[is]
@@ -5624,7 +5624,7 @@ but is illegal in Ada 95:
 @key[end];
 @end{Example}
 
-In Ada 9X, the declaration of X freezes Composite
+In Ada 95, the declaration of X freezes Composite
 (because it contains an expression of that type),
 which in turn freezes T (even though Ct does not exist in this
 particular case).
@@ -5671,7 +5671,7 @@ then all ancestor types are also frozen.
   @nt{Allocator}s also freeze the named subtype,
   as a consequence of other rules.
 
-  The ancestor types are frozen to prevent things like this:
+  @Leading@;The ancestor types are frozen to prevent things like this:
 @begin{Example}
 @key[type] Pool_Ptr @key[is] @key[access] System.Storage_Pools.Root_Storage_Pool'Class;
 @key[function] F @key[return] Pool_Ptr;
@@ -5685,8 +5685,7 @@ then all ancestor types are also frozen.
 @key[end] P;
 @end{Example}
 
-  This is necessary
-  because derived access types share their parent's pool.
+  This is necessary because derived access types share their parent's pool.
 @end{Ramification}
 
 @PDefn2{Term=[freezing], Sec=(subtypes of the profile of a callable entity)}
@@ -5747,11 +5746,11 @@ This rule is needed
 because (1) we don't want people dispatching to things that haven't
 been declared yet, and (2) we want to allow tagged type descriptors
 to be static (allocated statically, and initialized to link-time-known
-symbols).  Suppose T2 inherits primitive P from T1, and then
-overrides P.  Suppose P is called @i{before} the declaration of the
-overriding P.  What should it dispatch to?  If the answer is the new
-P, we've violated the first principle above.  If the answer is the
-old P, we've violated the second principle.  (A call
+symbols). Suppose T2 inherits primitive P from T1, and then
+overrides P. Suppose P is called @i{before} the declaration of the
+overriding P. What should it dispatch to? If the answer is the new
+P, we've violated the first principle above. If the answer is the
+old P, we've violated the second principle. (A call
 to the new one necessarily raises Program_Error, but that's
 beside the point.)
 
@@ -5779,7 +5778,7 @@ entity shall appear before the entity is frozen
 
 
 @begin{Discussion}
-From RM83-13.1(7).  The wording here forbids freezing
+From RM83-13.1(7). The wording here forbids freezing
 within the @nt{representation_clause} itself, which was not true of the Ada
 83 wording.
 The wording of this rule is carefully written to
@@ -5793,7 +5792,7 @@ The above @LegalityTitle are stated @lquotes@;officially@rquotes@;
 in the referenced clauses.
 @end{TheProof}
 @begin{Discussion}
-Here's an example that illustrates when freezing occurs in the
+@Leading@;Here's an example that illustrates when freezing occurs in the
 presence of defaults:
 @begin{Example}
 @key[type] T @key[is] ...;
@@ -5881,20 +5880,20 @@ declaration, a subprogram specification, an entry declaration, a deferred
 constant declaration, a @nt{pragma}, or a @nt{representation_clause} for the type
 itself. In any case, an occurrence within an expression is always forcing.@rquotes@;
 
-It seems like the wording allows things like this:
+@Leading@;It seems like the wording allows things like this:
 @begin{Example}
 @key[type] A @key[is] @key[array](Integer @key[range] 1..10) @key[of] Boolean;
 @key[subtype] S @key[is] Integer @key[range] A'Range;
     --@RI{ not forcing for A}
 @end{Example}
 
-Occurrences within @nt{pragma}s can cause freezing in Ada 9X.
+Occurrences within @nt{pragma}s can cause freezing in Ada 95.
 (Since such @nt{pragma}s are ignored in Ada 83,
 this will probably fix more bugs than it causes.)
 @end{Incompatible83}
 
 @begin{Extend83}
-In Ada 9X, @nt{generic_formal_parameter_declaration}s
+@Leading@;In Ada 95, @nt{generic_formal_parameter_declaration}s
 do not normally freeze the entities from which they are defined.
 For example:
 @begin{example}
@@ -5903,7 +5902,7 @@ For example:
     @key[generic]
         @key[type] T2 @key[is]
             @key[new] T @key[with] @key[private]; --@RI{ Does not freeze T}
-                                --@RI{ in Ada 9X.}
+                                --@RI{ in Ada 95.}
     @key[package] Inner @key[is]
         ...
     @key[end] Inner;
@@ -5913,7 +5912,7 @@ For example:
 @end{example}
 
 This is important for the usability of generics.
-The above example uses the Ada 9X feature of formal derived types.
+The above example uses the Ada 95 feature of formal derived types.
 Examples using the kinds of formal parameters already allowed in
 Ada 83 are well known.
 See, for example, comments 83-00627 and 83-00688.
@@ -5945,10 +5944,10 @@ We have expanded the concept to cover private types,
 because the rules stated in RM83-7.4.1(4) are almost identical to the
 forcing occurrence rules.
 
-The Ada 83 rules are changed in Ada 9X for the following reasons:
+@Leading@;The Ada 83 rules are changed in Ada 95 for the following reasons:
 @begin{Itemize}
 The Ada 83 rules do not work right for subtype-specific aspects.
-In an earlier version of Ada 9X, we considered allowing representation
+In an earlier version of Ada 95, we considered allowing representation
 items to apply to subtypes other than the first subtype.
 This was part of the reason for changing the Ada 83 rules.
 However, now that we have dropped that functionality,
@@ -5973,7 +5972,7 @@ and very useful.
 Ada 83 had a case where a @nt{representation_clause} had a strong
 effect on the semantics of the program @em 'Small.
 This caused certain semantic anomalies.
-There are more cases in Ada 9X,
+There are more cases in Ada 95,
 because the @nt{attribute_representation_clause} has been generalized.
 @end{Itemize}
 @end{DiffWord83}

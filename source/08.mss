@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:19 $}
+@Comment{$Date: 2000/08/11 00:09:15 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -132,20 +132,17 @@ with the declarative region in which it immediately occurs.
 @redundant[@Defn{local to}
 A declaration is @i{local} to a declarative region if
 the declaration occurs immediately within the declarative region.]
-@begin{Ramification}
-That is,
-"occurs immediately within" and "local to" are synonyms
-(when referring to declarations).
-@end{Ramification}
 @redundant[An entity is @i{local} to a declarative region if the entity is
 declared by a declaration that is local to the declarative region.]
 @begin{Ramification}
+"Occurs immediately within" and "local to" are synonyms
+(when referring to declarations).
+
 Thus, @lquotes@;local to@rquotes@; applies to both declarations and entities,
 whereas @lquotes@;occurs immediately within@rquotes@; only applies to declarations.
-We use this term only informally;
-for cases where precision is required,
-we use the term "occurs immediately within",
-since it is less likely to cause confusion.
+We use this term only informally; for cases where precision is required,
+we use the term "occurs immediately within", since it is less likely to
+cause confusion.
 @end{Ramification}
 
 @Defn{global to}
@@ -288,7 +285,7 @@ These places are defined by the rules of visibility and overloading.]
 @end{Intro}
 
 @begin{StaticSem}
-@Defn2{Term=[immediate scope], Sec=(of a declaration)}
+@Leading@Defn2{Term=[immediate scope], Sec=(of a declaration)}
 The @i{immediate scope} of a declaration
 is a portion of the declarative region immediately enclosing
 the declaration.
@@ -298,6 +295,8 @@ in which case the immediate scope starts just after the place
 where the profile of the callable entity is determined
 (which is at the end of the @nt<_specification> for the callable entity,
 or at the end of the @nt<generic_instantiation> if an instance).
+The immediate scope extends to the end of the declarative region,
+with the following exceptions:
 @begin{Reason}
 The reason for making overloadable declarations with profiles
 special is to simplify compilation:
@@ -308,8 +307,6 @@ Without this rule, two passes over the @nt<_specification> or
 @nt<generic_instantiation> would be required to
 resolve names that denote things with the same name as this one.
 @end{Reason}
-@leading@;The immediate scope extends to the end of the declarative region,
-with the following exceptions:
 @begin{Itemize}
 The immediate scope of a @nt{library_item} includes only its semantic
 dependents.
@@ -511,8 +508,8 @@ the body might include some children.
 @begin{Notes}
 There are notations for denoting visible declarations
 that are not directly visible.
-For example, @nt{parameter_specification}s are in the visible part of a
-@nt{subprogram_declaration} so that they can be used in
+For example, @nt{parameter_@!specification}s are in the visible part of a
+@nt{subprogram_@!declaration} so that they can be used in
 named-notation calls appearing outside the called subprogram.
 For another example,
 declarations of the visible part of a package can be denoted by expanded names
@@ -769,15 +766,14 @@ does not start until after its profile.
 @leading@PDefn2{Term=[hidden from all visibility], Sec=(within the declaration itself)}
 A declaration is hidden from all visibility until the end of the
 declaration, except:
-@begin(itemize)
+@begin(InnerItemize)
   For a record type or record extension,
   the declaration is hidden from all visibility only
   until the reserved word @b(record);
 
   For a @nt{package_declaration}, task declaration,
-  protected declaration, @nt{generic_package_declaration},
-  or @nt{subprogram_body},
-  the declaration is
+  protected declaration, @nt{generic_@!package_@!declaration},
+  or @nt{subprogram_@!body}, the declaration is
   hidden from all visibility only until the reserved word @b(is)
   of the declaration.
 @begin{Ramification}
@@ -785,18 +781,18 @@ We're talking about the @key{is} of the construct itself, here,
 not some random @key{is} that might appear in a
 @nt{generic_formal_part}.
 @end{Ramification}
-@end(itemize)
+@end(InnerItemize)
 
 @PDefn2{Term=[hidden from all visibility], Sec=(for a declaration completed
   by a subsequent declaration)}
 If the completion of a declaration is a declaration,
 then within the scope of the completion,
 the first declaration is hidden from all visibility.
-Similarly, a @nt{discriminant_specification} or
-@nt{parameter_specification} is hidden within the scope of a
-corresponding @nt{discriminant_specification} or
-@nt{parameter_specification} of a corresponding completion,
-or of a corresponding @nt{accept_statement}.
+Similarly, a @nt{discriminant_@!specification} or
+@nt{parameter_@!specification} is hidden within the scope of a
+corresponding @nt{discriminant_@!specification} or
+@nt{parameter_@!specification} of a corresponding completion,
+or of a corresponding @nt{accept_@!statement}.
 @begin{Ramification}
 This rule means, for example, that within the scope of a
 @nt{full_type_declaration} that completes a
@@ -815,7 +811,6 @@ The declaration of a library unit
 is hidden from all visibility
 except at places that are within its declarative region
 or within the scope of a @nt{with_clause} that mentions it.
-
 @Redundant[For each declaration or renaming of a generic unit as a child of
 some parent generic package, there is a corresponding declaration nested
 immediately within each instance of the parent.]
@@ -1360,11 +1355,11 @@ corresponding type is anonymous (meaning it has no nameable subtypes).
 For similar reasons, an object of an anonymous array or access type
 cannot be renamed.
 
-A subtype defined without any additional constraint
+@leading@keepnext@;A subtype defined without any additional constraint
 can be used to achieve the effect of renaming another subtype
 (including a task or protected subtype) as in
 @begin{Example}
-@key[subtype] Mode @key[is] Ada.Text_IO.File_Mode;
+   @key[subtype] Mode @key[is] Ada.Text_IO.File_Mode;
 @end{Example}
 @end{Notes}
 
@@ -1372,18 +1367,14 @@ can be used to achieve the effect of renaming another subtype
 The second sentence of RM83-8.5(3),
 @lquotes@;At any point where a renaming declaration is visible,
 the identifier, or operator symbol of this declaration denotes the
-renamed entity.@rquotes@;
-is incorrect.
-It doesn't say directly visible.
+renamed entity.@rquotes@; is incorrect. It doesn't say directly visible.
 Also, such an @nt{identifier} might resolve to something else.
 
 The verbiage about renamings being legal @lquotes@;only if exactly one...@rquotes@;,
-which appears in RM83-8.5(4) (for objects)
-and RM83-8.5(7) (for subprograms) is removed,
-because it follows from the normal rules about overload resolution.
-For language lawyers, these facts are obvious;
-for programmers, they are irrelevant,
-since failing these tests is highly unlikely.
+which appears in RM83-8.5(4) (for objects) and RM83-8.5(7) (for subprograms) is
+removed, because it follows from the normal rules about overload resolution.
+For language lawyers, these facts are obvious; for programmers, they are
+irrelevant, since failing these tests is highly unlikely.
 @end{DiffWord83}
 
 @LabeledSubClause{Object Renaming Declarations}
@@ -1521,7 +1512,7 @@ An @nt{exception_renaming_declaration} declares a new view
 @begin{Examples}
 @leading@keepnext@i{Example of renaming an exception:}
 @begin{Example}
-EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error;@RI{-- see @RefSecNum{Exceptions in Input-Output}}
+EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @RI{-- see @RefSecNum{Exceptions in Input-Output}}
 @end{Example}
 @end{Examples}
 

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/08/11 00:09:16 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/08/03 05:37:44 $}
+@Comment{$Date: 2000/08/11 00:09:16 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -997,11 +997,11 @@ The following language-defined library package exists:
 @ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}
 @key[package] Ada.Dynamic_Priorities @key[is]
 
-    @key[procedure] Set_Priority(Priority : @key[in] System.Any_Priority;
+    @key[procedure] @AdaSubDefn{Set_Priority}(Priority : @key[in] System.Any_Priority;
                            T : @key[in] Ada.Task_Identification.Task_ID :=
                            Ada.Task_Identification.Current_Task);
 
-    @key[function] Get_Priority (T : Ada.Task_Identification.Task_ID :=
+    @key[function] @AdaSubDefn{Get_Priority} (T : Ada.Task_Identification.Task_ID :=
                            Ada.Task_Identification.Current_Task)
                            @key[return] System.Any_Priority;
 
@@ -1422,22 +1422,22 @@ The following language-defined library package exists:
 
 @LangDefType{Package=[Ada.Real_Time],Type=[Time]}
   @key[type] Time @key[is] @key[private];
-  Time_First : @key[constant] Time;
-  Time_Last : @key[constant] Time;
-  Time_Unit : @key[constant] := @RI{implementation-defined-real-number};
+  @AdaDefn{Time_First} : @key[constant] Time;
+  @AdaDefn{Time_Last} : @key[constant] Time;
+  @AdaDefn{Time_Unit} : @key[constant] := @RI{implementation-defined-real-number};
 
 
 
 @LangDefType{Package=[Ada.Real_Time],Type=[Time_Span]}
   @key[type] Time_Span @key[is] @key[private];
-  Time_Span_First : @key[constant] Time_Span;
-  Time_Span_Last : @key[constant] Time_Span;
-  Time_Span_Zero : @key[constant] Time_Span;
-  Time_Span_Unit : @key[constant] Time_Span;
+  @AdaDefn{Time_Span_First} : @key[constant] Time_Span;
+  @AdaDefn{Time_Span_Last} : @key[constant] Time_Span;
+  @AdaDefn{Time_Span_Zero} : @key[constant] Time_Span;
+  @AdaDefn{Time_Span_Unit} : @key[constant] Time_Span;
 
 
-  Tick : @key[constant] Time_Span;
-  @key[function] Clock @key[return] Time;
+  @AdaDefn{Tick} : @key[constant] Time_Span;
+  @key[function] @AdaSubDefn{Clock} @key[return] Time;
 
 
   @key[function] "+" (Left : Time; Right : Time_Span) @key[return] Time;
@@ -1469,19 +1469,19 @@ The following language-defined library package exists:
   @key[function] ">="(Left, Right : Time_Span) @key[return] Boolean;
 
 
-  @key[function] To_Duration (TS : Time_Span) @key[return] Duration;
-  @key[function] To_Time_Span (D : Duration) @key[return] Time_Span;
+  @key[function] @AdaSubDefn{To_Duration} (TS : Time_Span) @key[return] Duration;
+  @key[function] @AdaSubDefn{To_Time_Span} (D : Duration) @key[return] Time_Span;
 
 
-  @key[function] Nanoseconds  (NS : Integer) @key{return} Time_Span;
-  @key[function] Microseconds (US : Integer) @key{return} Time_Span;
-  @key[function] Milliseconds (MS : Integer) @key{return} Time_Span;
+  @key[function] @AdaSubDefn{Nanoseconds}  (NS : Integer) @key{return} Time_Span;
+  @key[function] @AdaSubDefn{Microseconds} (US : Integer) @key{return} Time_Span;
+  @key[function] @AdaSubDefn{Milliseconds} (MS : Integer) @key{return} Time_Span;
 
 @LangDefType{Package=[Ada.Real_Time],Type=[Seconds_Count]}
   @key[type] Seconds_Count @key[is] @key[range] @RI{implementation-defined};
 
-  @key{procedure} Split(T : @key{in} Time; SC : @key{out} Seconds_Count; TS : @key{out} Time_Span);
-  @key{function} Time_Of(SC : Seconds_Count; TS : Time_Span) @key{return} Time;
+  @key{procedure} @AdaSubDefn{Split}(T : @key{in} Time; SC : @key{out} Seconds_Count; TS : @key{out} Time_Span);
+  @key{function} @AdaSubDefn{Time_Of}(SC : Seconds_Count; TS : Time_Span) @key{return} Time;
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -1907,10 +1907,10 @@ The following language-defined package exists:
 
 @LangDefType{Package=[Ada.Synchronous_Task_Control],Type=[Suspension_Object]}
   @key{type} Suspension_Object @key{is} @key{limited} @key{private};
-  @key{procedure} Set_True(S : @key{in} @key{out} Suspension_Object);
-  @key{procedure} Set_False(S : @key{in} @key{out} Suspension_Object);
-  @key{function} Current_State(S : Suspension_Object) @key{return} Boolean;
-  @key{procedure} Suspend_Until_True(S : @key{in} @key{out} Suspension_Object);
+  @key{procedure} @AdaSubDefn{Set_True}(S : @key{in} @key{out} Suspension_Object);
+  @key{procedure} @AdaSubDefn{Set_False}(S : @key{in} @key{out} Suspension_Object);
+  @key{function} @AdaSubDefn{Current_State}(S : Suspension_Object) @key{return} Boolean;
+  @key{procedure} @AdaSubDefn{Suspend_Until_True}(S : @key{in} @key{out} Suspension_Object);
 @key{private}
      ... -- @RI{not specified by the language}
 @key{end} Ada.Synchronous_Task_Control;
@@ -1980,9 +1980,9 @@ The following language-defined library package exists:
 @key{with} Ada.Task_Identification;
 @ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}
 @key{package} Ada.Asynchronous_Task_Control @key{is}
-  @key{procedure} Hold(T : @key[in] Ada.Task_Identification.Task_ID);
-  @key{procedure} Continue(T : @key[in] Ada.Task_Identification.Task_ID);
-  @key{function} Is_Held(T : Ada.Task_Identification.Task_ID)
+  @key{procedure} @AdaSubDefn{Hold}(T : @key[in] Ada.Task_Identification.Task_ID);
+  @key{procedure} @AdaSubDefn{Continue}(T : @key[in] Ada.Task_Identification.Task_ID);
+  @key{function} @AdaSubDefn{Is_Held}(T : Ada.Task_Identification.Task_ID)
    @key{return} Boolean;
 @key{end} Ada.Asynchronous_Task_Control;
 @end{example}
