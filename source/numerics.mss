@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2004/12/12 05:36:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2005/01/18 05:34:46 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2004/12/12 05:36:21 $}
+@Comment{$Date: 2005/01/18 05:34:46 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -85,7 +85,9 @@ Numerics.Generic_Complex_Types has the following declaration:
          Re, Im : Real'Base;
       @key{end} @key{record};
 
-   @key{type} @AdaTypeDefn{Imaginary} @key{is} @key{private};
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+   @key{type} @AdaTypeDefn{Imaginary} @key{is} @key{private};@Chg{Version=[2],New=[
+   @key{pragma} Preelaborable_Initialization(Imaginary);],Old=[]}
 
    @AdaDefn{i} : @key{constant} Imaginary;
    @AdaDefn{j} : @key{constant} Imaginary;
@@ -547,6 +549,10 @@ Generic_Complex_Types as defined in ISO/IEC CD 13813
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Explicitly stated that the
   predefined instantiations of Generic_Complex_Types are pure.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[Added a @nt{pragma} Preelaboratable_Initialization to
+  type Imaginary, so that it can be used in prelaborated units.]}
 @end{DiffWord95}
 
 
@@ -642,16 +648,23 @@ following conventions:
    complex type is discontinuous as that operand crosses the negative real
    axis.
 
-   The real (resp., imaginary) component of the result of the Arcsin and Arccos
-   (resp., Arctanh) functions is discontinuous as the parameter X crosses the
+   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00185-01]}
+   The @Chg{Version=[2],New=[],Old=[real (resp., ]}imaginary@Chg{Version=[2],
+   New=[],Old=[)]} component of the result of the Arcsin@Chg{Version=[2],
+   New=[,],Old=[ and]} Arccos@Chg{Version=[2],New=[],Old=[(resp.]}, Arctanh@Chg{Version=[2],
+   New=[],Old=[)]} functions is discontinuous as the parameter X crosses the
    real axis to the left of -1.0 or the right of 1.0.
 
-   The real (resp., imaginary) component of the result of the Arctan (resp.,
-   Arcsinh) function is discontinuous as the parameter X crosses the imaginary
-   axis below -@RI{i} or above @RI{i}.
+   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00185-01]}
+   The real @Chg{Version=[2],New=[],Old=[(resp., imaginary) ]}component of the
+   result of the Arctan @Chg{Version=[2],New=[and],Old=[(resp.,]}
+   Arcsinh@Chg{Version=[2], New=[ functions],Old=[) function]} is discontinuous
+   as the parameter X crosses the imaginary axis below -@RI{i} or above @RI{i}.
 
+   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00185-01]}
    The real component of the result of the Arccot function is discontinuous as
-   the parameter X crosses the imaginary axis between -@RI{i} and @RI{i}.
+   the parameter X crosses the imaginary axis @Chg{Version=[2],New=[below],
+   Old=[between]} -@RI{i} @Chg{Version=[2],New=[or above],Old=[and]} @RI{i}.
 
    The imaginary component of the Arccosh function is discontinuous as the
    parameter X crosses the real axis to the left of 1.0.
@@ -660,10 +673,42 @@ following conventions:
    discontinuous as the parameter X crosses the real axis between -1.0
    and 1.0.
 @end{Itemize}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00185-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The branch cuts come from the
+fact that the functions in question are
+really multi-valued in the complex domain, and that we have to pick one
+@i{principal value} to be the result of the function. Evidently we have
+much freedom in choosing where the branch cuts lie. However, we are
+adhering to the following principles which seem to lead to the more
+@i{natural} definitions:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[A branch cut should not intersect the real axis
+at a place where the
+corresponding real function is well-defined (in other words, the complex
+function should be an extension of the corresponding real function).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Because all the functions in question are
+analytic, to ensure power
+series validity for the principal value, the branch cuts should be
+invariant by complex conjugation.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[For odd functions, to ensure that the principal
+value remains an odd
+function, the branch cuts should be invariant by reflection in the origin.]}
+@end{Itemize}
+@end{Discussion}
 
 @Leading@;The computed results of the mathematically multivalued functions are rendered
 single-valued by the following conventions, which are meant to imply the
-principal branch:
+principal branch@Chg{Version=[2],New=[is an analytic continuation of
+the corresponding real-valued function in
+Ada.Numerics.Generic_Elementary_Functions. (For Arctan and Arccot,
+the single-argument function in question is that obtained from the two-argument
+version by fixing the second argument to be its default value.)],Old=[:]}
 @begin{Itemize}
    The real component of the result of the Sqrt and Arccosh functions is
    nonnegative.
@@ -892,6 +937,10 @@ ISO/IEC CD 13814 (for Ada 83) in the following ways:
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Explicitly stated that the
   predefined instantiations of Generic_Complex_Elementary_Functions are pure.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00185-01]}
+  @ChgAdded{Version=[2],Text=[Corrected various inconsistencies in the
+  definition of the branch cuts.]}
 @end{DiffWord95}
 
 
@@ -964,6 +1013,25 @@ Text_IO.Complex_IO has the following declaration:
 
 @key[end] Ada.Text_IO.Complex_IO;
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00328-01]}
+@ChgAdded{Version=[2],Text=[
+@Defn{Ada.Complex_Text_IO}
+@ChildUnit{Parent=[Ada],Child=[Complex_@!Text_IO]}
+The library package Complex_Text_IO defines the
+same subprograms as Text_IO.Complex_IO, except that the predefined type Float
+is systematically substituted for Real, and the type
+Numerics.Complex_Types.Complex is systematically substituted for Complex
+throughout. Non-generic equivalents of Text_IO.Complex_IO corresponding to each
+of the other predefined floating point types are defined similarly, with the
+names Short_Complex_Text_IO, Long_Complex_Text_IO, etc.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[
+   The nongeneric equivalents are provided to allow the programmer to
+   construct simple mathematical applications without being required to
+   understand and use generics.]}
+@end{Reason}
 
 The semantics of the Get and Put procedures are as follows:
 @begin{DescribeCode}
@@ -1147,6 +1215,20 @@ in the appropriate circumstances, as for the corresponding
 procedures of Text_IO.Float_IO.
 @end{ImplPerm}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00328-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Nongeneric equivalents for Ada.Text_IO.Complex_IO are added, to be consistent
+  with all other language-defined Numerics generic packages.]}
+@end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0092],ARef=[AI95-00029-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the syntax
+  of values read by Complex_Io is the same as that read by Text_IO.Float_IO.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{The Package Wide_Text_IO.Complex_IO}
 
 @begin{StaticSem}
@@ -1160,11 +1242,27 @@ additionally replacing references to particular characters (commas,
 parentheses, etc.) by those for the corresponding wide characters.
 @end{StaticSem}
 
-@begin{DiffWord95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0092],ARef=[AI95-00029-01]}
-  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the syntax
-  of values read by Complex_Io is the same as that read by Text_IO.Float_IO.]}
-@end{DiffWord95}
+
+@LabeledAddedSubClause{Version=[2],Name=[The Package Wide_Wide_Text_IO.Complex_IO]}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@Defn{Ada.Wide_Wide_@!Text_IO.Complex_IO}
+@ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Complex_IO]}
+Implementations shall also provide the generic library package
+Wide_Wide_Text_IO.Complex_IO. Its declaration is obtained from that of
+Text_IO.Complex_IO by systematically replacing Text_IO by Wide_Wide_Text_IO and
+String by Wide_Wide_String; the description of its behavior is obtained by
+additionally replacing references to particular characters (commas,
+parentheses, etc.) by those for the corresponding wide characters.]}
+@end{StaticSem}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Package Wide_Wide_Text_IO.Complex_IO is new. (At least it wasn't called
+  Incredibly_Wide_Text_IO.Complex_IO; maybe next time.)]}
+@end{Extend95}
 
 
 @LabeledClause{Numeric Performance Requirements}
@@ -1441,15 +1539,27 @@ These definitions add conditions to those in
 @begin{StaticSem}
 @Leading@keepnext@;For every subtype S of a floating point type @i{T}:
 @begin{Description}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 S'@Attr{Model_Mantissa} @\Yields the number of digits in the mantissa of
 the canonical form of the model numbers of @i{T}
 (see @RefSecNum{Attributes of Floating Point Types}). The
-value of this attribute shall be greater than or equal to
-@Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + 1, where @RI{d}
+value of this attribute shall be greater than or equal to@Chg{Version=[2],New=[],
+Old=[ @Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + 1, where @RI{d}
 is the requested decimal precision of @i{T}. In addition, it
 shall be less than or equal to the value of
 @i{T}'Machine_Mantissa. This attribute yields a value of the
-type @i{universal_integer}.
+type @i{universal_integer}.]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[    @Ceiling{@RI{d} @Times @Log(10) / @Log(@RI{T}'@R{Machine_Radix})} + @RI{g}]}
+@end{Display}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],NoPrefix=[T],Text=[where @RI{d}
+is the requested decimal precision of @i{T},and @RI{g}is 0 if Machine_Radix is
+a positive power of 10 and 1 otherwise. In addition, it
+shall be less than or equal to the value of
+@i{T}'Machine_Mantissa. This attribute yields a value of the
+type @i{universal_integer}.]}
   @begin{Ramification}
      S'Model_Epsilon, which is defined in terms of S'Model_Mantissa
      (see @RefSecNum{Attributes of Floating Point Types}), yields the
@@ -1581,6 +1691,13 @@ overflow and zerodivide situations (and at poles of the elementary functions).
 
 @end{Ramification}
 @end{StaticSem}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
+  @ChgAdded{Version=[2],Text=[Corrected the definition of Model_Mantissa to
+  match that given in @RefSecNum{Operations of Floating Point Types}.]}
+@end{DiffWord95}
+
 
 
 @LabeledSubClause{Model of Fixed Point Arithmetic}
@@ -2415,13 +2532,482 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Subprograms for Real_Vector types}]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Real_Vector arithmetic operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+"   (Right : Real_Vector)       @key{return} Real_Vector;
+   @key{function} "-"   (Right : Real_Vector)       @key{return} Real_Vector;
+   @key{function} "@key{abs}" (Right : Real_Vector)       @key{return} Real_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+"  (Left, Right : Real_Vector) @key{return} Real_Vector;
+   @key{function} "-"  (Left, Right : Real_Vector) @key{return} Real_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left, Right : Real_Vector) @key{return} Real'Base;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Real_Vector scaling operations]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real'Base;   Right : Real_Vector) @key{return} Real_Vector;
+   @key{function} "*" (Left : Real_Vector; Right : Real'Base)   @key{return} Real_Vector;
+   @key{function} "/" (Left : Real_Vector; Right : Real'Base)   @key{return} Real_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Other Real_Vector operations]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Unit_Vector} (Index : Integer;
+                         Order : Positive;
+                         First : Integer := 1) @key{return} Real_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Subprograms for Real_Matrix types]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Real_Matrix arithmetic operations]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+"       (Right : Real_Matrix) @key{return} Real_Matrix;
+   @key{function} "-"       (Right : Real_Matrix) @key{return} Real_Matrix;
+   @key{function} "@key{abs}"     (Right : Real_Matrix) @key{return} Real_Matrix;
+   @key{function} @AdaSubDefn{Transpose} (X     : Real_Matrix) @key{return} Real_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+" (Left, Right : Real_Matrix) @key{return} Real_Matrix;
+   @key{function} "-" (Left, Right : Real_Matrix) @key{return} Real_Matrix;
+   @key{function} "*" (Left, Right : Real_Matrix) @key{return} Real_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left, Right : Real_Vector) @key{return} Real_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real_Vector; Right : Real_Matrix) @key{return} Real_Vector;
+   @key{function} "*" (Left : Real_Matrix; Right : Real_Vector) @key{return} Real_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Real_Matrix scaling operations]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real'Base;   Right : Real_Matrix) @key{return} Real_Matrix;
+   @key{function} "*" (Left : Real_Matrix; Right : Real'Base)   @key{return} Real_Matrix;
+   @key{function} "/" (Left : Real_Matrix; Right : Real'Base)   @key{return} Real_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Real_Matrix inversion and related operations]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Solve} (A : Real_Matrix; X: Real_Vector) @key{return} Real_Vector;
+   @key{function} @AdaSubDefn{Solve} (A, X : Real_Matrix) @key{return} Real_Matrix;
+   @key{function} @AdaSubDefn{Inverse} (A : Real_Matrix) @key{return} Real_Matrix;
+   @key{function} @AdaSubDefn{Determinant} (A : Real_Matrix) @key{return} Real'Base;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Eigenvalues and vectors of a real symmetric matrix]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Eigenvalues} (A : Real_Matrix) @key{return} Real_Vector;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Eigensystem} (A       : @key{in}  Real_Matrix;
+                          Values  : @key{out} Real_Vector;
+                          Vectors : @key{out} Real_Matrix);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Other Real_Matrix operations]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Unit_Matrix} (Order            : Positive;
+                         First_1, First_2 : Integer := 1)
+                                            @key{return} Real_Matrix;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{end} Ada.Numerics.Generic_Real_Arrays;]}
 
 @end{Example}
 
-**** The rest of this subclause has yet to be inserted ****
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[The library package Numerics.Real_Arrays is
+declared pure and defines the
+same types and subprograms as Numerics.Generic_Real_Arrays, except that
+the predefined type Float is systematically substituted for Real'Base
+throughout. Nongeneric equivalents for each of the other predefined floating
+point types are defined similarly, with the names Numerics.Short_Real_Arrays,
+Numerics.Long_Real_Arrays, etc.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[
+   The nongeneric equivalents are provided to allow the programmer to
+   construct simple mathematical applications without being required to
+   understand and use generics, and to be consistent with other
+   Ada.Numerics packages.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Two types are defined and exported by
+Ada.Numerics.Generic_Real_Arrays. The composite type Real_Vector is provided to
+represent a vector with components of type Real; it is defined as an
+unconstrained, one-dimensional array with an index of type Integer. The
+composite type Real_Matrix is provided to represent a matrix with components of
+type Real; it is defined as an unconstrained, two-dimensional array with
+indices of type Integer.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[The effect of the various functions is as described
+below. In most cases the functions are described in terms of corresponding
+scalar operations of the type Real; any exception raised by those operations is
+propagated by the array operation. Moreover, the accuracy of the result for
+each individual component is as defined for the scalar operation unless stated
+otherwise.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[In the case of those operations which are defined
+to involve an inner product, Constraint_Error may be raised if an intermediate
+result is outside the range of Real'Base even though the mathematical final
+result would not be.]}
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+"   (Right : Real_Vector) @key{return} Real_Vector;
+@key{function} "-"   (Right : Real_Vector) @key{return} Real_Vector;
+@key{function} "@key{abs}" (Right : Real_Vector) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Each operation returns the result
+of applying the corresponding operation of the type Real to each component of
+Right. The index range of the result is Right'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+" (Left, Right : Real_Vector) @key{return} Real_Vector;
+@key{function} "-" (Left, Right : Real_Vector) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation of the type Real to each component of Left and the
+matching component of Right. The index range of the result is Left'Range.
+Constraint_Error is raised if Left'Length is not equal to Right'Length.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left, Right : Real_Vector) @key{return} Real'Base;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the inner product of Left
+and Right. Constraint_Error is raised if Left'Length is not equal to
+Right'Length. This operation involves an inner product.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real'Base; Right : Real_Vector) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
+each component of Right by the scalar Left using the "*" operation of the type
+Real. The index range of the result is Right'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real_Vector; Right : Real'Base) @key{return} Real_Vector;
+@key{function} "/" (Left : Real_Vector; Right : Real'Base) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation of the type Real to each component of Left and to the
+scalar Right. The index range of the result is Left'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Unit_Vector (Index : Integer;
+                      Order : Positive;
+                      First : Integer := 1) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a @i<unit vector>@Defn{unit vector}
+with Order components and a lower bound of First. All components are set to 0.0
+except for the Index component which is set to 1.0. Constraint_Error is raised
+if Index < First, Index > First + Order - 1 or if First + Order - 1 >
+Integer'Last.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+"   (Right : Real_Matrix) @key{return} Real_Matrix;
+@key{function} "-"   (Right : Real_Matrix) @key{return} Real_Matrix;
+@key{function} "@key{abs}" (Right : Real_Matrix) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation of the type Real to each component of Right. The index
+ranges of the result are those of Right.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Transpose (X : Real_Matrix) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns the transpose of a matrix X.
+The first and second index ranges of the result are X'Range(2) and X'Range(1)
+respectively.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "+" (Left, Right : Real_Matrix) @key{return} Real_Matrix;
+@key{function} "-" (Left, Right : Real_Matrix) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation of the type Real to each component of Left and the
+matching component of Right. The index ranges of the result are those of Left.
+Constraint_Error is raised if Left'Length(1) is not equal to Right'Length(1) or
+Left'Length(2) is not equal to Right'Length(2).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left, Right : Real_Matrix) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation provides the standard mathematical
+operation for matrix multiplication. The first and second index ranges of the
+result are Left'Range(1) and Right'Range(2) respectively. Constraint_Error is
+raised if Left'Length(2) is not equal to Right'Length(1). This operation
+involves inner products.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left, Right : Real_Vector) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the outer product of a
+(column) vector Left by a (row) vector Right using the operation "*" of the
+type Real for computing the individual components. The first and second index
+ranges of the matrix result are Left'Range and Right'Range respectively.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real_Vector; Right : Real_Matrix) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation provides the standard mathematical
+operation for multiplication of a (row) vector Left by a matrix Right. The
+index range of the (row) vector result is Right'Range(2). Constraint_Error is
+raised if Left'Length is not equal to Right'Length(1). This operation involves
+inner products.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real_Matrix; Right : Real_Vector) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation provides the standard mathematical
+operation for multiplication of a matrix Left by a (column) vector Right. The
+index range of the (column) vector result is Left'Range(1). Constraint_Error is
+raised if Left'Length(2) is not equal to Right'Length. This operation involves
+inner products.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real'Base; Right : Real_Matrix) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
+each component of Right by the scalar Left using the "*" operation of the type
+Real. The index ranges of the matrix result are those of Right.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real_Matrix; Right : Real'Base) @key{return} Real_Matrix;
+@key{function} "/" (Left : Real_Matrix; Right : Real'Base) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
+corresponding operation of the type Real to each component of Left and to the
+scalar Right. The index ranges of the matrix result are those of Left.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Solve (A : Real_Matrix; X: Real_Vector) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a vector Y such that X is
+(nearly) equal to A * Y. This is the standard mathematical operation for
+solving a single set of linear equations. The index range of the result is
+X'Range. Constraint_Error is raised if A'Length(1), A'Length(2) and X'Length
+are not equal. Constraint_Error is raised if the matrix A is ill-conditioned.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Solve (A, X : Real_Matrix) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a matrix Y such that X is
+(nearly) equal to A * Y. This is the standard mathematical operation for
+solving several sets of linear equations. The index ranges of the result are
+those of X. Constraint_Error is raised if A'Length(1), A'Length(2) and
+X'Length(1) are not equal. Constraint_Error is raised if the matrix A is
+ill-conditioned.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Inverse (A : Real_Matrix) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a matrix B such that A * B is
+(nearly) equal to the unit matrix. The index ranges of the result are those of
+A. Constraint_Error is raised if A'Length(1) is not equal to A'Length(2).
+Constraint_Error is raised if the matrix A is ill-conditioned.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Determinant (A : Real_Matrix) @key{return} Real'Base;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns the determinant of the matrix
+A. Constraint_Error is raised if A'Length(1) is not equal to A'Length(2).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Eigenvalues(A : Real_Matrix) @key{return} Real_Vector;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns the eigenvalues of the
+symmetric matrix A as a vector sorted into order with the largest first.
+Constraint_Error is raised if A'Length(1) is not equal to A'Length(2). The
+index range of the result is A'Range(1). Argument_Error is raised if the matrix
+A is not symmetric.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Eigensystem(A       : @key{in}  Real_Matrix;
+                      Values  : @key{out} Real_Vector;
+                      Vectors : @key{out} Real_Matrix);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This procedure computes both the eigenvalues and
+eigenvectors of the symmetric matrix A. The out parameter Values is the same as
+that obtained by calling the function Eigenvalues. The out parameter Vectors is
+a matrix whose columns are the eigenvectors of the matrix A. The order of the
+columns corresponds to the order of the eigenvalues. The eigenvectors are
+normalized and mutually orthogonal (they are orthonormal), including when there
+are repeated eigenvalues. Constraint_Error is raised if A'Length(1) is not
+equal to A'Length(2). The index ranges of the parameter Vectors are those of A.
+Argument_Error is raised if the matrix A is not symmetric.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Unit_Matrix (Order            : Positive;
+                      First_1, First_2 : Integer := 1) @key{return} Real_Matrix;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[This function returns a square
+@i{unit matrix}@Defn{unit matrix} with Order**2 components and lower bounds of
+First_1 and First_2 (for the first and second index ranges respectively). All
+components are set to 0.0 except for the main diagonal, whose components are
+set to 1.0. Constraint_Error is raised if First_1 + Order - 1 > Integer'Last or
+First_2 + Order - 1 > Integer'Last.]}
+
+@end{DescribeCode}
 
 @end{StaticSem}
 
+@begin{ImplReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Accuracy requirements for the subprograms Solve,
+Inverse, Determinant, Eigenvalues and Eigensystem are implementation defined.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+accuracy requirements for the subprograms Solve,
+Inverse, Determinant, Eigenvalues and Eigensystem.],Old=[]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[For operations not involving an inner product, the
+accuracy requirements are those of the corresponding operations of the type
+Real in both the strict mode and the relaxed mode (see G.2).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For operations involving an inner
+product, no
+requirements are specified in the relaxed mode. In the strict mode the modulus
+of the absolute error of the inner product @i<X>*@i<Y> shall not exceed
+@i<g>*@b<abs>(@i<X>)*@b<abs>(@i<Y>) where @i<g> is defined as]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@i<g> = @i<X>'Length * Real'Machine_Radix**(1-Real'Machine_Mantissa)]}
+@end{Display}
+@end{ImplReq}
+
+@begin{DocReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Implementations shall document any techniques used
+to reduce cancellation errors such as extended precision arithmetic.]}
+@begin{ImplNote}
+  The above accuracy requirement is met by the canonical implementation of the
+  inner product by multiplication and addition using the corresponding
+  operations of type Real'Base and performing the cumulative addition using
+  ascending indices. Note however, that some hardware provides special
+  operations for the computation of the inner product and although these may be
+  fast they may not meet the accuracy requirement specified. See Accuracy and
+  Stability of Numerical Algorithms By N J Higham (ISBN 0-89871-355-2),
+  Section 3.1.
+@end{ImplNote}
+@end{DocReq}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[The nongeneric equivalent packages may, but need
+not, be actual instantiations of the generic package for the appropriate
+predefined type.]}
+
+@end{ImplPerm}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Implementations should implement the Solve and
+Inverse functions using established techniques such as LU decomposition with
+row interchanges followed by back and forward substitution. Implementations are
+recommended to refine the result by performing an iteration on the residuals;
+if this is done then it should be documented.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[It is not the intention that any special provision
+should be made to determine whether a matrix is ill-conditioned or not. The
+naturally occurring overflow (including division by zero) which will result
+from executing these functions with an ill-conditioned matrix and thus raise
+Constraint_Error is sufficient.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The test that a matrix is symmetric may be
+performed by using the equality operator to compare the relevant components.]}
+
+@end{ImplAdvice}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -2445,7 +3031,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
    @key{use} Real_Arrays;
    @key{with package} Complex_Types @key{is new} Ada.Numerics.Generic_Complex_Types (Real);
    @key{use} Complex_Types;
-@key{package} Ada.Numerics.Generic_Complex_Arrays @key{is}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Complex_Arrays]}
+@key{package} Ada.Numerics.Generic_Complex_Arrays @key{is}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Arrays]}
    @key{pragma} Pure(Generic_Complex_Arrays);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

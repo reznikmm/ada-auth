@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/01/13 05:06:14 $}
+@Comment{$Date: 2005/01/18 05:34:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.5 $}
+@Comment{$Revision: 1.6 $}
 
 @LabeledClause{Type Conversions}
 
@@ -490,7 +490,7 @@ Further, if not @i<universal_access>:]}
       @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
       @ChgAdded{Version=[2],Text=[This does not require that types have a partial view
       in order to allow the conversion, simply that any partial view that does
-      exist is unconstrained.],Old=[]}
+      exist is unconstrained.]}
 
       @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00384-01]}
       @ChgAdded{Version=[2],Text=[This allows conversions both ways (either subtype

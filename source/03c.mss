@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/17 00:03:57 $}
+@Comment{$Date: 2005/01/18 05:34:44 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.6 $}
+@Comment{$Revision: 1.7 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2723,7 +2723,7 @@ includes a null value.]}
 @begin(Reason)
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[This is similar to doubly constraining a subtype,
-  which we don't allow either.]}
+  which we also don't allow.]}
 @end(Reason)
 @end{Legality}
 

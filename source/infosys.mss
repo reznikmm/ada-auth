@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2004/10/30 21:51:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2005/01/18 05:34:46 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:44 $}
+@Comment{$Date: 2005/01/18 05:34:46 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -14,11 +14,13 @@ categories:
 an attribute definition clause specifying Machine_Radix for a decimal subtype;
 
 the package Decimal, which declares a set of constants defining the
-implementation's capacity for decimal types, and  a
+implementation's capacity for decimal types, and a
 generic procedure
 for decimal division; and
 
-the child packages Text_IO.Editing and Wide_Text_IO.Editing,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+the child packages Text_IO.Editing@Chg{Version=[2],New=[,],Old=[ and]}
+Wide_Text_IO.Editing@Chg{Version=[2],New=[, and Wide_Wide_Text_IO.Editing],Old=[]},
 which
 support formatted and localized output of decimal data, based on
 @lquotes@;picture String@rquotes@; values.
@@ -55,6 +57,11 @@ that language.
 This Annex is new to Ada 95.
 @end{Extend83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[Added a mention of Wide_Wide_Text_IO.Editing,
+  part of the support for 32-bit characters.]}
+@end{DiffWord95}
 
 @LabeledClause{Machine_Radix Attribute Definition Clause}
 
@@ -178,9 +185,13 @@ function attribute Quotient_Type'Round or the conversion Quotient_Type
 to the expression Dividend/Divisor.
 @end(Notes)
 
+
 @LabeledClause{Edited Output for Decimal Types}
 @begin{Intro}
-@Leading@;The child packages Text_IO.Editing and Wide_Text_IO.Editing
+@Leading@;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+The child packages Text_IO.Editing@Chg{Version=[2],New=[,],Old=[ and]}
+Wide_Text_IO.Editing@Chg{Version=[2],New=[, and Wide_Wide_Text_IO.Editing],Old=[]}
 provide localizable formatted text
 output, known as @i{edited output} @Defn{edited output},
 for decimal types. An edited
@@ -197,10 +208,12 @@ some decimal type. The locale elements are:
     the fill character that replaces leading zeros of the numeric value.
 @end{itemize}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 For Text_IO.Editing the edited output and currency strings are of
 type String, and the locale characters are of type Character.
 For Wide_Text_IO.Editing their types are Wide_String and Wide_Character,
-respectively.
+respectively.@Chg{Version=[2],New=[ For Wide_Wide_Text_IO.Editing
+their types are Wide_Wide_String and Wide_Wide_Character, respectively.],Old=[]}
 
 Each of the locale elements has a default value that can be replaced or
 explicitly overridden.
@@ -276,15 +289,26 @@ the edited output string values for the decimal values 32.10 and @en@;5432.10 ar
 "bbFFbbb32.10b" and "(bFF5,432.10)", respectively, where 'b' indicates
 the space character.
 
-The generic packages Text_IO.Decimal_IO and Wide_Text_IO.Decimal_IO
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+The generic packages Text_IO.Decimal_IO@Chg{Version=[2],New=[,],Old=[ and]}
+Wide_Text_IO.Decimal_IO@Chg{Version=[2],New=[, and Wide_Wide_Text_IO.Decimal_IO],Old=[]}
 (see @RefSec(Input-Output for Real Types))
 provide text input and non-edited text output for decimal types.
 @end{Intro}
 
 @begin{Notes}
-A picture String is of type Standard.String, both for Text_IO.Editing
-and Wide_Text_IO.Editing.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+A picture String is of type Standard.String, @Chg{Version=[2],New=[for all of],
+Old=[both for]} Text_IO.Editing@Chg{Version=[2],New=[,],Old=[ and]}
+Wide_Text_IO.Editing@Chg{Version=[2],New=[, and Wide_Wide_Text_IO.Editing],Old=[]}.
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[Added descriptions of Wide_Wide_Text_IO.Editing;
+  see @RefSecNum{The Package Wide_Wide_Text_IO.Editing}.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Picture String Formation}
 @begin{Intro}
@@ -548,6 +572,13 @@ for a special rule to disallow "9.99DB(2)" as an abbreviation for
 Although a sign to the left of the number can float, a sign to the right
 of the number is in a fixed position.
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0088],ARef=[AI95-00153-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> The picture string rules for
+  numbers were tightened.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Edited Output Generation}
 @begin{RunTime}
@@ -903,9 +934,9 @@ Item:         Picture and Result Strings:
 @end{Examples}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0088],ARef=[AI95-00153-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> The picture string rules for numbers
-were tightened.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0089],ARef=[AI95-00070-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the picture string
+  example.]}
 @end{DiffWord95}
 
 
@@ -1232,3 +1263,53 @@ Each of the functions Wide_Text_IO.Editing.Valid, To_Picture, and Pic_String has
 Wide_String) as its parameter or result subtype, since a picture String
 is not localizable.
 @end{Notes}
+
+@LabeledAddedSubClause{Version=[2],Name=[The Package Wide_Wide_Text_IO.Editing]}
+
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{Ada.Wide_@!Wide_@!Text_IO.Editing}
+@ChildUnit{Parent=[Ada.Wide_@!Wide_@!Text_IO],Child=[Editing]}
+The child package Wide_Wide_Text_IO.Editing has
+the same contents as Text_IO.Editing, except that:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[each occurrence of Character is replaced by
+Wide_Wide_Character,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[each occurrence of Text_IO is replaced by
+Wide_Wide_Text_IO,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[the subtype of Default_Currency is Wide_Wide_String
+rather than String, and]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[each occurrence of String
+in the generic package Decimal_Output is replaced by
+Wide_Wide_String.]}
+@end{Itemize}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+value of Max_Picture_Length in the package Wide_Wide_Text_IO.Editing],Old=[]}]}
+
+@end{StaticSem}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[Each of the functions
+Wide_Wide_Text_IO.Editing.Valid, To_Picture, and Pic_String has String (versus
+Wide_Wide_String) as its parameter or result subtype, since a picture String is
+not localizable.]}
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Package Wide_Wide_Text_IO.Editing is new; it supports 32-bit character
+  strings. (Shouldn't it have been
+  @lquotes@;Widest_Text_IO.Editing@rquotes@;? :-)]}
+@end{Extend95}
+
+
