@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/29 04:22:23 $}
+@Comment{$Date: 2000/08/30 00:23:10 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -4318,6 +4318,15 @@ specified Allocate procedure.
 
 Note that the implementation does not turn other exceptions into
 Storage_Error.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0111]}
+@Chg{New=[If T includes subcomponents of other access types, they will be
+allocated from the storage pools for those types, even if those @nt{allocator}s
+are executed as part of the @nt{allocator} of T (as part of the initialization
+of the object). For instance, an access-to-task type TT may allocate the data
+structures used to implement the task value from other storage pools. (In
+particular, the task stack does not necessarily need to be allocated from the
+storage pool for TT.)],Old=[]}
 @end{Ramification}
 
 @Defn{standard storage pool}
@@ -6045,11 +6054,16 @@ before the constant is frozen
 (see @RefSecNum{Deferred Constants}).]
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
-@Redundant[@Chg{New=[An operational or],Old=[A]} representation item that
+@Chg{New=[An operational or],Old=[A]} representation item that
 directly specifies an aspect of an entity shall appear before the entity is
-frozen (see @RefSecNum{Operational and Representation Items}).]
+frozen (see @RefSecNum{Operational and Representation Items}).
+@ChgNote{A last minute change (requested by WG9) moved this rule to 13.1(9).
+However, the rule there only covers types and subtypes. So this rule is not
+redundant, and I removed the @Redundant for it. I don't have a way to mark
+that as a change, so it is just gone. RLB-29-08-00}
 
 @begin{Discussion}
+
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 From RM83-13.1(7). The wording here forbids freezing
 within the @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]}

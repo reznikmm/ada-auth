@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/29 04:22:22 $}
+@Comment{$Date: 2000/08/30 00:23:09 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3328,6 +3328,15 @@ the exponent is not negative.
 Constraint_Error is raised if this check fails.
 @end{Notes}
 
+@begin{Inconsistent83}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0100]}
+  @Chg{New=[The definition of "**" allows arbitrary association of the
+  multiplications which make up the result. Ada 83 required left-to-right
+  associations (confirmed by AI83-00137). Thus it is possible that "**"
+  would provide a slightly different answer in Ada 95 than in the same Ada 84
+  program.],Old=[]}
+@end{Inconsistent83}
+
 @begin{DiffWord83}
 We now show the specification for "**" for integer types
 with a parameter subtype of Natural rather than Integer for the exponent.
@@ -4167,8 +4176,8 @@ the determined type is @i<D>'Class.],Old=[.]}
 @end{Discussion}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
-An allocator is allowed as a controlling parameter of a dispatching call (see
-@RefSecNum{Dispatching Operations of Tagged Types}).
+@Chg{New=[An allocator is allowed as a controlling parameter of a dispatching
+call (see @RefSecNum{Dispatching Operations of Tagged Types}).],Old=[]}
 @end{Ramification}
 @end{Resolution}
 

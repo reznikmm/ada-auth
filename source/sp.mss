@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2000/08/29 04:22:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2000/08/30 00:23:11 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/08/29 04:22:23 $}
+@Comment{$Date: 2000/08/30 00:23:11 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1184,6 +1184,14 @@ environment task, the entire partition is aborted, See @RefSecNum{Partitions}.]
 
 The functions Is_Terminated and Is_Callable return the value of the
 corresponding attribute of the task identified by T.
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0115]}
+@Chg{New=[These routines can be called with an argument identifying the
+environment task. Is_Terminated will always be False for such a call, but
+Is_Callable (usually True) could be False if the environment task is waiting
+for the termination of dependent tasks. Thus, a dependent task can use
+Is_Callable to determine if the main subprogram has completed.],Old=[]}
+@end{Ramification}
 
 @Leading@;For @PrefixType{a @nt<prefix> T that is of a task type
 @Redundant[(after any implicit dereference)]},

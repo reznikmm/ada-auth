@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/24 04:21:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/08/30 00:23:11 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/08/24 04:21:04 $}
+@Comment{$Date: 2000/08/30 00:23:11 $}
 
 @LabeledClause{String Handling}
 
@@ -1291,6 +1291,15 @@ the copying and comparison of bounded strings.@end{reason}
 
 @key[end] Ada.Strings.Bounded;
 @end{example}
+
+@begin{ImplNote}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097]}
+@Chg{New=[Bounded_String cannot be implemented as a (directly) controlled type,
+as Ada.Strings.Bounded.Generic_Bounded_Length can be instantiated at any
+nesting depth. Bounded_String could have
+a component of a controlled type, as long as that type is declared in some
+other (non-generic) package (including directly in Ada.Strings.Bounded).],Old=[]}
+@end{ImplNote}
 
 Null_Bounded_String represents the null string.
 If an object of type Bounded_String is not otherwise initialized, it

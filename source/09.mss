@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:55 $}
+@Comment{$Date: 2000/08/30 00:23:09 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 
@@ -2543,9 +2543,13 @@ This exception is also raised by the function@Chg{New=[s],Old=[]} Year
 if the year number of the given date is outside of the range of the
 subtype Year_Number.
 @begin(Honest)
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0106]}
   By "proper date" above we mean that the given year has
   a month with the given day. For example, February 29th is
-  a proper date only for a leap year.
+  a proper date only for a leap year. @Chg{New=[We do not mean to include
+  the Seconds in this notion; in particular, we do not mean to require
+  implementations to check for the @lquotes@;missing hour@rquotes that occurs
+  when Daylight Savings Time starts in the spring.],Old=[]}
 @end(Honest)
 @begin(Reason)
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0030]}

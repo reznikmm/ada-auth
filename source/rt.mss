@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2000/08/26 04:13:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2000/08/30 00:23:11 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/08/26 04:13:56 $}
+@Comment{$Date: 2000/08/30 00:23:11 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -972,10 +972,17 @@ is selected.
 @end{RunTime}
 
 @begin{ImplPerm}
-
 Implementations are allowed to define other queuing policies, but
 need not support more than one such policy per partition.
-
+@begin{Discussion}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0116]}
+@Chg{New=[This rule is really redundant, as @RefSecNum(Pragmas and Program Units)
+allows an implementation to limit the use of configuration pragmas to an
+empty environment. In that case, there would be no way to have multiple policies
+in a partition. In any case, the wording here really ought to be "...more than
+one queuing policy per partition.", since this part of the rule applies to
+all queuing policies.)],Old=[]}
+@end{Discussion}
 @end{ImplPerm}
 
 @begin{ImplAdvice}

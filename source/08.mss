@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/08/29 04:22:22 $}
+@Comment{$Date: 2000/08/30 00:23:09 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -955,7 +955,7 @@ to resolve references to directly visible non-overloadable
 homographs, which is something compilers have never before been
 required to do.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0026]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0026],Ref=[8652/0102]}
 @Chg{New=[@Leading@;If a @nt{type_extension} contains a component with
 the same name as a complete in an ancestor type, there must be no place
 where both components are visible. For instance:],Old=[]}
@@ -963,29 +963,66 @@ where both components are visible. For instance:],Old=[]}
 @Chg{New=[@key[package] A @key[is]
    @key[type] T @key[is tagged private];
    @key[package] B @key[is]
-       @key[type] NT @key[is new] T @key[with record]
-           I: Integer; -- Illegal because T.I is visible in the body.
-       @key[end record]; -- T.I is not visible here.
-    @key[end] B;
+      @key[type] NT @key[is new] T @key[with record]
+         I: Integer; -- @RI{Illegal because T.I is visible in the body.}
+      @key[end record]; -- @RI{T.I is not visible here.}
+   @key[end] B;
+@key[private]
+   @key[type] T @key[is tagged record]
+      I: Integer; -- @RI{Illegal because T.I is visible in the body.}
+   @key[end record];
 @key[end] A;],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@key[package] A @key[is]
 @key[package] @key[body] A @key[is]
-    @key[package] @key[body] B @key[is]
-        -- T.I becomes visible here.
-    @key[end] B;
+   @key[package] @key[body] B @key[is]
+      -- @RI{T.I becomes visible here.}
+   @key[end] B;
 @key[end] A;],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@key[package] A.C @key[is]
-    @key[type] NT2 @key[is new] A.T @key[with record]
-       I: Integer; -- Illegal because T.I is visible in the private part.
-    @key[end record]; -- T.I is not visible here.
+   @key[type] NT2 @key[is new] A.T @key[with record]
+      I: Integer; -- @RI{Illegal because T.I is visible in the private part.}
+   @key[end record]; -- @RI{T.I is not visible here.}
 @key[private]
-    -- T.I is visible here.
+    -- @RI{T.I is visible here.}
 @key[end] A.C;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[with] A;
+@key[package] D @key[is]
+   @key[type] NT3 @key[is new] A.T @key[with record]
+      I: Integer; -- @RI{Legal because T.I is never visible in this package.}
+   @key[end record];
+@key[end] D;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[with] D;
+@key[package] A.E @key[is]
+   @key[type] NT4 @key[is new] D.NT3 @key[with null record];
+   X : NT4;
+   I1 : Integer := X.I;        -- @RI{D.NT3.I}
+   I2 : Integer := D.NT3(X).I; -- @RI{D.NT3.I}
+   I3 : Integer := A.T(X).I;   -- @RI{A.T.I}
+@key[end] A.E;],Old=[]}
 @end{Example}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0102]}
+@Chg{New=[@Noprefix@;D.NT3 can have a component I because the component I of
+the parent type is never visible. The parent component exists, of course, but
+is never declared for the type D.NT3. In the child package A.E, the component
+I of A.T is visible, but that does not change the fact that the A.T.I component
+was never declared for type D.NT3. Thus, A.E.NT4 does not (visibly) inherit
+the component I from A.T, while it does inherit the component I from D.NT3.
+Of course, both components exist, and can be accessed by a type conversion
+as shown above. This behavior stems from the fact that every characteristic
+of a type (including components) must be declared somewhere in the innermost
+declarative region containing the type - if the characteristic is never visible
+in that declarative region, it is not inherited or declared. Therefore, such
+characteristics do not suddenly become available even if they are in fact
+visible in some other scope. See @RefSecNum{Private Operations} for more on
+the rules.],Old=[]}
 @end{Itemize}
 
 Note that we need to be careful which things we make "hidden from all
@@ -1745,13 +1782,11 @@ forbids things like this:
 A renaming-as-declaration
 declares a new view of the renamed entity.
 The profile of this new view takes its subtypes, parameter modes,
-and calling convention
-from the original profile of the
+and calling convention from the original profile of the
 callable entity, while taking the formal parameter
 @nt{name}s and @nt{default_expression}s from the profile given in the
 @nt{subprogram_renaming_declaration}.
-The new view is a function or procedure,
-never an entry.
+The new view is a function or procedure, never an entry.
 @begin{Honest}
 When renaming an entry as a procedure,
 the compile-time rules apply as if the new view is a procedure,
@@ -1762,6 +1797,13 @@ For example, it is illegal for the @nt{entry_call_statement} of a
 @nt{timed_entry_call} to call the new view.
 But what looks like a procedure call will do things like barrier
 waiting.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0105]}
+@Chg{New=[All properties of the renamed entity are inherited by the new view.
+In particular, if the renamed entity is abstract or requires overridding
+(see @RefSecNum{Abstract Types and Subprograms}), the new view also is
+abstract or requires overridding. (The renaming will often be illegal in
+these cases, as a renaming cannot be overridden.)],Old=[]}
 @end{Ramification}
 @end{StaticSem}
 

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/29 04:22:21 $}
+@Comment{$Date: 2000/08/30 00:23:08 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1074,8 +1074,7 @@ such as assignment or a membership test, that operates
 on a type, is called
 a @i(predefined operation) of the type.
 @Defn2{Term=[primitive operations], Sec=(of a type)}
-The @i(primitive operations) of a type
-are
+The @i(primitive operations) of a type are
 the predefined operations of the type, plus any user-defined
 primitive subprograms.
 @ToGlossary{Term=<Primitive operations>,
@@ -1886,9 +1885,8 @@ precede the @nt<derived_type_definition>.]
 @begin{Reason}
   We originally hoped we could relax this restriction.
   However, we found it too complex to specify the rules for
-  a type derived from an
-  incompletely defined limited type that subsequently became
-  nonlimited.
+  a type derived from an incompletely defined limited type that
+  subsequently became nonlimited.
 @end{Reason}
 
 @Defn{record extension}
@@ -1898,7 +1896,7 @@ A @nt<record_extension_part> shall be provided if and only if
 the parent type is a tagged type.
 @begin(ImplNote)
   We allow a record extension to inherit discriminants;
-  a previous version of Ada 9X did not.
+  an early version of Ada 9X did not.
   If the parent subtype is unconstrained, it can be implemented
   as though its discriminants were repeated in a new
   @nt{known_discriminant_part} and then used to constrain the old ones
@@ -3035,11 +3033,19 @@ For a machine that supports negative zeros,
     @IndexCheck{Range_Check}
     otherwise Constraint_Error is raised.
     @begin{Discussion}
-
       It's not crystal clear that Range_Check is appropriate here,
       but it doesn't seem worthwhile to invent a whole new check name
       just for this weird case, so we decided to lump it in with
-      Range_Check.@end{discussion}
+      Range_Check.
+    @end{discussion}
+    @begin{Honest}
+      @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0096]}
+      @Chg{New=[A sequence of characters corresponds to the result of
+      S'Wide_Image if it is the same ignoring case. Thus, the case of an
+      image of a nongraphic character does not matter. For example,
+      Character'Wide_Value("nul") does not raise Constraint_Error, even though
+      Character'Wide_Image returns "NUL" for the nul character.],Old=[]}
+    @end{Honest}
 
     @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
     For the evaluation of a call on S'Wide_Value (or S'Value) for an integer
@@ -3722,19 +3728,25 @@ the operations of any integer type.]
   It is not specified whether the implicit derivation from
   @i(root_integer) is direct or indirect, not that it really matters.
   All we want is for all integer types to be descendants of @i(root_integer).
+
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0099]}
+  @Chg{New=[Note that this derivation does not imply any inheritance of
+  subprograms. Subprograms are inherited only for types derived by a
+  @nt{derived_@!type_@!definition} (see @RefSecNum{Derived Types and Classes}),
+  or a @nt{private_@!extension_@!declaration} (see
+  @RefSecNum{Private Types and Private Extensions}, @RefSecNum{Private Operations},
+  and @RefSecNum{Formal Private and Derived Types}).],Old=[]}
 @end{Discussion}
 @begin{ImplNote}
   It is the intent that even nonstandard integer
-  types (see below) will be descendants of @i(root_integer), even
-  though they
+  types (see below) will be descendants of @i(root_integer), even though they
   might have a base range that exceeds that of @i(root_integer).
   This causes no problem for static calculations, which
   are performed without range restrictions
   (see @RefSecNum(Static Expressions and Static Subtypes)). However
   for run-time calculations, it is possible that Constraint_Error
   might be raised when using an operator of @i(root_integer)
-  on the result of 'Val applied to a value of a nonstandard integer
-  type.
+  on the result of 'Val applied to a value of a nonstandard integer type.
 @end{ImplNote}
 
 @PDefn2{Term=[position number], Sec=(of an integer value)}
@@ -4136,6 +4148,15 @@ are in the derivation class rooted at @i(root_real).]
   It is not specified whether the derivation from @i(root_real) is
   direct or indirect, not that it really matters.
   All we want is for all real types to be descendants of @i(root_real).
+
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0099]}
+  @Chg{New=[Note that this derivation does not imply any inheritance of
+  subprograms. Subprograms are inherited only for types derived by a
+  @nt{derived_@!type_@!definition} (see @RefSecNum{Derived Types and Classes}),
+  or a @nt{private_@!extension_@!declaration} (see
+  @RefSecNum{Private Types and Private Extensions}, @RefSecNum{Private Operations},
+  and @RefSecNum{Formal Private and Derived Types}).],Old=[]}
+
 @end{Ramification}
 
 @redundant[@PDefn{universal_real}

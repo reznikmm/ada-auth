@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:55 $}
+@Comment{$Date: 2000/08/30 00:23:09 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1417,8 +1417,7 @@ they would be removed when the user explicitly deletes a source file.
 Note that the rule is recursive: if the above permission is used to
 remove a compilation unit containing an inlined subprogram call,
 then compilation units that depend semantically upon the removed one
-may also be removed,
-and so on.
+may also be removed, and so on.
 
 Note that here we are talking about
 dependences among existing
@@ -1434,6 +1433,15 @@ If so, it either has to have a mode in which that optimization is
 turned off, or it has to automatically regenerate code for the inlined
 calls without requiring the user to resubmit them to the compiler.
 @end{Ramification}
+@begin{Discussion}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0108]}
+@Chg{New=[In the standard mode, implementations may only remove units from
+the environment for one of the reasons listed here, or in response to an
+explicit user command to modify the environment. It is not intended that the
+act of compiling a unit is one of the @lquotes@;mechansisms@rquotes for
+removing units other than those specified by this International Standard.],
+Old=[]}
+@end{Discussion}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -1888,12 +1896,17 @@ and, for Elaborate_All only, upon
 each @nt{library_item} needed by
 the declaration of the other library unit.
 @begin{Discussion}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0107]}
+@Chg{New=[@Lquotes@;Mentions@rquotes is used informally in the above rule; it is
+not intended to refer to the definition of @i{mentions} in
+@RefSecNum{Context Clauses - With Clauses}. It would have been better to use
+@Lquotes@;named@rquotes instead of @Lquotes@;mentioned@rquotes above.],Old=[]}
+
 See above for a definition of which @nt{library_item}s are @lquotes@;needed by@rquotes@;
 a given declaration.
 
 Note that elaboration dependences are among @nt{library_item}s,
-whereas the other two forms of dependence are among
-compilation units.
+whereas the other two forms of dependence are among compilation units.
 Note that elaboration dependence includes semantic dependence.
 It's a little bit sad that pragma Elaborate_Body can't be folded into
 this mechanism.

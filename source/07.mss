@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/08/25 04:02:55 $}
+@Comment{$Date: 2000/08/30 00:23:09 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2377,6 +2377,13 @@ Objects for which Adjust was never even invoked must not be finalized.],Old=[]}
 For a Finalize invoked as part of a call on an instance of
 Unchecked_Deallocation, any other finalizations due to
 be performed are performed, and then Program_Error is raised.
+@begin{Discussion}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0104]}
+@Chg{New=[The standard does not specify if storage is recovered in this case.
+If storage is not recovered (and the object continues to exist), Finalize
+may be called on the object again (when the @nt<allocator>'s master is
+finalized).],Old=[]}
+@end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023]}
 @Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}

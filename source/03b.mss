@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/29 04:22:22 $}
+@Comment{$Date: 2000/08/30 00:23:09 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @LabeledClause{Array Types}
 
@@ -2884,12 +2884,19 @@ shall not have a @nt<default_expression>.
 A given subprogram shall not be a dispatching operation of two
 or more distinct tagged types.
 @begin{Reason}
-
   This restriction minimizes
   confusion since multiple dispatching is not provided. The normal
   solution is to replace all but one of the tagged types with their
-  class-wide types.@end{reason}
-
+  class-wide types.
+@end{reason}
+@begin{ramification}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0098]}
+  @Chg{New=[This restriction applies even if the partial view (see
+  @RefSecNum{Private Types and Private Extensions}) of one or both
+  of the types is untagged. This follows from the definition of dispatching
+  operation: the operation is a dispatching operation anywhere the full
+  views of the (tagged) types are visible.],Old=[]}
+@end{ramification}
 
 The explicit declaration of a primitive subprogram of a
 tagged type shall occur before the type is frozen

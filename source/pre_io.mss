@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/08/29 04:22:23 $}
+@Comment{$Date: 2000/08/30 00:23:10 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -284,6 +284,14 @@ It is possible that a program based on the assumption that File_Mode'Last = Out_
 will be illegal (e.g., case statement choice coverage)
 or execute with a different effect in Ada 95.
 @end{Incompatible83}
+
+@begin{ImplNote}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097]}
+@Chg{New=[File_Type cannot be implemented as a (directly) controlled type, as
+Ada.Sequential_IO can be instantiated at any nesting depth. File_Type could have
+a component of a controlled type, as long as that type is declared in some
+other (non-generic) package.],Old=[]}
+@end{ImplNote}
 
 @LabeledSubClause{File Management}
 
@@ -589,6 +597,15 @@ The Element_Type formal of Direct_IO does not have an
 so that the implementation can make use of the ability to declare
 uninitialized variables of the type.
 @end{Reason}
+
+@begin{ImplNote}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097]}
+@Chg{New=[File_Type cannot be implemented as a (directly) controlled type, as
+Ada.Direct_IO can be instantiated at any nesting depth. File_Type could have
+a component of a controlled type, as long as that type is declared in some
+other (non-generic) package.],Old=[]}
+@end{ImplNote}
+
 @end{StaticSem}
 
 @LabeledSubClause{Direct Input-Output Operations}
@@ -800,6 +817,14 @@ files. Procedures are provided to change the current default input file
 and the current default output file.
 @ImplDef{external files for standard input, standard output, and
 standard error}
+@begin{ImplNote}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0113]}
+@Chg{New=[The default input file and default output file are not the names
+of distinct file objects, but rather the @i<role> played by one or more
+(other) file object(s). Thus, they generally will be implemented as accesses
+to another file object. An implementation which implements them by copying
+them is incorrect.],Old=[]}
+@end{ImplNote}
 
 @Defn{standard error file}
 At the beginning of program execution a default file for

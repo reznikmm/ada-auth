@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/08/29 04:22:22 $}
+@Comment{$Date: 2000/08/30 00:23:10 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -432,10 +432,13 @@ then it has to be obeyed in the instance.
 @leading@;The @lquotes@;properties@rquotes@; of the formals are determined
 without knowing anything about the actuals:
 @begin{Itemize}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0095]}
 A formal derived subtype is constrained if and only if the ancestor
 subtype is constrained.
 A formal array type is constrained if and only if the declarations
 says so.
+@Chg{New=[A formal private type is constrained if it does not have a
+discriminant part.],Old=[]}
 Other formal subtypes are unconstrained,
 even though they might be constrained in an instance.
 

@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/08/24 04:21:03 $}
+@Comment{$Date: 2000/08/30 00:23:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -874,6 +874,10 @@ The following are defined as @i(external interactions):
   @begin{Discussion}
     By @lquotes@;result returned@rquotes@; we mean to include function results
     and values returned in [@key(in)] @key(out) parameters.
+
+    @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0094]}
+    @Chg{New=[The lack of a result from a program that does not terminate
+    is also included here.],Old=[]}
   @end{Discussion}
 
   @Redundant[Any read or update of an atomic or volatile object
