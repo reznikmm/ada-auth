@@ -143,6 +143,8 @@ package body ARM_Format is
     -- 10/28/04 - RLB - Replaced double single quotes with double quotes,
     --			as directed by the ARG.
     --		- RLB - Added "AddedNormal" ChgRef kind.
+    -- 10/29/04 - RLB - Added code so that section references in Annex K are
+    --			links.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -170,15 +172,15 @@ package body ARM_Format is
 	 Notes		 => (Length =>  4, Str => "Note                                    "), -- NotesName
 	 Examples	 => (Length =>  7, Str => "Example                                 "), -- ExamplesName
 	 Ada83_Inconsistencies
-			 => (Length => 25, Str => "Inconsistency With Ada 83               "), -- Inconsistent83Name
+			 => (Length => 25, Str => "Inconsistency with Ada 83               "), -- Inconsistent83Name
 	 Ada83_Incompatibilities
-			 => (Length => 27, Str => "Incompatibility With Ada 83             "), -- Incompatible83Name
+			 => (Length => 27, Str => "Incompatibility with Ada 83             "), -- Incompatible83Name
 	 Ada83_Extensions=> (Length => 19, Str => "Extension to Ada 83                     "), -- Extend83Name
 	 Ada83_Wording	 => (Length => 26, Str => "Wording Change from Ada 83              "), -- DiffWord83Name
 	 Ada95_Inconsistencies
-			 => (Length => 25, Str => "Inconsistency With Ada 95               "), -- Inconsistent95Name
+			 => (Length => 25, Str => "Inconsistency with Ada 95               "), -- Inconsistent95Name
 	 Ada95_Incompatibilities
-			 => (Length => 27, Str => "Incompatibility With Ada 95             "), -- Incompatible95Name
+			 => (Length => 27, Str => "Incompatibility with Ada 95             "), -- Incompatible95Name
 	 Ada95_Extensions=> (Length => 19, Str => "Extension to Ada 95                     "), -- Extend95Name
 	 Ada95_Wording	 => (Length => 26, Str => "Wording Change from Ada 95              "), -- DiffWord95Name
 	 Reason		 => (Length =>  0, Str => (others => ' ')), -- Not used.
@@ -7099,7 +7101,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    ":" & Ascii.LF & Ascii.LF &
 				    Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
 				    "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				    " See " & Clause_String & '.',
+				    " See @RefSecbyNum{" & Clause_String & "}.",
 				Change_Kind => Format_Object.Attr_Prefix_Change_Kind,
 				Version => Format_Object.Attr_Prefix_Version);
 			else -- not leading:
@@ -7112,7 +7114,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    ":" & Ascii.LF & Ascii.LF &
 				    Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
 				    "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				    " See " & Clause_String & '.',
+				    " See @RefSecbyNum{" & Clause_String & "}.",
 				Change_Kind => Format_Object.Attr_Prefix_Change_Kind,
 				Version => Format_Object.Attr_Prefix_Version);
 			end if;

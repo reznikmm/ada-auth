@@ -307,13 +307,13 @@ Text commands:
 	text to "@b{NONE!}". This exists to insure that the prefixes are set
 	properly, and aren't just set by accident.
 
-@PragmaSyntax{<Text>}
+@PragmaSyn{<Text>}
 	Defines a pragma. The text is displayed in the current format.
 	The text should contain an @prag command (which specifies and indexes
 	the name - see below.) The text can contain arbitrary commands;
 	it will be run through the full evaluation code.
 	The text is also sent to a database used to later create Annex L.
-@AddedPragmaSyntax{Version=[<Version>],<Text>}
+@AddedPragmaSyn{Version=[<Version>],<Text>}
 	Defines a pragma added by <Version>. Otherwise, the text is as
         described for PragmaSyntax. We assume that this command is surrounded
 	by an appropriate @Chg; the purpose of the Version number here is

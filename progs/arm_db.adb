@@ -147,7 +147,10 @@ package body ARM_Database is
 			"],Kind=[Added]}";
 		when Inserted_Normal_Number =>
 		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[Added-Normal]}";
+			"],Kind=[Added]}";
+		    -- Note: In the report, we always use a normal insert,
+		    -- because this is likely to be different than the place
+		    -- where this is defined.
 		when Revised =>
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[Revised]}";
