@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/01/21 06:07:29 $}
+@Comment{$Date: 2005/01/22 02:25:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -161,12 +161,14 @@ Out_File. An implementation may restrict the number of files that may
 be associated with a given external file.
 @end{Notes}
 
+
 @RMNewPage@Comment{Break here so printed RM looks better.}
 @LabeledClause{Sequential and Direct Files}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00283-01]}
 @Defn{sequential file}
-@Defn{direct file}
+@Defn{direct file}@Chg{Version=[2],New=[@Defn{stream file}],Old=[]}
 Two kinds of access to external files are defined in this subclause:
 @i{sequential access} and @i{direct access}.
 The corresponding file types and the associated
@@ -174,8 +176,8 @@ operations are provided by the generic packages Sequential_IO and
 Direct_IO. A file
 object to be used for sequential access is called a @i{sequential file},
 and one  to be used for direct access is called a @i{direct file}.
-Access to stream files is described in
-@RefSecNum(The Package Streams.Stream_IO).
+Access to @Chg{Version=[2],New=[@i{stream file}s],Old=[stream files]}
+is described in @RefSecNum(The Package Streams.Stream_IO).
 
 @Defn{sequential access}
 For sequential access, the file is viewed as a sequence of values that
@@ -226,6 +228,13 @@ used by the next read or write operation. When a direct file is opened,
 the current index is set to one. The current index of a direct file is
 a property of a file object, not of an external file.
 @end{StaticSem}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
+  @ChgAdded{Version=[2],Text=[Italized @lquotes@;stream file@rquotes@;
+  to clarify that this is another kind of file.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{The Generic Package Sequential_IO}
 
@@ -325,12 +334,13 @@ additional effects described in subclause
                  Name : @key[in] String := "";
                  Form : @key[in] String := "");
 @end{Example}
+    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00283-01]}
     Establishes a new external file, with the given name and form,
     and associates this external file with the given file. The
     given file is left open. The current mode of the given file
     is set to the given access mode. The default access mode is
-    the mode Out_File for sequential and text
-    input-output; it is
+    the mode Out_File for sequential@Chg{Version=[2],New=[, stream,],Old=[]}
+    and text input-output; it is
     the mode Inout_File for direct input-output. For direct
     access, the size of the created file is implementation defined.
 
@@ -468,6 +478,13 @@ made to use an I/O feature that cannot be supported by the
 implementation due to limitations in the external environment.
 Any such restriction should be documented.
 @end{ImplPerm}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
+  @ChgAdded{Version=[2],Text=[Added text to specific the default mode for
+  a stream file.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Sequential Input-Output Operations}
 
@@ -2626,25 +2643,27 @@ instantiated for this type.
 @end{DiffWord95}
 
 
-@LabeledClause{Wide Text Input-Output}
+@LabeledRevisedClause{Version=[1],New=[Wide Text Input-Output and Wide Wide Text Input-Output],Old=[Wide Text Input-Output]}
 
 @begin{Intro}
-The package Wide_Text_IO provides facilities
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+The @Chg{Version=[2],New=[packages],Old=[package]} Wide_Text_IO
+@Chg{Version=[2],New=[and Wide_Wide_Text_IO provide],Old=[provides]} facilities
 for input and output in human-readable form. Each file is read or
-written sequentially, as a sequence of wide characters grouped into lines,
-and as a sequence of lines grouped into pages.
+written sequentially, as a sequence of wide characters
+@Chg{Version=[2],New=[(or wide wide characters) ],Old=[]} grouped
+into lines, and as a sequence of lines grouped into pages.
 @end{Intro}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChildUnit{Parent=[Ada],Child=[Wide_@!Text_IO]}
 The specification of package Wide_Text_IO is the same as that for
 Text_IO, except that in each Get,
 Look_Ahead, Get_Immediate,
 Get_Line, Put, and Put_Line procedure,
 any occurrence of Character is replaced by Wide_Character, and any
-occurrence of String is replaced by Wide_String.
-
-
+occurrence of String is replaced by Wide_String.@Chg{Version=[2],New=[
 @ChildUnit{Parent=[Ada],Child=[Integer_@!Wide_@!Text_IO]}
 @ChildUnit{Parent=[Ada],Child=[Float_@!Wide_@!Text_IO]}
 Nongeneric equivalents of Wide_Text_IO.Integer_IO
@@ -2653,7 +2672,49 @@ for each predefined numeric type,
 with names such as Ada.Integer_@!Wide_Text_IO,
 Ada.Long_@!Integer_@!Wide_Text_IO,
 Ada.Float_@!Wide_Text_IO,
-Ada.Long_@!Float_@!Wide_Text_IO.
+Ada.Long_@!Float_@!Wide_Text_IO.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Chg{Version=[2],New=[
+@ChildUnit{Parent=[Ada],Child=[Wide_Wide_@!Text_IO]}
+The specification of package Wide_Wide_Text_IO is the same as that for
+Text_IO, except that in each Get,
+Look_Ahead, Get_Immediate,
+Get_Line, Put, and Put_Line procedure,
+any occurrence of Character is replaced by Wide_Wide_Character, and any
+occurrence of String is replaced by Wide_Wide_String.
+@ChildUnit{Parent=[Ada],Child=[Integer_@!Wide_Wide_@!Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Float_@!Wide_Wide_@!Text_IO]}
+Nongeneric equivalents of Wide_Wide_Text_IO.Integer_IO
+and Wide_Wide_Text_IO.@!Float_IO are provided (as for Text_IO)
+for each predefined numeric type,
+with names such as Ada.Integer_@!Wide_Wide_Text_IO,
+Ada.Long_@!Integer_@!Wide_Wide_Text_IO,
+Ada.Float_@!Wide_Wide_Text_IO,
+Ada.Long_@!Float_@!Wide_Wide_Text_IO.],
+Old=[
+@ChildUnit{Parent=[Ada],Child=[Integer_@!Wide_@!Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Float_@!Wide_@!Text_IO]}
+Nongeneric equivalents of Wide_Text_IO.Integer_IO
+and Wide_Text_IO.@!Float_IO are provided (as for Text_IO)
+for each predefined numeric type,
+with names such as Ada.Integer_@!Wide_Text_IO,
+Ada.Long_@!Integer_@!Wide_Text_IO,
+Ada.Float_@!Wide_Text_IO,
+Ada.Long_@!Float_@!Wide_Text_IO.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[
+@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Unbounded_IO]}
+@ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Unbounded_IO]}
+The specification of package Wide_Text_IO.Wide_Unbounded_IO is the same as that
+for Text_IO.Unbounded_IO, except that any occurrence of Unbounded_String is
+replaced by Wide_Unbounded_String, and any occurrence of package Unbounded is
+replaced by Wide_Unbounded. The specification of package
+Wide_Wide_Text_IO.Wide_Unbounded_IO is the same as that for
+Text_IO.Unbounded_IO, except that any occurrence of Unbounded_String is
+replaced by Wide_Wide_Unbounded_String, and any occurrence of package Unbounded
+is replaced by Wide_Wide_Unbounded.]}
 @end{StaticSem}
 
 @begin{Extend83}
@@ -2661,12 +2722,35 @@ Ada.Long_@!Float_@!Wide_Text_IO.
 Support for Wide_Character and Wide_String I/O is new in Ada 95.
 @end{Extend83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Package Wide_Wide_Text_IO is new. Be glad it wasn't called
+  Double_Wide_Text_IO (for use in trailer parks) or Really_Wide_Text_IO.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Text=[Packages
+  Wide_Text_IO.Unbounded_IO and Wide_Wide_Text_IO.Unbounded_IO are
+  also new.]}
+@end{Extend95}
+
+
 @LabeledClause{Stream Input-Output}
 @begin{Intro}
 
-The packages Streams.Stream_IO, Text_IO.Text_Streams, and
-Wide_Text_IO.Text_Streams provide stream-oriented operations on files.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+The packages Streams.Stream_IO, Text_IO.Text_Streams, @Chg{Version=[2],
+New=[],Old=[and ]}Wide_Text_IO.Text_Streams@Chg{Version=[2],New=[, and
+Wide_Wide_Text_IO.Text_Streams],Old=[]} provide stream-oriented operations
+on files.
 @end{Intro}
+
+@begin{Diffword95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[Included package Wide_Wide_Text_IO.Text_Streams
+  in this description.]}
+@end{Diffword95}
+
 
 @LabeledSubClause{The Package Streams.Stream_IO}
 
@@ -2789,12 +2873,40 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @key(end) Ada.Streams.Stream_IO;
 @end(example)
 
-The subprograms Create, Open, Close, Delete, Reset, Mode, Name, Form,
-Is_Open, and End_of_File have the same effect as the corresponding
-subprograms in Sequential_IO (see @RefSecNum(File Management)).
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
+@ChgAdded{Version=[2],Text=[The type File_Type needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00283-01]}
+The subprograms @Chg{Version=[2],New=[given in subclause
+@RefSecNum(File Management) for the control of external files (],Old=[]}
+Create, Open, Close, Delete, Reset, Mode, Name, Form,@Chg{Version=[2],New=[ and],Old=[]}
+Is_Open@Chg{Version=[2],New=[) are available for stream files],
+Old=[, and End_of_File have the same effect as the corresponding
+subprograms in Sequential_IO (see @RefSecNum(File Management))]}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00283-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The End_of_File function:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Propagates Mode_Error if the mode of the file
+is not In_File;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[If positioning is supported for the given external
+file, the function returns True if the current index exceeds the size of the
+external file; otherwise it returns False;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[If positioning is not supported for the given
+external file, the function returns True if no more elements can be read from
+the given file; otherwise it returns False.]}
+@end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
-@ChgAdded{Version=[1],Text=[The Set_Mode procedure changes the mode of the
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00085-01]}
+@ChgAdded{Version=[1],Text=[The Set_Mode
+procedure @Chg{Version=[2],New=[sets],Old=[changes]} the mode of the
 file. If the new mode is Append_File, the file is positioned to its end;
 otherwise, the position in the file is unchanged.]}
 
@@ -2810,13 +2922,17 @@ object, thus allowing the stream-oriented attributes Read, Write,
 Input, and Output to be used on the same file for multiple types.
 @Chg{New=[Stream propagates Status_Error if File is not open.],Old=[]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 The procedures Read and Write are equivalent to the corresponding operations
 in the package Streams. Read propagates Mode_Error if the mode of File is
 not In_File. Write propagates Mode_Error if the mode of File is not
 Out_File or Append_File. The Read procedure with a Positive_Count
 parameter starts reading at the specified index.
 The Write procedure with a Positive_Count
-parameter starts writing at the specified index.
+parameter starts writing at the specified index.@Chg{Version=[2],New=[ For
+a file that supports positioning, Read without a Positive_Count parameter
+starts reading at the current index, and Write without a Positive_Count
+parameter starts writing at the current index.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
 @ChgAdded{Version=[1],Text=[The Size function returns the current size of the
@@ -2873,6 +2989,22 @@ If positioning is not supported for the given file, then a call
 of Index or Set_Index propagates Use_Error. Similarly, a call of
 Read or Write with a Positive_Count parameter propagates Use_Error.
 
+@begin{ImplNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00085-01]}
+@ChgAdded{Version=[2],Text=[It is permissible for an implementation to
+implement mode Append_File using the Unix append mode (the
+O_APPEND bit). Such an implementation does not support positioning when
+the mode is Append_File, and therefore the operations listed above must
+raise Use_Error. This is acceptable as there is no requirement that any
+particular file support positioning; therefore it is acceptable that a
+file support positioning when opened with mode Out_File, and the same file
+not support positioning when opened with mode Append_File. But it is not
+acceptable for a file to support positioning (by allowing the above
+operations), but to do something other than the defined semantics (that is,
+always write at the end, even when explicitly commanded to write somewhere
+else).]}
+@end{ImplNote}
+
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055],ARef=[AI95-00026-01]}
 @ChgDeleted{Version=[1],Text=[The Size function returns the current size of
 the file, in stream elements.]}
@@ -2911,14 +3043,29 @@ closed file.]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter mode
   of Flush; otherwise it could not be used on Standard_Output.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0055],ARef=[AI95-00026-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0055],ARef=[AI95-00026-01],ARef=[AI95-00256-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to describe the
-  effects of the various operations on the current index.]}
+  effects of the various operations on the current index. The Amendment adds
+  an explanation of the use of current index for Read and Write.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0056],ARef=[AI95-00001-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Stream can
   raise Status_Error, and clarified that using a Stream_Access whose file
   has been closed is erroneous.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00085-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that Set_Mode can
+  be called with the current mode.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
+  @ChgAdded{Version=[2],Text=[Corrected description of the file control
+  subprograms to clarify that they do not require truncation of the
+  external file - a stream file is not a sequential file.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[Added text to define that a Stream_IO.File_Type
+  needs finalization. This is used by restriction No_Nested_Finalization (see
+  @RefSecNum{Tasking Restrictions}).]}
 @end{DiffWord95}
 
 
@@ -2974,6 +3121,41 @@ has the following declaration:
 The Stream function has the same effect as the corresponding function
 in Streams.Stream_IO.
 @end{StaticSem}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[The Package Wide_Wide_Text_IO.Text_Streams]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[The package Wide_Wide_Text_IO.Text_Streams provides
+a function for treating a double wide text file as a stream.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Leading@;The library package
+Wide_Wide_Text_IO.Text_Streams has the following declaration:]}
+@begin{example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[with] Ada.Streams;@ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Text_@!Streams]}
+@key[package] Ada.Wide_Wide_Text_IO.Text_Streams @key[is]
+   @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Stream} (File : @key[in] File_Type) @key[return] Stream_Access;
+@key[end] Ada.Wide_Wide_Text_IO.Text_Streams;]}
+@end{example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[The Stream function has the same effect as the
+corresponding function in Streams.Stream_IO.]}
+@end{StaticSem}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Package Wide_Wide_Text_IO.Text_Streams is new.]}
+@end{Extend95}
 
 
 @LabeledClause{Exceptions in Input-Output}

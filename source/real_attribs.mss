@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:07 $}
+@Comment{$Date: 2005/01/22 02:25:18 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.20 $}
+@comment{$Revision: 1.21 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -630,8 +630,7 @@ uses in Ada 83; T'Safe_Emax can be computed in the revised language as
 Integer'Min(T'Exponent(T'Safe_First), T'Exponent(T'Safe_Last)).
 
 Implementations are encouraged to eliminate the incompatibilities discussed
-here by
-retaining the old attributes, during a transition period,
+here by retaining the old attributes, during a transition period,
 in the form of implementation-defined attributes with their former values.
 @end{Incompatible83}
 

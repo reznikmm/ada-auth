@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2005/01/21 06:07:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2005/01/22 02:25:17 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/01/21 06:07:30 $}
+@Comment{$Date: 2005/01/22 02:25:17 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -20,7 +20,7 @@ children are defined in @RefSec{Numerics}.
 
 @begin{StaticSem}
 @ChgRef{Version=[1], Kind=[Deleted]}
-@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+@ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 @begin{Example}
 @key[package] Ada.Numerics @key[is]@ChildUnit{Parent=[Ada],Child=[Numerics]}
    @key[pragma] Pure(Numerics);
@@ -121,7 +121,7 @@ Numerics.Generic_Elementary_Functions has the following declaration:
 @key{end} Ada.Numerics.Generic_Elementary_Functions;
 @end{Example}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
 @Defn{Ada.Numerics.Elementary_Functions}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Elementary_@!Functions]}
 The library package Numerics.Elementary_Functions
@@ -384,6 +384,13 @@ in the following ways:
 @end{itemize}
 @end{DiffWord83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Explicitly stated that the
+  nongeneric equivalents of Generic_Elementary_Functions are pure.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Random Number Generation}
 
 @begin{Intro}
@@ -521,14 +528,14 @@ of @lquotes@;@key[with] Ada.Finalization;@rquotes@; as a context clause):
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0097],ARef=[AI95-00115-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00344-01]}
-@Chg{Version=[1],New=[@Chg{Version=[2],New=[],
+@ChgAdded{Version=[1],Text=[@Chg{Version=[2],New=[],
 Old=[Unfortunately, ]}Numerics.Discrete_Random.Generator @Chg{Version=[2],New=[also can],Old=[cannot]} be
 implemented this way@Chg{Version=[2],New=[],Old=[, as Numerics.Discrete_Random can be instantiated at any
 nesting depth. However, Generator could have a component of a controlled type,
 as long as that type is declared in some other (non-generic) package. One
 possible solution would be to implement Numerics.@!Discrete_@!Random in terms
 of Numerics.@!Float_@!Random, using a component of Numerics.@!Float_@!Random.Generator
-to implement Numerics.@!Float_@!Random.@!Generator]}.],Old=[]}
+to implement Numerics.@!Float_@!Random.@!Generator]}.]}
 
 Clearly some level of indirection is required in the implementation of a
 Generator, since the parameter mode is @key(in) for all operations on a
@@ -572,7 +579,14 @@ Float having a range of
 The result of the function in an
 instantiation of Numerics.Discrete_Random is delivered as a value of the
 generic formal subtype Result_Subtype.
-@ImplDef{The algorithms for random number generation.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],Text=[The
+algorithms for random number generation.]}]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[The algorithm is the subject of a documentation
+  requirement, so we don't separately summarize this implementation-defined
+  item.]}]}
+@end{Discussion}
 @begin{Reason}
    The requirement for a level of indirection in accessing the internal state
    of a generator arises from the desire to make Random a function, rather than
@@ -628,17 +642,17 @@ obtained from a generator by invoking Save.
 Instantiation of Numerics.Discrete_Random with a subtype having a null range
 raises Constraint_Error.
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0050]}
-@Chg{New=[],Old=[@IndexCheck{Range_Check}
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0050],ARef=[AI95-00089]}
+@ChgDeleted{Version=[1],Text=[@IndexCheck{Range_Check}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 Invoking Value with a string that is not the image of any generator
 state raises Constraint_Error.]}
 @end{RunTime}
 
 @begin{Bounded}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0050]}
-@Chg{New=[It is a bounded error to invoke Value with a string that is not the
-image of any generator state.
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0050],ARef=[AI95-00089]}
+@ChgAdded{Version=[1],Text=[It is a bounded error to invoke Value with a
+string that is not the image of any generator state.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If the error is detected, Constraint_Error or
@@ -646,7 +660,7 @@ Program_Error is raised. Otherwise, a call to Reset with the resulting state
 will produce a generator such that calls to Random with this generator will
 produce a sequence of values of the appropriate subtype, but which might not
 be random in character. That is, the sequence of values might not fulfill the
-implementation requirements of this subclause.],Old=[]}
+implementation requirements of this subclause.]}
 @end{Bounded}
 
 @begin{ImplReq}
@@ -673,19 +687,30 @@ used and shall give its period, if known exactly, or a lower bound on the
 period, if the exact period is unknown. Periods that are so long that the
 periodicity is unobservable in practice can be described in such terms, without
 giving a numerical bound.
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[The
+algorithm used for random number generation, including a description of its
+period, shall be documented.]}]}
 
 The implementation also shall document the minimum time interval between calls
 to the time-dependent Reset procedure that are guaranteed to initiate
-different sequences, and it shall document
-the nature of the strings that
+different sequences, and it shall document the nature of the strings that
 Value will accept without raising Constraint_Error.
-@ImplDef{The minimum time interval between calls to the time-dependent Reset
-procedure that are guaranteed to initiate different random number sequences.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],Text=[The
+minimum time interval between
+calls to the time-dependent Reset procedure that are guaranteed to initiate
+different random number sequences.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[The
+minimum time interval between
+calls to the time-dependent Reset procedure that is guaranteed to initiate
+different random number sequences shall be documented.]}]}
 @end{DocReq}
 
 @begin{ImplAdvice}
 Any storage associated with an object of type Generator should be
 reclaimed on exit from the scope of the object.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],Text=[Any
+Any storage associated with an object of type Generator of the random
+number packages should be reclaimed on exit from the scope of the object.]}]}
 @begin{Ramification}
   A level of indirection is implicit in the semantics of the
   operations, given that they all take parameters of mode @key(in).
@@ -699,6 +724,10 @@ Reset should initiate a sequence of random numbers that does not, in a
 practical sense, overlap the sequence initiated by any other value. If this
 is not possible, then the mapping between initiator values and generator states
 should be a rapidly varying function of the initiator value.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[Each
+value of Initiator passed to Reset for the random number packages should
+initiate a distinct sequence of random numbers, or, if that is not possible,
+be at least a rapidly varying function of the initiator value.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -833,3 +862,10 @@ resetting the generator obtained from that instance to a time-dependent state,
 and then using random integers obtained from that generator to initialize the
 generators in each Worker task.
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0050],ARef=[AI95-00089-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Made the passing of an incorrect
+  Image of a generator a bounded error, as it may not be practical to check
+  for problems (if a generator consists of several related values).]}
+@end{DiffWord95}

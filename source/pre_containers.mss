@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2005/01/21 06:07:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2005/01/22 02:25:17 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/01/21 06:07:30 $}
+@Comment{$Date: 2005/01/22 02:25:17 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -235,6 +235,9 @@ Containers has the following declaration:]}
 @ChgAdded{Version=[2],Text=[Hash_Type represents the range of the result of a
 hash function. Count_Type represents the (potential or actual) number of
 elements of a container.]}
+@ChgImpldef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The value of Containers.Hash_Type'Modulus. The value of
+Containers.Count_Type'Last.]}]}
 
 @end{StaticSem}
 
@@ -373,207 +376,251 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Length} (Container : Vector) @key{return} Count_Type;]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : Vector) @key{return} Boolean;]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Clear} (Container : @key{in out} Vector);]}
 
-@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{To_Cursor} (Container : Vector;
+                       Index     : Extended_Index) @key{return} Cursor;]}
 
-@end{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{To_Index} (Position  : Cursor) @key{return} Extended_Index;]}
 
-
-@begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The package Ada.Containers.Vectors is new.]}
-@end{Extend95}
-
-**** The text below here still needs to be formatted ****
-
-   @key{function} Is_Empty (Container : Vector) @key{return} Boolean;
-
-   @key{procedure} Clear (Container : @key{in out} Vector);
-
-   @key{function} To_Cursor (Container : Vector;
-                       Index     : Extended_Index) @key{return} Cursor;
-
-   @key{function} To_Index (Position  : Cursor) @key{return} Extended_Index;
-
-   @key{function} Element (Container : Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Container : Vector;
                      Index     : Index_Type)
-      @key{return} Element_Type;
+      @key{return} Element_Type;]}
 
-   @key{function} Element (Position : Cursor) @key{return} Element_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Position : Cursor) @key{return} Element_Type;]}
 
-   @key{procedure} Query_Element
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
      (Container : @key{in} Vector;
       Index     : @key{in} Index_Type;
-      Process   : @key{not null access procedure} (Element : @key{in} Element_Type));
+      Process   : @key{not null access procedure} (Element : @key{in} Element_Type));]}
 
-   @key{procedure} Query_Element
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
      (Position : @key{in} Cursor;
-      Process  : @key{not null access procedure} (Element : @key{in} Element_Type));
+      Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
 
-   @key{procedure} Update_Element
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Update_Element}
      (Container : @key{in} Vector;
       Index     : @key{in} Index_Type;
-      Process   : @key{not null access procedure} (Element : @key{in out} Element_Type));
+      Process   : @key{not null access procedure} (Element : @key{in out} Element_Type));]}
 
-   @key{procedure} Update_Element
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Update_Element}
      (Position : @key{in} Cursor;
-      Process  : @key{not null access procedure} (Element : @key{in out} Element_Type));
+      Process  : @key{not null access procedure} (Element : @key{in out} Element_Type));]}
 
-   @key{procedure} Replace_Element (Container : @key{in} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Container : @key{in} Vector;
                               Index     : @key{in} Index_Type;
-                              By        : @key{in} Element_Type);
+                              By        : @key{in} Element_Type);]}
 
-   @key{procedure} Replace_Element (Position : @key{in} Cursor;
-                              By       : @key{in} Element_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Position : @key{in} Cursor;
+                              By       : @key{in} Element_Type);]}
 
-   @key{procedure} Assign (Target : @key{in out} Vector;
-                     Source : @key{in}     Vector);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Vector;
+                     Source : @key{in}     Vector);]}
 
-   @key{procedure} Move (Target : @key{in out} Vector;
-                   Source : @key{in out} Vector);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Vector;
+                   Source : @key{in out} Vector);]}
 
-   @key{procedure} Insert (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} Vector;
                      Before    : @key{in}     Extended_Index;
-                     New_Item  : @key{in}     Vector);
+                     New_Item  : @key{in}     Vector);]}
 
-   @key{procedure} Insert (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} Vector;
                      Before    : @key{in}     Cursor;
-                     New_Item  : @key{in}     Vector);
+                     New_Item  : @key{in}     Vector);]}
 
-   @key{procedure} Insert (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} Vector;
                      Before    : @key{in}     Cursor;
                      New_Item  : @key{in}     Vector;
-                     Position  :    @key{out} Cursor);
+                     Position  :    @key{out} Cursor);]}
 
-   @key{procedure} Insert (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} Vector;
                      Before    : @key{in}     Extended_Index;
                      New_Item  : @key{in}     Element_Type;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Insert (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} Vector;
                      Before    : @key{in}     Cursor;
                      New_Item  : @key{in}     Element_Type;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Insert (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} Vector;
                      Before    : @key{in}     Cursor;
                      New_Item  : @key{in}     Element_Type;
                      Position  :    @key{out} Cursor;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Prepend (Container : @key{in out} Vector;
-                      New_Item  : @key{in}     Vector);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Prepend} (Container : @key{in out} Vector;
+                      New_Item  : @key{in}     Vector);]}
 
-   @key{procedure} Prepend (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Prepend} (Container : @key{in out} Vector;
                       New_Item  : @key{in}     Element_Type;
-                      Count     : @key{in}     Count_Type := 1);
+                      Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Append (Container : @key{in out} Vector;
-                     New_Item  : @key{in}     Vector);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Append} (Container : @key{in out} Vector;
+                     New_Item  : @key{in}     Vector);]}
 
-   @key{procedure} Append (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Append} (Container : @key{in out} Vector;
                      New_Item  : @key{in}     Element_Type;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Insert_Space (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert_Space} (Container : @key{in out} Vector;
                            Before    : @key{in}     Extended_Index;
-                           Count     : @key{in}     Count_Type := 1);
+                           Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Insert_Space (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert_Space} (Container : @key{in out} Vector;
                            Before    : @key{in}     Cursor;
                            Position  :    @key{out} Cursor;
-                           Count     : @key{in}     Count_Type := 1);
+                           Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Set_Length (Container : @key{in out} Vector;
-                         Length    : @key{in}     Count_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Set_Length} (Container : @key{in out} Vector;
+                         Length    : @key{in}     Count_Type);]}
 
-   @key{procedure} Delete (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete} (Container : @key{in out} Vector;
                      Index     : @key{in}     Extended_Index;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Delete (Container : @key{in out} Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete} (Container : @key{in out} Vector;
                      Position  : @key{in out} Cursor;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Delete_First (Container : @key{in out} Vector;
-                           Count     : @key{in}     Count_Type := 1);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_First} (Container : @key{in out} Vector;
+                           Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Delete_Last (Container : @key{in out} Vector;
-                          Count     : @key{in}     Count_Type := 1);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_Last} (Container : @key{in out} Vector;
+                          Count     : @key{in}     Count_Type := 1);]}
 
-   @key{function} First_Index (Container : Vector) @key{return} Index_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Index} (Container : Vector) @key{return} Index_Type;]}
 
-   @key{function} First (Container : Vector) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First} (Container : Vector) @key{return} Cursor;]}
 
-   @key{function} First_Element (Container : Vector)
-      @key{return} Element_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Element} (Container : Vector)
+      @key{return} Element_Type;]}
 
-   @key{function} Last_Index (Container : Vector) @key{return} Extended_Index;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Index} (Container : Vector) @key{return} Extended_Index;]}
 
-   @key{function} Last (Container : Vector) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last} (Container : Vector) @key{return} Cursor;]}
 
-   @key{function} Last_Element (Container : Vector)
-      @key{return} Element_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Element} (Container : Vector)
+      @key{return} Element_Type;]}
 
-   @key{procedure} Swap (Container : @key{in} Vector;
-                   I, J      : @key{in} Index_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Swap} (Container : @key{in} Vector;
+                   I, J      : @key{in} Index_Type);]}
 
-   @key{procedure} Swap (I, J      : @key{in}     Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Swap} (I, J      : @key{in}     Cursor);]}
 
-   @key{generic}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{generic}
       @key{with function} "<" (Left, Right : Element_Type)
          @key{return} Boolean @key{is} <>;
-   @key{procedure} Generic_Sort (Container : @key{in} Vector);
+   @key{procedure} @AdaSubDefn{Generic_Sort} (Container : @key{in} Vector);]}
 
-   @key{function} Find_Index (Container : Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find_Index} (Container : Vector;
                         Item      : Element_Type;
                         Index     : Index_Type := Index_Type'First)
-      @key{return} Extended_Index;
+      @key{return} Extended_Index;]}
 
-   @key{function} Find (Container : Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : Vector;
                   Item      : Element_Type;
                   Position  : Cursor := No_Element)
-      @key{return} Cursor;
+      @key{return} Cursor;]}
 
-   @key{function} Reverse_Find_Index (Container : Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Reverse_Find_Index} (Container : Vector;
                                 Item      : Element_Type;
                                 Index     : Index_Type := Index_Type'Last)
-      @key{return} Extended_Index;
+      @key{return} Extended_Index;]}
 
-   @key{function} Reverse_Find (Container : Vector;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Reverse_Find} (Container : Vector;
                           Item      : Element_Type;
                           Position  : Cursor := No_Element)
-      @key{return} Cursor;
+      @key{return} Cursor;]}
 
-   @key{function} Contains (Container : Vector;
-                      Item      : Element_Type) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : Vector;
+                      Item      : Element_Type) @key{return} Boolean;]}
 
 
-   @key{function} Next (Position : Cursor) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor;]}
 
-   @key{function} Previous (Position : Cursor) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor;]}
 
-   @key{procedure} Next (Position : @key{in out} Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor);]}
 
-   @key{procedure} Previous (Position : @key{in out} Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor);]}
 
-   @key{function} Has_Element (Position : Cursor) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
 
-   @key{procedure}  Iterate
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure}  @AdaSubDefn{Iterate}
      (Container : @key{in} Vector;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
-   @key{procedure} Reverse_Iterate
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate}
      (Container : @key{in} Vector;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
-@key{private}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{private}]}
 
-   ... -- @RI[not specified by the language]
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   ... -- @RI[not specified by the language]]}
 
-@key{end} Ada.Containers.Vectors;>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{end} Ada.Containers.Vectors;]}
+
+@end{Example}
+
+**** The text below here still needs to be formatted ****
 
 
 The type Vector is used to represent vectors. The type Vector needs finalization
@@ -1240,6 +1287,8 @@ End AARM Notes.
 @xindent<Iterates over the nodes in Container as per Iterate, except that elements are
 traversed in reverse index order.>
 
+@end{StaticSem}
+
 @i<@s8<Bounded (Run-Time) Errors>>
 
 Reading the value of an empty element by calling Element, Query_Element,
@@ -1375,6 +1424,13 @@ value of Last_Index.>>
 AARM Note: This property is the main reason why only integer types (as opposed
 to any discrete type) are allowed as the index type of a vector. An enumeration
 or modular type would require a subtype in order to meet this requirement.
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+The package Ada.Containers.Vectors is new.]}
+@end{Extend95}
+
 
 !corrigendum A.18.3
 
@@ -2029,9 +2085,10 @@ function to organize the keys, while an ordered map orders the keys per a
 specified relation.
 
 This section describes the declarations that are common to both kinds of maps.
-See A.18.5 for a description of the semantics specific to Containers.Hashed_Maps
-and A.18.6 for a description of the semantics specific to
-Containers.Ordered_Maps.
+See @RefSecNum{The Package Containers.Hashed_Maps} for a description of the
+semantics specific to Containers.Hashed_Maps and
+@RefSecNum{The Package Containers.Ordered_Maps} for a description of the
+semantics specific to Containers.Ordered_Maps.
 
 @i<@s8<Static Semantics>>
 
@@ -2576,7 +2633,7 @@ End AARM Notes
 
 Which nodes are the first node and the last node of a map, and which node is the
 successor of a given node, are unspecified, other than the general semantics
-described in A.18.4.
+described in @RefSecNum{Maps}.
 
 AARM Note
 Typically the first node will be the first node in the first bucket, the last
@@ -2586,8 +2643,8 @@ end of each bucket.
 
 @xcode<@key{procedure} Clear (Container : @key{in out} Map);>
 
-@xindent<In addition to the semantics described in A.18.4, Clear does not
-affect the capacity of Container.>
+@xindent<In addition to the semantics described in @RefSecNum{Maps},
+Clear does not affect the capacity of Container.>
 
 AARM Note:
 procedure Move (Target : in out Map;
@@ -2604,8 +2661,8 @@ End AARM Note.
                   Position  :    @key{out} Cursor;
                   Inserted  :    @key{out} Boolean);>
 
-@xindent<In addition to the semantics described in A.18.4, if Length
-(Container) equals Capacity (Container), then Insert first calls
+@xindent<In addition to the semantics described in (see @RefSecNum{Maps}),
+if Length (Container) equals Capacity (Container), then Insert first calls
 Reserve_Capacity to increase the capacity of Container to some larger value.>
 
 AARM Notes:
@@ -3048,9 +3105,10 @@ to be stored without duplication. A hashed set uses a hash function to organize
 elements, while an ordered set orders its element per a specified relation.
 
 This section describes the declarations that are common to both kinds of sets.
-See A.18.8 for a description of the semantics specific to
-Containers.Hashed_Sets and A.18.9 for a description of the semantics specific
-to Containers.Ordered_Sets.
+See @RefSecNum{The Package Containers.Hashed_Sets} for a description of the
+semantics specific to Containers.Hashed_Sets and
+@RefSecNum{The Package Containers.Ordered_Sets} for a description of the
+semantics specific to Containers.Ordered_Sets.
 
 @i<@s8<Static Semantics>>
 
@@ -3691,19 +3749,19 @@ to store elements, not key/element pairs.
 
 Which elements are the first element and the last element of a set, and which
 element is the successor of a given element, are unspecified, other than the
-general semantics described in A.18.7.
+general semantics described in @RefSecNum{Sets}).
 
 @xcode<@key{procedure} Clear (Container : @key{in out} Set);>
 
-@xindent<In addition to the semantics described in A.18.7, Clear does not
-affect the capacity of Container.>
+@xindent<In addition to the semantics described in @RefSecNum{Sets}, Clear
+does not affect the capacity of Container.>
 
 @xcode<@key{procedure} Insert (Container : @key{in out} Set;
                   New_Item  : @key{in}     Element_Type;
                   Position  :    @key{out} Cursor;
                   Inserted  :    @key{out} Boolean);>
 
-@xindent<In addition to the semantics described in A.18.7, if Length
+@xindent<In addition to the semantics described in @RefSecNum{Sets}, if Length
 (Container) equals Capacity (Container), then Insert first calls
 Reserve_Capacity to increase the capacity of Container to some larger value.>
 
@@ -3780,7 +3838,8 @@ subprograms that take a cursor parameter should be O(1). The average time
 complexity of Reserve_Capacity should be O(@i<N>).
 
 AARM Note:
-See Containers.Hashed_Maps (see A.18.5) for implementation notes regarding some
+See @RefSec{The Package Containers.Hashed_Maps} for
+implementation notes regarding some
 of the operations of this package.
 
 @begin{Extend95}
@@ -4138,7 +4197,8 @@ behavior of this package is unspecified. Which subprograms of this package
 call Key, Generic_Keys."<" and Generic_Keys.">", and how many times the
 functions are called, is unspecified.
 
-In addition to the semantics described in A.18.7, the subprograms in package
+In addition to the semantics described in @RefSecNum{Sets}, the subprograms
+in package
 Generic_Keys named Floor, Ceiling, "<", and ">", are equivalent to the
 corresponding subprograms in the parent package, with the difference that the
 Key subprogram parameter is compared to elements in the container using the
@@ -4151,9 +4211,14 @@ Insert, Include, Replace, Delete, Exclude and Find operations that take an
 element parameter should be O((log @i<N>)**2) or better. The worst-case time
 complexity of the subprograms that take a cursor parameter should be O(1).
 
-AARM Note:
-See Containers.Ordered_Maps (see A.18.6) for implementation notes regarding
-some of the operations of this package.
+**** The text above here still needs to be formatted ****
+
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+  @ChgAdded{Version=[2],Text=[AARM Note:
+  See @RefSec{The Package Containers.Ordered_Maps}
+  for implementation notes regarding some of the operations of this package.]}
+@end{ImplNote}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4161,25 +4226,35 @@ some of the operations of this package.
 The generic package Ada.Containers.Ordered_Sets is new.]}
 @end{Extend95}
 
-!corrigendum A.18.10
 
-@dinsc
+@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Vectors]}
 
-The language-defined generic package Containers.Indefinite_Vectors provides a
-private type Vector and a set of operations. It provides the same
-operations as the package Containers.Vectors (see A.18.2) does, with the
-difference that the generic formal Element_Type is indefinite.
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The language-defined generic package
+Containers.Indefinite_Vectors provides a private type Vector and a set of
+operations. It provides the same operations as the package Containers.Vectors
+(see @RefSecNum{The Package Containers.Vectors}) does, with the difference that
+the generic formal Element_Type is indefinite.]}
+@end{Intro}
 
-@i<@s8<Static Semantics>>
+@begin{StaticSem}
 
-The declaration of the generic library package
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration
+of the generic library package
 Containers.Indefinite_Vectors@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Vectors]}
-has the same contents as Containers.Vectors except:
+has the same contents as Containers.Vectors except:]}
 
-@xbullet<The generic formal Element_Type is indefinite.>
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
 
-@xbullet<The Element parameter of access subprogram Process of Update_Element
-may be constrained even if Element_Type is unconstrained.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+of Update_Element may be constrained even if Element_Type is unconstrained.]}
+@end{Itemize}
+@end{StaticSem}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4187,43 +4262,62 @@ may be constrained even if Element_Type is unconstrained.>
 The generic package Ada.Containers.Indefinite_Vectors is new.]}
 @end{Extend95}
 
-!corrigendum A.18.11
 
-@dinsc
+@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Doubly_Linked_Lists]}
 
-The language-defined generic package Containers.Indefinite_Doubly_Linked_Lists
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The language-defined generic package Containers.Indefinite_Doubly_Linked_Lists
 provides private types List and Cursor, and a set of operations for each
 type. It provides the same operations as the package
-Containers.Doubly_Linked_Lists (see A.18.3) does, with the difference that the
-generic formal Element_Type is indefinite.
+Containers.Doubly_Linked_Lists
+(see @RefSecNum{The Package Containers.Doubly_Linked_Lists}) does,
+with the difference that the generic formal Element_Type is indefinite.]}
+@end{Intro}
 
-@i<@s8<Static Semantics>>
+@begin{StaticSem}
 
-The declaration of the generic library package
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
+the generic library package
 Containers.Indefinite_Doubly_Linked_Lists@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Doubly_Linked_Lists]}
 has the same contents as
-Containers.Doubly_Linked_Lists except:
+Containers.Doubly_Linked_Lists except:]}
 
-@xbullet<The generic formal Element_Type is indefinite.>
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
 
-@xbullet<The procedure with the profile:>
-@xcode<     @key{procedure} Insert (Container : @key{in out} List;
-                       Before    : @key{in}     Cursor;
-                       Position  :    @key{out} Cursor;
-                       Count     : @key{in}     Count_Type := 1);>
-@xindent<is omitted.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[The procedure with
+the profile:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[T],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} List;
+                  Before    : @key{in}     Cursor;
+                  Position  :    @key{out} Cursor;
+                  Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Noprefix=[T],Text=[is omitted.]}
 
-AARM Note: This procedure is omitted because there is no way to create a
-default-initialized object of an indefinite type. We considered having this
-routine insert an empty element similar to the empty elements of a vector,
-but rejected this possibility because the semantics are fairly complex and
-very different from the existing case. That would make it more error-prone
-to convert a container from a definite type to an indefinite type; by
-omitting the routine completely, any problems will be diagnosed by the
-compiler.
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This procedure is omitted because there is no way
+  to create a default-initialized object of an indefinite type. We considered
+  having this routine insert an empty element similar to the empty elements of
+  a vector, but rejected this possibility because the semantics are fairly
+  complex and very different from the existing case. That would make it more
+  error-prone to convert a container from a definite type to an indefinite
+  type; by omitting the routine completely, any problems will be diagnosed by
+  the compiler.]}
+@end{Discussion}
 
-@xbullet<The Element parameter of access subprogram Process of Update_Element
-may be constrained even if Element_Type is unconstrained.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+of Update_Element may be constrained even if Element_Type is unconstrained.]}
+@end{Itemize}
+@end{StaticSem}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4231,43 +4325,63 @@ may be constrained even if Element_Type is unconstrained.>
 The generic package Ada.Containers.Indefinite_Doubly_Linked_Lists is new.]}
 @end{Extend95}
 
-!corrigendum A.18.12
 
-@dinsc
+@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Hashed_Maps]}
 
-The language-defined generic package Containers.Indefinite_Hashed_Maps provides
-a map with the same operations as the package Containers.Hashed_Maps (see A.18.5),
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The language-defined generic package Containers.Indefinite_Hashed_Maps provides
+a map with the same operations as the package Containers.Hashed_Maps
+(see @RefSecNum{The Package Containers.Hashed_Maps}),
 with the difference that the generic formal types Key_Type and Element_Type are
-indefinite.
+indefinite.]}
+@end{Intro}
 
-@i<@s8<Static Semantics>>
+@begin{StaticSem}
 
-The declaration of the generic library package
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
+the generic library package
 Containers.Indefinite_Hashed_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Hashed_Maps]}
-has the same contents as Containers.Hashed_Maps except:
+has the same contents as Containers.Hashed_Maps except:]}
 
-@xbullet<The generic formal Key_Type is indefinite.>
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The generic formal Key_Type is indefinite.]}
 
-@xbullet<The generic formal Element_Type is indefinite.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
 
-@xbullet<The procedure with the profile:>
-@xcode<     @key{procedure} Insert (Container : @key{in out} Map;
-                       Key       : @key{in}     Key_Type;
-                       Position  :    @key{out} Cursor;
-                       Inserted  :    @key{out} Boolean);>
-@xindent<is omitted.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[The procedure with
+the profile:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[T],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} Map;
+                  Key       : @key{in}     Key_Type;
+                  Position  :    @key{out} Cursor;
+                  Inserted  :    @key{out} Boolean);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Noprefix=[T],Text=[is omitted.]}
 
-AARM Note: This procedure is omitted because there is no way to create a
-default-initialized object of an indefinite type. We considered having this
-routine insert an empty element similar to the empty elements of a vector,
-but rejected this possibility because the semantics are fairly complex and
-very different from the existing case. That would make it more error-prone
-to convert a container from a definite type to an indefinite type; by
-omitting the routine completely, any problems will be diagnosed by the
-compiler.
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This procedure is omitted because there is no way
+  to create a default-initialized object of an indefinite type. We considered
+  having this routine insert an empty element similar to the empty elements of
+  a vector, but rejected this possibility because the semantics are fairly
+  complex and very different from the existing case. That would make it more
+  error-prone to convert a container from a definite type to an indefinite
+  type; by omitting the routine completely, any problems will be diagnosed by
+  the compiler.]}
+@end{Discussion}
 
-@xbullet<The Element parameter of access subprogram Process of Update_Element
-may be constrained even if Element_Type is unconstrained.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+of Update_Element may be constrained even if Element_Type is unconstrained.]}
+@end{Itemize}
+@end{StaticSem}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4275,52 +4389,71 @@ may be constrained even if Element_Type is unconstrained.>
 The generic package Ada.Containers.Indefinite_Hashed_Maps is new.]}
 @end{Extend95}
 
-!corrigendum A.18.13
 
-@dinsc
+@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Ordered_Maps]}
 
-The language-defined generic package Containers.Indefinite_Ordered_Maps
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The language-defined generic package Containers.Indefinite_Ordered_Maps
 provides a map with the same operations as the package Containers.Ordered_Maps
-(see A.18.6), with the difference that the generic formal types Key_Type and
-Element_Type are indefinite.
+(see @RefSecNum{The Package Containers.Ordered_Maps}), with the difference that
+the generic formal types Key_Type and Element_Type are indefinite.]}
+@end{Intro}
 
-@i<@s8<Static Semantics>>
+@begin{StaticSem}
 
-The declaration of the generic library package
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
+the generic library package
 Containers.Indefinite_Ordered_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Ordered_Maps]}
 has the same contents as
-Containers.Ordered_Maps except:
+Containers.Ordered_Maps except:]}
 
-@xbullet<The generic formal Key_Type is indefinite.>
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The generic formal Key_Type is indefinite.]}
 
-@xbullet<The generic formal Element_Type is indefinite.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
 
-@xbullet<The procedure with the profile:>
-@xcode<     @key{procedure} Insert (Container : @key{in out} Map;
-                       Key       : @key{in}     Key_Type;
-                       Position  :    @key{out} Cursor;
-                       Inserted  :    @key{out} Boolean);>
-@xindent<is omitted.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[The procedure with
+the profile:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[T],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} Map;
+                  Key       : @key{in}     Key_Type;
+                  Position  :    @key{out} Cursor;
+                  Inserted  :    @key{out} Boolean);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Noprefix=[T],Text=[is omitted.]}
 
-AARM Note: This procedure is omitted because there is no way to create a
-default-initialized object of an indefinite type. We considered having this
-routine insert an empty element similar to the empty elements of a vector,
-but rejected this possibility because the semantics are fairly complex and
-very different from the existing case. That would make it more error-prone
-to convert a container from a definite type to an indefinite type; by
-omitting the routine completely, any problems will be diagnosed by the
-compiler.
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This procedure is omitted because there is no way
+  to create a default-initialized object of an indefinite type. We considered
+  having this routine insert an empty element similar to the empty elements of
+  a vector, but rejected this possibility because the semantics are fairly
+  complex and very different from the existing case. That would make it more
+  error-prone to convert a container from a definite type to an indefinite
+  type; by omitting the routine completely, any problems will be diagnosed by
+  the compiler.]}
+@end{Discussion}
 
-@xbullet<The Element parameter of access subprogram Process of Update_Element
-may be constrained even if Element_Type is unconstrained.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+of Update_Element may be constrained even if Element_Type is unconstrained.]}
 
-**** The text above here still needs to be formatted ****
+@end{Itemize}
+@end{StaticSem}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The generic package Ada.Containers.Indefinite_Ordered_Maps is new.]}
 @end{Extend95}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Hashed_Sets]}
 
@@ -4336,8 +4469,8 @@ that the generic formal type Element_Type is indefinite.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[
-The declaration of the generic library package
+@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration
+of the generic library package
 Containers.Indefinite_Hashed_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Hashed_Sets]}
 has the same contents as
 Containers.Hashed_Sets except:]}
@@ -4358,6 +4491,7 @@ unconstrained.]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The generic package Ada.Containers.Indefinite_Hashed_Sets is new.]}
 @end{Extend95}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Ordered_Sets]}
 
@@ -4393,6 +4527,7 @@ unconstrained.]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The generic package Ada.Containers.Indefinite_Ordered_Sets is new.]}
 @end{Extend95}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[Array Sorting]}
 

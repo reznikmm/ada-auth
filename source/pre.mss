@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2004/11/11 05:59:04 $}
+@Comment{$Date: 2005/01/22 02:25:16 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.21 $}
+@comment{$Revision: 1.22 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -38,9 +38,9 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\Exceptions @em @RefSecNum{The Package Exceptions}
 @\@\Finalization @em @RefSecNum{User-Defined Assignment and Finalization}
 @Chg{New=(@\@\Float_Text_IO @em @RefSecNum{Input-Output for Real Types}
-@\@\Float_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output}
+@\@\Float_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\Integer_Text_IO @em @RefSecNum{Input-Output for Integer Types}
-@\@\Integer_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output}
+@\@\Integer_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 ), Old=()}@\@\Interrupts @em @RefSecNum{The Package Interrupts}
 @\@\@\Names @em @RefSecNum{The Package Interrupts}
 @\@\IO_Exceptions @em @RefSecNum{Exceptions in Input-Output}
@@ -83,7 +83,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Text_Streams @em @RefSecNum{The Package Text_IO.Text_Streams}
 @\@\Unchecked_Conversion @em @RefSecNum{Unchecked Type Conversions}
 @\@\Unchecked_Deallocation @em @RefSecNum{Unchecked Storage Deallocation}
-@\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output}
+@\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{Complex Input-Output}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}>

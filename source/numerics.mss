@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2005/01/21 06:07:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2005/01/22 02:25:14 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/01/21 06:07:28 $}
+@Comment{$Date: 2005/01/22 02:25:14 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -561,7 +561,7 @@ Generic_Complex_Types as defined in ISO/IEC CD 13813
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Explicitly stated that the
-  predefined instantiations of Generic_Complex_Types are pure.]}
+  nongeneric equivalents of Generic_Complex_Types are pure.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[Added a @nt{pragma} Preelaboratable_Initialization to
@@ -954,7 +954,7 @@ ISO/IEC CD 13814 (for Ada 83) in the following ways:
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Explicitly stated that the
-  predefined instantiations of Generic_Complex_Elementary_Functions are pure.]}
+  nongeneric equivalents of Generic_Complex_Elementary_Functions are pure.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00185-01]}
   @ChgAdded{Version=[2],Text=[Corrected various inconsistencies in the
