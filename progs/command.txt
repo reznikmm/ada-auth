@@ -421,15 +421,18 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	added by the change), "AddedNormal" (for a paragraph added by the
 	change which gets a normal paragraph number - used for insertions at
 	the end of clauses and added to new clauses), "Deleted" (for a
-	paragraph deleted by the change), or "DeletedAdded" (for an
-        added paragraph which is later deleted). [These control the paragraph
+	paragraph deleted by the change), "DeletedAdded" (for an
+        added paragraph which is later deleted), or "RevisedAdded" (for an
+        added paragraph which is later revised). [These control the paragraph
 	numbering of the following paragraph.] The <DR_Number>(s) and/or
 	<AI_Number>(s) that triggered the change are given. As many references
 	as necessary can be given. (Zero is allowed).
 	Note: If there are changes to the same paragraph in multiple versions,
 	each version should have their own chgref. *** THIS DOESN'T WORK ***
-	The Kind should be the same for all chgrefs - the numbering is the
-	same no matter when the paragraph was added or deleted.
+	The ChgRefs should be in the order of the versions (first version 1,
+	then version 2, etc.) The Kind should be consistent for all chgrefs -
+	the numbering is the same no matter when the paragraph was added or
+	deleted. That means "RevisedAdded" after "Added", etc.
 @chgnote{<text>} Notes on particular change. This is treated as a comment; it
 	has a separate command solely so that stripped easily in the future.
 @chg{[Version=[<Version>],]New=[<new text>],Old=[<old text>]}
@@ -439,6 +442,26 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
         the newest changes inside of older changes. The text may not contain
         any command that ends the paragraph. The Version is assumed to be '1'
         if that parameter is not given. Version is interpreted as for ChgRef.
+@ChgAdded{Version=[<Version>],[NoPrefix=[T|F],][Leading=[T|F],]
+        [Keepnext=[T|F],]Text=[text]}
+	Marks an insertion of a complete paragraph consisting of 'text'. This
+	cannot be nested in other commands. The AARM prefix (if any) also is
+	marked as an insertion. The optional parameters (conditionally) set the
+	paragraph properties; they work the same as the @NoPrefix, @Leading,
+	and @KeepNext commands if set to T, except that they're conditional
+	on the paragraph text being inserted. If omitted, each is assumed to
+	have the value F.
+@ChgDeleted{Version=[<Version>],[NoPrefix=[T|F],][Leading=[T|F],]
+        [Keepnext=[T|F],]Text=[text]}
+	Marks a deletion of a complete paragraph consisting of 'text'. This
+	cannot be nested in other commands. The AARM prefix (if any) also is
+	marked as a deletion. The optional parameters (conditionally) set the
+	paragraph properties; they work the same as the @NoPrefix, @Leading,
+	and @KeepNext commands if set to T, except that they're conditional
+	on the paragraph text being inserted in the document (even if it is
+	marked as deleted). If omitted, each is assumed to have the value F.
+
+New=[<new text>],Old=[<old text>]}
 @ChgImplDef{Version=[<version>],Kind=(<kind>),Text=<text>}
 	Marks a changed implementation-defined entry. (Essentially a
 	combination of ChgRef and Impldef.) <text> is the
@@ -446,7 +469,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	on the handling of the arguments.
 @ChgAttribute{Version=[<version>],Kind=(<kind>),ChginAnnex=[T|F],
 	Leading=[T|F],Prefix=<Prefix>,AttrName=<Name>,
-	[Ref={<DR_Number>}|ARef={<AI_Number>}],Text=<Text>}
+	{[Ref={<DR_Number>}|ARef={<AI_Number>}]},Text=<Text>}
 	Marks a changed attribute entry. (Essentially a combination of
 	ChgRef and Attribute.) ChginAnnex controls whether the change
 	is reflected in the Annex. (Set this to F when the change is in

@@ -7,7 +7,7 @@ package ARM_Input is
     -- or other entity, and routines to lex the input entities.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002  AXE Consultants.
+    -- Copyright 2000, 2002, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -40,6 +40,8 @@ package ARM_Input is
     --
     --  5/15/00 - RLB - Created base package.
     --  7/18/02 - RLB - Added Check_One_of_Parameter_Names.
+    -- 12/06/04 - RLB - Expanded Check_One_of_Parameter_Names to take up to
+    --			five names.
 
     type Input_Type is abstract tagged limited null record;
 
@@ -142,23 +144,28 @@ package ARM_Input is
         -- error message will be produced, and Param_Close_Bracket will
         -- be set to ' '.
 
+    subtype Param_Num is Natural range 0 .. 5;
     procedure Check_One_of_Parameter_Names (
 		Input_Object : in out Input_Type'Class;
 		Param_Name_1 : in ARM_Input.Command_Name_Type;
 		Param_Name_2 : in ARM_Input.Command_Name_Type;
+		Param_Name_3 : in ARM_Input.Command_Name_Type := (others => ' ');
+		Param_Name_4 : in ARM_Input.Command_Name_Type := (others => ' ');
+		Param_Name_5 : in ARM_Input.Command_Name_Type := (others => ' ');
 		Is_First : in Boolean;
 		Param_Close_Bracket : out Character;
-		Is_Param_1 : out Boolean);
-        -- Check that the name of a parameter (if any) is Param_Name_1 or
-	-- Param_Name_2. This is the first parameter is Is_First is True;
+		Param_Found : out Param_Num);
+        -- Check that the name of a parameter (if any) is one of the given
+	-- names. If the parameter is set to all blanks, it is not used.
+	-- This is the first parameter is Is_First is True;
 	-- otherwise it is a later parameter. (For a later parameter, we'll
 	-- skip the comma and any whitespace.)
-	-- If the parameter name is Param_Name_1, Is_Param_1 will be True;
-	-- otherwise it will be False.
+	-- Param_Found will be set to the number of the parameter that was
+	-- found.
         -- If the parameter has an argument, the opening character will
         -- be read, and the closing character will be returned in
         -- in Param_Close_Bracket. If the parameter wasn't found, an
-        -- error message will be produced, and Param_Close_Bracket will
-        -- be set to ' '.
+        -- error message will be produced, Param_Close_Bracket will
+        -- be set to ' ', and Param_Found will be set to 0.
 
 end ARM_Input;

@@ -45,6 +45,7 @@ package body ARM_Database is
     --  8/28/00 - RLB - Added revision info to database.
     -- 10/28/04 - RLB - Added Inserted_Normal_Number change kind.
     -- 11/02/04 - RLB - Added Deleted_Inserted_Number change kind.
+    -- 12/06/04 - RLB - Added Revised_Inserted_Number change kind.
 
     type String_Ptr is access String;
     type Item is record
@@ -155,6 +156,9 @@ package body ARM_Database is
 		when Revised =>
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[Revised]}";
+		when Revised_Inserted_Number =>
+		    return "@ChgRef{Version=[" & Item.Version &
+			"],Kind=[RevisedAdded]}";
 		when Deleted =>
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[Deleted]}";

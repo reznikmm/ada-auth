@@ -44,6 +44,8 @@ package body ARM_Input is
     --  5/15/00 - RLB - Created base package.
     --  5/16/00 - RLB - Added `' as a open/close pairing.
     --  7/18/02 - RLB - Added Check_One_of_Parameter_Names.
+    -- 12/06/04 - RLB - Expanded Check_One_of_Parameter_Names to take up to
+    --			five names.
 
     function Is_Open_Char (Open_Char : in Character) return Boolean is
 	-- Return True if character is a parameter opening character
@@ -247,20 +249,24 @@ package body ARM_Input is
 		Input_Object : in out Input_Type'Class;
 		Param_Name_1 : in ARM_Input.Command_Name_Type;
 		Param_Name_2 : in ARM_Input.Command_Name_Type;
+		Param_Name_3 : in ARM_Input.Command_Name_Type := (others => ' ');
+		Param_Name_4 : in ARM_Input.Command_Name_Type := (others => ' ');
+		Param_Name_5 : in ARM_Input.Command_Name_Type := (others => ' ');
 		Is_First : in Boolean;
 		Param_Close_Bracket : out Character;
-		Is_Param_1 : out Boolean) is
-        -- Check that the name of a parameter (if any) is Param_Name_1 or
-	-- Param_Name_2. This is the first parameter is Is_First is True;
+		Param_Found : out Param_Num) is
+        -- Check that the name of a parameter (if any) is one of the given
+	-- names. If the parameter is set to all blanks, it is not used.
+	-- This is the first parameter is Is_First is True;
 	-- otherwise it is a later parameter. (For a later parameter, we'll
 	-- skip the comma and any whitespace.)
-	-- If the parameter name is Param_Name_1, Is_Param_1 will be True;
-	-- otherwise it will be False.
+	-- Param_Found will be set to the number of the parameter that was
+	-- found.
         -- If the parameter has an argument, the opening character will
         -- be read, and the closing character will be returned in
         -- in Param_Close_Bracket. If the parameter wasn't found, an
-        -- error message will be produced, and Param_Close_Bracket will
-        -- be set to ' '.
+        -- error message will be produced, Param_Close_Bracket will
+        -- be set to ' ', and Param_Found will be set to 0.
         Our_Param_Name : ARM_Input.Command_Name_Type;
         Ch : Character;
     begin
@@ -282,30 +288,62 @@ package body ARM_Input is
         -- else nothing to clean up.
         end if;
         Arm_Input.Get_Name (Input_Object, Our_Param_Name, Null_Name_Allowed => True);
-        if Ada.Characters.Handling.To_Lower (Param_Name_1) =
-	   Ada.Characters.Handling.To_Lower (Our_Param_Name) then
+        if Param_Name_1 /= ARM_Input.Command_Name_Type'(others => ' ') and then
+	   Ada.Characters.Handling.To_Lower (Param_Name_1) =
+	     Ada.Characters.Handling.To_Lower (Our_Param_Name) then
 	    ARM_Input.Get_Char (Input_Object, Ch);
 	    if Ch /= '=' then
 	        Ada.Text_IO.Put_Line ("  ** Bad parameter character for " &
 		    Ada.Strings.Fixed.Trim(Our_Param_Name, Ada.Strings.Right) &
 		    " parameter: " & Ch & " on line " & ARM_Input.Line_String (Input_Object));
 	    end if;
-	    Is_Param_1 := True;
-        elsif Ada.Characters.Handling.To_Lower (Param_Name_2) =
-	   Ada.Characters.Handling.To_Lower (Our_Param_Name) then
+	    Param_Found := 1;
+        elsif Param_Name_2 /= ARM_Input.Command_Name_Type'(others => ' ') and then
+	   Ada.Characters.Handling.To_Lower (Param_Name_2) =
+	     Ada.Characters.Handling.To_Lower (Our_Param_Name) then
 	    ARM_Input.Get_Char (Input_Object, Ch);
 	    if Ch /= '=' then
 	        Ada.Text_IO.Put_Line ("  ** Bad parameter character for " &
 		    Ada.Strings.Fixed.Trim(Our_Param_Name, Ada.Strings.Right) &
 		    " parameter: " & Ch & " on line " & ARM_Input.Line_String (Input_Object));
 	    end if;
-	    Is_Param_1 := False;
+	    Param_Found := 2;
+        elsif Param_Name_3 /= ARM_Input.Command_Name_Type'(others => ' ') and then
+	   Ada.Characters.Handling.To_Lower (Param_Name_3) =
+	     Ada.Characters.Handling.To_Lower (Our_Param_Name) then
+	    ARM_Input.Get_Char (Input_Object, Ch);
+	    if Ch /= '=' then
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter character for " &
+		    Ada.Strings.Fixed.Trim(Our_Param_Name, Ada.Strings.Right) &
+		    " parameter: " & Ch & " on line " & ARM_Input.Line_String (Input_Object));
+	    end if;
+	    Param_Found := 3;
+        elsif Param_Name_4 /= ARM_Input.Command_Name_Type'(others => ' ') and then
+	   Ada.Characters.Handling.To_Lower (Param_Name_4) =
+	     Ada.Characters.Handling.To_Lower (Our_Param_Name) then
+	    ARM_Input.Get_Char (Input_Object, Ch);
+	    if Ch /= '=' then
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter character for " &
+		    Ada.Strings.Fixed.Trim(Our_Param_Name, Ada.Strings.Right) &
+		    " parameter: " & Ch & " on line " & ARM_Input.Line_String (Input_Object));
+	    end if;
+	    Param_Found := 4;
+        elsif Param_Name_5 /= ARM_Input.Command_Name_Type'(others => ' ') and then
+	   Ada.Characters.Handling.To_Lower (Param_Name_5) =
+	     Ada.Characters.Handling.To_Lower (Our_Param_Name) then
+	    ARM_Input.Get_Char (Input_Object, Ch);
+	    if Ch /= '=' then
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter character for " &
+		    Ada.Strings.Fixed.Trim(Our_Param_Name, Ada.Strings.Right) &
+		    " parameter: " & Ch & " on line " & ARM_Input.Line_String (Input_Object));
+	    end if;
+	    Param_Found := 5;
         else
 	    Ada.Text_IO.Put_Line ("  ** Bad parameter name: " & Ada.Strings.Fixed.Trim (Our_Param_Name, Ada.Strings.Right) &
 				  ", " & Ada.Strings.Fixed.Trim (Param_Name_1, Ada.Strings.Right) & " or " &
 				  Ada.Strings.Fixed.Trim (Param_Name_2, Ada.Strings.Right) & " expected on line " &
 				  ARM_Input.Line_String (Input_Object));
-	    Is_Param_1 := False;
+	    Param_Found := 0;
         end if;
         -- Now, open the parameter section:
         ARM_Input.Get_Char (Input_Object, Ch);

@@ -1,5 +1,7 @@
 with ARM_Output,
-     ARM_Contents,
+     ARM_Contents;
+--private -- Ada 2005
+with ARM_Input,
      ARM_Database;
 package ARM_Format is
 
@@ -73,6 +75,7 @@ package ARM_Format is
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
     -- 11/16/04 - RLB - Added Attr_Prefix_Text_Change_Kind.
+    -- 12/06/04 - RLB - Added reference chain for Format_Type.
 
     type Format_Type is tagged limited private;
 
@@ -185,6 +188,15 @@ private
 	Display, Syntax_Display, Syntax_Indented, Syntax_Production,
 	Enumerated, Hanging_Indented, In_Table);
 
+    type Reference;
+    type Reference_Ptr is access Reference;
+    type Reference is record
+	Ref_Name : ARM_Input.Command_Name_Type;
+	Ref_Len  : Natural; -- Length of the reference.
+	Is_DR_Ref : Boolean; -- True for a DR reference; False for an AI reference.
+        Next : Reference_Ptr;
+    end record;
+
     type Format_Type is tagged limited record
 	-- Document information:
 	Document : ARM_Format.Document_Type;
@@ -220,6 +232,9 @@ private
 			     -- The tab stops for the next paragraph.
 	In_Bundle : Boolean := False;
 			     -- Are we in a bundle?
+	References : Reference_Ptr := null;
+			     -- Any references to generate at the start of the
+			     -- next paragraph.
 
 	-- Paragraph numbering info:
 	Next_Note : Natural; -- The number of the next note. These are
