@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2005/03/10 06:20:00 $ $Author: Randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2005/03/11 05:49:18 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/10 06:20:00 $}
+@Comment{$Date: 2005/03/11 05:49:18 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -328,7 +328,7 @@ Old=[@RefSecNum{Task Execution - Task Activation}]}).@Chg{Version=[2],
 New=[],Old=[ The rules have two parts: the task dispatching model
 (see @RefSecNum{The Task Dispatching Model}),
 and a specific task dispatching policy
-(see @RefSecNum{The Standard Task Dispatching Policy}).]}]
+(see @RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching}).]}]
 @end{Intro}
 
 @begin{DiffWord95}
@@ -488,7 +488,8 @@ running task to go back to a ready queue.
 An implementation is allowed to define additional resources as execution
 resources, and to define the corresponding allocation policies for them.
 Such resources may have an implementation defined effect on
-task dispatching@Chg{Version=[2],New=[],Old=[ (see @RefSecNum{The Standard Task Dispatching Policy})]}.
+task dispatching@Chg{Version=[2],New=[],
+Old=[ (see @RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching})]}.
 @ImplDef{The affect of implementation defined execution resources on
 task dispatching.}
 
@@ -564,109 +565,406 @@ deferred while the affected task performs a protected action.]}
 @end{DiffWord95}
 
 
-@LabeledSubClause{The Standard Task Dispatching Policy}
+@LabeledRevisedSubClause{Version=[2],
+New=[Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching],
+Old=[The Standard Task Dispatching Policy]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[This clause allows a single task
+dispatching policy to be defined for all priorities, or the range of priorities
+to be split into subranges that are assigned individual dispatching
+policies.]]}
+@end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
 @Leading@Keepnext@;The form of a @nt{pragma} Task_Dispatching_Policy is as follows:
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Task_Dispatching_Policy)(@SynI{policy_}@Syn2{identifier} );'
+@PragmaSyn`@key{pragma} @prag(Task_Dispatching_Policy)(@SynI{policy_}@Syn2{identifier});'
+
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
+pragma Priority_Specific_Dispatching is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Priority_Specific_Dispatching> (@SynI{policy_}@Syn2{identifier},
+   @SynI{first_priority_}@Syn2{expression}, @SynI{last_priority_}@Syn2{expression});''}
+
 @end{Syntax}
+
+@begin{Resolution}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[The expected type for @SynI{first_priority_}@nt{expression}
+and @SynI{last_priority_}@nt{expression} is Integer.]}
+@end{Resolution}
 
 @begin{Legality}
 
-The @SynI{policy_}@Syn2{identifier} shall either be FIFO_Within_Priorities or
-an implementation-defined @Syn2{identifier}.
-@ImplDef{Implementation-defined @SynI{policy_}@Syn2{identifier}s allowed
-in a @nt{pragma} Task_Dispatching_Policy.}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01],ARef=[AI95-00355-01]}
+The @SynI{policy_}@nt{identifier} @Chg{Version=[2],New=[used in a @nt{pragma}
+Task_Dispatching_Policy shall be the name of a task dispatching policy],
+Old=[shall either be FIFO_Within_Priorities or
+an implementation-defined @Syn2{identifier}]}.
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined @SynI{policy_}@Syn2{identifier}s allowed
+in a @nt{pragma} Task_Dispatching_Policy.]}]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[The @SynI{policy_}@nt{identifier}
+used in a @nt{pragma}
+Priority_Specific_Dispatching shall be the name of a task dispatching policy.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[Both @Syni{first_priority_}@!@nt{expression} and
+@Syni{last_priority_}@!@nt{expression} shall be static expressions in the range
+of System.Any_Priority; @SynI{last_priority_}@!@nt{expression} shall have a
+value greater than or equal to @SynI{first_priority_}@!@nt{expression}.]}
 
 @end{Legality}
 
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[@nt{Pragma} Task_Dispatching_Policy specifies the
+task dispatching policy.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[@nt{Pragma} Priority_Specific_Dispatching specifies
+the task dispatching policy for the specified range of priorities. Tasks within
+the range of priorities specified in a Priority_Specific_Dispatching pragma are
+dispatched according to the specified dispatching policy.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[If a partition contains one or more
+Priority_Specific_Dispatching pragmas the dispatching policy for priorities not
+covered by any Priority_Specific_Dispatching pragmas is
+FIFO_Within_Priorities.]}
+
+@end{StaticSem}
+
 @begin{LinkTime}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00355-01]}
 @PDefn2{Term=[configuration pragma], Sec=(Task_Dispatching_Policy)}
 @PDefn2{Term=[pragma, configuration], Sec=(Task_Dispatching_Policy)}
-A Task_Dispatching_Policy pragma is a configuration pragma.
+A Task_Dispatching_Policy pragma is a configuration pragma.@Chg{Version=[2],
+New=[ A Priority_Specific_Dispatching pragma is a configuration pragma.
+@PDefn2{Term=[configuration pragma], Sec=(Priority_Specific_Dispatching)}
+@PDefn2{Term=[pragma, configuration], Sec=(Priority_Specific_Dispatching)}],Old=[]}
 
-If the FIFO_Within_Priorities policy is specified for a partition,
-then the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking})
-shall also be specified for the partition.
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[The priority ranges specified in more than one
+Priority_Specific_Dispatching pragma within the same partition shall not be
+overlapping.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[If a partition contains one or more
+Priority_Specific_Dispatching pragmas it shall not contain a
+Task_Dispatching_Policy pragma.]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00333-01]}
+@ChgDeleted{Version=[2],Text=[If the FIFO_Within_Priorities policy is specified
+for a partition, then the Ceiling_Locking policy
+(see @RefSecNum{Priority Ceiling Locking}) shall also be specified for
+the partition.]}
+
 @end{LinkTime}
 
 @begin{RunTime}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00355-01]}
 @Defn{task dispatching policy}
 @Redundant[A @i{task dispatching policy} specifies the details of task
 dispatching that are not covered by the basic task dispatching model.
 These rules govern when tasks are inserted into and
-deleted from the ready queues,
+deleted from the ready queues@Chg{Version=[2],New=[],Old=[,
 and whether a task is inserted at the head or the tail of the
-queue for its active priority.]
-The task dispatching policy is specified by a Task_Dispatching_Policy
-configuration pragma.
-@PDefn{unspecified}
-If no such pragma appears in any of the program
+queue for its active priority]}.]
+@Chg{Version=[2],New=[A single],Old=[The]} task dispatching policy is
+specified by a Task_Dispatching_Policy configuration pragma.
+@Chg{Version=[2],New=[Pragma Priority_Specific_Dispatching assigns distinct
+dispatching policies to ranges of System.Any_Priority.],
+Old=[@PDefn{unspecified}If no such pragma appears in any of the program
 units comprising a partition, the task dispatching policy for
-that partition is unspecified.
+that partition is unspecified.]}
 
-@Leading@;The language defines only one task dispatching policy, FIFO_Within_Priorities;
-when this policy is in effect, modifications to the ready queues occur
-only as follows:
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[@PDefn{unspecified}If neither @nt{pragma} applies
+to any of the program units comprising a partition, the task dispatching policy
+for that partition is unspecified.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[If a partition contains one or more
+Priority_Specific_Dispatching pragmas a task dispatching point occurs for the
+currently running task of a processor whenever there is a non-empty ready queue
+for that processor with a higher priority than the priority of the running
+task.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[A task that has its base priority changed may move
+from one dispatching policy to another. It is immediately dispatched according
+to the new policy.]}
+
+@ChgNote{The following stuff is moved to the next subclause}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[The language defines only one task
+dispatching policy, FIFO_Within_Priorities; when this policy is in effect,
+modifications to the ready queues occur only as follows:]}
+
 @begin{itemize}
 
-When a blocked task becomes ready, it is added at the tail of the
-ready queue for its active priority.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[When a blocked task becomes ready,
+it is added at the tail of the ready queue for its active priority.]}
 
-When the active priority of a ready task that is not
-running changes, or the setting of its base
-priority takes effect, the task is removed from the ready queue for
-its old active priority and is added at the tail of the ready queue for its new
-active priority, except in the case where the active priority is lowered due to
-the loss of inherited priority, in which case the task is added at the
-head of the ready queue for its new active priority.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[When the active priority of a ready task that is
+not running changes, or the setting of its base priority takes effect, the task
+is removed from the ready queue for its old active priority and is added at the
+tail of the ready queue for its new active priority, except in the case where
+the active priority is lowered due to the loss of inherited priority, in which
+case the task is added at the head of the ready queue for its new active
+priority.]}
 
-When the setting of the base priority of a running task takes effect, the
-task is added to the tail of the ready queue for its active priority.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[When the setting of the base priority of a
+running task takes effect, the task is added to the tail of the ready queue for
+its active priority.]}
 
-When a task executes a @nt{delay_statement} that does not result in blocking,
-it is added to the tail of the ready queue for its active priority.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[When a task executes a @nt{delay_statement} that
+does not result in blocking, it is added to the tail of the ready queue for its
+active priority.]}
 @begin{Ramification}
-If the delay does result in blocking,
-the task moves to the @lquotes@;delay queue@rquotes@;,
-not to the ready queue.
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[If the delay does result in blocking,
+  the task moves to the @lquotes@;delay queue@rquotes@;,
+  not to the ready queue.]}
 @end{Ramification}
 
 @end{itemize}
 
-@PDefn{task dispatching point}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[@PDefn{task dispatching point}
 @PDefn{dispatching point}
 Each of the events specified above is a task dispatching point
-(see @RefSecNum{The Task Dispatching Model}).
+(see @RefSecNum{The Task Dispatching Model}).]}
 
-In addition, when a task is preempted, it is added at the head of the
-ready queue for its active priority.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[In addition, when a task is preempted, it is
+added at the head of the ready queue for its active priority.]}
 
 @end{RunTime}
 
+@begin{ImplReq}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[An implementation shall allow specifying both the
+locking policy (see @RefSecNum{Priority Ceiling Locking}) as Ceiling_Locking
+and one or more Priority_Specific_Dispatching pragmas for a single partition.]}
+@end{ImplReq}
+
 @begin{DocReq}
 
-@Leading@Defn{priority inversion}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[@Defn{priority inversion}
 @i{Priority inversion} is the duration for which a task remains at the
 head of the highest priority ready queue while the processor executes
-a lower priority task. The implementation shall document:
+a lower priority task. The implementation shall document:]}
 @begin{Itemize}
-The maximum priority inversion a user task can experience due to activity
-of the implementation (on behalf of lower priority tasks), and
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[The maximum priority inversion a user task can experience due to activity
+of the implementation (on behalf of lower priority tasks), and]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[whether execution of a task can be preempted by
+the implementation processing of delay
+expirations for lower priority tasks, and if so, for how long.]}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of priority inversion.]}]}
+@end{Itemize}
+
+@end{DocReq}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
+Implementations are allowed to define other task dispatching policies, but
+need not support more than one @Chg{Version=[2],New=[task dispatching],
+Old=[such]} policy per partition.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00355-01]}
+@Chg{Version=[2],New=[An implementation need not support @nt{pragma}
+Priority_Specific_Dispatching if it is infeasible to support it in the
+target environment.],
+Old=[@Redundant[For optimization purposes,]
+an implementation may alter the points at which task dispatching occurs,
+in an implementation defined manner.
+However, a @nt{delay_statement} always corresponds to at least one task
+dispatching point.]}
+
+@ImplDef{Implementation defined task dispatching.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[Implementation defined task
+dispatching@Chg{Version=[2],New=[ policies],Old=[]}.]}
+
+@end{ImplPerm}
+
+@begin{Notes}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[If the active priority of a running task is
+lowered due to loss of inherited priority (as it is on completion of a
+protected operation) and there is a ready task of the same active priority that
+is not running, the running task continues to run (provided that there is no
+higher priority task).]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[The setting of a task's base priority as a result
+of a call to Set_Priority does not always take effect immediately when
+Set_Priority is called. The effect of setting the task's base priority is
+deferred while the affected task performs a protected action.]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgDeleted{Version=[2],Text=[Setting the base priority of a ready task causes
+the task to move to the end of the queue for its active priority,
+regardless of whether the active priority of the task actually changes.]}
+
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  It is no longer required to specify Ceiling_Locking with the language-defined
+  task dispatching policies; we only require that implementations @i<allow>
+  them to be used together.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+  @ChgAdded{Version=[2],Text=[@key{Pragma} Priority_Specific_Dispatching is
+  new; it allows specifying different policies for different priorities.]}
+@end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that an implementation may support only
+  one task dispatching policy (of any kind, language-defined or otherwise)
+  per partition.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+  @ChgAdded{Version=[2],Text=[This description is simplified to describe only
+  the rules for the Task_Dispatching_Policy pragma that are common to
+  all policies. In particular, rules about preemption are moved elsewhere. This
+  makes it easier to add other policies (which may not involve preemption).]}
+@end{DiffWord95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Preemptive Dispatching]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[This clause defines a preemptive task
+dispatching policy.]]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[The @SynI{policy_}@nt{identifier}
+FIFO_Within_Priorities is a task dispatching policy.]}
+
+@end{StaticSem}
+
+@begin{RunTime}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+@ChgAdded{Version=[2],Text=[When FIFO_Within_Priorities is in effect,
+modifications to the ready queues occur only as follows:]}
+
+@begin{itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+@ChgAdded{Version=[2],Text=[When a blocked task becomes ready, it is added at
+the tail of the ready queue for its active priority.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[When the active priority of a ready task that is
+not running changes, or the setting of its base
+priority takes effect, the task is removed from the ready queue for
+its old active priority and is added at the tail of the ready queue for its new
+active priority, except in the case where the active priority is lowered due to
+the loss of inherited priority, in which case the task is added at the
+head of the ready queue for its new active priority.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[When the setting of the base priority of a running task takes effect, the
+task is added to the tail of the ready queue for its active priority.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[When a task executes a @nt{delay_statement} that
+does not result in blocking, it is added to the tail of the ready queue for
+its active priority.]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If the delay does result in blocking,
+  the task moves to the @lquotes@;delay queue@rquotes@;,
+  not to the ready queue.]}
+@end{Ramification}
+
+@end{itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+@ChgAdded{Version=[2],Text=[@PDefn{task dispatching point}
+@PDefn{dispatching point}
+Each of the events specified above is a task dispatching point
+(see @RefSecNum{The Task Dispatching Model}).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+@ChgAdded{Version=[2],Text=[A task dispatching point occurs for the currently
+running task of a processor whenever there is a nonempty ready queue for that
+processor with a higher priority than the priority of the running task. The
+currently running task is said to be @i<preempted> and it is added at the head
+of the ready queue for its active priority.@Defn2{Term=[preempt],Sec=[a running task]}]}
+
+@end{RunTime}
+
+@begin{ImplReq}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
+@ChgAdded{Version=[2],Text=[An implementation shall allow specifying both the
+task dispatching policy as FIFO_Within_Priorities and the locking policy (see
+@RefSecNum{Priority Ceiling Locking}) as Ceiling_Locking for a single
+partition.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is the standard combination of policies,
+  and we want that to be portable.]}
+@end{Reason}
+@end{ImplReq}
+
+@begin{DocReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{priority inversion}
+@i{Priority inversion} is the duration for which a task remains at the
+head of the highest priority ready queue while the processor executes
+a lower priority task. The implementation shall document:]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The maximum priority inversion a user task
+can experience due to activity
+of the implementation (on behalf of lower priority tasks), and]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The maximum priority inversion a user task can experience from
 the implementation shall be documented.]}]}
 
-whether execution of a task can be preempted by the implementation
-processing of delay
-expirations for lower priority tasks, and if so, for how long.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
-Text=[Implementation-defined aspects of priority inversion.]}]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[whether execution of a task can be preempted
+by the implementation processing of delay
+expirations for lower priority tasks, and if so, for how long.]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The amount of time that a task can be preempted for processing on
 behalf of lower-priority tasks shall be documented.]}]}
@@ -674,41 +972,152 @@ behalf of lower-priority tasks shall be documented.]}]}
 
 @end{DocReq}
 
-@begin{ImplPerm}
-
-Implementations are allowed to define other task dispatching policies, but
-need not support more than one such policy per partition.
-
-
-@Redundant[For optimization purposes,]
-an implementation may alter the points at which task dispatching occurs,
-in an implementation defined manner.
-However, a @nt{delay_statement} always corresponds to at least one task
-dispatching point.
-
-@ImplDef{Implementation defined task dispatching.}
-
-@end{ImplPerm}
-
 @begin{Notes}
 
-If the active priority of a running task is lowered due to loss of
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+@ChgAdded{Version=[2],Text=[If the active priority of a running task is
+lowered due to loss of
 inherited priority (as it is on completion of a protected
 operation) and there is a ready task of the same active priority
 that is not running,
 the running task continues to run (provided that there is no higher
-priority task).
+priority task).]}
 
-The setting of a task's base priority as a result of a call to
-Set_Priority does not always take effect immediately when Set_Priority
-is called. The effect of setting the task's base priority is deferred
-while the affected task performs a protected action.
-
-Setting the base priority of a ready task causes
-the task to move to the end of the queue for its active priority,
-regardless of whether the active priority of the task actually changes.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+@ChgAdded{Version=[2],Text=[Setting the base priority of a ready task causes
+the task to move to the tail of the queue for its active priority,
+regardless of whether the active priority of the task actually changes.]}
 
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+  @ChgAdded{Version=[2],Text=[This subclause is new; it mainly consists of
+  text that was found in @RefSecNum{The Task Dispatching Model} and
+  @RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching} in Ada 95. This was
+  separated out so the definition of additional policies was easier.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
+  @ChgAdded{Version=[2],Text=[We require that implementations allow
+  this policy and Ceiling_Locking together.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+  @ChgAdded{Version=[2],Text=[We explicitly defined FIFO_Within_Priorities
+  to be a task dispatching policy.]}
+@end{DiffWord95}
+
+@LabeledAddedSubClause{Version=[2],Name=[Non-Preemptive Dispatching]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[This clause defines a non-preemptive task
+dispatching policy.]]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[The @SynI{policy_}@nt{identifier}
+Non_Preemptive_FIFO_Within_Priorities is a task dispatching policy.]}
+
+@end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[Non_Preemptive_FIFO_Within_Priorities shall not be
+specified as the @SynI{policy_}@nt{identifier} of @nt{pragma}
+Priority_Specific_Dispatching (see
+@RefSecNum{Pragmas Task_Dispatching_Policy and Priority_Specific_Dispatching}).]}
+
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The non-preemptive nature of this policy could
+cause the policies of higher priority tasks to malfunction, missing deadlines
+and having unlimited priority inversion. That would render the use of such
+policies impotent and misleading. As such, this policy only makes sense
+for a complete system.]}
+@end{Reason}
+@end{Legality}
+
+@begin{RunTime}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01]}
+@ChgAdded{Version=[2],Text=[When Non_Preemptive_FIFO_Within_Priorities is in
+effect, modifications to the ready queues occur only as follows:]}
+
+@begin{itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01]}
+@ChgAdded{Version=[2],Text=[When a blocked task becomes ready, it is added at
+the tail of the ready queue for its active priority.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[When the active priority of a ready task that is
+not running changes, or the setting of its base
+priority takes effect, the task is removed from the ready queue for
+its old active priority and is added at the tail of the ready queue for its new
+active priority.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[When the setting of the base priority of a running task takes effect, the
+task is added to the tail of the ready queue for its active priority.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[When a task executes a @nt{delay_statement} that
+does not result in blocking, it is added to the tail of the ready queue for
+its active priority. This is a task dispatching point
+(see @RefSecNum{The Task Dispatching Model}).@PDefn{task dispatching point}
+@PDefn{dispatching point}]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If the delay does result in blocking,
+  the task moves to the @lquotes@;delay queue@rquotes@;,
+  not to the ready queue.]}
+@end{Ramification}
+
+@end{itemize}
+
+@end{RunTime}
+
+@begin{ImplReq}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
+@ChgAdded{Version=[2],Text=[An implementation shall allow specifying both the
+task dispatching policy as Non_Preemptive_FIFO_Within_Priorities and the
+locking policy (see @RefSecNum{Priority Ceiling Locking}) as Ceiling_Locking
+for a single partition.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is the standard combination of policies,
+  and we want that to be portable.]}
+@end{Reason}
+@end{ImplReq}
+
+@begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01]}
+@ChgAdded{Version=[2],Text=[Since implementations are allowed to round all
+ceiling priorities in subrange System.Priority to System.Priority'Last (see
+@RefSecNum{Priority Ceiling Locking}), an implementation may allow a task to
+execute within a protected object without raising its active priority provided
+the protected object does not contain pragma Interrupt_Priority,
+Interrupt_Handler, or Attach_Handler.]}
+
+@end{ImplPerm}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01],ARef=[AI95-00355-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Policy Non_Preemptive_FIFO_Within_Priorities is new.]}
+@end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
+  @ChgAdded{Version=[2],Text=[We require that implementations allow
+  this policy and Ceiling_Locking together.]}
+@end{DiffWord95}
+
+
+** More of new shit here **
+
 
 @LabeledClause{Priority Ceiling Locking}
 

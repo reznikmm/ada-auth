@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:02 $}
+@Comment{$Date: 2005/03/11 05:49:17 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -511,7 +511,10 @@ covers @i<T>, or an access parameter designating one of these types. The
 designator of the subprogram shall not be the same as that of a component of
 the tagged type visible at the point of the @nt<selected_component>. The
 @nt<selected_component> denotes a view of this subprogram that omits the first
-formal parameter.]}
+formal parameter. This view is called a @i{prefixed view} of the subprogram,
+and the @nt{prefix} of the @nt<selected_component> (after any implicit
+dereference) is called the @i<prefix> of the prefixed view.
+@Defn{prefixed view}@Defn2{Term=[prefix],Sec=[of a prefixed view]}]}
 
 @end{Itemize}
 
@@ -553,17 +556,24 @@ then the expanded name is ambiguous, independently of the @nt<selector_name>.
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
-@ChgAdded{Version=[2],Text=[If a @nt<selected_component> other than an expanded
-name resolves to denote a view of a subprogram whose first parameter is an
-access parameter, the @nt<prefix> shall denote an aliased view of an object.]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
+@ChgAdded{Version=[2],Text=[For a subprogram whose first parameter is an
+access parameter, the prefix of any prefixed view shall denote an aliased
+view of an object.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00407-01]}
+@ChgAdded{Version=[2],Text=[For a subprogram whose first parameter is of mode
+@b<in out> or @b<out>, or of an anonymous access-to-variable type, the prefix
+of any prefixed view shall denote a variable.]}
 
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[We want calls in both this new notation and the
-traditional notation to have the same legality. Thus, the implicit 'Access in
+@ChgAdded{Version=[2],Text=[We want calls through a prefixed view and through
+a normal view to have the same legality. Thus, the implicit 'Access in
 this new notation needs the same legality check that an explicit 'Access
-would have.]}
+would have. Similarly, we need to prohibit the first parameter of the
+subprogram to be @key{in out} if the object is a constant, because that is
+(obviously) prohibited for passing a normal parameter.]}
 @end{Reason}
 @end{Legality}
 
@@ -580,14 +590,6 @@ the value or object denoted by the @nt<prefix> has this component.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 The exception Constraint_Error is raised if this check fails.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
-@ChgAdded{Version=[2],Text=[ For a @nt<selected_component> with a tagged @nt<prefix>
-and a @nt<selector_name> that denotes a view of a subprogram, a call on the view
-denoted by the @nt<selected_component> is equivalent to a call on the
-subprogram with the first actual parameter being provided by the
-object or value denoted by the @nt<prefix> (or the Access attribute of this
-object or value if the first formal parmeter is an access parameter), and the
-remaining actual parameters given by the @nt<actual_parameter_part>, if any.]}
 @end{RunTime}
 
 @begin{Examples}
@@ -602,8 +604,8 @@ remaining actual parameters given by the @nt<actual_parameter_part>, if any.]}
   Writer.Unit        @RI[--  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
   Min_Cell(H).Value  @RI[--  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
                      @RI[--  of the function call Min_Cell(H)]
-@Chg{Version=[2],New=<  X.Activate         @RI[--  a procedure call assuming X has @\(see @RefSecNum{Subprogram Calls})]
-                     @RI[--  a tagged type]
+@Chg{Version=[2],New=<  X.Activate         @RI[--  a prefixed view of a procedure @\(see @RefSecNum{Subprogram Calls})]
+                     @RI[--  assuming X has a tagged type]
 >,Old=<>}  Control.Seize      @RI[--  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
   Pool(K).Write      @RI[--  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
 @end{Example}
@@ -650,11 +652,10 @@ new terminology, to accommodate class-wide types, etc.
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The prefix call notation for
-  tagged objects is new. This provides a similar notation to that used in other
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The prefixed view notation
+  for tagged objects is new. This provides a similar notation to that used in other
   popular languages, and also reduces the need for @nt{use_clause}s. This
-  is sometimes known as @lquotes@;prefix call notation@rquotes or @lquotes@;distinguished
-  receiver notation@rquotes@;.],Old=[]}
+  is sometimes known as @lquotes@;distinguished receiver notation@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Given the following

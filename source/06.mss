@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/03/10 06:19:56 $}
+@Comment{$Date: 2005/03/11 05:49:18 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -872,17 +872,16 @@ and makes these Intrinsic, thus forbidding 'Access.],Old=[]}
   a subprogram declared immediately
   within a @nt{protected_body}@Chg{Version=[2],New=[;],Old=[.]}
 
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
-  @ChgAdded{Version=[2],Text=[the view of a subprogram denoted by a
-  @nt{selected_component} whose @nt{prefix} denotes an object or value of a
-  tagged type, and whose @nt{selector_name} denotes a subprogram operating on
-  the type (see @RefSecNum{Selected Components}).]}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
+  @ChgAdded{Version=[2],Text=[any prefixed view of a subprogram (see
+  @RefSecNum{Selected Components}).]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[The profile of the @nt{selected_component} is
-    different than the @lquotes@;real@rquotes profile of the subprogram, so
-    we don't want to be able to take 'Access of it,
-    as that would require generating a wrapper of some sort.]}
+    @ChgAdded{Version=[2],Text=[The profile of a prefixed view is
+    different than the @lquotes@;real@rquotes profile of the subprogram
+    (it doesn't have the first parameter), so we don't want to be able
+    to take 'Access of it, as that would require generating a wrapper of
+    some sort.]}
   @end{Reason}
 
 @end{InnerItemize}
@@ -1174,11 +1173,10 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to ensure that two
   attributes conform only if they have the same @nt{attribute_designator}.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01],ARef=[AI95-00254-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01],ARef=[AI95-00254-01],ARef=[AI95-00407-01]}
   @ChgAdded{Version=[2],Text=[Defined the calling convention for anonymous
-  access-to-subprogram types and for the @nt{selected_component} whose
-  @nt{prefix} denotes an object or value, and whose @nt{selector_name} denotes
-  a subprogram (see @RefSecNum{Selected Components}).]}
+  access-to-subprogram types and for prefixed views of subprograms (see
+  @RefSecNum{Selected Components}).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
   @ChgAdded{Version=[2],Text=[Defined the conformance of access result types
@@ -1436,10 +1434,18 @@ For a dispatching call,
 defines which @nt{subprogram_body} is executed.
 @end{Honest}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00407-01]}
+@ChgAdded{Version=[2],Text=[If the @nt{name} or @nt{prefix} of a subprogram
+call denotes a prefixed view (see @RefSecNum{Selected Components}), the
+subprogram call is equivalent to a call on the underlying subprogram, with the
+first actual parameter being provided by the the prefix of the prefixed view
+(or the Access attribute of this prefix if the first formal parameter is an
+access parameter), and the remaining actual parameters given by the
+@nt{actual_parameter_part}, if any.]}
+
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The exception Program_Error is raised at the point of a
-@nt{function_call}
-if the function
+@nt{function_call} if the function
 completes normally without executing a @nt{return_statement}.
 @begin{Discussion}
 We are committing to raising the exception at the point
@@ -1554,20 +1560,26 @@ that falls off the end to here from RM83-6.5.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Non-dispatching abstract operations are no longer considered when
-resolving a subprogram call. That makes it possible to use @key{abstract}
-to @lquotes@;undefine@rquotes@; a predefined operation. That's especially
-helpful when defining custom arithmetic packages.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Non-dispatching abstract operations are no longer considered when
+  resolving a subprogram call. That makes it possible to use @key{abstract}
+  to @lquotes@;undefine@rquotes@; a predefined operation for an untagged type.
+  That's especially helpful when defining custom arithmetic packages.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[Changed the definition of the nominal subtype of a
-@nt{function_call} to use the nominal subtype wording of 6.1, to take into
-account @nt{null_exclusion}s and access result types.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[Changed the definition of the nominal subtype
+  of a @nt{function_call} to use the nominal subtype wording of
+  @RefSecNum{Subprogram Declarations}, to take into account
+  @nt{null_exclusion}s and access result types.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00407-01]}
+  @ChgAdded{Version=[2],Text=[Defined the meaning of a call on a prefixed
+  view of a subrprogram (see @RefSecNum{Selected Components}).]}
 @end{DiffWord95}
+
 
 @LabeledSubClause{Parameter Associations}
 

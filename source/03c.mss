@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/10 06:19:56 $}
+@Comment{$Date: 2005/03/11 05:49:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -293,6 +293,12 @@ of the generic body result in distinct tags.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Parent_Tag} (T : Tag) @key[return] Tag;]}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00405-01]}
+@ChgAdded{Version=[2],Text=[    @key[type] @AdaTypeDefn{Tag_Array} @key[is array] (Positive @key[range] <>) @key[of] Tag;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00405-01]}
+@ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Interface_Ancestor_Tag} (T : Tag) @key[return] Tag_Array;]}
+
     @AdaDefn{Tag_Error} : @key[exception];
 
 @key[private]
@@ -337,7 +343,7 @@ an unnamed @nt{block_statement}.
 New=[Tags.Wide_@!Wide_@!Expanded_@!Name],Old=[Tags.Expanded_@!Name]} for types
 declared within an unnamed @nt{block_statement}.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00400-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00400-01]}
 @ChgAdded{Version=[2],Text=[The function Expanded_Name (respectively,
 Wide_Expanded_Name) returns the same sequence of graphic characters as that
 defined for Wide_Wide_Expanded_Name, if all the graphic characters are defined
@@ -364,7 +370,7 @@ New=[specified],Old=[specifiable]}
 via an @nt{attribute_definition_clause}.
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00417-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00417-01]}
 @ChgAdded{Version=[2],Text=[The string returned by the functions Expanded_Name,
 Wide_Expanded_Name, Wide_Wide_Expanded_Name, and External_Tag has lower bound
 1.]}
@@ -437,6 +443,20 @@ returned.]}
 type; a private extension appears to define a parent type, but it does not
 (only the various forms of derivation do that). As this is a run-time
 operation, ignoring privateness is OK.]}
+@end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00405-01]}
+@ChgAdded{Version=[2],Text=[The function Interface_Ancestor_Tags returns an
+array containing the tag of each interface ancestor type of the type whose tag
+is T, other than T itself. The lower bound of the returned array is 1, and the
+order of the returned tags is unspecified. Each tag appears in the result
+exactly once.@Redundant[ If the type whose tag is T has no interface ancestors,
+a null array is returned.]]}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The result of Interface_Ancestor_Tags includes the
+tag of the parent type, if the parent is an interface.]}
 @end{Ramification}
 
 For @PrefixType{every subtype S of a tagged type @i(T)
@@ -609,9 +629,10 @@ The tag is preserved by type conversion and by parameter passing.
 The tag of a value is the tag of the associated object
 (see @RefSecNum{Formal Parameter Modes}).
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02],ARef=[AI95-00344-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02],ARef=[AI95-00344-01],ARef=[AI95-00405-01]}
 @ChgAdded{Version=[2],Text=[Tag_Error is raised by a call of Descendant_Tag,
-Expanded_Name, External_Tag, Is_Descendant_At_Same_Level, or Parent_Tag if any
+Expanded_Name, External_Tag, Interface_Ancestor_Tag,
+Is_Descendant_At_Same_Level, or Parent_Tag if any
 tag passed is No_Tag.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
@@ -751,11 +772,11 @@ Tagged types are a new concept.
 @end{Inconsistent95}
 
 @begin{Incompatible95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01],ARef=[AI95-00400-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01],ARef=[AI95-00400-01],ARef=[AI95-00405-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Constant No_Tag, and functions Parent_Tag, Descendant_Tag,
-  Is_Descendant_At_Same_Level, Wide_Expanded_Name, and Wide_Wide_Expanded_Name
-  are newly added to Ada.Tags.
+  Constant No_Tag, and functions Parent_Tag, Interface_Ancestor_Tags,
+  Descendant_Tag, Is_Descendant_At_Same_Level, Wide_Expanded_Name,
+  and Wide_Wide_Expanded_Name are newly added to Ada.Tags.
   If Ada.Tags is referenced in a @nt{use_clause}, and an entity @i<E> with the
   same @nt{defining_identifier} as a new entity in Ada.Tags is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
