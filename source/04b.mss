@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/02/03 07:11:17 $}
+@Comment{$Date: 2005/02/05 05:48:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1085,13 +1085,13 @@ this conversion.],Old=[]}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0017],ARef=[AI95-00184-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Wording was added to insure that
+@Chg{Version=[2],New=[@b<Corrigendum:> Wording was added to ensure that
 view conversions are constrained, and that a tagged view conversion has a
 tagged object. Both rules are needed to avoid having a way to change the
 discriminants of a constrained object.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0008],ARef=[AI95-00168-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Wording was added to insure that the
+@Chg{Version=[2],New=[@b<Corrigendum:> Wording was added to ensure that the
 aliased status of array components cannot change in a view conversion. This
 rule was needed to avoid having a way to change the discriminants of an
 aliased object. This rule was repealed later, as Ada 2005 allows changing

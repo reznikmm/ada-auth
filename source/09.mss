@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/02/04 06:36:41 $}
+@Comment{$Date: 2005/02/05 05:48:02 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 
@@ -1083,7 +1083,7 @@ a task queued forever.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This very similar to the previous case. It is
 a bounded error so that implementations can avoid the overhead of the check
-if it can insure that the call still will operate properly. Such an
+if it can ensure that the call still will operate properly. Such an
 implementation cannot need to return resources (such as locks) to an
 executive that it needs to execute calls.]}
 

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/02/04 06:36:40 $}
+@Comment{$Date: 2005/02/05 05:47:59 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -622,7 +622,7 @@ Internal_Tag and Descendant_Tag
 cannot return the tag of a library-level type that has not been created.
 Finally, library-level types never cease to exist. Thus, if the tag comes from
 a library-level type, there cannot be erroneous execution (the use of
-Descendant_Tag rather than Internal_Tag can help insure that the tag is
+Descendant_Tag rather than Internal_Tag can help ensure that the tag is
 of a library-level type). This is also similar to the rules for T'Class'Input
 (see @RefSecNum{Stream-Oriented Attributes}).]}
 @end{Ramification}
@@ -743,7 +743,7 @@ Tagged types are a new concept.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgAdded{Version=[2],Text=[Added wording to define that tags for all
-  descendants of a tagged type must be distinct. This is needed to insure
+  descendants of a tagged type must be distinct. This is needed to ensure
   that more nested type extensions will work properly. The wording does not
   require implementation changes for types that were allowed in Ada 95.]}
 @end{DiffWord95}
@@ -1572,7 +1572,7 @@ was an oversight in the definition of Ada 95. (See @RefSecNum{Operations of Acce
 dispatching operations.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00196-01]}
-@Chg{Version=[2],New=[Clarified the wording to insure that functions with
+@Chg{Version=[2],New=[Clarified the wording to ensure that functions with
 no controlling operands are tag-indeterminate, and to describe that the
 controlling tag can come from the target of an @nt{assignment_statement}.],Old=[]}
 
@@ -2069,9 +2069,9 @@ clearly applies to abstract predefined equality.],Old=[]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
-@Chg{Version=[2],New=[An interface type is an abstract tagged type that
-provides a restricted form of multiple inheritance. A tagged record, task, or
-protected type have one or more interface types as ancestors.],Old=[]}
+@ChgAdded{Version=[2],Text=[An interface type is an abstract tagged type that
+provides a restricted form of multiple inheritance. A tagged, task, or
+protected type have one or more interface types as ancestors.]}
 @end{Intro}
 
 @begin{Syntax}
@@ -2210,7 +2210,7 @@ interface type.],Old=[]}
 @key{end} P;],Old=[]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[
+  @ChgAdded{Version=[2],Text=[
     If this example were legal (it is illegal because the completion of T1
     is descended from an interface that the partial view is not descended
     from), then we would have two dispatching calls to Pkg.Foo with the two
@@ -2220,8 +2220,15 @@ interface type.],Old=[]}
     case we have privacy breakage as the body of P should be able to
     expect that its private definitions are not tampered with by clients.
     This property is guaranteed for ordinary tagged types, and it should be
-    for interfaces as well.],Old=[]}
+    for interfaces as well.]}
 @end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This rule also prevents completing a private type
+  with an interface. A interface, like all types, is a descendant of itself,
+  and thus this rule is triggered.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @Chg{Version=[2],New=[For an interface type declared in a visible part, a
@@ -2614,11 +2621,12 @@ for how to override this default.]
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
   Note that access parameters of an
   anonymous access-to-subprogram type are @Chg{Version=[2],New=[],Old=[not ]}permitted.
-  @Chg{Version=[2],New=[For],Old=[If there were]} such parameters,
-  full @lquotes@;downward@rquotes@; closures
-  @Chg{Version=[2],New=[are],Old=[would be]} required, meaning that
+  @Chg{Version=[2],New=[Such],Old=[If there were such]} parameters@Chg{Version=[2],
+  New=[ represent],Old=[,]} full @lquotes@;downward@rquotes@;
+  closures@Chg{Version=[2],New=[],Old=[would be required]}, meaning that
   in an implementation that uses a per-task (global) display,
-  the display would have to be passed as a hidden parameter,
+  the display @Chg{Version=[2],New=[will],Old=[would]} have to be passed
+  as a hidden parameter,
   and reconstructed at the point of call.@Chg{Version=[2],New=[],
   Old=[ This was felt to be an undue implementation burden,
   given that an equivalent (actually, more general) capability
@@ -2731,8 +2739,9 @@ null value.],Old=[]}
   also constrained @Chg{Version=[2],New=[when the type does not have defaults
   for its discriminants. Constraints are not allowed on general access-to-unconstrained
   discriminated types if the type has defaults for its discriminants;
-  pool-specific constraints are usually allowed because allocated objects are
-  usually constrained by their initial value.],Old=[(by fiat, see @StaticSemTitle).]}
+  constraints on pool-specific access types are usually allowed because
+  allocated objects are usually constrained by their initial value.],
+  Old=[(by fiat, see @StaticSemTitle).]}
 @end(Reason)
 @end{StaticSem}
 
@@ -2760,7 +2769,7 @@ access subtype that includes a null value.],Old=[]}
 An access value @i(satisfies) a @nt<composite_constraint> of an access
 subtype if it equals the null value of its type
 or if it designates an object whose value satisfies the
-constraint.@Chg{Version=[2],New=[ An access value satisifies a
+constraint.@Chg{Version=[2],New=[ An access value satisfies a
 @nt{null_exclusion} imposed on an access subtype if it does not equal the
 null value of its type.],Old=[]}
 
@@ -2878,7 +2887,7 @@ any major compiler upgrade.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00225-01]}
 @Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
 The rule defining when a current instance of a limited type is considered to be
-aliased has been tightened to only apply to type which cannot become
+aliased has been tightened to only apply to types which cannot become
 nonlimited. A program which attempts to take 'Access of the current instance
 of a limited type that can become nonlimited will be illegal in Ada 2005.
 While Ada 95 allowed the current instance of any limited type
@@ -2950,20 +2959,10 @@ rhs="@key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}]@Chg{Versio
 An @nt{incomplete_type_declaration} declares
 an @i{incomplete view} of a
 type and its first subtype; the first subtype is unconstrained if
-a @nt<known_discriminant_part> appears. If the
+a @nt<discriminant_part> appears. If the
 @nt{incomplete_type_declaration} includes the reserved word @key{tagged}, it
 declares a @i{tagged incomplete view}.@Defn2{Term=[incomplete view],Sec=[tagged]}@Defn{tagged incomplete view}
 An incomplete view of a type is a limited view of the type (see @RefSecNum{Limited Types}).]}
-@begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[If an @nt<unknown_discriminant_part> or
-no @nt{discriminant_part}
-appears, then the constrainedness of the first subtype doesn't matter
-for any other rules or semantics, so we don't bother defining it.
-The case with a @nt<known_discriminant_part> is the only case in which
-a constraint could later be given in a @nt{subtype_indication} naming
-the incomplete type.]}
-@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Given an access type @i{A} whose designated
@@ -2971,11 +2970,11 @@ type @i{T} is an incomplete view, a dereference of a value of type @i{A} also
 has this incomplete view except when:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[it occurs in the immediate scope of the completion
+@Chg{Version=[2],New=[it occurs within the immediate scope of the completion
 of @i{T}, or],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[it occurs in the scope of a @nt{nonlimited_with_clause}
+@ChgAdded{Version=[2],Text=[it occurs within the scope of a @nt{nonlimited_with_clause}
 that mentions a library package in whose visible part the completion of @i{T}
 is declared.]}
 @end{Itemize}
@@ -3155,7 +3154,7 @@ parameter or result of an @nt{access_to_subprogram_definition}.]}
 declaration of a primitive subprogram of the incomplete view, and the
 declaration occurs immediately within the private part of a package, then
 the completion of the incomplete view shall also occur immediately within
-the private part; it may not be deferred to the package body.]}
+the private part; it shall not be deferred to the package body.]}
   @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This fixes a hole in Ada 95 where a dispatching
@@ -3417,7 +3416,7 @@ profile is type conformant with that of the prefix.],Old=[]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00235-01]}
 @Chg{Version=[2],New=[@Redundant[The @nt{prefix} of such an
 @nt{attribute_reference} is never interpreted as an @nt{implicit_dereference}
-or parameterless @nt{function_call} (see @RefSecNum{Attributes}).]
+or a parameterless @nt{function_call} (see @RefSecNum{Attributes}).]
 @PDefn2{Term=[expected profile],
   Sec=(Access @nt<attribute_reference> @nt<prefix>)}
 @PDefn2{Term=[expected type],
@@ -3476,7 +3475,7 @@ which prevent dangling references,
 are written in terms of @i{accessibility levels},
 which reflect the run-time nesting of @i{masters}@Chg{Version=[2],New=[ (see],
 Old=[. As explained in]}
-@RefSecNum{Completion and Finalization}@Chg{Version=[2],New=[],Old=[,
+@RefSecNum{Completion and Finalization}@Chg{Version=[2],New=[)],Old=[,
 a master is the execution of a @nt{task_body}, a @nt{block_statement},
 a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}]}.
 An accessibility level is @i{deeper than} another if it is more
@@ -3569,8 +3568,8 @@ the same as that of the containing object or associated constrained
 subtype.
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
-  @ChgAdded{Version=[2],Text=[For a type extension, for other than discriminants
-  of a limited type, the components inherited from
+  @ChgAdded{Version=[2],Text=[For a type extension, the components (other than
+  discriminants of a limited type) inherited from
   the parent have the same accessibility as they did in the parent;
   those in the extension part have the accessibility determined
   by the scope where the type extension is declared.
@@ -3597,11 +3596,11 @@ of an access parameter specifying an access-to-subprogram type is infinite.],Old
 @ChgAdded{Version=[2],Text=[@Defn{downward closure}
 @Defn2{Term=[closure],Sec=(downward)}
 These represent @lquotes@;downward closures@rquotes@; and
-thus will require passing of static links or global display information (along
+thus require passing of static links or global display information (along
 with generic sharing information if the implementation does sharing) along
 with the address of the subprogram. We must prevent conversions of these to
-types with @lquotes@;normal@rquotes@; accessibility, as those typically will
-not include the extra information needed to make a call.]}
+types with @lquotes@;normal@rquotes@; accessibility, as those typically don;t
+include the extra information needed to make a call.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
@@ -3771,7 +3770,7 @@ is the library level.
   The exceptions are:
   @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Revised]}
-  Checks involving access parameters@Chg{Version=[2],New=[ specifying an
+  Checks involving access parameters@Chg{Version=[2],New=[ of an
   access-to-object type],Old=[]}. The fact that @lquotes@;statically deeper
   than@rquotes@; is not defined for the anonymous access type of an access
   parameter implies that any rule saying @lquotes@;shall not be statically
@@ -3786,7 +3785,9 @@ is the library level.
   For implementations that share generics,
   run-time code is needed to detect the error.
 
-  Checks during function return.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344]}
+  Checks during function return@Chg{Version=[2],New=[ and @nt{allocator}s,
+  for nested type extensions],Old=[]}.
   @end{Itemize}
 
   Note that run-time checks are not required
@@ -3824,8 +3825,7 @@ is the library level.
 
   @ChgRef{Version=[2],Kind=[Revised]}
   Accessibility is not enforced at compile time for access
-  parameters@Chg{Version=[2],New=[ specifying an
-  access-to-object type],Old=[]}.
+  parameters@Chg{Version=[2],New=[ of an access-to-object type],Old=[]}.
   The @lquotes@;obvious@rquotes@; implementation of the run-time checks would be
   inefficient, and would involve distributed overhead;
   therefore, an efficient method is given below.
@@ -3862,7 +3862,7 @@ is the library level.
   Checking @lquotes@;not deeper than@rquotes@; is a "<=" test on the levels.
 
   @ChgRef{Version=[2],Kind=[Revised]}
-  @Leading@keepnext@;For each access parameter@Chg{Version=[2],New=[ specifying
+  @Leading@keepnext@;For each access parameter@Chg{Version=[2],New=[ of
   an access-to-object type],Old=[]}, the static depth passed depends on the
   actual, as follows:
   @begin{Itemize}
@@ -3885,7 +3885,7 @@ is the library level.
   pass 0 (the library accessibility level).
 
   @ChgRef{Version=[2],Kind=[Revised]}
-  If the actual is an access parameter@Chg{Version=[2],New=[ specifying
+  If the actual is an access parameter@Chg{Version=[2],New=[ of
   an access-to-object type],Old=[]},
   usually just pass along the level passed in.
   However, if the
@@ -3899,7 +3899,7 @@ is the library level.
 
   @ChgRef{Version=[2],Kind=[Revised]}
   For the Accessibility_Check associated with a @nt{type_conversion}
-  of an access parameter@Chg{Version=[2],New=[ specifying
+  of an access parameter@Chg{Version=[2],New=[ of
   an access-to-object type],Old=[]} of a given subprogram to a
   named access type,
   if the target type is statically nested within the subprogram,
@@ -3943,7 +3943,7 @@ Note that the accessibility levels of X and Y are the same.
 
 @ChgRef{Version=[2],Kind=[Revised]}
 @Leading@keepnext@;Here's an example involving access
-parameters@Chg{Version=[2],New=[ specifying an access-to-object type],Old=[]}:
+parameters@Chg{Version=[2],New=[ of an access-to-object type],Old=[]}:
 @begin{Example}
 @key[procedure] Main @key[is]
     @key[type] Level_1_Type @key[is] @key[access] @key[all] Integer;
@@ -4129,7 +4129,7 @@ denotes an aliased view of an object}:
 
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00363-01]}
     @ChgAdded{Version=[2],Text=[@i{D} shall be discriminated in its full view
-    and unconstrained in any partial view, and the @i{A}'s designated subtype of
+    and unconstrained in any partial view, and the designated subtype of
     @i{A} shall be unconstrained.]}
   @end{InnerItemize}
   @begin{ImplNote}
@@ -4180,14 +4180,14 @@ denotes an aliased view of an object}:
   If this check fails, Program_Error is raised.
   @begin{Ramification}
     @ChgRef{Version=[2],Kind=[Revised]}
-    The check is needed for access parameters @Chg{Version=[2],New=[ specifying
+    The check is needed for access parameters @Chg{Version=[2],New=[ of
     an access-to-object type],Old=[]} and in instance bodies.
   @end{Ramification}
   @begin(ImplNote)
     @ChgRef{Version=[2],Kind=[Revised]}
     This check requires that some indication of lifetime is
     passed as an implicit parameter along with access parameters@Chg{Version=[2],
-    New=[ specifying an access-to-object type],Old=[]}.
+    New=[ of an access-to-object type],Old=[]}.
     No such requirement applies to @Chg{Version=[2],New=[other anonymous
     access types],Old=[access discriminants]}, since
     the checks associated with them are all compile-time checks.
@@ -4293,8 +4293,8 @@ well as the need for an implementer to insert an implicit
 declaration for "=", etc. at the appropriate place in their symbol table.
 Note that @Chg{Version=[2],New=[":=", ],Old=[]}'Access@Chg{Version=[2],New=[,],Old=[]} and
 ".@key[all]" are defined@Chg{Version=[2],New=[],Old=[, and ":=" is defined
-though useless since all instances are constant]}.
-The literal @key(null) is also defined@Chg{Version=[2],New=[],Old=[ for the
+though useless since all instances are constant. The literal
+@key(null) is also defined for the
 purposes of overload resolution, but is disallowed by a @LegalityTitle
 of this subclause]}.
 @end(Reason)
@@ -4309,17 +4309,20 @@ value is never a dispatching call.
 See @RefSecNum{Dispatching Operations of Tagged Types}.
 @end{TheProof}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
 @Defn{downward closure}
 @Defn2{Term=[closure],Sec=(downward)}
-The accessibility rules imply that it
-is @Chg{Version=[2],New=[],Old=[not ]}possible to use the Access
-attribute to implement @lquotes@;downward closures@rquotes@; @em that is,
+@Chg{Version=[2],New=[The],Old=[The accessibility rules imply that it
+is not possible to use the]} Access
+attribute@Chg{Version=[2],New=[ for subprograms and parameters of an
+anonymous  access-to-subprogram type may together be used],Old=[]}
+to implement @lquotes@;downward closures@rquotes@; @em that is,
 to pass a more-nested subprogram as a parameter to a
-less-nested subprogram, as might be desired for example for an
-iterator abstraction@Chg{Version=[2],New=[ @em only for anonymous
-access-to-subprogram parameters. Downward],Old=[. Instead, downward]}
-closures @Chg{Version=[2],New=[also ],Old=[]}can be implemented using
+less-nested subprogram, as might be @Chg{Version=[2],
+New=[appropriate],Old=[desired for example]} for an
+iterator abstraction@Chg{Version=[2],New=[ or numerical integration.
+Downward],Old=[. Instead, downward]}
+closures can @Chg{Version=[2],New=[also ],Old=[]}be implemented using
 generic formal subprograms (see @RefSecNum{Formal Subprograms}).
 Note that Unchecked_Access is not allowed for subprograms.
 
@@ -4374,8 +4377,8 @@ variables are not necessarily constrained in Ada 2005 (see
 may disappear or change shape, and taking 'Access of such a subcomponent
 thus is illegal, while the same operation would have been legal in Ada 95.
 Note that most allocated objects are
-still constrained by their initial value (see @RefSecNum{Allocators}, and thus
-have no change in the legality of 'Access for them. For example:],Old=[]}
+still constrained by their initial value (see @RefSecNum{Allocators}), and thus
+legality of 'Access didn't change for them. For example:],Old=[]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{type} T1 (D1 : Boolean := False) @key{is}
@@ -4390,16 +4393,17 @@ have no change in the legality of 'Access for them. For example:],Old=[]}
 @key{type} Acc_Int @key{is access all} Integer;],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   AT : @key{aliased} T1;
-   Ptr : Acc_Int := AT.C1'Access;  -- @RI[Legal in Ada 2005, illegal in Ada 95]
-   AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95, but does not]
+@Chg{Version=[2],New=[   A_T : @key{aliased} T1;
+   Ptr : Acc_Int := A_T.C1'Access; -- @RI[Legal in Ada 2005, illegal in Ada 95]
+   A_T := (D1 => True);            -- @RI[Raised Constraint_Error in Ada 95, but does not]
                                    -- @RI[in Ada 2005, so Ptr becomes invalid when this]
                                    -- @RI[is assigned.]],Old=[]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
 @Chg{Version=[2],New=[If a discriminated full type has a partial view (private
-type) that is constrained, we do not allow 'Access on objects for an
+type) that is constrained, we do not allow 'Access on objects to create a value
+of an object of an
 access-to-unconstrained type. Ada 95 allowed this attribute and various
 access subtypes, requiring that the heap object be constrained and thus making
 details of the implementation of the private type visible to the client of
@@ -4411,8 +4415,8 @@ unit in the body of that generic is no longer allowed. Such references can
 easily be used to create dangling pointers, as @LegalityTitle are not rechecked
 in instance bodies. At the same time, the rules were loosened a bit where
 that is harmless, and
-allowed any routines to be passed to an access parameter specifying an
-access-to-subprogram. The now illegal uses of 'Access can almost always be
+allow any routine to be passed to an access parameter of an
+access-to-subprogram type. The now illegal uses of 'Access can almost always be
 moved to the private part of the generic unit, where they are still legal
 (and rechecked upon instantiation for possibly dangling pointers).],Old=[]}
 @end{Incompatible95}
@@ -4528,7 +4532,8 @@ are done in an arbitrary order.
   AI83-00406 applies to generic instantiation as well (see below).
 
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0014],ARef=[AI95-00064-01]}
-  @ChgAdded{Version=[1],Text=[A subprogram can be completed by a renames-as-body, and we need
+  @ChgAdded{Version=[1],Text=[A subprogram can be completed by a
+  renaming-as-body, and we need
   to make an elaboration check on such a body, so we use
   @lquotes@;body@rquotes@; rather than @nt{subprogram_body} above.]}
 @end{Discussion}

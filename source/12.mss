@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/01/27 06:13:00 $}
+@Comment{$Date: 2005/02/05 05:48:04 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2462,7 +2462,7 @@ one controlling type.
   a formal tagged private type,
   a formal derived type, or a normal tagged type. While the last case doesn't
   seem to be very useful, there isn't any good reason for disallowing it.
-  This rule insures that the operation is a dispatching operation of some
+  This rule ensures that the operation is a dispatching operation of some
   type, and that we unambiguously know what that type is.]}
 
   @ChgRef{Version=[2],Kind=[Added]}

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/12/10 06:13:44 $}
+@Comment{$Date: 2005/02/05 05:48:00 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2929,7 +2929,7 @@ expressions like (X = @key{null}) would be ambiguous for normal access types.]}
 @RefSecNum{Type Conversions}).]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[This insures that the designated type is the same,
+@ChgAdded{Version=[2],Text=[This ensures that the designated type is the same,
 or one of the operands is @key{null}.]}
 @end{Reason}
 @end{Legality}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2005/02/04 06:36:43 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2005/02/05 05:48:04 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/02/04 06:36:43 $}
+@Comment{$Date: 2005/02/05 05:48:04 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -4880,7 +4880,7 @@ from the set and Program_Error is propagated.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The key check insures that the invariants of
+  @ChgAdded{Version=[2],Text=[The key check ensures that the invariants of
   the set are preserved by the modification. The @lquotes@;tampers with
   elements@rquotes@; check prevents data loss (if Element_Type is by-copy) or
   erroneous execution (if element type is unconstrained and indefinite).]}

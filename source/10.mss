@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/02/04 06:36:42 $}
+@Comment{$Date: 2005/02/05 05:48:03 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1789,7 +1789,7 @@ the act of compiling a unit is one of the
 removing units other than those specified by this International Standard.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00214-01]}
-@ChgAdded{Version=[2],Text=[These rules are intended to insure that an
+@ChgAdded{Version=[2],Text=[These rules are intended to ensure that an
 implementation never need keep more than one compilation unit with any full
 expanded name. In particular, it is not necessary to be able to have an subunit
 and a child unit with the same name in the environment at one time.]}
@@ -1861,12 +1861,12 @@ containing the instantiation.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0032],ARef=[AI95-00192-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> The wording was clarified to
-  insure that a @nt{subprogram_body} is not considered a completion of
+  ensure that a @nt{subprogram_body} is not considered a completion of
   an instance of a generic subprogram.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00214-01]}
   @ChgAdded{Version=[2],Text=[The permissions to remove a unit from the
-  environment were clarified to insure that it is never necessary to keep
+  environment were clarified to ensure that it is never necessary to keep
   multiple (sub)units with the same full expanded name in the environment.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
@@ -2015,7 +2015,7 @@ for which there is not an overriding pragma applied directly to the instance.]}]
 @begin{DiffWord95}
   @ChgRef{Version=[2], Kind=[AddedNormal], Ref=[8652/0033], ARef=[AI95-00136-01]}
   @ChgAdded{Version=[2], Text=[@B<Corrigendum:> The wording was corrected to
-  insure that a program unit pragma cannot appear in private parts or
+  ensure that a program unit pragma cannot appear in private parts or
   generic formal parts.]}
 
   @ChgRef{Version=[2], Kind=[AddedNormal], Ref=[8652/0034],
@@ -2034,13 +2034,13 @@ for which there is not an overriding pragma applied directly to the instance.]}]
   place restrictions was clarified to:]}
   @begin{itemize}
   @ChgRef{Version=[2], Kind=[AddedNormal]}
-  @ChgAdded{Version=[2], Text=[Insure that it applies only to partition-wide
+  @ChgAdded{Version=[2], Text=[Ensure that it applies only to partition-wide
   configuration pragmas, not ones like Assertion_Policy (see
   @RefSecNum{Pragmas Assert and Assertion_Policy}), which can be different
   in different units; and]}
 
   @ChgRef{Version=[2], Kind=[AddedNormal]}
-  @ChgAdded{Version=[2], Text=[Insure that confirming pragmas are always allowed.]}
+  @ChgAdded{Version=[2], Text=[Ensure that confirming pragmas are always allowed.]}
   @end{itemize}
 
 @end{DiffWord95}
@@ -2296,7 +2296,7 @@ mention it in a @nt{with_clause}.
 @ChgAdded{Version=[2],Text=[A unit is included in a partition even if the only
 reference to it is in a @nt{limited_with_clause}. While this isn't strictly
 necessary (no objects of types imported from such a unit can be created),
-it insures that all incomplete types are eventually completed, and is the
+it ensures that all incomplete types are eventually completed, and is the
 least surprising option.]}
 @end{Discussion}
 

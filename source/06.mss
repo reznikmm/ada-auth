@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/01/27 06:12:58 $}
+@Comment{$Date: 2005/02/05 05:48:02 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1163,7 +1163,7 @@ Ada. Also clarified that the convention of a primitive operation of a tagged
 type is the same as that of the type.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0018],ARef=[AI95-00175-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to insure that two
+@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to ensure that two
 attributes conform only if they have the same @nt{attribute_designator}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01],ARef=[AI95-00254-01]}
