@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/08/11 00:09:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/08/11 00:09:16 $}
+@Comment{$Date: 2000/08/15 01:11:45 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -9,7 +9,7 @@
 @Defn{real-time systems}
 @Defn{embedded systems}
 This Annex specifies additional characteristics of Ada implementations
-intended for real-time systems software.  To conform to this Annex, an
+intended for real-time systems software. To conform to this Annex, an
 implementation shall also conform to the Systems Programming Annex.
 @end{Intro}
 
@@ -38,7 +38,7 @@ if there is no upper bound,
 the implementation shall report that the metric is unbounded.
 @begin{Discussion}
 There are several good reasons to specify metrics in seconds; there are however
-equally good reasons to specify them in processor clock cycles.  In
+equally good reasons to specify them in processor clock cycles. In
 defining the metrics, we have tried to strike a balance on a case-by-case
 basis.
 
@@ -53,10 +53,10 @@ However the paragraph number can serve that purpose.
 @begin{Notes}
 
 The specification of the metrics makes a distinction between upper bounds
-and simple execution times.  Where something is just specified as @lquotes@;the
+and simple execution times. Where something is just specified as @lquotes@;the
 execution time of@rquotes@; a piece of code, this leaves one
 the freedom
-to choose a nonpathological case.  This kind of metric is of the form
+to choose a nonpathological case. This kind of metric is of the form
 @lquotes@;there exists a program such that the value of the metric is V@rquotes@;.
 Conversely, the meaning of upper bounds is @lquotes@;there is no program such
 that the value of the metric is greater than V@rquotes@;.
@@ -65,16 +65,16 @@ of V for one or more test programs.
 
 The metrics do not cover the whole language;  they are limited
 to features that are specified in @RefSec{Systems Programming}
-and in this Annex.  The metrics are intended
+and in this Annex. The metrics are intended
 to provide guidance to potential users as to whether a particular
 implementation of such a feature is going to be adequate for a
-particular real-time application.  As such, the metrics are aimed
+particular real-time application. As such, the metrics are aimed
 at known implementation choices that can result in significant
 performance differences.
 
 The purpose of the metrics is not necessarily to provide fine-grained
 quantitative results or to serve as a comparison between different
-implementations on the same or different platforms.  Instead, their
+implementations on the same or different platforms. Instead, their
 goal is rather qualitative; to define a standard set of approximate values
 that can be measured and used to estimate the general suitability of an
 implementation, or to evaluate the comparative utility of certain features
@@ -83,7 +83,7 @@ of an implementation for a particular real-time application.
 @end{Notes}
 
 @begin{Extend83}
-This Annex is new to Ada 9X.
+This Annex is new to Ada 95.
 @end{Extend83}
 
 @LabeledClause{Task Priorities}
@@ -94,13 +94,13 @@ In addition, the methods for specifying priorities are defined.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Priority is as follows:
+@leading@keepnext@;The form of a @nt{pragma} Priority is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Priority)(@Syn2{expression});'
 
 @begin{SyntaxText}
-The form of a @nt{pragma} Interrupt_Priority is as follows:
+@leading@keepnext@;The form of a @nt{pragma} Interrupt_Priority is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Interrupt_Priority)[(@Syn2{expression})];'
@@ -120,7 +120,7 @@ or Interrupt_Priority pragma is Integer.
 
 A Priority pragma is allowed only immediately within a @nt{task_definition},
 a @nt{protected_definition}, or the @nt{declarative_part} of a
-@nt{subprogram_body}.  An Interrupt_Priority pragma is allowed only
+@nt{subprogram_body}. An Interrupt_Priority pragma is allowed only
 immediately within a @nt{task_definition} or a @nt{protected_definition}.
 At most one such pragma shall appear within a given construct.
 
@@ -136,7 +136,7 @@ starts executing.
 
 @begin{StaticSem}
 
-The following declarations exist in package System:
+@leading@keepnext@;The following declarations exist in package System:
 @begin{example}
 @key{subtype} Any_Priority @key{is} Integer @key{range} @RI{implementation-defined};
 @key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @RI{implementation-defined};
@@ -147,13 +147,13 @@ Default_Priority : @key{constant} Priority := (Priority'First + Priority'Last)/2
 @ImplDef{The declarations of Any_Priority and Priority.}
 
 The full range of priority values supported by an implementation is specified
-by the subtype Any_Priority.  The subrange of priority values that are high
+by the subtype Any_Priority. The subrange of priority values that are high
 enough to require the blocking of one or more interrupts is specified by the
-subtype Interrupt_Priority.  @Redundant[The subrange of priority values below
+subtype Interrupt_Priority. @Redundant[The subrange of priority values below
 System.Interrupt_Priority'First is specified by the subtype System.Priority.]
 
 The priority specified by a Priority or Interrupt_Priority pragma is the
-value of the @nt{expression} in the pragma, if any.  If there is no
+value of the @nt{expression} in the pragma, if any. If there is no
 @nt{expression} in an Interrupt_Priority pragma, the priority value is
 Interrupt_Priority'Last.
 
@@ -172,13 +172,13 @@ subprogram other than the main subprogram.
 @Defn{active priority}
 A @i{task priority} is an integer value that indicates a degree of urgency
 and is the basis for resolving competing demands of tasks for
-resources.  Unless otherwise specified, whenever tasks compete
+resources. Unless otherwise specified, whenever tasks compete
 for processors or other implementation-defined resources, the
 resources are allocated to the task with the highest priority
 value.
 The @i{base priority} of a task is the priority with which it was
 created, or to which it was later set by Dynamic_Priorities.Set_Priority
-(see @RefSecNum{Dynamic Priorities}).  At all times, a task also has
+(see @RefSecNum{Dynamic Priorities}). At all times, a task also has
 an @i{active priority}, which generally reflects its base priority
 as well as any priority it inherits from other sources.
 @i{Priority inheritance} is the process by which the priority of a
@@ -222,14 +222,14 @@ Similarly, the task's active priority is used
 to determine the task's position in any queue when Priority_Queuing is
 specified (see @RefSecNum{Entry Queuing Policies}).]
 
-At any time, the active priority of a task is the maximum of all the
-priorities the task is inheriting at that instant.  For a task that is not
+@Leading@;At any time, the active priority of a task is the maximum of all the
+priorities the task is inheriting at that instant. For a task that is not
 held (see @RefSecNum{Asynchronous Task Control}), its base priority is always
-a source of priority inheritance.  Other sources of priority inheritance
+a source of priority inheritance. Other sources of priority inheritance
 are specified under the following
 conditions:
 @begin{Discussion}
-Other parts of the annex, e.g.  @RefSecNum{Asynchronous Task Control}, define
+Other parts of the annex, e.g. @RefSecNum{Asynchronous Task Control}, define
 other sources of priority inheritance.
 @end{Discussion}
 @begin{itemize}
@@ -267,7 +267,7 @@ discriminants of the enclosing type.
 
 It is a consequence of the active priority rules that at the point when
 a task stops inheriting a priority from another source, its active priority
-is re-evaluated.  This is in addition to other instances described in this
+is re-evaluated. This is in addition to other instances described in this
 Annex for such re-evaluation.
 
 An implementation may provide a non-standard mode in which tasks
@@ -331,7 +331,7 @@ is waiting for access to a protected object keeps its processor busy.}
 @RootDefn{task dispatching point}
 @RootDefn{dispatching point}
 @i{Task dispatching} is the process by which one ready task is selected
-for execution on a processor.  This selection is done at certain points
+for execution on a processor. This selection is done at certain points
 during the execution of a task called @i{task dispatching
 points}.
 A task reaches a task dispatching point whenever it becomes blocked,
@@ -360,7 +360,7 @@ The first position in a queue is called the
 @i{tail of the queue}.
 A task is @i{ready} if it is in a ready queue,
 or if it is running.
-Each processor has one ready queue for each priority value.  At any instant,
+Each processor has one ready queue for each priority value. At any instant,
 each ready queue of a processor contains exactly the set of tasks of that
 priority that are ready for execution on that
 processor, but are not running on any processor; that is, those tasks
@@ -369,7 +369,7 @@ executed using that processor and other available resources.
 A task can be on the ready queues of more than one processor.
 @begin{Discussion}
 The core language defines a ready task as one that is not
-blocked.  Here we refine this definition and
+blocked. Here we refine this definition and
 talk about ready queues.
 @end{Discussion}
 
@@ -398,7 +398,7 @@ is a nonpreemptible resource.
 @begin{Reason}
 A processor that is executing a task is available to execute tasks of
 higher priority, within the set of tasks that that processor is able to
-execute.  Write access to a protected object, on the
+execute. Write access to a protected object, on the
 other hand, cannot be granted to a new task before the
 old task has released it.
 @end{Reason}
@@ -463,12 +463,12 @@ continue execution.
 The ready queues are purely conceptual; there is no requirement that such
 lists physically exist in an implementation.
 
-While a task is running, it is not on any ready queue.  Any time
+While a task is running, it is not on any ready queue. Any time
 the task that is running on a processor is added to a ready queue,
 a new running task is selected for that processor.
 
 In a multiprocessor system, a task can be on the ready queues of more than
-one processor.  At the extreme, if several processors share the same set of
+one processor. At the extreme, if several processors share the same set of
 ready tasks, the contents of their ready queues is identical, and so
 they can be viewed as sharing one ready queue, and can be implemented that
 way.
@@ -486,7 +486,7 @@ under @RefSec{Task Priorities}, @RefSec{Priority Ceiling Locking}, and
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Task_Dispatching_Policy is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Task_Dispatching_Policy is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Task_Dispatching_Policy)(@SynI{policy_}@Syn2{identifier} );'
@@ -528,7 +528,7 @@ If no such pragma appears in any of the program
 units comprising a partition, the task dispatching policy for
 that partition is unspecified.
 
-The language defines only one task dispatching policy, FIFO_Within_Priorities;
+@Leading@;The language defines only one task dispatching policy, FIFO_Within_Priorities;
 when this policy is in effect, modifications to the ready queues occur
 only as follows:
 @begin{itemize}
@@ -569,10 +569,10 @@ ready queue for its active priority.
 
 @begin{DocReq}
 
-@Defn{priority inversion}
+@Leading@Defn{priority inversion}
 @i{Priority inversion} is the duration for which a task remains at the
 head of the highest priority ready queue while the processor executes
-a lower priority task.  The implementation shall document:
+a lower priority task. The implementation shall document:
 @begin{Itemize}
 The maximum priority inversion a user task can experience due to activity
 of the implementation (on behalf of lower priority tasks), and
@@ -612,7 +612,7 @@ priority task).
 
 The setting of a task's base priority as a result of a call to
 Set_Priority does not always take effect immediately when Set_Priority
-is called.  The effect of setting the task's base priority is deferred
+is called. The effect of setting the task's base priority is deferred
 while the affected task performs a protected action.
 
 Setting the base priority of a ready task causes
@@ -625,13 +625,13 @@ regardless of whether the active priority of the task actually changes.
 
 @begin{Intro}
 @Redundant[This clause specifies the interactions between priority task
-scheduling and protected object ceilings.  This interaction is based on
+scheduling and protected object ceilings. This interaction is based on
 the concept of the @i{ceiling priority} of a protected object.]
 @end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Locking_Policy is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Locking_Policy is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Locking_Policy)(@SynI{policy_}@Syn2{identifier});'
@@ -658,12 +658,12 @@ A Locking_Policy pragma is a configuration pragma.
 
 @Defn{locking policy}
 @Redundant[A locking policy specifies the details of protected object
-locking.  These rules specify whether or not protected objects have
+locking. These rules specify whether or not protected objects have
 priorities, and the relationships between these priorities and
-task priorities.  In addition, the policy specifies the state of a task
+task priorities. In addition, the policy specifies the state of a task
 when it executes a protected action, and how its active priority is
 affected by the locking.]
-The @i{locking policy} is specified by a Locking_Policy pragma.  For
+The @i{locking policy} is specified by a Locking_Policy pragma. For
 implementation-defined locking policies, the effect of a Priority or
 Interrupt_Priority pragma on a protected object is
 implementation defined.
@@ -672,7 +672,7 @@ partition, the locking policy for that partition, as well as the effect
 of specifying either a Priority or Interrupt_Priority pragma for a
 protected object, are implementation defined.
 
-There is one predefined locking policy, Ceiling_Locking; this policy is
+@Leading@;There is one predefined locking policy, Ceiling_Locking; this policy is
 defined as follows:
 @begin{itemize}
 
@@ -779,7 +779,7 @@ ceiling priority of the protected object.
 
 If a protected object has a ceiling priority in the range
 of Interrupt_Priority, certain interrupts are blocked while
-protected actions of that object execute.  In the extreme, if
+protected actions of that object execute. In the extreme, if
 the ceiling is Interrupt_Priority'Last, all blockable interrupts
 are blocked during that time.
 
@@ -790,7 +790,7 @@ an interrupt handler (see @RefSecNum{Interrupt Support}).
 When specifying the ceiling of a protected object, one should
 choose a value that is at least as high as the highest active priority
 at which tasks can be executing when they call
-protected operations of that object.  In determining this
+protected operations of that object. In determining this
 value the following factors, which can affect active priority,
 should be considered: the effect of Set_Priority, nested
 protected operations, entry calls, task activation, and other
@@ -813,14 +813,14 @@ calls another protected operation on the same protected object).
 @begin{Intro}
 @Redundant[@Defn{queuing policy}
 This clause specifies a mechanism for a user to choose an entry
-@i{queuing policy}.  It also defines one such policy.  Other
+@i{queuing policy}. It also defines one such policy. Other
 policies are implementation defined.]
 @ImplDef{Implementation-defined queuing policies.}
 @end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Queuing_Policy is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Queuing_Policy is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Queuing_Policy)(@SynI{policy_}@Syn2{identifier});'
@@ -856,21 +856,21 @@ a protected object when more than one @nt{entry_barrier} @nt{condition} is True.
 @end{Ramification}
 
 Two queuing policies, FIFO_Queuing and Priority_Queuing,
-are language defined.  If no Queuing_Policy pragma appears
+are language defined. If no Queuing_Policy pragma appears
 in any of the program units
 comprising the partition, the queuing policy for that partition
-is FIFO_Queuing.  The rules for this policy are specified in
+is FIFO_Queuing. The rules for this policy are specified in
 @RefSecNum{Entry Calls} and @RefSecNum{Selective Accept}.
 
-The Priority_Queuing policy is defined as follows:
+@Leading@Keepnext@;The Priority_Queuing policy is defined as follows:
 @begin{itemize}
 
 @Defn{priority of an entry call}
 The calls to an entry @Redundant[(including a member of an entry family)]
-are queued in an order consistent with the priorities of the calls.  The
+are queued in an order consistent with the priorities of the calls. The
 @i{priority of an entry call} is initialized from the active
 priority of the calling task at the time
-the call is made, but can change later.  Within the same priority,
+the call is made, but can change later. Within the same priority,
 the order is consistent with the calling (or requeuing,
 or priority setting) time (that is, a FIFO order).
 
@@ -910,23 +910,23 @@ queue is irrelevant to the rate at which the task proceeds.
 
 Furthermore, when an entry is used for @nt{asynchronous_select}s,
 it is almost certain to be a @lquotes@;broadcast@rquotes@; entry or have
-only one caller at a time.  For example, if the entry is
+only one caller at a time. For example, if the entry is
 used to notify tasks of a mode switch, then all tasks on the
-entry queue would be signaled when the mode changes.  Similarly,
+entry queue would be signaled when the mode changes. Similarly,
 if it is indicating some interrupting event such as a control-C,
 all tasks sensitive to the interrupt will want to be informed
-that the event occurred.  Hence, the order on such a queue is
+that the event occurred. Hence, the order on such a queue is
 essentially irrelevant.
 
 Given the above, it seems an unnecessary semantic and implementation
 complexity to specify that asynchronous queued calls are moved in
-response to dynamic priority changes.  Furthermore, it is somewhat
+response to dynamic priority changes. Furthermore, it is somewhat
 inconsistent, since the call was originally queued based on the active
 priority of the task, but dynamic priority changes are changing the base
-priority of the task, and only indirectly the active priority.  We say
+priority of the task, and only indirectly the active priority. We say
 explicitly that asynchronous queued calls are not affected by normal
 changes in active priority during the execution of an
-@nt{abortable_part}.  Saying that, if a change in the base priority
+@nt{abortable_part}. Saying that, if a change in the base priority
 affects the active priority, then we do want the calls reordered, would
 be inconsistent.
 It would also require the implementation to maintain a readily
@@ -942,10 +942,10 @@ priority.
 
 When more than one @nt{condition} of an @nt{entry_barrier} of a protected
 object becomes True, and more than one of the respective queues is nonempty,
-the call with the highest priority is selected.  If more than one such
+the call with the highest priority is selected. If more than one such
 call has the same priority, the call that is queued on the entry whose
 declaration is first in textual order in the @nt{protected_definition} is
-selected.  For members of the same entry family,
+selected. For members of the same entry family,
 the one with the lower family index is selected.
 
 If the expiration time of two or more open
@@ -989,8 +989,7 @@ modified or queried at run time.]
 @end{Intro}
 
 @begin{StaticSem}
-
-The following language-defined library package exists:
+@Leading@Keepnext@;The following language-defined library package exists:
 @begin{Example}
 @key[with] System;
 @key[with] Ada.Task_Identification; @RI{-- See @RefSecNum[The Package Task_Identification]}
@@ -1060,7 +1059,7 @@ a high-priority task aborts a lower-priority task,
 which might have a call queued on a protected object with a low ceiling.
 @end{ImplNote}
 @begin{Reason}
-A previous version of Ada 9X made it a run-time error
+@Leading@;A previous version of Ada 9X made it a run-time error
 for a high-priority task to set the priority of a lower-priority
 task that has a queued call on a protected object with a low ceiling.
 This was changed because:
@@ -1073,7 +1072,7 @@ the operation succeeded or not.
 
 The run-time check would tend to cause intermittent system failures @em
 how is the caller supposed to know whether the other task happens to
-have a queued call at any given time?  Consider for example an
+have a queued call at any given time? Consider for example an
 interrupt that needs to trigger a priority change in some task.
 The interrupt handler could not safely call Set_Priority without knowing
 exactly what the other task is doing,
@@ -1137,10 +1136,10 @@ calling Get_Priority causes erroneous execution.
 @end{Erron}
 
 @begin{Metrics}
-The implementation shall document the following metric:
+@Leading@;The implementation shall document the following metric:
 @begin{Itemize}
 The execution time of a call to Set_Priority, for the nonpreempting case,
-in processor clock cycles.  This is measured for a call that modifies the
+in processor clock cycles. This is measured for a call that modifies the
 priority of a ready task that is not running (which
 cannot be the calling one), where the new
 base priority of the affected task is lower than the active priority of the
@@ -1151,15 +1150,15 @@ executing a protected operation.
 
 @begin{Notes}
 
-Setting a task's base priority affects task dispatching.  First, it can
-change the task's active priority.  Second, under the standard
+Setting a task's base priority affects task dispatching. First, it can
+change the task's active priority. Second, under the standard
 task dispatching policy it always causes the task to move to
 the tail of the ready queue corresponding to its active priority,
 even if the new base priority is unchanged.
 
 Under the priority queuing policy, setting a task's base
 priority has an effect on a queued entry call
-if the task is blocked waiting for the call.  That is, setting the
+if the task is blocked waiting for the call. That is, setting the
 base priority of a task causes the priority of a queued entry
 call from that task to be updated and the call to be removed and
 then reinserted in the entry queue at the new priority
@@ -1180,12 +1179,12 @@ beginning of @RefSec{Predefined Language Environment}.
 
 The rule for when Tasking_Error is raised for Set_Priority or Get_Priority is
 different from the rule for when Tasking_Error is raised on an
-entry call (see @RefSecNum{Entry Calls}).  In particular, setting or
+entry call (see @RefSecNum{Entry Calls}). In particular, setting or
 querying the priority of a completed or an abnormal
 task is allowed, so long as the task is not yet terminated.
 
 Changing the priorities of a set of tasks can be performed by a
-series of calls to Set_Priority for each task separately.  For
+series of calls to Set_Priority for each task separately. For
 this to work reliably, it should be done within a protected
 operation that has high enough ceiling priority to guarantee that
 the operation completes without being preempted by any of the
@@ -1218,12 +1217,12 @@ what is specified for a single processor.}
 @end{DocReq}
 
 @begin{Metrics}
-The implementation shall document the following metrics:
+@Leading@;The implementation shall document the following metrics:
 @begin{Itemize}
 The execution time, in processor clock cycles, that it takes for an
 @nt{abort_statement} to cause the completion of the aborted task.
 This is measured in a situation where a task T2 preempts task T1
-and aborts T1.  T1 does not have any finalization code.  T2 shall
+and aborts T1. T1 does not have any finalization code. T2 shall
 verify that T1 has terminated, by means of the Terminated attribute.
 
 On a multiprocessor, an upper bound in seconds,
@@ -1231,23 +1230,23 @@ on the time that the completion of an aborted task can be delayed beyond
 the point that it is required for a single processor.
 
 An upper bound on the execution time of an
-@nt{asynchronous_select}, in processor clock cycles.  This is measured
+@nt{asynchronous_select}, in processor clock cycles. This is measured
 between a point immediately before a task
 T1 executes a protected operation Pr.Set that makes the @nt{condition}
 of an @nt{entry_barrier} Pr.Wait true, and the point where task T2 resumes
 execution immediately after an entry call to Pr.Wait in an
-@nt{asynchronous_select}.  T1 preempts T2 while
+@nt{asynchronous_select}. T1 preempts T2 while
 T2 is executing the abortable part, and then blocks itself so that
-T2 can execute.  The execution time of T1 is measured separately,
+T2 can execute. The execution time of T1 is measured separately,
 and subtracted.
 
 An upper bound on the execution time of an
 @nt{asynchronous_select},
 in the case that no asynchronous transfer of control takes
-place.  This is measured between a point immediately before a task
+place. This is measured between a point immediately before a task
 executes the @nt{asynchronous_select} with a nonnull abortable
 part, and the point where the task continues execution immediately after
-it.  The execution time of the abortable part is subtracted.
+it. The execution time of the abortable part is subtracted.
 @end{Itemize}
 @end{Metrics}
 
@@ -1286,7 +1285,7 @@ construction of highly efficient tasking run-time systems.]
 @end{Intro}
 
 @begin{StaticSem}
-The following @SynI{restriction_}@nt{identifier}s are language defined:
+@Leading@;The following @SynI{restriction_}@nt{identifier}s are language defined:
 @begin{Description}
 @Defn2{Term=[Restrictions],Sec=(No_Task_Hierarchy)}No_Task_Hierarchy @\All (nonenvironment) tasks depend directly on
                         the environment task of the partition.
@@ -1311,7 +1310,7 @@ calls on Task_Identification.Abort_Task.
 
 @Defn2{Term=[Restrictions],Sec=(No_Implicit_Heap_Allocations)}No_Implicit_Heap_Allocations @\There are no operations that implicitly require
                         heap storage allocation to be performed by the
-                        implementation.  The operations that implicitly
+                        implementation. The operations that implicitly
                         require heap storage allocation are
                         implementation defined.
 @ImplDef{Any operations that implicitly
@@ -1325,7 +1324,7 @@ No_Dynamic_Priorities @\There are no semantic dependences on the package
                 Asynchronous_Task_Control.
 @end{Description}
 
-The following @SynI{restriction_parameter_}@nt{identifier}s are
+@Leading@;The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
 @begin{Description}
 @Defn2{Term=[Restrictions],Sec=(Max_Select_Alternatives)}Max_Select_Alternatives @\Specifies the maximum number of alternatives
@@ -1358,7 +1357,7 @@ the behavior is implementation defined.
 If an implementation chooses to detect such a violation,
 Storage_Error should be raised.
 
-The following @SynI{restriction_parameter_}@nt{identifier}s are
+@Leading@;The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
 @begin{Description}
 @Defn2{Term=[Restrictions],Sec=(Max_Storage_At_Blocking)}Max_Storage_At_Blocking @\Specifies the maximum portion
@@ -1393,7 +1392,7 @@ language defined:
 
 It is implementation defined whether the use of pragma Restrictions
 results in a reduction in executable program size, storage requirements,
-or execution time.  If possible, the implementation should provide
+or execution time. If possible, the implementation should provide
 quantitative descriptions of such effects for each restriction.
 @ImplDef{Implementation-defined aspects of pragma Restrictions.}
 
@@ -1415,7 +1414,7 @@ monotonic clock package.]
 @end{Intro}
 
 @begin{StaticSem}
-The following language-defined library package exists:
+@Leading@;The following language-defined library package exists:
 @begin{example}
 @ChildUnit{Parent=[Ada],Child=[Real_Time]}
 @key[package] Ada.Real_Time @key[is]
@@ -1497,15 +1496,15 @@ The type Time is a @i{time type} as defined by
 @Redundant[values of this type may be used in a
 @nt{delay_until_statement}.]
 Values of this type
-represent segments of an ideal time line.  The set of values of
+represent segments of an ideal time line. The set of values of
 the type Time corresponds one-to-one with an
 implementation-defined range of mathematical integers.
 @begin{Discussion}
 Informally, real time is defined to be the International Atomic Time (TAI)
-which is monotonic and nondecreasing.  We use it here for the purpose of
-discussing rate of change and monotonic behavior only.  It does not imply
+which is monotonic and nondecreasing. We use it here for the purpose of
+discussing rate of change and monotonic behavior only. It does not imply
 anything about the absolute value of Real_Time.Clock, or about Real_Time.Time
-being synchronized with TAI.  It is also used for real time in the metrics,
+being synchronized with TAI. It is also used for real time in the metrics,
 for comparison purposes.
 @end{Discussion}
 @begin{ImplNote}
@@ -1561,18 +1560,18 @@ since the epoch.
 @begin{RunTime}
 
 Time_Unit is the smallest amount of real time representable by the Time type;
-it is expressed in seconds.  Time_Span_Unit is the difference between
-two successive values of the Time type.  It is also the smallest positive
-value of type Time_Span.  Time_Unit and Time_Span_Unit represent
+it is expressed in seconds. Time_Span_Unit is the difference between
+two successive values of the Time type. It is also the smallest positive
+value of type Time_Span. Time_Unit and Time_Span_Unit represent
 the same real time duration.
 @Defn{clock tick}
 A @i{clock tick} is a real time interval during
 which the clock value (as observed by calling the Clock function) remains
-constant.  Tick is the average length of such intervals.
+constant. Tick is the average length of such intervals.
 
 The function To_Duration converts the value TS to a value of type
-Duration.  Similarly, the function To_Time_Span converts the value D
-to a value of type Time_Span.  For both operations, the result is
+Duration. Similarly, the function To_Time_Span converts the value D
+to a value of type Time_Span. For both operations, the result is
 rounded to the nearest exactly representable value (away from zero if exactly
 halfway between two exactly representable values).
 
@@ -1580,7 +1579,7 @@ To_Duration(Time_Span_Zero) returns 0.0,
 and To_Time_Span(0.0) returns Time_Span_Zero.
 
 The functions Nanoseconds, Microseconds, and Milliseconds convert the input
-parameter to a value of the type Time_Span.  NS, US,
+parameter to a value of the type Time_Span. NS, US,
 and MS are interpreted as a number of nanoseconds, microseconds, and
 milliseconds respectively.
 The result is rounded to the nearest exactly
@@ -1632,7 +1631,7 @@ a two-microsecond resolution.
 
 @Defn{clock jump}
 A @i{clock jump} is the difference between two successive distinct values of
-the clock (as observed by calling the Clock function).  There shall be no
+the clock (as observed by calling the Clock function). There shall be no
 backward clock jumps.
 
 @end{ImplReq}
@@ -1677,9 +1676,9 @@ This dependence has to be documented.
 For the purpose of the metrics defined in this clause, real time is
 defined to be the International Atomic Time (TAI).
 
-The implementation shall document the following metrics:
+@Leading@;The implementation shall document the following metrics:
 @begin{Itemize}
-An upper bound on the real-time duration of a clock tick.  This is a value
+An upper bound on the real-time duration of a clock tick. This is a value
 D such that if t1 and t2 are any real times such that t1 < t2 and
 Clock@-{t1} = Clock@-{t2} then t2 @en@; t1 <= D.
 
@@ -1694,13 +1693,13 @@ E*(1-D) <= (Clock@-{t+E} @en@; Clock@-{t}) <= E*(1+D)
 @end{display}
 
 where Clock@-{t} is the value of Clock at time t, and E is a real
-time duration not less than 24 hours.  The value of E used for
+time duration not less than 24 hours. The value of E used for
 this metric shall be reported.
 @begin{Reason}
 This metric is intended to provide a measurement
 of the long term (cumulative) deviation; therefore, 24
 hours is the
-lower bound on the measurement period.  On some implementations,
+lower bound on the measurement period. On some implementations,
 this is also the maximum period, since the language does not
 require that the range of the type Duration be more than 24 hours.
 On those implementations that support longer-range Duration, longer
@@ -1759,7 +1758,7 @@ as transformations of the same time base.
 
 It is recommended that the @lquotes@;best@rquotes@; time base which exists in the
 underlying system be available to the application through
-Clock.  @lquotes@;Best@rquotes@; may mean highest accuracy or largest range.
+Clock. @lquotes@;Best@rquotes@; may mean highest accuracy or largest range.
 
 @end{ImplAdvice}
 
@@ -1769,7 +1768,7 @@ The rules in this clause do not imply that the implementation can protect
 the user from operator or installation errors which could result in the
 clock being set incorrectly.
 
-Time_Unit is the granularity of the Time type.  In contrast,
+Time_Unit is the granularity of the Time type. In contrast,
 Tick represents the granularity of Real_Time.Clock.
 There is no requirement that these be the same.
 
@@ -1781,14 +1780,14 @@ There is no requirement that these be the same.
 @Redundant[This clause specifies performance requirements for the
 @nt{delay_statement}.
 The rules apply both to @nt{delay_relative_statement} and to
-@nt{delay_until_statement}.  Similarly, they apply equally to a
+@nt{delay_until_statement}. Similarly, they apply equally to a
 simple @nt{delay_statement} and to one which appears in a
 @nt{delay_alternative}.]
 @end{Intro}
 
 @begin{RunTime}
-The effect of the @nt{delay_statement} for Real_Time.Time is defined in
-terms of Real_Time.Clock:
+@Leading@;The effect of the @nt{delay_statement} for Real_Time.Time is
+defined in terms of Real_Time.Clock:
 @begin{itemize}
 
 If C@-{1} is a value of Clock read before a task executes a
@@ -1812,7 +1811,7 @@ When a @nt{delay_statement} appears in a @nt{delay_alternative} of a
 regardless of the specified expiration time.
 @begin{Ramification}
 The effect of these requirements is that one has to always attempt a rendezvous,
-regardless of the value of the delay expression.  This can be tested by
+regardless of the value of the delay expression. This can be tested by
 issuing a @nt{timed_entry_call} with an expiration time
 of zero, to an open entry.
 @end{Ramification}
@@ -1835,7 +1834,7 @@ Real_Time.Clock, that causes the task to actually be blocked.
 @end{DocReq}
 
 @begin{Metrics}
-The implementation shall document the following metrics:
+@Leading@;The implementation shall document the following metrics:
 @begin{Itemize}
 An upper bound on the execution time, in processor clock cycles, of a
 @nt{delay_relative_statement} whose requested value of the delay expression
@@ -1844,7 +1843,7 @@ is less than or equal to zero.
 An upper bound on the execution time, in processor clock cycles, of a
 @nt{delay_until_statement} whose requested value of the delay expression is
 less than or equal to the value of Real_Time.Clock at the
-time of executing the statement.  Similarly, for Calendar.Clock.
+time of executing the statement. Similarly, for Calendar.Clock.
 
 @Defn{lateness}
 @Defn{actual duration}
@@ -1852,10 +1851,10 @@ An upper bound on the @i{lateness} of a @nt{delay_relative_statement},
 for a positive value of the delay expression, in a situation
 where the task has sufficient priority to preempt the processor as
 soon as it becomes ready, and does not need to
-wait for any other execution resources.  The upper bound is
+wait for any other execution resources. The upper bound is
 expressed as a function of the value of the delay expression.
 The lateness is obtained by subtracting the value of the delay expression
-from the @i{actual duration}.  The actual duration is measured from a point
+from the @i{actual duration}. The actual duration is measured from a point
 immediately before a task executes the @nt{delay_statement} to a point
 immediately after the task resumes execution following this statement.
 
@@ -1863,10 +1862,10 @@ An upper bound on the lateness of a @nt{delay_until_statement}, in a
 situation where the value of the requested expiration time is after the time
 the task begins executing the statement, the task has sufficient priority
 to preempt the processor as soon as it becomes ready, and
-it does not need to wait for any other execution resources.  The upper
+it does not need to wait for any other execution resources. The upper
 bound is expressed as a function of the difference between the requested
 expiration time and the clock value at the time the statement begins
-execution.  The lateness of a @nt{delay_until_statement} is obtained by
+execution. The lateness of a @nt{delay_until_statement} is obtained by
 subtracting the requested expiration time from the real time that the task
 resumes execution following this statement.
 @end{Itemize}
@@ -1900,7 +1899,7 @@ queues.]
 
 @begin{StaticSem}
 
-The following language-defined package exists:
+@Leading@;The following language-defined package exists:
 @begin{example}
 @ChildUnit{Parent=[Ada],Child=[Synchronous_Task_Control]}
 @key{package} Ada.Synchronous_Task_Control @key{is}
@@ -1926,11 +1925,11 @@ limited record type.@end{implnote}
 @begin{RunTime}
 
 An object of the type Suspension_Object has two visible states: true and
-false.  Upon initialization, its value is set to false.
+false. Upon initialization, its value is set to false.
 @begin{Discussion}
 This object is assumed to be private to the declaring task, i.e. only that
 task will call Suspend_Until_True on this object, and the count of callers is
-at most one.  Other tasks can, of course, change and query the state of this
+at most one. Other tasks can, of course, change and query the state of this
 object.
 @end{Discussion}
 
@@ -1975,7 +1974,7 @@ It uses a conceptual @i{held priority} value to represent the task's
 
 @begin{StaticSem}
 
-The following language-defined library package exists:
+@Leading@;The following language-defined library package exists:
 @begin{example}
 @key{with} Ada.Task_Identification;
 @ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}
@@ -2001,12 +2000,12 @@ This state should not be confused with the blocked state as defined
 in @RefSecNum{Task Execution - Task Activation}; the task is still ready.
 @end{Discussion}
 For each processor there is a conceptual @i{idle task},
-which is always ready.  The base priority of the idle task is below
-System.Any_Priority'First.  The @i{held priority} is a
+which is always ready. The base priority of the idle task is below
+System.Any_Priority'First. The @i{held priority} is a
 constant of the type integer whose value is below the base priority of the
 idle task.
 
-The Hold operation sets the state of T to held.  For a held task:
+The Hold operation sets the state of T to held. For a held task:
 the task's own base priority does not constitute an inheritance source
 (see @RefSecNum{Task Priorities}), and the value of the held priority
 is defined to be such a source instead.
@@ -2075,7 +2074,7 @@ same as on any other task.
 
 Calling Hold on a held task or Continue on a non-held task has no effect.
 
-The rules affecting queuing are derived from the above rules, in
+@Leading@;The rules affecting queuing are derived from the above rules, in
 addition to the normal priority rules:
 @begin{itemize}
 
@@ -2083,7 +2082,7 @@ When a held task is on the ready queue, its priority is so low as to never
 reach the top of the queue as long as there are other tasks on that queue.
 
 If a task is executing in a protected action, inside a rendezvous, or is
-inheriting priorities from other sources (e.g.  when activated), it
+inheriting priorities from other sources (e.g. when activated), it
 continues to execute until it is no longer executing the corresponding
 construct.
 
@@ -2092,13 +2091,13 @@ complete, the active priority of the accepting task is not affected.
 
 If a task becomes held while waiting in a @nt{selective_accept},
 and a entry call is issued to one of the open entries, the corresponding
-accept body executes.  When the rendezvous completes, the active
+accept body executes. When the rendezvous completes, the active
 priority of the accepting task is lowered to the held priority
 (unless it is still inheriting from other sources), and the task does
 not execute until another Continue.
 
 The same holds if the held task is the only task on a protected entry queue
-whose barrier becomes open.  The corresponding entry body executes.
+whose barrier becomes open. The corresponding entry body executes.
 
 @end{itemize}
 
@@ -2136,7 +2135,7 @@ In particular, there should not be any overhead due to evaluating
 
 Unchecked_Deallocation shall be supported for terminated tasks that are
 designated by access types, and shall have the effect of releasing all
-the storage associated with the task.  This includes any run-time system
+the storage associated with the task. This includes any run-time system
 or heap storage that has been implicitly allocated for the task by the
 implementation.
 
@@ -2146,7 +2145,7 @@ implementation.
 
 The implementation shall document the
 upper bound on the duration of interrupt blocking caused by the
-implementation.  If this is different for different interrupts or
+implementation. If this is different for different interrupts or
 interrupt priority levels, it should be documented for each case.
 @ImplDef{The upper bound on the duration of interrupt blocking caused by
 the implementation.}
@@ -2154,13 +2153,13 @@ the implementation.}
 @end{DocReq}
 
 @begin{Metrics}
-The implementation shall document the following metric:
+@Leading@;The implementation shall document the following metric:
 @begin{Itemize}
 The overhead associated with obtaining
-a mutual-exclusive access to an entry-less protected object.  This shall be
+a mutual-exclusive access to an entry-less protected object. This shall be
 measured in the following way:
 
-@NoPrefix@;For a protected object of the form:
+@NoPrefix@Leading@;For a protected object of the form:
 @begin{example}
 @key{protected} Lock @key{is}
    @key{procedure} Set;
@@ -2186,10 +2185,10 @@ Set. This shall be measured between the point just before
 issuing the call, and the point just after the call
 completes.
 The function Read shall be called later to verify that Set was indeed
-called (and not optimized away).  The
+called (and not optimized away). The
 calling task shall have
 sufficiently high priority as to not be preempted during the measurement
-period.  The protected object shall have sufficiently high ceiling priority
+period. The protected object shall have sufficiently high ceiling priority
 to allow the task to call Set.
 
 @NoPrefix@;For a multiprocessor, if supported, the metric shall be reported for the

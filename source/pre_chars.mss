@@ -1,16 +1,15 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/08/05 04:53:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:24 $}
+@Comment{$Date: 2000/08/15 01:11:45 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
 This clause presents the packages related to character processing:
 an empty pure package Characters and child packages
 Characters.Handling and Characters.Latin_1.
-The package Characters.Handling
-provides classification and conversion
+The package Characters.Handling provides classification and conversion
 functions for Character data, and some simple functions for
 dealing with Wide_Character data.
 The child package Characters.Latin_1 declares a set of
@@ -18,13 +17,13 @@ constants initialized to values of type Character.
 @end{Intro}
 
 @begin{Extend83}
-This clause is new to Ada 9X.
+This clause is new to Ada 95.
 @end{Extend83}
 
 @LabeledSubClause(The Package Characters)
 
 @begin{StaticSem}
-@keepnext@;The library package Characters has the following declaration:
+@leading@keepnext@;The library package Characters has the following declaration:
 @begin{example}
 @ChildUnit{Parent=[Ada],Child=[Characters]}@key(package) Ada.Characters @key[is]
   @key[pragma] Pure(Characters);
@@ -35,7 +34,7 @@ This clause is new to Ada 9X.
 
 @LabeledSubClause{The Package Characters.Handling}
 @begin{StaticSem}
-@keepnext@;The library package Characters.Handling has the following declaration:
+@leading@keepnext@;The library package Characters.Handling has the following declaration:
 @begin{example}
 @key[package] Ada.Characters.Handling @key[is]@ChildUnit{Parent=[Ada.Characters],Child=[Handling]}
   @key[pragma] Preelaborate(Handling);
@@ -49,7 +48,8 @@ This clause is new to Ada 9X.
   @key[function] @AdaSubDefn{Is_Upper}             (Item : @key[in] Character) @key[return] Boolean;
   @key[function] @AdaSubDefn{Is_Basic}             (Item : @key[in] Character) @key[return] Boolean;
   @key[function] @AdaSubDefn{Is_Digit}             (Item : @key[in] Character) @key[return] Boolean;
-  @key[function] @AdaSubDefn{Is_Decimal_Digit}     (Item : @key[in] Character) @key[return] Boolean @key[renames] Is_Digit;
+  @key[function] @AdaSubDefn{Is_Decimal_Digit}     (Item : @key[in] Character) @key[return] Boolean
+                     @key[renames] Is_Digit;
   @key[function] @AdaSubDefn{Is_Hexadecimal_Digit} (Item : @key[in] Character) @key[return] Boolean;
   @key[function] @AdaSubDefn{Is_Alphanumeric}      (Item : @key[in] Character) @key[return] Boolean;
   @key[function] @AdaSubDefn{Is_Special}           (Item : @key[in] Character) @key[return] Boolean;
@@ -107,7 +107,7 @@ This clause is new to Ada 9X.
 
 In the description below for each function that returns a Boolean
 result, the effect is described in terms of the conditions under which
-the value True is returned.  If these conditions are not met, then the
+the value True is returned. If these conditions are not met, then the
 function returns False.
 
 Each of the following classification functions has a formal Character
@@ -117,7 +117,7 @@ parameter, Item, and returns a Boolean result.
 A @i{control character} is a character whose position is
 in one of the ranges 0..31 or 127..159.
 
-@Defn2{term=[graphic character], sec=[a category of Character]}Is_Graphic @\True if Item is a graphic character.  A @i[graphic character]
+@Defn2{term=[graphic character], sec=[a category of Character]}Is_Graphic @\True if Item is a graphic character. A @i[graphic character]
 is a character whose position is in one of the ranges
 32..126 or 160..255.
 
@@ -166,9 +166,9 @@ not alphanumeric.
 Each of the names
 To_Lower, To_Upper, and To_Basic refers to two
 functions: one that converts from Character to Character, and the
-other that converts from String to String.  The result of each
+other that converts from String to String. The result of each
 Character-to-Character function is described below, in terms of the
-conversion applied to Item, its formal Character parameter.  The
+conversion applied to Item, its formal Character parameter. The
 result of each  String-to-String conversion is  obtained by applying
 to each element of the function's
  String parameter the corresponding Character-to-Character conversion;
@@ -244,13 +244,13 @@ Item.
 If an implementation provides a localized definition of Character
 or Wide_Character,
 then the effects of the subprograms in Characters.Handling should
-reflect the  localizations.  See also @RefSecNum(Character Types).
+reflect the  localizations. See also @RefSecNum(Character Types).
 @end{ImplAdvice}
 
 @begin{Notes}
  A basic letter is a letter without a diacritical mark.
 
-Except for the hexadecimal digits, basic letters, and ISO_646
+@Leading@;Except for the hexadecimal digits, basic letters, and ISO_646
 characters, the categories identified in the classification functions
 form a strict hierarchy:
 @begin{Display}
@@ -288,17 +288,16 @@ characters in ISO 8859-1.
 @begin{reason}
 The constants for the ISO 646 characters could have
 been declared as renamings of objects declared in package ASCII, as
-opposed to explicit constants.  The main reason for explicit constants
+opposed to explicit constants. The main reason for explicit constants
 was for consistency of style with the upper-half constants, and to avoid
 emphasizing the package ASCII.@end{reason}
 @end{Intro}
 
 @begin{StaticSem}
-@keepnext@;The library package Characters.Latin_1 has the following
+@leading@keepnext@;The library package Characters.Latin_1 has the following
 declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Characters],Child=[Latin_1]}
-@key[package] Ada.Characters.Latin_1 @key[is]
+@key[package] Ada.Characters.Latin_1 @key[is]@ChildUnit{Parent=[Ada.Characters],Child=[Latin_1]}
     @key[pragma] Pure(Latin_1);
 
 @keepnext@RI{-- Control characters:}@PDefn2{term=[control character],
@@ -358,7 +357,7 @@ sec=[a category of Character]}
     @AdaDefn{Full_Stop}            : @key[constant] Character := '.';  @RI{-- Character'Val(46)}
     @AdaDefn{Solidus}              : @key[constant] Character := '/';  @RI{-- Character'Val(47)}
 
-    @keepnext@RI{-- Decimal digits '0' though '9' are at positions 48 through 57}
+@keepnext    @RI{-- Decimal digits '0' though '9' are at positions 48 through 57}
 
     @AdaDefn{Colon}                : @key[constant] Character := ':';  @RI{-- Character'Val(58)}
     @AdaDefn{Semicolon}            : @key[constant] Character := ';';  @RI{-- Character'Val(59)}
@@ -368,7 +367,7 @@ sec=[a category of Character]}
     @AdaDefn{Question}             : @key[constant] Character := '?';  @RI{-- Character'Val(63)}
     @AdaDefn{Commercial_At}        : @key[constant] Character := '@@';  @RI{-- Character'Val(64)}
 
-    @keepnext@RI{-- Letters 'A' through 'Z' are at positions 65 through 90}
+@keepnext    @RI{-- Letters 'A' through 'Z' are at positions 65 through 90}
 
     @AdaDefn{Left_Square_Bracket}  : @key[constant] Character := '[';  @RI{-- Character'Val(91)}
     @AdaDefn{Reverse_Solidus}      : @key[constant] Character := '\';  @RI{-- Character'Val(92)}
@@ -572,7 +571,7 @@ sec=[a category of Character]}
 @end{StaticSem}
 
 @begin{ImplPerm}
-An implementation may provide additional  packages as children of
-Ada.Characters,  to declare names for the  symbols of the local character set
+An implementation may provide additional packages as children of
+Ada.Characters, to declare names for the symbols of the local character set
 or other character sets.
 @end{ImplPerm}

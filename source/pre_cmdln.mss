@@ -1,19 +1,17 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/08/08 22:56:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:19 $}
+@Comment{$Date: 2000/08/15 01:11:45 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
-The package Command_Line allows a program
-to obtain the values of its arguments and to set
-the exit status code to be returned
-on normal termination.
+The package Command_Line allows a program to obtain the values of its
+arguments and to set the exit status code to be returned on normal termination.
 @ImplDef{The meaning of Argument_Count, Argument, and Command_Name.}
 @end{Intro}
 
 @begin{StaticSem}
-The library package Ada.Command_Line has the following declaration:
+@Leading@Keepnext@;The library package Ada.Command_Line has the following declaration:
 @begin{Example}
 @ChildUnit{Parent=[Ada],Child=[Command_Line]}
 @key[package] Ada.Command_Line @key[is]
@@ -46,7 +44,7 @@ If the external execution environment supports passing arguments to
 a program, then
 Argument_Count returns
 the number of arguments passed to the program
-invoking the function.  Otherwise it returns 0.
+invoking the function. Otherwise it returns 0.
 The meaning of @lquotes@;number of arguments@rquotes@; is implementation defined.
 
 @begin{Example}
@@ -85,10 +83,10 @@ respectively.
 @end{Example}
 
 If the external execution environment supports returning an exit status
-from a program, then Set_Exit_Status sets Code as the status.  Normal
+from a program, then Set_Exit_Status sets Code as the status. Normal
 termination of a program returns as the exit status the value most
 recently set by Set_Exit_Status, or, if no such value has been set, then the
-value Success.  If a program terminates abnormally, the status set by
+value Success. If a program terminates abnormally, the status set by
 Set_Exit_Status is ignored, and an implementation-defined exit status value
 is set.
 
@@ -121,5 +119,5 @@ whereas Argument_Count does not.
 @end{Notes}
 
 @begin{Extend83}
-This clause is new in Ada 9X.
+This clause is new in Ada 95.
 @end{Extend83}

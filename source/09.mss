@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:17 $}
+@Comment{$Date: 2000/08/15 01:11:43 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 
@@ -2386,8 +2386,7 @@ by a corresponding clock.
 @begin{Example}
 @ChildUnit{Parent=[Ada],Child=[Calendar]}
 @key(package) Ada.Calendar @key(is)
-@LangDefType{Package=[Ada.Calendar],Type=[Time]}
-  @key(type) Time @key(is) @key(private;)
+  @key(type) Time @key(is) @key(private;)@LangDefType{Package=[Ada.Calendar],Type=[Time]}
 
   @key(subtype) @AdaDefn{Year_Number}  @key(is) Integer @key(range) 1901 .. 2099;
   @key(subtype) @AdaDefn{Month_Number} @key(is) Integer @key(range) 1 .. 12;

@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 22:56:19 $}
+@Comment{$Date: 2000/08/15 01:11:45 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.17 $}
+@comment{$Revision: 1.18 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -15,7 +15,7 @@ The following @i{representation-oriented attributes} are defined for
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Machine_Radix>,
   Text=[Yields the radix of the hardware
-   representation of the type @i{T}.  The value of this attribute is of
+   representation of the type @i{T}. The value of this attribute is of
    the type @i{universal_integer}.]}
 @end{Description}
 
@@ -39,7 +39,7 @@ where
    in the canonical form (for the type @i{T}), having a @RI{p}-digit
    @i{mantissa} and an @i{exponent} between @i{T}'Machine_Emin and
    @i{T}'Machine_Emax, is a machine number (see @RefSecNum{Floating Point Types})
-   of the type @i{T}.  This attribute yields a value of the type
+   of the type @i{T}. This attribute yields a value of the type
    @i{universal_integer}.]}
 @begin{Ramification}
    Values of a type held in an extended register are, in general, not machine
@@ -60,7 +60,7 @@ where
   Text=[Yields the largest (most positive) value of @i{exponent} such that
    every value expressible in the canonical form (for the type @i{T}), having
    a @i{mantissa} of @i{T}'Machine_Mantissa digits, is a machine number
-   (see @RefSecNum{Floating Point Types}) of the type @i{T}.  This attribute
+   (see @RefSecNum{Floating Point Types}) of the type @i{T}. This attribute
    yields a value of the type @i{universal_integer}.]}
 @begin{Ramification}
 
@@ -108,10 +108,10 @@ the resulting form is the @i{canonical-form representation} of @RI{x}.
    The value
    of this attribute is of the predefined type Boolean.]}
 @begin{Discussion}
-   It is difficult to be more precise about what it means to round the result
-   of a predefined operation.  If the implementation does not use extended
-   registers, so that every arithmetic result is necessarily a machine number,
-   then rounding seems to imply two things:
+   @Leading@;It is difficult to be more precise about what it means to round
+   the result of a predefined operation. If the implementation does not use
+   extended registers, so that every arithmetic result is necessarily a machine
+   number, then rounding seems to imply two things:
    @begin{Itemize}
       S'Model_Mantissa = S'Machine_Mantissa, so that operand preperturbation
       never occurs;
@@ -124,7 +124,7 @@ the resulting form is the @i{canonical-form representation} of @RI{x}.
    Technically, this attribute should yield False when extended registers are
    used, since a few computed results will cross over the half-way point as
    a result of double rounding, if and when a value held in an extended
-   register has to be reduced in precision to that of the machine numbers.  It
+   register has to be reduced in precision to that of the machine numbers. It
    does not seem desirable to preclude the use of extended registers when
    S'Machine_Rounds could otherwise be True.
 @end{Discussion}
@@ -148,7 +148,7 @@ the resulting form is the @i{canonical-form representation} of @RI{x}.
    is of the predefined type Boolean.]}
 @end{Description}
 
-@Defn{normalized exponent}
+@Leading@Defn{normalized exponent}
 For every value @RI{x} of a floating point type @i{T}, the
 @i{normalized exponent} of @RI{x} is defined as follows:
 @begin{Itemize}
@@ -190,7 +190,7 @@ S of a floating point type @i{T}.
 @end(DescExample)
 
    @NoPrefix@;The function yields the value @RI(X) @Times @RI(T)@R('Machine_Radix)@+(-@RI(k)), where
-   @RI(k) is the normalized exponent of @i(X).  A zero result@Redundant(, which
+   @RI(k) is the normalized exponent of @i(X). A zero result@Redundant(, which
    can only occur when @i(X) is zero,) has the sign of @i(X).]}
 @begin{Discussion}
    Informally, when @i{X} is a normalized number, the result is the value
@@ -324,7 +324,7 @@ S of a floating point type @i{T}.
 
    @NoPrefix@;The function yields the integral value nearest to @i{X},
    rounding toward the even integer if @i{X} lies exactly halfway between
-   two integers.  A zero result has the sign of @i{X} when S'Signed_Zeros is
+   two integers. A zero result has the sign of @i{X} when S'Signed_Zeros is
    True.]}
 
 @AttributeLeading{Prefix=<S>, AttrName=<Truncation>,
@@ -336,7 +336,7 @@ S of a floating point type @i{T}.
 @end{DescExample}
 
    @NoPrefix@;The function yields the value @Ceiling{@RI{X}} when @i{X} is negative,
-   and @Floor{@RI{X}} otherwise.  A zero result has the sign of @i{X} when
+   and @Floor{@RI{X}} otherwise. A zero result has the sign of @i{X} when
    S'Signed_Zeros is True.]}
 
 @AttributeLeading{Prefix=<S>, AttrName=<Remainder>,
@@ -351,7 +351,7 @@ S of a floating point type @i{T}.
    For nonzero @i{Y}, let @RI{v} be the value
    @RI{X} - @RI{n} @Times @RI{Y}, where @RI{n} is the integer nearest to
    the exact value of @RI{X}/@RI{Y}; if @Abs{@RI{n} - @RI{X}/@RI{Y}} @Thin = @Thin 1/2,
-   then @RI(n) is chosen to be even.  If @RI{v} is a machine number of
+   then @RI(n) is chosen to be even. If @RI{v} is a machine number of
    the type @i{T}, the function yields @RI{v}; otherwise, it yields zero.
 @IndexCheck{Division_Check}Constraint_Error is raised if @i{Y} is zero.
    A zero result has the sign of @i{X} when S'Signed_Zeros is True.]}
@@ -405,11 +405,11 @@ is outside the base range of S.
    A zero result has the sign of @i{Sign} when S'Signed_Zeros is True.]}
 @begin{Discussion}
    S'Copy_Sign is provided for convenience in restoring the sign to a quantity
-   from which it has been temporarily removed, or to a related quantity.  When
+   from which it has been temporarily removed, or to a related quantity. When
    S'Signed_Zeros is True, it is also instrumental in determining the sign
-   of a zero quantity, when required.  (Because negative and positive zeros
+   of a zero quantity, when required. (Because negative and positive zeros
    compare equal in systems conforming to IEC 559:1989, a negative zero does
-   @i{not} appear to be negative when compared to zero.)  The sign
+   @i{not} appear to be negative when compared to zero.) The sign
    determination is accomplished by transferring the sign of the zero quantity
    to a nonzero quantity and then testing for a negative result.
 @end{Discussion}
@@ -424,7 +424,7 @@ is outside the base range of S.
 @end{DescExample}
 
    @NoPrefix@;Let @RI{v} be the value @RI{T}@R('Machine_Radix)@+{@RI{k}-@RI{Radix_Digits}},
-   where @RI{k} is the normalized exponent of @i{X}.  The function yields
+   where @RI{k} is the normalized exponent of @i{X}. The function yields
    the value
    @begin{Itemize}
       @Floor{@RI{X}/@RI{v}} @Times @RI{v},
@@ -471,16 +471,16 @@ truncating @i{X} to the precision
    All of the primitive function attributes except Rounding and Machine
    correspond to subprograms in the Generic_Primitive_Functions
    generic package proposed as a separate ISO standard (ISO/IEC DIS 11729) for
-   Ada 83.  The Scaling, Unbiased_Rounding, and Truncation attributes
+   Ada 83. The Scaling, Unbiased_Rounding, and Truncation attributes
    correspond to the Scale, Round, and Truncate functions, respectively, in
-   Generic_Primitive_Functions.  The Rounding attribute rounds away from zero;
-   this functionality was not provided in Generic_Primitive_Functions.  The
+   Generic_Primitive_Functions. The Rounding attribute rounds away from zero;
+   this functionality was not provided in Generic_Primitive_Functions. The
    name Round was not available for either of the primitive function attributes
    that perform rounding, since an attribute of that name is used for a
-   different purpose for decimal fixed point types.  Likewise, the name Scale
+   different purpose for decimal fixed point types. Likewise, the name Scale
    was not available, since an attribute of that name is also used for a
-   different purpose for decimal fixed point types.  The functionality of the
-   Machine attribute was also not provided in Generic_Primitive_Functions.  The
+   different purpose for decimal fixed point types. The functionality of the
+   Machine attribute was also not provided in Generic_Primitive_Functions. The
    functionality of the Decompose procedure of Generic_Primitive_Functions is
    only provided in the form of the separate attributes Exponent and Fraction.
    The functionality of the Successor and Predecessor functions of
@@ -490,7 +490,7 @@ truncating @i{X} to the precision
 @begin{ImplNote}
    The primitive function attributes may be implemented either with appropriate
    floating point arithmetic operations or with integer and logical operations
-   that act on parts of the representation directly.  The latter is strongly
+   that act on parts of the representation directly. The latter is strongly
    encouraged when it is more efficient than the former; it is mandatory when
    the former cannot deliver the required accuracy due to limitations of the
    implementation's arithmetic operations.
@@ -531,29 +531,29 @@ a floating point type @i{T}.
 
 @Attribute{Prefix=<S>, AttrName=<Model_Epsilon>,
   Text=[Yields the value
-   @RI{T}@R('Machine_Radix)@+{1 - @RI{T}@R('Model_Mantissa)}.  The value of this
+   @RI{T}@R('Machine_Radix)@+{1 - @RI{T}@R('Model_Mantissa)}. The value of this
    attribute is of the type @i{universal_real}.]}
 @begin{Discussion}
    In most implementations, this attribute yields the absolute value of the
    difference between one and the smallest machine number of the type @i{T}
    above one which, when added to one, yields a machine number different from
-   one.  Further discussion can be found in
+   one. Further discussion can be found in
    @RefSecNum{Model-Oriented Attributes of Floating Point Types}.
 @end{Discussion}
 
 @Attribute{Prefix=<S>, AttrName=<Model_Small>,
   Text=[Yields the value
-   @RI{T}@R('Machine_Radix)@+{@RI{T}@R('Model_Emin) - 1}.  The value of this
+   @RI{T}@R('Machine_Radix)@+{@RI{T}@R('Model_Emin) - 1}. The value of this
    attribute is of the type @i{universal_real}.]}
 @begin{Discussion}
    In most implementations, this attribute yields the
    smallest positive normalized number of the type @i{T},
    i.e. the number corresponding to the positive underflow
-   threshold.  In some implementations employing a radix-complement
+   threshold. In some implementations employing a radix-complement
    representation for the type @i{T}, the positive underflow threshold is
    closer to zero than is the negative underflow threshold, with the
    consequence that the smallest positive normalized number does not coincide with
-   the positive underflow threshold (i.e., it exceeds the latter).  Further
+   the positive underflow threshold (i.e., it exceeds the latter). Further
    discussion can be found in
    @RefSecNum{Model-Oriented Attributes of Floating Point Types}.
 @end{Discussion}
@@ -579,7 +579,7 @@ a floating point type @i{T}.
   of this attribute is implementation defined;
   see @RefSecNum{Model-Oriented Attributes of Floating Point Types}
   for the definition that applies to
-  implementations supporting the Numerics Annex.  The value of this attribute
+  implementations supporting the Numerics Annex. The value of this attribute
   is of the type @i{universal_real}.]}
 
 @Attribute{Prefix=<S>, AttrName=<Safe_Last>,
@@ -589,7 +589,7 @@ a floating point type @i{T}.
   of this attribute is implementation defined;
   see @RefSecNum{Model-Oriented Attributes of Floating Point Types}
   for the definition that applies to
-  implementations supporting the Numerics Annex.  The value of this attribute
+  implementations supporting the Numerics Annex. The value of this attribute
   is of the type @i{universal_real}.]}
 @begin{Discussion}
    A predefined floating point arithmetic operation that yields a value in the
@@ -617,13 +617,13 @@ another is intended to convert what would be an inconsistent change into an
 incompatible change.
 
 The Emax, Small, Large, Safe_Emax, Safe_Small, and Safe_Large attributes of
-floating point types are removed from the language.  Small and Safe_Small are
+floating point types are removed from the language. Small and Safe_Small are
 collectively replaced by Model_Small, which is functionally equivalent to
-Safe_Small, though it may have a slightly different value.  The others are
-collectively replaced by Safe_First and Safe_Last.  Safe_Last is functionally
+Safe_Small, though it may have a slightly different value. The others are
+collectively replaced by Safe_First and Safe_Last. Safe_Last is functionally
 equivalent to Safe_Large, though it may have a different value; Safe_First is
 comparable to the negation of Safe_Large but may differ slightly from it as
-well as from the negation of Safe_Last.  Emax and Safe_Emax had relatively few
+well as from the negation of Safe_Last. Emax and Safe_Emax had relatively few
 uses in Ada 83; T'Safe_Emax can be computed in the revised language as
 Integer'Min(T'Exponent(T'Safe_First), T'Exponent(T'Safe_Last)).
 
@@ -634,9 +634,9 @@ in the form of implementation-defined attributes with their former values.
 @end{Incompatible83}
 
 @begin{Extend83}
-The Model_Emin attribute is new.  It is conceptually similar to the negation of
+The Model_Emin attribute is new. It is conceptually similar to the negation of
 Safe_Emax attribute of Ada 83, adjusted for the fact that the model numbers now
-have the hardware radix.  It is a fundamental determinant, along with
+have the hardware radix. It is a fundamental determinant, along with
 Model_Mantissa, of the set of model numbers of a type
 (see @RefSecNum{Model of Floating Point Arithmetic}).
 
@@ -654,7 +654,7 @@ The following @i{representation-oriented} attributes are defined for
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Machine_Radix>,
   Text=[Yields the radix of the hardware representation of the type
-   @i{T}.  The value of this attribute is of the type @i{universal_integer}.]}
+   @i{T}. The value of this attribute is of the type @i{universal_integer}.]}
 
 @Attribute{Prefix=<S>, AttrName=<Machine_Rounds>,
   Text=[Yields the value True if rounding is performed on inexact
@@ -685,7 +685,7 @@ in the form of implementation-defined attributes with their former values.
 
 @begin{Extend83}
 The Machine_Radix attribute
-is now allowed for fixed point types.  It is
+is now allowed for fixed point types. It is
 also specifiable in an attribute definition clause
 (see @RefSecNum{Machine_Radix Attribute Definition Clause}).
 @end{Extend83}

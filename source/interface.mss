@@ -1,16 +1,15 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/11 00:09:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:16 $}
+@Comment{$Date: 2000/08/15 01:11:45 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
 @Defn{interface to other languages}
 @Defn2{Term=[language], Sec=(interface to non-Ada)}
 @Defn{mixed-language programs}
-This Annex
- describes features for writing mixed-language programs.
+This Annex describes features for writing mixed-language programs.
 General interface support is presented first;
 then specific support for C, COBOL, and Fortran is defined,
 in terms of language interface packages for each of
@@ -27,7 +26,7 @@ Ada should have strong support for mixed-language programming.
 @end{MetaRules}
 
 @begin{Extend83}
-Much of the functionality in this Annex is new to Ada 9X.
+Much of the functionality in this Annex is new to Ada 95.
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -43,7 +42,7 @@ thus allowing
  a foreign-language subprogram to be called from Ada,
 or a foreign-language variable to be accessed from Ada.
 In contrast,
-a @nt{pragma} Export  is used to export an Ada entity
+a @nt{pragma} Export is used to export an Ada entity
 to a foreign language, thus allowing
  an Ada subprogram to be called from a foreign language,
 or an Ada object
@@ -60,7 +59,7 @@ It is intended primarily for types and @lquotes@;callback@rquotes@; subprograms.
 For example,
 @lquotes@;@key{pragma} Convention(Fortran, Matrix);@rquotes@;
 implies that Matrix should be represented according to the
-conventions of the supported  Fortran implementation, namely
+conventions of the supported Fortran implementation, namely
 column-major order.
 
 A @nt{pragma} Linker_Options is used to specify the system linker
@@ -71,7 +70,7 @@ partition.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@RootDefn{interfacing pragma}
+@Leading@RootDefn{interfacing pragma}
 @PDefn2{Term=[interfacing pragma], Sec=(Import)}
 @PDefn2{Term=[pragma, interfacing], Sec=(Import)}
 @PDefn2{Term=[interfacing pragma], Sec=(Export)}
@@ -146,12 +145,11 @@ the list of children of package Interfaces @em a more open-ended sort
 of list.
 @end{Discussion}
 
-@Defn2{Term=[compatible],Sec=[a type, with a convention]}
+@Leading@Defn2{Term=[compatible],Sec=[a type, with a convention]}
 If @i[L] is a @i[convention_]@nt[identifier] for a language, then a
-type T is said to be @i{compatible with convention L},
-(alternatively,
-is said to be an @i[L-compatible type]) if any of
-the following conditions are met:
+type T is said to be @i{compatible with convention L}, (alternatively,
+is said to be an @i[L-compatible type]) if any of the following conditions
+are met:
 @begin[itemize]
 T is declared in a language interface package
 corresponding to @i[L] and is defined to be
@@ -162,7 +160,7 @@ corresponding to @i[L] and is defined to be
 @refsecnum(Interfacing with COBOL),
 @refsecnum(Interfacing with Fortran)),
 
-@Defn2{Term=[eligible],Sec=[a type, for a convention]}
+@Leading@Defn2{Term=[eligible],Sec=[a type, for a convention]}
 Convention @i[L] has been specified for T in
 a @nt[pragma] Convention, and T is @i{eligible for
 convention @i[L]}; that is:
@@ -191,7 +189,7 @@ type, though the C type to which it corresponds might be different
 in different environments.@end{discussion}
 @end[itemize]
 
-If @nt[pragma] Convention   applies to a type,
+If @nt[pragma] Convention applies to a type,
 then the type shall either be
 compatible with or eligible for
 the convention specified in the pragma.
@@ -227,7 +225,7 @@ then the @nt{pragma} Import is the completion of all of them.
 @begin(Discussion)
   For declarations of deferred constants and subprograms, we mention
   pragma Import
-  explicitly as a possible completion.  For other declarations that
+  explicitly as a possible completion. For other declarations that
   require completions, we ignore the possibility of pragma Import.
   Nevertheless, if an implementation chooses to allow a @nt{pragma} Import
   to complete the declaration of a task, protected type, incomplete
@@ -260,8 +258,8 @@ shall each be compatible with the convention specified in the
 corresponding pragma.
 
 The external name and link name @i{string}_@nt[expression]s
- of a @nt{pragma} Import or Export, and the @i[string]_@nt[expression]
-of a @nt[pragma] Linker_Options,  shall be
+of a @nt{pragma} Import or Export, and the @i[string]_@nt[expression]
+of a @nt[pragma] Linker_Options, shall be
 static.
 @end{Legality}
 
@@ -294,7 +292,7 @@ An interfacing pragma is a program unit pragma
 when applied to a program unit
 (see @RefSecNum{Pragmas and Program Units}).
 
-An interfacing pragma defines the convention
+@Leading@;An interfacing pragma defines the convention
 of the entity denoted by the @nt{local_name}.
 The convention represents the calling convention or representation
 convention of the entity.
@@ -345,7 +343,7 @@ Pragma Linker_Options has the
 effect of passing its string argument as a parameter to
 the system linker (if one exists), if the immediately
 enclosing compilation unit is included in the partition
-being linked.  The interpretation of the string argument, and the
+being linked. The interpretation of the string argument, and the
  way in which the string arguments from
 multiple Linker_Options pragmas are combined, is implementation
 defined.
@@ -386,7 +384,7 @@ precedence.
 
 @begin{ImplAdvice}
     If an implementation supports pragma Export
-     to a given language, then it should also
+    to a given language, then it should also
     allow the main subprogram to be written in that language.
     It should support some mechanism for invoking the elaboration of the
     Ada library units included in the system, and for invoking the
@@ -427,7 +425,7 @@ ones).
 The reason for giving the advice about C++ is to encourage
 uniformity among implementations, given that the name of the language is
 not syntactically legal as an @nt{identifier}.
-We place this advice in the AARM, rather than the RM9X proper,
+We place this advice in the AARM, rather than the RM95 proper,
 because (as of this writing) C++ is not an international standard,
 and we don't want to refer to a such a language from an international
 standard.
@@ -451,9 +449,9 @@ or only for certain conventions.
 @end{Ramification}
 
 A @nt{pragma} Import specifies the conventions for accessing external
-entities.  It is possible that the actual entity is written in assembly
+entities. It is possible that the actual entity is written in assembly
 language, but reflects the conventions of a particular
-language.  For example, @key{pragma} Import(Ada, ...) can be used to
+language. For example, @key{pragma} Import(Ada, ...) can be used to
 interface to an assembly language routine that obeys the
 Ada compiler's calling conventions.
 
@@ -500,7 +498,7 @@ Ada semantics.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of interfacing pragmas:}
+@leading@keepnext@i{Example of interfacing pragmas:}
 @begin{Example}
 @key[package] Fortran_Library @key[is]
   @key[function] Sqrt (X : Float) @key[return] Float;
@@ -513,7 +511,7 @@ Ada semantics.
 @end{Examples}
 
 @begin{Extend83}
-Interfacing pragmas are new to Ada 9X.
+Interfacing pragmas are new to Ada 95.
 Pragma Import replaces Ada 83's pragma Interface.
 Existing implementations can continue to support pragma Interface for
 upward compatibility.
@@ -521,12 +519,11 @@ upward compatibility.
 
 @LabeledClause{The Package Interfaces}
 @begin{Intro}
-Package Interfaces is  the parent of several library
-packages that declare
- types and other entities useful for
-interfacing to  foreign languages.
+Package Interfaces is the parent of several library
+packages that declare types and other entities useful for
+interfacing to foreign languages.
 It also contains some implementation-defined
-types that are  useful across more than one language
+types that are useful across more than one language
 (in particular for interfacing to assembly
 language).
 @ImplDef{The contents of the visible part of package Interfaces
@@ -534,8 +531,7 @@ and its language-defined descendants.}
 @end{Intro}
 
 @begin{StaticSem}
-The  library package Interfaces has the following skeletal
-declaration:
+@Leading@Keepnext@;The library package Interfaces has the following skeletal declaration:
 @begin{Example}
 @RootLibUnit{Interfaces}
 @key[package] Interfaces @key[is]
@@ -557,7 +553,7 @@ declaration:
 @end{StaticSem}
 
 @begin{ImplReq}
-An implementation shall provide the following declarations in the
+@Leading@;An implementation shall provide the following declarations in the
 visible part of package Interfaces:
 @begin{Itemize}
 Signed and modular integer types of @i{n} bits,
@@ -570,7 +566,7 @@ signed types, and Unsigned_@i{n} for the modular types;
 For example, for a typical 32-bit machine the corresponding
 types might be Integer_8, Unsigned_8,
 Integer_16, Unsigned_16,
-Integer_32,  and Unsigned_32.
+Integer_32, and Unsigned_32.
 
 The wording above implies, for example, that Integer_16'Size =
 Unsigned_16'Size = 16.
@@ -641,8 +637,7 @@ This package should contain any declarations that would be useful for
 interfacing to the language (implementation) represented by the
 convention.
 Any declarations useful for interfacing to any language on the
-given  hardware architecture
- should be provided directly in Interfaces.
+given hardware architecture should be provided directly in Interfaces.
 @begin{Ramification}
 For example, package Interfaces.XYZ_Pascal might contain
 declarations of types that match the data types provided by the
@@ -656,7 +651,7 @@ should provide the corresponding
 package or packages described in the following
 clauses.
 @begin{ImplNote}
-The intention is that an implementation might support several
+@Leading@;The intention is that an implementation might support several
 implementations of the foreign language: Interfaces.This_Fortran and
 Interfaces.That_Fortran might both exist.
 The @lquotes@;default@rquotes@; implementation, overridable by the user,
@@ -684,7 +679,7 @@ functions.
 @end{Intro}
 
 @begin{StaticSem}
-The library package Interfaces.C has the following declaration:
+@Leading@Keepnext@;The library package Interfaces.C has the following declaration:
 @begin{Example}
 @ChildUnit{Parent=[Interfaces],Child=[C]}
 @key(package) Interfaces.C @key(is)
@@ -843,11 +838,11 @@ and the C type char.
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0114]}
 @Chg{New=[The To_C and To_Ada functions map between corresponding
 characters, not necessarily between characters with the same internal
-representation.  Corresponding characters are characters defined by the
+representation. Corresponding characters are characters defined by the
 same enumeration literal, if such exist; otherwise, the correspondence
 is not defined by the language.], Old=[]}
 
-@Chg{New=[The following definition is equivalent to the above summary:], Old=[]}
+@Chg{New=[@Leading@;The following definition is equivalent to the above summary:], Old=[]}
 
 @Chg{New=[@f{To_C (Latin_1_Char) = char'Value(Character'Image(Latin_1_Char))}@*
 provided that char'Value does not raise an exception; otherwise the result
@@ -875,8 +870,7 @@ False otherwise.
    @key(return) String;
 @end{Example}
 
-The result of To_C is a char_array
- value of length Item'Length (if
+The result of To_C is a char_array value of length Item'Length (if
 Append_Nul is False) or Item'Length+1 (if Append_Nul is True).
 The lower bound is 0.
 For each component Item(I), the corresponding component in the result
@@ -886,7 +880,7 @@ The value nul is appended if Append_Nul is True.
 The result of To_Ada is a String whose length is Item'Length (if Trim_Nul is
 False) or the length of the slice of Item preceding the first
 nul (if
-Trim_Nul is True).  The lower bound of the result is 1.
+Trim_Nul is True). The lower bound of the result is 1.
 If Trim_Nul is False, then for each component Item(I)
 the
 corresponding component in the result
@@ -911,12 +905,11 @@ Item does not contain nul.
                   Trim_Nul : @key(in) Boolean := True);
 @end{Example}
 
-For procedure To_C, each element of Item is converted (via the
-To_C function)
+For procedure To_C, each element of Item is converted (via the To_C function)
 to a char, which is assigned to the corresponding element
-of Target.  If Append_Nul is True, nul
+of Target. If Append_Nul is True, nul
 is then assigned to the next
-element of Target.  In either case, Count is set to the
+element of Target. In either case, Count is set to the
 number of Target elements assigned.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Target is not long enough, Constraint_Error is propagated.
@@ -972,8 +965,7 @@ character types.
 
 The To_C and To_Ada subprograms that convert between Wide_String and
 wchar_array have analogous effects to the To_C and To_Ada
-subprograms that convert between String
-and char_array, except that
+subprograms that convert between String and char_array, except that
 wide_nul is used instead of nul.
 @begin{Discussion}
 The Interfaces.C package provides an implementation-defined character type,
@@ -981,11 +973,11 @@ char,
 designed to model the C run-time character set, and mappings
 between the types char and Character.
 
-One application of the C interface package is
+@Leading@;One application of the C interface package is
 to compose a C string and pass it to a C function.
 One way to do this is for the programmer to declare an
 object that will hold the C array, and then pass this array to the C
-function.  This is realized via the type char_array:
+function. This is realized via the type char_array:
 @begin{Example}
 @key(type) char_array @key(is) @key(array) (size_t @key(range) <>) of Char;
 @end{Example}
@@ -996,25 +988,25 @@ a char *.
 
 An alternative approach is for the programmer to obtain a C char pointer
 from an Ada String (or from a char_array) by invoking an allocation
-function.  The package Interfaces.C.Strings (see below) supplies
+function. The package Interfaces.C.Strings (see below) supplies
 the needed facilities, including a
 private type chars_ptr that corresponds to C's
-char *, and two allocation functions.  To avoid storage
+char *, and two allocation functions. To avoid storage
 leakage, a Free procedure releases the storage that was
 allocated by one
 of these allocate functions.
 
 It is typical for a C function that deals with strings to adopt the
-convention that the string is delimited by a nul char.  The C interface
-packages support this convention.  A constant nul of type Char is declared,
+convention that the string is delimited by a nul char. The C interface
+packages support this convention. A constant nul of type Char is declared,
 and the function Value(Chars_Ptr) in Interfaces.C.Strings
 returns a char_array up to and including
-the first nul in the array that the chars_ptr points to.  The Allocate_Chars
+the first nul in the array that the chars_ptr points to. The Allocate_Chars
 function allocates an array that is nul terminated.
 
 Some C functions that deal with strings take an explicit length as a
 parameter, thus allowing strings to be passed that contain nul as
-a data element.  Other C functions take an explicit length that is
+a data element. Other C functions take an explicit length that is
 an upper bound: the prefix of the string up to the char before nul,
 or the prefix of the given length, is used by the
 function, whichever is shorter.
@@ -1026,8 +1018,7 @@ The C Interface packages support calling such functions.
 @begin{ImplReq}
 An implementation shall support pragma Convention
 with a C @i{convention}_@nt{identifier} for a
-C-eligible type  (see
-@refsecnum(Interfacing Pragmas))
+C-eligible type (see @refsecnum(Interfacing Pragmas))
 @end{ImplReq}
 
 
@@ -1039,7 +1030,7 @@ interface packages.
 
 @begin{ImplAdvice}
 An implementation should support the following interface
-correspondences between Ada  and C.
+correspondences between Ada and C.
 @begin[itemize]
 An Ada procedure corresponds to
 a void-returning C function.
@@ -1058,11 +1049,11 @@ C function, where t is the C type corresponding to the
 Ada type T.
 
 An Ada @key[access] T parameter,
-or an Ada @key[out] or @key[in out]  parameter of an elementary type T,
+or an Ada @key[out] or @key[in out] parameter of an elementary type T,
  is passed as
  a t* argument
 to a C function, where t is the C type corresponding to the
-Ada type T.  In the case of an elementary @key[out] or @key[in out]
+Ada type T. In the case of an elementary @key[out] or @key[in out]
 parameter, a pointer to a temporary copy is used to preserve
 by-copy semantics.
 
@@ -1096,7 +1087,7 @@ where Item_Type is the corresponding Ada type,
  evaluate the expression: size_t(Item_Type'Size/CHAR_BIT).
 
 There is no explicit support for C's union types.
-Unchecked conversions  can be used to obtain
+Unchecked conversions can be used to obtain
 the effect of C unions.
 
 A C function that takes a variable number of arguments
@@ -1105,7 +1096,7 @@ specific numbers and types of parameters.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of using the Interfaces.C package:}
+@Leading@Keepnext@i{Example of using the Interfaces.C package:}
 @begin{Example}
 @RI{--Calling the C Library Function strcpy}
 @key(with) Interfaces.C;
@@ -1115,8 +1106,8 @@ specific numbers and types of parameters.
    @RI{-- Call <string.h>strcpy:}
    @RI{-- C definition of strcpy:  char *strcpy(char *s1, const char *s2);}
    @RI{--    This function copies the string pointed to by s2 (including the terminating null character)}
-   @RI{--     into the array pointed to by s1.  If copying takes place between objects that overlap, }
-   @RI{--     the behavior is undefined.  The strcpy function returns the value of s1.}
+   @RI{--     into the array pointed to by s1. If copying takes place between objects that overlap, }
+   @RI{--     the behavior is undefined. The strcpy function returns the value of s1.}
 
    @RI{-- Note: since the C function's return value is of no interest, the Ada interface is a procedure}
    @key(procedure) Strcpy (Target : @key(out) C.char_array;
@@ -1153,7 +1144,7 @@ and for which @lquotes@;char *@rquotes@;
 @end{Intro}
 
 @begin{StaticSem}
-The library package Interfaces.C.Strings has the following
+@Leading@;The library package Interfaces.C.Strings has the following
 declaration:
 @begin{example}
 @ChildUnit{Parent=[Interfaces.C],Child=[Strings]}
@@ -1252,8 +1243,7 @@ To_Chars_Ptr performs a pointer conversion with no allocation of memory.
 @key(function) New_Char_Array (Chars   : @key(in) char_array) @key(return) chars_ptr;
 @end{Example}
 
-This function returns a pointer to an allocated
- object initialized to
+This function returns a pointer to an allocated object initialized to
   Chars(Chars'First .. Index) & nul, where
 @begin{itemize}
 Index = Chars'Last if Chars does not contain nul, or
@@ -1340,11 +1330,10 @@ Strlen has the effect of C's strlen function.
                   Check  : Boolean := True);
 @end{Example}
 
-This procedure updates the value pointed to by Item, starting at
-position  Offset,
-using Chars as the data to be copied into the array.
+@Leading@;This procedure updates the value pointed to by Item, starting at
+position Offset, using Chars as the data to be copied into the array.
 Overwriting the nul terminator,
-and  skipping with the Offset past the nul terminator,
+and skipping with the Offset past the nul terminator,
 are both prevented if Check is True, as follows:
 @begin[itemize]
 Let N = Strlen(Item).
@@ -1353,7 +1342,7 @@ If Check is True, then:
  If Offset+Chars'Length>N, propagate Update_Error.
 
  Otherwise, overwrite the data in the array pointed to by Item,
-  starting at the char at position Offset, with the data in Chars.
+ starting at the char at position Offset, with the data in Chars.
 @end{itemize}
 
 If Check is False, then
@@ -1412,11 +1401,11 @@ Free, not by a called C function.
 @LabeledSubClause{The Generic Package Interfaces.C.Pointers}
 @begin{Intro}
 The generic package Interfaces.C.Pointers allows the Ada programmer to
-perform C-style operations on pointers.  It includes an access type
+perform C-style operations on pointers. It includes an access type
 Pointer, Value functions that dereference a Pointer and deliver the
 designated array, several pointer arithmetic operations, and @lquotes@;copy@rquotes@;
 procedures that copy the contents of a source pointer into the array
-designated by a destination pointer.  As in C, it treats an object Ptr of
+designated by a destination pointer. As in C, it treats an object Ptr of
 type Pointer as a pointer to the first element of an array, so that for
 example, adding 1 to Ptr yields a pointer to the
 second element of the array.
@@ -1427,7 +1416,7 @@ programmer needs to keep track of the length.
 @end{Intro}
 
 @begin{StaticSem}
-The generic library package Interfaces.C.Pointers has the
+@Leading@;The generic library package Interfaces.C.Pointers has the
 following declaration:
 @begin{Example}
 @key(generic)
@@ -1484,17 +1473,17 @@ following declaration:
 @key(end) Interfaces.C.Pointers;
 @end{Example}
 
-The type Pointer is C-compatible and
+@Leading@;The type Pointer is C-compatible and
 corresponds to one use of C's @lquotes@;Element *@rquotes@;.
 An object of type Pointer is interpreted as a pointer to the
 initial Element in an Element_Array.
 Two styles are supported:
 @begin{Itemize}
 Explicit termination of an array value with
-     Default_Terminator (a special terminator value);
+Default_Terminator (a special terminator value);
 
 Programmer-managed length, with
-     Default_Terminator  treated simply as a data element.
+Default_Terminator treated simply as a data element.
 @end{Itemize}
 @begin{DescribeCode}
 @begin{Example}
@@ -1516,7 +1505,7 @@ This function returns an Element_Array whose value is the array pointed
 @end{Example}
 
 This function returns an Element_Array comprising the first Length
-elements pointed to by Ref.  The exception
+elements pointed to by Ref. The exception
 Interfaces.C.Strings.Dereference_Error is
 propagated if Ref is @key(null).
 @end{DescribeCode}
@@ -1555,16 +1544,15 @@ Terminator, in Value(Ref, Terminator).
 @end{Example}
 
 This procedure copies Value(Source, Terminator) into the array
- pointed to by Target;
+pointed to by Target;
 it stops either after Terminator has been copied, or the
- number of elements copied is Limit, whichever occurs first.
+number of elements copied is Limit, whichever occurs first.
 Dereference_Error is propagated if either Source or Target is @key(null).
 @begin{ramification}
 It is the programmer's responsibility to ensure that
 elements are not copied beyond the logical length of the target array.@end{ramification}
 @begin{ImplNote}
-  The implementation has to take care to check the Limit
-  first.
+  The implementation has to take care to check the Limit first.
 @end{ImplNote}
 
 @begin{Example}
@@ -1600,7 +1588,7 @@ Execution of Virtual_Length(Ref, Terminator) is erroneous if
 Ref does not designate an aliased Element in an Element_Array
 terminated by Terminator.
 
-Execution of Copy_Terminated_Array(Source, Target, Limit, Terminator)
+@Leading@;Execution of Copy_Terminated_Array(Source, Target, Limit, Terminator)
 is erroneous in either of the following situations:
 @begin[itemize]
 Execution of both Value(Source,Terminator) and
@@ -1616,8 +1604,8 @@ the array containing the Element designated by Target.
 @end{erron}
 
 @begin{Notes}
-To compose a Pointer from an Element_Array, use 'Access on
- the first element.  For example (assuming appropriate instantiations):
+@Leading@;To compose a Pointer from an Element_Array, use 'Access on
+the first element. For example (assuming appropriate instantiations):
 @begin{example}
 Some_Array   : Element_Array(0..5) ;
 Some_Pointer : Pointer := Some_Array(0)'Access;
@@ -1625,7 +1613,7 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 @end{Notes}
 
 @begin{Examples}
-@i{Example of Interfaces.C.Pointers:}
+@Leading@Keepnext@i{Example of Interfaces.C.Pointers:}
 @begin{Example}
 @key(with) Interfaces.C.Pointers;
 @key(with) Interfaces.C.Strings;
@@ -1674,7 +1662,7 @@ Interfaces.COBOL
 and support for the Import, Export and
 Convention pragmas with @i{convention}_@nt{identifier} COBOL.
 
-The COBOL interface package supplies several sets of facilities:
+@Leading@;The COBOL interface package supplies several sets of facilities:
 @begin{itemize}
 A set of types corresponding to the native
 COBOL types of the supported COBOL implementation
@@ -1692,7 +1680,7 @@ either an internal or external COBOL representation
 @end{Intro}
 
 @begin{StaticSem}
-The library package Interfaces.COBOL has the following declaration:
+@Leading@Keepnext@;The library package Interfaces.COBOL has the following declaration:
 @begin{Example}
 @ChildUnit{Parent=[Interfaces],Child=[COBOL]}
 @key(package) Interfaces.COBOL @key(is)
@@ -1876,13 +1864,13 @@ Type Alphanumeric corresponds to COBOL's alphanumeric data category.
 Each of the functions To_COBOL and To_Ada converts its parameter
 based on the mappings Ada_To_COBOL and COBOL_To_Ada, respectively.
 The length of the result for each is the length of the parameter,
-and the lower bound of the result is 1.  Each component of the result
+and the lower bound of the result is 1. Each component of the result
 is obtained by applying the relevant mapping to the corresponding
 component of the parameter.
 
 Each of the procedures To_COBOL and To_Ada copies converted elements
 from Item to Target, using the appropriate mapping (Ada_To_COBOL or
-COBOL_To_Ada, respectively).  The index in Target of the last element
+COBOL_To_Ada, respectively). The index in Target of the last element
 assigned is returned in Last (0 if Item is a null array).
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Item'Length exceeds Target'Length, Constraint_Error is propagated.
@@ -1892,7 +1880,7 @@ display usage.
 
 The types Display_Format, Binary_Format, and Packed_Format
 are used in conversions between Ada decimal type values and
-COBOL internal or external data representations.  The value of the
+COBOL internal or external data representations. The value of the
 constant Native_Binary is either High_Order_First or Low_Order_First,
 depending on the implementation.
 @begin{DescribeCode}
@@ -1901,13 +1889,11 @@ depending on the implementation.
                 Format : @key(in) Display_Format) @key(return) Boolean;
 @end{Example}
 
-The function Valid
-checks that the
-Item parameter has a value consistent with
-the value of Format.
+@Leading@;The function Valid checks that the
+Item parameter has a value consistent with the value of Format.
 If the value of Format is other than
 Unsigned, Leading_Separate, and Trailing_Separate,
-the effect is implementation defined.  If Format does have one
+the effect is implementation defined. If Format does have one
 of these values, the following rules apply:
 @begin{itemize}
 Format=Unsigned: if Item comprises zero or more leading
@@ -1915,7 +1901,7 @@ space characters followed by one or more decimal digit
 characters then Valid returns
  True, else it returns False.
 
-Format=Leading_Separate: if Item  comprises
+Format=Leading_Separate: if Item comprises
 zero or more leading space characters,
 followed by a single occurrence of
 the plus or minus sign character, and then one or more
@@ -1955,7 +1941,7 @@ the number of decimal places is established by Num'Scale.@end{discussion}
 @end{Example}
 
 This function returns the Numeric value for Item, represented in
-accordance with Format.  Conversion_Error is propagated if Num is negative
+accordance with Format. Conversion_Error is propagated if Num is negative
 and Format is Unsigned.
 
 @begin{Example}
@@ -1964,7 +1950,7 @@ and Format is Unsigned.
 @end{Example}
 
 This function returns True if Item has a value consistent with Format,
-and False otherwise.  The rules for the formation of Packed_Decimal
+and False otherwise. The rules for the formation of Packed_Decimal
 values are implementation defined.
 
 @begin{Example}
@@ -1980,8 +1966,8 @@ sufficient to hold any value of type Num when represented as Format.
 @end{Example}
 
 Produces a value of type Num corresponding to Item as represented by
-Format.  Num'Scale is the number of digits after the assumed radix point
-in Item.  Conversion_Error is propagated if the value represented by Item is
+Format. Num'Scale is the number of digits after the assumed radix point
+in Item. Conversion_Error is propagated if the value represented by Item is
 outside the range of Num.
 
 @begin{Example}
@@ -1990,7 +1976,7 @@ outside the range of Num.
 @end{Example}
 
 This function returns the Packed_Decimal value for Item, represented in
-accordance with Format.  Conversion_Error is propagated if Num is negative
+accordance with Format. Conversion_Error is propagated if Num is negative
 and Format is Packed_Unsigned.
 
 @begin{Example}
@@ -2017,8 +2003,8 @@ sufficient to hold any value of type Num when represented as Format.
 @end{Example}
 
 Produces a value of type Num corresponding to Item as represented by
-Format.  Num'Scale is the number of digits after the assumed radix point
-in Item.  Conversion_Error is propagated if the value represented by Item is
+Format. Num'Scale is the number of digits after the assumed radix point
+in Item. Conversion_Error is propagated if the value represented by Item is
 outside the range of Num.
 
 @begin{Example}
@@ -2036,12 +2022,12 @@ accordance with Format.
 @end{Example}
 
 These functions convert from COBOL binary format to a corresponding
-value of the decimal type Num.  Conversion_Error is propagated if Item is
+value of the decimal type Num. Conversion_Error is propagated if Item is
 too large for Num.
 @begin{Ramification}
-There is no rescaling performed on the conversion.  That
+There is no rescaling performed on the conversion. That
 is, the returned value in each case is a @lquotes@;bit copy@rquotes@; if Num has a
-binary radix.  The programmer is responsible for maintaining the correct
+binary radix. The programmer is responsible for maintaining the correct
 scale.@end{ramification}
 
 @begin{Example}
@@ -2056,9 +2042,9 @@ represented in the result type.
 @begin{discussion}
 One style of interface supported for COBOL, similar to
 what is provided for C, is the ability to call and pass parameters to an
-existing COBOL program.  Thus the interface package supplies types
+existing COBOL program. Thus the interface package supplies types
 that can be used in an Ada program as parameters to subprograms whose
-bodies will be in COBOL.  These types map to COBOL's alphanumeric and
+bodies will be in COBOL. These types map to COBOL's alphanumeric and
 numeric data categories.
 
 Several types are provided for support of alphanumeric data.
@@ -2076,7 +2062,7 @@ Corresponding to COBOL's alphanumeric data is the string
  type Alphanumeric.
 
 Numeric data may have either a @lquotes@;display@rquotes@; or @lquotes@;computational@rquotes@; representation
-in COBOL.  On the Ada side, the data is of a decimal fixed point type.
+in COBOL. On the Ada side, the data is of a decimal fixed point type.
 Passing an Ada decimal data item to
 a COBOL program requires conversion from the Ada decimal type to some type
 that reflects the representation expected on the COBOL side.
@@ -2084,12 +2070,12 @@ that reflects the representation expected on the COBOL side.
 Computational Representation
 
 @NoPrefix@;Floating point representation is modeled by Ada floating point types,
-Floating and Long_Floating.  Conversion between these types and Ada decimal
+Floating and Long_Floating. Conversion between these types and Ada decimal
 types is obtained directly, since the type name serves as a conversion
 function.
 
 @NoPrefix@;Binary representation is modeled by an Ada integer type, Binary, and
-possibly other types such as Long_Binary.  Conversion between, say, Binary
+possibly other types such as Long_Binary. Conversion between, say, Binary
 and a decimal type is through functions from an instantiation of the
 generic package Decimal_Conversions.
 
@@ -2113,13 +2099,13 @@ type.
 
 The package Interfaces.COBOL allows the
 Ada programmer to deal with data from files (or databases) created by a
-COBOL program.  For data that is alphanumeric, or in display
+COBOL program. For data that is alphanumeric, or in display
 or packed decimal format, the
 approach is the same as for passing parameters (instantiate
-Decimal_Conversions to obtain the needed conversion functions).  For binary
+Decimal_Conversions to obtain the needed conversion functions). For binary
 data, the external representation is treated as a Byte array, and an
 instantiation of Decimal_IO produces a package that declares the needed
-conversion functions.  A parameter to the conversion function indicates the
+conversion functions. A parameter to the conversion function indicates the
 desired interpretation of the data (e.g., high- versus low-order byte
 first).
 @end{discussion}
@@ -2188,7 +2174,7 @@ call may specify
 @end[Notes]
 
 @begin{Examples}
-@i{Examples of Interfaces.COBOL:}
+@Leading@Keepnext@i{Examples of Interfaces.COBOL:}
 @begin{Example}
 @key(with) Interfaces.COBOL;
 @key(procedure) Test_Call @key(is)
@@ -2312,22 +2298,21 @@ call may specify
 @begin{Intro}
 @Defn{interface to Fortran}
 @Defn{Fortran interface}
-The facilities relevant to interfacing with
-the Fortran language
-are the package
-Interfaces.Fortran and support for the
+The facilities relevant to interfacing with the Fortran language
+are the package Interfaces.Fortran and support for the
 Import, Export and Convention pragmas with
 @i{convention}_@nt{identifier} Fortran.
 
 The package Interfaces.Fortran defines Ada types whose representations are
 identical to the default representations of the Fortran intrinsic types
 Integer, Real, Double Precision, Complex, Logical, and Character in a
-supported Fortran implementation.  These Ada types can therefore be used to
+supported Fortran implementation. These Ada types can therefore be used to
 pass objects between Ada and Fortran programs.
 @end{Intro}
 
 @begin{StaticSem}
-The library package Interfaces.Fortran has the following declaration:
+@Leading@Keepnext@;The library package Interfaces.Fortran has the following
+declaration:
 @begin{Example}
 @key[with] Ada.Numerics.Generic_Complex_Types;  @RI{-- see @RefSecNum{Complex Types}}
 @key[pragma] Elaborate_All(Ada.Numerics.Generic_Complex_Types);
@@ -2392,8 +2377,8 @@ The types Fortran_Integer, Real, Double_Precision, Logical,
 Complex, and Fortran_Character are Fortran-compatible.
 
 The To_Fortran and To_Ada functions map between the
-Ada  type Character and the Fortran type Character_Set,
-and also between the Ada  type String and the Fortran type
+Ada type Character and the Fortran type Character_Set,
+and also between the Ada type String and the Fortran type
 Fortran_Character.
  The To_Fortran and To_Ada procedures
  have analogous effects to the string conversion subprograms
@@ -2408,14 +2393,14 @@ type (see @RefSecNum(Interfacing Pragmas)).
 
 @begin{ImplPerm}
 An implementation may add additional declarations to the Fortran interface
-packages.  For example, the Fortran interface package for an implementation of
+packages. For example, the Fortran interface package for an implementation of
 Fortran 77 (ANSI X3.9-1978) that defines types like Integer*@i{n}, Real*@i{n},
 Logical*@i{n}, and Complex*@i{n} may contain the declarations of types named
 Integer_Star_@i{n}, Real_Star_@i{n}, Logical_Star_@i{n}, and
-Complex_Star_@i{n}.  (This convention should
+Complex_Star_@i{n}. (This convention should
  not apply to Character*@i{n}, for
 which the Ada analog is the constrained array subtype Fortran_Character
-(1..@i{n}).)  Similarly, the Fortran interface package for an implementation of
+(1..@i{n}).) Similarly, the Fortran interface package for an implementation of
 Fortran 90 that provides multiple @i{kinds} of intrinsic types, e.g. Integer
 (Kind=@i{n}), Real (Kind=@i{n}), Logical (Kind=@i{n}), Complex (Kind=@i{n}),
 and Character (Kind=@i{n}), may contain the declarations of types
@@ -2424,9 +2409,9 @@ Integer_Kind_@i{n}, Real_Kind_@i{n}, Logical_Kind_@i{n}, Complex_Kind_@i{n},
 and Character_Kind_@i{n}.
 @begin[discussion]
 Implementations may add auxiliary declarations as needed to assist in the
-declarations of additional Fortran-compatible types.  For example, if a double
+declarations of additional Fortran-compatible types. For example, if a double
 precision complex type is defined, then Numerics.Generic_Complex_Types may be
-instantiated for the double precision type.  Similarly, if a wide character
+instantiated for the double precision type. Similarly, if a wide character
 type is defined to match a Fortran 90 wide character type (accessible in
 Fortran 90 with the Kind modifier), then an auxiliary character set may be
 declared to serve as its component type.
@@ -2434,9 +2419,8 @@ declared to serve as its component type.
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-An Ada implementation should support the following interface
-correspondences
-between Ada and Fortran:
+@Leading@;An Ada implementation should support the following interface
+correspondences between Ada and Fortran:
 @begin[itemize]
 An Ada procedure corresponds to
 a Fortran subroutine.
@@ -2444,8 +2428,7 @@ a Fortran subroutine.
 An Ada function corresponds to a Fortran function.
 
 An Ada parameter of an elementary, array, or
-record type T is passed as
- a  T@-(F) argument to a Fortran procedure,
+record type T is passed as a T@-(F) argument to a Fortran procedure,
 where T@-(F) is the Fortran type corresponding to the
 Ada type T, and where the INTENT attribute of the corresponding
 dummy argument matches the Ada formal parameter mode;
@@ -2469,7 +2452,7 @@ block; the type also corresponds to
 a Fortran @lquotes@;derived type@rquotes@;.
 @end[Notes]
 @begin{Examples}
-@i{Example of Interfaces.Fortran:}
+@Leading@Keepnext@i{Example of Interfaces.Fortran:}
 @begin{Example}
 @key[with] Interfaces.Fortran;
 @key[use] Interfaces.Fortran;

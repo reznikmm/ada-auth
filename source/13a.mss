@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:15 $}
+@Comment{$Date: 2000/08/15 01:11:44 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @redundant[This section describes features for
@@ -100,14 +100,14 @@ statically denote an entity
 (or, in the case of a @nt{pragma}, one or more entities)
 declared immediately preceding it in a @nt<compilation>,
 or within the same
-@nt{declarative_part}, @nt{package_specification}, @nt{task_definition},
-@nt{protected_definition}, or @nt{record_definition}
+@nt{declarative_@!part}, @nt{package_@!specification}, @nt{task_@!definition},
+@nt{protected_@!definition}, or @nt{record_@!definition}
 as the representation item.
 If a @nt<local_name> denotes a @Redundant[local] callable entity,
 it may do so through a @Redundant[local]
-@nt<subprogram_renaming_declaration>
+@nt<subprogram_@!renaming_@!declaration>
 @Redundant[(as a way to resolve ambiguity in the presence of overloading)];
-otherwise, the @nt<local_name> shall not denote a @nt<renaming_declaration>.
+otherwise, the @nt<local_name> shall not denote a @nt<renaming_@!declaration>.
 @begin{Ramification}
 The @lquotes@;statically denote@rquotes@; part
 implies that it is impossible to specify the representation of
@@ -818,26 +818,26 @@ For an @nt{attribute_definition_clause} that specifies
 an attribute that denotes a value or an object,
 the expected type for the expression or @nt{name}
 is that of the attribute.
-@begin{Ramification}
-For example, the Size attribute is of type @i{universal_integer}.
-Therefore, the expected type for Y in @lquotes@;@key[for] X'Size @key[use] Y;@rquotes@; is
-@i{universal_integer},
-which means that Y can be of any integer type.
-@end{Ramification}
 @PDefn2{Term=[expected profile],
   Sec=(attribute_definition_clause name)}
 For an @nt{attribute_definition_clause} that specifies
 an attribute that denotes a subprogram,
 the expected profile for the @nt{name}
 is the profile required for the attribute.
-@begin{Discussion}
-The required profile is indicated separately for the individual
-attributes.
-@end{Discussion}
 For an @nt{attribute_definition_clause} that specifies
 an attribute that denotes some other kind of entity,
 the @nt{name} shall resolve to denote an entity of the appropriate
 kind.
+@begin{Ramification}
+For example, the Size attribute is of type @i{universal_integer}.
+Therefore, the expected type for Y in @lquotes@;@key[for] X'Size @key[use] Y;@rquotes@; is
+@i{universal_integer},
+which means that Y can be of any integer type.
+@end{Ramification}
+@begin{Discussion}
+For attributes that denote subprograms, the required profile is indicated
+separately for the individual attributes.
+@end{Discussion}
 @begin{Ramification}
 @Leading@;For an @nt{attribute_definition_clause} with a @nt{name},
 the @nt{name} need not statically denote the entity it denotes.
@@ -1188,13 +1188,11 @@ N-storage-element boundary.
 
 @end{Ramification}
 
-@PDefn2{Term=[specifiable], Sec=(of Alignment for first subtypes and objects)}
+@NoPrefix@PDefn2{Term=[specifiable], Sec=(of Alignment for first subtypes and objects)}
 @Defn{Alignment clause}
-@NoPrefix@;Alignment may be specified for first subtypes and
-@Redundant[stand-alone] objects
-via an @nt{attribute_definition_clause};
-the expression of such a clause shall be static,
-and its value nonnegative.
+Alignment may be specified for first subtypes and
+@Redundant[stand-alone] objects via an @nt{attribute_@!definition_@!clause};
+the expression of such a clause shall be static, and its value nonnegative.
 If the Alignment of a subtype is specified,
 then the Alignment of an object of the subtype is at least as strict,
 unless the object's Alignment is also specified.
@@ -1381,12 +1379,11 @@ Each decimal digit (and the sign) is presumably represented
 as some number of bits.
 @end{Ramification}
 
-@PDefn2{Term=[specifiable], Sec=(of Size for stand-alone objects)}
+@NoPrefix@PDefn2{Term=[specifiable], Sec=(of Size for stand-alone objects)}
 @Defn{Size clause}
-@NoPrefix@;Size may be specified for @Redundant[stand-alone] objects
+Size may be specified for @Redundant[stand-alone] objects
 via an @nt{attribute_definition_clause};
-the expression of such a clause shall be static
-and its value nonnegative.
+the expression of such a clause shall be static and its value nonnegative.
 @end{Description}
 @end{StaticSem}
 
@@ -1424,13 +1421,11 @@ The value of this attribute is of the type
 @i{universal_integer}.>}
 @PDefn2{Term=[specifiable], Sec=(of Size for first subtypes)}
 @Defn{Size clause}
-
 The Size of an object is at least as large as that of its subtype,
 unless the object's Size is determined by a Size clause,
 a component_clause, or a Component_Size clause.
-
 Size may be specified for first subtypes
-via an @nt{attribute_definition_clause};
+via an @nt{attribute_@!definition_@!clause};
 the expression of such a clause shall be static
 and its value nonnegative.
 @ImplDef{The meaning of Size for indefinite subtypes.}
@@ -1852,11 +1847,10 @@ components of the type of X.
 The value of this attribute is of type @i{universal_integer}.>}
 @EndPrefixType{}
 
-@PDefn2{Term=[specifiable], Sec=(of Component_Size for
-array types)}
-@Defn{Component_Size clause}
-@NoPrefix@;Component_Size may be specified for array types
-via an @nt{attribute_definition_clause};
+@NoPrefix@PDefn2{Term=[specifiable], Sec=(of Component_Size for
+array types)}@Defn{Component_Size clause}
+Component_Size may be specified for array types
+via an @nt{attribute_@!definition_@!clause};
 the expression of such a clause shall be static,
 and its value nonnegative.
 @begin{ImplNote}
@@ -2133,9 +2127,8 @@ its position number.
 The recommended level of support for @nt{enumeration_representation_clause}s is:
 @begin{Itemize}
 An implementation should support at least the internal codes in the
-range System.Min_Int..System.Max_Int.
-An implementation need not support
-@nt{enumeration_representation_clause}s for boolean types.
+range System.Min_Int..System.Max_Int. An implementation need not support
+@nt{enumeration_@!representation_@!clause}s for boolean types.
 @begin{Ramification}
 The implementation may support numbers outside the above
 range, such as numbers greater than System.Max_Int.
@@ -2218,7 +2211,7 @@ This is satisfied by all known implementations.
 The @i{(record) layout} aspect of representation
 consists of the @i{storage places} for some or all components,
 that is, storage place attributes of the components.
-The layout can be specified with a @nt{record_representation_clause}.
+The layout can be specified with a @nt{record_@!representation_@!clause}.
 @end{Intro}
 
 @LabeledSubClause{Record Representation Clauses}
@@ -2290,10 +2283,10 @@ the @nt{local_name} shall denote a component of the type.
 For a record extension, the component shall not be inherited,
 and shall not be a discriminant that corresponds to a discriminant of
 the parent type.
-If the @i{component_}@nt<local_name> has an @nt{attribute_designator},
-the @nt{direct_name} of the @nt<local_name> shall denote either
+If the @i{component_}@!@nt<local_@!name> has an @nt{attribute_@!designator},
+the @nt{direct_@!name} of the @nt<local_@!name> shall denote either
 the declaration of the type or a component of the type,
-and the @nt{attribute_designator} shall denote an
+and the @nt{attribute_@!designator} shall denote an
 implementation-defined implicit component of the type.
 
 The @nt{position}, @nt{first_bit}, and @nt{last_bit} shall be
@@ -2384,9 +2377,9 @@ example, one containing the offset of another component).
 An implementation may generate names that denote
 such implementation-defined components;
 such names shall be implementation-defined @nt{attribute_reference}s.
-An implementation may allow such implementation-defined names to be
-used in @nt{record_representation_clauses}.
-An implementation can restrict such @nt{component_clause}s in any
+An implemen@!tation may allow such implementation-defined names to be
+used in @nt{record_@!representation_@!clauses}.
+An implementation can restrict such @nt{component_@!clause}s in any
 manner it sees fit.
 @ImplDef{Implementation-defined components.}
 @begin{Ramification}
@@ -2414,7 +2407,7 @@ the storage place attributes for all of the components of the derived
 type may differ
 from those of the corresponding components of the parent type,
 even for components whose storage
-place is not specified explicitly in the @nt<record_representation_clause>.
+place is not specified explicitly in the @nt<record_@!representation_@!clause>.
 @begin{Reason}
   This is clearly necessary, since the whole record may need to be
   laid out differently.
@@ -2845,8 +2838,7 @@ and its language-defined children.}
 @key[package] System @key[is]
    @key{pragma} Preelaborate(System);
 
-@LangDefType{Package=[System],Type=[Name]}
-   @key[type] Name @key[is] @RI{implementation-defined-enumeration-type};
+@key[type] Name @key[is] @RI{implementation-defined-enumeration-type};@LangDefType{Package=[System],Type=[Name]}
    @AdaDefn{System_Name} : @key[constant] Name := @RI{implementation-defined};
 
 
@@ -2869,9 +2861,8 @@ and its language-defined children.}
 
    --@RI{ Storage-related Declarations:}
 
-   @key[type] Address @key[is] @RI{implementation-defined};
+   @key[type] Address @key[is] @RI{implementation-defined};@LangDefType{Package=[System],Type=[Address]}
    @AdaDefn{Null_Address} : @key[constant] Address;
-@LangDefType{Package=[System],Type=[Address]}
 
    @AdaDefn{Storage_Unit} : @key[constant] := @RI{implementation-defined};
    @AdaDefn{Word_Size}    : @key[constant] := @RI{implementation-defined} * Storage_Unit;
@@ -2890,17 +2881,19 @@ and its language-defined children.}
 
 
    --@RI{ Other System-Dependent Declarations:}
-@LangDefType{Package=[System],Type=[Bit_Order]}
-   @key[type] Bit_Order @key[is] (High_Order_First, Low_Order_First);
+   @key[type] Bit_Order @key[is] (High_Order_First, Low_Order_First);@LangDefType{Package=[System],Type=[Bit_Order]}
    @AdaDefn{Default_Bit_Order} : @key[constant] Bit_Order;
 
 
    --@RI{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
    @key{subtype} @AdaDefn{Any_Priority} @key{is} Integer @key{range} @RI{implementation-defined};
-   @key{subtype} @AdaDefn{Priority} @key{is} Any_Priority @key{range} Any_Priority'First .. @RI{implementation-defined};
-   @key{subtype} @AdaDefn{Interrupt_Priority} @key{is} Any_Priority @key{range} Priority'Last+1 .. Any_Priority'Last;
+   @key{subtype} @AdaDefn{Priority} @key{is} Any_Priority @key{range} Any_Priority'First ..
+             @RI{implementation-defined};
+   @key{subtype} @AdaDefn{Interrupt_Priority} @key{is} Any_Priority @key{range} Priority'Last+1 ..
+             Any_Priority'Last;
 
-   @AdaDefn{Default_Priority} : @key{constant} Priority := (Priority'First + Priority'Last)/2;
+   @AdaDefn{Default_Priority} : @key{constant} Priority :=
+             (Priority'First + Priority'Last)/2;
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -2910,7 +2903,7 @@ and its language-defined children.}
 
 Name is an enumeration subtype.
 Values of type Name are the names of alternative machine
-configurations handled by the implementation.
+configura@!tions handled by the implementation.
 System_Name represents the current machine configuration.
 
 The named numbers Fine_Delta and Tick are of the type
@@ -2921,11 +2914,11 @@ The named numbers Fine_Delta and Tick are of the type
 @Redundant[
 Min_Int @\The smallest (most negative) value
 allowed for the expressions of a
-@nt{signed_integer_type_definition}.
+@nt{signed_@!integer_@!type_@!definition}.
 
 Max_Int @\The largest (most positive) value
 allowed for the expressions of a
-@nt{signed_integer_type_definition}.
+@nt{signed_@!integer_@!type_@!definition}.
 
 Max_Binary_Modulus @\A power of two such that it,
 and all lesser positive powers of two, are allowed
@@ -2946,11 +2939,11 @@ causes implementation difficulties.
 @end{Ramification}
 
 Max_Base_Digits @\The largest value allowed for the requested decimal
-precision in a @nt{floating_point_definition}.
+precision in a @nt{floating_@!point_@!definition}.
 
 Max_Digits @\The largest value allowed for the requested decimal
-precision in a @nt{floating_point_definition}
-that has no @nt{real_range_specification}.
+precision in a @nt{floating_@!point_@!definition}
+that has no @nt{real_@!range_@!specification}.
 Max_Digits is less than or equal to Max_Base_Digits.
 
 Max_Mantissa @\The largest possible number of binary digits in the mantissa
@@ -2958,7 +2951,7 @@ of machine numbers of a user-defined ordinary fixed point type.
 (The mantissa is defined in @RefSecNum{Numerics}.)
 
 Fine_Delta @\The smallest delta allowed in an @nt{ordinary_fixed_point_definition} that
-has the @nt{real_range_specification} @key{range} @en@;1.0 .. 1.0.
+has the @nt{real_@!range_@!specification} @key{range} @en@;1.0 .. 1.0.
 ]
 
 Tick @\A period in seconds approximating the real time interval during
@@ -3101,18 +3094,14 @@ have been moved to the Real Time Annex.
 @ChildUnit{Parent=[System],Child=[Storage_Elements]}@key[package] System.Storage_Elements @key[is]
    @key{pragma} Preelaborate(System.Storage_Elements);
 
-@LangDefType{Package=[System.Storage_Elements],Type=[Storage_Offset]}
-   @key[type] Storage_Offset @key[is] @key[range] @RI(implementation-defined);
+   @key[type] Storage_Offset @key[is] @key[range] @RI(implementation-defined);@LangDefType{Package=[System.Storage_Elements],Type=[Storage_Offset]}
 
-@Defn2{Term=[Storage_Count], Sec=(subtype in package System.Storage_Elements)}
-   @key[subtype] Storage_Count @key[is] Storage_Offset @key[range] 0..Storage_Offset'Last;
+   @key[subtype] @AdaDefn{Storage_Count} @key[is] Storage_Offset @key[range] 0..Storage_Offset'Last;
 
 
-@LangDefType{Package=[System.Storage_Elements],Type=[Storage_Element]}
-   @key[type] Storage_Element @key[is] @key[mod] @RI{implementation-defined};
+   @key[type] Storage_Element @key[is] @key[mod] @RI{implementation-defined};@LangDefType{Package=[System.Storage_Elements],Type=[Storage_Element]}
    @key[for] Storage_Element'Size @key[use] Storage_Unit;
-@LangDefType{Package=[System.Storage_Elements],Type=[Storage_Array]}
-   @key[type] Storage_Array @key[is] @key[array]
+   @key[type] Storage_Array @key[is] @key[array]@LangDefType{Package=[System.Storage_Elements],Type=[Storage_Array]}
      (Storage_Offset @key[range] <>) @key[of] @key[aliased] Storage_Element;
    @key[for] Storage_Array'Component_Size @key[use] Storage_Unit;
 
@@ -3135,8 +3124,7 @@ have been moved to the Real Time Annex.
 
    --@RI{ Conversion to/from integers:}
 
-@LangDefType{Package=[System.Storage_Elements],Type=[Integer_Address]}
-   @key[type] Integer_Address @key[is] @RI{implementation-defined};
+   @key[type] Integer_Address @key[is] @RI{implementation-defined};@LangDefType{Package=[System.Storage_Elements],Type=[Integer_Address]}
    @key[function] @AdaSubDefn{To_Address}(Value : Integer_Address) @key[return] Address;
    @key[function] @AdaSubDefn{To_Integer}(Value : Address) @key[return] Integer_Address;
 
@@ -3339,12 +3327,12 @@ A machine code insertion can be achieved by a call to a subprogram whose
 
 @begin{SyntaxText}
 A @nt{code_statement} is only allowed in the
-@nt{handled_sequence_of_statements} of a @nt{subprogram_body}.
-If a @nt{subprogram_body} contains any @nt{code_statement}s, then within
-this @nt{subprogram_body} the only allowed form of @nt{statement} is a
-@nt{code_statement} (labeled or not),
-the only allowed @nt{declarative_item}s are @nt{use_clause}s,
-and no @nt{exception_handler} is allowed (@nt{comment}s and
+@nt{handled_sequence_of_@!statements} of a @nt{subprogram_@!body}.
+If a @nt{subprogram_@!body} contains any @nt{code_@!statement}s, then within
+this @nt{subprogram_@!body} the only allowed form of @nt{statement} is a
+@nt{code_@!statement} (labeled or not),
+the only allowed @nt{declarative_@!item}s are @nt{use_@!clause}s,
+and no @nt{exception_@!handler} is allowed (@nt{comment}s and
 @nt{pragma}s are allowed as usual).
 @end{SyntaxText}
 @end{Syntax}
@@ -4041,8 +4029,7 @@ For the same reason, @lquotes@;specified@rquotes@; means the same thing as
 @ChildUnit{Parent=[System],Child=[Storage_Pools]}@key[package] System.Storage_Pools @key[is]
     @key{pragma} Preelaborate(System.Storage_Pools);
 
-@LangDefType{Package=[System.Storage_Pools],Type=[Root_Storage_Pool]}
-    @key[type] Root_Storage_Pool @key[is]
+    @key[type] Root_Storage_Pool @key[is]@LangDefType{Package=[System.Storage_Pools],Type=[Root_Storage_Pool]}
         @key[abstract] @key[new] Ada.Finalization.Limited_Controlled @key[with] @key[private];
 
     @key[procedure] @AdaSubDefn{Allocate}(
@@ -4091,7 +4078,7 @@ the following attributes are defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Storage_Pool>,
   Text=<Denotes the storage pool of the type of S.
-The type of this attribute is Root_Storage_Pool'Class.>}
+The type of this attribute is Root_@!Storage_@!Pool'Class.>}
 
 @Attribute{Prefix=<S>, AttrName=<Storage_Size>,
   Text=<Yields the result of calling
@@ -4120,7 +4107,7 @@ a non-derived access-to-object type)}
 @Defn{Storage_Size clause}
 Storage_Size or Storage_Pool may be specified for
 a non-derived access-to-object type
-via an @nt{attribute_definition_clause};
+via an @nt{attribute_@!definition_@!clause};
 the @nt{name} in a Storage_Pool clause shall denote a variable.
 
 An @nt{allocator} of type T allocates storage from T's storage pool.
@@ -4136,7 +4123,7 @@ The Alignment parameter is D'Alignment.
 @PDefn{discontiguous representation}
 The result returned in the Storage_Address parameter is used by the
 @nt{allocator} as the address of the allocated storage,
-which is a contiguous block of memory of Size_In_Storage_Elements
+which is a contiguous block of memory of Size_In_@!Storage_@!Elements
 storage elements.
 @Redundant[Any exception propagated by Allocate is propagated by the
 @nt{allocator}.]
@@ -4192,7 +4179,7 @@ the declaration of the access type is left.
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 If the implementation cannot satisfy the request,
 Storage_Error is raised at the point of the
-@nt{attribute_definition_clause}.
+@nt{attribute_@!definition_@!clause}.
 If neither Storage_Pool nor Storage_Size are specified,
 then the meaning of Storage_Size is implementation defined.
 @ImplDef{The meaning of Storage_Size.}
@@ -4542,10 +4529,10 @@ performs finalization, as described in
 It then deallocates the storage occupied by the object designated by X.
 If the storage pool is a user-defined object, then
 the storage is deallocated by calling Deallocate,
-passing @i[access_to_variable_subtype_name]'Storage_Pool as the Pool parameter.
+passing @i[access_to_@!variable_@!subtype_name]'Storage_Pool as the Pool parameter.
 Storage_Address is the value returned in the Storage_Address parameter of the
 corresponding Allocate call.
-Size_In_Storage_Elements and Alignment are the same values passed to the
+Size_In_@!Storage_@!Elements and Alignment are the same values passed to the
 corresponding Allocate call.
 There is one exception: if the object being freed contains tasks,
 the object might not be deallocated.
@@ -4608,12 +4595,9 @@ is not reclaimed prior to task termination.
 
 @begin{Erron}
 @Defn{nonexistent}
-
 Evaluating a name that denotes a nonexistent object is erroneous.
-
 The execution of a call to an instance of Unchecked_Deallocation is
-erroneous if
-the object was created other than by an @nt<allocator> for
+erroneous if the object was created other than by an @nt<allocator> for
 an access type whose pool is Name'Storage_Pool.
 @end{Erron}
 
@@ -4940,14 +4924,13 @@ or can call the Read and Write attributes of other types.)
 @ChildUnit{Parent=[Ada],Child=[Streams]}@key[package] Ada.Streams @key[is]
     @key[pragma] Pure(Streams)@Defn{unpolluted};
 
-@LangDefType{Package=[Ada.Streams],Type=[Root_Stream_Type]}
-    @key[type] Root_Stream_Type @key[is] @key[abstract tagged limited private];
+    @key[type] Root_Stream_Type @key[is] @key[abstract tagged limited private];@LangDefType{Package=[Ada.Streams],Type=[Root_Stream_Type]}
 
-    @key[type] Stream_Element @key[is] @key[mod] @RI{implementation-defined};
-    @key[type] Stream_Element_Offset @key[is] @key[range] @RI{implementation-defined};
+    @key[type] Stream_Element @key[is] @key[mod] @RI{implementation-defined};@LangDefType{Package=[Ada.Streams],Type=[Stream_Element]}
+    @key[type] Stream_Element_Offset @key[is] @key[range] @RI{implementation-defined};@LangDefType{Package=[Ada.Streams],Type=[Stream_Element_Offset]}
     @key[subtype] @AdaDefn{Stream_Element_Count} @key[is]
         Stream_Element_Offset @key[range] 0..Stream_Element_Offset'Last;
-    @key[type] Stream_Element_Array @key[is]
+    @key[type] Stream_Element_Array @key[is]@LangDefType{Package=[Ada.Streams],Type=[Stream_Element_Array]}
         @key[array](Stream_Element_Offset @key[range] <>) @key[of] Stream_Element;
 
     @key[procedure] @AdaSubDefn{Read}(
@@ -5155,7 +5138,7 @@ specification:
 @end{DescExample}
 
 @noprefix@;First writes the external tag of @i{Item} to @i{Stream}
-(by calling String'Output(Tags.External_Tag(@i{Item}'Tag) @em
+(by calling String'Output(Tags.@!External_Tag(@i{Item}'Tag) @em
 see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Output attribute of
 the specific type identified by the tag.>}
@@ -5208,13 +5191,11 @@ can result
 The stream-oriented attributes may be specified
 for any type via an @nt{attribute_definition_clause}.
 All nonlimited types have default implementations
-for these operations.
-
-An @nt{attribute_reference} for one of these attributes is
-illegal if the type is limited,
+for these operations. An @nt{attribute_reference} for one of
+these attributes is illegal if the type is limited,
 unless the attribute has been specified by an
-@nt{attribute_definition_clause}.
-For an @nt{attribute_definition_clause} specifying one of these
+@nt{attribute_@!definition_@!clause}.
+For an @nt{attribute_@!definition_@!clause} specifying one of these
 attributes, the subtype of the Item parameter shall be the base subtype
 if scalar, and the first subtype otherwise.
 The same rule applies to the result of the Input function.
@@ -5696,7 +5677,7 @@ index subtype of the family is frozen.
 @PDefn2{Term=[freezing], Sec=(function call)}
 At the place where a function call
 causes freezing, if a parameter of the call is defaulted,
-the @nt{default_expression} for that parameter causes freezing.
+the @nt{default_@!expression} for that parameter causes freezing.
 @begin{Discussion}
   We don't worry about freezing for procedure calls or entry calls, since
   a body freezes everything that precedes it, and

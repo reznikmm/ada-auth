@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:15 $}
+@Comment{$Date: 2000/08/15 01:11:44 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -239,13 +239,11 @@ We also use terms like @lquotes@;generic function body@rquotes@; and
 The elaboration of a generic body has no other effect than to
 establish that the generic unit can from then on be instantiated without
 failing the Elaboration_Check.
-
 If the generic body is a child of a generic package,
 then its elaboration establishes that each corresponding
 declaration nested in an instance of the parent
 (see @RefSecNum{Compilation Units - Library Units})
 can from then on be instantiated without failing the Elaboration_Check.
-
 @end{RunTime}
 
 @begin{Notes}
@@ -362,7 +360,7 @@ Similarly, the contract model does not apply to @LinkTimeTitle.
 @Defn{named association}
 @Defn{positional association}
 A @nt{generic_association} is @i{named} or @i{positional}
-according to whether or not the @i{generic_formal_parameter_}@nt<selector_name>
+according to whether or not the @i{generic_@!formal_@!parameter_}@!@nt<selector_@!name>
 is specified. Any positional associations shall precede any
 named associations.
 @end{SyntaxText}
@@ -374,9 +372,9 @@ named associations.
 @Defn{actual}
 The @i{generic actual parameter} is either the
 @nt{explicit_generic_actual_parameter} given in a
-@nt{generic_parameter_association} for each formal,
-or the corresponding @nt{default_expression} or @nt{default_name} if
-no @nt{generic_parameter_association} is given for the formal.
+@nt{generic_@!parameter_@!association} for each formal,
+or the corresponding @nt{default_@!expression} or @nt{default_@!name} if
+no @nt{generic_@!parameter_@!association} is given for the formal.
 When the meaning is clear from context,
 the term @lquotes@;generic actual,@rquotes@; or simply @lquotes@;actual,@rquotes@; is used as a synonym for
 @lquotes@;generic actual parameter@rquotes@;
@@ -400,8 +398,7 @@ named associations are not allowed for the corresponding
 actuals.
 
 A @nt{generic_instantiation} shall contain at
-most one @nt<generic_association>
-for each formal.
+most one @nt<generic_association> for each formal.
 Each formal without an association shall have a
 @nt{default_expression} or @nt{subprogram_default}.
 
@@ -621,14 +618,12 @@ so this instantiation is illegal.
 
 @begin{StaticSem}
 A @nt{generic_instantiation} declares an instance;
-it is equivalent to the instance declaration
-(a @nt{package_declaration} or @nt{subprogram_declaration})
-immediately followed by the instance body,
+it is equivalent to the instance declaration (a @nt{package_@!declaration}
+or @nt{subprogram_@!declaration}) immediately followed by the instance body,
 both at the place of the instantiation.
 @begin{Ramification}
 The declaration and the body of the instance are not @lquotes@;implicit@rquotes@;
-in the technical sense, even though you can't see them in the program
-text.
+in the technical sense, even though you can't see them in the program text.
 Nor are declarations within an instance @lquotes@;implicit@rquotes@;
 (unless they are implicit by other rules).
 This is necessary because implicit declarations have special semantics
@@ -1644,8 +1639,7 @@ On the other hand, for an indefinite formal subtype,
 the actual can be either definite or indefinite.
 @end{Ramification}
 
-@leading@;For a generic formal derived type with no
-@nt<discriminant_part>:
+@leading@;For a generic formal derived type with no @nt<discriminant_part>:
 @begin(Itemize)
   If the ancestor subtype is constrained,
   the actual subtype shall be constrained,
@@ -1666,21 +1660,17 @@ the actual can be either definite or indefinite.
   does not cause further constraints to be illegal.
 @end{Reason}
 
-  If the ancestor subtype is an unconstrained discriminated
-  subtype, then the actual shall have the same number of
-  discriminants,
-
-  and each discriminant of the actual shall correspond to
-  a discriminant of the ancestor,
-  in the sense of @RefSecNum{Discriminants}.
+  If the ancestor subtype is an unconstrained discriminated subtype, then
+  the actual shall have the same number of discriminants, and each
+  discriminant of the actual shall correspond to a discriminant of the
+  ancestor, in the sense of @RefSecNum{Discriminants}.
 
 @begin{Reason}
   This ensures that if a discriminant constraint is given on
   the formal subtype, the corresponding constraint in the instance
   will make sense, without additional run-time checks.
-  This is not necessary for arrays, since the bounds cannot be
-  overridden in a type extension.
-  An @nt<unknown_discriminant_part> may be used
+  This is not necessary for arrays, since the bounds cannot be overridden
+  in a type extension. An @nt<unknown_discriminant_part> may be used
   to relax these matching requirements.
 @end{Reason}
 @end(Itemize)
@@ -1718,8 +1708,7 @@ and may be definite or indefinite.]
 @leading@;The class determined for a formal private type is as follows:
 @TabClear{}@Tabset(P32)
 @begin{Display}
-@i(Type Definition) @\@i(Determined Class)
-
+@i(Type Definition) @\@i(Determined Class)@*
 @key{limited private} @\the class of all types
 @key{private} @\the class of all nonlimited types
 @key{tagged limited private} @\the class of all tagged types
@@ -2137,8 +2126,8 @@ The profile of this view takes its subtypes
 and calling convention
 from the original profile of the actual entity,
 while taking the formal parameter
-@nt{name}s and @nt{default_expression}s from the profile given in the
-@nt{formal_subprogram_declaration}.
+@nt{name}s and @nt{default_@!expression}s from the profile given in the
+@nt{formal_@!subprogram_@!declaration}.
 The view is a function or procedure,
 never an entry.
 @begin{Discussion}
@@ -2276,9 +2265,9 @@ A @nt{formal_package_declaration} declares a generic formal package.
 @PDefn2{Term=[visible part], Sec=(of a formal package)}
 The visible part of a formal package includes
 the first list of @nt{basic_declarative_item}s of the
-@nt{package_specification}.
-In addition, if the @nt{formal_package_actual_part} is (<>),
-it also includes the @nt{generic_formal_part} of the template
+@nt{package_@!specification}.
+In addition, if the @nt{formal_@!package_@!actual_@!part} is (<>),
+it also includes the @nt{generic_@!formal_@!part} of the template
 for the formal package.
 @begin{Ramification}
 If the @nt<formal_package_actual_part> is (<>),
@@ -2319,6 +2308,9 @@ as generic formal parameters.
 @end{Intro}
 
 @begin{Examples}
+@Leading
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 @begin{Example}
 @key[generic]
    Size : Positive;

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/08/11 00:09:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/08/11 00:09:16 $}
+@Comment{$Date: 2000/08/15 01:11:45 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -13,12 +13,12 @@
 @Defn{distributed systems}
 @Defn{information systems}
 The Systems Programming Annex specifies additional capabilities
-provided for low-level programming.  These capabilities are also
+provided for low-level programming. These capabilities are also
 required in many real-time, embedded, distributed, and information systems.]
 @end{Intro}
 
 @begin{Extend83}
-This Annex is new to Ada 9X.
+This Annex is new to Ada 95.
 @end{Extend83}
 
 @LabeledClause{Access to Machine Operations}
@@ -99,10 +99,10 @@ for such a subprogram.
 The implementation should ensure that little or no overhead is associated
 with calling intrinsic and machine-code subprograms.
 
-It is recommended that intrinsic subprograms be provided for convenient
+@Leading@;It is recommended that intrinsic subprograms be provided for convenient
 access to any machine operations that provide special capabilities
 or efficiency and that are not otherwise available through the language
-constructs.  Examples of such instructions
+constructs. Examples of such instructions
 include:
 @begin{itemize}
 
@@ -150,7 +150,7 @@ in addition to mechanisms for handling interrupts.]
 @Redundant[An @i{interrupt} represents a class of events that are detected by
 the hardware or the system software.]
 @Defn2{Term=[occurrence], Sec=(of an interrupt)}
-Interrupts are said to occur.  An @i{occurrence} of an interrupt is
+Interrupts are said to occur. An @i{occurrence} of an interrupt is
 separable into generation and delivery.
 @Defn2{Term=[generation], Sec=(of an interrupt)}
 @i{Generation} of an interrupt is the event in the underlying hardware
@@ -162,16 +162,16 @@ response to the interrupt occurrence.
 Between generation and delivery, the interrupt occurrence @Redundant[(or
 interrupt)] is @i{pending}.
 @Defn{blocked interrupt}
-Some or all interrupts may be @i{blocked}.  When an interrupt is blocked, all
+Some or all interrupts may be @i{blocked}. When an interrupt is blocked, all
 occurrences of that interrupt are prevented from being delivered.
 @Defn2{Term=[attaching], Sec=(to an interrupt)}
 @Defn{reserved interrupt}
-Certain interrupts are @i{reserved}.  The set of reserved interrupts is
-implementation defined.  A reserved interrupt is either an interrupt for
+Certain interrupts are @i{reserved}. The set of reserved interrupts is
+implementation defined. A reserved interrupt is either an interrupt for
 which user-defined handlers are not supported, or one which
 already has an attached handler by some other implementation-defined means.
 @Defn{interrupt handler}
-Program units can be connected to non-reserved interrupts.  While
+Program units can be connected to non-reserved interrupts. While
 connected, the program unit is said to be @i{attached} to that interrupt.
 The execution of that program unit, the @i{interrupt handler}, is invoked upon
 delivery of the interrupt occurrence.
@@ -183,17 +183,17 @@ delivery of the interrupt occurrence.
 @end{Honest}
 
 While a handler is attached to an interrupt, it is called once for each
-delivered occurrence of that interrupt.  While the handler executes, the
+delivered occurrence of that interrupt. While the handler executes, the
 corresponding interrupt is blocked.
 
 While an interrupt is blocked, all occurrences of that interrupt are prevented
-from being delivered.  Whether such occurrences remain pending or are lost is
+from being delivered. Whether such occurrences remain pending or are lost is
 implementation defined.
 
 @Defn{default treatment}
 Each interrupt has a @i{default treatment} which determines the system's
 response to an occurrence of that interrupt when no user-defined
-handler is attached.  The set of possible default treatments is
+handler is attached. The set of possible default treatments is
 implementation defined, as is the method (if one exists) for configuring
 the default treatments for interrupts.
 
@@ -228,7 +228,7 @@ are to be blocked during protected actions.
 @end{ImplReq}
 
 @begin{DocReq}
-The implementation shall document the following items:
+@Leading@;The implementation shall document the following items:
 @begin{Discussion}
 This information may be different for different forms of interrupt handlers.
 @end{Discussion}
@@ -286,7 +286,7 @@ separate subsystems share the same Interrupt_ID type
 (see @RefSecNum{The Package Interrupts}).
 @begin{discussion}
 This issue is tightly related to the issue of scheduling on a
-multi-processor.  In a sense, if a particular interrupt source is not
+multi-processor. In a sense, if a particular interrupt source is not
 available to all processors, the system is not truly homogeneous.
 
 One way to approach this problem is to assign sub-ranges within
@@ -324,7 +324,7 @@ for a finer-grain control of interrupt blocking.
 
 The default treatment for an interrupt can be to keep the
 interrupt pending or to deliver it to an implementation-defined
-handler.  Examples of actions that an implementation-defined
+handler. Examples of actions that an implementation-defined
 handler is allowed to perform include aborting the partition, ignoring
 (i.e., discarding occurrences of) the interrupt, or queuing one
 or more occurrences of the interrupt for possible later delivery
@@ -342,13 +342,13 @@ is modeled after the rule about exceptions propagated out of task bodies.
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Interrupt_Handler is as follows:
+@Leading@keepnext@;The form of a @nt{pragma} Interrupt_Handler is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Interrupt_Handler)(@SynI{handler_}@Syn2{name});'
 
 @begin{SyntaxText}
-The form of a @nt{pragma} Attach_Handler is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Attach_Handler is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Attach_Handler)(@SynI{handler_}@Syn2{name}, @Syn2{expression});'
@@ -397,7 +397,7 @@ interrupts (see @RefSecNum{The Package Interrupts}).
 @Defn2{Term=[creation], Sec=(of a protected object)}
 @Defn2{Term=[initialization], Sec=(of a protected object)}
 The @nt{expression} in the Attach_Handler pragma @Redundant[as evaluated at
-object creation time] specifies an interrupt.  As part
+object creation time] specifies an interrupt. As part
 of the initialization of that object, if the Attach_Handler pragma is
 specified, the @SynI{handler} procedure is attached to the specified interrupt.
 @IndexCheck{Reserved_Check}
@@ -418,10 +418,10 @@ If the check fails, Program_Error is raised.
 
 @Defn2{Term=[finalization], Sec=(of a protected object)}
 When a protected object is finalized, for any of its procedures that are
-attached to interrupts, the handler is detached.  If the handler was
+attached to interrupts, the handler is detached. If the handler was
 attached by a procedure in the Interrupts package or if no user
 handler was previously attached to the interrupt, the default treatment is
-restored.  Otherwise, @Redundant[that is, if an Attach_Handler pragma was
+restored. Otherwise, @Redundant[that is, if an Attach_Handler pragma was
 used,] the previous handler is restored.
 @begin{Discussion}
 Since only library-level protected procedures can be attached as handlers
@@ -446,10 +446,10 @@ protected object, the execution of the program is erroneous.
 @end{Erron}
 
 @begin{Metrics}
-The following metric shall be documented by the implementation:
+@Leading@Keepnext@;The following metric shall be documented by the implementation:
 @begin{enumerate}
 The worst case overhead for an interrupt handler that is a parameterless
-protected procedure, in clock cycles.  This is the execution time not
+protected procedure, in clock cycles. This is the execution time not
 directly attributable to the handler procedure or the interrupted execution.
 It is estimated as C @en@; (A+B), where A is how long it takes to complete a given
 sequence of instructions without any interrupt, B is how long it takes to
@@ -459,7 +459,7 @@ one execution of the same procedure called via an interrupt.
 @begin{ImplNote}
 The instruction sequence and interrupt handler used to measure interrupt
 handling overhead should be chosen so as to maximize the execution time cost
-due to cache misses.  For example, if the processor has cache memory and the
+due to cache misses. For example, if the processor has cache memory and the
 activity of an interrupt handler could invalidate the contents of cache memory, the handler should be written such that it invalidates all of the cache memory.
 @end{ImplNote}
 @end{enumerate}
@@ -513,7 +513,7 @@ before run time.
 
 The Attach_Handler pragma can provide static attachment of handlers to
 interrupts if the implementation supports preelaboration of protected
-objects.  (See @RefSecNum{Preelaboration Requirements}.)
+objects. (See @RefSecNum{Preelaboration Requirements}.)
 
 The ceiling priority of a protected object that one of its procedures is
 attached to an interrupt should be at least as high as the highest
@@ -532,7 +532,7 @@ a protected procedure that is an interrupt handler.
 
 @begin{StaticSem}
 
-The following language-defined packages exist:
+@Leading@Keepnext@;The following language-defined packages exist:
 @begin{example}
 @ChildUnit{Parent=[Ada],Child=[Interrupts]}
 @key{with} System;
@@ -597,7 +597,7 @@ The Is_Attached function returns True if and only if a user-specified
 interrupt handler is attached to the interrupt.
 
 The Current_Handler function returns a value that represents the
-attached handler of the interrupt.  If no user-defined handler is attached to
+attached handler of the interrupt. If no user-defined handler is attached to
 the interrupt, Current_Handler returns a value that designates the default
 treatment; calling Attach_Handler or Exchange_Handler with this value
 restores the default treatment.
@@ -608,7 +608,7 @@ in effect for that interrupt.
 If New_Handler is @key[null], the default treatment is restored.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If New_Handler designates a protected procedure to which the pragma
-Interrupt_Handler does not apply, Program_Error is raised.  In
+Interrupt_Handler does not apply, Program_Error is raised. In
 this case, the operation does not modify the existing interrupt treatment.
 
 The Exchange_Handler procedure operates in the same manner as Attach_Handler
@@ -638,7 +638,7 @@ raised.
 The Reference function returns a value of type System.Address that can
 be used to attach a task entry, via an address clause
 (see @RefSecNum{Interrupt Entries}) to the interrupt
-specified by Interrupt.  This function raises Program_Error if attaching
+specified by Interrupt. This function raises Program_Error if attaching
 task entries to interrupts (or to this particular interrupt) is not supported.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 
@@ -680,7 +680,7 @@ the implementation.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of interrupt handlers:}
+@Leading@Keepnext@i{Example of interrupt handlers:}
 @begin{example}
 Device_Priority : @key[constant]
   @key[array] (1..5) of System.Interrupt_Priority := ( ... );@Softpage
@@ -800,7 +800,7 @@ reduction in storage used for the names of certain entities.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form of a @nt{pragma} Discard_Names is as follows:
+@Leading@Keepnext@;The form of a @nt{pragma} Discard_Names is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Discard_Names)[([On => ] @Syn2[local_name])];'
@@ -851,7 +851,7 @@ are implementation defined for that exception.
 
   The semantics of S'Wide_Image and S'Wide_Value are
   implementation defined for any subtype of an enumeration type to which
-  the pragma applies.  (The pragma actually names the first subtype,
+  the pragma applies. (The pragma actually names the first subtype,
   of course.)
 @end{Ramification}
 @end{StaticSem}
@@ -895,7 +895,7 @@ shared variables.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-The form for pragmas Atomic, Volatile, Atomic_Components, and
+@Leading@;The form for pragmas Atomic, Volatile, Atomic_Components, and
 Volatile_Components is as follows:
 @end{SyntaxText}
 
@@ -932,7 +932,7 @@ are all of its subcomponents @Redundant[(the same does not apply to atomic)].
 
 The @nt{local_name} in an Atomic or Volatile pragma shall resolve to denote
 either an @nt{object_declaration}, a non-inherited @nt{component_declaration},
-or a @nt{full_type_declaration}.  The
+or a @nt{full_type_declaration}. The
 @SynI{array_}@nt{local_name} in an Atomic_Components or
 Volatile_Components pragma shall resolve to denote the declaration
 of an array type or an array object of an anonymous type.
@@ -953,27 +953,27 @@ required indivisible reads and updates.
 
 If an atomic object is passed as a parameter, then the type of the formal
 parameter shall either be atomic or allow pass by copy @Redundant[(that
-is, not be a nonatomic by-reference type)].  If an atomic object is used
+is, not be a nonatomic by-reference type)]. If an atomic object is used
 as an actual for a generic formal object of mode @key{in out}, then the
-type of the generic formal object shall be atomic.  If the @nt<prefix> of
+type of the generic formal object shall be atomic. If the @nt<prefix> of
 an @nt<attribute_reference> for an Access attribute denotes an atomic
 object @Redundant[(including a component)], then the designated type of
-the resulting access type shall be atomic.  If an atomic type is used as
+the resulting access type shall be atomic. If an atomic type is used as
 an actual for a generic formal derived type, then the ancestor of the
-formal type shall be atomic or allow pass by copy.  Corresponding rules
+formal type shall be atomic or allow pass by copy. Corresponding rules
 apply to volatile objects and types.
 
 If a pragma Volatile, Volatile_Components, Atomic, or Atomic_Components
 applies to a stand-alone constant object, then a pragma Import shall
 also apply to it.
 @begin{Ramification}
-Hence, no initialization expression is allowed for such a constant.  Note
+Hence, no initialization expression is allowed for such a constant. Note
 that a constant that is atomic or volatile because of its type is allowed.
 @end{Ramification}
 @begin{Reason}
 Stand-alone constants that are explicitly specified as Atomic or Volatile
 only make sense if they are being manipulated outside the Ada program.
-From the Ada perspective the object is read-only.  Nevertheless, if
+From the Ada perspective the object is read-only. Nevertheless, if
 imported and atomic or volatile, the implementation should presume it
 might be altered externally.
 For an imported stand-alone constant that is not atomic or
@@ -1016,7 +1016,7 @@ is the read or update of the same atomic object.
 
 @PDefn2{Term=[by-reference type], Sec=(atomic or volatile)}
 If a type is atomic or volatile and it is not a by-copy type, then the type
-is defined to be a by-reference type.  If any subcomponent of a type is
+is defined to be a by-reference type. If any subcomponent of a type is
 atomic or volatile, then the type is defined to be a by-reference type.
 
 If an actual parameter is atomic or volatile, and the corresponding
@@ -1024,14 +1024,14 @@ formal parameter is not, then the parameter is passed by copy.
 @begin{ImplNote}
 Note that in the case where such a parameter is normally passed by
 reference, a copy of the actual will have to be produced at the call-site,
-and a pointer to the copy passed to the formal parameter.  If the actual
+and a pointer to the copy passed to the formal parameter. If the actual
 is atomic, any copying has to use indivisible read on the way in, and
 indivisible write on the way out.
 @end{ImplNote}
 @begin{Reason}
 It has to be known at compile time whether an atomic or a volatile parameter
-is to be passed by copy or by reference.  For some types, it is unspecified
-whether parameters are passed by copy or by reference.  The above rules
+is to be passed by copy or by reference. For some types, it is unspecified
+whether parameters are passed by copy or by reference. The above rules
 further specify the parameter passing rules involving atomic and volatile
 types and objects.
 @end{Reason}
@@ -1044,7 +1044,7 @@ types and objects.
 The external effect of a program
 (see @RefSecNum(Conformity of an Implementation with the Standard))
 is defined to include each read and update
-of a volatile or atomic object.  The implementation shall not
+of a volatile or atomic object. The implementation shall not
 generate any memory reads or updates of atomic or volatile
 objects other than those specified by the program.
 @begin{Discussion}
@@ -1052,11 +1052,11 @@ The presumption is that volatile or atomic objects might reside in an
 @lquotes@;active@rquotes@; part of the address space where each read has a potential
 side-effect, and at the very least might deliver a different value.
 
-The rule above and the definition of external effect are intended to
+@Leading@;The rule above and the definition of external effect are intended to
 prevent (at least) the following incorrect optimizations, where V is
 a volatile variable:
 @begin{itemize}
-X:= V; Y:=V;  cannot be allowed to be translated as Y:=V; X:=V;
+X:= V; Y:=V; cannot be allowed to be translated as Y:=V; X:=V;
 
 Deleting redundant loads: X:= V; X:= V; shall read the value of V from
 memory twice.
@@ -1103,7 +1103,7 @@ because the pragma was not used to mark variables as shared.
 
 @begin{Intro}
 @Redundant[This clause describes operations and attributes that can be
-used to obtain the identity of a task.  In addition,
+used to obtain the identity of a task. In addition,
 a package that associates user-defined information with a task is
 defined.]
 @end{Intro}
@@ -1111,7 +1111,7 @@ defined.]
 @LabeledSubClause{The Package Task_Identification}
 
 @begin{StaticSem}
-The following language-defined library package exists:
+@Leading@Keepnext@;The following language-defined library package exists:
 @begin{example}
 @ChildUnit{Parent=[Ada],Child=[Task_Identification]}
 @key[package] Ada.Task_Identification @key[is]
@@ -1134,15 +1134,15 @@ The following language-defined library package exists:
 
 @begin{RunTime}
 
-A value of the type Task_ID identifies an existent task.  The constant
-Null_Task_ID does not identify any task.  Each object of the type Task_ID
+A value of the type Task_ID identifies an existent task. The constant
+Null_Task_ID does not identify any task. Each object of the type Task_ID
 is default initialized to the value of Null_Task_ID.
 
 The function "=" returns True if and only if Left and Right identify the same
 task or both have the value Null_Task_ID.
 
 The function Image returns an implementation-defined string that identifies
-T.  If T equals Null_Task_ID, Image returns an empty string.
+T. If T equals Null_Task_ID, Image returns an empty string.
 @ImplDef{The result of the Task_Identification.Image attribute.}
 
 The function Current_Task returns a value that identifies the calling task.
@@ -1154,7 +1154,7 @@ environment task, the entire partition is aborted, See @RefSecNum{Partitions}.]
 The functions Is_Terminated and Is_Callable return the value of the
 corresponding attribute of the task identified by T.
 
-For @PrefixType{a @nt<prefix> T that is of a task type
+@Leading@;For @PrefixType{a @nt<prefix> T that is of a task type
 @Redundant[(after any implicit dereference)]},
 the following attribute is defined:
 @begin{Description}
@@ -1166,13 +1166,13 @@ the following attribute is defined:
 @end{Description}
 @EndPrefixType{}
 
-For @PrefixType{a @nt<prefix> E that denotes an
+@Leading@;For @PrefixType{a @nt<prefix> E that denotes an
 @nt<entry_declaration>},
 the following attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<E>, AttrName=<Caller>,
     Text=[Yields a value of the type Task_ID that identifies the task
-       whose call is now being serviced.  Use of this attribute is
+       whose call is now being serviced. Use of this attribute is
        allowed only inside an @nt{entry_body} or @nt{accept_statement}
        corresponding to the @nt{entry_declaration} denoted by E.]}
 @end{Description}
@@ -1224,7 +1224,7 @@ entry body or interrupt handler.}
 @begin{Notes}
 
 This package is intended for use in writing user-defined task scheduling
-packages and constructing server tasks.  Current_Task can be used in
+packages and constructing server tasks. Current_Task can be used in
 conjunction with other operations requiring a task as an argument such
 as Set_Priority (see @RefSecNum{Dynamic Priorities}).
 
@@ -1236,7 +1236,7 @@ Task_ID value that identifies the environment task.
 @LabeledSubClause{The Package Task_Attributes}
 
 @begin{StaticSem}
-The following language-defined generic library package exists:
+@Leading@Keepnext@;The following language-defined generic library package exists:
 @begin{example}
 @key{with} Ada.Task_Identification; @key{use} Ada.Task_Identification;
 @key{generic}
@@ -1273,8 +1273,8 @@ that exists and is not yet terminated.
 This object acts as a user-defined attribute of the task.
 A task created previously
 in the partition and not yet terminated has this attribute
-from that point on.  Each task subsequently created in the partition
-will have this attribute when created.  In all these cases, the initial value
+from that point on. Each task subsequently created in the partition
+will have this attribute when created. In all these cases, the initial value
 of the given attribute is Initial_Value.
 
 The Value operation returns the value of the corresponding attribute of T.
@@ -1346,8 +1346,8 @@ document how to configure them.
 
 The implementation shall document the following metrics: A task calling the
 following subprograms shall execute in a sufficiently high priority as to not
-be preempted during the measurement period.  This period shall start just
-before issuing the call and end just after the call completes.  If the
+be preempted during the measurement period. This period shall start just
+before issuing the call and end just after the call completes. If the
 attributes of task T are accessed by the measurement tests, no other task
 shall access attributes of that task during the measurement period.
 For all measurements described here, the Attribute type shall be a scalar
@@ -1358,8 +1358,8 @@ where the accessed attributes are of the calling task @Redundant[(that is,
 the default value for the T parameter is used)], and the other, where T
 identifies another, non-terminated, task.
 
-The following calls (to subprograms in the Task_Attributes package) shall
-be measured:
+@Leading@;The following calls (to subprograms in the Task_Attributes package)
+shall be measured:
 @begin{Itemize}
 a call to Value, where the return value is Initial_Value;
 
@@ -1412,12 +1412,12 @@ total storage size allocated for all the attributes of a task.
 @begin{ImplAdvice}
 
 Some implementations are targeted to domains in which memory use at run
-time must be completely deterministic.  For such implementations, it is
+time must be completely deterministic. For such implementations, it is
 recommended that the storage for task attributes will be pre-allocated
-statically and not from the  heap.  This can be accomplished by either
+statically and not from the heap. This can be accomplished by either
 placing restrictions on the number and the size of the task's attributes,
 or by using the pre-allocated storage for the first N attribute objects,
-and the heap for the others.  In the latter case, N should be documented.
+and the heap for the others. In the latter case, N should be documented.
 
 @end{ImplAdvice}
 
@@ -1425,13 +1425,13 @@ and the heap for the others.  In the latter case, N should be documented.
 
 An attribute always exists (after instantiation), and has the initial value.
 It need not occupy memory until the first operation that potentially
-changes the attribute value.  The same holds true after Reinitialize.
+changes the attribute value. The same holds true after Reinitialize.
 
 The result of the Reference function should be used with care; it is always
 safe to use that result in the task body whose attribute is being
-accessed.  However, when the result is being used by another task, the
+accessed. However, when the result is being used by another task, the
 programmer must make sure that the task whose attribute is being accessed
-is not yet terminated.  Failing  to do so could make the program execution
+is not yet terminated. Failing to do so could make the program execution
 erroneous.
 
 As specified in @RefSecNum{The Package Task_Identification}, if the parameter

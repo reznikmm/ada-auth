@@ -1,16 +1,15 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_ada.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 00/03/08 Created by RLB to avoid Includes }
+@comment{ $Revision: 1.14 $ $Date: 00/03/08 Created by RLB to avoid Includes }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:17 $}
+@Comment{$Date: 2000/08/15 01:11:44 $}
 
 @LabeledClause{The Package Ada}
 
 @begin{StaticSem}
 @Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
-@RootLibUnit{Ada}
-@key[package] Ada @key[is]
+@RootLibUnit{Ada}@key[package] Ada @key[is]
     @key[pragma] Pure(Ada);
 @key[end] Ada;
 @end{Example}

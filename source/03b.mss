@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:14 $}
+@Comment{$Date: 2000/08/15 01:11:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @LabeledClause{Array Types}
 
@@ -2144,8 +2144,7 @@ of the generic body result in distinct tags.
 @Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @key[is]
-@LangDefType{Package=[Tags],Type=[Tag]}
-    @key[type] Tag @key[is] @key[private];
+    @key[type] Tag @key[is] @key[private];@LangDefType{Package=[Tags],Type=[Tag]}
 
     @key[function] @AdaSubDefn{Expanded_Name}(T : Tag) @key[return] String;
     @key[function] @AdaSubDefn{External_Tag}(T : Tag) @key[return] String;

@@ -1,14 +1,14 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/08 04:35:32 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/15 01:11:44 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:32 $}
+@Comment{$Date: 2000/08/15 01:11:44 $}
 
 @LabeledClause{The Numerics Packages}
 
 @begin{Intro}
 The library package Numerics is the parent of several child units that provide
-facilities for mathematical computation.  One child, the generic package
+facilities for mathematical computation. One child, the generic package
 Generic_Elementary_Functions, is defined in @RefSecNum{Elementary Functions},
 together with nongeneric equivalents;
 two others,
@@ -59,14 +59,14 @@ Numerics and its children were not predefined in Ada 83.
 Implementation-defined
 approximations to the mathematical functions known as the @lquotes@;elementary
 functions@rquotes@; are provided by the subprograms in
-Numerics.Generic_Elementary_Functions.  Nongeneric equivalents of this generic
+Numerics.Generic_Elementary_Functions. Nongeneric equivalents of this generic
 package for each of the predefined floating point types are also provided as
 children of Numerics.
 @ImplDef{The accuracy actually achieved by the elementary functions.}
 @end{Intro}
 
 @begin{StaticSem}
-The generic library package
+@Leading@;The generic library package
 Numerics.Generic_Elementary_Functions has the following declaration:
 @begin{Example}
 @key{generic}
@@ -122,7 +122,7 @@ Numerics.Generic_Elementary_Functions has the following declaration:
 The library package Numerics.Elementary_Functions
 defines the same subprograms as Numerics.Generic_Elementary_Functions,
 except that the predefined type Float is systematically substituted for
-Float_Type'Base throughout.  Nongeneric equivalents of
+Float_Type'Base throughout. Nongeneric equivalents of
 Numerics.Generic_Elementary_Functions for each of the other predefined
 floating point types are defined similarly, with the names
 Numerics.Short_Elementary_Functions, Numerics.Long_Elementary_Functions, etc.
@@ -132,43 +132,43 @@ Numerics.Short_Elementary_Functions, Numerics.Long_Elementary_Functions, etc.
    understand and use generics.
 @end{Reason}
 
-The functions have their usual mathematical meanings.  When the Base parameter
+The functions have their usual mathematical meanings. When the Base parameter
 is specified, the Log function computes the logarithm to the given base;
-otherwise, it computes the natural logarithm.  When the Cycle parameter is
+otherwise, it computes the natural logarithm. When the Cycle parameter is
 specified, the parameter X of the forward trigonometric functions (Sin, Cos,
 Tan, and Cot) and the results of the inverse trigonometric functions (Arcsin,
 Arccos, Arctan, and Arccot) are measured in units such that a full cycle of
 revolution has the given value; otherwise, they are measured in radians.
 
-The computed results of the mathematically multivalued functions are rendered
-single-valued by the following conventions, which are meant to imply the
-principal branch:
+@Leading@;The computed results of the mathematically multivalued functions are
+rendered single-valued by the following conventions, which are meant to imply
+the principal branch:
 @begin{Itemize}
    The results of the Sqrt and Arccosh functions and that of the exponentiation
    operator are nonnegative.
 
    The result of the Arcsin function is in the quadrant containing the point
-   (1.0, @i[x]), where @i[x] is the value of the parameter X.  This quadrant is
+   (1.0, @i[x]), where @i[x] is the value of the parameter X. This quadrant is
    I or IV; thus, the range of the Arcsin function is approximately
    -@Pi/2.0 to @Pi/2.0
    (-@R[Cycle]/4.0 to @R[Cycle]/4.0,
    if the parameter Cycle is specified).
 
    The result of the Arccos function is in the quadrant containing the point
-   (@i{x}, 1.0), where @i[x] is the value of the parameter X.  This quadrant is
+   (@i{x}, 1.0), where @i[x] is the value of the parameter X. This quadrant is
    I or II; thus, the Arccos function ranges from 0.0 to approximately
    @Pi (@R[Cycle]/2.0, if the parameter Cycle is specified).
 
    The results of the Arctan and Arccot functions are in the quadrant
    containing the point (@i[x], @i[y]), where @i[x] and @i[y] are the values of
-   the parameters X and Y, respectively.  This may be any quadrant (I through
+   the parameters X and Y, respectively. This may be any quadrant (I through
    IV) when the parameter X (resp., Y) of Arctan (resp., Arccot) is specified,
    but it is restricted to quadrants I and IV (resp., I and II) when that
-   parameter is omitted.  Thus, the range when that parameter is specified is
+   parameter is omitted. Thus, the range when that parameter is specified is
    approximately -@Pi to @Pi
    (-@R[Cycle]/2.0 to @R[Cycle]/2.0,
    if the parameter Cycle is specified); when omitted, the range of Arctan
-   (resp., Arccot) is that of Arcsin (resp., Arccos), as given above.  When the
+   (resp., Arccot) is that of Arcsin (resp., Arccos), as given above. When the
    point (@i[x], @i[y]) lies on the negative x-axis, the result approximates
    @begin{Itemize}
       @Pi (resp., -@Pi) when the sign of the parameter Y is
@@ -185,9 +185,9 @@ but on the wrong side of the axis.)
 @end{StaticSem}
 
 @begin{RunTime}
-The exception Numerics.Argument_Error is raised, signaling a parameter value
-outside the domain of the corresponding mathematical function, in the following
-cases:
+@Leading@;The exception Numerics.Argument_Error is raised, signaling a
+parameter value outside the domain of the corresponding mathematical function,
+in the following cases:
 @begin{Itemize}
    by any forward or inverse trigonometric function with specified cycle, when
    the value of the parameter Cycle is zero or negative;
@@ -214,7 +214,7 @@ cases:
    of the parameter X is less than one.
 @end{Itemize}
 
-@IndexCheck{Division_Check}
+@Leading@IndexCheck{Division_Check}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 The exception Constraint_Error is raised, signaling a pole of the mathematical
 function (analogous to dividing by zero), in the following cases, provided that
@@ -255,15 +255,15 @@ When Float_Type'Machine_Overflows is False, the result at poles is
 unspecified.
 @begin{Discussion}
    It is anticipated that an Ada binding to IEC 559:1989 will be developed
-   in the future.  As part of such a binding, the Machine_Overflows attribute
+   in the future. As part of such a binding, the Machine_Overflows attribute
    of a conformant floating point type will be specified to yield False, which
    will permit both the predefined arithmetic operations and implementations of
    the elementary functions to deliver signed infinities (and set the overflow
    flag defined by the binding) instead of raising Constraint_Error in overflow
-   situations, when traps are disabled.  Similarly, it is appropriate for the
+   situations, when traps are disabled. Similarly, it is appropriate for the
    elementary functions to deliver signed infinities (and set the zero-divide
    flag defined by the binding) instead of raising Constraint_Error at poles,
-   when traps are disabled.  Finally, such a binding should also specify the
+   when traps are disabled. Finally, such a binding should also specify the
    behavior of the elementary functions, when sensible, given parameters with
    infinite values.
 @end{Discussion}
@@ -284,8 +284,8 @@ range constraint of the subtype Float_Type.
    subtype Float_Type'Base should be used instead.
 @end{ImplNote}
 
-@Defn2{Term=[prescribed result],
-        Sec=[for the evaluation of an elementary function]}
+@Leading@Defn2{Term=[prescribed result],
+Sec=[for the evaluation of an elementary function]}
 In the following cases, evaluation of an elementary function shall yield the
 @i{prescribed result},
 provided that the preceding rules do not call for an exception to be
@@ -305,9 +305,9 @@ raised:
    exact when the mathematical result is zero; those of the first two are also
    exact when the mathematical result is @PorM 1.0.
 
-   Exponentiation by a zero exponent yields the value one.  Exponentiation by
-   a unit exponent yields the value of the left operand.  Exponentiation of
-   the value one yields the value one.  Exponentiation of the value zero
+   Exponentiation by a zero exponent yields the value one. Exponentiation by
+   a unit exponent yields the value of the left operand. Exponentiation of
+   the value one yields the value one. Exponentiation of the value zero
    yields the value zero.
 @end{Itemize}
 
@@ -316,8 +316,8 @@ implementations conforming to the Numerics Annex, and then only in the
 @lquotes@;strict@rquotes@; mode defined there (see @RefSecNum{Numeric Performance Requirements}),
 are given in @RefSecNum{Accuracy Requirements for the Elementary Functions}.
 
-When Float_Type'Signed_Zeros is True, the sign of a zero result shall be as
-follows:
+@Leading@;When Float_Type'Signed_Zeros is True, the sign of a zero result
+shall be as follows:
 @begin{itemize}
    A prescribed zero result delivered
    @i{at the origin} by one of the odd functions (Sin, Arcsin, Sinh,
@@ -348,7 +348,7 @@ instantiations of the generic package for the appropriate predefined type.
 @end{ImplPerm}
 
 @begin{DiffWord83}
-The semantics of Numerics.Generic_Elementary_Functions differs from
+@Leading@;The semantics of Numerics.Generic_Elementary_Functions differs from
 Generic_Elementary_Functions as defined in ISO/IEC DIS 11430 (for Ada 83)
 in the following ways:
 @begin{itemize}
@@ -365,14 +365,14 @@ in the following ways:
    is no longer needed.)
 
    The sign of a prescribed zero result at the origin of the odd functions is
-   specified, when Float_Type'Signed_Zeros is True.  This conforms with
+   specified, when Float_Type'Signed_Zeros is True. This conforms with
    recommendations of Kahan and other numerical analysts.
 
    The dependence of Arctan and Arccot on the sign of a parameter value of zero
    is tied to the value of Float_Type'Signed_Zeros.
 
    Sqrt is prescribed to yield a result of one when its parameter has the
-   value one.  This guarantee makes it easier to achieve certain prescribed
+   value one. This guarantee makes it easier to achieve certain prescribed
    results of the complex elementary functions
    (see @RefSec{Complex Elementary Functions}).
 
@@ -393,14 +393,14 @@ For brevity, pseudo-random values of any of these types are called @i{random
 numbers}.
 
 Some of the facilities provided are basic to all applications of random
-numbers.  These include a limited private type each of whose objects serves as
+numbers. These include a limited private type each of whose objects serves as
 the generator of a (possibly distinct) sequence of random numbers; a function
 to obtain the @lquotes@;next@rquotes@; random number from a given sequence of random numbers
 (that is, from its generator); and subprograms to initialize or reinitialize a
 given generator to a time-dependent state or a state denoted by a single
 integer.
 
-Other facilities are provided specifically for advanced applications.  These
+Other facilities are provided specifically for advanced applications. These
 include subprograms to save and restore the state of a given generator; a
 private type whose objects can be used to hold the saved state of a
 generator;
@@ -413,7 +413,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
 @end{Intro}
 
 @begin{StaticSem}
-The library package Numerics.Float_Random has the following declaration:
+@Leading@;The library package Numerics.Float_Random has the following declaration:
 @begin{Example}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Float_@!Random]}
 @key[package] Ada.Numerics.Float_Random @key[is]
@@ -521,12 +521,12 @@ a context clause):
 
 Clearly some level of indirection is required in the implementation of a
 Generator, since the parameter mode is @key(in) for all operations on a
-Generator.  For this reason, Numerics.Float_Random and Numerics.Discrete_Random
+Generator. For this reason, Numerics.Float_Random and Numerics.Discrete_Random
 cannot be declared pure.
 @end{ImplNote}
 
 An object of the limited private type Generator is associated with a sequence
-of random numbers.  Each generator has a hidden (internal) state, which the
+of random numbers. Each generator has a hidden (internal) state, which the
 operations on generators use to determine the position in the associated
 sequence.
 @PDefn{unspecified}
@@ -541,11 +541,11 @@ testing or debugging purposes.
 @end{Discussion}
 
 An object of the private type State can be used to hold the internal state of a
-generator.  Such objects are only needed if the application is designed to
+generator. Such objects are only needed if the application is designed to
 save and restore generator states or to examine or manufacture them.
 
 The operations on generators affect the state and therefore the future values
-of the associated sequence.  The semantics of the operations on generators and
+of the associated sequence. The semantics of the operations on generators and
 states are defined below.
 @begin{DescribeCode}
 @begin{Example}
@@ -586,7 +586,7 @@ procedure}.
 @begin{ImplNote}
    The time-dependent Reset procedure can be implemented by mapping the current
    time and date as determined by the system clock into a state, but other
-   implementations are possible.  For example, a white-noise generator or
+   implementations are possible. For example, a white-noise generator or
    a radioactive source can be used to generate time-dependent states.
 @end{ImplNote}
 
@@ -597,8 +597,8 @@ procedure}.
                  From_State : @key[in]  State);
 @end{Example}
 
-Save obtains the current state of a generator.  Reset gives a generator the
-specified state.  A generator that is reset to a state previously obtained by
+Save obtains the current state of a generator. Reset gives a generator the
+specified state. A generator that is reset to a state previously obtained by
 invoking Save is restored to the state it had when Save was
 invoked.
 
@@ -644,11 +644,11 @@ are given in @RefSecNum{Performance Requirements for Random Number Generation}.
 @end{ImplReq}
 
 @begin{DocReq}
-No one algorithm for random number generation is best for all applications.  To
+No one algorithm for random number generation is best for all applications. To
 enable the user to determine the suitability of the random number generators
 for the intended application, the implementation shall describe the algorithm
 used and shall give its period, if known exactly, or a lower bound on the
-period, if the exact period is unknown.  Periods that are so long that the
+period, if the exact period is unknown. Periods that are so long that the
 periodicity is unobservable in practice can be described in such terms, without
 giving a numerical bound.
 
@@ -674,7 +674,7 @@ reclaimed on exit from the scope of the object.
 If the generator period is sufficiently long in relation to the number of
 distinct initiator values, then each possible value of Initiator passed to
 Reset should initiate a sequence of random numbers that does not, in a
-practical sense, overlap the sequence initiated by any other value.  If this
+practical sense, overlap the sequence initiated by any other value. If this
 is not possible, then the mapping between initiator values and generator states
 should be a rapidly varying function of the initiator value.
 @end{ImplAdvice}
@@ -692,15 +692,15 @@ different program executions by explicitly initializing the generator to a
 time-dependent state.
 
 A given implementation of the Random function in Numerics.Float_Random may or
-may not be capable of delivering the values 0.0 or 1.0.  Portable applications
+may not be capable of delivering the values 0.0 or 1.0. Portable applications
 should assume that these values, or values sufficiently close to them to behave
-indistinguishably from them, can occur.  If a sequence of random integers from
+indistinguishably from them, can occur. If a sequence of random integers from
 some fixed range is needed, the application should use the Random function in
 an appropriate instantiation of Numerics.Discrete_Random, rather than
 transforming the result of the Random function in Numerics.Float_Random.
 However, some applications with unusual requirements, such as for a sequence of
 random integers each drawn from a different range, will find it more convenient
-to transform the result of the floating point Random function.  For
+to transform the result of the floating point Random function. For
 @R[M] @geq 1, the expression
 @begin{Example}
 Integer(Float(M) * Random(G)) mod M
@@ -724,7 +724,7 @@ value.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a program that plays a simulated dice game:}
+@Leading@Keepnext@i{Example of a program that plays a simulated dice game:}
 @begin{Example}
 @key[with] Ada.Numerics.Discrete_Random;
 @key[procedure] Dice_Game @key[is]@Softpage
@@ -744,7 +744,9 @@ value.
 @key[end] Dice_Game;
 @end{Example}
 
-@i{Example of a program that simulates coin tosses:}
+@begin{Wide}
+@Leading@Keepnext@i{Example of a program that simulates coin tosses:}
+@end{Wide}
 @begin{Example}
 @key[with] Ada.Numerics.Discrete_Random;
 @key[procedure] Flip_A_Coin @key[is]@Softpage
@@ -767,8 +769,10 @@ value.
 @key[end] Flip_A_Coin;
 @end{Example}
 
-@i{Example of a parallel simulation of a physical system, with a separate
+@begin{Wide}
+@Leading@i{Example of a parallel simulation of a physical system, with a separate
 generator of event probabilities in each task:}
+@end{Wide}
 @begin{Example}
 @key[with] Ada.Numerics.Float_Random;
 @key[procedure] Parallel_Simulation @key[is]@Softpage
@@ -804,7 +808,7 @@ generator of event probabilities in each task:}
 @begin{Notes}
 @i{Notes on the last example:}
 Although each Worker task initializes its generator to a different state, those
-states will be the same in every execution of the program.  The generator
+states will be the same in every execution of the program. The generator
 states can be initialized uniquely in each program execution by instantiating
 Ada.Numerics.Discrete_Random for the type Integer in the main procedure,
 resetting the generator obtained from that instance to a time-dependent state,

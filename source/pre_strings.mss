@@ -1,14 +1,14 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/08/08 04:35:32 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/08/08 04:35:32 $}
+@Comment{$Date: 2000/08/15 01:11:45 $}
 
 @LabeledClause{String Handling}
 
 @begin{Intro}
 This clause presents the specifications of the package Strings and
 several child packages, which provide facilities for dealing with
- string data.  Fixed-length,
+ string data. Fixed-length,
 bounded-length, and unbounded-length strings are supported, for both
 String and Wide_String.
 The string-handling subprograms include searches for pattern strings
@@ -18,7 +18,7 @@ translation (via a character-to-character mapping), and transformation
 @end{Intro}
 
 @begin{Extend83}
-This clause is new to Ada 9X.
+This clause is new to Ada 95.
 @end{Extend83}
 
 @LabeledSubClause{The Package Strings}
@@ -28,7 +28,7 @@ common to the string handling packages.
 @end{Intro}
 
 @begin{StaticSem}
-The library package Strings has the following declaration:
+@Leading@;The library package Strings has the following declaration:
 @begin{example}
 @ChildUnit{Parent=[Ada],Child=[Strings]}@key[package] Ada.Strings @key[is]
    @key[pragma] Pure(Strings);
@@ -59,7 +59,7 @@ entities needed for character sets and character-to-character mappings.
 @end{Intro}
 
 @begin{StaticSem}
-The library package Strings.Maps has the following declaration:
+@Leading@;The library package Strings.Maps has the following declaration:
 @begin{example}
 @ChildUnit{Parent=[Ada.Strings],Child=[Maps]}@key[package] Ada.Strings.Maps @key[is]
    @key[pragma] Preelaborate(Maps);
@@ -353,9 +353,9 @@ For each function that returns a String, the lower bound of the returned
 value is 1.
 @begin{Discussion}
 Most operations that yields a String are provided both as a
-function and as a procedure.  The functional form is possibly a more aesthetic
+function and as a procedure. The functional form is possibly a more aesthetic
 style but may introduce overhead due to extra copying or dynamic memory
-usage in some implementations.  Thus a procedural form, with an @key[in]
+usage in some implementations. Thus a procedural form, with an @key[in]
 @key[out] parameter so that all copying is done `in place', is also
 supplied.@end{discussion}
 
@@ -363,17 +363,17 @@ The basic model embodied in the package is that a fixed-length string
 comprises significant characters and possibly padding
 (with space characters)
 on either or both
-ends.  When a shorter string is copied to a longer string, padding
+ends. When a shorter string is copied to a longer string, padding
 is inserted, and when a longer string is copied to a shorter one,
-padding is stripped.  The Move procedure in Strings.Fixed, which takes a
+padding is stripped. The Move procedure in Strings.Fixed, which takes a
 String as an @key[out] parameter, allows the programmer to control these
-effects.  Similar control is provided by the string transformation
+effects. Similar control is provided by the string transformation
 procedures.
 @end{Intro}
 
 @begin{StaticSem}
 @Leading@keepnext
-The library package Strings.Fixed has the following declaration:
+@Leading@;The library package Strings.Fixed has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
 @ChildUnit{Parent=[Ada.Strings],Child=[Fixed]}@key[package] Ada.Strings.Fixed @key[is]
@@ -569,7 +569,7 @@ The effects of the above subprograms are as follows.
                 Pad     : @key[in]  Character  := Space);
 @end{Example}
 
-The Move procedure copies characters from Source to Target.
+@Leading@;The Move procedure copies characters from Source to Target.
 If Source has the same length as Target, then the effect is
 to assign Source to Target.
 If Source is shorter than Target then:
@@ -598,7 +598,7 @@ of Source are copied into Target.
 If Drop=Right, then the leftmost Target'Length characters
 of Source are copied into Target.
 
-If Drop=Error, then the effect depends on the value of the Justify
+@Leading@;If Drop=Error, then the effect depends on the value of the Justify
 parameter and also on whether any characters in Source other than
 Pad would fail to be copied:
 @begin{itemize}
@@ -635,8 +635,7 @@ the order in COBOL's MOVE verb.@end{reason}
    @key[return] Natural;
 @end{Example}
 
-Each
- Index function searches for a slice of Source, with length
+Each Index function searches for a slice of Source, with length
 Pattern'Length, that matches Pattern
 with respect to Mapping;
 the parameter Going indicates the direction of the lookup.
@@ -652,7 +651,7 @@ the parameter Going indicates the direction of the lookup.
 There is no default value for the Mapping parameter that is
 a Character_Mapping_Function; if there were,
 a call would be ambiguous since there is also a default for
-the Mapping parameter that is  a Character_Mapping.
+the Mapping parameter that is a Character_Mapping.
 @end{discussion}
 
 @begin{Example}
@@ -664,11 +663,11 @@ the Mapping parameter that is  a Character_Mapping.
 @end{Example}
 
 Index searches for the first or last occurrence of any of a set of
- characters (when Test=Inside),
+characters (when Test=Inside),
 or any of the complement of a set of characters (when Test=Outside).
 It returns the smallest index I (if Going=Forward) or the largest index I
 (if Going=Backward) such that
- Source(I) satisfies the Test  condition with respect to Set;
+Source(I) satisfies the Test condition with respect to Set;
 it returns 0 if there is no such Character in Source.
 
 @begin{Example}
@@ -697,10 +696,10 @@ match Pattern with respect to Mapping.
 If Pattern is the null string then Pattern_Error is propagated.
 @begin{reason}
 We say `maximum number' because it is possible to slice a source
-string in different ways yielding different numbers of matches.  For
+string in different ways yielding different numbers of matches. For
 example if Source is "ABABABA" and Pattern is "ABA", then Count yields
 2, although there is a partitioning of Source that yields just 1 match,
-for the middle slice.  Saying `maximum number' is equivalent to saying
+for the middle slice. Saying `maximum number' is equivalent to saying
 that the pattern match starts either at the low index or the high index
 position.
 @end{reason}
@@ -818,7 +817,7 @@ Propagates Index_Error if Position is not in Source'First .. Source'Last+1;
 otherwise
 returns the string obtained from Source by consecutively replacing
 characters starting at Position with corresponding characters from
-New_Item.  If the end of Source is reached before the characters in
+New_Item. If the end of Source is reached before the characters in
 New_Item are exhausted, the remaining characters from New_Item are
 appended to the string.
 
@@ -902,8 +901,8 @@ Justify => Justify, Pad=>Pad).
    @key[return] String;
 @end{Example}
 
-Returns a string of length Count.  If Count <= Source'Length, the string
-comprises the first Count characters of Source.  Otherwise its contents
+Returns a string of length Count. If Count <= Source'Length, the string
+comprises the first Count characters of Source. Otherwise its contents
 are Source concatenated with Count@en@;Source'Length Pad characters.
 
 @begin{Example}
@@ -923,8 +922,8 @@ Justify=>Justify, Pad=>Pad).
    @key[return] String;
 @end{Example}
 
-Returns a string of length Count.  If Count <= Source'Length, the string
-comprises the last Count characters of Source.  Otherwise its contents
+Returns a string of length Count. If Count <= Source'Length, the string
+comprises the last Count characters of Source. Otherwise its contents
 are Count-Source'Length Pad characters concatenated with Source.
 
 @begin{Example}
@@ -946,8 +945,8 @@ Justify=>Justify, Pad=>Pad).
 @end{Example}
 
 These functions replicate a character or string a specified number of
-times.  The first function returns a string whose length is Left and each
-of whose elements is Right.  The second function returns a string whose
+times. The first function returns a string whose length is Left and each
+of whose elements is Right. The second function returns a string whose
 length is Left*Right'Length and whose value is the null
 string if Left = 0 and is
 (Left@en@;1)*Right & Right otherwise.
@@ -957,7 +956,7 @@ string if Left = 0 and is
 @begin{Notes}
 In the Index and Count functions taking Pattern and Mapping parameters,
 the actual String parameter passed to Pattern should comprise characters
-occurring as target characters of the mapping.  Otherwise the pattern
+occurring as target characters of the mapping. Otherwise the pattern
 will not match.
 
 In the Insert subprograms, inserting at the end of a string is obtained
@@ -974,14 +973,14 @@ string handling subprograms, Constraint_Error is propagated.
 @begin{Intro}
 The language-defined package Strings.Bounded provides a generic package
 each of whose instances yields a private type Bounded_String and a
-set of operations.  An object of a particular Bounded_String type
+set of operations. An object of a particular Bounded_String type
 represents a String whose low bound is 1 and whose length
 can vary conceptually
 between 0 and a maximum size established at the
 generic instantiation.
 The subprograms for fixed-length string handling
-are either overloaded directly  for Bounded_String, or are modified as
-needed to reflect the variability in length.  Additionally, since the
+are either overloaded directly for Bounded_String, or are modified as
+needed to reflect the variability in length. Additionally, since the
 Bounded_String type is private, appropriate constructor and selector
 operations are provided.
 @begin{reason}
@@ -997,7 +996,7 @@ the copying and comparison of bounded strings.@end{reason}
 @end{Intro}
 
 @begin{StaticSem}
-The library package Strings.Bounded has the following declaration:
+@Leading@Keepnext@;The library package Strings.Bounded has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
 @ChildUnit{Parent=[Ada.Strings],Child=[Bounded]}@key[package] Ada.Strings.Bounded @key[is]
@@ -1341,7 +1340,7 @@ The Length function returns the length of the string represented by Source.
    @key[return] Bounded_String;
 @end{Example}
 
-If Source'Length <= Max_Length then this function
+@Leading@;If Source'Length <= Max_Length then this function
 returns a Bounded_String that represents Source.
 Otherwise the effect depends on the value of Drop:
 @begin{itemize}
@@ -1361,7 +1360,7 @@ If Drop=Error, then Strings.Length_Error is propagated.
 @end{Example}
 
 To_String returns the String value with lower bound 1 represented by
-Source.  If B is a Bounded_String, then B = To_Bounded_String(To_String(B)).
+Source. If B is a Bounded_String, then B = To_Bounded_String(To_String(B)).
 @end{DescribeCode}
 
 Each of the Append functions returns a Bounded_String obtained by concatenating
@@ -1434,9 +1433,9 @@ Overwrite, Delete), selector subprograms
  (Trim, Head, Tail),
 and constructor functions ("*") has an effect based on its
 corresponding subprogram in Strings.Fixed, and Replicate is based on
-Fixed."*".  For each of these subprograms, the corresponding
+Fixed."*". For each of these subprograms, the corresponding
 fixed-length string subprogram is applied to the string represented by
-the Bounded_String parameter.  To_Bounded_String is applied the result
+the Bounded_String parameter. To_Bounded_String is applied the result
 string, with Drop (or Error in the case of Generic_Bounded_Length."*")
 determining the effect when the string length exceeds Max_Length.
 @begin{Ramification}
@@ -1450,7 +1449,7 @@ and Bounded_String, are automatically defined based on the corrsponding
 Bounded string objects should not be implemented by implicit
 pointers and dynamic allocation.
 @begin{ImplNote}
-The following is a possible implementation of the private part
+@Leading@;The following is a possible implementation of the private part
 of the package:
 @begin{example}
 @key[type] Bounded_String_Internals (Length : Length_Range := 0) @key[is]
@@ -1474,12 +1473,12 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 @begin{Intro}
 The language-defined package Strings.Unbounded provides a
  private type Unbounded_String and a
-set of operations.  An object of type Unbounded_String represents a String
+set of operations. An object of type Unbounded_String represents a String
 whose low bound is 1 and whose length
 can vary conceptually between 0 and Natural'Last.
 The subprograms for fixed-length string handling
-are either overloaded directly  for Unbounded_String, or are modified as
-needed to reflect the flexibility in length.  Since the
+are either overloaded directly for Unbounded_String, or are modified as
+needed to reflect the flexibility in length. Since the
 Unbounded_String type is private, relevant constructor and selector
 operations are provided.
 @begin{reason}
@@ -1493,7 +1492,7 @@ as the length does not exceed the allocated length.
 @end{Intro}
 
 @begin{StaticSem}
-The library package Strings.Unbounded has the following declaration:
+@Leading@;The library package Strings.Unbounded has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
 @ChildUnit{Parent=[Ada.Strings],Child=[Unbounded]}@key[package] Ada.Strings.Unbounded @key[is]
@@ -1767,8 +1766,7 @@ will be initialized to the same value as Null_Unbounded_String.
 The function Length returns the length of the String represented by Source.
 
 The type String_Access provides a (non-private) access type for explicit
-processing of unbounded-length strings.
-The procedure Free performs
+processing of unbounded-length strings. The procedure Free performs
 an unchecked deallocation of an object of type String_Access.
 
 The function To_Unbounded_String(Source : in String)
@@ -1777,8 +1775,8 @@ The function To_Unbounded_String(Length : in Natural)
 returns an Unbounded_String that represents an uninitialized String
 whose length is Length.
 
-The function To_String returns the String with lower bound 1 represented by Source.
-To_String and To_Unbounded_String are related as follows:
+@Leading@;The function To_String returns the String with lower bound 1
+represented by Source. To_String and To_Unbounded_String are related as follows:
 @begin{itemize}
 If S is a String, then To_String(To_Unbounded_String(S)) = S.
 
@@ -1802,9 +1800,8 @@ Each of the functions "=", "<", ">","<=", and ">="
 returns the same result as the corresponding String
 operation applied to the String values given or represented by Left and Right.
 
-Each of the search subprograms (Index, Index_Non_Blank, Count,
-Find_Token) has the
-same effect as the corresponding subprogram in Strings.Fixed applied
+Each of the search subprograms (Index, Index_Non_Blank, Count, Find_Token)
+has the same effect as the corresponding subprogram in Strings.Fixed applied
 to the string represented by the Unbounded_String parameter.
 
 The Translate function has
@@ -1816,10 +1813,10 @@ Unbounded_String.
 Each of the transformation functions (Replace_Slice, Insert, Overwrite,
 Delete), selector functions (Trim, Head, Tail), and constructor functions
 ("*") is likewise analogous to its corresponding
-subprogram in Strings.Fixed.  For each of the subprograms,
+subprogram in Strings.Fixed. For each of the subprograms,
 the corresponding fixed-length string subprogram is applied to the string
 represented by the Unbounded_String parameter, and
-  To_Unbounded_String is applied the result string.
+To_Unbounded_String is applied the result string.
 
 For each of the procedures Translate,
 Replace_Slice, Insert, Overwrite, Delete,
@@ -1847,7 +1844,7 @@ the package and several of the subprograms appears in the Rationale.
 The language-defined package Strings.Maps.Constants declares
 Character_Set
 and Character_Mapping
-constants corresponding to  classification and conversion functions
+constants corresponding to classification and conversion functions
 in package Characters.Handling.
 @begin{discussion}
 The Constants package is a child of Strings.Maps since it needs
@@ -1859,7 +1856,7 @@ in a preelaborable way (i.e. via aggregates versus function calls).
 @end{Intro}
 
 @begin{StaticSem}
-The library package Strings.Maps.Constants has the following declaration:
+@Leading@;The library package Strings.Maps.Constants has the following declaration:
 
 @begin{example}
 @ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants]}@key[package] Ada.Strings.Maps.Constants @key[is]
@@ -2010,7 +2007,7 @@ The package Strings.Wide_Maps has the following declaration.
 The context clause for each of the packages Strings.Wide_Fixed,
 Strings.Wide_Bounded, and Strings.Wide_Unbounded
 identifies Strings.Wide_Maps instead of Strings.Maps.
-For each of the packages  Strings.Fixed, Strings.Bounded,
+For each of the packages Strings.Fixed, Strings.Bounded,
 Strings.Unbounded, and Strings.Maps.Constants
 the corresponding wide string package has
 the same contents except that
@@ -2061,7 +2058,7 @@ Wide_String handling subprograms, Constraint_Error is propagated.
 
 Each Wide_Character_Set constant in the package
 Strings.Wide_Maps.Wide_Constants contains no values outside the Character
-portion of Wide_Character.  Similarly, each Wide_Character_Mapping
+portion of Wide_Character. Similarly, each Wide_Character_Mapping
 constant in this package is the identity mapping when applied to
 any element outside the Character portion of Wide_Character.
 @end{Notes}

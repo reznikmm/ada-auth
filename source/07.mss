@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:15 $}
+@Comment{$Date: 2000/08/15 01:11:43 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1653,15 +1653,13 @@ or Finalize is applied to the containing object.
 @key[package] Ada.Finalization @key[is]
     @key[pragma] Preelaborate(Finalization);
 
-@LangDefType{Package=[Ada.Finalization],Type=[Controlled]}
-    @key[type] Controlled @key[is abstract tagged private];
+    @key[type] Controlled @key[is abstract tagged private];@LangDefType{Package=[Ada.Finalization],Type=[Controlled]}
 
     @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Controlled);
     @key(procedure) @AdaSubDefn{Adjust}@\(Object : @key(in out) Controlled);
     @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Controlled);
 
-@LangDefType{Package=[Ada.Finalization],Type=[Limited_Controlled]}
-    @key[type] Limited_Controlled @key[is abstract tagged limited private];
+    @key[type] Limited_Controlled @key[is abstract tagged limited private];@LangDefType{Package=[Ada.Finalization],Type=[Limited_Controlled]}
 
     @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Limited_Controlled);
     @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Limited_Controlled);

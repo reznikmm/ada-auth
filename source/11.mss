@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:17 $}
+@Comment{$Date: 2000/08/15 01:11:44 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -525,15 +525,12 @@ are not handled by the handlers of the
 @begin{Example}
 @ChildUnit{Parent=[Ada],Child=[Exceptions]}
 @key[package] Ada.Exceptions @key[is]
-@LangDefType{Package=[Ada.Exceptions],Type=[Exception_Id]}
-    @key[type] Exception_Id @key[is] @key[private];
+    @key[type] Exception_Id @key[is] @key[private];@LangDefType{Package=[Ada.Exceptions],Type=[Exception_Id]}
     @AdaDefn{Null_Id} : @key[constant] Exception_Id;
     @key[function] @AdaSubDefn{Exception_Name}(Id : Exception_Id) @key[return] String;
 
-@LangDefType{Package=[Ada.Exceptions],Type=[Exception_Occurrence]}
-    @key[type] Exception_Occurrence @key[is] @key[limited] @key[private];
-@LangDefType{Package=[Ada.Exceptions],Type=[Exception_Occurrence_Access]}
-    @key[type] Exception_Occurrence_Access @key[is] @key[access] @key[all] Exception_Occurrence;
+    @key[type] Exception_Occurrence @key[is] @key[limited] @key[private];@LangDefType{Package=[Ada.Exceptions],Type=[Exception_Occurrence]}
+    @key[type] Exception_Occurrence_Access @key[is] @key[access] @key[all] Exception_Occurrence;@LangDefType{Package=[Ada.Exceptions],Type=[Exception_Occurrence_Access]}
     @AdaDefn{Null_Occurrence} : @key[constant] Exception_Occurrence;
 
     @key[procedure] @AdaSubDefn{Raise_Exception}(E : @key[in] Exception_Id;
