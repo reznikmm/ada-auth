@@ -82,6 +82,8 @@ package ARM_Output is
     --		- RLB - Added Change_Version_Type and uses.
     --  9/10/04 - RLB - Added "Both" to possible changes to handle
     --			replacement of changed text.
+    --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents to
+    --			avoid circularities.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -262,9 +264,6 @@ package ARM_Output is
     type Change_Type is (None, Insertion, Deletion, Both);
 	-- Defines the change state. Both means both an Insertion and Deletion.
 
-    subtype Change_Version_Type is Character range '0' .. '9';
-	-- Defines the change version. Version 0 is the original text.
-
     procedure Start_Paragraph (Output_Object : in out Output_Type;
 			       Format : in ARM_Output.Paragraph_Type;
 			       Number : in String;
@@ -317,7 +316,7 @@ package ARM_Output is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
-			     Version : in ARM_Output.Change_Version_Type;
+			     Version : in ARM_Contents.Change_Version_Type;
         		     No_Page_Break : in Boolean := False) is abstract;
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
@@ -477,8 +476,8 @@ package ARM_Output is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Output.Change_Version_Type := '0';
-			   Added_Version : in ARM_Output.Change_Version_Type := '0';
+			   Version : in ARM_Contents.Change_Version_Type := '0';
+			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is abstract;
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.

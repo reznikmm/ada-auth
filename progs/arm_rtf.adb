@@ -90,6 +90,7 @@ package body ARM_RTF is
     --		- RLB - Added Change_Version_Type and uses.
     --  9/10/04 - RLB - Added "Both" to possible changes to handle
     --			replacement of changed text.
+    --  9/14/04 - RLB - Moved Change_Version_Type to contents.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -2143,7 +2144,7 @@ package body ARM_RTF is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
-			     Version : in ARM_Output.Change_Version_Type;
+			     Version : in ARM_Contents.Change_Version_Type;
 			     No_Page_Break : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
@@ -3158,8 +3159,8 @@ package body ARM_RTF is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Output.Change_Version_Type := '0';
-			   Added_Version : in ARM_Output.Change_Version_Type := '0';
+			   Version : in ARM_Contents.Change_Version_Type := '0';
+			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
@@ -3170,7 +3171,7 @@ package body ARM_RTF is
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
 	-- Bold off, Italic off should be avoided (as separate commands).
 	use type ARM_Output.Change_Type;
-	use type ARM_Output.Change_Version_Type;
+	use type ARM_Contents.Change_Version_Type;
 	use type ARM_Output.Location_Type;
 	use type ARM_Output.Size_Type;
 

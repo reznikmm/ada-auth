@@ -53,6 +53,7 @@ package body ARM_Contents is
 	Section_Number : Section_Number_Type;
 	Clause_Number : Natural;
 	Subclause_Number : Natural;
+        Version : ARM_Contents.Change_Version_Type := '0';
     end record;
 
     Title_List : array (1 .. 500) of Title_Record;
@@ -72,7 +73,8 @@ package body ARM_Contents is
 		   Level : in Level_Type;
 		   Section_Number : in Section_Number_Type;
 		   Clause_Number : in Natural := 0;
-		   Subclause_Number : in Natural := 0) is
+		   Subclause_Number : in Natural := 0;
+                   Version : in ARM_Contents.Change_Version_Type := '0') is
 	-- Add a section or clause to the contents. It has the specified
 	-- characteristics.
     begin
@@ -91,7 +93,8 @@ package body ARM_Contents is
 	     Level => Level,
 	     Section_Number => Section_Number,
 	     Clause_Number => Clause_Number,
-	     Subclause_Number => Subclause_Number);
+	     Subclause_Number => Subclause_Number,
+             Version => Version);
     end Add;
 
 
@@ -118,7 +121,8 @@ package body ARM_Contents is
 	     Level => Level,
 	     Section_Number => Section_Number,
 	     Clause_Number => Clause_Number,
-	     Subclause_Number => Subclause_Number);
+	     Subclause_Number => Subclause_Number,
+             Version => '0');
     end Add_Old;
 
 
@@ -436,6 +440,7 @@ package body ARM_Contents is
 		     Title_List(I).Section_Number,
 		     Title_List(I).Clause_Number,
 		     Title_List(I).Subclause_Number,
+		     Title_List(I).Version,
 		     Quit);
 	    if Quit then
 		return;

@@ -70,6 +70,7 @@ package ARM_Format is
     --  7/18/02 - RLB - Moved document type here.
     --          - RLB - Added Changes_Only and versioning for individual changes.
     --  9/10/04 - RLB - Added support for nested changes.
+    --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
 
     type Format_Type is tagged limited private;
 
@@ -97,7 +98,7 @@ package ARM_Format is
     procedure Create (Format_Object : in out Format_Type;
 		      Document : ARM_Format.Document_Type;
 		      Changes : in ARM_Format.Change_Kind;
-		      Change_Version : in ARM_Output.Change_Version_Type;
+		      Change_Version : in ARM_Contents.Change_Version_Type;
 		      Display_Index_Entries : in Boolean);
 	-- Initialize an input object. Document determines the type of
 	-- document to create. Changes and Change_Version determine which
@@ -185,7 +186,7 @@ private
 	-- Document information:
 	Document : ARM_Format.Document_Type;
 	Changes : ARM_Format.Change_Kind; -- No Both here.
-	Change_Version : ARM_Output.Change_Version_Type;
+	Change_Version : ARM_Contents.Change_Version_Type;
 	Display_Index_Entries : Boolean;
 
 	-- Clause numbers:
@@ -197,7 +198,7 @@ private
 	Next_Paragraph_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 			     -- The change kind of the next paragraph. This is
 			     -- reset to none after each paragraph.
-	Next_Paragraph_Version : ARM_Output.Change_Version_Type;
+	Next_Paragraph_Version : ARM_Contents.Change_Version_Type;
 			     -- If the kind is not "None", this is the version
 			     -- number of the changed paragraph.
 	Last_Paragraph_Subhead_Type : Paragraph_Type;
@@ -243,8 +244,8 @@ private
 	Font : ARM_Output.Font_Family_Type; -- What is the current font family?
 	Size : ARM_Output.Size_Type; -- What is the current font size?
 	Change : ARM_Output.Change_Type; -- What is the current kind of change?
-	Current_Change_Version : ARM_Output.Change_Version_Type; -- What is the current version of change?
-	Current_Old_Change_Version : ARM_Output.Change_Version_Type; -- What is the current old version of change? (Only used if Change is Both).
+	Current_Change_Version : ARM_Contents.Change_Version_Type; -- What is the current version of change?
+	Current_Old_Change_Version : ARM_Contents.Change_Version_Type; -- What is the current old version of change? (Only used if Change is Both).
 	Location : ARM_Output.Location_Type; -- What is the current (vertical) location?
 	Format : ARM_Output.Paragraph_Type; -- What is the current paragraph type?
 	In_Paragraph : Boolean; -- Are we currently in a paragraph?
@@ -283,12 +284,12 @@ private
 	Attr_Prefix : String (1..10); -- Attribute prefix text
 	Attr_Prefix_Len : Natural := 0;
 	Attr_Prefix_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
-	Attr_Prefix_Version : ARM_Output.Change_Version_Type;
+	Attr_Prefix_Version : ARM_Contents.Change_Version_Type;
 	Attr_Name : String (1..30); -- Attribute name text
 	Attr_Name_Len : Natural := 0;
 	Attr_Leading : Boolean := False; -- Attribute leading flag
 	Attr_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
-	Attr_Version : ARM_Output.Change_Version_Type;
+	Attr_Version : ARM_Contents.Change_Version_Type;
 	    -- The above nine items are used only when processing Attribute
 	    -- and Attribute_Leading commands.
 
@@ -307,7 +308,7 @@ private
 	-- The next four are used only during processing of ImplDef and ChgImplDef.
 	Impdef_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 			-- The change kind of the impldef.
-	Impdef_Version : ARM_Output.Change_Version_Type;
+	Impdef_Version : ARM_Contents.Change_Version_Type;
 			-- If the kind is not "None", this is the version
 			-- number of the changed paragraph.
 	Impdef_Paragraph_String : String (1 .. 10); -- Paragraph number.

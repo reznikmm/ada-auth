@@ -98,7 +98,7 @@ Commands are represented by @<command_name>[<args>]. The command name can be an
 identifier, or certain special characters. The command name is not
 case-sensitive: @newpage; @NewPage; @NEWPAGE; all represent the same command.
 The argument list (if any) is surrounded by one of the bracket pairs
-(), {}, [], or <>. These pairs are equivalent, however the matching end
+(), {}, [], <>, or `'. These pairs are equivalent, however the matching end
 character must be used to close an argument list. The arguments can be
 anything. It can be another sequence of text, keywords, or other items
 (described below). In this list below, arguments are always signified by {},
@@ -193,16 +193,35 @@ Text commands:
 	The formatter assigns clause numbers.
 @LabeledSubClause{<text>} - Start a labeled subclause. The title will be "text".
 	The formatter assigns subclause numbers.
-@LabeledRevisedClause{New=[<new_text>],Old=[<old_text>]} - Start a labeled
-	clause. The title will be "new_text". If we are generating an old
-	version of the RM, the title is "old_text" instead. (Note that
-	clause references always use the new_text name.)
-	The formatter assigns clause numbers.
-@LabeledRevisedSubClause{New=[<new_text>],Old=[<old_text>]} - Start a labeled
-	subclause. The title will be "new_text". If we are generating an old
-	version of the RM, the title is "old_text" instead. (Note that
-	clause references always use the new_text name.)
-	The formatter assigns subclause numbers.
+@LabeledRevisedNormativeAnnex{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+	Start a labeled normative annex. The title will be "new_text". If we
+        are generating an old version of the RM, the title is "old_text"
+        instead. (Note that annex references in commands always use the
+        new_text name.) The formatter assigns annex letters. Version is the
+        version number of the change (see @ChgRef for details).
+@@LabeledRevisedClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        Start a labeled clause. The title will be "new_text". If we are
+        generating an old version of the RM, the title is "old_text" instead.
+        (Note that clause references in commands always use the new_text name.)
+        The formatter assigns clause numbers. Version is the version number of
+        the change (see @ChgRef for details).
+@LabeledRevisedSubClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        Start a labeled subclause. The title will be "new_text". If we are
+	generating an old version of the RM, the title is "old_text" instead.
+	(Note that clause references in commands always use the new_text name.)
+        The formatter assigns subclause numbers. Version is the version number
+        of the change (see @ChgRef for details).
+@LabeledAddedClause{Version=[<version>],Name=[<new_text>]} - Start a labeled
+        clause. The title will be "new_text". If we are generating an old
+	version of the RM, this clause does not exist. (Any clause references
+	ought to be in new text.) The formatter assigns clause numbers. Version
+	is the version number of the change (see @ChgRef for details).
+@LabeledAddedSubClause{Version=[<version>],Name=[<new_text>]} - Start a labeled
+        subclause. The title will be "new_text". If we are generating an old
+	version of the RM, this subclause does not exist. (Any subclause
+	references ought to be in new text.) The formatter assigns subclause
+        numbers. Version is the version number of the change (see @ChgRef for
+        details).
 
 @UnnumberedSection{<text>} - Start an unnumbered section. (These are the
 	Forward and Introduction). This *can* be referenced by a reference,
@@ -292,8 +311,12 @@ Text commands:
 	The text should contain an @prag command (which specifies and indexes
 	the name - see below.) The text can contain arbitrary commands;
 	it will be run through the full evaluation code.
-	The text is also sent to a database used to later create
-	Annex L.
+	The text is also sent to a database used to later create Annex L.
+@AddedPragmaSyntax{Version=[<Version>],<Text>}
+	Defines a pragma added by <Version>. Otherwise, the text is as
+        described for PragmaSyntax. We assume that this command is surrounded
+	by an appropriate @Chg; the purpose of the Version number here is
+	to determine whether (and how) this is entered into Annex L.
 @PragmaList
 	Dumps the summary list of all pragmas from the pragma database
 	to the output file.
@@ -430,7 +453,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Marks a changed prefix type text. Also, saves the indicated text to
 	use as part of any following attribute definitions. The text is also
 	written to the output. See ChgRef and PrefixType for more information.
-@AddedSubheading{<text>}
+@AddedSubheading{Version=[<version>],<text>}
 	Same as Subheading, except that this heading is present only in
 	new versions of the document.
 

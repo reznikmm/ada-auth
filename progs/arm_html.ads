@@ -75,6 +75,7 @@ package ARM_HTML is
     --		- RLB - Added Change_Version_Type and uses.
     --  9/10/04 - RLB - Added "Both" to possible changes to handle
     --			replacement of changed text.
+    --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -165,7 +166,7 @@ package ARM_HTML is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
-			     Version : in ARM_Output.Change_Version_Type;
+			     Version : in ARM_Contents.Change_Version_Type;
 			     No_Page_Break : in Boolean := False);
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
@@ -286,8 +287,8 @@ package ARM_HTML is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Output.Change_Version_Type := '0';
-			   Added_Version : in ARM_Output.Change_Version_Type := '0';
+			   Version : in ARM_Contents.Change_Version_Type := '0';
+			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type);
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
@@ -373,8 +374,8 @@ private
 	Font : ARM_Output.Font_Family_Type; -- What is the current font family?
 	Size : ARM_Output.Size_Type; -- What is the current relative size?
 	Change : ARM_Output.Change_Type := ARM_Output.None;
-	Version : ARM_Output.Change_Version_Type := '0';
-	Added_Version : ARM_Output.Change_Version_Type := '0';
+	Version : ARM_Contents.Change_Version_Type := '0';
+	Added_Version : ARM_Contents.Change_Version_Type := '0';
 	Location : ARM_Output.Location_Type := ARM_Output.Normal;
 	Tab_Stops : ARM_Output.Tab_Info := ARM_Output.NO_TABS;
 	Emulate_Tabs : Boolean := False; -- Can we emulate tabs in the current style?

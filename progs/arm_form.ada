@@ -63,6 +63,7 @@ procedure ARM_Formatter is
     --		- RLB - Added Version parameter to command line and formatting
     --			commands.
     --  9/10/04 - RLB - Updated descriptions of standard commands.
+    --  9/14/04 - RLB - Moved version to ARM_Contents.
 
     -- Standard commands:
     -- For Original RM:
@@ -94,7 +95,7 @@ procedure ARM_Formatter is
     Format : Output_Format_Type; -- Format to generate.
     Document : ARM_Format.Document_Type; -- Document to generate.
     Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
-    Change_Version : ARM_Output.Change_Version_Type; -- Change version.
+    Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
     Display_Index_Entries : Boolean; -- Should Index entries be displayed?
     Use_Large_Files : Boolean; -- Use large output files.
 
@@ -152,7 +153,7 @@ procedure ARM_Formatter is
 			Ada.Strings.Right));
 	    begin
 		if Version_Arg'Length = 1 and then
-		   Version_Arg(Version_Arg'First) in ARM_Output.Change_Version_Type then
+		   Version_Arg(Version_Arg'First) in ARM_Contents.Change_Version_Type then
 		    Change_Version := Version_Arg(Version_Arg'First);
 		else
 		    Ada.Text_IO.Put_Line ("** Unrecognized change version: " & Version_Arg);

@@ -100,6 +100,12 @@ package body ARM_HTML is
     --		- RLB - Updated to insure that changes are separated by a space.
     --  4/11/03 - RLB - Changed some formats to meet WC3 validation requirements.
     --  9/09/04 - RLB - Removed unused junk noted by Stephen Leake.
+    --  9/10/04 - RLB - Added "Both" to possible changes to handle
+    --			replacement of changed text.
+    --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
+    --		- RLB - Changed to use left/right quotes whether or not Unicode
+    --			is being used. (These work on IE, but not on old
+    --			Netscape.)
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -696,10 +702,10 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert0 {text-decoration: underline; color: black}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete0 {text-decoration: line-through; color: black }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: line-through, underline; color: black }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91)}"); -- Dark blue.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91) }"); -- Dark blue.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,0,91) }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: line-through, underline; color: rgb(0,0,91) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0)"); -- Dark green.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0) }"); -- Dark green.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,91,0) }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: line-through, underline; color: rgb(0,91,0) }");
 
@@ -770,10 +776,10 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert0 {text-decoration: underline; color: black}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete0 {text-decoration: line-through; color: black }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: line-through, underline; color: black }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91)}"); -- Dark blue.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91) }"); -- Dark blue.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,0,91) }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: line-through, underline; color: rgb(0,0,91) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0)"); -- Dark green.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0) }"); -- Dark green.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,91,0) }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: line-through, underline; color: rgb(0,91,0) }");
 
@@ -2547,7 +2553,7 @@ package body ARM_HTML is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
-			     Version : in ARM_Output.Change_Version_Type;
+			     Version : in ARM_Contents.Change_Version_Type;
 			     No_Page_Break : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
@@ -3369,7 +3375,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Left_Quote =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if HTML_Kind > HTML_3 then --and Use_Unicode then
 	            Output_Text (Output_Object, "&lsquo;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3377,7 +3383,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Right_Quote =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if HTML_Kind > HTML_3 then --and Use_Unicode then
 	            Output_Text (Output_Object, "&rsquo;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3385,7 +3391,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Left_Double_Quote =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if HTML_Kind > HTML_3 then --and Use_Unicode then
 	            Output_Text (Output_Object, "&ldquo;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3393,7 +3399,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Right_Double_Quote =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if HTML_Kind > HTML_3 then --and Use_Unicode then
 	            Output_Text (Output_Object, "&rdquo;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3504,8 +3510,8 @@ package body ARM_HTML is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Output.Change_Version_Type := '0';
-			   Added_Version : in ARM_Output.Change_Version_Type := '0';
+			   Version : in ARM_Contents.Change_Version_Type := '0';
+			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.

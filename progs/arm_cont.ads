@@ -7,9 +7,9 @@ package ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2004  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -44,6 +44,9 @@ package ARM_Contents is
     --  5/22/00 - RLB - Added Unnumbered_Section level.
     --  8/ 7/00 - RLB - Made Make_Clause visible.
     --  8/22/00 - RLB - Added Old_Title handling.
+    --  9/14/04 - RLB - Moved Change_Version_Type here, to avoid mutual
+    --			dependence.
+    --		- RLB - Added version to changes.
 
     subtype Title_Type is String (1 .. 80);
 	-- The type of a title.
@@ -52,6 +55,9 @@ package ARM_Contents is
 	-- Values > 20 represent annex letters (21 => A, 22 => B, etc.)
 	-- Value = 0 represents the preface, introduction, etc. No
 	-- number is generated if Section_Number = 0.
+
+    subtype Change_Version_Type is Character range '0' .. '9';
+	-- Defines the change version. Version 0 is the original text.
 
     Not_Found_Error : exception;
 
@@ -66,7 +72,8 @@ package ARM_Contents is
 		   Level : in Level_Type;
 		   Section_Number : in Section_Number_Type;
 		   Clause_Number : in Natural := 0;
-		   Subclause_Number : in Natural := 0);
+		   Subclause_Number : in Natural := 0;
+                   Version : in ARM_Contents.Change_Version_Type := '0');
 	-- Add a section or clause to the contents. It has the specified
 	-- characteristics.
 
@@ -133,6 +140,7 @@ package ARM_Contents is
 		   Section_Number : in Section_Number_Type;
 		   Clause_Number : in Natural;
 		   Subclause_Number : in Natural;
+                   Version : in ARM_Contents.Change_Version_Type;
 		   Quit : out Boolean) is <>;
     procedure For_Each;
 	-- Call Operate for each title in the contents, in the order that
