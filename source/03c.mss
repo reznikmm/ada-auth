@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/16 06:31:48 $}
+@Comment{$Date: 2004/12/17 00:03:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.5 $}
+@Comment{$Revision: 1.6 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2923,6 +2923,76 @@ to a subsequent @nt<full_type_declaration>.
 rhs="@key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}]@Chg{Version=[2],New=< [@key{is tagged}]>,Old=<>};"}
 @end{Syntax}
 
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+@ChgAdded{Version=[2],Text=[@Defn{incomplete type}@Defn{incomplete view}
+An @nt{incomplete_type_declaration} declares
+an @i{incomplete view} of a
+type and its first subtype; the first subtype is unconstrained if
+a @nt<known_discriminant_part> appears. If the
+@nt{incomplete_type_declaration} includes the reserved word @key{tagged}, it
+declares a @i{tagged incomplete view}.@Defn2{Term=[incomplete view],Sec=[tagged]}@Defn{tagged incomplete view}
+An incomplete view of a type is a limited view of the type (see @RefSecNum{Limited Types}).]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[If an @nt<unknown_discriminant_part> or
+no @nt{discriminant_part}
+appears, then the constrainedness of the first subtype doesn't matter
+for any other rules or semantics, so we don't bother defining it.
+The case with a @nt<known_discriminant_part> is the only case in which
+a constraint could later be given in a @nt{subtype_indication} naming
+the incomplete type.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[Given an access type @i{A} whose designated
+type @i{T} is an incomplete view, a dereference of a value of type @i{A} also
+has this incomplete view except when:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[it occurs in the immediate scope of the completion
+of @i{T}, or],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[it occurs in the scope of a @nt{nonlimited_with_clause}
+that mentions a library package in whose visible part the completion of @i{T}
+is declared.]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[In these cases, the dereference has the full view
+of @i{T}.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[We need the @lquotes@;in
+  whose visible part@rquotes@; rule so that the second rule doesn't trigger
+  in the body of a package with a @key{with} of a child unit:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Key{package} P @Key{is}
+@Key{private}
+   @Key{type} T;
+   @Key{type} PtrT @Key{is access} T;
+@Key{end} P;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Key{private package} P.C @Key{is}
+   Ptr : PtrT;
+@Key{end} P.C;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Key{with} P.C;
+@Key{package body} P @Key{is}
+    -- @RI{Ptr.all'Size is not legal here, but it is in the scope of a}
+    -- @nt{nonlimited_with_clause} @RI{for P.}
+    @Key{type} T @Key{is} ...
+    --  @RI{Ptr.all'Size is legal here.}
+@Key{end} P;],Old=[]}
+@end{Example}
+@end{Discussion}
+
+@end{StaticSem}
+
 @begin{Legality}
 @PDefn2{Term=[requires a completion], Sec=(@nt<incomplete_type_declaration>)}
 An @nt{incomplete_type_declaration} requires a completion, which shall
@@ -3089,71 +3159,22 @@ shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
-@Defn{incomplete type}@Chg{Version=[2],New=[@Defn{incomplete view}],Old=[]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}
+@ChgDeleted{Version=[2],Text=[@Defn{incomplete type}
 An @nt{incomplete_type_declaration} declares
-an @Chg{Version=[2],New=[@i{incomplete view} of a],Old=[incomplete]}
+an incomplete
 type and its first subtype; the first subtype is unconstrained if
-a @nt<known_discriminant_part> appears.@Chg{Version=[2],New=[ If the
-@nt{incomplete_type_declaration} includes the reserved word @key{tagged}, it
-declares a @i{tagged incomplete view}.@Defn2{Term=[incomplete view],Sec=[tagged]}@Defn{tagged incomplete view}
-An incomplete view of a type is a limited view of the type (see @RefSecNum{Limited Types}).],Old=[]}
+a @nt<known_discriminant_part> appears.]}
 @begin{Reason}
-If an @nt<unknown_discriminant_part> or no @nt{discriminant_part}
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[If an @nt<unknown_discriminant_part> or
+no @nt{discriminant_part}
 appears, then the constrainedness of the first subtype doesn't matter
 for any other rules or semantics, so we don't bother defining it.
 The case with a @nt<known_discriminant_part> is the only case in which
 a constraint could later be given in a @nt{subtype_indication} naming
-the incomplete type.
+the incomplete type.]}
 @end{Reason}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[Given an access type @i{A} whose designated
-type @i{T} is an incomplete view, a dereference of a value of type @i{A} also
-has this incomplete view except when:]}
-@begin{Itemize}
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[it occurs in the immediate scope of the completion
-of @i{T}, or],Old=[]}
-
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[it occurs in the scope of a @nt{nonlimited_with_clause}
-that mentions a library package in whose visible part the completion of @i{T}
-is declared.]}
-@end{Itemize}
-
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[In these cases, the dereference has the full view
-of @i{T}.]}
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[We need the @lquotes@;in
-  whose visible part@rquotes@; rule so that the second rule doesn't trigger
-  in the body of a package with a @key{with} of a child unit:]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Key{package} P @Key{is}
-@Key{private}
-   @Key{type} T;
-   @Key{type} PtrT @Key{is access} T;
-@Key{end} P;],Old=[]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Key{private package} P.C @Key{is}
-   Ptr : PtrT;
-@Key{end} P.C;],Old=[]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Key{with} P.C;
-@Key{package body} P @Key{is}
-    -- @RI{Ptr.all'Size is not legal here, but it is in the scope of a}
-    -- @nt{nonlimited_with_clause} @RI{for P.}
-    @Key{type} T @Key{is} ...
-    --  @RI{Ptr.all'Size is legal here.}
-@Key{end} P;],Old=[]}
-@end{Example}
-@end{Discussion}
-
 @end{StaticSem}
 
 @begin{RunTime}
