@@ -16,9 +16,9 @@ package body ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2002  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -84,6 +84,10 @@ package body ARM_RTF is
     --  8/31/00 - RLB - Moved paragraphs in again.
     --  9/26/00 - RLB - Added Syntax_Summary style.
     --  9/27/00 - RLB - Cut the lower margin for the AARM pages.
+    --  7/18/02 - RLB - Removed Document parameter, replaced by three
+    --			strings.
+    --		- RLB - Added AI_Reference.
+    --		- RLB - Added Change_Version_Type and uses.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -176,34 +180,38 @@ package body ARM_RTF is
         -- Default header/footer:
         Ada.Text_IO.Put (Output_Object.Output_File, "{\headerl ");
         Write_Style_for_Paragraph (Output_Object.Output_File, Header_Info, Junk);
-        if Output_Object.Includes_Changes then
-	    if ARM_Output."="(Output_Object.Document, ARM_Output.AARM) then
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\b\f1 ISO/IEC 8652:1995(E) with COR.1:2000 \emdash  Annotated Ada Reference Manual\par}}}");
-	    else
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\b\f1 ISO/IEC 8652:1995(E) with COR.1:2000 \emdash  Ada Reference Manual\par}}}");
-	    end if;
-        else
-	    if ARM_Output."="(Output_Object.Document, ARM_Output.AARM) then
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\b\f1 ISO/IEC 8652:1995(E) \emdash  AARM\par}}}");
-	    else
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\b\f1 ISO/IEC 8652:1995(E) \emdash  RM95\par}}}");
-	    end if;
-        end if;
+	if Ada.Strings.Unbounded.Length (Output_Object.Header_Prefix) = 0 then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\b\f1 " &
+		Ada.Strings.Unbounded.To_String (Output_Object.Title) &
+		"\par}}}");
+	elsif Ada.Strings.Unbounded.Length (Output_Object.Title) = 0 then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\b\f1 " &
+		Ada.Strings.Unbounded.To_String (Output_Object.Header_Prefix) &
+		"\par}}}");
+	else
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\b\f1 " &
+		Ada.Strings.Unbounded.To_String (Output_Object.Header_Prefix) &
+		" \emdash  " &
+		Ada.Strings.Unbounded.To_String (Output_Object.Title) &
+		"\par}}}");
+	end if;
         Ada.Text_IO.Put (Output_Object.Output_File, "{\headerr ");
         Write_Style_for_Paragraph (Output_Object.Output_File, Header_Info, Junk);
-        if Output_Object.Includes_Changes then
-	    if ARM_Output."="(Output_Object.Document, ARM_Output.AARM) then
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\qr\b\f1 ISO/IEC 8652:1995(E) with COR.1:2000 \emdash  Annotated Ada Reference Manual\par}}}");
-	    else
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\qr\b\f1 ISO/IEC 8652:1995(E) with COR.1:2000 \emdash  Ada Reference Manual\par}}}");
-	    end if;
-        else
-	    if ARM_Output."="(Output_Object.Document, ARM_Output.AARM) then
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\qr\b\f1 ISO/IEC 8652:1995(E) \emdash  AARM\par}}}");
-	    else
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\qr\b\f1 ISO/IEC 8652:1995(E) \emdash  RM95\par}}}");
-	    end if;
-        end if;
+	if Ada.Strings.Unbounded.Length (Output_Object.Header_Prefix) = 0 then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\qr\b\f1 " &
+		Ada.Strings.Unbounded.To_String (Output_Object.Title) &
+		"\par}}}");
+	elsif Ada.Strings.Unbounded.Length (Output_Object.Title) = 0 then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\qr\b\f1 " &
+		Ada.Strings.Unbounded.To_String (Output_Object.Header_Prefix) &
+		"\par}}}");
+	else
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\qr\b\f1 " &
+		Ada.Strings.Unbounded.To_String (Output_Object.Header_Prefix) &
+		" \emdash  " &
+		Ada.Strings.Unbounded.To_String (Output_Object.Title) &
+		"\par}}}");
+	end if;
 -- Note: We don't need the default footers; none probably work better, anyway.
 --	Ada.Text_IO.Put (Output_Object.Output_File, "{\footerl ");
 --	Write_Style_for_Paragraph (Output_Object.Output_File, Footer_Info, Junk);
@@ -294,7 +302,7 @@ package body ARM_RTF is
 	-- Font table:
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\fonttbl");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f0\froman\fcharset0 Times New Roman;}");
-	if ARM_Output."="(Output_Object.Document, ARM_Output.RM_ISO) then
+	if Output_Object.For_ISO then
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f1\fswiss\fcharset0 Helvetica{\*\falt Arial};}"); -- Really Arial, but this makes ISO happy.
 	else
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f1\fswiss\fcharset0 Arial{\*\falt Helvetica};}"); -- Give Arial preference, because otherwise it screwed up Jim Moore's machine.
@@ -1365,16 +1373,18 @@ package body ARM_RTF is
 	    -- \tqr - set following tab as a right tab.
 
 	-- Revision table:
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\*\revtbl {Technical Corrigendum1;}}");
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\*\revtbl {Original Text;}{Technical Corrigendum 1;}{Amendment 1;}}");
 
 	-- Information (truncated):
-	if ARM_Output."="(Output_Object.Document, ARM_Output.AARM) then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\info{\title Annotated Ada Reference Manual}");
-	else
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\info{\title Ada 95 Reference Manual}");
-	end if;
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\author JTC1/SC22/WG9/ARG}");
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\operator Randall Brukardt, ARG Editor}}");
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\info{\title " &
+	    Ada.Strings.Unbounded.To_String (Output_Object.Title) & "}");
+
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "\version2");
+
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\author AXE Consultants}"); -- Working.
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\operator Randall Brukardt, Principle Technician}}");
+	--Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\author JTC1/SC22/WG9/ARG}"); -- Final.
+	--Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\operator Randall Brukardt, ARG Editor}}");
 
 	-- Initial setup (document properties):
 	-- Paper size:
@@ -1456,43 +1466,43 @@ package body ARM_RTF is
 
 
     procedure Create (Output_Object : in out RTF_Output_Type;
-		      Document : in ARM_Output.Document_Type;
 		      Page_Size : in ARM_Output.Page_Size;
 		      Includes_Changes : in Boolean;
-		      Big_Files : in Boolean) is
-	-- Create an Output_Object for a document of Document type, with
-	-- the specified page size. Changes from the base standard are included
-	-- if Includes_Changes is True. Generate a few large output files if
+		      Big_Files : in Boolean;
+		      For_ISO : in Boolean := False;
+		      File_Prefix : in String;
+		      Header_Prefix : in String := "";
+		      Title : in String := "") is
+	-- Create an Output_Object for a document with the specified page
+	-- size. Changes from the base standard are included if
+	-- Includes_Changes is True. Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
+	-- The prefix of the output file names is File_Prefix - this
+	-- should be no more then 4 characters allowed in file names.
+	-- The title of the document is Title.
+	-- The header prefix appears in the header (if any) before the title,
+	-- separated by a dash.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Already valid object");
 	end if;
 	Output_Object.Is_Valid := True;
-	Output_Object.Document := Document;
 	Output_Object.Page_Size := Page_Size;
 	Output_Object.Includes_Changes := Includes_Changes;
 	Output_Object.Big_Files := Big_Files;
+	Output_Object.For_ISO := For_ISO;
+	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
+			        Source => File_Prefix);
+	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);
+	Output_Object.Header_Prefix :=
+		Ada.Strings.Unbounded.To_Unbounded_String (Header_Prefix);
 	if Big_Files then
 	    -- We're going to generate a single giant file. Open it now.
-	    case Output_Object.Document is
-	        when ARM_Output.RM =>
-		    Start_RTF_File (Output_Object,
-				    "RM",
-				    "Ada Reference Manual",
-				    "All");
-	        when ARM_Output.RM_ISO =>
-		    Start_RTF_File (Output_Object,
-				    "RMI",
-				    "Ada Reference Manual",
-				    "All");
-	        when ARM_Output.AARM =>
-		    Start_RTF_File (Output_Object,
-				    "AARM",
-				    "Annotated Ada Reference Manual",
-				    "All");
-	    end case;
+	    Start_RTF_File (Output_Object,
+			    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right),
+			    Ada.Strings.Unbounded.To_String (Output_Object.Title),
+			    "All");
 	    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	end if;
     end Create;
@@ -1534,23 +1544,11 @@ package body ARM_RTF is
 	    end if;
 
 	    -- Create a new file for this section:
-	    case Output_Object.Document is
-	        when ARM_Output.RM =>
-		    Start_RTF_File (Output_Object,
-				    "RM-" & Section_Name,
-				    Section_Title,
-				    Section_Name);
-	        when ARM_Output.RM_ISO =>
-		    Start_RTF_File (Output_Object,
-				    "RMI-" & Section_Name,
-				    Section_Title,
-				    Section_Name);
-	        when ARM_Output.AARM =>
-		    Start_RTF_File (Output_Object,
-				    "AA-" & Section_Name,
-				    Section_Title,
-				    Section_Name);
-	    end case;
+	    Start_RTF_File (Output_Object,
+			    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+				"-" & Section_Name,
+			    Section_Title,
+			    Section_Name);
 	    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	else
 	    if Output_Object.Wrote_into_Section then
@@ -2143,6 +2141,7 @@ package body ARM_RTF is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
+			     Version : in ARM_Output.Change_Version_Type;
 			     No_Page_Break : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
@@ -2154,7 +2153,7 @@ package body ARM_RTF is
 	Count : Natural; -- Not used after being set.
 	function Header_Text return String is
 	begin
-	    return "{\revised\revauth0 " & New_Header_Text & "}{\deleted\revauthdel0 " & Old_Header_Text & "}";
+	    return "{\revised\revauth" & Version & " " & New_Header_Text & "}{\deleted\revauthdel" & Version & " " & Old_Header_Text & "}";
 	end Header_Text;
     begin
 	if not Output_Object.Is_Valid then
@@ -3157,6 +3156,7 @@ package body ARM_RTF is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
+			   Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
@@ -3342,16 +3342,18 @@ package body ARM_RTF is
 	    case Change is
 		when ARM_Output.Insertion =>
 --Ada.Text_Io.Put (" Change ins");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth0 ");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
-			-- Note: \revauth0 indicates the author.
+			-- Note: \revauthN indicates the author. Each version
+			-- that we'll use needs an entry in the \revtbl.
 			-- We could include a date with \revddtm??, but that's messy.
 			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.Deletion =>
 --Ada.Text_Io.Put (" Change del");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel0 ");
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 21;
-			-- Note: \revauthdel0 indicates the author.
+			-- Note: \revauthdelN indicates the author. Each version
+			-- that we'll use needs an entry in the \revtbl.
 			-- We could include a date with \revddtmdel??, but that's messy.
 			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.None =>
@@ -3422,6 +3424,18 @@ package body ARM_RTF is
     begin
 	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
     end DR_Reference;
+
+
+    procedure AI_Reference (Output_Object : in out RTF_Output_Type;
+			    Text : in String;
+			    AI_Number : in String) is
+	-- Generate a reference to an AI from the standard. The text
+	-- of the reference is "Text", and AI_Number denotes
+	-- the target (in folded format). For hyperlinked formats, this should
+	-- generate a link; for other formats, the text alone is generated.
+    begin
+	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
+    end AI_Reference;
 
 -- Notes:
 -- "\_" is a non-breaking hyphen.

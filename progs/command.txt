@@ -1,8 +1,8 @@
 Ada Reference Manual formatting tool.
 
-Copyright 2000, AXE Consultants.
+Copyright 2000, 2002 AXE Consultants.
 P.O. Box 1512, Madison WI  53701
-E-Mail: rbrukardt@bix.com
+E-Mail: randy@rrsoftware.com
 
 AXE Consultants grants to all users the right to use/modify this formatting
 tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9 activities are
@@ -378,30 +378,32 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Generates the implementation-defined list.
 
 -- Changes:
-@chgref{Version=[<version>],Kind=(<kind>){,Ref=(<DR_Number>)}}
+@chgref{Version=[<version>],Kind=(<kind>){,Ref=(<DR_Number>)}{,ARef=(<AI_Number>)}}
 	- Marks a paragraph changed in a corrigendum. This command precedes
 	any text of the paragraph. The version number of the change is
-	<version>. [This is always "1" for technical corrigenum 1].
+	<version>. [This is "1" for technical corrigenum 1; "2" for amendment 1].
 	Kind is either "Revised" (an ordinary change), "Added" (for a paragraph
 	added by the corrigendum), or "Deleted" (for a paragraph deleted by
 	by the corrigendum) [These control the paragraph numbering of the
-	following paragraph.] The <DR_Number>(s) that triggered the change are
-	given. As many references as necessary can be given. (Zero is allowed).
+	following paragraph.] The <DR_Number>(s) and/or <AI_Number>(s) that
+	triggered the change are given. As many references as necessary can be
+	given. (Zero is allowed).
 @chgnote{<text>} Notes on particular change. This is treated as a comment; it
 	has a separate command solely so that stripped easily in the future.
-@chg{New=[<new text>],Old=[<old text>]}
+@chg{[Version=[<Version>],]New=[<new text>],Old=[<old text>]}
 	Marks a particular change. The new text and the old text are given.
 	(We have both sets of text so we can generate useful differences).
 	Nesting of @chg commands is not allowed. The text may not contain any
-	command that ends the paragraph.
+	command that ends the paragraph. The Version is assumed to be '1' if
+	that parameter is not given. Version is interpreted as for ChgRef.
 @ChgImplDef{Version=[<version>],Kind=(<kind>),Text=<text>}
 	Marks a changed implementation-defined entry. (Essentially a
 	combination of ChgRef and Impldef.) <text> is the
 	implementation-defined entry. See ChgRef and Impldef for details
 	on the handling of the arguments.
 @ChgAttribute{Version=[<version>],Kind=(<kind>),ChginAnnex=[T|F],
-	Leading=[T|F],Prefix=<Prefix>,AttrName=<Name>,Ref={<DR_Number>},
-	Text=<Text>}
+	Leading=[T|F],Prefix=<Prefix>,AttrName=<Name>,
+	[Ref={<DR_Number>}|ARef={<AI_Number>}|],Text=<Text>}
 	Marks a changed attribute entry. (Essentially a combination of
 	ChgRef and Attribute.) ChginAnnex controls whether the change
 	is reflected in the Annex. (Set this to F when the change is in
@@ -523,6 +525,10 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Incompatible83 - Incompatibilities with Ada 83.
 	Extend83  - Extensions to Ada 83.
 	DiffWord83- Wording Changes from Ada 83.
+	Inconsistent95 - Inconsistenies with Ada 95.
+	Incompatible95 - Incompatibilities with Ada 95.
+	Extend95  - Extensions to Ada 95.
+	DiffWord95- Wording Changes from Ada 95.
 	AARMOnly  - Text that is not included in the RM. No format is implied.
 
     AARM annotations:

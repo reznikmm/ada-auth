@@ -1,6 +1,8 @@
 with ARM_Output,
      ARM_Contents,
      Ada.Text_IO;
+-- private
+with Ada.Strings.Unbounded;
 package ARM_HTML is
 
     --
@@ -11,9 +13,9 @@ package ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, AXE Consultants.
+    -- Copyright 2000, 2001, 2002,  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -67,18 +69,30 @@ package ARM_HTML is
     --		- RLB - Added column emulation.
     --  9/29/00 - RLB - Added Any_Nonspace flag.
     --  7/18/01 - RLB - Added support for Big_Files.
+    --  7/18/02 - RLB - Removed Document parameter from Create, replaced by
+    --			three strings and For_ISO boolean.
+    --		- RLB - Added AI_Reference.
+    --		- RLB - Added Change_Version_Type and uses.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
     procedure Create (Output_Object : in out HTML_Output_Type;
-		      Document : in ARM_Output.Document_Type;
 		      Page_Size : in ARM_Output.Page_Size;
 		      Includes_Changes : in Boolean;
-		      Big_Files : in Boolean);
-	-- Create an Output_Object for a document of Document type, with
-	-- the specified page size. Changes from the base standard are included
-	-- if Includes_Changes is True. Generate a few large output files if
+		      Big_Files : in Boolean;
+		      For_ISO : in Boolean := False;
+		      File_Prefix : in String;
+		      Header_Prefix : in String := "";
+		      Title : in String := "");
+	-- Create an Output_Object for a document with the specified page
+	-- size. Changes from the base standard are included if
+	-- Includes_Changes is True. Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
+	-- The prefix of the output file names is File_Prefix - this
+	-- should be no more then 4 characters allowed in file names.
+	-- The title of the document is Title.
+	-- The header prefix appears in the header (if any) before the title,
+	-- separated by a dash.
 
     procedure Close (Output_Object : in out HTML_Output_Type);
 	-- Close an Output_Object. No further output to the object is
@@ -149,6 +163,7 @@ package ARM_HTML is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
+			     Version : in ARM_Output.Change_Version_Type;
 			     No_Page_Break : in Boolean := False);
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
@@ -269,6 +284,7 @@ package ARM_HTML is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
+			   Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type);
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
@@ -308,6 +324,14 @@ package ARM_HTML is
 	-- the target. For hyperlinked formats, this should generate
 	-- a link; for other formats, the text alone is generated.
 
+    procedure AI_Reference (Output_Object : in out HTML_Output_Type;
+			    Text : in String;
+			    AI_Number : in String);
+	-- Generate a reference to an AI from the standard. The text
+	-- of the reference is "Text", and AI_Number denotes
+	-- the target (in folded format). For hyperlinked formats, this should
+	-- generate a link; for other formats, the text alone is generated.
+
 private
 
     type Column_Text_Item_Type;
@@ -321,6 +345,7 @@ private
     end record;
     type Column_Text_Ptrs_Type is array (1..5) of Column_Text_Ptr;
 
+    subtype Prefix_String is String(1..4);
     type HTML_Output_Type is new ARM_Output.Output_Type with record
 	Is_Valid : Boolean := False;
 	Is_In_Paragraph : Boolean := False;
@@ -328,9 +353,10 @@ private
 	Had_Prefix : Boolean := False; -- If in paragraph, value of not No_Prefix.
 	Column_Count : ARM_Output.Column_Count := 1;
 	Output_File : Ada.Text_IO.File_Type;
-	Document : ARM_Output.Document_Type;
+	File_Prefix : Prefix_String; -- Blank padded.
 	Section_Name : String(1..3);
 	Big_Files : Boolean; -- For HTML, this means to generate a single monster file.
+	Title : Ada.Strings.Unbounded.Unbounded_String;
 	Char_Count : Natural := 0; -- Characters on current line.
 	Disp_Char_Count : Natural := 0; -- Displayed characters on current line.
 	Any_Nonspace : Boolean := False; -- Have we output any non-space on this line?

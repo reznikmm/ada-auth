@@ -1,7 +1,8 @@
 with ARM_Output,
      ARM_Contents,
      Ada.Text_IO,
-     Ada.Exceptions;
+     Ada.Exceptions,
+     Ada.Strings.Fixed;
 package body ARM_Text is
 
     --
@@ -12,7 +13,7 @@ package body ARM_Text is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2002  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -77,6 +78,10 @@ package body ARM_Text is
     --  8/22/00 - RLB - Added Revised_Clause_Header.
     --  8/23/00 - RLB - Fixed a problem with long lines in examples.
     --  9/26/00 - RLB - Added Syntax_Summary style.
+    --  7/18/02 - RLB - Removed Document parameter from Create, replaced by
+    --			three strings and For_ISO boolean.
+    --		- RLB - Added AI_Reference.
+    --		- RLB - Added Change_Version_Type and uses.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -94,22 +99,32 @@ package body ARM_Text is
 
 
     procedure Create (Output_Object : in out Text_Output_Type;
-		      Document : in ARM_Output.Document_Type;
 		      Page_Size : in ARM_Output.Page_Size;
 		      Includes_Changes : in Boolean;
-		      Big_Files : in Boolean) is
-	-- Create an Output_Object for a document of Document type, with
-	-- the specified page size. Changes from the base standard are included
-	-- if Includes_Changes is True. Generate a few large output files if
+		      Big_Files : in Boolean;
+		      For_ISO : in Boolean := False;
+		      File_Prefix : in String;
+		      Header_Prefix : in String := "";
+		      Title : in String := "") is
+	-- Create an Output_Object for a document with the specified page
+	-- size. Changes from the base standard are included if
+	-- Includes_Changes is True. Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
+	-- The prefix of the output file names is File_Prefix - this
+	-- should be no more then 4 characters allowed in file names.
+	-- The title of the document is Title.
+	-- The header prefix appears in the header (if any) before the title,
+	-- separated by a dash.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Already valid object");
 	end if;
 	Output_Object.Is_Valid := True;
-	Output_Object.Document := Document;
-	-- We don't use the page size, changes flag, or big files flag.
+	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
+				Source => File_Prefix);
+	-- We don't use the page size, changes flag, big files flag,
+	-- for ISO flag, the header prefix, or the title.
     end Create;
 
 
@@ -147,17 +162,9 @@ package body ARM_Text is
 	    Ada.Text_IO.Close (Output_Object.Output_File);
 	end if;
 	-- Create a new file for this section:
-	case Output_Object.Document is
-	    when ARM_Output.RM =>
-		Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-		    ".\Output\RM-" & Section_Name & ".TXT");
-	    when ARM_Output.RM_ISO =>
-		Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-		    ".\Output\RMI-" & Section_Name & ".TXT");
-	    when ARM_Output.AARM =>
-		Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-		    ".\Output\AA-" & Section_Name & ".TXT");
-	end case;
+	Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
+	    ".\Output\" & Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+		"-" & Section_Name & ".TXT");
 	Ada.Text_IO.New_Line (Output_Object.Output_File);
     end Section;
 
@@ -637,6 +644,7 @@ package body ARM_Text is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
+			     Version : in ARM_Output.Change_Version_Type;
 			     No_Page_Break : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
@@ -646,6 +654,7 @@ package body ARM_Text is
 	-- If No_Page_Break is True, suppress any page breaks.
 	-- Raises Not_Valid_Error if in a paragraph.
 	function Header_Text return String is
+	    -- Note: Version is not used.
 	begin
 	    return '{' & New_Header_Text & "} [" & Old_Header_Text & ']';
 	end Header_Text;
@@ -1220,6 +1229,7 @@ package body ARM_Text is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
+			   Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
@@ -1254,6 +1264,7 @@ package body ARM_Text is
 		    null;
 	    end case;
 	    case Change is
+		-- Note: Version is not used.
 		when ARM_Output.Insertion =>
 		    Buffer(Output_Object, '{');
 		when ARM_Output.Deletion =>
@@ -1327,5 +1338,17 @@ package body ARM_Text is
     begin
 	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
     end DR_Reference;
+
+
+    procedure AI_Reference (Output_Object : in out Text_Output_Type;
+			    Text : in String;
+			    AI_Number : in String) is
+	-- Generate a reference to an AI from the standard. The text
+	-- of the reference is "Text", and AI_Number denotes
+	-- the target (in folded format). For hyperlinked formats, this should
+	-- generate a link; for other formats, the text alone is generated.
+    begin
+	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
+    end AI_Reference;
 
 end ARM_Text;

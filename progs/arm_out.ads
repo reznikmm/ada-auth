@@ -13,9 +13,9 @@ package ARM_Output is
     -- determines the details of the text.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2002  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -76,27 +76,37 @@ package ARM_Output is
     -- 		- RLB - Added Nested_Enumerated.
     --  8/22/00 - RLB - Added Revised_Clause_Header.
     --  9/26/00 - RLB - Added Syntax_Summary style.
+    --  7/18/02 - RLB - Removed Document parameter from Create, replaced by
+    --			three strings and For_ISO boolean.
+    --		- RLB - Added AI_Reference.
+    --		- RLB - Added Change_Version_Type and uses.
 
     type Output_Type is abstract tagged limited null record;
 
     Not_Valid_Error : exception; -- Raised when an operation is invalid.
 
-    type Document_Type is (RM, RM_ISO, AARM);
     type Page_Size is (A4, Letter, Ada95);
 	-- A4 is standard European letter size.
 	-- Letter is standard American letter size (8.5x11).
 	-- Ada95 is the size of the existing Ada 95 standard (7x9).
 
     procedure Create (Output_Object : in out Output_Type;
-		      Document : in ARM_Output.Document_Type;
 		      Page_Size : in ARM_Output.Page_Size;
 		      Includes_Changes : in Boolean;
-		      Big_Files : in Boolean) is abstract;
-	-- Create an Output_Object for a document of Document type, with
-	-- the specified page size. Changes from the base standard are included
-	-- if Includes_Changes is True. Generate a few large output files if
+		      Big_Files : in Boolean;
+		      For_ISO : in Boolean := False;
+		      File_Prefix : in String;
+		      Header_Prefix : in String := "";
+		      Title : in String := "") is abstract;
+	-- Create an Output_Object for a document with the specified page
+	-- size. Changes from the base standard are included if
+	-- Includes_Changes is True. Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
-
+	-- The prefix of the output file names is File_Prefix - this
+	-- should be no more then 4 characters allowed in file names.
+	-- The title of the document is Title.
+	-- The header prefix appears in the header (if any) before the title,
+	-- separated by a dash.
 
     procedure Close (Output_Object : in out Output_Type) is abstract;
 	-- Close an Output_Object. No further output to the object is
@@ -247,6 +257,12 @@ package ARM_Output is
 	-- Defines the space following the paragraph. Narrow is about 30%
 	-- less than normal; Wide is about 50% more than normal.
 
+    type Change_Type is (None, Insertion, Deletion);
+	-- Defines the change state.
+
+    subtype Change_Version_Type is Character range '0' .. '9';
+	-- Defines the change version. Version 0 is the original text.
+
     procedure Start_Paragraph (Output_Object : in out Output_Type;
 			       Format : in ARM_Output.Paragraph_Type;
 			       Number : in String;
@@ -299,7 +315,8 @@ package ARM_Output is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
-			     No_Page_Break : in Boolean := False) is abstract;
+			     Version : in ARM_Output.Change_Version_Type;
+        		     No_Page_Break : in Boolean := False) is abstract;
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
 	-- Number is as specified.
@@ -442,9 +459,6 @@ package ARM_Output is
 	-- Determines the font family. "Default" is the font family
 	-- of a paragraph before it is changed.
 
-    type Change_Type is (None, Insertion, Deletion);
-	-- Determines the change state of the current text.
-
     type Size_Type is range -9 .. 9;
 	-- Determines the relative size. This is the change in size. For
 	-- formats that allow it, this is the change in size in points.
@@ -461,6 +475,7 @@ package ARM_Output is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
+			   Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is abstract;
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
@@ -495,9 +510,17 @@ package ARM_Output is
     procedure DR_Reference (Output_Object : in out Output_Type;
 			    Text : in String;
 			    DR_Number : in String) is abstract;
-	-- Generate a reference to an DR from the standard. The text
+	-- Generate a reference to a DR from the standard. The text
 	-- of the reference is "Text", and DR_Number denotes
 	-- the target. For hyperlinked formats, this should generate
 	-- a link; for other formats, the text alone is generated.
+
+    procedure AI_Reference (Output_Object : in out Output_Type;
+			    Text : in String;
+			    AI_Number : in String) is abstract;
+	-- Generate a reference to an AI from the standard. The text
+	-- of the reference is "Text", and AI_Number denotes
+	-- the target (in folded format). For hyperlinked formats, this should
+	-- generate a link; for other formats, the text alone is generated.
 
 end ARM_Output;

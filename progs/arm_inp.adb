@@ -10,9 +10,9 @@ package body ARM_Input is
     -- or other entity, and routines to lex the input entities.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2002  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -43,6 +43,7 @@ package body ARM_Input is
     --
     --  5/15/00 - RLB - Created base package.
     --  5/16/00 - RLB - Added `' as a open/close pairing.
+    --  7/18/02 - RLB - Added Check_One_of_Parameter_Names.
 
     function Is_Open_Char (Open_Char : in Character) return Boolean is
 	-- Return True if character is a parameter opening character
@@ -240,5 +241,86 @@ package body ARM_Input is
 	    Param_Close_Bracket := ' ';
         end if;
     end Check_Parameter_Name;
+
+
+    procedure Check_One_of_Parameter_Names (
+		Input_Object : in out Input_Type'Class;
+		Param_Name_1 : in ARM_Input.Command_Name_Type;
+		Param_Name_2 : in ARM_Input.Command_Name_Type;
+		Is_First : in Boolean;
+		Param_Close_Bracket : out Character;
+		Is_Param_1 : out Boolean) is
+        -- Check that the name of a parameter (if any) is Param_Name_1 or
+	-- Param_Name_2. This is the first parameter is Is_First is True;
+	-- otherwise it is a later parameter. (For a later parameter, we'll
+	-- skip the comma and any whitespace.)
+	-- If the parameter name is Param_Name_1, Is_Param_1 will be True;
+	-- otherwise it will be False.
+        -- If the parameter has an argument, the opening character will
+        -- be read, and the closing character will be returned in
+        -- in Param_Close_Bracket. If the parameter wasn't found, an
+        -- error message will be produced, and Param_Close_Bracket will
+        -- be set to ' '.
+        Our_Param_Name : ARM_Input.Command_Name_Type;
+        Ch : Character;
+    begin
+        if not Is_First then
+	    -- Skip over the comma and any whitespace:
+	    ARM_Input.Get_Char (Input_Object, Ch);
+	    if Ch /= ',' then
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter separator for " &
+			    Ada.Strings.Fixed.Trim (Param_Name_1, Ada.Strings.Right) & " or " &
+			    Ada.Strings.Fixed.Trim (Param_Name_2, Ada.Strings.Right) &
+			    ": " & Ch & " on line " & ARM_Input.Line_String (Input_Object));
+	    else
+	        ARM_Input.Get_Char (Input_Object, Ch);
+	    end if;
+	    while (Ch = ' ' or else Ch = Ascii.LF) loop
+	        ARM_Input.Get_Char (Input_Object, Ch);
+	    end loop;
+	    ARM_Input.Replace_Char (Input_Object);
+        -- else nothing to clean up.
+        end if;
+        Arm_Input.Get_Name (Input_Object, Our_Param_Name, Null_Name_Allowed => True);
+        if Ada.Characters.Handling.To_Lower (Param_Name_1) =
+	   Ada.Characters.Handling.To_Lower (Our_Param_Name) then
+	    ARM_Input.Get_Char (Input_Object, Ch);
+	    if Ch /= '=' then
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter character for " &
+		    Ada.Strings.Fixed.Trim(Our_Param_Name, Ada.Strings.Right) &
+		    " parameter: " & Ch & " on line " & ARM_Input.Line_String (Input_Object));
+	    end if;
+	    Is_Param_1 := True;
+        elsif Ada.Characters.Handling.To_Lower (Param_Name_2) =
+	   Ada.Characters.Handling.To_Lower (Our_Param_Name) then
+	    ARM_Input.Get_Char (Input_Object, Ch);
+	    if Ch /= '=' then
+	        Ada.Text_IO.Put_Line ("  ** Bad parameter character for " &
+		    Ada.Strings.Fixed.Trim(Our_Param_Name, Ada.Strings.Right) &
+		    " parameter: " & Ch & " on line " & ARM_Input.Line_String (Input_Object));
+	    end if;
+	    Is_Param_1 := False;
+        else
+	    Ada.Text_IO.Put_Line ("  ** Bad parameter name: " & Ada.Strings.Fixed.Trim (Our_Param_Name, Ada.Strings.Right) &
+				  ", " & Ada.Strings.Fixed.Trim (Param_Name_1, Ada.Strings.Right) & " or " &
+				  Ada.Strings.Fixed.Trim (Param_Name_2, Ada.Strings.Right) & " expected on line " &
+				  ARM_Input.Line_String (Input_Object));
+	    Is_Param_1 := False;
+        end if;
+        -- Now, open the parameter section:
+        ARM_Input.Get_Char (Input_Object, Ch);
+        if ARM_Input.Is_Open_Char (Ch) then -- Start parameter:
+	    Param_Close_Bracket := ARM_Input.Get_Close_Char (Ch);
+        elsif Ch = '"' then -- Start quoted parameter:
+	    Param_Close_Bracket := '"';
+        else -- No parameter. Weird.
+	    ARM_Input.Replace_Char (Input_Object);
+	    Ada.Text_IO.Put_Line ("  ** Failed to find parameter text for " &
+				  Ada.Strings.Fixed.Trim (Our_Param_Name, Ada.Strings.Right) &
+				  ", line " & ARM_Input.Line_String (Input_Object));
+	    Param_Close_Bracket := ' ';
+        end if;
+    end Check_One_of_Parameter_Names;
+
 
 end ARM_Input;

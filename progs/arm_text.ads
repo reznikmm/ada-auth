@@ -11,7 +11,7 @@ package ARM_Text is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2002  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -65,18 +65,30 @@ package ARM_Text is
     --  8/17/00 - RLB - Replaced "Leading" by "Space_After".
     --  8/22/00 - RLB - Added Revised_Clause_Header.
     --  8/23/00 - RLB - Added Real_Char_Count.
+    --  7/18/02 - RLB - Removed Document parameter from Create, replaced by
+    --			three strings and For_ISO boolean.
+    --		- RLB - Added AI_Reference.
+    --		- RLB - Added Change_Version_Type and uses.
 
     type Text_Output_Type is new ARM_Output.Output_Type with private;
 
     procedure Create (Output_Object : in out Text_Output_Type;
-		      Document : in ARM_Output.Document_Type;
 		      Page_Size : in ARM_Output.Page_Size;
 		      Includes_Changes : in Boolean;
-		      Big_Files : in Boolean);
-	-- Create an Output_Object for a document of Document type, with
-	-- the specified page size. Changes from the base standard are included
-	-- if Includes_Changes is True. Generate a few large output files if
+		      Big_Files : in Boolean;
+		      For_ISO : in Boolean := False;
+		      File_Prefix : in String;
+		      Header_Prefix : in String := "";
+		      Title : in String := "");
+	-- Create an Output_Object for a document with the specified page
+	-- size. Changes from the base standard are included if
+	-- Includes_Changes is True. Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
+	-- The prefix of the output file names is File_Prefix - this
+	-- should be no more then 4 characters allowed in file names.
+	-- The title of the document is Title.
+	-- The header prefix appears in the header (if any) before the title,
+	-- separated by a dash.
 
     procedure Close (Output_Object : in out Text_Output_Type);
 	-- Close an Output_Object. No further output to the object is
@@ -147,6 +159,7 @@ package ARM_Text is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
+			     Version : in ARM_Output.Change_Version_Type;
 			     No_Page_Break : in Boolean := False);
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
@@ -265,6 +278,7 @@ package ARM_Text is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
+			   Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type);
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
@@ -304,9 +318,18 @@ package ARM_Text is
 	-- the target. For hyperlinked formats, this should generate
 	-- a link; for other formats, the text alone is generated.
 
+    procedure AI_Reference (Output_Object : in out Text_Output_Type;
+			    Text : in String;
+			    AI_Number : in String);
+	-- Generate a reference to an AI from the standard. The text
+	-- of the reference is "Text", and AI_Number denotes
+	-- the target (in folded format). For hyperlinked formats, this should
+	-- generate a link; for other formats, the text alone is generated.
+
 private
 
     subtype Buffer_String is String (1 .. 120);
+    subtype Prefix_String is String(1..4);
     type Text_Output_Type is new ARM_Output.Output_Type with record
 	Is_Valid : Boolean := False;
 	Is_In_Paragraph : Boolean := False;
@@ -323,7 +346,7 @@ private
 	Output_Buffer_Space_Before : Boolean := False;
 			-- Do we need to output a space before the buffer?
 	Output_File : Ada.Text_IO.File_Type;
-	Document : ARM_Output.Document_Type;
+	File_Prefix : Prefix_String; -- Blank padded.
 	Char_Count : Natural := 0; -- Characters on current line.
 	Out_Char_Count : Natural := 0; -- Characters output on current line.
 	Indent_Amount : Natural := 0; -- Amount to indent paragraphs.

@@ -12,7 +12,7 @@ package ARM_Format is
     -- ---------------------------------------
     -- Copyright 2000, 2002, AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -67,27 +67,43 @@ package ARM_Format is
     --  8/31/00 - RLB - Added the New_Changes change kind.
     --  9/26/00 - RLB - Added Syntax_Display format.
     --  6/17/02 - RLB - Added Ada95 changes sections.
+    --  7/18/02 - RLB - Moved document type here.
+    --          - RLB - Added Changes_Only and versioning for individual changes.
 
     type Format_Type is tagged limited private;
 
-    type Change_Kind is (Old_Only, New_Only, Show_Changes, New_Changes);
-	-- Which changes to show? If Old_Only, we will get the original
-	-- Ada Reference Manual or AARM. If New_Only, we will get the
-	-- reference documents with the corrigendum updates included.
+    type Change_Kind is (Old_Only, New_Only, Changes_Only,
+	Show_Changes, New_Changes);
+	-- Which changes to show?
+	-- If Old_Only, we will get the original Ada Reference Manual or AARM.
+	-- If New_Only, we will get the reference documents with the updates
+	-- up to the Change_Version specified included.
+	-- If Changes_Only, we will get the reference documents with the updates
+	-- up to the Change_Version specified included; and insertions and
+	-- deletions will be shown for Change_Version.
 	-- If Show_Changes, original RM text will be shown as deleted,
-	-- and new RM text will be shown as inserted.
+	-- and new RM text will be shown as inserted, up to and including the
+	-- Change_Version specified.
 	-- If New_Changes, original RM text removed, but new RM text will be
-	-- shown as inserted.
+	-- shown as inserted, up to and including the Change_Version specified.
+	-- In all cases, changes with versions newer than Change_Version are
+	-- ignored. Thus Change_Version = '0' is the same as Old_Only no
+	-- matter what command is given.
+
+    type Document_Type is (AARM, RM, RM_ISO);
+	-- Which document to generate? The AARM, the RM, or the RM for ISO?
 
     procedure Create (Format_Object : in out Format_Type;
-		      Document : ARM_Output.Document_Type;
+		      Document : ARM_Format.Document_Type;
 		      Changes : in ARM_Format.Change_Kind;
+		      Change_Version : in ARM_Output.Change_Version_Type;
 		      Display_Index_Entries : in Boolean);
 	-- Initialize an input object. Document determines the type of
-	-- document to create. Changes determines which changes should
-	-- be displayed. If Display_Index_Entries is True, index entries
-	-- will be printed in the document; otherwise, they will not generate
-	-- any visible text (although they might generate a link anchor).
+	-- document to create. Changes and Change_Version determine which
+	-- changes should be displayed. If Display_Index_Entries is True,
+	-- index entries will be printed in the document; otherwise, they
+	-- will not generate any visible text (although they might generate
+	-- a link anchor).
 
     procedure Destroy (Format_Object : in out Format_Type);
 	-- Destroy a format object, releasing any resources.
@@ -166,8 +182,9 @@ private
 
     type Format_Type is tagged limited record
 	-- Document information:
-	Document : ARM_Output.Document_Type;
+	Document : ARM_Format.Document_Type;
 	Changes : ARM_Format.Change_Kind;
+	Change_Version : ARM_Output.Change_Version_Type;
 	Display_Index_Entries : Boolean;
 
 	-- Clause numbers:
@@ -179,7 +196,7 @@ private
 	Next_Paragraph_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 			     -- The change kind of the next paragraph. This is
 			     -- reset to none after each paragraph.
-	Next_Paragraph_Version : Character;
+	Next_Paragraph_Version : ARM_Output.Change_Version_Type;
 			     -- If the kind is not "None", this is the version
 			     -- number of the changed paragraph.
 	Last_Paragraph_Subhead_Type : Paragraph_Type;
@@ -225,6 +242,7 @@ private
 	Font : ARM_Output.Font_Family_Type; -- What is the current font family?
 	Size : ARM_Output.Size_Type; -- What is the current font size?
 	Change : ARM_Output.Change_Type; -- What is the current kind of change?
+	Current_Change_Version : ARM_Output.Change_Version_Type; -- What is the current version of change?
 	Location : ARM_Output.Location_Type; -- What is the current (vertical) location?
 	Format : ARM_Output.Paragraph_Type; -- What is the current paragraph type?
 	In_Paragraph : Boolean; -- Are we currently in a paragraph?
@@ -263,12 +281,12 @@ private
 	Attr_Prefix : String (1..10); -- Attribute prefix text
 	Attr_Prefix_Len : Natural := 0;
 	Attr_Prefix_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
-	Attr_Prefix_Version : Character;
+	Attr_Prefix_Version : ARM_Output.Change_Version_Type;
 	Attr_Name : String (1..30); -- Attribute name text
 	Attr_Name_Len : Natural := 0;
 	Attr_Leading : Boolean := False; -- Attribute leading flag
 	Attr_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
-	Attr_Version : Character;
+	Attr_Version : ARM_Output.Change_Version_Type;
 	    -- The above nine items are used only when processing Attribute
 	    -- and Attribute_Leading commands.
 
@@ -287,7 +305,7 @@ private
 	-- The next four are used only during processing of ImplDef and ChgImplDef.
 	Impdef_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 			-- The change kind of the impldef.
-	Impdef_Version : Character;
+	Impdef_Version : ARM_Output.Change_Version_Type;
 			-- If the kind is not "None", this is the version
 			-- number of the changed paragraph.
 	Impdef_Paragraph_String : String (1 .. 10); -- Paragraph number.

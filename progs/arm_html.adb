@@ -15,9 +15,9 @@ package body ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001 AXE Consultants.
+    -- Copyright 2000, 2001, 2002  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -89,6 +89,10 @@ package body ARM_HTML is
     --  7/18/01 - RLB - Added "Indented" style to supported styles for
     --			multi-column.
     --		- RLB - Implemented single "Big-File" support.
+    --  7/18/02 - RLB - Removed Document parameter from Create, replaced by
+    --			three strings and For_ISO boolean.
+    --		- RLB - Added AI_Reference.
+    --		- RLB - Added Change_Version_Type and uses.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -459,23 +463,10 @@ package body ARM_HTML is
 	-- Clause_Number. This does not include any path or extension.
     begin
 	if Output_Object.Big_Files then -- One big file.
-            case Output_Object.Document is
-	        when ARM_Output.RM =>
-		    return "RM";
-		when ARM_Output.RM_ISO =>
-		    return "RMI";
-		when ARM_Output.AARM =>
-		    return "AARM";
-	    end case;
+	    return Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right);
 	else -- Clause files.
-            case Output_Object.Document is
-	        when ARM_Output.RM =>
-		    return "RM-" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
-	        when ARM_Output.RM_ISO =>
-		    return "RMI-" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
-	        when ARM_Output.AARM =>
-		    return "AA-" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
-            end case;
+	    return Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	        "-" &Make_Clause_Anchor_Name (Output_Object, Clause_Number);
 	end if;
     end Make_Clause_File_Name;
 
@@ -681,14 +672,7 @@ package body ARM_HTML is
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HTML>");
 	-- Header information:
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HEAD>");
-        case Output_Object.Document is
-	    when ARM_Output.RM =>
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <TITLE>Ada95 - " & Title & "</TITLE>");
-	    when ARM_Output.RM_ISO =>
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <TITLE>Ada95 - " & Title & "</TITLE>");
-	    when ARM_Output.AARM =>
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <TITLE>AARM95 - " & Title & "</TITLE>");
-        end case;
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <TITLE>" & Title & "</TITLE>");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <META NAME=""Author"" CONTENT=""JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor"">");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <META NAME=""GENERATOR"" CONTENT=""Arm_Form.Exe, Ada Reference Manual generator"">");
 	if HTML_Kind = HTML_4_Only then
@@ -825,14 +809,9 @@ package body ARM_HTML is
         if Output_Object.Big_Files then
 	    Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
 	else
-	    case Output_Object.Document is
-	        when ARM_Output.RM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-TOC.html");
-	        when ARM_Output.RM_ISO =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-TOC.html");
-	        when ARM_Output.AARM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-TOC.html");
-            end case;
+	    Ada.Text_IO.Put (Output_Object.Output_File,
+		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+		   "-TOC.html");
 	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Contents</A>");
 	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
@@ -840,14 +819,9 @@ package body ARM_HTML is
         if Output_Object.Big_Files then
 	    Ada.Text_IO.Put (Output_Object.Output_File, "#0-29");
 	else
-	    case Output_Object.Document is
-	        when ARM_Output.RM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-0-29.html");
-	        when ARM_Output.RM_ISO =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-0-29.html");
-	        when ARM_Output.AARM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-0-29.html");
-            end case;
+	    Ada.Text_IO.Put (Output_Object.Output_File,
+		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	            "-0-29.html");
 	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
 	if Clause /= "" then
@@ -896,14 +870,9 @@ package body ARM_HTML is
         if Output_Object.Big_Files then
 	    Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
 	else
-	    case Output_Object.Document is
-	        when ARM_Output.RM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-TOC.html");
-	        when ARM_Output.RM_ISO =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-TOC.html");
-	        when ARM_Output.AARM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-TOC.html");
-            end case;
+	    Ada.Text_IO.Put (Output_Object.Output_File,
+		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	            "-TOC.html");
 	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Contents</A>");
 	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
@@ -911,14 +880,9 @@ package body ARM_HTML is
         if Output_Object.Big_Files then
 	    Ada.Text_IO.Put (Output_Object.Output_File, "#0-29");
 	else
-	    case Output_Object.Document is
-	        when ARM_Output.RM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-0-29.html");
-	        when ARM_Output.RM_ISO =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-0-29.html");
-	        when ARM_Output.AARM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-0-29.html");
-            end case;
+	    Ada.Text_IO.Put (Output_Object.Output_File,
+		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	            "-0-29.html");
 	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
 	if Clause /= "" then
@@ -942,14 +906,9 @@ package body ARM_HTML is
         if Output_Object.Big_Files then
 	    Ada.Text_IO.Put (Output_Object.Output_File, "#TTL");
 	else
-	    case Output_Object.Document is
-	        when ARM_Output.RM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RM-TTL.html");
-	        when ARM_Output.RM_ISO =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "RMI-TTL.html");
-	        when ARM_Output.AARM =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "AA-TTL.html");
-            end case;
+	    Ada.Text_IO.Put (Output_Object.Output_File,
+		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	            "-TTL.html");
 	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Legal</A>");
 
@@ -962,32 +921,39 @@ package body ARM_HTML is
 
 
     procedure Create (Output_Object : in out HTML_Output_Type;
-		      Document : in ARM_Output.Document_Type;
 		      Page_Size : in ARM_Output.Page_Size;
 		      Includes_Changes : in Boolean;
-		      Big_Files : in Boolean) is
-	-- Create an Output_Object for a document of Document type, with
-	-- the specified page size. Changes from the base standard are included
-	-- if Includes_Changes is True. Generate a few large output files if
+		      Big_Files : in Boolean;
+		      For_ISO : in Boolean := False;
+		      File_Prefix : in String;
+		      Header_Prefix : in String := "";
+		      Title : in String := "") is
+	-- Create an Output_Object for a document with the specified page
+	-- size. Changes from the base standard are included if
+	-- Includes_Changes is True. Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
+	-- The prefix of the output file names is File_Prefix - this
+	-- should be no more then 4 characters allowed in file names.
+	-- The title of the document is Title.
+	-- The header prefix appears in the header (if any) before the title,
+	-- separated by a dash.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Already valid object");
 	end if;
 	Output_Object.Is_Valid := True;
-	Output_Object.Document := Document;
-	-- We don't use the page size or changes flag.
+	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
+			        Source => File_Prefix);
+	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);
+	-- We don't use the page size, changes flag, for ISO flag, or
+	-- Header prefix.
 	Output_Object.Big_Files := Big_Files;
 	if Output_Object.Big_Files then
-	     case Output_Object.Document is
-		when ARM_Output.RM =>
-		    Start_HTML_File (Output_Object, "RM", "Ada Reference Manual", Clause => "");
-		when ARM_Output.RM_ISO =>
-		    Start_HTML_File (Output_Object, "RMI", "Ada Reference Manual", Clause => "");
-		when ARM_Output.AARM =>
-		    Start_HTML_File (Output_Object, "AARM", "Annotated Ada Reference Manual", Clause => "");
-	     end case;
+	    Start_HTML_File (Output_Object,
+			     Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right),
+			     Ada.Strings.Unbounded.To_String (Output_Object.Title),
+			     Clause => "");
 	    -- Insert an anchor for the title page:
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<A NAME=""TTL""></A>");
 	end if;
@@ -1130,17 +1096,9 @@ package body ARM_HTML is
 	-- create one.
     begin
 	if not Ada.Text_IO.Is_Open (Output_Object.Output_File) then
-	     case Output_Object.Document is
-		when ARM_Output.RM =>
-		    Start_HTML_File (Output_Object, "RM-" & Output_Object.Section_Name,
-				     "", Clause => "");
-		when ARM_Output.RM_ISO =>
-		    Start_HTML_File (Output_Object, "RMI-" & Output_Object.Section_Name,
-				     "", Clause => "");
-		when ARM_Output.AARM =>
-		    Start_HTML_File (Output_Object, "AA-" & Output_Object.Section_Name,
-				     "", Clause => "");
-	     end case;
+	    Start_HTML_File (Output_Object,
+		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	            "-" & Output_Object.Section_Name, "", Clause => "");
 	end if;
     end Check_Clause_File;
 
@@ -2440,14 +2398,9 @@ package body ARM_HTML is
 
 	    -- Special for table of contents:
 	    if Clause_Number = "" and then Header_Text = "Table of Contents" then
-	        case Output_Object.Document is
-	            when ARM_Output.RM =>
-	                Start_HTML_File (Output_Object, "RM-TOC", Header_Text, "");
-	            when ARM_Output.RM_ISO =>
-	                Start_HTML_File (Output_Object, "RMI-TOC", Header_Text, "");
-	            when ARM_Output.AARM =>
-	                Start_HTML_File (Output_Object, "AA-TOC", Header_Text, "");
-	        end case;
+                Start_HTML_File (Output_Object,
+		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+			"-TOC", Header_Text, "");
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
@@ -2510,6 +2463,7 @@ package body ARM_HTML is
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
+			     Version : in ARM_Output.Change_Version_Type;
 			     No_Page_Break : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
@@ -3454,6 +3408,7 @@ package body ARM_HTML is
 			   Font : in ARM_Output.Font_Family_Type;
 			   Size : in ARM_Output.Size_Type;
 			   Change : in ARM_Output.Change_Type;
+			   Version : in ARM_Output.Change_Version_Type := '0';
 			   Location : in ARM_Output.Location_Type) is
 	-- Change the text format so that Bold, Italics, the font family,
 	-- the text size, and the change state are as specified.
@@ -3474,6 +3429,7 @@ package body ARM_HTML is
 	end if;
 	-- We do these in this order so that the changes are stacked properly.
 	if Change /= Output_Object.Change then
+	    -- Note: Version is not used.
 	    case Output_Object.Change is
 		when ARM_Output.Insertion =>
 		    if HTML_Kind = HTML_4_Only then
@@ -3605,6 +3561,7 @@ package body ARM_HTML is
 	end if;
 
 	if Change /= Output_Object.Change then
+	    -- Note: Version is not used.
 	    case Change is
 		when ARM_Output.Insertion =>
 		    if HTML_Kind = HTML_4_Only then
@@ -3755,5 +3712,28 @@ package body ARM_HTML is
         Output_Text (Output_Object, "</A>");
     end DR_Reference;
 
+
+    procedure AI_Reference (Output_Object : in out HTML_Output_Type;
+			    Text : in String;
+			    AI_Number : in String) is
+	-- Generate a reference to an AI from the standard. The text
+	-- of the reference is "Text", and AI_Number denotes
+	-- the target (in folded format). For hyperlinked formats, this should
+	-- generate a link; for other formats, the text alone is generated.
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if not Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in paragraph");
+	end if;
+        Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-");
+        Output_Text (Output_Object, AI_Number);
+        Output_Text (Output_Object, ".TXT"">");
+        Ordinary_Text (Output_Object, Text);
+        Output_Text (Output_Object, "</A>");
+    end AI_Reference;
 
 end ARM_HTML;

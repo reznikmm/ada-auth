@@ -16,9 +16,9 @@ procedure ARM_Formatter is
     -- reference manual files (in various formats).
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2002 AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
-    -- E-Mail: rbrukardt@bix.com
+    -- E-Mail: randy@rrsoftware.com
     --
     -- AXE Consultants grants to all users the right to use/modify this
     -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
@@ -58,45 +58,57 @@ procedure ARM_Formatter is
     --  5/25/00 - RLB - Added the Big-Files option. Added the library separator.
     --  5/28/00 - RLB - Added index.
     --  8/31/00 - RLB - Added the New-Changes option.
+    --  7/18/02 - RLB - Changed copyright date.
+    --		- RLB - Changed Creates to include title and header.
+    --		- RLB - Added Version parameter to command line and formatting
+    --			commands.
 
     -- Standard commands:
     -- For Original RM:
-    --	   Arm_Form RM <Format> No-Changes Big_Files
+    --	   Arm_Form RM <Format> No-Changes 0 Big_Files
     -- For Original AARM:
-    --	   Arm_Form AARM <Format> No-Changes Show-Index-Entries
-    -- For New RM:
-    --	   Arm_Form RM <Format> New-Changes Big_Files
-    -- For New AARM:
+    --	   Arm_Form AARM <Format> No-Changes 0 Show-Index-Entries
+    -- For RM with Corr:
+    --	   Arm_Form RM <Format> New-Changes 1 Big_Files
+    -- For AARM with Corr:
     --     [HTML; RTF for display]:
-    --	      Arm_Form RM <Format> Show-Changes Show-Index-Entries
+    --	      Arm_Form RM <Format> Show-Changes 1 Show-Index-Entries
     --     [TXT; RTF for printing]:
-    --	      Arm_Form RM <Format> Changes-Only Show-Index-Entries
+    --	      Arm_Form RM <Format> New-Only 1 Show-Index-Entries
+    -- For RM with Corr and Amd:
+    --	   Arm_Form RM <Format> New-Changes 2 Big_Files
+    -- For AARM with Corr and Amd:
+    --     [HTML; RTF for display]:
+    --	      Arm_Form RM <Format> Changes-Only 2 Show-Index-Entries
+    --     [TXT; RTF for printing]:
+    --	      Arm_Form RM <Format> New-Only 2 Show-Index-Entries
 
 
     type Output_Format_Type is (HTML, RTF, Text, All_Formats);
     No_Command_Error : exception;
 
     Format : Output_Format_Type; -- Format to generate.
-    Document : ARM_Output.Document_Type; -- Document to generate.
+    Document : ARM_Format.Document_Type; -- Document to generate.
     Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
+    Change_Version : ARM_Output.Change_Version_Type; -- Change version.
     Display_Index_Entries : Boolean; -- Should Index entries be displayed?
     Use_Large_Files : Boolean; -- Use large output files.
 
     procedure Get_Commands is
 	-- Process the command line for this program.
     begin
-	if Ada.Command_Line.Argument_Count not in 1 .. 5 then
+	if Ada.Command_Line.Argument_Count not in 1 .. 6 then
 	    Ada.Text_IO.Put_Line ("** Wrong number of arguments");
 	    raise No_Command_Error;
 	end if;
-	if Ada.Command_Line.Argument_Count >= 4 then
+	if Ada.Command_Line.Argument_Count >= 5 then
 	    Display_Index_Entries := False;
 	    Use_Large_Files := False;
-	    if Ada.Command_Line.Argument_Count >= 5 then
+	    if Ada.Command_Line.Argument_Count >= 6 then
 	        declare
 		    Options_Arg : String :=
 		         Ada.Characters.Handling.To_Lower (
-			    Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(5),
+			    Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(6),
 			    Ada.Strings.Right));
 	        begin
 		    if Options_Arg = "show-index-entries" then
@@ -112,7 +124,7 @@ procedure ARM_Formatter is
 	    declare
 		Options_Arg : String :=
 		     Ada.Characters.Handling.To_Lower (
-			Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(4),
+			Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(5),
 			Ada.Strings.Right));
 	    begin
 		if Options_Arg = "show-index-entries" then
@@ -128,6 +140,24 @@ procedure ARM_Formatter is
 	    Display_Index_Entries := False;
 	    Use_Large_Files := False;
 	end if;
+	if Ada.Command_Line.Argument_Count >= 4 then
+	    declare
+		Version_Arg : String :=
+		     Ada.Characters.Handling.To_Lower (
+			Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(4),
+			Ada.Strings.Right));
+	    begin
+		if Version_Arg'Length = 1 and then
+		   Version_Arg(Version_Arg'First) in ARM_Output.Change_Version_Type then
+		    Change_Version := Version_Arg(Version_Arg'First);
+		else
+		    Ada.Text_IO.Put_Line ("** Unrecognized change version: " & Version_Arg);
+		    raise No_Command_Error;
+		end if;
+	    end;
+	else
+	    Change_Version := '0';
+	end if;
 	if Ada.Command_Line.Argument_Count >= 3 then
 	    declare
 		Changes_Arg : String :=
@@ -137,8 +167,10 @@ procedure ARM_Formatter is
 	    begin
 		if Changes_Arg = "no-changes" then
 		    Change_Kind := ARM_Format.Old_Only;
-		elsif Changes_Arg = "changes-only" then
+		elsif Changes_Arg = "new-only" then
 		    Change_Kind := ARM_Format.New_Only;
+		elsif Changes_Arg = "changes-only" then
+		    Change_Kind := ARM_Format.Changes_Only;
 		elsif Changes_Arg = "show-changes" then
 		    Change_Kind := ARM_Format.Show_Changes;
 		elsif Changes_Arg = "new-changes" then
@@ -181,11 +213,11 @@ procedure ARM_Formatter is
 		    Ada.Strings.Right));
         begin
 	    if Document_Arg = "aarm" then
-	        Document := ARM_Output.AARM;
+	        Document := ARM_Format.AARM;
 	    elsif Document_Arg = "rm" then
-	        Document := ARM_Output.RM;
+	        Document := ARM_Format.RM;
 	    elsif Document_Arg = "iso-rm" then
-	        Document := ARM_Output.RM_ISO;
+	        Document := ARM_Format.RM_ISO;
 	    else
 	        Ada.Text_IO.Put_Line ("** Unrecognized document: " & Document_Arg);
 	        raise No_Command_Error;
@@ -193,7 +225,7 @@ procedure ARM_Formatter is
         end;
     exception
 	when No_Command_Error =>
-	    Ada.Text_IO.Put_Line ("  Usage: Arm_Form <Document> [<Format>, [<Changes>, [<Options>]]]");
+	    Ada.Text_IO.Put_Line ("  Usage: Arm_Form <Document> [<Format>, [<Changes>, [<Version>, [<Options>]]]}");
 	    Ada.Text_IO.Put_Line ("     where: <Document> = 'RM' (reference manual),");
 	    Ada.Text_IO.Put_Line ("                         'ISO-RM' (reference manual for ISO),");
 	    Ada.Text_IO.Put_Line ("                         'AARM' (annotated reference manual);");
@@ -202,9 +234,14 @@ procedure ARM_Formatter is
 	    Ada.Text_IO.Put_Line ("                       'RTF' (RTF files for Word 97 or later),");
 	    Ada.Text_IO.Put_Line ("                       'All' (Files of all formats);");
 	    Ada.Text_IO.Put_Line ("     where: <Changes> = 'No-Changes' (RM text),");
-	    Ada.Text_IO.Put_Line ("                        'Changes-Only' (Revised RM text),");
-	    Ada.Text_IO.Put_Line ("                        'Show-Changes' (Text with changes marked),");
-	    Ada.Text_IO.Put_Line ("                        'New-Changes' (Text with insertions marked);");
+	    Ada.Text_IO.Put_Line ("                        'New-Only' (Revised RM text only for <Version>),");
+	    Ada.Text_IO.Put_Line ("                        'Changes-Only' (Text with changes marked for <Version> only),");
+	    Ada.Text_IO.Put_Line ("                        'Show-Changes' (Text with changes marked for <Version> and earlier),");
+	    Ada.Text_IO.Put_Line ("                        'New-Changes' (Text with insertions marked for <Version> and earlier);");
+	    Ada.Text_IO.Put_Line ("     where: <Version> = a value in 0 .. 9 representing the change version");
+	    Ada.Text_IO.Put_Line ("                        0-Original Ada 95 (equivalent to No-Changes)");
+	    Ada.Text_IO.Put_Line ("                        1-Technical Corrigendum 1");
+	    Ada.Text_IO.Put_Line ("                        2-Amendment 1");
 	    Ada.Text_IO.Put_Line ("     where: <Options> = 'Show-Index-Entries' (print in document);");
 	    Ada.Text_IO.Put_Line ("                        'Big-Files' (large output files).");
 	    raise No_Command_Error;
@@ -216,7 +253,8 @@ procedure ARM_Formatter is
 	-- table of contents.
 	Format : ARM_Format.Format_Type;
     begin
-	ARM_Format.Create (Format, Document, Change_Kind, Display_Index_Entries);
+	ARM_Format.Create (Format, Document, Change_Kind, Change_Version,
+		Display_Index_Entries);
 
 	ARM_Contents.Initialize; -- Make sure that the contents DB is empty.
 
@@ -349,21 +387,22 @@ procedure ARM_Formatter is
 	-- Generate a document into Output_Object.
 	Format : ARM_Format.Format_Type;
     begin
-	ARM_Format.Create (Format, Document, Change_Kind, Display_Index_Entries);
+	ARM_Format.Create (Format, Document, Change_Kind, Change_Version,
+		Display_Index_Entries);
 
 	-- This subprogram stands in for Ada.MSS in the original Scribe
 	-- sources (which we don't use).
 
-	-- For the RTF output, we'll use a master document to create the entire
-	-- thing in the order documented here.
+	-- For the RTF output, we had better use the big-files option, so
+	-- we get one large file.
 
 	ARM_Format.Process (Format, "Title.MSS", Output_Object,
 	    Section_Name => "Ttl", Section_Number => 0,
 	    Starts_New_Section => True);
 
 	-- The table of contents goes here in the collating order for the
-	-- final document. However, for Word, we hope to let Word generate
-	-- it (this would let us use page number references in the ToC).
+	-- final document. However, for Word, we let Word generate
+	-- it (this lets us use page number references in the ToC).
 	ARM_Format.Write_Table_of_Contents (Format, Output_Object);
 
 	ARM_Format.Process (Format, "Front_matter.MSS", Output_Object,
@@ -512,16 +551,115 @@ procedure ARM_Formatter is
     end Generate;
 
 
+    procedure Create (Output_Object : in out ARM_Output.Output_Type'Class) is
+	-- Create an Output_Object for the current parameters.
+    begin
+	case Document is
+	    when ARM_Format.AARM =>
+		if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
+		   Change_Version = '0' then
+		    ARM_Output.Create (Output_Object,
+				       Page_Size => ARM_Output.Letter,
+				       Includes_Changes => False,
+				       Big_Files => Use_Large_Files,
+				       For_ISO => False,
+				       File_Prefix => "AA",
+				       Title => "Annotated Ada Reference Manual",
+				       Header_Prefix => "ISO/IEC 8652:1995(E)");
+		elsif Change_Version = '1' then
+		    ARM_Output.Create (Output_Object,
+				       Page_Size => ARM_Output.Letter,
+				       Includes_Changes => True,
+				       Big_Files => Use_Large_Files,
+				       For_ISO => False,
+				       File_Prefix => "AA",
+				       Title => "Annotated Ada Reference Manual",
+				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001");
+		else
+		    ARM_Output.Create (Output_Object,
+				       Page_Size => ARM_Output.Letter,
+				       Includes_Changes => True,
+				       Big_Files => Use_Large_Files,
+				       For_ISO => False,
+				       File_Prefix => "AA",
+				       Title => "Annotated Ada Reference Manual",
+				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001 and AMD.1:Draft");
+		end if;
+	    when ARM_Format.RM =>
+		if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
+		   Change_Version = '0' then
+		    ARM_Output.Create (Output_Object,
+				       Page_Size => ARM_Output.Ada95,
+				       Includes_Changes => False,
+				       Big_Files => Use_Large_Files,
+				       For_ISO => False,
+				       File_Prefix => "RM",
+				       Title => "Ada Reference Manual",
+				       Header_Prefix => "ISO/IEC 8652:1995(E)");
+		elsif Change_Version = '1' then
+		    ARM_Output.Create (Output_Object,
+				       Page_Size => ARM_Output.Ada95,
+				       Includes_Changes => True,
+				       Big_Files => Use_Large_Files,
+				       For_ISO => False,
+				       File_Prefix => "RM",
+				       Title => "Ada Reference Manual",
+				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001");
+		else
+		    ARM_Output.Create (Output_Object,
+				       Page_Size => ARM_Output.Ada95,
+				       Includes_Changes => True,
+				       Big_Files => Use_Large_Files,
+				       For_ISO => False,
+				       File_Prefix => "RM",
+				       Title => "Ada Reference Manual",
+				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001 and AMD.1:Draft");
+		end if;
+	    when ARM_Format.RM_ISO =>
+		if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
+		   Change_Version = '0' then
+		    ARM_Output.Create (Output_Object,
+				       Page_Size => ARM_Output.A4,
+				       Includes_Changes => False,
+				       Big_Files => Use_Large_Files,
+				       For_ISO => False,
+				       File_Prefix => "RM",
+				       Title => "Ada Reference Manual",
+				       Header_Prefix => "ISO/IEC 8652:1995(E)");
+		elsif Change_Version = '1' then
+		    ARM_Output.Create (Output_Object,
+				       Page_Size => ARM_Output.A4,
+				       Includes_Changes => True,
+				       Big_Files => Use_Large_Files,
+				       For_ISO => False,
+				       File_Prefix => "RM",
+				       Title => "Ada Reference Manual",
+				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001");
+		else
+		    ARM_Output.Create (Output_Object,
+				       Page_Size => ARM_Output.A4,
+				       Includes_Changes => True,
+				       Big_Files => Use_Large_Files,
+				       For_ISO => False,
+				       File_Prefix => "RM",
+				       Title => "Ada Reference Manual",
+				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001 and AMD.1:Draft");
+		end if;
+	end case;
+    end Create;
+
+
 begin
-    Ada.Text_IO.Put_Line ("ARM 95 formatter");
-    Ada.Text_IO.Put_Line ("  Copyright 2000, AXE Consultants");
+    Ada.Text_IO.Put_Line ("ARM 95/0Y formatter");
+    Ada.Text_IO.Put_Line ("  Copyright 2000, 2002  AXE Consultants");
     Ada.Text_IO.Put_Line ("  P.O. Box 1512, Madison WI  53701");
 
     Get_Commands;
 
-Ada.Text_IO.Put_Line ("  Document = " & ARM_Output.Document_Type'Image(Document));
+Ada.Text_IO.Put_Line ("  Document = " & ARM_Format.Document_Type'Image(Document));
 Ada.Text_IO.Put_Line ("  Format = " & Output_Format_Type'Image(Format));
 Ada.Text_IO.Put_Line ("  Changes = " & ARM_Format.Change_Kind'Image(Change_Kind));
+Ada.Text_IO.Put_Line ("  Version = " & Change_Version);
 Ada.Text_IO.Put_Line ("  Display Index Entries = " & Boolean'Image(Display_Index_Entries));
 
     Scan;
@@ -531,10 +669,7 @@ Ada.Text_IO.Put_Line ("  Display Index Entries = " & Boolean'Image(Display_Index
 	    declare
 		Output : ARM_HTML.HTML_Output_Type;
 	    begin
-		ARM_HTML.Create (Output, Document => Document,
-				 Page_Size => ARM_Output.Letter, -- Not really used.
-				 Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-				 Big_Files => Use_Large_Files);
+		Create (Output);
 		Generate (Output);
 		ARM_HTML.Close (Output);
 	    end;
@@ -542,23 +677,7 @@ Ada.Text_IO.Put_Line ("  Display Index Entries = " & Boolean'Image(Display_Index
 	    declare
 		Output : ARM_RTF.RTF_Output_Type;
 	    begin
-		case Document is
-		    when ARM_Output.AARM =>
-			ARM_RTF.Create (Output, Document => ARM_Output.AARM,
-					Page_Size => ARM_Output.Letter,
-					Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-					Big_Files => Use_Large_Files);
-		    when ARM_Output.RM =>
-			ARM_RTF.Create (Output, Document => ARM_Output.RM,
-					Page_Size => ARM_Output.Ada95,
-					Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-					Big_Files => Use_Large_Files);
-		    when ARM_Output.RM_ISO =>
-			ARM_RTF.Create (Output, Document => ARM_Output.RM_ISO,
-					Page_Size => ARM_Output.A4,
-					Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-					Big_Files => Use_Large_Files);
-		end case;
+		Create (Output);
 		Generate (Output);
 		ARM_RTF.Close (Output);
 	    end;
@@ -566,10 +685,7 @@ Ada.Text_IO.Put_Line ("  Display Index Entries = " & Boolean'Image(Display_Index
 	    declare
 		Output : ARM_Text.Text_Output_Type;
 	    begin
-		ARM_Text.Create (Output, Document => Document,
-				 Page_Size => ARM_Output.Letter, -- Not really used.
-				 Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-				 Big_Files => Use_Large_Files);
+		Create (Output);
 		Generate (Output);
 		ARM_Text.Close (Output);
 	    end;
@@ -579,42 +695,20 @@ Ada.Text_IO.Put_Line ("  Display Index Entries = " & Boolean'Image(Display_Index
 		ROutput : ARM_RTF.RTF_Output_Type;
 		HOutput : ARM_HTML.HTML_Output_Type;
 	    begin
-		ARM_Text.Create (TOutput, Document => Document,
-				 Page_Size => ARM_Output.Letter, -- Not really used.
-				 Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-				 Big_Files => Use_Large_Files);
+		Create (TOutput);
 		Generate (TOutput);
 		ARM_Text.Close (TOutput);
-		case Document is
-		    when ARM_Output.AARM =>
-			ARM_RTF.Create (ROutput, Document => ARM_Output.AARM,
-					Page_Size => ARM_Output.Letter,
-					Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-					Big_Files => Use_Large_Files);
-		    when ARM_Output.RM =>
-			ARM_RTF.Create (ROutput, Document => ARM_Output.RM,
-					Page_Size => ARM_Output.Ada95,
-					Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-					Big_Files => Use_Large_Files);
-		    when ARM_Output.RM_ISO =>
-			ARM_RTF.Create (ROutput, Document => ARM_Output.RM_ISO,
-					Page_Size => ARM_Output.A4,
-					Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-					Big_Files => Use_Large_Files);
-		end case;
+		Create (ROutput);
 		Generate (ROutput);
 		ARM_RTF.Close (ROutput);
-		ARM_HTML.Create (HOutput, Document => Document,
-				 Page_Size => ARM_Output.Letter, -- Not really used.
-				 Includes_Changes => ARM_Format."/=" (Change_Kind, ARM_Format.Old_Only),
-				 Big_Files => Use_Large_Files);
+		Create (HOutput);
 		Generate (HOutput);
 		ARM_HTML.Close (HOutput);
 	    end;
 
     end case;
 
-    Ada.Text_IO.Put_Line ("ARM 95 document created");
+    Ada.Text_IO.Put_Line ("ARM 95/0Y document created");
 exception
     when No_Command_Error =>
 	null; -- Error message displayed by command line processor.
