@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/03/22 05:53:17 $}
+@Comment{$Date: 2005/03/25 07:16:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @LabeledClause{The Package System}
 
@@ -1332,8 +1332,10 @@ For the same reason, @lquotes@;specified@rquotes@; means the same thing as
 @ChildUnit{Parent=[System],Child=[Storage_Pools]}@key[package] System.Storage_Pools @key[is]
     @key{pragma} Preelaborate(System.Storage_Pools);
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
     @key[type] @AdaTypeDefn{Root_Storage_Pool} @key[is]
-        @key[abstract] @key[new] Ada.Finalization.Limited_Controlled @key[with] @key[private];
+        @key[abstract] @key[new] Ada.Finalization.Limited_Controlled @key[with] @key[private];@Chg{Version=[2],New=[
+    @key[pragma] Preelaborable_Initialization(Root_Storage_Pool);],Old=[]}
 
     @key[procedure] @AdaSubDefn{Allocate}(
       Pool : @key[in] @key[out] Root_Storage_Pool;
@@ -1477,11 +1479,12 @@ Storage_Pool is not specified for the type.]}]}
 @ImplDef{Whether or not the implementation
 provides user-accessible names for the standard pool type(s).}
 @begin{Ramification}
-An anonymous access type has no pool.
-An access-to-object type defined by a @nt{derived_type_definition}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+@ChgNote{This was never true.}@Chg{Version=[2],New=[],Old=[An anonymous access
+type has no pool. ]}An access-to-object type defined by a
+@nt{derived_type_definition}
 inherits its pool from its parent type, so
-all access-to-object types in the same derivation class share the
-same pool.
+all access-to-object types in the same derivation class share the same pool.
 Hence the @lquotes@;defined by an @nt{access_to_object_definition}@rquotes@; wording
 above.
 
@@ -1504,7 +1507,7 @@ If neither Storage_Pool nor Storage_Size are specified,
 then the meaning of Storage_Size is implementation defined.
 @ChgImplDef{Version=[2],Kind=[Revised],Text=[The meaning of
 Storage_Size@Chg{Version=[2], New=[ when neither the
-Storage_Size nor. the Storage_Pool is specified],Old=[]}.]}
+Storage_Size nor the Storage_Pool is specified for an access type],Old=[]}.]}
 @begin{Ramification}
 The Storage_Size function and attribute will return the actual
 size, rather than the requested size.
@@ -1632,16 +1635,41 @@ succeed, and there is no particular number of allocations that is
 guaranteed to fail.
 @end{Ramification}
 
-A storage pool for an anonymous access type should be created
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+@ChgNote{Use ChgAdded to get conditional Leading}@ChgAdded{Version=[2],
+Type=[Leading],Text=[]}@Chg{Version=[2],New=[The],Old=[A]}
+storage pool @Chg{Version=[2],New=[used ],Old=[]}for
+@Chg{Version=[2],New=[an @nt{allocator} of ],Old=[]}an
+anonymous access type should be
+@Chg{Version=[2],New=[determined as follows:],Old=[created
 at the point of an allocator for the type, and be reclaimed when
-the designated object becomes inaccessible.
+the designated object becomes inaccessible.]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgAdded{Version=[2],Text=[If the @nt{allocator} is initializing an access
+discriminant of an object of a limited type, and the discriminant is itself
+a subcomponent of an object being created by an outer @nt{allocator}, then
+the storage pool used for the outer @nt{allocator} should also be used for
+the @nt{allocator} initializing the access discriminant;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgAdded{Version=[2],Text=[Otherwise, the storage pool should be created at
+the point of the @nt{allocator}, and be reclaimed when the allocated object
+becomes inaccessible.]}
+@end{Itemize}
+
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[A storage pool for an anonymous access type should be created
-at the point of an allocator for the type, and be reclaimed when
-the designated object becomes inaccessible. *** Changed]}]}
+Text=[Usually, a storage pool for an anonymous access type should be created
+at the point of an @nt{allocator} for the type, and be reclaimed when
+the designated object becomes inaccessible.]}]}
+
 @begin{ImplNote}
-  Normally the "storage pool" for an anonymous access type
-  would not exist as a separate entity.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+  @Chg{Version=[2],New=[For access parameters and access discriminants,],
+  Old=[Normally]} the "storage pool" for an anonymous access type
+  would not @Chg{Version=[2],New=[normally ],Old=[]}exist as a separate
+  entity.
   Instead, the designated object of the allocator
   would be allocated, in the case of an access parameter,
   as a local aliased variable at the call site, and in the
@@ -1649,6 +1677,18 @@ the designated object becomes inaccessible. *** Changed]}]}
   containing the discriminant.
   This is similar to the way storage for @nt{aggregate}s is typically
   managed.
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[For other sorts of anonymous access types, this
+  implementation is not possible in general, as the accessibility of the
+  anonymous access type is that of its declaration, while the @nt{allocator}
+  could be more nested. In this case, a "real" storage pool is required.
+  Note, however, that this storage pool need not support (separate)
+  deallocation, as it is not possible to instantiate Unchecked_Deallocation
+  with an anonymous access type. (If deallocation is needed, the object should
+  be allocated for a named access type and converted.) Thus, deallocation only
+  need happen when the anonymous access type itself goes out of scope;
+  this is similar to the case of an access-to-constant type.]}
 @end{ImplNote}
 @end{ImplAdvice}
 
@@ -1789,10 +1829,25 @@ RM83 states the erroneousness of reading or updating deallocated
 objects incorrectly by missing various cases.
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Added @nt{pragma} Preelaborable_Initialization to
+  type Root_Storage_Pool, so that extensions of it can be used to declare
+  default-initialized objects in preelaborated units.]}
+@end{Extend95}
+
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
   these are representation attributes.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to clarify that an @nt{allocator}
+  for an access discriminant nested inside an outer @nt{allocator} shares
+  the pool with the outer @nt{allocator}. (Why this is a good idea is unclear
+  to this writer.)]}
 @end{DiffWord95}
 
 
@@ -1808,9 +1863,12 @@ types.]
 @Leading@;For @PrefixType{every subtype S},
 the following attribute is defined:
 @begin{Description}
-@Attribute{Prefix=<S>, AttrName=<Max_Size_In_Storage_Elements>,
+@ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<Max_Size_In_Storage_Elements>,
+  ARef=[AI95-00256-01],
   Text=<Denotes the maximum value for Size_In_Storage_Elements
-that will be requested via Allocate for an access type whose
+that @Chg{Version=[2],New=[could],Old=[will]} be requested @Chg{Version=[2],
+New=[by the implementation ],Old=[]}via Allocate for an access type whose
 designated subtype is S.
 The value of this attribute is of type @i{universal_integer}.>}
 @EndPrefixType{}
@@ -1821,6 +1879,15 @@ S'Max_Size_In_Storage_Elements might be very large.
 @end{Ramification}
 @end{Description}
 @end{StaticSem}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
+  @ChgAdded{Version=[2],Text=[Corrected the wording so that an
+  fortune-telling compiler that can see the future execution of the
+  program is not required.]}
+@end{DiffWord95}
+
+
 
 @LabeledSubClause{Unchecked Storage Deallocation}
 
@@ -1959,6 +2026,22 @@ This is not a testable property,
 since we do not how much storage is used by a given pool element,
 nor whether fragmentation can occur.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00162-01]}
+@ChgAdded{Version=[2],Text=[If the object being reclaimed has an access
+discriminant which designates an object which was created by an @nt{allocator}
+of the (anonymous) type of the access discriminant, then the designated object
+should also be reclaimed.]}
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[If an object being reclaimed by an instance of Unchecked_Deallocation
+has an access discriminant which designates an object which was created by an
+@nt{allocator} of the access discriminant, then the designated object should
+also be reclaimed.]}]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[The storage pool for access discriminant should
+have been the same as that of the reclaimed object.]}
+@end{Discussion}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -1969,6 +2052,14 @@ Unchecked_Deallocation cannot be instantiated for an
 access-to-constant type.
 This is implied by the rules of @RefSecNum{Formal Access Types}.
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
+  @ChgAdded{Version=[2],Text=[Added @ImplAdviceTitle that any anonymous
+  access discriminant objects that were allocated at the same time as a
+  deallocated object also are deallocated.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Pragma Controlled}
 

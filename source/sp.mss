@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2005/03/22 05:53:18 $ $Author: Randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2005/03/25 07:16:01 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/03/22 05:53:18 $}
+@Comment{$Date: 2005/03/25 07:16:01 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1552,7 +1552,7 @@ Task_Id value that identifies the environment task.
      @key{return} Attribute_Handle;
 
    @key{procedure} @AdaSubDefn{Set_Value}(Val : @key[in] Attribute;
-                             T : @key[in] Task_Id := Current_Task);
+                       T : @key[in] Task_Id := Current_Task);
    @key{procedure} @AdaSubDefn{Reinitialize}(T : @key[in] Task_Id := Current_Task);
 
 @key{end} Ada.Task_Attributes;

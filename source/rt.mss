@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2005/03/24 06:43:11 $ $Author: Randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2005/03/25 07:16:01 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/24 06:43:11 $}
+@Comment{$Date: 2005/03/25 07:16:01 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -3867,10 +3867,9 @@ language-defined library exists:]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
-@ChgAdded{Version=[2],Text=[This clause introduces a language-defined
-child package of Ada.Real_Time to allow user-defined protected procedures
-to be executed at a specified time without the need to use a task or a
-delay statement.]}
+@ChgAdded{Version=[2],Text=[This clause describes a language-defined package to
+allow user-defined protected procedures to be executed at a specified time
+without the need for a task or a delay statement.]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -3882,41 +3881,171 @@ language-defined library exists:]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Real_Time.Timing_Events @key{is}@ChildUnit{Parent=[Ada.Real_Time],Child=[Timing_Events]}
   @key{type} @AdaTypeDefn{Timing_Event} @key{is limited private};
   @key{type} @AdaTypeDefn{Timing_Event_Handler}
-       @key{is access protected procedure}(Event : @key{in out} Timing_Event);
-  @key{procedure} @AdaSubDefn{Set_Handler}(Event : @key{in out} Timing_Event;
-            At_Time : @key{in} Time; Handler: @key{in} Timing_Event_Handler);
-  @key{procedure} @AdaSubDefn{Set_Handler}(Event : @key{in out} Timing_Event;
-            In_Time: @key{in} Time_Span; Handler: @key{in} Timing_Event_Handler);
-  @key{function} @AdaSubDefn{Current_Handler}(Event : Timing_Event)
-           @key{return} Timing_Event_Handler;
-  @key{procedure} @AdaSubDefn{Cancel_Handler}(Event : @key{in out} Timing_Event;
-            Cancelled : @key{out} Boolean);
-  @key{function} @AdaSubDefn{Time_Of_Event}(Event : Timing_Event) @key{return} Time;
+       @key{is access protected procedure} (Event : @key{in out} Timing_Event);
+  @key{procedure} @AdaSubDefn{Set_Handler} (Event    : @key{in out} Timing_Event;
+                         At_Time : @key{in} Time;
+                         Handler : @key{in} Timing_Event_Handler);
+  @key{procedure} @AdaSubDefn{Set_Handler} (Event    : @key{in out} Timing_Event;
+                         In_Time : @key{in} Time_Span;
+                         Handler : @key{in} Timing_Event_Handler);
+  @key{function} @AdaSubDefn{Current_Handler} (Event : Timing_Event)
+       @key{return} Timing_Event_Handler;
+  @key{procedure} @AdaSubDefn{Cancel_Handler} (Event     : @key{in out} Timing_Event;
+             Cancelled : @key{out} Boolean);
+  @key{function} @AdaSubDefn{Time_Of_Event} (Event : Timing_Event) @key{return} Time;
 @key{private}
   ... -- @RI[not specified by the language]
 @key{end} Ada.Real_Time.Timing_Events;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
-@ChgAdded{Version=[2],Text=[The type Timing_Event represents a time in the
-future when an event is to occur. The type Timing_Event needs finalization (see
+@ChgAdded{Version=[2],Text=[The type Timing_Event represents a time in the future
+when an event is to occur. The type Timing_Event needs finalization (see
 @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[An object of type Timing_Event is said to be
-@i<set> if it is associated with a (non-null) Timing_Event_Handler and
+@i<set> if it is associated with a non-null Timing_Event_Handler and
 @i<cleared> otherwise. All Timing_Event objects are initially cleared.
-The Timing_Event_Handler identifies a protected procedure to be executed by the
-implementation when the timing event occurs.
 @PDefn{Term=[set],Sec=[timing event object]}
 @PDefn{Term=[clear],Sec=[timing event object]}]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[The type Timing_Event_Handler identifies a
+protected procedure to be executed by the implementation when the timing event
+occurs. Such a protected procedure is called a @i{handler}.
+@PDefn{Term=[handler],Sec=[timing event]}]}
+
 @end{StaticSem}
 
+@begin{Runtime}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[The procedures Set_Handler associate the handler
+Handler with the event Event; if Handler is @key{null}, the event is cleared,
+otherwise it is set. The first procedure Set_Handler sets the execution time
+for the event to be At_Time. The second  procedure Set_Handler sets the
+execution time for the event to be Ada.Real_Time.Clock + In_Time.]}
 
-**** The rest of this clause has yet to be inserted ****
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[A call of a procedure Set_Handler for an event that
+is already set replaces the handler and the time of execution; if Handler is
+not @key{null}, the event remains set.]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[As soon as possible after the time set for the
+event, the handler is executed, passing the event as parameter. The handler is
+only executed if the timing event is in the set state at the time of execution.
+The initial action of the execution of the handler is to clear the event.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The second sentence of this paragraph is because
+  of a potential race condition. The time might expire and yet before the
+  handler is executed, some task could call Cancel_Handler (or equivalently
+  call Set_Handler with a @key{null} parameter) and thus clear the handler.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[If the Ceiling_Locking policy (see
+@RefSecNum{Priority Ceiling Locking}) is in effect when a procedure
+Set_Handler is called, a check is made that the ceiling priority of
+Handler.@key{all} is Interrupt_Priority'Last. If the check fails, Program_Error
+is raised.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[If a procedure Set_Handler is called with zero or
+negative In_Time or with At_Time indicating a time in the past then the handler
+is executed immediately by the task executing the call of Set_Handler. The
+timing event Event is cleared.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[The function Current_Handler returns the handler
+associated with the event Event if that event is set; otherwise it returns
+@key{null}.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[The procedure Cancel_Handler clears the event if it
+is set. Cancelled is assigned True if the event was set prior to it being
+cleared; otherwise it is assigned False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[The function Time_Of_Event returns the time of the
+event if the event is set; otherwise it returns Ada.Real_Time.Time_First.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[As the final step of the finalization of an object
+of type Timing_Event, the Timing_Event is cleared.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[If several timing events are set for the same time,
+they are executed in FIFO order of being set.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[An exception propagated from a handler invoked by a
+timing event has no effect.]}
+
+@end{Runtime}
+
+@begin{ImplReq}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[For a given Timing_Event object, the implementation
+shall perform the operations declared in this package atomically with respect
+to any of these operations on the same Timing_Event object. The replacement of
+a handler by a call of Set_Handler shall be performed atomically with respect
+to the execution of the handler.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This prevents various race conditions. In
+  particular it ensures that if an event occurs when Set_Handler is changing
+  the handler then either the new or old handler is executed in response to the
+  appropriate event. It is never possible for a new handler to be executed in
+  response to an old event.]}
+@end{Reason}
+@end{ImplReq}
+
+@begin{Metrics}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The implementation shall document
+the following metric:]}
+@begin{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[An upper bound on the lateness of the execution of
+a handler. That is, the maximum time between when a handler is actually
+executed and the time specified when the event was set.]}
+
+@end{Itemize}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The metrics for timing events shall be documented.]}]}
+@end{Metrics}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[The protected handler procedure should be executed
+directly by the real-time clock interrupt mechanism.]}
+
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[For a timing event, the handler should be executed directly by the
+real-time clock interrupt mechanism.]}]}
+
+@end{ImplAdvice}
+
+@begin{Notes}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[Since a call of Set_Handler is not a blocking
+operation, it can be called from within a handler.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[Timing_Event_Handler can be associated with several
+Timing_Event objects.]}
+
+@end{Notes}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
