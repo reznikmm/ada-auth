@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/11/05 05:47:49 $}
+@Comment{$Date: 2004/11/06 05:34:28 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1186,6 +1186,41 @@ This is necessary so that controlled types
 will work (see @RefSecNum{User-Defined Assignment and Finalization}).
 @end{DiffWord83}
 
+@begin{Incompatible95}
+@Leading@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+In Ada 95, a limited type is not considered when resolving an @nt{aggregate}.
+Since Ada 2005 now allows limited @nt{aggregate}s, we can have
+incompatibilities. For example:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{type} Lim @key{is} @key{limited}
+   @key{record}
+      Comp: Integer;
+   @key{end} @key{record};],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{type} Not_Lim @key{is}
+   @key{record}
+      Comp: Integer;
+   @key{end} @key{record};],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{procedure} P(X: Lim);
+@key{procedure} P(X: Not_Lim);],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[P((Comp => 123));],Old=[]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The call to P is ambiguous in Ada 2005, while it would
+not be ambiguous in Ada 95 as the @nt{aggregate} could not have a limited type.
+Qualifying the @nt{aggregate} will eliminate any ambiguity. This construction
+would be rather confusing to a maintenance programmer, so it should be
+avoided, and thus we expect it to be rare.],Old=[]}
+@end{Incompatible95}
+
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}@nt{Aggregate}s can be of a
@@ -1448,7 +1483,7 @@ compatibility check in Ada 83.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
 @Chg{Version=[2],New=[For a @nt<record_component_association> with an
 @nt<expression>, the @nt<expression> defines the value for the associated
-component(s). For a @nt<record_component_association> with a <>, if the
+component(s). For a @nt<record_component_association> with <>, if the
 @nt<component_declaration> has a @nt<default_expression>, that
 @nt<default_expression> defines the value for the associated component(s);
 otherwise, the associated component(s) are initialized by default as for a
@@ -5241,7 +5276,7 @@ case.],Old=[]}
 @Chg{Version=[2],New=[Added accessibility checks to class-wide @nt{allocator}s.
 These checks could not fail in Ada 95 (as all of the types had to be declared
 at the same level, so the access type would necessarily have been at the
-same level or more nested.],Old=[]}
+same level or more nested than the type of allocated object.],Old=[]}
 @end{DiffWord95}
 
 

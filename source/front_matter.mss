@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.31 $ $Date: 2004/10/29 04:22:49 $}
+@comment{$Revision: 1.32 $ $Date: 2004/11/06 05:34:31 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -670,7 +670,7 @@ execution-time clocks (see @RefSecNum{D.14}), timing events (see
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[Interfaces, to provide a limited form of multiple
-inheritance of operations (see @RefSecNum{3.9.4}); and],Old=[]}
+inheritance of operations (see @RefSecNum{Interface Types}); and],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[A mechanism for writing C unions to make interfaces with

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:43 $}
+@Comment{$Date: 2004/11/06 05:34:30 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -383,9 +383,11 @@ and those will presumably be implemented in terms of dispatching).
 @Syn{lhs=<private_type_declaration>,rhs="
    @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}] @key{is} [[@key{abstract}] @key{tagged}] [@key{limited}] @key{private};"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Syn{lhs=<private_extension_declaration>,rhs="
    @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}] @key{is}
-     [@key{abstract}] @key{new} @SynI(ancestor_)@Syn2{subtype_indication} @key{with private};"}
+     [@key{abstract}] @key{new} @SynI(ancestor_)@Syn2{subtype_indication}@Chg{Version=[2],New=<
+     [@key{and} @Syn2[interface_list]]>,Old=<>} @key{with private};"}
 @end{Syntax}
 
 @begin{Legality}
@@ -895,6 +897,13 @@ and the rule that the parent type of a derived type declaration shall be
 completely defined, unless the derived type is a private extension.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[Added @nt{interface_list} to private extensions to
+support interfaces and multiple inheritance
+(see @RefSecNum{Interface Types}).],Old=[]}
+@end{DiffWord95}
+
 @LabeledSubClause{Private Operations}
 
 @begin{Intro}
@@ -1329,9 +1338,11 @@ corresponding full declaration:
   and has no full constant declaration.]
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 The completion of a deferred constant declaration shall occur
 before the constant is frozen
-(see @RefSecNum{Deferred Constants}).
+(see @Chg{Version=[2],New=[@RefSecNum{Freezing Rules}],
+Old=[@RefSecNum{Deferred Constants}]}).
 
 
 @end{Legality}
@@ -1430,14 +1441,17 @@ Deferred constant declarations used to have their own syntax, but now
 they are simply a special case of @nt<object_declaration>s.
 @end{DiffWord83}
 
+
 @LabeledClause{Limited Types}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @redundant[@ToGlossaryAlso{Term=<Limited type>,
   Text=<A limited type is (a view of) a type for which
-  the assignment operation is not allowed.
-  A nonlimited type is a (view of a) type for which the assignment
-  operation is allowed.>}]
+  @Chg{Version=[2],New=[copying (such as for an @nt{assignment_statement})],
+    Old=[the assignment operation]} is not allowed.
+  A nonlimited type is a (view of a) type for which
+  @Chg{Version=[2],New=[copying], Old=[the assignment operation]} is allowed.>}]
 @begin{Discussion}
 The concept of the @i(value) of a limited type is difficult
 to define, since the abstract value of a limited type often
@@ -1454,14 +1468,63 @@ In Ada 95, most limited types are passed by reference,
 and even return-ed by reference.
 @end{Discussion}
 @begin{Honest}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 For a limited partial view whose full view is nonlimited,
-assignment is possible on parameter passing and function return.
-To prevent any copying whatsoever, one should make both the partial
-@i{and} full views limited.
+@Chg{Version=[2],New=[copying],Old=[assignment]} is possible on parameter
+passing and function return. To prevent any copying whatsoever, one should
+make both the partial @i{and} full views limited.
 @end{Honest}
 @end{Intro}
 
 @begin{Legality}
+
+@Leading@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=[In the following contexts, an @nt{expression} of a limited
+type is not permitted unless it is an @nt{aggregate}, a @nt{function_call},
+or a parenthesized @nt{expression} or @nt{qualified_expression} whose operand
+is permitted by this rule:],Old=[]}
+@begin{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the initialization @nt{expression} of an
+@nt{object_declaration} (see @RefSecNum{Object Declarations})],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the @nt{default_expression} of a
+@nt{component_declaration} (see @RefSecNum{Record Types})],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the @nt{expression} of a @nt{record_component_association} (see @RefSecNum{Record Aggregates})],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the @nt{expression} for an @nt{ancestor_part} of an
+@nt{extension_aggregate} (see @RefSecNum{Extension Aggregates})],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[an @nt{expression} of a @nt{positional_array_aggregate}
+or the @nt{expression} of an @nt{array_component_association} (see
+@RefSecNum{Array Aggregates})],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the @nt{qualified_expression} of an initialized allocator
+(see @RefSecNum{Allocators})],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the @nt{expression} of a @nt{return_statement} (see
+@RefSecNum{Return Statements})],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the @nt{default_expression} or actual parameter for a
+formal object of mode @b{in} (see @RefSecNum{Formal Objects})],Old=[]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[All of these contexts normally require copying; by
+restricting the uses as above, we can require the new object to be
+built-in-place.],Old=[]}
+@end{Discussion}
+@end{Itemize}
+
 If a tagged record type has any limited components,
 then the reserved word @key[limited] shall
 appear in its @nt<record_type_definition>.
@@ -1517,29 +1580,68 @@ Otherwise, the type is nonlimited.
 a limited type.]
 @end{StaticSem}
 
+@begin{ImplReq}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=[
+For an @nt{aggregate} of a limited type used to initialize an object as allowed
+above, the implementation shall not create a separate anonymous object for the
+@nt{aggregate}. For a @nt{function_call} of a type with a part that is of a
+task, protected, or limited record type that is used to initialize an object as
+allowed above, the implementation shall not create a separate return object
+(see 6.5) for the @nt{function_call}. The @nt{aggregate} or @nt{function_call}
+shall be constructed directly in the new object.],Old=[]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[For a @nt{function_call}, we only require
+@i{build-in-place}@Defn{build-in-place} for a limited type that would have
+been a return-by-reference type in Ada 95. We do this because
+@Chg{Version=[2],New=[],Old=[Tucker said so ]}we want to mimimize disruption
+to Ada 95 implementations and users.],Old=[]}
+@end{Discussion}
+@end{ImplReq}
+
 @begin{Notes}
-@leading@keepnext@;The following are consequences of the rules for limited types:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=[While it is allowed to write initializations of limited
+objects, such initializations never copy a limited object. The source of such an
+assignment operation must be an @nt<aggregate> or @nt<function_call>, and such
+@nt<aggregate>s and @nt<function_call>s must be built directly in the target
+object.],
+Old=[@leading@keepnext@;The following are consequences of the rules for limited types:]}
+@begin{Honest}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This isn't quite true if the type can become nonlimited
+(see below); @nt{function_call}s only are required to be build-in-place for
+@lquotes@;really@rquotes@; limited types.],Old=[]}
+@end{Honest}
+
 @begin{Itemize}
-An initialization expression is not allowed in an
-@nt{object_declaration} if the type of the object is limited.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[],Old=[An initialization expression is not allowed in an
+@nt{object_declaration} if the type of the object is limited.]}
 
-A default expression is not allowed in a @nt{component_declaration} if
-the type of the record component is limited.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[],Old=[A default expression is not allowed in a
+@nt{component_declaration} if the type of the record component is limited.]}
 
-An initialized allocator is not allowed if the designated type is
-limited.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[],Old=[An initialized allocator is not allowed if the
+designated type is limited.]}
 
-A generic formal parameter of mode @key[in] must not be of a limited
-type.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[],Old=[A generic formal parameter of mode @key[in] must
+not be of a limited type.]}
 @end{Itemize}
 
-@nt{Aggregate}s are not available for a limited composite type.
-Concatenation is not available for a limited array type.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[],Old=[@nt{Aggregate}s are not available for a limited
+composite type. Concatenation is not available for a limited array type.]}
 
-The rules do not exclude a @nt{default_expression} for a formal
-parameter of a limited type; they do not exclude a deferred constant
-of a limited type if the full declaration of the constant
-is of a nonlimited type.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[],Old=[The rules do not exclude a @nt{default_expression}
+for a formal parameter of a limited type; they do not exclude a deferred
+constant of a limited type if the full declaration of the constant is of a
+nonlimited type.]}
 
 @Defn{become nonlimited}
 @Defn2{Term=[nonlimited type],Sec=(becoming nonlimited)}
@@ -1634,6 +1736,19 @@ to some extent in Ada 83), this is now its own clause rather
 than being a subclause of
 @RefSec{Private Types and Private Extensions}.
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Limited types now have an assignment operation, but its use is restricted
+such that all uses are build-in-place. This is
+accomplished by restricting uses to @nt{aggregate}s and @nt{function_call}s.
+@nt{Aggregate}s were not allowed to have a limited type in Ada 95, which
+causes a compatibility issue discussed in @RefSec{Aggregates}.
+Compatibility issues with @nt{return_statement}s are discussed
+in @RefSec{Return Statements}.],Old=[]}
+@end{Extend95}
+
 
 @LabeledClause{User-Defined Assignment and Finalization}
 
