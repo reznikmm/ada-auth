@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2004/12/15 01:09:48 $}
+@Comment{$Date: 2004/12/16 06:31:49 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2347,7 +2347,7 @@ to declare a procedure with an empty body.]}
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
 @Syn{lhs=<@Chg{Version=[2],New=<null_procedure_declaration>,Old=<>}>,
-rhs="@Chg{Version=[2],New=<procedure_specification @key{is} @key{null};>,Old=<>}"}
+rhs="@Chg{Version=[2],New=<@Syn2{procedure_specification} @key{is} @key{null};>,Old=<>}"}
 @end{Syntax}
 
 @begin{StaticSem}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.6 $ $Date: 2004/12/15 01:09:49 $ $Author: Randy $ }
+@comment{ $Revision: 1.7 $ $Date: 2004/12/16 06:31:50 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2004/12/15 01:09:49 $}
+@Comment{$Date: 2004/12/16 06:31:50 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -532,6 +532,92 @@ name (if Extension is null) or base name (if Extension is non-null).]}
 queries and types are provided:]}
 
 @begin{DescribeCode}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{type} File_Kind @key{is} (Directory, Ordinary_File, Special_File);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[The type File_Kind represents the
+kind of file represented by an external file or directory.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{type} File_Size @key{is range} 0 .. @RI<implementation-defined>;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[The type File_Size represents the
+size of an external file.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+maximum value for a file size in Directories.],Old=[]}]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Exists (Name : @key{in} String) @key{return} Boolean;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if external file
+represented by Name exists, and False
+otherwise. The exception Name_Error is propagated if the string given as Name
+does not allow the identification of an external file (including directories
+and special files).]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Kind (Name : @key{in} String) @key{return} File_Kind;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the kind of
+external file represented by Name. The exception
+Name_Error is propagated if the string given as Name does not allow the
+identification of an existing external file.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Size (Name : @key{in} String) @key{return} File_Size;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the size of the
+external file represented by Name. The size of
+an external file is the number of stream elements contained in the file.
+If the external file is discontiguous (not all elements exist), the result is
+implementation-defined. If the external file is not an ordinary file, the
+result is implementation-defined. The exception Name_Error is propagated if the
+string given as Name does not allow the identification of an existing external
+file. The exception Constraint_Error is propagated if the file size is not a
+value of type File_Size.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+result for Directories.Size for a directory, special file, or
+discontiguous file.],Old=[]}]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Trailing],Text=[We allow raising Constraint_Error,
+  so that an implementation for a system with 64-bit file sizes does not
+  need to support full numerics on 64-bit integers just to implement
+  this package. Of course, if 64-bit integers are available on such a system,
+  they should be used when defining type File_Size.]}
+@end{Discussion}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Modification_Time (Name : @key{in} String) @key{return} Ada.Calendar;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the time that the
+external file represented by Name was most
+recently modified. If the external file is not an ordinary file, the result is
+implementation-defined. The exception Name_Error is propagated if the string
+given as Name does not allow the identification of an existing external file. Th
+exception Use_Error is propagated if the external environment does not support
+the reading the modification time of the file with the name given by Name (in
+the absence of Name_Error).]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+result for Directories.Modification_Time for a directory or special file.],
+Old=[]}]}
+
+@end{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following directory searching
+operations and types are provided:]}
+
+@begin{DescribeCode}
+
+
 
 **** The rest of this clause has yet to be inserted ****
 

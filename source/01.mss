@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2004/12/09 06:13:21 $}
+@Comment{$Date: 2004/12/16 06:31:46 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1645,6 +1645,12 @@ ISO/IEC 6429:1992,
 @i{Information technology @em Control functions for coded
     graphic character sets.}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00351-01]}
+@ChgAdded{Version=[2],Text=[@Defn{ISO 8601:2004}
+@Defn{date and time formatting standard}
+ISO 8601:2004, @i{Data elements and interchange formats @em Information
+interchange @em Representation of dates and times.}]}
+
 @Defn{ISO/IEC 8859-1:1987}
 @Defn{8859-1:1987, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(8-bit)}
@@ -1661,6 +1667,7 @@ ISO/IEC 9899:1990,
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001],ARef=[AI95-00124-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Chg{Version=[2],New=[@Defn{ISO/IEC 10646-1:2003}
+@Defn{10646-1:2003, ISO/IEC standard}
 @Defn{10646-1:2003, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(16 and 32-bit)}
 ISO/IEC 10646:2003, @i{Information technology @em Universal Multiple-Octet

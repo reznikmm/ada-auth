@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/12/15 01:09:48 $}
+@Comment{$Date: 2004/12/16 06:31:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @LabeledClause{Type Conversions}
 
@@ -99,12 +99,21 @@ is interpreted as an @nt<expression>.
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-@ChgDeleted{Version=[2],Text=[@Defn2{Term=[type conversion],sec=(numeric)}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[In a view conversion for an untagged type,
+the target type shall be convertible (back) to the operand type.],
+Old=[@Defn2{Term=[type conversion],sec=(numeric)}
 @Defn2{Term=[conversion],sec=(numeric)}
 If the target type is a numeric type, then the operand type
 shall be a numeric type.]}
-
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=<Untagged view conversions appear only as [in] out
+  parameters. Hence, the reverse conversion must be legal as well.
+  The forward conversion must be legal even if an out parameter,
+  because actual parameters of an access type are always
+  copied in anyway.>}
+@end{Reason}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[The entire @LegalityTitle section has been
@@ -115,8 +124,8 @@ allowed in Ada 83. The reorganization fixes this.
 Much of the wording of the legality section is unchanged, but it is reordered
 and reformatted. Because of the limitations of our tools, we had to delete and
 replace nearly the entire section. The text of Ada 95 paragraphs 8 through 12,
-14, 15, 17, 19, and 20 are unchanged; these are now 24.2 through 24.5, 24.12,
-24.13, 24.17, 24.19, and 24.20.]}
+14, 15, 17, 19, 20, and 24 are unchanged (just moved); these are now
+24.1 through 24.4, 24.11, 24.12, 24.16, 24.18, 24.19, and 8.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
@@ -279,19 +288,7 @@ type shall be an access-to-subprogram type. Further:]}
 @end(itemize)
 
 @Comment{We start the new text here, so we can modify the handful of rules
-that are not reformatted}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[In a view conversion for an untagged type,
-the target type shall be convertible (back) to the operand type.]}
-@begin{Reason}
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=<Untagged view conversions appear only as [in] out
-  parameters. Hence, the reverse conversion must be legal as well.
-  The forward conversion must be legal even if an out parameter,
-  because actual parameters of an access type are always
-  copied in anyway.>}
-@end{Reason}
+that are not reformatted. (Except the first rule is at the top.)}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Leading@Defn2{Term=[type conversion],sec=[composite (non-array)]}
@@ -350,8 +347,10 @@ Further, if the target type is tagged, then either:]}
   @end{Ramification}
 @end(itemize)
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-@ChgDeleted{Version=[2],Text=[In a view conversion for
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[If there is no type that is an ancestor of both
+the target type and the operand type, then],
+Old=[In a view conversion for
 an untagged type, the target type shall be convertible (back) to the operand type.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Deleted]}
@@ -361,10 +360,6 @@ an untagged type, the target type shall be convertible (back) to the operand typ
   because actual parameters of an access type are always
   copied in anyway.>}
 @end{Reason}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[If there is no type that is an ancestor of both
-the target type and the operand type, then],Old=[]}
 
 @begin(itemize)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
@@ -545,7 +540,7 @@ Further, if not @i<universal_access>:]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
-If the target type is an access-to-subprogram type, then the operand ty
+If the target type is an access-to-subprogram type, then the operand type
 shall be @i<universal_access> or an access-to-subprogram type. Further, if
 not @i<universal_access>:]}
 

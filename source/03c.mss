@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/11 06:27:54 $}
+@Comment{$Date: 2004/12/16 06:31:48 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1675,7 +1675,7 @@ which is illegal.
 The two lines marked "--@i{ Illegal!}" are illegal when taken together.
 @end{Ramification}
 @begin{Reason}
-@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00310-02]}
+@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00310-01]}
   We considered disallowing untagged types from having abstract
   primitive subprograms.
   However, we rejected that plan, because it introduced some silly
@@ -3071,7 +3071,7 @@ the private part; it may not be deferred to the package body.]}
   operation with an access parameter could be declared in a private part
   and a dispatching call on it could occur in a child even though there is
   no visibility on the full type, requiring access to the controlling tag
-  without access to the representation of the type.],Old=[]}
+  without access to the representation of the type.]}
   @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
@@ -3084,7 +3084,7 @@ shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.
   type. Now we only disallow such dereferences when used as a @nt{prefix}.
   Dereferences used in other contexts do not pose a problem since normal type
   matching will preclude their use except when the full type is @lquotes@;nearby@rquotes@;
-  as context (for example, as the expected type).],Old=[]}
+  as context (for example, as the expected type).]}
   @end{Reason}
 @end{Legality}
 
@@ -3117,13 +3117,14 @@ has this incomplete view except when:]}
 of @i{T}, or],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[it occurs in the scope of a @nt{nonlimited_with_clause}
+@ChgAdded{Version=[2],Text=[it occurs in the scope of a @nt{nonlimited_with_clause}
 that mentions a library package in whose visible part the completion of @i{T}
-is declared.],Old=[]}
+is declared.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[In these cases, the dereference has the full view of @i{T}.],Old=[]}
+@ChgAdded{Version=[2],Text=[In these cases, the dereference has the full view
+of @i{T}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[We need the @lquotes@;in

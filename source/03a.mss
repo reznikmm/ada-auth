@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/15 01:09:46 $}
+@Comment{$Date: 2004/12/16 06:31:46 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2480,7 +2480,7 @@ If the @nt{subtype_@!indication} depends on a discriminant,
 then only those expressions that do not depend on a discriminant
 are evaluated.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00391-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00391-01]}
 @PDefn2{Term=[execution], Sec=(call on an inherited subprogram)}
 For the execution of a call on an inherited subprogram,
 a call on the corresponding primitive subprogram of the parent type is
@@ -2496,7 +2496,7 @@ null extension, extended to the derived type using the equivalent of an
 and @key{null record} as the @nt{record_component_association_list}],Old=[]}.
 @PDefn2{Term=[implicit subtype conversion],Sec=(result of inherited function)}
 @begin(Discussion)
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00391-01]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00391-01]}
   If an inherited function returns the derived type, and the type
   is a @Chg{Version=[2],New=[non-null ],Old=[]}record extension, then the
   inherited function @Chg{Version=[2],New=[shall be overridden, unless
@@ -4080,11 +4080,12 @@ one of its enumeration literals is a @nt<character_literal>.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Defn{Latin-1}
 @Defn{BMP}
-@Defn{ISO 10646}
+@Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}],Old=[@Defn{ISO 10646}]}
 @Defn{Character}
 The predefined type Character is a character type whose values
 correspond to the 256 code positions of Row 00 (also
-known as Latin-1) of the ISO 10646@Chg{Version=[2],New=[:2003],Old=[]}
+known as Latin-1) of the @Chg{Version=[2],New=[ISO/IEC 10646:2003],
+Old=[ISO 10646]}
 Basic Multilingual Plane (BMP).
 Each of the graphic characters of Row 00 of the BMP has
 a corresponding @nt<character_literal> in Character.
@@ -4101,9 +4102,10 @@ in @RefSec{The Package Standard}, but are set in @i{italics}.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Defn{Wide_Character}
 @Defn{BMP}
-@Defn{ISO 10646}
+@Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}],Old=[@Defn{ISO 10646}]}
 The predefined type Wide_Character is a character type whose
-values correspond to the 65536 code positions of the ISO 10646@Chg{Version=[2],New=[:2003],Old=[]}
+values correspond to the 65536 code positions of the @Chg{Version=[2],
+New=[ISO/IEC 10646:2003],Old=[ISO 10646]}
 Basic Multilingual Plane (BMP).
 Each of the graphic characters of the BMP has
 a corresponding @nt<character_literal> in Wide_Character.
@@ -4142,7 +4144,7 @@ and have]} a corresponding @nt<character_literal>.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[@Defn{Wide_Wide_Character}
 @Defn{BMP}
-@Defn{ISO 10646}
+@Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}],Old=[@Defn{ISO 10646}]}
 The predefined type Wide_Wide_Character is a character type whose values
 correspond to the 2147483648 code positions of the ISO/IEC 10646:2003 character
 set. Each of the @nt{graphic_character}s has a corresponding
@@ -4295,7 +4297,7 @@ Context is used to resolve their type.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[Characters are now defined in terms of
-  the entire ISO 10646:2003 character set.]}
+  the entire ISO/IEC 10646:2003 character set.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[We dropped the @ImplAdviceTitle for

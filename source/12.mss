@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2004/12/15 01:09:49 $}
+@Comment{$Date: 2004/12/16 06:31:50 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -342,7 +342,7 @@ Similarly, the contract model does not apply to @LinkTimeTitle.
 @end{MetaRules}
 
 @begin{Syntax}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
 @Syn{lhs=<generic_instantiation>,rhs="
      @key{package} @Syn2{defining_program_unit_name} @key{is}
          @key{new} @SynI{generic_package_}@Syn2{name} [@Syn2{generic_actual_part}];
@@ -2816,7 +2816,7 @@ Hence, it is possible to pass a generic formal package
 as an actual to another generic formal package.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00317-01]}
 @ChgAdded{Version=[2],Text=[
 For the purposes of matching, if the actual instance @i<A> is itself a
 formal package, then the actual parameters of A are those specified
@@ -2827,8 +2827,8 @@ template included in the visible part of @i<A>.]}
 @end{StaticSem}
 
 @begin{Extend83}
-@Defn{extensions to Ada 83}
-Formal packages are new to Ada 95.
+  @Defn{extensions to Ada 83}
+  Formal packages are new to Ada 95.
 @end{Extend83}
 
 @begin{Extend95}
