@@ -18,7 +18,7 @@ package body ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, AXE Consultants.
+    -- Copyright 2000, 2002, 2003  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -118,6 +118,17 @@ package body ARM_Format is
     --  7/18/02 - RLB - Moved document type here.
     --		- RLB - Added ARef= parameter to ChgRef.
     --          - RLB - Added Changes_Only and versioning for individual changes.
+    --  4/10/03 - RLB - Fixed Index_Pragma to include "<name> pragma".
+    --  4/11/03 - RLB - Fixed order of removal for formatting for Heading and
+    --			Subheading, so that the nesting is right (it needs to
+    --			be exactly like the order of application).
+    --		- RLB - Fixed code so that parameter version numbers aren't
+    --			displayed higher than the item we're generating.
+    --		- RLB - Fixed ChgRef and others not to generate anything if
+    --			we're not generating the version that the reference is
+    --			for. Similarly, avoid changing the paragraph kind if
+    --			we're not going to use the changes.
+    --		- RLB - Fixed font for changing non-terminals in @Syn.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1403,8 +1414,17 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	    -- where Num is a paragraph number in the RM; AARM is the
 	    -- paragraph subletter for AARM text; Ins is the number of
 	    -- inserted paragraph; and Vers is the version number ('1'
-	    -- for Technical Corrigendum 1; '0' for original RM.).
+	    -- for Technical Corrigendum 1; '0' for original RM.;
+	    -- '2' for Amendment 1). Note that we don't include change
+	    -- versions greater than the one we're currently processing.
 	    -- Unused parts are omitted.
+
+	    -- %%%% Buglet: If a paragraph was changed by multiple versions,
+	    -- we only know the last one. So we guess. If there was a change
+	    -- visible here, there must be a revision number, so we use the
+	    -- one we're generating. That could be wrong if we have three
+	    -- or more versions. I hope we don't need to regenerate old
+	    -- versions that far back.
 
 	    if Format_Object.Next_Paragraph_Change_Kind = ARM_Database.None or else
 	       Format_Object.Changes = Old_Only then
@@ -1433,9 +1453,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    Format_Object.Next_Insert_Para := 1;
 		end if;
 	    elsif Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Inserted then
-	        -- We'll assume there is a version number here, and
-	        -- that there are no more than 9 inserted paragraphs
-	        -- in a row.
+	        -- We'll assume that there are no more than 19 inserted
+		-- paragraphs in a row.
 	        Format_Object.Current_Paragraph_String(1 .. PNum_Pred'Last-1) :=
 		    PNum_Pred(2..PNum_Pred'Last);
 	        if Is_AARM_Paragraph (Format_Object.Next_Paragraph_Subhead_Type) then
@@ -1485,15 +1504,19 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		if Format_Object.Next_Paragraph_Version /= '0' then
 	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 3) :=
 		        '/';
-	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 4) :=
-		        Format_Object.Next_Paragraph_Version;
+		    if Format_Object.Next_Paragraph_Version <= Format_Object.Change_Version then
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 4) :=
+		            Format_Object.Next_Paragraph_Version;
+		    else -- Use the number we're generating.
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 4) :=
+		            Format_Object.Change_Version;
+		    end if;
 	            Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len + 4;
 		else
 	            Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len + 2;
                 end if;
 	    else --if Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Revised or else
 		 --   Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Deleted then
-	        -- We'll assume there is a version number here.
 	        if Is_AARM_Paragraph (Format_Object.Next_Paragraph_Subhead_Type) then
 	            Format_Object.Current_Paragraph_String(1 .. PNum_Pred'Last-1) :=
 		        PNum_Pred(2..PNum_Pred'Last);
@@ -1516,8 +1539,13 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	        if Format_Object.Next_Paragraph_Version /= '0' then
 	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 1) :=
 		        '/';
-	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) :=
-		        Format_Object.Next_Paragraph_Version;
+		    if Format_Object.Next_Paragraph_Version <= Format_Object.Change_Version then
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) :=
+		            Format_Object.Next_Paragraph_Version;
+		    else -- Use the number we're generating.
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) :=
+		            Format_Object.Change_Version;
+		    end if;
 	            Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len + 2;
 	        -- else no version to display.
 		end if;
@@ -2945,9 +2973,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 	    end Get_Boolean;
 
 
-	    procedure Gen_Ref_or_ARef_Parameter is
+	    procedure Gen_Ref_or_ARef_Parameter (Display_It : Boolean) is
 		-- Generate (and read) a "Ref" or "ARef" parameter, containing
-		-- a DR or AI reference.
+		-- a DR or AI reference. Generate it into the document only
+		-- if Display_It is True.
 		Ch, Close_Ch : Character;
 		Ref_Name : ARM_Input.Command_Name_Type;
 		Len : Natural;
@@ -2975,93 +3004,91 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    exit;
 		        end if;
 		    end loop;
-		    case Format_Object.Document is
-		        when ARM_Format.AARM =>
-			    if Is_Ref then
-			        -- Output a DR reference.
-			        Check_Paragraph;
-			        ARM_Output.Ordinary_Character (Output_Object, '{');
-			        ARM_Output.Text_Format (Output_Object,
-						        Bold => Format_Object.Is_Bold,
-						        Italic => True,
-						        Font => Format_Object.Font,
-						        Size => Format_Object.Size,
-						        Change => Format_Object.Change,
-						        Location => Format_Object.Location);
-			        ARM_Output.DR_Reference (Output_Object,
-						         Text => Ref_Name(1..Len),
-						         DR_Number => Ref_Name(1..Len));
-			        ARM_Output.Text_Format (Output_Object,
-						        Bold => Format_Object.Is_Bold,
-						        Italic => Format_Object.Is_Italic,
-						        Font => Format_Object.Font,
-						        Size => Format_Object.Size,
-						        Change => Format_Object.Change,
-						        Location => Format_Object.Location);
-			        ARM_Output.Ordinary_Character (Output_Object, '}');
-			        ARM_Output.Ordinary_Character (Output_Object, ' ');
-			        Format_Object.Last_Non_Space := False;
-			    else
-				-- Calculate the "folded" AI number.
-				declare
-				    Hyphen_1 : Natural := Ada.Strings.Fixed.Index (Ref_Name(1..Len), "-");
-				    -- Should be "AIzz-00xxx-yy", where -yy and zz are
-				    -- optional.
-				begin
-				    if Hyphen_1 = 0 or else Len < Hyphen_1+5 then
-					AI_Number := "00001";
-					Ada.Text_IO.Put_Line ("** Bad AI reference " & Ref_Name(1..Len) & ", line " & ARM_Input.Line_String (Input_Object));
-				    elsif Len = Hyphen_1+5 then -- No alternative number.
-					AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-				    elsif Len < Hyphen_1+8 or else Ref_Name(Hyphen_1+6) /= '-' then
-					AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-					Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & Ref_Name(1..Len) & ", line " & ARM_Input.Line_String (Input_Object));
-				    elsif Ref_Name(Hyphen_1+7) = '0' then
-					AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-					AI_Number(1) := Character'Pred(Ref_Name(Hyphen_1+8));
-				    elsif Ref_Name(Hyphen_1+7) = '1' then
-					AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-					if Ref_Name(Hyphen_1+8) = '0' then
-					    AI_Number(1) := '9';
-					else
-					    AI_Number(1) := Character'Val(Character'Pos(Ref_Name(Hyphen_1+8)) - Character'Pos('1') + Character'Pos('A'));
-					end if;
-				    elsif Ref_Name(Hyphen_1+7) = '2' then
-					AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-				        AI_Number(1) := Character'Val(Character'Pos(Ref_Name(Hyphen_1+8)) - Character'Pos('1') + Character'Pos('A') + 10);
+		    if Display_It then
+		        if Is_Ref then
+			    -- Output a DR reference.
+			    Check_Paragraph;
+			    ARM_Output.Ordinary_Character (Output_Object, '{');
+			    ARM_Output.Text_Format (Output_Object,
+						    Bold => Format_Object.Is_Bold,
+						    Italic => True,
+						    Font => Format_Object.Font,
+						    Size => Format_Object.Size,
+						    Change => Format_Object.Change,
+						    Location => Format_Object.Location);
+			    ARM_Output.DR_Reference (Output_Object,
+						     Text => Ref_Name(1..Len),
+						     DR_Number => Ref_Name(1..Len));
+			    ARM_Output.Text_Format (Output_Object,
+						    Bold => Format_Object.Is_Bold,
+						    Italic => Format_Object.Is_Italic,
+						    Font => Format_Object.Font,
+						    Size => Format_Object.Size,
+						    Change => Format_Object.Change,
+						    Location => Format_Object.Location);
+			    ARM_Output.Ordinary_Character (Output_Object, '}');
+			    ARM_Output.Ordinary_Character (Output_Object, ' ');
+			    Format_Object.Last_Non_Space := False;
+		        else
+			    -- Calculate the "folded" AI number.
+			    declare
+			        Hyphen_1 : Natural := Ada.Strings.Fixed.Index (Ref_Name(1..Len), "-");
+			        -- Should be "AIzz-00xxx-yy", where -yy and zz are
+			        -- optional.
+			    begin
+			        if Hyphen_1 = 0 or else Len < Hyphen_1+5 then
+				    AI_Number := "00001";
+				    Ada.Text_IO.Put_Line ("** Bad AI reference " & Ref_Name(1..Len) & ", line " & ARM_Input.Line_String (Input_Object));
+			        elsif Len = Hyphen_1+5 then -- No alternative number.
+				    AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
+			        elsif Len < Hyphen_1+8 or else Ref_Name(Hyphen_1+6) /= '-' then
+				    AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
+				    Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & Ref_Name(1..Len) & ", line " & ARM_Input.Line_String (Input_Object));
+			        elsif Ref_Name(Hyphen_1+7) = '0' then
+				    AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
+				    AI_Number(1) := Character'Pred(Ref_Name(Hyphen_1+8));
+			        elsif Ref_Name(Hyphen_1+7) = '1' then
+				    AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
+				    if Ref_Name(Hyphen_1+8) = '0' then
+				        AI_Number(1) := '9';
 				    else
-					AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-					Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & Ref_Name(1..Len) & ", line " & ARM_Input.Line_String (Input_Object));
+				        AI_Number(1) := Character'Val(Character'Pos(Ref_Name(Hyphen_1+8)) - Character'Pos('1') + Character'Pos('A'));
 				    end if;
-				end;
+			        elsif Ref_Name(Hyphen_1+7) = '2' then
+				    AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
+				    AI_Number(1) := Character'Val(Character'Pos(Ref_Name(Hyphen_1+8)) - Character'Pos('1') + Character'Pos('A') + 10);
+			        else
+				    AI_Number := Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
+				    Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & Ref_Name(1..Len) & ", line " & ARM_Input.Line_String (Input_Object));
+			        end if;
+			    end;
 
-			        -- Output an AI reference.
-			        Check_Paragraph;
-			        ARM_Output.Ordinary_Character (Output_Object, '{');
-			        ARM_Output.Text_Format (Output_Object,
-						        Bold => Format_Object.Is_Bold,
-						        Italic => True,
-						        Font => Format_Object.Font,
-						        Size => Format_Object.Size,
-						        Change => Format_Object.Change,
-						        Location => Format_Object.Location);
-			        ARM_Output.AI_Reference (Output_Object,
-						         Text => Ref_Name(1..Len),
-						         AI_Number => AI_Number);
-			        ARM_Output.Text_Format (Output_Object,
-						        Bold => Format_Object.Is_Bold,
-						        Italic => Format_Object.Is_Italic,
-						        Font => Format_Object.Font,
-						        Size => Format_Object.Size,
-						        Change => Format_Object.Change,
-						        Location => Format_Object.Location);
-			        ARM_Output.Ordinary_Character (Output_Object, '}');
-			        ARM_Output.Ordinary_Character (Output_Object, ' ');
-			        Format_Object.Last_Non_Space := False;
-			    end if;
-		        when ARM_Format.RM | ARM_Format.RM_ISO =>
-			    null; -- References not displayed.
-		    end case;
+			    -- Output an AI reference.
+			    Check_Paragraph;
+			    ARM_Output.Ordinary_Character (Output_Object, '{');
+			    ARM_Output.Text_Format (Output_Object,
+						    Bold => Format_Object.Is_Bold,
+						    Italic => True,
+						    Font => Format_Object.Font,
+						    Size => Format_Object.Size,
+						    Change => Format_Object.Change,
+						    Location => Format_Object.Location);
+			    ARM_Output.AI_Reference (Output_Object,
+						     Text => Ref_Name(1..Len),
+						     AI_Number => AI_Number);
+			    ARM_Output.Text_Format (Output_Object,
+						    Bold => Format_Object.Is_Bold,
+						    Italic => Format_Object.Is_Italic,
+						    Font => Format_Object.Font,
+						    Size => Format_Object.Size,
+						    Change => Format_Object.Change,
+						    Location => Format_Object.Location);
+			    ARM_Output.Ordinary_Character (Output_Object, '}');
+			    ARM_Output.Ordinary_Character (Output_Object, ' ');
+			    Format_Object.Last_Non_Space := False;
+		        end if;
+	            -- else don't display it.
+		    end if;
 	        -- else no parameter. Weird.
 	        end if;
 	    end Gen_Ref_or_ARef_Parameter;
@@ -3358,6 +3385,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name /=
 			        Ada.Characters.Handling.To_Lower (Type_Name) then
 			        Ada.Text_IO.Put_Line ("  ** Names of begin and end mismatch, line " & ARM_Input.Line_String (Input_Object));
+			        Ada.Text_IO.Put_Line ("     Begin name: " & Ada.Strings.Fixed.Trim(Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right) &
+			                              "  End name: " & Ada.Strings.Fixed.Trim(Type_Name, Ada.Strings.Right));
 --Ada.Text_IO.Put_Line (" &Stack name is " & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name);
 			    else
 			        if Format_Object.Next_Paragraph_Subhead_Type /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph then
@@ -4081,15 +4110,24 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char,
 			    Param,
 			    Len);
+
+			Check_Paragraph;
+
 			ARM_Index.Add (Term => "attributes",
 				       Subterm => Param(1..Len),
 				       Kind => ARM_Index.Primary_Term_and_Subterm,
 				       Clause => Clause_String,
 				       Paragraph => Paragraph_String,
 				       Key => Key);
-
-			Check_Paragraph;
 			ARM_Output.Index_Target (Output_Object, Key);
+
+			ARM_Index.Add (Term => Param(1..Len) & " attribute",
+				       Kind => ARM_Index.Primary_Term,
+				       Clause => Clause_String,
+				       Paragraph => Paragraph_String,
+				       Key => Key);
+			ARM_Output.Index_Target (Output_Object, Key);
+
 			ARM_Output.Ordinary_Text (Output_Object,
 			    Param(1..Len));
 		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
@@ -4110,15 +4148,22 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char,
 			    Param,
 			    Len);
+			Check_Paragraph;
 			ARM_Index.Add (Term => "pragmas",
 				       Subterm => Param(1..Len),
 				       Kind => ARM_Index.Primary_Term_and_Subterm,
 				       Clause => Clause_String,
 				       Paragraph => Paragraph_String,
 				       Key => Key);
-
-			Check_Paragraph;
 			ARM_Output.Index_Target (Output_Object, Key);
+
+			ARM_Index.Add (Term => Param(1..Len) & " pragma",
+				       Kind => ARM_Index.Primary_Term,
+				       Clause => Clause_String,
+				       Paragraph => Paragraph_String,
+				       Key => Key);
+			ARM_Output.Index_Target (Output_Object, Key);
+
 			ARM_Output.Ordinary_Text (Output_Object,
 			    Param(1..Len));
 		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
@@ -4188,6 +4233,18 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			end if;
 
 		        Check_Paragraph;
+			ARM_Format.Format (Format_Object,
+					   "@s{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) & "}",
+					   Output_Object,
+					   Text_Name => "@Syn(LHS=",
+					   No_AARM_Text => False);
+			    -- We use Format here so we can support changes in
+			    -- the non-terminal.
+
+			-- Set the font for the "::=". Note that we use @s{}
+			-- above, so that any font changes in the Non-Terminal
+			-- (as in a @Chg command) are respected.
+
 		        ARM_Output.Text_Format (Output_Object,
 					        Bold => Format_Object.Is_Bold,
 					        Italic => Format_Object.Is_Italic,
@@ -4195,13 +4252,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Size => Format_Object.Size,
 					        Change => Format_Object.Change,
 					        Location => Format_Object.Location);
-			ARM_Format.Format (Format_Object,
-					   Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len),
-					   Output_Object,
-					   Text_Name => "@Syn(LHS=",
-					   No_AARM_Text => False);
-			    -- We use Format here so we can support changes in
-			    -- the non-terminal.
 
 			-- Index the non-terminal:
 			ARM_Index.Add (Term => Get_NT,
@@ -4327,8 +4377,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 		    declare
 			Close_Ch, Ch : Character;
-			Kind_Name : ARM_Input.Command_Name_Type;
-			Len : Natural := 0;
 			Key : ARM_Index.Index_Key;
 		    begin
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -4494,8 +4542,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     --	Sec=<Name>}, and as by calling @Defn{<Name> attribute}.
 		    declare
 			Close_Ch, Ch : Character;
-			Kind_Name : ARM_Input.Command_Name_Type;
-			Len : Natural := 0;
 			Key : ARM_Index.Index_Key;
 		    begin
 			Check_End_Paragraph; -- This is always a paragraph end.
@@ -5296,27 +5342,42 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- be used.
 
 		    declare
-			Close_Ch, Ch : Character;
-			Kind_Name : ARM_Input.Command_Name_Type;
-			Len : Natural := 0;
-		    begin
+			Ch : Character;
+			Kind : ARM_Database.Paragraph_Change_Kind_Type;
+			Version : ARM_Output.Change_Version_Type;
+			Display_It : Boolean;
+        	    begin
 			Get_Change_Version (Is_First => True,
-			    Version => Format_Object.Next_Paragraph_Version);
+			    Version => Version);
 			    -- Read a parameter named "Version".
 
-			Get_Change_Kind (Format_Object.Next_Paragraph_Change_Kind);
+			Get_Change_Kind (Kind);
 			    -- Read a parameter named "Kind".
 
-			-- Handle zero or more "Ref" parameters.
-			loop
+			if Version <= Format_Object.Change_Version then
+			    Format_Object.Next_Paragraph_Version := Version;
+			    Format_Object.Next_Paragraph_Change_Kind := Kind;
+			    case Format_Object.Document is
+			        when ARM_Format.AARM =>
+				    Display_It := True;
+				when ARM_Format.RM | ARM_Format.RM_ISO =>
+				    Display_It := False; -- No references in RM.
+			    end case;
+            		else --This reference is too new, ignore it.
+			    Display_It := False;
+			end if;
+
+		        -- Handle zero or more "Ref" parameters.
+		        loop
 			    ARM_Input.Get_Char (Input_Object, Ch);
 			    if Ch /= ',' then
-				exit; -- No more commands.
+			        exit; -- No more commands.
 			    else
-				ARM_Input.Replace_Char (Input_Object);
+			        ARM_Input.Replace_Char (Input_Object);
 			    end if;
-			    Gen_Ref_or_ARef_Parameter; -- Generate (and read) a "Ref" or "ARef" parameter.
-			end loop;
+			    Gen_Ref_or_ARef_Parameter (Display_It);
+				-- Read (and possibly generate) a "Ref" or "ARef" parameter.
+		        end loop;
 
 			-- Now, close the command.
 			-- Ch was read when checking for commas, above.
@@ -5345,13 +5406,29 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- allowed bracketing characters can be used.
 		    declare
 			Close_Ch, Ch : Character;
+			Kind : ARM_Database.Paragraph_Change_Kind_Type;
+			Version : ARM_Output.Change_Version_Type;
+			Display_It : Boolean;
 		    begin
 			Get_Change_Version (Is_First => True,
-					    Version => Format_Object.Impdef_Version);
+			    Version => Version);
 			    -- Read a parameter named "Version".
 
-			Get_Change_Kind (Format_Object.Impdef_Change_Kind);
+			Get_Change_Kind (Kind);
 			    -- Read a parameter named "Kind".
+
+			if Version <= Format_Object.Change_Version then
+			    Format_Object.Impdef_Version := Version;
+			    Format_Object.Impdef_Change_Kind := Kind;
+			    case Format_Object.Document is
+			        when ARM_Format.AARM =>
+				    Display_It := True;
+				when ARM_Format.RM | ARM_Format.RM_ISO =>
+				    Display_It := False; -- No impdef note in RM.
+			    end case;
+			else --This reference is too new, ignore it.
+			    Display_It := False;
+			end if;
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
@@ -5382,45 +5459,43 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				end;
 			    end if;
 
-			    case Format_Object.Document is
-			        when ARM_Format.AARM =>
-				    Check_End_Paragraph; -- End any paragraph that we're in.
-				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
-				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph := Format_Object.Next_Paragraph_Subhead_Type;
-				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format := Format_Object.Next_Paragraph_Format_Type;
-				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
-				    Format_Object.Next_Paragraph_Format_Type := Bare_Annotation;
-				    Format_Object.Next_Paragraph_Subhead_Type := Bare_Annotation;
-				    Format_Object.Next_Paragraph_Version := Format_Object.Impdef_Version;
-				    Format_Object.Next_Paragraph_Change_Kind := Format_Object.Impdef_Change_Kind;
-				    Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
-				    Check_Paragraph;
-				    ARM_Output.Text_Format (Output_Object,
-				        Bold => True,
-				        Italic => Format_Object.Is_Italic,
-				        Font => Format_Object.Font,
-				        Size => Format_Object.Size,
-				        Change => Format_Object.Change,
-				        Version => Format_Object.Impdef_Version,
-				        Location => Format_Object.Location);
-				    ARM_Output.Ordinary_Text (Output_Object,
-					 Text => "Implementation defined: ");
-				    ARM_Output.Text_Format (Output_Object,
-				        Bold => Format_Object.Is_Bold,
-				        Italic => Format_Object.Is_Italic,
-				        Font => Format_Object.Font,
-				        Size => Format_Object.Size,
-				        Change => Format_Object.Change,
-				        Version => Format_Object.Impdef_Version,
-				        Location => Format_Object.Location);
-				    Format_Object.Last_Paragraph_Subhead_Type := Bare_Annotation;
-				    Format_Object.Last_Non_Space := False;
-			        when others =>
-				    -- Skip the text:
-				    ARM_Input.Skip_until_Close_Char (Input_Object,
-				        Close_Ch);
-				    ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
-			    end case;
+			    if Display_It then
+			        Check_End_Paragraph; -- End any paragraph that we're in.
+			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
+			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph := Format_Object.Next_Paragraph_Subhead_Type;
+			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format := Format_Object.Next_Paragraph_Format_Type;
+			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
+			        Format_Object.Next_Paragraph_Format_Type := Bare_Annotation;
+			        Format_Object.Next_Paragraph_Subhead_Type := Bare_Annotation;
+			        Format_Object.Next_Paragraph_Version := Format_Object.Impdef_Version;
+			        Format_Object.Next_Paragraph_Change_Kind := Format_Object.Impdef_Change_Kind;
+			        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
+			        Check_Paragraph;
+			        ARM_Output.Text_Format (Output_Object,
+				    Bold => True,
+				    Italic => Format_Object.Is_Italic,
+				    Font => Format_Object.Font,
+				    Size => Format_Object.Size,
+				    Change => Format_Object.Change,
+				    Version => Format_Object.Impdef_Version,
+				    Location => Format_Object.Location);
+			        ARM_Output.Ordinary_Text (Output_Object,
+				     Text => "Implementation defined: ");
+			        ARM_Output.Text_Format (Output_Object,
+				    Bold => Format_Object.Is_Bold,
+				    Italic => Format_Object.Is_Italic,
+				    Font => Format_Object.Font,
+				    Size => Format_Object.Size,
+				    Change => Format_Object.Change,
+				    Version => Format_Object.Impdef_Version,
+				    Location => Format_Object.Location);
+			        Format_Object.Last_Paragraph_Subhead_Type := Bare_Annotation;
+			        Format_Object.Last_Non_Space := False;
+			    else -- Don't display, skip the text:
+			        ARM_Input.Skip_until_Close_Char (Input_Object,
+				    Close_Ch);
+			        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+			    end if;
 		        -- else no parameter. Weird.
 		        end if;
 		    end;
@@ -5432,30 +5507,42 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     -- Defines a changed attribute.
 		    declare
 			Close_Ch, Ch : Character;
-			Kind_Name : ARM_Input.Command_Name_Type;
-			Len : Natural := 0;
 			Key : ARM_Index.Index_Key;
 			Chg_in_Annex : Boolean;
 			Is_Leading : Boolean;
+			Kind : ARM_Database.Paragraph_Change_Kind_Type;
+			Version : ARM_Output.Change_Version_Type;
+			Display_Ref : Boolean;
 		    begin
 			Check_End_Paragraph; -- This is always a paragraph end.
 
 			Get_Change_Version (Is_First => True,
-					    Version => Format_Object.Next_Paragraph_Version);
+			    Version => Version);
 			    -- Read a parameter named "Version".
 
-			Get_Change_Kind (Format_Object.Next_Paragraph_Change_Kind);
+			Get_Change_Kind (Kind);
 			    -- Read a parameter named "Kind".
+
+			if Version <= Format_Object.Change_Version then
+			    Format_Object.Next_Paragraph_Version := Version;
+			    Format_Object.Next_Paragraph_Change_Kind := Kind;
+			    case Format_Object.Document is
+			        when ARM_Format.AARM =>
+				    Display_Ref := True;
+				when ARM_Format.RM | ARM_Format.RM_ISO =>
+				    Display_Ref := False; -- No impdef note in RM.
+			    end case;
+			else --This reference is too new, ignore it.
+			    Display_Ref := False;
+			end if;
 
 			Get_Boolean ("ChginAnnex" & (11..ARM_Input.Command_Name_Type'Last => ' '),
 				     Chg_in_Annex);
 			    -- Read a boolean parameter.
 
 			if Chg_in_Annex then
-			    Format_Object.Attr_Change_Kind :=
-				Format_Object.Next_Paragraph_Change_Kind;
-			    Format_Object.Attr_Version :=
-				Format_Object.Next_Paragraph_Version;
+			    Format_Object.Attr_Change_Kind := Kind;
+			    Format_Object.Attr_Version := Version;
 			else -- don't save the change info.; it only applies here.
 			    Format_Object.Attr_Change_Kind := ARM_Database.None;
 			    Format_Object.Attr_Version := '0';
@@ -5529,11 +5616,13 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					       Key => Key);
 				ARM_Output.Index_Target (Output_Object, Key);
 
-			        Gen_Ref_or_ARef_Parameter; -- Generate (and read) a "Ref" or "ARef" parameter.
+			        Gen_Ref_or_ARef_Parameter(Display_Ref);
+				    -- Read (and possibly generate) a "Ref" or "ARef" parameter.
 				    -- (Note: we put it here so it appears after the hang item.)
 
 			    when ARM_Database.Inserted =>
-			        Gen_Ref_or_ARef_Parameter; -- Generate (and read) a "Ref" or "ARef" parameter.
+			        Gen_Ref_or_ARef_Parameter(Display_Ref);
+				    -- Read (and possibly generate) a "Ref" or "ARef" parameter.
 				    -- (Note: we put it here so it appears before the hang item.)
 
 				Ada.Text_IO.Put_Line ("  ** Attribute adding not implemented on line " & ARM_Input.Line_String (Input_Object));
@@ -5541,8 +5630,13 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				-- show insertion; otherwise do not generate or
 				-- store attribute in DB. The last would
 				-- require changes to Attribute_Text_Param.
+				-- Careful: We need to ignore this completely
+				-- if it is added and we're not adding
+				-- it because of the version being generated.
+
 			    when ARM_Database.Deleted =>
-			        Gen_Ref_or_ARef_Parameter; -- Generate (and read) a "Ref" or "ARef" parameter.
+			        Gen_Ref_or_ARef_Parameter(Display_Ref);
+				    -- Read (and possibly generate) a "Ref" or "ARef" parameter.
 				    -- (Note: we put it here so it appears before the hang item.)
 
 				Ada.Text_IO.Put_Line ("  ** Attribute deleting not implemented on line " & ARM_Input.Line_String (Input_Object));
@@ -6212,6 +6306,15 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		when Subheading | Heading =>
 		    -- Restore the format.
 		    Check_Paragraph;
+		    -- Separate calls to exactly undo the original calls -
+		    -- First the size:
+		    ARM_Output.Text_Format (Output_Object,
+			   Bold => True, Italic => False,
+			   Font => ARM_Output.Swiss,
+			   Size => 0,
+			   Change => ARM_Output.None,
+			   Location => ARM_Output.Normal);
+		    -- Then the rest:
 		    ARM_Output.Text_Format (Output_Object,
 			   Bold => False, Italic => False,
 			   Font => ARM_Output.Default,
@@ -6236,7 +6339,28 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			         ARM_Format.New_Changes |
 			         ARM_Format.Changes_Only =>
 			        Check_Paragraph;
-			        ARM_Output.Text_Format (Output_Object,
+			        -- Separate calls to exactly undo the original calls -
+			        -- First the size:
+			        if Format_Object.Changes = ARM_Format.New_Only then
+				    -- Unmarked.
+			            ARM_Output.Text_Format (Output_Object,
+				           Bold => True, Italic => False,
+				           Font => ARM_Output.Swiss,
+				           Size => 0,
+				           Change => ARM_Output.None,
+				           Location => ARM_Output.Normal);
+				else
+				    -- Marked as an insertion.
+			            ARM_Output.Text_Format (Output_Object,
+				           Bold => True, Italic => False,
+				           Font => ARM_Output.Swiss,
+				           Size => 0,
+				           Change => ARM_Output.Insertion,
+				           Version => '1', -- These don't have versions yet.
+				           Location => ARM_Output.Normal);
+				end if;
+			        -- Then the rest:
+				ARM_Output.Text_Format (Output_Object,
 				       Bold => False, Italic => False,
 				       Font => ARM_Output.Default,
 				       Size => 0,
@@ -6247,7 +6371,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			        Format_Object.Size := 0;
 			        Check_End_Paragraph;
 		        end case;
-    		    end if;
+		    end if;
 
 	        when Center | Right =>
 		    -- Close the paragraph.
@@ -6578,17 +6702,21 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    end if;
 				when ARM_Database.Inserted =>
 				    if Format_Object.Document = ARM_Format.RM_ISO then
-					return "@Chg{New=[ See " & Clause_String & ".],Old=[]}";
+					return "@Chg{Version=[" & Format_Object.Impdef_Version &
+					    "], New=[ See " & Clause_String & ".],Old=[]}";
 				    else
-					return "@Chg{New=[ See " & Clause_String & '(' &
+					return "@Chg{Version=[" & Format_Object.Impdef_Version &
+				            "], New=[ See " & Clause_String & '(' &
 					    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
 					    ").],Old=[]}";
 				    end if;
 				when ARM_Database.Deleted =>
 				    if Format_Object.Document = ARM_Format.RM_ISO then
-					return "@Chg{New=[],Old=[ See " & Clause_String & ".]}";
+					return "@Chg{Version=[" & Format_Object.Impdef_Version &
+					    "], New=[],Old=[ See " & Clause_String & ".]}";
 				    else
-					return "@Chg{New=[],Old=[ See " & Clause_String & '(' &
+					return "@Chg{Version=[" & Format_Object.Impdef_Version &
+					    "], New=[],Old=[ See " & Clause_String & '(' &
 					    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
 					    ").]}";
 				    end if;

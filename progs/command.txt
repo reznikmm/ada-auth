@@ -69,7 +69,7 @@ The formats are:
                 blank space. (See above for how these are marked). This form
 		is intended to be used with revision bars in Word (Word does
 		not reformat the document when deletions are hidden, leaving
-		unsighly blank spaces.)
+		unsightly blank spaces.)
 
 <Options> are:
    Show-Index-Entries: Index and glossary entries are visibly displayed in the
@@ -95,7 +95,7 @@ anything. It can be another sequence of text, keywords, or other items
 (described below). In this list below, arguments are always signified by {},
 but any of the other characters can be used. (Note that there is no escape
 character for the brackets, so if one of the bracket characters appears
-in the text, it different pair of bracket characters should be used).
+in the text, a different pair of bracket characters should be used).
 
 Command summary:
 
@@ -167,7 +167,7 @@ Text commands:
 	     given before any text for the paragraph.
 
 @thinline  - Draw a thin separator line across the page. Ends any paragraph.
-@thickline - Draw a thin separator line across the page. Ends any paragraph.
+@thickline - Draw a thick separator line across the page. Ends any paragraph.
 
 -- Section/Clause commands:
 @LabeledSection{<text>} - Start a labeled section (chapter). The title will be
@@ -348,10 +348,11 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	indexes <check> as a partial definition. (PDefn).
 @Attr{<name>} -- Generates an index entry for "attributes"
 	with a secondary entry of <name>. (Essentially a Defn2). Also
-	puts <name> to the output.
+	with a secondary entry of <name> (a Defn2), and also an index entry
+        of "<name> attribute" (a Defn). Also puts <name> to the output.
 @Prag{<name>} -- Generates an index entry for "pragmas"
-	with a secondary entry of <name>. (Essentially a Defn2). Also
-	puts <name> to the output.
+	with a secondary entry of <name> (a Defn2), and also an index entry
+        of "<name> pragma" (a Defn). Also puts <name> to the output.
 
 -- Glossary:
 @ToGlossary(Term=[<term>], Text=[<text>])
@@ -383,11 +384,15 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	any text of the paragraph. The version number of the change is
 	<version>. [This is "1" for technical corrigenum 1; "2" for amendment 1].
 	Kind is either "Revised" (an ordinary change), "Added" (for a paragraph
-	added by the corrigendum), or "Deleted" (for a paragraph deleted by
-	by the corrigendum) [These control the paragraph numbering of the
+	added by the change), or "Deleted" (for a paragraph deleted by
+	by the change) [These control the paragraph numbering of the
 	following paragraph.] The <DR_Number>(s) and/or <AI_Number>(s) that
 	triggered the change are given. As many references as necessary can be
 	given. (Zero is allowed).
+	Note: If there are changes to the same paragraph in multiple versions,
+	each version should have their own chgref. The Kind should be the same
+	for all chgrefs - the numbering is the same no matter when the paragraph
+	was added or deleted.
 @chgnote{<text>} Notes on particular change. This is treated as a comment; it
 	has a separate command solely so that stripped easily in the future.
 @chg{[Version=[<Version>],]New=[<new text>],Old=[<old text>]}

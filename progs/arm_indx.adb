@@ -14,7 +14,7 @@ package body ARM_Index is
     -- This package contains the routines to manage and generate the index.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2002, 2003 AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -48,7 +48,8 @@ package body ARM_Index is
     --  5/28/00 - RLB - Created package.
     --  8/ 7/00 - RLB - Improved sorting of entries.
     --  1/31/02 - RLB - Added missing with of Unchecked_Deallocation.
-
+    --  4/11/03 - RLB - Added a hard space in the indexing routine, in order
+    --			that the empty paragraph isn't ignored.
 
     Next_Index_Key : Index_Key;
 
@@ -743,6 +744,10 @@ package body ARM_Index is
 			   Bold => False, Italic => False, Font => ARM_Output.Default,
 			   Size => 0, Change => ARM_Output.None, Location => ARM_Output.Normal);
 		    ARM_Output.Index_Line_Break (Output_Object, Clear_Keep_with_Next => False);
+		else
+		    ARM_Output.Hard_Space (Output_Object);
+			-- So the paragraph isn't empty (which causes it to be
+			-- ignored in HTML).
 		end if;
 	    end if;
 

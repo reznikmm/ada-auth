@@ -15,7 +15,7 @@ package body ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2003  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -93,6 +93,12 @@ package body ARM_HTML is
     --			three strings and For_ISO boolean.
     --		- RLB - Added AI_Reference.
     --		- RLB - Added Change_Version_Type and uses.
+    --  1/15/03 - RLB - Removed space from DIV.paranum, as it doesn't validate
+    --			with it.
+    --  4/10/03 - RLB - Updated to add access to search pages (not generated
+    --			here; make them by hand, it only needs to be done once).
+    --		- RLB - Updated to insure that changes are separated by a space.
+    --  4/11/03 - RLB - Changed some formats to meet WC3 validation requirements.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -679,7 +685,7 @@ package body ARM_HTML is
 	     -- The style sheet.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <STYLE type=""text/css"">");
 	    -- Element styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5 em; top: auto}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5em; top: auto}");
 		-- CSS2. See HTML_4_Compatible for comments.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.roman {font-family: ""Times New Roman"", Times, serif}");
@@ -824,6 +830,12 @@ package body ARM_HTML is
 	            "-0-29.html");
 	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
+	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
+	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	        "-SRCH.html");
+	Ada.Text_IO.Put (Output_Object.Output_File, """>Search</A>");
 	if Clause /= "" then
 	    begin
 		-- Note: We do the following in one big glup so that if
@@ -885,6 +897,12 @@ package body ARM_HTML is
 	            "-0-29.html");
 	end if;
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
+	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
+	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	        "-SRCH.html");
+	Ada.Text_IO.Put (Output_Object.Output_File, """>Search</A>");
 	if Clause /= "" then
 	    begin
 		-- Note: We do the following in one big glup so that if
@@ -1103,6 +1121,85 @@ package body ARM_HTML is
     end Check_Clause_File;
 
 
+    procedure Put_Compatibility_Font_Info (Output_Object : in out HTML_Output_Type;
+					   Format : in ARM_Output.Paragraph_Type) is
+	-- Internal:
+        -- Output the font information for HTML 4.0 compatibility mode.
+    begin
+        if HTML_Kind = HTML_4_Compatible then
+	    case Paragraph_Info(Format).Font is
+	        when ARM_Output.Default | ARM_Output.Roman =>
+		    null;
+	        when ARM_Output.Swiss =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, SWISS_FONT_CODE);
+		    Output_Object.Char_Count := Output_Object.Char_Count + SWISS_FONT_CODE'Length;
+	        when ARM_Output.Fixed =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "<TT>");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	    end case;
+	    if ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
+	        null; -- No font change here.
+	    else
+	        case Paragraph_Info(Format).Size is
+		    when 0 => null;
+		    when 1 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=+1>");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		    when 2 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=+2>");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		    when -1 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-1>");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		    when -2 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-2>");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		    when -3 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-3>");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
+		    when others => null; -- Not supported.
+	        end case;
+	    end if;
+        end if;
+    end Put_Compatibility_Font_Info;
+
+
+    procedure Put_End_Compatibility_Font_Info (Output_Object : in out HTML_Output_Type;
+					       Format : in ARM_Output.Paragraph_Type) is
+	-- Internal:
+        -- Output the font information for HTML 4.0 compatibility mode.
+    begin
+        if HTML_Kind = HTML_4_Compatible then
+	    if ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
+	        null; -- No font change here.
+	    else
+	        case Paragraph_Info(Format).Size is
+		    when 0 => null;
+		    when 1 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
+		    when 2 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
+		    when -1 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
+		    when -2 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
+		    when -3 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
+		    when others => null; -- Not supported.
+	        end case;
+	    end if;
+	    case Paragraph_Info(Format).Font is
+	        when ARM_Output.Default | ARM_Output.Roman =>
+		    null;
+	        when ARM_Output.Swiss =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
+	        when ARM_Output.Fixed =>
+		    Ada.Text_IO.Put (Output_Object.Output_File, "</TT>");
+	    end case;
+        end if;
+    end Put_End_Compatibility_Font_Info;
+
+
     procedure Start_Paragraph (Output_Object : in out HTML_Output_Type;
 			       Format : in ARM_Output.Paragraph_Type;
 			       Number : in String;
@@ -1127,9 +1224,9 @@ package body ARM_HTML is
 	-- specifies the text justification for the paragraph. Not_Valid_Error
 	-- is raised if Tab_Stops /= NO_TABS for a hanging or bulleted format.
 
-	procedure Put_Style (Name : in String) is
-	    -- Output a style for HTML 4.0 (and for compatibility mode,
-	    -- output the other information as well).
+	procedure Put_Style (Name : in String; Include_Compatibility : in Boolean := True) is
+	    -- Output a style for HTML 4.0; if Include_Compatibility is True,
+	    -- include compatibility font information as well.
 	begin
 	    case Paragraph_Info(Format).Tag is
 		when DIV =>
@@ -1172,40 +1269,8 @@ package body ARM_HTML is
 	    end case;
 	    Ada.Text_IO.Put (Output_Object.Output_File, ">");
 	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
-	    if HTML_Kind = HTML_4_Compatible then
-		case Paragraph_Info(Format).Font is
-		    when ARM_Output.Default | ARM_Output.Roman =>
-			null;
-		    when ARM_Output.Swiss =>
-			Ada.Text_IO.Put (Output_Object.Output_File, SWISS_FONT_CODE);
-			Output_Object.Char_Count := Output_Object.Char_Count + SWISS_FONT_CODE'Length;
-		    when ARM_Output.Fixed =>
-			Ada.Text_IO.Put (Output_Object.Output_File, "<TT>");
-			Output_Object.Char_Count := Output_Object.Char_Count + 4;
-		end case;
-		if ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
-		    null; -- No font change here.
-		else
-	            case Paragraph_Info(Format).Size is
-		        when 0 => null;
-		        when 1 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=+1>");
-		            Output_Object.Char_Count := Output_Object.Char_Count + 14;
-		        when 2 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=+2>");
-		            Output_Object.Char_Count := Output_Object.Char_Count + 14;
-		        when -1 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-1>");
-		            Output_Object.Char_Count := Output_Object.Char_Count + 14;
-		        when -2 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-2>");
-		            Output_Object.Char_Count := Output_Object.Char_Count + 14;
-		        when -3 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-3>");
-		            Output_Object.Char_Count := Output_Object.Char_Count + 14;
-		        when others => null; -- Not supported.
-	            end case;
-		end if;
+	    if HTML_Kind = HTML_4_Compatible and then Include_Compatibility then
+		Put_Compatibility_Font_Info (Output_Object, Format);
 	    end if;
 	end Put_Style;
 
@@ -1398,7 +1463,7 @@ package body ARM_HTML is
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 26;
 		    else
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><FONT SIZE=-1><LI TYPE=DISC>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><LI TYPE=DISC><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 40;
 		    end if;
 	        when ARM_Output.Small_Nested_Bulleted =>
@@ -1406,7 +1471,7 @@ package body ARM_HTML is
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 30;
 		    else
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><FONT SIZE=-1><LI TYPE=DISC>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><LI TYPE=DISC><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 44;
 		    end if;
 	        when ARM_Output.Indented_Bulleted =>
@@ -1446,7 +1511,7 @@ package body ARM_HTML is
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 18;
 		    else
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><FONT SIZE=-1><LI TYPE=DISC>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><LI TYPE=DISC><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 32;
 		    end if;
 	        when ARM_Output.Notes_Nested_Bulleted =>
@@ -1454,7 +1519,7 @@ package body ARM_HTML is
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 22;
 		    else
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><FONT SIZE=-1><LI TYPE=DISC>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><LI TYPE=DISC><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 36;
 		    end if;
 	        when ARM_Output.Hanging =>
@@ -1479,21 +1544,21 @@ package body ARM_HTML is
 		    end if;
 	        when ARM_Output.Small_Hanging =>
 		    if No_Prefix then
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><DL><FONT SIZE=-1><DD>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><DL><DD><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 30;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><DL><FONT SIZE=-1><DT>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><DL><DT><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 30;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Small_Indented_Hanging =>
 		    if No_Prefix then
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><DL><FONT SIZE=-1><DD>");
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><DL><DD><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 38;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><DL><FONT SIZE=-1><DT>");
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><DL><DT><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 38;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
@@ -1509,11 +1574,11 @@ package body ARM_HTML is
 		    end if;
 	        when ARM_Output.Small_Hanging_in_Bulleted =>
 		    if No_Prefix then
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><DL><FONT SIZE=-1><DD>");
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><DL><DD><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 34;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><DL><FONT SIZE=-1><DT>");
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><DL><DT><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 34;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
@@ -1529,11 +1594,11 @@ package body ARM_HTML is
 		    end if;
 	        when ARM_Output.Small_Enumerated =>
 		    if No_Prefix then
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><DL><FONT SIZE=-1><DD>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><DL><DD><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 30;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><DL><FONT SIZE=-1><DT>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><DL><DT><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 30;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
@@ -1549,11 +1614,11 @@ package body ARM_HTML is
 		    end if;
 	        when ARM_Output.Small_Nested_Enumerated =>
 		    if No_Prefix then
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><DL><FONT SIZE=-1><DD>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><DL><DD><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 34;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
-	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><DL><FONT SIZE=-1><DT>");
+	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><DL><DT><FONT SIZE=-1>");
 		        Output_Object.Char_Count := 34;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
@@ -1620,195 +1685,215 @@ package body ARM_HTML is
 	        when ARM_Output.Small_Indented =>
 		    Put_Style ("SmallIndented");
 	        when ARM_Output.Bulleted =>
-		    Put_Style ("Bulleted");
+		    Put_Style ("Bulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Nested_Bulleted =>
-		    Put_Style ("NestedBulleted");
+		    Put_Style ("NestedBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Small_Bulleted =>
-		    Put_Style ("SmallBulleted");
+		    Put_Style ("SmallBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Small_Nested_Bulleted =>
-		    Put_Style ("SmallNestedBulleted");
+		    Put_Style ("SmallNestedBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Indented_Bulleted =>
-		    Put_Style ("IndentedBulleted");
+		    Put_Style ("IndentedBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Code_Indented_Bulleted =>
-		    Put_Style ("CodeIndentedBulleted");
+		    Put_Style ("CodeIndentedBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Code_Indented_Nested_Bulleted =>
-		    Put_Style ("CodeIndentedNestedBulleted");
+		    Put_Style ("CodeIndentedNestedBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Syntax_Indented_Bulleted =>
-		    Put_Style ("SyntaxIndentedBulleted");
+		    Put_Style ("SyntaxIndentedBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Notes_Bulleted =>
-		    Put_Style ("NotesBulleted");
+		    Put_Style ("NotesBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Notes_Nested_Bulleted =>
-		    Put_Style ("NotesNestedBulleted");
+		    Put_Style ("NotesNestedBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Hanging =>
-		    Put_Style ("Hanging");
+		    Put_Style ("Hanging", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""Hanging"">");
-		        Output_Object.Char_Count := 21;
+			Output_Object.Char_Count := Output_Object.Char_Count + 21;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Indented_Hanging =>
-		    Put_Style ("IndentedHanging");
+		    Put_Style ("IndentedHanging", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""IndentedHanging"">");
-		        Output_Object.Char_Count := 21;
+			Output_Object.Char_Count := Output_Object.Char_Count + 29;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Small_Hanging =>
-		    Put_Style ("SmallHanging");
+		    Put_Style ("SmallHanging", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""SmallHanging"">");
-		        Output_Object.Char_Count := 26;
+			Output_Object.Char_Count := Output_Object.Char_Count + 26;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Small_Indented_Hanging =>
-		    Put_Style ("SmallIndentedHanging");
+		    Put_Style ("SmallIndentedHanging", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""SmallIndentedHanging"">");
-		        Output_Object.Char_Count := 26;
+			Output_Object.Char_Count := Output_Object.Char_Count + 34;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Hanging_in_Bulleted =>
-		    Put_Style ("HangingInBulleted");
+		    Put_Style ("HangingInBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""HangingInBulleted"">");
-		        Output_Object.Char_Count := 21;
+			Output_Object.Char_Count := Output_Object.Char_Count + 31;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Small_Hanging_in_Bulleted =>
-		    Put_Style ("SmallHangingInBulleted");
+		    Put_Style ("SmallHangingInBulleted", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""SmallHangingInBulleted"">");
-		        Output_Object.Char_Count := 26;
+			Output_Object.Char_Count := Output_Object.Char_Count + 36;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Enumerated =>
-		    Put_Style ("Enumerated");
+		    Put_Style ("Enumerated", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""Enumerated"">");
-		        Output_Object.Char_Count := 24;
+			Output_Object.Char_Count := Output_Object.Char_Count + 24;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Small_Enumerated =>
-		    Put_Style ("SmallEnumerated");
+		    Put_Style ("SmallEnumerated", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""SmallEnumerated"">");
-		        Output_Object.Char_Count := 29;
+			Output_Object.Char_Count := Output_Object.Char_Count + 29;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Nested_Enumerated =>
-		    Put_Style ("NestedEnumerated");
+		    Put_Style ("NestedEnumerated", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""Enumerated"">");
-		        Output_Object.Char_Count := 24;
+			Output_Object.Char_Count := Output_Object.Char_Count + 24;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	        when ARM_Output.Small_Nested_Enumerated =>
-		    Put_Style ("SmallNestedEnumerated");
+		    Put_Style ("SmallNestedEnumerated", Include_Compatibility => False);
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""SmallEnumerated"">");
-		        Output_Object.Char_Count := 29;
+			Output_Object.Char_Count := Output_Object.Char_Count + 29;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
+		    Put_Compatibility_Font_Info (Output_Object, Format);
 	    end case;
 	    Output_Object.Paragraph_Format := Format;
 	    Output_Object.Font := ARM_Output.Default;
@@ -1880,7 +1965,7 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Nested_Bulleted =>
 		    Put_Style ("NestedBulleted");
@@ -1888,7 +1973,7 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Small_Bulleted =>
 		    Put_Style ("SmallBulleted");
@@ -1896,7 +1981,7 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Small_Nested_Bulleted =>
 		    Put_Style ("SmallNestedBulleted");
@@ -1904,7 +1989,7 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Indented_Bulleted =>
 		    Put_Style ("IndentedBulleted");
@@ -1912,7 +1997,7 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Code_Indented_Bulleted =>
 		    Put_Style ("CodeIndentedBulleted");
@@ -1920,7 +2005,7 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Code_Indented_Nested_Bulleted =>
 		    Put_Style ("CodeIndentedNestedBulleted");
@@ -1928,7 +2013,7 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Syntax_Indented_Bulleted =>
 		    Put_Style ("SyntaxIndentedBulleted");
@@ -1936,7 +2021,7 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Notes_Bulleted =>
 		    Put_Style ("NotesBulleted");
@@ -1944,7 +2029,7 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Notes_Nested_Bulleted =>
 		    Put_Style ("NotesNestedBulleted");
@@ -1952,116 +2037,116 @@ package body ARM_HTML is
 			null;
 		    else
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<LI TYPE=DISC>");
-		        Output_Object.Char_Count := 14;
+			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Hanging =>
 		    Put_Style ("Hanging");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""Hanging"">");
-		        Output_Object.Char_Count := 21;
+			Output_Object.Char_Count := Output_Object.Char_Count + 21;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Indented_Hanging =>
 		    Put_Style ("IndentedHanging");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""IndentedHanging"">");
-		        Output_Object.Char_Count := 21;
+			Output_Object.Char_Count := Output_Object.Char_Count + 29;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Small_Hanging =>
 		    Put_Style ("SmallHanging");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""SmallHanging"">");
-		        Output_Object.Char_Count := 26;
+			Output_Object.Char_Count := Output_Object.Char_Count + 26;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Small_Indented_Hanging =>
 		    Put_Style ("SmallIndentedHanging");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""SmallIndentedHanging"">");
-		        Output_Object.Char_Count := 26;
+			Output_Object.Char_Count := Output_Object.Char_Count + 34;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Hanging_in_Bulleted =>
 		    Put_Style ("HangingInBulleted");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""HangingInBulleted"">");
-		        Output_Object.Char_Count := 21;
+			Output_Object.Char_Count := Output_Object.Char_Count + 31;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Small_Hanging_in_Bulleted =>
 		    Put_Style ("SmallHangingInBulleted");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class =""SmallHangingInBulleted"">");
-		        Output_Object.Char_Count := 26;
+			Output_Object.Char_Count := Output_Object.Char_Count + 36;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>");
-		        Output_Object.Char_Count := 4;
+			Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Enumerated =>
 		    Put_Style ("Enumerated");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class=""Enumerated"">");
-		        Output_Object.Char_Count := 24;
+			Output_Object.Char_Count := Output_Object.Char_Count + 24;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>&nbsp;");
-		        Output_Object.Char_Count := 10;
+			Output_Object.Char_Count := Output_Object.Char_Count + 10;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Small_Enumerated =>
 		    Put_Style ("SmallEnumerated");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class=""SmallEnumerated"">");
-		        Output_Object.Char_Count := 29;
+			Output_Object.Char_Count := Output_Object.Char_Count + 29;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>&nbsp;");
-		        Output_Object.Char_Count := 10;
+			Output_Object.Char_Count := Output_Object.Char_Count + 10;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Nested_Enumerated =>
 		    Put_Style ("NestedEnumerated");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class=""Enumerated"">");
-		        Output_Object.Char_Count := 24;
+			Output_Object.Char_Count := Output_Object.Char_Count + 24;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>&nbsp;");
-		        Output_Object.Char_Count := 10;
+			Output_Object.Char_Count := Output_Object.Char_Count + 10;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	        when ARM_Output.Small_Nested_Enumerated =>
 		    Put_Style ("SmallNestedEnumerated");
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DD Class=""SmallEnumerated"">");
-		        Output_Object.Char_Count := 29;
+			Output_Object.Char_Count := Output_Object.Char_Count + 29;
 		        Output_Object.Saw_Hang_End := True;
 		    else -- Has prefix.
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<DT>&nbsp;");
-		        Output_Object.Char_Count := 10;
+			Output_Object.Char_Count := Output_Object.Char_Count + 10;
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 	    end case;
@@ -2094,37 +2179,13 @@ package body ARM_HTML is
     procedure End_Paragraph (Output_Object : in out HTML_Output_Type) is
 	-- End a paragraph.
 
-	procedure Put_End_Style (Format : in ARM_Output.Paragraph_Type) is
-	    -- Output an end style for HTML 4.0 (and for compatibility mode,
-	    -- output the other information as well).
+	procedure Put_End_Style (Format : in ARM_Output.Paragraph_Type;
+				 Include_Compatibility : in Boolean := True) is
+	    -- Output a end style for HTML 4.0; if Include_Compatibility is True,
+	    -- include compatibility font information as well.
 	begin
-	    if HTML_Kind = HTML_4_Compatible then
-		if ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
-		    null; -- No font change here.
-		else
-	            case Paragraph_Info(Format).Size is
-		        when 0 => null;
-		        when 1 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
-		        when 2 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
-		        when -1 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
-		        when -2 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
-		        when -3 =>
-		            Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
-		        when others => null; -- Not supported.
-	            end case;
-		end if;
-	        case Paragraph_Info(Format).Font is
-		    when ARM_Output.Default | ARM_Output.Roman =>
-			null;
-		    when ARM_Output.Swiss =>
-			Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
-		    when ARM_Output.Fixed =>
-			Ada.Text_IO.Put (Output_Object.Output_File, "</TT>");
-		end case;
+	    if HTML_Kind = HTML_4_Compatible and then Include_Compatibility then
+		Put_End_Compatibility_Font_Info (Output_Object, Format);
 	    end if;
 	    case Paragraph_Info(Format).Tag is
 		when DIV =>
@@ -2217,14 +2278,14 @@ package body ARM_HTML is
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Bulleted =>
 		    if Output_Object.Had_Prefix then
-	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</LI></FONT></UL></UL></UL>");
+	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></LI></UL></UL></UL>");
 		    else
 	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL>");
 		    end if;
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Nested_Bulleted =>
 		    if Output_Object.Had_Prefix then
-	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</LI></FONT></UL></UL></UL></UL>");
+	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></LI></UL></UL></UL></UL>");
 		    else
 	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL>");
 		    end if;
@@ -2259,14 +2320,14 @@ package body ARM_HTML is
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Notes_Bulleted =>
 		    if Output_Object.Had_Prefix then
-	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</LI></FONT></UL></UL>");
+	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></LI></UL></UL>");
 		    else
 	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL>");
 		    end if;
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Notes_Nested_Bulleted =>
 		    if Output_Object.Had_Prefix then
-	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</LI></FONT></UL></UL></UL>");
+	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></LI></UL></UL></UL>");
 		    else
 	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL>");
 		    end if;
@@ -2278,28 +2339,28 @@ package body ARM_HTML is
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Hanging =>
-	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL></FONT></UL></UL>");
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></DL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Indented_Hanging =>
-	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL></FONT></UL></UL></UL></UL>");
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></DL></UL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Hanging_in_Bulleted =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Hanging_in_Bulleted =>
-	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL></FONT></UL></UL></UL>");
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></DL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Enumerated =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Enumerated =>
-	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL></FONT></UL></UL>");
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></DL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Nested_Enumerated =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Nested_Enumerated =>
-	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL></FONT></UL></UL></UL>");
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></DL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	    end case;
 	else -- if HTML_Kind = HTML_4_Compatible or else HTML_Kind = HTML_4_Only then
@@ -2321,11 +2382,13 @@ package body ARM_HTML is
 	             ARM_Output.Code_Indented_Nested_Bulleted |
 	             ARM_Output.Syntax_Indented_Bulleted |
 	             ARM_Output.Notes_Bulleted | ARM_Output.Notes_Nested_Bulleted =>
+		    Put_End_Compatibility_Font_Info (Output_Object, Output_Object.Paragraph_Format);
 		    if Output_Object.Had_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "</LI>");
 		    -- else null;
 		    end if;
-		    Put_End_Style (Output_Object.Paragraph_Format);
+		    Put_End_Style (Output_Object.Paragraph_Format,
+				   Include_Compatibility => False);
 	        when ARM_Output.Hanging | ARM_Output.Indented_Hanging |
 	             ARM_Output.Small_Hanging | ARM_Output.Small_Indented_Hanging |
 		     ARM_Output.Hanging_in_Bulleted | ARM_Output.Small_Hanging_in_Bulleted =>
@@ -2475,9 +2538,9 @@ package body ARM_HTML is
 	function Header_Text return String is
 	begin
 	    if HTML_Kind = HTML_4_Only then
-		return "<INS>" & New_Header_Text & "</INS><DEL>" & Old_Header_Text & "</DEL>";
+		return "<INS>" & New_Header_Text & "</INS> <DEL>" & Old_Header_Text & "</DEL>";
 	    else
-		return "<U>" & New_Header_Text & "</U><S>" & Old_Header_Text & "</S>";
+		return "<U>" & New_Header_Text & "</U> <S>" & Old_Header_Text & "</S>";
 	    end if;
 	end Header_Text;
     begin
@@ -2695,7 +2758,6 @@ package body ARM_HTML is
 		Output_Object.Any_Nonspace := False;
 	    when ARM_Output.End_Table =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</TABLE>");
 		if HTML_Kind /= HTML_3 then
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</TABLE></DIV>");
 		else
@@ -3347,9 +3409,20 @@ package body ARM_HTML is
 	end if;
 	Output_Object.Saw_Hang_End := True;
 	if HTML_Kind = HTML_3 then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<DD>");
+	    case Output_Object.Paragraph_Format is
 	        -- Part of a definition list.
+		when ARM_Output.Small_Hanging |
+		     ARM_Output.Small_Indented_Hanging |
+		     ARM_Output.Small_Hanging_in_Bulleted |
+		     ARM_Output.Small_Enumerated | ARM_Output.Small_Nested_Enumerated =>
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT><DD><FONT SIZE=-1>");
+		when others =>
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<DD>");
+	    end case;
 	else
+	    -- We have to close and reopen the font info here, so that we
+	    -- properly nest these operations to pass the WC3 validator.
+	    Put_End_Compatibility_Font_Info (Output_Object, Output_Object.Paragraph_Format);
 	    case Output_Object.Paragraph_Format is
 		when ARM_Output.Hanging =>
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<DD Class=""Hanging"">");
@@ -3370,6 +3443,7 @@ package body ARM_HTML is
 		when others =>
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<DD>");
 	    end case;
+	    Put_Compatibility_Font_Info (Output_Object, Output_Object.Paragraph_Format);
 	end if;
         Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
@@ -3428,25 +3502,6 @@ package body ARM_HTML is
 		"Not in paragraph");
 	end if;
 	-- We do these in this order so that the changes are stacked properly.
-	if Change /= Output_Object.Change then
-	    -- Note: Version is not used.
-	    case Output_Object.Change is
-		when ARM_Output.Insertion =>
-		    if HTML_Kind = HTML_4_Only then
-		        Output_Text (Output_Object, "</INS>");
-		    else
-		        Output_Text (Output_Object, "</U>");
-		    end if;
-		when ARM_Output.Deletion =>
-		    if HTML_Kind = HTML_4_Only then
-			Output_Text (Output_Object, "</DEL>");
-		    else -- HTML 3.2
-			Output_Text (Output_Object, "</S>");
-		    end if;
-		when ARM_Output.None =>
-		    null;
-	    end case;
-	end if;
 
 	if not Bold and Output_Object.Is_Bold then
 	    Output_Text (Output_Object, "</B>");
@@ -3494,6 +3549,61 @@ package body ARM_HTML is
 		        Output_Text (Output_Object, "</FONT>");
 		    end if;
 	    end case;
+	end if;
+
+	if Change /= Output_Object.Change then
+	    -- Note: Version is not used.
+	    case Output_Object.Change is
+		when ARM_Output.Insertion =>
+		    if HTML_Kind = HTML_4_Only then
+		        Output_Text (Output_Object, "</INS> ");
+		    else
+		        Output_Text (Output_Object, "</U> ");
+		    end if;
+		    -- Note: We follow these with a space so that
+		    -- we don't get words running together for indexing
+		    -- purposes (Google, Ada Indexer). That's only a concern
+		    -- for deletions directly following insertions (at least in
+		    -- the absence of nesting), so we only add the extra space
+		    -- after insertions. RTF needs insertions and deletions
+		    -- without spaces to work properly, thus the source does not
+		    -- have them. We'd prefer to do this only when another
+		    -- change follows this one directly, but there is no easy
+		    -- way to determine that.
+		    -- HTML ignores extra spaces, so adding a space always
+		    -- would only be a problem if the space got 'pinned' by a
+		    -- format change immediately following the insertion.
+		    -- Probably not worth worrying about.
+		when ARM_Output.Deletion =>
+		    if HTML_Kind = HTML_4_Only then
+			Output_Text (Output_Object, "</DEL>");
+		    else -- HTML 3.2
+			Output_Text (Output_Object, "</S>");
+		    end if;
+		when ARM_Output.None =>
+		    null;
+	    end case;
+	    case Change is
+		when ARM_Output.Insertion =>
+		    if HTML_Kind = HTML_4_Only then
+		        Output_Text (Output_Object, "<INS>");
+		    else -- HTML 3.2
+		        Output_Text (Output_Object, "<U>");
+		    end if;
+		when ARM_Output.Deletion =>
+		    if HTML_Kind = HTML_4_Only then
+		        Output_Text (Output_Object, "<DEL>");
+		    else -- HTML 3.2
+		        Output_Text (Output_Object, "<S>");
+		    end if;
+		when ARM_Output.None =>
+		    null;
+	    end case;
+	    Output_Object.Change := Change;
+	end if;
+
+
+	if ARM_Output."/=" (Font, Output_Object.Font) then
 	    case Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed =>
@@ -3558,27 +3668,6 @@ package body ARM_HTML is
 	if Bold and (not Output_Object.Is_Bold) then
 	    Output_Text (Output_Object, "<B>");
 	    Output_Object.Is_Bold := True;
-	end if;
-
-	if Change /= Output_Object.Change then
-	    -- Note: Version is not used.
-	    case Change is
-		when ARM_Output.Insertion =>
-		    if HTML_Kind = HTML_4_Only then
-		        Output_Text (Output_Object, "<INS>");
-		    else -- HTML 3.2
-		        Output_Text (Output_Object, "<U>");
-		    end if;
-		when ARM_Output.Deletion =>
-		    if HTML_Kind = HTML_4_Only then
-		        Output_Text (Output_Object, "<DEL>");
-		    else -- HTML 3.2
-		        Output_Text (Output_Object, "<S>");
-		    end if;
-		when ARM_Output.None =>
-		    null;
-	    end case;
-	    Output_Object.Change := Change;
 	end if;
 
     end Text_Format;
