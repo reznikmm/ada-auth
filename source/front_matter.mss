@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.30 $ $Date: 2004/09/17 04:56:29 $}
+@comment{$Revision: 1.31 $ $Date: 2004/10/29 04:22:49 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -61,13 +61,13 @@ Manual is made available to the public.],Old=[]}
 @begin{RMOnly}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
-(ISO/IEC 8652:1995/COR1:2000). In addition, a variety of editorial errors have
+(ISO/IEC 8652:1995/COR.1:2001). In addition, a variety of editorial errors have
 been corrected.],Old=[]}
 @end{RMOnly}
 @begin{AARMOnly}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
-(ISO/IEC 8652:1995/COR1:2000). In addition, additional annotations have been added and
+(ISO/IEC 8652:1995/COR.1:2001). In addition, additional annotations have been added and
 a variety of editorial errors have been corrected.],Old=[]}
 @end{AARMOnly}
 

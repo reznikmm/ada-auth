@@ -1,13 +1,13 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2004/09/17 04:56:28 $}
+@comment{$Revision: 1.17 $ $Date: 2004/10/29 04:22:49 $}
 
 @begin{ISOOnly}
-@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2000], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}}}
 @end{ISOOnly}
 @begin{NotISO}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2000], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}}}
 @end{NotISO}
 
 @Noparanum@ @*
@@ -132,9 +132,7 @@ EVEN IF MITRE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 @Noparanum@;@Chg{Version=[2], New=[This document may be copied, in whole or in part, in any form or by any means,
 as is, or with alterations, provided that (1) alterations are clearly marked as
 alterations and (2) this copyright notice is included unmodified in any copy.
-Compiled copies of standard library units and examples need not contain this
-copyright notice so long as the notice is included in all copies of source code
-and documentation. Any other use or distribution of this document is prohibited
+Any other use or distribution of this document is prohibited
 without the prior express permission of AXE.], Old=[]}
 
 @Noparanum@;@Chg{Version=[2], New=[You use this document on the condition that

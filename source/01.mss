@@ -12,7 +12,7 @@ I probably ought to add a style just for this purpose)
 
 @begin{Wide}
 @noparanum@leading@tabclear()@tabset(P45)
-@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2000], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}]>
+@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}]>
 @end{Wide}
 
 @thickline
@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2004/09/17 04:56:25 $}
+@Comment{$Date: 2004/10/29 04:22:48 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -70,7 +70,7 @@ They describe the reason for each non-obvious rule,
 and point out interesting ramifications of the rules
 and interactions among the rules
 (interesting to language lawyers, that is).
-Differences between Ada 83@Chg{Version=[2],New=[, Ada95, and Ada0y],Old=[ and Ada 95]}
+Differences between Ada 83@Chg{Version=[2],New=[, Ada95, and Ada2005],Old=[ and Ada 95]}
 are listed.
 (The text you are reading now is an annotation.)
 
@@ -763,7 +763,7 @@ and does not appear in the RM95@Chg{Version=[2],New=[ or RM0y],Old=[]}.
 @Chg{Version=[2],New=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
 @*
 The next three headings list all language changes between Ada 95
-and Ada 0y (the language defined by the Ada 95 standard plus
+and Ada 2005 (the language defined by the Ada 95 standard plus
 Technical Corrigendum 1 plus Amendment 1).
 Each language change falls into one of the following three
 categories:],Old=[]}
@@ -774,7 +774,7 @@ categories:],Old=[]}
 @Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
 This heading lists all of the upward inconsistencies between Ada 95 and Ada
 0y. Upward inconsistencies are situations in which a legal Ada 95 program
-is a legal Ada 0y program with different semantics.],Old=[]}
+is a legal Ada 2005 program with different semantics.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,
@@ -785,9 +785,9 @@ and does not appear in the RM0y.],Old=[]}
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
 This heading lists all of the upward incompatibilities between Ada 95
-and Ada 0y, except for the ones listed under @lquotes@;@Inconsistent95Title@rquotes@;
+and Ada 2005, except for the ones listed under @lquotes@;@Inconsistent95Title@rquotes@;
 above. These are the situations in which a legal Ada 95 program is
-illegal in Ada 0y.],Old=[]}
+illegal in Ada 2005.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,
@@ -799,7 +799,7 @@ and does not appear in the RM0y.],Old=[]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
 This heading is used to list all upward compatible language changes;
 that is, language extensions.
-These are the situations in which a legal Ada 0y program is not a
+These are the situations in which a legal Ada 2005 program is not a
 legal Ada 95 program.
 The vast majority of language changes fall into this category.],Old=[]}
 
@@ -972,7 +972,7 @@ The following are defined as @i(external interactions):
     By @lquotes@;result returned@rquotes@; we mean to include function results
     and values returned in [@key(in)] @key(out) parameters.
 
-    @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0094],ARef=[AI95-00119]}
+    @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0094],ARef=[AI95-00119-01]}
     @Chg{Version=[1],New=[The lack of a result from a program that does not terminate
     is also included here.],Old=[]}
   @end{Discussion}
@@ -1316,6 +1316,16 @@ Duration the user might have declared.
 @end(Discussion)
 
 @begin{Wide}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@Chg{Version=[2],New=[The terminals of the grammar, including reserved words,
+punctuation and components of lexical elements, are exclusively made of the
+characters whose code position is between 16#20# and 16#7E#, inclusively.
+@Redundant[For example, the character E in the definition of exponent is the
+character whose name is @lquotes;LATIN CAPITAL LETTER E@rquotes;, not
+@lquotes;GREEK CAPITAL LETTER EPSILON@rquotes;.]],Old=[]}
+@end{Wide}
+
+@begin{Wide}
 @Defn{syntactic category}
 A @i{syntactic category} is
 a nonterminal in the grammar defined in BNF under @lquotes@;@SyntaxTitle.@rquotes@;
@@ -1410,6 +1420,15 @@ The line breaks and indentation in the syntax rules indicate the
 recommended line breaks and indentation in the corresponding constructs.
 The preferred places for other line breaks are after semicolons.
 @end{Notes}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@Chg{Version=[2],New=[We now explicitly say that the lexical elements of the
+language (with a few exceptions) are made up of characters in the lower half of
+the Latin-1 character set. This is needed to avoid confusion given the new
+capability to use most ISO 10646 characters in identifiers and
+strings.],Old=[]}
+@end{DiffWord95}
 
 @LabeledSubClause{Classification of Errors}
 
@@ -1632,7 +1651,7 @@ ISO/IEC 8859-1:1987,
 ISO/IEC 9899:1990,
 @i{Programming languages @em C.}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001],ARef=[AI95-00124]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001],ARef=[AI95-00124-01]}
 @Defn{ISO/IEC 10646-1:1993}
 @Defn{10646-1:1993, ISO/IEC standard}
 @Defn2{Term=[character set standard],Sec=(16-bit)}
@@ -1643,7 +1662,7 @@ ISO/IEC 10646-1:1993,
     1:1996.], Old=[.]}
 
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0001],ARef=[AI95-00124]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0001],ARef=[AI95-00124-01]}
 @Chg{Version=[1],New=[The Technical Corrigendum 1:1996 is needed so that character
 codes C6 and E6 (the ligatures @latin1(198) and @latin1(230)) are considered
 letters. These were named Latin Ligature AE in the original 1993 version,

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/10/29 00:12:33 $}
+@Comment{$Date: 2004/10/29 04:22:48 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -419,25 +419,25 @@ dependences of units.],Old=[]}
 @end(Discussion)
 
 @begin(Ramification)
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[The limited view does not include package instances and
 their contents. Semantic analysis of a unit (and dependence on its
 @nt{with_clause}s) would be needed to determine the contents of an instance.],Old=[]}
 @end(Ramification)
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[The limited view of a library @nt{package_declaration} is private if that
 library @nt{package_declaration} is immediately preceded by the reserved word
 @key{private}.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[@Redundant[There is no syntax for declaring limited views
 of packages, because they are always implicit.] The implicit declaration of a
 limited view of a package is @Redundant[not the declaration of a library
 unit (the library package_declaration is); nonetheless, it is] a
 @nt{library_item}.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[A library @nt{package_declaration} is the completion of
 the declaration of its limited view.],Old=[]}
 
@@ -938,10 +938,10 @@ to which the @nt{context_clause} is attached.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06],ARef=[AI95-00262-01]}
 @Syn{lhs=<with_clause>,rhs="@Chg{Version=[2],New=<@Syn2{limited_with_clause} | @Syn2{nonlimited_with_clause}>,Old=<@key{with} @SynI{library_unit_}@Syn2{name} {, @SynI{library_unit_}@Syn2{name}};>}"}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[Added]}
 @Syn{lhs=<@Chg{Version=[2],New=<limited_with_clause>,Old=<>}>,rhs="@Chg{Version=[2],New=<@key{limited} [@key{private}] @key{with} @SynI{library_unit_}@Syn2{name} {, @SynI{library_unit_}@Syn2{name}};>,Old=<>}"}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[Added]}
 @Syn{lhs=<@Chg{Version=[2],New=<nonlimited_with_clause>,Old=<>}>,rhs="@Chg{Version=[2],New=<[@key{private}] @key{with} @SynI{library_unit_}@Syn2{name} {, @SynI{library_unit_}@Syn2{name}};>,Old=<>}"}
 
 @begin{Discussion}
@@ -1046,16 +1046,16 @@ Old=[either the declaration of a private descendant of that library unit
 or the body or subunit of a @Redundant[(public or private)] descendant of
 that library unit.]}
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @Chg{Version=[2],New=[the declaration, body, or subunit of a private descendant
 of that library unit;],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00220-01],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00220-01],ARef=[AI95-00262-01]}
 @Chg{Version=[2],New=[the body or subunit of a public descendant of that
 library unit, but not a subprogram body acting as a subprogram declaration (see
 @RefSecNum{The Compilation Process}); or],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @Chg{Version=[2],New=[the declaration of a public descendant of that
 library unit, and the @nt<with_clause> shall include the keyword @key<private>.],Old=[]}
 @end{Itemize}
@@ -1127,50 +1127,50 @@ unit.
 
 @end{Honest}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @Chg{Version=[2],New=[A @nt<name> denoting a library item that is visible only
 due to being mentioned in @nt<with_clause>s that include the keyword
 @key<private> shall appear only within],Old=[]}
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[a private part,],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[a body, but not within the
 @nt<subprogram_specification> of a library subprogram body,],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[a private descendant of the unit on which one of these
 @nt<with_clause>s appear, or],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[a pragma within a context clause.],Old=[]}
 @end{Itemize}
 
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[These rules make the library item visible anywhere that
 is not visible outside the subsystem rooted at the @nt{compilation_unit} having
 the private @nt{with_clause}, including private parts of packages
 nested in the visible part, private parts of child packages, the visible part
 of private children, and context clause pragmas like Elaborate_All.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[We considered having the scope of a private
 @nt{with_clause} not include the visible part. However, that rule would mean
 that moving a declaration between the visible part and the private part could
 change its meaning from one legal interpretation to a different legal
 interpretation. For example:],Old=[]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{package} A @key{is}
     @key{function} B @key{return} Integer;
 @key{end} A;],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{function} B @key{return} Integer;],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{with} A;
 @key{private} @key{with} B;
 @key{package} C @key{is}
@@ -1181,7 +1181,7 @@ interpretation. For example:],Old=[]}
 @key{end} C;],Old=[]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[If we say that library subprogram B is not in scope
 in the visible part of C, then the B at (1) resolves to A.B, while (2)
 resolves to library unit B. Simply moving a declaration could silently change
@@ -1189,65 +1189,91 @@ its meaning. With the legality rule defined above, the B at (1) is illegal.
 If the user really meant A.B, they still can say that.],Old=[]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[A @nt{library_item} mentioned in a
 @nt{limited_with_clause} shall be a
 @nt{package_declaration}@Redundant[, not a @nt{subprogram_declaration},
 @nt{generic_declaration}, @nt{generic_instantiation}, or
 @nt{package_renaming_declaration}].],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[A @nt{limited_with_clause} shall not appear on a
 @nt{library_unit_body} or @nt{subunit}.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[A @nt{limited_with_clause} which names a @nt{library_item} shall not appear:],Old=[]}
 
 @begin(Itemize)
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[in the same @nt{context_clause} as a @nt{nonlimited_with_clause} which
 mentions the same @nt{library_item}; or],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[Such a @nt{limited_with_clause} could have no effect, and
+would be confusing.],Old=[]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[in the same @nt{context_clause} as a @nt{use_clause} which names an
 entity declared within the declarative region of the @nt{library_item}; or],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@Chg{Version=[2],New=[in the scope of a @nt{nonlimited_with_clause} which mentions the same
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This prevents visibility issues, where whether an entity
+is an incomplete or full view depends on how the name of the entity is written.
+The @nt{limited_with_clause} cannot be useful, as we must have the full view
+available in the parent in order for the @nt{use_clause} to be given.], Old=[]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@Chg{Version=[2],New=[in the @nt{context_clause} for the named
 @nt{library_item}; or],Old=[]}
 
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@Chg{Version=[2],New=[These prevent visibility problems. **TBD: A @i<@b<brief>> explanation of the problems.],Old=[]}
-@end{Reason}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@Chg{Version=[2],New=[in the scope of a @nt{use_clause} which names an entity declared
-within the declarative region of the @nt{library_item}.],Old=[]}
-@end(Itemize)
-
-@begin{Reason}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[We have to explicitly disallow],Old=[]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{limited} @key{with} P;
 @key{package} P @key{is} ...],Old=[]}
 @end{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[as we can't depend on the semantic dependence rules to do it for us as with
 regular withs. This says "named" and not "mentioned" in order that],Old=[]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{limited} @key{private} @key{with} P.Child;
 @key{package} P @key{is} ...],Old=[]}
 @end{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[can be used to allow a mutual dependence between the private part of P and
 the private child P.Child, which occurs in interfacing and other problems.
 Since the child always semantically depends on the parent, this is the only
 way such a dependence can be broken.],Old=[]}
 @end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@Chg{Version=[2],New=[in the scope of a @nt{nonlimited_with_clause} which mentions the same
+@nt{library_item}; or],Old=[]}
+
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[Such a @nt{limited_with_clause} could have no effect as
+the full view is available, and it would be confusing.],Old=[]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@Chg{Version=[2],New=[in the scope of a @nt{use_clause} which names an entity declared
+within the declarative region of the @nt{library_item}.],Old=[]}
+
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This prevents visibility problems, similar to the ones
+noted earlier.],Old=[]}
+@end{Reason}
+
+@end(Itemize)
 
 @end{Legality}
 
@@ -1316,13 +1342,13 @@ definition in @RefSecNum{Use Clauses}.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
 @nt{limited_with_clause}s are new. They make a limited view of a package
 visible, where all of the types in the package are incomplete. They facilitate
 construction of mutually recursive types in multiple packages.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
 The syntax rules for @nt{with_clause} also are modified to allow the keyword
 @key{private}. Private @nt{with_clause}s do not allow the use of their library
@@ -1599,7 +1625,7 @@ unit.
 @end{Intro}
 
 @begin{Resolution}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0032],ARef=[AI95-00192]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0032],ARef=[AI95-00192-01]}
 If a @nt<library_unit_body> that is a @nt<subprogram_body> is
 submitted to the compiler, it is interpreted only as a completion
 if a @nt<library_unit_declaration> @Chg{New=[], Old=[for a subprogram
@@ -1732,7 +1758,7 @@ turned off, or it has to automatically regenerate code for the inlined
 calls without requiring the user to resubmit them to the compiler.
 @end{Ramification}
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0108],ARef=[AI95-00077]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0108],ARef=[AI95-00077-01]}
 @Chg{Version=[1],New=[In the standard mode, implementations may only remove
 units from the environment for one of the reasons listed here, or in response
 to an explicit user command to modify the environment. It is not intended that
@@ -1800,7 +1826,7 @@ containing the instantiation.
 
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],Ref=[8652/0032],ARef=[AI95-00192]}
+@ChgRef{Version=[2],Kind=[Added],Ref=[8652/0032],ARef=[AI95-00192-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> The wording was clarified to insure that a
 @nt{subprogram_body} is not considered a completion of an instance of a
 generic subprogram.],Old=[]}
@@ -1861,7 +1887,7 @@ The @nt{name} has to denote the immediately preceding
 @nt{library_unit_declaration}.
 @end{Ramification}
 
-@ChgRef{Version=[1], Kind=[Revised], Ref=[8652/0033], ARef=[AI95-00136]}
+@ChgRef{Version=[1], Kind=[Revised], Ref=[8652/0033], ARef=[AI95-00136-01]}
 Immediately within the declaration of a program unit and
 before any nested declaration@Chg{New=[ (but not within a
 generic formal part)], Old=[]}, in which case the argument,
@@ -1908,7 +1934,7 @@ completion (and similar things), it has to appear inside, as the first
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041]}
+@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041-01]}
 @Chg{New=[A library unit pragma that applies to a generic unit does
 not apply to its instances, unless a specific rule for the pragma specifies the
 contrary.], Old=[]}
@@ -1942,7 +1968,7 @@ selected partition-wide or system-wide options.],Old=[]}
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041]}
+@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041-01]}
 @Chg{New=[When applied to a generic unit, a program unit pragma that
 is not a library unit pragma should apply to each instance of the generic unit
 for which there is not an overriding pragma applied directly to the instance.],
@@ -1951,12 +1977,12 @@ Old=[]}
 
 
 @begin{DiffWord95}
-@ChgRef{Version=[2], Kind=[Added], Ref=[8652/0033], ARef=[AI95-00136]}
+@ChgRef{Version=[2], Kind=[Added], Ref=[8652/0033], ARef=[AI95-00136-01]}
 @Chg{Version=[2], New=[@B<Corrigendum:> The wording was corrected to insure
 that a program unit pragma cannot appear in private parts or generic formal
 parts.], Old=[]}
 
-@ChgRef{Version=[2], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041]}
+@ChgRef{Version=[2], Kind=[Added], Ref=[8652/0034], ARef=[AI95-00041-01]}
 @Chg{Version=[2], New=[@B<Corrigendum:> The wording was clarified to explain
 the meaning of program unit and library unit pragmas in generic units.], Old=[]}
 
@@ -2270,7 +2296,7 @@ and, for Elaborate_All only, upon
 each @nt{library_item} needed by
 the declaration of the other library unit.
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0107],ARef=[AI95-00180]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0107],ARef=[AI95-00180-01]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00256-01]}
 @Chg{New=[@Lquotes@;Mentions@rquotes @Chg{Version=[2],New=[was],Old=[is]}
 used informally in the above rule; it @Chg{Version=[2],New=[was],Old=[is]}
@@ -2697,7 +2723,7 @@ The program as a whole is an entirely different thing.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00256]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00256-01]}
 @Chg{Version=[2],New=[The mistaken use of @lquotes@;mentions@rquotes@; in the
 elaboration dependence rule was fixed.],Old=[]}
 
@@ -2855,7 +2881,7 @@ instantiations in preelaborated library units,
 which would significantly reduce their usefulness.
 @end{Reason}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002-01]}
 @PDefn{preelaborated}
 If a @nt{pragma} Preelaborate (or @nt<pragma> Pure @em see below)
 applies to a library unit, then it is @i{preelaborated}.
@@ -2880,7 +2906,7 @@ compilation units of other preelaborated library units.
 In a generic body, we assume the worst about
 formal private types and extensions.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0035],ARef=[AI95-00002]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0035],ARef=[AI95-00002-01]}
 @Chg{Version=[1],New=[Subunits of a preelaborated subprogram unit do not need
 to be preelaborable. This is needed in order to be consistent with units
 nested in a subprogram body, which do not need to be preelaborable even if
@@ -3148,7 +3174,7 @@ previous @nt{with_clause} of the same @nt{context_clause}.
 A preelaborated library unit is allowed to have non-preelaborable
 children.
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002-01]}
 But @Chg{New=[generally ], Old=[]}not non-preelaborated subunits.
 @Chg{New=[(Non-preelaborated subunits of subprograms are allowed as
 discussed above.)], Old=[]}
@@ -3157,7 +3183,7 @@ discussed above.)], Old=[]}
 A library unit that is declared pure is allowed to have impure
 children.
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002-01]}
 But @Chg{New=[generally ], Old=[]}not impure subunits.
 @Chg{New=[(Impure subunits of subprograms are allowed as discussed above.)],
 Old=[]}
@@ -3190,7 +3216,7 @@ created in preelaborable units, and fix holes in the old rules.],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00002]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00002-01]}
 @Chg{Version=[2],New=[@B<Corrigendum:> The wording was changed so that
 subunits of a preelaborated subprogram are also preelaborated.],Old=[]}
 @end{DiffWord95}

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2004/09/17 04:56:27 $}
+@Comment{$Date: 2004/10/29 04:22:49 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1006,7 +1006,7 @@ string-returning functions in Ada.],Old=[]}
 @LabeledAddedSubClause{Version=[2],Name=[Pragmas Assert and Assertion_Policy]}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[Pragma Assert is used to assert the truth of a boolean
 expression at any point within a sequence of declarations or statements. Pragma
 Assertion_Policy is used to control whether such assertions@Defn{Assertions}
@@ -1016,26 +1016,26 @@ some implementation-defined manner.],Old=[]}
 
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[@Leading@Keepnext@;The form of a @nt{pragma} Assert is as follows:],Old=[]}
 @end{SyntaxText}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assert>([Check =>] @SynI{Boolean_}@Syn2{expression}[, [Message =>] @SynI{string_}@Syn2{expression}]);'>,Old=<>}
 
 @begin{SyntaxText}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[A @nt{pragma} Assert is allowed at the place where a
 @nt{declarative_item} or a @nt{statement} is allowed.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[@Leading@Keepnext@;The form of a @nt{pragma} Assertion_Policy is as follows:],Old=[]}
 @end{SyntaxText}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assertion_Policy>(@SynI{policy_}@Syn2{identifier});'>,Old=<>}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@PDefn2{Term=[configuration pragma], Sec=(Assertion_Policy)}
 @PDefn2{Term=[pragma, configuration], Sec=(Assertion_Policy)}
 A @nt{pragma} Assertion_Policy is a configuration pragma.],Old=[]}
@@ -1043,55 +1043,55 @@ A @nt{pragma} Assertion_Policy is a configuration pragma.],Old=[]}
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[The @SynI<policy_>@nt<identifier> of an Assertion_Policy
 pragma shall be either Check, Ignore, or an implementation-defined identifier.],Old=[]}
-@ChgImplDef{Version=[2],Kind=[Added],Text=[@Chg{Version=[2],New=[Implementation-defined
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[Implementation-defined
 @SynI<policy_>@nt<identifier>s allowed in a @nt{pragma} Assertion_Policy.],Old=[]}]}
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[A @nt<pragma> Assertion_Policy is a configuration pragma
 that specifies the assertion policy in effect for the compilation units to which it
 applies. Different policies may apply to different compilation
 units within the same partition. The default assertion policy is
 implementation-defined.],Old=[]}
-@ChgImplDef{Version=[2],Kind=[Added],Text=[@Chg{Version=[2],New=[The default
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The default
 assertion policy.],Old=[]}]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[@leading@keepnext@;The following language-defined library package exists:],Old=[]}
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@ChildUnit{Parent=[Ada],Child=[Assertions]}
 @key[package] Ada.Assertions @key[is]
    @key[pragma] Pure(Assertions);],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[   Assertion_Error : @key<exception>;],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[   @key<procedure> Assert(Check : @key<in> Boolean);
    @key<procedure> Assert(Check : @key<in> Boolean; Message : @key<in> String);],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key<end> Ada.Assertions;],Old=[]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[A compilation unit containing a @nt{pragma} Assert has a
 semantic dependence on the Ada.Assertions library unit.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[The assertion policy that applies within an instance is
 the policy that applies within the generic unit.],Old=[]}
 @end{StaticSem}
 
 
 @begin{RunTime}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[An assertion policy @defn{assertion policy}specifies how a @nt{pragma} Assert
 is interpreted by the implementation. If the assertion policy is Ignore at the
 point of a pragma Assert, the pragma is ignored. If the assertion policy is
@@ -1101,40 +1101,40 @@ evaluating the Message string, if any, and raising the exception
 Ada.Assertions.Assertion_Error, with a message if the Message argument is
 provided.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[@leading@keepnext@;Calling the procedure Ada.Assertions.Assert without a Message parameter is
 equivalent to:],Old=[]}
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key<if> Check = False @key<then>
    @key<raise> Ada.Assertions.Assertion_Error;
 @key{end} @key{if};],Old=[]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[@leading@keepnext@;Calling the procedure
 Ada.Assertions.Assert with a Message parameter is equivalent to:],Old=[]}
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key<if> Check = False @key<then>
    @key<raise> Ada.Assertions.Assertion_Error @key<with> Message;
 @key{end} @key{if};],Old=[]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[The procedures Assertions.Assert have these effects independent of the
 assertion policy in effect.],Old=[]}
 
 @end{RunTime}
 
 @begin{ImplPerm}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[Assertion_Error may be declared by renaming an
 implementation-defined exception from another package.],Old=[]}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This permission is intended to allow implementations
 which had an implementation-defined Assert pragma to continue to use their
 originally defined exception. Without this permission, such an implementation
@@ -1143,7 +1143,7 @@ would be incorrect, as Exception_Name would return the wrong name.],Old=[]}
 @end{ImplPerm}
 
 @begin{Notes}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[Normally, the boolean expression in an Assert pragma
 should not call functions that have significant side-effects when the result of
 the expression is True, so that the particular assertion policy in effect will
@@ -1151,7 +1151,7 @@ not affect normal operation of the program.],Old=[]}
 @end{Notes}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00286-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
 Pragmas Assert and Assertion_Policy, and package Ada.Assertions are new.],Old=[]}
 @end{Extend95}
@@ -1361,7 +1361,7 @@ can renew the permission.],Old=[]}
 @Leading@Redundant[The following checks correspond to situations in which the
 exception Constraint_Error is raised upon failure.]
 @begin{Description}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0036],ARef=[AI95-00176]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0036],ARef=[AI95-00176-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
 @RootDefn{Access_Check}
 Access_Check @\@Redundant[When evaluating a dereference (explicit
@@ -1617,7 +1617,7 @@ Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],Ref=[8652/0036],ARef=[AI95-00176],ARef=[AI95-00224-01]}
+@ChgRef{Version=[2],Kind=[Added],Ref=[8652/0036],ARef=[AI95-00176-01],ARef=[AI95-00224-01]}
 @Chg{Version=[2],New=[The description of Access_Check was corrected by the
 Corrigendum to include the discriminant case. This change was then replaced
 by the more general notion of checking conversions to null-excluding subtypes
