@@ -158,6 +158,9 @@ package body ARM_Format is
     --		- RLB - Allow multiple Ref and ARef params in ChgAttribute.
     --		- RLB - Added ChgAdded and ChgDeleted for entire paragraph
     --			operations.
+    -- 12/11/04 - RLB - Fixed brackets in Added_Pragma_Syntax to allow {} in
+    --			text.
+    --		- RLB - Implemented attribute adding in Change_Attribute.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -6454,6 +6457,41 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			Display_Ref : Boolean;
 			Which_Param : ARM_Input.Param_Num;
 			References : Reference_Ptr := null;
+
+
+			procedure Make_Attribute_Text is
+			    -- Generate the attribute text.
+			    -- Output <Prefix>'<Name> as the hanging text.
+			    -- Generate the needed index entries.
+			begin
+			    Check_Paragraph;
+			    ARM_Output.Ordinary_Text (Output_Object,
+				    Format_Object.Attr_Prefix (1 .. Format_Object.Attr_Prefix_Len));
+			    ARM_Output.Ordinary_Character (Output_Object, ''');
+			    ARM_Output.Ordinary_Text (Output_Object,
+				    Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len));
+			    ARM_Output.End_Hang_Item (Output_Object);
+			    Format_Object.Last_Non_Space := False; -- Treat like start of a line.
+
+			    ARM_Index.Add (Term => "attributes",
+					   Subterm => Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len),
+					   Kind => ARM_Index.Primary_Term_and_Subterm,
+					   Clause => Clause_String,
+					   Paragraph => Paragraph_String,
+					   Key => Key);
+			    ARM_Output.Index_Target (Output_Object, Key);
+
+			    ARM_Index.Add (Term => Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len) & " attribute",
+					   Kind => ARM_Index.Primary_Term,
+					   Clause => Clause_String,
+					   Paragraph => Paragraph_String,
+					   Key => Key);
+			    ARM_Output.Index_Target (Output_Object, Key);
+
+			    Make_References (References, Format_Object, Output_Object);
+
+			end Make_Attribute_Text;
+
 		    begin
 			Check_End_Paragraph; -- This is always a paragraph end.
 
@@ -6593,43 +6631,99 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    when ARM_Database.None | ARM_Database.Revised |
 				 ARM_Database.Revised_Inserted_Number =>
 				-- The prefix is unchanged.
-				-- Output <Prefix>'<Name> as the hanging text.
-				Check_Paragraph;
-				ARM_Output.Ordinary_Text (Output_Object,
-					Format_Object.Attr_Prefix (1 .. Format_Object.Attr_Prefix_Len));
-			        ARM_Output.Ordinary_Character (Output_Object, ''');
-			        ARM_Output.Ordinary_Text (Output_Object,
-					Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len));
-			        ARM_Output.End_Hang_Item (Output_Object);
-				Format_Object.Last_Non_Space := False; -- Treat like start of a line.
-
-				ARM_Index.Add (Term => "attributes",
-					       Subterm => Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len),
-					       Kind => ARM_Index.Primary_Term_and_Subterm,
-					       Clause => Clause_String,
-					       Paragraph => Paragraph_String,
-					       Key => Key);
-				ARM_Output.Index_Target (Output_Object, Key);
-
-				ARM_Index.Add (Term => Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len) & " attribute",
-					       Kind => ARM_Index.Primary_Term,
-					       Clause => Clause_String,
-					       Paragraph => Paragraph_String,
-					       Key => Key);
-				ARM_Output.Index_Target (Output_Object, Key);
-
-				Make_References (References, Format_Object, Output_Object);
+				Make_Attribute_Text;
+			        if Close_Ch /= ' ' then
+			            -- Now, handle the parameter:
+			            -- The text goes to the file *and* is recorded.
+			            Arm_Input.Start_Recording (Input_Object);
+			            -- Stack the parameter so we can process the end:
+			            Set_Nesting_for_Parameter
+			                (Command => Attribute_Text_Param,
+				         Close_Ch => Close_Ch);
+			        end if;
 
 			    when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
+				-- The insertion has to be both here and in the
+				-- Annex.
+				if not Chg_in_Annex then
+				    Ada.Text_IO.Put_Line ("  ** Attribute adding in text, but not in Annex??? on line " & ARM_Input.Line_String (Input_Object));
+				end if;
 
-				Ada.Text_IO.Put_Line ("  ** Attribute adding not implemented on line " & ARM_Input.Line_String (Input_Object));
-				-- If in new mode, do above; if in show_changes or new_changes,
-				-- show insertion; otherwise do not generate or
-				-- store attribute in DB. The last would
-				-- require changes to Attribute_Text_Param.
-				-- Careful: We need to ignore this completely
-				-- if it is added and we're not adding
-				-- it because of the version being generated.
+			        if Close_Ch /= ' ' then
+
+				    -- Stack the parameter so we can process the end:
+				    Set_Nesting_for_Parameter
+				        (Command => Attribute_Text_Param,
+					 Close_Ch => Close_Ch);
+
+				    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version >
+				       Format_Object.Change_Version then
+					-- Ignore any changes with version numbers
+					-- higher than the current maximum.
+				        -- Skip the text:
+				        ARM_Input.Skip_until_Close_Char (Input_Object,
+					    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
+				        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+
+				    else
+				        case Format_Object.Changes is
+					    when ARM_Format.Old_Only =>
+					        -- Skip the text:
+				                ARM_Input.Skip_until_Close_Char (Input_Object,
+					            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
+					        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+					    when ARM_Format.New_Only =>
+						Make_Attribute_Text;
+						-- Nothing special to do (normal text).
+					    when ARM_Format.Changes_Only |
+						 ARM_Format.Show_Changes |
+						 ARM_Format.New_Changes =>
+						if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
+						    Format_Object.Change_Version and then
+						    Format_Object.Changes = ARM_Format.Changes_Only then
+						    -- Just normal output text.
+						    Make_Attribute_Text;
+						else
+						    -- We assume non-empty text and no outer changes;
+						    -- set new change state:
+						    Format_Object.Change := ARM_Output.Insertion;
+						    Format_Object.Current_Change_Version := Version;
+						    Format_Object.Current_Old_Change_Version := '0';
+					            Check_Paragraph; -- Change the state *before* outputting the
+								     -- paragraph header, so the AARM prefix is included.
+					            ARM_Output.Text_Format (Output_Object,
+								            Bold => Format_Object.Is_Bold,
+								            Italic => Format_Object.Is_Italic,
+								            Font => Format_Object.Font,
+								            Size => Format_Object.Size,
+								            Change => Format_Object.Change,
+								            Version => Format_Object.Current_Change_Version,
+								            Added_Version => Format_Object.Current_Old_Change_Version,
+								            Location => Format_Object.Location);
+						    Make_Attribute_Text;
+
+						    -- Reset the state to normal:
+						    Format_Object.Change := ARM_Output.None;
+						    Format_Object.Current_Change_Version := '0';
+						    Format_Object.Current_Old_Change_Version := '0';
+
+					            ARM_Output.Text_Format (Output_Object,
+								            Bold => Format_Object.Is_Bold,
+								            Italic => Format_Object.Is_Italic,
+								            Font => Format_Object.Font,
+								            Size => Format_Object.Size,
+								            Change => Format_Object.Change,
+								            Version => Format_Object.Current_Change_Version,
+								            Added_Version => Format_Object.Current_Old_Change_Version,
+								            Location => Format_Object.Location);
+						end if;
+				        end case;
+				    end if;
+
+			            -- The text goes to the file *and* is recorded.
+			            Arm_Input.Start_Recording (Input_Object);
+			        -- else no parameter. Do nothing.
+				end if;
 
 			    when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
 
@@ -6639,17 +6733,18 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				-- otherwise do not generate or
 				-- store attribute in DB. The last would
 				-- require changes to Attribute_Text_Param.
-			end case;
 
-			if Close_Ch /= ' ' then
-			    -- Now, handle the parameter:
-			    -- The text goes to the file *and* is recorded.
-			    Arm_Input.Start_Recording (Input_Object);
-			    -- Stack the parameter so we can process the end:
-			    Set_Nesting_for_Parameter
-			        (Command => Attribute_Text_Param,
-				 Close_Ch => Close_Ch);
-			end if;
+			        Make_Attribute_Text;
+			        if Close_Ch /= ' ' then
+			            -- Now, handle the parameter:
+			            -- The text goes to the file *and* is recorded.
+			            Arm_Input.Start_Recording (Input_Object);
+			            -- Stack the parameter so we can process the end:
+			            Set_Nesting_for_Parameter
+			                (Command => Attribute_Text_Param,
+				         Close_Ch => Close_Ch);
+			        end if;
+			end case;
 		    end;
 
 		when Change_Prefix_Type =>
@@ -7580,38 +7675,130 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    end case;
 			end Chg_Command;
 
+			procedure Write_to_DB (Prefix_Kind, Text_Kind :
+				in ARM_Database.Paragraph_Change_Kind_Type;
+				Prefix_Version, Text_Version : in Character) is
+			    -- Write the item to the DB; use Prefix_Kind and
+			    -- Text_Kind for the change kind.
+			begin
+			    if Format_Object.Attr_Leading then
+			        ARM_Database.Insert (Format_Object.Attr_DB,
+				    Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
+				    Hang_Item =>
+				        Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
+					   ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
+				    Text => "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
+				        ":" & Ascii.LF & Ascii.LF &
+				        Chg_Command (Text_Kind, Text_Version) &
+				        "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
+				        " See @RefSecbyNum{" & Clause_String & "}.",
+				    Change_Kind => Prefix_Kind,
+				    Version => Prefix_Version);
+			    else -- not leading:
+			        ARM_Database.Insert (Format_Object.Attr_DB,
+				    Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
+				    Hang_Item =>
+				        Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
+					   ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
+				    Text => "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
+				        ":" & Ascii.LF & Ascii.LF &
+				        Chg_Command (Text_Kind, Text_Version) &
+				        "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
+				        " See @RefSecbyNum{" & Clause_String & "}.",
+				    Change_Kind => Prefix_Kind,
+				    Version => Prefix_Version);
+			    end if;
+			end Write_to_DB;
+
 		    begin
 			Arm_Input.Stop_Recording_and_Read_Result
 			    (Input_Object, Text_Buffer, Text_Buffer_Len);
 			Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
-			-- Ordinary text processing is fine for the local text.
-			if Format_Object.Attr_Leading then
-			    ARM_Database.Insert (Format_Object.Attr_DB,
-			        Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
-			        Hang_Item =>
-				    Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
-				       ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
-			        Text => "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
-				    ":" & Ascii.LF & Ascii.LF &
-				    Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
-				    "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				    " See @RefSecbyNum{" & Clause_String & "}.",
-				Change_Kind => Format_Object.Attr_Prefix_Change_Kind,
-				Version => Format_Object.Attr_Prefix_Version);
-			else -- not leading:
-			    ARM_Database.Insert (Format_Object.Attr_DB,
-			        Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
-			        Hang_Item =>
-				    Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
-				       ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
-			        Text => "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
-				    ":" & Ascii.LF & Ascii.LF &
-				    Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
-				    "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				    " See @RefSecbyNum{" & Clause_String & "}.",
-				Change_Kind => Format_Object.Attr_Prefix_Change_Kind,
-				Version => Format_Object.Attr_Prefix_Version);
-			end if;
+			case Format_Object.Attr_Change_Kind is
+			    when ARM_Database.None | ARM_Database.Revised |
+				 ARM_Database.Revised_Inserted_Number =>
+				-- Ordinary text processing is fine for the local text.
+				Write_to_DB (Prefix_Kind => Format_Object.Attr_Prefix_Change_Kind,
+ 					     Text_Kind => Format_Object.Attr_Change_Kind,
+					     Prefix_Version => Format_Object.Attr_Prefix_Version,
+					     Text_Version => Format_Object.Attr_Version);
+			    when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
+			        if Format_Object.Attr_Version >
+				   Format_Object.Change_Version then
+				    -- Ignore any changes with version numbers
+				    -- higher than the current maximum.
+				    null; -- Do *not* put this into the DB.
+			        else
+				    case Format_Object.Changes is
+				        when ARM_Format.Old_Only =>
+					    null; -- Do *not* put this into the DB.
+				        when ARM_Format.New_Only =>
+					    Write_to_DB (Prefix_Kind => ARM_Database.None,
+		 					 Text_Kind => ARM_Database.None,
+							 Prefix_Version => '0',
+							 Text_Version => '0');
+					    -- Nothing special to do (normal text).
+				        when ARM_Format.Changes_Only |
+					     ARM_Format.Show_Changes |
+					     ARM_Format.New_Changes =>
+					    if Format_Object.Attr_Version <
+					        Format_Object.Change_Version and then
+					        Format_Object.Changes = ARM_Format.Changes_Only then
+					        -- Just normal output text.
+					        Write_to_DB (Prefix_Kind => ARM_Database.None,
+		 					     Text_Kind => ARM_Database.None,
+							     Prefix_Version => '0',
+							     Text_Version => '0');
+					    else
+						-- Write inserted text:
+						-- We need to mark everything with
+						-- the kind and version of the *entire* insertion,
+						-- because the entire thing is an
+						-- insertion. (So we ignore the prefix kind and version).
+					        if Format_Object.Attr_Leading then
+					            ARM_Database.Insert (Format_Object.Attr_DB,
+						        Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
+						        Hang_Item =>
+							    "@ChgAdded{Version=[" & Format_Object.Attr_Version & "],Text=[" &
+						            Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
+							       ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & "]}",
+						        Text =>
+							    "@ChgAdded{Version=[" & Format_Object.Attr_Version & "],Text=[" &
+							    "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
+						            ":]}" & Ascii.LF & Ascii.LF &
+						            Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
+							    "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
+						            " See @RefSecbyNum{" & Clause_String & "}.",
+						        Change_Kind => Format_Object.Attr_Change_Kind,
+						        Version => Format_Object.Attr_Version);
+					        else -- not leading:
+					            ARM_Database.Insert (Format_Object.Attr_DB,
+						        Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
+						        Hang_Item =>
+							    "@ChgAdded{Version=[" & Format_Object.Attr_Version & "],Text=[" &
+						            Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
+							       ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & "]}",
+						        Text =>
+							    "@ChgAdded{Version=[" & Format_Object.Attr_Version & "],Text=[" &
+							    "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
+						            ":]}" & Ascii.LF & Ascii.LF &
+						            Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
+						            "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
+						            " See @RefSecbyNum{" & Clause_String & "}.",
+						        Change_Kind => Format_Object.Attr_Change_Kind,
+						        Version => Format_Object.Attr_Version);
+					        end if;
+					    end if;
+				    end case;
+			        end if;
+
+			    when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
+				-- *** We don't support this yet.
+				Write_to_DB (Prefix_Kind => Format_Object.Attr_Prefix_Change_Kind,
+ 					     Text_Kind => Format_Object.Attr_Change_Kind,
+					     Prefix_Version => Format_Object.Attr_Prefix_Version,
+					     Text_Version => Format_Object.Attr_Version);
+			end case;
         	    end;
 
 		when Pragma_Syntax | Added_Pragma_Syntax =>
@@ -7679,9 +7866,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				            Hang_Item => "",
 				            Text => "@ChgRef{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
 						"],Kind=[Added]}" &
-						"@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
-						"],New={" & Text_Buffer(1..Text_Buffer_Len) &
-					        " @em See @RefSecbyNum<" & Clause_String & ">.},Old=[]}");
+						"@Chg`Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
+						"],New=`" & Text_Buffer(1..Text_Buffer_Len) &
+					        " @em See @RefSecbyNum<" & Clause_String & ">.',Old=[]'");
+					-- Careful: The text con contain [], {}, (), and <>, so we
+					-- can only use `' for brackets.
 			            when ARM_Format.Changes_Only =>
 				        if Format_Object.Change_Version =
 					    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version then
@@ -7692,9 +7881,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				                Text =>
 						    "@ChgRef{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
 						    "],Kind=[Added]}" &
-						    "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
-						    "],New={" & Text_Buffer(1..Text_Buffer_Len) &
-					            " @em See @RefSecbyNum<" & Clause_String & ">.},Old=[]}");
+						    "@Chg`Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
+						    "],New=`" & Text_Buffer(1..Text_Buffer_Len) &
+					            " @em See @RefSecbyNum<" & Clause_String & ">.',Old=[]'");
+					    -- Careful: The text con contain [], {}, (), and <>, so we
+					    -- can only use `' for brackets.
 					else
 					    -- Don't show change, but use ChgRef to get paragraph numbers right.
 				            ARM_Database.Insert (Format_Object.Pragma_DB,

@@ -76,6 +76,7 @@ package ARM_Format is
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
     -- 11/16/04 - RLB - Added Attr_Prefix_Text_Change_Kind.
     -- 12/06/04 - RLB - Added reference chain for Format_Type.
+    -- 12/11/04 - RLB - Increased Syntax_NT length.
 
     type Format_Type is tagged limited private;
 
@@ -285,7 +286,7 @@ private
 	Unit_Len : Natural := 0;
 
 	-- Syntax:
-	Syntax_NT : String (1..60); -- Syntax non-terminal; used only during the
+	Syntax_NT : String (1..80); -- Syntax non-terminal; used only during the
 				    -- processing of the Syn command.
 	Syntax_NT_Len : Natural := 0;
 	Syntax_Tab : String (1..40); -- Syntax tab string; used only during the
