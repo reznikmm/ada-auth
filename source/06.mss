@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:43 $}
+@Comment{$Date: 2000/05/18 05:37:05 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -62,8 +62,8 @@ function.]
 
 @Syn{lhs=<designator>,rhs="[@Syn2{parent_unit_name} . ]@Syn2{identifier} | @Syn2{operator_symbol}"}
 
-@Syn{lhs=<defining_designator>, rhs=
-"@Syn2{defining_program_unit_name} | @Syn2{defining_operator_symbol}"}
+@Syn{lhs=<defining_designator>,
+   rhs="@Syn2{defining_program_unit_name} | @Syn2{defining_operator_symbol}"}
 
 @Syn{lhs=<defining_program_unit_name>,rhs="[@Syn2{parent_unit_name} . ]@Syn2{defining_identifier}"}
 

@@ -1,9 +1,9 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:42 $}
+@Comment{$Date: 2000/05/18 05:37:04 $}
 @PageOneFootings{}
 
-@PrefaceClause{} @Comment{Go to odd page.}
+@PrefaceSection{} @Comment{Go to odd page.}
 
 @begin{Comment}
 The following stuff is to get the "INTERNATIONAL STANDARD" title between
@@ -55,10 +55,10 @@ Languages @Em Ada
 @BlankSpace{0.5inch}
 
 @LabeledSection{General}
-@Comment{$Date: 2000/05/17 00:17:42 $}
+@Comment{$Date: 2000/05/18 05:37:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -121,7 +121,7 @@ and @LegalityName@;s is particularly important,
 as explained in @RefSecNum{The Context of Overload Resolution}.
 
 Text under the following sub-headings appears in both documents:
-@begin(itemize, Spacing=0)
+@begin(Inneritemize)
 The unlabeled text at the beginning of each clause or subclause,
 
 @SyntaxTitle,
@@ -153,11 +153,11 @@ The unlabeled text at the beginning of each clause or subclause,
 @NotesTitle,
 
 @ExamplesTitle.
-@end(itemize)
+@end(Inneritemize)
 
 Text under the following sub-headings
 does not appear in the RM9X:
-@begin(itemize, Spacing=0)
+@begin(Inneritemize)
 @MetaRulesTitle,
 
 @Inconsistent83Title,
@@ -167,7 +167,7 @@ does not appear in the RM9X:
 @Extend83Title,
 
 @DiffWord83Title.
-@end(itemize)
+@end(Inneritemize)
 
 The AARM also includes the following kinds of annotations.
 These do not necessarily annotate the immediately preceding
@@ -1578,7 +1578,7 @@ is marked like this.
 Here are some AARM-only definitions:
 @Defn{Ada Rapporteur Group (ARG)}
 @Defn(ARG)
-The Ada Rapporteur Group (ARG) interprets the RM83.
+The Ada Rapporteur Group (ARG) interprets the @chg{New=<Ada Reference Manual>,Old=<RM83>}.
 @Defn{Ada Issue (AI)}
 @Defn(AI)
 An Ada Issue (AI) is a numbered ruling from the ARG.
@@ -1589,11 +1589,12 @@ is an edition of RM83 in which clearly marked insertions
 and deletions indicate the effect of integrating the approved AIs.
 @Defn{Uniformity Rapporteur Group (URG)}
 @Defn(URG)
-The Uniformity Rapporteur Group (URG) issues recommendations
-intended to increase uniformity across Ada implementations.
+The Uniformity Rapporteur Group (URG) @chg{New=<issued>,Old=<issues>}
+recommendations intended to increase uniformity across Ada implementations.
+@chg{New=<The functions of the URG have been assumed by the ARG.>,Old=<>}
 @Defn{Uniformity Issue (UI)}
 @Defn(UI)
-A Uniformity Issue (UI) is a numbered recommendation from the URG.
+A Uniformity Issue (UI) @chg{New=<was>,Old=<is>} a numbered recommendation from the URG.
 @end{Discussion}
 @SeeAlso{Primary=[library unit], Other=(language-defined library units)}
 @SeeOther{Primary=[predefined library unit], Other=(language-defined library units)}

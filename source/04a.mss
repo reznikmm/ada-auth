@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:43 $}
+@Comment{$Date: 2000/05/18 05:37:04 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2126,13 +2126,13 @@ of functions for user-defined operators.  See @RefSec(Overloading of Operators).
 
 @begin{Syntax}
 @tabclear()
-@Syn{lhs=<logical_operator>,tab=<                                     @^>,
-    rhs=" @key{and} | @key{or}  | @key{xor}"}
-@Syn{lhs=<relational_operator>,tab=< @\>,rhs=" =   | /=  | <   | <= | > | >="}
-@Syn{lhs=<binary_adding_operator>,tab=< @\>,rhs=" +   | @en   | &"}
-@Syn{lhs=<unary_adding_operator>,tab=< @\>,rhs=" +   | @en"}
-@Syn{lhs=<multiplying_operator>,tab=< @\>,rhs=" *   | /   | @key{mod} | @key{rem}"}
-@Syn{lhs=<highest_precedence_operator>,tab=< @\>,rhs=" **  | @key{abs} | @key{not}"}
+@Syn{lhs=<logical_operator>,
+    rhs="                               @^ @key{and} | @key{or}  | @key{xor}"}
+@Syn{lhs=<relational_operator>,rhs="@\ =   | /=  | <   | <= | > | >="}
+@Syn{lhs=<binary_adding_operator>,rhs="@\ +   | @en   | &"}
+@Syn{lhs=<unary_adding_operator>,rhs="@\ +   | @en"}
+@Syn{lhs=<multiplying_operator>,rhs="@\ *   | /   | @key{mod} | @key{rem}"}
+@Syn{lhs=<highest_precedence_operator>,rhs="@\ **  | @key{abs} | @key{not}"}
 @begin(Discussion)
   Some of the above syntactic categories are not used in other
   syntax rules.  They are just used for classification.
@@ -4010,7 +4010,7 @@ or an @nt<aggregate>.
 
 @begin{Syntax}
 @Syn{lhs=<qualified_expression>,rhs="
-   @Syn2{subtype_mark}@SingleQuote(@Syn2{expression}) | @Syn2{subtype_mark}@SingleQuote@Syn2{aggregate}"}
+   @Syn2{subtype_mark}@SingleQuote@;(@Syn2{expression}) | @Syn2{subtype_mark}@SingleQuote@Syn2{aggregate}"}
 @end{Syntax}
 
 @begin{Resolution}

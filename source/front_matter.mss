@@ -1,10 +1,9 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2000/05/17 00:17:45 $}
+@comment{$Revision: 1.12 $ $Date: 2000/05/18 05:37:05 $}
 
 @begin{Intro}
-@begin{AARMandRM9XOnly}
 
 ISO (the International Organization for Standardization)
 and IEC (the International Electrotechnical Commission)
@@ -42,7 +41,6 @@ International Standard.
 Annexes K to P are for information only.
 
 
-@end{AARMandRM9XOnly}
 @begin{Discussion}
 This document is the Annotated Ada Reference Manual (AARM).
 It contains the entire text of the Ada 95 standard
@@ -65,43 +63,43 @@ with respect to the first (Ada 83) edition (ISO 8652:1987).
 
 @end{Comment}
 
-@begin{AARMandRM9XOnly}
 @UnNumberedSection{Introduction}
 
 @begin{Intro}
 
-This is the
-@Value{DocumentName}.
+@begin{AARMOnly}
+This is the Annotated Ada Reference Manual.
+@end{AARMOnly}
+@begin{RMOnly}
+This is the Ada Reference Manual.
+@end{RMOnly}
 
 
 Other available Ada documents include:
+@comment{We have to put the itemize inside of the AARMOnly, because otherwise
+the formatter thinks this is a nested bullet, making a mess. Since this is
+the only place this is used, it is easier to fix the text than the program.
+RLB - 2000-05-17}
+@begin{AARMOnly}
 @begin{Itemize}
 Rationale for the Ada Programming Language @em 1995 edition,
 which gives an introduction to the new features of Ada,
 and explains the rationale behind them.
 Programmers should read this first.
 
-@Case{DocumentNickname,
-  RM9X=<>,
-  ISO=<>,
-  else=<
-
 The Ada Reference Manual (RM).
-This is the International Standard @em ISO/IEC 8652:1995.>}
+This is the International Standard @em ISO/IEC 8652:1995.
+@end{Itemize}
+@end{AARMOnly}
 
-@Comment[@Case{DocumentNickname,
-  Chg83=<>,
-  else=<
+@begin{RMOnly}
+@begin{Itemize}
+Rationale for the Ada Programming Language @em 1995 edition,
+which gives an introduction to the new features of Ada,
+and explains the rationale behind them.
+Programmers should read this first.
 
-@Value{Chg839XDocumentName}.
-This document lists in detail the changes made to the 1987 edition of
-the standard.>} - No such document anymore - RLB 5/2000]
-
-@Case{DocumentNickname,
-  AARM=<>,
-  else=<
-
-The @Value{AARMDocumentName} (AARM).
+The Annotated Ada Reference Manual (AARM).
 The AARM contains all of the text in the RM95,
 plus various annotations.
 It is intended primarily for compiler writers,
@@ -109,8 +107,9 @@ validation test writers,
 and others who wish to study the fine details.
 The annotations include detailed rationale for individual rules
 and explanations of some of the more arcane interactions among the
-rules.>}
+rules.
 @end{Itemize}
+@end{RMOnly}
 @end{Intro}
 
 @SubHeading(Design Goals)
@@ -630,7 +629,6 @@ Christine M. Anderson at the Air Force Phillips Laboratory (Kirtland
 AFB, NM) was the project manager.
 
 @end{Intro}
-@end{NotISO}
 
 @NewPage()
 @SubHeading{Changes}
@@ -658,5 +656,5 @@ the International Standard is formatted for A4 paper
 thus, the page breaks are in different places.
 @end{Itemize}
 @end{Intro}
+@end{NotISO}
 
-@end{AARMandRM9XOnly}

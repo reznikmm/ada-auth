@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/05/17 00:17:42 $}
+@Comment{$Date: 2000/05/18 05:37:04 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @begin{Intro}
 @redundant[
@@ -642,8 +642,8 @@ string brackets.  They are used to represent @nt<operator_symbol>s
   rhs=<"" | @SynI{non_quotation_mark_}@Syn2{graphic_character}>}
 
 @begin{SyntaxText}
-@TextSyn{A @nt{string_element} is either a pair of quotation marks (""),
-or a single @nt{graphic_character} other than a quotation mark.}
+A @nt{string_element} is either a pair of quotation marks (""),
+or a single @nt{graphic_character} other than a quotation mark.
 @end{SyntaxText}
 @end{Syntax}
 
