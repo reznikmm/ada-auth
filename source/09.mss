@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2004/12/06 03:57:40 $}
+@Comment{$Date: 2004/12/08 01:09:46 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 
@@ -1071,7 +1071,8 @@ object for some useful purpose, so we didn't want to disallow this case.
 
 @begin{Bounded}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[It is a bounded error to call an entry or subprogram of a
+@Chg{Version=[2],New=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to call an entry or subprogram of a
 protected object after that object is finalized. If the error is detected,
 Program_Error is raised. Otherwise, the call proceeds normally, which may leave
 a task queued forever.],Old=[]}

@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2004/11/13 06:47:18 $}
+@Comment{$Date: 2004/12/08 01:09:47 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -39,7 +39,7 @@ Safe_Large attributes of floating point types
 (see @RefSecNum{Attributes of Floating Point Types}).
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00284-02]}
-@Chg{Version=[2],New=[],Old=[The pragma Interface
+@ChgDeleted{Version=[2],Text=[The pragma Interface
 (see @RefSecNum{Interfacing Pragmas}).]}
 
 The pragmas System_Name, Storage_Unit, and Memory_Size
@@ -645,8 +645,8 @@ specific entities.],Old=[]}
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Leading@Keepnext@;@Chg{Version=[2],New=[The form of a specific Suppress pragma
-is as follows:],Old=[]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The form of a specific
+Suppress pragma is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -727,9 +727,9 @@ moved here, to emphasize that its use is not portable.],Old=[]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[@Leading@;For the first subtype S of a type @i<T>
-declared by an @nt<incomplete_type_declaration> that is not tagged, the
-following attribute is defined:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For the first subtype S of a type
+@i<T> declared by an @nt<incomplete_type_declaration> that is not tagged, the
+following attribute is defined:]}
 @begin{Description}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
 @Chg{Version=[2],New=[S'@attr{Class} @\Denotes the first subtype of the
@@ -739,9 +739,9 @@ library unit as the @nt<incomplete_type_declaration>.],Old=[]}
 @end{Description}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-    @Chg{Version=[2],New=[This must occur in the same unit to prevent
+    @ChgAdded{Version=[2],Text=[This must occur in the same unit to prevent
     children from imposing requirements on their ancestor library
-    units for deferred incomplete types.],Old=[]}
+    units for deferred incomplete types.]}
   @end{reason}
 @end{StaticSem}
 
@@ -766,9 +766,9 @@ edition of the International Standard.],Old=[]}
 
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
-@Chg{Version=[2],New=[All implementations need to at least recognize and
+@ChgAdded{Version=[2],Text=[All implementations need to at least recognize and
 ignore this pragma. A syntax error is not an acceptable implementation of
-this pragma.],Old=[]}
+this pragma.]}
 @end{ImplNote}
 
 @begin{DiffWord95}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.1 $ $Date: 2004/12/07 05:17:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.2 $ $Date: 2004/12/08 01:09:47 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:08 $}
+@Comment{$Date: 2004/12/08 01:09:47 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -14,8 +14,8 @@ for manipulating files and directories, and their names.],Old=[]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
-@Chg{Version=[2],New=[@Leading@Keepnext@;The library package Directories
-has the following declaration:],Old=[]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The library package
+Directories has the following declaration:],Old=[]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{with} Ada.IO_Exceptions;

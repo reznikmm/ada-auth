@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.1 $ $Date: 2004/12/07 05:17:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.2 $ $Date: 2004/12/08 01:09:47 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:08 $}
+@Comment{$Date: 2004/12/08 01:09:47 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -58,9 +58,11 @@ the STL where that better maps to common Ada usage. For instance, what the STL
 calls @lquotes@;iterators@rquotes@; are
 called @lquotes@;cursors@rquotes@; here.],Old=[]}
 
-**** The rest of this clause (including subclauses) has yet to be inserted ****
+** The remainder of these rules need to be inserted.
 
 @end{Metarules}
+
+**** The rest of this clause (including subclauses) has yet to be inserted ****
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

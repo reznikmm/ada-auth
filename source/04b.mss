@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:04 $}
+@Comment{$Date: 2004/12/08 01:09:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @LabeledClause{Type Conversions}
 
@@ -100,14 +100,14 @@ is interpreted as an @nt<expression>.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[],Old=[@Defn2{Term=[type conversion],sec=(numeric)}
+@ChgDeleted{Version=[2],Text=[@Defn2{Term=[type conversion],sec=(numeric)}
 @Defn2{Term=[conversion],sec=(numeric)}
 If the target type is a numeric type, then the operand type
 shall be a numeric type.]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[The entire @LegalityTitle section has been
+@ChgAdded{Version=[2],Text=[The entire @LegalityTitle section has been
 reorganized to eliminate an
 unintentional incompatibility with Ada 83. In rare cases, a type conversion
 between two types related by derivation is not allowed by Ada 95, while it is
@@ -115,42 +115,42 @@ allowed in Ada 83. The reorganization fixes this.
 Much of the wording of the legality section is unchanged, but it is reordered
 and reformatted. Because of the limitations of our tools, we had to delete and
 replace nearly the entire section. The text of Ada 95 paragraphs 8 through 12,
-14, 15, 17, 19, and 20 are unchanged; these are now 24.2 through 24.5, 24.11,
-24.12, 24.16, 24.18, and 24.19.],Old=[]}
+14, 15, 17, 19, and 20 are unchanged; these are now 24.2 through 24.5, 24.12,
+24.13, 24.17, 24.19, and 24.20.]}
 @end{Discussion}
 
-@Leading@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[],Old=[@Defn2{Term=[type conversion],sec=(array)}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(array)}
 @Defn2{Term=[conversion],sec=(array)}
 If the target type is an array type, then the operand type shall
 be an array type. Further:]}
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[],Old=[The types shall have the same dimensionality;]}
+  @ChgDeleted{Version=[2],Text=[The types shall have the same dimensionality;]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008],ARef=[AI95-00168-01]}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[],Old=[Corresponding index types shall be convertible;@Chg{New=[],Old=[ and]}
+  @ChgDeleted{Version=[2],Text=[Corresponding index types shall be convertible;@Chg{New=[],Old=[ and]}
   @PDefn2{Term=[convertible],Sec=(required)}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008],ARef=[AI95-00168-01]}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[],Old=[The component subtypes shall statically match@Chg{New=[; and],Old=[.]}
+  @ChgDeleted{Version=[2],Text=[The component subtypes shall statically match@Chg{New=[; and],Old=[.]}
   @PDefn2{Term=[statically matching],Sec=(required)}]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008],ARef=[AI95-00168-01]}
 @ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[],Old=[@Chg{New=[In a view conversion, the target type and the operand type shall
+@ChgDeleted{Version=[2],Text=[@Chg{New=[In a view conversion, the target type and the operand type shall
 both or neither have aliased components.],Old=[]}]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[DeletedAdded]}
-@Chg{Version=[2],New=[],Old=[@Chg{New=[Without this rule, it is possible to violate the constrained status
+@ChgDeleted{Version=[2],Text=[@Chg{New=[Without this rule, it is possible to violate the constrained status
 of aliased array components. Consider:],Old=[]}]}
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[DeletedAdded]}
-@Chg{Version=[2],New=[],Old=[@Chg{New=[@key[package] P @key[is]
+@ChgDeleted{Version=[2],Text=[@Chg{New=[@key[package] P @key[is]
    @key[type] T @key[is private];
    A : @key[constant] T;
    @key[type] A1 @key[is array] (1 .. 10) @key[of aliased] T;
@@ -162,7 +162,7 @@ of aliased array components. Consider:],Old=[]}]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[DeletedAdded]}
-@Chg{Version=[2],New=[],Old=[@Chg{New=[@key[with] P;
+@ChgDeleted{Version=[2],Text=[@Chg{New=[@key[with] P;
 @key[procedure] Exam @key[is]
    X : P.A1;
    @key[procedure] S (Y : @key[in out] P.A2) @key[is]
@@ -178,13 +178,13 @@ of aliased array components. Consider:],Old=[]}]}
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[],Old=[@Leading@Defn2{Term=[type conversion],sec=(access)}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is a general access type, then the operand type
 shall be an access-to-object type. Further:]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[The @LegalityTitle and @RunTimeTitle are worded
+  @ChgDeleted{Version=[2],Text=[The @LegalityTitle and @RunTimeTitle are worded
   so that a @nt{type_conversion} T(X) (where T is an access type) is (almost)
   equivalent to the @nt{attribute_reference} X.@key[all]'Access, where the
   result is of type T. The @nt{type_conversion} accepts a null value, whereas
@@ -192,28 +192,30 @@ shall be an access-to-object type. Further:]}
 @end{Discussion}
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[],Old=[If the target type is an access-to-variable
+  @ChgDeleted{Version=[2],Text=[If the target type is an access-to-variable
   type, then the operand type shall be an access-to-variable type;]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[If the target type is an access-to-constant type, then the operand type
+  @ChgDeleted{Version=[2],Text=[If the target type is an access-to-constant
+  type, then the operand type
   can be access-to-constant or access-to-variable.]}
 @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[],Old=[If the target designated type is tagged, then the operand designated type
+  @ChgDeleted{Version=[2],Text=[If the target designated type is tagged,
+  then the operand designated type
   shall be convertible to the target designated type;
   @PDefn2{Term=[convertible],Sec=(required)}]}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[],Old=[If the target designated type is not tagged,
+  @ChgDeleted{Version=[2],Text=[If the target designated type is not tagged,
   then the designated types shall be the same,
   and either the designated subtypes shall statically match or
   the target designated subtype shall be discriminated and unconstrained; and
   @PDefn2{Term=[statically matching],Sec=(required)}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[These rules are designed to ensure that
+  @ChgDeleted{Version=[2],Text=[These rules are designed to ensure that
   aliased array objects only @i(need) "dope" if their nominal subtype is unconstrained,
   but they can always @i(have) dope if required by the run-time model
   (since no sliding is permitted as part of access type conversion).
@@ -224,7 +226,7 @@ shall be an access-to-object type. Further:]}
 @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[],Old=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
+  @ChgDeleted{Version=[2],Text=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
   @PDefn{generic contract issue}
@@ -234,23 +236,23 @@ shall be an access-to-object type. Further:]}
   instance of a generic unit.]}
   @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[The access parameter case is handled by a run-time check.
+  @ChgDeleted{Version=[2],Text=[The access parameter case is handled by a run-time check.
   Run-time checks are also done in instance bodies.]}
   @end{Ramification}
 @end(itemize)
 
-@Leading@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[],Old=[@Defn2{Term=[type conversion],sec=(access)}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is an access-to-subprogram type, then the operand
 type shall be an access-to-subprogram type. Further:]}
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[],Old=[The designated profiles shall be
+  @ChgDeleted{Version=[2],Text=[The designated profiles shall be
   subtype-conformant.@Defn2{Term=[subtype conformance],Sec=(required)}]}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[],Old=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
+  @ChgDeleted{Version=[2],Text=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
   @PDefn{generic contract issue}
@@ -263,7 +265,8 @@ type shall be an access-to-subprogram type. Further:]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[The reason it is illegal to convert from an access-to-subprogram type
+  @ChgDeleted{Version=[2],Text=[The reason it is illegal to convert from
+  an access-to-subprogram type
   declared in a generic body to one declared outside that body
   is that in an implementation that shares generic bodies,
   procedures declared inside the generic need to have a different
@@ -279,19 +282,19 @@ type shall be an access-to-subprogram type. Further:]}
 that are not reformatted}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[In a view conversion for an untagged type,
-the target type shall be convertible (back) to the operand type.],Old=[]}
+@ChgAdded{Version=[2],Text=[In a view conversion for an untagged type,
+the target type shall be convertible (back) to the operand type.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=<Untagged view conversions appear only as [in] out
+@ChgAdded{Version=[2],Text=<Untagged view conversions appear only as [in] out
   parameters. Hence, the reverse conversion must be legal as well.
   The forward conversion must be legal even if an out parameter,
   because actual parameters of an access type are always
-  copied in anyway.>,Old=[]}
+  copied in anyway.>}
 @end{Reason}
 
-@Leading@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
-@Defn2{Term=[type conversion],sec=[composite (non-array)]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@Leading@Defn2{Term=[type conversion],sec=[composite (non-array)]}
 @Defn2{Term=[conversion],sec=[composite (non-array)]}
 @Chg{Version=[2],New=[If there is a type that is an ancestor of both the target type and the operand
 type, then:],Old=[@Defn2{Term=[type conversion],sec=(enumeration)}
@@ -302,9 +305,9 @@ the target type and the operand type.
 Further, if the target type is tagged, then either:]}
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[@Defn2{Term=[type conversion],sec=(enumeration)}
+  @ChgAdded{Version=[2],Text=[@Defn2{Term=[type conversion],sec=(enumeration)}
   @Defn2{Term=[conversion],sec=(enumeration)}The target type shall be
-  untagged; or],Old=[]}
+  untagged; or]}
 
   The operand type shall be covered by or
   descended from the target type; or
@@ -332,27 +335,27 @@ Further, if the target type is tagged, then either:]}
   @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[The operand and target types shall both be class-wide
+  @ChgAdded{Version=[2],Text=[The operand and target types shall both be class-wide
   types and the specific type associated with at least one of them shall be an
-  interface type.],Old=[]}
+  interface type.]}
   @begin{Ramification}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[We allow converting any class-wide type T'Class to
+    @ChgAdded{Version=[2],Text=[We allow converting any class-wide type T'Class to
     or from a class-wide interface type even if the specific type T does not
     have an appropriate
     interface ancestor, because some extension of T might have the needed
     ancestor. This is similar to a conversion of a class-wide type toward the
     leaves of the tree, and we need to be consistent. Of course, there is
-    a check that the actual object has the needed interface.],Old=[]}
+    a check that the actual object has the needed interface.]}
   @end{Ramification}
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[],Old=[In a view conversion for
+@ChgDeleted{Version=[2],Text=[In a view conversion for
 an untagged type, the target type shall be convertible (back) to the operand type.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@Chg{Version=[2],New=[],Old=<Untagged view conversions appear only as [in] out
+@ChgDeleted{Version=[2],Text=<Untagged view conversions appear only as [in] out
   parameters. Hence, the reverse conversion must be legal as well.
   The forward conversion must be legal even if an out parameter,
   because actual parameters of an access type are always
@@ -370,11 +373,11 @@ the target type and the operand type, then],Old=[]}
 If the target type is a numeric type, then the operand type
 shall be a numeric type.],Old=[]}
 
-@Leading@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[@Defn2{Term=[type conversion],sec=(array)}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(array)}
 @Defn2{Term=[conversion],sec=(array)}
 If the target type is an array type, then the operand type shall
-be an array type. Further:],Old=[]}
+be an array type. Further:]}
 
 @begin(inneritemize)
 
@@ -391,12 +394,26 @@ be an array type. Further:],Old=[]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00246-01]}
   @Chg{Version=[2],New=[Neither the target type nor the operand type shall be
-  limited; and],Old=[]}
+  limited;],Old=[]}
   @begin{Reason}
-    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00246-01]}
-    @Chg{Version=[2],New=[We cannot allow conversions between unrelated limited
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[We cannot allow conversions between unrelated limited
     types, as they may have different representations, and (since the types
-    are limited), a copy cannot be made to reconcile the representations.],Old=[]}
+    are limited), a copy cannot be made to reconcile the representations.]}
+  @end{Reason}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00392-01]}
+  @Chg{Version=[2],New=[If the component types are anonymous access types, then the
+  accessibility level of the operand type shall not be statically deeper
+  than that of the target type; and
+  @PDefn2{Term=[accessibility rule],Sec=(type conversion, array components)}],Old=[]}
+  @begin{Reason}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[The component types could have different accessibility
+    in this case, and we had better not allow a conversion of a local type into
+    a global type, in case the local type points at local objects. We don't
+    need a check for other types of components; for them, the check on the
+    conversion (if any) will be sufficient. (I don't buy this - RLB)]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00246-01],ARef=[AI95-00251-01],ARef=[AI95-00363-01]}
@@ -405,15 +422,15 @@ be an array type. Further:],Old=[]}
   have a tagged, private, or volatile subcomponent.],Old=[]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00246-01]}
-    @Chg{Version=[2],New=[We cannot allow view conversions between unrelated
+    @ChgAdded{Version=[2],Text=[We cannot allow view conversions between unrelated
     might-be-by-reference types, as they may have different representations,
-    and a copy cannot be made to reconcile the representations.],Old=[]}
+    and a copy cannot be made to reconcile the representations.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-    @Chg{Version=[2],New=[We cannot allow a view conversion from an object
+    @ChgAdded{Version=[2],Text=[We cannot allow a view conversion from an object
     with unaliased components to an object with aliased components, because
     that would effectively allow pointers to unaliased components. This rule
-    was missing from Ada 95.],Old=[]}
+    was missing from Ada 95.]}
   @end{Reason}
 
 @end(inneritemize)
@@ -424,24 +441,24 @@ operand type shall be an access type.],Old=[]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[Such a conversion cannot be written explicitly,
-  of course, but it can be implicit (see below).],Old=[]}
+  @ChgAdded{Version=[2],Text=[Such a conversion cannot be written explicitly,
+  of course, but it can be implicit (see below).]}
 @end{Discussion}
 
-@Leading@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[@Defn2{Term=[type conversion],sec=(access)}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}If the target type is a general access-to-object type, then
 the operand type shall be @i<universal_access> or an access-to-object type.
-Further, if not @i<universal_access>:],Old=[]}
+Further, if not @i<universal_access>:]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[The @LegalityTitle and @RunTimeTitle are worded so that a
-  @nt{type_conversion} T(X) (where T is an access type) is
+  @ChgAdded{Version=[2],Text=[The @LegalityTitle and @RunTimeTitle are worded
+  so that a @nt{type_conversion} T(X) (where T is an access type) is
   (almost) equivalent to the @nt{attribute_reference}
   X.@key[all]'Access, where the result is of type T.
   The only difference is that the @nt{type_conversion} accepts a null value,
-  whereas the @nt{attribute_reference} would raise Constraint_Error.],Old=[]}
+  whereas the @nt{attribute_reference} would raise Constraint_Error.]}
 @end{Discussion}
 
 @begin(inneritemize)
@@ -451,18 +468,18 @@ Further, if not @i<universal_access>:],Old=[]}
   type, then the operand type shall be an access-to-variable type;],Old=[]}
   @begin{Ramification}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[If the target type is an access-to-constant type,
-    then the operand type can be access-to-constant or access-to-variable.],Old=[]}
+    @ChgAdded{Version=[2],Text=[If the target type is an access-to-constant type,
+    then the operand type can be access-to-constant or access-to-variable.]}
   @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[If the target designated type is tagged, then the
+  @ChgAdded{Version=[2],Text=[If the target designated type is tagged, then the
   operand designated type shall be convertible to the target designated type;
-  @PDefn2{Term=[convertible],Sec=(required)}],Old=[]}
+  @PDefn2{Term=[convertible],Sec=(required)}]}
 
-  @Leading@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00363-01]}
-  @Chg{Version=[2],New=[If the target designated type is not tagged, then the
-  designated types shall be the same, and either:],Old=[]}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[If the target designated type is
+  not tagged, then the designated types shall be the same, and either:]}
 
   @begin(innerinneritemize)
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00363-01]}
@@ -475,37 +492,37 @@ Further, if not @i<universal_access>:],Old=[]}
     subtypes shall be unconstrained;],Old=[]}
 
     @begin{Ramification}
-    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-    @Chg{Version=[2],New=[This does not require that types have a partial view
-    in order to allow the conversion, simply that any partial view that does
-    exist is unconstrained.],Old=[]}
+      @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+      @ChgAdded{Version=[2],Text=[This does not require that types have a partial view
+      in order to allow the conversion, simply that any partial view that does
+      exist is unconstrained.],Old=[]}
 
-    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00384-01]}
-    @Chg{Version=[2],New=[This allows conversions both ways (either subtype
-    can be unconstrained); while Ada 95 only allowed the conversion if the
-    target subtype is unconstrained. We generally want type conversions to be
-    symmetric; which type is the target shouldn't matter for legality.],Old=[]}
+      @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00384-01]}
+      @ChgAdded{Version=[2],Text=[This allows conversions both ways (either subtype
+      can be unconstrained); while Ada 95 only allowed the conversion if the
+      target subtype is unconstrained. We generally want type conversions to be
+      symmetric; which type is the target shouldn't matter for legality.]}
     @end{Ramification}
 
     @begin{Reason}
-    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-    @Chg{Version=[2],New=[If the visible partial view is constrained, we
-    do not allow conversion between unconstrained and constrained subtypes.
-    This means that whether the full type had discriminants is not visible
-    to clients of the partial view.],Old=[]}
+      @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+      @ChgAdded{Version=[2],Text=[If the visible partial view is constrained, we
+      do not allow conversion between unconstrained and constrained subtypes.
+      This means that whether the full type had discriminants is not visible
+      to clients of the partial view.]}
     @end{Reason}
 
   @end(innerinneritemize)
   @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[These rules are designed to ensure that aliased array objects
-  only @i(need) "dope" if their nominal subtype is unconstrained,
-  but they can always @i(have) dope if required by the run-time model
-  (since no sliding is permitted as part of access type conversion).
-  By contrast, aliased discriminated objects will always @i(need) their
-  discriminants stored with them, even if nominally constrained.
-  (Here, we are assuming an implementation that represents
-  an access value as a single pointer.)],Old=[]}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[These rules are designed to ensure that aliased array objects
+    only @i(need) "dope" if their nominal subtype is unconstrained,
+    but they can always @i(have) dope if required by the run-time model
+    (since no sliding is permitted as part of access type conversion).
+    By contrast, aliased discriminated objects will always @i(need) their
+    discriminants stored with them, even if nominally constrained.
+    (Here, we are assuming an implementation that represents
+    an access value as a single pointer.)]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
@@ -518,15 +535,15 @@ Further, if not @i<universal_access>:],Old=[]}
   this rule applies also in the private part of an
   instance of a generic unit.],Old=[]}
   @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[The access parameter case is handled by a run-time
-  check. Run-time checks are also done in instance bodies.],Old=[]}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[The access parameter case is handled by a run-time
+    check. Run-time checks are also done in instance bodies.]}
   @end{Ramification}
 
 @end(inneritemize)
 
-@Leading@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[@Defn2{Term=[type conversion],sec=(access)}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is an access-to-subprogram type, then the operand ty
 shall be @i<universal_access> or an access-to-subprogram type. Further, if
@@ -551,15 +568,15 @@ not @i<universal_access>:],Old=[]}
   the target type shall be declared within the generic body.],Old=[]}
 
   @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[The reason it is illegal to convert from an
-  access-to-subprogram type declared in a generic body to one declared outside
-  that body is that in an implementation that shares generic bodies,
-  procedures declared inside the generic need to have a different
-  calling convention @em they need an extra parameter pointing to the
-  data declared in the current instance. For procedures declared in the spec,
-  that's OK, because the compiler can know about them at compile time of
-  the instantiation.],Old=[]}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[The reason it is illegal to convert from an
+    access-to-subprogram type declared in a generic body to one declared outside
+    that body is that in an implementation that shares generic bodies,
+    procedures declared inside the generic need to have a different
+    calling convention @em they need an extra parameter pointing to the
+    data declared in the current instance. For procedures declared in the spec,
+    that's OK, because the compiler can know about them at compile time of
+    the instantiation.]}
   @end{Reason}
 @end(inneritemize)
 
@@ -681,6 +698,19 @@ Array Type Conversion
   @begin{Ramification}
     This applies whether or not the component is initialized.
   @end{Ramification}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00392-01]}
+  @ChgAdded{Version=[2],Text=[If the component types of the array types are
+  anonymous access types, then a check is made that the accessibility level
+  of the operand type is not deeper than that of the target type.
+  @IndexCheck{Accessibility_Check}]}
+  @begin{Reason}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[This check is needed for operands that are access
+    parameters and in instance bodies. Other cases are handled by the
+    legality rule given previously.]}
+  @end{Reason}
+
 @end(inneritemize)
 
 @Defn2{Term=[type conversion],sec=[composite (non-array)]}
@@ -775,7 +805,7 @@ Access Type Conversion
   @end{Ramification}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
-    @Chg{Version=[2],New=[],Old=[As explained in @RefSec{Access Types},
+    @ChgDeleted{Version=[2],Text=[As explained in @RefSec{Access Types},
     it is important that a value of an anonymous access type
     can never be null.]}
   @end{Reason}
@@ -1096,6 +1126,12 @@ not a view conversion (and thus is illegal).],Old=[]}
 @Chg{Version=[2],New=[Rules added by the Corrigendum to eliminate problems
 with discriminants of aliased components changing were removed, as we now
 generally allow discriminants of aliased components to be changed.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00392-01]}
+@Chg{Version=[2],New=[Added rules to make accessibility checks on conversions
+involving types with anonmyous access components. These have the level of the
+type, and conversions can be between types at different levels, which
+could cause dangling pointers.],Old=[]}
 @end{DiffWord95}
 
 
@@ -1236,7 +1272,7 @@ the @nt<allocator> shall be an initialized allocator.
 the @nt<allocator> shall be an uninitialized allocator.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
-  @Chg{Version=[2],New=[],Old=[For an access-to-constant type whose designated
+  @ChgDeleted{Version=[2],Text=[For an access-to-constant type whose designated
   type is limited, @nt{allocator}s are illegal.
   The Access attribute is legal for such a type, however.]}
 @end{Ramification}
@@ -1248,8 +1284,8 @@ class-wide, the accessibility level of the type determined by the
 deeper than that of the type of the @nt{allocator}.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[This prevents the allocated object from outliving
-  its type.],Old=[]}
+  @ChgAdded{Version=[2],Text=[This prevents the allocated object from outliving
+  its type.]}
 @end{Reason}
 
 @end{Legality}
@@ -1284,7 +1320,7 @@ otherwise, the]} object is constrained by its initial value
   @end{Reason}
   @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-  @Chg{Version=[2],New=[If there is a constrained partial view of the type, this
+  @ChgAdded{Version=[2],Text=[If there is a constrained partial view of the type, this
     allows the objects to be unconstrained. This eliminates privacy breaking
     (we don't want the objects to act different simply because they're
     allocated). Such a created object is effectively constrained by its initial
@@ -1293,7 +1329,7 @@ otherwise, the]} object is constrained by its initial value
     implicit in other rules. Note, however, that a value of an
     access-to-constant type can designate a variable object via 'Access or
     conversion, and the variable object might be assigned by some other access
-    path, and that assignment might alter the discriminants.],Old=[]}
+    path, and that assignment might alter the discriminants.]}
   @end{Discussion}
 @end{StaticSem}
 
@@ -1323,9 +1359,9 @@ if this check fails.@IndexCheck{Accessibility_Check}
 @end{Ramification}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
-  @Chg{Version=[2],New=[The check prevents the allocated object from outliving
-  its type. We need the check in instance bodies (other cases are statically
-  detected).],Old=[]}
+  @ChgAdded{Version=[2],Text=[The check prevents the allocated object from
+  outliving its type. We need the check in instance bodies (other cases are
+  statically detected).]}
 @end{Reason}
 
 @PDefn2{Term=[evaluation], Sec=(uninitialized allocator)}
@@ -1367,13 +1403,13 @@ started, Program_Error is raised.@IndexCheck{Allocation_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[If the object has a controlled or protected part, its
+  @ChgAdded{Version=[2],Text=[If the object has a controlled or protected part, its
   finalization is likely to be non-trivial. If the allocation was allowed,
   we could not know whether the finalization would actually be performed.
   That would be dangerous to otherwise safe abstractions, so we mandate
   a check here. On the other hand, if the finalization of the object will
   be trivial, we do not require (but allow) the check, as no real harm
-  could come from late allocation.],Old=[]}
+  could come from late allocation.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
@@ -1384,8 +1420,8 @@ Program_Error is raised.@IndexCheck{Allocation_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[A task created after waiting for tasks finishes could
-  depend on freed data structures, and certainly would never be awaited.],Old=[]}
+  @ChgAdded{Version=[2],Text=[A task created after waiting for tasks finishes could
+  depend on freed data structures, and certainly would never be awaited.]}
 @end{Reason}
 
 @Redundant[If the created object contains any tasks,
@@ -1396,14 +1432,14 @@ Finally, an access value that designates the created object is returned.
 
 @begin{Bounded}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[@PDefn2{Term=(bounded error),Sec=(cause)} It is a bounded
-error if the finalization of the collection of the type (see
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(bounded error),Sec=(cause)} It is a
+bounded error if the finalization of the collection of the type (see
 @RefSecNum{Completion and Finalization}) of the @nt<allocator> has started. If
 the error is detected, Program_Error is raised. Otherwise, the allocation
-proceeds normally.],Old=[]}
+proceeds normally.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[This check is required in some cases; see above.],Old=[]}
+  @ChgAdded{Version=[2],Text=[This check is required in some cases; see above.]}
 @end{Discussion}
 @end{Bounded}
 
@@ -1864,8 +1900,8 @@ then its value shall be within the base range of its expected type.
 Otherwise, the value may be arbitrarily large or small.
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
-@Chg{Version=[2],New=[If the expression is expected to be of a universal type,
-or of any integer type, there are no limits on the value of the expression.],Old=[]}
+@ChgAdded{Version=[2],Text=[If the expression is expected to be of a universal type,
+or of any integer type, there are no limits on the value of the expression.]}
 @end{Ramification}
 
 If the expression is of type @i<universal_real> and its expected type is
@@ -1917,8 +1953,8 @@ X is a static constant equal to True.
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
-  @Chg{Version=[2],New=[The @i<small> is not known for a generic formal type,
-  so we have to exclude formal types from that check.],Old=[]}
+  @ChgAdded{Version=[2],Text=[The @i<small> is not known for a generic formal type,
+  so we have to exclude formal types from that check.]}
 @end{Reason}
 @end{Legality}
 
@@ -1959,11 +1995,11 @@ real static expressions which are exactly half-way between two machine numbers.]
   for descendants of a formal fixed point type.
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00269-01]}
-  @Chg{Version=[2],New=[There is no requirement for exact evaluation or
+  @ChgAdded{Version=[2],Text=[There is no requirement for exact evaluation or
   special rounding in an instance body (unless the expression is static in
   the generic body). This eliminates a potential contract issue where the
   exact value of a static expression depends on the actual parameters (which
-  could then affect the legality of other code).],Old=[]}
+  could then affect the legality of other code).]}
 @end{Reason}
 @begin{ImplNote}
 
