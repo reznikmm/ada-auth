@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -474,7 +474,7 @@ enforced fall into these categories:
 Some rules are checked in the generic declaration,
 and then again
 in both the visible and private parts of the instance:
-@begin{Itemize}
+@begin{InnerItemize}
 The parent type of a record extension has to be specific
 (see @RefSecNum{Type Extensions}).
 This rule is not checked in the instance body.
@@ -498,9 +498,8 @@ A preelaborated library unit has to be preelaborable
 (see @RefSecNum{Elaboration Control}).
 In the generic body, this rule is checked in an assume-the-worst
 manner.
-@end{Itemize}
+@end{InnerItemize}
 
-@begin{Multiple}
 @PDefn2{Term=[accessibility rule],Sec=(checking in generic units)}
 For the accessibility rules,
 the formals have nothing to say about the property in question.
@@ -516,10 +515,9 @@ See @RefSecNum{Type Extensions},
 @RefSecNum{Operations of Access Types},
 and @RefSecNum{Type Conversions}.
 
-We considered run-time checks for access-to-subprogram types as well.
+@NoPrefix@;We considered run-time checks for access-to-subprogram types as well.
 However, this would present difficulties for
 implementations that share generic bodies.
-@end{Multiple}
 
 The rules requiring ``reasonable'' values for static expressions are
 ignored when the expected type for the expression is a descendant of a
@@ -533,10 +531,10 @@ that appears in the visible part of an instance.
 
 Some rules do not apply at all in an instance,
 not even in the visible part:
-@begin{Itemize}
+@begin{InnerItemize}
 @nt{Body_stub}s are not normally allowed to be multiply nested,
-but the can be in instances.
-@end{Itemize}
+but they can be in instances.
+@end{InnerItemize}
 @end{Itemize}
 
 @RootDefn{generic contract issue}

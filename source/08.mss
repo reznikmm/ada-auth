@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @redundant[
@@ -468,14 +468,13 @@ of the entity or view declared by the declaration.
 @begin{Ramification}
 The rule for immediate scope implies the following:
 @begin{Itemize}
-@begin{Multiple}
 If the declaration is that of a library unit,
 then the immediate scope includes the declarative region of the
 declaration itself, but not other places,
 unless they are within the scope of a @nt{with_clause} that mentions the
 library unit.
 
-It is necessary to attach the semantics of @nt{with_clause}s to
+@NoPrefix@;It is necessary to attach the semantics of @nt{with_clause}s to
 [immediate] scopes (as opposed to visibility),
 in order for various rules to work properly.
 A library unit should hide a homographic implicit declaration that
@@ -488,32 +487,29 @@ an explicit declaration in its parent's body,
 so long as that body does not mention the library unit in a
 @nt{with_clause}.
 
-This means that one cannot denote the declaration of the library unit,
+@NoPrefix@;This means that one cannot denote the declaration of the library unit,
 but one might still be able to denote the library unit via another
 view.
 
-A @nt{with_clause} does not make the declaration of a library unit
+@NoPrefix@;A @nt{with_clause} does not make the declaration of a library unit
 visible; the lack of a @nt{with_clause} prevents it from being visible.
 Even if a library unit is mentioned in a @nt{with_clause},
 its declaration can still be hidden.
-@end{Multiple}
 
 The completion of the declaration of a library unit
 (assuming that's also a declaration)
 is not visible, neither directly nor by selection,
 outside that completion.
 
-@begin{Multiple}
 The immediate scope of
 a declaration immediately within the body of a library unit
 does not include any child of that library unit.
 
-This is needed to prevent children from looking inside their
+@NoPrefix@;This is needed to prevent children from looking inside their
 parent's body.  The children are in the declarative region of the
 parent, and they might be after the parent's body.
 Therefore, the scope of a declaration that occurs immediately within
 the body might include some children.
-@end{Multiple}
 @end{Itemize}
 @end{Ramification}
 @end{StaticSem}
@@ -932,7 +928,6 @@ following special cases:
 If the second declaration completes the first one,
 the second declaration is legal.
 
-@begin{Multiple}
 If the body of a library unit contains an explicit homograph of a child
 of that same library unit, this is illegal only if the body
 mentions the child in its @nt<context_clause>, or if
@@ -958,19 +953,18 @@ Here's an example:
 @key[end] Sub;
 @end{Example}
 
-If package body P said "@key[with] P.Q;", then it would be illegal
+@NoPrefix@;If package body P said "@key[with] P.Q;", then it would be illegal
 to declare the homograph Q: Integer.  But it does not, so the
 body of P is OK.
 However, the subunit would be able to see both P.Q's,
 and is therefore illegal.
 
-A previous version of Ada 9X allowed the subunit,
+@NoPrefix@;A previous version of Ada 9X allowed the subunit,
 and said that references to P.Q would tend to be ambiguous.
 However, that was a bad idea, because it requires overload resolution
 to resolve references to directly visible non-overloadable
 homographs, which is something compilers have never before been
 required to do.
-@end{Multiple}
 @end{Itemize}
 
 Note that we need to be careful which things we make "hidden from all
@@ -2310,7 +2304,6 @@ in case it denotes more than one callable entity.
 @end{Legality}
 
 @begin{Notes}
-@begin{Multiple}
 If a usage name has only one acceptable interpretation,
 then it denotes the corresponding entity.
 However, this does not mean that the usage name is necessarily legal
@@ -2319,10 +2312,9 @@ resolution; for example, the fact that an expression is static, whether
 an object is constant, mode and subtype conformance rules, freezing
 rules, order of elaboration, and so on.
 
-Similarly, subtypes are not considered for overload resolution (the
+@NoPrefix@;Similarly, subtypes are not considered for overload resolution (the
 violation of a constraint does not make a program illegal but raises an
 exception during program execution).
-@end{Multiple}
 @end{Notes}
 
 @begin{Incompatible83}
@@ -2361,7 +2353,6 @@ It is replaced with some introductory
 text explaining the basic idea
 of what sorts of rules are overloading rules.
 
-@begin{Multiple}
 It is not clear from RM83 what information is embodied in a ``meaning''
 or an ``interpretation.''
 ``Meaning'' and ``interpretation'' were intended to be synonymous;
@@ -2370,7 +2361,7 @@ resolution.
 ``Meaning'' is used only informally.
 This clause attempts to clarify what is meant by ``interpretation.''
 
-For example,
+@NoPrefix@;For example,
 RM83 does not make it clear that overload resolution is required in
 order to match @nt{subprogram_bodies} with their corresponding
 declarations (and even to tell whether a given @nt{subprogram_body}
@@ -2384,7 +2375,7 @@ are needed @em the resolution of P'Access,
 where P might denote a subprogram,
 is an example.
 
-RM83-8.7(2) might seem to imply that an interpretation embodies
+@NoPrefix@;RM83-8.7(2) might seem to imply that an interpretation embodies
 information about what is denoted by each usage name,
 but not information about which syntactic category each construct
 belongs to.
@@ -2409,7 +2400,7 @@ I : Integer := 3;
 Y : A := F(I); --@i{ Ambiguous?  (We hope so.)}
 @end{Example}
 
-Consider the declaration of Y (a complete context).
+@NoPrefix@;Consider the declaration of Y (a complete context).
 In the above example, overload resolution can easily determine the
 declaration, and therefore the entity,
 denoted by Y, A, F, and I.
@@ -2418,14 +2409,13 @@ we still don't know whether F(I) is a @nt{function_call}
 or an @nt{indexed_component} whose prefix is a @nt{function_call}.
 (In the latter case, it is equivalent to F(7).@key[all](I).)
 
-It seems clear that the declaration of Y ought to be considered
+@NoPrefix@;It seems clear that the declaration of Y ought to be considered
 ambiguous.
 We describe that by saying that there are two interpretations,
 one as a @nt{function_call}, and one as an @nt{indexed_component}.
 These interpretations are both acceptable to the overloading
 rules.
 Therefore, the complete context is ambiguous, and therefore illegal.
-@end{Multiple}
 
 @PDefn{Beaujolais effect}
 It is the intent that the Ada 9X preference rule for root numeric

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1627,10 +1627,9 @@ is @Math{v}, and for the conversion of a value
 result set and close result set are defined as
 follows:
 @begin(itemize)
-   @begin(multiple)
       If the result type is an ordinary fixed point type with a
       @i(small) of @Math{s},
-      @begin(itemize)
+      @begin(InnerItemize)
          if @Math{v} is an integer multiple of
          @Math{s},
          then the perfect result set contains only the value
@@ -1641,17 +1640,15 @@ follows:
          @Math{v} and the
          integer multiple of @Math{s} just above
          @Math{v}.
-      @end(itemize)
+      @end(InnerItemize)
 
-      The close result set is an implementation-defined set of consecutive
+      @NoPrefix@;The close result set is an implementation-defined set of consecutive
       integer multiples of @Math{s} containing the perfect
       result set as a subset.
-   @end(multiple)
 
-   @begin(multiple)
       If the result type is a decimal type with a @i(small) of
       @Math{s},
-      @begin(itemize)
+      @begin(InnerItemize)
          if @Math{v} is an integer multiple of
          @Math{s},
          then the perfect result set contains
@@ -1663,20 +1660,18 @@ follows:
          applies then it contains only the nearest integer multiple of
          @Math{s} (with
          ties broken by rounding away from zero).
-      @end(itemize)
+      @end(InnerItemize)
 
-      The close result set is an implementation-defined set of consecutive
+      @NoPrefix@;The close result set is an implementation-defined set of consecutive
       integer multiples of @Math{s} containing the perfect
       result set as a subset.
       @begin{Ramification}
         As a consequence of subsequent rules, this case does not arise
         when the operand types are also decimal types.
       @end{Ramification}
-   @end(multiple)
 
-   @begin(multiple)
       If the result type is an integer type,
-      @begin(itemize)
+      @begin(InnerItemize)
          if @Math{v} is an integer,
          then the perfect result set contains only the
          value @Math{v};
@@ -1685,11 +1680,10 @@ follows:
          @Math{v} (if @Math{v} lies
          equally distant from two consecutive integers, the perfect result set
          contains the one that is further from zero).
-      @end(itemize)
+      @end(InnerItemize)
 
-      The close result set is an implementation-defined set of consecutive
+      @NoPrefix@;The close result set is an implementation-defined set of consecutive
       integers containing the perfect result set as a subset.
-   @end(multiple)
 @end(itemize)
 
 The result of a fixed point multiplication or division shall belong either to

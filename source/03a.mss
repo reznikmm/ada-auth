@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:23 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -635,7 +635,6 @@ otherwise, the subtype is called a @i(constrained) subtype
 @end{StaticSem}
 
 @begin{Notes}
-@begin{Multiple}
 Any set of types that is closed under derivation
 (see @RefSecNum(Derived Types and Classes)) can be called
 a ``class'' of types.  However, only certain classes are used in the
@@ -686,7 +685,7 @@ operands to produce an effect, or yield a result, or both.
   makes ``limited'' somewhat problematic as a class of types.
 @end{Ramification}
 
-These language-defined classes are organized like this:
+@noprefix@;These language-defined classes are organized like this:
 @begin{Display}
 @TabClear{}
 @TabSet{.25in,+.25in,+.25in,+.25in,+.25in,+.25in}
@@ -719,10 +718,9 @@ all types
 @\@\protected
 @end{Display}
 
-The classes ``numeric'' and ``nonlimited''
+@noprefix@;The classes ``numeric'' and ``nonlimited''
 represent other classification dimensions
 and do not fit into the above strictly hierarchical picture.
-@end{Multiple}
 @end{Notes}
 
 @begin{DiffWord83}
@@ -1944,12 +1942,13 @@ The characteristics of the derived type are defined as follows:
 
 Each class of types that includes the parent type also includes
 the derived type.
-@Discussion{This is inherent in our notion
+@begin{Discussion}
+This is inherent in our notion
   of a ``class'' of types.  It is not mentioned in the
   initial definition of ``class'' since at that point
   type derivation has not been defined.  In any case, this rule
   ensures that every class of types is closed under
-  derivation.}
+  derivation.@end{discussion}
 
 If the parent type is an elementary type or an array type, then the
 set of possible values of the derived type
@@ -1967,12 +1966,11 @@ as that of the parent type.
   for an explicit @nt<derived_type_definition>.
 @end{Discussion}
 
-@begin{Multiple}
 If the parent type is a composite type other than an array type,
 then the components,
 protected subprograms, and entries
 that are declared for the derived type are as follows:
-@begin(itemize)
+@begin(inneritemize)
   The discriminants specified by a new @nt{known_discriminant_part},
   if there is one;
   otherwise, each discriminant of the parent type
@@ -1989,11 +1987,12 @@ that are declared for the derived type are as follows:
   @Defn{inherited protected subprogram}
   @Defn{inherited entry}
   these components, entries, and protected subprograms are said to be @i(inherited);
-  @Ramification{
+  @begin{Ramification}
+
     The profiles of entries and protected subprograms do
     not change upon type derivation, although the type of the
     ``implicit'' parameter identified by the @nt<prefix> of
-    the @nt<name> in a call does.}
+    the @nt<name> in a call does.@end{ramification}
   @begin{Honest}
 
   Any name in the parent @nt{type_declaration} that denotes the
@@ -2004,9 +2003,9 @@ that are declared for the derived type are as follows:
 
   Each component declared in a
   @nt<record_extension_part>, if any.
-@end(itemize)
+@end(inneritemize)
 
-Declarations of components, protected subprograms,
+@noprefix@;Declarations of components, protected subprograms,
 and entries, whether implicit or explicit,
 occur immediately within the declarative region of
 the type, in the order indicated above,
@@ -2034,7 +2033,6 @@ following the parent @nt<subtype_indication>.
   not considered ``inherited'' even if it has the same name
   and subtype as a discriminant of the parent type.
 @end{Discussion}
-@end{Multiple}
 
 The derived type is limited if and only if the
 parent type is limited.
@@ -2071,7 +2069,6 @@ there is a corresponding predefined operator of the derived type.]
   primitive subprograms.
 @end(Reason)
 
-@begin{Multiple}
 @Defn{inherited subprogram}
 For each user-defined primitive subprogram (other than a user-defined
 equality operator @em see below) of the parent type
@@ -2120,7 +2117,7 @@ the implementation of the predefined equality operator of the record extension
   were used in the user-defined equality operators of the parent type.
 @end{Ramification}
 
-The profile of an inherited subprogram
+@noprefix@;The profile of an inherited subprogram
 (including an inherited enumeration literal) is obtained
 from the profile of the corresponding
 (user-defined) primitive subprogram of the parent type,
@@ -2131,7 +2128,7 @@ with a @i(corresponding subtype) of the derived type.
 @Defn{corresponding subtype}
 For a given subtype of the parent type,
 the corresponding subtype of the derived type is defined as follows:
-@begin(itemize)
+@begin(inneritemize)
   If the declaration of the derived type has neither a
   @nt<known_discriminant_part> nor a @nt<record_extension_part>,
   then the corresponding subtype
@@ -2156,9 +2153,9 @@ the corresponding subtype of the derived type is defined as follows:
     an inherited subprogram was felt to impose an undesirable
     implementation burden.
   @end{Reason}
-@end(itemize)
+@end(inneritemize)
 
-The same formal parameters have @nt<default_expression>s in
+@noprefix@;The same formal parameters have @nt<default_expression>s in
 the profile of the inherited subprogram.  @Redundant[Any type mismatch due
 to the systematic replacement of the parent type by the
 derived type is handled as part of the normal
@@ -2171,7 +2168,6 @@ passing @em see @RefSecNum(Parameter Associations).]
   just be "undone" since the parent's subprogram is ultimately being
   called anyway.
 @end(Reason)
-@end{Multiple}
 
 @end(itemize)  @Comment{end of characteristics of derived type}
 
@@ -2417,7 +2413,6 @@ as representatives for an entire class of types, as follows:
   types.  They are declared in the specification of package Standard.
 @end(Honest)
 @begin(Description)
-@begin(Multiple)
 @Defn{class-wide type}Class-wide types
 @\Class-wide types are defined for @Redundant[(and belong to)]
 each derivation class rooted
@@ -2431,7 +2426,7 @@ to be of a class-wide type @i(T)'Class, an actual parameter
 of any type in the derivation class rooted at @i(T) is acceptable
 (see @RefSecNum(The Context of Overload Resolution)).
 
-@Defn{first subtype}
+@NoPrefix@Defn{first subtype}
 The set of values for a class-wide type @i(T)'Class is the discriminated
 union of the set of values of each specific type in the
 derivation class rooted at @i(T) (the tag acts as the implicit discriminant
@@ -2450,9 +2445,7 @@ so that an @nt{attribute_definition_clause} like
 ``@key[for] S'Class'Output @key[use] ...;''
 will be legal.
 @end{Reason}
-@end(Multiple)
 
-@begin(Multiple)
 @Defn{universal type}Universal types
 @\Universal types
 are defined for @Redundant[(and belong to)] the integer,
@@ -2469,7 +2462,7 @@ in that it is acceptable where some particular type in the
 class is expected
 (see @RefSecNum(The Context of Overload Resolution)).
 
-The set of values of a universal type is the undiscriminated union
+@NoPrefix@;The set of values of a universal type is the undiscriminated union
 of the set of values possible for any definable type in the associated class.
 Like class-wide types, universal types have no
 primitive subprograms of their own.  However, their ``universality'' allows
@@ -2508,7 +2501,6 @@ type in the corresponding class.
   change the value, although an associated subtype conversion might
   need to.
 @end(Honest)
-@end(Multiple)
 @end(Description)
 
 @PDefn{root_integer}
@@ -2578,7 +2570,6 @@ chain of derivations going back to the given ancestor.
 @end{StaticSem}
 
 @begin{Notes}
-@begin{Multiple}
 Because operands of a universal type are acceptable to the
 predefined operators of any type in their class, ambiguity can
 result.  For @i(universal_integer) and @i(universal_real), this
@@ -2592,7 +2583,7 @@ Hence, in an apparently ambiguous expression like
 1 + 4 < 7
 @end(Display)
 
-where each of the literals is of type @i(universal_integer),
+@NoPrefix@;where each of the literals is of type @i(universal_integer),
 the predefined operators of @i(root_integer) will be preferred over those
 of other specific integer types, thereby resolving the ambiguity.
 @begin(Ramification)
@@ -2602,14 +2593,14 @@ of other specific integer types, thereby resolving the ambiguity.
   predefined operator of a root numeric type is not ``universal''
   (implicitly convertible) even if both operands were.
 @end(Ramification)
-@end{Multiple}
 @end{Notes}
 
+    @begin{Comment}
+        RLB - 00-12-05 - I hope this sillyness isn't needed anymore!
 @begin{ISOonly}
 @InsertTOCCopyright{}
 @Send(Contents "@NewPage()")
 @end{ISOonly}
-    @begin{Comment}
         This inserts the copyright notice at this point in the table of
         contents.
         See adalib.lib for explanation.
@@ -2723,22 +2714,24 @@ in every unconstrained object of the type;
 it is also the range supported at a minimum for
 intermediate values during the evaluation of expressions involving
 predefined operators of the type.
-@ImplNote{Note that in some machine architectures intermediates
+@begin{ImplNote}
+Note that in some machine architectures intermediates
   in an expression (particularly if static),
   and register-resident variables might accommodate
   a wider range.  The base range does not include the values
   of this wider range that are not assignable without overflow to
-  memory-resident objects.}
+  memory-resident objects.@end{implnote}
 @begin(Ramification)
   @PDefn2{Term=[base range], Sec=(of an enumeration type)}
   The base range of an enumeration type is the range of values
   of the enumeration type.
 @end(Ramification)
-@Reason{
+@begin{Reason}
+
   If the representation supports infinities,
   the base range is nevertheless restricted
   to include only the representable finite values,
-  so that 'Base'First and 'Base'Last are always guaranteed to be finite.}
+  so that 'Base'First and 'Base'Last are always guaranteed to be finite.@end{reason}
 @begin(Honest)
   By a "value that can be assigned without overflow" we don't mean
   to restrict ourselves to values that can be represented exactly.
@@ -2802,13 +2795,15 @@ the following attributes are defined:
   Text=[S'First denotes the lower bound of
      the range of S.  The value of this attribute is of the type
      of S.]}
-     @Ramification{Evaluating S'First never raises Constraint_Error.}
+     @begin{Ramification}
+Evaluating S'First never raises Constraint_Error.@end{ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Last>,
   Text=[S'Last denotes the upper bound of
      the range of S.  The value of this attribute is of the type
      of S.]}
-     @Ramification{Evaluating S'Last never raises Constraint_Error.}
+     @begin{Ramification}
+Evaluating S'Last never raises Constraint_Error.@end{ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Range>,
   Text=[S'Range is equivalent to the @nt<range> S'First .. S'Last.]}
@@ -2826,7 +2821,7 @@ the following attributes are defined:
   @b(return) S'Base
 @end(example)
 
-     The function returns the lesser of the values
+     @NoPrefix@;The function returns the lesser of the values
      of the two parameters.]}
      @begin{Discussion}
      @Defn2{Term=[italics],Sec=(formal parameters of attribute functions)}
@@ -2847,7 +2842,7 @@ the following attributes are defined:
   @b(return) S'Base
 @end(example)
 
-     The function returns the greater of the values of the two parameters.]}
+     @NoPrefix@;The function returns the greater of the values of the two parameters.]}
 
 @Attribute{Prefix=<S>, AttrName=<Succ>,
   Text=[S'Succ denotes a function with
@@ -2857,7 +2852,7 @@ the following attributes are defined:
   @b(return) S'Base
 @end(example)
 
-     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+     @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
      For an enumeration type, the function returns the value
      whose position number is one more than that of the value of @i(Arg);
      @IndexCheck{Range_Check}
@@ -2872,11 +2867,12 @@ the following attributes are defined:
      immediately above the value of @i(Arg);
      @IndexCheck{Range_Check}
      Constraint_Error is raised if there is no such machine number.]}
-     @Ramification{S'Succ for a modular integer subtype wraps around
+     @begin{Ramification}
+S'Succ for a modular integer subtype wraps around
        if the value of @i(Arg) is S'Base'Last.  S'Succ for a signed integer
        subtype might raise Constraint_Error if the value of @i(Arg) is
        S'Base'Last, or it might return the out-of-base-range value
-       S'Base'Last+1, as is permitted for all predefined numeric operations.}
+       S'Base'Last+1, as is permitted for all predefined numeric operations.@end{ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Pred>,
   Text=[S'Pred denotes a function with
@@ -2886,7 +2882,7 @@ the following attributes are defined:
   @b(return) S'Base
 @end(example)
 
-     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+     @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
      For an enumeration type, the function returns the value
      whose position number is one less than that of the value of @i(Arg);
      @IndexCheck{Range_Check}
@@ -2901,13 +2897,13 @@ the following attributes are defined:
      immediately below the value of @i(Arg);
      @IndexCheck{Range_Check}
      Constraint_Error is raised if there is no such machine number.]}
-     @Ramification{S'Pred for a modular integer subtype wraps around
+     @begin{Ramification}
+S'Pred for a modular integer subtype wraps around
        if the value of @i(Arg) is S'Base'First.  S'Pred for a signed integer
        subtype might raise Constraint_Error if the value of @i(Arg) is
        S'Base'First, or it might return the out-of-base-range value
-       S'Base'First@en@;1, as is permitted for all predefined numeric operations.}
+       S'Base'First@en@;1, as is permitted for all predefined numeric operations.@end{ramification}
 
-@begin(multiple)
 @Attribute{Prefix=<S>, AttrName=<Wide_Image>,
   Text=[S'Wide_Image denotes a function
      with the following specification:
@@ -2916,26 +2912,27 @@ the following attributes are defined:
   @b(return) Wide_String
 @end(example)
 
-     @Defn2{Term=image, Sec=(of a value)}
+     @NoPrefix@Defn2{Term=image, Sec=(of a value)}
      The function returns an @i(image) of the value of @i(Arg),
      that is, a sequence of characters representing the value in display
      form.]}
      The lower bound of the result is one.
 
-     The image of an integer value is the corresponding decimal
+     @NoPrefix@;The image of an integer value is the corresponding decimal
      literal,
      without underlines, leading zeros, exponent, or trailing spaces, but
      with a single leading character that is either a minus sign or
      a space.
-     @ImplNote{
+     @begin{ImplNote}
+
          If the machine supports negative zeros for signed integer types,
          it is not specified whether "@en@;0" or " 0" should be returned
          for negative zero.  We don't have enough experience with
          such machines to know what is appropriate, and what other
          languages do.  In any case, the implementation should be
-         consistent.}
+         consistent.@end{implnote}
 
-     @Defn{nongraphic character}
+     @NoPrefix@Defn{nongraphic character}
      The image of an enumeration value is either the corresponding
      identifier in upper case or the corresponding character literal
      (including the two apostrophes); neither leading nor trailing
@@ -2957,7 +2954,7 @@ the following attributes are defined:
        similar things.
      @end{ImplNote}
 
-     The image of a floating point value is a decimal real literal
+     @NoPrefix@;The image of a floating point value is a decimal real literal
      best approximating the value (rounded away from zero if halfway
      between)
      with a single leading character that is either a minus sign
@@ -2975,13 +2972,15 @@ the following attributes are defined:
      Leading zeros are present in the exponent only if necessary to make
      the exponent at least two digits.
      @end{Honest}
-     @Reason{
-        This image is intended to conform to that produced by
-        Text_IO.Float_IO.Put in its default format.}
-     @ImplNote{The rounding direction is specified here to ensure
-       portability of output results.}
+     @begin{Reason}
 
-     The image of a fixed point value is a decimal real literal
+        This image is intended to conform to that produced by
+        Text_IO.Float_IO.Put in its default format.@end{reason}
+     @begin{ImplNote}
+The rounding direction is specified here to ensure
+       portability of output results.@end{implnote}
+
+     @NoPrefix@;The image of a fixed point value is a decimal real literal
      best approximating the value (rounded away from zero if halfway
      between)
      with a single leading character that is either a minus sign
@@ -2989,17 +2988,18 @@ the following attributes are defined:
      (with no redundant leading zeros),
      a decimal point, and S'Aft (see @RefSecNum(Operations of Fixed Point Types))
      digits after the decimal point.
-     @Reason{This image is intended to conform to that produced by
-       Text_IO.Fixed_IO.Put.}
-     @ImplNote{The rounding direction is specified here to ensure
-       portability of output results.}
-     @ImplNote{For a machine that supports negative zeros,
+     @begin{Reason}
+This image is intended to conform to that produced by
+       Text_IO.Fixed_IO.Put.@end{reason}
+     @begin{ImplNote}
+The rounding direction is specified here to ensure
+       portability of output results.@end{implnote}
+     @begin{ImplNote}
+For a machine that supports negative zeros,
        it is not specified whether "@en@;0.000" or " 0.000" is returned.
        See corresponding comment above about integer types with
-       signed zeros.}
-@end(multiple)
+       signed zeros.@end{implnote}
 
-@begin(multiple)
 @Attribute{Prefix=<S>, AttrName=<Image>,
   Text=[S'Image denotes a function with
     the following specification:
@@ -3008,7 +3008,7 @@ the following attributes are defined:
   @b(return) String
 @end(example)
 
-     The function returns an image of the value of @i(Arg) as a String.]}
+     @NoPrefix@;The function returns an image of the value of @i(Arg) as a String.]}
      The lower bound of the result is one.  The image has the
      same sequence of graphic characters as that defined
      for S'Wide_Image if all the graphic characters are defined in Character;
@@ -3017,7 +3017,6 @@ the following attributes are defined:
      @ImplDef{The sequence of characters of the value returned by
      S'Image when some of the graphic characters of S'Wide_Image are not
      defined in Character.}
-@end(multiple)
 
 
 @Attribute{Prefix=<S>, AttrName=<Wide_Width>,
@@ -3034,7 +3033,6 @@ the following attributes are defined:
      subtype S.  It denotes zero for a subtype that has
      a null range.  Its type is @i(universal_integer).]}
 
-@begin(multiple)
 @Attribute{Prefix=<S>, AttrName=<Wide_Value>,
   Text=[S'Wide_Value denotes a function with
      the following specification:
@@ -3043,12 +3041,12 @@ the following attributes are defined:
   @b(return) S'Base
 @end(example)
 
-    This function returns a value given an image of the value
+    @NoPrefix@;This function returns a value given an image of the value
     as a Wide_String, ignoring any leading or trailing spaces.]}
 
     @PDefn2{Term=[evaluation], Sec=(Wide_Value)}
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-    For the evaluation of a call on S'Wide_Value
+    @NoPrefix@;For the evaluation of a call on S'Wide_Value
     for an enumeration subtype S,
     if the sequence of characters of the parameter (ignoring
     leading and trailing spaces) has the syntax
@@ -3058,14 +3056,15 @@ the following attributes are defined:
     the result is the corresponding enumeration value;
     @IndexCheck{Range_Check}
     otherwise Constraint_Error is raised.
-    @Discussion{
+    @begin{Discussion}
+
       It's not crystal clear that Range_Check is appropriate here,
       but it doesn't seem worthwhile to invent a whole new check name
       just for this weird case, so we decided to lump it in with
-      Range_Check.}
+      Range_Check.@end{discussion}
 
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-    For the evaluation of a call on S'Wide_Value (or S'Value) for
+    @NoPrefix@;For the evaluation of a call on S'Wide_Value (or S'Value) for
     an integer
     subtype S, if the sequence of characters of the
     parameter (ignoring leading and trailing spaces)
@@ -3090,7 +3089,7 @@ the following attributes are defined:
       literals (since overflow never occurs for modular types).
     @end(Discussion)
 
-For the evaluation of a call on S'Wide_Value (or S'Value) for a
+    @NoPrefix@;For the evaluation of a call on S'Wide_Value (or S'Value) for a
     real subtype S, if the sequence of characters of the
     parameter (ignoring leading and trailing spaces)
     has the syntax of one of the following:
@@ -3107,7 +3106,7 @@ For the evaluation of a call on S'Wide_Value (or S'Value) for a
 @end{Itemize}
 
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-    with an optional leading sign character (plus or minus), and if the
+    @NoPrefix@;with an optional leading sign character (plus or minus), and if the
     corresponding numeric value belongs to the base range of the
     type of S, then that value is the result;
     @IndexCheck{Range_Check}
@@ -3115,9 +3114,7 @@ For the evaluation of a call on S'Wide_Value (or S'Value) for a
     The sign of a zero value is preserved
     (positive if none has been specified)
     if S'Signed_Zeros is True.
-@end(multiple)
 
-@begin(multiple)
 @Attribute{Prefix=<S>, AttrName=<Value>,
   Text=[S'Value denotes a function with
      the following specification:
@@ -3126,12 +3123,12 @@ For the evaluation of a call on S'Wide_Value (or S'Value) for a
   @b(return) S'Base
 @end(example)
 
-    This function returns a value given an image of the value
+    @NoPrefix@;This function returns a value given an image of the value
     as a String, ignoring any leading or trailing spaces.]}
 
     @PDefn2{Term=[evaluation], Sec=(Value)}
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-    For the evaluation of a call on S'Value
+    @NoPrefix@;For the evaluation of a call on S'Value
     for an enumeration subtype S,
     if the sequence of characters of the parameter (ignoring
     leading and trailing spaces) has the syntax
@@ -3156,7 +3153,6 @@ For the evaluation of a call on S'Wide_Value (or S'Value) for a
        the same result given the same sequence of characters.
     @end(Reason)
 
-@end(multiple)
 @end(description)
 @EndPrefixType{}
 @end{RunTime}
@@ -3302,9 +3298,10 @@ An @nt<enumeration_type_definition> defines an enumeration type.]
 @Redundant[The @nt<defining_identifier>s and
 @nt<defining_character_literal>s listed in an
 @nt<enumeration_type_definition> shall be distinct.]
-  @TheProof{This is a ramification of the normal disallowance
+  @begin{TheProof}
+This is a ramification of the normal disallowance
     of homographs explicitly declared immediately in the same
-    declarative region.}
+    declarative region.@end{theproof}
 @end{Legality}
 
 @begin{StaticSem}
@@ -4042,14 +4039,16 @@ the following attributes are defined:
      For the evaluation of a call on S'Val, if there
      is no value in the base range of its type with the given
      position number, Constraint_Error is raised.
-     @Ramification{
+     @begin{Ramification}
+
         By the overload resolution rules, a formal parameter of type
         @i(universal_integer) allows an actual parameter of any
-        integer type.}
-     @Reason{We considered allowing
+        integer type.@end{ramification}
+     @begin{Reason}
+We considered allowing
         S'Val for a signed integer subtype S to return an out-of-range value,
         but since checks were required for enumeration and modular types
-        anyway, the allowance didn't seem worth the complexity of the rule.}
+        anyway, the allowance didn't seem worth the complexity of the rule.@end{reason}
 @end(description)
 @EndPrefixType{}
 @end{StaticSem}
@@ -4325,10 +4324,11 @@ unconstrained variable of the type.
 The base range (see @RefSecNum{Scalar Types})
 of a floating point type is symmetric around zero,
 except that it can include some extra negative values
-in some implementations.@ImplNote{For example, if a 2's complement
+in some implementations.@begin{ImplNote}
+For example, if a 2's complement
   representation is used for the mantissa rather than a sign-mantissa or
   1's complement representation, then there is usually one extra
-  negative machine number.}
+  negative machine number.@end{implnote}
 @begin{Honest}
 
   If the Signed_Zeros attribute is True,
@@ -4345,13 +4345,14 @@ of the type.
 The @i(safe range) of a floating point type is that part of its
 base range for which the accuracy corresponding to the base decimal precision
 is preserved by all predefined operations.
-@ImplNote{In most cases,
+@begin{ImplNote}
+In most cases,
   the safe range and base range are the same.
   However, for some hardware, values near the boundaries of
   the base range might result in excessive
   inaccuracies or spurious overflows when used with
   certain predefined operations.  For such hardware, the safe
-  range would omit such values.}
+  range would omit such values.@end{implnote}
 
 @PDefn2{Term=[base decimal precision], Sec=(of a floating point type)}
 A @nt<floating_point_definition> defines a floating point type
@@ -4781,7 +4782,6 @@ of Float_IO).
 @end{ImplPerm}
 
 @begin{Notes}
-@begin{Multiple}
   The base range of
   an ordinary fixed point type need not include the specified bounds
   themselves
@@ -4790,11 +4790,10 @@ of Float_IO).
 @b(type) Fraction @b(is delta) 2.0**(-15) @b(range) -1.0 .. 1.0;
   @end(example)
 
-  With 2's complement hardware, such a type could have a
+  @NoPrefix@;With 2's complement hardware, such a type could have a
   signed 16-bit representation, using 1 bit for the sign
   and 15 bits for fraction, resulting in a base range of
   @en@;1.0 .. 1.0@en@;2.0**(@en@;15).
-@end{Multiple}
 @end{Notes}
 
 @begin{Examples}
@@ -4860,10 +4859,11 @@ The following attributes are defined for
   Text=[S'Delta
      denotes the @i(delta) of the fixed point subtype S.
      The value of this attribute is of the type @i(universal_real).]}
-     @Reason{
+     @begin{Reason}
+
        The @i(delta) is associated with the @i(sub)type as opposed
        to the type,
-       because of the possibility of an (obsolescent) @nt<delta_constraint>.}
+       because of the possibility of an (obsolescent) @nt<delta_constraint>.@end{reason}
 
 @Attribute{Prefix=<S>, AttrName=<Fore>,
   Text=[S'Fore yields the minimum number of characters needed
@@ -4935,7 +4935,6 @@ The following additional attributes are defined for
    By contrast, S'Aft is always positive.
  @end{Ramification}
 
-@begin{Multiple}
 @Attribute{Prefix=<S>, AttrName=<Round>,
   Text=[S'Round denotes a function with
      the following specification:
@@ -4944,10 +4943,8 @@ The following additional attributes are defined for
   @b(return) S'Base
 @end(example)
 
-          The function returns the value obtained by rounding X (away
-          from 0, if X is midway between
-          two values of the type of S).]}
-@end{Multiple}
+     @NoPrefix@;The function returns the value obtained by rounding X (away
+     from 0, if X is midway between two values of the type of S).]}
 @end(description)
 @EndPrefixType{}
 @end{StaticSem}

@@ -1,9 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:24 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -537,11 +536,12 @@ consecutive occurrences of @i{char}, where
 
 An @i{expanded picture String} is a picture String containing no
 Character replications.
-@Discussion{
+@begin{Discussion}
+
 Since 'B' is not allowed after a RHS sign, there is no need
 for a special rule to disallow "9.99DB(2)" as an abbreviation for
 "9.99DBB"
-}
+@end{discussion}
 @end{RunTime}
 
 @begin{Notes}

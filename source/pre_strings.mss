@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 
 @LabeledClause{String Handling}
 
@@ -185,7 +185,8 @@ a Character_Set value that represents the set obtained by applying
 the corresponding operation to the set(s) represented by the parameter(s)
 of the operator.
 "@en"(Left, Right) is equivalent to "and"(Left, "not"(Right)).
-@reason{The set minus operator is provided for efficiency.}
+@begin{reason}
+The set minus operator is provided for efficiency.@end{reason}
 @begin{DescribeCode}
 @begin{Example}
 @key[function] Is_In (Element : @key[in] Character;
@@ -348,12 +349,13 @@ differs from the parameter's length.
 
 For each function that returns a String, the lower bound of the returned
 value is 1.
-@Discussion{Most operations that yields a String are provided both as a
+@begin{Discussion}
+Most operations that yields a String are provided both as a
 function and as a procedure.  The functional form is possibly a more aesthetic
 style but may introduce overhead due to extra copying or dynamic memory
 usage in some implementations.  Thus a procedural form, with an @key[in]
 @key[out] parameter so that all copying is done `in place', is also
-supplied.}
+supplied.@end{discussion}
 
 The basic model embodied in the package is that a fixed-length string
 comprises significant characters and possibly padding
@@ -609,10 +611,12 @@ of Source are copied to Target.
 Otherwise, Length_Error is propagated.
 @end{itemize}
 @end{itemize}
-@ramification{The Move procedure will work even if Source and Target
-overlap.}
-@reason{The order of parameters (Source before Target) corresponds to
-the order in COBOL's MOVE verb.}
+@begin{ramification}
+The Move procedure will work even if Source and Target
+overlap.@end{ramification}
+@begin{reason}
+The order of parameters (Source before Target) corresponds to
+the order in COBOL's MOVE verb.@end{reason}
 
 @begin{Example}
 @key[function] Index (Source   : @key[in] String;
@@ -978,14 +982,16 @@ are either overloaded directly  for Bounded_String, or are modified as
 needed to reflect the variability in length.  Additionally, since the
 Bounded_String type is private, appropriate constructor and selector
 operations are provided.
-@reason{Strings.Bounded declares an inner generic package, versus itself
+@begin{reason}
+Strings.Bounded declares an inner generic package, versus itself
 being directly a generic child of Strings, in order to retain
 compatibility with a version of the string-handling packages that
-is generic with respect to the character and string types.}
-@reason{The bound of a bounded-length string is specified as a parameter
+is generic with respect to the character and string types.@end{reason}
+@begin{reason}
+The bound of a bounded-length string is specified as a parameter
 to a generic, versus as the value for a discriminant, because of the
 inappropriateness of assignment and equality of discriminated types for
-the copying and comparison of bounded strings.}
+the copying and comparison of bounded strings.@end{reason}
 @end{Intro}
 
 @begin{StaticSem}

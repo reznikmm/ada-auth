@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @redundant[
@@ -966,7 +966,6 @@ The following attributes are defined:
 For @PrefixType{a prefix X that denotes an object, program unit,
 or label}:
 @begin{Description}
-@begin{Multiple}
 @Attribute{Prefix=<X>, AttrName=<Address>,
   Text=<Denotes the address of the first of the storage elements
 allocated to X.  For a program unit or
@@ -984,10 +983,9 @@ The value of this attribute is of type System.Address.>}
 @PDefn2{Term=[specifiable], Sec=(of Address for stand-alone
 objects and for program units)}
 @Defn{Address clause}
-Address may be specified for @Redundant[stand-alone] objects
+@NoPrefix@;Address may be specified for @Redundant[stand-alone] objects
 and for program units
 via an @nt{attribute_definition_clause}.
-@end{Multiple}
   @begin{Ramification}
   Address is not allowed for enumeration literals,
   predefined operators, derived task types,
@@ -1159,7 +1157,6 @@ than that.
 For @PrefixType{a prefix X that denotes a subtype or
 object}:
 @begin{Description}
-@begin{Multiple}
 @Attribute{Prefix=<X>, AttrName=<Alignment>,
   Text=<The Address of an object that is allocated under
     control of the implementation is an integral
@@ -1178,7 +1175,7 @@ object}:
     an integral multiple of its Alignment.
     The implementation shall not assume a stricter alignment.
 
-    The value of this attribute is of type @i{universal_integer},
+    @NoPrefix@;The value of this attribute is of type @i{universal_integer},
     and nonnegative;
     zero means that the object is not necessarily
     aligned on a storage element boundary.>}
@@ -1200,7 +1197,7 @@ N-storage-element boundary.
 
 @PDefn2{Term=[specifiable], Sec=(of Alignment for first subtypes and objects)}
 @Defn{Alignment clause}
-Alignment may be specified for first subtypes and
+@NoPrefix@;Alignment may be specified for first subtypes and
 @Redundant[stand-alone] objects
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static,
@@ -1211,11 +1208,10 @@ unless the object's Alignment is also specified.
 The Alignment of an object created by an allocator is that of the
 designated subtype.
 
-If an Alignment is specified for a composite subtype or object, this
+@NoPrefix@;If an Alignment is specified for a composite subtype or object, this
 Alignment shall be equal to the least common multiple of any
 specified Alignments of the subcomponent subtypes, or an integer
 multiple thereof.
-@end{Multiple}
 @end{Description}
 @end{StaticSem}
 
@@ -1381,7 +1377,6 @@ which are an obsolete version of Alignment clauses).
 For @PrefixType{a prefix X that denotes an
 object}:
 @begin{Description}
-@begin{Multiple}
 @Attribute{Prefix=<X>, AttrName=<Size>,
   Text=<Denotes the size in bits of
 the representation of the object.
@@ -1396,11 +1391,10 @@ as some number of bits.
 
 @PDefn2{Term=[specifiable], Sec=(of Size for stand-alone objects)}
 @Defn{Size clause}
-Size may be specified for @Redundant[stand-alone] objects
+@NoPrefix@;Size may be specified for @Redundant[stand-alone] objects
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static
 and its value nonnegative.
-@end{Multiple}
 @end{Description}
 @end{StaticSem}
 
@@ -1419,7 +1413,6 @@ Alignment is nonzero).
 @begin{StaticSem}
 For @PrefixType{every subtype S}:
 @begin{Description}
-@begin{Multiple}
 @Attribute{Prefix=<S>, AttrName=<Size>,
   Text=<If S is definite,
 denotes the size @Redundant{(in bits)}
@@ -1433,7 +1426,7 @@ The formal parameter of an instance of Unchecked_Conversion
 that converts from subtype S to some other subtype.
 @end{Itemize}
 
-If S is indefinite,
+@NoPrefix@;If S is indefinite,
 the meaning is implementation defined.
 The value of this attribute is of the type
 @i{universal_integer}.>}
@@ -1448,7 +1441,6 @@ Size may be specified for first subtypes
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static
 and its value nonnegative.
-@end{Multiple}
 @ImplDef{The meaning of Size for indefinite subtypes.}
   @begin{Reason}
   The effects of specifying the Size of a subtype are:
@@ -1773,7 +1765,6 @@ rather than letting implementations define their meaning.
 For @PrefixType{a prefix T that denotes a task
 object @Redundant[(after any implicit dereference)]}:
 @begin{Description}
-@begin{Multiple}
 @Attribute{Prefix=<T>, AttrName=<Storage_Size>,
   Text=<Denotes the number of storage elements reserved for
   the task.
@@ -1788,7 +1779,6 @@ If a @nt{pragma} Storage_Size is given,
 the value of the Storage_Size attribute is at least
 the value specified in the @nt{pragma}.
 @EndPrefixType{}
-@end{Multiple}
   @begin{Ramification}
   The value of this attribute is never negative,
   since it is impossible to ``reserve'' a negative number
@@ -1866,7 +1856,6 @@ accommodate the requested Storage_Size.
 For @PrefixType{a prefix X that denotes an array subtype or array
 object @Redundant[(after any implicit dereference)]}:
 @begin{Description}
-@begin{Multiple}
 @Attribute{Prefix=<X>, AttrName=<Component_Size>,
   Text=<Denotes the size in bits of
 components of the type of X.
@@ -1876,7 +1865,7 @@ The value of this attribute is of type @i{universal_integer}.>}
 @PDefn2{Term=[specifiable], Sec=(of Component_Size for
 array types)}
 @Defn{Component_Size clause}
-Component_Size may be specified for array types
+@NoPrefix@;Component_Size may be specified for array types
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static,
 and its value nonnegative.
@@ -1886,7 +1875,6 @@ If the array is stored ``backwards'' in memory
 (which might be caused by an implementation-defined pragma),
 X'Component_Size is still positive.
 @end{ImplNote}
-@end{Multiple}
 @begin{Ramification}
 For an array object A, A'Component_Size = A(I)'Size for any index I.
 @end{Ramification}
@@ -2611,12 +2599,10 @@ but the user may control their values by giving a
 @nt{record_representation_clause}.
 @end{Ramification}
 @begin{Description}
-@begin{Multiple}
 @Attribute{Prefix=<R.C>, AttrName=<Position>,
   Text=<Denotes the same value as R.C'Address @en@; R'Address.
 The value of this attribute is of the type
 @i{universal_integer}.>}
-@end{Multiple}
 @begin{Ramification}
 Thus, R.C'Position is the offset of C in storage
 elements from the beginning of the object,
@@ -2631,7 +2617,6 @@ the "@en@;" operator is the one in System.Storage_Elements
 that takes two Addresses and returns a Storage_Offset.
 @end{Ramification}
 
-@begin{Multiple}
 @Attribute{Prefix=<R.C>, AttrName=<First_Bit>,
   Text=<Denotes the offset, from the start of the first of the
 storage elements occupied by C, of the first bit occupied by C.
@@ -2639,9 +2624,7 @@ This offset is measured in bits.
 The first bit of a storage element is numbered zero.
 The value of this attribute is of the type
 @i{universal_integer}.>}
-@end{Multiple}
 
-@begin{Multiple}
 @Attribute{Prefix=<R.C>, AttrName=<Last_Bit>,
   Text=<Denotes the offset, from the start of the first of the
 storage elements occupied by C, of the last bit occupied by C.
@@ -2660,7 +2643,6 @@ then that component will be at the same relative storage place
 in all objects of the type.
 Otherwise, there is no such requirement.
 @end{Ramification}
-@end{Multiple}
 @end{Description}
 @EndPrefixType{}
 @end{StaticSem}
@@ -4591,7 +4573,6 @@ for instances of Unchecked_Deallocation.
 @end{StaticSem}
 
 @begin{RunTime}
-@begin{Multiple}
 Given an instance of Unchecked_Deallocation
 declared as follows:
 @begin{Example}
@@ -4606,12 +4587,10 @@ After executing Free(X), the value of X is @key{null}.
 
 Free(X), when X is already equal to @key{null}, has no effect.
 
-@begin{Multiple}
 Free(X), when X is not equal to @key{null} first
 performs finalization, as described in
 @RefSecNum{User-Defined Assignment and Finalization}.
-It then deallocates the storage occupied by the object designated
-by X.
+It then deallocates the storage occupied by the object designated by X.
 If the storage pool is a user-defined object, then
 the storage is deallocated by calling Deallocate,
 passing @i[access_to_variable_subtype_name]'Storage_Pool as the Pool parameter.
@@ -4621,7 +4600,6 @@ Size_In_Storage_Elements and Alignment are the same values passed to the
 corresponding Allocate call.
 There is one exception: if the object being freed contains tasks,
 the object might not be deallocated.
-@end{Multiple}
 @begin{Ramification}
 Free calls only the specified Deallocate procedure
 to do deallocation.
@@ -4635,7 +4613,6 @@ and @i{y}, then Free might deallocate @i{x} and then @i{y},
 or it might deallocate @i{y} and then @i{x}.
 @end{Ramification}
 @end{Enumerate}
-@end{Multiple}
 
 @IndexSee{Term=[freed],See=(nonexistent)}
 @Defn{nonexistent}
@@ -5953,7 +5930,6 @@ A @nt{representation_clause} for an entity should most certainly
 @end{Legality}
 
 @begin{Incompatible83}
-@begin{Multiple}
 RM83 defines a forcing occurrence of a type as follows:
 ``A forcing occurrence is any occurrence [of the name of the type,
 subtypes of the type, or types or subtypes with subcomponents of the type]
@@ -5972,7 +5948,6 @@ It seems like the wording allows things like this:
 Occurrences within @nt{pragma}s can cause freezing in Ada 9X.
 (Since such @nt{pragma}s are ignored in Ada 83,
 this will probably fix more bugs than it causes.)
-@end{Multiple}
 @end{Incompatible83}
 
 @begin{Extend83}

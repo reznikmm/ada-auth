@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program
@@ -59,9 +59,10 @@ the argument at relative position Number.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Number is outside the range 1..Argument_Count, then
 Constraint_Error is propagated.
-@Ramification{If the external execution environment does not support
+@begin{Ramification}
+If the external execution environment does not support
 passing arguments to a program, then Argument(N) for any N will
-raise Constraint_Error, since Argument_Count is 0.}
+raise Constraint_Error, since Argument_Count is 0.@end{ramification}
 
 @begin{Example}
 @key[function] Command_Name @key[return] String;

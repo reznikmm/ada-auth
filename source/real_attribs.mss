@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.9 $}
+@comment{$Revision: 1.10 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -172,26 +172,26 @@ The following @i{primitive function attributes} are defined for any subtype
 S of a floating point type @i{T}.
 @begin(Description)
 @Attribute{Prefix=<S>, AttrName=<Exponent>,
-  Text=[@Multiple(S'Exponent denotes a function with the following
+  Text=[S'Exponent denotes a function with the following
    specification:
 @begin(Example)
 @key(function) S'Exponent (@i(X) : @i(T))
   @key(return) @i(universal_integer)
 @end(Example)
 
-   The function yields the normalized exponent of @i{X}.)]}
+   @NoPrefix@;The function yields the normalized exponent of @i{X}.]}
 
 @Attribute{Prefix=<S>, AttrName=<Fraction>,
-  Text=[@Multiple(S'Fraction denotes a function with the following
+  Text=[S'Fraction denotes a function with the following
    specification:
 @begin(Example)
 @key(function) S'Fraction (@i(X) : @i(T))
   @key(return) @i(T)
 @end(Example)
 
-   The function yields the value @Math(X @Times T@r('Machine_Radix)@Up(-k)), where
+   @NoPrefix@;The function yields the value @Math(X @Times T@r('Machine_Radix)@Up(-k)), where
    @Math(k) is the normalized exponent of @i(X).  A zero result@Redundant(, which
-   can only occur when @i(X) is zero,) has the sign of @i(X).)]}
+   can only occur when @i(X) is zero,) has the sign of @i(X).]}
 @begin{Discussion}
    Informally, when @i{X} is a normalized number, the result is the value
    obtained by replacing the @i{exponent} by zero in the canonical-form
@@ -210,7 +210,7 @@ S of a floating point type @i{T}.
 @end{ImplNote}
 
 @Attribute{Prefix=<S>, AttrName=<Compose>,
-  Text=[@Multiple(S'Compose denotes a function with the following
+  Text=[S'Compose denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Compose (@i{Fraction} : @i{T};
@@ -219,7 +219,7 @@ S of a floating point type @i{T}.
 @end{Example}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   Let @Math{v} be the value @Math{Fraction @Times
+   @NoPrefix@;Let @Math{v} be the value @Math{Fraction @Times
    T@r('Machine_Radix)@Up{Exponent-k}},
    where @Math{k} is the normalized exponent of @i{Fraction}.
    If @Math{v} is a machine number of the type @i{T}, or if
@@ -227,9 +227,9 @@ S of a floating point type @i{T}.
    otherwise,
    it yields either one of the machine numbers of the type @i{T} adjacent to
    @Math{v}.
-@IndexCheck{Range_Check}Constraint_Error is optionally raised if
-@Math{v} is outside the base range of S.
-   A zero result has the sign of @i{Fraction} when S'Signed_Zeros is True.)]}
+   @IndexCheck{Range_Check}Constraint_Error is optionally raised if
+   @Math{v} is outside the base range of S.
+   A zero result has the sign of @i{Fraction} when S'Signed_Zeros is True.]}
 @begin{Discussion}
    Informally, when @i{Fraction} and @Math{v} are both normalized numbers, the
    result is the value obtained by replacing the @i{exponent} by @i{Exponent}
@@ -242,7 +242,7 @@ S of a floating point type @i{T}.
 @end{Ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Scaling>,
-  Text=[@Multiple(S'Scaling denotes a function with the following
+  Text=[S'Scaling denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Scaling (@i{X} : @i{T};
@@ -251,7 +251,7 @@ S of a floating point type @i{T}.
 @end{Example}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   Let @Math{v} be the value @Math{X @Times T@r('Machine_Radix)@Up{Adjustment}}.
+   @NoPrefix@;Let @Math{v} be the value @Math{X @Times T@r('Machine_Radix)@Up{Adjustment}}.
    If @Math{v} is a machine number of the type @i{T}, or if
    @Math{@Abs{v} @geq T@r('Model_Small)}, the function yields @Math{v};
    otherwise,
@@ -259,7 +259,7 @@ S of a floating point type @i{T}.
    @Math{v}.
 @IndexCheck{Range_Check}Constraint_Error is optionally raised if
 @Math{v} is outside the base range of S.
-   A zero result has the sign of @i{X} when S'Signed_Zeros is True.)]}
+   A zero result has the sign of @i{X} when S'Signed_Zeros is True.]}
 @begin{Discussion}
    Informally, when @i{X} and @Math{v} are both normalized numbers, the result
    is the value obtained by increasing the @i{exponent} by @i{Adjustment} in the
@@ -273,74 +273,74 @@ S of a floating point type @i{T}.
 @end{Ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Floor>,
-  Text=[@begin{Multiple}S'Floor denotes a function with the following
+  Text=[S'Floor denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Floor (@i{X} : @i{T})
   @key(return) @i{T}
 @end{Example}
 
-   The function yields the value @Math{@Flore{X}},
+   @NoPrefix@;The function yields the value @Math{@Flore{X}},
    i.e., the largest (most positive) integral value less than or equal to
    @i{X}.
    When @i{X} is zero, the
    result has the sign of @i{X}; a zero result otherwise has a positive
-   sign.@end{Multiple}]}
+   sign.]}
 
 @Attribute{Prefix=<S>, AttrName=<Ceiling>,
-  Text=[@begin{Multiple}S'Ceiling denotes a function with the following
+  Text=[S'Ceiling denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Ceiling (@i{X} : @i{T})
   @key(return) @i{T}
 @end{Example}
 
-   The function yields the value @Math{@Ceil{X}},
+   @NoPrefix@;The function yields the value @Math{@Ceil{X}},
    i.e., the smallest (most negative) integral value greater than or equal to
    @i{X}.
    When @i{X} is zero, the
    result has the sign of @i{X}; a zero result otherwise has a negative sign
-   when S'Signed_Zeros is True.@end{Multiple}]}
+   when S'Signed_Zeros is True.]}
 
 @Attribute{Prefix=<S>, AttrName=<Rounding>,
-  Text=[@Multiple(S'Rounding denotes a function with the following
+  Text=[S'Rounding denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Rounding (@i{X} : @i{T})
   @key(return) @i{T}
 @end{Example}
 
-   The function yields the integral value nearest to @i{X},
+   @NoPrefix@;The function yields the integral value nearest to @i{X},
    rounding away from zero if @i{X} lies exactly halfway between two integers.
-   A zero result has the sign of @i{X} when S'Signed_Zeros is True.)]}
+   A zero result has the sign of @i{X} when S'Signed_Zeros is True.]}
 
 @Attribute{Prefix=<S>, AttrName=<Unbiased_Rounding>,
-  Text=[@Multiple(S'Unbiased_Rounding denotes a function with
+  Text=[S'Unbiased_Rounding denotes a function with
    the following specification:
 @begin{Example}
 @key(function) S'Unbiased_Rounding (@i{X} : @i{T})
   @key(return) @i{T}
 @end{Example}
 
-   The function yields the integral value nearest to @i{X},
+   @NoPrefix@;The function yields the integral value nearest to @i{X},
    rounding toward the even integer if @i{X} lies exactly halfway between
    two integers.  A zero result has the sign of @i{X} when S'Signed_Zeros is
-   True.)]}
+   True.]}
 
 @Attribute{Prefix=<S>, AttrName=<Truncation>,
-  Text=[@Multiple(S'Truncation denotes a function with the following
+  Text=[S'Truncation denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Truncation (@i{X} : @i{T})
   @key(return) @i{T}
 @end{Example}
 
-   The function yields the value @Math{@Ceil{X}} when @i{X} is negative,
+   @NoPrefix@;The function yields the value @Math{@Ceil{X}} when @i{X} is negative,
    and @Math{@Flore{X}} otherwise.  A zero result has the sign of @i{X} when
-   S'Signed_Zeros is True.)]}
+   S'Signed_Zeros is True.]}
 
 @Attribute{Prefix=<S>, AttrName=<Remainder>,
-  Text=[@Multiple(S'Remainder denotes a function with the following
+  Text=[S'Remainder denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Remainder (@i{X}, @i{Y} : @i{T})
@@ -348,13 +348,13 @@ S of a floating point type @i{T}.
 @end{Example}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   For nonzero @i{Y}, let @Math{v} be the value
+   @NoPrefix@;For nonzero @i{Y}, let @Math{v} be the value
    @Math{X - n @Times Y}, where @Math{n} is the integer nearest to
    the exact value of @Math{X/Y}; if @Math{@Abs{n - X/Y} @Thin = @Thin 1/2},
    then @Math(n) is chosen to be even.  If @Math{v} is a machine number of
    the type @i{T}, the function yields @Math{v}; otherwise, it yields zero.
 @IndexCheck{Division_Check}Constraint_Error is raised if @i{Y} is zero.
-   A zero result has the sign of @i{X} when S'Signed_Zeros is True.)]}
+   A zero result has the sign of @i{X} when S'Signed_Zeros is True.]}
 @begin{Ramification}
    The magnitude of the result is less than or equal to one-half the magnitude
    of @i{Y}.
@@ -367,7 +367,7 @@ S of a floating point type @i{T}.
 @end{Discussion}
 
 @Attribute{Prefix=<S>, AttrName=<Adjacent>,
-  Text=[@Multiple(S'Adjacent denotes a function with the following
+  Text=[S'Adjacent denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Adjacent (@i{X}, @i{Towards} : @i{T})
@@ -375,13 +375,13 @@ S of a floating point type @i{T}.
 @end{Example}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   If @Math{Towards @Thin = @Thin X}, the function yields @i{X}; otherwise, it
+   @NoPrefix@;If @Math{Towards @Thin = @Thin X}, the function yields @i{X}; otherwise, it
    yields the machine number of the type @i{T} adjacent to @i{X} in the
    direction of @i{Towards}, if that machine number exists.
-@IndexCheck{Range_Check}If the result would
+   @IndexCheck{Range_Check}If the result would
    be outside the base range of S, Constraint_Error is raised.
    When @i{T}'Signed_Zeros is True, a zero result has the sign of @i{X}.
-   When @i{Towards} is zero, its sign has no bearing on the result.)]}
+   When @i{Towards} is zero, its sign has no bearing on the result.]}
 @begin{Ramification}
    The value of S'Adjacent(0.0, 1.0) is the smallest normalized positive number
    of the type @i{T} when @i{T}'Denorm is False and the smallest denormalized
@@ -389,7 +389,7 @@ S of a floating point type @i{T}.
 @end{Ramification}
 
 @Attribute{Prefix=<S>, AttrName=<Copy_Sign>,
-  Text=[@Multiple(S'Copy_Sign denotes a function with the following
+  Text=[S'Copy_Sign denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Copy_Sign (@i{Value}, @i{Sign} : @i{T})
@@ -397,12 +397,12 @@ S of a floating point type @i{T}.
 @end{Example}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   If the value of @i{Value} is nonzero, the function yields a result whose
+   @NoPrefix@;If the value of @i{Value} is nonzero, the function yields a result whose
    magnitude is that of @i{Value} and whose sign is that of @i{Sign};
    otherwise, it yields the value zero.
 @IndexCheck{Range_Check}Constraint_Error is optionally raised if the result
 is outside the base range of S.
-   A zero result has the sign of @i{Sign} when S'Signed_Zeros is True.)]}
+   A zero result has the sign of @i{Sign} when S'Signed_Zeros is True.]}
 @begin{Discussion}
    S'Copy_Sign is provided for convenience in restoring the sign to a quantity
    from which it has been temporarily removed, or to a related quantity.  When
@@ -415,7 +415,7 @@ is outside the base range of S.
 @end{Discussion}
 
 @Attribute{Prefix=<S>, AttrName=<Leading_Part>,
-  Text=[@Multiple(S'Leading_Part denotes a function with the following
+  Text=[S'Leading_Part denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Leading_Part (@i{X} : @i{T};
@@ -423,7 +423,7 @@ is outside the base range of S.
   @key(return) @i{T}
 @end{Example}
 
-   Let @Math{v} be the value @Math{T@r('Machine_Radix)@Up{k-Radix_Digits}},
+   @NoPrefix@;Let @Math{v} be the value @Math{T@r('Machine_Radix)@Up{k-Radix_Digits}},
    where @Math{k} is the normalized exponent of @i{X}.  The function yields
    the value
    @begin{Itemize}
@@ -435,10 +435,10 @@ is outside the base range of S.
    @end{Itemize}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-@IndexCheck{Range_Check}Constraint_Error is raised when @i{Radix_Digits}
+   @NoPrefix@IndexCheck{Range_Check}Constraint_Error is raised when @i{Radix_Digits}
    is zero or negative.
    A zero result@Redundant{, which can only occur when @i{X} is zero,} has the
-   sign of @i{X}.)]}
+   sign of @i{X}.]}
 @begin{Discussion}
    Informally, if @i{X} is nonzero, the result is the value
    obtained by retaining only the specified number of (leading) significant
@@ -452,7 +452,7 @@ is outside the base range of S.
 @end{ImplNote}
 
 @Attribute{Prefix=<S>, AttrName=<Machine>,
-  Text=[@Multiple(S'Machine denotes a function with the following
+  Text=[S'Machine denotes a function with the following
    specification:
 @begin{Example}
 @key(function) S'Machine (@i{X} : @i{T})
@@ -460,13 +460,13 @@ is outside the base range of S.
 @end{Example}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   If @i{X} is a machine number of the type @i{T}, the function yields @i{X};
+   @NoPrefix@;If @i{X} is a machine number of the type @i{T}, the function yields @i{X};
    otherwise, it yields the value obtained by rounding or truncating @i{X} to
    either one of the adjacent machine numbers of the type @i(T).
 @IndexCheck{Range_Check}Constraint_Error is raised if rounding or
 truncating @i{X} to the precision
    of the machine numbers results in a value outside the base range of S.
-   A zero result has the sign of @i{X} when S'Signed_Zeros is True.)]}
+   A zero result has the sign of @i{X} when S'Signed_Zeros is True.]}
 @begin{Discussion}
    All of the primitive function attributes except Rounding and Machine
    correspond to subprograms in the Generic_Primitive_Functions
@@ -559,18 +559,18 @@ a floating point type @i{T}.
 @end{Discussion}
 
 @Attribute{Prefix=<S>, AttrName=<Model>,
-  Text=[@Multiple(S'Model denotes a function with the following specification:
+  Text=[S'Model denotes a function with the following specification:
 @begin{Example}
 @key(function) S'Model (@i{X} : @i{T})
   @key(return) @i{T}
 @end{Example}
 
-   If the Numerics Annex is not supported,
+   @NoPrefix@;If the Numerics Annex is not supported,
    the meaning of this attribute is implementation
    defined;
    see @RefSecNum{Model-Oriented Attributes of Floating Point Types}
    for the definition that applies to implementations supporting
-   the Numerics Annex.)]}
+   the Numerics Annex.]}
 
 @Attribute{Prefix=<S>, AttrName=<Safe_First>,
   Text=[Yields the lower bound of the safe range

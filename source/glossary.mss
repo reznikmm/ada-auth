@@ -1,11 +1,10 @@
 @Part(glossary, Root="ada.mss")
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledInformativeAnnex{Glossary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/glossary.mss,v $}
-@comment{$Revision: 1.9 $}
+@comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @Defn{Glossary}
@@ -15,5 +14,5 @@ To find more formal definitions, look the term up in the index.
 
 
 
-@EvilInclude{ada.glo_sorted}
+@GlossaryList
 @end{Intro}

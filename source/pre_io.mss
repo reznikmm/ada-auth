@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -184,7 +184,8 @@ In_File or Out_File, transfer starts respectively
 from or to the beginning of the file.  When the file is opened with mode
 Append_File, transfer to the file starts after the last element of the
 file.
-@Discussion{Adding stream I/O necessitates a review of the terminology.  In
+@begin{Discussion}
+Adding stream I/O necessitates a review of the terminology.  In
 Ada 83, `sequential' implies both the access method (purely sequential
 @em that is, no indexing or positional access) and homogeneity.  Direct
 access includes purely sequential access and indexed access, as well as
@@ -203,7 +204,7 @@ It seems better to regard `sequential file' as meaning `only permitting
 purely sequential access'; hence we have decided to supplement `sequential
 access' and `direct access' with a third category, informally called `access
 to streams'.  (We decided against the term `stream access' because of possible
-confusion with the Stream_Access type declared in one of the stream packages.)}
+confusion with the Stream_Access type declared in one of the stream packages.)@end{discussion}
 
 @Defn{direct access}
 @Defn2{Term=[index], Sec=(of an element of an open direct file)}
@@ -1370,8 +1371,9 @@ For the procedure Reset: If the file has the current mode Out_File
        If the new mode is Append_File, it is implementation defined whether
        a page terminator will separate preexisting text in the file from the
        new text to be written.
-@Reason{The behavior of Reset should be similar to closing a file and
-       reopening it with the given mode}
+@begin{Reason}
+The behavior of Reset should be similar to closing a file and
+       reopening it with the given mode@end{reason}
 @end{Itemize}
 
 The exception Mode_Error is propagated by the procedure Reset upon an
@@ -1536,9 +1538,10 @@ file is not Out_File or Append_File.
           Sets the maximum line length of the specified output or append file to
           the number of characters specified by To.  The value zero for
           To specifies an unbounded line length.
-@Ramification{The setting
+@begin{Ramification}
+The setting
 does not affect the lengths of lines in the existing file, rather it only
-influences subsequent output operations.}
+influences subsequent output operations.@end{ramification}
 
           The exception Use_Error is propagated if the specified line length
           is inappropriate for the associated external file.
@@ -2985,9 +2988,10 @@ If the associated check is too complex, an implementation need
 not propagate Data_Error as part of a procedure Read
 (or the Read attribute) if the value read cannot be interpreted as a value
 of the required subtype.
-@Ramification{An example where the implementation may choose not to
+@begin{Ramification}
+An example where the implementation may choose not to
 perform the check is an enumeration type with a representation clause
-with ``holes'' in the range of internal codes.}
+with ``holes'' in the range of internal codes.@end{ramification}
 @end{ImplPerm}
 
 @begin{Erron}

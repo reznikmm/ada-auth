@@ -20,7 +20,7 @@
     else=<@Modify(I2Copyright, Fill)>}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2000/04/15 00:44:05 $}
+@comment{$Revision: 1.3 $ $Date: 2000/05/16 04:48:25 $}
 @begin(I2Title)
 @begin{FlushRight, Fixed 0.75inch}
 @HelveticaBold{INTERNATIONAL STANDARD} ISO/IEC 8652:@Value{StandardYear}(E)
@@ -35,7 +35,7 @@ INTERNATIONAL ELECTROTECHNICAL COMMISSION
 @Case{DocumentNickname,
     Chg839X=<>,
     else=<@begin{MajorHeading, FlushLeft}
-Information technology @EmDash{} Programming languages @EmDash{} Ada
+Information technology @Em Programming languages @Em Ada
 @end{MajorHeading}
 @begin{FlushLeft}
 [Revision of first edition (ISO 8652:1987)]
@@ -57,7 +57,7 @@ Version @Value(Version)
           @I2Copyright[@Value[CopyrightText]]
 
 >,
-    else=<@I2Copyright{Copyright @CircleC 1992,1993,1994,1995@:  Intermetrics, Inc.}>}
+    else=<@I2Copyright{Copyright @Latin1(169) 1992,1993,1994,1995@:  Intermetrics, Inc.}>}
 @end(I2TBox)
 @end(I2Title)
 @NewPage()

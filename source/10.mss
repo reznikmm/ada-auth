@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -553,7 +553,6 @@ dependences among tasks and masters defined in
 
 @Defn2{Term=[semantic dependence], Sec=(of one compilation unit upon another)}
 @Defn2{Term=[dependence], Sec=(semantic)}
-@begin{Multiple}
 A @nt{library_item} depends semantically upon its
 parent declaration.
 A subunit depends semantically upon its parent body.
@@ -603,7 +602,6 @@ Note that no special rule is needed for an
 will require semantic dependence upon the compilation unit containing
 the @nt{type_declaration} of interest.
 @end{Discussion}
-@end{Multiple}
 @end{StaticSem}
 
 @begin{Notes}
@@ -1898,7 +1896,6 @@ multiple concurrent executions of the same partition.
 primarily by the @i{elaboration dependences}.]
 @Defn2{Term=[elaboration dependence], Sec=(library_item on another)}
 @Defn2{Term=[dependence], Sec=(elaboration)}
-@begin{Multiple}
 There is an elaboration dependence of a given @nt{library_item} upon
 another if the given @nt{library_item} or any of its subunits depends
 semantically on the other @nt{library_item}.
@@ -1926,7 +1923,6 @@ a semantic dependence of a @nt{library_item} or one of its subunits
 upon a subunit of a different library unit,
 because that can never happen.
 @end{Discussion}
-@end{Multiple}
 
 The environment task for a partition has the following structure:
 @begin{Example}

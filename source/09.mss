@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 
@@ -189,7 +189,8 @@ is called the visible part of the task unit.
 @Redundant[@PDefn2{Term=[private part], Sec=(of a task unit)}
 The optional list of @nt{task_item}s after the reserved
 word @key{private} is called the private part of the task unit.]
-@TheProof{Private part is defined in Section 8.}
+@begin{TheProof}
+Private part is defined in Section 8.@end{theproof}
 
 @end{StaticSem}
 
@@ -746,7 +747,8 @@ is called the visible part of the protected unit.
 @Redundant[@PDefn2{Term=[private part], Sec=(of a protected unit)}
 The optional list of @nt{protected_element_declaration}s after the reserved
 word @key{private} is called the private part of the protected unit.]
-@TheProof{Private part is defined in Section 8.}
+@begin{TheProof}
+Private part is defined in Section 8.@end{theproof}
 
 @end{StaticSem}
 
@@ -1666,7 +1668,6 @@ can be renamed as a procedure as explained in
 @RefSecNum{Subprogram Renaming Declarations}.
 @end{Ramification}
 
-@begin{Multiple}
 The @nt<condition> in the @nt{entry_barrier} may reference
 anything visible except the formal parameters of the entry.
 This
@@ -1674,7 +1675,7 @@ includes the entry index (if any), the components (including discriminants) of
 the protected object, the Count attribute of an entry of that protected object,
 and data global to the protected unit.
 
-The restriction against referencing the formal parameters within an
+@NoPrefix@;The restriction against referencing the formal parameters within an
 @nt{entry_barrier} ensures that all calls of the same entry see
 the same barrier value.
 If it is necessary to look at the parameters of an entry
@@ -1682,8 +1683,6 @@ call before deciding whether to handle it, the @nt<entry_barrier>
 can be ``@key(when) True'' and the caller can
 be requeued (on some private entry)
 when its parameters indicate that it cannot be handled immediately.
-@end{Multiple}
-
 @end{Notes}
 
 @begin{Examples}

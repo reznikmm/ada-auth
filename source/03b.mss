@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @LabeledClause{Array Types}
 
@@ -65,9 +65,10 @@ values for each of the indices.
 The subtype defined by the @nt<subtype_indication> of a
 @nt<component_definition> (the @i(component subtype)) shall be
 a definite subtype.
-@Ramification{
+@begin{Ramification}
+
   This applies to all uses of @nt<component_definition>,
-  including in @nt<record_type_definition>s and @nt<protected_definition>s.}
+  including in @nt<record_type_definition>s and @nt<protected_definition>s.@end{ramification}
 
 Within the definition of a nonlimited composite type
 (or a limited composite type that later in its immediate
@@ -395,9 +396,10 @@ constrained is a @i(null array), having no components.
 An array value @i(satisfies) an @nt{index_constraint} if at each index position
 the array value and the @nt{index_constraint} have the same index
 bounds.
-@Ramification{
+@begin{Ramification}
+
   There is no need to define compatibility with a constrained
-  array subtype, because one is not allowed to constrain it again.}
+  array subtype, because one is not allowed to constrain it again.@end{ramification}
 
 @PDefn2{Term=[elaboration], Sec=(index_constraint)}
 The elaboration of an @nt{index_constraint} consists
@@ -485,9 +487,10 @@ The following attributes are defined for
 @PrefixType{a prefix A that is of an array type
 @Redundant[(after any implicit dereference)], or denotes
 a constrained array subtype}:
-@Ramification{These attributes are not defined if A is a subtype-mark
+@begin{Ramification}
+These attributes are not defined if A is a subtype-mark
   for an access-to-array subtype.  They are defined (by implicit
-  dereference) for access-to-array values.}
+  dereference) for access-to-array values.@end{ramification}
 @begin(description)
 @Attribute{Prefix=<A>, AttrName=<First>,
   Text=[A'First denotes the lower bound of the first index range; its
@@ -713,9 +716,10 @@ for a composite type that is not an array type
 @Defn{discriminated type}
 a type declared with a @nt<known_discriminant_part> is called
 a @i(discriminated) type, as is a type that inherits (known) discriminants.
-@ImplNote{
+@begin{ImplNote}
+
   Discriminants on array types were considered,
-  but were omitted to ease (existing) implementations.}
+  but were omitted to ease (existing) implementations.@end{implnote}
 @begin(Discussion)
   Note that the above definition for ``discriminated type'' does
   not include types declared with an @nt<unknown_discriminant_part>.
@@ -830,9 +834,10 @@ The parent subtype shall be constrained;
 
 If the parent type is not a tagged type, then each discriminant
 of the derived type shall be used in the constraint defining
-the parent subtype;@ImplNote{
+the parent subtype;@begin{ImplNote}
+
   This ensures that the new discriminant can share storage with
-  an existing discriminant.}
+  an existing discriminant.@end{implnote}
 
 If a discriminant is used in the constraint defining the parent subtype,
 the subtype of the discriminant shall be statically compatible
@@ -855,8 +860,9 @@ shall be convertible to the anonymous access
 type of the discriminant
 (see @RefSecNum{Type Conversions}).
 @PDefn2{Term=[convertible],Sec=(required)}
-@Ramification{This requires convertibility
-of the designated subtypes.}
+@begin{Ramification}
+This requires convertibility
+of the designated subtypes.@end{ramification}
 @end{Legality}
 
 @begin{StaticSem}
@@ -884,11 +890,12 @@ If a discriminant of a parent type is constrained to a specific value
 by a @nt<derived_type_definition>,
 then that discriminant is said to be @i(specified)
 by that @nt<derived_type_definition>.
-@Ramification{
+@begin{Ramification}
+
   The correspondence relationship is transitive, symmetric,
   and reflexive.  That is,
   if A corresponds to B, and B corresponds to C, then
-  A, B, and C each corresponds to A, B, and C in all combinations.}
+  A, B, and C each corresponds to A, B, and C in all combinations.@end{ramification}
 
 @Defn2{Term=[depend on a discriminant],
   Sec=(for a @nt<constraint> or @nt<component_definition>)}
@@ -910,8 +917,9 @@ that corresponds to it.
 A component @i(depends on a discriminant) if:
 @begin(itemize)
   Its @nt{component_definition} depends on the discriminant; or
-  @Ramification{A component does @i(not) depend on a discriminant just because
-  its @nt<default_expression> refers to the discriminant.}
+  @begin{Ramification}
+A component does @i(not) depend on a discriminant just because
+  its @nt<default_expression> refers to the discriminant.@end{ramification}
 
   It is declared in a @nt{variant_part} that is governed by the
   discriminant; or
@@ -1255,12 +1263,14 @@ subtype)}
 A @nt{discriminant_constraint} is @i(compatible) with an unconstrained
 discriminated subtype if each discriminant value belongs to the
 subtype of the corresponding discriminant.
-@Ramification{The "dependent
+@begin{Ramification}
+The "dependent
   compatibility check" has been eliminated in Ada 9X.  Any checking
-  on subcomponents is performed when (and if) an object is created.}
-@Discussion{
+  on subcomponents is performed when (and if) an object is created.@end{ramification}
+@begin{Discussion}
+
   There is no need to define compatibility with a constrained
-  discriminated subtype, because one is not allowed to constrain it again.}
+  discriminated subtype, because one is not allowed to constrain it again.@end{discussion}
 
 @PDefn2{Term=[satisfies], Sec=(a discriminant constraint)}
 A composite value @i(satisfies) a discriminant constraint if and only
@@ -1278,9 +1288,10 @@ the @nt{expression} of a named association is evaluated
 @PDefn2{Term=[implicit subtype conversion],Sec=(discriminant values)}
 The result of each evaluation and conversion is the
 value imposed by the constraint for the associated discriminant.
-@Reason{
+@begin{Reason}
+
   We convert to the type, not the subtype, so that the definition
-  of compatibility of discriminant constraints is not vacuous.}
+  of compatibility of discriminant constraints is not vacuous.@end{reason}
 
 @end{RunTime}
 
@@ -1463,10 +1474,11 @@ the components of a record type include any components declared by
 @nt<discriminant_specification>s of the record type declaration.
 @Redundant[The identifiers of all components of a record type shall
 be distinct.]
-@TheProof{The identifiers of all
+@begin{TheProof}
+The identifiers of all
   components of a record type have to
   be distinct because they are all declared immediately
-  within the same declarative region.  See Section 8.}
+  within the same declarative region.  See Section 8.@end{theproof}
 
 
 Within a @nt{type_declaration},
@@ -1487,11 +1499,13 @@ the constraint of the parent subtype in a
 @nt<derived_type_definition>
 then its name shall appear alone as a @nt<direct_name> (not as
 part of a larger expression or expanded name).
-@Reason{This restriction simplifies implementation,
+@begin{Reason}
+This restriction simplifies implementation,
   and allows the outer discriminant and the inner discriminant
-  or bound to possibly share storage.}@Ramification{
+  or bound to possibly share storage.@end{reason}@begin{Ramification}
+
   Other rules prevent such a discriminant from being an inherited
-  one.}
+  one.@end{ramification}
 A discriminant shall not be used to define the constraint of
 a scalar component.
 @begin{Reason}
@@ -1559,10 +1573,11 @@ word @key(null) and there are no discriminants, then the record type has
 no components and all records of the type are @i(null records).
 A @nt<record_definition> of @key{null record} is equivalent to
 @key{record null; end record}.
-@Ramification{
+@begin{Ramification}
+
   This short-hand is available both for declaring a record type
   and a record extension @em see @RefSecNum(Type Extensions).
-}
+@end{ramification}
 
 @end{StaticSem}
 
@@ -1783,8 +1798,9 @@ of the discriminant of the @nt{variant_part}.
 @begin{Legality}
 The discriminant of the @nt{variant_part} shall
 be of a discrete type.
-  @Ramification{It shall not be of an access type,
-  named or anonymous.}
+  @begin{Ramification}
+It shall not be of an access type,
+  named or anonymous.@end{ramification}
 
 The @nt{expression}s and @nt{discrete_range}s given as
 @nt{discrete_choice}s in a @nt{variant_part} shall be static.
@@ -1833,8 +1849,9 @@ shall be covered as follows:
   If the type of the discriminant is a
   descendant of a generic formal scalar type
   then the @nt{variant_part} shall have an @key{others}
-  @nt{discrete_choice};@Reason{The base range is not known statically in this
-  case.}
+  @nt{discrete_choice};@begin{Reason}
+The base range is not known statically in this
+  case.@end{reason}
 
   Otherwise,
   each value of the base range of the type of the discriminant shall
@@ -2100,9 +2117,11 @@ instances of the generic package are associated with distinct tags.
 For a tagged type that is local to a generic package body,
 the language does not specify whether repeated instantiations
 of the generic body result in distinct tags.
-@Reason{
-  This eases generic code sharing.}
-@ImplNote{
+@begin{Reason}
+
+  This eases generic code sharing.@end{reason}
+@begin{ImplNote}
+
   The language does not specify whether
   repeated elaborations of the same @nt<full_type_declaration>
   correspond to distinct tags.  In most cases, we expect
@@ -2111,7 +2130,7 @@ of the generic body result in distinct tags.
   allocated type descriptor.  However, with shared generics, the type
   descriptor might have to be allocated on a per-instance basis, which in some
   implementation models implies per-elaboration of the instantiation.
-}
+@end{implnote}
 
 The following language-defined library package exists:
 @begin{Example}
@@ -2218,9 +2237,10 @@ defined:
   the type @i(T) (or if @i(T) is class-wide, the tag of the root type of the
   corresponding class).
   The value of this attribute is of type Tag.]}
-  @Reason{S'Class'Tag equals S'Tag, to avoid generic
+  @begin{Reason}
+S'Class'Tag equals S'Tag, to avoid generic
     contract model problems when S'Class is the actual
-    type associated with a generic formal derived type.}
+    type associated with a generic formal derived type.@end{reason}
 @end(description)
 @EndPrefixType{}
 
@@ -2261,9 +2281,10 @@ identifies @i(T).
 The tag of an object created by an allocator for an
 access type with a specific designated tagged type @i(T),
 identifies @i(T).
-@Discussion{The tag of an object designated by a
+@begin{Discussion}
+The tag of an object designated by a
   value of such an access type might not be @i(T), if, for
-  example, the access value is the result of a type conversion.}
+  example, the access value is the result of a type conversion.@end{discussion}
 
 @PDefn2{Term=[tag of an object], Sec=(class-wide object)}
 The tag of an object of a class-wide tagged type
@@ -2694,8 +2715,9 @@ is determined as follows:
   tagged) if it is of a specific tagged type and,
   if it is a call with a controlling result, it has at least
   one statically tagged controlling operand;
-    @Discussion{It is illegal to have both statically tagged and
-  dynamically tagged controlling operands in the same call -- see below.}
+    @begin{Discussion}
+It is illegal to have both statically tagged and
+  dynamically tagged controlling operands in the same call -- see below.@end{discussion}
 
   @Defn{dynamically tagged}
   The @nt<name> or expression is @i(dynamically tagged)
@@ -2725,11 +2747,12 @@ actual parameter is specific or class-wide, respectively.
 @begin{Legality}
 A call on a dispatching operation shall not
 have both dynamically tagged and statically tagged controlling operands.
-@Reason{
+@begin{Reason}
+
   This restriction is intended to minimize
   confusion between whether the dynamically tagged operands
   are implicitly converted to, or tag checked against the
-  specific type of the statically tagged operand(s).}
+  specific type of the statically tagged operand(s).@end{reason}
 
 If the expected type for an expression or @nt<name>
 is some specific tagged type, then
@@ -2771,12 +2794,13 @@ A dispatching operation shall not be of convention Intrinsic.
 If a dispatching operation overrides the predefined equals
 operator, then it shall be of convention Ada @Redundant[(either explicitly
 or by default @em see @RefSecNum{Conformance Rules})].
-@Reason{These rules
+@begin{Reason}
+These rules
   ensure that constraint checks can be performed by the
   caller in a dispatching call, and parameter passing conventions
   match up properly.  A special rule on aggregates
   prevents values of a tagged type from being created that
-  are outside of its first subtype.}
+  are outside of its first subtype.@end{reason}
 
 The @nt<default_expression> for a controlling formal parameter
 of a dispatching operation
@@ -2798,11 +2822,12 @@ shall not have a @nt<default_expression>.
 
 A given subprogram shall not be a dispatching operation of two
 or more distinct tagged types.
-@Reason{
+@begin{Reason}
+
   This restriction minimizes
   confusion since multiple dispatching is not provided.  The normal
   solution is to replace all but one of the tagged types with their
-  class-wide types.}
+  class-wide types.@end{reason}
 
 
 The explicit declaration of a primitive subprogram of a
@@ -2990,9 +3015,10 @@ which can happen only if the call is part of a default expression,
 the overriding will still take effect for that call.
 
 @end{Reason}
-  @ImplNote{Even when a tag is not @i(statically determined), a compiler
+  @begin{ImplNote}
+Even when a tag is not @i(statically determined), a compiler
   might still be able to figure it out and thereby avoid
-  the overhead of run-time dispatching.}
+  the overhead of run-time dispatching.@end{implnote}
 
 @end{RunTime}
 
@@ -3727,9 +3753,10 @@ an @nt<allocator>@Redundant[,
 which
 returns an access value designating a newly created object
 (see @RefSecNum(Operations of Access Types))].
-@Ramification[A value of an anonymous access type
+@begin{Ramification}
+A value of an anonymous access type
 (that is, the value of an access parameter or access discriminant)
-cannot be null.]
+cannot be null.@end{ramification}
 @begin{Reason}
 Access parameters allow dispatching on the tag of the object designated
 by the actual parameter (which gets converted to the anonymous access
@@ -3784,13 +3811,11 @@ subtype if it equals the null value of its type
 or if it designates an object whose value satisfies the constraint.
 
 @PDefn2{Term=[elaboration], Sec=(access_type_definition)}
-@begin{Multiple}
 The elaboration of an @nt{access_type_definition}
 creates the access type and its first subtype.
 For an access-to-object type,
 this elaboration includes the elaboration of the @nt{subtype_indication},
 which creates the designated subtype.
-@end{Multiple}
 
 @PDefn2{Term=[elaboration], Sec=(access_definition)}
 The elaboration of an @nt{access_definition} creates
@@ -3975,9 +4000,10 @@ The only allowed uses of a @nt{name} that denotes an
   declare a tagged type, and the @nt<attribute_reference>
   shall occur in the same library unit as
   the @nt<incomplete_type_declaration>.
-  @Reason{This is to prevent
+  @begin{Reason}
+This is to prevent
     children from imposing requirements on their ancestor library
-    units for deferred incomplete types.}
+    units for deferred incomplete types.@end{reason}
 @end(itemize)
 
 A dereference (whether implicit or explicit @em see @RefSecNum(Names))
@@ -4672,7 +4698,6 @@ which the compiler can't see while compiling an object creation.
 The following attribute is defined for @PrefixType{a @nt{prefix} X that
 denotes an aliased view of an object}:
 @begin(description)
-@begin(multiple)
 @Attribute{Prefix=<X>, AttrName=<Access>,
   Text=<X'Access yields an access value that designates the object
   denoted by X.
@@ -4696,8 +4721,9 @@ denotes an aliased view of an object}:
   variable; @Redundant[on the other hand, if @i(A) is an
   access-to-constant type, the view may be either a constant
   or a variable.]
-  @Discussion{The current instance of a limited type
-    is considered a variable.}
+  @begin{Discussion}
+The current instance of a limited type
+    is considered a variable.@end{discussion}
 
   The view shall not be a subcomponent that
   depends on discriminants of a variable whose
@@ -4757,9 +4783,10 @@ denotes an aliased view of an object}:
   designated subtype
   shall be discriminated and unconstrained;
   @PDefn2{Term=[statically matching],Sec=(required)}
-  @ImplNote{This ensures
+  @begin{ImplNote}
+This ensures
     that the dope for an aliased array object can always be stored contiguous
-    with it, but need not be if its nominal subtype is constrained.}
+    with it, but need not be if its nominal subtype is constrained.@end{implnote}
 
 
   The accessibility level of the view shall not be statically deeper
@@ -4791,7 +4818,7 @@ denotes an aliased view of an object}:
   @IndexCheck{Accessibility_Check}
   @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 
-  A check is made that the accessibility level of X is not
+  @NoPrefix@;A check is made that the accessibility level of X is not
   deeper than that of the access type @i(A).
 
   If this check fails, Program_Error is raised.
@@ -4807,12 +4834,11 @@ denotes an aliased view of an object}:
   @end(ImplNote)
 
   @PDefn2{Term=[implicit subtype conversion],Sec=(Access attribute)}
-  If the nominal subtype of X does not statically match the designated
+  @NoPrefix@;If the nominal subtype of X does not statically match the designated
   subtype of @i(A), a view conversion of X to the designated subtype
   is evaluated (which might raise Constraint_Error @em
   see @RefSecNum(Type Conversions))
   and the value of X'Access designates that view.
-@end(multiple)
 @end(description)
 
 The following attribute is defined for @PrefixType{a @nt{prefix} P that
@@ -4938,13 +4964,14 @@ be because one points directly to the subprogram,
 while the other points to a special prologue that
 performs an Elaboration_Check and then jumps to the subprogram.
 See @RefSecNum(Relational Operators and Membership Tests).
-@Ramification{
+@begin{Ramification}
+
 If equality of
 access-to-subprogram values is important to the logic
 of a program, a reference to the Access attribute of a subprogram
 should be evaluated only once
 and stored in a global constant for subsequent use and equality
-comparison.}
+comparison.@end{ramification}
 @end{Notes}
 
 @begin{Examples}
@@ -5057,7 +5084,6 @@ are done in an arbitrary order.
   given that there might be multiple instances of the protected type.
 @end{Discussion}
 
-@begin{Multiple}
 For the activation of a task, a check is made by the
 activator that the @nt{task_body} is already elaborated.
 If two or more tasks are being activated together
@@ -5073,7 +5099,6 @@ of them.
   done by the task itself, it would be turned into a Tasking_Error
   in the activator, and the other tasks would still be activated.
 @end{Reason}
-@end{Multiple}
 
 For the instantiation of a generic unit that has a body, a check is
 made that this body is already elaborated.

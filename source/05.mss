@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -891,7 +891,6 @@ if False, the execution of the @nt{loop_statement} is complete.
 @PDefn2{Term=[execution],
   Sec=(loop_statement with a for iteration_scheme)}
 @PDefn2{Term=[elaboration], Sec=(loop_parameter_specification)}
-@begin{Multiple}
 For the execution of a @nt{loop_statement} with a @key{for}
 @nt{iteration_scheme},
 the @nt{loop_parameter_specification} is first elaborated.  This
@@ -917,7 +916,6 @@ The order of creating the loop parameter and evaluating the
 since the creation of the loop parameter has no side effects (other
 than possibly raising Storage_Error, but anything can do that).
 @end{Ramification}
-@end{Multiple}
 @end{RunTime}
 
 @begin{Notes}

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:23 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @redundant[
@@ -93,7 +93,7 @@ name begins ``Latin Small Letter''.
 @begin{Honest}
 
 The above rules do not include the ligatures
-@case{Device, Postscript= "@a9x(b) and @a9x(j)", else="AE and ae"}.
+@latin1(198) and @latin1(230).
 However, the intent is to include these characters as identifier letters.
 This problem was pointed out by a comment from the Netherlands.
 
@@ -128,7 +128,6 @@ other than a @nt<format_effector>, that is allowed in a comment; the set of
 
 @Defn{names of @nt{special_character}s}
 @Defn2{Term=[special_character],Sec=(names)}
-@begin{Multiple}
 The following names are used when referring to certain
 @nt{special_character}s:
 @Defn{quotation mark}
@@ -205,7 +204,6 @@ symbol @\name
   } @\right curly bracket
 @end(TwoColSC)
 @end{DisplayWithoutParaNum}
-@end{Multiple}
 @end{StaticSem}
 
 @begin{ImplPerm}

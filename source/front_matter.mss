@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
-@UnNumberedB(Foreword)
+@UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2000/04/30 02:44:42 $}
+@comment{$Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $}
 
 @begin{Intro}
 @begin{AARMandRM9XOnly}
@@ -44,30 +44,29 @@ Annexes K to P are for information only.
 
 @end{AARMandRM9XOnly}
 @begin{Discussion}
-This document is the @Value{DocumentName} (@Value{ReadableNickname}).
-It contains the entire text of the Ada 9X standard
-(ISO/IEC 8652:@Value{StandardYear}(E)), plus various annotations.
+This document is the Annotated Ada Reference Manual (AARM).
+It contains the entire text of the Ada 95 standard
+(ISO/IEC 8652:1995), plus various annotations.
 It is intended primarily for compiler writers,
-validation test writers,
-and other language lawyers.
+validation test writers, and other language lawyers.
 The annotations include detailed rationale for individual rules
 and explanations of some of the more arcane interactions among the
 rules.
 @end{Discussion}
 @end{Intro}
-@begin{Syntax9XOnly}
-This document lists the syntax rules of Ada 9X.
-@end{Syntax9XOnly}
-@begin{Chg839XOnly}
+@begin{Comment} (*Was Syntax9XOnly - We don't generate this document anymore*)
+This document lists the syntax rules of Ada 95.
+@end{Comment}
+@begin{Comment} (*Was Chg839XOnly - We don't generate this document anymore*)
 
 This document lists in detail the changes introduced in the second
-(Ada 9X) edition of the Ada standard (ISO/IEC 8652:1995)
+(Ada 95) edition of the Ada standard (ISO/IEC 8652:1995)
 with respect to the first (Ada 83) edition (ISO 8652:1987).
 
-@end{Chg839XOnly}
+@end{Comment}
 
 @begin{AARMandRM9XOnly}
-@UnNumberedB{Introduction}
+@UnNumberedSection{Introduction}
 
 @begin{Intro}
 
@@ -87,16 +86,16 @@ Programmers should read this first.
   ISO=<>,
   else=<
 
-The @Value{RM9XDocumentName} (RM).
-This is the International Standard @em ISO/IEC 8652:@Value{StandardYear}(E).>}
+The Ada Reference Manual (RM).
+This is the International Standard @em ISO/IEC 8652:1995.>}
 
-@Case{DocumentNickname,
+@Comment[@Case{DocumentNickname,
   Chg83=<>,
   else=<
 
 @Value{Chg839XDocumentName}.
 This document lists in detail the changes made to the 1987 edition of
-the standard.>}
+the standard.>} - No such document anymore - RLB 5/2000]
 
 @Case{DocumentNickname,
   AARM=<>,
@@ -492,7 +491,8 @@ application areas:
 @Defn{instructions for comment submission}
 @Defn{comments, instructions for submission}
 Informal comments on this International Standard may be sent via
-e-mail to @b(ada-comment@@sw-eng.falls-church.va.us).
+e-mail to @Chg{New=[@b(ada-comment@@ada-auth.org)],
+Old=[@b(ada-comment@@sw-eng.falls-church.va.us)]}.
 If appropriate, the Project Editor will initiate
 the defect correction procedure.
 
@@ -509,16 +509,13 @@ Comments should use the following format:
 @\@i{text of discussion}
 @end(display)
 
-
 where @i(ss.ss) is the section, clause or subclause number,
 @i(pp) is the paragraph number where applicable,
 and @i(yy-mm-dd) is the date the comment was sent.
 The date is optional, as is the @b(!keywords) line.
 
-
 Multiple comments per e-mail message are acceptable.
 Please use a descriptive ``Subject'' in your e-mail message.
-
 
 When correcting typographical errors or making minor wording
 suggestions, please put the correction directly as the topic of the
@@ -539,8 +536,7 @@ JTC1 Directives and the ISO/IEC JTC1/SC22 policy for interpretations.
 National Bodies may submit a Defect Report to ISO/IEC JTC1/SC22 for resolution
 under the JTC1 procedures.
 A response will be provided and, if appropriate,
-a Technical Corrigendum will be issued
-in accordance with the procedures.
+a Technical Corrigendum will be issued in accordance with the procedures.
 
 
 @end{Intro}
@@ -594,17 +590,14 @@ M. Gerhardt (ESL);
 J. Goodenough (SEI); @Comment{Also XRG - U.S.}
 S. Heilbrunner (University of Salzburg: Austria); @Comment{Also XRG - Belgium}
 P. Hilfinger (UC/Berkeley); @Comment{No longer a DR.}
-@case{Device, Postscript="B. K@aum()llberg",
-              else= "B. Kaellberg"} (CelsiusTech: Sweden);
-                   @Comment{XRG - Sweden}
-                   @Comment{"ae" should be "o" with a slash throught it.}
+B. K@latin1(228)llberg (CelsiusTech: Sweden); @Comment{XRG - Sweden}
 M. Kamrad II (Unisys);
 J. van Katwijk (Delft University of Technology: The Netherlands); @Comment{XRG - The Netherlands}
 V. Kaufman (Russia); @Comment{XRG - Russia}
 P. Kruchten (Rational); @Comment{Also XRG - France}
 R. Landwehr (CCI: Germany); @Comment{Also XRG - Germany}
 C. Lester (Portsmouth Polytechnic: UK);
-L. M@arg()nsson (TELIA Research: Sweden); @Comment{No longer a DR.}
+L. M@latin1(229)nsson (TELIA Research: Sweden); @Comment{No longer a DR.}
 S. Michell (Multiprocessor Toolsmiths: Canada); @Comment{Also XRG - Canada}
 M. Mills (US Air Force);
 D. Pogge (US Navy);

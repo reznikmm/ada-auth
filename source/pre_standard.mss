@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 
 @LabeledClause{The Package Standard}
 
@@ -224,58 +224,23 @@ the visible part of package Standard.}
       @i[st], @\@i[osc], @\@i[pm], @\@i[apc], @\ @\ @\ @\ @\@charnote[--@i{156 (16#9C#) .. 159 (16#9F#)}]
 
 @comment{blank line}
-@case{Device, Postscript=
-"      ' ',  '@a9x(A)',  '@a9x(B)',  '@a9x(C)',     '@a9x(D)',  '@a9x(E)',  '@a9x(F)',  '@a9x(G)', @\--@i{160 (16#A0#) .. 167 (16#A7#)}
-      '@a9x(H)',  '@a9x(I)',  '@a9x(J)',  '@a9x(K)',     '@a9x(L)',  '@a9x(M)',  '@a9x(N)',  '@a9x(O)', @\--@i{168 (16#A8#) .. 175 (16#AF#)}
+      ' ',  '@latin1(161)',  '@latin1(162)',  '@latin1(163)',     '@latin1(164)',  '@latin1(165)',  '@latin1(166)',  '@latin1(167)', @\--@i{160 (16#A0#) .. 167 (16#A7#)}
+      '@latin1(168)',  '@latin1(169)',  '@latin1(170)',  '@latin1(171)',     '@latin1(172)',  '@latin1(173)',  '@latin1(174)',  '@latin1(175)', @\--@i{168 (16#A8#) .. 175 (16#AF#)}
 @comment{blank line}
-      '@a9x(P)',  '@a9x(Q)',  '@a9x(R)',  '@a9x(S)',     '@a9x(T)',  '@a9x(U)',  '@a9x(V)',  '@a9x(W)', @\--@i{176 (16#B0#) .. 183 (16#B7#)}
-      '@a9x(X)',  '@a9x(Y)',  '@a9x(Z)',  '@a9x([)',     '@a9x(\)',  '@a9x(q)',  '@a9x(r)',  '@a9x(s)', @\--@i{184 (16#B8#) .. 191 (16#BF#)}
+      '@latin1(176)',  '@latin1(177)',  '@latin1(178)',  '@latin1(179)',     '@latin1(180)',  '@latin1(181)',  '@latin1(182)',  '@latin1(183)', @\--@i{176 (16#B0#) .. 183 (16#B7#)}
+      '@latin1(184)',  '@latin1(185)',  '@latin1(186)',  '@latin1(187)',     '@latin1(188)',  '@latin1(189)',  '@latin1(190)',  '@latin1(191)', @\--@i{184 (16#B8#) .. 191 (16#BF#)}
 @comment{blank line}
-      '@uagr()',  '@uaac()',  '@uacr()',  '@uatl()',     '@uaum()',  '@uarg()',  '@a9x(b)',  '@a9x(u)', @\--@i{192 (16#C0#) .. 199 (16#C7#)}
-      '@uegr()',  '@ueac()',  '@uecr()',  '@ueum()',     '@uigr()',  '@uiac()',  '@uicr()',  '@uium()', @\--@i{200 (16#C8#) .. 207 (16#CF#)}
+      '@latin1(192)',  '@latin1(193)',  '@latin1(194)',  '@latin1(195)',     '@latin1(196)',  '@latin1(197)',  '@latin1(198)',  '@latin1(199)', @\--@i{192 (16#C0#) .. 199 (16#C7#)}
+      '@latin1(200)',  '@latin1(201)',  '@latin1(202)',  '@latin1(203)',     '@latin1(204)',  '@latin1(205)',  '@latin1(206)',  '@latin1(207)', @\--@i{200 (16#C8#) .. 207 (16#CF#)}
 @comment{blank line}
-      '@a9x(t)',  '@a9x(a)',  '@uogr()',  '@uoac()',     '@uocr()',  '@uotl()',  '@uoum()',  '@a9x(c)', @\--@i{208 (16#D0#) .. 215 (16#D7#)}
-      '@a9x(d)',  '@uugr()',  '@uuac()',  '@uucr()',     '@uuum()',  '@a9x(e)',  '@a9x(f)',  '@a9x(g)', @\--@i{216 (16#D8#) .. 223 (16#DF#)}
+      '@latin1(208)',  '@latin1(209)',  '@latin1(210)',  '@latin1(211)',     '@latin1(212)',  '@latin1(213)',  '@latin1(214)',  '@latin1(215)', @\--@i{208 (16#D0#) .. 215 (16#D7#)}
+      '@latin1(216)',  '@latin1(217)',  '@latin1(218)',  '@latin1(219)',     '@latin1(220)',  '@latin1(221)',  '@latin1(222)',  '@latin1(223)', @\--@i{216 (16#D8#) .. 223 (16#DF#)}
 @comment{blank line}
-      '@agr()',  '@aac()',  '@acr()',  '@atl()',     '@aum()',  '@arg()',  '@a9x(j)',  '@a9x(v)', @\--@i{224 (16#E0#) .. 231 (16#E7#)}
-      '@egr()',  '@eac()',  '@ecr()',  '@eum()',     '@igr()',  '@iac()',  '@icr()',  '@ium()', @\--@i{232 (16#E8#) .. 239 (16#EF#)}
+      '@latin1(224)',  '@latin1(225)',  '@latin1(226)',  '@latin1(227)',     '@latin1(228)',  '@latin1(229)',  '@latin1(230)',  '@latin1(231)', @\--@i{224 (16#E0#) .. 231 (16#E7#)}
+      '@latin1(232)',  '@latin1(233)',  '@latin1(234)',  '@latin1(235)',     '@latin1(236)',  '@latin1(237)',  '@latin1(238)',  '@latin1(239)', @\--@i{232 (16#E8#) .. 239 (16#EF#)}
 @comment{blank line}
-      '@a9x(h)',  '@a9x(i)',  '@ogr()',  '@oac()',     '@ocr()',  '@otl()',  '@oum()',  '@a9x(k)', @\--@i{240 (16#F0#) .. 247 (16#F7#)}
-      '@a9x(l)',  '@ugr()',  '@uac()',  '@ucr()',     '@uum()',  '@a9x(m)',  '@a9x(n)',  '@a9x(o)'); @\--@i{248 (16#F8#) .. 255 (16#FF#)}",
-else="... );"}
-@begin{Comment}
-We can get some of the Latin-1 characters out of Scribe:
-
-@@Q(aA)
-@@q(Aa)
-   @Aac(),       A acute
-   @arg(),  a ring
-   @agr(),    a grave
-   @acr(),    a circumflex
-   @atl(),    a tilde
-   @aum(),    a umlaut
-
-   @ccd(),    c cedilla
-
-   @eac(),    e acute
-   @ecr(),    e circumflex
-   @egr(),    e grave
-   @eum(),    e umlaut
-   @iac(),    i acute
-   @icr(),    i circumflex
-   @ium(),    i umlaut
-   @ntl(),    n tilde
-   @oac(),    o acute
-   @ocr(),    o circumflex
-   @otl(),    o tilde
-   @oum(),    o umlaut
-
-   @scr(),    s circumflex
-   @uac(),    u acute
-   @ugr(),    u grave
-   @ucr(),    u circumflex
-   @uum(),    u umlaut
-@end{Comment}
+      '@latin1(240)',  '@latin1(241)',  '@latin1(242)',  '@latin1(243)',     '@latin1(244)',  '@latin1(245)',  '@latin1(246)',  '@latin1(247)', @\--@i{240 (16#F0#) .. 247 (16#F7#)}
+      '@latin1(248)',  '@latin1(249)',  '@latin1(250)',  '@latin1(251)',     '@latin1(252)',  '@latin1(253)',  '@latin1(254)',  '@latin1(255)', @\--@i{248 (16#F8#) .. 255 (16#FF#)}
 @Hinge{}
 
    --@i{ The predefined operators for the type Character are the  same  as  for}
@@ -343,9 +308,10 @@ We can get some of the Latin-1 characters out of Scribe:
 @end{Example}
 
 Standard has no private part.
-@Reason{This is important for portability.  All library packages
+@begin{Reason}
+This is important for portability.  All library packages
 are children of Standard, and if Standard had a private part then
-it would be visible to all of them.}
+it would be visible to all of them.@end{reason}
 
 In each of the types Character and Wide_Character,
 the character literals for the space character (position 32)

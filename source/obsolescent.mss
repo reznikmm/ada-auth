@@ -1,11 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -423,7 +422,6 @@ The following attribute is defined:
 
 For any task entry X:
 @begin{Description}
-@begin{Multiple}
 @Defn{interrupt entry}
 X'@attr{Address} @\For a task entry whose address is specified
                (an @i{interrupt entry}), the value
@@ -433,9 +431,8 @@ X'@attr{Address} @\For a task entry whose address is specified
                is of the type of the subtype System.Address.
 
 @PDefn2{Term=[specifiable], Sec=(of Address for entries)}
-               Address may be specified for single entries
+               @NoPrefix@;Address may be specified for single entries
                via an @nt{attribute_definition_clause}.
-@end{Multiple}
 @begin{Reason}
 Because of the equivalence of @nt{at_clause}s and
 @nt{attribute_definition_clause}s, an interrupt entry may be
@@ -599,7 +596,6 @@ confusion with the new term ``Alignment clause'' (that is, an
 For any task subtype T,
 the following attribute is defined:
 @begin{Description}
-@begin{Multiple}
 T'@attr{Storage_Size} @\Denotes an implementation-defined value
 of type @i{universal_integer}
 representing the number of storage
@@ -617,8 +613,7 @@ Hence, it is always implementation defined.
 
 @PDefn2{Term=[specifiable], Sec=(of Storage_Size for a task
 first subtype)}
-Storage_Size may be specified for a task first subtype
+@NoPrefix@;Storage_Size may be specified for a task first subtype
 via an @nt{attribute_definition_clause}.
-@end{Multiple}
 @end{Description}
 @end{StaticSem}

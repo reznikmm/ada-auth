@@ -1,6 +1,6 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:23 $}
 @PageOneFootings{}
 
 @PrefaceClause{} @Comment{Go to odd page.}
@@ -49,16 +49,16 @@ Note that we don't want a page break before Section 1, "General".
 
 @BlankSpace{1.25inch}
 @begin{StandardTitle}
-Information technology @EmDash{} Programming
-Languages @EmDash{} Ada
+Information technology @Em Programming
+Languages @Em Ada
 @end{StandardTitle}
 @BlankSpace{0.5inch}
 
 @LabeledSection{General}
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1317,11 +1317,10 @@ The preferred places for other line breaks are after semicolons.
 The language definition classifies errors into several different
 categories:
 @begin(Itemize)
-  @begin(Multiple)
      Errors that are required to be detected prior to run time by every
      Ada implementation;
 
-     These errors correspond to any violation of a rule given in this
+     @NoPrefix@;These errors correspond to any violation of a rule given in this
      International Standard, other than those listed below.
      In particular, violation of any rule that uses the
      terms shall, allowed, permitted, legal, or illegal belongs to this
@@ -1334,7 +1333,7 @@ categories:
      @Defn2{Term=[error], Sec=(compile-time)}
      @IndexSee{Term=[link-time error],See=(post-compilation error)}
      @Defn2{Term=[error], Sec=(link-time)}
-     The rules are further classified as either compile time rules, or
+     @NoPrefix@;The rules are further classified as either compile time rules, or
      post compilation rules, depending on whether a violation has to be
      detected at the time a compilation unit is submitted to
      the compiler,
@@ -1346,15 +1345,13 @@ categories:
        Implementations are allowed, but not required, to detect post
        compilation rules at compile time when possible.
      @end{Ramification}
-  @end(Multiple)
 
-  @begin(Multiple)
      Errors that are required to be detected at run time by the
      execution of an Ada program;
 
      @Defn{run-time error}
      @Defn2{Term=[error], Sec=(run-time)}
-     The corresponding error situations are associated with the names of
+     @NoPrefix@;The corresponding error situations are associated with the names of
      the predefined exceptions.  Every Ada compiler is required to
      generate code that raises the corresponding exception if such an
      error situation arises during program execution.
@@ -1363,12 +1360,10 @@ categories:
      execution of a construct, then an implementation is allowed
      (although not required) to report this fact at compilation time.]
 
-  @end(Multiple)
 
-  @begin(Multiple)
      Bounded errors;
 
-     The language rules define certain kinds of errors that need not be
+     @NoPrefix@;The language rules define certain kinds of errors that need not be
      detected either prior to or during run time, but if not detected,
      the range of possible effects shall be bounded.
      @Defn{bounded error}
@@ -1377,13 +1372,11 @@ categories:
      The possible effects of a given bounded error are specified for
      each such error, but in any case one possible effect of a bounded
      error is the raising of the exception Program_Error.
-  @end(Multiple)
 
-  @begin(Multiple)
      Erroneous execution.
 
      @Defn{erroneous execution}
-     In addition to bounded errors, the language rules define certain
+     @NoPrefix@;In addition to bounded errors, the language rules define certain
      kinds of errors as leading to @i{erroneous execution}.  Like bounded
      errors, the implementation need not detect such errors either prior
      to or during run time.  Unlike bounded errors, there is no
@@ -1412,7 +1405,6 @@ categories:
        However, ``erroneous'' has a slightly more disapproving
        flavor.
      @end{Ramification}
-  @end(Multiple)
 
 @end(Itemize)
 @end{ImplReq}

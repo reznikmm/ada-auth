@@ -1,10 +1,10 @@
 @Part(pragmas, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 @LabeledInformativeAnnex{Language-Defined Pragmas}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pragmas.mss,v $}
-@comment{$Revision: 1.9 $}
+@comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @Defn{pragma}
@@ -13,7 +13,7 @@ language-defined pragmas.
 
 
 
-@EvilInclude{ada.prag_sorted}
+@PragmaList
 @end{Intro}
 
 @begin{DiffWord83}

@@ -1,11 +1,10 @@
 @Part(predef, Root="ada.mss")
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.9 $}
+@comment{$Revision: 1.10 $}
 @comment{$RLB: Eliminated includes. $}
 
 @Define{TwoColRW, use=Display}
@@ -23,7 +22,6 @@ There are three root library units:
 Ada, Interfaces, and System;
 other library units are children of these:
 @*
-@begin{Multiple}
 @TabClear{}
 @TabSet{.25in,+.25in,+.25in,+.25in,+.25in}
 @begin{TwoColRW}
@@ -100,7 +98,6 @@ Standard (@i{...continued})
 @\@\Storage_Elements @em @RefSecNum{The Package System.Storage_Elements}
 @\@\Storage_Pools @em @RefSecNum{Storage Management}
 @end{TwoColRW}
-@end{Multiple}
 ]
 @begin{Discussion}
 In running text, we generally leave out the ``Ada.'' when referring to a

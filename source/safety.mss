@@ -1,9 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:42 $ $Author: Randy $ }
+@Comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -380,12 +379,13 @@ initialization and finalization code as well as
  run-time
 system components, and with an identification of those instructions and
 data that will be relocated at load time;
-@Discussion{The object code listing should enable a validator to estimate
+@begin{Discussion}
+The object code listing should enable a validator to estimate
 upper bounds for the time taken by critical parts of a program.
 Similarly, by an analysis of the entire partition, it should be possible
 to ensure that the storage requirements are suitably bounded,
 assuming that the partition was written in an appropriate
-manner.}
+manner.@end{discussion}
 
 A description of the run-time model relevant to the partition.
 @begin{Discussion}
@@ -487,12 +487,13 @@ is involved in this pragma.
 An @i{inspection point} is a point in the object code
 corresponding to the occurrence of a pragma Inspection_Point in the
 compilation unit.
-@ramification{If a pragma Inspection_Point is in an in-lined subprogram, there
+@begin{ramification}
+If a pragma Inspection_Point is in an in-lined subprogram, there
 might be numerous inspection points in the object code corresponding to
 the single occurrence of the pragma in the source; similar considerations
 apply if such a
 pragma is in a generic, or in a loop that has been ``unrolled'' by an
-optimizer.}
+optimizer.@end{ramification}
 @Defn{inspectable object}
 An object is @i{inspectable} at an inspection point if the corresponding
 pragma Inspection_Point either has an argument denoting that object,
@@ -526,11 +527,12 @@ Reaching an inspection point is an external interaction
 with respect to the values
 of the inspectable objects at that point
 (see @RefSecNum{Conformity of an Implementation with the Standard}).
-@Ramification{The compiler is inhibited from moving an assignment to
+@begin{Ramification}
+The compiler is inhibited from moving an assignment to
 an inspectable variable past an inspection point for that variable.
 On the other hand, the evaluation of an expression that might raise
 an exception may be moved past an inspection point
-(see @RefSecNum[Exceptions and Optimization]).}
+(see @RefSecNum[Exceptions and Optimization]).@end{ramification}
 @end{ImplReq}
 
 @begin{DocReq}

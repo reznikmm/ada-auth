@@ -1,9 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -185,10 +184,11 @@ and its designated profile's parameter and result types are all @i[L]-compatible
 T is derived from an @i[L]-compatible type,
 
 The implementation permits T as an @i[L]-compatible type.
-@discussion{
+@begin{discussion}
+
 For example, an implementation might permit Integer as a C-compatible
 type, though the C type to which it corresponds might be different
-in different environments.}
+in different environments.@end{discussion}
 @end[itemize]
 
 If @nt[pragma] Convention   applies to a type,
@@ -397,9 +397,10 @@ precedence.
     Adafinal should contain the finalization code.
     These subprograms should have no effect the second and subsequent
     time they are called.
-@ramification[For example, if the main subprogram is written in C,
+@begin{ramification}
+For example, if the main subprogram is written in C,
 it can call adainit before the first call to an Ada subprogram,
-and adafinal after the last.]
+and adafinal after the last.@end{ramification}
 
 Automatic elaboration of preelaborated packages should be provided
 when @nt[pragma] Export is supported.
@@ -581,7 +582,6 @@ expected.
 For each such modular type in Interfaces,
 shifting and rotating subprograms as specified in the declaration of
 Interfaces above.
-@begin{multiple}
 These subprograms are Intrinsic.
 They operate on a bit-by-bit basis,
 using the binary representation of the
@@ -609,7 +609,6 @@ which would have been upward incompatible,
 or else invent new operator symbols,
 which seemed like too much mechanism.
 @end{Reason}
-@end{Multiple}
 
 Floating point types corresponding to each floating point format
 fully supported by the hardware.
@@ -1025,8 +1024,9 @@ correspondences between Ada  and C.
 @begin[itemize]
 An Ada procedure corresponds to
 a void-returning C function.
-@discussion{The programmer can also choose an Ada procedure when
-the C function returns an int that is to be discarded.}
+@begin{discussion}
+The programmer can also choose an Ada procedure when
+the C function returns an int that is to be discarded.@end{discussion}
 
 An Ada function corresponds to a non-void C function.
 
@@ -1211,11 +1211,12 @@ a pointer to the first char in a char array terminated by nul.
 When an object of type chars_ptr is declared, its value is
 by default set to Null_Ptr, unless the object is imported
 (see @RefSecNum(Interfacing Pragmas)).
-@discussion{
+@begin{discussion}
+
 The type char_array_access is not necessarily C-compatible, since
 an object of this type may carry ``dope'' information.
 The programmer should convert from char_array_access to chars_ptr
-for objects imported from, exported to, or passed to C.}
+for objects imported from, exported to, or passed to C.@end{discussion}
 @begin{DescribeCode}
 @begin{Example}
 @key(function) To_Chars_Ptr (Item      : @key(in) char_array_access;
@@ -1338,8 +1339,9 @@ If Check is True, then:
 
 If Check is False, then
  processing is as above, but with no check that Offset+Chars'Length>N.
-@Ramification{If Chars contains nul, Update's effect may be
-to ``shorten'' the pointed-to char array.}
+@begin{Ramification}
+If Chars contains nul, Update's effect may be
+to ``shorten'' the pointed-to char array.@end{ramification}
 @end[itemize]
 @begin{Example}
 @key(procedure) Update (Item   : @key(in) chars_ptr;
@@ -1538,8 +1540,9 @@ This procedure copies Value(Source, Terminator) into the array
 it stops either after Terminator has been copied, or the
  number of elements copied is Limit, whichever occurs first.
 Dereference_Error is propagated if either Source or Target is @key(null).
-@ramification{It is the programmer's responsibility to ensure that
-elements are not copied beyond the logical length of the target array.}
+@begin{ramification}
+It is the programmer's responsibility to ensure that
+elements are not copied beyond the logical length of the target array.@end{ramification}
 @begin{ImplNote}
   The implementation has to take care to check the Limit
   first.
@@ -1561,8 +1564,9 @@ This procedure copies the first Length elements from the array pointed
 @begin{erron}
 It is erroneous to dereference a Pointer that does not designate
 an aliased Element.
-@Discussion[Such a Pointer could arise via "+", "-", Increment, or
-Decrement.]
+@begin{Discussion}
+Such a Pointer could arise via "+", "-", Increment, or
+Decrement.@end{discussion}
 
 Execution of Value(Ref, Terminator) is erroneous if
 Ref does not designate an aliased Element in an Element_Array
@@ -1922,8 +1926,9 @@ The number of digits after the assumed
 radix point in Item is Num'Scale.
  Conversion_Error is propagated if the value
 represented by Item is outside the range of Num.
-@discussion{There is no issue of truncation versus rounding, since
-the number of decimal places is established by Num'Scale.}
+@begin{discussion}
+There is no issue of truncation versus rounding, since
+the number of decimal places is established by Num'Scale.@end{discussion}
 
 @begin{Example}
 @key(function) To_Display (Item   : @key(in) Num;
@@ -1976,8 +1981,9 @@ and Format is Packed_Unsigned.
 
 This function returns True if Item has a value consistent with Format,
 and False otherwise.
-@ramification{This function returns False only when the represented
-value is outside the range of Num.}
+@begin{ramification}
+This function returns False only when the represented
+value is outside the range of Num.@end{ramification}
 
 @begin{Example}
 @key(function) Length (Format : @key(in) Binary_Format) @key(return) Natural;
@@ -2013,10 +2019,11 @@ accordance with Format.
 These functions convert from COBOL binary format to a corresponding
 value of the decimal type Num.  Conversion_Error is propagated if Item is
 too large for Num.
-@Ramification{There is no rescaling performed on the conversion.  That
+@begin{Ramification}
+There is no rescaling performed on the conversion.  That
 is, the returned value in each case is a ``bit copy'' if Num has a
 binary radix.  The programmer is responsible for maintaining the correct
-scale.}
+scale.@end{ramification}
 
 @begin{Example}
 @key(function) To_Binary      (Item : @key(in) Num)  @key(return) Binary;
@@ -2055,34 +2062,30 @@ Passing an Ada decimal data item to
 a COBOL program requires conversion from the Ada decimal type to some type
 that reflects the representation expected on the COBOL side.
 @begin{Itemize}
-@begin{Multiple}
 Computational Representation
 
-Floating point representation is modeled by Ada floating point types,
+@NoPrefix@;Floating point representation is modeled by Ada floating point types,
 Floating and Long_Floating.  Conversion between these types and Ada decimal
 types is obtained directly, since the type name serves as a conversion
 function.
 
-Binary representation is modeled by an Ada integer type, Binary, and
+@NoPrefix@;Binary representation is modeled by an Ada integer type, Binary, and
 possibly other types such as Long_Binary.  Conversion between, say, Binary
 and a decimal type is through functions from an instantiation of the
 generic package Decimal_Conversions.
 
-Packed decimal representation is modeled by the Ada array type Packed_Decimal.
+@NoPrefix@;Packed decimal representation is modeled by the Ada array type Packed_Decimal.
 Conversion between packed decimal and a decimal type is through functions
 from an instantiation of the generic package Decimal_Conversions.
-@end{Multiple}
 
-@begin{Multiple}
 Display Representation
 
-Display representation for numeric data
+@NoPrefix@;Display representation for numeric data
 is modeled by the array type Numeric.
 Conversion between display representation and a decimal type is through
 functions from an instantiation of the generic package Decimal_Conversions.
 A parameter to the conversion function indicates the desired interpretation
 of the data (e.g., signed leading separate, etc.)
-@end{Multiple}
 @end{Itemize}
 
 Pragma Convention(COBOL, T) may be applied to a record type T to direct the
@@ -2122,8 +2125,9 @@ that is part of the object).
 An implementation may
  provide additional constants of the private types
 Display_Format, Binary_Format, or Packed_Format.
-@Reason{This is to allow exploitation of other external formats that may
-be available in the COBOL implementation.}
+@begin{Reason}
+This is to allow exploitation of other external formats that may
+be available in the COBOL implementation.@end{reason}
 
 An implementation may
  provide further floating point and integer types
@@ -2155,8 +2159,9 @@ used if necessary to ensure by-copy semantics.
 An implementation is not required to support pragma Convention
 for access types, nor is it required to support pragma Import, Export
 or Convention for functions.
-@reason[COBOL does not have a pointer facility, and a COBOL program
-does not return a value.]
+@begin{reason}
+COBOL does not have a pointer facility, and a COBOL program
+does not return a value.@end{reason}
 
 If an Ada subprogram is exported to COBOL, then a call from COBOL
 call may specify

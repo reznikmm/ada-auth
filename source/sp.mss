@@ -1,8 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1162,7 +1161,6 @@ environment task, the entire partition is aborted, See @RefSecNum{Partitions}.]
 The functions Is_Terminated and Is_Callable return the value of the
 corresponding attribute of the task identified by T.
 
-@begin{Multiple}
 For @PrefixType{a @nt<prefix> T that is of a task type
 @Redundant[(after any implicit dereference)]},
 the following attribute is defined:
@@ -1174,9 +1172,7 @@ the following attribute is defined:
 
 @end{Description}
 @EndPrefixType{}
-@end{Multiple}
 
-@begin{Multiple}
 For @PrefixType{a @nt<prefix> E that denotes an
 @nt<entry_declaration>},
 the following attribute is defined:
@@ -1188,7 +1184,6 @@ the following attribute is defined:
        corresponding to the @nt{entry_declaration} denoted by E.]}
 @end{Description}
 @EndPrefixType{}
-@end{Multiple}
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if a value of Null_Task_ID is passed

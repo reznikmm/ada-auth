@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:23 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -454,10 +454,9 @@ shall resolve to denote one of the following:
   is a function that could be called without parameters.
 @end(Ramification)
 @begin{Itemize}
-@begin{Multiple}
 A component @Redundant[(including a discriminant)]:
 
-The @nt{prefix} shall resolve to denote an object or value of some
+@NoPrefix@;The @nt{prefix} shall resolve to denote an object or value of some
 non-array composite type
 (after any implicit dereference).
 The @nt{selector_name} shall resolve to denote a
@@ -478,13 +477,11 @@ corresponding component of the object or value.
   @nt<selected_component> can be selected, since a @nt<selector_name>
   can only denote declarations that are visible (see @RefSecNum{Visibility}).
 @end{Ramification}
-@end{Multiple}
 
-@begin{Multiple}
 A single entry, an entry family,
 or a protected subprogram:
 
-The @nt{prefix} shall resolve to denote an object or value of some
+@NoPrefix@;The @nt{prefix} shall resolve to denote an object or value of some
 task or protected type (after any implicit dereference).
 The @nt{selector_name} shall resolve to denote an @nt{entry_declaration}
 or @nt{subprogram_declaration} occurring (implicitly or explicitly)
@@ -498,7 +495,6 @@ corresponding entry, entry family, or protected subprogram.
   type, only those of the current instance (and expanded name notation
   has to be used for that).
 @end{Reason}
-@end{Multiple}
 @end{Itemize}
 
 An expanded name shall resolve to denote a declaration that
@@ -2256,7 +2252,7 @@ as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
 @key(not) Sunny @key(or) Warm    @i[--  same as (not Sunny) or Warm]
 X > 4.0 @key(and) Y > 0.0  @i[--  same as (X > 4.0) and (Y > 0.0)]
 
--4.0*A**2            @i[--  same as @en(4.0 * (A**2))]
+-4.0*A**2            @i[--  same as @en@;(4.0 * (A**2))]
 @key(abs)(1 + A) + B       @i[--  same as (abs (1 + A)) + B]
 Y**(-3)              @i[--  parentheses are necessary]
 A / B * C            @i[--  same as (A/B)*C]
@@ -3870,7 +3866,6 @@ type.
 @end{RunTime}
 
 @begin{Notes}
-@begin{Multiple}
 @RootDefn{implicit subtype conversion}
 In addition to explicit @nt<type_conversion>s,
 type conversions are performed implicitly in situations where the
@@ -3886,12 +3881,11 @@ formal parameter is of a class-wide type.
 
 @RootDefn{implicit subtype conversion}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
-Even when the expected and actual types are the same,
+@NoPrefix@;Even when the expected and actual types are the same,
 implicit subtype conversions are performed to adjust the array bounds (if any)
 of an operand to match the desired target subtype, or to
 raise Constraint_Error if the (possibly adjusted) value does not satisfy
 the constraints of the target subtype.
-@end{Multiple}
 
 A ramification of the
 overload resolution rules is that the operand of

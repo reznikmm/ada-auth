@@ -1,11 +1,10 @@
 @Part(syntax, Root="ada.mss")
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.9 $}
+@comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @Defn2{Term=[syntax], Sec=(complete listing)}
@@ -27,7 +26,7 @@ for a description of the notation used.
 
 
 @begin{SmallDisplay}
-@BackPlace{SyntaxSummary}
+@SyntaxSummary
 @end{SmallDisplay}
 
 @NewPage{}
@@ -51,5 +50,5 @@ for a description of the notation used.
 @Case{Device,
     Postscript="@TabSet(.25inches,2.5inches)",
     else="@TabSet(3chars,40chars)"}
-@EvilInclude{ada.syntax_xref_sorted}
+@SyntaxXRef
 @end{TwoColSyntaxSummary}

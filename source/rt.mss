@@ -1,8 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1287,7 +1286,6 @@ construction of highly efficient tasking run-time systems.]
 @end{Intro}
 
 @begin{StaticSem}
-@begin{multiple}
 The following @SynI{restriction_}@nt{identifier}s are language defined:
 @begin{Description}
 @Defn2{Term=[Restrictions],Sec=(No_Task_Hierarchy)}No_Task_Hierarchy @\All (nonenvironment) tasks depend directly on
@@ -1326,9 +1324,7 @@ No_Dynamic_Priorities @\There are no semantic dependences on the package
 @Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\There are no semantic dependences on the package
                 Asynchronous_Task_Control.
 @end{Description}
-@end{Multiple}
 
-@begin{Multiple}
 The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
 @begin{Description}
@@ -1351,12 +1347,10 @@ Max_Protected_Entries @\Specifies the maximum number of entries per
     corresponding bound is static.
 @Defn2{Term=[Restrictions],Sec=(Max_Protected_Entries)}
 @end{Description}
-@end{Multiple}
 @end{StaticSem}
 
 @begin{RunTime}
 
-@begin{Multiple}
 If the following restrictions are violated,
 the behavior is implementation defined.
 @IndexCheck{Storage_Check}
@@ -1396,7 +1390,6 @@ language defined:
                                 table elements.
                                 @end{ImplNote}
 @end{Description}
-@end{Multiple}
 
 It is implementation defined whether the use of pragma Restrictions
 results in a reduction in executable program size, storage requirements,
@@ -1792,7 +1785,6 @@ simple @nt{delay_statement} and to one which appears in a
 @end{Intro}
 
 @begin{RunTime}
-@begin{multiple}
 The effect of the @nt{delay_statement} for Real_Time.Time is defined in
 terms of Real_Time.Clock:
 @begin{itemize}
@@ -1805,9 +1797,7 @@ Clock read after the task resumes execution following that
 If C is a value of Clock read after a task resumes execution following a
 @nt{delay_until_statement} with Real_Time.Time value T, then C >= T.
 @end{itemize}
-@end{multiple}
 
-@begin{multiple}
 @PDefn2{Term=[potentially blocking operation],Sec=(delay_statement)}
 @PDefn2{Term=[blocking, potentially],Sec=(delay_statement)}
 A simple @nt{delay_statement} with a negative or zero value for the
@@ -1827,8 +1817,6 @@ of zero, to an open entry.
 When a @nt{delay_statement} appears in a @nt{selective_accept_alternative},
 and a call is queued on one of the open entries, the selection of that
 entry call proceeds, regardless of the value of the delay expression.
-
-@end{multiple}
 
 @end{RunTime}
 
@@ -1926,9 +1914,10 @@ The following language-defined package exists:
 @key{end} Ada.Synchronous_Task_Control;
 @end{example}
 
-The type Suspension_Object is a by-reference type.@ImplNote{The
+The type Suspension_Object is a by-reference type.@begin{ImplNote}
+The
 implementation can ensure this by, for example, making the full view a
-limited record type.}
+limited record type.@end{implnote}
 
 @end{StaticSem}
 
@@ -2165,12 +2154,11 @@ the implementation.}
 @begin{Metrics}
 The implementation shall document the following metric:
 @begin{Itemize}
-@begin{Multiple}
 The overhead associated with obtaining
 a mutual-exclusive access to an entry-less protected object.  This shall be
 measured in the following way:
 
-For a protected object of the form:
+@NoPrefix@;For a protected object of the form:
 @begin{example}
 @key{protected} Lock @key{is}
    @key{procedure} Set;
@@ -2191,9 +2179,8 @@ For a protected object of the form:
 @key{end} Lock;
 @end{example}
 
-The execution time, in processor clock cycles, of a call to
-Set.
-This shall be measured between the point just before
+@NoPrefix@;The execution time, in processor clock cycles, of a call to
+Set. This shall be measured between the point just before
 issuing the call, and the point just after the call
 completes.
 The function Read shall be called later to verify that Set was indeed
@@ -2203,9 +2190,8 @@ sufficiently high priority as to not be preempted during the measurement
 period.  The protected object shall have sufficiently high ceiling priority
 to allow the task to call Set.
 
-For a multiprocessor, if supported, the metric shall be reported for the
+@NoPrefix@;For a multiprocessor, if supported, the metric shall be reported for the
 case where no contention (on the execution resource) exists
 @Redundant[from tasks executing on other processors].
-@end{Multiple}
 @end{Itemize}
 @end{Metrics}

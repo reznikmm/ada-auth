@@ -1,11 +1,10 @@
 @Part(impldef, Root="ada.mss")
-@Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledInformativeAnnex{Implementation-Defined Characteristics}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/impldef.mss,v $}
-@comment{$Revision: 1.9 $}
+@comment{$Revision: 1.10 $}
 
 @begin{Intro}
 
@@ -24,7 +23,5 @@ It need not document unspecified characteristics.
 Some of the items in this list require documentation only for
 implementations that conform to Specialized Needs Annexes.
 @end{Ramification}
-@begin{Itemize}
-@BackPlace{ImplDefList}
-@end{Itemize}
+@ImplDefList
 @end{Intro}

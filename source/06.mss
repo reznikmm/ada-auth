@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -693,13 +693,12 @@ See also the rule about renamings-as-body
 in @RefSecNum{Subprogram Renaming Declarations}.
 @end{Ramification}
 
-@begin{Multiple}
 @Defn{Intrinsic calling convention}
 @Defn2{Term=[calling convention], Sec=(Intrinsic)}
 The @i{Intrinsic} calling convention represents
 subprograms that are ``built in'' to the compiler.
 The default calling convention is Intrinsic for the following:
-@begin{Itemize}
+@begin{InnerItemize}
   an enumeration literal;
 
   a "/=" operator declared implicitly due to
@@ -717,10 +716,10 @@ The default calling convention is Intrinsic for the following:
 
   a subprogram declared immediately
   within a @nt{protected_body}.
-@end{Itemize}
+@end{InnerItemize}
 
-@Redundant[The Access attribute is not allowed for
-Intrinsic subprograms.]
+@NoPrefix@Redundant[The Access attribute is not allowed
+for Intrinsic subprograms.]
 @begin{Ramification}
   The Intrinsic calling convention really represents any number of
   calling conventions at the machine code level;
@@ -754,7 +753,6 @@ Intrinsic subprograms.]
   the inherited subprograms of
   untagged types.
 @end{Ramification}
-@end{Multiple}
 
 @Defn{protected calling convention}
 @Defn2{Term=[calling convention], Sec=(protected)}

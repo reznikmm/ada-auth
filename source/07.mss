@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:40 $}
+@Comment{$Date: 2000/05/16 04:48:24 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 @redundant[
@@ -1132,7 +1132,6 @@ the following attribute is defined:
 @end{StaticSem}
 
 @begin{Notes}
-@begin{Multiple}
 Because a partial view and a full view
 are two different views of one and the same type,
 outside of the defining package the characteristics of the type are
@@ -1146,13 +1145,12 @@ an array type) is relevant only
 within the declarative region of the package itself
 including any child units.
 
-The consequences of this actual implementation are, however, valid
+@NoPrefix@;The consequences of this actual implementation are, however, valid
 everywhere.  For example: any default initialization of components
 takes place; the attribute Size provides the size of the full view;
 finalization is still done for controlled components of the full view;
 task dependence rules still apply to components that are task
 objects.
-@end{Multiple}
 
 Partial views provide assignment (unless the view is limited),
 membership tests, selected components for the selection of
@@ -1199,7 +1197,6 @@ are also defined for discriminants and inherited components.
 @end{Examples}
 
 @begin{Notes}
-@begin{Multiple}
 @i{Notes on the example:}
 Outside of the package Key_Manager, the operations available for
 objects of type Key include assignment, the comparison for equality
@@ -1207,7 +1204,7 @@ or inequality, the procedure Get_Key and the operator "<"; they do
 not include other relational operators such as ">=", or arithmetic
 operators.
 
-The explicitly declared operator "<" hides the predefined operator
+@NoPrefix@;The explicitly declared operator "<" hides the predefined operator
 "<" implicitly declared by the @nt{full_type_declaration}.  Within the
 body of the function, an explicit conversion of X and Y to the
 subtype Natural is necessary to invoke the "<" operator of the parent
@@ -1215,10 +1212,9 @@ type.
 Alternatively, the result of the function could be written as not (X
 >= Y), since the operator ">=" is not redefined.
 
-The value of the variable Last_Key, declared in the package body,
+@NoPrefix@;The value of the variable Last_Key, declared in the package body,
 remains unchanged between calls of the procedure Get_Key.  (See also
 the NOTES of @RefSecNum{Package Bodies}.)
-@end{Multiple}
 @end{Notes}
 
 @begin{DiffWord83}
@@ -1571,7 +1567,6 @@ circumstances.
 @end{Examples}
 
 @begin{Notes}
-@begin{Multiple}
 @i{Notes on the example:}
 In the example above, an outside subprogram making use of IO_Package
 may obtain a file name by calling Open and later use it in calls to
@@ -1583,18 +1578,17 @@ on a file name.
 Most importantly, clients of the package cannot make copies
 of objects of type File_Name.
 
-This example is characteristic of any case where complete control
+@NoPrefix@;This example is characteristic of any case where complete control
 over the operations of a type is desired.  Such packages serve a dual
 purpose.  They prevent a user from making use of the internal
 structure of the type.  They also implement the notion of an
 encapsulated data type where the only operations on the type are
 those given in the package specification.
 
-The fact that the full view of File_Name is explicitly declared
+@NoPrefix@;The fact that the full view of File_Name is explicitly declared
 @key[limited] means that
 parameter passing and function return will always be by reference
 (see @RefSecNum{Formal Parameter Modes} and @RefSecNum{Return Statements}).
-@end{Multiple}
 @end{Notes}
 
 @begin{Extend83}
@@ -2043,7 +2037,6 @@ defined in @RefSecNum{Completions of Declarations}.
 
 @Defn{leaving}
 @Defn{left}
-@begin{Multiple}
 After execution of a construct or entity is complete,
 it is @i{left},
 meaning that execution continues with the next action,
@@ -2125,7 +2118,6 @@ Thus, for example,
 really means
 ``@i{the execution of} the @nt{subprogram_call} or task is complete.''
 @end{Honest}
-@end{Multiple}
 
 @RootDefn2{Term=[finalization], Sec=(of an object)}
 For the @i{finalization} of an object:

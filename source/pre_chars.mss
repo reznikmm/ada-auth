@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:42 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -142,14 +142,7 @@ An @i[upper-case letter] is a character that is in the range
 A @i[basic letter] is a character that is in one of the
 ranges 'A'..'Z' and 'a'..'z', or that is one of the
 following:
-@case{Device,
-         Postscript=
-            "'@a9x(b)', '@a9x(j)', '@a9x(t)', '@a9x(h)', '@a9x(f)', '@a9x(n)', or '@a9x(g)'.",
-         else=
-            "an upper- or lower-case AE diphthong,
-             an upper- or lower-case Icelandic eth,
-             an upper- or lower-case Icelandic thorn,
-             or a sharp-s."}
+'@latin1(198)', '@latin1(230)', '@latin1(208)', '@latin1(240)', '@latin1(222)', '@latin1(254)', or '@latin1(223)'.
 
 @comment[These characters are at the positions
 198 and 230, 208 and 240, 222 and 254, and 223.]
@@ -191,11 +184,7 @@ Is_Upper(Item), and returns Item otherwise.
 To_Upper@\Returns the corresponding upper-case value for Item if
 Is_Lower(Item) and Item has an upper-case form, and returns Item otherwise.
 The lower case letters
-@case{Device,
-         Postscript=
-            "'@a9x(g)' and '@a9x(o)'",
-         else=
-            "sharp-s and y-diaeresis"}
+'@latin1(223)' and '@latin1(255)'
 @comment{These are at positions 223 and 255}
 do not have upper case forms.
 
@@ -286,22 +275,24 @@ Decimal digits
 Special graphic characters
 @end{Itemize}
 @end{Itemize}
-@Ramification{Thus each Character value is either a control character or
+@begin{Ramification}
+Thus each Character value is either a control character or
 a graphic character but not both; each graphic character is either
 an alphanumeric or special graphic but not both; each alphanumeric
 is either a letter or decimal digit but not both; each letter is
-either upper case or lower case but not both.}
+either upper case or lower case but not both.@end{ramification}
 @end{Notes}
 
 @LabeledSubClause{The Package Characters.Latin_1}
 @begin{Intro}
 The package Characters.Latin_1 declares constants for
 characters in ISO 8859-1.
-@reason{The constants for the ISO 646 characters could have
+@begin{reason}
+The constants for the ISO 646 characters could have
 been declared as renamings of objects declared in package ASCII, as
 opposed to explicit constants.  The main reason for explicit constants
 was for consistency of style with the upper-half constants, and to avoid
-emphasizing the package ASCII.}
+emphasizing the package ASCII.@end{reason}
 @end{Intro}
 
 @begin{StaticSem}
@@ -470,113 +461,113 @@ sec=[a category of Character]}
 @i{-- Character positions 160 (16#A0#) .. 175 (16#AF#):}
     No_Break_Space              : @key[constant] Character := ' ';  @i{--Character'Val(160)}
     NBSP                        : Character @key[renames] No_Break_Space;
-    Inverted_Exclamation        : @key[constant] Character := @case{Device, Postscript= "'@a9x(A)';  @i{--Character'Val(161)}", else="Character'Val(161);"}
-    Cent_Sign                   : @key[constant] Character := @case{Device, Postscript= "'@a9x(B)';  @i{--Character'Val(162)}", else="Character'Val(162);"}
-    Pound_Sign                  : @key[constant] Character := @case{Device, Postscript= "'@a9x(C)';  @i{--Character'Val(163)}", else="Character'Val(163);"}
-    Currency_Sign               : @key[constant] Character := @case{Device, Postscript= "'@a9x(D)';  @i{--Character'Val(164)}", else="Character'Val(164);"}
-    Yen_Sign                    : @key[constant] Character := @case{Device, Postscript= "'@a9x(E)';  @i{--Character'Val(165)}", else="Character'Val(165);"}
-    Broken_Bar                  : @key[constant] Character := @case{Device, Postscript= "'@a9x(F)';  @i{--Character'Val(166)}", else="Character'Val(166);"}
-    Section_Sign                : @key[constant] Character := @case{Device, Postscript= "'@a9x(G)';  @i{--Character'Val(167)}", else="Character'Val(167);"}
-    Diaeresis                   : @key[constant] Character := @case{Device, Postscript= "'@a9x(H)';  @i{--Character'Val(168)}", else="Character'Val(168);"}
-    Copyright_Sign              : @key[constant] Character := @case{Device, Postscript= "'@a9x(I)';  @i{--Character'Val(169)}", else="Character'Val(169);"}
-    Feminine_Ordinal_Indicator  : @key[constant] Character := @case{Device, Postscript= "'@a9x(J)';  @i{--Character'Val(170)}", else="Character'Val(170);"}
-    Left_Angle_Quotation        : @key[constant] Character := @case{Device, Postscript= "'@a9x(K)';  @i{--Character'Val(171)}", else="Character'Val(171);"}
-    Not_Sign                    : @key[constant] Character := @case{Device, Postscript= "'@a9x(L)';  @i{--Character'Val(172)}", else="Character'Val(172);"}
-    Soft_Hyphen                 : @key[constant] Character := @case{Device, Postscript= "'@a9x(M)';  @i{--Character'Val(173)}", else="Character'Val(173);"}
-    Registered_Trade_Mark_Sign  : @key[constant] Character := @case{Device, Postscript= "'@a9x(N)';  @i{--Character'Val(174)}", else="Character'Val(174);"}
-    Macron                      : @key[constant] Character := @case{Device, Postscript= "'@a9x(O)';  @i{--Character'Val(175)}", else="Character'Val(175);"}
+    Inverted_Exclamation        : @key[constant] Character := '@latin1(161)';  @i{--Character'Val(161)}
+    Cent_Sign                   : @key[constant] Character := '@latin1(162)';  @i{--Character'Val(162)}
+    Pound_Sign                  : @key[constant] Character := '@latin1(163)';  @i{--Character'Val(163)}
+    Currency_Sign               : @key[constant] Character := '@latin1(164)';  @i{--Character'Val(164)}
+    Yen_Sign                    : @key[constant] Character := '@latin1(165)';  @i{--Character'Val(165)}
+    Broken_Bar                  : @key[constant] Character := '@latin1(166)';  @i{--Character'Val(166)}
+    Section_Sign                : @key[constant] Character := '@latin1(167)';  @i{--Character'Val(167)}
+    Diaeresis                   : @key[constant] Character := '@latin1(168)';  @i{--Character'Val(168)}
+    Copyright_Sign              : @key[constant] Character := '@latin1(169)';  @i{--Character'Val(169)}
+    Feminine_Ordinal_Indicator  : @key[constant] Character := '@latin1(170)';  @i{--Character'Val(170)}
+    Left_Angle_Quotation        : @key[constant] Character := '@latin1(171)';  @i{--Character'Val(171)}
+    Not_Sign                    : @key[constant] Character := '@latin1(172)';  @i{--Character'Val(172)}
+    Soft_Hyphen                 : @key[constant] Character := '@latin1(173)';  @i{--Character'Val(173)}
+    Registered_Trade_Mark_Sign  : @key[constant] Character := '@latin1(174)';  @i{--Character'Val(174)}
+    Macron                      : @key[constant] Character := '@latin1(175)';  @i{--Character'Val(175)}
 
 @i{-- Character positions 176 (16#B0#) .. 191 (16#BF#):}
-    Degree_Sign                 : @key[constant] Character := @case{Device, Postscript= "'@a9x(P)';  @i{--Character'Val(176)}", else="Character'Val(176);"}
+    Degree_Sign                 : @key[constant] Character := '@latin1(176)';  @i{--Character'Val(176)}
     Ring_Above                  : Character @key[renames] Degree_Sign;
-    Plus_Minus_Sign             : @key[constant] Character := @case{Device, Postscript= "'@a9x(Q)';  @i{--Character'Val(177)}", else="Character'Val(177);"}
-    Superscript_Two             : @key[constant] Character := @case{Device, Postscript= "'@a9x(R)';  @i{--Character'Val(178)}", else="Character'Val(178);"}
-    Superscript_Three           : @key[constant] Character := @case{Device, Postscript= "'@a9x(S)';  @i{--Character'Val(179)}", else="Character'Val(179);"}
-    Acute                       : @key[constant] Character := @case{Device, Postscript= "'@a9x(T)';  @i{--Character'Val(180)}", else="Character'Val(180);"}
-    Micro_Sign                  : @key[constant] Character := @case{Device, Postscript= "'@a9x(U)';  @i{--Character'Val(181)}", else="Character'Val(181);"}
-    Pilcrow_Sign                : @key[constant] Character := @case{Device, Postscript= "'@a9x(V)';  @i{--Character'Val(182)}", else="Character'Val(182);"}
+    Plus_Minus_Sign             : @key[constant] Character := '@latin1(177)';  @i{--Character'Val(177)}
+    Superscript_Two             : @key[constant] Character := '@latin1(178)';  @i{--Character'Val(178)}
+    Superscript_Three           : @key[constant] Character := '@latin1(179)';  @i{--Character'Val(179)}
+    Acute                       : @key[constant] Character := '@latin1(180)';  @i{--Character'Val(180)}
+    Micro_Sign                  : @key[constant] Character := '@latin1(181)';  @i{--Character'Val(181)}
+    Pilcrow_Sign                : @key[constant] Character := '@latin1(182)';  @i{--Character'Val(182)}
     Paragraph_Sign              : Character @key[renames] Pilcrow_Sign;
-    Middle_Dot                  : @key[constant] Character := @case{Device, Postscript= "'@a9x(W)';  @i{--Character'Val(183)}", else="Character'Val(183);"}
-    Cedilla                     : @key[constant] Character := @case{Device, Postscript= "'@a9x(X)';  @i{--Character'Val(184)}", else="Character'Val(184);"}
-    Superscript_One             : @key[constant] Character := @case{Device, Postscript= "'@a9x(Y)';  @i{--Character'Val(185)}", else="Character'Val(185);"}
-    Masculine_Ordinal_Indicator : @key[constant] Character := @case{Device, Postscript= "'@a9x(Z)';  @i{--Character'Val(186)}", else="Character'Val(186);"}
-    Right_Angle_Quotation       : @key[constant] Character := @case{Device, Postscript= "'@a9x([)';  @i{--Character'Val(187)}", else="Character'Val(187);"}
-    Fraction_One_Quarter        : @key[constant] Character := @case{Device, Postscript= "'@a9x(\)';  @i{--Character'Val(188)}", else="Character'Val(188);"}
-    Fraction_One_Half           : @key[constant] Character := @case{Device, Postscript= "'@a9x(q)';  @i{--Character'Val(189)}", else="Character'Val(189);"}
-    Fraction_Three_Quarters     : @key[constant] Character := @case{Device, Postscript= "'@a9x(r)';  @i{--Character'Val(190)}", else="Character'Val(190);"}
-    Inverted_Question           : @key[constant] Character := @case{Device, Postscript= "'@a9x(s)';  @i{--Character'Val(191)}", else="Character'Val(191);"}
+    Middle_Dot                  : @key[constant] Character := '@latin1(183)';  @i{--Character'Val(183)}
+    Cedilla                     : @key[constant] Character := '@latin1(184)';  @i{--Character'Val(184)}
+    Superscript_One             : @key[constant] Character := '@latin1(185)';  @i{--Character'Val(185)}
+    Masculine_Ordinal_Indicator : @key[constant] Character := '@latin1(186)';  @i{--Character'Val(186)}
+    Right_Angle_Quotation       : @key[constant] Character := '@latin1(187)';  @i{--Character'Val(187)}
+    Fraction_One_Quarter        : @key[constant] Character := '@latin1(188)';  @i{--Character'Val(188)}
+    Fraction_One_Half           : @key[constant] Character := '@latin1(189)';  @i{--Character'Val(189)}
+    Fraction_Three_Quarters     : @key[constant] Character := '@latin1(190)';  @i{--Character'Val(190)}
+    Inverted_Question           : @key[constant] Character := '@latin1(191)';  @i{--Character'Val(191)}
 
 @i{-- Character positions 192 (16#C0#) .. 207 (16#CF#):}
-    UC_A_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@uagr()';  @i{--Character'Val(192)}", else="Character'Val(192);"}
-    UC_A_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@uaac()';  @i{--Character'Val(193)}", else="Character'Val(193);"}
-    UC_A_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@uacr()';  @i{--Character'Val(194)}", else="Character'Val(194);"}
-    UC_A_Tilde                  : @key[constant] Character := @case{Device, Postscript= "'@uatl()';  @i{--Character'Val(195)}", else="Character'Val(195);"}
-    UC_A_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@uaum()';  @i{--Character'Val(196)}", else="Character'Val(196);"}
-    UC_A_Ring                   : @key[constant] Character := @case{Device, Postscript= "'@uarg()';  @i{--Character'Val(197)}", else="Character'Val(197);"}
-    UC_AE_Diphthong             : @key[constant] Character := @case{Device, Postscript= "'@a9x(b)';  @i{--Character'Val(198)}", else="Character'Val(198);"}
-    UC_C_Cedilla                : @key[constant] Character := @case{Device, Postscript= "'@a9x(u)';  @i{--Character'Val(199)}", else="Character'Val(199);"}
-    UC_E_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@uegr()';  @i{--Character'Val(200)}", else="Character'Val(200);"}
-    UC_E_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@ueac()';  @i{--Character'Val(201)}", else="Character'Val(201);"}
-    UC_E_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@uecr()';  @i{--Character'Val(202)}", else="Character'Val(202);"}
-    UC_E_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@ueum()';  @i{--Character'Val(203)}", else="Character'Val(203);"}
-    UC_I_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@uigr()';  @i{--Character'Val(204)}", else="Character'Val(204);"}
-    UC_I_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@uiac()';  @i{--Character'Val(205)}", else="Character'Val(205);"}
-    UC_I_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@uicr()';  @i{--Character'Val(206)}", else="Character'Val(206);"}
-    UC_I_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@uium()';  @i{--Character'Val(207)}", else="Character'Val(207);"}
+    UC_A_Grave                  : @key[constant] Character := '@latin1(192)';  @i{--Character'Val(192)}
+    UC_A_Acute                  : @key[constant] Character := '@latin1(193)';  @i{--Character'Val(193)}
+    UC_A_Circumflex             : @key[constant] Character := '@latin1(194)';  @i{--Character'Val(194)}
+    UC_A_Tilde                  : @key[constant] Character := '@latin1(195)';  @i{--Character'Val(195)}
+    UC_A_Diaeresis              : @key[constant] Character := '@latin1(196)';  @i{--Character'Val(196)}
+    UC_A_Ring                   : @key[constant] Character := '@latin1(197)';  @i{--Character'Val(197)}
+    UC_AE_Diphthong             : @key[constant] Character := '@latin1(198)';  @i{--Character'Val(198)}
+    UC_C_Cedilla                : @key[constant] Character := '@latin1(199)';  @i{--Character'Val(199)}
+    UC_E_Grave                  : @key[constant] Character := '@latin1(200)';  @i{--Character'Val(200)}
+    UC_E_Acute                  : @key[constant] Character := '@latin1(201)';  @i{--Character'Val(201)}
+    UC_E_Circumflex             : @key[constant] Character := '@latin1(202)';  @i{--Character'Val(202)}
+    UC_E_Diaeresis              : @key[constant] Character := '@latin1(203)';  @i{--Character'Val(203)}
+    UC_I_Grave                  : @key[constant] Character := '@latin1(204)';  @i{--Character'Val(204)}
+    UC_I_Acute                  : @key[constant] Character := '@latin1(205)';  @i{--Character'Val(205)}
+    UC_I_Circumflex             : @key[constant] Character := '@latin1(206)';  @i{--Character'Val(206)}
+    UC_I_Diaeresis              : @key[constant] Character := '@latin1(207)';  @i{--Character'Val(207)}
 
 @i{-- Character positions 208 (16#D0#) .. 223 (16#DF#):}
-    UC_Icelandic_Eth            : @key[constant] Character := @case{Device, Postscript= "'@a9x(t)';  @i{--Character'Val(208)}", else="Character'Val(208);"}
-    UC_N_Tilde                  : @key[constant] Character := @case{Device, Postscript= "'@a9x(a)';  @i{--Character'Val(209)}", else="Character'Val(209);"}
-    UC_O_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@uogr()';  @i{--Character'Val(210)}", else="Character'Val(210);"}
-    UC_O_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@uoac()';  @i{--Character'Val(211)}", else="Character'Val(211);"}
-    UC_O_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@uocr()';  @i{--Character'Val(212)}", else="Character'Val(212);"}
-    UC_O_Tilde                  : @key[constant] Character := @case{Device, Postscript= "'@uotl()';  @i{--Character'Val(213)}", else="Character'Val(213);"}
-    UC_O_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@uoum()';  @i{--Character'Val(214)}", else="Character'Val(214);"}
-    Multiplication_Sign         : @key[constant] Character := @case{Device, Postscript= "'@a9x(c)';  @i{--Character'Val(215)}", else="Character'Val(215);"}
-    UC_O_Oblique_Stroke         : @key[constant] Character := @case{Device, Postscript= "'@a9x(d)';  @i{--Character'Val(216)}", else="Character'Val(216);"}
-    UC_U_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@uugr()';  @i{--Character'Val(217)}", else="Character'Val(217);"}
-    UC_U_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@uuac()';  @i{--Character'Val(218)}", else="Character'Val(218);"}
-    UC_U_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@uucr()';  @i{--Character'Val(219)}", else="Character'Val(219);"}
-    UC_U_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@uuum()';  @i{--Character'Val(220)}", else="Character'Val(220);"}
-    UC_Y_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@a9x(e)';  @i{--Character'Val(221)}", else="Character'Val(221);"}
-    UC_Icelandic_Thorn          : @key[constant] Character := @case{Device, Postscript= "'@a9x(f)';  @i{--Character'Val(222)}", else="Character'Val(222);"}
-    LC_German_Sharp_S           : @key[constant] Character := @case{Device, Postscript= "'@a9x(g)';  @i{--Character'Val(223)}", else="Character'Val(223);"}
+    UC_Icelandic_Eth            : @key[constant] Character := '@latin1(208)';  @i{--Character'Val(208)}
+    UC_N_Tilde                  : @key[constant] Character := '@latin1(209)';  @i{--Character'Val(209)}
+    UC_O_Grave                  : @key[constant] Character := '@latin1(210)';  @i{--Character'Val(210)}
+    UC_O_Acute                  : @key[constant] Character := '@latin1(211)';  @i{--Character'Val(211)}
+    UC_O_Circumflex             : @key[constant] Character := '@latin1(212)';  @i{--Character'Val(212)}
+    UC_O_Tilde                  : @key[constant] Character := '@latin1(213)';  @i{--Character'Val(213)}
+    UC_O_Diaeresis              : @key[constant] Character := '@latin1(214)';  @i{--Character'Val(214)}
+    Multiplication_Sign         : @key[constant] Character := '@latin1(215)';  @i{--Character'Val(215)}
+    UC_O_Oblique_Stroke         : @key[constant] Character := '@latin1(216)';  @i{--Character'Val(216)}
+    UC_U_Grave                  : @key[constant] Character := '@latin1(217)';  @i{--Character'Val(217)}
+    UC_U_Acute                  : @key[constant] Character := '@latin1(218)';  @i{--Character'Val(218)}
+    UC_U_Circumflex             : @key[constant] Character := '@latin1(219)';  @i{--Character'Val(219)}
+    UC_U_Diaeresis              : @key[constant] Character := '@latin1(220)';  @i{--Character'Val(220)}
+    UC_Y_Acute                  : @key[constant] Character := '@latin1(221)';  @i{--Character'Val(221)}
+    UC_Icelandic_Thorn          : @key[constant] Character := '@latin1(222)';  @i{--Character'Val(222)}
+    LC_German_Sharp_S           : @key[constant] Character := '@latin1(223)';  @i{--Character'Val(223)}
 
 @i{-- Character positions 224 (16#E0#) .. 239 (16#EF#):}
-    LC_A_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@agr()';  @i{--Character'Val(224)}",  else="Character'Val(224);"}
-    LC_A_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@aac()';  @i{--Character'Val(225)}",  else="Character'Val(225);"}
-    LC_A_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@acr()';  @i{--Character'Val(226)}",  else="Character'Val(226);"}
-    LC_A_Tilde                  : @key[constant] Character := @case{Device, Postscript= "'@atl()';  @i{--Character'Val(227)}",  else="Character'Val(227);"}
-    LC_A_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@aum()';  @i{--Character'Val(228)}",  else="Character'Val(228);"}
-    LC_A_Ring                   : @key[constant] Character := @case{Device, Postscript= "'@arg()';  @i{--Character'Val(229)}",  else="Character'Val(229);"}
-    LC_AE_Diphthong             : @key[constant] Character := @case{Device, Postscript= "'@a9x(j)';  @i{--Character'Val(230)}", else="Character'Val(230);"}
-    LC_C_Cedilla                : @key[constant] Character := @case{Device, Postscript= "'@a9x(v)';  @i{--Character'Val(231)}", else="Character'Val(231);"}
-    LC_E_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@egr()';  @i{--Character'Val(232)}",  else="Character'Val(232);"}
-    LC_E_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@eac()';  @i{--Character'Val(233)}",  else="Character'Val(233);"}
-    LC_E_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@ecr()';  @i{--Character'Val(234)}",  else="Character'Val(234);"}
-    LC_E_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@eum()';  @i{--Character'Val(235)}",  else="Character'Val(235);"}
-    LC_I_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@igr()';  @i{--Character'Val(236)}",  else="Character'Val(236);"}
-    LC_I_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@iac()';  @i{--Character'Val(237)}",  else="Character'Val(237);"}
-    LC_I_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@icr()';  @i{--Character'Val(238)}",  else="Character'Val(238);"}
-    LC_I_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@ium()';  @i{--Character'Val(239)}",  else="Character'Val(239);"}
+    LC_A_Grave                  : @key[constant] Character := '@latin1(224)';  @i{--Character'Val(224)}
+    LC_A_Acute                  : @key[constant] Character := '@latin1(225)';  @i{--Character'Val(225)}
+    LC_A_Circumflex             : @key[constant] Character := '@latin1(226)';  @i{--Character'Val(226)}
+    LC_A_Tilde                  : @key[constant] Character := '@latin1(227)';  @i{--Character'Val(227)}
+    LC_A_Diaeresis              : @key[constant] Character := '@latin1(228)';  @i{--Character'Val(228)}
+    LC_A_Ring                   : @key[constant] Character := '@latin1(229)';  @i{--Character'Val(229)}
+    LC_AE_Diphthong             : @key[constant] Character := '@latin1(230)';  @i{--Character'Val(230)}
+    LC_C_Cedilla                : @key[constant] Character := '@latin1(231)';  @i{--Character'Val(231)}
+    LC_E_Grave                  : @key[constant] Character := '@latin1(232)';  @i{--Character'Val(232)}
+    LC_E_Acute                  : @key[constant] Character := '@latin1(233)';  @i{--Character'Val(233)}
+    LC_E_Circumflex             : @key[constant] Character := '@latin1(234)';  @i{--Character'Val(234)}
+    LC_E_Diaeresis              : @key[constant] Character := '@latin1(235)';  @i{--Character'Val(235)}
+    LC_I_Grave                  : @key[constant] Character := '@latin1(236)';  @i{--Character'Val(236)}
+    LC_I_Acute                  : @key[constant] Character := '@latin1(237)';  @i{--Character'Val(237)}
+    LC_I_Circumflex             : @key[constant] Character := '@latin1(238)';  @i{--Character'Val(238)}
+    LC_I_Diaeresis              : @key[constant] Character := '@latin1(239)';  @i{--Character'Val(239)}
 
 @i{-- Character positions 240 (16#F0#) .. 255 (16#FF#):}
-    LC_Icelandic_Eth            : @key[constant] Character := @case{Device, Postscript= "'@a9x(h)';  @i{--Character'Val(240)}", else="Character'Val(240);"}
-    LC_N_Tilde                  : @key[constant] Character := @case{Device, Postscript= "'@a9x(i)';  @i{--Character'Val(241)}", else="Character'Val(241);"}
-    LC_O_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@ogr()';  @i{--Character'Val(242)}",  else="Character'Val(242);"}
-    LC_O_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@oac()';  @i{--Character'Val(243)}",  else="Character'Val(243);"}
-    LC_O_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@ocr()';  @i{--Character'Val(244)}",  else="Character'Val(244);"}
-    LC_O_Tilde                  : @key[constant] Character := @case{Device, Postscript= "'@otl()';  @i{--Character'Val(245)}",  else="Character'Val(245);"}
-    LC_O_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@oum()';  @i{--Character'Val(246)}",  else="Character'Val(246);"}
-    Division_Sign               : @key[constant] Character := @case{Device, Postscript= "'@a9x(k)';  @i{--Character'Val(247)}", else="Character'Val(247);"}
-    LC_O_Oblique_Stroke         : @key[constant] Character := @case{Device, Postscript= "'@a9x(l)';  @i{--Character'Val(248)}", else="Character'Val(248);"}
-    LC_U_Grave                  : @key[constant] Character := @case{Device, Postscript= "'@ugr()';  @i{--Character'Val(249)}",  else="Character'Val(249);"}
-    LC_U_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@uac()';  @i{--Character'Val(250)}",  else="Character'Val(250);"}
-    LC_U_Circumflex             : @key[constant] Character := @case{Device, Postscript= "'@ucr()';  @i{--Character'Val(251)}",  else="Character'Val(251);"}
-    LC_U_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@uum()';  @i{--Character'Val(252)}",  else="Character'Val(252);"}
-    LC_Y_Acute                  : @key[constant] Character := @case{Device, Postscript= "'@a9x(m)';  @i{--Character'Val(253)}", else="Character'Val(253);"}
-    LC_Icelandic_Thorn          : @key[constant] Character := @case{Device, Postscript= "'@a9x(n)';  @i{--Character'Val(254)}", else="Character'Val(254);"}
-    LC_Y_Diaeresis              : @key[constant] Character := @case{Device, Postscript= "'@a9x(o)';  @i{--Character'Val(255)}", else="Character'Val(255);"}
+    LC_Icelandic_Eth            : @key[constant] Character := '@latin1(240)';  @i{--Character'Val(240)}
+    LC_N_Tilde                  : @key[constant] Character := '@latin1(241)';  @i{--Character'Val(241)}
+    LC_O_Grave                  : @key[constant] Character := '@latin1(242)';  @i{--Character'Val(242)}
+    LC_O_Acute                  : @key[constant] Character := '@latin1(243)';  @i{--Character'Val(243)}
+    LC_O_Circumflex             : @key[constant] Character := '@latin1(244)';  @i{--Character'Val(244)}
+    LC_O_Tilde                  : @key[constant] Character := '@latin1(245)';  @i{--Character'Val(245)}
+    LC_O_Diaeresis              : @key[constant] Character := '@latin1(246)';  @i{--Character'Val(246)}
+    Division_Sign               : @key[constant] Character := '@latin1(247)';  @i{--Character'Val(247)}
+    LC_O_Oblique_Stroke         : @key[constant] Character := '@latin1(248)';  @i{--Character'Val(248)}
+    LC_U_Grave                  : @key[constant] Character := '@latin1(249)';  @i{--Character'Val(249)}
+    LC_U_Acute                  : @key[constant] Character := '@latin1(250)';  @i{--Character'Val(250)}
+    LC_U_Circumflex             : @key[constant] Character := '@latin1(251)';  @i{--Character'Val(251)}
+    LC_U_Diaeresis              : @key[constant] Character := '@latin1(252)';  @i{--Character'Val(252)}
+    LC_Y_Acute                  : @key[constant] Character := '@latin1(253)';  @i{--Character'Val(253)}
+    LC_Icelandic_Thorn          : @key[constant] Character := '@latin1(254)';  @i{--Character'Val(254)}
+    LC_Y_Diaeresis              : @key[constant] Character := '@latin1(255)';  @i{--Character'Val(255)}
 @key[end] Ada.Characters.Latin_1;
 @end{Example}
 

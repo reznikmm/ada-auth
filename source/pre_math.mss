@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/04/30 02:44:41 $}
+@Comment{$Date: 2000/05/16 04:48:25 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -697,7 +697,6 @@ Different sequences of random numbers can be obtained from a given generator in
 different program executions by explicitly initializing the generator to a
 time-dependent state.
 
-@begin{Multiple}
 A given implementation of the Random function in Numerics.Float_Random may or
 may not be capable of delivering the values 0.0 or 1.0.  Portable applications
 should assume that these values, or values sufficiently close to them to behave
@@ -713,7 +712,7 @@ to transform the result of the floating point Random function.  For
 Integer(Float(M) * Random(G)) mod M
 @end{Example}
 
-transforms the result of Random(G) to an integer uniformly distributed over the
+@NoPrefix@;transforms the result of Random(G) to an integer uniformly distributed over the
 range 0 .. @Math{@r[M]-1}; it is valid even if Random delivers 0.0 or 1.0.
 Each value of the result range is possible, provided that M is not too large.
 Exponentially distributed (floating point) random numbers with mean and
@@ -722,13 +721,12 @@ standard deviation 1.0 can be obtained by the transformation
 -Log(Random(G) + Float'Model_Small))
 @end{Example}
 
-where Log comes from Numerics.Elementary_Functions
+@NoPrefix@;where Log comes from Numerics.Elementary_Functions
 (see @RefSecNum{Elementary Functions});
 in this expression, the addition of Float'Model_Small avoids the
 exception that would be raised were Log to be given the value zero, without
 affecting the result (in most implementations) when Random returns a nonzero
 value.
-@end{Multiple}
 @end{Notes}
 
 @begin{Examples}
