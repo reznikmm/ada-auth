@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2005/01/21 06:07:31 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2005/01/29 07:15:08 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/01/21 06:07:31 $}
+@Comment{$Date: 2005/01/29 07:15:08 $}
 
 @LabeledClause{String Handling}
 
@@ -293,7 +293,7 @@ The lower bound of D is 1.
 @begin{Example}@Keepnext
 @key[function] To_Range  (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0048]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0048],ARef=[AI95-00151-01]}
 @Trailing@;To_Range returns the Character_Sequence value R,
 @Chg{New=[],Old=[with lower bound 1 and upper bound Map'Length,]}
 such that if D = To_Domain(Map)@Chg{New=[, then R has the same bounds as D,
@@ -326,6 +326,14 @@ and 'B' to 'Z', 'C' to 'A', 'D' to 'B', and each other Character to
 itself.
 @end{Examples}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0048],ARef=[AI95-00151-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the definition of
+  the range of the result of To_Range, since the Ada 95 definition makes no
+  sense.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Fixed-Length String Handling}
 @begin{Intro}
 The language-defined package Strings.Fixed provides string-handling subprograms
@@ -340,7 +348,9 @@ differs from the parameter's length.
 For each function that returns a String, the lower bound of the returned
 value is 1.
 @begin{Discussion}
-Most operations that yields a String are provided both as a
+@Chgref{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+Most operations that @Chg{Version=[2],New=[yield],Old=[yields]} a String
+are provided both as a
 function and as a procedure. The functional form is possibly a more aesthetic
 style but may introduce overhead due to extra copying or dynamic memory
 usage in some implementations. Thus a procedural form, with an @key[in]
@@ -700,7 +710,7 @@ are in Set.
                       First  : @key[out] Positive;
                       Last   : @key[out] Natural);
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049],ARef=[AI95-00128-01]}
 @Trailing@;Find_Token returns in First and Last the indices of the beginning
 and end of the first slice of Source all of whose elements
 satisfy the Test condition, and such that the elements
@@ -739,7 +749,7 @@ element of Source, for I in 1..Source'Length.
                         By       : @key[in] String)
    @key[return] String;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049],ARef=[AI95-00128-01]}
 @Chg{New=[@Leading],Old=[@Trailing]}If Low > Source'Last+1, or
 High < Source'First@en@;1, then Index_Error is propagated.
 Otherwise@Chg{New=[:],Old=[, if High >= Low then the returned string
@@ -748,14 +758,14 @@ and if High < Low then the returned string is
 Insert(Source, Before=>Low, New_Item=>By).]}
 
 @begin{Itemize}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0049]}
-@Chg{New=[If High >= Low, then the returned string comprises
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0049],ARef=[AI95-00128-01]}
+@ChgAdded{Version=[1],Text=[If High >= Low, then the returned string comprises
 Source(Source'First..Low-1) & By & Source(High+1..Source'Last), but with
-lower bound 1.@Trailing],Old=[]}
+lower bound 1.@Trailing]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0049]}
-@Chg{New=[If High < Low, then the returned string is
-Insert(Source, Before=>Low, New_Item=>By).],Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0049],ARef=[AI95-00128-01]}
+@ChgAdded{Version=[1],Text=[If High < Low, then the returned string is
+Insert(Source, Before=>Low, New_Item=>By).]}
 @end{Itemize}
 
 @begin{Example}@Keepnext
@@ -819,7 +829,7 @@ New_Item), Source, Drop).
                  Through : @key[in] Natural)
    @key[return] String;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049],ARef=[AI95-00128-01]}
 @Trailing@;If From <= Through, the returned string is Replace_Slice(Source, From,
 Through, ""), otherwise it is Source@Chg{New=[ with lower bound 1],Old=[]}.
 
@@ -914,7 +924,7 @@ Justify=>Justify, Pad=>Pad).
 @key[function] "*" (Left  : @key[in] Natural;
               Right : @key[in] String) @key[return] String;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049],ARef=[AI95-00128-01]}
 These functions replicate a character or string a specified number
 of times. The first function returns a string whose length is Left and each
 of whose elements is Right. The second function returns a string whose
@@ -938,6 +948,16 @@ If a null Character_Mapping_Function is passed to any of the
 string handling subprograms, Constraint_Error is propagated.
 @end{Notes}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0049],ARef=[AI95-00128-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Find_Token
+  may raise Constraint_Error if Source'First is not in Positive (which is
+  only possible for a null string).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0049],ARef=[AI95-00128-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Replace_Slice,
+  Delete, and "*" always return a string with lower bound 1.]}
+@end{DiffWord95}
 
 
 @LabeledSubClause{Bounded-Length String Handling}
@@ -1381,7 +1401,7 @@ propagates Index_Error if Index > Length(Source).
                 High   : @key[in] Natural)
    @key[return] String;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049],ARef=[AI95-00128-01]}
 @Trailing@;Returns the slice at positions Low through High in the string
 represented by Source; propagates Index_Error if
 Low > Length(Source)+1@Chg{New=[ or High > Length(Source)],Old=[]}.
@@ -1408,7 +1428,7 @@ parameter after the translation is given by the Translate function for
 fixed-length strings applied to the string represented by the
 original value of the parameter.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049],ARef=[AI95-00128-01]}
 Each of the transformation subprograms (Replace_Slice, Insert,
 Overwrite, Delete), selector subprograms (Trim, Head, Tail),
 and constructor functions ("*") has an effect based on its
@@ -1432,6 +1452,9 @@ and Bounded_String, are automatically defined based on the corrsponding
 @begin{ImplAdvice}
 Bounded string objects should not be implemented by implicit
 pointers and dynamic allocation.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Bounded string objects should not be implemented by implicit
+pointers and dynamic allocation.]}]}
 @begin{ImplNote}
 @Leading@;The following is a possible implementation of the private part
 of the package:
@@ -1452,6 +1475,19 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 @end{example}
 @end{ImplNote}
 @end{ImplAdvice}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0049],ARef=[AI95-00128-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the conditions for
+  which Slice raises Index_Error.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0049],ARef=[AI95-00128-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the meaning of
+  transformation, selector, and constructor subprograms by describing the
+  effects of procedures and functions separately.]}
+@end{DiffWord95}
+
+
 
 @LabeledSubClause{Unbounded-Length String Handling}
 @begin{Intro}

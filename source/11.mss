@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2004/12/12 05:36:20 $}
+@Comment{$Date: 2005/01/29 07:15:03 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -389,7 +389,7 @@ any force.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The syntax of a
 @nt{raise_statement} is extended to include a string message. This is more
-convinient than calling Ada.Exceptions.Exception_Message
+convenient than calling Ada.Exceptions.Exception_Message
 (@SynI{exception_}@nt{name}'Identity, @SynI{string_}@nt{expression}); and
 should encourage the use of message strings when raising exceptions.]}
 @end{Extend95}
@@ -559,13 +559,13 @@ are not handled by the handlers of the
 @key[package] Ada.Exceptions @key[is]@Chg{Version=[2],New=[
     @key[pragma] Preelaborate(Exceptions);],Old=[]}
     @key[type] @AdaTypeDefn{Exception_Id} @key[is] @key[private];@Chg{Version=[2],New=[
-    @key[pragma] Preelaboratable_Initialization(Exception_Id);],Old=[]}
+    @key[pragma] Preelaborable_Initialization(Exception_Id);],Old=[]}
     @AdaDefn{Null_Id} : @key[constant] Exception_Id;
     @key[function] @AdaSubDefn{Exception_Name}(Id : Exception_Id) @key[return] String;
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
     @key[type] @AdaTypeDefn{Exception_Occurrence} @key[is] @key[limited] @key[private];@Chg{Version=[2],New=[
-    @key[pragma] Preelaboratable_Initialization(Exception_Occurrence);],Old=[]}
+    @key[pragma] Preelaborable_Initialization(Exception_Occurrence);],Old=[]}
     @key[type] @AdaTypeDefn{Exception_Occurrence_Access} @key[is] @key[access] @key[all] Exception_Occurrence;
     @AdaDefn{Null_Occurrence} : @key[constant] Exception_Occurrence;
 
@@ -985,7 +985,7 @@ before calling Raise_Exception.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The package Ada.Exceptions is preelaborated, and types Exception_Id and
-Exception_Occurrence have preelaboratable initialization, allowing this package
+Exception_Occurrence have preelaborable initialization, allowing this package
 to be used in preelaborated units.]}
 @end{Extend95}
 
@@ -1651,7 +1651,7 @@ in the Amendment.]}
 Annex J.
 This feature's effect is inherently non-portable, depending on the
 implementation's model of computation. Compiler surveys demonstrated this,
-showing that implementations vary widely in the interprestation of these
+showing that implementations vary widely in the interpretation of these
 parameters, even on the same target. While this is relatively harmless for
 Suppress (which is never required to do anything), it would be a significant
 problem for Unsuppress (we want the checks to be made for all implementations).

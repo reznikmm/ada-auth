@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/01/28 06:27:27 $}
+@Comment{$Date: 2005/01/29 07:14:59 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -997,7 +997,7 @@ of a character type. See @RefSecNum(Character Types).
 @begin{Examples}
 @Leading@keepnext@i{Examples of character literals:}
 @begin{Display}
-'A'@ @ @ @ @ '*'@ @ @ @ @ @rquotes@;'@ @ @ @ @ '@ '
+'A'@ @ @ @ @ '*'@ @ @ @ @ '''@ @ @ @ @ '@ '
 @end{Display}
 @end{Examples}
 

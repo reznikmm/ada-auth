@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2000/08/31 04:56:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2005/01/29 07:15:07 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:10 $}
+@Comment{$Date: 2005/01/29 07:15:07 $}
 
 @LabeledClause{The Package Standard}
 
@@ -38,7 +38,7 @@ the visible part of package Standard.}
 
 @Keepnext   --@RI{ The predefined relational operators for this type are as follows:}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028],ARef=[AI95-00145-01]}
    -- @key[function] "="   (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
    -- @key[function] "/="  (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
    -- @key[function] "<"   (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
@@ -50,13 +50,13 @@ the visible part of package Standard.}
 @Keepnext   --@RI{ The predefined logical operators and the predefined logical}
    --@RI{ negation operator are as follows:}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028],ARef=[AI95-00145-01]}
    -- @key[function] "@key[and]" (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
    -- @key[function] "@key[or]"  (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
    -- @key[function] "@key[xor]" (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
 
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028],ARef=[AI95-00145-01]}
    -- @key[function] "@key[not]" (Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
 
 
@@ -336,6 +336,12 @@ then the names should end with @lquotes@;Integer@rquotes@; as in @lquotes@;Long_
 If an implementation provides additional named predefined
 floating point types,
 then the names should end with @lquotes@;Float@rquotes@; as in @lquotes@;Long_Float@rquotes@;.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If an implementation provides additional named predefined integer types,
+then the names should end with @lquotes@;Integer@rquotes@;.
+If an implementation provides additional named predefined
+floating point types,
+then the names should end with @lquotes@;Float@rquotes@;.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -410,3 +416,9 @@ forward reference.
 There's no real need to move Positive, too @em it just came along for
 the ride.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter
+  type for the Boolean operators declared in Standard..]}
+@end{DiffWord95}

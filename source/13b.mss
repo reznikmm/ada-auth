@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/01/28 06:27:29 $}
+@Comment{$Date: 2005/01/29 07:15:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @LabeledClause{The Package System}
 
@@ -2252,10 +2252,11 @@ System.Storage_Unit, then the components of Stream_@!Element_@!Array need
 not be aliased.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00114-01]}
 @ChgAdded{Version=[1],Text=[If the Stream_Element'Size is less than the size of
 System.Storage_Unit, then components of Stream_@!Element_@!Array need not be
 aliased. This is necessary as the components of type Stream_Element size might
-not be addressable on the target architechture.]}
+not be addressable on the target @Chg{Version=[2],New=[architecture],Old=[architechture]}.]}
 @end{Ramification}
 @end{ImplPerm}
 

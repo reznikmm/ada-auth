@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2005/01/22 02:25:16 $}
+@Comment{$Date: 2005/01/29 07:15:05 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.22 $}
+@comment{$Revision: 1.23 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -169,7 +169,7 @@ The order and lettering of the annexes has been changed.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0047],ARef=[AI95-00081-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Units missing from the list of
-predefined units were added.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0047],ARef=[AI95-00081-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Units missing from the list of
+  predefined units were added.]}
 @end{DiffWord95}

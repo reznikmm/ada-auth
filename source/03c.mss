@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/01/28 06:27:27 $}
+@Comment{$Date: 2005/01/29 07:15:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -242,7 +242,7 @@ of the generic body result in distinct tags.
     Old=[The language does not specify whether]}
     repeated elaborations of the same @nt<full_type_declaration>
     correspond to distinct tags. @Chg{Version=[2],New=[This was done so that
-    that Ada 2005 implementations of tagged types could maintain representation
+    Ada 2005 implementations of tagged types could maintain representation
     compatibility with Ada 95 implementations. Only type extensions that were
     not allowed in Ada 95 require additional information with the tag.],
     Old=[In most cases, we
@@ -1587,7 +1587,7 @@ operation, even though it is not a primitive operation. See
 @IndexSeeAlso{Term=[ADT (abstract data type)],See=(abstract type)}
 @IndexSee{Term=[concrete type],See=(nonabstract type)}
 An @i(abstract type) is a tagged type intended
-for use as @Chg{Version=[2],New=[as an ancestor of other types],Old=[a parent
+for use as @Chg{Version=[2],New=[an ancestor of other types],Old=[a parent
 type for type extensions]}, but which is not allowed to have objects of its own.
 @Defn{abstract subprogram}
 @IndexSee{Term=[concrete subprogram],See=(nonabstract subprogram)}
@@ -1651,7 +1651,7 @@ Static Semantics paragraph, but I won't move them, as it's not worth the time.}
 @Defn2{Term=[subprogram], Sec=(abstract)}
 A subprogram declared by an @nt{abstract_subprogram_declaration}
 (see @RefSecNum{Subprogram Declarations}) @Chg{Version=[2],New=[or declared
-declared by a @nt{formal_abstract_subprogram_declaration} (see
+by a @nt{formal_abstract_subprogram_declaration} (see
 @RefSecNum{Formal Subprograms}) ],Old=[]}is an @i{abstract subprogram}.
 If it is a primitive subprogram of a tagged type,
 then the tagged type shall be abstract.
@@ -2227,18 +2227,18 @@ primitive subprogram shall not be declared in the private part.],Old=[]}
   @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[In addition to the places where @LegalityTitle Rules
+@ChgAdded{Version=[2],Text=[In addition to the places where @LegalityTitle
 normally apply (see @RefSecNum{Generic Instantiation}), these rules apply also
 in the private part of an instance of a generic
-unit.@PDefn{generic contract issue}],Old=[]}
+unit.@PDefn{generic contract issue}]}
 
 @end{Legality}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}Interface types are new.
-They provide multiple inheritance of interfaces, similar to the facility
-provided in Java and other recent language designs.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}Interface types
+  are new. They provide multiple inheritance of interfaces, similar to the
+  facility provided in Java and other recent language designs.]}
 @end{Extend95}
 
 
@@ -2430,13 +2430,14 @@ either by the designated subtype, or by its initial value.]]}
   We instead make general access constrained subtypes illegal if the type
   allows unconstrained instances, see Discriminant Constraints.}
 
+  @ChgRef{Version=[2],Kind=[Revised]}@ChgNote{Eilers reported double word}
   We considered making more kinds of objects aliased by default.
   In particular, any object of a by-reference type will pretty
   much have to be allocated at an addressable location,
   so it can be passed by reference without using bit-field
   pointers. Therefore, one might wish to allow the Access and
-  and Unchecked_Access attributes for such objects.
-  However, private parts are transparent to the definition of
+  @Chg{Version=[2],New=[],Old=[and ]}Unchecked_Access attributes for such
+  objects. However, private parts are transparent to the definition of
   @lquotes@;by-reference type@rquotes@;, so if we made all objects of a by-reference
   type aliased, we would be violating the privacy of private parts.
   Instead, we would have to define a concept of @lquotes@;visibly by-reference@rquotes@;

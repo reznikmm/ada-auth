@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/31 04:56:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2005/01/29 07:15:07 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:10 $}
+@Comment{$Date: 2005/01/29 07:15:07 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -242,10 +242,11 @@ Item.
 @end{StaticSem}
 
 @begin{ImplAdvice}
-If an implementation provides a localized definition of Character
-or Wide_Character,
-then the effects of the subprograms in Characters.Handling should
-reflect the  localizations. See also @RefSecNum(Character Types).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgDeleted{Version=[2],Text=[If an implementation provides a localized
+definition of Character or Wide_Character, then the effects of the subprograms
+in Characters.Handling should reflect the localizations. See also
+@RefSecNum(Character Types).]}
 @end{ImplAdvice}
 
 @begin{Notes}

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.38 $ $Date: 2005/01/13 05:06:16 $}
+@comment{$Revision: 1.39 $ $Date: 2005/01/29 07:15:07 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -16,30 +16,31 @@ again.}
 programming language Ada is ISO/IEC 8652:1995(E).]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[The Ada Working Group ISO/IEC JTC1/SC 22/WG 9 is tasked by ISO with
+@ChgAdded{Version=[1],Text=[The Ada Working Group ISO/IEC JTC1/SC 22/WG 9 is tasked by ISO with
 the work item to interpret and maintain the International Standard and to
 produce Technical Corrigenda, as appropriate. The technical work on the
 International Standard is performed by the Ada Rapporteur Group (ARG) of WG 9.
 In September 2000, WG 9 approved and forwarded Technical Corrigendum 1 to
 SC 22 for ISO approval, which was granted in February 2001. Technical
-Corrigendum 1 was published in June 2001.],Old=[]}
+Corrigendum 1 was published in June 2001.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[In October 2002, WG 9 approved a schedule and
-guidelines for the preparation of an Amendment to the Internation Standard.
+@ChgAdded{Version=[2],Text=[In October 2002, WG 9 approved a schedule and
+guidelines for the preparation of an Amendment to the International Standard.
 WG 9 approved the scope of this Amendment in June 2004, with the completion
-of the Amendment expected in summer 2005.],Old=[]}
+of the Amendment expected in summer 2005.]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[The Technical Corrigendum lists the individual changes that need to be
-made to the text of the International Standard to correct errors, omissions or
-inconsistencies. The corrections specified in Technical Corrigendum 1 are
-part of the International Standard ISO/IEC 8652:1995(E).],Old=[]}
+@ChgAdded{Version=[1],Text=[The Technical Corrigendum lists the individual
+changes that need to be made to the text of the International Standard to
+correct errors, omissions or inconsistencies. The corrections specified in
+Technical Corrigendum 1 are
+part of the International Standard ISO/IEC 8652:1995(E).]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[Similarly, Amendment 1 lists the individual changes that
+@ChgAdded{Version=[2],Text=[Similarly, Amendment 1 lists the individual changes that
 need to be made to the text of the International Standard to add new features
-as well as correct errors.],Old=[]}
+as well as correct errors.]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[RevisedAdded]}
@@ -783,8 +784,9 @@ the defect correction procedure.
 
 Comments should use the following format:
 @begin(display)
+@ChgRef{Version=[2],Kind=[Revised]}
 @TabSet(L6)@\@b(!topic) @i[Title summarizing comment]
-@\@b(!reference) RM95-@i{ss.ss(pp)}
+@\@b(!reference) @Chg{Version=[2],New=[RM05],Old=[RM95]}-@i{ss.ss(pp)}
 @\@b(!from) @i{Author Name yy-mm-dd}
 @\@b(!keywords) @i{keywords related to topic}
 @\@b(!discussion)

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2004/12/12 05:36:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2005/01/29 07:15:06 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2004/12/12 05:36:22 $}
+@Comment{$Date: 2005/01/29 07:15:06 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2337,7 +2337,7 @@ execution-time clock package.]}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
-langauge-defined library exists:]}
+language-defined library exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Task_Identification;
@@ -2379,7 +2379,7 @@ delay statement.]}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
-langauge-defined library exists:]}
+language-defined library exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Real_Time.Timing_Events @key{is}@ChildUnit{Parent=[Ada.Real_Time],Child=[Timing_Events]}

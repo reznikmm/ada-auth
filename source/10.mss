@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/01/27 06:12:59 $}
+@Comment{$Date: 2005/01/29 07:15:03 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -510,7 +510,7 @@ instantiated or renamed only within the declarative region
 of the parent generic.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00331-01]}
-For each @Chg{Version=[2],New=[child @i<C> of],
+For each @Chg{Version=[2],New=[child @i<C>],
 Old=[declaration or renaming of a generic unit as a child]} of some parent
 generic package@Chg{Version=[2],New=[ @i<P>],Old=[]}, there is
 a corresponding declaration @Chg{Version=[2],New=[@i<C>],Old=[]} nested
@@ -1511,8 +1511,8 @@ declaration's elaboration.
 @end{Itemize}
 @begin{Ramification}
 A @nt<library_item> that is mentioned in a @nt{with_clause} of a
-subunit can be hidden (from direct visiblity) by a
-declaration (with the same
+subunit can be hidden (from direct @Chg{Version=[2],New=[visibility],
+Old=[visiblity]}) by a declaration (with the same
 @nt{identifier}) given in the subunit.
 Moreover, such a @nt<library_item> can even be hidden by a declaration
 given within the parent body since a library unit is declared in its
@@ -1780,10 +1780,12 @@ calls without requiring the user to resubmit them to the compiler.
 @end{Ramification}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0108],ARef=[AI95-00077-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00114-01]}
 @ChgAdded{Version=[1],Text=[In the standard mode, implementations may only remove
 units from the environment for one of the reasons listed here, or in response
 to an explicit user command to modify the environment. It is not intended that
-the act of compiling a unit is one of the @lquotes@;mechansisms@rquotes for
+the act of compiling a unit is one of the
+@lquotes@;@Chg{Version=[2],New=[mechanisms],Old=[mechansisms]}@rquotes for
 removing units other than those specified by this International Standard.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00214-01]}
@@ -1843,6 +1845,17 @@ containing the instantiation.
   recompiled.
 @end{ImplNote}
 @end{Notes}
+
+@begin{Extend83}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00077-01],ARef=[AI95-00114-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 83}
+  Ada 83 allowed implementations to require that the body of a generic unit
+  be available when the instantiation is compiled; that permission is dropped
+  in Ada 95. This isn't really an extension (it doesn't allow Ada users to
+  write anything that they couldn't in Ada 83), but there isn't a more
+  appropriate category, and it does allow users more flexibility when
+  developing programs.]}
+@end{Extend83}
 
 
 @begin{DiffWord95}
@@ -2969,7 +2982,7 @@ nested units.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
-@ChgAdded{Version=[2],Text=[@defn{preelaboratable initialization}The following rules
+@ChgAdded{Version=[2],Text=[@defn{preelaborable initialization}The following rules
 specify which entities have @i{preelaborable initialization}:], Old=[]}
 
 @begin{Itemize}
@@ -2992,7 +3005,7 @@ initialization.]}
 parent type has preelaborable initialization and (in the case of a derived
 record or protected type) if the non-inherited components all have
 preelaborable initialization. Moreover, a user-defined controlled type with an
-overridding Initialize procedure does not have preelaborable
+overriding Initialize procedure does not have preelaborable
 initialization.]}
 
 @ChgRef{Version=[2],Kind=[Added]}

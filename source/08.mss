@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/12/11 06:27:56 $}
+@Comment{$Date: 2005/01/29 07:15:02 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1799,7 +1799,7 @@ type.],Old=[]}
 The renamed entity shall not be a subcomponent that depends on
 discriminants of a variable whose nominal subtype is unconstrained,
 unless this subtype is indefinite, or the variable is @Chg{Version=[2],
-New=[is constrained by its initial value],Old=[aliased]}.
+New=[constrained by its initial value],Old=[aliased]}.
 A @nt{slice} of an array shall not be renamed if
 this restriction disallows renaming of the array.
 @Chg{New=[In addition to the places where Legality Rules normally apply, these
@@ -2162,7 +2162,7 @@ waiting.
 @Chg{New=[All properties of the renamed entity are inherited by the new view
 unless otherwise stated by this International Standard. In particular, if the
 renamed entity is abstract@Chg{Version=[2],New=[],Old=[ or requires
-overridding (see @RefSecNum{Abstract Types and Subprograms})]}, the new view
+overriding (see @RefSecNum{Abstract Types and Subprograms})]}, the new view
 also is abstract @Chg{Version=[2],New=[],Old=[or requires overridding ]}. (The renaming
 will often be illegal in @Chg{Version=[2],New=[this case],Old=[these cases]},
 as a renaming cannot be overridden.)],Old=[]}

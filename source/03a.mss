@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/01/13 05:06:13 $}
+@Comment{$Date: 2005/01/29 07:14:59 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -3486,8 +3486,8 @@ S'Pred for a modular integer subtype wraps around
      otherwise the sequence of characters is implementation defined (but
      no shorter than that of S'@Chg{Version=[2],New=[Wide_Wide_Image],
      Old=[Wide_Image]} for the same value of @i(Arg)).
-     @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[The
-     The sequence of characters of the value returned by
+     @ChgImplDef{Version=[2],Kind=[Revised],Text=[The
+     sequence of characters of the value returned by
      S'Image when some of the graphic characters of
      S'@Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]} are not
      defined in Character.]}

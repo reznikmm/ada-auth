@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/01/20 06:32:02 $}
+@Comment{$Date: 2005/01/29 07:14:59 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -70,7 +70,7 @@ They describe the reason for each non-obvious rule,
 and point out interesting ramifications of the rules
 and interactions among the rules
 (interesting to language lawyers, that is).
-Differences between Ada 83@Chg{Version=[2],New=[, Ada95, and Ada2005],Old=[ and Ada 95]}
+Differences between Ada 83@Chg{Version=[2],New=[, Ada 95, and Ada 2005],Old=[ and Ada 95]}
 are listed.
 (The text you are reading now is an annotation.)
 
@@ -390,16 +390,20 @@ by Specialized Needs Annexes;
 our goal is to increase uniformity among implementations by defining
 standard ways of providing the functionality.
 
-We recommend that the validation procedures allow implementations to
-validate the core language, plus any set of the Specialized Needs Annexes.
-We recommend that
-implementations @i{not} be allowed to validate a portion of one of the
-Specialized Needs Annexes,
-although implementations can, of course, provide unvalidated support for such
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}@ChgNote{Make consistent with 18009}
+We recommend that the @Chg{Version=[2],New=[certification],Old=[validation]}
+procedures allow implementations to
+@Chg{Version=[2],New=[certify],Old=[validate]} the core language, plus any
+set of the Specialized Needs Annexes. We recommend that
+implementations @i{not} be allowed to @Chg{Version=[2],New=[certify],Old=[validate]}
+a portion of one of the Specialized Needs Annexes,
+although implementations can, of course, provide @Chg{Version=[2],
+New=[uncertified],Old=[unvalidated]} support for such
 portions. We have designed the Specialized Needs Annexes assuming that
 this recommendation is followed. Thus, our decisions about what to
 include and what not to include in those annexes are
-based on the assumption that each annex is validated in an
+based on the assumption that each
+annex is @Chg{Version=[2],New=[certified],Old=[validated]} in an
 @lquotes@;all-or-nothing@rquotes@; manner.
 
 An implementation may, of course,
@@ -642,8 +646,9 @@ The word @lquotes@;should@rquotes@; is used to indicate that the advice is
 a recommendation, not a requirement.
 It is implementation defined
 whether or not a given recommendation is obeyed.
-@ImplDef{Whether or not each recommendation given in @ImplAdviceTitle
-is followed - see @RefSecNum{Implementation Advice}.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[Whether or not each recommendation
+given in @ImplAdviceTitle is followed@Chg{Version=[2],
+New=[ @em see @RefSec{Implementation Advice} for a listing],Old=[]}.]}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Revised]}
 The advice generally shows the intended implementation, but
@@ -867,17 +872,17 @@ the Specialized Needs Annexes.
      errors whose detection is required by this
      International Standard;
      @begin{Discussion}
-       Note that we no longer use the term @lquotes@;rejection@rquotes@; of programs
-       or program units.
+       Note that we no longer use the term @lquotes@;rejection@rquotes@; of
+       programs or program units.
        We require that programs or program units with errors or that
-       exceed some capacity limit be @lquotes@;identified.@rquotes@;  The way in which
-       errors or capacity problems are reported is not specified.
+       exceed some capacity limit be @lquotes@;identified@rquotes@;.
+       The way in which errors or capacity problems are reported is not
+       specified.
 
        An implementation is allowed to use standard error-recovery
        techniques.
        We do not disallow such techniques from being used across
        @nt{compilation_unit} or @nt{compilation} boundaries.
-
 
        See also the @ImplReqTitle of @RefSecNum{Program Execution},
        which disallow the execution of illegal partitions.
@@ -1165,7 +1170,10 @@ Note that dependence of a program on implementation-defined or
 unspecified functionality is not defined to be an error;
 it might cause the program to be less portable, however.
 @end(Discussion)
-
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
+The behavior of implementations in implementation-defined situations
+shall be documented @em see @RefSec{Implementation-Defined Characteristics}
+for a listing.]}]}
 @end{DocReq}
 
 @begin{ImplAdvice}
@@ -1173,6 +1181,9 @@ it might cause the program to be less portable, however.
 If an implementation detects the use of an unsupported
 Specialized Needs Annex feature at run time,
 it should raise Program_Error if feasible.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Program_Error should be raised when an unsupported
+Specialized Needs Annex feature is used at run time.]}]}
 @begin{Reason}
 The reason we don't @i{require} Program_Error is that there are
 situations where other exceptions might make sense.
@@ -1189,6 +1200,10 @@ we cannot require Program_Error to be raised instead.
 If an implementation wishes to provide implementation-defined
 extensions to the functionality of a language-defined library unit,
 it should normally do so by adding children to the library unit.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Implementation-defined extensions to the functionality of a
+language-defined library unit should be provided by adding children
+to the library unit.]}]}
 @begin(ImplNote)
 If an implementation has support code
 (@lquotes@;run-time system code@rquotes@;)
@@ -1567,6 +1582,9 @@ mode, all legal @nt<compilation_unit>s shall be accepted.]
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If an implementation detects a bounded error or erroneous execution,
 it should raise Program_Error.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If a bounded error or erroneous execution is detected, Program_Error
+should be raised.]}]}
 @end{ImplAdvice}
 
 @begin{DiffWord83}

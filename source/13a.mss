@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/01/28 06:27:28 $}
+@Comment{$Date: 2005/01/29 07:15:04 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -781,7 +781,7 @@ Atomic components have similar restrictions
 (see @RefSec{Shared Variable Control}).
 @end{Ramification}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The recommended level of support for all representation itemsshould be
+Text=[The recommended level of support for all representation items should be
 followed.]}]}
 @end{Itemize}
 @end{ImplAdvice}
@@ -818,6 +818,7 @@ both in Section 13; these have been reworded.
 representation aspects.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00114-01]}
 We have defined a new term @lquotes@;representation item,@rquotes@;
 which includes @Chg{New=[all representation clauses],
 Old=[@nt{representation_clause}s]} and representation pragmas, as well as
@@ -825,7 +826,7 @@ Old=[@nt{representation_clause}s]} and representation pragmas, as well as
 This is convenient because the rules are almost identical for all @Chg{New=[of them],
 Old=[three]}. @Chg{New=[We have also defined the new terms
 @lquotes@;operational item@rquotes@; and @lquotes@;operational aspects@rquotes@;
-in order to conveniently handle new types of specifable entities.],Old=[]}
+in order to conveniently handle new types of @Chg{Version=[2],New=[specifiable],Old=[specifable]} entities.],Old=[]}
 
 All of the forcing occurrence stuff has been moved into its own
 subclause (see @RefSecNum{Freezing Rules}),
@@ -893,6 +894,8 @@ If a type is packed, then the implementation should try to minimize
 storage allocated to objects of the type,
 possibly at the expense of speed of accessing components,
 subject to reasonable complexity in addressing calculations.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Storage allocated to objects of a packed type should be minimized.]}]}
 @begin{Ramification}
 A @nt{pragma} Pack is for gaining space efficiency,
 possibly at the expense of time.
@@ -1204,6 +1207,9 @@ the address is valid; otherwise, program execution is erroneous.
 @begin{ImplAdvice}
 For an array X, X'Address should point at the first component of the
 array, and not at the array bounds.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[For an array X, X'Address should point at the first component of the
+array rather than the array bounds.]}]}
 @begin{Ramification}
 On the other hand, we have no advice to offer about
 discriminants and tag fields;
@@ -1690,6 +1696,10 @@ Unaliased components, unless the Size of the
 component is determined by a @nt{component_clause} or Component_Size
 clause.
 @end{Itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If the Size of a subtype is specified, and allows for efficient
+independent addressability, then the Size of most objects of the subtype should
+equal the Size of the subtype.]}]}
 @begin{Ramification}
 Thus, on a typical 32-bit machine,
 @lquotes@;@key[for] S'Size @key[use] 32;@rquotes@;
@@ -1737,6 +1747,9 @@ one would want to pack in that manner.
 
 A Size clause on a composite subtype should not affect
 the internal layout of components.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[A Size clause on a composite subtype should not affect
+the internal layout of components.]}]}
 @begin{Reason}
 That's what Pack @nt{pragma}s, @nt{record_representation_clause}s,
 and Component_Size clauses are for.
@@ -1924,6 +1937,15 @@ A @nt{component_clause} or Component_Size clause
 can override a specified Size.
 A @nt{pragma} Pack cannot.
 @end{Notes}
+
+@begin{Inconsistent83}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00114-01]}
+  @ChgAdded{Version=[2],Text=[We specify the meaning of Size in much more
+  detail than Ada 83. This is not technically an inconsistency, but it is in
+  practice, as most Ada 83 compilers use a different definition for Size than
+  is required here. This should have been documented more explicitly during
+  the Ada 9X process.]}
+@end{Inconsistent83}
 
 @begin{DiffWord83}
 The requirement for a nonnegative value in a Size clause
@@ -2817,8 +2839,9 @@ storage elements occupied by C, of the last bit occupied by C.
 This offset is measured in bits. The value of this attribute
 is of the type @i{universal_integer}.>}
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The ordering of bits in a storage element is
-is defined in @RefSec{Bit Ordering}.
+@Chg{Version=[2],New=[],Old=[is ]}defined in @RefSec{Bit Ordering}.
 
 R.C'Size = R.C'Last_Bit @en@; R.C'First_Bit + 1.
 (Unless the implementation chooses an indirection
@@ -2853,6 +2876,14 @@ same subtype can share discriminants.
 Such representations cannot happen if there is a @nt{component_clause}
 for that component.
 @end{Reason}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If a component is represented using a pointer to the actual data of
+the component which is contiguous with
+the rest of the object, then the storage place attributes should reflect
+the place of the actual data.
+If a component is allocated discontiguously from the rest of the object,
+then a warning should be generated upon reference to one
+of its storage place attributes.]}]}
 @end{ImplAdvice}
 
 @LabeledSubClause{Bit Ordering}
