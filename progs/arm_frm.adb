@@ -176,6 +176,7 @@ package body ARM_Format is
     --  2/ 1/05 - RLB - Added Turkish Is.
     --  2/ 2/05 - RLB - Corrected so normal AARM numbers don't reset the
     --			RM insertion number.
+    --  3/15/05 - RLB - Corrected spelling.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -6902,7 +6903,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- by the text. As usual, any of the
 		    -- allowed bracketing characters can be used.
 		    Gen_Chg_xxxx (Param_Cmd => Change_Docreq_Text_Param,
-				  AARM_Prefix => "Documentataion requirement: ");
+				  AARM_Prefix => "Documentation requirement: ");
 
 		when Change_Attribute =>
 		     -- @ChgAttribute{Version=[<version>], Kind=(<kind>),
@@ -9132,7 +9133,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 	    elsif Ch = Ascii.LF then
 		-- Stand alone '@'.
 		-- I now believe this is an error, perhaps a hard space where
-		-- the trailing blank was dropped. It appears in
+		-- the trailing blank was dropped. It originally appeared in
 		-- Infosys.MSS.
 		Ada.Text_IO.Put_Line("** Stand-alone '@' on line " & ARM_Input.Line_String (Input_Object));
 		return;

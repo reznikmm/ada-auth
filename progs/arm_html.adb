@@ -113,6 +113,9 @@ package body ARM_HTML is
     -- 12/15/04 - RLB - Added wider columns.
     --  1/24/05 - RLB - Added Inner_Indented.
     --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
+    --  3/15/05 - RLB - Turned on Unicode characters at Pascal's insistence.
+    --  3/17/05 - RLB - Removed ceiling and floor characters because they don't
+    --			work on Windows.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -128,8 +131,9 @@ package body ARM_HTML is
     HTML_Kind : constant HTML_Type := HTML_4_Compatible;
 	-- Eventually, this will be a parameter to the Create routine.
 
-    Use_Unicode : constant Boolean := False;
-	-- Use Unicode characters. (Many browsers can't display these.)
+    Use_Unicode : constant Boolean := True;
+	-- Use Unicode characters. (Many older browsers can't display these;
+	-- it's known that IE can't do so on Windows 95/98/ME.)
 
     LEADING_PERCENT : constant := 70;
 	-- Leading is 70% of normal height.
@@ -3592,7 +3596,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.Left_Ceiling =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
+		    -- This character doesn't display on Windows 2000/XP.
 	            Output_Text (Output_Object, "&lceil;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3600,7 +3605,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 8;
 		end if;
 	    when ARM_Output.Right_Ceiling =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
+		    -- This character doesn't display on Windows 2000/XP.
 	            Output_Text (Output_Object, "&rceil;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3608,7 +3614,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Left_Floor =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
+		    -- This character doesn't display on Windows 2000/XP.
 	            Output_Text (Output_Object, "&lfloor;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3616,7 +3623,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 6;
 		end if;
 	    when ARM_Output.Right_Floor =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
+		    -- This character doesn't display on Windows 2000/XP.
 	            Output_Text (Output_Object, "&rfloor;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3624,7 +3632,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Thin_Space =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
+		    -- This character doesn't display on Windows 2000/XP.
 	            Output_Text (Output_Object, "&thinsp;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
