@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:18 $ $Author: Randy $ }
+@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:42 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:18 $}
+@Comment{$Date: 2000/04/30 02:44:42 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program
@@ -37,9 +37,9 @@ The library package Ada.Command_Line has the following declaration:
 @key[end] Ada.Command_Line;
 @end{example}
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[function] Argument_Count @key[return] Natural;
-@end{CodeExample}
+@end{Example}
 
 If the external execution environment supports passing arguments to
 a program, then
@@ -48,9 +48,9 @@ the number of arguments passed to the program
 invoking the function.  Otherwise it returns 0.
 The meaning of ``number of arguments'' is implementation defined.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Argument (Number : @key[in] Positive) @key[return] String;
-@end{CodeExample}
+@end{Example}
 
 If the external execution environment supports passing arguments to
 a program, then
@@ -63,9 +63,9 @@ Constraint_Error is propagated.
 passing arguments to a program, then Argument(N) for any N will
 raise Constraint_Error, since Argument_Count is 0.}
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Command_Name @key[return] String;
-@end{CodeExample}
+@end{Example}
 
 If the external execution environment supports passing arguments to
 a program, then
@@ -78,9 +78,9 @@ status values supported by the external execution environment.
 The constants Success and Failure correspond to success and failure,
 respectively.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Set_Exit_Status (Code : @key[in] Exit_Status);
-@end{CodeExample}
+@end{Example}
 
 If the external execution environment supports returning an exit status
 from a program, then Set_Exit_Status sets Code as the status.  Normal

@@ -1,11 +1,11 @@
 @Part(glossary, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
+@Comment{$Date: 2000/04/30 02:44:41 $}
 @LabeledInformativeAnnex{Glossary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/glossary.mss,v $}
-@comment{$Revision: 1.8 $}
+@comment{$Revision: 1.9 $}
 
 @begin{Intro}
 @Defn{Glossary}

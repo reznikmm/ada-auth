@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:18 $}
+@Comment{$Date: 2000/04/30 02:44:42 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.8 $}
+@comment{$Revision: 1.9 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 

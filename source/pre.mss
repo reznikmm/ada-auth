@@ -1,11 +1,11 @@
 @Part(predef, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
+@Comment{$Date: 2000/04/30 02:44:41 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.8 $}
+@comment{$Revision: 1.9 $}
 @comment{$RLB: Eliminated includes. $}
 
 @Define{TwoColRW, use=Display}

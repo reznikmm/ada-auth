@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:41 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
+@Comment{$Date: 2000/04/30 02:44:41 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -952,13 +952,13 @@ Text_IO.Complex_IO has the following declaration:
 
 The semantics of the Get and Put procedures are as follows:
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get (File  : @key[in]  File_Type;
                Item  : @key[out] Complex;
                Width : @key[in]  Field := 0);
 @key[procedure] Get (Item  : @key[out] Complex;
                Width : @key[in]  Field := 0);
-@end{CodeExample}
+@end{Example}
 
 The input sequence is a pair of
 optionally signed real literals representing
@@ -1005,7 +1005,7 @@ is raised if the input sequence
 does not have the required syntax or if the components of the complex value
 obtained are not of the base subtype of Complex_Types.Real.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put (File : @key[in] File_Type;
                Item : @key[in] Complex;
                Fore : @key[in] Field := Default_Fore;
@@ -1015,7 +1015,7 @@ obtained are not of the base subtype of Complex_Types.Real.
                Fore : @key[in] Field := Default_Fore;
                Aft  : @key[in] Field := Default_Aft;
                Exp  : @key[in] Field := Default_Exp);
-@end{CodeExample}
+@end{Example}
 
 Outputs the value of the parameter Item as a pair of decimal literals
 representing the real and imaginary components of the complex value,
@@ -1051,11 +1051,11 @@ More specifically,
    value separately.
 @end{Discussion}
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get (From : @key[in]  String;
                Item : @key[out] Complex;
                Last : @key[out] Positive);
-@end{CodeExample}
+@end{Example}
 
 Reads a complex value from the beginning of the given string, following the
 same rule as the Get procedure that reads a complex value from a file, but
@@ -1068,12 +1068,12 @@ The exception Text_IO.Data_Error is raised if the input sequence
 does not have the required syntax or if the components of the complex value
 obtained are not of the base subtype of Complex_Types.Real.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put (To   : @key[out] String;
                Item : @key[in]  Complex;
                Aft  : @key[in]  Field := Default_Aft;
                Exp  : @key[in]  Field := Default_Exp);
-@end{CodeExample}
+@end{Example}
 
 Outputs the value of the parameter Item to the given string as a pair of
 decimal literals representing the real and imaginary components of the complex

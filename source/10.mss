@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
+@Comment{$Date: 2000/04/30 02:44:41 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.8 $}
+@Comment{$Revision: 1.9 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -126,7 +126,7 @@ Others might allow multiple source files to be automatically
 concatenated to form a single @nt{compilation}.
 Others still may represent the source in a nontextual form such as a parse
 tree.
-Note that the RM9X does not even define the concept of a
+Note that the RM95 does not even define the concept of a
 source file.
 
 Note that a protected subprogram is a subprogram,
@@ -165,7 +165,7 @@ where P1 precedes P2 in the @nt<compilation> but P1 has a
 
 @begin{DiffWord83}
 The interactions between language issues and environmental issues
-are left open in Ada 9X.  The environment concept is new.
+are left open in Ada 95.  The environment concept is new.
 In Ada 83, the concept of the program library, for example,
 appeared to be quite concrete,
 although the rules had no force,
@@ -828,13 +828,13 @@ The syntax rule for @nt{library_item} is modified to allow the
 reserved word @key{private} before a @nt{library_unit_declaration}.
 
 Children (other than children of Standard)
-are new in Ada 9X.
+are new in Ada 95.
 
-Library unit renaming is new in Ada 9X.
+Library unit renaming is new in Ada 95.
 @end{Extend83}
 
 @begin{DiffWord83}
-Standard is considered a library unit in Ada 9X.
+Standard is considered a library unit in Ada 95.
 This simplifies the descriptions,
 since it implies that the parent of each library unit is a library unit.
 (Standard itself has no parent, of course.)
@@ -1805,7 +1805,7 @@ or by some other implementation-defined means):
 @RootDefn2{Term=[needed], Sec=(of a compilation unit by another)}
 @begin{Discussion}
 From a run-time point of view,
-an Ada 9X partition is identical to an Ada 83 program
+an Ada 95 partition is identical to an Ada 83 program
 @em implementations were always allowed to provide inter-program
 communication mechanisms.
 The additional semantics of partitions is that interfaces between
@@ -2027,7 +2027,7 @@ elaboration dependences.
 @begin{Honest}
 @PDefn2{Term=[requires a completion], Sec=(library_unit_declaration)}
 @Defn{notwithstanding}
-Notwithstanding what the RM9X says elsewhere,
+Notwithstanding what the RM95 says elsewhere,
 each rule that requires a declaration to have a corresponding
 completion is considered to be a @LinkTimeName
 when the declaration is that of a library unit.
@@ -2311,14 +2311,14 @@ time and at partition-construction time/run time.
 @end{Notes}
 
 @begin{Extend83}
-The concept of partitions is new to Ada 9X.
+The concept of partitions is new to Ada 95.
 
 A main subprogram is now optional.
 The language-defined restrictions on main subprograms are relaxed.
 @end{Extend83}
 
 @begin{DiffWord83}
-Ada 9X uses the term ``main subprogram'' instead of Ada 83's ``main
+Ada 95 uses the term ``main subprogram'' instead of Ada 83's ``main
 program'' (which was inherited from Pascal).
 This is done to avoid confusion @em a main subprogram is a subprogram, not a
 program.
@@ -2488,9 +2488,12 @@ In a generic body, we assume the worst about
 formal private types and extensions.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0035]}
-@Chg{New=[Subprogram subunits of a preelaborated unit do not need
-to be preelaborable. This is necessary to be consistent with normal subprogram
-bodies, which do not need to be preelaborable in a preelaborated unit.], Old=[]}
+@Chg{New=[Subunits of a preelaborated subprogram unit do not need
+to be preelaborable. This is needed in order to be consistent with units
+nested in a subprogram body, which do not need to be preelaborable even if
+the subprogram is preelaborated. However, such subunits cannot depend
+semantically on non-preelaborated units, which is also consistent with
+nested units.], Old=[]}
 @end{Ramification}
 @end{Legality}
 
@@ -2544,7 +2547,7 @@ between partitions with no common address space.
 @begin{Reason}
 Note that generic packages are not mentioned
 in the list of things that can contain variable declarations.
-Note that the Ada 9X rules for deferred constants make them
+Note that the Ada 95 rules for deferred constants make them
 allowable in library units that are declared pure;
 that isn't true of Ada 83's deferred constants.
 @end{Reason}
@@ -2689,13 +2692,19 @@ previous @nt{with_clause} of the same @nt{context_clause}.
 A preelaborated library unit is allowed to have non-preelaborable
 children.
 @begin{Ramification}
-But not non-preelaborated subunits.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035]}
+But @Chg{New=[generally ], Old=[]}not non-preelaborated subunits.
+@Chg{New=[(Non-preelaborated subunits of subprograms are allowed as
+discussed above.)], Old=[]}
 @end{Ramification}
 
 A library unit that is declared pure is allowed to have impure
 children.
 @begin{Ramification}
-But not impure subunits.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035]}
+But @Chg{New=[generally ], Old=[]}not impure subunits.
+@Chg{New=[(Impure subunits of subprograms are allowed as discussed above.)],
+Old=[]}
 @end{Ramification}
 @begin{Ramification}
 Pragma Elaborate is mainly for closely related library units,
@@ -2706,9 +2715,9 @@ In such cases, Elaborate_All sometimes won't work.
 
 @begin{Extend83}
 The concepts of preelaborability
-and purity are new to Ada 9X.
+and purity are new to Ada 95.
 The Elaborate_All, Elaborate_Body, Preelaborate,
-and Pure @nt{pragma}s are new to Ada 9X.
+and Pure @nt{pragma}s are new to Ada 95.
 
 Pragmas Elaborate are allowed to be mixed in with the other
 things in the @nt{context_clause} @em in Ada 83, they were

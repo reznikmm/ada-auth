@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/27 00:22:16 $}
+@Comment{$Date: 2000/04/30 02:44:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @LabeledClause{Array Types}
 

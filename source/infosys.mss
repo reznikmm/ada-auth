@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:41 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
+@Comment{$Date: 2000/04/30 02:44:41 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -1018,21 +1018,21 @@ The exception Constraint_Error is raised
 if the Image function or any of the
 Put procedures is invoked with a null string for Currency.
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key(function) Valid (Pic_String      : @key(in) String;
                 Blank_When_Zero : @key(in) Boolean := False) @key(return) Boolean;
-@end{CodeExample}
+@end{Example}
 
 Valid returns True if Pic_String is a well-formed picture String
 (see @RefSecNum(Picture String Formation)) the
 length of whose expansion does not exceed Max_Picture_Length, and if
 either Blank_When_Zero is False or Pic_String contains no '*'.
 
-@begin{CodeExample}
+@begin{Example}
 @key(function) To_Picture (Pic_String      : @key(in) String;
                      Blank_When_Zero : @key(in) Boolean := False)
    @key(return) Picture;
-@end{CodeExample}
+@end{Example}
 
 To_Picture returns a result Picture such that the application of the
 function Pic_String to this result
@@ -1042,11 +1042,11 @@ parameter Blank_When_Zero.
  Picture_Error is raised if not
 Valid(Pic_String, Blank_When_Zero).
 
-@begin{CodeExample}
+@begin{Example}
 @key(function) Pic_String      (Pic : @key(in) Picture) @key(return) String;
 
 @key(function) Blank_When_Zero (Pic : @key(in) Picture) @key(return) Boolean;
-@end{CodeExample}
+@end{Example}
 
 If Pic is To_Picture(String_Item, Boolean_Item) for some String_Item and
 Boolean_Item, then:
@@ -1066,11 +1066,11 @@ Pic_String(Pic_1) = Pic_String(Pic_2), and
 Blank_When_Zero(Pic_1) = Blank_When_Zero(Pic_2).
 @end[Itemize]
 
-@begin{CodeExample}
+@begin{Example}
 @key(function) Length (Pic      : @key(in) Picture;
                  Currency : @key(in) String := Default_Currency)
    @key(return) Natural;
-@end{CodeExample}
+@end{Example}
 
 Length returns Pic_String(Pic)'Length + Currency_Length_Adjustment -
 Radix_Adjustment where
@@ -1091,17 +1091,17 @@ Radix_Adjustment where
 @end[itemize]
 @end[itemize]
 
-@begin{CodeExample}
+@begin{Example}
 @key(function) Valid (Item     : @key(in) Num;
                 Pic      : @key(in) Picture;
                 Currency : @key(in) String := Default_Currency)
    @key(return) Boolean;
-@end{CodeExample}
+@end{Example}
 
 Valid returns True if Image(Item, Pic, Currency) does not raise
 Layout_Error, and returns False otherwise.
 
-@begin{CodeExample}
+@begin{Example}
 @key(function) Image (Item       : @key(in) Num;
                 Pic        : @key(in) Picture;
                 Currency   : @key(in) String    := Default_Currency;
@@ -1109,7 +1109,7 @@ Layout_Error, and returns False otherwise.
                 Separator  : @key(in) Character := Default_Separator;
                 Radix_Mark : @key(in) Character := Default_Radix_Mark)
    @key(return) String;
-@end{CodeExample}
+@end{Example}
 
 Image returns the edited output String as defined in
 @RefSecNum(Edited Output Generation) for Item,
@@ -1118,7 +1118,7 @@ Currency, Fill, Separator,
 and Radix_Mark.  If these rules identify a layout error, then Image
 raises the exception Layout_Error.
 
-@begin{CodeExample}
+@begin{Example}
 @key(procedure) Put (File       : @key(in) File_Type;
                Item       : @key(in) Num;
                Pic        : @key(in) Picture;
@@ -1133,14 +1133,14 @@ raises the exception Layout_Error.
                Fill       : @key(in) Character := Default_Fill;
                Separator  : @key(in) Character := Default_Separator;
                Radix_Mark : @key(in) Character := Default_Radix_Mark);
-@end{CodeExample}
+@end{Example}
 
 Each of these Put procedures
 outputs Image(Item, Pic, Currency, Fill, Separator, Radix_Mark)
 consistent with the conventions for Put for other real types in case
 of bounded line length (see @RefSec{Get and Put Procedures}).
 
-@begin{CodeExample}
+@begin{Example}
 @key(procedure) Put (To         : @key(out) String;
                Item       : @key(in) Num;
                Pic        : @key(in) Picture;
@@ -1148,7 +1148,7 @@ of bounded line length (see @RefSec{Get and Put Procedures}).
                Fill       : @key(in) Character := Default_Fill;
                Separator  : @key(in) Character := Default_Separator;
                Radix_Mark : @key(in) Character := Default_Radix_Mark);
-@end{CodeExample}
+@end{Example}
 
 Put copies Image(Item, Pic, Currency, Fill, Separator, Radix_Mark)
 to the given string, right justified.  Otherwise unassigned Character values

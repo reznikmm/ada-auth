@@ -1,11 +1,11 @@
 @Part(obsolescent, Root="ada.mss")
 
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/27 00:22:18 $}
+@Comment{$Date: 2000/04/30 02:44:42 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.8 $}
+@Comment{$Revision: 1.9 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}

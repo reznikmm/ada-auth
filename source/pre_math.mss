@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.9 $ $Date: 2000/04/30 02:44:41 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:17 $}
+@Comment{$Date: 2000/04/30 02:44:41 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -554,10 +554,10 @@ The operations on generators affect the state and therefore the future values
 of the associated sequence.  The semantics of the operations on generators and
 states are defined below.
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[function] Random (Gen : Generator) @key[return] Uniformly_Distributed;
 @key[function] Random (Gen : Generator) @key[return] Result_Subtype;
-@end{CodeExample}
+@end{Example}
 
 Obtains the ``next'' random number from the given generator, relative to its
 current state, according to an implementation-defined algorithm.
@@ -575,11 +575,11 @@ generic formal subtype Result_Subtype.
    a procedure.
 @end{Reason}
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Reset (Gen       : @key[in] Generator;
                  Initiator : @key[in] Integer);
 @key[procedure] Reset (Gen       : @key[in] Generator);
-@end{CodeExample}
+@end{Example}
 
 @PDefn{unspecified}
 Sets the state of the specified generator to one that is an unspecified
@@ -596,22 +596,22 @@ procedure}.
    a radioactive source can be used to generate time-dependent states.
 @end{ImplNote}
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Save  (Gen        : @key[in]  Generator;
                  To_State   : @key[out] State);
 @key[procedure] Reset (Gen        : @key[in]  Generator;
                  From_State : @key[in]  State);
-@end{CodeExample}
+@end{Example}
 
 Save obtains the current state of a generator.  Reset gives a generator the
 specified state.  A generator that is reset to a state previously obtained by
 invoking Save is restored to the state it had when Save was
 invoked.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Image (Of_State    : State)  @key[return] String;
 @key[function] Value (Coded_State : String) @key[return] State;
-@end{CodeExample}
+@end{Example}
 
 Image provides a representation of a state coded (in an implementation-defined
 way) as a string whose length is bounded by the value of Max_Image_Width.

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:17 $}
+@Comment{$Date: 2000/04/30 02:44:41 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.8 $}
+@Comment{$Revision: 1.9 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -103,16 +103,16 @@ The effect of input-output for access types is unspecified.
 An open file has a @i{current mode}, which is a value of one of the
 following enumeration types:
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[type] File_Mode @key[is] (In_File, Inout_File, Out_File);  --@i{  for Direct_IO}
-@end{CodeExample}
+@end{Example}
 
 These values correspond respectively to the cases where only reading,
 both reading and writing, or only writing are to be performed.
-@begin{CodeExample}
+@begin{Example}
 @key[type] File_Mode @key[is] (In_File, Out_File, Append_File);
 --@i{  for Sequential_IO, Text_IO, Wide_Text_IO, and Stream_IO}
-@end{CodeExample}
+@end{Example}
 
 These values correspond respectively to the cases where only reading,
 only writing, or only appending are to be performed.
@@ -307,12 +307,12 @@ text input-output, the procedures Create, Open, and Reset have
 additional effects described in subclause
 @RefSecNum{Text File Management}.
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Create(File : @key[in] @key[out] File_Type;
                  Mode : @key[in] File_Mode := @i{default_mode};
                  Name : @key[in] String := "";
                  Form : @key[in] String := "");
-@end{CodeExample}
+@end{Example}
 
           Establishes a new external file, with the given name and form,
           and associates this external file with the given file.  The
@@ -343,12 +343,12 @@ external environment
  does not support creation of
           an external file with the given name (in the absence of
           Name_Error) and form.
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Open(File : @key[in] @key[out] File_Type;
                Mode : @key[in] File_Mode;
                Name : @key[in] String;
                Form : @key[in] String := "");
-@end{CodeExample}
+@end{Example}
 
           Associates the given file with an existing external file
           having the given name and form, and sets the current mode of
@@ -366,9 +366,9 @@ external environment
 
  does not support opening for an external file with
           the given name (in the absence of Name_Error) and form.
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Close(File : @key[in] @key[out] File_Type);
-@end{CodeExample}
+@end{Example}
 
           Severs the association between the given file and its
           associated external file.  The given file is left closed.
@@ -382,9 +382,9 @@ then the closed file is unchanged.
 
           The exception Status_Error is propagated if the given file is not
           open.
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Delete(File : @key[in] @key[out] File_Type);
-@end{CodeExample}
+@end{Example}
 
           Deletes the external file associated with the given file.  The
           given file is closed, and the external file ceases to exist.
@@ -393,10 +393,10 @@ then the closed file is unchanged.
           open.  The exception Use_Error is propagated if
           deletion of the external file is not supported
           by the external environment.
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Reset(File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
 @key[procedure] Reset(File : @key[in] @key[out] File_Type);
-@end{CodeExample}
+@end{Example}
 
           Resets the given file so that reading from its
           elements can be restarted from the beginning of the file (for
@@ -428,16 +428,16 @@ external environment
 
  does not support resetting to the specified mode
           for the external file.
-@begin{CodeExample}
+@begin{Example}
 @key[function] Mode(File : @key[in] File_Type) @key[return] File_Mode;
-@end{CodeExample}
+@end{Example}
 
           Returns the current mode of the given file.
 
           The exception Status_Error is propagated if the file is not open.
-@begin{CodeExample}
+@begin{Example}
 @key[function] Name(File : @key[in] File_Type) @key[return] String;
-@end{CodeExample}
+@end{Example}
 
           Returns a string which uniquely identifies the external file
           currently associated with the given file (and may thus be used
@@ -454,9 +454,9 @@ external environment
           open.  The exception Use_Error is propagated if the associated
           external file is a temporary file that cannot be opened
           by any name.
-@begin{CodeExample}
+@begin{Example}
 @key[function] Form(File : @key[in] File_Type) @key[return] String;
-@end{CodeExample}
+@end{Example}
 
           Returns the form string for the external file currently
           associated with the given file.  If an
@@ -472,9 +472,9 @@ external environment
 
           The exception Status_Error is propagated if the given file is not
           open.
-@begin{CodeExample}
+@begin{Example}
 @key[function] Is_Open(File : @key[in] File_Type) @key[return] Boolean;
-@end{CodeExample}
+@end{Example}
 
           Returns True if the file is open (that is, if it is associated
           with an external file), otherwise returns False.
@@ -499,9 +499,9 @@ The operations available for  sequential input and output are described
 in this subclause.  The exception Status_Error is propagated if any of these
 operations is attempted for a file that is not open.
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Read(File : @key[in] File_Type; Item : @key[out] Element_Type);
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File.  Reads an element
 from the given file, and returns the value of this element
@@ -538,9 +538,9 @@ be interpreted as a value of the subtype Element_Type
   Data_Error need not be propagated if the check is too complex.
   See @RefSec{Exceptions in Input-Output}.
 @end{Discussion}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type);
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode Out_File or Append_File.
 Writes the value of Item to the given file.
@@ -548,9 +548,9 @@ Writes the value of Item to the given file.
           The exception Mode_Error is propagated if the mode is not
 Out_File or Append_File.  The exception Use_Error is propagated if the capacity
           of the external file is exceeded.
-@begin{CodeExample}
+@begin{Example}
 @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File.  Returns True if no more
           elements can be read from the given file; otherwise returns
@@ -649,11 +649,11 @@ The operations available for direct input and output are described in
 this subclause.  The exception Status_Error is propagated if any of these
 operations is attempted for a file that is not open.
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Read(File : @key[in] File_Type; Item : @key[out] Element_Type;
                                     From : @key[in]  Positive_Count);
 @key[procedure] Read(File : @key[in] File_Type; Item : @key[out] Element_Type);
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File or Inout_File.  In the case
           of the first form, sets the current index of the given file to
@@ -672,11 +672,11 @@ can be propagated if the element read cannot be
           interpreted as a value of the subtype Element_Type
 
 (see @RefSecNum{Exceptions in Input-Output}).
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type;
                                      To   : @key[in] Positive_Count);
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type);
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode Inout_File or Out_File.  In the
           case of the first form, sets the index of the given file to
@@ -689,28 +689,28 @@ can be propagated if the element read cannot be
           The exception Mode_Error is propagated if the mode of the given
           file is In_File.  The exception Use_Error is propagated if the
           capacity of the external file is exceeded.
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Set_Index(File : @key[in] File_Type; To : @key[in] Positive_Count);
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of any mode.  Sets the current index of the
           given file to the given index value (which may exceed the
           current size of the file).
-@begin{CodeExample}
+@begin{Example}
 @key[function] Index(File : @key[in] File_Type) @key[return] Positive_Count;
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of any mode.  Returns the current index of
           the given file.
-@begin{CodeExample}
+@begin{Example}
 @key[function] Size(File : @key[in] File_Type) @key[return] Count;
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of any mode.  Returns the current size of
           the external file that is associated with the given file.
-@begin{CodeExample}
+@begin{Example}
 @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File or Inout_File.  Returns
           True if the current index exceeds the size of the external
@@ -1401,9 +1401,9 @@ default files that are used when a file parameter is omitted from a Get,
 Put, or other operation of text input-output described below,
 or when application-dependent error-related text is to be output.
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Set_Input(File : @key[in] File_Type);
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File.  Sets the current default
           input file to File.
@@ -1411,10 +1411,10 @@ or when application-dependent error-related text is to be output.
           The exception Status_Error is propagated if the given file is not
           open.  The exception Mode_Error is propagated if the mode of the
           given file is not In_File.
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Set_Output(File : @key[in] File_Type);
 @key[procedure] Set_Error (File : @key[in] File_Type);
-@end{CodeExample}
+@end{Example}
 
           Each operates on a file of mode Out_File or Append_File.  Set_Output
         sets the current default output file to File.
@@ -1422,26 +1422,26 @@ or when application-dependent error-related text is to be output.
           The exception Status_Error is propagated if the given file is not
           open.  The exception Mode_Error is propagated if the mode of the
           given file is not Out_File or Append_File.
-@begin{CodeExample}
+@begin{Example}
 @key[function] Standard_Input @key[return] File_Type;
 @key[function] Standard_Input @key[return] File_Access;
-@end{CodeExample}
+@end{Example}
 
           Returns the standard input file (see @RefSecNum{Text Input-Output}),
 or an access value designating the standard input file, respectively.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Standard_Output @key[return] File_Type;
 @key[function] Standard_Output @key[return] File_Access;
-@end{CodeExample}
+@end{Example}
 
           Returns the standard output file (see @RefSecNum{Text Input-Output})
 or an access value designating the standard output file, respectively.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Standard_Error @key[return] File_Type;
 @key[function] Standard_Error @key[return] File_Access;
-@end{CodeExample}
+@end{Example}
 
           Returns the standard error file (see @RefSecNum{Text Input-Output}),
 or an access value designating the standard output file, respectively.
@@ -1449,36 +1449,36 @@ or an access value designating the standard output file, respectively.
 The Form strings implicitly associated with the opening of
 Standard_Input, Standard_Output, and
 Standard_Error at the start of program execution are implementation defined.
-@begin{CodeExample}
+@begin{Example}
 @key[function] Current_Input @key[return] File_Type;
 @key[function] Current_Input @key[return] File_Access;
-@end{CodeExample}
+@end{Example}
 
           Returns the current default input file,
 or an access value designating the current default input file,
 respectively.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Current_Output @key[return] File_Type;
 @key[function] Current_Output @key[return] File_Access;
-@end{CodeExample}
+@end{Example}
 
           Returns the current default output file,
 or an access value designating the current default output file,
 respectively.
-@begin{CodeExample}
+@begin{Example}
 @key[function] Current_Error @key[return] File_Type;
 @key[function] Current_Error @key[return] File_Access;
-@end{CodeExample}
+@end{Example}
 
           Returns the current default error file,
 or an access value designating the current default error file,
 respectively.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Flush (File : @key[in] @key[out] File_Type);
 @key[procedure] Flush;
-@end{CodeExample}
+@end{Example}
 
 The effect of Flush is the same as the corresponding subprogram
 in Streams.Stream_IO (see @RefSecNum[The Package Streams.Stream_IO]).
@@ -1528,10 +1528,10 @@ In all cases, the exception Status_Error is propagated if the file to be
 used is not open; the exception Mode_Error is propagated if the mode of the
 file is not Out_File or Append_File.
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Set_Line_Length(File : @key[in] File_Type; To : @key[in] Count);
 @key[procedure] Set_Line_Length(To   : @key[in] Count);
-@end{CodeExample}
+@end{Example}
 
           Sets the maximum line length of the specified output or append file to
           the number of characters specified by To.  The value zero for
@@ -1543,10 +1543,10 @@ influences subsequent output operations.}
           The exception Use_Error is propagated if the specified line length
           is inappropriate for the associated external file.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Set_Page_Length(File : @key[in] File_Type; To : @key[in] Count);
 @key[procedure] Set_Page_Length(To   : @key[in] Count);
-@end{CodeExample}
+@end{Example}
 
           Sets the maximum page length of the specified output or append file to
           the number of lines specified by To.  The value zero for To
@@ -1555,19 +1555,19 @@ influences subsequent output operations.}
           The exception Use_Error is propagated if the specified page length
           is inappropriate for the associated external file.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Line_Length(File : @key[in] File_Type) @key[return] Count;
 @key[function] Line_Length @key[return] Count;
-@end{CodeExample}
+@end{Example}
 
           Returns the maximum line length currently set for the
           specified output or append file, or zero if the line length is
           unbounded.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Page_Length(File : @key[in] File_Type) @key[return] Count;
 @key[function] Page_Length @key[return] Count;
-@end{CodeExample}
+@end{Example}
 
           Returns the maximum page length currently set for the
           specified output or append file, or zero if the page length is
@@ -1585,10 +1585,10 @@ appropriate (input or output) current default file.  The exception
 Status_Error is propagated by any of these subprograms if the file to be
 used is not open.
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] New_Line(File : @key[in] File_Type; Spacing : @key[in] Positive_Count := 1);
 @key[procedure] New_Line(Spacing : @key[in] Positive_Count := 1);
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode Out_File or Append_File.
 
@@ -1606,10 +1606,10 @@ used is not open.
           The exception Mode_Error is propagated if the mode is not
           Out_File or Append_File.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Skip_Line(File  : @key[in] File_Type; Spacing : @key[in] Positive_Count := 1);
 @key[procedure] Skip_Line(Spacing : @key[in] Positive_Count := 1);
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File.
 
@@ -1629,10 +1629,10 @@ used is not open.
           The exception End_Error is propagated if an attempt is made to
           read a file terminator.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] End_Of_Line(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_Line @key[return] Boolean;
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File.  Returns True if a line
           terminator or a file terminator is next; otherwise returns
@@ -1640,10 +1640,10 @@ used is not open.
 
           The exception Mode_Error is propagated if the mode is not In_File.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] New_Page(File : @key[in] File_Type);
 @key[procedure] New_Page;
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode Out_File or Append_File.  Outputs a line
           terminator if the current line is not terminated, or if the
@@ -1656,10 +1656,10 @@ used is not open.
           The exception Mode_Error is propagated if the mode is not
           Out_File or Append_File.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Skip_Page(File : @key[in] File_Type);
 @key[procedure] Skip_Page;
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File.  Reads and discards all
           characters and line terminators until a page terminator has
@@ -1670,10 +1670,10 @@ used is not open.
           The exception End_Error is propagated if an attempt is made to
           read a file terminator.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] End_Of_Page(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_Page @key[return] Boolean;
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File.  Returns True if the
           combination of a line terminator and a page terminator is
@@ -1682,10 +1682,10 @@ used is not open.
 
           The exception Mode_Error is propagated if the mode is not In_File.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_File @key[return] Boolean;
-@end{CodeExample}
+@end{Example}
 
           Operates on a file of mode In_File.  Returns True if a file
           terminator is next, or if the combination of a line, a page,
@@ -1697,10 +1697,10 @@ The following subprograms provide for the control of the current
 position of reading or writing in a file.  In all cases, the default
 file is the current output file.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Set_Col(File : @key[in] File_Type; To : @key[in] Positive_Count);
 @key[procedure] Set_Col(To   : @key[in] Positive_Count);
-@end{CodeExample}
+@end{Example}
 
           If the file mode is Out_File or Append_File:
 @begin{itemize}
@@ -1738,10 +1738,10 @@ file is the current output file.
                The exception End_Error is propagated if an attempt is made
                to read a file terminator.
 @end{itemize}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Set_Line(File : @key[in] File_Type; To : @key[in] Positive_Count);
 @key[procedure] Set_Line(To   : @key[in] Positive_Count);
-@end{CodeExample}
+@end{Example}
 
           If the file mode is Out_File or Append_File:
 @begin{itemize}
@@ -1773,30 +1773,30 @@ file is the current output file.
                The exception End_Error is propagated if an attempt is made
                to read a file terminator.
 @end{itemize}
-@begin{CodeExample}
+@begin{Example}
 @key[function] Col(File : @key[in] File_Type) @key[return] Positive_Count;
 @key[function] Col @key[return] Positive_Count;
-@end{CodeExample}
+@end{Example}
 
           Returns the current column number.
 
           The exception Layout_Error is propagated if this number exceeds
           Count'Last.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Line(File : @key[in] File_Type) @key[return] Positive_Count;
 @key[function] Line @key[return] Positive_Count;
-@end{CodeExample}
+@end{Example}
 
           Returns the current line number.
 
           The exception Layout_Error is propagated if this number exceeds
           Count'Last.
 
-@begin{CodeExample}
+@begin{Example}
 @key[function] Page(File : @key[in] File_Type) @key[return] Positive_Count;
 @key[function] Page @key[return] Positive_Count;
-@end{CodeExample}
+@end{Example}
 
           Returns the current page number.
 
@@ -1953,10 +1953,10 @@ Put(Item => -23, Width => 2);  --@i{  "@en@|23"}
 @begin{StaticSem}
 For an item of type Character the following procedures are provided:
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Character);
 @key[procedure] Get(Item : @key[out] Character);
-@end{CodeExample}
+@end{Example}
 
           After skipping any line terminators and any page terminators,
           reads the next character from the specified input file and
@@ -1964,23 +1964,23 @@ For an item of type Character the following procedures are provided:
 
           The exception End_Error is propagated if an attempt is made to
           skip a file terminator.
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put(File : @key[in] File_Type; Item : @key[in] Character);
 @key[procedure] Put(Item : @key[in] Character);
-@end{CodeExample}
+@end{Example}
 
           If the line length of the specified output file is bounded
           (that is, does not have the conventional value zero), and the
           current column number exceeds it, has the effect of calling
           New_Line with a spacing of one.  Then, or otherwise, outputs
           the given character to the file.
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Look_Ahead (File        : @key[in]  File_Type;
                       Item        : @key[out] Character;
                       End_Of_Line : @key[out] Boolean);
 @key[procedure] Look_Ahead (Item        : @key[out] Character;
                       End_Of_Line : @key[out] Boolean);
-@end{CodeExample}
+@end{Example}
 
 Mode_Error is propagated if the mode of the file is not In_File.
 Sets End_Of_Line to True if at end of line, including if at end of
@@ -1990,24 +1990,24 @@ Item is not specified.
 Otherwise End_Of_Line is set to
 False and Item is set to the the next character (without consuming it)
 from the file.
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get_Immediate(File : @key[in]  File_Type;
                         Item : @key[out] Character);
 @key[procedure] Get_Immediate(Item : @key[out] Character);
-@end{CodeExample}
+@end{Example}
 
 Reads the next character, either control or graphic, from the specified
 File or the default input file.  Mode_Error is propagated if the mode of the
 file is not In_File.  End_Error is propagated if at the end of the file.
 The current column, line and page numbers for the file are not affected.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get_Immediate(File      : @key[in]  File_Type;
                         Item      : @key[out] Character;
                         Available : @key[out] Boolean);
 @key[procedure] Get_Immediate(Item      : @key[out] Character;
                         Available : @key[out] Boolean);
-@end{CodeExample}
+@end{Example}
 
 If a character, either control or graphic, is available from the
 specified File or the default input file, then the character is read;
@@ -2022,30 +2022,30 @@ The current column, line and page numbers for the file are not affected.
 
 For an item of type String the following procedures are provided:
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] String);
 @key[procedure] Get(Item : @key[out] String);
-@end{CodeExample}
+@end{Example}
 
           Determines the length of the given string and attempts that
           number of Get operations for successive characters of the
           string (in particular, no operation is performed if the string
           is null).
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put(File : @key[in] File_Type; Item : @key[in] String);
 @key[procedure] Put(Item : @key[in] String);
-@end{CodeExample}
+@end{Example}
 
           Determines the length of the given string and attempts that
           number of Put operations for successive characters of the
           string (in particular, no operation is performed if the string
           is null).
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get_Line(File : @key[in] File_Type; Item : @key[out] String; Last : @key[out] Natural);
 @key[procedure] Get_Line(Item : @key[out] String;   Last : @key[out] Natural);
-@end{CodeExample}
+@end{Example}
 
 Reads successive characters from the specified input file and assigns
 them to  successive characters of the specified string.
@@ -2064,10 +2064,10 @@ The values of characters not assigned are not specified.
           Item'First.  The exception End_Error is propagated if an attempt
           is made to skip a file terminator.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put_Line(File : @key[in] File_Type; Item : @key[in] String);
 @key[procedure] Put_Line(Item : @key[in] String);
-@end{CodeExample}
+@end{Example}
 
           Calls the procedure Put for the given string, and then the
           procedure New_Line with a spacing of one.
@@ -2133,10 +2133,10 @@ Default_Base  : Number_Base := 10;
 
 The following procedures are provided:
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Num; Width : @key[in] Field := 0);
 @key[procedure] Get(Item : @key[out] Num; Width : @key[in] Field := 0);
-@end{CodeExample}
+@end{Example}
 
           If the value of the parameter Width is zero, skips any leading
           blanks, line terminators, or page terminators, then
@@ -2159,7 +2159,7 @@ read does not form a legal integer literal or if the value obtained is not
           of the subtype Num (for Integer_IO) or is not in the base
           range of Num (for Modular_IO).
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put(File  : @key[in] File_Type;
               Item  : @key[in] Num;
               Width : @key[in] Field := Default_Width;
@@ -2168,7 +2168,7 @@ read does not form a legal integer literal or if the value obtained is not
 @key[procedure] Put(Item  : @key[in] Num;
               Width : @key[in] Field := Default_Width;
               Base  : @key[in] Number_Base := Default_Base);
-@end{CodeExample}
+@end{Example}
 
           Outputs the value of the parameter Item as an integer literal,
           with no low lines, no exponent, and no leading zeros (but a
@@ -2184,9 +2184,9 @@ read does not form a legal integer literal or if the value obtained is not
           otherwise, uses the syntax for based literal, with any letters
           in upper case.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get(From : @key[in] String; Item : @key[out] Num; Last : @key[out] Positive);
-@end{CodeExample}
+@end{Example}
 
           Reads an integer value from the beginning of the given string,
           following the same rules as the Get procedure that reads an
@@ -2200,11 +2200,11 @@ read does not form a legal integer literal or if the value obtained is not
           not have the required syntax or if the value obtained is not
           of the subtype Num.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put(To   : @key[out] String;
               Item : @key[in] Num;
               Base : @key[in] Number_Base := Default_Base);
-@end{CodeExample}
+@end{Example}
 
           Outputs the value of the parameter Item to the given string,
           following the same rule as for output to a file, using the
@@ -2305,10 +2305,10 @@ Default_Exp  : Field := 0;
 
 The following procedures are provided:
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Num; Width : @key[in] Field := 0);
 @key[procedure] Get(Item : @key[out] Num; Width : @key[in] Field := 0);
-@end{CodeExample}
+@end{Example}
 
           If the value of the parameter Width is zero, skips any leading
           blanks, line terminators, or page terminators,
@@ -2346,7 +2346,7 @@ True.
           not have the required syntax or if the value obtained is not
           of the subtype Num.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put(File : @key[in] File_Type;
               Item : @key[in] Num;
               Fore : @key[in] Field := Default_Fore;
@@ -2357,7 +2357,7 @@ True.
               Fore : @key[in] Field := Default_Fore;
               Aft  : @key[in] Field := Default_Aft;
               Exp  : @key[in] Field := Default_Exp);
-@end{CodeExample}
+@end{Example}
 
           Outputs the value of the parameter Item as a decimal literal
           with the format defined by Fore, Aft and Exp.  If the value is
@@ -2397,9 +2397,9 @@ The value is rounded; a value
           digits, to make up the difference.  For the value 0.0 of Item,
           the exponent has the value zero.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get(From : @key[in] String; Item : @key[out] Num; Last : @key[out] Positive);
-@end{CodeExample}
+@end{Example}
 
           Reads a real value from the beginning of the given string,
           following the same rule as the Get procedure that reads a real
@@ -2413,12 +2413,12 @@ The value is rounded; a value
           not have the required syntax, or if the value obtained is not
           of the subtype Num.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put(To   : @key[out] String;
               Item : @key[in] Num;
               Aft  : @key[in] Field := Default_Aft;
               Exp  : @key[in] Field := Default_Exp);
-@end{CodeExample}
+@end{Example}
 
           Outputs the value of the parameter Item to the given string,
           following the same rule as for output to a file, using a value
@@ -2527,10 +2527,10 @@ Default_Setting : Type_Set := Upper_Case;
 
 The following procedures are provided:
 @begin{DescribeCode}
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Enum);
 @key[procedure] Get(Item : @key[out] Enum);
-@end{CodeExample}
+@end{Example}
 
           After skipping any leading blanks, line terminators, or page
           terminators, reads an identifier according to the syntax of
@@ -2545,7 +2545,7 @@ The following procedures are provided:
           character literal does not correspond to a value of the
           subtype Enum.
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put(File  : @key[in] File_Type;
               Item  : @key[in] Enum;
               Width : @key[in] Field := Default_Width;
@@ -2554,7 +2554,7 @@ The following procedures are provided:
 @key[procedure] Put(Item  : @key[in] Enum;
               Width : @key[in] Field := Default_Width;
               Set   : @key[in] Type_Set := Default_Setting);
-@end{CodeExample}
+@end{Example}
 
           Outputs the value of the parameter Item as an enumeration
           literal (either an identifier or a character literal).  The
@@ -2575,9 +2575,9 @@ The following procedures are provided:
   too.
 @end{Discussion}
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Get(From : @key[in] String; Item : @key[out] Enum; Last : @key[out] Positive);
-@end{CodeExample}
+@end{Example}
 
           Reads an enumeration value from the beginning of the given
           string, following the same rule as the Get procedure that
@@ -2597,11 +2597,11 @@ The following procedures are provided:
   in the case of wide @nt{character_literal}s and control characters.
 @end{Honest}
 
-@begin{CodeExample}
+@begin{Example}
 @key[procedure] Put(To   : @key[out] String;
               Item : @key[in] Enum;
               Set  : @key[in] Type_Set := Default_Setting);
-@end{CodeExample}
+@end{Example}
 
           Outputs the value of the parameter Item to the given string,
           following the same rule as for output to a file, using the
