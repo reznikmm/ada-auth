@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2005/01/29 07:15:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2005/01/30 06:44:20 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/01/29 07:15:06 $}
+@Comment{$Date: 2005/01/30 06:44:20 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1009,10 +1009,10 @@ modified or queried at run time.]
 @key[package] Ada.Dynamic_Priorities @key[is]@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}
 
     @key[procedure] @AdaSubDefn{Set_Priority}(Priority : @key[in] System.Any_Priority;
-                           T : @key[in] Ada.Task_Identification.Task_ID :=
+                           T : @key[in] Ada.Task_Identification.Task_Id :=
                            Ada.Task_Identification.Current_Task);
 
-    @key[function] @AdaSubDefn{Get_Priority} (T : Ada.Task_Identification.Task_ID :=
+    @key[function] @AdaSubDefn{Get_Priority} (T : Ada.Task_Identification.Task_Id :=
                            Ada.Task_Identification.Current_Task)
                            @key[return] System.Any_Priority;
 
@@ -1050,7 +1050,7 @@ that has terminated.
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised by Set_Priority and Get_Priority if T is equal
-to Null_Task_ID.
+to Null_Task_Id.
 
 Setting the task's base priority to the new value takes place as soon
 as is practical but not while the task is performing a
@@ -2003,9 +2003,9 @@ It uses a conceptual @i{held priority} value to represent the task's
 @begin{example}
 @key{with} Ada.Task_Identification;
 @key{package} Ada.Asynchronous_Task_Control @key{is}@ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}
-  @key{procedure} @AdaSubDefn{Hold}(T : @key[in] Ada.Task_Identification.Task_ID);
-  @key{procedure} @AdaSubDefn{Continue}(T : @key[in] Ada.Task_Identification.Task_ID);
-  @key{function} @AdaSubDefn{Is_Held}(T : Ada.Task_Identification.Task_ID)
+  @key{procedure} @AdaSubDefn{Hold}(T : @key[in] Ada.Task_Identification.Task_Id);
+  @key{procedure} @AdaSubDefn{Continue}(T : @key[in] Ada.Task_Identification.Task_Id);
+  @key{function} @AdaSubDefn{Is_Held}(T : Ada.Task_Identification.Task_Id)
    @key{return} Boolean;
 @key{end} Ada.Asynchronous_Task_Control;
 @end{example}
@@ -2053,7 +2053,7 @@ T is not terminated.
 @Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
 Tasking_Error is raised if the check fails.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-Program_Error is raised if the value of T is Null_Task_ID.
+Program_Error is raised if the value of T is Null_Task_Id.
 
 @end{RunTime}
 

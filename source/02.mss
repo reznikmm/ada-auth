@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:14:59 $}
+@Comment{$Date: 2005/01/30 06:44:18 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -20,27 +20,24 @@ described in this section.]
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Defn{character set}
-The @Chg{Version=[2],New=[],Old=[only ]}characters
-@Chg{Version=[2],New=[whose code position is 16#FFFE# or 16#FFFF#
-are not allowed anywhere in the text of a program. The characters in
-categories @nt{other_control}, @nt{other_private_use}, and
-@nt{other_surrogate} are only allowed in],Old=[allowed outside of]}
-@nt{comment}s@Chg{Version=[2],New=[],Old=[ are the @nt{graphic_character}s and
+The @Chg{Version=[2],New=[character repertoire for the text of an Ada program consists of the
+collection of characters described by the ISO/IEC 10646:2003 Universal
+Multiple-Octet Coded Character Set.],Old=[only characters
+allowed outside of @nt{comment}s are the @nt{graphic_character}s and
 @nt{format_effector}s]}.
+
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@ChgNote{We use @Chg below, because we're not deleting the entire Ramification}
-@Chg{Version=[2],New=[],Old=[Any character, including an
+@ChgDeleted{Version=[2],Text=[Any character, including an
 @nt<other_control_function>, is allowed in a comment.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-Note that this rule doesn't really have much force,
-since the implementation can represent characters in the source in any
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}@ChgNote{Moved below}
+@ChgDeleted{Version=[2],Text=[Note that this rule doesn't really have much
+force, since the implementation can represent characters in the source in any
 way it sees fit.
 For example, an implementation could simply define that what seems to be
-a @Chg{Version=[2],New=[@nt{other_private_use}],
-Old=[non-graphic, non-format-effector]} character is actually a
-representation of the space character.
+a non-graphic, non-format-effector character is actually a
+representation of the space character.]}
 @end{Ramification}
 @begin(Discussion)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -62,28 +59,46 @@ rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{graphic_character} | @Syn2{format_effect
 @DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<graphic_character>}>,
 rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{identifier_letter} | @Syn2{digit} | @Syn2{space_character} | @Syn2{special_character}>}"}
 
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[A @nt{character} is any character defined within
+ISO/IEC 10646:2003 other than those whose code position is 16#FFFE# or
+16#FFFF#.]}
+@end{SyntaxText}
 @end{Syntax}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-The character repertoire for the text of
+The@Chg{Version=[2],New=[],Old=[ character repertoire for the text of
 an Ada program consists of the
 collection of characters
 @Chg{Version=[2],New=[described by the ISO/IEC 10646:2003],
 Old=[called the Basic Multilingual Plane (BMP) of the
-ISO 10646]} Universal Multiple-Octet Coded Character Set@Chg{Version=[2],
-New=[. The],Old=[, plus a set
+ISO 10646]} Universal Multiple-Octet Coded Character Set, plus a set
 of @nt<format_effector>s and, in comments only,
-a set of @nt<other_control_function>s; the]} coded representation for these
-characters is implementation defined @Redundant[(it need not be a
+a set of @nt<other_control_function>s; the]} coded representation for
+@Chg{Version=[2],New=[],Old=[these ]}characters is implementation defined
+@Redundant[(it need not be a
 representation defined within @Chg{Version=[2],New=[ISO/IEC 10646:2003],
-Old=[ISO-10646-1]})].]}
+Old=[ISO-10646-1]})].@Chg{Version=[2],New=[ The characters whose
+code position is 16#FFFE# or 16#FFFF# are not allowed anywhere in the text
+of a program.],Old=[]}
 @ImplDef{The coded representation for the text of an Ada program.}
+
+@begin{Ramification}@ChgNote{Moved from above}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[Note that this rule doesn't really have
+  much force, since the implementation can represent characters in the
+  source in any way it sees fit.
+  For example, an implementation could simply define that what seems to be
+  an @nt{other_private_use} character is actually a
+  representation of the space character.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[The semantics of an Ada program whose text is not
 in Normalization Form KC (as defined by section 24 of ISO/IEC 10646:2003)
-are implementation defined.]}
+is implementation defined.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
 semantics of an Ada program whose text is not in Normalization Form KC.],Old=[]}]}
 
@@ -102,7 +117,9 @@ for the visual representation of
 the text of an Ada program is not specified.
 @PDefn{unspecified}
 
-@Leading@keepnext@;The categories of characters are defined as follows:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Leading@keepnext@;@Chg{Version=[2],New=[Characters],Old=[The categories of
+characters]} are @Chg{Version=[2],New=[categorized],Old=[defined]} as follows:
 @begin{Description}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
 @ChgDeleted{Version=[2],Text=[@Defn{identifier_letter}@nt<identifier_letter>@\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}]}
@@ -173,14 +190,10 @@ character whose General Category is defined to be @lquotes@;Number, Letter@rquot
 @ChgDeleted{Version=[2],Text=[@Defn{space_character}@nt<space_character>@\The
 character of ISO 10646 BMP named @lquotes@;Space@rquotes@;.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[@Defn{other_control}@nt{other_control}],
-Old=[@Defn{special_character}@nt<special_character>]}@\Any character
-@Chg{Version=[2],New=[whose General Category is defined
-to be @lquotes@;Other, Control@rquotes@;.
-@IndexSeeAlso{Term=[control character],See=(other_control)}],
-Old=[of the ISO 10646 BMP that is not reserved for a control function, and
-  is not the @nt<space_character>, an @nt<identifier_letter>, or a @nt<digit>.]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgDeleted{Version=[2],Text=[@Defn{special_character}@nt<special_character>@\Any
+character of the ISO 10646 BMP that is not reserved for a control function, and
+is not the @nt<space_character>, an @nt<identifier_letter>, or a @nt<digit>.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
 @ChgDeleted{Version=[2],Text=[Note that the no break space and soft hyphen
@@ -188,6 +201,26 @@ are @nt<special_character>s,
 and therefore @nt<graphic_character>s.
 They are not the same characters as space and hyphen-minus.]}
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Defn{format_effector}@nt<format_effector>@\The
+@Chg{Version=[2],New=[characters whose code positions are
+16#09# (CHARACTER TABULATION), 16#0A# (LINE FEED(LF)), 16#0B# (LINE TABULATION),
+16#0C# (FORM FEED(FF)), 16#0D# (CARRIAGE RETURN(CR)), 16#85# (NEXT LINE(NEL)),
+and the characters in categories @nt{separator_line} and
+@nt{separator_paragraph}. The names mentioned in parentheses in this list
+are not defined by ISO/IEC 10646:2003; they are only used for convenience in
+this International Standard],
+Old=[control functions of ISO 6429 called
+  character tabulation (HT), line tabulation (VT), carriage return (CR),
+  line feed (LF), and form feed (FF)]}.
+@IndexSeeAlso{Term=[control character],See=(format_effector)}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@Defn{other_control}@nt{other_control}@\Any
+character whose General Category is defined
+to be @lquotes@;Other, Control@rquotes@;, and which is not defined to be a
+@nt<format_effector>.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[@Defn{other_format}@nt{other_format}@\Any
@@ -218,20 +251,6 @@ character whose General Category is defined to be @lquotes@;Separator, Line@rquo
 character whose General Category is defined to be @lquotes@;Separator, Paragraph@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Defn{format_effector}@nt<format_effector>@\The
-@Chg{Version=[2],New=[characters whose code position is
-16#09# (CHARACTER TABULATION), 16#0A# (LINE FEED(LF)), 16#0B# (LINE TABULATION),
-16#0C# (FORM FEED(FF)), 16#0D# (CARRIAGE RETURN(CR)), 16#85# (NEXT LINE(NEL)),
-and the characters in categories @nt{separator_line} and
-@nt{separator_paragraph}. The names mentioned in parentheses in this list
-are not defined by ISO/IEC 10646:2003; they are only used for convenience in
-this International Standard],
-Old=[control functions of ISO 6429 called
-  character tabulation (HT), line tabulation (VT), carriage return (CR),
-  line feed (LF), and form feed (FF)]}.
-@IndexSeeAlso{Term=[control character],See=(format_effector)}
-
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Chg{Version=[2],New=[@Defn{graphic_character}@nt{graphic_character}],
 Old=[@Defn{other_control_function}@nt<other_control_function>]}@\@Chg{Version=[2],
 New=[Any character which is not in the categories @nt{other_control},
@@ -246,13 +265,13 @@ control functions allowed in comments.]}]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[We considered basing the definition of
+@ChgAdded{Version=[2],Text=`We considered basing the definition of
 lexical elements on Annex A of ISO/IEC
 TR 10176 (4th edition), which lists the characters which should be supported in
 identifiers for all programming languages, but we finally decided against this
 option. Note that it is not our intent to diverge from ISO/IEC TR 10176,
 except to the extent that ISO/IEC TR 10176 itself diverges from ISO/IEC
-10646:2003 (which is the case at the time of this writing).]}
+10646:2003 (which is the case at the time of this writing [January 2005]).'}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[More precisely, we intend to align
@@ -266,22 +285,14 @@ make a choice because there are important differences between the two:]}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[ISO/IEC TR 10176 is still based on
 ISO/IEC 10646:2000 while ISO/IEC 10646:2003 has already been published
-for a year.]}
+for a year. We cannot afford to delay
+the adoption of our amendment until ISO/IEC TR 10176 has been revised.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[There are considerable differences between the
 two editions of ISO/IEC 10646,
 notably in supporting characters beyond the BMP (this might be significant for
 some languages, e.g. Korean).]}
-
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[ISO/IEC TR 10176 is a moving target. It is in its
-fourth edition already, and
-nevertheless needs additional revision to catch up with ISO/IEC 10646:2003. We
-cannot afford to revise the Ada language and the vendors cannot afford to change
-the compilers each time ISO/IEC TR 10176 changes. And we cannot afford to delay
-the adoption of our amendment until ISO/IEC TR 10176 has been revised; we would
-run out of interest, money, and the ISO time table before then.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[ISO/IEC TR 10176 does not define case conversion
@@ -487,12 +498,13 @@ such as which characters are allowed in the text of a program.]}
 @end{ImplPerm}
 
 @begin{Notes}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@ChgDeleted{Version=[2],Text=[Every code position of ISO 10646 BMP
-that is not reserved for a control
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Chg{Version=[2],New=[The characters in categories @nt{other_control},
+@nt{other_private_use}, and @nt{other_surrogate} are only allowed in comments],
+Old=[Every code position of ISO 10646 BMP that is not reserved for a control
 function is defined to be a @nt<graphic_character> by this International Standard.
 This includes all code positions other than 0000 - 001F, 007F - 009F,
-and FFFE - FFFF.]}
+and FFFE - FFFF]}.
 
 The language does not specify the source representation of programs.
 @begin(Discussion)
@@ -533,7 +545,7 @@ and @nt{basic_character} are removed.
 @nt{Special_character} is expanded to include Ada 83's
 @nt{other_special_character}, as well as new 8-bit characters not
 present in Ada 83.@Chg{Version=[2],New=[ Ada 2005 removes
-@nt{Special_character} altogether; we want to stick to ISO/IEC 10646:2003
+@nt{special_character} altogether; we want to stick to ISO/IEC 10646:2003
 character classifications.],Old=[]}
 Note that the term @lquotes@;basic letter@rquotes@; is used
 in @RefSec{Character Handling}
@@ -553,7 +565,7 @@ permitted in identifiers (in the standard mode).]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Program text can use most characters defined by ISO-10646:2003. This
-  clause has be rewritten to use the categories defined in that Standard.
+  clause has been rewritten to use the categories defined in that Standard.
   This should ease programming in languages other than English.]}
 @end{Extend95}
 

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2000/09/27 00:15:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2005/01/30 06:44:20 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/09/27 00:15:10 $}
+@Comment{$Date: 2005/01/30 06:44:20 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1148,17 +1148,17 @@ defined.]
 @Leading@Keepnext@;The following language-defined library package exists:
 @begin{example}
 @key[package] Ada.Task_Identification @key[is]@ChildUnit{Parent=[Ada],Child=[Task_Identification]}
-   @key[type] @AdaTypeDefn{Task_ID} @key[is] @key{private};
-   @AdaSubDefn{Null_Task_ID} : @key{constant} Task_ID;
-   @key{function}  "=" (Left, Right : Task_ID) @key{return} Boolean;
+   @key[type] @AdaTypeDefn{Task_Id} @key[is] @key{private};
+   @AdaSubDefn{Null_Task_Id} : @key{constant} Task_Id;
+   @key{function}  "=" (Left, Right : Task_Id) @key{return} Boolean;
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0070]}
-   @key{function}  @AdaSubDefn{Image}        (T : Task_ID) @key{return} String;
-   @key[function]  @AdaSubDefn{Current_Task} @key[return] Task_ID;
-   @Key[procedure] @AdaSubDefn{Abort_Task}   (T : @key[in] @Chg{New=[],Old=[@key[out] ]}Task_ID);
+   @key{function}  @AdaSubDefn{Image}        (T : Task_Id) @key{return} String;
+   @key[function]  @AdaSubDefn{Current_Task} @key[return] Task_Id;
+   @Key[procedure] @AdaSubDefn{Abort_Task}   (T : @key[in] @Chg{New=[],Old=[@key[out] ]}Task_Id);
 
-   @key[function]  @AdaSubDefn{Is_Terminated}(T : Task_ID) @key{return} Boolean;
-   @key[function]  @AdaSubDefn{Is_Callable}  (T : Task_ID) @key{return} Boolean;
+   @key[function]  @AdaSubDefn{Is_Terminated}(T : Task_Id) @key{return} Boolean;
+   @key[function]  @AdaSubDefn{Is_Callable}  (T : Task_Id) @key{return} Boolean;
 @key[private]
    ... -- @RI{not specified by the language}
 @key[end] Ada.Task_Identification;
@@ -1167,15 +1167,15 @@ defined.]
 
 @begin{RunTime}
 
-A value of the type Task_ID identifies an existent task. The constant
-Null_Task_ID does not identify any task. Each object of the type Task_ID
-is default initialized to the value of Null_Task_ID.
+A value of the type Task_Id identifies an existent task. The constant
+Null_Task_Id does not identify any task. Each object of the type Task_Id
+is default initialized to the value of Null_Task_Id.
 
 The function "=" returns True if and only if Left and Right identify the same
-task or both have the value Null_Task_ID.
+task or both have the value Null_Task_Id.
 
 The function Image returns an implementation-defined string that identifies
-T. If T equals Null_Task_ID, Image returns an empty string.
+T. If T equals Null_Task_Id, Image returns an empty string.
 @ImplDef{The result of the Task_Identification.Image attribute.}
 
 The function Current_Task returns a value that identifies the calling task.
@@ -1201,7 +1201,7 @@ the following attribute is defined:
 @begin{Description}
 
 @Attribute{Prefix=<T>, AttrName=<Identity>,
-  Text=[Yields a value of the type Task_ID that identifies
+  Text=[Yields a value of the type Task_Id that identifies
     the task denoted by T.]}
 
 @end{Description}
@@ -1212,7 +1212,7 @@ the following attribute is defined:
 the following attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<E>, AttrName=<Caller>,
-    Text=[Yields a value of the type Task_ID that identifies the task
+    Text=[Yields a value of the type Task_Id that identifies the task
        whose call is now being serviced. Use of this attribute is
        allowed only inside an @nt{entry_body} or @nt{accept_statement}
        corresponding to the @nt{entry_declaration} denoted by E.]}
@@ -1220,7 +1220,7 @@ the following attribute is defined:
 @EndPrefixType{}
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-Program_Error is raised if a value of Null_Task_ID is passed
+Program_Error is raised if a value of Null_Task_Id is passed
 as a parameter to Abort_Task, Is_Terminated, and Is_Callable.
 
 @PDefn2{Term=[potentially blocking operation],Sec=(Abort_Task)}
@@ -1235,11 +1235,11 @@ It is a bounded error to call the Current_Task function from
 an entry body or an interrupt handler.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised, or an implementation-defined value of the type
-Task_ID is returned.
+Task_Id is returned.
 @ImplDef{The value of Current_Task when in a protected entry or
 interrupt handler.}
 @begin{ImplNote}
-This value could be Null_Task_ID, or the ID of some user task, or that of
+This value could be Null_Task_Id, or the ID of some user task, or that of
 an internal task created by the implementation.
 @end{ImplNote}
 
@@ -1247,7 +1247,7 @@ an internal task created by the implementation.
 
 @begin{Erron}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
-If a value of Task_ID is passed as a parameter to any of the operations
+If a value of Task_Id is passed as a parameter to any of the operations
 declared in this package (or any language-defined child of this
 package), and the corresponding task object no longer exists,
 the execution of the program is erroneous.
@@ -1269,7 +1269,7 @@ conjunction with other operations requiring a task as an argument such
 as Set_Priority (see @RefSecNum{Dynamic Priorities}).
 
 The function Current_Task and the attribute Caller can return a
-Task_ID value that identifies the environment task.
+Task_Id value that identifies the environment task.
 
 @end{Notes}
 
@@ -1286,15 +1286,15 @@ Task_ID value that identifies the environment task.
 
    @key{type} @AdaTypeDefn{Attribute_Handle} @key{is} @key{access} @key{all} Attribute;
 
-   @key{function} @AdaSubDefn{Value}(T : Task_ID := Current_Task)
+   @key{function} @AdaSubDefn{Value}(T : Task_Id := Current_Task)
      @key{return} Attribute;
 
-   @key{function} @AdaSubDefn{Reference}(T : Task_ID := Current_Task)
+   @key{function} @AdaSubDefn{Reference}(T : Task_Id := Current_Task)
      @key{return} Attribute_Handle;
 
    @key{procedure} @AdaSubDefn{Set_Value}(Val : @key[in] Attribute;
-                             T : @key[in] Task_ID := Current_Task);
-   @key{procedure} @AdaSubDefn{Reinitialize}(T : @key[in] Task_ID := Current_Task);
+                             T : @key[in] Task_Id := Current_Task);
+   @key{procedure} @AdaSubDefn{Reinitialize}(T : @key[in] Task_Id := Current_Task);
 
 @key{end} Ada.Task_Attributes;
 @end{example}
@@ -1335,7 +1335,7 @@ In most cases, the attribute memory can be reclaimed at this point.
 For all the operations declared in this package, Tasking_Error is raised
 if the task identified by T is terminated.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-Program_Error is raised if the value of T is Null_Task_ID.
+Program_Error is raised if the value of T is Null_Task_Id.
 @end{RunTime}
 
 @begin{Bounded}
@@ -1360,7 +1360,7 @@ the same task attribute, or after the associated task terminates.
 @end{Reason}
 
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
-If a value of Task_ID is passed as a parameter to any of the operations
+If a value of Task_Id is passed as a parameter to any of the operations
 declared in this package and the corresponding task object no longer exists,
 the execution of the program is erroneous.
 
