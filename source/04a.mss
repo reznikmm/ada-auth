@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:00 $}
+@Comment{$Date: 2000/05/29 05:47:20 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -103,12 +103,12 @@ This means
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=evaluation, Sec=(name)}
+@PDefn2{Term=[evaluation], Sec=(name)}
 The evaluation of a @nt<name> determines the entity denoted by the
 name.  This evaluation has no other effect for a @nt<name> that
 is a @nt<direct_name> or a @nt<character_literal>.
 
-@PDefn2{Term=evaluation, Sec=(name that has a prefix)}
+@PDefn2{Term=[evaluation], Sec=(name that has a prefix)}
 @Redundant[The evaluation of a @nt<name> that has a @nt<prefix> includes
 the evaluation of the @nt<prefix>.]
 @PDefn2{Term=[evaluation], Sec=(prefix)}
@@ -2013,7 +2013,7 @@ computation or retrieval of a value of that type.
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=evaluation, Sec=(primary that is a name)}
+@PDefn2{Term=[evaluation], Sec=(primary that is a name)}
 The value of a @nt<primary> that is a @nt{name} denoting an object
 is the value of the object.
 @end{RunTime}
@@ -2789,7 +2789,7 @@ They have the following specifications:
 
 @begin{RunTime}
 
-@PDefn2{Term=evaluation, Sec=(concatenation)}
+@PDefn2{Term=[evaluation], Sec=(concatenation)}
 For the evaluation of a concatenation with result type @i(T),
 if both operands are of type @i(T), the result of the concatenation
 is a one-dimensional array whose length is the sum of the lengths
@@ -4400,7 +4400,7 @@ both of whose @nt{relation}s are static expressions;
 a static expression enclosed in parentheses.
 @end{Itemize}
 @begin(Discussion)
-  @Defn2{Term=static, Sec=(value)}
+  @Defn2{Term=[static], Sec=(value)}
   Informally, we talk about a @i(static value).  When we do,
   we mean a value specified by a static expression.
 @end(Discussion)
@@ -4414,7 +4414,7 @@ a static expression enclosed in parentheses.
   in a @nt<record_aggregate> or @nt<extension_aggregate>.
 @end{Ramification}
 
-@Defn2{Term=statically, Sec=(denote)}
+@Defn2{Term=[statically], Sec=(denote)}
 A @nt{name} @i(statically denotes) an entity if it
 denotes the entity and:
 @begin(itemize)
@@ -4434,7 +4434,7 @@ denotes the entity and:
 and @nt{indexed_component}s do not statically denote things.
 @end{Ramification}
 
-@Defn2{Term=static, Sec=(function)}
+@Defn2{Term=[static], Sec=(function)}
 A @i{static function} is one of the following:
 @begin{Ramification}
   These are the functions whose calls can be static expressions.
@@ -4458,7 +4458,7 @@ and if the parameter and result types are scalar.
 
 In any case, a generic formal subprogram is not a static function.
 
-@Defn2{Term=static, Sec=(constant)}
+@Defn2{Term=[static], Sec=(constant)}
 A @i(static constant) is
 a constant view declared by a full constant declaration
 or an @nt<object_renaming_declaration> with a static nominal subtype,
@@ -4496,22 +4496,22 @@ A @i(static range) is a @nt{range} whose bounds are
 static expressions,
 @Redundant[or a @nt<range_attribute_reference> that is equivalent to
 such a @nt<range>.]
-@Defn2{Term=static, Sec=(discrete_range)}
+@Defn2{Term=[static], Sec=(discrete_range)}
 A @i(static @nt<discrete_range>) is one that is a static range
 or is a @nt<subtype_indication> that defines a static scalar subtype.
 The base range of a scalar type is a static range, unless the
 type is a descendant of a formal scalar type.
 
-@Defn2{Term=static, Sec=(subtype)}
+@Defn2{Term=[static], Sec=(subtype)}
 A @i(static subtype) is either a @i(static scalar subtype) or a
 @i(static string subtype).
-@Defn2{Term=static, Sec=(scalar subtype)}
+@Defn2{Term=[static], Sec=(scalar subtype)}
 A static scalar subtype is an unconstrained scalar subtype whose
 type is not a descendant of a formal scalar type, or
 a constrained scalar subtype formed by imposing a compatible
 static constraint on a
 static scalar subtype.
-@Defn2{Term=static, Sec=(string subtype)}
+@Defn2{Term=[static], Sec=(string subtype)}
 A static string subtype is an unconstrained string subtype
 whose index subtype and component subtype are static
 
@@ -4558,30 +4558,30 @@ A similar issue arises for generic formal functions,
 now that function calls are object names.
 @end{Reason}
 
-@Defn2{Term=static, Sec=(constraint)}
+@Defn2{Term=[static], Sec=(constraint)}
 The different kinds of @i(static constraint) are defined as follows:
 @begin(itemize)
   A null constraint is always static;
 
-  @Defn2{Term=static, Sec=(range constraint)}
-  @Defn2{Term=static, Sec=(digits constraint)}
-  @Defn2{Term=static, Sec=(delta constraint)}
+  @Defn2{Term=[static], Sec=(range constraint)}
+  @Defn2{Term=[static], Sec=(digits constraint)}
+  @Defn2{Term=[static], Sec=(delta constraint)}
   A scalar constraint is static if it has no
   @nt<range_constraint>,
   or one with a static range;
 
-  @Defn2{Term=static, Sec=(index constraint)}
+  @Defn2{Term=[static], Sec=(index constraint)}
   An index constraint is static if each
   @nt<discrete_range> is static, and each index subtype of the
   corresponding array type is static;
 
-  @Defn2{Term=static, Sec=(discriminant constraint)}
+  @Defn2{Term=[static], Sec=(discriminant constraint)}
   A discriminant constraint is static if
   each @nt<expression> of the constraint is static,
   and the subtype of each discriminant is static.
 @end(itemize)
 
-@Defn2{Term=statically, Sec=(constrained)}
+@Defn2{Term=[statically], Sec=(constrained)}
 A subtype is @i(statically constrained) if it is constrained,
 and its constraint is static.
 An object is @i(statically constrained) if its nominal subtype is

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:23 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/05/27 04:44:04 $}
+@Comment{$Date: 2000/05/29 05:47:23 $}
 
 @LabeledClause{String Handling}
 
@@ -30,7 +30,7 @@ common to the string handling packages.
 @begin{StaticSem}
 The library package Strings has the following declaration:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Strings],Expanded=[Ada.Strings]}
+@ChildUnit{Parent=[Ada],Child=[Strings]}
 @key[package] Ada.Strings @key[is]
    @key[pragma] Pure(Strings);
 
@@ -62,7 +62,7 @@ entities needed for character sets and character-to-character mappings.
 @begin{StaticSem}
 The library package Strings.Maps has the following declaration:
 @begin{example}
-@ChildUnit{Parent=[Ada.Strings],Child=[Maps],Expanded=[Ada.Strings.Maps]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Maps]}
 @key[package] Ada.Strings.Maps @key[is]
    @key[pragma] Preelaborate(Maps);
 
@@ -251,11 +251,11 @@ The function Value returns the Character value to which Element maps
 with respect to the mapping represented by Map.
 @end{DescribeCode}
 
-@Defn2{Term=match, Sec=(a character to a pattern character)}
+@Defn2{Term=[match], Sec=(a character to a pattern character)}
 A character C @i{matches} a pattern character P
 with respect to a given Character_Mapping value Map if
 Value(Map, C) = P.
-@Defn2{Term=match, Sec=(a string to a pattern string)}
+@Defn2{Term=[match], Sec=(a string to a pattern string)}
 A string S @i{matches} a pattern string P with respect to a
 given Character_Mapping if their lengths are the same
 and if each character in S matches its corresponding character in
@@ -373,7 +373,7 @@ procedures.
 The library package Strings.Fixed has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
-@ChildUnit{Parent=[Ada.Strings],Child=[Fixed],Expanded=[Ada.Strings.Fixed]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Fixed]}
 @key[package] Ada.Strings.Fixed @key[is]
    @key[pragma] Preelaborate(Fixed);
 
@@ -998,7 +998,7 @@ the copying and comparison of bounded strings.@end{reason}
 The library package Strings.Bounded has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
-@ChildUnit{Parent=[Ada.Strings],Child=[Bounded],Expanded=[Ada.Strings.Bounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Bounded]}
 @key[package] Ada.Strings.Bounded @key[is]
    @key[pragma] Preelaborate(Bounded);
 
@@ -1495,7 +1495,7 @@ as the length does not exceed the allocated length.
 The library package Strings.Unbounded has the following declaration:
 @begin{example}
 @key[with] Ada.Strings.Maps;
-@ChildUnit{Parent=[Ada.Strings],Child=[Unbounded],Expanded=[Ada.Strings.Unbounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Unbounded]}
 @key[package] Ada.Strings.Unbounded @key[is]
    @key[pragma] Preelaborate(Unbounded);
 
@@ -1861,7 +1861,7 @@ in a preelaborable way (i.e. via aggregates versus function calls).
 The library package Strings.Maps.Constants has the following declaration:
 
 @begin{example}
-@ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants],Expanded=[Ada.Strings.Maps.Constants]}
+@ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants]}
 @key[package] Ada.Strings.Maps.Constants @key[is]
    @key[pragma] Preelaborate(Constants);
 
@@ -1909,19 +1909,19 @@ They provide the same string-handling operations
 as the corresponding packages for
 strings of Character elements.
 @Defn{Ada.Strings.Wide_Fixed}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Fixed],Expanded=[Ada.Strings.Wide_Fixed]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Fixed]}
 @Defn{Ada.Strings.Wide_Bounded}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Bounded],Expanded=[Ada.Strings.Wide_Bounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Bounded]}
 @Defn{Ada.Strings.Wide_Unbounded}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Unbounded],Expanded=[Ada.Strings.Wide_Unbounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Unbounded]}
 @Defn{Ada.Strings.Wide_Maps.Wide_Constants}
-@ChildUnit{Parent=[Ada.Strings.Wide_Maps],Child=[Wide_Constants],Expanded=[Ada.Strings.Wide_Maps.Wide_Constants]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Maps],Child=[Wide_Constants]}
 @end{Intro}
 
 @begin{StaticSem}
 The package Strings.Wide_Maps has the following declaration.
 @begin{example}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Maps],Expanded=[Ada.Strings.Wide_Maps]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Maps]}
 @key[package] Ada.Strings.Wide_Maps @key[is]
    @key[pragma] Preelaborate(Wide_Maps);
 
@@ -2066,5 +2066,5 @@ Each Wide_Character_Set constant in the package
 Strings.Wide_Maps.Wide_Constants contains no values outside the Character
 portion of Wide_Character.  Similarly, each Wide_Character_Mapping
 constant in this package is the identity mapping when applied to
-any element outside the Character portion of Wide_Character. 
+any element outside the Character portion of Wide_Character.
 @end{Notes}

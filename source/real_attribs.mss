@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:02 $}
+@Comment{$Date: 2000/05/29 05:47:22 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.14 $}
+@comment{$Revision: 1.15 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -218,8 +218,8 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;Let @RI{v} be the value @RI{Fraction} @Times
+   @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   Let @RI{v} be the value @RI{Fraction} @Times
    @RI{T}@R('Machine_Radix)@+{@RI{Exponent}-@RI{k}},
    where @RI{k} is the normalized exponent of @i{Fraction}.
    If @RI{v} is a machine number of the type @i{T}, or if
@@ -250,8 +250,8 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;Let @RI{v} be the value @RI{X} @Times @RI{T}@R('Machine_Radix)@+{@RI{Adjustment}}.
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   Let @RI{v} be the value @RI{X} @Times @RI{T}@R('Machine_Radix)@+{@RI{Adjustment}}.
    If @RI{v} is a machine number of the type @i{T}, or if
    @Abs{@RI{v}} @geq @RI{T}@R('Model_Small), the function yields @RI{v};
    otherwise,
@@ -347,8 +347,8 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;For nonzero @i{Y}, let @RI{v} be the value
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   For nonzero @i{Y}, let @RI{v} be the value
    @RI{X} - @RI{n} @Times @RI{Y}, where @RI{n} is the integer nearest to
    the exact value of @RI{X}/@RI{Y}; if @Abs{@RI{n} - @RI{X}/@RI{Y}} @Thin = @Thin 1/2,
    then @RI(n) is chosen to be even.  If @RI{v} is a machine number of
@@ -374,8 +374,8 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;If @RI{Towards} @Thin = @Thin @RI{X}, the function yields @i{X}; otherwise, it
+   @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   If @RI{Towards} @Thin = @Thin @RI{X}, the function yields @i{X}; otherwise, it
    yields the machine number of the type @i{T} adjacent to @i{X} in the
    direction of @i{Towards}, if that machine number exists.
    @IndexCheck{Range_Check}If the result would
@@ -396,8 +396,8 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;If the value of @i{Value} is nonzero, the function yields a result whose
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   If the value of @i{Value} is nonzero, the function yields a result whose
    magnitude is that of @i{Value} and whose sign is that of @i{Sign};
    otherwise, it yields the value zero.
 @IndexCheck{Range_Check}Constraint_Error is optionally raised if the result
@@ -434,8 +434,8 @@ is outside the base range of S.
       when @i{X} is negative and @i{Radix_Digits} is positive.
    @end{Itemize}
 
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@IndexCheck{Range_Check}Constraint_Error is raised when @i{Radix_Digits}
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   @IndexCheck{Range_Check}Constraint_Error is raised when @i{Radix_Digits}
    is zero or negative.
    A zero result@Redundant{, which can only occur when @i{X} is zero,} has the
    sign of @i{X}.]}
@@ -459,8 +459,8 @@ is outside the base range of S.
   @key(return) @RI{T}
 @end{DescExample}
 
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-   @NoPrefix@;If @i{X} is a machine number of the type @i{T}, the function yields @i{X};
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   If @i{X} is a machine number of the type @i{T}, the function yields @i{X};
    otherwise, it yields the value obtained by rounding or truncating @i{X} to
    either one of the adjacent machine numbers of the type @i(T).
 @IndexCheck{Range_Check}Constraint_Error is raised if rounding or

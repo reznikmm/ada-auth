@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:22 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/05/27 04:44:03 $}
+@Comment{$Date: 2000/05/29 05:47:22 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -534,7 +534,7 @@ a protected procedure that is an interrupt handler.
 
 The following language-defined packages exist:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Interrupts],Expanded=[Ada.Interrupts]}
+@ChildUnit{Parent=[Ada],Child=[Interrupts]}
 @key{with} System;
 @key[package] Ada.Interrupts @key[is]
 @LangDefType{Package=[Ada.Interrupts],Type=[Interrupt_ID]}
@@ -578,7 +578,7 @@ The following language-defined packages exist:
 @key[end] Ada.Interrupts;
 
 
-@ChildUnit{Parent=[Ada.Interrupts],Child=[Names],Expanded=[Ada.Interrupts.Names]}
+@ChildUnit{Parent=[Ada.Interrupts],Child=[Names]}
 @key[package] Ada.Interrupts.Names @key[is]
    @RI{implementation-defined} : @key[constant] Interrupt_ID :=
      @RI{implementation-defined};
@@ -1015,7 +1015,7 @@ This precludes any use of register temporaries, caches, and other
 similar optimizations for that object.
 @end{ImplNote}
 
-@Defn2{Term=sequential, Sec=(actions)}
+@Defn2{Term=[sequential], Sec=(actions)}
 Two actions are sequential (see @RefSecNum{Shared Variables}) if each
 is the read or update of the same atomic object.
 
@@ -1118,7 +1118,7 @@ defined.]
 @begin{StaticSem}
 The following language-defined library package exists:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Task_Identification],Expanded=[Ada.Task_Identification]}
+@ChildUnit{Parent=[Ada],Child=[Task_Identification]}
 @key[package] Ada.Task_Identification @key[is]
 @LangDefType{Package=[Ada.Task_Identification],Type=[Task_ID]}
    @key[type] Task_ID @key[is] @key{private};
@@ -1247,7 +1247,7 @@ The following language-defined generic library package exists:
 @key{generic}
    @key{type} Attribute @key{is} @key{private};
    Initial_Value : @key[in] Attribute;
-@ChildUnit{Parent=[Ada],Child=[Task_Attributes],Expanded=[Ada.Task_Attributes]}
+@ChildUnit{Parent=[Ada],Child=[Task_Attributes]}
 @key{package} Ada.Task_Attributes @key{is}
 
 @LangDefType{Package=[Ada.Task_Attributes],Type=[Attribute_Handle]}

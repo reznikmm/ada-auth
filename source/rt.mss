@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:02 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/05/27 04:44:02 $}
+@Comment{$Date: 2000/05/29 05:47:21 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -994,7 +994,7 @@ The following language-defined library package exists:
 @begin{Example}
 @key[with] System;
 @key[with] Ada.Task_Identification; @RI{-- See @RefSecNum[The Package Task_Identification]}
-@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities],Expanded=[Ada.Dynamic_Priorities]}
+@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}
 @key[package] Ada.Dynamic_Priorities @key[is]
 
     @key[procedure] Set_Priority(Priority : @key[in] System.Any_Priority;
@@ -1417,7 +1417,7 @@ monotonic clock package.]
 @begin{StaticSem}
 The following language-defined library package exists:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Real_Time],Expanded=[Ada.Real_Time]}
+@ChildUnit{Parent=[Ada],Child=[Real_Time]}
 @key[package] Ada.Real_Time @key[is]
 
 @LangDefType{Package=[Ada.Real_Time],Type=[Time]}
@@ -1900,7 +1900,7 @@ queues.]
 
 The following language-defined package exists:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Synchronous_Task_Control],Expanded=[Ada.Synchronous_Task_Control]}
+@ChildUnit{Parent=[Ada],Child=[Synchronous_Task_Control]}
 @key{package} Ada.Synchronous_Task_Control @key{is}
 
 @LangDefType{Package=[Ada.Synchronous_Task_Control],Type=[Suspension_Object]}
@@ -1976,7 +1976,7 @@ It uses a conceptual @i{held priority} value to represent the task's
 The following language-defined library package exists:
 @begin{example}
 @key{with} Ada.Task_Identification;
-@ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control],Expanded=[Ada.Asynchronous_Task_Control]}
+@ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}
 @key{package} Ada.Asynchronous_Task_Control @key{is}
   @key{procedure} Hold(T : @key[in] Ada.Task_Identification.Task_ID);
   @key{procedure} Continue(T : @key[in] Ada.Task_Identification.Task_ID);

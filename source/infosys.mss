@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/05/28 05:17:46 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/05/28 05:17:46 $}
+@Comment{$Date: 2000/05/29 05:47:21 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -107,7 +107,7 @@ instructions that exploit the packed decimal representation.
 @begin{StaticSem}
 The library package Decimal has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Decimal],Expanded=[Ada.Decimal]}
+@ChildUnit{Parent=[Ada],Child=[Decimal]}
 @key(package) Ada.Decimal @key(is)
    @key(pragma) Pure(Decimal);
 
@@ -919,7 +919,7 @@ in @RefSecNum(Edited Output Generation).
 @begin{StaticSem}
 The library package Text_IO.Editing has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Text_IO],Child=[Editing],Expanded=[Ada.Text_IO.Editing]}
+@ChildUnit{Parent=[Ada.Text_IO],Child=[Editing]}
 @key(package) Ada.Text_IO.Editing @key(is)
 
    @key(type) Picture @key(is) @key(private);
@@ -1208,7 +1208,7 @@ for the currency string, would be an unnecessary complication.
 
 @begin{StaticSem}
 @Defn{Ada.Wide_Text_IO.Editing}
-@ChildUnit{Parent=[Ada.Wide_Text_IO],Child=[Editing],Expanded=[Ada.Wide_Text_IO.Editing]}
+@ChildUnit{Parent=[Ada.Wide_Text_IO],Child=[Editing]}
 @LangDefType{Package=[Ada.Wide_Text_IO.Editing],
              Type=[Picture]}
 The child package Wide_Text_IO.Editing has

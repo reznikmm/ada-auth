@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:03 $}
+@Comment{$Date: 2000/05/29 05:47:23 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -210,14 +210,14 @@ the floating point subtype is constrained by the @nt<range_constraint>.
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=compatibility,
+@PDefn2{Term=[compatibility],
   Sec=(delta_constraint with an ordinary fixed point subtype)}
 A @nt<delta_constraint> is @i(compatible) with an ordinary
 fixed point subtype if the value of the @nt<expression> is no less
 than the @i(delta) of the subtype, and the @nt<range_constraint>, if any,
 is compatible with the subtype.
 
-@PDefn2{Term=compatibility,
+@PDefn2{Term=[compatibility],
   Sec=(digits_constraint with a floating point subtype)}
 A @nt<digits_constraint> is @i(compatible) with a
 floating point subtype if the value of the @nt<expression> is no greater
@@ -225,7 +225,7 @@ than the requested decimal precision of the subtype, and
 the @nt<range_constraint>, if any,
 is compatible with the subtype.
 
-@PDefn2{Term=elaboration, Sec=(delta_constraint)}
+@PDefn2{Term=[elaboration], Sec=(delta_constraint)}
 The elaboration of a @nt<delta_constraint> consists of the
 elaboration of the @nt<range_constraint>, if any.
 @begin{Reason}
@@ -324,7 +324,7 @@ The following declaration exists in the declaration of package Standard:
       Underline : @key[constant] Character:= '_'; @\Grave     : @key[constant] Character:= '`';
       L_Brace   : @key[constant] Character:= '{'; @\Bar       : @key[constant] Character:= '|';
       R_Brace   : @key[constant] Character:= '}'; @\Tilde     : @key[constant] Character:= '~';
-      
+
 
       --@RI{ Lower case letters:}
 
@@ -441,7 +441,7 @@ specified via either notation.
 
 @begin{RunTime}
 
-@PDefn2{Term=initialization, Sec=[of a task object]}
+@PDefn2{Term=[initialization], Sec=[of a task object]}
 As part of the initialization of a task object, the
 address clause for an interrupt entry is
 elaborated@Redundant[, which evaluates the
@@ -453,7 +453,7 @@ If this check fails, Program_Error is raised.
 Otherwise, the interrupt entry
 is attached to the interrupt associated with the specified address.
 
-@PDefn2{Term=finalization, Sec=[of a task object]}
+@PDefn2{Term=[finalization], Sec=[of a task object]}
 Upon finalization of the task object, the interrupt entry, if any, is
 detached from the corresponding interrupt and the default treatment is
 restored.

@@ -1,18 +1,18 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:00 $}
+@Comment{$Date: 2000/05/29 05:47:20 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 
-@PDefn2{Term=execution, Sec=(Ada program)}
+@PDefn2{Term=[execution], Sec=(Ada program)}
 The execution of an Ada program consists of the execution of one
 or more @i(tasks).
 @Defn{task}
-@Defn2{Term=interaction, Sec=(between tasks)}
+@Defn2{Term=[interaction], Sec=(between tasks)}
 Each task represents a separate thread of
 control that proceeds independently and concurrently
 between the points where it @i(interacts) with other tasks.
@@ -76,7 +76,7 @@ Over time, tasks proceed through various @i(states).
 @PDefn2{Term=[task state], Sec=(inactive)}
 @Defn2{Term=[inactive], Sec=(a task state)}
 @PDefn2{Term=[task state], Sec=(blocked)}
-@Defn2{Term=blocked, Sec=(a task state)}
+@Defn2{Term=[blocked], Sec=(a task state)}
 @PDefn2{Term=[task state], Sec=(ready)}
 @Defn2{Term=[ready], Sec=(a task state)}
 @PDefn2{Term=[task state], Sec=(terminated)}
@@ -420,8 +420,8 @@ any initialization for the object created by the @nt<allocator>,
 and prior to returning the new access
 value.
 
-@Defn2{Term=activator, Sec=(of a task)}
-@PDefn2{term=blocked, Sec=(waiting for activations to complete)}
+@Defn2{Term=[activator], Sec=(of a task)}
+@PDefn2{term=[blocked], Sec=(waiting for activations to complete)}
 The task that created the new tasks and initiated their
 activations (the @i(activator)) is
 blocked until all of these activations complete (successfully
@@ -495,7 +495,7 @@ This clause has been rewritten in an attempt to improve presentation.
 
 @begin{RunTime}
 
-@Defn2{Term=dependence, Sec=(of a task on a master)}
+@Defn2{Term=[dependence], Sec=(of a task on a master)}
 @Defn2{Term=[task], Sec=(dependence)}
 @Defn2{Term=[task], Sec=(completion)}
 @Defn2{Term=[task], Sec=(termination)}
@@ -513,7 +513,7 @@ If the task is created by the elaboration of an @nt<object_declaration>,
 it depends on each master that includes this elaboration.
 @end(itemize)
 
-@Defn2{term=dependence, Sec=(of a task on another task)}
+@Defn2{term=[dependence], Sec=(of a task on another task)}
 Furthermore, if a task depends on a given master, it is defined
 to depend on the task that executes the master, and (recursively)
 on any master of that task.
@@ -530,7 +530,7 @@ any finalization of the @nt<task_body> has been performed
 @Redundant[The first step of finalizing a master
 (including a @nt<task_body>) is to
 wait for the termination of any tasks dependent on the master.]
-@PDefn2{Term=blocked, Sec=(waiting for dependents to terminate)}
+@PDefn2{Term=[blocked], Sec=(waiting for dependents to terminate)}
 The task executing the master is blocked until all the dependents
 have terminated.  @Redundant[Any remaining finalization is then performed
 and the master is left.]
@@ -1139,7 +1139,7 @@ This rule is expressible in terms of the execution resource
 associated with the protected object:
 @begin(Itemize)
 @Defn2{Term=[protected action], Sec=(start)}
-@Defn2{Term=acquire, Sec=(execution resource associated with protected object)}
+@Defn2{Term=[acquire], Sec=(execution resource associated with protected object)}
 @i(Starting) a protected action on a protected object
 corresponds to @i(acquiring) the execution resource associated
 with the protected object, either for concurrent read-only access
@@ -1147,7 +1147,7 @@ if the protected action is for a call on a protected function,
 or for exclusive read-write access otherwise;
 
 @Defn2{Term=[protected action], Sec=(complete)}
-@Defn2{Term=release, Sec=(execution resource associated with protected object)}
+@Defn2{Term=[release], Sec=(execution resource associated with protected object)}
 @i(Completing) the protected action
 corresponds to @i(releasing) the associated execution resource.
 @end(Itemize)
@@ -1502,7 +1502,7 @@ the same meaning (see @RefSecNum(Formal Parameter Modes)).
 Note that access parameters are not allowed for task entries (see above).
 @end{Discussion}
 
-@Defn2{Term=family, Sec=(entry)}
+@Defn2{Term=[family], Sec=(entry)}
 @Defn{entry family}
 @Defn{entry index subtype}
 An @nt<entry_declaration> with a @nt<discrete_subtype_definition>
@@ -1515,7 +1515,7 @@ an @nt<indexed_component>, where the @nt<prefix> denotes
 the @nt<entry_declaration> for the family, and the index value
 identifies the entry within the family.]
 @Defn{single entry}
-@Defn2{Term=entry, Sec=(single)}
+@Defn2{Term=[entry], Sec=(single)}
 The term @i(single entry) is used to refer to any entry other
 than an entry of an entry family.
 
@@ -1567,8 +1567,8 @@ For the execution of an @nt{accept_statement}, the @nt<entry_index>, if
 any, is first evaluated and converted to the entry index subtype;
 this index value identifies which entry of the family is to be accepted.
 @PDefn2{Term=[implicit subtype conversion],Sec=(entry index)}
-@PDefn2{Term=blocked, Sec=(on an @nt<accept_statement>)}
-@Defn2{Term=selection, Sec=(of an entry caller)}
+@PDefn2{Term=[blocked], Sec=(on an @nt<accept_statement>)}
+@Defn2{Term=[selection], Sec=(of an entry caller)}
 Further execution of the @nt<accept_statement> is then blocked
 until a caller of the corresponding entry is selected
 (see @RefSecNum(Entry Calls)), whereupon
@@ -1739,9 +1739,9 @@ the entry or entry family, and the entry index, if any
 
 @begin{RunTime}
 @Defn{open entry}
-@Defn2{Term=entry, Sec=(open)}
+@Defn2{Term=[entry], Sec=(open)}
 @Defn{closed entry}
-@Defn2{Term=entry, Sec=(closed)}
+@Defn2{Term=[entry], Sec=(closed)}
 Under certain circumstances (detailed below), an entry of a task
 or protected
 object is checked to see whether it is @i(open) or @i(closed):
@@ -1789,7 +1789,7 @@ For the execution of an @nt{entry_call_statement},
 evaluation of the @nt<name>
 and of the parameter associations
 is as for a subprogram call (see @RefSecNum{Subprogram Calls}).
-@Defn2{Term=issue, Sec=(an entry call)}
+@Defn2{Term=[issue], Sec=(an entry call)}
 The entry call is then @i(issued):
 For a call on an entry of a protected object, a new protected
 action is started on the object (see @RefSecNum(Protected Subprograms and Protected Actions)).
@@ -1830,7 +1830,7 @@ there is a separate (logical) entry queue for each entry of a
 given task or protected object
 @Redundant[(including each entry of an entry family)].
 
-@Defn2{Term=service, Sec=(an entry queue)}
+@Defn2{Term=[service], Sec=(an entry queue)}
 @Defn2{Term=[select an entry call], Sec=(from an entry queue)}
 When a queued call is @i{selected}, it is removed from its entry queue.
 Selecting a queued call from a particular entry queue is
@@ -1881,7 +1881,7 @@ the protected action completes.
   be done while another protected action is already in progress.
 @end(Discussion)
 
-@PDefn2{Term=blocked, Sec=(during an entry call)}
+@PDefn2{Term=[blocked], Sec=(during an entry call)}
 
 For an entry call that is added to a queue,
 and that is not the @nt<triggering_statement> of an
@@ -2382,7 +2382,7 @@ by a corresponding clock.
 
 The following language-defined library package exists:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Calendar],Expanded=[Ada.Calendar]}
+@ChildUnit{Parent=[Ada],Child=[Calendar]}
 @key(package) Ada.Calendar @key(is)
 @LangDefType{Package=[Ada.Calendar],Type=[Time]}
   @key(type) Time @key(is) @key(private;)
@@ -2463,7 +2463,7 @@ implementation defined.
   clock plus the specified duration.
 @end{Ramification}
 
-@PDefn2{Term=blocked, Sec=(on a @nt<delay_statement>)}
+@PDefn2{Term=[blocked], Sec=(on a @nt<delay_statement>)}
 The task executing a @nt<delay_statement> is blocked
 until the expiration time is reached, at which point it
 becomes ready again.  If the expiration time
@@ -3018,7 +3018,7 @@ of the call is not selected immediately).]
 
 @begin{RunTime}
 
-@PDefn2{Term=execution, Sec=(conditional_entry_call)}
+@PDefn2{Term=[execution], Sec=(conditional_entry_call)}
 The execution of a @nt<conditional_entry_call> is defined to be equivalent
 to the execution of a @nt<timed_entry_call> with a @nt<delay_alternative>
 specifying an immediate expiration time and the
@@ -3219,7 +3219,7 @@ they need not all be of the same task type.]
 @PDefn2{Term=[execution], Sec=(abort_statement)}
 For the execution of an @nt<abort_statement>, the given @i(task_)@nt<name>s
 are evaluated in an arbitrary order.
-@Defn2{Term=abort, Sec=(of a task)}
+@Defn2{Term=[abort], Sec=(of a task)}
 @Defn{abnormal task}
 @PDefn2{Term=[task state], Sec=(abnormal)}
 Each named task is
@@ -3520,7 +3520,7 @@ reading of variables shared between the tasks.]
 The actions of two different tasks are synchronized in this
 sense when an
 action of one task @i(signals) an action of the other task;
-@Defn2{Term=signal, Sec=(as defined between actions)}
+@Defn2{Term=[signal], Sec=(as defined between actions)}
 an action A1 is defined to signal an action A2 under the following
 circumstances:
 @begin(Itemize)
@@ -3593,7 +3593,7 @@ and an action of reading or updating a part of the same object
 (or of a neighboring object if the two are not
 independently addressable), then the execution of the actions is erroneous
 unless the actions are @i(sequential).
-@Defn2{Term=sequential, Sec=(actions)}
+@Defn2{Term=[sequential], Sec=(actions)}
 Two actions are sequential if one of the following is true:
 @begin(Itemize)
   One action signals the other;

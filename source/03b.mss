@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:43:59 $}
+@Comment{$Date: 2000/05/29 05:47:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @LabeledClause{Array Types}
 
@@ -132,7 +132,7 @@ they are always limited).
 @end{Legality}
 
 @begin{StaticSem}
-@Defn2{Term=dimensionality, Sec=(of an array)}
+@Defn2{Term=[dimensionality], Sec=(of an array)}
 @Defn{one-dimensional array}
 @Defn{multi-dimensional array}
 An array is characterized by the number of indices
@@ -149,7 +149,7 @@ The possible values for a given index are all the values between the
 lower and upper bounds, inclusive;
 @Defn{index range}
 this range of values is called the @i(index range).
-@Defn2{Term=bounds, Sec=(of an array)}
+@Defn2{Term=[bounds], Sec=(of an array)}
 The @i(bounds) of an array are the bounds of its index ranges.
 @Defn2{Term=[length], Sec=(of a dimension of an array)}
 The @i(length) of a dimension of an array is
@@ -167,27 +167,27 @@ and upper bounds for each index belong to
 the corresponding index subtype of its type, except for null arrays
 (see @RefSecNum(Index Constraints and Discrete Ranges))].
 
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 An @nt{unconstrained_array_definition} defines an array type with
 an unconstrained first subtype.
 Each @nt{index_subtype_definition} defines the
 corresponding index subtype to be the subtype denoted
 by the @nt{subtype_mark}.
-@redundant[@PDefn2{Term=box, Sec=(compound delimiter)}
+@redundant[@PDefn2{Term=[box], Sec=(compound delimiter)}
 The compound delimiter <> (called a @i(box)) of an
 @nt<index_subtype_definition> stands for an undefined range
 (different objects of the type need not have the same bounds).]
 
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 A @nt{constrained_array_definition} defines an array type with
 a constrained first subtype.
 Each @nt{discrete_subtype_definition}
 defines the corresponding index subtype,
 as well as the corresponding index range for the
 constrained first subtype.
-@PDefn2{Term=constraint, Sec=(of a first array subtype)}
+@PDefn2{Term=[constraint], Sec=(of a first array subtype)}
 The @i(constraint) of the first subtype consists of the bounds
 of the index ranges.
 @begin{Discussion}
@@ -965,8 +965,8 @@ Which values are present might depend on discriminants of
 
 @Defn{known discriminants}
 @Defn2{Term=[discriminants], Sec=(known)}
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 A type declared with a @nt<known_discriminant_part> is said to have
 @i(known discriminants); its first subtype is unconstrained.
 @Defn{unknown discriminants}
@@ -2044,7 +2044,7 @@ As for any derived type,
 additional primitive subprograms may be defined,
 and inherited primitive subprograms may be overridden.]
 @Defn{type extension}
-@Defn2{Term=extension, Sec=(of a type)}
+@Defn2{Term=[extension], Sec=(of a type)}
 The derived type is called an @i(extension)
 of the ancestor type, or simply a @i(type extension).
 @Defn2{Term=[extension], Sec=(of a record type)}
@@ -2127,7 +2127,7 @@ of the generic body result in distinct tags.
 
 The following language-defined library package exists:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Tags],Expanded=[Ada.Tags]}
+@ChildUnit{Parent=[Ada],Child=[Tags]}
 @key[package] Ada.Tags @key[is]
 @LangDefType{Package=[Tags],Type=[Tag]}
     @key[type] Tag @key[is] @key[private];
@@ -2199,9 +2199,9 @@ defined:
   rooted at @i(T) (or if S already denotes a class-wide subtype,
   then S'Class is the same as S).
 
-  @Defn2{Term=unconstrained, Sec=(subtype)}
-  @Defn2{Term=constrained, Sec=(subtype)}
-  @Noprefix@;S'Class is unconstrained.  However,
+  @Noprefix@;@Defn2{Term=[unconstrained], Sec=(subtype)}
+  @Defn2{Term=[constrained], Sec=(subtype)}
+  S'Class is unconstrained.  However,
   if S is constrained, then the values of S'Class are only those
   that when converted to the type @i(T) belong to S.]}
   @begin{Ramification}
@@ -3479,8 +3479,8 @@ and a formal parameter or generic formal object
 of a tagged type are defined to be aliased.
 @Redundant[Aliased views are the ones that can be designated by an
 access value.]
-@Defn2{Term=constrained, Sec=(object)}
-@Defn2{Term=unconstrained, Sec=(object)}
+@Defn2{Term=[constrained], Sec=(object)}
+@Defn2{Term=[unconstrained], Sec=(object)}
 @Defn{constrained by its initial value}
 If the view defined by an @nt{object_declaration} is aliased,
 and the type of the object has discriminants,
@@ -4211,7 +4211,7 @@ designated profile of the access type.
 @Defn2{Term=[level],Sec=(accessibility)}
 @Defn2{Term=[deeper],Sec=(accessibility level)}
 @Defn2{Term=[depth],Sec=(accessibility level)}
-@Defn2{Term[dangling references],Sec=(prevention via accessibility rules)}
+@Defn2{Term=[dangling references],Sec=(prevention via accessibility rules)}
 @Defn{lifetime}
 @Redundant[The accessibility rules,
 which prevent dangling references,
@@ -4721,7 +4721,7 @@ The current instance of a limited type
   nominal subtype is unconstrained,
   unless this subtype is indefinite,
   or the variable is aliased.
-  
+
   @begin(Discussion)
      This restriction is intended to be similar to the restriction
      on renaming discriminant-dependent subcomponents.

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:01 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/05/27 04:44:01 $}
+@Comment{$Date: 2000/05/29 05:47:21 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -411,7 +411,7 @@ a @nt<package_body>.
 
 @end{itemize}
 
-@PDefn2{Term=accessibility, Sec=(from shared passive library units)}
+@PDefn2{Term=[accessibility], Sec=(from shared passive library units)}
 @Defn{notwithstanding}
 Notwithstanding the definition of accessibility given in
 @RefSecNum(Operations of Access Types), the declaration
@@ -1426,7 +1426,7 @@ interface to implement remote subprogram calls.
 The following language-defined library package exists:
 @begin{example}
 @b(with) Ada.Streams; @RI{-- see @RefSecNum[The Package Streams]}
-@ChildUnit{Parent=[System],Child=[RPC],Expanded=[System.RPC]}
+@ChildUnit{Parent=[System],Child=[RPC]}
 @key(package) System.RPC @key(is)
 
 @LangDefType{Package=[System.RPC],Type=[Partition_ID]}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:22 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:03 $}
+@Comment{$Date: 2000/05/29 05:47:22 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -686,7 +686,7 @@ functions.
 @begin{StaticSem}
 The library package Interfaces.C has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Interfaces],Child=[C],Expanded=[Interfaces.C]}
+@ChildUnit{Parent=[Interfaces],Child=[C]}
 @key(package) Interfaces.C @key(is)
    @key(pragma) Pure(C);
 
@@ -1137,7 +1137,7 @@ and for which ``char *''
 The library package Interfaces.C.Strings has the following
 declaration:
 @begin{example}
-@ChildUnit{Parent=[Interfaces.C],Child=[Strings],Expanded=[Interfaces.C.Strings]}
+@ChildUnit{Parent=[Interfaces.C],Child=[Strings]}
 @key(package) Interfaces.C.Strings @key(is)
    @key[pragma] Preelaborate(Strings);
 
@@ -1416,7 +1416,7 @@ following declaration:
    @key(type) Element @key(is) @key(private);
    @key(type) Element_Array @key(is) @key(array) (Index @key(range) <>) @key(of) @key(aliased) Element;
    Default_Terminator : Element;
-@ChildUnit{Parent=[Interfaces.C],Child=[Pointers],Expanded=[Interfaces.C.Pointers]}
+@ChildUnit{Parent=[Interfaces.C],Child=[Pointers]}
 @key(package) Interfaces.C.Pointers @key(is)
    @key[pragma] Preelaborate(Pointers);
 
@@ -1675,7 +1675,7 @@ either an internal or external COBOL representation
 @begin{StaticSem}
 The library package Interfaces.COBOL has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Interfaces],Child=[COBOL],Expanded=[Interfaces.COBOL]}
+@ChildUnit{Parent=[Interfaces],Child=[COBOL]}
 @key(package) Interfaces.COBOL @key(is)
    @key[pragma] Preelaborate(COBOL);
 
@@ -1804,7 +1804,7 @@ The library package Interfaces.COBOL has the following declaration:
       @key(function) To_Decimal (Item   : @key(in) Byte_Array;
                            Format : @key(in) Binary_Format) @key(return) Num;
 
-      @key(function) To_Binary (Item   : @key(in) Num; 
+      @key(function) To_Binary (Item   : @key(in) Num;
                         Format : @key(in) Binary_Format) @key(return) Byte_Array;
 
       @RI{-- Internal Binary formats: data values are of type Binary or Long_Binary}
@@ -2312,7 +2312,7 @@ The library package Interfaces.Fortran has the following declaration:
 @begin{Example}
 @key[with] Ada.Numerics.Generic_Complex_Types;  @RI{-- see @RefSecNum{Complex Types}}
 @key[pragma] Elaborate_All(Ada.Numerics.Generic_Complex_Types);
-@ChildUnit{Parent=[Interfaces],Child=[Fortran],Expanded=[Interfaces.Fortran]}
+@ChildUnit{Parent=[Interfaces],Child=[Fortran]}
 @key[package] Interfaces.Fortran @key[is]
    @key[pragma] Pure(Fortran);
 

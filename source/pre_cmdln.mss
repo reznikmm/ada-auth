@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:23 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:03 $}
+@Comment{$Date: 2000/05/29 05:47:23 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program
@@ -15,7 +15,7 @@ on normal termination.
 @begin{StaticSem}
 The library package Ada.Command_Line has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Command_Line],Expanded=[Ada.Command_Line]}
+@ChildUnit{Parent=[Ada],Child=[Command_Line]}
 @key[package] Ada.Command_Line @key[is]
   @key[pragma] Preelaborate(Command_Line);
 

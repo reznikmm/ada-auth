@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:23 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:03 $}
+@Comment{$Date: 2000/05/29 05:47:23 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -26,7 +26,7 @@ This clause is new to Ada 9X.
 @begin{StaticSem}
 @keepnext@;The library package Characters has the following declaration:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Characters],Expanded=[Ada.Characters]}
+@ChildUnit{Parent=[Ada],Child=[Characters]}
 @key(package) Ada.Characters @key[is]
   @key[pragma] Pure(Characters);
 @key(end) Ada.Characters;
@@ -39,7 +39,7 @@ This clause is new to Ada 9X.
 @keepnext@;The library package Characters.Handling has the following declaration:
 @begin{example}
 @key[package] Ada.Characters.Handling @key[is]
-@ChildUnit{Parent=[Ada.Characters],Child=[Handling],Expanded=[Ada.Characters.Handling]}
+@ChildUnit{Parent=[Ada.Characters],Child=[Handling]}
   @key[pragma] Preelaborate(Handling);
 
 @keepnext--@RI{Character classification functions}
@@ -299,7 +299,7 @@ emphasizing the package ASCII.@end{reason}
 @keepnext@;The library package Characters.Latin_1 has the following
 declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Characters],Child=[Latin_1],Expanded=[Ada.Characters.Latin_1]}
+@ChildUnit{Parent=[Ada.Characters],Child=[Latin_1]}
 @key[package] Ada.Characters.Latin_1 @key[is]
     @key[pragma] Pure(Latin_1);
 

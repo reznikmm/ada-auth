@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:00 $}
+@Comment{$Date: 2000/05/29 05:47:20 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1350,7 +1350,7 @@ interpreted as both the declaration and body of a library subprogram.
 When a compilation unit is compiled,
 all compilation units upon which it depends semantically
 shall already exist in the environment;
-@Defn2{Term=consistency, Sec=(among compilation units)}
+@Defn2{Term=[consistency], Sec=(among compilation units)}
 the set of these compilation units shall be @i{consistent} in the
 sense that the new compilation unit shall not semantically depend
 (directly or indirectly) on two different versions of the same compilation
@@ -1499,7 +1499,7 @@ library units, and @nt{compilation}s.]
 @RootDefn{program unit pragma}
 @RootDefn{pragma, program unit}
 Certain @nt{pragma}s are defined to be @i{program unit pragmas}.
-@PDefn2{Term=apply, Sec=(to a program unit by a program unit pragma)}
+@PDefn2{Term=[apply], Sec=(to a program unit by a program unit pragma)}
 A @nt{name} given as the argument of a program unit pragma shall resolve to
 denote the declarations or renamings of one or more program
 units that occur immediately within the declarative region or @nt<compilation>

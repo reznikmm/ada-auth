@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:00 $}
+@Comment{$Date: 2000/05/29 05:47:20 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -113,9 +113,9 @@ A declarative region does not include @nt{context_clause}s.
 
 @Defn{occur immediately within}
 @Defn{immediately within}
-@Defn2{Term=[within],Sec(immediately)}
+@Defn2{Term=[within],Sec=(immediately)}
 @Defn{immediately enclosing}
-@Defn2{Term=[enclosing],Sec(immediately)}
+@Defn2{Term=[enclosing],Sec=(immediately)}
 A declaration occurs @i{immediately within} a declarative region if this
 region is the innermost declarative region that
 encloses the declaration

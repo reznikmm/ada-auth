@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:01 $}
+@Comment{$Date: 2000/05/29 05:47:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -233,7 +233,7 @@ The generic library package Sequential_IO has the following declaration:
 @key[with] Ada.IO_Exceptions;
 @key[generic]
    @key[type] Element_Type(<>) @key[is] @key[private];
-@ChildUnit{Parent=[Ada],Child=[Sequential_IO],Expanded=[Ada.Sequential_IO]}
+@ChildUnit{Parent=[Ada],Child=[Sequential_IO]}
 @key[package] Ada.Sequential_IO @key[is]
 
 @LangDefType{Package=[Ada.Sequential_IO],Type=[File_Type]}
@@ -569,7 +569,7 @@ The generic library package Direct_IO has the following declaration:
 @key[with] Ada.IO_Exceptions;
 @key[generic]
    @key[type] Element_Type @key[is] @key[private];
-@ChildUnit{Parent=[Ada],Child=[Direct_IO],Expanded=[Ada.Direct_IO]}
+@ChildUnit{Parent=[Ada],Child=[Direct_IO]}
 @key[package] Ada.Direct_IO @key[is]
 
 @LangDefType{Package=[Ada.Direct_IO],Type=[File_Type]}
@@ -751,12 +751,12 @@ the construction of user-defined input-output packages.
 @begin{StaticSem}
 The generic library package Storage_IO has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Storage_IO],Expanded=[Ada.Storage_IO]}
+@ChildUnit{Parent=[Ada],Child=[Storage_IO]}
 @key[with] Ada.IO_Exceptions;
 @key[with] System.Storage_Elements;
 @key[generic]
    @key[type] Element_Type @key[is] @key[private];
-@ChildUnit{Parent=[Ada],Child=[Direct_IO],Expanded=[Ada.Direct_IO]}
+@ChildUnit{Parent=[Ada],Child=[Direct_IO]}
 @key[package] Ada.Storage_IO @key[is]
    @key[pragma] Preelaborate(Storage_IO);
 
@@ -937,7 +937,7 @@ Append_File is new in Ada 9X.
 The library package Text_IO has the following declaration:
 @begin{Example}
 @key[with] Ada.IO_Exceptions;
-@ChildUnit{Parent=[Ada],Child=[Text_IO],Expanded=[Ada.Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Text_IO]}
 @key[package] Ada.Text_IO @key[is]
 
 @LangDefType{Package=[Ada.Text_IO],Type=[File_Type]}
@@ -2217,7 +2217,7 @@ read does not form a legal integer literal or if the value obtained is not
 
 Integer_Text_IO is a library package that is a nongeneric equivalent
 to Text_IO.Integer_IO for the predefined type Integer:
-@ChildUnit{Parent=[Ada],Child=[Integer_Text_IO],Expanded=[Ada.Integer_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Integer_Text_IO]}
 @begin{Example}
 @key[with] Ada.Text_IO;
 @key[package] Ada.Integer_Text_IO @key[is] @key[new] Ada.Text_IO.Integer_IO(Integer);
@@ -2432,7 +2432,7 @@ The value is rounded; a value
 
 Float_Text_IO is a library package that is a nongeneric equivalent
 to Text_IO.Float_IO for the predefined type Float:
-@ChildUnit{Parent=[Ada],Child=[Float_Text_IO],Expanded=[Ada.Float_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Float_Text_IO]}
 @begin{Example}
 @key[with] Ada.Text_IO;
 @key[package] Ada.Float_Text_IO @key[is] @key[new] Ada.Text_IO.Float_IO(Float);
@@ -2642,7 +2642,7 @@ and as a sequence of lines grouped into pages.
 
 @begin{StaticSem}
 @Defn{Ada.Wide_Text_IO}
-@ChildUnit{Parent=[Ada],Child=[Wide_Text_IO],Expanded=[Ada.Wide_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Wide_Text_IO]}
 The specification of package Wide_Text_IO is the same as that for
 Text_IO, except that in each Get,
 Look_Ahead, Get_Immediate,
@@ -2652,9 +2652,9 @@ occurrence of String is replaced by Wide_String.
 
 
 @Defn{Ada.Integer_Wide_Text_IO}
-@ChildUnit{Parent=[Ada],Child=[Integer_Wide_Text_IO],Expanded=[Ada.Integer_Wide_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Integer_Wide_Text_IO]}
 @Defn{Ada.Float_Wide_Text_IO}
-@ChildUnit{Parent=[Ada],Child=[Float_Wide_Text_IO],Expanded=[Ada.Float_Wide_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Float_Wide_Text_IO]}
 Nongeneric equivalents of Wide_Text_IO.Integer_IO
 and Wide_Text_IO.Float_IO are provided (as for Text_IO)
 for each predefined numeric type,
@@ -2700,7 +2700,7 @@ See @RefSecNum{Streams} for a general discussion of streams.
 The library package Streams.Stream_IO has the following declaration:
 @begin(example)
 @key(with) Ada.IO_Exceptions;
-@ChildUnit{Parent=[Ada.Streams],Child=[Stream_IO],Expanded=[Ada.Streams.Stream_IO]}
+@ChildUnit{Parent=[Ada.Streams],Child=[Stream_IO]}
 @key(package) Ada.Streams.Stream_IO @key(is)
 
 @LangDefType{Package=[Ada.Streams.Stream_IO],Type=[Stream_Access]}
@@ -2852,7 +2852,7 @@ a text file as a stream.
 The library package Text_IO.Text_Streams has the following declaration:
 @begin{example}
 @key[with] Ada.Streams;
-@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_Streams],Expanded=[Ada.Text_IO.Text_Streams]}
+@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_Streams]}
 @key[package] Ada.Text_IO.Text_Streams @key[is]
    @key[type] Stream_Access @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
 
@@ -2885,7 +2885,7 @@ The library package Wide_Text_IO.Text_Streams
 has the following declaration:
 @begin{example}
 @key[with] Ada.Streams;
-@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_Streams],Expanded=[Ada.Wide_Text_IO.Text_Streams]}
+@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_Streams]}
 @key[package] Ada.Wide_Text_IO.Text_Streams @key[is]
    @key[type] Stream_Access @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
 
@@ -2907,7 +2907,7 @@ predefined input-output packages.
 @begin{StaticSem}
 The library package IO_Exceptions has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[IO_Exceptions],Expanded=[Ada.IO_Exceptions]}
+@ChildUnit{Parent=[Ada],Child=[IO_Exceptions]}
 @key[package] Ada.IO_Exceptions @key[is]
    @key[pragma] Pure(IO_Exceptions);
 

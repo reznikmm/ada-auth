@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/27 04:44:02 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:02 $}
+@Comment{$Date: 2000/05/29 05:47:21 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -20,7 +20,7 @@ children are defined in @RefSec{Numerics}.
 
 @begin{StaticSem}
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Numerics],Expanded=[Ada.Numerics]}
+@ChildUnit{Parent=[Ada],Child=[Numerics]}
 @key[package] Ada.Numerics @key[is]
    @key[pragma] Pure(Numerics);
    Argument_Error : @key[exception];
@@ -71,7 +71,7 @@ Numerics.Generic_Elementary_Functions has the following declaration:
 @begin{Example}
 @key{generic}
    @key{type} Float_Type @key{is} @key{digits} <>;
-@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Elementary_Functions],Expanded=[Ada.Numerics.Generic_Elementary_Functions]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Elementary_Functions]}
 @key{package} Ada.Numerics.Generic_Elementary_Functions @key{is}
    @key[pragma] Pure(Generic_Elementary_Functions);
 
@@ -118,7 +118,7 @@ Numerics.Generic_Elementary_Functions has the following declaration:
 @end{Example}
 
 @Defn{Ada.Numerics.Elementary_Functions}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Elementary_Functions],Expanded=[Ada.Numerics.Elementary_Functions]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Elementary_Functions]}
 The library package Numerics.Elementary_Functions
 defines the same subprograms as Numerics.Generic_Elementary_Functions,
 except that the predefined type Float is systematically substituted for
@@ -415,7 +415,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
 @begin{StaticSem}
 The library package Numerics.Float_Random has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Float_Random],Expanded=[Ada.Numerics.Float_Random]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Float_Random]}
 @key[package] Ada.Numerics.Float_Random @key[is]
 
    -- @RI{Basic facilities}
@@ -460,7 +460,7 @@ The library package Numerics.Float_Random has the following declaration:
 The generic library package Numerics.Discrete_Random has the following
 declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Discrete_Random],Expanded=[Ada.Numerics.Discrete_Random]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Discrete_Random]}
 @key[generic]
    @key[type] Result_Subtype @key[is] (<>);
 @key[package] Ada.Numerics.Discrete_Random @key[is]

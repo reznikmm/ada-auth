@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:00 $}
+@Comment{$Date: 2000/05/29 05:47:20 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -467,8 +467,7 @@ handler with a choice covering the exception,
 the occurrence is handled by that handler;
 
 @Defn2{Term=[propagate],
-  Sec=(an exception occurrence by an execution, to
-  a dynamically enclosing execution)}
+Sec=(an exception occurrence by an execution, to a dynamically enclosing execution)}
 Otherwise, the occurrence is @i{propagated}
 to the innermost dynamically enclosing execution,
 which means that the occurrence is raised again
@@ -483,8 +482,8 @@ if the execution of the construct propagates an exception occurrence.
 @end{Itemize}
 
 @Defn2{Term=[handle], Sec=(an exception occurrence)}
-@PDefn2{Term=execution, Sec=(handler)}
-@PDefn2{Term=elaboration, Sec=(choice_parameter_specification)}
+@PDefn2{Term=[execution], Sec=(handler)}
+@PDefn2{Term=[elaboration], Sec=(choice_parameter_specification)}
 When an occurrence is @i(handled) by a given handler,
 the @nt{choice_parameter_specification}, if any, is first elaborated,
 which creates the choice parameter and initializes it to the occurrence.
@@ -525,7 +524,7 @@ are not handled by the handlers of the
 @begin{StaticSem}
 The following language-defined library package exists:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Exceptions],Expanded=[Ada.Exceptions]}
+@ChildUnit{Parent=[Ada],Child=[Exceptions]}
 @key[package] Ada.Exceptions @key[is]
 @LangDefType{Package=[Ada.Exceptions],Type=[Exception_Id]}
     @key[type] Exception_Id @key[is] @key[private];

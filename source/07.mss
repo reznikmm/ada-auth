@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:00 $}
+@Comment{$Date: 2000/05/29 05:47:20 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1656,7 +1656,7 @@ or Finalize is applied to the containing object.
 The following language-defined library package exists:
 @begin{Example}
 @tabclear()@tabset(P22)
-@ChildUnit{Parent=[Ada],Child=[Finalization],Expanded=[Ada.Finalization]}
+@ChildUnit{Parent=[Ada],Child=[Finalization]}
 @key[package] Ada.Finalization @key[is]
     @key[pragma] Preelaborate(Finalization);
 

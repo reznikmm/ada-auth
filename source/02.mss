@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:43:59 $}
+@Comment{$Date: 2000/05/29 05:47:19 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -774,7 +774,7 @@ A @nt{pragma} is allowed where a
 @end{Syntax}
 
 @begin{Intro}
-@Defn2{Term=name, Sec=(of a @nt{pragma})}
+@Defn2{Term=[name], Sec=(of a @nt{pragma})}
 @Defn{pragma name}
 The @i{name} of a @nt{pragma} is
 the identifier following the reserved word @key{pragma}.

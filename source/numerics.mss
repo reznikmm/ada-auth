@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/05/28 05:17:46 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/05/28 05:17:46 $}
+@Comment{$Date: 2000/05/29 05:47:21 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -75,7 +75,7 @@ Numerics.Generic_Complex_Types has the following declaration:
 @begin{Example}
 @key{generic}
    @key{type} Real @key{is} @key{digits} <>;
-@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Complex_Types],Expanded=[Ada.Numerics.Generic_Complex_Types]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Complex_Types]}
 @key{package} Ada.Numerics.Generic_Complex_Types @key{is}
    pragma Pure(Generic_Complex_Types);
 
@@ -195,7 +195,7 @@ Numerics.Generic_Complex_Types has the following declaration:
 @end{Example}
 
 @Defn{Ada.Numerics.Complex_Types}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Complex_Types],Expanded=[Ada.Numerics.Complex_Types]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Complex_Types]}
 The library package Numerics.Complex_Types
 defines the same types, constants, and subprograms as
 Numerics.Generic_Complex_Types, except that the predefined type Float is
@@ -554,7 +554,7 @@ Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @key[generic]
    @key[with] @key[package] Complex_Types @key[is] @key[new] Ada.Numerics.Generic_Complex_Types (<>);
    @key[use] Complex_Types;
-@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Complex_Elementary_Functions],Expanded=[Ada.Numerics.Generic_Complex_Elementary_Functions]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Complex_Elementary_Functions]}
 @key[package] Ada.Numerics.Generic_Complex_Elementary_Functions @key[is]
    pragma Pure(Generic_Complex_Elementary_Functions);
 
@@ -594,7 +594,7 @@ Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @end{Example}
 
 @Defn{Ada.Numerics.Complex_Elementary_Functions}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Complex_Elementary_Functions],Expanded=[Ada.Numerics.Complex_Elementary_Functions]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Complex_Elementary_Functions]}
 The library package Numerics.Complex_Elementary_Functions
 defines the same subprograms as Numerics.Generic_Complex_Elementary_Functions,
 except that the predefined type Float is systematically substituted for
@@ -910,7 +910,7 @@ Text_IO.Complex_IO has the following declaration:
 @key[with] Ada.Numerics.Generic_Complex_Types;
 @key[generic]
    @key[with] @key[package] Complex_Types @key[is] @key[new] Ada.Numerics.Generic_Complex_Types (<>);
-@ChildUnit{Parent=[Ada.Text_IO],Child=[Complex_IO],Expanded=[Ada.Text_IO.Complex_IO]}
+@ChildUnit{Parent=[Ada.Text_IO],Child=[Complex_IO]}
 @key[package] Ada.Text_IO.Complex_IO @key[is]
 
 
@@ -1131,7 +1131,7 @@ procedures of Text_IO.Float_IO.
 
 @begin{StaticSem}
 @Defn{Ada.Wide_Text_IO.Complex_IO}
-@ChildUnit{Parent=[Ada.Wide_Text_IO],Child=[Complex_IO],Expanded=[Ada.Wide_Text_IO.Complex_IO]}
+@ChildUnit{Parent=[Ada.Wide_Text_IO],Child=[Complex_IO]}
 Implementations shall also provide the generic library package
 Wide_Text_IO.Complex_IO.  Its declaration is obtained from that of
 Text_IO.Complex_IO by systematically replacing Text_IO by Wide_Text_IO and

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:43:59 $}
+@Comment{$Date: 2000/05/29 05:47:19 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -114,7 +114,7 @@ but instead defines a view of an existing entity
   view of its full type.
 @end{Discussion}
 
-@PDefn2{Term=scope, Sec=(informal definition)}
+@PDefn2{Term=[scope], Sec=(informal definition)}
 For each declaration, the language rules define a certain
 region of text called the @i(scope) of the declaration
 (see @RefSecNum(Scope of Declarations)).  Most declarations
@@ -124,11 +124,11 @@ and only there, there are places where it is possible to use the
 @nt<identifier> to refer to the declaration, the view it defines,
 and the associated entity; these places are defined by
 the visibility rules (see @RefSecNum(Visibility)).
-@Defn2{Term=name, Sec={of (a view of) an entity}}
+@Defn2{Term=[name], Sec={of (a view of) an entity}}
 At such places
 the @nt<identifier> is said to be a @i(name) of the entity (the
 @nt<direct_name> or @nt<selector_name>);
-@PDefn2{Term=denote, Sec={informal definition}}
+@PDefn2{Term=[denote], Sec={informal definition}}
 the name is said to @i(denote) the declaration,
 the view, and the associated entity
 (see @RefSecNum{The Context of Overload Resolution}).
@@ -394,7 +394,7 @@ a value of the type.
   condition.
   The values of a subtype are a subset of the values of its type.>}
 
-@Defn2{Term=class, Sec=(of types)}
+@Defn2{Term=[class], Sec=(of types)}
 Types are grouped into @i(classes) of types, reflecting the
 similarity of their values and primitive operations.
 @Defn2{Term=[language-defined class], Sec=(of types)}
@@ -570,7 +570,7 @@ Similarly, the associated constraint is called the
 constraint @i(of) the subtype.  The set of values
 of a subtype consists of the values of its type
 that satisfy its constraint.
-@Defn2{Term=belong, Sec=(to a subtype)}
+@Defn2{Term=[belong], Sec=(to a subtype)}
 Such values @i(belong) to the subtype.
 @begin{Discussion}
   We make a strong distinction between a type and its
@@ -607,8 +607,8 @@ subtype is ``parent type'' or ``index type.''
 
 @Defn{constrained}
 @Defn{unconstrained}
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 A subtype is called an @i(unconstrained) subtype if its
 type has unknown discriminants,
 or if its type allows range, index, or discriminant constraints,
@@ -1124,7 +1124,7 @@ specific type are defined as follows:
   explicitly declared immediately within the same
   @nt<package_specification> and that operate on the type;
 
-  @Defn2{Term=override, Sec=(a primitive subprogram)}
+  @Defn2{Term=[override], Sec=(a primitive subprogram)}
 
   Any subprograms not covered above
 
@@ -1474,7 +1474,7 @@ anonymous array, task, or protected type.
 @end{StaticSem}
 
 @begin{RunTime}
-@Defn2{Term=constraint, Sec=(of an object)}
+@Defn2{Term=[constraint], Sec=(of an object)}
 If a composite object declared by an
 @nt{object_declaration} has an unconstrained nominal subtype,
 then if this subtype is indefinite
@@ -1492,8 +1492,8 @@ in the other cases, an explicit initial value is required.]
 
 When not constrained by its initial value, the actual and nominal
 subtypes of the object are the same.
-@Defn2{Term=constrained, Sec=(object)}
-@Defn2{Term=unconstrained, Sec=(object)}
+@Defn2{Term=[constrained], Sec=(object)}
+@Defn2{Term=[unconstrained], Sec=(object)}
 If its actual subtype is constrained, the object
 is called a @i(constrained object).
 
@@ -1910,8 +1910,8 @@ instance of a generic unit.
 @end{Legality}
 
 @begin{StaticSem}
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 The first subtype of the derived type is
 unconstrained if a @nt{known_discriminant_part}
 is provided in the declaration of the derived type, or if the
@@ -2502,18 +2502,18 @@ The integer and real numeric classes each have a specific root type in
 addition to their universal type, named respectively @i(root_integer)
 and @i(root_real).
 
-@Defn2{Term=cover, Sec=(a type)}
+@Defn2{Term=[cover], Sec=(a type)}
 A class-wide or universal type is said to @i(cover) all of the types
 in its class.  A specific type covers only itself.
 
-@Defn2{Term=descendant, Sec=(of a type)}
+@Defn2{Term=[descendant], Sec=(of a type)}
 A specific type @i(T2) is defined to be a @i(descendant) of a
 type @i(T1) if @i(T2) is the same as @i(T1), or if @i(T2) is derived
 (directly or indirectly) from @i(T1).  A class-wide type @i(T2)'Class is
 defined to be a descendant of type @i(T1) if @i(T2) is a descendant of @i(T1).
 Similarly, the universal types are
 defined to be descendants of the root types of their classes.
-@Defn2{Term=ancestor, Sec=(of a type)}
+@Defn2{Term=[ancestor], Sec=(of a type)}
 If a type @i(T2) is a descendant of a type @i(T1),
 then @i(T1) is called an @i(ancestor) of @i(T2).
 @Defn2{Term=[ultimate ancestor], Sec=(of a type)}
@@ -2635,13 +2635,13 @@ the range is a @i(null range), and specifies an
 empty set of values.
 Otherwise, the range specifies the values of the type from
 the lower bound to the upper bound, inclusive.
-@Defn2{Term=belong, Sec=(to a range)}
+@Defn2{Term=[belong], Sec=(to a range)}
 A value @i(belongs) to a range if it is of the type of the
 range, and is in the subset of values specified by the range.
-@PDefn2{Term=satisfies, Sec=(a range constraint)}
+@PDefn2{Term=[satisfies], Sec=(a range constraint)}
 A value @i(satisfies) a range constraint if it belongs to
 the associated range.
-@Defn2{Term=included, Sec=(one range in another)}
+@Defn2{Term=[included], Sec=(one range in another)}
 One range is @i(included) in another if all values that
 belong to the first range also belong to the second.
 @end{Intro}
@@ -2723,11 +2723,11 @@ Note that in some machine architectures intermediates
   precision of the type.
 @end(Honest)
 
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 @Redundant[A constrained scalar subtype is one to which a range constraint
 applies.]
-@Defn2{Term=range, Sec=(of a scalar subtype)}
+@Defn2{Term=[range], Sec=(of a scalar subtype)}
 The @i(range) of a constrained scalar subtype
 is the range associated with the range constraint of the subtype.
 The @i(range) of an unconstrained scalar subtype is the base range of
@@ -2735,11 +2735,11 @@ its type.
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=compatibility, Sec=(range with a scalar subtype)}
+@PDefn2{Term=[compatibility], Sec=(range with a scalar subtype)}
 A range is @i(compatible) with a scalar subtype if and only
 if it is either a null range
 or each bound of the range belongs to the range of the subtype.
-@PDefn2{Term=compatibility, Sec=(range_constraint with a scalar subtype)}
+@PDefn2{Term=[compatibility], Sec=(range_constraint with a scalar subtype)}
 A @nt<range_constraint> is @i(compatible) with a scalar subtype if and only if
 its range is compatible with the subtype.
 @begin(Ramification)
@@ -2894,7 +2894,7 @@ S'Pred for a modular integer subtype wraps around
   @b(return) Wide_String
 @end(Descexample)
 
-     @NoPrefix@Defn2{Term=image, Sec=(of a value)}
+     @NoPrefix@Defn2{Term=[image], Sec=(of a value)}
      The function returns an @i(image) of the value of @i(Arg),
      that is, a sequence of characters representing the value in display
      form.]}
@@ -3087,8 +3087,8 @@ For a machine that supports negative zeros,
 @nt[base]#.@nt[based_numeral]#[@nt[exponent]]
 @end{Itemize}
 
-    @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-    @NoPrefix@;with an optional leading sign character (plus or minus), and if the
+    @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+    with an optional leading sign character (plus or minus), and if the
     corresponding numeric value belongs to the base range of the
     type of S, then that value is the result;
     @IndexCheck{Range_Check}
@@ -3318,7 +3318,7 @@ is one more than that of its predecessor in the list.
 the enumeration type follow the
 order of corresponding position numbers.]
 
-@redundant[@PDefn2{Term=overloaded, Sec=(enumeration literal)}
+@redundant[@PDefn2{Term=[overloaded], Sec=(enumeration literal)}
 If the same @nt<defining_identifier> or
 @nt<defining_character_literal> is specified in more than one
 @nt<enumeration_type_definition>, the corresponding enumeration literals
@@ -3330,8 +3330,8 @@ of the enumeration literal has to be determinable from the context
 
 @begin{RunTime}
 @PDefn2{Term=[elaboration], Sec=(enumeration_type_definition)}
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 The elaboration of an @nt<enumeration_type_definition> creates
 the enumeration type and its first subtype,
 which is constrained to the base range of the type.
@@ -3644,8 +3644,8 @@ A @nt<signed_integer_type_definition> defines an integer type whose
 base range
 includes at least the values of the @nt<simple_expression>s and
 is symmetric about zero, excepting possibly an extra negative value.
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 A @nt<signed_integer_type_definition> also defines a constrained first
 subtype of the type,
 with a range whose bounds are given by
@@ -3659,8 +3659,8 @@ the values of the @nt<simple_expression>s, converted to the type being defined.
 @PDefn2{Term=[base range], Sec=(of a modular type)}
 A @nt<modular_type_definition> defines a modular type whose base range
 is from zero to one less than the given modulus.
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 A @nt<modular_type_definition> also defines a constrained first
 subtype of the type with a range that is the same as the base range of
 the type.
@@ -4007,9 +4007,9 @@ the following attributes are defined:
   @b(return) S'Base
 @end(Descexample)
 
-     @PDefn2{Term=(evaluation), Sec=(Val)}
+     @NoPrefix@PDefn2{Term=(evaluation), Sec=(Val)}
      @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-     @NoPrefix@;This function returns a value of the type of S
+     This function returns a value of the type of S
      whose position number equals the value of @i(Arg).]}
      @IndexCheck{Range_Check}
      For the evaluation of a call on S'Val, if there
@@ -4350,8 +4350,8 @@ give the actual bounds of the safe range.]
 
 A @nt<floating_point_definition> also defines a first
 subtype of the type.
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 If a @nt<real_range_specification> is given, then
 the subtype is constrained to a range whose bounds are
 given by a conversion of the values of the @nt<simple_expression>s
@@ -4534,7 +4534,7 @@ Other attributes of floating point types are defined in
 @Defn{decimal fixed point type}
 A fixed point type is either an ordinary fixed point type,
 or a decimal fixed point type.
-@Defn2{Term=delta, Sec=(of a fixed point type)}
+@Defn2{Term=[delta], Sec=(of a fixed point type)}
 The error bound of a fixed point type is specified as an
 absolute value, called the @i(delta) of the fixed point type.
 @end{Intro}
@@ -4561,7 +4561,7 @@ the @nt<expression> given after the
 reserved word @key(delta); this @nt<expression> is expected
 to be of any real type.
 @PDefn2{Term=[expected type], Sec=(decimal fixed point type digits)}
-@Defn2{Term=digits, Sec=(of a decimal fixed point subtype)}
+@Defn2{Term=[digits], Sec=(of a decimal fixed point subtype)}
 @Defn{decimal fixed point type}
 For a type defined by a @nt<decimal_fixed_point_definition>
 (a @i(decimal) fixed point type),
@@ -4578,7 +4578,7 @@ the @nt<expression>s given after the
 reserved words @key(delta) and @key(digits) shall be static; their
 values shall be positive.
 
-@Defn2{Term=small, Sec=(of a fixed point type)}
+@Defn2{Term=[small], Sec=(of a fixed point type)}
 The set of values of a fixed point type comprise the integral multiples
 of a number called the @i(small) of the type.
 @Defn{ordinary fixed point type}
@@ -4628,8 +4628,8 @@ includes at least all multiples of @i(small) that are between the
 bounds specified
 in the @nt<real_range_specification>.  The base range of the
 type does not necessarily include the specified bounds themselves.
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 An @nt<ordinary_fixed_point_definition> also defines a constrained first
 subtype of the type, with each bound of its range
 given by the closer to zero of:
@@ -4646,8 +4646,8 @@ given by the closer to zero of:
 A @nt<decimal_fixed_point_definition> defines a decimal fixed point
 type whose base range includes at least
 the range @en@;(10**@i(digits)@en@;1)*@i(delta) .. +(10**@i(digits)@en@;1)*@i(delta).
-@Defn2{Term=constrained, Sec=(subtype)}
-@Defn2{Term=unconstrained, Sec=(subtype)}
+@Defn2{Term=[constrained], Sec=(subtype)}
+@Defn2{Term=[unconstrained], Sec=(subtype)}
 A @nt<decimal_fixed_point_definition> also defines a constrained first
 subtype of the type.  If a @nt<real_range_specification> is given,
 the bounds of the first subtype are given by a conversion
@@ -4669,7 +4669,7 @@ a given @i(delta), if it does not have a @nt<range_constraint>,
 then it specifies an implicit range
 @en@;(10**@i(D)@en@;1)*@i(delta) .. +(10**@i(D)@en@;1)*@i(delta),
 where @i(D) is the value of the @nt<expression>.
-@Defn2{Term=compatibility,
+@Defn2{Term=[compatibility],
   Sec=(digits_constraint with a decimal fixed point subtype)}
 A @nt<digits_constraint> is @i(compatible) with a decimal
 fixed point subtype if the value of the @nt<expression>
@@ -4870,7 +4870,7 @@ The following additional attributes are defined for
      subtype.
      The value of this attribute is of the type @i(universal_integer).]}
      Its value is determined as follows:
-@Defn2{Term=digits, Sec=(of a decimal fixed point subtype)}
+@Defn2{Term=[digits], Sec=(of a decimal fixed point subtype)}
 @begin(itemize)
   For a first subtype or a subtype
   defined by a @nt<subtype_indication> with
@@ -4900,7 +4900,7 @@ The following additional attributes are defined for
 @Attribute{Prefix=<S>, AttrName=<Scale>,
   Text=[S'Scale denotes the @i(scale) of the subtype S,
  defined as the value N such that S'Delta = 10.0**(@en@;N).
- @Defn2{Term=scale, Sec=(of a decimal fixed point subtype)}
+ @Defn2{Term=[scale], Sec=(of a decimal fixed point subtype)}
  @Redundant{The scale indicates the position of the point relative
  to the rightmost significant digits of values of subtype S.}
  The value of this attribute is of the type @i{universal_integer}.]}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:01 $}
+@Comment{$Date: 2000/05/29 05:47:21 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @redundant[This section describes features for
@@ -140,7 +140,7 @@ This is subtle, but it seems like the least confusing set of rules.
 @end{Discussion}
 
 @Defn{representation of an object}
-@Defn2{Term=size, Sec=(of an object)}The @i{representation} of an
+@Defn2{Term=[size], Sec=(of an object)}The @i{representation} of an
 object consists of a certain
 number of bits (the @i(size) of
 the object).
@@ -3115,7 +3115,7 @@ have been moved to the Real Time Annex.
 @begin{StaticSem}
 The following language-defined library package exists:
 @begin{Example}
-@ChildUnit{Parent=[System],Child=[Storage_Elements],Expanded=[System.Storage_Elements]}
+@ChildUnit{Parent=[System],Child=[Storage_Elements]}
 @key[package] System.Storage_Elements @key[is]
    @key{pragma} Preelaborate(System.Storage_Elements);
 
@@ -3263,7 +3263,7 @@ converts from that record type to type Address.
 
 The following language-defined generic library package exists:
 @begin{Example}
-@ChildUnit{Parent=[System],Child=[Address_To_Access_Conversions],Expanded=[System.Address_To_Access_Conversions]}
+@ChildUnit{Parent=[System],Child=[Address_To_Access_Conversions]}
 @key[generic]
     @key[type] Object(<>) @key[is] @key[limited] @key[private];
 @key[package] System.Address_To_Access_Conversions @key[is]
@@ -3392,7 +3392,7 @@ in compilation units which depend on System.Machine_Code only indirectly.
 
 @begin{StaticSem}
 @Defn{System.Machine_Code}
-@ChildUnit{Parent=[System],Child=[Machine_Code],Expanded=[System.Machine_Code]}
+@ChildUnit{Parent=[System],Child=[Machine_Code]}
 The contents of the library package System.Machine_Code
 (if provided) are implementation defined.
 The meaning of @nt{code_statement}s is implementation defined.
@@ -3480,7 +3480,7 @@ The following language-defined generic library function exists:
 @key[generic]
    @key[type] Source(<>) @key[is] @key[limited] @key[private];
    @key[type] Target(<>) @key[is] @key[limited] @key[private];
-@ChildUnit{Parent=[Ada],Child=[Unchecked_Conversion],Expanded=[Ada.Unchecked_Conversion]}
+@ChildUnit{Parent=[Ada],Child=[Unchecked_Conversion]}
 @key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target;
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Conversion);
 @key[pragma] Pure(Ada.Unchecked_Conversion);
@@ -4060,7 +4060,7 @@ The following language-defined library package exists:
 @begin{Example}
 @key[with] Ada.Finalization;
 @key[with] System.Storage_Elements;
-@ChildUnit{Parent=[System],Child=[Storage_Pools],Expanded=[System.Storage_Pools]}
+@ChildUnit{Parent=[System],Child=[Storage_Pools]}
 @key[package] System.Storage_Pools @key[is]
     @key{pragma} Preelaborate(System.Storage_Pools);
 
@@ -4530,7 +4530,7 @@ The following language-defined generic library procedure exists:
 @key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
    @key[type] Name   @key[is] @key[access]  Object;
-@ChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation],Expanded=[Ada.Unchecked_Deallocation]}
+@ChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}
 @key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name);
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);
 @key[pragma] Preelaborate(Ada.Unchecked_Deallocation);
@@ -4960,7 +4960,7 @@ calls on the Read and Write procedures of the Root_Stream_Type.
 (User-defined T'Read and T'Write attributes can also make such calls,
 or can call the Read and Write attributes of other types.)
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Streams],Expanded=[Ada.Streams]}
+@ChildUnit{Parent=[Ada],Child=[Streams]}
 @key[package] Ada.Streams @key[is]
     @key[pragma] Pure(Streams)@Defn{unpolluted};
 
@@ -5513,7 +5513,7 @@ The end of a @nt{declarative_part},
 or a declaration of a library package or generic library package,
 causes @i(freezing) of each entity declared within it,
 except for incomplete types.
-@Defn2{Term=freezing, Sec=(entity caused by a body)}
+@Defn2{Term=[freezing], Sec=(entity caused by a body)}
 A noninstance body causes freezing of each entity declared
 before it within the same @nt{declarative_part}.
 @begin{Discussion}
@@ -5658,7 +5658,7 @@ In Ada 83, on the other hand, there is no occurrence of the name T,
 hence no forcing occurrence of T.
 @end{Ramification}
 
-@PDefn2{Term=freezing, Sec=(entity caused by a name)}
+@PDefn2{Term=[freezing], Sec=(entity caused by a name)}
 At the place where a @nt<name> causes freezing,
 the entity denoted by the @nt<name> is frozen, unless
 the @nt<name> is a @nt<prefix> of an expanded name;
@@ -5674,7 +5674,7 @@ subtype, plus all component junk.
 @nt{Implicit_dereference}s are covered by @nt{expression}.
 @end{Ramification}
 
-@Redundant[@PDefn2{Term=freezing, Sec=(type caused by a range)}
+@Redundant[@PDefn2{Term=[freezing], Sec=(type caused by a range)}
 At the place where a @nt{range} causes freezing, the type of the
 @nt<range> is frozen.]
 @begin{TheProof}

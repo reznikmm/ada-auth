@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:00 $}
+@Comment{$Date: 2000/05/29 05:47:20 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1255,7 +1255,7 @@ The default mode is @key{in}.
 For a formal object of mode @key{in},
 the nominal subtype is the one denoted by the
 @nt{subtype_mark} in the declaration of the formal.
-@PDefn2{Term=static, Sec=(subtype)}
+@PDefn2{Term=[static], Sec=(subtype)}
 For a formal object of mode @key{in out}, its type
 is determined by the @nt<subtype_mark> in the declaration;
 its nominal subtype is nonstatic, even if the
@@ -2220,7 +2220,7 @@ of that generic package.]
 @end{Syntax}
 
 @begin{Legality}
-@Defn2{Term=template, Sec=(for a formal package)}
+@Defn2{Term=[template], Sec=(for a formal package)}
 The @i(generic_package_)@nt<name> shall denote a generic package
 (the @i(template) for the formal package);
 the formal package is an instance of the template.
