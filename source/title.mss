@@ -1,13 +1,13 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2000/11/10 20:26:23 $}
+@comment{$Revision: 1.14 $ $Date: 2002/06/18 03:56:20 $}
 
 @begin{ISOOnly}
-@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}@Chg{New=[ and AMD.1:200y], Old=[]}}}}
 @end{ISOOnly}
 @begin{NotISO}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]@Chg{New=[ and AMD.1:200y], Old=[]}}}}}
 @end{NotISO}
 
 @Noparanum@ @*
@@ -57,6 +57,7 @@
 
 @Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:1995(E)}}}
 @Noparanum@Center{@Swiss{@Chg{New=[@Grow{with Technical Corrigendum 1}], Old=[]}}}
+@Noparanum@Center{@Swiss{@Chg{New=[@Grow{and Amendment 1}], Old=[]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
@@ -69,6 +70,8 @@
 @Noparanum@;Copyright @Latin1(169) 1992,1993,1994,1995  Intermetrics, Inc.
 
 @Noparanum@;Copyright @Latin1(169) 2000  The MITRE Corporation, Inc.
+
+@Noparanum@;Copyright @Latin1(169) 2002  AXE Consultants
 
 @NewPage
 @Comment{For ISO version, the back of the title page is blank, and the
@@ -117,4 +120,18 @@ EXPRESS OR IMPLIED, AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY,
 OR FUNCTIONING OF THIS DOCUMENT.  IN NO EVENT WILL MITRE BE LIABLE FOR ANY
 GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
 EVEN IF MITRE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+@Noparanum@;@ @;@comment{A dummy paragraph containing just a blank}
+
+@Noparanum@;@b{Amendment 1}
+
+@Noparanum@;Copyright @Latin1(169) 2002, AXE Consultants.  All Rights Reserved.
+
+@Noparanum@;This document may be copied, in whole or in part, in any form or by any means,
+as is, or with alterations, provided that (1) alterations are clearly marked as
+alterations and (2) this copyright notice is included unmodified in any copy.
+Compiled copies of standard library units and examples need not contain this
+copyright notice so long as the notice is included in all copies of source code
+and documentation. Any other use or distribution of this document is prohibited
+without the prior express permission of AXE.
 @end{NotISO}

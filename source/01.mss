@@ -12,7 +12,7 @@ I probably ought to add a style just for this purpose)
 
 @begin{Wide}
 @noparanum@leading@tabclear()@tabset(P45)
-@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}]>
+@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}@Chg{New=[ and AMD.1:200y], Old=[]}}]>
 @end{Wide}
 
 @thickline
@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/09/27 00:15:08 $}
+@Comment{$Date: 2002/06/18 03:56:20 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -61,33 +61,39 @@ a predefined environment of standard packages is provided, including
 facilities for, among others, input-output, string manipulation,
 numeric elementary functions, and random number generation.
 @begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised]}
 This Annotated Ada Reference Manual (AARM) contains the entire text of
-the Ada Reference Manual (RM95), plus certain annotations.
+the Ada Reference Manual @Chg{New=[ with Amendment 1 (RM0y],Old=[(RM95]}),
+plus certain annotations.
 The annotations give a more in-depth analysis of the language.
 They describe the reason for each non-obvious rule,
 and point out interesting ramifications of the rules
 and interactions among the rules
 (interesting to language lawyers, that is).
-Differences between Ada 83 and Ada 95 are listed.
+Differences between Ada 83@Chg{New=[, Ada95, and Ada0y],Old=[ and Ada 95]}
+are listed.
 (The text you are reading now is an annotation.)
 
+@ChgRef{Version=[2],Kind=[Revised]}
 The AARM stresses detailed correctness and uniformity over
 readability and understandability.
 We're not trying to make the language @lquotes@;appear@rquotes@; simple here;
 on the contrary, we're trying to expose hidden complexities,
 so we can more easily detect language bugs.
-The RM95, on the other hand, is intended to be a more
+The @Chg{New=[RM0y],Old=[RM95]}, on the other hand, is intended to be a more
 readable document for programmers.
 
 @Leading@keepnext@;The annotations in the AARM are as follows:
 @begin{Itemize}
+@ChgRef{Version=[2],Kind=[Revised]}
 Text that is logically redundant is shown
 @Redundant[in square brackets, like this].
 Technically, such text could be written as a @NotesName
-in the RM95, since it is really a theorem that can be proven from the
-non-redundant rules of the language.
-We use the square brackets instead when it seems to make the RM95
-more readable.
+in the @Chg{New=[RM0y (and the RM95 before it)],Old=[RM95]}, since it
+is really a theorem that can
+be proven from the non-redundant rules of the language.
+We use the square brackets instead when it seems to make the
+@Chg{New=[RM0y],Old=[RM95]} more readable.
 
 The rules of the language (and some AARM-only text) are categorized,
 and placed under certain @i{sub-headings} that indicate
@@ -131,8 +137,9 @@ The unlabeled text at the beginning of each clause or subclause,
 @ExamplesTitle.
 @end(Inneritemize)
 
+@ChgRef{Version=[2],Kind=[Revised]}
 Text under the following sub-headings
-does not appear in the RM95:
+does not appear in the @Chg{New=[RM0y],Old=[RM95]}:
 @begin(Inneritemize)
 @MetaRulesTitle,
 
@@ -142,7 +149,20 @@ does not appear in the RM95:
 
 @Extend83Title,
 
-@DiffWord83Title.
+@ChgRef{Version=[2],Kind=[Revised]}
+@DiffWord83Title@Chg{New=[,],Old=[.]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{New=[@Inconsistent95Title,],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{New=[@Incompatible95Title,],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{New=[@Extend95Title,],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{New=[@DiffWord95Title.],Old=[]}
 @end(Inneritemize)
 
 The AARM also includes the following kinds of annotations.
@@ -192,7 +212,8 @@ The text of a Glossary entry @em this text will also appear
 in @RefSec{Glossary}.
 @end{GlossaryMarker}
 @begin{Discussion}
-In general, RM95 text appears in the normal font,
+@ChgRef{Version=[2],Kind=[Revised]}
+In general, @Chg{New=[RM0y],Old=[RM95]} text appears in the normal font,
 whereas AARM-only text appears in a smaller font.
 @NotesName@;s also appear in the smaller font,
 as recommended by ISO/IEC style guidelines.
@@ -423,8 +444,9 @@ defining the rules of the language.
 In some cases, the goal is only partially met;
 such cases are explained.
 
+@ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
-and does not appear in the RM95.
+and does not appear in the @Chg{New=[RM0y],Old=[RM95]}.
 @end{MetaRules}
 
 @begin{Syntax}
@@ -688,8 +710,9 @@ The set can contain more than one allowed behavior.
 Thus, when we ask whether the semantics changes,
 we are asking whether the set of behaviors changes.)
 
+@ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
-and does not appear in the RM95.
+and does not appear in the RM95@Chg{New=[ or RM0y],Old=[]}.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
@@ -702,7 +725,7 @@ We do not generally consider a change that turns erroneous execution
 into an exception, or into an illegality, to be upwardly incompatible.
 
 This is not part of the definition of the language,
-and does not appear in the RM95.
+and does not appear in the RM95@Chg{New=[ or RM0y],Old=[]}.
 @end{Incompatible83}
 
 @begin{Extend83}
@@ -713,8 +736,9 @@ These are the situations in which a legal Ada 95 program is not a
 legal Ada 83 program.
 The vast majority of language changes fall into this category.
 
+@ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
-and does not appear in the RM95.
+and does not appear in the RM95@Chg{New=[ or RM0y],Old=[]}.
 
 @ @* @Comment{Two blank lines: why? Because it was in the original.}
 @*
@@ -729,9 +753,86 @@ the RM95.
 It is incomplete; we have not attempted to list all wording
 changes, but only the @lquotes@;interesting@rquotes@; ones.
 
+@ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
-and does not appear in the RM95.
+and does not appear in the RM95@Chg{New=[ or RM0y],Old=[]}.
 @end{DiffWord83}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@begin{Discussion}
+@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
+@*
+The next three headings list all language changes between Ada 95
+and Ada 0y (the language defined by the Ada 95 standard plus
+Technical Corrigendum 1 plus Amendment 1).
+Each language change falls into one of the following three
+categories:
+@end{Discussion}
+@end{Examples}
+
+@begin{Inconsistent95}
+@ChgRef{Version=[2],Kind=[Added]}
+@Defn{inconsistencies with Ada 95}
+This heading lists all of the upward inconsistencies between Ada 95 and Ada
+0y. Upward inconsistencies are situations in which a legal Ada 95 program
+is a legal Ada 0y program with different semantics.
+
+@ChgRef{Version=[2],Kind=[Added]}
+Since Amendment 1 is intended to be a very compatible update to the
+Ada 95 language, we do not expect any entries under this heading. However,
+we define it for completeness.
+
+@ChgRef{Version=[2],Kind=[Added]}
+This is not part of the definition of the language,
+and does not appear in the RM0y.
+@end{Inconsistent95}
+
+@begin{Incompatible95}
+@ChgRef{Version=[2],Kind=[Added]}
+@Defn{incompatibilities with Ada 95}
+This heading lists all of the upward incompatibilities between Ada 95
+and Ada 0y, except for the ones listed under @lquotes@;@Inconsistent95Title@rquotes@;
+above. These are the situations in which a legal Ada 95 program is
+illegal in Ada 0y.
+
+@ChgRef{Version=[2],Kind=[Added]}
+This is not part of the definition of the language,
+and does not appear in the RM0y.
+@end{Incompatible95}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[Added]}
+@Defn{extensions to Ada 95}
+This heading is used to list all upward compatible language changes;
+that is, language extensions.
+These are the situations in which a legal Ada 0y program is not a
+legal Ada 95 program.
+The vast majority of language changes fall into this category.
+
+@ChgRef{Version=[2],Kind=[Added]}
+This is not part of the definition of the language,
+and does not appear in the RM0y.
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
+@*
+As explained above,
+the next heading does not represent any language change:
+@end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[Added]}
+@Defn{wording changes from Ada 95}
+This heading lists some of the non-semantic changes between RM95 and
+the RM0y. This heading lists only @lquotes@;interesting@rquotes@; changes
+(for instance, editorial corrections are not listed). Changes which
+come from Technical Corrigendum 1 are marked @b{Corrigendum}; unmarked changes
+come from Amendment 1.
+
+@ChgRef{Version=[2],Kind=[Added]}
+This is not part of the definition of the language,
+and does not appear in the RM0y.
+@end{DiffWord95}
 
 @LabeledSubClause{Conformity of an Implementation with the Standard}
 
