@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/09/28 02:57:09 $}
+@Comment{$Date: 2001/04/05 19:16:40 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -4190,7 +4190,7 @@ Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @RI[-- see @RefSecNum{Type Convers
 an access value that designates the object.
 @IndexSee{Term=[new],See=(allocator)}
 @IndexSee{Term=[malloc],See=(allocator)}
-@IndexSeeAlso{Term=[heap management],See=(alligator)}]
+@IndexSeeAlso{Term=[heap management],See=(allocator)}]
 @end{Intro}
 
 @begin{Syntax}
@@ -4230,7 +4230,7 @@ In the @nt<subtype_indication> of an uninitialized allocator, a
 @Redundant[unconstrained] composite subtype;
 if there is no @nt<constraint>, then the @nt<subtype_mark>
 shall denote a definite subtype.
-@IndexSee{Term=[constructor],See=[initialized alligator]}
+@IndexSee{Term=[constructor],See=[initialized allocator]}
 @begin{Ramification}
   For example, ... @key[new] S'Class ... (with no initialization
   expression) is illegal,
