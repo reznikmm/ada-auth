@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:23 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:16 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @redundant[
@@ -161,7 +161,7 @@ An entity is @i{global} to a declarative region if the entity is
 declared by a declaration that is global to the declarative region.
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 The children of a parent library unit are inside the parent's
 declarative region, even though they do not occur inside the
 parent's declaration or body.
@@ -203,7 +203,7 @@ anything that has a @nt{component_list}
 record extension @nt{type_declaration}),
 and finally the declarations of task and protected units and packages.
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 It was necessary to extend Ada 83's definition of declarative region
@@ -518,7 +518,7 @@ the body might include some children.
 @end{Ramification}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 There are notations for denoting visible declarations
 that are not directly visible.
 For example, @nt{parameter_specification}s are in the visible part of a
@@ -533,7 +533,7 @@ There are some obscure involving generics cases in which there is
 no such notation.
 See Section 12.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 The fact that the immediate scope of an overloadable declaration does
@@ -991,7 +991,7 @@ components are not overloadable.
 @end{Discussion}
 @end{Legality}
 
-@begin{NotesNotes}
+@begin{Notes}
 Visibility for compilation units
 follows from the definition of the environment
 in @RefSecNum{The Compilation Process},
@@ -1077,7 +1077,7 @@ X : @key[constant] Integer := 17;
 The constant X is hidden from direct visibility by the generic
 declaration.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 Declarations with the same defining
@@ -1367,7 +1367,7 @@ view and entity denoted by this name
 denotes (a new view of) the renamed entity.]
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 Renaming may be used to resolve name conflicts and to act as a
 shorthand.  Renaming with a different @nt{identifier} or
 @nt{operator_symbol} does not hide the old @nt{name}; the new
@@ -1387,7 +1387,7 @@ can be used to achieve the effect of renaming another subtype
 @begin{Example}
 @key[subtype] Mode @key[is] Ada.Text_IO.File_Mode;
 @end{Example}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 The second sentence of RM83-8.5(3),
@@ -1734,7 +1734,7 @@ predefined subprogram before later overriding it.
 @end{Discussion}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 A procedure can only be renamed as a procedure.
 A function whose @nt{defining_designator} is either an
 @nt{identifier} or an @nt{operator_symbol}
@@ -1783,7 +1783,7 @@ it emphasizes the entity being renamed,
 rather than the new view, which we think is a bad idea.
 We'll live with the oddity.
 @end{Reason}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of subprogram renaming declarations:}
@@ -1836,14 +1836,14 @@ A @nt{generic_renaming_declaration} declares a new view
 @Redundant{of the renamed generic unit}.
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 Although the properties of the new view are the same as those of the
 renamed view, the place where the @nt<generic_renaming_declaration> occurs
 may affect the legality of subsequent renamings and instantiations
 that denote the @nt<generic_renaming_declaration>,
 in particular if the renamed generic unit is a library unit
 (see @RefSecNum{Compilation Units - Library Units}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of renaming a generic unit:}
@@ -2309,7 +2309,7 @@ in case it denotes more than one callable entity.
 @end{Ramification}
 @end{Legality}
 
-@begin{NotesNotes}
+@begin{Notes}
 @begin{Multiple}
 If a usage name has only one acceptable interpretation,
 then it denotes the corresponding entity.
@@ -2323,7 +2323,7 @@ Similarly, subtypes are not considered for overload resolution (the
 violation of a constraint does not make a program illegal but raises an
 exception during program execution).
 @end{Multiple}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Incompatible83}
 @PDefn{Beaujolais effect}

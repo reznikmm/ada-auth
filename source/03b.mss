@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:22 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @LabeledClause{Array Types}
 
@@ -261,7 +261,7 @@ and the elaboration of the
 @nt{component_definition} are performed in an arbitrary order.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 All components of an array have the same subtype.  In particular, for an array
 of components that are one-dimensional arrays, this means that all components
 have the same bounds and hence the same length.
@@ -270,7 +270,7 @@ Each elaboration of an @nt<array_type_definition> creates
 a distinct array type.  A consequence of this is that each
 object whose @nt<object_declaration> contains an @nt<array_type_definition>
 is of its own unique type.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of type declarations with unconstrained array definitions: )
@@ -408,7 +408,7 @@ consists of the elaboration of the @nt{subtype_indication}
 or the evaluation of the @nt{range}.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The elaboration of a @nt<subtype_indication> consisting
 of a @nt<subtype_mark> followed
 by an @nt<index_constraint> checks the compatibility of the
@@ -420,7 +420,7 @@ of an array subtype, Constraint_Error is not
 raised on conversion to the array subtype, so long as
 the length of each dimension of the array value and the
 array subtype match.  See @RefSecNum(Type Conversions).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of array declarations including an index constraint: )
@@ -533,7 +533,7 @@ multidimensional array type, then column-major order should be used
 instead (see @RefSec{Interfacing with Fortran}).
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 The @nt<attribute_reference>s A'First and A'First(1) denote the same value.
 A similar relation exists for the @nt<attribute_reference>s A'Last,
 A'Range, and A'Length.  The following relation is satisfied (except
@@ -563,7 +563,7 @@ A value of an array type can be specified with an
 For a one-dimensional array type, a slice of the array can be named;
 also, string literals are defined if the component type is
 a character type.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples (using arrays declared in the examples of subclause @RefSecNum(Index Constraints and Discrete Ranges)):}
@@ -594,7 +594,7 @@ these are declared in the visible part of package Standard:
 ]
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 String literals (see @RefSecNum(String Literals) and
 @RefSecNum(Literals)) are defined for all string types.
 The concatenation operator & is predefined
@@ -605,7 +605,7 @@ for string types, as for all one-dimensional discrete array types;
 these ordering operators correspond to lexicographic order
 (see @RefSecNum(Relational Operators and Membership Tests)).
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of string objects:)
@@ -1033,7 +1033,7 @@ anonymous access type (see @RefSecNum{Type Conversions}).]
 @end(Ramification)
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 If a discriminated type has @nt<default_expression>s for its
 discriminants, then unconstrained variables of the type are permitted,
 and the values of the discriminants can be changed by an assignment
@@ -1113,7 +1113,7 @@ parent's discriminant.
 A discriminant that is of a named access type is not called
 an access discriminant; that term is
 used only for discriminants defined by an @nt<access_definition>.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of discriminated types:)
@@ -1284,7 +1284,7 @@ value imposed by the constraint for the associated discriminant.
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The rules of the language ensure that
 a discriminant of an object always has a value, either
 from explicit or implicit initialization.
@@ -1298,7 +1298,7 @@ to A equal to B,
 but there can be other discriminants defined
 in extensions that are not constrained to any particular value.
 @end(Discussion)
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples (using types declared above in clause @RefSecNum(Discriminants)):}
@@ -1623,7 +1623,7 @@ then the elaboration consists of the evaluation of any included
 expression that is not part of a per-object expression.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 A @nt<component_declaration> with several identifiers is equivalent
 to a sequence of single @nt<component_declaration>s, as explained
 in @RefSecNum{Object Declarations}.
@@ -1654,7 +1654,7 @@ A component of a record can be named with a @nt<selected_component>.
 A value of a record can be specified with a @nt<record_aggregate>,
 unless the record type is limited.
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of record type declarations: )
@@ -2324,7 +2324,7 @@ rule.
 @end{Reason}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 A type declared with the reserved word @key[tagged]
 should normally be declared in a @nt{package_specification},
 so that new primitive subprograms can be declared for it.
@@ -2349,7 +2349,7 @@ for incomplete types whose full type is tagged, but only within
 the library unit in which the incomplete type is declared
 (see @RefSecNum(Incomplete Type Declarations)).
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of tagged record types:)
@@ -2511,7 +2511,7 @@ The elaboration of a @nt{record_extension_part} consists
 of the elaboration of the @nt{record_definition}.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The term ``type extension'' refers to a type as a whole.
 The term ``extension part'' refers to the piece
 of text that defines the additional components (if any) the
@@ -2560,7 +2560,7 @@ Each visible component of a record extension has to have a
 unique name, whether the component is (visibly) inherited
 from the parent type or declared in the
 @nt<record_extension_part> (see @RefSecNum{Visibility}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 
@@ -2996,7 +2996,7 @@ the overriding will still take effect for that call.
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 The body to be executed for a call on a dispatching operation is
 determined by the tag;
@@ -3023,7 +3023,7 @@ access value designates a dispatching operation.  Similarly
 a call whose @nt<prefix> denotes a @nt<subprogram_renaming_declaration>
 cannot be a dispatching call unless the renaming itself is the
 declaration of a primitive subprogram.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 The concept of dispatching operations is new.
@@ -3303,7 +3303,7 @@ default.
 @end{Ramification}
 @end{Legality}
 
-@begin{NotesNotes}
+@begin{Notes}
 Abstractness is not inherited; to declare an abstract type,
 the reserved word @key[abstract] has to be used
 in the declaration of the type extension.
@@ -3318,7 +3318,7 @@ is rooted at an abstract type, the class-wide type for the
 class is not abstract, and an object of the class-wide type
 can be created; the tag of such an object will identify
 some nonabstract type in the class.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Example of an abstract type representing a set of natural numbers:)
@@ -3335,7 +3335,7 @@ some nonabstract type in the class.
 @end{Example}
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 @i(Notes on the example:)
 Given the above abstract type, one could then derive
 various (nonabstract) extensions of the type, representing
@@ -3369,7 +3369,7 @@ and then a record extension T of it,
 unless T were in the private part after the full declaration of Private_Part,
 but then clients of the package would not have visibility to T.
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Access Types}
 
@@ -3799,7 +3799,7 @@ an anonymous general access-to-variable type
 an access parameter or access discriminant)].
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 Access values are called ``pointers'' or ``references'' in
 some other languages.
 
@@ -3816,7 +3816,7 @@ Only @nt<index_constraint>s and @nt<discriminant_constraint>s
 can be applied to access types
 (see @RefSecNum{Index Constraints and Discrete Ranges} and
 @RefSecNum{Discriminant Constraints}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of access-to-object types:}
@@ -4013,7 +4013,7 @@ The elaboration of an @nt{incomplete_type_declaration} has no effect.
 @end(Reason)
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 @PDefn{completion legality}
 Within a @nt<declarative_part>, an @nt<incomplete_type_declaration>
 and a corresponding @nt<full_type_declaration> cannot be separated
@@ -4022,7 +4022,7 @@ This is because a type has to
 be completely defined before it is frozen, and a body freezes
 all types declared prior to it in the same @nt<declarative_part>
 (see @RefSecNum{Freezing Rules}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Example of a recursive type:)
@@ -4868,7 +4868,7 @@ denotes a subprogram}:
 
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 The Unchecked_Access attribute yields the same result as the Access
 attribute for objects, but has fewer restrictions
 (see @RefSecNum{Unchecked Access Value Creation}).
@@ -4945,7 +4945,7 @@ of a program, a reference to the Access attribute of a subprogram
 should be evaluated only once
 and stored in a global constant for subsequent use and equality
 comparison.}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of use of the Access attribute:}
@@ -5229,7 +5229,7 @@ A type shall be completely defined before it is frozen
 @end(Reason)
 @end{Legality}
 
-@begin{NotesNotes}
+@begin{Notes}
 Completions are in principle allowed for any kind of explicit declaration.
 However, for some kinds of declaration,
 the only allowed completion is a @nt{pragma} Import,
@@ -5255,7 +5255,7 @@ generic units.
 The rules of @RefSec{Freezing Rules}
 prevent, at compile time, premature uses of other entities
 such as private types and deferred constants.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 This subclause is new.  It is intended to cover all

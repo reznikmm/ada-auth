@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/25 04:14:24 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -148,7 +148,7 @@ situations.
 input-output packages.}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 Each instantiation of the generic packages Sequential_IO and Direct_IO
 declares a different type File_Type.  In the case of Text_IO, Wide_Text_IO,
 and Streams.Stream_IO, the corresponding type
@@ -158,7 +158,7 @@ A bidirectional device can often be modeled as two sequential files
 associated with the device, one of mode In_File, and one of mode
 Out_File.  An implementation may restrict the number of files that may
 be associated with a given external file.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Sequential and Direct Files}
 
@@ -721,9 +721,9 @@ can be propagated if the element read cannot be
 @end{DescribeCode}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 Append_File mode is not supported for the generic package Direct_IO.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{The Generic Package Storage_IO}
 
@@ -798,10 +798,10 @@ but with the content of the Item parameter being read from
 or written into the specified Buffer, rather than an external file.
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 A buffer used for Storage_IO holds only one element at a time; an external
 file used for Direct_IO holds a sequence of elements.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Text Input-Output}
 
@@ -1381,7 +1381,7 @@ input file, the current default output file,
 or the current default error file.
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 An implementation can define the Form parameter of
 Create and Open to control effects including the following:
 @begin{itemize}
@@ -1391,7 +1391,7 @@ and
 the interpretation of text formats in
 a file created by a foreign program.
 @end{itemize}
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Default Input, Output, and Error Files}
 
@@ -1497,7 +1497,7 @@ file,  then subsequent operations on
 such a default file are erroneous.
 @end{Erron}
 
-@begin{NotesNotes}
+@begin{Notes}
 The standard input,
 standard output, and standard error
 files cannot be opened,
@@ -1507,7 +1507,7 @@ corresponding procedures has the mode @key[in] @key[out].
 The standard input, standard output, and standard
 error files are different
 file objects, but not necessarily different external files.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Specification of Line and Page Lengths}
 
@@ -1812,12 +1812,12 @@ However, a call of Col, Line, or Page propagates the
 exception Layout_Error if the corresponding number exceeds Count'Last.
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 A page terminator is always skipped whenever the preceding line
 terminator is skipped.  An implementation may represent the combination
 of these terminators by a single character, provided that it is properly
 recognized on input.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Get and Put Procedures}
 
@@ -2084,7 +2084,7 @@ of the underlying operating system should be disabled during
 the execution of Get_Immediate.
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 Get_Immediate can be used to read a single key from the
 keyboard ``immediately''; that is, without waiting for an end of line.
 In a call of Get_Immediate without the parameter Available,
@@ -2099,7 +2099,7 @@ A string read by Get or written by Put can extend over several lines.
 An implementation is allowed to assume that certain external files do
 not contain page terminators, in which case Get_Line and Skip_Line can
 return as soon as a line terminator is read.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Input-Output for Integer Types}
 
@@ -2235,12 +2235,12 @@ predefined type.
 
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 For Modular_IO, execution of Get propagates
  Data_Error if the sequence of
 characters read forms an integer literal outside the range
 0..Num'Last.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @begin{Example}
@@ -2476,7 +2476,7 @@ predefined type.
 
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 For an item with a positive value, if output to a string exactly fills
 the string without leading spaces, then output of the corresponding
 negative value will propagate Layout_Error.
@@ -2484,7 +2484,7 @@ negative value will propagate Layout_Error.
 The rules for the Value attribute
 (see @RefSecNum(Scalar Types)) and the rules for Get are based on the
 same set of formats.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @begin{Example}
@@ -2614,7 +2614,7 @@ this generic package, and the effect of such instantiations is not
 defined by the language.
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 There is a difference between Put defined for characters, and for
 enumeration values.  Thus
 @begin{Example}
@@ -2626,7 +2626,7 @@ Char_IO.Put('A');  --@i{  outputs the character 'A', between apostrophes}
 
 The type Boolean is an enumeration type, hence Enumeration_IO can be
 instantiated for this type.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Wide Text Input-Output}
 
@@ -2860,7 +2860,7 @@ The library package Text_IO.Text_Streams has the following declaration:
 The Stream function has the same effect as the corresponding function
 in Streams.Stream_IO.
 @end{StaticSem}
-@begin[NotesNotes]
+@begin[Notes]
 The ability to obtain a stream for a text file allows Current_Input,
 Current_Output, and Current_Error to be processed with the functionality
 of streams, including the mixing of text and binary input-output,
@@ -2868,7 +2868,7 @@ and the mixing of binary input-output for different types.
 
 Performing operations on the stream associated with a text file does not
 affect the column, line, or page counts.
-@end[NotesNotes]
+@end[Notes]
 
 
 @LabeledSubClause{The Package Wide_Text_IO.Text_Streams}

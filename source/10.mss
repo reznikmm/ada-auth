@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:23 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -606,7 +606,7 @@ the @nt{type_declaration} of interest.
 @end{Multiple}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 A simple program may consist of a single compilation unit.
 A @nt{compilation} need not have any compilation units;
 for example, its text can consist of @nt{pragma}s.
@@ -710,7 +710,7 @@ used to denote a root library unit L (unless the declaration of
 Standard is hidden)
 since root library unit declarations occur immediately within the
 declarative region of package Standard.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of library units:}
@@ -1014,7 +1014,7 @@ unit.
 @end{Honest}
 @end{Legality}
 
-@begin{NotesNotes}
+@begin{Notes}
 A @nt<library_item> mentioned in
 a @nt{with_clause} of a compilation unit
 is visible within the
@@ -1049,7 +1049,7 @@ of Y or Z visible.
 Note that this does not cause the dreaded visibility holes mentioned
 above.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 The syntax rule for @nt{with_clause} is modified to allow expanded name
@@ -1185,7 +1185,7 @@ For each @nt{body_stub}, there shall be a subunit containing
 the corresponding @nt{proper_body}.
 @end{LinkTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The rules in @RefSec{The Compilation Process}
 say that a @nt{body_stub} is equivalent to the corresponding
 @nt{proper_body}.  This implies:
@@ -1227,7 +1227,7 @@ The body of a protected operation cannot be a subunit.
 This follows from the syntax rules.
 The body of a protected unit can be a subunit.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 The package Parent is first written without subunits:
@@ -1455,7 +1455,7 @@ calls without requiring the user to resubmit them to the compiler.
 @end{Ramification}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 The rules of the language are enforced across
 @nt{compilation} and compilation unit boundaries,
 just as they are enforced within a single compilation unit.
@@ -1502,7 +1502,7 @@ containing the instantiation.
   on the compilation unit containing the instantiation to be
   recompiled.
 @end{ImplNote}
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Pragmas and Program Units}
 
@@ -2251,7 +2251,7 @@ can have modes that provide other behaviors in addition.
 @end{Reason}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 An implementation may provide inter-partition
 communication mechanism(s) via special packages and pragmas.
 Standard pragmas for distribution and methods for specifying
@@ -2308,7 +2308,7 @@ Elaborate_All are defined in terms of ``needed by''.)
 This property allows us to use the environment concept both at compile
 time and at partition-construction time/run time.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 The concept of partitions is new to Ada 9X.
@@ -2685,7 +2685,7 @@ previous @nt{with_clause} of the same @nt{context_clause}.
 @end{Discussion}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 A preelaborated library unit is allowed to have non-preelaborable
 children.
 @begin{Ramification}
@@ -2702,7 +2702,7 @@ Pragma Elaborate is mainly for closely related library units,
 such as when two package bodies 'with' each other's declarations.
 In such cases, Elaborate_All sometimes won't work.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 The concepts of preelaborability

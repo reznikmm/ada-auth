@@ -1,9 +1,9 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:25 $ $Author: Randy $ }
+@Comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:18 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:25 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:18 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -33,7 +33,7 @@ The @nt[pragma]s Reviewable and Restrictions relate to the other
 requirements addressed by this Annex.
 @end{Intro}
 
-@begin{NotesNotes}
+@begin{Notes}
 The @attr[Valid] attribute (see @RefSecNum(The Valid Attribute)) is
 also useful in addressing these needs,
 to avoid problems that could otherwise arise from scalars
@@ -48,7 +48,7 @@ documentation requirements, but it is not easy to determine objectively that
 the documentation is ``adequate''.
 
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 This Annex is new to Ada 9X.
@@ -126,7 +126,7 @@ In addition, it can be detected by the Valid attribute.
 @end{Discussion}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 The initialization requirement applies to
 uninitialized scalar objects that are subcomponents of composite
 objects, to allocated objects, and to stand-alone objects.  It also
@@ -153,7 +153,7 @@ array, with the array index out of range, will result in a write to an
 arbitrary store location, having unpredictable effects.
 
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Documentation of Implementation Decisions}
 
@@ -174,7 +174,7 @@ See also @RefSecNum(Conformity of an Implementation with the Standard), and
 
 @end{DocReq}
 
-@begin{NotesNotes}
+@begin{Notes}
 Among the situations to be
 documented are the conventions
 chosen for parameter passing,  the methods used for the management of
@@ -202,7 +202,7 @@ most useful. Similarly, an implementation may be able to take into
 account use of the Restrictions pragma.
 
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 
 @LabeledClause{Reviewable Object Code}
@@ -429,11 +429,11 @@ The format should be in some agreed form.
 @end{Reason}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 The order of elaboration of library units will be documented
 even in the absence of @nt[pragma] Reviewable
 (see @RefSecNum{Program Execution}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin[discussion]
 There might be some interactions between pragma Reviewable and compiler
@@ -542,7 +542,7 @@ can be obtained.
 @ImplDef{Implementation-defined aspects of pragma Inspection_Point.}
 @end{DocReq}
 
-@begin{NotesNotes}
+@begin{Notes}
 The implementation is not allowed to perform ``dead store elimination'' on
 the last assignment to a variable prior to a point where the
 variable is inspectable.
@@ -574,7 +574,7 @@ known from the source listing. In practice, one needs a tool similar
 to an interactive debugger to perform the check.
 
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Safety and Security Restrictions}
 @begin{Intro}
@@ -850,7 +850,7 @@ still formally erroneous.
 @ImplDef{Any restrictions on pragma Restrictions.}
 
 @begin{comment}
-@begin{NotesNotes}
+@begin{Notes}
 The standard mode for pragma Restrictions is that a
 compilation unit
 (or a partition if at link time) is illegal
@@ -879,5 +879,5 @@ specified in the pragma in order to obtain the reduced RTS, and
 identify any constructs that would use any of the features so
 proscribed
 @end{itemize}
-@end{NotesNotes}
+@end{Notes}
 @end{comment}

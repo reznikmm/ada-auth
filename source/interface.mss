@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:25 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:18 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:25 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:18 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -433,7 +433,7 @@ standard.
 @end{Reason}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 Implementations may place restrictions on interfacing
 pragmas;
 for example, requiring each exported entity to be declared
@@ -496,7 +496,7 @@ then the External_Name is ignored.
 
 An interfacing pragma might result in an effect that violates
 Ada semantics.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of interfacing pragmas:}
@@ -1066,7 +1066,7 @@ specification.
 @end{ImplAdvice}
 
 
-@begin{NotesNotes}
+@begin{Notes}
 Values of type char_array are not implicitly terminated with nul.
 If a char_array is to be passed as a parameter to an imported
 C function requiring nul termination, it is the programmer's
@@ -1083,7 +1083,7 @@ the effect of C unions.
 A C function that takes a variable number of arguments
 can correspond to several Ada subprograms, taking various
 specific numbers and types of parameters.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of using the Interfaces.C package:}
@@ -1373,7 +1373,7 @@ Execution of Update is erroneous if Check is False and a call with
 Check equal to True would have propagated Update_Error.
 @end{erron}
 
-@begin{NotesNotes}
+@begin{Notes}
 New_Char_Array and New_String might be
 implemented either through
 the allocation function from the C environment (``malloc'') or through
@@ -1386,7 +1386,7 @@ that it may be passed to C functions;
 the allocated object should be freed by the programmer via a call of
 Free, not by a called C function.
 @end{itemize}
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{The Generic Package Interfaces.C.Pointers}
 @begin{Intro}
@@ -1592,14 +1592,14 @@ Value(Source, Length) is erroneous, or copying writes past the end of
 the array containing the Element designated by Target.
 @end{erron}
 
-@begin{NotesNotes}
+@begin{Notes}
 To compose a Pointer from an Element_Array, use 'Access on
  the first element.  For example (assuming appropriate instantiations):
 @begin{example}
 Some_Array   : Element_Array(0..5) ;
 Some_Pointer : Pointer := Some_Array(0)'Access;
 @end{example}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of Interfaces.C.Pointers:}
@@ -2151,7 +2151,7 @@ used if necessary to ensure by-copy semantics.
 @end[itemize]
 @end{ImplAdvice}
 
-@begin[NotesNotes]
+@begin[Notes]
 An implementation is not required to support pragma Convention
 for access types, nor is it required to support pragma Import, Export
 or Convention for functions.
@@ -2161,7 +2161,7 @@ does not return a value.]
 If an Ada subprogram is exported to COBOL, then a call from COBOL
 call may specify
  either ``BY CONTENT'' or ``BY REFERENCE''.
-@end[NotesNotes]
+@end[Notes]
 
 @begin{Examples}
 @i{Examples of Interfaces.COBOL:}
@@ -2436,13 +2436,13 @@ specification.
 @end[itemize]
 @end{ImplAdvice}
 
-@begin[NotesNotes]
+@begin[Notes]
 An object of a Fortran-compatible record type,
 declared in a library package or subprogram,
 can correspond to a Fortran common
 block; the type also corresponds to
 a Fortran ``derived type''.
-@end[NotesNotes]
+@end[Notes]
 @begin{Examples}
 @i{Example of Interfaces.Fortran:}
 @begin{Example}

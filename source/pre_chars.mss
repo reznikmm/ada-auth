@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:25 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:18 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/25 04:14:25 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:18 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -260,7 +260,7 @@ then the effects of the subprograms in Characters.Handling should
 reflect the  localizations.  See also @RefSecNum(Character Types).
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
  A basic letter is a letter without a diacritical mark.
 
 Except for the hexadecimal digits, basic letters, and ISO_646
@@ -291,7 +291,7 @@ a graphic character but not both; each graphic character is either
 an alphanumeric or special graphic but not both; each alphanumeric
 is either a letter or decimal digit but not both; each letter is
 either upper case or lower case but not both.}
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{The Package Characters.Latin_1}
 @begin{Intro}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:17 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/25 04:14:24 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -58,7 +58,7 @@ a distributed system be homogeneous.
 
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 
 The partitions comprising a program may be executed on differently
@@ -73,7 +73,7 @@ as the equivalent single partition program.
 
 
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Partitions}
 
@@ -221,7 +221,7 @@ a distributed program to persist while other partitions of the program
 terminate and are later reinvoked.
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 
 Library units are grouped into partitions after compile time,
@@ -234,7 +234,7 @@ The value returned by the Partition_ID attribute can be used as a
 parameter to implementation-provided subprograms in order
 to query information about the partition.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Categorization of Library Units}
 
@@ -594,7 +594,7 @@ shall not be an actual parameter for a generic formal access type;
 
 @end{Legality}
 
-@begin{NotesNotes}
+@begin{Notes}
 A remote types library unit
 need not be pure, and the types it defines may
 include levels of indirection implemented by using access types.
@@ -604,7 +604,7 @@ provide for sending values of such a type
 between active partitions, with Write marshalling the
 representation, and Read unmarshalling any levels of
 indirection.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Remote Call Interface Library Units}
 
@@ -1229,7 +1229,7 @@ normally from the @i{dispatching stub}.
 @end{ImplNote}
 @end{ImplReq}
 
-@begin{NotesNotes}
+@begin{Notes}
 A given active partition can both make and receive remote subprogram calls.
 Thus, an active partition can act as both a client and a server.
 
@@ -1243,7 +1243,7 @@ in a case of dynamically nested remote subprogram calls, where an
 intermediate call executes in a partition that does
 not include the library unit that defines the exception.
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Pragma Asynchronous}
 
@@ -1657,7 +1657,7 @@ into the stream.
 
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
   The package System.RPC is not designed for direct calls by user
   programs.  It is instead designed for use in the implementation of remote
   subprograms calls, being called by the calling stubs generated for a
@@ -1666,4 +1666,4 @@ into the stream.
   RPC-receiver that dispatches to the receiving stubs generated
   for the body of a remote call interface, to handle a remote call
   received from elsewhere.
-@end{NotesNotes}
+@end{Notes}

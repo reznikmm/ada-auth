@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:23 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @redundant[
@@ -525,11 +525,11 @@ error.
 @end{Ramification}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 Note that exceptions raised in a @nt{declarative_part} of a body
 are not handled by the handlers of the
 @nt{handled_sequence_of_statements} of that body.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{The Package Exceptions}
 
@@ -1227,12 +1227,12 @@ there is no need to actually suppress the check.
 @end{ImplNote}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 @Defn{optimization}
 @Defn{efficiency}
 There is no guarantee that a suppressed check is actually removed;
 hence a @nt{pragma} Suppress should be used only for efficiency reasons.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of suppressing checks:}
@@ -1532,10 +1532,10 @@ broken by bugs outside the library unit.
 @end{Discussion}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 The permissions granted by this clause can have an effect on the
 semantics of a program only if the program fails a language-defined check.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 RM83-11.6 was unclear.

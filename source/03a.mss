@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:22 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:15 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -256,7 +256,7 @@ A construct is @i(executable) if execution is defined for it.
 @end(Discussion)
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 @Defn{declare}
 At compile time, the declaration of an entity @i(declares) the entity.
 @Defn{create}
@@ -279,7 +279,7 @@ and the name of a statement.
 Identifiers are also associated with names of pragmas, arguments to
 pragmas, and with attributes, but these are not user-definable.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 The syntax rule for @nt{defining_identifier} is new.
@@ -634,7 +634,7 @@ otherwise, the subtype is called a @i(constrained) subtype
 @end{Discussion}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 @begin{Multiple}
 Any set of types that is closed under derivation
 (see @RefSecNum(Derived Types and Classes)) can be called
@@ -723,7 +723,7 @@ The classes ``numeric'' and ``nonlimited''
 represent other classification dimensions
 and do not fit into the above strictly hierarchical picture.
 @end{Multiple}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 This clause and its subclauses now precede the clause and
@@ -889,7 +889,7 @@ creates a distinct type and its first subtype.
 @end(Example)
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 Each of the above examples declares a named type.  The identifier
 given denotes the first subtype of the type.  Other named subtypes of the
 type can be declared with @nt<subtype_declaration>s
@@ -900,7 +900,7 @@ the first subtype of the type.  For an example of the definition
 of an anonymous type, see the declaration
 of the array Color_Table in @RefSecNum{Object Declarations}; its type
 is anonymous @em it has no nameable subtypes.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 The syntactic category @nt{full_type_declaration} now includes task and
@@ -1017,7 +1017,7 @@ Other @nt<constraint>s do not.
 @end{Ramification}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 A @nt<scalar_constraint> may be applied to a subtype of an appropriate
 scalar type (see @RefSecNum{Scalar Types}, @RefSecNum{Fixed Point Types},
 and @RefSecNum{Reduced Accuracy Subtypes}), even if the subtype
@@ -1026,7 +1026,7 @@ may be applied to a composite subtype (or an access-to-composite subtype)
 only if the composite subtype is unconstrained
 (see @RefSecNum{Index Constraints and Discrete Ranges} and
 @RefSecNum{Discriminant Constraints}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of subtype declarations:)
@@ -1342,7 +1342,7 @@ A @i(named number) provides a name for a numeric value known
 at compile time.  It is declared by a @nt<number_declaration>.
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 A constant cannot be the target of an assignment operation, nor be
 passed as an @key(in) @key(out) or @key(out)
 parameter, between its initialization and finalization, if any.
@@ -1351,7 +1351,7 @@ The nominal and actual subtypes of an elementary object are
 always the same.  For a discriminated or array object,
 if the nominal subtype is constrained then so is the actual
 subtype.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 There are additional kinds of objects (choice parameters and
@@ -1666,7 +1666,7 @@ same value each time
 @end{Ramification}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 Implicit initial values are not defined
 for an indefinite subtype,
 because if an object's nominal subtype is indefinite,
@@ -1688,7 +1688,7 @@ stand-alone object.
 
 The type of a stand-alone object cannot
 be abstract (see @RefSecNum{Abstract Types and Subprograms}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Example of a multiple object declaration:)
@@ -2228,7 +2228,7 @@ is converted to the derived type.
 @end(Discussion)
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 @Defn{closed under derivation}
 Classes are closed under derivation @em
 any class that contains a type also contains its derivatives.
@@ -2286,7 +2286,7 @@ subtype of the derived type.
 
 If the reserved word @key{abstract} is given in the declaration of a
 type, the type is abstract (see @RefSecNum{Abstract Types and Subprograms}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of derived type declarations:)
@@ -2577,7 +2577,7 @@ chain of derivations going back to the given ancestor.
 
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 @begin{Multiple}
 Because operands of a universal type are acceptable to the
 predefined operators of any type in their class, ambiguity can
@@ -2603,7 +2603,7 @@ of other specific integer types, thereby resolving the ambiguity.
   (implicitly convertible) even if both operands were.
 @end(Ramification)
 @end{Multiple}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{ISOonly}
 @InsertTOCCopyright{}
@@ -3182,7 +3182,7 @@ See also the similar permission for Get in
 @end{Reason}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 The evaluation of S'First or S'Last never raises an exception.
 If a scalar subtype S has a nonnull range, S'First and S'Last
 belong to this range.  These values can, for example, always be
@@ -3207,7 +3207,7 @@ For any value V (including any nongraphic character) of an
 enumeration subtype S, S'Value(S'Image(V)) equals V,
 as does S'Wide_Value(S'Wide_Image(V)).  Neither expression
 ever raises Constraint_Error.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of ranges:)
@@ -3370,12 +3370,12 @@ When called, the parameterless function associated with an enumeration literal
 returns the corresponding value of the enumeration type.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 If an enumeration literal occurs in a context that does not
 otherwise suffice to determine the type of the literal, then qualification
 by the name of the enumeration type is one way to resolve
 the ambiguity (see @RefSecNum(Qualified Expressions)).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of enumeration types and subtypes: )
@@ -3489,7 +3489,7 @@ implementation should also support a corresponding change in what is
 a legal @nt<identifier_letter>.
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 The language-defined library package Characters.Latin_1
 (see @RefSecNum(The Package Characters.Latin_1))
 includes the declaration of constants
@@ -3505,7 +3505,7 @@ A conventional character set such as @i(EBCDIC) can be declared as
 a character type; the internal codes of the characters can be specified
 by an @nt<enumeration_representation_clause> as explained in
 clause @RefSecNum(Enumeration Representation Clauses).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Example of a character type: )
@@ -3919,7 +3919,7 @@ An implementation should support a nonbinary modulus up to Integer'Last.
 @end{ImplNote}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 @Defn{universal_integer}
 @Defn{integer literals}
 Integer literals are of the anonymous predefined
@@ -3943,7 +3943,7 @@ Modular types match a @nt{generic_formal_parameter_declaration} of the
 form "@key(type) T @key(is mod) <>;";
 signed integer types match "@key(type) T @key(is range) <>;"
 (see @RefSecNum{Formal Scalar Types}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of integer types and subtypes: )
@@ -4075,7 +4075,7 @@ Unchecked_Conversion.)
 @end{Reason}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 Indexing and loop iteration use values of discrete types.
 
 @PDefn2{Term=[predefined operations],Sec=(of a discrete type)}
@@ -4102,7 +4102,7 @@ are satisfied (in the absence of an exception) by these attributes:
 S'Val(S'Pos(X)) = X
 S'Pos(S'Val(N)) = N
 @end(Example)
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of attributes of discrete subtypes: )
@@ -4224,7 +4224,7 @@ for ``any real type'' are defined for a particular nonstandard real type.
 @Redundant[In any case, such types are not permitted as @nt{explicit_generic_actual_parameter}s for formal scalar types @em see @RefSecNum(Formal Scalar Types).]
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 As stated, real literals are of the anonymous predefined
 real type @i(universal_real).  Other real types
 have no literals.  However, the overload resolution rules
@@ -4232,7 +4232,7 @@ have no literals.  However, the overload resolution rules
 allow expressions of the type @i(universal_real)
 whenever a real type is expected.
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 The syntax rule for @nt{real_type_definition} is modified to use
@@ -4450,11 +4450,11 @@ See @RefSecNum(The Package Interfaces).
 @end{ImplNote}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 If a floating point subtype is unconstrained,
 then assignments to variables of the subtype involve only
 Overflow_Checks, never Range_Checks.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of floating point types and subtypes:)
@@ -4532,7 +4532,7 @@ ceiling(@i{d} * log(10) / log(T'Machine_Radix)) + 1 <= T'Model_Mantissa.
 @EndPrefixType{}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 @PDefn2{Term=[predefined operations],Sec=(of a floating point type)}
 The predefined operations of a floating point type include the assignment
 operation, qualification, the membership tests, and
@@ -4549,7 +4549,7 @@ have Size and Address attributes
 (see @RefSecNum(Representation Attributes)).
 Other attributes of floating point types are defined in
 @RefSecNum{Attributes of Floating Point Types}.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Fixed Point Types}
 
@@ -4780,7 +4780,7 @@ of Float_IO).
 @end{ImplNote}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 @begin{Multiple}
   The base range of
   an ordinary fixed point type need not include the specified bounds
@@ -4795,7 +4795,7 @@ of Float_IO).
   and 15 bits for fraction, resulting in a base range of
   @en@;1.0 .. 1.0@en@;2.0**(@en@;15).
 @end{Multiple}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of fixed point types and subtypes:)
@@ -4952,7 +4952,7 @@ The following additional attributes are defined for
 @EndPrefixType{}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 All subtypes of a fixed point type will have the same value
 for the Delta attribute, in the absence of @nt<delta_constraint>s
 (see @RefSecNum(Reduced Accuracy Subtypes)).
@@ -4975,5 +4975,5 @@ have Size and Address attributes
 (see @RefSecNum(Representation Attributes)).
 Other attributes of fixed point types are defined in
 @RefSecNum{Attributes of Fixed Point Types}.
-@end{NotesNotes}
+@end{Notes}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:17 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/25 04:14:24 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:17 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -685,7 +685,7 @@ is not possible, then the mapping between initiator values and generator states
 should be a rapidly varying function of the initiator value.
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 If two or more tasks are to share the same generator, then the tasks have to
 synchronize their access to the generator as for any shared variable
 (see @RefSecNum(Shared Variables)).
@@ -729,7 +729,7 @@ exception that would be raised were Log to be given the value zero, without
 affecting the result (in most implementations) when Random returns a nonzero
 value.
 @end{Multiple}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a program that plays a simulated dice game:}
@@ -823,7 +823,7 @@ generator of event probabilities in each task:}
 @end{Example}
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 @i{Notes on the last example:}
 Although each Worker task initializes its generator to a different state, those
 states will be the same in every execution of the program.  The generator
@@ -832,4 +832,4 @@ Ada.Numerics.Discrete_Random for the type Integer in the main procedure,
 resetting the generator obtained from that instance to a time-dependent state,
 and then using random integers obtained from that generator to initialize the
 generators in each Worker task.
-@end{NotesNotes}
+@end{Notes}

@@ -1,11 +1,11 @@
 @Part(obsolescent, Root="ada.mss")
 
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/25 04:14:25 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:18 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -520,7 +520,7 @@ allowed to impose further requirements for the selection of the
 @RefSecNum{Task Dependence - Termination of Tasks}.
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 Queued interrupts correspond to ordinary entry calls.  Interrupts that are
 lost if not immediately processed correspond to conditional entry calls.  It
@@ -531,7 +531,7 @@ without a scheduling action.
 
 Control information that is supplied upon an interrupt can be passed to an
 associated interrupt entry as one or more parameters of mode @key[in].
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of an interrupt entry:}

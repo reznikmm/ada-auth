@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:23 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -122,7 +122,7 @@ or a ``formal integer type declaration.'']
 The elaboration of a @nt{generic_declaration} has no effect.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 Outside a generic unit
 a @nt{name} that denotes the @nt{generic_declaration} denotes the
 generic unit.
@@ -147,7 +147,7 @@ A @nt{default_expression} or @nt{default_name} appearing in a
 (The usual visibility rules apply to any @nt{name} used in a default:
 the denoted declaration therefore has to be visible at the place of the
 expression.)
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of generic formal parts:}
@@ -248,10 +248,10 @@ can from then on be instantiated without failing the Elaboration_Check.
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The syntax of generic subprograms implies that a generic subprogram body
 is always the completion of a declaration.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a generic procedure body:}
@@ -993,7 +993,7 @@ kind of construct @em we don't actually ``evaluate'' @nt{subtype_mark}s.
 @end{Honest}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 If a formal type is not tagged, then the type is treated as
 an untagged type within the generic body.
 Deriving from such a type in a generic body is permitted;
@@ -1092,7 +1092,7 @@ operators of T2, such as "=" (call it "="@-{5}) and "+".
 These operations cannot be called from within the instance,
 but the declaration of Bool_4 calls "="@-{5}.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of generic instantiations (see @RefSecNum{Generic Declarations}):}
@@ -1327,7 +1327,7 @@ the general Dynamic Semantics rule in @RefSecNum{Generic Instantiation}.
 @end{Discussion}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The constraints that apply to a generic formal object of mode @key{in
 out} are those of the corresponding generic actual parameter (not
 those implied by the @nt{subtype_mark} that appears in the
@@ -1340,7 +1340,7 @@ Constraint checks are done at instantiation time for formal objects of
 mode @key{in},
 but not for formal objects of mode @key{in out}.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 In Ada 83, it is forbidden to pass a (nongeneric) formal parameter
@@ -1519,7 +1519,7 @@ not.)
 
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 Generic formal types, like all types, are not named.
 Instead, a @nt{name} can denote a generic formal subtype.
 Within a generic unit, a generic formal type is considered as being
@@ -1540,7 +1540,7 @@ a formal derived type whose ancestor is floating point.
 Similar terminology applies to the other kinds of
 @nt{formal_type_definition}.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of generic formal types:}
@@ -1794,7 +1794,7 @@ which is now considered obsolete.
 @EndPrefixType{}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 In accordance with the general rule that the actual type shall
 belong to the class determined for the formal
 (see @RefSec(Formal Types)):
@@ -1822,7 +1822,7 @@ be abstract.
 If the formal has a @nt{discriminant_part},
 the actual can be either definite or indefinite.
 Otherwise, the actual has to be definite.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Incompatible83}
 Ada 83 does not have
@@ -1881,12 +1881,12 @@ might disallow anything).
 @end{Reason}
 @end{Legality}
 
-@begin{NotesNotes}
+@begin{Notes}
 The actual type shall be in the class of types implied
 by the syntactic category of the formal type definition
 (see @RefSec(Formal Types)).  For example, the actual for a
 @nt<formal_modular_type_definition> shall be a modular type.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Formal Array Types}
 
@@ -2150,7 +2150,7 @@ an explicit actual parameter that is a usage name identical to the
 defining name of the formal.
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 The matching rules for formal subprograms state requirements that are
 similar to those applying to @nt{subprogram_renaming_declaration}s
 (see @RefSecNum{Subprogram Renaming Declarations}).
@@ -2189,7 +2189,7 @@ actual parameter.
 
 The actual subprogram cannot be abstract
 (see @RefSecNum{Abstract Types and Subprograms}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of generic formal subprograms:}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:26 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:18 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/25 04:14:26 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:18 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program
@@ -104,7 +104,7 @@ for the external execution environment.
 @end{ImplPerm}
 
 
-@begin{NotesNotes}
+@begin{Notes}
 Argument_Count, Argument, and Command_Name
 correspond to the C language's argc, argv[n] (for n>0) and argv[0],
 respectively.
@@ -116,7 +116,7 @@ includes the command name,
 whereas Argument_Count does not.
 
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 This clause is new in Ada 9X.

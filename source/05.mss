@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:22 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:16 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -183,7 +183,7 @@ or by a transfer of control.
 @end{Ramification}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 A @nt<statement_identifier> that appears immediately within
 the declarative region of a
 named @nt<loop_statement> or an @nt<accept_statement> is nevertheless
@@ -223,7 +223,7 @@ expanded name associated with an entity declared in the task body:
 @key(end) Compute;
 @end{Example}
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of labeled statements:}
@@ -425,7 +425,7 @@ nothing.
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The tag of an object never changes;
 in particular, an
 @nt{assignment_statement}
@@ -452,7 +452,7 @@ access value returned by a function call, and similarly, as a
 component or slice of such a variable
 (see @RefSec{The Context of Overload Resolution}).
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of assignment statements:}
@@ -491,7 +491,7 @@ A(4 .. 12) := A(1 .. 9);  --@i{  A(1 .. 12) = "tartar sauce"}
 @end{Example}
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 @i{Notes on the examples:}
 @nt{Assignment_statement}s are allowed even in the case of overlapping
 slices of the same array,
@@ -500,7 +500,7 @@ are both evaluated before copying the value into the variable.
 In the above example, an
 implementation yielding A(1 .. 12) = "tartartartar" would be
 incorrect.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 We now allow user-defined finalization and value adjustment actions
@@ -742,13 +742,13 @@ or is an invalid representation.
 @end{Ramification}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The execution of a @nt{case_statement} chooses one and only one
 alternative.
 Qualification of the expression of a @nt{case_statement} by a static
 subtype can often be used to limit the number of choices that need be
 given explicitly.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of case statements:}
@@ -920,7 +920,7 @@ than possibly raising Storage_Error, but anything can do that).
 @end{Multiple}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 A loop parameter is a constant;
 it cannot be updated within the
 @nt{sequence_of_statements} of the loop
@@ -953,7 +953,7 @@ first has a null range.
 If a @nt{loop_parameter_specification} has a static discrete range,
 the subtype of the loop parameter is static.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a loop statement without an iteration scheme:}
@@ -1111,10 +1111,10 @@ If the value of the @nt{condition} is False, no transfer of control takes
 place.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 Several nested loops can be exited by an @nt{exit_statement} that names
 the outer loop.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of loops with exit statements:}
@@ -1177,7 +1177,7 @@ of any @nt<compound_statement> that encloses the @nt<goto_statement>
 but does not enclose the target.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The above rules allow transfer of control to a @nt{statement} of an
 enclosing @nt{sequence_of_statements} but not the reverse.  Similarly,
 they prohibit transfers of control such as between alternatives of a
@@ -1185,7 +1185,7 @@ they prohibit transfers of control such as between alternatives of a
 between @nt{exception_handler}s; or from an @nt{exception_handler} of
 a @nt{handled_sequence_of_statements}
 back to its @nt{sequence_of_statements}.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a loop containing a goto statement:}

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:23 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:16 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 
@@ -100,7 +100,7 @@ While ready, a task competes for the available
 @end(Discussion)
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 Concurrent task execution may be implemented on
 multicomputers, multiprocessors, or with interleaved execution on a single
@@ -110,7 +110,7 @@ parts of the execution of a
 given task are performed by different physical processors acting in
 parallel, it may choose to perform them in this way.
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 The introduction has been rewritten.
@@ -259,7 +259,7 @@ The content of a task object of a given task type includes:
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 Within the declaration or body of a task unit, the name of
 the task unit denotes the current instance of the unit
@@ -292,7 +292,7 @@ Systems Programming Annex,
 the Identity attribute
 can be used for task identification
 (see @RefSecNum(Task Identification and Attributes)).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of declarations of task types:}
@@ -457,7 +457,7 @@ raising of an exception),
 the newly created tasks become terminated and are never activated.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 An entry of a task can be called before the task has been activated.
 
@@ -468,7 +468,7 @@ A task can become completed during its activation either because of an
 exception or because it is aborted
 (see @RefSecNum(Abort of a Task - Abort of a Sequence of Statements)).
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of task activation:}
@@ -564,7 +564,7 @@ considered that are not yet completed.
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 The full view of a limited private type can be a task type, or
 can have subcomponents of a task type.  Creation of an object of
@@ -599,7 +599,7 @@ in the corresponding @nt<task_body>;
 the abort of the task.
 @end{itemize}
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of task dependence:}
@@ -860,7 +860,7 @@ object for some useful purpose, so we didn't want to disallow this case.
 @end(Reason)
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 Within the declaration or body of a protected unit, the name of
 the protected unit denotes the current instance of the unit
@@ -904,7 +904,7 @@ The same applies to @nt{entry_declaration}s,
 since an entry involves an implicit component @em the entry queue.
 @end{Reason}
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of declaration of protected type and corresponding body:}
@@ -1231,7 +1231,7 @@ When not specified as potentially blocking,
 a language-defined subprogram is nonblocking.
 @end{Bounded}
 
-@begin{NotesNotes}
+@begin{Notes}
 If two tasks both try to start a protected action
 on a protected object, and at most one is calling
 a protected function, then only one of the tasks can proceed.
@@ -1269,7 +1269,7 @@ target object is not considered a potentially blocking operation.
   object are considered potentially blocking, since they
   can deadlock the task indefinitely.
 @end(Reason)
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of protected subprogram calls
@@ -1637,7 +1637,7 @@ the entry @nt<name> specified in the
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 A task entry has corresponding accept_statements (zero or more),
 whereas a protected entry has a corresponding entry_body (exactly
@@ -1684,7 +1684,7 @@ be requeued (on some private entry)
 when its parameters indicate that it cannot be handled immediately.
 @end{Multiple}
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of entry declarations:}
@@ -2067,7 +2067,7 @@ selected in the interim.
 
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 If an exception is raised during the execution of an @nt{entry_body}, it is
 propagated to the corresponding caller (see @RefSecNum(Exception Handling)).
@@ -2102,7 +2102,7 @@ need not reevaluate the @nt<condition> if nothing it references was
 updated by an intervening protected action on the protected object,
 even if the @nt<condition> references some global variable that might
 have been updated by an action performed from outside of a protected action.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of entry calls:}
@@ -2302,7 +2302,7 @@ of the @nt<requeue_statement>.
 @end(Reason)
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 A requeue is permitted from a single entry to an entry of
 an entry family, or vice-versa.  The entry index, if any,
@@ -2311,7 +2311,7 @@ profiles of the two entries; an entry index
 is part of the @i(entry_)@nt<name> for an entry of a family.
 @PDefn{subtype conformance}
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of requeue statements:}
@@ -2618,7 +2618,7 @@ it need not be the same time base as used for Calendar.Clock.
 
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 A @nt{delay_relative_statement} with a negative value of the
 @i(delay_)@nt<expression> is equivalent to one with a zero value.
@@ -2652,7 +2652,7 @@ functionality defined in @RefSec{Real-Time Systems}.
 Additional requirements associated with @nt<delay_statement>s
 are given in @RefSec(Delay Accuracy).
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a relative delay statement:}
@@ -2902,14 +2902,14 @@ there is no else part.
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 A @nt{selective_accept} is allowed to have several open
 @nt{delay_alternative}s.  A @nt{selective_accept} is allowed
 to have several open
 @nt{accept_alternative}s for the same entry.
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a task body with a selective accept:}
@@ -3050,12 +3050,12 @@ specifying an immediate expiration time and the
 same @nt<sequence_of_statements> as given after the reserved word @key(else).
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 A @nt{conditional_entry_call} may briefly increase the Count attribute of
 the entry, even if the conditional call is not selected.
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a conditional entry call:}
@@ -3424,7 +3424,7 @@ and certain subsequent uses of the object can be erroneous,
 as explained in @RefSecNum{Data Validity}.
 @end{Erron}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 An @nt{abort_statement} should be used only in situations
 requiring unconditional termination.
@@ -3433,7 +3433,7 @@ A task is allowed to abort any task it can name, including itself.
 
 Additional requirements associated with abort
 are given in @RefSec(Preemptive Abort).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 This clause has been rewritten to accommodate the concept
@@ -3482,7 +3482,7 @@ program unit that is, itself, inner to the body of the task unit.
 @EndPrefixType{}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 For the Count attribute, the entry can be either a single entry or an
 entry of a family.  The name of the entry or entry
@@ -3498,7 +3498,7 @@ Within protected units, algorithms interrogating the attribute E'Count
 in the @nt<entry_barrier> for the entry E should take precautions to
 allow for the evaluation of the @nt<condition> of the barrier both before
 and after queuing a given caller.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Shared Variables}
 

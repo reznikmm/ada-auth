@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:23 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @redundant[
@@ -1099,7 +1099,7 @@ assumptions of no aliases.
 @end{Itemize}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 The specification of a link name in a @nt{pragma} Export
 (see @RefSecNum{Interfacing Pragmas})
 for a subprogram or object is an alternative to explicit
@@ -1110,7 +1110,7 @@ The rules for the Size attribute imply,
 for an aliased object X, that if X'Size = Storage_Unit,
 then X'Address points at a storage element containing all
 of the bits of X, and only the bits of X.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 The intended meaning of the various attributes,
@@ -1269,7 +1269,7 @@ is likely to be supported for such objects, but not for subtypes.
 @end{Itemize}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 Alignment is a subtype-specific attribute.
 
 The Alignment of a composite object is always equal to the least
@@ -1369,7 +1369,7 @@ is 32.  On a machine where unaligned loads and stores are merely
 inefficient (as opposed to causing hardware traps),
 we would expect an Alignment of 1 to be supported for any Size.
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 The nonnegative part is missing from RM83
@@ -1754,13 +1754,13 @@ should include the size of the stack.
 @end{Itemize}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 Size is a subtype-specific attribute.
 
 A @nt{component_clause} or Component_Size clause
 can override a specified Size.
 A @nt{pragma} Pack cannot.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 The requirement for a nonnegative value in a Size clause
@@ -1990,7 +1990,7 @@ same in two different partitions.}
 @end{ImplReq}
 
 
-@begin{NotesNotes}
+@begin{Notes}
 The following language-defined attributes are specifiable,
 at least for some of the kinds of entities to which they apply:
 Address, Size, Component_Size, Alignment, External_Tag,
@@ -2013,7 +2013,7 @@ implementation-defined attributes is implementation defined.
 An implementation is not allowed to make
 a language-defined attribute specifiable if it isn't.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of attribute definition clauses:}
@@ -2040,12 +2040,12 @@ Device_Register : Medium;
 @end{Example}
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 @i{Notes on the examples:}
 In the Size clause for Short,
 fifteen bits is the minimum necessary,
 since the type definition requires Short'Small <= 2**(@en@;7).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 The syntax rule for @nt{length_clause} is replaced with the new syntax rule
@@ -2175,7 +2175,7 @@ It's implementable, but not worth it.
 @end{Itemize}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 Unchecked_Conversion may be used to query the internal codes used
 for an enumeration type.
 The attributes of the type, such as Succ, Pred, and Pos,
@@ -2206,7 +2206,7 @@ We considered allowing or requiring
 ``@key[for] S2'Base @key[use] ...'' in cases like this,
 but it didn't seem worth the trouble.
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of an enumeration representation clause:}
@@ -2500,7 +2500,7 @@ passed by reference, as is required.
 @end{Itemize}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 If no @nt{component_clause} is given for a component, then the
 choice of the storage place for the component is left to the
 implementation.  If @nt{component_clause}s are given for all components,
@@ -2531,7 +2531,7 @@ protected outside the protected object (possibly with a pointer to it
 in the protected object), in order to keep implementation-defined
 components out of the way.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of specifying the layout of a record type:}
@@ -2574,14 +2574,14 @@ Word : @key[constant] := 4;  --@i{  storage element is byte, 4 bytes per word}
 @end{Example}
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 @i{Note on the example:}
 The @nt{record_representation_clause} defines the record layout.  The
 Size clause guarantees that (at least) eight storage elements are used
 for objects of the type.  The Alignment clause guarantees that
 aliased, imported, or exported objects of the type will have
 addresses divisible by eight.
-@end{NotesNotes}
+@end{Notes}
 
 
 @begin{DiffWord83}
@@ -3120,10 +3120,10 @@ See UI-0065 regarding Null_Address.
 @end{ImplNote}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 There are also some language-defined child packages of System
 defined elsewhere.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 Much of the content of System is standardized,
@@ -3449,7 +3449,7 @@ An implementation may place restrictions on @nt{code_statement}s.
 An implementation is not required to provide package System.Machine_Code.
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 An implementation may provide implementation-defined pragmas
 specifying register conventions and calling conventions.
 
@@ -3470,7 +3470,7 @@ Intrinsic subprograms (see @RefSec{Conformance Rules})
 can also be used to achieve machine code insertions.
 Interface to assembly language can be achieved
 using the features in @RefSec{Interface to Other Languages}.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a code statement:}
@@ -3866,11 +3866,11 @@ constant object.
 @end{Ramification}
 @end{Erron}
 
-@begin{NotesNotes}
+@begin{Notes}
 Objects can become abnormal due to other kinds of actions that directly
 update the object's representation;
 such actions are generally considered directly erroneous, however.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 In order to reduce the amount of erroneousness,
@@ -3915,7 +3915,7 @@ The value of this attribute is of the predefined type Boolean.>}
 @EndPrefixType{}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 Invalid data can be created in the following cases
 (not counting erroneous or unpredictable execution):
 @begin{Itemize}
@@ -3963,7 +3963,7 @@ subcomponents are static.
 Otherwise, evaluation of the @nt{prefix} of the @nt{attribute_reference}
 causes erroneous execution (see @RefSecNum{Names}).
 @end{Reason}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 X'Valid is new in Ada 9X.
@@ -3995,7 +3995,7 @@ it is as if X were declared immediately within a library package.>}
 @EndPrefixType{}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 This attribute is provided to support the situation where a local
 object is to be inserted into a global linked data structure, when the
 programmer knows that it will always be removed from the data structure prior
@@ -4043,7 +4043,7 @@ There is no Unchecked_Access attribute for subprograms.
   type doesn't include a static link.
 @end{Reason}
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Storage Management}
 
@@ -4394,7 +4394,7 @@ the designated object becomes inaccessible.
 @end{ImplNote}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 A user-defined storage pool type can be obtained by extending the
 Root_Storage_Pool type,
 and overriding the primitive subprograms Allocate, Deallocate, and
@@ -4453,7 +4453,7 @@ since this would be semantically invisible.
 For example, the allocator could conceivably be implemented with inline
 code.
 @end{ImplNote}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 To associate an access type with a storage pool object, the user
@@ -4702,14 +4702,14 @@ nor whether fragmentation can occur.
 @end{Ramification}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 The rules here that refer to Free apply to any instance
 of Unchecked_Deallocation.
 
 Unchecked_Deallocation cannot be instantiated for an
 access-to-constant type.
 This is implied by the rules of @RefSecNum{Formal Access Types}.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Pragma Controlled}
 
@@ -4952,7 +4952,7 @@ the restrictions to be erroneous, and not enforce them at all.
 @end{Ramification}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 Restrictions intended to facilitate the construction of
 efficient tasking run-time systems are defined
 in @RefSecNum{Tasking Restrictions}.
@@ -4971,7 +4971,7 @@ An implementation might support only two run-time systems,
 and document a set of restrictions that is sufficient to allow
 use of the more efficient and safe one.
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 Pragma Restrictions is new to Ada 9X.
@@ -5052,10 +5052,10 @@ The Write operation appends Item to the specified stream.
 
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 See @RefSec{The Package Streams.Stream_IO} for an example of extending
 type Root_Stream_Type.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Stream-Oriented Attributes}
 
@@ -5303,7 +5303,7 @@ The same rule applies to the result of the Input function.
 @end{Reason}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 For a definite subtype S of a type @i(T), only @i(T)'Write and @i(T)'Read
 are needed to pass
 an arbitrary value of the subtype through a stream.
@@ -5313,7 +5313,7 @@ pass bounds, discriminants, or tags.
 
 User-specified attributes of S'Class are not inherited by other
 class-wide types descended from S.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of user-defined Write attribute:}

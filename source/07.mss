@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:23 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:16 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @redundant[
@@ -112,7 +112,7 @@ The elaboration of a @nt{package_declaration} consists of the elaboration of
 its @nt{basic_declarative_item}s in the given order.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The visible part of a package contains all the information that
 another program unit is able to know about the package.
 
@@ -130,7 +130,7 @@ in @nt{package_specification}s.
 This does not apply to instances of generic units,
 whose bodies can occur in @nt{package_specification}s.
 @end{TheProof}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a package declaration:}
@@ -283,7 +283,7 @@ its @nt{declarative_part} is first
 elaborated, and its @nt{handled_sequence_of_statements} is then executed.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 A variable declared in the body of a package is only visible
 within this body and, consequently, its value can only be
 changed within the @nt{package_body}.  In the absence of local tasks,
@@ -298,7 +298,7 @@ body of the package.  Hence a call of such a subprogram by an
 outside program unit raises the exception Program_Error if the call
 takes place before the elaboration of the
 @nt{package_body} (see @RefSecNum{Declarative Parts}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a package body
@@ -784,7 +784,7 @@ the @i(ancestor_)@nt<subtype_indication>, and creates a
 partial view of a type.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The partial view of a type as declared by a @nt<private_type_declaration>
 is defined to be a composite view (in @RefSecNum{Types and Subtypes}).
 The full view of the type might or might not be composite.
@@ -856,7 +856,7 @@ come from the corresponding primitive subprogram of the specified ancestor
 type, while the body comes from the corresponding primitive subprogram
 of the parent type of the full view.
 See @RefSecNum{Dispatching Operations of Tagged Types}.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of private type declarations:}
@@ -1131,7 +1131,7 @@ the following attribute is defined:
 @EndPrefixType{}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 @begin{Multiple}
 Because a partial view and a full view
 are two different views of one and the same type,
@@ -1166,7 +1166,7 @@ the attributes A'Size and A'Address are defined
 (see @RefSecNum{Representation Attributes}).
 The Position, First_Bit, and Last_Bit attributes
 are also defined for discriminants and inherited components.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a type with private operations:}
@@ -1198,7 +1198,7 @@ are also defined for discriminants and inherited components.
 @end{Example}
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 @begin{Multiple}
 @i{Notes on the example:}
 Outside of the package Key_Manager, the operations available for
@@ -1219,7 +1219,7 @@ The value of the variable Last_Key, declared in the package body,
 remains unchanged between calls of the procedure Get_Key.  (See also
 the NOTES of @RefSecNum{Package Bodies}.)
 @end{Multiple}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 The phrase in RM83-7.4.2(7), ``...after the full type declaration'',
@@ -1316,7 +1316,7 @@ elaborates the @nt<subtype_indication> or (only allowed in the case of an
 imported constant) the @nt<array_type_definition>.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The full constant declaration for a deferred constant that is of a given
 private type or private extension is not allowed before the corresponding
 @nt{full_type_declaration}.  This is a consequence of the freezing
@@ -1333,7 +1333,7 @@ They are also useful for declaring
 access-to-constant objects that designate
 variables declared in the private part of a package.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of deferred constant declarations:}
@@ -1491,7 +1491,7 @@ Otherwise, the type is nonlimited.
 a limited type.]
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 The following are consequences of the rules for limited types:
 @begin{Itemize}
 An initialization expression is not allowed in an
@@ -1535,7 +1535,7 @@ circumstances.
 
   Tagged types never become nonlimited.
 @end{Ramification}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of a package with a limited type:}
@@ -1570,7 +1570,7 @@ circumstances.
 @end{Example}
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 @begin{Multiple}
 @i{Notes on the example:}
 In the example above, an outside subprogram making use of IO_Package
@@ -1595,7 +1595,7 @@ The fact that the full view of File_Name is explicitly declared
 parameter passing and function return will always be by reference
 (see @RefSecNum{Formal Parameter Modes} and @RefSecNum{Return Statements}).
 @end{Multiple}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 The restrictions in RM83-7.4.4(4),
@@ -2397,7 +2397,7 @@ a bounded error to raise Program_Error
 @end{Itemize}
 @end{Bounded}
 
-@begin{NotesNotes}
+@begin{Notes}
 The rules of Section 10 imply that
 immediately prior to partition termination, Finalize operations
 are applied to library-level controlled objects (including those
@@ -2569,7 +2569,7 @@ and the others must not be finalized.
 It is our intention that both of these implementation methods should
 be possible.
 @end{ImplNote}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 Finalization depends on the concepts of completion and leaving,

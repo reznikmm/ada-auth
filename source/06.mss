@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:22 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:16 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -219,7 +219,7 @@ The elaboration of a @nt{subprogram_declaration}
 or an @nt{abstract_subprogram_declaration} has no effect.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 A @nt{parameter_specification} with several identifiers is equivalent
 to a sequence of single @nt{parameter_specification}s, as explained
 in @RefSecNum{Objects and Named Numbers}.
@@ -234,7 +234,7 @@ the subprogram declaration.
 
 Subprograms can be called recursively and can be called
 concurrently from multiple tasks.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of subprogram declarations:}
@@ -532,11 +532,11 @@ do not overlap (unless, of course, it can prove otherwise).
 @end{Reason}
 @end{Bounded}
 
-@begin{NotesNotes}
+@begin{Notes}
 A formal parameter of mode @key(in) is a constant
 view (see @RefSecNum{Objects and Named Numbers});
 it cannot be updated within the @nt{subprogram_body}.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 The value of an @key(out) parameter may be read.
@@ -1018,11 +1018,11 @@ so long as the semantics of the program remains unchanged.
 @end{Ramification}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 The @nt{name} in a @nt{pragma} Inline can denote
 more than one entity in the case of overloading.
 Such a @nt{pragma} applies to all of the denoted entities.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 
@@ -1205,12 +1205,12 @@ Pair(Left => @key[new] Person, Right => @key[new] Person);
 @end{Example}
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 If a @nt{default_expression} is used for two or more parameters in a
 multiple @nt{parameter_specification}, the @nt{default_expression} is
 evaluated once for each omitted parameter.  Hence in the above
 examples, the two calls of Pair are equivalent.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of overloaded subprograms:}
@@ -1745,10 +1745,10 @@ Boolean implicitly declares a declaration of "/=" that
 gives the complementary result.
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 The operators "+" and "@en@;" are both unary and binary operators,
 and hence may be overloaded with both one- and two-parameter functions.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of user-defined operators:}@begin{Example}

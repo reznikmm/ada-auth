@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:26 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:18 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/25 04:14:26 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:18 $}
 
 @LabeledClause{The Package Standard}
 
@@ -396,7 +396,7 @@ floating point types,
 then  the names should end with ``Float'' as in ``Long_Float''.
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 Certain aspects of the predefined entities cannot be completely
 described in the language itself.  For example, although the
 enumeration type Boolean can be written showing the two enumeration
@@ -446,7 +446,7 @@ It doesn't logically imply that, but it's still useful as a reminder.
 In any case, declaring these general-purpose subtypes of Integer close
 to Integer seems more readable than declaring them much later.
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 Package Standard is declared to be pure.

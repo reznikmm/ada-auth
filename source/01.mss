@@ -1,6 +1,6 @@
 @Part(01, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/25 04:14:21 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:15 $}
 @PageOneFootings{}
 
 @PrefaceClause{} @Comment{Go to odd page.}
@@ -55,10 +55,10 @@ Languages @EmDash{} Ada
 @BlankSpace{0.5inch}
 
 @LabeledSection{General}
-@SetPageHeadingsNoPage{$Date: 2000/04/25 04:14:21 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:15 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -107,7 +107,7 @@ The annotations in the AARM are as follows:
 @begin{Itemize}
 Text that is logically redundant is shown
 @Redundant[in square brackets, like this].
-Technically, such text could be written as a @NotesNotesName
+Technically, such text could be written as a @NotesName
 in the RM9X, since it is really a theorem that can be proven from the
 non-redundant rules of the language.
 We use the square brackets instead when it seems to make the RM9X
@@ -122,7 +122,7 @@ as explained in @RefSecNum{The Context of Overload Resolution}.
 
 Text under the following sub-headings appears in both documents:
 @begin(itemize, Spacing=0)
-@IntroTitle The unlabeled text at the beginning of each clause or subclause,
+The unlabeled text at the beginning of each clause or subclause,
 
 @SyntaxTitle,
 
@@ -150,7 +150,7 @@ Text under the following sub-headings appears in both documents:
 
 @ImplAdviceTitle,
 
-@NotesNotesTitle,
+@NotesTitle,
 
 @ExamplesTitle.
 @end(itemize)
@@ -182,11 +182,11 @@ or why it is worded in a certain way.
 An obscure ramification of the rules that is of interest
 only to language lawyers.
 (If a ramification of the rules is of interest to programmers,
-then it appears under @NotesNotesTitle.)
+then it appears under @NotesTitle.)
 @end{Ramification}
 @begin{TheProof}
 An informal proof explaining how a given
-@NotesNotesName or
+@NotesName or
 @Redundant[marked-as-redundant] piece of text
 follows from the other rules of the language.
 @end{TheProof}
@@ -212,7 +212,7 @@ in @RefSec{Glossary}.
 @begin{Discussion}
 In general, RM9X text appears in the normal font,
 whereas AARM-only text appears in a smaller font.
-@NotesNotesName@;s also appear in the smaller font,
+@NotesName@;s also appear in the smaller font,
 as recommended by ISO/IEC style guidelines.
 Ada examples are also usually printed in a smaller font.
 
@@ -653,12 +653,12 @@ burden implementations by requiring the behavior.
 @end{Discussion}
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 @Defn{notes}
 Notes emphasize consequences of the rules
 described in the (sub)clause or elsewhere.
 This material is informative.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 Examples illustrate the possible forms of the constructs described.
@@ -1105,7 +1105,7 @@ to user-defined code
 @end(ImplNote)
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 The above requirements imply that an implementation conforming
 to this Standard may support some of the capabilities required by a
 Specialized Needs Annex without supporting all required
@@ -1116,7 +1116,7 @@ capabilities.
   Such an implementation does not conform to the Annex,
   but it does conform to the Standard.
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Method of Description and Syntax Notation}
 
@@ -1291,7 +1291,7 @@ equivalent to some sequential order.
 @end{Reason}
 @end{Intro}
 
-@begin{NotesNotes}
+@begin{Notes}
 The syntax rules describing structured constructs are presented in a
 form that corresponds to the recommended paragraphing.  For example, an
 @nt{if_statement} is defined as:
@@ -1309,7 +1309,7 @@ form that corresponds to the recommended paragraphing.  For example, an
 The line breaks and indentation in the syntax rules indicate the
 recommended line breaks and indentation in the corresponding constructs.
 The preferred places for other line breaks are after semicolons.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Classification of Errors}
 

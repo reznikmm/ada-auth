@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:17 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:24 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -172,12 +172,12 @@ Decimal.Max_Scale shall be at least 18.
 Decimal.Min_Scale shall be at most 0.
 @end{ImplReq}
 
-@begin(NotesNotes)
+@begin(Notes)
 The effect of division yielding a quotient with control over rounding
 versus truncation is obtained by applying either the
 function attribute Quotient_Type'Round or the conversion Quotient_Type
 to the expression Dividend/Divisor.
-@end(NotesNotes)
+@end(Notes)
 
 @LabeledClause{Edited Output for Decimal Types}
 @begin{Intro}
@@ -283,10 +283,10 @@ The generic packages Text_IO.Decimal_IO and Wide_Text_IO.Decimal_IO
 provide text input and non-edited text output for decimal types.
 @end{Intro}
 
-@begin{NotesNotes}
+@begin{Notes}
 A picture String is of type Standard.String, both for Text_IO.Editing
 and Wide_Text_IO.Editing.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Picture String Formation}
 @begin{Intro}
@@ -544,10 +544,10 @@ for a special rule to disallow "9.99DB(2)" as an abbreviation for
 }
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 Although a sign to the left of the number can float, a sign to the right
 of the number is in a fixed position.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Edited Output Generation}
 @begin{RunTime}
@@ -1170,7 +1170,7 @@ if its expanded form exceeds 30 characters.
 @end{Discussion}
 @end{ImplReq}
 
-@begin{NotesNotes}
+@begin{Notes}
 The rules for edited output are based on COBOL (ANSI X3.23:1985, endorsed
 by ISO as ISO 1989-1985), with the
 following differences:
@@ -1193,7 +1193,7 @@ following differences:
 @end{Itemize}
 @end{Itemize}
 The value of 30 for Max_Picture_Length is the same limit as in COBOL.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Reason}
 There are several reasons we have not adopted the COBOL-style permission to
@@ -1246,9 +1246,9 @@ Wide_String.
 @ImplDef{The value of Max_Picture_Length in the package Wide_Text_IO.Editing}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 Each of the functions Wide_Text_IO.Editing.Valid, To_Picture, and Pic_String has String (versus
 Wide_String) as its parameter or result subtype, since a picture String
 is not localizable.
-@end{NotesNotes}
+@end{Notes}
 

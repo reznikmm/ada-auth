@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:22 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:15 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @redundant[
@@ -223,7 +223,7 @@ such as which characters are allowed in the text of a program.
 @end{Ramification}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 Every code position of ISO 10646 BMP that is not reserved for a control
 function is defined to be a @nt<graphic_character> by this International Standard.
 This includes all code positions other than 0000 - 001F, 007F - 009F,
@@ -246,7 +246,7 @@ It is also the intent to allow different fonts:
 reserved words might be in bold face,
 and that should be irrelevant to the semantics.
 @end(Discussion)
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 Ada 9X allows 8-bit and 16-bit characters,
@@ -461,10 +461,10 @@ an integer literal is a @nt{numeric_literal} without a point.
 @Syn{lhs=<numeric_literal>,rhs="@Syn2{decimal_literal} | @Syn2{based_literal}"}
 @end{Syntax}
 
-@begin{NotesNotes}
+@begin{Notes}
 The type of an integer literal is @i{universal_integer}.
 The type of a real literal is @i{universal_real}.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Decimal Literals}
 
@@ -605,10 +605,10 @@ character between two apostrophe characters.]
 @Syn{lhs=<character_literal>,rhs="@SingleQuote@Syn2{graphic_character}@SingleQuote"}
 @end{Syntax}
 
-@begin{NotesNotes}
+@begin{Notes}
 A @nt{character_literal} is an enumeration literal
 of a character type.  See @RefSecNum(Character Types).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of character literals:}
@@ -665,9 +665,9 @@ A @i(null string literal) is a @nt<string_literal> with no
 
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 An end of line cannot appear in a @nt{string_literal}.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of string literals:}
@@ -1228,7 +1228,7 @@ The following are the @i{reserved words}
 @end{Bundle}
 @end{Syntax}
 
-@begin{NotesNotes}
+@begin{Notes}
 The reserved words appear in @key{lower case boldface}
 in this International Standard,
 except when used in the @nt{designator} of an attribute
@@ -1240,7 +1240,7 @@ for a reserved word in a
 @nt{string_literal} used as an @nt{operator_symbol}.
 This is merely a convention @em programs may be written in whatever
 typeface is desired and available.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Incompatible83}
 The following words are not reserved in Ada 83, but are reserved in Ada

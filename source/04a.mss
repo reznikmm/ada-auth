@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/25 04:14:22 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:16 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -315,7 +315,7 @@ Constraint_Error is raised if this check fails.
 @end{Example}
 @end{Examples}
 
-@begin{NotesNotes}
+@begin{Notes}
 @i(Notes on the examples:)
 Distinct notations are used for components of multidimensional arrays (such
 as  Board) and arrays of arrays (such as Page).  The components of an array
@@ -324,7 +324,7 @@ denotes  the 20th component of Page(10).  In the last example Next_Frame(L)
 is  a  function  call  returning  an  access  value  that   designates   a
 two-dimensional array.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Slices}
 
@@ -379,7 +379,7 @@ Constraint_Error is raised if this check fails.
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 A @nt<slice> is not permitted as the @nt<prefix> of an
 Access @nt<attribute_reference>,
 even if the components or the array as a whole are aliased.
@@ -398,7 +398,7 @@ For  a  one-dimensional  array  A,  the  @nt<slice>  A(N  .. N) denotes
 an array that has only one component;
 its type is the type of A.  On the other hand, A(N)  denotes  a
 component of the array A and has the corresponding component type.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of slices:)
@@ -725,7 +725,7 @@ implementation-defined attribute can be used in a static expression.
 @end{Ramification}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 Attributes are defined throughout this International Standard,
 and are summarized in
 @RefSecNum{Language-Defined Attributes}.
@@ -754,7 +754,7 @@ access type.
   it would be very difficult to take 'Access of an overloaded
   subprogram.
 @end(Reason)
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of attributes:)
@@ -932,14 +932,14 @@ component subtype.
 @end{Ramification}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 Enumeration literals that are @nt<identifier>s rather than
 @nt<character_literal>s follow the normal rules for @nt<identifier>s
 when used in a @nt<name>
 (see @RefSecNum{Names} and @RefSecNum{Selected Components}).
 @nt<Character_literal>s used as @nt<selector_name>s follow the normal
 rules for expanded names (see @RefSecNum{Selected Components}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of literals:)
@@ -1332,13 +1332,13 @@ is evaluated (and converted) once for each associated component.
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 For a @nt<record_aggregate> with positional associations, expressions
 specifying discriminant
 values appear first since the @nt<known_discriminant_part>
 is given first in the declaration of the type; they have to
 be in the same order as in the @nt<known_discriminant_part>.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Example of a record aggregate with positional associations:)
@@ -1491,7 +1491,7 @@ of the ancestor expression.
 @end{Ramification}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 If all components of the value of the @nt<extension_aggregate>
 are determined by the @nt<ancestor_part>, then
 the @nt<record_component_association_list> is required to be
@@ -1503,7 +1503,7 @@ then as the last step of evaluating the aggregate,
 the Initialize procedure of the ancestor type is called,
 unless the Initialize procedure is abstract
 (see @RefSecNum{User-Defined Assignment and Finalization}).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of extension aggregates (for types defined in @RefSecNum{Type Extensions}):}
@@ -1843,13 +1843,13 @@ The exception Constraint_Error is raised if any of the above
 checks fail.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 In an @nt<array_aggregate>, positional notation may only be used
 with two or more @nt<expression>s; a single @nt<expression>
 in parentheses is interpreted as a @nt<parenthesized_expression>.
 A @nt<named_array_aggregate>, such as (1 => X), may be used to specify
 an array with a single component.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of array aggregates with positional associations:)
@@ -2244,11 +2244,11 @@ left-to-right or chosen order of association.
 @end{Discussion}
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 The two operands of an expression of the form X op Y, where
 op is a binary operator, are evaluated in an arbitrary order,
 as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of precedence:)
@@ -2363,7 +2363,7 @@ either of the above checks fails.
 
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 The conventional meaning of the logical operators is given by the
 following truth table:
 @begin(Display)
@@ -2376,7 +2376,7 @@ following truth table:
         False@\        True@\        False@\        True@\        True
         False@\        False@\        False@\        False@\        False
 @end(Display)
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of logical operators:)
@@ -2713,7 +2713,7 @@ A membership test using @key(not in) gives the complementary result to
 the corresponding membership test using @key(in).
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 No exception is ever raised by a membership test, by a predefined
 ordering operator,
 or by a predefined equality operator for an elementary type,
@@ -2726,7 +2726,7 @@ If a composite type has components that depend on discriminants, two values
 of this type have matching components if and only if their
 discriminants are equal.  Two nonnull arrays have matching components
 if and only if the length of each dimension is the same for both.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of expressions involving relational operators and
@@ -2867,7 +2867,7 @@ It is the only one that can return a value having controlled parts.
 @end{Ramification}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 As for all predefined operators on modular types, the binary adding
 operators + and @en on modular types include a final
 reduction modulo the modulus if the result is outside
@@ -2881,7 +2881,7 @@ the base range can be followed by a conditional subtraction of the modulus.
 Conversely, a check after subtraction to see if a "borrow" was
 performed can be followed by a conditional addition of the modulus.
 @end{ImplNote}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of expressions involving binary adding operators:)
@@ -2940,12 +2940,12 @@ They have the following specifications:
 @end(example)
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 For modular integer types, the unary adding operator @en, when
 given a nonzero operand, returns the result of subtracting
 the value of the operand from the modulus;
 for a zero operand, the result is zero.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Multiplying Operators}
 
@@ -3110,7 +3110,7 @@ and @key(mod) if the right operand is zero.
 True, division by zero raises Constraint_Error.]
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 For positive A and B, A/B is the quotient and A @key(rem) B is the remainder when
 A  is  divided  by  B.   The  following  relations are satisfied by the rem
 operator:
@@ -3144,7 +3144,7 @@ A      B   A/B   A @key(rem) B  A @key(mod) B     A     B    A/B   A @key(rem) B
 14    -5   -2       4       -1       -14   -5     2      -4        -4
 @end{Example}
 @end{Bundle}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of expressions involving multiplying operators:)
@@ -3296,14 +3296,14 @@ would not be.
 final result in this case would generally be 0.0.)
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 @IndexCheck{Range_Check}
 As implied by the specification given above
 for exponentiation of an integer type, a check is made that
 the exponent is not negative.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 Constraint_Error is raised if this check fails.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 We now show the specification for "**" for integer types
@@ -3869,7 +3869,7 @@ type.
 @end{Ramification}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 @begin{Multiple}
 @RootDefn{implicit subtype conversion}
 In addition to explicit @nt<type_conversion>s,
@@ -3911,7 +3911,7 @@ that the first subtype be specified
 as the target to minimize confusion
 (a similar recommendation applies to renaming and
 generic formal @key(in out) objects).
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of numeric type conversion:)
@@ -4054,13 +4054,13 @@ The exception Constraint_Error is raised if this check fails.
 @end{Reason}
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 When a given context does not uniquely identify an expected type,
 a @nt<qualified_expression> can be used to do so.
 In particular, if an overloaded @nt<name> or
 @nt<aggregate> is passed to an overloaded subprogram, it
 might be necessary to qualify the operand to resolve its type.
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of disambiguating expressions using qualification:)
@@ -4213,7 +4213,7 @@ they are activated
 Finally, an access value that designates the created object is returned.
 @end{RunTime}
 
-@begin{NotesNotes}
+@begin{Notes}
 Allocators cannot create objects of an abstract type.
 See @RefSecNum{Abstract Types and Subprograms}.
 
@@ -4244,7 +4244,7 @@ to provide garbage collection (see @RefSecNum{Pragma Controlled}).
   The user may exercise more control over storage management by
   associating a user-defined pool with an access type.
 @end{Discussion}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Examples of allocators:}
@@ -4711,7 +4711,7 @@ accuracy rules apply (see @RefSecNum(Numerics)).
 
 @end{ImplReq}
 
-@begin{NotesNotes}
+@begin{Notes}
 An expression can be static even if it occurs in a context where
 staticness is not required.
 @begin{Ramification}
@@ -4758,7 +4758,7 @@ between two integers, the rounding is performed away from zero.
   The implementation must take care to evaluate such literals properly.
 
 @end{ImplNote}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i(Examples of static expressions:)

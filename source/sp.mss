@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:25 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:18 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/25 04:14:25 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:18 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -321,7 +321,7 @@ for a finer-grain control of interrupt blocking.
 
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 The default treatment for an interrupt can be to keep the
 interrupt pending or to deliver it to an implementation-defined
@@ -337,7 +337,7 @@ It is a bounded error to call Task_Identification.Current_Task
 The rule that an exception propagated from an interrupt handler has no effect
 is modeled after the rule about exceptions propagated out of task bodies.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{Protected Procedure Handlers}
 
@@ -510,7 +510,7 @@ before run time.
 
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 The Attach_Handler pragma can provide static attachment of handlers to
 interrupts if the implementation supports preelaboration of protected
@@ -527,7 +527,7 @@ An example of a possible implementation-defined restriction is
 disallowing the use of the standard storage pools within the body of
 a protected procedure that is an interrupt handler.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{The Package Interrupts}
 
@@ -677,13 +677,13 @@ predefined package Interrupts.
 
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 The package Interrupts.Names contains implementation-defined
 names (and constant values) for the interrupts that are supported by
 the implementation.
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 @i{Example of interrupt handlers:}
@@ -1093,13 +1093,13 @@ A warning might be appropriate if no packing whatsoever can be achieved.
 
 @end{ImplReq}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 An imported volatile or atomic constant behaves as a constant (i.e.
 read-only) with respect to other parts of the Ada program, but can
 still be modified by an ``external source.''
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Incompatible83}
 Pragma Atomic replaces Ada 83's pragma Shared.
@@ -1233,7 +1233,7 @@ from an entry body or interrupt handler.
 entry body or interrupt handler.}
 @end{DocReq}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 This package is intended for use in writing user-defined task scheduling
 packages and constructing server tasks.  Current_Task can be used in
@@ -1243,7 +1243,7 @@ as Set_Priority (see @RefSecNum{Dynamic Priorities}).
 The function Current_Task and the attribute Caller can return a
 Task_ID value that identifies the environment task.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{The Package Task_Attributes}
 
@@ -1433,7 +1433,7 @@ and the heap for the others.  In the latter case, N should be documented.
 
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 An attribute always exists (after instantiation), and has the initial value.
 It need not occupy memory until the first operation that potentially
@@ -1450,4 +1450,4 @@ As specified in @RefSecNum{The Package Task_Identification}, if the parameter
 T (in a call on a subprogram of an instance of this package) identifies
 a nonexistent task, the execution of the program is erroneous.
 
-@end{NotesNotes}
+@end{Notes}

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:17 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/25 04:14:24 $}
+@SetPageHeadings{$Date: 2000/04/27 00:22:17 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -51,7 +51,7 @@ However the paragraph number can serve that purpose.
 
 @end{Metrics}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 The specification of the metrics makes a distinction between upper bounds
 and simple execution times.  Where something is just specified as ``the
@@ -81,7 +81,7 @@ that can be measured and used to estimate the general suitability of an
 implementation, or to evaluate the comparative utility of certain features
 of an implementation for a particular real-time application.
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 This Annex is new to Ada 9X.
@@ -261,7 +261,7 @@ The range of System.Priority shall include at least 30 values.
 
 @end{ImplReq}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 The priority expression can include references to
 discriminants of the enclosing type.
@@ -280,7 +280,7 @@ require the package System to be named in a @nt{with_clause} for the
 enclosing @nt{compilation_unit}.
 @end{Ramification}
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Extend83}
 
@@ -447,7 +447,7 @@ or via priority inheritance.
 
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 Section 9 specifies under which circumstances a task
 becomes ready.
@@ -481,7 +481,7 @@ The priority of a task is determined by rules specified in this subclause, and
 under @RefSec{Task Priorities}, @RefSec{Priority Ceiling Locking}, and
 @RefSec{Dynamic Priorities}.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledSubClause{The Standard Task Dispatching Policy}
 
@@ -602,7 +602,7 @@ dispatching point.
 
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 If the active priority of a running task is lowered due to loss of
 inherited priority (as it is on completion of a protected
@@ -620,7 +620,7 @@ Setting the base priority of a ready task causes
 the task to move to the end of the queue for its active priority,
 regardless of whether the active priority of the task actually changes.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Priority Ceiling Locking}
 
@@ -772,7 +772,7 @@ The implementation should use names that end with
 
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 While a task executes in a protected action, it can be preempted
 only by tasks whose active priorities are higher than the
@@ -807,7 +807,7 @@ rules guarantee that there is no possibility of deadlock involving
 only protected subprograms (excluding the case where a protected operation
 calls another protected operation on the same protected object).
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Entry Queuing Policies}
 
@@ -1150,7 +1150,7 @@ executing a protected operation.
 @end{Itemize}
 @end{Metrics}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 Setting a task's base priority affects task dispatching.  First, it can
 change the task's active priority.  Second, under the standard
@@ -1192,7 +1192,7 @@ operation that has high enough ceiling priority to guarantee that
 the operation completes without being preempted by any of the
 affected tasks.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Preemptive Abort}
 
@@ -1269,14 +1269,14 @@ if necessary, to achieve this.
 
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 Abortion does not change the active or base priority of the aborted task.
 
 Abortion cannot be more immediate than is allowed by the rules for
 deferral of abortion during finalization and in protected actions.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Tasking Restrictions}
 
@@ -1411,9 +1411,9 @@ When feasible, the implementation should take advantage of the specified
 restrictions to produce a more efficient implementation.
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 The above Storage_Checks can be suppressed with pragma Suppress.
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Monotonic Time}
 @begin{Intro}
@@ -1768,7 +1768,7 @@ Clock.  ``Best'' may mean highest accuracy or largest range.
 
 @end{ImplAdvice}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 The rules in this clause do not imply that the implementation can protect
 the user from operator or installation errors which could result in the
@@ -1778,7 +1778,7 @@ Time_Unit is the granularity of the Time type.  In contrast,
 Tick represents the granularity of Real_Time.Clock.
 There is no requirement that these be the same.
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Delay Accuracy}
 
@@ -1882,14 +1882,14 @@ resumes execution following this statement.
 @end{Itemize}
 @end{Metrics}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 The execution time of a @nt{delay_statement} that does not cause the
 task to be blocked (e.g. ``@key[delay] 0.0;'' ) is of interest in situations
 where delays are used to achieve voluntary round-robin task dispatching among
 equal-priority tasks.
 
-@end{NotesNotes}
+@end{Notes}
 
 @begin{DiffWord83}
 
@@ -2072,7 +2072,7 @@ so creating enough idle tasks would be problematic.
 
 @end{ImplPerm}
 
-@begin{NotesNotes}
+@begin{Notes}
 
 It is a consequence of the priority rules that held tasks cannot be dispatched
 on any processor in a partition (unless they are inheriting
@@ -2111,7 +2111,7 @@ whose barrier becomes open.  The corresponding entry body executes.
 
 @end{itemize}
 
-@end{NotesNotes}
+@end{Notes}
 
 @LabeledClause{Other Optimizations and Determinism Rules}
 

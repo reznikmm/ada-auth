@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:26 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2000/04/27 00:22:18 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@SetPageHeadingsNoPage{$Date: 2000/04/25 04:14:26 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/27 00:22:18 $}
 
 @LabeledClause{String Handling}
 
@@ -316,7 +316,7 @@ value C to the Character value F.@key{all}(C), which is said to
 respect to a character mapping function>]
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 Character_Mapping and Character_Mapping_Function
 are used both for character equivalence
 mappings in the search subprograms (such as for case insensitivity) and
@@ -327,7 +327,7 @@ To_Domain(Identity) and To_Range(Identity) each returns the null string.
 Package Strings.Maps is not pure, since it declares an
 access-to-subprogram type.
 @end{Reason}
-@end{NotesNotes}
+@end{Notes}
 
 @begin{Examples}
 To_Mapping("ABCD", "ZZAB") returns a Character_Mapping that maps 'A'
@@ -948,7 +948,7 @@ string if Left = 0 and is
 @end{DescribeCode}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 In the Index and Count functions taking Pattern and Mapping parameters,
 the actual String parameter passed to Pattern should comprise characters
 occurring as target characters of the mapping.  Otherwise the pattern
@@ -960,7 +960,7 @@ by passing Source'Last+1 as the Before parameter.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If a null Character_Mapping_Function is passed to any of the
 string handling subprograms, Constraint_Error is propagated.
-@end{NotesNotes}
+@end{Notes}
 
 
 
@@ -2051,7 +2051,7 @@ Character_Set : @key[constant] Wide_Maps.Wide_Character_Set;
 @end{example}
 @end{StaticSem}
 
-@begin{NotesNotes}
+@begin{Notes}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If a null Wide_Character_Mapping_Function is passed to any of the
 Wide_String handling subprograms, Constraint_Error is propagated.
@@ -2061,5 +2061,5 @@ Strings.Wide_Maps.Wide_Constants contains no values outside the Character
 portion of Wide_Character.  Similarly, each Wide_Character_Mapping
 constant in this package is the identity mapping when applied to
 any element outside the Character portion of Wide_Character. 
-@end{NotesNotes}
+@end{Notes}
 
