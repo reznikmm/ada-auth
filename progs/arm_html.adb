@@ -1372,6 +1372,8 @@ package body ARM_HTML is
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
 	Output_Object.Any_Nonspace := False;
+	Output_Object.Last_Was_Space := True; -- Start of line
+	Output_Object.Conditional_Space := False;
 	Output_Object.Saw_Hang_End := False;
 	Check_Clause_File (Output_Object);
 	-- Note: We only support Justification for the Normal and Wide styles.
@@ -1762,6 +1764,8 @@ package body ARM_HTML is
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
 		Output_Object.Any_Nonspace := False;
+		Output_Object.Last_Was_Space := True; -- Start of line
+		Output_Object.Conditional_Space := False; -- Don't need it here.
 	    end if;
 
 	    case Format is
@@ -2068,6 +2072,8 @@ package body ARM_HTML is
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
 		Output_Object.Any_Nonspace := False;
+		Output_Object.Last_Was_Space := True; -- Start of line
+		Output_Object.Conditional_Space := False; -- Don't need it here.
 	    end if;
 
 	    case Format is
@@ -2391,6 +2397,8 @@ package body ARM_HTML is
             Output_Object.Char_Count := 0;
             Output_Object.Disp_Char_Count := 0;
 	    Output_Object.Any_Nonspace := False;
+	    Output_Object.Last_Was_Space := True; -- Start of line.
+	    Output_Object.Conditional_Space := False; -- Don't need it here.
 	    return; -- Nothing else to do here.
 	end if;
 
@@ -2604,6 +2612,8 @@ package body ARM_HTML is
         Output_Object.Char_Count := 0;
         Output_Object.Disp_Char_Count := 0;
 	Output_Object.Any_Nonspace := False;
+        Output_Object.Last_Was_Space := True; -- Start of line.
+        Output_Object.Conditional_Space := False; -- Don't need it here.
     end End_Paragraph;
 
 
@@ -2632,6 +2642,8 @@ package body ARM_HTML is
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
 	Output_Object.Any_Nonspace := False;
+        Output_Object.Last_Was_Space := True; -- Start of line.
+        Output_Object.Conditional_Space := False; -- Don't need it here.
     end Category_Header;
 
 
@@ -2670,6 +2682,8 @@ package body ARM_HTML is
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
 	        Output_Object.Any_Nonspace := False;
+	        Output_Object.Last_Was_Space := True; -- Start of line.
+	        Output_Object.Conditional_Space := False; -- Don't need it here.
 	        return;
 	    end if;
 
@@ -2684,6 +2698,8 @@ package body ARM_HTML is
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
 	        Output_Object.Any_Nonspace := False;
+	        Output_Object.Last_Was_Space := True; -- Start of line.
+	        Output_Object.Conditional_Space := False; -- Don't need it here.
 	        return;
 	    end if;
 	    -- Insert an anchor:
@@ -2719,6 +2735,8 @@ package body ARM_HTML is
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
 	Output_Object.Any_Nonspace := False;
+        Output_Object.Last_Was_Space := True; -- Start of line.
+        Output_Object.Conditional_Space := False; -- Don't need it here.
 	-- No page breaks in HTML, so we don't need to look at No_Page_Break.
     end Clause_Header;
 
@@ -2798,6 +2816,8 @@ package body ARM_HTML is
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
 	Output_Object.Any_Nonspace := False;
+        Output_Object.Last_Was_Space := True; -- Start of line.
+        Output_Object.Conditional_Space := False; -- Don't need it here.
 	-- No page breaks in HTML, so we don't need to look at No_Page_Break.
     end Revised_Clause_Header;
 
@@ -2900,6 +2920,8 @@ package body ARM_HTML is
 	Output_Object.Char_Count := 9;
 	Output_Object.Disp_Char_Count := 0;
 	Output_Object.Any_Nonspace := False;
+        Output_Object.Last_Was_Space := True; -- Start of line.
+        Output_Object.Conditional_Space := False; -- Don't need it here.
 
 	Output_Object.Is_In_Paragraph := True;
 	Output_Object.Is_In_Table := True;
@@ -2946,12 +2968,16 @@ package body ARM_HTML is
 		Output_Object.Char_Count := 24;
 		Output_Object.Disp_Char_Count := 0;
 		Output_Object.Any_Nonspace := False;
+	        Output_Object.Last_Was_Space := True; -- Start of line.
+	        Output_Object.Conditional_Space := False; -- Don't need it here.
 	    when ARM_Output.End_Header =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
 		Output_Object.Char_Count := 24;
 		Output_Object.Disp_Char_Count := 0;
 		Output_Object.Any_Nonspace := False;
+	        Output_Object.Last_Was_Space := True; -- Start of line.
+	        Output_Object.Conditional_Space := False; -- Don't need it here.
 		Output_Object.In_Header := False;
 	    when ARM_Output.End_Row | ARM_Output.End_Row_Next_Is_Last =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
@@ -2959,6 +2985,8 @@ package body ARM_HTML is
 		Output_Object.Char_Count := 24;
 		Output_Object.Disp_Char_Count := 0;
 		Output_Object.Any_Nonspace := False;
+	        Output_Object.Last_Was_Space := True; -- Start of line.
+	        Output_Object.Conditional_Space := False; -- Don't need it here.
 	    when ARM_Output.End_Table =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 		if HTML_Kind /= HTML_3 then
@@ -2976,10 +3004,21 @@ package body ARM_HTML is
     -- before any End_Paragraph. Raises Not_Valid_Error if not allowed.
 
     Special_Set : constant Ada.Strings.Maps.Character_Set :=
+       Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set (Ada.Strings.Maps.Character_Range'(Low => Character'Val(127), High => Character'Val(255))),
          Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set ('<'),
            Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set ('>'),
              Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set ('"'),
-			              Ada.Strings.Maps.To_Set ('&'))));
+			              Ada.Strings.Maps.To_Set ('&')))));
+
+    No_Conditional_Set : constant Ada.Strings.Maps.Character_Set :=
+         Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set (' '),
+           Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set ('.'),
+             Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set (','),
+               Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set (':'),
+                 Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set (';'),
+                   Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set ('!'),
+                     Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set ('('),
+			                      Ada.Strings.Maps.To_Set (')'))))))));
 
     procedure Output_Text (Output_Object : in out HTML_Output_Type;
 			   Text : in String) is
@@ -3028,6 +3067,9 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
+	if Text'Length = 0 then
+	    return; -- Nothing to do.
+	end if;
 	if Ada.Strings.Fixed.Count (Text, Special_Set) = 0 then
 	    if Output_Object.Char_Count + Text'Length >= LINE_LENGTH - 10 then
 		-- We can only break on a space.
@@ -3035,9 +3077,19 @@ package body ARM_HTML is
 		    Ordinary_Character (Output_Object, Text(I));
 	        end loop;
 	    else
+		if Output_Object.Conditional_Space then
+		    Output_Object.Conditional_Space := False;
+		    if Ada.Strings.Maps.Is_In (Text(Text'First), No_Conditional_Set) then
+			null; -- Don't need the conditional space.
+		    else
+		        Output_Text (Output_Object, " ");
+		        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		    end if;
+		end if;
 	        Output_Text (Output_Object, Text);
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + Text'Length;
 		Output_Object.Any_Nonspace := True;
+		Output_Object.Last_was_Space := Text(Text'Last) = ' ';
 	    end if;
 	else
 	    for I in Text'range loop
@@ -3060,245 +3112,261 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	if Char = ' ' and then Output_Object.Char_Count >= LINE_LENGTH - 10 and then
-	    Output_Object.Column_Count < 4 then
-	    Ada.Text_IO.New_Line (Output_Object.Output_File);
-	    Output_Object.Char_Count := 0;
-	else
-	    if Char = '<' then
-	        Output_Text (Output_Object, "&lt;");
-	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
-		Output_Object.Any_Nonspace := True;
-	    elsif Char = '>' then
-	        Output_Text (Output_Object, "&gt;");
-	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
-		Output_Object.Any_Nonspace := True;
-	    elsif Char = '"' then
-	        Output_Text (Output_Object, "&quot;");
-	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
-		Output_Object.Any_Nonspace := True;
-	    elsif Char = '&' then
-	        Output_Text (Output_Object, "&amp;");
-	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
-		Output_Object.Any_Nonspace := True;
-	    elsif Char >= Character'Val(126) then -- All higher Latin-1 characters.
-		case Character'Pos(Char) is
-		    when 160 =>
-		        Output_Text (Output_Object, "&nbsp;");
-		    when 161 =>
-		        Output_Text (Output_Object, "&iexcl;");
-		    when 162 =>
-		        Output_Text (Output_Object, "&cent;");
-		    when 163 =>
-		        Output_Text (Output_Object, "&pound;");
-		    when 164 =>
-		        Output_Text (Output_Object, "&curren;");
-		    when 165 =>
-		        Output_Text (Output_Object, "&yen;");
-		    when 166 =>
-		        Output_Text (Output_Object, "&brvbar;");
-		    when 167 =>
-		        Output_Text (Output_Object, "&sect;");
-		    when 168 =>
-		        Output_Text (Output_Object, "&uml;");
-		    when 169 =>
-		        Output_Text (Output_Object, "&copy;");
-		    when 170 =>
-		        Output_Text (Output_Object, "&ordf;");
-		    when 171 =>
-		        Output_Text (Output_Object, "&laquo;");
-		    when 172 =>
-		        Output_Text (Output_Object, "&not;");
-		    when 173 =>
-		        Output_Text (Output_Object, "&shy;");
-		    when 174 =>
-		        Output_Text (Output_Object, "&reg;");
-		    when 175 =>
-		        Output_Text (Output_Object, "&macr;");
-		    when 176 =>
-		        Output_Text (Output_Object, "&deg;");
-		    when 177 =>
-		        Output_Text (Output_Object, "&plusmn;");
-		    when 178 =>
-		        Output_Text (Output_Object, "&sup2;");
-		    when 179 =>
-		        Output_Text (Output_Object, "&sup3;");
-		    when 180 =>
-		        Output_Text (Output_Object, "&acute;");
-		    when 181 =>
-		        Output_Text (Output_Object, "&micro;");
-		    when 182 =>
-		        Output_Text (Output_Object, "&para;");
-		    when 183 =>
-		        Output_Text (Output_Object, "&middot;");
-		    when 184 =>
-		        Output_Text (Output_Object, "&cedil;");
-		    when 185 =>
-		        Output_Text (Output_Object, "&sup1;");
-		    when 186 =>
-		        Output_Text (Output_Object, "&ordm;");
-		    when 187 =>
-		        Output_Text (Output_Object, "&raquo;");
-		    when 188 =>
-		        Output_Text (Output_Object, "&frac14;");
-		    when 189 =>
-		        Output_Text (Output_Object, "&frac12;");
-		    when 190 =>
-		        Output_Text (Output_Object, "&frac34;");
-		    when 191 =>
-		        Output_Text (Output_Object, "&iquest;");
-		    when 192 =>
-		        Output_Text (Output_Object, "&Agrave;");
-		    when 193 =>
-		        Output_Text (Output_Object, "&Aacute;");
-		    when 194 =>
-		        Output_Text (Output_Object, "&Acirc;");
-		    when 195 =>
-		        Output_Text (Output_Object, "&Atilde;");
-		    when 196 =>
-		        Output_Text (Output_Object, "&Auml;");
-		    when 197 =>
-		        Output_Text (Output_Object, "&Aring;");
-		    when 198 =>
-		        Output_Text (Output_Object, "&AElig;");
-		    when 199 =>
-		        Output_Text (Output_Object, "&Ccedil;");
-		    when 200 =>
-		        Output_Text (Output_Object, "&Egrave;");
-		    when 201 =>
-		        Output_Text (Output_Object, "&Eacute;");
-		    when 202 =>
-		        Output_Text (Output_Object, "&Ecirc;");
-		    when 203 =>
-		        Output_Text (Output_Object, "&Euml;");
-		    when 204 =>
-		        Output_Text (Output_Object, "&Igrave;");
-		    when 205 =>
-		        Output_Text (Output_Object, "&Iacute;");
-		    when 206 =>
-		        Output_Text (Output_Object, "&Icirc;");
-		    when 207 =>
-		        Output_Text (Output_Object, "&Iuml;");
-		    when 208 =>
-		        Output_Text (Output_Object, "&ETH;");
-		    when 209 =>
-		        Output_Text (Output_Object, "&Ntilde;");
-		    when 210 =>
-		        Output_Text (Output_Object, "&Ograve;");
-		    when 211 =>
-		        Output_Text (Output_Object, "&Oacute;");
-		    when 212 =>
-		        Output_Text (Output_Object, "&Ocirc;");
-		    when 213 =>
-		        Output_Text (Output_Object, "&Otilde;");
-		    when 214 =>
-		        Output_Text (Output_Object, "&Ouml;");
-		    when 215 =>
-		        Output_Text (Output_Object, "&times;");
-		    when 216 =>
-		        Output_Text (Output_Object, "&Oslash;");
-		    when 217 =>
-		        Output_Text (Output_Object, "&Ugrave;");
-		    when 218 =>
-		        Output_Text (Output_Object, "&Uacute;");
-		    when 219 =>
-		        Output_Text (Output_Object, "&Ucirc;");
-		    when 220 =>
-		        Output_Text (Output_Object, "&Uuml;");
-		    when 221 =>
-		        Output_Text (Output_Object, "&Yacute;");
-		    when 222 =>
-		        Output_Text (Output_Object, "&THORN;");
-		    when 223 =>
-		        Output_Text (Output_Object, "&szlig;");
-
-		    when 224 =>
-		        Output_Text (Output_Object, "&agrave;");
-		    when 225 =>
-		        Output_Text (Output_Object, "&aacute;");
-		    when 226 =>
-		        Output_Text (Output_Object, "&acirc;");
-		    when 227 =>
-		        Output_Text (Output_Object, "&atilde;");
-		    when 228 =>
-		        Output_Text (Output_Object, "&auml;");
-		    when 229 =>
-		        Output_Text (Output_Object, "&aring;");
-		    when 230 =>
-		        Output_Text (Output_Object, "&aelig;");
-		    when 231 =>
-		        Output_Text (Output_Object, "&ccedil;");
-		    when 232 =>
-		        Output_Text (Output_Object, "&egrave;");
-		    when 233 =>
-		        Output_Text (Output_Object, "&eacute;");
-		    when 234 =>
-		        Output_Text (Output_Object, "&ecirc;");
-		    when 235 =>
-		        Output_Text (Output_Object, "&euml;");
-		    when 236 =>
-		        Output_Text (Output_Object, "&igrave;");
-		    when 237 =>
-		        Output_Text (Output_Object, "&iacute;");
-		    when 238 =>
-		        Output_Text (Output_Object, "&icirc;");
-		    when 239 =>
-		        Output_Text (Output_Object, "&iuml;");
-		    when 240 =>
-		        Output_Text (Output_Object, "&eth;");
-		    when 241 =>
-		        Output_Text (Output_Object, "&ntilde;");
-		    when 242 =>
-		        Output_Text (Output_Object, "&ograve;");
-		    when 243 =>
-		        Output_Text (Output_Object, "&oacute;");
-		    when 244 =>
-		        Output_Text (Output_Object, "&ocirc;");
-		    when 245 =>
-		        Output_Text (Output_Object, "&otilde;");
-		    when 246 =>
-		        Output_Text (Output_Object, "&ouml;");
-		    when 247 =>
-		        Output_Text (Output_Object, "&divide;");
-		    when 248 =>
-		        Output_Text (Output_Object, "&oslash;");
-		    when 249 =>
-		        Output_Text (Output_Object, "&ugrave;");
-		    when 250 =>
-		        Output_Text (Output_Object, "&uacute;");
-		    when 251 =>
-		        Output_Text (Output_Object, "&ucirc;");
-		    when 252 =>
-		        Output_Text (Output_Object, "&uuml;");
-		    when 253 =>
-		        Output_Text (Output_Object, "&yacute;");
-		    when 254 =>
-		        Output_Text (Output_Object, "&thorn;");
-		    when 255 =>
-		        Output_Text (Output_Object, "&yuml;");
-
-
-		    when others =>
-			declare
-			    Code : constant String :=
-				Natural'Image(Character'Pos(Char));
-			begin
-		            Output_Text (Output_Object, "&#" & Code(2..4) & ';');
-			end;
-		end case;
-	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
-		Output_Object.Any_Nonspace := True;
+	if Output_Object.Conditional_Space then
+	    Output_Object.Conditional_Space := False;
+	    if Ada.Strings.Maps.Is_In (Char, No_Conditional_Set) then
+		null; -- Don't need the conditional space.
 	    else
-	        Output_Text (Output_Object, Char & "");
+	        Output_Text (Output_Object, " ");
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
-		Output_Object.Any_Nonspace := True;
 	    end if;
 	end if;
+	Output_Object.Last_was_Space := False;
+	if Char = ' ' then
+	    if Output_Object.Char_Count >= LINE_LENGTH - 10 and then
+	        Output_Object.Column_Count < 4 then
+	        Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        Output_Object.Char_Count := 0;
+	        Output_Object.Last_was_Space := True;
+	    else
+	        Output_Text (Output_Object, " ");
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	    end if;
+	    -- Output_Object.Any_Nonspace := <unchanged>;
+	    Output_Object.Last_was_Space := True;
+	elsif Char = '<' then
+	    Output_Text (Output_Object, "&lt;");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	    Output_Object.Any_Nonspace := True;
+        elsif Char = '>' then
+	    Output_Text (Output_Object, "&gt;");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	    Output_Object.Any_Nonspace := True;
+        elsif Char = '"' then
+	    Output_Text (Output_Object, "&quot;");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	    Output_Object.Any_Nonspace := True;
+        elsif Char = '&' then
+	    Output_Text (Output_Object, "&amp;");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	    Output_Object.Any_Nonspace := True;
+        elsif Char >= Character'Val(126) then -- All higher Latin-1 characters.
+	    case Character'Pos(Char) is
+	        when 160 =>
+		    Output_Text (Output_Object, "&nbsp;");
+	        when 161 =>
+		    Output_Text (Output_Object, "&iexcl;");
+	        when 162 =>
+		    Output_Text (Output_Object, "&cent;");
+	        when 163 =>
+		    Output_Text (Output_Object, "&pound;");
+	        when 164 =>
+		    Output_Text (Output_Object, "&curren;");
+	        when 165 =>
+		    Output_Text (Output_Object, "&yen;");
+	        when 166 =>
+		    Output_Text (Output_Object, "&brvbar;");
+	        when 167 =>
+		    Output_Text (Output_Object, "&sect;");
+	        when 168 =>
+		    Output_Text (Output_Object, "&uml;");
+	        when 169 =>
+		    Output_Text (Output_Object, "&copy;");
+	        when 170 =>
+		    Output_Text (Output_Object, "&ordf;");
+	        when 171 =>
+		    Output_Text (Output_Object, "&laquo;");
+	        when 172 =>
+		    Output_Text (Output_Object, "&not;");
+	        when 173 =>
+		    Output_Text (Output_Object, "&shy;");
+	        when 174 =>
+		    Output_Text (Output_Object, "&reg;");
+	        when 175 =>
+		    Output_Text (Output_Object, "&macr;");
+	        when 176 =>
+		    Output_Text (Output_Object, "&deg;");
+	        when 177 =>
+		    Output_Text (Output_Object, "&plusmn;");
+	        when 178 =>
+		    Output_Text (Output_Object, "&sup2;");
+	        when 179 =>
+		    Output_Text (Output_Object, "&sup3;");
+	        when 180 =>
+		    Output_Text (Output_Object, "&acute;");
+	        when 181 =>
+		    Output_Text (Output_Object, "&micro;");
+	        when 182 =>
+		    Output_Text (Output_Object, "&para;");
+	        when 183 =>
+		    Output_Text (Output_Object, "&middot;");
+	        when 184 =>
+		    Output_Text (Output_Object, "&cedil;");
+	        when 185 =>
+		    Output_Text (Output_Object, "&sup1;");
+	        when 186 =>
+		    Output_Text (Output_Object, "&ordm;");
+	        when 187 =>
+		    Output_Text (Output_Object, "&raquo;");
+	        when 188 =>
+		    Output_Text (Output_Object, "&frac14;");
+	        when 189 =>
+		    Output_Text (Output_Object, "&frac12;");
+	        when 190 =>
+		    Output_Text (Output_Object, "&frac34;");
+	        when 191 =>
+		    Output_Text (Output_Object, "&iquest;");
+	        when 192 =>
+		    Output_Text (Output_Object, "&Agrave;");
+	        when 193 =>
+		    Output_Text (Output_Object, "&Aacute;");
+	        when 194 =>
+		    Output_Text (Output_Object, "&Acirc;");
+	        when 195 =>
+		    Output_Text (Output_Object, "&Atilde;");
+	        when 196 =>
+		    Output_Text (Output_Object, "&Auml;");
+	        when 197 =>
+		    Output_Text (Output_Object, "&Aring;");
+	        when 198 =>
+		    Output_Text (Output_Object, "&AElig;");
+	        when 199 =>
+		    Output_Text (Output_Object, "&Ccedil;");
+	        when 200 =>
+		    Output_Text (Output_Object, "&Egrave;");
+	        when 201 =>
+		    Output_Text (Output_Object, "&Eacute;");
+	        when 202 =>
+		    Output_Text (Output_Object, "&Ecirc;");
+	        when 203 =>
+		    Output_Text (Output_Object, "&Euml;");
+	        when 204 =>
+		    Output_Text (Output_Object, "&Igrave;");
+	        when 205 =>
+		    Output_Text (Output_Object, "&Iacute;");
+	        when 206 =>
+		    Output_Text (Output_Object, "&Icirc;");
+	        when 207 =>
+		    Output_Text (Output_Object, "&Iuml;");
+	        when 208 =>
+		    Output_Text (Output_Object, "&ETH;");
+	        when 209 =>
+		    Output_Text (Output_Object, "&Ntilde;");
+	        when 210 =>
+		    Output_Text (Output_Object, "&Ograve;");
+	        when 211 =>
+		    Output_Text (Output_Object, "&Oacute;");
+	        when 212 =>
+		    Output_Text (Output_Object, "&Ocirc;");
+	        when 213 =>
+		    Output_Text (Output_Object, "&Otilde;");
+	        when 214 =>
+		    Output_Text (Output_Object, "&Ouml;");
+	        when 215 =>
+		    Output_Text (Output_Object, "&times;");
+	        when 216 =>
+		    Output_Text (Output_Object, "&Oslash;");
+	        when 217 =>
+		    Output_Text (Output_Object, "&Ugrave;");
+	        when 218 =>
+		    Output_Text (Output_Object, "&Uacute;");
+	        when 219 =>
+		    Output_Text (Output_Object, "&Ucirc;");
+	        when 220 =>
+		    Output_Text (Output_Object, "&Uuml;");
+	        when 221 =>
+		    Output_Text (Output_Object, "&Yacute;");
+	        when 222 =>
+		    Output_Text (Output_Object, "&THORN;");
+	        when 223 =>
+		    Output_Text (Output_Object, "&szlig;");
+
+	        when 224 =>
+		    Output_Text (Output_Object, "&agrave;");
+	        when 225 =>
+		    Output_Text (Output_Object, "&aacute;");
+	        when 226 =>
+		    Output_Text (Output_Object, "&acirc;");
+	        when 227 =>
+		    Output_Text (Output_Object, "&atilde;");
+	        when 228 =>
+		    Output_Text (Output_Object, "&auml;");
+	        when 229 =>
+		    Output_Text (Output_Object, "&aring;");
+	        when 230 =>
+		    Output_Text (Output_Object, "&aelig;");
+	        when 231 =>
+		    Output_Text (Output_Object, "&ccedil;");
+	        when 232 =>
+		    Output_Text (Output_Object, "&egrave;");
+	        when 233 =>
+		    Output_Text (Output_Object, "&eacute;");
+	        when 234 =>
+		    Output_Text (Output_Object, "&ecirc;");
+	        when 235 =>
+		    Output_Text (Output_Object, "&euml;");
+	        when 236 =>
+		    Output_Text (Output_Object, "&igrave;");
+	        when 237 =>
+		    Output_Text (Output_Object, "&iacute;");
+	        when 238 =>
+		    Output_Text (Output_Object, "&icirc;");
+	        when 239 =>
+		    Output_Text (Output_Object, "&iuml;");
+	        when 240 =>
+		    Output_Text (Output_Object, "&eth;");
+	        when 241 =>
+		    Output_Text (Output_Object, "&ntilde;");
+	        when 242 =>
+		    Output_Text (Output_Object, "&ograve;");
+	        when 243 =>
+		    Output_Text (Output_Object, "&oacute;");
+	        when 244 =>
+		    Output_Text (Output_Object, "&ocirc;");
+	        when 245 =>
+		    Output_Text (Output_Object, "&otilde;");
+	        when 246 =>
+		    Output_Text (Output_Object, "&ouml;");
+	        when 247 =>
+		    Output_Text (Output_Object, "&divide;");
+	        when 248 =>
+		    Output_Text (Output_Object, "&oslash;");
+	        when 249 =>
+		    Output_Text (Output_Object, "&ugrave;");
+	        when 250 =>
+		    Output_Text (Output_Object, "&uacute;");
+	        when 251 =>
+		    Output_Text (Output_Object, "&ucirc;");
+	        when 252 =>
+		    Output_Text (Output_Object, "&uuml;");
+	        when 253 =>
+		    Output_Text (Output_Object, "&yacute;");
+	        when 254 =>
+		    Output_Text (Output_Object, "&thorn;");
+	        when 255 =>
+		    Output_Text (Output_Object, "&yuml;");
+
+
+	        when others =>
+		    declare
+		        Code : constant String :=
+			    Natural'Image(Character'Pos(Char));
+		    begin
+		        Output_Text (Output_Object, "&#" & Code(2..4) & ';');
+		    end;
+	    end case;
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	    Output_Object.Any_Nonspace := True;
+        else
+	    Output_Text (Output_Object, Char & "");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	    Output_Object.Any_Nonspace := True;
+        end if;
     end Ordinary_Character;
 
 
     procedure Hard_Space (Output_Object : in out HTML_Output_Type) is
-	-- Output a hard space. No line break should happen at a hard space.
+        -- Output a hard space. No line break should happen at a hard space.
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -3311,6 +3379,8 @@ package body ARM_HTML is
         Output_Text (Output_Object, "&nbsp;");
         Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	-- Output_Object.Any_Nonspace := <unchanged>;
+	Output_Object.Last_was_Space := True;
+        Output_Object.Conditional_Space := False; -- Never need a conditional space here.
     end Hard_Space;
 
 
@@ -3336,11 +3406,15 @@ package body ARM_HTML is
             Output_Object.Char_Count := 0;
             Output_Object.Disp_Char_Count := 0;
 	    Output_Object.Any_Nonspace := False;
+	    Output_Object.Last_Was_Space := True; -- Start of line.
+	    Output_Object.Conditional_Space := False; -- Don't need it here.
 	else -- Normal.
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BR>");
             Output_Object.Char_Count := 0;
             Output_Object.Disp_Char_Count := 0;
 	    Output_Object.Any_Nonspace := False;
+	    Output_Object.Last_Was_Space := True; -- Start of line.
+	    Output_Object.Conditional_Space := False; -- Don't need it here.
 	end if;
     end Line_Break;
 
@@ -3419,6 +3493,8 @@ package body ARM_HTML is
 		"Tab, but none set");
 	end if;
 
+        Output_Object.Conditional_Space := False; -- Never need a conditional space here.
+        Output_Object.Last_was_Space := True; -- Treat this as a space.
 	if Output_Object.Emulate_Tabs or else
 	    (not Output_Object.Any_Nonspace) then -- Always can emulate if they're first on a line.
 	    Output_Text (Output_Object, "&nbsp;");
@@ -3459,6 +3535,11 @@ package body ARM_HTML is
 	if not Output_Object.Is_In_Paragraph then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
+	end if;
+	if Output_Object.Conditional_Space then
+	    Output_Object.Conditional_Space := False;
+	    Output_Text (Output_Object, " ");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	end if;
 	case Char is
 	    when ARM_Output.EM_Dash =>
@@ -3583,6 +3664,7 @@ package body ARM_HTML is
 		end if;
 	end case;
 	Output_Object.Any_Nonspace := True;
+	Output_Object.Last_was_Space := False;
     end Special_Character;
 
 
@@ -3651,6 +3733,8 @@ package body ARM_HTML is
         Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
 	Output_Object.Any_Nonspace := False;
+        Output_Object.Last_Was_Space := True; -- Start of line.
+        Output_Object.Conditional_Space := False; -- Don't need it here.
     end End_Hang_Item;
 
 
@@ -3764,25 +3848,36 @@ package body ARM_HTML is
 	    case Output_Object.Change is
 		when ARM_Output.Insertion =>
 		    if HTML_Kind = HTML_3 then
-		        Output_Text (Output_Object, "</U> ");
+		        Output_Text (Output_Object, "</U>");
 		    else
-		        --Output_Text (Output_Object, "</INS> ");
-		        Output_Text (Output_Object, "</SPAN> ");
+		        --Output_Text (Output_Object, "</INS>");
+		        Output_Text (Output_Object, "</SPAN>");
 		    end if;
-		    -- Note: We follow these with a space so that
+		    -- Note: We need to follow these with a space so that
 		    -- we don't get words running together for indexing
 		    -- purposes (Google, Ada Indexer). That's only a concern
 		    -- for deletions directly following insertions (at least in
 		    -- the absence of nesting), so we only add the extra space
 		    -- after insertions. RTF needs insertions and deletions
 		    -- without spaces to work properly, thus the source does not
-		    -- have them. We'd prefer to do this only when another
-		    -- change follows this one directly, but there is no easy
-		    -- way to determine that.
-		    -- HTML ignores extra spaces, so adding a space always
-		    -- would only be a problem if the space got 'pinned' by a
-		    -- format change immediately following the insertion.
-		    -- Probably not worth worrying about.
+		    -- have them.
+		    -- If the last character of the displayed text is a space,
+		    -- we don't need this, and don't generate it. We do
+		    -- generate it for punctuation, as we want a space following
+		    -- that in general.
+		    -- If the next visible character is not in some sort of
+		    -- change section, we'd prefer to not generate
+		    -- the space, but there is no obvious way to determine that
+		    -- (we don't know when the command ends here).
+		    -- We can, however, generate a conditional space that is
+		    -- not generated if the next visible character is a space
+		    -- or punctuation (we don't usually want a space *before*
+		    -- punctuation).
+		    if Output_Object.Last_was_Space then
+			null;
+		    else
+			Output_Object.Conditional_Space := True;
+		    end if;
 		when ARM_Output.Deletion =>
 		    if HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "</S>");
@@ -3792,13 +3887,18 @@ package body ARM_HTML is
 		    end if;
 		when ARM_Output.Both =>
 		    if HTML_Kind = HTML_3 then
-		        Output_Text (Output_Object, "</S></U> ");
+		        Output_Text (Output_Object, "</S></U>");
 		    else
-		        --Output_Text (Output_Object, "</DEL></INS> ");
-		        --Output_Text (Output_Object, "</SPAN> ");
+		        --Output_Text (Output_Object, "</DEL></INS>");
+		        --Output_Text (Output_Object, "</SPAN>");
 			-- CSS2 doesn't allow multiple decorations in a single definition, so we have
 			-- to nest them. But that might not be right, either (it works on IE).
-		        Output_Text (Output_Object, "</SPAN></SPAN> ");
+		        Output_Text (Output_Object, "</SPAN></SPAN>");
+		    end if;
+		    if Output_Object.Last_was_Space then -- See above for reasons for this.
+			null;
+		    else
+			Output_Object.Conditional_Space := True;
 		    end if;
 		when ARM_Output.None =>
 		    null;

@@ -10,7 +10,7 @@ package body ARM_Input is
     -- or other entity, and routines to lex the input entities.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -46,6 +46,7 @@ package body ARM_Input is
     --  7/18/02 - RLB - Added Check_One_of_Parameter_Names.
     -- 12/06/04 - RLB - Expanded Check_One_of_Parameter_Names to take up to
     --			five names.
+    --  1/26/05 - RLB - Fixed so that quoted parameters can be skipped.
 
     function Is_Open_Char (Open_Char : in Character) return Boolean is
 	-- Return True if character is a parameter opening character
@@ -69,7 +70,9 @@ package body ARM_Input is
 	    when '{' => return '}';
 	    when '(' => return ')';
 	    when '`' => return ''';
-	    when others => raise ARM_Input.Not_Valid_Error;
+	    when others =>
+	        Ada.Text_IO.Put_Line ("** Not an Open_Char - " & Open_Char);
+		raise ARM_Input.Not_Valid_Error;
 	end case;
     end Get_Close_Char;
 
@@ -85,7 +88,9 @@ package body ARM_Input is
 	    when '}' => return '{';
 	    when ')' => return '(';
 	    when ''' => return '`';
-	    when others => raise ARM_Input.Not_Valid_Error;
+	    when others =>
+	        Ada.Text_IO.Put_Line ("** Not a Close_Char - " & Close_Char);
+		raise ARM_Input.Not_Valid_Error;
 	end case;
     end Get_Open_Char;
 
@@ -128,9 +133,18 @@ package body ARM_Input is
         -- Note that we watch for matching opening characters, in
         -- case a nested command uses one.
         Ch : Character;
-        Start_Ch : constant Character := ARM_Input.Get_Open_Char (Close_Char);
+	Start_Ch : Character;
         Start_Ch_Count : Natural := 0;
     begin
+	if Close_Char = '"' then
+	    Start_Ch := Character'Val(128);
+	    -- This character shouldn't occur in input text.
+	    -- Buglet: We don't have a way to tell whether this is an inner
+	    -- command or just the end; best to avoid nesting of
+	    -- quoted parameters.
+	else
+	    Start_Ch := ARM_Input.Get_Open_Char (Close_Char);
+	end if;
         ARM_Input.Get_Char (Input_Object, Ch);
         Len := 0;
         loop
@@ -161,9 +175,18 @@ package body ARM_Input is
         -- Note that we watch for matching opening characters, in
         -- case a nested command uses one.
         Ch : Character;
-        Start_Ch : constant Character := ARM_Input.Get_Open_Char (Close_Char);
+        Start_Ch : Character;
         Start_Ch_Count : Natural := 0;
     begin
+	if Close_Char = '"' then
+	    Start_Ch := Character'Val(128);
+	    -- This character shouldn't occur in input text.
+	    -- Buglet: We don't have a way to tell whether this is an inner
+	    -- command or just the end; best to avoid nesting of
+	    -- quoted parameters.
+	else
+	    Start_Ch := ARM_Input.Get_Open_Char (Close_Char);
+	end if;
         ARM_Input.Get_Char (Input_Object, Ch);
         loop
 	    if Ch = Start_Ch then

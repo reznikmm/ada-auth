@@ -98,13 +98,16 @@ Commands are represented by @<command_name>[<args>]. The command name can be an
 identifier, or certain special characters. The command name is not
 case-sensitive: @newpage; @NewPage; @NEWPAGE; all represent the same command.
 The argument list (if any) is surrounded by one of the bracket pairs
-(), {}, [], <>, or `'. These pairs are equivalent, however the matching end
+(), {}, [], <>, `', or "". These pairs are equivalent, however the matching end
 character must be used to close an argument list. The arguments can be
 anything. It can be another sequence of text, keywords, or other items
 (described below). In this list below, arguments are always signified by {},
 but any of the other characters can be used. (Note that there is no escape
 character for the brackets, so if one of the bracket characters appears
-in the text, a different pair of bracket characters should be used).
+in the text, a different pair of bracket characters should be used. Also
+note that there is no sane way to tell the end of a quoted parameter from a
+nested one, so parameters nested in a "" pair should never used "" as their
+brackets.)
 
 Command summary:
 

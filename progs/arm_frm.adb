@@ -3962,13 +3962,27 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		Key : ARM_Index.Index_Key;
 	    begin
 		if Disposition = Do_Not_Display_Text then
-		    -- Skip the RHS and do nothing further.
-		    ARM_Input.Skip_until_Close_Char (Input_Object, RHS_Close_Ch);
-		    ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
-		    -- Stack it so this ends consistently:
+		    if RHS_Close_Ch /= ' ' then
+		        -- Skip the RHS and put nothing in the DB.
+		        ARM_Input.Skip_until_Close_Char (Input_Object, RHS_Close_Ch);
+		        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+		        if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+		           ARM_Database.Deleted) or else
+		           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+		           ARM_Database.Deleted_Inserted_Number) then
+			    -- In a deleted paragraph, call Check_Paragraph
+			    -- to trigger the "deleted paragraph" message.
+			    -- (Otherwise, this may never happens.)
+		            Check_Paragraph;
+		        -- else null; -- Nothing special to do.
+		        end if;
+		    end if;
+		    -- Stack it so we can process the end:
 		    Set_Nesting_for_Parameter
 		        (Command => Syntax_Rule_RHS,
 			 Close_Ch => RHS_Close_Ch);
+		    -- (We probably don't need to do the above, but consistency
+		    -- is preferred.)
 		else
 		    -- Set up the tabs:
 		    Org_Tabs := Format_Object.Paragraph_Tab_Stops;

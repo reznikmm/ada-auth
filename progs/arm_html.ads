@@ -13,7 +13,7 @@ package ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2004  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -367,6 +367,12 @@ private
 	Char_Count : Natural := 0; -- Characters on current line.
 	Disp_Char_Count : Natural := 0; -- Displayed characters on current line.
 	Any_Nonspace : Boolean := False; -- Have we output any non-space on this line?
+	Last_was_Space : Boolean := False; -- True if the last visible character
+				-- output was a space (any kind), or this is the
+				-- start of a line.
+	Conditional_Space : Boolean := False; -- If True, output a space if the
+				-- next *visible* character is not a space or
+				-- punctuation.
 	Saw_Hang_End : Boolean := False; -- If we are in a hanging paragraph,
 			       -- have we seen the end of the hanging part yet?
 	Is_Bold : Boolean; -- Is the text currently bold?
