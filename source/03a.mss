@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/02/02 01:07:14 $}
+@Comment{$Date: 2005/02/03 07:11:15 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -601,16 +601,17 @@ for @nt<index_constraint>s, and
 for an object of an access type can also be subject to a condition that is
 called a null exclusion (see @RefSecNum{Access Types}).],Old=[]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @Defn{subtype}
 A @i(subtype) of a given type is a combination of the type,
 a constraint on values of the type, and certain
 attributes specific to the subtype.
-The given type is called the type @i(of) the
-subtype.
+The given type is called the type @i(of) the subtype.
 Similarly, the associated constraint is called the
 constraint @i(of) the subtype. The set of values
 of a subtype consists of the values of its type
-that satisfy its constraint.
+that satisfy its constraint@Chg{Version=[2],New=[ and, in the case
+of a subtype of an access type, any applicable null exclusion],Old=[]}.
 @Defn2{Term=[belong], Sec=(to a subtype)}
 Such values @i(belong) to the subtype.
 @begin{Discussion}
@@ -833,7 +834,7 @@ defines the discriminants of the type (see @RefSec(Discriminants)).
 The remainder of the @nt<type_@!declaration> defines the
 remaining characteristics of (the view of) the type.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 @Defn{named type}
 A type defined by a @nt<type_@!declaration> is a @i(named) type;
 such a type has one or more nameable subtypes.
@@ -850,7 +851,7 @@ an @nt<identifier>. For a named type whose first subtype is T,
 this International Standard sometimes refers to the type of T
 as simply @lquotes@;the type T@rquotes@;.
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
   The only user-defined types
   that can be anonymous in the above sense are array,
   access, task, and protected types.
@@ -861,11 +862,12 @@ as simply @lquotes@;the type T@rquotes@;.
   discriminant specification]}.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00326-01]}
 @Defn{full type}
 A named type that is declared by a @nt<full_type_@!declaration>,
 or an anonymous type that is defined as part of declaring
-an object of the type, is called a
+an object @Chg{Version=[2],New=[(or view of an object) ],Old=[]}of the type,
+is called a
 @i(full type).@Defn{full type definition}@Chg{Version=[2],New=[ The
 declaration of a full type also declares the @i<full view> of the type.],Old=[]}
 The @nt<type_@!definition>, @nt<task_@!definition>, @nt<protected_@!definition>,
@@ -877,6 +879,12 @@ of some full type.]
 @begin{Honest}
   Class-wide, universal, and root numeric types are full types.
 @end{Honest}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[We need @lquotes@;view of an object@rquotes@;
+  above so that anonymous types declared in renames are covered, as renames
+  do not declare objects.]}
+@end{Reason}
 
 @PDefn{predefined operator}
 The definition of a type implicitly declares
@@ -990,6 +998,10 @@ created@Chg{Version=[2],New=[ (for a limited type)],Old=[]}.
 @end{DiffWord83}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[Added wording so that anonymous access types
+  are always full types, even if they appear in renames.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
   @ChgAdded{Version=[2],Text=[Added interface types
   (see @RefSecNum{Interface Types}) to the syntax.]}
@@ -1416,6 +1428,19 @@ The following (and no others) represent constants:
   an object declared by an @nt<object_declaration> with the
   reserved word @key(constant);
 
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00385-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[We mean the word @key{constant}
+  as defined by the grammar for @nt{object_declaration}, not some random word
+  @key{constant}. Thus,]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[X : @key{access constant} T;]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[is not a constant.]}
+@end{Honest}
+
   a formal parameter or generic formal object of mode @key(in);
 
   a discriminant;
@@ -1609,8 +1634,10 @@ or full type definition of an
 The @nt<object_declaration> declares an object of the type
 of the nominal subtype.
 @begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01]}
 The phrase @lquotes@;full type definition@rquotes@; here includes the
-case of an anonymous array, task, or protected type.
+case of an anonymous array, @Chg{Version=[2],New=[access, ],Old=[]}task, or
+protected type.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00373-01]}
@@ -1701,8 +1728,8 @@ sequence of steps:
   The @nt{subtype_@!indication},@Chg{Version=[2],New=[ @nt{access_@!definition},],Old=[]}
   @nt<array_@!type_@!definition>, @nt{single_@!task_@!declaration},
   or @nt{single_@!protected_@!declaration} is first elaborated.
-  This creates the nominal subtype (and the anonymous type in the latter
-  @Chg{Version=[2],New=[four],Old=[three]} cases).
+  This creates the nominal subtype (and the anonymous type in the
+  @Chg{Version=[2],New=[last four],Old=[latter three]} cases).
 
   If the @nt<object_declaration> includes an initialization expression,
   the (explicit) initial value is obtained by evaluating the
@@ -1713,7 +1740,8 @@ sequence of steps:
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}
   The object is created, and, if there is not an initialization expression,
-  any per-object expressions (see @RefSecNum(Record Types)) are
+  any per-object @Chg{New=[constraints],Old=[expressions]}
+  (see @RefSecNum(Record Types)) are
   @Chg{New=[elaborated], Old=[evaluated]} and any implicit initial values for
   the object or for its subcomponents are obtained as determined by
   the nominal subtype.@Chg{Version=[2],New=[
@@ -1790,7 +1818,7 @@ assigned.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00373-01]}
 @ChgAdded{Version=[2],Text=[Assignment to any part of the object
-is preceded by the evaluation of the value that is to be assigned;]}
+is preceded by the evaluation of the value that is to be assigned.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[Duh. But we ought to say it. Note that, like
@@ -1799,9 +1827,9 @@ an @lquotes@;as-if@rquotes optimization; as long as the semantics as observed
 from the program are correct, the compiler can generate any code it wants.]}
 @end{Reason}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00373-01]}
-@ChgAdded{Version=[2],Text=[the evaluation of a @nt{default_expression} that
-includes the name of a discriminant is preceded by the assigment to that
-discriminant;]}
+@ChgAdded{Version=[2],Text=[The evaluation of a @nt{default_expression} that
+includes the name of a discriminant is preceded by the assignment to that
+discriminant.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[Duh again. But we have to say this, too. It's
@@ -1810,9 +1838,9 @@ the discriminant is used; it says nothing about discriminant values that
 come from @nt{subtype_indication}s.]}
 @end{Reason}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00373-01]}
-@ChgAdded{Version=[2],Text=[the evaluation of the @nt{default_expression}
+@ChgAdded{Version=[2],Text=[The evaluation of the @nt{default_expression}
 for any component that depends on a discriminant is preceded by the assignment
-to that discriminant;]}
+to that discriminant.]}
 @begin{Reason}
 @Leading@keepnext@;For example:
 @begin{Example}
@@ -1829,14 +1857,14 @@ it is important that F be evaluated before the aggregate.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00373-01]}
-@ChgAdded{Version=[2],Text=[the assignments to any components, including
+@ChgAdded{Version=[2],Text=[The assignments to any components, including
 implicit components, not requiring late initialization must precede the
 initial value evaluations for any components requiring late initialization;
 if two components both require late initialization, then assignments to parts
 of the component occurring earlier in the order of the component declarations
 must precede the initial value evaluations of the component occurring later.]}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Components that require late
 initialization can refer to the entire object during their initialization.
 We want them to be initialized as late as possible to reduce the chance
@@ -2014,7 +2042,7 @@ without an initialization expression.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   A constant may have a limited type; the initialization @nt{expression}
-  has to be built-in-place (see @RefSecNum{Limited Types}).]}
+  has to be built in-place (see @RefSecNum{Limited Types}).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00385-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -2145,7 +2173,7 @@ rhs="@Chg{Version=[2],New=<@SynI{interface_}@Syn2{subtype_indication} {@key{and}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Syn{lhs=<derived_type_definition>,rhs="[@Chg{Version=[2],New=<
-    >,Old=<>}[@key{abstract}] @key{new} @SynI{parent_}@Syn2{subtype_indication} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}] >,Old=<>}Syn2{record_extension_part}]"}
+    >,Old=<>}[@key{abstract}] @key{new} @SynI{parent_}@Syn2{subtype_indication} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}] >,Old=<>}@Syn2{record_extension_part}]"}
 @end{Syntax}
 
 @begin{Legality}
@@ -2775,17 +2803,18 @@ will be legal.
 @\Universal types
 are defined for @Redundant[(and belong to)] the integer,
 real, @Chg{Version=[2],New=[],Old=[and ]}fixed point@Chg{Version=[2],
-New=[ and access],Old=[]} classes,
+New=[, and access],Old=[]} classes,
 and are referred to in this standard as respectively,
 @i(universal_integer), @i(universal_real), @Chg{Version=[2],New=[],
 Old=[and ]}@i(universal_fixed)@Chg{Version=[2],
-New=[ and @i(universal_access)],Old=[]}.
+New=[, and @i(universal_access)],Old=[]}.
 These are analogous to class-wide types for these language-defined
-numeric classes.
+@Chg{Version=[2],New=[elementary],Old=[numeric]} classes.
 As with class-wide types, if a formal parameter is of a universal type,
 then an actual parameter of any type in the corresponding class
 is acceptable. In addition, a value of a universal type
-(including an integer or real @nt<numeric_literal>) is @lquotes@;universal@rquotes@;
+(including an integer or real @nt<numeric_literal>@Chg{Version=[2],New=[, or
+the literal @key{null}],Old=[]}) is @lquotes@;universal@rquotes@;
 in that it is acceptable where some particular type in the
 class is expected
 (see @RefSecNum(The Context of Overload Resolution)).
@@ -2802,11 +2831,12 @@ type in the corresponding class.
   a universal type is class-wide (universal) in both directions,
   from specific to universal and back.
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
   We considered defining class-wide or perhaps universal types for
-  all derivation classes, not just tagged classes and these three
-  numeric classes. However, this was felt to overly weaken the
-  strong-typing model in some situations. Tagged types preserve
-  strong type distinctions thanks to the run-time tag. Class-wide
+  all derivation classes, not just tagged classes and these @Chg{Version=[2],
+  New=[four elementary],Old=[three numeric]} classes. However, this was felt
+  to overly weaken the strong-typing model in some situations. Tagged types
+  preserve strong type distinctions thanks to the run-time tag. Class-wide
   or universal types for untagged types would weaken the compile-time
   type distinctions without providing a compensating run-time-checkable
   distinction.
@@ -2841,13 +2871,13 @@ and @i(root_real).
 A class-wide or universal type is said to @i(cover) all of the types
 in its class. A specific type covers only itself.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00251-01]}
 @Defn2{Term=[descendant], Sec=(of a type)}
 A specific type @i(T2) is defined to be a @i(descendant) of a
 type @i(T1) if @i(T2) is the same as @i(T1), or if @i(T2) is derived
 (directly or indirectly) from @i(T1). A class-wide type @i(T2)'Class is
 defined to be a descendant of type @i(T1) if @i(T2) is a descendant of @i(T1).
-Similarly, the universal types are
+Similarly, the @Chg{Version=[2],New=[numeric ],Old=[]}universal types are
 defined to be descendants of the root types of their classes.
 @Defn2{Term=[ancestor], Sec=(of a type)}
 If a type @i(T2) is a descendant of a type @i(T1),
@@ -2855,8 +2885,9 @@ then @i(T1) is called an @i(ancestor) of @i(T2).
 @Defn2{Term=[ultimate ancestor], Sec=(of a type)}
 @Defn2{Term=[ancestor], Sec=(ultimate)}
 @Chg{Version=[2],New=[An],Old=[The]} @i(ultimate ancestor) of a type
-is the ancestor of the type that is not
-a descendant of any other type.@Chg{Version=[2],New=[ Each untagged type
+is @Chg{Version=[2],New=[an],Old=[the]} ancestor of the type that is not
+@Chg{Version=[2],New=[itself ],Old=[]}a descendant of any other
+type.@Chg{Version=[2],New=[ Each untagged type
 has a unique ultimate ancestor.],Old=[]}
 @begin{Ramification}
   A specific type is a descendant of itself.
@@ -3278,7 +3309,7 @@ S'Pred for a modular integer subtype wraps around
      For a @i(nongraphic character) (a value of
      a character type that has no
      enumeration literal associated with it), the
-     result is a corresponding language-defined or implementation-defined
+     result is a corresponding language-defined
      name in upper case (for example, the image
      of the nongraphic character identified as @i(nul) is @lquotes@;NUL@rquotes@; @em the
      quotes are not part of the image).]}
@@ -3690,7 +3721,7 @@ S'Pred for a modular integer subtype wraps around
        S'Wide_Wide_Value for enumeration
        subtypes since S'Wide_Image might produce a different sequence of
        characters than S'Wide_Wide_Image if the enumeration literal
-       uses characters outside of the predefined type Character.
+       uses characters outside of the predefined type Wide_Character.
        That is why we don't just define S'Wide_Value in terms of
        S'Wide_Wide_Value for enumeration subtypes.
        S'Wide_Value and S'Wide_Wide_Value for numeric subtypes yield
@@ -3812,7 +3843,7 @@ S'Pred for a modular integer subtype wraps around
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 An implementation may extend the @Chg{Version=[2],New=[Wide_Wide_Value, ],
 Old=[Wide_Value, ]}
-@Redundant[@Chg{Version=[2],New=[Wide_Image, ],Old=[]}Value,
+@Redundant[@Chg{Version=[2],New=[Wide_Value, ],Old=[]}Value,
 @Chg{Version=[2],New=[Wide_Wide_Image, ],
 Old=[]}Wide_Image, and Image] attributes
 of a floating point type
@@ -4137,23 +4168,6 @@ the names @i(FFFE) and @i(FFFF) are usable only with the attributes
 literals.
 All other values of Wide_Character are considered graphic characters,
 and have]} a corresponding @nt<character_literal>.
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-  @ChgDeleted{Version=[2],Text=[The language-defined names are not usable as
-   enumeration literals
-  to avoid "polluting" the name space. Since Wide_Character is defined
-  in Standard, if the names FFFE and FFFF were usable as enumeration
-  literals, they would hide other nonoverloadable declarations with the
-  same names in @key[use]-d packages.]}
-
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-  @ChgDeleted{Version=[2],Text=[ISO 10646 has not defined the meaning of
-  all of the code positions
-  from 0100 through FFFD, but they are all considered graphic characters by
-  Ada to simplify the implementation, and to allow for revisions to ISO 10646.
-  In ISO 10646, FFFE and FFFF are special, and will never be associated
-  with graphic characters in any revision.]}
-@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[@Defn{Wide_Wide_Character}
@@ -4179,24 +4193,33 @@ position in hexadecimal as eight extended digits. As with other
 language-defined names, these names are usable only with the attributes
 (Wide_)Wide_Image and (Wide_)Wide_Value; they are not usable as enumeration
 literals.]}
+
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[The language-defined names are not usable as
-  enumeration literals
-  to avoid "polluting" the name space. Since Wide_Character and
-  Wide_Wide_Character are defined
-  in Standard, if the language-defined names were usable as enumeration
-  literals, they would hide other nonoverloadable declarations with the
-  same names in @key[use]-d packages.]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+  The language-defined names are not usable as
+  enumeration literals to avoid "polluting" the name space. Since
+  Wide_Character @Chg{Version=[2],New=[and Wide_Wide_Character ],Old=[]}are
+  defined in Standard, if the @Chg{Version=[2],New=[language-defined ],
+  Old=[]}names @Chg{Version=[2],New=[],Old=[FFFE and FFFF ]}were usable
+  as enumeration literals, they would hide other nonoverloadable declarations
+  with the same names in @key[use]-d packages.]}
+
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+  @ChgDeleted{Version=[2],Text=[ISO 10646 has not defined the meaning of
+  all of the code positions
+  from 0100 through FFFD, but they are all considered graphic characters by
+  Ada to simplify the implementation, and to allow for revisions to ISO 10646.
+  In ISO 10646, FFFE and FFFF are special, and will never be associated
+  with graphic characters in any revision.]}
 @end{Reason}
 @end{StaticSem}
 
 @begin{ImplPerm}
-@Defn{localization}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgDeleted{Version=[2],Text=[@Defn{localization}
 In a nonstandard mode, an implementation may provide
-other interpretations for the predefined types Character@Chg{Version=[2],New=[,],Old=[ and]}
-Wide_Character@Chg{Version=[2],New=[, and Wide_Wide_Character],
-Old=[]}@Redundant[, to conform to local conventions].
+other interpretations for the predefined types Character and
+Wide_Character@Redundant[, to conform to local conventions].]}
 @end{ImplPerm}
 
 @begin{ImplAdvice}
@@ -4212,6 +4235,8 @@ the subprograms defined in the language-defined package Characters.Handling
 In a mode with an alternative interpretation of Character, the
 implementation should also support a corresponding change in what is
 a legal @nt<identifier_letter>.]}
+@ChgNote{We won't add an ChgImplAdvice here, because we would need to add
+and remove it in the same command.}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -4305,7 +4330,7 @@ Context is used to resolve their type.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Type Wide_Wide_Character is new.]}
+  The type Wide_Wide_Character is new.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -4690,6 +4715,10 @@ No other named integer subtypes are recommended for package Standard.
 Instead, appropriate named integer subtypes should be provided in
 the library package Interfaces
 (see @RefSecNum{The Package Interfaces}).
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Long_Integer should be declared in Standard if the target supports
+32-bit arithmetic. No other named integer subtypes should be declared in
+Standard.]}]}
 @begin{ImplNote}
 To promote portability, implementations should explicitly declare the integer
 (sub)types Integer and Long_Integer in Standard, and leave other
@@ -4712,6 +4741,10 @@ An implementation for a two's complement machine should support
 modular types with a binary modulus
 up to System.Max_Int*2+2.
 An implementation should support a nonbinary modulus up to Integer'Last.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[For a two's complement target, modular types with a binary modulus
+up to System.Max_Int*2+2 should be supported. A nonbinary modulus up
+to Integer'Last should be supported.]}]}
 @begin{Reason}
   Modular types provide bit-wise "@key{and}", "@key{or}", "@key{xor}",
   and "@key{not}" operations.
@@ -4894,6 +4927,10 @@ then the implementation should raise Program_Error.
 This is particularly important for enumeration types with
 noncontiguous internal codes specified by an
 @nt<enumeration_representation_clause>.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Program_Error should be raised for the evaluation of S'Pos for an
+enumeration type, if the value of the operand does not correspond
+to the internal code for any enumeration literal of the type.]}]}
 @begin{Reason}
 We say Program_Error here, rather than Constraint_Error,
 because the main reason for such values is uninitialized variables,
@@ -5283,6 +5320,10 @@ No other named floating point subtypes are recommended for package Standard.
 Instead, appropriate named floating point subtypes should be provided in
 the library package Interfaces
 (see @RefSecNum(The Package Interfaces)).
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Long_Float should be declared in Standard if the target supports
+11 or more digits of precision. No other named float subtypes should be
+declared in Standard.]}]}
 @begin{ImplNote}
 To promote portability, implementations should explicitly declare the floating
 point (sub)types Float and Long_Float in Standard, and leave other
@@ -5599,10 +5640,12 @@ or implicitly) a range that is compatible with the subtype.
   Thus, "@key[digits] 6" is not compatible with the constraint of D, but
   "@key[digits] 6 range 0.00 .. 9999.99" is compatible.
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   A value of a scalar type
   belongs to a constrained subtype of the type if it belongs to the
   range of the subtype. Attributes like Digits and Delta have no
-  affect on this fundamental rule. So the obsolescent forms of
+  @Chg{Version=[2],New=[effect],Old=[affect]} on this fundamental rule.
+  So the obsolescent forms of
   @nt<digits_constraint>s and @nt<delta_constraint>s that are
   called @lquotes@;accuracy constraints@rquotes@; in RM83 don't really
   represent constraints on the values of the subtype, but rather primarily

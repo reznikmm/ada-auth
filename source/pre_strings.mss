@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2005/01/29 07:15:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2005/02/03 07:11:22 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/01/29 07:15:08 $}
+@Comment{$Date: 2005/02/03 07:11:22 $}
 
 @LabeledClause{String Handling}
 
@@ -1452,7 +1452,7 @@ and Bounded_String, are automatically defined based on the corrsponding
 @begin{ImplAdvice}
 Bounded string objects should not be implemented by implicit
 pointers and dynamic allocation.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Bounded string objects should not be implemented by implicit
 pointers and dynamic allocation.]}]}
 @begin{ImplNote}
@@ -1876,8 +1876,9 @@ in a preelaborable way (i.e. via aggregates versus function calls).
 @Leading@;The library package Strings.Maps.Constants has the following declaration:
 
 @begin{example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants]}@key[package] Ada.Strings.Maps.Constants @key[is]
-   @key[pragma] Preelaborate(Constants);
+   @key[pragma] @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(Constants);
 
    @AdaDefn{Control_Set}           : @key[constant] Character_Set;
    @AdaDefn{Graphic_Set}           : @key[constant] Character_Set;
@@ -1910,19 +1911,30 @@ character mapping in Characters.Handling
 (see @refsecnum(The Package Characters.Handling)).
 @end{StaticSem}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[Strings.Maps.Constants is now Pure,
+  so it can be used in more places.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Wide_String Handling}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00302-03]}
 Facilities for handling strings of Wide_Character elements are
 found in the packages Strings.@!Wide_Maps, Strings.@!Wide_Fixed,
 Strings.@!Wide_@!Bounded, Strings.@!Wide_@!Unbounded,
-and Strings.@!Wide_Maps.@!Wide_@!Constants.
+and Strings.@!Wide_Maps.@!Wide_@!Constants@Chg{Version=[2],New=[, and in the
+functions Strings.Wide_Hash and Strings.Wide_Unbounded.Wide_Hash],Old=[]}.
 They provide the same string-handling operations
-as the corresponding packages for
-strings of Character elements.
+as the corresponding packages @Chg{Version=[2],New=[ and functions],Old=[]}
+for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Fixed]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Bounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Unbounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Unbounded],Child=[Wide_@!Hash]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -1931,8 +1943,10 @@ The package Strings.Wide_Maps has the following declaration.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Maps]}@key[package] Ada.Strings.Wide_Maps @key[is]
    @key[pragma] Preelaborate(Wide_Maps);
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
    --@RI{ Representation for a set of Wide_Character values:}
-   @key[type] @AdaTypeDefn{Wide_Character_Set} @key[is] @key[private];
+   @key[type] @AdaTypeDefn{Wide_Character_Set} @key[is] @key[private];@Chg{Version=[2],New=[
+   @key[pragma] Preelaborable_Initialization(Wide_Character_Set);],Old=[]}
 
    @AdaDefn{Null_Set} : @key[constant] Wide_Character_Set;
 
@@ -1994,8 +2008,10 @@ The package Strings.Wide_Maps has the following declaration.
       @key[return] Wide_Character_Sequence;
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
    --@RI{ Representation for a Wide_Character to Wide_Character mapping:}
-   @key[type] @AdaTypeDefn{Wide_Character_Mapping} @key[is] @key[private];
+   @key[type] @AdaTypeDefn{Wide_Character_Mapping} @key[is] @key[private];@Chg{Version=[2],New=[
+   @key[pragma] Preelaborable_Initialization(Wide_Character_Mapping);],Old=[]}
 
    @key[function] @AdaSubDefn{Value} (Map     : @key[in] Wide_Character_Mapping;
                    Element : @key[in] Wide_Character)
@@ -2026,8 +2042,11 @@ The context clause for each of the packages Strings.Wide_Fixed,
 Strings.Wide_Bounded, and Strings.Wide_Unbounded
 identifies Strings.Wide_Maps instead of Strings.Maps.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00302-03]}
 @Leading@;For each of the packages Strings.Fixed, Strings.Bounded,
-Strings.Unbounded, and Strings.Maps.Constants
+Strings.Unbounded, and Strings.Maps.Constants@Chg{Version=[2],New=[, and
+for functions Strings.Hash and
+Strings.Unbounded.Hash,],Old=[]}
 the corresponding wide string package has the same contents except that
 @begin{itemize}
 Wide_Space replaces Space
@@ -2061,13 +2080,19 @@ Wide_String_Access replaces String_Access
 To_Unbounded_Wide_String replaces To_Unbounded_String
 @end{Itemize}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Leading@keepnext@;The following additional declaration is present in
 Strings.Wide_Maps.Wide_Constants:
 @begin{example}
 @AdaDefn{Character_Set} : @key[constant] Wide_Maps.Wide_Character_Set;
---@RI{Contains each Wide_Character value WC such that Characters.Is_Character(WC) is True}
+--@RI{Contains each Wide_Character value WC such that}@Chg{Version=[2],New=[
+--],Old=[]}@RI{ Characters.@Chg{Version=[2],New=[Handling.],Old=[]}Is_Character(WC) is True}
 @end{example}
 @end{StaticSem}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00362-01]}
+@ChgAdded{Version=[2],Text=[@nt{Pragma} Pure is replaced by
+@nt{pragma} Preelaborate in Strings.Wide_Maps.Wide_Constants.]}
 
 @begin{Notes}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
@@ -2080,3 +2105,339 @@ portion of Wide_Character. Similarly, each Wide_Character_Mapping
 constant in this package is the identity mapping when applied to
 any element outside the Character portion of Wide_Character.
 @end{Notes}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[Various items are defined to have
+  Preelaborable_Initialization.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[Corrected the description of Character_Set.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-02]}
+  @ChgAdded{Version=[2],Text=[Added wide versions of Strings.Hash and
+  Strings.Unbounded.Hash.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[Added wording so
+  Strings.Wide_Maps.Wide_Constants does not change to Pure.]}
+@end{DiffWord95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Wide_Wide_String Handling]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[Facilities for handling strings of
+Wide_Wide_Character components are found in
+the packages Strings.Wide_Wide_Maps, Strings.Wide_Wide_Fixed,
+Strings.Wide_Wide_Bounded, Strings.Wide_Wide_Unbounded, and
+Strings.Wide_Wide_Maps.Wide_Wide_Constants, and in the
+functions Strings.Wide_Wide_Hash and Strings.Wide_Wide_Unbounded.Wide_Wide_Hash.
+They provide the same
+string-handling operations as the corresponding packages and functions
+for strings of Character components.
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Fixed]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Bounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Unbounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The library package Strings.Wide_Wide_Maps has the following declaration.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<package> Ada.Strings.Wide_Wide_Maps @key<is>@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Maps]}
+   @key<pragma> Preelaborate(Wide_Wide_Maps);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Representation for a set of Wide_Wide_Character values:]
+   @key<type> @AdaTypeDefn{Wide_Wide_Character_Set} @key<is private>;
+   @key<pragma> Preelaborable_Initialization(Wide_Wide_Character_Set);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{Null_Set} : @key<constant> Wide_Wide_Character_Set;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Wide_Wide_Character_Range} @key<is>
+      @key<record>
+         Low : Wide_Wide_Character;
+         High : Wide_Wide_Character;
+      @key<end record>;
+   -- @RI[Represents Wide_Wide_Character range Low..High]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Wide_Wide_Character_Ranges} @key<is array> (Positive @key<range> <>)
+         @key<of> Wide_Wide_Character_Range;
+   @key<function> @AdaSubDefn{To_Set} (Ranges : @key<in> Wide_Wide_Character_Ranges)
+         @key<return> Wide_Wide_Character_Set;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Set} (Span : @key<in> Wide_Wide_Character_Range)
+         @key<return> Wide_Wide_Character_Set;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Ranges} (Set : @key<in> Wide_Wide_Character_Set)
+         @key<return> Wide_Wide_Character_Ranges;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> "=" (Left, Right : @key<in> Wide_Wide_Character_Set) @key<return> Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> "@key<not>" (Right : @key<in> Wide_Wide_Character_Set)
+         @key<return> Wide_Wide_Character_Set;
+   @key<function> "@key<and>" (Left, Right : @key<in> Wide_Wide_Character_Set)
+         @key<return> Wide_Wide_Character_Set;
+   @key<function> "@key<or>" (Left, Right : @key<in> Wide_Wide_Character_Set)
+         @key<return> Wide_Wide_Character_Set;
+   @key<function> "@key<xor>" (Left, Right : @key<in> Wide_Wide_Character_Set)
+         @key<return> Wide_Wide_Character_Set;
+   @key<function> "-" (Left, Right : @key<in> Wide_Wide_Character_Set)
+         @key<return> Wide_Wide_Character_Set;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Is_In} (Element : @key<in> Wide_Wide_Character;
+                   Set : @key<in> Wide_Wide_Character_Set)
+         @key<return> Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Is_Subset} (Elements : @key<in> Wide_Wide_Character_Set;
+                       Set : @key<in> Wide_Wide_Character_Set)
+         @key<return> Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> "<=" (Left : @key<in> Wide_Wide_Character_Set;
+                  Right : @key<in> Wide_Wide_Character_Set)
+         @key<return> Boolean @key<renames> Is_Subset;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Alternative representation for a set of Wide_Wide_Character values:]
+   sub@key<type> @AdaDefn{Wide_Wide_Character_Sequence} @key<is> Wide_Wide_String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Set} (Sequence : @key<in> Wide_Wide_Character_Sequence)
+         @key<return> Wide_Wide_Character_Set;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Set} (Singleton : @key<in> Wide_Wide_Character)
+         @key<return> Wide_Wide_Character_Set;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Sequence} (Set : @key<in> Wide_Wide_Character_Set)
+         @key<return> Wide_Wide_Character_Sequence;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI[Representation for a Wide_Wide_Character to Wide_Wide_Character]
+   -- @RI[mapping:]
+   @key<type> @AdaTypeDefn{Wide_Wide_Character_Mapping} @key<is private>;
+   @key<pragma> Preelaborable_Initialization(Wide_Wide_Character_Mapping);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Value} (Map : @key<in> Wide_Wide_Character_Mapping;
+                   Element : @key<in> Wide_Wide_Character)
+         @key<return> Wide_Wide_Character;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{Identity} : @key<constant> Wide_Wide_Character_Mapping;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Mapping} (From, To : @key<in> Wide_Wide_Character_Sequence)
+         @key<return> Wide_Wide_Character_Mapping;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Domain} (Map : @key<in> Wide_Wide_Character_Mapping)
+         @key<return> Wide_Wide_Character_Sequence;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Range} (Map : @key<in> Wide_Wide_Character_Mapping)
+         @key<return> Wide_Wide_Character_Sequence;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Wide_Wide_Character_Mapping_Function} @key<is>
+         @key<access function> (From : @key<in> Wide_Wide_Character)
+         @key<return> Wide_Wide_Character;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<private>
+   ... -- @RI[not specified by the language]
+@key<end> Ada.Strings.Wide_Wide_Maps;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Strings.Wide_@!Maps],Child=[Wide_@!Constants]}
+The context clause for each of the packages Strings.Wide_Wide_Fixed,
+Strings.Wide_Wide_Bounded, and Strings.Wide_Wide_Unbounded identifies
+Strings.Wide_Wide_Maps instead of Strings.Maps.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For each of the packages
+Strings.Fixed, Strings.Bounded, Strings.Unbounded, and Strings.Maps.Constants,
+and for functions Strings.Hash and Strings.Unbounded.Hash,
+the corresponding wide wide string package has the same contents except that]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Wide_Wide_Space replaces Space]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Wide_Wide_Character replaces Character]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Wide_Wide_String replaces String]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Wide_Wide_Character_Set replaces Character_Set]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Wide_Wide_Character_Mapping replaces Character_Mapping]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Wide_Wide_Character_Mapping_Function replaces Character_Mapping_Function]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Wide_Wide_Maps replaces Maps]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Bounded_Wide_Wide_String replaces Bounded_String]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Null_Bounded_Wide_Wide_String replaces Null_Bounded_String]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[To_Bounded_Wide_Wide_String replaces To_Bounded_String]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[To_Wide_Wide_String replaces To_String]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Unbounded_Wide_Wide_String replaces Unbounded_String]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Null_Unbounded_Wide_Wide_String replaces Null_Unbounded_String]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Wide_Wide_String_Access replaces String_Access]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[To_Unbounded_Wide_Wide_String replaces To_Unbounded_String]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The following
+additional declarations are present in
+Strings.Wide_Wide_Maps.Wide_Wide_Constants:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@AdaDefn{Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
+-- @RI[Contains each Wide_Wide_Character value WWC such that]
+-- @RI[Characters.Handling.Is_Character(WWC) is True]
+@AdaDefn{Wide_Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
+-- @RI[Contains each Wide_Wide_Character value WWC such that]
+-- @RI[Characters.Handling.Is_Wide_Character(WWC) is True]]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[@nt{Pragma} Pure is replaced by
+@nt{pragma} Preelaborate in Strings.Wide_Wide_Maps.Wide_Wide_Constants.]}
+
+@end{StaticSem}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+If a null Wide_Wide_Character_Mapping_Function is passed to any of the
+Wide_Wide_String handling subprograms, Constraint_Error is propagated.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[Each Wide_Wide_Character_Set constant in the
+package Strings.Wide_Wide_Maps.Wide_Wide_Constants contains no values outside
+the Character portion of Wide_Wide_Character. Similarly, each
+Wide_Wide_Character_Mapping constant in this package is the identity mapping
+when applied to any element outside the Character portion of
+Wide_Wide_Character. Use Ada.Characters.Wide_Wide_Handling to do more general
+case mapping.]}
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The double wide string handling packages (Strings.Wide_Wide_Maps,
+  Strings.Wide_Wide_Fixed, Strings.Wide_Wide_Bounded,
+  Strings.Wide_Wide_Unbounded, and Strings.Wide_Wide_Maps.Wide_Wide_Constants),
+  and functions Strings.Wide_Wide_Hash and
+  Strings.Wide_Wide_Unbounded.Wide_Wide_Hash are new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[String Hashing]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The library
+function Strings.Hash has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
+@key<function> Ada.Strings.Hash (Key : String) @key<return> Containers.Hash_Type;@ChildUnit{Parent=[Ada.Strings],Child=[Hash]}
+@key<pragma> Pure (Ada.Strings.Hash);]}
+@end{Example}
+
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Return an implementation-defined
+value which is a function of the value of Key. If A and B are strings such that
+A equals B, Hash(A) equals Hash(B).]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The values returned by Strings.Hash.]}]}
+
+@end{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The library
+function Strings.Umbounded.Hash has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
+@key<function> Ada.Strings.Unbounded.Hash (Key : Unbounded_String) @key<return>@ChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash]}
+    Containers.Hash_Type;
+@key<pragma> Preelaborate (Ada.Strings.Unbounded.Hash);]}
+@end{Example}
+
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Return an implementation-defined
+value which is a function of the value of Key. If A and B are unbounded strings
+such that A equals B, Hash(A) equals Hash(B).]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The values returned by Strings.Unbounded.Hash.]}]}
+
+@end{DescribeCode}
+
+
+@end{StaticSem}
+
+
+@begin{ImplAdvice}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The various Hash functions should be good hash
+functions, returning a wide spread of values for different string values. It
+should be unlikely for similar strings to return the same value.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Strings.Hash and Strings.Unbounded.Hash should be good hash
+functions, returning a wide spread of values for different string values,
+and similar strings should rarely return the same value.]}]}
+@end{ImplAdvice}
+
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The Strings.Hash and Strings.Unbounded.Hash functions are new.]}
+@end{Extend95}
+

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/02/02 01:07:13 $}
+@Comment{$Date: 2005/02/03 07:11:14 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1423,7 +1423,7 @@ that is, if the implementation-defined pragmas are removed from a
 working program,
 the program should still be legal, and should still have the same
 semantics.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Implementation-defined pragmas should have no semantic effect
 for error-free programs.]}]}
 @begin{Ramification}
@@ -1450,7 +1450,7 @@ program legal, except as follows:
   A @nt<pragma> used to configure the environment
   by adding, removing, or replacing @nt{library_item}s.
 @end(Itemize)
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Implementation-defined pragmas should not make an illegal program
 legal, unless they complete a declaration or configure the @nt{library_item}s
 in an environment.]}]}

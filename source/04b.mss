@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/01/18 05:34:45 $}
+@Comment{$Date: 2005/02/03 07:11:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.6 $}
+@Comment{$Revision: 1.7 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2014,12 +2014,13 @@ real static expressions which are exactly half-way between two machine numbers.]
 
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00268-01]}
-@Chg{Version=[2],New=[For a real static expression that is not part of a
+@ChgAdded{Version=[2],Text=[For a real static expression that is not part of a
 larger static expression, and whose expected type is not a descendant of a
 formal scalar type, the rounding should be the same as the default rounding
-for the target system.
-@Comment{@ImplAdv{Round real static expressions the same as the target
-system.}}],Old=[]}
+for the target system.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[For a real static expression with a non-formal type that is not part of a
+larger static expression should be rounded the same as the target system.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}

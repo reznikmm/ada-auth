@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2005/01/25 07:00:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2005/02/03 07:11:19 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/01/25 07:00:10 $}
+@Comment{$Date: 2005/02/03 07:11:19 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1841,7 +1841,7 @@ Text=[The PCS should allow for multiple tasks to call the RPC-receiver.]}]}
 The Write operation on a stream of type Params_Stream_Type should raise
 Storage_Error if it runs out of space trying to write the Item
 into the stream.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The System.RPC.Write operation should raise Storage_Error if runs out
 of space when writing an item.]}]}
 @begin{ImplNote}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/02/01 06:46:23 $}
+@Comment{$Date: 2005/02/03 07:11:17 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -780,7 +780,7 @@ typically b@Chg{New=[e],Old=[y]} illegal if it disobeys the above rule.
 Atomic components have similar restrictions
 (see @RefSec{Shared Variable Control}).
 @end{Ramification}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The recommended level of support for all representation items should be
 followed.]}]}
 @end{Itemize}
@@ -907,7 +907,7 @@ If a type is packed, then the implementation should try to minimize
 storage allocated to objects of the type,
 possibly at the expense of speed of accessing components,
 subject to reasonable complexity in addressing calculations.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Storage allocated to objects of a packed type should be minimized.]}]}
 @begin{Ramification}
 A @nt{pragma} Pack is for gaining space efficiency,
@@ -1221,7 +1221,7 @@ the address is valid; otherwise, program execution is erroneous.
 @begin{ImplAdvice}
 For an array X, X'Address should point at the first component of the
 array, and not at the array bounds.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[For an array X, X'Address should point at the first component of the
 array rather than the array bounds.]}]}
 @begin{Ramification}
@@ -1710,7 +1710,7 @@ Unaliased components, unless the Size of the
 component is determined by a @nt{component_clause} or Component_Size
 clause.
 @end{Itemize}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If the Size of a subtype is specified, and allows for efficient
 independent addressability, then the Size of most objects of the subtype should
 equal the Size of the subtype.]}]}
@@ -1761,7 +1761,7 @@ one would want to pack in that manner.
 
 A Size clause on a composite subtype should not affect
 the internal layout of components.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[A Size clause on a composite subtype should not affect
 the internal layout of components.]}]}
 @begin{Reason}
@@ -3012,7 +3012,7 @@ The recommended level of support for the nondefault bit ordering is:
   If Word_Size = Storage_Unit, then
   the implementation should support the nondefault bit ordering
   in addition to the default bit ordering.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The recommended level of support for the nondefault bit ordering
 should be followed.]}]}
 @end{Itemize}

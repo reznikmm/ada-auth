@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/02/01 06:46:24 $}
+@Comment{$Date: 2005/02/03 07:11:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @LabeledClause{The Package System}
 
@@ -224,7 +224,7 @@ implementation-defined predefined operations for the type.
 We don't require it, because implementations may want to stick with
 what they have.
 @end{Reason}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Type System.Address should be a private type.]}]}
 @begin{ImplNote}
 It is not necessary for Address to be able to point at
@@ -394,7 +394,7 @@ to @lquotes@;wrap around.@rquotes@;
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Operations that do not make sense should raise
 Program_Error.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Operations in System and its children should reflect the
 target environment; operations that do not make sense should raise Program_Error.]}]}
 @begin{Discussion}
@@ -735,11 +735,11 @@ which unchecked conversion doesn't make sense may be disallowed.
 @begin{ImplAdvice}
 The Size of an array object should not include its bounds;
 hence, the bounds should not be part of the converted data.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The Size of an array object should not include its bounds.]}]}
 @Comment{The above advice belongs in 13.3; I've asked permission to move it,
 and replace the above by the below.}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Since the Size of an array object generally does not include its bounds,
 the bounds should not be part of the converted data in an instance of
 Unchecked_Conversion.]}]}
@@ -755,7 +755,7 @@ It should take advantage of the permission to return by reference
 when possible.
 Restrictions on unchecked conversions should be avoided
 unless required by the target environment.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[There should not be unncessary run-time checks on the result of
 an Unchecked_Conversion; the result should be returned by reference when
 possible. Restrictions on Unchecked_Conversions should be avoided.]}]}
@@ -1493,7 +1493,7 @@ by standard storage pools shall be documented.]}]}
 An implementation should document any cases in which it dynamically
 allocates heap storage for a purpose other than the evaluation of an
 @nt{allocator}.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Any cases in which heap storage is dynamically allocated other than
 the evaluation of an @nt{allocator} should be documented.]}]}
 @begin{Reason}
@@ -1505,7 +1505,7 @@ therefore, it is not testable whether the implementation obeys this advice.
 A default (implementation-provided) storage pool for an
 access-to-constant type should
 not have overhead to support deallocation of individual objects.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[A default storage pool for an access-to-constant type should
 not have overhead to support deallocation of individual objects.]}]}
 @begin{Ramification}
@@ -1547,7 +1547,7 @@ guaranteed to fail.
 A storage pool for an anonymous access type should be created
 at the point of an allocator for the type, and be reclaimed when
 the designated object becomes inaccessible.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[A storage pool for an anonymous access type should be created
 at the point of an allocator for the type, and be reclaimed when
 the designated object becomes inaccessible. *** Changed]}]}
@@ -1863,7 +1863,7 @@ an access type whose pool is Name'Storage_Pool.
 @begin{ImplAdvice}
 For a standard storage pool,
 Free should actually reclaim the storage.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[For a standard storage pool, an instance of Unchecked_Deallocation
 should actually reclaim the storage.]}]}
 @begin{Ramification}

@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/01/29 07:14:59 $}
+@Comment{$Date: 2005/02/03 07:11:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1181,7 +1181,7 @@ for a listing.]}]}
 If an implementation detects the use of an unsupported
 Specialized Needs Annex feature at run time,
 it should raise Program_Error if feasible.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Program_Error should be raised when an unsupported
 Specialized Needs Annex feature is used at run time.]}]}
 @begin{Reason}
@@ -1200,7 +1200,7 @@ we cannot require Program_Error to be raised instead.
 If an implementation wishes to provide implementation-defined
 extensions to the functionality of a language-defined library unit,
 it should normally do so by adding children to the library unit.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Implementation-defined extensions to the functionality of a
 language-defined library unit should be provided by adding children
 to the library unit.]}]}
@@ -1582,7 +1582,7 @@ mode, all legal @nt<compilation_unit>s shall be accepted.]
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If an implementation detects a bounded error or erroneous execution,
 it should raise Program_Error.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If a bounded error or erroneous execution is detected, Program_Error
 should be raised.]}]}
 @end{ImplAdvice}

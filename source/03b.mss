@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:15:00 $}
+@Comment{$Date: 2005/02/03 07:11:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @LabeledClause{Array Types}
 
@@ -581,6 +581,9 @@ for multidimensional array aggregates (see @RefSecNum(Array Aggregates)).
 However, if a @key<pragma> Convention(Fortran, ...) applies to a
 multidimensional array type, then column-major order should be used
 instead (see @RefSec{Interfacing with Fortran}).
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Multidimensional arrays should be represented in row-major order,
+unless the array has convention Fortran.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}

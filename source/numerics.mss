@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2005/01/25 07:00:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2005/02/03 07:11:19 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/01/25 07:00:10 $}
+@Comment{$Date: 2005/02/03 07:11:19 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -39,7 +39,7 @@ Fortran (respectively, C) in the interfacing pragmas
 (see @RefSecNum{Interface to Other Languages}),
 thus allowing Ada programs to interface with programs written in
 that language.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If Fortran (respectively, C) is supported in the target environment,
 then interfacing to Fortran (respectively, C) should be supported as
 specified in @RefSecNum{Interface to Other Languages}.]}]}
@@ -528,7 +528,7 @@ parameter lies on the positive real axis; as another, the sign of the imaginary
 component of the Compose_@!From_@!Polar function should be the same as (resp., the
 opposite of) that of the Argument parameter when that parameter has a value of
 zero and the Modulus parameter has a nonnegative (resp., negative) value.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If Real'Signed_Zeros is true for Numerics.Generic_Complex_Types,
 a rational treatment of the signs of
 zero results and result components should be provided.]}]}
@@ -923,7 +923,7 @@ cases, the result component should have the sign of the parameter component at
 the origin. Other complex elementary functions have zero components whose sign
 is opposite that of a parameter component at the origin, or is always positive
 or always negative.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If Complex_Types.Real'Signed_Zeros is true for
 Numerics.Generic_Complex_Elementary_Functions,
 a rational treatment of the signs of
@@ -2098,7 +2098,7 @@ parameter of 2.0*Numerics.Pi, since this will not provide the required accuracy
 in some portions of the domain. For the same reason, the version of Log
 without a Base parameter should not be implemented by calling the corresponding
 version with a Base parameter of Numerics.e.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[For elementary functions, the forward trigonometric functions without a
 Cycle parameter should not be implemented by calling the corresponding version
 with a Cycle parameter. Log without a Base parameter should not be implemented
@@ -2495,7 +2495,7 @@ The version of the Compose_From_Polar function without a Cycle parameter should
 not be implemented by calling the corresponding version with a Cycle parameter
 of 2.0*Numerics.Pi, since this will not provide the required accuracy in some
 portions of the domain.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[For complex arithmetic, the Compose_From_Polar function without a Cycle
 parameter should not be implemented by calling Compose_From_Polar with a Cycle
 parameter.]}]}
