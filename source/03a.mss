@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:04 $}
+@Comment{$Date: 2000/05/23 04:52:38 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -4010,8 +4010,8 @@ the following attributes are defined:
   @b(return) @i(universal_integer)
 @end(example)
 
-     This function returns the position number of the value of @i(Arg),
-     as a value of type @i(universal_integer).]}
+     @NoPrefix@;This function returns the position number of the value of
+     @i(Arg), as a value of type @i(universal_integer).]}
 
 @Attribute{Prefix=<S>, AttrName=<Val>,
   Text=[S'Val denotes a function with the following specification:
@@ -4022,7 +4022,7 @@ the following attributes are defined:
 
      @PDefn2{Term=(evaluation), Sec=(Val)}
      @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
-     This function returns a value of the type of S
+     @NoPrefix@;This function returns a value of the type of S
      whose position number equals the value of @i(Arg).]}
      @IndexCheck{Range_Check}
      For the evaluation of a call on S'Val, if there

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/23 04:52:39 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 @redundant[
@@ -5053,7 +5053,7 @@ the following attributes are defined.
    @i{Item} : @key{in} @i(T))
 @end{Example}
 
-S'Write writes the value of @i{Item} to @i{Stream}.>}
+@noprefix@;S'Write writes the value of @i{Item} to @i{Stream}.>}
 
 @Attribute{Prefix=<S>, AttrName=<Read>,
   Text=<S'Read denotes a procedure with the following specification:
@@ -5063,7 +5063,7 @@ S'Write writes the value of @i{Item} to @i{Stream}.>}
    @i{Item} : @key{out} @i(T))
 @end{Example}
 
-S'Read reads the value of @i{Item} from @i{Stream}.>}
+@noprefix@;S'Read reads the value of @i{Item} from @i{Stream}.>}
 @end{Description}
 @EndPrefixType{}
 
@@ -5116,7 +5116,7 @@ specification:
    @i{Item}   : @key{in} @i(T)'Class)
 @end{Example}
 
-Dispatches to the subprogram denoted by the Write attribute of
+@noprefix@;Dispatches to the subprogram denoted by the Write attribute of
 the specific type identified by the tag of Item.>}
 
 @Attribute{Prefix=<S'Class>, AttrName=<Read>,
@@ -5127,7 +5127,7 @@ the specific type identified by the tag of Item.>}
    @i{Item} : @key{out} @i(T)'Class)
 @end{Example}
 
-Dispatches to the subprogram denoted by the Read attribute of
+@noprefix@;Dispatches to the subprogram denoted by the Read attribute of
 the specific type identified by the tag of Item.>}
 @begin{Reason}
 It is necessary to have class-wide versions of Read and Write
@@ -5162,7 +5162,7 @@ the following attributes are defined.
    @i{Item} : @key{in} @i(T))
 @end{Example}
 
-S'Output writes the value of @i{Item} to @i{Stream}, including
+@noprefix@;S'Output writes the value of @i{Item} to @i{Stream}, including
 any bounds or discriminants.>}
 @begin{Ramification}
 Note that the bounds are included even for an array type whose
@@ -5177,7 +5177,7 @@ first subtype is constrained.
    @key(return) @i(T)
 @end{Example}
 
-S'Input reads and returns one value from
+@noprefix@;S'Input reads and returns one value from
 @i{Stream}, using any bounds or discriminants written by a corresponding
 S'Output to determine how much to read.>}
 @end{Description}
@@ -5210,7 +5210,7 @@ specification:
    @i{Item}   : @key{in} @i(T)'Class)
 @end{Example}
 
-First writes the external tag of @i{Item} to @i{Stream}
+@noprefix@;First writes the external tag of @i{Item} to @i{Stream}
 (by calling String'Output(Tags.External_Tag(@i{Item}'Tag) @em
 see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Output attribute of
@@ -5224,7 +5224,7 @@ the specific type identified by the tag.>}
    @key{return} @i(T)'Class
 @end{Example}
 
-First reads the external tag from @i{Stream} and determines
+@noprefix@;First reads the external tag from @i{Stream} and determines
 the corresponding internal tag
 (by calling Tags.Internal_Tag(String'Input(@i{Stream})) @em
 see @RefSecNum{Tagged Types and Type Extensions})

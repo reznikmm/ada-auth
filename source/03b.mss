@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/23 04:52:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.7 $}
+@Comment{$Revision: 1.8 $}
 
 @LabeledClause{Array Types}
 
@@ -2208,7 +2208,7 @@ defined:
 
   @Defn2{Term=unconstrained, Sec=(subtype)}
   @Defn2{Term=constrained, Sec=(subtype)}
-  S'Class is unconstrained.  However,
+  @Noprefix@;S'Class is unconstrained.  However,
   if S is constrained, then the values of S'Class are only those
   that when converted to the type @i(T) belong to S.]}
   @begin{Ramification}
@@ -4730,7 +4730,7 @@ The current instance of a limited type
   nominal subtype is unconstrained,
   unless this subtype is indefinite,
   or the variable is aliased.
-  
+
   @begin(Discussion)
      This restriction is intended to be similar to the restriction
      on renaming discriminant-dependent subcomponents.
