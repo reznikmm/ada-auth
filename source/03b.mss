@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:43 $}
+@Comment{$Date: 2000/08/17 03:15:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @LabeledClause{Array Types}
 
@@ -247,11 +247,15 @@ creates the array type and its first subtype,
 and consists of the elaboration of any @nt{discrete_@!subtype_@!definition}s
 and the @nt{component_@!definition}.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
 @PDefn2{Term=[elaboration], Sec=(discrete_subtype_definition)}
-The elaboration of a @nt{discrete_subtype_definition} creates
-the discrete subtype, and consists
+The elaboration of a @nt{discrete_subtype_definition}
+@Chg{New=[that does not contain any per-object expressions],Old=[]}
+creates the discrete subtype, and consists
 of the elaboration of the @nt{subtype_@!indication} or the
 evaluation of the @nt{range}.
+@Chg{New=[The elaboration of a @nt{discrete_subtype_definition} that contains
+one or more per-object expressions is defined in @RefSecNum{Record Types}.],Old=[]}
 @PDefn2{Term=[elaboration], Sec=(component_definition)}
 The elaboration of a @nt{component_@!definition} in an
 @nt{array_@!type_@!definition} consists of the elaboration
@@ -490,8 +494,9 @@ and no greater than the dimensionality of the array.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0006]}
 The following attributes are defined for
-@PrefixType{a prefix A that is of an array type
+@PrefixType{a @Chg{New=[@nt{prefix}],Old=[prefix]} A that is of an array type
 @Redundant[(after any implicit dereference)], or denotes
 a constrained array subtype}:
 @begin{Ramification}
@@ -714,16 +719,17 @@ discriminant.
 @end{Resolution}
 
 @begin{Legality}
-A @nt{known_discriminant_part} is only permitted in a declaration
-for a composite type that is not an array type
-@Redundant[(this includes generic formal types)];
-@Defn{discriminated type}
-a type declared with a @nt<known_discriminant_part> is called
-a @i(discriminated) type, as is a type that inherits (known) discriminants.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0007]}
+A @Chg{New=[@nt{discriminant_part}],Old=[@nt{known_discriminant_part}]} is only
+permitted in a declaration for a composite type that is not an array type
+@Redundant[(this includes generic formal types)]@Chg{New=[. A],Old=[; a]}
+type declared with a @nt<known_discriminant_part> is called
+a @i(discriminated) type@Defn{discriminated type}, as is a type that inherits
+(known) discriminants.
 @begin{ImplNote}
-
   Discriminants on array types were considered,
-  but were omitted to ease (existing) implementations.@end{implnote}
+  but were omitted to ease (existing) implementations.
+@end{implnote}
 @begin(Discussion)
   Note that the above definition for @lquotes@;discriminated type@rquotes@; does
   not include types declared with an @nt<unknown_discriminant_part>.
@@ -731,6 +737,12 @@ a @i(discriminated) type, as is a type that inherits (known) discriminants.
   formal part) would not be considered discriminated types.
   Furthermore, the full type for a type with unknown discriminants
   need not even be composite, much less have any discriminants.
+
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0007]}
+  @Chg{New=[On the other hand, @nt<unknown_discriminant_part>s cannot be
+  applied to types that cannot have a @nt<known_discriminant_part>. There
+  is no point in having unknown discriminants on a type that cannot have
+  discriminants at all.],Old=[]}
 @end(Discussion)
 
 The subtype of a discriminant may be defined by
@@ -860,13 +872,13 @@ subtype of the corresponding parent discriminant.
 @end{Itemize}
 
 The type of the @nt<default_expression>, if any, for an access discriminant
-shall be convertible to the anonymous access
-type of the discriminant
+shall be convertible to the anonymous access type of the discriminant
 (see @RefSecNum{Type Conversions}).
 @PDefn2{Term=[convertible],Sec=(required)}
 @begin{Ramification}
 This requires convertibility
-of the designated subtypes.@end{ramification}
+of the designated subtypes.
+@end{ramification}
 @end{Legality}
 
 @begin{StaticSem}
@@ -997,7 +1009,8 @@ and @RefSecNum{Objects and Named Numbers}).]
 @begin(Discussion)
   An @nt<unknown_discriminant_part> @lquotes@;(<>)@rquotes@; is only permitted in
   the declaration of a (generic or nongeneric) private type,
-  private extension, or formal derived type.
+  private extension, or formal derived type.@Comment{That was always intended,
+  but 8652/0007 was needed to make it true.}
   Hence, only such types, descendants thereof, and class-wide
   types can have unknown discriminants.
   An @nt<unknown_discriminant_part> is used to indicate that the corresponding
@@ -1014,13 +1027,13 @@ and @RefSecNum{Objects and Named Numbers}).]
   can be declared since initialization is not permitted (though
   formal parameters are permitted, and objects of the actual/full type
   will generally be declarable). A limited private type with
-  unknown discriminants
-  is @lquotes@;extremely@rquotes@; limited; such a type is useful for keeping complete control
-  over object creation within the package declaring the type.
+  unknown discriminants is @lquotes@;extremely@rquotes@; limited; such a type
+  is useful for keeping complete control over object creation within the
+  package declaring the type.
 
   A partial view of a type might have unknown discriminants, while
   the full view of the same type might have known, unknown, or no
-  discriminants,
+  discriminants@Chg{New=[.],Old=[,]}
 @end(Discussion)
 @end{StaticSem}
 
@@ -1037,8 +1050,7 @@ anonymous access type (see @RefSecNum{Type Conversions}).]
 @begin(Ramification)
 
   This conversion raises Constraint_Error if the initial value is
-  @key(null),
-  or, for an object created by an allocator of an access type
+  @key(null), or, for an object created by an allocator of an access type
   T, if the initial value is an access parameter
   that designates a view whose accessibility level is deeper than that
   of T.
@@ -1233,11 +1245,21 @@ is that of the associated discriminant(s).
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008]}
 A @nt{discriminant_constraint} is only allowed in a
 @nt{subtype_indication} whose @nt{subtype_mark} denotes
 either an unconstrained discriminated subtype, or an
 unconstrained access subtype whose designated subtype is
 an unconstrained discriminated subtype.
+@Chg{New=[However, in the case of a general access subtype, a
+@nt{discriminant_constraint} is illegal if there is a place within the
+immediate scope of the designated subtype where its view is constrained.],
+Old=[]}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008]}
+@Chg{New=[The second rule is necessary to prevent assignments that change the
+discriminant of a constrained object. See the defect report for examples.],Old=[]}
+@end{Reason}
 
 A named @nt<discriminant_association> with more than one
 @nt<selector_name> is allowed only if the named discriminants
@@ -1455,7 +1477,8 @@ values of the components.
    | {@Syn2{component_item}} @Syn2{variant_part}
    |  @key{null};"}
 
-@Syn{lhs=<component_item>,rhs="@Syn2{component_declaration} | @Syn2{representation_clause}"}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Syn{lhs=<component_item>,rhs="@Syn2{component_declaration} | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
 
 @Syn{lhs=<component_declaration>,rhs="
    @Syn2{defining_identifier_list} : @Syn2{component_definition} [:= @Syn2{default_expression}];"}
@@ -1611,6 +1634,7 @@ elaboration of the @nt{component_definition}.
   each @nt<defining_identifier> in the list.
 @end(Discussion)
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002]}
 @Defn{per-object expression}
 @Defn{per-object constraint}
 @Defn{entry index subtype}
@@ -1621,16 +1645,36 @@ includes a @nt<name> that denotes a discriminant of the type, or
 that is an @nt<attribute_reference> whose @nt<prefix> denotes the current
 instance of the type,
 the expression containing the @nt<name> is called a @i(per-object expression),
-and the constraint being defined is called a @i(per-object constraint).
+and the @Chg{New=[@nt{constraint} or @nt{range}],Old=[constraint]} being defined
+is called a @i(per-object constraint).
 @PDefn2{Term=[elaboration], Sec=(component_definition)}
 For the elaboration of a @nt{component_definition} of
-a @nt<component_declaration>, if the @nt{constraint} of
-the @nt{subtype_indication}
-is not a per-object constraint,
-then the @nt{subtype_indication} is elaborated.
-On the other hand, if the @nt{constraint} is a per-object constraint,
+a @nt<component_declaration>@Chg{New=[ or the @nt{discrete_subtype_definition}
+of an @nt{entry_declaration} for an entry family (see
+@RefSecNum{Entries and Accept Statements})],Old=[]}, if the @nt{constraint}
+@Chg{New=[or @nt{range}],Old=[]} of the @nt{subtype_indication}
+@Chg{New=[or @nt{discrete_subtype_definition}],Old=[]} is not a per-object
+constraint, then the @nt{subtype_indication}
+@Chg{New=[or @nt{discrete_subtype_definition}],Old=[]} is elaborated.
+On the other hand, if the @nt{constraint}
+@Chg{New=[or @nt{range}],Old=[]} is a per-object constraint,
 then the elaboration consists of the evaluation of any included
 expression that is not part of a per-object expression.
+@Chg{New=[Each such expression is evaluated once unless it is part of a named
+association in a discriminant constraint, in which case it is evaluated once
+for each associated discriminant.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0002]}
+@Chg{New=[@PDefn2{Term=[Elaboration],Sec=(per-object constraint)}When a
+per-object constraint is elaborated @Redundant[(as part of creating an
+object)], each per-object expression of the constraint is evaluated. For other
+expressions, the values determined during the elaboration of the
+@nt{component_definition} or @nt{entry_declaration} are used. Any checks
+associated with the enclosing @nt{subtype_indication} or
+@nt{discrete_subtype_definition} are performed@Redundant[, including the subtype
+compatibility check (see @RefSecNum{Subtype Declarations}),] and the associated
+subtype is created.],
+Old=[]}
 @begin(Discussion)
   The evaluation of other expressions that appear in
   @nt<component_definition>s and @nt<discrete_subtype_definition>s
@@ -2144,7 +2188,7 @@ of the generic body result in distinct tags.
 @Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @key[is]
-    @key[type] Tag @key[is] @key[private];@LangDefType{Package=[Tags],Type=[Tag]}
+    @key[type] @AdaTypeDefn{Tag} @key[is] @key[private];
 
     @key[function] @AdaSubDefn{Expanded_Name}(T : Tag) @key[return] String;
     @key[function] @AdaSubDefn{External_Tag}(T : Tag) @key[return] String;
@@ -2734,39 +2778,51 @@ It is illegal to have both statically tagged and
   controlling operands (if any) are tag indeterminate.
 @end(itemize)
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
 @Redundant[A @nt<type_conversion> is statically or dynamically
 tagged according to whether the type determined by the @nt<subtype_mark>
 is specific or class-wide, respectively.]
-For a controlling operand that is designated by an actual parameter,
-the controlling operand is statically
-or dynamically tagged according to whether the designated type of the
-actual parameter is specific or class-wide, respectively.
+@Chg{New=[For an object that is designated by an expression whose expected type
+is an anonymous access-to-specific tagged type, the object is dynamically
+tagged if the expression, ignoring enclosing parentheses, is of the form
+X'Access, where X is of a class-wide type, or is of the form
+@key(new) T'(...), where T denotes a class-wide subtype. Otherwise, the object],
+Old=[For a controlling operand that is designated by an actual parameter,
+the controlling operand]} is statically or dynamically tagged according to
+whether the designated type @Chg{New=[of the type of the expression],
+Old=[of the actual parameter]} is specific or class-wide, respectively.
 @begin{Ramification}
   A @nt<type_conversion> is never tag indeterminate, even if its
   operand is. A designated object is never tag indeterminate.
 @end{Ramification}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
+  @Chg{New=[The wording change for Defect Report 8652/0010 allows allocators
+  and access attributes as the controlling parameters of dispatching calls.],
+  Old=[]}
+@end{Reason}
 @end{StaticSem}
 
 @begin{Legality}
 A call on a dispatching operation shall not
 have both dynamically tagged and statically tagged controlling operands.
 @begin{Reason}
-
   This restriction is intended to minimize
   confusion between whether the dynamically tagged operands
   are implicitly converted to, or tag checked against the
-  specific type of the statically tagged operand(s).@end{reason}
+  specific type of the statically tagged operand(s).
+@end{Reason}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
 If the expected type for an expression or @nt<name>
-is some specific tagged type, then
-the expression or @nt<name>
-shall not be dynamically
-tagged unless it is a controlling operand in a call
+is some specific tagged type, then the expression or @nt<name>
+shall not be dynamically tagged unless it is a controlling operand in a call
 on a dispatching operation.
 Similarly, if the expected type for an expression
 is an anonymous access-to-specific
-tagged type, then the expression shall not be
-of an access-to-class-wide type unless it designates a controlling
+tagged type, then the @Chg{New=[then the object designated by the expression
+shall not be dynamically tagged unless it is],Old=[expression shall not be
+of an access-to-class-wide type unless it designates]} a controlling
 operand in a call on a dispatching operation.
 @begin(Reason)
   This prevents implicit "truncation"
@@ -2783,6 +2839,7 @@ operand in a call on a dispatching operation.
   See @RefSecNum(Relational Operators and Membership Tests).
 @end(Ramification)
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011]}
 In the declaration of a dispatching operation of a tagged type,
 everywhere a subtype of the tagged type appears as a
 subtype of the profile (see @RefSecNum(Subprogram Declarations)),
@@ -2791,17 +2848,19 @@ it shall statically match the first subtype of the tagged type.
 If the dispatching operation overrides an inherited subprogram,
 it shall be subtype conformant with the inherited subprogram.
 @Defn2{Term=[subtype conformance],Sec=(required)}
-A dispatching operation shall not be of convention Intrinsic.
-If a dispatching operation overrides the predefined equals
-operator, then it shall be of convention Ada @Redundant[(either explicitly
-or by default @em see @RefSecNum{Conformance Rules})].
+@Chg{New=[The convention of an inherited or overriding dispatching operation is
+the convention of the corresponding primitive operation of the parent type. An
+explicitly declared],Old=[A]} dispatching operation shall not be of convention
+Intrinsic.@Chg{New=[],Old=[ If a dispatching operation overrides the predefined
+equals operator, then it shall be of convention Ada @Redundant[(either
+explicitly or by default @em see @RefSecNum{Conformance Rules})].]}
 @begin{Reason}
-These rules
-  ensure that constraint checks can be performed by the
+  These rules ensure that constraint checks can be performed by the
   caller in a dispatching call, and parameter passing conventions
   match up properly. A special rule on aggregates
   prevents values of a tagged type from being created that
-  are outside of its first subtype.@end{reason}
+  are outside of its first subtype.
+@end{reason}
 
 The @nt<default_expression> for a controlling formal parameter
 of a dispatching operation shall be tag indeter@!minate.
@@ -3441,6 +3500,7 @@ by compile-time rules.
 @end{Syntax}
 
 @begin{StaticSem}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0012]}
 @Defn{access-to-object type}
 @Defn{access-to-subprogram type}
 @Defn{pool-specific access type}
@@ -3451,6 +3511,7 @@ values designate subprograms.
 @Defn{storage pool}
 Associated with an access-to-object type is a @i(storage pool);
 several access types may share the same storage pool.
+@Chg{New=[All descendants of an access type share the same storage pool.],Old=[]}
 @Defn{pool element}
 A storage pool is an area of storage used to hold dynamically
 allocated objects (called @i(pool elements)) created
@@ -3765,13 +3826,15 @@ Hence, the type conversion will raise Constraint_Error if the value of
 the actual parameter is null.
 @end{Reason}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0013]}
 @PDefn2{Term=[constrained],Sec=(subtype)}
 @PDefn2{Term=[unconstrained],Sec=(subtype)}
 @Redundant[All subtypes of an access-to-subprogram type
 are constrained.] The first subtype of a type defined by
-an @nt<access_type_definition> or an @nt<access_to_object_definition>
-is unconstrained if the designated subtype is an unconstrained
-array or discriminated type; otherwise it is constrained.
+an @Chg{New=[@nt<access_definition>],Old=[@nt<access_type_definition>]} or an
+@nt<access_to_object_definition> is unconstrained if the designated subtype
+is an unconstrained array or discriminated @Chg{New=[subtype],Old=[type]};
+otherwise it is constrained.
 @begin(TheProof)
   The Legality Rules on @nt<range_constraint>s (see @RefSecNum(Scalar Types))
   do not permit the @nt<subtype_mark> of the @nt<subtype_indication> to denote
@@ -4165,14 +4228,10 @@ not at all) for different designated subtypes.
 designating aliased objects and non-intrinsic subprograms.
 The @lquotes@;accessibility@rquotes@; rules prevent dangling references
 (in the absence of uses of certain unchecked features
-@em see Section 13).
-
-]
-
+@em see Section 13).]
 @end{Intro}
 
 @begin{MetaRules}
-
 It should be possible for an access value to designate an object
 declared by an object declaration,
 or a subcomponent thereof.
@@ -4186,7 +4245,6 @@ not used.
 In order to create such access values, we require that the access type be a
 general access type, that the designated object be aliased,
 and that the accessibility rules be obeyed.
-
 @end{MetaRules}
 
 @begin{Resolution}
@@ -4701,32 +4759,31 @@ which the compiler can't see while compiling an object creation.
 denotes an aliased view of an object}:
 @end{Wide}
 @begin(description)
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
 @Attribute{Prefix=<X>, AttrName=<Access>,
   Text=<X'Access yields an access value that designates the object
-  denoted by X.
-  The type of X'Access is an access-to-object type,
+  denoted by X. The type of X'Access is an access-to-object type,
   as determined by the expected type.
   The expected type shall be a general access type.>}
 @IndexSeeAlso{Term=[Unchecked_Access attribute],See=(Access attribute)}
 @EndPrefixType{}
-  X shall denote an aliased view of an object@Redundant[,
-  including possibly the
+  X shall denote an aliased view of an object@Redundant[, including possibly the
   current instance (see @RefSecNum{The Context of Overload Resolution})
   of a limited type within its definition, or a formal parameter
-  or generic formal object
-  of a tagged type].
+  or generic formal object of a tagged type].
   The view denoted by the @nt<prefix> X
   shall satisfy the following additional requirements, presuming the
-  expected type for X'Access
-  is the general access type @i(A):
+  expected type for X'Access is the general access type
+  @i(A)@Chg{New=[ with designated type @i(D)],Old=[]}:
 @begin(itemize)
   If @i(A) is an access-to-variable type, then the view shall be a
   variable; @Redundant[on the other hand, if @i(A) is an
   access-to-constant type, the view may be either a constant
   or a variable.]
   @begin{Discussion}
-The current instance of a limited type
-    is considered a variable.@end{discussion}
+    The current instance of a limited type
+    is considered a variable.
+  @end{discussion}
 
   The view shall not be a subcomponent that
   depends on discriminants of a variable whose
@@ -4778,19 +4835,31 @@ The current instance of a limited type
      (see @RefSecNum(Discriminants)).
   @end{ImplNote}
 
-  If the designated type of @i(A) is tagged, then the type of the view
-  shall be covered by the designated type;
-  if @i(A)'s designated type is not tagged, then the type of the
-  view shall be the same, and either @i(A)'s designated subtype
-  shall statically match the nominal subtype of the view, or the
-  designated subtype
-  shall be discriminated and unconstrained;
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
+  If @Chg{New=[@i(A) is a named access type and @i(D) is a tagged type],
+  Old=[the designated type of @i(A) is tagged]}, then the type of the view
+  shall be covered by the @Chg{New=[@i(D)],Old=[designated type]};
+  @Chg{New=[if @i(A) is anonymous and @i(D) is tagged, then the type of the
+  view shall be either @i(D)'Class or a type covered by D;],Old=[]}
+  if @Chg{New=[@i(D) is untagged],Old=[@i(A)'s designated type is not tagged]},
+  then the type of the view shall be
+  @Chg{New=[@i(D)],Old=[the same]}, and @Chg{New=[],Old=[either ]}@i(A)'s
+  designated subtype shall @Chg{New=[either ],Old=[]}
+  statically match the nominal subtype of the view@Chg{New=[or be],
+  Old=[, or the designated subtype shall be]} discriminated
+  and unconstrained;
   @PDefn2{Term=[statically matching],Sec=(required)}
   @begin{ImplNote}
     This ensures
     that the dope for an aliased array object can always be stored contiguous
     with it, but need not be if its nominal subtype is constrained.
   @end{implnote}
+  @begin{Ramification}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
+  @Chg{New=[An access attribute can be used as the controlling operand in a
+  dispatching call, see @RefSecNum{Dispatching Operations of Tagged Types}.],
+  Old=[]}
+  @end{Ramification}
 
   The accessibility level of the view shall not be statically deeper
   than that of the access type @i{A}.
@@ -5002,8 +5071,9 @@ while X'Last is not. See AI83-00154.
 @Syn{lhs=<declarative_item>,rhs="
     @Syn2{basic_declarative_item} | @Syn2{body}"}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 @Syn{lhs=<basic_declarative_item>,rhs="
-    @Syn2{basic_declaration} | @Syn2{representation_clause} | @Syn2{use_clause}"}
+    @Syn2{basic_declaration} | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]} | @Syn2{use_clause}"}
 
 @Syn{lhs=<body>,rhs="@Syn2{proper_body} | @Syn2{body_stub}"}
 
@@ -5039,9 +5109,10 @@ Prior to that, it is @i(not yet elaborated).
 For a construct that attempts to use a body,
 a check (Elaboration_Check) is performed, as follows:
 @begin{Itemize}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
 For a call to a (non-protected) subprogram that has
 an explicit body, a check is made that the
-@nt{subprogram_body} is already elaborated.
+@Chg{New=[body],Old=[@nt{subprogram_body}]} is already elaborated.
 This check and the evaluations of any actual parameters of the call
 are done in an arbitrary order.
 @begin{Discussion}
@@ -5051,6 +5122,11 @@ are done in an arbitrary order.
   for an enumeration literal. AI83-00406 specifies that the evaluation
   of parameters and the elaboration check occur in an arbitrary order.
   AI83-00406 applies to generic instantiation as well (see below).
+
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0014]}
+  @Chg{New=[A subprogram can be completed by a renames-as-body, and we need
+  to make an elaboration check on such a body, so we use
+  @lquotes@;body@rquotes@; rather than @nt{subprogram_body} above.],Old=[]}
 @end{Discussion}
 
 For a call to a protected operation of a protected type
@@ -5152,8 +5228,9 @@ A declaration that requires a second part is said to @i(require completion).
 The second part is called the @i(completion) of the declaration (and of
 the entity declared),
 and is either another declaration, a body, or a @nt<pragma>.
-@Chg{New=[A @i<body>@defn{body} is a @nt<body>,
-an @nt<entry_body>, or a renaming-as-body (see 8.5.4).],Old=[]}
+@Chg{New=[A @i<body>@defn<body> is a @nt<body>,
+an @nt<entry_body>, or a renaming-as-body
+(see @RefSecNum<Subprogram Renaming Declarations>).],Old=[]}
 @begin{Discussion}
 @Leading@keepnext@;Throughout the RM95, there are rules about completions that
 define the following:

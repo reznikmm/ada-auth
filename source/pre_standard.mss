@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/17 03:15:29 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:45 $}
+@Comment{$Date: 2000/08/17 03:15:29 $}
 
 @LabeledClause{The Package Standard}
 
@@ -33,7 +33,7 @@ the visible part of package Standard.}
 @RootLibUnit{Standard}@key[package] Standard @key[is]
    @key[pragma] Pure(Standard);
 
-   @key[type] Boolean @key[is] (False, True);@LangDefType{Package=[Standard],Type=[Boolean]}
+   @key[type] @AdaTypeDefn{Boolean} @key[is] (False, True);
 
 
 @Keepnext   --@RI{ The predefined relational operators for this type are as follows:}
@@ -61,7 +61,7 @@ the visible part of package Standard.}
    --@RI{ The corresponding universal type is universal_integer.}
 
 
-   @key[type] Integer @key[is] @key{range} @RI{implementation-defined};@LangDefType{Package=[Standard],Type=[Integer]}
+   @key[type] @AdaTypeDefn{Integer} @key[is] @key{range} @RI{implementation-defined};
 
 
    @key[subtype] @AdaDefn{Natural}  @key[is] Integer @key[range] 0 .. Integer'Last;
@@ -108,7 +108,7 @@ the visible part of package Standard.}
 
 
 
-   @key[type] Float @key[is] @key{digits} @RI{implementation-defined};@LangDefType{Package=[Standard],Type=[Float]}
+   @key[type] @AdaTypeDefn{Float} @key[is] @key{digits} @RI{implementation-defined};
 
 
 @Keepnext   --@RI{ The predefined operators for this type are as follows:}
@@ -173,7 +173,7 @@ the visible part of package Standard.}
       --@RI{ There are no character literals corresponding to the positions for control characters.}
       --@RI{ They are indicated in italics in this definition. See @refsecnum[Character Types].}
 @comment[blank line]
-   @key[type] Character @key[is]@LangDefType{Package=[Standard],Type=[Character]}
+   @key[type] @AdaTypeDefn{Character} @key[is]
      (@RI[nul],@\@RI[soh],@\@RI[stx],@\@RI[etx],@\@RI[eot],@\@RI[enq],@\@RI[ack],@\@RI[bel],@\--@RI{0 (16#00#) .. 7 (16#07#)}
       @RI[bs],@\@RI[ht],@\@RI[lf],@\@RI[vt],@\@RI[ff],@\@RI[cr],@\@RI[so],@\@RI[si],@\--@RI{8 (16#08#) .. 15 (16#0F#)}
 @comment{blank line}
@@ -228,12 +228,10 @@ the visible part of package Standard.}
    --@RI{ The predefined operators for the type Character are the same as for}
    --@RI{ any enumeration type.}
 @Softpage@;@comment[blank line]
-@comment[blank line]
    --@RI{ The declaration of type Wide_Character is based on the standard ISO 10646 BMP character set.}
    --@RI{ The first 256 positions have the same contents as type Character. See @refsecnum[Character types].}
 @comment[blank line]
-   @key[type] Wide_Character @key[is] (@RI[nul], @RI[soh] ... @RI[FFFE], @RI[FFFF]);
-@comment[blank line]@LangDefType{Package=[Standard],Type=[Wide_Character]}
+   @key[type] @AdaTypeDefn{Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[FFFE], @RI[FFFF]);
 @comment[blank line]
    @key[package] ASCII @key[is] ... @key[end] ASCII;  @RI{--Obsolescent; see @RefSecNum[ASCII]}
 @Defn2{Term=[ASCII], Sec=(package physically nested within the declaration of Standard)}
@@ -241,8 +239,8 @@ the visible part of package Standard.}
 
    --@RI{ Predefined string types:}
 @comment[blank line]
-   @key[type] String @key[is] @key[array](Positive @key[range] <>) @key[of] Character;
-   @key[pragma] Pack(String);@LangDefType{Package=[Standard],Type=[String]}
+   @key[type] @AdaTypeDefn{String} @key[is] @key[array](Positive @key[range] <>) @key[of] Character;
+   @key[pragma] Pack(String);
 
 @Keepnext   --@RI{ The predefined operators for this type are as follows:}
 
@@ -260,13 +258,13 @@ the visible part of package Standard.}
    --     @key[function] "&" (Left: Character; Right: Character) @key[return] String;
 
 
-   @key[type] Wide_String @key[is] @key[array](Positive @key[range] <>) @key[of] Wide_Character;
-   @key[pragma] Pack(Wide_String);@LangDefType{Package=[Standard],Type=[Wide_String]}
+   @key[type] @AdaTypeDefn{Wide_String} @key[is] @key[array](Positive @key[range] <>) @key[of] Wide_Character;
+   @key[pragma] Pack(Wide_String);
 
    --@RI{ The predefined operators for this type correspond to those for String}
 
 
-   @key[type] Duration @key[is] @key[delta] @RI{implementation-defined} @key[range] @RI{implementation-defined};@LangDefType{Package=[Standard],Type=[Duration]}
+   @key[type] @AdaTypeDefn{Duration} @key[is] @key[delta] @RI{implementation-defined} @key[range] @RI{implementation-defined};
 
       --@RI{ The predefined operators for the type Duration are the same as for}
       --@RI{ any fixed point type.}

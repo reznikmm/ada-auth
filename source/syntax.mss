@@ -1,13 +1,12 @@
 @Part(syntax, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:24 $}
+@Comment{$Date: 2000/08/17 03:15:28 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.16 $}
+@comment{$Revision: 1.17 $}
 
-@begin{WithoutParanum}
-@Defn2{Term=[syntax], Sec=(complete listing)}
+@NoParaNum@Defn2{Term=[syntax], Sec=(complete listing)}
 @Defn2{Term=[grammar], Sec=(complete listing)}
 @Defn2{Term=[context free grammar], Sec=(complete listing)}
 @Defn2{Term=[BNF (Backus-Naur Form)], Sec=(complete listing)}
@@ -15,19 +14,16 @@
 This Annex summarizes the complete syntax of the language.
 See @RefSecNum{Method of Description and Syntax Notation}
 for a description of the notation used.
-@end{WithoutParanum}
 
 @SyntaxSummary
 
 @NewPage
-@Heading{Syntax Cross Reference}
+@NoParaNum@Heading{Syntax Cross Reference}
 
-@begin{WithoutParanum}
-@Defn2{Term=[syntax], Sec=(cross reference)}
+@NoParaNum@Defn2{Term=[syntax], Sec=(cross reference)}
 @Defn2{Term=[grammar], Sec=(cross reference)}
 @Defn2{Term=[context free grammar], Sec=(cross reference)}
 @Defn2{Term=[BNF (Backus-Naur Form)], Sec=(cross reference)}
 @Defn2{Term=[Backus-Naur Form (BNF)], Sec=(cross reference)}
-@end{WithoutParanum}
 
 @SyntaxXRef

@@ -1,15 +1,15 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:45 $}
+@Comment{$Date: 2000/08/17 03:15:28 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.18 $}
+@comment{$Revision: 1.19 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
 @begin{StaticSem}
-@Defn2{Term=[representation-oriented attributes],
-        Sec=[of a floating point subtype]}
+@Leading@Defn2{Term=[representation-oriented attributes],
+               Sec=[of a floating point subtype]}
 The following @i{representation-oriented attributes} are defined for
 @PrefixType{every subtype S of a floating point type @i{T}}.
 @begin{Description}
@@ -88,11 +88,6 @@ The values described by the formula in the definition of S'Denorm are called
 @Defn{normalized number}
 A nonzero machine number that is not a denormalized number is a
 @i{normalized number}.
-@begin{Discussion}
-   The intent is that S'Denorm be True when such denormalized numbers exist
-   and are generated in the circumstances defined by IEC 559:1989,
-   though the latter requirement is not formalized here.
-@end{Discussion}
 @Defn{represented in canonical form}
 @Defn{canonical-form representation}
 A normalized number @RI{x} of a given type @i{T} is said to be
@@ -100,6 +95,11 @@ A normalized number @RI{x} of a given type @i{T} is said to be
 canonical form (for the type @i{T}) with a @i{mantissa}
 having @i{T}'Machine_Mantissa digits;
 the resulting form is the @i{canonical-form representation} of @RI{x}.
+@begin{Discussion}
+   The intent is that S'Denorm be True when such denormalized numbers exist
+   and are generated in the circumstances defined by IEC 559:1989,
+   though the latter requirement is not formalized here.
+@end{Discussion}
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Machine_Rounds>,
   Text=[Yields the value True if rounding is performed on inexact
@@ -167,9 +167,11 @@ For every value @RI{x} of a floating point type @i{T}, the
    @i{T}'Machine_Emin.
 @end{Ramification}
 
-@Defn{primitive function}
+@begin{Wide}
+@Leading@Defn{primitive function}
 The following @i{primitive function attributes} are defined for any subtype
 S of a floating point type @i{T}.
+@end{Wide}
 @begin(Description)
 @AttributeLeading{Prefix=<S>, AttrName=<Exponent>,
   Text=[S'Exponent denotes a function with the following
@@ -389,8 +391,7 @@ S of a floating point type @i{T}.
 @end{Ramification}
 
 @AttributeLeading{Prefix=<S>, AttrName=<Copy_Sign>,
-  Text=[S'Copy_Sign denotes a function with the following
-   specification:
+  Text=[S'Copy_Sign denotes a function with the following specification:
 @begin{DescExample}
 @key(function) S'Copy_Sign (@RI{Value}, @RI{Sign} : @RI{T})
   @key(return) @RI{T}
@@ -415,8 +416,7 @@ is outside the base range of S.
 @end{Discussion}
 
 @AttributeLeading{Prefix=<S>, AttrName=<Leading_Part>,
-  Text=[S'Leading_Part denotes a function with the following
-   specification:
+  Text=[S'Leading_Part denotes a function with the following specification:
 @begin{DescExample}
 @key(function) S'Leading_Part (@RI{X} : @RI{T};
                          @RI{Radix_Digits} : @RI{universal_integer})
@@ -452,8 +452,7 @@ is outside the base range of S.
 @end{ImplNote}
 
 @AttributeLeading{Prefix=<S>, AttrName=<Machine>,
-  Text=[S'Machine denotes a function with the following
-   specification:
+  Text=[S'Machine denotes a function with the following specification:
 @begin{DescExample}
 @key(function) S'Machine (@RI{X} : @RI{T})
   @key(return) @RI{T}
@@ -497,10 +496,12 @@ truncating @i{X} to the precision
 @end{ImplNote}
 @end(Description)
 
-@Defn2{Term=[model-oriented attributes],
-        Sec=[of a floating point subtype]}
+@begin{Wide}
+@Leading@Defn2{Term=[model-oriented attributes],
+                Sec=[of a floating point subtype]}
 The following @i{model-oriented attributes} are defined for any subtype S of
 a floating point type @i{T}.
+@end{Wide}
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Model_Mantissa>,
   Text=[If the Numerics Annex is not supported,
@@ -647,8 +648,8 @@ primitive function attributes.
 @LabeledSubClause{Attributes of Fixed Point Types}
 
 @begin{StaticSem}
-@Defn2{Term=[representation-oriented attributes],
-        Sec=[of a fixed point subtype]}
+@Leading@Defn2{Term=[representation-oriented attributes],
+                Sec=[of a fixed point subtype]}
 The following @i{representation-oriented} attributes are defined for
 @PrefixType{every subtype S of a fixed point type @i{T}}.
 @begin{Description}

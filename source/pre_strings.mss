@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:30 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/08/15 01:11:45 $}
+@Comment{$Date: 2000/08/17 03:15:30 $}
 
 @LabeledClause{String Handling}
 
@@ -38,16 +38,11 @@ common to the string handling packages.
 
    @AdaDefn{Length_Error}, @AdaDefn{Pattern_Error}, @AdaDefn{Index_Error}, @AdaDefn{Translation_Error} : @key[exception];
 
-@LangDefType{Package=[Ada.Strings],Type=[Alignment]}
-   @key[type] Alignment  @key[is] (Left, Right, Center);
-@LangDefType{Package=[Ada.Strings],Type=[Truncation]}
-   @key[type] Truncation @key[is] (Left, Right, Error);
-@LangDefType{Package=[Ada.Strings],Type=[Membership]}
-   @key[type] Membership @key[is] (Inside, Outside);
-@LangDefType{Package=[Ada.Strings],Type=[Direction]}
-   @key[type] Direction  @key[is] (Forward, Backward);
-@LangDefType{Package=[Ada.Strings],Type=[Trim_End]}
-   @key[type] Trim_End   @key[is] (Left, Right, Both);
+   @key[type] @AdaTypeDefn{Alignment}  @key[is] (Left, Right, Center);
+   @key[type] @AdaTypeDefn{Truncation} @key[is] (Left, Right, Error);
+   @key[type] @AdaTypeDefn{Membership} @key[is] (Inside, Outside);
+   @key[type] @AdaTypeDefn{Direction}  @key[is] (Forward, Backward);
+   @key[type] @AdaTypeDefn{Trim_End}   @key[is] (Left, Right, Both);
 @key[end] Ada.Strings;
 @end{example}
 @end{StaticSem}
@@ -65,27 +60,24 @@ entities needed for character sets and character-to-character mappings.
    @key[pragma] Preelaborate(Maps);
 
    --@RI{ Representation for a set of character values:}
-@LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Set]}
-   @key[type] Character_Set @key[is] @key[private];
+   @key[type] @AdaTypeDefn{Character_Set} @key[is] @key[private];
 
    @AdaDefn{Null_Set} : @key[constant] Character_Set;
 
-@LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Range]}
-   @key[type] Character_Range @key[is]
+   @key[type] @AdaTypeDefn{Character_Range} @key[is]
      @Key[record]
         Low  : Character;
         High : Character;
      @key[end] @key[record];
    -- @RI[Represents Character range Low..High]
 
-@LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Ranges]}
-   @key[type] Character_Ranges @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Range;
+   @key[type] @AdaTypeDefn{Character_Ranges} @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Range;
 
-   @key[function] @AdaSubDefn{To_Set}    (Ranges : @key[in] Character_Ranges) @key[return] Character_Set;
+   @key[function] @AdaSubDefn{To_Set}    (Ranges : @key[in] Character_Ranges)@key[return] Character_Set;
 
-   @key[function] @AdaSubDefn{To_Set}    (Span   : @key[in] Character_Range)  @key[return] Character_Set;
+   @key[function] @AdaSubDefn{To_Set}    (Span   : @key[in] Character_Range)@key[return] Character_Set;
 
-   @key[function] @AdaSubDefn{To_Ranges} (Set    : @key[in] Character_Set)    @key[return] Character_Ranges;
+   @key[function] @AdaSubDefn{To_Ranges} (Set    : @key[in] Character_Set)  @key[return] Character_Ranges;
 
    @key[function] "="   (Left, Right : @key[in] Character_Set) @key[return] Boolean;
 
@@ -111,16 +103,15 @@ entities needed for character sets and character-to-character mappings.
    --@RI{ Alternative representation for a set of character values:}
    @key[subtype] @AdaDefn{Character_Sequence} @key[is] String;
 
-   @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Character_Sequence) @key[return] Character_Set;
+   @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Character_Sequence)@key[return] Character_Set;
 
-   @key[function] @AdaSubDefn{To_Set} (Singleton : @key[in] Character)          @key[return] Character_Set;
+   @key[function] @AdaSubDefn{To_Set} (Singleton : @key[in] Character)     @key[return] Character_Set;
 
-   @key[function] @AdaSubDefn{To_Sequence} (Set  : @key[in] Character_Set)      @key[return] Character_Sequence;
+   @key[function] @AdaSubDefn{To_Sequence} (Set  : @key[in] Character_Set) @key[return] Character_Sequence;
 
 
    --@RI{ Representation for a character to character mapping:}
-@LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Mapping]}
-   @key[type] Character_Mapping @key[is] @key[private];
+   @key[type] @AdaTypeDefn{Character_Mapping} @key[is] @key[private];
 
    @key[function] @AdaSubDefn{Value} (Map     : @key[in] Character_Mapping;
                    Element : @key[in] Character)
@@ -128,13 +119,15 @@ entities needed for character sets and character-to-character mappings.
 
    @AdaDefn{Identity} : @key[constant] Character_Mapping;
 
-   @key[function] @AdaSubDefn{To_Mapping} (From, To : @key[in] Character_Sequence) @key[return] Character_Mapping;
+   @key[function] @AdaSubDefn{To_Mapping} (From, To : @key[in] Character_Sequence)
+      @key[return] Character_Mapping;
 
-   @key[function] @AdaSubDefn{To_Domain} (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
-   @key[function] @AdaSubDefn{To_Range}  (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
+   @key[function] @AdaSubDefn{To_Domain} (Map : @key[in] Character_Mapping)
+      @key[return] Character_Sequence;
+   @key[function] @AdaSubDefn{To_Range}  (Map : @key[in] Character_Mapping)
+      @key[return] Character_Sequence;
 
-@LangDefType{Package=[Ada.Strings.Maps],Type=[Character_Mapping_Function]}
-   @key{type} Character_Mapping_Function @key{is}
+   @key{type} @AdaTypeDefn{Character_Mapping_Function} @key{is}
       @key{access} @key{function} (From : @key{in} Character) @key{return} Character;
 
 @key[private]
@@ -142,10 +135,9 @@ entities needed for character sets and character-to-character mappings.
 @key[end] Ada.Strings.Maps;
 @end{example}
 
-An object of type Character_Set represents a set of
-characters.
+An object of type Character_Set represents a set of characters.
 
-Null_Set  represents the set containing no characters.
+Null_Set represents the set containing no characters.
 
 An object Obj of type Character_Range represents the set of characters
 in the range Obj.Low .. Obj.High.
@@ -153,19 +145,18 @@ in the range Obj.Low .. Obj.High.
 An object Obj of type Character_Ranges represents the
 union of the sets corresponding to Obj(I) for I in Obj'Range.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] To_Set (Ranges : @key[in] Character_Ranges) @key[return] Character_Set;
 @end{Example}
 
-
 If Ranges'Length=0 then Null_Set is returned;
 otherwise the returned value represents the set corresponding to Ranges.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] To_Set (Span : @key[in] Character_Range) @key[return] Character_Set;
 @end{Example}
 
 The returned value represents the set containing each character in Span.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] To_Ranges (Set : @key[in] Character_Set) @key[return] Character_Ranges;
 @end{Example}
 
@@ -173,7 +164,7 @@ If Set = Null_Set then an empty Character_Ranges array is returned;
 otherwise
 the shortest array of contiguous ranges of Character
 values in Set, in increasing order of Low, is returned.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] "=" (Left, Right : @key[in] Character_Set) @key[return] Boolean;
 @end{Example}
 
@@ -190,14 +181,14 @@ of the operator.
 @begin{reason}
 The set minus operator is provided for efficiency.@end{reason}
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Is_In (Element : @key[in] Character;
                 Set     : @key[in] Character_Set);
    @key[return] Boolean;
 @end{Example}
 
 Is_In returns True if Element is in Set, and False otherwise.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Is_Subset (Elements : @key[in] Character_Set;
                     Set      : @key[in] Character_Set)
    @key[return] Boolean;
@@ -205,7 +196,7 @@ Is_In returns True if Element is in Set, and False otherwise.
 
 Is_Subset returns True if
 Elements is a subset of Set, and False otherwise.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[subtype] Character_Sequence @key[is] String;
 @end{Example}
 
@@ -218,9 +209,8 @@ could have been used for the parameter to To_Set and To_Mapping
 below @em the use of a differently named subtype identifies the intended
 purpose of the parameter.
 @end{reason}
-@begin{Example}
-@key[function] To_Set (Sequence  : @key[in] Character_Sequence) @key[return] Character_Set;
-
+@begin{Example}@Keepnext
+@key[function] To_Set (Sequence  : @key[in] Character_Sequence) @key[return] Character_Set;@*
 @key[function] To_Set (Singleton : @key[in] Character)          @key[return] Character_Set;
 @end{Example}
 
@@ -230,20 +220,20 @@ Singleton portrays the set comprising a single Character.
 Each of the To_Set functions
 returns a Character_Set value that represents
 the set portrayed by Sequence or Singleton.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] To_Sequence (Set : @key[in] Character_Set) @key[return] Character_Sequence;
 @end{Example}
 
 The function To_Sequence returns a Character_Sequence value
 containing each of the characters in the set represented by Set, in
 ascending order with no duplicates.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[type] Character_Mapping @key[is] @key[private];
 @end{Example}
 
 An object  of type Character_Mapping represents a
 Character-to-Character mapping.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Value (Map     : @key[in] Character_Mapping;
                 Element : @key[in] Character)
    @key[return] Character;
@@ -276,13 +266,14 @@ the pattern string P.
 String handling subprograms that deal with character mappings have
 parameters whose type is Character_Mapping.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 Identity : @key[constant] Character_Mapping;
 @end{Example}
 
    Identity maps each Character to itself.
-@begin{Example}
-@key[function] To_Mapping (From, To : @key[in] Character_Sequence) @key[return] Character_Mapping;
+@begin{Example}@Keepnext
+@key[function] To_Mapping (From, To : @key[in] Character_Sequence)
+    @key[return] Character_Mapping;
 @end{Example}
 
 To_Mapping produces a Character_Mapping such that
@@ -291,7 +282,7 @@ each element of From maps to the corresponding element of To,
     If From'Length /= To'Length, or
      if some character is repeated in From, then Translation_Error
      is propagated.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] To_Domain (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
 @end{Example}
 
@@ -299,15 +290,12 @@ To_Domain returns the shortest Character_Sequence value D such that
 each character not in D maps to itself, and such that
 the characters in D are in ascending order.
 The lower bound of D is 1.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] To_Range  (Map : @key[in] Character_Mapping) @key[return] Character_Sequence;
 @end{Example}
 
 To_Range returns the Character_Sequence value R, with lower bound 1
-
-and upper bound Map'Length,
-
-such that if
+and upper bound Map'Length, such that if
 D = To_Domain(Map) then
 D(I) maps to R(I) for each I in D'Range.
 @end{DescribeCode}
@@ -439,7 +427,7 @@ procedures.
                          Last   : @key[out] Natural);
 
 
---@RI{ String translation subprograms}
+@Keepnext@;--@RI{ String translation subprograms}
 
    @key[function] @AdaSubDefn{Translate} (Source  : @key[in] String;
                        Mapping : @key[in] Maps.Character_Mapping)
@@ -456,7 +444,7 @@ procedures.
    @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] String;
                         Mapping : @key[in] Maps.Character_Mapping_Function);
 
---@RI{ String transformation subprograms}
+@Keepnext@;--@RI{ String transformation subprograms}
 
    @key[function] @AdaSubDefn{Replace_Slice} (Source   : @key[in] String;
                            Low      : @key[in] Positive;
@@ -561,7 +549,7 @@ procedures.
 
 The effects of the above subprograms are as follows.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Move (Source  : @key[in]  String;
                 Target  : @key[out] String;
                 Drop    : @key[in]  Truncation := Error;
@@ -601,7 +589,7 @@ of Source are copied into Target.
 @Leading@;If Drop=Error, then the effect depends on the value of the Justify
 parameter and also on whether any characters in Source other than
 Pad would fail to be copied:
-@begin{itemize}
+@begin{inneritemize}
 If Justify=Left, and if each of the rightmost Source'Length-Target'Length
 characters in Source is Pad, then the leftmost Target'Length characters
 of Source are copied to Target.
@@ -611,7 +599,7 @@ characters in Source is Pad, then the rightmost Target'Length characters
 of Source are copied to Target.
 
 Otherwise, Length_Error is propagated.
-@end{itemize}
+@end{inneritemize}
 @end{itemize}
 @begin{ramification}
 The Move procedure will work even if Source and Target
@@ -620,14 +608,13 @@ overlap.@end{ramification}
 The order of parameters (Source before Target) corresponds to
 the order in COBOL's MOVE verb.@end{reason}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Index (Source   : @key[in] String;
                 Pattern  : @key[in] String;
                 Going    : @key[in] Direction := Forward;
                 Mapping  : @key[in] Maps.Character_Mapping
                               := Maps.Identity)
-   @key[return] Natural;
-
+   @key[return] Natural;@*
 @key[function] Index (Source   : @key[in] String;
                 Pattern  : @key[in] String;
                 Going    : @key[in] Direction := Forward;
@@ -654,7 +641,7 @@ a call would be ambiguous since there is also a default for
 the Mapping parameter that is a Character_Mapping.
 @end{discussion}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Index (Source : @key[in] String;
                 Set    : @key[in] Maps.Character_Set;
                 Test   : @key[in] Membership := Inside;
@@ -670,7 +657,7 @@ It returns the smallest index I (if Going=Forward) or the largest index I
 Source(I) satisfies the Test condition with respect to Set;
 it returns 0 if there is no such Character in Source.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Index_Non_Blank (Source : @key[in] String;
                           Going  : @key[in] Direction := Forward)
    @key[return] Natural;
@@ -678,13 +665,12 @@ it returns 0 if there is no such Character in Source.
 
 Returns Index(Source, Maps.To_Set(Space), Outside, Going)
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Count (Source   : @key[in] String;
                 Pattern  : @key[in] String;
                 Mapping  : @key[in] Maps.Character_Mapping
                              := Maps.Identity)
-   @key[return] Natural;
-
+   @key[return] Natural;@*
 @key[function] Count (Source   : @key[in] String;
                 Pattern  : @key[in] String;
                 Mapping  : @key[in] Maps.Character_Mapping_Function)
@@ -704,7 +690,7 @@ that the pattern match starts either at the low index or the high index
 position.
 @end{reason}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Count (Source   : @key[in] String;
                 Set      : @key[in] Maps.Character_Set)
    @key[return] Natural;
@@ -713,7 +699,7 @@ position.
 Returns the number of occurrences in Source of characters that
 are in Set.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Find_Token (Source : @key[in] String;
                       Set    : @key[in] Maps.Character_Set;
                       Test   : @key[in] Membership;
@@ -729,11 +715,10 @@ Find_Token returns in First and Last the indices of the beginning and
 If no such slice exists, then the value returned for Last is zero, and
 the value returned for First is Source'First.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Translate (Source  : @key[in] String;
                     Mapping : @key[in] Maps.Character_Mapping)
-   @key[return] String;
-
+   @key[return] String;@*
 @key[function] Translate (Source  : @key[in] String;
                     Mapping : @key[in] Maps.Character_Mapping_Function)
    @key[return] String;
@@ -745,17 +730,16 @@ that S(I) is the character to which Mapping maps the corresponding
 element of Source, for I in 1..Source'Length.
 
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Translate (Source  : @key[in] @key[out] String;
-                     Mapping : @key[in] Maps.Character_Mapping);
-
+                     Mapping : @key[in] Maps.Character_Mapping);@*
 @key[procedure] Translate (Source  : @key[in] @key[out] String;
                      Mapping : @key[in] Maps.Character_Mapping_Function);
 @end{Example}
 
 Equivalent to Source := Translate(Source, Mapping).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Replace_Slice (Source   : @key[in] String;
                         Low      : @key[in] Positive;
                         High     : @key[in] Natural;
@@ -771,7 +755,7 @@ Otherwise, if High >= Low then the returned string
 and if High < Low then the returned string is
 Insert(Source, Before=>Low, New_Item=>By).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Replace_Slice (Source   : @key[in] @key[out] String;
                          Low      : @key[in] Positive;
                          High     : @key[in] Natural;
@@ -784,7 +768,7 @@ Insert(Source, Before=>Low, New_Item=>By).
 Equivalent to Move(Replace_Slice(Source, Low, High,
 By), Source, Drop, Justify, Pad).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Insert (Source   : @key[in] String;
                  Before   : @key[in] Positive;
                  New_Item : @key[in] String)
@@ -797,7 +781,7 @@ returns Source(Source'First..Before@en@;1) & New_Item &
 Source(Before..Source'Last), but with lower bound 1.
 
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Insert (Source   : @key[in] @key[out] String;
                   Before   : @key[in] Positive;
                   New_Item : @key[in] String;
@@ -806,7 +790,7 @@ Source(Before..Source'Last), but with lower bound 1.
 
 Equivalent to Move(Insert(Source, Before, New_Item), Source, Drop).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Overwrite (Source   : @key[in] String;
                     Position : @key[in] Positive;
                     New_Item : @key[in] String)
@@ -821,7 +805,7 @@ New_Item. If the end of Source is reached before the characters in
 New_Item are exhausted, the remaining characters from New_Item are
 appended to the string.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Overwrite (Source   : @key[in] @key[out] String;
                      Position : @key[in] Positive;
                      New_Item : @key[in] String;
@@ -831,7 +815,7 @@ appended to the string.
 Equivalent to Move(Overwrite(Source, Position,
 New_Item), Source, Drop).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Delete (Source  : @key[in] String;
                  From    : @key[in] Positive;
                  Through : @key[in] Natural)
@@ -841,7 +825,7 @@ New_Item), Source, Drop).
 If From <= Through, the returned string is Replace_Slice(Source, From,
 Through, ""), otherwise it is Source.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Delete (Source  : @key[in] @key[out] String;
                   From    : @key[in] Positive;
                   Through : @key[in] Natural;
@@ -852,7 +836,7 @@ Through, ""), otherwise it is Source.
 Equivalent to Move(Delete(Source, From, Through),
 Source, Justify => Justify, Pad => Pad).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Trim (Source : @key[in] String;
                Side   : @key[in] Trim_End)
   @key[return] String;
@@ -863,7 +847,7 @@ characters (if Side = Left), all trailing Space characters
 (if Side = Right), or all leading and trailing Space characters
 (if Side = Both).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Trim (Source  : @key[in] @key[out] String;
                 Side    : @key[in] Trim_End;
                 Justify : @key[in] Alignment := Left;
@@ -872,7 +856,7 @@ characters (if Side = Left), all trailing Space characters
 
 Equivalent to Move(Trim(Source, Side), Source, Justify=>Justify, Pad=>Pad).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Trim (Source : @key[in] String;
                Left   : @key[in] Maps.Character_Set;
                Right  : @key[in] Maps.Character_Set)
@@ -883,7 +867,7 @@ Returns the string obtained by removing from Source all leading characters
 in Left and all
 trailing characters in Right.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Trim (Source  : @key[in] @key[out] String;
                 Left    : @key[in] Maps.Character_Set;
                 Right   : @key[in] Maps.Character_Set;
@@ -894,7 +878,7 @@ trailing characters in Right.
 Equivalent to Move(Trim(Source, Left, Right), Source,
 Justify => Justify, Pad=>Pad).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Head (Source : @key[in] String;
                Count  : @key[in] Natural;
                Pad    : @key[in] Character := Space)
@@ -905,7 +889,7 @@ Returns a string of length Count. If Count <= Source'Length, the string
 comprises the first Count characters of Source. Otherwise its contents
 are Source concatenated with Count@en@;Source'Length Pad characters.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Head (Source  : @key[in] @key[out] String;
                 Count   : @key[in] Natural;
                 Justify : @key[in] Alignment := Left;
@@ -915,7 +899,7 @@ are Source concatenated with Count@en@;Source'Length Pad characters.
 Equivalent to Move(Head(Source, Count, Pad), Source, Drop=>Error,
 Justify=>Justify, Pad=>Pad).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Tail (Source : @key[in] String;
                Count  : @key[in] Natural;
                Pad    : @key[in] Character := Space)
@@ -926,7 +910,7 @@ Returns a string of length Count. If Count <= Source'Length, the string
 comprises the last Count characters of Source. Otherwise its contents
 are Count-Source'Length Pad characters concatenated with Source.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Tail (Source  : @key[in] @key[out] String;
                 Count   : @key[in] Natural;
                 Justify : @key[in] Alignment := Left;
@@ -936,10 +920,9 @@ are Count-Source'Length Pad characters concatenated with Source.
 Equivalent to Move(Tail(Source, Count, Pad), Source, Drop=>Error,
 Justify=>Justify, Pad=>Pad).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] "*" (Left  : @key[in] Natural;
-              Right : @key[in] Character) @key[return] String;
-
+              Right : @key[in] Character) @key[return] String;@*
 @key[function] "*" (Left  : @key[in] Natural;
               Right : @key[in] String) @key[return] String;
 @end{Example}
@@ -1005,12 +988,11 @@ the copying and comparison of bounded strings.@end{reason}
 
    @key[generic]
       Max   : Positive;    --@RI{ Maximum length of a Bounded_String}
-   @key[package] Generic_Bounded_Length @key[is]
+   @key[package] @AdaDefn{Generic_Bounded_Length} @key[is]
 
       @AdaDefn{Max_Length} : @key[constant] Positive := Max;
 
-@LangDefType{Package=[Ada.Strings.Bounded.Generic_Bounded_Length],Type=[Bounded_String]}
-      @key[type] Bounded_String @key[is] @key[private];
+      @key[type] @AdaTypeDefn{Bounded_String} @key[is] @key[private];
 
       @AdaDefn{Null_Bounded_String} : @key[constant] Bounded_String;
 
@@ -1182,7 +1164,7 @@ the copying and comparison of bounded strings.@end{reason}
                             First  : @key[out] Positive;
                             Last   : @key[out] Natural);
 
-   --@RI{ String translation subprograms}
+@Keepnext@;   --@RI{ String translation subprograms}
 
       @key[function] @AdaSubDefn{Translate} (Source  : @key[in] Bounded_String;
                           Mapping : @key[in] Maps.Character_Mapping)
@@ -1199,7 +1181,7 @@ the copying and comparison of bounded strings.@end{reason}
       @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] Bounded_String;
                            Mapping : @key[in] Maps.Character_Mapping_Function);
 
-   --@RI{ String transformation subprograms}
+@Keepnext@;   --@RI{ String transformation subprograms}
 
       @key[function] @AdaSubDefn{Replace_Slice} (Source   : @key[in] Bounded_String;
                               Low      : @key[in] Positive;
@@ -1328,13 +1310,13 @@ Null_Bounded_String represents the null string.
 If an object of type Bounded_String is not otherwise initialized, it
 will be initialized to the same value as Null_Bounded_String.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Length (Source : @key[in] Bounded_String) @key[return] Length_Range;
 @end{Example}
 
 The Length function returns the length of the string represented by Source.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] To_Bounded_String (Source : @key[in] String;
                             Drop   : @key[in] Truncation := Error)
    @key[return] Bounded_String;
@@ -1355,7 +1337,7 @@ the leftmost Max_Length characters of Source.
 If Drop=Error, then Strings.Length_Error is propagated.
 @end{itemize}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] To_String (Source : @key[in] Bounded_String) @key[return] String;
 @end{Example}
 
@@ -1376,7 +1358,7 @@ Append(Source, New_Item, Drop).
 Each of the "&" functions has the same effect as the corresponding
 Append function, with Error as the Drop parameter.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Element (Source : @key[in] Bounded_String;
                   Index  : @key[in] Positive)
    @key[return] Character;
@@ -1385,7 +1367,7 @@ Append function, with Error as the Drop parameter.
 Returns the character at position Index in the string represented by Source;
 propagates Index_Error if Index > Length(Source).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Replace_Element (Source : @key[in] @key[out] Bounded_String;
                            Index  : @key[in] Positive;
                            By     : @key[in] Character);
@@ -1395,7 +1377,7 @@ Updates Source such that the character at position Index in the string
 represented by Source is By;
 propagates Index_Error if Index > Length(Source).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Slice (Source : @key[in] Bounded_String;
                 Low    : @key[in] Positive;
                 High   : @key[in] Natural)
@@ -1498,16 +1480,13 @@ as the length does not exceed the allocated length.
 @ChildUnit{Parent=[Ada.Strings],Child=[Unbounded]}@key[package] Ada.Strings.Unbounded @key[is]
    @key[pragma] Preelaborate(Unbounded);
 
-@LangDefType{Package=[Ada.Strings.Unbounded],Type=[Unbounded_String]}
-   @key[type] Unbounded_String @key[is] @key[private];
+   @key[type] @AdaTypeDefn{Unbounded_String} @key[is] @key[private];
 
    @AdaDefn{Null_Unbounded_String} : @key[constant] Unbounded_String;
 
    @key[function] @AdaSubDefn{Length} (Source : @key[in] Unbounded_String) @key[return] Natural;
 
-
-@LangDefType{Package=[Ada.Strings.Unbounded],Type=[Unbounded_String]}
-   @key[type] String_Access @key[is] @key[access] @key[all] String;
+   @key[type] @AdaTypeDefn{String_Access} @key[is] @key[access] @key[all] String;
    @key[procedure] @AdaSubDefn{Free} (X : @key[in] @key[out] String_Access);
 
 --@RI{ Conversion, Concatenation, and Selection functions}
@@ -1651,7 +1630,7 @@ as the length does not exceed the allocated length.
                          Last   : @key[out] Natural);
 
 
---@RI{ String translation subprograms}
+@Keepnext@;--@RI{ String translation subprograms}
 
    @key[function] @AdaSubDefn{Translate} (Source  : @key[in] Unbounded_String;
                        Mapping : @key[in] Maps.Character_Mapping)
@@ -1667,7 +1646,7 @@ as the length does not exceed the allocated length.
    @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] Unbounded_String;
                         Mapping : @key[in] Maps.Character_Mapping_Function);
 
---@RI{ String transformation subprograms}
+@Keepnext@;--@RI{ String transformation subprograms}
 
    @key[function] @AdaSubDefn{Replace_Slice} (Source   : @key[in] Unbounded_String;
                            Low      : @key[in] Positive;
@@ -1897,11 +1876,9 @@ character mapping in Characters.Handling
 
 @begin{Intro}
 Facilities for handling strings of Wide_Character elements are
-found in the packages Strings.Wide_Maps, Strings.Wide_Fixed,
-Strings.Wide_Bounded, Strings.Wide_Unbounded,
-
-and Strings.Wide_Maps.Wide_Constants.
-
+found in the packages Strings.@!Wide_Maps, Strings.@!Wide_Fixed,
+Strings.@!Wide_@!Bounded, Strings.@!Wide_@!Unbounded,
+and Strings.@!Wide_Maps.@!Wide_@!Constants.
 They provide the same string-handling operations
 as the corresponding packages for
 strings of Character elements.
@@ -1920,35 +1897,41 @@ The package Strings.Wide_Maps has the following declaration.
    @key[pragma] Preelaborate(Wide_Maps);
 
    --@RI{ Representation for a set of Wide_Character values:}
-@LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Set]}
-   @key[type] Wide_Character_Set @key[is] @key[private];
+   @key[type] @AdaTypeDefn{Wide_Character_Set} @key[is] @key[private];
 
    @AdaDefn{Null_Set} : @key[constant] Wide_Character_Set;
 
-@LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Range]}
-   @key[type] Wide_Character_Range @key[is]
+   @key[type] @AdaTypeDefn{Wide_Character_Range} @key[is]
      @key[record]
          Low  : Wide_Character;
          High : Wide_Character;
      @key[end] @key[record];
    -- @RI{Represents Wide_Character range Low..High}
 
-@LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Ranges]}
-   @key[type] Wide_Character_Ranges @key[is] @key[array] (Positive @key[range] <>) @key[of] Wide_Character_Range;
+   @key[type] @AdaTypeDefn{Wide_Character_Ranges} @key[is] @key[array] (Positive @key[range] <>)
+      @key[of] Wide_Character_Range;
 
-   @key[function] @AdaSubDefn{To_Set}    (Ranges : @key[in] Wide_Character_Ranges) @key[return] Wide_Character_Set;
+   @key[function] @AdaSubDefn{To_Set}    (Ranges : @key[in] Wide_Character_Ranges)
+      @key[return] Wide_Character_Set;
 
-   @key[function] @AdaSubDefn{To_Set}    (Span   : @key[in] Wide_Character_Range)  @key[return] Wide_Character_Set;
+   @key[function] @AdaSubDefn{To_Set}    (Span   : @key[in] Wide_Character_Range)
+      @key[return] Wide_Character_Set;
 
-   @key[function] @AdaSubDefn{To_Ranges} (Set    : @key[in] Wide_Character_Set)    @key[return] Wide_Character_Ranges;
+   @key[function] @AdaSubDefn{To_Ranges} (Set    : @key[in] Wide_Character_Set)
+      @key[return] Wide_Character_Ranges;
 
    @key[function] "="   (Left, Right : @key[in] Wide_Character_Set) @key[return] Boolean;
 
-   @key[function] "@key[not]" (Right : @key[in] Wide_Character_Set)       @key[return] Wide_Character_Set;
-   @key[function] "@key[and]" (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
-   @key[function] "@key[or]"  (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
-   @key[function] "@key[xor]" (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
-   @key[function] "@key[@en]"   (Left, Right : @key[in] Wide_Character_Set) @key[return] Wide_Character_Set;
+   @key[function] "@key[not]" (Right : @key[in] Wide_Character_Set)
+      @key[return] Wide_Character_Set;
+   @key[function] "@key[and]" (Left, Right : @key[in] Wide_Character_Set)
+      @key[return] Wide_Character_Set;
+   @key[function] "@key[or]"  (Left, Right : @key[in] Wide_Character_Set)
+      @key[return] Wide_Character_Set;
+   @key[function] "@key[xor]" (Left, Right : @key[in] Wide_Character_Set)
+      @key[return] Wide_Character_Set;
+   @key[function] "@key[@en]"   (Left, Right : @key[in] Wide_Character_Set)
+      @key[return] Wide_Character_Set;
 
    @key[function] @AdaSubDefn{Is_In} (Element : @key[in] Wide_Character;
                    Set     : @key[in] Wide_Character_Set)
@@ -1966,16 +1949,18 @@ The package Strings.Wide_Maps has the following declaration.
    --@RI{ Alternative representation for a set of Wide_Character values:}
    @key[subtype] @AdaDefn{Wide_Character_Sequence} @key[is] Wide_String;
 
-   @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Wide_Character_Sequence) @key[return] Wide_Character_Set;
+   @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Wide_Character_Sequence)
+      @key[return] Wide_Character_Set;
 
-   @key[function] @AdaSubDefn{To_Set} (Singleton : @key[in] Wide_Character) @key[return] Wide_Character_Set;
+   @key[function] @AdaSubDefn{To_Set} (Singleton : @key[in] Wide_Character)
+      @key[return] Wide_Character_Set;
 
-   @key[function] @AdaSubDefn{To_Sequence} (Set  : @key[in] Wide_Character_Set) @key[return] Wide_Character_Sequence;
+   @key[function] @AdaSubDefn{To_Sequence} (Set  : @key[in] Wide_Character_Set)
+      @key[return] Wide_Character_Sequence;
 
 
    --@RI{ Representation for a Wide_Character to Wide_Character mapping:}
-@LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Mapping]}
-   @key[type] Wide_Character_Mapping @key[is] @key[private];
+   @key[type] @AdaTypeDefn{Wide_Character_Mapping} @key[is] @key[private];
 
    @key[function] @AdaSubDefn{Value} (Map     : @key[in] Wide_Character_Mapping;
                    Element : @key[in] Wide_Character)
@@ -1993,8 +1978,7 @@ The package Strings.Wide_Maps has the following declaration.
       @key[return] Wide_Character_Sequence;
 
 
-@LangDefType{Package=[Ada.Strings.Wide_Maps],Type=[Wide_Character_Mapping_Function]}
-   @key{type} Wide_Character_Mapping_Function @key{is}
+   @key{type} @AdaTypeDefn{Wide_Character_Mapping_Function} @key{is}
       @key{access} @key{function} (From : @key{in} Wide_Character) @key{return} Wide_Character;
 
 @key[private]
@@ -2007,10 +1991,10 @@ The package Strings.Wide_Maps has the following declaration.
 The context clause for each of the packages Strings.Wide_Fixed,
 Strings.Wide_Bounded, and Strings.Wide_Unbounded
 identifies Strings.Wide_Maps instead of Strings.Maps.
-For each of the packages Strings.Fixed, Strings.Bounded,
+
+@Leading@;For each of the packages Strings.Fixed, Strings.Bounded,
 Strings.Unbounded, and Strings.Maps.Constants
-the corresponding wide string package has
-the same contents except that
+the corresponding wide string package has the same contents except that
 @begin{itemize}
 Wide_Space replaces Space
 

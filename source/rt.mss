@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/08/15 01:11:45 $}
+@Comment{$Date: 2000/08/17 03:15:27 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -993,8 +993,7 @@ modified or queried at run time.]
 @begin{Example}
 @key[with] System;
 @key[with] Ada.Task_Identification; @RI{-- See @RefSecNum[The Package Task_Identification]}
-@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}
-@key[package] Ada.Dynamic_Priorities @key[is]
+@key[package] Ada.Dynamic_Priorities @key[is]@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}
 
     @key[procedure] @AdaSubDefn{Set_Priority}(Priority : @key[in] System.Any_Priority;
                            T : @key[in] Ada.Task_Identification.Task_ID :=
@@ -1416,19 +1415,16 @@ monotonic clock package.]
 @begin{StaticSem}
 @Leading@;The following language-defined library package exists:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Real_Time]}
-@key[package] Ada.Real_Time @key[is]
+@key[package] Ada.Real_Time @key[is]@ChildUnit{Parent=[Ada],Child=[Real_Time]}
 
-@LangDefType{Package=[Ada.Real_Time],Type=[Time]}
-  @key[type] Time @key[is] @key[private];
+  @key[type] @AdaTypeDefn{Time} @key[is] @key[private];
   @AdaDefn{Time_First} : @key[constant] Time;
   @AdaDefn{Time_Last} : @key[constant] Time;
   @AdaDefn{Time_Unit} : @key[constant] := @RI{implementation-defined-real-number};
 
 
 
-@LangDefType{Package=[Ada.Real_Time],Type=[Time_Span]}
-  @key[type] Time_Span @key[is] @key[private];
+  @key[type] @AdaTypeDefn{Time_Span} @key[is] @key[private];
   @AdaDefn{Time_Span_First} : @key[constant] Time_Span;
   @AdaDefn{Time_Span_Last} : @key[constant] Time_Span;
   @AdaDefn{Time_Span_Zero} : @key[constant] Time_Span;
@@ -1476,8 +1472,7 @@ monotonic clock package.]
   @key[function] @AdaSubDefn{Microseconds} (US : Integer) @key{return} Time_Span;
   @key[function] @AdaSubDefn{Milliseconds} (MS : Integer) @key{return} Time_Span;
 
-@LangDefType{Package=[Ada.Real_Time],Type=[Seconds_Count]}
-  @key[type] Seconds_Count @key[is] @key[range] @RI{implementation-defined};
+  @key[type] @AdaTypeDefn{Seconds_Count} @key[is] @key[range] @RI{implementation-defined};
 
   @key{procedure} @AdaSubDefn{Split}(T : @key{in} Time; SC : @key{out} Seconds_Count; TS : @key{out} Time_Span);
   @key{function} @AdaSubDefn{Time_Of}(SC : Seconds_Count; TS : Time_Span) @key{return} Time;
@@ -1901,11 +1896,9 @@ queues.]
 
 @Leading@;The following language-defined package exists:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Synchronous_Task_Control]}
-@key{package} Ada.Synchronous_Task_Control @key{is}
+@key{package} Ada.Synchronous_Task_Control @key{is}@ChildUnit{Parent=[Ada],Child=[Synchronous_Task_Control]}
 
-@LangDefType{Package=[Ada.Synchronous_Task_Control],Type=[Suspension_Object]}
-  @key{type} Suspension_Object @key{is} @key{limited} @key{private};
+  @key{type} @AdaTypeDefn{Suspension_Object} @key{is} @key{limited} @key{private};
   @key{procedure} @AdaSubDefn{Set_True}(S : @key{in} @key{out} Suspension_Object);
   @key{procedure} @AdaSubDefn{Set_False}(S : @key{in} @key{out} Suspension_Object);
   @key{function} @AdaSubDefn{Current_State}(S : Suspension_Object) @key{return} Boolean;
@@ -1977,8 +1970,7 @@ It uses a conceptual @i{held priority} value to represent the task's
 @Leading@;The following language-defined library package exists:
 @begin{example}
 @key{with} Ada.Task_Identification;
-@ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}
-@key{package} Ada.Asynchronous_Task_Control @key{is}
+@key{package} Ada.Asynchronous_Task_Control @key{is}@ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}
   @key{procedure} @AdaSubDefn{Hold}(T : @key[in] Ada.Task_Identification.Task_ID);
   @key{procedure} @AdaSubDefn{Continue}(T : @key[in] Ada.Task_Identification.Task_ID);
   @key{function} @AdaSubDefn{Is_Held}(T : Ada.Task_Identification.Task_ID)

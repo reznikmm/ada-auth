@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/12 00:40:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/08/12 00:40:17 $}
+@Comment{$Date: 2000/08/17 03:15:27 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1421,16 +1421,13 @@ interface to implement remote subprogram calls.
 @leading@keepnext@;The following language-defined library package exists:
 @begin{example}
 @b(with) Ada.Streams; @RI{-- see @RefSecNum[The Package Streams]}
-@ChildUnit{Parent=[System],Child=[RPC]}
-@key(package) System.RPC @key(is)
+@key(package) System.RPC @key(is)@ChildUnit{Parent=[System],Child=[RPC]}
 
-@LangDefType{Package=[System.RPC],Type=[Partition_ID]}
-   @key(type) Partition_ID @key(is range) 0 .. @RI(implementation-defined);
+   @key(type) @AdaTypeDefn{Partition_ID} @key(is range) 0 .. @RI(implementation-defined);
 
    @AdaDefn{Communication_Error} : @key(exception);
 
-@LangDefType{Package=[System.RPC],Type=[Params_Stream_Type]}
-   @key(type) Params_Stream_Type(
+   @key(type) @AdaTypeDefn{Params_Stream_Type} (
       Initial_Size : Ada.Streams.Stream_Element_Count) @key(is) @key(new)
       Ada.Streams.Root_Stream_Type @key(with) @key(private);
 
@@ -1456,8 +1453,7 @@ interface to implement remote subprogram calls.
       Params     : @key(access) Params_Stream_Type);
 
    @RI(-- The handler for incoming RPCs)
-@LangDefType{Package=[System.RPC],Type=[RPC_Receiver]}
-   @key(type) RPC_Receiver @key(is access procedure)(
+   @key(type) @AdaTypeDefn{RPC_Receiver} @key(is access procedure)(
       Params     : @key(access) Params_Stream_Type;
       Result     : @key(access) Params_Stream_Type);
 

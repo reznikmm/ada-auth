@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:15 $}
+@Comment{$Date: 2000/08/17 03:15:26 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -697,22 +697,26 @@ of the evaluation of the @nt{prefix}.
 @end{RunTime}
 
 @begin{ImplPerm}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0015]}
 An implementation may provide implementation-defined attributes;
-the @nt{identifier}
-for an implementation-defined
-attribute shall differ from those of the language-defined attributes.
+the @nt{identifier} for an implementation-defined
+attribute shall differ from those of the language-defined
+attributes@Chg{New=[ unless supplied for compatibility with a previous edition of
+this International Standard],Old=[]}.
 @ImplDef{Implementation-defined attributes.}
 @begin{Ramification}
 They cannot be reserved words because reserved words are not legal
 identifiers.
 
-
 The semantics of implementation-defined attributes,
-and any associated rules,
-are, of course, implementation defined.
+and any associated rules, are, of course, implementation defined.
 For example, the implementation defines whether a given
 implementation-defined attribute can be used in a static expression.
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0015]}
+@Chg{New=[Implementations are allowed to support the Small attribute for
+floating types, as this was defined in Ada 83, even though the name would
+conflict with a language-defined attribute.],Old=[]}
 @end{Ramification}
 @end{ImplPerm}
 
@@ -2600,11 +2604,9 @@ are convertible, rather than being the same.
 the result of the predefined equals operator for composite types (other than
 for those composite types covered earlier) is defined as follows:
 @begin(Itemize)
-  If there are no components,
-  the result is defined to be True;
+  If there are no components, the result is defined to be True;
 
-  If there are
-  unmatched components, the result is defined to be False;
+  If there are unmatched components, the result is defined to be False;
 
   Otherwise, the result is defined in terms of
   the primitive equals operator for any
@@ -2644,6 +2646,18 @@ for those composite types covered earlier) is defined as follows:
   occur for integer types, since one's complement machines
   typically have both a plus and minus (integer) zero.
 @end{Ramification}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016]}
+@Chg{New=[For any composite type, the order in which "=" is called for
+components is not defined by the language. Furthermore, if the result can be
+determined before calling "=" on some components, the language does not define
+whether "=" is called on those components.@PDefn{Unspecified}],Old=[]}
+@begin{Honest}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[This new paragraph should have been worded using @i<Unspecified>
+instead of @i<Not defined by the language>. But this is unlikely to cause a
+problem, as @i<unspecified> carries no semantics.],Old=[]}
+@end{Honest}
 
 The predefined "/=" operator gives the complementary result
 to the predefined "=" operator.
@@ -2708,6 +2722,22 @@ Otherwise the test yields the result False.
 A membership test using @key(not in) gives the complementary result to
 the corresponding membership test using @key(in).
 @end{RunTime}
+
+@begin{ImplReq}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016]}
+@Chg{New=[For all nonlimited types declared in language-defined packages,
+the "=" and "/=" operators of the type shall behave as if they were the
+predefined equality operators for the purposes of the equality of composite
+types and generic formal types.],Old=[]}
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[If any language-defined types are implemented with a user-defined
+"=" operator, then either the full type must be tagged, or the compiler must
+use @lquotes@;magic@rquotes@; to implement equality if this type. A
+user-defined "=" operator for an untagged type does not meet this
+requirement.],Old=[]}
+@end{Ramification}
+@end{ImplReq}
 
 @begin{Notes}
 No exception is ever raised by a membership test, by a predefined
@@ -3350,12 +3380,14 @@ Two types are convertible if each is convertible to the other.
   at run time is irrelevant to this definition.
 @end{Ramification}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017]}
 @Defn{view conversion}
 @Defn2{Term=[conversion],Sec=(view)}
 A @nt{type_conversion} whose operand is the
-@nt<name> of an object is called a @i(view conversion) if its
-target type is tagged, or if it appears as an actual parameter
-of mode @key[out] or @key[in out];
+@nt<name> of an object is called a @i(view conversion) if
+@Chg{New=[both ],Old=[]}its target type
+@Chg{New=[and operand type are],Old=[is]} tagged, or if it appears as an
+actual parameter of mode @key[out] or @key[in out];
 @Defn{value conversion}
 @Defn2{Term=[conversion],Sec=(value)}
 other @nt<type_conversion>s are called @i(value conversions).
@@ -3406,11 +3438,47 @@ be an array type. Further:
 @begin(itemize)
   The types shall have the same dimensionality;
 
-  Corresponding index types shall be convertible; and
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008]}
+  Corresponding index types shall be convertible;@Chg{New=[],Old=[ and]}
   @PDefn2{Term=[convertible],Sec=(required)}
 
-  The component subtypes shall statically match.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008]}
+  The component subtypes shall statically match@Chg{New=[; and],Old=[.]}
   @PDefn2{Term=[statically matching],Sec=(required)}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008]}
+@Chg{New=[In a view conversion, the target type and the operand type shall
+both or neither have aliased components.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added]}
+Without this rule, it is possible to violate the constrained status of
+aliased array components. Consider:
+@begin{Example}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[package] P @key[is]
+   @key[type] T @key[is private];
+   A : @key[constant] T;
+   @key[type] A1 @key[is array] (1 .. 10) @key[of aliased] T;
+   @key[type] A2 @key[is array] (1 .. 10) @key[of] T;
+@key[private]
+   @key[type] T (D : Integer := 0) @key[is null record];
+   A : @key[constant] T := (D => 1);
+@key[end] P;],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[@key[with] P;
+@key[procedure] Exam @key[is]
+   X : P.A1;
+   @key[procedure] S (Y : @key[in out] P.A2) @key[is]
+   @key[begin]
+      Y (1) := P.A;
+   @key[end];
+@key[begin]
+   S (P.A2 (X)); -- This call will change the discriminant of X (1),
+                 -- so we cannot allow the conversion.
+@key[end];],Old=[]}
+@end{Example}
+@end{Reason}
 @end(itemize)
 
 @Leading@Defn2{Term=[type conversion],sec=(access)}
@@ -3702,8 +3770,7 @@ Composite (Non-Array) Type Conversion
   of the operand), its
   value in the result is that specified by the @nt<derived_type_definition>.
 @begin{Ramification}
-It
-  is a ramification of the rules for the discriminants of derived types
+  It is a ramification of the rules for the discriminants of derived types
   that each discriminant of the result is covered either by this
   paragraph or the previous one. See @RefSecNum(Discriminants).
 @end{Ramification}
@@ -3796,12 +3863,14 @@ performed as above for a value conversion.
 
 @Leading@;The properties of this new view are as follows:
 @begin(itemize)
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017]}
   If the target type is composite, the bounds or discriminants (if any)
   of the view are as defined above for a value conversion;
   each nondiscriminant component of the view denotes the matching
   component of the operand object; the
   subtype of the view is constrained if either the target subtype
   or the operand object is constrained,
+  @Chg{New=[or if the target subtype is indefinite,],Old=[]}
   or if the operand type is a descendant of the target type,
   and has discriminants that were not inherited from
   the target type;
@@ -4083,15 +4152,23 @@ an access value that designates the object.
 @end{Syntax}
 
 @begin{Resolution}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
 @PDefn2{Term=[expected type],Sec=(allocator)}
 The expected type for an @nt<allocator> shall be a single access-to-object
-type
-whose designated type covers the type determined by the
-@nt<subtype_mark> of the @nt<subtype_indication> or @nt<qualified_expression>.
+type @Chg{New=[with],Old=[whose]} designated type
+@Chg{New=[@i<D> such that either @i<D>],Old=[]} covers the type determined
+by the @nt<subtype_mark> of the @nt<subtype_indication> or
+@nt<qualified_expression>@Chg{New=[, or the expected type is anonymous and
+the determined type is @i<D>'Class.],Old=[.]}
 @begin{Discussion}
   See @RefSec(The Context of Overload Resolution) for the meaning
   of @lquotes@;shall be a single ... type whose ...@rquotes@;
 @end{Discussion}
+@begin{Ramification}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
+An allocator is allowed as a controlling parameter of a dispatching call (see
+@RefSecNum{Dispatching Operations of Tagged Types}).
+@end{Ramification}
 @end{Resolution}
 
 @begin{Legality}
@@ -4173,15 +4250,16 @@ uninitialized allocator)}
   If the designated type is elementary, an object of the
   designated subtype is created and any implicit initial value is assigned;
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0002]}
 @Defn2{Term=[assignment operation], Sec=(during evaluation of an
 uninitialized allocator)}
   If the designated type is composite, an object of the
   designated type is created with tag, if any, determined
   by the @nt<subtype_mark> of the @nt<subtype_indication>;
-  any per-object constraints on subcomponents
-  are elaborated and any implicit initial
-  values for the subcomponents of the object are obtained as determined by the
-  @nt<subtype_indication> and assigned to the corresponding subcomponents.
+  any per-object constraints on subcomponents are elaborated
+  @Chg{New=[(see @RefSecNum{Record Types}) ],Old=[]}and any implicit initial
+  values for the subcomponents of the object are obtained as determined by
+  the @nt<subtype_indication> and assigned to the corresponding subcomponents.
   @IndexCheck{Index_Check}
   @IndexCheck{Discriminant_Check}
   A check is made that the value of the object belongs to the designated

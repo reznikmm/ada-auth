@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:31 $}
+@Comment{$Date: 2000/08/17 03:15:27 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.18 $}
+@comment{$Revision: 1.19 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -21,10 +21,10 @@ other library units are children of these:]
 @ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047)}
 @ @*@ @;@comment{paragraph number here, paragraph numbers seem to intrude on
 the RHS column, misaligning it. Thus we have two lines, as small as possible.}
-@begin{DisplaywithoutParanum}
+@begin{Display}
 @TabClear{}@TabSet{L2, L4, L6, L8, L10, L12, L14, L16}
 @begin{TwoCol}
-@redundant[@shrink<Standard @em @RefSecNum{The Package Standard}
+@Noparanum@redundant[@shrink<Standard @em @RefSecNum{The Package Standard}
 @\Ada @em @RefSecNum{The Package Ada}
 @\@\Asynchronous_Task_Control @em @RefSecNum{Asynchronous Task Control}
 @\@\Calendar @em @RefSecNum{Delay Statements, Duration, and Time}
@@ -60,7 +60,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\Streams @em @RefSecNum{The Package Streams}
 @\@\@\Stream_IO @em @RefSecNum{The Package Streams.Stream_IO}>
 @NewColumn
-@shrink<Standard (@i{...continued})
+@Noparanum@shrink<Standard (@i{...continued})
 @\Ada (@i{...continued})
 @\@\Strings @em @RefSecNum{The Package Strings}
 @\@\@\Bounded @em @RefSecNum{Bounded-Length String Handling}
@@ -88,21 +88,21 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}>
 
-@shrink<@\Interfaces @em @RefSecNum{The Package Interfaces}
+@Noparanum@shrink<@\Interfaces @em @RefSecNum{The Package Interfaces}
 @\@\C @em @RefSecNum{Interfacing with C}
 @\@\@\Pointers @em @RefSecNum{The Generic Package Interfaces.C.Pointers}
 @\@\@\Strings @em @RefSecNum{The Package Interfaces.C.Strings}
 @\@\COBOL @em @RefSecNum{Interfacing with COBOL}
 @\@\Fortran @em @RefSecNum{Interfacing with Fortran}>
 
-@shrink<@\System @em @RefSecNum{The Package System}
+@Noparanum@shrink<@\System @em @RefSecNum{The Package System}
 @\@\Address_To_Access_Conversions @em @RefSecNum{The Package System.Address_To_Access_Conversions}
 @\@\Machine_Code @em @RefSecNum{Machine Code Insertions}
 @\@\RPC @em @RefSecNum{Partition Communication Subsystem}
 @\@\Storage_Elements @em @RefSecNum{The Package System.Storage_Elements}
 @\@\Storage_Pools @em @RefSecNum{Storage Management}>]
 @end{TwoCol}
-@end{DisplaywithoutParanum}
+@end{Display}
 @begin{Discussion}
 In running text, we generally leave out the @lquotes@;Ada.@rquotes@; when referring to a
 child of Ada.

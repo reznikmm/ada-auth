@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/17 03:15:29 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:45 $}
+@Comment{$Date: 2000/08/17 03:15:29 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -254,23 +254,23 @@ reflect the  localizations. See also @RefSecNum(Character Types).
 characters, the categories identified in the classification functions
 form a strict hierarchy:
 @begin{Display}
-@TabClear{}
+@TabClear{}@Comment{We use "Leading" below to make this list closely packed}
 @TabSet{4, 8, 12, 16}
-@em Control characters
+@Leading@em Control characters
 
-@em Graphic characters
+@Leading@em Graphic characters
 
-@\@em Alphanumeric characters
+@Leading@\@em Alphanumeric characters
 
-@\@\@em Letters
+@Leading@\@\@em Letters
 
-@\@\@\@em Upper-case letters
+@Leading@\@\@\@em Upper-case letters
 
-@\@\@\@em Lower-case letters
+@Leading@\@\@\@em Lower-case letters
 
-@\@\@em Decimal digits
+@Leading@\@\@em Decimal digits
 
-@\@em Special graphic characters
+@Leading@\@em Special graphic characters
 @end{Display}
 
 @begin{Ramification}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/15 01:11:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:44 $}
+@Comment{$Date: 2000/08/17 03:15:27 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -75,44 +75,46 @@ Numerics.Generic_Elementary_Functions has the following declaration:
 @key{package} Ada.Numerics.Generic_Elementary_Functions @key{is}
    @key[pragma] Pure(Generic_Elementary_Functions);
 
-   @key{function} @AdaSubDefn{Sqrt}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Log}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Log}     (X, Base     : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Exp}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} "**"    (Left, Right : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Sqrt}    (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Log}     (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Log}     (X, Base     : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Exp}     (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} "**"    (Left, Right : Float_Type'Base) @key{return} Float_Type'Base;
 
-   @key{function} @AdaSubDefn{Sin}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Sin}     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Cos}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Cos}     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Tan}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Tan}     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Cot}     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Cot}     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Sin}     (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Sin}     (X, Cycle    : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cos}     (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cos}     (X, Cycle    : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Tan}     (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Tan}     (X, Cycle    : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cot}     (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cot}     (X, Cycle    : Float_Type'Base) @key{return} Float_Type'Base;
 
-   @key{function} @AdaSubDefn{Arcsin}  (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Arcsin}  (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Arccos}  (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Arccos}  (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arcsin}  (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arcsin}  (X, Cycle    : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccos}  (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccos}  (X, Cycle    : Float_Type'Base) @key{return} Float_Type'Base;
    @key{function} @AdaSubDefn{Arctan}  (Y           : Float_Type'Base;
-                           X           : Float_Type'Base := 1.0) @key{return} Float_Type'Base;
+                     X           : Float_Type'Base := 1.0)
+                                                    @key{return} Float_Type'Base;
    @key{function} @AdaSubDefn{Arctan}  (Y           : Float_Type'Base;
-                           X           : Float_Type'Base := 1.0;
-                           Cycle       : Float_Type'Base)        @key{return} Float_Type'Base;
+                     X           : Float_Type'Base := 1.0;
+                     Cycle       : Float_Type'Base) @key{return} Float_Type'Base;
    @key{function} @AdaSubDefn{Arccot}  (X           : Float_Type'Base;
-                           Y           : Float_Type'Base := 1.0) @key{return} Float_Type'Base;
+                     Y           : Float_Type'Base := 1.0)
+                                                    @key{return} Float_Type'Base;
    @key{function} @AdaSubDefn{Arccot}  (X           : Float_Type'Base;
-                           Y           : Float_Type'Base := 1.0;
-                           Cycle       : Float_Type'Base)        @key{return} Float_Type'Base;
+                     Y           : Float_Type'Base := 1.0;
+                     Cycle       : Float_Type'Base) @key{return} Float_Type'Base;
 
-   @key{function} @AdaSubDefn{Sinh}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Cosh}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Tanh}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Coth}    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Arcsinh} (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Arccosh} (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Arctanh} (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-   @key{function} @AdaSubDefn{Arccoth} (X           : Float_Type'Base)        @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Sinh}    (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Cosh}    (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Tanh}    (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Coth}    (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arcsinh} (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccosh} (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arctanh} (X           : Float_Type'Base) @key{return} Float_Type'Base;
+   @key{function} @AdaSubDefn{Arccoth} (X           : Float_Type'Base) @key{return} Float_Type'Base;
 
 @key{end} Ada.Numerics.Generic_Elementary_Functions;
 @end{Example}
@@ -120,12 +122,12 @@ Numerics.Generic_Elementary_Functions has the following declaration:
 @Defn{Ada.Numerics.Elementary_Functions}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Elementary_@!Functions]}
 The library package Numerics.Elementary_Functions
-defines the same subprograms as Numerics.Generic_Elementary_Functions,
+defines the same subprograms as Numerics.@!Generic_Elementary_Functions,
 except that the predefined type Float is systematically substituted for
 Float_Type'Base throughout. Nongeneric equivalents of
 Numerics.Generic_Elementary_Functions for each of the other predefined
 floating point types are defined similarly, with the names
-Numerics.Short_Elementary_Functions, Numerics.Long_Elementary_Functions, etc.
+Numerics.@!Short_@!Elementary_@!Functions, Numerics.@!Long_@!Elementary_@!Functions, etc.
 @begin{Reason}
    The nongeneric equivalents are provided to allow the programmer to
    construct simple mathematical applications without being required to
@@ -242,7 +244,8 @@ when a finite result overflows
 (see @RefSecNum{Accuracy Requirements for the Elementary Functions}); this may
 occur for parameter values sufficiently @i{near} poles, and, in the case of
 some of the functions, for parameter values with sufficiently large
-magnitudes.]
+magnitudes.]@PDefn{unspecified} When Float_Type'Machine_Overflows is False,
+the result at poles is unspecified.
 @begin{Reason}
    The purpose of raising Constraint_Error (rather than
    Numerics.Argument_Error) at the poles of a function, when
@@ -250,9 +253,6 @@ magnitudes.]
    the actual parameters of the function approach the pole and finally reach
    it.
 @end{Reason}
-@PDefn{unspecified}
-When Float_Type'Machine_Overflows is False, the result at poles is
-unspecified.
 @begin{Discussion}
    It is anticipated that an Ada binding to IEC 559:1989 will be developed
    in the future. As part of such a binding, the Machine_Overflows attribute
@@ -415,13 +415,11 @@ sequences (for debugging) to unique sequences in each execution of a program.
 @begin{StaticSem}
 @Leading@;The library package Numerics.Float_Random has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Float_@!Random]}
-@key[package] Ada.Numerics.Float_Random @key[is]
+@key[package] Ada.Numerics.Float_Random @key[is]@ChildUnit{Parent=[Ada.Numerics],Child=[Float_@!Random]}
 
    -- @RI{Basic facilities}
 
-@LangDefType{Package=[Ada.Numerics.Float_Random],Type=[Generator]}
-   @key[type] Generator @key[is] @key[limited] @key[private];
+   @key[type] @AdaTypeDefn{Generator} @key[is] @key[limited] @key[private];
 
 
    @key[subtype] @AdaDefn{Uniformly_Distributed} @key[is] Float @key[range] 0.0 .. 1.0;
@@ -435,8 +433,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
 
    -- @RI{Advanced facilities}
 
-@LangDefType{Package=[Ada.Numerics.Float_Random],Type=[State]}
-   @key[type] State @key[is] @key[private];
+   @key[type] @AdaTypeDefn{State} @key[is] @key[private];
 
 
    @key[procedure] @AdaSubDefn{Save}  (Gen        : @key[in]  Generator;
@@ -467,8 +464,7 @@ declaration:
 
    -- @RI{Basic facilities}
 
-@LangDefType{Package=[Ada.Numerics.Discrete_Random],Type=[Generator]}
-   @key[type] Generator @key[is] @key[limited] @key[private];
+   @key[type] @AdaTypeDefn{Generator} @key[is] @key[limited] @key[private];
 
 
    @key[function] @AdaSubDefn{Random} (Gen : Generator) @key[return] Result_Subtype;
@@ -481,8 +477,7 @@ declaration:
 
    -- @RI{Advanced facilities}
 
-@LangDefType{Package=[Ada.Numerics.Discrete_Random],Type=[State]}
-   @key[type] State @key[is] @key[private];
+   @key[type] @AdaTypeDefn{State} @key[is] @key[private];
 
 
    @key[procedure] @AdaSubDefn{Save}  (Gen        : @key[in]  Generator;
@@ -703,7 +698,7 @@ random integers each drawn from a different range, will find it more convenient
 to transform the result of the floating point Random function. For
 @R[M] @geq 1, the expression
 @begin{Example}
-Integer(Float(M) * Random(G)) mod M
+   Integer(Float(M) * Random(G)) mod M
 @end{Example}
 
 @NoPrefix@;transforms the result of Random(G) to an integer uniformly distributed over the
@@ -712,7 +707,7 @@ Each value of the result range is possible, provided that M is not too large.
 Exponentially distributed (floating point) random numbers with mean and
 standard deviation 1.0 can be obtained by the transformation
 @begin{Example}
--Log(Random(G) + Float'Model_Small))
+   -Log(Random(G) + Float'Model_Small))
 @end{Example}
 
 @NoPrefix@;where Log comes from Numerics.Elementary_Functions
@@ -770,8 +765,8 @@ value.
 @end{Example}
 
 @begin{Wide}
-@Leading@i{Example of a parallel simulation of a physical system, with a separate
-generator of event probabilities in each task:}
+@Leading@Keepnext@i{Example of a parallel simulation of a physical system,
+with a separate generator of event probabilities in each task:}
 @end{Wide}
 @begin{Example}
 @key[with] Ada.Numerics.Float_Random;

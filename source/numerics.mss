@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2000/08/12 00:40:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:17 $}
+@Comment{$Date: 2000/08/17 03:15:27 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -79,14 +79,12 @@ Numerics.Generic_Complex_Types has the following declaration:
 @key{package} Ada.Numerics.Generic_Complex_Types @key{is}
    pragma Pure(Generic_Complex_Types);
 
-@LangDefType{Package=[Ada.Numerics.Generic_Complex_Types],Type=[Complex]}
-   @key{type} Complex @key{is}
+   @key{type} @AdaTypeDefn{Complex} @key{is}
       @key{record}
          Re, Im : Real'Base;
       @key{end} @key{record};
 
-@LangDefType{Package=[Ada.Numerics.Generic_Complex_Types],Type=[Imaginary]}
-   @key{type} Imaginary @key{is} @key{private};
+   @key{type} @AdaTypeDefn{Imaginary} @key{is} @key{private};
 
    @AdaDefn{i} : @key{constant} Imaginary;
    @AdaDefn{j} : @key{constant} Imaginary;

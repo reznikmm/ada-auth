@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:16 $}
+@Comment{$Date: 2000/08/17 03:15:25 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -166,12 +166,12 @@ The first name given is the name from ISO 10646-1; the subsequent
 names, if any, are those used within the
 standard, depending on context.
 @end{Discussion}
-@begin{DisplayWithoutParaNum}
+@begin{Display}
 @TabClear()@TabSet(P9)
 @begin(TwoCol)
-symbol @\name
+@NoParanum@;symbol @\name
 
-  " @\quotation mark
+@NoParanum@;  " @\quotation mark
   # @\number sign
   & @\ampersand
   ' @\apostrophe, tick
@@ -184,9 +184,9 @@ symbol @\name
   . @\full stop, dot, point
   / @\solidus, divide
 @NewColumn
-symbol @\name
+@NoParanum@;symbol @\name
 
-  : @\colon
+@NoParanum@;  : @\colon
   ; @\semicolon
   < @\less-than sign
   = @\equals sign
@@ -198,7 +198,7 @@ symbol @\name
   { @\left curly bracket
   } @\right curly bracket
 @end(TwoCol)
-@end{DisplayWithoutParaNum}
+@end{Display}
 @end{StaticSem}
 
 @begin{ImplPerm}
@@ -1119,9 +1119,9 @@ The following are the @i{reserved words}
 @end{Discussion}
 @*
 
-@begin{DisplayWithoutParanum}
+@begin{Display}
 @begin{FourCol}
-@key{abort}
+@noparanum@key{abort}
 @key{abs}
 @key{abstract}
 @key{accept}
@@ -1132,60 +1132,60 @@ The following are the @i{reserved words}
 @key{array}
 @key{at}
 
-@key{begin}
+@noparanum@key{begin}
 @key{body}
 
-@key{case}
+@noparanum@key{case}
 @key{constant}
 
-@key{declare}
+@noparanum@key{declare}
 @key{delay}
 @key{delta}
 @key{digits}
 @key{do}
 @NewColumn
 
-@key{else}
+@noparanum@key{else}
 @key{elsif}
 @key{end}
 @key{entry}
 @key{exception}
 @key{exit}
 
-@key{for}
+@noparanum@key{for}
 @key{function}
 
-@key{generic}
+@noparanum@key{generic}
 @key{goto}
 
-@key{if}
+@noparanum@key{if}
 @key{in}
 @key{is}
 
 
-@key{limited}
+@noparanum@key{limited}
 @key{loop}
 
-@key{mod}
+@noparanum@key{mod}
 @NewColumn
 
-@key{new}
+@noparanum@key{new}
 @key{not}
 @key{null}
 
 
-@key{of}
+@noparanum@key{of}
 @key{or}
 @key{others}
 @key{out}
 
-@key{package}
+@noparanum@key{package}
 @key{pragma}
 @key{private}
 @key{procedure}
 @key{protected}
 
-@key{raise}
+@noparanum@key{raise}
 @key{range}
 @key{record}
 @key{rem}
@@ -1193,30 +1193,29 @@ The following are the @i{reserved words}
 @key{requeue}
 @NewColumn
 
-@key{return}
+@noparanum@key{return}
 @key{reverse}
 
-@key{select}
+@noparanum@key{select}
 @key{separate}
 @key{subtype}
 
-@key{tagged}
+@noparanum@key{tagged}
 @key{task}
 @key{terminate}
 @key{then}
 @key{type}
 
-
-@key{until}
+@noparanum@key{until}
 @key{use}
 
-@key{when}
+@noparanum@key{when}
 @key{while}
 @key{with}
 
-@key{xor}
+@noparanum@key{xor}
 @end{FourCol}
-@end{DisplayWithoutParanum}
+@end{Display}
 @end{Bundle}
 @end{Syntax}
 

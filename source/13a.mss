@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:44 $}
+@Comment{$Date: 2000/08/17 03:15:26 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @redundant[This section describes features for
@@ -2838,7 +2838,7 @@ and its language-defined children.}
 @key[package] System @key[is]
    @key{pragma} Preelaborate(System);
 
-@key[type] Name @key[is] @RI{implementation-defined-enumeration-type};@LangDefType{Package=[System],Type=[Name]}
+   @key[type] @AdaTypeDefn{Name} @key[is] @RI{implementation-defined-enumeration-type};
    @AdaDefn{System_Name} : @key[constant] Name := @RI{implementation-defined};
 
 
@@ -2861,7 +2861,7 @@ and its language-defined children.}
 
    --@RI{ Storage-related Declarations:}
 
-   @key[type] Address @key[is] @RI{implementation-defined};@LangDefType{Package=[System],Type=[Address]}
+   @key[type] @AdaTypeDefn{Address} @key[is] @RI{implementation-defined};
    @AdaDefn{Null_Address} : @key[constant] Address;
 
    @AdaDefn{Storage_Unit} : @key[constant] := @RI{implementation-defined};
@@ -2881,7 +2881,7 @@ and its language-defined children.}
 
 
    --@RI{ Other System-Dependent Declarations:}
-   @key[type] Bit_Order @key[is] (High_Order_First, Low_Order_First);@LangDefType{Package=[System],Type=[Bit_Order]}
+   @key[type] @AdaTypeDefn{Bit_Order} @key[is] (High_Order_First, Low_Order_First);
    @AdaDefn{Default_Bit_Order} : @key[constant] Bit_Order;
 
 
@@ -3094,14 +3094,14 @@ have been moved to the Real Time Annex.
 @ChildUnit{Parent=[System],Child=[Storage_Elements]}@key[package] System.Storage_Elements @key[is]
    @key{pragma} Preelaborate(System.Storage_Elements);
 
-   @key[type] Storage_Offset @key[is] @key[range] @RI(implementation-defined);@LangDefType{Package=[System.Storage_Elements],Type=[Storage_Offset]}
+   @key[type] @AdaTypeDefn{Storage_Offset} @key[is] @key[range] @RI(implementation-defined);
 
    @key[subtype] @AdaDefn{Storage_Count} @key[is] Storage_Offset @key[range] 0..Storage_Offset'Last;
 
 
-   @key[type] Storage_Element @key[is] @key[mod] @RI{implementation-defined};@LangDefType{Package=[System.Storage_Elements],Type=[Storage_Element]}
+   @key[type] @AdaTypeDefn{Storage_Element} @key[is] @key[mod] @RI{implementation-defined};
    @key[for] Storage_Element'Size @key[use] Storage_Unit;
-   @key[type] Storage_Array @key[is] @key[array]@LangDefType{Package=[System.Storage_Elements],Type=[Storage_Array]}
+   @key[type] @AdaTypeDefn{Storage_Array} @key[is] @key[array]
      (Storage_Offset @key[range] <>) @key[of] @key[aliased] Storage_Element;
    @key[for] Storage_Array'Component_Size @key[use] Storage_Unit;
 
@@ -3124,7 +3124,7 @@ have been moved to the Real Time Annex.
 
    --@RI{ Conversion to/from integers:}
 
-   @key[type] Integer_Address @key[is] @RI{implementation-defined};@LangDefType{Package=[System.Storage_Elements],Type=[Integer_Address]}
+   @key[type] @AdaTypeDefn{Integer_Address} @key[is] @RI{implementation-defined};
    @key[function] @AdaSubDefn{To_Address}(Value : Integer_Address) @key[return] Address;
    @key[function] @AdaSubDefn{To_Integer}(Value : Address) @key[return] Integer_Address;
 
@@ -4029,7 +4029,7 @@ For the same reason, @lquotes@;specified@rquotes@; means the same thing as
 @ChildUnit{Parent=[System],Child=[Storage_Pools]}@key[package] System.Storage_Pools @key[is]
     @key{pragma} Preelaborate(System.Storage_Pools);
 
-    @key[type] Root_Storage_Pool @key[is]@LangDefType{Package=[System.Storage_Pools],Type=[Root_Storage_Pool]}
+    @key[type] @AdaTypeDefn{Root_Storage_Pool} @key[is]
         @key[abstract] @key[new] Ada.Finalization.Limited_Controlled @key[with] @key[private];
 
     @key[procedure] @AdaSubDefn{Allocate}(
@@ -4924,13 +4924,13 @@ or can call the Read and Write attributes of other types.)
 @ChildUnit{Parent=[Ada],Child=[Streams]}@key[package] Ada.Streams @key[is]
     @key[pragma] Pure(Streams)@Defn{unpolluted};
 
-    @key[type] Root_Stream_Type @key[is] @key[abstract tagged limited private];@LangDefType{Package=[Ada.Streams],Type=[Root_Stream_Type]}
+    @key[type] @AdaTypeDefn{Root_Stream_Type} @key[is] @key[abstract tagged limited private];
 
-    @key[type] Stream_Element @key[is] @key[mod] @RI{implementation-defined};@LangDefType{Package=[Ada.Streams],Type=[Stream_Element]}
-    @key[type] Stream_Element_Offset @key[is] @key[range] @RI{implementation-defined};@LangDefType{Package=[Ada.Streams],Type=[Stream_Element_Offset]}
+    @key[type] @AdaTypeDefn{Stream_Element} @key[is] @key[mod] @RI{implementation-defined};
+    @key[type] @AdaTypeDefn{Stream_Element_Offset} @key[is] @key[range] @RI{implementation-defined};
     @key[subtype] @AdaDefn{Stream_Element_Count} @key[is]
         Stream_Element_Offset @key[range] 0..Stream_Element_Offset'Last;
-    @key[type] Stream_Element_Array @key[is]@LangDefType{Package=[Ada.Streams],Type=[Stream_Element_Array]}
+    @key[type] @AdaTypeDefn{Stream_Element_Array} @key[is]
         @key[array](Stream_Element_Offset @key[range] <>) @key[of] Stream_Element;
 
     @key[procedure] @AdaSubDefn{Read}(

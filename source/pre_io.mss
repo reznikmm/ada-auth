@@ -1,23 +1,22 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:44 $}
+@Comment{$Date: 2000/08/17 03:15:27 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
 Input-output is provided through
 language-defined packages, each of which is a child of the root package Ada.
-  The generic packages Sequential_IO and Direct_IO
+The generic packages Sequential_IO and Direct_IO
 define input-output operations applicable to files containing elements
-of a given type.
-The generic package Storage_IO supports reading from and writing to
-an in-memory buffer.
+of a given type. The generic package Storage_IO supports reading from and
+writing to an in-memory buffer.
 Additional operations for text input-output are
 supplied in the packages Text_IO and Wide_Text_IO. Heterogeneous
 input-output is provided through the child packages
-Streams.Stream_IO  and Text_IO.Text_Streams
+Streams.@!Stream_IO and Text_IO.@!Text_@!Streams
 (see also @RefSecNum{Streams}).
 The package IO_Exceptions defines the
 exceptions needed by the predefined input-output packages.]
@@ -34,7 +33,7 @@ presence of @key[use] clauses.
 @begin{Extend83}
 Text_IO enhancements
 (Get_Immediate, Look_Ahead, Standard_Error, Modular_IO, Decimal_IO),
-Wide_Text_IO, and the stream input-output facilities are new in Ada 9X.
+Wide_Text_IO, and the stream input-output facilities are new in Ada 95.
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -99,7 +98,7 @@ if corresponding files have not been closed).
 @PDefn{unspecified}
 The effect of input-output for access types is unspecified.
 
-@Leading@Defn2{Term=[current mode], Sec=(of an open file)}
+@Leading@Keepnext@Defn2{Term=[current mode], Sec=(of an open file)}
 An open file has a @i{current mode}, which is a value of one of the
 following enumeration types:
 @begin{DescribeCode}
@@ -128,22 +127,16 @@ sequential and direct files.
 Any additional effects concerning text
 input-output are described in subclause @RefSecNum{Text File Management}.
 
-The exceptions that can be propagated by the
- execution of an input-output
+The exceptions that can be propagated by the execution of an input-output
 subprogram are defined in the package IO_Exceptions; the situations
-in which they can be  propagated
-are described following the
-description of the subprogram
-(and in clause @RefSecNum{Exceptions in Input-Output}).
+in which they can be propagated are described following the description of
+the subprogram (and in clause @RefSecNum{Exceptions in Input-Output}).
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The exceptions Storage_Error and Program_Error may be propagated.
-(Program_Error can only be propagated
- due to errors made by the
-caller of the subprogram.)
-Finally, exceptions can be propagated
- in certain implementation-defined
-situations.
+(Program_Error can only be propagated due to errors made by the
+caller of the subprogram.) Finally, exceptions can be propagated
+in certain implementation-defined situations.
 @ImplDef{Any implementation-defined characteristics of the
 input-output packages.}
 @end{StaticSem}
@@ -189,7 +182,7 @@ Adding stream I/O necessitates a review of the terminology. In
 Ada 83, `sequential' implies both the access method (purely sequential
 @em that is, no indexing or positional access) and homogeneity. Direct
 access includes purely sequential access and indexed access, as well as
-homogeneity. In Ada 9X, streams allow purely sequential access but also
+homogeneity. In Ada 95, streams allow purely sequential access but also
 positional access to an individual
 element, and are
 heterogeneous. We considered generalizing the notion of
@@ -233,14 +226,11 @@ a property of a file object, not of an external file.
 @key[with] Ada.IO_Exceptions;
 @key[generic]
    @key[type] Element_Type(<>) @key[is] @key[private];
-@ChildUnit{Parent=[Ada],Child=[Sequential_IO]}
-@key[package] Ada.Sequential_IO @key[is]
+@key[package] Ada.Sequential_IO @key[is]@ChildUnit{Parent=[Ada],Child=[Sequential_IO]}
 
-@LangDefType{Package=[Ada.Sequential_IO],Type=[File_Type]}
-   @key[type] File_Type @key[is] @key[limited] @key[private];
+   @key[type] @AdaTypeDefn{File_Type} @key[is] @key[limited] @key[private];
 
-@LangDefType{Package=[Ada.Sequential_IO],Type=[File_Mode]}
-   @key[type] File_Mode @key[is] (In_File, Out_File, Append_File);
+   @key[type] @AdaTypeDefn{File_Mode} @key[is] (In_File, Out_File, Append_File);
 
    @RI{-- File management}
 
@@ -292,7 +282,7 @@ a property of a file object, not of an external file.
 The new enumeration element Append_File may introduce upward incompatibilities.
 It is possible that a program based on the assumption that File_Mode'Last = Out_File
 will be illegal (e.g., case statement choice coverage)
-or execute with a different effect in Ada 9X.
+or execute with a different effect in Ada 95.
 @end{Incompatible83}
 
 @LabeledSubClause{File Management}
@@ -308,170 +298,145 @@ text input-output, the procedures Create, Open, and Reset have
 additional effects described in subclause
 @RefSecNum{Text File Management}.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Create(File : @key[in] @key[out] File_Type;
                  Mode : @key[in] File_Mode := @RI{default_mode};
                  Name : @key[in] String := "";
                  Form : @key[in] String := "");
 @end{Example}
+    Establishes a new external file, with the given name and form,
+    and associates this external file with the given file. The
+    given file is left open. The current mode of the given file
+    is set to the given access mode. The default access mode is
+    the mode Out_File for sequential and text
+    input-output; it is
+    the mode Inout_File for direct input-output. For direct
+    access, the size of the created file is implementation defined.
 
-          Establishes a new external file, with the given name and form,
-          and associates this external file with the given file. The
-          given file is left open. The current mode of the given file
-          is set to the given access mode. The default access mode is
-          the mode Out_File for sequential and text
-          input-output; it is
-          the mode Inout_File for direct input-output. For direct
-          access, the size of the created file is implementation defined.
+    A null string for Name specifies an
+    external file that is not accessible after the completion of
+    the main program (a temporary file). A null string for Form
+    specifies the use of the default options of the implementation
+    for the external file.
 
-          A null string for Name specifies an
-          external file that is not accessible after the completion of
-          the main program (a temporary file). A null string for Form
-          specifies the use of the default options of the implementation
-          for the external file.
+    The exception Status_Error is propagated if the given file is
+    already open. The exception Name_Error is propagated if the
+    string given as Name does not allow the identification of an
+    external file. The exception Use_Error is propagated if, for the
+    specified mode, the external environment does not support creation of
+    an external file with the given name (in the absence of
+    Name_Error) and form.
 
-          The exception Status_Error is propagated if the given file is
-          already open. The exception Name_Error is propagated if the
-          string given as Name does not allow the identification of an
-          external file. The exception Use_Error is propagated if, for the
-          specified mode, the external environment does not support creation of
-          an external file with the given name (in the absence of
-          Name_Error) and form.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Open(File : @key[in] @key[out] File_Type;
                Mode : @key[in] File_Mode;
                Name : @key[in] String;
                Form : @key[in] String := "");
 @end{Example}
+    Associates the given file with an existing external file
+    having the given name and form, and sets the current mode of
+    the given file to the given mode. The given file is left open.
 
-          Associates the given file with an existing external file
-          having the given name and form, and sets the current mode of
-          the given file to the given mode. The given file is left
-          open.
+    The exception Status_Error is propagated if the given file is
+    already open. The exception Name_Error is propagated if the
+    string given as Name does not allow the identification of an
+    external file; in particular, this exception is propagated if no
+    external file with the given name exists. The exception
+    Use_Error is propagated if, for the specified mode, the
+    external environment does not support opening for an external file with
+    the given name (in the absence of Name_Error) and form.
 
-          The exception Status_Error is propagated if the given file is
-          already open. The exception Name_Error is propagated if the
-          string given as Name does not allow the identification of an
-          external file; in particular, this exception is propagated if no
-          external file with the given name exists. The exception
-          Use_Error is propagated if, for the specified mode, the
-
-external environment
-
- does not support opening for an external file with
-          the given name (in the absence of Name_Error) and form.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Close(File : @key[in] @key[out] File_Type);
 @end{Example}
+    Severs the association between the given file and its
+    associated external file. The given file is left closed.
+    In addition, for sequential files, if the file
+    being closed has mode Out_File or Append_File, then the last element
+    written since the most recent open or reset is the last element that
+    can be read from the file. If no elements have been written and the
+    file mode is Out_File, then the closed file is empty.
+    If no elements have been written and the file mode is Append_File,
+    then the closed file is unchanged.
 
-          Severs the association between the given file and its
-          associated external file. The given file is left closed.
-          In addition, for sequential files, if the file
-being closed has mode Out_File or Append_File, then the last element written
-since the most recent open or reset is the last element that can be read
-from the file. If no elements have been written and the file mode is
-Out_File, then the closed file is empty.
-If no elements have been written and the file mode is Append_File,
-then the closed file is unchanged.
+    The exception Status_Error is propagated if the given file is not open.
 
-          The exception Status_Error is propagated if the given file is not
-          open.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Delete(File : @key[in] @key[out] File_Type);
 @end{Example}
+    Deletes the external file associated with the given file. The
+    given file is closed, and the external file ceases to exist.
 
-          Deletes the external file associated with the given file. The
-          given file is closed, and the external file ceases to exist.
+    The exception Status_Error is propagated if the given file is not
+    open. The exception Use_Error is propagated if
+    deletion of the external file is not supported
+    by the external environment.
 
-          The exception Status_Error is propagated if the given file is not
-          open. The exception Use_Error is propagated if
-          deletion of the external file is not supported
-          by the external environment.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Reset(File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
 @key[procedure] Reset(File : @key[in] @key[out] File_Type);
 @end{Example}
+    Resets the given file so that reading from its
+    elements can be restarted from the beginning of the file (for
+    modes In_File and Inout_File), and so that writing to its elements can be
+    restarted at the beginning of the file (for modes Out_File and Inout_File)
+    or after the last element of the file (for mode Append_File).
+    In particular, for direct access this means that the current
+    index is set to one. If a Mode parameter is supplied, the
+    current mode of the given file is set to the given mode. In addition, for
+    sequential files, if the given file has mode Out_File or Append_File when
+    Reset is called, the last element written since the most recent open or
+    reset is the last element that can be read from the file. If no elements
+    have been written and the file mode is Out_File, the reset file is empty.
+    If no elements have been written and the file mode is Append_File,
+    then the reset file is unchanged.
 
-          Resets the given file so that reading from its
-          elements can be restarted from the beginning of the file (for
-          modes In_File and Inout_File), and so that writing to
-its elements can be restarted at the beginning of the file (for
-modes Out_File and Inout_File) or after the last element of the file (for mode
-Append_File).
-          In particular, for direct access this means that the current
-          index is set to one. If a Mode parameter is supplied, the
-          current mode of the given file is set to the given mode.
-In addition, for sequential files, if the given file has mode
-Out_File or Append_File when Reset is called, the last element written
-since the most recent open or reset is the last element that can be read
-from the file. If no elements have been written and the file mode is
-Out_File, the reset file is empty.
-If no elements have been written and the file mode is
-Append_File,
-then the reset file is unchanged.
+    The exception Status_Error is propagated if the file is not open.
+    The exception Use_Error is propagated if the external environment
+    does not support resetting for the external file and, also, if the
+    external environment does not support resetting to the specified mode
+    for the external file.
 
-          The exception Status_Error is propagated if the file is not open.
-          The exception Use_Error is propagated if the
-
-external environment
-
- does not
-          support resetting for the external file and, also, if the
-
-external environment
-
- does not support resetting to the specified mode
-          for the external file.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Mode(File : @key[in] File_Type) @key[return] File_Mode;
 @end{Example}
+    Returns the current mode of the given file.
 
-          Returns the current mode of the given file.
+    The exception Status_Error is propagated if the file is not open.
 
-          The exception Status_Error is propagated if the file is not open.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Name(File : @key[in] File_Type) @key[return] String;
 @end{Example}
+    Returns a string which uniquely identifies the external file
+    currently associated with the given file (and may thus be used
+    in an Open operation). If an external environment allows alternative
+    specifications of the name (for example, abbreviations), the string
+    returned by the function should correspond to a full specification of
+    the name.
 
-          Returns a string which uniquely identifies the external file
-          currently associated with the given file (and may thus be used
-          in an Open operation). If an
+    The exception Status_Error is propagated if the given file is not
+    open. The exception Use_Error is propagated if the associated
+    external file is a temporary file that cannot be opened
+    by any name.
 
-external environment
-
- allows alternative
-          specifications of the name (for example, abbreviations), the
-          string returned by the function should correspond to a full
-          specification of the name.
-
-          The exception Status_Error is propagated if the given file is not
-          open. The exception Use_Error is propagated if the associated
-          external file is a temporary file that cannot be opened
-          by any name.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Form(File : @key[in] File_Type) @key[return] String;
 @end{Example}
+    Returns the form string for the external file currently
+    associated with the given file. If an external environment allows
+    alternative specifications of the form (for example,
+    abbreviations using default options), the string returned by
+    the function should correspond to a full specification (that
+    is, it should indicate explicitly all options selected,
+    including default options).
 
-          Returns the form string for the external file currently
-          associated with the given file. If an
+    The exception Status_Error is propagated if the given file is not open.
 
-external environment
-
- allows
-          alternative specifications of the form (for example,
-          abbreviations using default options), the string returned by
-          the function should correspond to a full specification (that
-          is, it should indicate explicitly all options selected,
-          including default options).
-
-          The exception Status_Error is propagated if the given file is not
-          open.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Is_Open(File : @key[in] File_Type) @key[return] Boolean;
 @end{Example}
-
-          Returns True if the file is open (that is, if it is associated
-          with an external file), otherwise returns False.
+    Returns True if the file is open (that is, if it is associated
+    with an external file), otherwise returns False.
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -479,10 +444,7 @@ external environment
 An implementation may propagate
 Name_Error or Use_Error if an attempt is
 made to use an I/O feature that cannot be supported by the
-implementation due to limitations in the
-
-external environment.
-
+implementation due to limitations in the external environment.
 Any such restriction should be documented.
 @end{ImplPerm}
 
@@ -493,11 +455,10 @@ The operations available for sequential input and output are described
 in this subclause. The exception Status_Error is propagated if any of these
 operations is attempted for a file that is not open.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Read(File : @key[in] File_Type; Item : @key[out] Element_Type);
 @end{Example}
-
-          Operates on a file of mode In_File. Reads an element
+Operates on a file of mode In_File. Reads an element
 from the given file, and returns the value of this element
 in the Item parameter.
 @begin{Discussion}
@@ -511,9 +472,9 @@ in the Item parameter.
   be based on Element_Type'Read would create an upward incompatibility
   since existing data files written by an Ada 83 program using
   Sequential_IO might not be readable by the identical program
-  built with an Ada 9X implementation of Sequential_IO.
+  built with an Ada 95 implementation of Sequential_IO.
 
-  An Ada 9X implementation might still use an implementation-defined
+  An Ada 95 implementation might still use an implementation-defined
   attribute analogous to 'Read to implement the procedure Read,
   but that attribute will likely have to be subtype-specific
   rather than type-related, and it need not be user-specifiable.
@@ -521,8 +482,7 @@ in the Item parameter.
   generic package Storage_IO (see @RefSecNum{The Generic Package Storage_IO}).
 @end{Discussion}
 
-The exception Mode_Error is propagated if the mode is not
-In_File.
+The exception Mode_Error is propagated if the mode is not In_File.
 The exception End_Error is propagated if no more elements can be
 read from the given file.
 The exception Data_Error can be propagated if the element read cannot
@@ -532,25 +492,23 @@ be interpreted as a value of the subtype Element_Type
   Data_Error need not be propagated if the check is too complex.
   See @RefSec{Exceptions in Input-Output}.
 @end{Discussion}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type);
 @end{Example}
-
-          Operates on a file of mode Out_File or Append_File.
+Operates on a file of mode Out_File or Append_File.
 Writes the value of Item to the given file.
 
-          The exception Mode_Error is propagated if the mode is not
+The exception Mode_Error is propagated if the mode is not
 Out_File or Append_File. The exception Use_Error is propagated if the capacity
-          of the external file is exceeded.
-@begin{Example}
+of the external file is exceeded.
+
+@begin{Example}@Keepnext
 @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
 @end{Example}
+Operates on a file of mode In_File. Returns True if no more
+elements can be read from the given file; otherwise returns False.
 
-          Operates on a file of mode In_File. Returns True if no more
-          elements can be read from the given file; otherwise returns
-          False.
-
-          The exception Mode_Error is propagated if the mode is not In_File.
+The exception Mode_Error is propagated if the mode is not In_File.
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -562,16 +520,12 @@ Out_File or Append_File. The exception Use_Error is propagated if the capacity
 @key[with] Ada.IO_Exceptions;
 @key[generic]
    @key[type] Element_Type @key[is] @key[private];
-@ChildUnit{Parent=[Ada],Child=[Direct_IO]}
-@key[package] Ada.Direct_IO @key[is]
+@key[package] Ada.Direct_IO @key[is]@ChildUnit{Parent=[Ada],Child=[Direct_IO]}
 
-@LangDefType{Package=[Ada.Direct_IO],Type=[File_Type]}
-   @key[type] File_Type @key[is] @key[limited] @key[private];
+   @key[type] @AdaTypeDefn{File_Type} @key[is] @key[limited] @key[private];
 
-@LangDefType{Package=[Ada.Direct_IO],Type=[File_Mode]}
-   @key[type] File_Mode @key[is] (In_File, Inout_File, Out_File);
-@LangDefType{Package=[Ada.Direct_IO],Type=[Count]}
-   @key[type] Count     @key[is] @key[range] 0 .. @RI[implementation-defined];
+   @key[type] @AdaTypeDefn{File_Mode} @key[is] (In_File, Inout_File, Out_File);
+   @key[type] @AdaTypeDefn{Count}     @key[is] @key[range] 0 .. @RI[implementation-defined];
    @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
 
    --@RI{ File management}
@@ -643,75 +597,72 @@ The operations available for direct input and output are described in
 this subclause. The exception Status_Error is propagated if any of these
 operations is attempted for a file that is not open.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Read(File : @key[in] File_Type; Item : @key[out] Element_Type;
                                     From : @key[in]  Positive_Count);
 @key[procedure] Read(File : @key[in] File_Type; Item : @key[out] Element_Type);
 @end{Example}
+Operates on a file of mode In_File or Inout_File. In the case
+of the first form, sets the current index of the given file to
+the index value given by the parameter From. Then (for both
+forms) returns, in the parameter Item, the value of the
+element whose position in the given file is specified by the
+current index of the file; finally, increases the current
+index by one.
 
-          Operates on a file of mode In_File or Inout_File. In the case
-          of the first form, sets the current index of the given file to
-          the index value given by the parameter From. Then (for both
-          forms) returns, in the parameter Item, the value of the
-          element whose position in the given file is specified by the
-          current index of the file; finally, increases the current
-          index by one.
-
-          The exception Mode_Error is propagated if the mode of the given
-          file is Out_File. The exception End_Error is propagated if the
-          index to be used exceeds the size of the external file. The
-          exception Data_Error
-
-can be propagated if the element read cannot be
-          interpreted as a value of the subtype Element_Type
-
+The exception Mode_Error is propagated if the mode of the given
+file is Out_File. The exception End_Error is propagated if the
+index to be used exceeds the size of the external file. The
+exception Data_Error can be propagated if the element read cannot be
+interpreted as a value of the subtype Element_Type
 (see @RefSecNum{Exceptions in Input-Output}).
-@begin{Example}
+
+@begin{Example}@Keepnext
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type;
                                      To   : @key[in] Positive_Count);
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type);
 @end{Example}
+Operates on a file of mode Inout_File or Out_File. In the
+case of the first form, sets the index of the given file to
+the index value given by the parameter To. Then (for both
+forms) gives the value of the parameter Item to the element
+whose position in the given file is specified by the current
+index of the file; finally, increases the current index by
+one.
 
-          Operates on a file of mode Inout_File or Out_File. In the
-          case of the first form, sets the index of the given file to
-          the index value given by the parameter To. Then (for both
-          forms) gives the value of the parameter Item to the element
-          whose position in the given file is specified by the current
-          index of the file; finally, increases the current index by
-          one.
+The exception Mode_Error is propagated if the mode of the given
+file is In_File. The exception Use_Error is propagated if the
+capacity of the external file is exceeded.
 
-          The exception Mode_Error is propagated if the mode of the given
-          file is In_File. The exception Use_Error is propagated if the
-          capacity of the external file is exceeded.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Set_Index(File : @key[in] File_Type; To : @key[in] Positive_Count);
 @end{Example}
+Operates on a file of any mode. Sets the current index of the
+given file to the given index value (which may exceed the
+current size of the file).
 
-          Operates on a file of any mode. Sets the current index of the
-          given file to the given index value (which may exceed the
-          current size of the file).
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Index(File : @key[in] File_Type) @key[return] Positive_Count;
 @end{Example}
+Operates on a file of any mode. Returns the current index of
+the given file.
 
-          Operates on a file of any mode. Returns the current index of
-          the given file.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Size(File : @key[in] File_Type) @key[return] Count;
 @end{Example}
+Operates on a file of any mode. Returns the current size of
+the external file that is associated with the given file.
 
-          Operates on a file of any mode. Returns the current size of
-          the external file that is associated with the given file.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
 @end{Example}
+Operates on a file of mode In_File or Inout_File. Returns
+True if the current index exceeds the size of the external
+file; otherwise returns False.
 
-          Operates on a file of mode In_File or Inout_File. Returns
-          True if the current index exceeds the size of the external
-          file; otherwise returns False.
+The exception Mode_Error is propagated if the mode of the given file is
+Out_File.
 
-          The exception Mode_Error is propagated if the mode of the given
-          file is Out_File.
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -744,17 +695,17 @@ the construction of user-defined input-output packages.
 @begin{StaticSem}
 @Leading@;The generic library package Storage_IO has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Storage_IO]}
 @key[with] Ada.IO_Exceptions;
 @key[with] System.Storage_Elements;
 @key[generic]
    @key[type] Element_Type @key[is] @key[private];
-@ChildUnit{Parent=[Ada],Child=[Direct_IO]}
-@key[package] Ada.Storage_IO @key[is]
+@key[package] Ada.Storage_IO @key[is]@ChildUnit{Parent=[Ada],Child=[Storage_IO]}
    @key[pragma] Preelaborate(Storage_IO);
 
-   @AdaDefn{Buffer_Size} : @key(constant) System.Storage_Elements.Storage_Count := @RI(implementation-defined);
-   @key(subtype) @AdaDefn{Buffer_Type} @key(is) System.Storage_Elements.Storage_Array(1..Buffer_Size);
+   @AdaDefn{Buffer_Size} : @key(constant) System.Storage_Elements.Storage_Count :=
+      @RI(implementation-defined);
+   @key(subtype) @AdaDefn{Buffer_Type} @key(is)
+      System.Storage_Elements.Storage_Array(1..Buffer_Size);
 
    --@RI{ Input and output operations}
 
@@ -771,8 +722,12 @@ the construction of user-defined input-output packages.
 In each instance,
 the constant Buffer_Size has a value that is the size (in storage elements)
 of the buffer required to represent the content of an object of
-subtype Element_Type,
-including any implicit levels of indirection used by the implementation.
+subtype Element_Type, including any implicit levels of indirection used by
+the implementation.
+The Read and Write procedures of Storage_IO correspond to the Read and Write
+procedures of Direct_IO (see @RefSecNum{The Generic Package Direct_IO}),
+but with the content of the Item parameter being read from
+or written into the specified Buffer, rather than an external file.
 
 @begin{Reason}
 @Leading@;As with Direct_IO, the Element_Type formal of Storage_IO does not
@@ -786,10 +741,6 @@ of indirection, Buffer_Size will typically equal:
 @end{Example}
 @end{Reason}
 @ImplDef{The value of Buffer_Size in Storage_IO.}
-The Read and Write procedures of Storage_IO correspond to the Read and Write
-procedures of Direct_IO (see @RefSecNum{The Generic Package Direct_IO}),
-but with the content of the Item parameter being read from
-or written into the specified Buffer, rather than an external file.
 @end{StaticSem}
 
 @begin{Notes}
@@ -921,7 +872,7 @@ are not used.) The constant Unbounded is provided for this purpose.
 @end{StaticSem}
 
 @begin{Extend83}
-Append_File is new in Ada 9X.
+Append_File is new in Ada 95.
 @end{Extend83}
 
 @LabeledSubClause{The Package Text_IO}
@@ -930,25 +881,20 @@ Append_File is new in Ada 9X.
 @Leading@;The library package Text_IO has the following declaration:
 @begin{Example}
 @key[with] Ada.IO_Exceptions;
-@ChildUnit{Parent=[Ada],Child=[Text_IO]}
-@key[package] Ada.Text_IO @key[is]
+@key[package] Ada.Text_IO @key[is]@ChildUnit{Parent=[Ada],Child=[Text_IO]}
 
-@LangDefType{Package=[Ada.Text_IO],Type=[File_Type]}
-   @key[type] File_Type @key[is] @key[limited] @key[private];
+   @key[type] @AdaTypeDefn{File_Type} @key[is] @key[limited] @key[private];
 
-@LangDefType{Package=[Ada.Text_IO],Type=[File_Mode]}
-   @key[type] File_Mode @key[is] (In_File, Out_File, Append_File);
+   @key[type] @AdaTypeDefn{File_Mode} @key[is] (In_File, Out_File, Append_File);
 
-@LangDefType{Package=[Ada.Text_IO],Type=[Count]}
-   @key[type] Count @key[is] @key[range] 0 .. @RI[implementation-defined];
+   @key[type] @AdaTypeDefn{Count} @key[is] @key[range] 0 .. @RI[implementation-defined];
    @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
    @AdaDefn{Unbounded} : @key[constant] Count := 0; --@RI{ line and page length}
 
    @key[subtype] @AdaDefn{Field}       @key[is] Integer @key[range] 0 .. @RI[implementation-defined];
    @key[subtype] @AdaDefn{Number_Base} @key[is] Integer @key[range] 2 .. 16;
 
-@LangDefType{Package=[Ada.Text_IO],Type=[Type_Set]}
-   @key[type] Type_Set @key[is] (Lower_Case, Upper_Case);
+   @key[type] @AdaTypeDefn{Type_Set} @key[is] (Lower_Case, Upper_Case);
 
    --@RI{ File Management}
 
@@ -987,8 +933,7 @@ Append_File is new in Ada 9X.
    @key[function] @AdaSubDefn{Current_Output}  @key[return] File_Type;
    @key[function] @AdaSubDefn{Current_Error}   @key[return] File_Type;
 
-@LangDefType{Package=[Ada.Text_IO],Type=[File_Access]}
-   @key[type] File_Access @key[is] @key[access] @key[constant] File_Type;
+   @key[type] @AdaTypeDefn{File_Access} @key[is] @key[access] @key[constant] File_Type;
 
    @key[function] @AdaSubDefn{Standard_Input}  @key[return] File_Access;
    @key[function] @AdaSubDefn{Standard_Output} @key[return] File_Access;
@@ -1312,7 +1257,7 @@ Append_File is a new element of enumeration type File_Mode.
 Get_Immediate, Look_Ahead, the subprograms for dealing with
 standard error, the type File_Access and its associated subprograms,
 and the
-generic packages Modular_IO and Decimal_IO are new in Ada 9X.
+generic packages Modular_IO and Decimal_IO are new in Ada 95.
 @end{Extend83}
 
 @LabeledSubClause{Text File Management}
@@ -1396,7 +1341,7 @@ default files that are used when a file parameter is omitted from a Get,
 Put, or other operation of text input-output described below,
 or when application-dependent error-related text is to be output.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Set_Input(File : @key[in] File_Type);
 @end{Example}
 
@@ -1406,7 +1351,7 @@ or when application-dependent error-related text is to be output.
           The exception Status_Error is propagated if the given file is not
           open. The exception Mode_Error is propagated if the mode of the
           given file is not In_File.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Set_Output(File : @key[in] File_Type);
 @key[procedure] Set_Error (File : @key[in] File_Type);
 @end{Example}
@@ -1417,7 +1362,7 @@ or when application-dependent error-related text is to be output.
           The exception Status_Error is propagated if the given file is not
           open. The exception Mode_Error is propagated if the mode of the
           given file is not Out_File or Append_File.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Standard_Input @key[return] File_Type;
 @key[function] Standard_Input @key[return] File_Access;
 @end{Example}
@@ -1425,7 +1370,7 @@ or when application-dependent error-related text is to be output.
           Returns the standard input file (see @RefSecNum{Text Input-Output}),
 or an access value designating the standard input file, respectively.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Standard_Output @key[return] File_Type;
 @key[function] Standard_Output @key[return] File_Access;
 @end{Example}
@@ -1433,7 +1378,7 @@ or an access value designating the standard input file, respectively.
           Returns the standard output file (see @RefSecNum{Text Input-Output})
 or an access value designating the standard output file, respectively.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Standard_Error @key[return] File_Type;
 @key[function] Standard_Error @key[return] File_Access;
 @end{Example}
@@ -1444,7 +1389,7 @@ or an access value designating the standard output file, respectively.
 The Form strings implicitly associated with the opening of
 Standard_Input, Standard_Output, and
 Standard_Error at the start of program execution are implementation defined.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Current_Input @key[return] File_Type;
 @key[function] Current_Input @key[return] File_Access;
 @end{Example}
@@ -1453,7 +1398,7 @@ Standard_Error at the start of program execution are implementation defined.
 or an access value designating the current default input file,
 respectively.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Current_Output @key[return] File_Type;
 @key[function] Current_Output @key[return] File_Access;
 @end{Example}
@@ -1461,7 +1406,7 @@ respectively.
           Returns the current default output file,
 or an access value designating the current default output file,
 respectively.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Current_Error @key[return] File_Type;
 @key[function] Current_Error @key[return] File_Access;
 @end{Example}
@@ -1470,7 +1415,7 @@ respectively.
 or an access value designating the current default error file,
 respectively.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Flush (File : @key[in] @key[out] File_Type);
 @key[procedure] Flush;
 @end{Example}
@@ -1520,7 +1465,7 @@ In all cases, the exception Status_Error is propagated if the file to be
 used is not open; the exception Mode_Error is propagated if the mode of the
 file is not Out_File or Append_File.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Set_Line_Length(File : @key[in] File_Type; To : @key[in] Count);
 @key[procedure] Set_Line_Length(To   : @key[in] Count);
 @end{Example}
@@ -1536,7 +1481,7 @@ influences subsequent output operations.@end{ramification}
           The exception Use_Error is propagated if the specified line length
           is inappropriate for the associated external file.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Set_Page_Length(File : @key[in] File_Type; To : @key[in] Count);
 @key[procedure] Set_Page_Length(To   : @key[in] Count);
 @end{Example}
@@ -1548,7 +1493,7 @@ influences subsequent output operations.@end{ramification}
           The exception Use_Error is propagated if the specified page length
           is inappropriate for the associated external file.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Line_Length(File : @key[in] File_Type) @key[return] Count;
 @key[function] Line_Length @key[return] Count;
 @end{Example}
@@ -1557,7 +1502,7 @@ influences subsequent output operations.@end{ramification}
           specified output or append file, or zero if the line length is
           unbounded.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Page_Length(File : @key[in] File_Type) @key[return] Count;
 @key[function] Page_Length @key[return] Count;
 @end{Example}
@@ -1578,7 +1523,7 @@ appropriate (input or output) current default file. The exception
 Status_Error is propagated by any of these subprograms if the file to be
 used is not open.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] New_Line(File : @key[in] File_Type; Spacing : @key[in] Positive_Count := 1);
 @key[procedure] New_Line(Spacing : @key[in] Positive_Count := 1);
 @end{Example}
@@ -1599,7 +1544,7 @@ used is not open.
           The exception Mode_Error is propagated if the mode is not
           Out_File or Append_File.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Skip_Line(File  : @key[in] File_Type; Spacing : @key[in] Positive_Count := 1);
 @key[procedure] Skip_Line(Spacing : @key[in] Positive_Count := 1);
 @end{Example}
@@ -1622,7 +1567,7 @@ used is not open.
           The exception End_Error is propagated if an attempt is made to
           read a file terminator.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] End_Of_Line(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_Line @key[return] Boolean;
 @end{Example}
@@ -1633,7 +1578,7 @@ used is not open.
 
           The exception Mode_Error is propagated if the mode is not In_File.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] New_Page(File : @key[in] File_Type);
 @key[procedure] New_Page;
 @end{Example}
@@ -1649,7 +1594,7 @@ used is not open.
           The exception Mode_Error is propagated if the mode is not
           Out_File or Append_File.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Skip_Page(File : @key[in] File_Type);
 @key[procedure] Skip_Page;
 @end{Example}
@@ -1663,7 +1608,7 @@ used is not open.
           The exception End_Error is propagated if an attempt is made to
           read a file terminator.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] End_Of_Page(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_Page @key[return] Boolean;
 @end{Example}
@@ -1675,7 +1620,7 @@ used is not open.
 
           The exception Mode_Error is propagated if the mode is not In_File.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_File @key[return] Boolean;
 @end{Example}
@@ -1690,7 +1635,7 @@ The following subprograms provide for the control of the current
 position of reading or writing in a file. In all cases, the default
 file is the current output file.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Set_Col(File : @key[in] File_Type; To : @key[in] Positive_Count);
 @key[procedure] Set_Col(To   : @key[in] Positive_Count);
 @end{Example}
@@ -1731,7 +1676,7 @@ file is the current output file.
                The exception End_Error is propagated if an attempt is made
                to read a file terminator.
 @end{itemize}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Set_Line(File : @key[in] File_Type; To : @key[in] Positive_Count);
 @key[procedure] Set_Line(To   : @key[in] Positive_Count);
 @end{Example}
@@ -1766,7 +1711,7 @@ file is the current output file.
                The exception End_Error is propagated if an attempt is made
                to read a file terminator.
 @end{itemize}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Col(File : @key[in] File_Type) @key[return] Positive_Count;
 @key[function] Col @key[return] Positive_Count;
 @end{Example}
@@ -1776,7 +1721,7 @@ file is the current output file.
           The exception Layout_Error is propagated if this number exceeds
           Count'Last.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Line(File : @key[in] File_Type) @key[return] Positive_Count;
 @key[function] Line @key[return] Positive_Count;
 @end{Example}
@@ -1786,7 +1731,7 @@ file is the current output file.
           The exception Layout_Error is propagated if this number exceeds
           Count'Last.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Page(File : @key[in] File_Type) @key[return] Positive_Count;
 @key[function] Page @key[return] Positive_Count;
 @end{Example}
@@ -1945,9 +1890,10 @@ Put(Item => -23, Width => 2);  --@RI{  "@en@|23"}
 @LabeledSubClause{Input-Output of Characters and Strings}
 
 @begin{StaticSem}
-@Leading@;For an item of type Character the following procedures are provided:
+@Leading@Keepnext@;For an item of type Character the following procedures are
+provided:
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Character);
 @key[procedure] Get(Item : @key[out] Character);
 @end{Example}
@@ -1958,7 +1904,7 @@ Put(Item => -23, Width => 2);  --@RI{  "@en@|23"}
 
           The exception End_Error is propagated if an attempt is made to
           skip a file terminator.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Put(File : @key[in] File_Type; Item : @key[in] Character);
 @key[procedure] Put(Item : @key[in] Character);
 @end{Example}
@@ -1968,7 +1914,7 @@ Put(Item => -23, Width => 2);  --@RI{  "@en@|23"}
           current column number exceeds it, has the effect of calling
           New_Line with a spacing of one. Then, or otherwise, outputs
           the given character to the file.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Look_Ahead (File        : @key[in]  File_Type;
                       Item        : @key[out] Character;
                       End_Of_Line : @key[out] Boolean);
@@ -1984,7 +1930,7 @@ Item is not specified.
 Otherwise End_Of_Line is set to
 False and Item is set to the the next character (without consuming it)
 from the file.
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get_Immediate(File : @key[in]  File_Type;
                         Item : @key[out] Character);
 @key[procedure] Get_Immediate(Item : @key[out] Character);
@@ -1995,7 +1941,7 @@ File or the default input file. Mode_Error is propagated if the mode of the
 file is not In_File. End_Error is propagated if at the end of the file.
 The current column, line and page numbers for the file are not affected.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get_Immediate(File      : @key[in]  File_Type;
                         Item      : @key[out] Character;
                         Available : @key[out] Boolean);
@@ -2015,7 +1961,7 @@ The current column, line and page numbers for the file are not affected.
 
 @Leading@;For an item of type String the following procedures are provided:
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] String);
 @key[procedure] Get(Item : @key[out] String);
 @end{Example}
@@ -2025,7 +1971,7 @@ The current column, line and page numbers for the file are not affected.
           string (in particular, no operation is performed if the string
           is null).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Put(File : @key[in] File_Type; Item : @key[in] String);
 @key[procedure] Put(Item : @key[in] String);
 @end{Example}
@@ -2035,8 +1981,10 @@ The current column, line and page numbers for the file are not affected.
           string (in particular, no operation is performed if the string
           is null).
 
-@begin{Example}
-@key[procedure] Get_Line(File : @key[in] File_Type; Item : @key[out] String; Last : @key[out] Natural);
+@begin{Example}@Keepnext
+@key[procedure] Get_Line(File : @key[in] File_Type;
+                              Item : @key[out] String;
+                              Last : @key[out] Natural);
 @key[procedure] Get_Line(Item : @key[out] String;   Last : @key[out] Natural);
 @end{Example}
 
@@ -2055,7 +2003,7 @@ The values of characters not assigned are not specified.
           Item'First. The exception End_Error is propagated if an attempt
           is made to skip a file terminator.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Put_Line(File : @key[in] File_Type; Item : @key[in] String);
 @key[procedure] Put_Line(Item : @key[in] String);
 @end{Example}
@@ -2123,10 +2071,10 @@ Default_Base  : Number_Base := 10;
 @end{Example}
 
 @begin{Wide}
-@Leading@;The following procedures are provided:
+@Leading@Keepnext@;The following procedures are provided:
 @end{Wide}
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Num; Width : @key[in] Field := 0);
 @key[procedure] Get(Item : @key[out] Num; Width : @key[in] Field := 0);
 @end{Example}
@@ -2150,12 +2098,12 @@ Default_Base  : Number_Base := 10;
       not of the subtype Num (for Integer_IO) or is not in the base
       range of Num (for Modular_IO).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Put(File  : @key[in] File_Type;
               Item  : @key[in] Num;
               Width : @key[in] Field := Default_Width;
               Base  : @key[in] Number_Base := Default_Base);
-
+@comment{Blank Line}
 @key[procedure] Put(Item  : @key[in] Num;
               Width : @key[in] Field := Default_Width;
               Base  : @key[in] Number_Base := Default_Base);
@@ -2175,7 +2123,7 @@ Default_Base  : Number_Base := 10;
           otherwise, uses the syntax for based literal, with any letters
           in upper case.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get(From : @key[in] String; Item : @key[out] Num; Last : @key[out] Positive);
 @end{Example}
 
@@ -2191,7 +2139,7 @@ Default_Base  : Number_Base := 10;
           not have the required syntax or if the value obtained is not
           of the subtype Num.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Put(To   : @key[out] String;
               Item : @key[in] Num;
               Base : @key[in] Number_Base := Default_Base);
@@ -2205,9 +2153,8 @@ Default_Base  : Number_Base := 10;
 
 @Leading@;Integer_Text_IO is a library package that is a nongeneric equivalent
 to Text_IO.Integer_IO for the predefined type Integer:
-@ChildUnit{Parent=[Ada],Child=[Integer_@!Text_IO]}
 @begin{Example}
-@key[with] Ada.Text_IO;
+@key[with] Ada.Text_IO;@ChildUnit{Parent=[Ada],Child=[Integer_@!Text_IO]}
 @key[package] Ada.Integer_Text_IO @key[is] @key[new] Ada.Text_IO.Integer_IO(Integer);
 @end{Example}
 
@@ -2235,6 +2182,9 @@ characters read forms an integer literal outside the range
 
 @begin{Examples}
 @begin{Example}
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+
 @key[package] Int_IO @key[is] @key[new] Integer_IO(Small_Int); @key[use] Int_IO;
 --@RI{ default format used at instantiation,}
 --@RI{ Default_Width = 4, Default_Base = 10}
@@ -2298,7 +2248,7 @@ Default_Exp  : Field := 0;
 @Leading@Keepnext@;The following procedures are provided:
 @end{Wide}
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Num; Width : @key[in] Field := 0);
 @key[procedure] Get(Item : @key[out] Num; Width : @key[in] Field := 0);
 @end{Example}
@@ -2334,13 +2284,13 @@ possible sequence of characters matching the syntax of any of the following
           not have the required syntax or if the value obtained is not
           of the subtype Num.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Put(File : @key[in] File_Type;
               Item : @key[in] Num;
               Fore : @key[in] Field := Default_Fore;
               Aft  : @key[in] Field := Default_Aft;
               Exp  : @key[in] Field := Default_Exp);
-
+@comment{Blank Line}
 @key[procedure] Put(Item : @key[in] Num;
               Fore : @key[in] Field := Default_Fore;
               Aft  : @key[in] Field := Default_Aft;
@@ -2352,7 +2302,6 @@ with the format defined by Fore, Aft and Exp. If the value is
 negative, or if Num is a floating point type where Num'Signed_Zeros is True and
 the value is a negatively signed zero, then
 a minus sign is included in the integer part.
-
 If Exp has the value zero, then the integer part to be output has
 as many digits as are needed to represent the integer part of
 the value of Item, overriding Fore if necessary, or consists
@@ -2367,7 +2316,6 @@ fewer than Fore characters, including any minus sign, then
 leading spaces are first output to make up the difference.
 The number of digits of the fractional part is given by Aft,
 or is one if Aft equals zero.
-
 The value is rounded; a value of exactly one half in the last place
 is rounded away from zero.
 
@@ -2381,7 +2329,7 @@ characters, including the sign, then leading zeros precede the
 digits, to make up the difference. For the value 0.0 of Item,
 the exponent has the value zero.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get(From : @key[in] String; Item : @key[out] Num; Last : @key[out] Positive);
 @end{Example}
 
@@ -2397,7 +2345,7 @@ the exponent has the value zero.
           not have the required syntax, or if the value obtained is not
           of the subtype Num.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Put(To   : @key[out] String;
               Item : @key[in] Num;
               Aft  : @key[in] Field := Default_Aft;
@@ -2413,9 +2361,8 @@ the exponent has the value zero.
 
 @Leading@;Float_Text_IO is a library package that is a nongeneric equivalent
 to Text_IO.Float_IO for the predefined type Float:
-@ChildUnit{Parent=[Ada],Child=[Float_@!Text_IO]}
 @begin{Example}
-@key[with] Ada.Text_IO;
+@key[with] Ada.Text_IO;@ChildUnit{Parent=[Ada],Child=[Float_@!Text_IO]}
 @key[package] Ada.Float_Text_IO @key[is] @key[new] Ada.Text_IO.Float_IO(Float);
 @end{Example}
 
@@ -2472,6 +2419,9 @@ same set of formats.
 
 @begin{Examples}
 @begin{Example}
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+
 @key[package] Real_IO @key[is] @key[new] Float_IO(Real); @key[use] Real_IO;
 --@RI{ default format used at instantiation, Default_Exp = 3}
 
@@ -2513,7 +2463,7 @@ Default_Setting : Type_Set := Upper_Case;
 @Leading@Keepnext@;The following procedures are provided:
 @end{Wide}
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get(File : @key[in] File_Type; Item : @key[out] Enum);
 @key[procedure] Get(Item : @key[out] Enum);
 @end{Example}
@@ -2531,12 +2481,12 @@ Default_Setting : Type_Set := Upper_Case;
           character literal does not correspond to a value of the
           subtype Enum.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Put(File  : @key[in] File_Type;
               Item  : @key[in] Enum;
               Width : @key[in] Field := Default_Width;
               Set   : @key[in] Type_Set := Default_Setting);
-
+@comment{Blank Line}
 @key[procedure] Put(Item  : @key[in] Enum;
               Width : @key[in] Field := Default_Width;
               Set   : @key[in] Type_Set := Default_Setting);
@@ -2548,9 +2498,7 @@ Default_Setting : Type_Set := Upper_Case;
           case is used for identifiers; it has no effect for character
           literals. If the sequence of characters produced has fewer
           than Width characters, then trailing spaces are finally output
-          to make up the difference.
-
-          If Enum is a character type,
+          to make up the difference. If Enum is a character type,
           the sequence of characters produced is as for
           Enum'Image(Item), as modified by the Width
           and Set parameters.
@@ -2561,7 +2509,7 @@ Default_Setting : Type_Set := Upper_Case;
   too.
 @end{Discussion}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Get(From : @key[in] String; Item : @key[out] Enum; Last : @key[out] Positive);
 @end{Example}
 
@@ -2583,7 +2531,7 @@ Default_Setting : Type_Set := Upper_Case;
   in the case of wide @nt{character_literal}s and control characters.
 @end{Honest}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Put(To   : @key[out] String;
               Item : @key[in] Enum;
               Set  : @key[in] Type_Set := Default_Setting);
@@ -2604,10 +2552,10 @@ defined by the language.
 There is a difference between Put defined for characters, and for
 enumeration values. Thus
 @begin{Example}
-Ada.Text_IO.Put('A');  --@RI{  outputs the character A}
+   Ada.Text_IO.Put('A');  --@RI{  outputs the character A}
 
-@key[package] Char_IO @key[is] @key[new] Ada.Text_IO.Enumeration_IO(Character);
-Char_IO.Put('A');  --@RI{  outputs the character 'A', between apostrophes}
+   @key[package] Char_IO @key[is] @key[new] Ada.Text_IO.Enumeration_IO(Character);
+   Char_IO.Put('A');  --@RI{  outputs the character 'A', between apostrophes}
 @end{Example}
 
 The type Boolean is an enumeration type, hence Enumeration_IO can be
@@ -2639,27 +2587,23 @@ occurrence of String is replaced by Wide_String.
 @Defn{Ada.Float_Wide_Text_IO}
 @ChildUnit{Parent=[Ada],Child=[Float_@!Wide_@!Text_IO]}
 Nongeneric equivalents of Wide_Text_IO.Integer_IO
-and Wide_Text_IO.Float_IO are provided (as for Text_IO)
+and Wide_Text_IO.@!Float_IO are provided (as for Text_IO)
 for each predefined numeric type,
-with names such as Ada.Integer_Wide_Text_IO,
-Ada.Long_Integer_Wide_Text_IO,
-Ada.Float_Wide_Text_IO,
-Ada.Long_Float_Wide_Text_IO.
-
-
+with names such as Ada.Integer_@!Wide_Text_IO,
+Ada.Long_@!Integer_@!Wide_Text_IO,
+Ada.Float_@!Wide_Text_IO,
+Ada.Long_@!Float_@!Wide_Text_IO.
 @end{StaticSem}
 
 @begin{Extend83}
-Support for Wide_Character and Wide_String I/O is new in Ada 9X.
+Support for Wide_Character and Wide_String I/O is new in Ada 95.
 @end{Extend83}
 
 @LabeledClause{Stream Input-Output}
 @begin{Intro}
 
 The packages Streams.Stream_IO, Text_IO.Text_Streams, and
-Wide_Text_IO.Text_Streams
-
-provide stream-oriented operations on files.
+Wide_Text_IO.Text_Streams provide stream-oriented operations on files.
 @end{Intro}
 
 @LabeledSubClause{The Package Streams.Stream_IO}
@@ -2682,21 +2626,16 @@ See @RefSecNum{Streams} for a general discussion of streams.
 @begin{StaticSem}
 @Leading@;The library package Streams.Stream_IO has the following declaration:
 @begin(example)
-@key(with) Ada.IO_Exceptions;
-@ChildUnit{Parent=[Ada.Streams],Child=[Stream_@!IO]}
+@key(with) Ada.IO_Exceptions;@ChildUnit{Parent=[Ada.Streams],Child=[Stream_@!IO]}
 @key(package) Ada.Streams.Stream_IO @key(is)
 
-@LangDefType{Package=[Ada.Streams.Stream_IO],Type=[Stream_Access]}
-    @key[type] Stream_Access @key[is] @key[access] @key[all] Root_Stream_Type'Class;
+    @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Root_Stream_Type'Class;
 
-@LangDefType{Package=[Ada.Streams.Stream_IO],Type=[File_Type]}
-    @key(type) File_Type @key(is) @key(limited) @key(private;)
+    @key(type) @AdaTypeDefn{File_Type} @key(is) @key(limited) @key(private;)
 
-@LangDefType{Package=[Ada.Streams.Stream_IO],Type=[File_Mode]}
-    @key(type) File_Mode @key(is) (In_File, Out_File, Append_File);
+    @key(type) @AdaTypeDefn{File_Mode} @key(is) (In_File, Out_File, Append_File);
 
-@LangDefType{Package=[Ada.Streams.Stream_IO],Type=[Count]}
-    @key[type]    Count          @key[is] @key[range] 0 .. @RI[implementation-defined];
+    @key[type]    @AdaTypeDefn{Count}          @key[is] @key[range] 0 .. @RI[implementation-defined];
     @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
       -- @RI(Index into file, in stream elements.)
 
@@ -2710,27 +2649,23 @@ See @RefSecNum{Streams} for a general discussion of streams.
                     Name : @key(in) String;
                     Form : @key(in) String := "");
 
-
     @key(procedure) @AdaSubDefn{Close}  (File : @key(in) @key(out) File_Type);
     @key(procedure) @AdaSubDefn{Delete} (File : @key(in) @key(out) File_Type);
     @key(procedure) @AdaSubDefn{Reset}  (File : @key(in) @key(out) File_Type; Mode : @key(in) File_Mode);
     @key(procedure) @AdaSubDefn{Reset}  (File : @key(in) @key(out) File_Type);
 
-
     @key(function) @AdaSubDefn{Mode} (File : @key(in) File_Type) @key(return) File_Mode;
     @key(function) @AdaSubDefn{Name} (File : @key(in) File_Type) @key(return) String;
     @key(function) @AdaSubDefn{Form} (File : @key(in) File_Type) @key(return) String;
 
-
     @key(function) @AdaSubDefn{Is_Open}     (File : @key(in) File_Type) @key(return) Boolean;
     @key(function) @AdaSubDefn{End_Of_File} (File : @key(in) File_Type) @key(return) Boolean;
-
 
     @key(function) @AdaSubDefn{Stream} (File : @key(in) File_Type) @key(return) Stream_Access;
         -- @RI(Return stream access for use with T'Input and T'Output)
 
-
-
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
     -- @RI(Read array of stream elements from file)
     @key(procedure) @AdaSubDefn{Read} (File : @key(in)  File_Type;
@@ -2742,7 +2677,8 @@ See @RefSecNum{Streams} for a general discussion of streams.
                     Item : @key(out) Stream_Element_Array;
                     Last : @key(out) Stream_Element_Offset);
 
-
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
     -- @RI(Write array of stream elements into file)
     @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
@@ -2752,10 +2688,10 @@ See @RefSecNum{Streams} for a general discussion of streams.
     @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
                            Item : @key(in) Stream_Element_Array);
 
-
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
     -- @RI(Operations on position within file)
-
 
     @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count);
 
@@ -2837,11 +2773,9 @@ a text file as a stream.
 @begin{StaticSem}
 @Leading@;The library package Text_IO.Text_Streams has the following declaration:
 @begin{example}
-@key[with] Ada.Streams;
-@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_@!Streams]}
+@key[with] Ada.Streams;@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_@!Streams]}
 @key[package] Ada.Text_IO.Text_Streams @key[is]
-@LangDefType{Package=[Ada.Text_IO.Text_@!Streams],Type=[Stream_Access]}
-   @key[type] Stream_Access @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
+   @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
 
    @key[function] @AdaSubDefn{Stream} (File : @key[in] File_Type) @key[return] Stream_Access;
 @key[end] Ada.Text_IO.Text_Streams;
@@ -2871,11 +2805,9 @@ a wide text file as a stream.
 @Leading@;The library package Wide_Text_IO.Text_Streams
 has the following declaration:
 @begin{example}
-@key[with] Ada.Streams;
-@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Text_@!Streams]}
+@key[with] Ada.Streams;@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Text_@!Streams]}
 @key[package] Ada.Wide_Text_IO.Text_Streams @key[is]
-@LangDefType{Package=[Ada.Wide_Text_@!IO.Text_@!Streams],Type=[Stream_Access]}
-   @key[type] Stream_Access @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
+   @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
 
    @key[function] @AdaSubDefn{Stream} (File : @key[in] File_Type) @key[return] Stream_Access;
 @key[end] Ada.Wide_Text_IO.Text_Streams;
@@ -2895,8 +2827,7 @@ predefined input-output packages.
 @begin{StaticSem}
 @Leading@;The library package IO_Exceptions has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[IO_Exceptions]}
-@key[package] Ada.IO_Exceptions @key[is]
+@key[package] Ada.IO_Exceptions @key[is]@ChildUnit{Parent=[Ada],Child=[IO_Exceptions]}
    @key[pragma] Pure(IO_Exceptions);
 
    @AdaDefn{Status_Error} : @key[exception];

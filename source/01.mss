@@ -8,36 +8,33 @@ two horizontal rules at the top of page 1. (RLB-The following is a hack:
 I probably ought to add a style just for this purpose)
 @end{Comment}
 
-@begin{WithoutParanum}
 @thickline
 
 @begin{Wide}
-@leading@tabclear()@tabset(P45)
+@noparanum@leading@tabclear()@tabset(P45)
 @Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}]>
 @end{Wide}
 
 @thickline
 
-@ @*@comment{Some vertical whitespace}
+@noparanum@ @*@comment{Some vertical whitespace}
 @ @*
 @ @*
 
-@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Information technology
+@noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Information technology
 @Em Programming}}}}}}}}}}
 
-@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Languages @Em Ada}}}}}}}}}}
+@noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Languages @Em Ada}}}}}}}}}}
 
-@ @*@comment{Some vertical whitespace}
+@noparanum@ @*@comment{Some vertical whitespace}
 @ @*
 @ @*
-
-@end{WithoutParanum}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/08/12 00:40:16 $}
+@Comment{$Date: 2000/08/17 03:15:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of

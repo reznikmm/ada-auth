@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/12 00:40:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/17 03:15:27 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:17 $}
+@Comment{$Date: 2000/08/17 03:15:27 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -107,8 +107,7 @@ instructions that exploit the packed decimal representation.
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Decimal has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Decimal]}
-@key(package) Ada.Decimal @key(is)
+@key(package) Ada.Decimal @key(is)@ChildUnit{Parent=[Ada],Child=[Decimal]}
    @key(pragma) Pure(Decimal);
 
    @AdaDefn{Max_Scale} : @key(constant) := @RI{implementation-defined};
@@ -922,9 +921,7 @@ in @RefSecNum(Edited Output Generation).
 @ChildUnit{Parent=[Ada.Text_IO],Child=[Editing]}
 @key(package) Ada.Text_IO.Editing @key(is)
 
-   @key(type) Picture @key(is) @key(private);
-@LangDefType{Package=[Ada.Text_IO.Editing],
-             Type=[Picture]}
+   @key(type) @AdaTypeDefn{Picture} @key(is) @key(private);
 
    @key(function) @AdaSubDefn{Valid} (Pic_String      : @key(in) String;
                    Blank_When_Zero : @key(in) Boolean := False) @key(return) Boolean;
@@ -1209,13 +1206,10 @@ for the currency string, would be an unnecessary complication.
 @begin{StaticSem}
 @Leading@;@Defn{Ada.Wide_Text_IO.Editing}
 @ChildUnit{Parent=[Ada.Wide_Text_IO],Child=[Editing]}
-@LangDefType{Package=[Ada.Wide_Text_IO.Editing],
-             Type=[Picture]}
 The child package Wide_Text_IO.Editing has
 the same contents as Text_IO.Editing, except that:
 @begin{Itemize}
-each occurrence of Character
-is replaced by Wide_Character,
+each occurrence of Character is replaced by Wide_Character,
 
 each occurrence of Text_IO is replaced by Wide_Text_IO,
 

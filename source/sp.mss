@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:28 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/08/15 01:11:45 $}
+@Comment{$Date: 2000/08/17 03:15:28 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -284,6 +284,8 @@ In a multi-processor with more than one interrupt subsystem, it is
 implementation defined whether (and how) interrupt sources from
 separate subsystems share the same Interrupt_ID type
 (see @RefSecNum{The Package Interrupts}).
+In particular, the meaning of a blocked or pending interrupt may then be
+applicable to one processor only.
 @begin{discussion}
 This issue is tightly related to the issue of scheduling on a
 multi-processor. In a sense, if a particular interrupt source is not
@@ -293,8 +295,6 @@ One way to approach this problem is to assign sub-ranges within
 Interrupt_ID to each interrupt subsystem, such that @lquotes@;similar@rquotes@; interrupt
 sources (e.g. a timer) in different subsystems get a distinct id.
 @end{Discussion}
-In particular, the meaning of a blocked or pending interrupt may then be
-applicable to one processor only.
 
 Implementations are allowed to impose timing or other limitations on the
 execution of interrupt handlers.
@@ -370,8 +370,8 @@ For the Attach_Handler pragma, the expected type for the
 The Attach_Handler pragma is only allowed immediately within the
 @nt{protected_definition}
 where the corresponding subprogram is declared.
-The corresponding @nt{protected_type_declaration}
-or @nt{single_protected_declaration}
+The corresponding @nt{protected_@!type_@!declaration}
+or @nt{single_@!protected_@!declaration}
 shall be a library level declaration.
 @begin{Discussion}
 In the case of a @nt{protected_type_declaration},
@@ -381,9 +381,9 @@ need not be at library level.
 
 The Interrupt_Handler pragma is only allowed immediately within a
 @nt{protected_definition}.
-The corresponding @nt{protected_type_declaration} shall
+The cor@!responding @nt{protected_type_declaration} shall
 be a library level declaration.
-In addition, any @nt{object_declaration} of such a type shall be a
+In addition, any @nt{object_@!declaration} of such a type shall be a
 library level declaration.
 @end{Legality}
 
@@ -421,7 +421,7 @@ When a protected object is finalized, for any of its procedures that are
 attached to interrupts, the handler is detached. If the handler was
 attached by a procedure in the Interrupts package or if no user
 handler was previously attached to the interrupt, the default treatment is
-restored. Otherwise, @Redundant[that is, if an Attach_Handler pragma was
+restored. Otherwise, @Redundant[that is, if an Attach_@!Handler pragma was
 used,] the previous handler is restored.
 @begin{Discussion}
 Since only library-level protected procedures can be attached as handlers
@@ -466,11 +466,10 @@ activity of an interrupt handler could invalidate the contents of cache memory, 
 @end{Metrics}
 
 @begin{ImplPerm}
-
 When the pragmas Attach_Handler or Interrupt_Handler apply to a protected
-procedure, the implementation is allowed to impose
+procedure, the implemen@!tation is allowed to impose
 implementation-defined restrictions on the
-corresponding @nt{protected_type_declaration} and @nt{protected_body}.
+corresponding @nt{protected_@!type_@!declaration} and @nt{protected_@!body}.
 @begin{Ramification}
 The restrictions may be on the constructs that are allowed within them,
 and on ordinary calls (i.e. not via interrupts) on protected operations in
@@ -534,15 +533,14 @@ a protected procedure that is an interrupt handler.
 
 @Leading@Keepnext@;The following language-defined packages exist:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Interrupts]}
-@key{with} System;
+@key{with} System;@ChildUnit{Parent=[Ada],Child=[Interrupts]}
 @key[package] Ada.Interrupts @key[is]
-@LangDefType{Package=[Ada.Interrupts],Type=[Interrupt_ID]}
-   @key[type] Interrupt_ID @key[is] @RI{implementation-defined};
-@LangDefType{Package=[Ada.Interrupts],Type=[Parameterless_Handler]}
-   @key[type] Parameterless_Handler @key[is]
+   @key[type] @AdaTypeDefn{Interrupt_ID} @key[is] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Parameterless_Handler} @key[is]
       @key[access] @key[protected] @key[procedure];
 
+@ChgRef{Version=[1], Kind=[Deleted]}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
    @key[function] @AdaSubDefn{Is_Reserved} (Interrupt : Interrupt_ID)
       @key[return] Boolean;
@@ -573,8 +571,7 @@ a protected procedure that is an interrupt handler.
 @key[end] Ada.Interrupts;
 
 
-@ChildUnit{Parent=[Ada.Interrupts],Child=[Names]}
-@key[package] Ada.Interrupts.Names @key[is]
+@key[package] Ada.Interrupts.Names @key[is]@ChildUnit{Parent=[Ada.Interrupts],Child=[Names]}
    @RI{implementation-defined} : @key[constant] Interrupt_ID :=
      @RI{implementation-defined};
       . . .
@@ -608,7 +605,7 @@ in effect for that interrupt.
 If New_Handler is @key[null], the default treatment is restored.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If New_Handler designates a protected procedure to which the pragma
-Interrupt_Handler does not apply, Program_Error is raised. In
+Interrupt_@!Handler does not apply, Program_Error is raised. In
 this case, the operation does not modify the existing interrupt treatment.
 
 The Exchange_Handler procedure operates in the same manner as Attach_Handler
@@ -665,7 +662,7 @@ Interrupt_Handler pragmas, but not the Interrupt_Priority pragma.
 
 If implementation-defined forms of interrupt handler procedures are supported,
 such as protected procedures with parameters, then for each such form of a
-handler, a type analogous to Parameterless_Handler should be specified in a
+handler, a type analogous to Parameterless_@!Handler should be specified in a
 child package of Interrupts, with the same operations as in the
 predefined package Interrupts.
 
@@ -839,7 +836,7 @@ of Wide_Image and Wide_Value.]
 In addition, the semantics of Text_IO.Enumeration_IO are implementation
 defined.
 If the pragma applies to a tagged type,
-then the semantics of the Tags.Expanded_Name function
+then the semantics of the Tags.@!Expanded_@!Name function
 are implementation defined for that type.
 If the pragma applies to an exception,
 then the semantics of the Exceptions.Exception_Name function
@@ -921,7 +918,7 @@ a pragma Atomic_Components applies, or any object of an atomic type.
 A @i{volatile} type is one to which a pragma Volatile applies.
 A @i{volatile} object (including a component)
 is one to which a pragma Volatile applies,
-or a component of an array to which a pragma Volatile_Components applies,
+or a component of an array to which a pragma Volatile_@!Components applies,
 or any object of a volatile type.
 In addition, every atomic type or object is also defined to be volatile.
 Finally, if an object is volatile, then so
@@ -931,10 +928,10 @@ are all of its subcomponents @Redundant[(the same does not apply to atomic)].
 @begin{Resolution}
 
 The @nt{local_name} in an Atomic or Volatile pragma shall resolve to denote
-either an @nt{object_declaration}, a non-inherited @nt{component_declaration},
-or a @nt{full_type_declaration}. The
-@SynI{array_}@nt{local_name} in an Atomic_Components or
-Volatile_Components pragma shall resolve to denote the declaration
+either an @nt{object_declaration}, a non-inherited @nt{component_@!declaration},
+or a @nt{full_type_@!declaration}. The
+@SynI{array_}@nt{local_name} in an Atomic_@!Components or
+Volatile_@!Components pragma shall resolve to denote the declaration
 of an array type or an array object of an anonymous type.
 
 @end{Resolution}
@@ -1113,10 +1110,8 @@ defined.]
 @begin{StaticSem}
 @Leading@Keepnext@;The following language-defined library package exists:
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Task_Identification]}
-@key[package] Ada.Task_Identification @key[is]
-@LangDefType{Package=[Ada.Task_Identification],Type=[Task_ID]}
-   @key[type] Task_ID @key[is] @key{private};
+@key[package] Ada.Task_Identification @key[is]@ChildUnit{Parent=[Ada],Child=[Task_Identification]}
+   @key[type] @AdaTypeDefn{Task_ID} @key[is] @key{private};
    @AdaSubDefn{Null_Task_ID} : @key{constant} Task_ID;
    @key{function}  "=" (Left, Right : Task_ID) @key{return} Boolean;
 
@@ -1242,11 +1237,9 @@ Task_ID value that identifies the environment task.
 @key{generic}
    @key{type} Attribute @key{is} @key{private};
    Initial_Value : @key[in] Attribute;
-@ChildUnit{Parent=[Ada],Child=[Task_Attributes]}
-@key{package} Ada.Task_Attributes @key{is}
+@key{package} Ada.Task_Attributes @key{is}@ChildUnit{Parent=[Ada],Child=[Task_Attributes]}
 
-@LangDefType{Package=[Ada.Task_Attributes],Type=[Attribute_Handle]}
-   @key{type} Attribute_Handle @key{is} @key{access} @key{all} Attribute;
+   @key{type} @AdaTypeDefn{Attribute_Handle} @key{is} @key{access} @key{all} Attribute;
 
    @key{function} @AdaSubDefn{Value}(T : Task_ID := Current_Task)
      @key{return} Attribute;

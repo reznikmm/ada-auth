@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/08/11 00:09:15 $}
+@Comment{$Date: 2000/08/17 03:15:26 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -664,6 +664,7 @@ RM83 forgot to restrict the definition of elaboration of a
 @nt{subprogram_body} to non-generics.
 @end{DiffWord83}
 
+
 @LabeledSubClause{Conformance Rules}
 
 @begin{Intro}
@@ -678,11 +679,14 @@ conformance, subtype conformance, or full conformance.]
 @end{Intro}
 
 @begin{StaticSem}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011]}
 @leading@Defn{convention}
 @Defn{calling convention}
 @Redundant[As explained in @RefSec{Interfacing Pragmas},
-a @i{convention} can be specified for an entity.
-For a callable entity or access-to-subprogram type,
+a @i{convention} can be specified for an entity.]
+@Chg{New=[Unless this International Standard states otherwise, the default
+convention of an entity is Ada.],Old=[]}
+@Redundant[For a callable entity or access-to-subprogram type,
 the convention is called the @i{calling convention}.]
 The following conventions are defined by the language:
 @begin{Itemize}
@@ -767,8 +771,20 @@ the reserved word @key(protected) in its definition.
 
 @Defn{entry calling convention}
 @Defn2{Term=[calling convention], Sec=(entry)}
-The default calling convention is @i{entry}
-for an entry.
+The default calling convention is @i{entry} for an entry.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0011]}
+@Chg{New=[@Redundant[If not specified above as Intrinsic, the calling convention for any
+inherited or overriding dispatching operation of a tagged type is that of the
+corresponding subprogram of the parent type.] The default calling convention
+for a new dispatching operation of a tagged type is the convention of the type.],
+Old=[]}
+@begin{Reason}
+@Chg{New=[The first rule is officially stated in
+@RefSecNum(Dispatching Operations of Tagged Types). The second is intended
+to make interfacing to foreign OOP languages easier, by making the default
+that the type and operations all have the same convention.],Old=[]}
+@end{Reason}
 @end{Itemize}
 
 Of these four conventions, only Ada and Intrinsic are
@@ -884,6 +900,10 @@ However, @lquotes@;F@rquotes@; and @lquotes@;F_View@rquotes@; are not fully conf
 If they were, it would be bad news, since the two denoted views have
 different @nt{default_expression}s.
 @end{Ramification}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0018]}
+@Chg{New=[each @nt{attribute_designator} in one must be the same as the
+corresponding @nt{attribute_designator} in the other; and],Old=[]}
 
 each @nt{primary} that is a literal in one
 has the same value as the corresponding literal in the other.
@@ -1722,12 +1742,12 @@ We also use the term operator
 to refer to one of the syntactic categories
 defined in @RefSec{Operators and Expression Evaluation}
 whose names end with @lquotes@;_operator:@rquotes@;
-@nt<logical_operator>,
-@nt<relational_operator>,
-@nt<binary_adding_operator>,
-@nt<unary_adding_operator>,
-@nt<multiplying_operator>, and
-@nt<highest_precedence_operator>.
+@nt<logical_@!operator>,
+@nt<relational_@!operator>,
+@nt<binary_@!adding_@!operator>,
+@nt<unary_@!adding_@!operator>,
+@nt<multiplying_@!operator>, and
+@nt<highest_@!precedence_@!operator>.
 @end{Honest}
 @end{Resolution}
 

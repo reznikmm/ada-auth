@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/17 03:15:28 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:45 $}
+@Comment{$Date: 2000/08/17 03:15:28 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -85,13 +85,13 @@ or Convention.
 Their forms, together with that of the related
 @nt[pragma] Linker_Options, are as follows:
 @end{SyntaxText}
-@PragmaSyn`@key{pragma} @prag(Import)(
-    [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}
- [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);'
+@PragmaSyn`@key{pragma} @prag(Import)(@*
+@ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
+@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);'
 
-@PragmaSyn`@key{pragma} @prag(Export)(
-    [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}
- [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);'
+@PragmaSyn`@key{pragma} @prag(Export)(@*
+@ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
+@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);'
 
 @PragmaSyn`@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});'
 
@@ -164,7 +164,7 @@ corresponding to @i[L] and is defined to be
 Convention @i[L] has been specified for T in
 a @nt[pragma] Convention, and T is @i{eligible for
 convention @i[L]}; that is:
-@begin[itemize]
+@begin[inneritemize]
 T is an array type with either an
 unconstrained or statically-constrained first subtype, and
 its component type is @i[L]-compatible,
@@ -177,7 +177,7 @@ T is an access-to-object type, and its designated type is @i[L]-compatible,
 
 T is an access-to-subprogram type,
 and its designated profile's parameter and result types are all @i[L]-compatible.
-@end[itemize]
+@end[inneritemize]
 
 T is derived from an @i[L]-compatible type,
 
@@ -322,16 +322,16 @@ foreign language's compiler in interfacing with the
 system's linker tool.
 
 The meaning of link names is implementation defined.
+If neither a link name nor
+the Address attribute of an imported or exported entity is specified,
+then a link name is chosen in an implementation-defined manner,
+based on the external name if one is specified.
 @ImplDef{The meaning of link names.}
 @begin{Ramification}
 For example,
 an implementation might always prepend "_",
 and then pass it to the system linker.
 @end{Ramification}
-If neither a link name nor
-the Address attribute of an imported or exported entity is specified,
-then a link name is chosen in an implementation-defined manner,
-based on the external name if one is specified.
 @ImplDef{The manner of choosing link names when neither the link name
 nor the address of an imported or exported entity is specified.}
 @begin{Ramification}
@@ -541,12 +541,16 @@ and its language-defined descendants.}
 
    @key[type] Unsigned_@RI{n} @key[is] @key[mod] 2**@RI{n};
 
-   @key[function] Shift_Left  (Value : Unsigned_@RI{n}; Amount : Natural) @key[return] Unsigned_@RI{n};
-   @key[function] Shift_Right (Value : Unsigned_@RI{n}; Amount : Natural) @key[return] Unsigned_@RI{n};
+   @key[function] Shift_Left  (Value : Unsigned_@RI{n}; Amount : Natural)
+      @key[return] Unsigned_@RI{n};
+   @key[function] Shift_Right (Value : Unsigned_@RI{n}; Amount : Natural)
+      @key[return] Unsigned_@RI{n};
    @key[function] Shift_Right_Arithmetic (Value : Unsigned_@RI{n}; Amount : Natural)
       @key[return] Unsigned_@RI{n};
-   @key[function] Rotate_Left  (Value : Unsigned_@RI{n}; Amount : Natural) @key[return] Unsigned_@RI{n};
-   @key[function] Rotate_Right (Value : Unsigned_@RI{n}; Amount : Natural) @key[return] Unsigned_@RI{n};
+   @key[function] Rotate_Left  (Value : Unsigned_@RI{n}; Amount : Natural)
+      @key[return] Unsigned_@RI{n};
+   @key[function] Rotate_Right (Value : Unsigned_@RI{n}; Amount : Natural)
+      @key[return] Unsigned_@RI{n};
    ...
 @key[end] Interfaces;
 @end{Example}
@@ -681,8 +685,7 @@ functions.
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Interfaces.C has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Interfaces],Child=[C]}
-@key(package) Interfaces.C @key(is)
+@key(package) Interfaces.C @key(is)@ChildUnit{Parent=[Interfaces],Child=[C]}
    @key(pragma) Pure(C);
 
    @RI{-- Declarations based on C's <limits.h>}
@@ -693,53 +696,38 @@ functions.
    @AdaDefn{UCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 255}
 
    @RI{-- Signed and Unsigned Integers}
-@LangDefType{Package=[Interfaces.C],Type=[int]}
-   @key(type) int   @key(is) @key(range) @RI{implementation-defined};
-@LangDefType{Package=[Interfaces.C],Type=[short]}
-   @key(type) short @key(is) @key(range) @RI{implementation-defined};
-@LangDefType{Package=[Interfaces.C],Type=[long]}
-   @key(type) long  @key(is) @key(range) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{int}   @key(is) @key(range) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{short} @key(is) @key(range) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{long}  @key(is) @key(range) @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.C],Type=[signed_char]}
-   @key(type) signed_char @key(is) @key(range) SCHAR_MIN .. SCHAR_MAX;
+   @key(type) @AdaTypeDefn{signed_char} @key(is) @key(range) SCHAR_MIN .. SCHAR_MAX;
    @key(for) signed_char'Size @key(use) CHAR_BIT;
 
-@LangDefType{Package=[Interfaces.C],Type=[unsigned]}
-   @key(type) unsigned       @key(is) @key(mod) @RI{implementation-defined};
-@LangDefType{Package=[Interfaces.C],Type=[unsigned_short]}
-   @key(type) unsigned_short @key(is) @key(mod) @RI{implementation-defined};
-@LangDefType{Package=[Interfaces.C],Type=[unsigned_long]}
-   @key(type) unsigned_long  @key(is) @key(mod) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{unsigned}       @key(is) @key(mod) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{unsigned_short} @key(is) @key(mod) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{unsigned_long}  @key(is) @key(mod) @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.C],Type=[unsigned_char]}
-   @key(type) unsigned_char @key(is) @key(mod) (UCHAR_MAX+1);
+   @key(type) @AdaTypeDefn{unsigned_char} @key(is) @key(mod) (UCHAR_MAX+1);
    @key(for) unsigned_char'Size @key(use) CHAR_BIT;
 
-@LangDefType{Package=[Interfaces.C],Type=[plain_char]}
-   @key(subtype) plain_char @key(is) @RI{implementation-defined};
+   @key(subtype) @AdaTypeDefn{plain_char} @key(is) @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.C],Type=[ptrdiff_t]}
-   @key(type) ptrdiff_t @key(is) @key(range) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{ptrdiff_t} @key(is) @key(range) @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.C],Type=[size_t]}
-   @key(type) size_t @key(is) @key(mod) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{size_t} @key(is) @key(mod) @RI{implementation-defined};
 
    @RI{-- Floating Point}
 
-@LangDefType{Package=[Interfaces.C],Type=[C_float]}
-   @key(type) C_float     @key(is) @key(digits) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{C_float}     @key(is) @key(digits) @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.C],Type=[double]}
-   @key(type) double      @key(is) @key(digits) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{double}      @key(is) @key(digits) @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.C],Type=[long_double]}
-   @key(type) long_double @key(is) @key(digits) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{long_double} @key(is) @key(digits) @RI{implementation-defined};
 
 
    @RI{-- Characters and Strings }
 
-@LangDefType{Package=[Interfaces.C],Type=[char]}
-   @key(type) char @key(is) @RI{<implementation-defined character type>};
+   @key(type) @AdaTypeDefn{char} @key(is) @RI{<implementation-defined character type>};
 
    @AdaDefn{nul} : @key(constant) char := char'First;
 
@@ -747,8 +735,7 @@ functions.
 
    @key[function] @AdaSubDefn{To_Ada} (Item : @key[in] char) @key[return] Character;
 
-@LangDefType{Package=[Interfaces.C],Type=[char_array]}
-   @key(type) char_array @key(is) @key(array) (size_t @key(range) <>) @key(of) @key[aliased] char;
+   @key(type) @AdaTypeDefn{char_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @key[aliased] char;
    @key[pragma] Pack(char_array);
    @key(for) char_array'Component_Size @key(use) CHAR_BIT;
 
@@ -774,16 +761,14 @@ functions.
 
    @RI{-- Wide Character and Wide String}
 
-@LangDefType{Package=[Interfaces.C],Type=[wchar_t]}
-   @key(type) wchar_t @key(is) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{wchar_t} @key(is) @RI{implementation-defined};
 
    @AdaDefn{wide_nul} : @key(constant) wchar_t := wchar_t'First;
 
    @key(function) @AdaSubDefn{To_C}   (Item : @key(in) Wide_Character) @key(return) wchar_t;
    @key(function) @AdaSubDefn{To_Ada} (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
 
-@LangDefType{Package=[Interfaces.C],Type=[wchar_array]}
-   @key(type) wchar_array @key(is) @key(array) (size_t @key(range) <>) @key(of) @key(aliased) wchar_t;
+   @key(type) @AdaTypeDefn{wchar_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @key(aliased) wchar_t;
 
    @key(pragma) Pack(wchar_array);
 
@@ -818,15 +803,15 @@ The types int, short, long, unsigned,
 ptrdiff_t, size_t, double,
 char, and wchar_t correspond respectively
 to the C types having the same names.
-The types signed_char, unsigned_short, unsigned_long, unsigned_char,
-C_float, and long_double correspond respectively
+The types signed_char, unsigned_@!short, unsigned_@!long, unsigned_@!char,
+C_float, and long_@!double correspond respectively
 to the C types signed char,
 unsigned short, unsigned long, unsigned char, float, and long double.
 
 The type of the subtype plain_char is either signed_char or
 unsigned_char, depending on the C implementation.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_C   (Item : @key(in) Character) @key(return) char;
 @key(function) To_Ada (Item : @key(in) char     ) @key(return) Character;
 @end{Example}
@@ -840,20 +825,23 @@ and the C type char.
 characters, not necessarily between characters with the same internal
 representation. Corresponding characters are characters defined by the
 same enumeration literal, if such exist; otherwise, the correspondence
-is not defined by the language.], Old=[]}
+is unspecified.@PDefn{Unspecified}], Old=[]}
 
+@ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@Leading@;The following definition is equivalent to the above summary:], Old=[]}
 
+@ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@f{To_C (Latin_1_Char) = char'Value(Character'Image(Latin_1_Char))}@*
 provided that char'Value does not raise an exception; otherwise the result
-is not defined by the language.], Old=[]}
+is unspecified.], Old=[]}
 
+@ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@f{To_Ada (Native_C_Char) = Character'Value(char'Image(Native_C_Char))}@*
 provided that Character'Value does not raise an exception;
-otherwise the result is not defined by the language.], Old=[]}
+otherwise the result is unspecified.], Old=[]}
 @end{ImplNote}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Is_Nul_Terminated (Item : @key(in) char_array) @key(return) Boolean;
 @end{Example}
 
@@ -862,10 +850,10 @@ The result of Is_Nul_Terminated is True if Item contains nul, and is
 False otherwise.
 
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_C   (Item : @key(in) String;     Append_Nul : @key(in) Boolean := True)
    @key(return) char_array;
-
+@Comment{Blank line}
 @key(function) To_Ada (Item : @key(in) char_array; Trim_Nul   : @key(in) Boolean := True)
    @key(return) String;
 @end{Example}
@@ -893,12 +881,12 @@ The function propagates Terminator_Error
  if Trim_Nul is True and
 Item does not contain nul.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(procedure) To_C (Item       : @key(in) String;
                 Target     : @key(out) char_array;
                 Count      : @key(out) size_t;
                 Append_Nul : @key(in) Boolean := True);
-
+@Comment{Blank line}
 @key(procedure) To_Ada (Item     : @key(in) char_array;
                   Target   : @key(out) String;
                   Count    : @key(out) Natural;
@@ -926,7 +914,7 @@ If Target is not long enough, Constraint_Error is propagated.
 If Trim_Nul is True and Item does not contain nul,
 then Terminator_Error is propagated.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Is_Nul_Terminated (Item : @key(in) wchar_array) @key(return) Boolean;
 @end{Example}
 
@@ -935,7 +923,7 @@ The result of Is_Nul_Terminated is True if Item contains wide_nul, and is
 False otherwise.
 
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_C   (Item : @key(in) Wide_Character) @key(return) wchar_t;
 @key(function) To_Ada (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
 @end{Example}
@@ -947,16 +935,16 @@ character types.
 @key(function) To_C   (Item       : @key(in) Wide_String;
                  Append_Nul : @key(in) Boolean := True)
    @key(return) wchar_array;
-
+@Comment{Blank line}
 @key(function) To_Ada (Item     : @key(in) wchar_array;
                  Trim_Nul : @key(in) Boolean := True)
    @key(return) Wide_String;
-
+@Comment{Blank line}
 @key(procedure) To_C (Item       : @key(in) Wide_String;
                 Target     : @key(out) wchar_array;
                 Count      : @key(out) size_t;
                 Append_Nul : @key(in) Boolean := True);
-
+@Comment{Blank line}
 @key(procedure) To_Ada (Item     : @key(in) wchar_array;
                   Target   : @key(out) Wide_String;
                   Count    : @key(out) Natural;
@@ -1147,18 +1135,14 @@ and for which @lquotes@;char *@rquotes@;
 @Leading@;The library package Interfaces.C.Strings has the following
 declaration:
 @begin{example}
-@ChildUnit{Parent=[Interfaces.C],Child=[Strings]}
-@key(package) Interfaces.C.Strings @key(is)
+@key(package) Interfaces.C.Strings @key(is)@ChildUnit{Parent=[Interfaces.C],Child=[Strings]}
    @key[pragma] Preelaborate(Strings);
 
-@LangDefType{Package=[Interfaces.C],Type=[char_array_access]}
-   @key(type) char_array_access @key(is) @key(access) @key(all) char_array;
+   @key(type) @AdaTypeDefn{char_array_access} @key(is) @key(access) @key(all) char_array;
 
-@LangDefType{Package=[Interfaces.C],Type=[chars_ptr]}
-   @key(type) chars_ptr @key(is) @key(private);
+   @key(type) @AdaTypeDefn{chars_ptr} @key(is) @key(private);
 
-@LangDefType{Package=[Interfaces.C],Type=[chars_ptr_array]}
-   @key(type) chars_ptr_array @key(is) @key(array) (size_t @key(range) <>) @key(of) chars_ptr;
+   @key(type) @AdaTypeDefn{chars_ptr_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) chars_ptr;
 
    @AdaDefn{Null_Ptr} : @key(constant) chars_ptr;
 
@@ -1228,7 +1212,7 @@ an object of this type may carry @lquotes@;dope@rquotes@; information.
 The programmer should convert from char_array_access to chars_ptr
 for objects imported from, exported to, or passed to C.@end{discussion}
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Chars_Ptr (Item      : @key(in) char_array_access;
                        Nul_Check : @key(in) Boolean := False)
    @key(return) chars_ptr;
@@ -1239,7 +1223,7 @@ Otherwise, if Nul_Check is True and Item.@key(all) does not contain nul,
 then the function propagates Terminator_Error;
 if Nul_Check is True and Item.@key(all) does contain nul,
 To_Chars_Ptr performs a pointer conversion with no allocation of memory.
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) New_Char_Array (Chars   : @key(in) char_array) @key(return) chars_ptr;
 @end{Example}
 
@@ -1251,23 +1235,26 @@ Index = Chars'Last if Chars does not contain nul, or
 Index is the smallest size_t value I such that Chars(I+1) = nul.
 @end{itemize}
 
-Storage_Error is propagated if the allocation fails.
+@comment{The following paragraph is missing a number in the original version.
+To gove it a number in the new version, it is marked as an insertion.}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[],Old=[@Noparanum@;]}Storage_Error is propagated if the allocation
+fails.
 
-
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) New_String (Str : @key(in) String) @key(return) chars_ptr;
 @end{Example}
 
 This function is equivalent to New_Char_Array(To_C(Str)).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(procedure) Free (Item : @key(in) @key(out) chars_ptr);
 @end{Example}
 
 If Item is Null_Ptr, then Free has no effect.
 Otherwise, Free releases the storage occupied by Value(Item),
  and resets Item to Null_Ptr.
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Value (Item : @key(in) chars_ptr) @key(return) char_array;
 @end{Example}
 
@@ -1279,7 +1266,7 @@ The lower bound of the result is 0.
 If Item does not point to a nul-terminated string, then
 execution of Value is erroneous.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
    @key(return) char_array;
 @end{Example}
@@ -1294,20 +1281,20 @@ nul; else Value(New_Char_Array(Chars)) is the prefix of Chars
 up to and including the first nul.
 @end{Ramification}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Value (Item : @key(in) chars_ptr) @key(return) String;
 @end{Example}
 
 Equivalent to To_Ada(Value(Item), Trim_Nul=>True).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
    @key(return) String;
 @end{Example}
 
 Equivalent to To_Ada(Value(Item, Length), Trim_Nul=>True).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Strlen (Item : @key(in) chars_ptr) @key(return) size_t;
 @end{Example}
 
@@ -1323,7 +1310,7 @@ as Value, in cases where the string has not been nul-terminated.
 Strlen has the effect of C's strlen function.
 @end{Ramification}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(procedure) Update (Item   : @key(in) chars_ptr;
                   Offset : @key(in) size_t;
                   Chars  : @key(in) char_array;
@@ -1338,12 +1325,12 @@ are both prevented if Check is True, as follows:
 @begin[itemize]
 Let N = Strlen(Item).
 If Check is True, then:
-@begin{itemize}
+@begin{inneritemize}
  If Offset+Chars'Length>N, propagate Update_Error.
 
  Otherwise, overwrite the data in the array pointed to by Item,
  starting at the char at position Offset, with the data in Chars.
-@end{itemize}
+@end{inneritemize}
 
 If Check is False, then
  processing is as above, but with no check that Offset+Chars'Length>N.
@@ -1351,7 +1338,7 @@ If Check is False, then
 If Chars contains nul, Update's effect may be
 to @lquotes@;shorten@rquotes@; the pointed-to char array.@end{ramification}
 @end[itemize]
-@begin{Example}
+@begin{Example}@Keepnext
 @key(procedure) Update (Item   : @key(in) chars_ptr;
                   Offset : @key(in) size_t;
                   Str    : @key(in) String;
@@ -1424,12 +1411,10 @@ following declaration:
    @key(type) Element @key(is) @key(private);
    @key(type) Element_Array @key(is) @key(array) (Index @key(range) <>) @key(of) @key(aliased) Element;
    Default_Terminator : Element;
-@ChildUnit{Parent=[Interfaces.C],Child=[Pointers]}
-@key(package) Interfaces.C.Pointers @key(is)
+@key(package) Interfaces.C.Pointers @key(is)@ChildUnit{Parent=[Interfaces.C],Child=[Pointers]}
    @key[pragma] Preelaborate(Pointers);
 
-@LangDefType{Package=[Interfaces.C.Pointers],Type=[Pointer]}
-   @key(type) Pointer @key(is) @key(access) @key(all) Element;
+   @key(type) @AdaTypeDefn{Pointer} @key(is) @key(access) @key(all) Element;
 
    @key(function) @AdaSubDefn{Value}(Ref        : @key(in) Pointer;
                   Terminator : @key(in) Element := Default_Terminator)
@@ -1447,7 +1432,7 @@ following declaration:
    @key(function) "+" (Left : @key(in) Pointer;   Right : @key(in) ptrdiff_t) @key(return) Pointer;
    @key(function) "+" (Left : @key(in) ptrdiff_t; Right : @key(in) Pointer)   @key(return) Pointer;
    @key(function) "-" (Left : @key(in) Pointer;   Right : @key(in) ptrdiff_t) @key(return) Pointer;
-   @key(function) "-" (Left : @key(in) Pointer;   Right : @key(in) Pointer)   @key(return) ptrdiff_t;
+   @key(function) "-" (Left : @key(in) Pointer;   Right : @key(in) Pointer) @key(return) ptrdiff_t;
 
    @key(procedure) @AdaSubDefn{Increment} (Ref : @key(in) @key(out) Pointer);
    @key(procedure) @AdaSubDefn{Decrement} (Ref : @key(in) @key(out) Pointer);
@@ -1461,10 +1446,11 @@ following declaration:
                             Terminator : @key(in) Element := Default_Terminator)
       @key(return) ptrdiff_t;
 
-   @key(procedure) @AdaSubDefn{Copy_Terminated_Array} (Source     : @key(in) Pointer;
-                                    Target     : @key(in) Pointer;
-                                    Limit      : @key(in) ptrdiff_t := ptrdiff_t'Last;
-                                    Terminator : @key(in) Element :=  Default_Terminator);
+   @key(procedure) @AdaSubDefn{Copy_Terminated_Array}
+      (Source     : @key(in) Pointer;
+       Target     : @key(in) Pointer;
+       Limit      : @key(in) ptrdiff_t := ptrdiff_t'Last;
+       Terminator : @key(in) Element :=  Default_Terminator);
 
    @key(procedure) @AdaSubDefn{Copy_Array} (Source  : @key(in) Pointer;
                          Target  : @key(in) Pointer;
@@ -1486,7 +1472,7 @@ Programmer-managed length, with
 Default_Terminator treated simply as a data element.
 @end{Itemize}
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Value(Ref        : @key(in) Pointer;
                Terminator : @key(in) Element := Default_Terminator)
    @key(return) Element_Array;
@@ -1498,7 +1484,7 @@ This function returns an Element_Array whose value is the array pointed
   Interfaces.C.Strings.Dereference_Error is
   propagated if Ref is @key(null).
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Value(Ref    : @key(in) Pointer;
                Length : @key(in) ptrdiff_t)
    @key(return) Element_Array;
@@ -1515,19 +1501,19 @@ the Size of the array elements.
 In each of these functions, Pointer_Error
 is propagated if a Pointer parameter is @key(null).
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key(procedure) Increment (Ref : @key(in) @key(out) Pointer);
 @end{Example}
 
 Equivalent to Ref := Ref+1.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(procedure) Decrement (Ref : @key(in) @key(out) Pointer);
 @end{Example}
 
 Equivalent to Ref := Ref@en@;1.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Virtual_Length (Ref        : @key(in) Pointer;
                          Terminator : @key(in) Element := Default_Terminator)
    @key(return) ptrdiff_t;
@@ -1536,11 +1522,12 @@ Equivalent to Ref := Ref@en@;1.
 Returns the number of Elements, up to the one just before the first
 Terminator, in Value(Ref, Terminator).
 
-@begin{Example}
-@key(procedure) Copy_Terminated_Array (Source     : @key(in) Pointer;
-                                 Target     : @key(in) Pointer;
-                                 Limit      : @key(in) ptrdiff_t := ptrdiff_t'Last;
-                                 Terminator : @key(in) Element := Default_Terminator);
+@begin{Example}@Keepnext
+@key(procedure) Copy_Terminated_Array
+   (Source     : @key(in) Pointer;
+    Target     : @key(in) Pointer;
+    Limit      : @key(in) ptrdiff_t := ptrdiff_t'Last;
+    Terminator : @key(in) Element := Default_Terminator);
 @end{Example}
 
 This procedure copies Value(Source, Terminator) into the array
@@ -1555,7 +1542,7 @@ elements are not copied beyond the logical length of the target array.@end{ramif
   The implementation has to take care to check the Limit first.
 @end{ImplNote}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(procedure) Copy_Array (Source  : @key(in) Pointer;
                       Target  : @key(in) Pointer;
                       Length  : @key(in) ptrdiff_t);
@@ -1682,41 +1669,32 @@ either an internal or external COBOL representation
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Interfaces.COBOL has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Interfaces],Child=[COBOL]}
-@key(package) Interfaces.COBOL @key(is)
+@key(package) Interfaces.COBOL @key(is)@ChildUnit{Parent=[Interfaces],Child=[COBOL]}
    @key[pragma] Preelaborate(COBOL);
 
 @RI{-- Types and operations for internal data representations}
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[Floating]}
-   @key(type) Floating      @key(is) @key(digits) @RI{implementation-defined};
-@LangDefType{Package=[Interfaces.COBOL],Type=[Long_Floating]}
-   @key(type) Long_Floating @key(is) @key(digits) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{Floating}      @key(is) @key(digits) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{Long_Floating} @key(is) @key(digits) @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[Binary]}
-   @key(type) Binary      @key(is) @key(range) @RI{implementation-defined};
-@LangDefType{Package=[Interfaces.COBOL],Type=[Long_Binary]}
-   @key(type) Long_Binary @key(is) @key(range) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{Binary}      @key(is) @key(range) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{Long_Binary} @key(is) @key(range) @RI{implementation-defined};
 
    @AdaDefn{Max_Digits_Binary}      : @key(constant) := @RI{implementation-defined};
    @AdaDefn{Max_Digits_Long_Binary} : @key(constant) := @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[Decimal_Element]}
-   @key(type) Decimal_Element  @key(is) @key(mod) @RI{implementation-defined};
-@LangDefType{Package=[Interfaces.COBOL],Type=[Packed_Decimal]}
-   @key(type) Packed_Decimal @key(is) @key(array) (Positive @key(range) <>) @key(of) Decimal_Element;
+   @key(type) @AdaTypeDefn{Decimal_Element}  @key(is) @key(mod) @RI{implementation-defined};
+   @key(type) @AdaTypeDefn{Packed_Decimal} @key(is) @key(array) (Positive @key(range) <>) @key(of) Decimal_Element;
    @key(pragma) Pack(Packed_Decimal);
 
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[COBOL_Character]}
-   @key(type) COBOL_Character @key(is) @RI{implementation-defined character type};
+   @key(type) @AdaTypeDefn{COBOL_Character} @key(is) @RI{implementation-defined character type};
 
    @AdaDefn{Ada_To_COBOL} : @key(array) (Character) @key(of) COBOL_Character := @RI{implementation-defined};
 
    @AdaDefn{COBOL_To_Ada} : @key(array) (COBOL_Character) @key(of) Character := @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[Alphanumeric]}
-   @key(type) Alphanumeric @key(is) @key(array) (Positive range <>) @key(of) COBOL_Character;
+   @key(type) @AdaTypeDefn{Alphanumeric} @key(is) @key(array) (Positive range <>) @key(of) COBOL_Character;
    @key(pragma) Pack(Alphanumeric);
 
    @key(function) @AdaSubDefn{To_COBOL} (Item : @key(in) String) @key(return) Alphanumeric;
@@ -1730,14 +1708,12 @@ either an internal or external COBOL representation
                      Target   : @key(out) String;
                      Last     : @key(out) Natural);
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[Numeric]}
-   @key(type) Numeric @key(is) @key(array) (Positive @key[range] <>) @key(of) COBOL_Character;
+   @key(type) @AdaTypeDefn{Numeric} @key(is) @key(array) (Positive @key[range] <>) @key(of) COBOL_Character;
    @key(pragma) Pack(Numeric);
 
 @RI{-- Formats for COBOL data representations}
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[Display_Format]}
-   @key(type) Display_Format @key(is) @key(private);
+   @key(type) @AdaTypeDefn{Display_Format} @key(is) @key(private);
 
    @AdaDefn{Unsigned}             : @key(constant) Display_Format;
    @AdaDefn{Leading_Separate}     : @key(constant) Display_Format;
@@ -1745,15 +1721,13 @@ either an internal or external COBOL representation
    @AdaDefn{Leading_Nonseparate}  : @key(constant) Display_Format;
    @AdaDefn{Trailing_Nonseparate} : @key(constant) Display_Format;
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[Binary_Format]}
-   @key(type) Binary_Format @key(is) @key(private);
+   @key(type) @AdaTypeDefn{Binary_Format} @key(is) @key(private);
 
    @AdaDefn{High_Order_First}  : @key(constant) Binary_Format;
    @AdaDefn{Low_Order_First}   : @key(constant) Binary_Format;
    @AdaDefn{Native_Binary}     : @key(constant) Binary_Format;
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[Packed_Format]}
-   @key(type) Packed_Format @key(is) @key(private);
+   @key(type) @AdaTypeDefn{Packed_Format} @key(is) @key(private);
 
    @AdaDefn{Packed_Unsigned}   : @key(constant) Packed_Format;
    @AdaDefn{Packed_Signed}     : @key(constant) Packed_Format;
@@ -1761,10 +1735,8 @@ either an internal or external COBOL representation
 
 @RI{-- Types for external representation of COBOL binary data}
 
-@LangDefType{Package=[Interfaces.COBOL],Type=[Byte]}
-   @key(type) Byte @key(is) @key(mod) 2**COBOL_Character'Size;
-@LangDefType{Package=[Interfaces.COBOL],Type=[Byte_Array]}
-   @key(type) Byte_Array @key(is) @key(array) (Positive @key(range) <>) @key(of) Byte;
+   @key(type) @AdaTypeDefn{Byte} @key(is) @key(mod) 2**COBOL_Character'Size;
+   @key(type) @AdaTypeDefn{Byte_Array} @key(is) @key(array) (Positive @key(range) <>) @key(of) Byte;
    @key(pragma) Pack (Byte_Array);
 
    @AdaDefn{Conversion_Error} : @key(exception);
@@ -1884,7 +1856,7 @@ COBOL internal or external data representations. The value of the
 constant Native_Binary is either High_Order_First or Low_Order_First,
 depending on the implementation.
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Valid (Item   : @key(in) Numeric;
                 Format : @key(in) Display_Format) @key(return) Boolean;
 @end{Example}
@@ -1913,14 +1885,14 @@ finally a plus or minus sign character,
 then Valid returns True, else it returns False.
 @end{itemize}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Length (Format : @key(in) Display_Format) @key(return) Natural;
 @end{Example}
 
 The Length function returns the minimal length of a Numeric value
 sufficient to hold any value of type Num when represented as Format.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Decimal (Item   : @key(in) Numeric;
                      Format : @key(in) Display_Format) @key(return) Num;
 @end{Example}
@@ -1935,7 +1907,7 @@ represented by Item is outside the range of Num.
 There is no issue of truncation versus rounding, since
 the number of decimal places is established by Num'Scale.@end{discussion}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Display (Item   : @key(in) Num;
                      Format : @key(in) Display_Format) @key(return) Numeric;
 @end{Example}
@@ -1944,7 +1916,7 @@ This function returns the Numeric value for Item, represented in
 accordance with Format. Conversion_Error is propagated if Num is negative
 and Format is Unsigned.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Valid (Item   : @key(in) Packed_Decimal;
                 Format : @key(in) Packed_Format) @key(return) Boolean;
 @end{Example}
@@ -1953,14 +1925,14 @@ This function returns True if Item has a value consistent with Format,
 and False otherwise. The rules for the formation of Packed_Decimal
 values are implementation defined.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Length (Format : @key(in) Packed_Format) @key(return) Natural;
 @end{Example}
 
 This function returns the minimal length of a Packed_Decimal value
 sufficient to hold any value of type Num when represented as Format.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Decimal (Item   : @key(in) Packed_Decimal;
                      Format : @key(in) Packed_Format) @key(return) Num;
 @end{Example}
@@ -1970,7 +1942,7 @@ Format. Num'Scale is the number of digits after the assumed radix point
 in Item. Conversion_Error is propagated if the value represented by Item is
 outside the range of Num.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Packed (Item   : @key(in) Num;
                     Format : @key(in) Packed_Format) @key(return) Packed_Decimal;
 @end{Example}
@@ -1979,7 +1951,7 @@ This function returns the Packed_Decimal value for Item, represented in
 accordance with Format. Conversion_Error is propagated if Num is negative
 and Format is Packed_Unsigned.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Valid (Item   : @key(in) Byte_Array;
                 Format : @key(in) Binary_Format) @key(return) Boolean;
 @end{Example}
@@ -1990,14 +1962,14 @@ and False otherwise.
 This function returns False only when the represented
 value is outside the range of Num.@end{ramification}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) Length (Format : @key(in) Binary_Format) @key(return) Natural;
 @end{Example}
 
 This function returns the minimal length of a Byte_Array value
 sufficient to hold any value of type Num when represented as Format.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Decimal (Item   : @key(in) Byte_Array;
                      Format : @key(in) Binary_Format) @key(return) Num;
 @end{Example}
@@ -2007,7 +1979,7 @@ Format. Num'Scale is the number of digits after the assumed radix point
 in Item. Conversion_Error is propagated if the value represented by Item is
 outside the range of Num.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Binary (Item   : @key(in) Num;
                     Format : @key(in) Binary_Format) @key(return) Byte_Array;
 @end{Example}
@@ -2015,9 +1987,9 @@ outside the range of Num.
 This function returns the Byte_Array value for Item, represented in
 accordance with Format.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Decimal (Item : @key(in) Binary)      @key(return) Num;
-
+@comment{Blank line}
 @key(function) To_Decimal (Item : @key(in) Long_Binary) @key(return) Num;
 @end{Example}
 
@@ -2030,9 +2002,9 @@ is, the returned value in each case is a @lquotes@;bit copy@rquotes@; if Num has
 binary radix. The programmer is responsible for maintaining the correct
 scale.@end{ramification}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key(function) To_Binary      (Item : @key(in) Num)  @key(return) Binary;
-
+@comment{Blank line}
 @key(function) To_Long_Binary (Item : @key(in) Num)  @key(return) Long_Binary;
 @end{Example}
 
@@ -2316,36 +2288,28 @@ declaration:
 @begin{Example}
 @key[with] Ada.Numerics.Generic_Complex_Types;  @RI{-- see @RefSecNum{Complex Types}}
 @key[pragma] Elaborate_All(Ada.Numerics.Generic_Complex_Types);
-@ChildUnit{Parent=[Interfaces],Child=[Fortran]}
-@key[package] Interfaces.Fortran @key[is]
+@key[package] Interfaces.Fortran @key[is]@ChildUnit{Parent=[Interfaces],Child=[Fortran]}
    @key[pragma] Pure(Fortran);
 
-@LangDefType{Package=[Interfaces.Fortran],Type=[Fortran_Integer]}
-   @key[type] Fortran_Integer @key[is] @key[range] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Fortran_Integer} @key[is] @key[range] @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.Fortran],Type=[Real]}
-   @key[type] Real             @key[is] @key[digits] @RI{implementation-defined};
-@LangDefType{Package=[Interfaces.Fortran],Type=[Double_Precision]}
-   @key[type] Double_Precision @key[is] @key[digits] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Real}             @key[is] @key[digits] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Double_Precision} @key[is] @key[digits] @RI{implementation-defined};
 
-@LangDefType{Package=[Interfaces.Fortran],Type=[Logical]}
-   @key[type] Logical @key[is] @key[new] Boolean;
+   @key[type] @AdaTypeDefn{Logical} @key[is] @key[new] Boolean;
 
    @key[package] @AdaDefn{Single_Precision_Complex_Types} @key[is]
       @key[new] Ada.Numerics.Generic_Complex_Types (Real);
 
-@LangDefType{Package=[Interfaces.Fortran],Type=[Complex]}
-   @key[type] Complex @key[is] @key[new] Single_Precision_Complex_Types.Complex;
+   @key[type] @AdaTypeDefn{Complex} @key[is] @key[new] Single_Precision_Complex_Types.Complex;
 
    @key[subtype] @AdaDefn{Imaginary} @key[is] Single_Precision_Complex_Types.Imaginary;
    @AdaDefn{i} : Imaginary @key[renames] Single_Precision_Complex_Types.i;
    @AdaDefn{j} : Imaginary @key[renames] Single_Precision_Complex_Types.j;
 
-@LangDefType{Package=[Interfaces.Fortran],Type=[Character_Set]}
-   @key[type] Character_Set @key[is] @RI{implementation-defined character type};
+   @key[type] @AdaTypeDefn{Character_Set} @key[is] @RI{implementation-defined character type};
 
-@LangDefType{Package=[Interfaces.Fortran],Type=[Fortran_Character]}
-   @key[type] Fortran_Character @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Set;
+   @key[type] @AdaTypeDefn{Fortran_Character} @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Set;
    @key[pragma] Pack (Fortran_Character);
 
    @key[function] @AdaSubDefn{To_Fortran} (Item : @key[in] Character) @key[return] Character_Set;
@@ -2396,9 +2360,8 @@ An implementation may add additional declarations to the Fortran interface
 packages. For example, the Fortran interface package for an implementation of
 Fortran 77 (ANSI X3.9-1978) that defines types like Integer*@i{n}, Real*@i{n},
 Logical*@i{n}, and Complex*@i{n} may contain the declarations of types named
-Integer_Star_@i{n}, Real_Star_@i{n}, Logical_Star_@i{n}, and
-Complex_Star_@i{n}. (This convention should
- not apply to Character*@i{n}, for
+Integer_@!Star_@i{n}, Real_@!Star_@i{n}, Logical_@!Star_@i{n}, and
+Complex_@!Star_@i{n}. (This convention should not apply to Character*@i{n}, for
 which the Ada analog is the constrained array subtype Fortran_Character
 (1..@i{n}).) Similarly, the Fortran interface package for an implementation of
 Fortran 90 that provides multiple @i{kinds} of intrinsic types, e.g. Integer

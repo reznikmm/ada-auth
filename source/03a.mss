@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:16 $}
+@Comment{$Date: 2000/08/17 03:15:25 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -3853,7 +3853,7 @@ modulus values greater than System.Max_Nonbinary_Modulus. It is implementation
 defined which specific values greater than System.Max_Nonbinary_Modulus, if
 any, are supported.],Old=[]}
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0003]}
+@ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[On a one's complement machine, the natural full word type would have
 a modulus of 2**Word_Size-1. However, we would want to allow the all-ones bit
 pattern (which represents negative zero as a number) in logical operations.

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/15 01:11:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/17 03:15:29 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/08/15 01:11:45 $}
+@Comment{$Date: 2000/08/17 03:15:29 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -13,8 +13,7 @@ arguments and to set the exit status code to be returned on normal termination.
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Ada.Command_Line has the following declaration:
 @begin{Example}
-@ChildUnit{Parent=[Ada],Child=[Command_Line]}
-@key[package] Ada.Command_Line @key[is]
+@key[package] Ada.Command_Line @key[is]@ChildUnit{Parent=[Ada],Child=[Command_Line]}
   @key[pragma] Preelaborate(Command_Line);
 
   @key[function] @AdaSubDefn{Argument_Count} @key[return] Natural;
@@ -23,8 +22,7 @@ arguments and to set the exit status code to be returned on normal termination.
 
   @key[function] @AdaSubDefn{Command_Name} @key[return] String;
 
-@LangDefType{Package=[Ada.Command_Line],Type=[Exit_Status]}
-  @key[type] Exit_Status @key[is] @RI{implementation-defined integer type};
+  @key[type] @AdaTypeDefn{Exit_Status} @key[is] @RI{implementation-defined integer type};
 
   @AdaDefn{Success} : @key[constant] Exit_Status;
   @AdaDefn{Failure} : @key[constant] Exit_Status;
@@ -34,9 +32,10 @@ arguments and to set the exit status code to be returned on normal termination.
 @key[private]
   ... -- @RI{not specified by the language}
 @key[end] Ada.Command_Line;
+@comment{Blank line}
 @end{example}
 @begin{DescribeCode}
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Argument_Count @key[return] Natural;
 @end{Example}
 
@@ -47,7 +46,7 @@ the number of arguments passed to the program
 invoking the function. Otherwise it returns 0.
 The meaning of @lquotes@;number of arguments@rquotes@; is implementation defined.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Argument (Number : @key[in] Positive) @key[return] String;
 @end{Example}
 
@@ -63,7 +62,7 @@ If the external execution environment does not support
 passing arguments to a program, then Argument(N) for any N will
 raise Constraint_Error, since Argument_Count is 0.@end{ramification}
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[function] Command_Name @key[return] String;
 @end{Example}
 
@@ -78,7 +77,7 @@ status values supported by the external execution environment.
 The constants Success and Failure correspond to success and failure,
 respectively.
 
-@begin{Example}
+@begin{Example}@Keepnext
 @key[procedure] Set_Exit_Status (Code : @key[in] Exit_Status);
 @end{Example}
 
