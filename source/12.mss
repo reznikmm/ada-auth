@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2004/12/13 05:56:26 $}
+@Comment{$Date: 2004/12/15 01:09:49 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1928,7 +1928,8 @@ calls (see @RefSecNum{Dispatching Operations of Tagged Types} and
 @RefSecNum{Assignment Statements}). In the case where the tag would be
 statically determined to be that of the actual type, the call raises
 Program_Error. If such a function is renamed, any call on the
-renaming raises Program_Error.]}
+renaming raises Program_Error.
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2038,7 +2039,7 @@ run-time check to a compile-time check.
   operations that are inherited when the ancestor of a formal type is itself
   a formal type to avoid anomalies.]}
 
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00158-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00158-01]}
   @ChgAdded{Version=[2],Text=[Added a semantic description of the meaning
   of operations of an actual class-wide type, as such a type does not have
   primitive operations of its own.]}
@@ -2388,9 +2389,23 @@ rhs="@Chg{Version=[2],New=<
 @Syn{lhs=<default_name>,rhs="@Syn2{name}"}
 
 @begin{SyntaxText}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02],ARef=[AI95-00348-01]}
 @ChgAdded{Version=[2],Text=[A @nt{subprogram_default} of @key{null} shall not
-be specified for a formal function.]}
+be specified for a formal function or for a
+@nt{formal_abstract_subprogram_declaration}.]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[There are no null functions because the return
+value has to be constructed somehow. We don't allow null for abstract formal
+procedures, as the operation is dispatching. It doesn't seem appropriate (or
+useful) to say that the implementation of something is null in the formal
+type and all possible descendants of that type. This also would define a
+dispatching operation that doesn't correspond to a slot in the tag of the
+controlling type, which would be a new concept. Finally, additional rules
+would be needed to define the meaning of a dispatching null procedure (for
+instance, the convention of such a subprogram should be intrinsic, but that's
+not what the language says.) It doesn't seem worth the effort.]}
+@end{Reason}
 @end{SyntaxText}
 
 @end{Syntax}
@@ -2482,16 +2497,16 @@ corresponding to the controlling type.]}
   as only specific types have primitive operations (and a formal subprogram
   eventually has to have an actual that is a primitive of some type). This could
   happen in a case like:]}
-  @begin{Example}
+@begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[@key{generic}
-  @key{type} T(<>) @key{is tagged private};
-  @key{with procedure} Foo (Obj : @key{in} T) @key{is abstract};
+   @key{type} T(<>) @key{is tagged private};
+   @key{with procedure} Foo (Obj : @key{in} T) @key{is abstract};
 @key{package} P ...]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[@key{package} New_P @key{is new} P (Something'Class, Some_Proc);]}
-  @end{Example}
+@end{Example}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[The instantiation here is always illegal,

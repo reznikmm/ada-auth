@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.5 $ $Date: 2004/12/13 05:56:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.6 $ $Date: 2004/12/15 01:09:49 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2004/12/13 05:56:27 $}
+@Comment{$Date: 2004/12/15 01:09:49 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -124,6 +124,13 @@ Directories has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Get_Next_Entry} (Search : @key{in out} Search_Type;
                              Directory_Entry : @key{out} Directory_Entry_Type);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} Search (
+      Directory : @key{in} String;
+      Pattern : @key{in} String;
+      Filter : @key{in} Filter_Type := (@key{others} => True);
+      Process : @key{not null access procedure} (Directory_Entry : @key{in} Directory_Entry_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Operations on Directory Entries:}]}
@@ -350,12 +357,186 @@ existing ordinary or special external file. The exception Use_Error is
 propagated if the external environment does not support the deletion of the
 file with the given name (in the absence of Name_Error).]}
 
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Rename (Old_Name, New_Name : @key{in} String);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Renames an existing external file
+(including directories) with Old_Name
+to New_Name. The exception Name_Error is propagated if the string given as
+Old_Name does not identify an existing external file. The exception Use_Error
+is propagated if the external environment does not support the renaming of the
+file with the given name (in the absence of Name_Error). In particular,
+Use_Error is propagated if a file or directory already exists with New_Name.]}
 
-
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Copy_File (Source_Name, Target_Name : @key{in} String;
+                     Form : @key{in} String);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Copies the contents of the existing
+external file with Source_Name to
+Target_Name. The resulting external file is a duplicate of the source external
+file. The Form can be used to give system-dependent characteristics of the
+resulting external file; the interpretation of the Form parameter is
+implementation-defined. Exception Name_Error is propagated if the string given
+as Source_Name does not identify an existing external ordinary or special file
+or if the string given as Target_Name does not allow the identification of an
+external file. The exception Use_Error is propagated if the external
+environment does not support the creating of the file with the name given by
+Target_Name and form given by Form, or copying of the file with the name given
+by Source_Name (in the absence of Name_Error).]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Name_Error is always raised if Source_Name
+  identifies a directory. It is up to the implementation whether
+  special files can be copied, or if Use_Error will be raised.]}
+@end{Ramification}
 
 @end{DescribeCode}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following file and directory
+name operations are provided:]}
+
+@begin{DescribeCode}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Full_Name (Name : @key{in} String) @key{return} String;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the full name corresponding
+to the file name specified by
+Name. The exception Name_Error is propagated if the string given as Name does
+not allow the identification of an external file (including directories and
+special files).]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Full name means that no abbreviations are
+  used in the returned name, and that it is a full specification of the name.
+  Thus, for Unix and Windows, the result should be a full path which does not
+  contain any "." or ".." directories. Typically, the default directory
+  is used to fill in any missing information.]}
+@end{Discussion}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Simple_Name (Name : @key{in} String) @key{return} String;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the simple name portion of
+the file name specified by Name.
+The exception Name_Error is propagated if the string given as Name does not
+allow the identification of an external file (including directories and special
+files).]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Containing_Directory (Name : @key{in} String) @key{return} String;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the name of the containing
+directory of the external file
+(including directories) identified by Name. (If more than one directory can
+contain Name, the directory name returned is implementation-defined.) The
+exception Name_Error is propagated if the string given as Name does not allow
+the identification of an external file. The exception Use_Error is propagated
+if the external file does not have a containing directory.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is purely a string manipulation function.
+  If Name is not given as a full name, the containing directory probably
+  won't be one, either. For example, if Containing_Directory ("..\AARM\RM-A-8")
+  is called on Windows, the result should be "..\AARM". If there is no
+  path at all on the name, the result should be "." (which represents the
+  current directory). Use Full_Name on the result of Containing_Directory
+  if the full name is needed.]}
+@end{Discussion}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Extension (Name : @key{in} String) @key{return} String;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the extension name
+corresponding to Name. The extension name
+is a portion of a simple name (not including any separator characters),
+typically used to identify the file class. If the external environment does not
+have extension names, then the null string is returned. The exception
+Name_Error is propagated if the string given as Name does not allow the
+identification of an external file.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[For Unix and Windows, the extension is the
+  portion of the simple name following the rightmost period. For example,
+  in the simple name "RM-A-8.html", the extension is "html".]}
+@end{Discussion}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Base_Name (Name : @key{in} String) @key{return} String;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the base name corresponding
+to Name. The base name is the
+remainder of a simple name after removing any extension and extension
+separators. The exception Name_Error is propagated if the string given as Name
+does not allow the identification of an external file (including directories and
+special files).]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[For Unix and Windows, the base name is the
+  portion of the simple name preceding the rightmost period (except for the
+  special directory names "." and "..", whose Base_Name is "." and "..").
+  For example, in the simple name "RM-A-8.html", the base name is "RM-A-8".]}
+@end{Discussion}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Compose (Containing_Directory : @key{in} String := "";
+                  Name : @key{in} String;
+                  Extension : @key{in} String := "") @key{return} String;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the name of the external
+file with the specified
+Containing_Directory, Name, and Extension. If Extension is the null string,
+then Name is interpreted as a simple name; otherwise Name is interpreted as a
+base name. The exception Name_Error is propagated if the string given as
+Containing_Directory is not null and does not allow the identification of a
+directory, or if the string given as Extension is not null and is not a
+possible extension, or if the string given as Name is not a possible simple
+name (if Extension is null) or base name (if Extension is non-null).]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The above definition implies that if
+  the Extension is null, for Unix and Windows no '.' is added to Name.]}
+@end{Ramification}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If Name is null, Name_Error should be raised
+  as nothing is not a possible simple name or base name.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Generally, Compose(Containing_Directory(F),
+  Base_Name(F),Extension(F)) = F. However, this is not true on Unix or
+  Windows for file names that end with a '.';
+  Compose(Base_Name("Fooey."),Extension("Fooey.")) = "Fooey".
+  This is not a problem for Windows, as the names have the same meaning with
+  or without the '.', but these are different names for Unix. Thus,
+  care needs to be taken on Unix; if Extension is null, Base_Name should
+  be avoided. (That's not usually a problem with file names generated by a
+  program.)]}
+@end{Discussion}
+
+@end{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following file and directory
+queries and types are provided:]}
+
+@begin{DescribeCode}
+
 **** The rest of this clause has yet to be inserted ****
+
+@end{DescribeCode}
+
 
 @end{StaticSem}
 

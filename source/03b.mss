@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/12 05:36:19 $}
+@Comment{$Date: 2004/12/15 01:09:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @LabeledClause{Array Types}
 
@@ -712,8 +712,10 @@ to the term @i(character type).
 @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
 The declaration of Wide_Wide_String in Standard hides a use-visible
 declaration with the same @nt<defining_identifier>.
-In rare cases, this might result in an inconsistency between
-Ada 95 and Ada 2005.]}
+In the (very) unlikely event that an Ada 95 program had
+depended on such a use-visible declaration, and the program remains
+legal after the substitution of Standard.Wide_Wide_String,
+the meaning of the program will be different.]}
 @end{Inconsistent95}
 
 @begin{Extend95}
@@ -1194,7 +1196,8 @@ access discriminant is defined,
 either by evaluation of its @nt<default_expression> or by
 elaboration of a @nt<discriminant_constraint>.@Chg{Version=[2],New=[ For
 an access discriminant of a nonlimited
-type, its @nt{access_definition} is elaborated when the type declaration
+type, its @nt{access_definition} is elaborated when the
+@nt{full_type_declaration}
 with the @nt{known_discriminant_part} is elaborated.],Old=[]}
 @Redundant[The elaboration of an @nt<access_definition> creates the
 anonymous access type. When the expression defining the

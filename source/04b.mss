@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/12/08 01:09:45 $}
+@Comment{$Date: 2004/12/15 01:09:48 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.2 $}
+@Comment{$Revision: 1.3 $}
 
 @LabeledClause{Type Conversions}
 
@@ -368,10 +368,10 @@ the target type and the operand type, then],Old=[]}
 
 @begin(itemize)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[@Defn2{Term=[type conversion],sec=(numeric)}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[type conversion],sec=(numeric)}
 @Defn2{Term=[conversion],sec=(numeric)}
 If the target type is a numeric type, then the operand type
-shall be a numeric type.],Old=[]}
+shall be a numeric type.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(array)}
@@ -547,7 +547,7 @@ Further, if not @i<universal_access>:]}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is an access-to-subprogram type, then the operand ty
 shall be @i<universal_access> or an access-to-subprogram type. Further, if
-not @i<universal_access>:],Old=[]}
+not @i<universal_access>:]}
 
 @begin(inneritemize)
 

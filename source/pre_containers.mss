@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2004/12/12 05:36:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2004/12/15 01:09:49 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2004/12/12 05:36:22 $}
+@Comment{$Date: 2004/12/15 01:09:49 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -70,18 +70,18 @@ containers are provided:]}
   @ChgAdded{Version=[2],Text=[Doubly-linked Lists of any non-limited type;]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Hashed Maps keyed by any non-limited type
-  containing any non-limited type;]}
+  @ChgAdded{Version=[2],Text=[Hashed Maps keyed by any non-limited hashable type,
+  and containing any non-limited type;]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Ordered Maps keyed by any non-limited type
-  containing any non-limited type;]}
+  @ChgAdded{Version=[2],Text=[Ordered Maps keyed by any non-limited ordered type,
+  and containing any non-limited type;]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Hashed Sets of any non-limited type; and]}
+  @ChgAdded{Version=[2],Text=[Hashed Sets of any non-limited hashable type; and]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Ordered Sets of any non-limited type.]}
+  @ChgAdded{Version=[2],Text=[Ordered Sets of any non-limited ordered type.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2004/12/11 06:27:55 $}
+@Comment{$Date: 2004/12/15 01:09:48 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2236,8 +2236,16 @@ applies to all instances of that generic procedure.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
 @ChgAdded{Version=[2],Text=[If a @nt{pragma} No_Return applies to a procedure, then the exception
 Program_Error is raised at the point of the call of the procedure if the
-procedure body completes normally.]}
+procedure body completes normally.
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @end{RunTime}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Note that there is no name for suppressing
+this check, since the check represents a bug, imposes no time overhead,
+and minimal space overhead (since it can usually be statically eliminated
+as dead code).]}
+@end{Discussion}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
@@ -2347,6 +2355,12 @@ rhs="@Chg{Version=[2],New=<procedure_specification @key{is} @key{null};>,Old=<>}
 @ChgAdded{Version=[2],Text=[A @nt<null_procedure_declaration> declares a @i<null
 procedure>.@Defn{null procedure}@Defn2{Term=[procedure],Sec=[null]}
 A completion is not allowed for a @nt<null_procedure_declaration>.]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[There are no null functions because the return
+value has to be constructed somehow; a function that always raises
+Program_Error doesn't seem very useful or worth the complication.]}
+@end{Reason}
 @end{StaticSem}
 
 @begin{RunTime}

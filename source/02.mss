@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2004/12/11 06:27:52 $}
+@Comment{$Date: 2004/12/15 01:09:45 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -359,20 +359,24 @@ However, a sequence of one or more @nt<format_effector>s other
 than character tabulation (HT) signifies at least one end of line.
 @ImplDef{The representation for an end of line.}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Leading@Defn{separator}
 @Redundant[In some cases an explicit @i(separator) is required
 to separate adjacent lexical elements.]
 A separator is
-any of a space character, a format
-effector, or the end of a line, as follows:
+any of a @Chg{Version=[2],New=[@nt{separator_space}],Old=[space character]},
+a @Chg{Version=[2],New=[@nt{format_effector}],Old=[format effector]},
+or the end of a line, as follows:
 @begin(Discussion)
 It might be useful to define @lquotes@;white space@rquotes@; and use it here.
 @end(Discussion)
 @begin{Itemize}
-A space character is a separator except within a @nt{comment}, a
-@nt{string_literal}, or a @nt{character_literal}.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+A @Chg{Version=[2],New=[@nt{separator_space}],Old=[space character]} is
+a separator except within a @nt{comment}, a @nt{string_literal},
+or a @nt{character_literal}.
 
-Character tabulation (HT) is a
+Character @Chg{Version=[2],New=[Tabulation],Old=[tabulation (HT)]} is a
 separator except within a @nt{comment}.
 
 The end of a line is always a separator.
@@ -386,7 +390,8 @@ a reserved word, or a @nt{numeric_literal} and an adjacent
 @nt{identifier}, reserved word, or @nt{numeric_literal}.
 
 @Defn{delimiter}
-A @i{delimiter} is either one of the following special characters
+A @i{delimiter} is either one of the following@Chg{Version=[2],New=[],Old=[ special]}
+characters
 @begin{Display}
 &@ @ @ @ '@ @ @ @ (@ @ @ @ )@ @ @ @ *@ @ @ @ +@ @ @ @ ,@ @ @ @ -@ @ @ @ .@ @ @ @ /@ @ @ @ :@ @ @ @ ;@ @ @ @ <@ @ @ @ =@ @ @ @ >@ @ @ @ |
 @end{Display}
@@ -473,6 +478,12 @@ From URG recommendation.
 @end{Discussion}
 @end{ImplReq}
 
+@begin{Diffword95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[The wording was updated to use the new character
+  categories defined in the preceding clause.]}
+@end{Diffword95}
+
 @LabeledClause{Identifiers}
 
 @begin{Intro}
@@ -480,10 +491,31 @@ From URG recommendation.
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<identifier>,rhs="
-   @Syn2{identifier_letter} {[@Syn2{underline}] @Syn2{letter_or_digit}}"}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<identifier_start>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<@Syn2{letter_uppercase} |
+                     @Syn2{letter_lowercase} |
+                     @Syn2{letter_titlecase} |
+                     @Syn2{letter_modifier} |
+                     @Syn2{letter_other} |
+                     @Syn2{number_letter}>,Old=<>}"}
 
-@Syn{lhs=<letter_or_digit>,rhs="@Syn2{identifier_letter} | @Syn2{digit}"}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<identifier_extend>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<@Syn2{identifier_start} |
+                      @Syn2{mark_non_spacing} |
+                      @Syn2{mark_spacing_combining} |
+                      @Syn2{number_decimal_digit} |
+                      @Syn2{other_format}>,Old=<>}"}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Syn{lhs=<identifier>,rhs="
+   @Chg{Version=[2],New=<@Syn2{identifier_start} {[@Syn2{punctuation_connector}] @Syn2{identifier_extend}}>,
+   Old=<@Syn2{identifier_letter} {[@Syn2{underline}] @Syn2{letter_or_digit}}>}"}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<>,Old=<letter_or_digit>}>,
+rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{identifier_letter} | @Syn2{digit}>}"}
 
 @begin{SyntaxText}
 An @nt{identifier} shall not be a reserved word.
@@ -491,17 +523,33 @@ An @nt{identifier} shall not be a reserved word.
 @end{Syntax}
 
 @begin{StaticSem}
-All characters of an @nt{identifier} are significant, including any
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[Two @nt{identifier}s are ]}@Chg{Version=[2],
+New=[considered the same if they consist of the same sequence of characters
+after applying the following transformations (in this order):],Old=[All
+characters of an @nt{identifier} are significant, including any
 underline character.
 @Defn{case insensitive}
 @nt{Identifier}s differing only in the use of
-corresponding upper and lower case letters are considered the
-same.
+corresponding upper and lower case letters are considered the same.]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[The characters in category @nt{other_format}
+are eliminated.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[Full case folding, as defined by documents
+referenced in the note in section 1 of ISO/IEC 10646:2003, is applied to
+obtain the uppercase version of each character.
+@Defn{case insensitive}]}
+@end{Itemize}
 @begin(Discussion)
-  Two of the letters of ISO 8859-1 appear only as lower case,
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+  @ChgDeleted{Version=[2],Text=[Two of the letters of ISO 8859-1
+  appear only as lower case,
   "sharp s" and "y with diaeresis." These two letters have
   no corresponding upper case letter (in particular, they
-  are not considered equivalent to one another).
+  are not considered equivalent to one another).]}
 @end(Discussion)
 @end{StaticSem}
 
@@ -511,6 +559,12 @@ an implementation may support other upper/lower case equivalence
 rules for @nt<identifier>s@Redundant[,
 to accommodate local conventions].
 @end{ImplPerm}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@nt{Identifier}s differing only in the use of
+corresponding upper and lower case letters are considered the same.]}
+@end{Notes}
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of identifiers:}
@@ -538,6 +592,15 @@ As a side effect, implementations cannot use reserved words as
 implementation-defined attributes or pragma names.
 @end{Ramification}
 @end{DiffWord83}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  An @nt{identifier} can use any letter defined by ISO-10646:2003, along
+  with several other categories. This should ease programming in languages
+  other than English.]}
+@end{Extend95}
+
 
 @LabeledClause{Numeric Literals}
 
