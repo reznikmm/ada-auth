@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/20 04:32:36 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -41,8 +41,7 @@ which contains @nt{library_item}s
 and their subunits.
 @IndexSee{Term=[program library],See=(library)}
 Library units may be organized into a hierarchy of
-children, grandchildren, and so on.
-]
+children, grandchildren, and so on.]
 
 This section has two clauses:
 @RefSec{Separate Compilation}
