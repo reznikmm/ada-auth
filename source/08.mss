@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:09 $}
+@Comment{$Date: 2001/04/05 22:12:03 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1857,7 +1857,6 @@ overriding declaration in the private part of P.
 
 Thus a renaming allows one to squirrel away a copy of an inherited or
 predefined subprogram before later overriding it.
-@Defn2{Term=[squirrel away],Sec=(included in fairness to alligators)}
 @end{Discussion}
 @end{RunTime}
 
