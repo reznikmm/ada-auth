@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:18 $}
+@Comment{$Date: 2000/09/28 02:57:09 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -31,11 +31,11 @@ is a form of declaration defined as follows.
 
 @begin{Syntax}
 @Syn{tabs=[P27], lhs=<basic_declaration>,rhs="
-     @Syn2{type_declaration} @\| @Syn2{subtype_declaration}
-   | @Syn2{object_declaration} @\| @Syn2{number_declaration}
-   | @Syn2{subprogram_declaration} @\| @Syn2{abstract_subprogram_declaration}
-   | @Syn2{package_declaration} @\| @Syn2{renaming_declaration}
-   | @Syn2{exception_declaration} @\| @Syn2{generic_declaration}
+     @Syn2{type_declaration}@\| @Syn2{subtype_declaration}
+   | @Syn2{object_declaration}@\| @Syn2{number_declaration}
+   | @Syn2{subprogram_declaration}@\| @Syn2{abstract_subprogram_declaration}
+   | @Syn2{package_declaration}@\| @Syn2{renaming_declaration}
+   | @Syn2{exception_declaration}@\| @Syn2{generic_declaration}
    | @Syn2{generic_instantiation}"}
 
 
@@ -753,8 +753,8 @@ A @nt<type_declaration> declares a type and its first subtype.
 
 @Syn{tabs=[P29], lhs=<type_definition>,rhs="
      @Syn2{enumeration_type_definition}@\| @Syn2{integer_type_definition}
-   | @Syn2{real_type_definition}    @\| @Syn2{array_type_definition}
-   | @Syn2{record_type_definition}  @\| @Syn2{access_type_definition}
+   | @Syn2{real_type_definition}@\| @Syn2{array_type_definition}
+   | @Syn2{record_type_definition}@\| @Syn2{access_type_definition}
    | @Syn2{derived_type_definition}"}
 @end{Syntax}
 

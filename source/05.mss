@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:09 $}
+@Comment{$Date: 2000/09/28 02:57:09 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -49,17 +49,17 @@ no other @nt<statement>. A @nt<compound_statement> can enclose
    {@Syn2{label}} @Syn2{simple_statement} | {@Syn2{label}} @Syn2{compound_statement}"}
 
 @Syn{tabs=[P31], lhs=<simple_statement>,rhs="@Syn2{null_statement}
-   | @Syn2{assignment_statement} @\| @Syn2{exit_statement}
-   | @Syn2{goto_statement} @\| @Syn2{procedure_call_statement}
-   | @Syn2{return_statement} @\| @Syn2{entry_call_statement}
-   | @Syn2{requeue_statement} @\| @Syn2{delay_statement}
-   | @Syn2{abort_statement} @\| @Syn2{raise_statement}
+   | @Syn2{assignment_statement}@\| @Syn2{exit_statement}
+   | @Syn2{goto_statement}@\| @Syn2{procedure_call_statement}
+   | @Syn2{return_statement}@\| @Syn2{entry_call_statement}
+   | @Syn2{requeue_statement}@\| @Syn2{delay_statement}
+   | @Syn2{abort_statement}@\| @Syn2{raise_statement}
    | @Syn2{code_statement}"}
 
 @Syn{tabs=[P31], lhs=<compound_statement>,rhs="
-     @Syn2{if_statement} @\| @Syn2{case_statement}
-   | @Syn2{loop_statement}  @\| @Syn2{block_statement}
-   | @Syn2{accept_statement} @\| @Syn2{select_statement}"}
+     @Syn2{if_statement}@\| @Syn2{case_statement}
+   | @Syn2{loop_statement}@\| @Syn2{block_statement}
+   | @Syn2{accept_statement}@\| @Syn2{select_statement}"}
 
 @Syn{lhs=<null_statement>,rhs="@key{null};"}
 

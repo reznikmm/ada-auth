@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:19 $}
+@Comment{$Date: 2000/09/28 02:57:09 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -208,8 +208,8 @@ Standard is a library unit.
 
 
 @Syn{tabs=[P25], lhs=<library_unit_declaration>,rhs="
-     @Syn2{subprogram_declaration} @\| @Syn2{package_declaration}
-   | @Syn2{generic_declaration} @\| @Syn2{generic_instantiation}"}
+     @Syn2{subprogram_declaration}@\| @Syn2{package_declaration}
+   | @Syn2{generic_declaration}@\| @Syn2{generic_instantiation}"}
 
 
 @Syn{lhs=<library_unit_renaming_declaration>,rhs="

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:09 $}
+@Comment{$Date: 2000/09/28 02:57:09 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -26,10 +26,10 @@ Finally, @nt<name>s can denote attributes of any of the foregoing.]
 
 @begin{Syntax}
 @Syn{tabs=[P22], lhs=<name>,rhs="
-     @Syn2{direct_name} @\| @Syn2{explicit_dereference}
-   | @Syn2{indexed_component} @\| @Syn2{slice}
-   | @Syn2{selected_component} @\| @Syn2{attribute_reference}
-   | @Syn2{type_conversion} @\| @Syn2{function_call}
+     @Syn2{direct_name}@\| @Syn2{explicit_dereference}
+   | @Syn2{indexed_component}@\| @Syn2{slice}
+   | @Syn2{selected_component}@\| @Syn2{attribute_reference}
+   | @Syn2{type_conversion}@\| @Syn2{function_call}
    | @Syn2{character_literal}"}
 
 
@@ -147,7 +147,7 @@ Error @\@RI(-- the direct name of an exception) @\(see @RefSecNum(Exception Decl
 @begin{Wide}
 @leading@keepnext@i{Examples of dereferences:}
 @end{Wide}
-@begin{Example}@tabclear()@tabset(P16)
+@begin{Example}@tabclear()@tabset(P19)
 Next_Car.@key[all]@\@RI[--  explicit dereference denoting the object designated by]
                @\@RI[--  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
 Next_Car.Owner @\@RI[--  selected component with implicit dereference;]
@@ -305,7 +305,7 @@ Constraint_Error is raised if this check fails.
 @begin{Examples}
 @Leading@keepnext@i(Examples of indexed components:)
 @begin{Example}
-@tabclear()@tabset(P56)
+@tabclear()@tabset(P64)
  My_Schedule(Sat)     @RI[--  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
  Page(10)             @RI[--  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
  Board(M, J + 1)      @RI[--  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
@@ -401,7 +401,7 @@ component of the array A and has the corresponding component type.
 @begin{Examples}
 @Leading@keepnext@i(Examples of slices:)
 @begin{Example}
-@tabclear()@tabset(P50)
+@tabclear()@tabset(P58)
   Stars(1 .. 15)        @RI[--  a slice of 15 characters @\(see @RefSecNum{String Types})]
   Page(10 .. 10 + Size) @RI[--  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
   Page(L)(A .. B)       @RI[--  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
@@ -547,7 +547,7 @@ The exception Constraint_Error is raised if this check fails.
 @begin{Examples}
 @Leading@keepnext@i(Examples of selected components:)
 @begin{Example}
-@tabclear()@tabset(P50)
+@tabclear()@tabset(P60)
   Tomorrow.Month     @RI[--  a record component @\(see @RefSecNum{Record Types})]
   Next_Car.Owner     @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
   Next_Car.Owner.Age @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
@@ -563,7 +563,7 @@ The exception Constraint_Error is raised if this check fails.
 @leading@keepnext@i(Examples of expanded names:)
 @end{Wide}
 @begin{Example}
-@tabclear()@tabset(P58)
+@tabclear()@tabset(P66)
   Key_Manager."<"      @RI[--  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
   Dot_Product.Sum      @RI[--  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
   Buffer.Pool          @RI[--  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]

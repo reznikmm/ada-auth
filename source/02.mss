@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:55:59 $}
+@Comment{$Date: 2000/09/28 02:57:09 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -76,17 +76,17 @@ the text of an Ada program is not specified.
 
 @Leading@keepnext@;The categories of characters are defined as follows:
 @begin{Description}
-@Defn{identifier_letter}@nt<identifier_letter> @\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}
+@Defn{identifier_letter}@nt<identifier_letter>@\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}
 @begin{Discussion}
   We use @nt<identifier_letter> instead of simply @nt<letter> because
   ISO 10646 BMP includes many other characters that would generally
   be considered "letters."
 @end{Discussion}
 
-@Defn{upper_case_identifier_letter}@nt<upper_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
+@Defn{upper_case_identifier_letter}@nt<upper_case_identifier_letter>@\Any character of Row 00 of ISO 10646 BMP whose
 name begins @lquotes@;Latin Capital Letter@rquotes@;.
 
-@Defn{lower_case_identifier_letter}@nt<lower_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
+@Defn{lower_case_identifier_letter}@nt<lower_case_identifier_letter>@\Any character of Row 00 of ISO 10646 BMP whose
 name begins @lquotes@;Latin Small Letter@rquotes@;.
 @begin{Honest}
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0001]}
@@ -97,12 +97,12 @@ However, the intent is to include these characters as identifier letters.
 This problem was pointed out by a comment from the Netherlands.]}
 @end{Honest}
 
-@Defn{digit}@nt<digit> @\One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.
+@Defn{digit}@nt<digit>@\One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.
 
-@Defn{space_character}@nt<space_character> @\The character of ISO
+@Defn{space_character}@nt<space_character>@\The character of ISO
 10646 BMP named @lquotes@;Space@rquotes@;.
 
-@Defn{special_character}@nt<special_character> @\Any character of
+@Defn{special_character}@nt<special_character>@\Any character of
   the ISO 10646 BMP that is not reserved for a control function, and
   is not the @nt<space_character>, an @nt<identifier_letter>, or a @nt<digit>.
 @begin{Ramification}
@@ -111,12 +111,12 @@ and therefore @nt<graphic_character>s.
 They are not the same characters as space and hyphen-minus.
 @end{Ramification}
 
-@Defn{format_effector}@nt<format_effector> @\The control functions of ISO 6429 called
+@Defn{format_effector}@nt<format_effector>@\The control functions of ISO 6429 called
   character tabulation (HT), line tabulation (VT), carriage return (CR),
   line feed (LF), and form feed (FF).
 @IndexSeeAlso{Term=[control character],See=(format_effector)}
 
-@Defn{other_control_function}@nt<other_control_function> @\Any control
+@Defn{other_control_function}@nt<other_control_function>@\Any control
 function,
 other than a @nt<format_effector>, that is allowed in a comment; the set of
 @nt<other_control_function>s allowed in comments is implementation defined.
@@ -166,6 +166,7 @@ The first name given is the name from ISO 10646-1; the subsequent
 names, if any, are those used within the
 standard, depending on context.
 @end{Discussion}
+@Comment{The original version follows here (commented out)
 @begin{Display}
 @TabClear()@TabSet(P9)
 @begin(TwoCol)
@@ -198,7 +199,68 @@ standard, depending on context.
   { @\left curly bracket
   } @\right curly bracket
 @end(TwoCol)
-@end{Display}
+@end{Display}}
+@Comment{We use this (weird) four column version to make the HTML look much better.
+WARNING: The items that go together are in separate columns!!}
+@begin(FourCol)
+@NoParanum@;@ @ @ @ @ @ symbol
+
+@NoParanum@;@ @ @ @ @ @ @ @ @ "@*
+@ @ @ @ @ @ @ @ @ #@*
+@ @ @ @ @ @ @ @ @ &@*
+@ @ @ @ @ @ @ @ @ '@*
+@ @ @ @ @ @ @ @ @ (@*
+@ @ @ @ @ @ @ @ @ )@*
+@ @ @ @ @ @ @ @ @ *@*
+@ @ @ @ @ @ @ @ @ +@*
+@ @ @ @ @ @ @ @ @ ,@*
+@ @ @ @ @ @ @ @ @ @en@;@*
+@ @ @ @ @ @ @ @ @ .@*
+@ @ @ @ @ @ @ @ @ /
+@NewColumn
+@NoParanum@;name
+
+@NoParanum@;quotation mark@*
+number sign@*
+ampersand@*
+apostrophe, tick@*
+left parenthesis@*
+right parenthesis@*
+asterisk, multiply@*
+plus sign@*
+comma@*
+hyphen-minus, minus@*
+full stop, dot, point@*
+solidus, divide
+@NewColumn
+@NoParanum@;@ @ @ @ @ @ symbol
+
+@NoParanum@;@ @ @ @ @ @ @ @ @ :@*
+@ @ @ @ @ @ @ @ @ ;@*
+@ @ @ @ @ @ @ @ @ <@*
+@ @ @ @ @ @ @ @ @ =@*
+@ @ @ @ @ @ @ @ @ >@*
+@ @ @ @ @ @ @ @ @ _@*
+@ @ @ @ @ @ @ @ @ |@*
+@ @ @ @ @ @ @ @ @ [@*
+@ @ @ @ @ @ @ @ @ ]@*
+@ @ @ @ @ @ @ @ @ {@*
+@ @ @ @ @ @ @ @ @ }
+@NewColumn
+@NoParanum@;name
+
+@NoParanum@;colon@*
+semicolon@*
+less-than sign@*
+equals sign@*
+greater-than sign@*
+low line, underline@*
+vertical line@*
+left square bracket@*
+right square bracket@*
+left curly bracket@*
+right curly bracket
+@end(FourCol)
 @end{StaticSem}
 
 @begin{ImplPerm}
@@ -343,6 +405,7 @@ of a compound delimiter, or as a character of a @nt{comment},
 
 @Leading@keepnext@;The following names are used when referring to compound
 delimiters:
+@Comment{The original version follows here (commented out)
 @begin{Display}
 @TabClear()@TabSet(P11)delimiter @\name
 @comment{Blank line}
@@ -356,7 +419,43 @@ delimiters:
    << @\left label bracket
    >> @\right label bracket
    <> @\box
-@end{Display}
+@end{Display}}
+@Comment{We use this (weird) four column version to make the HTML look much better.
+WARNING: The items that go together are in separate columns!!}
+@begin(FourCol)
+@Noparanum@ @ @ @ @ @ delimiter
+
+@Noparanum@ @ @ @ @ @ @ @ @ =>@*
+@ @ @ @ @ @ @ @ @ ..@*
+@ @ @ @ @ @ @ @ @ **@*
+@ @ @ @ @ @ @ @ @ :=@*
+@*
+@ @ @ @ @ @ @ @ @ /=@*
+@*
+@ @ @ @ @ @ @ @ @ >=@*
+@ @ @ @ @ @ @ @ @ <=@*
+@ @ @ @ @ @ @ @ @ <<@*
+@ @ @ @ @ @ @ @ @ >>@*
+@ @ @ @ @ @ @ @ @ <>
+@NewColumn
+@Noparanum@;name
+
+@Noparanum@;arrow@*
+double dot@*
+double star, exponentiate@*
+assignment (pronounced:@*
+@ @ @ @lquotes@;becomes@rquotes@;)@*
+inequality (pronounced:@*
+@ @ @ @lquotes@;not equal@rquotes@;)@*
+greater than or equal@*
+less than or equal@*
+left label bracket@*
+right label bracket@*
+box
+@NewColumn
+@Comment{Last two columns are empty.}
+@NewColumn
+@end(FourCol)
 @end{StaticSem}
 
 @begin{ImplReq}

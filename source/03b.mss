@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:08 $}
+@Comment{$Date: 2000/09/28 02:57:09 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @LabeledClause{Array Types}
 
@@ -632,7 +632,7 @@ Question   : @key(constant) String  := "How many characters?";
 @\@RI[-- Question'First = 1, Question'Last = 20]
 @\@RI[-- Question'Length = 20 (the number of characters)]
 
-Ask_Twice  : String  := Question & Question;  @RI[-- constrained to (1..40)]
+Ask_Twice  : String  := Question & Question;@\@RI[-- constrained to (1..40)]
 Ninety_Six : @key(constant) Roman   := "XCVI";@\@RI[-- see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
 @end(Example)
 @end{Examples}
