@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2004/10/30 21:51:40 $}
+@Comment{$Date: 2004/11/04 05:41:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1321,8 +1321,8 @@ Duration the user might have declared.
 punctuation and components of lexical elements, are exclusively made of the
 characters whose code position is between 16#20# and 16#7E#, inclusively.
 @Redundant[For example, the character E in the definition of exponent is the
-character whose name is @lquotes;LATIN CAPITAL LETTER E@rquotes;, not
-@lquotes;GREEK CAPITAL LETTER EPSILON@rquotes;.]],Old=[]}
+character whose name is @lquotes@;LATIN CAPITAL LETTER E@rquotes@;, not
+@lquotes@;GREEK CAPITAL LETTER EPSILON@rquotes@;.]],Old=[]}
 @end{Wide}
 
 @begin{Wide}
