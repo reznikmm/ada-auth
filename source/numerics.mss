@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:29 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:29 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -36,7 +36,7 @@ Interfaces.Fortran (respectively, Interfaces.C) specified in
 @RefSecNum{Interface to Other Languages}
 and should support a @i{convention_}@nt{identifier} of
 Fortran (respectively, C) in the interfacing pragmas
-(@lSeeSecNum{Interface to Other Languages}),
+(see @RefSecNum{Interface to Other Languages}),
 thus allowing Ada programs to interface with programs written in
 that language.
 @end{ImplAdvice}
@@ -54,7 +54,7 @@ Implementation-defined approximations to the complex analogs of the mathematical
 functions known as the ``elementary functions'' are provided by the subprograms
 in Generic_Complex_Elementary_Functions, which is defined in
 @RefSecNum{Complex Elementary Functions}.  Both of these library units are generic
-children of the predefined package Numerics (@lSeeSecNum{The Numerics Packages}).
+children of the predefined package Numerics (see @RefSecNum{The Numerics Packages}).
 Nongeneric equivalents of these generic packages for each of the predefined
 floating point types are also provided as children of Numerics.
 @ImplDef{The accuracy actually achieved by the complex elementary
@@ -276,7 +276,7 @@ Real'Base.}
    precision to be maintained in complex arithmetic calculations.  Thus, the
    subprograms in Numerics.Generic_Complex_Types share with those in
    Numerics.Generic_Elementary_Functions, and indeed even with the predefined
-   arithmetic operations (@lSeeSecNum{Operators and Expression Evaluation}),
+   arithmetic operations (see @RefSecNum{Operators and Expression Evaluation}),
    the property of being free of range checks on input
    and output, i.e., of being able to exploit the base range of the relevant
    floating point type fully.  As a result, the user loses the ability to
@@ -363,7 +363,7 @@ unspecified.
 @PDefn{unspecified}
 @Redundant[Constraint_Error
 can also be raised when a finite result overflows
-(@lSeeSecNum{Accuracy Requirements for Complex Arithmetic}).]
+(see @RefSecNum{Accuracy Requirements for Complex Arithmetic}).]
 @begin{Discussion}
    It is anticipated that an Ada binding to IEC 559:1989 will be developed in
    the future.  As part of such a binding, the Machine_Overflows attribute of a
@@ -613,7 +613,7 @@ Numerics.Long_Complex_Elementary_Functions, etc.
 The overloading of the Exp function for the pure-imaginary type is provided
 to give the user an alternate way to compose a complex value from a given
 modulus and argument.  In addition to Compose_From_Polar(Rho, Theta)
-(@lSeeSecNum{Complex Types}), the programmer may write Rho * Exp(i * Theta).
+(see @RefSecNum{Complex Types}), the programmer may write Rho * Exp(i * Theta).
 
 The imaginary (resp., real) component of the parameter X of the forward
 hyperbolic (resp., trigonometric) functions and of the Exp function (and the
@@ -663,7 +663,7 @@ principal branch:
    The same convention applies to the imaginary component of the result of the
    Log function as applies to the result of the natural-cycle version of the
    Argument function of Numerics.Generic_Complex_Types
-   (@lSeeSecNum{Complex Types}).
+   (see @RefSecNum{Complex Types}).
 
    The range of the real (resp., imaginary) component of the result of the
    Arcsin and Arctan (resp., Arcsinh and Arctanh) functions is
@@ -709,7 +709,7 @@ Complex_Types.Real'Machine_Overflows is True:
 
 @redundant[Constraint_Error can also be raised
 when a finite result overflows
-(@lSeeSecNum{Accuracy Requirements for Complex Arithmetic}); this may
+(see @RefSecNum{Accuracy Requirements for Complex Arithmetic}); this may
 occur for parameter values sufficiently @i{near} poles, and, in the case of
 some of the functions, for parameter values having components of sufficiently
 large magnitude.]
@@ -1207,7 +1207,7 @@ In the strict mode, the predefined operations of a floating point type shall
 satisfy the accuracy requirements specified here and shall avoid or signal
 overflow in the situations described.  This behavior is presented in terms of
 a model of floating point arithmetic that builds on the concept of the
-canonical form (@lSeeSecNum{Attributes of Floating Point Types}).
+canonical form (see @RefSecNum{Attributes of Floating Point Types}).
 @end{Intro}
 
 @begin{StaticSem}
@@ -1272,11 +1272,11 @@ operations of floating point types are as follows.
 This subclause does not cover the accuracy of an operation of a static
 expression; such operations
 have to be evaluated exactly
-(@lSeeSecNum(Static Expressions and Static Subtypes)).
+(see @RefSecNum(Static Expressions and Static Subtypes)).
 It also does not cover the accuracy of the predefined attributes of a
 floating point subtype that yield a value of the type;
 such operations also yield exact results
-(@lSeeSecNum(Operations of Floating Point Types)
+(see @RefSecNum(Operations of Floating Point Types)
 and @RefSecNum(Attributes of Floating Point Types)).
 @end{Discussion}
 
@@ -1415,7 +1415,7 @@ For every subtype S of a floating point type @i{T}:
 @begin{Description}
 S'@Attr{Model_Mantissa} @\Yields the number of digits in the mantissa of
 the canonical form of the model numbers of @i{T}
-(@lSeeSecNum{Attributes of Floating Point Types}).  The
+(see @RefSecNum{Attributes of Floating Point Types}).  The
 value of this attribute shall be greater than or equal to
 @Math{@ceil{d @Times @Log(10) / @Log(T'@r{Machine_Radix})} + 1}, where @Math{d}
 is the requested decimal precision of @i{T}.  In addition, it
@@ -1424,7 +1424,7 @@ shall be less than or equal to the value of
 type @i{universal_integer}.
   @begin{Ramification}
      S'Model_Epsilon, which is defined in terms of S'Model_Mantissa
-     (@lSeeSecNum{Attributes of Floating Point Types}), yields the
+     (see @RefSecNum{Attributes of Floating Point Types}), yields the
      absolute value of the difference between one and the next model number of
      the type @i{T} above one.
      It is equal to or larger than the absolute value of the difference
@@ -1434,13 +1434,13 @@ type @i{universal_integer}.
 
 S'@Attr{Model_Emin} @\Yields the minimum exponent of the canonical form
 of the model numbers of @i{T}
-(@lSeeSecNum{Attributes of Floating Point Types}).  The value of this
+(see @RefSecNum{Attributes of Floating Point Types}).  The value of this
 attribute shall be greater than or equal to the value of
 @i{T}'Machine_Emin.  This attribute yields a value of the type
 @i{universal_integer}.
   @begin{Ramification}
      S'Model_Small, which is defined in terms of S'Model_Emin
-     (@lSeeSecNum{Attributes of Floating Point Types}), yields the
+     (see @RefSecNum{Attributes of Floating Point Types}), yields the
      smallest positive (nonzero) model number of the type @i{T}.
   @end{Ramification}
 
@@ -1571,7 +1571,7 @@ given below.
 This subclause does not cover the accuracy of an operation of a static
 expression; such operations
 have to be evaluated exactly
-(@lSeeSecNum(Static Expressions and Static Subtypes)).
+(see @RefSecNum(Static Expressions and Static Subtypes)).
 @end{Discussion}
 
 The operands of the fixed point adding operators, absolute value,
@@ -1587,7 +1587,7 @@ as a single operation whose accuracy depends on three types (those
 of the operands and the result).
 For decimal fixed point types, the
 attribute T'Round may be used to imply explicit conversion with
-rounding (@lSeeSecNum(Operations of Fixed Point Types)).
+rounding (see @RefSecNum(Operations of Fixed Point Types)).
 
 When the result type is a floating point type, the accuracy is
 as given in @RefSecNum(Model of Floating Point Arithmetic).
@@ -2182,7 +2182,7 @@ When an exception is not raised, the result of evaluating a real function of
 an instance @i{CT} of Numerics.Generic_Complex_Types (i.e., a function that
 yields a value of subtype @i{CT}.Real'Base or @i{CT}.Imaginary) belongs to a
 result interval defined as for a real elementary function
-(@lSeeSecNum{Accuracy Requirements for the Elementary Functions}).
+(see @RefSecNum{Accuracy Requirements for the Elementary Functions}).
 
 @Defn2{Term=[result interval],
         Sec=[for a component of the result of evaluating a complex function]}
@@ -2303,7 +2303,7 @@ The maximum relative error given above applies throughout the domain of the
 Compose_From_Polar function when the Cycle parameter is specified.  When the
 Cycle parameter is omitted, the maximum relative error applies only when the
 absolute value of the parameter Argument is less than or equal to the angle
-threshold (@lSeeSecNum{Accuracy Requirements for the Elementary Functions}).
+threshold (see @RefSecNum{Accuracy Requirements for the Elementary Functions}).
 For the Exp function, and for the forward hyperbolic (resp., trigonometric)
 functions, the maximum relative error given above likewise applies only when
 the absolute value of the imaginary (resp., real) component of the parameter X

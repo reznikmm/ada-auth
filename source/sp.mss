@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:30 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:30 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -33,8 +33,8 @@ from within an Ada program.]
 @begin{ImplReq}
 @Defn{machine code insertion}
 The implementation shall support machine code insertions
-(@lSeeSecNum{Machine Code Insertions}) or intrinsic subprograms
-(@lSeeSecNum{Conformance Rules}) (or both).
+(see @RefSecNum{Machine Code Insertions}) or intrinsic subprograms
+(see @RefSecNum{Conformance Rules}) (or both).
 Implementation-defined attributes shall be provided to
 allow the use of Ada entities as operands.
 @end{ImplReq}
@@ -55,7 +55,7 @@ Ada can be used to write systems programs that run in privileged mode.
 @Defn2{Term=[language], Sec=(interface to assembly)}
 @Defn{mixed-language programs}
 @Defn{assembly language}
-The interfacing pragmas (@lSeeSecNum{Interface to Other Languages})
+The interfacing pragmas (see @RefSecNum{Interface to Other Languages})
 should support interface to assembler;
 the default assembler should be associated with the convention
 identifier Assembler.
@@ -180,7 +180,7 @@ delivery of the interrupt occurrence.
 @begin{Honest}
   As an obsolescent feature,
   interrupts may be attached to task entries by an address clause.
-  @SeeSecNum{Interrupt Entries}.
+  See @RefSecNum{Interrupt Entries}.
 @end{Honest}
 
 While a handler is attached to an interrupt, it is called once for each
@@ -204,7 +204,7 @@ effect for that interrupt at the time of delivery.
 An exception propagated from a handler that is invoked by an
 interrupt has no effect.
 
-@Redundant[If the Ceiling_Locking policy (@lSeeSecNum{Priority Ceiling Locking}) is
+@Redundant[If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
 in effect, the interrupt handler executes with the active priority that is the
 ceiling priority of the corresponding protected object.]
 
@@ -284,7 +284,7 @@ subprograms is an interrupt handler].
 In a multi-processor with more than one interrupt subsystem, it is
 implementation defined whether (and how) interrupt sources from
 separate subsystems share the same Interrupt_ID type
-(@lSeeSecNum{The Package Interrupts}).
+(see @RefSecNum{The Package Interrupts}).
 @begin{discussion}
 This issue is tightly related to the issue of scheduling on a
 multi-processor.  In a sense, if a particular interrupt source is not
@@ -332,7 +332,7 @@ or more occurrences of the interrupt for possible later delivery
 when a user-defined handler is attached to that interrupt.
 
 It is a bounded error to call Task_Identification.Current_Task
-(@lSeeSecNum{The Package Task_Identification}) from an interrupt handler.
+(see @RefSecNum{The Package Task_Identification}) from an interrupt handler.
 
 The rule that an exception propagated from an interrupt handler has no effect
 is modeled after the rule about exceptions propagated out of task bodies.
@@ -363,7 +363,7 @@ with a parameterless profile.
 
 For the Attach_Handler pragma, the expected type for the
 @nt{expression} is Interrupts.Interrupt_ID
-(@lSeeSecNum{The Package Interrupts}).
+(see @RefSecNum{The Package Interrupts}).
 @end{Resolution}
 
 @begin{Legality}
@@ -392,7 +392,7 @@ library level declaration.
 
 If the pragma Interrupt_Handler appears in a @nt{protected_definition},
 then the corresponding procedure can be attached dynamically, as a handler, to
-interrupts (@lSeeSecNum{The Package Interrupts}).
+interrupts (see @RefSecNum{The Package Interrupts}).
 @Redundant[Such procedures are allowed to be attached to multiple interrupts.]
 
 @Defn2{Term=[creation], Sec=(of a protected object)}
@@ -409,7 +409,7 @@ for the interrupt is not affected.
 
 @Defn2{Term=[initialization], Sec=(of a protected object)}
 @IndexCheck{Ceiling_Check}
-If the Ceiling_Locking policy (@lSeeSecNum{Priority Ceiling Locking}) is
+If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
 in effect then upon the initialization of a protected object that either an
 Attach_Handler or Interrupt_Handler pragma applies to one of its procedures,
 a check is made that the ceiling priority defined in the
@@ -439,7 +439,7 @@ containing the handler.
 
 @begin{Erron}
 
-If the Ceiling_Locking policy (@lSeeSecNum{Priority Ceiling Locking}) is
+If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
 in effect and an interrupt is delivered to a handler, and the interrupt
 hardware priority is higher than the ceiling priority of the corresponding
 protected object, the execution of the program is erroneous.
@@ -483,7 +483,7 @@ procedure in response to a hardware interrupt than is used for a call
 to that protected procedure from a task.
 @begin{Discussion}
 This is despite the fact that the priority of an interrupt handler
-(@lSeeSecNum{Task Priorities}) is modeled after a hardware task calling the
+(see @RefSecNum{Task Priorities}) is modeled after a hardware task calling the
 handler.
 @end{Discussion}
 
@@ -514,7 +514,7 @@ before run time.
 
 The Attach_Handler pragma can provide static attachment of handlers to
 interrupts if the implementation supports preelaboration of protected
-objects.  (@SeeSecNum{Preelaboration Requirements}.)
+objects.  (See @RefSecNum{Preelaboration Requirements}.)
 
 The ceiling priority of a protected object that one of its procedures is
 attached to an interrupt should be at least as high as the highest
@@ -643,7 +643,7 @@ raised.
 
 The Reference function returns a value of type System.Address that can
 be used to attach a task entry, via an address clause
-(@lSeeSecNum{Interrupt Entries}) to the interrupt
+(see @RefSecNum{Interrupt Entries}) to the interrupt
 specified by Interrupt.  This function raises Program_Error if attaching
 task entries to interrupts (or to this particular interrupt) is not supported.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -659,7 +659,7 @@ of the corresponding interrupt be undefined.
 
 @begin{DocReq}
 
-If the Ceiling_Locking policy (@lSeeSecNum{Priority Ceiling Locking}) is
+If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
 in effect the implementation shall document the default ceiling priority
 assigned to a protected object that contains either the Attach_Handler or
 Interrupt_Handler pragmas, but not the Interrupt_Priority pragma.
@@ -711,7 +711,7 @@ Device_5_Driver : Device_Interface(5);
 
 @begin{Intro}
 @Redundant[This clause specifies additional implementation and documentation
-requirements for the Preelaborate pragma (@lSeeSecNum{Elaboration Control}).]
+requirements for the Preelaborate pragma (see @RefSecNum{Elaboration Control}).]
 @end{Intro}
 
 @begin{ImplReq}
@@ -1002,7 +1002,7 @@ altered.
 @PDefn2{Term=[representation pragma], Sec=(Volatile_Components)}
 @PDefn2{Term=[pragma, representation], Sec=(Volatile_Components)}
 These @nt{pragma}s are representation pragmas
-(@lSeeSecNum{Representation Items}).
+(see @RefSecNum{Representation Items}).
 
 @end{StaticSem}
 
@@ -1019,7 +1019,7 @@ similar optimizations for that object.
 @end{ImplNote}
 
 @Defn2{Term=sequential, Sec=(actions)}
-Two actions are sequential (@lSeeSecNum{Shared Variables}) if each
+Two actions are sequential (see @RefSecNum{Shared Variables}) if each
 is the read or update of the same atomic object.
 
 @PDefn2{Term=[by-reference type], Sec=(atomic or volatile)}
@@ -1050,7 +1050,7 @@ types and objects.
 
 @PDefn2{Term=[external effect], Sec=(volatile/atomic objects)}
 The external effect of a program
-(@lSeeSecNum(Conformity of an Implementation with the Standard))
+(see @RefSecNum(Conformity of an Implementation with the Standard))
 is defined to include each read and update
 of a volatile or atomic object.  The implementation shall not
 generate any memory reads or updates of atomic or volatile
@@ -1157,7 +1157,7 @@ The function Current_Task returns a value that identifies the calling task.
 
 The effect of Abort_Task is the same as the @nt{abort_statement} for the
 task identified by T. @Redundant[In addition, if T identifies the
-environment task, the entire partition is aborted, @SeeSecNum{Partitions}.]
+environment task, the entire partition is aborted, See @RefSecNum{Partitions}.]
 
 The functions Is_Terminated and Is_Callable return the value of the
 corresponding attribute of the task identified by T.
@@ -1197,7 +1197,7 @@ as a parameter to Abort_Task, Is_Terminated, and Is_Callable.
 @PDefn2{Term=[potentially blocking operation],Sec=(Abort_Task)}
 @PDefn2{Term=[blocking, potentially],Sec=(Abort_Task)}
 Abort_Task is a potentially blocking operation
-(@lSeeSecNum{Protected Subprograms and Protected Actions}).
+(see @RefSecNum{Protected Subprograms and Protected Actions}).
 @end{RunTime}
 
 @begin{Bounded}
@@ -1238,7 +1238,7 @@ entry body or interrupt handler.}
 This package is intended for use in writing user-defined task scheduling
 packages and constructing server tasks.  Current_Task can be used in
 conjunction with other operations requiring a task as an argument such
-as Set_Priority (@lSeeSecNum{Dynamic Priorities}).
+as Set_Priority (see @RefSecNum{Dynamic Priorities}).
 
 The function Current_Task and the attribute Caller can return a
 Task_ID value that identifies the environment task.
@@ -1296,7 +1296,7 @@ corresponding attribute of T.
 
 The Set_Value operation performs any finalization on the old value of the
 attribute of T and assigns Val to that attribute
-(@lSeeSecNum{Assignment Statements} and
+(see @RefSecNum{Assignment Statements} and
 @RefSecNum{User-Defined Assignment and Finalization}).
 
 The effect of the Reinitialize operation is the same as Set_Value where

@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:30 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:30 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -292,7 +292,7 @@ respectively.
 @PDefn2{Term=[pragma, program unit], Sec=(Convention)}
 An interfacing pragma is a program unit pragma
 when applied to a program unit
-(@lSeeSecNum{Pragmas and Program Units}).
+(see @RefSecNum{Pragmas and Program Units}).
 
 An interfacing pragma defines the convention
 of the entity denoted by the @nt{local_name}.
@@ -2305,7 +2305,7 @@ pass objects between Ada and Fortran programs.
 @begin{StaticSem}
 The library package Interfaces.Fortran has the following declaration:
 @begin{Example}
-@key[with] Ada.Numerics.Generic_Complex_Types;  @i{-- @lSeeSecNum{Complex Types}}
+@key[with] Ada.Numerics.Generic_Complex_Types;  @i{-- see @RefSecNum{Complex Types}}
 @key[pragma] Elaborate_All(Ada.Numerics.Generic_Complex_Types);
 @ChildUnit{Parent=[Interfaces],Child=[Fortran],Expanded=[Interfaces.Fortran]}
 @key[package] Interfaces.Fortran @key[is]
@@ -2356,7 +2356,7 @@ The library package Interfaces.Fortran has the following declaration:
 @begin{Ramification}
    The means by which the Complex type is provided in Interfaces.Fortran
    creates a dependence of Interfaces.Fortran on Numerics.Generic_Complex_Types
-   (@lSeeSecNum{Complex Types}).
+   (see @RefSecNum{Complex Types}).
    This dependence is intentional and unavoidable,
    if the Fortran-compatible Complex type is to be useful in Ada code
    without duplicating facilities defined elsewhere.

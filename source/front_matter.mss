@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedB(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $}
+@comment{$Revision: 1.5 $ $Date: 2000/04/20 02:30:30 $}
 
 @begin{Intro}
 @begin{AARMandRM9XOnly}
@@ -451,7 +451,7 @@ and @RefSec{Formal Packages}.
 Access types have been extended to allow an access value to designate
 a subprogram or an object declared by an object declaration
 (as opposed to just a heap-allocated object).
-@SeeSecNum{Access Types}.
+See @RefSecNum{Access Types}.
 
 Efficient data-oriented synchronization is provided via
 protected types.
@@ -462,7 +462,7 @@ parent and child units.
 See Section 10.
 
 Additional support has been added for interfacing to other languages.
-@SeeSecNum{Interface to Other Languages}.
+See @RefSecNum{Interface to Other Languages}.
 
 The Specialized Needs Annexes have been added
 to provide specific support for certain

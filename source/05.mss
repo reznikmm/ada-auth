@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:28 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -110,7 +110,7 @@ or @nt<block_statement> with the given @nt<statement_identifier>.
   refer to the @nt{declarative_part} of a @nt<block_statement>.
 
   The scope of a declaration starts at the place of the declaration
-  itself (@lSeeSecNum{Scope of Declarations}).
+  itself (see @RefSecNum{Scope of Declarations}).
   In the case of a label, loop, or block name, it
   follows from this rule that the scope of the implicit declaration
   starts before the first explicit occurrence of the corresponding
@@ -287,7 +287,7 @@ Don't confuse the term ``assignment operation'' with the
 The assignment operation is just one part of the execution of an
 @nt{assignment_statement}.
 The assignment operation is also a part of the execution of various
-other constructs; @lSeeSec{Completion and Finalization} for a complete
+other constructs; see @RefSec{Completion and Finalization} for a complete
 list.
 Note that when we say, ``such-and-such is assigned to so-and-so'',
 we mean that the assignment operation is being applied, and that
@@ -330,7 +330,7 @@ The target @Redundant[denoted by the
 If the target is of a tagged class-wide type @i(T)'Class, then
 the @nt<expression> shall either be dynamically tagged,
 or of type @i(T) and tag-indeterminate
-(@lSeeSecNum{Dispatching Operations of Tagged Types}).
+(see @RefSecNum{Dispatching Operations of Tagged Types}).
 @begin{Reason}
   This is consistent with the general rule that a single
   dispatching operation shall not have both dynamically tagged and
@@ -363,10 +363,10 @@ When the type of the target is class-wide:
   @PDefn2{Term=[controlling tag value], Sec=(for the @nt{expression}
     in an @nt{assignment_statement})}
   If the @nt<expression> is tag-indeterminate
-  (@lSeeSecNum{Dispatching Operations of Tagged Types}), then the controlling
+  (see @RefSecNum{Dispatching Operations of Tagged Types}), then the controlling
   tag value for the @nt<expression> is the tag of the target;
 @begin{Ramification}
-    @SeeSec(Dispatching Operations of Tagged Types).
+    See @RefSec(Dispatching Operations of Tagged Types).
 @end{Ramification}
 
   @IndexCheck{Tag_Check}
@@ -380,7 +380,7 @@ When the type of the target is class-wide:
 
 The value of the @nt<expression> is converted to the subtype of the
 target.  @Redundant[The conversion might raise an exception
-(@lSeeSecNum{Type Conversions}).]
+(see @RefSecNum{Type Conversions}).]
 @PDefn2{Term=[implicit subtype conversion],Sec=(assignment_statement)}
 @begin{Ramification}
   @RefSec(Type Conversions) defines what actions
@@ -450,7 +450,7 @@ if the variable
 name can be interpreted as the name of a variable designated by the
 access value returned by a function call, and similarly, as a
 component or slice of such a variable
-(@lSeeSec{The Context of Overload Resolution}).
+(see @RefSec{The Context of Overload Resolution}).
 @end{Ramification}
 @end{NotesNotes}
 
@@ -460,11 +460,11 @@ component or slice of such a variable
 Value := Max_Value - 1;
 Shade := Blue;
 
-Next_Frame(F)(M, N) := 2.5;        --@i{  @lSeeSecNum{Indexed Components}}
-U := Dot_Product(V, W);            --@i{  @lSeeSecNum{Subprogram Bodies}}
+Next_Frame(F)(M, N) := 2.5;        --@i{  see @RefSecNum{Indexed Components}}
+U := Dot_Product(V, W);            --@i{  see @RefSecNum{Subprogram Bodies}}
 
-Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@i{ @lSeeSecNum{Variant Parts and Discrete Choices}}
-Next_Car.@key[all] := (72074, @key[null]);    --@i{  @lSeeSecNum{Incomplete Type Declarations}}
+Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@i{ see @RefSecNum{Variant Parts and Discrete Choices}}
+Next_Car.@key[all] := (72074, @key[null]);    --@i{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
 @i{Examples involving scalar subtype conversions:}
@@ -505,7 +505,7 @@ incorrect.
 @begin{Extend83}
 We now allow user-defined finalization and value adjustment actions
 as part of @nt{assignment_statement}s
-(@lSeeSec{User-Defined Assignment and Finalization}).
+(see @RefSec{User-Defined Assignment and Finalization}).
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -587,7 +587,7 @@ them is executed.
    Put(Item);
 @key[end] @key[if];
 
-@key[if] My_Car.Owner.Vehicle /= My_Car @key[then]            --@i{  @lSeeSecNum{Incomplete Type Declarations}}
+@key[if] My_Car.Owner.Vehicle /= My_Car @key[then]            --@i{  see @RefSecNum{Incomplete Type Declarations}}
    Report ("Incorrect data");
 @key[end] @key[if];
 @end{Example}
@@ -644,7 +644,7 @@ The possible values of the @nt{expression} shall be covered as follows:
   @begin{Ramification}
     Although not official @nt<name>s of objects, a value conversion
     still has a defined nominal subtype, namely its target subtype.
-    @SeeSecNum{Type Conversions}.
+    See @RefSecNum{Type Conversions}.
   @end{Ramification}
 
   If the type of the @nt{expression} is
@@ -708,7 +708,7 @@ Otherwise (no @key{others}), Constraint_Error is raised either way @em on
 the @nt{expression} evaluation, or for the @nt{case_statement} itself.
 
 For an enumeration type with a discontiguous set of internal codes
-(@lSeeSecNum{Enumeration Representation Clauses}),
+(see @RefSecNum{Enumeration Representation Clauses}),
 the only way to get values in between the proper values
 is via an object with an invalid representation;
 there is no ``out-of-range'' situation that can produce them.
@@ -788,7 +788,7 @@ This restriction is removed in Ada 9X; an @key{others} @nt{discrete_choice}
 is required instead.
 
 In Ada 9X, a function call is the name of an object;
-this was not true in Ada 83 (@lSeeSec{Names}).
+this was not true in Ada 83 (see @RefSec{Names}).
 This change makes the following @nt{case_statement} legal:
 @begin{Example}
 @key[subtype] S @key[is] Integer @key[range] 1..2;
@@ -806,7 +806,7 @@ for a @nt{case_statement} whose expression calls a such a function, the
 full coverage rules are checked using the result subtype of the original
 function.
 Note that predefined operators such as "+" have an unconstrained result
-subtype (@lSeeSecNum{Logical Operators and Short-circuit Control Forms}).
+subtype (see @RefSecNum{Logical Operators and Short-circuit Control Forms}).
 Note that generic formal functions do not have static result subtypes.
 Note that the result subtype of an inherited subprogram need not
 correspond to any namable subtype;
@@ -825,7 +825,7 @@ we no longer need RM83-5.4(3)'s ``which must be determinable
 independently of the context in which the expression occurs, but
 using the fact that the expression must be of a discrete type,''
 because the @nt{expression} is now a complete context.
-@SeeSec{The Context of Overload Resolution}.
+See @RefSec{The Context of Overload Resolution}.
 
 Since @nt<type_conversion>s are now defined as @nt<name>s,
 their coverage rule is now covered under the general rule
@@ -924,7 +924,7 @@ than possibly raising Storage_Error, but anything can do that).
 A loop parameter is a constant;
 it cannot be updated within the
 @nt{sequence_of_statements} of the loop
-(@lSeeSecNum{Objects and Named Numbers}).
+(see @RefSecNum{Objects and Named Numbers}).
 
 
 An @nt{object_declaration} should not be given for a loop parameter,
@@ -984,7 +984,7 @@ the subtype of the loop parameter is static.
 @i{Example of a loop statement with a name:}
 @begin{Example}
 Summation:
-   @key[while] Next /= Head @key[loop]       --@i{ @lSeeSecNum{Incomplete Type Declarations}}
+   @key[while] Next /= Head @key[loop]       --@i{ see @RefSecNum{Incomplete Type Declarations}}
       Sum  := Sum + Next.Value;
       Next := Next.Succ;
    @key[end] @key[loop] Summation;
@@ -1051,12 +1051,12 @@ Swap:
 If task objects are declared within a @nt{block_statement} whose execution
 is completed, the @nt{block_statement} is not left until all its dependent
 tasks are terminated
-(@lSeeSecNum{User-Defined Assignment and Finalization}).
+(see @RefSecNum{User-Defined Assignment and Finalization}).
 This rule applies to completion caused by a transfer of control.
 
 Within a @nt{block_statement}, the block name can be used in expanded
 names denoting local entities such as Swap.Temp in the above example
-(@lSeeSecNum{Selected Components}).
+(see @RefSecNum{Selected Components}).
 @end{Ramification}
 @end{Examples}
 

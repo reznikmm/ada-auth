@@ -1,9 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:29 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:29 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -46,7 +46,7 @@ Interfaces.COBOL (respectively, Interfaces.C) specified in
 @RefSecNum{Interface to Other Languages}
 and should support a @i{convention_}@nt{identifier} of
 COBOL (respectively, C) in the interfacing pragmas
-(@lSeeSecNum{Interface to Other Languages}),
+(see @RefSecNum{Interface to Other Languages}),
 thus allowing Ada programs to interface with programs written in
 that language.
 @end{ImplAdvice}
@@ -62,7 +62,7 @@ This Annex is new to Ada 9X.
 @PDefn2{Term=[specifiable], Sec=(of Machine_Radix for decimal first subtypes)}
 @Defn{Machine_Radix clause}
 Machine_Radix may be specified for a decimal first subtype
-(@lSeeSecNum{Fixed Point Types})
+(see @RefSecNum{Fixed Point Types})
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static,
 and its value shall be 2 or 10.
@@ -279,7 +279,7 @@ the edited output string values for the decimal values 32.10 and @en@;5432.10 ar
 the space character.
 
 The generic packages Text_IO.Decimal_IO and Wide_Text_IO.Decimal_IO
-(@lSeeSec(Input-Output for Real Types))
+(see @RefSec(Input-Output for Real Types))
 provide text input and non-edited text output for decimal types.
 @end{Intro}
 
@@ -924,7 +924,7 @@ Item:         Picture and Result Strings:
 The package Text_IO.Editing provides a private type Picture with associated
 operations, and a generic package Decimal_Output.
 An object of type Picture is composed from a well-formed picture String
-(@lSeeSecNum(Picture String Formation)) and a Boolean item indicating
+(see @RefSecNum(Picture String Formation)) and a Boolean item indicating
 whether a zero numeric value will result in an edited output string
 of all space characters.
 The package Decimal_Output
@@ -1024,7 +1024,7 @@ Put procedures is invoked with a null string for Currency.
 @end{CodeExample}
 
 Valid returns True if Pic_String is a well-formed picture String
-(@lSeeSecNum(Picture String Formation)) the
+(see @RefSecNum(Picture String Formation)) the
 length of whose expansion does not exceed Max_Picture_Length, and if
 either Blank_When_Zero is False or Pic_String contains no '*'.
 
@@ -1138,7 +1138,7 @@ raises the exception Layout_Error.
 Each of these Put procedures
 outputs Image(Item, Pic, Currency, Fill, Separator, Radix_Mark)
 consistent with the conventions for Put for other real types in case
-of bounded line length (@lSeeSec{Get and Put Procedures}).
+of bounded line length (see @RefSec{Get and Put Procedures}).
 
 @begin{CodeExample}
 @key(procedure) Put (To         : @key(out) String;

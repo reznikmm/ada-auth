@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/20 02:30:30 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.4 $}
+@comment{$Revision: 1.5 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -38,7 +38,7 @@ where
   Text=[Yields the largest value of @Math{p} such that every value expressible
    in the canonical form (for the type @i{T}), having a @Math{p}-digit
    @i{mantissa} and an @i{exponent} between @i{T}'Machine_Emin and
-   @i{T}'Machine_Emax, is a machine number (@lSeeSecNum{Floating Point Types})
+   @i{T}'Machine_Emax, is a machine number (see @RefSecNum{Floating Point Types})
    of the type @i{T}.  This attribute yields a value of the type
    @i{universal_integer}.]}
 @begin{Ramification}
@@ -51,7 +51,7 @@ where
   Text=[Yields the smallest (most negative) value of @i{exponent} such
    that every value expressible in the canonical form (for the type @i{T}),
    having a @i{mantissa} of @i{T}'Machine_Mantissa digits, is a machine number
-   (@lSeeSecNum{Floating Point Types}) of the type
+   (see @RefSecNum{Floating Point Types}) of the type
    @i{T}.
    This attribute yields
    a value of the type @i{universal_integer}.]}
@@ -60,7 +60,7 @@ where
   Text=[Yields the largest (most positive) value of @i{exponent} such that
    every value expressible in the canonical form (for the type @i{T}), having
    a @i{mantissa} of @i{T}'Machine_Mantissa digits, is a machine number
-   (@lSeeSecNum{Floating Point Types}) of the type @i{T}.  This attribute
+   (see @RefSecNum{Floating Point Types}) of the type @i{T}.  This attribute
    yields a value of the type @i{universal_integer}.]}
 @begin{Ramification}
 
@@ -76,7 +76,7 @@ where
    @MathDisplay{@PorM mantissa @Times T@r{'Machine_Radix}@Up{T@r{'Machine_Emin}}}
    where @i{mantissa} is a nonzero @i{T}'Machine_Mantissa-digit fraction in the
    number base @i{T}'Machine_Radix, the first digit of which is zero,
-   is a machine number (@lSeeSecNum{Floating Point Types}) of the type
+   is a machine number (see @RefSecNum{Floating Point Types}) of the type
    @i{T}; yields the value False otherwise.
    The value
    of this attribute is of the predefined type Boolean.]}
@@ -510,7 +510,7 @@ a floating point type @i{T}.
    @Math{d} is the requested decimal precision of @i{T},
    and less than or equal to the value of
    @i{T}'Machine_Mantissa.
-   @SeeSecNum{Model-Oriented Attributes of Floating Point Types}
+   See @RefSecNum{Model-Oriented Attributes of Floating Point Types}
    for further requirements
    that apply to implementations supporting the Numerics
    Annex.
@@ -522,7 +522,7 @@ a floating point type @i{T}.
   this attribute yields an implementation defined value
   that is greater than or equal to the value
   of @i{T}'Machine_Emin.
-  @SeeSecNum{Model-Oriented Attributes of Floating Point Types}
+  See @RefSecNum{Model-Oriented Attributes of Floating Point Types}
   for further requirements
   that apply to implementations supporting the Numerics
   Annex.
@@ -568,26 +568,26 @@ a floating point type @i{T}.
    If the Numerics Annex is not supported,
    the meaning of this attribute is implementation
    defined;
-   @lSeeSecNum{Model-Oriented Attributes of Floating Point Types}
+   see @RefSecNum{Model-Oriented Attributes of Floating Point Types}
    for the definition that applies to implementations supporting
    the Numerics Annex.)]}
 
 @Attribute{Prefix=<S>, AttrName=<Safe_First>,
   Text=[Yields the lower bound of the safe range
-  (@lSeeSecNum{Floating Point Types}) of the type @i{T}.
+  (see @RefSecNum{Floating Point Types}) of the type @i{T}.
   If the Numerics Annex is not supported, the value
   of this attribute is implementation defined;
-  @lSeeSecNum{Model-Oriented Attributes of Floating Point Types}
+  see @RefSecNum{Model-Oriented Attributes of Floating Point Types}
   for the definition that applies to
   implementations supporting the Numerics Annex.  The value of this attribute
   is of the type @i{universal_real}.]}
 
 @Attribute{Prefix=<S>, AttrName=<Safe_Last>,
   Text=[Yields the upper bound of the safe range
-  (@lSeeSecNum{Floating Point Types}) of the type @i{T}.
+  (see @RefSecNum{Floating Point Types}) of the type @i{T}.
   If the Numerics Annex is not supported, the value
   of this attribute is implementation defined;
-  @lSeeSecNum{Model-Oriented Attributes of Floating Point Types}
+  see @RefSecNum{Model-Oriented Attributes of Floating Point Types}
   for the definition that applies to
   implementations supporting the Numerics Annex.  The value of this attribute
   is of the type @i{universal_real}.]}
@@ -638,7 +638,7 @@ The Model_Emin attribute is new.  It is conceptually similar to the negation of
 Safe_Emax attribute of Ada 83, adjusted for the fact that the model numbers now
 have the hardware radix.  It is a fundamental determinant, along with
 Model_Mantissa, of the set of model numbers of a type
-(@lSeeSecNum{Model of Floating Point Arithmetic}).
+(see @RefSecNum{Model of Floating Point Arithmetic}).
 
 The Denorm and Signed_Zeros attributes are new, as are all of the
 primitive function attributes.
@@ -687,5 +687,5 @@ in the form of implementation-defined attributes with their former values.
 The Machine_Radix attribute
 is now allowed for fixed point types.  It is
 also specifiable in an attribute definition clause
-(@lSeeSecNum{Machine_Radix Attribute Definition Clause}).
+(see @RefSecNum{Machine_Radix Attribute Definition Clause}).
 @end{Extend83}

@@ -1,11 +1,11 @@
 @Part(syntax, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:30 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.4 $}
+@comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @Defn2{Term=[syntax], Sec=(complete listing)}
@@ -14,7 +14,7 @@
 @Defn2{Term=[BNF (Backus-Naur Form)], Sec=(complete listing)}
 @Defn2{Term=[Backus-Naur Form (BNF)], Sec=(complete listing)}
 This Annex summarizes the complete syntax of the language.
-@SeeSecNum{Method of Description and Syntax Notation}
+See @RefSecNum{Method of Description and Syntax Notation}
 for a description of the notation used.
 
 

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:28 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -16,7 +16,7 @@ expression, and to their evaluation, are given in this section.]
 @begin{Intro}
 @redundant[
 @nt<Name>s can denote declared entities, whether declared explicitly
-or implicitly (@lSeeSecNum(Declarations)).  @nt<Name>s can also
+or implicitly (see @RefSecNum(Declarations)).  @nt<Name>s can also
 denote objects or subprograms designated by access values; the
 results of @nt<type_conversion>s or @nt<function_call>s; subcomponents
 and slices of objects and values; protected subprograms,
@@ -41,7 +41,7 @@ rhs="@Syn2{identifier} | @Syn2{operator_symbol}"}
 @begin{Discussion}
   @nt<character_literal> is no longer a @nt<direct_name>.
   @nt<character_literal>s are usable even when the corresponding
-  @nt<enumeration_type_declaration> is not visible.  @SeeSecNum(Literals).
+  @nt<enumeration_type_declaration> is not visible.  See @RefSecNum(Literals).
 @end{Discussion}
 
 @Syn{lhs=<prefix>,rhs="@Syn2{name} | @Syn2{implicit_dereference}"}
@@ -80,7 +80,7 @@ value of the @nt<name> is the result of an access type conversion, the
 dereference denotes a view created as part of the conversion.
 The nominal subtype of the view is not necessarily
 the same as that used to create the designated object.
-@SeeSecNum{Type Conversions}.
+See @RefSecNum{Type Conversions}.
 @end{Ramification}
 @begin{Honest}
   @PDefn2{Term=[nominal subtype], Sec=(of a @nt<name>)}
@@ -138,20 +138,20 @@ denotes the object or subprogram designated by the value of the @nt{name}.
 @i(Examples of direct names:)
 @begin(Display)
 @tabclear()
-Pi             @^@i(-- the direct name of a number)                  @^(@lSeeSecNum(Number Declarations))
-Limit @\@i(-- the direct name of a constant) @\(@lSeeSecNum(Object Declarations))
-Count @\@i(-- the direct name of a scalar variable) @\(@lSeeSecNum(Object Declarations))
-Board @\@i(-- the direct name of an array variable) @\(@lSeeSecNum(Index Constraints and Discrete Ranges))
-Matrix @\@i(-- the direct name of a type) @\(@lSeeSecNum(Array Types))
-Random @\@i(-- the direct name of a function) @\(@lSeeSecNum(Subprogram Declarations))
-Error @\@i(-- the direct name of an exception) @\(@lSeeSecNum(Exception Declarations))
+Pi             @^@i(-- the direct name of a number)                  @^(see @RefSecNum(Number Declarations))
+Limit @\@i(-- the direct name of a constant) @\(see @RefSecNum(Object Declarations))
+Count @\@i(-- the direct name of a scalar variable) @\(see @RefSecNum(Object Declarations))
+Board @\@i(-- the direct name of an array variable) @\(see @RefSecNum(Index Constraints and Discrete Ranges))
+Matrix @\@i(-- the direct name of a type) @\(see @RefSecNum(Array Types))
+Random @\@i(-- the direct name of a function) @\(see @RefSecNum(Subprogram Declarations))
+Error @\@i(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
 @end(Display)
 
 @i{Examples of dereferences:}
 @begin{Display}
 @tabclear()
 Next_Car.@key[all]         @^@i[--  explicit dereference denoting the object designated by]
-               @\@i[--  the access variable Next_Car (@lSeeSecNum{Incomplete Type Declarations})]
+               @\@i[--  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
 Next_Car.Owner @\@i[--  selected component with implicit dereference;]
                @\@i[--  same as Next_Car.@key[all].Owner]
 @end{Display}
@@ -173,7 +173,7 @@ of a function call and the function call itself are treated
 equivalently in the grammar.
 A function call is considered the name of a constant,
 and can be used anywhere such a name is permitted.
-@SeeSecNum(Return Statements).
+See @RefSecNum(Return Statements).
 
 Type conversions of a tagged type are permitted anywhere
 their operand is permitted.  That is, if the operand
@@ -182,7 +182,7 @@ left-hand side of an @nt{assignment_statement}.
 If the operand is an object,
 then the type conversion can appear in an object renaming
 or as a prefix.
-@SeeSecNum(Type Conversions).
+See @RefSecNum(Type Conversions).
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -276,7 +276,7 @@ In the case of an array whose components are aliased, and
 of an unconstrained discriminated subtype, the components
 are constrained even though their nominal subtype is unconstrained.
 (This is because all aliased discriminated objects are constrained.
-@SeeSecNum(Operations of Access Types).)
+See @RefSecNum(Operations of Access Types).)
 In all other cases, an array component is constrained if and only
 if its nominal subtype is constrained.
 @end{Ramification}
@@ -306,12 +306,12 @@ Constraint_Error is raised if this check fails.
 @i(Examples of indexed components:)
 @begin{Example}
 @tabclear()
- My_Schedule(Sat)     @i[--  a component of a one-dimensional array  @^(@lSeeSecNum{Index Constraints and Discrete Ranges})]
- Page(10)             @i[--  a component of a one-dimensional array @\(@lSeeSecNum{Array Types})]
- Board(M, J + 1)      @i[--  a component of a two-dimensional array @\(@lSeeSecNum{Index Constraints and Discrete Ranges})]
- Page(10)(20)         @i[--  a component of a component @\(@lSeeSecNum{Array Types})]
- Request(Medium)      @i[--  an entry in a family of entries @\(@lSeeSecNum{Task Units and Task Objects})]
- Next_Frame(L)(M, N)  @i[--  a component of a function call @\(@lSeeSecNum{Subprogram Declarations})]
+ My_Schedule(Sat)     @i[--  a component of a one-dimensional array  @^(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)             @i[--  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
+ Board(M, J + 1)      @i[--  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)(20)         @i[--  a component of a component @\(see @RefSecNum{Array Types})]
+ Request(Medium)      @i[--  an entry in a family of entries @\(see @RefSecNum{Task Units and Task Objects})]
+ Next_Frame(L)(M, N)  @i[--  a component of a function call @\(see @RefSecNum{Subprogram Declarations})]
 @end{Example}
 @end{Examples}
 
@@ -383,7 +383,7 @@ Constraint_Error is raised if this check fails.
 A @nt<slice> is not permitted as the @nt<prefix> of an
 Access @nt<attribute_reference>,
 even if the components or the array as a whole are aliased.
-@SeeSecNum(Operations of Access Types).
+See @RefSecNum(Operations of Access Types).
 @begin{TheProof}
   Slices are not aliased, by @RefSec{Access Types}.
 @end{TheProof}
@@ -404,12 +404,12 @@ component of the array A and has the corresponding component type.
 @i(Examples of slices:)
 @begin{Example}
 @tabclear()
-  Stars(1 .. 15)        @i[--  a slice of 15 characters                  @^(@lSeeSecNum{String Types})]
-  Page(10 .. 10 + Size) @i[--  a slice of 1 + Size components @\(@lSeeSecNum{Array Types})]
-  Page(L)(A .. B)       @i[--  a slice of the array Page(L) @\(@lSeeSecNum{Array Types})]
-  Stars(1 .. 0)         @i[--  a null slice @\(@lSeeSecNum{String Types})]
-  My_Schedule(Weekday)  @i[--  bounds given by subtype @\(@lSeeSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
-  Stars(5 .. 15)(K)     @i[--  same as Stars(K) @\(@lSeeSecNum{String Types})]
+  Stars(1 .. 15)        @i[--  a slice of 15 characters                  @^(see @RefSecNum{String Types})]
+  Page(10 .. 10 + Size) @i[--  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
+  Page(L)(A .. B)       @i[--  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
+  Stars(1 .. 0)         @i[--  a null slice @\(see @RefSecNum{String Types})]
+  My_Schedule(Weekday)  @i[--  bounds given by subtype @\(see @RefSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
+  Stars(5 .. 15)(K)     @i[--  same as Stars(K) @\(see @RefSecNum{String Types})]
                         @i[--  provided that K is in 5 .. 15]
 @end{Example}
 @end{Examples}
@@ -476,7 +476,7 @@ corresponding component of the object or value.
 @begin{Ramification}
   Only the discriminants and components visible at the place of the
   @nt<selected_component> can be selected, since a @nt<selector_name>
-  can only denote declarations that are visible (@lSeeSecNum{Visibility}).
+  can only denote declarations that are visible (see @RefSecNum{Visibility}).
 @end{Ramification}
 @end{Multiple}
 
@@ -512,7 +512,7 @@ The @nt{selector_name}
 shall resolve to denote a declaration that occurs
 immediately within the declarative region of the
 package or enclosing construct @Redundant[(the declaration shall be visible
-at the place of the expanded name @em @lSeeSecNum(Visibility))].
+at the place of the expanded name @em see @RefSecNum(Visibility))].
 The expanded name denotes that declaration.
 @begin{Ramification}
   Hence, a library unit or subunit can use an expanded
@@ -556,26 +556,26 @@ The exception Constraint_Error is raised if this check fails.
 @i(Examples of selected components:)
 @begin{Example}
 @tabclear()
-  Tomorrow.Month     @i[--  a record component                             @^(@lSeeSecNum{Record Types})]
-  Next_Car.Owner     @i[--  a record component @\(@lSeeSecNum{Incomplete Type Declarations})]
-  Next_Car.Owner.Age @i[--  a record component @\(@lSeeSecNum{Incomplete Type Declarations})]
+  Tomorrow.Month     @i[--  a record component                             @^(see @RefSecNum{Record Types})]
+  Next_Car.Owner     @i[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
+  Next_Car.Owner.Age @i[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
                      @i[--  the previous two lines involve implicit dereferences]
-  Writer.Unit        @i[--  a record component (a discriminant) @\(@lSeeSecNum{Variant Parts and Discrete Choices})]
-  Min_Cell(H).Value  @i[--  a record component of the result @\(@lSeeSecNum{Subprogram Declarations})]
+  Writer.Unit        @i[--  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
+  Min_Cell(H).Value  @i[--  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
                      @i[--  of the function call Min_Cell(H)]
-  Control.Seize      @i[--  an entry of a protected object @\(@lSeeSecNum{Protected Units and Protected Objects})]
-  Pool(K).Write      @i[--  an entry of the task Pool(K) @\(@lSeeSecNum{Protected Units and Protected Objects})]
+  Control.Seize      @i[--  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
+  Pool(K).Write      @i[--  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
 @end{Example}
 
 @i(Examples of expanded names:)
 @begin{Example}
 @tabclear()
-  Key_Manager."<"      @i[--  an operator of the visible part of a package @^(@lSeeSecNum{Private Operations})]
-  Dot_Product.Sum      @i[--  a variable declared in a function body @\(@lSeeSecNum{Subprogram Declarations})]
-  Buffer.Pool          @i[--  a variable declared in a protected unit @\(@lSeeSecNum{Example of Tasking and Synchronization})]
-  Buffer.Read          @i[--  an entry of a protected unit @\(@lSeeSecNum{Example of Tasking and Synchronization})]
-  Swap.Temp            @i[--  a variable declared in a block statement @\(@lSeeSecNum{Block Statements})]
-  Standard.Boolean     @i[--  the name of a predefined type @\(@lSeeSecNum{The Package Standard})]
+  Key_Manager."<"      @i[--  an operator of the visible part of a package @^(see @RefSecNum{Private Operations})]
+  Dot_Product.Sum      @i[--  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
+  Buffer.Pool          @i[--  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
+  Buffer.Read          @i[--  an entry of a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
+  Swap.Temp            @i[--  a variable declared in a block statement @\(see @RefSecNum{Block Statements})]
+  Standard.Boolean     @i[--  the name of a predefined type @\(see @RefSecNum{The Package Standard})]
 @end{Example}
 @end{Examples}
 
@@ -594,7 +594,7 @@ prefix is a rename of the package.
 @begin{DiffWord83}
 The syntax rule for @nt{selector_name} is new.  It is used in places where
 visibility, but not necessarily direct visibility, is required.
-@SeeSec{Names} for more information.
+See @RefSec{Names} for more information.
 
 The description of dereferencing an access type has been moved
 to @RefSec{Names}; @nt<name>.@key(all) is no longer considered
@@ -737,7 +737,7 @@ without using any context.
 However, in the case of the Access attribute,
 the expected type for the prefix has to be a single access type,
 and if it is an access-to-subprogram type
-(@lSeeSecNum(Operations of Access Types))
+(see @RefSecNum(Operations of Access Types))
 then the resolution of the @nt<name> can use the fact that
 the profile of the callable entity denoted by the @nt<prefix>
 has to be type conformant with the designated profile of the
@@ -760,14 +760,14 @@ access type.
 @i(Examples of attributes:)
 @begin{Example}
 @tabclear()
-Color'First        @i[-- minimum value of the enumeration type Color   @^(@lSeeSecNum{Enumeration Types})]
-Rainbow'Base'First @i[-- same as Color'First @\(@lSeeSecNum{Enumeration Types})]
-Real'Digits        @i[-- precision of the type Real @\(@lSeeSecNum{Floating Point Types})]
-Board'Last(2)      @i[-- upper bound of the second dimension of Board @\(@lSeeSecNum{Index Constraints and Discrete Ranges})]
-Board'Range(1)     @i[-- index range of the first dimension of Board @\(@lSeeSecNum{Index Constraints and Discrete Ranges})]
-Pool(K)'Terminated @i[-- True if task Pool(K) is terminated @\(@lSeeSecNum{Task Units and Task Objects})]
-Date'Size          @i[-- number of bits for records of type Date @\(@lSeeSecNum{Record Types})]
-Message'Address    @i[-- address of the record variable Message @\(@lSeeSecNum{Discriminant Constraints})]
+Color'First        @i[-- minimum value of the enumeration type Color   @^(see @RefSecNum{Enumeration Types})]
+Rainbow'Base'First @i[-- same as Color'First @\(see @RefSecNum{Enumeration Types})]
+Real'Digits        @i[-- precision of the type Real @\(see @RefSecNum{Floating Point Types})]
+Board'Last(2)      @i[-- upper bound of the second dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Board'Range(1)     @i[-- index range of the first dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Pool(K)'Terminated @i[-- True if task Pool(K) is terminated @\(see @RefSecNum{Task Units and Task Objects})]
+Date'Size          @i[-- number of bits for records of type Date @\(see @RefSecNum{Record Types})]
+Message'Address    @i[-- address of the record variable Message @\(see @RefSecNum{Discriminant Constraints})]
 @end{Example}
 @end{Examples}
 
@@ -811,7 +811,7 @@ The Ada 83 rule said that the
 
   Note however that if the attribute designator is Access,
   it makes a big difference in the interpretation of the
-  prefix (@lSeeSecNum(Operations of Access Types)).
+  prefix (see @RefSecNum(Operations of Access Types)).
 @end{DiffWord83}
 
 @LabeledClause{Literals}
@@ -843,7 +843,7 @@ replaces the old "shall be determinable" stuff.
 It reflects an attempt to simplify and unify the description
 of the rules for resolving
 aggregates, literals, type conversions, etc.
-@SeeSec{The Context of Overload Resolution}
+See @RefSec{The Context of Overload Resolution}
 for the details.
 @end{Discussion}
 
@@ -857,11 +857,11 @@ or its expected profile shall correspond to a parameterless
 function with a character result type, in which case it
 is interpreted as the name of the corresponding parameterless
 function declared as part of the character type's definition
-(@lSeeSecNum(Enumeration Types)).
+(see @RefSecNum(Enumeration Types)).
 In either case, the @nt{character_literal} denotes the
 @nt{enumeration_literal_specification}.
 @begin{Discussion}
-  @SeeSecNum(Selected Components) for the resolution rules for a
+  See @RefSecNum(Selected Components) for the resolution rules for a
   @nt<selector_name> that is a @nt<character_literal>.
 @end{Discussion}
 
@@ -882,7 +882,7 @@ the component type of the expected string type.
 
 A literal @nt<null> shall not be of an anonymous
 access type@Redundant[, since such types do not have a null value
-(@lSeeSecNum{Access Types})].
+(see @RefSecNum{Access Types})].
 @begin{Reason}
 This is a legality rule rather than an overloading rule,
 to simplify implementations.
@@ -909,7 +909,7 @@ yields an array value containing the value of each character of the
 sequence of characters of the @nt<string_literal>,
 as defined in @RefSecNum{String Literals}.
 The bounds of this array value are determined according to the rules for
-@nt<positional_array_aggregate>s (@lSeeSecNum{Array Aggregates}),
+@nt<positional_array_aggregate>s (see @RefSecNum{Array Aggregates}),
 except that for a null string literal, the upper bound is the predecessor
 of the lower bound.
 
@@ -936,9 +936,9 @@ component subtype.
 Enumeration literals that are @nt<identifier>s rather than
 @nt<character_literal>s follow the normal rules for @nt<identifier>s
 when used in a @nt<name>
-(@lSeeSecNum{Names} and @RefSecNum{Selected Components}).
+(see @RefSecNum{Names} and @RefSecNum{Selected Components}).
 @nt<Character_literal>s used as @nt<selector_name>s follow the normal
-rules for expanded names (@lSeeSecNum{Selected Components}).
+rules for expanded names (see @RefSecNum{Selected Components}).
 @end{NotesNotes}
 
 @begin{Examples}
@@ -994,7 +994,7 @@ into a composite value of an array type, record type, or record extension.]
 The expected type for an @nt{aggregate} shall be a single nonlimited
 array type, record type, or record extension.
 @begin{Discussion}
-@SeeSec{The Context of Overload Resolution}
+See @RefSec{The Context of Overload Resolution}
 for the meaning of ``shall be a single ... type.''
 @end{Discussion}
 @end{Resolution}
@@ -1066,7 +1066,7 @@ Constraint_Error is raised if this check fails.
 This check ensures that no values of a tagged type are
 ever outside the first subtype, as required
 for inherited dispatching operations to work properly
-(@lSeeSecNum(Derived Types and Classes)).  This check will always
+(see @RefSecNum(Derived Types and Classes)).  This check will always
 succeed if the first subtype is unconstrained.
 This check is not extended to untagged types
 to preserve upward compatibility.
@@ -1086,7 +1086,7 @@ it is nonlimited record (extension) or array.
 
 An @nt{aggregate} now creates an anonymous object.
 This is necessary so that controlled types
-will work (@lSeeSecNum{User-Defined Assignment and Finalization}).
+will work (see @RefSecNum{User-Defined Assignment and Finalization}).
 @end{DiffWord83}
 
 @LabeledSubClause{Record Aggregates}
@@ -1171,7 +1171,7 @@ the aggregate are @i(needed)@Redundant[; for the association list of
 an @nt<extension_aggregate>,
 only those components not determined by the ancestor expression or
 subtype are needed
-(@lSeeSecNum{Extension Aggregates}).]
+(see @RefSecNum{Extension Aggregates}).]
 Each @nt{selector_name} in a @nt{record_component_association}
 shall denote
 a needed component @Redundant[(including possibly a discriminant)].
@@ -1272,7 +1272,7 @@ components, all of them shall be of the same type.
   Ada 9X,
   so the staticness of an applicable index constraint has no
   effect on the legality of the array aggregate to which it applies.
-  @SeeSecNum{Array Aggregates}.  This was the only case (that we know of)
+  See @RefSecNum{Array Aggregates}.  This was the only case (that we know of)
   where a subtype provided by context affected the legality
   of an @nt{expression}.
 @end{Discussion}
@@ -1308,7 +1308,7 @@ evaluation of the @nt<record_component_association_list>.
 
 @PDefn2{Term=[evaluation], Sec=(record_component_association_list)}
 For the evaluation of a @nt{record_component_association_list},
-any per-object constraints (@lSeeSecNum(Record Types))
+any per-object constraints (see @RefSecNum(Record Types))
 for components specified in the association list are elaborated and
 any @nt<expression>s are evaluated and converted to the subtype of the
 associated component.
@@ -1343,7 +1343,7 @@ be in the same order as in the @nt<known_discriminant_part>.
 @begin{Examples}
 @i(Example of a record aggregate with positional associations:)
 @begin{Example}
-(4, July, 1776)                                       @i[--  @lSeeSecNum{Record Types} ]
+(4, July, 1776)                                       @i[--  see @RefSecNum{Record Types} ]
 @end{Example}
 
 @i(Examples of record aggregates with named associations:)
@@ -1351,19 +1351,19 @@ be in the same order as in the @nt<known_discriminant_part>.
 (Day => 4, Month => July, Year => 1776)
 (Month => July, Day => 4, Year => 1776)
 
-(Disk, Closed, Track => 5, Cylinder => 12)            @i[--  @lSeeSecNum{Variant Parts and Discrete Choices}]
+(Disk, Closed, Track => 5, Cylinder => 12)            @i[--  see @RefSecNum{Variant Parts and Discrete Choices}]
 (Unit => Disk, Status => Closed, Cylinder => 9, Track => 1)
 @end{Example}
 
 @i(Example of component association with several choices:)
 @begin{Example}
-(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null)))   @i[--  @lSeeSecNum{Incomplete Type Declarations}]
+(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null)))   @i[--  see @RefSecNum{Incomplete Type Declarations}]
 
  @i[--  The allocator is evaluated twice:  Succ and Pred designate different cells]
 @end{Example}
 
 @i{Examples of record aggregates for tagged types
-(@lSeeSecNum(Tagged Types and Type Extensions)
+(see @RefSecNum(Tagged Types and Type Extensions)
 and @RefSecNum{Type Extensions}):}
 @begin{Example}
 Expression'(@key{null record})
@@ -1502,7 +1502,7 @@ then its type can be abstract.  If its type is controlled,
 then as the last step of evaluating the aggregate,
 the Initialize procedure of the ancestor type is called,
 unless the Initialize procedure is abstract
-(@lSeeSecNum{User-Defined Assignment and Finalization}).
+(see @RefSecNum{User-Defined Assignment and Finalization}).
 @end{NotesNotes}
 
 @begin{Examples}
@@ -1718,7 +1718,7 @@ other array component expressions as well.
 
 In a @nt<named_array_aggregate> with more than one @nt<discrete_choice>,
 no two @nt<discrete_choice>s are allowed to
-cover the same value (@lSeeSecNum{Variant Parts and Discrete Choices});
+cover the same value (see @RefSecNum{Variant Parts and Discrete Choices});
 if there is no @key[others] choice, the @nt<discrete_choice>s taken
 together shall
 exactly cover a contiguous sequence of values of the corresponding index type.
@@ -1855,7 +1855,7 @@ an array with a single component.
 @i(Examples of array aggregates with positional associations:)
 @begin{Example}
 (7, 9, 5, 1, 3, 2, 4, 8, 6, 0)
-Table'(5, 8, 4, 1, @key(others) => 0)  @i[--  @lSeeSecNum{Array Types} ]
+Table'(5, 8, 4, 1, @key(others) => 0)  @i[--  see @RefSecNum{Array Types} ]
 @end{Example}
 
 @i(Examples of array aggregates with named associations:)
@@ -1864,14 +1864,14 @@ Table'(5, 8, 4, 1, @key(others) => 0)  @i[--  @lSeeSecNum{Array Types} ]
 (1 .. N => @key(new) Cell)             @i[--  N new cells, in particular for N = 0]
 
 Table'(2 | 4 | 10 => 1, @key(others) => 0)
-Schedule'(Mon .. Fri => True,  @key(others) => False)  @i[--  @lSeeSecNum{Array Types}]
+Schedule'(Mon .. Fri => True,  @key(others) => False)  @i[--  see @RefSecNum{Array Types}]
 Schedule'(Wed | Sun  => False, @key(others) => True)
 Vector'(1 => 2.5)                                @i[--  single-component vector]
 @end{Example}
 
 @i(Examples of two-dimensional array aggregates:)
 @begin{Example}
-@i[-- Three aggregates for the same value of subtype Matrix(1..2,1..3) (@lSeeSecNum{Array Types}):]
+@i[-- Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
 
 ((1.1, 1.2, 1.3), (2.1, 2.2, 2.3))
 (1 => (1.1, 1.2, 1.3), 2 => (2.1, 2.2, 2.3))
@@ -1884,7 +1884,7 @@ A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        @i[-- A(1)=7, A(10)=0]
 B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        @i[-- B(1)=0, B(10)=1]
 C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); @i[-- C'Last(1)=5, C'Last(2)=8]
 
-D : Bit_Vector(M .. N) := (M .. N => True);         @i[-- @lSeeSecNum{Array Types}]
+D : Bit_Vector(M .. N) := (M .. N => True);         @i[-- see @RefSecNum{Array Types}]
 E : Bit_Vector(M .. N) := (@key(others) => True);
 F : String(1 .. 1) := (1 => 'F');  @i[-- a one component aggregate: same as "F"]
 @end{Example}
@@ -1907,7 +1907,7 @@ of the "extra values" check required by AI-309.
 
 Named array aggregates are permitted even if the
 index type is descended from a formal scalar type.
-@SeeSecNum(Static Expressions and Static Subtypes) and AI-00190.
+See @RefSecNum(Static Expressions and Static Subtypes) and AI-00190.
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -2125,7 +2125,7 @@ The language defines the following six categories
 of operators (given in order of increasing
 precedence).  The corresponding @nt<operator_symbol>s,
 and only those, can be used as @nt<designator>s in declarations
-of functions for user-defined operators.  @SeeSec(Overloading of Operators).]
+of functions for user-defined operators.  See @RefSec(Overloading of Operators).]
 @end{Intro}
 
 @begin{Syntax}
@@ -2247,7 +2247,7 @@ left-to-right or chosen order of association.
 @begin{NotesNotes}
 The two operands of an expression of the form X op Y, where
 op is a binary operator, are evaluated in an arbitrary order,
-as for any @nt<function_call> (@lSeeSecNum(Subprogram Calls)).
+as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
 @end{NotesNotes}
 
 @begin{Examples}
@@ -2332,7 +2332,7 @@ result into the base range of the type.
 The logical operators on arrays are performed on a
 component-by-component basis on
 matching components (as for equality @em
-@lSeeSecNum{Relational Operators and Membership Tests}),
+see @RefSecNum{Relational Operators and Membership Tests}),
 using the predefined logical operator for the component type.  The bounds of
 the resulting array are those of the left operand.
 
@@ -2382,12 +2382,12 @@ following truth table:
 @i(Examples of logical operators:)
 @begin{Example}
 Sunny @key(or) Warm
-Filter(1 .. 10) @key(and) Filter(15 .. 24)   @i[--   @lSeeSecNum{Index Constraints and Discrete Ranges} ]
+Filter(1 .. 10) @key(and) Filter(15 .. 24)   @i[--   see @RefSecNum{Index Constraints and Discrete Ranges} ]
 @end{Example}
 
 @i(Examples of short-circuit control forms:)
 @begin{Example}
-Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   @i[--   @lSeeSecNum{Incomplete Type Declarations}]
+Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   @i[--   see @RefSecNum{Incomplete Type Declarations}]
 N = 0 @key(or) @key(else) A(N) = Hit_Value
 @end{Example}
 @end{Examples}
@@ -2515,7 +2515,7 @@ type.
   For floating point types, the results of comparing
   @i(nearly) equal values depends on the accuracy of
   the implementation
-  (@lSeeSec{Model of Floating Point Arithmetic}
+  (see @RefSec{Model of Floating Point Arithmetic}
   for implementations that support the Numerics Annex).
 @end{Ramification}
 @begin{ImplNote}
@@ -2574,7 +2574,7 @@ for the private type is that of its full type.
 For other composite types, the predefined equality operators
 @Redundant[(and
 certain other predefined operations on composite types @em
-@lSeeSecNum(Logical Operators and Short-circuit Control Forms)
+see @RefSecNum(Logical Operators and Short-circuit Control Forms)
 and @RefSecNum(Type Conversions))] are defined
 in terms of the corresponding operation on
 @i(matching components), defined as follows:
@@ -2597,7 +2597,7 @@ are convertible, rather than being the same.
 @begin{Discussion}
   Ada 83 seems to
   omit this part of the definition, though it is used in array type
-  conversions.  @SeeSecNum{Type Conversions}.
+  conversions.  See @RefSecNum{Type Conversions}.
 @end{Discussion}
 
 Given the above definition of matching components,
@@ -2621,7 +2621,7 @@ for those composite types covered earlier) is defined as follows:
     predefined operations ``reemerge'' in a generic for
     untagged types, but do not for tagged types.  Also, only
     tagged types support user-defined assignment
-    (@lSeeSecNum{User-Defined Assignment and Finalization}),
+    (see @RefSecNum{User-Defined Assignment and Finalization}),
     so only tagged types
     can fully handle levels of indirection in the implementation
     of the type.  For untagged types, one reason for
@@ -2656,7 +2656,7 @@ Furthermore,
   if the user defines an "=" operator that returns Boolean,
   then a "/=" operator is implicitly declared in terms of
   the user-defined "=" operator so as to give the complementary
-  result.  @SeeSecNum(Overloading of Operators).
+  result.  See @RefSecNum(Overloading of Operators).
 @end{Ramification}
 
 @Defn{lexicographic order}
@@ -2737,15 +2737,15 @@ X /= Y
 "" < "A" @key(and) "A" < "Aa"     @i[--  True]
 "Aa" < "B" @key(and) "A" < "A  "  @i[--  True]
 
-My_Car = @key(null)               @i[-- true if My_Car has been set to null (@lSeeSecNum{Incomplete Type Declarations})]
+My_Car = @key(null)               @i[-- true if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
 My_Car = Your_Car           @i[-- true if we both share the same car]
 My_Car.@key[all] = Your_Car.@key[all]   @i[-- true if the two cars are identical]
 
 N @key(not) @key(in) 1 .. 10            @i[-- range membership test]
 Today @key(in) Mon .. Fri         @i[-- range membership test]
-Today @key(in) Weekday            @i[-- subtype membership test (@lSeeSecNum{Enumeration Types})]
-Archive @key(in) Disk_Unit        @i[-- subtype membership test (@lSeeSecNum{Variant Parts and Discrete Choices})]
-Tree.@key(all) @key(in) Addition'Class  @i[-- class membership test (@lSeeSecNum{Type Extensions})]
+Today @key(in) Weekday            @i[-- subtype membership test (see @RefSecNum{Enumeration Types})]
+Archive @key(in) Disk_Unit        @i[-- subtype membership test (see @RefSecNum{Variant Parts and Discrete Choices})]
+Tree.@key(all) @key(in) Addition'Class  @i[-- class membership test (see @RefSecNum{Type Extensions})]
 @end{Example}
 @end{Examples}
 
@@ -2856,10 +2856,10 @@ of the index subtype of the array type as its lower bound.
 @Defn2{Term=[assignment operation], Sec=(during evaluation of concatenation)}
 The result of a concatenation is defined in terms of an
 assignment to an anonymous object,
-as for any function call (@lSeeSecNum{Return Statements}).
+as for any function call (see @RefSecNum{Return Statements}).
 @begin{Ramification}
 This implies that value adjustment is performed as appropriate
-@em @lSeeSecNum{User-Defined Assignment and Finalization}.
+@em see @RefSecNum{User-Defined Assignment and Finalization}.
 We don't bother saying this for other predefined operators,
 even though they are all function calls,
 because this is the only one where it matters.
@@ -3153,10 +3153,10 @@ I : Integer := 1;
 J : Integer := 2;
 K : Integer := 3;
 
-X : Real := 1.0;                      @i[--     @lSeeSecNum{Floating Point Types}]
+X : Real := 1.0;                      @i[--     see @RefSecNum{Floating Point Types}]
 Y : Real := 2.0;
 
-F : Fraction := 0.25;                 @i[--     @lSeeSecNum{Fixed Point Types}]
+F : Fraction := 0.25;                 @i[--     see @RefSecNum{Fixed Point Types}]
 G : Fraction := 0.5;
 @end{Example}
 @begin{Display}
@@ -3469,7 +3469,7 @@ These rules are designed to ensure that aliased array objects
 
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
-  (@lSeeSecNum{Generic Instantiation}),
+  (see @RefSecNum{Generic Instantiation}),
   this rule applies also in the private part of an
   instance of a generic unit.
   @begin{Ramification}
@@ -3492,7 +3492,7 @@ type shall be an access-to-subprogram type.  Further:
   deeper than that of the target type.
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
-  (@lSeeSecNum{Generic Instantiation}),
+  (see @RefSecNum{Generic Instantiation}),
   this rule applies also in the private part of an
   instance of a generic unit.
   If the operand type is declared within a generic body,
@@ -3606,7 +3606,7 @@ Numeric Type Conversion
   @Defn{accuracy}
   If the target type is some other real type,
   then the result is within the accuracy of the target type
-  (@lSeeSec{Numeric Performance Requirements},
+  (see @RefSec{Numeric Performance Requirements},
   for implementations that support the Numerics Annex).
   @begin(Discussion)
     An integer type might have more bits of precision than a real type,
@@ -3631,7 +3631,7 @@ Numeric Type Conversion
     for those applications that require round-to-nearest-even.
     ``Deterministic'' rounding is required for static conversions to
     integer as well.
-    @SeeSecNum{Static Expressions and Static Subtypes}.
+    See @RefSecNum{Static Expressions and Static Subtypes}.
 @end{Discussion}
 @end(itemize)
 
@@ -3667,7 +3667,7 @@ Array Type Conversion
 
   In either array case, the value of each component of the result is that
   of the matching component of the operand value
-  (@lSeeSecNum{Relational Operators and Membership Tests}).
+  (see @RefSecNum{Relational Operators and Membership Tests}).
   @begin{Ramification}
     This applies whether or not the component is initialized.
   @end{Ramification}
@@ -3717,7 +3717,7 @@ Composite (Non-Array) Type Conversion
 It
   is a ramification of the rules for the discriminants of derived types
   that each discriminant of the result is covered either by this
-  paragraph or the previous one.  @SeeSecNum(Discriminants).
+  paragraph or the previous one.  See @RefSecNum(Discriminants).
 @end{Ramification}
 
   @IndexCheck{Discriminant_Check}
@@ -3838,7 +3838,7 @@ The properties of this new view are as follows:
   the value of the operand object is used to initialize
   the formal parameter without
   checking against any constraint of the target subtype
-  (@lSeeSecNum(Parameter Associations)).
+  (see @RefSecNum(Parameter Associations)).
   @PDefn2{Term=[implicit subtype conversion],Sec=(reading a view conversion)}
   @begin(Reason)
     This ensures that even an @key(out) parameter of
@@ -3876,7 +3876,7 @@ In addition to explicit @nt<type_conversion>s,
 type conversions are performed implicitly in situations where the
 expected type and the actual type of a construct differ,
 as is permitted by the type resolution rules
-(@lSeeSecNum(The Context of Overload Resolution)).
+(see @RefSecNum(The Context of Overload Resolution)).
 For example, an integer literal is
 of the type @i(universal_integer), and is implicitly converted
 when assigned to a target of some specific integer type.
@@ -3901,7 +3901,7 @@ the literal @key(null), an @nt<allocator>, an @nt<aggregate>, a
 a @nt<character_literal>, or an @nt<attribute_reference>
 for an Access or Unchecked_Access attribute.
 Similarly, such an @nt{expression} enclosed by parentheses is not
-allowed.  A @nt<qualified_expression> (@lSeeSecNum(Qualified Expressions))
+allowed.  A @nt<qualified_expression> (see @RefSecNum(Qualified Expressions))
 can be used instead of such a @nt<type_conversion>.
 
 The constraint of the target subtype has no effect
@@ -4075,7 +4075,7 @@ Print (Code'(Dec));  @i[--  Dec is of type Code ]
 @key(for) J @key(in) Code @key(range) Fix .. Dec @key(loop) ...    @i[-- qualification unnecessary]
 @key(for) J @key(in) Code'(Fix) .. Dec @key(loop) ...        @i[-- qualification unnecessary for Dec]
 
-Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @i[-- @lSeeSecNum{Type Conversions} ]
+Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @i[-- see @RefSecNum{Type Conversions} ]
 @end{Example}
 @end{Examples}
 
@@ -4101,7 +4101,7 @@ type
 whose designated type covers the type determined by the
 @nt<subtype_mark> of the @nt<subtype_indication> or @nt<qualified_expression>.
 @begin{Discussion}
-  @SeeSec(The Context of Overload Resolution) for the meaning
+  See @RefSec(The Context of Overload Resolution) for the meaning
   of ``shall be a single ... type whose ...''
 @end{Discussion}
 @end{Resolution}
@@ -4209,17 +4209,17 @@ AI-00150.
 
 @Redundant[If the created object contains any tasks,
 they are activated
-(@lSeeSecNum(Task Execution - Task Activation)).]
+(see @RefSecNum(Task Execution - Task Activation)).]
 Finally, an access value that designates the created object is returned.
 @end{RunTime}
 
 @begin{NotesNotes}
 Allocators cannot create objects of an abstract type.
-@SeeSecNum{Abstract Types and Subprograms}.
+See @RefSecNum{Abstract Types and Subprograms}.
 
 If any part of the created object is controlled, the initialization
 includes calls on corresponding Initialize or Adjust procedures.
-@SeeSecNum{User-Defined Assignment and Finalization}.
+See @RefSecNum{User-Defined Assignment and Finalization}.
 
 As explained in @RefSec{Storage Management},
 the storage for an object allocated by an @nt{allocator} comes from a
@@ -4231,7 +4231,7 @@ Instances of Unchecked_Deallocation may be used to explicitly reclaim
 storage.
 
 Implementations are permitted, but not required,
-to provide garbage collection (@lSeeSecNum{Pragma Controlled}).
+to provide garbage collection (see @RefSecNum{Pragma Controlled}).
 @begin{Ramification}
   Note that in an @nt<allocator>,
   the exception Constraint_Error can be
@@ -4249,7 +4249,7 @@ to provide garbage collection (@lSeeSecNum{Pragma Controlled}).
 @begin{Examples}
 @i{Examples of allocators:}
 @begin{Example}
-@key(new) Cell'(0, @key(null), @key(null))                          @i[-- initialized explicitly, @lSeeSecNum{Incomplete Type Declarations}]
+@key(new) Cell'(0, @key(null), @key(null))                          @i[-- initialized explicitly, see @RefSecNum{Incomplete Type Declarations}]
 @key(new) Cell'(Value => 0, Succ => @key(null), Pred => @key(null)) @i[-- initialized explicitly]
 @key(new) Cell                                          @i[-- not initialized]
 
@@ -4259,7 +4259,7 @@ to provide garbage collection (@lSeeSecNum{Pragma Controlled}).
 @key(new) Buffer(100)                                   @i[-- the discriminant only is given]
 @key(new) Buffer'(Size => 80, Pos => 0, Value => (1 .. 80 => 'A')) @i[-- initialized explicitly]
 
-Expr_Ptr'(@key(new) Literal)                        @i[-- allocator for access-to-class-wide type, @lSeeSecNum{Type Extensions}]
+Expr_Ptr'(@key(new) Literal)                        @i[-- allocator for access-to-class-wide type, see @RefSecNum{Type Extensions}]
 Expr_Ptr'(@key(new) Literal'(Expression @key[with] 3.5)) @i[-- initialized explicitly]
 
 @end{Example}
@@ -4680,7 +4680,7 @@ if the value is exactly half-way between two machine
 numbers, any rounding shall be performed away from zero.
 If the expected type is a descendant of a formal scalar type,
 no special rounding or truncating is required @em normal
-accuracy rules apply (@lSeeSecNum(Numerics)).
+accuracy rules apply (see @RefSecNum(Numerics)).
 @begin{Reason}
   Discarding extended precision enhances portability
   by ensuring that the value of a
@@ -4746,7 +4746,7 @@ between two integers, the rounding is performed away from zero.
 @end{Reason}
 @begin{Ramification}
   The attribute Truncation
-  (@lSeeSecNum{Attributes of Floating Point Types})
+  (see @RefSecNum{Attributes of Floating Point Types})
   can be used to perform a (static) truncation prior to conversion,
   to prevent rounding.
 @end{Ramification}
@@ -4770,7 +4770,7 @@ Kilo : @key(constant) := 1000;
 Mega : @key(constant) := Kilo*Kilo;   @i[-- 1_000_000]
 Long : @key(constant) := Float'Digits*2;
 
-Half_Pi    : @key(constant) := Pi/2;           @i[-- @lSeeSecNum(Number Declarations)]
+Half_Pi    : @key(constant) := Pi/2;           @i[-- see @RefSecNum(Number Declarations)]
 Deg_To_Rad : @key(constant) := Half_Pi/90;
 Rad_To_Deg : @key(constant) := 1.0/Deg_To_Rad; @i[-- equivalent to 1.0/((3.14159_26536/2)/90)]
 @end{Example}
@@ -4898,7 +4898,7 @@ statically match
 if their designated subtypes statically match.
 @begin{Ramification}
   Statically matching constraints and subtypes are the basis
-  for subtype conformance of profiles (@lSeeSecNum(Conformance Rules)).
+  for subtype conformance of profiles (see @RefSecNum(Conformance Rules)).
 @end{Ramification}
 
 @Defn2{Term=[statically matching], Sec=(for ranges)}
@@ -4930,7 +4930,7 @@ second subtype.
 @begin{Discussion}
   Static compatibility is required when constraining a parent subtype
   with a discriminant from a new @nt<discriminant_part>.
-  @SeeSecNum{Discriminants}.  Static compatibility is also used
+  See @RefSecNum{Discriminants}.  Static compatibility is also used
   in matching generic formal derived types.
 
   Note that

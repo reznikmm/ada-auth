@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:28 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -69,7 +69,7 @@ function.]
 
 @begin{SyntaxText}
 @Redundant[The optional @nt{parent_unit_name} is only allowed for
-library units (@lSeeSecNum{Compilation Units - Library Units}).]
+library units (see @RefSecNum{Compilation Units - Library Units}).]
 @end{SyntaxText}
 
 @Syn{lhs=<operator_symbol>,rhs="@Syn2{string_literal}"}
@@ -137,8 +137,8 @@ A @nt{subprogram_declaration}
 or a @nt{generic_subprogram_declaration}
 requires a completion:
 @Redundant[a body, a @nt<renaming_declaration>
-(@lSeeSecNum(Renaming Declarations)), or a @key(pragma) Import
-(@lSeeSecNum{Interfacing Pragmas})].
+(see @RefSecNum(Renaming Declarations)), or a @key(pragma) Import
+(see @RefSecNum{Interfacing Pragmas})].
 @Redundant[A completion is not allowed
 for an @nt<abstract_subprogram_declaration>.]
 @begin(Ramification)
@@ -188,7 +188,7 @@ defined by the @nt{access_definition}, in the
 An @i(access parameter) is a formal @key[in] parameter
 specified by an @nt{access_definition}.
 An access parameter is of an anonymous
-general access-to-variable type (@lSeeSecNum{Access Types}).
+general access-to-variable type (see @RefSecNum{Access Types}).
 @Redundant[Access parameters allow dispatching calls
 to be controlled by access values.]
 
@@ -209,7 +209,7 @@ The @i{types of a profile} are the types of those subtypes.]
 @Redundant[A subprogram declared by an
 @nt<abstract_subprogram_declaration>
 is abstract; a subprogram declared by a @nt<subprogram_declaration>
-is not.  @SeeSec{Abstract Types and Subprograms}.]
+is not.  See @RefSec{Abstract Types and Subprograms}.]
 @end{StaticSem}
 
 @begin{RunTime}
@@ -225,7 +225,7 @@ to a sequence of single @nt{parameter_specification}s, as explained
 in @RefSecNum{Objects and Named Numbers}.
 
 Abstract subprograms do not have bodies, and cannot be used
-in a nondispatching call (@lSeeSec{Abstract Types and Subprograms}).
+in a nondispatching call (see @RefSec{Abstract Types and Subprograms}).
 
 The evaluation of @nt<default_expression>s is caused by certain
 calls, as described in @RefSecNum{Parameter Associations}.
@@ -241,22 +241,22 @@ concurrently from multiple tasks.
 @begin{Example}
 @key[procedure] Traverse_Tree;
 @key[procedure] Increment(X : @key[in] @key[out] Integer);
-@key[procedure] Right_Indent(Margin : @key[out] Line_Size);          --@i{  @lSeeSecNum{Integer Types}}
-@key[procedure] Switch(From, To : @key[in] @key[out] Link);                --@i{  @lSeeSecNum{Incomplete Type Declarations}}
+@key[procedure] Right_Indent(Margin : @key[out] Line_Size);          --@i{  see @RefSecNum{Integer Types}}
+@key[procedure] Switch(From, To : @key[in] @key[out] Link);                --@i{  see @RefSecNum{Incomplete Type Declarations}}
 
-@key[function] Random @key[return] Probability;                      --@i{  @lSeeSecNum{Floating Point Types}}
+@key[function] Random @key[return] Probability;                      --@i{  see @RefSecNum{Floating Point Types}}
 
-@key[function] Min_Cell(X : Link) @key[return] Cell;                 --@i{  @lSeeSecNum{Incomplete Type Declarations}}
-@key[function] Next_Frame(K : Positive) @key[return] Frame;          --@i{  @lSeeSecNum{Access Types}}
-@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@i{  @lSeeSecNum{Array Types}}
+@key[function] Min_Cell(X : Link) @key[return] Cell;                 --@i{  see @RefSecNum{Incomplete Type Declarations}}
+@key[function] Next_Frame(K : Positive) @key[return] Frame;          --@i{  see @RefSecNum{Access Types}}
+@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@i{  see @RefSecNum{Array Types}}
 
-@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@i{  @lSeeSecNum{Array Types}}
+@key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@i{  see @RefSecNum{Array Types}}
 @end{Example}
 
 @i{Examples of @key[in] parameters with default expressions:}
 @begin{Example}
 @key[procedure] Print_Header(Pages  : @key[in] Natural;
-            Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@i{  @lSeeSecNum{Array Types}}
+            Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@i{  see @RefSecNum{Array Types}}
             Center : @key[in] Boolean := True);
 @end{Example}
 @end{Examples}
@@ -264,7 +264,7 @@ concurrently from multiple tasks.
 @begin{Extend83}
 The syntax for @nt{abstract_subprogram_declaration} is added.
 The syntax for @nt{parameter_specification} is revised to allow
-for access parameters (@lSeeSecNum{Access Types})
+for access parameters (see @RefSecNum{Access Types})
 
 Program units that are library units may have
 a @nt{parent_unit_name} to indicate the parent of a child
@@ -401,11 +401,11 @@ is passed by copy or by reference.
   This is because we explicitly indicate that a function
   creates an anonymous constant object for its result,
   unless the type is a return-by-reference type
-  (@lSeeSecNum{Return Statements}).
+  (see @RefSecNum{Return Statements}).
   We also provide a special dispensation for
   instances of Unchecked_Conversion to return by reference, even
   if the result type is not a return-by-reference type
-  (@lSeeSecNum{Unchecked Type Conversions}).
+  (see @RefSecNum{Unchecked Type Conversions}).
 @end{Discussion}
 @end{StaticSem}
 
@@ -534,7 +534,7 @@ do not overlap (unless, of course, it can prove otherwise).
 
 @begin{NotesNotes}
 A formal parameter of mode @key(in) is a constant
-view (@lSeeSecNum{Objects and Named Numbers});
+view (see @RefSecNum{Objects and Named Numbers});
 it cannot be updated within the @nt{subprogram_body}.
 @end{NotesNotes}
 
@@ -601,7 +601,7 @@ The elaboration of a non-generic
 that the subprogram can from then on be called without
 failing the Elaboration_Check.
 @begin{Ramification}
-@SeeSecNum{Generic Bodies} for elaboration of a generic body.
+See @RefSecNum{Generic Bodies} for elaboration of a generic body.
 Note that protected @nt{subprogram_bodies} never get elaborated;
 the elaboration of the containing @nt{protected_body}
 allows them to be called without failing the Elaboration_Check.
@@ -687,7 +687,7 @@ The following conventions are defined by the language:
 The default calling convention for any subprogram not listed below is
 @i{Ada}.
 @Redundant[A @nt{pragma} Convention, Import, or Export may be used to override
-the default calling convention (@lSeeSecNum{Interfacing Pragmas})].
+the default calling convention (see @RefSecNum{Interfacing Pragmas})].
 @begin{Ramification}
 See also the rule about renamings-as-body
 in @RefSecNum{Subprogram Renaming Declarations}.
@@ -703,7 +703,7 @@ The default calling convention is Intrinsic for the following:
   an enumeration literal;
 
   a "/=" operator declared implicitly due to
-  the declaration of "=" (@lSeeSecNum{Overloading of Operators});
+  the declaration of "=" (see @RefSecNum{Overloading of Operators});
 
   any other implicitly declared subprogram unless it is
   a dispatching operation of a tagged type;
@@ -952,7 +952,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 @PDefn2{Term=[program unit pragma], Sec=(Inline)}
 @PDefn2{Term=[pragma, program unit], Sec=(Inline)}
 The form of a @nt{pragma} Inline,
-which is a program unit pragma (@lSeeSecNum{Pragmas and Program Units}),
+which is a program unit pragma (see @RefSecNum{Pragmas and Program Units}),
 is as follows:
 @end{SyntaxText}
 
@@ -1000,7 +1000,7 @@ overloaded subprograms as follows:
 @begin{Ramification}
 The meaning of a subprogram can be changed by a @nt{pragma} Inline only
 in the presence of failing checks
-(@lSeeSecNum{Exceptions and Optimization}).
+(see @RefSecNum{Exceptions and Optimization}).
 @end{Ramification}
 @end{StaticSem}
 
@@ -1101,7 +1101,7 @@ Each formal parameter without an association shall have a
 @nt{default_expression} (in the profile of the view denoted
 by the @nt<name> or @nt<prefix>).
 This rule is an overloading rule
-(@lSeeSecNum{The Context of Overload Resolution}).
+(see @RefSecNum{The Context of Overload Resolution}).
 @end{Resolution}
 
 @begin{RunTime}
@@ -1109,7 +1109,7 @@ This rule is an overloading rule
 For the execution of a subprogram call,
 the @nt{name} or @nt{prefix} of the call is evaluated,
 and each @nt{parameter_association} is evaluated
-(@lSeeSecNum{Parameter Associations}).
+(see @RefSecNum{Parameter Associations}).
 If a @nt{default_expression} is used,
 an implicit @nt{parameter_association} is assumed for this rule.
 These evaluations are done in an arbitrary order.
@@ -1117,19 +1117,19 @@ The @nt{subprogram_body} is then executed.
 Finally, if the subprogram completes normally,
 then after it is left,
 any necessary assigning back of formal to actual parameters occurs
-(@lSeeSecNum{Parameter Associations}).
+(see @RefSecNum{Parameter Associations}).
 @begin{Discussion}
 The implicit association for a default is only for this run-time rule.
 At compile time, the visibility rules are applied to the default at
 the place where it occurs, not at the place of a call.
 @end{Discussion}
 @begin{Honest}
-If the subprogram is inherited, @lSeeSec{Derived Types and Classes}.
+If the subprogram is inherited, see @RefSec{Derived Types and Classes}.
 
-If the subprogram is protected, @lSeeSec{Protected Subprograms and Protected Actions}.
+If the subprogram is protected, see @RefSec{Protected Subprograms and Protected Actions}.
 
 If the subprogram is really a renaming of an entry,
-@lSeeSec{Entry Calls}.
+see @RefSec{Entry Calls}.
 
 Normally, the @nt{subprogram_body} that is executed by the above rule
 is the one for the subprogram being called.
@@ -1168,19 +1168,19 @@ constant is given by the result subtype of the function.
 @begin{Examples}
 @i{Examples of procedure calls:}
 @begin{Example}
-Traverse_Tree;                                               --@i{  @lSeeSecNum{Subprogram Declarations}}
-Print_Header(128, Title, True);                              --@i{  @lSeeSecNum{Subprogram Declarations}}
+Traverse_Tree;                                               --@i{  see @RefSecNum{Subprogram Declarations}}
+Print_Header(128, Title, True);                              --@i{  see @RefSecNum{Subprogram Declarations}}
 
-Switch(From => X, To => Next);                               --@i{  @lSeeSecNum{Subprogram Declarations}}
-Print_Header(128, Header => Title, Center => True);          --@i{  @lSeeSecNum{Subprogram Declarations}}
-Print_Header(Header => Title, Center => True, Pages => 128); --@i{  @lSeeSecNum{Subprogram Declarations}}
+Switch(From => X, To => Next);                               --@i{  see @RefSecNum{Subprogram Declarations}}
+Print_Header(128, Header => Title, Center => True);          --@i{  see @RefSecNum{Subprogram Declarations}}
+Print_Header(Header => Title, Center => True, Pages => 128); --@i{  see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
 @i{Examples of function calls:}
 @begin{Example}
-Dot_Product(U, V)   --@i{  @lSeeSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
-Clock               --@i{  @lSeeSecNum{Delay Statements}}
-F.@key[all]               --@i{  presuming F is of an access-to-subprogram type @em @lSeeSecNum{Access Types}}
+Dot_Product(U, V)   --@i{  see @RefSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
+Clock               --@i{  see @RefSecNum{Delay Statements, Duration, and Time}}
+F.@key[all]               --@i{  presuming F is of an access-to-subprogram type @em see @RefSecNum{Access Types}}
 @end{Example}
 
 @i{Examples of procedures with default expressions:}
@@ -1190,7 +1190,7 @@ F.@key[all]               --@i{  presuming F is of an access-to-subprogram type 
                    Wait    : @key[in] Duration := 0.0;
                    Prior   : @key[in] Boolean := False);
 
-@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person);   --@i{  @lSeeSecNum{Incomplete Type Declarations}}
+@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person);   --@i{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
 @i{Examples of their calls:}
@@ -1260,7 +1260,7 @@ actual parameter and a formal parameter.]
 @begin{MetaRules}
 The parameter passing rules for @b(out) parameters
 are designed to ensure that the parts of a type that have
-implicit initial values (@lSeeSecNum{Object Declarations})
+implicit initial values (see @RefSecNum{Object Declarations})
 don't become ``de-initialized'' by
 being passed as an @b(out) parameter.
 @end{MetaRules}
@@ -1327,7 +1327,7 @@ Print(3); --@i{ Ambiguous!}
 @end{Reason}
 
 The type of the actual parameter associated with an access parameter
-shall be convertible (@lSeeSecNum{Type Conversions})
+shall be convertible (see @RefSecNum{Type Conversions})
 to its anonymous access type.
 @PDefn2{Term=[convertible],Sec=(required)}
 @end{Legality}
@@ -1343,7 +1343,7 @@ the @nt{access_definition} is elaborated,
 which creates the anonymous access type.
 
 For a parameter @Redundant[(of any mode)] that is passed by reference
-(@lSeeSecNum{Formal Parameter Modes}),
+(see @RefSecNum{Formal Parameter Modes}),
 a view conversion of the actual parameter to the nominal subtype
 of the formal parameter is evaluated,
 and the formal parameter denotes that conversion.
@@ -1356,7 +1356,7 @@ parameters.
 @Defn2{Term=[assignment operation], Sec=(during evaluation of a
 @nt{parameter_association})}
 For an @key(in) or @key(in out) parameter that is passed
-by copy (@lSeeSecNum{Formal Parameter Modes}),
+by copy (see @RefSecNum{Formal Parameter Modes}),
 the formal parameter object is created,
 and the value of the actual parameter is converted to the
 nominal subtype of the formal parameter
@@ -1378,7 +1378,7 @@ the formal parameter object is created, and:
 
   For a composite type with discriminants or
   that has implicit initial values for any subcomponents
-  (@lSeeSecNum{Object Declarations}),
+  (see @RefSecNum{Object Declarations}),
   the behavior is as for an @key[in out] parameter
   passed by copy.
 @begin{Reason}
@@ -1431,7 +1431,7 @@ These conversions and assignments occur in an arbitrary
 order.
 @begin{Ramification}
 The conversions mentioned above during parameter passing might raise
-Constraint_Error @em (@lSeeSecNum{Type Conversions}).
+Constraint_Error @em (see @RefSecNum{Type Conversions}).
 @end{Ramification}
 @begin{Ramification}
 If any conversion or assignment as part of parameter passing
@@ -1529,7 +1529,7 @@ For the execution of a @nt{return_statement}, the @nt{expression}
 @PDefn2{Term=[implicit subtype conversion],Sec=(function return)}
 @begin{Ramification}
 The conversion might raise
-Constraint_Error @em (@lSeeSecNum{Type Conversions}).
+Constraint_Error @em (see @RefSecNum{Type Conversions}).
 @end{Ramification}
 
 If the result type is class-wide, then

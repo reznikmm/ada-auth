@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:28 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @redundant[
@@ -90,19 +90,19 @@ and it defines types in its visible part that are derived from,
 or contain as components, private types declared within the
 parent package.  These implicit declarations are visible
 in children of the child package.
-@SeeSecNum(Compilation Units - Library Units).
+See @RefSecNum(Compilation Units - Library Units).
 @end{Ramification}
 
 @redundant[
 An entity declared in the private part of a package is visible
 only within the declarative region of the package itself
 (including any child units @em
-@lSeeSecNum{Compilation Units - Library Units}).
+see @RefSecNum{Compilation Units - Library Units}).
 In contrast, expanded names denoting
 entities declared in the visible part can be used even outside the
 package; furthermore, direct visibility of such entities can be
 achieved by means of @nt{use_clause}s
-(@lSeeSecNum{Selected Components} and @RefSecNum{Use Clauses}).
+(see @RefSecNum{Selected Components} and @RefSecNum{Use Clauses}).
 ]
 @end{StaticSem}
 
@@ -156,7 +156,7 @@ whose bodies can occur in @nt{package_specification}s.
 
 There are also many examples of package declarations in the predefined
 language environment
-(@lSeeSecNum{Predefined Language Environment}).
+(see @RefSecNum{Predefined Language Environment}).
 @end{Examples}
 
 @begin{Incompatible83}
@@ -227,7 +227,7 @@ shall not have a body
 unless it requires a body@Redundant[;
 @key<pragma> Elaborate_Body can be used to require
 a @nt<library_unit_declaration> to have a body
-(@lSeeSecNum{Elaboration Control})
+(see @RefSecNum{Elaboration Control})
 if it would not otherwise require one].
 @begin{Ramification}
 The first part of the rule forbids a @nt{package_body} from
@@ -256,7 +256,7 @@ the order of the implicit @nt{package_bodies} is unspecified.
 @PDefn{unspecified}
 @Redundant[(For an instance, the implicit @nt{package_body}
 occurs at the place of the instantiation
-(@lSeeSecNum{Generic Instantiation}).
+(see @RefSecNum{Generic Instantiation}).
 For a library package, the place is partially determined by the
 elaboration dependences (see Section 10).)]
 @begin{Discussion}
@@ -297,12 +297,12 @@ in the visible part of a package is caused by the elaboration of the
 body of the package.  Hence a call of such a subprogram by an
 outside program unit raises the exception Program_Error if the call
 takes place before the elaboration of the
-@nt{package_body} (@lSeeSecNum{Declarative Parts}).
+@nt{package_body} (see @RefSecNum{Declarative Parts}).
 @end{NotesNotes}
 
 @begin{Examples}
 @i{Example of a package body
-(@lSeeSecNum{Package Specifications and Declarations}):}
+(see @RefSecNum{Package Specifications and Declarations}):}
 @begin{Example}
 @key[package] @key[body] Rational_Numbers @key[is]
 
@@ -368,7 +368,7 @@ serves to separate the characteristics that can be used
 directly by outside program units (that is, the logical properties)
 from other characteristics whose direct use is confined to the
 package (the details of the definition of the type itself).
-@SeeSecNum(Type Extensions) for an overview of type extensions.
+See @RefSecNum(Type Extensions) for an overview of type extensions.
 @Defn{private types and private extensions}
 @IndexSee{Term=[information hiding],See=(private types and private extensions)}
 @IndexSee{Term=[opaque type],See=(private types and private extensions)}
@@ -425,7 +425,7 @@ generic formal private extension is also a partial view.
 
 
 @Redundant[A type shall be completely defined before it is frozen
-(@lSeeSecNum{Completions of Declarations} and
+(see @RefSecNum{Completions of Declarations} and
 @RefSecNum{Freezing Rules}).
 Thus, neither the declaration
 of a variable of a partial view of a type, nor the creation by an
@@ -594,7 +594,7 @@ the ancestor type shall be a specific tagged type.
 The full view of a private extension shall be derived
 (directly or indirectly) from the ancestor type.
 In addition to the places where @LegalityTitle normally apply
-(@lSeeSecNum{Generic Instantiation}),
+(see @RefSecNum{Generic Instantiation}),
 the requirement that the ancestor be specific applies also in the
 private part of an instance of a generic unit.
 @begin{Reason}
@@ -610,11 +610,11 @@ a @nt{known_discriminant_part}, then
 the @nt{full_type_declaration} shall have a fully conforming
 @Redundant[(explicit)]
 @nt{known_discriminant_part}
-@Redundant[(@lSeeSec(Conformance Rules))].
+@Redundant[(see @RefSec(Conformance Rules))].
 @Defn2{Term=[full conformance],Sec=(required)}
 @Redundant[The ancestor subtype may be unconstrained;
 the parent subtype of the full view is required to be constrained
-(@lSeeSecNum{Discriminants}).]
+(see @RefSecNum{Discriminants}).]
 @begin{Discussion}
   If the ancestor subtype has discriminants,
   then it is usually best to make it unconstrained.
@@ -756,7 +756,7 @@ the classes that include the type,
 which components, entries, and protected subprograms are visible,
 what attributes and other predefined operations are allowed,
 and whether the first subtype is static.
-@SeeSecNum{Private Operations}.
+See @RefSecNum{Private Operations}.
 
 A private extension inherits components (including
 discriminants unless there is a new @nt<discriminant_part>
@@ -764,13 +764,13 @@ specified) and user-defined primitive
 subprograms from its ancestor type, in the same way that
 a record extension inherits components and user-defined primitive
 subprograms from its parent type
-(@lSeeSecNum{Derived Types and Classes}).
+(see @RefSecNum{Derived Types and Classes}).
 @begin{Honest}
 If an operation of the parent type is abstract,
 then the abstractness of the inherited operation
 is different for nonabstract record extensions
 than for nonabstract private extensions
-(@lSeeSecNum{Abstract Types and Subprograms}).
+(see @RefSecNum{Abstract Types and Subprograms}).
 @end{Honest}
 @end{StaticSem}
 
@@ -855,7 +855,7 @@ not overridden, the formal parameter names and default expressions (if any)
 come from the corresponding primitive subprogram of the specified ancestor
 type, while the body comes from the corresponding primitive subprogram
 of the parent type of the full view.
-@SeeSecNum{Dispatching Operations of Tagged Types}.
+See @RefSecNum{Dispatching Operations of Tagged Types}.
 @end{NotesNotes}
 
 @begin{Examples}
@@ -930,7 +930,7 @@ immediately after the definition of the type,
 except as stated below.
 
 For a composite type, the characteristics
-(@lSeeSecNum{Private Types and Private Extensions})
+(see @RefSecNum{Private Types and Private Extensions})
 of the type are determined in part by the
 characteristics of its component types.
 At the place where the composite type is declared,
@@ -1160,10 +1160,10 @@ discriminants and inherited components, qualification,
 and explicit conversion.
 
 For a subtype S of a partial view, S'Size is defined
-(@lSeeSecNum{Representation Attributes}).
+(see @RefSecNum{Representation Attributes}).
 For an object A of a partial view,
 the attributes A'Size and A'Address are defined
-(@lSeeSecNum{Representation Attributes}).
+(see @RefSecNum{Representation Attributes}).
 The Position, First_Bit, and Last_Bit attributes
 are also defined for discriminants and inherited components.
 @end{NotesNotes}
@@ -1173,7 +1173,7 @@ are also defined for discriminants and inherited components.
 @begin{Example}
 @key[package] Key_Manager @key[is]
    @key[type] Key @key[is] @key[private];
-   Null_Key : @key[constant] Key; --@i{ a deferred constant declaration (@lSeeSecNum{Deferred Constants})}
+   Null_Key : @key[constant] Key; --@i{ a deferred constant declaration (see @RefSecNum{Deferred Constants})}
    @key[procedure] Get_Key(K : @key[out] Key);
    @key[function] "<" (X, Y : Key) @key[return] Boolean;
 @key[private]
@@ -1239,7 +1239,7 @@ Deferred constant declarations may be used to declare constants
 in the visible part of a package,
 but with the value of the constant given in the private part.
 They may also be used to declare constants imported from other
-languages (@lSeeSecNum{Interface to Other Languages}).
+languages (see @RefSecNum{Interface to Other Languages}).
 ]
 @end{Intro}
 
@@ -1257,7 +1257,7 @@ a @i{deferred constant}.
 A deferred constant declaration requires a completion,
 which shall be a full constant declaration
 (called the @i{full declaration} of the deferred constant),
-or a @nt{pragma} Import (@lSeeSecNum(Interface to Other Languages)).
+or a @nt{pragma} Import (see @RefSecNum(Interface to Other Languages)).
 @Defn{full declaration}
 
 A deferred constant declaration that is completed
@@ -1304,7 +1304,7 @@ corresponding full declaration:
 
 The completion of a deferred constant declaration shall occur
 before the constant is frozen
-(@lSeeSecNum{Deferred Constants}).
+(see @RefSecNum{Deferred Constants}).
 
 
 @end{Legality}
@@ -1321,7 +1321,7 @@ The full constant declaration for a deferred constant that is of a given
 private type or private extension is not allowed before the corresponding
 @nt{full_type_declaration}.  This is a consequence of the freezing
 rules for types
-(@lSeeSecNum{Freezing Rules}).
+(see @RefSecNum{Freezing Rules}).
 @begin{Ramification}
 Multiple or single declarations are allowed for the
 deferred and the full declarations, provided that the
@@ -1338,11 +1338,11 @@ variables declared in the private part of a package.
 @begin{Examples}
 @i{Examples of deferred constant declarations:}
 @begin{Example}
-Null_Key : @key[constant] Key;      @i[-- @lSeeSecNum{Private Operations}]
+Null_Key : @key[constant] Key;      @i[-- see @RefSecNum{Private Operations}]
 
 CPU_Identifier : @key[constant] String(1..8);
 @key[pragma] Import(Assembler, CPU_Identifier, Link_Name => "CPU_ID");
-                              @i[-- @lSeeSecNum{Interfacing Pragmas}]
+                              @i[-- see @RefSecNum{Interfacing Pragmas}]
 @end{Example}
 @end{Examples}
 
@@ -1593,7 +1593,7 @@ those given in the package specification.
 The fact that the full view of File_Name is explicitly declared
 @key[limited] means that
 parameter passing and function return will always be by reference
-(@lSeeSecNum{Formal Parameter Modes} and @RefSecNum{Return Statements}).
+(see @RefSecNum{Formal Parameter Modes} and @RefSecNum{Return Statements}).
 @end{Multiple}
 @end{NotesNotes}
 
@@ -2006,7 +2006,7 @@ of constructs and entities.
 A @i{master} is the execution of a construct that
 includes finalization of local objects after it is complete
 (and after waiting for any local tasks
-@em @lSeeSecNum(Task Dependence - Termination of Tasks)),
+@em see @RefSecNum(Task Dependence - Termination of Tasks)),
 but before leaving.
 Other constructs and entities are left immediately upon completion.
 @IndexSee{Term=[cleanup],See=(finalization)}
@@ -2020,7 +2020,7 @@ Other constructs and entities are left immediately upon completion.
 The execution of a construct or entity
 is @i{complete} when the end of that execution has been reached,
 or when a transfer of control
-(@lSeeSecNum{Simple and Compound Statements - Sequences of Statements})
+(see @RefSecNum{Simple and Compound Statements - Sequences of Statements})
 causes it to be abandoned.
 @Defn{normal completion}
 @Defn2{Term=[completion], Sec=(normal)}
@@ -2174,7 +2174,7 @@ this rule is applied as though each
 such object that still exists had been created
 in an arbitrary order
 at the first freezing point
-(@lSeeSecNum{Freezing Rules})
+(see @RefSecNum{Freezing Rules})
 of the ultimate ancestor type.
 @begin{Reason}
   Note that we talk about the type of the @nt{allocator} here.
@@ -2197,7 +2197,7 @@ of the ultimate ancestor type.
 Finalization of allocated objects is done according
   to the (ultimate ancestor) @nt{allocator} type, not according to the storage pool
   in which they are allocated.
-  Pool finalization might reclaim storage (@lSeeSec{Storage Management}),
+  Pool finalization might reclaim storage (see @RefSec{Storage Management}),
   but has nothing (directly) to do with finalization of the
   pool elements.
 
@@ -2392,7 +2392,7 @@ This case includes an asynchronous transfer of control.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 This violates the general principle that it is always possible for
 a bounded error to raise Program_Error
-(@lSeeSec{Classification of Errors}).
+(see @RefSec{Classification of Errors}).
 @end{Honest}
 @end{Itemize}
 @end{Bounded}
@@ -2465,11 +2465,11 @@ nor is the value of the @nt<aggregate> adjusted.
 All of the following use the assignment operation,
 and thus perform value adjustment:
 @begin{Itemize}
-the @nt{assignment_statement} (@lSeeSecNum{Assignment Statements});
+the @nt{assignment_statement} (see @RefSecNum{Assignment Statements});
 
 explicit initialization of a stand-alone object
-(@lSeeSecNum{Object Declarations})
-or of a pool element (@lSeeSecNum{Allocators});
+(see @RefSecNum{Object Declarations})
+or of a pool element (see @RefSecNum{Allocators});
 
 default initialization of a component of a stand-alone object
 or pool element
@@ -2478,20 +2478,20 @@ but the value of the object as a whole is not adjusted);
 
 function return, when the result type is not a
 return-by-reference
-type (@lSeeSecNum{Return Statements});
+type (see @RefSecNum{Return Statements});
 (adjustment of the result happens before finalization of
 the function;
 values of return-by-reference types are not
 adjusted);
 
 predefined operators (although the only one that matters is
-concatenation; @lSeeSecNum{Binary Adding Operators});
+concatenation; see @RefSecNum{Binary Adding Operators});
 
 generic formal objects of mode @key{in}
-(@lSeeSecNum{Formal Objects});
+(see @RefSecNum{Formal Objects});
 these are defined in terms of @nt{constant_declaration}s; and
 
-@nt{aggregate}s (@lSeeSecNum{Aggregates})
+@nt{aggregate}s (see @RefSecNum{Aggregates})
 (in this case, the value of each component, and the parent part, for an
 @nt{extension_aggregate}, is assigned, and therefore adjusted,
 but the value of the @nt{aggregate} as a whole is not adjusted;
@@ -2502,7 +2502,7 @@ The following also use the assignment operation,
 but adjustment never does anything interesting in these cases:
 @begin{Itemize}
 By-copy parameter passing uses the assignment operation
-(@lSeeSecNum{Parameter Associations}),
+(see @RefSecNum{Parameter Associations}),
 but controlled objects are always passed by reference,
 so the assignment operation never does anything interesting in
 this case.
@@ -2515,7 +2515,7 @@ similar to the finalization of an anonymous function return
 object or @nt{aggregate} object.
 
 @key{For} loops use the assignment operation
-(@lSeeSecNum{Loop Statements}), but since the type
+(see @RefSecNum{Loop Statements}), but since the type
 of the loop parameter is never controlled,
 nothing interesting happens there, either.
 @end{Itemize}
@@ -2524,7 +2524,7 @@ Because Controlled and Limited_Controlled
 are library-level tagged types,
 all controlled types will be library-level types,
 because of the accessibility rules
-(@lSeeSecNum{Operations of Access Types} and @RefSecNum{Type Extensions}).
+(see @RefSecNum{Operations of Access Types} and @RefSecNum{Type Extensions}).
 This ensures that the Finalize operations may be applied without
 providing any ``display'' or ``static-link.''
 This simplifies finalization as a result of garbage collection,

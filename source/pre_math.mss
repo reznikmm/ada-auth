@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:30 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/20 02:30:30 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -244,7 +244,7 @@ Float_Type'Machine_Overflows is True:
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 @redundant[Constraint_Error can also be raised
 when a finite result overflows
-(@lSeeSecNum{Accuracy Requirements for the Elementary Functions}); this may
+(see @RefSecNum{Accuracy Requirements for the Elementary Functions}); this may
 occur for parameter values sufficiently @i{near} poles, and, in the case of
 some of the functions, for parameter values with sufficiently large
 magnitudes.]
@@ -318,7 +318,7 @@ raised:
 
 Other accuracy requirements for the elementary functions, which apply only in
 implementations conforming to the Numerics Annex, and then only in the
-``strict'' mode defined there (@lSeeSecNum{Numeric Performance Requirements}),
+``strict'' mode defined there (see @RefSecNum{Numeric Performance Requirements}),
 are given in @RefSecNum{Accuracy Requirements for the Elementary Functions}.
 
 When Float_Type'Signed_Zeros is True, the sign of a zero result shall be as
@@ -379,7 +379,7 @@ in the following ways:
    Sqrt is prescribed to yield a result of one when its parameter has the
    value one.  This guarantee makes it easier to achieve certain prescribed
    results of the complex elementary functions
-   (@lSeeSec{Complex Elementary Functions}).
+   (see @RefSec{Complex Elementary Functions}).
 
    Conformance to accuracy requirements is conditional.
 @end{itemize}
@@ -645,7 +645,7 @@ calls, provided that the number of such values does not exceed
 
 Other performance requirements for the random number generator, which apply
 only in implementations conforming to the Numerics Annex, and then only in the
-``strict'' mode defined there (@lSeeSecNum{Numeric Performance Requirements}),
+``strict'' mode defined there (see @RefSecNum{Numeric Performance Requirements}),
 are given in @RefSecNum{Performance Requirements for Random Number Generation}.
 @end{ImplReq}
 
@@ -688,7 +688,7 @@ should be a rapidly varying function of the initiator value.
 @begin{NotesNotes}
 If two or more tasks are to share the same generator, then the tasks have to
 synchronize their access to the generator as for any shared variable
-(@lSeeSecNum(Shared Variables)).
+(see @RefSecNum(Shared Variables)).
 
 Within a given implementation, a repeatable random number sequence can be
 obtained by relying on the implicit initialization of generators or by
@@ -723,7 +723,7 @@ standard deviation 1.0 can be obtained by the transformation
 @end{Example}
 
 where Log comes from Numerics.Elementary_Functions
-(@lSeeSecNum{Elementary Functions});
+(see @RefSecNum{Elementary Functions});
 in this expression, the addition of Float'Model_Small avoids the
 exception that would be raised were Log to be given the value zero, without
 affecting the result (in most implementations) when Random returns a nonzero

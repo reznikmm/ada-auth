@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:30 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:30 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -179,12 +179,12 @@ resources are allocated to the task with the highest priority
 value.
 The @i{base priority} of a task is the priority with which it was
 created, or to which it was later set by Dynamic_Priorities.Set_Priority
-(@lSeeSecNum{Dynamic Priorities}).  At all times, a task also has
+(see @RefSecNum{Dynamic Priorities}).  At all times, a task also has
 an @i{active priority}, which generally reflects its base priority
 as well as any priority it inherits from other sources.
 @i{Priority inheritance} is the process by which the priority of a
 task or other entity (e.g. a protected object;
-@lSeeSecNum{Priority Ceiling Locking}) is used in the evaluation of another
+see @RefSecNum{Priority Ceiling Locking}) is used in the evaluation of another
 task's active priority.
 @ImplDef{Implementation-defined execution resources.}
 
@@ -194,7 +194,7 @@ is discussed in @RefSecNum{Priority Ceiling Locking}.
 @Defn2{Term=[creation], Sec=(of a task object)}
 The @nt{expression} in a Priority or Interrupt_Priority pragma that
 appears in a @nt{task_definition} is evaluated for each task object
-(@lSeeSecNum{Task Units and Task Objects}).
+(see @RefSecNum{Task Units and Task Objects}).
 For a Priority pragma, the
 value of the @nt{expression} is converted to the subtype Priority; for an
 Interrupt_Priority pragma, this value is converted to the subtype Any_Priority.
@@ -210,10 +210,10 @@ The initial value of a task's base priority is specified by default or
 by means of a Priority or Interrupt_Priority pragma.
 @Redundant[After a task is created,
 its base priority can be changed only by a call to
-Dynamic_Priorities.Set_Priority (@lSeeSecNum{Dynamic Priorities}).]
+Dynamic_Priorities.Set_Priority (see @RefSecNum{Dynamic Priorities}).]
 The initial base priority of a task in the absence of a pragma is the
 base priority of the task that creates it at the time of creation
-(@lSeeSecNum{Task Units and Task Objects}).
+(see @RefSecNum{Task Units and Task Objects}).
 If a pragma Priority does not apply to the main subprogram,
 the initial base priority of the environment task is
 System.Default_Priority.
@@ -221,11 +221,11 @@ System.Default_Priority.
 processors.
 Similarly, the task's active priority is used
 to determine the task's position in any queue when Priority_Queuing is
-specified (@lSeeSecNum{Entry Queuing Policies}).]
+specified (see @RefSecNum{Entry Queuing Policies}).]
 
 At any time, the active priority of a task is the maximum of all the
 priorities the task is inheriting at that instant.  For a task that is not
-held (@lSeeSecNum{Asynchronous Task Control}), its base priority is always
+held (see @RefSecNum{Asynchronous Task Control}), its base priority is always
 a source of priority inheritance.  Other sources of priority inheritance
 are specified under the following
 conditions:
@@ -236,13 +236,13 @@ other sources of priority inheritance.
 @begin{itemize}
 
 During activation, a task being activated inherits the active priority of the
-its activator (@lSeeSecNum{Task Execution - Task Activation}).
+its activator (see @RefSecNum{Task Execution - Task Activation}).
 
 During rendezvous, the task accepting the entry call inherits the active
-priority of the caller (@lSeeSecNum{Entry Calls}).
+priority of the caller (see @RefSecNum{Entry Calls}).
 
 During a protected action on a protected object, a task inherits the ceiling
-priority of the protected object (@lSeeSecNum{Intertask Communication} and
+priority of the protected object (see @RefSecNum{Intertask Communication} and
 @RefSecNum{Priority Ceiling Locking}).
 
 @end{itemize}
@@ -301,11 +301,11 @@ The description of the Priority pragma has been moved to this annex.
 @begin{Intro}
 @Redundant[This clause describes the rules that determine which task is
 selected for execution when more than one task is ready
-(@lSeeSecNum{Task Execution - Task Activation}).
+(see @RefSecNum{Task Execution - Task Activation}).
 The rules have two parts: the task dispatching model
-(@lSeeSecNum{The Task Dispatching Model}),
+(see @RefSecNum{The Task Dispatching Model}),
 and a specific task dispatching policy
-(@lSeeSecNum{The Standard Task Dispatching Policy}).]
+(see @RefSecNum{The Standard Task Dispatching Policy}).]
 @end{Intro}
 
 @LabeledSubClause{The Task Dispatching Model}
@@ -318,7 +318,7 @@ scheduling, based on conceptual priority-ordered ready queues.]
 @begin{RunTime}
 
 A task runs (that is, it becomes a @i{running task}) only when
-it is ready (@lSeeSecNum{Task Execution - Task Activation}) and
+it is ready (see @RefSecNum{Task Execution - Task Activation}) and
 the execution resources required by that task are available.
 Processors are allocated to tasks based on each task's active priority.
 
@@ -338,7 +338,7 @@ points}.
 A task reaches a task dispatching point whenever it becomes blocked,
 and whenever it becomes ready.
 In addition, the completion of an @nt{accept_statement}
-(@lSeeSecNum{Entries and Accept Statements}), and task termination are
+(see @RefSecNum{Entries and Accept Statements}), and task termination are
 task dispatching points for the executing task.
 @Redundant[Other task dispatching points are defined
 throughout this Annex.]
@@ -394,7 +394,7 @@ to one task can be allocated (temporarily) to another
 instead.
 Processors are preemptible resources.
 Access to a protected object
-(@lSeeSecNum{Protected Subprograms and Protected Actions})
+(see @RefSecNum{Protected Subprograms and Protected Actions})
 is a nonpreemptible resource.
 @begin{Reason}
 A processor that is executing a task is available to execute tasks of
@@ -429,7 +429,7 @@ An implementation is allowed to define additional resources as execution
 resources, and to define the corresponding allocation policies for them.
 
 Such resources may have an implementation defined effect on
-task dispatching (@lSeeSecNum{The Standard Task Dispatching Policy}).
+task dispatching (see @RefSecNum{The Standard Task Dispatching Policy}).
 
 @ImplDef{The affect of implementation defined execution resources on
 task dispatching.}
@@ -509,7 +509,7 @@ in a @nt{pragma} Task_Dispatching_Policy.}
 A Task_Dispatching_Policy pragma is a configuration pragma.
 
 If the FIFO_Within_Priorities policy is specified for a partition,
-then the Ceiling_Locking policy (@lSeeSecNum{Priority Ceiling Locking})
+then the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking})
 shall also be specified for the partition.
 @end{LinkTime}
 
@@ -561,7 +561,7 @@ not to the ready queue.
 @PDefn{task dispatching point}
 @PDefn{dispatching point}
 Each of the events specified above is a task dispatching point
-(@lSeeSecNum{The Task Dispatching Model}).
+(see @RefSecNum{The Task Dispatching Model}).
 
 In addition, when a task is preempted, it is added at the head of the
 ready queue for its active priority.
@@ -694,7 +694,7 @@ the corresponding protected object.
 @PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}
 
 If an Interrupt_Handler or Attach_Handler pragma
-(@lSeeSecNum{Protected Procedure Handlers}) appears in a
+(see @RefSecNum{Protected Procedure Handlers}) appears in a
 @nt{protected_definition} without an Interrupt_Priority pragma, the
 ceiling priority of protected objects of that type is
 implementation defined,
@@ -741,7 +741,7 @@ partition.
 
 @Redundant[Since implementations are allowed to place restrictions
 on code that runs at an interrupt-level active priority
-(@lSeeSecNum{Protected Procedure Handlers}
+(see @RefSecNum{Protected Procedure Handlers}
 and @RefSecNum{The Task Dispatching Model}),
 the implementation may implement a language feature in terms
 of a protected object with an implementation-defined ceiling,
@@ -786,7 +786,7 @@ are blocked during that time.
 
 The ceiling priority of a protected object has to be in the
 Interrupt_Priority range if one of its procedures is to be used as
-an interrupt handler (@lSeeSecNum{Interrupt Support}).
+an interrupt handler (see @RefSecNum{Interrupt Support}).
 
 When specifying the ceiling of a protected object, one should
 choose a value that is at least as high as the highest active priority
@@ -800,7 +800,7 @@ implementation-defined factors.
 Attaching a protected procedure whose ceiling is below the
 interrupt hardware priority to an interrupt causes the execution of the
 program to be erroneous
-(@lSeeSecNum{Protected Procedure Handlers}).
+(see @RefSecNum{Protected Procedure Handlers}).
 
 On a single processor implementation, the ceiling priority
 rules guarantee that there is no possibility of deadlock involving
@@ -879,7 +879,7 @@ After a call is first queued, changes to the active priority of a task do
 not affect the priority of the call, unless the base priority of the task is
 set.
 
-When the base priority of a task is set (@lSeeSecNum{Dynamic Priorities}),
+When the base priority of a task is set (see @RefSecNum{Dynamic Priorities}),
 if the task is blocked on an entry call,
 and the call is queued,
 the priority of the call is updated to the new
@@ -994,7 +994,7 @@ modified or queried at run time.]
 The following language-defined library package exists:
 @begin{Example}
 @key[with] System;
-@key[with] Ada.Task_Identification; @i{-- @SeeSecNum[The Package Task_Identification]}
+@key[with] Ada.Task_Identification; @i{-- See @RefSecNum[The Package Task_Identification]}
 @ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities],Expanded=[Ada.Dynamic_Priorities]}
 @key[package] Ada.Dynamic_Priorities @key[is]
 
@@ -1047,7 +1047,7 @@ as is practical but not while the task is performing a
 protected action.
 This setting occurs no later then the next abort completion point of
 the task T
-(@lSeeSecNum{Abort of a Task - Abort of a Sequence of Statements}).
+(see @RefSecNum{Abort of a Task - Abort of a Sequence of Statements}).
 @begin{ImplNote}
 When Set_Priority is called by a task T1 to set the priority of T2,
 if T2 is blocked, waiting on an entry call queued on a protected object,
@@ -1164,7 +1164,7 @@ if the task is blocked waiting for the call.  That is, setting the
 base priority of a task causes the priority of a queued entry
 call from that task to be updated and the call to be removed and
 then reinserted in the entry queue at the new priority
-(@lSeeSecNum{Entry Queuing Policies}),
+(see @RefSecNum{Entry Queuing Policies}),
 unless the call originated from the @nt{triggering_statement} of an
 @nt{asynchronous_select}.
 
@@ -1181,7 +1181,7 @@ beginning of @RefSec{Predefined Language Environment}.
 
 The rule for when Tasking_Error is raised for Set_Priority or Get_Priority is
 different from the rule for when Tasking_Error is raised on an
-entry call (@lSeeSecNum{Entry Calls}).  In particular, setting or
+entry call (see @RefSecNum{Entry Calls}).  In particular, setting or
 querying the priority of a completed or an abnormal
 task is allowed, so long as the task is not yet terminated.
 
@@ -1256,7 +1256,7 @@ it.  The execution time of the abortable part is subtracted.
 
 Even though the @nt{abort_statement} is included in the list of
 potentially blocking operations
-(@lSeeSecNum{Protected Subprograms and Protected Actions}),
+(see @RefSecNum{Protected Subprograms and Protected Actions}),
 it is recommended that this statement be implemented in a way that
 never requires the task executing the @nt{abort_statement} to
 block.
@@ -1282,7 +1282,7 @@ deferral of abortion during finalization and in protected actions.
 
 @begin{Intro}
 @Redundant[This clause defines restrictions that can be used with a
-pragma Restrictions (@lSeeSecNum{Pragma Restrictions}) to facilitate the
+pragma Restrictions (see @RefSecNum{Pragma Restrictions}) to facilitate the
 construction of highly efficient tasking run-time systems.]
 @end{Intro}
 
@@ -1500,7 +1500,7 @@ The following language-defined library package exists:
 In this Annex, @i{real time} is defined to be the physical time as observed
 in the external environment.
 The type Time is a @i{time type} as defined by
-@RefSecNum{Delay Statements};
+@RefSecNum{Delay Statements, Duration, and Time};
 @Redundant[values of this type may be used in a
 @nt{delay_until_statement}.]
 Values of this type
@@ -1813,7 +1813,7 @@ If C is a value of Clock read after a task resumes execution following a
 A simple @nt{delay_statement} with a negative or zero value for the
 expiration time does not cause the calling task to be blocked; it is
 nevertheless a potentially blocking operation
-(@lSeeSecNum{Protected Subprograms and Protected Actions}).
+(see @RefSecNum{Protected Subprograms and Protected Actions}).
 
 When a @nt{delay_statement} appears in a @nt{delay_alternative} of a
 @nt{timed_entry_call} the selection of the entry call is attempted,
@@ -1962,7 +1962,7 @@ and the state of the object becomes false.
 Program_Error is raised upon calling Suspend_Until_True if another
 task is already waiting on that suspension object.
 Suspend_Until_True is a potentially blocking operation
-(@lSeeSecNum{Protected Subprograms and Protected Actions}).
+(see @RefSecNum{Protected Subprograms and Protected Actions}).
 @end{RunTime}
 
 @begin{ImplReq}
@@ -2017,7 +2017,7 @@ idle task.
 
 The Hold operation sets the state of T to held.  For a held task:
 the task's own base priority does not constitute an inheritance source
-(@lSeeSecNum{Task Priorities}), and the value of the held priority
+(see @RefSecNum{Task Priorities}), and the value of the held priority
 is defined to be such a source instead.
 @begin{Ramification}
 For example, if T is currently inheriting priorities from other sources (e.g.
@@ -2122,7 +2122,7 @@ improving the response and determinism in a real-time system.]
 
 @begin{ImplReq}
 
-If the implementation blocks interrupts (@lSeeSecNum{Interrupt Support}) not
+If the implementation blocks interrupts (see @RefSecNum{Interrupt Support}) not
 as a result of direct user
 action (e.g. an execution of a protected action) there shall be an upper
 bound on the duration of this blocking.
@@ -2130,13 +2130,13 @@ bound on the duration of this blocking.
 The implementation shall not allow itself to be interrupted when it is in a
 state where it is unable to support all the language-defined operations
 permitted in the execution of interrupt handlers.
-(@lSeeSecNum{Protected Subprograms and Protected Actions}).
+(see @RefSecNum{Protected Subprograms and Protected Actions}).
 @end{Ramification}
 
 The implementation shall recognize entry-less protected types.
 The overhead of acquiring
 the execution resource of an object of such a type
-(@lSeeSecNum{Protected Subprograms and Protected Actions}) shall be minimized.
+(see @RefSecNum{Protected Subprograms and Protected Actions}) shall be minimized.
 @begin{ImplNote}
 Ideally just a spin-lock.
 @end{ImplNote}

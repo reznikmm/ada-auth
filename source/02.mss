@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:02 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:27 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @redundant[
@@ -607,7 +607,7 @@ character between two apostrophe characters.]
 
 @begin{NotesNotes}
 A @nt{character_literal} is an enumeration literal
-of a character type.  @SeeSecNum(Character Types).
+of a character type.  See @RefSecNum(Character Types).
 @end{NotesNotes}
 
 @begin{Examples}
@@ -630,9 +630,9 @@ since it requires knowledge of types.
 A @nt<string_literal> is formed by a sequence of graphic characters
 (possibly none) enclosed between two quotation marks used as
 string brackets.  They are used to represent @nt<operator_symbol>s
-(@lSeeSecNum(Subprogram Declarations)), values of a string type
-(@lSeeSecNum(Literals)), and array subaggregates
-(@lSeeSecNum(Array Aggregates)).
+(see @RefSecNum(Subprogram Declarations)), values of a string type
+(see @RefSecNum(Literals)), and array subaggregates
+(see @RefSecNum(Array Aggregates)).
 @IndexSee{Term=[quoted string],See=(string_literal)}
 ]
 @end{Intro}
@@ -860,7 +860,7 @@ arguments in an arbitrary order @em the order given in the syntax rule
 for each individual pragma must be obeyed.
 However, it is generally possible to leave out earlier arguments when
 later ones are given; for example, this is allowed by the syntax rule
-for pragma Import (@lSeeSec{Interfacing Pragmas}).
+for pragma Import (see @RefSec{Interfacing Pragmas}).
 As for subprogram calls, positional notation precedes named
 notation.
 
@@ -1232,7 +1232,7 @@ The following are the @i{reserved words}
 The reserved words appear in @key{lower case boldface}
 in this International Standard,
 except when used in the @nt{designator} of an attribute
-(@lSeeSecNum(Attributes)).
+(see @RefSecNum(Attributes)).
 
 Lower case boldface is also used
 

@@ -8,7 +8,7 @@
         AfterExit "Reprinting permitted if accompanied by this statement")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/ansi_title.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2000/04/19 00:07:04 $}
+@comment{$Revision: 1.4 $ $Date: 2000/04/20 02:30:30 $}
 @begin(I2Title)
 @begin{FlushRight, Fixed 0.75inch}
 @Case{DocumentNickname,

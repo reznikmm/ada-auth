@@ -1,11 +1,11 @@
 @Part(obsolescent, Root="ada.mss")
 
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:30 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -29,20 +29,20 @@ The following features have been removed from the language,
 rather than declared to be obsolescent:
 @begin{Itemize}
 The package Low_Level_IO
-(@lSeeSecNum{Input-Output}).
+(see @RefSecNum{Input-Output}).
 
 The Epsilon, Mantissa, Emax, Small, Large, Safe_Emax, Safe_Small, and
 Safe_Large attributes of floating point types
-(@lSeeSecNum{Attributes of Floating Point Types}).
+(see @RefSecNum{Attributes of Floating Point Types}).
 
 The pragma Interface
-(@lSeeSecNum{Interfacing Pragmas}).
+(see @RefSecNum{Interfacing Pragmas}).
 
 The pragmas System_Name, Storage_Unit, and Memory_Size
-(@lSeeSecNum{The Package System}).
+(see @RefSecNum{The Package System}).
 
 The pragma Shared
-(@lSeeSecNum{Shared Variable Control}).
+(see @RefSecNum{Shared Variable Control}).
 @end{Itemize}
 
 Implementations can continue to support the above features for upward
@@ -464,7 +464,7 @@ detached from the corresponding interrupt and the default treatment is
 restored.
 
 While an interrupt entry is attached to an interrupt,
-the interrupt is reserved (@lSeeSecNum{Interrupt Support}).
+the interrupt is reserved (see @RefSecNum{Interrupt Support}).
 
 An interrupt delivered to a task entry acts as a call to the entry issued by
 a hardware task whose priority is in the System.Interrupt_Priority range.
@@ -477,7 +477,7 @@ can depend on the specific interrupt.
 
 @begin{Bounded}
 It is a bounded error to evaluate
-E'Caller (@lSeeSecNum(The Package Task_Identification))
+E'Caller (see @RefSecNum(The Package Task_Identification))
 in an @nt{accept_statement} for an interrupt
 entry.  The possible effects are
 the same as for calling Current_Task from an entry body.

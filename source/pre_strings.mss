@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:31 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/20 02:30:31 $}
 
 @LabeledClause{String Handling}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:29 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:29 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -103,7 +103,7 @@ there is no concrete meaning to passive partition termination.
 
 A passive partition shall include only @nt{library_item}s that either are
 declared pure or are shared
-passive (@lSeeSecNum{Elaboration Control} and
+passive (see @RefSecNum{Elaboration Control} and
 @RefSecNum{Shared Passive Library Units}).
 
 An active partition shall be configured on a processing node.
@@ -140,7 +140,7 @@ protected objects).
 A @nt{library_item} is elaborated as part of the elaboration
 of each partition that includes it.
 If a normal library unit
-(@lSeeSecNum{Categorization of Library Units}) has state, then a separate
+(see @RefSecNum{Categorization of Library Units}) has state, then a separate
 copy of the state exists in each active partition that elaborates it.
 @Redundant[The state evolves independently in each such partition.]
 
@@ -173,7 +173,7 @@ the following attribute is defined:
          identifies the partition in which D was elaborated.
          If D denotes the declaration of a remote call interface
          library unit
-         (@lSeeSecNum{Remote Call Interface Library Units}) the
+         (see @RefSecNum{Remote Call Interface Library Units}) the
          given partition is the one where the body of D was elaborated.]}
 @end{Description}
 
@@ -253,7 +253,7 @@ program.
 @PDefn2{Term=[pragma, library unit], Sec=(categorization pragmas)}
 @Defn{categorized library unit}
 A @i{categorization pragma} is a library unit pragma
-(@lSeeSecNum{Pragmas and Program Units})
+(see @RefSecNum{Pragmas and Program Units})
 that restricts the declarations, child units, or
 semantic dependences of the library unit to which it applies. A
 @i{categorized library unit} is a library unit to which
@@ -262,7 +262,7 @@ a categorization pragma applies.
 The pragmas Shared_Passive, Remote_Types, and Remote_Call_Interface
 are categorization pragmas.
 In addition, for the purposes of this Annex, the pragma Pure
-(@lSeeSecNum{Elaboration Control}) is
+(see @RefSecNum{Elaboration Control}) is
 considered a categorization pragma.
 
 @Defn{shared passive library unit}
@@ -381,7 +381,7 @@ A @i{shared passive library unit} is a library unit to which
 a Shared_Passive pragma applies.
 The following restrictions apply to such a library unit:
 @begin{itemize}
-@Redundant[it shall be preelaborable (@lSeeSecNum{Elaboration Control});]
+@Redundant[it shall be preelaborable (see @RefSecNum{Elaboration Control});]
 @begin{Ramification}
   It cannot contain library-level declarations of protected objects
   with entries, nor of task objects.  Task objects are disallowed
@@ -577,7 +577,7 @@ explicitly converted only to another remote access-to-class-wide type;
 A value of a remote access-to-class-wide type shall be dereferenced
 (or implicitly converted to an anonymous access type)
 only as part of a dispatching call where the value designates
-a controlling operand of the call (@lSeeSec{Remote Subprogram Calls});
+a controlling operand of the call (see @RefSec{Remote Subprogram Calls});
 
 The Storage_Pool and
 Storage_Size attributes are not defined for
@@ -599,7 +599,7 @@ A remote types library unit
 need not be pure, and the types it defines may
 include levels of indirection implemented by using access types.
 User-specified Read and Write attributes
-(@lSeeSecNum{Stream-Oriented Attributes})
+(see @RefSecNum{Stream-Oriented Attributes})
 provide for sending values of such a type
 between active partitions, with Write marshalling the
 representation, and Read unmarshalling any levels of
@@ -661,7 +661,7 @@ called a @i{remote subprogram}.
 
 
 The declaration of an RCI library unit shall be preelaborable
-(@lSeeSecNum{Elaboration Control}), and shall depend semantically
+(see @RefSecNum{Elaboration Control}), and shall depend semantically
 only upon declared pure, shared passive,
 remote types, or other remote call interface library units.
 
@@ -767,7 +767,7 @@ implementation shall route any
 call to a subprogram of the RCI package from outside the
 declarative region of the package
 through the Partition Communication Subsystem
-(PCS); @lSeeSecNum{Partition Communication Subsystem}.
+(PCS); see @RefSecNum{Partition Communication Subsystem}.
 Calls to such subprograms from within the declarative region of
 the package are defined to be local and shall not go through
 the PCS.
@@ -925,7 +925,7 @@ The latter two ways correspond to a @i(dynamic) binding between
 the calling and the called partition.
 
 A remote call interface library unit
-(@lSeeSecNum{Remote Call Interface Library Units})
+(see @RefSecNum{Remote Call Interface Library Units})
 defines the remote subprograms or remote access types used for
 remote subprogram calls.
 @end{Intro}
@@ -953,7 +953,7 @@ remote access-to-class-wide type, then all shall be.
 For the execution of a remote subprogram call, subprogram parameters
 (and later the results, if any) are passed using a stream-oriented
 representation
-(@lSeeSecNum{The Package Streams}) @Redundant[which is
+(see @RefSecNum{The Package Streams}) @Redundant[which is
 suitable for transmission between partitions].  This action is called
 @i{marshalling}. @i{Unmarshalling} is the reverse action of
 reconstructing the parameters or results from the stream-oriented
@@ -1013,14 +1013,14 @@ For an asynchronous call, if the remote procedure call returns prior to
 the completion of the remotely called subprogram, any exception is lost.
 
 The exception Communication_Error
-(@lSeeSecNum{Partition Communication Subsystem}) is raised if a remote call
+(see @RefSecNum{Partition Communication Subsystem}) is raised if a remote call
 cannot be completed due to difficulties in communicating with the called
 partition.
 
 @PDefn2{Term=[potentially blocking operation],Sec=(remote subprogram call)}
 @PDefn2{Term=[blocking, potentially],Sec=(remote subprogram call)}
 All forms of remote subprogram calls are potentially blocking operations
-(@lSeeSecNum{Protected Subprograms and Protected Actions}).
+(see @RefSecNum{Protected Subprograms and Protected Actions}).
 @begin{Reason}
 Asynchronous remote procedure calls are potentially blocking since the
 implementation may require waiting for the availability of shared resources
@@ -1062,7 +1062,7 @@ Program_Error is raised if this check fails.
 In a dispatching call with two or more controlling operands that are
 designated by values of a remote access-to-class-wide type,
 a check is made @Redundant[(in addition to the normal Tag_Check
-@em @lSeeSecNum{Suppressing Checks})] that all the remote
+@em see @RefSecNum{Suppressing Checks})] that all the remote
 access-to-class-wide values originated from Access
 @nt<attribute_reference>s that were evaluated by tasks of the
 same active partition.
@@ -1082,7 +1082,7 @@ Constraint_Error is raised if this check fails.
 The implementation of remote subprogram calls shall conform
 to the PCS interface as defined by the specification of the
 language-defined package System.RPC
-(@lSeeSecNum{Partition Communication Subsystem}).
+(see @RefSecNum{Partition Communication Subsystem}).
 The calling stub shall use the Do_RPC procedure unless the remote
 procedure call is asynchronous in which case Do_APC shall be used.
 On the receiving side, the corresponding receiving stub shall be
@@ -1445,7 +1445,7 @@ interface to implement remote subprogram calls.
 
 The following language-defined library package exists:
 @begin{example}
-@b(with) Ada.Streams; @i{-- @lSeeSecNum[The Package Streams]}
+@b(with) Ada.Streams; @i{-- see @RefSecNum[The Package Streams]}
 @ChildUnit{Parent=[System],Child=[RPC],Expanded=[System.RPC]}
 @key(package) System.RPC @key(is)
 

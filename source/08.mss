@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:28 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @redundant[
@@ -78,7 +78,7 @@ If a declaration is included, so is its completion, if any.
 
 If the declaration of a library unit
 @Redundant[(including Standard @em
-@lSeeSecNum{Compilation Units - Library Units})] is included,
+see @RefSecNum{Compilation Units - Library Units})] is included,
 so are the declarations of any child units
 @Redundant[(and their completions, by the previous rule)].
 The child declarations occur after the declaration.
@@ -429,7 +429,7 @@ it is not defined in terms of the visible part of a generic unit.
 @Redundant[The visible part of a package, task unit, or protected
 unit consists of declarations in the program unit's declaration
 other than those following the reserved word @key{private}, if any;
-@lSeeSecNum{Package Specifications and Declarations}
+see @RefSecNum{Package Specifications and Declarations}
 and @RefSecNum{Formal Packages} for packages,
 @RefSecNum{Task Units and Task Objects} for task units,
 and @RefSecNum{Protected Units and Protected Objects}
@@ -633,7 +633,7 @@ A declaration is immediately visible at a place if it is directly
 visible because the place is within its immediate scope.
 @Defn{use-visible}
 A declaration is use-visible if it is directly visible
-because of a @nt{use_clause} (@lSeeSecNum{Use Clauses}).
+because of a @nt{use_clause} (see @RefSecNum{Use Clauses}).
 Both conditions can apply.
 
 @Defn{hiding}
@@ -896,7 +896,7 @@ in @RefSec{Environment-Level Visibility Rules}.
 Direct visibility is irrelevant for @nt{character_literal}s.
 In terms of overload resolution
 @nt{character_literal}s are similar to other literals,
-like @key{null} @em @lSeeSecNum{Literals}.
+like @key{null} @em see @RefSecNum{Literals}.
 For @nt{character_literal}s, there is no need to worry about
 hiding, since there is no way to declare homographs.
 @end{Ramification}
@@ -977,11 +977,11 @@ Note that we need to be careful which things we make "hidden from all
 visibility" versus which things we make simply illegal for names to
 denote.  The distinction is subtle.
 The rules that disallow names denoting components within a type
-declaration (@lSeeSecNum{Discriminants}) do not make the components
+declaration (see @RefSecNum{Discriminants}) do not make the components
 invisible at those places, so that the above rule makes components with
 the same name illegal.
 The same is true for the rule that disallows names denoting formal
-parameters within a @nt{formal_part} (@lSeeSecNum{Subprogram Declarations}).
+parameters within a @nt{formal_part} (see @RefSecNum{Subprogram Declarations}).
 @end{Discussion}
 @begin{Discussion}
 The part about instances is from AI-00012.
@@ -1003,7 +1003,7 @@ In addition to the visibility rules given above,
 the meaning of the occurrence of a @nt{direct_name} or
 @nt{selector_name} at a given place in the text can depend on
 the overloading rules
-(@lSeeSecNum{The Context of Overload Resolution}).
+(see @RefSecNum{The Context of Overload Resolution}).
 
 Not all contexts where an @nt<identifier>, @nt<character_literal>,
 or @nt<operator_symbol> are allowed require visibility of a corresponding
@@ -1167,7 +1167,7 @@ any public descendant of that library unit.
 @begin{Reason}
 The exception echoes the similar exception for
 ``immediate scope (of a declaration)''
-(@lSeeSecNum{Scope of Declarations}).
+(see @RefSecNum{Scope of Declarations}).
 It makes @nt{use_clause}s work like this:
 @begin{Example}
 @key[package] P @key[is]
@@ -1277,7 +1277,7 @@ The elaboration of a @nt{use_clause} has no effect.
 
 @i{Example of a use type clause:}
 @begin{Example}
-@key[use type] Rational_Numbers.Rational; --@i{ @lSeeSecNum{Package Specifications and Declarations}}
+@key[use type] Rational_Numbers.Rational; --@i{ see @RefSecNum{Package Specifications and Declarations}}
 Two_Thirds: Rational_Numbers.Rational := 2/3;
 @end{Example}
 
@@ -1507,7 +1507,7 @@ when writing an @nt{object_renaming_declaration}.
 @i{Example of renaming an object:}
 @begin{Example}
 @key[declare]
-   L : Person @key[renames] Leftmost_Person; --@i{ @lSeeSecNum{Incomplete Type Declarations}}
+   L : Person @key[renames] Leftmost_Person; --@i{ see @RefSecNum{Incomplete Type Declarations}}
 @key[begin]
    L.Age := L.Age + 1;
 @key[end];
@@ -1547,7 +1547,7 @@ An @nt{exception_renaming_declaration} declares a new view
 @begin{Examples}
 @i{Example of renaming an exception:}
 @begin{Example}
-EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error;@i{-- @lSeeSecNum{Exceptions in Input-Output}}
+EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error;@i{-- see @RefSecNum{Exceptions in Input-Output}}
 @end{Example}
 @end{Examples}
 
@@ -1788,26 +1788,26 @@ We'll live with the oddity.
 @begin{Examples}
 @i{Examples of subprogram renaming declarations:}
 @begin{Example}
-@key[procedure] My_Write(C : @key[in] Character) @key[renames] Pool(K).Write; --@i{  @lSeeSecNum{Selected Components}}
+@key[procedure] My_Write(C : @key[in] Character) @key[renames] Pool(K).Write; --@i{  see @RefSecNum{Selected Components}}
 
 @key[function] Real_Plus(Left, Right : Real   ) @key[return] Real    @key[renames] "+";
 @key[function] Int_Plus (Left, Right : Integer) @key[return] Integer @key[renames] "+";
 
-@key[function] Rouge @key[return] Color @key[renames] Red;  --@i{  @lSeeSecNum{Enumeration Types}}
+@key[function] Rouge @key[return] Color @key[renames] Red;  --@i{  see @RefSecNum{Enumeration Types}}
 @key[function] Rot   @key[return] Color @key[renames] Red;
 @key[function] Rosso @key[return] Color @key[renames] Rouge;
 
-@key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@i{ @lSeeSecNum{Enumeration Types}}
+@key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@i{ see @RefSecNum{Enumeration Types}}
 @end{Example}
 
 @i{Example of a subprogram renaming declaration with new parameter names:}
 @begin{Example}
-@key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@i{ @lSeeSecNum{Subprogram Declarations}}
+@key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@i{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
 @i{Example of a subprogram renaming declaration with a new default expression:}
 @begin{Example}
-@key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@i{ @lSeeSecNum{Subprogram Declarations}}
+@key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@i{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 @end{Examples}
 
@@ -1842,13 +1842,13 @@ renamed view, the place where the @nt<generic_renaming_declaration> occurs
 may affect the legality of subsequent renamings and instantiations
 that denote the @nt<generic_renaming_declaration>,
 in particular if the renamed generic unit is a library unit
-(@lSeeSecNum{Compilation Units - Library Units}).
+(see @RefSecNum{Compilation Units - Library Units}).
 @end{NotesNotes}
 
 @begin{Examples}
 @i{Example of renaming a generic unit:}
 @begin{Example}
-@key[generic package] Enum_IO @key[renames] Ada.Text_IO.Enumeration_IO;  @i{-- @lSeeSecNum{Input-Output for Enumeration Types}}
+@key[generic package] Enum_IO @key[renames] Ada.Text_IO.Enumeration_IO;  @i{-- see @RefSecNum{Input-Output for Enumeration Types}}
 @end{Example}
 @end{Examples}
 
@@ -2023,7 +2023,7 @@ or be @i(interpreted).}
 One rule that falls into this category,
 but does not use the above-mentioned magic words,
 is the rule about numbers of parameter associations in a call
-(@lSeeSecNum{Subprogram Calls}).
+(see @RefSecNum{Subprogram Calls}).
 @end{Honest}
 @begin{Ramification}
 The @ResolutionName@;s are the ones that appear under the
@@ -2152,14 +2152,14 @@ type @em such a preference would cause Beaujolais effects.
     to @i(T)'Class; or
 @begin{Ramification}
       This will only be legal as part of a call on a dispatching operation;
-      @lSeeSec(Dispatching Operations of Tagged Types).
+      see @RefSec(Dispatching Operations of Tagged Types).
       Note that that rule is not a @ResolutionName.
 @end{Ramification}
 
     to a universal type that covers @i(T); or
 
     when @i(T) is an anonymous access type
-    (@lSeeSecNum{Access Types}) with designated type @i(D),
+    (see @RefSecNum{Access Types}) with designated type @i(D),
     to an access-to-variable type
     whose designated type is @i(D)'Class or is covered by @i(D).
 @begin{Ramification}
@@ -2171,7 +2171,7 @@ type @em such a preference would cause Beaujolais effects.
 
       The case where the actual is access-to-@i(D)'Class will only
       be legal as part of a call on a dispatching operation;
-      @lSeeSec(Dispatching Operations of Tagged Types).
+      see @RefSec(Dispatching Operations of Tagged Types).
       Note that that rule is not a @ResolutionName.
 @end{Ramification}
 @end(itemize)

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2000/04/19 00:07:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2000/04/20 02:30:31 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/20 02:30:31 $}
 
 @LabeledClause{The Package Standard}
 
@@ -371,7 +371,7 @@ Elaboration of the body of Standard has no effect.
 @begin{Discussion}
 Note that the language does not define where
 this body appears in the environment @nt{declarative_part}
-@em @lSeeSec{Program Structure and Compilation Issues}.
+@em see @RefSec{Program Structure and Compilation Issues}.
 @end{Discussion}
 @end{RunTime}
 

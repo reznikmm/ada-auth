@@ -1,6 +1,6 @@
 @Part(01, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:02 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/20 02:30:27 $}
 @PageOneFootings{}
 
 @PrefaceClause{} @Comment{Go to odd page.}
@@ -55,10 +55,10 @@ Languages @EmDash{} Ada
 @BlankSpace{0.5inch}
 
 @LabeledSection{General}
-@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:02 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/20 02:30:27 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -370,7 +370,7 @@ The Specialized Needs Annexes extend the core language only in ways that
 users, implementations, and standards bodies are allowed to extend the
 language;
 for example, via additional library units,
-attributes, representation items (@lSeeSecNum{Representation Items}),
+attributes, representation items (see @RefSecNum{Representation Items}),
 @nt{pragma}s,
 and constraints on semantic details that are left unspecified by the
 core language.
@@ -555,7 +555,7 @@ usable in a @nt{pragma} Suppress.
 @Defn{bounded error}
 @SeeAlso{Primary=[error], Other=(bounded error)}
 Situations that result in bounded (run-time) errors
-(@lSeeSecNum{Classification of Errors}).
+(see @RefSecNum{Classification of Errors}).
 @begin{Discussion}
 The ``bounds'' of each such error are described here @em
 that is, we characterize the set of all possible behaviors that can
@@ -567,7 +567,7 @@ result from a bounded error occurring at run time.
 @Defn{erroneous execution}
 @SeeAlso{Primary=[error], Other=(erroneous execution)}
 Situations that result in erroneous execution
-(@lSeeSecNum{Classification of Errors}).
+(see @RefSecNum{Classification of Errors}).
 @end{Erron}
 
 @begin{ImplReq}
@@ -858,34 +858,34 @@ with its external environment.
 The following are defined as @i(external interactions):
 @begin(Itemize)
   Any interaction with an external file
-  (@lSeeSecNum(External Files and File Objects));
+  (see @RefSecNum(External Files and File Objects));
 
   The execution of
   certain @nt<code_statement>s
-  (@lSeeSecNum{Machine Code Insertions});
+  (see @RefSecNum{Machine Code Insertions});
   which @nt{code_statement}s cause external interactions
   is implementation defined.
   @ImplDef{Which @nt{code_statement}s cause external interactions.}
 
   Any call on an imported subprogram
-  (@lSeeSecNum(Interface to Other Languages)),
+  (see @RefSecNum(Interface to Other Languages)),
   including any parameters passed to it;
 
   Any result returned or exception
   propagated from a main subprogram
-  (@lSeeSecNum(Program Execution))
+  (see @RefSecNum(Program Execution))
   or an exported subprogram
-  (@lSeeSecNum(Interface to Other Languages)) to an external caller;
+  (see @RefSecNum(Interface to Other Languages)) to an external caller;
   @begin{Discussion}
     By ``result returned'' we mean to include function results
     and values returned in [@key(in)] @key(out) parameters.
   @end{Discussion}
 
   @Redundant[Any read or update of an atomic or volatile object
-  (@lSeeSecNum(Shared Variable Control));]
+  (see @RefSecNum(Shared Variable Control));]
 
   The values of imported and exported objects
-  (@lSeeSecNum(Interface to Other Languages)) at the time
+  (see @RefSecNum(Interface to Other Languages)) at the time
   of any other interaction with the external environment.
     @begin{Honest}
     Also other uses of imported and exported entities,
@@ -1188,7 +1188,7 @@ information.  For example @i(subtype_)@nt<name> and
 The grammar given in the RM9X is not LR(1).
 In fact, it is ambiguous; the ambiguities are resolved
 by the overload resolution rules
-(@lSeeSecNum{The Context of Overload Resolution}).
+(see @RefSecNum{The Context of Overload Resolution}).
 
 We often use ``if'' to mean ``if and only if'' in definitions.
 For example, if we define ``photogenic'' by saying,

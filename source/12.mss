@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:29 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -243,7 +243,7 @@ failing the Elaboration_Check.
 If the generic body is a child of a generic package,
 then its elaboration establishes that each corresponding
 declaration nested in an instance of the parent
-(@lSeeSecNum{Compilation Units - Library Units})
+(see @RefSecNum{Compilation Units - Library Units})
 can from then on be instantiated without failing the Elaboration_Check.
 
 @end{RunTime}
@@ -256,7 +256,7 @@ is always the completion of a declaration.
 @begin{Examples}
 @i{Example of a generic procedure body:}
 @begin{Example}
-@key[procedure] Exchange(U, V : @key[in] @key[out] Elem) @key[is]  --@i{ @lSeeSecNum{Generic Declarations}}
+@key[procedure] Exchange(U, V : @key[in] @key[out] Elem) @key[is]  --@i{ see @RefSecNum{Generic Declarations}}
    T : Elem;  --@i{  the generic formal type}
 @key[begin]
    T := U;
@@ -267,7 +267,7 @@ is always the completion of a declaration.
 
 @i{Example of a generic function body:}
 @begin{Example}
-@key[function] Squaring(X : Item) @key[return] Item @key[is]  --@i{  @lSeeSecNum{Generic Declarations}}
+@key[function] Squaring(X : Item) @key[return] Item @key[is]  --@i{  see @RefSecNum{Generic Declarations}}
 @key[begin]
    @key[return] X*X;  --@i{  the formal operator "*"}
 @key[end] Squaring;
@@ -275,7 +275,7 @@ is always the completion of a declaration.
 
 @i{Example of a generic package body:}
 @begin{Example}
-@key[package] @key[body] On_Vectors @key[is]  --@i{  @lSeeSecNum{Generic Declarations}}
+@key[package] @key[body] On_Vectors @key[is]  --@i{  see @RefSecNum{Generic Declarations}}
 
    @key[function] Sum(A, B : Vector) @key[return] Vector @key[is]
       Result : Vector(A'Range); --@i{  the formal type Vector}
@@ -476,11 +476,11 @@ and then again
 in both the visible and private parts of the instance:
 @begin{Itemize}
 The parent type of a record extension has to be specific
-(@lSeeSecNum{Type Extensions}).
+(see @RefSecNum{Type Extensions}).
 This rule is not checked in the instance body.
 
 The parent type of a private extension has to be specific
-(@lSeeSecNum{Private Types and Private Extensions}).
+(see @RefSecNum{Private Types and Private Extensions}).
 This rule is not checked in the instance body.
 
 A type with an access discriminant has to be a descendant of
@@ -490,12 +490,12 @@ This rule is irrelevant in the instance body.
 In the declaration of a record extension,
 if the parent type is nonlimited, then each of the
 components of the @nt{record_extension_part} have to be nonlimited
-(@lSeeSecNum{Type Extensions}).
+(see @RefSecNum{Type Extensions}).
 In the generic body, this rule is checked in an assume-the-worst
 manner.
 
 A preelaborated library unit has to be preelaborable
-(@lSeeSecNum{Elaboration Control}).
+(see @RefSecNum{Elaboration Control}).
 In the generic body, this rule is checked in an assume-the-worst
 manner.
 @end{Itemize}
@@ -512,7 +512,7 @@ assume the worst (in the cases of type extensions and
 access-to-subprogram types),
 and we have run-time checks
 (in the case of access-to-object types).
-@SeeSecNum{Type Extensions},
+See @RefSecNum{Type Extensions},
 @RefSecNum{Operations of Access Types},
 and @RefSecNum{Type Conversions}.
 
@@ -706,7 +706,7 @@ Although the @nt{generic_formal_part} is included in an instance,
 the declarations in the @nt{generic_formal_part} are only visible
 outside the instance in the case of a generic formal package whose
 @nt{formal_package_actual_part} is (<>)
-@em @lSeeSecNum{Formal Packages}.
+@em see @RefSecNum{Formal Packages}.
 @end{Discussion}
 
 The interpretation
@@ -722,7 +722,7 @@ the corresponding name in the instance then denotes the corresponding copy
 of the denoted declaration.
 The overloading rules do not apply in the instance.
 @begin{Ramification}
-@SeeSec{The Context of Overload Resolution} for definitions of
+See @RefSec{The Context of Overload Resolution} for definitions of
 ``interpretation'' and ``overloading rule.''
 
 Even the @nt{generic_formal_parameter_declaration}s have corresponding
@@ -986,7 +986,7 @@ the order is still arbitrary.
 For the evaluation of a @nt{generic_association}
 the generic actual parameter is evaluated.
 Additional actions are performed in the case of a formal object of
-mode @key{in} (@lSeeSecNum{Formal Objects}).
+mode @key{in} (see @RefSecNum{Formal Objects}).
 @begin{Honest}
 Actually, the actual is evaluated only if evaluation is defined for that
 kind of construct @em we don't actually ``evaluate'' @nt{subtype_mark}s.
@@ -1095,7 +1095,7 @@ but the declaration of Bool_4 calls "="@-{5}.
 @end{NotesNotes}
 
 @begin{Examples}
-@i{Examples of generic instantiations (@lSeeSecNum{Generic Declarations}):}
+@i{Examples of generic instantiations (see @RefSecNum{Generic Declarations}):}
 @begin{Example}
 @tabclear()
 @key[procedure] Swap @key[is] @key[new] Exchange(Elem => Integer);
@@ -1113,7 +1113,7 @@ Swap(A, B);
 A := Square(A);
 
 T : Table(1 .. 5) := (10, 20, 30, 40, 50);
-N : Integer := Int_Vectors.Sigma(T);  --@i{  150 (@lSeeSec{Generic Bodies} for the body of Sigma)}
+N : Integer := Int_Vectors.Sigma(T);  --@i{  150 (see @RefSec{Generic Bodies} for the body of Sigma)}
 
 @key[use] Int_Vectors;
 M : Integer := Sigma(T);  --@i{  150}
@@ -1239,7 +1239,7 @@ For a generic formal object of mode @key{in}, the actual shall be an
 @nt{expression}.
 For a generic formal object of mode @key{in out}, the actual shall be
 a @nt{name} that denotes a variable for which renaming is allowed
-(@lSeeSecNum{Object Renaming Declarations}).
+(see @RefSecNum{Object Renaming Declarations}).
 @begin{Honest}
 The part of this that requires an @nt{expression} or @nt{name} is a
 @ResolutionName,
@@ -1290,7 +1290,7 @@ reference.
 
 Initialization and finalization happen for the constant declared by
 a @nt{formal_object_declaration} of mode @key{in} as for any constant;
-@lSeeSec{Object Declarations}
+see @RefSec{Object Declarations}
 and @RefSec{User-Defined Assignment and Finalization}.
 
 @PDefn2{Term=[subtype], Sec=(of a generic formal object)}
@@ -1313,7 +1313,7 @@ for a formal object of mode @key{in},
 a constant object is created, the value of the actual parameter
 is converted to the nominal subtype of the formal object,
 and assigned to the object@Redundant[, including any value adjustment @em
-@lSeeSecNum{User-Defined Assignment and Finalization}].
+see @RefSecNum{User-Defined Assignment and Finalization}].
 @PDefn2{Term=[implicit subtype conversion],Sec=(generic formal object of mode @key[in])}
 @begin{Ramification}
 This includes evaluating the actual
@@ -1443,7 +1443,7 @@ The form of a @nt{formal_type_definition} @i{determines a
 class} to which the formal type belongs.
 For a @nt{formal_private_type_definition} the reserved words
 @key{tagged} and @key{limited} indicate the class
-(@lSeeSecNum{Formal Private and Derived Types}).
+(see @RefSecNum{Formal Private and Derived Types}).
 For a @nt{formal_derived_type_definition} the class is
 the derivation class rooted at the ancestor type.
 For other formal types,
@@ -1531,7 +1531,7 @@ declares a type.
 
 A @nt{discriminant_part} is allowed only for certain kinds of types,
 and therefore only for certain kinds of generic formal types.
-@SeeSecNum{Discriminants}.
+See @RefSecNum{Discriminants}.
 @begin{Ramification}
 The term ``formal floating point type'' refers to a type defined by a
 @nt{formal_floating_point_definition}.
@@ -1740,14 +1740,14 @@ array type, the formal type inherits components from the ancestor
 type (including
 discriminants if a new @nt<discriminant_part> is not specified),
 as for a derived type defined by a @nt<derived_type_definition>
-(@lSeeSecNum(Derived Types and Classes)).
+(see @RefSecNum(Derived Types and Classes)).
 
 For a formal derived type, the predefined
 operators and inherited user-defined subprograms are determined
 by the ancestor type, and are implicitly declared
 at the earliest place, if any, within the immediate scope of the
 formal type, where the corresponding primitive subprogram
-of the ancestor is visible (@lSeeSecNum{Private Operations}).
+of the ancestor is visible (see @RefSecNum{Private Operations}).
 In an instance, the copy of such an implicit declaration declares a view
 of the corresponding primitive subprogram of the ancestor,
 even if this primitive has been overridden for the actual type.
@@ -1797,7 +1797,7 @@ which is now considered obsolete.
 @begin{NotesNotes}
 In accordance with the general rule that the actual type shall
 belong to the class determined for the formal
-(@lSeeSec(Formal Types)):
+(see @RefSec(Formal Types)):
 @begin(itemize)
   If the formal type is nonlimited, then so shall be the actual;
 
@@ -1806,7 +1806,7 @@ belong to the class determined for the formal
 @end(itemize)
 
 @Redundant[The actual type can be abstract only if the formal type is abstract
-(@lSeeSecNum{Abstract Types and Subprograms}).]
+(see @RefSecNum{Abstract Types and Subprograms}).]
 @begin{Reason}
 This is necessary to avoid contract model problems,
 since one or more of its primitive subprograms are abstract;
@@ -1884,7 +1884,7 @@ might disallow anything).
 @begin{NotesNotes}
 The actual type shall be in the class of types implied
 by the syntactic category of the formal type definition
-(@lSeeSec(Formal Types)).  For example, the actual for a
+(see @RefSec(Formal Types)).  For example, the actual for a
 @nt<formal_modular_type_definition> shall be a modular type.
 @end{NotesNotes}
 
@@ -1905,7 +1905,7 @@ declaration of a
 generic formal (constrained) array subtype is a @nt{subtype_mark}.
 @begin{Reason}
 The reason is the same as for forbidding @nt{constraint}s in
-@nt{subtype_indication}s (@lSeeSecNum{Generic Declarations}).
+@nt{subtype_indication}s (see @RefSecNum{Generic Declarations}).
 @end{Reason}
 
 For a formal array subtype, the actual subtype shall satisfy the
@@ -1918,7 +1918,7 @@ either both constrained or both unconstrained.
 For each index position, the index types shall be the same,
 and the index subtypes (if unconstrained),
 or the index ranges (if constrained), shall statically match
-(@lSeeSecNum{Statically Matching Constraints and Subtypes}).
+(see @RefSecNum{Statically Matching Constraints and Subtypes}).
 @PDefn2{Term=[statically matching],Sec=(required)}
 
 The component subtypes of the formal and
@@ -1995,7 +1995,7 @@ to the formal,
 the actual shall be an access-to-constant type.
 If the @nt{general_access_modifier} @key{all} applies to the
 formal, then the actual shall be a general access-to-variable type
-(@lSeeSecNum{Access Types}).
+(see @RefSecNum{Access Types}).
 @begin{Ramification}
 If no @nt{_modifier} applies to the formal, then
 the actual type may be either a pool-specific or a general
@@ -2153,7 +2153,7 @@ defining name of the formal.
 @begin{NotesNotes}
 The matching rules for formal subprograms state requirements that are
 similar to those applying to @nt{subprogram_renaming_declaration}s
-(@lSeeSecNum{Subprogram Renaming Declarations}).
+(see @RefSecNum{Subprogram Renaming Declarations}).
 In particular, the name of a parameter of the formal subprogram need not
 be the same as that of the corresponding parameter of the actual
 subprogram;
@@ -2188,7 +2188,7 @@ actual parameter.
 @end{TheProof}
 
 The actual subprogram cannot be abstract
-(@lSeeSecNum{Abstract Types and Subprograms}).
+(see @RefSecNum{Abstract Types and Subprograms}).
 @end{NotesNotes}
 
 @begin{Examples}

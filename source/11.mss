@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:29 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @redundant[
@@ -258,7 +258,7 @@ exception, and thus can't enforce the coverage rules.
 @Defn{choice parameter}
 A @nt{choice_parameter_specification} declares a
 @i{choice parameter}, which is a constant object of type
-Exception_Occurrence (@lSeeSecNum{The Package Exceptions}).
+Exception_Occurrence (see @RefSecNum{The Package Exceptions}).
 During the handling of an exception occurrence,
 the choice parameter, if any, of the handler
 represents the exception occurrence that is being handled.
@@ -277,11 +277,11 @@ that are propagated by the @nt{sequence_of_statement}s.]
 @i{Example of an exception handler:}
 @begin{Example}
 @key[begin]
-   Open(File, In_File, "input.txt");   @i[-- @lSeeSecNum{File Management}]
+   Open(File, In_File, "input.txt");   @i[-- see @RefSecNum{File Management}]
 @key[exception]
    @key[when] E : Name_Error =>
       Put("Cannot open input file : ");
-      Put_Line(Exception_Message(E));  @i[-- @lSeeSecNum{The Package Exceptions}]
+      Put_Line(Exception_Message(E));  @i[-- see @RefSecNum{The Package Exceptions}]
       @key[raise];
 @key[end];
 @end{Example}
@@ -358,7 +358,7 @@ This allows the original cause of the exception to be determined.
 @begin{Examples}
 @i{Examples of raise statements:}
 @begin{Example}
-@key[raise] Ada.IO_Exceptions.Name_Error;   @i[-- @lSeeSecNum{Exceptions In Input-Output}]
+@key[raise] Ada.IO_Exceptions.Name_Error;   @i[-- see @RefSecNum{Exceptions In Input-Output}]
 
 @key[raise];                                @i[-- re-raise the current exception]
 @end{Example}
@@ -679,7 +679,7 @@ but simply save the Null_Occurrence.
 
 @begin{ImplReq}
 The implementation of the Write attribute
-(@lSeeSecNum{Stream-Oriented Attributes})
+(see @RefSecNum{Stream-Oriented Attributes})
 of Exception_Occurrence shall support writing
 a representation of an exception occurrence
 to a stream; the implementation of the Read attribute
@@ -704,7 +704,7 @@ a different partition).
   to external files for post-mortem analysis, as well as
   propagating exceptions across remote subprogram calls
   in a distributed system
-  (@lSeeSecNum{Remote Subprogram Calls}).
+  (see @RefSecNum{Remote Subprogram Calls}).
 @end{Reason}
 @end{ImplReq}
 
@@ -1321,7 +1321,7 @@ interest to the reader of this clause:
 @begin{Itemize}
 Behavior in the presence of abnormal objects
 and objects with invalid representations
-(@lSeeSecNum{Data Validity}).
+(see @RefSecNum{Data Validity}).
 
 Various actions that are defined to occur in an arbitrary order.
 

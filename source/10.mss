@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:29 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @redundant[
@@ -540,7 +540,7 @@ the other compilation units needed to determine its legality.
 The visibility rules are based on the semantic dependences.
 
 The @i{elaboration dependences}
-(@lSeeSecNum{Program Execution})
+(see @RefSecNum{Program Execution})
 determine the order of elaboration of @nt{library_item}s.
 @end{Itemize}
 ]
@@ -655,7 +655,7 @@ operator symbol).
 
 
 When the parent unit is ``used'' the simple names of the
-with'd child units are directly visible (@lSeeSec{Use Clauses}).
+with'd child units are directly visible (see @RefSec{Use Clauses}).
 
 When a parent body with's its own child, the defining name of
 the child is directly visible, and the parent body
@@ -714,7 +714,7 @@ declarative region of package Standard.
 @begin{Examples}
 @i{Examples of library units:}
 @begin{Example}
-@key[package] Rational_Numbers.IO @key[is]  @i[-- public child of Rational_Numbers, @lSeeSecNum{Package Specifications and Declarations}]
+@key[package] Rational_Numbers.IO @key[is]  @i[-- public child of Rational_Numbers, see @RefSecNum{Package Specifications and Declarations}]
    @key[procedure] Put(R : @key[in]  Rational);
    @key[procedure] Get(R : @key[out] Rational);
 @key[end] Rational_Numbers.IO;
@@ -728,11 +728,11 @@ declarative region of package Standard.
 @key[end] Rational_Numbers;
 
 @key[with] Rational_Numbers.IO; @key[use] Rational_Numbers;
-@key[with] Ada.Text_io;               @i[-- @lSeeSecNum{Text Input-Output}]
+@key[with] Ada.Text_io;               @i[-- see @RefSecNum{Text Input-Output}]
 @key[procedure] Main @key[is]               @i[-- a root library procedure]
    R : Rational;
 @key[begin]
-   R := 5/3;                    @i[-- construct a rational number, @lSeeSecNum{Package Specifications and Declarations}]
+   R := 5/3;                    @i[-- construct a rational number, see @RefSecNum{Package Specifications and Declarations}]
    Ada.Text_IO.Put("The answer is: ");
    IO.Put(R);
    Ada.Text_IO.New_Line;
@@ -1282,7 +1282,7 @@ the outermost declarative region of the
 context of any @nt{compilation}.
 At run time, an environment forms the @nt<declarative_part> of
 the body of the environment task of a partition
-(@lSeeSec{Program Execution}).
+(see @RefSec{Program Execution}).
 @begin{Ramification}
 At compile time, there is no particular construct that the
 declarative region is considered to be nested within
@@ -1302,7 +1302,7 @@ The visibility rules apply as if the environment were the outermost
 declarative region,
 except that @nt{with_clause}s are needed to make
 declarations of library units visible
-(@lSeeSecNum{Context Clauses - With Clauses}).
+(see @RefSecNum{Context Clauses - With Clauses}).
 
 The mechanisms for creating an environment
 and for adding and replacing compilation units within an environment
@@ -1639,7 +1639,7 @@ an expanded name in a @nt{with_clause} may consist of a
 @nt<prefix> that denotes a generic package and a @nt<selector_name> that
 denotes a child of that generic package.
 @Redundant[(The child is necessarily a generic unit;
-@lSeeSecNum{Compilation Units - Library Units}.)]
+see @RefSecNum{Compilation Units - Library Units}.)]
 
 @begin{Ramification}
 In ``@key{package} P.Q.R @key{is} ... @key{end} P.Q.R;'',
@@ -1925,7 +1925,7 @@ that this task is anonymous.
 @end{Ramification}
 @begin{Discussion}
   The model is different for a ``passive partition''
-  (@lSeeSecNum{Partitions}).
+  (see @RefSecNum{Partitions}).
   Either there is no environment task, or its @nt<sequence_of_statements>
   is an infinite loop rather than a call on a main subprogram.
 @end{Discussion}
@@ -1978,7 +1978,7 @@ the order in which they appear in the environment
 Normally, if two partitions contain the same compilation unit,
 they each contain a separate @i{copy} of that
 compilation unit.
-@SeeSec{Distributed Systems} for cases where two partitions share
+See @RefSec{Distributed Systems} for cases where two partitions share
 the same copy of something.
 
 There is no requirement that the main subprogram be elaborated last.
@@ -1987,7 +1987,7 @@ subprogram cannot be elaborated last.
 @end{Discussion}
 @begin{Ramification}
 This @nt{declarative_part} has the properties required of all
-environments (@lSeeSecNum{The Compilation Process}).
+environments (see @RefSecNum{The Compilation Process}).
 However, the environment @nt{declarative_part} of a partition will
 typically contain fewer compilation units than the environment
 @nt{declarative_part} used at compile time @em only the ``needed''
@@ -2047,7 +2047,7 @@ or:
   @begin{Discussion}
     For a passive partition, either there is no environment task,
     or its @nt<sequence_of_statements> is an infinite loop.
-    @SeeSecNum{Partitions}.
+    See @RefSecNum{Partitions}.
   @end{Discussion}
 @end{Itemize}
 
@@ -2277,7 +2277,7 @@ This prevents strange implementation-dependences involving private
 children of Standard having visibility upon Standard's private part.
 It doesn't matter where the body of Standard appears in the environment,
 since it doesn't do anything.
-@SeeSec{Predefined Language Environment}.
+See @RefSec{Predefined Language Environment}.
 
 Note that elaboration dependence is carefully defined in such a way that
 if (say) the body of something doesn't exist yet,
@@ -2454,7 +2454,7 @@ All compilation units of a preelaborated library unit shall
 be preelaborable.
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
-(@lSeeSecNum{Generic Instantiation}),
+(see @RefSecNum{Generic Instantiation}),
 this rule applies also in the private part of an
 instance of a generic unit.
 In addition, all compilation units of a preelaborated library unit

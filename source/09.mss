@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:28 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 
@@ -24,7 +24,7 @@ described in this section, and include:
 @IndexSeeAlso{Term=[intertask communication],See=(task)}
 @begin(Honest)
   The execution of an Ada program consists of the execution
-  of one or more partitions (@lSeeSecNum(Program Execution)),
+  of one or more partitions (see @RefSecNum(Program Execution)),
   each of which in turn consists of the execution of an environment task
   and zero or more subtasks.
 @end(Honest)
@@ -96,7 +96,7 @@ While ready, a task competes for the available
   @i(task dispatching policy) in effect, which is generally
   implementation defined, but may be controlled by pragmas
   and operations defined in the Real-Time Annex
-  (@lSeeSecNum(Priority Scheduling) and @RefSecNum(Dynamic Priorities)).
+  (see @RefSecNum(Priority Scheduling) and @RefSecNum(Dynamic Priorities)).
 @end(Discussion)
 @end{RunTime}
 
@@ -241,7 +241,7 @@ failing the Elaboration_Check.
 @redundant[
 The execution of a @nt<task_body> is invoked by the activation of a
 task of the corresponding type
-(@lSeeSecNum(Task Execution - Task Activation)).
+(see @RefSecNum(Task Execution - Task Activation)).
 ]
 
 The content of a task object of a given task type includes:
@@ -263,7 +263,7 @@ The content of a task object of a given task type includes:
 
 Within the declaration or body of a task unit, the name of
 the task unit denotes the current instance of the unit
-(@lSeeSecNum(The Context of Overload Resolution)),
+(see @RefSecNum(The Context of Overload Resolution)),
 rather than the first subtype of the corresponding task type (and
 thus the name cannot be used as a @nt<subtype_mark>).
 @begin(Discussion)
@@ -274,12 +274,12 @@ declared between the @nt<task_type_declaration> and the @nt<task_body>.
 @end(Discussion)
 
 The notation of a @nt<selected_component> can be used to denote a discriminant
-of a task (@lSeeSecNum(Selected Components)).
+of a task (see @RefSecNum(Selected Components)).
 Within a task unit, the name of a discriminant of the task type
 denotes the corresponding discriminant of the current instance
 of the unit.
 
-A task type is a limited type (@lSeeSecNum(Limited Types)),
+A task type is a limited type (see @RefSecNum(Limited Types)),
 and hence has neither
 an assignment operation nor predefined equality operators.
 If an application needs to store and exchange task identities, it
@@ -291,7 +291,7 @@ Alternatively, if the implementation supports the
 Systems Programming Annex,
 the Identity attribute
 can be used for task identification
-(@lSeeSecNum(Task Identification and Attributes)).
+(see @RefSecNum(Task Identification and Attributes)).
 @end{NotesNotes}
 
 @begin{Examples}
@@ -406,7 +406,7 @@ For tasks created by the elaboration of @nt<object_declaration>s
 of a given declarative region, the activations are initiated
 within the context of the @nt<handled_sequence_of_statements>
 (and its associated @nt<exception_handler>s if any @em
-@lSeeSecNum{Exception Handlers}), just prior to executing the
+see @RefSecNum{Exception Handlers}), just prior to executing the
 statements of the @nt<_sequence>.
 @Redundant[For a package without an explicit body or an explicit
 @nt<handled_sequence_of_statements>,
@@ -466,7 +466,7 @@ tasks need not await the end of the activation of the other tasks.
 
 A task can become completed during its activation either because of an
 exception or because it is aborted
-(@lSeeSecNum(Abort of a Task - Abort of a Sequence of Statements)).
+(see @RefSecNum(Abort of a Task - Abort of a Sequence of Statements)).
 
 @end{NotesNotes}
 
@@ -503,9 +503,9 @@ This clause has been rewritten in an attempt to improve presentation.
 @Defn2{Term=[task], Sec=(dependence)}
 @Defn2{Term=[task], Sec=(completion)}
 @Defn2{Term=[task], Sec=(termination)}
-Each task (other than an environment task  @em @lSeeSecNum(Program Execution))
+Each task (other than an environment task  @em see @RefSecNum(Program Execution))
 @i(depends) on one or more masters
-(@lSeeSecNum(Completion and Finalization)), as follows:
+(see @RefSecNum(Completion and Finalization)), as follows:
 @begin(itemize)
 If the task is created by the evaluation of an @nt<allocator>
 for a given access type,
@@ -530,7 +530,7 @@ dependences among compilation units defined in
 A task is said to be @i(completed) when the execution of its corresponding
 @nt<task_body> is completed.  A task is said to be @i(terminated) when
 any finalization of the @nt<task_body> has been performed
-(@lSeeSecNum(Completion and Finalization)).
+(see @RefSecNum(Completion and Finalization)).
 @Redundant[The first step of finalizing a master
 (including a @nt<task_body>) is to
 wait for the termination of any tasks dependent on the master.]
@@ -542,7 +542,7 @@ and the master is left.]
 Completion of a task (and the corresponding @nt<task_body>) can occur when
 the task is blocked at a @nt<select_statement> with an
 an open @nt<terminate_alternative>
-(@lSeeSecNum(Selective Accept)); the open @nt<terminate_alternative>
+(see @RefSecNum(Selective Accept)); the open @nt<terminate_alternative>
 is selected if and only if the following conditions are satisfied:
 @begin{itemize}
   The task depends on some completed master;
@@ -605,7 +605,7 @@ the abort of the task.
 @i{Example of task dependence:}
 @begin{Example}
 @key(declare)
-   @key(type) Global @key(is) @key(access) Server;        @i[--  @lSeeSecNum(Task Units and Task Objects)]
+   @key(type) Global @key(is) @key(access) Server;        @i[--  see @RefSecNum(Task Units and Task Objects)]
    A, B : Server;
    G    : Global;
 @hinge{}
@@ -634,7 +634,7 @@ of master now given in @RefSec(Completion and Finalization).
 
 Tasks that used to depend on library packages in Ada 83, now depend on the
 (implicit) @nt<task_body> of the
-environment task (@lSeeSecNum(Program Execution)).
+environment task (see @RefSecNum(Program Execution)).
 Therefore, the environment task has to wait for
 them before performing library level finalization and terminating
 the partition.
@@ -775,7 +775,7 @@ in the given order.
 @redundant[
 @PDefn2{Term=[initialization], Sec=(of a protected object)}
 As part of the initialization of a protected object,
-any per-object constraints (@lSeeSecNum{Record Types}) are elaborated.
+any per-object constraints (see @RefSecNum{Record Types}) are elaborated.
 ]
 @begin{Discussion}
   We do not mention pragmas since each pragma has its
@@ -807,7 +807,7 @@ The content of an object of a given protected type includes:
 has to be acquired to
 read or update any components of the protected object;
 it can be acquired (as part of a protected action @em
-@lSeeSecNum(Protected Subprograms and Protected Actions))
+see @RefSecNum(Protected Subprograms and Protected Actions))
 either for concurrent read-only access, or for exclusive
 read-write access.]
 
@@ -864,7 +864,7 @@ object for some useful purpose, so we didn't want to disallow this case.
 
 Within the declaration or body of a protected unit, the name of
 the protected unit denotes the current instance of the unit
-(@lSeeSecNum(The Context of Overload Resolution)),
+(see @RefSecNum(The Context of Overload Resolution)),
 rather than the first subtype of the corresponding protected type (and
 thus the name cannot be used as a @nt<subtype_mark>).
 @begin(Discussion)
@@ -876,12 +876,12 @@ thus the name cannot be used as a @nt<subtype_mark>).
 @end(Discussion)
 
 A @nt<selected_component> can be used to denote a discriminant
-of a protected object (@lSeeSecNum(Selected Components)).
+of a protected object (see @RefSecNum(Selected Components)).
 Within a protected unit, the name of a discriminant of the protected type
 denotes the corresponding discriminant of the current instance
 of the unit.
 
-A protected type is a limited type (@lSeeSecNum(Limited Types)),
+A protected type is a limited type (see @RefSecNum(Limited Types)),
 and hence has neither
 an assignment operation nor predefined equality operators.
 
@@ -976,7 +976,7 @@ Calls on protected subprograms allow coordinated access
 to shared data objects.
 Entry calls allow for blocking the caller until
 a given condition is satisfied (namely, that the corresponding entry is open
-@em @lSeeSecNum(Entry Calls)),
+@em see @RefSecNum(Entry Calls)),
 and then communicating data or control information directly
 with another task or
 indirectly via a shared protected object.
@@ -1027,7 +1027,7 @@ Other_Object : Some_Other_Protected_Type;
     Op1; --@i{ An internal call.}
     Pt.Op1; --@i{ Another internal call.}
     PO.Op1; --@i{ An external call.  It the current instance is PO, then}
-            --@i{ this is a bounded error (@lSeeSecNum{Protected Subprograms and Protected Actions}).}
+            --@i{ this is a bounded error (see @RefSecNum{Protected Subprograms and Protected Actions}).}
     Other_Object.Some_Op; --@i{ An external call.}
   @key[end] Op2;
 @key[end] Pt;
@@ -1054,14 +1054,14 @@ Other_Object : Some_Other_Protected_Type;
 @Defn{internal requeue}
 @Defn{external requeue}
 A corresponding definition of target object applies
-to a @nt<requeue_statement> (@lSeeSecNum(Requeue Statements)),
+to a @nt<requeue_statement> (see @RefSecNum(Requeue Statements)),
 with a corresponding distinction between an @i(internal requeue)
 and an @i(external requeue).
 @end{StaticSem}
 
 @begin{RunTime}
 Within the body of a protected operation, the current instance
-(@lSeeSecNum(The Context of Overload Resolution))
+(see @RefSecNum(The Context of Overload Resolution))
 of the immediately enclosing protected unit is determined by the target object
 specified (implicitly or explicitly) in the call (or requeue) on the
 protected operation.
@@ -1099,7 +1099,7 @@ concurrent read-only access to the data.
 @begin{Ramification}
 A subprogram declared immediately within a @nt{protected_body} is not a
 protected subprogram; it is an intrinsic subprogram.
-@SeeSec{Conformance Rules}.
+See @RefSec{Conformance Rules}.
 @end{Ramification}
 @end{Intro}
 
@@ -1129,8 +1129,8 @@ For the execution of a call on a protected subprogram,
 the evaluation of the @nt<name> or @nt<prefix>
 and of the parameter associations,
 and any assigning back of @key[in out] or @key[out] parameters,
-proceeds as for a normal subprogram call (@lSeeSecNum{Subprogram Calls}).
-If the call is an internal call (@lSeeSecNum(Intertask Communication)),
+proceeds as for a normal subprogram call (see @RefSecNum{Subprogram Calls}).
+If the call is an internal call (see @RefSecNum(Intertask Communication)),
 the body of the subprogram
 is executed as for a normal subprogram call.
 If the call is an external call, then
@@ -1139,7 +1139,7 @@ the body of the subprogram is executed as part of a new
 the protected action completes after the body of the
 subprogram is executed.
 @Redundant[A protected action can also be started by an entry call
-(@lSeeSecNum{Entry Calls}).]
+(see @RefSecNum{Entry Calls}).]
 
 @Defn{protected action}
 A new protected action is not started on a protected object
@@ -1167,7 +1167,7 @@ a call on a protected function, but prior
 to completing the associated protected action,
 the entry queues (if any)
 of the protected object are
-serviced (@lSeeSecNum(Entry Calls)).]
+serviced (see @RefSecNum(Entry Calls)).]
 @end{RunTime}
 
 @begin{Bounded}
@@ -1240,7 +1240,7 @@ blocked, and it might be consuming processing resources while it
 awaits its turn.  There is no language-defined ordering or queuing
 presumed for tasks competing to start a protected action @em
 on a multiprocessor such tasks might use busy-waiting; for
-monoprocessor considerations, @lSeeSec{Priority Ceiling Locking}.
+monoprocessor considerations, see @RefSec{Priority Ceiling Locking}.
 @begin{Discussion}
 The intended implementation on a multi-processor is in terms of
 ``spin locks'' @em the waiting task will spin.
@@ -1273,7 +1273,7 @@ target object is not considered a potentially blocking operation.
 
 @begin{Examples}
 @i{Examples of protected subprogram calls
-(@lSeeSecNum(Protected Units and Protected Objects)):}
+(see @RefSecNum(Protected Units and Protected Objects)):}
 @begin{Example}
 Shared_Array.Set_Component(N, E);
 E := Shared_Array.Component(M);
@@ -1361,7 +1361,7 @@ if a @nt<selected_component> has a @nt<prefix> that denotes
 the corresponding @nt<entry_declaration>, then the
 entity denoted by the @nt<prefix> is the @nt<accept_statement>, and
 the @nt<selected_component> is interpreted as an expanded name
-(@lSeeSecNum(Selected Components))@Redundant[; the @nt<selector_name>
+(see @RefSecNum(Selected Components))@Redundant[; the @nt<selector_name>
 of the @nt<selected_component> has to be the @nt<identifier> for
 some formal parameter of the @nt<accept_statement>].
 @begin{TheProof}
@@ -1374,7 +1374,7 @@ some formal parameter of the @nt<accept_statement>].
 @begin{Legality}
 
 An @nt<entry_declaration> in a task declaration shall not contain
-a specification for an access parameter (@lSeeSecNum(Access Types)).
+a specification for an access parameter (see @RefSecNum(Access Types)).
 @begin(Reason)
   Access parameters for task entries would require a complex implementation.
   For example:
@@ -1496,7 +1496,7 @@ if and only if the corresponding @nt{entry_declaration} has
 a @nt<discrete_subtype_definition>.
 In this case, the @nt<discrete_subtype_definition>s of the
 @nt<entry_declaration> and the @nt<entry_index_specification>
-shall fully conform to one another (@lSeeSecNum(Conformance Rules)).
+shall fully conform to one another (see @RefSecNum(Conformance Rules)).
 @Defn2{Term=[full conformance],Sec=(required)}
 
 A name that denotes a formal parameter of an @nt<entry_body> is not
@@ -1508,7 +1508,7 @@ allowed within the @nt<entry_barrier> of the @nt<entry_body>.
 The parameter modes defined for parameters in the @nt<parameter_profile>
 of an @nt{entry_declaration}
 are the same as for a @nt<subprogram_declaration> and have
-the same meaning (@lSeeSecNum(Formal Parameter Modes)).
+the same meaning (see @RefSecNum(Formal Parameter Modes)).
 @begin{Discussion}
 Note that access parameters are not allowed for task entries (see above).
 @end{Discussion}
@@ -1517,7 +1517,7 @@ Note that access parameters are not allowed for task entries (see above).
 @Defn{entry family}
 @Defn{entry index subtype}
 An @nt<entry_declaration> with a @nt<discrete_subtype_definition>
-(@lSeeSecNum(Array Types)) declares a @i(family) of distinct
+(see @RefSecNum(Array Types)) declares a @i(family) of distinct
 entries having the same profile, with one such entry for each
 value of the @i(entry index subtype) defined
 by the @nt<discrete_subtype_definition>.
@@ -1554,7 +1554,7 @@ is per-object.
 For the elaboration of an @nt<entry_declaration> for an
 entry family, if the
 @nt{discrete_subtype_definition} contains no per-object expressions
-(@lSeeSecNum(Record Types)), then the @nt<discrete_subtype_definition>
+(see @RefSecNum(Record Types)), then the @nt<discrete_subtype_definition>
 is elaborated.  Otherwise, the elaboration of the
 @nt<entry_declaration> consists of the evaluation of any
 expression of the @nt<discrete_subtype_definition>
@@ -1582,7 +1582,7 @@ this index value identifies which entry of the family is to be accepted.
 @Defn2{Term=selection, Sec=(of an entry caller)}
 Further execution of the @nt<accept_statement> is then blocked
 until a caller of the corresponding entry is selected
-(@lSeeSecNum(Entry Calls)), whereupon
+(see @RefSecNum(Entry Calls)), whereupon
 the @nt<handled_sequence_of_statements>, if any, of the @nt<accept_statement>
 is executed, with the formal parameters associated with the
 corresponding actual parameters of the selected entry call.
@@ -1617,7 +1617,7 @@ their execution independently.]
 @Redundant[An @nt<entry_body> is executed when the @nt<condition> of the
 @nt<entry_barrier> evaluates to True and a caller of the corresponding
 single entry, or entry of the corresponding entry family,
-has been selected (@lSeeSecNum(Entry Calls)).]
+has been selected (see @RefSecNum(Entry Calls)).]
 @PDefn2{Term=[execution], Sec=(entry_body)}
 For the execution of the @nt<entry_body>,
 the @nt<declarative_part> of the @nt<entry_body> is elaborated,
@@ -1626,7 +1626,7 @@ of the body is executed, as for the execution
 of a @nt<subprogram_body>.  The value of the named entry index, if any,
 is determined by the value of the entry index specified in the
 @i(entry_)@nt<name> of the selected entry call (or intermediate
-@nt<requeue_statement> @em @lSeeSecNum(Requeue Statements)).
+@nt<requeue_statement> @em see @RefSecNum(Requeue Statements)).
 @begin(Honest)
 If the entry had been renamed as a subprogram,
 and the call was a @nt<procedure_call_statement> using
@@ -1647,8 +1647,8 @@ A consequence of the rule regarding the allowed placements of
 @nt{accept_statement}s is that a task can execute @nt{accept_statement}s
 only for its own entries.
 
-A @nt<return_statement> (@lSeeSecNum(Return Statements))
-or a @nt<requeue_statement> (@lSeeSecNum(Requeue Statements))
+A @nt<return_statement> (see @RefSecNum(Return Statements))
+or a @nt<requeue_statement> (see @RefSecNum(Requeue Statements))
 may be used to complete the execution of
 an @nt<accept_statement> or an @nt<entry_body>.
 @begin{Ramification}
@@ -1730,7 +1730,7 @@ represents an unconditional call on an entry of a target
 task or a protected object.
 @Redundant[Entry calls can also appear
 as part of @nt<select_statement>s
-(@lSeeSecNum(Select Statements)).]
+(see @RefSecNum(Select Statements)).]
 @end{Intro}
 
 @begin{Syntax}
@@ -1740,7 +1740,7 @@ as part of @nt<select_statement>s
 @begin{Resolution}
 The @i(entry_)@nt<name> given in an @nt<entry_call_statement> shall resolve
 to denote an entry.  The rules for parameter
-associations are the same as for subprogram calls (@lSeeSecNum(Subprogram Calls)
+associations are the same as for subprogram calls (see @RefSecNum(Subprogram Calls)
 and @RefSecNum(Parameter Associations)).
 @end{Resolution}
 
@@ -1748,7 +1748,7 @@ and @RefSecNum(Parameter Associations)).
 @Redundant[The @i(entry_)@nt<name> of an @nt<entry_call_statement> specifies
 (explicitly or implicitly) the target object of the call,
 the entry or entry family, and the entry index, if any
-(@lSeeSecNum(Intertask Communication)).]
+(see @RefSecNum(Intertask Communication)).]
 @end{StaticSem}
 
 @begin{RunTime}
@@ -1764,9 +1764,9 @@ object is checked to see whether it is @i(open) or @i(closed):
 @Defn2{Term=[closed entry], Sec=(of a task)}
 An entry of a task is open if the task
 is blocked on an @nt<accept_statement>
-that corresponds to the entry (@lSeeSecNum(Entries and Accept Statements)),
+that corresponds to the entry (see @RefSecNum(Entries and Accept Statements)),
 or on a @nt<selective_accept>
-(@lSeeSecNum(Selective Accept)) with an open
+(see @RefSecNum(Selective Accept)) with an open
 @nt<accept_alternative> that corresponds to the entry; otherwise
 it is closed.
 
@@ -1802,11 +1802,11 @@ to all current callers of all entries of the protected object.
 For the execution of an @nt{entry_call_statement},
 evaluation of the @nt<name>
 and of the parameter associations
-is as for a subprogram call (@lSeeSecNum{Subprogram Calls}).
+is as for a subprogram call (see @RefSecNum{Subprogram Calls}).
 @Defn2{Term=issue, Sec=(an entry call)}
 The entry call is then @i(issued):
 For a call on an entry of a protected object, a new protected
-action is started on the object (@lSeeSecNum(Protected Subprograms and Protected Actions)).
+action is started on the object (see @RefSecNum(Protected Subprograms and Protected Actions)).
 The named entry is checked to see if it is open;
 @Defn2{Term=[select an entry call], Sec=(immediately)}
 if open, the entry call is said to be @i(selected immediately),
@@ -1814,19 +1814,19 @@ and the execution of the call proceeds as follows:
 @begin(Itemize)
   For a call on an open entry of a task, the accepting task becomes ready and
   continues the execution of the corresponding @nt<accept_statement>
-  (@lSeeSecNum(Entries and Accept Statements)).
+  (see @RefSecNum(Entries and Accept Statements)).
 
   For a call on an open entry of a protected object, the corresponding
-  @nt<entry_body> is executed (@lSeeSecNum(Entries and Accept Statements))
+  @nt<entry_body> is executed (see @RefSecNum(Entries and Accept Statements))
   as part of the protected action.
 @end(Itemize)
 
 If the @nt<accept_statement> or @nt<entry_body> completes other than
-by a requeue (@lSeeSecNum(Requeue Statements)), return is made to the
+by a requeue (see @RefSecNum(Requeue Statements)), return is made to the
 caller (after servicing the entry queues @em see below);
 any necessary assigning back
 of formal to actual parameters occurs,
-as for a subprogram call (@lSeeSecNum(Parameter Associations));
+as for a subprogram call (see @RefSecNum(Parameter Associations));
 such assignments take
 place outside of any protected action.
 @begin(Ramification)
@@ -1879,7 +1879,7 @@ queue in order of arrival.  If calls from two or more queues are
 simultaneously eligible for selection, the default entry queuing policy
 does not specify which queue is serviced first.
 Other entry queuing policies can be specified by @nt{pragma}s
-(@lSeeSecNum(Entry Queuing Policies)).
+(see @RefSecNum(Entry Queuing Policies)).
 
 For a protected object, the above servicing of entry queues continues
 until there are no open entries with queued calls, at which point
@@ -1887,7 +1887,7 @@ the protected action completes.
 @begin(Discussion)
   While servicing the entry queues of a protected object, no new calls
   can be added to any entry queue of the object,
-  except due to an internal requeue (@lSeeSecNum(Requeue Statements)).
+  except due to an internal requeue (see @RefSecNum(Requeue Statements)).
   This is because the first step of a call on a protected entry
   is to start a new protected action, which implies acquiring
   (for exclusive read-write access)
@@ -1900,7 +1900,7 @@ the protected action completes.
 For an entry call that is added to a queue,
 and that is not the @nt<triggering_statement> of an
 @nt<asynchronous_select>
-(@lSeeSecNum{Asynchronous Transfer of Control}),
+(see @RefSecNum{Asynchronous Transfer of Control}),
 the calling task is blocked until the call is cancelled,
 or the call is selected and a corresponding @nt<accept_statement>
 or @nt<entry_body> completes without requeuing.
@@ -1916,15 +1916,15 @@ unless a requeue causes the call to be queued.
 
 @Defn2{Term=[cancellation], Sec=(of an entry call)}
 An attempt can be made to cancel an entry call upon an abort
-(@lSeeSecNum(Abort of a Task - Abort of a Sequence of Statements))
+(see @RefSecNum(Abort of a Task - Abort of a Sequence of Statements))
 and as part of certain forms of @nt<select_statement>
-(@lSeeSecNum(Timed Entry Calls),
+(see @RefSecNum(Timed Entry Calls),
 @RefSecNum(Conditional Entry Calls), and
 @RefSecNum(Asynchronous Transfer of Control)).
 The cancellation does not take place until
 a point (if any) when the call is on some entry queue,
 and not protected from cancellation as part of a requeue
-(@lSeeSecNum(Requeue Statements)); at such a point, the
+(see @RefSecNum(Requeue Statements)); at such a point, the
 call is removed from the entry queue and the call completes due
 to the cancellation.
 The cancellation of a call on an entry of a protected object
@@ -1945,7 +1945,7 @@ raises the exception Tasking_Error at the point of the call;
 similarly, this exception is raised at the point of the call if the
 called task completes its execution or becomes abnormal before accepting
 the call or completing the rendezvous
-(@lSeeSecNum(Abort of a Task - Abort of a Sequence of Statements)).
+(see @RefSecNum(Abort of a Task - Abort of a Sequence of Statements)).
 This applies equally to a simple entry call and to an entry call as part
 of a @nt<select_statement>.
 
@@ -1965,7 +1965,7 @@ without waiting for the entire protected action to complete.
   the protected action is essentially invisible, since the thread is
   not abortable in any case, and the "current_task" function is not
   guaranteed to work during a protected action
-  (@lSeeSecNum(Task Identification and Attributes)).
+  (see @RefSecNum(Task Identification and Attributes)).
 @end(Reason)
 
 When the entry of a protected object is checked to see whether it
@@ -2070,11 +2070,11 @@ selected in the interim.
 @begin{NotesNotes}
 
 If an exception is raised during the execution of an @nt{entry_body}, it is
-propagated to the corresponding caller (@lSeeSecNum(Exception Handling)).
+propagated to the corresponding caller (see @RefSecNum(Exception Handling)).
 
 For a call on a protected entry, the entry is checked to see if
 it is open prior to queuing the call, and again thereafter
-if its Count attribute (@lSeeSecNum{Task and Entry Attributes})
+if its Count attribute (see @RefSecNum{Task and Entry Attributes})
 is referenced in some entry barrier.
 @begin(Ramification)
   Given this, extra care is required if
@@ -2088,8 +2088,8 @@ is referenced in some entry barrier.
 
 In addition to simple entry calls,
 the language permits timed, conditional, and asynchronous entry calls
-(@lSeeSecNum(Timed Entry Calls), @RefSecNum(Conditional Entry Calls),
-and @lSeeSecNum(Asynchronous Transfer of Control)).
+(see @RefSecNum(Timed Entry Calls), @RefSecNum(Conditional Entry Calls),
+and see @RefSecNum(Asynchronous Transfer of Control)).
 @begin{Ramification}
 A task can call its own entries, but
 the task will deadlock if the call is a simple entry call.
@@ -2107,11 +2107,11 @@ have been updated by an action performed from outside of a protected action.
 @begin{Examples}
 @i{Examples of entry calls:}
 @begin{Example}
-Agent.Shut_Down;                      @i[--  @lSeeSecNum(Task Units and Task Objects)]
-Parser.Next_Lexeme(E);                @i[--  @lSeeSecNum(Task Units and Task Objects)]
-Pool(5).Read(Next_Char);              @i[--  @lSeeSecNum(Task Units and Task Objects)]
-Controller.Request(Low)(Some_Item);   @i[--  @lSeeSecNum(Task Units and Task Objects)]
-Flags(3).Seize;                       @i[--  @lSeeSecNum(Protected Units and Protected Objects)]
+Agent.Shut_Down;                      @i[--  see @RefSecNum(Task Units and Task Objects)]
+Parser.Next_Lexeme(E);                @i[--  see @RefSecNum(Task Units and Task Objects)]
+Pool(5).Read(Next_Char);              @i[--  see @RefSecNum(Task Units and Task Objects)]
+Controller.Request(Low)(Some_Item);   @i[--  see @RefSecNum(Task Units and Task Objects)]
+Flags(3).Seize;                       @i[--  see @RefSecNum(Protected Units and Protected Objects)]
 @end{Example}
 @end{Examples}
 
@@ -2143,7 +2143,7 @@ the expiration of a delay.
 The @i(entry_)@nt{name} of a @nt{requeue_statement} shall resolve
 to denote an entry (the @i(target entry))
 that either has no parameters, or that has
-a profile that is type conformant (@lSeeSecNum(Conformance Rules)) with
+a profile that is type conformant (see @RefSecNum(Conformance Rules)) with
 the profile of the innermost enclosing @nt<entry_body> or
 @nt<accept_statement>.
 @Defn2{Term=[type conformance],Sec=(required)}
@@ -2226,14 +2226,14 @@ within an entry family, if any].
 The @nt{entry_body} or @nt{accept_statement}
 enclosing the @nt{requeue_statement} is then
 completed@Redundant[, finalized, and left
-(@lSeeSecNum(Completion and Finalization))].
+(see @RefSecNum(Completion and Finalization))].
 
 @PDefn2{Term=[execution], Sec=(requeue task entry)}
 For the execution of a requeue on an entry of a target task,
 after leaving the enclosing callable construct, the named entry
 is checked to see if it is open and the requeued call is either
 selected immediately or queued, as for a normal entry call
-(@lSeeSecNum(Entry Calls)).
+(see @RefSecNum(Entry Calls)).
 
 @PDefn2{Term=[execution], Sec=(requeue protected entry)}
 For the execution of a requeue on an entry of a target protected
@@ -2241,9 +2241,9 @@ object, after leaving the enclosing callable construct:
 @begin(Itemize)
   if the requeue is an internal requeue
   (that is, the requeue is back on an entry of the same protected object @em
-  @lSeeSecNum(Intertask Communication)),
+  see @RefSecNum(Intertask Communication)),
   the call is added to the queue of the named entry and
-  the ongoing protected action continues (@lSeeSecNum(Protected Subprograms and Protected Actions));
+  the ongoing protected action continues (see @RefSecNum(Protected Subprograms and Protected Actions));
   @begin(Ramification)
     Note that for an internal requeue, the call
     is queued without checking whether the target entry is open.
@@ -2255,9 +2255,9 @@ object, after leaving the enclosing callable construct:
 
   if the requeue is an external requeue (that is, the target protected
   object is not implicitly the same as the current object @em
-  @lSeeSecNum(Intertask Communication)),
+  see @RefSecNum(Intertask Communication)),
   a protected action is started on the target object and proceeds
-  as for a normal entry call (@lSeeSecNum(Entry Calls)).
+  as for a normal entry call (see @RefSecNum(Entry Calls)).
 @end(Itemize)
 
 If the new entry named in the @nt<requeue_statement>
@@ -2274,7 +2274,7 @@ If the @nt<requeue_statement> includes the reserved words @key(with abort)
 (it is a @i(requeue-with-abort)), then:
 @begin(Itemize)
   if the original entry call has been aborted
-  (@lSeeSecNum(Abort of a Task - Abort of a Sequence of Statements)), then
+  (see @RefSecNum(Abort of a Task - Abort of a Sequence of Statements)), then
   the requeue acts as an abort completion point for the call,
   and the call is cancelled and no requeue is
   performed;
@@ -2317,10 +2317,10 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 @i{Examples of requeue statements:}
 @begin{Example}
 @key[requeue] Request(Medium) @key[with abort];
-                    @i[-- requeue on a member of an entry family of the current task, @lSeeSecNum{Task Units and Task Objects}]
+                    @i[-- requeue on a member of an entry family of the current task, see @RefSecNum{Task Units and Task Objects}]
 
 @key[requeue] Flags(I).Seize;
-                    @i[-- requeue on an entry of an array component, @lSeeSecNum{Protected Units and Protected Objects}]
+                    @i[-- requeue on an entry of an array component, see @RefSecNum{Protected Units and Protected Objects}]
 @end{Example}
 @end{Examples}
 
@@ -2382,7 +2382,7 @@ The type of the @i(delay_)@nt<expression>
 in a @nt{delay_until_statement} shall be a time type @em either the
 type Time defined in the language-defined package Calendar (see below),
 or some other implementation-defined time type
-(@lSeeSecNum(Monotonic Time)).
+(see @RefSecNum(Monotonic Time)).
 @ImplDef{Any implementation-defined time types.}
 @end{Legality}
 
@@ -2493,13 +2493,13 @@ has already passed, the task is not blocked.
 
   Even though the task is not blocked,
   it might be put back on the end of its ready queue.
-  @SeeSec(Priority Scheduling).
+  See @RefSec(Priority Scheduling).
 @end(Discussion)
 
 @Defn2{Term=[cancellation], Sec=(of a @nt<delay_statement>)}
 If an attempt is made to @i(cancel) the @nt<delay_statement>
 @Redundant[(as part of an @nt<asynchronous_select> or abort @em
-@lSeeSecNum{Asynchronous Transfer of Control} and
+see @RefSecNum{Asynchronous Transfer of Control} and
 @RefSecNum{Abort of a Task - Abort of a Sequence of Statements})],
 the @nt<_statement> is cancelled if
 the expiration time has not yet passed,
@@ -2519,7 +2519,7 @@ The function Clock of package Calendar
 returns a value representing the current time for this
 time base.
 @Redundant[The implementation-defined value of the
-named number System.Tick (@lSeeSecNum(The Package System))
+named number System.Tick (see @RefSecNum(The Package System))
 is an approximation of the length of the real-time
 interval during which the value of Calendar.Clock remains constant.]
 
@@ -2581,7 +2581,7 @@ may allow representation of other dates as well (both earlier and later).]
 @begin{ImplPerm}
 
 An implementation may define additional time
-types (@lSeeSecNum{Monotonic Time}).
+types (see @RefSecNum{Monotonic Time}).
 
 An implementation may raise Time_Error if the
 value of a @i{delay_}@nt<expression> in a @nt<delay_until_statement>
@@ -2626,7 +2626,7 @@ A @nt{delay_relative_statement} with a negative value of the
 A @nt{delay_statement} may be executed by the environment task;
 consequently @nt{delay_statement}s may be executed as part of
 the elaboration of a @nt{library_item} or the execution of the main subprogram.
-Such statements delay the environment task (@lSeeSecNum(Program Execution)).
+Such statements delay the environment task (see @RefSecNum(Program Execution)).
 
 @PDefn2{Term=[potentially blocking operation],Sec=(delay_statement)}
 @PDefn2{Term=[blocking, potentially],Sec=(delay_statement)}
@@ -2848,7 +2848,7 @@ Open @nt{accept_alternative}s are first considered.  Selection of one such
 alternative takes place immediately if the corresponding
 entry already has queued calls.  If several alternatives
 can thus be selected, one of them is selected according to the
-entry queuing policy in effect (@lSeeSecNum(Entry Calls) and
+entry queuing policy in effect (see @RefSecNum(Entry Calls) and
 @RefSecNum(Entry Queuing Policies)).
 When such an
 alternative is selected, the selected call is
@@ -2871,7 +2871,7 @@ or other @nt<delay_alternative> can be selected prior to the
 expiration time.  If several
 @nt{delay_alternative}s have this same expiration time,
 one of them is selected according to the queuing policy in
-effect (@lSeeSecNum{Entry Queuing Policies}); the default queuing
+effect (see @RefSecNum{Entry Queuing Policies}); the default queuing
 policy chooses arbitrarily among the @nt<delay_alternative>s
 whose expiration time has passed.
 
@@ -2970,9 +2970,9 @@ is not selected before the expiration time is reached.
 @PDefn2{Term=[execution], Sec=(timed_entry_call)}
 For the execution of a @nt{timed_entry_call}, the @i(entry_)@nt<name>
 and the actual parameters are evaluated, as for a simple entry call
-(@lSeeSecNum(Entry Calls)).
+(see @RefSecNum(Entry Calls)).
 The expiration time
-(@lSeeSecNum(Delay Statements))
+(see @RefSecNum(Delay Statements, Duration, and Time))
 for the call is determined by evaluating
 the @i(delay_)@nt<expression> of the
 @nt<delay_alternative>;
@@ -3116,7 +3116,7 @@ upon completion of an entry call or the expiration of a delay.
 For the execution of an @nt{asynchronous_select}
 whose @nt<triggering_statement> is an @nt<entry_call_statement>,
 the @i(entry_)@nt<name> and actual parameters are evaluated as
-for a simple entry call (@lSeeSecNum(Entry Calls)), and the
+for a simple entry call (see @RefSecNum(Entry Calls)), and the
 entry call is issued.
 If the entry call is queued (or requeued-with-abort),
 then the @nt<abortable_part> is executed.
@@ -3137,15 +3137,15 @@ is executed.
 If the @nt<abortable_part> completes and is left prior to completion of the
 @nt<triggering_statement>,
 an attempt to cancel the @nt<triggering_statement> is made.
-If the attempt to cancel succeeds (@lSeeSecNum(Entry Calls) and
-@RefSecNum(Delay Statements)), the
+If the attempt to cancel succeeds (see @RefSecNum(Entry Calls) and
+@RefSecNum(Delay Statements, Duration, and Time)), the
 @nt<asynchronous_select> is complete.
 
 If the @nt<triggering_statement> completes other than
 due to cancellation,
 the @nt<abortable_part>
 is aborted (if started but not yet completed @em
-@lSeeSecNum(Abort of a Task - Abort of a Sequence of Statements)).
+see @RefSecNum(Abort of a Task - Abort of a Sequence of Statements)).
 If the @nt<triggering_statement> completes normally, the optional
 @nt<sequence_of_statements> of the @nt<triggering_alternative> is
 executed after the @nt<abortable_part> is left.
@@ -3334,7 +3334,7 @@ is not specified by the language.
 
 If the execution of an entry call is aborted,
 an immediate attempt is made to cancel the entry call
-(@lSeeSecNum(Entry Calls)).
+(see @RefSecNum(Entry Calls)).
 If the execution of a construct
 is aborted at a time when the execution is blocked,
 other than for an entry call, at a point that is outside
@@ -3657,7 +3657,7 @@ Two actions are sequential if one of the following is true:
 
 A @nt{pragma} Atomic or Atomic_Components may also be used to
 ensure that certain reads and updates are sequential @em
-@lSeeSecNum(Shared Variable Control).
+see @RefSecNum(Shared Variable Control).
 @begin(Ramification)
   If two actions are ``sequential'' it is known that their executions
   don't overlap in time, but it is not necessarily specified which occurs first.

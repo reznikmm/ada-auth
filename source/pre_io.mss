@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/20 02:30:30 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -524,7 +524,7 @@ in the Item parameter.
   but that attribute will likely have to be subtype-specific
   rather than type-related, and it need not be user-specifiable.
   Such an attribute will presumably be needed to implement the
-  generic package Storage_IO (@lSeeSecNum{The Generic Package Storage_IO}).
+  generic package Storage_IO (see @RefSecNum{The Generic Package Storage_IO}).
 @end{Discussion}
 
 The exception Mode_Error is propagated if the mode is not
@@ -533,10 +533,10 @@ The exception End_Error is propagated if no more elements can be
 read from the given file.
 The exception Data_Error can be propagated if the element read cannot
 be interpreted as a value of the subtype Element_Type
-(@lSeeSec{Exceptions in Input-Output}).
+(see @RefSec{Exceptions in Input-Output}).
 @begin{Discussion}
   Data_Error need not be propagated if the check is too complex.
-  @SeeSec{Exceptions in Input-Output}.
+  See @RefSec{Exceptions in Input-Output}.
 @end{Discussion}
 @begin{CodeExample}
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type);
@@ -671,7 +671,7 @@ operations is attempted for a file that is not open.
 can be propagated if the element read cannot be
           interpreted as a value of the subtype Element_Type
 
-(@lSeeSecNum{Exceptions in Input-Output}).
+(see @RefSecNum{Exceptions in Input-Output}).
 @begin{CodeExample}
 @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type;
                                      To   : @key[in] Positive_Count);
@@ -793,7 +793,7 @@ of indirection, Buffer_Size will typically equal:
 @end{Reason}
 @ImplDef{The value of Buffer_Size in Storage_IO.}
 The Read and Write procedures of Storage_IO correspond to the Read and Write
-procedures of Direct_IO (@lSeeSecNum{The Generic Package Direct_IO}),
+procedures of Direct_IO (see @RefSecNum{The Generic Package Direct_IO}),
 but with the content of the Item parameter being read from
 or written into the specified Buffer, rather than an external file.
 @end{StaticSem}
@@ -1427,7 +1427,7 @@ or when application-dependent error-related text is to be output.
 @key[function] Standard_Input @key[return] File_Access;
 @end{CodeExample}
 
-          Returns the standard input file (@lSeeSecNum{Text Input-Output}),
+          Returns the standard input file (see @RefSecNum{Text Input-Output}),
 or an access value designating the standard input file, respectively.
 
 @begin{CodeExample}
@@ -1435,7 +1435,7 @@ or an access value designating the standard input file, respectively.
 @key[function] Standard_Output @key[return] File_Access;
 @end{CodeExample}
 
-          Returns the standard output file (@lSeeSecNum{Text Input-Output})
+          Returns the standard output file (see @RefSecNum{Text Input-Output})
 or an access value designating the standard output file, respectively.
 
 @begin{CodeExample}
@@ -1443,7 +1443,7 @@ or an access value designating the standard output file, respectively.
 @key[function] Standard_Error @key[return] File_Access;
 @end{CodeExample}
 
-          Returns the standard error file (@lSeeSecNum{Text Input-Output}),
+          Returns the standard error file (see @RefSecNum{Text Input-Output}),
 or an access value designating the standard output file, respectively.
 
 The Form strings implicitly associated with the opening of
@@ -1730,7 +1730,7 @@ file is the current output file.
                column number already equals this value.  Each transfer
                of a character or terminator maintains the current
                column, line, and page numbers in the same way as a Get
-               procedure (@lSeeSecNum{Get and Put Procedures}).
+               procedure (see @RefSecNum{Get and Put Procedures}).
                (Short lines will be skipped
                until a line is reached that has a character at the
                specified column position.)
@@ -2093,7 +2093,7 @@ the caller will wait until a character is available.
 In a literal string parameter of Put, the enclosing string bracket
 characters are not output.  Each doubled string bracket character in the
 enclosed string is output as a single string bracket character, as a
-consequence of the rule for string literals (@lSeeSecNum{String Literals}).
+consequence of the rule for string literals (see @RefSecNum{String Literals}).
 
 A string read by Get or written by Put can extend over several lines.
 An implementation is allowed to assume that certain external files do
@@ -2491,7 +2491,7 @@ same set of formats.
 @key[package] Real_IO @key[is] @key[new] Float_IO(Real); @key[use] Real_IO;
 --@i{ default format used at instantiation, Default_Exp = 3}
 
-X : Real := -123.4567;  --@i{  digits 8      (@lSeeSecNum{Floating Point Types})}
+X : Real := -123.4567;  --@i{  digits 8      (see @RefSecNum{Floating Point Types})}
 
 @tabclear()
 Put(X);  @i[-- default format]                          @i[@^"@en@|1.2345670E+02"]
@@ -2690,7 +2690,7 @@ by specifying a relative index for an element.
 file can be converted to a Stream_Access value, calling stream-oriented
 attribute subprograms of different element types with the same
 Stream_Access value provides heterogeneous input-output.]
-@SeeSecNum{Streams} for a general discussion of streams.
+See @RefSecNum{Streams} for a general discussion of streams.
 @end{Intro}
 
 @begin{StaticSem}
@@ -2794,7 +2794,7 @@ The library package Streams.Stream_IO has the following declaration:
 
 The subprograms Create, Open, Close, Delete, Reset, Mode, Name, Form,
 Is_Open, and End_of_File have the same effect as the corresponding
-subprograms in Sequential_IO (@lSeeSecNum(File Management)).
+subprograms in Sequential_IO (see @RefSecNum(File Management)).
 
 The Stream function returns a Stream_Access result from a File_Type
 object, thus allowing the stream-oriented attributes Read, Write,

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:03 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:29 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.4 $}
+@Comment{$Revision: 1.5 $}
 
 @begin{Intro}
 @redundant[
@@ -69,7 +69,7 @@ that occurs immediately within the same
 @nt{declarative_region} as the representation item.
 If the @nt<local_name> has an @nt<attribute_designator>, then it shall
 resolve to denote an implementation-defined
-component (@lSeeSecNum{Record Representation Clauses})
+component (see @RefSecNum{Record Representation Clauses})
 or a class-wide
 type implicitly declared immediately within the same
 @nt<declarative_region> as the representation item.
@@ -138,7 +138,7 @@ This is subtle, but it seems like the least confusing set of rules.
 @end{Ramification}
 @begin{Discussion}
   A separate @LegalityName applies for @nt<component_clause>s.
-  @SeeSec{Record Representation Clauses}.
+  See @RefSec{Record Representation Clauses}.
 @end{Discussion}
 
 @Defn{representation of an object}
@@ -260,7 +260,7 @@ Each representation pragma specifies a separate aspect.
 We don't need to say that an @nt{at_clause} or a
 @nt{mod_clause} specify separate aspects,
 because these are equivalent to @nt{attribute_definition_clause}s.
-@SeeSec{At Clauses}, and @RefSec{Mod Clauses}.
+See @RefSec{At Clauses}, and @RefSec{Mod Clauses}.
 @end{Reason}
 @begin{Ramification}
 The following representation items are type-related:
@@ -335,9 +335,9 @@ pragma Asynchronous (applies to procedures)
 A representation item that directly specifies an aspect of a subtype or
 type shall appear after the type is completely
 defined
-(@lSeeSecNum{Completions of Declarations}),
+(see @RefSecNum{Completions of Declarations}),
 and before the subtype or type is frozen
-(@lSeeSecNum{Freezing Rules}).
+(see @RefSecNum{Freezing Rules}).
 If a representation item is given that directly specifies an aspect of an
 entity, then it is illegal to give another representation item that
 directly specifies the same aspect of the entity.
@@ -553,7 +553,7 @@ A @i{recommended level of support} is specified for representation items
 and related features in each subclause.
 These recommendations are changed to requirements
 for implementations that support the Systems Programming Annex
-(@lSeeSec{Required Representation Support}).
+(see @RefSec{Required Representation Support}).
 @ImplDef{The interpretation of each aspect of representation.}
 @ImplDef{Any restrictions placed upon representation items.}
 @begin{Ramification}
@@ -637,7 +637,7 @@ above rule.
 A Component_Size clause or @nt{record_representation_clause} will
 typically by illegal if it disobeys the above rule.
 Atomic components have similar restrictions
-(@lSeeSec{Shared Variable Control}).
+(see @RefSec{Shared Variable Control}).
 @end{Ramification}
 @end{Itemize}
 @end{ImplAdvice}
@@ -675,7 +675,7 @@ This is convenient because the rules are almost identical for all
 three.
 
 All of the forcing occurrence stuff has been moved into its own
-subclause (@lSeeSecNum{Freezing Rules}),
+subclause (see @RefSecNum{Freezing Rules}),
 and rewritten to use the term ``freezing''.
 
 RM83-13.1(10) requires implementation-defined restrictions on
@@ -732,7 +732,7 @@ For a type extension, the parent part is packed as for the parent
 type, and a @nt{pragma} Pack causes packing only of the extension part.
 @begin{Ramification}
 The only high level semantic effect of a @nt{pragma} Pack
-is independent addressability (@lSeeSec{Shared Variables}).
+is independent addressability (see @RefSec{Shared Variables}).
 @end{Ramification}
 @end{StaticSem}
 
@@ -957,7 +957,7 @@ bits.
 A word is what ACID refers to as a ``natural hardware boundary''.
 
 Storage elements may, but need not be, independently addressable
-(@lSeeSec{Shared Variables}).
+(see @RefSec{Shared Variables}).
 Words are expected to be independently addressable.
 @end{Discussion}
 
@@ -1008,7 +1008,7 @@ via an @nt{attribute_definition_clause}.
   a given type depends semantically on the declaration of the package
   in which the type is declared, even if not mentioned
   in an applicable @nt<with_clause>
-  @em @lSeeSecNum{Compilation Units - Library Units}.
+  @em see @RefSecNum{Compilation Units - Library Units}.
   In this case, it means that if a compilation unit contains
   X'Address, then it depends on the declaration of System.
   Otherwise, the fact that the value of Address is of
@@ -1101,7 +1101,7 @@ assumptions of no aliases.
 
 @begin{NotesNotes}
 The specification of a link name in a @nt{pragma} Export
-(@lSeeSecNum{Interfacing Pragmas})
+(see @RefSecNum{Interfacing Pragmas})
 for a subprogram or object is an alternative to explicit
 specification of its link-time address, allowing a link-time directive
 to place the subprogram or object within memory.
@@ -1520,7 +1520,7 @@ In an implementation, Boolean'Size shall be 1.
 @begin{ImplAdvice}
 If the Size of a subtype is specified,
 and allows for efficient independent addressability
-(@lSeeSecNum{Shared Variables}) on the target architecture,
+(see @RefSecNum{Shared Variables}) on the target architecture,
 then the Size of the following objects of the subtype should equal the
 Size of the subtype:
 @begin{Itemize}
@@ -1804,7 +1804,7 @@ the value specified in the @nt{pragma}.
   storage for different tasks of the same subtype.
 
   Storage_Size is also defined for access subtypes
-  @em @lSeeSecNum{Storage Management}.
+  @em see @RefSecNum{Storage Management}.
   @end{Ramification}
 @end{Description}
 @end{StaticSem}
@@ -1941,7 +1941,7 @@ the following attribute is defined:
   the expression of such a clause shall be static.
   The default external
   tag representation is implementation defined.
-  @SeeSecNum{Dispatching Operations of Tagged Types} and
+  See @RefSecNum{Dispatching Operations of Tagged Types} and
   @RefSecNum{Stream-Oriented Attributes}.]}
   @ImplDef{The default external representation for a type tag.}
   @end{Description}
@@ -2036,7 +2036,7 @@ Device_Register : Medium;
 
 @key[function] My_Read(Stream : @key[access] Ada.Streams.Root_Stream_Type'Class)
   @key[return] T;
-@key(for) T'Read @key(use) My_Read; --@i{ @lSeeSecNum{Stream-Oriented Attributes}}
+@key(for) T'Read @key(use) My_Read; --@i{ see @RefSecNum{Stream-Oriented Attributes}}
 @end{Example}
 @end{Examples}
 
@@ -2282,7 +2282,7 @@ Therefore, negative offsets should be disallowed in
 @begin{Reason}
 @nt{First_bit} and @nt{last_bit} need to be @nt{simple_expression}
 instead of @nt{expression} for the same reason as in @nt{range}
-(@lSeeSec{Scalar Types}).
+(see @RefSec{Scalar Types}).
 @end{Reason}
 @end{Syntax}
 
@@ -2380,7 +2380,7 @@ A @nt{record_representation_clause}
 (without the @nt{mod_clause})
 specifies the layout.
 The storage place
-attributes (@lSeeSecNum{Storage Place Attributes})
+attributes (see @RefSecNum{Storage Place Attributes})
 are taken from the
 values of the @nt{position}, @nt{first_bit},
 and @nt{last_bit} expressions
@@ -2813,7 +2813,7 @@ The Bit_Order attribute is new to Ada 9X.
 @redundant[
 @Defn{change of representation}
 @Defn2{Term=[representation], Sec=(change of)}
-A @nt{type_conversion} (@lSeeSecNum{Type Conversions})
+A @nt{type_conversion} (see @RefSecNum{Type Conversions})
 can be used to convert between two different
 representations of the same array or record.
 To convert an array from one representation to another,
@@ -2948,7 +2948,7 @@ and its language-defined children.}
    Default_Bit_Order : @key[constant] Bit_Order;
 
 
-   --@i{ Priority-related declarations (@lSeeSecNum{Task Priorities}):}
+   --@i{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
    @key{subtype} Any_Priority @key{is} Integer @key{range} @i{implementation-defined};
    @key{subtype} Priority @key{is} Any_Priority @key{range} Any_Priority'First .. @i{implementation-defined};
    @key{subtype} Interrupt_Priority @key{is} Any_Priority @key{range} Priority'Last+1 .. Any_Priority'Last;
@@ -3070,7 +3070,7 @@ it is important to be able to assign addresses,
 and to declare uninitialized address variables.
 @end{Reason}
 
-@SeeSecNum{Bit Ordering} for an explanation of Bit_Order and
+See @RefSecNum{Bit Ordering} for an explanation of Bit_Order and
 Default_Bit_Order.
 @end{StaticSem}
 
@@ -3224,9 +3224,9 @@ Note that there are some language-defined subprograms that fill part of
 a Storage_Array, and return the index of the last element filled as a
 Storage_Offset.
 The Read procedures in
-Streams (@lSeeSecNum{The Package Streams}),
-Streams.Stream_IO (@lSeeSecNum{The Package Streams.Stream_IO}),
-and System.RPC (@lSeeSecNum{Partition Communication Subsystem})
+Streams (see @RefSecNum{The Package Streams}),
+Streams.Stream_IO (see @RefSecNum{The Package Streams.Stream_IO}),
+and System.RPC (see @RefSecNum{Partition Communication Subsystem})
 behave in this manner.
 These will raise Constraint_Error if the resulting Last value is not in
 Storage_Offset.
@@ -3466,7 +3466,7 @@ machine code function, for example,
 ``Scalar results are returned in register 0.''
 @end{Discussion}
 
-Intrinsic subprograms (@lSeeSec{Conformance Rules})
+Intrinsic subprograms (see @RefSec{Conformance Rules})
 can also be used to achieve machine code insertions.
 Interface to assembly language can be achieved
 using the features in @RefSec{Interface to Other Languages}.
@@ -3568,7 +3568,7 @@ an object of the target subtype.
 
 Otherwise, the effect is implementation defined;
 in particular, the result can be abnormal
-(@lSeeSecNum{Data Validity}).
+(see @RefSecNum{Data Validity}).
 @ImplDef{The effect of unchecked conversion.}
 @begin{Ramification}
 Whenever unchecked conversions are used, it is the programmer's
@@ -3677,9 +3677,9 @@ in the following ways:
 @begin{Itemize}
 @Defn{disruption of an assignment}
 An assignment to the object is disrupted due to an abort
-(@lSeeSecNum{Abort of a Task - Abort of a Sequence of Statements})
+(see @RefSecNum{Abort of a Task - Abort of a Sequence of Statements})
 or due to the failure of a language-defined check
-(@lSeeSecNum{Exceptions and Optimization}).
+(see @RefSecNum{Exceptions and Optimization}).
 
 The object is not scalar, and is passed to an @key[in out]
 or @key[out] parameter
@@ -3931,7 +3931,7 @@ aborting an assignment,
 
 disrupting an assignment due to the failure
 of a language-defined check
-(@lSeeSecNum{Exceptions and Optimization}), and
+(see @RefSecNum{Exceptions and Optimization}), and
 
 use of an object whose Address has been specified.
 @end{Itemize}
@@ -3961,7 +3961,7 @@ Note that one can safely check the validity of a composite object with
 an abnormal value only if the constraints on the object and all of its
 subcomponents are static.
 Otherwise, evaluation of the @nt{prefix} of the @nt{attribute_reference}
-causes erroneous execution (@lSeeSecNum{Names}).
+causes erroneous execution (see @RefSecNum{Names}).
 @end{Reason}
 @end{NotesNotes}
 
@@ -3985,7 +3985,7 @@ denotes an aliased view of an object}:
 @begin{Description}
 @Attribute{Prefix=<X>, AttrName=<Unchecked_Access>,
   Text=<All rules and semantics that apply to
-X'Access (@lSeeSecNum{Operations of Access Types})
+X'Access (see @RefSecNum{Operations of Access Types})
 apply also to X'Unchecked_Access,
 except that,
 for the purposes of accessibility rules and checks,
@@ -4001,7 +4001,7 @@ object is to be inserted into a global linked data structure, when the
 programmer knows that it will always be removed from the data structure prior
 to exiting the object's scope.  The Access attribute would
 be illegal in this case
-(@lSeeSec{Operations of Access Types}).
+(see @RefSec{Operations of Access Types}).
 @begin{Ramification}
 @PDefn2{Term=[expected type],
   Sec=(Unchecked_Access attribute)}
@@ -4167,7 +4167,7 @@ The type of this attribute is @i{universal_integer}.>}
 @EndPrefixType{}
 @begin{Ramification}
 Storage_Size is also defined for task subtypes and objects
-@em @lSeeSecNum{Representation Attributes}.
+@em see @RefSecNum{Representation Attributes}.
 
 Storage_Size is not a measure of how much un-allocated space is
 left in the pool.
@@ -4418,12 +4418,12 @@ mutual exclusion.
  If they are used inside protected objects, they cannot block.
 
  If they are used by interrupt handlers
-(@lSeeSec{Interrupt Support}),
+(see @RefSec{Interrupt Support}),
 the mutual exclusion mechanism has to work properly in that context.
  @end{itemize}
 
 The primitives Allocate, Deallocate, and Storage_Size are declared as
-abstract (@lSeeSecNum{Abstract Types and Subprograms}),
+abstract (see @RefSecNum{Abstract Types and Subprograms}),
 and therefore they have to be overridden when
 a new (non-abstract) storage pool type is declared.
 @begin{Ramification}
@@ -4769,7 +4769,7 @@ any self-relative pointers will have to be updated by the garbage
 collector.
 If an implementation provides garbage collection
 for a storage pool containing controlled objects
-(@lSeeSecNum{User-Defined Assignment and Finalization}),
+(see @RefSecNum{User-Defined Assignment and Finalization}),
 then it should provide a means for deferring garbage collection of
 those controlled objects.
 @end{ImplNote}
@@ -4877,7 +4877,7 @@ a pragma Controlled has no effect.
 Ada 83 used the term ``automatic storage reclamation'' to refer to what
 is known traditionally as ``garbage collection''.
 Because of the existence of storage pools
-(@lSeeSecNum{Storage Management}),
+(see @RefSecNum{Storage Management}),
 we need to distinguish this from the storage reclamation that might
 happen upon leaving a master.
 Therefore, we now use the term ``garbage collection''
@@ -5053,7 +5053,7 @@ The Write operation appends Item to the specified stream.
 @end{StaticSem}
 
 @begin{NotesNotes}
-@SeeSec{The Package Streams.Stream_IO} for an example of extending
+See @RefSec{The Package Streams.Stream_IO} for an example of extending
 type Root_Stream_Type.
 @end{NotesNotes}
 
@@ -5235,7 +5235,7 @@ specification:
 
 First writes the external tag of @i{Item} to @i{Stream}
 (by calling String'Output(Tags.External_Tag(@i{Item}'Tag) @em
-@lSeeSecNum{Tagged Types and Type Extensions})
+see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Output attribute of
 the specific type identified by the tag.>}
 
@@ -5250,7 +5250,7 @@ the specific type identified by the tag.>}
 First reads the external tag from @i{Stream} and determines
 the corresponding internal tag
 (by calling Tags.Internal_Tag(String'Input(@i{Stream})) @em
-@lSeeSecNum{Tagged Types and Type Extensions})
+see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Input attribute of
 the specific type identified by the internal tag;
 returns that result.>}
@@ -5273,7 +5273,7 @@ a value of its subtype, Constraint_Error is raised.  If the value
 is not a value of its subtype and this error is not detected,
 the component has an abnormal value, and erroneous execution
 can result
-(@lSeeSecNum{Data Validity}).
+(see @RefSecNum{Data Validity}).
 
 
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
@@ -5821,7 +5821,7 @@ the corresponding specific type is frozen as well.
 
 @Redundant[The explicit declaration of a primitive subprogram of a
 tagged type shall occur before the type is frozen
-(@lSeeSecNum{Dispatching Operations of Tagged Types}).]
+(see @RefSecNum{Dispatching Operations of Tagged Types}).]
 @begin{Reason}
 This rule is needed
 because (1) we don't want people dispatching to things that haven't
@@ -5846,16 +5846,16 @@ old P (which is arguably confusing).
 @end{Reason}
 
 @Redundant[A type shall be completely defined before it is frozen
-(@lSeeSecNum{Completions of Declarations} and
+(see @RefSecNum{Completions of Declarations} and
 @RefSecNum{Private Types and Private Extensions}).]
 
 @Redundant[The completion of a deferred constant declaration shall occur
 before the constant is frozen
-(@lSeeSecNum{Deferred Constants}).]
+(see @RefSecNum{Deferred Constants}).]
 
 @Redundant[A representation item that directly specifies an aspect of an
 entity shall appear before the entity is frozen
-(@lSeeSecNum{Representation Items}).]
+(see @RefSecNum{Representation Items}).]
 
 
 @begin{Discussion}

@@ -1,11 +1,11 @@
 @Part(predef, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
 
-@SetPageHeadings{$Date: 2000/04/19 00:07:04 $}
+@SetPageHeadings{$Date: 2000/04/20 02:30:30 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.4 $}
+@comment{$Revision: 1.5 $}
 @comment{$RLB: Eliminated includes. $}
 
 @Define{TwoColRW, use=Display}
@@ -30,7 +30,7 @@ other library units are children of these:
 Standard @em @RefSecNum{The Package Standard}
 @\Ada @em @RefSecNum{The Package Ada}
 @\@\Asynchronous_Task_Control @em @RefSecNum{Asynchronous Task Control}
-@\@\Calendar @em @RefSecNum{Delay Statements}
+@\@\Calendar @em @RefSecNum{Delay Statements, Duration, and Time}
 @\@\Characters @em @RefSecNum{The Package Characters}
 @\@\@\Handling @em @RefSecNum{The Package Characters.Handling}
 @\@\@\Latin_1 @em @RefSecNum{The Package Characters.Latin_1}
@@ -162,7 +162,7 @@ the following declarations: ...''.
 Many of Ada 83's language-defined library units are now children of Ada
 or System.
 For upward compatibility, these are renamed as root library units
-(@lSeeSecNum{Renamings of Ada 83 Library Units}).
+(see @RefSecNum{Renamings of Ada 83 Library Units}).
 
 The order and lettering of the annexes has been changed.
 @end{DiffWord83}
