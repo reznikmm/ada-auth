@@ -173,6 +173,7 @@ package body ARM_Format is
     --  1/20/05 - RLB - Added debugging for stack overflows.
     --  1/24/05 - RLB - Added Inner_Indented.
     --	1/25/05 - RLB - Added AddedSyn and DeleteSyn commands.
+    --  2/ 1/05 - RLB - Added Turkish Is.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -444,7 +445,7 @@ package body ARM_Format is
 	EM_Dash, EN_Dash, LE, LT, GE, GT, NE, PI, Times, PorM, Single_Quote,
 	Latin_1, Ceiling, Floor, Absolute, Log, Thin_Space,
 	Left_Quote, Right_Quote, Left_Double_Quote, Right_Double_Quote,
-	Left_Quote_Pair, Right_Quote_Pair,
+	Left_Quote_Pair, Right_Quote_Pair, Small_Dotless_I, Capital_Dotted_I,
 	Unknown);
 
 
@@ -806,6 +807,10 @@ package body ARM_Format is
 	    return Right_Quote_Pair;
 	elsif Canonical_Name = "rdquote" then
 	    return Right_Double_Quote;
+	elsif Canonical_Name = "smldotlessi" then
+	    return Small_Dotless_I;
+	elsif Canonical_Name = "capdottedi" then
+	    return Capital_Dotted_I;
 	else
 	    return Unknown;
 	end if;
@@ -7336,7 +7341,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     EM_Dash | EN_Dash | LT | LE | GT | GE | NE | PI |
 		     Times | PorM | Single_Quote | Thin_Space | Left_Quote |
 		     Right_Quote | Left_Double_Quote | Right_Double_Quote |
-		     Left_Quote_Pair | Right_Quote_Pair =>
+		     Left_Quote_Pair | Right_Quote_Pair | Small_Dotless_I |
+		     Capital_Dotted_I =>
 
 		    -- These commands must not have a parameter.
 		    Ada.Text_IO.Put_Line ("  ** Parameter for " &
@@ -7714,6 +7720,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		when Thin_Space =>
 		    Check_Paragraph;
 		    ARM_Output.Special_Character (Output_Object, ARM_Output.Thin_Space);
+		    Format_Object.Last_Non_Space := True;
+		when Small_Dotless_I =>
+		    Check_Paragraph;
+		    ARM_Output.Special_Character (Output_Object, ARM_Output.Small_Dotless_I);
+		    Format_Object.Last_Non_Space := True;
+		when Capital_Dotted_I =>
+		    Check_Paragraph;
+		    ARM_Output.Special_Character (Output_Object, ARM_Output.Capital_Dotted_I);
 		    Format_Object.Last_Non_Space := True;
 		when Left_Quote =>
 		    Check_Paragraph;

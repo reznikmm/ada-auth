@@ -671,6 +671,8 @@ various mathematical symbols.
 @lt	- Less than symbol
 @neq	- Not equal symbol
 @pi	- Pi
+@smldotlessi -- Small Dotless I (for examples). Use @Unicode(305) if we ever implement that.
+@capdottedi -- Capital Dotted I (for examples). Use @Unicode(304) if we ever implement that.
 @singlequote - Single quote ('''). Used to avoid confusion in syntax rules.
 @latin1{<number>} - Generate the Latin-1 character with the decimal code
 	"number".

@@ -87,6 +87,7 @@ package ARM_Output is
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
     -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
     --  1/24/05 - RLB - Added Inner_Indented.
+    --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -459,7 +460,9 @@ package ARM_Output is
 				    Left_Quote, -- A left facing single quote.
 				    Right_Quote, -- A right facing single quote.
 				    Left_Double_Quote, -- A left facing double quote.
-				    Right_Double_Quote -- A right facing double quote.
+				    Right_Double_Quote, -- A right facing double quote.
+				    Small_Dotless_I, -- A small i without a dot (Unicode(16#0131#).
+				    Capital_Dotted_I -- A large I with a dot (Unicode(16#0130#).
 				   );
 
     procedure Special_Character (Output_Object : in out Output_Type;

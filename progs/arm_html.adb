@@ -112,6 +112,7 @@ package body ARM_HTML is
     -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
     -- 12/15/04 - RLB - Added wider columns.
     --  1/24/05 - RLB - Added Inner_Indented.
+    --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -3660,6 +3661,22 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
 	            Output_Text (Output_Object, """");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		end if;
+	    when ARM_Output.Small_Dotless_I =>
+		if HTML_Kind > HTML_3 then --and Use_Unicode then -- We'll use it if it might be supported.
+	            Output_Text (Output_Object, "&#0305;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		else
+	            Output_Text (Output_Object, "i");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		end if;
+	    when ARM_Output.Capital_Dotted_I =>
+		if HTML_Kind > HTML_3 then --and Use_Unicode then -- We'll use it if it might be supported.
+	            Output_Text (Output_Object, "&#0304;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		else
+	            Output_Text (Output_Object, "I");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	end case;

@@ -101,6 +101,7 @@ package body ARM_RTF is
     --			Word 2000/XP/2003.
     -- 12/16/04 - RLB - Removed it after it proved not to help.
     --  1/24/05 - RLB - Added Inner_Indent.
+    --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -3185,6 +3186,16 @@ package body ARM_RTF is
 	        Output_Object.Char_Count := Output_Object.Char_Count + 11;
 	    when ARM_Output.Right_Double_Quote =>
 	        Ada.Text_IO.Put (Output_Object.Output_File, "\rdblquote ");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 11;
+	    when ARM_Output.Small_Dotless_I =>
+	        --Unicode: Doesn't work on Windows 98: but we have no choice here:
+	        Ada.Text_IO.Put (Output_Object.Output_File, "\uc1\u305 i");
+		-- Note: \uc1 means ASCII version has one character;
+		-- \u305 means use Unicode character 305.
+	        Output_Object.Char_Count := Output_Object.Char_Count + 11;
+	    when ARM_Output.Capital_Dotted_I =>
+	        --Unicode: Doesn't work on Windows 98: but we have no choice here:
+	        Ada.Text_IO.Put (Output_Object.Output_File, "\uc1\u304 I");
 	        Output_Object.Char_Count := Output_Object.Char_Count + 11;
 	end case;
 	if Output_Object.Paragraph_Format in ARM_Output.Hanging ..

@@ -88,6 +88,7 @@ package body ARM_Text is
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
     -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
     --  1/24/05 - RLB - Added Inner_Indented.
+    --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1200,6 +1201,10 @@ package body ARM_Text is
 		Ordinary_Text (Output_Object, """"); -- Not available in plain text, use double quote.
 	    when ARM_Output.Right_Double_Quote =>
 		Ordinary_Text (Output_Object, """"); -- Not available in plain text, use double quote.
+	    when ARM_Output.Small_Dotless_I =>
+		Ordinary_Text (Output_Object, "i"); -- Not available in plain text, use the nearest text.
+	    when ARM_Output.Capital_Dotted_I =>
+		Ordinary_Text (Output_Object, "I"); -- Not available in plain text, use the nearest text.
 	end case;
     end Special_Character;
 
