@@ -655,7 +655,7 @@ procedure ARM_Formatter is
 
 
 begin
-    Ada.Text_IO.Put_Line ("ARM 95/0Y formatter");
+    Ada.Text_IO.Put_Line ("ARM 95/2005 formatter");
     Ada.Text_IO.Put_Line ("  Copyright 2000, 2002  AXE Consultants");
     Ada.Text_IO.Put_Line ("  P.O. Box 1512, Madison WI  53701");
 
@@ -713,7 +713,7 @@ Ada.Text_IO.Put_Line ("  Display Index Entries = " & Boolean'Image(Display_Index
 
     end case;
 
-    Ada.Text_IO.Put_Line ("ARM 95/0Y document created");
+    Ada.Text_IO.Put_Line ("ARM 95/2005 document created");
 exception
     when No_Command_Error =>
 	null; -- Error message displayed by command line processor.

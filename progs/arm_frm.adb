@@ -148,6 +148,8 @@ package body ARM_Format is
     -- 11/02/04 - RLB - Added "DeletedAdded" ChgRef kind.
     -- 11/03/04 - RLB - Fixed @Chg nesting glitch.
     --		- RLB - Added InnerInnerItemize == Nested_X2_Bulleted.
+    -- 11/04/04 - RLB - Fixed a problem that reset the insertion number for
+    --			paragraphs have a normal AARM para. was encountered.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1721,6 +1723,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	            Format_Object.Current_Paragraph_Len := PNum'Last - 1;
 		    if Update_Numbers then
 		        Format_Object.Next_Paragraph := Format_Object.Next_Paragraph + 1;
+		        Format_Object.Next_Insert_Para := 1;
 		        Format_Object.Next_AARM_Sub := 'a';
 			Format_Object.Next_AARM_Insert_Para := 1;
 		    end if;
@@ -1737,9 +1740,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    end if;
 	            Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len + 2;
 	        -- else no version to display.
-		end if;
-	        if Update_Numbers then
-		    Format_Object.Next_Insert_Para := 1;
 		end if;
 	    end if;
 	end Paragraph_Number_String;
