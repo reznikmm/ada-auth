@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/11/25 03:12:16 $}
+@Comment{$Date: 2004/12/02 05:47:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @LabeledClause{Array Types}
 
@@ -2580,8 +2580,11 @@ Old=[in a generic body if the parent type is declared outside that body]}.
 This paragraph ensures that a dispatching call will never
 attempt to execute an inaccessible subprogram body.
 
-The part about generic bodies is necessary in order to preserve the
-contract model.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
+@ChgNote{This rule is only about generic bodies (and always was only
+about generic bodies. So we drop the extra text.}
+@Chg{Version=[2],New=[This],Old=[The part about generic bodies]} is necessary
+in order to preserve the contract model.
 
 @Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 @Chg{Version=[2],New=[If an ancestor],Old=[Since a generic unit can be instantiated at a
@@ -2788,6 +2791,7 @@ tagged types.],Old=[]}
 @LabeledSubClause{Dispatching Operations of Tagged Types}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
 @RootDefn{dispatching operation}
 @Defn2{Term=[dispatching call], Sec=(on a dispatching operation)}
 @Defn2{Term=[nondispatching call], Sec=(on a dispatching operation)}
@@ -2797,7 +2801,8 @@ tagged types.],Old=[]}
 @Defn{run-time polymorphism}
 @Defn2{Term=[controlling tag], Sec=(for a call on a dispatching operation)}
 The primitive subprograms of a tagged type are called
-@i(dispatching operations).
+@i(dispatching operations)@Chg{Version=[2],New=[, as are subprograms
+declared by a @nt{formal_abstract_subprogram_declaration}],Old=[]}.
 @Redundant[A dispatching operation can be called using a statically
 determined @i{controlling} tag, in which case the body to be
 executed is determined at compile time.
@@ -2827,11 +2832,14 @@ may depend on operands or result context.
 @end{MetaRules}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
 @Defn{call on a dispatching operation}
 @Defn{dispatching operation}
 A @i{call on a dispatching operation} is a call whose @nt<name> or
 @nt<prefix> denotes the declaration of a primitive subprogram
-of a tagged type, that is, a dispatching operation.
+of a tagged type@Chg{Version=[2],New=[ or a subprogram declared by
+a @nt{formal_abstract_subprogram_declaration}],Old=[]},
+that is, a dispatching operation.
 @Defn{controlling operand}
 A @i{controlling operand} in a call on a dispatching operation of a tagged
 type @i(T) is one whose corresponding formal parameter is of type @i(T)
@@ -3269,6 +3277,11 @@ controlling tag can come from the target of an @nt{assignment_statement}.],Old=[
 inherited by derived subprograms. A literal reading of the old wording
 would have implied that operations would be called with objects with the
 wrong type.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+@Chg{Version=[2],New=[An abstract formal subprogram is a dispatching
+operation, even though it is not a primitive operation. See
+@RefSec{Formal Subprograms}.],Old=[]}
 @end{Diffword95}
 
 
@@ -3340,10 +3353,13 @@ Static Semantics paragraph, but I won't move them, as it's not worth the time.}
   and this tag will necessarily be different from T'Tag.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
 @Defn{abstract subprogram}
 @Defn2{Term=[subprogram], Sec=(abstract)}
 A subprogram declared by an @nt{abstract_subprogram_declaration}
-(see @RefSecNum{Subprogram Declarations}) is an @i{abstract subprogram}.
+(see @RefSecNum{Subprogram Declarations}) @Chg{Version=[2],New=[or declared
+declared by a @nt{formal_abstract_subprogram_declaration} (see
+@RefSecNum{Formal Subprograms}) ],Old=[]}is an @i{abstract subprogram}.
 If it is a primitive subprogram of a tagged type,
 then the tagged type shall be abstract.
 @begin{Ramification}
@@ -3364,7 +3380,6 @@ The full view of T is not abstract,
 but has an abstract operation Foo,
 which is illegal.
 The two lines marked "--@i{ Illegal!}" are illegal when taken together.
-
 @end{Ramification}
 @begin{Reason}
 @Leading@;We considered disallowing untagged types from having abstract
@@ -3392,6 +3407,13 @@ that was not primitive on some tagged type.
 Other rules could be formulated to solve this problem,
 but the current ones seem like the simplest.
 @end{Reason}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+@Chg{Version=[2],New=[Note that the second sentence does not apply to
+abstract formal subprograms, as they are never primitive operations of
+a type.],Old=[]}
+@end{Ramification}
 
 @Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00334-01]}
 @Chg{Version=[2],New=[If a type has an implicitly declared primitive subprogram
@@ -3595,19 +3617,22 @@ On the other hand, if the P were abstract for both T1 and T2,
 the example would be legal as is.
 @end{Reason}
 
-A generic actual subprogram shall not be an abstract subprogram.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
+A generic actual subprogram shall not be an abstract
+subprogram @Chg{Version=[2],New=[unless the generic formal subprogram is a
+@nt{formal_abstract_subprogram_declaration}],Old=[]}.
 The @nt{prefix} of an @nt{attribute_reference} for the Access,
-Unchecked_Access, or Address attributes shall not denote an abstract
-subprogram.
+Unchecked_Access, or Address attributes shall not denote an abstract subprogram.
 @begin{Ramification}
 An @nt{abstract_subprogram_declaration} is not syntactically a
 @nt{subprogram_declaration}.
 Nonetheless, an abstract subprogram is a subprogram,
-and an @nt{abstract_subprogram_declaration} is a declaration of a
-subprogram.
+and an @nt{abstract_subprogram_declaration} is a declaration of a subprogram.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
 The part about generic actual subprograms includes those given by
-default.
+default.@Chg{Version=[2],New=[ Of course, an abstract formal subprogram's
+actual subprogram can be abstract.],Old=[]}
 @end{Ramification}
 @end{Legality}
 
@@ -3684,6 +3709,10 @@ but then clients of the package would not have visibility to T.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[Updated the wording to reflect the addition of
 interfaces (see @RefSecNum{Interface Types}).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+@Chg{Version=[2],New=[Updated the wording to reflect the addition of
+abstract formal subprograms (see @RefSecNum{Formal Subprograms}).],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00334-01]}
 @Chg{Version=[2],New=[Clarified the wording of shall-be-overridden so that it
@@ -5109,6 +5138,10 @@ a derived access type
 is the same as that of
 its ultimate ancestor.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00385-01]}
+@Chg{Version=[2],New=[The accessibility level of the anonymous access type
+defined by an @nt{access_definition} of an @nt{object_declaration} is
+the same as that of the declared object.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
 @Chg{Version=[2],New=[The accessibility level of the anonymous access type
@@ -5992,7 +6025,7 @@ does not resolve by the new rules would have failed a @LegalityTitle.],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02],ARef=[AI95-00385-01]}
 @Chg{Version=[2],New=[Defined the accessibility of the various new kinds and
 uses of anonymous access types.],Old=[]}
 @end{DiffWord95}

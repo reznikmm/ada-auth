@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/12/01 01:09:23 $}
+@Comment{$Date: 2004/12/02 05:47:57 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -510,17 +510,17 @@ instantiated or renamed only within the declarative region
 of the parent generic.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00331-01]}
-For each @Chg{Version=[2],New=[instance of a],
-Old=[declaration or renaming of a generic unit as a child of some
-parent]} generic package@Chg{Version=[2],New=[],Old=[,]} there is
-a corresponding declaration @Chg{Version=[2],New=[for each child unit of that
-generic package,],Old=[]} nested
-immediately within @Chg{Version=[2],New=[the],Old=[each]}
-instance @Chg{Version=[2],New=[. For the purposes of this rule, if the child
-unit itself has a child unit, the corresponding declaration has a corresponding
-child unit], Old=[of the parent]}.
-@Redundant[@Chg{Version=[2],New=[Such a corresponding generic],Old=[This]}
-declaration is visible only within the scope of a @nt{with_clause} that
+For each @Chg{Version=[2],New=[child @i<C> of],
+Old=[declaration or renaming of a generic unit as a child]} of some parent
+generic package@Chg{Version=[2],New=[ @i<P>],Old=[]}, there is
+a corresponding declaration @Chg{Version=[2],New=[@i<C>],Old=[]} nested
+immediately within each instance @Chg{Version=[2],New=[of @i<P>. For the
+purposes of this rule, if the child @i<C> itself has a child @i<D>, each
+corresponding declaration for @i<C> has a corresponding
+child @i<D>], Old=[of the parent]}.
+@Redundant[@Chg{Version=[2],New=[The corresponding],Old=[This]}
+declaration @Chg{Version=[2],New=[for a child within an instance ],Old=[]}is
+visible only within the scope of a @nt{with_clause} that
 mentions the @Chg{Version=[2],New=[(original) ],Old=[]}child generic unit.]
 
 @begin{ImplNote}

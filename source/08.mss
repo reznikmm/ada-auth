@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/12/01 01:09:22 $}
+@Comment{$Date: 2004/12/02 05:47:56 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2574,23 +2574,37 @@ so it can denote several declarations,
 and all of the views declared by those declarations.
 @end{Ramification}
 @begin(itemize)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00382-01]}
   @Defn2{Term=[current instance], Sec=(of a type)}
   If a usage name appears within the declarative region of a
   @nt{type_declaration} and denotes that same @nt{type_declaration},
   then it denotes the @i{current instance} of the type (rather than
-  the type itself).
-  The current instance of a type is the object or value
+  the type itself)@Chg{Version=[2],New=[; the],Old=[. The]} current
+  instance of a type is the object or value
   of the type that is associated with the execution that
-  evaluates the usage name.
+  evaluates the usage name.@Chg{Version=[2],New=[ This rule does not apply
+  if the usage name appears within the @nt{subtype_mark} of an
+  @nt{access_definition} for an access-to-object type, or within the subtype
+  of a parameter or result of an access-to-subprogram type.],Old=[]}
   @begin{Reason}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00382-01]}
   This is needed, for example, for references to the Access attribute
   from within the @nt{type_declaration}.
   Also, within a @nt{task_body} or @nt{protected_body},
   we need to be able to denote the current task or protected object.
   (For a @nt{single_task_declaration} or
   @nt{single_protected_declaration}, the rule about current instances
-  is not needed.)
+  is not needed.)@Chg{Version=[2],New=[ We exclude anonymous access types
+  so that they can be used to create self-referencing types in the natural
+  manner (otherwise such types would be illegal).],Old=[]}
   @end{Reason}
+  @begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
+  @Chg{Version=[2],New=[The phrase @lquotes@;within the @nt{subtype_mark}@rquotes@;
+  in the @lquotes@;this rule does not apply@rquotes@; part is intended to cover
+  a case like @key{access} T'Class appearing within the declarative region of
+  T: here T denotes the type, not the current instance.],Old=[]}
+  @end{Discussion}
 
   @Defn2{Term=[current instance], Sec=(of a generic unit)}
   If a usage name appears within the declarative region of a
@@ -2987,4 +3001,23 @@ things like @lquotes@;any integer type.@rquotes@;
 Generalized the anonymous access resolution rules to support the new
 capabilities of anonymous access types (that is, access-to-subprogram and
 access-to-constant).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
+@Chg{Version=[2],New=[We now allow the creation of self-referencing types
+via anonymous access types. This is an extension because in some unusual cases
+(in task and protected types) it will make programs that were illegal in Ada 95
+legal in Ada 2005. For example:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{task type} T;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key{task body} T @key{is}
+   @key{procedure} P (X : @key{access} T) @key{is} -- @RI[Illegal in Ada 95, legal in Ada 2005]
+      ...
+   @key{end} P;
+@key{begin}
+   ...
+@key{end} T;],Old=[]}
+@end{Example}
 @end{Extend95}

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.33 $ $Date: 2004/11/11 05:59:04 $}
+@comment{$Revision: 1.34 $ $Date: 2004/12/02 05:47:58 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -37,17 +37,18 @@ inconsistencies. The corrections specified in Technical Corrigendum 1 are
 part of the International Standard ISO/IEC 8652:1995(E).],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{New=[Similarly, Amendment 1 lists the individual changes that need to be
-made to the text of the International Standard to add new features as well
-as correct errors.],Old=[]}
+@Chg{Version=[2],New=[Similarly, Amendment 1 lists the individual changes that
+need to be made to the text of the International Standard to add new features
+as well as correct errors.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[When ISO published Technical Corrigendum 1, it did not also publish
 a document that merges the Technical Corrigendum changes into
 the text of the International Standard.@Chg{Version=[2],New=[ It is not
-expected that ISO will publish document that merges the Technical Corrigendum and
-Amendment 1 changes into the text of the International Standard.],Old=[]}
+expected that ISO will publish a document that merges the Technical
+Corrigendum and Amendment 1 changes into the text of the International
+Standard.],Old=[]}
 However, ISO rules require that the
 project editor for the @Chg{Version=[2],New=[International Standard],
 Old=[Technical Corrigendum]} be able to produce such a document
@@ -74,9 +75,11 @@ Corrigendum 1), the other documents contain the official text of the
 International Standard ISO/IEC 8652:1995(E)@Chg{Version=[2],New=[ and
 its Amendment],Old=[]}.],Old=[]}
 
+@ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[As it is very inconvenient to have the Reference Manual for Ada
-specified in two documents, this consolidated version of the Ada Reference
+specified in @Chg{Version=[2],New=[three],Old=[two]} documents, this
+consolidated version of the Ada Reference
 Manual is made available to the public.],Old=[]}
 
 @end{NotISO}
@@ -157,14 +160,14 @@ the only place this is used, it is easier to fix the text than the program.
 RLB - 2000-05-17}
 @begin{AARMOnly}
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
 Programming Language @em 1995 edition, which]} gives an introduction to the
 new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition of this Standard],Old=[]},
 and explains the rationale behind them. Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],
 Old=[]} read this first.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[Ada 2005 Rationale. This give an introduction to the
 changes and new features in Ada 2005 (compared with the 1995 edition), and
 explains the rationale behind them. Programmers should read this rationale
@@ -194,14 +197,14 @@ document combining the above three documents into a single document.],Old=[]}
 
 @begin{RMOnly}
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
 Programming Language @em 1995 edition, which]} gives an introduction to the
 new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition of this Standard],Old=[]},
 and explains the rationale behind them. Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],
 Old=[]} read this first.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[Ada 2005 Rationale. This give an introduction to the
 changes and new features in Ada 2005 (compared with the 1995 edition), and
 explains the rationale behind them. Programmers should read this rationale
@@ -211,7 +214,7 @@ before reading this Standard in depth.],Old=[]}
 @Chg{New=[], Old=[Changes to Ada @em 1987 to 1995. This document lists in detail the changes made
 to the 1987 edition of the standard.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 The Annotated Ada Reference Manual (AARM).@Defn{Annotated Ada Reference Manual}
 @Defn{AARM}The AARM contains all of the text
 in @Chg{Version=[2],New=[the consolidated Ada Reference Manual],Old=[the RM95]},
@@ -230,7 +233,7 @@ rules.
 @SubHeading(Design Goals)
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 Ada was originally designed with three overriding concerns:
 program reliability and maintenance, programming as a human
 activity, and efficiency. @Chg{Version=[2],New=[The 1995],Old=[This]} revision
@@ -441,7 +444,7 @@ main classes of types are elementary types (comprising
 enumeration, numeric, and access types) and composite types
 (including array and record types).
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00387-01]}
 An enumeration type defines an ordered set of distinct
 enumeration literals, for example a list of states or an
 alphabet of characters. The enumeration types Boolean,
@@ -457,7 +460,7 @@ absolute bounds on the error, or floating point types, with
 relative bounds on the error. The numeric types Integer,
 Float, and Duration are predefined.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00387-01]}
 Composite types allow definitions of structured objects with
 related components. The composite types in the language
 include arrays and records. An array is an object with
@@ -506,7 +509,7 @@ type is applied to an operand whose specific type is not
 known until run time, implicit dispatching is performed
 based on the tag of the operand.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[
 Interface types provide abstract models from which other interfaces and
 types may be composed and derived. This provides a reliable form of multiple
@@ -523,7 +526,7 @@ values.
 
 @keepnext@i(Other Facilities)
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[Aspect],Old=[Representation]} clauses can be
 used to specify the mapping
 between types and features of an underlying machine. For
@@ -534,7 +537,7 @@ storage layout. Other features allow the controlled use of
 low level, nonportable, or implementation-dependent aspects,
 including the direct insertion of machine code.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 The predefined environment of the language provides
 for input-output and other capabilities @Chg{Version=[2],New=[],Old=[(such
 as string manipulation and random number generation) ]}by means of
@@ -546,13 +549,13 @@ also provided.@Chg{Version=[2],New=[],Old=[ Other standard library packages are 
 in annexes of the standard to support systems with
 specialized requirements.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[The predefined standard library packages provide
 facilities such as string manipulation, containers of various kinds (vectors,
 lists, maps etc.), mathematical functions, random number generation, and access
 to the execution environment.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[The specialized annexes define further predefined library
 packages and facilities with especial emphasis on areas such as real-time
 scheduling, interrupt handling, distributed systems, numerical computation, and
@@ -570,14 +573,14 @@ applicable to all types of a given class.
 
 @begin{Intro}
 
-@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 This @Chg{Version=[2],New=[revised ],Old=[]}International
 Standard @Chg{Version=[2],New=[modifies the edition of 1995 which ],
 Old=[]}replace@Chg{Version=[2],New=[d],Old=[s]} the first edition of 1987.
 In th@Chg{Version=[2],New=[e 1995],Old=[is]} edition, the following major
 language changes have been incorporated:
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 Support for standard 8-bit and 16-bit
 character@Chg{Version=[2],New=[s was added],Old=[ sets]}.
 See @Chg{Version=[2],New=[clauses @RefSecNum{Character Set}],Old=[Section 2]},
@@ -587,7 +590,7 @@ See @Chg{Version=[2],New=[clauses @RefSecNum{Character Set}],Old=[Section 2]},
 @RefSecNum{Character Handling}, and
 @RefSecNum{String Handling}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[The type model was extended to include facilities
 for o],Old=[O]}bject-oriented programming
 with @Chg{Version=[2],New=[dynamic],Old=[run-time]} polymorphism.
@@ -602,26 +605,26 @@ formal parameters @Chg{Version=[2],New=[were],Old=[that are]} allowed
 @RefSecNum{Formal Private and Derived Types} and @RefSecNum{Formal Packages}],
 Old=[by @RefSec{Formal Private and Derived Types} and @RefSec{Formal Packages}]}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 Access types @Chg{Version=[2],New=[were],Old=[have been]} extended to allow
 an access value to designate a subprogram or an object declared by an
 object declaration @Chg{Version=[2],New=[],Old=[(]}as opposed to just
 a@Chg{Version=[2],New=[n object ],Old=[ heap-]}allocated a@Chg{Version=[2],New=[on a heap],Old=[object)]}.
 See @Chg{Version=[2],New=[clause ],Old=[]}@RefSecNum{Access Types}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 Efficient data-oriented synchronization @Chg{Version=[2],New=[was],
 Old=[is]} provided @Chg{Version=[2],New=[by the introduction of],
 Old=[via]} protected types. See @Chg{Version=[2],
 New=[clause @RefSecNum{Protected Units and Protected Objects}],Old=[Section 9]}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 The library@Chg{Version=[2],New=[-level structure was extended to allow
 library units to], Old=[units of a library may]} be organized into a
 hierarchy of parent and child units.
 See @Chg{Version=[2], New=[clause @RefSecNum{Separate Compilation}],Old=[Section 10]}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 Additional support @Chg{Version=[2],New=[was],Old=[has been]} added for
 interfacing to other languages. See @RefSecNum{Interface to Other Languages}.
 
@@ -643,7 +646,7 @@ application areas:
 @end{InnerItemize}
 @end{Itemize}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[This Amended language (incorporating Amendment 1)
 modifies the 1995 International Standard by making changes and additions that
 improve the capability of the language and the reliability of programs written
@@ -651,7 +654,7 @@ in the language. In particular the changes were designed to improve the
 portability of programs, interfacing to other languages, and both the
 object-oriented and real-time capabilities.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[@Leading@;The following major changes with respect to the
 1995 edition are incorporated:],Old=[]}
 
