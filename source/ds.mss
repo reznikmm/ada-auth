@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/08/08 22:56:19 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/08/03 05:37:42 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1432,39 +1432,41 @@ The following language-defined library package exists:
 @LangDefType{Package=[System.RPC],Type=[Partition_ID]}
    @key(type) Partition_ID @key(is range) 0 .. @RI(implementation-defined);
 
-   Communication_Error : @key(exception);
+   @AdaDefn{Communication_Error} : @key(exception);
 
+@LangDefType{Package=[System.RPC],Type=[Params_Stream_Type]}
    @key(type) Params_Stream_Type(
       Initial_Size : Ada.Streams.Stream_Element_Count) @key(is) @key(new)
       Ada.Streams.Root_Stream_Type @key(with) @key(private);
 
-   @key(procedure) Read(
+   @key(procedure) @AdaSubDefn{Read}(
       Stream : @key(in out) Params_Stream_Type;
       Item : @key(out) Ada.Streams.Stream_Element_Array;
       Last : @key(out) Ada.Streams.Stream_Element_Offset);
 
-   @key(procedure) Write(
+   @key(procedure) @AdaSubDefn{Write}(
       Stream : @key(in out) Params_Stream_Type;
       Item : @key(in) Ada.Streams.Stream_Element_Array);
 
 
    @RI(-- Synchronous call)
-   @key(procedure) Do_RPC(
+   @key(procedure) @AdaSubDefn{Do_RPC}(
       Partition  : @key(in) Partition_ID;
       Params     : @key(access) Params_Stream_Type;
       Result     : @key(access) Params_Stream_Type);
 
    @RI(-- Asynchronous call)
-   @key(procedure) Do_APC(
+   @key(procedure) @AdaSubDefn{Do_APC}(
       Partition  : @key(in) Partition_ID;
       Params     : @key(access) Params_Stream_Type);
 
    @RI(-- The handler for incoming RPCs)
+@LangDefType{Package=[System.RPC],Type=[RPC_Receiver]}
    @key(type) RPC_Receiver @key(is access procedure)(
       Params     : @key(access) Params_Stream_Type;
       Result     : @key(access) Params_Stream_Type);
 
-   @key(procedure) Establish_RPC_Receiver(
+   @key(procedure) @AdaSubDefn{Establish_RPC_Receiver}(
       Partition : @key(in) Partition_ID;
       Receiver  : @key(in) RPC_Receiver);
 

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:30 $}
+@Comment{$Date: 2000/08/08 22:56:18 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2797,8 +2797,8 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
      This unconstrained subtype is called the @i(base subtype) of the type.
      ]}@Defn2{Term=(base subtype), Sec=(of a type)}
 
-@Attribute{Prefix=<S>, AttrName=<Min>,
-  Text=[@leading@;S'Min denotes a function with the following specification:
+@AttributeLeading{Prefix=<S>, AttrName=<Min>,
+  Text=[S'Min denotes a function with the following specification:
 @begin(Descexample)
 @b(function) S'Min(@RI(Left), @RI(Right) : S'Base)
   @b(return) S'Base
@@ -2817,8 +2817,8 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
      can its formal parameters be anonymous.
      @end{Discussion}
 
-@Attribute{Prefix=<S>, AttrName=<Max>,
-  Text=[@leading@;S'Max denotes a function with the following specification:
+@AttributeLeading{Prefix=<S>, AttrName=<Max>,
+  Text=[S'Max denotes a function with the following specification:
 @begin(Descexample)
 @b(function) S'Max(@RI(Left), @RI(Right) : S'Base)
   @b(return) S'Base
@@ -2826,8 +2826,8 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
 
      @NoPrefix@;The function returns the greater of the values of the two parameters.]}
 
-@Attribute{Prefix=<S>, AttrName=<Succ>,
-  Text=[@leading@;S'Succ denotes a function with the following specification:
+@AttributeLeading{Prefix=<S>, AttrName=<Succ>,
+  Text=[S'Succ denotes a function with the following specification:
 @begin(Descexample)
 @b(function) S'Succ(@RI(Arg) : S'Base)
   @b(return) S'Base
@@ -2855,8 +2855,8 @@ S'Succ for a modular integer subtype wraps around
        S'Base'Last, or it might return the out-of-base-range value
        S'Base'Last+1, as is permitted for all predefined numeric operations.@end{ramification}
 
-@Attribute{Prefix=<S>, AttrName=<Pred>,
-  Text=[@leading@;S'Pred denotes a function with
+@AttributeLeading{Prefix=<S>, AttrName=<Pred>,
+  Text=[S'Pred denotes a function with
      the following specification:
 @begin(Descexample)
 @b(function) S'Pred(@RI(Arg) : S'Base)
@@ -2885,8 +2885,8 @@ S'Pred for a modular integer subtype wraps around
        S'Base'First, or it might return the out-of-base-range value
        S'Base'First@en@;1, as is permitted for all predefined numeric operations.@end{ramification}
 
-@Attribute{Prefix=<S>, AttrName=<Wide_Image>,
-  Text=[@leading@;S'Wide_Image denotes a function
+@AttributeLeading{Prefix=<S>, AttrName=<Wide_Image>,
+  Text=[S'Wide_Image denotes a function
      with the following specification:
 @begin(Descexample)
 @b(function) S'Wide_Image(@RI(Arg) : S'Base)
@@ -2981,8 +2981,8 @@ For a machine that supports negative zeros,
        See corresponding comment above about integer types with
        signed zeros.@end{implnote}
 
-@Attribute{Prefix=<S>, AttrName=<Image>,
-  Text=[@leading@;S'Image denotes a function with
+@AttributeLeading{Prefix=<S>, AttrName=<Image>,
+  Text=[S'Image denotes a function with
     the following specification:
 @begin(Descexample)
 @b(function) S'Image(@RI(Arg) : S'Base)
@@ -3011,8 +3011,8 @@ For a machine that supports negative zeros,
      subtype S. It denotes zero for a subtype that has
      a null range. Its type is @i(universal_integer).]}
 
-@Attribute{Prefix=<S>, AttrName=<Wide_Value>,
-  Text=[@leading@;S'Wide_Value denotes a function with
+@AttributeLeading{Prefix=<S>, AttrName=<Wide_Value>,
+  Text=[S'Wide_Value denotes a function with
      the following specification:
 @begin(Descexample)
 @b(function) S'Wide_Value(@RI(Arg) : Wide_String)
@@ -3092,8 +3092,8 @@ For a machine that supports negative zeros,
     (positive if none has been specified)
     if S'Signed_Zeros is True.
 
-@Attribute{Prefix=<S>, AttrName=<Value>,
-  Text=[@leading@;S'Value denotes a function with
+@AttributeLeading{Prefix=<S>, AttrName=<Value>,
+  Text=[S'Value denotes a function with
      the following specification:
 @begin(Descexample)
 @b(function) S'Value(@RI(Arg) : String)
@@ -3987,7 +3987,7 @@ definition and normal type derivation.
 @Leading@;For @PrefixType{every discrete subtype S},
 the following attributes are defined:
 @begin(description)
-@Attribute{Prefix=<S>, AttrName=<Pos>,
+@AttributeLeading{Prefix=<S>, AttrName=<Pos>,
   Text=[S'Pos denotes a function with the following specification:
 @begin(Descexample)
 @b(function) S'Pos(@RI(Arg) : S'Base)
@@ -3997,7 +3997,7 @@ the following attributes are defined:
      @NoPrefix@;This function returns the position number of the value
      of @i(Arg), as a value of type @i(universal_integer).]}
 
-@Attribute{Prefix=<S>, AttrName=<Val>,
+@AttributeLeading{Prefix=<S>, AttrName=<Val>,
   Text=[S'Val denotes a function with the following specification:
 @begin(Descexample)
 @b(function) S'Val(@RI(Arg) : @RI(universal_integer))
@@ -4903,7 +4903,7 @@ Obsolescent features (to be compatible with Ada 83's
    By contrast, S'Aft is always positive.
  @end{Ramification}
 
-@Attribute{Prefix=<S>, AttrName=<Round>,
+@AttributeLeading{Prefix=<S>, AttrName=<Round>,
   Text=[S'Round denotes a function with
      the following specification:
 @begin(Descexample)

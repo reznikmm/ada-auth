@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2000/08/05 04:53:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2000/08/08 22:56:19 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/08/05 04:53:24 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -75,7 +75,7 @@ Numerics.Generic_Complex_Types has the following declaration:
 @begin{Example}
 @key{generic}
    @key{type} Real @key{is} @key{digits} <>;
-@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Complex_Types]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Types]}
 @key{package} Ada.Numerics.Generic_Complex_Types @key{is}
    pragma Pure(Generic_Complex_Types);
 
@@ -88,41 +88,41 @@ Numerics.Generic_Complex_Types has the following declaration:
 @LangDefType{Package=[Ada.Numerics.Generic_Complex_Types],Type=[Imaginary]}
    @key{type} Imaginary @key{is} @key{private};
 
-   i : @key{constant} Imaginary;
-   j : @key{constant} Imaginary;
+   @AdaDefn{i} : @key{constant} Imaginary;
+   @AdaDefn{j} : @key{constant} Imaginary;
 
 
-   @key{function} Re (X : Complex)   @key{return} Real'Base;
-   @key{function} Im (X : Complex)   @key{return} Real'Base;
-   @key{function} Im (X : Imaginary) @key{return} Real'Base;
+   @key{function} @AdaSubDefn{Re} (X : Complex)   @key{return} Real'Base;
+   @key{function} @AdaSubDefn{Im} (X : Complex)   @key{return} Real'Base;
+   @key{function} @AdaSubDefn{Im} (X : Imaginary) @key{return} Real'Base;
 
-   @key{procedure} Set_Re (X  : @key{in} @key{out} Complex;
+   @key{procedure} @AdaSubDefn{Set_Re} (X  : @key{in} @key{out} Complex;
                      Re : @key{in}     Real'Base);
-   @key{procedure} Set_Im (X  : @key{in} @key{out} Complex;
+   @key{procedure} @AdaSubDefn{Set_Im} (X  : @key{in} @key{out} Complex;
                      Im : @key{in}     Real'Base);
-   @key{procedure} Set_Im (X  :    @key{out} Imaginary;
+   @key{procedure} @AdaSubDefn{Set_Im} (X  :    @key{out} Imaginary;
                      Im : @key{in}     Real'Base);
 
-   @key{function} Compose_From_Cartesian (Re, Im : Real'Base) @key{return} Complex;
-   @key{function} Compose_From_Cartesian (Re     : Real'Base) @key{return} Complex;
-   @key{function} Compose_From_Cartesian (Im     : Imaginary) @key{return} Complex;
+   @key{function} @AdaSubDefn{Compose_From_Cartesian} (Re, Im : Real'Base) @key{return} Complex;
+   @key{function} @AdaSubDefn{Compose_From_Cartesian} (Re     : Real'Base) @key{return} Complex;
+   @key{function} @AdaSubDefn{Compose_From_Cartesian} (Im     : Imaginary) @key{return} Complex;
 
-   @key{function} Modulus (X     : Complex) @key{return} Real'Base;
+   @key{function} @AdaSubDefn{Modulus} (X     : Complex) @key{return} Real'Base;
    @key{function} "@key{abs}"   (Right : Complex) @key{return} Real'Base @key{renames} Modulus;
 
-   @key{function} Argument (X     : Complex)   @key{return} Real'Base;
-   @key{function} Argument (X     : Complex;
+   @key{function} @AdaSubDefn{Argument} (X     : Complex)   @key{return} Real'Base;
+   @key{function} @AdaSubDefn{Argument} (X     : Complex;
                       Cycle : Real'Base) @key{return} Real'Base;
 
-   @key{function} Compose_From_Polar (Modulus, Argument        : Real'Base)
+   @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument        : Real'Base)
       @key{return} Complex;
-   @key{function} Compose_From_Polar (Modulus, Argument, Cycle : Real'Base)
+   @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument, Cycle : Real'Base)
       @key{return} Complex;
 
 
    @key{function} "+"       (Right : Complex) @key{return} Complex;
    @key{function} "-"       (Right : Complex) @key{return} Complex;
-   @key{function} Conjugate (X     : Complex) @key{return} Complex;
+   @key{function} @AdaSubDefn{Conjugate} (X     : Complex) @key{return} Complex;
 
 
    @key{function} "+" (Left, Right : Complex) @key{return} Complex;
@@ -136,7 +136,7 @@ Numerics.Generic_Complex_Types has the following declaration:
 
    @key{function} "+"       (Right : Imaginary) @key{return} Imaginary;
    @key{function} "-"       (Right : Imaginary) @key{return} Imaginary;
-   @key{function} Conjugate (X     : Imaginary) @key{return} Imaginary @key{renames} "-";
+   @key{function} @AdaSubDefn{Conjugate} (X     : Imaginary) @key{return} Imaginary @key{renames} "-";
    @key{function} "@key{abs}"     (Right : Imaginary) @key{return} Real'Base;
 
 
@@ -195,7 +195,7 @@ Numerics.Generic_Complex_Types has the following declaration:
 @end{Example}
 
 @Defn{Ada.Numerics.Complex_Types}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Complex_Types]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Types]}
 The library package Numerics.Complex_Types
 defines the same types, constants, and subprograms as
 Numerics.Generic_Complex_Types, except that the predefined type Float is
@@ -554,47 +554,47 @@ Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @key[generic]
    @key[with] @key[package] Complex_Types @key[is] @key[new] Ada.Numerics.Generic_Complex_Types (<>);
    @key[use] Complex_Types;
-@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Complex_Elementary_Functions]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Elementary_@!Functions]}
 @key[package] Ada.Numerics.Generic_Complex_Elementary_Functions @key[is]
    pragma Pure(Generic_Complex_Elementary_Functions);
 
-   @key[function] Sqrt (X : Complex)   @key[return] Complex;
-   @key[function] Log  (X : Complex)   @key[return] Complex;
-   @key[function] Exp  (X : Complex)   @key[return] Complex;
-   @key[function] Exp  (X : Imaginary) @key[return] Complex;
+   @key[function] @AdaSubDefn{Sqrt} (X : Complex)   @key[return] Complex;
+   @key[function] @AdaSubDefn{Log}  (X : Complex)   @key[return] Complex;
+   @key[function] @AdaSubDefn{Exp}  (X : Complex)   @key[return] Complex;
+   @key[function] @AdaSubDefn{Exp}  (X : Imaginary) @key[return] Complex;
    @key[function] "**" (Left : Complex;   Right : Complex)   @key[return] Complex;
    @key[function] "**" (Left : Complex;   Right : Real'Base) @key[return] Complex;
    @key[function] "**" (Left : Real'Base; Right : Complex)   @key[return] Complex;
 
 
-   @key[function] Sin (X : Complex) @key[return] Complex;
-   @key[function] Cos (X : Complex) @key[return] Complex;
-   @key[function] Tan (X : Complex) @key[return] Complex;
-   @key[function] Cot (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Sin} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Cos} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Tan} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Cot} (X : Complex) @key[return] Complex;
 
 
-   @key[function] Arcsin (X : Complex) @key[return] Complex;
-   @key[function] Arccos (X : Complex) @key[return] Complex;
-   @key[function] Arctan (X : Complex) @key[return] Complex;
-   @key[function] Arccot (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Arcsin} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Arccos} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Arctan} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Arccot} (X : Complex) @key[return] Complex;
 
 
-   @key[function] Sinh (X : Complex) @key[return] Complex;
-   @key[function] Cosh (X : Complex) @key[return] Complex;
-   @key[function] Tanh (X : Complex) @key[return] Complex;
-   @key[function] Coth (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Sinh} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Cosh} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Tanh} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Coth} (X : Complex) @key[return] Complex;
 
 
-   @key[function] Arcsinh (X : Complex) @key[return] Complex;
-   @key[function] Arccosh (X : Complex) @key[return] Complex;
-   @key[function] Arctanh (X : Complex) @key[return] Complex;
-   @key[function] Arccoth (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Arcsinh} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Arccosh} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Arctanh} (X : Complex) @key[return] Complex;
+   @key[function] @AdaSubDefn{Arccoth} (X : Complex) @key[return] Complex;
 
 @key[end] Ada.Numerics.Generic_Complex_Elementary_Functions;
 @end{Example}
 
 @Defn{Ada.Numerics.Complex_Elementary_Functions}
-@ChildUnit{Parent=[Ada.Numerics],Child=[Complex_Elementary_Functions]}
+@ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Elementary_@!Functions]}
 The library package Numerics.Complex_Elementary_Functions
 defines the same subprograms as Numerics.Generic_Complex_Elementary_Functions,
 except that the predefined type Float is systematically substituted for
@@ -916,33 +916,33 @@ Text_IO.Complex_IO has the following declaration:
 
    @key[use] Complex_Types;
 
-   Default_Fore : Field := 2;
-   Default_Aft  : Field := Real'Digits - 1;
-   Default_Exp  : Field := 3;
+   @AdaDefn{Default_Fore} : Field := 2;
+   @AdaDefn{Default_Aft}  : Field := Real'Digits - 1;
+   @AdaDefn{Default_Exp}  : Field := 3;
 
 
-   @key[procedure] Get (File  : @key[in]  File_Type;
+   @key[procedure] @AdaSubDefn{Get} (File  : @key[in]  File_Type;
                   Item  : @key[out] Complex;
                   Width : @key[in]  Field := 0);
-   @key[procedure] Get (Item  : @key[out] Complex;
+   @key[procedure] @AdaSubDefn{Get} (Item  : @key[out] Complex;
                   Width : @key[in]  Field := 0);
 
 
-   @key[procedure] Put (File : @key[in] File_Type;
+   @key[procedure] @AdaSubDefn{Put} (File : @key[in] File_Type;
                   Item : @key[in] Complex;
                   Fore : @key[in] Field := Default_Fore;
                   Aft  : @key[in] Field := Default_Aft;
                   Exp  : @key[in] Field := Default_Exp);
-   @key[procedure] Put (Item : @key[in] Complex;
+   @key[procedure] @AdaSubDefn{Put} (Item : @key[in] Complex;
                   Fore : @key[in] Field := Default_Fore;
                   Aft  : @key[in] Field := Default_Aft;
                   Exp  : @key[in] Field := Default_Exp);
 
 
-   @key[procedure] Get (From : @key[in]  String;
+   @key[procedure] @AdaSubDefn{Get} (From : @key[in]  String;
                   Item : @key[out] Complex;
                   Last : @key[out] Positive);
-   @key[procedure] Put (To   : @key[out] String;
+   @key[procedure] @AdaSubDefn{Put} (To   : @key[out] String;
                   Item : @key[in]  Complex;
                   Aft  : @key[in]  Field := Default_Aft;
                   Exp  : @key[in]  Field := Default_Exp);
@@ -1131,7 +1131,7 @@ procedures of Text_IO.Float_IO.
 
 @begin{StaticSem}
 @Defn{Ada.Wide_Text_IO.Complex_IO}
-@ChildUnit{Parent=[Ada.Wide_Text_IO],Child=[Complex_IO]}
+@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Complex_IO]}
 Implementations shall also provide the generic library package
 Wide_Text_IO.Complex_IO.  Its declaration is obtained from that of
 Text_IO.Complex_IO by systematically replacing Text_IO by Wide_Text_IO and

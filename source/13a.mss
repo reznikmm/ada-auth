@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:31 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 @redundant[This section describes features for
@@ -4990,7 +4990,7 @@ stream of elements and reconstruct values from a stream.
 For @PrefixType{every subtype S of a specific type @i(T)},
 the following attributes are defined.
 @begin{Description}
-@Attribute{Prefix=<S>, AttrName=<Write>,
+@AttributeLeading{Prefix=<S>, AttrName=<Write>,
   Text=<S'Write denotes a procedure with the following specification:
 @begin{DescExample}
 @key(procedure) S'Write(
@@ -5000,7 +5000,7 @@ the following attributes are defined.
 
 @noprefix@;S'Write writes the value of @i{Item} to @i{Stream}.>}
 
-@Attribute{Prefix=<S>, AttrName=<Read>,
+@AttributeLeading{Prefix=<S>, AttrName=<Read>,
   Text=<S'Read denotes a procedure with the following specification:
 @begin{DescExample}
 @key(procedure) S'Read(
@@ -5052,7 +5052,7 @@ elementary types in terms of stream elements.}
 For @PrefixType{every subtype S'Class of a class-wide type
 @i(T)'Class}:
 @begin{Description}
-@Attribute{Prefix=<S'Class>, AttrName=<Write>,
+@AttributeLeading{Prefix=<S'Class>, AttrName=<Write>,
   Text=<S'Class'Write denotes a procedure with the following
 specification:
 @begin{DescExample}
@@ -5064,7 +5064,7 @@ specification:
 @noprefix@;Dispatches to the subprogram denoted by the Write attribute of
 the specific type identified by the tag of Item.>}
 
-@Attribute{Prefix=<S'Class>, AttrName=<Read>,
+@AttributeLeading{Prefix=<S'Class>, AttrName=<Read>,
   Text=<S'Class'Read denotes a procedure with the following specification:
 @begin{DescExample}
 @key(procedure) S'Class'Read(
@@ -5099,7 +5099,7 @@ range of the scalar type.
 For @PrefixType{every subtype S of a specific type @i(T)},
 the following attributes are defined.
 @begin{Description}
-@Attribute{Prefix=<S>, AttrName=<Output>,
+@AttributeLeading{Prefix=<S>, AttrName=<Output>,
   Text=<S'Output denotes a procedure with the following specification:
 @begin{DescExample}
 @key(procedure) S'Output(
@@ -5114,7 +5114,7 @@ Note that the bounds are included even for an array type whose
 first subtype is constrained.
 @end{Ramification}
 
-@Attribute{Prefix=<S>, AttrName=<Input>,
+@AttributeLeading{Prefix=<S>, AttrName=<Input>,
   Text=<S'Input denotes a function with the following specification:
 @begin{DescExample}
 @key(function) S'Input(
@@ -5146,7 +5146,7 @@ the value of the object.
 For @PrefixType{every subtype S'Class of a class-wide type
 @i(T)'Class}:
 @begin{Description}
-@Attribute{Prefix=<S'Class>, AttrName=<Output>,
+@AttributeLeading{Prefix=<S'Class>, AttrName=<Output>,
   Text=<S'Class'Output denotes a procedure with the following
 specification:
 @begin{DescExample}
@@ -5161,7 +5161,7 @@ see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Output attribute of
 the specific type identified by the tag.>}
 
-@Attribute{Prefix=<S'Class>, AttrName=<Input>,
+@AttributeLeading{Prefix=<S'Class>, AttrName=<Input>,
   Text=<S'Class'Input denotes a function with the following specification:
 @begin{DescExample}
 @key(function) S'Class'Input(

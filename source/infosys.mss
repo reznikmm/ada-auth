@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2000/08/03 05:37:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2000/08/08 22:56:19 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:42 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -111,20 +111,20 @@ The library package Decimal has the following declaration:
 @key(package) Ada.Decimal @key(is)
    @key(pragma) Pure(Decimal);
 
-   Max_Scale : @key(constant) := @RI{implementation-defined};
-   Min_Scale : @key(constant) := @RI{implementation-defined};
+   @AdaDefn{Max_Scale} : @key(constant) := @RI{implementation-defined};
+   @AdaDefn{Min_Scale} : @key(constant) := @RI{implementation-defined};
 
-   Min_Delta : @key(constant) := 10.0**(-Max_Scale);
-   Max_Delta : @key(constant) := 10.0**(-Min_Scale);
+   @AdaDefn{Min_Delta} : @key(constant) := 10.0**(-Max_Scale);
+   @AdaDefn{Max_Delta} : @key(constant) := 10.0**(-Min_Scale);
 
-   Max_Decimal_Digits : @key(constant) := @RI{implementation-defined};
+   @AdaDefn{Max_Decimal_Digits} : @key(constant) := @RI{implementation-defined};
 
    @key(generic)
       @key(type) Dividend_Type  @key(is) @key(delta) <> @key(digits) <>;
       @key(type) Divisor_Type   @key(is) @key(delta) <> @key(digits) <>;
       @key(type) Quotient_Type  @key(is) @key(delta) <> @key(digits) <>;
       @key(type) Remainder_Type @key(is) @key(delta) <> @key(digits) <>;
-   @key(procedure) Divide (Dividend  : @key(in) Dividend_Type;
+   @key(procedure) @AdaSubDefn{Divide} (Dividend  : @key(in) Dividend_Type;
                      Divisor   : @key(in) Divisor_Type;
                      Quotient  : @key(out) Quotient_Type;
                      Remainder : @key(out) Remainder_Type);
@@ -926,24 +926,24 @@ The library package Text_IO.Editing has the following declaration:
 @LangDefType{Package=[Ada.Text_IO.Editing],
              Type=[Picture]}
 
-   @key(function) Valid (Pic_String      : @key(in) String;
+   @key(function) @AdaSubDefn{Valid} (Pic_String      : @key(in) String;
                    Blank_When_Zero : @key(in) Boolean := False) @key(return) Boolean;
 
-   @key(function) To_Picture (Pic_String      : @key(in) String;
+   @key(function) @AdaSubDefn{To_Picture} (Pic_String      : @key(in) String;
                         Blank_When_Zero : @key(in) Boolean := False)
       @key(return) Picture;
 
-   @key(function) Pic_String      (Pic : @key(in) Picture) @key(return) String;
-   @key(function) Blank_When_Zero (Pic : @key(in) Picture) @key(return) Boolean;
+   @key(function) @AdaSubDefn{Pic_String}      (Pic : @key(in) Picture) @key(return) String;
+   @key(function) @AdaSubDefn{Blank_When_Zero} (Pic : @key(in) Picture) @key(return) Boolean;
 
-   Max_Picture_Length  : @key(constant) := @RI{implementation_defined};
+   @AdaDefn{Max_Picture_Length}  : @key(constant) := @RI{implementation_defined};
 
-   Picture_Error       : @key(exception);
+   @AdaDefn{Picture_Error}       : @key(exception);
 
-   Default_Currency    : @key(constant) String    := "$";
-   Default_Fill        : @key(constant) Character := '*';
-   Default_Separator   : @key(constant) Character := ',';
-   Default_Radix_Mark  : @key(constant) Character := '.';
+   @AdaDefn{Default_Currency}    : @key(constant) String    := "$";
+   @AdaDefn{Default_Fill}        : @key(constant) Character := '*';
+   @AdaDefn{Default_Separator}   : @key(constant) Character := ',';
+   @AdaDefn{Default_Radix_Mark}  : @key(constant) Character := '.';
 
    @key(generic)
       @key(type) Num @key(is) @key(delta) <> @key(digits) <>;
@@ -951,17 +951,17 @@ The library package Text_IO.Editing has the following declaration:
       Default_Fill       : @key(in) Character :=  Text_IO.Editing.Default_Fill;
       Default_Separator  : @key(in) Character :=  Text_IO.Editing.Default_Separator;
       Default_Radix_Mark : @key(in) Character :=  Text_IO.Editing.Default_Radix_Mark;
-   @key(package) Decimal_Output @key(is)
-      @key(function) Length (Pic      : @key(in) Picture;
+   @key(package) @AdaDefn{Decimal_Output} @key(is)
+      @key(function) @AdaSubDefn{Length} (Pic      : @key(in) Picture;
                        Currency : @key(in) String := Default_Currency)
          @key(return) Natural;
 
-      @key(function) Valid (Item     : @key(in) Num;
+      @key(function) @AdaSubDefn{Valid} (Item     : @key(in) Num;
                       Pic      : @key(in) Picture;
                       Currency : @key(in) String := Default_Currency)
          @key(return) Boolean;
 
-      @key(function) Image (Item       : @key(in) Num;
+      @key(function) @AdaSubDefn{Image} (Item       : @key(in) Num;
                       Pic        : @key(in) Picture;
                       Currency   : @key(in) String    := Default_Currency;
                       Fill       : @key(in) Character := Default_Fill;
@@ -969,7 +969,7 @@ The library package Text_IO.Editing has the following declaration:
                       Radix_Mark : @key(in) Character := Default_Radix_Mark)
          @key(return) String;
 
-      @key(procedure) Put (File       : @key(in) File_Type;
+      @key(procedure) @AdaSubDefn{Put} (File       : @key(in) File_Type;
                      Item       : @key(in) Num;
                      Pic        : @key(in) Picture;
                      Currency   : @key(in) String    := Default_Currency;
@@ -977,14 +977,14 @@ The library package Text_IO.Editing has the following declaration:
                      Separator  : @key(in) Character := Default_Separator;
                      Radix_Mark : @key(in) Character := Default_Radix_Mark);
 
-      @key(procedure) Put (Item       : @key(in) Num;
+      @key(procedure) @AdaSubDefn{Put} (Item       : @key(in) Num;
                      Pic        : @key(in) Picture;
                      Currency   : @key(in) String    := Default_Currency;
                      Fill       : @key(in) Character := Default_Fill;
                      Separator  : @key(in) Character := Default_Separator;
                      Radix_Mark : @key(in) Character := Default_Radix_Mark);
 
-      @key(procedure) Put (To         : @key(out) String;
+      @key(procedure) @AdaSubDefn{Put} (To         : @key(out) String;
                      Item       : @key(in) Num;
                      Pic        : @key(in) Picture;
                      Currency   : @key(in) String    := Default_Currency;

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/08/08 22:56:19 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:45 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program
@@ -19,18 +19,19 @@ The library package Ada.Command_Line has the following declaration:
 @key[package] Ada.Command_Line @key[is]
   @key[pragma] Preelaborate(Command_Line);
 
-  @key[function] Argument_Count @key[return] Natural;
+  @key[function] @AdaSubDefn{Argument_Count} @key[return] Natural;
 
-  @key[function] Argument (Number : @key[in] Positive) @key[return] String;
+  @key[function] @AdaSubDefn{Argument} (Number : @key[in] Positive) @key[return] String;
 
-  @key[function] Command_Name @key[return] String;
+  @key[function] @AdaSubDefn{Command_Name} @key[return] String;
 
+@LangDefType{Package=[Ada.Command_Line],Type=[Exit_Status]}
   @key[type] Exit_Status @key[is] @RI{implementation-defined integer type};
 
-  Success : @key[constant] Exit_Status;
-  Failure : @key[constant] Exit_Status;
+  @AdaDefn{Success} : @key[constant] Exit_Status;
+  @AdaDefn{Failure} : @key[constant] Exit_Status;
 
-  @key[procedure] Set_Exit_Status (Code : @key[in] Exit_Status);
+  @key[procedure] @AdaSubDefn{Set_Exit_Status} (Code : @key[in] Exit_Status);
 
 @key[private]
   ... -- @RI{not specified by the language}

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:37 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -84,7 +84,7 @@ The implicit empty private part is important because certain
 implicit declarations occur there if the package is a child package,
 and it defines types in its visible part that are derived from,
 or contain as components, private types declared within the
-parent package.  These implicit declarations are visible
+parent package. These implicit declarations are visible
 in children of the child package.
 See @RefSecNum(Compilation Units - Library Units).
 @end{Ramification}
@@ -127,7 +127,7 @@ whose bodies can occur in @nt{package_specification}s.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a package declaration:}
+@leading@keepnext@i{Example of a package declaration:}
 @begin{Example}
 @key[package] Rational_Numbers @key[is]
 
@@ -156,7 +156,7 @@ language environment
 @begin{Incompatible83}
 In Ada 83, a library package is allowed to have a body even if
 it doesn't need one.
-In Ada 9X, a library package body is either
+In Ada 95, a library package body is either
 required or forbidden @em never optional.
 The workaround is to add @key[pragma] Elaborate_Body,
 or something else requiring a body,
@@ -278,7 +278,7 @@ elaborated, and its @nt{handled_sequence_of_statements} is then executed.
 @begin{Notes}
 A variable declared in the body of a package is only visible
 within this body and, consequently, its value can only be
-changed within the @nt{package_body}.  In the absence of local tasks,
+changed within the @nt{package_body}. In the absence of local tasks,
 the value of such a variable remains unchanged between calls issued
 from outside the package to subprograms declared in the visible part.
 The properties of such a variable are similar to those of a @lquotes@;static@rquotes@;
@@ -286,14 +286,14 @@ variable of C.
 
 The elaboration of the body of a subprogram explicitly declared
 in the visible part of a package is caused by the elaboration of the
-body of the package.  Hence a call of such a subprogram by an
+body of the package. Hence a call of such a subprogram by an
 outside program unit raises the exception Program_Error if the call
 takes place before the elaboration of the
 @nt{package_body} (see @RefSecNum{Declarative Parts}).
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a package body
+@leading@keepnext@i{Example of a package body
 (see @RefSecNum{Package Specifications and Declarations}):}
 @begin{Example}
 @key[package] @key[body] Rational_Numbers @key[is]
@@ -321,10 +321,10 @@ takes place before the elaboration of the
       @key[end] @key[if];
    @key[end] "/";
 
-   @key[function] "+" (X,Y : Rational) @key[return] Rational @key[is] ...  @key[end] "+";
-   @key[function] "-" (X,Y : Rational) @key[return] Rational @key[is] ...  @key[end] "-";
-   @key[function] "*" (X,Y : Rational) @key[return] Rational @key[is] ...  @key[end] "*";
-   @key[function] "/" (X,Y : Rational) @key[return] Rational @key[is] ...  @key[end] "/";
+   @key[function] "+" (X,Y : Rational) @key[return] Rational @key[is] ... @key[end] "+";
+   @key[function] "-" (X,Y : Rational) @key[return] Rational @key[is] ... @key[end] "-";
+   @key[function] "*" (X,Y : Rational) @key[return] Rational @key[is] ... @key[end] "*";
+   @key[function] "/" (X,Y : Rational) @key[return] Rational @key[is] ... @key[end] "/";
 
 @key[end] Rational_Numbers;
 @end{Example}
@@ -372,7 +372,7 @@ A private (untagged) type can be thought of as a record type
 with the type of its single (hidden) component being the full view.
 
 A private tagged type can be thought of as a private extension
-of an anonymous parent with no components.  The only
+of an anonymous parent with no components. The only
 dispatching operation of the parent is equality
 (although the Size attribute, and, if nonlimited, assignment are allowed,
 and those will presumably be implemented in terms of dispatching).
@@ -484,7 +484,7 @@ that seemed like too much mechanism.
   method.
 @end{Honest}
 @begin{Reason}
-  Tagged limited private types have certain capabilities that are
+  @leading@;Tagged limited private types have certain capabilities that are
   incompatible with having assignment for the full view of the type.
   In particular, tagged limited private types can be extended
   with access discriminants and components of a limited type,
@@ -541,8 +541,7 @@ that seemed like too much mechanism.
   corresponding record extension if the parent is nonlimited.
 @end{Reason}
 @begin{Ramification}
-
-A type derived from an untagged private type is untagged,
+@leading@;A type derived from an untagged private type is untagged,
 even if the full view of the parent is tagged,
 and even at places that can see the parent:
 @begin{Example}
@@ -617,7 +616,7 @@ the parent subtype of the full view is required to be constrained
   Also, the full view cannot inherit the discriminants in this case;
   the @nt{known_discriminant_part} has to be explicit.
 
-  That is, the following is illegal:
+  @leading@keepnext@;That is, the following is illegal:
   @begin{Example}
 @key[package] P @key[is]
     @key[type] T(D : Integer) @key[is] @key[private];
@@ -674,7 +673,7 @@ matching constraint on those discriminants.
   chain between the ancestor type and the parent type.
 @end{Ramification}
 @begin{Reason}
-This prevents the following:
+@leading@keepnext@;This prevents the following:
 @begin{Example}
 @key[package] P @key[is]
     @key[type] T2 @key[is] @key[new] T1(Discrim => 3) @key[with] @key[private];
@@ -686,8 +685,7 @@ This prevents the following:
 
 The constraints in this example do not statically match.
 
-
-If the constraint on the parent subtype of the full view depends on
+@leading@;If the constraint on the parent subtype of the full view depends on
 discriminants of the full view, then the ancestor subtype has to be
 unconstrained:
 @begin{Example}
@@ -727,7 +725,7 @@ a private type other than a generic formal private type.
 @Defn{package-private extension}
 Similarly, a @i(package-private extension) is one
 declared by a @nt<private_extension_declaration>.
-These terms are not used in the RM9X version of this document.
+These terms are not used in the RM95 version of this document.
 @end{Discussion}
 
 A declaration of a partial view and the corresponding
@@ -787,7 +785,7 @@ type; they are then forced to initialize each object by calling some
 operation declared in the visible part of the package.
 If such a type is also limited, then no objects of the type can
 be declared outside the scope of the @nt{full_type_declaration}, restricting
-all object creation to the package defining the type.  This allows
+all object creation to the package defining the type. This allows
 complete control over all storage allocation for the type.
 Objects of such a type can still be passed as parameters, however.
 @begin{Discussion}
@@ -849,13 +847,15 @@ See @RefSecNum{Dispatching Operations of Tagged Types}.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of private type declarations:}
+@leading@keepnext@i{Examples of private type declarations:}
 @begin{Example}
 @key[type] Key @key[is] @key[private];
 @key[type] File_Name @key[is] @key[limited] @key[private];
 @end{Example}
 
-@i{Example of a private extension declaration:}
+@begin{Wide}
+@leading@keepnext@i{Example of a private extension declaration:}
+@end{Wide}
 @begin{Example}
 @key[type] List @key[is] @key[new] Ada.Finalization.Controlled @key[with] @key[private];
 @end{Example}
@@ -867,7 +867,7 @@ allow the reserved word @key{tagged}.
 
 In Ada 83, a private type without discriminants cannot be completed
 with a type with discriminants.
-Ada 9X allows the full view to have discriminants,
+Ada 95 allows the full view to have discriminants,
 so long as they have defaults
 (that is, so long as the first subtype is definite).
 This change is made for uniformity with generics,
@@ -982,7 +982,7 @@ declared in the visible part of a package, and the composite type (or
 derived type) is declared within the declarative region of that package
 (possibly in a nested package or a child package).
 
-Consider:
+@leading@keepnext@;Consider:
 @begin{Example}
 @key[package] Parent @key[is]
     @key[type] Root @key[is] @key[tagged] @key[null] @key[record];
@@ -1038,7 +1038,7 @@ but this is unrelated to the inherited one @em it
 does not override the inherited one,
 and occupies a different slot in the type descriptor.
 
-T3 inherits both Op1 and Op2.  Op1 is implicitly declared immediately
+T3 inherits both Op1 and Op2. Op1 is implicitly declared immediately
 after the type declaration,
 whereas Op2 is declared at the beginning of the private part.
 Note that if Child were a private child of Parent,
@@ -1061,12 +1061,11 @@ implicitly declared for T5,
 since T2's version of that Op2 is never visible (anywhere @em it never
 got declared either).
 
-
 For all of these rules, implicit private parts and bodies are assumed as
 needed.
 
-It is possible for characteristics of a type to be revealed in more than
-one place:
+@leading@keepnext@;It is possible for characteristics of a type to be revealed
+in more than one place:
 
 @begin{Example}
 @key[package] P @key[is]
@@ -1102,7 +1101,7 @@ one place:
 
 @end{Discussion}
 
-@Redundant[The Class attribute is defined for tagged subtypes in
+@leading@Redundant[The Class attribute is defined for tagged subtypes in
 @RefSecNum{Tagged Types and Type Extensions}.
 In addition,] for
 @PrefixType{every subtype S of an untagged private type
@@ -1129,14 +1128,14 @@ those defined by the visible part.
 Within these outside program units the type is just a private type
 or private extension,
 and any language rule that applies only to another class of types
-does not apply.  The fact that the full declaration might implement
+does not apply. The fact that the full declaration might implement
 a private type with a type of a particular class (for example, as
 an array type) is relevant only
 within the declarative region of the package itself
 including any child units.
 
 @NoPrefix@;The consequences of this actual implementation are, however, valid
-everywhere.  For example: any default initialization of components
+everywhere. For example: any default initialization of components
 takes place; the attribute Size provides the size of the full view;
 finalization is still done for controlled components of the full view;
 task dependence rules still apply to components that are task
@@ -1157,7 +1156,7 @@ are also defined for discriminants and inherited components.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a type with private operations:}
+@leading@keepnext@i{Example of a type with private operations:}
 @begin{Example}
 @key[package] Key_Manager @key[is]
    @key[type] Key @key[is] @key[private];
@@ -1195,7 +1194,7 @@ not include other relational operators such as ">=", or arithmetic
 operators.
 
 @NoPrefix@;The explicitly declared operator "<" hides the predefined operator
-"<" implicitly declared by the @nt{full_type_declaration}.  Within the
+"<" implicitly declared by the @nt{full_type_declaration}. Within the
 body of the function, an explicit conversion of X and Y to the
 subtype Natural is necessary to invoke the "<" operator of the parent
 type.
@@ -1203,7 +1202,7 @@ Alternatively, the result of the function could be written as not (X
 >= Y), since the operator ">=" is not redefined.
 
 @NoPrefix@;The value of the variable Last_Key, declared in the package body,
-remains unchanged between calls of the procedure Get_Key.  (See also
+remains unchanged between calls of the procedure Get_Key. (See also
 the NOTES of @RefSecNum{Package Bodies}.)
 @end{Notes}
 
@@ -1244,7 +1243,7 @@ which shall be a full constant declaration
 or a @nt{pragma} Import (see @RefSecNum(Interface to Other Languages)).
 @Defn{full declaration}
 
-A deferred constant declaration that is completed
+@leading@;A deferred constant declaration that is completed
 by a full constant declaration shall occur immediately
 within the visible part of a @nt<package_specification>.
 For this case, the following additional rules apply to the
@@ -1303,7 +1302,7 @@ imported constant) the @nt<array_type_definition>.
 @begin{Notes}
 The full constant declaration for a deferred constant that is of a given
 private type or private extension is not allowed before the corresponding
-@nt{full_type_declaration}.  This is a consequence of the freezing
+@nt{full_type_declaration}. This is a consequence of the freezing
 rules for types
 (see @RefSecNum{Freezing Rules}).
 @begin{Ramification}
@@ -1320,7 +1319,7 @@ variables declared in the private part of a package.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of deferred constant declarations:}
+@leading@keepnext@i{Examples of deferred constant declarations:}
 @begin{Example}
 Null_Key : @key[constant] Key;      @RI[-- see @RefSecNum{Private Operations}]
 
@@ -1333,7 +1332,7 @@ CPU_Identifier : @key[constant] String(1..8);
 @begin{Extend83}
 In Ada 83, a deferred constant is required to be of a private type
 declared in the same visible part.
-This restriction is removed for Ada 9X;
+This restriction is removed for Ada 95;
 deferred constants can be of any type.
 
 In Ada 83, a deferred constant declaration was not permitted to
@@ -1344,11 +1343,11 @@ we require static matching of subtypes if the deferred constant
 is constrained.
 
 A deferred constant declaration can be completed with a @nt{pragma}
-Import.  Such a deferred constant declaration need not be within a
+Import. Such a deferred constant declaration need not be within a
 @nt{package_specification}.
 
 The rules for too-early uses of deferred constants are modified in
-Ada 9X to allow more cases, and catch all errors at compile time.
+Ada 95 to allow more cases, and catch all errors at compile time.
 This change is necessary in order to allow deferred constants of a
 tagged type without violating the principle that for a dispatching call,
 there is always an implementation to dispatch to.
@@ -1361,7 +1360,7 @@ constants.
 Furthermore, uninitialized deferred constants cause trouble for the
 shared variable / tasking rules, since they are really variable, even
 though they purport to be constant.
-In Ada 9X, they cannot be touched until they become constant.
+In Ada 95, they cannot be touched until they become constant.
 
 Note that we do not consider this change to be an upward
 incompatibility, because it merely changes an erroneous execution in Ada
@@ -1374,7 +1373,7 @@ objects.
 One wonders if the implementation is required to initialize the
 deferred constant to null, and then initialize it (again!) to its
 real value.
-In Ada 9X, the problem goes away.
+In Ada 95, the problem goes away.
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -1397,16 +1396,16 @@ they are simply a special case of @nt<object_declaration>s.
 @begin{Discussion}
 The concept of the @i(value) of a limited type is difficult
 to define, since the abstract value of a limited type often
-extends beyond its physical representation.  In some
+extends beyond its physical representation. In some
 sense, values of a limited type cannot be divorced from
-their object.  The value @i(is) the object.
+their object. The value @i(is) the object.
 
 In Ada 83, in the two places where limited types were defined
 by the language, namely tasks and files, an implicit
 level of indirection was implied by the semantics to
 avoid the separation of the value from an associated
 object.
-In Ada 9X, most limited types are passed by reference,
+In Ada 95, most limited types are passed by reference,
 and even return-ed by reference.
 @end{Discussion}
 @begin{Honest}
@@ -1422,7 +1421,7 @@ If a tagged record type has any limited components,
 then the reserved word @key[limited] shall
 appear in its @nt<record_type_definition>.
 @begin{Reason}
-This prevents tagged limited types from becoming nonlimited.
+@leading@;This prevents tagged limited types from becoming nonlimited.
 Otherwise, the following could happen:
 @begin{Example}
 @key[package] P @key[is]
@@ -1451,7 +1450,7 @@ which is bad news, given the access discriminant and the task.
 @end{Legality}
 
 @begin{StaticSem}
-@Defn{limited type}
+@leading@keepnext@Defn{limited type}
 A type is @i{limited} if it
 is a descendant of one of the following:
 @begin(itemize)
@@ -1474,7 +1473,7 @@ a limited type.]
 @end{StaticSem}
 
 @begin{Notes}
-The following are consequences of the rules for limited types:
+@leading@keepnext@;The following are consequences of the rules for limited types:
 @begin{Itemize}
 An initialization expression is not allowed in an
 @nt{object_declaration} if the type of the object is limited.
@@ -1510,7 +1509,7 @@ circumstances.
 
   It is important to remember
   that a single nonprivate type can be both limited and nonlimited
-  in different parts of its scope.  In other words, @lquotes@;limited@rquotes@; is a property
+  in different parts of its scope. In other words, @lquotes@;limited@rquotes@; is a property
   that depends on where you are in the scope of the type.
   We don't call this a @lquotes@;view property@rquotes@; because there is no particular
   declaration to declare the nonlimited view.
@@ -1520,7 +1519,7 @@ circumstances.
 @end{Notes}
 
 @begin{Examples}
-@i{Example of a package with a limited type:}
+@leading@keepnext@i{Example of a package with a limited type:}
 @begin{Example}
 @key[package] IO_Package @key[is]
    @key[type] File_Name @key[is] @key[limited] @key[private];
@@ -1556,7 +1555,7 @@ circumstances.
 @i{Notes on the example:}
 In the example above, an outside subprogram making use of IO_Package
 may obtain a file name by calling Open and later use it in calls to
-Read and Write.  Thus, outside the package, a file name obtained from
+Read and Write. Thus, outside the package, a file name obtained from
 Open acts as a kind of password; its internal properties (such as
 containing a numeric value) are not known and no other operations
 (such as addition or comparison of internal names) can be performed
@@ -1565,9 +1564,9 @@ Most importantly, clients of the package cannot make copies
 of objects of type File_Name.
 
 @NoPrefix@;This example is characteristic of any case where complete control
-over the operations of a type is desired.  Such packages serve a dual
-purpose.  They prevent a user from making use of the internal
-structure of the type.  They also implement the notion of an
+over the operations of a type is desired. Such packages serve a dual
+purpose. They prevent a user from making use of the internal
+structure of the type. They also implement the notion of an
 encapsulated data type where the only operations on the type are
 those given in the package specification.
 
@@ -1584,7 +1583,7 @@ cases, are removed.
 @end{Extend83}
 
 @begin{DiffWord83}
-Since limitedness and privateness are orthogonal in Ada 9X (and
+Since limitedness and privateness are orthogonal in Ada 95 (and
 to some extent in Ada 83), this is now its own clause rather
 than being a subclause of
 @RefSec{Private Types and Private Extensions}.
@@ -1653,7 +1652,7 @@ or Finalize is applied to the containing object.
 @end{Intro}
 
 @begin{StaticSem}
-The following language-defined library package exists:
+@leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @tabclear()@tabset(P22)
 @ChildUnit{Parent=[Ada],Child=[Finalization]}
@@ -1699,7 +1698,7 @@ that it is limited and it lacks the primitive subprogram Adjust.
   However, a reasonable coding convention is e.g. for Finalize to
   always call the parent's Finalize after doing whatever work is needed
   for the extension part.
-  (Unlike CLOS, we have no way to do that automatically in Ada 9X.)
+  (Unlike CLOS, we have no way to do that automatically in Ada 95.)
   For this to work, Finalize cannot be abstract.
   In a generic unit, for a generic formal abstract derived type whose
   ancestor is Controlled or Limited_Controlled, calling the ancestor's
@@ -1736,7 +1735,7 @@ if the type of the ancestor part is itself controlled,
 the Initialize procedure of the ancestor type is called,
 unless that Initialize procedure is abstract.
 @begin{Discussion}
-Example:
+@leading@keepnext@;Example:
 @begin{Example}
 @key[type] T1 @key[is] @key[new] Controlled @key[with]
     @key[record]
@@ -1797,7 +1796,7 @@ on Initialize.
   For multiple such components, it allows some predictability.
 @end{Reason}
 
-@Defn{assignment operation}
+@leading@keepnext@Defn{assignment operation}
 When a target object with any controlled parts is assigned a value,
 @Redundant[either when created or in a subsequent
 @nt{assignment_statement},]
@@ -1854,18 +1853,18 @@ the implementation may eliminate the intermediate anonymous object,
 so this description subsumes the one given in
 @RefSec{Assignment Statements}.]
 @begin{Reason}
-An alternative design for user-defined assignment might involve an
+@leading@;An alternative design for user-defined assignment might involve an
 Assign operation instead of Adjust:
 @begin{Example}
 @key[procedure] Assign(Target : @key[in] @key[out] Controlled; Source : @key[in] @key[out] Controlled);
 @end{Example}
 
-Or perhaps even a syntax like this:
+@leading@keepnext@;Or perhaps even a syntax like this:
 @begin{Example}
 @key[procedure] ":="(Target : @key[in] @key[out] Controlled; Source : @key[in] @key[out] Controlled);
 @end{Example}
 
-Assign (or ":=") would have the responsibility of doing the copy,
+@leading@;Assign (or ":=") would have the responsibility of doing the copy,
 as well as whatever else is necessary.
 This would have the advantage that the Assign operation knows about both
 the target and the source at the same time @em it would be possible to
@@ -1942,7 +1941,7 @@ Similarly, for an @nt{assignment_statement},
 the implementation need not create an anonymous object if
 the value being assigned is the result of evaluating a @nt{name}
 denoting an object (the source object) whose storage cannot overlap
-with the target.  If the source object might overlap with the
+with the target. If the source object might overlap with the
 target object, then the implementation can avoid the need for
 an intermediary anonymous object by exercising one of the
 above permissions and perform the assignment one component
@@ -1970,7 +1969,7 @@ subcomponents may be self-referential or otherwise position-dependent.
 @end{ImplPerm}
 
 @begin{Extend83}
-Controlled types and user-defined finalization are new to Ada 9X.
+Controlled types and user-defined finalization are new to Ada 95.
 (Ada 83 had finalization semantics only for masters of tasks.)
 @end{Extend83}
 
@@ -2100,7 +2099,7 @@ really means
 @lquotes@;@i{the execution of} the @nt{subprogram_call} or task is complete.@rquotes@;
 @end{Honest}
 
-@RootDefn2{Term=[finalization], Sec=(of an object)}
+@leading@keepnext@RootDefn2{Term=[finalization], Sec=(of an object)}
 For the @i{finalization} of an object:
 @begin{Itemize}
   If the object is of an elementary type, finalization has no effect;
@@ -2212,7 +2211,7 @@ if that is a @nt{compound_statement},
 they are finalized before starting the execution of any
 @nt{statement} within the @nt{compound_statement}.
 @begin{Honest}
-This is not to be construed as permission to call Finalize
+@leading@;This is not to be construed as permission to call Finalize
 asynchronously with respect to normal user code.
 For example,
 @begin{Example}
@@ -2242,13 +2241,13 @@ is not known at the call site.
 @end{RunTime}
 
 @begin{Bounded}
-It is a bounded error for a call on
+@leading@;It is a bounded error for a call on
 Finalize or Adjust to propagate an exception.
 The possible consequences depend on what action invoked the Finalize or
 Adjust operation:
 @begin{Ramification}
   It is not a bounded error for Initialize to propagate an
-  exception.  If Initialize propagates an exception,
+  exception. If Initialize propagates an exception,
   then no further calls on Initialize are performed,
   and those components that have already been initialized
   (either explicitly or by default)
@@ -2434,7 +2433,7 @@ The one exception is the anonymous object created by an @nt{aggregate};
 Initialize is not applied to the @nt{aggregate} as a whole,
 nor is the value of the @nt<aggregate> adjusted.
 
-@Defn2{Term=[assignment operation], Sec=(list of uses)}
+@leading@Defn2{Term=[assignment operation], Sec=(list of uses)}
 All of the following use the assignment operation,
 and thus perform value adjustment:
 @begin{Itemize}
@@ -2471,7 +2470,7 @@ but the value of the @nt{aggregate} as a whole is not adjusted;
 neither is Initialize called);
 @end{Itemize}
 
-The following also use the assignment operation,
+@leading@;The following also use the assignment operation,
 but adjustment never does anything interesting in these cases:
 @begin{Itemize}
 By-copy parameter passing uses the assignment operation
@@ -2534,8 +2533,8 @@ possible implementation strategy for exception handling @em the
 map is consulted to determine which exception handler applies.
 
 If the PC-map approach is used, the implementation must take care in the
-case of arrays.  The generated code will generally contain a loop to
-initialize an array.  If an exception is raised part way through the
+case of arrays. The generated code will generally contain a loop to
+initialize an array. If an exception is raised part way through the
 array, the components that have been initialized must be finalized,
 and the others must not be finalized.
 

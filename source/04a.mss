@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:31 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -472,8 +472,7 @@ corresponding component of the object or value.
   can only denote declarations that are visible (see @RefSecNum{Visibility}).
 @end{Ramification}
 
-A single entry, an entry family,
-or a protected subprogram:
+A single entry, an entry family, or a protected subprogram:
 
 @NoPrefix@;The @nt{prefix} shall resolve to denote an object or value of some
 task or protected type (after any implicit dereference).
@@ -515,8 +514,8 @@ If the @nt<prefix> does not denote a package, then it
 shall be a @nt<direct_name> or an expanded name,
 and it shall resolve to denote a program unit (other than a package),
 the current instance of a type, a @nt{block_statement}, a @nt{loop_statement},
-or an @nt{accept_statement}
-(in the case of an @nt<accept_statement> or @nt<entry_body>,
+or an @nt{accept_@!statement}
+(in the case of an @nt<accept_@!statement> or @nt<entry_@!body>,
 no family index is allowed);
 the expanded name shall occur within the
 declarative region of this construct.
@@ -601,8 +600,8 @@ new terminology, to accommodate class-wide types, etc.
 @begin{Intro}
 @Defn{attribute}
 @Redundant[An @i(attribute) is a characteristic of an entity that can be
-queried via an @nt{attribute_reference}
-or a @nt<range_attribute_reference>.]
+queried via an @nt{attribute_@!reference}
+or a @nt<range_@!attribute_@!reference>.]
 @end{Intro}
 
 @begin{Syntax}
@@ -751,7 +750,7 @@ access type.
 @begin{Examples}
 @Leading@keepnext@i(Examples of attributes:)
 @begin{Example}
-@tabclear()@tabset(P58)
+@tabclear()@tabset(P64)
 Color'First        @RI[-- minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
 Rainbow'Base'First @RI[-- same as Color'First @\(see @RefSecNum{Enumeration Types})]
 Real'Digits        @RI[-- precision of the type Real @\(see @RefSecNum{Floating Point Types})]
@@ -1164,8 +1163,7 @@ an @nt<extension_aggregate>,
 only those components not determined by the ancestor expression or
 subtype are needed
 (see @RefSecNum{Extension Aggregates}).]
-Each @nt{selector_name} in a @nt{record_component_association}
-shall denote
+Each @nt{selector_@!name} in a @nt{record_component_association} shall denote
 a needed component @Redundant[(including possibly a discriminant)].
 @begin{Ramification}
 For the association list of a @nt{record_aggregate},
@@ -1240,8 +1238,8 @@ than a list of @nt<record_component_association>s.
 Each @nt<record_component_association> shall have at least
 one associated component, and each needed component
 shall be associated with exactly
-one @nt<record_component_association>.
-If a @nt<record_component_association> has two or more associated
+one @nt<record_@!component_@!association>.
+If a @nt<record_@!component_@!association> has two or more associated
 components, all of them shall be of the same type.
 @begin{Ramification}
   These rules apply to an association with
@@ -1281,13 +1279,11 @@ components, all of them shall be of the same type.
   nor specified twice.
 @end{Ramification}
 
-If the components of a @nt{variant_part} are needed,
-then the value
+If the components of a @nt{variant_part} are needed, then the value
 of a discriminant that governs the @nt{variant_part} shall be given
 by a static expression.
 @begin{Ramification}
-This
-expression might either be given within the aggregate itself,
+This expression might either be given within the aggregate itself,
 or in a constraint on the parent subtype in a @nt<derived_type_definition>
 for some ancestor of the type of the aggregate.
 @end{Ramification}
@@ -1296,7 +1292,7 @@ for some ancestor of the type of the aggregate.
 @begin{RunTime}
 @PDefn2{Term=[evaluation], Sec=(record_aggregate)}
 The evaluation of a @nt<record_aggregate> consists of the
-evaluation of the @nt<record_component_association_list>.
+evaluation of the @nt<record_@!component_@!association_@!list>.
 
 @PDefn2{Term=[evaluation], Sec=(record_component_association_list)}
 For the evaluation of a @nt{record_component_association_list},
@@ -1305,19 +1301,19 @@ for components specified in the association list are elaborated and
 any @nt<expression>s are evaluated and converted to the subtype of the
 associated component.
 @PDefn2{Term=[implicit subtype conversion],Sec=(expressions in aggregate)}
-@begin{Ramification}
-The conversion might raise Constraint_Error.
-@end{Ramification}
-@begin{Discussion}
-This check presumably happened as part of the dependent compatibility
-check in Ada 83.
-@end{Discussion}
 Any constraint elaborations and @nt{expression} evaluations (and conversions)
 occur in an arbitrary order, except that the @nt<expression>
 for a discriminant is evaluated (and converted) prior to the
 elaboration of any per-object constraint that depends on it, which in
 turn occurs prior to the evaluation and conversion of the @nt{expression} for
 the component with the per-object constraint.
+@begin{Ramification}
+The conversion in the first rule might raise Constraint_Error.
+@end{Ramification}
+@begin{Discussion}
+This check in the first rule presumably happened as part of the dependent
+compatibility check in Ada 83.
+@end{Discussion}
 
 The @nt<expression> of a @nt{record_component_association}
 is evaluated (and converted) once for each associated component.
@@ -1446,8 +1442,8 @@ For the @nt{record_component_association_list}
 of an @nt{extension_aggregate},
 the only components @i(needed) are those of the composite value defined
 by the aggregate that are not inherited from the type of
-the @nt<ancestor_part>, plus any inherited discriminants
-if the @nt<ancestor_part> is a @nt<subtype_mark> that
+the @nt<ancestor_@!part>, plus any inherited discriminants
+if the @nt<ancestor_@!part> is a @nt<subtype_@!mark> that
 denotes an unconstrained subtype.
 @end{StaticSem}
 
@@ -1650,7 +1646,7 @@ defines an applicable index constraint:
   an @nt{explicit_generic_actual_parameter},
   the @nt{expression} of a @nt{return_statement}, the
   initialization expression
-  in an @nt{object_declaration}, or a @nt{default_expression}
+  in an @nt{object_@!declaration}, or a @nt{default_@!expression}
   @Redundant[(for a parameter or a component)],
   when the nominal subtype
   of the corresponding formal parameter, generic formal parameter,

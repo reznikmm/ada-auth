@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/08 04:35:31 $}
+@Comment{$Date: 2000/08/08 22:56:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @LabeledClause{Array Types}
 
@@ -172,9 +172,9 @@ the corresponding index subtype of its type, except for null arrays
 @Defn2{Term=[unconstrained], Sec=(subtype)}
 An @nt{unconstrained_array_definition} defines an array type with
 an unconstrained first subtype.
-Each @nt{index_subtype_definition} defines the
+Each @nt{index_@!subtype_@!definition} defines the
 corresponding index subtype to be the subtype denoted
-by the @nt{subtype_mark}.
+by the @nt{subtype_@!mark}.
 @redundant[@PDefn2{Term=[box], Sec=(compound delimiter)}
 The compound delimiter <> (called a @i(box)) of an
 @nt<index_subtype_definition> stands for an undefined range
@@ -184,7 +184,7 @@ The compound delimiter <> (called a @i(box)) of an
 @Defn2{Term=[unconstrained], Sec=(subtype)}
 A @nt{constrained_array_definition} defines an array type with
 a constrained first subtype.
-Each @nt{discrete_subtype_definition}
+Each @nt{discrete_@!subtype_@!definition}
 defines the corresponding index subtype,
 as well as the corresponding index range for the
 constrained first subtype.
@@ -199,8 +199,8 @@ of the index ranges.
   This is also true for Ada 83.
 @end{Discussion}
 
-@Leading@;The discrete subtype defined by a @nt{discrete_subtype_definition} is
-either that defined by the @nt{subtype_indication}, or a subtype
+@Leading@;The discrete subtype defined by a @nt{discrete_@!subtype_@!definition} is
+either that defined by the @nt{subtype_@!indication}, or a subtype
 determined by the @nt{range} as follows:
 @begin(itemize)
   If the type of the @nt{range} resolves to @i(root_integer), then
@@ -244,21 +244,21 @@ then each component of the array is aliased
 @PDefn2{Term=[elaboration], Sec=(array_type_definition)}
 The elaboration of an @nt{array_type_definition}
 creates the array type and its first subtype,
-and consists of the elaboration of any @nt{discrete_subtype_definition}s
-and the @nt{component_definition}.
+and consists of the elaboration of any @nt{discrete_@!subtype_@!definition}s
+and the @nt{component_@!definition}.
 
 @PDefn2{Term=[elaboration], Sec=(discrete_subtype_definition)}
 The elaboration of a @nt{discrete_subtype_definition} creates
 the discrete subtype, and consists
-of the elaboration of the @nt{subtype_indication} or the
+of the elaboration of the @nt{subtype_@!indication} or the
 evaluation of the @nt{range}.
 @PDefn2{Term=[elaboration], Sec=(component_definition)}
-The elaboration of a @nt{component_definition} in an
-@nt{array_type_definition} consists of the elaboration
-of the @nt{subtype_indication}.
-The elaboration of any @nt{discrete_subtype_definition}s
+The elaboration of a @nt{component_@!definition} in an
+@nt{array_@!type_@!definition} consists of the elaboration
+of the @nt{subtype_@!indication}.
+The elaboration of any @nt{discrete_@!subtype_@!definition}s
 and the elaboration of the
-@nt{component_definition} are performed in an arbitrary order.
+@nt{component_@!definition} are performed in an arbitrary order.
 @end{RunTime}
 
 @begin{Notes}
@@ -550,7 +550,7 @@ A'Range, and A'Length. The following relation is satisfied (except
 for a null array) by the above attributes if the index type is an
 integer type:
 @begin(example)
-A'Length(N) = A'Last(N) - A'First(N) + 1
+   A'Length(N) = A'Last(N) - A'First(N) + 1
 @end(example)
 
 An array type is limited if its component type is limited
@@ -804,9 +804,9 @@ instance of a generic unit.
 @end{Reason}
 
 @nt{Default_expression}s shall be provided either for all or for none
-of the discriminants of a @nt{known_discriminant_part}.
-No @nt<default_expression>s are permitted in a
-@nt<known_discriminant_part> in a declaration of a tagged
+of the discriminants of a @nt{known_@!discriminant_@!part}.
+No @nt<default_@!expression>s are permitted in a
+@nt<known_@!discriminant_@!part> in a declaration of a tagged
 type @Redundant[or a generic formal type].
 @begin(Reason)
   The all-or-none rule
@@ -1142,7 +1142,8 @@ used only for discriminants defined by an @nt<access_definition>.
       Mat : Matrix(1 .. Rows, 1 .. Columns);       @RI[-- see @RefSecNum(Array Types)]
    @key(end) @key(record);
 
-@key(type) Square(Side : Integer) @key(is) @key(new) Matrix_Rec(Rows => Side, Columns => Side);
+@key(type) Square(Side : Integer) @key(is) @key(new)
+   Matrix_Rec(Rows => Side, Columns => Side);
 
 @key(type) Double_Square(Number : Integer) @key(is)
    @key(record)
@@ -1212,7 +1213,7 @@ associations.
 @end{Syntax}
 
 @begin{Resolution}
-Each @nt<selector_name> of a named @nt<discriminant_association> shall
+Each @nt<selector_name> of a named @nt<discriminant_@!association> shall
 resolve to denote a discriminant of the subtype being constrained;
 @Defn2{Term=[associated discriminants],
   Sec=(of a named @nt<discriminant_association>)}
@@ -1221,8 +1222,8 @@ the named association.
 @Defn2{Term=[associated discriminants],
   Sec=(of a positional @nt<discriminant_association>)}
 For a positional association, the @i(associated discriminant)
-is the one whose @nt<discriminant_specification> occurred in
-the corresponding position in the @nt<known_discriminant_part>
+is the one whose @nt<discriminant_@!specification> occurred in
+the corresponding position in the @nt<known_@!discriminant_@!part>
 that defined the discriminants of the subtype being constrained.
 
 @PDefn2{Term=[expected type], Sec=(discriminant_association expression)}
@@ -1503,20 +1504,20 @@ the constraint of the parent subtype in a
 @nt<derived_type_definition>
 then its name shall appear alone as a @nt<direct_name> (not as
 part of a larger expression or expanded name).
-@begin{Reason}
-This restriction simplifies implementation,
-  and allows the outer discriminant and the inner discriminant
-  or bound to possibly share storage.@end{reason}@begin{Ramification}
-
-  Other rules prevent such a discriminant from being an inherited
-  one.@end{ramification}
 A discriminant shall not be used to define the constraint of
 a scalar component.
 @begin{Reason}
-This restriction is inherited from Ada 83.
+The penultimate restriction simplifies implementation,
+  and allows the outer discriminant and the inner discriminant
+  or bound to possibly share storage.
+@end{reason}
+@begin{Ramification}
+  Other rules prevent such a discriminant from being an inherited one.
+@end{ramification}
+@begin{Reason}
+The last restriction is inherited from Ada 83.
 The restriction is not really necessary from a language design point of
-view,
-but we did not remove it,
+view, but we did not remove it,
 in order to avoid unnecessary changes to existing compilers.
 @end{Reason}
 @begin{Discussion}
@@ -1621,6 +1622,15 @@ that is an @nt<attribute_reference> whose @nt<prefix> denotes the current
 instance of the type,
 the expression containing the @nt<name> is called a @i(per-object expression),
 and the constraint being defined is called a @i(per-object constraint).
+@PDefn2{Term=[elaboration], Sec=(component_definition)}
+For the elaboration of a @nt{component_definition} of
+a @nt<component_declaration>, if the @nt{constraint} of
+the @nt{subtype_indication}
+is not a per-object constraint,
+then the @nt{subtype_indication} is elaborated.
+On the other hand, if the @nt{constraint} is a per-object constraint,
+then the elaboration consists of the evaluation of any included
+expression that is not part of a per-object expression.
 @begin(Discussion)
   The evaluation of other expressions that appear in
   @nt<component_definition>s and @nt<discrete_subtype_definition>s
@@ -1631,15 +1641,6 @@ and the constraint being defined is called a @i(per-object constraint).
   that appear within a composite type definition are evaluated
   according to the rules of the particular representation item.
 @end(Discussion)
-@PDefn2{Term=[elaboration], Sec=(component_definition)}
-For the elaboration of a @nt{component_definition} of
-a @nt<component_declaration>, if the @nt{constraint} of
-the @nt{subtype_indication}
-is not a per-object constraint,
-then the @nt{subtype_indication} is elaborated.
-On the other hand, if the @nt{constraint} is a per-object constraint,
-then the elaboration consists of the evaluation of any included
-expression that is not part of a per-object expression.
 @end{RunTime}
 
 @begin{Notes}
@@ -1847,9 +1848,9 @@ its @nt{discrete_choice}s covers the value.
 shall be covered as follows:
 @begin{itemize}
   If the discriminant is of a static constrained scalar subtype,
-  then each non-@key{others} @nt{discrete_choice} shall cover only values in
+  then each non-@key{others} @nt{discrete_@!choice} shall cover only values in
   that subtype, and each value of that subtype shall be covered
-  by some @nt{discrete_choice} @Redundant[(either explicitly or
+  by some @nt{discrete_@!choice} @Redundant[(either explicitly or
   by @key<others>)];
 
   If the type of the discriminant is a
@@ -2431,12 +2432,10 @@ a class-wide type.
 If the parent type is nonlimited, then each of the
 components of the @nt{record_extension_part} shall be nonlimited.
 @PDefn2{Term=[accessibility rule],Sec=(record extension)}
-
 The accessibility level
 (see @RefSecNum(Operations of Access Types))
 of a record extension shall not be statically deeper than that of its
 parent type.
-
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
@@ -2679,14 +2678,6 @@ may depend on operands or result context.
 A @i{call on a dispatching operation} is a call whose @nt<name> or
 @nt<prefix> denotes the declaration of a primitive subprogram
 of a tagged type, that is, a dispatching operation.
-@begin{Ramification}
-  This definition implies that a call through the dereference of an
-  access-to-subprogram value is never considered a call on
-  a dispatching operation.
-  Note also that if the @nt{prefix} denotes a @nt{renaming_declaration},
-  the place where the renaming occurs determines whether it is
-  primitive; the thing being renamed is irrelevant.
-@end{Ramification}
 @Defn{controlling operand}
 A @i{controlling operand} in a call on a dispatching operation of a tagged
 type @i(T) is one whose corresponding formal parameter is of type @i(T)
@@ -2701,6 +2692,14 @@ rather than the actual parameter itself.
 If the call is to a (primitive) function with result type @i(T),
 then the call has a @i(controlling result) @em
 the context of the call can control the dispatching.
+@begin{Ramification}
+  This definition implies that a call through the dereference of an
+  access-to-subprogram value is never considered a call on
+  a dispatching operation.
+  Note also that if the @nt{prefix} denotes a @nt{renaming_declaration},
+  the place where the renaming occurs determines whether it is
+  primitive; the thing being renamed is irrelevant.
+@end{Ramification}
 
 @Leading@;A @nt<name> or expression of a tagged type
 is either @i(statically) tagged,
@@ -2793,9 +2792,7 @@ it shall statically match the first subtype of the tagged type.
 If the dispatching operation overrides an inherited subprogram,
 it shall be subtype conformant with the inherited subprogram.
 @Defn2{Term=[subtype conformance],Sec=(required)}
-
 A dispatching operation shall not be of convention Intrinsic.
-
 If a dispatching operation overrides the predefined equals
 operator, then it shall be of convention Ada @Redundant[(either explicitly
 or by default @em see @RefSecNum{Conformance Rules})].
@@ -2808,8 +2805,7 @@ These rules
   are outside of its first subtype.@end{reason}
 
 The @nt<default_expression> for a controlling formal parameter
-of a dispatching operation
-shall be tag indeterminate.
+of a dispatching operation shall be tag indeter@!minate.
 A controlling formal parameter that is an access parameter
 shall not have a @nt<default_expression>.
 @begin(Reason)
@@ -3359,7 +3355,7 @@ some nonabstract type in the class.
     @key(function) Intersection(Left, Right : Set) @key(return) Set @key(is abstract);
     @key(function) Unit_Set(Element : Element_Type) @key(return) Set @key(is abstract);
     @key(procedure) Take(Element : @key(out) Element_Type;
-                    From : @key(in out) Set) @key(is abstract);
+                   From : @key(in out) Set) @key(is abstract);
 @key(end) Sets;
 @end{Example}
 @end{Examples}
@@ -3481,7 +3477,7 @@ and aliased subcomponents of other objects.
 
 @Defn{aliased}
 A view of an object is defined to be @i(aliased) if
-it is defined by an @nt<object_declaration> or @nt<component_definition>
+it is defined by an @nt<object_@!declaration> or @nt<component_@!definition>
 with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
@@ -3494,7 +3490,7 @@ access value.]
 @Defn2{Term=[constrained], Sec=(object)}
 @Defn2{Term=[unconstrained], Sec=(object)}
 @Defn{constrained by its initial value}
-If the view defined by an @nt{object_declaration} is aliased,
+If the view defined by an @nt{object_@!declaration} is aliased,
 and the type of the object has discriminants,
 then the object is constrained;
 if its nominal subtype is unconstrained,
@@ -3591,9 +3587,9 @@ An @nt{access_to_object_definition} defines
 an access-to-object type and its first subtype;
 @Defn2{Term=[designated subtype], Sec=(of a named access type)}
 @Defn2{Term=[designated type], Sec=(of a named access type)}
-the @nt<subtype_indication> defines the @i(designated subtype)
+the @nt<subtype_@!indication> defines the @i(designated subtype)
 of the access type.
-If a @nt<general_access_modifier> appears, then the access type
+If a @nt<general_@!access_@!modifier> appears, then the access type
 is a general access type.
 @Defn{access-to-constant type}
 If the modifier is the reserved word @key(constant), then the type is an
@@ -3603,8 +3599,8 @@ through a value of such a type].
 If the modifier is the reserved word @key(all),
 then the type is an @i(access-to-variable type)@Redundant[; a designated object
 can be both read and updated through a value of such a type].
-If no @nt<general_access_modifier> appears in the
-@nt<access_to_object_definition>, the access type is a
+If no @nt<general_@!access_@!modifier> appears in the
+@nt<access_to_@!object_@!definition>, the access type is a
 pool-specific access-to-variable type.
 @begin{Honest}
   The type of the designated subtype is called the
@@ -3916,19 +3912,19 @@ rhs="@key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}];"}
 @begin{Legality}
 @PDefn2{Term=[requires a completion], Sec=(@nt<incomplete_type_declaration>)}
 An @nt{incomplete_type_declaration} requires a completion, which shall
-be a @nt{full_type_declaration}.
-@Redundant[If the @nt{incomplete_type_declaration} occurs immediately
+be a @nt{full_@!type_@!declaration}.
+@Redundant[If the @nt{incomplete_@!type_@!declaration} occurs immediately
 within either the visible part of a
-@nt{package_specification} or a @nt<declarative_part>,
-then the @nt{full_type_declaration}
+@nt{package_@!specification} or a @nt<declarative_@!part>,
+then the @nt{full_@!type_@!declaration}
 shall occur later and immediately within this
-visible part or @nt<declarative_part>.
-If the @nt{incomplete_type_declaration} occurs
+visible part or @nt<declarative_@!part>.
+If the @nt{incomplete_@!type_@!declaration} occurs
 immediately within the private part of a
-given @nt<package_specification>, then the
-@nt{full_type_declaration} shall occur later and immediately
-within either the private part itself, or the @nt{declarative_part}
-of the corresponding @nt{package_body}.]
+given @nt<package_@!specification>, then the
+@nt{full_@!type_@!declaration} shall occur later and immediately
+within either the private part itself, or the @nt{declarative_@!part}
+of the corresponding @nt{package_@!body}.]
 @begin{TheProof}
 This is implied by the next AARM-only rule,
 plus the rules in @RefSec{Completions of Declarations}
@@ -3950,13 +3946,13 @@ visible part.
 
 If an @nt{incomplete_type_declaration} has a
 @nt{known_discriminant_part},
-then a @nt{full_type_declaration} that completes it shall have a fully
-conforming (explicit) @nt{known_discriminant_part}
+then a @nt{full_@!type_@!declaration} that completes it shall have a fully
+conforming (explicit) @nt{known_@!discriminant_@!part}
 (see @RefSecNum(Conformance Rules)).
 @Defn2{Term=[full conformance],Sec=(required)}
-@Redundant[If an @nt{incomplete_type_declaration} has no @nt<discriminant_part>
-(or an @nt<unknown_discriminant_part>),
-then a corresponding @nt{full_type_declaration} is nevertheless allowed
+@Redundant[If an @nt{incomplete_type_@!declaration} has no @nt<discriminant_part>
+(or an @nt<unknown_@!discriminant_@!part>),
+then a corresponding @nt{full_@!type_@!declaration} is nevertheless allowed
 to have discriminants,
 either explicitly, or inherited via derivation.]
 
@@ -3986,7 +3982,7 @@ either explicitly, or inherited via derivation.]
 
 
   as the @nt{subtype_mark} defining the subtype of a parameter
-  or result of an @nt{access_to_subprogram_definition};
+  or result of an @nt{access_to_@!subprogram_definition};
 
   @begin{Reason}
 
@@ -3999,14 +3995,14 @@ either explicitly, or inherited via derivation.]
   as the @nt<subtype_mark> in an @nt<access_definition>;
 
   as the @nt{prefix} of an @nt{attribute_reference}
-  whose @nt{attribute_designator}
-  is Class; such an @nt{attribute_reference}
+  whose @nt{attribute_@!designator}
+  is Class; such an @nt{attribute_@!reference}
   is similarly restricted to the uses allowed here;
   when used in this way,
-  the corresponding @nt{full_type_declaration} shall
-  declare a tagged type, and the @nt<attribute_reference>
+  the corresponding @nt{full_type_@!declaration} shall
+  declare a tagged type, and the @nt<attribute_@!reference>
   shall occur in the same library unit as
-  the @nt<incomplete_type_declaration>.
+  the @nt<incomplete_@!type_@!declaration>.
   @begin{Reason}
 This is to prevent
     children from imposing requirements on their ancestor library
@@ -4168,7 +4164,6 @@ not at all) for different designated subtypes.
 @begin{Intro}
 @Redundant[The attribute Access is used to create access values
 designating aliased objects and non-intrinsic subprograms.
-
 The @lquotes@;accessibility@rquotes@; rules prevent dangling references
 (in the absence of uses of certain unchecked features
 @em see Section 13).
@@ -4332,11 +4327,12 @@ is the same as that of
 (the view of) the composite object.
 @end{Itemize}
 
-
+@begin{Wide}
 @Leading@Defn{statically deeper}
 @Defn2{Term=[deeper],Sec=(statically)}
 One accessibility level is defined to be
 @i{statically deeper} than another in the following cases:
+@end{Wide}
 @begin{Itemize}
 For a master that is statically nested within another master,
 the accessibility level of the inner master is statically deeper than
@@ -4701,9 +4697,10 @@ Furthermore, the problems might occur within a task or protected body,
 which the compiler can't see while compiling an object creation.
 @end{Discussion}
 
-
+@begin{Wide}
 @Leading@;The following attribute is defined for @PrefixType{a @nt{prefix} X that
 denotes an aliased view of an object}:
+@end{Wide}
 @begin(description)
 @Attribute{Prefix=<X>, AttrName=<Access>,
   Text=<X'Access yields an access value that designates the object
@@ -4791,14 +4788,13 @@ The current instance of a limited type
   shall be discriminated and unconstrained;
   @PDefn2{Term=[statically matching],Sec=(required)}
   @begin{ImplNote}
-This ensures
+    This ensures
     that the dope for an aliased array object can always be stored contiguous
-    with it, but need not be if its nominal subtype is constrained.@end{implnote}
-
+    with it, but need not be if its nominal subtype is constrained.
+  @end{implnote}
 
   The accessibility level of the view shall not be statically deeper
   than that of the access type @i{A}.
-
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
   this rule applies also in the private part of an
@@ -4808,7 +4804,6 @@ This ensures
   @begin(Ramification)
     In an instance body, a run-time check applies.
 
-
     If @i(A) is an anonymous access type, then the view can never have a
     deeper accessibility level than @i(A),
     except when X'Access is used to initialize an access discriminant
@@ -4817,17 +4812,13 @@ This ensures
     is statically deeper than that of the access type of the
     @nt<allocator>; a run-time check is needed in the case where the
     initial value comes from an access parameter.
-
   @end(Ramification)
-
 @end(itemize)
 
-  @IndexCheck{Accessibility_Check}
+  @NoPrefix@IndexCheck{Accessibility_Check}
   @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-
-  @NoPrefix@;A check is made that the accessibility level of X is not
+  A check is made that the accessibility level of X is not
   deeper than that of the access type @i(A).
-
   If this check fails, Program_Error is raised.
   @begin{Ramification}
     The check is needed for access parameters and in instance
@@ -4840,8 +4831,8 @@ This ensures
     the checks associated with them are all compile-time checks.
   @end(ImplNote)
 
-  @PDefn2{Term=[implicit subtype conversion],Sec=(Access attribute)}
-  @NoPrefix@;If the nominal subtype of X does not statically match the designated
+  @NoPrefix@PDefn2{Term=[implicit subtype conversion],Sec=(Access attribute)}
+  If the nominal subtype of X does not statically match the designated
   subtype of @i(A), a view conversion of X to the designated subtype
   is evaluated (which might raise Constraint_Error @em
   see @RefSecNum(Type Conversions))
@@ -4858,10 +4849,8 @@ denotes a subprogram}:
   as determined by the expected type.>}
 @EndPrefixType{}
 @PDefn2{Term=[accessibility rule],Sec=(Access attribute)}
-
   The accessibility level of P shall not be statically deeper than
   that of @i{S}.
-
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
@@ -4871,7 +4860,6 @@ denotes a subprogram}:
   shall be subtype-conformant with the designated profile of @i(S),
   and shall not be Intrinsic.
 @Defn2{Term=[subtype conformance],Sec=(required)}
-
   If the subprogram denoted by P is declared within a generic body,
   @i{S} shall be declared within the generic body.
 
@@ -4939,7 +4927,7 @@ resolution, but is disallowed by a Legality Rule of this subclause.
 @end(Reason)
 
 The object or subprogram designated by an access value can be named
-with a dereference, either an @nt<explicit_dereference> or an
+with a dereference, either an @nt<explicit_@!dereference> or an
 @nt<implicit_dereference>. See @RefSecNum{Names}.
 
 A call through the dereference of an access-to-subprogram
@@ -5250,15 +5238,12 @@ This is not a violation of the @lquotes@;at most one completion@rquotes@; rule.
 A type is @i(completely defined) at a place that is after its
 full type definition (if it has one) and after all of its
 subcomponent types are completely defined.
-
 A type shall be completely defined before it is frozen
 (see @RefSecNum{Freezing Rules} and
 @RefSecNum{Private Types and Private Extensions}).
 
-
 @begin(Reason)
-  Index types
-  are always completely defined @em no need to mention them.
+  Index types are always completely defined @em no need to mention them.
   There is no way for a completely defined type to depend on the value of
   a (still) deferred constant.
 @end(Reason)

@@ -1,16 +1,16 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:37 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
 which @nt{identifier}s, @nt{character_literal}s, and
 @nt{operator_symbol}s are visible at (or from) various places in the text of
-the program are described in this section.  The formulation of these
+the program are described in this section. The formulation of these
 rules uses the notion of a declarative region.
 
 As explained in Section 3,
@@ -38,19 +38,19 @@ the declarative region of the declaration.
 We no longer define the term @lquotes@;basic operation;@rquotes@;
 thus we no longer have to worry about the visibility of them.
 Since they were essentially always visible in Ada 83, this change has
-no effect.  The reason for this change is that the definition in Ada
+no effect. The reason for this change is that the definition in Ada
 83 was confusing, and not quite correct,
-and we found it difficult to fix.  For example, one
+and we found it difficult to fix. For example, one
 wonders why an @nt{if_statement} was not a basic operation of type
-Boolean.  For another example, one wonders what it meant for a basic
+Boolean. For another example, one wonders what it meant for a basic
 operation to be @lquotes@;inherent in@rquotes@; something.
-Finally, this fixes the problem addressed by AI-00027/07.
+Finally, this fixes the problem addressed by AI83-00027/07.
 @end{DiffWord83}
 
 @LabeledClause{Declarative Region}
 
 @begin{StaticSem}
-@Defn2{Term=[declarative region], Sec=(of a construct)}
+@leading@Defn2{Term=[declarative region], Sec=(of a construct)}
 For each of the following constructs,
 there is a portion of the program text
 called its @i{declarative region},
@@ -68,9 +68,11 @@ called its @i{declarative region},
   an @nt{exception_handler}.
 @end(itemize)
 
-The declarative region includes the text of the construct
+@begin{Wide}
+@leading@;The declarative region includes the text of the construct
 together with additional text determined @Redundant[(recursively)],
 as follows:
+@end{Wide}
 @begin{Itemize}
 If a declaration is included, so is its completion, if any.
 
@@ -200,8 +202,8 @@ and finally the declarations of task and protected units and packages.
 @end{Notes}
 
 @begin{DiffWord83}
-It was necessary to extend Ada 83's definition of declarative region
-to take the following Ada 9X features into account:
+@leading@;It was necessary to extend Ada 83's definition of declarative region
+to take the following Ada 95 features into account:
 @begin{Itemize}
 Child library units.
 
@@ -239,7 +241,7 @@ so that it makes sense to talk about "inner declarative regions,"
 and "...extends to the end of a declarative region."
 Inside an @nt{accept_statement}, the @nt{name} of one of the parameters
 denotes the @nt{parameter_specification} of the @nt{accept_statement},
-not that of the @nt{entry_declaration}.  If the @nt{accept_statement} is
+not that of the @nt{entry_declaration}. If the @nt{accept_statement} is
 nested within a @nt{block_statement}, these
 @nt{parameter_specification}s can hide declarations of the
 @nt{block_statement}.
@@ -260,13 +262,13 @@ It works for @nt{accept_statement}s only because an
 @nt{accept_statement} does not have a @nt{declarative_part}.
 
 To avoid confusion,
-we use the term @lquotes@;local to@rquotes@; only informally in Ada 9X.
+we use the term @lquotes@;local to@rquotes@; only informally in Ada 95.
 Even RM83 used the term incorrectly (see, for example, RM83-12.3(13)).
 
 In Ada 83, (root) library units were inside Standard;
 it was not clear whether the declaration or body of Standard
 was meant.
-In Ada 9X, they are children of Standard,
+In Ada 95, they are children of Standard,
 and so occur immediately within Standard's declarative
 region, but not within either the declaration or the body.
 (See RM83-8.6(2) and RM83-10.1.1(5).)
@@ -306,7 +308,7 @@ Without this rule, two passes over the @nt<_specification> or
 @nt<generic_instantiation> would be required to
 resolve names that denote things with the same name as this one.
 @end{Reason}
-The immediate scope extends to the end of the declarative region,
+@leading@;The immediate scope extends to the end of the declarative region,
 with the following exceptions:
 @begin{Itemize}
 The immediate scope of a @nt{library_item} includes only its semantic
@@ -317,7 +319,7 @@ Therefore, it is a good idea to restrict the immediate scope
 (and the scope, defined below)
 to semantic dependents.
 
-Consider also examples like this:
+@leading@;Consider also examples like this:
 @begin{Example}
 @key[package] P @key[is] @key[end] P;
 
@@ -458,7 +460,7 @@ Similarly,
 the scope of a declaration is also the scope
 of the entity or view declared by the declaration.
 @begin{Ramification}
-The rule for immediate scope implies the following:
+@leading@;The rule for immediate scope implies the following:
 @begin{Itemize}
 If the declaration is that of a library unit,
 then the immediate scope includes the declarative region of the
@@ -498,7 +500,7 @@ a declaration immediately within the body of a library unit
 does not include any child of that library unit.
 
 @NoPrefix@;This is needed to prevent children from looking inside their
-parent's body.  The children are in the declarative region of the
+parent's body. The children are in the declarative region of the
 parent, and they might be after the parent's body.
 Therefore, the scope of a declaration that occurs immediately within
 the body might include some children.
@@ -525,7 +527,7 @@ See Section 12.
 
 @begin{Extend83}
 The fact that the immediate scope of an overloadable declaration does
-not include its profile is new to Ada 9X.  It replaces
+not include its profile is new to Ada 95. It replaces
 RM83-8.3(16), which said that within
 a subprogram specification and within the formal part of an
 entry declaration or accept statement, all declarations with
@@ -539,7 +541,7 @@ implementation difficulties and unnecessary semantic complexity.
 We no longer need to talk about the scope of notations,
 @nt{identifier}s, @nt{character_literal}s, and @nt{operator_symbol}s.
 
-The notion of "visible part" has been extended in Ada 9X.
+The notion of "visible part" has been extended in Ada 95.
 The syntax of
 task and protected units now allows private parts,
 thus requiring us to be able to talk about the visible part as well.
@@ -561,7 +563,7 @@ In Ada 83, the semantics of @nt{with_clause}s was described
 in terms of visibility.
 It is now described in terms of [immediate] scope.
 
-We have clarified that the following is illegal
+@leading@;We have clarified that the following is illegal
 (where Q and R are library units):
 @begin{Example}
 @key[package] Q @key[is]
@@ -657,9 +659,9 @@ A @nt{generic_declaration} is not overloadable within its own
 @nt{generic_formal_part}.
 This follows from the rules about when a @nt{name} denotes a current
 instance.
-See AI-00286.  This implies that within a
+See AI83-00286. This implies that within a
 @nt{generic_formal_part}, outer declarations with the same defining name
-are hidden from direct visibility.  It also implies that if a generic
+are hidden from direct visibility. It also implies that if a generic
 formal parameter has the same defining name as the generic itself,
 the formal parameter hides the generic from direct visibility.
 @end{Ramification}
@@ -672,7 +674,7 @@ their profiles are type conformant.
 @PDefn{type conformance}
 @redundant[An inner declaration hides any outer homograph from direct visibility.]
 
-@Redundant[Two homographs are not generally allowed
+@leading@Redundant[Two homographs are not generally allowed
 immediately within the same declarative region unless one
 @i{overrides} the other (see Legality Rules below).]
 @Defn{override}
@@ -746,7 +748,7 @@ The rationale for the rule is explained there.
 @end{Discussion}
 @end{Itemize}
 
-@Defn{visible}
+@leading@Defn{visible}
 @RootDefn{hidden from all visibility}
 A declaration is visible within its scope,
 except where hidden from all visibility,
@@ -764,7 +766,7 @@ Note that the scope of an explicit @nt{subprogram_declaration}
 does not start until after its profile.
 @end{Ramification}
 
-@PDefn2{Term=[hidden from all visibility], Sec=(within the declaration itself)}
+@leading@PDefn2{Term=[hidden from all visibility], Sec=(within the declaration itself)}
 A declaration is hidden from all visibility until the end of the
 declaration, except:
 @begin(itemize)
@@ -828,7 +830,7 @@ the [immediate] scope includes indirect semantic dependents.
 @end{Discussion}
 @end{Itemize}
 
-@Defn{directly visible}
+@leading@Defn{directly visible}
 @Defn{immediately visible}
 @Defn2{Term=[visibility], Sec=(direct)}
 @Defn2{Term=[visibility], Sec=(immediate)}
@@ -836,8 +838,7 @@ A declaration with a @nt{defining_identifier} or
 @nt{defining_operator_symbol} is immediately visible
 @Redundant[(and hence
 directly visible)] within its immediate scope
-@RootDefn{hidden from direct visibility}
-except where hidden
+@RootDefn{hidden from direct visibility} except where hidden
 from direct visibility, as follows:
 @begin{Itemize}
   @PDefn2{Term=[hidden from direct visibility], Sec=(by an inner homograph)}
@@ -905,7 +906,7 @@ in the instance, so long as the corresponding declarations in the generic
 were not type conformant].
 @PDefn{type conformance}
 @begin{Discussion}
-Normally, these rules just mean you can't explicitly
+@leading@;Normally, these rules just mean you can't explicitly
 declare two homographs
 immediately within the same declarative region.
 The wording is designed to handle the
@@ -914,8 +915,8 @@ following special cases:
 If the second declaration completes the first one,
 the second declaration is legal.
 
-If the body of a library unit contains an explicit homograph of a child
-of that same library unit, this is illegal only if the body
+@leading@;If the body of a library unit contains an explicit homograph of
+a child of that same library unit, this is illegal only if the body
 mentions the child in its @nt<context_clause>, or if
 some subunit mentions the child.
 Here's an example:
@@ -940,7 +941,7 @@ Here's an example:
 @end{Example}
 
 @NoPrefix@;If package body P said "@key[with] P.Q;", then it would be illegal
-to declare the homograph Q: Integer.  But it does not, so the
+to declare the homograph Q: Integer. But it does not, so the
 body of P is OK.
 However, the subunit would be able to see both P.Q's,
 and is therefore illegal.
@@ -955,7 +956,7 @@ required to do.
 
 Note that we need to be careful which things we make "hidden from all
 visibility" versus which things we make simply illegal for names to
-denote.  The distinction is subtle.
+denote. The distinction is subtle.
 The rules that disallow names denoting components within a type
 declaration (see @RefSecNum{Discriminants}) do not make the components
 invisible at those places, so that the above rule makes components with
@@ -964,7 +965,7 @@ The same is true for the rule that disallows names denoting formal
 parameters within a @nt{formal_part} (see @RefSecNum{Subprogram Declarations}).
 @end{Discussion}
 @begin{Discussion}
-The part about instances is from AI-00012.
+The part about instances is from AI83-00012.
 The reason it says @lquotes@;overloadable declarations@rquotes@; is because we don't
 want it to apply to type extensions that appear in an instance;
 components are not overloadable.
@@ -993,7 +994,7 @@ are identified by using one of these three syntactic categories
 directly in a syntax rule, rather than using @nt<direct_name> or
 @nt<selector_name>.
 @begin{Ramification}
-An @nt{identifier}, @nt{character_literal} or @nt{operator_symbol}
+@leading@;An @nt{identifier}, @nt{character_literal} or @nt{operator_symbol}
 that occurs in one of the following contexts is not
 required to denote a visible or directly
 visible declaration:
@@ -1029,7 +1030,7 @@ work that way.
 @nt{Accept_statements} are never denoted, although the
 @nt{parameter_specification}s in their profiles can be.
 
-The scope of a subprogram does not start until after its profile.
+@leading@;The scope of a subprogram does not start until after its profile.
 Thus, the following is legal:
 @begin{Example}
 X : @key[constant] Integer := 17;
@@ -1042,7 +1043,7 @@ X : @key[constant] Integer := 17;
 The body of the subprogram will probably be illegal,
 however, since the constant X will be hidden by then.
 
-The rule is different for generic subprograms,
+@leading@;The rule is different for generic subprograms,
 since they are not overloadable;
 the following is illegal:
 @begin{Example}
@@ -1143,7 +1144,7 @@ However, the scope of a @nt{use_clause} in the private part of a library
 unit does not include the visible part of
 any public descendant of that library unit.
 @begin{Reason}
-The exception echoes the similar exception for
+@leading@;The exception echoes the similar exception for
 @lquotes@;immediate scope (of a declaration)@rquotes@;
 (see @RefSecNum{Scope of Declarations}).
 It makes @nt{use_clause}s work like this:
@@ -1215,7 +1216,7 @@ if its declaration is visible at this place.
   which helps avoid breaking the generic contract model.
   @end{Ramification}
 
-@Defn{use-visible}
+@leading@Defn{use-visible}
 @Defn2{Term=[visibility],Sec=(use clause)}
 A declaration is @i{use-visible} if it is potentially use-visible,
 except in these naming-conflict cases:
@@ -1248,12 +1249,14 @@ The elaboration of a @nt{use_clause} has no effect.
 
 @begin{Examples}
 
-@i{Example of a use clause in a context clause:}
+@leading@keepnext@i{Example of a use clause in a context clause:}
 @begin{Example}
 @key[with] Ada.Calendar; @key[use] Ada;
 @end{Example}
 
-@i{Example of a use type clause:}
+@begin{Wide}
+@leading@keepnext@i{Example of a use type clause:}
+@end{Wide}
 @begin{Example}
 @key[use type] Rational_Numbers.Rational; --@RI{ see @RefSecNum{Package Specifications and Declarations}}
 Two_Thirds: Rational_Numbers.Rational := 2/3;
@@ -1301,7 +1304,7 @@ and the case of @nt{subtype_declaration}s
 @end{Examples}
 
 @begin{Extend83}
-The @nt{use_type_clause} is new to Ada 9X.
+The @nt{use_type_clause} is new to Ada 95.
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -1345,13 +1348,13 @@ denotes (a new view of) the renamed entity.]
 
 @begin{Notes}
 Renaming may be used to resolve name conflicts and to act as a
-shorthand.  Renaming with a different @nt{identifier} or
+shorthand. Renaming with a different @nt{identifier} or
 @nt{operator_symbol} does not hide the old @nt{name}; the new
 @nt{name} and the old @nt{name} need not be visible at the same
 places.
 
 A task or protected object that is declared by an explicit
-@nt{object_declaration} can be renamed as an object.  However, a
+@nt{object_declaration} can be renamed as an object. However, a
 single task or protected object cannot be renamed since the
 corresponding type is anonymous (meaning it has no nameable subtypes).
 For similar reasons, an object of an anonymous array or access type
@@ -1399,18 +1402,17 @@ The type of the @SynI{object_}@nt{name} shall resolve to
 the type determined by the @nt{subtype_mark}.
 
 @begin{Reason}
-
-A previous version of Ada 9X used the usual @lquotes@;expected type@rquotes@;
-wording:
+@leading@;A previous version of Ada 9X used the usual
+@lquotes@;expected type@rquotes@; wording:@*
 @lquotes@;The expected type for the @SynI{object_}@nt{name} is
-that determined by the @nt{subtype_mark}.@rquotes@;
+that determined by the @nt{subtype_mark}.@rquotes@;@*
 We changed it so that this would be illegal:
 @begin{Example}
 X: T;
 Y: T'Class @key[renames] X; --@RI{ Illegal!}
 @end{Example}
 
-When the above was legal, it was unclear whether Y
+@leading@;When the above was legal, it was unclear whether Y
 was of type T or T'Class.
 Note that we still allow this:
 @begin{Example}
@@ -1478,7 +1480,7 @@ when writing an @nt{object_renaming_declaration}.
 @end{StaticSem}
 
 @begin{Examples}
-@i{Example of renaming an object:}
+@leading@keepnext@i{Example of renaming an object:}
 @begin{Example}
 @key[declare]
    L : Person @key[renames] Leftmost_Person; --@RI{ see @RefSecNum{Incomplete Type Declarations}}
@@ -1491,7 +1493,7 @@ when writing an @nt{object_renaming_declaration}.
 @begin{DiffWord83}
 The phrase @lquotes@;subtype ... as defined in a corresponding
 object declaration, component declaration, or component subtype
-indication,@rquotes@; from RM83-8.5(5), is incorrect in Ada 9X;
+indication,@rquotes@; from RM83-8.5(5), is incorrect in Ada 95;
 therefore we removed it.
 It is incorrect in the case of an object with an indefinite
 unconstrained nominal subtype.
@@ -1517,7 +1519,7 @@ An @nt{exception_renaming_declaration} declares a new view
 @end{StaticSem}
 
 @begin{Examples}
-@i{Example of renaming an exception:}
+@leading@keepnext@i{Example of renaming an exception:}
 @begin{Example}
 EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error;@RI{-- see @RefSecNum{Exceptions in Input-Output}}
 @end{Example}
@@ -1543,7 +1545,7 @@ A @nt{package_renaming_declaration} declares a new view
 @end{StaticSem}
 
 @begin{Examples}
-@i{Example of renaming a package:}
+@leading@keepnext@i{Example of renaming a package:}
 @begin{Example}
 @key[package] TM @key[renames] Table_Manager;
 @end{Example}
@@ -1628,13 +1630,15 @@ A @nt{name} that denotes a formal parameter
 of the @nt{subprogram_specification}
 is not allowed within the @i{callable_entity_}@nt{name}.
 @begin{Reason}
-This is to prevent things like this:
+@leading@keepnext@;This is to prevent things like this:
 @begin{Example}
 @key[function] F(X : Integer) @key[return] Integer @key[renames] Table(X).@key[all];
 @end{Example}
 
-A similar rule in @RefSecNum{Subprogram Declarations}
+@begin{Wide}
+@leading@;A similar rule in @RefSecNum{Subprogram Declarations}
 forbids things like this:
+@end{Wide}
 @begin{Example}
 @key[function] F(X : Integer; Y : Integer := X) @key[return] Integer;
 @end{Example}
@@ -1679,7 +1683,7 @@ nothing to do with the renamed subprogram.
 
 Note that the above rule is only for tagged types.
 
-Consider the following example:
+@leading@keepnext@;Consider the following example:
 @begin{Example}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[tagged] @key[null] @key[record];
@@ -1713,12 +1717,12 @@ can be renamed with either an
 for renaming as an operator, the subprogram specification given in
 the @nt{renaming_declaration} is subject to the rules given in
 @RefSecNum{Overloading of Operators}
-for operator declarations.  Enumeration literals can be
+for operator declarations. Enumeration literals can be
 renamed as functions; similarly, @nt{attribute_reference}s that
 denote functions (such as references to Succ and Pred) can be renamed
-as functions.  An entry can only be renamed as a procedure; the new
+as functions. An entry can only be renamed as a procedure; the new
 @nt{name} is only allowed to appear in contexts that allow a
-procedure @nt{name}.  An entry of a family can be renamed, but an
+procedure @nt{name}. An entry of a family can be renamed, but an
 entry family cannot be renamed as a whole.
 
 
@@ -1756,7 +1760,7 @@ We'll live with the oddity.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of subprogram renaming declarations:}
+@leading@keepnext@i{Examples of subprogram renaming declarations:}
 @begin{Example}
 @key[procedure] My_Write(C : @key[in] Character) @key[renames] Pool(K).Write; --@RI{  see @RefSecNum{Selected Components}}
 
@@ -1770,12 +1774,16 @@ We'll live with the oddity.
 @key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@RI{ see @RefSecNum{Enumeration Types}}
 @end{Example}
 
-@i{Example of a subprogram renaming declaration with new parameter names:}
+@begin{Wide}
+@leading@keepnext@i{Example of a subprogram renaming declaration with new parameter names:}
+@end{Wide}
 @begin{Example}
 @key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@RI{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
-@i{Example of a subprogram renaming declaration with a new default expression:}
+@begin{Wide}
+@leading@keepnext@i{Example of a subprogram renaming declaration with a new default expression:}
+@end{Wide}
 @begin{Example}
 @key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@RI{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
@@ -1813,16 +1821,16 @@ in particular if the renamed generic unit is a library unit
 @end{Notes}
 
 @begin{Examples}
-@i{Example of renaming a generic unit:}
+@leading@keepnext@i{Example of renaming a generic unit:}
 @begin{Example}
 @key[generic package] Enum_IO @key[renames] Ada.Text_IO.Enumeration_IO;  @RI{-- see @RefSecNum{Input-Output for Enumeration Types}}
 @end{Example}
 @end{Examples}
 
 @begin{Extend83}
-Renaming of generic units is new to Ada 9X.
+Renaming of generic units is new to Ada 95.
 It is particularly important for renaming child library
-units that are generic units.  For example, it might
+units that are generic units. For example, it might
 be used to rename Numerics.Generic_Elementary_Functions as simply
 Generic_Elementary_Functions, to match the name for
 the corresponding Ada-83-based package.
@@ -1883,7 +1891,7 @@ operations.
 @end{MetaRules}
 
 @begin{Resolution}
-@Defn{complete context}
+@leading@Defn{complete context}
 @Redundant{Overload resolution is applied separately to each
 @i{complete context},
 not counting inner complete contexts.}
@@ -1913,7 +1921,7 @@ The @nt{expression} of a @nt{case_statement}.
 @end{Ramification}
 @end{itemize}
 
-@Defn2{Term=[interpretation], Sec=(of a complete context)}
+@leading@Defn2{Term=[interpretation], Sec=(of a complete context)}
 @Defn2{Term=[overall interpretation], Sec=(of a complete context)}
 An (overall) @i{interpretation} of a complete context
 embodies its meaning, and includes
@@ -2007,7 +2015,7 @@ for example, @lquotes@;interpreted as a @nt{function_call},@rquotes@;
 means that the construct's interpretation says that it belongs
 to the syntactic category @nt{function_call}.}
 
-@Defn{denote}
+@leading@Defn{denote}
 @Redundant[Each occurrence of]
 a usage name @i{denotes} the declaration determined by its
 interpretation.
@@ -2062,7 +2070,7 @@ Usually, a usage name denotes only one declaration,
 and therefore one view and one entity.
 @end{Ramification}
 
-@RootDefn[expected type]
+@leading@RootDefn[expected type]
 The @i(expected type) for a given @nt<expression>, @nt<name>,
 or other construct determines, according to the @i{type resolution
 rules} given below, the types considered for the construct during
@@ -2073,7 +2081,7 @@ The type resolution rules provide support for class-wide programming,
 universal numeric literals, dispatching operations, and
 anonymous access types:]
 @begin{Ramification}
-  Expected types are defined throughout the RM9X.
+  Expected types are defined throughout the RM95.
   The most important definition is that, for a
   subprogram, the expected type for the
   actual parameter is the type of the formal parameter.
@@ -2104,7 +2112,7 @@ then an expression whose type is @i{universal_real}
 (such as a real literal) is OK.
 @end{Ramification}
 
-@PDefn2{Term=[type resolution rules],
+@leading@PDefn2{Term=[type resolution rules],
   Sec=(if expected type is specific)}
 If the expected type for a construct is a specific type @i(T), then the type
 of the construct shall resolve either to @i(T), or:
@@ -2212,10 +2220,9 @@ type @i{root_integer} or @i{root_real}, and the other is not,
 the interpretation using the primitive operator (or @nt<range>)
 of the root numeric type is @i{preferred}.
 @begin{Reason}
-The reason for this preference is so that expressions involving literals
-and named numbers can be unambiguous.
-For example, without the preference rule,
-the following would be ambiguous:
+@leading@;The reason for this preference is so that expressions involving
+literals and named numbers can be unambiguous.
+For example, without the preference rule, the following would be ambiguous:
 @begin{Example}
 N : @key[constant] := 123;
 @key[if] N > 100 @key[then] --@RI{ Preference for root_integer "<" operator.}
@@ -2293,7 +2300,7 @@ exception during program execution).
 The new preference rule for operators of root numeric types
 is upward incompatible,
 but only in cases that involved @i(Beaujolais) effects in Ada 83.
-Such cases are ambiguous in Ada 9X.
+Such cases are ambiguous in Ada 95.
 @end{Incompatible83}
 
 @begin{Extend83}
@@ -2306,7 +2313,7 @@ for universal types.
 
 @begin{DiffWord83}
 In Ada 83, it is not clear what the @lquotes@;syntax rules@rquotes@; are.
-AI-00157 states that a certain textual rule is a syntax rule,
+AI83-00157 states that a certain textual rule is a syntax rule,
 but it's still not clear how one tells in general which textual rules are
 syntax rules.
 We have solved the problem by stating exactly which
@@ -2341,15 +2348,14 @@ Clearly, the information needed to do this is part of the
 @lquotes@;interpretation@rquotes@; of a @nt{subprogram_body}.
 The resolution of such things is defined in terms of
 the @lquotes@;expected profile@rquotes@; concept.
-Ada 9X has some new cases where expected profiles
+Ada 95 has some new cases where expected profiles
 are needed @em the resolution of P'Access,
 where P might denote a subprogram,
 is an example.
 
-@NoPrefix@;RM83-8.7(2) might seem to imply that an interpretation embodies
-information about what is denoted by each usage name,
-but not information about which syntactic category each construct
-belongs to.
+@Leading@NoPrefix@;RM83-8.7(2) might seem to imply that an interpretation
+embodies information about what is denoted by each usage name,
+but not information about which syntactic category each construct belongs to.
 However, it seems necessary to include such information,
 since the Ada grammar is highly ambiguous.
 For example, X(Y) might be a @nt{function_call} or an
@@ -2368,7 +2374,7 @@ Here's an example:
 @key[type] T @key[is] @key[array](Integer @key[range] 1..10) @key[of] A;
 I : Integer := 3;
 @key[function] F(X : Integer := 7) @key[return] A;
-Y : A := F(I); --@RI{ Ambiguous?  (We hope so.)}
+Y : A := F(I); --@RI{ Ambiguous? (We hope so.)}
 @end{Example}
 
 @NoPrefix@;Consider the declaration of Y (a complete context).
@@ -2389,7 +2395,7 @@ rules.
 Therefore, the complete context is ambiguous, and therefore illegal.
 
 @PDefn{Beaujolais effect}
-It is the intent that the Ada 9X preference rule for root numeric
+It is the intent that the Ada 95 preference rule for root numeric
 operators is more locally enforceable than that of RM83-4.6(15).
 It should also eliminate interpretation shifts due to the
 addition or removal of a @nt{use_clause}

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:43 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -244,43 +244,43 @@ The generic library package Sequential_IO has the following declaration:
 
    @RI{-- File management}
 
-   @key[procedure] Create(File : @key[in] @key[out] File_Type;
+   @key[procedure] @AdaSubDefn{Create}(File : @key[in] @key[out] File_Type;
                     Mode : @key[in] File_Mode := Out_File;
                     Name : @key[in] String := "";
                     Form : @key[in] String := "");
 
-   @key[procedure] Open  (File : @key[in] @key[out] File_Type;
+   @key[procedure] @AdaSubDefn{Open}  (File : @key[in] @key[out] File_Type;
                     Mode : @key[in] File_Mode;
                     Name : @key[in] String;
                     Form : @key[in] String := "");
 
-   @key[procedure] Close (File : @key[in] @key[out] File_Type);
-   @key[procedure] Delete(File : @key[in] @key[out] File_Type);
-   @key[procedure] Reset (File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
-   @key[procedure] Reset (File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Close} (File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Delete}(File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Reset} (File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
+   @key[procedure] @AdaSubDefn{Reset} (File : @key[in] @key[out] File_Type);
 
-   @key[function] Mode   (File : @key[in] File_Type) @key[return] File_Mode;
-   @key[function] Name   (File : @key[in] File_Type) @key[return] String;
-   @key[function] Form   (File : @key[in] File_Type) @key[return] String;
+   @key[function] @AdaSubDefn{Mode}   (File : @key[in] File_Type) @key[return] File_Mode;
+   @key[function] @AdaSubDefn{Name}   (File : @key[in] File_Type) @key[return] String;
+   @key[function] @AdaSubDefn{Form}   (File : @key[in] File_Type) @key[return] String;
 
-   @key[function] Is_Open(File : @key[in] File_Type) @key[return] Boolean;
+   @key[function] @AdaSubDefn{Is_Open}(File : @key[in] File_Type) @key[return] Boolean;
 
    --@RI{ Input and output operations}
 
-   @key[procedure] Read  (File : @key[in] File_Type; Item : @key[out] Element_Type);
-   @key[procedure] Write (File : @key[in] File_Type; Item : @key[in] Element_Type);
+   @key[procedure] @AdaSubDefn{Read}  (File : @key[in] File_Type; Item : @key[out] Element_Type);
+   @key[procedure] @AdaSubDefn{Write} (File : @key[in] File_Type; Item : @key[in] Element_Type);
 
-   @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
+   @key[function] @AdaSubDefn{End_Of_File}(File : @key[in] File_Type) @key[return] Boolean;
 
    --@RI{ Exceptions}
 
-   Status_Error : @key[exception] @key[renames] IO_Exceptions.Status_Error;
-   Mode_Error   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
-   Name_Error   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
-   Use_Error    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
-   Device_Error : @key[exception] @key[renames] IO_Exceptions.Device_Error;
-   End_Error    : @key[exception] @key[renames] IO_Exceptions.End_Error;
-   Data_Error   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
+   @AdaDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
+   @AdaDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
+   @AdaDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
+   @AdaDefn{Use_Error}    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
+   @AdaDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
+   @AdaDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
+   @AdaDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -579,57 +579,57 @@ The generic library package Direct_IO has the following declaration:
    @key[type] File_Mode @key[is] (In_File, Inout_File, Out_File);
 @LangDefType{Package=[Ada.Direct_IO],Type=[Count]}
    @key[type] Count     @key[is] @key[range] 0 .. @RI[implementation-defined];
-   @key[subtype] Positive_Count @key[is] Count @key[range] 1 .. Count'Last;
+   @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
 
    --@RI{ File management}
 
-   @key[procedure] Create(File : @key[in] @key[out] File_Type;
+   @key[procedure] @AdaSubDefn{Create}(File : @key[in] @key[out] File_Type;
                     Mode : @key[in] File_Mode := Inout_File;
                     Name : @key[in] String := "";
                     Form : @key[in] String := "");
 
-   @key[procedure] Open  (File : @key[in] @key[out] File_Type;
+   @key[procedure] @AdaSubDefn{Open}  (File : @key[in] @key[out] File_Type;
                     Mode : @key[in] File_Mode;
                     Name : @key[in] String;
                     Form : @key[in] String := "");
 
-   @key[procedure] Close (File : @key[in] @key[out] File_Type);
-   @key[procedure] Delete(File : @key[in] @key[out] File_Type);
-   @key[procedure] Reset (File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
-   @key[procedure] Reset (File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Close} (File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Delete}(File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Reset} (File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
+   @key[procedure] @AdaSubDefn{Reset} (File : @key[in] @key[out] File_Type);
 
-   @key[function] Mode   (File : @key[in] File_Type) @key[return] File_Mode;
-   @key[function] Name   (File : @key[in] File_Type) @key[return] String;
-   @key[function] Form   (File : @key[in] File_Type) @key[return] String;
+   @key[function] @AdaSubDefn{Mode}   (File : @key[in] File_Type) @key[return] File_Mode;
+   @key[function] @AdaSubDefn{Name}   (File : @key[in] File_Type) @key[return] String;
+   @key[function] @AdaSubDefn{Form}   (File : @key[in] File_Type) @key[return] String;
 
-   @key[function] Is_Open(File : @key[in] File_Type) @key[return] Boolean;
+   @key[function] @AdaSubDefn{Is_Open}(File : @key[in] File_Type) @key[return] Boolean;
 
    --@RI{ Input and output operations}
 
-   @key[procedure] Read (File : @key[in] File_Type; Item : @key[out] Element_Type;
+   @key[procedure] @AdaSubDefn{Read} (File : @key[in] File_Type; Item : @key[out] Element_Type;
                                         From : @key[in] Positive_Count);
-   @key[procedure] Read (File : @key[in] File_Type; Item : @key[out] Element_Type);
+   @key[procedure] @AdaSubDefn{Read} (File : @key[in] File_Type; Item : @key[out] Element_Type);
 
-   @key[procedure] Write(File : @key[in] File_Type; Item : @key[in]  Element_Type;
+   @key[procedure] @AdaSubDefn{Write}(File : @key[in] File_Type; Item : @key[in]  Element_Type;
                                         To   : @key[in] Positive_Count);
-   @key[procedure] Write(File : @key[in] File_Type; Item : @key[in] Element_Type);
+   @key[procedure] @AdaSubDefn{Write}(File : @key[in] File_Type; Item : @key[in] Element_Type);
 
-   @key[procedure] Set_Index(File : @key[in] File_Type; To : @key[in] Positive_Count);
+   @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count);
 
-   @key[function] Index(File : @key[in] File_Type) @key[return] Positive_Count;
-   @key[function] Size (File : @key[in] File_Type) @key[return] Count;
+   @key[function] @AdaSubDefn{Index}(File : @key[in] File_Type) @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Size} (File : @key[in] File_Type) @key[return] Count;
 
-   @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
+   @key[function] @AdaSubDefn{End_Of_File}(File : @key[in] File_Type) @key[return] Boolean;
 
    --@RI{ Exceptions}
 
-   Status_Error : @key[exception] @key[renames] IO_Exceptions.Status_Error;
-   Mode_Error   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
-   Name_Error   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
-   Use_Error    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
-   Device_Error : @key[exception] @key[renames] IO_Exceptions.Device_Error;
-   End_Error    : @key[exception] @key[renames] IO_Exceptions.End_Error;
-   Data_Error   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
+   @AdaDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
+   @AdaDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
+   @AdaDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
+   @AdaDefn{Use_Error}    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
+   @AdaDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
+   @AdaDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
+   @AdaDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -760,18 +760,18 @@ The generic library package Storage_IO has the following declaration:
 @key[package] Ada.Storage_IO @key[is]
    @key[pragma] Preelaborate(Storage_IO);
 
-   Buffer_Size : @key(constant) System.Storage_Elements.Storage_Count := @RI(implementation-defined);
-   @key(subtype) Buffer_Type @key(is) System.Storage_Elements.Storage_Array(1..Buffer_Size);
+   @AdaDefn{Buffer_Size} : @key(constant) System.Storage_Elements.Storage_Count := @RI(implementation-defined);
+   @key(subtype) @AdaDefn{Buffer_Type} @key(is) System.Storage_Elements.Storage_Array(1..Buffer_Size);
 
    --@RI{ Input and output operations}
 
-   @key[procedure] Read (Buffer : @key[in]  Buffer_Type; Item : @key[out] Element_Type);
+   @key[procedure] @AdaSubDefn{Read} (Buffer : @key[in]  Buffer_Type; Item : @key[out] Element_Type);
 
-   @key[procedure] Write(Buffer : @key[out] Buffer_Type; Item : @key[in]  Element_Type);
+   @key[procedure] @AdaSubDefn{Write}(Buffer : @key[out] Buffer_Type; Item : @key[in]  Element_Type);
 
    --@RI{ Exceptions}
 
-   Data_Error   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
+   @AdaDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 @key[end] Ada.Storage_IO;
 @end{Example}
 
@@ -948,188 +948,189 @@ The library package Text_IO has the following declaration:
 
 @LangDefType{Package=[Ada.Text_IO],Type=[Count]}
    @key[type] Count @key[is] @key[range] 0 .. @RI[implementation-defined];
-   @key[subtype] Positive_Count @key[is] Count @key[range] 1 .. Count'Last;
-   Unbounded : @key[constant] Count := 0; --@RI{ line and page length}
+   @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
+   @AdaDefn{Unbounded} : @key[constant] Count := 0; --@RI{ line and page length}
 
-   @key[subtype] Field       @key[is] Integer @key[range] 0 .. @RI[implementation-defined];
-   @key[subtype] Number_Base @key[is] Integer @key[range] 2 .. 16;
+   @key[subtype] @AdaDefn{Field}       @key[is] Integer @key[range] 0 .. @RI[implementation-defined];
+   @key[subtype] @AdaDefn{Number_Base} @key[is] Integer @key[range] 2 .. 16;
 
 @LangDefType{Package=[Ada.Text_IO],Type=[Type_Set]}
    @key[type] Type_Set @key[is] (Lower_Case, Upper_Case);
 
    --@RI{ File Management}
 
-   @key[procedure] Create (File : @key[in] @key[out] File_Type;
+   @key[procedure] @AdaSubDefn{Create} (File : @key[in] @key[out] File_Type;
                      Mode : @key[in] File_Mode := Out_File;
                      Name : @key[in] String    := "";
                      Form : @key[in] String    := "");
 
-   @key[procedure] Open   (File : @key[in] @key[out] File_Type;
+   @key[procedure] @AdaSubDefn{Open}   (File : @key[in] @key[out] File_Type;
                      Mode : @key[in] File_Mode;
                      Name : @key[in] String;
                      Form : @key[in] String := "");
 
-   @key[procedure] Close  (File : @key[in] @key[out] File_Type);
-   @key[procedure] Delete (File : @key[in] @key[out] File_Type);
-   @key[procedure] Reset  (File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
-   @key[procedure] Reset  (File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Close}  (File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Delete} (File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Reset}  (File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
+   @key[procedure] @AdaSubDefn{Reset}  (File : @key[in] @key[out] File_Type);
 
-   @key[function]  Mode   (File : @key[in] File_Type) @key[return] File_Mode;
-   @key[function]  Name   (File : @key[in] File_Type) @key[return] String;
-   @key[function]  Form   (File : @key[in] File_Type) @key[return] String;
+   @key[function]  @AdaSubDefn{Mode}   (File : @key[in] File_Type) @key[return] File_Mode;
+   @key[function]  @AdaSubDefn{Name}   (File : @key[in] File_Type) @key[return] String;
+   @key[function]  @AdaSubDefn{Form}   (File : @key[in] File_Type) @key[return] String;
 
-   @key[function]  Is_Open(File : @key[in] File_Type) @key[return] Boolean;
+   @key[function]  @AdaSubDefn{Is_Open}(File : @key[in] File_Type) @key[return] Boolean;
 
    --@RI{ Control of default input and output files}
 
-   @key[procedure] Set_Input (File : @key[in] File_Type);
-   @key[procedure] Set_Output(File : @key[in] File_Type);
-   @key[procedure] Set_Error (File : @key[in] File_Type);
+   @key[procedure] @AdaSubDefn{Set_Input} (File : @key[in] File_Type);
+   @key[procedure] @AdaSubDefn{Set_Output}(File : @key[in] File_Type);
+   @key[procedure] @AdaSubDefn{Set_Error} (File : @key[in] File_Type);
 
-   @key[function] Standard_Input  @key[return] File_Type;
-   @key[function] Standard_Output @key[return] File_Type;
-   @key[function] Standard_Error  @key[return] File_Type;
+   @key[function] @AdaSubDefn{Standard_Input}  @key[return] File_Type;
+   @key[function] @AdaSubDefn{Standard_Output} @key[return] File_Type;
+   @key[function] @AdaSubDefn{Standard_Error}  @key[return] File_Type;
 
-   @key[function] Current_Input   @key[return] File_Type;
-   @key[function] Current_Output  @key[return] File_Type;
-   @key[function] Current_Error   @key[return] File_Type;
+   @key[function] @AdaSubDefn{Current_Input}   @key[return] File_Type;
+   @key[function] @AdaSubDefn{Current_Output}  @key[return] File_Type;
+   @key[function] @AdaSubDefn{Current_Error}   @key[return] File_Type;
 
+@LangDefType{Package=[Ada.Text_IO],Type=[File_Access]}
    @key[type] File_Access @key[is] @key[access] @key[constant] File_Type;
 
-   @key[function] Standard_Input  @key[return] File_Access;
-   @key[function] Standard_Output @key[return] File_Access;
-   @key[function] Standard_Error  @key[return] File_Access;
+   @key[function] @AdaSubDefn{Standard_Input}  @key[return] File_Access;
+   @key[function] @AdaSubDefn{Standard_Output} @key[return] File_Access;
+   @key[function] @AdaSubDefn{Standard_Error}  @key[return] File_Access;
 
-   @key[function] Current_Input   @key[return] File_Access;
-   @key[function] Current_Output  @key[return] File_Access;
-   @key[function] Current_Error   @key[return] File_Access;
+   @key[function] @AdaSubDefn{Current_Input}   @key[return] File_Access;
+   @key[function] @AdaSubDefn{Current_Output}  @key[return] File_Access;
+   @key[function] @AdaSubDefn{Current_Error}   @key[return] File_Access;
 
 
 --@RI{Buffer control}
-   @key[procedure] Flush (File : @key[in] @key[out] File_Type);
-   @key[procedure] Flush;
+   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] @key[out] File_Type);
+   @key[procedure] @AdaSubDefn{Flush};
 
 
    --@RI{ Specification of line and page lengths}
 
-   @key[procedure] Set_Line_Length(File : @key[in] File_Type; To : @key[in] Count);
-   @key[procedure] Set_Line_Length(To   : @key[in] Count);
+   @key[procedure] @AdaSubDefn{Set_Line_Length}(File : @key[in] File_Type; To : @key[in] Count);
+   @key[procedure] @AdaSubDefn{Set_Line_Length}(To   : @key[in] Count);
 
-   @key[procedure] Set_Page_Length(File : @key[in] File_Type; To : @key[in] Count);
-   @key[procedure] Set_Page_Length(To   : @key[in] Count);
+   @key[procedure] @AdaSubDefn{Set_Page_Length}(File : @key[in] File_Type; To : @key[in] Count);
+   @key[procedure] @AdaSubDefn{Set_Page_Length}(To   : @key[in] Count);
 
-   @key[function]  Line_Length(File : @key[in] File_Type) @key[return] Count;
-   @key[function]  Line_Length @key[return] Count;
+   @key[function]  @AdaSubDefn{Line_Length}(File : @key[in] File_Type) @key[return] Count;
+   @key[function]  @AdaSubDefn{Line_Length} @key[return] Count;
 
-   @key[function]  Page_Length(File : @key[in] File_Type) @key[return] Count;
-   @key[function]  Page_Length @key[return] Count;
+   @key[function]  @AdaSubDefn{Page_Length}(File : @key[in] File_Type) @key[return] Count;
+   @key[function]  @AdaSubDefn{Page_Length} @key[return] Count;
 
    --@RI{ Column, Line, and Page Control}
 
-   @key[procedure] New_Line   (File    : @key[in] File_Type;
+   @key[procedure] @AdaSubDefn{New_Line}   (File    : @key[in] File_Type;
                          Spacing : @key[in] Positive_Count := 1);
-   @key[procedure] New_Line   (Spacing : @key[in] Positive_Count := 1);
+   @key[procedure] @AdaSubDefn{New_Line}   (Spacing : @key[in] Positive_Count := 1);
 
-   @key[procedure] Skip_Line  (File    : @key[in] File_Type;
+   @key[procedure] @AdaSubDefn{Skip_Line}  (File    : @key[in] File_Type;
                          Spacing : @key[in] Positive_Count := 1);
-   @key[procedure] Skip_Line  (Spacing : @key[in] Positive_Count := 1);
+   @key[procedure] @AdaSubDefn{Skip_Line}  (Spacing : @key[in] Positive_Count := 1);
 
-   @key[function]  End_Of_Line(File : @key[in] File_Type) @key[return] Boolean;
-   @key[function]  End_Of_Line @key[return] Boolean;
+   @key[function]  @AdaSubDefn{End_Of_Line}(File : @key[in] File_Type) @key[return] Boolean;
+   @key[function]  @AdaSubDefn{End_Of_Line} @key[return] Boolean;
 
-   @key[procedure] New_Page   (File : @key[in] File_Type);
-   @key[procedure] New_Page;
+   @key[procedure] @AdaSubDefn{New_Page}   (File : @key[in] File_Type);
+   @key[procedure] @AdaSubDefn{New_Page};
 
-   @key[procedure] Skip_Page  (File : @key[in] File_Type);
-   @key[procedure] Skip_Page;
+   @key[procedure] @AdaSubDefn{Skip_Page}  (File : @key[in] File_Type);
+   @key[procedure] @AdaSubDefn{Skip_Page};
 
-   @key[function]  End_Of_Page(File : @key[in] File_Type) @key[return] Boolean;
-   @key[function]  End_Of_Page @key[return] Boolean;
+   @key[function]  @AdaSubDefn{End_Of_Page}(File : @key[in] File_Type) @key[return] Boolean;
+   @key[function]  @AdaSubDefn{End_Of_Page} @key[return] Boolean;
 
-   @key[function]  End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
-   @key[function]  End_Of_File @key[return] Boolean;
+   @key[function]  @AdaSubDefn{End_Of_File}(File : @key[in] File_Type) @key[return] Boolean;
+   @key[function]  @AdaSubDefn{End_Of_File} @key[return] Boolean;
 
-   @key[procedure] Set_Col (File : @key[in] File_Type; To : @key[in] Positive_Count);
-   @key[procedure] Set_Col (To   : @key[in] Positive_Count);
+   @key[procedure] @AdaSubDefn{Set_Col} (File : @key[in] File_Type; To : @key[in] Positive_Count);
+   @key[procedure] @AdaSubDefn{Set_Col} (To   : @key[in] Positive_Count);
 
-   @key[procedure] Set_Line(File : @key[in] File_Type; To : @key[in] Positive_Count);
-   @key[procedure] Set_Line(To   : @key[in] Positive_Count);
+   @key[procedure] @AdaSubDefn{Set_Line}(File : @key[in] File_Type; To : @key[in] Positive_Count);
+   @key[procedure] @AdaSubDefn{Set_Line}(To   : @key[in] Positive_Count);
 
-   @key[function] Col (File : @key[in] File_Type) @key[return] Positive_Count;
-   @key[function] Col  @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Col} (File : @key[in] File_Type) @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Col}  @key[return] Positive_Count;
 
-   @key[function] Line(File : @key[in] File_Type) @key[return] Positive_Count;
-   @key[function] Line @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Line}(File : @key[in] File_Type) @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Line} @key[return] Positive_Count;
 
-   @key[function] Page(File : @key[in] File_Type) @key[return] Positive_Count;
-   @key[function] Page @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Page}(File : @key[in] File_Type) @key[return] Positive_Count;
+   @key[function] @AdaSubDefn{Page} @key[return] Positive_Count;
 
    --@RI{ Character Input-Output}
 
-   @key[procedure] Get(File : @key[in]  File_Type; Item : @key[out] Character);
-   @key[procedure] Get(Item : @key[out] Character);
+   @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type; Item : @key[out] Character);
+   @key[procedure] @AdaSubDefn{Get}(Item : @key[out] Character);
 
-   @key[procedure] Put(File : @key[in]  File_Type; Item : @key[in] Character);
-   @key[procedure] Put(Item : @key[in]  Character);
+   @key[procedure] @AdaSubDefn{Put}(File : @key[in]  File_Type; Item : @key[in] Character);
+   @key[procedure] @AdaSubDefn{Put}(Item : @key[in]  Character);
 
-   @key[procedure] Look_Ahead (File        : @key[in]  File_Type;
+   @key[procedure] @AdaSubDefn{Look_Ahead} (File        : @key[in]  File_Type;
                          Item        : @key[out] Character;
                          End_Of_Line : @key[out] Boolean);
-   @key[procedure] Look_Ahead (Item        : @key[out] Character;
+   @key[procedure] @AdaSubDefn{Look_Ahead} (Item        : @key[out] Character;
                          End_Of_Line : @key[out] Boolean);
 
-   @key[procedure] Get_Immediate(File      : @key[in]  File_Type;
+   @key[procedure] @AdaSubDefn{Get_Immediate}(File      : @key[in]  File_Type;
                            Item      : @key[out] Character);
-   @key[procedure] Get_Immediate(Item      : @key[out] Character);
+   @key[procedure] @AdaSubDefn{Get_Immediate}(Item      : @key[out] Character);
 
-   @key[procedure] Get_Immediate(File      : @key[in]  File_Type;
+   @key[procedure] @AdaSubDefn{Get_Immediate}(File      : @key[in]  File_Type;
                            Item      : @key[out] Character;
                            Available : @key[out] Boolean);
-   @key[procedure] Get_Immediate(Item      : @key[out] Character;
+   @key[procedure] @AdaSubDefn{Get_Immediate}(Item      : @key[out] Character;
                            Available : @key[out] Boolean);
 
    --@RI{ String Input-Output}
 
-   @key[procedure] Get(File : @key[in]  File_Type; Item : @key[out] String);
-   @key[procedure] Get(Item : @key[out] String);
+   @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type; Item : @key[out] String);
+   @key[procedure] @AdaSubDefn{Get}(Item : @key[out] String);
 
-   @key[procedure] Put(File : @key[in]  File_Type; Item : @key[in] String);
-   @key[procedure] Put(Item : @key[in]  String);
+   @key[procedure] @AdaSubDefn{Put}(File : @key[in]  File_Type; Item : @key[in] String);
+   @key[procedure] @AdaSubDefn{Put}(Item : @key[in]  String);
 
-   @key[procedure] Get_Line(File : @key[in]  File_Type;
+   @key[procedure] @AdaSubDefn{Get_Line}(File : @key[in]  File_Type;
                       Item : @key[out] String;
                       Last : @key[out] Natural);
-   @key[procedure] Get_Line(Item : @key[out] String; Last : @key[out] Natural);
+   @key[procedure] @AdaSubDefn{Get_Line}(Item : @key[out] String; Last : @key[out] Natural);
 
-   @key[procedure] Put_Line(File : @key[in]  File_Type; Item : @key[in] String);
-   @key[procedure] Put_Line(Item : @key[in]  String);
+   @key[procedure] @AdaSubDefn{Put_Line}(File : @key[in]  File_Type; Item : @key[in] String);
+   @key[procedure] @AdaSubDefn{Put_Line}(Item : @key[in]  String);
 
 --@RI{ Generic packages for Input-Output of Integer Types}
 
    @key[generic]
       @key[type] Num @key[is] @key[range] <>;
-   @key[package] Integer_IO @key[is]
+   @key[package] @AdaDefn{Integer_IO} @key[is]
 
-      Default_Width : Field := Num'Width;
-      Default_Base  : Number_Base := 10;
+      @AdaDefn{Default_Width} : Field := Num'Width;
+      @AdaDefn{Default_Base}  : Number_Base := 10;
 
-      @key[procedure] Get(File  : @key[in]  File_Type;
+      @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
                     Width : @key[in] Field := 0);
-      @key[procedure] Get(Item  : @key[out] Num;
+      @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
 
-      @key[procedure] Put(File  : @key[in] File_Type;
+      @key[procedure] @AdaSubDefn{Put}(File  : @key[in] File_Type;
                     Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
                     Base  : @key[in] Number_Base := Default_Base);
-      @key[procedure] Put(Item  : @key[in] Num;
+      @key[procedure] @AdaSubDefn{Put}(Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
                     Base  : @key[in] Number_Base := Default_Base);
-      @key[procedure] Get(From : @key[in]  String;
+      @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
                     Last : @key[out] Positive);
-      @key[procedure] Put(To   : @key[out] String;
+      @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
                     Base : @key[in] Number_Base := Default_Base);
 
@@ -1137,28 +1138,28 @@ The library package Text_IO has the following declaration:
 
    @key[generic]
       @key[type] Num @key[is] @key[mod] <>;
-   @key[package] Modular_IO @key[is]
+   @key[package] @AdaDefn{Modular_IO} @key[is]
 
-      Default_Width : Field := Num'Width;
-      Default_Base  : Number_Base := 10;
+      @AdaDefn{Default_Width} : Field := Num'Width;
+      @AdaDefn{Default_Base}  : Number_Base := 10;
 
-      @key[procedure] Get(File  : @key[in]  File_Type;
+      @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
                     Width : @key[in] Field := 0);
-      @key[procedure] Get(Item  : @key[out] Num;
+      @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
 
-      @key[procedure] Put(File  : @key[in] File_Type;
+      @key[procedure] @AdaSubDefn{Put}(File  : @key[in] File_Type;
                     Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
                     Base  : @key[in] Number_Base := Default_Base);
-      @key[procedure] Put(Item  : @key[in] Num;
+      @key[procedure] @AdaSubDefn{Put}(Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
                     Base  : @key[in] Number_Base := Default_Base);
-      @key[procedure] Get(From : @key[in]  String;
+      @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
                     Last : @key[out] Positive);
-      @key[procedure] Put(To   : @key[out] String;
+      @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
                     Base : @key[in] Number_Base := Default_Base);
 
@@ -1168,32 +1169,32 @@ The library package Text_IO has the following declaration:
 
    @key[generic]
       @key[type] Num @key[is] @key[digits] <>;
-   @key[package] Float_IO @key[is]
+   @key[package] @AdaDefn{Float_IO} @key[is]
 
-      Default_Fore : Field := 2;
-      Default_Aft  : Field := Num'Digits-1;
-      Default_Exp  : Field := 3;
+      @AdaDefn{Default_Fore} : Field := 2;
+      @AdaDefn{Default_Aft}  : Field := Num'Digits-1;
+      @AdaDefn{Default_Exp}  : Field := 3;
 
-      @key[procedure] Get(File  : @key[in]  File_Type;
+      @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
-      @key[procedure] Get(Item  : @key[out] Num;
+      @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
 
-      @key[procedure] Put(File : @key[in] File_Type;
+      @key[procedure] @AdaSubDefn{Put}(File : @key[in] File_Type;
                     Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
-      @key[procedure] Put(Item : @key[in] Num;
+      @key[procedure] @AdaSubDefn{Put}(Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
 
-      @key[procedure] Get(From : @key[in] String;
+      @key[procedure] @AdaSubDefn{Get}(From : @key[in] String;
                     Item : @key[out] Num;
                     Last : @key[out] Positive);
-      @key[procedure] Put(To   : @key[out] String;
+      @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
@@ -1201,32 +1202,32 @@ The library package Text_IO has the following declaration:
 
    @key[generic]
       @key[type] Num @key[is] @key[delta] <>;
-   @key[package] Fixed_IO @key[is]
+   @key[package] @AdaDefn{Fixed_IO} @key[is]
 
-      Default_Fore : Field := Num'Fore;
-      Default_Aft  : Field := Num'Aft;
-      Default_Exp  : Field := 0;
+      @AdaDefn{Default_Fore} : Field := Num'Fore;
+      @AdaDefn{Default_Aft}  : Field := Num'Aft;
+      @AdaDefn{Default_Exp}  : Field := 0;
 
-      @key[procedure] Get(File  : @key[in]  File_Type;
+      @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
-      @key[procedure] Get(Item  : @key[out] Num;
+      @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
 
-      @key[procedure] Put(File : @key[in] File_Type;
+      @key[procedure] @AdaSubDefn{Put}(File : @key[in] File_Type;
                     Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
-      @key[procedure] Put(Item : @key[in] Num;
+      @key[procedure] @AdaSubDefn{Put}(Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
 
-      @key[procedure] Get(From : @key[in]  String;
+      @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
                     Last : @key[out] Positive);
-      @key[procedure] Put(To   : @key[out] String;
+      @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
@@ -1234,32 +1235,32 @@ The library package Text_IO has the following declaration:
 
    @key[generic]
       @key[type] Num @key[is] @key[delta] <> @key[digits] <>;
-   @key[package] Decimal_IO @key[is]
+   @key[package] @AdaDefn{Decimal_IO} @key[is]
 
-      Default_Fore : Field := Num'Fore;
-      Default_Aft  : Field := Num'Aft;
-      Default_Exp  : Field := 0;
+      @AdaDefn{Default_Fore} : Field := Num'Fore;
+      @AdaDefn{Default_Aft}  : Field := Num'Aft;
+      @AdaDefn{Default_Exp}  : Field := 0;
 
-      @key[procedure] Get(File  : @key[in]  File_Type;
+      @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
-      @key[procedure] Get(Item  : @key[out] Num;
+      @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
 
-      @key[procedure] Put(File : @key[in] File_Type;
+      @key[procedure] @AdaSubDefn{Put}(File : @key[in] File_Type;
                     Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
-      @key[procedure] Put(Item : @key[in] Num;
+      @key[procedure] @AdaSubDefn{Put}(Item : @key[in] Num;
                     Fore : @key[in] Field := Default_Fore;
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
 
-      @key[procedure] Get(From : @key[in]  String;
+      @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
                     Last : @key[out] Positive);
-      @key[procedure] Put(To   : @key[out] String;
+      @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
@@ -1269,41 +1270,41 @@ The library package Text_IO has the following declaration:
 
    @key[generic]
       @key[type] Enum @key[is] (<>);
-   @key[package] Enumeration_IO @key[is]
+   @key[package] @AdaDefn{Enumeration_IO} @key[is]
 
-      Default_Width   : Field := 0;
-      Default_Setting : Type_Set := Upper_Case;
+      @AdaDefn{Default_Width}   : Field := 0;
+      @AdaDefn{Default_Setting} : Type_Set := Upper_Case;
 
-      @key[procedure] Get(File : @key[in]  File_Type;
+      @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type;
                     Item : @key[out] Enum);
-      @key[procedure] Get(Item : @key[out] Enum);
+      @key[procedure] @AdaSubDefn{Get}(Item : @key[out] Enum);
 
-      @key[procedure] Put(File  : @key[in] File_Type;
+      @key[procedure] @AdaSubDefn{Put}(File  : @key[in] File_Type;
                     Item  : @key[in] Enum;
                     Width : @key[in] Field    := Default_Width;
                     Set   : @key[in] Type_Set := Default_Setting);
-      @key[procedure] Put(Item  : @key[in] Enum;
+      @key[procedure] @AdaSubDefn{Put}(Item  : @key[in] Enum;
                     Width : @key[in] Field    := Default_Width;
                     Set   : @key[in] Type_Set := Default_Setting);
 
-      @key[procedure] Get(From : @key[in]  String;
+      @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Enum;
                     Last : @key[out] Positive);
-      @key[procedure] Put(To   : @key[out] String;
+      @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in]  Enum;
                     Set  : @key[in]  Type_Set := Default_Setting);
    @key[end] Enumeration_IO;
 
 --@RI{ Exceptions}
 
-   Status_Error : @key[exception] @key[renames] IO_Exceptions.Status_Error;
-   Mode_Error   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
-   Name_Error   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
-   Use_Error    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
-   Device_Error : @key[exception] @key[renames] IO_Exceptions.Device_Error;
-   End_Error    : @key[exception] @key[renames] IO_Exceptions.End_Error;
-   Data_Error   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
-   Layout_Error : @key[exception] @key[renames] IO_Exceptions.Layout_Error;
+   @AdaDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
+   @AdaDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
+   @AdaDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
+   @AdaDefn{Use_Error}    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
+   @AdaDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
+   @AdaDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
+   @AdaDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
+   @AdaDefn{Layout_Error} : @key[exception] @key[renames] IO_Exceptions.Layout_Error;
 @key[private]
    ... -- @RI{not specified by the language}
 @key[end] Ada.Text_IO;
@@ -2217,7 +2218,7 @@ read does not form a legal integer literal or if the value obtained is not
 
 Integer_Text_IO is a library package that is a nongeneric equivalent
 to Text_IO.Integer_IO for the predefined type Integer:
-@ChildUnit{Parent=[Ada],Child=[Integer_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Integer_@!Text_IO]}
 @begin{Example}
 @key[with] Ada.Text_IO;
 @key[package] Ada.Integer_Text_IO @key[is] @key[new] Ada.Text_IO.Integer_IO(Integer);
@@ -2432,7 +2433,7 @@ The value is rounded; a value
 
 Float_Text_IO is a library package that is a nongeneric equivalent
 to Text_IO.Float_IO for the predefined type Float:
-@ChildUnit{Parent=[Ada],Child=[Float_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Float_@!Text_IO]}
 @begin{Example}
 @key[with] Ada.Text_IO;
 @key[package] Ada.Float_Text_IO @key[is] @key[new] Ada.Text_IO.Float_IO(Float);
@@ -2642,7 +2643,7 @@ and as a sequence of lines grouped into pages.
 
 @begin{StaticSem}
 @Defn{Ada.Wide_Text_IO}
-@ChildUnit{Parent=[Ada],Child=[Wide_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Wide_@!Text_IO]}
 The specification of package Wide_Text_IO is the same as that for
 Text_IO, except that in each Get,
 Look_Ahead, Get_Immediate,
@@ -2652,9 +2653,9 @@ occurrence of String is replaced by Wide_String.
 
 
 @Defn{Ada.Integer_Wide_Text_IO}
-@ChildUnit{Parent=[Ada],Child=[Integer_Wide_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Integer_@!Wide_@!Text_IO]}
 @Defn{Ada.Float_Wide_Text_IO}
-@ChildUnit{Parent=[Ada],Child=[Float_Wide_Text_IO]}
+@ChildUnit{Parent=[Ada],Child=[Float_@!Wide_@!Text_IO]}
 Nongeneric equivalents of Wide_Text_IO.Integer_IO
 and Wide_Text_IO.Float_IO are provided (as for Text_IO)
 for each predefined numeric type,
@@ -2700,70 +2701,73 @@ See @RefSecNum{Streams} for a general discussion of streams.
 The library package Streams.Stream_IO has the following declaration:
 @begin(example)
 @key(with) Ada.IO_Exceptions;
-@ChildUnit{Parent=[Ada.Streams],Child=[Stream_IO]}
+@ChildUnit{Parent=[Ada.Streams],Child=[Stream_@!IO]}
 @key(package) Ada.Streams.Stream_IO @key(is)
 
 @LangDefType{Package=[Ada.Streams.Stream_IO],Type=[Stream_Access]}
     @key[type] Stream_Access @key[is] @key[access] @key[all] Root_Stream_Type'Class;
 
+@LangDefType{Package=[Ada.Streams.Stream_IO],Type=[File_Type]}
     @key(type) File_Type @key(is) @key(limited) @key(private;)
 
+@LangDefType{Package=[Ada.Streams.Stream_IO],Type=[File_Mode]}
     @key(type) File_Mode @key(is) (In_File, Out_File, Append_File);
 
+@LangDefType{Package=[Ada.Streams.Stream_IO],Type=[Count]}
     @key[type]    Count          @key[is] @key[range] 0 .. @RI[implementation-defined];
-    @key[subtype] Positive_Count @key[is] Count @key[range] 1 .. Count'Last;
+    @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
       -- @RI(Index into file, in stream elements.)
 
-    @key(procedure) Create (File : @key(in) @key(out) File_Type;
+    @key(procedure) @AdaSubDefn{Create} (File : @key(in) @key(out) File_Type;
                       Mode : @key(in) File_Mode := Out_File;
                       Name : @key(in) String    := "";
                       Form : @key(in) String    := "");
 
-    @key(procedure) Open (File : @key(in) @key(out) File_Type;
+    @key(procedure) @AdaSubDefn{Open} (File : @key(in) @key(out) File_Type;
                     Mode : @key(in) File_Mode;
                     Name : @key(in) String;
                     Form : @key(in) String := "");
 
 
-    @key(procedure) Close  (File : @key(in) @key(out) File_Type);
-    @key(procedure) Delete (File : @key(in) @key(out) File_Type);
-    @key(procedure) Reset  (File : @key(in) @key(out) File_Type; Mode : @key(in) File_Mode);
-    @key(procedure) Reset  (File : @key(in) @key(out) File_Type);
+    @key(procedure) @AdaSubDefn{Close}  (File : @key(in) @key(out) File_Type);
+    @key(procedure) @AdaSubDefn{Delete} (File : @key(in) @key(out) File_Type);
+    @key(procedure) @AdaSubDefn{Reset}  (File : @key(in) @key(out) File_Type; Mode : @key(in) File_Mode);
+    @key(procedure) @AdaSubDefn{Reset}  (File : @key(in) @key(out) File_Type);
 
 
-    @key(function) Mode (File : @key(in) File_Type) @key(return) File_Mode;
-    @key(function) Name (File : @key(in) File_Type) @key(return) String;
-    @key(function) Form (File : @key(in) File_Type) @key(return) String;
+    @key(function) @AdaSubDefn{Mode} (File : @key(in) File_Type) @key(return) File_Mode;
+    @key(function) @AdaSubDefn{Name} (File : @key(in) File_Type) @key(return) String;
+    @key(function) @AdaSubDefn{Form} (File : @key(in) File_Type) @key(return) String;
 
 
-    @key(function) Is_Open     (File : @key(in) File_Type) @key(return) Boolean;
-    @key(function) End_Of_File (File : @key(in) File_Type) @key(return) Boolean;
+    @key(function) @AdaSubDefn{Is_Open}     (File : @key(in) File_Type) @key(return) Boolean;
+    @key(function) @AdaSubDefn{End_Of_File} (File : @key(in) File_Type) @key(return) Boolean;
 
 
-    @key(function) Stream (File : @key(in) File_Type) @key(return) Stream_Access;
+    @key(function) @AdaSubDefn{Stream} (File : @key(in) File_Type) @key(return) Stream_Access;
         -- @RI(Return stream access for use with T'Input and T'Output)
 
 
 
 
     -- @RI(Read array of stream elements from file)
-    @key(procedure) Read (File : @key(in)  File_Type;
+    @key(procedure) @AdaSubDefn{Read} (File : @key(in)  File_Type;
                     Item : @key(out) Stream_Element_Array;
                     Last : @key(out) Stream_Element_Offset;
                     From : @key(in)  Positive_Count);
 
-    @key(procedure) Read (File : @key(in)  File_Type;
+    @key(procedure) @AdaSubDefn{Read} (File : @key(in)  File_Type;
                     Item : @key(out) Stream_Element_Array;
                     Last : @key(out) Stream_Element_Offset);
 
 
 
     -- @RI(Write array of stream elements into file)
-    @key(procedure) Write (File : @key(in) File_Type;
+    @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
                      Item : @key(in) Stream_Element_Array;
                      To   : @key(in) Positive_Count);
 
-    @key(procedure) Write (File : @key(in) File_Type;
+    @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
                            Item : @key(in) Stream_Element_Array);
 
 
@@ -2771,24 +2775,24 @@ The library package Streams.Stream_IO has the following declaration:
     -- @RI(Operations on position within file)
 
 
-    @key[procedure] Set_Index(File : @key[in] File_Type; To : @key[in] Positive_Count);
+    @key[procedure] @AdaSubDefn{Set_Index}(File : @key[in] File_Type; To : @key[in] Positive_Count);
 
-    @key[function] Index(File : @key[in] File_Type) @key[return] Positive_Count;
-    @key[function] Size (File : @key[in] File_Type) @key[return] Count;
+    @key[function] @AdaSubDefn{Index}(File : @key[in] File_Type) @key[return] Positive_Count;
+    @key[function] @AdaSubDefn{Size} (File : @key[in] File_Type) @key[return] Count;
 
-    @key(procedure) Set_Mode(File : @key(in) @key(out) File_Type; Mode : @key(in) File_Mode);
+    @key(procedure) @AdaSubDefn{Set_Mode}(File : @key(in) @key(out) File_Type; Mode : @key(in) File_Mode);
 
-    @key(procedure) Flush(File : @key(in) @key(out) File_Type);
+    @key(procedure) @AdaSubDefn{Flush}(File : @key(in) @key(out) File_Type);
 
 
     -- @RI(exceptions)
-    Status_Error : @key(exception) @key(renames) IO_Exceptions.Status_Error;
-    Mode_Error   : @key(exception) @key(renames) IO_Exceptions.Mode_Error;
-    Name_Error   : @key(exception) @key(renames) IO_Exceptions.Name_Error;
-    Use_Error    : @key(exception) @key(renames) IO_Exceptions.Use_Error;
-    Device_Error : @key(exception) @key(renames) IO_Exceptions.Device_Error;
-    End_Error    : @key(exception) @key(renames) IO_Exceptions.End_Error;
-    Data_Error   : @key(exception) @key(renames) IO_Exceptions.Data_Error;
+    @AdaDefn{Status_Error} : @key(exception) @key(renames) IO_Exceptions.Status_Error;
+    @AdaDefn{Mode_Error}   : @key(exception) @key(renames) IO_Exceptions.Mode_Error;
+    @AdaDefn{Name_Error}   : @key(exception) @key(renames) IO_Exceptions.Name_Error;
+    @AdaDefn{Use_Error}    : @key(exception) @key(renames) IO_Exceptions.Use_Error;
+    @AdaDefn{Device_Error} : @key(exception) @key(renames) IO_Exceptions.Device_Error;
+    @AdaDefn{End_Error}    : @key(exception) @key(renames) IO_Exceptions.End_Error;
+    @AdaDefn{Data_Error}   : @key(exception) @key(renames) IO_Exceptions.Data_Error;
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -2852,11 +2856,12 @@ a text file as a stream.
 The library package Text_IO.Text_Streams has the following declaration:
 @begin{example}
 @key[with] Ada.Streams;
-@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_Streams]}
+@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_@!Streams]}
 @key[package] Ada.Text_IO.Text_Streams @key[is]
+@LangDefType{Package=[Ada.Text_IO.Text_@!Streams],Type=[Stream_Access]}
    @key[type] Stream_Access @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
 
-   @key[function] Stream (File : @key[in] File_Type) @key[return] Stream_Access;
+   @key[function] @AdaSubDefn{Stream} (File : @key[in] File_Type) @key[return] Stream_Access;
 @key[end] Ada.Text_IO.Text_Streams;
 @end{example}
 
@@ -2885,11 +2890,12 @@ The library package Wide_Text_IO.Text_Streams
 has the following declaration:
 @begin{example}
 @key[with] Ada.Streams;
-@ChildUnit{Parent=[Ada.Text_IO],Child=[Text_Streams]}
+@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Text_@!Streams]}
 @key[package] Ada.Wide_Text_IO.Text_Streams @key[is]
+@LangDefType{Package=[Ada.Wide_Text_@!IO.Text_@!Streams],Type=[Stream_Access]}
    @key[type] Stream_Access @key[is] @key[access] @key[all] Streams.Root_Stream_Type'Class;
 
-   @key[function] Stream (File : @key[in] File_Type) @key[return] Stream_Access;
+   @key[function] @AdaSubDefn{Stream} (File : @key[in] File_Type) @key[return] Stream_Access;
 @key[end] Ada.Wide_Text_IO.Text_Streams;
 @end{example}
 
@@ -2911,14 +2917,14 @@ The library package IO_Exceptions has the following declaration:
 @key[package] Ada.IO_Exceptions @key[is]
    @key[pragma] Pure(IO_Exceptions);
 
-   Status_Error : @key[exception];
-   Mode_Error   : @key[exception];
-   Name_Error   : @key[exception];
-   Use_Error    : @key[exception];
-   Device_Error : @key[exception];
-   End_Error    : @key[exception];
-   Data_Error   : @key[exception];
-   Layout_Error : @key[exception];
+   @AdaDefn{Status_Error} : @key[exception];
+   @AdaDefn{Mode_Error}   : @key[exception];
+   @AdaDefn{Name_Error}   : @key[exception];
+   @AdaDefn{Use_Error}    : @key[exception];
+   @AdaDefn{Device_Error} : @key[exception];
+   @AdaDefn{End_Error}    : @key[exception];
+   @AdaDefn{Data_Error}   : @key[exception];
+   @AdaDefn{Layout_Error} : @key[exception];
 
 @key[end] Ada.IO_Exceptions;
 @end{Example}

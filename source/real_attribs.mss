@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/08/03 05:37:44 $}
+@Comment{$Date: 2000/08/08 22:56:19 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.16 $}
+@comment{$Revision: 1.17 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -171,7 +171,7 @@ For every value @RI{x} of a floating point type @i{T}, the
 The following @i{primitive function attributes} are defined for any subtype
 S of a floating point type @i{T}.
 @begin(Description)
-@Attribute{Prefix=<S>, AttrName=<Exponent>,
+@AttributeLeading{Prefix=<S>, AttrName=<Exponent>,
   Text=[S'Exponent denotes a function with the following
    specification:
 @begin(DescExample)
@@ -181,7 +181,7 @@ S of a floating point type @i{T}.
 
    @NoPrefix@;The function yields the normalized exponent of @i{X}.]}
 
-@Attribute{Prefix=<S>, AttrName=<Fraction>,
+@AttributeLeading{Prefix=<S>, AttrName=<Fraction>,
   Text=[S'Fraction denotes a function with the following
    specification:
 @begin(DescExample)
@@ -209,7 +209,7 @@ S of a floating point type @i{T}.
    the result of scaling @i{X} up sufficiently to normalize it.
 @end{ImplNote}
 
-@Attribute{Prefix=<S>, AttrName=<Compose>,
+@AttributeLeading{Prefix=<S>, AttrName=<Compose>,
   Text=[S'Compose denotes a function with the following
    specification:
 @begin{DescExample}
@@ -241,7 +241,7 @@ S of a floating point type @i{T}.
    (if @i{T}'Denorm is True) a denormalized number.
 @end{Ramification}
 
-@Attribute{Prefix=<S>, AttrName=<Scaling>,
+@AttributeLeading{Prefix=<S>, AttrName=<Scaling>,
   Text=[S'Scaling denotes a function with the following
    specification:
 @begin{DescExample}
@@ -272,7 +272,7 @@ S of a floating point type @i{T}.
    number.
 @end{Ramification}
 
-@Attribute{Prefix=<S>, AttrName=<Floor>,
+@AttributeLeading{Prefix=<S>, AttrName=<Floor>,
   Text=[S'Floor denotes a function with the following
    specification:
 @begin{DescExample}
@@ -287,7 +287,7 @@ S of a floating point type @i{T}.
    result has the sign of @i{X}; a zero result otherwise has a positive
    sign.]}
 
-@Attribute{Prefix=<S>, AttrName=<Ceiling>,
+@AttributeLeading{Prefix=<S>, AttrName=<Ceiling>,
   Text=[S'Ceiling denotes a function with the following
    specification:
 @begin{DescExample}
@@ -302,7 +302,7 @@ S of a floating point type @i{T}.
    result has the sign of @i{X}; a zero result otherwise has a negative sign
    when S'Signed_Zeros is True.]}
 
-@Attribute{Prefix=<S>, AttrName=<Rounding>,
+@AttributeLeading{Prefix=<S>, AttrName=<Rounding>,
   Text=[S'Rounding denotes a function with the following
    specification:
 @begin{DescExample}
@@ -314,7 +314,7 @@ S of a floating point type @i{T}.
    rounding away from zero if @i{X} lies exactly halfway between two integers.
    A zero result has the sign of @i{X} when S'Signed_Zeros is True.]}
 
-@Attribute{Prefix=<S>, AttrName=<Unbiased_Rounding>,
+@AttributeLeading{Prefix=<S>, AttrName=<Unbiased_Rounding>,
   Text=[S'Unbiased_Rounding denotes a function with
    the following specification:
 @begin{DescExample}
@@ -327,7 +327,7 @@ S of a floating point type @i{T}.
    two integers.  A zero result has the sign of @i{X} when S'Signed_Zeros is
    True.]}
 
-@Attribute{Prefix=<S>, AttrName=<Truncation>,
+@AttributeLeading{Prefix=<S>, AttrName=<Truncation>,
   Text=[S'Truncation denotes a function with the following
    specification:
 @begin{DescExample}
@@ -339,7 +339,7 @@ S of a floating point type @i{T}.
    and @Floor{@RI{X}} otherwise.  A zero result has the sign of @i{X} when
    S'Signed_Zeros is True.]}
 
-@Attribute{Prefix=<S>, AttrName=<Remainder>,
+@AttributeLeading{Prefix=<S>, AttrName=<Remainder>,
   Text=[S'Remainder denotes a function with the following
    specification:
 @begin{DescExample}
@@ -366,7 +366,7 @@ S of a floating point type @i{T}.
    and @i{T}'Denorm is False.
 @end{Discussion}
 
-@Attribute{Prefix=<S>, AttrName=<Adjacent>,
+@AttributeLeading{Prefix=<S>, AttrName=<Adjacent>,
   Text=[S'Adjacent denotes a function with the following
    specification:
 @begin{DescExample}
@@ -388,7 +388,7 @@ S of a floating point type @i{T}.
    positive number of the type @i{T} when @i{T}'Denorm is True.
 @end{Ramification}
 
-@Attribute{Prefix=<S>, AttrName=<Copy_Sign>,
+@AttributeLeading{Prefix=<S>, AttrName=<Copy_Sign>,
   Text=[S'Copy_Sign denotes a function with the following
    specification:
 @begin{DescExample}
@@ -414,7 +414,7 @@ is outside the base range of S.
    to a nonzero quantity and then testing for a negative result.
 @end{Discussion}
 
-@Attribute{Prefix=<S>, AttrName=<Leading_Part>,
+@AttributeLeading{Prefix=<S>, AttrName=<Leading_Part>,
   Text=[S'Leading_Part denotes a function with the following
    specification:
 @begin{DescExample}
@@ -451,7 +451,7 @@ is outside the base range of S.
    scaled up.
 @end{ImplNote}
 
-@Attribute{Prefix=<S>, AttrName=<Machine>,
+@AttributeLeading{Prefix=<S>, AttrName=<Machine>,
   Text=[S'Machine denotes a function with the following
    specification:
 @begin{DescExample}
@@ -558,7 +558,7 @@ a floating point type @i{T}.
    @RefSecNum{Model-Oriented Attributes of Floating Point Types}.
 @end{Discussion}
 
-@Attribute{Prefix=<S>, AttrName=<Model>,
+@AttributeLeading{Prefix=<S>, AttrName=<Model>,
   Text=[S'Model denotes a function with the following specification:
 @begin{DescExample}
 @key(function) S'Model (@RI{X} : @RI{T})
