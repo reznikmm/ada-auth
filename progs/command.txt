@@ -1,0 +1,590 @@
+Ada Reference Manual formatting tool.
+
+Copyright 2000, AXE Consultants.
+P.O. Box 1512, Madison WI  53701
+E-Mail: rbrukardt@bix.com
+
+AXE Consultants grants to all users the right to use/modify this formatting
+tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9 activities are
+explicitly included as "non-commercial purposes".) Commercial uses of this
+software and its source code, including but not limited to documents for sale
+and sales of modified versions of this tool, are prohibited without the prior
+written permission of AXE Consultants. All rights not explicitly granted above
+are reserved by AXE Consultants.
+
+You use this tool and/or its source code on the condition that you indemnify
+and hold harmless AXE Consultants, its agents, and employees, from any and
+all liability or damages to yourself or your hardware or software, or third
+parties, including attorneys' fees, court costs, and other related costs and
+expenses, arising out of your use of this tool and/or its source code
+irrespective of the cause of said liability.
+
+AXE CONSULTANTS MAKES THIS TOOL AND SOURCE CODE AVAILABLE ON AN "AS IS" BASIS
+AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, AS TO THE ACCURACY, CAPABILITY,
+EFFICIENCY, MERCHANTABILITY, OR FUNCTIONING OF THIS TOOL. IN NO EVENT WILL AXE
+CONSULTANTS BE LIABLE FOR ANY GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL,
+EXEMPLARY, OR SPECIAL DAMAGES, EVEN IF AXE CONSULTANTS HAS BEEN ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.
+
+
+
+Running the formmating tool:
+
+The formmating tool reads the ARM text input files (.MSS files) in a
+Scribe-like format. The tool allows determining the output document,
+format, and other properties. The output is written into a subdirectory
+"Output" of the directory where Arm_Form is run. The input files are
+assumed to be in the current directory. The tool is self-contained; it does
+not require any pre or post processing except to have Word create the real
+table of contents for the .RTF outout.
+
+Usage: Arm_Form <Document> [<Format>, [<Changes>, [<Options>]]]
+
+The documents are:
+   AARM: The Annotated Ada 95 Reference Manual. This is mainly intended for
+	 implementors and language lawyers.
+   RM:   The Ada 95 Reference Manual. This is the version used by most users.
+   ISO-RM: The Ada 95 Reference Manual in ISO format. This version lacks some
+	 sections, paragraph numbers, and is printed on A4 paper.
+
+The formats are:
+   Text: Pure text files. These are missing a lot of formatting; we recommend
+	 using the HTML versions instead.
+   HTML: HTML files. The HTML is designed for HTML version 4.0. Old browsers
+	 may display the documents with little formatting.
+   RTF:  RTF files. The RTF files are designed for Word 97 and later. PDF
+	 versions should be created from these file using Word and Adobe tools.
+   All:  (Default) Generate all of the above formats.
+
+<Changes> are:
+   No-Changes: The original RM 95 text.
+   Changes-Only: (Default) The RM 95 text with Corrigendum changes applied.
+   Show-Changes: The RM 95 text with Corrigendum changes applied, and
+		 changes marked. For HTML, the <INS> and <DEL> tags are used,
+		 which showed deleted text as struck-through and inserted text
+		 as underlined. (This can be different on a different browser.)
+		 For RTF, this uses Word's "changes" mechanisms.
+   New-Changes: The RM 95 text with Corrigendum changes applied, and
+		insertions marked. Deletions are marked by just a single
+                blank space. (See above for how these are marked). This form
+		is intended to be used with revision bars in Word (Word does
+		not reformat the document when deletions are hidden, leaving
+		unsighly blank spaces.)
+
+<Options> are:
+   Show-Index-Entries: Index and glossary entries are visibly displayed in the
+		       document. If this option is not used, these items are
+		       not displayed (although they may create links if the
+		       output format supports links).
+   Big-Files:	       Generate a few (possibly one) large file for the output,
+		       rather than a set of smaller files. What this means
+		       exactly depends on the output format.
+
+
+Summary of commands used in the ARM text input files (.MSS files):
+
+Syntax summary:
+
+Commands are represented by @<command_name>[<args>]. The command name can be an
+identifier, or certain special characters. The command name is not
+case-sensitive: @newpage; @NewPage; @NEWPAGE; all represent the same command.
+The argument list (if any) is surrounded by one of the bracket pairs
+(), {}, [], or <>. These pairs are equivalent, however the matching end
+character must be used to close an argument list. The arguments can be
+anything. It can be another sequence of text, keywords, or other items
+(described below). In this list below, arguments are always signified by {},
+but any of the other characters can be used. (Note that there is no escape
+character for the brackets, so if one of the bracket characters appears
+in the text, it different pair of bracket characters should be used).
+
+Command summary:
+
+Meta-commands:
+
+@; - Signifies nothing. Used to break a parameterless command from following
+     text: "@LegalityName@;s" (otherwise the command "LegalityNames" would be
+     looked for).
+@: - After a period, signifies an sentence ending period, rather than a
+     initial period. Not used currently, but remains in text in case someone
+     cares eventually. (Only matters if the amount of space after sentences
+     is different than the amount between words within a sentence.)
+@| - Marks a potential line break point, without inserting a hyphen. (Scribe
+     says that it is a "zero-length word".) Not used currently, as the RTF
+     command (\zwbo) prints a square box in both Word 97 and Word 2000 -- and
+     no break. Similarly, zero-width space in HTML 4.0 doesn't work on Internet
+     Exploder 4.1 - it also prints a square box and no break.
+@! - Marks a potential line break point, inserting a hyphen if the break is
+     used. (A so-called "soft-hyphen"). Unlike the above, this actually
+     works in Word 97 and HTML. &shy.
+
+
+Text commands:
+
+@@ - the literal character '@'.
+@\ - A tab, or end of centered text. Also used to mark the separation between
+     hanging text and the rest of the paragraph.
+@^ - Sets a tab stop at the current text location. (*Can't implement in RTF and
+     HTML does not have tabs at all; has been removed from the text *)
+@  - [@<space>] - A hard space; cannot be used to insert a line break.
+@* - Line break inside a paragraph.
+
+@+{<text>} - Superscript text (text size will be smaller).
+@-{<text>} - Subscript text (text size will be smaller).
+@b{<text>} - Bold text.
+@i{<text>} - Italic text.
+@r{<text>} - Roman font text.
+@ri{<text>} -Roman italic text (use for comments in examples).
+@s{<text>} - Swiss font text.
+@f{<text>} - Fixed-width font text.
+@shrink{<text>} - Text is one size smaller. (Typically 1 point smaller).
+@grow{<text>} - Text is one size larger. (Typically 1 point larger).
+@comment{<text>} - The text is a comment to the input files, and is ignored
+	     on output.
+@newpage   - Insert a page break. Ends a paragraph.
+@rmnewpage - Insert a page break in the RM, ignored in other documents. Ends a
+	     paragraph. Use to insert page breaks to make the printed RM look better.
+@newcolumn - Insert a column break. Only allowed in a multi-column formats.
+	     Ends a paragraph.
+@softpage  - Insert a soft page break in a format that does not generally
+	     allow one. A page is allowed (but not required) at this point.
+             [Note: This doesn't seem to work in Word 97, but we've kept it
+	     anyway.]
+@noprefix  - The following paragraph does not have a prefix (that is, hanging
+	     text, numbers, or bullets). For example, if the paragraph is in
+	     a bulleted list, it will not have a bullet. This command must be
+	     given before any text for the paragraph (including index entries
+	     and even spaces in example formats).
+@keepnext  - Keep this paragraph with the next one (usually used on leadins,
+	     like "The following example shows...:"). This command must be
+	     given before any text for the paragraph.
+@leading   - This paragraph leads in an example or list. Cut the space
+	     following the paragraph (usually by 30%). This command must be
+	     given before any text for the paragraph.
+@trailing  - This paragraph ends an item of some sort. Increase the space
+	     following the paragraph (usually by 50%). This command must be
+	     given before any text for the paragraph.
+@noparanum - This paragraph has no number. This command must be
+	     given before any text for the paragraph.
+
+@thinline  - Draw a thin separator line across the page. Ends any paragraph.
+@thickline - Draw a thin separator line across the page. Ends any paragraph.
+
+-- Section/Clause commands:
+@LabeledSection{<text>} - Start a labeled section (chapter). The title will be
+	"text". The formatter assigns section numbers.
+@LabeledSectionNoBreak{<text>} - Start a labeled section (chapter). The
+	title will be "text". The formatter assigns section numbers. No page
+	break before it.
+@LabeledInformativeAnnex{<text>} - Start a labeled informative annex. The title
+	will be "text". The formatter assigns annex letters.
+@LabeledNormativeAnnex{<text>} - Start a labeled normative annex. The title
+	will be "text". The formatter assigns annex letters.
+@LabeledClause{<text>} - Start a labeled clause. The title will be "text".
+	The formatter assigns clause numbers.
+@LabeledSubClause{<text>} - Start a labeled subclause. The title will be "text".
+	The formatter assigns subclause numbers.
+@LabeledRevisedClause{New=[<new_text>],Old=[<old_text>]} - Start a labeled
+	clause. The title will be "new_text". If we are generating an old
+	version of the RM, the title is "old_text" instead. (Note that
+	clause references always use the new_text name.)
+	The formatter assigns clause numbers.
+@LabeledRevisedSubClause{New=[<new_text>],Old=[<old_text>]} - Start a labeled
+	subclause. The title will be "new_text". If we are generating an old
+	version of the RM, the title is "old_text" instead. (Note that
+	clause references always use the new_text name.)
+	The formatter assigns subclause numbers.
+
+@UnnumberedSection{<text>} - Start an unnumbered section. (These are the
+	Forward and Introduction). This *can* be referenced by a reference,
+	and will appear in the table of contents.
+@Subheading{<text>} - Start an unnumbered subclause (a subclause of an
+	unnumbered section). These are formatting only, they cannot be
+	referenced, nor do they appear in the table of contents.
+@Heading{<text>} - Start an unnumbered clause (a clause of an unnumbered
+	section). These are formatting only, they cannot be referenced, nor do
+	they appear in the table of contents.
+@Center{<text>} - Center the otherwise normal text. Note that this is a
+	paragraph style and is treated like a header.
+@Right{<text>} - Right justify the otherwise normal text. Note that this is a
+	paragraph style and is treated like a header.
+
+@PrefaceClause{} - Start a new clause without numbering or title - just a
+	page break to an odd page.
+
+@RefSec{<title>} - Generates a reference to the clause "title". (This must
+	match exactly except for case). The reference is of the form
+	"<clause number>, ``<title>''".
+@RefSecNum{<title>} - Generates a reference to the clause "title". (This must
+	match exactly except for case). The reference is of the form
+	"<clause number>".
+
+
+-- Ada specific commands:
+@nt{<text>} - A non-terminal in normal text. This will be set in a Swiss
+	      (sans-serif) font.
+@key{<text>} - A keyword in normal text. This will be set in boldface.
+@redundant{<text>} - Marks text thought to be unnecessary in the RM. That is,
+	the rules are explained elsewhere. The text is formatted normally.
+	For the AARM, this text is surrounded in brackets. For the RM, no
+	special formatting is used.
+
+@syn{[Tabs=<Tabset>, ]LHS=<Non-terminal>, RHS=<Production>}
+       - Marks a syntax production.
+	<Production> contains @syn2 commands for RHS non-terminals.
+	<Tabset> defines any tabs needed by the <Production>.
+	The <Non-terminal> is indexed. The <Non-Terminal> and <Production>
+	(and the clause number) are sent to the syntax manager. Also, saves
+	<Non-terminal> for any following @Syn2 to use. The command also writes
+	    @nt<Non-Terminal> ::= <Production>
+	to the output.
+@syni{<prefix>} - Generates <prefix> in the italics of a non-terminal prefix.
+@syn2{<name>} - Marks a non-terminal name in the production of a syntax rule.
+	If the current non-terminal is not null, generates a cross reference
+	entry: <Name> in <Non-Terminal> at <ClauseNum>. Also, generate an index
+	entry for the item: @Defn2(Term=<Name>,Sec=@i{used}). (For the purposes
+	of the index, all of Annex P is a single paragraph). Otherwise, is the
+	same as @nt.
+@syntaxsummary -- Generate the syntax summary at this point. *No paragraph
+	numbers*!
+@syntaxxref -- Generate the syntax cross-reference at this point. *No paragraph
+	numbers*!
+
+@Attribute{Prefix=<Prefix>,AttrName=<Name>,Text=<Text>}
+	Defines an attribute. Creates a hanging text item <Prefix>'<Name>,
+	with the specified text. The text can contain arbitrary commands;
+	it will be run through the full evaluation code.
+	The attribute and text is also sent to a database used to later create
+	Annex K. (This uses the current value of PrefixType.) Finally, the
+	attribute <Name> is indexed as by calling @Defn2{Term=[Attribute],
+	Sec=<Name>}, and as by calling @Defn{<Name> attribute}. See also
+	ChgAttribute.
+@AttributeLeading{Prefix=<Prefix>,AttrName=<Name>,Text=<Text>}
+        Same as attribute, except that the first paragraph is a "Leading"
+	paragraph. (Use when the second paragraph is a DescExample, such
+	as when a function specification is given.)
+@AttributeList
+	Dumps the summary list of all attributes from the attribute database
+	to the output file.
+@PrefixType{text}
+	Save the indicated text to use as part of any following attribute
+	definitions. The text is also written to the output. The text should
+	fit in the phrase: "For {text}:". For instance, the text could be
+	"every scalar subtype S". See also ChgPrefixType.
+@EndPrefixType{}
+	(The parameter list must exist and be empty) Set the saved attribute
+	text to "@b{NONE!}". This exists to insure that the prefixes are set
+	properly, and aren't just set by accident.
+
+@PragmaSyntax{<Text>}
+	Defines a pragma. The text is displayed in the current format.
+	The text should contain an @prag command (which specifies and indexes
+	the name - see below.) The text can contain arbitrary commands;
+	it will be run through the full evaluation code.
+	The text is also sent to a database used to later create
+	Annex L.
+@PragmaList
+	Dumps the summary list of all pragmas from the pragma database
+	to the output file.
+
+-- Indexing:
+
+If Show-Index-Entries is not used on the command line, indexing entries
+are transparent (this is usually the case for the RM).
+
+If Show-Index-Entries is used on the command line, indexing entries show as
+italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
+"[partial]", IndexSee adds ": see <OtherTerm>", and IndexSeeAlso adds
+": see also <OtherTerm>" to the reference.
+
+@defn{<text>} - Defines a term, where the entire definition is given in the
+	referenced paragraph.
+@rootdefn{<text>} - Defines a term, where the definition is given in several
+	paragraphs. This is the primary definition.
+@pdefn{<text>} - Defines a term, where the definition is given in several
+	paragraphs. This is one of the secondary definitions.
+@defn2{Term=[<term>],Sec=(<subterm>)} - Same as Defn, except a subterm is
+	allowed. The subterm will be indexed under the primary term.
+@rootdefn2{Term=[<term>],Sec=(<subterm>)} - Same as RootDefn, except a
+	subterm is allowed.
+@pdefn2{Term=[<term>],Sec=(<subterm>)} - Same as PDefn, except a subterm is
+	allowed.
+@seeother{Primary=[<term>],Other=(<other_term>)} - Generates a See
+	reference to <other_term> in the index. No page/clause reference is
+	generated.
+@seealso{Primary=[<term>],Other=(<other_term>)} - Generates a See also
+	reference to <other_term> in the index. No page/clause reference is
+	generated.
+@indexsee{Term=[<term>],See=(<other_term>)} - Generates a See
+	reference to <other_term> in the index. A page/clause reference is
+	generated.
+@indexseealso{Term=[<term>],See=(<other_term>)} - Generates a See also
+	reference to <other_term> in the index. A page/clause reference is
+	generated.
+@ChildUnit{Parent=[<parent>],Child=[<child>]}
+	Generates three index entries: An index entry for <child>, with a secondary
+	of "@i{child of} <parent>", an index entry for "Language-Defined
+	Library Units" with a secondary entry of <parent>.<child>, and an index
+	entry for <parent>.<child>. The Unit is set to <parent>.<child>.
+@RootLibUnit{<unit>} - Generates two index entries: An index entry for
+	"Language-Defined Library Units" with a secondary entry of <unit>,
+	and an index entry for <unit>. The Unit is set to <parent>.<child>.
+@AdaDefn{<defn>} - Generates an index entry for <defn> with a secondary entry
+	of "@i{in} <Unit>" (where Unit is the unit saved by a previous
+	RootLibUnit or ChildUnit.) Also outputs the <defn> to the output file.
+@AdaSubDefn{<defn>} - Generates two index entries: one for <defn> with a
+	secondary entry of "@i{in} <Unit>" (where Unit is the unit saved by
+	a previous RootLibUnit or ChildUnit.), and second for "Language-Defined
+	Subprogram" with a secondary entry of "<defn> @i{in} <Unit>".
+	Also outputs the <defn> to the output file.
+@AdaTypeDefn{<defn>} - Generates two index entries: one for <defn> with a
+	secondary entry of "@i{in} <Unit>" (where Unit is the unit saved by
+	a previous RootLibUnit or ChildUnit.), and second for "Language-Defined
+	Type" with a secondary entry of "<defn> @i{in} <Unit>".
+	Also outputs the <defn> to the output file.
+@IndexCheck{<check>} - Generates an index entry for "check, language defined"
+	with a secondary entry of <check>. (Essentially a Defn2). Also,
+	indexes <check> as a partial definition. (PDefn).
+@Attr{<name>} -- Generates an index entry for "attributes"
+	with a secondary entry of <name>. (Essentially a Defn2). Also
+	puts <name> to the output.
+@Prag{<name>} -- Generates an index entry for "pragmas"
+	with a secondary entry of <name>. (Essentially a Defn2). Also
+	puts <name> to the output.
+
+-- Glossary:
+@ToGlossary(Term=[<term>], Text=[<text>])
+	Creates a glossary entry for <term> with the value <text>.
+	The item is shown as a annotation in the AARM. The term is also
+	indexed (and displayed as such if appropriate) with @Defn immediately
+	after the annotation header.
+@ToGlossaryAlso(Term=[<term>], Text=[<text>])
+	Creates a glossary entry for <term> with the value <text>.
+	The text is part of the current paragraph. If Show-Index-Entries is
+	used on the command line, a "[Glossary Entry]" marker is shown;
+	otherwise nothing is. The term is also indexed (and displayed as
+	such if appropriate) with @Defn immediately after the marker.
+@GlossaryList
+	Generates the glossary.
+
+-- Implementation-defined annex:
+@ImplDef{<text>}
+	Creates an implementation-defined entry for <text>. The clause and
+	paragraph references are saved to create Annex M. For the AARM,
+	<text> is an annotation; otherwise, it is discarded. See also
+	ChgImplDef.
+@ImplDefList
+	Generates the implementation-defined list.
+
+-- Changes:
+@chgref{Version=[<version>],Kind=(<kind>){,Ref=(<DR_Number>)}}
+	- Marks a paragraph changed in a corrigendum. This command precedes
+	any text of the paragraph. The version number of the change is
+	<version>. [This is always "1" for technical corrigenum 1].
+	Kind is either "Revised" (an ordinary change), "Added" (for a paragraph
+	added by the corrigendum), or "Deleted" (for a paragraph deleted by
+	by the corrigendum) [These control the paragraph numbering of the
+	following paragraph.] The <DR_Number>(s) that triggered the change are
+	given. As many references as necessary can be given. (Zero is allowed).
+@chgnote{<text>} Notes on particular change. This is treated as a comment; it
+	has a separate command solely so that stripped easily in the future.
+@chg{New=[<new text>],Old=[<old text>]}
+	Marks a particular change. The new text and the old text are given.
+	(We have both sets of text so we can generate useful differences).
+	Nesting of @chg commands is not allowed. The text may not contain any
+	command that ends the paragraph.
+@ChgImplDef{Version=[<version>],Kind=(<kind>),Text=<text>}
+	Marks a changed implementation-defined entry. (Essentially a
+	combination of ChgRef and Impldef.) <text> is the
+	implementation-defined entry. See ChgRef and Impldef for details
+	on the handling of the arguments.
+@ChgAttribute{Version=[<version>],Kind=(<kind>),ChginAnnex=[T|F],
+	Leading=[T|F],Prefix=<Prefix>,AttrName=<Name>,Ref={<DR_Number>},
+	Text=<Text>}
+	Marks a changed attribute entry. (Essentially a combination of
+	ChgRef and Attribute.) ChginAnnex controls whether the change
+	is reflected in the Annex. (Set this to F when the change is in
+	text "glued" onto the annex paragraph.) Leading controls whether the
+	first paragraph is leading or not. See ChgRef and Attribute
+	for the meaning of the other parameters.
+@ChgPrefixType{Version=[<version>],Kind=(<kind>),Text=[<text>]}
+	Marks a changed prefix type text. Also, saves the indicated text to
+	use as part of any following attribute definitions. The text is also
+	written to the output. See ChgRef and PrefixType for more information.
+@AddedSubheading{<text>}
+	Same as Subheading, except that this heading is present only in
+	new versions of the document.
+
+-- Tabs:
+@tabclear() - Clears all tab settings. Tabs are also cleared by leaving the
+	@begin region that contains the tabstop command. Also ends any
+	paragraphs.
+@tabset(<list>) - Sets tab stops at the indicated values, in picas. The list
+	is increasing (each value is larger than the one to its right), and
+	separated by commas. Each value can be preceeded by a modifier:
+	    L - fixed left tab;
+	    P - proporational left tab.
+	(Other modifiers are possible, but are hard to implement in text mode.)
+	Proportional tab values are based on the font size; the values
+	given are for 12 point fonts (in picas); the value is then adjusted
+	for the actual (default) font size of the paragraph.
+	Tab stops can only be set in formats that preserve
+	breaks (i.e. Display). Also ends any paragraphs.
+@\      - Move to the next tab stop.
+
+-- Paragraphs:
+@begin{<kind>}
+	Marks the beginning of a group of paragraphs of a particular kind.
+	See the definition of the kinds below. Most groupings have a
+	subheading.
+@end{<kind>}
+	Marks the ending of a group of paragraphs of a particular kind.
+
+
+-- Paragraph kinds (nesting is allowed; characteristics are not preserved
+--		    unless specifically marked below):
+
+
+    Pure formatting:
+	Comment - The text is never output into the document.
+	Wide    - The paragraph has wider than usual space above, but is
+		  otherwise normal.
+	DescribeCode -
+		  The text is indented 2 units.
+	Example - The text is formatted in a fixed-width example font with
+		  an indent of 1 unit; spaces and breaks are preserved. This
+		  format preserves size characteristics of its parent (if any),
+		  except that if the parent is "DescribeCode", the normal
+		  characteristics are used. No page breaks are allowed
+		  within a paragraph.
+		  Do not confuse this with "Examples", which is a text
+		  grouping.
+	Itemize - The text is indented and bulleted (with solid circle bullets).
+		  The text preserves the size and indenting of its parent (if
+		  any).
+	InnerItemize - The text is indented to fit inside an Itemize or
+		  Enumerate paragraph, and bulleted (with [smaller] solid
+		  circle bullets).
+	Enumerate - The text is indented and numbered (that is, each paragraph
+		  has a prefix number). The text preserves the size and
+		  indenting of its parent (if any).
+	Display - A normal paragraph indented one level from its parent, except
+		  that spaces and breaks are preserved. The text preserves the
+		  size of its parent (if any). No page breaks are allowed
+		  within a paragraph.
+	Description - A paragraph with text indented 3 units; but the item
+		  is a hanging undent to the normal paragraph level. Usually
+		  used for attributes, but sometimes used for other items.
+	DescExample - The text is formatted in a fixed-width example font with
+		  an indent of 4 units; spaces and breaks are preserved. No page breaks
+		  are allowed within a paragraph.
+	SyntaxText -
+		  The text is indented 1 unit. This is intended to match the
+		  indentation of syntax and is usually used in the syntax
+		  grouping; however syntax is usually in the swiss font.
+	Bundle -  The text in the 'bundle' should never be page-breaked.
+		  The format is unchanged.
+	TwoCol -  Sets the text to a two-column format. The text format
+		  is unchanged.
+	FourCol - Sets the text to a four-column format. The text format
+		  is unchanged.
+
+    RM groupings:
+	Intro	  - Introductory text. No heading.
+	Syntax	  - Syntax.
+	Resolution- Name resolution rules.
+	Legality  - Legality rules.
+	StaticSem - Static Semantics.
+	LinkTime  - Post-Compilation Rules.
+	RunTime   - Dynamic Semantics.
+	Bounded   - Bounded (Run-Time) errors.
+	Erron	  - Erroneous Execution.
+	ImplReq	  - Implementation Requirements.
+	DocReq	  - Documentation Requirements.
+	Metrics	  - Metrics.
+	ImplPerm  - Implementation Permissions.
+	ImplAdvice- Implementation Advice.
+	Notes	  - Notes. (Each of these is numbered and indented 1 unit.)
+	Examples  - Examples. (Do not confuse this with the text format
+		    "Example". This is a grouping with a subhead. It is in
+		    the normal font by default; often an "Example" is found
+		    inside of "Examples".)
+	NotIso    - Text that is not included in ISO documents. No format is implied.
+	RMOnly    - Text that is not included in the AARM. No format is implied.
+
+    AARM-only groupings:
+	MetaRules - Language Design Principles.
+	Inconsistent83 - Inconsistenies with Ada 83.
+	Incompatible83 - Incompatibilities with Ada 83.
+	Extend83  - Extensions to Ada 83.
+	DiffWord83- Wording Changes from Ada 83.
+	AARMOnly  - Text that is not included in the RM. No format is implied.
+
+    AARM annotations:
+	Reason    - Why a rule is necessary.
+	Ramification- Consequences of rules. (Important ones should be Notes).
+	Discussion - General annotations.
+	TheProof  - Informal proof as to why Notes or Redundant text follows
+		    from the language.
+	ImplNote  - A note on implementation.
+	Honest    - To be Honest: Only pedants need apply.
+	GlossaryMarker - Looks like a glossary entry in the AARM (but isn't
+		    really one). (Also internally used by the formatter for
+		    real glossary entries.)
+
+-- Text Macros:
+
+<Grouping>Name  - The name of a kind of rule (as in "This is a
+		  @ResolutionName.").
+<Grouping>Title - The title of a kind of rule (as in "This belongs under
+		  "@ResolutionTitle".").
+	where <Grouping> is any of the paragraph grouping kinds listed above.
+
+-- Character Macros:
+
+These represent characters not available in the lower 128 of Latin-1, including
+various mathematical symbols.
+
+@em	- EM dash (a very long dash)
+@en	- EN dash (a long dash)
+@thin   - A thin space (quarter em if possible)
+@geq	- Greater than or equal symbol
+@gt	- Greater than symbol
+@leq	- Less than or equal symbol
+@lt	- Less than symbol
+@neq	- Not equal symbol
+@pi	- Pi
+@singlequote - Single quote ('''). Used to avoid confusion in syntax rules.
+@latin1{<number>} - Generate the Latin-1 character with the decimal code
+	"number".
+@times  - The middle dot multiply symbol.
+@porm   - The plus or minus symbol.
+@ceiling{<text>} - The ceiling operator, surrounding <text>.
+@floor{<text>} - The floor operator, surrounding <text>.
+@abs{<text>} - The mathematical absolute value operation, surrounding <text>.
+@log{<text>} - The log operation, surrounding <text>. (In practice, this is
+	 always translated "log(<text>)").
+@lquote - Left (directed) single quote.
+@rquote - Right (directed) single quote.
+@ldquote - Left (directed) double quote.
+@rdquote - Right (directed) double quote.
+@lquotes - Pair of left (directed) single quotes.
+@rquotes - Pair of rright (directed) single quotes.
+
+-- Tables:
+@table(Columns=<number>,
+       Caption=<text>,
+       Headers=<text>,
+       Body=<row_text>)
+
+	- Defines a table. Columns must be a single digit (2-9).
+	- Caption defines the table caption. This spans the entire table.
+	- Headers defines the table headers. Each header is separated by
+	  a tab stop (@\). This should be a single line.
+	- Body defines the table body. Each row should be a single line,
+	  with each item separated by a tab stop.
+	  The text may contain character and text formatting commands, but
+	  no paragraph commands. But no text command may extend across the
+	  tab marking the end of an item.
+@Last	- Marks the end of the second last row of the table. (If left out,
+	  the bottom line of the table may be missing).
+
