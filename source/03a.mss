@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/11/12 06:10:14 $}
+@Comment{$Date: 2004/12/07 05:17:00 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -4572,10 +4572,10 @@ the definition of Succ and Pred for floating point numbers.
 
 @begin(description)
 @ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
-  Prefix=<S>, AttrName=<Digits>, Ref=[8652/0004],
+  Prefix=<S>, AttrName=<Digits>, Ref=[8652/0004], ARef=[AI-00203-01],
   Text=[S'Digits denotes the requested decimal precision
   for the subtype S. The value of this attribute
-  is of the type @i(universal_integer).]}@ChgNote{Should be ARef=[AI-00203-01], but not allowed now.}
+  is of the type @i(universal_integer).]}
 The requested decimal precision of the base subtype of a floating
 point type @i{T} is defined to be the largest value of @i{d} for which
 @chg{New=[@*],Old=[]}
@@ -4925,11 +4925,10 @@ Obsolescent features (to be compatible with Ada 83's
 @PrefixType{every fixed point subtype S}:
 @begin(description)
 @ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
-  Prefix=<S>, AttrName=<Small>, Ref=[8652/0005],
+  Prefix=<S>, AttrName=<Small>, Ref=[8652/0005], ARef=[AI-00054-01],
   Text=[S'Small
      denotes the @i(small) of the type of S.
      The value of this attribute is of the type @i(universal_real).]}
-@ChgNote{Should be ARef=[AI-00054-01], but not allowed now.}
      @PDefn2{Term=[specifiable], Sec=(of Small for fixed point types)}
      @Defn{Small clause}
      Small may be specified

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2004/12/06 03:57:39 $}
+@Comment{$Date: 2004/12/07 05:17:04 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2551,7 +2551,7 @@ new value, as explained
 in @RefSecNum{User-Defined Assignment and Finalization}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}@ChgNote{Should be RevisedAdded}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
 @Chg{Version=[2],New=[The master of an object is the master enclosing its
 creation whose accessibility level (see @RefSecNum{Operations of Access Types})
 is equal to that of the object.],
@@ -2606,7 +2606,7 @@ is not known at the call site.]}
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}@ChgNote{Should be RevisedAdded}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00162-01]}
 @Chg{Version=[2],New=[In the case of a potentially blocking operation which is
 a master, finalization of an (anonymous) object occurs before blocking if the
 last use of the object occurs before blocking. In particular, for
@@ -2646,8 +2646,8 @@ Adjust operation:
 For a Finalize invoked as part of an @nt<assignment_statement>,
 Program_Error is raised at that point.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0024],ARef=[AI95-00193-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 @Chg{New=[For an Adjust invoked as part of @Chg{Version=[2],New=[assignment
 operations other than those invoked as part of an @nt{assignment_statement}],
 Old=[the initialization of a controlled object]}, other adjustments due to be
@@ -2659,8 +2659,8 @@ For an Adjust invoked as part of an @Chg{Version=[2],New=[@nt{assignment_stateme
 Old=[assignment @Chg{New=[statement],Old=[operation]}]}, any other adjustments
 due to be performed are performed, and then Program_Error is raised.
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024],ARef=[AI95-00193-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 @Chg{New=[In the case of assignments that are part of initialization, there is
 no need to complete all adjustments if one propagates an exception, as the
 object will immediately be finalized. So long as a subcomponent is not going
@@ -3003,7 +3003,7 @@ objects aren't finalized until the object can't be used anymore.],Old=[]}
 when Adjust or Finalize raises an exception; some cases had been omitted.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0024],ARef=[AI95-00193-01]}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Stated that if Adjust raises an
 exception during initialization, nothing further is required. This is
 corrected in Ada 2005 to include all kinds of assignment other than

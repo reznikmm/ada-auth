@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.35 $ $Date: 2004/12/06 03:57:42 $}
+@comment{$Revision: 1.36 $ $Date: 2004/12/07 05:17:08 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -41,21 +41,22 @@ part of the International Standard ISO/IEC 8652:1995(E).],Old=[]}
 need to be made to the text of the International Standard to add new features
 as well as correct errors.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[When ISO published Technical Corrigendum 1, it did not also publish
-a document that merges the Technical Corrigendum changes into
+a document that merges the @Chg{Version=[2],New=[change from ],Old=[]}Technical
+Corrigendum @Chg{Version=[2],New=[],Old=[changes ]}into
 the text of the International Standard.@Chg{Version=[2],New=[ It is not
-expected that ISO will publish a document that merges the Technical
-Corrigendum and Amendment 1 changes into the text of the International
+expected that ISO will publish a document that merges the changes from
+Technical Corrigendum and Amendment 1 into the text of the International
 Standard.],Old=[]}
 However, ISO rules require that the
 project editor for the @Chg{Version=[2],New=[International Standard],
 Old=[Technical Corrigendum]} be able to produce such a document
 on demand.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[This version of the Ada Reference Manual is what the project editor would
 provide to ISO in response to such a request. It incorporates the changes
 specified in the Technical Corrigendum @Chg{Version=[2],New=[and Amendment ],Old=[]}into
@@ -75,8 +76,8 @@ Corrigendum 1), the other documents contain the official text of the
 International Standard ISO/IEC 8652:1995(E)@Chg{Version=[2],New=[ and
 its Amendment],Old=[]}.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[As it is very inconvenient to have the Reference Manual for Ada
 specified in @Chg{Version=[2],New=[three],Old=[two]} documents, this
 consolidated version of the Ada Reference
@@ -586,8 +587,8 @@ applicable to all types of a given class.
 @begin{Intro}
 
 @Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
-This @Chg{Version=[2],New=[amended edition modifies the edition of 1995 which
-replaced],
+This @Chg{Version=[2],New=[amended ],Old=[]}International Standard
+@Chg{Version=[2],New=[modifies the edition of 1995 which replaced],
 Old=[International Standard replaces]} the first edition of 1987.
 In @Chg{Version=[2],New=[the 1995],Old=[this]} edition, the following major
 language changes have been incorporated:
@@ -1001,15 +1002,15 @@ clause is not included in the International Standard.],Old=[]}
 @AddedSubHeading{Version=[1],Using this version of the Ada Reference Manual}
 
 @begin{RMOnly}
-@ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
 (ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and Amendment 1 (ISO/IEC 8652/AMD.1:200x)],Old=[]}.
 In addition, a variety of editorial errors have been corrected.],Old=[]}
 @end{RMOnly}
 @begin{AARMOnly}
-@ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
 (ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and Amendment 1 (ISO/IEC 8652/AMD.1:200x)],Old=[]}.
 In addition, additional annotations have been added and

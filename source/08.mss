@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/12/06 03:57:39 $}
+@Comment{$Date: 2004/12/07 05:17:05 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -968,8 +968,8 @@ hiding, since there is no way to declare homographs.
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00377-01]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],Ref=[8652/0026],ARef=[AI95-00044-01],ARef=[AI95-00150-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00377-01]}
 @Chg{New=[A non-overridable],Old=[An explicit]} declaration is illegal if there is a
 homograph occurring immediately within the same
 declarative region that is visible at the place of the
@@ -1118,25 +1118,25 @@ where both components are visible. For instance:],Old=[]}
 @key[end] A.E;],Old=[]}
 @end{Example}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0102],ARef=[AI95-00157-01]}
-@Chg{New=[@Noprefix@;D.NT3 can have a component I because the component I of
-the parent type is never visible. The parent component exists, of course, but
-is never declared for the type D.NT3. In the child package A.E, the component
-I of A.T is visible, but that does not change the fact that the A.T.I component
-was never declared for type D.NT3. Thus, A.E.NT4 does not (visibly) inherit
-the component I from A.T, while it does inherit the component I from D.NT3.
-Of course, both components exist, and can be accessed by a type conversion
-as shown above. This behavior stems from the fact that every characteristic
-of a type (including components) must be declared somewhere in the innermost
-declarative region containing the type - if the characteristic is never visible
-in that declarative region, it is never declared. Therefore, such
-characteristics do not suddenly become available even if they are in fact
-visible in some other scope. See @RefSecNum{Private Operations} for more on
-the rules.],Old=[]}
+@ChgAdded{Version=[1],NoPrefix=[T],Text=[D.NT3 can have a component I because
+the component I of the parent type is never visible. The parent component
+exists, of course, but is never declared for the type D.NT3. In the child
+package A.E, the component I of A.T is visible, but that does not change the
+fact that the A.T.I component was never declared for type D.NT3. Thus, A.E.NT4
+does not (visibly) inherit the component I from A.T, while it does inherit the
+component I from D.NT3. Of course, both components exist, and can be accessed
+by a type conversion as shown above. This behavior stems from the fact that
+every characteristic of a type (including components) must be declared
+somewhere in the innermost declarative region containing the type - if the
+characteristic is never visible in that declarative region, it is never
+declared. Therefore, such characteristics do not suddenly become available even
+if they are in fact visible in some other scope.
+See @RefSecNum{Private Operations} for more on the rules.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00377-01]}
-@Chg{Version=[2],New=[It is illegal to mention both an explicit child of an
-instance, and a child of the generic from which the instance was instantiated.
-This is easier to understand with an example:],Old=[]}
+@ChgAdded{Version=[2],Text=[It is illegal to mention both an explicit child of
+an instance, and a child of the generic from which the instance was
+instantiated. This is easier to understand with an example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[@key{generic}
@@ -1163,12 +1163,12 @@ This is easier to understand with an example:],Old=[]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[@NoPrefix@;The context clause for Bad is illegal
+@ChgAdded{Version=[2],NoPrefix=[T],Text=[The context clause for Bad is illegal
 as I1 has an implicit declaration of I1.G2 based on the generic child G1.G2,
 as well was the mention of the explicit child I1.G2. As in the previous cases,
 this is illegal only if the context clause makes both children visible; the
 explicit child can be mentioned as long as the generic child is not (and
-vice-versa).],Old=[]}
+vice-versa).]}
 @end{Itemize}
 
 Note that we need to be careful which things we make "hidden from all
@@ -1793,8 +1793,8 @@ type if and only if the @nt{access_definition} defines an access-to-constant
 type.],Old=[]}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
 The renamed entity shall not be a subcomponent that depends on
 discriminants of a variable whose nominal subtype is unconstrained,
 unless this subtype is indefinite, or the variable is @Chg{Version=[2],

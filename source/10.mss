@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/12/06 03:57:41 $}
+@Comment{$Date: 2004/12/07 05:17:06 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -2337,7 +2337,7 @@ each @nt{library_item} needed by
 the declaration of the other library unit.
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0107],ARef=[AI95-00180-01]}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00256-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00256-01]}
 @Chg{New=[@Lquotes@;Mentions@rquotes @Chg{Version=[2],New=[was],Old=[is]}
 used informally in the above rule; it @Chg{Version=[2],New=[was],Old=[is]}
 not intended to refer to the definition of @i{mentions} in
