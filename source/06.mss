@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2004/11/06 05:34:30 $}
+@Comment{$Date: 2004/11/08 04:56:38 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1756,8 +1756,9 @@ rhs="@Chg{Version=[2],New=<@Syn2{subtype_indication} | @Syn2{access_definition}>
 The @i<result subtype> of a function is the subtype denoted by the
 @nt<subtype_mark>, or defined by the @nt<access_definition>, after the reserved
 word @key<return> in the profile of the function. ],Old=[]}@Defn{return expression}
-The @nt<expression>, if any, of a @nt<return_statement>
-is called the @i{return expression}.@Chg{Version=[2],New=[],
+The @nt<expression>, if any, of a @Chg{Version=[2],New=[@nt{simple_return_statement} or
+@nt{extended_return_statement}],Old=[@nt{return_statement}]} is called the
+@i{return expression}.@Chg{Version=[2],New=[],
 Old=[@Defn2{Term=[result subtype], Sec=(of a function)}
 The @i(result subtype) of a function is the subtype denoted by the
 @nt{subtype_mark} after the reserved word @key(return) in the profile

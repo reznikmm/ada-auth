@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/11/10 20:26:23 $}
+@Comment{$Date: 2004/11/08 04:56:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @LabeledClause{Array Types}
 
@@ -4883,7 +4883,8 @@ denotes an aliased view of an object}:
   Old=[the designated type of @i(A) is tagged]}, then the type of the view
   shall be covered by @Chg{New=[@i(D)],Old=[the designated type]};
   @Chg{New=[if @i(A) is anonymous and @i(D) is tagged, then the type of the
-  view shall be either @i(D)'Class or a type covered by D;],Old=[]}
+  view shall be either @i(D)'Class or a type covered by
+  @Chg{Version=[2],New=[@i<D>],Old=[D]};],Old=[]}
   if @Chg{New=[@i(D) is untagged],Old=[@i(A)'s designated type is not tagged]},
   then the type of the view shall be
   @Chg{New=[@i(D)],Old=[the same]}, and @Chg{New=[],Old=[either ]}@i(A)'s

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:42 $}
+@Comment{$Date: 2004/11/08 04:56:37 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -722,7 +722,9 @@ X+1, then the implementation might choose to produce the correct value, which
 is outside the bounds of Integer.
 (It might raise Constraint_Error instead.)
 This case can only happen for non-generic subtypes that are either
-unconstrained or non-static (or both).
+unconstrained or
+non@Chg{Version=[2],New=[],Old=[-]}@ChgNote{Make spelling consistent}static
+(or both).
 It can only happen if there is no @key{others} @nt{discrete_choice}.
 @end{Itemize}
 

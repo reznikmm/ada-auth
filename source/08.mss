@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/11/05 05:47:50 $}
+@Comment{$Date: 2004/11/08 04:56:39 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -62,6 +62,9 @@ called its @i{declarative region},
   a @nt{block_statement};
 
   a @nt{loop_statement};
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+  @Chg{Version=[2],New=[an @nt{extended_return_statement}],Old=[]}
 
   an @nt{accept_statement};
 
@@ -270,6 +273,14 @@ and so occur immediately within Standard's declarative
 region, but not within either the declaration or the body.
 (See RM83-8.6(2) and RM83-10.1.1(5).)
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=[@nt{Extended_return_statement}
+(see @RefSecNum{Return Statements}) is added to the list
+of constructs that have a declarative region.],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledClause{Scope of Declarations}
 
@@ -579,6 +590,7 @@ even though Q is declared in the declarative region of Standard,
 because R does not mention Q in a @nt{with_clause}.
 @end{DiffWord83}
 
+
 @LabeledClause{Visibility}
 
 @begin{Intro}
@@ -673,7 +685,7 @@ their profiles are type conformant.
 @PDefn{type conformance}
 @redundant[An inner declaration hides any outer homograph from direct visibility.]
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044-01]}
 @leading@Redundant[Two homographs are not generally allowed
 immediately within the same declarative region unless one
 @i{overrides} the other (see Legality Rules below).]
@@ -685,12 +697,12 @@ A declaration overrides another homograph that occurs
 immediately within the same declarative region in the
 following cases:
 @begin{Itemize}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044-01]}
 @Chg{New=[A declaration that is not overridable overrides one that is overridable],
 Old=[An explicit declaration overrides an implicit declaration of a primitive
 subprogram]}, @Redundant[regardless of which declaration occurs first];
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044-01]}
 And regardless of whether the @Chg{New=[non-overriddable],Old=[explicit]}
 declaration is overloadable or not.
 @Chg{New=[For example, @nt{statement_identifier}s are covered by this rule.],Old=[]}
@@ -733,6 +745,58 @@ implicitly declared earlier.
 An implicit declaration of an inherited subprogram
 overrides a previous implicit declaration of an inherited
 subprogram.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[@leading@;If two or more homographs are implicitly
+declared at the same place:],Old=[]}
+
+@begin{InnerItemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[If one is a non-null non-abstract subprogram, then it
+overrides all which are null or abstract subprograms.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[If all are null procedures or abstract subprograms, then
+any null procedure overrides all abstract subprograms; if more than one
+homograph remains that is not thus overridden, then one is chosen
+arbitrarily to override the others.],Old=[]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[In the case where the
+    implementation arbitrarily chooses one overrider from among a group
+    of inherited subprograms, users should not be able to determine which
+    member was chosen, as the set of inherited subprograms which are chosen
+    from must be fully conformant (see below). This rule is needed in order to
+    allow],Old=[]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Key{package} Outer @Key{is}
+   @Key{package} P1 @Key{is}
+      @Key{type} Ifc1 @Key{is interface};
+      @Key{procedure} Null_Procedure (X : Ifc1) @Key{is null};
+      @Key{procedure} Abstract_Subp  (X : Ifc1) @Key{is abstract};
+   @Key{end} P1;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @Key{package} P2 @Key{is}
+      @Key{type} Ifc2 @Key{is interface};
+      @Key{procedure} Null_Procedure (X : Ifc2) @Key{is null};
+      @Key{procedure} Abstract_Subp  (X : Ifc2) @Key{is abstract};
+   @Key{end} P2;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @Key{type} T @Key{is new} P1.Ifc1 @Key{and} P2.Ifc2 @Key{with null record};
+@Key{end} Outer;],Old=[]}
+@end{Example}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[without requiring that T explicitly override any of
+    its inherited operations.],Old=[]}
+@end{Discussion}
+
+@end{InnerItemize}
 
 @Redundant[For an implicit declaration of a primitive subprogram in a
 generic unit, there is a copy of this declaration in an instance.]
@@ -810,13 +874,18 @@ then it doesn't hide anything,
 and you can't denote it.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
 @PDefn2{Term=[hidden from all visibility], Sec=(by lack of a
 @nt{with_clause})}
 The declaration of a library unit
 (including a @nt{library_unit_renaming_declaration})
 is hidden from all visibility
 except at places that are within its declarative region
-or within the scope of a @nt{with_clause} that mentions it.
+or within the scope of a @nt{@Chg{Version=[2],New=[nonlimited_],Old=[]}with_clause} that
+mentions it.{@Chg{Version=[2],New=[ The limited view of a library package
+is hidden from all visibility except at places that are within the scope of a
+@nt{limited_with_clause} that mentions it but not within the scope of a
+@nt{nonlimited_with_clause} that mentions it.],Old=[]}
 @Redundant[For each declaration or renaming of a generic unit as a child of
 some parent generic package, there is a corresponding declaration nested
 immediately within each instance of the parent.]
@@ -825,9 +894,11 @@ except at places that are
 within the scope of a @nt{with_clause} that mentions the child.
 
 @begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
 This is the rule that prevents @nt{with_clause}s from being
-transitive;
-the [immediate] scope includes indirect semantic dependents.
+transitive; the [immediate] scope includes indirect semantic dependents.
+@Chg{Version=[2],New=[This rule also prevents the limited view of a package
+from being visible in the same place as the full view of the package.],Old=[]}
 @end{Discussion}
 @end{Itemize}
 
@@ -853,6 +924,13 @@ from direct visibility, as follows:
   A declaration is also hidden from direct visibility
   where hidden from all visibility.
 @end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01]}
+@Chg{Version=[2],New=[An @nt{attribute_definition_clause} is @i{visible} at a
+place if a declaration at the point of the @nt{attribute_definition_clause}
+would be immediately visible at the
+place.@DefN2{Term=[visible],Sec=[attribute_definition_clause]}],Old=[]}
+
 @end{StaticSem}
 
 @begin{Resolution}
@@ -887,7 +965,8 @@ hiding, since there is no way to declare homographs.
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],Ref=[8652/0026],ARef=[AI95-00044],ARef=[AI95-00150]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],Ref=[8652/0026],ARef=[AI95-00044-01],ARef=[AI95-00150-01]}
 @Chg{New=[A non-overridable],Old=[An explicit]} declaration is illegal if there is a
 homograph occurring immediately within the same
 declarative region that is visible at the place of the
@@ -901,14 +980,38 @@ Similarly, the @nt<context_clause> for a
 of the library unit that is visible at the place of the corresponding
 stub, and the homograph and the mentioned library unit are both
 declared immediately within the same declarative region.
-@PDefn{generic contract issue}
+@Chg{Version=[2],New=[],Old=[@PDefn{generic contract issue}
 These rules also apply to dispatching operations declared
 in the visible part of an instance of a generic unit.
 However, they do not apply to other overloadable declarations in
 an instance@Redundant[; such declarations may have type conformant profiles
 in the instance, so long as the corresponding declarations in the generic
 were not type conformant].
-@PDefn{type conformance}
+@PDefn{type conformance}]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[If two or more homographs are implicitly declared at the same place (and not
+overridden by a non-overridable declaration) then at most one shall be a
+non-null non-abstract subprogram. If all are null or abstract, then all of the
+null subprograms shall be fully conformant with one another. If all are
+abstract, then all of the subprograms shall be fully conformant with one
+another.@Defn2{Term=[full conformance],Sec=(required)}],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Full conformance is required so it is not possible
+to tell which subprogram is actually the overriding one. See discussion
+above.],Old=[]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[@PDefn{generic contract issue}
+All of the above @LegalityTitle also apply to dispatching operations declared
+in the visible part of an instance of a generic unit. However, they do not
+apply to other overloadable declarations in an instance@Redundant[; such declarations may
+have type conformant profiles in the instance, so long as the corresponding
+declarations in the generic were not type conformant].
+@PDefn{type conformance}],Old=[]}
+
 @begin{Discussion}
 @leading@;Normally, these rules just mean you can't explicitly
 declare two homographs
@@ -1043,6 +1146,53 @@ The reason it says @lquotes@;overloadable declarations@rquotes@; is because we d
 want it to apply to type extensions that appear in an instance;
 components are not overloadable.
 @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
+@Chg{Version=[2],New=[@Leading@;If a @nt{subprogram_declaration},
+@nt{abstract_subprogram_declaration},
+@nt{subprogram_body}, @nt{subprogram_body_stub},
+@nt{subprogram_renaming_declaration}, or @nt{generic_instantiation} of a
+subprogram has an @nt{overriding_indicator}, then:],Old=[]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[the operation shall be a primitive operation for some
+type;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[if the @nt{overriding_indicator} is @key{overriding},
+then the operation shall override a homograph at the point of the declaration
+or body;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[if the @nt{overriding_indicator} is @key{not overriding},
+then the operation shall not override any homograph (at any point).],Old=[]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[@PDefn{generic contract issue}In addition to the
+places where @LegalityTitle normally
+apply, these rules also apply in the private part of an instance of a generic
+unit.],Old=[]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The @Key{overriding} and @Key{not overriding} rules
+differ slightly. For @Key{overriding}, we want the indicator to reflect the
+overriding state at the point of the declaration; otherwise the indicator would
+be @LQuotes@;lying@RQuotes@;. Whether a homograph is implicitly declared after
+the declaration (see 7.3.1 to see how this can happen)
+has no impact on this check. However, @Key{not overriding} is different;
+@LQuotes@;lying@RQuotes@; would happen if a homograph declared later actually
+is overriding. So, we require this check to take into account later overridings.
+That can be implemented either by looking ahead, or by rechecking when
+additional operations are declared.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The @LQuotes@;no lying@RQuotes@; rules are needed to
+prevent a @nt{subprogram_declaration} and @nt{subprogram_body} from having
+contradictory @nt{overriding_indicator}s.],Old=[]}
+@end{Discussion}
 @end{Legality}
 
 @begin{Notes}
@@ -1151,6 +1301,15 @@ and the region in which it is directly visible.
 Visibility is defined only for declarations.
 @end{DiffWord83}
 
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+The rules for @nt{overriding_clause} are new. These rules let the programmer
+state her overriding intentions to the compiler; if the compiler disagrees,
+an error will be produced rather than a hard to find bug.],Old=[]}
+@end{Extend95}
+
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0025],ARef=[AI95-00044-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Clarified the overriding rules so that
@@ -1160,6 +1319,20 @@ Visibility is defined only for declarations.
 @Chg{Version=[2],New=[@b<Corrigendum:> Clarified that is it never possible
 for two components with the same name to be visible; any such program is
 illegal.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+@Chg{Version=[2],New=[The visibility of an @nt{attribute_definition_clause} is
+defined so that it can be used by the stream attribute availability rules
+(see @RefSecNum{Stream-Oriented Attributes}).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@Chg{Version=[2],New=[The visibility of a limited view of a library package
+is defined (see @RefSecNum{Compilation Units - Library Units}).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Chg{Version=[2],New=[Added rules to handle the inheritance and overriding of
+multiple homographs for a single type declaration, in order to support
+multiple inheritance from interfaces.],Old=[]}
 @end{DiffWord95}
 
 
@@ -1201,8 +1374,9 @@ change the meaning of a program from one legal interpretation to another.
 @end{Syntax}
 
 @begin{Legality}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
 A @SynI{package_}@nt{name} of a @nt{use_package_clause}
-shall denote a package.
+shall denote @Chg{Version=[2],New=[a nonlimited view of ],Old=[]}a package.
 @begin{Ramification}
 This includes formal packages.
 @end{Ramification}
@@ -1259,20 +1433,24 @@ does not include that place, so T is not directly visible there.
 The declarations of X, Z, and W are legal.
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@Chg{Version=[2],New=[A package is @i{named} in a @nt{use_package_clause} if
+it is denoted by a @SynI{package_}@nt{name} of that clause. A type is @i{named}
+in a @nt{use_type_clause} if it is determined by a @nt{subtype_mark} of that
+clause.@Defn2{Term=[named],Sec=[in a use clause]}],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
 @Defn{potentially use-visible}
-For each package denoted by a @SynI{package_}@nt{name}
-of a @nt{use_package_clause} whose scope encloses a place,
-each declaration that occurs immediately within
+For each package @Chg{Version=[2],New=[named in ],Old=[denoted by
+a @SynI{package_}@nt{name} of ]}a @nt{use_package_clause} whose scope
+encloses a place, each declaration that occurs immediately within
 the declarative region of the package is
-@i(potentially) @i(use-visible) at this place
+@i(potentially use-visible) at this place
 if the declaration is visible at this place.
-@Comment{potentially and use-visible get separate i commands,
-to prevent a Scribe bug that causes use-visible to not be italicized.}
-For each type @i(T) or @i(T)'Class determined by a @nt<subtype_mark>
-of a @nt{use_type_clause} whose scope encloses a place,
-the declaration of each primitive operator of type @i(T)
-is potentially use-visible
-at this place
+For each type @i(T) or @i(T)'Class @Chg{Version=[2],New=[named in ],Old=[
+determined by a @nt<subtype_mark> of ]}a @nt{use_type_clause} whose scope
+encloses a place, the declaration of each primitive operator of type @i(T)
+is potentially use-visible at this place
 if its declaration is visible at this place.
   @begin{Ramification}
   Primitive subprograms whose defining name is an @nt{identifier} are
@@ -1402,6 +1580,15 @@ declaration has to be visible in order to be
 potentially use-visible.
 @end{DiffWord83}
 
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@Chg{Version=[2],New=[Limited views of packages are not allowed in use clauses.
+Defined @i<named in a use clause> for use in other limited view rules (see
+@RefSecNum{Context Clauses - With Clauses}).],Old=[]}
+@end{DiffWord95}
+
+
 @LabeledClause{Renaming Declarations}
 
 @begin{Intro}
@@ -1518,7 +1705,7 @@ That makes the rule different for @key[in] vs. @key[in out].
 @begin{Legality}
 The renamed entity shall be an object.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
 The renamed entity shall not be a subcomponent that depends on
 discriminants of a variable whose nominal subtype is unconstrained,
 unless this subtype is indefinite, or the variable is aliased.
@@ -1535,7 +1722,7 @@ This prevents renaming of subcomponents that might
 disappear, which might leave dangling references.
 Similar restrictions exist for the Access attribute.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0017],ARef=[AI95-00184]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0017],ARef=[AI95-00184-01]}
 @Chg{New=[@Leading@;The "recheck on instantiation" and "assume-the-worst in the body"
 restrictions on generics are necessary to avoid renaming of components which
 could disappear even when the nominal subtype would prevent the problem:],Old=[]}

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2004/11/06 05:34:30 $}
+@Comment{$Date: 2004/11/08 04:56:38 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1581,7 +1581,7 @@ a limited type.]
 @end{StaticSem}
 
 @begin{ImplReq}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
 @Chg{Version=[2],New=[
 For an @nt{aggregate} of a limited type used to initialize an object as allowed
 above, the implementation shall not create a separate anonymous object for the
@@ -1591,7 +1591,7 @@ allowed above, the implementation shall not create a separate return object
 (see 6.5) for the @nt{function_call}. The @nt{aggregate} or @nt{function_call}
 shall be constructed directly in the new object.],Old=[]}
 @begin{Discussion}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
 @Chg{Version=[2],New=[For a @nt{function_call}, we only require
 @i{build-in-place}@Defn{build-in-place} for a limited type that would have
 been a return-by-reference type in Ada 95. We do this because
@@ -1817,26 +1817,33 @@ or Finalize is applied to the containing object.
     @key[pragma] Preelaborate(Finalization);@Chg{New=[
     @key[pragma] Remote_Types(Finalization);],Old=[]}
 
-    @key[type] @AdaTypeDefn{Controlled} @key[is abstract tagged private];
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+    @key[type] @AdaTypeDefn{Controlled} @key[is abstract tagged private];@Chg{Version=[2],New=[
+    @key{pragma} Preelaborable_Initialization(Controlled);],Old=[]}
 
-    @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Controlled);
-    @key(procedure) @AdaSubDefn{Adjust}@\(Object : @key(in out) Controlled);
-    @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Controlled);
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+    @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
+    @key(procedure) @AdaSubDefn{Adjust}@\(Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
+    @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
 
-    @key[type] @AdaTypeDefn{Limited_Controlled} @key[is abstract tagged limited private];
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+    @key[type] @AdaTypeDefn{Limited_Controlled} @key[is abstract tagged limited private];@Chg{Version=[2],New=[
+    @key{pragma} Preelaborable_Initialization(Limited_Controlled);],Old=[]}
 
-    @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Limited_Controlled);
-    @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Limited_Controlled);
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+    @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Limited_Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
+    @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Limited_Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
 @key(private)
     ... -- @RI{not specified by the language}
 @key[end] Ada.Finalization;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
 @Defn{controlled type}
 A controlled type is a descendant of Controlled or Limited_Controlled.
-The (default) implementations of
-Initialize, Adjust, and Finalize have no effect.
-The predefined "=" operator of type Controlled always returns True,
+@Chg{Version=[2],New=[],Old=[The (default) implementations of
+Initialize, Adjust, and Finalize have no effect. ]}The predefined
+"=" operator of type Controlled always returns True,
 @Redundant[since this operator is incorporated into
 the implementation of the predefined equality operator of types derived
 from Controlled, as explained in
@@ -1867,6 +1874,35 @@ of Controlled only.
   know that there are no objects of these types @em in case the
   implementation wishes to make them @lquotes@;magic@rquotes@; in some way.
 @end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
+@Chg{Version=[2],New=[@leading@;A type is said to @i{need finalization}
+if:@Defn{Needs Finalization}@Defn2{Term=[type],Sec=[needs finalization]}],Old=[]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[it is a controlled type, a task type or a protected type;
+or],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[it has a component that needs finalization; or],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[it is a limited type that has an access discriminant
+whose designated type needs finalization; or],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[it is one of a number of language-defined types that are
+explicitly defined to need finalization.],Old=[]}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The fact that a type needs finalization does not require
+it to be implemented with a controlled type. It just has to be recognized by
+the No_Nested_Finalization restriction.],Old=[]}
+@end{Ramification}
+
+@end{Itemize}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -2126,8 +2162,8 @@ Note that the direction, and even the fact that it's a slice assignment,
 can in general be determined only at run time.
 @end{Reason}
 
-For an
-@nt{aggregate} or function call whose value is assigned
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00147-01]}
+For an @nt{aggregate} or function call whose value is assigned
 into a target object,
 the implementation need not create a separate anonymous object if
 it can safely create the value of
@@ -2143,24 +2179,80 @@ an intermediary anonymous object by exercising one of the
 above permissions and perform the assignment one component
 at a time (for an overlapping array assignment), or not at all
 (for an assignment where the target and the source of the assignment are
-the same object).
-Even if an anonymous object is created,
-the implementation may move its value to the target object as part of
+the same object).@Chg{Version=[2],New=[],Old=[ Even if an anonymous object is
+created, the implementation may move its value to the target object as part of
 the assignment without re-adjusting so long as the
-anonymous object has no aliased subcomponents.
+anonymous object has no aliased subcomponents.]}
 @begin{Ramification}
 In the @nt{aggregate} case, only one value adjustment is necessary,
 and there is no anonymous object to be finalized.
 
-In the @nt{assignment_statement} case as well,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00147-01]}
+@Chg{Version=[2],New=[Similarly, in the function call case, the
+anonymous object can be eliminated. Note, however, that Adjust
+must be called],Old=[In the @nt{assignment_statement} case as well,
 no finalization of the anonymous object is needed.
 On the other hand, if the target has aliased subcomponents,
-then an adjustment takes place directly on the target object
+then an adjustment takes place]} directly on the target object
 as the last step of the assignment, since some of the
-subcomponents may be self-referential or otherwise position-dependent.
+subcomponents may be self-referential or otherwise
+position-dependent.@Chg{Version=[2],New=[ This Adjust can be eliminated only
+by using one of the following permissions.],Old=[]}
 @end{Ramification}
-
 @end{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00147-01]}
+@Chg{Version=[2],New=[@leading@;Furthermore, an implementation is permitted to
+omit implicit Initialize, Adjust, and Finalize calls and associated assignment
+operations on an object of nonlimited controlled type provided that: ],Old=[]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[any omitted Initialize call is not a call on a
+user-defined Initialize procedure, an],Old=[]}
+@begin{Honest}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This does not apply to any calls to a user-defined
+Initialize routine that happen to occur in an Adjust or Finalize routine. It
+is intended that it is never necessary to look inside of an Adjust or Finalize
+routine to determine if the call can be omitted.],Old=[]}
+@end{Honest}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[We don't want to eliminate objects for which the
+Initialize might have side effects (such as locking a resource).],Old=[]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[any usage of the value of the object after the implicit
+Initialize or Adjust call and before any subsequent Finalize call on the object
+does not change the external effect of the program, and],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[after the omission of such calls and operations, any
+execution of the program that executes an Initialize or Adjust call on an
+object or initializes an object by an aggregate will also later execute a
+Finalize call on the object and will always do so prior to assigning a new
+value to the object, and],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[the assignment operations associated with omitted Adjust
+calls are also omitted.],Old=[]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This permission applies to Adjust and Finalize calls even
+if the implicit calls have additional external effects.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The goal of the above permissions is to allow
+typical dead assignment and dead variable removal algorithms to work for
+nonlimited controlled types. We require that lquotes@;pairs@rquotes@; of
+Initialize/Adjust/Finalize operations are removed. (These aren't always pairs,
+which is why we talk about @lquotes@;any execution of the program@rquotes@;.)],
+Old=[]}
+@end{Reason}
+
 @end{ImplPerm}
 
 @begin{Extend83}
@@ -2182,7 +2274,29 @@ default initialization (whatever that is) of an ancestor part is used.],Old=[]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Clarified that Adjust is never called
 on an aggregate used for the initialization of an object or subaggregate,
 or passed as a parameter.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00147-01]}
+@Chg{Version=[2],New=[Additional optimizations are allowed for nonlimited
+controlled types. These allow traditional dead variable elimination to
+be applied to such types.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+@Chg{Version=[2],New=[Types Controlled and Limited_Controlled now have
+Preelaborable_Initialization, so that they can be used in preelaborated
+packages.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+@Chg{Version=[2],New=[The operations of types Controlled and Limited_Controlled
+are not declared as null procedures (see @RefSecNum{Null Procedures}) to make
+the semantics clear (and to provide a good example of what null procedures can
+be used for.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+@Chg{Version=[2],New=[Types that need finalization are defined; this is
+used by the No_Nested_Finalization restriction
+(see @RefSec{Tasking Restrictions}).],Old=[]}
 @end{DiffWord95}
+
 
 @LabeledSubClause{Completion and Finalization}
 
@@ -2342,6 +2456,7 @@ an object created by an @nt{allocator},
 the object will still exist when the corresponding master completes,
 and it will be finalized then.]
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00280-01]}
 The order in which the finalization of a master performs finalization of
 objects is as follows:
 Objects created by declarations in the master are finalized
@@ -2354,7 +2469,9 @@ such object that still exists had been created
 in an arbitrary order
 at the first freezing point
 (see @RefSecNum{Freezing Rules})
-of the ultimate ancestor type.
+of the ultimate ancestor type@Chg{Version=[2],New=[; the finalization of
+these objects is called the @i<finalization of the
+collection>@Defn{finalization of the collection}@Defn2{Term=[collection],Sec=[finalization of]}],Old=[]}.
 @begin{Reason}
   Note that we talk about the type of the @nt{allocator} here.
     There may be access values of a (general) access type
@@ -2406,8 +2523,10 @@ finalized, and that object had better be in its (well-defined)
 finalized state.
 @end{ImplNote}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 @PDefn2{Term=[execution], Sec=(assignment_statement)}
-The target of an assignment statement is finalized before copying in the
+The target of an @Chg{Version=[2],New=[@nt{assignment_statement}],
+Old=[assignment statement]} is finalized before copying in the
 new value, as explained
 in @RefSecNum{User-Defined Assignment and Finalization}.
 
@@ -2486,16 +2605,20 @@ Adjust operation:
 For a Finalize invoked as part of an @nt<assignment_statement>,
 Program_Error is raised at that point.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0024],ARef=[AI95-00193-01]}
-@Chg{New=[For an Adjust invoked as part of the initialization of a controlled
-object, other adjustments due to be performed might or might not be performed,
-and then Program_Error is raised. During its propagation, finalization might or
+@Chg{New=[For an Adjust invoked as part of @Chg{Version=[2],New=[assignment
+operations other than those invoked as part of an @nt{assignment_statement}],
+Old=[the initialization of a controlled object]}, other adjustments due to be
+performed might or might not be performed, and then Program_Error is raised.
+During its propagation, finalization might or
 might not be applied to objects whose Adjust failed.],Old=[]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-For an Adjust invoked as part of an assignment @Chg{New=[statement],
-Old=[operation]}, any other adjustments due to be performed are performed,
-and then Program_Error is raised.
+For an Adjust invoked as part of an @Chg{Version=[2],New=[@nt{assignment_statement}],
+Old=[assignment @Chg{New=[statement],Old=[operation]}]}, any other adjustments
+due to be performed are performed, and then Program_Error is raised.
 @begin{Reason}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024],ARef=[AI95-00193-01]}
 @Chg{New=[In the case of assignments that are part of initialization, there is
 no need to complete all adjustments if one propagates an exception, as the
@@ -2505,9 +2628,12 @@ an enclosing composite assignment operation for which some adjustments are
 performed. However, there is no harm in an implementation making additional
 Adjust calls (as long as any additional components that are adjusted are also
 finalized), so we allow the implementation flexibility here.
-On the other hand, for an assignment statement, it is important that all
+On the other hand, for an @Chg{Version=[2],New=[@nt{assignment_statement}],
+Old=[assignment statement]}, it is important that all
 adjustments be performed, even if one fails, because all controlled
-subcomponents are going to be finalized.],Old=[]}
+subcomponents are going to be finalized.@Chg{Version=[2],New=[ Other kinds of
+assignment are more like initialization than @nt{assignment_statement}s, so we
+include them as well in the permission.],Old=[]}],Old=[]}
 @end{Reason}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024],ARef=[AI95-00193-01]}
@@ -2835,7 +2961,15 @@ objects aren't finalized until the object can't be used anymore.],Old=[]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Added wording to clarify what happens
 when Adjust or Finalize raises an exception; some cases had been omitted.],Old=[]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0024],ARef=[AI95-00193-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Stated that if Adjust raises an
-exception during initialization, nothing further is required.],Old=[]}
+exception during initialization, nothing further is required. This is
+corrected in Ada 2005 to include all kinds of assignment other than
+@nt{assignment_statement}s.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
+@Chg{Version=[2],New=[We define @i{finalization of the collection} here,
+so as to be able to conveniently refer to it in other rules (especially in
+@RefSec{Allocators}).],Old=[]}
 @end{DiffWord95}

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/11/06 05:34:28 $}
+@Comment{$Date: 2004/11/08 04:56:36 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3869,9 +3869,9 @@ between two types related by derivation is not allowed by Ada 95, while it is
 allowed in Ada 83. The reorganization fixes this.
 Much of the wording of the legality section is unchanged, but it is reordered
 and reformatted. Because of the limitations of our tools, we had to delete and
-replace nearly the entire section. Ada 95 paragraphs 8 through 12, 14, 15,
-17, 19, and 20 are unchanged; these are now 24.2 through 24.5, 24.15, 24.11,
-24.16, 24.18, and 24.19.
+replace nearly the entire section. The text of Ada 95 paragraphs 8 through 12,
+14, 15, 17, 19, and 20 are unchanged; these are now 24.2 through 24.5, 24.11,
+24.12, 24.16, 24.18, and 24.19.
 @end{Discussion}
 
 @Leading@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
@@ -3950,7 +3950,7 @@ shall be an access-to-object type. Further:]}
   @Chg{Version=[2],New=[],Old=[If the target type is an access-to-variable
   type, then the operand type shall be an access-to-variable type;]}
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[Deleted]}
   @Chg{Version=[2],New=[],Old=[If the target type is an access-to-constant type, then the operand type
   can be access-to-constant or access-to-variable.]}
 @end{Ramification}
@@ -4202,6 +4202,15 @@ Further, if not @i<universal_access>:],Old=[]}
 @begin(inneritemize)
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+  @Chg{Version=[2],New=[If the target type is an access-to-variable
+  type, then the operand type shall be an access-to-variable type;],Old=[]}
+  @begin{Ramification}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[If the target type is an access-to-constant type,
+    then the operand type can be access-to-constant or access-to-variable.],Old=[]}
+  @end{Ramification}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
   @Chg{Version=[2],New=[If the target designated type is tagged, then the
   operand designated type shall be convertible to the target designated type;
   @PDefn2{Term=[convertible],Sec=(required)}],Old=[]}
@@ -4255,15 +4264,6 @@ Further, if not @i<universal_access>:],Old=[]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[If the target type is an access-to-variable
-  type, then the operand type shall be an access-to-variable type;],Old=[]}
-  @begin{Ramification}
-    @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[If the target type is an access-to-constant type,
-    then the operand type can be access-to-constant or access-to-variable.],Old=[]}
-  @end{Ramification}
-
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
   @Chg{Version=[2],New=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
@@ -4306,7 +4306,7 @@ not @i<universal_access>:],Old=[]}
   the target type shall be declared within the generic body.],Old=[]}
 
   @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @Chg{Version=[2],New=[The reason it is illegal to convert from an
   access-to-subprogram type declared in a generic body to one declared outside
   that body is that in an implementation that shares generic bodies,
