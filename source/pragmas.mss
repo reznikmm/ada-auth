@@ -1,10 +1,10 @@
 @Part(pragmas, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/20 02:42:03 $}
+@SetPageHeadings{$Date: 2000/04/25 04:14:24 $}
 @LabeledInformativeAnnex{Language-Defined Pragmas}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pragmas.mss,v $}
-@comment{$Revision: 1.6 $}
+@comment{$Revision: 1.7 $}
 
 @begin{Intro}
 @Defn{pragma}

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/20 02:42:01 $}
+@SetPageHeadings{$Date: 2000/04/25 04:14:22 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.1 $}
+@Comment{$Revision: 1.2 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules

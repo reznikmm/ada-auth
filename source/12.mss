@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/20 02:42:02 $}
+@SetPageHeadings{$Date: 2000/04/25 04:14:23 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.6 $}
+@Comment{$Revision: 1.7 $}
 
 @begin{Intro}
 @Defn{generic unit}

@@ -1,10 +1,11 @@
 @Part(10, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/20 02:42:02 $}
+@SetPageHeadings{$Date: 2000/04/25 04:14:23 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.6 $}
+@Comment{$Revision: 1.7 $}
+@Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
 @redundant[
@@ -1326,13 +1327,15 @@ unit.
 @end{Intro}
 
 @begin{Resolution}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0032]}
 If a @nt<library_unit_body> that is a @nt<subprogram_body> is
 submitted to the compiler, it is interpreted only as a completion
-if a @nt<library_unit_declaration> for a subprogram or a generic
-subprogram with the same @nt<defining_program_unit_name> already
-exists in the environment (even if the profile of the body is not
-type conformant with that of the declaration); otherwise the
-@nt<subprogram_body> is
+if a @nt<library_unit_declaration> @Chg{New=[], Old=[for a subprogram
+or a generic subprogram ]}with the same @nt<defining_program_unit_name>
+already exists in the environment @Chg{New=[for a subprogram other than
+an instance of a generic subprogram or for a generic subprogram ], Old=[]}
+(even if the profile of the body is not type conformant with that of the
+declaration); otherwise the @nt<subprogram_body> is
 interpreted as both the declaration and body of a library subprogram.
 @PDefn{type conformance}
 @begin{Ramification}
@@ -1355,7 +1358,7 @@ interpreted as both the declaration and body of a library subprogram.
   or in the case where there is no preexisting thing),
   the @nt{subprogram_body} declares a new subprogram.
 
-  See also AI-00266/09.
+  See also AI83-00266/09.
 @end{Ramification}
 @end{Resolution}
 
@@ -1546,8 +1549,10 @@ The @nt{name} has to denote the immediately preceding
 @nt{library_unit_declaration}.
 @end{Ramification}
 
+@ChgRef{Version=[1], Kind=[Revised], Ref=[8652/0033]}
 Immediately within the declaration of a program unit and
-before any nested declaration, in which case the argument,
+before any nested declaration@Chg{New=[ (but not within a
+generic formal part)], Old=[]}, in which case the argument,
 if any, shall be a @nt{direct_name}
 that denotes the immediately enclosing program unit declaration.
 @begin{Ramification}
@@ -1589,6 +1594,21 @@ completion (and similar things), it has to appear inside, as the first
 @nt{declarative_item}.
 @end{Ramification}
 @end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034]}
+@Chg{New=[A library unit pragma that applies to a generic unit does
+not apply to its instances, unless a specific rule for the pragma specifies the
+contrary.], Old=[]}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[1], Kind=[Added], Ref=[8652/0034]}
+@Chg{New=[When applied to a generic unit, a program unit pragma that
+is not a library unit pragma should apply to each instance of the generic unit
+for which there is not an overriding pragma applied directly to the instance.],
+Old=[]}
+@end{ImplAdvice}
 
 @begin{LinkTime}
 @RootDefn{configuration pragma}
@@ -1945,7 +1965,7 @@ the order in which they appear in the environment
   @begin{Ramification}
     This rule is written so that if a @nt{library_item}
     depends on itself, we don't require it to be elaborated
-    before itself.  See AI-00113/12.
+    before itself.  See AI83-00113/12.
     This can happen only in pathological circumstances.
     For example, if a library @nt{subprogram_body}
     has no corresponding @nt{subprogram_declaration},
@@ -2442,6 +2462,7 @@ instantiations in preelaborated library units,
 which would significantly reduce their usefulness.
 @end{Reason}
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035]}
 @PDefn{preelaborated}
 If a @nt{pragma} Preelaborate (or @nt<pragma> Pure @em see below)
 applies to a library unit, then it is @i{preelaborated}.
@@ -2450,8 +2471,10 @@ applies to a library unit, then it is @i{preelaborated}.
 If a library unit is preelaborated, then its declaration, if any,
 and body, if any, are elaborated
 prior to all non-preelaborated @nt{library_item}s of the partition.]
-All compilation units of a preelaborated library unit shall
-be preelaborable.
+@Chg{New=[The declaration and body of a preelaborated library
+unit, and all subunits that are elaborated as part of elaborating the library
+unit,], Old=[All compilation units of a preelaborated
+library unit]} shall be preelaborable.
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
@@ -2463,6 +2486,11 @@ compilation units of other preelaborated library units.
 @begin{Ramification}
 In a generic body, we assume the worst about
 formal private types and extensions.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0035]}
+@Chg{New=[Subprogram subunits of a preelaborated unit do not need
+to be preelaborable. This is necessary to be consistent with normal subprogram
+bodies, which do not need to be preelaborable in a preelaborated unit.], Old=[]}
 @end{Ramification}
 @end{Legality}
 

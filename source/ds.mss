@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.6 $ $Date: 2000/04/20 02:42:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:24 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
 @Modify(Appendix, Numbered <@A.>, Referenced <@A>)
-@SetPageHeadings{$Date: 2000/04/20 02:42:03 $}
+@SetPageHeadings{$Date: 2000/04/25 04:14:24 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 

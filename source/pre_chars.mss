@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.6 $ $Date: 2000/04/20 02:42:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.7 $ $Date: 2000/04/25 04:14:25 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@SetPageHeadingsNoPage{$Date: 2000/04/20 02:42:04 $}
+@SetPageHeadingsNoPage{$Date: 2000/04/25 04:14:25 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/20 02:42:02 $}
+@SetPageHeadings{$Date: 2000/04/25 04:14:22 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.6 $}
+@Comment{$Revision: 1.7 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon

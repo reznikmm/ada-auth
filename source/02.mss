@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@SetPageHeadings{$Date: 2000/04/20 02:42:01 $}
+@SetPageHeadings{$Date: 2000/04/25 04:14:22 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.6 $}
+@Comment{$Revision: 1.7 $}
 
 @begin{Intro}
 @redundant[
