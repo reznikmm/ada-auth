@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/11/25 03:12:19 $}
+@Comment{$Date: 2004/12/01 01:09:22 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -968,7 +968,7 @@ hiding, since there is no way to declare homographs.
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00377-01]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],Ref=[8652/0026],ARef=[AI95-00044-01],ARef=[AI95-00150-01]}
 @Chg{New=[A non-overridable],Old=[An explicit]} declaration is illegal if there is a
 homograph occurring immediately within the same
@@ -977,11 +977,12 @@ declaration, and is not hidden from all visibility by the
 @Chg{New=[non-overridable],Old=[explicit]} declaration.
 @Chg{New=[In addition, a type extension is illegal if somewhere within its
 immediate scope it has two visible components with the same name.],Old=[]}
-Similarly, the @nt<context_clause> for a
-@nt<subunit> is illegal if it mentions (in a
+Similarly, the @nt<context_clause> for a @Chg{Version=[2],
+New=[compilation unit],Old=[@nt<subunit>]} is illegal if it mentions (in a
 @nt<with_clause>) some library unit, and there is a homograph
-of the library unit that is visible at the place of the corresponding
-stub, and the homograph and the mentioned library unit are both
+of the library unit that is visible at the place of the @Chg{Version=[2],
+New=[compilation unit],Old=[corresponding stub]}, and the
+homograph and the mentioned library unit are both
 declared immediately within the same declarative region.
 @Chg{Version=[2],New=[],Old=[@PDefn{generic contract issue}
 These rules also apply to dispatching operations declared
@@ -1131,6 +1132,43 @@ in that declarative region, it is never declared. Therefore, such
 characteristics do not suddenly become available even if they are in fact
 visible in some other scope. See @RefSecNum{Private Operations} for more on
 the rules.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00377-01]}
+@Chg{Version=[2],New=[It is illegal to mention both an explicit child of an
+instance, and a child of the generic from which the instance was instantiated.
+This is easier to understand with an example:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[@key{generic}
+@key{package} G1 @key{is}
+@key{end} G1;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[@key{generic}
+@key{package} G1.G2 @key{is}
+@key{end} G1.G2;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[@key{with} G1;
+@key{package} I1 @key{is new} G1;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[@key{package} I1.G2 @key{is}
+@key{end} I1.G2;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[@key{with} G1.G2;
+@key{with} I1.G2;             -- @RI{Illegal}
+@key{package} Bad @key{is} ...],Old=[]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[@NoPrefix@;The context clause for Bad is illegal
+as I1 has an implicit declaration of I1.G2 based on the generic child G1.G2,
+as well was the mention of the explicit child I1.G2. As in the previous cases,
+this is illegal only if the context clause makes both children visible; the
+explicit child can be mentioned as long as the generic child is not (and
+vice-versa).],Old=[]}
 @end{Itemize}
 
 Note that we need to be careful which things we make "hidden from all
@@ -1145,8 +1183,8 @@ parameters within a @nt{formal_part} (see @RefSecNum{Subprogram Declarations}).
 @end{Discussion}
 @begin{Discussion}
 The part about instances is from AI83-00012.
-The reason it says @lquotes@;overloadable declarations@rquotes@; is because we don't
-want it to apply to type extensions that appear in an instance;
+The reason it says @lquotes@;overloadable declarations@rquotes@; is because
+we don't want it to apply to type extensions that appear in an instance;
 components are not overloadable.
 @end{Discussion}
 
@@ -1363,6 +1401,11 @@ defined so that it can be used by the stream attribute availability rules
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[The visibility of a limited view of a library package
 is defined (see @RefSecNum{Compilation Units - Library Units}).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00377-01]}
+@Chg{Version=[2],New=[A @nt{with_clause} is illegal if it would create a
+homograph of an implicitly declared generic child (see
+@RefSecNum{Compilation Units - Library Units}).],Old=[]}
 @end{DiffWord95}
 
 

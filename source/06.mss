@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2004/11/25 03:12:18 $}
+@Comment{$Date: 2004/12/01 01:09:22 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1239,6 +1239,22 @@ Note also that the implementation can inline calls even
 when no such desire was expressed by a pragma,
 so long as the semantics of the program remains unchanged.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00309-01]}
+@Chg{Version=[2],New=[An implementation may allow a @nt{pragma} Inline that has
+an argument which is a @nt{direct_name} denoting a @nt{subprogram_body} of the
+same @nt{declarative_part}.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This is allowed for Ada 83 compatibility. This is
+only a permission as this usage is considered obsolescent.],Old=[]}
+@end{Reason}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[We only need to allow this in @nt{declarative_part}s,
+because a body is only allowed in another body, and these all have
+@nt{declarative_part}s.],Old=[]}
+@end{Discussion}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -1247,13 +1263,29 @@ more than one entity in the case of overloading.
 Such a @nt{pragma} applies to all of the denoted entities.
 @end{Notes}
 
+@begin{Incompatible83}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
+@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 83}
+A pragma Inline may not refer to a @nt{subprogram_body} outside of that
+body. The pragma can be given inside of the subprogram body. Ada 2005
+adds an @ImplPermName to allow this usage for compatibility, but
+implementations do not have to allow such @nt{pragma}s.],Old=[]}
+@end{Incompatible83}
+
 @begin{Extend83}
 @Defn{extensions to Ada 83}
 A @nt{pragma} Inline is allowed inside a @nt{subprogram_body} if there
 is no corresponding @nt{subprogram_declaration}.
 This is for uniformity with other program unit pragmas.
-
 @end{Extend83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Implementations are allowed to let @nt{Pragma} Inline apply to a
+@nt{subprogram_body}.],Old=[]}
+@end{Extend95}
+
 
 @LabeledClause{Subprogram Calls}
 

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 23:35:49 $}
+@Comment{$Date: 2004/12/01 01:09:23 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -509,12 +509,19 @@ A child of a parent generic package shall be
 instantiated or renamed only within the declarative region
 of the parent generic.
 
-For each declaration or renaming of a generic unit as a child of some
-parent generic package, there is a corresponding declaration
-nested immediately within each instance of the parent.
-@Redundant[This declaration is visible only within the
-scope of a @nt{with_clause} that mentions
-the child generic unit.]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00331-01]}
+For each @Chg{Version=[2],New=[instance of a],
+Old=[declaration or renaming of a generic unit as a child of some
+parent]} generic package@Chg{Version=[2],New=[],Old=[,]} there is
+a corresponding declaration @Chg{Version=[2],New=[for each child unit of that
+generic package,],Old=[]} nested
+immediately within @Chg{Version=[2],New=[the],Old=[each]}
+instance @Chg{Version=[2],New=[. For the purposes of this rule, if the child
+unit itself has a child unit, the corresponding declaration has a corresponding
+child unit], Old=[of the parent]}.
+@Redundant[@Chg{Version=[2],New=[Such a corresponding generic],Old=[This]}
+declaration is visible only within the scope of a @nt{with_clause} that
+mentions the @Chg{Version=[2],New=[(original) ],Old=[]}child generic unit.]
 
 @begin{ImplNote}
 Within the child, like anything nested in a generic unit,
@@ -909,6 +916,12 @@ The concept of a limited view is new. Combined with @nt{limited_with_clause}s
 (see @RefSecNum{Context Clauses - With Clauses}), they facilitate
 construction of mutually recursive types in multiple packages.],Old=[]}
 @end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00331-01]}
+@Chg{Version=[2],New=[Clarified the wording so that a grandchild generic unit
+will work as expected.],Old=[]}
+@end{DiffWord95}
 
 @LabeledSubClause{Context Clauses - With Clauses}
 
@@ -2017,6 +2030,7 @@ are given here.]
 @end{Intro}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00312-01]}
 @PDefn2{Term=[directly visible], Sec=(within the
 @nt{parent_unit_name} of a library unit)}
 @PDefn2{Term=[visible], Sec=(within the
@@ -2028,13 +2042,13 @@ and within a @nt{with_clause}, the only declarations
 that are visible are those that are @nt<library_item>s of the environment,
 and the only declarations that are directly visible are those that
 are root @nt<library_item>s of the environment.
-@Defn{notwithstanding}
+@Chg{Version=[2],New=[],Old=[@Defn{notwithstanding}
 Notwithstanding the rules of @RefSecNum(Selected Components),
 an expanded name in a @nt{with_clause} may consist of a
 @nt<prefix> that denotes a generic package and a @nt<selector_name> that
 denotes a child of that generic package.
 @Redundant[(The child is necessarily a generic unit;
-see @RefSecNum{Compilation Units - Library Units}.)]
+see @RefSecNum{Compilation Units - Library Units}.)]]}
 
 @begin{Ramification}
 In @lquotes@;@key{package} P.Q.R @key{is} ... @key{end} P.Q.R;@rquotes@;,
@@ -2053,13 +2067,13 @@ since it is not directly visible,
 and it has no parent.
 @end{Reason}
 @begin{Reason}
-
-The @lquotes@;notwithstanding@rquotes@; part allows @lquotes@;@key[with] A.B;@rquotes@;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00312-01]}
+@Chg{Version=[2],New=[],Old=[The @lquotes@;notwithstanding@rquotes@; part
+allows @lquotes@;@key[with] A.B;@rquotes@;
 where A is a generic library package and B is one of its
 (generic) children.
 This is necessary because it is not normally legal to use an expanded
-name to reach inside a generic package.
-
+name to reach inside a generic package.]}
 @end{Reason}
 
 @PDefn2{Term=[directly visible], Sec=(within a @nt{use_clause} in a
@@ -2118,6 +2132,24 @@ the immediately preceding @nt<library_item> and each of its
 ancestors is visible.
 The ancestor root @nt<library_item> is directly visible.
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00312-01]}
+@Chg{Version=[2],New=[@Defn{notwithstanding}
+Notwithstanding the rules of @RefSecNum(Selected Components),
+an expanded name in a @nt{with_clause}, a @nt{pragma} in a @nt{context_clause},
+or a @nt{pragma} that appears at the place of a compilation unit}
+may consist of a @nt<prefix> that denotes a generic package and
+a @nt<selector_name> that denotes a child of that generic package.
+@Redundant[(The child is necessarily a generic unit;
+see @RefSecNum{Compilation Units - Library Units}.)]],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This rule allows @key[with] A.B; and
+@key[pragma] Elaborate(A.B); where A is a
+generic library package and B is one of its (generic) children. This is
+necessary because it is not normally legal to use an expanded
+name to reach inside a generic package.],Old=[]}
+@end{Reason}
+
 @end{StaticSem}
 
 @begin{DiffWord83}
@@ -2139,6 +2171,13 @@ And we would still need a special rule to prevent seeing things
 (in our own @nt{context_clause})
 that were with-ed by our parent, etc.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00312-01]}
+@Chg{Version=[2],New=[Clarified that the name of a generic child unit may
+appear in a @nt{pragma} in a @nt{context_clause}.],Old=[]}
+@end{DiffWord95}
+
 
 @NewPage
 @LabeledClause{Program Execution}
