@@ -2657,6 +2657,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 			-- the next paragraph.
 		if Format_Object.In_Change then
 		    Ada.Text_IO.Put_Line ("** Paragraph end while in change; line " & ARM_Input.Line_String (Input_Object));
+		    Format_Object.In_Change := False;
 		end if;
 	    end if;
 	end Check_End_Paragraph;
@@ -5959,9 +5960,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 		when Change_Added | Change_Deleted =>
 		    -- @ChgAdded{Version=[<Version>],[NoPrefix=[T|F],]
-		    --     [Leading=[T|F],][Keepnext=[T|F],]Text=[text]}
+		    --     [Type=[Leading|Trailing|Normal],][Keepnext=[T|F],]Text=[text]}
 		    -- @ChgDeleted{Version=[<Version>],[NoPrefix=[T|F],]
-		    --     [Leading=[T|F],][Keepnext=[T|F],]Text=[text]}
+		    --     [Type=[Leading|Trailing|Normal],][Keepnext=[T|F],]Text=[text]}
 		    -- Whole paragraph change. These let us modify the AARM prefix
 		    -- (like "Reason:" or "Discussion:", and also let us
 		    -- conditionally handle paragraph formatting (which
@@ -5970,7 +5971,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        Which_Param : ARM_Input.Param_Num;
 		        Ch, Close_Ch : Character;
 
-			NoPrefix, Leading, Keepnext : Boolean := False;
+			NoPrefix, Keepnext : Boolean := False;
+			Space_After : ARM_Output.Space_After_Type := ARM_Output.Normal;
 
 			function Read_Boolean (Close_Ch : in Character;
 					       Name : in String) return Boolean is
@@ -5999,6 +6001,36 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    return Result;
 			end Read_Boolean;
 
+			function Read_Type (Close_Ch : in Character) return ARM_Output.Space_After_Type is
+			    -- Read the Type parameter.
+			    Type_Name : ARM_Input.Command_Name_Type;
+			    Ch : Character;
+			    Result : ARM_Output.Space_After_Type := ARM_Output.Normal;
+		        begin
+			    -- Get the type word:
+			    Arm_Input.Get_Name (Input_Object, Type_Name);
+			    ARM_Input.Get_Char (Input_Object, Ch);
+			    if Ch /= Close_Ch then
+				Ada.Text_IO.Put_Line ("  ** Bad close for Type on line " & ARM_Input.Line_String (Input_Object));
+				ARM_Input.Replace_Char (Input_Object);
+			    end if;
+			    if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) =
+				"leading" then
+				Result := ARM_Output.Narrow;
+			    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) =
+				"trailing" then
+				Result := ARM_Output.Wide;
+			    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right)) =
+				"normal" then
+				Result := ARM_Output.Normal;
+			    else
+				Ada.Text_IO.Put_Line ("  ** Bad type for paragraph type: " &
+				    Ada.Strings.Fixed.Trim (Type_Name, Ada.Strings.Right) &
+				    " on line " & ARM_Input.Line_String (Input_Object));
+			    end if;
+			    return Result;
+		        end Read_Type;
+
 		    begin
 		        -- These are not allowed in other @Chg commands.
 		        if Format_Object.In_Change then
@@ -6013,7 +6045,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    -- Handle the optional parameters; stop on Text.
 		            ARM_Input.Check_One_of_Parameter_Names (Input_Object,
 			        Param_Name_1 => "NoPrefix" & (9..ARM_Input.Command_Name_Type'Last => ' '),
-			        Param_Name_2 => "Leading" & (8..ARM_Input.Command_Name_Type'Last => ' '),
+			        Param_Name_2 => "Type" & (5..ARM_Input.Command_Name_Type'Last => ' '),
 			        Param_Name_3 => "Keepnext" & (9..ARM_Input.Command_Name_Type'Last => ' '),
 			        Param_Name_4 => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
 			        Is_First => False,
@@ -6023,7 +6055,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    if Which_Param = 1 and then Close_Ch /= ' ' then
 				NoPrefix := Read_Boolean (Close_Ch, "NoPrefix");
 			    elsif Which_Param = 2 and then Close_Ch /= ' ' then
-				Leading := Read_Boolean (Close_Ch, "Leading");
+				Space_After := Read_Type (Close_Ch);
 			    elsif Which_Param = 3 and then Close_Ch /= ' ' then
 				Keepnext := Read_Boolean (Close_Ch, "KeepNext");
 			    else
@@ -6061,11 +6093,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    when ARM_Format.New_Only =>
 					Format_Object.No_Prefix := NoPrefix;
 					Format_Object.Keep_with_Next := KeepNext;
-					if Leading then
-					    Format_Object.Space_After := ARM_Output.Narrow;
-					else
-					    Format_Object.Space_After := ARM_Output.Normal;
-					end if;
+				        Format_Object.Space_After := Space_After;
 
 				        if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
 				           ARM_Database.Deleted) then
@@ -6080,11 +6108,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					 ARM_Format.New_Changes =>
 					Format_Object.No_Prefix := NoPrefix;
 					Format_Object.Keep_with_Next := KeepNext;
-					if Leading then
-					    Format_Object.Space_After := ARM_Output.Narrow;
-					else
-					    Format_Object.Space_After := ARM_Output.Normal;
-					end if;
+				        Format_Object.Space_After := Space_After;
 					if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
 					    Format_Object.Change_Version and then
 					    Format_Object.Changes = ARM_Format.Changes_Only then
@@ -6141,11 +6165,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					-- Output normal text.
 					Format_Object.No_Prefix := NoPrefix;
 					Format_Object.Keep_with_Next := KeepNext;
-					if Leading then
-					    Format_Object.Space_After := ARM_Output.Narrow;
-					else
-					    Format_Object.Space_After := ARM_Output.Normal;
-					end if;
+				        Format_Object.Space_After := Space_After;
 				    when ARM_Format.New_Only =>
 				        -- Skip the text:
 			                ARM_Input.Skip_until_Close_Char (Input_Object, Ch);
@@ -6164,11 +6184,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    -- set the new change state and formatting.
 					    Format_Object.No_Prefix := NoPrefix;
 					    Format_Object.Keep_with_Next := KeepNext;
-					    if Leading then
-					        Format_Object.Space_After := ARM_Output.Narrow;
-					    else
-					        Format_Object.Space_After := ARM_Output.Normal;
-					    end if;
+					    Format_Object.Space_After := Space_After;
 
 					    Format_Object.Change := ARM_Output.Deletion;
 					    Format_Object.Current_Change_Version :=

@@ -442,24 +442,25 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
         the newest changes inside of older changes. The text may not contain
         any command that ends the paragraph. The Version is assumed to be '1'
         if that parameter is not given. Version is interpreted as for ChgRef.
-@ChgAdded{Version=[<Version>],[NoPrefix=[T|F],][Leading=[T|F],]
+@ChgAdded{Version=[<Version>],[NoPrefix=[T|F],][Type=[Leading|Trailing|Normal],]
         [Keepnext=[T|F],]Text=[text]}
 	Marks an insertion of a complete paragraph consisting of 'text'. This
 	cannot be nested in other commands. The AARM prefix (if any) also is
 	marked as an insertion. The optional parameters (conditionally) set the
-	paragraph properties; they work the same as the @NoPrefix, @Leading,
-	and @KeepNext commands if set to T, except that they're conditional
-	on the paragraph text being inserted. If omitted, each is assumed to
-	have the value F.
-@ChgDeleted{Version=[<Version>],[NoPrefix=[T|F],][Leading=[T|F],]
+	paragraph properties; NoPrefix and KeepNext work the same as the
+        @NoPrefix, and @KeepNext commands if set to T, except that they're
+	conditional on the paragraph text being inserted. Similarly, Type
+	works the same as @Leading and @Trailing if set to those values,
+	except that they are conditional. If omitted, NoPrefix is set to F,
+	KeepNext is set to F, and Type is set to Normal.
+@ChgDeleted{Version=[<Version>],[NoPrefix=[T|F],][Type=[Leading|Trailing|Normal],]
         [Keepnext=[T|F],]Text=[text]}
 	Marks a deletion of a complete paragraph consisting of 'text'. This
 	cannot be nested in other commands. The AARM prefix (if any) also is
 	marked as a deletion. The optional parameters (conditionally) set the
-	paragraph properties; they work the same as the @NoPrefix, @Leading,
-	and @KeepNext commands if set to T, except that they're conditional
-	on the paragraph text being inserted in the document (even if it is
-	marked as deleted). If omitted, each is assumed to have the value F.
+	paragraph properties; they work as described in ChgAdded. Note that
+	they're conditional on the paragraph text being included in the
+	document (even if it is marked as deleted).
 
 New=[<new text>],Old=[<old text>]}
 @ChgImplDef{Version=[<version>],Kind=(<kind>),Text=<text>}
