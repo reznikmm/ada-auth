@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:01 $}
+@Comment{$Date: 2005/03/08 06:44:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -278,7 +278,10 @@ of the generic body result in distinct tags.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[    @AdaDefn{No_Tag} : @key[constant] Tag;]}
 
-    @key[function] @AdaSubDefn{Expanded_Name}(T : Tag) @key[return] String;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00400-01]}
+    @key[function] @AdaSubDefn{Expanded_Name}(T : Tag) @key[return] String;@Chg{Version=[2],New=[
+    @key[function] @AdaSubDefn{Wide_Expanded_Name}(T : Tag) @key[return] Wide_String;
+    @key[function] @AdaSubDefn{Wide_Wide_Expanded_Name}(T : Tag) @key[return] Wide_Wide_String;],Old=[]}
     @key[function] @AdaSubDefn{External_Tag}(T : Tag) @key[return] String;
     @key[function] @AdaSubDefn{Internal_Tag}(External : String) @key[return] Tag;
 
@@ -319,18 +322,33 @@ This is one reason to allow equality for type Tag.
 access values be initialized to @key[null].]}
 @end{Reason}
 
-The function Expanded_Name returns the full expanded name of the
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00400-01]}
+The function @Chg{Version=[2],New=[Wide_@!Wide_@!Expanded_@!Name],
+Old=[Expanded_@!Name]} returns the full expanded name of the
 first subtype of the specific type identified by the tag,
-in upper case,
-starting with a root library unit.
+in upper case, starting with a root library unit.
 The result is implementation defined if the type is declared within
 an unnamed @nt{block_statement}.
 @begin{Honest}
-This name, as well as each @nt{prefix} of it,
-does not denote a @nt{renaming_declaration}.
+  This name, as well as each @nt{prefix} of it,
+  does not denote a @nt{renaming_declaration}.
 @end{Honest}
-@ImplDef{The result of Tags.Expanded_Name for types declared within
-an unnamed @nt{block_statement}.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[The result of @Chg{Version=[2],
+New=[Tags.Wide_@!Wide_@!Expanded_@!Name],Old=[Tags.Expanded_@!Name]} for types
+declared within an unnamed @nt{block_statement}.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00400-01]}
+@ChgAdded{Version=[2],Text=[The function Expanded_Name (respectively,
+Wide_Expanded_Name) returns the same sequence of graphic characters as that
+defined for Wide_Wide_Expanded_Name, if all the graphic characters are defined
+in Character (respectively, Wide_Character); otherwise, the sequence of
+characters is implementation defined, but no shorter than that returned by
+Wide_Wide_Expanded_Name for the same value of the argument.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[
+The sequence of characters of the value returned by Tags.Expanded_Name
+(respectively, Tags.Wide_Expanded_Name)
+when some of the graphic characters of Tags.Wide_Wide_Expanded_Name are not
+defined in Character (respectively, Wide_Character).],Old=[]}]}
 
 The function External_Tag returns a string to be used in an
 external representation for the given tag. The call External_Tag(S'Tag)
@@ -728,10 +746,11 @@ Tagged types are a new concept.
 @end{Inconsistent95}
 
 @begin{Incompatible95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01],ARef=[AI95-00400-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Constant No_Tag, and functions Parent_Tag, Descendant_Tag, and
-  Is_Descendant_At_Same_Level are newly added to Ada.Tags.
+  Constant No_Tag, and functions Parent_Tag, Descendant_Tag,
+  Is_Descendant_At_Same_Level, Wide_Expanded_Name, and Wide_Wide_Expanded_Name
+  are newly added to Ada.Tags.
   If Ada.Tags is referenced in a @nt{use_clause}, and an entity @i<E> with the
   same @nt{defining_identifier} as a new entity in Ada.Tags is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
@@ -754,6 +773,10 @@ Tagged types are a new concept.
   descendants of a tagged type must be distinct. This is needed to ensure
   that more nested type extensions will work properly. The wording does not
   require implementation changes for types that were allowed in Ada 95.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00400-01]}
+  @ChgAdded{Version=[2],Text=[Added Wide_Expanded_Name and Wide_Wide_Expanded_Name
+  because identifiers can now contain characters outside of Latin-1.]}
 @end{DiffWord95}
 
 @LabeledSubClause{Type Extensions}

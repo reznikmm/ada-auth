@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/03/04 06:44:25 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/03/08 06:44:26 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/03/04 06:44:25 $}
+@Comment{$Date: 2005/03/08 06:44:26 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1103,12 +1103,21 @@ Volatile_Components is as follows:
 @end{Syntax}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00272-01]}
 @Defn{atomic}
 An @i{atomic} type is one to which a pragma Atomic applies.
 An @i{atomic} object (including a component)
 is one to which a
 pragma Atomic applies, or a component of an array to which
-a pragma Atomic_Components applies, or any object of an atomic type.
+a pragma Atomic_Components applies, or any object of an atomic type@Chg{Version=[2],
+New=[, other than objects obtained by evaluating a slice],Old=[]}.
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00272-01]}
+  @ChgAdded{Version=[2],Text=[A slice of an atomic array object is not itself
+  atomic. That's necessary as executing a read or write of a dynamic number
+  of types in a single instruction is not possible on many targets.]}
+@end{Ramification}
 
 @Defn{volatile}
 A @i{volatile} type is one to which a pragma Volatile applies.
@@ -1278,6 +1287,44 @@ A warning might be appropriate if no packing whatsoever can be achieved.
 
 @end{ImplReq}
 
+@begin{ImplAdvice}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00259-01]}
+@ChgAdded{Version=[2],Text=[A load or store of a volatile object whose size is
+a multiple of System.Storage_Unit and whose alignment is nonzero, should be
+implemented by accessing exactly the bits of the object and no others.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[A load or store of a volatile object whose size is
+a multiple of System.Storage_Unit and whose alignment is nonzero, should be
+implemented by accessing exactly the bits of the object and no others.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Since any object can be a volatile object,
+  including packed array components and bit-mapped record components, we
+  require the above only when it is reasonable to assume that the machine
+  can avoid accessing bits outside of the object.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This implies that the load or store of a
+  volatile object that meets the above requirement should not be combined
+  with that of any other object, nor should it access any bits not
+  belonging to any other object. This means that the suitability of the
+  implementation for memory-mapped I/O can be determined from its
+  documentation, as any cases where the implementation does not follow
+  @ImplAdviceTitle must be documented.]}
+@end{Ramification}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00259-01]}
+@ChgAdded{Version=[2],Text=[A load or store of an atomic object should, where
+possible, be implemented by a single load or store instruction.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[A load or store of an atomic object should be implemented by a single
+load or store instruction.]}]}
+
+@end{ImplAdvice}
+
 @begin{Notes}
 
 An imported volatile or atomic constant behaves as a constant (i.e.
@@ -1293,22 +1340,48 @@ The name @lquotes@;Shared@rquotes@; was confusing,
 because the pragma was not used to mark variables as shared.
 @end{Incompatible83}
 
-@LabeledClause{Task Identification and Attributes}
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00259-01]}
+  @ChgAdded{Version=[2],Text=[Added @ImplAdviceTitle to clarify the meaning
+  of Atomic and Volatile in machine terms. The documentation that this
+  advice applies will make the use of Ada implementations more predictable
+  for low-level (such as device register) programming.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00272-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to clarify that a slice of an
+  object of an atomic type is not atomic, just like a component of an atomic
+  type is not (necessarily) atomic.]}
+@end{Diffword95}
+
+
+@LabeledRevisedClause{Version=[2],New=[Random Operations on Tasks],
+Old=[Task Identification and Attributes]}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00266-02]}
 @Redundant[This clause describes operations and attributes that can be
 used to obtain the identity of a task. In addition,
 a package that associates user-defined information with a task is
-defined.]
+defined.@Chg{Version=[2],New=[ Finally, a package that associates
+termination procedures with a task or set of tasks is defined.],Old=[]}]
 @end{Intro}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+  @ChgAdded{Version=[2],Text=[The title and text here were updated to reflect
+  the addition of task termination procedures to this clause.]}
+@end{DiffWord95}
 
 @LabeledSubClause{The Package Task_Identification}
 
 @begin{StaticSem}
 @Leading@Keepnext@;The following language-defined library package exists:
 @begin{example}
-@key[package] Ada.Task_Identification @key[is]@ChildUnit{Parent=[Ada],Child=[Task_Identification]}
-   @key[type] @AdaTypeDefn{Task_Id} @key[is] @key{private};
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
+@key[package] Ada.Task_Identification @key[is]@ChildUnit{Parent=[Ada],Child=[Task_Identification]}@Chg{Version=[2],New=[
+   @key[pragma] Preelaborate(Task_Identification);],Old=[]}
+   @key[type] @AdaTypeDefn{Task_Id} @key[is] @key{private};@Chg{Version=[2],New=[
+   @key[pragma] Preelaborable_Initialization (Task_Id);],Old=[]}
    @AdaSubDefn{Null_Task_Id} : @key{constant} Task_Id;
    @key{function}  "=" (Left, Right : Task_Id) @key{return} Boolean;
 
@@ -1390,14 +1463,17 @@ Abort_Task is a potentially blocking operation
 @end{RunTime}
 
 @begin{Bounded}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00237-01]}
 @PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error to call the Current_Task function from
-an entry body or an interrupt handler.
+an entry body@Chg{Version=[2],New=[,],Old=[ or an]} interrupt handler@Chg{Version=[2],
+New=[, or finalization of a task attribute],Old=[]}.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised, or an implementation-defined value of the type
 Task_Id is returned.
-@ImplDef{The value of Current_Task when in a protected entry or
-interrupt handler.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[The value of Current_Task when in
+a protected entry@Chg{Version=[2],New=[,],Old=[ or]} interrupt handler@Chg{Version=[2],
+New=[, or finalization of a task attribute],Old=[]}.]}
 @begin{ImplNote}
 This value could be Null_Task_Id, or the ID of some user task, or that of
 an internal task created by the implementation.
@@ -1437,10 +1513,21 @@ Task_Id value that identifies the environment task.
 
 @end{Notes}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[Task_Identification is now Preelaborated,
+  so it can be used in preelaborated units.]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0070],ARef=[AI95-00101-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the mode of the
   parameter to Abort_Task to @key{in}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00237-01]}
+  @ChgAdded{Version=[2],Text=[Corrected the wording to include finalization
+  of a task attribute in the bounded error case; we don't want to specify
+  which task does these operations.]}
 @end{Diffword95}
 
 
@@ -1508,6 +1595,25 @@ For all the operations declared in this package, Tasking_Error is raised
 if the task identified by T is terminated.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if the value of T is Null_Task_Id.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00237-01]}
+@ChgAdded{Version=[2],Text=[After a task has terminated, all of its attributes
+are finalized, unless they have been finalized earlier. When the master of an
+instantiation of Ada.Task_Attributes is finalized, the corresponding attribute
+of each task is finalized, unless it has been finalized earlier.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is necessary so that a task attribute does
+  not outlive its type. For instance, that's possible if the instantiation is
+  nested, and the attribute is on a library-level task.]}
+@end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The task owning an attribute cannot, in general,
+  finalize that attribute. That's because the attributes are finalized @i<after>
+  the task is terminated; moreover, a task may have attributes as soon as it is
+  created; the task may never even have been activated.]}
+@end{Ramification}
 @end{RunTime}
 
 @begin{Bounded}
@@ -1537,15 +1643,31 @@ declared in this package and the corresponding task object no longer exists,
 the execution of the program is erroneous.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0071],ARef=[AI95-00165-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00237-01]}
 @ChgAdded{Version=[1],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
-Accesses to task attributes via a value of type Attribute_Handle are
-erroneous if executed concurrently with each other or with calls of any of the
-operations declared in package Task_Attributes.]}
+@Chg{Version=[2],New=[An access],Old=[Accesses]} to @Chg{Version=[2],New=[a ],Old=[]}task
+@Chg{Version=[2],New=[attribute],Old=[attributes]} via a value of type
+Attribute_Handle @Chg{Version=[2],New=[is],Old=[are]}
+erroneous if executed concurrently with @Chg{Version=[2],New=[another such access],
+Old=[each other]} or @Chg{Version=[2],New=[call],Old=[with calls]} of any of the
+operations declared in package Task_Attributes.@Chg{Version=[2],New=[ An access
+to a task attribute is erroneous if executed
+concurrently with or after the finalization of the task attribute.],Old=[]}]}
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added]}
-@ChgAdded{Version=[1],Text=[There is no requirement of atomicity on accesses
-via a value of type Attribute_Handle.]}
+  @ChgRef{Version=[1],Kind=[Added]}
+  @ChgAdded{Version=[1],Text=[There is no requirement of atomicity on accesses
+  via a value of type Attribute_Handle.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[A task attribute can only be accessed after
+  finalization through a value of type Attribute_Handle. Operations in
+  package Task_Attributes cannot be used to access after finalization,
+  because either the master of the instance has been or is in the process
+  of being left (in which case the instance is out of scope and thus cannot
+  be called), or the associated task is already terminated (in which case
+  Tasking_Error is raised for any attempt to call an operation).]}
+@end{Ramification}
 @end{Erron}
 
 @begin{ImplReq}
@@ -1566,8 +1688,11 @@ Reference, an attribute of a given task can be safely read and updated
 concurrently by multiple tasks.
 @end{Ramification}
 
-When a task terminates, the implementation shall finalize
-all attributes of the task, and reclaim any other storage
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00237-01]}
+@Chg{Version=[2],New=[After],Old=[When a]} task
+@Chg{Version=[2],New=[attributes are finalized],Old=[terminates]},
+the implementation shall @Chg{Version=[2],New=[],Old=[finalize
+all attributes of the task]}, and reclaim any other storage
 associated with the attributes.
 @end{ImplReq}
 
@@ -1624,7 +1749,7 @@ and the old attribute value is not equal to Initial_Value.
 
 @end{Itemize}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The metric for the Task_Attributes package shall be documented.]}]}
+Text=[The metrics for the Task_Attributes package shall be documented.]}]}
 @end{Metrics}
 
 @begin{ImplPerm}
@@ -1640,14 +1765,14 @@ be recreated when needed later.
 While the object does not exist, the function Value may
 simply return Initial_Value, rather than implicitly creating the object.
 @begin{Discussion}
-The effect of this permission can only be observed if the assignment
-operation for the corresponding type has side-effects.
+  The effect of this permission can only be observed if the assignment
+  operation for the corresponding type has side-effects.
 @end{Discussion}
 @begin{ImplNote}
-This permission means that even though every task has every
-attribute, storage need only be allocated for those attributes
-that have been Reference'd or set to a value other than that
-of Initial_Value.
+  This permission means that even though every task has every
+  attribute, storage need only be allocated for those attributes
+  that have been Reference'd or set to a value other than that
+  of Initial_Value.
 @end{ImplNote}
 
 An implementation is allowed to place restrictions on the maximum number of
@@ -1672,6 +1797,24 @@ time, storage for task attributes should be pre-allocated
 statically and the number of attributes pre-allocated should be documented.]}]}
 @end{ImplAdvice}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00237-01]}
+@ChgAdded{Version=[2],Text=[Finalization of task attributes and reclamation of
+associated storage should be performed as soon as possible after task
+termination.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Finalization of task attributes and reclamation of
+associated storage should be performed as soon as possible after task
+termination.]}]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00237-01]}
+  @ChgAdded{Version=[2],Text=[This is necessary because the normative wording
+  only says that that attributes are finalized @lquotes@;after@rquotes@;
+  task termination. Without this advice, waiting until the instance is
+  finalized would meet the requirements (it is after termination, but may be
+  a very long time after termination). We can't say anything more specific
+  than this, as we do not want to require overhead of an interaction with
+  the tasking system to be done at a specific point.]}
+@end{Reason}
 @begin{Notes}
 
 An attribute always exists (after instantiation), and has the initial value.
@@ -1696,4 +1839,115 @@ a nonexistent task, the execution of the program is erroneous.
   attribute operations from within a task attribute operation (by a an Adjust
   or Finalize call) is a bounded error, and that concurrent use of attribute
   handles is erroneous.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00237-01]}
+  @ChgAdded{Version=[2],Text=[Clarified the wording so that the finalization
+  takes place after the termination of the task or when the instance is
+  finalized (whichever is sooner).]}
 @end{Diffword95}
+
+@LabeledAddedSubClause{Version=[2],Name=[Task Termination Procedures]}
+
+@begin{Intro}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+  @ChgAdded{Version=[2],Text=[@Redundant[This clause specifies a package for
+  associating protected procedures with a task. One such procedure is invoked
+  when the task is about to terminate.@Defn{termination handler}
+  @Defn2{Term=[task],Sec=[termination handler]}]]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library package exists:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<with> System;
+@key<with> Ada.Task_Identification;
+@key<with> Ada.Exceptions;
+@key<package> Ada.Task_Termination @key<is>@ChildUnit{Parent=[Ada],Child=[Task_Termination]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key<type> @AdaTypeDefn{Cause_Of_Termination} @key<is> (Normal, Abnormal, Unhandled_Exception);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Termination_Handler} @key<is access protected procedure>(
+      Cause : @key<in> Cause_Of_Termination;
+      T     : @key<in> Ada.Task_Identification.Task_Id;
+      X     : @key<in> Ada.Exceptions.Exception_Occurrence);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Dependents_Fallback_Handler}(
+      Handler: @key<in> Termination_Handler);
+  @key<function> @AdaSubDefn{Current_Task_Fallback_Handler} return Termination_Handler;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Specific_Handler}(
+      T           : @key<in> Ada.Task_Identification.Task_Id;
+      Handler     : @key<in> Termination_Handler);
+  @key<function> @AdaSubDefn{Specific_Handler}(T : Ada.Task_Identification.Task_Id)
+      @key<return> Termination_Handler;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<end> Ada.Task_Termination;]}
+@end{Example}
+
+@end{StaticSem}
+
+@begin{RunTime}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[@Defn{fall-back handler}@Defn2{Term=[termination handler],Sec=[fall-back]}
+A call of Set_Dependents_Fallback_Handler
+sets the @i<fall-back handler>
+for all dependent tasks. If a fall-back handler had previously been
+set it is replaced. A call with a null access parameter is
+equivalent to removing the fall-back handler. A call of
+Current_Task_Fallback_Handler returns the fall-back handler that is currently
+in effect for the calling task. If no fall-back handler has been set
+it returns @key{null}.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[A call of Set_Specific_Handler sets a specific
+handler for the task identified by T. If a specific handler had previously been
+set it is replaced. A call with a null access parameter is equivalent to
+removing the specific handler. A call of Specific_Handler returns the specific
+handler if one has been set, otherwise the handler it returns @key{null}.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[As part of the finalization of a @nt{task_body},
+after performing the actions specified in
+@RefSecNum{User-Defined Assignment and Finalization} for finalization of a
+master, the task specific handler, if not @key{null}, is called. If there is no such
+specific handler, a fall-back handler is determined by recursively searching
+for a non-null fall-back handler in the tasks upon which it depends. If such a
+fall-back handler is determined it is executed; otherwise no handler is
+executed.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[If the task completed due to completing the last
+statement of the task body, or as a result of waiting on a terminate
+alternative then Cause is set to Normal and X is set to Null_Occurrence. If
+completion is due to abort then Cause is set to Abnormal and X is set to
+Null_Occurrence. If completion is due to an unhandled exception then Cause is
+set to Unhandled_Exception and X is set to the associated exception
+occurrence.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[For all the operations defined in this package,
+Tasking_Error is raised if the task identified by T has already terminated.
+Program_Error is raised if the value of T is Null_Task_ID.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[An exception propagated from a handler that is
+invoked as part of the termination of a task has no effect.]}
+
+@end{RunTime}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Package Task_Termination is new.]}
+@end{Extend95}
+

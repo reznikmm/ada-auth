@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:04 $}
+@Comment{$Date: 2005/03/08 06:44:26 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1909,15 +1909,20 @@ which is now considered obsolete.
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00158-01]}
-@ChgAdded{Version=[2],Text=[
-In the case where a formal type is tagged with unknown
-discriminants, and the actual type is a class-wide type @i<T>'Class,
-each of the primitive operations of the actual type is considered to
-be a subprogram (with an intrinsic calling convention @em see
-@RefSecNum{Conformance Rules})
-whose body consists of a dispatching call upon the corresponding
-operation of @i<T>, with its formal parameters as the actual parameters.
-If it is a function, the result of the dispatching call is returned.]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[In the case where a formal type is
+tagged with unknown discriminants, and the actual type is a class-wide type
+@i<T>'Class:]}
+
+@begin{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00158-01]}
+@ChgAdded{Version=[2],Text=[For the purposes of defining the primitive
+operations of the formal type, each of the primitive operations of the actual
+type is considered to be a subprogram (with an intrinsic calling convention @em
+see @RefSecNum{Conformance Rules}) whose body consists of a dispatching call
+upon the corresponding operation of @i<T>, with its formal parameters as the
+actual parameters. If it is a function, the result of the dispatching call is
+returned.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00158-01]}
 @ChgAdded{Version=[2],Text=[If the corresponding operation of @i<T>
@@ -1926,10 +1931,13 @@ parameters, then the controlling tag value is determined by the
 context of the call, according to the rules for tag-indeterminate
 calls (see @RefSecNum{Dispatching Operations of Tagged Types} and
 @RefSecNum{Assignment Statements}). In the case where the tag would be
-statically determined to be that of the actual type, the call raises
+statically determined to be that of the formal type, the call raises
 Program_Error. If such a function is renamed, any call on the
 renaming raises Program_Error.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
+@end{Itemize}
+
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1958,8 +1966,8 @@ call. For example:]}
 @ChgAdded{Version=[2],Text=[@key{package body} G @key{is}
    @key{procedure} Test(X : @key{in out} NT) @key{is}
    @key{begin}
-      X := Empty;  -- @RI[Dispatching takes place, based]
-                   -- @RI[on X'Tag if actual is class-wide.]
+      X := Empty;  -- @RI[Dispatching based on X'Tag takes]
+                   -- @RI[place if actual is class-wide.]
       @key{declare}
           Y : NT := Empty;
                    -- @RI[If actual is class-wide, this raises Program_Error]

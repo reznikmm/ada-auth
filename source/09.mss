@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/02/05 05:48:02 $}
+@Comment{$Date: 2005/03/08 06:44:25 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 
@@ -370,7 +370,8 @@ Alternatively, if the implementation supports the
 Systems Programming Annex,
 the Identity attribute
 can be used for task identification
-(see @RefSecNum(Task Identification and Attributes)).
+(see @Chg{Version=[2],New=[@RefSecNum(The Package Task_Identification)],
+Old=[@RefSecNum(Random Operations on Tasks)]}).
 @end{Notes}
 
 @begin{Examples}
@@ -2292,7 +2293,8 @@ without waiting for the entire protected action to complete.
   the protected action is essentially invisible, since the thread is
   not abortable in any case, and the "current_task" function is not
   guaranteed to work during a protected action
-  (see @RefSecNum(Task Identification and Attributes)).
+  (see @Chg{Version=[2],New=[@RefSecNum(The Package Task_Identification)],
+  Old=[@RefSecNum(Random Operations on Tasks)]}).
 @end(Reason)
 
 When the entry of a protected object is checked to see whether it

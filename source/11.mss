@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/02/04 06:36:43 $}
+@Comment{$Date: 2005/03/08 06:44:25 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -554,14 +554,17 @@ are not handled by the handlers of the
 @begin{StaticSem}
 @leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01],ARef=[AI95-00400-01]}
 @ChildUnit{Parent=[Ada],Child=[Exceptions]}
 @key[package] Ada.Exceptions @key[is]@Chg{Version=[2],New=[
     @key[pragma] Preelaborate(Exceptions);],Old=[]}
     @key[type] @AdaTypeDefn{Exception_Id} @key[is] @key[private];@Chg{Version=[2],New=[
     @key[pragma] Preelaborable_Initialization(Exception_Id);],Old=[]}
     @AdaDefn{Null_Id} : @key[constant] Exception_Id;
-    @key[function] @AdaSubDefn{Exception_Name}(Id : Exception_Id) @key[return] String;
+    @key[function] @AdaSubDefn{Exception_Name}(Id : Exception_Id) @key[return] String;@Chg{Version=[2],New=[
+    @key[function] @AdaSubDefn{Wide_Exception_Name}(Id : Exception_Id) @key[return] Wide_String;
+    @key[function] @AdaSubDefn{Wide_Wide_Exception_Name}(Id : Exception_Id)
+        @key[return] Wide_Wide_String;],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
     @key[type] @AdaTypeDefn{Exception_Occurrence} @key[is] @key[limited] @key[private];@Chg{Version=[2],New=[
@@ -576,10 +579,17 @@ are not handled by the handlers of the
     @key[function] @AdaSubDefn{Exception_Message}(X : Exception_Occurrence) @key[return] String;
     @key[procedure] @AdaSubDefn{Reraise_Occurrence}(X : @key[in] Exception_Occurrence);
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00400-01]}
     @key[function] @AdaSubDefn{Exception_Identity}(X : Exception_Occurrence)
                                 @key[return] Exception_Id;
     @key[function] @AdaSubDefn{Exception_Name}(X : Exception_Occurrence) @key[return] String;
-        --@RI{ Same as Exception_Name(Exception_Identity(X)).}
+        --@RI{ Same as Exception_Name(Exception_Identity(X)).}@Chg{Version=[2],New=[
+    @key[function] @AdaSubDefn{Wide_Exception_Name}(X : Exception_Occurrence)
+        @key[return] Wide_String;
+        --@RI{ Same as Wide_Exception_Name(Exception_Identity(X)).}
+    @key[function] @AdaSubDefn{Wide_Wide_Exception_Name}(X : Exception_Occurrence)
+        @key[return] Wide_Wide_String;
+        --@RI{ Same as Wide_Wide_Exception_Name(Exception_Identity(X)).}],Old=[]}
     @key[function] @AdaSubDefn{Exception_Information}(X : Exception_Occurrence) @key[return] String;
 
     @key[procedure] @AdaSubDefn{Save_Occurrence}(Target : @key[out] Exception_Occurrence;
@@ -668,8 +678,9 @@ Raise_Exception(E'Identity, Message => @RI{implementation-defined-string});
 Exception_Identity returns the identity of the exception of the
 occurrence.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00378-01]}
-The Exception_Name functions return the full expanded name of the
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00378-01],ARef=[AI95-00400-01]}
+The @Chg{Version=[2],New=[Wide_@!Wide_@!Exception_Name],Old=[Exception_Name]}
+functions return the full expanded name of the
 exception, in upper case, starting with a root library unit.
 @Chg{Version=[2],New=[The returned string has lower bound 1.],Old=[]}
 For an exception declared immediately within package Standard,
@@ -677,18 +688,34 @@ the @nt{defining_@!identifier} is returned.
 The result is implementation defined if the exception is declared within
 an unnamed @nt{block_statement}.
 @begin{Ramification}
-See the @ImplPermName below.
+  See the @ImplPermName below.
 @end{Ramification}
 @begin{Honest}
-This name, as well as each @nt{prefix} of it,
-does not denote a @nt{renaming_declaration}.
+  This name, as well as each @nt{prefix} of it,
+  does not denote a @nt{renaming_declaration}.
 @end{Honest}
-@ImplDef{The result of Exceptions.Exception_Name for types declared within
-an unnamed @nt{block_statement}.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[The result of @Chg{Version=[2],
+New=[Exceptions.@!Wide_@!Wide_@!Exception_@!Name],Old=[Exceptions.@!Exception_@!Name]}
+for @Chg{Version=[2],New=[exceptions],Old=[types]} declared within
+an unnamed @nt{block_statement}.]}
 @begin{Ramification}
-Note that we're talking about the name of the exception,
-not the name of the occurrence.
+  Note that we're talking about the name of the exception,
+  not the name of the occurrence.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00400-01]}
+@ChgAdded{Version=[2],Text=[The functions Exception_Name (respectively,
+Wide_Exception_Name) return the same sequence of graphic characters as that
+defined for Wide_Wide_Exception_Name, if all the graphic characters are defined
+in Character (respectively, Wide_Character); otherwise, the sequence of
+characters is implementation defined, but no shorter than that returned by
+Wide_Wide_Exception_Name for the same value of the argument. In any case, the
+lower bound of the returned string is 1.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[
+The sequence of characters of the value returned by Exceptions.Exception_Name
+(respectively, Exceptions.Wide_Exception_Name) when some of the graphic
+characters of Exceptions.Wide_Wide_Exception_Name are not defined in Character
+(respectively, Wide_Character).],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00378-01]}
 Exception_Information returns implementation-defined information
@@ -965,50 +992,67 @@ contains such a character.
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
-The Identity attribute of exceptions is new, as is the package
-Exceptions.
+  The Identity attribute of exceptions is new, as is the package
+  Exceptions.
 @end{Extend83}
 
 @begin{Inconsistent95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00241-01]}
-@ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
-Exception_Identity of an Exception_Occurrence now is
-defined to return Null_Id for Null_Occurrence, rather than raising
-Constraint_Error. This provides a simple way to test for Null_Occurrence.
-We expect that programs that need Constraint_Error raised will be very rare;
-they can be easily fixed by explicitly testing for Null_Id or by using
-Exception_Name instead.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00241-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  Exception_Identity of an Exception_Occurrence now is
+  defined to return Null_Id for Null_Occurrence, rather than raising
+  Constraint_Error. This provides a simple way to test for Null_Occurrence.
+  We expect that programs that need Constraint_Error raised will be very rare;
+  they can be easily fixed by explicitly testing for Null_Id or by using
+  Exception_Name instead.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
-Raise_Exception now raises Constraint_Error if passed Null_Id. This means
-that it always raises an exception, and thus we can apply pragma No_Return to
-it. We expect that programs that call Raise_Exception with Null_Id will be
-rare, and programs that does that and expect no exception to be raised will be
-rarer; such programs can be easily fixed by explicitly testing for Null_Id
-before calling Raise_Exception.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  Raise_Exception now raises Constraint_Error if passed Null_Id. This means
+  that it always raises an exception, and thus we can apply pragma No_Return to
+  it. We expect that programs that call Raise_Exception with Null_Id will be
+  rare, and programs that does that and expect no exception to be raised will be
+  rarer; such programs can be easily fixed by explicitly testing for Null_Id
+  before calling Raise_Exception.]}
 @end{Inconsistent95}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01],ARef=[AI95-00400-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Functions Wide_Exception_Name and Wide_Wide_Exception_Name
+  are newly added to Ada.Exceptions. If Ada.Exceptions is referenced in a
+  @nt{use_clause}, and an entity @i<E> with the same @nt{defining_identifier}
+  as a new entity in Ada.Exceptions is defined in a
+  package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
+  longer be use-visible, resulting in errors. This should be rare and is easily
+  fixed if it does occur.]}
+@end{Incompatible95}
+
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The package Ada.Exceptions is preelaborated, and types Exception_Id and
-Exception_Occurrence have preelaborable initialization, allowing this package
-to be used in preelaborated units.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The package Ada.Exceptions is preelaborated, and types Exception_Id and
+  Exception_Occurrence have preelaborable initialization, allowing this package
+  to be used in preelaborated units.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
-@ChgAdded{Version=[2],Text=[The meaning of Exception_Message is reworded to
-reflect that the string can come from a @nt{raise_statement} as well as a
-call of Raise_Exception.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
+  @ChgAdded{Version=[2],Text=[The meaning of Exception_Message is reworded to
+  reflect that the string can come from a @nt{raise_statement} as well as a
+  call of Raise_Exception.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00378-01]}
-@ChgAdded{Version=[2],Text=[We now define the lower bound of the string
-returned from
-Exception_Name, Exception_Message, and Exception_Information. This makes
-working with the returned string easier, and is consistent with many other
-string-returning functions in Ada.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00378-01]}
+  @ChgAdded{Version=[2],Text=[We now define the lower bound of the string
+  returned from
+  Exception_Name, Exception_Message, and Exception_Information. This makes
+  working with the returned string easier, and is consistent with many other
+  string-returning functions in Ada.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00400-01]}
+  @ChgAdded{Version=[2],Text=[Added Wide_Exception_Name and
+  Wide_Wide_Exception_Name
+  because identifiers can now contain characters outside of Latin-1.]}
 @end{DiffWord95}
 
 
