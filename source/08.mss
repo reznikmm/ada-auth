@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/26 05:03:27 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 @redundant[
@@ -1814,9 +1814,9 @@ A @nt{generic_renaming_declaration} is used to rename a generic unit.
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()
+@tabclear()@tabset(P22)
 @Syn{lhs=<generic_renaming_declaration>,rhs="
-    @key{generic package}       @^@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_package_}@Syn2{name};
+    @key{generic package}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_package_}@Syn2{name};
   | @key{generic procedure}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_procedure_}@Syn2{name};
   | @key{generic function}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_function_}@Syn2{name};"}
 @end{Syntax}

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/26 05:03:27 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -48,15 +48,16 @@ no other @nt<statement>.  A @nt<compound_statement> can enclose
 @Syn{lhs=<statement>,rhs="
    {@Syn2{label}} @Syn2{simple_statement} | {@Syn2{label}} @Syn2{compound_statement}"}
 
-@tabclear()
+@tabclear()@tabset(P31)
 @Syn{lhs=<simple_statement>,rhs="@Syn2{null_statement}
-   | @Syn2{assignment_statement}              @^| @Syn2{exit_statement}
+   | @Syn2{assignment_statement} @\| @Syn2{exit_statement}
    | @Syn2{goto_statement} @\| @Syn2{procedure_call_statement}
    | @Syn2{return_statement} @\| @Syn2{entry_call_statement}
    | @Syn2{requeue_statement} @\| @Syn2{delay_statement}
    | @Syn2{abort_statement} @\| @Syn2{raise_statement}
    | @Syn2{code_statement}"}
 
+@tabclear()@tabset(P31)
 @Syn{lhs=<compound_statement>,rhs="
      @Syn2{if_statement} @\| @Syn2{case_statement}
    | @Syn2{loop_statement}  @\| @Syn2{block_statement}
@@ -752,26 +753,26 @@ given explicitly.
 
 @begin{Examples}
 @i{Examples of case statements:}
-@tabclear()
 @begin{Example}
+@tabclear()@tabset(P22)
 @key[case] Sensor @key[is]
-   @key[when] Elevation  @^=> Record_Elevation(Sensor_Value);
+   @key[when] Elevation @\=> Record_Elevation(Sensor_Value);
    @key[when] Azimuth@\=> Record_Azimuth  (Sensor_Value);
    @key[when] Distance@\=> Record_Distance (Sensor_Value);
    @key[when] @key[others]@\=> @key[null];
 @key[end] @key[case];
 
-@tabclear()
+@tabclear()@tabset(P22)
 @key[case] Today @key[is]
-   @key[when] Mon        @^=> Compute_Initial_Balance;
+   @key[when] Mon@\=> Compute_Initial_Balance;
    @key[when] Fri@\=> Compute_Closing_Balance;
    @key[when] Tue .. Thu@\=> Generate_Report(Today);
    @key[when] Sat .. Sun@\=> @key[null];
 @key[end] @key[case];
 
-@tabclear()
+@tabclear()@tabset(P16)
 @key[case] Bin_Number(Count) @key[is]
-   @key[when] 1      @^=> Update_Bin(1);
+   @key[when] 1@\=> Update_Bin(1);
    @key[when] 2@\=> Update_Bin(2);
    @key[when] 3 | 4@\=>
       Empty_Bin(1);

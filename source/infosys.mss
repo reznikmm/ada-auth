@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/26 05:03:28 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/26 05:03:28 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -223,14 +223,13 @@ output string.  The picture String symbols fall into several categories
 based on their effect on the edited output string:
 @TabClear()
 @begin{Display}
-@TabSet{2inches, +0.5inches, +0.5inches, +0.5inches, +0.5inches,
-+0.5inches}
-     Decimal Digit: @\'9'
-     Radix Control: @\'.' @\'V'
-     Sign Control: @\'+' @\'-' @\'<' @\'>' @\"CR" @\"DB"
-     Currency Control: @\'$' @\'#'
-     Zero Suppression: @\'Z' @\'*'
-     Simple Insertion: @\'_' @\'B' @\'0' @\'/'
+@TabSet{3, 21, 27, 33, 39, 45, 51}
+@\Decimal Digit: @\'9'
+@\Radix Control: @\'.' @\'V'
+@\Sign Control: @\'+' @\'-' @\'<' @\'>' @\"CR" @\"DB"
+@\Currency Control: @\'$' @\'#'
+@\Zero Suppression: @\'Z' @\'*'
+@\Simple Insertion: @\'_' @\'B' @\'0' @\'/'
 @end{Display}
 
 The entries are not case-sensitive.  Mixed- or lower-case forms

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/26 05:03:27 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1095,9 +1095,9 @@ but the declaration of Bool_4 calls "="@-{5}.
 @begin{Examples}
 @i{Examples of generic instantiations (see @RefSecNum{Generic Declarations}):}
 @begin{Example}
-@tabclear()
+@tabclear()@tabset(P49)
 @key[procedure] Swap @key[is] @key[new] Exchange(Elem => Integer);
-@key[procedure] Swap @key[is] @key[new] Exchange(Character);  @^--@i{  Swap is overloaded }
+@key[procedure] Swap @key[is] @key[new] Exchange(Character); @\--@i{  Swap is overloaded }
 @key[function] Square @key[is] @key[new] Squaring(Integer); @\--@i{  "*" of Integer used by default}
 @key[function] Square @key[is] @key[new] Squaring(Item => Matrix, "*" => Matrix_Product);
 @key[function] Square @key[is] @key[new] Squaring(Matrix, Matrix_Product); --@i{ same as previous    }
@@ -1714,9 +1714,9 @@ and may be definite or indefinite.]
 
 @begin{StaticSem}
 The class determined for a formal private type is as follows:
-@TabClear{}
+@TabClear{}@Tabset(P32)
 @begin{Display}
-@i(Type Definition)                               @^@i(Determined Class)
+@i(Type Definition) @\@i(Determined Class)
 
 @key{limited private} @\the class of all types
 @key{private} @\the class of all nonlimited types

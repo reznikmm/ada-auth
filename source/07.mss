@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/26 05:03:27 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @begin{Intro}
 @redundant[
@@ -1671,7 +1671,7 @@ or Finalize is applied to the containing object.
 @begin{StaticSem}
 The following language-defined library package exists:
 @begin{Example}
-@tabclear()
+@tabclear()@tabset(P22)
 @ChildUnit{Parent=[Ada],Child=[Finalization],Expanded=[Ada.Finalization]}
 @key[package] Ada.Finalization @key[is]
     @key[pragma] Preelaborate(Finalization);
@@ -1679,15 +1679,15 @@ The following language-defined library package exists:
 @LangDefType{Package=[Ada.Finalization],Type=[Controlled]}
     @key[type] Controlled @key[is abstract tagged private];
 
-    @key(procedure) Initialize@^(Object : @key(in out) Controlled);
+@tabclear()@tabset(P22)
+    @key(procedure) Initialize@\(Object : @key(in out) Controlled);
     @key(procedure) Adjust@\(Object : @key(in out) Controlled);
     @key(procedure) Finalize@\(Object : @key(in out) Controlled);
 
 @LangDefType{Package=[Ada.Finalization],Type=[Limited_Controlled]}
     @key[type] Limited_Controlled @key[is abstract tagged limited private];
 
-@tabclear()
-    @key(procedure) Initialize@^(Object : @key(in out) Limited_Controlled);
+    @key(procedure) Initialize@\(Object : @key(in out) Limited_Controlled);
     @key(procedure) Finalize@\(Object : @key(in out) Limited_Controlled);
 @key(private)
     ... -- @i{not specified by the language}

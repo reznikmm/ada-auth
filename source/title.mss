@@ -1,61 +1,96 @@
 @Part(title, Root="ada.mss")
 
-@PageHeading(Immediate)
-@PageFooting(Immediate)
-
-@Define(I2Title, Copy TitlePage, Sink 8.5in)
-@Case{Device,
-    Postscript=<@Modify(I2Title, Font HeadingFont, PageBreak Off)>}
-
-@Define(I2TBox, Copy TitleBox, Fixed 3.5inches)
-
-@Define(I2ISO, FlushLeft)
-@Case{Device,
-    Postscript=<@Modify(I2ISO, Font HeadingFont, Fixed 2inches, Size 6, Spread 2points)>,
-    else=<>}
-
-@Define(I2Copyright, FlushLeft)
-@Case{Device,
-    Postscript=<@Modify(I2Copyright, Font BodyFont, Fixed 10inches)>,
-    else=<@Modify(I2Copyright, Fill)>}
-
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2000/05/25 00:56:00 $}
-@begin(I2Title)
-@begin{FlushRight, Fixed 0.75inch}
-@HelveticaBold{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)
-@end{FlushRight}
+@comment{$Revision: 1.7 $ $Date: 2000/05/26 05:03:28 $}
 
-@begin{I2ISO}
-INTERNATIONAL ORGANIZATION FOR STANDARDIZATION
-INTERNATIONAL ELECTROTECHNICAL COMMISSION
-@end{I2ISO}
+@begin{WithoutParanum}
+@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@chg{New=[ with COR.1:2000], Old=[]}}}}
 
-@begin(I2TBox)
-@begin{MajorHeading, FlushLeft}
-Information technology @Em Programming languages @Em Ada
-@end{MajorHeading}
-@begin{FlushLeft}
-[Revision of first edition (ISO 8652:1987)]
-@end{FlushLeft}>}
+@ @*
+@ @*
+@ @*
+
+@swiss{@shrink{@shrink{@shrink{INTERNATIONAL ORGANIZATION FOR STANDARDIZATION}}}}
+
+@swiss{@shrink{@shrink{@shrink{INTERNATIONAL ELECTROTECHNICAL COMMISSION}}}}}
+
+@ @*
+@ @*
+
+@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Information technology @Em Programming languages @Em Ada}}}}}}}
+
+@ @;@comment{A dummy paragraph containing just a blank}
+
+@Swiss{[Revision of first edition (ISO 8652:1987)]}
+
+@ @*
 
 @begin{NotISO}
-@Heading{@Value{DocumentName}}
+@begin{RMOnly}
+@Heading{Ada Reference Manual}
+@end{RMOnly}
+@begin{AARMOnly}
+@Heading{Annotated Ada Reference Manual}
+@end{AARMOnly}
+
+@ @;@comment{A dummy paragraph containing just a blank}
+
+@center{@chg{New=[@Swiss<with Technical Corrigendum 1>], Old=[]}}
 @end{NotISO}
 
-Language and Standard Libraries
+@ @;@comment{A dummy paragraph containing just a blank}
 
-@begin{NotISO}
-Version @Value(Version)
-@Value(Date)
-@end{NotISO}
+@center{@Swiss{Language and Standard Libraries}}
 
-@Case{Device,
-    File=<@BlankSpace[4lines]
-          @I2Copyright[@Value[CopyrightText]]
+@Comment{The following puts the copyright near the bottom of the page}
+@ @*@*@*@*@*@*@*@*@*@*
 
->,
-    else=<@I2Copyright{Copyright @Latin1(169) 1992,1993,1994,1995@:  Intermetrics, Inc.}>}
-@end(I2TBox)
-@end(I2Title)
+Copyright @Latin1(169) 1992,1993,1994,1995  Intermetrics, Inc.
+
+Copyright @Latin1(169) 2000  The MITRE Corporation, Inc.
+@end(WithoutParanum)
+
 @NewPage
+@Comment{For ISO version, the back of the title page is blank, and the
+copyright ought to appear at the bottom of the table of contents. [But that
+probably is changed by now.}
+@begin(WithoutParanum)
+@begin{NotISO}
+@Comment{The following puts the copyright near the bottom of the page}
+@ @*@*@*@*@*
+
+Copyright @Latin1(169) 1992, 1993, 1994, 1995, Intermetrics, Inc.
+
+This copyright is assigned to the U.S. Government.  All rights reversed.
+
+This document may be copied, in whole or in part, in any form or by any means,
+as is or with alterations, provided that (1) alterations are clearly marked as
+alterations and (2) this copyright notice is included unmodified in any copy.
+Compiled copies of standard library units and examples need not contain this
+copyright notice so long as the notice is included in all copies of source code
+and documentation.
+
+@ThinLine
+
+Alterations copyright @Latin1(169) 2000, The MITRE Corporation.  All Rights Reserved.
+
+This document may be copied, in whole or in part, in any form or by any means,
+as is, or with alterations, provided that (1) alterations are clearly marked as
+alterations and (2) this copyright notice is included unmodified in any copy.
+Any other use or distribution of this document is prohibited without the prior
+express permission of MITRE.
+
+You use this document on the condition that you indemnify and hold harmless
+MITRE, its Board of Trustees, officers, agents, and employees, from any and all
+liability or damages to yourself or your hardware or software, or third parties,
+including attorneys' fees, court costs, and other related costsand expenses,
+arising out of your use of this document irrespective of the cause of said
+liability.
+
+MITRE MAKES THIS DOCUMENT AVAILABLE ON AN "AS IS" BASIS AND MAKES NO WARRANTY,
+EXPRESS OR IMPLIED, AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY,
+OR FUNCTIONING OF THIS DOCUMENT.  IN NO EVENT WILL MITRE BE LIABLE FOR ANY
+GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
+EVEN IF MITRE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+@end{NotISO}
+@end(WithoutParanum)

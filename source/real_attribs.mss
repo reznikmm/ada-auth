@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/26 05:03:28 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.12 $}
+@comment{$Revision: 1.13 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -174,20 +174,20 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Exponent>,
   Text=[S'Exponent denotes a function with the following
    specification:
-@begin(Example)
+@begin(DescExample)
 @key(function) S'Exponent (@i(X) : @i(T))
   @key(return) @i(universal_integer)
-@end(Example)
+@end(DescExample)
 
    @NoPrefix@;The function yields the normalized exponent of @i{X}.]}
 
 @Attribute{Prefix=<S>, AttrName=<Fraction>,
   Text=[S'Fraction denotes a function with the following
    specification:
-@begin(Example)
+@begin(DescExample)
 @key(function) S'Fraction (@i(X) : @i(T))
   @key(return) @i(T)
-@end(Example)
+@end(DescExample)
 
    @NoPrefix@;The function yields the value @Math(X @Times T@r('Machine_Radix)@Up(-k)), where
    @Math(k) is the normalized exponent of @i(X).  A zero result@Redundant(, which
@@ -212,11 +212,11 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Compose>,
   Text=[S'Compose denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Compose (@i{Fraction} : @i{T};
                     @i{Exponent} : @i{universal_integer})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    @NoPrefix@;Let @Math{v} be the value @Math{Fraction @Times
@@ -244,11 +244,11 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Scaling>,
   Text=[S'Scaling denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Scaling (@i{X} : @i{T};
                     @i{Adjustment} : @i{universal_integer})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    @NoPrefix@;Let @Math{v} be the value @Math{X @Times T@r('Machine_Radix)@Up{Adjustment}}.
@@ -275,10 +275,10 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Floor>,
   Text=[S'Floor denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Floor (@i{X} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
    @NoPrefix@;The function yields the value @Math{@Floor{X}},
    i.e., the largest (most positive) integral value less than or equal to
@@ -290,10 +290,10 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Ceiling>,
   Text=[S'Ceiling denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Ceiling (@i{X} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
    @NoPrefix@;The function yields the value @Math{@Ceiling{X}},
    i.e., the smallest (most negative) integral value greater than or equal to
@@ -305,10 +305,10 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Rounding>,
   Text=[S'Rounding denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Rounding (@i{X} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
    @NoPrefix@;The function yields the integral value nearest to @i{X},
    rounding away from zero if @i{X} lies exactly halfway between two integers.
@@ -317,10 +317,10 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Unbiased_Rounding>,
   Text=[S'Unbiased_Rounding denotes a function with
    the following specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Unbiased_Rounding (@i{X} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
    @NoPrefix@;The function yields the integral value nearest to @i{X},
    rounding toward the even integer if @i{X} lies exactly halfway between
@@ -330,10 +330,10 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Truncation>,
   Text=[S'Truncation denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Truncation (@i{X} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
    @NoPrefix@;The function yields the value @Math{@Ceiling{X}} when @i{X} is negative,
    and @Math{@Floor{X}} otherwise.  A zero result has the sign of @i{X} when
@@ -342,10 +342,10 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Remainder>,
   Text=[S'Remainder denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Remainder (@i{X}, @i{Y} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    @NoPrefix@;For nonzero @i{Y}, let @Math{v} be the value
@@ -369,10 +369,10 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Adjacent>,
   Text=[S'Adjacent denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Adjacent (@i{X}, @i{Towards} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    @NoPrefix@;If @Math{Towards @Thin = @Thin X}, the function yields @i{X}; otherwise, it
@@ -391,10 +391,10 @@ S of a floating point type @i{T}.
 @Attribute{Prefix=<S>, AttrName=<Copy_Sign>,
   Text=[S'Copy_Sign denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Copy_Sign (@i{Value}, @i{Sign} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    @NoPrefix@;If the value of @i{Value} is nonzero, the function yields a result whose
@@ -417,11 +417,11 @@ is outside the base range of S.
 @Attribute{Prefix=<S>, AttrName=<Leading_Part>,
   Text=[S'Leading_Part denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Leading_Part (@i{X} : @i{T};
                          @i{Radix_Digits} : @i{universal_integer})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
    @NoPrefix@;Let @Math{v} be the value @Math{T@r('Machine_Radix)@Up{k-Radix_Digits}},
    where @Math{k} is the normalized exponent of @i{X}.  The function yields
@@ -454,10 +454,10 @@ is outside the base range of S.
 @Attribute{Prefix=<S>, AttrName=<Machine>,
   Text=[S'Machine denotes a function with the following
    specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Machine (@i{X} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    @NoPrefix@;If @i{X} is a machine number of the type @i{T}, the function yields @i{X};
@@ -560,10 +560,10 @@ a floating point type @i{T}.
 
 @Attribute{Prefix=<S>, AttrName=<Model>,
   Text=[S'Model denotes a function with the following specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Model (@i{X} : @i{T})
   @key(return) @i{T}
-@end{Example}
+@end{DescExample}
 
    @NoPrefix@;If the Numerics Annex is not supported,
    the meaning of this attribute is implementation

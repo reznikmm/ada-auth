@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2000/05/25 00:56:00 $}
+@comment{$Revision: 1.15 $ $Date: 2000/05/26 05:03:28 $}
 
 @begin{Intro}
 
@@ -463,7 +463,7 @@ See @RefSecNum{Interface to Other Languages}.
 The Specialized Needs Annexes have been added
 to provide specific support for certain
 application areas:
-@begin{Itemize}
+@begin{InnerItemize}
 @RefSec{Systems Programming}
 
 @RefSec{Real-Time Systems}
@@ -475,7 +475,7 @@ application areas:
 @RefSec{Numerics}
 
 @RefSec{Safety and Security}
-@end{Itemize}
+@end{InnerItemize}
 @end{Itemize}
 @end{Intro}
 

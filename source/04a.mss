@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/05/25 00:56:00 $}
+@Comment{$Date: 2000/05/26 05:03:27 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -941,7 +941,7 @@ rules for expanded names (see @RefSecNum{Selected Components}).
 @i(Examples of literals:)
 @begin{Example}
 @tabclear()@tabset(P16)
-3.14159_26536    @^@i[--  a real literal]
+3.14159_26536 @\@i[--  a real literal]
 1_345 @\@i[--  an integer literal]
 'A' @\@i[--  a character literal]
 "Some Text" @\@i[--  a string literal ]
@@ -2364,13 +2364,13 @@ The conventional meaning of the logical operators is given by the
 following truth table:
 @begin(Display)
 @TabClear()
-@TabDivide(7)
-@=A@=B@=(A @key(and) B)@=(A @key(or) B)@=(A @key(xor) B)@=
+@TabSet(P16, P32, P48, P64, P80)
+@\@ @ A@\@ @ B@\(A @key(and) B)@\(A @key(or) B)@\(A @key(xor) B)
 
-        True@\        True@\        True@\        True@\        False
-        True@\        False@\        False@\        True@\        True
-        False@\        True@\        False@\        True@\        True
-        False@\        False@\        False@\        False@\        False
+@\True  @\True  @\True  @\True  @\False
+@\True  @\False @\False @\True  @\True
+@\False @\True  @\False @\True  @\True
+@\False @\False @\False @\False @\False
 @end(Display)
 @end{Notes}
 

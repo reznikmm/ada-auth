@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/26 05:03:28 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/26 05:03:28 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -332,13 +332,13 @@ principal branch:
    (@Math{-@r[Cycle]/2.0} to @Math{@r[Cycle]/2.0}, if the parameter Cycle is
    specified).  When the point represented by the parameter X lies on the
    negative real axis, the result approximates
-   @begin{Itemize}
+   @begin{InnerItemize}
       @Math{@Pi} (resp., @Math{-@Pi}) when the sign of the imaginary
       component of X is positive (resp., negative), if Real'Signed_Zeros is
       True;
 
       @Math{@Pi}, if Real'Signed_Zeros is False.
-   @end{Itemize}
+   @end{InnerItemize}
 
    Because a result lying on or near one of the axes may not be exactly
    representable, the approximation inherent in computing the result may place
@@ -769,13 +769,13 @@ raised:
 
    When the parameter X has the value @Math{-1.0}, the Sqrt function yields the
    result
-   @begin{Itemize}
+   @begin{InnerItemize}
       @Math{i} (resp., @Math{-i}), when the sign of the imaginary component of
       X is positive (resp., negative), if Complex_Types.Real'Signed_Zeros is
       True;
 
       @Math{i}, if Complex_Types.Real'Signed_Zeros is False;
-   @end{Itemize}
+   @end{InnerItemize}
 
    the Log function yields an imaginary result; and the Arcsin and Arccos
    functions yield a real result.

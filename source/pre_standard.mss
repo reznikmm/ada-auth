@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/26 05:03:28 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:07 $}
+@Comment{$Date: 2000/05/26 05:03:28 $}
 
 @LabeledClause{The Package Standard}
 
@@ -177,13 +177,12 @@ the visible part of package Standard.}
 @comment{blank line}
       --@i{ The declaration of type Character is based on the standard ISO 8859-1 character set.}
 
+@tabclear()@tabset(4, 8, 12, 16, 22, 26, 30, 34, 40)
       --@i{ There are no character literals corresponding to the positions for control characters.}
       --@i{ They are indicated in italics in this definition.  See @refsecnum[Character Types].}
 @comment[blank line]
 @LangDefType{Package=[Standard],Type=[Character]}
    @key[type] Character @key[is]
-@tabclear()
-      @^      @^      @^      @^         @^      @^      @^      @^         @^
      (@i[nul], @\@i[soh], @\@i[stx], @\@i[etx], @\@i[eot], @\@i[enq], @\@i[ack], @\@i[bel], @\--@i{0 (16#00#) .. 7 (16#07#)}]
       @i[bs], @\@i[ht], @\@i[lf], @\@i[vt], @\@i[ff], @\@i[cr], @\@i[so], @\@i[si], @\--@i{8 (16#08#) .. 15 (16#0F#)}]
 @comment{blank line}

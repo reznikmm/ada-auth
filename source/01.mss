@@ -1,64 +1,41 @@
 @Part(01, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:04 $}
-@PageOneFootings{}
-
 @PrefaceSection{} @Comment{Go to odd page.}
 
 @begin{Comment}
 The following stuff is to get the "INTERNATIONAL STANDARD" title between
-two horizontal rules at the top of page 1.
+two horizontal rules at the top of page 1. (RLB-The following is a hack:
+I probably ought to add a style just for this purpose)
 @end{Comment}
 
-@Case{Device,
-    Postscript=<
-@Define{BigInternationalStandard, Font HeadingFont, FaceCode B}
-@DefineLineType{ThickLine, Weight 200}
-@DefineBox{TwoHorizontalLinesBox, Horizontal ThickLine}
-@Define(ISBoxMargins,
-        boxTM 6 pts,boxBM 4 pts,
-        boxLM 4 pts,boxRM 4 pts)
-@Define{TwoHorizontalLines, BoxType TwoHorizontalLinesBox, use ISBoxMargins}
-@begin{TwoHorizontalLines, Fixed 0.41inch}
-@BigInternationalStandard{INTERNATIONAL STANDARD}
-@end{TwoHorizontalLines}
-        >,
-    else=<
-@begin{DisplayWithoutParaNum}
-----------------------
-INTERNATIONAL STANDARD
-----------------------
-@end{DisplayWithoutParaNum}
->}
+@begin{WithoutParanum}
+@thickline
 
-@begin{Comment}
-The following stuff is to get the title of the standard in just before
-the start of Section 1.  The @em command doesn't work when the FaceCode
-is B, so we split the title in pieces.
-Note that we don't want a page break before Section 1, "General".
-@end{Comment}
+@tabclear()@tabset(P45)
+@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@chg{New=[ with COR.1:2000], Old=[]}}]>
 
-@Define(StandardTitle,Hyphenation off,Spacing 1.2,
-         Need 1in,Above 2,Below 2,
-         TabExport False, FlushLeft)
-@Case{Device,
-  Postscript=
-    "@Modify(StandardTitle, Size 20,Font HeadingFont,FaceCode B)",
-  else=
-    ""}
+@thickline
 
-@BlankSpace{1.25inch}
-@begin{StandardTitle}
-Information technology @Em Programming
-Languages @Em Ada
-@end{StandardTitle}
-@BlankSpace{0.5inch}
+@ @*@comment{Some vertical whitespace}
+@ @*
+@ @*
 
-@LabeledSection{General}
-@Comment{$Date: 2000/05/19 04:12:04 $}
+@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Information technology
+@Em Programming}}}}}}}}}}
+
+@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Languages @Em Ada}}}}}}}}}}
+
+@ @*@comment{Some vertical whitespace}
+@ @*
+@ @*
+
+@end{WithoutParanum}
+
+@LabeledSectionNoBreak{General}
+@Comment{$Date: 2000/05/26 05:03:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -664,7 +641,8 @@ This material is informative.
 Examples illustrate the possible forms of the constructs described.
 This material is informative.
 @begin{Discussion}
-@BlankSpace(0.25 inch)
+@ @*@comment{Insert blanklines, because the original author's want it}
+@ @*
 The next three headings list all language changes between Ada 83
 and Ada 95.  Language changes are any change that changes the set of
 text strings that are legal Ada programs, or changes the meaning of
@@ -722,7 +700,8 @@ The vast majority of language changes fall into this category.
 This is not part of the definition of the language,
 and does not appear in the RM95.
 
-@BlankSpace(0.25 inch)
+@ @*@comment{Insert blanklines, because the original author's want it}
+@ @*
 As explained above,
 the next heading does not represent any language change:
 @end{Extend83}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/05/23 04:52:39 $}
+@Comment{$Date: 2000/05/26 05:03:27 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 @redundant[
@@ -4476,10 +4476,8 @@ the following is a possible use:
 
 ...
 
-@tabclear{}
-MR_Pool : Mark_Release_Pool_Type (@^Pool_Size => 2000,
- @\Block_Size => 100);
-@tabclear{}
+MR_Pool : Mark_Release_Pool_Type (Pool_Size => 2000,
+                                  Block_Size => 100);
 
 @key[type] Acc @key[is] @key[access] ...;
 @key[for] Acc'Storage_Pool @key[use] MR_Pool;
@@ -5047,21 +5045,21 @@ the following attributes are defined.
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Write>,
   Text=<S'Write denotes a procedure with the following specification:
-@begin{Example}
+@begin{DescExample}
 @key(procedure) S'Write(
    @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
    @i{Item} : @key{in} @i(T))
-@end{Example}
+@end{DescExample}
 
 @noprefix@;S'Write writes the value of @i{Item} to @i{Stream}.>}
 
 @Attribute{Prefix=<S>, AttrName=<Read>,
   Text=<S'Read denotes a procedure with the following specification:
-@begin{Example}
+@begin{DescExample}
 @key(procedure) S'Read(
    @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
    @i{Item} : @key{out} @i(T))
-@end{Example}
+@end{DescExample}
 
 @noprefix@;S'Read reads the value of @i{Item} from @i{Stream}.>}
 @end{Description}
@@ -5110,22 +5108,22 @@ For @PrefixType{every subtype S'Class of a class-wide type
 @Attribute{Prefix=<S'Class>, AttrName=<Write>,
   Text=<S'Class'Write denotes a procedure with the following
 specification:
-@begin{Example}
+@begin{DescExample}
 @key(procedure) S'Class'Write(
    @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
    @i{Item}   : @key{in} @i(T)'Class)
-@end{Example}
+@end{DescExample}
 
 @noprefix@;Dispatches to the subprogram denoted by the Write attribute of
 the specific type identified by the tag of Item.>}
 
 @Attribute{Prefix=<S'Class>, AttrName=<Read>,
   Text=<S'Class'Read denotes a procedure with the following specification:
-@begin{Example}
+@begin{DescExample}
 @key(procedure) S'Class'Read(
    @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
    @i{Item} : @key{out} @i(T)'Class)
-@end{Example}
+@end{DescExample}
 
 @noprefix@;Dispatches to the subprogram denoted by the Read attribute of
 the specific type identified by the tag of Item.>}
@@ -5156,11 +5154,11 @@ the following attributes are defined.
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Output>,
   Text=<S'Output denotes a procedure with the following specification:
-@begin{Example}
+@begin{DescExample}
 @key(procedure) S'Output(
    @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
    @i{Item} : @key{in} @i(T))
-@end{Example}
+@end{DescExample}
 
 @noprefix@;S'Output writes the value of @i{Item} to @i{Stream}, including
 any bounds or discriminants.>}
@@ -5171,11 +5169,11 @@ first subtype is constrained.
 
 @Attribute{Prefix=<S>, AttrName=<Input>,
   Text=<S'Input denotes a function with the following specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Input(
    @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)
    @key(return) @i(T)
-@end{Example}
+@end{DescExample}
 
 @noprefix@;S'Input reads and returns one value from
 @i{Stream}, using any bounds or discriminants written by a corresponding
@@ -5204,11 +5202,11 @@ For @PrefixType{every subtype S'Class of a class-wide type
 @Attribute{Prefix=<S'Class>, AttrName=<Output>,
   Text=<S'Class'Output denotes a procedure with the following
 specification:
-@begin{Example}
+@begin{DescExample}
 @key(procedure) S'Class'Output(
    @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
    @i{Item}   : @key{in} @i(T)'Class)
-@end{Example}
+@end{DescExample}
 
 @noprefix@;First writes the external tag of @i{Item} to @i{Stream}
 (by calling String'Output(Tags.External_Tag(@i{Item}'Tag) @em
@@ -5218,11 +5216,11 @@ the specific type identified by the tag.>}
 
 @Attribute{Prefix=<S'Class>, AttrName=<Input>,
   Text=<S'Class'Input denotes a function with the following specification:
-@begin{Example}
+@begin{DescExample}
 @key(function) S'Class'Input(
    @i{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)
    @key{return} @i(T)'Class
-@end{Example}
+@end{DescExample}
 
 @noprefix@;First reads the external tag from @i{Stream} and determines
 the corresponding internal tag

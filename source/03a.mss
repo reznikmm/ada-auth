@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/25 00:56:00 $}
+@Comment{$Date: 2000/05/26 05:03:26 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -688,7 +688,7 @@ operands to produce an effect, or yield a result, or both.
 @noprefix@;These language-defined classes are organized like this:
 @begin{Display}
 @TabClear{}
-@TabSet{.25in,+.25in,+.25in,+.25in,+.25in,+.25in}
+@TabSet{3, 6, 9, 12, 15, 18, 21}
 all types
 @\elementary
 @\@\scalar
@@ -2805,10 +2805,10 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
 @Attribute{Prefix=<S>, AttrName=<Min>,
   Text=[S'Min denotes a function with
      the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Min(@i(Left), @i(Right) : S'Base)
   @b(return) S'Base
-@end(example)
+@end(Descexample)
 
      @NoPrefix@;The function returns the lesser of the values
      of the two parameters.]}
@@ -2826,20 +2826,20 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
 @Attribute{Prefix=<S>, AttrName=<Max>,
   Text=[S'Max denotes a function with
      the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Max(@i(Left), @i(Right) : S'Base)
   @b(return) S'Base
-@end(example)
+@end(Descexample)
 
      @NoPrefix@;The function returns the greater of the values of the two parameters.]}
 
 @Attribute{Prefix=<S>, AttrName=<Succ>,
   Text=[S'Succ denotes a function with
      the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Succ(@i(Arg) : S'Base)
   @b(return) S'Base
-@end(example)
+@end(Descexample)
 
      @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
      For an enumeration type, the function returns the value
@@ -2866,10 +2866,10 @@ S'Succ for a modular integer subtype wraps around
 @Attribute{Prefix=<S>, AttrName=<Pred>,
   Text=[S'Pred denotes a function with
      the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Pred(@i(Arg) : S'Base)
   @b(return) S'Base
-@end(example)
+@end(Descexample)
 
      @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
      For an enumeration type, the function returns the value
@@ -2896,10 +2896,10 @@ S'Pred for a modular integer subtype wraps around
 @Attribute{Prefix=<S>, AttrName=<Wide_Image>,
   Text=[S'Wide_Image denotes a function
      with the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Wide_Image(@i(Arg) : S'Base)
   @b(return) Wide_String
-@end(example)
+@end(Descexample)
 
      @NoPrefix@Defn2{Term=image, Sec=(of a value)}
      The function returns an @i(image) of the value of @i(Arg),
@@ -2992,10 +2992,10 @@ For a machine that supports negative zeros,
 @Attribute{Prefix=<S>, AttrName=<Image>,
   Text=[S'Image denotes a function with
     the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Image(@i(Arg) : S'Base)
   @b(return) String
-@end(example)
+@end(Descexample)
 
      @NoPrefix@;The function returns an image of the value of @i(Arg) as a String.]}
      The lower bound of the result is one.  The image has the
@@ -3025,10 +3025,10 @@ For a machine that supports negative zeros,
 @Attribute{Prefix=<S>, AttrName=<Wide_Value>,
   Text=[S'Wide_Value denotes a function with
      the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Wide_Value(@i(Arg) : Wide_String)
   @b(return) S'Base
-@end(example)
+@end(Descexample)
 
     @NoPrefix@;This function returns a value given an image of the value
     as a Wide_String, ignoring any leading or trailing spaces.]}
@@ -3107,10 +3107,10 @@ For a machine that supports negative zeros,
 @Attribute{Prefix=<S>, AttrName=<Value>,
   Text=[S'Value denotes a function with
      the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Value(@i(Arg) : String)
   @b(return) S'Base
-@end(example)
+@end(Descexample)
 
     @NoPrefix@;This function returns a value given an image of the value
     as a String, ignoring any leading or trailing spaces.]}
@@ -4005,20 +4005,20 @@ the following attributes are defined:
 @begin(description)
 @Attribute{Prefix=<S>, AttrName=<Pos>,
   Text=[S'Pos denotes a function with the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Pos(@i(Arg) : S'Base)
   @b(return) @i(universal_integer)
-@end(example)
+@end(Descexample)
 
      @NoPrefix@;This function returns the position number of the value of
      @i(Arg), as a value of type @i(universal_integer).]}
 
 @Attribute{Prefix=<S>, AttrName=<Val>,
   Text=[S'Val denotes a function with the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Val(@i(Arg) : @i(universal_integer))
   @b(return) S'Base
-@end(example)
+@end(Descexample)
 
      @PDefn2{Term=(evaluation), Sec=(Val)}
      @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
@@ -4927,10 +4927,10 @@ The following additional attributes are defined for
 @Attribute{Prefix=<S>, AttrName=<Round>,
   Text=[S'Round denotes a function with
      the following specification:
-@begin(example)
+@begin(Descexample)
 @b(function) S'Round(@i(X) : @i(universal_real))
   @b(return) S'Base
-@end(example)
+@end(Descexample)
 
      @NoPrefix@;The function returns the value obtained by rounding X (away
      from 0, if X is midway between two values of the type of S).]}

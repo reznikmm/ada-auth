@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2000/05/19 04:12:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2000/05/26 05:03:28 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/26 05:03:28 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -80,7 +80,6 @@ Numerics.Generic_Elementary_Functions has the following declaration:
    @key{function} Log     (X, Base     : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Exp     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} "**"    (Left, Right : Float_Type'Base)        @key{return} Float_Type'Base;
-@Hinge{}
 
    @key{function} Sin     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Sin     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
@@ -90,24 +89,21 @@ Numerics.Generic_Elementary_Functions has the following declaration:
    @key{function} Tan     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Cot     (X           : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Cot     (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-@Hinge{}
 
    @key{function} Arcsin  (X           : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Arcsin  (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Arccos  (X           : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Arccos  (X, Cycle    : Float_Type'Base)        @key{return} Float_Type'Base;
-@tabclear()
-   @key{function} Arctan  (@^Y           : Float_Type'Base;
-        @\X           : Float_Type'Base := 1.0) @key{return} Float_Type'Base;
    @key{function} Arctan  (Y           : Float_Type'Base;
-        @\X           : Float_Type'Base := 1.0;
-        @\Cycle       : Float_Type'Base)        @key{return} Float_Type'Base;
+                           X           : Float_Type'Base := 1.0) @key{return} Float_Type'Base;
+   @key{function} Arctan  (Y           : Float_Type'Base;
+                           X           : Float_Type'Base := 1.0;
+                           Cycle       : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Arccot  (X           : Float_Type'Base;
-        @\Y           : Float_Type'Base := 1.0) @key{return} Float_Type'Base;
+                           Y           : Float_Type'Base := 1.0) @key{return} Float_Type'Base;
    @key{function} Arccot  (X           : Float_Type'Base;
-        @\Y           : Float_Type'Base := 1.0;
-        @\Cycle       : Float_Type'Base)        @key{return} Float_Type'Base;
-@Hinge{}
+                           Y           : Float_Type'Base := 1.0;
+                           Cycle       : Float_Type'Base)        @key{return} Float_Type'Base;
 
    @key{function} Sinh    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Cosh    (X           : Float_Type'Base)        @key{return} Float_Type'Base;
@@ -117,7 +113,6 @@ Numerics.Generic_Elementary_Functions has the following declaration:
    @key{function} Arccosh (X           : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Arctanh (X           : Float_Type'Base)        @key{return} Float_Type'Base;
    @key{function} Arccoth (X           : Float_Type'Base)        @key{return} Float_Type'Base;
-@Hinge{}
 
 @key{end} Ada.Numerics.Generic_Elementary_Functions;
 @end{Example}

@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2000/05/25 00:56:00 $}
+@Comment{$Date: 2000/05/26 05:03:28 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.13 $}
+@comment{$Revision: 1.14 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -16,7 +16,8 @@ provided by every implementation.
 There are three root library units:
 Ada, Interfaces, and System;
 other library units are children of these:
-@*
+
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0047]}@ @;@comment{paragraph number here}
 @begin{DisplaywithoutParanum}
 @TabClear{}
 @TabSet{L2, L4, L6, L8, L10, L12, L14, L16}
@@ -34,7 +35,11 @@ other library units are children of these:
 @\@\Dynamic_Priorities @em @RefSecNum{Dynamic Priorities}
 @\@\Exceptions @em @RefSecNum{The Package Exceptions}
 @\@\Finalization @em @RefSecNum{User-Defined Assignment and Finalization}
-@\@\Interrupts @em @RefSecNum{The Package Interrupts}
+@Chg{New=[@\@\Float_Text_IO @em @RefSecNum{Input-Output for Real Types}
+@\@\Float_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output}
+@\@\Integer_Text_IO @em @RefSecNum{Input-Output for Integer Types}
+@\@\Integer_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output}
+], Old=[]}@\@\Interrupts @em @RefSecNum{The Package Interrupts}
 @\@\@\Names @em @RefSecNum{The Package Interrupts}
 @\@\IO_Exceptions @em @RefSecNum{Exceptions in Input-Output}
 @\@\Numerics @em @RefSecNum{The Numerics Packages}
@@ -43,15 +48,18 @@ other library units are children of these:
 @\@\@\Discrete_Random @em @RefSecNum{Random Number Generation}
 @\@\@\Elementary_Functions @em @RefSecNum{Elementary Functions}
 @\@\@\Float_Random @em @RefSecNum{Random Number Generation}
-@\@\@\Generic_Complex_Elementary_Functions @em
-@\@\@\@\@\@\@RefSecNum{Complex Elementary Functions}
+@\@\@\Generic_Complex_Elementary_Functions
+@\@\@\@\@\@\@em @RefSecNum{Complex Elementary Functions}
 @\@\@\Generic_Complex_Types @em @RefSecNum{Complex Types}
 @\@\@\Generic_Elementary_Functions @em @RefSecNum{Elementary Functions}
 @\@\Real_Time @em @RefSecNum{Monotonic Time}
 @\@\Sequential_IO @em @RefSecNum{The Generic Package Sequential_IO}
 @\@\Storage_IO @em @RefSecNum{The Generic Package Storage_IO}
 @\@\Streams @em @RefSecNum{The Package Streams}
-@\@\@\Stream_IO @em @RefSecNum{The Package Streams.Stream_IO}
+@\@\@\Stream_IO @em @RefSecNum{The Package Streams.Stream_IO}>
+@NewColumn
+@shrink<Standard (@i{...continued})
+@\Ada (@i{...continued})
 @\@\Strings @em @RefSecNum{The Package Strings}
 @\@\@\Bounded @em @RefSecNum{Bounded-Length String Handling}
 @\@\@\Fixed @em @RefSecNum{Fixed-Length String Handling}
@@ -62,10 +70,7 @@ other library units are children of these:
 @\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
 @\@\@\Wide_Maps @em @RefSecNum{Wide_String Handling}
 @\@\@\@\Wide_Constants @em @RefSecNum{Wide_String Handling}
-@\@\@\Wide_Unbounded @em @RefSecNum{Wide_String Handling}>
-@NewColumn
-@shrink<Standard (@i{...continued})
-@\Ada (@i{...continued})
+@\@\@\Wide_Unbounded @em @RefSecNum{Wide_String Handling}
 @\@\Synchronous_Task_Control @em @RefSecNum{Synchronous Task Control}
 @\@\Tags @em @RefSecNum{Tagged Types and Type Extensions}
 @\@\Task_Attributes @em @RefSecNum{The Package Task_Attributes}
