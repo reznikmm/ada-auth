@@ -63,6 +63,8 @@ package ARM_HTML is
     --  8/ 7/00 - RLB - Added Leading flag to Start_Paragraph.
     --  8/17/00 - RLB - Replaced "Leading" by "Space_After".
     --  8/22/00 - RLB - Added Revised_Clause_Header.
+    --  9/27/00 - RLB - Added tab emulation when in the fixed font.
+    --		- RLB - Added column emulation.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -306,6 +308,17 @@ package ARM_HTML is
 
 private
 
+    type Column_Text_Item_Type;
+    type Column_Text_Ptr is access Column_Text_Item_Type;
+    type Column_Text_Item_Type is record
+	Text : String (1..80);
+	Length : Natural;
+	Item : Natural; -- Which item.
+	End_Para : Boolean; -- True if this item is an end paragraph.
+	Next : Column_Text_Ptr;
+    end record;
+    type Column_Text_Ptrs_Type is array (1..5) of Column_Text_Ptr;
+
     type HTML_Output_Type is new ARM_Output.Output_Type with record
 	Is_Valid : Boolean := False;
 	Is_In_Paragraph : Boolean := False;
@@ -316,6 +329,7 @@ private
 	Document : ARM_Output.Document_Type;
 	Section_Name : String(1..3);
 	Char_Count : Natural := 0; -- Characters on current line.
+	Disp_Char_Count : Natural := 0; -- Displayed characters on current line.
 	Saw_Hang_End : Boolean := False; -- If we are in a hanging paragraph,
 			       -- have we seen the end of the hanging part yet?
 	Is_Bold : Boolean; -- Is the text currently bold?
@@ -325,9 +339,15 @@ private
 	Change : ARM_Output.Change_Type := ARM_Output.None;
 	Location : ARM_Output.Location_Type := ARM_Output.Normal;
 	Tab_Stops : ARM_Output.Tab_Info := ARM_Output.NO_TABS;
+	Emulate_Tabs : Boolean := False; -- Can we emulate tabs in the current style?
 
 	Is_In_Table : Boolean := False; -- Are we processing a table?
 	In_Header : Boolean := False; -- If Is_In_Table, are we processing the header?
+
+	Current_Column : Natural := 0; -- When processing 4-column+ text, the current column number.
+	Current_Item : Natural := 0; -- When processing 4-column+ text, the current item within the column.
+	Column_Text : Column_Text_Ptrs_Type := (others => null);
+		-- If we are processing 4-column+ text, the text for the columns.
     end record;
 
 end ARM_HTML;

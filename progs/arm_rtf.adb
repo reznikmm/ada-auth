@@ -83,6 +83,7 @@ package body ARM_RTF is
     --  8/23/00 - RLB - Revised widths of AARM text to be more like RM.
     --  8/31/00 - RLB - Moved paragraphs in again.
     --  9/26/00 - RLB - Added Syntax_Summary style.
+    --  9/27/00 - RLB - Cut the lower margin for the AARM pages.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -1392,7 +1393,7 @@ package body ARM_RTF is
 	if ARM_Output."=" (Output_Object.Page_Size, ARM_Output.Ada95) then
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl1440\margr900\margt1080\margb1080");
 	else
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl1800\margr1080\margt1440\margb1800");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl1800\margr1080\margt1440\margb1440");
 	end if;
 	-- Revisions:
 	if Output_Object.Includes_Changes then

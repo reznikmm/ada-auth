@@ -49,6 +49,7 @@ package body ARM_Syntax is
     --			blank lines and paragraph numbers).
     --  9/26/00 - RLB - Revised to use SyntaxDisplay format to get more
     --			control over the formating of this section.
+    --  9/27/00 - RLB - Revised XRef to decrease white space.
 
     type String_Ptr is access String;
     type Rule_Type;
@@ -286,28 +287,29 @@ package body ARM_Syntax is
 
 
 	Format_Text ("@begin(syntaxdisplay)" & Ascii.LF, "Prefix");
-	Format_Text ("@tabclear()@tabset(P4, P32)" & Ascii.LF, "Prefix");
+	Format_Text ("@tabclear()@tabset(P4, P38)" & Ascii.LF, "Prefix");
 	Format_Text ("@begin(twocol)" & Ascii.LF, "Prefix");
 	Temp := XRef_List;
 	while Temp /= null loop
 	    if Last = null or else
 		Last.Name (1..Last.Name_Len) /= Temp.Name (1..Temp.Name_Len) then
 		-- New header:
-		if Last = null then
-		    Format_Text ("@noparanum@nt{" & Temp.Name (1..Temp.Name_Len) &
-		         "}" & Ascii.LF,
-		         Temp.Name (1..Temp.Name_Len) & " header");
-		else -- End the last item.
-		    Format_Text ("@shrink{@ }" & Ascii.LF & Ascii.LF & -- The "shrink" here to decrease the space between.
-			 "@noparanum@nt{" & Temp.Name (1..Temp.Name_Len) &
-		         "}" & Ascii.LF,
-		         Temp.Name (1..Temp.Name_Len) & " header");
-		end if;
+	        Format_Text ("@noparanum@trailing@nt{" & Temp.Name (1..Temp.Name_Len) &
+		     "}" & Ascii.LF,
+		     Temp.Name (1..Temp.Name_Len) & " header");
 		Last := Temp;
 	    end if;
-	    Format_Text ("@\@nt{" & Temp.Used_In(1..Temp.Used_In_Len) & "}@\" &
-		Temp.Clause(1..Temp.Clause_Len) & Ascii.LF,
-	        Temp.Name (1..Temp.Name_Len) & " ref " & Temp.Clause(1..Temp.Clause_Len));
+	    if Temp.Next = null or else
+		Temp.Name (1..Temp.Name_Len) /= Temp.Next.Name (1..Temp.Next.Name_Len) then
+		-- Last item of a set.
+	        Format_Text ("@\@nt{" & Temp.Used_In(1..Temp.Used_In_Len) & "}@\" &
+		    Temp.Clause(1..Temp.Clause_Len) & Ascii.LF & Ascii.LF,
+	            Temp.Name (1..Temp.Name_Len) & " ref " & Temp.Clause(1..Temp.Clause_Len));
+	    else -- Not an end item.
+	        Format_Text ("@\@nt{" & Temp.Used_In(1..Temp.Used_In_Len) & "}@\" &
+		    Temp.Clause(1..Temp.Clause_Len) & Ascii.LF,
+	            Temp.Name (1..Temp.Name_Len) & " ref " & Temp.Clause(1..Temp.Clause_Len));
+	    end if;
 	    Temp := Temp.Next;
 	end loop;
 	Format_Text ("@end(twocol)" & Ascii.LF, "Suffix");

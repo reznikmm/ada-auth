@@ -3,7 +3,8 @@ with ARM_Output,
      Ada.Text_IO,
      Ada.Exceptions,
      Ada.Strings.Maps,
-     Ada.Strings.Fixed;
+     Ada.Strings.Fixed,
+     Ada.Unchecked_Deallocation;
 package body ARM_HTML is
 
     --
@@ -81,6 +82,7 @@ package body ARM_HTML is
     --  9/ 8/00 - RLB - Removed soft hyphen, as this does not work on either
     --			browser I tried.
     --  9/26/00 - RLB - Added Syntax_Summary style.
+    --  9/27/00 - RLB - Added tab emulation when in the fixed font.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -94,6 +96,8 @@ package body ARM_HTML is
 	-- Create routine.)
     Use_Unicode : constant Boolean := False;
 	-- Use Unicode characters. (Many browsers can't display these.)
+
+    procedure Free is new Ada.Unchecked_Deallocation (Column_Text_Item_Type, Column_Text_Ptr);
 
     function Make_Clause_File_Name (Output_Object : in HTML_Output_Type;
 				    Clause_Number : in String) return String is
@@ -141,7 +145,7 @@ package body ARM_HTML is
     begin
 	Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
 	    ".\Output\" & File_Name & ".html");
-
+--Ada.Text_IO.Put_Line ("--Creating " & File_Name & ".html");
 	-- File introduction:
 	if HTML_4 then
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""");
@@ -361,8 +365,71 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"In paragraph");
 	end if;
-	-- %%%% No columns yet; eventually we could try using a table to
-	--      format these.
+	if Number_of_Columns >= 4 then
+	    -- We have special processing for 4 or more columns. Note that we
+	    -- assume such items are formated with explicit New_Column calls,
+	    -- and do not contain any nested paragraph formats.
+	    Output_Object.Current_Column := 1;
+	    Output_Object.Current_Item := 1;
+	elsif Output_Object.Column_Count >= 4 and then Number_of_Columns = 1 then
+	    -- Finished processing columns, output the columns as a table.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<UL><UL><TABLE Width=""70%"">"); -- Table with no border or caption, takes up 70% of the screen.
+	    -- And start the first row:
+	    Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""left"">");
+	    for Item in 1 .. 5000 loop
+		for Col in 1 .. Output_Object.Column_Count loop
+		    declare
+		        Find : Column_Text_Ptr := Output_Object.Column_Text(Col);
+			Temp : Column_Text_Ptr;
+		    begin
+			-- We're going to free this item after outputting it.
+			if Find = null then
+			    null;
+			elsif Find.Next = null then
+			    if Find.Item /= Item then
+				Find := null;
+			    else
+			        Output_Object.Column_Text(Col) := null;
+			    end if;
+			else
+			    while Find.Next /= null and then Find.Next.Item /= Item loop
+			        Find := Find.Next;
+			    end loop;
+			    Temp := Find;
+			    Find := Find.Next;
+			    Temp.Next := null;
+			end if;
+			if Find /= null then
+			    Ada.Text_IO.Put (Output_Object.Output_File,
+				Find.Text (1 .. Find.Length));
+			    -- This should always be the last item:
+			    if Find.Next /= null then
+				Ada.Text_IO.Put_Line ("** Column Item invariant failure!");
+			    end if;
+			    Free (Find);
+			else -- No item, make a blank.
+			    Ada.Text_IO.Put (Output_Object.Output_File,
+				"&nbsp;");
+			end if;
+		    end;
+	            Ada.Text_IO.Put (Output_Object.Output_File, "<TD align=""left"">");
+		end loop;
+		if Output_Object.Column_Text = Column_Text_Ptrs_Type'(others => null) then
+		    -- We've output everything.
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "</TABLE></UL></UL>");
+		    exit;
+		end if;
+		-- End the row:
+		Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""left"">");
+	    end loop;
+	    Output_Object.Current_Column := 0;
+	    Output_Object.Current_Item := 0;
+	-- else Two and Three column formats are displayed without any columns.
+	-- This is mainly used for the syntax cross-reference and index, and
+	-- these definitely look better without columns.
+	end if;
 	Output_Object.Column_Count := Number_of_Columns;
     end Set_Columns;
 
@@ -422,9 +489,31 @@ package body ARM_HTML is
 	Output_Object.Is_In_Paragraph := True;
 	Output_Object.Had_Prefix := not No_Prefix;
 	Output_Object.Char_Count := 0;
+	Output_Object.Disp_Char_Count := 0;
 	Output_Object.Saw_Hang_End := False;
 	Check_Clause_File (Output_Object);
 	-- Note: We only support Justification for the Normal and Wide styles.
+	if Output_Object.Column_Count >= 4 then
+	    -- Formatting is deferred; only a few formats are supported.
+	    if Tab_Stops.Number /= 0 then
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "Tabs in 4+ column text");
+	    end if;
+	    case Format is
+	        when ARM_Output.Normal | ARM_Output.Syntax_Indented |
+		     ARM_Output.Code_Indented =>
+		    null;
+		when others =>
+	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Unsupported format in 4+ column text - " & ARM_Output.Paragraph_Type'Image(Format));
+	    end case;
+	    if Number /= "" then
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "No paragraph numbers in 4+ column text");
+	    end if;
+	    return; -- Nothing more to do here.
+	end if;
+
 	-- Note: In HTML 4, we might be able to control the space below for "Space_After".
 	case Format is
 	    when ARM_Output.Normal =>
@@ -699,7 +788,27 @@ package body ARM_HTML is
 		 ARM_Output.Small_Indented | ARM_Output.Code_Indented |
 		 ARM_Output.Small_Code_Indented =>
 		Output_Object.Tab_Stops := Tab_Stops;
-		--%%%% No tabs in HTML.
+		-- No tabs in HTML; we'll emulate them for fixed fonts.
+		-- We'll expand proportional stops here (text characters
+		-- are larger than the variable ones these are set up for).
+		for I in 1 .. Tab_Stops.Number loop
+		    if ARM_Output."=" (Tab_Stops.Stops(I).Kind,
+				       ARM_Output.Left_Proportional) then
+		        Output_Object.Tab_Stops.Stops(I).Stop :=
+				(Tab_Stops.Stops(I).Stop * 13 / 12);
+		    else
+		        Output_Object.Tab_Stops.Stops(I).Stop :=
+				Tab_Stops.Stops(I).Stop;
+		    end if;
+		end loop;
+		case Format is
+		    when ARM_Output.Examples | ARM_Output.Small_Examples |
+			 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples =>
+			Output_Object.Emulate_Tabs := True;
+		    when others =>
+			Output_Object.Emulate_Tabs := False;
+		end case;
+
 	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
 		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
 		 ARM_Output.Indented_Bulleted | ARM_Output.Code_Indented_Bulleted |
@@ -715,14 +824,16 @@ package body ARM_HTML is
 	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		        "Tabs in hanging/bulleted paragraph");
 		end if;
+		Output_Object.Emulate_Tabs := False;
 	end case;
 
-	--**** Temp: (?)
-	if Number /= "" then -- No paragraph numbers.
+	if Number /= "" then -- Has paragraph number.
 	    Ada.Text_IO.Put (Output_Object.Output_File, TINY_SWISS_FONT_CODE);
 	    Ada.Text_IO.Put (Output_Object.Output_File, Number);
 	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT> ");
 	    Output_Object.Char_Count := Output_Object.Char_Count + TINY_SWISS_FONT_CODE'Length + Number'Length + 8;
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + ((Number'Length+1)/2) + 1;
+		-- Note: Count these as half characters, as the font is so small.
 	end if;
 	-- Note: No_Breaks and Keep_with_Next have no effect here, because
 	-- HTML doesn't have page breaks.
@@ -741,6 +852,18 @@ package body ARM_HTML is
 		"Not in paragraph");
 	end if;
 	Output_Object.Is_In_Paragraph := False;
+	if Output_Object.Column_Count >= 4 then
+	    -- Formatting is deferred; only a few formats are supported.
+	    if Output_Object.Column_Text (Output_Object.Current_Column) /= null and then
+	       Output_Object.Column_Text (Output_Object.Current_Column).Item = Output_Object.Current_Item then
+		Output_Object.Column_Text (Output_Object.Current_Column).End_Para := True;
+	    end if;
+	    Output_Object.Current_Item := Output_Object.Current_Item + 2; -- Skip an item.
+            Output_Object.Char_Count := 0;
+            Output_Object.Disp_Char_Count := 0;
+	    return; -- Nothing else to do here.
+	end if;
+
 	case Output_Object.Paragraph_Format is
 	    when ARM_Output.Normal | ARM_Output.Wide |
 	         ARM_Output.Index =>
@@ -884,6 +1007,7 @@ package body ARM_HTML is
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 	end case;
 	Output_Object.Char_Count := 0;
+	Output_Object.Disp_Char_Count := 0;
     end End_Paragraph;
 
 
@@ -906,6 +1030,7 @@ package body ARM_HTML is
 	Ada.Text_IO.New_Line (Output_Object.Output_File);
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H4 ALIGN=CENTER>" & Header_Text & "</H4>");
 	Output_Object.Char_Count := 0;
+	Output_Object.Disp_Char_Count := 0;
     end Category_Header;
 
 
@@ -946,6 +1071,7 @@ package body ARM_HTML is
 	    end case;
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
 	    Output_Object.Char_Count := 0;
+	    Output_Object.Disp_Char_Count := 0;
 	    return;
 	end if;
 
@@ -977,6 +1103,7 @@ package body ARM_HTML is
 				      Clause_Number & ' ' & Header_Text & "</H1>");
 	end case;
 	Output_Object.Char_Count := 0;
+	Output_Object.Disp_Char_Count := 0;
 	-- No page breaks in HTML, so we don't need to look at No_Page_Break.
     end Clause_Header;
 
@@ -1044,6 +1171,7 @@ package body ARM_HTML is
 				      Clause_Number & ' ' & Header_Text & "</H1>");
 	end case;
 	Output_Object.Char_Count := 0;
+	Output_Object.Disp_Char_Count := 0;
 	-- No page breaks in HTML, so we don't need to look at No_Page_Break.
     end Revised_Clause_Header;
 
@@ -1141,6 +1269,7 @@ package body ARM_HTML is
         Ada.Text_IO.Put (Output_Object.Output_File, "<TABLE frame=""border"" rules=""all"" border=""2"">");
         Ada.Text_IO.Put (Output_Object.Output_File, "<CAPTION>");
 	Output_Object.Char_Count := 9;
+	Output_Object.Disp_Char_Count := 0;
 
 	Output_Object.Is_In_Paragraph := True;
 	Output_Object.Is_In_Table := True;
@@ -1185,15 +1314,18 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</CAPTION>");
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TH align=""center"">");
 		Output_Object.Char_Count := 24;
+		Output_Object.Disp_Char_Count := 0;
 	    when ARM_Output.End_Header =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
 		Output_Object.Char_Count := 24;
+		Output_Object.Disp_Char_Count := 0;
 		Output_Object.In_Header := False;
 	    when ARM_Output.End_Row | ARM_Output.End_Row_Next_Is_Last =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
 		Output_Object.Char_Count := 24;
+		Output_Object.Disp_Char_Count := 0;
 	    when ARM_Output.End_Table =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</TABLE>");
@@ -1211,6 +1343,40 @@ package body ARM_HTML is
            Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set ('>'),
              Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set ('"'),
 			              Ada.Strings.Maps.To_Set ('&'))));
+
+    procedure Output_Text (Output_Object : in out HTML_Output_Type;
+			   Text : in String) is
+	-- Output the text to the current output place.
+    begin
+	if Output_Object.Column_Count >= 4 then
+	    if (Output_Object.Column_Text(Output_Object.Current_Column) = null) or else
+		-- No items stored.
+	       (Output_Object.Column_Text(Output_Object.Current_Column).Item /=
+	        Output_Object.Current_Item) then
+		-- Start a new item.
+		Output_Object.Column_Text(Output_Object.Current_Column) :=
+		    new Column_Text_Item_Type'(Text => (others => ' '),
+			Length => 0, Item => Output_Object.Current_Item,
+			End_Para => False, Next => Output_Object.Column_Text(Output_Object.Current_Column));
+	    end if;
+	    if Output_Object.Column_Text(Output_Object.Current_Column).Length +
+		Text'Length > Output_Object.Column_Text(Output_Object.Current_Column).Text'Length then
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"Column item full, but more text!");
+	    else
+		Output_Object.Column_Text(Output_Object.Current_Column).Text(
+		   Output_Object.Column_Text(Output_Object.Current_Column).Length+1..
+		   Output_Object.Column_Text(Output_Object.Current_Column).Length+Text'Length) :=
+			Text;
+		Output_Object.Column_Text(Output_Object.Current_Column).Length :=
+		   Output_Object.Column_Text(Output_Object.Current_Column).Length + Text'Length;
+	    end if;
+	else -- Normal, use Text_IO.
+	     Ada.Text_IO.Put (Output_Object.Output_File, Text);
+	     Output_Object.Char_Count := Output_Object.Char_Count + Text'Length;
+	end if;
+    end Output_Text;
+
 
     procedure Ordinary_Text (Output_Object : in out HTML_Output_Type;
 			     Text : in String) is
@@ -1232,8 +1398,8 @@ package body ARM_HTML is
 		    Ordinary_Character (Output_Object, Text(I));
 	        end loop;
 	    else
-	        Ada.Text_IO.Put (Output_Object.Output_File, Text);
-	        Output_Object.Char_Count := Output_Object.Char_Count + Text'Length;
+	        Output_Text (Output_Object, Text);
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + Text'Length;
 	    end if;
 	else
 	    for I in Text'range loop
@@ -1256,313 +1422,218 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	if Char = ' ' and then Output_Object.Char_Count >= LINE_LENGTH - 10 then
+	if Char = ' ' and then Output_Object.Char_Count >= LINE_LENGTH - 10 and then
+	    Output_Object.Column_Count < 4 then
 	    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	    Output_Object.Char_Count := 0;
 	else
 	    if Char = '<' then
-	        Ada.Text_IO.Put (Output_Object.Output_File, "&lt;");
-	        Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	        Output_Text (Output_Object, "&lt;");
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	    elsif Char = '>' then
-	        Ada.Text_IO.Put (Output_Object.Output_File, "&gt;");
-	        Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	        Output_Text (Output_Object, "&gt;");
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	    elsif Char = '"' then
-	        Ada.Text_IO.Put (Output_Object.Output_File, "&quot;");
-	        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+	        Output_Text (Output_Object, "&quot;");
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	    elsif Char = '&' then
-	        Ada.Text_IO.Put (Output_Object.Output_File, "&amp;");
-	        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+	        Output_Text (Output_Object, "&amp;");
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	    elsif Char >= Character'Val(126) then -- All higher Latin-1 characters.
 		case Character'Pos(Char) is
 		    when 160 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&nbsp;");
 		    when 161 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&iexcl;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&iexcl;");
 		    when 162 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&cent;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&cent;");
 		    when 163 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&pound;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&pound;");
 		    when 164 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&curren;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&curren;");
 		    when 165 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&yen;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "&yen;");
 		    when 166 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&brvbar;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&brvbar;");
 		    when 167 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&sect;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&sect;");
 		    when 168 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&uml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "&uml;");
 		    when 169 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&copy;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&copy;");
 		    when 170 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ordf;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&ordf;");
 		    when 171 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&laquo;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&laquo;");
 		    when 172 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&not;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "&not;");
 		    when 173 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&shy;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "&shy;");
 		    when 174 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&reg;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "&reg;");
 		    when 175 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&macr;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&macr;");
 		    when 176 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&deg;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "&deg;");
 		    when 177 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&plusmn;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&plusmn;");
 		    when 178 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&sup2;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&sup2;");
 		    when 179 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&sup3;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&sup3;");
 		    when 180 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&acute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&acute;");
 		    when 181 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&micro;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&micro;");
 		    when 182 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&para;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&para;");
 		    when 183 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&middot;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&middot;");
 		    when 184 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&cedil;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&cedil;");
 		    when 185 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&sup1;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&sup1;");
 		    when 186 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ordm;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&ordm;");
 		    when 187 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&raquo;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&raquo;");
 		    when 188 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&frac14;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&frac14;");
 		    when 189 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&frac12;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&frac12;");
 		    when 190 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&frac34;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&frac34;");
 		    when 191 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&iquest;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&iquest;");
 		    when 192 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Agrave;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Agrave;");
 		    when 193 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Aacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Aacute;");
 		    when 194 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Acirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&Acirc;");
 		    when 195 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Atilde;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Atilde;");
 		    when 196 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Auml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&Auml;");
 		    when 197 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Aring;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&Aring;");
 		    when 198 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&AElig;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&AElig;");
 		    when 199 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Ccedil;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Ccedil;");
 		    when 200 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Egrave;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Egrave;");
 		    when 201 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Eacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Eacute;");
 		    when 202 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Ecirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&Ecirc;");
 		    when 203 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Euml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&Euml;");
 		    when 204 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Igrave;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Igrave;");
 		    when 205 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Iacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Iacute;");
 		    when 206 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Icirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&Icirc;");
 		    when 207 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Iuml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&Iuml;");
 		    when 208 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ETH;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "&ETH;");
 		    when 209 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Ntilde;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Ntilde;");
 		    when 210 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Ograve;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Ograve;");
 		    when 211 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Oacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Oacute;");
 		    when 212 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Ocirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&Ocirc;");
 		    when 213 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Otilde;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Otilde;");
 		    when 214 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Ouml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&Ouml;");
 		    when 215 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&times;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&times;");
 		    when 216 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Oslash;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Oslash;");
 		    when 217 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Ugrave;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Ugrave;");
 		    when 218 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Uacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Uacute;");
 		    when 219 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Ucirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&Ucirc;");
 		    when 220 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Uuml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&Uuml;");
 		    when 221 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&Yacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&Yacute;");
 		    when 222 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&THORN;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&THORN;");
 		    when 223 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&szlig;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&szlig;");
 
 		    when 224 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&agrave;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&agrave;");
 		    when 225 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&aacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&aacute;");
 		    when 226 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&acirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&acirc;");
 		    when 227 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&atilde;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&atilde;");
 		    when 228 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&auml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&auml;");
 		    when 229 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&aring;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&aring;");
 		    when 230 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&aelig;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&aelig;");
 		    when 231 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ccedil;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&ccedil;");
 		    when 232 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&egrave;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&egrave;");
 		    when 233 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&eacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&eacute;");
 		    when 234 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ecirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&ecirc;");
 		    when 235 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&euml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&euml;");
 		    when 236 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&igrave;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&igrave;");
 		    when 237 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&iacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&iacute;");
 		    when 238 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&icirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&icirc;");
 		    when 239 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&iuml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&iuml;");
 		    when 240 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&eth;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "&eth;");
 		    when 241 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ntilde;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&ntilde;");
 		    when 242 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ograve;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&ograve;");
 		    when 243 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&oacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&oacute;");
 		    when 244 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ocirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&ocirc;");
 		    when 245 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&otilde;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&otilde;");
 		    when 246 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ouml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&ouml;");
 		    when 247 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&divide;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&divide;");
 		    when 248 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&oslash;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&oslash;");
 		    when 249 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ugrave;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&ugrave;");
 		    when 250 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&uacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&uacute;");
 		    when 251 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&ucirc;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&ucirc;");
 		    when 252 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&uuml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&uuml;");
 		    when 253 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&yacute;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 8;
+		        Output_Text (Output_Object, "&yacute;");
 		    when 254 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&thorn;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		        Output_Text (Output_Object, "&thorn;");
 		    when 255 =>
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&yuml;");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "&yuml;");
 
 
 		    when others =>
@@ -1570,13 +1641,13 @@ package body ARM_HTML is
 			    Code : constant String :=
 				Natural'Image(Character'Pos(Char));
 			begin
-		            Ada.Text_IO.Put (Output_Object.Output_File, "&#" & Code(2..4) & ';');
-		            Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		            Output_Text (Output_Object, "&#" & Code(2..4) & ';');
 			end;
 		end case;
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	    else
-	        Ada.Text_IO.Put (Output_Object.Output_File, Char);
-	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	        Output_Text (Output_Object, Char & "");
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	    end if;
 	end if;
     end Ordinary_Character;
@@ -1593,8 +1664,8 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;");
-        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+        Output_Text (Output_Object, "&nbsp;");
+        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
     end Hard_Space;
 
 
@@ -1610,8 +1681,20 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BR>");
-        Output_Object.Char_Count := 0;
+	if Output_Object.Column_Count >= 4 then
+	    -- Output is deferred; mark the end of an item.
+	    if Output_Object.Column_Text (Output_Object.Current_Column) /= null and then
+	       Output_Object.Column_Text (Output_Object.Current_Column).Item = Output_Object.Current_Item then
+		Output_Object.Column_Text (Output_Object.Current_Column).End_Para := False;
+	    end if;
+	    Output_Object.Current_Item := Output_Object.Current_Item + 1;
+            Output_Object.Char_Count := 0;
+            Output_Object.Disp_Char_Count := 0;
+	else -- Normal.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BR>");
+            Output_Object.Char_Count := 0;
+            Output_Object.Disp_Char_Count := 0;
+	end if;
     end Line_Break;
 
 
@@ -1645,8 +1728,7 @@ package body ARM_HTML is
 		"Not in paragraph");
 	end if;
 	if HTML_4 and then Use_Unicode then
-            Ada.Text_IO.Put (Output_Object.Output_File, "&#8203;");
-            Output_Object.Char_Count := Output_Object.Char_Count + 7;
+            Output_Text (Output_Object, "&#8203;");
 	-- else no Soft break in HTML 3.2.
 	end if;
     end Soft_Line_Break;
@@ -1668,8 +1750,7 @@ package body ARM_HTML is
         null; -- Soft hyphens exist, but don't work on either Internet Exploder 4
 	      -- or Netcrash 3. That is, they are always displayed. (They should
 	      -- only be displayed at the location of a line break).
-        --Ada.Text_IO.Put (Output_Object.Output_File, "&shy;"); -- A Latin-1 char.
-        --Output_Object.Char_Count := Output_Object.Char_Count + 5;
+        --Output_Text (Output_Object, "&shy;"); -- A Latin-1 char.
     end Soft_Hyphen_Break;
 
 
@@ -1690,9 +1771,26 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Tab, but none set");
 	end if;
-	-- %%%% HTML does not have tabs. Put in some spaces.
-        Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
-        Output_Object.Char_Count := Output_Object.Char_Count + 15;
+
+	if Output_Object.Emulate_Tabs then
+	    Output_Text (Output_Object, "&nbsp;");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	    for I in 1 .. Output_Object.Tab_Stops.Number loop
+	        if Output_Object.Tab_Stops.Stops(I).Stop > Output_Object.Disp_Char_Count then
+		    for J in Output_Object.Disp_Char_Count+1 .. Output_Object.Tab_Stops.Stops(I).Stop-1 loop
+		        Output_Text (Output_Object, "&nbsp;");
+		        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		    end loop;
+		    exit;
+	        end if;
+	    end loop; -- If we drop out without finding a tab, we just use the single
+		      -- space already written.
+	else
+	    -- HTML does not have tabs. We can't even emulate them for a
+	    -- proportional font. Put in a space.
+	    Output_Text (Output_Object, "&nbsp;");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	end if;
     end Tab;
 
 
@@ -1711,123 +1809,123 @@ package body ARM_HTML is
 	case Char is
 	    when ARM_Output.EM_Dash =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&mdash;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	            Output_Text (Output_Object, "&mdash;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "--");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	            Output_Text (Output_Object, "--");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.EN_Dash =>
 		if HTML_4 and Use_Unicode then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "&ndash;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		    Output_Text (Output_Object, "&ndash;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-		    Ada.Text_IO.Put (Output_Object.Output_File, "-");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		    Output_Text (Output_Object, "-");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.GEQ =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&ge;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	            Output_Text (Output_Object, "&ge;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, ">=");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	            Output_Text (Output_Object, ">=");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.LEQ =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&le;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	            Output_Text (Output_Object, "&le;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "<=");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	            Output_Text (Output_Object, "<=");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.NEQ =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&ne;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	            Output_Text (Output_Object, "&ne;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "/=");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	            Output_Text (Output_Object, "/=");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.PI =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&pi;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	            Output_Text (Output_Object, "&pi;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "PI");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	            Output_Text (Output_Object, "PI");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.Left_Ceiling =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&lceil;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	            Output_Text (Output_Object, "&lceil;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "<I>Ceiling</I>(");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 15;
+	            Output_Text (Output_Object, "<I>Ceiling</I>(");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 8;
 		end if;
 	    when ARM_Output.Right_Ceiling =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&rceil;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	            Output_Text (Output_Object, "&rceil;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, ")");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	            Output_Text (Output_Object, ")");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Left_Floor =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&lfloor;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 8;
+	            Output_Text (Output_Object, "&lfloor;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "<I>Floor</I>(");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 13;
+	            Output_Text (Output_Object, "<I>Floor</I>(");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 6;
 		end if;
 	    when ARM_Output.Right_Floor =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&rfloor;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 8;
+	            Output_Text (Output_Object, "&rfloor;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, ")");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	            Output_Text (Output_Object, ")");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Thin_Space =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&thinsp;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 8;
+	            Output_Text (Output_Object, "&thinsp;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, " ");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	            Output_Text (Output_Object, " ");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Left_Quote =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&lsquo;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	            Output_Text (Output_Object, "&lsquo;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "`");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	            Output_Text (Output_Object, "`");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Right_Quote =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&rsquo;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	            Output_Text (Output_Object, "&rsquo;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "`");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	            Output_Text (Output_Object, "'");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Left_Double_Quote =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&ldquo;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	            Output_Text (Output_Object, "&ldquo;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, """");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	            Output_Text (Output_Object, """");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Right_Double_Quote =>
 		if HTML_4 and Use_Unicode then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "&rdquo;");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	            Output_Text (Output_Object, "&rdquo;");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, """");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	            Output_Text (Output_Object, """");
+		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	end case;
     end Special_Character;
@@ -1861,6 +1959,7 @@ package body ARM_HTML is
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<DD>");
 	    -- Part of a definition list.
         Output_Object.Char_Count := 0;
+	Output_Object.Disp_Char_Count := 0;
     end End_Hang_Item;
 
 
@@ -1881,7 +1980,11 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in a multi-column area");
 	end if;
-	--%%%% No columns yet.
+	if Output_Object.Column_Count >= 4 then
+	    Output_Object.Current_Column := Output_Object.Current_Column + 1;
+	    Output_Object.Current_Item := 1;
+	-- else ignore it, no columns will be used.
+	end if;
     end New_Column;
 
 
@@ -1914,19 +2017,15 @@ package body ARM_HTML is
 	    case Output_Object.Change is
 		when ARM_Output.Insertion =>
 		    if HTML_4 then
-		        Ada.Text_IO.Put (Output_Object.Output_File, "</INS>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		        Output_Text (Output_Object, "</INS>");
 		    else
-		        Ada.Text_IO.Put (Output_Object.Output_File, "</U>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 4;
+		        Output_Text (Output_Object, "</U>");
 		    end if;
 		when ARM_Output.Deletion =>
 		    if HTML_4 then
-			Ada.Text_IO.Put (Output_Object.Output_File, "</DEL>");
-			Output_Object.Char_Count := Output_Object.Char_Count + 6;
+			Output_Text (Output_Object, "</DEL>");
 		    else -- HTML 3.2
-			Ada.Text_IO.Put (Output_Object.Output_File, "</S>");
-			Output_Object.Char_Count := Output_Object.Char_Count + 4;
+			Output_Text (Output_Object, "</S>");
 		    end if;
 		when ARM_Output.None =>
 		    null;
@@ -1934,32 +2033,27 @@ package body ARM_HTML is
 	end if;
 
 	if not Bold and Output_Object.Is_Bold then
-	    Ada.Text_IO.Put (Output_Object.Output_File, "</B>");
-	    Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	    Output_Text (Output_Object, "</B>");
 	    Output_Object.Is_Bold := False;
 	end if;
 
 	if not Italic and Output_Object.Is_Italic then
-	    Ada.Text_IO.Put (Output_Object.Output_File, "</I>");
-	    Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	    Output_Text (Output_Object, "</I>");
 	    Output_Object.Is_Italic := False;
 	end if;
 
 	if Size /= Output_Object.Size then
 	    if Output_Object.Size /= 0 then
-	        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
-	        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	        Output_Text (Output_Object, "</FONT>");
 	    end if;
 	end if;
 
 	if Location /= Output_Object.Location then
 	    case Output_Object.Location is
 		when ARM_Output.Superscript =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></SUP>");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 13;
+		    Output_Text (Output_Object, "</FONT></SUP>");
 		when ARM_Output.Subscript =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></SUB>");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 13;
+		    Output_Text (Output_Object, "</FONT></SUB>");
 		when ARM_Output.Normal =>
 		    null;
 	    end case;
@@ -1969,26 +2063,20 @@ package body ARM_HTML is
 	    case Output_Object.Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "</TT>");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		    Output_Text (Output_Object, "</TT>");
 		when ARM_Output.Roman => null; -- Default, currently.
-		    --Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
-		    --Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		    --Output_Text (Output_Object, "</FONT>");
 		when ARM_Output.Swiss =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 7;
+		    Output_Text (Output_Object, "</FONT>");
 	    end case;
 	    case Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "<TT>");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 4;
+		    Output_Text (Output_Object, "<TT>");
 		when ARM_Output.Roman => null; -- Default, currently.
-		    --Ada.Text_IO.Put (Output_Object.Output_File, "<FONT xxx>");
-		    --Output_Object.Char_Count := Output_Object.Char_Count + x;
+		    --Output_Text (Output_Object, "<FONT xxx>");
 		when ARM_Output.Swiss =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, SWISS_FONT_CODE);
-		    Output_Object.Char_Count := Output_Object.Char_Count + SWISS_FONT_CODE'Length;
+		    Output_Text (Output_Object, SWISS_FONT_CODE);
 	    end case;
 	    Output_Object.Font := Font;
 	end if;
@@ -1999,11 +2087,9 @@ package body ARM_HTML is
 	    -- size.
 	    case Location is
 		when ARM_Output.Superscript =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "<SUP><FONT SIZE=+1>");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
+		    Output_Text (Output_Object, "<SUP><FONT SIZE=+1>");
 		when ARM_Output.Subscript =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "<SUB><FONT SIZE=+1>");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
+		    Output_Text (Output_Object, "<SUB><FONT SIZE=+1>");
 		when ARM_Output.Normal =>
 		    null;
 	    end case;
@@ -2014,33 +2100,29 @@ package body ARM_HTML is
 	    -- HTML sizes are 1..7, with a default of 3. So we limit the changes.
 	    if Size > 0 then
 		if Size > 5 then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=+5>");
+	            Output_Text (Output_Object, "<FONT SIZE=+5>");
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=+" &
+	            Output_Text (Output_Object, "<FONT SIZE=+" &
 		        Character'Val(Size + Character'Pos('0')) & ">");
 		end if;
-	        Output_Object.Char_Count := Output_Object.Char_Count + 14;
 	    elsif Size < 0 then
 		if Size < -4 then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-4>");
+	            Output_Text (Output_Object, "<FONT SIZE=-4>");
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-" &
+	            Output_Text (Output_Object, "<FONT SIZE=-" &
 		        Character'Val(abs Size + Character'Pos('0')) & ">");
 		end if;
-	        Output_Object.Char_Count := Output_Object.Char_Count + 14;
 	    -- else Size=0, nothing to do.
 	    end if;
 	    Output_Object.Size := Size;
 	end if;
 
 	if Italic and (not Output_Object.Is_Italic) then
-	    Ada.Text_IO.Put (Output_Object.Output_File, "<I>");
-	    Output_Object.Char_Count := Output_Object.Char_Count + 3;
+	    Output_Text (Output_Object, "<I>");
 	    Output_Object.Is_Italic := True;
 	end if;
 	if Bold and (not Output_Object.Is_Bold) then
-	    Ada.Text_IO.Put (Output_Object.Output_File, "<B>");
-	    Output_Object.Char_Count := Output_Object.Char_Count + 3;
+	    Output_Text (Output_Object, "<B>");
 	    Output_Object.Is_Bold := True;
 	end if;
 
@@ -2048,19 +2130,15 @@ package body ARM_HTML is
 	    case Change is
 		when ARM_Output.Insertion =>
 		    if HTML_4 then
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<INS>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "<INS>");
 		    else -- HTML 3.2
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<U>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 3;
+		        Output_Text (Output_Object, "<U>");
 		    end if;
 		when ARM_Output.Deletion =>
 		    if HTML_4 then
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<DEL>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		        Output_Text (Output_Object, "<DEL>");
 		    else -- HTML 3.2
-		        Ada.Text_IO.Put (Output_Object.Output_File, "<S>");
-		        Output_Object.Char_Count := Output_Object.Char_Count + 3;
+		        Output_Text (Output_Object, "<S>");
 		    end if;
 		when ARM_Output.None =>
 		    null;
@@ -2087,20 +2165,16 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-	Output_Object.Char_Count := Output_Object.Char_Count + 9;
+	Output_Text (Output_Object, "<A HREF=""");
 	declare
 	    Name : constant String :=
 		Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
 	begin
-	    Ada.Text_IO.Put (Output_Object.Output_File, Name);
-	    Output_Object.Char_Count := Output_Object.Char_Count + Name'Length;
+	    Output_Text (Output_Object, Name);
 	end;
-	Ada.Text_IO.Put (Output_Object.Output_File, """>");
-	Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	Output_Text (Output_Object, """>");
         Ordinary_Text (Output_Object, Text);
-	Ada.Text_IO.Put (Output_Object.Output_File, "</A>");
-	Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	Output_Text (Output_Object, "</A>");
     end Clause_Reference;
 
 
@@ -2120,18 +2194,14 @@ package body ARM_HTML is
 		"Not in paragraph");
 	end if;
 	-- Insert an anchor:
-	Ada.Text_IO.Put (Output_Object.Output_File, "<A NAME=""");
-	Output_Object.Char_Count := Output_Object.Char_Count + 9;
-	Ada.Text_IO.Put (Output_Object.Output_File, "I");
-	Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	Output_Text (Output_Object, "<A NAME=""");
+	Output_Text (Output_Object, "I");
 	declare
 	    Key_Name : constant String := Natural'Image(Index_Key);
 	begin
-	    Ada.Text_IO.Put (Output_Object.Output_File, Key_Name(2..Key_Name'Last));
-	    Output_Object.Char_Count := Output_Object.Char_Count + Key_Name'Length-1;
+	    Output_Text (Output_Object, Key_Name(2..Key_Name'Last));
 	end;
-	Ada.Text_IO.Put (Output_Object.Output_File, """></A>");
-	Output_Object.Char_Count := Output_Object.Char_Count + 6;
+	Output_Text (Output_Object, """></A>");
     end Index_Target;
 
 
@@ -2152,28 +2222,22 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-	Output_Object.Char_Count := Output_Object.Char_Count + 9;
+	Output_Text (Output_Object, "<A HREF=""");
 	declare
 	    Name : constant String :=
 		Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
 	begin
-	    Ada.Text_IO.Put (Output_Object.Output_File, Name);
-	    Output_Object.Char_Count := Output_Object.Char_Count + Name'Length;
+	    Output_Text (Output_Object, Name);
 	end;
-	Ada.Text_IO.Put (Output_Object.Output_File, "#I");
-	Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	Output_Text (Output_Object, "#I");
 	declare
 	    Key_Name : constant String := Natural'Image(Index_Key);
 	begin
-	    Ada.Text_IO.Put (Output_Object.Output_File, Key_Name(2..Key_Name'Last));
-	    Output_Object.Char_Count := Output_Object.Char_Count + Key_Name'Length-1;
+	    Output_Text (Output_Object, Key_Name(2..Key_Name'Last));
 	end;
-	Ada.Text_IO.Put (Output_Object.Output_File, """>");
-	Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	Output_Text (Output_Object, """>");
 	Ordinary_Text (Output_Object, Text);
-	Ada.Text_IO.Put (Output_Object.Output_File, "</A>");
-	Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	Output_Text (Output_Object, "</A>");
     end Index_Reference;
 
 
@@ -2196,25 +2260,18 @@ package body ARM_HTML is
 	declare
 	    Num : Integer := Integer'Value(DR_Number(DR_Number'Last-3 .. DR_Number'Last));
 	begin
-	    Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-	    Output_Object.Char_Count := Output_Object.Char_Count + 9;
+	    Output_Text (Output_Object, "<A HREF=""");
 	    if Num <= 93 then -- In Defect Reports 1. -- %%%% Update if changed.
-		Ada.Text_IO.Put (Output_Object.Output_File, "defect1.html");
-		Output_Object.Char_Count := Output_Object.Char_Count + 12;
+		Output_Text (Output_Object, "defect1.html");
 	    else -- In Defect Reports 2.
-		Ada.Text_IO.Put (Output_Object.Output_File, "defect2.html");
-		Output_Object.Char_Count := Output_Object.Char_Count + 12;
+		Output_Text (Output_Object, "defect2.html");
 	    end if;
-	    Ada.Text_IO.Put (Output_Object.Output_File, '#');
-	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
-	    Ada.Text_IO.Put (Output_Object.Output_File, DR_Number);
-	    Output_Object.Char_Count := Output_Object.Char_Count + DR_Number'Length;
+	    Output_Text (Output_Object, "#");
+	    Output_Text (Output_Object, DR_Number);
 	end;
-        Ada.Text_IO.Put (Output_Object.Output_File, """>");
-        Output_Object.Char_Count := Output_Object.Char_Count + 2;
+        Output_Text (Output_Object, """>");
         Ordinary_Text (Output_Object, Text);
-        Ada.Text_IO.Put (Output_Object.Output_File, "</A>");
-        Output_Object.Char_Count := Output_Object.Char_Count + 4;
+        Output_Text (Output_Object, "</A>");
     end DR_Reference;
 
 
