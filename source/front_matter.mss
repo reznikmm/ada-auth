@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.36 $ $Date: 2004/12/07 05:17:08 $}
+@comment{$Revision: 1.37 $ $Date: 2004/12/10 06:13:45 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -12,8 +12,8 @@ again.}
 @begin{Intro}
 @begin{NotISO}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[The International Standard for the programming language Ada is ISO/IEC
-8652:1995(E).],Old=[]}
+@ChgAdded{Version=[1],Text=[The International Standard for the
+programming language Ada is ISO/IEC 8652:1995(E).]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[The Ada Working Group ISO/IEC JTC1/SC 22/WG 9 is tasked by ISO with
@@ -119,12 +119,12 @@ edition (ISO 8652:@Chg{Version=[2],New=[1995)],Old=[1987), of which it constitut
 a technical revision]}.
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The above is unofficial wording added just to avoid
+@ChgAdded{Version=[2],Text=[The above is unofficial wording added just to avoid
 confusion. If ISO decides
 to publish a new standard, the above would be replaced by @ldquote@;This third
 edition cancels and replaces the second edition (ISO 8652:1995), of which it
 constitutes a technical revision@rdquote. The first three paragraphs in this
-section also would be replaced by the current ISO boilerplate.],Old=[]}
+section also would be replaced by the current ISO boilerplate.]}
 @end{Discussion}
 
 
@@ -523,12 +523,12 @@ known until run time, implicit dispatching is performed
 based on the tag of the operand.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[
+@ChgAdded{Version=[2],Text=[
 Interface types provide abstract models from which other interfaces and
 types may be composed and derived. This provides a reliable form of multiple
 inheritance. Interface types may also be implemented by synchronized types
 (task types and protected types) thereby enabling concurrent programming and
-inheritance to be merged.],Old=[]}
+inheritance to be merged.]}
 
 The concept of a type is further refined by the concept of a
 subtype, whereby a user can constrain the set of allowed
@@ -586,8 +586,8 @@ applicable to all types of a given class.
 
 @begin{Intro}
 
-@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
-This @Chg{Version=[2],New=[amended ],Old=[]}International Standard
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
+@Leading@;This @Chg{Version=[2],New=[amended ],Old=[]}International Standard
 @Chg{Version=[2],New=[modifies the edition of 1995 which replaced],
 Old=[International Standard replaces]} the first edition of 1987.
 In @Chg{Version=[2],New=[the 1995],Old=[this]} edition, the following major
@@ -662,15 +662,15 @@ application areas:
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[Amendment 1 modifies the 1995 International Standard by
+@ChgAdded{Version=[2],Text=[Amendment 1 modifies the 1995 International Standard by
 making changes and additions that improve the capability of the language and
 the reliability of programs written in the language. In particular the changes
 were designed to improve the portability of programs, interfacing to other
-languages, and both the object-oriented and real-time capabilities.],Old=[]}
+languages, and both the object-oriented and real-time capabilities.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[@Leading@;The following significant changes with respect
-to the 1995 edition are incorporated:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following significant changes
+with respect to the 1995 edition are incorporated:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}

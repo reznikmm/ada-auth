@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/09 06:13:23 $}
+@Comment{$Date: 2004/12/10 06:13:42 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @LabeledClause{Array Types}
 
@@ -33,7 +33,8 @@ value consisting of the values of the components.
 
 @Syn{lhs=<discrete_subtype_definition>,rhs="@SynI{discrete_}@Syn2{subtype_indication} | @Syn2{range}"}
 
-@Syn{lhs=<component_definition>,rhs="[@key{aliased}] @Syn2{subtype_indication}"}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+@Syn{lhs=<component_definition>,rhs="[@key{aliased}] @Syn2{subtype_indication}@Chg{Version=[2],New=< | @Syn2{access_definition}>,Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -70,65 +71,76 @@ a definite subtype.
   This applies to all uses of @nt<component_definition>,
   including in @nt<record_type_definition>s and @nt<protected_definition>s.@end{ramification}
 
-Within the definition of a nonlimited composite type
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00363-01]}
+@ChgDeleted{Version=[2],Text=[Within the definition of a
+nonlimited composite type
 (or a limited composite type that later in its immediate
 scope becomes nonlimited @em see @RefSecNum{Private Operations}
 and @RefSecNum{Limited Types}),
 if a @nt{component_definition} contains the reserved word
 @key[aliased] and the type of the component is discriminated,
-then the nominal subtype of the component shall be constrained.
+then the nominal subtype of the component shall be constrained.]}
 @begin{Reason}
-If we allowed the subtype to be unconstrained,
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgNote{The rule's gone, we might as well clobber all the notes.}
+@ChgDeleted{Version=[2],Text=[If we allowed the subtype to be unconstrained,
 then the discriminants might change because of
 an assignment to the containing (nonlimited) object,
 thus causing a potential violation of an access subtype constraint
-of an access value designating the aliased component.
+of an access value designating the aliased component.]}
 
-Note that the rule elsewhere defining all aliased discriminated objects to
-be constrained does not help @em that rule
-prevents assignments to the component itself from doing any harm,
-but not assignments to the containing object.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Note that the rule elsewhere defining all aliased
+discriminated objects to be constrained does not help @em that rule prevents
+assignments to the component itself from doing any harm, but not assignments to
+the containing object.]}
 
-@Leading@;
-We allow this for components within limited types since assignment to
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[We allow this
+for components within limited types since assignment to
 the enclosing object is not a problem. Furthermore, it is
 important to be able to use a default expression for a discriminant
 in arrays of limited components, since that is the only way
 to give the components different values for their discriminants.
-For example:
+For example:]}
 @begin{Example}
-@key[protected] @key[type] Counter_Type(Initial_Value : Integer := 1) @key[is]
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[@key[protected] @key[type] Counter_Type(Initial_Value : Integer := 1) @key[is]
    @key[procedure] Get_Next(Next_Value : @key[out] Integer);
      --@RI{ Returns the next value on each call, bumping Count}
      --@RI{ before returning.}
 @key[private]
    Count : Integer := Initial_Value;
 @key[end] Counter_Type;
-@key[protected] @key[body] Counter_Type @key[is] ...
+@key[protected] @key[body] Counter_Type @key[is] ...]}
 
-@key[function] Next_Id(Counter : @key[access] Counter_Type) @key[return] Integer @key[is]
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[@key[function] Next_Id(Counter : @key[access] Counter_Type) @key[return] Integer @key[is]
     Result : Integer;
 @key[begin]
     Counter.Get_Next(Result);
     @key[return] Result;
-@key[end] Next_Id;
+@key[end] Next_Id;]}
 
-C : @key[aliased] Counter_Type;
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[C : @key[aliased] Counter_Type;
 @key[task] @key[type] T(Who_Am_I : Integer := Next_Id(C'Access));
-@key[task] @key[body] T @key[is] ...
+@key[task] @key[body] T @key[is] ...]}
 
-Task_Array : @key[array](1..100) @key[of] @key[aliased] T;
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Task_Array : @key[array](1..100) @key[of] @key[aliased] T;
   --@RI{ Array of task elements, each with its own unique ID.}
   --@RI{ We specify "aliased" so we can use Task_Array(I)'Access.}
   --@RI{ This is safe because Task_Array is of a limited type,}
   --@RI{ so there is no way an assignment to it could change}
-  --@RI{ the discriminants of one of its components.}
+  --@RI{ the discriminants of one of its components.}]}
 @end{Example}
 @end{Reason}
 @begin{Ramification}
-Note that this rule applies to array components and
-record components, but not to protected type components (since
-they are always limited).
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Note that this rule applies to array components
+and record components, but not to protected type components (since
+they are always limited).]}
 @end{Ramification}
 @end{Legality}
 
@@ -248,6 +260,7 @@ and consists of the elaboration of any @nt{discrete_@!subtype_@!definition}s
 and the @nt{component_@!definition}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI-00171-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00230-01]}
 @PDefn2{Term=[elaboration], Sec=(discrete_subtype_definition)}
 The elaboration of a @nt{discrete_subtype_definition}
 @Chg{New=[that does not contain any per-object expressions],Old=[]}
@@ -259,7 +272,7 @@ one or more per-object expressions is defined in @RefSecNum{Record Types}.],Old=
 @PDefn2{Term=[elaboration], Sec=(component_definition)}
 The elaboration of a @nt{component_@!definition} in an
 @nt{array_@!type_@!definition} consists of the elaboration
-of the @nt{subtype_@!indication}.
+of the @nt{subtype_@!indication}@Chg{Version=[2],New=[ or @nt{access_definition}],Old=[]}.
 The elaboration of any @nt{discrete_@!subtype_@!definition}s
 and the elaboration of the
 @nt{component_@!definition} are performed in an arbitrary order.
@@ -344,6 +357,18 @@ The syntax rule for @nt{component_definition} (formerly
 @nt<component_subtype_definition>) is moved here from
 RM83-3.7.
 @end{DiffWord83}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Array components can have an anonymous access type.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[The prohibition against unconstrained
+  discriminated aliased components has been lifted. It has been replaced
+  by a prohibition against the actual troublemakers: general access
+  discriminant constraints (see @RefSecNum{Discriminant Constraints}).]}
+@end{Extend95}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
@@ -582,9 +607,11 @@ if the component type is discrete, the predefined relational operators;
 if the component type is boolean, the predefined
 logical operators are also included.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 A component of an array can be named with an @nt<indexed_component>.
 A value of an array type can be specified with an
-@nt<array_aggregate>, unless the array type is limited.
+@nt<array_aggregate>@Chg{Version=[2],New=[],Old=[, unless the array type
+is limited]}.
 For a one-dimensional array type, a slice of the array can be named;
 also, string literals are defined if the component type is
 a character type.
@@ -791,7 +818,7 @@ or in that of one of its ancestors.
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 this rule applies also in the private part of an
-instance of a generic unit.
+instance of a generic unit.@PDefn{generic contract issue}
 @begin{Discussion}
   This rule implies that a type can have an access discriminant
   if the type is limited,
@@ -1269,20 +1296,46 @@ is that of the associated discriminant(s).
 
 @begin{Legality}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008],ARef=[AI95-00168-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
 A @nt{discriminant_constraint} is only allowed in a
 @nt{subtype_indication} whose @nt{subtype_mark} denotes
 either an unconstrained discriminated subtype, or an
 unconstrained access subtype whose designated subtype is
 an unconstrained discriminated subtype.
 @Chg{New=[However, in the case of a general access subtype, a
-@nt{discriminant_@!constraint} is illegal if there is a place within the
+@nt{discriminant_@!constraint} is illegal if @Chg{Version=[2],New=[the
+designated type has defaults for its discriminants. In addition to the
+places where @LegalityTitle@; normally apply
+(see @RefSecNum{Generic Instantiation}),
+these rules apply also in the private part of an instance
+of a generic unit. In a generic body, this rule is checked presuming all
+formal access types of the generic might be general access types, and all
+untagged discriminated formal types of the generic might have defaults.
+@PDefn{generic contract issue}],
+Old=[there is a place within the
 immediate scope of the designated subtype where the designated subtype's view
-is constrained.],
-Old=[]}
+is constrained.]}],Old=[]}
+
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008],ARef=[AI95-00168-01]}
-@Chg{New=[The second rule is necessary to prevent assignments that change the
-discriminant of a constrained object. See the defect report for examples.],Old=[]}
+@ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00363-01]}
+@ChgDeleted{Version=[2],Text=[@Chg{New=[The second rule is necessary to
+prevent assignments that change the discriminant of a constrained object.
+See the defect report for examples.],Old=[]}]}
+@end{Reason}
+
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+@ChgAdded{Version=[2],Text=[The second rule is necessary to prevent objects
+from changing so that they no longer match their constraint. In Ada 95, we
+attempted to prevent this by banning every case where an aliased object
+could be unconstrained or be changed by an enclosing assignment. New ways
+to cause this problem were being discovered frequently, meaning that new rules
+had to be dreamed up to cover them. Meanwhile, aliased objects and components
+were getting more and more limited. In Ada 2005, we sweep away all of that
+cruft and replace it by a simple rule @lquotes@;thou shalt not create an
+access subtype that can point to a item whose discriminants can be changed by
+assignment@rquotes@;.]}
 @end{Reason}
 
 A named @nt<discriminant_association> with more than one
@@ -1400,8 +1453,8 @@ if the designated type can be treated as constrained somewhere in the program.
 Ada 2005 goes further and prohibits such @nt{discriminant_constraint}s if
 the designated type has (or might have, in the case of a formal type)
 defaults for its discriminants. The use of general access subtypes is rare,
-and this eliminates a boatload of problems which can cause programs to
-misbehave.],Old=[]}
+and this eliminates a boatload of problems that required many restrictions
+on the use of aliased objects and components (now lifted).],Old=[]}
 @end{Incompatible95}
 
 
@@ -1840,6 +1893,10 @@ representation pragmas to be as similar as possible.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Record components can have an anonymous access type.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Limited components can be initialized, so long as the expression is
   one that allows building the object in place (such as an @nt{aggregate} or
   @nt{function_call}).]}
@@ -1854,10 +1911,6 @@ elaboration of per-object constraints.]}
 @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed representation clauses to
 aspect clauses to reflect that they are used for more than just
 representation.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
-@ChgAdded{Version=[2],Text=[Changed the description of component elaboration
-to allow anonymous access components.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[Defined @i{limited record} type to use in

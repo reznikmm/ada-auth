@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:03 $}
+@Comment{$Date: 2004/12/10 06:13:44 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -441,7 +441,7 @@ or @nt<generic_renaming_declaration>).
 See AI83-00187.
 @end{Discussion}
 
-A @nt{selected_component} that is not an expanded name
+@Leading@;A @nt{selected_component} that is not an expanded name
 shall resolve to denote one of the following:
 @begin(Ramification)
   If the @nt<prefix> of a @nt<selected_component> denotes
@@ -493,11 +493,11 @@ corresponding entry, entry family, or protected subprogram.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
-@Chg{Version=[2],New=[A view of a subprogram whose first formal parameter is of
-a tagged or is an access parameter whose designated type is tagged:],Old=[]}
+@ChgAdded{Version=[2],Text=[A view of a subprogram whose first formal parameter is of
+a tagged or is an access parameter whose designated type is tagged:]}
 
-@NoPrefix@;@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[The @nt<prefix> (after any implicit
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],NoPrefix=[T],Text=[The @nt<prefix> (after any implicit
 dereference) shall resolve to denote an object or value of a specific tagged
 type @i<T> or class-wide type @i<T>'Class. The @nt<selector_name> shall resolve
 to denote a view of a subprogram declared immediately within the region in
@@ -507,11 +507,11 @@ or an access parameter designating one of these types. The designator of the
 subprogram shall not be the same as that of a component of the tagged type
 visible at the point of the @nt<selected_component>. The
 @nt<selected_component> denotes a view of this subprogram that omits the first
-formal parameter.],Old=[]}
+formal parameter.]}
 
 @end{Itemize}
 
-An expanded name shall resolve to denote a declaration that
+@Leading@;An expanded name shall resolve to denote a declaration that
 occurs immediately within a named declarative region, as follows:
 @begin(itemize)
 The @nt<prefix> shall resolve to denote either a package @Redundant[(including
@@ -556,10 +556,10 @@ denote an aliased view of an object.],Old=[]}
 
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[We want calls in both this new notation and the
+@ChgAdded{Version=[2],Text=[We want calls in both this new notation and the
 traditional notation to have the same legality. Thus, the implicit 'Access in
 this new notation needs the same legality check that an explicit 'Access
-would have.],Old=[]}
+would have.]}
 @end{Reason}
 @end{Legality}
 
@@ -577,13 +577,13 @@ the value or object denoted by the @nt<prefix> has this component.
 The exception Constraint_Error is raised if this check fails.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
-@Chg{Version=[2],New=[ For a @nt<selected_component> with a tagged @nt<prefix>
+@ChgAdded{Version=[2],Text=[ For a @nt<selected_component> with a tagged @nt<prefix>
 and @nt<selector_name> that denotes a view of a subprogram, a call on the view
 denoted by the @nt<selected_component> is equivalent to a call on the
 underlying subprogram with the first actual parameter being provided by the
 object or value denoted by the @nt<prefix> (or the Access attribute of this
 object or value if the first formal is an access parameter), and the remaining
-actual parameters given by the @nt<actual_parameter_part>, if any.],Old=[]}
+actual parameters given by the @nt<actual_parameter_part>, if any.]}
 @end{RunTime}
 
 @begin{Examples}
@@ -653,14 +653,15 @@ is sometimes known as @lquotes@;prefix call notation@rquotes or @lquotes@;direct
 receiver notation@rquotes@;.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Given the following definitions for a tagged type T:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[Given the following
+definitions for a tagged type T:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{procedure} Do_Something (Obj : in out T; Count : in Natural);
 My_Object : T;],Old=[]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[the following calls are equivalent:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[the following calls are equivalent:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[Do_Something (My_Object, 10);
@@ -925,12 +926,12 @@ the literal @key(null), or a @nt<string_literal>.
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01]}
-@Chg{Version=[2],New=[],Old=[@PDefn2{Term=[expected type],Sec=(null literal)}
+@ChgDeleted{Version=[2],Text=[@PDefn2{Term=[expected type],Sec=(null literal)}
 The expected type for a literal @key(null) shall be a single
 access type.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@Chg{Version=[2],New=[],Old=[This new wording ("expected type ... shall be a
+@ChgDeleted{Version=[2],Text=[This new wording ("expected type ... shall be a
 single ... type") replaces the old "shall be determinable" stuff. It reflects
 an attempt to simplify and unify the description of the rules for resolving
 aggregates, literals, type conversions, etc. See
@@ -971,12 +972,12 @@ a corresponding @nt<defining_character_literal> of
 the component type of the expected string type.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[],Old=[A literal @nt<null> shall not be of an anonymous
+@ChgDeleted{Version=[2],Text=[A literal @nt<null> shall not be of an anonymous
 access type@Redundant[, since such types do not have a null value
 (see @RefSecNum{Access Types})].]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@Chg{Version=[2],New=[],Old=[This is a legality rule rather than an overloading
+@ChgDeleted{Version=[2],Text=[This is a legality rule rather than an overloading
 rule, to simplify implementations.]}
 @end{Reason}
 @end{Legality}
@@ -1196,11 +1197,11 @@ will work (see @RefSecNum{User-Defined Assignment and Finalization}).
 @end{DiffWord83}
 
 @begin{Incompatible95}
-@Leading@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{incompatibilities with Ada 95}
 In Ada 95, a limited type is not considered when resolving an @nt{aggregate}.
 Since Ada 2005 now allows limited @nt{aggregate}s, we can have
-incompatibilities. For example:],Old=[]}
+incompatibilities. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{type} Lim @key{is} @key{limited}
@@ -1348,11 +1349,11 @@ are well defined, and that discriminants that govern @nt{variant_part}s
 can be given by static expressions.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
-@Chg{Version=[2],New=[For a partial view, all of the components of the full
+@ChgAdded{Version=[2],Text=[For a partial view, all of the components of the full
 type are needed, even though not all of them can be named in the
 @nt{aggregate}. For a generic formal type, all of the components of the actual
 type are needed, even though not all of them can be named in the
-@nt{aggregate}.],Old=[]}
+@nt{aggregate}.]}
 @end{Ramification}
 
 @Leading@Keepnext@PDefn2{Term=[expected type],
@@ -1463,27 +1464,27 @@ for some ancestor of the type of the aggregate.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[A @nt<record_component_association> for a discriminant
+@ChgAdded{Version=[2],Text=[A @nt<record_component_association> for a discriminant
 without a @nt<default_expression> shall have an @nt<expression> rather
-than <>.],Old=[]}
+than <>.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[A discriminant must always have a defined value,
+@ChgAdded{Version=[2],Text=[A discriminant must always have a defined value,
 but <> means uninitialized for a discrete type unless the component has a
-default value.],Old=[]}
+default value.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
-@Chg{Version=[2],New=[If the type of the @nt{record_aggregate} is a partial
-view of a type, a task type, a protected type, a formal private type, or a
-formal derived type:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If the type of the
+@nt{record_aggregate} is a partial view of a type, a task type, a protected
+type, a formal private type, or a formal derived type:]}
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
-  @Chg{Version=[2],New=[The @nt{record_component_association_list} shall
-  include @key{others} => <>; and],Old=[]}
+  @ChgAdded{Version=[2],Text=[The @nt{record_component_association_list} shall
+  include @key{others} => <>; and]}
   @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[For partial views and generic formals, this is needed
+  @ChgAdded{Version=[2],Text=[For partial views and generic formals, this is needed
    to avoid "leaking" information about the full type to the @nt{aggregate}.
    Without this rule, if the full type was @key{null record}, @key{null record}
    could be used; and if the full type had only one component, @key{others} =>
@@ -1491,47 +1492,47 @@ formal derived type:],Old=[]}
    Similar issues apply to formal types; if information about the actual type
    could be used in the aggregate, we'd have a generic contract issue. Since
    each component can only occur in a single association, this rule prevents
-   those issues.],Old=[]}
+   those issues.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[For tasks and protected types, this recognizes that
+  @ChgAdded{Version=[2],Text=[For tasks and protected types, this recognizes that
    there may be components (such as the lock for a protected type) that are
    only known to the implementation; these components necessarily have to be
    given default initialization. For portability, we don't want aggregates to
-   be written that depend on whether the implementation has such components.],Old=[]}
+   be written that depend on whether the implementation has such components.]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
-  @Chg{Version=[2],New=[The type of the @nt{record_aggregate} shall have known
+  @ChgAdded{Version=[2],Text=[The type of the @nt{record_aggregate} shall have known
   discriminants or be a tagged, task, or protected type that does not have
-  unknown discriminants; and],Old=[]}
+  unknown discriminants; and]}
 
   @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[We only want to allow @nt{aggregate}s of partial views
-   when the full type is certain to be composite. Otherwise, we would have
-   anomalies where additional visibility would cause the ability to have
+  @ChgAdded{Version=[2],Text=[We only want to allow @nt{aggregate}s of partial
+   views when the full type is certain to be composite. Otherwise, we would
+   have anomalies where additional visibility would cause the ability to have
    @nt{aggregate}s to disappear (if the full type is elementary).
    That's true if the partial view has known discriminants or is tagged.
    Task and protected types are also allowed, as they are always composite.
    We also disallow types with unknown discriminants. Unknown discriminants
    are often used to prevent uncontrolled initialization of objects, and
    we don't want to provide an uncontrolled initialization mechanism for
-   such types.],Old=[]}
+   such types.]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
-  @Chg{Version=[2],New=[The @nt{record_component_association_list} shall not
-  include a positional component association.],Old=[]}
+  @ChgAdded{Version=[2],Text=[The @nt{record_component_association_list} shall not
+  include a positional component association.]}
 
   @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[Otherwise, positional notation could be used to give
+  @ChgAdded{Version=[2],Text=[Otherwise, positional notation could be used to give
    associations for components of the full view that are not visible to the
    @nt{aggregate}. That would be bad. We disallow positional notation
    completely to avoid confusion and complexity; this shouldn't be a hardship
    since typically there will be no more than a couple discriminants along with
-   @key{others} => <> in such an @nt{aggregate}.],Old=[]}
+   @key{others} => <> in such an @nt{aggregate}.]}
   @end{Reason}
 @end{Itemize}
 
@@ -1564,14 +1565,14 @@ compatibility check in Ada 83.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[For a @nt<record_component_association> with an
+@ChgAdded{Version=[2],Text=[For a @nt<record_component_association> with an
 @nt<expression>, the @nt<expression> defines the value for the associated
 component(s). For a @nt<record_component_association> with <>, if the
 @nt<component_declaration> has a @nt<default_expression>, that
 @nt<default_expression> defines the value for the associated component(s);
 otherwise, the associated component(s) are initialized by default as for a
 stand-alone object of the component subtype
-(see @RefSecNum{Object Declarations}).],Old=[]}
+(see @RefSecNum{Object Declarations}).]}
 
 The @nt<expression> of a @nt{record_component_association}
 is evaluated (and converted) once for each associated component.
@@ -1735,21 +1736,21 @@ through one or more private extensions, then the
 shall not include a positional component association.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
-  @Chg{Version=[2],New=[The expression cannot to dynamically tagged to
+  @ChgAdded{Version=[2],Text=[The expression cannot to dynamically tagged to
   prevent implicit "truncation" of a dynamically-tagged value to the specific
   ancestor type. This is similar to the
-  rules in @RefSecNum{Dispatching Operations of Tagged Types}.],Old=[]}
+  rules in @RefSecNum{Dispatching Operations of Tagged Types}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
-  @Chg{Version=[2],New=[We allow the type of the @nt{ancestor_part} to be the
-  type itself, so that these are allowed for generic formal derived types,
-  where the actual type might be the same as the ancestor type.],Old=[]}
+  @ChgAdded{Version=[2],Text=[We allow the type of the @nt{ancestor_part} to be
+  the type itself, so that these are allowed for generic formal derived types,
+  where the actual type might be the same as the ancestor type.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
-  @Chg{Version=[2],New=[If the type involves any private extensions, we require
-  the use of @key{others} => <> and disallow positional associations in order to
-  avoid breaking privacy of the extensions. See @RefSecNum{Record Aggregates}
-  for a more complete discussion.],Old=[]}
+  @ChgAdded{Version=[2],Text=[If the type involves any private extensions, we
+  require the use of @key{others} => <> and disallow positional associations
+  in order to avoid breaking privacy of the extensions.
+  See @RefSecNum{Record Aggregates} for a more complete discussion.]}
 @end{Reason}
 @end{Legality}
 
@@ -2108,10 +2109,10 @@ proceeds in two steps:
 @end(Ramification)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[Each array component @nt{expression} defines the value
-for the associated component(s). For a component given by <>, the associated
-component(s) are initialized by default (see
-@RefSecNum{Object Declarations}).],Old=[]}
+@ChgAdded{Version=[2],Text=[Each array component @nt{expression} defines the
+value for the associated component(s). For a component given by <>, the
+associated component(s) are initialized by default (see
+@RefSecNum{Object Declarations}).]}
 
 @Leading@Defn2{Term=[bounds],
   Sec=(of the index range of an @nt{array_aggregate})}
@@ -2246,10 +2247,10 @@ F : String(1 .. 1) := (1 => 'F');  @RI[-- a one component aggregate: same as "F"
 
 @begin{Incompatible83}
 @ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00016}
-@Chg{New=[@Defn{incompatibilities with Ada 83}
+@ChgAdded{Version=[1],Type=[Leading],Text=[@Defn{incompatibilities with Ada 83}
 In Ada 95, no applicable index constraint is defined for a parameter
 in a call to a generic formal subprogram; thus, some aggregates that are
-legal in Ada 83 are illegal in Ada 95. For example:],Old=[]}
+legal in Ada 83 are illegal in Ada 95. For example:]}
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00016}
 @Chg{New=[@key[subtype] S3 @key[is] String (1 .. 3);
@@ -2886,14 +2887,15 @@ with the following specifications:
 @key(function) "/="(Left, Right : @RI(T)) @key(return) Boolean
 @end(example)
 
-@Leading@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@Chg{Version=[2],New=[The following additional equality operators for the
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following additional equality
+operators for the
 @i<universal_access> type are declared in package Standard for use with
-anonymous access types:],Old=[]}
+anonymous access types:]}
 @begin(example)
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[@key<function> "=" (Left, Right : @i<universal_access>) @key<return> Boolean
-@key<function> "/="(Left, Right : @i<universal_access>) @key<return> Boolean],Old=[]}
+@ChgAdded{Version=[2],Text=[@key<function> "=" (Left, Right : @i<universal_access>) @key<return> Boolean
+@key<function> "/="(Left, Right : @i<universal_access>) @key<return> Boolean]}
 @end(example)
 
 @Leading@;The ordering operators are predefined for every specific
@@ -2909,26 +2911,26 @@ scalar type @i(T), and for every discrete array type
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@Chg{Version=[2],New=[At least one of the operands of the equality operators
-for @i<universal_access> shall be of a specific anonymous access type.],Old=[]}
+@ChgAdded{Version=[2],Text=[At least one of the operands of the equality
+operators for @i<universal_access> shall be of a specific anonymous access type.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This prevents compatibility problems by insuring that
+@ChgAdded{Version=[2],Text=[This prevents compatibility problems by insuring that
 these operators are not used for named access types. Also, universal access
 types do not count for the purposes of this rule. Otherwise, equality
-expressions like (X = @key{null}) would be ambiguous for normal access types.],Old=[]}
+expressions like (X = @key{null}) would be ambiguous for normal access types.]}
 @end{Reason}
 @end{Resolution}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@Chg{Version=[2],New=[The operands of the equality operators for
+@ChgAdded{Version=[2],Text=[The operands of the equality operators for
 @i<universal_access> shall be convertible to one another (see
-@RefSecNum{Type Conversions}).],Old=[]}
+@RefSecNum{Type Conversions}).]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This insures that the designated type is the same,
-or one of the operands is @key{null}.],Old=[]}
+@ChgAdded{Version=[2],Text=[This insures that the designated type is the same,
+or one of the operands is @key{null}.]}
 @end{Reason}
 @end{Legality}
 
@@ -2996,10 +2998,10 @@ for any other components not inherited from the parent type.
   for the parent type considers them equal.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00349-01]}
-  @Chg{Version=[2],New=[The full type extension's operation is used for a
-  private extension. This follows as only full types have parent types;
+  @ChgAdded{Version=[2],Type=[Leading],Text=[The full type extension's operation
+  is used for a private extension. This follows as only full types have parent types;
   the type specified in a private extension is an ancestor, but not necessarily
-  the parent type. For instance, in:],Old=[]}
+  the parent type. For instance, in:]}
   @begin(Example)
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{with} Pak1;
@@ -3169,17 +3171,18 @@ the corresponding membership test using @key(in).
 
 @begin{ImplReq}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016],ARef=[AI95-00123-01]}
-@Chg{New=[For all nonlimited types declared in language-defined packages,
-the "=" and "/=" operators of the type shall behave as if they were the
-predefined equality operators for the purposes of the equality of composite
-types and generic formal types.],Old=[]}
+@ChgAdded{Version=[1],Text=[For all nonlimited types declared in
+language-defined packages, the "=" and "/=" operators of the type shall behave
+as if they were the predefined equality operators for the purposes of the
+equality of composite types and generic formal types.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[If any language-defined types are implemented with a user-defined
-"=" operator, then either the full type must be tagged, or the compiler must
+@ChgAdded{Version=[1],Text=[If any language-defined types are implemented with
+a user-defined "=" operator, then either the full type must be tagged, or
+the compiler must
 use @lquotes@;magic@rquotes@; to implement equality for this type. A normal
 user-defined "=" operator for an untagged type does @i{not} meet this
-requirement.],Old=[]}
+requirement.]}
 @end{Ramification}
 @end{ImplReq}
 
@@ -3559,7 +3562,7 @@ any fixed point type.
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00364-01]}
-@Chg{Version=[2],New=[The above two fixed-fixed multiplying operators shall
+@ChgAdded{Version=[2],Text=[The above two fixed-fixed multiplying operators shall
 not be used in a context where the expected type for the result is itself
 @i(universal_fixed) @Redundant[@em the context has to identify some other
 numeric type to which the result is to be converted, either explicitly or
@@ -3568,11 +3571,11 @@ above fixed-fixed multiplication operator when either operand is of a type
 having a user-defined primitive multiplication operator declared immediately
 within the same list of declarations as the type and with both formal
 parameters of a fixed-point type. A corresponding requirement applies to
-the universal fixed-fixed division operator.],Old=[]}
+the universal fixed-fixed division operator.]}
 
 @begin(Discussion)
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The @i(small) of @i(universal_fixed) is
+@ChgAdded{Version=[2],Text=[The @i(small) of @i(universal_fixed) is
 infinitesimal; no loss of precision is permitted.
 However, fixed-fixed division is impractical to implement when
 an exact result is required,
@@ -3580,24 +3583,24 @@ and multiplication will sometimes result in unanticipated overflows
 in such circumstances,
 so we require an explicit conversion to be inserted in
 expressions like A * B * C if A, B, and C are each of some fixed point
-type.],Old=[]}
+type.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[On the other hand, X := A * B; is permitted by this rule, even if X, A, and B
+@ChgAdded{Version=[2],Text=[On the other hand, X := A * B; is permitted by this rule, even if X, A, and B
 are all of different fixed point types, since the expected type
 for the result of the multiplication is the type of X, which is necessarily
-not @i(universal_fixed).],Old=[]}
+not @i(universal_fixed).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00364-01]}
-@Chg{Version=[2],New=[We have made these into Name Resolution rules to ensure
-that user-defined primitive fixed-fixed operators are not made unusable due
-to the presence of these universal fixed-fixed operators.],Old=[]}
+@ChgAdded{Version=[2],Text=[We have made these into Name Resolution rules to
+ensure that user-defined primitive fixed-fixed operators are not made unusable
+due to the presence of these universal fixed-fixed operators.]}
 @end(Discussion)
 @end{Resolution}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00364-01]}
-@Chg{Version=[2],New=[],Old=[The full type extension's operation is used for a
+@ChgDeleted{Version=[2],Text=[The full type extension's operation is used for a
 The above two fixed-fixed multiplying operators
 shall not be used in a context where the expected type for the result
 is itself @i(universal_fixed) @em @Redundant[the context has to
@@ -3605,7 +3608,7 @@ identify some other numeric type to which the result is to be converted,
 either explicitly or implicitly].]}
 @begin(Discussion)
 @ChgRef{Version=[2],Kind=[Deleted]}
-@Chg{Version=[2],New=[],Old=[The @i(small) of @i(universal_fixed) is infinitesimal; no loss
+@ChgDeleted{Version=[2],Text=[The @i(small) of @i(universal_fixed) is infinitesimal; no loss
 of precision is permitted.
 However, fixed-fixed division is impractical to implement when
 an exact result is required,
@@ -3616,7 +3619,7 @@ expressions like A * B * C if A, B, and C are each of some fixed point
 type.]}
 
 @ChgRef{Version=[2],Kind=[Deleted]}
-@Chg{Version=[2],New=[],Old=[On the other hand, X := A * B; is permitted by this rule, even if X, A, and B
+@ChgDeleted{Version=[2],Text=[On the other hand, X := A * B; is permitted by this rule, even if X, A, and B
 are all of different fixed point types, since the expected type
 for the result of the multiplication is the type of X, which is necessarily
 not @i(universal_fixed).]}
@@ -3864,12 +3867,12 @@ Constraint_Error is raised if this check fails.
 
 @begin{Inconsistent83}
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0100],ARef=[AI95-00018-01]}
-  @Chg{New=[@Defn{inconsistencies with Ada 83}
+  @ChgAdded{Version=[1],Text=[@Defn{inconsistencies with Ada 83}
   The definition of "**" allows arbitrary association of the
   multiplications which make up the result. Ada 83 required left-to-right
   associations (confirmed by AI83-00137). Thus it is possible that "**"
   would provide a slightly different answer in Ada 95 than in the same Ada 83
-  program.],Old=[]}
+  program.]}
 @end{Inconsistent83}
 
 @begin{DiffWord83}
