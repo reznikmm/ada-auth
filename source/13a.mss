@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/04/02 07:09:37 $}
+@Comment{$Date: 2005/04/04 04:38:45 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -360,6 +360,9 @@ Storage_Pool clause
 
 Storage_Size clause
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
+@ChgAdded{Version=[2],Text=[Stream_Size clause]}
+
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgDeleted{Version=[1],Text=[Read clause]}
 
@@ -449,9 +452,6 @@ type-related:]}
 
 @ChgRef{Version=[1],Kind=[AddedNormal]}
 @ChgAdded{Version=[1],Text=[Output clause]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00270-01]}
-@ChgAdded{Version=[2],Text=[Stream_Size clause]}
 
 @end{Itemize}
 @end{Ramification}
@@ -1061,6 +1061,14 @@ or in addition to,
 a @nt{pragma} Pack.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[If a packed type has a component which is not of a
+by-reference type and has no aliased part then such a component need not be be
+aligned according to the Alignment of the component's subtype; in particular it
+need not be allocated on a storage element boundary.]}
+@Comment{No "should" here; thus no ImplAdvice entry. This really qualifies the
+item above}
+
 @Leading@PDefn2{Term=[recommended level of support], Sec=(pragma Pack)}
 The recommended level of support for pragma Pack is:
 @begin{Itemize}
@@ -1097,6 +1105,15 @@ so it probably won't get packed very tightly.
 Text=[The recommended level of support for pragma Pack should be
 followed.]}]}
 @end{ImplAdvice}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+  @ChgAdded{Version=[2],Text=[Added clarification that pragma Pack can
+  ignore alignment requirements on types that don't have by-reference or
+  aliased parts. This was always intended, but there was no wording to that
+  effect.]}
+@end{DiffWord95}
+
 
 
 @LabeledRevisedClause{Version=[1],New=[Operational and Representation Attributes], Old=[Representation Attributes]}
@@ -1206,7 +1223,7 @@ the profile shall be mode conformant with the one
 required for the attribute,
 and the convention shall be Ada.
 Additional requirements are defined for particular attributes.
-@Defn2{Term=[subtype conformance],Sec=(required)}
+@Defn2{Term=[mode conformance],Sec=(required)}
 @begin{Ramification}
 @Leading@;This implies, for example, that if one writes:
 @begin{Example}
@@ -1220,6 +1237,7 @@ subtypes and modes as shown in
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00270-01]}
 @Defn{Address clause}
 @Defn{Alignment clause}
 @Defn{Size clause}
@@ -1228,7 +1246,8 @@ subtypes and modes as shown in
 @Defn{Small clause}
 @Defn{Bit_Order clause}
 @Defn{Storage_Pool clause}
-@Defn{Storage_Size clause}
+@Defn{Storage_Size clause}@Chg{Version=[2],New=[
+@Defn{Stream_Size clause}],Old=[]}
 @Defn{Read clause}
 @Defn{Write clause}
 @Defn{Input clause}
@@ -1415,14 +1434,16 @@ type, or is an entity whose Address has been specified.
 An implementation should support Address clauses for
 imported subprograms.
 
-Objects (including subcomponents) that are aliased or
-of a by-reference type
-should be allocated on storage element boundaries.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00291-02]}
+@ChgDeleted{Version=[2],Text=[Objects (including subcomponents) that are
+aliased or of a by-reference type
+should be allocated on storage element boundaries.]}
+@Comment{There is a now a blanket permission to this effect}
 @begin{Reason}
-This is necessary for the Address attribute to be useful
-(since First_Bit and Last_Bit apply only to components).
-Implementations generally need to do this anyway,
-for tasking to work properly.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[This is necessary for the Address attribute to be
+useful (since First_Bit and Last_Bit apply only to components). Implementations
+generally need to do this anyway, for tasking to work properly.]}
 @end{Reason}
 
 If the Address of an object is specified,
@@ -1493,15 +1514,22 @@ than that.
 
 @begin{StaticSem}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
 @Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
-@Chg{New=[@nt{prefix}],Old=[prefix]} X that denotes a subtype or object]}:
+@Chg{New=[@nt{prefix}],Old=[prefix]} X that denotes @Chg{Version=[2],New=[an],
+Old=[a subtype or]} object]}:
 @begin{Description}
-@Attribute{Prefix=<X>, AttrName=<Alignment>,
-  Text=<The Address of an object that is allocated under
-    control of the implementation is an integral
-    multiple of the Alignment of the object
-    (that is, the Address modulo the Alignment is zero).
-    The offset of a record component is a multiple of the
+@ChgAttribute{Version=[2], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<X>, AttrName=<Alignment>, ARef=[AI95-00291-02],
+  Text=[@Chg{Version=[2],New=[The value of this attribute is of type
+    @i{universal_integer}, and nonnegative; zero means that the object is not
+    necessarily aligned on a storage element boundary. If X'Alignment is not
+    zero, then X is aligned on a storage unit boundary and X'Address],
+    Old=[The Address of an object that is allocated under
+    control of the implementation]} is an integral multiple of
+    @Chg{Version=[2],New=[X'Alignment],Old=[the Alignment of the object]}
+    (that is, the Address modulo the Alignment is zero).@Chg{Version=[2],
+    New=[],Old=[The offset of a record component is a multiple of the
     Alignment of the component.
     For an object that is not allocated under control of
     the implementation
@@ -1512,44 +1540,61 @@ than that.
     instance of Unchecked_Conversion),
     the implementation may assume that the Address is
     an integral multiple of its Alignment.
-    The implementation shall not assume a stricter alignment.
+    The implementation shall not assume a stricter alignment.]}
 
-    @NoPrefix@;The value of this attribute is of type @i{universal_integer},
-    and nonnegative;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00291-02]}
+@ChgDeleted{Version=[2],NoPrefix=[T],Text=[The value of this attribute
+    is of type @i{universal_integer}, and nonnegative;
     zero means that the object is not necessarily
-    aligned on a storage element boundary.>}
+    aligned on a storage element boundary.]}]}@Comment{End X'Alignment}
 @EndPrefixType{}
 @begin{Ramification}
-The Alignment is passed by an @nt{allocator} to the
-Allocate operation;
+The Alignment is passed by an @nt{allocator} to the Allocate operation;
 the implementation has to choose a value such that if the address
 returned by Allocate is aligned as requested,
 the generated code can correctly access the object.
-
 
 The above mention of @lquotes@;modulo@rquotes@; is referring to the "@key[mod]"
 operator declared in System.Storage_Elements;
 if X @key[mod] N = 0, then X is by definition aligned on an
 N-storage-element boundary.
-
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
 @NoPrefix@PDefn2{Term=[specifiable], Sec=(of Alignment for first subtypes and objects)}
 @Defn{Alignment clause}
-Alignment may be specified for first subtypes and
+Alignment may be specified for@Chg{Version=[2],New=[],Old=[ first subtypes and]}
 @Redundant[stand-alone] objects via an @nt{attribute_@!definition_@!clause};
-the expression of such a clause shall be static, and its value nonnegative.
-If the Alignment of a subtype is specified,
-then the Alignment of an object of the subtype is at least as strict,
-unless the object's Alignment is also specified.
+the expression of such a clause shall be static, and its value
+nonnegative.@Chg{Version=[2],New=[],Old=[If the Alignment of a subtype is
+specified, then the Alignment of an object of the subtype is at least as
+strict, unless the object's Alignment is also specified.
 The Alignment of an object created by an allocator is that of the
-designated subtype.
+designated subtype.]}
 
-@NoPrefix@;If an Alignment is specified for a composite subtype or object, this
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00247-01]}
+@ChgDeleted{Version=[2],NoPrefix=[T],Text=[If an Alignment is specified
+for a composite subtype or object, this
 Alignment shall be equal to the least common multiple of any
 specified Alignments of the subcomponent subtypes, or an integer
-multiple thereof.
+multiple thereof.]}
 @end{Description}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],
+Text=[For @PrefixType{every subtype S}:]}
+@begin{Description}
+@ChgAttribute{Version=[2], Kind=[Added], ChginAnnex=[F], Leading=[F],
+  Prefix=<S>, AttrName=<Alignment>, ARef=[AI95-00291-02],
+  Text=[@Chg{Version=[2],New=[The value of this attribute is of type
+  @i{universal_integer}, and nonnegative.],Old=[]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00051-02],ARef=[AI95-00291-02]}
+  @ChgAdded{Version=[2],NoPrefix=[T], Text=[For an object X of subtype S,
+  if S'Alignment is not zero, then X'Alignment is a nonzero integral multiple
+  of S'Alignment unless specified otherwise by a representation item.]}]}@Comment{End S'Alignment}
+@end{Description}
+
 @end{StaticSem}
 
 @begin{Erron}
@@ -1561,11 +1606,13 @@ The user has to either give an Alignment clause also,
 or else know what Alignment the implementation will choose by default.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02],ARef=[AI95-00291-02]}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
-If the Alignment is specified for an object that is not allocated
-under control of the implementation,
+@Chg{Version=[2],New=[For],Old=[If the Alignment is specified for]} an
+object that is not allocated under control of the implementation,
 execution is erroneous if the object is not aligned according to the
 Alignment.
+
 @end{Erron}
 
 @begin{ImplAdvice}
@@ -1574,20 +1621,44 @@ for subtypes)}
 @Leading@;The recommended level of support for the Alignment attribute for
 subtypes is:
 @begin{Itemize}
-An implementation should support specified
-Alignments that are factors and multiples of
-the number of storage elements per word,
-subject to the following:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02]}
+An implementation should support @Chg{Version=[2],New=[an Alignment clause
+for a discrete type, fixed point type, record type, or
+array type, specifying an Alignment value that is zero or
+a power of two],Old=[specified Alignments that are factors and multiples of
+the number of storage elements per word]}, subject to the following:
 
-An implementation need not support specified
-Alignments for combinations of Sizes and
-Alignments that cannot be easily loaded and
-stored by available machine instructions.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02]}
+An implementation need not support
+@Chg{Version=[2], New=[an Alignment clause for a signed
+integer type specifying an Alignment greater than the largest
+Alignment value that is ever chosen by default by the implementation
+for any signed integer type. A corresponding limitation may be
+imposed for modular integer types, fixed point types, enumeration types,
+record types, and array types],Old=[specified Alignments for combinations
+of Sizes and Alignments that cannot be easily loaded and
+stored by available machine instructions]}.
 
-An implementation need not support specified
-Alignments that are greater than the maximum
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02]}
+An implementation need not support
+@Chg{Version=[2],New=[a nonconfirming Alignment clause which could enable the
+creation of an object of an elementary type which cannot be easily loaded and
+stored by available machine instructions.],
+Old=[specified Alignments that are greater than the maximum
 Alignment the implementation ever returns
-by default.
+by default.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[An implementation need not support an
+Alignment specified for a derived tagged type which is not a multiple of the
+Alignment of the parent type. An implementation need not support a
+nonconfirming Alignment specified for a derived untagged by-reference type.]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[Remember that
+@RefSecNum{Operational and Representation Items} requires support for
+confirming alignment clauses for all types.]}
+@end{Discussion}
 @end{Itemize}
 
 @Leading@PDefn2{Term=[recommended level of support], Sec=(Alignment attribute
@@ -1596,6 +1667,12 @@ The recommended level of support for the Alignment attribute for
 objects is:
 @begin{Itemize}
 Same as above, for subtypes, but in addition:
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[An implementation need not support Alignments
+specified for objects of a by-reference type or for objects of types containing
+aliased subcomponents if the specified Alignment is not a multiple of the
+Alignment of the object's subtype.]}
 
 For stand-alone library-level objects of statically constrained
 subtypes, the implementation should support all Alignments
@@ -1610,12 +1687,15 @@ followed.]}]}
 @begin{Notes}
 Alignment is a subtype-specific attribute.
 
-The Alignment of a composite object is always equal to the least
-common multiple of the Alignments of its components, or a multiple
-thereof.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00247-01]}
+@ChgDeleted{Version=[2],Text=[The Alignment of a composite object is always
+equal to the least common multiple of the Alignments of its components, or a
+multiple thereof.]}
 @begin{Discussion}
-For default Alignments, this follows from the semantics of Alignment.
-For specified Alignments, it follows from a @LegalityName stated above.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[For default Alignments, this follows from the
+semantics of Alignment. For specified Alignments, it follows from a
+@LegalityName stated above.]}
 @end{Discussion}
 
 A @nt{component_clause}, Component_Size clause, or a @nt{pragma} Pack
@@ -1644,12 +1724,14 @@ alignment of, say, an imported object. Furthermore, the information
 about where an address @lquotes@;came from@rquotes@; can be lost to the compiler due to
 separate compilation.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The Alignment of an object that is a component of a packed
 composite object will usually be 0, to indicate that the component is
 not necessarily aligned on a storage element boundary.
 For a subtype, an Alignment of 0 means that objects of the subtype are
 not normally aligned on a storage element boundary at all.
-For example, an implementation might choose to make Component_Size be 0
+For example, an implementation might choose to make Component_Size be
+@Chg{Version=[2],New=[1],Old=[0]}
 for an array of Booleans, even when @nt{pragma} Pack has not been
 specified for the array.
 In this case, Boolean'Alignment would be 0.
@@ -1748,15 +1830,19 @@ its bounds.]}
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The Size of an array object should not include its bounds.]}]}
 
-@Leading@PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00051-02]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[]}@Comment{A fake to get a conditional Leading}
+@PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
 The recommended level of support for the Size attribute
-of objects is:
+of objects is@Chg{Version=[2],New=[the same as for subtypes (see below)],
+Old=[:]}
 @begin{Itemize}
-A Size clause should be supported for an object if the specified Size
-is at least as large as its subtype's Size, and corresponds to a size in
-storage elements that is a multiple of the object's Alignment (if the
-Alignment is nonzero).
-@Comment{No summary here; there is no reason to separately mention it}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00051-02]}
+@ChgDeleted{Version=[2],Text=[A Size clause should be supported for an object
+if the specified Size is at least as large as its subtype's Size, and
+corresponds to a size in storage elements that is a multiple of the object's
+Alignment (if the Alignment is nonzero).]}
+@Comment{No ImplDef summary here; there is no reason to separately mention it}
 @end{Itemize}
 @end{ImplAdvice}
 
@@ -1858,8 +1944,9 @@ In an implementation, Boolean'Size shall be 1.
 @end{ImplReq}
 
 @begin{ImplAdvice}
-@Leading@;If the Size of a subtype is specified,
-and allows for efficient independent addressability
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00051-02]}
+@Leading@;If the Size of a subtype @Chg{Version=[2],New=[],Old=[is specified,
+and ]}allows for efficient independent addressability
 (see @RefSecNum{Shared Variables}) on the target architecture,
 then the Size of the following objects of the subtype should equal the
 Size of the subtype:
@@ -1871,8 +1958,8 @@ component is determined by a @nt{component_clause} or Component_Size
 clause.
 @end{Itemize}
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[If the Size of a subtype is specified, and allows for efficient
-independent addressability, then the Size of most objects of the subtype should
+Text=[If the Size of a subtype allows for efficient independent
+addressability, then the Size of most objects of the subtype should
 equal the Size of the subtype.]}]}
 @begin{Ramification}
 Thus, on a typical 32-bit machine,
@@ -1898,18 +1985,23 @@ The same is not true of array components;
 their Size may be rounded up to the nearest factor of the word size.
 @end{Ramification}
 @begin{ImplNote}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
 @Defn{gaps}
-On most machines, arrays don't contain gaps between components;
+On most machines, arrays don't contain gaps between @Chg{Version=[2],
+New=[elementary ],Old=[]}components;
 if the Component_Size is greater than the Size of the component subtype,
 the extra bits are generally considered part of each component,
 rather than gaps between components.
 On the other hand,
-a record might contain gaps between components,
+a record might contain gaps between @Chg{Version=[2],
+New=[elementary ],Old=[]}components,
 depending on what sorts of loads, stores, and masking operations
 are generally done by the generated code.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
 For an array,
-any extra bits stored for each component will generally be part
+any extra bits stored for each @Chg{Version=[2],
+New=[elementary ],Old=[]}component will generally be part
 of the component @em the whole point of storing extra bits is to
 make loads and stores more efficient by avoiding the need to mask out
 extra bits.
@@ -2098,10 +2190,46 @@ should be the size of the pointer.
 The Storage_Size, on the other hand,
 should include the size of the stack.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00051-02]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[An implementation should support a
+Size clause for a discrete type, fixed point type, record type, or array type,
+subject to the following:]}
+@begin{InnerItemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00051-02]}
+@ChgAdded{Version=[2],Text=[An implementation need not support a Size clause
+for a signed integer type specifying a Size greater than that of the largest
+signed integer type supported by the implementation in the absence of a size
+clause (that is, when the size is chosen by default). A corresponding
+limitation may be imposed for modular integer types, fixed point types,
+enumeration types, record types, and array types.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00051-02]}
+  @ChgAdded{Version=[2],Text=[Note that the @lquotes@;corresponding
+  limitation@rquotes for a record or array type implies that an implementation
+  may impose some reasonable maximum size for records and arrays (e.g. 2**32
+  bits), which is an upper bound (@lquotes@;capacity@rquotes limit) on the
+  size, whether chosen by default or by being specified by the user. The
+  largest size supported for records need not be the same as the largest
+  size supported for arrays.]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00291-02]}
+@ChgAdded{Version=[2],Text=[A nonconfirming size clause for the first subtype
+of a derived untagged by-reference type need not be supported.]}
+@end{InnerItemize}
 @end{Itemize}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The recommended level of support for the Size attribute should be
 followed.]}]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+@ChgAdded{Version=[2],Text=[Remember that
+@RefSecNum{Operational and Representation Items} requires support for
+confirming size clauses for all types.]}
+@end{Discussion}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -2343,7 +2471,9 @@ same in two different partitions.}
   in which the type is declared (or changes in some unit on which it
   depends).
 
-  We use a String rather than a Storage_Array to represent an
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+  We use a String rather than a @Chg{Version=[2],
+  New=[Stream_Element_Array],Old=[Storage_Array]} to represent an
   external tag for portability.
 @end{Reason}
 @begin{Ramification}
@@ -2355,11 +2485,14 @@ same in two different partitions.}
 @end{ImplReq}
 
 @begin{Notes}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00270-01]}
 The following language-defined attributes are specifiable,
 at least for some of the kinds of entities to which they apply:
 Address, Size, Component_Size, Alignment, External_Tag,
 Small, Bit_Order, Storage_Pool, Storage_Size,
-Write, Output, Read, Input,
+@Chg{Version=[2],New=[Stream_Size, ],Old=[]}
+Write, @Chg{Version=[2],New=[],Old=[Output, ]}Read,
+@Chg{Version=[2],New=[Output, ],Old=[]}Input,
 and Machine_Radix.
 
 It follows from the general rules in @RefSecNum{Operational and Representation Items}
@@ -2437,9 +2570,41 @@ except for certain explicit exceptions.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
   External_Tag is never inherited.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00051-01],ARef=[AI95-00291-01]}
+  @ChgAdded{Version=[2],Text=[Adjusted the Recommended Level of Support for
+  Alignment to eliminate nonsense requirements and to insure that useful
+  capabilities are required.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00051-01],ARef=[AI95-00291-01]}
+  @ChgAdded{Version=[2],Text=[Adjusted the Recommended Level of Support for
+  Size to eliminate nonsense requirements and to insure that useful
+  capabilities are required. Also eliminated any dependence on whether an
+  aspect was specified (a confirming rep. item should not affect the
+  semantics).]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
   @ChgAdded{Version=[2],Text=[Added the definition of machine scalar.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00247-01]}
+  @ChgAdded{Version=[2],Text=[Removed the requirement that specified
+  alignments for a composite type cannot override those for their components,
+  because it was never intended to apply to components whose location was
+  specified with a representation item. Moreover, it causes a difference in
+  legality when a confirming alignment is specified for one of the composite
+  types.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+  @ChgAdded{Version=[2],Text=[Removed recommended level of support rules about
+  types with by-reference and aliased parts, because these are now blanket
+  rules covering all recommended level of support rules.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+  @ChgAdded{Version=[2],Text=[Split the definition of Alignment for subtypes
+  and for objects. This simplified the wording and eliminated confusion about
+  which rules applied to objects, which applied to subtypes, and which applied
+  to both.]}
 @end{DiffWord95}
+
 
 
 @LabeledClause{Enumeration Representation Clauses}

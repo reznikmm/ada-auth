@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/04/02 07:09:38 $}
+@Comment{$Date: 2005/04/04 04:38:46 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @LabeledClause{The Package System}
 
@@ -2684,7 +2684,7 @@ external streaming.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For @PrefixType{every subtype S of
-an elementary type @i(T)}, the following operational attribute is defined:]}
+an elementary type @i(T)}, the following representation attribute is defined:]}
 @begin{Description}
 
 @ChgAttribute{Version=[2],Kind=[Added],ChginAnnex=[T],
@@ -3986,7 +3986,7 @@ For example, an @nt{enumeration_@!representation_@!clause} is illegal after the
 type is frozen, even though the @nt{_clause} refers to the first subtype.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00114-01]}
-@ChgAdded{Version=[2],Text=[The above Legality Rule is stated
+@ChgAdded{Version=[2],Text=[The above @LegalityName is stated
 for types and subtypes in @RefSecNum{Operational and Representation Items},
 but the rule here covers all other entities as well.]}
 @end{Discussion}

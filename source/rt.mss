@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2005/03/30 00:54:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2005/04/04 04:38:47 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/30 00:54:07 $}
+@Comment{$Date: 2005/04/04 04:38:47 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2168,7 +2168,7 @@ One way to implement this is to wake T2 up and have T2 do the work.
 This is similar to the disentangling of queues that needs to happen when
 a high-priority task aborts a lower-priority task,
 which might have a call queued on a protected object with a low
-ceiling.@Chg{Version=[2],New=[ We have an Implementation Permission in
+ceiling.@Chg{Version=[2],New=[ We have an @ImplPermName in
 @RefSecNum{Entry Queuing Policies} to allow this implementation.],Old=[]}
 @end{ImplNote}
 @begin{Reason}
