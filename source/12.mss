@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2004/12/11 06:27:57 $}
+@Comment{$Date: 2004/12/12 05:36:21 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2017,12 +2017,14 @@ the designated subtypes of the formal and actual types shall
 statically match.
 @PDefn2{Term=[statically matching],Sec=(required)}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 If and only if the @nt{general_access_modifier} @key{constant} applies
 to the formal,
 the actual shall be an access-to-constant type.
 If the @nt{general_access_modifier} @key{all} applies to the
 formal, then the actual shall be a general access-to-variable type
-(see @RefSecNum{Access Types}).
+(see @RefSecNum{Access Types}).@Chg{Version=[2],New=[ If and only
+if the formal subtype excludes null, the actual subtype shall exclude null.],Old=[]}
 @begin{Ramification}
 If no @nt{_modifier} applies to the formal, then
 the actual type may be either a pool-specific or a general
@@ -2033,6 +2035,17 @@ access-to-variable type.
 @ChgAdded{Version=[1],Text=[Matching an access-to-variable to a formal
 access-to-constant type cannot be allowed. If it were allowed, it would
 be possible to create an access-to-variable value designating a constant.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231]}
+@ChgAdded{Version=[2],Text=[We require that the null exclusion property
+match, because it would be difficult to write a correct generic for a formal
+access type without knowing this property. Many typical algorithms and
+techniques will not work for a null excluding subtype (setting an unused
+component to null, default-initialized objects, and so on). Even
+Ada.Unchecked_Deallocation would fail for a null excluding subtype. Most
+generics would end up with comments saying that they are not intended to work
+for null excluding subtypes. We would rather that this sort to requirement
+be reflected in the contract of the generic.]}
 @end{Reason}
 
 For a formal access-to-subprogram subtype,
@@ -2095,6 +2108,64 @@ Formal access-to-subprogram subtypes and formal general access
 types are new concepts.
 @end{Extend83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[Added a matching rule for subtypes that exclude
+  null.]}
+@end{DiffWord95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Formal Interface Types]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[The class determined for a formal
+interface type is the class of all interface types.]]}
+
+@end{Intro}
+
+@begin{Syntax}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<formal_interface_type_definition>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<@Syn2{interface_type_definition}>,Old=<>}"}
+@end{Syntax}
+
+@begin{Legality}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251]}
+@ChgAdded{Version=[2],Text=[The actual type shall be an interface type.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The class of all interface types includes
+  non-interface descendants of interface types. Such types must
+  not match a formal interface.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251]}
+@ChgAdded{Version=[2],Text=[The actual type shall be a descendant of every
+ancestor of the formal type.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345]}
+@ChgAdded{Version=[2],Text=[The actual type shall be a limited, task,
+protected, or synchronized interface
+if and only if the formal type is also, respectively, a limited, task,
+protected, or synchronized interface.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We require the kind of interface type to match
+  exactly because without that it is almost impossible to properly implement
+  the interface.]}
+@end{Discussion}
+@end{Legality}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The formal interface type is new.]}
+@end{Extend95}
+
+
 @LabeledClause{Formal Subprograms}
 
 @begin{Intro}
@@ -2109,10 +2180,33 @@ Generic formal subprograms are like renames of the @nt{explicit_generic_actual_p
 @end{MetaRules}
 
 @begin{Syntax}
-@Syn{lhs=<formal_subprogram_declaration>,rhs="@key{with} @Syn2{subprogram_specification} [@key{is} @Syn2{subprogram_default}];"}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
+@Syn{lhs=<formal_subprogram_declaration>,rhs="@Chg{Version=[2],
+New=<@Syn2{formal_abstract_subprogram_declaration}
+    | @Syn2{formal_concrete_subprogram_declaration}>,
+Old=<@key{with} @Syn2{subprogram_specification} [@key{is} @Syn2{subprogram_default}];>}"}
 
-@Syn{lhs=<subprogram_default>,rhs="@Syn2{default_name} | <>"}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@Syn{lhs=<@Chg{Version=[2],New=<formal_concrete_subprogram_declaration>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<
+     @key{with} @Syn2{subprogram_specification} [@key{is} @Syn2{subprogram_default}];>,Old=<>}"}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@Syn{lhs=<@Chg{Version=[2],New=<formal_abstract_subprogram_declaration>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<
+     @key{with} @Syn2{subprogram_specification} @key{is abstract} [@Syn2{subprogram_default}];>,Old=<>}"}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+@Syn{lhs=<subprogram_default>,rhs="@Syn2{default_name} | <>@Chg{Version=[2],New=< | @key{null}>,Old=<>}"}
+
 @Syn{lhs=<default_name>,rhs="@Syn2{name}"}
+
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
+@ChgAdded{Version=[2],Text=[A @nt{subprogram_default} of @key{null} shall not
+be specified for a formal function.]}
+@end{SyntaxText}
+
 @end{Syntax}
 
 @begin{Resolution}
@@ -2120,12 +2214,11 @@ Generic formal subprograms are like renames of the @nt{explicit_generic_actual_p
 The expected profile for the @nt<default_name>, if any, is that of the
 formal subprogram.
 @begin{Ramification}
-This rule,
+  This rule,
   unlike others in this clause, is observed at compile
   time of the @nt{generic_declaration}.
 
-The evaluation
-  of the @nt{default_name} takes place during the
+  The evaluation of the @nt{default_name} takes place during the
   elaboration of each instantiation that uses the default, as defined
   in @RefSec{Generic Instantiation}.
 @end{Ramification}
@@ -2146,9 +2239,84 @@ time of the @nt{generic_declaration}.
 
 The profiles of the formal and actual shall be mode-conformant.
 @Defn2{Term=[mode conformance],Sec=(required)}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[If a formal parameter of an
+@nt{formal_@!abstract_@!subprogram_@!declaration} is of a
+specific tagged type T or of an anonymous access designating a specific tagged
+type T, T is called a @i<controlling type> of the
+@nt{formal_@!abstract_@!subprogram_@!declaration}. Similarly, if the result
+of an @nt{formal_@!abstract_@!subprogram_@!declaration} for a function is of
+a specific tagged
+type T or of an anonymous access designating a specific tagged type T, T is
+called a controlling type of
+the @nt{formal_@!abstract_@!subprogram_@!declaration}. A
+@nt{formal_@!abstract_@!subprogram_@!declaration} shall have exactly
+one controlling type.
+@Defn2{Term=[controlling type],Sec=[of a @nt{formal_abstract_subprogram_declaration}]}]}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[The specific tagged type could be any of
+  a formal tagged private type,
+  a formal derived type, or a normal tagged type. While the last case doesn't
+  seem to be very useful, there isn't any good reason for disallowing it.
+  This rule insures that the operation is a dispatching operation of some
+  type, and that we unambiguously know what that type is.]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[We informally call a subprogram declared by
+  a @nt{formal_@!abstract_@!subprogram_@!declaration} an
+  @i{abstract formal subprogram},
+  but we do not use this term in normative wording.
+  @Defn{abstract formal subprogram}
+  (We do use it often in these notes.)]}
+@end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[The actual subprogram for a
+@nt{formal_@!abstract_@!subprogram_@!declaration} shall be a
+dispatching operation of the controlling type or of the actual type
+corresponding to the controlling type.]}
+
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[We mean the controlling type of the
+  @nt{formal_@!abstract_@!subprogram_@!declaration}, of course.
+  Saying that gets unwieldy and redundant (so says at least one reviewer,
+  anyway).]}
+@end{Honest}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[This means that the actual is
+  either a primitive operation of the
+  controlling type, or an abstract formal subprogram. Also note that this
+  prevents the controlling type from being class-wide,
+  as only specific types have primitive operations (and a formal subprogram
+  eventually has to have an actual that is a primitive of some type). This could
+  happen in a case like:]}
+  @begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key{generic}
+  @key{type} T(<>) @key{is tagged private};
+  @key{with procedure} Foo (Obj : @key{in} T) @key{is abstract};
+@key{package} P ...]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key{package} New_P @key{is new} P (Something'Class, Some_Proc);]}
+  @end{Example}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[The instantiation here is always illegal,
+  because Some_Proc could never be a primitive operation of Something'Class
+  (there are no such operations). That's good, because we want calls to Foo
+  always to be dispatching calls.]}
+@end{Ramification}
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 A @nt{formal_subprogram_declaration} declares a generic formal subprogram.
 The types of the formal parameters and result, if any, of
 the formal subprogram are
@@ -2167,9 +2335,8 @@ and calling convention
 from the original profile of the actual entity,
 while taking the formal parameter
 @nt{name}s and @nt{default_@!expression}s from the profile given in the
-@nt{formal_@!subprogram_@!declaration}.
-The view is a function or procedure,
-never an entry.
+@nt{formal_@!subprogram_@!declaration}.@Chg{Version=[2],New=[],Old=[ The
+view is a function or procedure, never an entry.]}
 @begin{Discussion}
 This rule is intended to be the same as the one for
 renamings-as-declarations, where the @nt{formal_subprogram_declaration}
@@ -2181,6 +2348,26 @@ If a generic unit has a @nt<subprogram_default> specified by a box, and
 the corresponding actual parameter is omitted, then it is equivalent to
 an explicit actual parameter that is a usage name identical to the
 defining name of the formal.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
+@ChgAdded{Version=[2],Text=[If a generic unit has a @nt{subprogram_default}
+specified by the reserved word @key{null}, and the corresponding actual
+parameter is omitted, then it is equivalent to an explicit actual parameter
+that is a null procedure having the profile given in the
+@nt{formal_@!subprogram_@!declaration}.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[The subprogram declared by a
+@nt{formal_@!abstract_@!subprogram_@!declaration} with a controlling type @i<T>
+is a dispatching operation of type @i<T>.]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[This is necessary to trigger all of the
+dispatching operation
+rules. It otherwise would not be considered a dispatching operation, as
+formal subprograms are never primitive operations.]}
+@end{Reason}
+
 @end{StaticSem}
 
 @begin{Notes}
@@ -2220,8 +2407,28 @@ Visibility and name resolution are applied to the equivalent explicit
 actual parameter.
 @end{TheProof}
 
-The actual subprogram cannot be abstract
-(see @RefSecNum{Abstract Types and Subprograms}).
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
+The actual subprogram cannot be abstract@Chg{Version=[2],New=[ unless
+the formal subprogram is a @nt{formal_@!abstract_@!subprogram_@!declaration}],
+Old=[]} (see @RefSecNum{Abstract Types and Subprograms}).
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[The subprogram declared by a
+@nt{formal_@!abstract_@!subprogram_@!declaration} is an abstract subprogram.
+All calls on a subprogram declared by a
+@nt{formal_@!abstract_@!subprogram_@!declaration} must be dispatching calls.
+See @RefSecNum{Abstract Types and Subprograms}.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
+@ChgAdded{Version=[2],Text=[A null procedure as a subprogram default has
+convention Intrinsic (see @RefSecNum{Conformance Rules}).]}
+@begin{TheProof}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[This is an implicitly declared subprogram,
+so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.
+*** This note appears to be wrong for @nt{formal_abstract_subprogram_declaration}s.***]}
+@end{TheProof}
+
 @end{Notes}
 
 @begin{Examples}
@@ -2247,6 +2454,27 @@ The actual subprogram cannot be abstract
 @end{Example}
 @end{Examples}
 
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The @nt{formal_abstract_subprogram_declaration} is new. It allows
+  the passing of dispatching operations to generic units.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+  @ChgAdded{Version=[2],Text=[
+  The formal subprogram default of @key{null} is new. It allows the default
+  of a generic procedure to do nothing, such as for passing a debugging
+  routine.]}
+@end{Extend95}
+
+@begin{Diffword95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[Formal procedures can be used as entries;
+  removed wording that said otherwise.]}
+@end{Diffword95}
+
+
 @LabeledClause{Formal Packages}
 
 @begin{Intro}
@@ -2263,8 +2491,24 @@ of that generic package.]
 @Syn{lhs=<formal_package_declaration>,rhs="
     @key{with} @key{package} @Syn2{defining_identifier} @key{is} @key{new} @SynI{generic_package_}@Syn2{name}  @Syn2{formal_package_actual_part};"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
 @Syn{lhs=<formal_package_actual_part>,rhs="
-    (<>) | [@Syn2{generic_actual_part}]"}
+    @Chg{Version=[2],New=`([@key{others} =>] <>)
+  | [@Syn2{generic_actual_part}]
+  | (@Syn2{formal_package_association} {, @Syn2{formal_package_association}} [, @key{others} => <>])',
+Old=[(<>) | [@Syn2{generic_actual_part}]]}"}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<formal_package_association>,Old=<>}>,
+rhs="@Chg{Version=[2],New={
+    @Syn2{generic_association}
+  | @SynI{generic_formal_parameter_}@Syn2{selector_name} => <>},Old={}}"}
+
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
+@ChgAdded{Version=[2],Text=[Any positional @nt{formal_package_association}s
+shall precede any named @nt{formal_package_association}s.]}
+@end{SyntaxText}
 @end{Syntax}
 
 @begin{Legality}
@@ -2273,12 +2517,36 @@ The @i(generic_package_)@nt<name> shall denote a generic package
 (the @i(template) for the formal package);
 the formal package is an instance of the template.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
 @Leading@;The actual shall be an instance of the template.
-If the @nt<formal_package_actual_part> is (<>),
+If the @nt<formal_package_actual_part> is (<>)@Chg{Version=[2],
+New=[ or (@key{others} => <>)],Old=[]},
 @Redundant[then the actual may be any instance of the template]; otherwise,
-each actual parameter of the actual instance shall match the corresponding
-actual parameter of the formal package @Redundant[(whether the
-actual parameter is given explicitly or by default)], as follows:
+@Chg{Version=[2],New=[certain of the actual parameters],
+Old=[each actual parameter ]}
+of the actual instance shall match the corresponding
+actual parameter of the formal package@Chg{Version=[2],New=[, determined],
+Old=[ @Redundant[(whether the
+actual parameter is given explicitly or by default)],]} as follows:
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
+@ChgAdded{Version=[2],Text=[If the @nt{formal_@!package_@!actual_@!part}
+includes @nt{generic_association}s as well as associations with <>,
+then only the actual parameters specified explicitly with
+@nt{generic_association}s are required to match;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
+@ChgAdded{Version=[2],Text=[Otherwise, all actual parameters shall
+match@Redundant[, whether the actual parameter is given explicitly
+or by default].]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The rules for matching of
+actual parameters between the actual instance and the formal package
+are as follows:]}
+
 @begin{Itemize}
 For a formal object of mode @key[in] the actuals match if they are
 static expressions with the same value, or if they statically denote
@@ -2307,13 +2575,22 @@ expression (recursively).]}
 @begin{StaticSem}
 A @nt{formal_package_declaration} declares a generic formal package.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
 @PDefn2{Term=[visible part], Sec=(of a formal package)}
 The visible part of a formal package includes
 the first list of @nt{basic_declarative_item}s of the
 @nt{package_@!specification}.
-In addition, if the @nt{formal_@!package_@!actual_@!part} is (<>),
+In addition, @Chg{Version=[2],New=[for each actual parameter that is
+not required to match, a copy of the
+declaration of the corresponding formal parameter of the template is
+included in the visible part of the formal package. If the copied
+declaration is for a formal type, copies of the implicit declarations
+of the primitive subprograms of the formal type are also included in
+the visible part of],
+Old=[if the @nt{formal_@!package_@!actual_@!part} is (<>),
 it also includes the @nt{generic_@!formal_@!part} of the template
-for the formal package.
+for]} the formal package.
+
 @begin{Ramification}
 If the @nt<formal_package_actual_part> is (<>),
 then the declarations that occur immediately within the
@@ -2337,6 +2614,15 @@ A generic formal package is a package, and is an instance.
 Hence, it is possible to pass a generic formal package
 as an actual to another generic formal package.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
+@ChgAdded{Version=[2],Text=[
+For the purposes of matching, if the actual instance @i<A> is itself a
+formal package, then the actual parameters of A are those specified
+explicitly or implicitly in the @nt{formal_package_actual_part} for @i<A>, plus,
+for those not specified, the copies of the formal parameters of the
+template included in the visible part of @i<A>.]}
+
 @end{StaticSem}
 
 @begin{Extend83}
@@ -2344,12 +2630,24 @@ as an actual to another generic formal package.
 Formal packages are new to Ada 95.
 @end{Extend83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00317-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  It's now allowed to mix actuals of a formal package that are specified
+  with those that are not specified.]}
+@end{Extend95}
+
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0039],ARef=[AI95-00213-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the description of
-formal package matching to say that formal parameters are always replaced by
-their actual parameters (recursively). This matches the actual practice of
-compilers, as the ACATS has always required this behavior.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0039],ARef=[AI95-00213-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the description of
+  formal package matching to say that formal parameters are always replaced by
+  their actual parameters (recursively). This matches the actual practice of
+  compilers, as the ACATS has always required this behavior.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00317-01]}
+  @ChgAdded{Version=[2],Text=[The description of which operations are
+  visible in a formal package has been clarified. We also specify how matching
+  is done when the actual is a formal package.]}
 @end{DiffWord95}
 
 

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.22 $ $Date: 2004/09/17 04:56:28 $ $Author: Randy $ }
+@Comment{ $Revision: 1.23 $ $Date: 2004/12/12 05:36:23 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2004/09/17 04:56:28 $}
+@Comment{$Date: 2004/12/12 05:36:23 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -62,12 +62,13 @@ This Annex is new to Ada 95.
 @end{Extend83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
-The title of this annex was changed to better reflect its purpose and scope.
-High integrity systems has become the standard way of identifying systems
-that have high reliability requirements; it subsumes terms such as safety
-and security. Moreover, the annex does not include any security specific
-features and as such the previous title is somewhat misleading.
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
+  @ChgAdded{Version=[2],Text=[The title of this annex was changed to better
+  reflect its purpose and scope. High integrity systems has become the standard
+  way of identifying systems that have high reliability requirements; it
+  subsumes terms such as safety and security. Moreover, the annex does not
+  include any security specific features and as such the previous title is
+  somewhat misleading.]}
 @end{DiffWord95}
 
 @LabeledClause{Pragma Normalize_Scalars}
@@ -499,7 +500,7 @@ is involved in this pragma.
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0093]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0093],ARef=[AI95-00207-01]}
 @Defn{inspection point}
 An @i{inspection point} is a point in the object code
 corresponding to the occurrence of a pragma Inspection_@!Point in the
@@ -516,18 +517,18 @@ the single occurrence of the pragma in the source; similar considerations
 apply if such a pragma is in a generic, or in a loop that has
 been @lquotes@;unrolled@rquotes@; by an optimizer.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0093]}
-@Chg{New=[The short form of the pragma is a convenient shorthand for
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0093],ARef=[AI95-00207-01]}
+@ChgAdded{Version=[1],Text=[The short form of the pragma is a convenient shorthand for
 listing all objects which could be explicitly made inspectable by the long
 form of the pragma; thus only visible objects are made inspectable by it.
 Objects that are not visible at the point of the pragma are not made
 inspectable by the short form pragma. This is necessary so that implementations
 need not keep information about (or prevent optimizations on) a unit simply
 because some other unit @i<might> contain a short form Inspection_Point
-pragma.],Old=[]}
+pragma.]}
 @end{ramification}
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0093]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0093],ARef=[AI95-00207-01]}
 If the short form of the pragma is used, then all@Chg{New=[ visible],Old=[]}
 objects are inspectable.
 This implies that @Chg{New=[global objects from other compilation units],
@@ -537,7 +538,6 @@ similar to a post-mortem dump at such inspection points. The annex does
 not require that any inspection facility is provided, merely that the
 information is available to understand the state of the machine at those
 points.
-
 @end{Discussion}
 @end{StaticSem}
 
@@ -608,6 +608,14 @@ to an interactive debugger to perform the check.
 @end{Discussion}
 @end{Notes}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0093],ARef=[AI95-00207-01]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the definition of
+the Inspection_Point pragma to apply to only variables visible at the point
+of the pragma.]}
+@end{DiffWord95}
+
+
 @LabeledRevisedClause{Version=[2],New=[High Integrity Restrictions],Old=[Safety and Security Restrictions]}
 @begin{Intro}
 This clause defines restrictions that can be used with pragma
@@ -639,10 +647,11 @@ apply in this Annex:
 @redundant[The last three restrictions are checked prior to program execution.]
 @Chg{Version=[2],New=[Pragma Profile(Ravenscar) applies in this Annex.],Old=[]}
 @begin{Discussion}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
-The reference to pragma Profile(Ravenscar) is intended to show that properly
-restricted tasking is appropriate for use in high integrity systems. The Ada 95
-Annex seemed to suggest that tasking was inappropriate for such systems.
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
+  @ChgAdded{Version=[2],Text=[The reference to pragma Profile(Ravenscar) is
+  intended to show that properly restricted tasking is appropriate for use
+  in high integrity systems. The Ada 95
+  Annex seemed to suggest that tasking was inappropriate for such systems.]}
 @end{Discussion}
 
 @Trailing@;The following additional restrictions apply in this Annex.
@@ -657,7 +666,7 @@ are no declarations of protected types or protected objects.
 @Defn2{Term=[Restrictions],Sec=(No_Allocators)}No_Allocators @\There are no
 occurrences of an @nt{allocator}.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042],ARef=[AI95-00130]}
 @Defn2{Term=[Restrictions],Sec=(No_Local_Allocators)}No_Local_Allocators @\@nt{Allocator}s
 are prohibited in subprograms, generic subprograms,
 tasks, and entry bodies@Chg{New=[],Old=[; instantiations of generic packages
@@ -667,9 +676,10 @@ Thus @nt{allocator}s are permitted only in expressions whose
 evaluation can only be performed before the main subprogram is invoked.
 @end[Ramification]
 @begin[Reason]
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042]}
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042],ARef=[AI95-00130]}
 @ChgNote{The associated rule has been deleted.}
-@Chg{New=[],Old=[The reason for the prohibition against instantiations of
+@ChgDeleted{Version=[1],Text=[The reason for the prohibition against
+instantiations of
 generic packages is to avoid contract model violations.
 An alternative would be to prohibit @nt{allocator}s from generic
 packages, but it seems preferable to allow generality on the
@@ -926,8 +936,14 @@ proscribed
 @end{Notes}
 @end{comment}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  No_Local_Allocators no longer prohibits generic instantiations.]}
+@end{Extend95}
+
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
-The title of this clause was changed to match the change to the Annex title.
-Pragma Profile(Ravenscar) is part of this annex.
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
+  @ChgAdded{Version=[2],Text=[The title of this clause was changed to match the
+  change to the Annex title. Pragma Profile(Ravenscar) is part of this annex.]}
 @end{DiffWord95}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2000/09/27 00:15:09 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2004/12/12 05:36:21 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:09 $}
+@Comment{$Date: 2004/12/12 05:36:21 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -74,7 +74,7 @@ operations.}
 @Leading@;The generic library package
 Numerics.Generic_Complex_Types has the following declaration:
 @begin{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
 @key{generic}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Types]}
    @key{type} Real @key{is} @key{digits} <>;
 @key{package} Ada.Numerics.Generic_Complex_Types @key{is}
@@ -193,7 +193,7 @@ Numerics.Generic_Complex_Types has the following declaration:
 @key{end} Ada.Numerics.Generic_Complex_Types;
 @end{Example}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
 @Defn{Ada.Numerics.Complex_Types}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Types]}
 The library package Numerics.Complex_Types
@@ -543,6 +543,13 @@ Generic_Complex_Types as defined in ISO/IEC CD 13813
 @end{itemize}
 @end{DiffWord83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Explicitly stated that the
+  predefined instantiations of Generic_Complex_Types are pure.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Complex Elementary Functions}
 
 @begin{StaticSem}
@@ -592,7 +599,7 @@ Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @key[end] Ada.Numerics.Generic_Complex_Elementary_Functions;
 @end{Example}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
 @Defn{Ada.Numerics.Complex_Elementary_Functions}
 @ChildUnit{Parent=[Ada.Numerics],Child=[Complex_@!Elementary_@!Functions]}
 The library package Numerics.Complex_Elementary_Functions
@@ -881,6 +888,13 @@ ISO/IEC CD 13814 (for Ada 83) in the following ways:
 @end{itemize}
 @end{DiffWord83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Explicitly stated that the
+  predefined instantiations of Generic_Complex_Elementary_Functions are pure.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Complex Input-Output}
 
 @begin{Intro}
@@ -960,7 +974,7 @@ The semantics of the Get and Put procedures are as follows:
 @key[procedure] Get (Item  : @key[out] Complex;
                Width : @key[in]  Field := 0);
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0092]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0092],ARef=[AI95-00029-01]}
 @Leading@;The input sequence is a pair of
 optionally signed real literals representing
 the real and imaginary components of a complex value@Chg{New=[ These components
@@ -1145,6 +1159,12 @@ String by Wide_String; the description of its behavior is obtained by
 additionally replacing references to particular characters (commas,
 parentheses, etc.) by those for the corresponding wide characters.
 @end{StaticSem}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0092],ARef=[AI95-00029-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the syntax
+  of values read by Complex_Io is the same as that read by Text_IO.Float_IO.]}
+@end{DiffWord95}
 
 
 @LabeledClause{Numeric Performance Requirements}
@@ -2346,3 +2366,122 @@ In addition,
 we do not generally specify the signs of zero results (or result
 components), although those proposed standards do.
 @end{DiffWord83}
+
+
+@LabeledAddedClause{Version=[2],Name=[Vector and Matrix Manipulation]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],Text=[Types and operations for the manipulation
+of real vectors and matrices are provided in Generic_Real_Arrays, which is
+defined in @RefSecNum[Real Vectors and Matrices]. Types and
+operations for the manipulation of complex vectors and matrices are provided
+in Generic_Complex_Arrays, which is defined in
+@RefSecNum[Complex Vectors and Matrices]. Both of these library units
+are generic children of the predefined package Numerics (see
+@RefSecNum[The Numerics Packages]). Nongeneric
+equivalents of these packages for each of the predefined floating point types
+are also provided as children of Numerics.]}
+@end{Intro}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  This clause is new. It just provides an introduction to the following
+  subclauses.]}
+@end{Extend95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Real Vectors and Matrices]}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
+package Numerics.Generic_Real_Arrays has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{generic}
+   @key{type} Real @key{is digits} <>;
+@key{package} Ada.Numerics.Generic_Real_Arrays @key{is}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Real_Arrays]}
+   @key{pragma} Pure(Generic_Real_Arrays);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Types}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Real_Vector} @key{is array} (Integer @key{range} <>) @key{of} Real'Base;
+   @key{type} @AdaTypeDefn{Real_Matrix} @key{is array} (Integer @key{range} <>, Integer @key{range} <>) @key{of} Real'Base;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Subprograms for Real_Vector types}]}
+
+
+@end{Example}
+
+**** The rest of this subclause has yet to be inserted ****
+
+@end{StaticSem}
+
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The package Ada.Numerics.Generic_Real_Arrays and its nongeneric equivalents
+  are new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Complex Vectors and Matrices]}
+
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
+package Numerics.Generic_Complex_Arrays has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{generic}
+   @key{with package} Real_Arrays   @key{is new} Ada.Numerics.Generic_Real_Arrays   (<>);
+   @key{use} Real_Arrays;
+   @key{with package} Complex_Types @key{is new} Ada.Numerics.Generic_Complex_Types (Real);
+   @key{use} Complex_Types;
+@key{package} Ada.Numerics.Generic_Complex_Arrays @key{is}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Complex_Arrays]}
+   @key{pragma} Pure(Generic_Complex_Arrays);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Types}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Complex_Vector} @key{is array} (Integer @key{range} <>) @key{of} Complex;
+   @key{type} @AdaTypeDefn{Complex_Matrix} @key{is array} (Integer @key{range} <>,
+                                 Integer @key{range} <>) @key{of} Complex;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Subprograms for Complex_Vector types}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   -- @RI{Complex_Vector selection, conversion and composition operations}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Re} (X : Complex_Vector) @key{return} Real_Vector;
+   @key{function} @AdaSubDefn{Im} (X : Complex_Vector) @key{return} Real_Vector;]}
+
+
+
+@end{Example}
+
+**** The rest of this subclause has yet to be inserted ****
+
+@end{StaticSem}
+
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The package Ada.Numerics.Generic_Complex_Arrays and its nongeneric equivalents
+  are new. It would be better if this was called
+  "Ada.Numerics.Generic_Imitation_Arrays", 'cause that's the opposite of Real. :-)
+  Just checking if anyone reads this stuff.]}
+@end{Extend95}
+
+

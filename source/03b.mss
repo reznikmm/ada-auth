@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/11 06:27:53 $}
+@Comment{$Date: 2004/12/12 05:36:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @LabeledClause{Array Types}
 
@@ -1582,14 +1582,20 @@ seem worth putting it in a "NOTE."
 
 @begin{Incompatible95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0008],ARef=[AI95-00168-01],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> @Defn{incompatibilities with Ada 95}
-For general access subtypes, @nt{discriminant_constraint}s are prohibited
+@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+The Corrigendum added a restriction on @nt{discriminant_constraint}s for
+general access subtypes. Such constraints are prohibited
 if the designated type can be treated as constrained somewhere in the program.
 Ada 2005 goes further and prohibits such @nt{discriminant_constraint}s if
 the designated type has (or might have, in the case of a formal type)
 defaults for its discriminants. The use of general access subtypes is rare,
 and this eliminates a boatload of problems that required many restrictions
-on the use of aliased objects and components (now lifted).],Old=[]}
+on the use of aliased objects and components (now lifted). Similarly,
+Ada 2005 prohibits @nt{discriminant_constraint}s on any access type whose
+designated type has a partial view that is constrained. Such a type will
+not be constrained in the heap to avoid privating problems. Again, the use
+of such subtypes is rare (they can only happen within the package and its
+child units).],Old=[]}
 @end{Incompatible95}
 
 

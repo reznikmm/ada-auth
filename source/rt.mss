@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2000/09/01 03:51:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2004/12/12 05:36:22 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/09/01 03:51:24 $}
+@Comment{$Date: 2004/12/12 05:36:22 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2219,3 +2219,211 @@ case where no contention (on the execution resource) exists
 @Redundant[from tasks executing on other processors].
 @end{Itemize}
 @end{Metrics}
+
+
+@LabeledAddedClause{Version=[2],Name=[Run-time Profiles and the Ravenscar Profile]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[This clause
+specifies a mechanism for defining run-time profiles.
+It also defines one such profile, Ravenscar.]]}
+@end{Intro}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Profile is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});''}
+
+@end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Text=[The @SynI{profile_}@nt{identifier} shall be either Ravenscar or an
+implementation-defined identifier. For @SynI{profile_}@nt{identifier}
+Ravenscar, there shall be no @SynI{profile_}@nt{pragma_@!argument_@!association}s. For other
+@SynI{profile_}@nt{identifier}s, the semantics of any
+@SynI{profile_}@nt{pragma_@!argument_@!association}s are implementation-defined.]}
+
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+definition, arguments, and meaning of any
+implementation-defined @SynI{profile_}@nt{identifier}s.],Old=[]}]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[
+A profile is equivalent to the set of configuration pragmas that is
+defined for each @SynI{profile_}@nt{identifier}. The
+@SynI{profile_}@nt{identifier}
+Ravenscar is equivalent to the following set of pragmas:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[
+@key{pragma} Task_Dispatching_Policy (FIFO_Within_Priorities);
+@key{pragma} Locking_Policy (Ceiling_Locking);
+@key{pragma} Detect_Blocking;
+@key{pragma} Restrictions (
+                Max_Entry_Queue_Length => 1,
+                Max_Protected_Entries => 1,
+                Max_Task_Entries => 0,
+                No_Abort_Statements,
+                No_Asynchronous_Control,
+                No_Calendar,
+                No_Dynamic_Attachment,
+                No_Dynamic_Priorities,
+                No_Implicit_Heap_Allocations,
+                No_Local_Timing_Events,
+                No_Local_Protected_Objects,
+                No_Protected_Type_Allocators,
+                No_Relative_Delay,
+                No_Requeue_Statements,
+                No_Select_Statements,
+                No_Task_Allocators,
+                No_Task_Attributes_Package,
+                No_Task_Hierarchy,
+                No_Task_Termination,
+                Simple_Barriers);]}
+@end{Example}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The Ravenscar profile is named for the location
+of the meeting that defined its initial version. The name is now in widespread
+use, so we stick with existing practice, rather than using a more descriptive
+name. This is another example of Ada's lousy marketing sense; casual readers,
+especially those outside of Ada, have no conception of what
+@lquotes@;Ravenscar@rquotes@; is, and thus are much less likely to investigate
+to find out how it can help them.]}
+@end{Discussion}
+
+@end{StaticSem}
+
+@begin{Linktime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Text=[A @key{pragma} Profile is a configuration pragma.
+There may be more than one @key{pragma} Profile for a partition.]}
+@end{Linktime}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Text=[
+The effect of the Max_Entry_Queue_Length => 1 restriction applies
+only to protected entry queues due to the accompanying restriction of
+Max_Task_Entries => 0.]}
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @key{Pragma} Profile and the Ravenscar profile is new.]}
+@end{Extend95}
+
+
+@LabeledAddedClause{Version=[2],Name=[Execution Time]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[This clause specifies an
+execution-time clock package.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
+langauge-defined library exists:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} Ada.Task_Identification;
+@key{with} Ada.Real_Time; @key{use} Ada.Real_Time;
+@key{package} Ada.Execution_Time @key{is}@ChildUnit{Parent=[Ada],Child=[Execution_Time]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{CPU_Time} @key{is private};
+   @AdaDefn{CPU_Time_First} : @key{constant} CPU_Time;
+   @AdaDefn{CPU_Time_Last}  : @key{constant} CPU_Time;
+   @AdaDefn{CPU_Time_Unit}  : @key{constant} := @RI{implementation-defined-real-number};
+   @AdaDefn{CPU_Tick} : @key{constant} Time_Span;]}
+
+
+@end{Example}
+
+**** The rest of this clause (including two subclauses) has yet to be inserted ****
+
+@end{StaticSem}
+
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The package Ada.Execution_Time is new.]}
+@end{Extend95}
+
+
+@LabeledAddedClause{Version=[2],Name=[Timing Events]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[This clause introduces a language-defined
+child package of Ada.Real_Time to allow user-defined protected procedures
+to be executed at a specified time without the need to use a task or a
+delay statement.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
+langauge-defined library exists:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package} Ada.Real_Time.Timing_Events @key{is}@ChildUnit{Parent=[Ada.Real_Time],Child=[Timing_Events]}
+  @key{type} @AdaTypeDefn{Timing_Event} @key{is limited private};
+  @key{type} @AdaTypeDefn{Timing_Event_Handler}
+       @key{is access protected procedure}(Event : @key{in out} Timing_Event);
+  @key{procedure} @AdaSubDefn{Set_Handler}(Event : @key{in out} Timing_Event;
+            At_Time : @key{in} Time; Handler: @key{in} Timing_Event_Handler);
+  @key{procedure} @AdaSubDefn{Set_Handler}(Event : @key{in out} Timing_Event;
+            In_Time: @key{in} Time_Span; Handler: @key{in} Timing_Event_Handler);
+  @key{function} @AdaSubDefn{Current_Handler}(Event : Timing_Event)
+           @key{return} Timing_Event_Handler;
+  @key{procedure} @AdaSubDefn{Cancel_Handler}(Event : @key{in out} Timing_Event;
+            Cancelled : @key{out} Boolean);
+  @key{function} @AdaSubDefn{Time_Of_Event}(Event : Timing_Event) @key{return} Time;
+@key{private}
+  ... -- @RI[not specified by the language]
+@key{end} Ada.Real_Time.Timing_Events;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[The type Timing_Event represents a time in the
+future when an event is to occur. The type Timing_Event needs finalization (see
+@RefSecNum{User-Defined Assignment and Finalization}).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgAdded{Version=[2],Text=[An object of type Timing_Event is said to be
+@i<set> if it is associated with a (non-null) Timing_Event_Handler and
+@i<cleared> otherwise. All Timing_Event objects are initially cleared.
+The Timing_Event_Handler identifies a protected procedure to be executed by the
+implementation when the timing event occurs.
+@PDefn{Term=[set],Sec=[timing event object]}
+@PDefn{Term=[clear],Sec=[timing event object]}]}
+
+@end{StaticSem}
+
+
+
+**** The rest of this clause has yet to be inserted ****
+
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The package Ada.Real_Time.Timing_Events is new.]}
+@end{Extend95}
+

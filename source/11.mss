@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2004/11/10 00:57:21 $}
+@Comment{$Date: 2004/12/12 05:36:20 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -332,8 +332,8 @@ but not within a body enclosed by that handler.
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
-@Chg{Version=[2],New=[The @nt<expression>, if any, in a @nt<raise_statement>,
-is expected to be of type String.],Old=[]}
+@ChgAdded{Version=[2],Text=[The @nt<expression>, if any, in a
+@nt<raise_statement>, is expected to be of type String.]}
 @end{Resolution}
 
 @begin{RunTime}
@@ -359,10 +359,10 @@ This allows the original cause of the exception to be determined.
 @end{ImplNote}
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
-@Chg{Version=[2],New=[The definition of Ada.Exceptions.Exception_Message
+@ChgAdded{Version=[2],Text=[The definition of Ada.Exceptions.Exception_Message
 includes a statement that the string is returned (see
 @RefSecNum{The Package Exceptions}). We repeat it here so that we don't have
-an unexplained parameter in this subclause.],Old=[]}
+an unexplained parameter in this subclause.]}
 @end{TheProof}
 @end{RunTime}
 
@@ -387,11 +387,11 @@ any force.
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}The syntax of a
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The syntax of a
 @nt{raise_statement} is extended to include a string message. This is more
 convinient than calling Ada.Exceptions.Exception_Message
-(@SynI{exception_}@Syn2{name}'Identity, @SynI{string_}@Syn2{expression}); and
-should encourage the use of message strings when raising exceptions.],Old=[]}
+(@SynI{exception_}@nt{name}'Identity, @SynI{string_}@nt{expression}); and
+should encourage the use of message strings when raising exceptions.]}
 @end{Extend95}
 
 @LabeledClause{Exception Handling}
@@ -711,20 +711,20 @@ raise Constraint_Error for a Null_Id or Null_Occurrence.]}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00241-01]}
-@Chg{Version=[2],New=[Null_Occurrence can be tested for by comparing
-Exception_Identity(Occurrence) to Null_Id.],Old=[]}
+@ChgAdded{Version=[2],Text=[Null_Occurrence can be tested for by comparing
+Exception_Identity(Occurrence) to Null_Id.]}
 @end{Ramification}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00329-01]}
-@Chg{Version=[2],New=[Raise_Exception was changed so that it always raises
-an exception and thus is a No_Return procedure. A similar change was not
+@ChgAdded{Version=[2],Text=[Raise_Exception was changed so that it always
+raises an exception and thus is a No_Return procedure. A similar change was not
 made for Reraise_Occurrence, as doing so was determined to be a significant
 incompatibility. It is not unusual to pass an Exception_Occurrence to other
 code to delay raising it. If there was no exception, passing Null_Occurrence
 works fine (nothing is raised). Moreover, as there is no test for
 Null_Occurrence in Ada 95, this is the only way to write such code without
-using additional flags. Breaking this sort of code is unacceptable.],Old=[]}
+using additional flags. Breaking this sort of code is unacceptable.]}
 @end{Discussion}
 
 The Save_Occurrence procedure copies the Source to the Target.
@@ -963,43 +963,44 @@ Exceptions.
 
 @begin{Inconsistent95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00241-01]}
-@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
+@ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
 Exception_Identity of an Exception_Occurrence now is
 defined to return Null_Id for Null_Occurrence, rather than raising
 Constraint_Error. This provides a simple way to test for Null_Occurrence.
 We expect that programs that need Constraint_Error raised will be very rare;
 they can be easily fixed by explicitly testing for Null_Id or by using
-Exception_Name instead.],Old=[]}
+Exception_Name instead.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
+@ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
 Raise_Exception now raises Constraint_Error if passed Null_Id. This means
 that it always raises an exception, and thus we can apply pragma No_Return to
 it. We expect that programs that call Raise_Exception with Null_Id will be
 rare, and programs that does that and expect no exception to be raised will be
 rarer; such programs can be easily fixed by explicitly testing for Null_Id
-before calling Raise_Exception.],Old=[]}
+before calling Raise_Exception.]}
 @end{Inconsistent95}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The package Ada.Exceptions is preelaborated, and types Exception_Id and
 Exception_Occurrence have preelaboratable initialization, allowing this package
-to be used in preelaborated units.],Old=[]}
+to be used in preelaborated units.]}
 @end{Extend95}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
-@Chg{Version=[2],New=[The meaning of Exception_Message is reworded to reflect
-that the string can come from a @nt{raise_statement} as well as a call of
-Raise_Exception.],Old=[]}
+@ChgAdded{Version=[2],Text=[The meaning of Exception_Message is reworded to
+reflect that the string can come from a @nt{raise_statement} as well as a
+call of Raise_Exception.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00378-01]}
-@Chg{Version=[2],New=[We now define the lower bound of the string returned from
+@ChgAdded{Version=[2],Text=[We now define the lower bound of the string
+returned from
 Exception_Name, Exception_Message, and Exception_Information. This makes
 working with the returned string easier, and is consistent with many other
-string-returning functions in Ada.],Old=[]}
+string-returning functions in Ada.]}
 @end{DiffWord95}
 
 
@@ -1007,153 +1008,156 @@ string-returning functions in Ada.],Old=[]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[Pragma Assert is used to assert the truth of a Boolean
-expression at any point within a sequence of declarations or statements. Pragma
-Assertion_Policy is used to control whether such assertions@Defn{Assertions}
+@ChgAdded{Version=[2],Text=[Pragma Assert is used to assert the truth of a
+Boolean expression at any point within a sequence of declarations or statements.
+Pragma Assertion_Policy is used to control whether such assertions@Defn{Assertions}
 are to be ignored by the implementation, checked at run-time, or handled in
-some implementation-defined manner.],Old=[]}
+some implementation-defined manner.]}
 @end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[@Leading@Keepnext@;The form of a @nt{pragma} Assert is as follows:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Assert is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assert>([Check =>] @SynI{Boolean_}@Syn2{expression}[, [Message =>] @SynI{string_}@Syn2{expression}]);'',Old=<>}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assert>([Check =>] @SynI{Boolean_}@Syn2{expression}[, [Message =>] @SynI{string_}@Syn2{expression}]);''}
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[A @nt{pragma} Assert is allowed at the place where a
-@nt{declarative_item} or a @nt{statement} is allowed.],Old=[]}
+@ChgAdded{Version=[2],Text=[A @nt{pragma} Assert is allowed at the place where a
+@nt{declarative_item} or a @nt{statement} is allowed.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[@Leading@Keepnext@;The form of a @nt{pragma} Assertion_Policy is as follows:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Assertion_Policy is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assertion_Policy>(@SynI{policy_}@Syn2{identifier});'>,Old=<>}
+@ChgAdded{Version=[2],Text=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assertion_Policy>(@SynI{policy_}@Syn2{identifier});'>,Old=<>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@PDefn2{Term=[configuration pragma], Sec=(Assertion_Policy)}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[configuration pragma], Sec=(Assertion_Policy)}
 @PDefn2{Term=[pragma, configuration], Sec=(Assertion_Policy)}
-A @nt{pragma} Assertion_Policy is a configuration pragma.],Old=[]}
+A @nt{pragma} Assertion_Policy is a configuration pragma.]}
 
 @end{Syntax}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[The @SynI<policy_>@nt<identifier> of an Assertion_Policy
-pragma shall be either Check, Ignore, or an implementation-defined identifier.],Old=[]}
+@ChgAdded{Version=[2],Text=[The @SynI<policy_>@nt<identifier> of an Assertion_Policy
+pragma shall be either Check, Ignore, or an implementation-defined identifier.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[Implementation-defined
 @SynI<policy_>@nt<identifier>s allowed in a @nt{pragma} Assertion_Policy.],Old=[]}]}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[A @nt<pragma> Assertion_Policy is a configuration pragma
+@ChgAdded{Version=[2],Text=[A @nt<pragma> Assertion_Policy is a configuration pragma
 that specifies the assertion policy in effect for the compilation units to which it
 applies. Different policies may apply to different compilation
 units within the same partition. The default assertion policy is
-implementation-defined.],Old=[]}
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The default
-assertion policy.],Old=[]}]}
+implementation-defined.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
+default assertion policy.],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[@leading@keepnext@;The following language-defined library package exists:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The following
+language-defined library package exists:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@ChildUnit{Parent=[Ada],Child=[Assertions]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Assertions]}
 @key[package] Ada.Assertions @key[is]
-   @key[pragma] Pure(Assertions);],Old=[]}
+   @key[pragma] Pure(Assertions);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   Assertion_Error : @key<exception>;],Old=[]}
+@ChgAdded{Version=[2],Text=[   Assertion_Error : @key<exception>;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key<procedure> Assert(Check : @key<in> Boolean);
-   @key<procedure> Assert(Check : @key<in> Boolean; Message : @key<in> String);],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key<procedure> Assert(Check : @key<in> Boolean);
+   @key<procedure> Assert(Check : @key<in> Boolean; Message : @key<in> String);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key<end> Ada.Assertions;],Old=[]}
+@ChgAdded{Version=[2],Text=[@key<end> Ada.Assertions;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[A compilation unit containing a @nt{pragma} Assert has a
-semantic dependence on the Ada.Assertions library unit.],Old=[]}
+@ChgAdded{Version=[2],Text=[A compilation unit containing a @nt{pragma} Assert has a
+semantic dependence on the Ada.Assertions library unit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[The assertion policy that applies within an instance is
-the policy that applies within the generic unit.],Old=[]}
+@ChgAdded{Version=[2],Text=[The assertion policy that applies within an instance is
+the policy that applies within the generic unit.]}
 @end{StaticSem}
 
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[An assertion policy @defn{assertion policy}specifies how a @nt{pragma} Assert
+@ChgAdded{Version=[2],Text=[An assertion policy @defn{assertion policy}specifies how a @nt{pragma} Assert
 is interpreted by the implementation. If the assertion policy is Ignore at the
 point of a pragma Assert, the pragma is ignored. If the assertion policy is
 Check at the point of a @nt{pragma} Assert, the elaboration of the pragma
 consists of evaluating the Boolean expression, and if it evaluates to False,
 evaluating the Message string, if any, and raising the exception
 Ada.Assertions.Assertion_Error, with a message if the Message argument is
-provided.],Old=[]}
+provided.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[@leading@keepnext@;Calling the procedure Ada.Assertions.Assert without a Message parameter is
-equivalent to:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Calling the procedure
+Ada.Assertions.Assert without a Message parameter is equivalent to:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key<if> Check = False @key<then>
+@ChgAdded{Version=[2],Text=[@key<if> Check = False @key<then>
    @key<raise> Ada.Assertions.Assertion_Error;
-@key{end} @key{if};],Old=[]}
+@key{end} @key{if};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[@leading@keepnext@;Calling the procedure
-Ada.Assertions.Assert with a Message parameter is equivalent to:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Calling the procedure
+Ada.Assertions.Assert with a Message parameter is equivalent to:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key<if> Check = False @key<then>
+@ChgAdded{Version=[2],Text=[@key<if> Check = False @key<then>
    @key<raise> Ada.Assertions.Assertion_Error @key<with> Message;
-@key{end} @key{if};],Old=[]}
+@key{end} @key{if};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[The procedures Assertions.Assert have these
-effects independently of the assertion policy in effect.],Old=[]}
+@ChgAdded{Version=[2],Text=[The procedures Assertions.Assert have these
+effects independently of the assertion policy in effect.]}
 
 @end{RunTime}
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[Assertion_Error may be declared by renaming an
-implementation-defined exception from another package.],Old=[]}
+@ChgAdded{Version=[2],Text=[Assertion_Error may be declared by renaming an
+implementation-defined exception from another package.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This permission is intended to allow implementations
+@ChgAdded{Version=[2],Text=[This permission is intended to allow implementations
 which had an implementation-defined Assert pragma to continue to use their
 originally defined exception. Without this permission, such an implementation
-would be incorrect, as Exception_Name would return the wrong name.],Old=[]}
+would be incorrect, as Exception_Name would return the wrong name.]}
 @end{Reason}
 @end{ImplPerm}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[Normally, the Boolean expression in an Assert pragma
+@ChgAdded{Version=[2],Text=[Normally, the Boolean expression in an Assert pragma
 should not call functions that have significant side-effects when the result of
 the expression is True, so that the particular assertion policy in effect will
-not affect normal operation of the program.],Old=[]}
+not affect normal operation of the program.]}
 @end{Notes}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Pragmas Assert and Assertion_Policy, and package Ada.Assertions are new.],Old=[]}
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+Pragmas Assert and Assertion_Policy, and package Ada.Assertions are new.]}
 @end{Extend95}
 
 @LabeledSubClause{Example of Exception Handling}
@@ -1281,7 +1285,7 @@ in clauses and subclauses throughout the standard.
 @PragmaSyn`@key{pragma} @prag(Suppress)(@Syn2{identifier}@Chg{Version=[2],New=<>,Old=( [, [On =>] @Syn2{name}])});'
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag(Unsuppress)(@Syn2{identifier});'>,Old=<>}
+@ChgAdded{Version=[2],Text=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag(Unsuppress)(@Syn2{identifier});'>}
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
@@ -1301,7 +1305,7 @@ The @nt{identifier} shall be the name of a check.
 some entity.>}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=<>,Old=<For a @nt{pragma} Suppress that is immediately
+@ChgDeleted{Version=[2],Text=<For a @nt{pragma} Suppress that is immediately
 within a @nt{package_specification} and includes a @nt<name>, the @nt<name>
 shall denote an entity (or several overloaded subprograms) declared immediately
 within the @nt{package_specification}.>}
@@ -1309,19 +1313,20 @@ within the @nt{package_specification}.>}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[A checking pragma applies to the named check in a specific region (see below),
+@ChgAdded{Version=[2],Text=[A checking pragma applies to the named check in a
+specific region (see below),
 and applies to all entities in that region. A checking pragma given in a
 @nt<declarative_part> or immediately within a @nt<package_specification>
 applies from the place of the @nt<pragma> to the end of the innermost enclosing
 declarative region. The region for a checking pragma given as a configuration
 pragma is the declarative region for the entire compilation unit (or units) to
-which it applies.],Old=[]}
+which it applies.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[If a checking pragma applies to a generic instantiation, then the checking
+@ChgAdded{Version=[2],Text=[If a checking pragma applies to a generic instantiation, then the checking
 pragma also applies to the instance. If a checking pragma applies to a call to
 a subprogram that has a @nt<pragma> Inline applied to it, then the checking
-pragma also applies to the inlined subprogram body.],Old=[]}
+pragma also applies to the inlined subprogram body.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
 A @nt{pragma} Suppress gives permission to an implementation to omit the
@@ -1347,13 +1352,13 @@ for example, if the erroneousness is detected.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[A @nt{pragma} Unsuppress revokes the permission to omit
-the named check (or every check in the case of All_Checks) given by any
+@ChgAdded{Version=[2],Text=[A @nt{pragma} Unsuppress revokes the permission
+to omit the named check (or every check in the case of All_Checks) given by any
 @nt{pragma} Suppress that applies at the point of the @nt{pragma} Unsuppress.
 The permission is revoked for the region to which the @nt{pragma} Unsuppress
 applies. If there is no such permission at the point of a @nt{pragma}
 Unsuppress, then the @nt{pragma} has no effect. A later @nt{pragma} Suppress
-can renew the permission.],Old=[]}
+can renew the permission.]}
 
 @Leading@Keepnext@;The following are the language-defined checks:
 @begin{Itemize}
@@ -1433,15 +1438,15 @@ and when returning a tagged limited object from a function.]
 exception Program_Error is raised upon failure.]
 @begin{Description}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
-@Chg{Version=[2],New=[@RootDefn{Accessibility_Check}
+@ChgAdded{Version=[2],Text=[@RootDefn{Accessibility_Check}
 Accessibility_Check @\@Redundant[Check the accessibility level of an
-entity or view.]],Old=[]}
+entity or view.]]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
-@Chg{Version=[2],New=[@RootDefn{Allocation_Check}
+@ChgAdded{Version=[2],Text=[@RootDefn{Allocation_Check}
 Allocation_Check @\@Redundant[For an @nt<allocator>, check that the master of
 any tasks has not yet finished waiting for dependents, and that the
-finalization of the collection has not started.]],Old=[]}
+finalization of the collection has not started.]]}
 
 @RootDefn{Elaboration_Check}
 Elaboration_Check @\@Redundant[When a subprogram or protected entry is
@@ -1451,7 +1456,7 @@ of the corresponding unit has already been elaborated.]
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00280]}
 @ChgNote{This item is not in alphabetical order}
-@Chg{Version=[2],New=[],Old=[@RootDefn{Accessibility_Check}
+@ChgDeleted{Version=[2],Text=[@RootDefn{Accessibility_Check}
 Accessibility_Check @\@Redundant[Check the accessibility level of an
 entity or view.]]}
 
@@ -1530,10 +1535,11 @@ the same manner as Overflow_Checks (unless they are free).
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[An implementation may support an additional parameter on
+@ChgAdded{Version=[2],Text=[An implementation may support an additional
+parameter on
 @nt{pragma} Unsuppress similar to the one allowed for @nt{pragma} Suppress
 (see @RefSecNum{Specific Suppression of Checks}). The meaning of
-such a parameter is implementation-defined.],Old=[]}
+such a parameter is implementation-defined.]}
 @ChgImplDef{Version=[2],Kind=[Added],Text=[@Chg{Version=[2],New=[Existence and
 meaning of second parameter of @nt{pragma} Unsuppress.],Old=[]}]}
 @end{ImplPerm}
@@ -1559,11 +1565,12 @@ There is no guarantee that a suppressed check is actually removed;
 hence a @nt{pragma} Suppress should be used only for efficiency reasons.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[It is possible to give both a @nt{pragma} Suppress and
-Unsuppress for the same check immediately within the same @nt{declarative_part}.
+@ChgAdded{Version=[2],Text=[It is possible to give both a @nt{pragma} Suppress
+and Unsuppress for the same check immediately within the same
+@nt{declarative_part}.
 In that case, the last @nt{pragma} given determines whether or not the check is
 suppressed. Similarly, it is possible to resuppress a check which has been
-unsuppressed by giving a pragma Suppress in an inner declarative region.],Old=[]}
+unsuppressed by giving a pragma Suppress in an inner declarative region.]}
 @end{Notes}
 
 @begin{Examples}
@@ -1624,24 +1631,24 @@ which was included in @nt{selected_component} in RM83.
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}Pragma Unsuppress is new.],
-Old=[]}
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}Pragma Unsuppress is new.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[Allocation_Check was added to support suppressing the
-new check on @nt{allocator}s (see @RefSecNum{Allocators}. The order of the
-Program_Error checks was corrected to be alphabetical.],Old=[]}
+@ChgAdded{Version=[2],Text=[Allocation_Check was added to support suppressing
+the new check on @nt{allocator}s (see @RefSecNum{Allocators}. The order of the
+Program_Error checks was corrected to be alphabetical.]}
 @end{Extend95}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0036],ARef=[AI95-00176-01],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[The description of Access_Check was corrected by the
+@ChgAdded{Version=[2],Text=[The description of Access_Check was corrected by the
 Corrigendum to include the discriminant case. This change was then replaced
 by the more general notion of checking conversions to null-excluding subtypes
-in the Amendment.],Old=[]}
+in the Amendment.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[The On parameter of pragma Suppress was moved to Annex J.
+@ChgAdded{Version=[2],Text=[The On parameter of pragma Suppress was moved to
+Annex J.
 This feature's effect is inherently non-portable, depending on the
 implementation's model of computation. Compiler surveys demonstrated this,
 showing that implementations vary widely in the interprestation of these
@@ -1649,7 +1656,7 @@ parameters, even on the same target. While this is relatively harmless for
 Suppress (which is never required to do anything), it would be a significant
 problem for Unsuppress (we want the checks to be made for all implementations).
 By moving it, we avoid needing to define the meaning of Unsuppress with an
-On parameter.],Old=[]}
+On parameter.]}
 @end{DiffWord95}
 
 @LabeledClause{Exceptions and Optimization}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2004/12/11 06:27:57 $ $Author: Randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2004/12/12 05:36:22 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2004/12/11 06:27:57 $}
+@Comment{$Date: 2004/12/12 05:36:22 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -199,7 +199,8 @@ implementations that are unstable if given buggy hash functions, et. al.]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-This clause is new. It just provides an introduction.]}
+This clause is new. It just provides an introduction to the following
+subclauses.]}
 @end{Extend95}
 
 
@@ -212,7 +213,7 @@ the containers subsystem.]}
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The library package
 Containers has the following declaration:]}
 @begin{Example}
@@ -259,7 +260,7 @@ exists) with @i<C> as a parameter.]}
 @end{StaticSem}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Hash_Type'Modulus should be at least 2**32.
 Count_Type'Last should be at least 2**31-1.]}
 
@@ -322,7 +323,7 @@ for an implementation to be a single contiguous array.]}
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The library package
 Containers.Vectors has the following declaration:]}
 @begin{Example}
