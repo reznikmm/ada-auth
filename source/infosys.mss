@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/27 04:44:01 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/05/28 05:17:46 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:01 $}
+@Comment{$Date: 2000/05/28 05:17:46 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -635,7 +635,7 @@ Body=['+'@\'+'@\'-'
 '-'@\'b'@\'-'
 '<'@\'b'@\'('
 '>'@\'b'@\')'
-"CR"@\"bb"@\"CR"
+"CR"@\"bb"@\"CR"@Last
 "DB"@\"bb"@\"DB"]}
 
 An instance of @nt{fixed_LHS_sign} maps to a character as shown in
@@ -713,12 +713,12 @@ An instance of @nt{zero_suppression} maps to the string obtained as follows:
                   Each Character to the left of the
                    leftmost Character replaced according to rule 1 above
                   is replaced by:
-@begin{Itemize}
+@begin{InnerItemize}
                      the space character  if the zero suppression Character is
                          'Z' or 'z', or
 
                      the Fill character if the zero suppression Character is '*'.
-@end{Itemize}
+@end{InnerItemize}
 
                    A layout error occurs if some excess digits remain
                    after all 'Z', 'z', and '*' Character values in
@@ -1060,19 +1060,19 @@ Length returns Pic_String(Pic)'Length + Currency_Length_Adjustment -
 Radix_Adjustment where
 @begin[itemize]
         Currency_Length_Adjustment =
-@begin[itemize]
+@begin[Inneritemize]
            Currency'Length @en@; 1 if there is some occurrence of '$' in
              Pic_String(Pic), and
 
            0 otherwise.
-@end[itemize]
+@end[Inneritemize]
 
         Radix_Adjustment =
-@begin[itemize]
+@begin[Inneritemize]
            1 if there is an occurrence of 'V' or 'v' in Pic_Str(Pic), and
 
            0 otherwise.
-@end[itemize]
+@end[Inneritemize]
 @end[itemize]
 
 @begin{Example}
@@ -1163,7 +1163,7 @@ following differences:
    are absent from Ada.
 
    The following Ada facilities are not in COBOL:
-@begin{Itemize}
+@begin{InnerItemize}
       currency symbol placement after the number,
 
       localization of edited output string for multi-character
@@ -1174,7 +1174,7 @@ following differences:
       fill character, and
 
       parenthesization of negative values.
-@end{Itemize}
+@end{InnerItemize}
 @end{Itemize}
 The value of 30 for Max_Picture_Length is the same limit as in COBOL.
 @end{Notes}

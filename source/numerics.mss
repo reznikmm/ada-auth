@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/27 04:44:01 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/05/28 05:17:46 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:01 $}
+@Comment{$Date: 2000/05/28 05:17:46 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1896,7 +1896,7 @@ Arccos@\-1.0@\n.a.@\Cycle/2.0@\@Pi
 Arctan and Arccot@\0.0@\positive@\Cycle/4.0@\@Pi/2.0
 Arctan and Arccot@\0.0@\negative@\-@R[Cycle]/4.0@\-@Pi/2.0
 Arctan and Arccot@\negative@\+0.0@\Cycle/2.0@\@Pi
-Arctan and Arccot@\negative@\-0.0@\-@R[Cycle]/2.0@\-@Pi
+Arctan and Arccot@\negative@\-0.0@\-@R[Cycle]/2.0@\-@Pi@Last
 Arctan and Arccot@\negative@\0.0@\Cycle/2.0@\@Pi>]
 
 The last line of the table is meant to apply when
@@ -2236,7 +2236,7 @@ The error bounds for particular complex functions are tabulated below.
 In the table, the error bound is given as the coefficient of
 @i{CT}.Real'Model_Epsilon.
 
-@Table[Columns=<3>,
+@Table[Columns=<4>,
 Caption=<@b{Error Bounds for Particular Complex Functions}>,
 Headers=<@b{Function or Operator}@\@b{Nature of @*Result}@\@b{Nature of @*Bound}@\@b{Error Bound}>,
 Body=<Modulus@\real@\max. rel. error@\3.0
@@ -2250,7 +2250,7 @@ Exp (complex parameter)@\complex@\max. rel. error@\7.0
 Exp (imaginary parameter)@\complex@\max. rel. error@\2.0
 Sin, Cos, Sinh, and Cosh@\complex@\max. rel. error@\11.0
 Tan, Cot, Tanh, and Coth@\complex@\max. rel. error@\35.0
-inverse trigonometric@\complex@\max. rel. error@\14.0
+inverse trigonometric@\complex@\max. rel. error@\14.0@Last
 inverse hyperbolic@\complex@\max. rel. error@\14.0>]
 
 The maximum relative error given above applies throughout the domain of the
