@@ -1,16 +1,22 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.21 $ $Date: 2000/09/27 00:15:10 $ $Author: Randy $ }
+@Comment{ $Revision: 1.22 $ $Date: 2004/09/17 04:56:28 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:10 $}
-@LabeledNormativeAnnex{Safety and Security}
+@Comment{$Date: 2004/09/17 04:56:28 $}
+@LabeledRevisedNormativeAnnex{Version=[2],
+New=[High Integrity Systems], Old=[Safety and Security]}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00347-01]}
 @Leading@Defn{safety-critical systems}
 @Defn{secure systems}
-This Annex addresses requirements for systems that are safety critical
-or have security constraints. It provides facilities and specifies
-documentation requirements that relate to several needs:
+This Annex addresses requirements for @Chg{Version=[2],
+New=[high integrity ],Old=[]}systems @Chg{Version=[2],New=[(including],
+Old=[that are]} safety@Chg{Version=[2],New=[-],Old=[ ]}critical
+@Chg{Version=[2],New=[system and],Old=[or have]}
+security@Chg{Version=[2],New=[-critical systems)],Old=[ constraints]}. It
+provides facilities and specifies documentation requirements that relate to
+several needs:
 @begin{Itemize}
 Understanding program execution;
 
@@ -54,6 +60,15 @@ the documentation is @lquotes@;adequate@rquotes@;.
 @Defn{extensions to Ada 83}
 This Annex is new to Ada 95.
 @end{Extend83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
+The title of this annex was changed to better reflect its purpose and scope.
+High integrity systems has become the standard way of identifying systems
+that have high reliability requirements; it subsumes terms such as safety
+and security. Moreover, the annex does not include any security specific
+features and as such the previous title is somewhat misleading.
+@end{DiffWord95}
 
 @LabeledClause{Pragma Normalize_Scalars}
 @begin{Intro}
@@ -144,7 +159,7 @@ solely by the foreign language environment
 
 The use of pragma Normalize_Scalars in conjunction with
 Pragma Restrictions(No_Exceptions) may result in erroneous execution
-(see @RefSecNum[Safety and Security Restrictions]).
+(see @RefSecNum[High Integrity Restrictions]).
 @begin{Discussion}
 
 Since the effect of an access to an out of range value will often be to
@@ -593,7 +608,7 @@ to an interactive debugger to perform the check.
 @end{Discussion}
 @end{Notes}
 
-@LabeledClause{Safety and Security Restrictions}
+@LabeledRevisedClause{Version=[2],New=[High Integrity Restrictions],Old=[Safety and Security Restrictions]}
 @begin{Intro}
 This clause defines restrictions that can be used with pragma
 Restrictions (see @RefSecNum(Pragma Restrictions)); these facilitate
@@ -612,6 +627,7 @@ a restriction can be imposed.
 @end{Intro}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00347-01]}
 The following restrictions, the same as in @RefSecNum{Tasking Restrictions},
 apply in this Annex:
  No_Task_@!Hierarchy,
@@ -621,6 +637,13 @@ apply in this Annex:
  Max_@!Asynchronous_@!Select_@!Nesting is 0, and
  Max_@!Tasks is 0.
 @redundant[The last three restrictions are checked prior to program execution.]
+@Chg{Version=[2],New=[Pragma Profile(Ravenscar) applies in this Annex.],Old=[]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
+The reference to pragma Profile(Ravenscar) is intended to show that properly
+restricted tasking is appropriate for use in high integrity systems. The Ada 95
+Annex seemed to suggest that tasking was inappropriate for such systems.
+@end{Discussion}
 
 @Trailing@;The following additional restrictions apply in this Annex.
 
@@ -902,3 +925,9 @@ proscribed
 @end{itemize}
 @end{Notes}
 @end{comment}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
+The title of this clause was changed to match the change to the Annex title.
+Pragma Profile(Ravenscar) is part of this annex.
+@end{DiffWord95}

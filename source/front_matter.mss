@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.29 $ $Date: 2001/12/21 23:26:10 $}
+@comment{$Revision: 1.30 $ $Date: 2004/09/17 04:56:29 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -56,7 +56,7 @@ International Standard ISO/IEC 8652:1995(E).],Old=[]}
 specified in two documents, this consolidated version of the Ada Reference
 Manual is made available to the public.],Old=[]}
 
-@AddedSubHeading{Using this version of the Ada Reference Manual}
+@AddedSubHeading{Version=[1],Using this version of the Ada Reference Manual}
 
 @begin{RMOnly}
 @ChgRef{Version=[1],Kind=[Added]}
@@ -105,7 +105,7 @@ original Ada Reference Manual. Similar markings and numbering is used for
 changes to annotations.],Old=[]}
 @end{AARMOnly}
 
-@AddedSubHeading{Acknowledgements for this version of the Ada Reference Manual}
+@AddedSubHeading{Version=[1],Acknowledgements for this version of the Ada Reference Manual}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=<The editor [R. Brukardt (USA)] would like to thank the many people
@@ -605,9 +605,81 @@ application areas:
 
 @RefSec{Numerics}
 
-@RefSec{Safety and Security}
+@RefSec{High Integrity Systems}
 @end{InnerItemize}
 @end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Amendment 1 modifies this International Standard by
+making changes and additions that improve:],Old=[]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[The safety of applications written in Ada;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[The portability of applications written in Ada;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Interoperability with other languages and systems; and],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Accessibility and ease of transition from idioms in other
+programming and modeling languages.],Old=[]}
+@end{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Amendment 1 incorporates the following major additions to
+this International Standard:],Old=[]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[The Ravenscar profile to provide a simplified tasking
+system for high-integrity systems (see @RefSecNum{D.13});],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[A non-preemptive task dispatching policy (see
+@RefSecNum{D.2.4});],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Aggregates, constructor functions, and constants for
+limited types (see @RefSecNum{Record Aggregates}, @RefSecNum{Return Statements},
+and @RefSecNum{Limited Types});],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Control of overriding to eliminate errors (see
+@RefSecNum{Visibility});],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Improvements for access types, such as null excluding
+subtypes (see @RefSecNum{Access Types}), additional uses for anonymous access
+types (see @RefSecNum{Array Types} and @RefSecNum{Object Renaming Declarations}),
+and anonymous access-to-subprogram subtypes to support
+@lquote@;downward closures@rquote@; (see @RefSecNum{Access Types} and
+@RefSecNum{Operations of Access Types});],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Additional context clause capabilities: limited views to
+allow mutually dependent types (see @RefSecNum{Incomplete Type Declarations} and
+@RefSecNum{Context Clauses - With Clauses}) and private context clauses that
+apply only in the private part of a package (see
+@RefSecNum{Context Clauses - With Clauses});],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Added standard packages, including time management (see
+@RefSecNum{9.6.1}), file directory and name management (see @RefSecNum{A.16}),
+execution-time clocks (see @RefSecNum{D.14}), timing events (see
+@RefSecNum{D.15}), and array and vector operations (see @RefSecNum{G.3});],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[Interfaces, to provide a limited form of multiple
+inheritance of operations (see @RefSecNum{3.9.4}); and],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[A mechanism for writing C unions to make interfaces with
+C systems easier (see @RefsecNum{B.3.3}).],Old=[]}
+@end{Itemize}
+
+
+
+
 @end{Intro}
 
 @NewPage

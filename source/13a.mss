@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2001/12/21 23:21:09 $}
+@Comment{$Date: 2004/09/17 04:56:27 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -19,7 +19,7 @@ This was necessary to preserve a logical order,
 given the new Ada 95 semantics given in this section.
 @end{DiffWord83}
 
-@LabeledRevisedClause{New=[Operational and Representation Items],Old=[Representation Items]}
+@LabeledRevisedClause{Version=[1],New=[Operational and Representation Items],Old=[Representation Items]}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009]}
@@ -929,7 +929,7 @@ so it probably won't get packed very tightly.
 @end{Itemize}
 @end{ImplAdvice}
 
-@LabeledRevisedClause{New=[Operational and Representation Attributes], Old=[Representation Attributes]}
+@LabeledRevisedClause{Version=[1],New=[Operational and Representation Attributes], Old=[Representation Attributes]}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -5102,7 +5102,7 @@ efficient tasking run-time systems are defined
 in @RefSecNum{Tasking Restrictions}.
 Safety- and security-related
 restrictions are defined in
-@RefSecNum{Safety and Security Restrictions}.
+@RefSecNum{High Integrity Restrictions}.
 
 An implementation has to enforce the restrictions in cases where
 enforcement is required,

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2001/03/22 18:14:24 $}
+@Comment{$Date: 2004/09/17 04:56:25 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 
@@ -193,7 +193,7 @@ Private part is defined in Section 8.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0029]}
 @Chg{New=[For a task declaration without a @nt{task_definition}, a
-@nt{task_definition} without @nt{task_items} is assumed.],Old=[]}
+@nt{task_definition} without @nt{task_item}s is assumed.],Old=[]}
 @end{StaticSem}
 
 @begin{RunTime}

@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2002/07/19 05:48:18 $}
+@Comment{$Date: 2004/09/17 04:56:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -331,7 +331,7 @@ application areas:
 
 @RefSec{Numerics}
 
-@RefSec{Safety and Security}
+@RefSec{High Integrity Systems}
 @end{Itemize}
 
 @begin{Wide}
@@ -775,11 +775,6 @@ categories:],Old=[]}
 This heading lists all of the upward inconsistencies between Ada 95 and Ada
 0y. Upward inconsistencies are situations in which a legal Ada 95 program
 is a legal Ada 0y program with different semantics.],Old=[]}
-
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[Since Amendment 1 is intended to be a very compatible update to the
-Ada 95 language, we do not expect any entries under this heading. However,
-we define it for completeness.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,

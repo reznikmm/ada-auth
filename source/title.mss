@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2002/07/19 05:48:18 $}
+@comment{$Revision: 1.16 $ $Date: 2004/09/17 04:56:28 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2000], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}}}
@@ -57,7 +57,7 @@
 
 @Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:1995(E)}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}}}
-@Noparanum@Center{@Swiss{@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}}}
+@Noparanum@Center{@Swiss{@Chg{Version=[2], New=[@Grow{and Amendment 1 (Draft 7)}], Old=[]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
@@ -69,9 +69,11 @@
 
 @Noparanum@;Copyright @Latin1(169) 1992,1993,1994,1995  Intermetrics, Inc.
 
-@Noparanum@;Copyright @Latin1(169) 2000  The MITRE Corporation, Inc.
+@Noparanum@;@Chg{Version=[1], New=[Copyright @Latin1(169) 2000  The MITRE Corporation, Inc.], Old=[]}
 
-@Noparanum@;Copyright @Latin1(169) 2002  AXE Consultants
+@Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005  AXE Consultants], Old=[]}
+
+@Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005  Ada-Europe], Old=[]}
 
 @NewPage
 @Comment{For ISO version, the back of the title page is blank, and the
@@ -98,40 +100,79 @@ and documentation.
 
 @Noparanum@;@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@;@b{Technical Corrigendum 1}
+@Noparanum@;@Chg{Version=[1], New=[@b{Technical Corrigendum 1}], Old=[]}
 
-@Noparanum@;Copyright @Latin1(169) 2000, The MITRE Corporation.  All Rights Reserved.
+@Noparanum@;@Chg{Version=[1], New=[Copyright @Latin1(169) 2000, The MITRE Corporation.  All Rights Reserved.], Old=[]}
 
-@Noparanum@;This document may be copied, in whole or in part, in any form or by any means,
+@Noparanum@;@Chg{Version=[1], New=[This document may be copied, in whole or in part, in any form or by any means,
 as is, or with alterations, provided that (1) alterations are clearly marked as
 alterations and (2) this copyright notice is included unmodified in any copy.
 Any other use or distribution of this document is prohibited without the prior
-express permission of MITRE.
+express permission of MITRE.], Old=[]}
 
-@Noparanum@;You use this document on the condition that you indemnify and hold harmless
-MITRE, its Board of Trustees, officers, agents, and employees, from any and all
-liability or damages to yourself or your hardware or software, or third parties,
-including attorneys' fees, court costs, and other related costs and expenses,
-arising out of your use of this document irrespective of the cause of said
-liability.
+@Noparanum@;@Chg{Version=[1], New=[You use this document on the condition that
+you indemnify and hold harmless MITRE, its Board of Trustees, officers, agents,
+and employees, from any and all liability or damages to yourself or your
+hardware or software, or third parties, including attorneys' fees, court costs,
+and other related costs and expenses, arising out of your use of this document
+irrespective of the cause of said liability.], Old=[]}
 
-@Noparanum@;MITRE MAKES THIS DOCUMENT AVAILABLE ON AN "AS IS" BASIS AND MAKES NO WARRANTY,
+@Noparanum@;@Chg{Version=[1], New=[MITRE MAKES THIS DOCUMENT AVAILABLE ON AN "AS IS" BASIS AND MAKES NO WARRANTY,
 EXPRESS OR IMPLIED, AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY,
 OR FUNCTIONING OF THIS DOCUMENT.  IN NO EVENT WILL MITRE BE LIABLE FOR ANY
 GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
-EVEN IF MITRE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+EVEN IF MITRE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 
 @Noparanum@;@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@;@b{Amendment 1}
+@Noparanum@;@Chg{Version=[2], New=[@b{Amendment 1}], Old=[]}
 
-@Noparanum@;Copyright @Latin1(169) 2002, AXE Consultants.  All Rights Reserved.
+@Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005  AXE Consultants.  All Rights Reserved.], Old=[]}
 
-@Noparanum@;This document may be copied, in whole or in part, in any form or by any means,
+@Noparanum@;@Chg{Version=[2], New=[This document may be copied, in whole or in part, in any form or by any means,
 as is, or with alterations, provided that (1) alterations are clearly marked as
 alterations and (2) this copyright notice is included unmodified in any copy.
 Compiled copies of standard library units and examples need not contain this
 copyright notice so long as the notice is included in all copies of source code
 and documentation. Any other use or distribution of this document is prohibited
-without the prior express permission of AXE.
+without the prior express permission of AXE.], Old=[]}
+
+@Noparanum@;@Chg{Version=[2], New=[You use this document on the condition that
+you indemnify and hold harmless AXE, its board, officers, agents, and
+employees, from any and all liability or damages to yourself or your hardware
+or software, or third parties, including attorneys' fees, court costs, and
+other related costs and expenses, arising out of your use of this document
+irrespective of the cause of said liability.], Old=[]}
+
+@Noparanum@;@Chg{Version=[2], New=[AXE MAKES THIS DOCUMENT AVAILABLE ON AN "AS IS" BASIS AND MAKES NO WARRANTY,
+EXPRESS OR IMPLIED, AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY,
+OR FUNCTIONING OF THIS DOCUMENT. IN NO EVENT WILL AXE BE LIABLE FOR ANY
+GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
+EVEN IF AXE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
+
+@Noparanum@;@ @;@comment{A dummy paragraph containing just a blank}
+
+@Noparanum@;@Chg{Version=[2], New=[@b{Consolidated Standard}], Old=[]}
+
+@Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005  Ada-Europe.], Old=[]}
+
+@Noparanum@;@Chg{Version=[2], New=[This document may be copied, in whole or in
+part, in any form or by any means, as is, or with alterations, provided that
+(1) alterations are clearly marked as alterations and (2) this copyright notice
+is included unmodified in any copy. Any other use or distribution of this
+document is prohibited without the prior express permission of Ada-Europe.], Old=[]}
+
+@Noparanum@;@Chg{Version=[2], New=[You use this document on the condition that
+you indemnify and hold harmless Ada-Europe and its Board from any and all
+liability or damages to yourself or your hardware or software, or third
+parties, including attorneys' fees, court costs, and other related costs and
+expenses, arising out of your use of this document irrespective of the cause of
+said liability.], Old=[]}
+
+@Noparanum@;@Chg{Version=[2], New=[ADA-EUROPE MAKES THIS DOCUMENT AVAILABLE ON AN "AS IS" BASIS AND MAKES NO WARRANTY,
+EXPRESS OR IMPLIED, AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY,
+OR FUNCTIONING OF THIS DOCUMENT. IN NO EVENT WILL ADA-EUROPE BE LIABLE FOR ANY
+GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
+EVEN IF ADA-EUROPE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 @end{NotISO}
+
