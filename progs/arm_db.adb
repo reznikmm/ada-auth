@@ -46,12 +46,13 @@ package body ARM_Database is
     -- 10/28/04 - RLB - Added Inserted_Normal_Number change kind.
     -- 11/02/04 - RLB - Added Deleted_Inserted_Number change kind.
     -- 12/06/04 - RLB - Added Revised_Inserted_Number change kind.
+    -- 12/14/04 - RLB - Made the hang item bigger.
 
     type String_Ptr is access String;
     type Item is record
 	Next : Item_List;
 	Sort_Key : String(1 .. 20);
-	Hang : String(1 .. 40);
+	Hang : String(1 .. 50);
 	Hang_Len : Natural;
 	Text : String_Ptr;
 	Change_Kind : Paragraph_Change_Kind_Type;

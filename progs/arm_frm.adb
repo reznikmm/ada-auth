@@ -161,6 +161,7 @@ package body ARM_Format is
     -- 12/11/04 - RLB - Fixed brackets in Added_Pragma_Syntax to allow {} in
     --			text.
     --		- RLB - Implemented attribute adding in Change_Attribute.
+    -- 12/13/04 - RLB - Fixed problems in the new change commands.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -6171,7 +6172,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        Format_Object.Space_After := Space_After;
 				    when ARM_Format.New_Only =>
 				        -- Skip the text:
-			                ARM_Input.Skip_until_Close_Char (Input_Object, Ch);
+			                ARM_Input.Skip_until_Close_Char (Input_Object, Close_Ch);
 				        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
 				    when ARM_Format.Changes_Only |
 					 ARM_Format.Show_Changes =>
@@ -6180,7 +6181,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Format_Object.Changes = ARM_Format.Changes_Only then
 					    -- Old enough that only the new text is shown.
 				            -- Skip the text:
-			                    ARM_Input.Skip_until_Close_Char (Input_Object, Ch);
+			                    ARM_Input.Skip_until_Close_Char (Input_Object, Close_Ch);
 				            ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
 					else
 					    -- We assume that the text is non-empty;
@@ -6228,7 +6229,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 				        ARM_Output.Ordinary_Character (Output_Object, ' ');
 				        -- Skip the text (we're not going to output it):
-			                ARM_Input.Skip_until_Close_Char (Input_Object, Ch);
+			                ARM_Input.Skip_until_Close_Char (Input_Object, Close_Ch);
 				        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
 			        end case;
 			    end if;
@@ -6661,16 +6662,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					-- Ignore any changes with version numbers
 					-- higher than the current maximum.
 				        -- Skip the text:
-				        ARM_Input.Skip_until_Close_Char (Input_Object,
-					    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
+				        ARM_Input.Skip_until_Close_Char (Input_Object, Close_Ch);
 				        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
 
 				    else
 				        case Format_Object.Changes is
 					    when ARM_Format.Old_Only =>
 					        -- Skip the text:
-				                ARM_Input.Skip_until_Close_Char (Input_Object,
-					            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
+				                ARM_Input.Skip_until_Close_Char (Input_Object, Close_Ch);
 					        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
 					    when ARM_Format.New_Only =>
 						Make_Attribute_Text;
