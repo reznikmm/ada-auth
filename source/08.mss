@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:15:02 $}
+@Comment{$Date: 2005/02/06 04:31:42 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2635,6 +2635,7 @@ Usually, a usage name denotes only one declaration,
 and therefore one view and one entity.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @leading@RootDefn[expected type]
 The @i(expected type) for a given @nt<expression>, @nt<name>,
 or other construct determines, according to the @i{type resolution
@@ -2643,8 +2644,8 @@ overload resolution.
 @Defn{type resolution rules}
 @Redundant[
 The type resolution rules provide support for class-wide programming,
-universal numeric literals, dispatching operations, and
-anonymous access types:]
+universal @Chg{Version=[2],New=[numeric ],Old=[]}literals, dispatching
+operations, and anonymous access types:]
 @begin{Ramification}
   Expected types are defined throughout the RM95.
   The most important definition is that, for a

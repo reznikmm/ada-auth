@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/02/05 05:48:00 $}
+@Comment{$Date: 2005/02/06 04:31:41 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -186,16 +186,16 @@ See @RefSecNum(Type Conversions).
 @end{Extend83}
 
 @begin{DiffWord83}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 Everything of the general syntactic form @nt{name}(...) is
 now syntactically a @nt{name}. In any realistic parser,
 this would be a necessity since distinguishing among the various
 @nt{name}(...) constructs inevitably requires name resolution.
 In cases where the construct yields a value rather than an object,
-the name denotes the value rather than an object. Names already denote
-values in Ada 83 with named numbers, components of the result
-of a function call, etc. This is partly just a wording change,
-and partly an extension of functionality (see Extensions heading
-above).
+the name denotes @Chg{Version=[2],New=[a],Old=[the]} value rather than an
+object. Names already denote values in Ada 83 with named numbers, components of
+the result of a function call, etc. This is partly just a wording change, and
+partly an extension of functionality (see Extensions heading above).
 
 The syntax rule for @nt{direct_name} is new. It is used in places where
 direct visibility is required.
@@ -272,13 +272,15 @@ array with the specified index value(s).
 The nominal subtype of the @nt<indexed_component> is the
 component subtype of the array type.
 @begin{Ramification}
-In the case of an array whose components are aliased, and
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
+@ChgDeleted{Version=[2],Text=[In the case of an array whose components are
+aliased, and
 of an unconstrained discriminated subtype, the components
 are constrained even though their nominal subtype is unconstrained.
 (This is because all aliased discriminated objects are constrained.
 See @RefSecNum(Operations of Access Types).)
 In all other cases, an array component is constrained if and only
-if its nominal subtype is constrained.
+if its nominal subtype is constrained.]}
 @end{Ramification}
 
 When the @nt<prefix> denotes an entry family,
@@ -494,18 +496,18 @@ corresponding entry, entry family, or protected subprogram.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
 @ChgAdded{Version=[2],Text=[A view of a subprogram whose first formal parameter is of
-a tagged or is an access parameter whose designated type is tagged:]}
+a tagged type or is an access parameter whose designated type is tagged:]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],NoPrefix=[T],Text=[The @nt<prefix> (after any implicit
 dereference) shall resolve to denote an object or value of a specific tagged
 type @i<T> or class-wide type @i<T>'Class. The @nt<selector_name> shall resolve
-to denote a view of a subprogram declared immediately within the region in
-which an ancestor of the type @i<T> is declared. The first formal parameter of
-the subprogram shall be of type @i<T>, or a class-wide type that covers @i<T>,
-or an access parameter designating one of these types. The designator of the
-subprogram shall not be the same as that of a component of the tagged type
-visible at the point of the @nt<selected_component>. The
+to denote a view of a subprogram declared immediately within the declarative
+region in which an ancestor of the type @i<T> is declared. The first formal
+parameter of the subprogram shall be of type @i<T>, or a class-wide type that
+covers @i<T>, or an access parameter designating one of these types. The
+designator of the subprogram shall not be the same as that of a component of
+the tagged type visible at the point of the @nt<selected_component>. The
 @nt<selected_component> denotes a view of this subprogram that omits the first
 formal parameter.]}
 
@@ -550,9 +552,9 @@ then the expanded name is ambiguous, independently of the @nt<selector_name>.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
-@Chg{Version=[2],New=[If a @nt<selected_component> resolves to a view of a
-subprogram whose first parameter is an access parameter, the @nt<prefix> shall
-denote an aliased view of an object.],Old=[]}
+@ChgAdded{Version=[2],Text=[If a @nt<selected_component> other than an expanded
+name resolves to denote a view of a subprogram whose first parameter is an
+access parameter, the @nt<prefix> shall denote an aliased view of an object.]}
 
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -578,12 +580,12 @@ The exception Constraint_Error is raised if this check fails.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
 @ChgAdded{Version=[2],Text=[ For a @nt<selected_component> with a tagged @nt<prefix>
-and @nt<selector_name> that denotes a view of a subprogram, a call on the view
+and a @nt<selector_name> that denotes a view of a subprogram, a call on the view
 denoted by the @nt<selected_component> is equivalent to a call on the
-underlying subprogram with the first actual parameter being provided by the
+subprogram with the first actual parameter being provided by the
 object or value denoted by the @nt<prefix> (or the Access attribute of this
-object or value if the first formal is an access parameter), and the remaining
-actual parameters given by the @nt<actual_parameter_part>, if any.]}
+object or value if the first formal parmeter is an access parameter), and the
+remaining actual parameters given by the @nt<actual_parameter_part>, if any.]}
 @end{RunTime}
 
 @begin{Examples}
@@ -645,12 +647,12 @@ new terminology, to accommodate class-wide types, etc.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}The prefix call notation for
-tagged objects is new. This provides a similar notation to that used in other
-popular languages, and also reduces the need for @nt{use_clause}s. This
-is sometimes known as @lquotes@;prefix call notation@rquotes or @lquotes@;directed
-receiver notation@rquotes@;.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00252-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The prefix call notation for
+  tagged objects is new. This provides a similar notation to that used in other
+  popular languages, and also reduces the need for @nt{use_clause}s. This
+  is sometimes known as @lquotes@;prefix call notation@rquotes or @lquotes@;distinguished
+  receiver notation@rquotes@;.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Given the following
@@ -664,8 +666,8 @@ My_Object : T;],Old=[]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[the following calls are equivalent:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Do_Something (My_Object, 10);
-My_Object.Do_Something (10);],Old=[]}
+@ChgAdded{Version=[2],Text=[Do_Something (My_Object, Count => 10);
+My_Object.Do_Something (Count => 10);]}
 @end{Example}
 @end{Extend95}
 
@@ -1072,12 +1074,12 @@ nor semantically "literals" but are rather names of parameterless
 functions.
 @end{DiffWord83}
 
-@begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[@key{Null} now has type @i<universal_access>, which is
-similar to other literals. @key{Null} can be used with anonymous access
-types.],Old=[]}
-@end{DiffWord95}
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}@key{Null} now has
+  type @i<universal_access>, which is similar to other literals. @key{Null}
+  can be used with anonymous access types.]}
+@end{Extend95}
 
 
 @LabeledClause{Aggregates}
@@ -1220,7 +1222,7 @@ incompatibilities. For example:]}
 @key{procedure} P(X: Not_Lim);],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[P((Comp => 123));],Old=[]}
+@ChgAdded{Version=[2],Text=[P((Comp => 123)); -- @RI[Illegal in Ada 2005, legal in Ada 95]]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1353,7 +1355,8 @@ can be given by static expressions.
 type are needed, even though not all of them can be named in the
 @nt{aggregate}. For a generic formal type, all of the components of the actual
 type are needed, even though not all of them can be named in the
-@nt{aggregate}.]}
+@nt{aggregate}. The @nt{aggregate} would include @key{others} => <>
+in the case of needed but unnameable components.]}
 @end{Ramification}
 
 @Leading@Keepnext@PDefn2{Term=[expected type],
@@ -1416,7 +1419,8 @@ two or more associated components, all of them shall be of the same type.
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00389-01]}
   These rules apply to an association with an @key(others)
   choice@Chg{Version=[2],New=[ with an expression. An @key(others) choice with
-  a <> can match a null record type or null extension],Old=[]}.
+  a <> can match zero components or several components with different
+  types],Old=[]}.
 @end{Ramification}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
@@ -1495,11 +1499,12 @@ type, a formal private type, or a formal derived type:]}
    those issues.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[For tasks and protected types, this recognizes that
-   there may be components (such as the lock for a protected type) that are
-   only known to the implementation; these components necessarily have to be
-   given default initialization. For portability, we don't want aggregates to
-   be written that depend on whether the implementation has such components.]}
+  @ChgAdded{Version=[2],Text=[For tasks and protected types, this recognizes
+   that there may be components (such as the lock for a protected type) that
+   are known only to the implementation; these components necessarily have
+   to be given default initialization. For portability, we don't want
+   aggregates to be written that depend on whether the implementation has
+   such components.]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
@@ -1513,12 +1518,12 @@ type, a formal private type, or a formal derived type:]}
    views when the full type is certain to be composite. Otherwise, we would
    have anomalies where additional visibility would cause the ability to have
    @nt{aggregate}s to disappear (if the full type is elementary).
-   That's true if the partial view has known discriminants or is tagged.
-   Task and protected types are also allowed, as they are always composite.
-   We also disallow types with unknown discriminants. Unknown discriminants
-   are often used to prevent uncontrolled initialization of objects, and
-   we don't want to provide an uncontrolled initialization mechanism for
-   such types.]}
+   The full type is certain to be composite if the partial view has known
+   discriminants or is tagged. Task and protected types are also allowed, as
+   they are always composite. We also disallow types with unknown
+   discriminants. Unknown discriminants are often used to prevent uncontrolled
+   initialization of objects, and we don't want to provide an uncontrolled
+   initialization mechanism for such types.]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
@@ -1656,7 +1661,7 @@ an @nt{expression} in a @nt{record_aggregate}, default initializing the
 component.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
-@Chg{Version=[2],New=[An @nt{record_aggregate} can be of any non-array
+@Chg{Version=[2],New=[A @nt{record_aggregate} can be of any non-array
 composite type, other than partial views whose full type @i{might} be an
 elementary type. For partial views, task types, protected types, and generic
 formal types, @key{others} => <> is required, as all of the components are
@@ -1736,15 +1741,16 @@ through one or more private extensions, then the
 shall not include a positional component association.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
-  @ChgAdded{Version=[2],Text=[The expression cannot to dynamically tagged to
+  @ChgAdded{Version=[2],Text=[The expression cannot be dynamically tagged to
   prevent implicit "truncation" of a dynamically-tagged value to the specific
   ancestor type. This is similar to the
   rules in @RefSecNum{Dispatching Operations of Tagged Types}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
   @ChgAdded{Version=[2],Text=[We allow the type of the @nt{ancestor_part} to be
-  the type itself, so that these are allowed for generic formal derived types,
-  where the actual type might be the same as the ancestor type.]}
+  the type itself, so that these @nt{aggregate}s are allowed for generic
+  formal derived types, where the actual type might be the same as the
+  ancestor type.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
   @ChgAdded{Version=[2],Text=[If the type involves any private extensions, we
@@ -1846,13 +1852,13 @@ not (necessarily) visible to the @nt{extension_aggregate}.],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[Limited @nt{extension_aggregate}s are allowed (since
-all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[Limited @nt{extension_aggregate}s are allowed (since
+  all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
-@Chg{Version=[2],New=[Fixed a hole that allow implicit "truncation" of a
-dynamically-tagged value when used as an ancestor @nt{expression}.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
+  @ChgAdded{Version=[2],Text=[Eliminated implicit @lquotes@;truncation@rquotes
+  of a dynamically-tagged value when it is used as an ancestor @nt{expression}.]}
 @end{DiffWord95}
 
 
@@ -1952,9 +1958,11 @@ The component type of this array type is the
 expected type for each array component expression of
 the @nt<array_aggregate>.
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 We already require a single array or record type or
 record extension for an @nt{aggregate}.
-The above rule requiring a single nonlimited array type
+The above rule requiring a single @Chg{Version=[2],New=[],
+Old=[nonlimited ]}array type
 (and similar ones for record and extension aggregates)
 resolves which kind of aggregate you have.
 @end{Ramification}
@@ -2109,10 +2117,11 @@ proceeds in two steps:
 @end(Ramification)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
-@ChgAdded{Version=[2],Text=[Each array component @nt{expression} defines the
-value for the associated component(s). For a component given by <>, the
-associated component(s) are initialized by default (see
-@RefSecNum{Object Declarations}).]}
+@ChgAdded{Version=[2],Text=[Each @nt<expression> in an
+@nt<array_component_association> defines the value for the associated
+component(s). For an @nt<array_component_association> with <>, the associated
+component(s) are initialized by default as for a stand-alone object of the
+component subtype (see @RefSecNum{Object Declarations}).]}
 
 @Leading@Defn2{Term=[bounds],
   Sec=(of the index range of an @nt{array_aggregate})}
@@ -2301,7 +2310,7 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}<> can be used in place of
-an @nt{expression} in an @nt{array_aggregate}, default initializing the
+an @nt{expression} in an @nt{array_aggregate}, default-initializing the
 component.],Old=[]}
 @end{Extend95}
 
@@ -2844,9 +2853,11 @@ type; if untagged, the expected type for the @nt<simple_expression> is
 the tested type.
 
 @begin{Reason}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
   The part of the rule for untagged types is stated in a way
-  that ensures that operands like @key(null) are still legal
-  as operands of a membership test.
+  that ensures that operands
+  like @Chg{Version=[2],New=[a string literal],Old=[@key(null)]} are still
+  legal as operands of a membership test.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
   The significance of @lquotes@;@Chg{Version=[2],New=[is convertible to],
@@ -3152,15 +3163,28 @@ in an arbitrary order.
     when X is outside Float'Range.
 @end{Ramification}
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{To get conditional Leading}.
   The tested type is not scalar, and
   the value of the @nt<simple_expression> satisfies any constraints
-  of the named subtype, and, if the type of the @nt{simple_expression}
+  of the named subtype, and@Chg{Version=[2],New=[:],Old=[, if the type of
+  the @nt{simple_expression}
   is class-wide, the value has a tag that identifies a type covered by
-  the tested type.
-  @begin{Ramification}
-  Note that the tag is not checked if the @nt{simple_expression} is of a
-  specific type.
-  @end{Ramification}
+  the tested type.]}
+  @begin{Inneritemize}
+    @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+    @ChgAdded{Version=[2],Text=[if the type of the @nt{simple_expression} is
+    class-wide, the value has a tag that identifies a type covered by the
+    tested type.]}
+    @begin{Ramification}
+      Note that the tag is not checked if the @nt{simple_expression} is of a
+      specific type.
+    @end{Ramification}
+    @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+    @ChgAdded{Version=[2],Text=[if the tested type is an access type and the
+    named subtype excludes null, the value of the @nt{simple_expression} is
+    not null.]}
+  @end{Inneritemize}
 @end(itemize)
 
 Otherwise the test yields the result False.
@@ -3600,8 +3624,7 @@ due to the presence of these universal fixed-fixed operators.]}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00364-01]}
-@ChgDeleted{Version=[2],Text=[The full type extension's operation is used for a
-The above two fixed-fixed multiplying operators
+@ChgDeleted{Version=[2],Text=[The above two fixed-fixed multiplying operators
 shall not be used in a context where the expected type for the result
 is itself @i(universal_fixed) @em @Redundant[the context has to
 identify some other numeric type to which the result is to be converted,
@@ -3721,7 +3744,8 @@ fixed-fixed multiplying operators are now directly available (see below).
 Any attempt to use user-defined fixed-fixed multiplying operators
 will be ambiguous with the universal ones. The only way to use the user-defined
 operators is to fully qualify them in a prefix call. This problem was not
-documented during the design of Ada 95.],Old=[]}
+documented during the design of Ada 95, and has been mitigated by
+Ada 2005.],Old=[]}
 @end{Incompatible83}
 
 @begin{Extend83}

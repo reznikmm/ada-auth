@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/02/04 06:36:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/02/06 04:31:44 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/02/04 06:36:45 $}
+@Comment{$Date: 2005/02/06 04:31:44 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -787,6 +787,10 @@ a non-interrupt priority.
 The implementation should use names that end with
 @lquotes@;_Locking@rquotes@; for implementation-defined locking policies.
 
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Names that end with @lquotes@;_Locking@rquotes@; should be used for
+implementation-defined locking policies.]}]}
+
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -989,13 +993,14 @@ is selected.
 Implementations are allowed to define other queuing policies, but
 need not support more than one such policy per partition.
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0116]}
-@Chg{New=[This rule is really redundant, as @RefSecNum(Pragmas and Program Units)
-allows an implementation to limit the use of configuration pragmas to an
-empty environment. In that case, there would be no way to have multiple policies
-in a partition. In any case, the wording here really ought to be "...more than
-one queuing policy per partition.", since this part of the rule applies to
-all queuing policies, not just implementation-defined ones.],Old=[]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0116]}
+  @ChgAdded{Version=[1],Text=[This rule is really redundant, as
+  @RefSecNum(Pragmas and Program Units) allows an implementation to limit the
+  use of configuration pragmas to an empty environment. In that case, there
+  would be no way to have multiple policies in a partition. In any case, the
+  wording here really ought to be "...more than one queuing policy per
+  partition.", since this part of the rule applies to all queuing policies, not
+  just implementation-defined ones.]}
 @end{Discussion}
 @end{ImplPerm}
 
@@ -1003,6 +1008,10 @@ all queuing policies, not just implementation-defined ones.],Old=[]}
 
 The implementation should use names that end with
 @lquotes@;_Queuing@rquotes@; for implementation-defined queuing policies.
+
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Names that end with @lquotes@;_Queuing@rquotes@; should be used for
+implementation-defined queuing policies.]}]}
 
 @end{ImplAdvice}
 
@@ -1293,11 +1302,20 @@ it is recommended that this statement be implemented in a way that
 never requires the task executing the @nt{abort_statement} to
 block.
 
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The @nt{abort_statement} should not require the task executing the
+statement to block.]}]}
+
 On a multi-processor,
 the delay associated with aborting a task on another processor
 should be bounded;
 the implementation should use periodic polling,
 if necessary, to achieve this.
+
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[On a multi-processor,
+the delay associated with aborting a task on another processor
+should be bounded.]}]}
 
 @end{ImplAdvice}
 
@@ -1332,7 +1350,7 @@ construction of highly efficient tasking run-time systems.]
     @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042]}
     @ChgNote{This is no longer true.}
-    @Chg{New=[],Old=[Note that protected types with entries and
+    @ChgDeleted{Version=[1],Text=[Note that protected types with entries and
     interrupt-handling protected types have nontrivial finalization actions.
     However, this restriction does not restrict those things.]}
     @end{Ramification}
@@ -1389,7 +1407,7 @@ Max_Protected_Entries @\Specifies the maximum number of entries per
 @begin{RunTime}
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0076]}
-@Chg{New=[],Old=[If the following restrictions are violated,
+@ChgDeleted{Version=[1],Text=[If the following restrictions are violated,
 the behavior is implementation defined.
 @IndexCheck{Storage_Check}
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
@@ -1456,6 +1474,10 @@ program code or data size or execution time],Old=[]}.]}
 @begin{ImplAdvice}
 When feasible, the implementation should take advantage of the specified
 restrictions to produce a more efficient implementation.
+
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[When feasible, specified restrictions should be used to produce a more
+efficient implementation.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -1806,6 +1828,9 @@ values need to be documented.
 
 When appropriate, implementations should provide configuration mechanisms to
 change the value of Tick.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[When appropriate, mechanisms to change the value of Tick should be
+provided.]}]}
 @begin{Reason}
 This is often needed when the compilation system was originally targeted to a
 particular processor with a particular interval timer, but the customer
@@ -1824,10 +1849,17 @@ by a function call residing in a board specific module.
 
 It is recommended that Calendar.Clock and Real_Time.Clock be implemented
 as transformations of the same time base.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Calendar.Clock and Real_Time.Clock should be transformations of the
+same time base.]}]}
 
 It is recommended that the @lquotes@;best@rquotes@; time base which exists in the
 underlying system be available to the application through
 Clock. @lquotes@;Best@rquotes@; may mean highest accuracy or largest range.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The @lquotes@;best@rquotes@; time base which exists in the
+underlying system should be available to the application through
+Real_Time.Clock.]}]}
 
 @end{ImplAdvice}
 

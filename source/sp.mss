@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2005/02/04 06:36:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2005/02/06 04:31:45 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/02/04 06:36:45 $}
+@Comment{$Date: 2005/02/06 04:31:45 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -46,6 +46,10 @@ The machine code or intrinsics support should allow access to all
 operations normally available to assembly language programmers for the
 target environment,
 including privileged instructions, if any.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The machine code or intrinsics support should allow access to all
+operations normally available to assembly language programmers for the
+target environment.]}]}
 @begin{Ramification}
 Of course, on a machine with protection, an attempt to execute a
 privileged instruction in user mode will probably trap.
@@ -61,6 +65,9 @@ The interfacing pragmas (see @RefSecNum{Interface to Other Languages})
 should support interface to assembler;
 the default assembler should be associated with the convention
 identifier Assembler.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Interface to assembler should be supported; the default assembler
+should be associated with the convention identifier Assembler.]}]}
 
 If an entity is exported to assembly language, then the implementation
 should allocate it at an addressable location,
@@ -69,6 +76,12 @@ even if not otherwise referenced from the Ada code.
 The implementation should assume that any call to a machine code or
 assembler subprogram is allowed to read or update every object that is
 specified as exported.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If an entity is exported to assembly language, then the implementation
+should allocate it at an addressable location even if not otherwise referenced
+from the Ada code. A call to a machine code or assembler subprogram should
+be treated as if it could to read or update every object that is
+specified as exported.]}]}
 @end{ImplAdvice}
 
 @begin{DocReq}
@@ -114,6 +127,9 @@ link name shall be documented.]}]}
 
 The implementation should ensure that little or no overhead is associated
 with calling intrinsic and machine-code subprograms.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Little or no overhead should be associated
+with calling intrinsic and machine-code subprograms.]}]}
 
 @Leading@;It is recommended that intrinsic subprograms be provided for convenient
 access to any machine operations that provide special capabilities
@@ -134,6 +150,9 @@ Vector operations @em e.g., compare vector against thresholds.
 Direct operations on I/O ports.
 
 @end{itemize}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Intrinsic subprograms should be provided access to any machine operations that
+provide special capabilities or efficiency not normally available.]}]}
 
 @end{ImplAdvice}
 
@@ -337,6 +356,11 @@ If the Ceiling_Locking policy is not in effect, the implementation
 should provide means for the application to specify which interrupts
 are to be blocked during protected actions, if the underlying system allows
 for a finer-grain control of interrupt blocking.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If the Ceiling_Locking policy is not in effect and the target system
+allows for a finer-grain control of interrupt blocking, a means for the
+application to specify which interrupts are to be blocked during protected
+actions should be provided.]}]}
 
 @end{ImplAdvice}
 
@@ -473,19 +497,19 @@ hardware priority is higher than the ceiling priority of the corresponding
 protected object, the execution of the program is erroneous.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068]}
-@Chg{New=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+@ChgAdded{Version=[1],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the handlers for a given interrupt attached via pragma
 Attach_Handler are not attached and detached in a stack-like (LIFO) order,
 program execution is erroneous. In particular, when a protected object is
 finalized, the execution is erroneous if any of the procedures of the
 protected object are attached to interrupts via pragma Attach_@!Handler and
 the most recently attached handler for the same interrupt is not the same as
-the one that was attached at the time the protected object was initialized.],Old=[]}
+the one that was attached at the time the protected object was initialized.]}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068]}
-@Chg{New=[This simplifies implementation of the Attach_@!Handler pragma by not
+@ChgAdded{Version=[1],Text=[This simplifies implementation of the Attach_@!Handler pragma by not
 requiring a check that the current handler is the same as the one attached
-by the initialization of a protected object.],Old=[]}
+by the initialization of a protected object.]}
 @end{Discussion}
 @end{Erron}
 
@@ -547,10 +571,15 @@ it need not invent implementation-defined pragmas for the purpose.
 
 Whenever possible, the implementation should allow interrupt handlers to be
 called directly by the hardware.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Interrupt handlers should be called directly by the hardware.]}]}
 
 Whenever practical, the implementation should
 detect violations of any implementation-defined restrictions
 before run time.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Violations of any implementation-defined restrictions on interrupt
+handlers should be detected before run time.]}]}
 
 @end{ImplAdvice}
 
@@ -665,12 +694,12 @@ Calling Attach_Handler or Exchange_Handler with this value for New_Handler
 restores the previous handler.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0069]}
-@Chg{New=[If the application uses only parameterless procedures as handlers
-(other types of handlers may be provided by the implementation, but are not
+@ChgAdded{Version=[1],Text=[If the application uses only parameterless procedures as
+handlers (other types of handlers may be provided by the implementation, but are not
 required by the standard), then if Old_Handler is not @key(null), it may be
 called to execute the previous handler. This provides a way to cascade
 application interrupt handlers. However, the default handler cannot be
-cascaded this way (Old_Handler must be @key(null) for the default handler).],Old=[]}
+cascaded this way (Old_Handler must be @key(null) for the default handler).]}
 @end{Ramification}
 
 The Detach_Handler procedure restores the default treatment for the
@@ -726,6 +755,13 @@ such as protected procedures with parameters, then for each such form of a
 handler, a type analogous to Parameterless_@!Handler should be specified in a
 child package of Interrupts, with the same operations as in the
 predefined package Interrupts.
+
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If implementation-defined forms of interrupt handler procedures are
+supported, then for each such form of a
+handler, a type analogous to Parameterless_@!Handler should be specified in a
+child package of Interrupts, with the same operations as in the
+predefined package Interrupts.]}]}
 
 @end{ImplAdvice}
 
@@ -854,6 +890,9 @@ It is recommended that preelaborated packages be implemented in such a
 way that there should be little or no code executed at run time for the
 elaboration of entities not already covered by the @ImplReqName@;s.
 
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Preelaborated packages should be implemented such that little or no
+code executed is at run time for the elaboration of entities.]}]}
 @end{ImplAdvice}
 
 @LabeledClause{Pragma Discard_Names}
@@ -925,6 +964,9 @@ are implementation defined for that exception.
 If the pragma applies to an entity, then the implementation should
 reduce the amount of storage used for storing names associated with that
 entity.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If @nt{pragma} Discard_Names applies to an entity, then the amount of
+storage used for storing names associated with that entity should be reduced.]}]}
 @begin{Reason}
 A typical implementation of the Image attribute for enumeration types is
 to store a table containing the names of all the enumeration literals.
@@ -1220,11 +1262,11 @@ The functions Is_Terminated and Is_Callable return the value of the
 corresponding attribute of the task identified by T.
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0115]}
-@Chg{New=[These routines can be called with an argument identifying the
-environment task. Is_Terminated will always be False for such a call, but
-Is_Callable (usually True) could be False if the environment task is waiting
-for the termination of dependent tasks. Thus, a dependent task can use
-Is_Callable to determine if the main subprogram has completed.],Old=[]}
+@ChgAdded{Version=[1],Text=[These routines can be called with an argument
+identifying the environment task. Is_Terminated will always be False for such a
+call, but Is_Callable (usually True) could be False if the environment task is
+waiting for the termination of dependent tasks. Thus, a dependent task can use
+Is_Callable to determine if the main subprogram has completed.]}
 @end{Ramification}
 
 @Leading@;For @PrefixType{a @nt<prefix> T that is of a task type
@@ -1376,13 +1418,13 @@ Program_Error is raised if the value of T is Null_Task_Id.
 
 @begin{Bounded}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0071]}
-@Chg{New=[@PDefn2{Term=(bounded error),Sec=(cause)}
+@ChgAdded{Version=[1],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 If the package Ada.Task_Attributes is instantiated with a controlled type and
 the controlled type has user-defined Adjust or Finalize operations that in
 turn access task attributes by any of the above operations, then a call of
 Set_Value of the instantiated package constitutes a bounded error. The call
 may perform as expected or may result in forever blocking the calling task and
-subsequently some or all tasks of the partition.],Old=[]}
+subsequently some or all tasks of the partition.]}
 @end{Bounded}
 
 @begin{Erron}
@@ -1401,14 +1443,14 @@ declared in this package and the corresponding task object no longer exists,
 the execution of the program is erroneous.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0071]}
-@Chg{New=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+@ChgAdded{Version=[1],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Accesses to task attributes via a value of type Attribute_Handle are
 erroneous if executed concurrently with each other or with calls of any of the
-operations declared in package Task_Attributes.],Old=[]}
+operations declared in package Task_Attributes.]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[There is no requirement of atomicity on accesses via a value of
-type Attribute_Handle.],Old=[]}
+@ChgAdded{Version=[1],Text=[There is no requirement of atomicity on accesses
+via a value of type Attribute_Handle.]}
 @end{Reason}
 @end{Erron}
 
@@ -1530,6 +1572,10 @@ placing restrictions on the number and the size of the task's attributes,
 or by using the pre-allocated storage for the first N attribute objects,
 and the heap for the others. In the latter case, N should be documented.
 
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If the target domain requires deterministic memory use at run
+time, storage for task attributes should be pre-allocated
+statically and the number of attributes pre-allocated should be documented.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}

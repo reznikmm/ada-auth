@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/02/05 05:47:59 $}
+@Comment{$Date: 2005/02/06 04:31:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -487,7 +487,7 @@ generic function exists:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Tags],Child=[Generic_Dispatching_Constructor]}@key{generic}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Tags],Child=[Generic_@!Dispatching_@!Constructor]}@key{generic}
     @key{type} T (<>) @key{is abstract tagged limited private};
     @key{type} Parameters (<>) @key{is limited private};
     @key{with function} Constructor (Params : @key{access} Parameters)
@@ -668,7 +668,9 @@ an @nt<object_declaration> or an @nt<allocator>),
 and that @nt<aggregate>s have to be explicitly qualified with a specific
 type when their expected type is class-wide.
 
-If S denotes an untagged private type whose full type is tagged,
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}
+@ChgDeleted{Version=[2],Text=[If S denotes an untagged private type
+whose full type is tagged,
 then S'Class is also allowed before the full type definition,
 but only in the private part of the package in which the type is
 declared
@@ -676,7 +678,7 @@ declared
 Similarly, the Class attribute is defined
 for incomplete types whose full type is tagged, but only within
 the library unit in which the incomplete type is declared
-(see @RefSecNum(Incomplete Type Declarations)).
+(see @RefSecNum(Incomplete Type Declarations)).]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[The capability provided by
@@ -2669,23 +2671,30 @@ parameter (see @RefSecNum(Subprogram Declarations)).]]}
 @Defn2{Term=[null value], Sec=(of an access type)}
 For each @Chg{Version=[2],New=[],Old=[(named) ]}access type, there is
 @Chg{Version=[2],New=[],Old=[a literal @key(null) which has ]}a null
-access value designating no entity at all.
+access value designating no entity at all@Chg{Version=[2],New=[, which can be
+obtained by converting the literal @key{null} to the access type],Old=[]}.
 @Redundant[The null value of @Chg{Version=[2],New=[an],Old=[a named]} access
 type is the default initial value of the type.]
-Other values of an access type are obtained by evaluating
-an @nt<attribute_reference> for the Access or Unchecked_Access
-attribute of@Chg{Version=[2],New=[ a non-intrinsic subprogram or],Old=[]}
-an aliased view of an object@Chg{Version=[2],New=[],Old=[ or non-intrinsic
-subprogram]}, or,
-in the case of @Chg{Version=[2],New=[an],Old=[a named]} access-to-object type,
+Other values of an access@Chg{Version=[2],New=[-to-object],Old=[]} type are
+obtained by evaluating @Chg{Version=[2],New=[],Old=[an
+@nt<attribute_reference> for the Access or Unchecked_Access
+attribute of an aliased view of an object or non-intrinsic
+subprogram, or, in the case of a named access-to-object type,]}
 an @nt<allocator>@Redundant[, which
 returns an access value designating a newly created object
-(see @RefSecNum(Operations of Access Types))].
+(see @RefSecNum(Operations of Access Types))]@Chg{Version=[2],New=[, or in the
+case of a general access-to-object type, evaluating an
+@nt{attribute_reference} for the Access or Unchecked_Access
+attribute of an aliased view of an object. Other values of an
+access-to-subprogram type are obtained by evaluating an
+@nt{attribute_reference} for the Access attribute of a
+non-intrinsic subprogram.],Old=[]}.
+
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
-@ChgDeleted{Version=[2],Text=[A value of an anonymous access type
-(that is, the value of an access parameter or access discriminant)
-cannot be null.]}
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
+  @ChgDeleted{Version=[2],Text=[A value of an anonymous access type
+  (that is, the value of an access parameter or access discriminant)
+  cannot be null.]}
 @end{ramification}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
@@ -3164,6 +3173,10 @@ the private part; it shall not be deferred to the package body.]}
   without access to the representation of the type.]}
   @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+@ChgAdded{Version=[2],Text=[No other uses of a @nt{name} that denotes an
+incomplete view of a type are allowed.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
 @Chg{Version=[2],New=[A @nt{prefix}],
 Old=[A dereference (whether implicit or explicit @em see @RefSecNum(Names))]}
@@ -3589,10 +3602,17 @@ this is the accessibility level of the execution of the called
 subprogram.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[The accessibility level of the anonymous access type
-of an access parameter specifying an access-to-subprogram type is infinite.],Old=[]}
+@ChgAdded{Version=[2],Text=[The accessibility level of the anonymous access type
+of an access parameter specifying an access-to-subprogram type is
+statically deeper than any master.]}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This rule means that it is illegal to convert an
+access parameter specifying an access to subprogram to a
+named access to subprogram type.]}
+@end{Ramification}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00254-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@Defn{downward closure}
 @Defn2{Term=[closure],Sec=(downward)}
 These represent @lquotes@;downward closures@rquotes@; and
@@ -4160,16 +4180,18 @@ denotes an aliased view of an object}:
   @begin(Ramification)
     In an instance body, a run-time check applies.
 
-    @ChgRef{Version=[2],Kind=[Revised]}
+    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
     If @i(A) is an anonymous@Chg{Version=[2],New=[ access-to-object type of
     an access parameter],Old=[access type]}, then the view can never have a
-    deeper accessibility level than @i(A),
-    except when X'Access is used to initialize an access discriminant
-    of an object created by an @nt<allocator>.
+    deeper accessibility level than @i(A)@Chg{Version=[2],New=[. The same is
+    true for an anonymous access-to-object type of an access
+    discriminant],Old=[]}, except when X'Access is used to initialize
+    an access discriminant of an object created by an @nt<allocator>.
     The latter case is illegal if the accessibility level of X
     is statically deeper than that of the access type of the
     @nt<allocator>; a run-time check is needed in the case where the
-    initial value comes from an access parameter.
+    initial value comes from an access parameter.@Chg{Version=[2],New=[ Other
+    anonymous access-to-object types have "normal" accessibility checks.],Old=[]}
   @end(Ramification)
 @end(itemize)
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2005/02/04 06:36:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2005/02/06 04:31:45 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/02/04 06:36:45 $}
+@Comment{$Date: 2005/02/06 04:31:45 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -103,9 +103,9 @@ A @nt[pragma] Linker_Options is allowed only at the place of a
 @nt[declarative_item].
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0058]}
-@Chg{New=[For @nt{pragma}s Import and Export, the argument for Link_Name shall
-not be given without the @nt{pragma_@!argument_@!identifier} unless the
-argument for External_Name is given.],Old=[]}
+@ChgAdded{Version=[1],Text=[For @nt{pragma}s Import and Export, the argument
+for Link_Name shall not be given without the @nt{pragma_@!argument_@!identifier}
+unless the argument for External_Name is given.]}
 @end{SyntaxText}
 @end{Syntax}
 
@@ -386,8 +386,6 @@ precedence.
 @end{RunTime}
 
 
-
-
 @begin{ImplAdvice}
     If an implementation supports pragma Export
     to a given language, then it should also
@@ -407,6 +405,10 @@ precedence.
     Sec=[of environment task for a foreign language main subprogram]}],
     Old=[]}@ChgNote{Presentation AI-00052. Index entries only; no
       real change, so no Chgref}
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[If @nt{pragma} Export is supported for a language, the main program should
+be able to be written in that language. Subprograms named "adainit and "adafinal"
+should be provided for elaboration and finalization of the environment task.]}]}
 @begin{ramification}
 For example, if the main subprogram is written in C,
 it can call adainit before the first call to an Ada subprogram,
@@ -414,6 +416,9 @@ and adafinal after the last.@end{ramification}
 
 Automatic elaboration of preelaborated packages should be provided
 when @nt[pragma] Export is supported.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Automatic elaboration of preelaborated packages should be provided
+when @nt[pragma] Export is supported.]}]}
 
 For each supported convention @i[L] other than Intrinsic,
 an implementation should support Import and Export @nt{pragma}s for
@@ -422,6 +427,12 @@ subprograms, and @nt(pragma) Convention for @i[L]-eligible
 types and for subprograms,
 presuming the other language has corresponding features.
 @nt(Pragma) Convention need not be supported for scalar types.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[For each supported convention @i[L] other than Intrinsic,
+@nt{pragma}s Import and Export should be supported for
+objects of @i[L]-compatible types and for
+subprograms, and @nt(pragma) Convention should be supported for @i[L]-eligible
+types and for subprograms.]}]}
 @begin{reason}
 Pragma Convention is not necessary for scalar types,
 since the language interface packages declare scalar types corresponding
@@ -657,6 +668,10 @@ interfacing to the language (implementation) represented by the
 convention.
 Any declarations useful for interfacing to any language on the
 given hardware architecture should be provided directly in Interfaces.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[For each implementation-defined convention identifier,
+there should be a child package of package Interfaces with the
+corresponding name.]}]}
 @begin{Ramification}
 For example, package Interfaces.XYZ_Pascal might contain
 declarations of types that match the data types provided by the
@@ -669,6 +684,10 @@ An implementation supporting an interface to C, COBOL, or Fortran
 should provide the corresponding
 package or packages described in the following
 clauses.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[If an interface to C, COBOL, or Fortran is provided, the corresponding
+package or packages described in the following clauses should also be
+provided.]}]}
 @begin{ImplNote}
 @Leading@;The intention is that an implementation might support several
 implementations of the foreign language: Interfaces.This_Fortran and
@@ -842,24 +861,25 @@ and the C type char.
 
 @begin{ImplNote}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0114]}
-@Chg{New=[The To_C and To_Ada functions map between corresponding
-characters, not necessarily between characters with the same internal
-representation. Corresponding characters are characters defined by the
+@ChgAdded{Version=[1],Text=[The To_C and To_Ada functions map between
+corresponding characters, not necessarily between characters with the same
+internal representation. Corresponding characters are characters defined by the
 same enumeration literal, if such exist; otherwise, the correspondence
-is unspecified.@PDefn{Unspecified}], Old=[]}
+is unspecified.@PDefn{Unspecified}]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@Leading@;The following definition is equivalent to the above summary:], Old=[]}
+@ChgAdded{Version=[1],Type=[Leading],Text=[The following definition is
+equivalent to the above summary:]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@f{To_C (Latin_1_Char) = char'Value(Character'Image(Latin_1_Char))}@*
+@ChgAdded{Version=[1],Text=[@f{To_C (Latin_1_Char) = char'Value(Character'Image(Latin_1_Char))}@*
 provided that char'Value does not raise an exception; otherwise the result
-is unspecified.], Old=[]}
+is unspecified.]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@f{To_Ada (Native_C_Char) = Character'Value(char'Image(Native_C_Char))}@*
+@ChgAdded{Version=[1],Text=[@f{To_Ada (Native_C_Char) = Character'Value(char'Image(Native_C_Char))}@*
 provided that Character'Value does not raise an exception;
-otherwise the result is unspecified.], Old=[]}
+otherwise the result is unspecified.]}
 @end{ImplNote}
 
 @begin{Example}@Keepnext
@@ -1008,18 +1028,19 @@ The C Interface packages support calling such functions.
 @end{DescribeCode}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
-@Chg{New=[A Convention pragma with @i{convention}_@nt{identifier}
-C_Pass_By_Copy shall only be applied to a type.],Old=[]}
+@ChgAdded{Version=[1],Text=[A Convention pragma with @i{convention}_@nt{identifier}
+C_Pass_By_Copy shall only be applied to a type.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
-@Chg{New=[The eligibility rules in @RefSecNum(Interfacing Pragmas) do not apply
+@ChgAdded{Version=[1],Text=[The eligibility rules in @RefSecNum(Interfacing Pragmas) do not apply
 to convention C_Pass_By_Copy. Instead, a type T is eligible for convention
 C_Pass_By_Copy if T is a record type that has no discriminants and that only
 has components with statically constrained subtypes, and each component is
-C-compatible.],Old=[]}
+C-compatible.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
-@Chg{New=[If a type is C_Pass_By_Copy-compatible then it is also C-compatible.],Old=[]}
+@ChgAdded{Version=[1],Text=[If a type is C_Pass_By_Copy-compatible then it is
+also C-compatible.]}
 
 @end{StaticSem}
 
@@ -1040,8 +1061,11 @@ interface packages.
 
 @begin{ImplAdvice}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0060]}
-@Chg{New=[The constants nul and wide_nul should have a representation of zero.],
-Old=[]}
+@ChgAdded{Version=[1],Text=[The constants nul and wide_nul should have a
+representation of zero.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The constants nul and wide_nul in package Interfaces.C should have a
+representation of zero.]}]}
 
 An implementation should support the following interface
 correspondences between Ada and C.
@@ -1069,9 +1093,10 @@ parameter, a pointer to a temporary copy is used to preserve
 by-copy semantics.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
-@Chg{New=[An Ada parameter of a C_Pass_By_Copy-compatible (record) type T, of
+@ChgAdded{Version=[1],Text=[An Ada parameter of a C_Pass_By_Copy-compatible
+(record) type T, of
 mode @key{in}, is passed as a t argument to a C function, where t is the
-C struct corresponding to the Ada type T.],Old=[]}
+C struct corresponding to the Ada type T.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059]}
 An Ada parameter of a record type T, of any mode,
@@ -1089,6 +1114,9 @@ is passed as a pointer to a
 C function whose prototype corresponds to the designated subprogram's
 specification.
 @end[itemize]
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If C interfacing is supported, the interface corrspondences between Ada
+and C should be supported.]}]}
 @end{ImplAdvice}
 
 
@@ -2157,6 +2185,9 @@ Any other Ada parameter is passed as a
 to the Ada parameter type; for scalars, a local copy is
 used if necessary to ensure by-copy semantics.
 @end[itemize]
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If COBOL interfacing is supported, the interface corrspondences between
+Ada and COBOL should be supported.]}]}
 @end{ImplAdvice}
 
 @begin[Notes]
@@ -2434,6 +2465,9 @@ is passed as a reference to a Fortran
 procedure whose interface corresponds to the designated subprogram's
 specification.
 @end[itemize]
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If Fortran interfacing is supported, the interface corrspondences between
+Ada and Fortran should be supported.]}]}
 @end{ImplAdvice}
 
 @begin[Notes]
