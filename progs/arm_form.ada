@@ -72,14 +72,22 @@ procedure ARM_Formatter is
     -- For Original AARM:
     --	   Arm_Form AARM <Format> No-Changes 0 Show-Index-Entries
     -- For RM with Corr:
-    --	   Arm_Form RM <Format> New-Changes 1 Big_Files
+    --     [With change bars for Word 97/2000:]
+    --	   Arm_Form RM RTF New-Changes 1 Big_Files
+    --     [Final versions with no changes:]
+    --	   Arm_Form RM <Format> New-Only 1 Big_Files
     -- For AARM with Corr:
     --     [HTML; RTF for display]:
     --	      Arm_Form RM <Format> Show-Changes 1 Show-Index-Entries
     --     [TXT; RTF for printing]:
     --	      Arm_Form RM <Format> New-Only 1 Show-Index-Entries
     -- For RM with Corr and Amd:
-    --	   Arm_Form RM <Format> New-Changes 2 Big_Files
+    --     [With change bars for Word 97/2000:]
+    --	   Arm_Form RM RTF New-Changes 2 Big_Files
+    --     [With change ballons for Word XP/2003:]
+    --	   Arm_Form RM RTF Show-Changes 2 Big_Files
+    --     [Final versions with no changes:]
+    --	   Arm_Form RM <Format> New-Only 2 Big_Files
     -- For AARM with Corr and Amd:
     --     [HTML; RTF for display]:
     --	      Arm_Form RM <Format> Changes-Only 2 Show-Index-Entries

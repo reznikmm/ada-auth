@@ -99,6 +99,7 @@ package body ARM_RTF is
     --			revision markers.
     -- 12/15/04 - RLB - Added Pascal's workaround to formatting bugs in
     --			Word 2000/XP/2003.
+    -- 12/16/04 - RLB - Removed it after it proved not to help.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -415,9 +416,6 @@ package body ARM_RTF is
 			 "\s5\keepn\widctlpar\adjustright " &
 			 "\pvpara\phpg\posxo\posy0\absw450\dxfrtext100\dfrmtxtx120\dfrmtxty120"&
 			 "\f1\fs12\cgrid\qc \snext0 "); -- Note: We adjust the space before on use.
-			-- %%%% Weird bug workaround: \dfrmtxtx121 should be \dfrmtxtx120, but
-			-- %%%% that causes large spaces when formatting paragraphs with
-			-- %%%% keepnext set. From Pascal Leroy.
 	    Set_Style (Paragraph_Info(ARM_Output.Notes),
 		       Font_Size => 15,
 		       Style_Indent => 360,
@@ -886,11 +884,8 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String =>
 			 "\s5\keepn\widctlpar\adjustright " &
-			 "\pvpara\phpg\posxo\posy0\absw580\dxfrtext100\dfrmtxtx151\dfrmtxty150"&
+			 "\pvpara\phpg\posxo\posy0\absw580\dxfrtext100\dfrmtxtx150\dfrmtxty150"&
 			 "\f1\fs14\cgrid\qc \snext0 "); -- We adjust the space before for each number.
-			-- %%%% Weird bug workaround: \dfrmtxtx151 should be \dfrmtxtx150, but
-			-- %%%% that causes large spaces when formatting paragraphs with
-			-- %%%% keepnext set. From Pascal Leroy.
 		-- Frame commands:
 		-- \pvpara - positions the frame vertically with the next paragraph;
 		-- \phpg - positions the frame horizonatally within the page;
