@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:01 $}
+@Comment{$Date: 2000/08/25 04:02:55 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 
@@ -1172,8 +1172,8 @@ serviced (see @RefSecNum(Entry Calls)).]
 @end{RunTime}
 
 @begin{Bounded}
-@leading@;During a protected action,
-it is a bounded error to invoke an operation that
+@leading@PDefn2{Term=(bounded error),Sec=(cause)}
+During a protected action, it is a bounded error to invoke an operation that
 is @i(potentially blocking).
 @Defn{potentially blocking operation}
 @Defn{blocking, potentially}
@@ -3367,6 +3367,7 @@ the following are abort completion points for an execution:
 @end{RunTime}
 
 @begin{Bounded}
+@PDefn2{Term=(bounded error),Sec=(cause)}
 An attempt to execute an @nt<asynchronous_select> as
 part of the execution of an abort-deferred operation is a bounded error.
 Similarly, an attempt to create a task that depends on a master
@@ -3400,6 +3401,7 @@ or the created task might or might not have an effect.
 @PDefn{normal state of an object}
 @PDefn{abnormal state of an object}
 @Defn{disruption of an assignment}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If an assignment operation completes prematurely due to an abort,
 the assignment is said to be @i{disrupted};
 the target of the assignment or its parts can become abnormal,
@@ -3606,6 +3608,7 @@ circumstances:
 @end{RunTime}
 
 @begin{Erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Given an action of assigning to an object,
 and an action of reading or updating a part of the same object
 (or of a neighboring object if the two are not

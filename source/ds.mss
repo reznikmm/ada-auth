@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/18 01:10:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/08/18 01:10:07 $}
+@Comment{$Date: 2000/08/25 04:02:56 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -173,6 +173,7 @@ the following attribute is defined:
 @end{RunTime}
 
 @begin{Bounded}
+@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error for there to be cyclic elaboration dependences
 between the active partitions of a single distributed
 program.
@@ -823,7 +824,7 @@ result in the version of a compilation unit changing.
 @end{StaticSem}
 
 @begin{Bounded}
-
+@PDefn2{Term=(bounded error),Sec=(cause)}
 @Defn{unit consistency}
 In a distributed program, a library unit is @i{consistent} if the same
 version of its declaration is used throughout.

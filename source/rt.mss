@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/08/18 01:10:08 $}
+@Comment{$Date: 2000/08/25 04:02:56 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1083,8 +1083,8 @@ want the third task to have high priority.
 @end{RunTime}
 
 @begin{Bounded}
-If a task is blocked on a protected entry call,
-and the call is queued,
+@PDefn2{Term=(bounded error),Sec=(cause)}
+If a task is blocked on a protected entry call, and the call is queued,
 it is a bounded error to raise its base priority
 above the ceiling priority of the corresponding
 protected object.
@@ -1118,7 +1118,7 @@ and the task is about to start raising an exception anyway.
 @end{Bounded}
 
 @begin{Erron}
-
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If any subprogram in this package is called with a parameter T that
 specifies a task object that no longer exists, the execution of the
 program is erroneous.
@@ -1130,7 +1130,6 @@ Get_Priority raises Program_Error.
 However, if the task object no longer exists,
 calling Get_Priority causes erroneous execution.
 @end{Ramification}
-
 @end{Erron}
 
 @begin{Metrics}
@@ -2020,11 +2019,10 @@ Program_Error is raised if the value of T is Null_Task_ID.
 @end{RunTime}
 
 @begin{Erron}
-
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If any operation in this package is called with a parameter T that
 specifies a task object that no longer exists, the execution of the
 program is erroneous.
-
 @end{Erron}
 
 @begin{ImplPerm}

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:00 $}
+@Comment{$Date: 2000/08/25 04:02:55 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2318,9 +2318,9 @@ innermost enclosing master.],Old=[]}
 
 @begin{Bounded}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0023]}
-@leading@;It is a bounded error for a call on
-Finalize or Adjust @Chg{New=[that occurs as part of object finalization or
-assignment ], Old=[]}to propagate an exception.
+@leading@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error for a call on Finalize or Adjust @Chg{New=[that occurs as
+part of object finalization or assignment ], Old=[]}to propagate an exception.
 The possible consequences depend on what action invoked the Finalize or
 Adjust operation:
 @begin{Ramification}

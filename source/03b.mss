@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/24 04:21:03 $}
+@Comment{$Date: 2000/08/25 04:02:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @LabeledClause{Array Types}
 
@@ -1408,6 +1408,7 @@ the following attribute is defined:
 @end{StaticSem}
 
 @begin{Erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 The execution of a construct is erroneous if the construct
 has a constituent that is a @nt<name> denoting
 a subcomponent that depends on discriminants, and the

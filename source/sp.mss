@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2000/08/23 00:31:01 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/08/23 00:31:01 $}
+@Comment{$Date: 2000/08/25 04:02:56 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -355,7 +355,6 @@ is modeled after the rule about exceptions propagated out of task bodies.
 @end{Syntax}
 
 @begin{Resolution}
-
 For the Interrupt_Handler and Attach_Handler pragmas, the
 @SynI{handler_}@nt{name} shall resolve to denote a protected procedure
 with a parameterless profile.
@@ -416,17 +415,27 @@ a check is made that the ceiling priority defined in the
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If the check fails, Program_Error is raised.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068]}
 @Defn2{Term=[finalization], Sec=(of a protected object)}
 When a protected object is finalized, for any of its procedures that are
 attached to interrupts, the handler is detached. If the handler was
 attached by a procedure in the Interrupts package or if no user
 handler was previously attached to the interrupt, the default treatment is
-restored. Otherwise, @Redundant[that is, if an Attach_@!Handler pragma was
-used,] the previous handler is restored.
+restored. @Chg{New=[If an Attach_@!Handler pragma was used and the most recently
+attached handler for the same interrupt is the same as the one that was
+attached at the time the protected object was initialized],
+Old=[Otherwise, @Redundant[that is, if an Attach_@!Handler pragma was
+used]]}, the previous handler is restored.
 @begin{Discussion}
-Since only library-level protected procedures can be attached as handlers
-using the Interrupts package, the finalization discussed above occurs
-only as part of the finalization of all library-level packages in a partition.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068]}
+@Chg{New=[If all protected objects for interrupt handlers are declared at the
+library-level],Old=[Since only library-level protected procedures can be attached as
+handlers using the Interrupts package]}, the finalization discussed above
+occurs only as part of the finalization of all library-level packages in
+a partition.
+@Chg{New=[However, objects of a protected type containing an Attach_@!Handler
+pragma need not be at the library level. Thus, an implementation needs to be
+able to restore handlers during the execution of the program.],Old=[]}
 @end{Discussion}
 
 When a handler is attached to an interrupt, the interrupt is blocked
@@ -437,12 +446,27 @@ containing the handler.
 @end{RunTime}
 
 @begin{Erron}
-
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
 in effect and an interrupt is delivered to a handler, and the interrupt
 hardware priority is higher than the ceiling priority of the corresponding
 protected object, the execution of the program is erroneous.
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068]}
+@Chg{New=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+If the handlers for a given interrupt attached via pragma
+Attach_Handler are not attached and detached in a stack-like (LIFO) order,
+program execution is erroneous. In particular, when a protected object is
+finalized, the execution is erroneous if any of the procedures of the
+protected object are attached to interrupts via pragma Attach_@!Handler and
+the most recently attached handler for the same interrupt is not the same as
+the one that was attached at the time the protected object was initialized.],Old=[]}
+@begin{Discussion}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068]}
+@Chg{New=[This simplifies implementation of the Attach_@!Handler pragma by not
+requiring a check that the current handler is the same as the one attached
+by the initialization of a protected object.],Old=[]}
+@end{Discussion}
 @end{Erron}
 
 @begin{Metrics}
@@ -593,11 +617,12 @@ interrupt is reserved.
 The Is_Attached function returns True if and only if a user-specified
 interrupt handler is attached to the interrupt.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0069]}
 The Current_Handler function returns a value that represents the
 attached handler of the interrupt. If no user-defined handler is attached to
-the interrupt, Current_Handler returns a value that designates the default
-treatment; calling Attach_Handler or Exchange_Handler with this value
-restores the default treatment.
+the interrupt, Current_Handler returns @Chg{New=[@key{null}],
+Old=[a value that designates the default treatment; calling Attach_Handler
+or Exchange_Handler with this value restores the default treatment]}.
 
 The Attach_Handler procedure attaches the specified handler to the
 interrupt, overriding any existing treatment (including a user handler)
@@ -608,12 +633,22 @@ If New_Handler designates a protected procedure to which the pragma
 Interrupt_@!Handler does not apply, Program_Error is raised. In
 this case, the operation does not modify the existing interrupt treatment.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0069]}
 The Exchange_Handler procedure operates in the same manner as Attach_Handler
 with the addition that the value returned in Old_Handler designates the
-previous treatment for the specified interrupt.
+previous treatment for the specified interrupt.@Chg{New=[ If the previous
+treatment is not a user-defined handler, @key[null] is returned.],Old=[]}
 @begin{Ramification}
 Calling Attach_Handler or Exchange_Handler with this value for New_Handler
 restores the previous handler.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0069]}
+@Chg{New=[If the application uses only parameterless procedures as handlers
+(other types of handlers may be provided by the implementation, but are not
+required by the standard), then if Old_Handler is not @key(null), it may be
+called to execute the previous handler. This provides a way to cascade
+application interrupt handlers. However, the default handler cannot be
+cascaded this way (Old_Handler must be @key(null) for the default handler).],Old=[]}
 @end{Ramification}
 
 The Detach_Handler procedure restores the default treatment for the
@@ -1115,9 +1150,10 @@ defined.]
    @AdaSubDefn{Null_Task_ID} : @key{constant} Task_ID;
    @key{function}  "=" (Left, Right : Task_ID) @key{return} Boolean;
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0070]}
    @key{function}  @AdaSubDefn{Image}        (T : Task_ID) @key{return} String;
    @key[function]  @AdaSubDefn{Current_Task} @key[return] Task_ID;
-   @Key[procedure] @AdaSubDefn{Abort_Task}   (T : @key[in] @key[out] Task_ID);
+   @Key[procedure] @AdaSubDefn{Abort_Task}   (T : @key[in] @Chg{New=[],Old=[@key[out] ]}Task_ID);
 
    @key[function]  @AdaSubDefn{Is_Terminated}(T : Task_ID) @key{return} Boolean;
    @key[function]  @AdaSubDefn{Is_Callable}  (T : Task_ID) @key{return} Boolean;
@@ -1184,7 +1220,7 @@ Abort_Task is a potentially blocking operation
 @end{RunTime}
 
 @begin{Bounded}
-
+@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error to call the Current_Task function from
 an entry body or an interrupt handler.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -1200,12 +1236,11 @@ an internal task created by the implementation.
 @end{Bounded}
 
 @begin{Erron}
-
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If a value of Task_ID is passed as a parameter to any of the operations
 declared in this package (or any language-defined child of this
 package), and the corresponding task object no longer exists,
 the execution of the program is erroneous.
-
 @end{Erron}
 
 @begin{DocReq}
@@ -1291,10 +1326,21 @@ For all the operations declared in this package, Tasking_Error is raised
 if the task identified by T is terminated.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if the value of T is Null_Task_ID.
-
 @end{RunTime}
 
+@begin{Bounded}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0071]}
+@Chg{New=[@PDefn2{Term=(bounded error),Sec=(cause)}
+If the package Ada.Task_Attributes is instantiated with a controlled type and
+the controlled type has user-defined Adjust or Finalize operations that in
+turn access task attributes by any of the above operations, then a call of
+Set_Value of the instantiated package constitutes a bounded error. The call
+may perform as expected or may result in forever blocking the calling task and
+subsequently some or all tasks of the partition.],Old=[]}
+@end{Bounded}
+
 @begin{Erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 It is erroneous to dereference the access value returned by a given
 call on Reference after a subsequent call on Reinitialize for
 the same task attribute, or after the associated task terminates.
@@ -1303,15 +1349,32 @@ the same task attribute, or after the associated task terminates.
   associated with an attribute upon Reinitialize or task termination.
 @end{Reason}
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If a value of Task_ID is passed as a parameter to any of the operations
 declared in this package and the corresponding task object no longer exists,
 the execution of the program is erroneous.
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0071]}
+@Chg{New=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
+Accesses to task attributes via a value of type Attribute_Handle are
+erroneous if executed concurrently with each other or with calls of any of the
+operations declared in package Task_Attributes.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added]}
+@Chg{New=[There is no requirement of atomicity on accesses via a value of
+type Attribute_Handle.],Old=[]}
+@end{Reason}
 @end{Erron}
 
 @begin{ImplReq}
-The implementation shall perform each of the above operations for
-a given attribute of a given task atomically with respect
-to any other of the above operations for the same attribute of the same task.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0071]}
+@Chg{New=[For a given attribute of a given task, t],Old=[T]}he implementation
+shall perform @Chg{New=[the operations declared in this package],
+Old=[each of the above operations for a given attribute of a given task]}
+atomically with respect to any @Chg{New=[of these operations of],
+Old=[other of the above operations for]} the same attribute of the same task.
+@Chg{New=[The granularity of any locking mechanism necessary to achieve such
+atomicity is implementation defined.],Old=[]}
 @begin{Ramification}
 Hence, other than by dereferencing an access value returned by
 Reference, an attribute of a given task can be safely read and updated
@@ -1430,5 +1493,4 @@ erroneous.
 As specified in @RefSecNum{The Package Task_Identification}, if the parameter
 T (in a call on a subprogram of an instance of this package) identifies
 a nonexistent task, the execution of the program is erroneous.
-
 @end{Notes}

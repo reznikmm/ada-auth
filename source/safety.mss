@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.16 $ $Date: 2000/08/18 01:10:08 $ $Author: Randy $ }
+@Comment{ $Revision: 1.17 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/08/18 01:10:08 $}
+@Comment{$Date: 2000/08/25 04:02:56 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -820,6 +820,7 @@ mechanism enabled.
 @end{DocReq}
 
 @begin{Erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Program execution is erroneous if pragma Restrictions(No_Exceptions)
 has been specified and the conditions arise under which a generated
 language-defined run-time check would fail.
@@ -831,6 +832,7 @@ provides, they had better be careful!
 
 @end{Discussion}
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Program execution is erroneous if pragma Restrictions(No_Recursion)
 has been specified and a subprogram is invoked as part of its
 own execution,

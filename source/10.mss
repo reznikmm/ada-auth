@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/08/12 00:40:17 $}
+@Comment{$Date: 2000/08/25 04:02:55 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -2095,6 +2095,7 @@ environment task terminates (normally or abnormally, respectively).
 @end{RunTime}
 
 @begin{Bounded}
+@PDefn2{Term=(bounded error),Sec=(cause)}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Once the environment task has awaited the termination of all other
 tasks of the partition, any further attempt to create a task

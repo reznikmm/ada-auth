@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/08/24 04:21:03 $}
+@Comment{$Date: 2000/08/25 04:02:55 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -415,6 +415,7 @@ is passed by copy or by reference.
 @Defn{distinct access paths}
 @Defn2{Term=[access paths],Sec=(distinct)}
 @IndexSee{Term=[aliasing],See=(distinct access paths)}
+@PDefn2{Term=(bounded error),Sec=(cause)}
 If one @nt<name> denotes a part of a formal parameter,
 and a second @nt<name> denotes a part of
 a distinct formal parameter or an object that is not

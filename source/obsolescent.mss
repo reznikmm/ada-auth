@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/08/18 01:10:08 $}
+@Comment{$Date: 2000/08/25 04:02:56 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -470,6 +470,7 @@ can depend on the specific interrupt.
 @end{RunTime}
 
 @begin{Bounded}
+@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error to evaluate
 E'Caller (see @RefSecNum(The Package Task_Identification))
 in an @nt{accept_statement} for an interrupt

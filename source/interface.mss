@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2000/08/23 00:31:01 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2000/08/25 04:02:56 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:01 $}
+@Comment{$Date: 2000/08/25 04:02:56 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -100,6 +100,11 @@ Their forms, together with that of the related
 @begin{SyntaxText}
 A @nt[pragma] Linker_Options is allowed only at the place of a
 @nt[declarative_item].
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0058]}
+@Chg{New=[For @nt{pragma}s Import and Export, the argument for Link_Name shall
+not be given without the @nt{pragma_@!argument_@!identifier} unless the
+argument for External_Name is given.],Old=[]}
 @end{SyntaxText}
 @end{Syntax}
 
@@ -668,14 +673,15 @@ should be declared as a renaming:
 
 @LabeledClause{Interfacing with C}
 @begin{Intro}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059]}
 @Defn{interface to C}
 @Defn{C interface}
 The facilities relevant to interfacing with
-the C language
- are the package Interfaces.C
-and its children;
-and support for the Import, Export, and
-Convention pragmas with @i{convention}_@nt{identifier} C.
+the C language are the package Interfaces.C and its children;
+@Chg{New=[],Old=[and ]}support for the Import, Export, and
+Convention pragmas with @i{convention}_@nt{identifier}
+C@Chg{New=[; and support for the Convention pragma with
+@i{convention}_@nt{identifier} C_Pass_By_Copy],Old=[]}.
 
 The package Interfaces.C contains the basic types, constants and
 subprograms that allow an Ada program to pass scalars and strings to C
@@ -729,7 +735,8 @@ functions.
 
    @key(type) @AdaTypeDefn{char} @key(is) @RI{<implementation-defined character type>};
 
-   @AdaDefn{nul} : @key(constant) char := char'First;
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060]}
+   @AdaDefn{nul} : @key(constant) char := @Chg{New=[@RI{implementation-defined}],Old=[char'First]};
 
    @key[function] @AdaSubDefn{To_C}   (Item : @key[in] Character) @key[return] char;
 
@@ -761,9 +768,12 @@ functions.
 
    @RI{-- Wide Character and Wide String}
 
-   @key(type) @AdaTypeDefn{wchar_t} @key(is) @RI{implementation-defined};
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060]}
+   @key(type) @AdaTypeDefn{wchar_t} @key(is) @Chg{New=[@RI{<implementation-defined character type>}],
+Old=[@RI{implementation-defined}]};
 
-   @AdaDefn{wide_nul} : @key(constant) wchar_t := wchar_t'First;
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060]}
+   @AdaDefn{wide_nul} : @key(constant) wchar_t := @Chg{New=[@RI{implementation-defined}],Old=[wchar_t'First]};
 
    @key(function) @AdaSubDefn{To_C}   (Item : @key(in) Wide_Character) @key(return) wchar_t;
    @key(function) @AdaSubDefn{To_Ada} (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
@@ -965,8 +975,7 @@ the needed facilities, including a
 private type chars_ptr that corresponds to C's
 char *, and two allocation functions. To avoid storage
 leakage, a Free procedure releases the storage that was
-allocated by one
-of these allocate functions.
+allocated by one of these allocate functions.
 
 It is typical for a C function that deals with strings to adopt the
 convention that the string is delimited by a nul char. The C interface
@@ -985,12 +994,30 @@ function, whichever is shorter.
 The C Interface packages support calling such functions.
 @end{Discussion}
 @end{DescribeCode}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
+@Chg{New=[A Convention pragma with @i{convention}_@nt{identifier}
+C_Pass_By_Copy shall only be applied to a type.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
+@Chg{New=[The eligibility rules in @RefSecNum(Interfacing Pragmas) do not apply
+to convention C_Pass_By_Copy. Instead, a type T is eligible for convention
+C_Pass_By_Copy if T is a record type that has no discriminants and that only
+has components with statically constrained subtypes, and each component is
+C-compatible.],Old=[]}
+
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
+@Chg{New=[If a type is C_Pass_By_Copy-compatible then it is also C-compatible.],Old=[]}
+
 @end{StaticSem}
 
 @begin{ImplReq}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059]}
 An implementation shall support pragma Convention
 with a C @i{convention}_@nt{identifier} for a
-C-eligible type (see @refsecnum(Interfacing Pragmas))
+C-eligible type (see @refsecnum(Interfacing Pragmas))@Chg{New=[. An
+implementation shall support pragma Convention with a C_Pass_By_Copy
+@i{convention}_@nt{identifier} for a C_Pass_By_Copy-eligible type.],Old=[]}
 @end{ImplReq}
 
 
@@ -999,8 +1026,11 @@ An implementation may provide additional declarations in the C
 interface packages.
 @end{ImplPerm}
 
-
 @begin{ImplAdvice}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0060]}
+@Chg{New=[The constants nul and wide_nul should have a representation of zero.],
+Old=[]}
+
 An implementation should support the following interface
 correspondences between Ada and C.
 @begin[itemize]
@@ -1012,28 +1042,30 @@ the C function returns an int that is to be discarded.@end{discussion}
 
 An Ada function corresponds to a non-void C function.
 
-An Ada @key[in] scalar parameter is passed as
- a scalar argument to a C function.
+An Ada @key[in] scalar parameter is passed as a scalar argument to a C function.
 
 An Ada @key[in] parameter of an access-to-object type with designated
-type T is passed as a t* argument to a
-C function, where t is the C type corresponding to the
-Ada type T.
+type T is passed as a t* argument to a C function, where t is the C type
+corresponding to the Ada type T.
 
 An Ada @key[access] T parameter,
 or an Ada @key[out] or @key[in out] parameter of an elementary type T,
- is passed as
- a t* argument
+is passed as a t* argument
 to a C function, where t is the C type corresponding to the
 Ada type T. In the case of an elementary @key[out] or @key[in out]
 parameter, a pointer to a temporary copy is used to preserve
 by-copy semantics.
 
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059]}
+@Chg{New=[An Ada parameter of a C_Pass_By_Copy-compatible (record) type T, of
+mode @key{in}, is passed as a t argument to a C function, where t is the
+C struct corresponding to the Ada type T.],Old=[]}
 
-An Ada parameter of a record type T, of any mode, is passed as
- a t* argument to a C function,
-where t is the C struct corresponding to the
-Ada type T.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059]}
+An Ada parameter of a record type T, of any mode,
+@Chg{New=[other than an @key{in} parameter of a C_Pass_By_Copy-compatible type,],Old=[]}
+is passed as a t* argument to a C function, where t is the
+C struct corresponding to the Ada type T.
 
 An Ada parameter of an array type with component type
 T, of any mode, is passed as a t* argument to a
@@ -1201,10 +1233,13 @@ for objects imported from, exported to, or passed to C.@end{discussion}
                        Nul_Check : @key(in) Boolean := False)
    @key(return) chars_ptr;
 @end{Example}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0061]}
 @Trailing@;If Item is @key(null), then To_Chars_Ptr returns Null_Ptr.
-Otherwise, if Nul_Check is True and Item.@key(all) does not contain nul,
-then the function propagates Terminator_Error;
-if Nul_Check is True and Item.@key(all) does contain nul,
+@Chg{New=[If Item is not @key(null),], Old=[Otherwise, if ]}Nul_Check is
+True@Chg{New=[,],Old=[]} and Item.@key(all) does not contain nul, then
+the function propagates Terminator_Error;
+@Chg{New=[otherwise],
+Old=[if Nul_Check is True and Item.@key(all) does contain nul,]}
 To_Chars_Ptr performs a pointer conversion with no allocation of memory.
 
 @begin{Example}@Keepnext
@@ -1251,13 +1286,16 @@ execution of Value is erroneous.
 @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
    @key(return) char_array;
 @end{Example}
-@Trailing@;If Item = Null_Ptr then Value(Item) propagates Dereference_Error.
-Otherwise Value returns the shorter of two arrays:
-the first Length chars pointed to by Item, and Value(Item).
-The lower bound of the result is 0.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0062]}
+@Trailing@;If Item = Null_Ptr then Value@Chg{New=[],Old=[(Item)]} propagates
+Dereference_Error.
+Otherwise Value returns the shorter of two arrays@Chg{New=[, either],Old=[:]}
+the first Length chars pointed to by Item, @Chg{New=[or],Old=[and]}
+Value(Item). The lower bound of the result is 0.
+@Chg{New=[If Length is 0, then Value propagates Constraint_Error.],Old=[]}
 @begin{Ramification}
 Value(New_Char_Array(Chars)) = Chars if Chars does not contain
-nul; else Value(New_Char_Array(Chars)) is the prefix of Chars
+nul; else Value(@!New_Char_Array(@!Chars)) is the prefix of Chars
 up to and including the first nul.
 @end{Ramification}
 
@@ -1270,7 +1308,8 @@ up to and including the first nul.
 @key(function) Value (Item : @key(in) chars_ptr; Length : @key(in) size_t)
    @key(return) String;
 @end{Example}
-@Trailing@;Equivalent to To_Ada(Value(Item, Length), Trim_Nul=>True).
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0063]}
+@Trailing@;Equivalent to To_Ada(Value(Item, Length)@Chg{New=[ & nul],Old=[]}, Trim_Nul=>True).
 
 @begin{Example}@Keepnext
 @key(function) Strlen (Item : @key(in) chars_ptr) @key(return) size_t;
@@ -1293,9 +1332,11 @@ Strlen has the effect of C's strlen function.
                   Chars  : @key(in) char_array;
                   Check  : Boolean := True);
 @end{Example}
-@Leading@;This procedure updates the value pointed to by Item, starting at
-position Offset, using Chars as the data to be copied into the array.
-Overwriting the nul terminator,
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0064]}
+@Leading@;@Chg{New=[If Item = Null_Ptr, then Update propagates
+Dereference_Error. Otherwise, t],Old=[T]}his procedure updates the value
+pointed to by Item, starting at position Offset, using Chars as the data to be
+copied into the array. Overwriting the nul terminator,
 and skipping with the Offset past the nul terminator,
 are both prevented if Check is True, as follows:
 @begin[itemize]
@@ -1326,6 +1367,7 @@ Equivalent to Update(Item, Offset, To_C(Str), Check).
 @end{StaticSem}
 
 @begin{erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Execution of any of the following is erroneous if the Item
 parameter is not null_ptr and Item
 does not point to a nul-terminated array of chars.
@@ -1337,11 +1379,14 @@ the Free procedure,
 the Strlen function.
 @end[itemize]
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Execution of Free(X) is also erroneous if the chars_ptr X was not returned
 by New_Char_Array or New_String.
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Reading or updating a freed char_array is erroneous.
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Execution of Update is erroneous if Check is False and a call with
 Check equal to True would have propagated Update_Error.
 @end{erron}
@@ -1522,26 +1567,31 @@ This procedure copies the first Length elements from the array pointed
 @end{StaticSem}
 
 @begin{erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 It is erroneous to dereference a Pointer that does not designate
 an aliased Element.
 @begin{Discussion}
 Such a Pointer could arise via "+", "-", Increment, or
 Decrement.@end{discussion}
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Execution of Value(Ref, Terminator) is erroneous if
 Ref does not designate an aliased Element in an Element_Array
 terminated by Terminator.
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Execution of Value(Ref, Length) is erroneous if
 Ref does not designate an aliased Element in an Element_Array
 containing at least Length Elements between the designated Element and
 the end of the array, inclusive.
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Execution of Virtual_Length(Ref, Terminator) is erroneous if
 Ref does not designate an aliased Element in an Element_Array
 terminated by Terminator.
 
-@Leading@;Execution of Copy_Terminated_Array(Source, Target, Limit, Terminator)
+@Leading@PDefn2{Term=(erroneous execution),Sec=(cause)}
+Execution of Copy_Terminated_Array(Source, Target, Limit, Terminator)
 is erroneous in either of the following situations:
 @begin[itemize]
 Execution of both Value(Source,Terminator) and
@@ -1551,6 +1601,7 @@ Copying writes past the end of the array containing the Element
 designated by Target.
 @end[Itemize]
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Execution of Copy_Array(Source, Target, Length) is erroneous if either
 Value(Source, Length) is erroneous, or copying writes past the end of
 the array containing the Element designated by Target.
@@ -1590,10 +1641,11 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
          @key(raise) C.Strings.Dereference_Error;
       @key(end if);
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0065]}
       @key(loop)
          Element             := Source_Temp_Ptr.@key(all);
          Target_Temp_Ptr.@key(all) := Element;
-         @key(exit) @key(when) Element = C.nul;
+         @key(exit) @key(when) @Chg{New=[C."="(Element, C.nul)],Old=[Element = C.nul]};
          Char_Ptrs.Increment(Target_Temp_Ptr);
          Char_Ptrs.Increment(Source_Temp_Ptr);
       @key(end) @key(loop);
@@ -1833,20 +1885,21 @@ Unsigned, Leading_Separate, and Trailing_Separate,
 the effect is implementation defined. If Format does have one
 of these values, the following rules apply:
 @begin{itemize}
-Format=Unsigned: if Item comprises zero or more leading
-space characters followed by one or more decimal digit
-characters then Valid returns
- True, else it returns False.
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066]}
+Format=Unsigned: if Item comprises @Chg{New=[],Old=[zero or more leading
+space characters followed by ]}one or more decimal digit
+characters then Valid returns True, else it returns False.
 
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066]}
 Format=Leading_Separate: if Item comprises
-zero or more leading space characters,
-followed by a single occurrence of
-the plus or minus sign character, and then one or more
+@Chg{New=[],Old=[zero or more leading space characters, followed by ]}a
+single occurrence of the plus or minus sign character, and then one or more
 decimal digit characters, then Valid returns True, else it returns False.
 
-@Trailing@;Format=Trailing_Separate: if Item comprises zero or more leading space
-characters, followed by one or more decimal digit characters and
-finally a plus or minus sign character,
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066]}
+@Trailing@;Format=Trailing_Separate: if Item comprises
+@Chg{New=[],Old=[zero or more leading space characters, followed by ]}one or
+more decimal digit characters and finally a plus or minus sign character,
 then Valid returns True, else it returns False.
 @end{itemize}
 
@@ -1874,8 +1927,11 @@ the number of decimal places is established by Num'Scale.@end{discussion}
 @key(function) To_Display (Item   : @key(in) Num;
                      Format : @key(in) Display_Format) @key(return) Numeric;
 @end{Example}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0067]}
 @Trailing@;This function returns the Numeric value for Item, represented in
-accordance with Format. Conversion_Error is propagated if Num is negative
+accordance with Format.
+@Chg{New=[The length of the returned value is Length(Format), and the
+lower bound is 1. ],Old=[]}Conversion_Error is propagated if Num is negative
 and Format is Unsigned.
 
 @begin{Example}@Keepnext
@@ -1905,8 +1961,11 @@ outside the range of Num.
 @key(function) To_Packed (Item   : @key(in) Num;
                     Format : @key(in) Packed_Format) @key(return) Packed_Decimal;
 @end{Example}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0067]}
 @Trailing@;This function returns the Packed_Decimal value for Item, represented in
-accordance with Format. Conversion_Error is propagated if Num is negative
+accordance with Format.
+@Chg{New=[The length of the returned value is Length(Format), and the
+lower bound is 1. ],Old=[]}Conversion_Error is propagated if Num is negative
 and Format is Packed_Unsigned.
 
 @begin{Example}@Keepnext
@@ -1938,8 +1997,11 @@ outside the range of Num.
 @key(function) To_Binary (Item   : @key(in) Num;
                     Format : @key(in) Binary_Format) @key(return) Byte_Array;
 @end{Example}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0067]}
 @Trailing@;This function returns the Byte_Array value for Item, represented in
 accordance with Format.
+@Chg{New=[The length of the returned value is Length(Format), and the
+lower bound is 1.],Old=[]}
 
 @begin{Example}@Keepnext
 @key(function) To_Decimal (Item : @key(in) Binary)      @key(return) Num;

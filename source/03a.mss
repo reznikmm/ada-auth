@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:00 $}
+@Comment{$Date: 2000/08/25 04:02:55 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1853,6 +1853,7 @@ it seems simpler to say that the elaboration has no effect.
 @Defn{derived type}
 A @nt<derived_type_definition> defines a new type (and its first subtype)
 whose characteristics are @i(derived) from those of a @i(parent type).
+@IndexSee{Term=[inheritance],See=[derived types and classes]}
 @ToGlossary{Term=<Derived type>,
   Text=<A derived type is a type defined in terms of another type,
   which is the parent type of the derived type.
@@ -1861,7 +1862,6 @@ whose characteristics are @i(derived) from those of a @i(parent type).
   primitive operations from the parent.
   A type together with the types derived from it
   (directly or indirectly) form a derivation class.>}
-@IndexSee{Term=[inheritance],See=[derived types and classes]}
 @end{Intro}
 
 @begin{Syntax}

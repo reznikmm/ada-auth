@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/08/24 04:21:04 $}
+@Comment{$Date: 2000/08/25 04:02:56 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -90,6 +90,7 @@ of representation have stricter rules as to when they can be specified.],Old=[]}
 A representation pragma is allowed only at places where a
 @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]}
 or @nt{compilation_unit} is allowed.
+@Chg{New=[@IndexSee(Term=(representation_clause),See=(aspect_clause))],Old=[]}
 @end{SyntaxText}
 @end{Syntax}
 
@@ -1184,10 +1185,9 @@ and for program units via an @nt{attribute_definition_clause}.
 @end{StaticSem}
 
 @begin{Erron}
-If an Address is specified,
+@PDefn2{Term=(erroneous execution),Sec=(cause)}If an Address is specified,
 it is the programmer's responsibility to ensure that
-the address is valid;
-otherwise, program execution is erroneous.
+the address is valid; otherwise, program execution is erroneous.
 @end{Erron}
 
 @begin{ImplAdvice}
@@ -1365,6 +1365,7 @@ multiple thereof.
 @end{StaticSem}
 
 @begin{Erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Program execution is erroneous if an Address clause is given that
 conflicts with the Alignment.
 @begin{Ramification}
@@ -1372,6 +1373,7 @@ The user has to either give an Alignment clause also,
 or else know what Alignment the implementation will choose by default.
 @end{Ramification}
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the Alignment is specified for an object that is not allocated
 under control of the implementation,
 execution is erroneous if the object is not aligned according to the
@@ -3788,6 +3790,7 @@ an assignment to the object as a whole.
 @end{RunTime}
 
 @begin{Erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 It is erroneous to evaluate a @nt<primary> that is a @nt<name>
 denoting an abnormal object,
 or to evaluate a @nt{prefix} that denotes an abnormal object.
@@ -3821,7 +3824,7 @@ The same is true if the discriminants have been destroyed.
 @end{Erron}
 
 @begin{Bounded}
-@Leading@Defn{invalid representation}
+@Leading@Defn{invalid representation}@PDefn2{Term=(bounded error),Sec=(cause)}
 If the representation of a scalar object does not represent a value of
 the object's subtype
 (perhaps because the object was not initialized),
@@ -3857,6 +3860,7 @@ execution, or to other objects becoming abnormal.
 @end{Bounded}
 
 @begin{Erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 A call to an imported function or an instance of Unchecked_Conversion is
 erroneous if the result is scalar, and the result object has an invalid
 representation.
@@ -3873,8 +3877,7 @@ operations on the invalid representations in the obvious manner
 a given representation should be equal to itself,
 a representation that is in between the internal codes of
 two enumeration literals should behave accordingly when passed to
-comparison operators and membership tests,
-etc.
+comparison operators and membership tests, etc.
 We considered @i{requiring} such sensible behavior,
 but it resulted in too much arcane verbiage,
 and since implementations have little incentive to behave
@@ -3934,6 +3937,7 @@ subsequent checks required by the language rules.
   to a composite operand with an invalid scalar subcomponent.
 @end{Ramification}
 
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 The dereference of an access value is erroneous if
 it does not designate an object of an appropriate type or a subprogram
 with an appropriate profile,
@@ -4390,6 +4394,7 @@ erroneous.
 @end{StaticSem}
 
 @begin{Erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If Storage_Pool is specified for an access type,
 then if Allocate can satisfy the request,
 it should allocate a contiguous block of memory,
@@ -4726,7 +4731,8 @@ their storage can be reused for other purposes.
 @end{RunTime}
 
 @begin{Bounded}
-@Leading@;It is a bounded error to free a discriminated, unterminated
+@Leading@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to free a discriminated, unterminated
 task object. The possible consequences are:
 @begin{Reason}
   This is an error because the task might refer to its discriminants,
@@ -4762,7 +4768,7 @@ is not reclaimed prior to task termination.
 @end{Bounded}
 
 @begin{Erron}
-@Defn{nonexistent}
+@Defn{nonexistent}@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Evaluating a name that denotes a nonexistent object is erroneous.
 The execution of a call to an instance of Unchecked_Deallocation is
 erroneous if the object was created other than by an @nt<allocator> for

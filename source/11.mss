@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/08/23 00:31:01 $}
+@Comment{$Date: 2000/08/25 04:02:56 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1171,6 +1171,7 @@ checks.
 @end{StaticSem}
 
 @begin{Erron}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If a given check has been suppressed,
 and the corresponding error situation occurs,
 the execution of the program is erroneous.
