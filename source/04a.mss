@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:41 $}
+@Comment{$Date: 2004/10/30 23:35:48 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -892,6 +892,7 @@ attribute. This was always intended to be allowed (and never was
 disallowed).],Old=[]}
 @end{DiffWord95}
 
+
 @LabeledClause{Literals}
 
 @begin{Intro}
@@ -912,17 +913,17 @@ the literal @key(null), or a @nt<string_literal>.
 @end{Intro}
 
 @begin{Resolution}
-@PDefn2{Term=[expected type],Sec=(null literal)}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01]}
+@Chg{Version=[2],New=[],Old=[@PDefn2{Term=[expected type],Sec=(null literal)}
 The expected type for a literal @key(null) shall be a single
-access type.
+access type.]}
 @begin{Discussion}
-This new wording ("expected type ... shall be a single ... type")
-replaces the old "shall be determinable" stuff.
-It reflects an attempt to simplify and unify the description
-of the rules for resolving
-aggregates, literals, type conversions, etc.
-See @RefSec{The Context of Overload Resolution}
-for the details.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@Chg{Version=[2],New=[],Old=[This new wording ("expected type ... shall be a
+single ... type") replaces the old "shall be determinable" stuff. It reflects
+an attempt to simplify and unify the description of the rules for resolving
+aggregates, literals, type conversions, etc. See
+@RefSec{The Context of Overload Resolution} for the details.]}
 @end{Discussion}
 
 @PDefn2{Term=[expected type],Sec=(character_literal)}
@@ -958,19 +959,22 @@ expected string type, there shall be
 a corresponding @nt<defining_character_literal> of
 the component type of the expected string type.
 
-A literal @nt<null> shall not be of an anonymous
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
+@Chg{Version=[2],New=[],Old=[A literal @nt<null> shall not be of an anonymous
 access type@Redundant[, since such types do not have a null value
-(see @RefSecNum{Access Types})].
+(see @RefSecNum{Access Types})].]}
 @begin{Reason}
-This is a legality rule rather than an overloading rule,
-to simplify implementations.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[],Old=[This is a legality rule rather than an overloading
+rule, to simplify implementations.]}
 @end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 An integer literal is of type @i{universal_integer}.
-A real literal is of type @i{universal_real}.
-
+A real literal is of type @i{universal_real}.@Chg{Version=[2],New=[ The literal
+@key<null> is of type @i<universal_access>.],Old=[]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -1056,6 +1060,14 @@ nor semantically "literals" but are rather names of parameterless
 functions.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
+@Chg{Version=[2],New=[@key{Null} now has type @i<universal access>, which is
+similar to other literals. @key{Null} can be used with anonymous access
+types.],Old=[]}
+@end{DiffWord95}
+
+
 @LabeledClause{Aggregates}
 
 @begin{Intro}
@@ -1070,9 +1082,11 @@ into a composite value of an array type, record type, or record extension.]
 @end{Syntax}
 
 @begin{Resolution}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @PDefn2{Term=[expected type],Sec=(aggregate)}
-The expected type for an @nt{aggregate} shall be a single nonlimited
-array type, record type, or record extension.
+The expected type for an @nt{aggregate} shall be a
+single@Chg{Version=[2],New=[],Old=[ nonlimited]} array type, record type,
+or record extension.
 @begin{Discussion}
 See @RefSec{The Context of Overload Resolution}
 for the meaning of @lquotes@;shall be a single ... type.@rquotes@;
@@ -1170,6 +1184,13 @@ This is necessary so that controlled types
 will work (see @RefSecNum{User-Defined Assignment and Finalization}).
 @end{DiffWord83}
 
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}@nt{Aggregate}s can be of a
+limited type.],Old=[]}
+@end{Extend95}
+
+
 @LabeledSubClause{Record Aggregates}
 
 @begin{Intro}
@@ -1186,8 +1207,10 @@ using either a named or a positional association.]
   | @key<null record>"}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @Syn{lhs=<record_component_association>,rhs="
-   [ @Syn2{component_choice_list} => ] @Syn2{expression}"}
+    [@Syn2{component_choice_list} =>] @Syn2{expression}@Chg{Version=[2],New=[
+   | @Syn2{component_choice_list} => <>],Old=[]}"}
 
 @Syn{lhs=<component_choice_list>,rhs="
      @SynI{component_}@Syn2{selector_name} {| @SynI{component_}@Syn2{selector_name}}
@@ -1233,9 +1256,11 @@ if there is only one association, it shall be a named association.
 @end{Syntax}
 
 @begin{Resolution}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @PDefn2{Term=[expected type],Sec=(record_aggregate)}
 The expected type for a @nt{record_aggregate} shall be
-a single nonlimited record type or record extension.
+a single @Chg{Version=[2],New=[],Old=[nonlimited ]}record type or
+record extension.
 @begin{Ramification}
 This rule is used to resolve whether an @nt{aggregate} is
 an @nt{array_aggregate} or a @nt{record_aggregate}.
@@ -1325,31 +1350,33 @@ than a list of @nt<record_@!component_@!association>s.
   record extension of T.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 Each @nt<record_component_association> shall have at least
 one associated component, and each needed component
 shall be associated with exactly
 one @nt<record_@!component_@!association>.
-If a @nt<record_@!component_@!association> has two or more associated
-components, all of them shall be of the same type.
+If a @nt<record_@!component_@!association> @Chg{Version=[2],New=[with an @nt{expression} ],Old=[]}has
+two or more associated components, all of them shall be of the same type.
 @begin{Ramification}
-  These rules apply to an association with
-  an @key(others) choice.
+  These rules apply to an association with an @key(others) choice.
 @end{Ramification}
 @begin{Reason}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
   Without these rules, there would be no way to know what
-  was the expected type for the @nt<expression> of the
-  association.
+  was the expected type for the @nt<expression> of the association.
+  @Chg{Version=[2],New=[Note that the second rule does not apply to <>
+  associations, as we do not need to resolve anything. That means that
+  (@key{others} => <>) always represents a default-initialized array
+  or record value.],Old=[]}
 @end{Reason}
 @begin{Discussion}
-  AI83-00244 also
-  requires that the @nt{expression} shall
+  AI83-00244 also requires that the @nt{expression} shall
   be legal for each associated component. This is because
   even though two components have the same type, they might have
   different subtypes. Therefore, the legality of the
   @nt<expression>, particularly if it is an array aggregate,
   might differ depending on the associated component's subtype.
-  However, we have relaxed the rules on array aggregates slightly for
-  Ada 95,
+  However, we have relaxed the rules on array aggregates slightly for Ada 95,
   so the staticness of an applicable index constraint has no
   effect on the legality of the array aggregate to which it applies.
   See @RefSecNum{Array Aggregates}. This was the only case (that we know of)
@@ -1377,6 +1404,17 @@ This expression might either be given within the aggregate itself,
 or in a constraint on the parent subtype in a @nt<derived_type_definition>
 for some ancestor of the type of the aggregate.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[A @nt<record_component_association> for a discriminant
+without a @nt<default_expression> shall have an @nt<expression> rather
+than <>.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[A discriminant must always have a defined value,
+but <> means uninitialized for a discrete type unless the component has a
+default value.],Old=[]}
+@end{Reason}
 @end{Legality}
 
 @begin{RunTime}
@@ -1404,6 +1442,16 @@ The conversion in the first rule might raise Constraint_Error.
 This check in the first rule presumably happened as part of the dependent
 compatibility check in Ada 83.
 @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[For a @nt<record_component_association> with an
+@nt<expression>, the @nt<expression> defines the value for the associated
+component(s). For a @nt<record_component_association> with a <>, if the
+@nt<component_declaration> has a @nt<default_expression>, that
+@nt<default_expression> defines the value for the associated component(s);
+otherwise, the associated component(s) are initialized by default as for a
+stand-alone object of the component subtype
+(see @RefSecNum{Object Declarations}).],Old=[]}
 
 The @nt<expression> of a @nt{record_component_association}
 is evaluated (and converted) once for each associated component.
@@ -1436,12 +1484,22 @@ be in the same order as in the @nt<known_discriminant_part>.
 @end{Example}
 
 @begin{Wide}
-@leading@keepnext@i(Example of component association with several choices:)
+@leading@keepnext@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@i(Example@Chg{Version=[2],New=[s],Old=[]} of component association with
+several choices:)
 @end{Wide}
 @begin{Example}
-(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null)))   @RI[--  see @RefSecNum{Incomplete Type Declarations}]
+@tabclear()@tabset(P50)
+(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) @\@RI[--  see @RefSecNum{Incomplete Type Declarations}]
 
  @RI[--  The allocator is evaluated twice: Succ and Pred designate different cells]
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[(Value => 0, Succ|Pred => <>) @\@RI[--  see @RefSecNum{Incomplete Type Declarations}]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[ @RI[--  Succ and Pred will be set to @key{null}]],Old=[]}
+
 @end{Example}
 
 @begin{Wide}
@@ -1469,6 +1527,20 @@ Various AIs have been incorporated (AI83-00189, AI83-00244, and AI83-00309).
 In particular, Ada 83 did not explicitly disallow extra values in
 a record aggregate. Now we do.
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}<> can be used in place of
+an @nt{expression} in a @nt{record_aggregate}, default initializing the
+component.],Old=[]}
+@end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[Limited @nt{record_aggregate}s are allowed (since
+all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Extension Aggregates}
 
@@ -1500,13 +1572,16 @@ determines the value of the ancestor/prefix.
 @end{Syntax}
 
 @begin{Resolution}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @PDefn2{Term=[expected type], Sec=(extension_aggregate)}
 The expected type for an @nt{extension_aggregate} shall be
-a single nonlimited type that is a record extension.
+a single @Chg{Version=[2],New=[],Old=[nonlimited ]}type that is a
+record extension.
 @PDefn2{Term=[expected type],
   Sec=(extension_aggregate ancestor expression)}
 If the @nt<ancestor_part> is an @nt<expression>,
-it is expected to be of any nonlimited tagged type.
+it is expected to be of any @Chg{Version=[2],New=[],Old=[nonlimited ]}tagged
+type.
 @begin{Reason}
 We could have made
 the expected type @i(T')Class where @i(T) is the ultimate ancestor of
@@ -1518,12 +1593,21 @@ it becomes harder to produce good error messages.
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00306-01]}
 If the @nt<ancestor_part> is a @nt<subtype_mark>, it shall
 denote a specific tagged subtype.
 The type of the @nt{extension_aggregate} shall be derived
 from the type of the @nt<ancestor_part>, through one
 or more record extensions
 (and no private extensions).
+@Chg{Version=[2],New=[If the @nt{ancestor_part} is an @nt{expression}, it
+shall not be dynamically tagged.],Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
+@Chg{Version=[2],New=[This prevents implicit "truncation" of a
+dynamically-tagged value to the specific ancestor type, similar to the
+rules in @RefSecNum{Dispatching Operations of Tagged Types}.],Old=[]}
+@end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
@@ -1608,6 +1692,17 @@ Addition'(Binop @key{with null record})
 The extension aggregate syntax is new.
 @end{Extend83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[Limited @nt{extension_aggregate}s are allowed (since
+all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
+@Chg{Version=[2],New=[Fixed a hole that allow implicit "truncation" of a
+dynamically-tagged value when used as an ancestor @nt{expression}.],Old=[]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Array Aggregates}
 
 @begin{Intro}
@@ -1640,17 +1735,21 @@ we answer it explicitly.}
   @Syn2{positional_array_aggregate} | @Syn2{named_array_aggregate}"}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @Syn{lhs=<positional_array_aggregate>,rhs="
     (@Syn2{expression}, @Syn2{expression} {, @Syn2{expression}})
-  | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => @Syn2{expression})"}
+  | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => @Syn2{expression})@Chg{Version=[2],New=[
+  | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => <>)],Old=[]}"}
 
 
 @Syn{lhs=<named_array_aggregate>,rhs="
     (@Syn2{array_component_association} {, @Syn2{array_component_association}})"}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @Syn{lhs=<array_component_association>,rhs="
-    @Syn2{discrete_choice_list} => @Syn2{expression}"}
+    @Syn2{discrete_choice_list} => @Syn2{expression}@Chg{Version=[2],New=[
+  | @Syn2{discrete_choice_list} => <>],Old=[]}"}
 
 @end{Syntax}
 
@@ -1689,10 +1788,11 @@ in an @nt{array_component_association}.
 @end{Intro}
 
 @begin{Resolution}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @PDefn2{Term=[expected type], Sec=(array_aggregate)}
 The expected type for an @nt{array_aggregate} (that is not
-a subaggregate) shall be a single nonlimited
-array type.
+a subaggregate) shall be a
+single @Chg{Version=[2],New=[],Old=[nonlimited ]}array type.
 @PDefn2{Term=[expected type],
   Sec=(array_aggregate component expression)}
 The component type of this array type is the
@@ -1854,6 +1954,12 @@ proceeds in two steps:
   The conversion of the value of the component expressions
   to the component subtype might raise Constraint_Error.
 @end(Ramification)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[Each array component @nt{expression} defines the value
+for the associated component(s). For a component given by <>, the associated
+component(s) are initialized by default (see
+@RefSecNum{Object Declarations}).],Old=[]}
 
 @Leading@Defn2{Term=[bounds],
   Sec=(of the index range of an @nt{array_aggregate})}
@@ -2038,6 +2144,20 @@ We have also reorganized the presentation to handle
 multidimensional and one-dimensional aggregates more uniformly,
 and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}<> can be used in place of
+an @nt{expression} in an @nt{array_aggregate}, default initializing the
+component.],Old=[]}
+@end{Extend95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+@Chg{Version=[2],New=[Limited @nt{array_aggregate}s are allowed (since
+all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).],Old=[]}
+@end{DiffWord95}
+
 
 @LabeledClause{Expressions}
 

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2004/10/30 21:51:43 $}
+@Comment{$Date: 2004/10/30 23:35:49 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1606,8 +1606,9 @@ unit mentioned in a @nt{limited_with_clause} to an
 environment are implementation defined.],Old=[]}
 @ImplDef{The mechanisms for creating an environment
 and for adding and replacing compilation units.}
-@ChgImplDef{Version=[2],Kind=[Added],Text=[The mechanisms for adding a
-unit mentioned in a @nt{limited_with_clause} to an environment.],Old=[]}]}
+@ChgImplDef{Version=[2],Kind=[Added],Text=[@Chg{Version=[2],New=[The
+mechanisms for adding a unit mentioned in a @nt{limited_with_clause}
+to an environment.],Old=[]}]}
 @begin{Ramification}
 The traditional model, used by most Ada 83 implementations,
 is that one places a compilation unit in the environment
