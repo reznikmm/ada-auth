@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.39 $ $Date: 2005/01/29 07:15:07 $}
+@comment{$Revision: 1.40 $ $Date: 2005/02/01 06:46:27 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -371,13 +371,15 @@ execution on a single processor. A task unit may define
 either a single executing task or a task type permitting the
 creation of any number of similar tasks.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00114-01]}
 A protected unit is the basic unit for defining protected
 operations for the coordinated use of data shared between
 tasks. Simple mutual exclusion is provided automatically,
 and more elaborate sharing protocols can be defined. A
 protected operation can either be a subprogram or an entry.
 A protected entry specifies a Boolean expression (an entry
-barrier) that must be true before the body of the entry is
+barrier) that must be @Chg{Version=[2],New=[True],Old=[true]}
+before the body of the entry is
 executed. A protected unit may define a single protected
 object or a protected type permitting the creation of
 several similar objects.

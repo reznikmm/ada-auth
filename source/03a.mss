@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:14:59 $}
+@Comment{$Date: 2005/02/01 06:46:20 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -35,7 +35,7 @@ is a form of declaration defined as follows.
      @Syn2{type_declaration}@\| @Syn2{subtype_declaration}
    | @Syn2{object_declaration}@\| @Syn2{number_declaration}
    | @Syn2{subprogram_declaration}@\| @Syn2{abstract_subprogram_declaration}
-   | @Chg{Version=[2],New=[@Syn2{null_subprogram_declaration}@\| ],Old=[]}@Syn2{package_declaration}@Chg{Version=[2],New=[
+   | @Chg{Version=[2],New=[@Syn2{null_procedure_declaration}@\| ],Old=[]}@Syn2{package_declaration}@Chg{Version=[2],New=[
    |],Old=[@\|]} @Syn2{renaming_declaration}@Chg{Version=[2],New=[@\|],Old=[
    |]} @Syn2{exception_declaration}@Chg{Version=[2],New=[
    |],Old=[@\|]} @Syn2{generic_declaration}@Chg{Version=[2],New=[@\|],Old=[
@@ -531,20 +531,20 @@ A partial view is a composite type.]}
 @Defn{private type}
 @Defn{private extension}
 There can be multiple views of a type with varying
-sets of operations. An @i(incomplete) type represents an incomplete view
-(see @RefSecNum{Incomplete Type Declarations}) of a type with a
+sets of operations. @Redundant[An @i(incomplete) type represents an incomplete
+view (see @RefSecNum{Incomplete Type Declarations}) of a type with a
 very restricted usage, providing support for recursive data structures. A
 @i(private) type or @i(private extension) represents a partial view
 (see @RefSecNum{Private Types and Private Extensions}) of a
 type, providing support for data abstraction. The full view
 (see @RefSecNum{Type Declarations}) of a
-type provides its complete declaration. An incomplete or partial view is
-considered a composite type.]}
-@begin{Discussion}
+type represents its complete definition.] An incomplete or partial view is
+considered a composite type@Redundant[, even if the full view is not].]}
+@begin{TheProof}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Only the first and last sentences really define
-anything; the real definitions of the views are in the referenced clauses.]}
-@end{Discussion}
+@ChgAdded{Version=[2],Text=[The real definitions of the views are in the
+referenced clauses.]}
+@end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
 @Defn{discriminant}
@@ -564,8 +564,8 @@ are excluded, the term component is used instead.
 @Defn2{Term=[part], Sec=(of an object or value)}
 Similarly, a @i(part) of an object or value is used to mean
 the whole object or value, or any set of its subcomponents.@Chg{Version=[2],
-New=[ The terms component, subcomponent and part are also applied to a type
-meaning the component, subcomponent or part of objects and values of the type.],Old=[]}
+New=[ The terms component, subcomponent, and part are also applied to a type
+meaning the component, subcomponent, or part of objects and values of the type.],Old=[]}
 @begin{Discussion}
   The definition of @lquotes@;part@rquotes@; here is designed to simplify rules
   elsewhere. By design, the intuitive meaning of
@@ -825,36 +825,41 @@ defines the discriminants of the type (see @RefSec(Discriminants)).
 The remainder of the @nt<type_@!declaration> defines the
 remaining characteristics of (the view of) the type.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230]}
 @Defn{named type}
 A type defined by a @nt<type_@!declaration> is a @i(named) type;
 such a type has one or more nameable subtypes.
 @Defn{anonymous type}
 Certain other forms of declaration also include type
-definitions as part of the declaration for an object (including a parameter
-or a discriminant). The type defined by such
+definitions as part of the declaration for an object@Chg{Version=[2],New=[],
+Old=[ (including a parameter or a discriminant)]}. The type defined by such
 a declaration is @i(anonymous) @em it has no nameable subtypes.
 @Defn2{Term=[italics],Sec=(pseudo-names of anonymous types)}
 For explanatory purposes, this International Standard sometimes refers to
 an anonymous type by a pseudo-name, written in italics, and
 uses such pseudo-names at places where the syntax normally requires
 an @nt<identifier>. For a named type whose first subtype is T,
-this International Standard sometimes refers to the type of T as simply @lquotes@;the type T.@rquotes@;
+this International Standard sometimes refers to the type of T
+as simply @lquotes@;the type T@rquotes@;.
 @begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230]}
   The only user-defined types
   that can be anonymous in the above sense are array,
   access, task, and protected types.
   An anonymous array, task, or protected type
   can be defined as part of an @nt{object_declaration}.
   An anonymous access type can be defined as part of
-  a parameter or discriminant specification.
+  @Chg{Version=[2],New=[numerous other constructs],Old=[a parameter or
+  discriminant specification]}.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326]}
 @Defn{full type}
 A named type that is declared by a @nt<full_type_@!declaration>,
 or an anonymous type that is defined as part of declaring
 an object of the type, is called a
-@i(full type).@Defn{full type definition}@Chg{Version=[2],New=[ A
-full type defines the @i(full view) of a type.],Old=[]}
+@i(full type).@Defn{full type definition}@Chg{Version=[2],New=[ The
+declaration of a full type also declares the @i<full view> of the type.],Old=[]}
 The @nt<type_@!definition>, @nt<task_@!definition>, @nt<protected_@!definition>,
 or @nt<access_@!definition> that defines a full type is called
 a @i(full type definition).
@@ -983,7 +988,7 @@ created@Chg{Version=[2],New=[ (for a limited type)],Old=[]}.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
   @ChgAdded{Version=[2],Text=[Added a definition of full view, so that
-  all types have a well-defined view.]}
+  all types have a well-defined full view.]}
 @end{DiffWord95}
 
 
@@ -1129,7 +1134,7 @@ since it always denotes a subtype.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  An optional @nt{null_exclusion} can be used in an a @nt{subtype_indication}.]}
+  An optional @nt{null_exclusion} can be used in a @nt{subtype_indication}.]}
 @end{Extend95}
 
 
@@ -1253,7 +1258,8 @@ specific type are defined as follows:
   @ChgAdded{Version=[2],Text=[Subprograms declared in a generic package
   specification are never primitive for a formal type, even if they happen
   to override an operation of the formal type. This includes formal
-  subprograms, which are never primitive operations.]}
+  subprograms, which are never primitive operations (that's true even
+  for an abstract formal subprogram).]}
 @end{Ramification}
 
 @Defn2{Term=[primitive operator], Sec=(of a type)}
@@ -5021,10 +5027,12 @@ type definable by a @nt<floating_point_definition>.
 @end{ImplReq}
 
 @begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 @Redundant[For the execution of a predefined operation of a real type,
 the implementation need not raise Constraint_Error if the result is
 outside the base range of the type, so long as the correct result
-is produced, or the Machine_Overflows attribute of the type is false
+is produced, or the Machine_Overflows attribute of the type is @Chg{Version=[2],
+New=[False],Old=[false]}
 (see @RefSecNum{Numeric Performance Requirements}).]
 
 @Defn{nonstandard real type}

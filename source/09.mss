@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/01/27 06:12:58 $}
+@Comment{$Date: 2005/02/01 06:46:22 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 
@@ -3482,7 +3482,7 @@ Leap_Second is True, and Seconds is not appropriate for a Leap_Second.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Split Date into its constituent parts (Year,
 Month, Day, Hour, Minute, Second, Sub_Second), relative to the specified time
-zone offset. Leap_Second is true if Date identifies a leap second.]}
+zone offset. Leap_Second is True if Date identifies a leap second.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;
@@ -3496,7 +3496,7 @@ zone offset. Leap_Second is true if Date identifies a leap second.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Split Date into its constituent parts (Year,
 Month, Day, Seconds), relative to the specified time zone offset. Leap_Second
-is true if Date identifies a leap second.]}
+is True if Date identifies a leap second.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Image (Date : Time;

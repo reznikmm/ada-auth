@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2005/01/30 06:44:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2005/02/01 06:46:25 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/01/30 06:44:19 $}
+@Comment{$Date: 2005/02/01 06:46:25 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -651,8 +651,7 @@ to the Index_Type'Last.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[
-@Defn2{Term=[tamper with cursors],Sec=[of a vector]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a vector]}
 Some operations are assumed to work on a constant
 set of elements. For such an operation, a subprogram is said to @i<tamper with
 cursors> of a vector object @i<V> if:]}
@@ -681,8 +680,7 @@ a parameter.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[
-@Defn2{Term=[tamper with elements],Sec=[of a vector]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a vector]}
 Some operations are assumed to not change elements.  For such an operation, a
 subprogram is said to @i<tamper with elements> of a vector object @i<V> if:]}
 
@@ -1858,7 +1856,7 @@ average time complexity should be better than O(@i{N}**2).]}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In other words, we're requiring the use of a
-  better than O(@i{N}**2) sorting algorithm, such as Quicksort. No Bubble sorts
+  better than O(@i{N}**2) sorting algorithm, such as Quicksort. No bubble sorts
   allowed!]}
 @end{Ramification}
 
@@ -1870,7 +1868,7 @@ Text=[Containers.Vectors.Generic_Sort should minimize copying of elements.]}]}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[ We do not mean @lquotes@;absolutely minimize@rquotes
+  @ChgAdded{Version=[2],Text=[We do not mean @lquotes@;absolutely minimize@rquotes
   here; we're not intending to require a single copy for each element.
   Rather, we want to suggest that the sorting algorithm chosen is one that
   does not copy items unnecessarily. Bubble sort would not meet this advice,
@@ -1884,12 +1882,12 @@ copying of internal data structures.]}
 Text=[Containers.Vectors.Move should not copy elements, and should minimize
 copying of internal data structures.]}]}
 
-@begin{Honest}
+@begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Usually that can be accomplishing simply by
+  @ChgAdded{Version=[2],Text=[Usually that can be accomplished simply by
   moving the pointer(s) to the internal data structures from the Source vector
   to the Target vector.]}
-@end{Honest}
+@end{ImplNote}
 
 @end{ImplAdvice}
 
@@ -1997,169 +1995,231 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
       Process  : @key{not null access procedure} (Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} Replace_Element (Position : @key{in} Cursor;
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Position : @key{in} Cursor;
                               By       : @key{in} Element_Type);]}
 
-**** The text below here still needs to be formatted ****
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} List;
+                   Source : @key{in out} List);]}
 
-   @key{procedure} Move (Target : @key{in out} List;
-                   Source : @key{in out} List);
-
-   @key{procedure} Prepend (Container : @key{in out} List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Prepend} (Container : @key{in out} List;
                       New_Item  : @key{in}     Element_Type;
-                      Count     : @key{in}     Count_Type := 1);
+                      Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Append (Container : @key{in out} List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Append} (Container : @key{in out} List;
                      New_Item  : @key{in}     Element_Type;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Insert (Container : @key{in out} List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
                      Before    : @key{in}     Cursor;
                      New_Item  : @key{in}     Element_Type;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Insert (Container : @key{in out} List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
                      Before    : @key{in}     Cursor;
                      New_Item  : @key{in}     Element_Type;
                      Position  :    @key{out} Cursor;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Insert (Container : @key{in out} List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
                      Before    : @key{in}     Cursor;
                      Position  :    @key{out} Cursor;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Delete (Container : @key{in out} List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete} (Container : @key{in out} List;
                      Position  : @key{in out} Cursor;
-                     Count     : @key{in}     Count_Type := 1);
+                     Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Delete_First (Container : @key{in out} List;
-                           Count     : @key{in}     Count_Type := 1);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_First} (Container : @key{in out} List;
+                           Count     : @key{in}     Count_Type := 1);]}
 
-   @key{procedure} Delete_Last (Container : @key{in out} List;
-                          Count     : @key{in}     Count_Type := 1);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_Last} (Container : @key{in out} List;
+                          Count     : @key{in}     Count_Type := 1);]}
 
-   @key{generic}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{generic}
       @key{with function} "<" (Left, Right : Element_Type)
          @key{return} Boolean is <>;
-   @key{procedure} Generic_Sort (Container : @key{in out} List);
+   @key{procedure} @AdaSubDefn{Generic_Sort} (Container : @key{in out} List);]}
 
-   @key{generic}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{generic}
       @key{with function} "<" (Left, Right : Element_Type)
          @key{return} Boolean @key{is} <>;
-   @key{procedure} Generic_Merge (Target  : @key{in out} List;
-                            Source  : @key{in out} List);
+   @key{procedure} @AdaSubDefn{Generic_Merge} (Target  : @key{in out} List;
+                            Source  : @key{in out} List);]}
 
-   @key{procedure} Reverse_List (Container : @key{in out} List);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_List} (Container : @key{in out} List);]}
 
-   @key{procedure} Swap (I, J  : @key{in} Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Swap} (I, J  : @key{in} Cursor);]}
 
-   @key{procedure} Swap_Links (Container : @key{in out} List;
-                         I, J      : @key{in}     Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Swap_Links} (Container : @key{in out} List;
+                         I, J      : @key{in}     Cursor);]}
 
-   @key{procedure} Splice (Target   : @key{in out} List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Target   : @key{in out} List;
                      Before   : @key{in}     Cursor;
-                     Source   : @key{in out} List);
+                     Source   : @key{in out} List);]}
 
-   @key{procedure} Splice (Target   : @key{in out} List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Target   : @key{in out} List;
                      Before   : @key{in}     Cursor;
-                     Position : @key{in}     Cursor);
+                     Position : @key{in}     Cursor);]}
 
-   @key{procedure} Splice (Target   : @key{in out} List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Target   : @key{in out} List;
                      Before   : @key{in}     Cursor;
                      Source   : @key{in out} List;
-                     Position : @key{in}     Cursor);
+                     Position : @key{in}     Cursor);]}
 
-   @key{function} First (Container : List) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First} (Container : List) @key{return} Cursor;]}
 
-   @key{function} First_Element (Container : List)
-      @key{return} Element_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Element} (Container : List)
+      @key{return} Element_Type;]}
 
-   @key{function} Last (Container : List) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last} (Container : List) @key{return} Cursor;]}
 
-   @key{function} Last_Element (Container : List)
-      @key{return} Element_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Element} (Container : List)
+      @key{return} Element_Type;]}
 
-   @key{function} Contains (Container : List;
-                      Item      : Element_Type) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : List;
+                      Item      : Element_Type) @key{return} Boolean;]}
 
-   @key{function} Find (Container : List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : List;
                   Item      : Element_Type;
                   Position  : Cursor := No_Element)
-      @key{return} Cursor;
+      @key{return} Cursor;]}
 
-   @key{function} Reverse_Find (Container : List;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Reverse_Find} (Container : List;
                           Item      : Element_Type;
                           Position  : Cursor := No_Element)
-      @key{return} Cursor;
+      @key{return} Cursor;]}
 
-   @key{function} Next (Position : Cursor) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor;]}
 
-   @key{function} Previous (Position : Cursor) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor;]}
 
-   @key{procedure} Next (Position : @key{in out} Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor);]}
 
-   @key{procedure} Previous (Position : @key{in out} Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor);]}
 
-   @key{function} Has_Element (Position : Cursor) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
 
-   @key{procedure} Iterate
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Iterate}
      (Container : @key{in} List;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
-   @key{procedure} Reverse_Iterate
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate}
      (Container : @key{in} List;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
-@key{private}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{private}]}
 
-   ... -- @RI[not specified by the language]
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   ... -- @RI[not specified by the language]]}
 
-@key{end} Ada.Containers.Doubly_Linked_Lists;>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{end} Ada.Containers.Doubly_Linked_Lists;]}
 
 @end{Example}
 
-The type List is used to represent lists. The type List
-needs finalization (see @RefSecNum{User-Defined Assignment and Finalization}).
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The type List is used to represent lists. The type
+List needs finalization (see
+@RefSecNum{User-Defined Assignment and Finalization}).]}
 
-Empty_List represents the empty List object. It has a length of 0. If an object
-of type List is not otherwise initialized, it is initialized to the same value
-as Empty_List.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Empty_List represents the empty List object. It has
+a length of 0. If an object of type List is not otherwise initialized, it is
+initialized to the same value as Empty_List.]}
 
-No_Element represents a cursor that designates no element. If an object of type
-Cursor is not otherwise initialized, it is initialized to the same value as
-No_Element.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[No_Element represents a cursor that designates no
+element. If an object of type Cursor is not otherwise initialized, it is
+initialized to the same value as No_Element.]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a list]}
 Some operations are assumed to work on a constant set of elements. For such
-an operation, a subprogram is said to @i<tamper with cursors> of a list object
-@i<L> if:
+an operation, a subprogram is said to @i{tamper with cursors} of a list object
+@i<L> if:]}
 
-@xbullet<it inserts or deletes elements of @i<L>, that is, it calls the Insert,
-Clear, Delete, or Delete_Last procedures with @i<L> as a parameter; or>
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it inserts or deletes elements of @i<L>, that is,
+it calls the Insert, Clear, Delete, or Delete_Last procedures with @i<L> as a
+parameter; or]}
 
-   AARM To Be Honest: Operations which are defined to be equivalent to
-   a call on one of these operations also are included. Similarly, operations
-   which call one of these as part of their definition are included.
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Operations which are defined to be equivalent to
+  a call on one of these operations also are included. Similarly, operations
+  which call one of these as part of their definition are included.]}
+@end{Honest}
 
-@xbullet<it reorders the elements of @i<L>, that is, it calls the Splice,
-Swap_Links, or Reverse_List procedures or an instance of Generic_Sort or
-Generic_Merge with C as a parameter; or>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it reorders the elements of @i<L>, that is, it
+calls the Splice, Swap_Links, or Reverse_List procedures or an instance of
+Generic_Sort or Generic_Merge with C as a parameter; or]}
 
-@xbullet<it finalizes @i<L>; or>
-@xbullet<it calls the Move procedure with @i<L> as a parameter.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it finalizes @i<L>; or]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<L> as a
+parameter.]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a list]}
 Some operations are assumed to not change elements. For such an operation, a
-subprogram is said to @i<tamper with elements> of a list object @i<L> if:
+subprogram is said to @i{tamper with elements} of a list object @i<L> if:]}
 
-@xbullet<it tampers with cursors of @i<L>; or>
-@xbullet<it modifies one or more elements of @i<L>, that is, it calls the
-Replace_Element, Update_Element, or Swap procedures with @i<L> as a parameter.>
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it tampers with cursors of @i<L>; or]}
 
-   AARM Note:
-   Swap copies elements rather than reordering them, so it can be allowed
-   for Iterate.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it modifies one or more elements of @i<L>, that is,
+it calls the Replace_Element, Update_Element, or Swap procedures with @i<L> as
+a parameter.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Swap copies elements rather than reordering them,
+  so it can be allowed for Iterate.]}
+@end{Reason}
+@end{Itemize}
 
 @begin{DescribeCode}
+
+**** The text below here still needs to be formatted ****
 
 @xcode<@key{function} "=" (Left, Right : List) @key{return} Boolean;>
 
@@ -2558,47 +2618,78 @@ are encouraged to check for as many of these cases as possible and raise
 Program_Error if detected.
 End AARM Notes.
 
+**** The text above here still needs to be formatted ****
+
 @end{Erron}
 
-@i<@s8<Implementation Requirements>>
+@begin{ImplReq}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[No storage associated with a doubly-linked List
+object shall be lost upon assignment or scope exit.]}
+@end{ImplReq}
 
-No storage associated with a doubly-linked List object shall be lost
-upon assignment or scope exit.
+@begin{ImplAdvice}
 
-@i<@s8<Implementation Advice>>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Containers.Doubly_Linked_Lists should be
+implemented similarly to a linked list. In particular, if @i<N> is the length
+of a list, then the worst-case time complexity of Element, Insert with Count=1,
+and Delete with Count=1 should be O(log @i<N>).]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The worst-case time complexity of Element, Insert with Count=1, and
+Delete with Count=1 for Containers.Doubly_Linked_Lists should be
+O(log @i<N>).]}]}
 
-Containers.Doubly_Linked_Lists should be implemented similarly to a linked
-list. In particular, if @i<N> is the length of a list, then the worst-case time
-complexity of Element, Insert with Count=1, and Delete with Count=1 should be
-O(log @i<N>).
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We do not mean to overly constrain implementation
+  strategies here. However, it is important for portability that the
+  performance of large containers has roughly the same factors on different
+  implementations. If a program is moved to an implementation that takes
+  O(@i<N>) time to access elements, that program could be unusable when the
+  lists are large. We allow O(log @i<N>) access because the proportionality
+  constant and caching effects are likely to be larger than the log factor, and
+  we don't want to discourage innovative implementations.]}
+@end{Reason}
 
-AARM Note
-We do not mean to overly constrain implementation strategies here. However, it
-is important for portability that the performance of large containers has
-roughly the same factors on different implementations. If a program is moved to
-an implementation that takes O(N) time to access elements, that program could
-be unusable when the lists are large. We allow O(log N) access because the
-proportionality constant and caching effects are likely to be larger than the
-log factor, and we don't want to discourage innovative implementations.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The worst-case time complexity of a call on an
+instantiation of Containers.Doubly_Linked_Lists.Generic_Sort should be
+O(@i<N>**2), and the average time complexity should be better than O(@i<N>**2).]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort
+should have an average time complexity better than O(N**2) and worst case no
+worse than O(N**2).]}]}
 
-The worst-case time complexity of a call on an instantiation of
-Containers.Doubly_Linked_Lists.Generic_Sort should be O(@i<N>**2), and
-the average time complexity should be better than O(@i<N>**2).
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[In other words, we're requiring the use of a
+  better than O(@i{N}**2) sorting algorithm, such as Quicksort. No bubble sorts
+  allowed!]}
+@end{Ramification}
 
-AARM Note
-In other words, we're requiring the use of a better than O(N**2) sorting
-algorithm, such as Quicksort. No Bubble sorts allowed!
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Move should not copy elements, and should minimize
+copying of internal data structures.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Containers.Doubly_Link_Lists.Move should not copy elements, and should
+minimize copying of internal data structures.]}]}
 
-Move should not copy elements, and should minimize copying of internal
-data structures.
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Usually that can be accomplished simply by
+  moving the pointer(s) to the internal data structures from the Source
+  container to the Target container.]}
+@end{ImplNote}
+@end{ImplAdvice}
 
-AARM Note: Usually that can be accomplishing simply by moving the pointer(s) to
-the internal data structures from the Source container to the Target container.
-
-@xindent<@s9<NOTES:@hr
-43 Sorting a list never copies elements, and is a stable sort (equal elements
-remain in the original order). This is different than sorting an array or
-vector, which may need to copy elements, and is probably not a stable sort.>>
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Sorting a list never copies elements, and is a
+stable sort (equal elements remain in the original order). This is different
+than sorting an array or vector, which may need to copy elements, and is
+probably not a stable sort.]}
+@end{Notes}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2607,21 +2698,27 @@ vector, which may need to copy elements, and is probably not a stable sort.>>
 @end{Extend95}
 
 
-!corrigendum A.18.4
+@LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
-@dinsc
-The language-defined generic packages Containers.Hashed_Maps and
-Containers.Ordered_Maps provide private types Map and Cursor, and a set of
-operations for each type. A map container allows an arbitrary type to be used
-as a key to find the element associated with that key. A hashed map uses a hash
-function to organize the keys, while an ordered map orders the keys per a
-specified relation.@Defn{map container}@Defn2{Term=[container],Sec=[map]}
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The language-defined generic packages
+Containers.Hashed_Maps and Containers.Ordered_Maps provide private types Map
+and Cursor, and a set of operations for each type. A map container allows an
+arbitrary type to be used as a key to find the element associated with that
+key. A hashed map uses a hash function to organize the keys, while an ordered
+map orders the keys per a specified relation.
+@Defn{map container}@Defn2{Term=[container],Sec=[map]}]}
 
-This section describes the declarations that are common to both kinds of maps.
-See @RefSecNum{The Package Containers.Hashed_Maps} for a description of the
-semantics specific to Containers.Hashed_Maps and
-@RefSecNum{The Package Containers.Ordered_Maps} for a description of the
-semantics specific to Containers.Ordered_Maps.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[This section describes the declarations that are
+common to both kinds of maps. See @RefSecNum{The Package Containers.Hashed_Maps}
+for a description of the semantics specific to
+Containers.Hashed_Maps and @RefSecNum{The Package Containers.Ordered_Maps} for
+a description of the semantics specific to Containers.Ordered_Maps.]}
+@end{Intro}
+
+**** The text below here still needs to be formatted ****
 
 @i<@s8<Static Semantics>>
 
@@ -2642,9 +2739,12 @@ the first node and repeatedly going to the successor node will visit each node
 in the map exactly once until the last node is reached. The exact definition of
 these terms is different for hashed maps and ordered maps.
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[
+@Defn2{Term=[tamper with cursors],Sec=[of a map]}
 Some operations are assumed to work on a constant set of elements. For such
-an operation, a subprogram is said to @i<tamper with cursors> of a map object @i<M>
-if:
+an operation, a subprogram is said to @i{tamper with cursors} of a map object @i<M>
+if:]}
 
 @xbullet<it inserts or deletes elements of @i<M>, that is, it calls the Insert,
 Include, Clear, Delete, or Exclude procedures with @i<M> as a parameter; or>
@@ -2659,8 +2759,11 @@ Include, Clear, Delete, or Exclude procedures with @i<M> as a parameter; or>
 
 @xbullet<it calls one of the operations defined to tamper with the cursors of @i<M>.>
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[
+@Defn2{Term=[tamper with elements],Sec=[of a map]}
 Some operations are assumed to not change elements. For such an operation, a
-subprogram is said to @i<tamper with elements> of a map object @i<M> if:
+subprogram is said to @i{tamper with elements} of a map object @i<M> if:]}
 
 @xbullet<it tampers with cursors of @i<M>; or>
 
@@ -2953,18 +3056,27 @@ Program_Error if detected.
 End AARM Notes.
 @end{Erron}
 
-@i<@s8<Implementation Requirements>>
+@begin{ImplReq}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[No storage associated with a Map object shall be
+lost upon assignment or scope exit.]}
+@end{ImplReq}
 
-No storage associated with a Map object shall be lost upon assignment or
-scope exit.
+@begin{ImplAdvice}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Move should not copy elements, and should minimize
+copying of internal data structures.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Move for a map should not copy elements, and should
+minimize copying of internal data structures.]}]}
 
-@i<@s8<Implementation Advice>>
-
-Move should not copy elements, and should minimize copying of internal
-data structures.
-
-AARM Note: Usually that can be accomplishing simply by moving the pointer(s) to
-the internal data structures from the Source container to the Target container.
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Usually that can be accomplished simply by
+  moving the pointer(s) to the internal data structures from the Source
+  container to the Target container.]}
+@end{ImplNote}
+@end{ImplAdvice}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3309,22 +3421,34 @@ Reserve_Capacity tampers with the cursors, as rehashing probably will change
 the order that elements are stored in the map.
 End AARM Notes
 
-@i<@s8<Implementation Advice>>
+@begin{ImplAdvice}
 
-If @i<N> is the length of a map, the average time complexity of the subprograms
-Element, Insert, Include, Replace, Delete, Exclude and Find that take a key
-parameter should be O(log @i<N>). The average time complexity of the
-subprograms that take a cursor parameter should be O(1). The average time
-complexity of Reserve_Capacity should be O(@i<N>).
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If @i<N> is the length of a map, the average time
+complexity of the subprograms Element, Insert, Include, Replace, Delete,
+Exclude and Find that take a key parameter should be O(log @i<N>). The average
+time complexity of the subprograms that take a cursor parameter should be O(1).
+The average time complexity of Reserve_Capacity should be O(@i<N>).]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The average time complexity of Element, Insert, Include, Replace,
+Delete, Exclude and Find operations that
+take a key parameter for Containers.Hashed_Maps should be
+O(log @i<N>). The average
+time complexity of the subprograms of Containers.Hashed_Maps that take
+a cursor parameter should be O(1).]}]}
 
-AARM Note
-We do not mean to overly constrain implementation strategies here. However, it
-is important for portability that the performance of large containers has
-roughly the same factors on different implementations. If a program is moved to
-an implementation for which Find is O(N), that program could be unusable when
-the maps are large. We allow O(log N) access because the proportionality
-constant and caching effects are likely to be larger than the log factor, and
-we don't want to discourage innovative implementations.
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We do not mean to overly constrain implementation
+  strategies here. However, it is important for portability that the
+  performance of large containers has roughly the same factors on different
+  implementations. If a program is moved to an implementation for which Find is
+  O(@i<N>), that program could be unusable when the maps are large. We allow
+  O(log @i<N>) access because the proportionality constant and caching effects
+  are likely to be larger than the log factor, and we don't want to discourage
+  innovative implementations.]}
+@end{Reason}
+@end{ImplAdvice}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3628,25 +3752,44 @@ returns No_Element.>
 difference that the nodes are traversed in predecessor order, starting with the
 last node.>
 
-@i<@s8<Implementation Advice>>
+**** The text above here still needs to be formatted ****
 
-If @i<N> is the length of a map, then the worst-case time complexity of the
+@begin{ImplAdvice}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If @i<N> is the length of a map, then the
+worst-case time complexity of the
 Element, Insert, Include, Replace, Delete, Exclude and Find operations that
 take a key parameter should be O((log @i<N>)**2) or better. The worst-case
-time complexity of the subprograms that take a cursor parameter should be O(1).
+time complexity of the subprograms that take a cursor parameter should be O(1).]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The worst-case time complexity of Element, Insert, Include, Replace,
+Delete, Exclude and Find operations that
+take a key parameter for Containers.Ordered_Maps should be
+O((log @i<N>)**2) or better. The worst-case
+time complexity of the subprograms of Containers.Ordered_Maps that take
+a cursor parameter should be O(1).]}]}
 
-AARM Note
-A balanced (red-black) tree for keys has O(log N) worst-case performance. Note
-that a O(N) worst-case implementation (like a list) would be wrong. We do not
-mean to overly constrain implementation strategies here. However, it is
-important for portability that the performance of large containers has roughly
-the same factors on different implementations. If a program is moved to an
-implementation that takes O(N) to find elements, that program could be unusable
-when the maps are large. We allow the extra log N factors because the
-proportionality constant and caching effects are likely to be larger than the
-log factor, and we don't want to discourage innovative implementations.
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[A balanced (red-black) tree for keys has
+  O(log @i<N>) worst-case performance. Note that a O(@i<N>) worst-case
+  implementation (like a list) would be wrong.]}
+@end{ImplNote}
 
-**** The text above here still needs to be formatted ****
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We do not mean to overly constrain implementation
+  strategies here. However, it is important for portability that the
+  performance of large containers has roughly the same factors on different
+  implementations. If a program is moved to an implementation that takes O(@i<N>)
+  to find elements, that program could be unusable when the maps are large. We
+  allow the extra log @i<N> factors because the proportionality constant and
+  caching effects are likely to be larger than the log factor, and we don't
+  want to discourage innovative implementations.]}
+@end{Reason}
+
+@end{ImplAdvice}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4366,7 +4509,7 @@ copying of internal data structures.]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Usually that can be accomplishing simply by
+  @ChgAdded{Version=[2],Text=[Usually that can be accomplished simply by
   moving the pointer(s) to the internal data structures from the Source
   container to the Target container.]}
 @end{ImplNote}
@@ -5801,8 +5944,8 @@ worse than O(N**2).]}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In other words, we're requiring the use of
-  a sorting algorithm better than O(N**2), such as Quicksort. No Bubble sorts
-  allowed!]}
+  a sorting algorithm better than O(@i<N>**2), such as Quicksort. No bubble
+  sorts allowed!]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

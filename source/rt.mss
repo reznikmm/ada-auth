@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2005/01/30 06:44:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2005/02/01 06:46:27 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/01/30 06:44:20 $}
+@Comment{$Date: 2005/02/01 06:46:27 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1240,11 +1240,13 @@ On a multiprocessor, an upper bound in seconds,
 on the time that the completion of an aborted task can be delayed beyond
 the point that it is required for a single processor.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 An upper bound on the execution time of an
 @nt{asynchronous_select}, in processor clock cycles. This is measured
 between a point immediately before a task
 T1 executes a protected operation Pr.Set that makes the @nt{condition}
-of an @nt{entry_barrier} Pr.Wait true, and the point where task T2 resumes
+of an @nt{entry_barrier} Pr.Wait @Chg{Version=[2],
+New=[True],Old=[true]}, and the point where task T2 resumes
 execution immediately after an entry call to Pr.Wait in an
 @nt{asynchronous_select}. T1 preempts T2 while
 T2 is executing the abortable part, and then blocks itself so that
@@ -1949,8 +1951,11 @@ limited record type.@end{implnote}
 
 @begin{RunTime}
 
-An object of the type Suspension_Object has two visible states: true and
-false. Upon initialization, its value is set to false.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+An object of the type Suspension_Object has two visible states:
+@Chg{Version=[2],New=[True],Old=[true]} and
+@Chg{Version=[2],New=[False],Old=[false]}. Upon initialization,
+its value is set to @Chg{Version=[2],New=[False],Old=[false]}.
 @begin{Discussion}
 This object is assumed to be private to the declaring task, i.e. only that
 task will call Suspend_Until_True on this object, and the count of callers is
@@ -1958,18 +1963,22 @@ at most one. Other tasks can, of course, change and query the state of this
 object.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The operations Set_True and Set_False are atomic with respect to each other
-and with respect to Suspend_Until_True; they set the state to true and false
-respectively.
+and with respect to Suspend_Until_True; they set the state to
+@Chg{Version=[2],New=[True],Old=[true]} and
+@Chg{Version=[2],New=[False],Old=[false]} respectively.
 
 Current_State returns the current state of the object.
 @begin{Discussion}
 This state can change immediately after the operation returns.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The procedure Suspend_Until_True blocks the calling task until the
-state of the object S is true; at that point the task becomes ready
-and the state of the object becomes false.
+state of the object S is @Chg{Version=[2],New=[True],Old=[true]}; at that
+point the task becomes ready
+and the state of the object becomes @Chg{Version=[2],New=[False],Old=[false]}.
 
 @PDefn2{Term=[potentially blocking operation],Sec=(Suspend_Until_True)}
 @PDefn2{Term=[blocking, potentially],Sec=(Suspend_Until_True)}

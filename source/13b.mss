@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:15:04 $}
+@Comment{$Date: 2005/02/01 06:46:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @LabeledClause{The Package System}
 
@@ -1288,7 +1288,7 @@ However, in some cases the implementation may choose to associate
 more than one memory block with a given pool element.
 @end{Discussion}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Leading@;For @PrefixType{every access subtype S},
 the following @Chg{New=[representation ],Old=[]}attributes are defined:
 @begin{Description}
@@ -1355,7 +1355,7 @@ specified Allocate procedure.
 Note that the implementation does not turn other exceptions into
 Storage_Error.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0111]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0111],ARef=[AI95-00103-01]}
 @ChgAdded{Version=[1],Text=[If D (the designated type of T) includes
 subcomponents of other access types, they will be allocated from the storage
 pools for those types, even if those @nt{allocator}s are executed as part of
@@ -1658,7 +1658,7 @@ operations. For example, presuming that Mark_Release_Pool_Type has
 two additional operations, Mark and Release,
 the following is a possible use:
 @begin{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0041]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0041],ARef=[AI95-00066-01]}
 @key[type] Mark_Release_Pool_Type
    (Pool_Size : Storage_Elements.Storage_Count;
     Block_Size : Storage_Elements.Storage_Count)
@@ -1700,6 +1700,14 @@ the different name.
 RM83 states the erroneousness of reading or updating deallocated
 objects incorrectly by missing various cases.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
+  these are representation attributes.]}
+@end{DiffWord95}
+
+
 
 @LabeledSubClause{The Max_Size_In_Storage_Elements Attribute}
 
@@ -2096,22 +2104,22 @@ a partition shall obey the restriction
 if a @nt{pragma} Restrictions applies to any compilation unit
 included in the partition.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @ChgAdded{Version=[1],Type=[Leading],Text=[For the purpose of checking whether
 a partition contains constructs that violate any restriction (unless specified
 otherwise for a particular restriction):]}
 
 @begin{itemize}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @ChgAdded{Version=[1],Text=[Generic instances are logically expanded at the
 point of instantiation;]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @ChgAdded{Version=[1],Text=[If an object of a type is declared or allocated and
 not explicitly initialized, then all expressions appearing in the definition
 for the type and any of its ancestors are presumed to be used;]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @ChgAdded{Version=[1],Text=[A @nt{default_expression} for a formal parameter or
 a generic formal object is considered to be used if and only if the
 corresponding actual parameter is not provided in a given call or
@@ -2133,12 +2141,12 @@ Alternatively, the implementation is allowed to declare violations of
 the restrictions to be erroneous, and not enforce them at all.
 @end{Ramification}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @ChgAdded{Version=[1],Text=[An implementation is permitted to omit restriction
 checks for code that is recognized at compile time to be unreachable and for
 which no code is generated.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0043]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0043],ARef=[AI95-00190-01]}
 @ChgAdded{Version=[1],Text=[Whenever enforcement of a restriction is not
 required prior to execution, an implementation may nevertheless enforce the
 restriction prior to execution of a partition to which the restriction applies,
@@ -2170,6 +2178,22 @@ use of the more efficient and safe one.
 @Defn{extensions to Ada 83}
 Pragma Restrictions is new to Ada 95.
 @end{Extend83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the wording so that
+  restrictions are checked inside of generic instantiations and in default
+  expressions. Since not making these checks would violate the purpose of
+  restrictions, we are not documenting this as an incompatibility.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0043],ARef=[AI95-00190-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added a permission that
+  restrictions can be enforced at compile-time. While this is technically
+  incompatible, documenting it as such would be unnecessarily alarming -
+  there should not be any programs depending on the runtime failure of
+  restrictions.]}
+@end{DiffWord95}
+
 
 @LabeledClause{Streams}
 
@@ -2215,7 +2239,7 @@ or can call the Read and Write attributes of other types.)
 
     @key[type] @AdaTypeDefn{Root_Stream_Type} @key[is] @key[abstract tagged limited private];
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0044]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0044],ARef=[AI95-00181-01]}
     @key[type] @AdaTypeDefn{Stream_Element} @key[is] @key[mod] @RI{implementation-defined};
     @key[type] @AdaTypeDefn{Stream_Element_Offset} @key[is] @key[range] @RI{implementation-defined};
     @key[subtype] @AdaDefn{Stream_Element_Count} @key[is]
@@ -2246,7 +2270,7 @@ The Write operation appends Item to the specified stream.
 
 @end{StaticSem}
 @begin{ImplPerm}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0044]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0044],ARef=[AI95-00181-01]}
 @ChgAdded{Version=[1],Text=[If Stream_Element'Size is not a multiple of
 System.Storage_Unit, then the components of Stream_@!Element_@!Array need
 not be aliased.]}
@@ -2265,10 +2289,17 @@ See @RefSec{The Package Streams.Stream_IO} for an example of extending
 type Root_Stream_Type.
 @end{Notes}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0044],ARef=[AI95-00181-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Stream elements are aliased
+  presuming that makes sense.]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Stream-Oriented Attributes}
 
 @begin{Intro}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 The @Chg{New=[operational attributes ],Old=[]}Write, Read, Output, and
 Input @Chg{New=[],Old=[attributes ]}convert values to a
 stream of elements and reconstruct values from a stream.
@@ -2301,14 +2332,14 @@ the following attributes are defined.
 @EndPrefixType{}
 
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgAdded{Version=[1],Text=[For untagged derived types, the Write and Read
 attributes of the parent type are inherited as specified in
 @RefSecNum(Operational and Representation Items); otherwise, the default
 implementations of these attributes are used. The default implementations of
 Write and Read attributes execute as follows:]}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 For elementary types, the representation in terms of stream elements
 is implementation defined.
 For composite types, the Write or Read attribute for each component is
@@ -2339,7 +2370,7 @@ elementary types in terms of stream elements.}
   the 'Input function, but they are not written by 'Write nor read by 'Read.
   A tag is like a discriminant without a default.
 
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[1],Text=[For limited type extensions, we must have a
   definition of 'Read and 'Write if the parent type has one, as it is possible
   to make a dispatching call through the attributes. The rule is designed to
@@ -2437,7 +2468,7 @@ S'Output to determine how much to read.>}
 @end{Description}
 @EndPrefixType{}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @Chg{New=[@Leading@;For untagged derived types, the Output and Input attributes
 of the parent type are inherited as specified in @RefSecNum(Operational and Representation Items);
 otherwise, the default implementations of these attributes are used. The
@@ -2511,13 +2542,13 @@ is not a value of its subtype and this error is not detected,
 the component has an abnormal value, and erroneous execution
 can result (see @RefSecNum{Data Validity}).
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0045]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0045],ARef=[AI95-00132-01]}
 @ChgAdded{Version=[1],Text=[@Defn2{Term=[End_Error],Sec=(raised by failure of run-time check)}
 In the default implementation of Read and Input for a type, End_Error
 is raised if the end of the stream is reached before the reading of a value of
 the type is completed.]}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Write for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Input for a type)}
@@ -2542,7 +2573,7 @@ The same rule applies to the result of the Input function.
   This is to simplify implementation.
 @end{Reason}
 @begin{Discussion}
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[1],Text=[@lquotes@;Specified@rquotes includes inherited
   attributes, and default implementations are never inherited. So, for untagged
   limited types, the second part of the @nt{attribute_reference} rule has the
@@ -2554,7 +2585,7 @@ The same rule applies to the result of the Input function.
 @end{StaticSem}
 
 @begin{ImplReq}
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040]}
+  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[1],Text=[For every subtype @i<S> of a language-defined
   nonlimited specific type @i<T>, the output generated by S'Output or S'Write
   shall be readable by S'Input or S'Read, respectively. This rule applies
@@ -2621,6 +2652,32 @@ class-wide types descended from S.
 @end{Example}
 @end{Discussion}
 @end{Examples}
+
+@begin{Inconsistent95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  @b<Corrigendum:> Clarified how the default
+  implementation for stream attributes is determined (eliminating conflicting
+  language). The new wording provides that attributes for type extensions are
+  created by composing the parent's attribute with those for the extension
+  components if any. If a program was written assuming that the extension
+  components were not included in the stream (as in original Ada 95), it
+  would fail to work in the language as corrected by the Corrigendum.]}
+@end{Inconsistent95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
+  these are operational attributes.]}
+
+  @ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0045],ARef=[AI95-00132-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that End_Error
+  is raised by the default implementation of Read and Input if the end of
+  the stream is reached. (The result could have been abnormal without this
+  clarification, thus this is not an inconsistency, as the programmer could
+  not have depended on the previous behavior.)]}
+@end{DiffWord95}
+
 
 @LabeledClause{Freezing Rules}
 
@@ -2864,7 +2921,7 @@ freezing of each entity declared before it within the same
   at the containing @nt{declarative_part}.
 @end{Reason}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @Leading@RootDefn2{Term=[freezing], Sec=(entity caused by a construct)}
 A construct that (explicitly or implicitly) references an
 entity can cause the @i(freezing) of the entity, as defined by
@@ -2910,7 +2967,7 @@ The declaration of a private
 @end{Ramification}
 @end{Itemize}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @PDefn2{Term=[freezing], Sec=(by an expression)}
 A static expression causes freezing where it occurs.
 @Chg{New=[@PDefn2{Term=[freezing], Sec=(by an object name)}
@@ -2920,13 +2977,13 @@ occurs, unless the @Chg{New=[name or ],Old=[]}expression is part of a
 of a component's @nt<constraint>, in which case,
 the freezing occurs later as part of another construct.
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @ChgAdded{Version=[1],Text=[@PDefn2{Term=[freezing], Sec=(by an implicit call)}
 An implicit call freezes the same entities that would be frozen by an
 explicit call. This is true even if the implicit call is removed via
 implementation permissions.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @ChgAdded{Version=[1],Text=[@PDefn2{Term=[freezing], Sec=(subtype caused by an implicit conversion)}
 If an expression is implicitly converted to a type or subtype @i(T),
 then at the place where the expression causes freezing, @i(T) is frozen.]}
@@ -2994,13 +3051,13 @@ access types; an @nt{object_declaration} other than a
 @nt{deferred_constant_declaration} causes freezing of the nominal
 subtype, plus all component junk.
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0046]}
+@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @ChgDeleted{Version=[1],Text=[@nt{Implicit_dereference}s are covered by
 @nt{expression}.]}
 @Comment{This statement is just plain wrong.}
 @end{Ramification}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @ChgAdded{Version=[1],Type=[Leading],Text=[@PDefn2{Term=[freezing], Sec=(subtype caused by an implicit dereference)}
 At the place where an @nt{implicit_dereference} causes freezing,
 the nominal subtype associated with the @nt{implicit_dereference} is frozen.]}
@@ -3125,7 +3182,7 @@ old P (which is arguably confusing).
 before the constant is frozen
 (see @RefSecNum{Deferred Constants}).]
 
-@Leading@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@Leading@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Chg{New=[An operational or],Old=[A]} representation item that
 directly specifies an aspect of an entity shall appear before the entity is
 frozen (see @RefSecNum{Operational and Representation Items}).
@@ -3141,7 +3198,7 @@ appearently 6.0 is different.
 @ChgRef{Version=[1],Kind=[Deleted]}
 @ChgDeleted{Version=[1],Text=[Old @b{Change}.]}}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 From RM83-13.1(7). The wording here forbids freezing
 within the @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]}
 itself, which was not true of the Ada 83 wording.
@@ -3229,7 +3286,7 @@ accessing the size dope for a private type before it is initialized.
 @RefSecNum{Pragmas} overrides the freezing rules in the case of
 unrecognized @nt{pragma}s.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Chg{New=[An @nt{aspect_clause}],Old=[A @nt{representation_clause}]} for
 an entity should most certainly @i{not} be a freezing point for the entity.
 @end{ImplNote}
@@ -3342,3 +3399,19 @@ There are more cases in Ada 95,
 because the @nt{attribute_representation_clause} has been generalized.
 @end{Itemize}
 @end{DiffWord83}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0046],ARef=[AI95-00106-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Various freezing rules were added to fix holes in the rules.
+  Implicit calls are now freezing, which make make some representation
+  clauses illegal in Ada 2005 which were legal (but dubious) in Ada 95.]}
+@end{Incompatible95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
+  that both operational and representation attributes must be specified before
+  the type is frozen.]}
+@end{DiffWord95}
+

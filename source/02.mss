@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/01/30 06:44:18 $}
+@Comment{$Date: 2005/02/01 06:46:20 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -589,11 +589,14 @@ The meaning of a program depends only on the particular sequences of
 lexical elements that form its @nt{compilation}s, excluding
 @nt{comment}s.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 The text of a @nt<compilation> is divided into @Defn{line}@i{lines}.
 @Defn{end of a line}
 In general, the representation for an end of line is implementation defined.
 However, a sequence of one or more @nt<format_effector>s other
-than character tabulation (HT) signifies at least one end of line.
+than @Chg{Version=[2],New=[the character whose code position
+is 16#09# (CHARACTER TABULATION)],Old=[character tabulation (HT)]}
+signifies at least one end of line.
 @ImplDef{The representation for an end of line.}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -613,7 +616,9 @@ A @Chg{Version=[2],New=[@nt{separator_space}],Old=[space character]} is
 a separator except within a @nt{comment}, a @nt{string_literal},
 or a @nt{character_literal}.
 
-Character @Chg{Version=[2],New=[Tabulation],Old=[tabulation (HT)]} is a
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Chg{Version=[2],New=[The character whose code position
+is 16#09# (CHARACTER TABULATION)],Old=[Character tabulation (HT)]} is a
 separator except within a @nt{comment}.
 
 The end of a line is always a separator.
@@ -626,6 +631,7 @@ At least one separator is required between an @nt{identifier},
 a reserved word, or a @nt{numeric_literal} and an adjacent
 @nt{identifier}, reserved word, or @nt{numeric_literal}.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Defn{delimiter}
 A @i{delimiter} is either one of the following@Chg{Version=[2],New=[],Old=[ special]}
 characters
@@ -777,9 +783,9 @@ corresponding upper and lower case letters are considered the same.]}
 are eliminated.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[Full case folding, as defined by documents
-referenced in the note in section 1 of ISO/IEC 10646:2003, is applied to
-obtain the uppercase version of each character.
+@ChgAdded{Version=[2],Text=[Locale-independent full case folding, as defined
+by documents  referenced in the note in section 1 of ISO/IEC 10646:2003, is
+applied to obtain the uppercase version of each character.
 @Defn{case insensitive}]}
 @end{Itemize}
 @begin(Discussion)
@@ -799,10 +805,22 @@ rules for @nt<identifier>s@Redundant[,
 to accommodate local conventions].
 @end{ImplPerm}
 
+@begin(Discussion)
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgDeleted{Version=[2],Text=[For instance, in most languages, the uppercase
+  equivalent of 'i' is LATIN CAPITAL LETTER I, an uppercase letter without a
+  dot above. In Turkish on the other hand, dotless-i and dotted-i are two
+  distinct letters, so the uppercase equivalent of 'i' is LATIN CAPITAL LETTER
+  I WITH DOT ABOVE. An implementation targeting the Turkish market is allowed
+  (in fact, expected) to provide a nonstandard mode where the case folding is
+  appropriate for Turkish. Lithuanian and Azeri are two other languages that
+  present similar idiosyncrasies.]}
+@end{Discussion}
+
 @begin{Notes}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@nt{Identifier}s differing only in the use of
-corresponding upper and lower case letters are considered the same.]}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@nt{Identifier}s differing only in the use of
+  corresponding upper and lower case letters are considered the same.]}
 @end{Notes}
 
 @begin{Examples}
@@ -877,6 +895,10 @@ decimal notation (that is, the base is ten).
 @Syn{lhs=<numeral>,rhs="@Syn2{digit} {[@Syn2{underline}] @Syn2{digit}}"}
 
 @Syn{lhs=<exponent>,rhs="E [+] @Syn2{numeral} | E @en@; @Syn2{numeral}"}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<digit>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9>,Old=<>}"}
 
 @begin{SyntaxText}
 An @nt{exponent} for an integer literal shall not have a minus sign.
@@ -1197,6 +1219,13 @@ the identifier following the reserved word @key{pragma}.
 The @nt{name} or @nt{expression} of a @nt{pragma_argument_association}
 is a @i{pragma argument}.
 
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
+  @ChgAdded{Version=[2],Text=[For compatibility for Ada 83, the name of a
+  pragma may also be @lquotes@key{interface}@rquotes@;, which is not an
+  identifier. See @RefSecNum{Pragma Interface}.]}
+@end{Honest}
+
 @Defn{identifier specific to a pragma}
 @Defn{pragma, identifier specific to}
 An @i{identifier specific to a pragma} is
@@ -1352,6 +1381,9 @@ that is, if the implementation-defined pragmas are removed from a
 working program,
 the program should still be legal, and should still have the same
 semantics.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Implementation-defined pragmas should have no semantic effect
+for error-free programs.]}]}
 @begin{Ramification}
 Note that @lquotes@;semantics@rquotes@; is not the same as @lquotes@;effect;@rquotes@;
 as explained in
@@ -1376,6 +1408,10 @@ program legal, except as follows:
   A @nt<pragma> used to configure the environment
   by adding, removing, or replacing @nt{library_item}s.
 @end(Itemize)
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Implementation-defined pragmas should not make an illegal program
+legal, unless they complete a declaration or configure the @nt{library_item}s
+in an environment.]}]}
 @begin(Ramification)
 For example, it is OK to support Interface,
 System_Name, Storage_Unit, and Memory_Size @nt{pragma}s

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/01/27 06:13:00 $}
+@Comment{$Date: 2005/02/01 06:46:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -3350,7 +3350,8 @@ closed file.]}
 
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
-  @ChgAdded{Version=[2],Text=[The description of the file control
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  The description of the file control
   subprograms was corrected so that they do not require truncation of the
   external file - a stream file is not a sequential file. Ada 95 that
   expects truncation of the stream file may not work under Ada 2005.

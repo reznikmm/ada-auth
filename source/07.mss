@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2004/12/11 06:27:55 $}
+@Comment{$Date: 2005/02/01 06:46:22 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -415,7 +415,14 @@ generic formal private extension is also a partial view.
   confused with the view provided @i(from) the private part, namely the
   full view.
 @end{Reason}
-
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00326-01]}
+  @ChgAdded{Version=[2],Text=[Full view is now defined in
+  @RefSec{Type Declarations}, as all types now have them. This definition
+  isn't marked as redundant only because we didn't want to have to add
+  and delete the sentence in question (making a phony change), and that
+  would be necessary to add redunant brackets.]}
+@end{TheProof}
 
 @Redundant[A type shall be completely defined before it is frozen
 (see @RefSecNum{Completions of Declarations} and
