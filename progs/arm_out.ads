@@ -13,7 +13,7 @@ package ARM_Output is
     -- determines the details of the text.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -86,6 +86,7 @@ package ARM_Output is
     --			avoid circularities.
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
     -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
+    --  1/24/05 - RLB - Added Inner_Indented.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -138,6 +139,7 @@ package ARM_Output is
 	Indented_Examples, Small_Indented_Examples,
 	Syntax_Indented, Code_Indented,
 	Small_Code_Indented, Indented, Small_Indented,
+	Inner_Indented, Small_Inner_Indented,
 	Bulleted, Nested_Bulleted, Nested_X2_Bulleted,
         Small_Bulleted, Small_Nested_Bulleted, Small_Nested_X2_Bulleted,
 	Indented_Bulleted, Indented_Nested_Bulleted,
@@ -173,6 +175,10 @@ package ARM_Output is
 	-- Indented paragraphs are indented three units, and are in the normal
 	--     font.
 	-- Small_Indented paragraphs are indented five units, and are in a
+	--     smaller font.
+	-- Inner_Indented paragraphs are indented four units, and are in the
+	--     normal font.
+	-- Small_Inner_Indented paragraphs are indented six units, and are in a
 	--     smaller font.
 	-- Bulleted paragraphs are indented one unit, with a right indent of
 	--     one unit, and each paragraph is preceeded by a bullet (a solid circle).

@@ -13,7 +13,7 @@ package body ARM_Text is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -87,6 +87,7 @@ package body ARM_Text is
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
     -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
+    --  1/24/05 - RLB - Added Inner_Indented.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -323,6 +324,12 @@ package body ARM_Text is
 	    when ARM_Output.Small_Indented => Output_Object.Indent_Amount := 18;
                 Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		Output_Object.Char_Count := 12;
+	    when ARM_Output.Inner_Indented => Output_Object.Indent_Amount := 18;
+                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
+		Output_Object.Char_Count := 8;
+	    when ARM_Output.Small_Inner_Indented => Output_Object.Indent_Amount := 22;
+                Ada.Text_IO.Put (Output_Object.Output_File, "                ");
+		Output_Object.Char_Count := 12;
 	    when ARM_Output.Bulleted => Output_Object.Indent_Amount := 6;
 		-- No prefix in text mode.
 	    when ARM_Output.Nested_Bulleted => Output_Object.Indent_Amount := 10;
@@ -504,8 +511,9 @@ package body ARM_Text is
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
 		 ARM_Output.Syntax_Indented |
-		 ARM_Output.Indented |
-		 ARM_Output.Small_Indented | ARM_Output.Code_Indented |
+		 ARM_Output.Indented | ARM_Output.Small_Indented |
+		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
+		 ARM_Output.Code_Indented |
 		 ARM_Output.Small_Code_Indented =>
 		Output_Object.Tab_Stops := Tab_Stops;
 		    -- We'll expand proportional stops here (text characters

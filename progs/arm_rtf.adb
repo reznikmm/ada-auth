@@ -16,7 +16,7 @@ package body ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -100,6 +100,7 @@ package body ARM_RTF is
     -- 12/15/04 - RLB - Added Pascal's workaround to formatting bugs in
     --			Word 2000/XP/2003.
     -- 12/16/04 - RLB - Removed it after it proved not to help.
+    --  1/24/05 - RLB - Added Inner_Indent.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -797,6 +798,22 @@ package body ARM_RTF is
 		       Style_String =>
 			 "\s47\widctlpar\adjustright \li1800\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx1080 \snext47 ");
 			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Inner_Indented),
+		       Font_Size => 18,
+		       Style_Indent => 1440,
+		       Style_Before => 0,
+		       Style_After => 120,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s48\widctlpar\adjustright \li1440\fs18\f0\cgrid\sa120\qj\sl-220\slmult0 \snext48 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Inner_Indented),
+		       Font_Size => 15,
+		       Style_Indent => 2160,
+		       Style_Before => 0,
+		       Style_After => 90,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s49\widctlpar\adjustright \li2160\fs15\f0\cgrid\sa90\qj\sl-180\slmult0 \snext49 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -806,7 +823,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s48\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s50\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs20\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 17,
@@ -815,7 +832,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s49\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s51\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 17,
@@ -824,7 +841,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s50\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s52\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1278,6 +1295,22 @@ package body ARM_RTF is
 		       Style_String =>
 			 "\s47\widctlpar\adjustright \li1800\fi-230\ri360\fs22\f0\cgrid\sa120\qj\sl-240\slmult0\tx1080 \snext47 ");
 			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Inner_Indented),
+		       Font_Size => 22,
+		       Style_Indent => 1440,
+		       Style_Before => 0,
+		       Style_After => 120,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s48\widctlpar\adjustright \li1440\fs22\f0\cgrid\sa120\qj\sl-260\slmult0 \snext48 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Inner_Indented),
+		       Font_Size => 18,
+		       Style_Indent => 21600,
+		       Style_Before => 0,
+		       Style_After => 90,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s49\widctlpar\adjustright \li1800\fs18\f0\cgrid\sa90\qj\sl-200\slmult0 \snext49 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -1287,7 +1320,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s48\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s50\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs24\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 22,
@@ -1296,7 +1329,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s49\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s51\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 22,
@@ -1305,7 +1338,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s50\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s52\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1412,9 +1445,13 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Nested X2 Bulleted;}");
         Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested X2 Bulleted;}");
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented_Nested_Bulleted));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Nested Bulleted;}");
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Inner_Indented));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Inner Indented;}");
         if Output_Object.Big_Files then
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented_Nested_Bulleted));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Nested Bulleted;}");
+	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Inner_Indented));
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Inner Indented;}");
 	    -- Define the TOC styles:
 	    Write_Style (Output_Object.Output_File, TOC_1_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 1;}");
@@ -1423,8 +1460,8 @@ package body ARM_RTF is
 	    Write_Style (Output_Object.Output_File, TOC_3_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 3;}}");
 	else
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented_Nested_Bulleted));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Nested Bulleted;}}");
+	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Inner_Indented));
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Inner Indented;}}");
 	end if;
             -- \additive means that the style inherits from the previous style.
 	    -- \basedon defines the style that the style was inherited from.
@@ -1714,8 +1751,9 @@ package body ARM_RTF is
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
 		 ARM_Output.Syntax_Indented |
-		 ARM_Output.Indented |
-		 ARM_Output.Small_Indented | ARM_Output.Code_Indented |
+		 ARM_Output.Indented | ARM_Output.Small_Indented |
+		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
+		 ARM_Output.Code_Indented |
 		 ARM_Output.Small_Code_Indented =>
 		if Output_Object.Tab_Stops.Number /= 0 then
 		    if (Output_Object.Tab_Stops.Number * 8) + Output_Object.Char_Count >
@@ -1859,6 +1897,7 @@ package body ARM_RTF is
 		 ARM_Output.Small_Examples | ARM_Output.Indented_Examples |
 		 ARM_Output.Small_Indented_Examples | ARM_Output.Syntax_Indented |
 		 ARM_Output.Indented | ARM_Output.Small_Indented |
+		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
 		 ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented =>
 		Write_Style_for_Paragraph (Output_Object.Output_File,
 		    Paragraph_Info(Format),

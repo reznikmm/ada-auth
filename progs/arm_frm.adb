@@ -171,6 +171,7 @@ package body ARM_Format is
     --		- RLB - Added ChgDocReq and ChgImplAdvice.
     --		- RLB - Added AddedDocReqList and AddedImplAdviceList.
     --  1/20/05 - RLB - Added debugging for stack overflows.
+    --  1/24/05 - RLB - Added Inner_Indented.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -2175,39 +2176,55 @@ Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Notes paragraph, line " & 
 				-- Display is never bulleted, so we can tell between
 				-- the original format, and ourselves.
 				if Format_Object.Format = ARM_Output.Indented_Bulleted then
-				    Format_Object.Format := ARM_Output.Indented;
-				        -- %%%% Not Indented enough!
+				    Format_Object.Format := ARM_Output.Inner_Indented;
+				        -- %%%% No additional indent and no right indent.
 Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Indented_Nested_Bulleted then
-				    Format_Object.Format := ARM_Output.Indented;
-				        -- %%%% Not Indented enough!
+				    Format_Object.Format := ARM_Output.Inner_Indented;
+				        -- %%%% No additional indent and no right indent.
 Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Code_Indented_Bulleted then
-				    Format_Object.Format := ARM_Output.Indented;
-				        -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				    Format_Object.Format := ARM_Output.Inner_Indented;
 				elsif Format_Object.Format = ARM_Output.Syntax_Indented_Bulleted then
 				    Format_Object.Format := ARM_Output.Indented;
 				elsif Format_Object.Format = ARM_Output.Bulleted then
 				    Format_Object.Format := ARM_Output.Code_Indented;
+					-- No right indent, but usually Display is
+					-- not used for wrapping text. So we ignore that.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Small_Bulleted then
 				    Format_Object.Format := ARM_Output.Small_Code_Indented;
+					-- No right indent, but usually Display is
+					-- not used for wrapping text. So we ignore that.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Nested_Bulleted then
 				    Format_Object.Format := ARM_Output.Indented;
-				elsif Format_Object.Format = ARM_Output.Nested_Bulleted then
-				    Format_Object.Format := ARM_Output.Indented;
-				        -- %%%% Not Indented enough!
-Ada.Text_IO.Put_Line ("%% Oops, Display in Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+				elsif Format_Object.Format = ARM_Output.Nested_X2_Bulleted then
+				    Format_Object.Format := ARM_Output.Inner_Indented;
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Code_Indented_Nested_Bulleted then
-				    Format_Object.Format := ARM_Output.Indented;
-				        -- %%%% Not Indented enough!
+				    Format_Object.Format := ARM_Output.Inner_Indented;
+				        -- %%%% No additional indent and no right indent).
 Ada.Text_IO.Put_Line ("%% Oops, Display in Code_Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Small_Nested_Bulleted then
 				    Format_Object.Format := ARM_Output.Small_Indented;
-				elsif Format_Object.Format = ARM_Output.Small_Nested_Bulleted then
-				        -- %%%% Not Indented enough!
-Ada.Text_IO.Put_Line ("%% Oops, Display in Small_Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    Format_Object.Format := ARM_Output.Small_Indented;
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+				elsif Format_Object.Format = ARM_Output.Small_Nested_X2_Bulleted then
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+				    Format_Object.Format := ARM_Output.Small_Inner_Indented;
 				else
 				    null; -- Probably ourselves.
 				end if;
@@ -2217,25 +2234,23 @@ Ada.Text_IO.Put_Line ("%% Oops, Display in Small_Nested_X2_Bulleted paragraph, l
 				-- Display is never hanging, so we can tell between
 				-- the original format, and ourselves.
 				if Format_Object.Format = ARM_Output.Indented_Hanging then
-				    Format_Object.Format := ARM_Output.Indented;
-				        -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				    Format_Object.Format := ARM_Output.Inner_Indented;
 				elsif Format_Object.Format = ARM_Output.Hanging then
-				    Format_Object.Format := ARM_Output.Indented;
-				        -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				    Format_Object.Format := ARM_Output.Inner_Indented;
 				elsif Format_Object.Format = ARM_Output.Hanging_in_Bulleted then
-				    Format_Object.Format := ARM_Output.Indented;
-				        -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				    Format_Object.Format := ARM_Output.Inner_Indented;
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Hanging Bulleted), line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Small_Hanging then
-				    Format_Object.Format := ARM_Output.Small_Indented;
-				        -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				    Format_Object.Format := ARM_Output.Small_Inner_Indented;
 				elsif Format_Object.Format = ARM_Output.Small_Hanging_in_Bulleted then
-				    Format_Object.Format := ARM_Output.Small_Indented;
-				        -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				    Format_Object.Format := ARM_Output.Small_Inner_Indented;
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Small Hanging Bulleted), line " & ARM_Input.Line_String (Input_Object));
 				else
 				    null; -- Probably ourselves.
 				end if;
@@ -2246,12 +2261,28 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 				-- the original format, and ourselves.
 				if Format_Object.Format = ARM_Output.Enumerated then
 				    Format_Object.Format := ARM_Output.Code_Indented;
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Small_Enumerated then
 				    Format_Object.Format := ARM_Output.Small_Code_Indented;
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Nested_Enumerated then
 				    Format_Object.Format := ARM_Output.Indented;
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
 				elsif Format_Object.Format = ARM_Output.Small_Nested_Enumerated then
 				    Format_Object.Format := ARM_Output.Small_Indented;
+					-- No right indent, but usually Display is
+					-- used with hard returns and short lines.
+					-- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
 				else
 				    null; -- Probably ourselves.
 				end if;
@@ -2288,94 +2319,126 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph in Syntax Summary
 				    when ARM_Output.Small_Examples =>
 					Format_Object.Format := ARM_Output.Small_Code_Indented;
 				    when ARM_Output.Indented_Examples =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- %%%% Not Indented enough!
-Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Examples paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Inner_Indented;
+				        -- %%%% No additional indent.
+Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Indented Examples), line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Small_Indented_Examples =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-					    -- %%%% Not Indented enough!
-Ada.Text_IO.Put_Line ("%% Oops, Display in Small_Indented_Examples paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
+				        -- %%%% No additional indent.
+Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Small Indented Examples), line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Syntax_Indented =>
 				        Format_Object.Format := ARM_Output.Code_Indented;
 				    when ARM_Output.Code_Indented =>
 				        Format_Object.Format := ARM_Output.Indented;
 				    when ARM_Output.Small_Code_Indented =>
 				        Format_Object.Format := ARM_Output.Small_Indented;
-				    when ARM_Output.Indented | ARM_Output.Small_Indented =>
+				    when ARM_Output.Indented =>
+				        Format_Object.Format := ARM_Output.Inner_Indented;
+				    when ARM_Output.Small_Indented =>
+				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
+				    when ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented =>
 				        null; -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Inner Indented), line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Bulleted =>
 				        Format_Object.Format := ARM_Output.Code_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Nested_Bulleted =>
 				        Format_Object.Format := ARM_Output.Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Nested_X2_Bulleted =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- %%%% Not Indented enough!
-Ada.Text_IO.Put_Line ("%% Oops, Display in Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Inner_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Indented_Bulleted =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- %%%% Not Indented enough!
+				        Format_Object.Format := ARM_Output.Inner_Indented;
+					    -- %%%% Not indented further and no right indent!
 Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Indented_Nested_Bulleted =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- %%%% Not Indented enough!
+				        Format_Object.Format := ARM_Output.Inner_Indented;
+					    -- %%%% Not Indented enough and no right indent!
 Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Code_Indented_Bulleted =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Inner_Indented;
 				    when ARM_Output.Code_Indented_Nested_Bulleted =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- %%%% Not Indented enough!
-Ada.Text_IO.Put_Line ("%% Oops, Display in Code_Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Inner_Indented;
+				            -- %%%% No additional indent.
+Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Nested Bulleted), line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Syntax_Indented_Bulleted =>
 				        Format_Object.Format := ARM_Output.Indented;
 				    when ARM_Output.Notes_Bulleted =>
 				        Format_Object.Format := ARM_Output.Small_Indented;
 				    when ARM_Output.Notes_Nested_Bulleted =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-					    -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
 				    when ARM_Output.Small_Bulleted =>
 				        Format_Object.Format := ARM_Output.Small_Code_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Small_Nested_Bulleted =>
 				        Format_Object.Format := ARM_Output.Small_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Small_Nested_X2_Bulleted =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-					    -- %%%% Not Indented enough!
-Ada.Text_IO.Put_Line ("%% Oops, Display in Small_Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Hanging =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Inner_Indented;
 				    when ARM_Output.Small_Hanging =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-					    -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
 				    when ARM_Output.Indented_Hanging =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Inner_Indented;
 				    when ARM_Output.Small_Indented_Hanging =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-					    -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
 				    when ARM_Output.Hanging_in_Bulleted =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Inner_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indentation for Display paragraph (Hanging in Bulleted), line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Small_Hanging_in_Bulleted =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-					    -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Input.Line_String (Input_Object));
+				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indentation for Display paragraph (Small Hanging in Bulleted), line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Enumerated =>
 				        Format_Object.Format := ARM_Output.Code_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Small_Enumerated =>
 				        Format_Object.Format := ARM_Output.Small_Code_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Nested_Enumerated =>
 				        Format_Object.Format := ARM_Output.Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for in Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Small_Nested_Enumerated =>
 				        Format_Object.Format := ARM_Output.Small_Indented;
+					    -- No right indent, but usually Display is
+					    -- used with hard returns and short lines.
+					    -- So we ignore the right indent.
+--Ada.Text_IO.Put_Line ("%% No right indent for Display in Small Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
 				end case;
 			    end if;
 			    Format_Object.No_Breaks := True;

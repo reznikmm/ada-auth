@@ -15,7 +15,7 @@ package body ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2003, 2004  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2003, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -111,6 +111,7 @@ package body ARM_HTML is
     -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
     -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
     -- 12/15/04 - RLB - Added wider columns.
+    --  1/24/05 - RLB - Added Inner_Indented.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -249,6 +250,22 @@ package body ARM_HTML is
 		 Size => -1,
 		 Font => ARM_Output.Roman,
 		 Indent => 5,
+		 Right_Indent => 0,
+		 Before => 0,
+		 After => 6),
+	    ARM_Output.Inner_Indented =>
+		(Tag  => DIV,
+		 Size => 0,
+		 Font => ARM_Output.Roman,
+		 Indent => 4,
+		 Right_Indent => 0,
+		 Before => 0,
+		 After => 6),
+	    ARM_Output.Small_Inner_Indented =>
+		(Tag  => DIV,
+		 Size => -1,
+		 Font => ARM_Output.Roman,
+		 Indent => 6,
 		 Right_Indent => 0,
 		 Before => 0,
 		 After => 6),
@@ -750,9 +767,11 @@ package body ARM_HTML is
 	    Make_Style ("NotesHeader", ARM_Output.Notes_Header);
 	    Make_Style ("SyntaxIndented", ARM_Output.Syntax_Indented);
 	    Make_Style ("Indented", ARM_Output.Indented);
-	    Make_Style ("CodeIndented", ARM_Output.Code_Indented);
 	    Make_Style ("SmallIndented", ARM_Output.Small_Indented);
+	    Make_Style ("CodeIndented", ARM_Output.Code_Indented);
 	    Make_Style ("SmallCodeIndented", ARM_Output.Small_Code_Indented);
+	    Make_Style ("InnerIndented", ARM_Output.Inner_Indented);
+	    Make_Style ("SmallInnerIndented", ARM_Output.Small_Inner_Indented);
 	    Make_Style ("Examples", ARM_Output.Examples);
 	    Make_Style ("SmallExamples", ARM_Output.Small_Examples);
 	    Make_Style ("IndentedExamples", ARM_Output.Indented_Examples);
@@ -827,8 +846,10 @@ package body ARM_HTML is
 	    Make_Style ("NotesHeader", ARM_Output.Notes_Header);
 	    Make_Style ("SyntaxIndented", ARM_Output.Syntax_Indented);
 	    Make_Style ("Indented", ARM_Output.Indented);
-	    Make_Style ("CodeIndented", ARM_Output.Code_Indented);
 	    Make_Style ("SmallIndented", ARM_Output.Small_Indented);
+	    Make_Style ("InnerIndented", ARM_Output.Inner_Indented);
+	    Make_Style ("SmallInnerIndented", ARM_Output.Small_Inner_Indented);
+	    Make_Style ("CodeIndented", ARM_Output.Code_Indented);
 	    Make_Style ("SmallCodeIndented", ARM_Output.Small_Code_Indented);
 	    Make_Style ("Examples", ARM_Output.Examples);
 	    Make_Style ("SmallExamples", ARM_Output.Small_Examples);
@@ -1384,8 +1405,9 @@ package body ARM_HTML is
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
 		 ARM_Output.Syntax_Indented |
-		 ARM_Output.Indented |
-		 ARM_Output.Small_Indented | ARM_Output.Code_Indented |
+		 ARM_Output.Indented | ARM_Output.Small_Indented |
+		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
+		 ARM_Output.Code_Indented |
 		 ARM_Output.Small_Code_Indented =>
 		Output_Object.Tab_Stops := Tab_Stops;
 		-- No tabs in HTML; we'll emulate them for fixed fonts.
@@ -1505,6 +1527,12 @@ package body ARM_HTML is
 	        when ARM_Output.Small_Indented =>
 	            Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><UL><FONT SIZE=-1>");
 	            Output_Object.Char_Count := 34;
+	        when ARM_Output.Inner_Indented =>
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL>");
+		    Output_Object.Char_Count := 16;
+	        when ARM_Output.Small_Inner_Indented =>
+	            Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><UL><UL><FONT SIZE=-1>");
+	            Output_Object.Char_Count := 38;
 	        when ARM_Output.Bulleted =>
 		    if No_Prefix then
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "<UL>");
@@ -1771,6 +1799,10 @@ package body ARM_HTML is
 		    Put_Style ("Indented");
 	        when ARM_Output.Small_Indented =>
 		    Put_Style ("SmallIndented");
+	        when ARM_Output.Inner_Indented =>
+		    Put_Style ("InnerIndented");
+	        when ARM_Output.Small_Inner_Indented =>
+		    Put_Style ("SmallInnerIndented");
 	        when ARM_Output.Bulleted =>
 		    Put_Style ("Bulleted", Include_Compatibility => False);
 		    if No_Prefix then
@@ -2073,6 +2105,10 @@ package body ARM_HTML is
 		    Put_Style ("Indented");
 	        when ARM_Output.Small_Indented =>
 		    Put_Style ("SmallIndented");
+	        when ARM_Output.Inner_Indented =>
+		    Put_Style ("InnerIndented");
+	        when ARM_Output.Small_Inner_Indented =>
+		    Put_Style ("SmallInnerIndented");
 	        when ARM_Output.Bulleted =>
 		    Put_Style ("Bulleted");
 		    if No_Prefix then
@@ -2400,6 +2436,12 @@ package body ARM_HTML is
 	        when ARM_Output.Small_Indented =>
 	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        when ARM_Output.Inner_Indented =>
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</UL></UL></UL></UL>");
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        when ARM_Output.Small_Inner_Indented =>
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL></UL>");
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Bulleted =>
 		    if Output_Object.Had_Prefix then
 	    	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</LI></UL>");
@@ -2533,7 +2575,8 @@ package body ARM_HTML is
 	             ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
 	             ARM_Output.Syntax_Indented |
 	             ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented |
-	             ARM_Output.Indented | ARM_Output.Small_Indented =>
+	             ARM_Output.Indented | ARM_Output.Small_Indented |
+	             ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented =>
 		    Put_End_Style (Output_Object.Paragraph_Format);
 	        when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
 	             ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
