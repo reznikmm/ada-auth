@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/02/01 06:46:20 $}
+@Comment{$Date: 2005/02/02 01:07:14 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -584,6 +584,7 @@ meaning the component, subcomponent, or part of objects and values of the type.]
   object as a whole is controlled, or any subcomponent is.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @PDefn{constraint}
 The set of possible values for an object of a given type can be
 subjected to a condition that is called a @i(constraint)
@@ -595,7 +596,10 @@ the rules for which values satisfy a given kind of constraint
 are given in @RefSecNum(Scalar Types) for @nt<range_constraint>s,
 @RefSecNum(Index Constraints and Discrete Ranges)
 for @nt<index_constraint>s, and
-@RefSecNum(Discriminant Constraints) for @nt<discriminant_constraint>s].
+@RefSecNum(Discriminant Constraints) for
+@nt<discriminant_constraint>s].@Chg{Version=[2],New=[The set of possible values
+for an object of an access type can also be subject to a condition that is
+called a null exclusion (see @RefSecNum{Access Types}).],Old=[]}
 
 @Defn{subtype}
 A @i(subtype) of a given type is a combination of the type,
@@ -773,6 +777,10 @@ a type T, we call T the "type of the subtype S."
 @end{DiffWord83}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[Added a mention of null exclusions when we're
+  talking about constraints (these are not constraints, but they are similar).]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
   @ChgAdded{Version=[2],Text=[Revised the wording so that it is clear
   that an incomplete view is similar to a partial view in terms of the

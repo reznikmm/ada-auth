@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/02/01 06:46:20 $}
+@Comment{$Date: 2005/02/02 01:07:13 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -186,13 +186,19 @@ Old=[One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9]}.
 @ChgAdded{Version=[2],Text=[@Defn{number_letter}@nt{number_letter}@\Any
 character whose General Category is defined to be @lquotes@;Number, Letter@rquotes@;.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@ChgDeleted{Version=[2],Text=[@Defn{space_character}@nt<space_character>@\The
-character of ISO 10646 BMP named @lquotes@;Space@rquotes@;.]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Chg{Version=[2],New=[@Defn{separator_space}@nt<separator_space>],
+Old=[@Defn{space_character}@nt{space_character}]}@\@Chg{Version=[2],New=[Any
+character whose General Category is defined to be @lquotes@;Separator,
+Space@rquotes@;.],Old=[The character of ISO 10646 BMP named
+@lquotes@;Space@rquotes@;.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@ChgDeleted{Version=[2],Text=[@Defn{special_character}@nt<special_character>@\Any
-character of the ISO 10646 BMP that is not reserved for a control function, and
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Chg{Version=[2],New=[@Defn{separator_line}@nt{separator_line}],
+Old=[@Defn{special_character}@nt{special_character}]}@\Any character
+@Chg{Version=[2],New=[whose General Category is defined to be
+@lquotes@;Separator, Line@rquotes@;.],
+Old=[of the ISO 10646 BMP that is not reserved for a control function, and
 is not the @nt<space_character>, an @nt<identifier_letter>, or a @nt<digit>.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
@@ -201,6 +207,10 @@ are @nt<special_character>s,
 and therefore @nt<graphic_character>s.
 They are not the same characters as space and hyphen-minus.]}
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@Defn{separator_paragraph}@nt{separator_paragraph}@\Any
+character whose General Category is defined to be @lquotes@;Separator, Paragraph@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Defn{format_effector}@nt<format_effector>@\The
@@ -237,18 +247,6 @@ character whose General Category is defined to be @lquotes@;Other, Surrogate@rqu
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[@Defn{punctuation_connector}@nt{punctuation_connector}@\Any
 character whose General Category is defined to be @lquotes@;Punctuation, Connector@rquotes@;.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{separator_space}@nt{separator_space}@\Any
-character whose General Category is defined to be @lquotes@;Separator, Space@rquotes@;.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{separator_line}@nt{separator_line}@\Any
-character whose General Category is defined to be @lquotes@;Separator, Line@rquotes@;.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{separator_paragraph}@nt{separator_paragraph}@\Any
-character whose General Category is defined to be @lquotes@;Separator, Paragraph@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Chg{Version=[2],New=[@Defn{graphic_character}@nt{graphic_character}],
@@ -608,7 +606,10 @@ any of a @Chg{Version=[2],New=[@nt{separator_space}],Old=[space character]},
 a @Chg{Version=[2],New=[@nt{format_effector}],Old=[format effector]},
 or the end of a line, as follows:
 @begin(Discussion)
-It might be useful to define @lquotes@;white space@rquotes@; and use it here.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgDeleted{Version=[2],Text=[It might be useful to define @lquotes@;white space@rquotes@;
+and use it here.]}@ChgNote{No one can figure out why, and it wouldn't match the
+Unicode def of whitespace.}
 @end(Discussion)
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -807,13 +808,53 @@ to accommodate local conventions].
 
 @begin(Discussion)
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-  @ChgDeleted{Version=[2],Text=[For instance, in most languages, the uppercase
-  equivalent of 'i' is LATIN CAPITAL LETTER I, an uppercase letter without a
-  dot above. In Turkish on the other hand, dotless-i and dotted-i are two
-  distinct letters, so the uppercase equivalent of 'i' is LATIN CAPITAL LETTER
-  I WITH DOT ABOVE. An implementation targeting the Turkish market is allowed
-  (in fact, expected) to provide a nonstandard mode where the case folding is
-  appropriate for Turkish. Lithuanian and Azeri are two other languages that
+  @ChgAdded{Version=[2],Type=[Leading],Text=[For instance, in most languages,
+  the uppercase
+  equivalent of LATIN SMALL LETTER I (a lower case letter with a dot above) is
+  LATIN CAPITAL LETTER I (an upper case letter without a dot above). In
+  Turkish, though, LATIN SMALL LETTER I and LATIN SMALL LETTER DOTLESS I are
+  two distinct letters, so the upper case equivalent of LATIN SMALL LETTER I is
+  LATIN CAPITAL LETTER I WITH DOT ABOVE, and the upper case equivalent of LATIN
+  SMALL LETTER DOTLESS I is LATIN CAPITAL LETTER I. Take for instance the
+  following identifier (which is the name of a city on the Tigris river in
+  Eastern Anatolia):]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[diyarbak@smldotlessi@;r -- @RI[The first i is dotted, the second isn't.]]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[Locale-independent conversion to
+  upper case results in:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[DIYARBAKIR -- @RI[Both Is are dotless.]]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[This means that the four following
+  sequences of characters represent the same identifier, even though for a
+  locutor of Turkish they would probably be considered distinct words:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[diyarbakir
+diyarbak@smldotlessi@;r
+d@smldotlessi@;yarbakir
+d@smldotlessi@;yarbak@smldotlessi@;r]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[An implementation targeting the
+  Turkish market is allowed (in fact, expected) to provide a nonstandard mode
+  where case folding is appropriate for Turkish.  This would cause the original
+  identifier to be converted to:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[D@capdottedi@;YARBAKIR -- @RI[The first I is dotted, the second isn't.]]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[and the four sequences of characters shown above
+  would represent four distinct identifiers.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Lithuanian and Azeri are two other languages that
   present similar idiosyncrasies.]}
 @end{Discussion}
 
@@ -1079,13 +1120,14 @@ in the sequence.
 A @i(null string literal) is a @nt<string_literal> with no
 @nt<string_element>s between the quotation marks.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[No modification is performed on the
-sequence of characters in a @nt{string_literal}.]}
 @end{StaticSem}
 
 @begin{Notes}
 An end of line cannot appear in a @nt{string_literal}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[No transformation is performed on the
+sequence of characters in a @nt{string_literal}.]}
 @end{Notes}
 
 @begin{Examples}
