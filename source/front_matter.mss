@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.28 $ $Date: 2001/05/24 16:27:39 $}
+@comment{$Revision: 1.29 $ $Date: 2001/12/21 23:26:10 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -18,18 +18,18 @@ the work item to interpret and maintain the International Standard and to
 produce Technical Corrigenda, as appropriate. The technical work on the
 International Standard is performed by the Ada Rapporteur Group (ARG) of WG 9.
 In September 2000, WG 9 approved and forwarded Technical Corrigendum 1 to
-SC 22 for ISO approval, which was granted in February 2001.],Old=[]}
+SC 22 for ISO approval, which was granted in February 2001. Technical
+Corrigendum 1 was published in June 2001.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[The Technical Corrigendum lists the individual changes that need to be
 made to the text of the International Standard to correct errors, omissions or
-inconsistencies.  Once approved, the corrections specified in Technical
-Corrigendum 1 will be part of the International Standard ISO/IEC
-8652:1995(E).],Old=[]}
+inconsistencies. The corrections specified in Technical Corrigendum 1 are
+part of the International Standard ISO/IEC 8652:1995(E).],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[When ISO publishes Technical Corrigendum 1, it is unlikely that ISO
-will also publish a document that merges the Technical Corrigendum changes into
+@Chg{New=[When ISO published Technical Corrigendum 1, it did not also publish
+a document that merges the Technical Corrigendum changes into
 the text of the International Standard. However, ISO rules require that the
 project editor for the Technical Corrigendum be able to produce such a document
 on demand.],Old=[]}
