@@ -112,6 +112,8 @@ package body ARM_Format is
     --			subprograms to the index introduction.
     --  9/26/00 - RLB - Added Syntax_Display format.
     --  9/28/00 - RLB - Added RefSecbyNum command.
+    -- 10/30/00 - RLB - Added ISOOnly paragraph grouping.
+    --		- RLB - Fixed inserted paragraph numbers to support more than 9.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1400,8 +1402,16 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    end if;
 	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 1) :=
 		        '.';
-	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) :=
-		        Character'Val(Format_Object.Next_AARM_Insert_Para + Character'Pos('0'));
+		    if Format_Object.Next_AARM_Insert_Para >= 10 then
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) := '1';
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 3) :=
+		            Character'Val(Format_Object.Next_AARM_Insert_Para + Character'Pos('0'));
+			Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len + 1;
+			    -- Make this consistent with the other cases.
+		    else
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) :=
+		            Character'Val(Format_Object.Next_AARM_Insert_Para + Character'Pos('0'));
+		    end if;
 	            if Update_Numbers then
 			Format_Object.Next_AARM_Insert_Para :=
 			    Format_Object.Next_AARM_Insert_Para + 1;
@@ -1410,8 +1420,16 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    Format_Object.Current_Paragraph_Len := PNum_Pred'Last - 1;
 	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 1) :=
 		        '.';
-	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) :=
-		        Character'Val(Format_Object.Next_Insert_Para + Character'Pos('0'));
+		    if Format_Object.Next_Insert_Para >= 10 then
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) := '1';
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 3) :=
+		            Character'Val((Format_Object.Next_Insert_Para-10) + Character'Pos('0'));
+			Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len + 1;
+			    -- Make this consistent with the other cases.
+		    else
+	                Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 2) :=
+		            Character'Val(Format_Object.Next_Insert_Para + Character'Pos('0'));
+		    end if;
 	            if Update_Numbers then
 			Format_Object.Next_Insert_Para := Format_Object.Next_Insert_Para + 1;
 			-- Note: We don't update the AARM numbers for
@@ -2505,7 +2523,17 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph, line " & ARM_Inp
 	    	= "notiso" then
 		if Format_Object.Document = ARM_Output.RM_ISO then
 		    Toss_for_RM ("notiso"); -- This text does not appear in ISO documents.
-		else -- RM, but this is AARM-only.
+		else -- RM.
+	            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Is_Formatting
+		        := False; -- Leave the format alone.
+		end if;
+	    -- ISOOnly text:
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "isoonly" then
+		if Format_Object.Document /= ARM_Output.RM_ISO then
+		    Toss_for_RM ("isoonly"); -- This text does not appear in ISO documents.
+		else -- ISO RM.
 	            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Is_Formatting
 		        := False; -- Leave the format alone.
 		end if;
@@ -4696,9 +4724,17 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    ARM_Output.Text_Format (Output_Object,
 			   Bold => True, Italic => False,
 			   Font => ARM_Output.Swiss,
+			   Size => 0,
+			   Change => ARM_Output.None,
+			   Location => ARM_Output.Normal);
+		    ARM_Output.Text_Format (Output_Object,
+			   Bold => True, Italic => False,
+			   Font => ARM_Output.Swiss,
 			   Size => 2,
 			   Change => ARM_Output.None,
 			   Location => ARM_Output.Normal);
+			-- Separate calls to Text_Format so we can use "Grow"
+			-- in here.
 		    Format_Object.Is_Bold := True;
 		    Format_Object.Font := ARM_Output.Swiss;
 		    Format_Object.Size := 2;
@@ -4722,9 +4758,17 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    ARM_Output.Text_Format (Output_Object,
 			       Bold => True, Italic => False,
 			       Font => ARM_Output.Swiss,
+			       Size => 0,
+			       Change => ARM_Output.None,
+			       Location => ARM_Output.Normal);
+			    ARM_Output.Text_Format (Output_Object,
+			       Bold => True, Italic => False,
+			       Font => ARM_Output.Swiss,
 			       Size => 2,
 			       Change => ARM_Output.None,
 			       Location => ARM_Output.Normal);
+				-- Separate calls to Text_Format so we can use "Grow"
+				-- in here.
 			    Format_Object.Is_Bold := True;
 			    Format_Object.Font := ARM_Output.Swiss;
 			    Format_Object.Size := 2;
@@ -4737,9 +4781,17 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    ARM_Output.Text_Format (Output_Object,
 			       Bold => True, Italic => False,
 			       Font => ARM_Output.Swiss,
+			       Size => 0,
+			       Change => ARM_Output.Insertion,
+			       Location => ARM_Output.Normal);
+			    ARM_Output.Text_Format (Output_Object,
+			       Bold => True, Italic => False,
+			       Font => ARM_Output.Swiss,
 			       Size => 2,
 			       Change => ARM_Output.Insertion,
 			       Location => ARM_Output.Normal);
+				-- Separate calls to Text_Format so we can use "Grow"
+				-- in here.
 			    Format_Object.Is_Bold := True;
 			    Format_Object.Font := ARM_Output.Swiss;
 			    Format_Object.Size := 2;
@@ -4758,9 +4810,17 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    ARM_Output.Text_Format (Output_Object,
 			   Bold => True, Italic => False,
 			   Font => ARM_Output.Swiss,
+			   Size => 0,
+			   Change => ARM_Output.None,
+			   Location => ARM_Output.Normal);
+		    ARM_Output.Text_Format (Output_Object,
+			   Bold => True, Italic => False,
+			   Font => ARM_Output.Swiss,
 			   Size => 3,
 			   Change => ARM_Output.None,
 			   Location => ARM_Output.Normal);
+			-- Separate calls to Text_Format so we can use "Grow"
+			-- in here.
 		    Format_Object.Is_Bold := True;
 		    Format_Object.Font := ARM_Output.Swiss;
 		    Format_Object.Size := 3;

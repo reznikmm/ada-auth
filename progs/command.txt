@@ -514,6 +514,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		    the normal font by default; often an "Example" is found
 		    inside of "Examples".)
 	NotIso    - Text that is not included in ISO documents. No format is implied.
+	IsoOnly   - Text that is included only in ISO documents. No format is implied.
 	RMOnly    - Text that is not included in the AARM. No format is implied.
 
     AARM-only groupings:
