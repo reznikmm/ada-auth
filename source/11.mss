@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2000/06/03 02:02:34 $}
+@Comment{$Date: 2000/08/03 05:37:40 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -39,8 +39,8 @@ numerous occurrences of this exception.
 @begin{Honest}
 @Defn{occurrence (of an exception)}
 When the meaning is clear from the context,
-we sometimes use ``@i{occurrence}'' as a
-short-hand for ``exception occurrence.''
+we sometimes use @lquotes@;@i{occurrence}@rquotes@; as a
+short-hand for @lquotes@;exception occurrence.@rquotes@;
 @end{Honest}
 
 @redundant[An @nt{exception_declaration} declares a name for an exception.
@@ -164,7 +164,7 @@ To increase upward compatibility,
 we also changed the rules to allow the same exception to be named
 more than once by a given handler.
 Thus,
-``@key[when] Constraint_Error | Numeric_Error =>'' will remain
+@lquotes@;@key[when] Constraint_Error | Numeric_Error =>@rquotes@; will remain
 legal in Ada 9X,
 even though Constraint_Error and Numeric_Error now denote the same
 exception.  However, it will not be legal to have
@@ -203,11 +203,11 @@ We explicitly define elaboration for @nt{exception_declaration}s.
 @Syn{lhs=<exception_choice>,rhs="@SynI{exception_}@Syn2{name} | @key{others}"}
 @begin{Honest}
 @Defn{handler}
-``@i{Handler}'' is an abbreviation for ``@nt{exception_handler}.''
+@lquotes@;@i{Handler}@rquotes@; is an abbreviation for @lquotes@;@nt{exception_handler}.@rquotes@;
 
 @Defn2{term=<choice>, Sec=<of an @nt{exception_handler}>}
 Within this section, we sometimes abbreviate
-``@nt{exception_choice}'' to ``@i{choice}.''
+@lquotes@;@nt{exception_choice}@rquotes@; to @lquotes@;@i{choice}.@rquotes@;
 @end{Honest}
 @end{Syntax}
 
@@ -226,7 +226,7 @@ exception.
   the same exception.  For example, given two renaming declarations in
   separate packages for the same exception, one may nevertheless
   write, for example,
-  ``@key[when] Ada.Text_IO.Data_Error | My_Seq_IO.Data_Error =>''.
+  @lquotes@;@key[when] Ada.Text_IO.Data_Error | My_Seq_IO.Data_Error =>@rquotes@;.
 
   An @key{others} choice even covers exceptions that are not
   visible at the place of the handler.
@@ -286,11 +286,11 @@ allow a @nt{choice_parameter_specification}.
 
 Different @nt<choice>s of the same @nt<exception_handler> may
 cover the same exception.  This allows for
-``when Numeric_Error | Constraint_Error =>'' even though
+@lquotes@;when Numeric_Error | Constraint_Error =>@rquotes@; even though
 Numeric_Error is a rename of Constraint_Error.
-This also allows one to ``with'' two different I/O packages,
+This also allows one to @lquotes@;with@rquotes@; two different I/O packages,
 and then write, for example,
-``when Ada.Text_IO.Data_Error | My_Seq_IO.Data_Error =>''
+@lquotes@;when Ada.Text_IO.Data_Error | My_Seq_IO.Data_Error =>@rquotes@;
 even though these might both be renames of the same exception.
 @end{Extend83}
 
@@ -417,8 +417,8 @@ then we also say that the execution of @i{b} is
 Examples: The execution of an @nt{if_statement}
 dynamically encloses the evaluation of the @nt{condition} after the
 @key{if} (during that evaluation).
-(Recall that ``execution'' includes both ``elaboration'' and
-``evaluation'', as well as other executions.)
+(Recall that @lquotes@;execution@rquotes@; includes both @lquotes@;elaboration@rquotes@; and
+@lquotes@;evaluation@rquotes@;, as well as other executions.)
 The evaluation of a function call dynamically encloses the execution
 of the @nt{sequence_of_statement}s of the @nt{function_body}
 (during that execution).  Note that, due to recursion, several
@@ -492,7 +492,7 @@ handler is executed;
 this execution replaces the abandoned portion of the execution of
 the @nt{sequence_of_statements}.
 @begin{Ramification}
-  This ``replacement'' semantics implies that the handler can do
+  This @lquotes@;replacement@rquotes@; semantics implies that the handler can do
   pretty much anything the abandoned sequence could do; for example, in a
   function, the handler can execute a @nt{return_statement} that
   applies to the function.
@@ -712,7 +712,7 @@ The reason for allowing truncation is to ease implementations.
 The reason for choosing the number 200 is that this is the minimum
 source line length that implementations have to support,
 and this feature seems vaguely related since it's usually a
-``one-liner''.
+@lquotes@;one-liner@rquotes@;.
 Note that an implementation is allowed to do this truncation even if it
 supports arbitrarily long lines.
 @end{Reason}
@@ -757,7 +757,7 @@ it should do so by providing one or more children of
 Ada.Exceptions.
 
 Note that exceptions behave as if declared at library level;
-there is no ``natural scope'' for an exception; an exception always
+there is no @lquotes@;natural scope@rquotes@; for an exception; an exception always
 exists.  Hence, there is no harm in saving an exception occurrence in
 a data structure, and reraising it later.  The reraise has to occur
 as part of the same program execution, so saving an exception
@@ -966,7 +966,7 @@ even though the exceptional situations arise from the same basic causes.
 @end{Examples}
 
 @begin{DiffWord83}
-The sections labeled ``Exceptions Raised During ...''
+The sections labeled @lquotes@;Exceptions Raised During ...@rquotes@;
 are subsumed by this clause,
 and by parts of Section 9.
 @end{DiffWord83}
@@ -982,7 +982,7 @@ implementation to omit certain language-defined checks.
 @IndexSee{Term=[run-time check],See=(language-defined check)}
 @Defn{run-time error}
 @Defn2{Term=[error], Sec=(run-time)}
-A @i{language-defined check} (or simply, a ``check'') is
+A @i{language-defined check} (or simply, a @lquotes@;check@rquotes@;) is
 one of the situations defined by this International Standard that requires a check to
 be made at run time to determine whether some
 condition is true.
@@ -990,7 +990,7 @@ condition is true.
 A check @i{fails} when the condition being checked is false,
 causing an exception to be raised.
 @begin{Discussion}
-All such checks are defined under ``@RunTimeTitle''
+All such checks are defined under @lquotes@;@RunTimeTitle@rquotes@;
 in clauses and subclauses throughout the standard.
 @end{Discussion}
 @end{Intro}
@@ -1285,7 +1285,7 @@ which was included in @nt{selected_component} in RM83.
 @Defn{optimization}
 @Defn{efficiency}
 This clause gives permission to the implementation to perform
-certain ``optimizations'' that do not necessarily preserve the canonical
+certain @lquotes@;optimizations@rquotes@; that do not necessarily preserve the canonical
 semantics.]
 @end{Intro}
 
@@ -1446,7 +1446,7 @@ as explained in @RefSecNum{Data Validity}.
 @begin{Reason}
   We allow such variables to become abnormal so that
   assignments (other than to atomic variables) can be disrupted
-  due to ``imprecise'' exceptions or instruction scheduling,
+  due to @lquotes@;imprecise@rquotes@; exceptions or instruction scheduling,
   and so that assignments can be reordered
   so long as the correct results are produced in the end if
   no language-defined checks fail.
@@ -1486,9 +1486,9 @@ In practice, implementers would provide a compromise based on their
 customer's needs.
 Therefore, we view this as one viable alternative.
 
-The extreme liberal rule would be ``the language does not specify the
+The extreme liberal rule would be @lquotes@;the language does not specify the
 execution of a program once a language-defined check has failed;
-such execution can be unpredictable.''
+such execution can be unpredictable.@rquotes@;
 This achieves the best efficiency.
 It sounds like a disaster from the predictability point of view,
 but in practice it might not be so bad.
@@ -1533,17 +1533,17 @@ Paragraphs 1 and 2 contain no semantics;
 they are merely pointing out that anything goes if the canonical
 semantics is preserved.
 We have similar introductory paragraphs,
-but we have tried to clarify that these are not granting any ``extra''
+but we have tried to clarify that these are not granting any @lquotes@;extra@rquotes@;
 permission beyond what the rest of the document allows.
 
 Paragraphs 3 and 4 are reflected in the
-``extra permission to reorder actions''.
+@lquotes@;extra permission to reorder actions@rquotes@;.
 Note that this permission now allows the reordering of assignments in
 many cases.
 
 Paragraph 5 is moved to @RefSec{Operators and Expression Evaluation},
 where operator association is discussed.
-Hence, this is no longer an ``extra permission''
+Hence, this is no longer an @lquotes@;extra permission@rquotes@;
 but is part of the canonical semantics.
 
 Paragraph 6 now follows from the general permission to store
@@ -1552,10 +1552,10 @@ Note that the parameters and results of all the predefined operators
 of a type are of the unconstrained subtype of the type.
 
 Paragraph 7 is reflected in the
-``extra permission to avoid raising exceptions''.
+@lquotes@;extra permission to avoid raising exceptions@rquotes@;.
 @end{Itemize}
 
 We moved clause @RefSec{Suppressing Checks} from after 11.6 to
-before 11.6, in order to preserve the famous number ``11.6''
+before 11.6, in order to preserve the famous number @lquotes@;11.6@rquotes@;
 (given the changes to earlier clauses in Section 11).
 @end{DiffWord83}

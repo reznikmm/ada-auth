@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/03 05:37:43 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:21 $}
+@Comment{$Date: 2000/08/03 05:37:43 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -11,13 +11,13 @@ The Numerics Annex specifies
 @begin{itemize}
    features for complex arithmetic, including complex I/O;
 
-   a mode (``strict mode''), in which the predefined arithmetic operations of
+   a mode (@lquotes@;strict mode@rquotes@;), in which the predefined arithmetic operations of
    floating point and fixed point types and the functions and operations of
    various predefined packages have to provide guaranteed accuracy or conform
    to other numeric performance requirements, which the Numerics Annex also
    specifies;
 
-   a mode (``relaxed mode''), in which no accuracy or other numeric performance
+   a mode (@lquotes@;relaxed mode@rquotes@;), in which no accuracy or other numeric performance
    requirements need be satisfied, as for implementations not conforming to the
    Numerics Annex;
 
@@ -51,7 +51,7 @@ This Annex is new to Ada 9X.
 Types and arithmetic operations for complex arithmetic are provided in
 Generic_Complex_Types, which is defined in @RefSecNum{Complex Types}.
 Implementation-defined approximations to the complex analogs of the mathematical
-functions known as the ``elementary functions'' are provided by the subprograms
+functions known as the @lquotes@;elementary functions@rquotes@; are provided by the subprograms
 in Generic_Complex_Elementary_Functions, which is defined in
 @RefSecNum{Complex Elementary Functions}.  Both of these library units are generic
 children of the predefined package Numerics (see @RefSecNum{The Numerics Packages}).
@@ -223,7 +223,7 @@ Numerics.Short_Complex_Types, Numerics.Long_Complex_Types, etc.
    representation, in practice.  The accuracy of the results of the complex
    arithmetic operations and of the complex elementary functions
    is dependent on the representation; thus, implementers need to know that
-   representation.  The type is visible so that complex ``literals'' can be
+   representation.  The type is visible so that complex @lquotes@;literals@rquotes@; can be
    written in aggregate notation, if desired.
 @end{Reason}
 
@@ -232,7 +232,7 @@ Real'Base.}
 @begin{Reason}
    The Imaginary type and the constants i and j are provided for two reasons:
    @begin{itemize}
-      They allow complex ``literals'' to be written in the alternate form of
+      They allow complex @lquotes@;literals@rquotes@; to be written in the alternate form of
       @RI{a} + @RI{b}*i (or @RI{a} + @RI{b}*j), if desired.  Of course,
       in some contexts the sum will need to be parenthesized.
 
@@ -288,7 +288,7 @@ Real'Base.}
 
 The arithmetic operations and the Re, Im, Modulus, Argument, and Conjugate
 functions have their usual mathematical meanings.  When applied to a parameter
-of pure-imaginary type, the ``imaginary-part'' function Im yields the value of
+of pure-imaginary type, the @lquotes@;imaginary-part@rquotes@; function Im yields the value of
 its parameter, as the corresponding real value.
 @begin{Reason}
    The latter case can be understood by considering the parameter of
@@ -1096,11 +1096,11 @@ More specifically,
 @end{itemize}
 @begin{Reason}
    This rule is the one proposed in LSN-1051.  Other rules were considered,
-   including one that would have read ``Outputs the value of the parameter Item
+   including one that would have read @lquotes@;Outputs the value of the parameter Item
    to the given string, following the same rule as for output to a file, using
    a value for Fore such that the sequence of characters output exactly fills,
    or comes closest to filling, the string; in the latter case, the string is
-   filled by inserting one extra blank immediately after the comma.''  While
+   filled by inserting one extra blank immediately after the comma.@rquotes@;  While
    this latter rule might be considered the closest analogue to the rule for
    output to a string in Text_IO.Float_IO, it requires a more difficult and
    inefficient implementation involving special cases when the integer part of
@@ -1699,7 +1699,7 @@ let @RI{s} be 1.0.
    be the @i(smalls) of the left and right
    operands.  For a multiplication, if (@RI{l} @Times @RI{r}) / @RI{s}
    is an integer or the
-   reciprocal of an integer (the @i(smalls) are said to be ``compatible'' in
+   reciprocal of an integer (the @i(smalls) are said to be @lquotes@;compatible@rquotes@; in
    this case), the result shall belong to the perfect result set; otherwise, it
    belongs to the close result set.  For a division, if
    @RI{l} / (@RI{r} @Times @RI{s}) is an
@@ -1716,8 +1716,8 @@ let @RI{s} be 1.0.
    a value of @RI{v},
    note that it is always possible to factor
    @RI{v} as an integer
-   multiple of a ``compatible'' @i(small), but the integer multiple may be
-   ``too big.''
+   multiple of a @lquotes@;compatible@rquotes@; @i(small), but the integer multiple may be
+   @lquotes@;too big.@rquotes@;
 
    If there exists a factorization in which that multiple is less than some
    implementation-defined limit, the result shall belong to the perfect result
@@ -2008,7 +2008,7 @@ fewer than 5.
       of the test, subject to the constraint that 0.2 @leq @RI{B}-@RI{A} @leq 0.6.
       Random floating point numbers are generated until 5000 falling into the
       range @RI{A} .. @RI{B} have been encountered.  Each of these 5000 is
-      preceded by a ``gap'' (of length greater than or equal to 0) of
+      preceded by a @lquotes@;gap@rquotes@; (of length greater than or equal to 0) of
       consecutive random numbers not falling into the range
       @RI{A} .. @RI{B}.  The counts of gaps of each length from 0 to 15,
       and of all lengths greater than 15 lumped together, are tallied and
@@ -2028,7 +2028,7 @@ fewer than 5.
       is 23.
 
       Increasing-Runs Test.  Random floating point numbers are generated until
-      5000 increasing runs have been observed.  An ``increasing run'' is a
+      5000 increasing runs have been observed.  An @lquotes@;increasing run@rquotes@; is a
       sequence of random numbers in strictly increasing order; it is followed
       by a random number that is strictly smaller than the preceding random
       number.  (A run under construction is entirely discarded in the unlikely
@@ -2073,7 +2073,7 @@ fewer than 5.
       Simplified Poker Test.  Numerics.Discrete_Random is instantiated once
       with an enumeration subtype representing the 13 denominations (Two
       through Ten, Jack, Queen, King, and Ace) of an infinite deck of playing
-      cards.  2000 ``poker'' hands (5-tuples of values of this subtype) are
+      cards.  2000 @lquotes@;poker@rquotes@; hands (5-tuples of values of this subtype) are
       generated randomly.  The counts of hands containing exactly @RI{K}
       different denominations (1 @leq @RI{K} @leq 5) are tallied and compared
       with the expected counts.  The probability that a hand contains exactly
@@ -2085,7 +2085,7 @@ fewer than 5.
       1 .. @RI{R}, where @RI{R} varies systematically from 2 to 11.
       Integers are generated randomly from this range until each value in the
       range has occurred, and the number @RI{K} of integers generated is
-      recorded.  This constitutes a ``coupon collector's segment'' of length
+      recorded.  This constitutes a @lquotes@;coupon collector's segment@rquotes@; of length
       @RI{K}.  2000 such segments are generated.  The counts of segments of
       each length from @RI{R} to @RI{R}+29, and of all lengths greater than
       @RI{R}+29 lumped together, are tallied and compared with the expected

@@ -1,14 +1,14 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 21:33:47 $}
+@Comment{$Date: 2000/08/03 05:37:36 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
-@nt<compilation>s.  The text of a @nt<compilation> is a sequence of
+@nt<compilation>s. The text of a @nt<compilation> is a sequence of
 lexical elements, each composed of characters; the rules of
 composition are given in this section.
 @nt{Pragma}s, which provide certain information for the compiler, are also
@@ -74,7 +74,9 @@ for the visual representation of
 the text of an Ada program is not specified.
 @PDefn{unspecified}
 
-The categories of characters are defined as follows:
+@begin{Leading}
+@keepnext@;The categories of characters are defined as follows:
+@end{Leading}
 @begin{Description}
 @Defn{identifier_letter}@nt<identifier_letter> @\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}
 @begin{Discussion}
@@ -84,10 +86,10 @@ The categories of characters are defined as follows:
 @end{Discussion}
 
 @Defn{upper_case_identifier_letter}@nt<upper_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
-name begins ``Latin Capital Letter''.
+name begins @lquotes@;Latin Capital Letter@rquotes@;.
 
 @Defn{lower_case_identifier_letter}@nt<lower_case_identifier_letter> @\Any character of Row 00 of ISO 10646 BMP whose
-name begins ``Latin Small Letter''.
+name begins @lquotes@;Latin Small Letter@rquotes@;.
 @begin{Honest}
 
 The above rules do not include the ligatures
@@ -100,7 +102,7 @@ This problem was pointed out by a comment from the Netherlands.
 @Defn{digit}@nt<digit> @\One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.
 
 @Defn{space_character}@nt<space_character> @\The character of ISO
-10646 BMP named ``Space''.
+10646 BMP named @lquotes@;Space@rquotes@;.
 
 @Defn{special_character}@nt<special_character> @\Any character of
   the ISO 10646 BMP that is not reserved for a control function, and
@@ -124,6 +126,7 @@ other than a @nt<format_effector>, that is allowed in a comment; the set of
 @IndexSeeAlso{Term=[control character],See=(other_control_function)}
 @end{Description}
 
+@begin{Leading}
 @Defn{names of @nt{special_character}s}
 @Defn2{Term=[special_character],Sec=(names)}
 The following names are used when referring to certain
@@ -158,8 +161,9 @@ The following names are used when referring to certain
 @Defn{right square bracket}
 @Defn{left curly bracket}
 @Defn{right curly bracket}
+@end{Leading}
 @begin{Discussion}
-These are the ones that play a special role in the syntax of Ada 9X,
+These are the ones that play a special role in the syntax of Ada 95,
 or in the syntax rules;
 we don't bother to define names for all characters.
 The first name given is the name from ISO 10646-1; the subsequent
@@ -210,7 +214,7 @@ or changed to conform to local conventions].
 @begin{Ramification}
 If an implementation supports other character sets,
 it defines which characters fall into each category,
-such as ``@nt{identifier_letter},''
+such as @lquotes@;@nt{identifier_letter},@rquotes@;
 and what the corresponding rules of this section are,
 such as which characters are allowed in the text of a program.
 @end{Ramification}
@@ -242,7 +246,7 @@ and that should be irrelevant to the semantics.
 @end{Notes}
 
 @begin{Extend83}
-Ada 9X allows 8-bit and 16-bit characters,
+Ada 95 allows 8-bit and 16-bit characters,
 as well as implementation-specified character sets.
 @end{Extend83}
 
@@ -258,7 +262,7 @@ and @nt{basic_character} are removed.
 @nt{Special_character} is expanded to include Ada 83's
 @nt{other_special_character}, as well as new 8-bit characters not
 present in Ada 83.
-Note that the term ``basic letter'' is used
+Note that the term @lquotes@;basic letter@rquotes@; is used
 in @RefSec{Character Handling}
 to refer to letters without diacritical marks.
 
@@ -295,14 +299,16 @@ In general, the representation for an end of line is implementation defined.
 However, a sequence of one or more @nt<format_effector>s other
 than character tabulation (HT) signifies at least one end of line.
 
+@begin{Leading}
 @Defn{separator}
 @Redundant[In some cases an explicit @i(separator) is required
 to separate adjacent lexical elements.]
 A separator is
 any of a space character, a format
 effector, or the end of a line, as follows:
+@end{Leading}
 @begin(Discussion)
-It might be useful to define ``white space'' and use it here.
+It might be useful to define @lquotes@;white space@rquotes@; and use it here.
 @end(Discussion)
 @begin{Itemize}
 A space character is a separator except within a @nt{comment}, a
@@ -340,16 +346,18 @@ of a compound delimiter, or as a character of a @nt{comment},
 @nt{string_literal}, @nt{character_literal}, or
 @nt{numeric_literal}.
 
+@begin{Leading}
 The following names are used when referring to compound
 delimiters:
+@end{Leading}
 @begin{Display}
 @TabClear()@TabSet(P11)delimiter @\name
 @comment{Blank line}
    => @\arrow
    .. @\double dot
    ** @\double star, exponentiate
-   := @\assignment (pronounced: ``becomes'')
-   /= @\inequality (pronounced: ``not equal'')
+   := @\assignment (pronounced: @lquotes@;becomes@rquotes@;)
+   /= @\inequality (pronounced: @lquotes@;not equal@rquotes@;)
    >= @\greater than or equal
    <= @\less than or equal
    << @\left label bracket
@@ -412,7 +420,9 @@ to accommodate local conventions].
 @end{ImplPerm}
 
 @begin{Examples}
-@i{Examples of identifiers:}
+@begin{Leading}
+@keepnext@;@i{Examples of identifiers:}
+@end{Leading}
 @begin{Display}
 Count      X    Get_Symbol   Ethelyn   Marion
 @Comment{Blank line}
@@ -500,7 +510,9 @@ obtain the value of the @nt{decimal_literal} with the @nt{exponent}.
 @end{StaticSem}
 
 @begin{Examples}
-@i{Examples of decimal literals:}
+@begin{Leading}
+@keepnext@;@i{Examples of decimal literals:}
+@end{Leading}
 @begin{Display}
 @tabclear()@tabset(P31)
 12        0      1E6    123_456 @\--@i{  integer literals}
@@ -572,7 +584,9 @@ lower case or in upper case, with the same meaning.
 @end{StaticSem}
 
 @begin{Examples}
-@i{Examples of based literals:}
+@begin{Leading}
+@keepnext@;@i{Examples of based literals:}
+@end{Leading}
 @begin{Display}
 @tabclear()@tabset(P16, P45)
 2#1111_1111# @\16#FF#       016#0ff# @\--@i{  integer literals of value 255}
@@ -600,13 +614,15 @@ character between two apostrophe characters.]
 
 @begin{Notes}
 A @nt{character_literal} is an enumeration literal
-of a character type.  See @RefSecNum(Character Types).
+of a character type. See @RefSecNum(Character Types).
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of character literals:}
+@begin{Leading}
+@keepnext@;@i{Examples of character literals:}
+@end{Leading}
 @begin{Display}
-'A'@ @ @ @ @ '*'@ @ @ @ @ '''@ @ @ @ @ '@ '
+'A'@ @ @ @ @ '*'@ @ @ @ @ @rquotes@;'@ @ @ @ @ '@ '
 @end{Display}
 @end{Examples}
 
@@ -621,7 +637,7 @@ since it requires knowledge of types.
 @begin{Intro}
 @redundant[A @nt<string_literal> is formed by a sequence of graphic characters
 (possibly none) enclosed between two quotation marks used as
-string brackets.  They are used to represent @nt<operator_symbol>s
+string brackets. They are used to represent @nt<operator_symbol>s
 (see @RefSecNum(Subprogram Declarations)), values of a string type
 (see @RefSecNum(Literals)), and array subaggregates
 (see @RefSecNum(Array Aggregates)).
@@ -661,7 +677,9 @@ An end of line cannot appear in a @nt{string_literal}.
 @end{Notes}
 
 @begin{Examples}
-@i{Examples of string literals:}
+@begin{Leading}
+@keepnext@;@i{Examples of string literals:}
+@end{Leading}
 @begin{Display}
 @tabclear()@tabset(P16)
 "Message of the day:"
@@ -700,12 +718,14 @@ A @nt{comment} may appear on any line of a program.
 
 @begin{StaticSem}
 The presence or absence of @nt{comment}s has no influence on whether a program
-is legal or illegal.  Furthermore, @nt{comment}s do not influence the meaning
+is legal or illegal. Furthermore, @nt{comment}s do not influence the meaning
 of a program; their sole purpose is the enlightenment of the human reader.
 @end{StaticSem}
 
 @begin{Examples}
-@i{Examples of comments:}
+@begin{Leading}
+@keepnext@;@i{Examples of comments:}
+@end{Leading}
 @begin{Display}
 --@i{  the last sentence above echoes the Algol 68 report }
 @comment{Blank line}
@@ -744,7 +764,9 @@ In a @nt<pragma>, any @nt<pragma_argument_association>s without a
 associations with a
 @i{pragma_argument_}@nt<identifier>.
 
-@nt{Pragma}s are only allowed at the following places in a program:
+@begin{SyntaxTextLeading}
+@keepnext@;@nt{Pragma}s are only allowed at the following places in a program:
+@end{SyntaxTextLeading}
 @begin{Itemize}
 After a semicolon delimiter, but not within a
 @nt{formal_part}
@@ -828,12 +850,12 @@ Inline(Foo) and freeze things accordingly, even if they choose to never
 do inlining.
 
 Obviously, the contradiction needs to be resolved one way or the
-other.  The reasons for resolving it this way are:  The
+other. The reasons for resolving it this way are:  The
 implementation is simple @em the compiler can just ignore the
 @nt{pragma} altogether.
 The interpretation of constructs appearing inside
-implementation-defined @nt{pragma}s is implementation defined.  For
-example: ``@key[pragma] Mumble(X);''.  If the current implementation has
+implementation-defined @nt{pragma}s is implementation defined. For
+example: @lquotes@;@key[pragma] Mumble(X);@rquotes@;. If the current implementation has
 never heard of Mumble, then it doesn't know whether X is a name,
 an expression, or an identifier specific to the pragma Mumble.
 @end{Ramification}
@@ -883,7 +905,7 @@ An identifier specific to a pragma is neither a @nt{name} nor an
 implementation defines them to be evaluated in the case of an
 implementation-defined @nt{pragma}).
 
-The ``unless otherwise specified'' part allows us (and
+The @lquotes@;unless otherwise specified@rquotes@; part allows us (and
 implementations) to make exceptions, so a @nt{pragma} can contain an
 expression that is not evaluated.
 Note that @nt{pragma}s in @nt{type_definition}s may contain expressions
@@ -939,7 +961,7 @@ working program,
 the program should still be legal, and should still have the same
 semantics.
 @begin{Ramification}
-Note that ``semantics'' is not the same as ``effect;''
+Note that @lquotes@;semantics@rquotes@; is not the same as @lquotes@;effect;@rquotes@;
 as explained in
 @RefSecNum{Conformity of an Implementation With the Standard},
 the semantics defines a set of possible effects.
@@ -953,9 +975,11 @@ and that have real semantics; thus,
 this paragraph is merely a recommendation.
 @end{Ramification}
 
+@begin{Leading}
 Normally,
 an implementation should not define pragmas that can make an illegal
 program legal, except as follows:
+@end{Leading}
 @begin(Itemize)
   A @nt<pragma> used to complete a declaration, such as a @nt{pragma} Import;
 
@@ -982,8 +1006,8 @@ it is best if the user gets an error message.
 @end{ImplAdvice}
 
 @begin{Incompatible83}
-In Ada 83, ``bad'' @nt{pragma}s are ignored.
-In Ada 9X, they are illegal,
+In Ada 83, @lquotes@;bad@rquotes@; @nt{pragma}s are ignored.
+In Ada 95, they are illegal,
 except in the case where the name of the @nt{pragma} itself
 is not recognized by the implementation.
 @end{Incompatible83}
@@ -997,13 +1021,13 @@ Implementation-defined @nt{pragma}s may affect the run-time semantics of
 the program.
 This was always true in Ada 83 (since it was not explicitly forbidden by
 RM83), but it was not clear, because there was no definition of
-``executing'' or ``elaborating'' a @nt{pragma}.
+@lquotes@;executing@rquotes@; or @lquotes@;elaborating@rquotes@; a @nt{pragma}.
 @end{DiffWord83}
 
 @begin{Syntax}
-@begin{SyntaxText}
-The forms of List, Page, and Optimize @nt{pragma}s are as follows:
-@end{SyntaxText}
+@begin{SyntaxTextLeading}
+@keepnext@;The forms of List, Page, and Optimize @nt{pragma}s are as follows:
+@end{SyntaxTextLeading}
 
 @PragmaSyn`@key{pragma} @prag(List)(@Syn2{identifier});'
 
@@ -1018,7 +1042,7 @@ and are summarized in
 @begin{Ramification}
 The language-defined pragmas
 are supported by every implementation,
-although ``supporting'' some of
+although @lquotes@;supporting@rquotes@; some of
 them (for example, Inline) requires nothing more than checking the
 arguments, since they act only as advice to the implementation.
 @end{Ramification}
@@ -1029,22 +1053,22 @@ arguments, since they act only as advice to the implementation.
 @begin{StaticSem}
 A @nt{pragma} List
 takes one of the @nt{identifier}s On or Off as the single
-argument.  This pragma is allowed anywhere a
-@nt{pragma} is allowed.  It specifies that listing of the
+argument. This pragma is allowed anywhere a
+@nt{pragma} is allowed. It specifies that listing of the
 compilation is to be continued or suspended until a List
 @nt{pragma} with the opposite argument is given within the
-same compilation.  The @nt{pragma} itself is always listed if
+same compilation. The @nt{pragma} itself is always listed if
 the compiler is producing a listing.
 
 A @nt{pragma} Page
 is allowed anywhere a
-@nt{pragma} is allowed.  It specifies that the program text
+@nt{pragma} is allowed. It specifies that the program text
 which follows the @nt{pragma} should start on a new page (if
 the compiler is currently producing a listing).
 
 A @nt{pragma} Optimize
 takes one of the @nt{identifier}s Time, Space, or Off as the
-single argument.  This @nt{pragma} is allowed anywhere a @nt<pragma>
+single argument. This @nt{pragma} is allowed anywhere a @nt<pragma>
 is allowed, and it applies until the end of the immediately enclosing
 declarative region,
 or for a @nt{pragma} at the place of a @nt{compilation_unit},
@@ -1061,7 +1085,7 @@ generic instantiations are implemented with a macro-expansion model,
 versus a shared-generic-body model.
 
 
-We don't define what constitutes an ``optimization''
+We don't define what constitutes an @lquotes@;optimization@rquotes@;
 @em in fact, it cannot be formally defined in the context of Ada.
 One compiler might call something an optional optimization,
 whereas another compiler might consider that same thing
@@ -1073,7 +1097,9 @@ Some compilers might even ignore the pragma altogether.
 @end{StaticSem}
 
 @begin{Examples}
-@i{Examples of pragmas:}
+@begin{Leading}
+@keepnext@;@i{Examples of pragmas:}
+@end{Leading}
 @begin{Example}
 @key[pragma] List(Off); --@RI{ turn off listing generation}
 @key[pragma] Optimize(Off); --@RI{ turn off optional optimizations}
@@ -1101,20 +1127,20 @@ informative annex.
 
 @begin{Syntax}
 @begin{Bundle}
-@begin{SyntaxText}
+@begin{SyntaxTextLeading}
 @ChgRef{Version=[1], Kind=[Deleted]}
 @Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @Defn{reserved word}
 The following are the @i{reserved words}
 (ignoring upper/lower case distinctions):
-@end{SyntaxText}
+@end{SyntaxTextLeading}
 @begin{Discussion}
   Reserved words have special meaning in the syntax.
   In addition, certain reserved words are used as attribute names.
 
   The syntactic category @nt{identifier}
-  no longer allows reserved words.  We have added the few reserved
+  no longer allows reserved words. We have added the few reserved
   words that are legal explicitly to the syntax for @nt{attribute_reference}.
   Allowing identifier to include reserved words has been a source
   of confusion for some users, and differs from the way they
@@ -1237,11 +1263,11 @@ typeface is desired and available.
 
 @begin{Incompatible83}
 The following words are not reserved in Ada 83, but are reserved in Ada
-9X: @key{abstract}, @key{aliased}, @key{protected}, @key{requeue},
+95: @key{abstract}, @key{aliased}, @key{protected}, @key{requeue},
 @key{tagged}, @key{until}.
 @end{Incompatible83}
 
 @begin{DiffWord83}
-The clause entitled ``Allowed Replacements of Characters'' has been moved
+The clause entitled @lquotes@;Allowed Replacements of Characters@rquotes@; has been moved
 to @RefSec(Obsolescent Features).
 @end{DiffWord83}

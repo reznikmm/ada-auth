@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:22 $}
+@Comment{$Date: 2000/08/03 05:37:44 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.15 $}
+@comment{$Revision: 1.16 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -21,7 +21,7 @@ The following @i{representation-oriented attributes} are defined for
 
 @Defn{canonical form}
 The values of other representation-oriented attributes of a floating point
-subtype, and of the ``primitive function'' attributes of a floating point
+subtype, and of the @lquotes@;primitive function@rquotes@; attributes of a floating point
 subtype described later, are defined in terms of a particular representation
 of nonzero values called the @i{canonical form}.
 The canonical form (for the type @i{T}) is the form@*

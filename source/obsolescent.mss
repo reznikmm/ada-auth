@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:23 $}
+@Comment{$Date: 2000/08/03 05:37:45 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 @Redundant[@Defn{obsolescent feature}
@@ -100,7 +100,7 @@ occurrences.
 @begin{Honest}
   The intent is that such a replacement works in the Value and
   Wide_Value attributes, and in the Get procedures of Text_IO,
-  so that things like ``16:.123:'' is acceptable.
+  so that things like @lquotes@;16:.123:@rquotes@; is acceptable.
 @end{Honest}
 
 The quotation marks (") used as string brackets at both ends of
@@ -229,11 +229,11 @@ is compatible with the subtype.
 The elaboration of a @nt<delta_constraint> consists of the
 elaboration of the @nt<range_constraint>, if any.
 @begin{Reason}
-A numeric subtype is considered ``constrained'' only if a range constraint
+A numeric subtype is considered @lquotes@;constrained@rquotes@; only if a range constraint
 applies to it.  The only effect of a @nt<digits_constraint> or a
 @nt<delta_constraint> without a @nt<range_constraint> is to specify
 the value of the corresponding Digits or Delta attribute in
-the new subtype.  The set of values of the subtype is not ``constrained''
+the new subtype.  The set of values of the subtype is not @lquotes@;constrained@rquotes@;
 in any way by such @nt<_constraint>s.
 @end{Reason}
 @end{RunTime}
@@ -271,7 +271,7 @@ we do not bother to extend its definition to private extensions.
 
 The Constrained attribute of an object is @i(not) obsolete.
 
-Note well: S'Constrained matches the Ada 9X definition of ``constrained''
+Note well: S'Constrained matches the Ada 9X definition of @lquotes@;constrained@rquotes@;
 only for composite subtypes.  For elementary subtypes,
 S'Constrained is always true, whether or not S is constrained.
 (The Constrained attribute of an object does not have this problem,
@@ -374,9 +374,9 @@ In new code, Constraint_Error should be used instead of Numeric_Error.
 @end{Syntax}
 
 @begin{StaticSem}
-An @nt{at_clause} of the form ``for @i{x} use at @i{y};'' is
+An @nt{at_clause} of the form @lquotes@;for @i{x} use at @i{y};@rquotes@; is
 equivalent to an @nt{attribute_definition_clause} of the form
-``for @i{x}'Address use @i{y};''.
+@lquotes@;for @i{x}'Address use @i{y};@rquotes@;.
 @begin{Reason}
 The preferred syntax for specifying the address of an entity is an
 @nt{attribute_definition_clause} specifying the Address attribute.
@@ -394,12 +394,12 @@ and an @nt{attribute_definition_clause} specifying the Address attribute.
 We now allow to define the address of an entity using an
 @nt{attribute_definition_clause}.
 This is because Ada 83's @nt{at_clause} is so hard to
-remember: programmers often tend to write ``for X'Address use...;''.
+remember: programmers often tend to write @lquotes@;for X'Address use...;@rquotes@;.
 @end{Extend83}
 
 @begin{DiffWord83}
 Ada 83's @nt{address_clause} is now called an @nt{at_clause} to avoid
-confusion with the new term ``Address clause'' (that is, an
+confusion with the new term @lquotes@;Address clause@rquotes@; (that is, an
 @nt{attribute_definition_clause} for the Address attribute).
 @end{DiffWord83}
 
@@ -584,7 +584,7 @@ for the same type.
 
 @begin{DiffWord83}
 Ada 83's @nt{alignment_clause} is now called a @nt{mod_clause} to avoid
-confusion with the new term ``Alignment clause'' (that is, an
+confusion with the new term @lquotes@;Alignment clause@rquotes@; (that is, an
 @nt{attribute_definition_clause} for the Alignment attribute).
 @end{DiffWord83}
 

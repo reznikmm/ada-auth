@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2000/08/03 05:37:42 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:21 $}
+@Comment{$Date: 2000/08/03 05:37:42 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -21,7 +21,7 @@ for decimal division; and
 the child packages Text_IO.Editing and Wide_Text_IO.Editing,
 which
 support formatted and localized output of decimal data, based on
-``picture String'' values.
+@lquotes@;picture String@rquotes@; values.
 @end{itemize}
 
 See also: @RefSec{Fixed Point Types}; @RefSec{Operations of Fixed Point Types};

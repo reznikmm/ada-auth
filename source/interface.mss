@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:22 $}
+@Comment{$Date: 2000/08/03 05:37:44 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -16,7 +16,7 @@ then specific support for C, COBOL, and Fortran is defined,
 in terms of language interface packages for each of
 these languages.
 @begin{Ramification}
-This Annex is not a ``Specialized Needs'' annex.
+This Annex is not a @lquotes@;Specialized Needs@rquotes@; annex.
 Every implementation must support all non-optional features defined here
 (mainly the package Interfaces).
 @end{Ramification}
@@ -56,9 +56,9 @@ entities.
 
 A @nt{pragma} Convention is used to specify that an Ada entity should use
 the conventions of another language.
-It is intended primarily for types and ``callback'' subprograms.
+It is intended primarily for types and @lquotes@;callback@rquotes@; subprograms.
 For example,
-``@key{pragma} Convention(Fortran, Matrix);''
+@lquotes@;@key{pragma} Convention(Fortran, Matrix);@rquotes@;
 implies that Matrix should be represented according to the
 conventions of the supported  Fortran implementation, namely
 column-major order.
@@ -244,7 +244,7 @@ The declaration of an imported object shall not include an explicit
 initialization expression.
 @Redundant[Default initializations are not performed.]
 @begin{TheProof}
-This follows from the ``Notwithstanding ...''
+This follows from the @lquotes@;Notwithstanding ...@rquotes@;
 wording in the Dynamics Semantics paragraphs below.
 @end{TheProof}
 
@@ -373,8 +373,8 @@ more than one declaration; in that case, the entity of all of those
 declarations will be the external entity.
 @end{Ramification}
 @begin{Discussion}
-This ``notwithstanding'' wording is better than saying
-``unless named by a @nt{pragma} Import'' on every definition of
+This @lquotes@;notwithstanding@rquotes@; wording is better than saying
+@lquotes@;unless named by a @nt{pragma} Import@rquotes@; on every definition of
 elaboration.
 It says we recognize the contradiction, and this rule takes
 precedence.
@@ -457,7 +457,7 @@ language.  For example, @key{pragma} Import(Ada, ...) can be used to
 interface to an assembly language routine that obeys the
 Ada compiler's calling conventions.
 
-To obtain ``call-back'' to an Ada subprogram from a foreign language
+To obtain @lquotes@;call-back@rquotes@; to an Ada subprogram from a foreign language
 environment, @key(pragma) Convention should be specified both for the
 access-to-subprogram type and the specific subprogram(s) to which 'Access
 is applied.
@@ -473,8 +473,8 @@ Such a @nt{pragma} applies to all of the denoted entities.
 See also @RefSec{Machine Code Insertions}.
 @begin{Ramification}
 The Intrinsic convention (see @refsecnum(Conformance Rules))
-implies that the entity is somehow ``built
-in'' to the implementation.
+implies that the entity is somehow @lquotes@;built
+in@rquotes@; to the implementation.
 Thus, it generally does not make sense for users to specify Intrinsic
 in a @nt{pragma} Import.
 The intention is that only implementations will specify
@@ -659,7 +659,7 @@ clauses.
 The intention is that an implementation might support several
 implementations of the foreign language: Interfaces.This_Fortran and
 Interfaces.That_Fortran might both exist.
-The ``default'' implementation, overridable by the user,
+The @lquotes@;default@rquotes@; implementation, overridable by the user,
 should be declared as a renaming:
 @begin{Example}
 @key[package] Interfaces.Fortran @key[renames] Interfaces.This_Fortran;
@@ -838,6 +838,25 @@ unsigned_char, depending on the C implementation.
 
 The functions To_C and To_Ada map between the Ada type Character
 and the C type char.
+
+@begin{ImplNote}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0114]}
+@Chg{New=[The To_C and To_Ada functions map between corresponding
+characters, not necessarily between characters with the same internal
+representation.  Corresponding characters are characters defined by the
+same enumeration literal, if such exist; otherwise, the correspondence
+is not defined by the language.], Old=[]}
+
+@Chg{New=[The following definition is equivalent to the above summary:], Old=[]}
+
+@Chg{New=[@f{To_C (Latin_1_Char) = char'Value(Character'Image(Latin_1_Char))}@*
+provided that char'Value does not raise an exception; otherwise the result
+is not defined by the language.], Old=[]}
+
+@Chg{New=[@f{To_Ada (Native_C_Char) = Character'Value(char'Image(Native_C_Char))}@*
+provided that Character'Value does not raise an exception;
+otherwise the result is not defined by the language., Old=[]}
+@end{ImplNote}
 
 @begin{Example}
 @key(function) Is_Nul_Terminated (Item : @key(in) char_array) @key(return) Boolean;
@@ -1127,9 +1146,9 @@ allowing an Ada program to allocate, reference, update, and free C-style
 strings.
 In particular, the private type chars_ptr
  corresponds to a common
-use of ``char *'' in C programs, and an object of this type can be
+use of @lquotes@;char *@rquotes@; in C programs, and an object of this type can be
 passed to a subprogram to which @nt(pragma) Import(C,...) has been applied,
-and for which ``char *''
+and for which @lquotes@;char *@rquotes@;
  is the type of the argument of the C function.
 @end{Intro}
 
@@ -1206,7 +1225,7 @@ ambiguous.
 @end{discussion}
 
 The type chars_ptr is C-compatible and
-corresponds to the use of C's ``char *'' for
+corresponds to the use of C's @lquotes@;char *@rquotes@; for
 a pointer to the first char in a char array terminated by nul.
 When an object of type chars_ptr is declared, its value is
 by default set to Null_Ptr, unless the object is imported
@@ -1214,7 +1233,7 @@ by default set to Null_Ptr, unless the object is imported
 @begin{discussion}
 
 The type char_array_access is not necessarily C-compatible, since
-an object of this type may carry ``dope'' information.
+an object of this type may carry @lquotes@;dope@rquotes@; information.
 The programmer should convert from char_array_access to chars_ptr
 for objects imported from, exported to, or passed to C.@end{discussion}
 @begin{DescribeCode}
@@ -1341,7 +1360,7 @@ If Check is False, then
  processing is as above, but with no check that Offset+Chars'Length>N.
 @begin{Ramification}
 If Chars contains nul, Update's effect may be
-to ``shorten'' the pointed-to char array.@end{ramification}
+to @lquotes@;shorten@rquotes@; the pointed-to char array.@end{ramification}
 @end[itemize]
 @begin{Example}
 @key(procedure) Update (Item   : @key(in) chars_ptr;
@@ -1378,11 +1397,11 @@ Check equal to True would have propagated Update_Error.
 @begin{Notes}
 New_Char_Array and New_String might be
 implemented either through
-the allocation function from the C environment (``malloc'') or through
-Ada dynamic memory allocation (``new''). The key points are
+the allocation function from the C environment (@lquotes@;malloc@rquotes@;) or through
+Ada dynamic memory allocation (@lquotes@;new@rquotes@;). The key points are
 @begin{itemize}
 the returned value (a chars_ptr) is
-represented as a C ``char *'' so
+represented as a C @lquotes@;char *@rquotes@; so
 that it may be passed to C functions;
 
 the allocated object should be freed by the programmer via a call of
@@ -1395,7 +1414,7 @@ Free, not by a called C function.
 The generic package Interfaces.C.Pointers allows the Ada programmer to
 perform C-style operations on pointers.  It includes an access type
 Pointer, Value functions that dereference a Pointer and deliver the
-designated array, several pointer arithmetic operations, and ``copy''
+designated array, several pointer arithmetic operations, and @lquotes@;copy@rquotes@;
 procedures that copy the contents of a source pointer into the array
 designated by a destination pointer.  As in C, it treats an object Ptr of
 type Pointer as a pointer to the first element of an array, so that for
@@ -1466,7 +1485,7 @@ following declaration:
 @end{Example}
 
 The type Pointer is C-compatible and
-corresponds to one use of C's ``Element *''.
+corresponds to one use of C's @lquotes@;Element *@rquotes@;.
 An object of type Pointer is interpreted as a pointer to the
 initial Element in an Element_Array.
 Two styles are supported:
@@ -1659,7 +1678,7 @@ The COBOL interface package supplies several sets of facilities:
 @begin{itemize}
 A set of types corresponding to the native
 COBOL types of the supported COBOL implementation
-(so-called ``internal COBOL representations''),
+(so-called @lquotes@;internal COBOL representations@rquotes@;),
 allowing Ada data to be passed as parameters to COBOL programs
 
 A set of types and constants reflecting external data representations
@@ -2021,7 +2040,7 @@ value of the decimal type Num.  Conversion_Error is propagated if Item is
 too large for Num.
 @begin{Ramification}
 There is no rescaling performed on the conversion.  That
-is, the returned value in each case is a ``bit copy'' if Num has a
+is, the returned value in each case is a @lquotes@;bit copy@rquotes@; if Num has a
 binary radix.  The programmer is responsible for maintaining the correct
 scale.@end{ramification}
 
@@ -2056,7 +2075,7 @@ flexibility of dynamically modifying the mappings is needed.
 Corresponding to COBOL's alphanumeric data is the string
  type Alphanumeric.
 
-Numeric data may have either a ``display'' or ``computational'' representation
+Numeric data may have either a @lquotes@;display@rquotes@; or @lquotes@;computational@rquotes@; representation
 in COBOL.  On the Ada side, the data is of a decimal fixed point type.
 Passing an Ada decimal data item to
 a COBOL program requires conversion from the Ada decimal type to some type
@@ -2116,7 +2135,7 @@ An implementation supporting this package shall ensure that if the bounds of
 a Packed_Decimal, Alphanumeric, or Numeric variable are static,
 then the representation of the
 object comprises solely the array components (that is, there is no implicit
-run-time ``descriptor''
+run-time @lquotes@;descriptor@rquotes@;
 that is part of the object).
 @end{ramification}
 @end{ImplReq}
@@ -2142,14 +2161,14 @@ correspondences between Ada and COBOL.
 @begin[itemize]
 An Ada @key[access] T parameter
 is passed as a
-``BY REFERENCE'' data item of the COBOL type corresponding
+@lquotes@;BY REFERENCE@rquotes@; data item of the COBOL type corresponding
 to T.
 
-An Ada @key[in] scalar parameter is passed as a ``BY CONTENT'' data item
+An Ada @key[in] scalar parameter is passed as a @lquotes@;BY CONTENT@rquotes@; data item
 of the corresponding COBOL type.
 
 Any other Ada parameter is passed as a
-``BY REFERENCE'' data item of the COBOL type corresponding
+@lquotes@;BY REFERENCE@rquotes@; data item of the COBOL type corresponding
 to the Ada parameter type; for scalars, a local copy is
 used if necessary to ensure by-copy semantics.
 @end[itemize]
@@ -2165,7 +2184,7 @@ does not return a value.@end{reason}
 
 If an Ada subprogram is exported to COBOL, then a call from COBOL
 call may specify
- either ``BY CONTENT'' or ``BY REFERENCE''.
+ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
 @end[Notes]
 
 @begin{Examples}
@@ -2446,7 +2465,7 @@ An object of a Fortran-compatible record type,
 declared in a library package or subprogram,
 can correspond to a Fortran common
 block; the type also corresponds to
-a Fortran ``derived type''.
+a Fortran @lquotes@;derived type@rquotes@;.
 @end[Notes]
 @begin{Examples}
 @i{Example of Interfaces.Fortran:}

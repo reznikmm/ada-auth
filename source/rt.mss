@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2000/05/29 05:47:21 $}
+@Comment{$Date: 2000/08/03 05:37:44 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -43,7 +43,7 @@ defining the metrics, we have tried to strike a balance on a case-by-case
 basis.
 
 It has been suggested that all metrics should be given names,
-so that ``data-sheets'' could be formulated and published
+so that @lquotes@;data-sheets@rquotes@; could be formulated and published
 by vendors.
 However the paragraph number can serve that purpose.
 @end{Discussion}
@@ -53,13 +53,13 @@ However the paragraph number can serve that purpose.
 @begin{Notes}
 
 The specification of the metrics makes a distinction between upper bounds
-and simple execution times.  Where something is just specified as ``the
-execution time of'' a piece of code, this leaves one
+and simple execution times.  Where something is just specified as @lquotes@;the
+execution time of@rquotes@; a piece of code, this leaves one
 the freedom
 to choose a nonpathological case.  This kind of metric is of the form
-``there exists a program such that the value of the metric is V''.
-Conversely, the meaning of upper bounds is ``there is no program such
-that the value of the metric is greater than V''.
+@lquotes@;there exists a program such that the value of the metric is V@rquotes@;.
+Conversely, the meaning of upper bounds is @lquotes@;there is no program such
+that the value of the metric is greater than V@rquotes@;.
 This kind of metric can only be partially tested, by finding the value
 of V for one or more test programs.
 
@@ -551,7 +551,7 @@ When a task executes a @nt{delay_statement} that does not result in blocking,
 it is added to the tail of the ready queue for its active priority.
 @begin{Ramification}
 If the delay does result in blocking,
-the task moves to the ``delay queue'',
+the task moves to the @lquotes@;delay queue@rquotes@;,
 not to the ready queue.
 @end{Ramification}
 
@@ -728,7 +728,7 @@ For example, an implementation might use Priority'Last for all ceilings
 in Priority, and Interrupt_Priority'Last for all ceilings in
 Interrupt_Priority.
 This would be equivalent to having two ceiling priorities for protected objects,
-``nonpreemptible'' and ``noninterruptible'', and is an allowed behavior.
+@lquotes@;nonpreemptible@rquotes@; and @lquotes@;noninterruptible@rquotes@;, and is an allowed behavior.
 
 Note that the implementation cannot choose a subrange that crosses the
 boundary between normal and interrupt priorities.
@@ -767,7 +767,7 @@ a non-interrupt priority.
 @begin{ImplAdvice}
 
 The implementation should use names that end with
-``_Locking'' for implementation-defined locking policies.
+@lquotes@;_Locking@rquotes@; for implementation-defined locking policies.
 
 @end{ImplAdvice}
 
@@ -898,18 +898,18 @@ but a task can be blocked on only one call at a time.
 
 A previous version of Ada 9X required queue reordering in the
 @nt{asynchronous_select} case as well.
-If the call corresponds to a ``synchronous'' entry call, then the task
+If the call corresponds to a @lquotes@;synchronous@rquotes@; entry call, then the task
 is blocked while queued, and it makes good sense to move it up in the
 queue if its priority is raised.
 
-However, if the entry call is ``asynchronous,'' that is, it is
+However, if the entry call is @lquotes@;asynchronous,@rquotes@; that is, it is
 due to an @nt{asynchronous_select} whose @nt{triggering_statement}
 is an entry call, then the task is not waiting for this
 entry call, so the placement of the entry call on the
 queue is irrelevant to the rate at which the task proceeds.
 
 Furthermore, when an entry is used for @nt{asynchronous_select}s,
-it is almost certain to be a ``broadcast'' entry or have
+it is almost certain to be a @lquotes@;broadcast@rquotes@; entry or have
 only one caller at a time.  For example, if the entry is
 used to notify tasks of a mode switch, then all tasks on the
 entry queue would be signaled when the mode changes.  Similarly,
@@ -977,7 +977,7 @@ need not support more than one such policy per partition.
 @begin{ImplAdvice}
 
 The implementation should use names that end with
-``_Queuing'' for implementation-defined queuing policies.
+@lquotes@;_Queuing@rquotes@; for implementation-defined queuing policies.
 
 @end{ImplAdvice}
 
@@ -1030,7 +1030,7 @@ inter-processor communication overhead,
 so the error might not be detected until after Set_Priority has
 returned.
 
-However, we wish to allow implementations to avoid storing ``extra''
+However, we wish to allow implementations to avoid storing @lquotes@;extra@rquotes@;
 information about terminated tasks.
 Therefore, we make Get_Priority of a terminated task raise an exception;
 the implementation need not continue to store the priority of a task
@@ -1101,7 +1101,7 @@ either Program_Error is raised in the task that called the entry,
 or its priority is temporarily lowered,
 or both, or neither.
 @begin{Ramification}
-Note that the error is ``blamed'' on the task that did the entry call,
+Note that the error is @lquotes@;blamed@rquotes@; on the task that did the entry call,
 not the task that called Set_Priority.
 This seems to make sense for the case of a task blocked on a call,
 since if the Set_Priority had happened a
@@ -1509,7 +1509,7 @@ being synchronized with TAI.  It is also used for real time in the metrics,
 for comparison purposes.
 @end{Discussion}
 @begin{ImplNote}
-The specification of TAI as ``real time'' does not preclude the
+The specification of TAI as @lquotes@;real time@rquotes@; does not preclude the
 use of a simulated TAI clock for simulated execution environments.
 @end{ImplNote}
 
@@ -1660,9 +1660,11 @@ with external time references, and if such synchronization exists, the sources
 of synchronization information, the frequency of synchronization, and the
 synchronization method applied.
 
-The implementation shall document any aspects of the the external
-environment that could interfere with the clock behavior as defined in
-this clause.
+@ChgRef{Version=[1],Kind=[Revised]}
+The implementation shall document any aspects of the @Chg{New=[], Old=[the]}
+@chgnote{Correct typo as noted at Potsdam ARG meeting}
+external environment that could interfere with the clock behavior as defined
+in this clause.
 @begin{Discussion}
 For example, the implementation is allowed to rely on the time services of
 an underlying operating system, and this operating system clock can
@@ -1755,9 +1757,9 @@ by a function call residing in a board specific module.
 It is recommended that Calendar.Clock and Real_Time.Clock be implemented
 as transformations of the same time base.
 
-It is recommended that the ``best'' time base which exists in the
+It is recommended that the @lquotes@;best@rquotes@; time base which exists in the
 underlying system be available to the application through
-Clock.  ``Best'' may mean highest accuracy or largest range.
+Clock.  @lquotes@;Best@rquotes@; may mean highest accuracy or largest range.
 
 @end{ImplAdvice}
 
@@ -1873,7 +1875,7 @@ resumes execution following this statement.
 @begin{Notes}
 
 The execution time of a @nt{delay_statement} that does not cause the
-task to be blocked (e.g. ``@key[delay] 0.0;'' ) is of interest in situations
+task to be blocked (e.g. @lquotes@;@key[delay] 0.0;@rquotes@; ) is of interest in situations
 where delays are used to achieve voluntary round-robin task dispatching among
 equal-priority tasks.
 
@@ -2049,7 +2051,7 @@ infeasible to support it in the target environment.
 A direct implementation of the Asynchronous_Task_Control semantics using
 priorities is not necessarily efficient enough.
 Thus, we envision implementations that use some other mechanism to set
-the ``held'' state.
+the @lquotes@;held@rquotes@; state.
 If there is no other such mechanism,
 support for Asynchronous_Task_Control might be infeasible,
 because an implementation in terms of priority would require one idle

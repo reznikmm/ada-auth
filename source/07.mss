@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/06/03 02:02:34 $}
+@Comment{$Date: 2000/08/03 05:37:37 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -166,7 +166,7 @@ required.
 
 @begin{DiffWord83}
 We have moved the syntax into this clause and the next clause from
-RM83-7.1, ``Package Structure'', which we have removed.
+RM83-7.1, @lquotes@;Package Structure@rquotes@;, which we have removed.
 
 RM83 was unclear on the rules about when a package requires a body.
 For example, RM83-7.1(4) and RM83-7.1(8) clearly forgot about the
@@ -281,7 +281,7 @@ within this body and, consequently, its value can only be
 changed within the @nt{package_body}.  In the absence of local tasks,
 the value of such a variable remains unchanged between calls issued
 from outside the package to subprograms declared in the visible part.
-The properties of such a variable are similar to those of a ``static''
+The properties of such a variable are similar to those of a @lquotes@;static@rquotes@;
 variable of C.
 
 The elaboration of the body of a subprogram explicitly declared
@@ -408,7 +408,7 @@ generic formal private extension is also a partial view.
   Import, if supported by an implementation.
 @end(Honest)
 @begin{Reason}
-  We originally used the term ``private view,'' but this was easily
+  We originally used the term @lquotes@;private view,@rquotes@; but this was easily
   confused with the view provided @i(from) the private part, namely the
   full view.
 @end{Reason}
@@ -480,7 +480,7 @@ that seemed like too much mechanism.
 @end{Discussion}
 @begin{Honest}
   This rule is checked in a generic unit,
-  rather than using the ``assume the best'' or ``assume the worst''
+  rather than using the @lquotes@;assume the best@rquotes@; or @lquotes@;assume the worst@rquotes@;
   method.
 @end{Honest}
 @begin{Reason}
@@ -496,7 +496,7 @@ that seemed like too much mechanism.
     @key[procedure] Foo(X : @key[in] T1'Class);
 @key[private]
     @key[type] T1 @key[is] @key[tagged] @key[null] @key[record]; --@RI{ Illegal!}
-        --@RI{ This should say ``@key[tagged limited null record]''.}
+        --@RI{ This should say @lquotes@;@key[tagged limited null record]@rquotes@;.}
 @key[end] P1;
 
 @key[package] @key[body] P1 @key[is]
@@ -704,7 +704,7 @@ unconstrained:
 @end{Example}
 
 The above example would be illegal if the private extension said
-``is new One_Discrim(A => C);'',
+@lquotes@;is new One_Discrim(A => C);@rquotes@;,
 because then the constraints would not statically match.
 (Constraints that depend on discriminants are not static.)
 
@@ -810,7 +810,7 @@ operations defined by the contract.
 In other words, being inside the package is like being outside the
 generic, and being outside the package is like being inside the
 generic;
-a generic is like an ``inside-out'' package.
+a generic is like an @lquotes@;inside-out@rquotes@; package.
 
 This analogy also works for private extensions
 in the same inside-out way.
@@ -876,7 +876,7 @@ than the Ada 83 rule.
 In the original version of Ada 83, the same restriction applied
 to generic formal private types.
 However, the restriction was removed by the ARG for generics.
-In order to maintain the ``generic contract/private type contract analogy''
+In order to maintain the @lquotes@;generic contract/private type contract analogy@rquotes@;
 discussed above, we have to apply the same rule to
 package-private types.
 Note that a private untagged type without discriminants can be
@@ -887,9 +887,9 @@ cannot have defaults.
 
 @begin{DiffWord83}
 RM83-7.4.1(4),
-``Within the specification of the package that declares a private type
+@lquotes@;Within the specification of the package that declares a private type
 and before the end of the corresponding full type declaration, a
-restriction applies....'',
+restriction applies....@rquotes@;,
 is subsumed (and corrected) by the rule that
 a type shall be completely defined before it is frozen,
 and the rule that the parent type of a derived type declaration shall be
@@ -970,7 +970,7 @@ Otherwise, the inherited subprogram is not declared for the private
 extension,
 @Redundant[though it might be for the full type].
 @begin{Reason}
-  There is no need for the ``earliest place within the immediate scope''
+  There is no need for the @lquotes@;earliest place within the immediate scope@rquotes@;
   business here, because a @nt{private_extension_declaration} will be
   completed with a @nt{full_type_declaration}, so we can hang the
   necessary private implicit declarations on the
@@ -1027,7 +1027,7 @@ Consider:
 @end{Example}
 
 Another_Int does not inherit Int_Op,
-because Int_Op does not ``exist'' at the place
+because Int_Op does not @lquotes@;exist@rquotes@; at the place
 where Another_Int is declared.
 
 Type T2 inherits Op1 and Op2 from Root.
@@ -1208,12 +1208,12 @@ the NOTES of @RefSecNum{Package Bodies}.)
 @end{Notes}
 
 @begin{DiffWord83}
-The phrase in RM83-7.4.2(7), ``...after the full type declaration'',
+The phrase in RM83-7.4.2(7), @lquotes@;...after the full type declaration@rquotes@;,
 doesn't work in the presence of child units, so we define that rule in
 terms of visibility.
 
 The definition of the Constrained attribute for private types
-has been moved to ``Obsolescent Features.''
+has been moved to @lquotes@;Obsolescent Features.@rquotes@;
 (The Constrained attribute of an object has not been moved there.)
 @end{DiffWord83}
 
@@ -1429,7 +1429,7 @@ Otherwise, the following could happen:
     @key[type] T @key[is] @key[limited] @key[private];
     @key[type] R @key[is] @key[tagged]
         @key[record] --@RI{ Illegal!}
-               --@RI{ This should say ``@key[limited record]''.}
+               --@RI{ This should say @lquotes@;@key[limited record]@rquotes@;.}
             X : T;
         @key[end] @key[record];
 @key[private]
@@ -1457,8 +1457,8 @@ is a descendant of one of the following:
 @begin(itemize)
   a type with the reserved word @b(limited) in its definition;
   @begin{Ramification}
-  Note that there is always a ``definition,'' conceptually,
-  even if there is no syntactic category called ``..._definition''.
+  Note that there is always a @lquotes@;definition,@rquotes@; conceptually,
+  even if there is no syntactic category called @lquotes@;..._definition@rquotes@;.
   @end{Ramification}
 
   a task or protected type;
@@ -1510,9 +1510,9 @@ circumstances.
 
   It is important to remember
   that a single nonprivate type can be both limited and nonlimited
-  in different parts of its scope.  In other words, ``limited'' is a property
+  in different parts of its scope.  In other words, @lquotes@;limited@rquotes@; is a property
   that depends on where you are in the scope of the type.
-  We don't call this a ``view property'' because there is no particular
+  We don't call this a @lquotes@;view property@rquotes@; because there is no particular
   declaration to declare the nonlimited view.
 
   Tagged types never become nonlimited.
@@ -1680,7 +1680,7 @@ The following language-defined library package exists:
 @Defn{controlled type}
 A controlled type is a descendant of Controlled or Limited_Controlled.
 @begin{Discussion}
-We say ``nonlimited controlled types'' when we want to talk
+We say @lquotes@;nonlimited controlled types@rquotes@; when we want to talk
 about descendants of Controlled only.
 @end{Discussion}
 The (default) implementations of
@@ -1711,7 +1711,7 @@ that it is limited and it lacks the primitive subprogram Adjust.
   It is not clear that they need to be abstract, but there seems to be
   no harm in it, and it might make an implementation's life easier to
   know that there are no objects of these types @em in case the
-  implementation wishes to make them ``magic'' in some way.
+  implementation wishes to make them @lquotes@;magic@rquotes@; in some way.
 @end{Reason}
 @end{StaticSem}
 
@@ -1902,7 +1902,7 @@ An implementation is allowed to relax the above rules
 @Redundant[(for nonlimited controlled types)]
 in the following ways:
 @begin{TheProof}
-The phrase ``for nonlimited controlled types'' follows from the fact
+The phrase @lquotes@;for nonlimited controlled types@rquotes@; follows from the fact
 that all of the following permissions apply to cases involving
 assignment.
 It is important because the programmer can count on a stricter semantics
@@ -2095,9 +2095,9 @@ entities.
 However, the standard sometimes (informally) refers
 to the constructs or entities whose executions are being completed.
 Thus, for example,
-``the @nt{subprogram_call} or task is complete''
+@lquotes@;the @nt{subprogram_call} or task is complete@rquotes@;
 really means
-``@i{the execution of} the @nt{subprogram_call} or task is complete.''
+@lquotes@;@i{the execution of} the @nt{subprogram_call} or task is complete.@rquotes@;
 @end{Honest}
 
 @RootDefn2{Term=[finalization], Sec=(of an object)}
@@ -2342,7 +2342,7 @@ one for @key{others} in the main subprogram.
 If some deeply nested call raises an exception,
 causing some Finalize operation to be called,
 which then raises an exception,
-then normal execution ``would have continued''
+then normal execution @lquotes@;would have continued@rquotes@;
 at the beginning of the @nt{exception_handler}.
 Raising Program_Error at that point would cause that
 handler's code to be skipped.
@@ -2408,7 +2408,7 @@ designed to have no ill effect if it is applied a second time
 to the same object.
 @begin{Discussion}
   Or equivalently, a Finalize procedure
-  should be ``idempotent'';
+  should be @lquotes@;idempotent@rquotes@;;
   applying it twice to the same object should be equivalent to
   applying it once.
 @end{Discussion}
@@ -2499,7 +2499,7 @@ all controlled types will be library-level types,
 because of the accessibility rules
 (see @RefSecNum{Operations of Access Types} and @RefSecNum{Type Extensions}).
 This ensures that the Finalize operations may be applied without
-providing any ``display'' or ``static-link.''
+providing any @lquotes@;display@rquotes@; or @lquotes@;static-link.@rquotes@;
 This simplifies finalization as a result of garbage collection,
 abort, and asynchronous transfer of control.
 
@@ -2518,7 +2518,7 @@ The links needed to implement the list can be declared (privately)
 in types Controlled and Limited_Controlled,
 so they will be inherited by all controlled types.
 
-Another implementation technique, which we refer to as the ``PC-map''
+Another implementation technique, which we refer to as the @lquotes@;PC-map@rquotes@;
 approach essentially implies inserting exception handlers at various
 places, and finalizing objects based on where the exception was
 raised.

@@ -32,10 +32,10 @@ I probably ought to add a style just for this purpose)
 @end{WithoutParanum}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/06/03 02:02:33 $}
+@Comment{$Date: 2000/08/03 05:37:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -45,7 +45,7 @@ packages
 of related types, objects, and operations.
 The packages may be parameterized
 and the types may be extended to support the construction of libraries
-of reusable, adaptable software components.  The operations
+of reusable, adaptable software components. The operations
 may be implemented as subprograms using conventional sequential
 control structures, or as entries that include synchronization
 of concurrent threads of control as part of their invocation.
@@ -57,7 +57,7 @@ the support of real-time, concurrent programming.
 Errors can be signaled as exceptions and handled explicitly.
 The language also
 covers  systems  programming;   this  requires  precise  control  over  the
-representation of data and access to system-dependent properties.  Finally,
+representation of data and access to system-dependent properties. Finally,
 a predefined environment of standard packages is provided, including
 facilities for, among others, input-output, string manipulation,
 numeric elementary functions, and random number generation.
@@ -74,13 +74,15 @@ Differences between Ada 83 and Ada 95 are listed.
 
 The AARM stresses detailed correctness and uniformity over
 readability and understandability.
-We're not trying to make the language ``appear'' simple here;
+We're not trying to make the language @lquotes@;appear@rquotes@; simple here;
 on the contrary, we're trying to expose hidden complexities,
 so we can more easily detect language bugs.
 The RM95, on the other hand, is intended to be a more
 readable document for programmers.
 
+@begin{Leading}
 The annotations in the AARM are as follows:
+@end{Leading}
 @begin{Itemize}
 Text that is logically redundant is shown
 @Redundant[in square brackets, like this].
@@ -199,10 +201,10 @@ Each defined term appears there,
 and also in @i{italics, like this}.
 Syntactic categories defined in BNF are also indexed.
 
-A definition marked ``[distributed]'' is the main definition for a
+A definition marked @lquotes@;[distributed]@rquotes@; is the main definition for a
 term whose complete definition is given in pieces distributed
 throughout the document.
-The pieces are marked ``[partial]''
+The pieces are marked @lquotes@;[partial]@rquotes@;
 or with a phrase explaining what cases the partial definition applies
 to.
 @end{Discussion}
@@ -221,7 +223,9 @@ of data processing systems.
 @LabeledSubClause{Extent}
 
 @begin{Intro}
+@begin{Leading}
 This International Standard specifies:
+@end{Leading}
 @begin(Itemize)
      The form of a program written in Ada;
 
@@ -244,7 +248,9 @@ This International Standard specifies:
      is not required to detect.
 @end(Itemize)
 
+@begin{Leading}
 This International Standard does not specify:
+@end{Leading}
 @begin(Itemize)
      The means whereby a program written in Ada is transformed into
      object code executable by a processor;
@@ -272,8 +278,10 @@ This International Standard contains thirteen sections,
 fourteen annexes,
 and an index.
 
+@begin{Leading}
 @Defn{core language}
 The @i{core} of the Ada language consists of:
+@end{Leading}
 @begin{Itemize}
 Sections 1 through 13
 
@@ -284,12 +292,14 @@ Sections 1 through 13
 @RefSec{Obsolescent Features}
 @end{Itemize}
 
+@begin{Leading}
 @Defn{Specialized Needs Annexes}
 @Defn2{Term=[Annex],Sec=(Specialized Needs)}
 @Defn{application areas}
 The following @i{Specialized Needs Annexes}
 define features that are needed by certain
 application areas:
+@end{Leading}
 @begin{Itemize}
 @RefSec{Systems Programming}
 
@@ -304,26 +314,30 @@ application areas:
 @RefSec{Safety and Security}
 @end{Itemize}
 
+@begin{Leading}
 @Defn{normative}
 @Defn2{Term=[Annex],Sec=(normative)}
 The core language and the Specialized Needs Annexes are normative,
 except that the material in each of the items listed below
 is informative:
+@end{Leading}
 @begin(Itemize)
     Text under a NOTES or Examples heading.
 
-    Each clause or subclause whose title starts with the word ``Example''
-    or ``Examples''.
+    Each clause or subclause whose title starts with the word @lquotes@;Example@rquotes@;
+    or @lquotes@;Examples@rquotes@;.
 @end(Itemize)
 
 All implementations shall conform to the core language.
 In addition, an implementation may conform separately to one or more
 Specialized Needs Annexes.
 
+@begin{Leading}
 @Defn{informative}
 @IndexSee{Term=[non-normative],See=(informative)}
 @Defn2{Term=[Annex],Sec=(informative)}
 The following Annexes are informative:
+@end{Leading}
 @begin{Itemize}
 @RefSec{Language-Defined Attributes}
 
@@ -362,11 +376,11 @@ We recommend that
 implementations @i{not} be allowed to validate a portion of one of the
 Specialized Needs Annexes,
 although implementations can, of course, provide unvalidated support for such
-portions.  We have designed the Specialized Needs Annexes assuming that
-this recommendation is followed.  Thus, our decisions about what to
+portions. We have designed the Specialized Needs Annexes assuming that
+this recommendation is followed. Thus, our decisions about what to
 include and what not to include in those annexes are
 based on the assumption that each annex is validated in an
-``all-or-nothing'' manner.
+@lquotes@;all-or-nothing@rquotes@; manner.
 
 An implementation may, of course,
 support extensions that are different from
@@ -431,7 +445,7 @@ Compile-time rules that are used in name resolution,
 including overload resolution.
 @begin{Discussion}
 These rules are observed at compile time.
-(We say ``observed'' rather than ``checked,''
+(We say @lquotes@;observed@rquotes@; rather than @lquotes@;checked,@rquotes@;
 because these rules are not individually checked.
 They are really just part of the @LegalityName@;s in Section 8
 that require exactly one interpretation of each constituent
@@ -445,9 +459,9 @@ or a @LegalityName,
 and it is sometimes difficult to decide which it should be.
 We generally make a given rule a @ResolutionName only if it has to be.
 For example,
-``The @nt{name}, if any, in a @nt{raise_statement} shall be the @nt{name}
-of an exception.''
-is under ``@LegalityTitle.''
+@lquotes@;The @nt{name}, if any, in a @nt{raise_statement} shall be the @nt{name}
+of an exception.@rquotes@;
+is under @lquotes@;@LegalityTitle.@rquotes@;
 @end{Discussion}
 @end{Resolution}
 
@@ -463,7 +477,7 @@ A construct is @i{legal} if it obeys all of the @LegalityName@;s.
 These rules are not used in overload resolution.
 
 Note that run-time errors are always attached to exceptions;
-for example, it is not ``illegal'' to divide by zero,
+for example, it is not @lquotes@;illegal@rquotes@; to divide by zero,
 it just raises an exception.
 @end{Discussion}
 @end{Legality}
@@ -475,10 +489,10 @@ A definition of the compile-time effect of each construct.
 @begin{Discussion}
 The most important compile-time effects represent the effects
 on the symbol table associated with declarations (implicit or
-explicit).  In addition, we use this heading as a bit of a grab
+explicit). In addition, we use this heading as a bit of a grab
 bag for equivalences, package specifications, etc.
 For example, this is where we put statements like so-and-so is
-equivalent to such-and-such.  (We ought to try to really mean it when we say
+equivalent to such-and-such. (We ought to try to really mean it when we say
 such things!)
 Similarly, statements about magically-generated implicit declarations
 go here.
@@ -500,10 +514,10 @@ and it obeys all of the @LinkTimeName@;s.
 @begin{Discussion}
 It is not specified exactly when these rules are checked, so
 long as they are checked for any given partition before that partition starts
-running.  An implementation may choose to check some such rules at compile
+running. An implementation may choose to check some such rules at compile
 time, and reject @nt{compilation_unit}s accordingly.
 Alternatively, an implementation may check such rules when the partition is
-created (usually known as ``link time''),
+created (usually known as @lquotes@;link time@rquotes@;),
 or when the partition is mapped to a particular piece of hardware (but before
 the partition starts running).
 @end{Discussion}
@@ -534,7 +548,7 @@ usable in a @nt{pragma} Suppress.
 Situations that result in bounded (run-time) errors
 (see @RefSecNum{Classification of Errors}).
 @begin{Discussion}
-The ``bounds'' of each such error are described here @em
+The @lquotes@;bounds@rquotes@; of each such error are described here @em
 that is, we characterize the set of all possible behaviors that can
 result from a bounded error occurring at run time.
 @end{Discussion}
@@ -553,13 +567,13 @@ Additional requirements for conforming implementations.
 @begin{Discussion}
 ...as opposed to rules imposed on the programmer.
 An example might be,
-``The smallest representable duration, Duration'Small,
-shall not be greater than twenty milliseconds.''
+@lquotes@;The smallest representable duration, Duration'Small,
+shall not be greater than twenty milliseconds.@rquotes@;
 
 It's really just an issue of how the rule is worded.
-We could write the same rule as ``The smallest representable duration is
-an implementation-defined value less than or equal to 20 milliseconds''
-and then it would be under ``@StaticSemTitle.''
+We could write the same rule as @lquotes@;The smallest representable duration is
+an implementation-defined value less than or equal to 20 milliseconds@rquotes@;
+and then it would be under @lquotes@;@StaticSemTitle.@rquotes@;
 @end{Discussion}
 @end{ImplReq}
 
@@ -568,9 +582,9 @@ and then it would be under ``@StaticSemTitle.''
 Documentation requirements for conforming implementations.
 @begin{Discussion}
 These requirements are beyond those that are implicitly specified by
-the phrase ``implementation defined''.  The
+the phrase @lquotes@;implementation defined@rquotes@;. The
 latter require documentation as well, but we don't repeat these cases
-under this heading.  Usually this heading is used for when the
+under this heading. Usually this heading is used for when the
 description of the documentation requirement is longer and does not
 correspond directly to one, narrow normative sentence.
 @end{Discussion}
@@ -586,14 +600,14 @@ of certain language constructs.
 @Defn{implementation permissions}
 Additional permissions given to the implementer.
 @begin{Discussion}
-For example, ``The implementation is allowed to impose further
-restrictions on the record aggregates allowed in code statements.''
+For example, @lquotes@;The implementation is allowed to impose further
+restrictions on the record aggregates allowed in code statements.@rquotes@;
 When there are restrictions on the permission,
 those restrictions are given here also.
-For example, ``An implementation is allowed to restrict the kinds of
+For example, @lquotes@;An implementation is allowed to restrict the kinds of
 subprograms that are allowed to be main subprograms.
-However, it shall support at least parameterless procedures.''
-@em we don't split this up between here and ``@ImplReqTitle.''
+However, it shall support at least parameterless procedures.@rquotes@;
+@em we don't split this up between here and @lquotes@;@ImplReqTitle.@rquotes@;
 @end{Discussion}
 @end{ImplPerm}
 
@@ -601,7 +615,7 @@ However, it shall support at least parameterless procedures.''
 @Defn{implementation advice}
 @Defn{advice}
 Optional advice given to the implementer.
-The word ``should'' is used to indicate that the advice is
+The word @lquotes@;should@rquotes@; is used to indicate that the advice is
 a recommendation, not a requirement.
 It is implementation defined
 whether or not a given recommendation is obeyed.
@@ -618,9 +632,9 @@ and whether the required documentation is sufficient.
 It would be wrong for the ACVC to enforce any of this advice.
 
 For example,
-``Whenever possible, the implementation should choose a value no
+@lquotes@;Whenever possible, the implementation should choose a value no
 greater than fifty microseconds for the smallest representable duration,
-Duration'Small.''
+Duration'Small.@rquotes@;
 
 We use this heading, for example, when the rule is so low level or
 implementation-oriented as to be untestable.
@@ -644,7 +658,7 @@ This material is informative.
 @ @* @Comment{Two blank lines: why? Because it was in the original.}
 @*
 The next three headings list all language changes between Ada 83
-and Ada 95.  Language changes are any change that changes the set of
+and Ada 95. Language changes are any change that changes the set of
 text strings that are legal Ada programs, or changes the meaning of
 any legal program.
 Wording changes, such as changes in terminology, are not language
@@ -657,8 +671,7 @@ categories:
 @begin{Inconsistent83}
 @Defn{inconsistencies with Ada 83}
 This heading lists all of the upward inconsistencies between Ada 83 and Ada
-9X.
-Upward inconsistencies are situations in which a legal Ada 83 program
+95. Upward inconsistencies are situations in which a legal Ada 83 program
 is a legal Ada 95 program with different semantics.
 This type of upward incompatibility is the worst type for users,
 so we only tolerate it in rare situations.
@@ -666,7 +679,7 @@ so we only tolerate it in rare situations.
 (Note that the semantics of a program is not the same thing as the
 behavior of the program.
 Because of Ada's indeterminacy,
-the ``semantics'' of a given feature describes a @i{set} of behaviors
+the @lquotes@;semantics@rquotes@; of a given feature describes a @i{set} of behaviors
 that can be exhibited by that feature.
 The set can contain more than one allowed behavior.
 Thus, when we ask whether the semantics changes,
@@ -679,8 +692,8 @@ and does not appear in the RM95.
 @begin{Incompatible83}
 @Defn{incompatibilities with Ada 83}
 This heading lists all of the upward incompatibilities between Ada 83
-and Ada 95, except for the ones listed under ``@Inconsistent83Title''
-above.  These are the situations in which a legal Ada 83 program is
+and Ada 95, except for the ones listed under @lquotes@;@Inconsistent83Title@rquotes@;
+above. These are the situations in which a legal Ada 83 program is
 illegal in Ada 95.
 We do not generally consider a change that turns erroneous execution
 into an exception, or into an illegality, to be upwardly incompatible.
@@ -711,7 +724,7 @@ the next heading does not represent any language change:
 This heading lists some of the non-semantic changes between RM83 and
 the RM95.
 It is incomplete; we have not attempted to list all wording
-changes, but only the ``interesting'' ones.
+changes, but only the @lquotes@;interesting@rquotes@; ones.
 
 This is not part of the definition of the language,
 and does not appear in the RM95.
@@ -721,21 +734,23 @@ and does not appear in the RM95.
 
 @begin{ImplReq}
 
+@begin{Leading}
 @Defn2{Term=[conformance],Sec=(of an implementation with the Standard)}
 A conforming implementation shall:
+@end{Leading}
 @begin{Discussion}
 @Defn{implementation}
 The @i{implementation} is the software and hardware that implements
 the language.
 This includes compiler, linker, operating system, hardware, etc.
 
-We first define what it means to ``conform'' in general @em
+We first define what it means to @lquotes@;conform@rquotes@; in general @em
 basically, the implementation has to properly implement the normative
 rules given throughout the standard.
 Then we define what it means to conform to a Specialized Needs
 Annex @em the implementation must support the core features plus the
 features of that Annex.
-Finally, we define what it means to ``conform to the Standard'' @em
+Finally, we define what it means to @lquotes@;conform to the Standard@rquotes@; @em
 this requires support for the core language,
 and allows partial (but not conflicting) support for
 the Specialized Needs Annexes.
@@ -756,10 +771,10 @@ the Specialized Needs Annexes.
      errors whose detection is required by this
      International Standard;
      @begin{Discussion}
-       Note that we no longer use the term ``rejection'' of programs
+       Note that we no longer use the term @lquotes@;rejection@rquotes@; of programs
        or program units.
        We require that programs or program units with errors or that
-       exceed some capacity limit be ``identified.''  The way in which
+       exceed some capacity limit be @lquotes@;identified.@rquotes@;  The way in which
        errors or capacity problems are reported is not specified.
 
        An implementation is allowed to use standard error-recovery
@@ -796,7 +811,7 @@ the Specialized Needs Annexes.
        @Defn2{Term=[italics],Sec=(implementation-defined)}
        Wherever in the standard the text of a language-defined library
        unit contains an italicized phrase starting with
-       ``@i{implementation-defined}'', the implementation's version
+       @lquotes@;@i{implementation-defined}@rquotes@;, the implementation's version
        will replace that phrase with some implementation-defined text
        that is syntactically legal at that place, and follows any other
        applicable rules.
@@ -815,7 +830,7 @@ the Specialized Needs Annexes.
      @ImplDef{Variations from the standard that are impractical to avoid
      given the implementation's execution environment.}
      @begin{Reason}
-     The ``impossible or impractical'' wording comes from AI-325.
+     The @lquotes@;impossible or impractical@rquotes@; wording comes from AI-325.
      It takes some judgement and common sense to interpret this.
      Restricting compilation units to less than 4 lines is probably
      unreasonable, whereas restricting them to less than 4 billion lines
@@ -828,6 +843,7 @@ the Specialized Needs Annexes.
      by this International Standard.
 @end(Itemize)
 
+@begin{Leading}
 @Defn2{Term=[external effect], Sec=(of the execution of an Ada program)}
 @Defn2{Term=[effect], Sec=(external)}
 The @i(external effect) of the execution of an Ada program is
@@ -835,6 +851,7 @@ defined in terms of its interactions
 with its external environment.
 @Defn{external interaction}
 The following are defined as @i(external interactions):
+@end{Leading}
 @begin(Itemize)
   Any interaction with an external file
   (see @RefSecNum(External Files and File Objects));
@@ -856,7 +873,7 @@ The following are defined as @i(external interactions):
   or an exported subprogram
   (see @RefSecNum(Interface to Other Languages)) to an external caller;
   @begin{Discussion}
-    By ``result returned'' we mean to include function results
+    By @lquotes@;result returned@rquotes@; we mean to include function results
     and values returned in [@key(in)] @key(out) parameters.
   @end{Discussion}
 
@@ -880,7 +897,7 @@ a set of interactions with the external environment whose
 order and timing are consistent with the definitions and requirements of this
 International Standard for the semantics of the given program.
 @begin{Ramification}
-  There is no need to produce any of the ``internal effects''
+  There is no need to produce any of the @lquotes@;internal effects@rquotes@;
   defined for the semantics of the program @em all of these
   can be optimized away @em so long as an appropriate sequence
   of external interactions is produced.
@@ -890,38 +907,38 @@ International Standard for the semantics of the given program.
   various liberties associated with optimizations in
   the presence of language-defined checks,
   that could change the external effects that
-  might be produced.  These alternative external effects
+  might be produced. These alternative external effects
   are still consistent with the standard, since
   @RefSecNum(Exceptions and Optimization) is part of the standard.
 
-  Note also that we only require ``@i(an appropriate) sequence
-  of external interactions'' rather than ``@i(the same) sequence...''
+  Note also that we only require @lquotes@;@i(an appropriate) sequence
+  of external interactions@rquotes@; rather than @lquotes@;@i(the same) sequence...@rquotes@;
   An optimizer may cause a different sequence of external interactions
   to be produced than would be produced without the optimizer, so
   long as the new sequence still satisfies the requirements
-  of the standard.  For example, optimization might affect
+  of the standard. For example, optimization might affect
   the relative rate of progress of two concurrent tasks, thereby
   altering the order in which two external interactions occur.
 
-  Note that RM83 explicitly mentions the case of an ``exact effect''
+  Note that RM83 explicitly mentions the case of an @lquotes@;exact effect@rquotes@;
   of a program, but since so few programs have their effects defined
   that exactly,
-  we don't even mention this ``special'' case.  In particular,
+  we don't even mention this @lquotes@;special@rquotes@; case. In particular,
   almost any program that uses floating point or tasking has to have
   some level
-  of inexactness in the specification of its effects.  And if one
+  of inexactness in the specification of its effects. And if one
   includes aspects of the timing of the external interactions
   in the external effect of the program (as is appropriate for a real-time
-  language), no ``exact effect'' can be specified.
+  language), no @lquotes@;exact effect@rquotes@; can be specified.
   For example, if two external interactions initiated by a single task
-  are separated by a ``@key(delay) 1.0;'' then the language rules
+  are separated by a @lquotes@;@key(delay) 1.0;@rquotes@; then the language rules
   imply that the two external interactions have to be separated in time
   by at least one second, as defined by the clock associated with
-  the @nt<delay_relative_statement>.  This in turn implies that
+  the @nt<delay_relative_statement>. This in turn implies that
   the time at which an external interaction occurs is part of
   the characterization of the external interaction, at least in
   some cases, again making the specification of the required
-  ``exact effect'' impractical.
+  @lquotes@;exact effect@rquotes@; impractical.
 @end{Discussion}
 
 An implementation that conforms to this Standard shall support each
@@ -1012,18 +1029,18 @@ for unspecified situations.
 The implementation-defined characteristics are summarized in
 @RefSecNum{Implementation-Defined Characteristics}.
 @begin{Discussion}
-  We used to use the term ``implementation dependent''
-  instead of ``unspecified''.
-  However, that sounded too much like ``implementation defined''.
-  Furthermore, the term ``unspecified'' is used in the ANSI C and
+  We used to use the term @lquotes@;implementation dependent@rquotes@;
+  instead of @lquotes@;unspecified@rquotes@;.
+  However, that sounded too much like @lquotes@;implementation defined@rquotes@;.
+  Furthermore, the term @lquotes@;unspecified@rquotes@; is used in the ANSI C and
   POSIX standards for this purpose, so that is another advantage.
-  We also use ``not specified'' and ``not specified by the language''
-  as synonyms for ``unspecified.''
+  We also use @lquotes@;not specified@rquotes@; and @lquotes@;not specified by the language@rquotes@;
+  as synonyms for @lquotes@;unspecified.@rquotes@;
   The documentation requirement is the only difference between
   implementation defined and unspecified.
 
-  Note that the ``set of possible effects'' can be ``all imaginable
-  effects'', as is the case with erroneous execution.
+  Note that the @lquotes@;set of possible effects@rquotes@; can be @lquotes@;all imaginable
+  effects@rquotes@;, as is the case with erroneous execution.
 @end{Discussion}
 
 The implementation may choose to document implementation-defined behavior
@@ -1072,7 +1089,7 @@ extensions to the functionality of a language-defined library unit,
 it should normally do so by adding children to the library unit.
 @begin(ImplNote)
 If an implementation has support code
-(``run-time system code'')
+(@lquotes@;run-time system code@rquotes@;)
 that is needed for the execution of user-defined code,
 it can put that support code in child packages of System.
 Otherwise, it has to use some trick to avoid polluting the user's
@@ -1108,13 +1125,15 @@ The meaning of Ada programs is described by means of narrative
 rules defining both the effects of each construct and the composition
 rules for constructs.
 
+@begin{Leading}
 @keepnext@;@Defn2{Term=[syntax], Sec=(notation)}
 @Defn2{Term=[grammar], Sec=(notation)}
 @Defn2{Term=[context free grammar], Sec=(notation)}
 @Defn2{Term=[BNF (Backus-Naur Form)], Sec=(notation)}
 @Defn2{Term=[Backus-Naur Form (BNF)], Sec=(notation)}
 The context-free syntax of the language is described using a simple variant
-of Backus-Naur Form.  In particular:
+of Backus-Naur Form. In particular:
+@end{Leading}
 @begin(Itemize)
 @keepnext@;Lower case words in a sans-serif font,
 some containing embedded underlines, are used to
@@ -1128,16 +1147,16 @@ denote syntactic categories, for example:
 @key(array)
 @end(Display)
 
-@keepnext@;Square brackets enclose optional items.  Thus the two following
+@keepnext@;Square brackets enclose optional items. Thus the two following
 rules are equivalent.
 @begin(Display)
 @nt<return_statement> ::= @key(return) [@nt<expression>];
 @nt<return_statement> ::= @key(return); | @key(return) @nt<expression>;
 @end(Display)
 
-@keepnext@;Curly brackets enclose a repeated item.  The item may appear zero
+@keepnext@;Curly brackets enclose a repeated item. The item may appear zero
 or more times; the repetitions occur from left to right as with an
-equivalent left-recursive rule.  Thus the two following rules are
+equivalent left-recursive rule. Thus the two following rules are
 equivalent.
 @begin(Display)
 @nt<term> ::= @nt<factor> {@nt<multiplying_operator> @nt<factor>}
@@ -1155,8 +1174,8 @@ for itself:
 @Defn2{Term=[italics],Sec=(syntax rules)}
 If the name of any syntactic category starts with an italicized
 part, it is equivalent to the category name without the italicized
-part.  The italicized part is intended to convey some semantic
-information.  For example @i(subtype_)@nt<name> and
+part. The italicized part is intended to convey some semantic
+information. For example @i(subtype_)@nt<name> and
 @i(task_)@nt<name> are both equivalent to @nt<name> alone.
 @end(Itemize)
 @begin(Discussion)
@@ -1169,22 +1188,22 @@ In fact, it is ambiguous; the ambiguities are resolved
 by the overload resolution rules
 (see @RefSecNum{The Context of Overload Resolution}).
 
-We often use ``if'' to mean ``if and only if'' in definitions.
-For example, if we define ``photogenic'' by saying,
-``A type is photogenic if it has the following properties...,''
+We often use @lquotes@;if@rquotes@; to mean @lquotes@;if and only if@rquotes@; in definitions.
+For example, if we define @lquotes@;photogenic@rquotes@; by saying,
+@lquotes@;A type is photogenic if it has the following properties...,@rquotes@;
 we mean that a type is photogenic if @i{and only if}
 it has those properties.
 It is usually clear from the context,
-and adding the ``and only if'' seems too cumbersome.
+and adding the @lquotes@;and only if@rquotes@; seems too cumbersome.
 
-When we say, for example, ``a @nt{declarative_item} of a
-@nt{declarative_part}'', we are talking about a @nt{declarative_item}
-immediately within that @nt{declarative_part}.  When we say ``a
-@nt{declarative_item} in, or within, a @nt{declarative_part}'', we are
+When we say, for example, @lquotes@;a @nt{declarative_item} of a
+@nt{declarative_part}@rquotes@;, we are talking about a @nt{declarative_item}
+immediately within that @nt{declarative_part}. When we say @lquotes@;a
+@nt{declarative_item} in, or within, a @nt{declarative_part}@rquotes@;, we are
 talking about a @nt{declarative_item} anywhere in the
 @nt{declarative_part}, possibly deeply nested within other
-@nt{declarative_part}s.  (This notation doesn't work very well for
-@nt{name}s, since the name ``of'' something also has another meaning.)
+@nt{declarative_part}s. (This notation doesn't work very well for
+@nt{name}s, since the name @lquotes@;of@rquotes@; something also has another meaning.)
 
 When we refer to the name of a language-defined
 entity (for example, Duration),
@@ -1198,21 +1217,21 @@ Duration the user might have declared.
 
 @Defn{syntactic category}
 A @i{syntactic category} is
-a nonterminal in the grammar defined in BNF under ``@SyntaxTitle.''
+a nonterminal in the grammar defined in BNF under @lquotes@;@SyntaxTitle.@rquotes@;
 Names of syntactic categories are set in a different font,
 @nt{like_this}.
 
 @ToGlossaryAlso{Term=<Construct>,
   Text=<A @i(construct) is a piece of text
   (explicit or implicit) that is an instance of a syntactic category
-  defined under ``@SyntaxTitle.''>}
+  defined under @lquotes@;@SyntaxTitle.@rquotes@;>}
 @begin{Ramification}
 For example, an @nt{expression} is a construct.
 A declaration is a construct,
-whereas the thing declared by a declaration is an ``entity.''
+whereas the thing declared by a declaration is an @lquotes@;entity.@rquotes@;
 @end{Ramification}
 @begin{Discussion}
-``Explicit'' and ``implicit'' don't mean exactly what you might think
+@lquotes@;Explicit@rquotes@; and @lquotes@;implicit@rquotes@; don't mean exactly what you might think
 they mean:  The text of an instance of a generic is
 considered explicit, even though it does not appear explicitly (in
 the non-technical sense) in the program text,
@@ -1251,15 +1270,15 @@ Additional reordering permissions are given in
 @RefSec(Exceptions and Optimization).
 
 There is no requirement that the implementation always choose
-the same order in a given kind of situation.  In fact, the
+the same order in a given kind of situation. In fact, the
 implementation is allowed to choose a different order for two
 different executions of the same construct.
 However, we expect most implementations will behave in a relatively
 predictable manner in most situations.
 @end{Ramification}
 @begin{Reason}
-The ``sequential order'' wording is intended to allow the programmer
-to rely on ``benign'' side effects.
+The @lquotes@;sequential order@rquotes@; wording is intended to allow the programmer
+to rely on @lquotes@;benign@rquotes@; side effects.
 For example, if F is a function that returns a unique integer by
 incrementing some global and returning the result,
 a call such as P(F, F) is OK if the programmer cares only
@@ -1272,7 +1291,7 @@ equivalent to some sequential order.
 
 @begin{Notes}
 The syntax rules describing structured constructs are presented in a
-form that corresponds to the recommended paragraphing.  For example, an
+form that corresponds to the recommended paragraphing. For example, an
 @nt{if_statement} is defined as:
 @begin(Example)
 @nt<if_statement> ::=
@@ -1293,8 +1312,10 @@ The preferred places for other line breaks are after semicolons.
 @LabeledSubClause{Classification of Errors}
 
 @begin{ImplReq}
+@begin{Leading}
 The language definition classifies errors into several different
 categories:
+@end{Leading}
 @begin(Itemize)
      @Keepnext@;Errors that are required to be detected prior to run time by every
      Ada implementation;
@@ -1303,7 +1324,7 @@ categories:
      International Standard, other than those listed below.
      In particular, violation of any rule that uses the
      terms shall, allowed, permitted, legal, or illegal belongs to this
-     category.  Any program that contains such an error is not a legal
+     category. Any program that contains such an error is not a legal
      Ada program; on the other hand, the fact that a program is legal
      does not mean, @i(per se), that the program is free from other
      forms of error.
@@ -1331,7 +1352,7 @@ categories:
      @NoPrefix@Defn{run-time error}
      @Defn2{Term=[error], Sec=(run-time)}
      The corresponding error situations are associated with the names of
-     the predefined exceptions.  Every Ada compiler is required to
+     the predefined exceptions. Every Ada compiler is required to
      generate code that raises the corresponding exception if such an
      error situation arises during program execution.
      @Redundant[If such an error situation is certain to arise in every
@@ -1355,9 +1376,9 @@ categories:
 
      @NoPrefix@Defn{erroneous execution}
      In addition to bounded errors, the language rules define certain
-     kinds of errors as leading to @i{erroneous execution}.  Like bounded
+     kinds of errors as leading to @i{erroneous execution}. Like bounded
      errors, the implementation need not detect such errors either prior
-     to or during run time.  Unlike bounded errors, there is no
+     to or during run time. Unlike bounded errors, there is no
      language-specified bound on the possible effect of erroneous
      execution; the effect is in general not predictable.
      @begin{Ramification}
@@ -1370,8 +1391,8 @@ categories:
        since partitions are not required to live in separate address spaces.
        (But implementations are encouraged to limit it as much as possible.)
 
-       Suppose a program contains a pair of things that will be executed ``in
-       an arbitrary order.''
+       Suppose a program contains a pair of things that will be executed @lquotes@;in
+       an arbitrary order.@rquotes@;
        It is possible that one order will result in something sensible, whereas
        the other order will result in erroneous execution.
        If the implementation happens to choose the first order,
@@ -1380,7 +1401,7 @@ categories:
 
        Saying that something is erroneous is semantically
        equivalent to saying that the behavior is unspecified.
-       However, ``erroneous'' has a slightly more disapproving
+       However, @lquotes@;erroneous@rquotes@; has a slightly more disapproving
        flavor.
      @end{Ramification}
 
@@ -1392,11 +1413,11 @@ categories:
 @Defn{nonstandard mode}An implementation may provide
 @i(nonstandard modes) of operation.
 Typically these modes would be selected by a @nt<pragma> or by a command line
-switch when the compiler is invoked.  When operating in
+switch when the compiler is invoked. When operating in
 a nonstandard mode, the implementation may reject @nt<compilation_unit>s
 that do not conform to additional requirements associated
 with the mode, such as an excessive number of warnings or violation
-of coding style guidelines.  Similarly, in a nonstandard mode,
+of coding style guidelines. Similarly, in a nonstandard mode,
 the implementation may apply special optimizations or alternative
 algorithms that are only meaningful for programs that
 satisfy certain criteria specified by the implementation.
@@ -1407,9 +1428,9 @@ conforms to the requirements of this International Standard; in particular, in t
 mode, all legal @nt<compilation_unit>s shall be accepted.]
 @begin{Discussion}
   These permissions are designed to authorize explicitly the
-  support for alternative modes.  Of course, nothing we say can
+  support for alternative modes. Of course, nothing we say can
   prevent them anyway, but this (redundant) paragraph is designed
-  to indicate that such alternative modes are in some sense ``approved''
+  to indicate that such alternative modes are in some sense @lquotes@;approved@rquotes@;
   and even encouraged where they serve the specialized needs of
   a given user community, so long as the standard mode, designed
   to foster maximum portability, is always available.
@@ -1441,18 +1462,18 @@ Violating a Range_Check or Overflow_Check raises
 Constraint_Error, even if the value came from an uninitialized
 variable.
 This means that optimizers can no longer
-``assume'' that all variables are initialized within their subtype's
+@lquotes@;assume@rquotes@; that all variables are initialized within their subtype's
 range.
 Violating a check that is suppressed remains erroneous.
 
-The ``incorrect order dependences'' category of errors is removed.
+The @lquotes@;incorrect order dependences@rquotes@; category of errors is removed.
 All such situations are simply considered potential non-portabilities.
 This category was removed due to the difficulty of defining
-what it means for two executions to have a ``different effect.''
+what it means for two executions to have a @lquotes@;different effect.@rquotes@;
 For example, if a function with a side-effect is called twice in a single
 expression, it is not in principle possible for the compiler to
 decide whether the correctness of the resulting program depends on the order
-of execution of the two function calls.  A compile time warning
+of execution of the two function calls. A compile time warning
 might be appropriate, but raising of Program_Error at
 run time would not be.
 @end{DiffWord83}
@@ -1463,8 +1484,8 @@ run time would not be.
 @Defn{references}
 @Defn{bibliography}
 The following standards contain provisions which, through reference in
-this text, constitute provisions of this International Standard.  At the
-time of publication, the editions indicated were valid.  All standards
+this text, constitute provisions of this International Standard. At the
+time of publication, the editions indicated were valid. All standards
 are subject to revision, and parties to agreements based on this
 International Standard are encouraged to investigate the possibility
 of applying the most recent editions of the standards indicated below.
@@ -1537,7 +1558,7 @@ POSIX,
 Terms are defined throughout this International Standard,
 indicated by @i(italic) type.
 Terms explicitly defined in this International Standard are not to be presumed to
-refer implicitly to similar terms defined elsewhere.  Terms not defined in
+refer implicitly to similar terms defined elsewhere. Terms not defined in
 this International Standard are to be interpreted according to
 the @i(Webster's Third New International Dictionary of the
 English Language).
@@ -1565,7 +1586,9 @@ Here are some AARM-only definitions:
 The Ada Rapporteur Group (ARG) interprets the @Chg{New=<Ada Reference Manual>,Old=<RM83>}.
 @Defn{Ada Issue (AI)}
 @Defn(AI)
-An Ada Issue (AI) is a numbered ruling from the ARG.
+An Ada Issue (AI) is a numbered ruling from the ARG.@Chg{New=< Ada Issues
+created for Ada 83 are denoted as "AI83", while Ada Issues created for Ada 95
+are denoted as "AI95" in this document.>,Old=<>}
 @Defn{Ada Commentary Integration Document (ACID)}
 @Defn(ACID)
 The Ada Commentary Integration Document (ACID)

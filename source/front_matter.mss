@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.18 $ $Date: 2000/06/03 02:02:34 $}
+@comment{$Revision: 1.19 $ $Date: 2000/08/03 05:37:44 $}
 
 @begin{Intro}
 
@@ -73,7 +73,9 @@ This is the Annotated Ada Reference Manual.
 This is the Ada Reference Manual.
 @end{RMOnly}
 
+@begin{Leading}
 Other available Ada documents include:
+@end{Leading}
 @comment{We have to put the itemize inside of the AARMOnly, because otherwise
 the formatter thinks this is a nested bullet, making a mess. Since this is
 the only place this is used, it is easier to fix the text than the program.
@@ -123,7 +125,7 @@ rules.
 @begin{Intro}
 Ada was originally designed with three overriding concerns:
 program reliability and maintenance, programming as a human
-activity, and efficiency.  This revision to the language was
+activity, and efficiency. This revision to the language was
 designed to provide greater flexibility and extensibility,
 additional control over storage management and
 synchronization, and standardized packages oriented toward
@@ -132,48 +134,48 @@ time retaining the original emphasis on reliability,
 maintainability, and efficiency.
 
 The need for languages that promote reliability and simplify
-maintenance is well established.  Hence emphasis was placed
-on program readability over ease of writing.  For example,
+maintenance is well established. Hence emphasis was placed
+on program readability over ease of writing. For example,
 the rules of the language require that program variables be
-explicitly declared and that their type be specified.  Since
+explicitly declared and that their type be specified. Since
 the type of a variable is invariant, compilers can ensure
 that operations on variables are compatible with the
-properties intended for objects of the type.  Furthermore,
+properties intended for objects of the type. Furthermore,
 error-prone notations have been avoided, and the syntax of
 the language avoids the use of encoded forms in favor of
-more English-like constructs.  Finally, the language offers
+more English-like constructs. Finally, the language offers
 support for separate compilation of program units in a way
 that facilitates program development and maintenance, and
 which provides the same degree of checking between units as
 within a unit.
 
 Concern for the human programmer was also stressed during
-the design.  Above all, an attempt was made to keep to a
+the design. Above all, an attempt was made to keep to a
 relatively small number of underlying concepts integrated in
 a consistent and systematic way while continuing to avoid
-the pitfalls of excessive involution.  The design especially
+the pitfalls of excessive involution. The design especially
 aims to provide language constructs that correspond
 intuitively to the normal expectations of users.
 
 Like many other human activities, the development of
 programs is becoming ever more decentralized and
-distributed.  Consequently, the ability to assemble a
+distributed. Consequently, the ability to assemble a
 program from independently produced software components
-continues to be a central idea in the design.  The concepts
+continues to be a central idea in the design. The concepts
 of packages, of private types, and of generic units are
 directly related to this idea, which has ramifications in
-many other aspects of the language.  An allied concern is
+many other aspects of the language. An allied concern is
 the maintenance of programs to match changing requirements;
 type extension and the hierarchical library enable a program
 to be modified while minimizing disturbance to existing
 tested and trusted components.
 
-No language can avoid the problem of efficiency.  Languages
+No language can avoid the problem of efficiency. Languages
 that require over-elaborate compilers, or that lead to the
 inefficient use of storage or execution time, force these
-inefficiencies on all machines and on all programs.  Every
+inefficiencies on all machines and on all programs. Every
 construct of the language was examined in the light of
-present implementation techniques.  Any proposed construct
+present implementation techniques. Any proposed construct
 whose implementation was unclear or that required excessive
 machine resources was rejected.
 @end{Intro}
@@ -188,11 +190,11 @@ entities), task units (which define concurrent
 computations), protected units (which define operations for
 the coordinated sharing of data between tasks), or generic
 units (which define parameterized forms of packages and
-subprograms).  Each program unit normally consists of two parts:  a
+subprograms). Each program unit normally consists of two parts:  a
 specification, containing the information that must be
 visible to other units, and a body, containing the
 implementation details, which need not be visible to other
-units.  Most program units can be compiled separately.
+units. Most program units can be compiled separately.
 
 This distinction of the specification and body, and the
 ability to compile units separately, allows a program to be
@@ -200,11 +202,11 @@ designed, written, and tested as a set of largely
 independent software components.
 
 An Ada program will normally make use of a library of
-program units of general utility.  The language provides
+program units of general utility. The language provides
 means whereby individual organizations can construct their
-own libraries.  All libraries are structured in a
+own libraries. All libraries are structured in a
 hierarchical manner; this enables the logical decomposition
-of a subsystem into individual components.  The text of a
+of a subsystem into individual components. The text of a
 separately compiled program unit must name the library units
 it requires.
 
@@ -213,19 +215,19 @@ it requires.
 
 A subprogram is the basic unit for expressing an algorithm.
 There are two kinds of subprograms: procedures and
-functions.  A procedure is the means of invoking a series of
-actions.  For example, it may read data, update variables,
-or produce some output.  It may have parameters, to provide
+functions. A procedure is the means of invoking a series of
+actions. For example, it may read data, update variables,
+or produce some output. It may have parameters, to provide
 a controlled means of passing information between the
 procedure and the point of call.
 A function is the means of invoking the computation of a
-value.  It is similar to a procedure, but in addition will
+value. It is similar to a procedure, but in addition will
 return a result.
 
 A package is the basic unit for defining a collection of
-logically related entities.  For example, a package can be
+logically related entities. For example, a package can be
 used to define a set of type declarations and
-associated operations.  Portions of a package can be hidden
+associated operations. Portions of a package can be hidden
 from the user, thus allowing access only to the logical
 properties expressed by the package specification.
 
@@ -236,20 +238,20 @@ their detailed implementation.
 
 A task unit is the basic unit for defining a task whose
 sequence of actions may be executed concurrently with those
-of other tasks.  Such tasks may be implemented on
+of other tasks. Such tasks may be implemented on
 multicomputers, multiprocessors, or with interleaved
-execution on a single processor.  A task unit may define
+execution on a single processor. A task unit may define
 either a single executing task or a task type permitting the
 creation of any number of similar tasks.
 
 A protected unit is the basic unit for defining protected
 operations for the coordinated use of data shared between
-tasks.  Simple mutual exclusion is provided automatically,
-and more elaborate sharing protocols can be defined.  A
+tasks. Simple mutual exclusion is provided automatically,
+and more elaborate sharing protocols can be defined. A
 protected operation can either be a subprogram or an entry.
 A protected entry specifies a Boolean expression (an entry
 barrier) that must be true before the body of the entry is
-executed.  A protected unit may define a single protected
+executed. A protected unit may define a single protected
 object or a protected type permitting the creation of
 several similar objects.
 
@@ -261,18 +263,18 @@ used in the program unit, and a sequence of statements,
 which defines the execution of the program unit.
 
 The declarative part associates names with declared
-entities.  For example, a name may denote a type, a
-constant, a variable, or an exception.  A declarative part
+entities. For example, a name may denote a type, a
+constant, a variable, or an exception. A declarative part
 also introduces the names and parameters of other nested
 subprograms, packages, task units, protected units, and
 generic units to be used in the program unit.
 
 The sequence of statements describes a sequence of actions
-that are to be performed.  The statements are executed in
+that are to be performed. The statements are executed in
 succession (unless a transfer of control causes execution to continue
 from another place).
 
-An assignment statement changes the value of a variable.  A
+An assignment statement changes the value of a variable. A
 procedure call invokes execution of a procedure after
 associating any actual parameters provided at the call with
 the corresponding formal parameters.
@@ -282,7 +284,7 @@ enclosed sequence of statements based on the value of an
 expression or on the value of a condition.
 
 The loop statement provides the basic iterative mechanism in
-the language.  A loop statement specifies that a sequence of
+the language. A loop statement specifies that a sequence of
 statements is to be executed repeatedly as directed by an
 iteration scheme, or until an exit statement is encountered.
 
@@ -292,62 +294,62 @@ statements.
 
 Certain statements are associated with concurrent execution.
 A delay statement delays the execution of a task for a
-specified duration or until a specified time.  An entry call
+specified duration or until a specified time. An entry call
 statement is written as a procedure call statement; it
 requests an operation on a task or on a protected
 object, blocking the caller until the operation can be
-performed.  A called task may accept an entry call by
+performed. A called task may accept an entry call by
 executing a corresponding accept statement, which specifies
 the actions then to be performed as part of the rendezvous
-with the calling task.  An entry call on a protected object
+with the calling task. An entry call on a protected object
 is processed when the corresponding entry barrier evaluates
-to true, whereupon the body of the entry is executed.  The
+to true, whereupon the body of the entry is executed. The
 requeue statement permits the provision of a service as a
-number of related activities with preference control.  One
+number of related activities with preference control. One
 form of the select statement allows a selective wait for one
-of several alternative rendezvous.  Other forms of the
+of several alternative rendezvous. Other forms of the
 select statement allow conditional or timed entry calls and
 the asynchronous transfer of control in response to some
 triggering event.
 
 Execution of a program unit may encounter error situations
-in which normal program execution cannot continue.  For
+in which normal program execution cannot continue. For
 example, an arithmetic computation may exceed the maximum
 allowed value of a number, or an attempt may be made to
 access an array component by using an incorrect index value.
 To deal with such error situations, the statements of a
 program unit can be textually followed by exception handlers
 that specify the actions to be taken when the error
-situation arises.  Exceptions can be raised explicitly by a
+situation arises. Exceptions can be raised explicitly by a
 raise statement.
 
 @i(Data Types)
 
 Every object in the language has a type, which characterizes
-a set of values and a set of applicable operations.  The
+a set of values and a set of applicable operations. The
 main classes of types are elementary types (comprising
 enumeration, numeric, and access types) and composite types
 (including array and record types).
 
 An enumeration type defines an ordered set of distinct
 enumeration literals, for example a list of states or an
-alphabet of characters.  The enumeration types Boolean,
+alphabet of characters. The enumeration types Boolean,
 Character, and Wide_Character are predefined.
 
 Numeric types provide a means of performing exact or
-approximate numerical computations.  Exact computations use
+approximate numerical computations. Exact computations use
 integer types, which denote sets of consecutive integers.
 Approximate computations use either fixed point types, with
 absolute bounds on the error, or floating point types, with
-relative bounds on the error.  The numeric types Integer,
+relative bounds on the error. The numeric types Integer,
 Float, and Duration are predefined.
 
 Composite types allow definitions of structured objects with
-related components.  The composite types in the language
-include arrays and records.  An array is an object with
-indexed components of the same type.  A record is an object
-with named components of possibly different types.  Task and
-protected types are also forms of composite types.  The
+related components. The composite types in the language
+include arrays and records. An array is an object with
+indexed components of the same type. A record is an object
+with named components of possibly different types. Task and
+protected types are also forms of composite types. The
 array types String and Wide_String are predefined.
 
 Record, task, and protected types may have special components
@@ -356,41 +358,41 @@ Variant record structures that depend on the values of
 discriminants can be defined within a record type.
 
 Access types allow the construction of linked data
-structures.  A value of an access type represents a
+structures. A value of an access type represents a
 reference to an object declared as aliased or to an object
-created by the evaluation of an allocator.  Several
+created by the evaluation of an allocator. Several
 variables of an access type may designate the same object,
 and components of one object may designate the same or other
-objects.  Both the elements in such linked data structures
+objects. Both the elements in such linked data structures
 and their relation to other elements can be altered during
-program execution.  Access types also permit references to
+program execution. Access types also permit references to
 subprograms to be stored, passed as parameters, and
 ultimately dereferenced as part of an indirect call.
 
-Private types permit restricted views of a type.  A private
+Private types permit restricted views of a type. A private
 type can be defined in a package so that only the logically
 necessary properties are made visible to the users of the
-type.  The full structural details that are externally
+type. The full structural details that are externally
 irrelevant are then only available within the package and
 any child units.
 
-From any type a new type may be defined by derivation.  A type,
+From any type a new type may be defined by derivation. A type,
 together with its derivatives (both direct and indirect)
-form a derivation class.  Class-wide operations may be
+form a derivation class. Class-wide operations may be
 defined that accept as a parameter an operand of any type in
-a derivation class.  For record and private types, the derivatives may
-be extensions of the parent type.  Types that support these
+a derivation class. For record and private types, the derivatives may
+be extensions of the parent type. Types that support these
 object-oriented capabilities of class-wide operations and type extension
 must be tagged, so that
 the specific type of an operand within a derivation class can
-be identified at run time.  When an operation of a tagged
+be identified at run time. When an operation of a tagged
 type is applied to an operand whose specific type is not
 known until run time, implicit dispatching is performed
 based on the tag of the operand.
 
 The concept of a type is further refined by the concept of a
 subtype, whereby a user can constrain the set of allowed
-values of a type.  Subtypes can be used to define subranges
+values of a type. Subtypes can be used to define subranges
 of scalar types, arrays with a limited set of index values,
 and records and private types with particular discriminant
 values.
@@ -398,11 +400,11 @@ values.
 @i(Other Facilities)
 
 Representation clauses can be used to specify the mapping
-between types and features of an underlying machine.  For
+between types and features of an underlying machine. For
 example, the user can specify that objects of a given type
 must be represented with a given number of bits, or that the
 components of a record are to be represented using a given
-storage layout.  Other features allow the controlled use of
+storage layout. Other features allow the controlled use of
 low level, nonportable, or implementation-dependent aspects,
 including the direct insertion of machine code.
 
@@ -413,13 +415,13 @@ by means of standard library packages.
 Input-output is supported for
 values of user-defined as well as of predefined types.
 Standard means of representing values in display form are
-also provided.  Other standard library packages are defined
+also provided. Other standard library packages are defined
 in annexes of the standard to support systems with
 specialized requirements.
 
 Finally, the language provides a powerful means of
 parameterization of program units, called generic program
-units.  The generic parameters can be types and subprograms
+units. The generic parameters can be types and subprograms
 (as well as objects and packages) and so allow general
 algorithms and data structures to be defined that are
 applicable to all types of a given class.
@@ -429,8 +431,10 @@ applicable to all types of a given class.
 
 @begin{Intro}
 
+@begin{Leading}
 This International Standard replaces the first edition of 1987.
 In this edition, the following major language changes have been incorporated:
+@end{Leading}
 @begin{Itemize}
 Support for standard 8-bit and 16-bit character sets.
 See Section 2,
@@ -502,8 +506,7 @@ the defect correction procedure.
 
 Comments should use the following format:
 @begin(display)
-@TabSet(L6)
-@\@b(!topic) @i[Title summarizing comment]
+@TabSet(L6)@\@b(!topic) @i[Title summarizing comment]
 @\@b(!reference) RM95-@i{ss.ss(pp)}
 @\@b(!from) @i{Author Name yy-mm-dd}
 @\@b(!keywords) @i{keywords related to topic}
@@ -518,7 +521,7 @@ and @i(yy-mm-dd) is the date the comment was sent.
 The date is optional, as is the @b(!keywords) line.
 
 Multiple comments per e-mail message are acceptable.
-Please use a descriptive ``Subject'' in your e-mail message.
+Please use a descriptive @lquotes@;Subject@rquotes@; in your e-mail message.
 
 When correcting typographical errors or making minor wording
 suggestions, please put the correction directly as the topic of the
@@ -527,8 +530,7 @@ curly braces { } to indicate text to be added, and provide enough
 context to make the nature of the suggestion self-evident or put
 additional information in the body of the comment, for example:
 @begin{Display}
-@TabSet(L6)
-@\@b(!topic) [c]{C}haracter
+@TabSet(L6)@\@b(!topic) [c]{C}haracter
 @\@b(!topic) it[']s meaning is not defined
 @end{Display}
 
@@ -612,7 +614,7 @@ J. Tokar (Tartan);
 E. Vasilescu (Grumman);
 J. Vladik (Prospeks s.r.o.:
    Czech Republic); @Comment{XRG - Czech Republic}
-S. Van Vlierberghe (OFFIS: Belgium).  @Comment{XRG - Belgium}
+S. Van Vlierberghe (OFFIS: Belgium). @Comment{XRG - Belgium}
 
 
 Other valuable feedback influencing the revision
@@ -639,13 +641,15 @@ AFB, NM) was the project manager.
 
 @begin{Intro}
 
+@begin{Leading}
 The International Standard is the same as this version
 of the Reference Manual, except:
+@end{Leading}
 @begin{Itemize}
 This list of Changes
 is not included in the International Standard.
 
-The ``Acknowledgements'' page
+The @lquotes@;Acknowledgements@rquotes@; page
 is not included in the International Standard.
 
 The text in the running headers and footers on each page is slightly

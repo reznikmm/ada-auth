@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/06/03 02:02:34 $}
+@Comment{$Date: 2000/08/03 05:37:37 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 
@@ -1233,7 +1233,7 @@ on a multiprocessor such tasks might use busy-waiting; for
 monoprocessor considerations, see @RefSec{Priority Ceiling Locking}.
 @begin{Discussion}
 The intended implementation on a multi-processor is in terms of
-``spin locks'' @em the waiting task will spin.
+@lquotes@;spin locks@rquotes@; @em the waiting task will spin.
 @end{Discussion}
 
 The body of a protected unit may contain declarations and bodies for local
@@ -1475,7 +1475,7 @@ The above applies only to protected entries,
 which are the only ones completed with @nt{entry_bodies}.
 Task entries have corresponding @nt{accept_statements}
 instead of having @nt{entry_bodies}, and
-we do not consider an @nt{accept_statement} to be a ``completion,''
+we do not consider an @nt{accept_statement} to be a @lquotes@;completion,@rquotes@;
 because a task @nt{entry_declaration} is allowed to have zero, one, or more
 than one corresponding @nt{accept_statement}s.
 @end{Discussion}
@@ -1590,9 +1590,9 @@ and continues concurrently in both tasks.
 The caller gets a new occurrence;
 this isn't considered propagation.
 
-Note that we say ``propagated from the
-@nt{handled_sequence_of_statements} of an @nt{accept_statement}'',
-not ``propagated from an @nt{accept_statement}.''
+Note that we say @lquotes@;propagated from the
+@nt{handled_sequence_of_statements} of an @nt{accept_statement}@rquotes@;,
+not @lquotes@;propagated from an @nt{accept_statement}.@rquotes@;
 The latter would be wrong @em we don't want exceptions propagated by
 the @nt<entry_index> to be sent to the caller (there is none yet!).
 @end{Ramification}
@@ -1667,7 +1667,7 @@ and data global to the protected unit.
 the same barrier value.
 If it is necessary to look at the parameters of an entry
 call before deciding whether to handle it, the @nt<entry_barrier>
-can be ``@key(when) True'' and the caller can
+can be @lquotes@;@key(when) True@rquotes@; and the caller can
 be requeued (on some private entry)
 when its parameters indicate that it cannot be handled immediately.
 @end{Notes}
@@ -3230,8 +3230,8 @@ Therefore, if one of the named tasks is the task executing the
 then it is possible for the execution of the @nt{abort_statement} to be
 aborted, thus leaving some of the tasks unaborted.
 This allows the implementation to use either a sequence of calls to an
-``abort task'' RTS primitive, or
-a single call to an ``abort list of tasks'' RTS primitive.
+@lquotes@;abort task@rquotes@; RTS primitive, or
+a single call to an @lquotes@;abort list of tasks@rquotes@; RTS primitive.
 @end{Ramification}
 
 @PDefn2{Term=[execution], Sec=(aborting the execution of a construct)}
@@ -3552,7 +3552,7 @@ circumstances:
   protected object;
   @begin(Reason)
     The underlying principle here is that
-    for one action to ``signal'' a second, the second action has to follow
+    for one action to @lquotes@;signal@rquotes@; a second, the second action has to follow
     a potentially blocking operation, whose blocking is dependent on
     the first action in some way.
     Protected procedures are not potentially blocking, so they can
@@ -3597,8 +3597,8 @@ Two actions are sequential if one of the following is true:
   @begin{Reason}
     Any two actions of the same task are sequential, even
     if one does not signal the other because they can be
-    executed in an ``arbitrary''
-    (but necessarily equivalent to some ``sequential'') order.
+    executed in an @lquotes@;arbitrary@rquotes@;
+    (but necessarily equivalent to some @lquotes@;sequential@rquotes@;) order.
   @end{Reason}
 
   Both actions occur as part
@@ -3623,7 +3623,7 @@ A @nt{pragma} Atomic or Atomic_Components may also be used to
 ensure that certain reads and updates are sequential @em
 see @RefSecNum(Shared Variable Control).
 @begin(Ramification)
-  If two actions are ``sequential'' it is known that their executions
+  If two actions are @lquotes@;sequential@rquotes@; it is known that their executions
   don't overlap in time, but it is not necessarily specified which occurs first.
   For example, all actions of a single task are sequential, even though
   the exact order of execution is not fully specified for all constructs.
@@ -3635,8 +3635,8 @@ see @RefSecNum(Shared Variable Control).
   Such a situation usually corresponds to a programming mistake, but
   in some (rare) cases, the order makes no difference, and for this
   reason this situation is not considered erroneous nor even a bounded error.
-  In Ada 83, this was considered an ``incorrect order dependence'' if
-  the ``effect'' of the program was affected, but ``effect'' was never
+  In Ada 83, this was considered an @lquotes@;incorrect order dependence@rquotes@; if
+  the @lquotes@;effect@rquotes@; of the program was affected, but @lquotes@;effect@rquotes@; was never
   fully defined.  In Ada 9X, this situation represents a potential
   nonportability, and a friendly compiler might want to warn the
   programmer about the situation, but it is not considered an error.

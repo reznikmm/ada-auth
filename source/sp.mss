@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/05/29 05:47:22 $}
+@Comment{$Date: 2000/08/03 05:37:44 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -290,7 +290,7 @@ multi-processor.  In a sense, if a particular interrupt source is not
 available to all processors, the system is not truly homogeneous.
 
 One way to approach this problem is to assign sub-ranges within
-Interrupt_ID to each interrupt subsystem, such that ``similar'' interrupt
+Interrupt_ID to each interrupt subsystem, such that @lquotes@;similar@rquotes@; interrupt
 sources (e.g. a timer) in different subsystems get a distinct id.
 @end{Discussion}
 In particular, the meaning of a blocked or pending interrupt may then be
@@ -730,7 +730,7 @@ The meaning of @i{load time} is implementation defined.
 On systems where the image of the partition is initially copied from
 disk to RAM, or from ROM to RAM, prior to starting execution of the
 partition,
-the intention is that ``load time'' consist of this initial copying
+the intention is that @lquotes@;load time@rquotes@; consist of this initial copying
 step.
 On other systems, load time and run time might actually be interspersed.
 @end{Discussion}
@@ -1054,7 +1054,7 @@ generate any memory reads or updates of atomic or volatile
 objects other than those specified by the program.
 @begin{Discussion}
 The presumption is that volatile or atomic objects might reside in an
-``active'' part of the address space where each read has a potential
+@lquotes@;active@rquotes@; part of the address space where each read has a potential
 side-effect, and at the very least might deliver a different value.
 
 The rule above and the definition of external effect are intended to
@@ -1094,13 +1094,13 @@ A warning might be appropriate if no packing whatsoever can be achieved.
 
 An imported volatile or atomic constant behaves as a constant (i.e.
 read-only) with respect to other parts of the Ada program, but can
-still be modified by an ``external source.''
+still be modified by an @lquotes@;external source.@rquotes@;
 
 @end{Notes}
 
 @begin{Incompatible83}
 Pragma Atomic replaces Ada 83's pragma Shared.
-The name ``Shared'' was confusing,
+The name @lquotes@;Shared@rquotes@; was confusing,
 because the pragma was not used to mark variables as shared.
 @end{Incompatible83}
 

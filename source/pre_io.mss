@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:21 $}
+@Comment{$Date: 2000/08/03 05:37:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -743,7 +743,7 @@ the construction of user-defined input-output packages.
   any implicit levels of indirection used in the representation
   of the type.  It also properly initializes any type tags that appear
   within the value, presuming that the buffer was written by
-  a different program and that tag values for the``same'' type
+  a different program and that tag values for the@lquotes@;same@rquotes@; type
   might vary from one executable to another.
 @end{Reason}
 @end{Intro}
@@ -830,7 +830,7 @@ values as appropriate lexical elements.  Procedures Get and Put are also
 available that input and output individual characters treated as
 character values rather than as lexical elements.
 Related to character input are procedures to look ahead at the
-next character without reading it, and to read a character ``immediately''
+next character without reading it, and to read a character @lquotes@;immediately@rquotes@;
 without waiting for an end-of-line to signal availability.
 
 In addition to the procedures Get and Put for numeric and enumeration
@@ -2079,7 +2079,7 @@ The values of characters not assigned are not specified.
 
 @begin{ImplAdvice}
 The Get_Immediate procedures should be implemented with unbuffered
-input.  For a device such as a keyboard, input should be ``available''
+input.  For a device such as a keyboard, input should be @lquotes@;available@rquotes@;
 if a key has already been typed, whereas for a disk file, input
 should always be available except at end of file.  For a file
 associated with a keyboard-like device, any line-editing features
@@ -2089,7 +2089,7 @@ the execution of Get_Immediate.
 
 @begin{Notes}
 Get_Immediate can be used to read a single key from the
-keyboard ``immediately''; that is, without waiting for an end of line.
+keyboard @lquotes@;immediately@rquotes@;; that is, without waiting for an end of line.
 In a call of Get_Immediate without the parameter Available,
 the caller will wait until a character is available.
 
@@ -2991,7 +2991,7 @@ of the required subtype.
 @begin{Ramification}
 An example where the implementation may choose not to
 perform the check is an enumeration type with a representation clause
-with ``holes'' in the range of internal codes.@end{ramification}
+with @lquotes@;holes@rquotes@; in the range of internal codes.@end{ramification}
 @end{ImplPerm}
 
 @begin{Erron}

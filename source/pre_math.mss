@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:21 $}
+@Comment{$Date: 2000/08/03 05:37:44 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -57,8 +57,8 @@ Numerics and its children were not predefined in Ada 83.
 
 @begin{Intro}
 Implementation-defined
-approximations to the mathematical functions known as the ``elementary
-functions'' are provided by the subprograms in
+approximations to the mathematical functions known as the @lquotes@;elementary
+functions@rquotes@; are provided by the subprograms in
 Numerics.Generic_Elementary_Functions.  Nongeneric equivalents of this generic
 package for each of the predefined floating point types are also provided as
 children of Numerics.
@@ -313,7 +313,7 @@ raised:
 
 Other accuracy requirements for the elementary functions, which apply only in
 implementations conforming to the Numerics Annex, and then only in the
-``strict'' mode defined there (see @RefSecNum{Numeric Performance Requirements}),
+@lquotes@;strict@rquotes@; mode defined there (see @RefSecNum{Numeric Performance Requirements}),
 are given in @RefSecNum{Accuracy Requirements for the Elementary Functions}.
 
 When Float_Type'Signed_Zeros is True, the sign of a zero result shall be as
@@ -395,7 +395,7 @@ numbers}.
 Some of the facilities provided are basic to all applications of random
 numbers.  These include a limited private type each of whose objects serves as
 the generator of a (possibly distinct) sequence of random numbers; a function
-to obtain the ``next'' random number from a given sequence of random numbers
+to obtain the @lquotes@;next@rquotes@; random number from a given sequence of random numbers
 (that is, from its generator); and subprograms to initialize or reinitialize a
 given generator to a time-dependent state or a state denoted by a single
 integer.
@@ -506,7 +506,7 @@ declaration:
 @ImplDef{The value of Numerics.Discrete_Random.Max_Image_Width.}
 @begin{ImplNote}
 The following is a possible implementation of the private part of each
-package (assuming the presence of ``@key[with] Ada.Finalization;'' as
+package (assuming the presence of @lquotes@;@key[with] Ada.Finalization;@rquotes@; as
 a context clause):
 @begin{example}
 @key[type] State @key[is] ...;
@@ -552,7 +552,7 @@ states are defined below.
 @key[function] Random (Gen : Generator) @key[return] Result_Subtype;
 @end{Example}
 
-Obtains the ``next'' random number from the given generator, relative to its
+Obtains the @lquotes@;next@rquotes@; random number from the given generator, relative to its
 current state, according to an implementation-defined algorithm.
 The result of the function in Numerics.Float_Random is delivered as a value of
 the subtype Uniformly_Distributed, which is a subtype of the predefined type
@@ -638,7 +638,7 @@ calls, provided that the number of such values does not exceed
 
 Other performance requirements for the random number generator, which apply
 only in implementations conforming to the Numerics Annex, and then only in the
-``strict'' mode defined there (see @RefSecNum{Numeric Performance Requirements}),
+@lquotes@;strict@rquotes@; mode defined there (see @RefSecNum{Numeric Performance Requirements}),
 are given in @RefSecNum{Performance Requirements for Random Number Generation}.
 @end{ImplReq}
 

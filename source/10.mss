@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:20 $}
+@Comment{$Date: 2000/08/03 05:37:39 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -35,7 +35,7 @@ a partition is constructed from @i{library units}.
 Syntactically, the declaration of a library unit is a @nt{library_item},
 as is the body of a library unit.
 An implementation may support a concept of a @i{program library}
-(or simply, a ``library''),
+(or simply, a @lquotes@;library@rquotes@;),
 which contains @nt{library_item}s
 and their subunits.
 @IndexSee{Term=[program library],See=(library)}
@@ -46,8 +46,8 @@ This section has two clauses:
 @RefSec{Separate Compilation}
 discusses compile-time issues related to separate compilation.
 @RefSec{Program Execution}
-discusses issues related to what is traditionally known as ``link time''
-and ``run time'' @em building and executing partitions.
+discusses issues related to what is traditionally known as @lquotes@;link time@rquotes@;
+and @lquotes@;run time@rquotes@; @em building and executing partitions.
 
 @end{Intro}
 
@@ -84,7 +84,7 @@ Also on the other hand,
 it is generally necessary to look outside that set in
 order to check @LinkTimeName@;s.
 
-See also the ``generic contract model'' @MetaRulesName of
+See also the @lquotes@;generic contract model@rquotes@; @MetaRulesName of
 @RefSec{Generic Instantiation}.
 @end{MetaRules}
 
@@ -171,7 +171,7 @@ structures were actually stored in support of separate compilation.
 Indeed, implementations were encouraged to do so.
 
 In RM83, it was unclear which was the official definition of
-``program unit.''
+@lquotes@;program unit.@rquotes@;
 Definitions appeared in RM83-5, 6, 7, and 9, but not 12.
 Placing it here seems logical,
 since a program unit is sort of a potential compilation unit.
@@ -229,11 +229,11 @@ Standard is a library unit.
 A @i{library unit} is a program unit that is declared by a
 @nt{library_item}.
 When a program unit is a library unit,
-the prefix ``library'' is used to refer to it (or ``generic library''
+the prefix @lquotes@;library@rquotes@; is used to refer to it (or @lquotes@;generic library@rquotes@;
 if generic),
 as well as to its declaration and body,
-as in ``library procedure'', ``library @nt{package_body}'', or
-``generic library package''.
+as in @lquotes@;library procedure@rquotes@;, @lquotes@;library @nt{package_body}@rquotes@;, or
+@lquotes@;generic library package@rquotes@;.
 @Defn{compilation unit}
 The term @i{compilation unit} is used to refer to
 a @nt{compilation_unit}.
@@ -252,18 +252,18 @@ In this example:
 @key[end] P;
 @end{Example}
 
-the term ``compilation unit'' can refer to this text: ``@key[with] Ada.Text_IO;
-@key[package] P @key[is] ... @key[end] P;'' or to this text:
-``@key[package] P @key[is] ... @key[end] P;''.  We use this shorthand
+the term @lquotes@;compilation unit@rquotes@; can refer to this text: @lquotes@;@key[with] Ada.Text_IO;
+@key[package] P @key[is] ... @key[end] P;@rquotes@; or to this text:
+@lquotes@;@key[package] P @key[is] ... @key[end] P;@rquotes@;.  We use this shorthand
 because it corresponds to common usage.
 
-We like to use the word ``unit'' for declaration-plus-body things,
-and ``item'' for declaration or body separately (as in
+We like to use the word @lquotes@;unit@rquotes@; for declaration-plus-body things,
+and @lquotes@;item@rquotes@; for declaration or body separately (as in
 @nt{declarative_item}).
-The terms ``@nt{compilation_unit},'' ``compilation unit,''
-and ``@nt{subunit}'' are exceptions to this rule.
-We considered changing ``@nt{compilation_unit},'' ``compilation unit''
-to ``@nt{compilation_item},'' ``compilation item,''
+The terms @lquotes@;@nt{compilation_unit},@rquotes@; @lquotes@;compilation unit,@rquotes@;
+and @lquotes@;@nt{subunit}@rquotes@; are exceptions to this rule.
+We considered changing @lquotes@;@nt{compilation_unit},@rquotes@; @lquotes@;compilation unit@rquotes@;
+to @lquotes@;@nt{compilation_item},@rquotes@; @lquotes@;compilation item,@rquotes@;
 respectively, but we decided not to.
 @end{Discussion}
 
@@ -293,14 +293,14 @@ Standard.Standard.
 @end{Discussion}
 @begin{Reason}
 Library units (other than Standard)
-have ``parent declarations'' and ``parent units''.
-Subunits have ``parent bodies''.
+have @lquotes@;parent declarations@rquotes@; and @lquotes@;parent units@rquotes@;.
+Subunits have @lquotes@;parent bodies@rquotes@;.
 We didn't bother to define the other possibilities:
 parent body of a library unit,
 parent declaration of a subunit,
 parent unit of a subunit.
 These are not needed,
-and might get in the way of a correct definition of ``child.''
+and might get in the way of a correct definition of @lquotes@;child.@rquotes@;
 @end{Reason}
 
 @Redundant[The children of a library unit occur immediately
@@ -315,8 +315,8 @@ The @i{descendant} relation is the inverse of the ancestor relation.
 These definitions are worded carefully to avoid defining subunits as
 children.  Only library units can be children.
 
-We use the unadorned term ``ancestors'' here to concisely define both
-``ancestor unit'' and ``ancestor declaration.''
+We use the unadorned term @lquotes@;ancestors@rquotes@; here to concisely define both
+@lquotes@;ancestor unit@rquotes@; and @lquotes@;ancestor declaration.@rquotes@;
 @end{Reason}
 
 @Defn{public library unit}
@@ -360,7 +360,7 @@ parent.
 
 Private children of Standard are legal, and follow the normal rules.
 It is intended that implementations might have some method for taking an
-existing environment, and treating it as a package to be ``imported'' into
+existing environment, and treating it as a package to be @lquotes@;imported@rquotes@; into
 another environment, treating children of Standard in the imported environment
 as children of the imported package.
 @end{Discussion}
@@ -471,7 +471,7 @@ Within the child, like anything nested in a generic unit,
 one can make up-level references to the current instance of its
 parent, and thereby gain access to the formal parameters of the
 parent, to the types declared in the parent, etc.
-This ``nesting'' model applies even within the
+This @lquotes@;nesting@rquotes@; model applies even within the
 @nt{generic_formal_part} of the child,
 as it does for a generic child of a nongeneric unit.
 @end{ImplNote}
@@ -551,7 +551,7 @@ A subunit depends semantically upon its parent body.
 A @nt{library_unit_body} depends semantically upon the corresponding
 @nt{library_unit_declaration}, if any.
 @begin{Discussion}
-The ``if any'' is necessary
+The @lquotes@;if any@rquotes@; is necessary
 because library subprograms are not required to have a
 @nt{subprogram_declaration}.
 @end{Discussion}
@@ -619,7 +619,7 @@ after the parent's declaration,
 as explained in @RefSecNum{Declarative Region},
 has the following ramifications:
 @begin(itemize)
-The restrictions on ``early'' use of a private type (RM83-7.4.1(4))
+The restrictions on @lquotes@;early@rquotes@; use of a private type (RM83-7.4.1(4))
 or a deferred constant (RM83-7.4.3(2))
 do not apply to uses in child units, because they follow
 the full declaration.
@@ -645,7 +645,7 @@ such as Integer
 operator symbol).
 
 
-When the parent unit is ``used'' the simple names of the
+When the parent unit is @lquotes@;used@rquotes@; the simple names of the
 with'd child units are directly visible (see @RefSec{Use Clauses}).
 
 When a parent body with's its own child, the defining name of
@@ -656,11 +656,11 @@ immediately within the @nt{declarative_part} of the body
 (RM83-8.3(17)).
 @end(itemize)
 
-Note that ``declaration of a library unit''
-is different from ``@nt{library_unit_declaration}''
+Note that @lquotes@;declaration of a library unit@rquotes@;
+is different from @lquotes@;@nt{library_unit_declaration}@rquotes@;
 @em the former includes @nt{subprogram_body}.
-Also, we sometimes really mean ``declaration of a view of a
-library unit'', which includes
+Also, we sometimes really mean @lquotes@;declaration of a view of a
+library unit@rquotes@;, which includes
 
 @nt{library_unit_renaming_declaration}s.
 
@@ -674,11 +674,11 @@ The real rule is that the renamed library unit
 has to be visible in the @nt{library_unit_renaming_declaration}.
 @end{Honest}
 @begin{Reason}
-In most cases, ``has to be visible'' means there has to be a
+In most cases, @lquotes@;has to be visible@rquotes@; means there has to be a
 @nt{with_clause}.
 However, it is possible in obscure cases to avoid the need for a
 @nt{with_clause}; in particular, a compilation unit such as
-``@key[package] P.Q @key[renames] P;''
+@lquotes@;@key[package] P.Q @key[renames] P;@rquotes@;
 is legal with no @nt{with_clause}s
 (though not particularly interesting).
 ASCII is physically nested in Standard,
@@ -889,7 +889,7 @@ would be illegal.)
 We did not put in such a rule for two reasons:
 (1) It would complicate the wording of the rules,
 because we would have to split each @nt{with_clause}
-into pieces, in order to correctly handle ``@key[with] P, Q;''
+into pieces, in order to correctly handle @lquotes@;@key[with] P, Q;@rquotes@;
 where P is public and Q is private.
 (2) The conformance rules prevent any problems.
 It doesn't matter if a type name in the spec of the body denotes
@@ -916,10 +916,10 @@ Mentioning a non-root library unit
 makes its declaration visible.
 See Section 8 for details.
 
-Note that this rule implies that ``@key{with} A.B.C;'' is equivalent to
-``@key{with} A, A.B, A.B.C;''
+Note that this rule implies that @lquotes@;@key{with} A.B.C;@rquotes@; is equivalent to
+@lquotes@;@key{with} A, A.B, A.B.C;@rquotes@;
 The reason for making a @nt{with_clause} apply to all the ancestor
-units is to avoid ``visibility holes'' @em situations in which an inner
+units is to avoid @lquotes@;visibility holes@rquotes@; @em situations in which an inner
 program unit is visible while an outer one is not.
 Visibility holes would cause semantic complexity and implementation
 difficulty.
@@ -980,12 +980,12 @@ Example:
 (1) is OK because it's a private child of A.B @em it would be illegal if
 we made A.B.X a public child of A.B.
 (2) is OK because it's the body of a child of A.B.
-It would be illegal to say ``@key[with] A.B.C;'' on any
-@nt{library_item} whose name does not start with ``A.B''.
+It would be illegal to say @lquotes@;@key[with] A.B.C;@rquotes@; on any
+@nt{library_item} whose name does not start with @lquotes@;A.B@rquotes@;.
 Note that mentioning A.B.C.D in a @nt{with_clause} automatically
 mentions A.B.C as well,
-so ``@key[with] A.B.C.D;'' is illegal in the same places as
-``@key[with] A.B.C;''.
+so @lquotes@;@key[with] A.B.C.D;@rquotes@; is illegal in the same places as
+@lquotes@;@key[with] A.B.C;@rquotes@;.
 @end{Discussion}
 @begin{Honest}
 
@@ -1025,12 +1025,12 @@ given @nt{with_clause}.
 
 If a @nt{with_clause} mentions a
 @nt{library_unit_renaming_declaration},
-it only ``mentions'' the @nt<prefix>es appearing explicitly
+it only @lquotes@;mentions@rquotes@; the @nt<prefix>es appearing explicitly
 in the @nt<with_clause>
 (and the renamed view itself);
 the @nt{with_clause} is not defined to mention the ancestors of the
 renamed entity.
-Thus, if X renames Y.Z, then ``with X;'' does not make the declarations
+Thus, if X renames Y.Z, then @lquotes@;with X;@rquotes@; does not make the declarations
 of Y or Z visible.
 Note that this does not cause the dreaded visibility holes mentioned
 above.
@@ -1054,14 +1054,14 @@ that @nt{with_clause}, which is not true.
 The new syntax allows a @nt{use_clause} to appear first,
 but that is prevented by a textual rule that already exists in Ada 83.
 
-The concept of ``scope of a @nt{with_clause}'' (which is a region of text)
-replaces RM83's notion of ``apply to''
+The concept of @lquotes@;scope of a @nt{with_clause}@rquotes@; (which is a region of text)
+replaces RM83's notion of @lquotes@;apply to@rquotes@;
 (a @nt{with_clause} applies to a @nt{library_item})
 The visibility rules are interested in a region of text,
 not in a set of compilation units.
 
-No need to define ``apply to'' for @nt{use_clause}s.
-Their semantics are fully covered by the ``scope (of a @nt{use_clause})''
+No need to define @lquotes@;apply to@rquotes@; for @nt{use_clause}s.
+Their semantics are fully covered by the @lquotes@;scope (of a @nt{use_clause})@rquotes@;
 definition in @RefSecNum{Use Clauses}.
 @end{DiffWord83}
 
@@ -1324,21 +1324,21 @@ interpreted as both the declaration and body of a library subprogram.
 @PDefn{type conformance}
 @begin{Ramification}
   The principle here is that a @nt{subprogram_body} should be
-  interpreted as only a completion if and only if it ``might''
+  interpreted as only a completion if and only if it @lquotes@;might@rquotes@;
   be legal as the completion of some preexisting declaration,
-  where ``might'' is defined in a way that does not require overload
+  where @lquotes@;might@rquotes@; is defined in a way that does not require overload
   resolution to determine.
 
   Hence, if the preexisting declaration is a @nt{subprogram_declaration}
   or @nt{generic_subprogram_declaration}, we treat the new
-  @nt{subprogram_body} as its completion, because it ``might'' be legal.
+  @nt{subprogram_body} as its completion, because it @lquotes@;might@rquotes@; be legal.
   If it turns out that the profiles don't fully conform,
   it's an error.
   In all other cases (the preexisting declaration is a
   package or a generic package,
   or an instance of a generic subprogram,
   or a renaming,
-  or a ``spec-less'' subprogram,
+  or a @lquotes@;spec-less@rquotes@; subprogram,
   or in the case where there is no preexisting thing),
   the @nt{subprogram_body} declares a new subprogram.
 
@@ -1357,12 +1357,12 @@ sense that the new compilation unit shall not semantically depend
 unit, nor on an earlier version of itself.
 @begin{Discussion}
 For example, if package declarations A and B both say
-``@key[with] X;'', and the user compiles a compilation unit that says
-``@key[with] A, B;'', then the A and B have to be talking about the
+@lquotes@;@key[with] X;@rquotes@;, and the user compiles a compilation unit that says
+@lquotes@;@key[with] A, B;@rquotes@;, then the A and B have to be talking about the
 same version of X.
 @end{Discussion}
 @begin{Ramification}
-  What it means to be a ``different version'' is not specified by the
+  What it means to be a @lquotes@;different version@rquotes@; is not specified by the
   language.  In some implementations, it means that the compilation
   unit has been recompiled.  In others, it means that the
   source of the compilation unit has been edited in some significant way.
@@ -1468,7 +1468,7 @@ library Y into library X.
 If a root library unit called LU (that is, Standard.LU) exists in Y,
 then from the point of view of library X,
 it could be called Y.LU.
-X might contain library units that say, ``@key[with] Y.LU;''.
+X might contain library units that say, @lquotes@;@key[with] Y.LU;@rquotes@;.
 @end{Discussion}
 
 A compilation unit containing an instantiation of a separately
@@ -1646,12 +1646,12 @@ denotes a child of that generic package.
 see @RefSecNum{Compilation Units - Library Units}.)]
 
 @begin{Ramification}
-In ``@key{package} P.Q.R @key{is} ... @key{end} P.Q.R;'',
+In @lquotes@;@key{package} P.Q.R @key{is} ... @key{end} P.Q.R;@rquotes@;,
 this rule requires P to be a root library unit,
 and Q to be a library unit
 (because those are the things that are directly visible and visible).
-Note that visibility does not apply between the ``@key{end}''
-and the ``;''.
+Note that visibility does not apply between the @lquotes@;@key{end}@rquotes@;
+and the @lquotes@;;@rquotes@;.
 
 Physically nested declarations are not visible at these places.
 @end{Ramification}
@@ -1663,7 +1663,7 @@ and it has no parent.
 @end{Reason}
 @begin{Reason}
 
-The ``notwithstanding'' part allows ``@key[with] A.B;''
+The @lquotes@;notwithstanding@rquotes@; part allows @lquotes@;@key[with] A.B;@rquotes@;
 where A is a generic library package and B is one of its
 (generic) children.
 This is necessary because it is not normally legal to use an expanded
@@ -1692,7 +1692,7 @@ each declaration that occurs immediately within the given declaration's
 visible part is also visible.
 No other declarations are visible or directly visible.
 @begin{Discussion}
-Note the word ``same''.
+Note the word @lquotes@;same@rquotes@;.
 For example, if a @nt{with_clause} on a declaration mentions X,
 this does not make X visible in @nt{use_clause}s and @nt{pragma}s
 that are on the body.
@@ -1802,7 +1802,7 @@ semantics.
 @ImplDef{The implementation-defined means, if any, of specifying which
 compilation units are needed by a given compilation unit.}
 @begin{Discussion}
-There are no pragmas that ``specify otherwise'' defined by the
+There are no pragmas that @lquotes@;specify otherwise@rquotes@; defined by the
 core language.  However, an implementation is allowed to provide such
 pragmas, and in fact @RefSec{Distributed Systems} defines some
 pragmas whose semantics includes reducing the set of
@@ -1841,11 +1841,11 @@ This may seem superfluous,
 since it follows from the definition.
 But we would like to have every error message that might be generated
 (before run time) by an implementation correspond to some
-explicitly stated ``shall'' rule.
+explicitly stated @lquotes@;shall@rquotes@; rule.
 
-Of course, this does not mean that the ``shall'' rules correspond
+Of course, this does not mean that the @lquotes@;shall@rquotes@; rules correspond
 one-to-one with an implementation's error messages.  For example,
-the rule that says overload resolution ``shall'' succeed in producing a
+the rule that says overload resolution @lquotes@;shall@rquotes@; succeed in producing a
 single interpretation would correspond to many error messages in a good
 implementation @em the implementation would want to explain to the user
 exactly why overload resolution failed.
@@ -1893,7 +1893,7 @@ and, for Elaborate_All only, upon
 each @nt{library_item} needed by
 the declaration of the other library unit.
 @begin{Discussion}
-See above for a definition of which @nt{library_item}s are ``needed by''
+See above for a definition of which @nt{library_item}s are @lquotes@;needed by@rquotes@;
 a given declaration.
 
 Note that elaboration dependences are among @nt{library_item}s,
@@ -1926,7 +1926,7 @@ The name of the environment task is written in italics here to indicate
 that this task is anonymous.
 @end{Ramification}
 @begin{Discussion}
-  The model is different for a ``passive partition''
+  The model is different for a @lquotes@;passive partition@rquotes@;
   (see @RefSecNum{Partitions}).
   Either there is no environment task, or its @nt<sequence_of_statements>
   is an infinite loop rather than a call on a main subprogram.
@@ -1965,7 +1965,7 @@ the order in which they appear in the environment
   if included.
 @begin{Discussion}
   This implies that the body of such a library unit
-  shall not ``with'' any of its own children,
+  shall not @lquotes@;with@rquotes@; any of its own children,
   or anything else that depends semantically upon
   the declaration of the library unit.
 @end{Discussion}
@@ -1992,7 +1992,7 @@ This @nt{declarative_part} has the properties required of all
 environments (see @RefSecNum{The Compilation Process}).
 However, the environment @nt{declarative_part} of a partition will
 typically contain fewer compilation units than the environment
-@nt{declarative_part} used at compile time @em only the ``needed''
+@nt{declarative_part} used at compile time @em only the @lquotes@;needed@rquotes@;
 ones are included in the partition.
 @end{Ramification}
 
@@ -2015,7 +2015,7 @@ completion is considered to be a @LinkTimeName
 when the declaration is that of a library unit.
 @end{Honest}
 @begin{Discussion}
-Such rules may be checked at ``link time,'' for example.
+Such rules may be checked at @lquotes@;link time,@rquotes@; for example.
 Rules requiring the completion to have certain properties,
 on the other hand, are checked at compile time of the completion.
 @end{Discussion}
@@ -2027,7 +2027,7 @@ given partition shall be distinct.
 @begin{Reason}
 This is a @LinkTimeName because making it a @LegalityName
 would violate the @MetaRulesName labeled
-``legality determinable via semantic dependences.''
+@lquotes@;legality determinable via semantic dependences.@rquotes@;
 @end{Reason}
 
 The @nt{sequence_of_statement}s of the environment task (see (2)
@@ -2056,7 +2056,7 @@ or:
 The mechanisms for building and running partitions are implementation
 defined.
 @Redundant[These might be combined into one operation,
-as, for example, in dynamic linking, or ``load-and-go'' systems.]
+as, for example, in dynamic linking, or @lquotes@;load-and-go@rquotes@; systems.]
 @ImplDef{The mechanisms for building and running partitions.}
 @end{LinkTime}
 
@@ -2076,7 +2076,7 @@ When the environment task completes (normally or abnormally),
 it waits for the termination of all such tasks,
 and then finalizes any remaining objects of the partition.]
 @begin{Ramification}
-The ``further details'' mentioned above include,
+The @lquotes@;further details@rquotes@; mentioned above include,
 for example, program termination @em it
 is implementation defined.
 There is no need to define it here;
@@ -2284,9 +2284,9 @@ See @RefSec{Predefined Language Environment}.
 Note that elaboration dependence is carefully defined in such a way that
 if (say) the body of something doesn't exist yet,
 then there is no elaboration dependence upon the nonexistent body.
-(This follows from the fact that ``needed by'' is defined that way,
+(This follows from the fact that @lquotes@;needed by@rquotes@; is defined that way,
 and the elaboration dependences caused by a @nt{pragma} Elaborate or
-Elaborate_All are defined in terms of ``needed by''.)
+Elaborate_All are defined in terms of @lquotes@;needed by@rquotes@;.)
 This property allows us to use the environment concept both at compile
 time and at partition-construction time/run time.
 @end{Ramification}
@@ -2300,8 +2300,8 @@ The language-defined restrictions on main subprograms are relaxed.
 @end{Extend83}
 
 @begin{DiffWord83}
-Ada 95 uses the term ``main subprogram'' instead of Ada 83's ``main
-program'' (which was inherited from Pascal).
+Ada 95 uses the term @lquotes@;main subprogram@rquotes@; instead of Ada 83's @lquotes@;main
+program@rquotes@; (which was inherited from Pascal).
 This is done to avoid confusion @em a main subprogram is a subprogram, not a
 program.
 The program as a whole is an entirely different thing.
@@ -2318,7 +2318,7 @@ the elaboration order of @nt{library_item}s.]
 @begin{MetaRules}
 The rules governing preelaboration are designed to allow
 it to be done largely by bulk initialization of statically
-allocated storage from information in a ``load module'' created by a linker.
+allocated storage from information in a @lquotes@;load module@rquotes@; created by a linker.
 Some implementations may require run-time code to be executed in some
 cases, but we consider these cases rare enough that we need not
 further complicate the rules.
@@ -2571,7 +2571,7 @@ earlier call.
 produces other side effects when called.]
 @begin{Discussion}
 A declared-pure @nt{library_item} has no variable state.
-Hence, a call on one of its (nonnested) subprograms cannot ``normally''
+Hence, a call on one of its (nonnested) subprograms cannot @lquotes@;normally@rquotes@;
 have side effects.
 The only possible side effects from such a call would be
 through machine code insertions,
@@ -2600,7 +2600,7 @@ Elaborate_Body is as follows:
 A @nt{pragma} Elaborate or Elaborate_All is only allowed within a
 @nt{context_clause}.
 @begin{Ramification}
-  ``Within a @nt{context_clause}'' allows it to be the last
+  @lquotes@;Within a @nt{context_clause}@rquotes@; allows it to be the last
   item in the @nt{context_clause}.
   It can't be first, because the @nt{name} has to denote something
   mentioned earlier.

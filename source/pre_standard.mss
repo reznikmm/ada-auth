@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/27 04:44:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:45 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:03 $}
+@Comment{$Date: 2000/08/03 05:37:45 $}
 
 @LabeledClause{The Package Standard}
 
@@ -183,7 +183,7 @@ the visible part of package Standard.}
       @RI[dle],@\@RI[dc1],@\@RI[dc2],@\@RI[dc3],@\@RI[dc4],@\@RI[nak],@\@RI[syn],@\@RI[etb],@\--@RI{16 (16#10#) .. 23 (16#17#)}
       @RI[can],@\@RI[em],@\@RI[sub],@\@RI[esc],@\@RI[fs],@\@RI[gs],@\@RI[rs],@\@RI[us],@\--@RI{24 (16#18#) .. 31 (16#1F#)}
 @comment{blank line}
-      ' ',@\'!',@\'"',@\'#',@\'$',@\'%',@\'&',@\''',@\--@RI{32 (16#20#) .. 39 (16#27#)}
+      ' ',@\'!',@\'"',@\'#',@\'$',@\'%',@\'&',@\@rquotes@;',@\--@RI{32 (16#20#) .. 39 (16#27#)}
       '(',@\')',@\'*',@\'+',@\',',@\'-',@\'.',@\'/',@\--@RI{40 (16#28#) .. 47 (16#2F#)}
 @comment{blank line}
       '0',@\'1',@\'2',@\'3',@\'4',@\'5',@\'6',@\'7',@\--@RI{48 (16#30#) .. 55 (16#37#)}
@@ -338,10 +338,10 @@ this body appears in the environment @nt{declarative_part}
 
 @begin{ImplAdvice}
 If an implementation provides additional named predefined integer types,
-then  the names should end with ``Integer'' as in ``Long_Integer''.
+then  the names should end with @lquotes@;Integer@rquotes@; as in @lquotes@;Long_Integer@rquotes@;.
 If an implementation provides additional named predefined
 floating point types,
-then  the names should end with ``Float'' as in ``Long_Float''.
+then  the names should end with @lquotes@;Float@rquotes@; as in @lquotes@;Long_Float@rquotes@;.
 @end{ImplAdvice}
 
 @begin{Notes}

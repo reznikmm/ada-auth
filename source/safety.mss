@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.13 $ $Date: 2000/05/27 04:44:02 $ $Author: Randy $ }
+@Comment{ $Revision: 1.14 $ $Date: 2000/08/03 05:37:44 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:02 $}
+@Comment{$Date: 2000/08/03 05:37:44 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -44,7 +44,7 @@ However, it is not possible, in general, to test for high assurance. For any
 specific language feature, it is possible to demonstrate its presence by a
 functional test, as in the ACVC. One can also check for the presence of some
 documentation requirements, but it is not easy to determine objectively that
-the documentation is ``adequate''.
+the documentation is @lquotes@;adequate@rquotes@;.
 
 @end{Discussion}
 @end{Notes}
@@ -181,7 +181,7 @@ run-time storage, and the method used to evaluate numeric expressions if
 this involves extended range or extra precision.
 @begin{Discussion}
 
-Look up ``unspecified'' and ``erroneous execution''
+Look up @lquotes@;unspecified@rquotes@; and @lquotes@;erroneous execution@rquotes@;
 in the index for a list of the cases.
 
 The management of run-time storage is particularly important. For safety
@@ -284,15 +284,15 @@ situations. Of course, such events could well indicate a programmer error.
 @end{Discussion}
 
 For each reference to a scalar object, an identification of  the
-reference as either  ``known to be initialized,'' or ``possibly uninitialized,''
+reference as either  @lquotes@;known to be initialized,@rquotes@; or @lquotes@;possibly uninitialized,@rquotes@;
 independent of whether pragma Normalize_Scalars applies;
 @begin{Discussion}
 
 This issue again raises the question as to what the compiler has determined.
-A lazy implementation could clearly mark all scalars as ``possibly
-uninitialized'', but this would be very unhelpful to the user. It should be
+A lazy implementation could clearly mark all scalars as @lquotes@;possibly
+uninitialized@rquotes@;, but this would be very unhelpful to the user. It should be
 possible to analyze a range of scalar uses and note the percentage in each
-class. Note that an access marked ``known to be initialized'' does not imply
+class. Note that an access marked @lquotes@;known to be initialized@rquotes@; does not imply
 that the value is in range, since the initialization could be from an
 (erroneous) call of unchecked conversion, or by means external to the Ada
 program.
@@ -406,7 +406,7 @@ the compilation units of the partition.
 This requirement is quite vague, since it is unclear what control and data
 flow information the compiler has produced. It is really a plea not to throw
 away information that could be useful to the validator. Note that the data
-flow information is relevant to the detection of ``possibly uninitialized''
+flow information is relevant to the detection of @lquotes@;possibly uninitialized@rquotes@;
 objects referred to above.
 
 @end{Discussion}
@@ -492,7 +492,7 @@ If a pragma Inspection_Point is in an in-lined subprogram, there
 might be numerous inspection points in the object code corresponding to
 the single occurrence of the pragma in the source; similar considerations
 apply if such a
-pragma is in a generic, or in a loop that has been ``unrolled'' by an
+pragma is in a generic, or in a loop that has been @lquotes@;unrolled@rquotes@; by an
 optimizer.@end{ramification}
 @Defn{inspectable object}
 An object is @i{inspectable} at an inspection point if the corresponding
@@ -545,7 +545,7 @@ can be obtained.
 @end{DocReq}
 
 @begin{Notes}
-The implementation is not allowed to perform ``dead store elimination'' on
+The implementation is not allowed to perform @lquotes@;dead store elimination@rquotes@; on
 the last assignment to a variable prior to a point where the
 variable is inspectable.
 Thus an inspection point has the effect of an
@@ -690,7 +690,7 @@ but this is expressed in
 language terms. It is conceivable that floating point is used implicitly in
 some contexts, say fixed point type conversions of high accuracy. However,
 the @ImplReqTitle below make it clear that the restriction would apply
-to the ``run-time system'' and hence not be allowed.
+to the @lquotes@;run-time system@rquotes@; and hence not be allowed.
 This parameter could be used to inform a compiler that a variant of the
 architecture is being used which does not have floating point instructions.
 

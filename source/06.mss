@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:00 $}
+@Comment{$Date: 2000/08/03 05:37:37 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -34,10 +34,10 @@ that defines the action of a call upon a callable entity:
 a @nt{subprogram_body},
 @nt{entry_body}, or @nt{accept_statement}.
 @begin{Ramification}
-Note that ``callable entity''
+Note that @lquotes@;callable entity@rquotes@;
 includes predefined operators, enumeration literals,
 and abstract subprograms.
-``Call'' includes calls of these things.
+@lquotes@;Call@rquotes@; includes calls of these things.
 They do not have callable constructs,
 since they don't have completions.
 @end{Ramification}
@@ -273,11 +273,11 @@ a @nt{parent_unit_name} to indicate the parent of a child
 
 @begin{DiffWord83}
 We have incorporated the rules from
-RM83-6.5, ``Function Subprograms'' here and in
+RM83-6.5, @lquotes@;Function Subprograms@rquotes@; here and in
 @RefSec{Subprogram Bodies}
 
-We have incorporated the definitions of RM83-6.6, ``Parameter and Result
-Type Profile - Overloading of Subprograms'' here.
+We have incorporated the definitions of RM83-6.6, @lquotes@;Parameter and Result
+Type Profile - Overloading of Subprograms@rquotes@; here.
 
 The syntax rule for @nt{defining_operator_symbol} is new.
 It is used for the defining occurrence of an @nt{operator_symbol},
@@ -385,7 +385,7 @@ the object whose value it represents.
 Two values of a limited by-reference type are the @i{same}
 if and only if they represent the value of the same object.
 
-We say ``by-reference'' above because
+We say @lquotes@;by-reference@rquotes@; above because
 these statements are not always true for limited private types
 whose underlying type is nonlimited (unfortunately).
 @end{Ramification}
@@ -434,8 +434,8 @@ The possible consequences are that Program_Error is raised,
 or the newly assigned value is read,
 or some old value of the object is read.
 @begin{Discussion}
-For example, if we call ``P(X => Global_Variable, Y => Global_Variable)'',
-then within P, the names ``X'', ``Y'', and ``Global_Variable''
+For example, if we call @lquotes@;P(X => Global_Variable, Y => Global_Variable)@rquotes@;,
+then within P, the names @lquotes@;X@rquotes@;, @lquotes@;Y@rquotes@;, and @lquotes@;Global_Variable@rquotes@;
 are all distinct access paths.
 If Global_Variable's type is neither pass-by-copy nor pass-by-reference,
 then it is a bounded error to assign to Global_Variable and
@@ -451,7 +451,7 @@ We are saying @i(assign) here, not @i(update),
 because updating any subcomponent is considered
 to update the enclosing object.
 
-The ``still exists'' part is so that a read after the subprogram returns
+The @lquotes@;still exists@rquotes@; part is so that a read after the subprogram returns
 is OK.
 
 If the parameter is of a by-copy type,
@@ -475,7 +475,7 @@ it has to be consistent -- it cannot then assume that something it has
 proven about the register is true of the memory location.
 For example, suppose the formal parameter is L,
 the value of L(6) is now in a register, and L(6) is used
-in an @nt{indexed_component} as in ``A(L(6)) := 99;'',
+in an @nt{indexed_component} as in @lquotes@;A(L(6)) := 99;@rquotes@;,
 where A has bounds 1..3.
 If the implementation can prove that the value for L(6) in the register is in
 the range 1..3, then it need not perform the constraint check if it
@@ -506,7 +506,7 @@ in standard Ada:
 This is from the standard string handling package.
 It would be embarrassing if this couldn't be written in Ada!
 
-The ``then'' before ``read'' in the rule implies that the implementation
+The @lquotes@;then@rquotes@; before @lquotes@;read@rquotes@; in the rule implies that the implementation
 can move a read to an earlier place in the code, but not to a later
 place after a potentially aliased assignment.
 Thus, if the subprogram reads one of its parameters into a local
@@ -696,7 +696,7 @@ in @RefSecNum{Subprogram Renaming Declarations}.
 @Defn{Intrinsic calling convention}
 @Defn2{Term=[calling convention], Sec=(Intrinsic)}
 The @i{Intrinsic} calling convention represents
-subprograms that are ``built in'' to the compiler.
+subprograms that are @lquotes@;built in@rquotes@; to the compiler.
 The default calling convention is Intrinsic for the following:
 @begin{InnerItemize}
   an enumeration literal;
@@ -732,9 +732,9 @@ for Intrinsic subprograms.]
   Whenever we wish to disallow the Access attribute in order to ease
   implementation, we make the subprogram Intrinsic.
   Several language-defined subprograms have
-  ``@key[pragma] Convention(Intrinsic, ...);''.
+  @lquotes@;@key[pragma] Convention(Intrinsic, ...);@rquotes@;.
   An implementation might actually implement this
-  as ``@key[pragma] Import(Intrinsic, ...);'',
+  as @lquotes@;@key[pragma] Import(Intrinsic, ...);@rquotes@;,
   if there is really no body, and the implementation of the subprogram
   is built into the code generator.
 
@@ -743,12 +743,12 @@ for Intrinsic subprograms.]
   convention so as to pass along the identification of the
   current instance of the protected type.
   The convention is not @i(protected) since such local subprograms
-  need not contain any ``locking'' logic since they are
-  not callable via ``external'' calls;
+  need not contain any @lquotes@;locking@rquotes@; logic since they are
+  not callable via @lquotes@;external@rquotes@; calls;
   this rule prevents an access value designating such a subprogram
   from being passed outside the protected unit.
 
-  The ``implicitly declared subprogram'' above refers to
+  The @lquotes@;implicitly declared subprogram@rquotes@; above refers to
   predefined operators (other than the "=" of a tagged type) and
   the inherited subprograms of
   untagged types.
@@ -846,7 +846,7 @@ denotes the same declaration as the corresponding
 @nt{direct_name}, @nt{character_literal},
 or @nt{selector_name} in the other; and
 @begin{Ramification}
-Note that it doesn't say ``respectively''
+Note that it doesn't say @lquotes@;respectively@rquotes@;
 because a @nt{direct_name} can correspond to a @nt{selector_name},
 and vice-versa, by the previous bullet.
 This rule allows the @nt{prefix} of an expanded name to be removed,
@@ -875,9 +875,9 @@ Given the following declarations:
 @key[procedure] Main @key[is] ...
 @end{Example}
 
-Within Main, the expressions ``F'', ``A.F'', ``B.A_View.F'',
-and ``A_View.F'' are all fully conformant with one another.
-However, ``F'' and ``F_View'' are not fully conformant.
+Within Main, the expressions @lquotes@;F@rquotes@;, @lquotes@;A.F@rquotes@;, @lquotes@;B.A_View.F@rquotes@;,
+and @lquotes@;A_View.F@rquotes@; are all fully conformant with one another.
+However, @lquotes@;F@rquotes@; and @lquotes@;F_View@rquotes@; are not fully conformant.
 If they were, it would be bad news, since the two denoted views have
 different @nt{default_expression}s.
 @end{Ramification}
@@ -1235,7 +1235,7 @@ Set(Color'(Red));
 @end{Examples}
 
 @begin{DiffWord83}
-We have gotten rid of parameters ``of the form of a type conversion''
+We have gotten rid of parameters @lquotes@;of the form of a type conversion@rquotes@;
 (see RM83-6.4.1(3)).
 The new view semantics of @nt{type_conversion}s allows us to use
 normal @nt{type_conversion}s instead.
@@ -1259,7 +1259,7 @@ actual parameter and a formal parameter.]
 The parameter passing rules for @b(out) parameters
 are designed to ensure that the parts of a type that have
 implicit initial values (see @RefSecNum{Object Declarations})
-don't become ``de-initialized'' by
+don't become @lquotes@;de-initialized@rquotes@; by
 being passed as an @b(out) parameter.
 @end{MetaRules}
 
@@ -1298,8 +1298,8 @@ otherwise, the actual is interpreted only as a @nt{name}, if possible.
 If the mode is @key(in out) or @key(out),
 the actual shall be a @nt<name> that denotes a variable.
 @begin{Discussion}
-  We no longer need ``or a
-  @nt{type_conversion} whose argument is the @nt{name} of a variable,''
+  We no longer need @lquotes@;or a
+  @nt{type_conversion} whose argument is the @nt{name} of a variable,@rquotes@;
   because a @nt{type_conversion} is now a @nt{name}, and a
   @nt{type_conversion} of a variable is a variable.
 @end{Discussion}
@@ -1318,7 +1318,7 @@ Print(3); --@RI{ Ambiguous!}
 
   The above call to Print is ambiguous even though the call is
   not compatible with the second Print which requires an actual
-  that is a (variable) @nt<name> (``3'' is an @nt<expression>, not
+  that is a (variable) @nt<name> (@lquotes@;3@rquotes@; is an @nt<expression>, not
   a @nt<name>).  This requirement is a legality rule, so overload
   resolution fails before it is considered, meaning that the call
   is ambiguous.
@@ -1371,7 +1371,7 @@ the formal parameter object is created, and:
   from the value of the actual, without a constraint check;
 @begin{Reason}
   This preserves the @MetaRulesName that an object of an access type
-  is always initialized with a ``reasonable'' value.
+  is always initialized with a @lquotes@;reasonable@rquotes@; value.
 @end{Reason}
 
   For a composite type with discriminants or
@@ -1381,7 +1381,7 @@ the formal parameter object is created, and:
   passed by copy.
 @begin{Reason}
   This ensures that no part of an object of such a type
-  can become ``de-initialized'' by being part of an @b(out)
+  can become @lquotes@;de-initialized@rquotes@; by being part of an @b(out)
   parameter.
 @end{Reason}
 @begin{Ramification}
@@ -1457,7 +1457,7 @@ S1.
 
 @begin{Extend83}
 In Ada 9X, a program can rely on the fact that passing an object as
-an @key[out] parameter does not ``de-initialize'' any parts of the
+an @key[out] parameter does not @lquotes@;de-initialize@rquotes@; any parts of the
 object whose subtypes have implicit initial values.
 (This generalizes the RM83 rule that required copy-in for parts that
 were discriminants or of an access type.)
@@ -1511,7 +1511,7 @@ A @nt{return_statement} shall include a return expression
 if and only if it applies to a function body.
 @begin{Reason}
 The requirement that a function body has to have at least one
-@nt{return_statement} is a ``helpful'' restriction.
+@nt{return_statement} is a @lquotes@;helpful@rquotes@; restriction.
 There was been some interest in lifting this restriction,
 or allowing a raise statement to substitute for the
 @nt{return_statement}.
@@ -1686,8 +1686,8 @@ construct, not to a callable entity.
 
 There is no need to mention generics in the rules about where a
 @nt{return_statement} can appear and what it applies to;
-the phrase ``body of a subprogram or generic subprogram'' is
-syntactic, and refers exactly to ``@nt{subprogram_body}''.
+the phrase @lquotes@;body of a subprogram or generic subprogram@rquotes@; is
+syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{DiffWord83}
 
 @LabeledClause{Overloading of Operators}
@@ -1712,7 +1712,7 @@ We also use the term operator
 (in Section 4 and in @RefSecNum{Subprogram Declarations})
 to refer to one of the syntactic categories
 defined in @RefSec{Operators and Expression Evaluation}
-whose names end with ``_operator:''
+whose names end with @lquotes@;_operator:@rquotes@;
 @nt<logical_operator>,
 @nt<relational_operator>,
 @nt<binary_adding_operator>,

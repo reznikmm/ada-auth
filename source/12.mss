@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:20 $}
+@Comment{$Date: 2000/08/03 05:37:41 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -104,13 +104,13 @@ as appropriate.
 
 @Defn{generic formal}
 An entity is a @i{generic formal} entity if it is declared
-by a @nt<generic_formal_parameter_declaration>.  ``Generic formal,''
-or simply ``formal,'' is used as a prefix in referring
+by a @nt<generic_formal_parameter_declaration>.  @lquotes@;Generic formal,@rquotes@;
+or simply @lquotes@;formal,@rquotes@; is used as a prefix in referring
 to objects, subtypes (and types), functions, procedures and packages,
 that are generic formal entities, as well as to their respective
 declarations.
-@Redundant[Examples: ``generic formal procedure''
-or a ``formal integer type declaration.'']
+@Redundant[Examples: @lquotes@;generic formal procedure@rquotes@;
+or a @lquotes@;formal integer type declaration.@rquotes@;]
 @end{StaticSem}
 
 @begin{RunTime}
@@ -126,7 +126,7 @@ In contrast, within the declarative region of the generic unit,
 a @nt{name} that denotes the @nt{generic_declaration} denotes the
 current instance.
 @begin{TheProof}
-This is stated officially as part of the ``current instance''
+This is stated officially as part of the @lquotes@;current instance@rquotes@;
 rule in @RefSec{The Context of Overload Resolution}.
 See also @RefSec{Generic Instantiation}.
 @end{TheProof}
@@ -212,7 +212,7 @@ The names of the categories are changed to be more intuitive and uniform.
 For example, we changed @nt{generic_parameter_declaration} to
 @nt{generic_formal_parameter_declaration}, because the thing it declares
 is a generic formal, not a generic.
-In the others, we abbreviate ``generic_formal'' to just ``formal''.
+In the others, we abbreviate @lquotes@;generic_formal@rquotes@; to just @lquotes@;formal@rquotes@;.
 We can't do that for @nt{generic_formal_parameter_declaration},
 because of confusion with normal formal parameters of subprograms.
 @end{DiffWord83}
@@ -225,8 +225,8 @@ The body of a generic unit (a @i{generic body})
 @Redundant[is a template for the instance bodies.
 The syntax of a generic body is identical to that of a nongeneric body].
 @begin{Ramification}
-We also use terms like ``generic function body'' and
-``nongeneric package body.''
+We also use terms like @lquotes@;generic function body@rquotes@; and
+@lquotes@;nongeneric package body.@rquotes@;
 @end{Ramification}
 @end{Intro}
 
@@ -318,7 +318,7 @@ Thus, the @nt{generic_declaration} forms a contract between the body and
 the instances; if each obeys the rules with respect to the
 @nt{generic_declaration}, then no legality problems will arise.
 This is really a special case of the
-``legality determinable via semantic dependences''
+@lquotes@;legality determinable via semantic dependences@rquotes@;
 @MetaRulesName (see Section 10),
 given that a @nt{generic_instantiation} does not depend semantically
 upon the generic body, nor vice-versa.
@@ -370,8 +370,8 @@ The @i{generic actual parameter} is either the
 or the corresponding @nt{default_expression} or @nt{default_name} if
 no @nt{generic_parameter_association} is given for the formal.
 When the meaning is clear from context,
-the term ``generic actual,'' or simply ``actual,'' is used as a synonym for
-``generic actual parameter''
+the term @lquotes@;generic actual,@rquotes@; or simply @lquotes@;actual,@rquotes@; is used as a synonym for
+@lquotes@;generic actual parameter@rquotes@;
 and also for the view denoted by one, or the value of one.
 @end{Intro}
 
@@ -424,7 +424,7 @@ and actuals guarantee that if the rule is obeyed in the generic unit,
 then it has to be obeyed in the instance.
 @end{Reason}
 @begin{Ramification}
-The ``properties'' of the formals are determined without knowing
+The @lquotes@;properties@rquotes@; of the formals are determined without knowing
 anything about the actuals:
 @begin{Itemize}
 A formal derived subtype is constrained if and only if the ancestor
@@ -513,7 +513,7 @@ and @RefSecNum{Type Conversions}.
 However, this would present difficulties for
 implementations that share generic bodies.
 
-The rules requiring ``reasonable'' values for static expressions are
+The rules requiring @lquotes@;reasonable@rquotes@; values for static expressions are
 ignored when the expected type for the expression is a descendant of a
 generic formal type other than a generic formal derived type,
 and do not apply in an instance.
@@ -533,7 +533,7 @@ but they can be in instances.
 
 @RootDefn{generic contract issue}
 Each rule that is an exception is marked with
-``generic contract issue;'' look that up in the index to find them all.
+@lquotes@;generic contract issue;@rquotes@; look that up in the index to find them all.
 @end{Ramification}
 @begin{Ramification}
 The @LegalityName@;s are the ones labeled @LegalityTitle.
@@ -552,9 +552,9 @@ or the @RunTimeName@;s.
 @end{Ramification}
 @begin{Discussion}
 Here is an example illustrating how this rule is checked:
-``In the declaration of a record extension,
+@lquotes@;In the declaration of a record extension,
 if the parent type is nonlimited, then each of the
-components of the @nt{record_extension_part} shall be nonlimited.''
+components of the @nt{record_extension_part} shall be nonlimited.@rquotes@;
 @begin{Example}
 @key[generic]
     @key[type] Parent @key[is] @key[tagged] @key[private];
@@ -619,10 +619,10 @@ it is equivalent to the instance declaration
 immediately followed by the instance body,
 both at the place of the instantiation.
 @begin{Ramification}
-The declaration and the body of the instance are not ``implicit''
+The declaration and the body of the instance are not @lquotes@;implicit@rquotes@;
 in the technical sense, even though you can't see them in the program
 text.
-Nor are declarations within an instance ``implicit''
+Nor are declarations within an instance @lquotes@;implicit@rquotes@;
 (unless they are implicit by other rules).
 This is necessary because implicit declarations have special semantics
 that should not be attached to instances.
@@ -715,7 +715,7 @@ of the denoted declaration.
 The overloading rules do not apply in the instance.
 @begin{Ramification}
 See @RefSec{The Context of Overload Resolution} for definitions of
-``interpretation'' and ``overloading rule.''
+@lquotes@;interpretation@rquotes@; and @lquotes@;overloading rule.@rquotes@;
 
 Even the @nt{generic_formal_parameter_declaration}s have corresponding
 declarations in the instance,
@@ -729,7 +729,7 @@ a nonstatic constant, whereas the copy of that declaration might
 declare a static constant.
 This can happen when the staticness depends on some generic formal.
 
-This rule is partly a ramification of the ``current instance''
+This rule is partly a ramification of the @lquotes@;current instance@rquotes@;
 rule in @RefSec{The Context of Overload Resolution}.
 Note that that rule doesn't cover the @nt{generic_formal_part}.
 
@@ -761,7 +761,7 @@ properties are identical to the corresponding declaration within the
 declaration of the actual.
 @begin{Ramification}
   In an instance,
-  there are no ``properties'' of types and subtypes that come from
+  there are no @lquotes@;properties@rquotes@; of types and subtypes that come from
   the formal.
   The primitive operations of the type come from the
   formal, but these are declarations in their own right,
@@ -979,7 +979,7 @@ Additional actions are performed in the case of a formal object of
 mode @key{in} (see @RefSecNum{Formal Objects}).
 @begin{Honest}
 Actually, the actual is evaluated only if evaluation is defined for that
-kind of construct @em we don't actually ``evaluate'' @nt{subtype_mark}s.
+kind of construct @em we don't actually @lquotes@;evaluate@rquotes@; @nt{subtype_mark}s.
 @end{Honest}
 @end{RunTime}
 
@@ -1042,7 +1042,7 @@ substitution of formals and actuals:
     @key[function] "="(X, Y : My_Int) @key[return] Boolean;
     --@RI{ Call this "="@-{4}.}
     --@RI{ "="@-{3} is hidden from all visibility by "="@-{4}.}
-    --@RI{ Nonetheless, "="@-{3} can ``reemerge'' in certain circumstances.}
+    --@RI{ Nonetheless, "="@-{3} can @lquotes@;reemerge@rquotes@; in certain circumstances.}
 @key[end] P;
 @key[use] P;
 ...
@@ -1139,13 +1139,13 @@ because it is a ramification of other rules, and because it is not of
 interest to the average user.
 
 The rule that
-``An explicit @nt{explicit_generic_actual_parameter} shall not be supplied more
-than once for a given @nt{generic_formal_parameter}''
+@lquotes@;An explicit @nt{explicit_generic_actual_parameter} shall not be supplied more
+than once for a given @nt{generic_formal_parameter}@rquotes@;
 seems to be missing from RM83, although it was clearly the intent.
 
 In the explanation that the instance is a copy of the template,
-we have left out RM83-12.3(5)'s ``apart from the generic formal
-part'', because it seems that things in the formal part still need to
+we have left out RM83-12.3(5)'s @lquotes@;apart from the generic formal
+part@rquotes@;, because it seems that things in the formal part still need to
 exist in instances.
 This is particularly true for generic formal packages,
 where you're sometimes allowed to reach in and denote the formals of
@@ -1159,13 +1159,13 @@ packages, and the declarations that occur therein.
 
 We have corrected the definition of the elaboration of a
 @nt{generic_instantiation} (RM83-12.3(17)); we don't elaborate
-entities, and the instance is not ``implicit.''
+entities, and the instance is not @lquotes@;implicit.@rquotes@;
 
 In RM83, there is a rule saying the formal and actual shall match, and
 then there is much text defining what it means to match.
 Here, we simply state all the latter text as rules.
-For example, ``A formal foo is matched by an actual greenish bar''
-becomes ``For a formal foo, the actual shall be a greenish bar.''
+For example, @lquotes@;A formal foo is matched by an actual greenish bar@rquotes@;
+becomes @lquotes@;For a formal foo, the actual shall be a greenish bar.@rquotes@;
 This is necessary to split the @ResolutionName@;s
 from the @LegalityName@;s.
 Besides, there's really no need to define the concept of matching for
@@ -1338,7 +1338,7 @@ This restriction is removed in Ada 9X.
 @end{Extend83}
 
 @begin{DiffWord83}
-We make ``@nt{mode}'' explicit in the syntax.
+We make @lquotes@;@nt{mode}@rquotes@; explicit in the syntax.
 RM83 refers to the mode without saying what it is.
 This is also more uniform with the way (nongeneric) formal parameters
 are defined.
@@ -1403,7 +1403,7 @@ For a generic formal subtype, the actual shall be
 a @nt{subtype_mark};
 it denotes the @i{(generic) actual subtype}.
 @begin{Ramification}
-When we say simply ``formal'' or ``actual'' (for a generic
+When we say simply @lquotes@;formal@rquotes@; or @lquotes@;actual@rquotes@; (for a generic
 formal that denotes a subtype) we're talking about the subtype, not
 the type, since a name that denotes a @nt{formal_type_declaration}
 denotes a subtype, and the corresponding actual also denotes a
@@ -1462,12 +1462,12 @@ and are therefore technically classes
 since they are uninteresting).
 We don't want this rule to apply to @i{those} classes.
 
-``Limited'' is not a ``interesting'' class, but ``nonlimited'' is;
+@lquotes@;Limited@rquotes@; is not a @lquotes@;interesting@rquotes@; class, but @lquotes@;nonlimited@rquotes@; is;
 it is legal to pass a nonlimited type to a limited formal type,
 but not the other way around.
 The reserved word @nt{limited} really represents a class containing
 both limited and nonlimited types.
-``Private'' is not a class; a generic formal private type accepts
+@lquotes@;Private@rquotes@; is not a class; a generic formal private type accepts
 both private and nonprivate actual types.
 
 It is legal to pass a class-wide subtype as the actual
@@ -1519,7 +1519,7 @@ A @nt{discriminant_part} is allowed only for certain kinds of types,
 and therefore only for certain kinds of generic formal types.
 See @RefSecNum{Discriminants}.
 @begin{Ramification}
-The term ``formal floating point type'' refers to a type defined by a
+The term @lquotes@;formal floating point type@rquotes@; refers to a type defined by a
 @nt{formal_floating_point_definition}.
 It does not include
 a formal derived type whose ancestor is floating point.
@@ -1552,15 +1552,15 @@ Similar terminology applies to the other kinds of
 @end{Examples}
 
 @begin{DiffWord83}
-RM83 has separate sections ``Generic Formal Xs'' and ``Matching Rules for
-Formal Xs'' (for various X's) with most of the text
+RM83 has separate sections @lquotes@;Generic Formal Xs@rquotes@; and @lquotes@;Matching Rules for
+Formal Xs@rquotes@; (for various X's) with most of the text
 redundant between the two.
 We have combined the two in order to reduce the redundancy.
-In RM83, there is no ``Matching Rules for Formal Types'' section; nor is
-there a ``Generic Formal Y Types'' section (for Y = Private, Scalar, Array,
+In RM83, there is no @lquotes@;Matching Rules for Formal Types@rquotes@; section; nor is
+there a @lquotes@;Generic Formal Y Types@rquotes@; section (for Y = Private, Scalar, Array,
 and Access).
-This causes, for example, the duplication across all the ``Matching
-Rules for Y Types'' sections of the rule that the actual passed to a
+This causes, for example, the duplication across all the @lquotes@;Matching
+Rules for Y Types@rquotes@; sections of the rule that the actual passed to a
 formal type shall be a subtype;
 the new organization avoids that problem.
 
@@ -1619,7 +1619,7 @@ type.
 the optional reserved word @key{abstract} shall
 appear only if the ancestor type is a tagged type].
 @begin{Reason}
-We use the term ``ancestor'' here instead of ``parent''
+We use the term @lquotes@;ancestor@rquotes@; here instead of @lquotes@;parent@rquotes@;
 because the actual can be any descendant of the ancestor,
 not necessarily a direct descendant.
 @end{Reason}
@@ -1639,7 +1639,7 @@ For a generic formal derived type with no
   and shall be statically compatible with the ancestor;
 @begin{Ramification}
   In other words, any constraint on the ancestor subtype is considered
-  part of the ``contract.''
+  part of the @lquotes@;contract.@rquotes@;
 @end{Ramification}
 
   If the ancestor subtype is an unconstrained access
@@ -1687,7 +1687,7 @@ discriminant of the formal type.
 @PDefn2{Term=[statically matching],Sec=(required)}
 @begin{Reason}
 We considered defining the first and third rule to be called
-``subtype conformance'' for @nt{discriminant_parts}.
+@lquotes@;subtype conformance@rquotes@; for @nt{discriminant_parts}.
 We rejected that idea, because it would require implicit (inherited)
 @nt{discriminant_parts}, which seemed like too much mechanism.
 @end{Reason}
@@ -1953,9 +1953,9 @@ then the actual's components can be either aliased or not.
 The check for matching of component subtypes and index subtypes or
 index ranges is changed from a
 run-time check to a compile-time check.
-The Ada 83 rule that ``If the component type is not a scalar type,
+The Ada 83 rule that @lquotes@;If the component type is not a scalar type,
 then the component subtypes shall be either both constrained or both
-unconstrained'' is removed, since it is subsumed by static matching.
+unconstrained@rquotes@; is removed, since it is subsumed by static matching.
 Likewise, the rules requiring that component types be
 the same is subsumed.
 @end{Incompatible83}
@@ -1988,6 +1988,12 @@ If no @nt{_modifier} applies to the formal, then
 the actual type may be either a pool-specific or a general
 access-to-variable type.
 @end{Ramification}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0109]}
+@Chg{New=[Matching an access-to-variable to a formal access-to-constant type
+cannot be allowed. If it were allowed, it would be possible to create an
+access-to-variable value designating a constant.], Old=[]}
+@end{Reason}
 
 For a formal access-to-subprogram subtype,
 the designated profiles of the formal and the actual
@@ -2036,9 +2042,9 @@ the formal.
 @begin{Incompatible83}
 The check for matching of designated subtypes is changed from a
 run-time check to a compile-time check.
-The Ada 83 rule that ``If the
+The Ada 83 rule that @lquotes@;If the
 designated type is other than a scalar type, then the designated
-subtypes shall be either both constrained or both unconstrained'' is
+subtypes shall be either both constrained or both unconstrained@rquotes@; is
 removed, since it is subsumed by static matching.
 @end{Incompatible83}
 
@@ -2275,7 +2281,7 @@ or the formals of an instance to be namable from outside, but never both.
 If both were namable, one would get some funny anomalies since
 they denote the same entity, but, in the case of types at least,
 they might have different and inconsistent sets of primitive operators
-due to predefined operator ``reemergence.''  Formal derived types
+due to predefined operator @lquotes@;reemergence.@rquotes@;  Formal derived types
 exacerbate the difference.  We want the implicit declarations
 of the @nt<generic_formal_part> as well as the explicit
 declarations, so we get operations on the formal types.

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/06/03 02:02:34 $}
+@Comment{$Date: 2000/08/03 05:37:41 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 @redundant[This section describes features for
@@ -109,7 +109,7 @@ it may do so through a @Redundant[local]
 @Redundant[(as a way to resolve ambiguity in the presence of overloading)];
 otherwise, the @nt<local_name> shall not denote a @nt<renaming_declaration>.
 @begin{Ramification}
-The ``statically denote'' part
+The @lquotes@;statically denote@rquotes@; part
 implies that it is impossible to specify the representation of
 an object that is not a stand-alone object,
 except in the case of a representation
@@ -118,9 +118,9 @@ that is allowed inside a @nt{component_list}
 (in which case the representation item specifies
 the representation of components of all objects of the type).
 It also prevents the problem of
-renamings of things like ``P.@key[all]''
+renamings of things like @lquotes@;P.@key[all]@rquotes@;
 (where P is an access-to-subprogram value)
-or ``E(I)'' (where E is an entry family).
+or @lquotes@;E(I)@rquotes@; (where E is an entry family).
 
 The part about where the denoted entity has to have been
 declared appears twice @em once as a @ResolutionName,
@@ -505,8 +505,8 @@ except in the case of Storage_Size,
 which specifies a minimum.
 @begin{Ramification}
 This rule implies that queries of the aspect return the
-specified value.  For example, if the user writes ``@key{for}
-X'Size @key{use} 32;'',
+specified value.  For example, if the user writes @lquotes@;@key{for}
+X'Size @key{use} 32;@rquotes@;,
 then a query of X'Size will return 32.
 @end{Ramification}
 
@@ -519,9 +519,9 @@ Note that @nt{representation_clause}s can affect the
 semantics of the entity.
 
 The rules forbid things like
-``@key[for] S'Base'Alignment @key[use] ...''
+@lquotes@;@key[for] S'Base'Alignment @key[use] ...@rquotes@;
 and
-``@key[for] S'Base @key[use] record ...''.
+@lquotes@;@key[for] S'Base @key[use] record ...@rquotes@;.
 @end{Ramification}
 @begin{Discussion}
 The intent is that implementations will represent the
@@ -596,7 +596,7 @@ X : Integer := F(...);
 @key[for] X'Address @key[use] Y;
 @end{Example}
 
-This allows the expression ``Y'' to be safely evaluated before X is
+This allows the expression @lquotes@;Y@rquotes@; to be safely evaluated before X is
 created.
 
 The constant could be a formal parameter of mode @key[in].
@@ -662,11 +662,11 @@ objects.
 The syntax rule for @nt{type_representation_clause} is removed;
 the right-hand side of that rule is moved up to where it was used,
 in @nt{representation_clause}.
-There are two references to ``type representation clause'' in RM83,
+There are two references to @lquotes@;type representation clause@rquotes@; in RM83,
 both in Section 13;
 these have been reworded.
 
-We have defined a new term ``representation item,''
+We have defined a new term @lquotes@;representation item,@rquotes@;
 which includes both @nt{representation_clause}s
 and representation pragmas, as well as @nt<component_clause>s.
 This is convenient because the rules are almost identical for all
@@ -674,7 +674,7 @@ three.
 
 All of the forcing occurrence stuff has been moved into its own
 subclause (see @RefSecNum{Freezing Rules}),
-and rewritten to use the term ``freezing''.
+and rewritten to use the term @lquotes@;freezing@rquotes@;.
 
 RM83-13.1(10) requires implementation-defined restrictions on
 representation items to be enforced at compile time.
@@ -683,7 +683,7 @@ If the user specifies a junk (nonstatic) address in an address
 clause, and the implementation chooses to detect the error (for example,
 using hardware memory management with protected pages), then it's
 clearly going to be a run-time error.
-It seems silly to call that ``semantics'' rather than ``a restriction.''
+It seems silly to call that @lquotes@;semantics@rquotes@; rather than @lquotes@;a restriction.@rquotes@;
 
 RM83-13.1(10) tries to pretend that @nt{representation_clause}s don't affect
 the semantics of the program.
@@ -821,7 +821,7 @@ the expected type for the expression or @nt{name}
 is that of the attribute.
 @begin{Ramification}
 For example, the Size attribute is of type @i{universal_integer}.
-Therefore, the expected type for Y in ``@key[for] X'Size @key[use] Y;'' is
+Therefore, the expected type for Y in @lquotes@;@key[for] X'Size @key[use] Y;@rquotes@; is
 @i{universal_integer},
 which means that Y can be of any integer type.
 @end{Ramification}
@@ -863,8 +863,8 @@ Each specifiable attribute constitutes an aspect of representation.
 @begin{Discussion}
 For each specifiable attribute,
 we generally say something like,
-``The ... attribute may be specified for ... via
-an @nt{attribute_definition_clause}.''
+@lquotes@;The ... attribute may be specified for ... via
+an @nt{attribute_definition_clause}.@rquotes@;
 
 The above wording allows for
 T'Class'Alignment, T'Class'Size, T'Class'Input, and T'Class'Output
@@ -873,7 +873,7 @@ to be specifiable.
 A specifiable attribute is not necessarily
 specifiable for all entities for which it is defined.
 For example, one is allowed to ask T'Component_Size for an array
-subtype T, but ``@key[for] T'Component_Size @key[use] ...''
+subtype T, but @lquotes@;@key[for] T'Component_Size @key[use] ...@rquotes@;
 is only allowed if T is a first subtype,
 because Component_Size is a type-related aspect.
 @end{Discussion}
@@ -943,12 +943,12 @@ with a full set of arithmetic and logical instructions to manipulate those
 registers, a word ought to be 4 storage elements @em that is, 32 bits.
 @end{Ramification}
 @begin{Discussion}
-The ``given the implementation's run-time model'' part is
+The @lquotes@;given the implementation's run-time model@rquotes@; part is
 intended to imply that, for example, on an 80386 running MS-DOS,
 the word might be 16 bits, even though the hardware can support 32
 bits.
 
-A word is what ACID refers to as a ``natural hardware boundary''.
+A word is what ACID refers to as a @lquotes@;natural hardware boundary@rquotes@;.
 
 Storage elements may, but need not be, independently addressable
 (see @RefSec{Shared Variables}).
@@ -968,7 +968,7 @@ the corresponding body or @nt{statement}.
 The value of this attribute is of type System.Address.>}
 @begin{Ramification}
 
-  Here, the ``first of the storage elements'' is intended to mean
+  Here, the @lquotes@;first of the storage elements@rquotes@; is intended to mean
   the one with the lowest address;
   the endianness of the machine doesn't matter.
 
@@ -1005,8 +1005,8 @@ via an @nt{attribute_definition_clause}.
   X'Address, then it depends on the declaration of System.
   Otherwise, the fact that the value of Address is of
   a type in System wouldn't make sense;
-  it would violate the ``legality determinable via semantic
-  dependences'' @MetaRulesName.
+  it would violate the @lquotes@;legality determinable via semantic
+  dependences@rquotes@; @MetaRulesName.
 
   AI-00305 @em If X is a task type,
   then within the body of X,
@@ -1112,7 +1112,7 @@ is more explicit.
 The @nt{address_clause} has been renamed to @nt{at_clause} and moved
 to @RefSec{Obsolescent Features}.
 One can use an Address clause
-(``for T'Address @key[use] ...;'')
+(@lquotes@;for T'Address @key[use] ...;@rquotes@;)
 instead.
 
 The attributes defined in RM83-13.7.3 are moved to
@@ -1123,7 +1123,7 @@ The attributes defined in RM83-13.7.3 are moved to
 
 @begin{MetaRules}
 By default, the Alignment of a subtype should
-reflect the ``natural'' alignment for objects of the
+reflect the @lquotes@;natural@rquotes@; alignment for objects of the
 subtype on the machine.
 The Alignment, whether specified or default,
 should be known at compile time, even though
@@ -1182,7 +1182,7 @@ returned by Allocate is aligned as requested,
 the generated code can correctly access the object.
 
 
-The above mention of ``modulo'' is referring to the "@key[mod]"
+The above mention of @lquotes@;modulo@rquotes@; is referring to the "@key[mod]"
 operator declared in System.Storage_Elements;
 if X @key[mod] N = 0, then X is by definition aligned on an
 N-storage-element boundary.
@@ -1293,7 +1293,7 @@ objects allocated outside the control of the implementation.
 Of course implementations can assume anything they can prove, but
 typically an implementation will be unable to prove much about the
 alignment of, say, an imported object.  Furthermore, the information
-about where an address ``came from'' can be lost to the compiler due to
+about where an address @lquotes@;came from@rquotes@; can be lost to the compiler due to
 separate compilation.
 
 The Alignment of an object that is a component of a packed
@@ -1518,22 +1518,22 @@ clause.
 @end{Itemize}
 @begin{Ramification}
 Thus, on a typical 32-bit machine,
-``@key[for] S'Size @key[use] 32;''
+@lquotes@;@key[for] S'Size @key[use] 32;@rquotes@;
 will guarantee that aliased objects of subtype S,
 and components whose subtype is S, will have Size
 = 32 (assuming the implementation chooses to obey this @ImplAdviceTitle).
 On the other hand, if one writes,
-``@key[for] S2'Size @key[use] 5;''
+@lquotes@;@key[for] S2'Size @key[use] 5;@rquotes@;
 then stand-alone objects of subtype S2 will typically have their Size
 rounded up to ensure independent addressability.
 
-Note that ``@key[for] S'Size @key[use] 32;''
+Note that @lquotes@;@key[for] S'Size @key[use] 32;@rquotes@;
 does not cause things like formal parameters to have Size = 32 @em
 the implementation is allowed to make all parameters be at least 64
 bits, for example.
 
 Note that
-``@key[for] S2'Size @key[use] 5;''
+@lquotes@;@key[for] S2'Size @key[use] 5;@rquotes@;
 requires record components whose subtype is S2 to be exactly 5 bits
 if the record type is packed.
 The same is not true of array components;
@@ -1594,7 +1594,7 @@ reflects this representation.
   then S'Size should be <= the smallest such @i{n}.
   For a one's-complement machine,
   it is the same except that in the second range,
-  the lower bound ``@en@;2@+{@i{n@en@;1}}'' is replaced by ``@en@;2@+{@i{n@en@;1}}+1''.
+  the lower bound @lquotes@;@en@;2@+{@i{n@en@;1}}@rquotes@; is replaced by @lquotes@;@en@;2@+{@i{n@en@;1}}+1@rquotes@;.
 
 
   If an integer subtype (whether signed or unsigned)
@@ -1767,7 +1767,7 @@ The value of this attribute is of the type
 The Storage_Size includes the size of the task's stack,
 if any.  The language does not specify whether or
 not it includes other storage associated with the task
-(such as the ``task control block'' used by some
+(such as the @lquotes@;task control block@rquotes@; used by some
 implementations.)>}
 If a @nt{pragma} Storage_Size is given,
 the value of the Storage_Size attribute is at least
@@ -1775,14 +1775,14 @@ the value specified in the @nt{pragma}.
 @EndPrefixType{}
   @begin{Ramification}
   The value of this attribute is never negative,
-  since it is impossible to ``reserve'' a negative number
+  since it is impossible to @lquotes@;reserve@rquotes@; a negative number
   of storage elements.
 
   If the implementation chooses to allocate an initial amount of
   storage, and then increase this as needed,
   the Storage_Size cannot include the additional amounts
   (assuming the allocation of the additional amounts can raise
-  Storage_Error); this is inherent in the meaning of ``reserved.''
+  Storage_Error); this is inherent in the meaning of @lquotes@;reserved.@rquotes@;
 
   The implementation is allowed to allocate different amounts of
   storage for different tasks of the same subtype.
@@ -1863,7 +1863,7 @@ the expression of such a clause shall be static,
 and its value nonnegative.
 @begin{ImplNote}
 The intent is that the value of X'Component_Size is always nonnegative.
-If the array is stored ``backwards'' in memory
+If the array is stored @lquotes@;backwards@rquotes@; in memory
 (which might be caused by an implementation-defined pragma),
 X'Component_Size is still positive.
 @end{ImplNote}
@@ -1979,7 +1979,7 @@ Write, Output, Read, Input,
 and Machine_Radix.
 
 It follows from the general rules in @RefSecNum{Representation Items}
-that if one writes ``@key[for] X'Size @key[use] Y;'' then the X'Size
+that if one writes @lquotes@;@key[for] X'Size @key[use] Y;@rquotes@; then the X'Size
 @nt{attribute_reference} will return Y
 (assuming the implementation allows the Size clause).
 The same is true for all of the specifiable attributes
@@ -2066,7 +2066,7 @@ The @nt<enumeration_aggregate> shall be written as a one-dimensional
 subtype of the enumeration type, and each component expression
 is expected to be of any integer type.
 @begin{Ramification}
-The ``full coverage rules'' for @nt<aggregate>s applies.
+The @lquotes@;full coverage rules@rquotes@; for @nt<aggregate>s applies.
 An @key{others} is not allowed @em there is no applicable index
 constraint in this context.
 @end{Ramification}
@@ -2089,7 +2089,7 @@ satisfy the predefined ordering relation of the type.
   Each value of the enumeration type has to be given an internal code,
   even if the first subtype of the enumeration type is constrained
   to only a subrange (this is only possible if the enumeration type
-  is a derived type).  This ``full coverage'' requirement is important
+  is a derived type).  This @lquotes@;full coverage@rquotes@; requirement is important
   because one may refer to Enum'Base'First and Enum'Base'Last, which
   need to have defined representations.
 @end{Reason}
@@ -2181,7 +2181,7 @@ For example:
 @end{Example}
 
 We considered allowing or requiring
-``@key[for] S2'Base @key[use] ...'' in cases like this,
+@lquotes@;@key[for] S2'Base @key[use] ...@rquotes@; in cases like this,
 but it didn't seem worth the trouble.
 @end{Discussion}
 @end{Notes}
@@ -2204,7 +2204,7 @@ for the predefined operators of @i{root_integer} eliminate
 any ambiguity.
 
 For portability, we now require that the default coding for an enumeration
-type be the ``obvious'' coding using position numbers.
+type be the @lquotes@;obvious@rquotes@; coding using position numbers.
 This is satisfied by all known implementations.
 @end{Extend83}
 
@@ -2305,7 +2305,7 @@ The value of @nt{last_bit} shall be no less than
 @nt{first_bit} @en 1.
 @begin{Ramification}
 A @nt{component_clause} such as
-``X @key{at} 4 @key{range} 0..@en@;1;''
+@lquotes@;X @key{at} 4 @key{range} 0..@en@;1;@rquotes@;
 is allowed if X can fit in zero bits.
 @end{Ramification}
 
@@ -2365,7 +2365,7 @@ after normalizing those values so that
 @begin{Ramification}
 For example,
 if Storage_Unit is 8, then
-``C @key[at] 0 @key[range] 24..31;''
+@lquotes@;C @key[at] 0 @key[range] 24..31;@rquotes@;
 defines C'Position = 3, C'First_Bit = 0, and C'Last_Bit = 7.
 This is true of machines with either bit ordering.
 
@@ -2406,7 +2406,7 @@ things.
 @begin{Discussion}
 @Defn{dope}
 Such implementation-defined components are known in the
-vernacular as ``dope.''
+vernacular as @lquotes@;dope.@rquotes@;
 Their main purpose is for storing offsets of components that depend
 on discriminants.
 @end{Discussion}
@@ -2469,7 +2469,7 @@ These restrictions are probably necessary if block equality
 operations are to be feasible for class-wide types.
 For block comparison to work, the implementation typically has to fill
 in any gaps with zero (or one) bits.
-If a ``gap'' in the parent type is filled in with a component in a
+If a @lquotes@;gap@rquotes@; in the parent type is filled in with a component in a
 type extension, then this won't work when a class-wide object is
 passed by reference, as is required.
 @end{Reason}
@@ -2600,7 +2600,7 @@ For record extensions, the offset is not measured from
 the beginning of the extension part, but from the
 beginning of the whole object, as usual.
 
-In ``R.C'Address @en@; R'Address'',
+In @lquotes@;R.C'Address @en@; R'Address@rquotes@;,
 the "@en@;" operator is the one in System.Storage_Elements
 that takes two Addresses and returns a Storage_Offset.
 @end{Ramification}
@@ -2684,14 +2684,14 @@ storage place attributes.
 @Defn{High_Order_First}
 @Defn{big endian}
 @Defn2{Term=[endian], Sec=(big)}
-High_Order_First @Redundant[(known in the vernacular as ``big endian'')]
+High_Order_First @Redundant[(known in the vernacular as @lquotes@;big endian@rquotes@;)]
 means that the first bit of a storage element
 (bit 0) is the most significant bit (interpreting the sequence of
 bits that represent a component as an unsigned integer value).
 @Defn{Low_Order_First}
 @Defn{little endian}
 @Defn2{Term=[endian], Sec=(little)}
-Low_Order_First @Redundant[(known in the vernacular as ``little endian'')]
+Low_Order_First @Redundant[(known in the vernacular as @lquotes@;little endian@rquotes@;)]
 means the opposite: the first bit is the least significant.
 
 For @PrefixType{every specific record subtype S},
@@ -2991,7 +2991,7 @@ configuration in storage elements.]
 @begin{Discussion}
 It is unspecified whether this refers to the size of the
 address space, the amount of physical memory on the machine,
-or perhaps some other interpretation of ``memory size.''
+or perhaps some other interpretation of @lquotes@;memory size.@rquotes@;
 In any case, the value has to be given by a static expression,
 even though the amount of memory on many modern machines is
 a dynamic quantity in several ways.
@@ -3207,7 +3207,7 @@ Package System.Storage_Elements may be declared pure.
 Operations in System and its children should reflect the
 target environment semantics as closely as is reasonable.
 For example, on most machines, it makes sense for address arithmetic
-to ``wrap around.''
+to @lquotes@;wrap around.@rquotes@;
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Operations that do not make sense should raise
 Program_Error.
@@ -3289,7 +3289,7 @@ Unspecified is almost the same thing as erroneous;
 they both allow arbitrarily bad behavior.
 We don't say erroneous here, because the implementation
 might allow the address passed to To_Pointer to point
-at some memory that just happens to ``look like'' an
+at some memory that just happens to @lquotes@;look like@rquotes@; an
 object of type Object.
 That's not necessarily an error; it's just not portable.
 However, if the actual type passed to Object is (for example)
@@ -3322,7 +3322,7 @@ if the implementation has chosen to use negative component offsets
 it might not be possible to preserve the semantics,
 since negative offsets from the Address are not allowed.
 (The Address attribute always points at
-``the first of the storage elements....'')
+@lquotes@;the first of the storage elements....@rquotes@;)
 Note that while the implementation knows how to convert an access
 value into an address, it might not be able to do the reverse.
 To avoid generic contract model violations,
@@ -3410,7 +3410,7 @@ the calling conventions, and refers to parameters and results
 accordingly.
 The implementation should document where to put the result of a
 machine code function, for example,
-``Scalar results are returned in register 0.''
+@lquotes@;Scalar results are returned in register 0.@rquotes@;
 @end{Discussion}
 
 Intrinsic subprograms (see @RefSec{Conformance Rules})
@@ -3426,7 +3426,7 @@ M : Mask;
 @key[procedure] Set_Mask; @key[pragma] Inline(Set_Mask);
 
 @key[procedure] Set_Mask @key[is]
-  @key[use] System.Machine_Code; --@RI{ assume ``@key[with] System.Machine_Code;'' appears somewhere above}
+  @key[use] System.Machine_Code; --@RI{ assume @lquotes@;@key[with] System.Machine_Code;@rquotes@; appears somewhere above}
 @key[begin]
   SI_Format'(Code => SSM, B => M'Base_Reg, D => M'Disp);
   --@RI{  Base_Reg and Disp are implementation-defined attributes}
@@ -3441,8 +3441,8 @@ in Ada 83, only procedures were allowed.
 
 @begin{DiffWord83}
 The syntax for @nt{code_statement} is changed to say
-``@nt{qualified_expression}'' instead of
-``@Syn2{subtype_mark}'@Syn2{record_aggregate}''.
+@lquotes@;@nt{qualified_expression}@rquotes@; instead of
+@lquotes@;@Syn2{subtype_mark}'@Syn2{record_aggregate}@rquotes@;.
 Requiring the type of each instruction to be a record type is
 overspecification.
 @end{DiffWord83}
@@ -3762,13 +3762,13 @@ the fact that the conversion is unchecked does not obviate the need for
 subsequent checks required by the language rules.
 @end{Ramification}
 @begin{ImplNote}
-  If an implementation wants to have a ``friendly'' mode, it
+  If an implementation wants to have a @lquotes@;friendly@rquotes@; mode, it
   might always assign an uninitialized scalar a default initial value
   that is outside the object's subtype (if there is one), and check
   for this value on some or all reads of the object, so as to help
   detect references to uninitialized scalars.
   Alternatively, an implementation might want to provide an
-  ``unsafe'' mode where it presumed even uninitialized scalars
+  @lquotes@;unsafe@rquotes@; mode where it presumed even uninitialized scalars
   were always within their subtype.
 @end{ImplNote}
 @begin{Ramification}
@@ -3919,7 +3919,7 @@ X'Valid is new in Ada 9X.
 @begin{Intro}
 @redundant[The attribute Unchecked_Access is used to create access values
 in an unsafe manner @em the programmer is responsible for preventing
-``dangling references.'']
+@lquotes@;dangling references.@rquotes@;]
 @end{Intro}
 
 @begin{StaticSem}
@@ -3960,7 +3960,7 @@ parameter.
 
 There is no Unchecked_Access attribute for subprograms.
 @begin{Reason}
-  Such an attribute would allow ``downward closures,''
+  Such an attribute would allow @lquotes@;downward closures,@rquotes@;
   where an access value designating a more nested subprogram is passed
   to a less nested subprogram.
   This requires some means of reconstructing the global environment for
@@ -4035,8 +4035,8 @@ question cannot be specified for derived types,
 nor for non-first subtypes,
 so we don't have to worry about whether, say, Storage_Pool on a
 derived type overrides Storage_Size on the parent type.
-For the same reason, ``specified'' means the same thing as
-``directly specified'' here.
+For the same reason, @lquotes@;specified@rquotes@; means the same thing as
+@lquotes@;directly specified@rquotes@; here.
 @end{Reason}
 @end{Legality}
 
@@ -4183,7 +4183,7 @@ An access-to-object type defined by a @nt{derived_type_definition}
 inherits its pool from its parent type, so
 all access-to-object types in the same derivation class share the
 same pool.
-Hence the ``defined by an @nt{access_to_object_definition}'' wording
+Hence the @lquotes@;defined by an @nt{access_to_object_definition}@rquotes@; wording
 above.
 
 @PDefn{contiguous representation}
@@ -4274,7 +4274,7 @@ An implementation should document any cases in which it dynamically
 allocates heap storage for a purpose other than the evaluation of an
 @nt{allocator}.
 @begin{Reason}
-This is ``@ImplAdviceTitle'' because the term ``heap storage''
+This is @lquotes@;@ImplAdviceTitle@rquotes@; because the term @lquotes@;heap storage@rquotes@;
 is not formally definable;
 therefore, it is not testable whether the implementation obeys this advice.
 @end{Reason}
@@ -4445,7 +4445,7 @@ MR_Pool : Mark_Release_Pool_Type (Pool_Size => 2000,
 ...
 
 Mark(MR_Pool);
-... --@RI{ Allocate objects using ``@key[new] Designated(...)''.}
+... --@RI{ Allocate objects using @lquotes@;@key[new] Designated(...)@rquotes@;.}
 Release(MR_Pool); --@RI{ Reclaim the storage.}
 @end{Example}
 @end{Examples}
@@ -4455,7 +4455,7 @@ User-defined storage pools are new to Ada 9X.
 @end{Extend83}
 
 @begin{DiffWord83}
-Ada 83 had a concept called a ``collection,''
+Ada 83 had a concept called a @lquotes@;collection,@rquotes@;
 which is similar to what we call a storage pool.
 All access types in the same derivation class
 shared the same collection.
@@ -4684,7 +4684,7 @@ Storage reclamation upon leaving a master is not considered garbage
 collection.
 
 Note that garbage collection includes compaction of a pool
-(``moved to a different Address''), even if storage reclamation is not
+(@lquotes@;moved to a different Address@rquotes@;), even if storage reclamation is not
 done.
 @end{Ramification}
 @begin{Reason}
@@ -4806,13 +4806,13 @@ a pragma Controlled has no effect.
 @end{ImplPerm}
 
 @begin{DiffWord83}
-Ada 83 used the term ``automatic storage reclamation'' to refer to what
-is known traditionally as ``garbage collection''.
+Ada 83 used the term @lquotes@;automatic storage reclamation@rquotes@; to refer to what
+is known traditionally as @lquotes@;garbage collection@rquotes@;.
 Because of the existence of storage pools
 (see @RefSecNum{Storage Management}),
 we need to distinguish this from the storage reclamation that might
 happen upon leaving a master.
-Therefore, we now use the term ``garbage collection''
+Therefore, we now use the term @lquotes@;garbage collection@rquotes@;
 in its normal computer-science sense.
 This has the additional advantage of making our terminology more
 accessible to people outside the Ada world.
@@ -5043,9 +5043,9 @@ elementary types in terms of stream elements.}
   A discriminant with a default value is treated simply as
   a component of the object.  On the other hand,
   an array bound or a discriminant without a default value,
-  is treated as ``descriptor'' or ``dope'' that must be provided in order
+  is treated as @lquotes@;descriptor@rquotes@; or @lquotes@;dope@rquotes@; that must be provided in order
   to create the object and thus is logically separate from the regular
-  components.  Such ``descriptor'' data are written by 'Output and
+  components.  Such @lquotes@;descriptor@rquotes@; data are written by 'Output and
   produced as part of the delivered result by the 'Input function,
   but they are not written by 'Write nor read by 'Read.
   A tag is like a discriminant without a default.
@@ -5298,7 +5298,7 @@ class-wide types descended from S.
 @begin{Intro}
 @redundant[This clause defines
 a place in the program text where each declared entity becomes
-``frozen.''
+@lquotes@;frozen.@rquotes@;
 A use of an entity, such as a reference to it by name,
 or (for a type) an expression of the type,
 causes freezing of the entity in some contexts,
@@ -5326,8 +5326,8 @@ We wish to allow a compiler to evaluate static expressions when it sees
 them in a single pass over the @nt{compilation_unit}.
 The freezing rules ensure that.
 
-The run-time purpose of the freezing rules is called the ``linear
-elaboration model.''
+The run-time purpose of the freezing rules is called the @lquotes@;linear
+elaboration model.@rquotes@;
 This means that declarations are elaborated in the order in which they
 appear in the program text,
 and later elaborations can depend on the results of earlier ones.
@@ -5340,12 +5340,12 @@ a function call that takes a parameter of type @i(T).
 In order to pass that parameter, the size of type @i(T) has to be known.
 If @i(T) is composite, that size might be known only at run time.
 
-(Note that in these discussions, words like ``before'' and ``after''
+(Note that in these discussions, words like @lquotes@;before@rquotes@; and @lquotes@;after@rquotes@;
 generally refer to places in the program text,
 as opposed to times at run time.)
 @end{Reason}
 @begin{Discussion}
-The ``implementation details'' we're talking about above are:
+The @lquotes@;implementation details@rquotes@; we're talking about above are:
 @begin{Itemize}
 For a tagged type,
 the implementations of all the primitive subprograms of the type
@@ -5484,8 +5484,8 @@ freezing point to the end of the program text
 (given the ordering of compilation units defined in
 @RefSecNum{The Compilation Process}).
 @begin{Ramification}
-  The ``representation'' for a subprogram includes its calling convention
-  and means for referencing the subprogram body, either a ``link-name'' or
+  The @lquotes@;representation@rquotes@; for a subprogram includes its calling convention
+  and means for referencing the subprogram body, either a @lquotes@;link-name@rquotes@; or
   specified address.  It does
   not include the code for the subprogram body itself, nor its
   address if a link-name is used to reference the body.
@@ -5548,7 +5548,7 @@ each @nt<name>, expression@Redundant[, or @nt{range}]
 within the construct causes freezing:
 @begin{Ramification}
 Note that in the sense of this paragraph,
-a @nt{subtype_mark} ``references'' the denoted subtype,
+a @nt{subtype_mark} @lquotes@;references@rquotes@; the denoted subtype,
 but not the type.
 @end{Ramification}
 
@@ -5666,7 +5666,7 @@ At the place where a @nt{range} causes freezing, the type of the
 This is consequence of the facts that
 expressions freeze their type,
 and the Range attribute is defined to be equivalent
-to a pair of expressions separated by ``..''.}
+to a pair of expressions separated by @lquotes@;..@rquotes@;.}
 @end{TheProof}
 
 @PDefn2{Term=[freezing],
@@ -5797,7 +5797,7 @@ after the type is frozen, even though the @nt{_clause} refers to the
 first subtype.
 @end{Discussion}
 @begin{TheProof}
-The above @LegalityTitle are stated ``officially''
+The above @LegalityTitle are stated @lquotes@;officially@rquotes@;
 in the referenced clauses.
 @end{TheProof}
 @begin{Discussion}
@@ -5817,7 +5817,7 @@ X : R;
 Since the elaboration of R's declaration does not allocate component C,
 there is no need to freeze C's subtype at that place.
 Similarly, since the elaboration of R does not evaluate the
-@nt{default_expression} ``F = F'', there is no need to freeze the types
+@nt{default_expression} @lquotes@;F = F@rquotes@;, there is no need to freeze the types
 involved at that point.
 However, the declaration of X @i{does} need to freeze these things.
 Note that even if component C did not exist, the elaboration of the
@@ -5882,12 +5882,12 @@ A @nt{representation_clause} for an entity should most certainly
 
 @begin{Incompatible83}
 RM83 defines a forcing occurrence of a type as follows:
-``A forcing occurrence is any occurrence [of the name of the type,
+@lquotes@;A forcing occurrence is any occurrence [of the name of the type,
 subtypes of the type, or types or subtypes with subcomponents of the type]
 other than in a type or subtype
 declaration, a subprogram specification, an entry declaration, a deferred
 constant declaration, a @nt{pragma}, or a @nt{representation_clause} for the type
-itself. In any case, an occurrence within an expression is always forcing.''
+itself. In any case, an occurrence within an expression is always forcing.@rquotes@;
 
 It seems like the wording allows things like this:
 @begin{Example}
@@ -5937,14 +5937,14 @@ has its body right there.
 @end{Extend83}
 
 @begin{DiffWord83}
-The concept of freezing is based on Ada 83's concept of ``forcing
-occurrences.''
+The concept of freezing is based on Ada 83's concept of @lquotes@;forcing
+occurrences.@rquotes@;
 The first freezing point of an entity
 corresponds roughly to the place of the first forcing occurrence, in Ada
 83 terms.
 The reason for changing the terminology is that the new rules do not
-refer to any particular ``occurrence'' of a name of an entity.
-Instead, we refer to ``uses'' of an entity,
+refer to any particular @lquotes@;occurrence@rquotes@; of a name of an entity.
+Instead, we refer to @lquotes@;uses@rquotes@; of an entity,
 which are sometimes implicit.
 
 In Ada 83, forcing occurrences were used only in rules about

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:19 $}
+@Comment{$Date: 2000/08/03 05:37:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.10 $}
+@Comment{$Revision: 1.11 $}
 
 @LabeledClause{Array Types}
 
@@ -214,7 +214,7 @@ determined by the @nt{range} as follows:
   @end{Reason}
   @begin{Discussion}
     We considered doing this by simply creating
-    a ``preference'' for Integer when resolving the @nt<range>.
+    a @lquotes@;preference@rquotes@; for Integer when resolving the @nt<range>.
     @PDefn{Beaujolais effect}
     However, this can introduce @i(Beaujolais) effects when the
     @nt<simple_expression>s involve calls on functions visible
@@ -569,8 +569,8 @@ a character type.
 @begin{Examples}
 @i{Examples (using arrays declared in the examples of subclause @RefSecNum(Index Constraints and Discrete Ranges)):}
 @begin(Example)
---  Filter'First       =    0   Filter'Last        =  31   Filter'Length  =  32
---  Rectangle'Last(1)  =   20   Rectangle'Last(2)  =  30
+--  Filter'First      =   0   Filter'Last       =  31   Filter'Length =  32
+--  Rectangle'Last(1) =  20   Rectangle'Last(2) =  30
 @end(Example)
 
 @end{Examples}
@@ -715,7 +715,7 @@ a @i(discriminated) type, as is a type that inherits (known) discriminants.
   Discriminants on array types were considered,
   but were omitted to ease (existing) implementations.@end{implnote}
 @begin(Discussion)
-  Note that the above definition for ``discriminated type'' does
+  Note that the above definition for @lquotes@;discriminated type@rquotes@; does
   not include types declared with an @nt<unknown_discriminant_part>.
   This seems consistent with Ada 83, where such types (in a generic
   formal part) would not be considered discriminated types.
@@ -743,7 +743,7 @@ denoted by the @nt<subtype_mark> of the @nt<access_definition>.
   discriminants just for limited types.
 
   Note that discriminants of a named access type are not
-  considered ``access discriminants.''  Similarly, ``access parameter''
+  considered @lquotes@;access discriminants.@rquotes@;  Similarly, @lquotes@;access parameter@rquotes@;
   only refers to a formal parameter defined by an @nt<access_definition>.
 @end(Reason)
 
@@ -786,10 +786,10 @@ instance of a generic unit.
     if it is limited just because of a limited component.
     For example, any record containing a task would be allowed to have
     an access discriminant, whereas the actual rule requires
-    ``@key[limited] @key[record]''.
+    @lquotes@;@key[limited] @key[record]@rquotes@;.
     This rule was also rejected due to readability concerns,
     and because would interact badly with the rules for
-    limited types that ``become nonlimited''.
+    limited types that @lquotes@;become nonlimited@rquotes@;.
   @end{Itemize}
 @end{Reason}
 
@@ -927,7 +927,7 @@ A component does @i(not) depend on a discriminant just because
     component.
   @end{Reason}
   @begin{Ramification}
-    Because of this rule, we don't really need to worry about ``corresponding''
+    Because of this rule, we don't really need to worry about @lquotes@;corresponding@rquotes@;
     discriminants, since all the inherited components will be
     discriminant-dependent if there is a new @nt<known_discriminant_part>
     whose discriminants are used to constrain the old discriminants.
@@ -985,7 +985,7 @@ is an unconstrained and indefinite
 subtype (see @RefSecNum{Types and Subtypes}
 and @RefSecNum{Objects and Named Numbers}).]
 @begin(Discussion)
-  An @nt<unknown_discriminant_part> ``(<>)'' is only permitted in
+  An @nt<unknown_discriminant_part> @lquotes@;(<>)@rquotes@; is only permitted in
   the declaration of a (generic or nongeneric) private type,
   private extension, or formal derived type.
   Hence, only such types, descendants thereof, and class-wide
@@ -1005,7 +1005,7 @@ and @RefSecNum{Objects and Named Numbers}).]
   formal parameters are permitted, and objects of the actual/full type
   will generally be declarable).  A limited private type with
   unknown discriminants
-  is ``extremely'' limited; such a type is useful for keeping complete control
+  is @lquotes@;extremely@rquotes@; limited; such a type is useful for keeping complete control
   over object creation within the package declaring the type.
 
   A partial view of a type might have unknown discriminants, while
@@ -1745,7 +1745,7 @@ in @nt{variant_part}s, @nt{array_aggregate}s, and
 @end{Intro}
 
 @begin{MetaRules}
-The definition of ``cover'' in this subclause
+The definition of @lquotes@;cover@rquotes@; in this subclause
 and the rules about discrete choices
 are designed so that they
 are also appropriate for array aggregates and case statements.
@@ -1977,7 +1977,7 @@ fills in the actual addresses.
 
 Other implementation models are possible.
 
-The rules ensure that ``dangling dispatching'' is impossible;
+The rules ensure that @lquotes@;dangling dispatching@rquotes@; is impossible;
 that is, when a dispatching call is made, there is always a body to
 execute.  This is different from some other object-oriented
 languages, such as Smalltalk, where it is possible to get a run-time
@@ -2150,7 +2150,7 @@ Also, equality, assignment, and object declaration
 are all useful capabilities for this subtype.
 
 For an object X and a type T,
-``X'Tag = T'Tag'' is not needed,
+@lquotes@;X'Tag = T'Tag@rquotes@; is not needed,
 because a membership test can be used.
 However, comparing the tags of two objects
 cannot be done via membership.
@@ -2284,9 +2284,9 @@ The tag of an object of a class-wide tagged type
 is that of its initialization expression.
 @begin{Ramification}
   The tag of an object (even a class-wide one)
-  cannot be changed after it is initialized, since a ``class-wide''
+  cannot be changed after it is initialized, since a @lquotes@;class-wide@rquotes@;
   @nt{assignment_statement} raises Constraint_Error if the tags don't
-  match, and a ``specific'' @nt{assignment_statement} does not affect
+  match, and a @lquotes@;specific@rquotes@; @nt{assignment_statement} does not affect
   the tag.
 @end{Ramification}
 
@@ -2333,7 +2333,7 @@ for each elaboration of a @nt{type_declaration}.
 In that case, Tag_Error could also be raised if the created type no
 longer exists because the subprogram containing it has returned,
 for example.
-We don't require the latter behavior; hence the word ``may'' in this
+We don't require the latter behavior; hence the word @lquotes@;may@rquotes@; in this
 rule.
 @end{Reason}
 @end{ImplPerm}
@@ -2508,9 +2508,9 @@ in order to avoid unnecessary restrictions.
 @PDefn2{Term=[accessibility rule],Sec=(not part of generic contract)}
 We also considered trying make the accessibility level part of the
 contract; i.e. invent some way of saying (in the
-@nt{generic_declaration}) ``all instances of this generic unit will
+@nt{generic_declaration}) @lquotes@;all instances of this generic unit will
 have the same accessibility level as the
-@nt{generic_declaration}.''
+@nt{generic_declaration}.@rquotes@;
 Unfortunately, that doesn't solve the part of the problem having to do
 with abstract types.
 
@@ -2526,23 +2526,23 @@ of the elaboration of the @nt{record_definition}.
 @end{RunTime}
 
 @begin{Notes}
-The term ``type extension'' refers to a type as a whole.
-The term ``extension part'' refers to the piece
+The term @lquotes@;type extension@rquotes@; refers to a type as a whole.
+The term @lquotes@;extension part@rquotes@; refers to the piece
 of text that defines the additional components (if any) the
 type extension has relative to its specified ancestor type.
 @begin(Discussion)
-  We considered other terminology, such as ``extended type.''
-  However, the terms ``private extended type'' and ``record extended type''
+  We considered other terminology, such as @lquotes@;extended type.@rquotes@;
+  However, the terms @lquotes@;private extended type@rquotes@; and @lquotes@;record extended type@rquotes@;
   did not convey the proper meaning.  Hence, we have chosen
-  to uniformly use the term ``extension'' as the type resulting
-  from extending a type, with ``private extension'' being one
-  produced by privately extending the type, and ``record extension''
+  to uniformly use the term @lquotes@;extension@rquotes@; as the type resulting
+  from extending a type, with @lquotes@;private extension@rquotes@; being one
+  produced by privately extending the type, and @lquotes@;record extension@rquotes@;
   being one produced by extending the type with an additional record-like set
   of components.
-  Note also that the term ``type extension'' refers to the result
+  Note also that the term @lquotes@;type extension@rquotes@; refers to the result
   of extending a type in the language Oberon as well (though there
-  the term ``extended type'' is also used, interchangeably, perhaps because
-  Oberon doesn't have the concept of a ``private extension'').
+  the term @lquotes@;extended type@rquotes@; is also used, interchangeably, perhaps because
+  Oberon doesn't have the concept of a @lquotes@;private extension@rquotes@;).
 @end(Discussion)
 
 The accessibility rules imply that a tagged type declared
@@ -2606,7 +2606,7 @@ Origin : @key(constant) Painted_Point := (X | Y => 0.0, Paint => Black);
 @key(type) Subtraction @key(is new) Binary_Operation @key(with null record);
   @RI[-- No additional components needed for these extensions]
 
-Tree : Expr_Ptr :=         @RI[-- A tree representation of ``5.0 + (13.0-7.0)'']
+Tree : Expr_Ptr :=         @RI[-- A tree representation of @lquotes@;5.0 + (13.0-7.0)@rquotes@;]
    @key(new) Addition'(
       Left  => @key(new) Literal'(Value => 5.0),
       Right => @key(new) Subtraction'(
@@ -2951,7 +2951,7 @@ In the unusual case in which a dispatching subprogram is explicitly
 declared (overridden) by a body (with no preceding
 @nt{subprogram_declaration}),
 the body for that dispatching subprogram is that body;
-that is, the ``corresponding explicit body'' in the above rule is the
+that is, the @lquotes@;corresponding explicit body@rquotes@; in the above rule is the
 body itself.
 @end{Honest}
 @begin{Reason}
@@ -3277,7 +3277,7 @@ shall not be declared in the private part,
 unless it is overriding a function
 implicitly declared in the visible part.
 @begin{Reason}
-The ``visible part'' could be that of a package or a generic package.
+The @lquotes@;visible part@rquotes@; could be that of a package or a generic package.
 This rule is needed because a non-abstract type extension declared
 outside the package would not know about any abstract primitive
 subprograms or primitive functions with controlling results
@@ -3404,8 +3404,8 @@ an appropriate type.
 @IndexSee{Term=[pointer type],See=(access type)}
 @begin(Discussion)
   A @nt<name> @i(denotes) an entity; an access value @i(designates) an
-  entity.  The ``dereference'' of an access value X, written
-  ``X.@key[all]'', is a @nt<name> that denotes the entity designated by X.
+  entity.  The @lquotes@;dereference@rquotes@; of an access value X, written
+  @lquotes@;X.@key[all]@rquotes@;, is a @nt<name> that denotes the entity designated by X.
 @end(Discussion)
 @end{Intro}
 
@@ -3560,9 +3560,9 @@ either by the designated subtype, or by its initial value.]
   pointers.  Therefore, one might wish to allow the Access and
   and Unchecked_Access attributes for such objects.
   However, private parts are transparent to the definition of
-  ``by-reference type'', so if we made all objects of a by-reference
+  @lquotes@;by-reference type@rquotes@;, so if we made all objects of a by-reference
   type aliased, we would be violating the privacy of private parts.
-  Instead, we would have to define a concept of ``visibly by-reference''
+  Instead, we would have to define a concept of @lquotes@;visibly by-reference@rquotes@;
   and base the rule on that.
   This seemed to complicate the rules more than it was worth,
   especially since there is no way to declare an untagged limited
@@ -3570,7 +3570,7 @@ either by the designated subtype, or by its initial value.]
   nonlimited.
 @end(Reason)
 @begin{Discussion}
-  Note that we do not use the term ``aliased'' to refer to formal
+  Note that we do not use the term @lquotes@;aliased@rquotes@; to refer to formal
   parameters that are referenced through multiple access paths
   (see @RefSecNum{Formal Parameter Modes}).
 @end{Discussion}
@@ -3600,8 +3600,8 @@ pool-specific access-to-variable type.
 @end{Honest}
 @begin(Reason)
   The modifier @key(all) was picked to suggest that
-  values of a general access type could point into ``all'' storage pools,
-  as well as to objects declared aliased, and that ``all'' access
+  values of a general access type could point into @lquotes@;all@rquotes@; storage pools,
+  as well as to objects declared aliased, and that @lquotes@;all@rquotes@; access
   (both read and update) to the designated object was provided.
   We couldn't think of any use for pool-specific
   access-to-constant types, so any access type defined with
@@ -3625,7 +3625,7 @@ pool-specific access-to-variable type.
   types, access-to-constant types, and (named) access-to-variable types,
   with its subclass (named) general access-to-variable types.
   Pool-specific access-to-variable types are not a separately matchable
-  subclass of types, since they don't have any ``extra'' operations
+  subclass of types, since they don't have any @lquotes@;extra@rquotes@; operations
   relative to all (named) access-to-variable types.
 @end(Discussion)
 
@@ -3640,8 +3640,8 @@ There is a @i(calling convention) associated with the designated
 profile@Redundant[; only subprograms with this
 calling convention can be designated by
 values of the access type.]
-By default, the calling convention is ``@i(protected)'' if the reserved
-word @key(protected) appears, and ``Ada'' otherwise.
+By default, the calling convention is @lquotes@;@i(protected)@rquotes@; if the reserved
+word @key(protected) appears, and @lquotes@;Ada@rquotes@; otherwise.
 @Redundant[See @RefSecNum{Interface to Other Languages}
 for how to override this default.]
 @begin(Ramification)
@@ -3674,7 +3674,7 @@ for how to override this default.]
   subprogram, as well as the address of the associated protected object.
   This could be thought of as a static link, but it will be needed even
   for global-display-based implementation models.  It corresponds
-  to the value of the ``implicit parameter'' that is passed into
+  to the value of the @lquotes@;implicit parameter@rquotes@; that is passed into
   every call of a protected operation, to identify the current instance
   of the protected type on which they are to operate.
 
@@ -3711,7 +3711,7 @@ for how to override this default.]
   Note that access parameters of an
   anonymous access-to-subprogram type are not permitted.
   If there were such parameters,
-  full ``downward'' closures would be required, meaning that
+  full @lquotes@;downward@rquotes@; closures would be required, meaning that
   in an implementation that uses a per-task (global) display,
   the display would have to be passed as a hidden parameter,
   and reconstructed at the point of call.
@@ -3816,7 +3816,7 @@ an access parameter or access discriminant)].
 @end{RunTime}
 
 @begin{Notes}
-Access values are called ``pointers'' or ``references'' in
+Access values are called @lquotes@;pointers@rquotes@; or @lquotes@;references@rquotes@; in
 some other languages.
 
 Each access-to-object type has an associated storage pool;
@@ -3825,7 +3825,7 @@ An object can be created in the storage pool of an
 access type by an @nt{allocator} (see @RefSecNum{Allocators})
 for the access type.
 A storage pool (roughly) corresponds to what some other languages
-call a ``heap.''
+call a @lquotes@;heap.@rquotes@;
 See @RefSecNum{Storage Management} for a discussion of pools.
 
 Only @nt<index_constraint>s and @nt<discriminant_constraint>s
@@ -4102,7 +4102,7 @@ The @nt{full_type_declaration} that completes an
 A @nt<discriminant_constraint> may be applied
 to an incomplete type, even if it its completion is
 deferred to the package body, because there is no
-``dependent compatibility check'' required any more.
+@lquotes@;dependent compatibility check@rquotes@; required any more.
 Of course, the constraint can be specified only if
 a @nt<known_discriminant_part> was given in the
 @nt<incomplete_type_declaration>.  As mentioned in the previous
@@ -4153,7 +4153,7 @@ not at all) for different designated subtypes.
 @Redundant[The attribute Access is used to create access values
 designating aliased objects and non-intrinsic subprograms.
 
-The ``accessibility'' rules prevent dangling references
+The @lquotes@;accessibility@rquotes@; rules prevent dangling references
 (in the absence of uses of certain unchecked features
 @em see Section 13).
 
@@ -4374,8 +4374,8 @@ is the library level.
   The definition of the accessibility level of the anonymous type of an
   access parameter cheats a bit, since it refers to the view designated by
   the actual, but access values designate objects, not views of objects.
-  What we really mean is the view that ``would be'' denoted by an
-  expression ``X.@key[all]'', where X is the actual, even though such
+  What we really mean is the view that @lquotes@;would be@rquotes@; denoted by an
+  expression @lquotes@;X.@key[all]@rquotes@;, where X is the actual, even though such
   an expression is a figment of our imagination.
   The definition is intended to be equivalent to the
   following more verbose version:
@@ -4412,9 +4412,9 @@ is the library level.
 @begin{Discussion}
   A deeper accessibility level implies a shorter maximum lifetime.
   Hence, when a rule requires X to have a level that is
-  ``not deeper than'' Y's level,
+  @lquotes@;not deeper than@rquotes@; Y's level,
   this requires that X has a lifetime at least as long as Y.
-  (We say ``maximum lifetime'' here, because the accessibility
+  (We say @lquotes@;maximum lifetime@rquotes@; here, because the accessibility
   level really represents an upper bound on the lifetime;
   an object created by an @nt{allocator} can have its lifetime
   prematurely ended by an instance of Unchecked_Deallocation.)
@@ -4437,7 +4437,7 @@ is the library level.
   or by the master in which the object was declared.
   The former is used in several @LegalityTitle and run-time checks;
   the latter is used to define when X.@key[all] gets finalized.
-  The level of a view reflects what we can conservatively ``know''
+  The level of a view reflects what we can conservatively @lquotes@;know@rquotes@;
   about the object of that view;
   for example, due to @nt{type_conversion}s,
   an access value might designate an object that was allocated by an
@@ -4451,14 +4451,14 @@ is the library level.
   possible executions.
 
   Most accessibility checking is done at compile time;
-  the rules are stated in terms of ``statically deeper than''.
+  the rules are stated in terms of @lquotes@;statically deeper than@rquotes@;.
   The exceptions are:
   @begin{Itemize}
-  Checks involving access parameters.  The fact that ``statically deeper
-  than'' is not defined for the anonymous access type of an access
-  parameter implies that any rule saying ``shall not be statically
-  deeper than'' does not apply to such a type, nor to anything defined
-  to have ``the same'' level as such a type.
+  Checks involving access parameters.  The fact that @lquotes@;statically deeper
+  than@rquotes@; is not defined for the anonymous access type of an access
+  parameter implies that any rule saying @lquotes@;shall not be statically
+  deeper than@rquotes@; does not apply to such a type, nor to anything defined
+  to have @lquotes@;the same@rquotes@; level as such a type.
 
   Checks involving entities and views within generic packages.
   This is because an instantiation can be at a level that is
@@ -4480,8 +4480,8 @@ is the library level.
   the time when that object will be finalized;
   we don't allow pointers to the object to survive beyond that time.
 
-  We sometimes use the terms ``accessible''
-  and ``inaccessible'' to mean that something has an
+  We sometimes use the terms @lquotes@;accessible@rquotes@;
+  and @lquotes@;inaccessible@rquotes@; to mean that something has an
   accessibility level that is not deeper, or deeper,
   respectively, than something else.
 @end{Discussion}
@@ -4493,21 +4493,21 @@ is the library level.
   unless access parameters or shared generic bodies are involved.
 
   Accessibility levels are defined in terms of the relations
-  ``the same as'' and ``deeper than''.
+  @lquotes@;the same as@rquotes@; and @lquotes@;deeper than@rquotes@;.
   To make the discussion more concrete,
   we can assign actual numbers to each level.
   Here, we assume that library-level accessibility is level 0,
-  and each level defined as ``deeper than'' is one level deeper.
+  and each level defined as @lquotes@;deeper than@rquotes@; is one level deeper.
   Thus, a subprogram directly called from the environment task
   (such as the main subprogram) would be at level 1,
   and so on.
 
   Accessibility is not enforced at compile time for access
   parameters.
-  The ``obvious'' implementation of the run-time checks would be
+  The @lquotes@;obvious@rquotes@; implementation of the run-time checks would be
   inefficient, and would involve distributed overhead;
   therefore, an efficient method is given below.
-  The ``obvious'' implementation would be to pass
+  The @lquotes@;obvious@rquotes@; implementation would be to pass
   the level of the caller at each subprogram call,
   task creation, etc.
   This level would be incremented by 1 for each
@@ -4526,7 +4526,7 @@ is the library level.
   the accessibility level of the anonymous access type,
   and, therefore, the level of the view denoted
   by a dereference of the access parameter.
-  This is analogous to the implicit ``Constrained'' bit associated
+  This is analogous to the implicit @lquotes@;Constrained@rquotes@; bit associated
   with certain formal parameters of an unconstrained but definite
   composite subtype.
   In this method, we avoid distributed overhead:
@@ -4537,7 +4537,7 @@ is the library level.
   and is defined analogously to the RM9X definition
   of accessibility level (e.g. derived access types
   get their nesting level from their parent).
-  Checking ``not deeper than'' is a "<=" test on the levels.
+  Checking @lquotes@;not deeper than@rquotes@; is a "<=" test on the levels.
 
   For each access parameter, the static depth passed depends on the
   actual, as follows:
@@ -4935,7 +4935,7 @@ See @RefSecNum{Dispatching Operations of Tagged Types}.
 @Defn{downward closure}
 @Defn2{Term=[closure],Sec=(downward)}
 The accessibility rules imply that it is not possible to use the Access
-attribute to implement ``downward closures'' @em that is,
+attribute to implement @lquotes@;downward closures@rquotes@; @em that is,
 to pass a more-nested subprogram as a parameter to a
 less-nested subprogram,
 as might be desired for example for an iterator abstraction.
@@ -5057,7 +5057,7 @@ a check is made that the @nt<protected_body> is already elaborated.
 This check and the evaluations of any actual parameters of the call
 are done in an arbitrary order.
 @begin{Discussion}
-  A protected type has only one elaboration ``bit,'' rather than
+  A protected type has only one elaboration @lquotes@;bit,@rquotes@; rather than
   one for each operation, because one call may result in evaluating
   the barriers of other entries, and because there are no elaborable
   declarations between the bodies of the operations.  In fact,
@@ -5120,7 +5120,7 @@ The syntax rule for
 @nt{later_declarative_item} is removed;
 the syntax rule for @nt{declarative_item} is new.
 
-RM83 defines ``elaborated'' and ``not yet elaborated'' for
+RM83 defines @lquotes@;elaborated@rquotes@; and @lquotes@;not yet elaborated@rquotes@; for
 @nt{declarative_item}s here, and for other things in @RefSec{Declarations}.
 That's no longer necessary, since these terms are fully defined in
 @RefSecNum{Declarations}.
@@ -5129,7 +5129,7 @@ In RM83, all uses of @nt{declarative_part} are optional
 (except for the one in @nt{block_statement} with a @key(declare))
 which is sort of strange, since a @nt{declarative_part} can be empty,
 according to the syntax.
-That is, @nt{declarative_part}s are sort of ``doubly optional''.
+That is, @nt{declarative_part}s are sort of @lquotes@;doubly optional@rquotes@;.
 In Ada 9X, these @nt{declarative_part}s are always required
 (but can still be empty).
 To simplify description, we go further and say
@@ -5141,6 +5141,7 @@ is equivalent to one with an empty one.
 @LabeledSubClause{Completions of Declarations}
 
 @begin{Intro}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
 Declarations sometimes come in two parts.
 @Defn{requires a completion}
 A declaration that requires a second part is said to @i(require completion).
@@ -5148,8 +5149,10 @@ A declaration that requires a second part is said to @i(require completion).
 The second part is called the @i(completion) of the declaration (and of
 the entity declared),
 and is either another declaration, a body, or a @nt<pragma>.
+@Chg{New=[A @i<body>@defn{body} is a @nt<body>,
+an @nt<entry_body>, or a renaming-as-body (see 8.5.4).],Old=[]}
 @begin{Discussion}
-Throughout the RM9X, there are rules about completions that
+Throughout the RM95, there are rules about completions that
 define the following:
 @begin{Itemize}
 Which declarations require a corresponding completion.
@@ -5224,7 +5227,7 @@ If the completion of a declaration is also a declaration,
 then @i{that} declaration might have a completion, too.
 For example, a limited private type can be completed with a task type,
 which can then be completed with a task body.
-This is not a violation of the ``at most one completion'' rule.
+This is not a violation of the @lquotes@;at most one completion@rquotes@; rule.
 @end{Ramification}
 
 @Defn{completely defined}

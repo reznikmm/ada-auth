@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/06/03 02:02:34 $}
+@Comment{$Date: 2000/08/03 05:37:37 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -278,17 +278,17 @@ is the view of the object to which a value is being assigned;
 the target of an @nt{assignment_statement} is the variable denoted by
 the @SynI{variable_}@nt{name}.
 @begin{Discussion}
-Don't confuse this notion of the ``target'' of an assignment
-with the notion of the ``target object'' of an entry call or requeue.
+Don't confuse this notion of the @lquotes@;target@rquotes@; of an assignment
+with the notion of the @lquotes@;target object@rquotes@; of an entry call or requeue.
 
-Don't confuse the term ``assignment operation'' with the
+Don't confuse the term @lquotes@;assignment operation@rquotes@; with the
 @nt{assignment_statement}.
 The assignment operation is just one part of the execution of an
 @nt{assignment_statement}.
 The assignment operation is also a part of the execution of various
 other constructs; see @RefSec{Completion and Finalization} for a complete
 list.
-Note that when we say, ``such-and-such is assigned to so-and-so'',
+Note that when we say, @lquotes@;such-and-such is assigned to so-and-so@rquotes@;,
 we mean that the assignment operation is being applied, and that
 so-and-so is the target of the assignment operation.
 @end{Discussion}
@@ -388,7 +388,7 @@ target.  @Redundant[The conversion might raise an exception
   check presuming the types match.
   For array subtypes, it checks the lengths and slides if the
   target is constrained.
-  ``Sliding'' means the array doesn't have to have the same bounds,
+  @lquotes@;Sliding@rquotes@; means the array doesn't have to have the same bounds,
   so long as it is the same length.
 @end{Ramification}
 
@@ -510,7 +510,7 @@ as part of @nt{assignment_statement}s
 @begin{DiffWord83}
 The special case of array assignment is subsumed by the concept
 of a subtype conversion, which is applied for all kinds of types,
-not just arrays.  For arrays it provides ``sliding.''  For numeric
+not just arrays.  For arrays it provides @lquotes@;sliding.@rquotes@;  For numeric
 types it provides conversion of a value of a universal type to
 the specific type of the target.  For other types,
 it generally has no run-time effect, other than a constraint
@@ -710,7 +710,7 @@ For an enumeration type with a discontiguous set of internal codes
 (see @RefSecNum{Enumeration Representation Clauses}),
 the only way to get values in between the proper values
 is via an object with an invalid representation;
-there is no ``out-of-range'' situation that can produce them.
+there is no @lquotes@;out-of-range@rquotes@; situation that can produce them.
 @end{Ramification}
 @end{Legality}
 
@@ -811,16 +811,16 @@ there is still a perfectly good result subtype, though.
 @end{Extend83}
 
 @begin{DiffWord83}
-Ada 83 forgot to say what happens for ``legally'' out-of-bounds values.
+Ada 83 forgot to say what happens for @lquotes@;legally@rquotes@; out-of-bounds values.
 
 We take advantage of rules and terms (e.g. @i(cover a value))
 defined for @nt{discrete_choice}s and @nt{discrete_choice_list}s
 in @RefSec{Variant Parts and Discrete Choices}.
 
 In the @ResolutionName for the case expression,
-we no longer need RM83-5.4(3)'s ``which must be determinable
+we no longer need RM83-5.4(3)'s @lquotes@;which must be determinable
 independently of the context in which the expression occurs, but
-using the fact that the expression must be of a discrete type,''
+using the fact that the expression must be of a discrete type,@rquotes@;
 because the @nt{expression} is now a complete context.
 See @RefSec{The Context of Overload Resolution}.
 

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:42 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/05/29 05:47:21 $}
+@Comment{$Date: 2000/08/03 05:37:42 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -91,7 +91,7 @@ library units are all preelaborated, and whose data and subprograms are
 accessible to one or more active partitions.
 @begin{Discussion}
 In most situations, a passive partition does not execute, and does not have
-a ``real'' environment task.  Any execution involved in
+a @lquotes@;real@rquotes@; environment task.  Any execution involved in
 its elaboration and initialization occurs before it comes into existence in a
 distributed program (like most preelaborated entities).  Likewise,
 there is no concrete meaning to passive partition termination.
@@ -123,7 +123,7 @@ A passive partition that is accessible to an active partition should have
 its storage addressable to the processor(s) of the active partition.  The
 processor(s) should be able to read and write from/to that
 storage, as well as
-to perform ``read-modify-write'' operations (in order to support entry-less
+to perform @lquotes@;read-modify-write@rquotes@; operations (in order to support entry-less
 protected objects).
 
 @end{Discussion}
@@ -504,11 +504,11 @@ or other remote types library units;
 it shall not contain the declaration of any variable
 within the visible part of the library unit;
 @begin{Reason}
-  This is essentially a ``methodological'' restriction.
+  This is essentially a @lquotes@;methodological@rquotes@; restriction.
   A separate copy of a remote types package is included
   in each partition that references it, just like a normal package.
   Nevertheless, a remote types package is thought of as
-  an ``essentially pure'' package for defining types to be used
+  an @lquotes@;essentially pure@rquotes@; package for defining types to be used
   for interpartition communication,
   and it could be misleading to declare visible objects
   when no remote data access is actually being provided.
@@ -694,7 +694,7 @@ any public child of the library unit shall
 be a remote call interface library unit.
 @begin{Reason}
   No restrictions apply to the private part of an RCI package,
-  and since a public child can ``see'' the private part
+  and since a public child can @lquotes@;see@rquotes@; the private part
   of its parent, such a child must itself have a
   Remote_Call_Interface pragma, and be assigned to the same partition
   (see below).
@@ -954,7 +954,7 @@ partition.]
 @Defn{receiving stub}
 A @i{calling stub} is the sequence of code that replaces the subprogram
 body of a remotely called subprogram in the calling partition. A
-@i{receiving stub} is the sequence of code (the ``wrapper'') that
+@i{receiving stub} is the sequence of code (the @lquotes@;wrapper@rquotes@;) that
 receives a remote subprogram call on the called partition and invokes
 the appropriate subprogram body.
 @begin{Discussion}

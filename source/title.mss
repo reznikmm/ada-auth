@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2000/06/03 02:02:34 $}
+@comment{$Revision: 1.10 $ $Date: 2000/08/03 05:37:44 $}
 
 @begin{WithoutParanum}
 @Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}}}
@@ -12,7 +12,7 @@
 
 @swiss{@shrink{@shrink{@shrink{INTERNATIONAL ORGANIZATION FOR STANDARDIZATION}}}}
 
-@swiss{@shrink{@shrink{@shrink{INTERNATIONAL ELECTROTECHNICAL COMMISSION}}}}}
+@swiss{@shrink{@shrink{@shrink{INTERNATIONAL ELECTROTECHNICAL COMMISSION}}}}
 
 @ @*
 @ @*
@@ -85,7 +85,7 @@ express permission of MITRE.
 You use this document on the condition that you indemnify and hold harmless
 MITRE, its Board of Trustees, officers, agents, and employees, from any and all
 liability or damages to yourself or your hardware or software, or third parties,
-including attorneys' fees, court costs, and other related costsand expenses,
+including attorneys' fees, court costs, and other related costs and expenses,
 arising out of your use of this document irrespective of the cause of said
 liability.
 

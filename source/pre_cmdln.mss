@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2000/05/29 05:47:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2000/08/03 05:37:45 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:23 $}
+@Comment{$Date: 2000/08/03 05:37:45 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program
@@ -46,7 +46,7 @@ a program, then
 Argument_Count returns
 the number of arguments passed to the program
 invoking the function.  Otherwise it returns 0.
-The meaning of ``number of arguments'' is implementation defined.
+The meaning of @lquotes@;number of arguments@rquotes@; is implementation defined.
 
 @begin{Example}
 @key[function] Argument (Number : @key[in] Positive) @key[return] String;

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:20 $}
+@Comment{$Date: 2000/08/03 05:37:36 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -210,7 +210,7 @@ explicit textual rule: to forbid @nt<statement_identifier>s from being
 This is the only case where the explicit rule is needed,
 because this is the only case where the declaration of the entity is
 implicit.
-For example, there is no need to syntactically forbid (say) ``X: "Rem";'',
+For example, there is no need to syntactically forbid (say) @lquotes@;X: "Rem";@rquotes@;,
 because it is impossible to declare a type whose name is an
 @nt{operator_symbol} in the first place.
 
@@ -482,7 +482,7 @@ within the visible part of that type.
 The @nt{selected_component} denotes the
 corresponding entry, entry family, or protected subprogram.
 @begin{Reason}
-  This explicitly says ``visible part'' because even though the body
+  This explicitly says @lquotes@;visible part@rquotes@; because even though the body
   has visibility on the private part, it cannot call the
   private operations of some arbitrary object of the task or protected
   type, only those of the current instance (and expanded name notation
@@ -733,10 +733,10 @@ has to be type conformant with the designated profile of the
 access type.
 @Defn2{Term=[type conformance],Sec=(required)}
 @begin(TheProof)
-  In the general case, there is no ``expected type'' for
+  In the general case, there is no @lquotes@;expected type@rquotes@; for
   the @nt<prefix> of an @nt<attribute_reference>.
   In the special case of 'Access,
-  there is an ``expected profile'' for the @nt<prefix>.
+  there is an @lquotes@;expected profile@rquotes@; for the @nt<prefix>.
 @end(TheProof)
 @begin(Reason)
   'Access is a special case, because without it,
@@ -816,7 +816,7 @@ the literal @key(null), or a @nt<string_literal>.
   An enumeration literal that is an @nt<identifier>
   rather than a @nt<character_literal> is not considered a @i(literal)
   in the above sense, because it involves no special notation
-  ``suited to its kind.''
+  @lquotes@;suited to its kind.@rquotes@;
   It might more properly be called an @nt<enumeration_identifier>,
   except for historical reasons.
 @end(Discussion)
@@ -984,7 +984,7 @@ The expected type for an @nt{aggregate} shall be a single nonlimited
 array type, record type, or record extension.
 @begin{Discussion}
 See @RefSec{The Context of Overload Resolution}
-for the meaning of ``shall be a single ... type.''
+for the meaning of @lquotes@;shall be a single ... type.@rquotes@;
 @end{Discussion}
 @end{Resolution}
 
@@ -1166,7 +1166,7 @@ shall denote
 a needed component @Redundant[(including possibly a discriminant)].
 @begin{Ramification}
 For the association list of a @nt{record_aggregate},
-``needed components'' includes every component of the composite value, but
+@lquotes@;needed components@rquotes@; includes every component of the composite value, but
 does not include those in unchosen @nt{variant}s (see AI-309).
 If there are @nt<variant>s, then
 the value specified for
@@ -1820,7 +1820,7 @@ this would be a nonstatic check in some cases.
 For a multidimensional @nt{array_aggregate}, a check is made
 that all subaggregates that correspond to the same index have the same bounds.
 @begin{Ramification}
-  No array bounds ``sliding'' is performed on subaggregates.
+  No array bounds @lquotes@;sliding@rquotes@; is performed on subaggregates.
 @end{Ramification}
 @begin{Reason}
   If sliding were performed, it would not be obvious which
@@ -1916,7 +1916,7 @@ and to incorporate the rulings of AI-19, AI-309, etc.
 @Defn{expression}
 An @i(expression) is a formula that defines the computation or retrieval
 of a value.
-In this International Standard, the term ``expression'' refers to a construct
+In this International Standard, the term @lquotes@;expression@rquotes@; refers to a construct
 of the syntactic category @nt<expression> or
 of any of the other five syntactic categories defined below.
 @Defn{and operator}@Defn2{Term=[operator],Sec=(and)}
@@ -2047,7 +2047,7 @@ or return the value of the object.
 @end{Reason}
 @begin{Discussion}
   There is no need to mention other kinds of @nt<primary>s, since any
-  Constraint_Error to be raised can be ``charged'' to the evaluation
+  Constraint_Error to be raised can be @lquotes@;charged@rquotes@; to the evaluation
   of the particular kind of @nt<primary>.
 @end{Discussion}
 @end{ImplPerm}
@@ -2178,7 +2178,7 @@ accuracy is defined in @RefSecNum(Numerics), or
 raise the exception Constraint_Error.
 ]
 @begin{Honest}
-  Predefined operations on real types can ``silently'' give wrong results
+  Predefined operations on real types can @lquotes@;silently@rquotes@; give wrong results
   when the Machine_Overflows attribute is false, and the
   computation overflows.
 @end{Honest}
@@ -2438,7 +2438,7 @@ the tested type.
   that ensures that operands like @key(null) are still legal
   as operands of a membership test.
 
-  The significance of ``covers or is covered by'' is that
+  The significance of @lquotes@;covers or is covered by@rquotes@; is that
   we allow the @nt<simple_expression> to be of
   any class-wide type that covers the tested type, not just the
   one rooted at the tested type.
@@ -2455,7 +2455,7 @@ Untagged types covered by the tagged class-wide type
   are not permitted.  Such types can exist if they are
   descendants of a private type whose full type is tagged.
   This rule is intended to avoid confusion since such derivatives
-  don't have their ``own'' tag, and hence are indistinguishable
+  don't have their @lquotes@;own@rquotes@; tag, and hence are indistinguishable
   from one another at run time once converted to a covering
   class-wide type.
 @end{Ramification}
@@ -2524,7 +2524,7 @@ Access @nt<attribute_reference>s are equal
 or unequal.]
 @begin{Reason}
 This allows each Access @nt<attribute_reference>
-  for a subprogram to designate a distinct ``wrapper'' subprogram
+  for a subprogram to designate a distinct @lquotes@;wrapper@rquotes@; subprogram
   if necessary to support an indirect call.
 @end{Reason}
 
@@ -2540,7 +2540,7 @@ for any other components not inherited from the parent type.
   a @nt<variant_part> in the extension part and the two
   values have different @nt<variant>s present.
   This is a ramification of the requirement that a
-  discriminant governing such a @nt<variant_part> has to be a ``new''
+  discriminant governing such a @nt<variant_part> has to be a @lquotes@;new@rquotes@;
   discriminant, and so has to be equal in the two values for
   the values to be equal.  Note that @nt<variant_part>s in
   the parent part need not match if the primitive equals operator
@@ -2600,7 +2600,7 @@ for those composite types covered earlier) is defined as follows:
     This asymmetry between tagged and untagged components is
     necessary to preserve upward compatibility and corresponds
     with the corresponding situation with generics, where the
-    predefined operations ``reemerge'' in a generic for
+    predefined operations @lquotes@;reemerge@rquotes@; in a generic for
     untagged types, but do not for tagged types.  Also, only
     tagged types support user-defined assignment
     (see @RefSecNum{User-Defined Assignment and Finalization}),
@@ -2669,11 +2669,11 @@ A membership test using
 @begin{Ramification}
     The scalar membership test only does a range check.
     It does not perform any other check, such as whether
-    a value falls in a ``hole'' of a ``holey'' enumeration type.
+    a value falls in a @lquotes@;hole@rquotes@; of a @lquotes@;holey@rquotes@; enumeration type.
     The Pos attribute function can be used for that purpose.
 
     Even though Standard.Float is an unconstrained subtype,
-    the test ``X in Float'' will still return False
+    the test @lquotes@;X in Float@rquotes@; will still return False
     (presuming the evaluation of X does not raise Constraint_Error)
     when X is outside Float'Range.
 @end{Ramification}
@@ -2740,18 +2740,18 @@ for tagged components or the parent part.
 @end{Extend83}
 
 @begin{DiffWord83}
-The term ``membership test'' refers to the @nt<relation> "X in S" rather
+The term @lquotes@;membership test@rquotes@; refers to the @nt<relation> "X in S" rather
 to simply the reserved word @key(in) or @key(not in).
 
-We use the term ``equality operator'' to refer to both
+We use the term @lquotes@;equality operator@rquotes@; to refer to both
 the = (equals) and /= (not equals) operators.
 Ada 83 referred to = as @i(the) equality operator, and
 /= as the inequality operator.  The new wording is more
 consistent with the ISO 10646 name for "=" (equals sign) and provides a
-category similar to ``ordering operator'' to refer to both
+category similar to @lquotes@;ordering operator@rquotes@; to refer to both
 = and /=.
 
-We have changed the term ``catenate'' to ``concatenate''.
+We have changed the term @lquotes@;catenate@rquotes@; to @lquotes@;concatenate@rquotes@;.
 @end{DiffWord83}
 
 @LabeledSubClause{Binary Adding Operators}
@@ -2830,7 +2830,7 @@ of the index subtype of the array type as its lower bound.
 @PDefn2{Term=[implicit subtype conversion],Sec=(operand of concatenation)}
 @begin{Ramification}
   The conversion might raise Constraint_Error.
-  The conversion provides ``sliding''
+  The conversion provides @lquotes@;sliding@rquotes@;
   for the component in the case of an array-of-arrays, consistent with
   the normal Ada 9X rules that allow sliding during parameter passing.
 @end{Ramification}
@@ -3333,7 +3333,7 @@ with the first type as operand type and the second type as target type
 is legal according to the rules of this clause.
 Two types are convertible if each is convertible to the other.
 @begin{Ramification}
-  Note that ``convertible'' is defined in terms of legality
+  Note that @lquotes@;convertible@rquotes@; is defined in terms of legality
   of the conversion.  Whether the conversion would raise an exception
   at run time is irrelevant to this definition.
 @end{Ramification}
@@ -3367,7 +3367,7 @@ The operand of a @nt<type_conversion> is expected to be of any type.
   This replaces the "must be determinable" wording of Ada 83.
   This is equivalent to (but hopefully more intuitive than) saying
   that the operand of a @nt<type_conversion>
-  is a ``complete context.''
+  is a @lquotes@;complete context.@rquotes@;
 @end{Discussion}
 
 The operand of a view conversion
@@ -3602,14 +3602,14 @@ Numeric Type Conversion
     in Ada 9X.  Round-away-from-zero is the conventional
     definition of rounding, and standard Fortran and COBOL both specify
     rounding away from zero, so for interoperability, it seems important
-    to pick this.  This is also the most easily ``undone'' by hand.
+    to pick this.  This is also the most easily @lquotes@;undone@rquotes@; by hand.
     Round-to-nearest-even is an alternative, but that is quite complicated
     if not supported by the hardware.  In any case, this operation is not
     expected to be part of an inner loop, so predictability and portability
     are judged most important.  We anticipate that
     a floating point attribute function Unbiased_Rounding will be provided
     for those applications that require round-to-nearest-even.
-    ``Deterministic'' rounding is required for static conversions to
+    @lquotes@;Deterministic@rquotes@; rounding is required for static conversions to
     integer as well.
     See @RefSecNum{Static Expressions and Static Subtypes}.
 @end{Discussion}
@@ -3955,11 +3955,11 @@ inherited subprograms (since there isn't really a type-mark
 for converted formals), as well as for renamings, formal subprograms,
 etc.  See AI-245, AI-318, AI-547.
 
-We now specify ``deterministic'' rounding from real to integer types
+We now specify @lquotes@;deterministic@rquotes@; rounding from real to integer types
 when the value of the operand is exactly between two integers
 (rounding is away from zero in this case).
 
-``Sliding'' of array bounds
+@lquotes@;Sliding@rquotes@; of array bounds
 (which is part of conversion to an array subtype)
 is performed in more cases in Ada 9X than in Ada 83.
 Sliding is not performed on
@@ -4020,7 +4020,7 @@ The exception Constraint_Error is raised if this check fails.
 @begin{Ramification}
   This is one of the few contexts in Ada 9X where implicit subtype conversion
   is not performed prior to a constraint check, and hence no
-  ``sliding'' of array bounds is provided.
+  @lquotes@;sliding@rquotes@; of array bounds is provided.
 @end{Ramification}
 @begin{Reason}
   Implicit subtype conversion is not provided because a
@@ -4080,7 +4080,7 @@ whose designated type covers the type determined by the
 @nt<subtype_mark> of the @nt<subtype_indication> or @nt<qualified_expression>.
 @begin{Discussion}
   See @RefSec(The Context of Overload Resolution) for the meaning
-  of ``shall be a single ... type whose ...''
+  of @lquotes@;shall be a single ... type whose ...@rquotes@;
 @end{Discussion}
 @end{Resolution}
 
@@ -4610,7 +4610,7 @@ a decimal fixed point type,
 then its value shall be a multiple of the @i<small> of the decimal type.
 @begin{Ramification}
   This means that a @nt{numeric_literal} for a decimal type cannot have
-  ``extra'' significant digits.
+  @lquotes@;extra@rquotes@; significant digits.
 @end{Ramification}
 @end{Itemize}
 
@@ -4620,7 +4620,7 @@ descendant of a formal scalar type
 
 @begin{Discussion}
   Values outside the base range are not permitted
-  when crossing from the ``static'' domain to the ``dynamic'' domain.
+  when crossing from the @lquotes@;static@rquotes@; domain to the @lquotes@;dynamic@rquotes@; domain.
   This rule is designed to enhance portability of programs
   containing static expressions.
   Note that this rule applies to the exact value,

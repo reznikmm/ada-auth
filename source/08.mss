@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/05/29 05:47:20 $}
+@Comment{$Date: 2000/08/03 05:37:37 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -35,7 +35,7 @@ the declarative region of the declaration.
 @end{Intro}
 
 @begin{DiffWord83}
-We no longer define the term ``basic operation;''
+We no longer define the term @lquotes@;basic operation;@rquotes@;
 thus we no longer have to worry about the visibility of them.
 Since they were essentially always visible in Ada 83, this change has
 no effect.  The reason for this change is that the definition in Ada
@@ -43,7 +43,7 @@ no effect.  The reason for this change is that the definition in Ada
 and we found it difficult to fix.  For example, one
 wonders why an @nt{if_statement} was not a basic operation of type
 Boolean.  For another example, one wonders what it meant for a basic
-operation to be ``inherent in'' something.
+operation to be @lquotes@;inherent in@rquotes@; something.
 Finally, this fixes the problem addressed by AI-00027/07.
 @end{DiffWord83}
 
@@ -138,8 +138,8 @@ That is,
 @redundant[An entity is @i{local} to a declarative region if the entity is
 declared by a declaration that is local to the declarative region.]
 @begin{Ramification}
-Thus, ``local to'' applies to both declarations and entities,
-whereas ``occurs immediately within'' only applies to declarations.
+Thus, @lquotes@;local to@rquotes@; applies to both declarations and entities,
+whereas @lquotes@;occurs immediately within@rquotes@; only applies to declarations.
 We use this term only informally;
 for cases where precision is required,
 we use the term "occurs immediately within",
@@ -260,7 +260,7 @@ It works for @nt{accept_statement}s only because an
 @nt{accept_statement} does not have a @nt{declarative_part}.
 
 To avoid confusion,
-we use the term ``local to'' only informally in Ada 9X.
+we use the term @lquotes@;local to@rquotes@; only informally in Ada 9X.
 Even RM83 used the term incorrectly (see, for example, RM83-12.3(13)).
 
 In Ada 83, (root) library units were inside Standard;
@@ -686,7 +686,7 @@ subprogram, @Redundant[regardless of which declaration occurs first];
 And regardless of whether the explicit
 declaration is overloadable or not.
 
-The ``regardless of which declaration occurs first''
+The @lquotes@;regardless of which declaration occurs first@rquotes@;
 is there because the explicit declaration could be a primitive subprogram
 of a partial view, and then the full view might inherit a homograph.
 We are saying that the explicit one wins
@@ -713,7 +713,7 @@ However, this seemed like too much mechanism.
 Therefore, a type can have a predefined "+" as well as an inherited "+".
 The above rule says the inherited one wins.
 
-The ``regardless of which declaration occurs first'' applies here
+The @lquotes@;regardless of which declaration occurs first@rquotes@; applies here
 as well, in the case where @nt{derived_type_declaration} in the visible
 part of a public library unit derives from a private type declared in
 the parent unit, and the full view of the parent type has additional
@@ -965,7 +965,7 @@ parameters within a @nt{formal_part} (see @RefSecNum{Subprogram Declarations}).
 @end{Discussion}
 @begin{Discussion}
 The part about instances is from AI-00012.
-The reason it says ``overloadable declarations'' is because we don't
+The reason it says @lquotes@;overloadable declarations@rquotes@; is because we don't
 want it to apply to type extensions that appear in an instance;
 components are not overloadable.
 @end{Discussion}
@@ -1002,7 +1002,7 @@ A defining name.
 
 The @nt{identifier}s or @nt{operator_symbol} that appear after the
 reserved word @key{end} in a @nt{proper_body}.
-Similarly for ``@key{end loop}'', etc.
+Similarly for @lquotes@;@key{end loop}@rquotes@;, etc.
 
 An @nt{attribute_designator}.
 
@@ -1067,8 +1067,8 @@ the subprogram specification or entry declaration.
 @end{Extend83}
 
 @begin{DiffWord83}
-The term ``visible by selection'' is no longer defined.
-We use the terms ``directly visible'' and ``visible'' (among other things).
+The term @lquotes@;visible by selection@rquotes@; is no longer defined.
+We use the terms @lquotes@;directly visible@rquotes@; and @lquotes@;visible@rquotes@; (among other things).
 There are only two regions of text that are of interest, here: the
 region in which a declaration is visible,
 and the region in which it is directly visible.
@@ -1144,7 +1144,7 @@ unit does not include the visible part of
 any public descendant of that library unit.
 @begin{Reason}
 The exception echoes the similar exception for
-``immediate scope (of a declaration)''
+@lquotes@;immediate scope (of a declaration)@rquotes@;
 (see @RefSecNum{Scope of Declarations}).
 It makes @nt{use_clause}s work like this:
 @begin{Example}
@@ -1167,7 +1167,7 @@ It makes @nt{use_clause}s work like this:
 @key[end] Parent.Child;
 @end{Example}
 
-The declaration of Y is illegal because the scope of the ``@key[use] P''
+The declaration of Y is illegal because the scope of the @lquotes@;@key[use] P@rquotes@;
 does not include that place, so T is not directly visible there.
 The declarations of X, Z, and W are legal.
 @end{Reason}
@@ -1196,8 +1196,8 @@ if its declaration is visible at this place.
   to the semantics for expanded names given
   in @RefSec{Selected Components}
   so as to achieve the effect requested by
-  the ``principle of equivalence of @nt{use_clause}s and
-  @nt{selected_component}s.''
+  the @lquotes@;principle of equivalence of @nt{use_clause}s and
+  @nt{selected_component}s.@rquotes@;
   Thus, child library units and generic formal parameters of a formal
   package are
   potentially use-visible when their enclosing package is use'd.
@@ -1260,9 +1260,9 @@ Two_Thirds: Rational_Numbers.Rational := 2/3;
 @end{Example}
 
 @begin{Ramification}
-In ``@key[use] X, Y;'', Y cannot refer to something made visible by the
-``@key[use]'' of X.
-Thus, it's not (quite) equivalent to ``@key[use] X; @key[use] Y;''.
+In @lquotes@;@key[use] X, Y;@rquotes@;, Y cannot refer to something made visible by the
+@lquotes@;@key[use]@rquotes@; of X.
+Thus, it's not (quite) equivalent to @lquotes@;@key[use] X; @key[use] Y;@rquotes@;.
 
 If a given declaration is already immediately visible,
 then a @nt{use_clause} that makes it potentially use-visible
@@ -1305,8 +1305,8 @@ The @nt{use_type_clause} is new to Ada 9X.
 @end{Extend83}
 
 @begin{DiffWord83}
-The phrase ``omitting from this set any packages that
-enclose this place'' is no longer necessary to avoid making something
+The phrase @lquotes@;omitting from this set any packages that
+enclose this place@rquotes@; is no longer necessary to avoid making something
 visible outside its scope, because we explicitly state that the
 declaration has to be visible in order to be
 potentially use-visible.
@@ -1367,14 +1367,14 @@ can be used to achieve the effect of renaming another subtype
 
 @begin{DiffWord83}
 The second sentence of RM83-8.5(3),
-``At any point where a renaming declaration is visible,
+@lquotes@;At any point where a renaming declaration is visible,
 the identifier, or operator symbol of this declaration denotes the
-renamed entity.''
+renamed entity.@rquotes@;
 is incorrect.
 It doesn't say directly visible.
 Also, such an @nt{identifier} might resolve to something else.
 
-The verbiage about renamings being legal ``only if exactly one...'',
+The verbiage about renamings being legal @lquotes@;only if exactly one...@rquotes@;,
 which appears in RM83-8.5(4) (for objects)
 and RM83-8.5(7) (for subprograms) is removed,
 because it follows from the normal rules about overload resolution.
@@ -1400,10 +1400,10 @@ the type determined by the @nt{subtype_mark}.
 
 @begin{Reason}
 
-A previous version of Ada 9X used the usual ``expected type''
+A previous version of Ada 9X used the usual @lquotes@;expected type@rquotes@;
 wording:
-``The expected type for the @SynI{object_}@nt{name} is
-that determined by the @nt{subtype_mark}.''
+@lquotes@;The expected type for the @SynI{object_}@nt{name} is
+that determined by the @nt{subtype_mark}.@rquotes@;
 We changed it so that this would be illegal:
 @begin{Example}
 X: T;
@@ -1489,9 +1489,9 @@ when writing an @nt{object_renaming_declaration}.
 @end{Examples}
 
 @begin{DiffWord83}
-The phrase ``subtype ... as defined in a corresponding
+The phrase @lquotes@;subtype ... as defined in a corresponding
 object declaration, component declaration, or component subtype
-indication,'' from RM83-8.5(5), is incorrect in Ada 9X;
+indication,@rquotes@; from RM83-8.5(5), is incorrect in Ada 9X;
 therefore we removed it.
 It is incorrect in the case of an object with an indefinite
 unconstrained nominal subtype.
@@ -1829,10 +1829,10 @@ the corresponding Ada-83-based package.
 @end{Extend83}
 
 @begin{DiffWord83}
-The information in RM83-8.6, ``The Package Standard,''
+The information in RM83-8.6, @lquotes@;The Package Standard,@rquotes@;
 has been updated for the child unit feature,
 and moved to @RefSecNum{Predefined Language Environment},
-except for the definition of ``predefined type,''
+except for the definition of @lquotes@;predefined type,@rquotes@;
 which has been moved to @RefSecNum{Type Declarations}.
 @end{DiffWord83}
 
@@ -1849,7 +1849,7 @@ to the actual interpretation.
 
 @Defn{overloading rules}
 Certain rules of the language (the @ResolutionTitle)
-are considered ``overloading rules''.
+are considered @lquotes@;overloading rules@rquotes@;.
 If a possible interpretation violates an overloading rule,
 it is assumed not to be the intended interpretation;
 some other possible interpretation
@@ -1859,7 +1859,7 @@ violations of non-overloading rules do not affect which
 interpretation is chosen; instead,
 they cause the construct to be illegal.
 To be legal, there usually has to be exactly one acceptable
-interpretation of a construct that is a ``complete context'',
+interpretation of a construct that is a @lquotes@;complete context@rquotes@;,
 not counting any nested complete contexts.
 
 @Defn2{Term=[grammar],Sec=(resolution of ambiguity)}
@@ -1936,7 +1936,7 @@ in this order: @nt{identifier},
 @nt{simple_expression}, and
 @nt{relation}.
 Basically, we're trying to capture all the information in the parse tree
-here, without using compiler-writer's jargon like ``parse tree''.
+here, without using compiler-writer's jargon like @lquotes@;parse tree@rquotes@;.
 @end{Ramification}
 
 for each usage name, which declaration it denotes
@@ -1962,14 +1962,14 @@ Unfortunately, we are not confident that the above list is complete.
 We'll have to live with that.
 @end{Ramification}
 @begin{Honest}
-For ``possible'' interpretations, the above information is tentative.
+For @lquotes@;possible@rquotes@; interpretations, the above information is tentative.
 @end{Honest}
 @begin{Discussion}
 A possible interpretation (an @i{input} to overload
 resolution) contains information about what a
 usage name @i{might} denote, but what it actually @i{does} denote
 requires overload resolution to determine.
-Hence the term ``tentative'' is needed for possible interpretations;
+Hence the term @lquotes@;tentative@rquotes@; is needed for possible interpretations;
 otherwise, the definition would be circular.
 @end{Discussion}
 
@@ -2003,7 +2003,7 @@ The @i{interpretation} of a constituent of a complete context is
 determined from the overall interpretation of the complete context as a
 whole.
 @Redundant{Thus,
-for example, ``interpreted as a @nt{function_call},''
+for example, @lquotes@;interpreted as a @nt{function_call},@rquotes@;
 means that the construct's interpretation says that it belongs
 to the syntactic category @nt{function_call}.}
 
@@ -2097,7 +2097,7 @@ Val attribute, which denotes a function that takes a parameter of type
 @i(universal_integer).
 
 The last part of the rule,
-``or to a universal type that includes the class''
+@lquotes@;or to a universal type that includes the class@rquotes@;
 implies that if the expected type for an expression
 is @i{universal_fixed},
 then an expression whose type is @i{universal_real}
@@ -2128,7 +2128,7 @@ type @em such a preference would cause Beaujolais effects.
     to an access-to-variable type
     whose designated type is @i(D)'Class or is covered by @i(D).
 @begin{Ramification}
-      Because it says ``access-to-variable'' instead of ``access-to-object,''
+      Because it says @lquotes@;access-to-variable@rquotes@; instead of @lquotes@;access-to-object,@rquotes@;
       two subprograms that differ only in that one has a parameter
       of an access-to-constant type,
       and the other has an access parameter, are distinguishable
@@ -2185,7 +2185,7 @@ Therefore, the literal @key{null} is not allowed as the operand of a
 @nt{type_conversion}.
 This is true even if there is only one access type in scope.
 The reason for these rules is so that the compiler will not have to
-search ``everywhere'' to see if there is exactly one type in a class
+search @lquotes@;everywhere@rquotes@; to see if there is exactly one type in a class
 in scope.
 @end{Ramification}
 
@@ -2249,8 +2249,8 @@ and all of the views declared by these declarations.
 @begin{Ramification}
 This applies to Inline, Suppress,
 Import, Export, and Convention @nt{pragma}s.
-For example, it is OK to say ``@key[pragma] Suppress(Elaboration_Check, On
-=> P.Q);'', even if there are two directly visible P's, and
+For example, it is OK to say @lquotes@;@key[pragma] Suppress(Elaboration_Check, On
+=> P.Q);@rquotes@;, even if there are two directly visible P's, and
 there are two Q's declared in the visible part of each P.
 In this case, P.Q denotes four different declarations.
 This rule also applies to certain pragmas defined in the
@@ -2268,7 +2268,7 @@ so that, for example, a @nt{pragma} Inline does not pick up
 subprograms declared in enclosing declarative regions,
 and therefore make itself illegal.
 
-We say ``statically denotes'' in the above rule in order to avoid
+We say @lquotes@;statically denotes@rquotes@; in the above rule in order to avoid
 having to worry about how many times the @nt{name} is evaluated,
 in case it denotes more than one callable entity.
 @end{Ramification}
@@ -2305,15 +2305,15 @@ for universal types.
 @end{Extend83}
 
 @begin{DiffWord83}
-In Ada 83, it is not clear what the ``syntax rules'' are.
+In Ada 83, it is not clear what the @lquotes@;syntax rules@rquotes@; are.
 AI-00157 states that a certain textual rule is a syntax rule,
 but it's still not clear how one tells in general which textual rules are
 syntax rules.
 We have solved the problem by stating exactly which
-rules are syntax rules @em the ones that appear under the ``@SyntaxTitle''
+rules are syntax rules @em the ones that appear under the @lquotes@;@SyntaxTitle@rquotes@;
 heading.
 
-RM83 has a long list of the ``forms'' of rules that are to be
+RM83 has a long list of the @lquotes@;forms@rquotes@; of rules that are to be
 used in overload resolution (in addition to the syntax rules).
 It is not clear exactly which rules fall under each form.
 We have solved the problem by explicitly
@@ -2324,13 +2324,13 @@ It is replaced with some introductory
 text explaining the basic idea
 of what sorts of rules are overloading rules.
 
-It is not clear from RM83 what information is embodied in a ``meaning''
-or an ``interpretation.''
-``Meaning'' and ``interpretation'' were intended to be synonymous;
+It is not clear from RM83 what information is embodied in a @lquotes@;meaning@rquotes@;
+or an @lquotes@;interpretation.@rquotes@;
+@lquotes@;Meaning@rquotes@; and @lquotes@;interpretation@rquotes@; were intended to be synonymous;
 we now use the latter only in defining the rules about overload
 resolution.
-``Meaning'' is used only informally.
-This clause attempts to clarify what is meant by ``interpretation.''
+@lquotes@;Meaning@rquotes@; is used only informally.
+This clause attempts to clarify what is meant by @lquotes@;interpretation.@rquotes@;
 
 @NoPrefix@;For example,
 RM83 does not make it clear that overload resolution is required in
@@ -2338,9 +2338,9 @@ order to match @nt{subprogram_bodies} with their corresponding
 declarations (and even to tell whether a given @nt{subprogram_body}
 is the completion of a previous declaration).
 Clearly, the information needed to do this is part of the
-``interpretation'' of a @nt{subprogram_body}.
+@lquotes@;interpretation@rquotes@; of a @nt{subprogram_body}.
 The resolution of such things is defined in terms of
-the ``expected profile'' concept.
+the @lquotes@;expected profile@rquotes@; concept.
 Ada 9X has some new cases where expected profiles
 are needed @em the resolution of P'Access,
 where P might denote a subprogram,
@@ -2355,8 +2355,8 @@ since the Ada grammar is highly ambiguous.
 For example, X(Y) might be a @nt{function_call} or an
 @nt{indexed_component}, and no context-free/syntactic information can
 tell the difference.
-It seems like we should view X(Y) as being, for example, ``interpreted as a
-@nt{function_call}'' (if that's what overload resolution decides it is).
+It seems like we should view X(Y) as being, for example, @lquotes@;interpreted as a
+@nt{function_call}@rquotes@; (if that's what overload resolution decides it is).
 Note that there are examples where the denotation of each usage name
 does not imply the syntactic category.
 However, even if that were not true, it seems that intuitively,
@@ -2400,11 +2400,11 @@ such as @nt{pragma_argument_association}s,
 @nt{declarative_item}s that are not
 declarations or @nt{representation_clause}s,
 and @nt{context_item}s.
-We have added these, and also replaced the ``must be determinable''
+We have added these, and also replaced the @lquotes@;must be determinable@rquotes@;
 wording of RM83-5.4(3) with the notion that the expression of a
 @nt{case_statement} is a complete context.
 
 Cases like the Val attribute are now handled using the normal type
 resolution rules, instead of having special cases that explicitly allow
-things like ``any integer type.''
+things like @lquotes@;any integer type.@rquotes@;
 @end{DiffWord83}

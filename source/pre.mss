@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2000/05/27 04:44:01 $}
+@Comment{$Date: 2000/08/03 05:37:43 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.15 $}
+@comment{$Revision: 1.16 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -101,7 +101,7 @@ other library units are children of these:
 @end{TwoCol}
 @end{DisplaywithoutParanum}]
 @begin{Discussion}
-In running text, we generally leave out the ``Ada.'' when referring to a
+In running text, we generally leave out the @lquotes@;Ada.@rquotes@; when referring to a
 child of Ada.
 @end{Discussion}
 @begin{Reason}
@@ -127,7 +127,7 @@ denote nonoverlapping objects.
   erroneous use of shared variables.
 @end{Ramification}
 @begin{Honest}
-  Here, ``language defined subprogram'' means a language defined library
+  Here, @lquotes@;language defined subprogram@rquotes@; means a language defined library
   subprogram, a subprogram declared in the visible part of a language
   defined library package, an instance of a language defined
   generic library subprogram,
@@ -148,11 +148,11 @@ The implementation may restrict children of language-defined library
 units (other than Standard).
 @begin{Ramification}
 For example, the implementation may say,
-``you cannot compile a library unit called System''
-or ``you cannot compile a child of package System''
-or ``if you compile a library unit called System,
+@lquotes@;you cannot compile a library unit called System@rquotes@;
+or @lquotes@;you cannot compile a child of package System@rquotes@;
+or @lquotes@;if you compile a library unit called System,
 it has to be a package, and it has to contain at least
-the following declarations: ...''.
+the following declarations: ...@rquotes@;.
 @end{Ramification}
 @end{ImplPerm}
 
