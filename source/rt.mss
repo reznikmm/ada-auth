@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2005/03/29 06:32:54 $ $Author: Randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2005/03/30 00:54:07 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/03/29 06:32:54 $}
+@Comment{$Date: 2005/03/30 00:54:07 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -4100,16 +4100,16 @@ finalization (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[An object of type Timer is said to be @i<set> if it
-is associated with a non-null Timer_Handler and @i<cleared> otherwise. All
-Timer objects are initially cleared.
-@PDefn{Term=[set],Sec=[execution timer object]}
-@PDefn{Term=[clear],Sec=[execution timer object]}]}
+is associated with a non-null value of type Timer_Handler and @i<cleared>
+otherwise. All Timer objects are initially cleared.
+@PDefn2{Term=[set],Sec=[execution timer object]}
+@PDefn2{Term=[clear],Sec=[execution timer object]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[The type Timer_Handler identifies a protected
 procedure to be executed by the implementation when the timer expires. Such a
 protected procedure is called a @i<handler>.
-@PDefn{Term=[handler],Sec=[execution timer]}]}
+@PDefn2{Term=[handler],Sec=[execution timer]}]}
 
 @end{StaticSem}
 
@@ -4309,18 +4309,21 @@ to at most one group. Tasks of any priority can be added to a group.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[An object of type Group_Budget has an associated
-non-negative value of type Time_Span known as its @i<budget>.@Defn{budget}]}
+non-negative value of type Time_Span known as its @i<budget>, which is
+initially Time_Span_Zero. The type Group_Budget_Handler identifies a protected
+procedure to be executed by the implementation when the budget is
+@i<exhausted>, that is, reaches zero. Such a protected procedure is called a
+@i<handler>.@Defn{budget}@Defn2{Term=[exhaust],Sec=[a budget]}
+@PDefn2{Term=[handler],Sec=[group budget]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
-@ChgAdded{Version=[2],Text=[The type Group_Budget_Handler identifies a
-protected procedure to be executed by the implementation when the budget is
-exhausted. Such a protected procedure is called a @i<handler>. The handler of
-an object of type Group_Budget is said to be @i<set> if it is associated with a
-non-null value of Group_Budget_Handler and @i<cleared> otherwise. The handler
-of all Group_Budget objects is initially cleared.
-@PDefn{Term=[handler],Sec=[group budget]}
-@PDefn{Term=[set],Sec=[group budget object]}
-@PDefn{Term=[clear],Sec=[group budget object]}]}
+@ChgAdded{Version=[2],Text=[An object of type Group_Budget also includes a
+handler, which is a value of type Group_Budget_Handler. The handler of the
+object is said to be @i<set> if it is not null and @i<cleared> otherwise. The
+handler of all Group_Budget objects is initially cleared.
+@PDefn2{Term=[set],Sec=[group budget object]}
+@PDefn2{Term=[clear],Sec=[group budget object]}]}
+
 @end{StaticSem}
 
 @begin{RunTime}
@@ -4353,10 +4356,9 @@ order of the components of the array is unspecified.]}
 @ChgAdded{Version=[2],Text=[The procedure Replenish loads the group budget GB
 with the Time_Span value To. Group_Budget_Error is raised if the Time_Span
 value To is non-positive. Any execution of any member of the group of tasks
-results in the budget counting down. When the budget becomes exhausted (goes to
+results in the budget counting down. When the budget becomes exhausted (reaches
 Time_Span_Zero), the associated handler is executed if the handler of group
-budget GB is set; the tasks continue to execute. An object of type Group_Budget
-is initially loaded with a budget of Time_Span_Zero.]}
+budget GB is set; the tasks continue to execute.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The procedure Add modifies the budget of the group
@@ -4368,7 +4370,7 @@ if the handler of the group budget GB is set.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The function Budget_Has_Expired returns True if the
-budget of group GB is @i<exhausted> (equal to Time_Span_Zero); otherwise it
+budget of group GB is exhausted (equal to Time_Span_Zero); otherwise it
 returns False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
@@ -4513,16 +4515,16 @@ when an event is to occur. The type Timing_Event needs finalization (see
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[An object of type Timing_Event is said to be
-@i<set> if it is associated with a non-null Timing_Event_Handler and
-@i<cleared> otherwise. All Timing_Event objects are initially cleared.
-@PDefn{Term=[set],Sec=[timing event object]}
-@PDefn{Term=[clear],Sec=[timing event object]}]}
+@i<set> if it is associated with a non-null value of type Timing_Event_Handler
+and @i<cleared> otherwise. All Timing_Event objects are initially cleared.
+@PDefn2{Term=[set],Sec=[timing event object]}
+@PDefn2{Term=[clear],Sec=[timing event object]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[The type Timing_Event_Handler identifies a
 protected procedure to be executed by the implementation when the timing event
 occurs. Such a protected procedure is called a @i{handler}.
-@PDefn{Term=[handler],Sec=[timing event]}]}
+@PDefn2{Term=[handler],Sec=[timing event]}]}
 
 @end{StaticSem}
 

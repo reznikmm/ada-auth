@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/03/29 06:32:53 $}
+@Comment{$Date: 2005/03/30 00:54:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @LabeledClause{The Package System}
 
@@ -2794,9 +2794,9 @@ attribute of @Chg{Version=[2],New=[the parent],Old=[any ancestor]} type of
 @i(T) @Chg{Version=[2],New=[is available anywhere within the immediate scope
 of @i<T>,],Old=[has been directly specified]} and the attribute
 of @Chg{Version=[2],New=[],Old=[any ancestor type of]} the
-type of any of the extension components which are of a limited type@Chg{Version=[2],
-New=[, @i<L>, is not available at the freezing point of @i<T>, then],
-Old=[ has not been specified,]}
+type of any of the extension components which are of a limited type
+@Chg{Version=[2],New=[is not available at the freezing point of @i<T>, then],
+Old=[has not been specified,]}
 the attribute of @i(T) shall be directly specified.],Old=[]}
 
 @ImplDef{The representation used by the Read and Write attributes of
@@ -3027,19 +3027,20 @@ discriminants, if the actual parameter of Read is constrained, a check is made
 that the discriminants read from the stream are equal to those of the actual
 parameter. Constraint_Error is raised if this check fails.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
 @ChgAdded{Version=[2],Text=[@PDefn{unspecified}It is unspecified at which point
 and in which order these checks are performed. In particular, if
 Constraint_Error is raised due to the failure of one of these checks, it is
 unspecified how many stream elements have been read from the stream.]}
 
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0045],ARef=[AI95-00132-01]}
+@ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0045],ARef=[AI95-00132-01]}
 @ChgAdded{Version=[1],Text=[@Defn2{Term=[End_Error],Sec=(raised by failure of run-time check)}
 In the default implementation of Read and Input for a type, End_Error
 is raised if the end of the stream is reached before the reading of a value of
 the type is completed.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Write for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Input for a type)}
@@ -3050,7 +3051,9 @@ the type is completed.]}
 @Defn{Output clause}
 The stream-oriented attributes may be specified
 for any type via an @nt{attribute_definition_clause}.
-All nonlimited types have default implementations
+@Chg{Version=[2],New=[The subprogram name given in such a
+clause shall not denote an abstract subprogram.],
+Old=[All nonlimited types have default implementations
 for these operations. An @nt{attribute_reference} for one of
 these attributes is illegal if the type is limited,
 unless the attribute has been specified by an
@@ -3059,24 +3062,161 @@ the attribute has been specified for an ancestor type],Old=[]}.
 For an @nt{attribute_@!definition_@!clause} specifying one of these
 attributes, the subtype of the Item parameter shall be the base subtype
 if scalar, and the first subtype otherwise.
-The same rule applies to the result of the Input function.
-@begin{Reason}
-  This is to simplify implementation.
+The same rule applies to the result of the Input function.]}
+@ChgNote{Most of the old text is moved down}
+
+@begin{Reason}@ChgNote{This belongs below}
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00195-01]}
+  @ChgDeleted{Version=[2],Text=[This is to simplify implementation.]}
 @end{Reason}
-@begin{Discussion}
+
+@begin{Discussion}@ChgNote{This is junk}
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
-  @ChgAdded{Version=[1],Text=[@lquotes@;Specified@rquotes includes inherited
-  attributes, and default implementations are never inherited. So, for untagged
-  limited types, the second part of the @nt{attribute_reference} rule has the
-  same meaning as the first part. However, tagged types never inherit
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00195-01]}
+  @ChgDeleted{Version=[2],Text=[@Chg{Version=[1],New=[@lquotes@;Specified@rquotes
+  includes inherited attributes, and default implementations are never inherited.
+  So, for untagged limited types, the second part of the @nt{attribute_reference}
+  rule has the same meaning as the first part. However, tagged types never inherit
   attributes, so the second rule is needed so that the default implementations
   for the attributes can be called when those are constructed from a directly
-  specified ancestor.]}
+  specified ancestor.],Old=[]}]}
 @end{Discussion}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+  @ChgAdded{Version=[2],Text=[Limited types generally do not have default
+  implementations of the stream-oriented attributes. The rules defining when
+  a stream-oriented attribute is available (see below) determine when an
+  attribute of a limited type is in fact well defined and usable. The rules are
+  complicated so that the attributes can be called in the maximum number of
+  cases. For instance, when the language provides a default implementation of
+  an attribute for a limited type based on a specified attribute for the parent
+  type, we want to be able to call that attribute.]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[A stream-oriented attribute for a
+subtype of a specific type @i<T> is @i<available> at places where one of the
+following conditions is true: @Defn2{Term=[available],Sec=[stream attribute]}]}
+
+@begin{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The @nt{attribute_designator} is Read, Write or
+Output, and @i<T> is nonlimited.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The @nt{attribute_designator} is Input, and @i<T>
+is nonlimited and not abstract.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We don't otherwise allow functions returning
+  abstract objects, and we certainly don't want to start now. We don't need
+  this for the procedure attributes; any object has to be a type conversion
+  from a concrete type.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The @nt{attribute_designator} is Read (resp. Write)
+and @i<T> is a limited record extension, and the attribute Read (resp. Write)
+is available for the parent type of @i<T> and for the types of all of the
+extension components.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[In this case, the language provides a
+  well-defined default implementation, which we want to be able to call.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The @nt{attribute_designator} is Input (resp.
+Output), and @i<T> is a limited type, and the attribute Read (resp. Write) is
+available for @i<T>.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The default implementation of Input and Output
+  are based on Read and Write; so if the implementation of Read or Write is
+  good, so is the matching implementation of Input or Output.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The attribute has been specified via an
+@nt{attribute_definition_clause}, and the @nt{attribute_definition_clause}
+is visible.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We always want to allow calling a specified
+  attribute. But we don't want availability to break privacy.
+  Therefore, only attributes whose specification can be seen count. Yes, we
+  defined the visibility of an @nt{attribute_definition_clause}
+  (see @RefSecNum{Visibility}).]}
+@end{Reason}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[A stream-oriented attribute for a subtype of a class-wide type T'Class is
+available at places where one of the following conditions is true:]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@i<T> is nonlimited; or]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The attribute has been specified via an
+@nt{attribute_definition_clause}, and the @nt{attribute_definition_clause}
+is visible; or]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[where the corresponding attribute of @i<T> is
+available, provided that if @i<T> has a partial view, the corresponding
+attribute is available at the end of the visible part where @i<T> is
+declared.]}
+
+@end{Itemize}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The rules are stricter for class-wide attributes
+  because (for the default implementation) we must insure that any specific
+  attribute that might ever be dispatched to is available. Because we require
+  specification of attributes for extensions of limited parent types with
+  available attributes, we can in fact know this. Otherwise, we would not be
+  able to use default class-wide attributes with limited types, a significant
+  limitation.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+@ChgAdded{Version=[2],Text=[An @nt{attribute_reference} for one of the
+stream-oriented attributes is illegal unless the attribute is available at
+the place of the @nt{attribute_reference}.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Stream attributes always exist. It is illegal
+  to call them in some cases. Having the attributes not be defined for
+  some limited types would seem to be a cleaner solution, but it would lead
+  to contract model problems for limited private types.]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+@ChgAdded{Version=[2],Text=[In the @nt{parameter_and_result_profile}s for the
+stream-oriented attributes, the subtype of the Item parameter is the base
+subtype of @i<T> if @i<T> is a scalar type, and the first subtype otherwise.
+The same rule applies to the result of the Input attribute.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+@ChgAdded{Version=[2],Text=[For an @nt{attribute_definition_clause} specifying
+one of these attributes, the subtype of the Item parameter shall be the base
+subtype if scalar, and the first subtype otherwise. The same rule applies to
+the result of the Input function.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is to simplify implementation.]}
+@end{Reason}
+
 @end{StaticSem}
 
 @begin{Erron}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the internal tag returned by Descendant_Tag to T'Class'Input identifies a
 specific type whose tag has not been created, or does not exist in the
@@ -3090,14 +3230,14 @@ partition at the time of the call, execution is erroneous.]}
 @end{Erron}
 
 @begin{ImplReq}
-  @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
+  @ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[1],Text=[For every subtype @i<S> of a language-defined
   nonlimited specific type @i<T>, the output generated by S'Output or S'Write
   shall be readable by S'Input or S'Read, respectively. This rule applies
   across partitions if the implementation conforms to the Distributed Systems
   Annex.]}
 
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
   @ChgAdded{Version=[2],Text=[If Constraint_Error is raised during a call to
   Read because of failure of one the above checks, the implementation must
   ensure that the discriminants of the actual parameter of Read are not
@@ -3105,7 +3245,7 @@ partition at the time of the call, execution is erroneous.]}
 @end{ImplReq}
 
 @begin{ImplPerm}
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
   @ChgAdded{Version=[2],Text=[The number of calls performed by the predefined
   implementation of the stream-oriented attributes on the Read and Write
   operations of the stream type is unspecified. An implementation may take
@@ -3128,7 +3268,7 @@ pass bounds, discriminants, or tags.
 User-specified attributes of S'Class are not inherited by other
 class-wide types descended from S.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00279-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
 @ChgAdded{Version=[2],Text=[If the prefix subtype S of function S'Class'Input
 is a library-level subtype, then reading a value of a type which has not yet
 been frozen with the S'Class'Input function will always raise Tag_Error;
@@ -3547,6 +3687,16 @@ The declaration of a private
   until the full type declaration, which will necessarily be
   for a record extension.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Text=[The declaration of a specific descendant of an
+interface type freezes the interface type.]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[This rules has the same purpose as the one
+above: ensuring that all descendants of an interface tagged type implement all
+of its dispatching operations.]}
+@end{Reason}
 @end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
@@ -3725,6 +3875,25 @@ the corresponding specific type is frozen as well.
 
   Freezing an access type does not freeze its designated subtype.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00341-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[At the place where a specific
+tagged type is frozen, the primitive subprograms of the type are frozen.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We have a language design principle that all of
+  the details of a specific tagged type are known at its freezing point.
+  But that is only true if the primitive subprograms are frozen at this
+  point as well. Late changes of Import and address clauses violate the
+  principle.]}
+@end{Reason}
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This rule means that no implicit call to
+  Initialize or Adjust can freeze a subprogram (the type and thus subprograms
+  would have been frozen at worst at the same point).]}
+@end{ImplNote}
+
 @end{Itemize}
 
 @end{Intro}
@@ -3874,6 +4043,13 @@ an entity should most certainly @i{not} be a freezing point for the entity.
 @end{ImplNote}
 @end{Legality}
 
+@begin{RunTime}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00279-01]}
+@ChgAdded{Version=[2],Text=[The tag (see
+@RefSecNum{Tagged Types and Type Extensions}) of a tagged type T
+is created at the point where T is frozen.]}
+@end{RunTime}
+
 @begin{Incompatible83}
 @Defn{incompatibilities with Ada 83}
 RM83 defines a forcing occurrence of a type as follows:
@@ -3983,11 +4159,15 @@ because the @nt{attribute_representation_clause} has been generalized.
 @end{DiffWord83}
 
 @begin{Incompatible95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0046],ARef=[AI95-00106-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0046],ARef=[AI95-00106-01],ARef=[AI95-00341-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Various freezing rules were added to fix holes in the rules.
-  Implicit calls are now freezing, which make make some representation
-  clauses illegal in Ada 2005 which were legal (but dubious) in Ada 95.]}
+  Implicit calls are now freezing, which make some representation
+  clauses illegal in Ada 2005 that were legal (but dubious) in Ada 95.
+  Similarly, the primitive subprograms of a specific tagged type are frozen
+  when type is frozen, preventing dubious convention changes (and address
+  clauses) after the freezing point. In both cases, the code is dubious
+  and the workaround is easy.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -3995,5 +4175,14 @@ because the @nt{attribute_representation_clause} has been generalized.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
   that both operational and representation attributes must be specified before
   the type is frozen.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[Added wording that declaring a specific
+  descendant of an interface type is freezes it.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
+  @ChgAdded{Version=[2],Text=[Added wording that defines when a tag is created
+  for a type (at the freezing point of the type). This is used to specify
+  checking for uncreated tags.]}
 @end{DiffWord95}
 
