@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2004/11/13 06:47:17 $}
+@Comment{$Date: 2004/11/17 01:20:31 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 
@@ -2638,6 +2638,7 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 The @nt<requeue_statement> is new.
 @end{Extend83}
 
+
 @LabeledClause{Delay Statements, Duration, and Time}
 
 @begin{Intro}
@@ -2712,7 +2713,8 @@ by a corresponding clock.
 @key(package) Ada.Calendar @key(is)
   @key(type) @AdaTypeDefn{Time} @key(is) @key(private);
 
-  @key(subtype) @AdaDefn{Year_Number}  @key(is) Integer @key(range) 1901 .. 2099;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00351-01]}
+  @key(subtype) @AdaDefn{Year_Number}  @key(is) Integer @key(range) 1901 .. @Chg{Version=[2],New=[2399],Old=[2099]};
   @key(subtype) @AdaDefn{Month_Number} @key(is) Integer @key(range) 1 .. 12;
   @key(subtype) @AdaDefn{Day_Number}   @key(is) Integer @key(range) 1 .. 31;
   @key(subtype) @AdaDefn{Day_Duration} @key(is) Duration @key(range) 0.0 .. 86_400.0;
@@ -2823,17 +2825,21 @@ is an approximation of the length of the real-time
 interval during which the value of Calendar.Clock remains constant.]
 @ImplDef{The time base of the type Calendar.Time.}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00351-01]}
 The functions Year,
 Month, Day, and Seconds return the corresponding values for
 a given value of the type Time,
-as appropriate to an implementation-defined timezone;
-the procedure Split returns all four
+as appropriate to an implementation-defined
+@Chg{Version=[2],New=[time zone],Old=[timezone]}; the procedure Split
+returns all four
 corresponding values. Conversely, the function Time_Of combines a
 year number, a month number, a day number, and a duration, into
 a value of type Time. The operators "+" and "@en@;" for addition
 and subtraction of times and durations, and the relational operators
 for times, have the conventional meaning.
-@ImplDef{The timezone used for package Calendar operations.}
+@ChgImplDef{Version=[2],Kind=[Revised],
+Text=[The @Chg{Version=[2],New=[time zone],Old=[timezone]} used for
+package Calendar operations.]}
 
 If Time_Of is called with a seconds value of 86_400.0, the value
 returned is equal to the value of Time_Of for the next day
@@ -2998,6 +3004,7 @@ recent past or near future.
 The syntax rule for @nt{delay_statement} is modified to allow
 @nt{delay_until_statement}s.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00351-01]}
 The type Time may represent dates with year numbers outside of Year_Number.
 Therefore, the operations "+" and
 "@en@;" need only raise Time_Error if the result is not representable
@@ -3006,7 +3013,7 @@ if the year number is outside of Year_Number.
 This change is intended to simplify the implementation
 of "+" and "@en@;" (allowing them to depend on overflow for
 detecting when to raise Time_Error) and to allow local
-timezone information to be
+@Chg{Version=[2],New=[time zone],Old=[timezone]} information to be
 considered at the time of Split rather than Clock (depending on
 the implementation approach). For example, in a POSIX environment,
 it is natural for the type Time to be based on GMT, and
@@ -3016,18 +3023,582 @@ In other environments, it is more natural for the type Time to
 be based on the local time zone, with the results of
 Year, Month, Day, and Seconds being pure functions of their input.
 
-We anticipate that implementations will provide child packages
-of Calendar to provide more explicit control over time zones
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00351-01]}
+@Chg{Version=[2],New=[],Old=[We anticipate that implementations will provide
+child packages of Calendar to provide more explicit control over time zones
 and other environment-dependent time-related issues.
 These would be appropriate for standardization in a given
-environment (such as POSIX).
+environment (such as POSIX).]}
 @end{Extend83}
+
+@begin{Inconsistent95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}The upper bound
+of Year_Number has been changed to avoid an year 2100 problem. A program
+which expects years past 2099 to raise Constraint_Error will fail on Ada 2005.
+We don't expect there to be many programs which are depending on an exception
+to be raised. A program that uses Year_Number'Last as a magic number may also
+fail if values of Time are stored outside of the program.
+Note that the lower bound of Year_Number wasn't changed, because
+it is not unusual to use that value in a constant to represent an unknown
+time.],Old=[]}
+@end{Inconsistent95}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Clarified that Month, Day, and
 Seconds can raise Time_Error.],Old=[]}
 @end{DiffWord95}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[Formatting, Time Zones, and other operations for Time]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+@Chg{Version=[2],New=[The following language-defined library packages exist:],Old=[]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@ChildUnit{Parent=[Ada.Calendar],Child=[Time_Zones]}
+@key(package) Ada.Calendar.Time_Zones @key(is)],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   -- @RI[Time zone manipulation:]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<type> @AdaTypeDefn{Time_Offset} @key<is range> -1440 .. 1440;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @AdaDefn{Unknown_Zone_Error} : @key<exception>;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{UTC_Time_Offset} (Date : Time := Clock) @key<return> Time_Offset;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key<end> Ada.Calendar.Time_Zones;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@ChildUnit{Parent=[Ada.Calendar],Child=[Arithmetic]}
+@key(package) Ada.Calendar.Arithmetic @key(is)],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   -- @RI[Arithmetic on days:]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<type> @AdaTypeDefn{Day_Count} @key<is range>
+     -366*(1+Year_Number'Last - Year_Number'First)
+     ..
+     366*(1+Year_Number'Last - Year_Number'First);],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<subtype> @AdaDefn{Leap_Seconds_Count} @key<is> Integer @key<range> -999 .. 999;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Difference} (Left, Right : @key<in> Time;
+                         Days : @key<out> Day_Count;
+                         Seconds : @key<out> Duration;
+                         Leap_Seconds : @key<out> Leap_Seconds_Count);],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> "+" (Left : Time; Right : Day_Count) @key<return> Time;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> "+" (Left : Day_Count; Right : Time) @key<return> Time;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> "@en" (Left : Time; Right : Day_Count) @key<return> Time;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> "@en" (Left, Right : Time) @key<return> Day_Count;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key<end> Ada.Calendar.Arithmetic;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@ChildUnit{Parent=[Ada.Calendar],Child=[Formatting]}
+@key<with> Ada.Calendar.Time_Zones;
+@key(package) Ada.Calendar.Formatting @key(is)],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   -- @RI[Day of the week:]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<type> @AdaTypeDefn{Day_Name} @key<is> (@AdaDefn{Monday}, @AdaDefn{Tuesday}, @AdaDefn{Wednesday}, @AdaDefn{Thursday},
+       @AdaDefn{Friday}, @AdaDefn{Saturday}, @AdaDefn{Sunday});],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Day_of_Week} (Date : Time) @key<return> Day_Name;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   -- @RI[Hours:Minutes:Seconds access:]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<subtype> @AdaDefn{Hour_Number}         @key<is> Natural @key<range> 0 .. 23;
+   @key<subtype> @AdaDefn{Minute_Number}       @key<is> Natural @key<range> 0 .. 59;
+   @key<subtype> @AdaDefn{Second_Number}       @key<is> Natural @key<range> 0 .. 59;
+   @key<subtype> @AdaDefn{Second_Duration}     @key<is> Day_Duration @key<range> 0.0 .. 1.0;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Hour}       (Date : Time;
+                        Time_Zone  : Time_Zones.Time_Offset := 0)
+                           @key<return> Hour_Number;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Minute}     (Date : Time;
+                        Time_Zone  : Time_Zones.Time_Offset := 0)
+                           @key<return> Minute_Number;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Second}     (Date : Time;
+                        Time_Zone  : Time_Zones.Time_Offset := 0)
+                           @key<return> Second_Number;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Sub_Second} (Date : Time;
+                        Time_Zone  : Time_Zones.Time_Offset := 0)
+                           @key<return> Second_Duration;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Seconds_Of} (Hour   :  Hour_Number;
+                        Minute : Minute_Number;
+                        Second : Second_Number := 0;
+                        Sub_Second : Second_Duration := 0.0)
+       @key<return> Day_Duration;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Split} (Seconds    : @key<in> Day_Duration;
+                    Hour       : @key<out> Hour_Number;
+                    Minute     : @key<out> Minute_Number;
+                    Second     : @key<out> Second_Number;
+                    Sub_Second : @key<out> Second_Duration);],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
+                    Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
+                    Year       : @key<out> Year_Number;
+                    Month      : @key<out> Month_Number;
+                    Day        : @key<out> Day_Number;
+                    Hour       : @key<out> Hour_Number;
+                    Minute     : @key<out> Minute_Number;
+                    Second     : @key<out> Second_Number;
+                    Sub_Second : @key<out> Second_Duration);],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Time_Of} (Year       : Year_Number;
+                     Month      : Month_Number;
+                     Day        : Day_Number;
+                     Hour       : Hour_Number;
+                     Minute     : Minute_Number;
+                     Second     : Second_Number;
+                     Sub_Second : Second_Duration := 0.0;
+                     Leap_Second: Boolean := False;
+                     Time_Zone  : Time_Zones.Time_Offset := 0)
+                             @key<return> Time;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Time_Of} (Year       : Year_Number;
+                     Month      : Month_Number;
+                     Day        : Day_Number;
+                     Seconds    : Day_Duration;
+                     Leap_Second: Boolean := False;
+                     Time_Zone  : Time_Zones.Time_Offset := 0)
+                             @key<return> Time;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
+                    Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
+                    Year       : @key<out> Year_Number;
+                    Month      : @key<out> Month_Number;
+                    Day        : @key<out> Day_Number;
+                    Hour       : @key<out> Hour_Number;
+                    Minute     : @key<out> Minute_Number;
+                    Second     : @key<out> Second_Number;
+                    Sub_Second : @key<out> Second_Duration;
+                    Leap_Second: @key<out> Boolean);],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
+                    Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
+                    Year       : @key<out> Year_Number;
+                    Month      : @key<out> Month_Number;
+                    Day        : @key<out> Day_Number;
+                    Seconds    : @key<out> Day_Duration;
+                    Leap_Second: @key<out> Boolean);],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   -- @RI[Simple image and value:]
+   @key<function> @AdaSubDefn{Image} (Date : Time;
+                   Include_Time_Fraction : Boolean := False;
+                   Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Value} (Date : String;
+                   Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> Time;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Image} (Elapsed_Time : Duration;
+                   Include_Time_Fraction : Boolean := False) @key<return> String;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[   @key<function> @AdaSubDefn{Value} (Elapsed_Time : String) @key<return> Duration;],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@key<end> Ada.Calendar.Formatting;],Old=[]}
+
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+@Chg{Version=[2],New=[Type Time_Offset represents the number of minutes
+difference between the implementation-defined time zone used by Ada.Calendar
+and another time zone.],Old=[]}
+
+@begin{DescribeCode}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> UTC_Time_Offset (Date : Time := Clock) @key<return> Time_Offset;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns, as a number of minutes, the
+difference between the implementation-defined time zone of Calendar, and
+UTC time, at the time Date. If the time zone of the Calendar implementation is
+unknown, then Unknown_Zone_Error is raised.],Old=[]}
+@begin{Discussion}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[The Date parameter is needed to take
+    into account time differences caused by daylight-savings time and other
+    time changes.],Old=[]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[Other time zones can be supported with a
+    child package. We don't define one because of the lack of agreement
+    on the definition of a time zone.],Old=[]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[The accuracy of this routine is not specified; the
+    intent is that the facilities of the underlying target operating system
+    are used to implement it.],Old=[]}
+@end{Discussion}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<procedure> Difference (Left, Right : @key<in> Time;
+                      Days : @key<out> Day_Count;
+                      Seconds : @key<out> Duration;
+                      Leap_Seconds : @key<out> Leap_Seconds_Count);],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns the difference between Left and Right.
+Days is the number of days of difference, Seconds is the
+remainder seconds of difference, and Leap_Seconds is the number of leap
+seconds. If Left < Right, then Seconds <= 0.0, Days <= 0, and Leap_Seconds <=
+0. Otherwise, all values are non-negative. For the returned values, if Days =
+0, then Seconds + Duration(Leap_Seconds) = Calendar."@en" (Left, Right).],Old=[]}
+@begin{Discussion}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[The number of days is calculated midnight-to-midnight.
+    Leap_Seconds, if any, are not included in Seconds.],Old=[]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[Leap_Seconds should be included in calculations
+    using the operators defined in Calendar, as is specified for "@en" above.],Old=[]}
+@end{Discussion}
+
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> "+" (Left : Time; Right : Day_Count) @key<return> Time;
+@key<function> "+" (Left : Day_Count; Right : Time) @key<return> Time;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Adds a number of days to a time value.
+Time_Error is raised if the result is not representable as a value of type
+Time.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> "@en" (Left : Time; Right : Day_Count) @key<return> Time;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Subtracts a number of days from a time value.
+Time_Error is raised if the result is not representable as a value of type
+Time.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> "@en" (Left, Right : Time) @key<return> Day_Count;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Subtracts two time values, and returns the
+number of days between them. This is the same value that Difference would
+return in Days.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Day_of_Week (Date : Time) @key<return> Day_Name;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns the day of the week for Time. This is
+based on the Year, Month, and Day values of Time.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Hour       (Date : Time;
+                     Time_Zone  : Time_Zones.Time_Offset := 0)
+                        @key<return> Hour_Number;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns the hour for Date, as appropriate for
+the specified time zone offset.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Minute     (Date : Time;
+                     Time_Zone  : Time_Zones.Time_Offset := 0)
+                        @key<return> Minute_Number;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns the minute within the hour for Date,
+as appropriate for the specified time zone offset.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Second     (Date : Time;
+                     Time_Zone  : Time_Zones.Time_Offset := 0)
+                        @key<return> Second_Number;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns the second within the hour and minute
+for Date, as appropriate for the specified time zone offset.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Sub_Second (Date : Time;
+                     Time_Zone  : Time_Zones.Time_Offset := 0)
+                        @key<return> Second_Duration;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns the fraction of second for Date (this
+has the same accuracy as Day_Duration), as appropriate for the specified time
+zone offset.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Seconds_Of (Hour   : Hour_Number;
+                     Minute : Minute_Number;
+                     Second : Second_Number := 0;
+                     Sub_Second : Second_Duration := 0.0)
+    @key<return> Day_Duration;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns a Day_Duration value for the
+Hour:Minute:Second.Sub_Second. This value can be used in Calendar.Time_Of as
+well as the argument to Calendar."+" and Calendar."@en".],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<procedure> Split (Seconds    : @key<in> Day_Duration;
+                 Hour       : @key<out> Hour_Number;
+                 Minute     : @key<out> Minute_Number;
+                 Second     : @key<out> Second_Number;
+                 Sub_Second : @key<out> Second_Duration);],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Splits Seconds into
+Hour:Minute:Second.Sub_Second.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<procedure> Split (Date       : @key<in> Time;
+                 Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
+                 Year       : @key<out> Year_Number;
+                 Month      : @key<out> Month_Number;
+                 Day        : @key<out> Day_Number;
+                 Hour       : @key<out> Hour_Number;
+                 Minute     : @key<out> Minute_Number;
+                 Second     : @key<out> Second_Number;
+                 Sub_Second : @key<out> Second_Duration);],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Splits Date into its constituent parts (Year,
+Month, Day, Hour, Minute,
+Second, Sub_Second), relative to the specified time zone offset.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Time_Of (Year       : Year_Number;
+                  Month      : Month_Number;
+                  Day        : Day_Number;
+                  Hour       : Hour_Number;
+                  Minute     : Minute_Number;
+                  Second     : Second_Number;
+                  Sub_Second : Second_Duration := 0.0;
+                  Leap_Second: Boolean := False;
+                  Time_Zone  : Time_Zones.Time_Offset := 0)
+                          @key<return> Time;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns a Time built from the date and time
+values, relative to the
+specified time zone offset. Time_Error is raised if Leap_Second is True,
+and Hour, Minute, and Second are not appropriate for a Leap_Second.],Old=[]}
+@begin{Discussion}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[A leap second always occurs at midnight UTC, and is
+    23:59:60 UTC in ISO notation. So, if the time zone is UTC, if any of
+    Hour /= 23, Minute /= 59, or Second /= 59, then Time_Error should be raised.
+    However, we do not say that, because other time zones will have different
+    values where a leap second is allowed.],Old=[]}
+@end{Discussion}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Time_Of (Year       : Year_Number;
+                  Month      : Month_Number;
+                  Day        : Day_Number;
+                  Seconds    : Day_Duration;
+                  Leap_Second: Boolean := False;
+                  Time_Zone  : Time_Zones.Time_Offset := 0)
+                          @key<return> Time;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns a Time built from the date and time
+values, relative to the specified time zone offset. Time_Error is raised if
+Leap_Second is True, and Seconds is not appropriate for a Leap_Second.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<procedure> Split (Date       : @key<in> Time;
+                 Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
+                 Year       : @key<out> Year_Number;
+                 Month      : @key<out> Month_Number;
+                 Day        : @key<out> Day_Number;
+                 Hour       : @key<out> Hour_Number;
+                 Minute     : @key<out> Minute_Number;
+                 Second     : @key<out> Second_Number;
+                 Sub_Second : @key<out> Second_Duration;
+                 Leap_Second: @key<out> Boolean);],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Split Date into its constituent parts (Year,
+Month, Day, Hour, Minute, Second, Sub_Second), relative to the specified time
+zone offset. Leap_Second is true if Date identifies a leap second.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<procedure> Split (Date       : @key<in> Time;
+                 Time_Zone  : @key<in> Time_Zones.Time_Offset := 0;
+                 Year       : @key<out> Year_Number;
+                 Month      : @key<out> Month_Number;
+                 Day        : @key<out> Day_Number;
+                 Seconds    : @key<out> Day_Duration;
+                 Leap_Second: @key<out> Boolean);],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Split Date into its constituent parts (Year,
+Month, Day, Seconds), relative to the specified time zone offset. Leap_Second
+is true if Date identifies a leap second.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Image (Date : Time;
+                Include_Time_Fraction : Boolean := False;
+                Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns a string form of the Date relative to
+the given Time_Zone.
+The format is "Year-Month-Day Hour:Minute:Second", where each value
+other than Year is a 2-digit form of the value of the functions
+defined in Calendar and Calendar.Formatting, including a leading '0',
+if needed. Year is a 4-digit value.
+If Include_Time_Fraction is True, Sub_Seconds*100 is suffixed to the
+string as a 2-digit value following a '.'.],Old=[]}
+@begin{Discussion}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[The Image provides a string in ISO 8601 format, the
+    international standard time format. Alternative representations allowed
+    in ISO 8601 are not supported here.],Old=[]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @Chg{Version=[2],New=[ISO 8601 allows 24:00:00 for midnight; and a seconds
+    value of 60 for leap seconds. These are not allowed here (the routines
+    mentioned above cannot produce those results).],Old=[]}
+@end{Discussion}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Value (Date : String)
+                Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> Time;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns a Time value for the image given as
+Date, relative to the given time zone. Constraint_Error is raised if the string
+is not formatted as described for Image, or the function cannot interpret the
+given string as a Time value.],Old=[]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Image (Elapsed_Time : Duration;
+                Include_Time_Fraction : Boolean := False) @key<return> String;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns a string form of the Elapsed_Time.
+The format is "Hour:Minute:Second", where each value
+is a 2-digit form of the value, including a leading '0', if needed.
+If Include_Time_Fraction is True, Sub_Seconds*100 is suffixed to the
+string as a 2-digit value following a '.'.
+If Elapsed_Time < 0.0, the result is Image (@key<abs> Elapsed_Time,
+Include_Time_Fraction) prefixed with "@en". If @key<abs> Elapsed_Time represents
+100 hours or more, the result is implementation-defined.
+],Old=[]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+New=[The result of Calendar.Formating.Image if its argument is represents more than
+100 hours.],Old=[]}]}
+@begin{ImplNote}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This cannot be implemented (directly) by calling
+    Ada.Calendar.Formatting.Split, since it may be out of the range of
+    Day_Duration, and thus the number of hours may be out of the range of
+    Hour_Number.],Old=[]}
+
+@Chg{Version=[2],New=[If a Duration value can represent more then 100 hours,
+    the implementation will need to define a format for the return of Image.],Old=[]}
+@end{ImplNote}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Keepnext@key<function> Value (Elapsed_Time : String) @key<return> Duration;],Old=[]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[@Trailing@;Returns a Duration value for the image given
+as Elapsed_Time. Constraint_Error is raised if the string is not formatted as
+described for Image, or the function cannot interpret the given string as a
+Duration value.],Old=[]}
+
+@end{DescribeCode}
+
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+@Chg{Version=[2],New=[An implementation should support leap seconds if the
+target system supports them. If leap seconds are not supported, Difference
+should return zero for Leap_Seconds, Split should return False for Leap_Second,
+and Time_Of should raise Time_Error if Leap_Second is True.],Old=[]}
+@end{ImplAdvice}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The time in the time zone known as Greenwich Mean Time (GMT)
+is generally equivalent to UTC time.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[The implementation-defined time zone of package Calendar
+may, but need not, be the local time zone. UTC_Time_Offset always returns the
+difference relative to the implementation-defined time zone of package
+Calendar. If UTC_Time_Offset does not raise Unknown_Zone_Error, UTC time
+can be safely calculated (within the accuracy of the underlying time-base).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[Calling Split on the results of subtracting
+Duration(UTC_Time_Offset*60) from Clock provides the components (hours,
+minutes, and so on) of the UTC time. In the United States, for example,
+UTC_Time_Offset will generally be negative.],Old=[]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[This is an illustration to help specify the value of
+  UTC_Time_Offset. A user should pass UTC_Time_Offset as the Time_Zone
+  parameter of Split, rather than trying to make the above calculation.],Old=[]}
+@end{Discussion}
+@end{Notes}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Packages Calendar.Time_Zones, Calendar.Arithmetic, and Calendar.Formatting
+are new.],Old=[]}
+@end{Extend95}
 
 
 @LabeledClause{Select Statements}
@@ -3251,12 +3822,17 @@ We kept @nt{select_alternative} as is, because
 with @nt<accept_alternative>.
 @end{DiffWord83}
 
+
 @LabeledSubClause{Timed Entry Calls}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @redundant[A @nt{timed_entry_call} issues an entry call that is
 cancelled if the call (or a requeue-with-abort of the call)
-is not selected before the expiration time is reached.
+is not selected before the expiration time is
+reached.@Chg{Version=[2],New=[ A procedure call may appear rather than
+an entry call for cases where the procedure might be implemented by
+an entry.],Old=[]}
 @IndexSee{Term=[time-out],See=(timed_entry_call)}]
 @end{Intro}
 
@@ -3268,25 +3844,71 @@ is not selected before the expiration time is reached.
    @Syn2{delay_alternative}
   @key{end select};"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @Syn{lhs=<entry_call_alternative>,rhs="
-  @Syn2{entry_call_statement} [@Syn2{sequence_of_statements}]"}
+  @Chg{Version=[2],New=[@Syn2{procedure_or_entry_call}],Old=[@Syn2{entry_call_statement}]} [@Syn2{sequence_of_statements}]"}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Syn{lhs=<@Chg{Version=[2],New=[procedure_or_entry_call],Old=[]}>,rhs="
+  @Chg{Version=[2],New=[@Syn2{procedure_call_statement} | @Syn2{entry_call_statement}],Old=[]}"}
 @end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[If a @nt{procedure_call_statement} is used for a
+@nt{procedure_or_entry_call}, the @SynI{procedure_}@nt{name} or
+@SynI{procedure_}@nt{prefix} of the @nt{procedure_call_statement} shall denote
+an entry renamed as a procedure, a formal subprogram, or (a view of) a
+primitive subprogram of a limited interface whose first parameter is a
+controlling parameter (see @RefSecNum{Dispatching Operations of Tagged Types}).],
+Old=[]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Chg{Version=[2],New=[This would be a confusing way to call a procedure, so we
+only allow it when it is possible that the procedure is actually an
+entry.],Old=[]}
+@end{Reason}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[If a @nt{procedure_call_statement} is used for a
+@nt{procedure_or_entry_call}, and the procedure is implemented by an entry,
+then the @SynI{procedure_}@nt{name}, or @SynI{procedure_}@nt{prefix} and
+possibly the first parameter of the @nt{procedure_call_statement}, determine
+the target object of the call and the entry to be called.],Old=[]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @Chg{Version=[2],New=[The above says @lquotes@;possibly the first
+    parameter@rquotes@;, because Ada allows entries
+    to be renamed and passed as formal subprograms. In those cases, the
+    task or protected object is implicit in the name of the routine; otherwise
+    the object is an explicit parameter to the call.],Old=[]}
+@end{Discussion}
+@end{StaticSem}
 
 @begin{RunTime}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[execution], Sec=(timed_entry_call)}
-For the execution of a @nt{timed_entry_call}, the @i(entry_)@nt<name>
-and the actual parameters are evaluated, as for a simple entry call
-(see @RefSecNum(Entry Calls)).
+For the execution of a @nt{timed_entry_call}, the @SynI(entry_)@nt<name>
+@Chg{Version=[2],New=[, @Syni{procedure_}@nt{name},
+or @Syni{procedure_}@nt{prefix} ,],Old=[]} and actual parameters are evaluated
+as for a simple entry call (see @RefSecNum(Entry Calls))@Chg{Version=[2],New=[
+or procedure call (see @RefSecNum{Subprogram Calls})],Old=[]}.
 The expiration time
 (see @RefSecNum(Delay Statements, Duration, and Time))
 for the call is determined by evaluating
 the @i(delay_)@nt<expression> of the
-@nt<delay_alternative>;
-the entry call is then issued.
+@nt<delay_alternative>@Chg{Version=[2],New=[. If the call is an entry call or
+a call on a procedure implemented by an entry,],Old=[;]}
+the entry call is then issued.@Chg{Version=[2],New=[Otherwise, the call
+proceeds as described in @RefSecNum{Subprogram Calls} for a procedure call,
+followed by the @nt{sequence_of_statements} of the @nt{entry_call_alternative},
+and the @nt{delay_alternative} @nt{sequence_of_statements} is ignored.],Old=[]}
 
-If the call is queued (including due to
-a requeue-with-abort),
+
+If the call is queued (including due to a requeue-with-abort),
 and not selected before the expiration
 time is reached, an attempt to cancel the call is made.
 If the call completes due to the cancellation, the optional
@@ -3322,6 +3944,14 @@ meant.
 This clause comes before the one for Conditional Entry Calls,
 so we can define conditional entry calls in terms of timed entry calls.
 @end{DiffWord83}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+A procedure call that might be an entry can be used in a timed or
+conditional entry call.],Old=[]}
+@end{Extend95}
+
 
 @LabeledSubClause{Conditional Entry Calls}
 
@@ -3390,6 +4020,7 @@ thereby simplifying the definition of what happens on
 a requeue-with-abort.
 @end{DiffWord83}
 
+
 @LabeledSubClause{Asynchronous Transfer of Control}
 
 @begin{Intro}
@@ -3409,25 +4040,38 @@ upon completion of an entry call or the expiration of a delay.]
 @Syn{lhs=<triggering_alternative>,rhs="@Syn2{triggering_statement} [@Syn2{sequence_of_statements}]"}
 
 
-@Syn{lhs=<triggering_statement>,rhs="@Syn2{entry_call_statement} | @Syn2{delay_statement}"}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@Syn{lhs=<triggering_statement>,rhs="@Chg{Version=[2],New=[@Syn2{procedure_or_entry_call}],Old=[@Syn2{entry_call_statement}]} | @Syn2{delay_statement}"}
 
 @Syn{lhs=<abortable_part>,rhs="@Syn2{sequence_of_statements}"}
 @end{Syntax}
 
 @begin{RunTime}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[execution],
   Sec=(asynchronous_select with an entry call trigger)}
+@Chg{Version=[2],New=[@PDefn2{Term=[execution],
+  Sec=(asynchronous_select with a procedure call trigger)}],Old=[]}
 For the execution of an @nt{asynchronous_select}
-whose @nt<triggering_statement> is an @nt<entry_call_statement>,
-the @i(entry_)@nt<name> and actual parameters are evaluated as
-for a simple entry call (see @RefSecNum(Entry Calls)), and the
-entry call is issued.
+whose @nt<triggering_statement> is @Chg{Version=[2],
+New=[a @nt<procedure_or_entry_call>],Old=[an @nt<entry_call_statement>]},
+the @Syni(entry_)@nt<name>@Chg{Version=[2],New=[, @Syni{procedure_}@nt{name},
+or @Syni{procedure_}@nt{prefix} ,],Old=[]} and actual parameters are evaluated
+as for a simple entry call (see @RefSecNum(Entry Calls))@Chg{Version=[2],New=[
+or procedure call (see @RefSecNum{Subprogram Calls}).
+If the call is an entry call or a call on a procedure implemented by an
+entry,],Old=[, and]} the entry call is issued.
 If the entry call is queued (or requeued-with-abort),
 then the @nt<abortable_part> is executed.
 @Redundant[If the entry call is selected immediately,
 and never requeued-with-abort,
-then the @nt<abortable_part> is never started.]
+then the @nt<abortable_part> is never started.]@Chg{Version=[2],New=[ If the
+call is on a procedure that is not implemented by an entry, the call proceeds
+as described in @RefSecNum{Subprogram Calls}, followed by the
+@nt{sequence_of_statements} of the @nt{triggering_alternative}@Redundant[, and
+the @nt{abortable_part} is never started].],Old=[]}
+
 
 @PDefn2{Term=[execution],
   Sec=(asynchronous_select with a delay_statement trigger)}
@@ -3527,6 +4171,14 @@ executed after the @nt<abortable_part> is left.
 @nt<Asynchronous_select> is new.
 @end{Extend83}
 
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+A procedure call that might be an entry can be used the
+@nt{triggering_statement} of an @nt<asynchronous_select>.],Old=[]}
+@end{Extend95}
+
+
 @LabeledClause{Abort of a Task - Abort of a Sequence of Statements}
 
 @begin{Intro}
@@ -3543,8 +4195,10 @@ causes a @nt{sequence_of_statements} to be aborted.]
 
 @begin{Resolution}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[expected type], Sec=(abort_statement task_name)}
-Each @SynI{task_}@nt{name} is expected to be of any task type@Redundant[;
+Each @SynI{task_}@nt{name} is expected to be of any task
+type@Chg{Version=[2],New=[ or task interface type],Old=[]}@Redundant[;
 they need not all be of the same task type.]
 
 @end{Resolution}
@@ -3748,15 +4402,26 @@ This clause has been rewritten to accommodate the concept
 of aborting the execution of a construct, rather than just of a task.
 @end{DiffWord83}
 
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Abort can be used on a task interface.],Old=[]}
+@end{Extend95}
+
+
 @LabeledClause{Task and Entry Attributes}
 
 @begin{RunTime}
 
-@leading@;For @PrefixType{a @nt<prefix> T that is of a task type
-@Redundant[(after any implicit dereference)]},
+@leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+For @ChgPrefixType{Version=[2],Kind=[Revised],Text=<a @nt<prefix> T that
+is of a task type
+@Chg{Version=[2],New=[or task interface type ],Old=[]}@Redundant[(after
+any implicit dereference)]>},
 the following attributes are defined:
 @begin{Description}
-@Attribute{Prefix=<T>, AttrName=<Callable>,
+@ChgAttribute{Version=[2], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<T>, AttrName=<Callable>, ARef=[AI95-00345],
   Text=<Yields the value True when the task denoted by T
                 is @i(callable), and False otherwise;>}
                 @PDefn2{Term=[task state], Sec=(callable)}
@@ -3765,7 +4430,8 @@ the following attributes are defined:
                 The value of this attribute is of the predefined
                 type Boolean.
 
-@Attribute{Prefix=<T>, AttrName=<Terminated>,
+@ChgAttribute{Version=[2], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<T>, AttrName=<Terminated>, ARef=[AI95-00345],
   Text=<Yields the value True if the task denoted by T is
                 terminated, and False otherwise. The value of this
                 attribute is of the predefined type Boolean.>}
@@ -3807,6 +4473,14 @@ in the @nt<entry_barrier> for the entry E should take precautions to
 allow for the evaluation of the @nt<condition> of the barrier both before
 and after queuing a given caller.
 @end{Notes}
+
+@begin{Extend95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+Task attributes can be used on a task interface.],Old=[]}
+@end{Extend95}
+
+
 
 @LabeledClause{Shared Variables}
 

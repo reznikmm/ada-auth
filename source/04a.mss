@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2004/11/12 06:10:16 $}
+@Comment{$Date: 2004/11/17 01:20:30 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -800,25 +800,28 @@ Attributes are defined throughout this International Standard,
 and are summarized in
 @RefSecNum{Language-Defined Attributes}.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00235]}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
-In general,
-the @nt<name> in a @nt<prefix> of an @nt<attribute_reference>
+In general, the @nt<name> in a @nt<prefix> of an @nt<attribute_reference>
 (or a @nt<range_attribute_reference>) has to be resolved
 without using any context.
 However, in the case of the Access attribute,
 the expected type for the @Chg{New=[@nt{prefix}],Old=[prefix]} has to be a
-single access type, and if it is an access-to-subprogram type
-(see @RefSecNum(Operations of Access Types))
-then the resolution of the @nt<name> can use the fact that
-the profile of the callable entity denoted by the @nt<prefix>
-has to be type conformant with the designated profile of the
-access type.
+single access type, and@Chg{Version=[2],New=[],Old=[ if it is an
+access-to-subprogram type (see @RefSecNum(Operations of Access Types)) then]}
+the resolution of the @nt<name> can use the fact that
+the@Chg{Version=[2],New=[ type of the object or the],Old=[]} profile of the
+callable entity denoted by the @nt<prefix>
+has to @Chg{Version=[2],New=[ match the designated type or],Old=[]}be type
+conformant with the designated profile of the access type.
 @Defn2{Term=[type conformance],Sec=(required)}
 @begin(TheProof)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00235]}
   In the general case, there is no @lquotes@;expected type@rquotes@; for
   the @nt<prefix> of an @nt<attribute_reference>.
   In the special case of 'Access,
-  there is an @lquotes@;expected profile@rquotes@; for the @nt<prefix>.
+  there is an @Chg{Version=[2],New=[@lquotes@;expected profile@rquotes@; or ],
+  Old=[]}@lquotes@;expected profile@rquotes@; for the @nt<prefix>.
 @end(TheProof)
 @begin(Reason)
   'Access is a special case, because without it,
@@ -892,6 +895,11 @@ The Ada 83 rule said that the
 was changed to allow implementations to continue to implement the Ada 83 Small
 attribute. This was always intended to be allowed (and never was
 disallowed).],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00235-01]}
+@Chg{Version=[2],New=[The note about resolving prefixes of attributes was
+updated to reflect that the prefix of an Access attribute now has an expected
+type (see @RefSecNum{Operations of Access Types}).],Old=[]}
 @end{DiffWord95}
 
 
@@ -5241,7 +5249,8 @@ has been moved to @RefSec{Storage Management}.
 
 @begin{Inconsistent95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[If the designated type has a constrained partial view,
+@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}If the
+designated type has a constrained partial view,
 the allocated object can be unconstrained. This might cause the object to
 take up a different amount of memory, and might cause the operations to work
 where they previously would have raised Constraint_Error. It's unlikely that
@@ -5907,8 +5916,9 @@ raising.
 
 @begin{Inconsistent95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00268-01]}
-@Chg{Version=[2],New=[Rounding of static real expressions is
-implementation-defined in Ada 2005, while it was specified as away from zero
+@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}Rounding of static
+real expressions is implementation-defined in Ada 2005, while it was specified
+as away from zero
 in Ada 95. This could make subtle differences in programs. However, the
 Ada 95 rule required rounding that (probably) differed from the target
 processor, thus creating anomalies where the value of a static expression

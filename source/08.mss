@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/11/13 06:47:16 $}
+@Comment{$Date: 2004/11/17 01:20:31 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1866,14 +1866,14 @@ an aliased variable is no longer necessarily safe, and thus may be illegal
 if the component may disappear or change shape, while the same renaming
 would have been legal in Ada 95. Note that most allocated
 objects are still constrained by their initial value (see @RefSecNum{Allocators},
-and thus have no change in the legality of renaming. For example, using the
-type T2 of the previous example:],Old=[]}
+and thus have no change in the legality of renaming for them. For example,
+using the type T2 of the previous example:],Old=[]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[   AT : @key{aliased} T2;
    C1_Ren : Integer @key{renames} AT.C1; -- @RI[Legal in Ada 2005, illegal in Ada 95]
    AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95, but does not in Ada 2005,]
-                                   -- @RI[so C1_Ren becomes invalid when assigned.]],Old=[]}
+                                   -- @RI[so C1_Ren becomes invalid when this is assigned.]],Old=[]}
 @end{Example}
 @end{Incompatible95}
 
