@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2004/12/06 03:57:38 $}
+@Comment{$Date: 2004/12/11 06:27:55 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -233,8 +233,8 @@ as parameters irrespective of their accessibility level.],Old=[]}]
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[Access result types have normal accessibility and
-thus don't have any special properties worth noting here.],Old=[]}
+@ChgAdded{Version=[2],Text=[Access result types have normal accessibility and
+thus don't have any special properties worth noting here.]}
 @end{Discussion}
 
 @leading@keepnext@Defn2{Term=[subtypes], Sec=(of a profile)}
@@ -247,8 +247,8 @@ The @i(subtypes of a profile) are:
   the designated subtype of the parameter type.
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
-  @Chg{Version=[2],New=[For any access parameters of an access-to-subprogram
-  type, the subtypes of the profile of the parameter type.],Old=[]}
+  @ChgAdded{Version=[2],Text=[For any access parameters of an access-to-subprogram
+  type, the subtypes of the profile of the parameter type.]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00318-02]}
   @Chg{Version=[2],New=[For any non-access result, the nominal subtype of the
@@ -273,8 +273,8 @@ is abstract; a subprogram declared by a @nt<subprogram_declaration>
 is not. See @RefSec{Abstract Types and Subprograms}.]
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[@Redundant[An @nt{overriding_indicator} is used to
-indicate whether overriding is intended. See @RefSec{Visibility}.]],Old=[]}
+@ChgAdded{Version=[2],Text=[@Redundant[An @nt{overriding_indicator} is used to
+indicate whether overriding is intended. See @RefSec{Visibility}.]]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -873,16 +873,16 @@ and makes these Intrinsic, thus forbidding 'Access.],Old=[]}
   within a @nt{protected_body}@Chg{Version=[2],New=[;],Old=[.]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
-  @Chg{Version=[2],New=[the view of a subprogram denoted by a
+  @ChgAdded{Version=[2],Text=[the view of a subprogram denoted by a
   @nt{selected_component} whose @nt{prefix} denotes an object or value of a
   tagged type, and whose @nt{selector_name} denotes a subprogram operating on
-  the type (see @RefSecNum{Selected Components}).],Old=[]}
+  the type (see @RefSecNum{Selected Components}).]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @Chg{Version=[2],New=[The profile of the @nt{selected_component} is
+    @ChgAdded{Version=[2],Text=[The profile of the @nt{selected_component} is
     different than the @lquotes@;real@rquotes profile of the subprogram, so
     we don't want to be able to take 'Access of it,
-    as that would require generating a wrapper of some sort.],Old=[]}
+    as that would require generating a wrapper of some sort.]}
   @end{Reason}
 
 @end{InnerItemize}
@@ -935,14 +935,14 @@ the reserved word @key(protected) in its definition.
 The default calling convention is @i{entry} for an entry.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[The calling convention for an access parameter of an
+@ChgAdded{Version=[2],Text=[The calling convention for an access parameter of an
 access-to-subprogram type is @i<protected> if the reserved word @key{protected}
 appears in its definition and otherwise is the convention of the subprogram
-that contains the parameter.],Old=[]}
+that contains the parameter.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The calling convention for other access-to-subprogram
-types is Ada.],Old=[]}
+@ChgAdded{Version=[2],Text=[The calling convention for other access-to-subprogram
+types is Ada.]}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0011],ARef=[AI95-00117-01]}
@@ -953,10 +953,10 @@ for a new dispatching operation of a tagged type is the convention of the type.]
 Old=[]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[The first rule is officially stated in
+@ChgAdded{Version=[1],Text=[The first rule is officially stated in
 @RefSecNum(Dispatching Operations of Tagged Types). The second is intended
 to make interfacing to foreign OOP languages easier, by making the default
-be that the type and operations all have the same convention.],Old=[]}
+be that the type and operations all have the same convention.]}
 @end{Reason}
 @end{Itemize}
 
@@ -1133,10 +1133,10 @@ conformant, subtype conformant, or fully conformant).
 @Defn2{Term=[full conformance], Sec=(for entries)}],Old=[]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-  @Chg{Version=[2],New=[This definition is used to define the conformance
+  @ChgAdded{Version=[2],Text=[This definition is used to define the conformance
   required for interfaces used in task and protected type definitions (see
   @RefSecNum{Task Units and Task Objects} and
-  @RefSecNum{Protected Units and Protected Objects}).],Old=[]}
+  @RefSecNum{Protected Units and Protected Objects}).]}
 @end{Discussion}
 @end{StaticSem}
 
@@ -1263,14 +1263,14 @@ an argument which is a @nt{direct_name} denoting a @nt{subprogram_body} of the
 same @nt{declarative_part}.],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This is allowed for Ada 83 compatibility. This is
-only a permission as this usage is considered obsolescent.],Old=[]}
+@ChgAdded{Version=[2],Text=[This is allowed for Ada 83 compatibility. This is
+only a permission as this usage is considered obsolescent.]}
 @end{Reason}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[We only need to allow this in @nt{declarative_part}s,
+@ChgAdded{Version=[2],Text=[We only need to allow this in @nt{declarative_part}s,
 because a body is only allowed in another body, and these all have
-@nt{declarative_part}s.],Old=[]}
+@nt{declarative_part}s.]}
 @end{Discussion}
 @end{ImplPerm}
 
@@ -1368,9 +1368,9 @@ can be an @nt<implicit_@!dereference> of an access-to-subprogram
 value.]
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00310-01]}
-@Chg{Version=[2],New=[This rule is talking about dispatching operations
+@ChgAdded{Version=[2],Text=[This rule is talking about dispatching operations
 (which is a static concept) and not about dispatching calls (which is a
-dynamic concept).],Old=[]}
+dynamic concept).]}
 @end{Discussion}
 @begin{Ramification}
 The function can be an operator,
@@ -1439,7 +1439,7 @@ space overhead (since it can usually be statically eliminated
 as dead code).
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 A @nt{function_call} denotes a constant, as defined in
 @RefSecNum{Return Statements}; the nominal subtype of the constant is
 given by the @Chg{Version=[2],New=[nominal],Old=[result]} subtype of the
@@ -1884,9 +1884,9 @@ an operator), or a @nt{qualified_expression} or parenthesized expression whose
 operand is one of these.],Old=[]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[In other words, if limited, the return expression
+  @ChgAdded{Version=[2],Text=[In other words, if limited, the return expression
   must produce a @lquotes@;new@rquotes@; object, rather than being the name
-  of a preexisting object (which would imply copying).],Old=[]}
+  of a preexisting object (which would imply copying).]}
 @end{Discussion}
 
 @end{Legality}
@@ -1928,7 +1928,7 @@ Constraint_Error @em (see @RefSecNum{Type Conversions}).
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[],Old=[If the result type is class-wide, then
+@ChgDeleted{Version=[2],Text=[If the result type is class-wide, then
 the tag of the result is the tag of the value
 of the @nt<expression>.]}
 
@@ -1938,7 +1938,7 @@ tagged type@Chg{Version=[2],New=[, the tag of the return object is that
 of the result type.],Old=[:]}
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[],Old=[@IndexCheck{Tag_Check}
+  @ChgDeleted{Version=[2],Text=[@IndexCheck{Tag_Check}
   If it is limited, then
   a check is made that the tag of the value of the return expression
   identifies the result type.
@@ -1946,7 +1946,7 @@ of the result type.],Old=[:]}
   Constraint_Error is raised if this check fails.]}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[],Old=[If it is nonlimited, then
+  @ChgDeleted{Version=[2],Text=[If it is nonlimited, then
   the tag of the result is that of the result type.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
@@ -1971,76 +1971,79 @@ of the result type.],Old=[:]}
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[],Old=[@leading@keepnext@Defn{return-by-reference type}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],
+Text=[@Defn{return-by-reference type}
 A type is a @i(return-by-reference) type if it
 is a descendant of one of the following:]}
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[],Old=[a tagged limited type;]}
+  @ChgDeleted{Version=[2],Text=[a tagged limited type;]}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[],Old=[a task or protected type;]}
+  @ChgDeleted{Version=[2],Text=[a task or protected type;]}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[],Old=[a nonprivate type with the reserved word
+  @ChgDeleted{Version=[2],Text=[a nonprivate type with the reserved word
   @b(limited) in its declaration;]}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[],Old=[a composite type with a subcomponent
+  @ChgDeleted{Version=[2],Text=[a composite type with a subcomponent
   of a return-by-reference type;]}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[],Old=[a private type
+  @ChgDeleted{Version=[2],Text=[a private type
   whose full type is a return-by-reference type.]}
 @end(itemize)
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[
+  @ChgDeleted{Version=[2],Text=[
   The above rules are such that there are no "Ada 83" types other than
   those containing tasks that are return-by-reference. This helps
   to minimize upward incompatibilities relating to return-by-reference.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[],Old=[@leading@IndexCheck{Accessibility_Check}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[IndexCheck{Accessibility_Check}
 If the result type is a return-by-reference type,
 then a check is made that the return expression is one of the
 following:]}
 @begin(itemize)
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[],Old=[a @nt{name} that denotes an object view
+  @ChgDeleted{Version=[2],Text=[a @nt{name} that denotes an object view
   whose accessibility level is not deeper than that of the master that
   elaborated the function body; or]}
   @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00316-01]}
-  @Chg{Version=[2],New=[This rule was unnecessarily confusing, and the
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00316-01]}
+  @ChgNote{This really wasn't in the previous version, but we don't want it
+  in a version without deletions shown...}
+  @ChgDeleted{Version=[2],Text=[This rule was unnecessarily confusing, and the
   parenthetical remark "(or a value with an associated object, see 6.2)"
-  was added @em and then the entire concept was deleted.],Old=[]}
+  was added @em and then the entire concept was deleted.]}
   @end{Discussion}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[],Old=[a parenthesized expression or
+  @ChgDeleted{Version=[2],Text=[a parenthesized expression or
   @nt{qualified_expression} whose operand is one of these kinds of expressions.]}
 
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[],Old=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@ChgDeleted{Version=[2],Text=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The exception Program_Error is raised if this check fails.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[Compare the definition of return-by-reference
+  @ChgDeleted{Version=[2],Text=[Compare the definition of return-by-reference
   with that of by-reference.]}
 
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[The return-by-reference types are all limited types
+  @ChgDeleted{Version=[2],Text=[The return-by-reference types are all limited types
   except those that are limited only because of a limited
   private type with a nonlimited untagged full type.]}
 @end{Discussion}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[@PDefn{generic contract issue}
+  @ChgDeleted{Version=[2],Text=[@PDefn{generic contract issue}
   This check can often be performed at compile time. It is
   defined to be a run-time check to avoid generic contract model
   problems. In a future version of the standard, we anticipate
@@ -2050,20 +2053,20 @@ The exception Program_Error is raised if this check fails.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
-@Chg{Version=[2],New=[If the result type is class-wide, a check is made that
+@ChgAdded{Version=[2],Text=[If the result type is class-wide, a check is made that
 the accessibility level of the type identified by the tag of the result is not
 deeper than that of the master that elaborated the function body. If this
 check fails, Program_Error is raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@IndexCheck{Accessibility_Check}],Old=[]}
+@IndexCheck{Accessibility_Check}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[The check prevents the returned object from outliving
-  its type.],Old=[]}
+  @ChgAdded{Version=[2],Text=[The check prevents the returned object from
+  outliving its type.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[],Old=[For a function with a return-by-reference result type
+@ChgDeleted{Version=[2],Text=[For a function with a return-by-reference result type
 the result is returned by reference;
 that is, the function call denotes a constant view of the
 object associated
@@ -2077,7 +2080,7 @@ the point of the @nt{return_statement}, and the function call denotes
 that object.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted]}
-  @Chg{Version=[2],New=[],Old=[The assignment operation does the necessary
+  @ChgDeleted{Version=[2],Text=[The assignment operation does the necessary
   value adjustment, as described in
   @RefSec{User-Defined Assignment and Finalization}.
   @RefSecNum{Completion and Finalization}
@@ -2195,51 +2198,51 @@ object.],Old=[]}
 at least.}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@Chg{Version=[2],New=[A @nt{pragma} No_Return indicates that a
-procedure can return only by propagating an exception.],Old=[]}
+@ChgAdded{Version=[2],Text=[A @nt{pragma} No_Return indicates that a
+procedure can return only by propagating an exception.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@nt{Pragma} No_Deposit will have to wait for Ada 2015. :-)],Old=[]}
+@ChgAdded{Version=[2],Text=[@nt{Pragma} No_Deposit will have to wait for Ada 2015. :-)]}
 @end{Discussion}
 
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@Chg{Version=[2],New=[The form of a @nt{pragma} No_Return, which is a program unit
-pragma (see @RefSecNum{Pragmas and Program Units}), is as follows:],Old=[]}
+@ChgAdded{Version=[2],Text=[The form of a @nt{pragma} No_Return, which is a program unit
+pragma (see @RefSecNum{Pragmas and Program Units}), is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{local_}@Syn2{name}{, @SynI{local_}@Syn2{name}]);'',Old=<>}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{local_}@Syn2{name}{, @SynI{local_}@Syn2{name}]);'',Old=<>}
 @end{Syntax}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@Chg{Version=[2],New=[The @nt{pragma} shall apply to one or more procedures or
-generic procedures.],Old=[]}
+@ChgAdded{Version=[2],Text=[The @nt{pragma} shall apply to one or more procedures or
+generic procedures.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@Chg{Version=[2],New=[If a @nt{pragma} No_Return applies to a procedure or a generic procedure, there
-shall be no @nt<return_statement>s that apply to that procedure.],Old=[]}
+@ChgAdded{Version=[2],Text=[If a @nt{pragma} No_Return applies to a procedure or a generic procedure, there
+shall be no @nt<return_statement>s that apply to that procedure.]}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@Chg{Version=[2],New=[If a @nt{pragma} No_Return applies to a generic procedure, pragma No_Return
-applies to all instances of that generic procedure.],Old=[]}
+@ChgAdded{Version=[2],Text=[If a @nt{pragma} No_Return applies to a generic procedure, pragma No_Return
+applies to all instances of that generic procedure.]}
 @end{StaticSem}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
-@Chg{Version=[2],New=[If a @nt{pragma} No_Return applies to a procedure, then the exception
+@ChgAdded{Version=[2],Text=[If a @nt{pragma} No_Return applies to a procedure, then the exception
 Program_Error is raised at the point of the call of the procedure if the
-procedure body completes normally.],Old=[]}
+procedure body completes normally.]}
 @end{RunTime}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-@nt{Pragma} No_Return is new.],Old=[]}
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+@nt{Pragma} No_Return is new.]}
 @end{Extend95}
 
 
@@ -2329,8 +2332,8 @@ as the result type is not Boolean.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
-@Chg{Version=[2],New=[A @nt<null_procedure_declaration> provides a shorthand
-to declare a procedure with an empty body.],Old=[]}
+@ChgAdded{Version=[2],Text=[A @nt<null_procedure_declaration> provides a shorthand
+to declare a procedure with an empty body.]}
 @end{Intro}
 
 @begin{Syntax}
@@ -2341,34 +2344,34 @@ rhs="@Chg{Version=[2],New=<procedure_specification @key{is} @key{null};>,Old=<>}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
-@Chg{Version=[2],New=[A @nt<null_procedure_declaration> declares a @i<null
+@ChgAdded{Version=[2],Text=[A @nt<null_procedure_declaration> declares a @i<null
 procedure>.@Defn{null procedure}@Defn2{Term=[procedure],Sec=[null]}
-A completion is not allowed for a @nt<null_procedure_declaration>.],Old=[]}
+A completion is not allowed for a @nt<null_procedure_declaration>.]}
 @end{StaticSem}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[The execution of a null procedure is invoked by a subprogram call.
+@ChgAdded{Version=[2],Text=[The execution of a null procedure is invoked by a subprogram call.
 For the execution of a subprogram call on a null procedure, the execution of
-the @nt<subprogram_body> has no effect.],Old=[]}
+the @nt<subprogram_body> has no effect.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Thus, a null procedure is equivalent to the body],Old=[]}
+@ChgAdded{Version=[2],Text=[Thus, a null procedure is equivalent to the body]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{begin}
+@ChgAdded{Version=[2],Text=[@key{begin}
    @key{null};
-@key{end};],Old=[]}
+@key{end};]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[with the exception that a null procedure can be used in
-place of a procedure specification.],Old=[]}
+@ChgAdded{Version=[2],Text=[with the exception that a null procedure can be used in
+place of a procedure specification.]}
 @end{Ramification}
 @end{RunTime}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Null procedures are new.],Old=[]}
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+Null procedures are new.]}
 @end{Extend95}
 

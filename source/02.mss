@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2004/12/09 06:13:21 $}
+@Comment{$Date: 2004/12/11 06:27:52 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -755,6 +755,9 @@ in the sequence.
 A @i(null string literal) is a @nt<string_literal> with no
 @nt<string_element>s between the quotation marks.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[No modification is performed on the
+sequence of characters in a @nt{string_literal}.]}
 @end{StaticSem}
 
 @begin{Notes}
@@ -782,6 +785,14 @@ which don't have a defined value.
 
 The syntax is described differently.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[We explicitly say that the characters of a
+@nt{string_literal} should be used as is. In particular, no normalization
+or folding should be performed on a @nt{string_literal}.]}
+@end{DiffWord95}
+
 
 @LabeledClause{Comments}
 
@@ -1206,6 +1217,9 @@ informative annex.
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Type=[Leading],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00284-02]}
+@ChgNote{The table of words has no paragraph number, so we need to put the
+change here}
 @Leading
 @Defn{reserved word}
 The following are the @i{reserved words}
@@ -1264,6 +1278,7 @@ The following are the @i{reserved words}
 
 @noparanum@key{if}
 @key{in}
+@Chg{Version=[2],New=[@key{interface}],Old=[]}
 @key{is}
 
 
@@ -1282,6 +1297,7 @@ The following are the @i{reserved words}
 @key{or}
 @key{others}
 @key{out}
+@Chg{Version=[2],New=[@key{overriding}],Old=[]}
 
 @noparanum@key{package}
 @key{pragma}
@@ -1303,6 +1319,7 @@ The following are the @i{reserved words}
 @noparanum@key{select}
 @key{separate}
 @key{subtype}
+@Chg{Version=[2],New=[@key{synchronized}],Old=[]}
 
 @noparanum@key{tagged}
 @key{task}
@@ -1346,3 +1363,14 @@ The following words are not reserved in Ada 83, but are reserved in Ada
 The clause entitled @lquotes@;Allowed Replacements of Characters@rquotes@; has been moved
 to @RefSec(Obsolescent Features).
 @end{DiffWord83}
+
+@begin{Incompatible95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
+@ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 83}
+The following words are not reserved in Ada 95, but are reserved in Ada
+2005: @key{interface}, @key{overriding}, @key{synchronized}. A special
+allowance is made for @key{pragma} Interface (see @RefSecNum{Pragma Interface}).
+Uses of these words as identifiers will need to be changed, but we do not
+expect them to be common.]}
+@end{Incompatible95}
+

@@ -1,19 +1,19 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2004/12/08 01:09:47 $ $Author: Randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2004/12/11 06:27:57 $ $Author: Randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2004/12/08 01:09:47 $}
+@Comment{$Date: 2004/12/11 06:27:57 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
-@Chg{Version=[2],New=[@Defn{environment variable}
+@ChgAdded{Version=[2],Text=[@Defn{environment variable}
 The package Environment_Variables allows a program to
 read or modify the environment variables. Environment variables are name-value
 pairs, where both the name and value are strings. The definition of what
 constitutes an @i{environment variable}, and the meaning of the name and value,
-are implementation defined.],Old=[]}
+are implementation defined.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
 definition and meaning of an environment variable.],Old=[]}]}
 @end{Intro}
@@ -24,25 +24,25 @@ definition and meaning of an environment variable.],Old=[]}]}
 Environment_Variables has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{package} Ada.Environment_Variables @key{is}@ChildUnit{Parent=[Ada],Child=[Environment_Variables]}
-   @key{pragma} Preelaborate (Environment_Variables);],Old=[]}
+@ChgAdded{Version=[2],Text=[@key{package} Ada.Environment_Variables @key{is}@ChildUnit{Parent=[Ada],Child=[Environment_Variables]}
+   @key{pragma} Preelaborate(Environment_Variables);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key{function} @AdaSubDefn{Value} (Name : @key{in} String) @key{return} String;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Value} (Name : @key{in} String) @key{return} String;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key{function} @AdaSubDefn{Exists} (Name : @key{in} String) @key{return} Boolean;],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Exists} (Name : @key{in} String) @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key{procedure} @AdaSubDefn{Set} (Name : @key{in} String; Value : @key{in} String);],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Set} (Name : @key{in} String; Value : @key{in} String);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key{procedure} @AdaSubDefn{Clear} (Name : @key{in} String);
-   @key{procedure} @AdaSubDefn{Clear};],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Clear} (Name : @key{in} String);
+   @key{procedure} @AdaSubDefn{Clear};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @key{procedure} @AdaSubDefn{Iterate} (
-       Process : @key{not null access procedure} (Name, Value : @key{in} String));],Old=[]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Iterate} (
+       Process : @key{not null access procedure} (Name, Value : @key{in} String));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[@key{end} Ada.Environment_Variables;]}
@@ -205,7 +205,7 @@ perform any buffering of the environment variables.]}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Package Ada.Environment_Variables is new.],Old=[]}
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+Package Ada.Environment_Variables is new.]}
 @end{Extend95}
 

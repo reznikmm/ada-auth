@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/09 06:13:22 $}
+@Comment{$Date: 2004/12/11 06:27:52 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1759,8 +1759,8 @@ without an initialization expression.
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Corrected wording to say that
-per-object constraints are elaborated (not evaluated).],Old=[]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected wording to say that
+per-object constraints are elaborated (not evaluated).]}
 @end{DiffWord95}
 
 
@@ -3782,10 +3782,25 @@ the operations of any integer type.]
 The @i(position number) of an integer value is equal to the value.
 
 @begin{Wide}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00340-01]}
 @Leading@keepnext@;For @PrefixType{every modular subtype S},
-the following attribute is defined:
+the following @Chg{Version=[2],New=[attributes are],Old=[attribute is]} defined:
 @end{Wide}
 @begin(description)
+@ChgAttribute{Version=[2],Kind=[Added],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Mod>, ARef=[AI95-00340-01],
+  Text=[@ChgAdded{Version=[2],Text=[S'Mod denotes a function with the following specification:]}
+
+@begin(Descexample)
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key{function} S'Mod (@RI{Arg} : @RI{universal_integer})
+  @key{return} S'Base]}
+@end(Descexample)
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],NoPrefix=[T],Text=[This function returns @i{Arg}
+  @key{mod} S'Modulus, as a value of the type of S.]}]}@Comment{end attribute Mod}
+
 @Attribute{Prefix=<S>, AttrName=<Modulus>,
   Text=[S'Modulus yields the modulus of the type of S, as a value of the
         type @i(universal_integer).]}
@@ -4039,10 +4054,18 @@ to pushing an explicit equivalence between integer type
 definition and normal type derivation.
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00340-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The Mod attribute is new. It eases mixing of signed and unsigned values in
+  an expression, which can be difficult as there may be no type which
+  can contain all of the values of both of the types involved.]}
+@end{Extend95}
+
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0003],ARef=[AI95-00095-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Added additional permissions for
-modular types on one's complement machines.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0003],ARef=[AI95-00095-01]}
+  @Chg{Version=[2],New=[@b<Corrigendum:> Added additional permissions for
+  modular types on one's complement machines.],Old=[]}
 @end{DiffWord95}
 
 
@@ -4609,8 +4632,8 @@ Other attributes of floating point types are defined in
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0004],ARef=[AI95-00203-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Corrected the formula for Digits when
-the Machine_Radix is 10.],Old=[]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the formula for Digits when
+the Machine_Radix is 10.]}
 @end{DiffWord95}
 
 
@@ -4666,9 +4689,13 @@ the @nt<expression>s given after the
 reserved words @key(delta) and @key(digits) shall be static; their
 values shall be positive.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00100-01]}
 @Defn2{Term=[small], Sec=(of a fixed point type)}
 The set of values of a fixed point type comprise the integral multiples
-of a number called the @i(small) of the type.
+of a number called the @i(small) of the
+type.@Chg{Version=[2],New=[@PDefn2{Term=[machine numbers],Sec=[of a fixed point type]}
+The @i{machine numbers} of a fixed point type are the values of the type that
+can be represented exactly in every unconstrained variable of the type.],Old=[]}
 @Defn{ordinary fixed point type}
 For a type defined by an @nt<ordinary_fixed_point_definition>
 (an @i(ordinary) fixed point type), the @i(small) may be specified
@@ -4919,6 +4946,13 @@ Obsolescent features (to be compatible with Ada 83's
 @nt<fixed_point_constraint>).
 @end{DiffWord83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00100-01]}
+@ChgAdded{Version=[2],Text=[Added wording to define the
+machine numbers of fixed point types; this is needed by the static
+evaluation rules.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Operations of Fixed Point Types}
 
@@ -5061,6 +5095,6 @@ Other attributes of fixed point types are defined in
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0005],ARef=[AI95-00054-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that @i<small> may be
-specified only for ordinary fixed point types.],Old=[]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that @i<small> may be
+specified only for ordinary fixed point types.]}
 @end{DiffWord95}

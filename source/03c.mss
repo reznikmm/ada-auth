@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/10 06:13:43 $}
+@Comment{$Date: 2004/12/11 06:27:54 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.3 $}
+@Comment{$Revision: 1.4 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -715,12 +715,19 @@ Tagged types are a new concept.
   inconsistency.]}
 @end{Inconsistent95}
 
-@begin{Extend95}
+@begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Constant No_Tag, and functions Parent_Tag, Descendant_Tag, and
-  Is_Descendant_At_Same_Level are newly added to Ada.Tags.]}
+  Is_Descendant_At_Same_Level are newly added to Ada.Tags.
+  If Ada.Tags is referenced in a @nt{use_clause}, and an entity @i<E> with the
+  same @nt{defining_identifier} as a new entity in Ada.Tags is defined in a
+  package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
+  longer be use-visible, resulting in errors. This should be rare and is easily
+  fixed if it does occur.]}
+@end{Incompatible95}
 
+@begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
   @ChgAdded{Version=[2],Text=[Ada.Tags is now defined to be preelaborated.]}
 
@@ -2862,7 +2869,8 @@ nonlimited.],Old=[]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}The @nt{null_exclusion} is
-new. It is most useful to declare that parameters cannot be @key{null},
+new. It can be used in both anonymous and named access type definitions.
+It is most useful to declare that parameters cannot be @key{null},
 thus eliminating the need for checks on use.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}

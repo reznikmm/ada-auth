@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:04 $}
+@Comment{$Date: 2004/12/11 06:27:55 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -899,9 +899,9 @@ completely defined, unless the derived type is a private extension.
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[Added @nt{interface_list} to private extensions to
+@ChgAdded{Version=[2],Text=[Added @nt{interface_list} to private extensions to
 support interfaces and multiple inheritance
-(see @RefSecNum{Interface Types}).],Old=[]}
+(see @RefSecNum{Interface Types}).]}
 @end{DiffWord95}
 
 @LabeledSubClause{Private Operations}
@@ -1123,7 +1123,8 @@ in more than one place:
 @end{Example}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0019],ARef=[AI95-00033-01]}
-@Chg{New=[We say @i<immediately> within the declarative region in order that
+@ChgAdded{Version=[1],Type=[Leading],Text=[We say @i<immediately> within
+the declarative region in order that
 types do not gain operations within a nested scope. Consider:],Old=[]}
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}
@@ -1486,11 +1487,12 @@ make both the partial @i{and} full views limited.
 
 @begin{Legality}
 
-@Leading@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[In the following contexts, an @nt{expression} of a limited
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[In the following contexts,
+an @nt{expression} of a limited
 type is not permitted unless it is an @nt{aggregate}, a @nt{function_call},
 or a parenthesized @nt{expression} or @nt{qualified_expression} whose operand
-is permitted by this rule:],Old=[]}
+is permitted by this rule:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -1527,9 +1529,9 @@ formal object of mode @b{in} (see @RefSecNum{Formal Objects})],Old=[]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[All of these contexts normally require copying; by
+@ChgAdded{Version=[2],Text=[All of these contexts normally require copying; by
 restricting the uses as above, we can require the new object to be
-built-in-place.],Old=[]}
+built-in-place.]}
 @end{Discussion}
 @end{Itemize}
 
@@ -1590,21 +1592,21 @@ a limited type.]
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[
+@ChgAdded{Version=[2],Text=[
 For an @nt{aggregate} of a limited type used to initialize an object as allowed
 above, the implementation shall not create a separate anonymous object for the
 @nt{aggregate}. For a @nt{function_call} of a type with a part that is of a
 task, protected, or limited record type that is used to initialize an object as
 allowed above, the implementation shall not create a separate return object
 (see 6.5) for the @nt{function_call}. The @nt{aggregate} or @nt{function_call}
-shall be constructed directly in the new object.],Old=[]}
+shall be constructed directly in the new object.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[For a @nt{function_call}, we only require
+@ChgAdded{Version=[2],Text=[For a @nt{function_call}, we only require
 @i{build-in-place}@Defn{build-in-place} for a limited type that would have
 been a return-by-reference type in Ada 95. We do this because
 @Chg{Version=[2],New=[],Old=[Tucker said so ]}we want to mimimize disruption
-to Ada 95 implementations and users.],Old=[]}
+to Ada 95 implementations and users.]}
 @end{Discussion}
 @end{ImplReq}
 
@@ -1618,35 +1620,35 @@ object.],
 Old=[@leading@keepnext@;The following are consequences of the rules for limited types:]}
 @begin{Honest}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This isn't quite true if the type can become nonlimited
-(see below); @nt{function_call}s only are required to be build-in-place for
-@lquotes@;really@rquotes@; limited types.],Old=[]}
+@ChgAdded{Version=[2],Text=[This isn't quite true if the type can become
+nonlimited (see below); @nt{function_call}s only are required to be
+build-in-place for @lquotes@;really@rquotes@; limited types.]}
 @end{Honest}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[],Old=[An initialization expression is not allowed in an
+@ChgDeleted{Version=[2],Text=[An initialization expression is not allowed in an
 @nt{object_declaration} if the type of the object is limited.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[],Old=[A default expression is not allowed in a
+@ChgDeleted{Version=[2],Text=[A default expression is not allowed in a
 @nt{component_declaration} if the type of the record component is limited.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[],Old=[An initialized allocator is not allowed if the
+@ChgDeleted{Version=[2],Text=[An initialized allocator is not allowed if the
 designated type is limited.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[],Old=[A generic formal parameter of mode @key[in] must
+@ChgDeleted{Version=[2],Text=[A generic formal parameter of mode @key[in] must
 not be of a limited type.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[],Old=[@nt{Aggregate}s are not available for a limited
+@ChgDeleted{Version=[2],Text=[@nt{Aggregate}s are not available for a limited
 composite type. Concatenation is not available for a limited array type.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[],Old=[The rules do not exclude a @nt{default_expression}
+@ChgDeleted{Version=[2],Text=[The rules do not exclude a @nt{default_expression}
 for a formal parameter of a limited type; they do not exclude a deferred
 constant of a limited type if the full declaration of the constant is of a
 nonlimited type.]}
@@ -1747,14 +1749,15 @@ than being a subclause of
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
+@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 Limited types now have an assignment operation, but its use is restricted
 such that all uses are build-in-place. This is
 accomplished by restricting uses to @nt{aggregate}s and @nt{function_call}s.
 @nt{Aggregate}s were not allowed to have a limited type in Ada 95, which
 causes a compatibility issue discussed in @RefSec{Aggregates}.
-Compatibility issues with @nt{return_statement}s are discussed
-in @RefSec{Return Statements}.],Old=[]}
+Compatibility issues with @nt{return_statement}s for limited
+@nt{function_call}s are discussed
+in @RefSec{Return Statements}.]}
 @end{Extend95}
 
 
@@ -1884,8 +1887,8 @@ of Controlled only.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
-@Chg{Version=[2],New=[@leading@;A type is said to @i{need finalization}
-if:@Defn{Needs Finalization}@Defn2{Term=[type],Sec=[needs finalization]}],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[A type is said to
+@i{need finalization} if:@Defn{Needs Finalization}@Defn2{Term=[type],Sec=[needs finalization]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
@@ -1905,9 +1908,10 @@ explicitly defined to need finalization.],Old=[]}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The fact that a type needs finalization does not require
+@ChgAdded{Version=[2],Text=[The fact that a type needs finalization
+does not require
 it to be implemented with a controlled type. It just has to be recognized by
-the No_Nested_Finalization restriction.],Old=[]}
+the No_Nested_Finalization restriction.]}
 @end{Ramification}
 
 @end{Itemize}
@@ -1965,8 +1969,7 @@ all. Instead the assignment adjusts B's value;
 that is, it applies Adjust to B.X, B.Y, and B.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0021],ARef=[AI95-00182-01]}
-@Chg{New=[The @nt{ancestor_part} of an @nt{extension_aggregate} is handled similarly.],
-Old=[]}
+@ChgAdded{Version=[1],Text=[The @nt{ancestor_part} of an @nt{extension_aggregate} is handled similarly.]}
 @end{Discussion}
 
 Initialize and other initialization
@@ -2102,16 +2105,15 @@ contract model violations.
 
 @begin{ImplReq}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0022],ARef=[AI95-00083-01]}
-@Chg{New=[For an @nt{aggregate} of a controlled type whose value is assigned,
+@ChgAdded{Version=[1],Text=[For an @nt{aggregate} of a controlled type whose value is assigned,
 other than by an @nt{assignment_statement} or a @nt{return_statement}, the
 implementation shall not create a separate anonymous object for the
 @nt{aggregate}. The aggregate value shall be constructed directly in the target
-of the assignment operation and Adjust is not called on the target object.],
-Old=[]}
+of the assignment operation and Adjust is not called on the target object.]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[This is necessary to prevent elaboration problems with deferred
-constants of controlled types. Consider:],Old=[]}
+@ChgAdded{Version=[1],Type=[Leading],Text=[This is necessary to prevent
+elaboration problems with deferred constants of controlled types. Consider:]}
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@key[package] P @key[is]
@@ -2210,55 +2212,55 @@ by using one of the following permissions.],Old=[]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00147-01]}
-@Chg{Version=[2],New=[@leading@;Furthermore, an implementation is permitted to
+@ChgAdded{Version=[2],Type=[Leading],Text=[Furthermore, an implementation is
+permitted to
 omit implicit Initialize, Adjust, and Finalize calls and associated assignment
-operations on an object of nonlimited controlled type provided that: ],Old=[]}
+operations on an object of nonlimited controlled type provided that:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[any omitted Initialize call is not a call on a
-user-defined Initialize procedure, an],Old=[]}
+@ChgAdded{Version=[2],Text=[any omitted Initialize call is not a call on a
+user-defined Initialize procedure, an]}
 @begin{Honest}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This does not apply to any calls to a user-defined
+@ChgAdded{Version=[2],Text=[This does not apply to any calls to a user-defined
 Initialize routine that happen to occur in an Adjust or Finalize routine. It
 is intended that it is never necessary to look inside of an Adjust or Finalize
-routine to determine if the call can be omitted.],Old=[]}
+routine to determine if the call can be omitted.]}
 @end{Honest}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[We don't want to eliminate objects for which the
-Initialize might have side effects (such as locking a resource).],Old=[]}
+@ChgAdded{Version=[2],Text=[We don't want to eliminate objects for which the
+Initialize might have side effects (such as locking a resource).]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[any usage of the value of the object after the implicit
+@ChgAdded{Version=[2],Text=[any usage of the value of the object after the implicit
 Initialize or Adjust call and before any subsequent Finalize call on the object
-does not change the external effect of the program, and],Old=[]}
+does not change the external effect of the program, and]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[after the omission of such calls and operations, any
+@ChgAdded{Version=[2],Text=[after the omission of such calls and operations, any
 execution of the program that executes an Initialize or Adjust call on an
 object or initializes an object by an aggregate will also later execute a
 Finalize call on the object and will always do so prior to assigning a new
-value to the object, and],Old=[]}
+value to the object, and]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[the assignment operations associated with omitted Adjust
-calls are also omitted.],Old=[]}
+@ChgAdded{Version=[2],Text=[the assignment operations associated with omitted Adjust
+calls are also omitted.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This permission applies to Adjust and Finalize calls even
-if the implicit calls have additional external effects.],Old=[]}
+@ChgAdded{Version=[2],Text=[This permission applies to Adjust and Finalize calls even
+if the implicit calls have additional external effects.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The goal of the above permissions is to allow
+@ChgAdded{Version=[2],Text=[The goal of the above permissions is to allow
 typical dead assignment and dead variable removal algorithms to work for
 nonlimited controlled types. We require that lquotes@;pairs@rquotes@; of
 Initialize/Adjust/Finalize operations are removed. (These aren't always pairs,
-which is why we talk about @lquotes@;any execution of the program@rquotes@;.)],
-Old=[]}
+which is why we talk about @lquotes@;any execution of the program@rquotes@;.)]}
 @end{Reason}
 
 @end{ImplPerm}
@@ -2271,38 +2273,38 @@ Controlled types and user-defined finalization are new to Ada 95.
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that Ada.Finalization is
-a remote types package.],Old=[]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Ada.Finalization is
+a remote types package.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0021],ARef=[AI95-00182-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to clarify that the
-default initialization (whatever that is) of an ancestor part is used.],Old=[]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to clarify that the
+default initialization (whatever that is) of an ancestor part is used.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0022],ARef=[AI95-00083-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that Adjust is never called
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Adjust is never called
 on an aggregate used for the initialization of an object or subaggregate,
-or passed as a parameter.],Old=[]}
+or passed as a parameter.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00147-01]}
-@Chg{Version=[2],New=[Additional optimizations are allowed for nonlimited
+@ChgAdded{Version=[2],Text=[Additional optimizations are allowed for nonlimited
 controlled types. These allow traditional dead variable elimination to
-be applied to such types.],Old=[]}
+be applied to such types.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
-@Chg{Version=[2],New=[Types Controlled and Limited_Controlled now have
+@ChgAdded{Version=[2],Text=[Types Controlled and Limited_Controlled now have
 Preelaborable_Initialization, so that they can be used in preelaborated
-packages.],Old=[]}
+packages.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
-@Chg{Version=[2],New=[The operations of types Controlled and Limited_Controlled
+@ChgAdded{Version=[2],Text=[The operations of types Controlled and Limited_Controlled
 are not declared as null procedures (see @RefSecNum{Null Procedures}) to make
 the semantics clear (and to provide a good example of what null procedures can
-be used for.],Old=[]}
+be used for.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
-@Chg{Version=[2],New=[Types that need finalization are defined; this is
+@ChgAdded{Version=[2],Text=[Types that need finalization are defined; this is
 used by the No_Nested_Finalization restriction
-(see @RefSec{Tasking Restrictions}).],Old=[]}
+(see @RefSec{Tasking Restrictions}).]}
 @end{DiffWord95}
 
 
@@ -2377,11 +2379,11 @@ complete, and before it is left.
   and we don't want those objects to escape outside the rendezvous.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
-  @Chg{Version=[2],New=[Similarly, @nt{expression}s and @nt{simple_statement}s
+  @ChgAdded{Version=[2],Text=[Similarly, @nt{expression}s and @nt{simple_statement}s
   are masters so that objects created by subprogram calls (in @nt{aggregate}s,
   @nt{allocator}s for anonymous access-to-object types, and so on) are
   finalized and have their tasks awaited before the @nt{expression}s or
-  @nt{simple_statement}s is left.],Old=[]}
+  @nt{simple_statement}s is left.]}
 @end{Reason}
 
 @Defn2{Term=[finalization], Sec=(of a master)}
@@ -2570,12 +2572,12 @@ if that is a @nt{compound_statement},
 execution of any @nt{statement} within the @nt{compound_statement}.]}
 @begin{Honest}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00162-01]}@ChgNote{Should be ChgDeleted}
-@Chg{Version=[2],New=[],Old=[@leading@;This is not to be construed as permission to call Finalize
+@ChgDeleted{Version=[2],Text=[@leading@;This is not to be construed as permission to call Finalize
 asynchronously with respect to normal user code.
 For example,]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@Chg{Version=[2],New=[],Old=[@key[declare]
+@ChgDeleted{Version=[2],Text=[@key[declare]
     X : Some_Controlled_Type := F(G(...));
     --@RI{ The anonymous objects created for F and G are finalized}
     --@RI{ no later than this point.}
@@ -2586,7 +2588,7 @@ For example,]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Deleted]}
-@Chg{Version=[2],New=[],Old=[
+@ChgDeleted{Version=[2],Text=[
 The anonymous object for G should not be finalized at some random
 point in the middle of the body of F,
 because F might manipulate the same data structures as
@@ -2661,7 +2663,8 @@ due to be performed are performed, and then Program_Error is raised.
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024],ARef=[AI95-00193-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
-@Chg{New=[In the case of assignments that are part of initialization, there is
+@ChgAdded{Version=[1],Text=[In the case of assignments that are part of
+initialization, there is
 no need to complete all adjustments if one propagates an exception, as the
 object will immediately be finalized. So long as a subcomponent is not going
 to be finalized, it need not be adjusted, even if it is initialized as part of
@@ -2674,15 +2677,16 @@ Old=[assignment statement]}, it is important that all
 adjustments be performed, even if one fails, because all controlled
 subcomponents are going to be finalized.@Chg{Version=[2],New=[ Other kinds of
 assignment are more like initialization than @nt{assignment_statement}s, so we
-include them as well in the permission.],Old=[]}],Old=[]}
+include them as well in the permission.],Old=[]}]}
 @end{Reason}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024],ARef=[AI95-00193-01]}
-@Chg{New=[Even if an Adjust invoked as part of the initialization of a
+@ChgAdded{Version=[1],Text=[Even if an Adjust invoked as part of the
+initialization of a
 controlled object propagates an exception, objects whose initialization
 (including any Adjust or Initialize calls) successfully completed will be
 finalized. The permission above only applies to objects whose Adjust failed.
-Objects for which Adjust was never even invoked must not be finalized.],Old=[]}
+Objects for which Adjust was never even invoked must not be finalized.]}
 @end{Ramification}
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -2691,10 +2695,11 @@ Unchecked_Deallocation, any other finalizations due to
 be performed are performed, and then Program_Error is raised.
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0104],ARef=[AI95-00179-01]}
-@Chg{New=[The standard does not specify if storage is recovered in this case.
+@ChgAdded{Version=[1],Text=[The standard does not specify if storage is
+recovered in this case.
 If storage is not recovered (and the object continues to exist), Finalize
 may be called on the object again (when the @nt<allocator>'s master is
-finalized).],Old=[]}
+finalized).]}
 @end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2004/12/10 06:13:42 $}
+@Comment{$Date: 2004/12/11 06:27:53 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @LabeledClause{Array Types}
 
@@ -371,9 +371,9 @@ RM83-3.7.
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to allow
-the elaboration of per-object constraints for constrained arrays.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to allow
+  the elaboration of per-object constraints for constrained arrays.]}
 @end{DiffWord95}
 
 
@@ -633,14 +633,19 @@ a character type.
 A one-dimensional array type whose component type is a character type
 is called a @i(string) type.
 
-@Leading@redundant[There are two predefined string types, String and Wide_String,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@Leading@redundant[There are @Chg{Version=[2],New=[three],Old=[two]} predefined
+string types, String@Chg{Version=[2],New=[,],Old=[ and]}
+Wide_String@Chg{Version=[2],New=[, and Wide_Wide_String],Old=[]},
 each indexed by values of the predefined subtype Positive;
 these are declared in the visible part of package Standard:]
 @begin(example)
 @redundant[@key(subtype) Positive @key(is) Integer @key(range) 1 .. Integer'Last;
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @key(type) String @key(is) @key(array)(Positive @key(range) <>) @key(of) Character;
 @key(type) Wide_String @key(is) @key(array)(Positive @key(range) <>) @key(of) Wide_Character;
+@Chg{Version=[2],New=[@key(type) Wide_Wide_String @key(is) @key(array)(Positive @key(range) <>) @key(of) Wide_Wide_Character;],Old=[]}
 ]@end(example)
 @end{StaticSem}
 
@@ -702,10 +707,26 @@ We define the term @i(string type) as a natural analogy
 to the term @i(character type).
 @end{DiffWord83}
 
+@begin{Inconsistent95}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+The declaration of Wide_Wide_String in Standard hides a use-visible
+declaration with the same @nt<defining_identifier>.
+In rare cases, this might result in an inconsistency between
+Ada 95 and Ada 2005.]}
+@end{Inconsistent95}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Type Wide_Wide_String is new.]}
+@end{Extend95}
+
 
 @LabeledClause{Discriminants}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
 @redundant[@Defn{discriminant}
 @IndexSee{Term=[type parameter],See=(discriminant)}
 @IndexSeeAlso{Term=[parameter],See=(discriminant)}
@@ -715,15 +736,18 @@ A @nt<known_discriminant_part> specifies the discriminants
 of a composite type.
 A discriminant of an object is a component of the object,
 and is either of a discrete type or an access type.
-An @nt<unknown_discriminant_part> in the declaration of a
-partial view of a type
+An @nt<unknown_discriminant_part> in the declaration of
+a@Chg{Version=[2],New=[],Old=[ partial]} view of a type
 specifies that the discriminants of the type are unknown
 for the given view;
-all subtypes of such a partial view are indefinite subtypes.]
+all subtypes of such a@Chg{Version=[2],New=[],Old=[ partial]} view
+are indefinite subtypes.]
+@ChgRef{Version=[2],Kind=[Revised]}
 @ToGlossary{Term=<Discriminant>,
   Text=<A discriminant is a parameter of a composite type.
   It can control, for example, the bounds of a component
-  of the type if that type is an array type.
+  of the type if @Chg{Version=[2],New=[the component],Old=[that]} type is
+  an array type.
   A discriminant of a task type can be used to pass data
   to a task of the type upon creation.>}
 @begin{Discussion}
@@ -744,8 +768,9 @@ the point of the type declaration. A @nt<discriminant_part> of
 @Syn{lhs=<known_discriminant_part>,rhs="
    (@Syn2{discriminant_specification} {; @Syn2{discriminant_specification}})"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @Syn{lhs=<discriminant_specification>,rhs="
-   @Syn2{defining_identifier_list} : @Syn2{subtype_mark} [:= @Syn2{default_expression}]
+   @Syn2{defining_identifier_list} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [:= @Syn2{default_expression}]
  | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]"}
 
 @Syn{lhs=<default_expression>,rhs="@Syn2{expression}"}
@@ -786,31 +811,41 @@ a @i(discriminated) type,@Defn{discriminated type} as is a type that inherits
   are allowed syntactically.],Old=[]}
 @end(Discussion)
 
-The subtype of a discriminant may be defined by
-a @nt<subtype_mark>, in which case the @nt<subtype_mark> shall denote
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+The subtype of a discriminant may be defined
+by@Chg{Version=[2],New=[ an optional @nt{null_exclusion} and],Old=[]} a
+@nt<subtype_mark>, in which case the @nt<subtype_mark> shall denote
 a discrete or access subtype, or it may be defined by an
-@nt<access_definition> @Redundant[(in which case the @nt<subtype_mark>
-of the @nt<access_definition> may denote any kind of subtype)].
+@nt<access_definition>@Chg{Version=[2],New=[],Old=[ @Redundant[(in which case
+the @nt<subtype_mark> of the @nt<access_definition> may denote
+any kind of subtype)]]}.
 @Defn{access discriminant}
 A discriminant that is defined by an @nt<access_definition>
 is called an @i(access discriminant)
-and is of an anonymous general access-to-variable type
-whose designated subtype is
-denoted by the @nt<subtype_mark> of the @nt<access_definition>.
+and is of an anonymous @Chg{Version=[2],New=[access],
+Old=[general access-to-variable]} type@Chg{Version=[2],New=[],Old=[ whose
+designated subtype is
+denoted by the @nt<subtype_mark> of the @nt<access_definition>]}.
 @begin(Reason)
-  In an early version of Ada 9X,
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01]}
+  @ChgNote{It still does cause complexities. :-)}@ChgNote{We don't
+  want to delete "Reason:" here, thus we use @Chg and not @ChgDeleted}
+  @Chg{Version=[2],New=[],Old=[In an early version of Ada 9X,
   we allowed access discriminants on nonlimited types,
   but this created unpleasant complexities.
   It turned out to be simpler and more uniform to allow discriminants
   of a named access type on any discriminated type, and keep access
-  discriminants just for limited types.
+  discriminants just for limited types.]}
 
   Note that discriminants of a named access type are not
-  considered @lquotes@;access discriminants.@rquotes@;  Similarly, @lquotes@;access parameter@rquotes@;
+  considered @lquotes@;access discriminants.@rquotes@;
+  Similarly, @lquotes@;access parameter@rquotes@;
   only refers to a formal parameter defined by an @nt<access_definition>.
 @end(Reason)
 
-A @nt<discriminant_specification> for an access discriminant
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01]}
+@ChgDeleted{Version=[2],Text=[A @nt<discriminant_specification> for
+an access discriminant
 shall appear only in the declaration for a task or protected type,
 or for a type with the reserved word @key[limited] in its
 @Redundant[(full)] definition
@@ -818,22 +853,28 @@ or in that of one of its ancestors.
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 this rule applies also in the private part of an
-instance of a generic unit.@PDefn{generic contract issue}
+instance of a generic unit.@PDefn{generic contract issue}]}
 @begin{Discussion}
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[
   This rule implies that a type can have an access discriminant
   if the type is limited,
   but not if the only reason it's limited is because of a limited
   component.
   Compare with the definition of limited type in
-  @RefSecNum{Limited Types}.
+  @RefSecNum{Limited Types}.]}
 @end{Discussion}
 @begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[
   It is a consequence of this rule that only a return-by-reference
   type can have an access discriminant (see @RefSecNum{Return Statements}).
-  This is important to avoid dangling references to local variables.
+  This is important to avoid dangling references to local variables.]}
 @end{Ramification}
 @begin{Reason}
-  @Leading@keepnext@;We also considered the following rules:
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+  @Leading@Keepnext@;We @Chg{Version=[2],New=[],Old=[also ]considered the
+  following rules@Chg{Version=[2],New=[ for access discriminants],Old=[]}:]}
   @begin{Itemize}
     If a type has an access discriminant,
     this automatically makes it limited,
@@ -843,8 +884,9 @@ instance of a generic unit.@PDefn{generic contract issue}
     and because it seemed error prone (two bugs in a previous
     version of the RM9X were attributable to this rule).
 
+    @ChgRef{Version=[2],Kind=[Revised]}
     A type with an access discriminant shall be limited.
-    This is equivalent to the rule we actually chose,
+    This is equivalent to the rule we actually chose@Chg{Version=[2],New=[ for Ada 95],Old=[]},
     except that it allows a type to have an access discriminant
     if it is limited just because of a limited component.
     For example, any record containing a task would be allowed to have
@@ -853,6 +895,65 @@ instance of a generic unit.@PDefn{generic contract issue}
     This rule was also rejected due to readability concerns,
     and because would interact badly with the rules for
     limited types that @lquotes@;become nonlimited@rquotes@;.
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[A type may have an access discriminant if
+    it is a limited partial view, or a task, protected, or
+    limited record type. This was the rule chosen for Ada 95.]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[Any type may have an access discriminant.
+    For nonlimited type, there is no special accessibility for access
+    discriminants; they're the same as any other anonymous access component.
+    For a limited type, they have the special accessibility of Ada 95. However,
+    this doesn't work because a limited partial view can have a nonlimited
+    full view -- giving the two view different accessibility.]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
+    as above. However, special accessibility rules only apply to types
+    that are @lquotes@;really@rquotes@; limited (task, protected, and limited
+    records). However, this breaks privacy; worse, @LegalityTitle depend on
+    the definition of accessibility.]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
+    as above. Limited types have special accessibility, while nonlimited
+    types have normal accessibility. However, a limited partial view with an
+    access discriminant can only be completed by a task, protected, or limited
+    record type. That prevents accessibility from changing. A runtime
+    accessibility check is required on generic formal types with access
+    discriminants. However, changing between limited and nonlimited types
+    would have far-reaching consequences for access discriminants - which
+    is uncomfortable.]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[Any type may have an access discriminant.
+    All types have special accessibility. This was considered early during
+    the Ada 9X process, but was dropped for @lquotes@;unpleasant
+    complexities@rquotes@;, which unfortunately aren't recorded. It does
+    seem that an accessibility check would be needed on assignment of such
+    a type, to avoid copying an object with a discriminant pointing to a
+    local object into a more global object (and thus creating a dangling
+    pointer).]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
+    but access discriminants may not have defaults. All types have special
+    accessibility. This get rid of the problems on assignment (you couldn't
+    change such a discriminant), but it would be horribly incompatible.]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[** Note to reviewers: The latter part of this
+    discussion came from a private e-mail discussion between Tucker, Pascal, and
+    Randy. @b<We need to chose one of these alternatives, or come up with
+    something else!!> The current choice is the fourth bullet, which does not
+    work! Mr. Private will not allow us to choose the fifth bullet. I'm
+    unconvinced that the second-last bullet will work; the other choices
+    are the sixth bullet (annoying because limited and nonlimited are very
+    different), and the Ada 95 rule (which would mean that a discriminant
+    of a nonlimited type is the @i<only> place where an anonymous access type
+    can't be used). So where are we going to put this bump??]}
   @end{Itemize}
 @end{Reason}
 
@@ -1062,15 +1163,21 @@ and @RefSecNum{Objects and Named Numbers}).]
   discriminants of any given value of a tagged class-wide type
   is not known at compile time.
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
   A subtype with unknown discriminants
   is indefinite, and hence an object of such a subtype needs
-  explicit initialization. If the subtype is limited, no (stand-alone) objects
+  explicit initialization.@Chg{Version=[2],New=[],Old=[ If the subtype is
+  limited, no (stand-alone) objects
   can be declared since initialization is not permitted (though
   formal parameters are permitted, and objects of the actual/full type
-  will generally be declarable). A limited private type with
-  unknown discriminants is @lquotes@;extremely@rquotes@; limited; such a type
-  is useful for keeping complete control over object creation within the
-  package declaring the type.
+  will generally be declarable).]} A limited private type with
+  unknown discriminants is @lquotes@;extremely@rquotes@;
+  limited;@Chg{Version=[2],New=[ objects of],Old=[]} such a type
+  @Chg{Version=[2],New=[ can be initialized only by subprograms (either
+  procedures with a parameter of the type, or a function returning the
+  type) declared in the package. Such a type],Old=[]} is useful for
+  keeping complete control over object creation within the package declaring
+  the type.
 
   A partial view of a type might have unknown discriminants, while
   the full view of the same type might have known, unknown, or no
@@ -1079,23 +1186,28 @@ and @RefSecNum{Objects and Named Numbers}).]
 @end{StaticSem}
 
 @begin{RunTime}
-An @nt<access_definition> is
-elaborated when the value of a corresponding access discriminant is defined,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+@Chg{Version=[2],New=[For an access discriminant of a limited type, its],
+Old=[An]} @nt<access_definition> is
+elaborated when the value of @Chg{Version=[2],New=[the],Old=[a corresponding]}
+access discriminant is defined,
 either by evaluation of its @nt<default_expression> or by
-elaboration of a @nt<discriminant_constraint>.
+elaboration of a @nt<discriminant_constraint>.@Chg{Version=[2],New=[ For
+an access discriminant of a nonlimited
+type, its @nt{access_definition} is elaborated when the type declaration
+with the @nt{known_discriminant_part} is elaborated.],Old=[]}
 @Redundant[The elaboration of an @nt<access_definition> creates the
 anonymous access type. When the expression defining the
 access discriminant is evaluated, it is converted to this
 anonymous access type (see @RefSecNum{Type Conversions}).]
 @PDefn2{Term=[implicit subtype conversion],Sec=(access discriminant)}
 @begin(Ramification)
-
-  This conversion raises Constraint_Error if the initial value is
-  @key(null), or, for an object created by an allocator of an access type
-  T, if the initial value is an access parameter
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+  This conversion raises Constraint_Error @Chg{Version=[2],New=[],Old=[if the
+  initial value is @key(null), or, ]}for an object created by an allocator
+  of an access type T, if the initial value is an access parameter
   that designates a view whose accessibility level is deeper than that
   of T.
-
 @end(Ramification)
 @end{RunTime}
 
@@ -1232,11 +1344,32 @@ when the discriminant is initialized.
 
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[Access discriminants (anonymous access types
+  used as a discriminant) can be used on any type allowing discriminants.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[
+  @nt{null_exclusion} can be used in the declaration of a discriminant.]}
+@end{Extend95}
+
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0007],ARef=[AI95-00098-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> The wording was clarified so that
-types that cannot have discriminants cannot have a
-@nt{unknown_discriminant_part}.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0007],ARef=[AI95-00098-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> The wording was clarified so
+  that types that cannot have discriminants cannot have a
+  @nt{unknown_discriminant_part}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00254-01]}
+  @ChgAdded{Version=[2],Text=[Removed wording which implied or required an
+  access discriminant to have an access-to-object type (anonymous access
+  types can now be access-to-subprogram types as well).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+  @ChgAdded{Version=[2],Text=[Fixed the wording of the introduction to this
+  clause to reflect that both incomplete and partial views can have
+  unknown discriminants. That was always true, but for some reason this
+  wording specified partial views.]}
 @end{DiffWord95}
 
 
@@ -1302,9 +1435,11 @@ A @nt{discriminant_constraint} is only allowed in a
 either an unconstrained discriminated subtype, or an
 unconstrained access subtype whose designated subtype is
 an unconstrained discriminated subtype.
-@Chg{New=[However, in the case of a general access subtype, a
-@nt{discriminant_@!constraint} is illegal if @Chg{Version=[2],New=[the
-designated type has defaults for its discriminants. In addition to the
+@Chg{New=[However, in the case of @Chg{Version=[2],New=[an],Old=[a general]}
+access subtype, a @nt{discriminant_@!constraint} is illegal
+if @Chg{Version=[2],New=[the
+designated type has a partial view that is constrained or, for a general
+access subtype, has defaults for its discriminants. In addition to the
 places where @LegalityTitle@; normally apply
 (see @RefSecNum{Generic Instantiation}),
 these rules apply also in the private part of an instance
@@ -1903,18 +2038,18 @@ representation pragmas to be as similar as possible.
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Improved the description of the
-elaboration of per-object constraints.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Improved the description of the
+  elaboration of per-object constraints.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed representation clauses to
-aspect clauses to reflect that they are used for more than just
-representation.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed representation clauses to
+  aspect clauses to reflect that they are used for more than just
+  representation.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@ChgAdded{Version=[2],Text=[Defined @i{limited record} type to use in
-other rules.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[Defined @i{limited record} type to use in
+  other rules.]}
 @end{DiffWord95}
 
 

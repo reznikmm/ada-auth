@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:20 $}
+@Comment{$Date: 2004/12/11 06:27:57 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -434,7 +434,7 @@ then it has to be obeyed in the instance.
 @leading@;The @lquotes@;properties@rquotes@; of the formals are determined
 without knowing anything about the actuals:
 @begin{Itemize}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0095]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0095],ARef=[AI95-00034-01]}
 A formal derived subtype is constrained if and only if the ancestor
 subtype is constrained.
 A formal array type is constrained if and only if the declarations
@@ -841,7 +841,7 @@ the declaration of Foo for Derived_From_Formal
 overrides the Foo inherited from T2.
 @end{Ramification}
 @begin{ImplNote}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 For formal types,
 an implementation that shares the code among multiple instances of the
 same generic unit needs to beware that things like parameter passing
@@ -1493,7 +1493,7 @@ so long as the formal has unknown discriminants.
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0037]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0037],ARef=[AI95-00043-01]}
 @Redundant[The formal type also belongs to each class that contains
 the determined class.]
 The primitive subprograms of the type are as for any
@@ -1596,6 +1596,14 @@ predefined for the various types; there is only one of each in
 package Standard. Therefore, we need not mention them here as RM83
 had to.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0037],ARef=[AI95-00043-01]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the wording to properly
+define the location where operators are defined for formal array types.
+The word here was inconsistent with that in @RefSec{Private Operations}.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Formal Private and Derived Types}
 
@@ -1712,7 +1720,6 @@ We rejected that idea, because it would require implicit (inherited)
 @end{Reason}
 @end{Itemize}
 
-
 @Redundant[For a generic formal type with an
 @nt{unknown_discriminant_part},
 the actual may, but need not, have discriminants,
@@ -1747,7 +1754,7 @@ discriminants if a new @nt<discriminant_part> is not specified),
 as for a derived type defined by a @nt<derived_type_definition>
 (see @RefSecNum(Derived Types and Classes)).
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0038]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0038],ARef=[AI95-00202]}
 For a formal derived type, the predefined
 operators and inherited user-defined subprograms are determined
 by the ancestor type, and are implicitly declared
@@ -1852,6 +1859,14 @@ in the generic body that would require a definite subtype.
 The check for discriminant subtype matching is changed from a
 run-time check to a compile-time check.
 @end{Incompatible83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0038],ARef=[AI95-00202-01]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected wording define the
+operations that are inherited when the ancestor of a formal type is itself
+a formal type to avoid anomalies.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Formal Scalar Types}
 
@@ -2014,10 +2029,10 @@ the actual type may be either a pool-specific or a general
 access-to-variable type.
 @end{Ramification}
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0109]}
-@Chg{New=[Matching an access-to-variable to a formal access-to-constant type
-cannot be allowed. If it were allowed, it would be possible to create an
-access-to-variable value designating a constant.], Old=[]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0109],ARef=[AI95-00025]}
+@ChgAdded{Version=[1],Text=[Matching an access-to-variable to a formal
+access-to-constant type cannot be allowed. If it were allowed, it would
+be possible to create an access-to-variable value designating a constant.]}
 @end{Reason}
 
 For a formal access-to-subprogram subtype,
@@ -2282,10 +2297,11 @@ statically matching subtypes.
 For other kinds of formals, the actuals match if they statically
 denote the same entity.
 @end{Itemize}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0039]}
-@Chg{New=[For the purposes of matching, any actual parameter that is the name
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0039],ARef=[AI95-00213]}
+@ChgAdded{Version=[1],Text=[For the purposes of matching, any actual parameter
+that is the name
 of a formal object of mode @key{in} is replaced by the formal object's actual
-expression (recursively).],Old=[]}
+expression (recursively).]}
 @end{Legality}
 
 @begin{StaticSem}
@@ -2328,6 +2344,15 @@ as an actual to another generic formal package.
 Formal packages are new to Ada 95.
 @end{Extend83}
 
+@begin{DiffWord95}
+@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0039],ARef=[AI95-00213-01]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the description of
+formal package matching to say that formal parameters are always replaced by
+their actual parameters (recursively). This matches the actual practice of
+compilers, as the ACATS has always required this behavior.]}
+@end{DiffWord95}
+
+
 @LabeledClause{Example of a Generic Package}
 
 @begin{Intro}
@@ -2340,7 +2365,7 @@ as generic formal parameters.
 @begin{Examples}
 @Leading
 @ChgRef{Version=[1], Kind=[Deleted]}
-@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
+@ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 @begin{Example}
 @key[generic]
    Size : Positive;

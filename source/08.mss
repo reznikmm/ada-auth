@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2004/12/07 05:17:05 $}
+@Comment{$Date: 2004/12/11 06:27:56 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -64,7 +64,7 @@ called its @i{declarative region},
   a @nt{loop_statement};
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[an @nt{extended_return_statement}],Old=[]}
+  @ChgAdded{Version=[2],Text=[an @nt{extended_return_statement}]}
 
   an @nt{accept_statement};
 
@@ -276,9 +276,9 @@ region, but not within either the declaration or the body.
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[@nt{Extended_return_statement}
+@ChgAdded{Version=[2],Text=[@nt{Extended_return_statement}
 (see @RefSecNum{Return Statements}) is added to the list
-of constructs that have a declarative region.],Old=[]}
+of constructs that have a declarative region.]}
 @end{DiffWord95}
 
 
@@ -747,8 +747,8 @@ overrides a previous implicit declaration of an inherited
 subprogram.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[@leading@;If two or more homographs are implicitly
-declared at the same place:],Old=[]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If two or more homographs are
+implicitly declared at the same place:]}
 
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
@@ -763,12 +763,12 @@ arbitrarily to override the others.],Old=[]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[In the case where the
+  @ChgAdded{Version=[2],Type=[Leading],Text=[In the case where the
     implementation arbitrarily chooses one overrider from among a group
     of inherited subprograms, users should not be able to determine which
     member was chosen, as the set of inherited subprograms which are chosen
     from must be fully conformant (see below). This rule is needed in order to
-    allow],Old=[]}
+    allow]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -792,8 +792,8 @@ arbitrarily to override the others.],Old=[]}
 @end{Example}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @Chg{Version=[2],New=[without requiring that T explicitly override any of
-    its inherited operations.],Old=[]}
+  @ChgAdded{Version=[2],Text=[without requiring that T explicitly override
+    any of its inherited operations.]}
 @end{Discussion}
 
 @end{InnerItemize}
@@ -1002,9 +1002,9 @@ abstract, then all of the subprograms shall be fully conformant with one
 another.@Defn2{Term=[full conformance],Sec=(required)}],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[Full conformance is required so it is not possible
+@ChgAdded{Version=[2],Text=[Full conformance is required so it is not possible
 to tell which subprogram is actually the overriding one. See discussion
-above.],Old=[]}
+above.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
@@ -1065,9 +1065,10 @@ homographs, which is something compilers have never before been
 required to do.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0026],Ref=[8652/0102],ARef=[AI95-00150-01],ARef=[AI95-00157-01]}
-@Chg{New=[@Leading@;If a @nt{type_extension} contains a component with
+@ChgAdded{Version=[1],Type=[Leading],Text=[If a @nt{type_extension} contains a
+component with
 the same name as a component in an ancestor type, there must be no place
-where both components are visible. For instance:],Old=[]}
+where both components are visible. For instance:]}
 @begin{Example}@ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@key[package] A @key[is]
    @key[type] T @key[is tagged private];
@@ -1189,11 +1190,11 @@ components are not overloadable.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[@Leading@;If a @nt{subprogram_declaration},
+@ChgAdded{Version=[2],Type=[Leading],Text=[If a @nt{subprogram_declaration},
 @nt{abstract_subprogram_declaration},
 @nt{subprogram_body}, @nt{subprogram_body_stub},
 @nt{subprogram_renaming_declaration}, or @nt{generic_instantiation} of a
-subprogram has an @nt{overriding_indicator}, then:],Old=[]}
+subprogram has an @nt{overriding_indicator}, then:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
@@ -1218,7 +1219,7 @@ unit.],Old=[]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The @Key{overriding} and @Key{not overriding} rules
+@ChgAdded{Version=[2],Text=[The @Key{overriding} and @Key{not overriding} rules
 differ slightly. For @Key{overriding}, we want the indicator to reflect the
 overriding state at the point of the declaration; otherwise the indicator would
 be @LQuotes@;lying@RQuotes@;. Whether a homograph is implicitly declared after
@@ -1227,12 +1228,12 @@ has no impact on this check. However, @Key{not overriding} is different;
 @LQuotes@;lying@RQuotes@; would happen if a homograph declared later actually
 is overriding. So, we require this check to take into account later overridings.
 That can be implemented either by looking ahead, or by rechecking when
-additional operations are declared.],Old=[]}
+additional operations are declared.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The @LQuotes@;no lying@RQuotes@; rules are needed to
-prevent a @nt{subprogram_declaration} and @nt{subprogram_body} from having
-contradictory @nt{overriding_indicator}s.],Old=[]}
+@ChgAdded{Version=[2],Text=[The @LQuotes@;no lying@RQuotes@; rules are
+needed to prevent a @nt{subprogram_declaration} and @nt{subprogram_body}
+from having contradictory @nt{overriding_indicator}s.]}
 @end{Discussion}
 @end{Legality}
 
@@ -1345,13 +1346,13 @@ Visibility is defined only for declarations.
 
 @begin{Incompatible95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[@Leading@;@Defn{incompatibilities with Ada 95}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{incompatibilities with Ada 95}
 Added rules to handle the inheritance and overriding of
 multiple homographs for a single type declaration, in order to support
 multiple inheritance from interfaces. The new rules are intended to be
 compatible with the existing rules so that programs that do not use
 interfaces do not change their legality. However, there is an very rare
-case where this is not true:],Old=[]}
+case where this is not true:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{generic}
@@ -1813,9 +1814,10 @@ disappear, which might leave dangling references.
 Similar restrictions exist for the Access attribute.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0017],ARef=[AI95-00184-01]}
-@Chg{New=[@Leading@;The "recheck on instantiation" and "assume-the-worst in the body"
+@ChgAdded{Version=[1],Type=[Leading],Text=[;The @lquotes@;recheck on
+instantiation@rquotes@; and @lquotes@;assume-the-worst in the body@rquotes@;
 restrictions on generics are necessary to avoid renaming of components which
-could disappear even when the nominal subtype would prevent the problem:],Old=[]}
+could disappear even when the nominal subtype would prevent the problem:]}
 
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}
@@ -1905,7 +1907,7 @@ unconstrained nominal subtype.
 
 @begin{Incompatible95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[@Leading@;@Defn{incompatibilities with Ada 95}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Leading@;@Defn{incompatibilities with Ada 95}
 Aliased variables are not necessarily constrained in Ada
 2005 (see @RefSecNum{Array Types}). Therefore, renaming a subcomponent of
 an aliased variable is no longer necessarily safe, and thus may be illegal
@@ -1913,7 +1915,7 @@ if the component may disappear or change shape, while the same renaming
 would have been legal in Ada 95. Note that most allocated
 objects are still constrained by their initial value (see @RefSecNum{Allocators},
 and thus have no change in the legality of renaming for them. For example,
-using the type T2 of the previous example:],Old=[]}
+using the type T2 of the previous example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[   AT : @key{aliased} T2;
@@ -2096,9 +2098,9 @@ involved in the conformance rules.
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027],ARef=[AI95-00135-01]}
-@Chg{New=[Circular renames before freezing is illegal, as the compiler
+@ChgAdded{Version=[1],Text=[Circular renames before freezing is illegal, as the compiler
 would not be able to determine the convention of the subprogram. Other
-circular renames are handled below; see @BoundedTitle.],Old=[]}
+circular renames are handled below; see @BoundedTitle.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00228-01]}
@@ -2108,12 +2110,12 @@ denotes a subprogram which shall be overridden
 illegal.],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00228-01]}
-@Chg{Version=[2],New=[Such a rename cannot be of the inherited subprogram
+@ChgAdded{Version=[2],Text=[Such a rename cannot be of the inherited subprogram
 (which is shall-be-overridden because it cannot be called),
 and thus cannot squirrel away a subprogram (see below). That would be
 confusing, so we make it illegal. The renaming is allowed after the
 overriding, as then the @nt{name} will denote the overriding subprogram,
-not the inherited one.],Old=[]}
+not the inherited one.]}
 @end{Reason}
 
 A @nt{name} that denotes a formal parameter
@@ -2176,8 +2178,8 @@ parameters as the actual parameters and, if it is a function, returns the
 value of the call.],Old=[]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[This implies that the subprogram completed by the renames-as-body
-has its own elaboration check.],Old=[]}
+@ChgAdded{Version=[1],Text=[This implies that the subprogram completed by the
+renames-as-body has its own elaboration check.]}
 @end{Ramification}
 
 For a call on a renaming of a dispatching subprogram that is overridden,
@@ -2217,16 +2219,16 @@ predefined subprogram before later overriding it.
 
 @begin{Bounded}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027],ARef=[AI95-00135-01]}
-@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@ChgAdded{Version=[1],Text=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 If a subprogram directly or indirectly renames itself, then it is a bounded
 error to call that subprogram. Possible consequences are that Program_Error or
-Storage_Error is raised, or that the call results in infinite recursion.],Old=[]}
+Storage_Error is raised, or that the call results in infinite recursion.]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027],ARef=[AI95-00135-01]}
-@Chg{New=[This has to be a bounded error, as it is possible for a
-renames-as-body appearing in a package body to cause this problem. Thus it is
-not possible in general to detect this problem at compile time.],Old=[]}
+@ChgAdded{Version=[1],Text=[This has to be a bounded error, as it is possible
+for a renames-as-body appearing in a package body to cause this problem.
+Thus it is not possible in general to detect this problem at compile time.]}
 @end{Reason}
 @end{Bounded}
 
@@ -2310,28 +2312,30 @@ We'll live with the oddity.
 @end{Examples}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-@b<Corrigendum:> Allowed a renames-as-body to be just
-mode conformant with the specification if the subprogram is not yet frozen.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @b<Corrigendum:> Allowed a renames-as-body to be just
+  mode conformant with the specification if the subprogram is not yet frozen.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0014],ARef=[AI95-00064-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Described the semantics of
-renames-as-body, so that the location of elaboration checks is clear.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0014],ARef=[AI95-00064-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Described the semantics of
+  renames-as-body, so that the location of elaboration checks is clear.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0027],ARef=[AI95-00135-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that circular renames-as-body
-is illegal (if it can be detected in time) or a bounded error.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0027],ARef=[AI95-00135-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that circular
+  renames-as-body is illegal (if it can be detected in time) or a
+  bounded error.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[@nt{Overriding_indicator} (see @RefSecNum{Subprogram Declarations}
-and @RefSecNum{Visibility}) is optionally added to subprogram renamings.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+  @ChgAdded{Version=[2],Text=[@nt{Overriding_indicator} (see
+  @RefSecNum{Subprogram Declarations} and @RefSecNum{Visibility}) is
+  optionally added to subprogram renamings.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00228-01]}
-@Chg{Version=[2],New=[Clarified that renaming a shall-be-overridden subprogram
-is illegal.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00228-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that renaming a shall-be-overridden
+  subprogram is illegal.]}
 @end{DiffWord95}
 
 
@@ -2600,10 +2604,10 @@ and all of the views declared by those declarations.
   @end{Reason}
   @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
-  @Chg{Version=[2],New=[The phrase @lquotes@;within the @nt{subtype_mark}@rquotes@;
+  @ChgAdded{Version=[2],Text=[The phrase @lquotes@;within the @nt{subtype_mark}@rquotes@;
   in the @lquotes@;this rule does not apply@rquotes@; part is intended to cover
   a case like @key{access} T'Class appearing within the declarative region of
-  T: here T denotes the type, not the current instance.],Old=[]}
+  T: here T denotes the type, not the current instance.]}
   @end{Discussion}
 
   @Defn2{Term=[current instance], Sec=(of a generic unit)}
@@ -2718,13 +2722,13 @@ type @em such a preference would cause Beaujolais effects.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[when @i(T) is an anonymous access-to-subprogram type
-     (see @RefSecNum{Access Types}), to an access-to-subprogram type whose
-     designated profile is subtype-conformant with that of @i{T}.],Old=[]}
-
+@ChgAdded{Version=[2],Text=[when @i(T) is an anonymous access-to-subprogram
+     type (see @RefSecNum{Access Types}), to an access-to-subprogram type
+     whose designated profile is subtype-conformant with that of @i{T}.]}
 
 @end(Inneritemize)
 @end{Itemize}
+
 
 @RootDefn[expected profile]
 In certain contexts,
@@ -3017,31 +3021,31 @@ capabilities of anonymous access types (that is, access-to-subprogram and
 access-to-constant).],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
-@Chg{Version=[2],New=[We now allow the creation of self-referencing types
-via anonymous access types. This is an extension because in some unusual cases
-(in task and protected types) it will make programs that were illegal in Ada 95
-legal in Ada 2005. For example:],Old=[]}
+   @ChgAdded{Version=[2],Type=[Leading],Text=[We now allow the creation of
+   self-referencing types via anonymous access types. This is an extension
+   because in some unusual cases (in task and protected types) it will make
+   programs that were illegal in Ada 95 legal in Ada 2005. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{task type} T;],Old=[]}
+@ChgAdded{Version=[2],Text=[@key{task type} T;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{task body} T @key{is}
+@ChgAdded{Version=[2],Text=[@key{task body} T @key{is}
    @key{procedure} P (X : @key{access} T) @key{is} -- @RI[Illegal in Ada 95, legal in Ada 2005]
       ...
    @key{end} P;
 @key{begin}
    ...
-@key{end} T;],Old=[]}
+@key{end} T;]}
 @end{Example}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00332-01]}
-@Chg{Version=[2],New=[Corrected the @lquotes@;single expected type@rquotes@;
-so that it works in contexts that don't have expected types (like
-object renames and qualified expressions). This fixes a hole in Ada 95 that
-appears to prohibit using aggregates, 'Access, character literals, string
-literals, and allocators in qualified expressions.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00332-01]}
+  @ChgAdded{Version=[2],Text=[Corrected the @lquotes@;single expected
+  type@rquotes@; so that it works in contexts that don't have expected types
+  (like object renames and qualified expressions). This fixes a hole in Ada 95
+  that appears to prohibit using aggregates, 'Access, character literals,
+  string literals, and allocators in qualified expressions.]}
 @end{DiffWord95}
 
