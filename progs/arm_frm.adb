@@ -174,6 +174,8 @@ package body ARM_Format is
     --  1/24/05 - RLB - Added Inner_Indented.
     --	1/25/05 - RLB - Added AddedSyn and DeleteSyn commands.
     --  2/ 1/05 - RLB - Added Turkish Is.
+    --  2/ 2/05 - RLB - Corrected so normal AARM numbers don't reset the
+    --			RM insertion number.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1864,13 +1866,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    Format_Object.Current_Paragraph_Len := PNum'Last - 1;
 		    if Update_Numbers then
 		        Format_Object.Next_Paragraph := Format_Object.Next_Paragraph + 1;
+		        Format_Object.Next_Insert_Para := 1;
 		        Format_Object.Next_AARM_Sub := 'a';
 			Format_Object.Next_AARM_Insert_Para := 1;
 		    end if;
 	        end if;
-	        if Update_Numbers then
-		    Format_Object.Next_Insert_Para := 1;
-		end if;
 	    elsif Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Inserted or else
 	          Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Revised_Inserted_Number or else
 	          Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Deleted_Inserted_Number then

@@ -8,7 +8,7 @@ package body ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004  AXE Consultants.
+    -- Copyright 2000, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -45,6 +45,7 @@ package body ARM_Contents is
     --  5/22/00 - RLB - Added Unnumbered_Section level.
     --  8/22/00 - RLB - Added Old_Title handling.
     --  9/ 9/04 - RLB - Removed unused with.
+    --  2/ 2/05 - RLB - Allowed more old titles.
 
     type Title_Record is record
 	Title : Title_Type; -- Title in original format.
@@ -59,7 +60,7 @@ package body ARM_Contents is
     Title_List : array (1 .. 500) of Title_Record;
     Last_Title : Natural;
 
-    Old_Title_List : array (1 .. 50) of Title_Record;
+    Old_Title_List : array (1 .. 100) of Title_Record;
     Last_Old_Title : Natural;
 
     procedure Initialize is
