@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/09/28 02:57:09 $}
+@Comment{$Date: 2000/09/29 05:34:30 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @LabeledClause{Array Types}
 
@@ -2920,10 +2920,12 @@ objects or values of the type exist,
 nor after deriving a record extension from it,
 nor after a body.]
 
+@comment{The following is a "fix" to keep consistent with v. 5.95;
+appearently 6.0 is different.
 @begin{Discussion}
     @ChgRef{Version=[1],Kind=[Deleted]}
     @Chg{New=[],Old=[Old @b{Change}.]}
-@end{Discussion}
+@end{Discussion}}
 @begin{Reason}
 This rule is needed
 because (1) we don't want people dispatching to things that haven't
@@ -4828,8 +4830,10 @@ denotes an aliased view of an object}:
   or the variable is aliased.
 
   @begin(Discussion)
+    @comment{The following is a "fix" to keep consistent with v. 5.95;
+    appearently 6.0 is different.
     @ChgRef{Version=[1],Kind=[Deleted]}
-    @Chg{New=[],Old=[Old @b{Change}.]}
+    @Chg{New=[],Old=[Old @b{Change}.]}}
 
      This restriction is intended to be similar to the restriction
      on renaming discriminant-dependent subcomponents.
@@ -5353,8 +5357,10 @@ A type shall be completely defined before it is frozen
 (see @RefSecNum{Freezing Rules} and
 @RefSecNum{Private Types and Private Extensions}).
 @begin(Reason)
+  @comment{The following is a "fix" to keep consistent with v. 5.95;
+  appearently 6.0 is different.
   @ChgRef{Version=[1],Kind=[Deleted]}
-  @Chg{New=[],Old=[Old @b{Change}.]}
+  @Chg{New=[],Old=[Old @b{Change}.]}}
 
   Index types are always completely defined @em no need to mention them.
   There is no way for a completely defined type to depend on the value of

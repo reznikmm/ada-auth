@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:09 $}
+@Comment{$Date: 2000/09/29 05:34:31 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -6075,8 +6075,10 @@ that as a change, so it is just gone. RLB-29-08-00}
 
 @begin{Discussion}
 
+@comment{The following is a "fix" to keep consistent with v. 5.95;
+appearently 6.0 is different.
 @ChgRef{Version=[1],Kind=[Deleted]}
-@Chg{New=[],Old=[Old @b{Change}.]}
+@Chg{New=[],Old=[Old @b{Change}.]}}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
 From RM83-13.1(7). The wording here forbids freezing
