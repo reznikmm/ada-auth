@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:15:01 $}
+@Comment{$Date: 2005/02/04 06:36:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.10 $}
+@Comment{$Revision: 1.11 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -205,7 +205,8 @@ If a declaration for a tagged type occurs within a
 then the corresponding type declarations in distinct
 instances of the generic package are associated with distinct tags.
 For a tagged type that is local to a generic package body@Chg{Version=[2],
-New=[ and with any ancestors also local to the generic body],Old=[]},
+New=[ and with all of its ancestors (if any) also local to the
+generic body],Old=[]},
 the language does not specify whether repeated instantiations
 of the generic body result in distinct tags.
 @begin{Reason}
@@ -263,7 +264,7 @@ of the generic body result in distinct tags.
   that no longer exist.
   For instance, the address of the stack frame of the subprogram that created
   the tag is sufficient to meet the requirements of this rule, even though
-  it is possible that, after the subprogram returns, that a later call of the
+  it is possible, after the subprogram returns, that a later call of the
   subprogram could have the same stack frame and thus have an identical tag.]}
 @end{Honest}
 
@@ -340,7 +341,8 @@ It might seem redundant to provide both the function External_Tag and
 the attribute External_Tag.
 The function is needed because the attribute can't be applied to
 values of type Tag.
-The attribute is needed so that it can be specifiable
+The attribute is needed so that it can be @Chg{Version=[2],
+New=[specified],Old=[specifiable]}
 via an @nt{attribute_definition_clause}.
 @end{Reason}
 
@@ -350,15 +352,15 @@ to the given external tag, or raises Tag_Error if the given string
 is not the external tag for any specific
 type of the partition.@Chg{Version=[2],New=[ Tag_Error is also raised
 if the specific type identified is a library-level type whose tag
-has not yet been created.],Old=[]}
+has not yet been created (see @RefSecNum{Freezing Rules}.],Old=[]}
 
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
-@ChgAdded{Version=[2],Text=[The check for uncreated library-level types
-prevents a reference to the type before it reaches the freezing point of
-the type. This is important so that T'Class'Input or an instance of
-Tags.Generic_Dispatching_Constructor do not try to create an object of a type
-that hasn't been frozen (which may not have yet elaborated its constraints).]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
+  @ChgAdded{Version=[2],Text=[The check for uncreated library-level types
+  prevents a reference to the type before execution reaches the freezing point
+  of the type. This is important so that T'Class'Input or an instance of
+  Tags.Generic_Dispatching_Constructor do not try to create an object of a type
+  that hasn't been frozen (which may not have yet elaborated its constraints).]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
@@ -437,10 +439,12 @@ defined:
     added in descendants of @i(T) which are not constrained.
   @end{Ramification}
   @begin{Reason}
+    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
     The Class attribute is not defined for untagged subtypes
     (except for incomplete types and private types
     whose full view is tagged
-    @em see @RefSecNum{Incomplete Type Declarations} and
+    @em see @Chg{Version=[2],New=[@RefSecNum{The Class Attribute of Untagged Incomplete Types}],
+    Old=[@RefSecNum{Incomplete Type Declarations}]} and
     @RefSecNum{Private Operations})
     so as to preclude implicit conversion in the absence of run-time
     type information. If it were defined for untagged subtypes, it would
@@ -479,7 +483,7 @@ the following attribute is defined:
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The following language-defined
-generic functions exist:]}
+generic function exists:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
@@ -705,7 +709,7 @@ Tagged types are a new concept.
   must raise Tag_Error if the tag of a library-level type has not yet been
   created. Ada 95 gave an Implementation Permission to do this; we require
   it to avoid erroneous execution when streaming in an object of a
-  library-level type that has not yet been elaborated. This technically
+  library-level type that has not yet been elaborated. This is technically
   inconsistent; a program that used Internal_Tag outside of streaming and
   used a compiler that didn't take advantage of the Implementation Permission
   would not have raised Tag_Error, and may have returned a useful tag. (If
@@ -881,16 +885,13 @@ I.NT is an abstract type with two abstract subprograms:
 F (inherited as abstract) and Q (explicitly declared as abstract).
 But the generic body doesn't know about F,
 so we don't know that it needs to be overridden to make a nonabstract
-extension of NT.
+extension of NT.@Chg{Version=[2],New=[],Old=[
 Furthermore, a formal tagged limited private type can be extended with
 limited components,
 but the actual might not be limited,
 which would allow assignment of limited types,
-which is bad.
-Hence, we have to disallow this case@Chg{Version=[2],New=[],Old=[ as well]}.
-
-If TT were declared as abstract, then we could have the same
-problem with abstract procedures.
+which is bad. ]}Hence, we have to disallow this
+case@Chg{Version=[2],New=[],Old=[ as well]}.
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[Similarly, since the actual type for a
@@ -900,7 +901,10 @@ declared in a generic body. Such an
 extension could have a task component, for example, and an object of that
 type could be passed to a dispatching operation of a non-limited ancestor
 type. That operation could try to copy the object with the task component.
-That would be bad.]}
+That would be bad. So we disallow this as well.]}
+
+If TT were declared as abstract, then we could have the same
+problem with abstract procedures.
 
 We considered disallowing all tagged types in a generic body,
 for simplicity.
@@ -971,7 +975,7 @@ type extension has relative to its specified ancestor type.
 declared in a library @nt{package_specification} can be extended only
 at library level or as a generic formal. ]}When
 @Chg{Version=[2],New=[an],Old=[the]} extension is declared immediately within
-a @nt{package_body},
+a @Chg{Version=[2],New=[body],Old=[@nt{package_body}]},
 primitive subprograms are inherited and are overridable,
 but new primitive subprograms cannot be added.
 
@@ -1072,9 +1076,9 @@ tagged types.]}
 @Defn{polymorphism}
 @Defn{run-time polymorphism}
 @Defn2{Term=[controlling tag], Sec=(for a call on a dispatching operation)}
-The primitive subprograms of a tagged type are called
-@i(dispatching operations)@Chg{Version=[2],New=[, as are subprograms
-declared by a @nt{formal_abstract_subprogram_declaration}],Old=[]}.
+The primitive subprograms of a tagged type@Chg{Version=[2],New=[, and the
+subprograms declared by a @nt{formal_abstract_subprogram_declaration}],Old=[]}
+are called @i(dispatching operations).
 @Redundant[A dispatching operation can be called using a statically
 determined @i{controlling} tag, in which case the body to be
 executed is determined at compile time.
@@ -1219,12 +1223,16 @@ operand in a call on a dispatching operation.
   this truncation.
 @end(Reason)
 @begin(Ramification)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01]}@ChgNote{Add info about prefix calls}
   This rule applies to all expressions
   or @nt<name>s with a specific expected type, not just those that
   are actual parameters to a dispatching call. This rule does not apply to
   a membership test whose @nt<expression> is class-wide,
   since any type that covers the tested type is explicitly allowed.
-  See @RefSecNum(Relational Operators and Membership Tests).
+  See @RefSecNum(Relational Operators and Membership Tests).@Chg{Version=[2],
+  New=[ This rule also doesn't apply to a @nt{selected_component} whose
+  @nt{selector_name} is a subprogram, since the rules explicitly say that
+  the prefix may be class-wide (see @RefSecNum{Selected Components}).],Old=[]}
 @end(Ramification)
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011],ARef=[AI95-00117-01]}
@@ -1299,9 +1307,11 @@ appearently 6.0 is different.
     @ChgDeleted{Version=[1],Text=[Old @b{Change}.]}
 @end{Discussion}}
 @begin{Reason}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344]}@ChgNote{Tags now have two parts, logically}
 This rule is needed
 because (1) we don't want people dispatching to things that haven't
-been declared yet, and (2) we want to allow tagged type descriptors
+been declared yet, and (2) we want to allow @Chg{Version=[2],New=[the static
+part of ],Old=[]}tagged type descriptors
 to be static (allocated statically, and initialized to link-time-known
 symbols). Suppose T2 inherits primitive P from T1, and then
 overrides P. Suppose P is called @i{before} the declaration of the
@@ -1524,8 +1534,9 @@ and it does not matter whether the subprogram's declaration is visible at
 the place of the call.
 
 
-This subclause covers calls on primitive subprograms of
-a tagged type.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
+This subclause covers calls on @Chg{Version=[2],New=[dispatching],
+Old=[primitive]} subprograms of a tagged type.
 Rules for tagged type membership tests are described
 in @RefSecNum(Relational Operators and Membership Tests).
 Controlling tag determination for an
@@ -1566,9 +1577,9 @@ no controlling operands are tag-indeterminate, and to describe that the
 controlling tag can come from the target of an @nt{assignment_statement}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00239-01]}
-@Chg{Version=[2],New=[Fixed the wording to covered default expressions
+@Chg{Version=[2],New=[Fixed the wording to cover default expressions
 inherited by derived subprograms. A literal reading of the old wording
-would have implied that operations would be called with objects with the
+would have implied that operations would be called with objects of the
 wrong type.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
@@ -1718,7 +1729,7 @@ a type.]}
 that is inherited or is the predefined equality operator, and the corresponding
 primitive subprogram of],Old=[For a derived type, if]}
 the parent or ancestor type
-@Chg{Version=[2],New=[is abstract or a function with a controlling access
+@Chg{Version=[2],New=[is abstract or is a function with a controlling access
 result, or a type other than a null extension inherits a],
 Old=[has an abstract primitive subprogram, or a primitive]}
 function with a controlling result, then:
@@ -1801,7 +1812,7 @@ function with a controlling result, then:
     with a controlling result is defined in terms of an @nt{extension_aggregate}
     with a @key{null record} @nt{extension_part}
     (see @RefSecNum{Derived Types and Classes}). This means that these
-    restrictions on functions with a controlling result do not have apply to
+    restrictions on functions with a controlling result do not have to apply to
     null extensions.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
@@ -1945,8 +1956,8 @@ the example would be legal as is.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
 A generic actual subprogram shall not be an abstract
-subprogram @Chg{Version=[2],New=[unless the generic formal subprogram is a
-@nt{formal_abstract_subprogram_declaration}],Old=[]}.
+subprogram @Chg{Version=[2],New=[unless the generic formal subprogram is
+declared by a @nt{formal_abstract_subprogram_declaration}],Old=[]}.
 The @nt{prefix} of an @nt{attribute_reference} for the Access,
 Unchecked_Access, or Address attributes shall not denote an abstract subprogram.
 @begin{Ramification}
@@ -2058,9 +2069,9 @@ clearly applies to abstract predefined equality.],Old=[]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
-@Chg{Version=[2],New=[An interface type is an abstract tagged type which
-provides a restricted form of multiple inheritance. A tagged, task, or
-protected type may be derived from one or more interface types.],Old=[]}
+@Chg{Version=[2],New=[An interface type is an abstract tagged type that
+provides a restricted form of multiple inheritance. A tagged record, task, or
+protected type have one or more interface types as ancestors.],Old=[]}
 @end{Intro}
 
 @begin{Syntax}
@@ -2203,10 +2214,13 @@ interface type.],Old=[]}
     If this example were legal (it is illegal because the completion of T1
     is descended from an interface that the partial view is not descended
     from), then we would have two dispatching calls to Pkg.Foo with the two
-    controlling operands having the same tag and yet different bodies would
-    be executed. The two conversions to Pkg.Ifc'Class would map Pkg.Foo to
-    different slots in the same dispatch table because the source types of
-    the conversions are different. That would be bad.],Old=[]}
+    controlling operands having the same tag and yet the user might expect
+    that different bodies should be executed. More likely, they
+    would map to the same body, presumably Foo#2, in which
+    case we have privacy breakage as the body of P should be able to
+    expect that its private definitions are not tampered with by clients.
+    This property is guaranteed for ordinary tagged types, and it should be
+    for interfaces as well.],Old=[]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
@@ -2233,6 +2247,12 @@ in the private part of an instance of a generic
 unit.@PDefn{generic contract issue}]}
 
 @end{Legality}
+
+@begin{Runtime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Text=[The elaboration of an
+@nt{interface_type_definition} has no effect.]}
+@end{Runtime}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}

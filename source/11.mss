@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:15:03 $}
+@Comment{$Date: 2005/02/04 06:36:43 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -803,6 +803,14 @@ whereas Exception_Information can be long.
 Exception_Message should not include the Exception_Name.
 Exception_Information should include both the Exception_Name and the
 Exception_Message.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Exception_Information should provide
+information useful for debugging, and should include the Exception_Name
+and Exception_Message.]}]}
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Exception_Message should be short, by default provide
+information useful for debugging, and should not include the Exception_Name.]}]}
+
 @begin{Reason}
 It may seem strange to define two subprograms whose semantics is
 implementation defined.
@@ -1547,6 +1555,9 @@ meaning of second parameter of @nt{pragma} Unsuppress.],Old=[]}]}
 @begin{ImplAdvice}
 The implementation should minimize the code executed for checks
 that have been suppressed.
+@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Code executed for checks
+that have been suppressed should be minimized.]}]}
 @begin{ImplNote}
 However, if a given check comes for free (for example, the hardware
 automatically performs the check in parallel with doing useful work)

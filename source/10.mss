@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:15:03 $}
+@Comment{$Date: 2005/02/04 06:36:42 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -2005,6 +2005,10 @@ selected partition-wide or system-wide options.],Old=[]}
 @ChgAdded{Version=[1],Text=[When applied to a generic unit, a program unit pragma that
 is not a library unit pragma should apply to each instance of the generic unit
 for which there is not an overriding pragma applied directly to the instance.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[When applied to a generic unit, a program unit pragma that
+is not a library unit pragma should apply to each instance of the generic unit
+for which there is not an overriding pragma applied directly to the instance.]}]}
 @end{ImplAdvice}
 
 
@@ -3054,6 +3058,10 @@ of a given version of the package,
 whether the elaborations occur in distinct executions of
 the same program, or in executions of distinct programs or partitions
 that include the given version.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[A type declared in a preelaborated package
+should have the same representation in every elaboration
+of a given version of the package.]}]}
 @end{ImplAdvice}
 
 @begin{Syntax}

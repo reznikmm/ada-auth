@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2005/01/30 06:44:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2005/02/04 06:36:45 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/01/30 06:44:20 $}
+@Comment{$Date: 2005/02/04 06:36:45 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -27,7 +27,9 @@ This Annex is new to Ada 95.
 @begin{Intro}
 @Redundant[This clause specifies rules regarding access to machine instructions
 from within an Ada program.]
-@ImplDef{Support for access to machine instructions.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[@Chg{Version=[2],
+New=[Implementation-defined intrinsic subprograms],
+Old=[Support for access to machine instructions]}.]}
 @end{Intro}
 
 @begin{ImplReq}
@@ -74,24 +76,37 @@ specified as exported.
 The implementation shall document the overhead associated with calling
 machine-code or intrinsic subprograms, as compared to a fully-inlined
 call, and to a regular out-of-line call.
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The overhead of calling machine-code or intrinsic subprograms
+shall be documented.]}]}
 
 The implementation shall document the types of
 the package System.Machine_Code usable for machine code
 insertions, and the attributes to be used in
 machine code insertions for references to Ada entities.
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The types and attributes used in machine code insertions
+shall be documented.]}]}
 
 The implementation shall document the subprogram calling conventions
 associated with the convention identifiers available for use
 with the interfacing pragmas (Ada and Assembler, at a minimum),
 including register saving,
 exception propagation, parameter passing, and function value returning.
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The subprogram calling conventions for all supported convention
+identifiers shall be documented.]}]}
 
 For exported and imported subprograms,
 the implementation shall document the mapping
 between the Link_Name string, if specified, or
 the Ada designator, if not, and the external link name used
 for such a subprogram.
-@ImplDef{Implementation-defined aspects of access to machine operations.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of access to machine operations.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The mapping between the Link_Name or Ada designator and the external
+link name shall be documented.]}]}
 
 @end{DocReq}
 
@@ -176,7 +191,8 @@ Program units can be connected to non-reserved interrupts. While
 connected, the program unit is said to be @i{attached} to that interrupt.
 The execution of that program unit, the @i{interrupt handler}, is invoked upon
 delivery of the interrupt occurrence.
-@ImplDef{Implementation-defined aspects of interrupts.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of interrupts.]}]}
 @begin{Honest}
   As an obsolescent feature,
   interrupts may be attached to task entries by an address clause.
@@ -272,6 +288,9 @@ exceptions.
 On a multi-processor, the rules governing the delivery of an interrupt
 to a particular processor.
 @end{Enumerate}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The treatment of interrupts shall be documented.]}]}
+@ChgNote{A Bob Duff explanation, but this is just too much junk.}
 @end{DocReq}
 
 @begin{ImplPerm}
@@ -487,6 +506,8 @@ handling overhead should be chosen so as to maximize the execution time cost
 due to cache misses. For example, if the processor has cache memory and the
 activity of an interrupt handler could invalidate the contents of cache memory, the handler should be written such that it invalidates all of the cache memory.
 @end{ImplNote}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The metrics for interrupt handlers shall be documented.]}]}
 @end{enumerate}
 @end{Metrics}
 
@@ -691,6 +712,10 @@ in effect the implementation shall document the default ceiling priority
 assigned to a protected object that contains either the Attach_Handler or
 Interrupt_Handler pragmas, but not the Interrupt_Priority pragma.
 @Redundant[This default need not be the same for all interrupts.]
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If the Ceiling_Locking policy is in effect, the default ceiling priority
+for a protected object that contains an interrupt handler pragma shall be
+documented.]}]}
 
 @end{DocReq}
 
@@ -804,11 +829,18 @@ code generated.
 
 The implementation shall document any circumstances under which the
 elaboration of a preelaborated package causes code to be executed at run time.
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Any circumstances when the elaboration of a preelaborated package
+causes code to be executed shall be documented.]}]}
 
 The implementation shall document whether the method used for initialization
 of preelaborated variables allows a partition to be restarted without
 reloading.
-@ImplDef{Implementation-defined aspects of preelaboration.}
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Whether a partition can be restarted without reloading shall
+be documented.]}]}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of preelaboration.]}]}
 @begin{discussion}
 This covers the issue of the RTS itself being restartable,
 so that need not be a separate @DocReqName.
@@ -1257,8 +1289,12 @@ the execution of the program is erroneous.
 
 The implementation shall document the effect of calling Current_Task
 from an entry body or interrupt handler.
-@ImplDef{The effect of calling Current_Task from an
-entry body or interrupt handler.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[The effect of calling Current_Task from an
+entry body or interrupt handler.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The effect of calling Current_Task from an
+entry body or interrupt handler shall be documented.]}]}
 @end{DocReq}
 
 @begin{Notes}
@@ -1407,9 +1443,12 @@ per task, if such a limit exists.
 
 In addition, if these limits can be configured, the implementation shall
 document how to configure them.
-@ChgImplDef{Version=[1],Kind=[Revised],Text=[@Chg{New=[Limits on the number and size of task attributes, and how to configure them.],
-Old=[Implementation-defined aspects of Task_Attributes.]}]}
-
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[@Chg{New=[Limits on the number and size of task attributes, and how to configure them.],
+Old=[Implementation-defined aspects of Task_Attributes.]}]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[For package Task_Attributes, limits on the number and size of task
+attributes, and how to configure any limits shall be documented.]}]}
 @end{DocReq}
 
 @begin{Metrics}
@@ -1448,6 +1487,8 @@ a call to Set_Value where the Val parameter is not equal to Initial_Value
 and the old attribute value is not equal to Initial_Value.
 
 @end{Itemize}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The metric for the Task_Attributes package shall be documented.]}]}
 @end{Metrics}
 
 @begin{ImplPerm}

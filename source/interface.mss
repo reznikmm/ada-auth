@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2000/09/27 00:15:10 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2005/02/04 06:36:45 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:10 $}
+@Comment{$Date: 2005/02/04 06:36:45 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -642,8 +642,10 @@ An implementation may provide implementation-defined library units
 that are children of Interfaces,
 and may add declarations to the visible part of Interfaces
 in addition to the ones defined above.
-@ImplDef{Implementation-defined children of package Interfaces.
-The contents of the visible part of package Interfaces.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[Implementation-defined
+children of package Interfaces.@Chg{Version=[2],New=[],Old=[ The
+contents of the visible part of package Interfaces.]}]}
+@ChgNote{The latter sentence is given previously!}
 @end{ImplPerm}
 
 @begin{ImplAdvice}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2005/01/21 06:07:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2005/02/04 06:36:43 $ $Author: Randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2005/01/21 06:07:29 $}
+@Comment{$Date: 2005/02/04 06:36:43 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -177,6 +177,9 @@ execution.]}
 operations of this package behave if
 environment variables are changed by external mechanisms (for instance,
 calling operating system services).]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The behavior of package Environment_Variables when environment variables
+are changed by external mechanisms shall be documented.]}]}
 @end{DocReq}
 
 @begin{ImplPerm}

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2005/02/01 06:46:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2005/02/04 06:36:45 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/02/01 06:46:27 $}
+@Comment{$Date: 2005/02/04 06:36:45 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -19,7 +19,12 @@ The metrics are documentation requirements; an implementation shall
 document the values of the language-defined metrics for at least one
 configuration @Redundant[of hardware or an underlying system] supported by
 the implementation, and shall document the details of that configuration.
-@ImplDef{Values of all @MetricsTitle.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Values of all @MetricsTitle.]}]}@ChgNote{We're going to document the
+individual metrics sections.}
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The details of the configuration used to generate the values of all
+metrics shall be documented.]}]}
 @begin{Reason}
 The actual values of the metrics are likely to depend on hardware
 configuration details that are variable and generally outside the control
@@ -581,11 +586,18 @@ a lower priority task. The implementation shall document:
 @begin{Itemize}
 The maximum priority inversion a user task can experience due to activity
 of the implementation (on behalf of lower priority tasks), and
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The maximum priority inversion a user task can experience from
+the implementation shall be documented.]}]}
 
 whether execution of a task can be preempted by the implementation
 processing of delay
 expirations for lower priority tasks, and if so, for how long.
-@ImplDef{Implementation-defined aspects of priority inversion.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of priority inversion.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The amount of time that a task can be preempted for processing on
+behalf of lower-priority tasks shall be documented.]}]}
 @end{Itemize}
 
 @end{DocReq}
@@ -1157,6 +1169,8 @@ base priority of the affected task is lower than the active priority of the
 calling task, and the affected task is not on any entry queue and is not
 executing a protected operation.
 @end{Itemize}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The metrics for Set_Priority shall be documented.]}]}
 @end{Metrics}
 
 @begin{Notes}
@@ -1222,9 +1236,14 @@ abort-deferred operation.
 On a multiprocessor, the implementation shall document any conditions that
 cause the completion of an aborted construct to be delayed later than
 what is specified for a single processor.
-@ImplDef{On a multiprocessor, any conditions that
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[On a multiprocessor, any conditions that
 cause the completion of an aborted construct to be delayed later than
-what is specified for a single processor.}
+what is specified for a single processor.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[On a multiprocessor, any conditions that
+cause the completion of an aborted construct to be delayed later than
+what is specified for a single processorshall be documented.]}]}
 @end{DocReq}
 
 @begin{Metrics}
@@ -1261,6 +1280,8 @@ executes the @nt{asynchronous_select} with a nonnull abortable
 part, and the point where the task continues execution immediately after
 it. The execution time of the abortable part is subtracted.
 @end{Itemize}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The metrics for aborts shall be documented.]}]}
 @end{Metrics}
 
 @begin{ImplAdvice}
@@ -1426,7 +1447,10 @@ It is implementation defined whether the use of pragma Restrictions
 results in a reduction in executable program size, storage requirements,
 or execution time. If possible, the implementation should provide
 quantitative descriptions of such effects for each restriction.
-@ImplDef{Implementation-defined aspects of pragma Restrictions.}
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[@Chg{Version=[2],
+New=[Whether the use of],Old=[Implementation-defined aspects of]}
+pragma Restrictions@Chg{Version=[2],New=[results in a reduction in
+program code or data size or execution time],Old=[]}.]}
 @end{RunTime}
 
 @begin{ImplAdvice}
@@ -1515,7 +1539,8 @@ monotonic clock package.]
    ... -- @RI{not specified by the language}
 @key[end] Ada.Real_Time;
 @end{example}
-@ImplDef{Implementation-defined aspects of package Real_Time.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of package Real_Time.]}]}
 
 @Defn{real time}
 In this Annex, @i{real time} is defined to be the physical time as observed
@@ -1669,12 +1694,19 @@ backward clock jumps.
 
 The implementation shall document the values of Time_First, Time_Last,
 Time_Span_@!First, Time_Span_@!Last, Time_Span_@!Unit, and Tick.
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The values of Time_First, Time_Last,
+Time_Span_@!First, Time_Span_@!Last, Time_Span_@!Unit, and Tick
+for package Real_Time shall be documented.]}]}
 
 The implementation shall document the properties of the underlying
 time base used for the clock and for type Time,
 such as the range of values supported
 and any relevant aspects of the underlying hardware
 or operating system facilities used.
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The properties of the underlying
+time base used package Real_Time shall be documented.]}]}
 @begin{Discussion}
 If there is an underlying operating system,
 this might include information about which system call is used
@@ -1687,12 +1719,18 @@ The implementation shall document whether or not there is any synchronization
 with external time references, and if such synchronization exists, the sources
 of synchronization information, the frequency of synchronization, and the
 synchronization method applied.
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Any synchronization of package Real_Time with external time references
+shall be documented.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised]}
 The implementation shall document any aspects of the @Chg{New=[], Old=[the]}
 @chgnote{Correct typo as noted at Potsdam ARG meeting}
 external environment that could interfere with the clock behavior as defined
 in this clause.
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[Any aspects of the external environment that could interfere with
+package Real_Time shall be documented.]}]}
 @begin{Discussion}
 For example, the implementation is allowed to rely on the time services of
 an underlying operating system, and this operating system clock can
@@ -1748,6 +1786,8 @@ Arithmetic on time values should not be significantly slower
 than 64-bit arithmetic in the underlying machine instruction set.
 @end{ImplNote}
 @end{Itemize}
+@ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[The metrics for package Real_Time shall be documented.]}]}
 @end{Metrics}
 
 @begin{ImplPerm}
@@ -1854,11 +1894,20 @@ of zero, to an open entry.
 
 The implementation shall document the minimum value of the delay expression
 of a @nt{delay_relative_statement} that causes the task to actually be blocked.
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The minimum value of the delay expression of a
+@nt{delay_relative_statement} that causes a task to actually be blocked shall
+be documented.]}]}
 
 The implementation shall document the minimum difference between the value of
 the delay expression of a @nt{delay_until_statement} and the value of
 Real_Time.Clock, that causes the task to actually be blocked.
-@ImplDef{Implementation-defined aspects of @nt{delay_statement}s.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[Implementation-defined aspects of @nt{delay_statement}s.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The minimum difference between the value of the delay expression of a
+@nt{delay_until_statement} and the value of Real_Time.Clock, that causes the
+task to actually be blocked shall be documented.]}]}
 
 @end{DocReq}
 
@@ -1898,6 +1947,8 @@ execution. The lateness of a @nt{delay_until_statement} is obtained by
 subtracting the requested expiration time from the real time that the task
 resumes execution following this statement.
 @end{Itemize}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The metrics for delay statements shall be documented.]}]}
 @end{Metrics}
 
 @begin{Notes}
@@ -2179,8 +2230,12 @@ The implementation shall document the
 upper bound on the duration of interrupt blocking caused by the
 implementation. If this is different for different interrupts or
 interrupt priority levels, it should be documented for each case.
-@ImplDef{The upper bound on the duration of interrupt blocking caused by
-the implementation.}
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+Text=[The upper bound on the duration of interrupt blocking caused by
+the implementation.]}]}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The upper bound on the duration of interrupt blocking caused by
+the implementation shall be documented.]}]}
 
 @end{DocReq}
 
@@ -2227,6 +2282,8 @@ to allow the task to call Set.
 case where no contention (on the execution resource) exists
 @Redundant[from tasks executing on other processors].
 @end{Itemize}
+@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The metrics for entry-less protected objects shall be documented.]}]}
 @end{Metrics}
 
 

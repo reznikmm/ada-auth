@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2005/02/03 07:11:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2005/02/04 06:36:43 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/02/03 07:11:20 $}
+@Comment{$Date: 2005/02/04 06:36:43 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -2219,199 +2219,294 @@ a parameter.]}
 
 @begin{DescribeCode}
 
-**** The text below here still needs to be formatted ****
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "=" (Left, Right : List) @key{return} Boolean;]}
+@end{Example}
 
-@xcode<@key{function} "=" (Left, Right : List) @key{return} Boolean;>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Left and Right denote the same
+list object, then the function returns True. If Left and Right have different
+lengths, then the function returns False. Otherwise, it compares each element
+in Left to the corresponding element in Right using the generic formal equality
+operator; if element equality returns False, then the function returns False.
+If the function has not returned a result after checking all of the elements,
+it returns True. Any exception raised during evaluation of element equality is
+propagated.]}
 
-@xindent<If Left and Right denote the same list object, then the function returns True.
-If Left and Right have different lengths, then the function returns False.
-Otherwise, it compares each element in Left to the corresponding element in
-Right using the generic formal equality operator; if element equality returns
-False, then the function returns False. If the function has not returned a
-result after checking all of the elements, it returns True. Any exception
-raised during evaluation of element equality is propagated.>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Length (Container : List) @key{return} Count_Type;]}
+@end{Example}
 
-@xcode<@key{function} Length (Container : List) @key{return} Count_Type;>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the number of elements in
+Container.]}
 
-@xindent<Returns the number of elements in Container.>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Is_Empty (Container : List) @key{return} Boolean;]}
+@end{Example}
 
-@xcode<@key{function} Is_Empty (Container : List) @key{return} Boolean;>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Length (Container) = 0.]}
 
-@xindent<Equivalent to Length (Container) = 0.>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Clear (Container : @key{in out} List);]}
+@end{Example}
 
-@xcode<@key{procedure} Clear (Container : @key{in out} List);>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Removes all the elements from Container.]}
 
-@xindent<Removes all the elements from Container.>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Element (Position : Cursor) @key{return} Element_Type;]}
+@end{Example}
 
-@xcode<@key{function} Element (Position : Cursor) @key{return} Element_Type;>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
+Constraint_Error is propagated. Otherwise, Element returns the element
+designated by Position.]}
 
-@xindent<If Position equals No_Element, then Constraint_Error is propagated.
-Otherwise, Element returns the element designated by Position.>
-
-@xcode<@key{procedure} Query_Element
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Query_Element
   (Position : @key{in} Cursor;
-   Process  : @key{not null access procedure} (Element : @key{in} Element_Type));>
+   Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
+@end{Example}
 
-@xindent<If Position equals No_Element, then Constraint_Error is propagated.
-Otherwise, Query_Element calls Process.@key{all} with the element on node designated by
-Position as the argument. Program_Error is propagated if Process.@key{all} tampers
-with the elements of Container. Any exception raised by Process.@key{all} is propagated.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
+Constraint_Error is propagated. Otherwise, Query_Element calls
+Process.@key{all} with the element on node designated by Position as the
+argument. Program_Error is propagated if Process.@key{all} tampers with the
+elements of Container. Any exception raised by Process.@key{all} is
+propagated.]}
 
-@xcode<@key{procedure} Update_Element
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Update_Element
   (Position : @key{in} Cursor;
-   Process  : @key{not null access procedure} (Element : @key{in out} Element_Type));>
+   Process  : @key{not null access procedure} (Element : @key{in out} Element_Type));]}
+@end{Example}
 
-@xindent<If Position equals No_Element, then Constraint_Error is propagated. Otherwise,
-Update_Element calls Process.@key{all} with the element on node designated by
-Position as the argument. Program_Error is propagated if Process.@key{all} tampers
-with the elements of Container. Any exceptions raised by Process.@key{all} are propagated.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If Position equals No_Element, then
+Constraint_Error is propagated. Otherwise, Update_Element calls
+Process.@key{all} with the element on node designated by Position as the
+argument. Program_Error is propagated if Process.@key{all} tampers with the
+elements of Container. Any exceptions raised by Process.@key{all} are
+propagated.]}
 
-@xindent<If Element_Type is unconstrained and definite, then the Element parameter
-of Process.@key{all} shall be unconstrained.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Element_Type is unconstrained
+and definite, then the Element parameter of Process.@key{all} shall be
+unconstrained.]}
 
-AARM Note: This means that the elements cannot be directly allocated from the
-heap (nor aliased unless AI-363 is included in the Amendment); it must be
-possible to change the discriminants of the element in place.
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This means that the elements cannot be directly
+  allocated from the heap; it must be possible to change the discriminants of
+  the element in place.]}
+@end{Ramification}
 
-@xcode<@key{procedure} Replace_Element (Position : Cursor;
-                           By       : Element_Type);>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Replace_Element (Position : Cursor;
+                           By       : Element_Type);]}
+@end{Example}
 
-@xindent<If Position equals No_Element, then Constraint_Error is propagated. Otherwise
-Replace_Element assigns the value By to the element designated by
-Position.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
+Constraint_Error is propagated. Otherwise Replace_Element assigns the value By
+to the element designated by Position.]}
 
-@xcode<@key{procedure} Move (Target : @key{in out} List;
-                Source : @key{in out} List);>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Move (Target : @key{in out} List;
+                Source : @key{in out} List);]}
+@end{Example}
 
-@xindent<If Target denotes the same object as Source, then Move has no
-effect. Otherwise, Move first calls Clear (Target). Then, the nodes in Source
-are moved to Target (in the original order). The length of Target is set to the
-length of Source, and the length of Source is set to 0.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
+as Source, then Move has no effect. Otherwise, Move first calls Clear (Target).
+Then, the nodes in Source are moved to Target (in the original order). The
+length of Target is set to the length of Source, and the length of Source is
+set to 0.]}
 
-@xcode<@key{procedure} Prepend (Container : @key{in out} List;
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Prepend (Container : @key{in out} List;
                    New_Item  : @key{in}     Element_Type;
-                   Count     : @key{in}     Count_Type := 1);>
+                   Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
 
-@xindent<Equivalent to Insert (Container, First (Container), New_Item, Count).>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Insert (Container,
+First (Container), New_Item, Count).]}
 
-@xcode<@key{procedure} Append (Container : @key{in out} List;
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Append (Container : @key{in out} List;
                   New_Item  : @key{in}     Element_Type;
-                  Count     : @key{in}     Count_Type := 1);>
+                  Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
 
-@xindent<Equivalent to Insert (Container, No_Element, New_Item, Count).>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Insert (Container,
+No_Element, New_Item, Count).]}
 
-@xcode<@key{procedure} Insert (Container : @key{in out} List;
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert (Container : @key{in out} List;
                   Before    : @key{in}     Cursor;
                   New_Item  : @key{in}     Element_Type;
-                  Count     : @key{in}     Count_Type := 1);>
+                  Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
 
-@xindent<Program_Error is propagated unless Before is equal to No_Element or
-designated an element in Container.
-Otherwise, Insert inserts Count copies of
-New_Item prior to the element designated by Before. If Before equals
-No_Element, the new elements are inserted after the last node (if any). Any
-exception raised during allocation of internal storage is propagated, and
-Container is not modified.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
+Before is equal to No_Element or designated an element in Container. Otherwise,
+Insert inserts Count copies of New_Item prior to the element designated by
+Before. If Before equals No_Element, the new elements are inserted after the
+last node (if any). Any exception raised during allocation of internal storage
+is propagated, and Container is not modified.]}
 
-AARM Note: The check on Before checks that the cursor does not belong to some
-other Container. This check implies that a reference to the container is
-included in the cursor value. This wording is not meant to require detection of
-dangling cursors; such cursors are defined to be invalid, which means that
-execution is erroneous, and any result is allowed (including not raising an
-exception).
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The check on Before checks that the cursor does
+  not belong to some other Container. This check implies that a reference to
+  the container is included in the cursor value. This wording is not meant to
+  require detection of dangling cursors; such cursors are defined to be
+  invalid, which means that execution is erroneous, and any result is allowed
+  (including not raising an exception).]}
+@end{Ramification}
 
-@xcode<@key{procedure} Insert (Container : @key{in out} List;
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert (Container : @key{in out} List;
                   Before    : @key{in}     Cursor;
                   New_Item  : @key{in}     Element_Type;
                   Position  :    @key{out} Cursor;
-                  Count     : @key{in}     Count_Type := 1);>
+                  Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
 
-@xindent<Program_Error is propagated unless Before is equal to No_Element or
-designated an element in Container.
-Otherwise, Insert allocates Count copies of
-New_Item, and inserts them prior to the element designated by Before. If Before
-equals No_Element, the new elements are inserted after the last element (if
-any). Position designates the first newly-inserted element. Any exception
-raised during allocation of internal storage is propagated, and Container is
-not modified.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
+Before is equal to No_Element or designated an element in Container. Otherwise,
+Insert allocates Count copies of New_Item, and inserts them prior to the
+element designated by Before. If Before equals No_Element, the new elements are
+inserted after the last element (if any). Position designates the first
+newly-inserted element. Any exception raised during allocation of internal
+storage is propagated, and Container is not modified.]}
 
-@xcode<@key{procedure} Insert (Container : @key{in out} List;
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert (Container : @key{in out} List;
                   Before    : @key{in}     Cursor;
                   Position  :    @key{out} Cursor;
-                  Count     : @key{in}     Count_Type := 1);>
+                  Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
 
-@xindent<Program_Error is propagated unless Before is equal to No_Element or
-designated an element in Container.
-Otherwise, Insert inserts Count new elements
-prior to the element designated by Before. If Before equals No_Element, the new
-elements are inserted after the last node (if any). The new elements are
-initialized with any implicit initial value for any part (as for an
-object_declaration with no initialization expression - see 3.3.1). Any
-exception raised during allocation of internal storage is propagated, and
-Container is not modified.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
+Before is equal to No_Element or designated an element in Container. Otherwise,
+Insert inserts Count new elements prior to the element designated by Before. If
+Before equals No_Element, the new elements are inserted after the last node (if
+any). The new elements are initialized with any implicit initial value for any
+part (as for an object_declaration with no initialization expression - see
+3.3.1). Any exception raised during allocation of internal storage is
+propagated, and Container is not modified.]}
 
-@xcode<@key{procedure} Delete (Container : @key{in out} List;
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete (Container : @key{in out} List;
                   Position  : @key{in out} Cursor;
-                  Count     : @key{in}     Count_Type := 1);>
+                  Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
 
-@xindent<If Position equals No_Element, then Constraint_Error is propagated. If Position
-does not designate an element in Container, then Program_Error is propagated.
-Otherwise Delete removes (from Container) Count elements starting at the
-element designated by Position (or all of the elements if there are less than
-Count elements starting at Position).>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
+Constraint_Error is propagated. If Position does not designate an element in
+Container, then Program_Error is propagated. Otherwise Delete removes (from
+Container) Count elements starting at the element designated by Position (or
+all of the elements if there are less than Count elements starting at
+Position).]}
 
-@xcode<@key{procedure} Delete_First (Container : @key{in out} List;
-                        Count     : @key{in}     Count_Type := 1);>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete_First (Container : @key{in out} List;
+                        Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
 
-@xindent<Equivalent to Delete (Container, First (Container), Count).>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Delete (Container,
+First (Container), Count).]}
 
-@xcode<@key{procedure} Delete_Last (Container : @key{in out} List;
-                       Count     : @key{in}     Count_Type := 1);>
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete_Last (Container : @key{in out} List;
+                       Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
 
-@xindent<If Length (Container) <= Count then Delete_Last is equivalent to Clear
-(Container). Otherwise it removes the last Count nodes from Container.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Length (Container) <= Count then
+Delete_Last is equivalent to Clear (Container). Otherwise it removes the last
+Count nodes from Container.]}
 
-@xcode<@key{generic}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{generic}
    @key{with function} "<" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
-@key{procedure} Generic_Sort (Container : @key{in out} List);>
+@key{procedure} Generic_Sort (Container : @key{in out} List);]}
+@end{Example}
 
-@xindent<Reorders the nodes of Container such that the elements are
-sorted smallest first as determined by the generic formal "<" operator
-provided. The sort must be stable. Any exception raised during evaluation of
-"<" is propagated.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Reorders the nodes of Container
+such that the elements are sorted smallest first as determined by the generic
+formal "<" operator provided. The sort must be stable. Any exception raised
+during evaluation of "<" is propagated.]}
 
-AARM Notes
-Unlike array sorts, we do require stable sorts here. That's because
-algorithms in the merge sort family (as described by Knuth) can be both
-fast and stable. Such sorts use the extra memory as offered by
-the links to provide better performance.
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Unlike array sorts, we do require stable sorts
+  here. That's because algorithms in the merge sort family (as described by
+  Knuth) can be both fast and stable. Such sorts use the extra memory as
+  offered by the links to provide better performance.]}
 
-Note that list sorts never copy elements; it is the nodes, not the elements,
-that are reordered.
-End AARM Notes
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Note that list sorts never copy elements; it is
+  the nodes, not the elements, that are reordered.]}
+@end{Ramification}
 
-@xcode<@key{generic}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{generic}
    @key{with function} "<" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
 @key{procedure} Generic_Merge (Target  : @key{in out} List;
-                         Source  : @key{in out} List);>
+                         Source  : @key{in out} List);]}
+@end{Example}
 
-@xindent<Generic_Merge removes elements from Source and inserts them into Target so that
-Target be sorted smallest first as determined by the generic formal "<"
-operator.>
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Generic_Merge removes elements from
+Source and inserts them into Target so that Target be sorted smallest first as
+determined by the generic formal "<" operator.]}
 
-@xindent<Any exception raised during evaluation of "<" is propagated. If Target and
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Any exception raised during evaluation of "<" is propagated. If Target and
 Source are not sorted smallest first, then Program_Error is propagated. In
 these cases, Target is left in an unspecified order, but contains the union of
 the elements that were initially in Source and Target; Source is left empty.
-@PDefn{unspecified}>
+@PDefn{unspecified}]}
 
-AARM Note:
-If Program_Error is propagated by Generic_Merge because one of the lists was
-unsorted, it is possible to recover by sorting Target. If Source and Target
-designate the same object, Generic_Merge is essentially a no-op, but it still
-has to check that the list is sorted.
-
-**** The text above here still needs to be formatted ****
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If Program_Error is propagated by Generic_Merge
+  because one of the lists was unsorted, it is possible to recover by sorting
+  Target. If Source and Target designate the same object, Generic_Merge is
+  essentially a no-op, but it still has to check that the list is sorted.]}
+@end{Ramification}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2843,24 +2938,31 @@ a description of the semantics specific to Containers.Ordered_Maps.]}
 
 @begin{StaticSem}
 
-**** The text below here still needs to be formatted ****
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[The type Map is used to represent maps. The type
+Map needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
-The type Map is used to represent maps. The type Map
-needs finalization (see @RefSecNum{User-Defined Assignment and Finalization}).
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[node],Sec=[of a map]}A map contains
+pairs of keys and elements, called @i{nodes}. Map cursors designate nodes, but
+also can be thought of as designating an element (the element contained in the
+node) for consistency with the other containers. There exists an equivalence
+relation on keys, whose definition is different for hashed maps and ordered
+maps. A map never contains two or more nodes with equivalent keys. The
+@i{length} of a map is the number of nodes it
+contains.@Defn2{Term=[length],Sec=[of a map]}]}
 
-A map contains pairs of keys and elements, called @i<nodes>. Map cursors
-designate nodes, but also can be thought of as designating an element (the
-element contained in the node) for consistency with the other containers. There
-exists an equivalence relation on keys, whose definition is different for hashed
-maps and ordered maps. A map never contains two or more nodes with equivalent
-keys. The @i<length> of a map is the number of nodes it contains.
-
-Each nonempty map has two particular nodes called the @i<first node> and the
-@i<last node> (which may be the same). Each node except for the last node has a
-@i<successor node>. If there are no other intervening operations, starting with
-the first node and repeatedly going to the successor node will visit each node
-in the map exactly once until the last node is reached. The exact definition of
-these terms is different for hashed maps and ordered maps.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[first node],Sec=[of a map]}
+@Defn2{Term=[last node],Sec=[of a map]}
+@Defn2{Term=[successor node],Sec=[of a map]}Each nonempty map has two
+particular nodes called the @i{first node} and the @i{last node} (which may be
+the same). Each node except for the last node has a @i{successor node}. If
+there are no other intervening operations, starting with the first node and
+repeatedly going to the successor node will visit each node in the map exactly
+once until the last node is reached. The exact definition of these terms is
+different for hashed maps and ordered maps.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
@@ -2869,18 +2971,32 @@ Some operations are assumed to work on a constant set of elements. For such
 an operation, a subprogram is said to @i{tamper with cursors} of a map object @i<M>
 if:]}
 
-@xbullet<it inserts or deletes elements of @i<M>, that is, it calls the Insert,
-Include, Clear, Delete, or Exclude procedures with @i<M> as a parameter; or>
+@begin{Itemize}
 
-   AARM To Be Honest: Operations which are defined to be equivalent to
-   a call on one of these operations also are included. Similarly, operations
-   which call one of these as part of their definition are included.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it inserts or deletes elements of @i<M>, that is,
+it calls the Insert, Include, Clear, Delete, or Exclude procedures with @i<M>
+as a parameter; or]}
 
-@xbullet<it finalizes @i<M>; or>
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Operations which are defined to be equivalent to
+  a call on one of these operations also are included. Similarly, operations
+  which call one of these as part of their definition are included.]}
+@end{Honest}
 
-@xbullet<it calls the Move procedure with @i<M> as a parameter; or>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it finalizes @i<M>; or]}
 
-@xbullet<it calls one of the operations defined to tamper with the cursors of @i<M>.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<M> as a
+parameter; or]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it calls one of the operations defined to tamper
+with the cursors of @i<M>.]}
+
+@end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
@@ -2888,15 +3004,25 @@ Include, Clear, Delete, or Exclude procedures with @i<M> as a parameter; or>
 Some operations are assumed to not change elements. For such an operation, a
 subprogram is said to @i{tamper with elements} of a map object @i<M> if:]}
 
-@xbullet<it tampers with cursors of @i<M>; or>
+@begin{Itemize}
 
-@xbullet<it modifies one or more elements of @i<M>, that is, it calls the
-Replace, Replace_Element, or Update_Element procedures with @i<M> as a
-parameter.>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it tampers with cursors of @i<M>; or]}
 
-   AARM Note:
-   Replace only modifies a key and element rather than rehashing, so it can be
-   allowed for Iterate.
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[it modifies one or more elements of @i<M>, that is,
+it calls the Replace, Replace_Element, or Update_Element procedures with @i<M>
+as a parameter.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Replace only modifies a key and element rather
+  than rehashing, so it can be allowed for Iterate.]}
+@end{Ramification}
+
+@end{Itemize}
+
+**** The text below here still needs to be formatted ****
 
 Empty_Map represents the empty Map object. It has a length of 0. If an object
 of type Map is not otherwise initialized, it is initialized to the same
@@ -3135,17 +3261,21 @@ AARM Note: To Be Honest: This function may not detect cursors that designate
 deleted elements; such cursors are invalid (see below); the result of
 Has_Element for invalid cursors is unspecified (but not erroneous).
 
-@xcode<@key{procedure} Iterate
-  (Container : @key{in} Map;
-   Process   : @key{not null access procedure} (Position : @key{in} Cursor));>
-
-@xindent<Iterate calls Process.@key{all} with a cursor that designates each node
-in Container, starting with the first node and moving the cursor according to
-the successor relation. Program_Error is propagated if Process.@key{all} tampers
-with the elements of Container. Any exception raised by Process.@key{all} is
-propagated.>
-
 **** The text above here still needs to be formatted ****
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Iterate
+  (Container : @key{in} Map;
+   Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Iterate calls Process.@key{all} with a cursor that
+designates each node in Container, starting with the first node and moving the
+cursor according to the successor relation. Program_Error is propagated if
+Process.@key{all} tampers with the elements of Container. Any exception raised
+by Process.@key{all} is propagated.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3441,7 +3571,9 @@ be possible to modify keys stored in a map. But we can't prevent this error
 anymore than we can prevent someone passing as Hash a random number generator.
 End AARM Notes
 
-Which nodes are the first node and the last node of a map, and which node is the
+@Defn2{Term=[first node],Sec=[of a hashed map]}
+@Defn2{Term=[last node],Sec=[of a hashed map]}
+@Defn2{Term=[successor node],Sec=[of a hashed map]}Which nodes are the first node and the last node of a map, and which node is the
 successor of a given node, are unspecified, other than the general semantics
 described in @RefSecNum{Maps}.@PDefn{unspecified}
 
@@ -3903,6 +4035,7 @@ unspecified.@PDefn{unspecified}]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[first node],Sec=[of an ordered map]}
 @Defn2{Term=[last node],Sec=[of an ordered map]}
+@Defn2{Term=[successor node],Sec=[of an ordered map]}
 The first node of a nonempty map is the one whose key is less than the key of
 all the other nodes in the map. The last node of a nonempty map is the one
 whose key is greater than the key of all the other elements in the map. The
@@ -5149,7 +5282,10 @@ package is unspecified.@PDefn{unspecified}]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[Which elements are the first element and the last
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[first element],Sec=[of a hashed set]}
+@Defn2{Term=[last element],Sec=[of a hashed set]}
+@Defn2{Term=[successor element],Sec=[of a hashed set]}
+Which elements are the first element and the last
 element of a set, and which element is the successor of a given element, are
 unspecified, other than the general semantics described in
 @RefSecNum{Sets}).@PDefn{unspecified}]}
@@ -5238,8 +5374,8 @@ first hashed element in Container.]}
 that the length of the resulting set can become at least the value Capacity
 without requiring an additional call to Reserve_Capacity, and is large enough
 to hold the current length of Container. Reserve_Capacity then rehashes the
-nodes in Container onto the new hash table. It replaces the old hash table with
-the new hash table, and then deallocates the old hash table. Any exception
+elements in Container onto the new hash table. It replaces the old hash table
+with the new hash table, and then deallocates the old hash table. Any exception
 raised during allocation is propagated and Container is not modified.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

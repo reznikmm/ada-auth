@@ -1,14 +1,14 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2005/01/21 06:07:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2005/02/04 06:36:43 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/01/21 06:07:29 $}
+@Comment{$Date: 2005/02/04 06:36:43 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
-@ChgAdded{Version=[2],Text=[The package Ada.Directories provides operations
+@ChgAdded{Version=[2],Text=[The package Directories provides operations
 for manipulating files and directories, and their names.]}
 @end{Intro}
 
@@ -182,7 +182,7 @@ are not special files or directories are called @i<ordinary files>.
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[A directory is an external file, although it may
   not have a name on some targets. A directory is not a special file, as it
-  can be created and read by Ada.Directories.]}
+  can be created and read by Directories.]}
 @end{Ramification}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -667,7 +667,7 @@ external file or directory. The exception Use_Error is propagated if the
 external environment does not support the searching of the directory with the
 given name (in the absence of Name_Error).]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
-intepretation of a non-null search pattern in Ada.Directories.],Old=[]}]}
+intepretation of a non-null search pattern in Directories.],Old=[]}]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} End_Search (Search : @key{in out} Search_Type);]}
@@ -699,7 +699,7 @@ altered while the Search object is valid (for example, by another program). The
 exception Use_Error is propagated if the external environment does not support
 continued searching of the directory represented by Search.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
-results of an Ada.Directories search if the contents of the directory are
+results of a Directories search if the contents of the directory are
 altered while a search is in progress.],Old=[]}]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -811,17 +811,17 @@ Copy_File shall not propagate Use_Error.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[If other information about a file is available
 (such as the owner or creation date) in a directory entry, the implementation
-should provide functions in a child package Ada.Directories.Information to
+should provide functions in a child package Directories.Information to
 retrieve it.@ChildUnit{Parent=[Ada.Directories],Child=[Information]}]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Package Ada.Directories.Information should be provided to retrieve
+Text=[Package Directories.Information should be provided to retrieve
 other information about a file.]}]}
 
 @begin{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For Microsoft Windows,
-Ada.Directories.Information should contain at least the following routines:]}
+Directories.Information should contain at least the following routines:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -915,7 +915,7 @@ Ada.Directories.Information should contain at least the following routines:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For Unix-like systems (POSIX,
-Linux, etc.), Ada.Directories.Information should contain at least the
+Linux, etc.), Directories.Information should contain at least the
 following routines:]}
 
 @begin{Example}

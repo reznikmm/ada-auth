@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/02/03 07:11:16 $}
+@Comment{$Date: 2005/02/04 06:36:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @LabeledClause{Array Types}
 
@@ -246,8 +246,9 @@ If the reserved word @key(aliased) appears in the @nt{component_definition},
 then each component of the array is aliased
 (see @RefSecNum{Access Types}).
 @begin(Ramification)
-  In this case, the nominal subtype cannot be an unconstrained
-  discriminated subtype. See @RefSecNum{Record Types}.
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00363-01]}
+  @ChgDeleted{Version=[2],Text=[In this case, the nominal subtype cannot be an
+  unconstrained discriminated subtype. See @RefSecNum{Record Types}.]}
 @end(Ramification)
 
 @end{StaticSem}
@@ -724,7 +725,7 @@ the meaning of the program will be different.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Type Wide_Wide_String is new.]}
+  The type Wide_Wide_String is new.]}
 @end{Extend95}
 
 
@@ -756,12 +757,15 @@ are indefinite subtypes.]
   A discriminant of a task type can be used to pass data
   to a task of the type upon creation.>}
 @begin{Discussion}
-@PDefn{unknown discriminants}
-@PDefn2{Term=[discriminants], Sec=(unknown)}
-A type, and all of its subtypes, have @i(unknown discriminants)
-when the number or names of the discriminants, if any, are unknown at
-the point of the type declaration. A @nt<discriminant_part> of
-(<>) is used to indicate unknown discriminants.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+  @PDefn{unknown discriminants}
+  @PDefn2{Term=[discriminants], Sec=(unknown)}
+  A @Chg{Version=[2],New=[view of a ],Old=[]}type, and all @Chg{Version=[2],New=[],
+  Old=[of its ]}subtypes@Chg{Version=[2],New=[ of the view],Old=[]}, have
+  @i(unknown discriminants)
+  when the number or names of the discriminants, if any, are unknown at
+  the point of the type declaration@Chg{Version=[2],New=[ for the view],Old=[]}.
+  A @nt<discriminant_part> of (<>) is used to indicate unknown discriminants.
 @end{Discussion}
 @end{Intro}
 
@@ -878,8 +882,8 @@ instance of a generic unit.@PDefn{generic contract issue}]}
 @end{Ramification}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
-  @Leading@Keepnext@;We @Chg{Version=[2],New=[],Old=[also ]considered the
-  following rules@Chg{Version=[2],New=[ for access discriminants],Old=[]}:]}
+  @Leading@Keepnext@;We @Chg{Version=[2],New=[],Old=[also ]}considered the
+  following rules@Chg{Version=[2],New=[ for access discriminants],Old=[]}:
   @begin{Itemize}
     If a type has an access discriminant,
     this automatically makes it limited,
@@ -1154,9 +1158,11 @@ is an unconstrained and indefinite
 subtype (see @RefSecNum{Types and Subtypes}
 and @RefSecNum{Objects and Named Numbers}).]
 @begin(Discussion)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   An @nt<unknown_discriminant_part> @lquotes@;(<>)@rquotes@; is only permitted in
   the declaration of a (generic or nongeneric) private type,
-  private extension, or formal derived type.@Comment{That was always intended,
+  private extension, @Chg{Version=[2],New=[incomplete type, ],Old=[]}or
+  formal derived type.@Comment{That was always intended,
   but 8652/0007 was needed to make it true.}
   Hence, only such types, descendants thereof, and class-wide
   types can have unknown discriminants.
@@ -1180,7 +1186,9 @@ and @RefSecNum{Objects and Named Numbers}).]
   limited;@Chg{Version=[2],New=[ objects of],Old=[]} such a type
   @Chg{Version=[2],New=[ can be initialized only by subprograms (either
   procedures with a parameter of the type, or a function returning the
-  type) declared in the package. Such a type],Old=[]} is useful for
+  type) declared in the package. Subprograms declared elsewhere can operate on
+  and even return the type, but they can only initialize the object by calling
+  (ultimately) a subprogram in the package declaring the type. Such a type],Old=[]} is useful for
   keeping complete control over object creation within the package declaring
   the type.
 
@@ -1209,11 +1217,11 @@ anonymous access type (see @RefSecNum{Type Conversions}).]
 @PDefn2{Term=[implicit subtype conversion],Sec=(access discriminant)}
 @begin(Ramification)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
-  This conversion raises Constraint_Error @Chg{Version=[2],New=[],Old=[if the
-  initial value is @key(null), or, ]}for an object created by an allocator
-  of an access type T, if the initial value is an access parameter
-  that designates a view whose accessibility level is deeper than that
-  of T.
+  This conversion raises @Chg{Version=[2],New=[Program_Error],
+  Old=[Constraint_Error if the initial value is @key(null), or,]} for an
+  object created by an allocator of an access type T, if the
+  initial value is an access parameter that designates a view whose
+  accessibility level is deeper than that of T.
 @end(Ramification)
 @end{RunTime}
 
@@ -1269,9 +1277,11 @@ Note however that the value of a discriminant
 can be changed by assigning to the enclosing object, presuming it
 is an unconstrained variable.
 @begin(Discussion)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 An @nt{unknown_discriminant_part} is permitted only in the
 declaration of a private type (including generic formal private),
-private extension, or generic formal derived type.
+private extension, @Chg{Version=[2],New=[incomplete type, ],Old=[]}or
+generic formal derived type.
 These are the things that will have a corresponding completion or
 generic actual, which will either define the discriminants,
 or say there are none.
@@ -1363,7 +1373,7 @@ when the discriminant is initialized.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0007],ARef=[AI95-00098-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> The wording was clarified so
-  that types that cannot have discriminants cannot have a
+  that types that cannot have discriminants cannot have an
   @nt{unknown_discriminant_part}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00254-01]}
@@ -1445,8 +1455,8 @@ an unconstrained discriminated subtype.
 access subtype, a @nt{discriminant_@!constraint} is illegal
 if @Chg{Version=[2],New=[the
 designated type has a partial view that is constrained or, for a general
-access subtype, has defaults for its discriminants. In addition to the
-places where @LegalityTitle@; normally apply
+access subtype, has @nt{default_expression}s for its discriminants.
+In addition to the places where @LegalityTitle@; normally apply
 (see @RefSecNum{Generic Instantiation}),
 these rules apply also in the private part of an instance
 of a generic unit. In a generic body, this rule is checked presuming all
@@ -1475,7 +1485,7 @@ to cause this problem were being discovered frequently, meaning that new rules
 had to be dreamed up to cover them. Meanwhile, aliased objects and components
 were getting more and more limited. In Ada 2005, we sweep away all of that
 cruft and replace it by a simple rule @lquotes@;thou shalt not create an
-access subtype that can point to a item whose discriminants can be changed by
+access subtype that can point to an item whose discriminants can be changed by
 assignment@rquotes@;.]}
 @end{Reason}
 
@@ -1588,7 +1598,7 @@ seem worth putting it in a "NOTE."
 
 @begin{Incompatible95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0008],ARef=[AI95-00168-01],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+@ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
 The Corrigendum added a restriction on @nt{discriminant_constraint}s for
 general access subtypes. Such constraints are prohibited
 if the designated type can be treated as constrained somewhere in the program.
@@ -1599,9 +1609,9 @@ and this eliminates a boatload of problems that required many restrictions
 on the use of aliased objects and components (now lifted). Similarly,
 Ada 2005 prohibits @nt{discriminant_constraint}s on any access type whose
 designated type has a partial view that is constrained. Such a type will
-not be constrained in the heap to avoid privating problems. Again, the use
+not be constrained in the heap to avoid privacy problems. Again, the use
 of such subtypes is rare (they can only happen within the package and its
-child units).],Old=[]}
+child units).]}
 @end{Incompatible95}
 
 
@@ -1793,10 +1803,13 @@ in order to avoid unnecessary changes to existing compilers.
   for a component that is of an access-to-composite type.
 @end{Discussion}
 @begin{Reason}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}
   The above rules, and a similar one in @RefSecNum{Subprogram Declarations}
   for formal parameters, are intended to allow initializations of
-  components or parameters to occur in an arbitrary order @em whatever
-  order is most efficient,
+  components or parameters to occur in @Chg{Version=[2],
+  New=[a (nearly)],Old=[an]} arbitrary order @em whatever
+  order is most efficient@Chg{Version=[2],New=[ (subject to the restrictions
+  of @RefSecNum{Object Declarations})],Old=[]},
   since one @nt{default_expression} cannot depend on the value of
   another one.
   It also prevent circularities.
@@ -1839,9 +1852,10 @@ defines the (nominal) subtype of the component.
 If the reserved word @key(aliased) appears in the @nt{component_definition},
 then the component is aliased (see @RefSecNum{Access Types}).
 @begin(Ramification)
-  In this case, the nominal subtype cannot be an unconstrained
-  discriminated subtype.
-  See @RefSecNum{Array Types}.
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
+  @ChgDeleted{Version=[2],Text=[In this case, the nominal subtype cannot be
+  an unconstrained discriminated subtype.
+  See @RefSecNum{Array Types}.]}
 @end(Ramification)
 
 @Defn{null record}
@@ -1907,8 +1921,8 @@ Old=[]} if the @nt{constraint}
 @Chg{New=[or @nt{range}],Old=[]} of the @nt{subtype_indication}
 @Chg{New=[or @nt{discrete_@!subtype_@!definition}],Old=[]} is not a per-object
 constraint, then the@Chg{Version=[2],New=[ @nt{access_definition},],Old=[]} @nt{subtype_indication}
-@Chg{New=[or @nt{discrete_@!subtype_@!definition}],Old=[]} is elaborated.
-On the other hand, if the @nt{constraint}
+@Chg{New=[or@Chg{Version=[2],New=[,],Old=[]} @nt{discrete_@!subtype_@!definition}],Old=[]}
+is elaborated. On the other hand, if the @nt{constraint}
 @Chg{New=[or @nt{range}],Old=[]} is a per-object constraint,
 then the elaboration consists of the evaluation of any included
 expression that is not part of a per-object expression.

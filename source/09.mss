@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/02/01 06:46:22 $}
+@Comment{$Date: 2005/02/04 06:36:41 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 
@@ -2935,10 +2935,13 @@ Duration'Small should be no greater than 100 microseconds.
   with a @i(small) of 2.0**(@en@;14) @em that is, 61 microseconds @em and a
   range of @PorM 2.0**17 @em that is, 131_072.0.
 @end(ImplNote)
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The value of Duration'Small should be no greater than 100 microseconds.]}]}
 
-The time base for @nt{delay_relative_statement}s should be
-monotonic;
+The time base for @nt{delay_relative_statement}s should be monotonic;
 it need not be the same time base as used for Calendar.Clock.
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The time base for @nt{delay_relative_statement}s should be monotonic.]}]}
 
 @end{ImplAdvice}
 
@@ -3581,6 +3584,10 @@ Duration value.]}
 target system supports them. If leap seconds are not supported, Difference
 should return zero for Leap_Seconds, Split should return False for Leap_Second,
 and Time_Of should raise Time_Error if Leap_Second is True.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Leap seconds should be supported if the target system supports them.
+Otherwise, operations in Calendar.Formatting should return results
+consistent with no leap seconds.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
