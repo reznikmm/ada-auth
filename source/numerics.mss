@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2005/01/22 02:25:14 $ $Author: Randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2005/01/25 07:00:10 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/01/22 02:25:14 $}
+@Comment{$Date: 2005/01/25 07:00:10 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -558,14 +558,17 @@ Generic_Complex_Types as defined in ISO/IEC CD 13813
 @end{itemize}
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Added a @nt{pragma} Preelaboratable_Initialization to
+  type Imaginary, so that it can be used in prelaborated units.]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Explicitly stated that the
   nongeneric equivalents of Generic_Complex_Types are pure.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
-  @ChgAdded{Version=[2],Text=[Added a @nt{pragma} Preelaboratable_Initialization to
-  type Imaginary, so that it can be used in prelaborated units.]}
 @end{DiffWord95}
 
 
@@ -1243,7 +1246,7 @@ procedures of Text_IO.Float_IO.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0092],ARef=[AI95-00029-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the syntax
-  of values read by Complex_Io is the same as that read by Text_IO.Float_IO.]}
+  of values read by Complex_IO is the same as that read by Text_IO.Float_IO.]}
 @end{DiffWord95}
 
 

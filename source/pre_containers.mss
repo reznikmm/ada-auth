@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2005/01/23 06:04:02 $ $Author: Randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2005/01/25 07:00:12 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/01/23 06:04:02 $}
+@Comment{$Date: 2005/01/25 07:00:12 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -182,7 +182,7 @@ hard to define precisely what is and is not allowed behavior.]}
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[When this clause says that the behavior of
-something is unspecified, we
+something is unspecified@PDefn{unspecified}, we
 really mean that any result of executing Ada code short of erroneous
 execution is allowed. We do not mean that memory not belonging to the
 parameters of the operation can be trashed. When we mean to allow erroneous
@@ -1442,6 +1442,7 @@ the Source or Target of a call to Move;>
 The result of "=" or Has_Element is unspecified if it is called with an
 invalid cursor parameter. Execution is erroneous if any other subprogram
 declared in Containers.Vectors is called with an invalid cursor parameter.
+@PDefn{unspecified}
 
 AARM Notes: The list above (combined with the bounded error cases) is intended
 to be exhaustive. In other cases, a cursor value continues to designate its
@@ -1911,7 +1912,8 @@ operator.>
 @xindent<Any exception raised during evaluation of "<" is propagated. If Target and
 Source are not sorted smallest first, then Program_Error is propagated. In
 these cases, Target is left in an unspecified order, but contains the union of
-the elements that were initially in Source and Target; Source is left empty.>
+the elements that were initially in Source and Target; Source is left empty.
+@PDefn{unspecified}>
 
 AARM Note:
 If Program_Error is propagated by Generic_Merge because one of the lists was
@@ -2107,6 +2109,7 @@ created:
 The result of "=" or Has_Element is unspecified if it is called with an invalid
 cursor parameter. Execution is erroneous if any other subprogram declared in
 Containers.Doubly_Linked_Lists is called with an invalid cursor parameter.
+@PDefn{unspecified}
 
 AARM Notes: The list above is intended to be exhaustive. In other cases, a
 cursor value continues to designate its original element. For instance,
@@ -2486,7 +2489,7 @@ Source or Target of a call to Move;>
 The result of "=" or Has_Element is unspecified if these functions are called
 with an invalid cursor parameter. Execution is erroneous if any other subprogram
 declared in Containers.Hashed_Maps or Containers.Ordered_Maps is called with an
-invalid cursor parameter.
+invalid cursor parameter.@PDefn{unspecified}
 
 AARM Notes: The list above is intended to be exhaustive. In other cases, a
 cursor value continues to designate its original element. For instance, cursor
@@ -2670,7 +2673,7 @@ Function Hash is expected to return the same value each time it is called with a
 particular key value. For any two equivalent key values, Hash is expected to
 return the same value. If Hash behaves in some other manner, the behavior of
 this package is unspecified. Which subprograms of this package call Hash, and
-how many times they call it, is unspecified.
+how many times they call it, is unspecified.@PDefn{unspecified}
 
 AARM Notes
 The implementation is not required to protect against Hash raising an exception,
@@ -2687,7 +2690,7 @@ called with a particular pair of key values. For any two keys @i<K1> and @i<K2>,
 boolean values Equivalent_Keys (@i<K1>, @i<K2>) and Equivalent_Key (@i<K2>, @i<K1>)
 are expected to be equal. If Equivalent_Keys behaves in some other manner, the
 behavior of this package is unspecified. Which subprograms of this package call
-Equivalent_Keys, and how many times they call it, is unspecified.
+Equivalent_Keys, and how many times they call it, is unspecified.@PDefn{unspecified}
 
 AARM Note
 As with Hash, the implementation is not required to protect against
@@ -2717,7 +2720,7 @@ End AARM Notes
 
 Which nodes are the first node and the last node of a map, and which node is the
 successor of a given node, are unspecified, other than the general semantics
-described in @RefSecNum{Maps}.
+described in @RefSecNum{Maps}.@PDefn{unspecified}
 
 AARM Note
 Typically the first node will be the first node in the first bucket, the last
@@ -3028,7 +3031,7 @@ returns True, then @i<B> < @i<A> is expected to return False. For any two
 equivalent elements, "=" is expected to return True. If "<" or "=" behaves in
 some other manner, the behavior of this package is unspecified. Which
 subprograms of this package call "<" and "=", and how many times these
-functions are called, is unspecified.
+functions are called, is unspecified.@PDefn{unspecified}
 
 AARM Notes
 The implementation is not required to protect against "<" or "=" raising an
@@ -3043,7 +3046,7 @@ End AARM Notes
 
 If the value of a key stored in a map is changed other than by an operation in
 this package such that at least one of "<" or "=" give different results, the
-behavior of this package is unspecified.
+behavior of this package is unspecified.@PDefn{unspecified}
 
 AARM Notes
 The implementation is not required to protect against changes to key values
@@ -3521,11 +3524,11 @@ terms of a key (typically, a portion of an element) instead of a complete
 element. The formal function Key of Generic_Keys extracts a key value from an
 element. It is expected to return the same value each time it is called with a
 particular element. The behavior of Generic_Keys is unspecified if Key behaves
-in some other manner.
+in some other manner.@PDefn{unspecified}
 
 A key is expected to unambiguously determine one equivalence class for elements.
 The behavior of Generic_Keys is unspecified if the formal parameters of this
-package behave in some other manner.
+package behave in some other manner.@PDefn{unspecified}
 
 The subprograms in package Generic_Keys named Contains, Find, Element, Delete,
 and Exclude, are equivalent to the corresponding subprograms in the parent
@@ -3579,7 +3582,8 @@ Source or Target of a call to Move;>
 @xbullet<The element it designates has been deleted from the set.>
 
 The result of "=" or Has_Element is unspecified if these functions are called
-with an invalid cursor parameter. Execution is erroneous if any other
+with an invalid cursor parameter.@PDefn{unspecified}
+Execution is erroneous if any other
 subprogram declared in Containers.Hashed_Sets or Containers.Ordered_Sets is
 called with an invalid cursor parameter.
 
@@ -3712,14 +3716,14 @@ declaration:
 
    @key{function} Union (Left, Right : Set) @key{return} Set;
 
-   @key{function} "or" (Left, Right : Set) @key{return} Set @key{renames} Union;
+   @key{function} "@key{or}" (Left, Right : Set) @key{return} Set @key{renames} Union;
 
    @key{procedure} Intersection (Target : @key{in out} Set;
                            Source : @key{in}     Set);
 
    @key{function} Intersection (Left, Right : Set) @key{return} Set;
 
-   @key{function} "and" (Left, Right : Set) @key{return} Set @key{renames} Intersection;
+   @key{function} "@key{and}" (Left, Right : Set) @key{return} Set @key{renames} Intersection;
 
    @key{procedure} Difference (Target : @key{in out} Set;
                          Source : @key{in}     Set);
@@ -3733,7 +3737,7 @@ declaration:
 
    @key{function} Symmetric_Difference (Left, Right : Set) @key{return} Set;
 
-   @key{function} "xor" (Left, Right : Set) @key{return} Set
+   @key{function} "@key{xor}" (Left, Right : Set) @key{return} Set
      @key{renames} Symmetric_Difference;
 
    @key{function} Overlap (Left, Right : Set) @key{return} Boolean;
@@ -3812,7 +3816,7 @@ Function Hash is expected to return the same value each time it is called with
 a particular element value. For any two equivalent elements, Hash is expected
 to return the same value. If Hash behaves in some other manner, the behavior of
 this package is unspecified. Which subprograms of this package call Hash, and
-how many times they call it, is unspecified.
+how many times they call it, is unspecified.@PDefn{unspecified}
 
 Function Equivalent_Elements is expected to return the same value each time
 it is called with a particular pair of element values. For any two elements @i<E1>
@@ -3821,10 +3825,11 @@ Equivalent_Elements (@i<E2>, @i<E1>)
 are expected to be equal. If Equivalent_Elements behaves in some other manner,
 the behavior of this package is unspecified. Which subprograms of this package
 call Equivalent_Elements, and how many times they call it, is unspecified.
+@PDefn{unspecified}
 
 If the value of an element stored in a set is changed other than by an
 operation in this package such that at least one of Hash or Equivalent_Elements
-give different results, the behavior of this package is unspecified.
+give different results, the behavior of this package is unspecified.@PDefn{unspecified}
 
 AARM Note
 See @RefSec{The Package Containers.Hashed_Maps} for a suggested implementation,
@@ -3834,7 +3839,7 @@ key/element pairs.
 
 Which elements are the first element and the last element of a set, and which
 element is the successor of a given element, are unspecified, other than the
-general semantics described in @RefSecNum{Sets}).
+general semantics described in @RefSecNum{Sets}).@PDefn{unspecified}
 
 @xcode<@key{procedure} Clear (Container : @key{in out} Set);>
 
@@ -3895,14 +3900,14 @@ For any element @i<E>, the function Generic_Keys.Hash must be such that
 Hash (@i<E>) = Generic_Keys.Hash (Key (@i<E>)). If Key or Generic_Keys.Hash
 behave in some other manner, the behavior of Generic_Keys is unspecified. Which
 subprograms of Generic_Keys call Generic_Keys.Hash, and how many times they
-call it, is unspecified.
+call it, is unspecified.@PDefn{unspecified}
 
 For any two elements @i<E1> and @i<E2>, the boolean values
 Equivalent_Element (@i<E1>, @i<E2>), Equivalent_Keys (Key (@i<E1>), @i<E2>),
 and Equivalent_Keys (Key (@i<E2>), @i<E1>) are all expected to be equal. If Key
 or Equivalent behave in some other manner, the behavior of Generic_Keys is
 unspecified. Which subprograms of Generic_Keys call Equivalent, and how many
-times they call it, is unspecified.
+times they call it, is unspecified.@PDefn{unspecified}
 
 @xcode<@key{function} Equivalent_Keys (Left  : Cursor;
                           Right : Key_Type) @key{return} Boolean;>
@@ -3913,6 +3918,8 @@ times they call it, is unspecified.
                           Right : Cursor) @key{return} Boolean;>
 
 @xindent<Equivalent to Equivalent_Keys (Left, Key (Right)).>
+
+**** The text above here still needs to be formatted ****
 
 @begin{ImplAdvice}
 
@@ -3948,261 +3955,350 @@ O(@i<N>).]}]}
 
 @begin{StaticSem}
 
-The generic library package Containers.Ordered_Sets has the following
-declaration:
-
-@xcode<@key{generic}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
+package Containers.Ordered_Sets has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Element_Type @key{is private};
    @key{with function} "<" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
    @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
-@key{package} Ada.Containers.Ordered_Sets @key{is}
-   @key{pragma} Preelaborate (Ordered_Sets);
+@key{package} Ada.Containers.Ordered_Sets @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Ordered_Sets]}
+   @key{pragma} Preelaborate (Ordered_Sets);]}
 
-   @key{type} Set @key{is tagged private};
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private};]}
 
-   @key{type} Cursor @key{is private};
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};]}
 
-   Empty_Set : @key{constant} Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Set} : @key{constant} Set;]}
 
-   No_Element : @key{constant} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{No_Element} : @key{constant} Cursor;]}
 
-   @key{function} "=" (Left, Right : Set) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : Set) @key{return} Boolean;]}
 
-   @key{function} Equivalent_Sets (Left, Right : Set) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Sets} (Left, Right : Set) @key{return} Boolean;]}
 
-   @key{function} Length (Container : Set) @key{return} Count_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Length} (Container : Set) @key{return} Count_Type;]}
 
-   @key{function} Is_Empty (Container : Set) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : Set) @key{return} Boolean;]}
 
-   @key{procedure} Clear (Container : @key{in out} Set);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Clear} (Container : @key{in out} Set);]}
 
-   @key{function} Element (Position : Cursor) @key{return} Element_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Position : Cursor) @key{return} Element_Type;]}
 
-   @key{procedure} Query_Element
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
      (Position : @key{in} Cursor;
-      Process  : @key{not null access procedure} (Element : @key{in} Element_Type));
+      Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
 
-   @key{procedure} Replace_Element (Container : @key{in} Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Container : @key{in} Set;
                               Position  : @key{in} Cursor;
-                              By        : @key{in} Element_Type);
+                              By        : @key{in} Element_Type);]}
 
-   @key{procedure} Move (Target : @key{in out} Set;
-                   Source : @key{in out} Set);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Set;
+                   Source : @key{in out} Set);]}
 
-   @key{procedure} Insert (Container : @key{in out} Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} Set;
                      New_Item  : @key{in}     Element_Type;
                      Position  :    @key{out} Cursor;
-                     Inserted  :    @key{out} Boolean);
+                     Inserted  :    @key{out} Boolean);]}
 
-   @key{procedure} Insert (Container : @key{in out} Set;
-                     New_Item  : @key{in}     Element_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} Set;
+                     New_Item  : @key{in}     Element_Type);]}
 
-   @key{procedure} Include (Container : @key{in out} Set;
-                      New_Item  : @key{in}     Element_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Include} (Container : @key{in out} Set;
+                      New_Item  : @key{in}     Element_Type);]}
 
-   @key{procedure} Replace (Container : @key{in out} Set;
-                      New_Item  : @key{in}     Element_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace} (Container : @key{in out} Set;
+                      New_Item  : @key{in}     Element_Type);]}
 
-   @key{procedure} Delete (Container : @key{in out} Set;
-                     Item      : @key{in}     Element_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete} (Container : @key{in out} Set;
+                     Item      : @key{in}     Element_Type);]}
 
-   @key{procedure} Exclude (Container : @key{in out} Set;
-                      Item      : @key{in}     Element_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Exclude} (Container : @key{in out} Set;
+                      Item      : @key{in}     Element_Type);]}
 
-   @key{procedure} Delete (Container : @key{in out} Set;
-                     Position  : @key{in out} Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete} (Container : @key{in out} Set;
+                     Position  : @key{in out} Cursor);]}
 
-   @key{procedure} Delete_First (Container : @key{in out} Set);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_First} (Container : @key{in out} Set);]}
 
-   @key{procedure} Delete_Last (Container : @key{in out} Set);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_Last} (Container : @key{in out} Set);]}
 
-   @key{procedure} Union (Target : @key{in out} Set;
-                    Source : @key{in}     Set);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Union} (Target : @key{in out} Set;
+                    Source : @key{in}     Set);]}
 
-   @key{function} Union (Left, Right : Set) @key{return} Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Union} (Left, Right : Set) @key{return} Set;]}
 
-   @key{function} "or" (Left, Right : Set) @key{return} Set @key{renames} Union;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{or}" (Left, Right : Set) @key{return} Set @key{renames} Union;]}
 
-   @key{procedure} Intersection (Target : @key{in out} Set;
-                           Source : @key{in}     Set);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Intersection} (Target : @key{in out} Set;
+                           Source : @key{in}     Set);]}
 
-   @key{function} Intersection (Left, Right : Set) @key{return} Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Intersection} (Left, Right : Set) @key{return} Set;]}
 
-   @key{function} "and" (Left, Right : Set) @key{return} Set @key{renames} Intersection;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{and}" (Left, Right : Set) @key{return} Set @key{renames} Intersection;]}
 
-   @key{procedure} Difference (Target : @key{in out} Set;
-                         Source : @key{in}     Set);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Difference} (Target : @key{in out} Set;
+                         Source : @key{in}     Set);]}
 
-   @key{function} Difference (Left, Right : Set) @key{return} Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Difference} (Left, Right : Set) @key{return} Set;]}
 
-   @key{function} "-" (Left, Right : Set) @key{return} Set @key{renames} Difference;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "-" (Left, Right : Set) @key{return} Set @key{renames} Difference;]}
 
-   @key{procedure} Symmetric_Difference (Target : @key{in out} Set;
-                                   Source : @key{in}     Set);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Symmetric_Difference} (Target : @key{in out} Set;
+                                   Source : @key{in}     Set);]}
 
-   @key{function} Symmetric_Difference (Left, Right : Set) @key{return} Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Symmetric_Difference} (Left, Right : Set) @key{return} Set;]}
 
-   @key{function} "xor" (Left, Right : Set) @key{return} Set @key{renames}
-      Symmetric_Difference;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{xor}" (Left, Right : Set) @key{return} Set @key{renames}
+      Symmetric_Difference;]}
 
-   @key{function} Overlap (Left, Right : Set) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Overlap} (Left, Right : Set) @key{return} Boolean;]}
 
-   @key{function} Is_Subset (Subset : Set;
-                       Of_Set : Set) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Is_Subset} (Subset : Set;
+                       Of_Set : Set) @key{return} Boolean;]}
 
-   @key{function} Contains (Container : Set;
-                      Item      : Element_Type) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : Set;
+                      Item      : Element_Type) @key{return} Boolean;]}
 
-   @key{function} Find (Container : Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : Set;
                   Item      : Element_Type)
-      @key{return} Cursor;
+      @key{return} Cursor;]}
 
-   @key{function} Floor (Container : Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Floor} (Container : Set;
                    Item      : Element_Type)
-      @key{return} Cursor;
+      @key{return} Cursor;]}
 
-   @key{function} Ceiling (Container : Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Ceiling} (Container : Set;
                      Item      : Element_Type)
-      @key{return} Cursor;
+      @key{return} Cursor;]}
 
-   @key{function} First (Container : Set) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First} (Container : Set) @key{return} Cursor;]}
 
-   @key{function} First_Element (Container : Set) @key{return} Element_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Element} (Container : Set) @key{return} Element_Type;]}
 
-   @key{function} Last (Container : Set) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last} (Container : Set) @key{return} Cursor;]}
 
-   @key{function} Last_Element (Container : Set) @key{return} Element_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Element} (Container : Set) @key{return} Element_Type;]}
 
-   @key{function} Next (Position : Cursor) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor;]}
 
-   @key{procedure} Next (Position : @key{in out} Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor);]}
 
-   @key{function} Previous (Position : Cursor) @key{return} Cursor;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor;]}
 
-   @key{procedure} Previous (Position : @key{in out} Cursor);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor);]}
 
-   @key{function} Has_Element (Position : Cursor) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
 
-   @key{function} "<" (Left, Right : Cursor) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "<" (Left, Right : Cursor) @key{return} Boolean;]}
 
-   @key{function} ">" (Left, Right : Cursor) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} ">" (Left, Right : Cursor) @key{return} Boolean;]}
 
-   @key{function} "<" (Left : Cursor; Right : Element_Type)
-      @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "<" (Left : Cursor; Right : Element_Type)
+      @key{return} Boolean;]}
 
-   @key{function} ">" (Left : Cursor; Right : Element_Type)
-      @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} ">" (Left : Cursor; Right : Element_Type)
+      @key{return} Boolean;]}
 
-   @key{function} "<" (Left : Element_Type; Right : Cursor)
-      @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "<" (Left : Element_Type; Right : Cursor)
+      @key{return} Boolean;]}
 
-   @key{function} ">" (Left : Element_Type; Right : Cursor)
-      @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} ">" (Left : Element_Type; Right : Cursor)
+      @key{return} Boolean;]}
 
-   @key{procedure} Iterate
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Iterate}
+     (Container : @key{in} Set;]}
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate}
      (Container : @key{in} Set;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
-   @key{procedure} Reverse_Iterate
-     (Container : @key{in} Set;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));
-
-   @key{generic}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{generic}
       @key{type} Key_Type (<>) @key{is limited private};
       @key{with function} Key (Element : Element_Type) @key{return} Key_Type;
       @key{with function} "<" (Left : Key_Type; Right : Element_Type)
          @key{return} Boolean @key{is} <>;
       @key{with function} ">" (Left : Key_Type; Right : Element_Type)
          @key{return} Boolean @key{is} <>;
-   @key{package} Generic_Keys @key{is}
+   @key{package} @AdaDefn{Generic_Keys} @key{is}]}
 
-       @key{function} Contains (Container : Set;
-                          Key       : Key_Type) @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Contains} (Container : Set;
+                          Key       : Key_Type) @key{return} Boolean;]}
 
-       @key{function} Find (Container : Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Find} (Container : Set;
                       Key       : Key_Type)
-          @key{return} Cursor;
+          @key{return} Cursor;]}
 
-       @key{function} Floor (Container : Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Floor} (Container : Set;
                        Item      : Key_Type)
-          @key{return} Cursor;
+          @key{return} Cursor;]}
 
-       @key{function} Ceiling (Container : Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Ceiling} (Container : Set;
                          Item      : Key_Type)
-          @key{return} Cursor;
+          @key{return} Cursor;]}
 
-       @key{function} Key (Position : Cursor) @key{return} Key_Type;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Key} (Position : Cursor) @key{return} Key_Type;]}
 
-       @key{function} Element (Container : Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Element} (Container : Set;
                          Key       : Key_Type)
-          @key{return} Element_Type;
+          @key{return} Element_Type;]}
 
-       @key{procedure} Replace (Container : @key{in out} Set;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{procedure} @AdaSubDefn{Replace} (Container : @key{in out} Set;
                           Key       : @key{in}     Key_Type;
-                          New_Item  : @key{in}     Element_Type);
+                          New_Item  : @key{in}     Element_Type);]}
 
-       @key{procedure} Delete (Container : @key{in out} Set;
-                         Key       : @key{in}     Key_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{procedure} @AdaSubDefn{Delete} (Container : @key{in out} Set;
+                         Key       : @key{in}     Key_Type);]}
 
-       @key{procedure} Exclude (Container : @key{in out} Set;
-                          Key       : @key{in}     Key_Type);
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{procedure} @AdaSubDefn{Exclude} (Container : @key{in out} Set;
+                          Key       : @key{in}     Key_Type);]}
 
-       @key{function} "<" (Left : Cursor; Right : Key_Type)
-          @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} "<" (Left : Cursor; Right : Key_Type)
+          @key{return} Boolean;]}
 
-       @key{function} ">" (Left : Cursor; Right : Key_Type)
-          @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} ">" (Left : Cursor; Right : Key_Type)
+          @key{return} Boolean;]}
 
-       @key{function} "<" (Left : Key_Type; Right : Cursor)
-          @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} "<" (Left : Key_Type; Right : Cursor)
+          @key{return} Boolean;]}
 
-       @key{function} ">" (Left : Key_Type; Right : Cursor)
-          @key{return} Boolean;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} ">" (Left : Key_Type; Right : Cursor)
+          @key{return} Boolean;]}
 
-       @key{procedure} Update_Element_Preserving_Key
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{procedure} @AdaSubDefn{Update_Element_Preserving_Key}
          (Container : @key{in out} Set;
           Position  : @key{in}     Cursor;
           Process   : @key{not null access procedure}
-                                         (Element : @key{in out} Element_Type));
+                                         (Element : @key{in out} Element_Type));]}
 
-   @key{end} Generic_Keys;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{end} Generic_Keys;]}
 
-@key{private}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{private}]}
 
-   ... -- @RI[not specified by the language]
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   ... -- @RI[not specified by the language]]}
 
-@key{end} Ada.Containers.Ordered_Sets;>
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{end} Ada.Containers.Ordered_Sets;]}
+@end{Example}
 
-Two elements @i<E1> and @i<E2> are @i<equivalent> if both @i<E1> < @i<E2> and
-@i<E2> < @i<E1> return False, using the generic formal "<" operator for
-elements.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Two elements @i<E1> and @i<E2> are @i<equivalent>
+if both @i<E1> < @i<E2> and @i<E2> < @i<E1> return False, using the generic
+formal "<" operator for elements.@Defn2{Term=[equivalent element],Sec=[ordered set]}]}
 
-Functions "<" and "=" on Element_Type values are expected to return the same
-result value each time they are called with a particular pair of element values.
-If @i<A> = @i<B> returns True, then @i<B> = @i<A> is expected to also return
-True. If @i<A> < @i<B> returns True, then @i<B> < @i<A> is expected to return
-False. For any two equivalent elements, "=" is expected to return True. If "<"
-or "=" behaves in some other manner, the behavior of this package is
-unspecified. Which subprograms of this package call "<" and "=", and how many
-times these functions are called, is unspecified.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[Functions "<" and "=" on Element_Type values are
+expected to return the same result value each time they are called with a
+particular pair of element values. If @i<A> = @i<B> returns True, then @i<B> =
+@i<A> is expected to also return True. If @i<A> < @i<B> returns True, then
+@i<B> < @i<A> is expected to return False. For any two equivalent elements, "="
+is expected to return True. If "<" or "=" behaves in some other manner, the
+behavior of this package is unspecified. Which subprograms of this package call
+"<" and "=", and how many times these functions are called, is
+unspecified.@PDefn{unspecified}]}
 
-If the value of an element stored in a set is changed other than by an
-operation in this package such that at least one of "<" or "=" give different
-results, the behavior of this package is unspecified.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If the value of an element stored in a set is changed
+other than by an operation in this package such that at least one of
+"<" or "=" give different
+results, the behavior of this package is unspecified.@PDefn{unspecified}]}
 
-AARM Note
-See @RefSec{The Package Containers.Ordered_Maps} for a suggested
-implementation, and for justification of the restrictions regarding "<" and
-"=". Note that sets only need to store elements, not key/element pairs.
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[See @RefSec{The Package Containers.Ordered_Maps}
+for a suggested implementation, and for justification of the restrictions
+regarding "<" and "=". Note that sets only need to store elements, not
+key/element pairs.]}
+@end{Discussion}
 
-The first element of a nonempty set is the one which is less than all the other
-elements in the set. The last element of a nonempty set is the one which is
-greater than all the other elements in the set. The successor of an element is
-the smallest element that is larger than the given element. The predecessor of
-an element is the largest element that is smaller than the given element. All
-comparisons are done using the generic formal "<" operator for elements.
-
-**** The text above here still needs to be formatted ****
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[first element],Sec=[ordered set]}
+@Defn2{Term=[last element],Sec=[ordered set]}
+The first element of a nonempty set is the one
+which is less than all the other elements in the set. The last element of a
+nonempty set is the one which is greater than all the other elements in the
+set. The successor of an element is the smallest element that is larger than
+the given element. The predecessor of an element is the largest element that is
+smaller than the given element. All comparisons are done using the generic
+formal "<" operator for elements.]}
 
 @begin{DescribeCode}
 
@@ -4363,7 +4459,7 @@ boolean values (@i<E1> < @i<E2>), (Key(@i<E1>) < @i<E2>), and (Key(@i<E2>) >
 Generic_Keys.">" behave in some other manner, the behavior of this package is
 unspecified. Which subprograms of this package call Key, Generic_Keys."<" and
 Generic_Keys.">", and how many times the functions are called, is
-unspecified.]}
+unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[In addition to the semantics described in

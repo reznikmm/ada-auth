@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/01/23 06:04:01 $}
+@Comment{$Date: 2005/01/25 07:00:11 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -345,12 +345,16 @@ package.],Old=[]}]}@ChgNote{AI-344 allows controlled types to be declared at
 any nesting depth, so this note is obsolete.}
 @end{ImplNote}
 
-@begin{DiffWord95}
+@begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
-  @ChgAdded{Version=[2],Text=[Added text to define that a Sequential_IO.File_Type
-  needs finalization. This is used by restriction No_Nested_Finalization (see
-  @RefSecNum{Tasking Restrictions}).]}
-@end{DiffWord95}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95} File_Type in
+  an instance of Sequential_IO is defined to need finalization. If the
+  restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
+  applies to the partition, and File_Type does not have a controlled part, it
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
+  in Ada 95. Such code is not portable, as another Ada compiler may have a
+  controlled part in File_Type, and thus would be illegal.]}
+@end{Incompatible95}
 
 
 @LabeledSubClause{File Management}
@@ -445,27 +449,24 @@ additional effects described in subclause
 @key[procedure] Reset(File : @key[in] @key[out] File_Type; Mode : @key[in] File_Mode);
 @key[procedure] Reset(File : @key[in] @key[out] File_Type);
 @end{Example}
+    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00085-01]}
     Resets the given file so that reading from its
-    elements can be restarted from the beginning of the file (for
+    elements can be restarted from the beginning of the
+    @Chg{Version=[2],New=[external ],Old=[]}file (for
     modes In_File and Inout_File), and so that writing to its elements can be
-    restarted at the beginning of the file (for modes Out_File and Inout_File)
-    or after the last element of the file (for mode Append_File).
+    restarted at the beginning of the
+    @Chg{Version=[2],New=[external ],Old=[]}file (for modes Out_File and Inout_File)
+    or after the last element of the @Chg{Version=[2],New=[external ],Old=[]}file (for mode Append_File).
     In particular, for direct access this means that the current
     index is set to one. If a Mode parameter is supplied, the
     current mode of the given file is set to the given mode. In addition, for
     sequential files, if the given file has mode Out_File or Append_File when
     Reset is called, the last element written since the most recent open or
-    reset is the last element that can be read from the file. If no elements
+    reset is the last element that can be read from the
+    @Chg{Version=[2],New=[external ],Old=[]}file. If no elements
     have been written and the file mode is Out_File, the reset file is empty.
     If no elements have been written and the file mode is Append_File,
     then the reset file is unchanged.
-
-@begin{Honest}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00085-01]}
-  @ChgAdded{Version=[2],Text=[This is talking about the beginning of the
-  @i<external> file and the last element of the @i<external> file, as
-  opposed to the normal meaning of @lquotes@;file@rquotes in the Standard.]}
-@end{Honest}
 
     @Trailing@;The exception Status_Error is propagated if the file is not open.
     The exception Use_Error is propagated if the external environment
@@ -539,10 +540,17 @@ Any such restriction should be documented.
 @end{ImplPerm}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00085-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that Reset affects and depends on the
+  external file.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
   @ChgAdded{Version=[2],Text=[Removed the requirement for Name to return
   a full path; this is now accomplished by Directories.Full_Name(Name(File))
-  (see @RefSecNum{The Package Directories}).]}
+  (see @RefSecNum{The Package Directories}). This is not documented as
+  an inconsistency, because there is no requirement for implementations to
+  change - the Ada 95 behavior is still allowed, it just is no longer
+  required.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
   @ChgAdded{Version=[2],Text=[Added text to specific the default mode for
@@ -709,12 +717,16 @@ declared in some other (non-generic) package.],Old=[]}]}
 
 @end{StaticSem}
 
-@begin{DiffWord95}
+@begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
-  @ChgAdded{Version=[2],Text=[Added text to define that a Direct_IO.File_Type
-  needs finalization. This is used by restriction No_Nested_Finalization (see
-  @RefSecNum{Tasking Restrictions}).]}
-@end{DiffWord95}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95} File_Type in
+  an instance of Direct_IO is defined to need finalization. If the
+  restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
+  applies to the partition, and File_Type does not have a controlled part, it
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
+  in Ada 95. Such code is not portable, as another Ada compiler may have a
+  controlled part in File_Type, and thus would be illegal.]}
+@end{Incompatible95}
 
 
 @LabeledSubClause{Direct Input-Output Operations}
@@ -1407,6 +1419,17 @@ and the
 generic packages Modular_IO and Decimal_IO are new in Ada 95.
 @end{Extend83}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Text_IO.File_Type is defined to need finalization. If the
+  restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
+  applies to the partition, and File_Type does not have a controlled part, it
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
+  in Ada 95. Such code is not portable, as another Ada compiler may have a
+  controlled part in File_Type, and thus would be illegal.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0051],ARef=[AI95-00057-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter mode
@@ -1415,11 +1438,6 @@ generic packages Modular_IO and Decimal_IO are new in Ada 95.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Text=[The Text_IO.Get_Line functions are new;
   they are described in @RefSec{Input-Output of Characters and Strings}.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
-  @ChgAdded{Version=[2],Text=[Added text to define that a Text_IO.File_Type
-  needs finalization. This is used by restriction No_Nested_Finalization (see
-  @RefSecNum{Tasking Restrictions}).]}
 @end{DiffWord95}
 
 
@@ -2250,6 +2268,16 @@ An implementation is allowed to assume that certain external files do
 not contain page terminators, in which case Get_Line and Skip_Line can
 return as soon as a line terminator is read.
 @end{Notes}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  The Get_Line functions are newly added to Ada.Text_IO.
+  If Ada.Text_IO is referenced in a @nt{use_clause}, and an entity Get_Line
+  is defined in a package that is also referenced in a @nt{use_clause}, the
+  user-defined Get_Line may no longer be use-visible, resulting in errors.
+  This should be rare and is easily fixed if it does occur.]}
+@end{Incompatible95}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
@@ -3319,6 +3347,31 @@ closed file.]}
 @end{Reason}
 @end{Erron}
 
+@begin{Inconsistent95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
+  @ChgAdded{Version=[2],Text=[The description of the file control
+  subprograms was corrected so that they do not require truncation of the
+  external file - a stream file is not a sequential file. Ada 95 that
+  expects truncation of the stream file may not work under Ada 2005.
+  Note that the Ada 95 standard was ambiguous on this point (the normative
+  wording seemed to require truncation, but didn't explain where; the
+  AARM notes seemed to expect behavior like Direct_IO), and implementations
+  varied widely. Therefore, as a practical matter, code that depends on
+  stream truncation may not work even in Ada 95; deleting the file before
+  opening it provides truncation which works in both Ada 95 and Ada 2005.]}
+@end{Inconsistent95}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Stream_IO.File_Type is defined to need finalization. If the
+  restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
+  applies to the partition, and File_Type does not have a controlled part, it
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
+  in Ada 95. Such code is not portable, as another Ada compiler may have a
+  controlled part in File_Type, and thus would be illegal.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0051],ARef=[AI95-00057-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter mode
@@ -3337,16 +3390,6 @@ closed file.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00085-01]}
   @ChgAdded{Version=[2],Text=[Clarified that Set_Mode can
   be called with the current mode.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
-  @ChgAdded{Version=[2],Text=[Corrected description of the file control
-  subprograms to clarify that they do not require truncation of the
-  external file - a stream file is not a sequential file.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
-  @ChgAdded{Version=[2],Text=[Added text to define that a Stream_IO.File_Type
-  needs finalization. This is used by restriction No_Nested_Finalization (see
-  @RefSecNum{Tasking Restrictions}).]}
 @end{DiffWord95}
 
 

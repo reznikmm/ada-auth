@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2005/01/21 06:07:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2005/01/25 07:00:10 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/01/21 06:07:27 $}
+@Comment{$Date: 2005/01/25 07:00:10 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -237,7 +237,11 @@ to query information about the partition.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00226-01]}
   @ChgAdded{Version=[2],Text=[Corrected wording so that a partition that
-  has an elaboration problem will either deadlock or raise an exception.]}
+  has an elaboration problem will either deadlock or raise an exception.
+  While an Ada 95 implementation could allow some partitions to continue to
+  execute, they could be accesing unelaborated data, which is very bad
+  (and erroneous in a practical sense). Therefore, this isn't listed as an
+  inconsistency.]}
 @end{DiffWord95}
 
 
@@ -539,7 +543,8 @@ within the visible part of the library unit;
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}
-if the full view of a type declared in the visible part of the
+@Chg{Version=[2],New=[],Old=[if ]}the full view of a type declared in
+the visible part of the
 library unit @Chg{Version=[2],New=[shall support external streaming (see
 @RefSecNum{Stream-Oriented Attributes})], Old=[has a part that is of a
 non-remote access type, then that access type, or the type of some
@@ -1861,12 +1866,17 @@ of space when writing an item.]}]}
   received from elsewhere.
 @end{Notes}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00273-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  The specification of System.RPC can now be
+  tailored for an implementation. If program replaces the body of System.RPC
+  with a user-defined body, it may not compile in Ada 2005 (if the
+  specification of System.RPC has been changed).]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0087],ARef=[AI95-00082-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the user can
   replace System.RPC.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00273-01]}
-  @ChgAdded{Version=[2],Text=[The specification of System.RPC can now be
-  tailored for an implementation.]}
 @end{DiffWord95}

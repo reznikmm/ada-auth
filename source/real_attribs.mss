@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2005/01/22 02:25:18 $}
+@Comment{$Date: 2005/01/25 07:00:14 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.21 $}
+@comment{$Revision: 1.22 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -329,6 +329,33 @@ S of a floating point type @i{T}.
    two integers. A zero result has the sign of @i{X} when S'Signed_Zeros is
    True.]}
 
+@ChgAttribute{Version=[2],Kind=[Added],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Machine_Rounding>, ARef=[AI95-00267-01],
+  Text=[@Chg{Version=[2],New=[S'Machine_Rounding denotes a function
+     with the following specification:],Old=[]}
+@begin(Descexample)
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key(function) S'Machine_Rounding (@RI{X} : @RI{T})
+  @key(return) @RI{T}]}
+@end(Descexample)
+
+   @ChgRef{Version=[2],Kind=[Added]}
+   @ChgAdded{Version=[2],NoPrefix=[T],Text=[The function yields the
+   integral value nearest to @i{X}. If @i{X} lies exactly halfway between two
+   integers, one of those integers is returned, but which of them is returned
+   is unspecified. A zero result has the sign of @i{X} when S'Signed_Zeros is
+   True. This function provides access to the rounding behavior which is most
+   efficient on the target processor.@PDefn{unspecified}]}]}
+
+   @begin{Discussion}
+     @ChgRef{Version=[2],Kind=[Added]}
+     @ChgAdded{Version=[2],Text=[We leave the rounding unspecified, so that
+     users cannot depend on a particular rounding. This attribute is intended
+     for use in cases where the particular rounding chosen is irrelevant. If
+     there is a need to know which way values halfway between two integers are
+     rounded, one of the other rounding attributes should be used.]}
+   @end{Discussion}
+
 @AttributeLeading{Prefix=<S>, AttrName=<Truncation>,
   Text=[S'Truncation denotes a function with the following
    specification:
@@ -646,6 +673,13 @@ The Denorm and Signed_Zeros attributes are new, as are all of the
 primitive function attributes.
 @end{Extend83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00388-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The 'Machine_Rounding attribute is new.]}
+@end{Extend95}
+
+
 @LabeledSubClause{Attributes of Fixed Point Types}
 
 @begin{StaticSem}
@@ -693,3 +727,4 @@ is now allowed for fixed point types. It is
 also specifiable in an attribute definition clause
 (see @RefSecNum{Machine_Radix Attribute Definition Clause}).
 @end{Extend83}
+

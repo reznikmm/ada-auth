@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2005/01/22 02:25:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2005/01/25 07:00:12 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/01/22 02:25:17 $}
+@Comment{$Date: 2005/01/25 07:00:12 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -22,11 +22,13 @@ children are defined in @RefSec{Numerics}.
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00388-01]}
 @key[package] Ada.Numerics @key[is]@ChildUnit{Parent=[Ada],Child=[Numerics]}
    @key[pragma] Pure(Numerics);
    @AdaDefn{Argument_Error} : @key[exception];
    @AdaDefn{Pi} : @key[constant] :=
-          3.14159_26535_89793_23846_26433_83279_50288_41971_69399_37511;
+          3.14159_26535_89793_23846_26433_83279_50288_41971_69399_37511;@Chg{Version=[2],New=[
+   @pi  : @key[constant] := Pi;],Old=[]}
    @AdaDefn{e}  : @key[constant] :=
           2.71828_18284_59045_23536_02874_71352_66249_77572_47093_69996;
 @key[end] Ada.Numerics;
@@ -54,6 +56,13 @@ significant digits.
 @Defn{extensions to Ada 83}
 Numerics and its children were not predefined in Ada 83.
 @end{Extend83}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00388-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The alternative declaration of @pi is new.]}
+@end{Extend95}
+
 
 @LabeledSubClause{Elementary Functions}
 
@@ -465,6 +474,10 @@ sequences (for debugging) to unique sequences in each execution of a program.
 @key[end] Ada.Numerics.Float_Random;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
+@ChgAdded{Version=[2],Text=[The type Generator needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+
 The generic library package Numerics.Discrete_Random has the following
 declaration:
 @begin{Example}
@@ -542,6 +555,11 @@ Generator, since the parameter mode is @key(in) for all operations on a
 Generator. For this reason, Numerics.Float_Random and Numerics.Discrete_Random
 cannot be declared pure.
 @end{ImplNote}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
+@ChgAdded{Version=[2],Text=[The type Generator needs finalization
+(see @RefSecNum{User-Defined Assignment and Finalization})
+in every instantiation of Numerics.Discrete_Random.]}
 
 An object of the limited private type Generator is associated with a sequence
 of random numbers. Each generator has a hidden (internal) state, which the
@@ -862,6 +880,18 @@ resetting the generator obtained from that instance to a time-dependent state,
 and then using random integers obtained from that generator to initialize the
 generators in each Worker task.
 @end{Notes}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Type Generator in Numerics.Float_Random and in an instance of
+  Numerics.Discrete_Random is defined to need finalization. If the
+  restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
+  applies to the partition, and Generator does not have a controlled part, it
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
+  in Ada 95. Such code is not portable, as another Ada compiler may have a
+  controlled part in Generator, and thus would be illegal.]}
+@end{Incompatible95}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0050],ARef=[AI95-00089-01]}

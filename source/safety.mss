@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.25 $ $Date: 2005/01/21 06:07:31 $ $Author: Randy $ }
+@Comment{ $Revision: 1.26 $ $Date: 2005/01/25 07:00:14 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/01/21 06:07:31 $}
+@Comment{$Date: 2005/01/25 07:00:14 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -649,7 +649,9 @@ to an interactive debugger to perform the check.
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0093],ARef=[AI95-00207-01]}
 @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the definition of
 the Inspection_Point pragma to apply to only variables visible at the point
-of the pragma.]}
+of the pragma. Otherwise, the compiler would have to assume that some
+other code somewhere could have a pragma Inspection_Point, preventing many
+optimizations (such as unused object elimination).]}
 @end{DiffWord95}
 
 
