@@ -1,10 +1,10 @@
 @Part(syntax, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:25 $}
+@Comment{$Date: 2000/05/17 00:17:44 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.10 $}
+@comment{$Revision: 1.11 $}
 
 @begin{Intro}
 @Defn2{Term=[syntax], Sec=(complete listing)}

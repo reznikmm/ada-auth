@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:23 $}
+@Comment{$Date: 2000/05/17 00:17:43 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.10 $}
+@Comment{$Revision: 1.11 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and

@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:25 $}
+@Comment{$Date: 2000/05/17 00:17:44 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.10 $}
+@comment{$Revision: 1.11 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -280,7 +280,7 @@ S of a floating point type @i{T}.
   @key(return) @i{T}
 @end{Example}
 
-   @NoPrefix@;The function yields the value @Math{@Flore{X}},
+   @NoPrefix@;The function yields the value @Math{@Floor{X}},
    i.e., the largest (most positive) integral value less than or equal to
    @i{X}.
    When @i{X} is zero, the
@@ -295,7 +295,7 @@ S of a floating point type @i{T}.
   @key(return) @i{T}
 @end{Example}
 
-   @NoPrefix@;The function yields the value @Math{@Ceil{X}},
+   @NoPrefix@;The function yields the value @Math{@Ceiling{X}},
    i.e., the smallest (most negative) integral value greater than or equal to
    @i{X}.
    When @i{X} is zero, the
@@ -335,8 +335,8 @@ S of a floating point type @i{T}.
   @key(return) @i{T}
 @end{Example}
 
-   @NoPrefix@;The function yields the value @Math{@Ceil{X}} when @i{X} is negative,
-   and @Math{@Flore{X}} otherwise.  A zero result has the sign of @i{X} when
+   @NoPrefix@;The function yields the value @Math{@Ceiling{X}} when @i{X} is negative,
+   and @Math{@Floor{X}} otherwise.  A zero result has the sign of @i{X} when
    S'Signed_Zeros is True.]}
 
 @Attribute{Prefix=<S>, AttrName=<Remainder>,
@@ -427,10 +427,10 @@ is outside the base range of S.
    where @Math{k} is the normalized exponent of @i{X}.  The function yields
    the value
    @begin{Itemize}
-      @Math{@Flore{X/v} @Times v},
+      @Math{@Floor{X/v} @Times v},
       when @i{X} is nonnegative and @i{Radix_Digits} is positive;
 
-      @Math{@Ceil{X/v} @Times v},
+      @Math{@Ceiling{X/v} @Times v},
       when @i{X} is negative and @i{Radix_Digits} is positive.
    @end{Itemize}
 
@@ -506,7 +506,7 @@ a floating point type @i{T}.
   Text=[If the Numerics Annex is not supported,
    this attribute yields an implementation defined value that is
    greater than or equal to
-   @Math{@ceil{d @Times @Log(10) / @Log(T'@r{Machine_Radix})} + 1}, where
+   @Math{@Ceiling{d @Times @Log(10) / @Log(T'@r{Machine_Radix})} + 1}, where
    @Math{d} is the requested decimal precision of @i{T},
    and less than or equal to the value of
    @i{T}'Machine_Mantissa.

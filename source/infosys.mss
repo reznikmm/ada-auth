@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.11 $ $Date: 2000/05/17 00:17:44 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:24 $}
+@Comment{$Date: 2000/05/17 00:17:44 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}

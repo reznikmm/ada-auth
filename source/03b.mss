@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:23 $}
+@Comment{$Date: 2000/05/17 00:17:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.5 $}
+@Comment{$Revision: 1.6 $}
 
 @LabeledClause{Array Types}
 

@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:25 $}
+@Comment{$Date: 2000/05/17 00:17:44 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.10 $}
+@comment{$Revision: 1.11 $}
 @comment{$RLB: Eliminated includes. $}
 
 @Define{TwoColRW, use=Display}

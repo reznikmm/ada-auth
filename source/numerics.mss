@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
+@comment{ $Revision: 1.11 $ $Date: 2000/05/17 00:17:44 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:25 $}
+@Comment{$Date: 2000/05/17 00:17:44 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1417,7 +1417,7 @@ S'@Attr{Model_Mantissa} @\Yields the number of digits in the mantissa of
 the canonical form of the model numbers of @i{T}
 (see @RefSecNum{Attributes of Floating Point Types}).  The
 value of this attribute shall be greater than or equal to
-@Math{@ceil{d @Times @Log(10) / @Log(T'@r{Machine_Radix})} + 1}, where @Math{d}
+@Math{@Ceiling{d @Times @Log(10) / @Log(T'@r{Machine_Radix})} + 1}, where @Math{d}
 is the requested decimal precision of @i{T}.  In addition, it
 shall be less than or equal to the value of
 @i{T}'Machine_Mantissa.  This attribute yields a value of the
@@ -1860,7 +1860,7 @@ When the Cycle parameter is omitted, the maximum relative error given above
 applies only when the absolute value of the angle parameter X is less than or
 equal to some implementation-defined @i{angle threshold}, which shall be at
 least
-@Math{EF@r[.Float_Type'Machine_Radix] @Up<@Flore(EF@r[.Float_Type'Machine_Mantissa]/2)>}.
+@Math{EF@r[.Float_Type'Machine_Radix] @Up<@Floor(EF@r[.Float_Type'Machine_Mantissa]/2)>}.
 Beyond the angle threshold, the accuracy of the forward trigonometric functions
 is implementation defined.
 @ImplDef{The value of the @i{angle threshold}, within which certain elementary

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:24 $}
+@Comment{$Date: 2000/05/17 00:17:43 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.10 $}
+@Comment{$Revision: 1.11 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon

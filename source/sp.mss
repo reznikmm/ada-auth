@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
+@comment{ $Revision: 1.11 $ $Date: 2000/05/17 00:17:44 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/05/16 04:48:25 $}
+@Comment{$Date: 2000/05/17 00:17:44 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 

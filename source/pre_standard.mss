@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.10 $ $Date: 2000/05/16 04:48:25 $ $Author: Randy $ }
+@comment{ $Revision: 1.11 $ $Date: 2000/05/17 00:17:45 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:25 $}
+@Comment{$Date: 2000/05/17 00:17:45 $}
 
 @LabeledClause{The Package Standard}
 
@@ -208,19 +208,12 @@ the visible part of package Standard.}
       'p',  'q',  'r',  's',     't',  'u',  'v',  'w', @\@charnote[--@i{112 (16#70#) .. 119 (16#77#)}]
       'x',  'y',  'z',  '{',     '|',  '}',  '~',  @i[del], @\@charnote[--@i{120 (16#78#) .. 127 (16#7F#)}]
 @Comment{Blank line}
-
       @i[reserved_128], @\@i[reserved_129], @\@i[bph], @\@i[nbh], @\ @\ @\@charnote[--@i{128 (16#80#) .. 131 (16#83#)}]
       @i[reserved_132], @\@i[nel], @\@i[ssa], @\@i[esa], @\ @\ @\ @\@charnote[--@i{132 (16#84#) .. 135 (16#87#)}]
-
       @i[hts], @\@i[htj], @\@i[vts], @\@i[pld], @\@i[plu], @\@i[ri], @\@i[ss2], @\@i[ss3], @\@charnote[--@i{136 (16#88#) .. 143 (16#8F#)}]
 @comment{blank line}
       @i[dcs], @\@i[pu1], @\@i[pu2], @\@i[sts], @\@i[cch], @\@i[mw], @\@i[spa], @\@i[epa], @\@charnote[--@i{144 (16#90#) .. 151 (16#97#)}]
-
-@case{Device, Postscript=
-"      @i[sos], @\@i[reserved_153], @\@i[sci], @\@i[csi], @\ @\ @\",
-     else=
-"      @i[sos], @i[reserved_153], @i[sci], @i[csi],"}
-@\@charnote[--@i{152 (16#98#) .. 155 (16#9B#)}]
+      @i[sos], @\@i[reserved_153], @\@i[sci], @\@i[csi], @\ @\ @\@\@charnote[--@i{152 (16#98#) .. 155 (16#9B#)}]
       @i[st], @\@i[osc], @\@i[pm], @\@i[apc], @\ @\ @\ @\ @\@charnote[--@i{156 (16#9C#) .. 159 (16#9F#)}]
 
 @comment{blank line}

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/05/16 04:48:23 $}
+@Comment{$Date: 2000/05/17 00:17:42 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.10 $}
+@Comment{$Revision: 1.11 $}
 
 @begin{Intro}
 @redundant[
