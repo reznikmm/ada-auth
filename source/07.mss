@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/11/10 20:26:23 $}
+@Comment{$Date: 2001/03/22 18:14:23 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2355,8 +2355,8 @@ object, other adjustments due to be performed might or might not be performed,
 and then Program_Error is raised. During its propagation, finalization might or
 might not be applied to objects whose Adjust failed.],Old=[]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-For an Adjust invoked as part of an assignment operation,
-any other adjustments due to be performed are performed,
+For an Adjust invoked as part of an assignment @Chg{New=[statement],
+Old=[operation]}, any other adjustments due to be performed are performed,
 and then Program_Error is raised.
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0024]}

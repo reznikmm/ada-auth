@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/11/10 20:26:23 $}
+@Comment{$Date: 2001/03/22 18:14:24 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 
@@ -2540,10 +2540,10 @@ The exception Time_Error is raised by the function Time_Of if the
 actual parameters do not form a proper date. This exception
 is also raised by the operators "+" and "@en@;" if the
 result is not representable in the type Time or Duration, as appropriate.
-This exception is also raised by the function@Chg{New=[s],Old=[]} Year
-@Chg{New=[, Month, Day, and Seconds and],Old=[or]} the procedure Split
-if the year number of the given date is outside of the range of the
-subtype Year_Number.
+This exception is also raised by the
+function@Chg{New=[s],Old=[]} Year@Chg{New=[, Month, Day, and Seconds and],
+Old=[or]} the procedure Split if the year number of the given date is
+outside of the range of the subtype Year_Number.
 @begin(Honest)
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0106]}
   By "proper date" above we mean that the given year has
