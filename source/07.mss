@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:09 $}
+@Comment{$Date: 2000/11/10 20:26:23 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1120,7 +1120,7 @@ types do not gain operations within a nested scope. Consider:],Old=[]}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[@Key[package] Outer @key[is]
     @key[package] Inner @key[is]
-	@key[type] Inner_Type @key[is] @key[private];
+        @key[type] Inner_Type @key[is] @key[private];
     @key[private]
         @key[type] Inner_Type @key[is] @key[new] Boolean;
     @key[end] Inner;

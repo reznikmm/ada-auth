@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:19 $}
+@Comment{$Date: 2000/11/10 20:26:23 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 
@@ -544,9 +544,10 @@ The task executing the master is blocked until all the dependents
 have terminated. @Redundant[Any remaining finalization is then performed
 and the master is left.]
 
+@ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Doubled word}
 @leading@;Completion of a task (and the corresponding @nt<task_body>) can
 occur when the task is blocked at a @nt<select_@!statement> with an
-an open @nt<terminate_alternative>
+@Chg{New=[],Old=[an ]}open @nt<terminate_alternative>
 (see @RefSecNum(Selective Accept)); the open @nt<terminate_alternative>
 is selected if and only if the following conditions are satisfied:
 @begin{itemize}

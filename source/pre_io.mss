@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/09/27 00:15:10 $}
+@Comment{$Date: 2000/11/10 20:26:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -1959,14 +1959,14 @@ provided:
 @key[procedure] Look_Ahead (Item        : @key[out] Character;
                       End_Of_Line : @key[out] Boolean);
 @end{Example}
-  @Trailing@;Mode_Error is propagated if the mode of the file is not In_File.
-  Sets End_Of_Line to True if at end of line, including if at end of
-  page or at end of file; in each of these cases the value of
-  Item is not specified.
+  @Trailing@ChgRef{Version=[1],Kind=[Revised]}Mode_Error is propagated if
+  the mode of the file is not In_File. Sets End_Of_Line to True if at end of
+  line, including if at end of page or at end of file; in each of these cases
+  the value of Item is not specified.
   @PDefn{unspecified}
   Otherwise End_Of_Line is set to
-  False and Item is set to the the next character (without consuming it)
-  from the file.
+  False and Item is set to @Chg{New=[],Old=[the ]}the next character (without
+  consuming it) from the file.
 
 @begin{Example}@Keepnext
 @key[procedure] Get_Immediate(File : @key[in]  File_Type;

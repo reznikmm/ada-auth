@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/09/29 05:34:30 $}
+@Comment{$Date: 2000/11/10 20:26:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @LabeledClause{Array Types}
 
@@ -2836,7 +2836,7 @@ shall not be dynamically tagged unless it is a controlling operand in a call
 on a dispatching operation.
 Similarly, if the expected type for an expression
 is an anonymous access-to-specific
-tagged type, then the @Chg{New=[then the object designated by the expression
+tagged type, then the @Chg{New=[object designated by the expression
 shall not be dynamically tagged unless it is],Old=[expression shall not be
 of an access-to-class-wide type unless it designates]} a controlling
 operand in a call on a dispatching operation.
@@ -4881,7 +4881,7 @@ denotes an aliased view of an object}:
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010]}
   If @Chg{New=[@i(A) is a named access type and @i(D) is a tagged type],
   Old=[the designated type of @i(A) is tagged]}, then the type of the view
-  shall be covered by the @Chg{New=[@i(D)],Old=[designated type]};
+  shall be covered by @Chg{New=[@i(D)],Old=[the designated type]};
   @Chg{New=[if @i(A) is anonymous and @i(D) is tagged, then the type of the
   view shall be either @i(D)'Class or a type covered by D;],Old=[]}
   if @Chg{New=[@i(D) is untagged],Old=[@i(A)'s designated type is not tagged]},

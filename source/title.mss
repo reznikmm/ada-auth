@@ -1,45 +1,67 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2000/09/01 22:49:02 $}
+@comment{$Revision: 1.13 $ $Date: 2000/11/10 20:26:23 $}
 
+@begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}}}
+@end{ISOOnly}
+@begin{NotISO}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:1995(E)@Chg{New=[ with COR.1:2000], Old=[]}}}}
+@end{NotISO}
 
 @Noparanum@ @*
 @ @*
 @ @*
 
+@begin{ISOOnly}
 @Noparanum@swiss{@shrink{@shrink{@shrink{INTERNATIONAL ORGANIZATION FOR STANDARDIZATION}}}}
 
 @Noparanum@swiss{@shrink{@shrink{@shrink{INTERNATIONAL ELECTROTECHNICAL COMMISSION}}}}
+@end{ISOOnly}
 
 @Noparanum@ @*
 @ @*
 
+@begin{ISOOnly}
 @Noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Information technology @Em Programming languages @Em Ada}}}}}}}
+@end{ISOOnly}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
+@begin{NotISO}
+@Noparanum@ @*@;@comment{A dummy paragraph containing three blank lines}
+@ @*
+@ @*
+@ @*
+
+@end{NotISO}
+
+@begin{ISOOnly}
 @Comment{Jim Moore wants this deleted, as it is confusing.}
 @Noparanum@Chg{New=[@ @*@Comment{Dummy paragraph}],
                Old=[@Swiss{[Revision of first edition (ISO 8652:1987)]}]}
+@end{ISOOnly}
 
 @Noparanum@ @*
 
 @begin{NotISO}
 @begin{RMOnly}
-@Noparanum@Heading{Ada Reference Manual}
+@Noparanum@Heading{@Grow{@Grow{@Grow{Ada Reference Manual}}}}
 @end{RMOnly}
 @begin{AARMOnly}
-@Noparanum@Heading{Annotated Ada Reference Manual}
+@Noparanum@Heading{@Grow{@Grow{@Grow{Annotated Ada Reference Manual}}}}
 @end{AARMOnly}
 
-@Noparanum@Heading{@Chg{New=[with Technical Corrigendum 1], Old=[]}}
+@Noparanum@ @;@comment{A dummy paragraph containing just a blank}
+
+@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:1995(E)}}}
+@Noparanum@Center{@Swiss{@Chg{New=[@Grow{with Technical Corrigendum 1}], Old=[]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@center{@Swiss{Language and Standard Libraries}}
+@Noparanum@Center{@Swiss{@Grow{Language and Standard Libraries}}}
 
 @Noparanum@Comment{The following puts the copyright near the bottom of the page}
 @ @*@*@*@*@*@*@*@*@*@*

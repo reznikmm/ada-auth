@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2000/09/27 00:15:09 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2000/11/10 20:26:23 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/09/27 00:15:09 $}
+@Comment{$Date: 2000/11/10 20:26:23 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -666,7 +666,7 @@ remote types, or other remote call interface library units.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
 @Leading@;In addition, the following restrictions apply to @Chg{New=[],Old=[the
-visible part ]}of an RCI library unit:
+visible part of ]}an RCI library unit:
 @begin{itemize}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078]}
 it@Chg{New=[s visible part],Old=[]} shall not contain the declaration of a
