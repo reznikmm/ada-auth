@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:23 $}
+@Comment{$Date: 2000/09/27 00:15:10 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @Redundant[@Defn{input}@Defn{output}
@@ -2589,7 +2589,6 @@ and as a sequence of lines grouped into pages.
 @end{Intro}
 
 @begin{StaticSem}
-@Defn{Ada.Wide_Text_IO}
 @ChildUnit{Parent=[Ada],Child=[Wide_@!Text_IO]}
 The specification of package Wide_Text_IO is the same as that for
 Text_IO, except that in each Get,
@@ -2599,9 +2598,7 @@ any occurrence of Character is replaced by Wide_Character, and any
 occurrence of String is replaced by Wide_String.
 
 
-@Defn{Ada.Integer_Wide_Text_IO}
 @ChildUnit{Parent=[Ada],Child=[Integer_@!Wide_@!Text_IO]}
-@Defn{Ada.Float_Wide_Text_IO}
 @ChildUnit{Parent=[Ada],Child=[Float_@!Wide_@!Text_IO]}
 Nongeneric equivalents of Wide_Text_IO.Integer_IO
 and Wide_Text_IO.@!Float_IO are provided (as for Text_IO)
@@ -2797,8 +2794,8 @@ current index is maintained as follows:],Old=[]}
 @begin{Itemize}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
 @Chg{New=[For Open and Create, if the Mode parameter is Append_File, the
-current index is set to the current size of the file; otherwise, the current
-index is set to one.],Old=[]}
+current index is set to the current size of the file plus one; otherwise, the
+current index is set to one.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055]}
 @Chg{New=[For Reset, if the Mode parameter is Append_File, or no Mode parameter

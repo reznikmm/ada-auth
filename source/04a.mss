@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:19 $}
+@Comment{$Date: 2000/09/27 00:15:09 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -4206,7 +4206,7 @@ type @Chg{New=[with],Old=[whose]} designated type
 @Chg{New=[@i<D> such that either @i<D>],Old=[]} covers the type determined
 by the @nt<subtype_mark> of the @nt<subtype_indication> or
 @nt<qualified_expression>@Chg{New=[, or the expected type is anonymous and
-the determined type is @i<D>'Class.],Old=[.]}
+the determined type is @i<D>'Class],Old=[]}.
 @begin{Discussion}
   See @RefSec(The Context of Overload Resolution) for the meaning
   of @lquotes@;shall be a single ... type whose ...@rquotes@;

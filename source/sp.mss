@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2000/08/31 04:56:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2000/09/27 00:15:10 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2000/08/31 04:56:08 $}
+@Comment{$Date: 2000/09/27 00:15:10 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1407,7 +1407,7 @@ per task, if such a limit exists.
 
 In addition, if these limits can be configured, the implementation shall
 document how to configure them.
-@ChgImplDef{Version=[1],Kind=[Revised],Text=[@Chg{New=[Limits on the number and size of task attributes.],
+@ChgImplDef{Version=[1],Kind=[Revised],Text=[@Chg{New=[Limits on the number and size of task attributes, and how to configure them.],
 Old=[Implementation-defined aspects of Task_Attributes.]}]}
 
 @end{DocReq}

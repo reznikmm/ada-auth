@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2000/09/09 01:16:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2000/09/27 00:15:10 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2000/09/09 01:16:21 $}
+@Comment{$Date: 2000/09/27 00:15:10 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1305,7 +1305,7 @@ Value(Item). The lower bound of the result is 0.
 @Chg{New=[If Length is 0, then Value propagates Constraint_Error.],Old=[]}
 @begin{Ramification}
 Value(New_Char_Array(Chars)) = Chars if Chars does not contain
-nul; else Value(@!New_Char_Array(@!Chars)) is the prefix of Chars
+nul; else Value(New_Char_Array( Chars)) is the prefix of Chars
 up to and including the first nul.
 @end{Ramification}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2000/08/31 04:56:05 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2000/09/27 00:15:09 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:05 $}
+@Comment{$Date: 2000/09/27 00:15:09 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -1167,7 +1167,11 @@ following differences:
       parenthesization of negative values.
 @end{InnerItemize}
 @end{Itemize}
-@NoPrefix@;The value of 30 for Max_Picture_Length is the same limit as in COBOL.
+@ChgNote{The following paragraph is missing a number in the original version.
+To give it a number in the new version, it is marked as an insertion.}
+@ChgRef{Version=[0],Kind=[Added]}@NoPrefix
+@Chg{New=[],Old=[@Noparanum@;]}The value of 30 for Max_Picture_Length is the
+same limit as in COBOL.
 @end{Notes}
 
 @begin{Reason}
@@ -1198,8 +1202,8 @@ for the currency string, would be an unnecessary complication.
 @LabeledSubClause{The Package Wide_Text_IO.Editing}
 
 @begin{StaticSem}
-@Leading@;@Defn{Ada.Wide_Text_IO.Editing}
-@ChildUnit{Parent=[Ada.Wide_Text_IO],Child=[Editing]}
+@Leading@;@Defn{Ada.Wide_@!Text_IO.Editing}
+@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Editing]}
 The child package Wide_Text_IO.Editing has
 the same contents as Text_IO.Editing, except that:
 @begin{Itemize}

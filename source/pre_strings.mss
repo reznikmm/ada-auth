@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2000/09/01 03:51:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2000/09/27 00:15:10 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2000/09/01 03:51:24 $}
+@Comment{$Date: 2000/09/27 00:15:10 $}
 
 @LabeledClause{String Handling}
 
@@ -1879,11 +1879,8 @@ and Strings.@!Wide_Maps.@!Wide_@!Constants.
 They provide the same string-handling operations
 as the corresponding packages for
 strings of Character elements.
-@Defn{Ada.Strings.Wide_Fixed}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Fixed]}
-@Defn{Ada.Strings.Wide_Bounded}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Bounded]}
-@Defn{Ada.Strings.Wide_Unbounded}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Unbounded]}
 @end{Intro}
 
@@ -1983,7 +1980,6 @@ The package Strings.Wide_Maps has the following declaration.
 @key[end] Ada.Strings.Wide_Maps;
 @end{example}
 
-@Defn{Ada.Strings.Wide_Maps.Wide_Constants}
 @ChildUnit{Parent=[Ada.Strings.Wide_@!Maps],Child=[Wide_@!Constants]}
 The context clause for each of the packages Strings.Wide_Fixed,
 Strings.Wide_Bounded, and Strings.Wide_Unbounded

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:19 $}
+@Comment{$Date: 2000/09/27 00:15:09 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -823,10 +823,11 @@ corresponding subprogram of the parent type.] The default calling convention
 for a new dispatching operation of a tagged type is the convention of the type.],
 Old=[]}
 @begin{Reason}
+@ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[The first rule is officially stated in
 @RefSecNum(Dispatching Operations of Tagged Types). The second is intended
 to make interfacing to foreign OOP languages easier, by making the default
-that the type and operations all have the same convention.],Old=[]}
+be that the type and operations all have the same convention.],Old=[]}
 @end{Reason}
 @end{Itemize}
 

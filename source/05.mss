@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:01 $}
+@Comment{$Date: 2000/09/27 00:15:09 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -787,7 +787,7 @@ given explicitly.
 @begin{Incompatible83}
 @ChgRef{Version=[1],Kind=[Added]}@ChgNote{Presentation AI-00020}
 @Chg{New=[@Defn{incompatibilities with Ada 83}
-In Ada 95, @nt{function_call}s and @nt{type_conversion}s are @nt{name}s, while
+In Ada 95, @nt{function_call}s and @nt{type_conversion}s are @nt{name}s, whereas
 in Ada 83, they were @nt{expression}s. Therefore, if the @nt{expression} of a
 @nt{case_statement} is a @nt{function_call} or @nt{type_conversion}, and the
 result subtype is static, it is illegal to specify a choice outside the bounds

@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2000/09/01 03:51:17 $}
+@Comment{$Date: 2000/09/27 00:15:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -623,14 +623,16 @@ whether or not a given recommendation is obeyed.
 @ImplDef{Whether or not each recommendation given in @ImplAdviceTitle
 is followed.}
 @begin{Discussion}
+@ChgRef{Version=[1],Kind=[Revised]}
 The advice generally shows the intended implementation, but
 the implementer is free to ignore it.
 The implementer is the sole arbiter of whether or not the advice has
 been obeyed, if not, whether the reason is a good one,
 and whether the required documentation is sufficient.
-@PDefn2{Term=[ACVC],Sec=(Ada Compiler Validation Capability)}
-@PDefn2{Term=[Ada Compiler Validation Capability],Sec=(ACVC)}
-It would be wrong for the ACVC to enforce any of this advice.
+@Chg{New=[],Old=[@PDefn2{Term=[ACVC],Sec=(Ada Compiler Validation Capability)}
+@PDefn2{Term=[Ada Compiler Validation Capability],Sec=(ACVC)}]}
+It would be wrong for the @Chg{New=[ACATS],Old=[ACVC]} to enforce any of
+this advice.
 
 For example,
 @lquotes@;Whenever possible, the implementation should choose a value no
@@ -1620,4 +1622,11 @@ A Uniformity Issue (UI) @Chg{New=<was>,Old=<is>} a numbered recommendation from 
 error in the standard. Defect Reports are processed by the ARG, and are
 referenced here by their ISO numbers: 8652/nnnn. Most changes to the Ada 95
 standard include reference(s) to the Defect Report(s) that prompted the change.>,Old=<>}
+@Chg{New=[@PDefn2{Term=[ACVC],Sec=(Ada Compiler Validation Capability)}
+@PDefn2{Term=[Ada Compiler Validation Capability],Sec=(ACVC)}
+@PDefn2{Term=[ACATS],Sec=(Ada Conformity Assessment Test Suite)}
+@PDefn2{Term=[Ada Conformity Assessment Test Suite],Sec=(ACATS)}
+The @i<Ada Conformity Assessment Test Suite (ACATS)> is a set of tests intended
+to check the conformity of Ada implementations to this standard. This set of
+tests was previously known as the Ada Compiler Validation Capability (ACVC).],Old=[]}
 @end{Discussion}

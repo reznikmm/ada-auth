@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2000/09/01 03:51:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2000/09/27 00:15:09 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:23 $}
+@Comment{$Date: 2000/09/27 00:15:09 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1136,7 +1136,7 @@ procedures of Text_IO.Float_IO.
 @LabeledSubClause{The Package Wide_Text_IO.Complex_IO}
 
 @begin{StaticSem}
-@Defn{Ada.Wide_Text_IO.Complex_IO}
+@Defn{Ada.Wide_@!Text_IO.Complex_IO}
 @ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Complex_IO]}
 Implementations shall also provide the generic library package
 Wide_Text_IO.Complex_IO. Its declaration is obtained from that of

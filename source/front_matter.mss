@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.24 $ $Date: 2000/09/01 22:49:02 $}
+@comment{$Revision: 1.25 $ $Date: 2000/09/27 00:15:10 $}
 
 @begin{Intro}
 
@@ -700,7 +700,7 @@ document contains the official text of this International Standard.],Old=[]}}
 @Chg{New=[
 Changes to the original 8652:1995 can be identified by the version number /1
 following the paragraph number. Paragraphs not so marked are unchanged by
-Technical Corrigendum 1. Paragraph numbers of unchanged paragraphs should be
+Technical Corrigendum 1. Paragraph numbers of unchanged paragraphs are
 the same as in the original International Standard. In addition, some versions
 of this document include revision bars near the paragraph numbers. Where
 paragraphs are inserted, the paragraph numbers are of the form pp.nn, where pp

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:19 $}
+@Comment{$Date: 2000/09/27 00:15:09 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1965,7 +1965,8 @@ constants of controlled types. Consider:],Old=[]}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[When Null_String is elaborated, the bodies of Finalize and Adjust
 clearly have not been elaborated. Without this rule, this declaration would
-necessarily raise Program_Error.],Old=[]}
+necessarily raise Program_Error (unless the permissions given below are
+used by the compiler).],Old=[]}
 @end{Reason}
 @end{ImplReq}
 

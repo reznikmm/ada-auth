@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:18 $}
+@Comment{$Date: 2000/09/27 00:15:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @LabeledClause{Array Types}
 
@@ -730,7 +730,7 @@ A @Chg{New=[@nt{discriminant_part}],Old=[@nt{known_discriminant_part}]} is only
 permitted in a declaration for a composite type that is not an array type
 @Redundant[(this includes generic formal types)]@Chg{New=[. A],Old=[; a]}
 type declared with a @nt<known_discriminant_part> is called
-a @i(discriminated) type@Defn{discriminated type}, as is a type that inherits
+a @i(discriminated) type,@Defn{discriminated type} as is a type that inherits
 (known) discriminants.
 @begin{ImplNote}
   Discriminants on array types were considered,
@@ -746,9 +746,10 @@ a @i(discriminated) type@Defn{discriminated type}, as is a type that inherits
 
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0007]}
   @Chg{New=[On the other hand, @nt<unknown_discriminant_part>s cannot be
-  applied to types that cannot have a @nt<known_discriminant_part>. There
-  is no point in having unknown discriminants on a type that can never have
-  discriminants.],Old=[]}
+  applied to type declarations that cannot have a @nt<known_discriminant_part>.
+  There is no point in having unknown discriminants on a type that can never
+  have discriminants (for instance, a formal modular type), even when these
+  are allowed syntactically.],Old=[]}
 @end(Discussion)
 
 The subtype of a discriminant may be defined by
@@ -1260,7 +1261,8 @@ unconstrained access subtype whose designated subtype is
 an unconstrained discriminated subtype.
 @Chg{New=[However, in the case of a general access subtype, a
 @nt{discriminant_@!constraint} is illegal if there is a place within the
-immediate scope of the designated subtype where its view is constrained.],
+immediate scope of the designated subtype where the designated subtype's view
+is constrained.],
 Old=[]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008]}
@@ -4882,7 +4884,7 @@ denotes an aliased view of an object}:
   then the type of the view shall be
   @Chg{New=[@i(D)],Old=[the same]}, and @Chg{New=[],Old=[either ]}@i(A)'s
   designated subtype shall @Chg{New=[either ],Old=[]}
-  statically match the nominal subtype of the view@Chg{New=[or be],
+  statically match the nominal subtype of the view@Chg{New=[ or be],
   Old=[, or the designated subtype shall be]} discriminated
   and unconstrained;
   @PDefn2{Term=[statically matching],Sec=(required)}
@@ -4894,7 +4896,7 @@ denotes an aliased view of an object}:
   @begin{Ramification}
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0010]}
   @Chg{New=[An access attribute can be used as the controlling operand in a
-  dispatching call, see @RefSecNum{Dispatching Operations of Tagged Types}.],
+  dispatching call; see @RefSecNum{Dispatching Operations of Tagged Types}.],
   Old=[]}
   @end{Ramification}
 

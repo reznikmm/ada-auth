@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2000/08/31 04:56:02 $}
+@Comment{$Date: 2000/09/27 00:15:09 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1021,7 +1021,7 @@ Of course, both components exist, and can be accessed by a type conversion
 as shown above. This behavior stems from the fact that every characteristic
 of a type (including components) must be declared somewhere in the innermost
 declarative region containing the type - if the characteristic is never visible
-in that declarative region, it is not inherited or declared. Therefore, such
+in that declarative region, it is never declared. Therefore, such
 characteristics do not suddenly become available even if they are in fact
 visible in some other scope. See @RefSecNum{Private Operations} for more on
 the rules.],Old=[]}
@@ -1760,7 +1760,7 @@ involved in the conformance rules.
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027]}
 @Chg{New=[Circular renames before freezing is illegal, as the compiler
 would not be able to determine the convention of the subprogram. Other
-circular renames are handled below, see @BoundedTitle.],Old=[]}
+circular renames are handled below; see @BoundedTitle.],Old=[]}
 @end{Reason}
 
 A @nt{name} that denotes a formal parameter
@@ -1803,7 +1803,8 @@ But what looks like a procedure call will do things like barrier
 waiting.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0105]}
-@Chg{New=[All properties of the renamed entity are inherited by the new view.
+@Chg{New=[All properties of the renamed entity are inherited by the new view
+unless otherwise stated by this International Standard.
 In particular, if the renamed entity is abstract or requires overridding
 (see @RefSecNum{Abstract Types and Subprograms}), the new view also is
 abstract or requires overridding. (The renaming will often be illegal in
@@ -1871,7 +1872,7 @@ Storage_Error is raised, or that the call results in infinite recursion.],Old=[]
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027]}
 @Chg{New=[This has to be a bounded error, as it is possible for a
 renames-as-body appearing in a package body to cause this problem. Thus it is
-not possible in general to detect this problem at compile-time.],Old=[]}
+not possible in general to detect this problem at compile time.],Old=[]}
 @end{Reason}
 @end{Bounded}
 

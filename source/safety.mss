@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.20 $ $Date: 2000/09/01 03:51:24 $ $Author: Randy $ }
+@Comment{ $Revision: 1.21 $ $Date: 2000/09/27 00:15:10 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:24 $}
+@Comment{$Date: 2000/09/27 00:15:10 $}
 @LabeledNormativeAnnex{Safety and Security}
 
 @begin{Intro}
@@ -19,11 +19,12 @@ Reviewing object code;
 Restricting language constructs whose usage might
 complicate the demonstration of program correctness
 @end{Itemize}
-Execution understandability
-is supported by pragma Normalize_Scalars, and
-also by
-requirements for the implementation to document the effect
-of a program
+@ChgNote{The following paragraph is missing a number in the original version.
+To give it a number in the new version, it is marked as an insertion.}
+@ChgRef{Version=[0],Kind=[Added]}
+@Chg{New=[],Old=[@Noparanum@;]}Execution understandability
+is supported by pragma Normalize_Scalars, and also by
+requirements for the implementation to document the effect of a program
 in the presence of a bounded error or where the language rules leave
 the effect unspecified.
 @PDefn{unspecified}
@@ -503,7 +504,7 @@ been @lquotes@;unrolled@rquotes@; by an optimizer.
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0093]}
 @Chg{New=[The short form of the pragma is a convenient shorthand for
 listing all objects which could be explicitly made inspectable by the long
-form of the pragma, thus only visible objects are made inspectable by it.
+form of the pragma; thus only visible objects are made inspectable by it.
 Objects that are not visible at the point of the pragma are not made
 inspectable by the short form pragma. This is necessary so that implementations
 need not keep information about (or prevent optimizations on) a unit simply

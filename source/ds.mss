@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2000/09/09 01:16:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2000/09/27 00:15:09 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2000/09/09 01:16:21 $}
+@Comment{$Date: 2000/09/27 00:15:09 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -535,10 +535,10 @@ type.]}
 
 @begin{Itemize}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0082]}
-@Chg{New=[An access-to-subprogram type, or],Old=[]}
+@Chg{New=[an access-to-subprogram type, or],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0082]}
-@Chg{New=[A general access type that designates a class-wide limited private
+@Chg{New=[a general access type that designates a class-wide limited private
 type or a class-wide private type extension all of whose ancestors are either
 private type extensions or limited private types.],Old=[]}
 @end{Itemize}
@@ -580,12 +580,13 @@ A value of a remote access-to-class-wide type shall be dereferenced
 only as part of a dispatching call where the value designates
 a controlling operand of the call (see @RefSec{Remote Subprogram Calls})@Chg{New=[.],Old=[;]}
 
+@ChgRef{Version=[1],Kind=[Revised]}
 The Storage_Pool and
 Storage_Size attributes are not defined for
 remote access-to-class-wide types;
 the expected type for an @nt{allocator} shall not be a remote
 access-to-class-wide type; a remote access-to-class-wide type
-shall not be an actual parameter for a generic formal access type;
+shall not be an actual parameter for a generic formal access type@Chg{New=[.],Old=[;]}
 @begin{Reason}
   All three of these restrictions are because
   there is no storage pool associated with a remote

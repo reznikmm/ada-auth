@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2000/09/01 03:51:20 $}
+@Comment{$Date: 2000/09/27 00:15:09 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
@@ -70,7 +70,7 @@ need to be known before the compiler can generate code to create or access an
 entity. For instance, the size of an object needs to be known before the object
 can be created. Conversely, operational aspects are those that only need to be
 known before they can be used. For instance, how an object is read from a
-stream only needs to be known when an stream read is executed. Thus, aspects
+stream only needs to be known when a stream read is executed. Thus, aspects
 of representation have stricter rules as to when they can be specified.],Old=[]}
 @end{Metarules}
 
@@ -87,8 +87,8 @@ of representation have stricter rules as to when they can be specified.],Old=[]}
 
 @begin{SyntaxText}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009]}
-A representation pragma is allowed only at places where a
-@Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]}
+A representation pragma is allowed only at places where
+@Chg{New=[an @nt{aspect_clause}],Old=[a @nt{representation_clause}]}
 or @nt{compilation_unit} is allowed.
 @Chg{New=[@IndexSee(Term=(representation_clause),See=(aspect_clause))],Old=[]}
 @end{SyntaxText}
@@ -3209,7 +3209,8 @@ However, the implementation is not @i{required} to use the predefined
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-Address should be of a private type.
+@ChgNote{Version=[1],Kind=[Revised]}@ChgNote{Remove bogus "of"}
+Address should be @Chg{New=[],Old=[of ]}a private type.
 @begin{Reason}
 This promotes uniformity by avoiding having
 implementation-defined predefined operations for the type.
@@ -4330,13 +4331,13 @@ Note that the implementation does not turn other exceptions into
 Storage_Error.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0111]}
-@Chg{New=[If T includes subcomponents of other access types, they will be
-allocated from the storage pools for those types, even if those @nt{allocator}s
-are executed as part of the @nt{allocator} of T (as part of the initialization
-of the object). For instance, an access-to-task type TT may allocate the data
-structures used to implement the task value from other storage pools. (In
-particular, the task stack does not necessarily need to be allocated from the
-storage pool for TT.)],Old=[]}
+@Chg{New=[If D (the designated type of T) includes subcomponents of other
+access types, they will be allocated from the storage pools for those types,
+even if those @nt{allocator}s are executed as part of the @nt{allocator} of T
+(as part of the initialization of the object). For instance, an access-to-task
+type TT may allocate the data structures used to implement the task value from
+other storage pools. (In particular, the task stack does not necessarily need
+to be allocated from the storage pool for TT.)],Old=[]}
 @end{Ramification}
 
 @Defn{standard storage pool}
@@ -5203,7 +5204,7 @@ then the components of Stream_@!Element_@!Array need not be aliased.],Old=[]}
 @ChgRef{Version=[1],Kind=[Added]}
 @Chg{New=[If the Stream_Element'Size is less than the size of
 System.Storage_Unit, then components of Stream_@!Element_@!Array need not be
-aliased. This is necessary as the components of type Stream_Element size may
+aliased. This is necessary as the components of type Stream_Element size might
 not be addressable on the target architechture.],Old=[]}
 @end{Ramification}
 @end{ImplPerm}
