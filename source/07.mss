@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/02/01 06:46:22 $}
+@Comment{$Date: 2005/03/01 06:05:03 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -493,11 +493,12 @@ that seemed like too much mechanism.
   method.
 @end{Honest}
 @begin{Reason}
-  @leading@;Tagged limited private types have certain capabilities that are
+  @leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}Tagged
+  limited private types have certain capabilities that are
   incompatible with having assignment for the full view of the type.
   In particular, tagged limited private types can be extended
-  with access discriminants and components of a limited type,
-  which works only because assignment is not allowed.
+  with @Chg{Version=[2],New=[],Old=[access discriminants and ]}components
+  of a limited type, which works only because assignment is not allowed.
   Consider the following example:
   @begin{Example}
 @key[package] P1 @key[is]
@@ -520,12 +521,12 @@ that seemed like too much mechanism.
     @key[end] @Chg{New=[Foo],Old=[A]};
 @key[end] P1;
 
-@key[with] P1;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}@key[with] P1;
 @key[package] P2 @key[is]
-    @key[type] T2(D : @key[access] Integer) --@RI{ Trouble!}
+    @key[type] T2(D : @key[access] Integer)@Chg{Version=[2],New=[],Old=[ --@RI{ Trouble!}]}
             @key[is] @key[new] P1.T1 @key[with]
         @key[record]
-            My_Task : Some_Task_Type; --@RI{ More trouble!}
+            My_Task : Some_Task_Type; --@RI{ @Chg{Version=[2],New=[Trouble],Old=[More trouble]}!}
         @key[end] @key[record];
 @key[end] P2;
 
@@ -540,11 +541,14 @@ that seemed like too much mechanism.
 @key[end] Main;
   @end{Example}
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
   If the above example were legal,
-  we would have succeeded in making an access value that points
-  to Main.Local after Main has been left,
-  and we would also have succeeded in doing an assignment of a task
-  object, both of which are supposed to be no-no's.
+  we would have succeeded in @Chg{Version=[2],New=[],Old=[making an access
+  value that points to Main.Local after Main has been left,
+  and we would also have succeeded in ]}doing an assignment of a task
+  object, @Chg{Version=[2],New=[],Old=[both of ]}which @Chg{Version=[2],New=[is],
+  Old=[are]} supposed to be @Chg{Version=[2],New=[a no-no],Old=[no-no's]}.
+  @ChgNote{A runtime check prevents the first from being a problem in Ada 2005.}
 
   This rule is not needed for private extensions,
   because they inherit their limitedness from their ancestor,
@@ -1560,17 +1564,20 @@ Otherwise, the following could happen:
     @key[type] T @key[is] @key[new] Integer; --@RI{ R becomes nonlimited here.}
 @key[end] P;
 
+@ChgRef{Version=[2],Kind=[Revised]}
 @key[package] Q @key[is]
-    @key[type] R2(Access_Discrim : @key[access] ...) @key[is] @key[new] R @key[with]
+    @key[type] R2@Chg{Version=[2],New=[],Old=[(Access_Discrim : @key[access] ...)]} @key[is] @key[new] R @key[with]
         @key[record]
             Y : Some_Task_Type;
         @key[end] @key[record];
 @key[end] Q;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 If the above were legal,
 then assignment would be defined for R'Class in the body of P,
-which is bad news, given the access discriminant and the task.
+which is bad news, given @Chg{Version=[2],New=[],Old=[the access discriminant
+and ]}the task.
 @end{Reason}
 @end{Legality}
 
@@ -1584,6 +1591,16 @@ is a descendant of one of the following:
   Note that there is always a @lquotes@;definition,@rquotes@; conceptually,
   even if there is no syntactic category called @lquotes@;..._definition@rquotes@;.
   @end{Ramification}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00411-01]}
+  @ChgAdded{Version=[2],Text=[a limited interface;]}
+
+  @begin{Reason}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[This is needed to cover task and protected
+    interfaces, which neither contain @key{limited} nor are task or protected
+    types.]}
+  @end{Reason}
 
   a task or protected type;
 

@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/01/20 06:32:03 $}
+@Comment{$Date: 2005/03/01 06:05:12 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -758,6 +758,7 @@ capability (it doesn't put requirements on the completion based on uses that
 could be anywhere). Pity we didn't think of it in 1994.],Old=[]}
 @end{DiffWord95}
 
+
 @LabeledAddedClause{Version=[2],Name=[Pragma Interface]}
 
 @begin{Syntax}
@@ -777,12 +778,60 @@ this pragma.]}
 @end{ImplNote}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[This clause is new. This is necessary as @key{interface}
-is now a reserved word, which would prevent pragma Interface from being an
-implementation-defined pragma. We don't define any semantics for this
-pragma, as we expect that implementations will continue to use whatever they
-currently implement - requiring any changes would be counter-productive.],
-Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+  @ChgAdded{Version=[2],Text=[This clause is new. This is necessary as @key{interface}
+  is now a reserved word, which would prevent pragma Interface from being an
+  implementation-defined pragma. We don't define any semantics for this
+  pragma, as we expect that implementations will continue to use whatever they
+  currently implement - requiring any changes would be counter-productive.]}
+@end{DiffWord95}
+
+
+@LabeledAddedClause{Version=[2],Name=[Dependence Restrictions Identifiers]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgAdded{Version=[2],Text=[The following @nt<restrictions> involve dependence
+on specific language-defined units. The more general restriction No_Dependence
+(see @RefSecNum{Restriction No_Dependence}) should be used for this purpose.]}
+@end{Intro}
+
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgAdded{Version=[2],Type=[Leading],
+Text=[The following @Syni<restrictions_>@nt<identifiers> exist:]}
+
+@begin{Description}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
+Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\There are no
+semantic dependences on package Asynchronous_Task_Control.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
+Sec=(No_Dynamic_Priorities)}No_Dynamic_Priorities @\There are no
+semantic dependences on package Dynamic_Priorities.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
+Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic
+dependence on the predefined generic Unchecked_Conversion is not allowed.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
+Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic
+dependence on Unchecked_Deallocation is not allowed.]}
+
+@end{Description}
+@end{StaticSem}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
+  @ChgAdded{Version=[2],Text=[This clause is new. These @nt{restrictions}
+  are replaced by the more general No_Dependence
+  (see @RefSecNum{Restriction No_Dependence}).]}
 @end{DiffWord95}
 

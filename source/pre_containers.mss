@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2005/02/06 04:31:43 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2005/03/01 06:05:08 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/02/06 04:31:43 $}
+@Comment{$Date: 2005/03/01 06:05:08 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -2186,7 +2186,7 @@ parameter; or]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it reorders the elements of @i<L>, that is, it
 calls the Splice, Swap_Links, or Reverse_List procedures or an instance of
-Generic_Sort or Generic_Merge with C as a parameter; or]}
+Generic_Sort or Generic_Merge with @i<L> as a parameter; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it finalizes @i<L>; or]}

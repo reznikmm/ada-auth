@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/02/03 07:11:18 $}
+@Comment{$Date: 2005/03/01 06:05:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.5 $}
+@Comment{$Revision: 1.6 $}
 
 @LabeledClause{The Package System}
 
@@ -2193,6 +2193,16 @@ Pragma Restrictions is new to Ada 95.
   there should not be any programs depending on the runtime failure of
   restrictions.]}
 @end{DiffWord95}
+
+@LabeledAddedSubclause{Version=[2], Name=[Restriction No_Dependence]}
+
+*** TBD ***
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Restriction No_Dependence is new.]}
+@end{Extend95}
 
 
 @LabeledClause{Streams}

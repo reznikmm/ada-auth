@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/02/09 00:00:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/03/01 06:05:12 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/02/09 00:00:20 $}
+@Comment{$Date: 2005/03/01 06:05:12 $}
 
 @LabeledClause{String Handling}
 
@@ -358,7 +358,7 @@ itself.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added @nt{pragma} Preelaboratable_Initialization to
+  Added @nt{pragma} Preelaborable_Initialization to
   types Character_Set and Character_Mapping, so that they can be used in
   preelaborated units.]}
 
@@ -708,7 +708,7 @@ the order in COBOL's MOVE verb.@end{reason}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Each Index function searches, starting from From, for a slice of
 Source, with length Pattern'Length, that matches Pattern with respect to
 Mapping; the parameter Going indicates the direction of the lookup. If
-From < Source'First, then Index_Error is propagated. If Going =
+From is not in Source'Range, then Index_Error is propagated. If Going =
 Forward, then Index returns the smallest index I which is greater than or equal
 to From such that the slice of Source starting at I matches Pattern. If Going =
 Backward, then Index returns the largest index I such that the slice of Source
@@ -790,11 +790,11 @@ the parameter Going indicates the direction of the lookup.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Index searches for the first or
 last occurrence of any of a set of characters (when Test=Inside), or any of the
-complement of a set of characters (when Test=Outside). If From < Source'First,
-then Index_Error is propagated. Otherwise, it returns the smallest index I >=
-From (if Going=Forward) or the largest index I <= From (if Going=Backward) such
-that Source(I) satisfies the Test condition with respect to Set; it returns 0
-if there is no such Character in Source.]}
+complement of a set of characters (when Test=Outside). If From is not in
+Source'Range, then Index_Error is propagated. Otherwise, it returns the
+smallest index I >= From (if Going=Forward) or the largest index I <= From (if
+Going=Backward) such that Source(I) satisfies the Test condition with respect
+to Set; it returns 0 if there is no such Character in Source.]}
 
 @begin{Example}@Keepnext
 @key[function] Index (Source : @key[in] String;
@@ -2232,7 +2232,7 @@ the package and several of the subprograms appears in the Rationale.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added a @nt{pragma} Preelaboratable_Initialization to
+  Added a @nt{pragma} Preelaborable_Initialization to
   type Unbounded_String, so that it can be used in preelaborated units.]}
 @end{Extend95}
 
@@ -2455,6 +2455,9 @@ To_Bounded_Wide_String replaces To_Bounded_String
 
 To_Wide_String replaces To_String
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Set_Bounded_Wide_String replaces Set_Bounded_String]}
+
 Unbounded_Wide_String replaces Unbounded_String
 
 Null_Unbounded_Wide_String replaces Null_Unbounded_String
@@ -2462,6 +2465,10 @@ Null_Unbounded_Wide_String replaces Null_Unbounded_String
 Wide_String_Access replaces String_Access
 
 To_Unbounded_Wide_String replaces To_Unbounded_String
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Set_Unbounded_Wide_String replaces Set_Unbounded_String]}
+
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2490,10 +2497,21 @@ constant in this package is the identity mapping when applied to
 any element outside the Character portion of Wide_Character.
 @end{Notes}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Various new operations are added to Strings.Wide_Fixed, Strings.Wide_Bounded,
+  and Strings.Wide_Unbounded. If one of these packages is referenced in a
+  @nt{use_clause}, and an entity @i<E> with the same @nt{defining_identifier}
+  as a new entity is defined in a package that is also referenced in a
+  @nt{use_clause}, the entity @i<E> may no longer be use-visible, resulting in
+  errors. This should be rare and is easily fixed if it does occur.]}
+@end{Incompatible95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added @nt{pragma} Preelaboratable_Initialization to
+  Added @nt{pragma} Preelaborable_Initialization to
   types Wide_Character_Set and Wide_Character_Mapping, so that they can be
   used in preelaborated units.]}
 @end{Extend95}
@@ -2699,6 +2717,9 @@ the corresponding wide wide string package has the same contents except that]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[To_Wide_Wide_String replaces To_String]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Set_Bounded_Wide_Wide_String replaces Set_Bounded_String]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Unbounded_Wide_Wide_String replaces Unbounded_String]}
 
@@ -2710,6 +2731,10 @@ the corresponding wide wide string package has the same contents except that]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[To_Unbounded_Wide_Wide_String replaces To_Unbounded_String]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[Set_Unbounded_Wide_Wide_String replaces Set_Unbounded_String]}
+
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}

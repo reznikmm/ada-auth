@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/02/01 06:46:25 $}
+@Comment{$Date: 2005/03/01 06:05:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -1193,6 +1193,10 @@ Append_File is new in Ada 95.
                       Last : @key[out] Natural);
    @key[procedure] @AdaSubDefn{Get_Line}(Item : @key[out] String; Last : @key[out] Natural);
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Get_Line}(File : @key[in]  File_Type) @key[return] String;
+   @key[function] @AdaSubDefn{Get_Line} @key[return] String;]}
+
    @key[procedure] @AdaSubDefn{Put_Line}(File : @key[in]  File_Type; Item : @key[in] String);
    @key[procedure] @AdaSubDefn{Put_Line}(Item : @key[in]  String);
 
@@ -2207,8 +2211,20 @@ Old=[procedures]} are provided:
   effect) called with a spacing of 1.]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
-  @ChgAdded{Version=[2],Type=[Trailing],Text=[The exception End_Error is
+  @ChgAdded{Version=[2],Type=[Trailing],Text=[Constraint_Error is raised if the
+  length of line exceeds Positive'Last; in the case, the line number and page
+  number are unchanged, and the column number is unspecified but no less than
+  it was before the call.@PDefn{unspecified} The exception End_Error is
   propagated if an attempt is made to skip a file terminator.]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+    @ChgAdded{Version=[2],Text=[Precisely what is left in the file is unspecified
+    if Constraint_Error is raised because the line doesn't fit in a String; it
+    should be consistent with column number. This allows implementers to use
+    whatever buffering scheme makes sense. But the line terminator is not
+    skipped in this case.]}
+  @end{Ramification}
 
 @begin{Example}@Keepnext
 @key[procedure] Get_Line(File : @key[in] File_Type;

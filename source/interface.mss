@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/02/08 06:35:37 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/03/01 06:05:11 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/02/08 06:35:37 $}
+@Comment{$Date: 2005/03/01 06:05:11 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -161,7 +161,7 @@ are met:
 T is declared in a language interface package
 corresponding to @i[L] and is defined to be
 @i[L]-compatible
-(see @refsecnum(Interfacing with C),
+(see @refsecnum(Interfacing with C and C++),
 @refsecnum(The Package Interfaces.C.Strings),
 @refsecnum(The Generic Package Interfaces.C.Pointers),
 @refsecnum(Interfacing with COBOL),
@@ -761,21 +761,26 @@ should be declared as a renaming:
 @end{DiffWord95}
 
 
-@LabeledClause{Interfacing with C}
+@LabeledRevisedClause{Version=[2],New=[Interfacing with C and C++],
+Old=[Interfacing with C]}
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
 @Defn{interface to C}
 @Defn{C interface}
 The facilities relevant to interfacing with
-the C language are the package Interfaces.C and its children;
+the C language @Chg{Version=[2],New=[and the corresponding subset of
+the C++ language ],Old=[]}are the package Interfaces.C and its children;
 @Chg{New=[],Old=[and ]}support for the Import, Export, and
 Convention pragmas with @i{convention}_@nt{identifier}
 C@Chg{New=[; and support for the Convention pragma with
 @i{convention}_@nt{identifier} C_Pass_By_Copy],Old=[]}.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
 The package Interfaces.C contains the basic types, constants and
 subprograms that allow an Ada program to pass scalars and strings to C
-functions.
+functions.@Chg{Version=[2],New=[ When this clause mentions a C entity,
+the reference also applies to the same entity in C++.],Old=[]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -846,15 +851,15 @@ functions.
                     Trim_Nul : @key(in) Boolean := True)
       @key(return) String;
 
-   @key(procedure) @AdaSubDefn{To_C} (Item       : @key(in) String;
+   @key(procedure) @AdaSubDefn{To_C} (Item       : @key(in)  String;
                    Target     : @key(out) char_array;
                    Count      : @key(out) size_t;
-                   Append_Nul : @key(in) Boolean := True);
+                   Append_Nul : @key(in)  Boolean := True);
 
-   @key(procedure) @AdaSubDefn{To_Ada} (Item     : @key(in) char_array;
+   @key(procedure) @AdaSubDefn{To_Ada} (Item     : @key(in)  char_array;
                      Target   : @key(out) String;
                      Count    : @key(out) Natural;
-                     Trim_Nul : @key(in) Boolean := True);
+                     Trim_Nul : @key(in)  Boolean := True);
 
    @RI{-- Wide Character and Wide String}
 
@@ -892,6 +897,87 @@ Old=[@RI{implementation-defined}]};
                      Count    : @key(out) Natural;
                      Trim_Nul : @key(in)  Boolean := True);
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[   -- @RI[ISO/IEC 10646:2003 compatible types defined by SC22/WG14 document N1010.]]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char16_t} @key<is> @RI{<implementation-defined character type>};]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{char16_nul} : @key<constant> char16_t := @RI{implementation-defined};]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_C} (Item : @key<in> Wide_Character) @key<return> char16_t;
+   @key<function> @AdaSubDefn{To_Ada} (Item : @key<in> char16_t) @key<return> Wide_Character;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char16_array} @key<is array> (size_t @key<range> <>) @key<of aliased> char16_t;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<pragma> Pack(char16_array);]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Is_Nul_Terminated} (Item : @key<in> char16_array) @key<return> Boolean;
+   @key<function> @AdaSubDefn{To_C} (Item       : @key<in> Wide_String;
+                  Append_Nul : @key<in> Boolean := True)
+      @key<return> char16_array;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Ada} (Item     : @key<in> char16_array;
+                    Trim_Nul : @key<in> Boolean := True)
+      @key<return> Wide_String;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{To_C} (Item       : @key<in>  Wide_String;
+                   Target     : @key<out> char16_array;
+                   Count      : @key<out> size_t;
+                   Append_Nul : @key<in>  Boolean := True);]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{To_Ada} (Item     : @key<in>  char16_array;
+                     Target   : @key<out> Wide_String;
+                     Count    : @key<out> Natural;
+                     Trim_Nul : @key<in>  Boolean := True);]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char32_t} @key<is> @RI{<implementation-defined character type>};]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @AdaDefn{char32_nul} : @key<constant> char32_t := @RI{implementation-defined};]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_C} (Item : @key<in> Wide_Wide_Character) @key<return> char32_t;
+   @key<function> @AdaSubDefn{To_Ada} (Item : @key<in> char32_t) @key<return> Wide_Wide_Character;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char32_array} @key<is array> (size_t @key<range> <>) @key<of aliased> char32_t;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<pragma> Pack(char32_array);]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Is_Nul_Terminated} (Item : @key<in> char32_array) @key<return> Boolean;
+   @key<function> @AdaSubDefn{To_C} (Item       : @key<in> Wide_Wide_String;
+                  Append_Nul : @key<in> Boolean := True)
+      @key<return> char32_array;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Ada} (Item     : @key<in> char32_array;
+                    Trim_Nul : @key<in> Boolean := True)
+      @key<return> Wide_Wide_String;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{To_C} (Item       : @key<in>  Wide_Wide_String;
+                   Target     : @key<out> char32_array;
+                   Count      : @key<out> size_t;
+                   Append_Nul : @key<in>  Boolean := True);]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{To_Ada} (Item     : @key<in>  char32_array;
+                     Target   : @key<out> Wide_Wide_String;
+                     Count    : @key<out> Natural;
+                     Trim_Nul : @key<in>  Boolean := True);]}
+
    @AdaDefn{Terminator_Error} : @key(exception);
 
 @key(end) Interfaces.C;
@@ -901,10 +987,12 @@ and constants in Interfaces.C.],Old=[]}]}
 
 Each of the types declared in Interfaces.C is C-compatible.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 The types int, short, long, unsigned,
 ptrdiff_t, size_t, double,
-char, and wchar_t correspond respectively
-to the C types having the same names.
+char, @Chg{Version=[2],New=[],Old=[and ]}wchar_t@Chg{Version=[2],New=[,
+char16_t, and char32_t],Old=[]}
+correspond respectively to the C types having the same names.
 The types signed_char, unsigned_@!short, unsigned_@!long, unsigned_@!char,
 C_float, and long_@!double correspond respectively
 to the C types signed char,
@@ -957,12 +1045,15 @@ False otherwise.
    @key(return) String;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00258-01]}
 The result of To_C is a char_array value of length Item'Length (if
 Append_Nul is False) or Item'Length+1 (if Append_Nul is True).
 The lower bound is 0.
 For each component Item(I), the corresponding component in the result
 is To_C applied to Item(I).
-The value nul is appended if Append_Nul is True.
+The value nul is appended if Append_Nul is True.@Chg{Version=[2],New=[ If
+Append_Nul is False and Item'Length is 0, then To_C propagates
+Constraint_Error.],Old=[]}
 
 @Trailing@;The result of To_Ada is a String whose length is Item'Length (if Trim_Nul is
 False) or the length of the slice of Item preceding the first
@@ -977,15 +1068,15 @@ The function propagates Terminator_Error if Trim_Nul is True and
 Item does not contain nul.
 
 @begin{Example}@Keepnext
-@key(procedure) To_C (Item       : @key(in) String;
+@key(procedure) To_C (Item       : @key(in)  String;
                 Target     : @key(out) char_array;
                 Count      : @key(out) size_t;
-                Append_Nul : @key(in) Boolean := True);
+                Append_Nul : @key(in)  Boolean := True);
 @Comment{Blank line}
-@key(procedure) To_Ada (Item     : @key(in) char_array;
+@key(procedure) To_Ada (Item     : @key(in)  char_array;
                   Target   : @key(out) String;
                   Count    : @key(out) Natural;
-                  Trim_Nul : @key(in) Boolean := True);
+                  Trim_Nul : @key(in)  Boolean := True);
 @end{Example}
 For procedure To_C, each element of Item is converted (via the To_C function)
 to a char, which is assigned to the corresponding element
@@ -1028,24 +1119,116 @@ character types.
                  Trim_Nul : @key(in) Boolean := True)
    @key(return) Wide_String;
 @Comment{Blank line}
-@key(procedure) To_C (Item       : @key(in) Wide_String;
+@key(procedure) To_C (Item       : @key(in)  Wide_String;
                 Target     : @key(out) wchar_array;
                 Count      : @key(out) size_t;
-                Append_Nul : @key(in) Boolean := True);
+                Append_Nul : @key(in)  Boolean := True);
 @Comment{Blank line}
-@key(procedure) To_Ada (Item     : @key(in) wchar_array;
+@key(procedure) To_Ada (Item     : @key(in)  wchar_array;
                   Target   : @key(out) Wide_String;
                   Count    : @key(out) Natural;
-                  Trim_Nul : @key(in) Boolean := True);
+                  Trim_Nul : @key(in)  Boolean := True);
 @end{Example}
 The To_C and To_Ada subprograms that convert between Wide_String and
 wchar_array have analogous effects to the To_C and To_Ada
 subprograms that convert between String and char_array, except that
 wide_nul is used instead of nul.
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key<function> Is_Nul_Terminated (Item : @key<in> char16_array) @key<return> Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[The result of Is_Nul_Terminated is True if Item contains char16_nul,
+and is False otherwise.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key<function> To_C (Item : @key<in> Wide_Character) @key<return> char16_t;
+@key<function> To_Ada (Item : @key<in> char16_t ) @key<return> Wide_Character;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[To_C and To_Ada provide mappings
+between the Ada and C 16-bit character types.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key<function> To_C (Item       : @key<in> Wide_String;
+               Append_Nul : @key<in> Boolean := True)
+   @key<return> char16_array;
+@Comment{Blank line}
+@key<function> To_Ada (Item     : @key<in> char16_array;
+                 Trim_Nul : @key<in> Boolean := True)
+   @key<return> Wide_String;
+@Comment{Blank line}
+@key<procedure> To_C (Item       : @key<in>  Wide_String;
+                Target     : @key<out> char16_array;
+                Count      : @key<out> size_t;
+                Append_Nul : @key<in>  Boolean := True);
+@Comment{Blank line}
+@key<procedure> To_Ada (Item     : @key<in>  char16_array;
+                  Target   : @key<out> Wide_String;
+                  Count    : @key<out> Natural;
+                  Trim_Nul : @key<in>  Boolean := True);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[The To_C and To_Ada subprograms that
+convert between Wide_String and char16_array have analogous effects to the To_C
+and To_Ada subprograms that convert between String and char_array, except that
+char16_nul is used instead of nul.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key<function> Is_Nul_Terminated (Item : @key<in> char32_array) @key<return> Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[The result of Is_Nul_Terminated is
+True if Item contains char16_nul, and is False otherwise.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key<function> To_C (Item : @key<in> Wide_Wide_Character) @key<return> char32_t;
+@key<function> To_Ada (Item : @key<in> char32_t ) @key<return> Wide_Wide_Character;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[To_C and To_Ada provide mappings
+between the Ada and C 32-bit character types.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key<function> To_C (Item       : @key<in> Wide_Wide_String;
+               Append_Nul : @key<in> Boolean := True)
+   @key<return> char32_array;
+@Comment{Blank line}
+@key<function> To_Ada (Item     : @key<in> char32_array;
+                 Trim_Nul : @key<in> Boolean := True)
+   @key<return> Wide_Wide_String;
+@Comment{Blank line}
+@key<procedure> To_C (Item       : @key<in>  Wide_Wide_String;
+                Target     : @key<out> char32_array;
+                Count      : @key<out> size_t;
+                Append_Nul : @key<in>  Boolean := True);
+@Comment{Blank line}
+@key<procedure> To_Ada (Item     : @key<in>  char32_array;
+                  Target   : @key<out> Wide_Wide_String;
+                  Count    : @key<out> Natural;
+                  Trim_Nul : @key<in>  Boolean := True);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[The To_C and To_Ada subprograms
+that convert between Wide_Wide_String and char32_array have analogous effects
+to the To_C and To_Ada subprograms that convert between String and char_array,
+except that char32_nul is used instead of nul.]}
+
 @begin{Discussion}
 The Interfaces.C package provides an implementation-defined character type,
-char,
-designed to model the C run-time character set, and mappings
+char, designed to model the C run-time character set, and mappings
 between the types char and Character.
 
 @Leading@;One application of the C interface package is
@@ -1093,9 +1276,11 @@ The C Interface packages support calling such functions.
 C_Pass_By_Copy shall only be applied to a type.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00216-01]}
 @ChgAdded{Version=[1],Text=[The eligibility rules in @RefSecNum(Interfacing Pragmas) do not apply
 to convention C_Pass_By_Copy. Instead, a type T is eligible for convention
-C_Pass_By_Copy if T is a record type that has no discriminants and that only
+C_Pass_By_Copy @Chg{Version=[2],New=[if T is an unchecked union type or ],
+Old=[]}if T is a record type that has no discriminants and that only
 has components with statically constrained subtypes, and each component is
 C-compatible.]}
 
@@ -1113,7 +1298,6 @@ C-eligible type (see @refsecnum(Interfacing Pragmas))@Chg{New=[. An
 implementation shall support pragma Convention with a C_Pass_By_Copy
 @i{convention}_@nt{identifier} for a C_Pass_By_Copy-eligible type.],Old=[]}
 @end{ImplReq}
-
 
 @begin{ImplPerm}
 An implementation may provide additional declarations in the C
@@ -1154,14 +1338,19 @@ parameter, a pointer to a temporary copy is used to preserve
 by-copy semantics.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
-@ChgAdded{Version=[1],Text=[An Ada parameter of a C_Pass_By_Copy-compatible
-(record) type T, of
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00343-01]}
+@ChgAdded{Version=[1],Text=[An Ada parameter of a @Chg{Version=[2],
+New=[(record) type T of convention ],Old=[]}C_Pass_By_Copy@Chg{Version=[2],
+New=[],Old=[-compatible (record) type T]}, of
 mode @key{in}, is passed as a t argument to a C function, where t is the
 C struct corresponding to the Ada type T.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00343-01]}
 An Ada parameter of a record type T, of any mode,
-@Chg{New=[other than an @key{in} parameter of a C_Pass_By_Copy-compatible type,],Old=[]}
+@Chg{New=[other than an @key{in} parameter of a @Chg{Version=[2],
+New=[type of convention ],Old=[]}C_Pass_By_Copy@Chg{Version=[2],
+New=[],Old=[-compatible type]},],Old=[]}
 is passed as a t* argument to a C function, where t is the
 C struct corresponding to the Ada type T.
 
@@ -1175,11 +1364,15 @@ is passed as a pointer to a
 C function whose prototype corresponds to the designated subprogram's
 specification.
 @end[itemize]
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00337-01]}
+@ChgAdded{Version=[2],Text=[An Ada parameter of a private type is passed
+as specified for the full view of the type.]}
+
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[If C interfacing is supported, the interface corrspondences between Ada
 and C should be supported.]}]}
 @end{ImplAdvice}
-
 
 @begin{Notes}
 Values of type char_array are not implicitly terminated with nul.
@@ -1191,9 +1384,10 @@ To obtain the effect of C's sizeof(item_type),
 where Item_Type is the corresponding Ada type,
  evaluate the expression: size_t(Item_Type'Size/CHAR_BIT).
 
-There is no explicit support for C's union types.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00216-01]}
+@ChgDeleted{Version=[2],Text=[There is no explicit support for C's union types.
 Unchecked conversions can be used to obtain
-the effect of C unions.
+the effect of C unions.]}
 
 A C function that takes a variable number of arguments
 can correspond to several Ada subprograms, taking various
@@ -1234,6 +1428,18 @@ specific numbers and types of parameters.
 @end{Example}
 @end{Examples}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  Types char16_t and char32_t and their related
+  types and operations are newly added to Interfaces.C. If Interfaces.C is
+  referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Interfaces.C is defined in a
+  package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
+  longer be use-visible, resulting in errors. This should be rare and is easily
+  fixed if it does occur.]}
+@end{Incompatible95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0059],ARef=[AI95-00131-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -1244,6 +1450,29 @@ specific numbers and types of parameters.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0060],ARef=[AI95-00037-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the intent for
   Nul and Wide_Nul.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+  @ChgAdded{Version=[2],Text=[Specified that an unchecked union type (see
+  @RefSecNum{Pragma Unchecked_Union}) are eligible for convention
+  C_Pass_By_Copy.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00258-01]}
+  @ChgAdded{Version=[2],Text=[Specified what happens if the To_C function
+  tries to return a null string.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00337-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that the interface correspondences
+  also apply to private types whose full types have the specified
+  characteristics.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00343-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that a type must have convention
+  C_Pass_By_Copy in order to be passed by copy (not just a type that could
+  have that convention).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00376-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to make it clear that these
+  facilities can also be used with C++.]}
 @end{DiffWord95}
 
 

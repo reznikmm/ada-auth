@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2005/02/03 07:11:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2005/03/01 06:05:06 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/02/03 07:11:19 $}
+@Comment{$Date: 2005/03/01 06:05:06 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -629,9 +629,11 @@ formal access type@Chg{New=[.],Old=[;]}@Chg{Version=[2],New=[ The Storage_Size
 attribute of a remote access-to-class-wide type yields 0; it is not allowed in
 an attribute_definition_clause.],Old=[]}
 @begin{Reason}
+  @ChgRef{Version=[2],Kind=[Revised]}
   All three of these restrictions are because
   there is no storage pool associated with a remote
-  access-to-class-wide type.
+  access-to-class-wide type.@Chg{Version=[2],New=[ The Storage_Size is defined
+  to be 0 so that there is no conflict with the rules for pure units.],Old=[]}
 @end{Reason}
 @end{Itemize}
 

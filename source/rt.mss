@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2005/02/06 04:31:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2005/03/01 06:05:10 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/02/06 04:31:44 $}
+@Comment{$Date: 2005/03/01 06:05:10 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2319,13 +2319,12 @@ Text=[The metrics for entry-less protected objects shall be documented.]}]}
 @end{Metrics}
 
 
-@LabeledAddedClause{Version=[2],Name=[Run-time Profiles and the Ravenscar Profile]}
+@LabeledAddedClause{Version=[2],Name=[Run-time Profiles]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
 @ChgAdded{Version=[2],Text=[@Redundant[This clause
-specifies a mechanism for defining run-time profiles.
-It also defines one such profile, Ravenscar.]]}
+specifies a mechanism for defining run-time profiles.]]}
 @end{Intro}
 
 @begin{Syntax}
@@ -2342,52 +2341,83 @@ It also defines one such profile, Ravenscar.]]}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgAdded{Version=[2],Text=[The @SynI{profile_}@nt{identifier} shall be either Ravenscar or an
-implementation-defined identifier. For @SynI{profile_}@nt{identifier}
-Ravenscar, there shall be no @SynI{profile_}@nt{pragma_@!argument_@!association}s. For other
-@SynI{profile_}@nt{identifier}s, the semantics of any
-@SynI{profile_}@nt{pragma_@!argument_@!association}s are implementation-defined.]}
-
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
-definition, arguments, and meaning of any
-implementation-defined @SynI{profile_}@nt{identifier}s.],Old=[]}]}
+@ChgAdded{Version=[2],Text=[The @SynI{profile_}@nt{identifier} shall be the name
+of a run-time profile. The semantics of any
+@SynI{profile_}@nt{pragma_@!argument_@!association}s are defined by
+the run-time profile specified by the @SynI{profile_}@nt{identifier}.]}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[
+@ChgAdded{Version=[2],Text=[
 A profile is equivalent to the set of configuration pragmas that is
-defined for each @SynI{profile_}@nt{identifier}. The
-@SynI{profile_}@nt{identifier}
+defined for each run-time profile.]}
+@end{StaticSem}
+
+@begin{Linktime}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Text=[A @key{pragma} Profile is a configuration pragma.
+There may be more than one @key{pragma} Profile for a partition.]}
+@end{Linktime}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @key{Pragma} Profile is new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[The Ravenscar Profile]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[This clause
+defines the Ravenscar profile.]@Defn{Ravenscar}]}
+@end{Intro}
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Text=[The @SynI{profile_}@nt{identifier}
+Ravenscar names a run-time profile.
+For run-time profile Ravenscar, there shall be no
+@Syni{profile_}@nt{pragma_argument_association}s.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The run-time profile
 Ravenscar is equivalent to the following set of pragmas:]}
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI95-00297-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI95-00297-01],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[
 @key{pragma} Task_Dispatching_Policy (FIFO_Within_Priorities);
 @key{pragma} Locking_Policy (Ceiling_Locking);
 @key{pragma} Detect_Blocking;
 @key{pragma} Restrictions (
-                Max_Entry_Queue_Length => 1,
-                Max_Protected_Entries => 1,
-                Max_Task_Entries => 0,
                 No_Abort_Statements,
-                No_Asynchronous_Control,
-                No_Calendar,
                 No_Dynamic_Attachment,
-                No_Dynamic_Priorities,
                 No_Implicit_Heap_Allocations,
-                No_Local_Timing_Events,
                 No_Local_Protected_Objects,
+                No_Local_Timing_Events,
                 No_Protected_Type_Allocators,
                 No_Relative_Delay,
                 No_Requeue_Statements,
                 No_Select_Statements,
+                No_Specific_Termination_Handlers,
                 No_Task_Allocators,
-                No_Task_Attributes_Package,
                 No_Task_Hierarchy,
                 No_Task_Termination,
-                Simple_Barriers);]}
+                Simple_Barriers,
+                Max_Entry_Queue_Length => 1,
+                Max_Protected_Entries => 1,
+                Max_Task_Entries => 0,
+                No_Dependence => Ada.Asynchronous_Task_Control,
+                No_Dependence => Ada.Calendar,
+                No_Dependence => Ada.Dynamic_Priorities,
+                No_Dependence => Ada.Execution_Time.Group_Budget,
+                No_Dependence => Ada.Execution_Time.Timers,
+                No_Dependence => Ada.Task_Attributes);]}
 @end{Example}
 
 @begin{Discussion}
@@ -2398,16 +2428,10 @@ use, so we stick with existing practice, rather than using a more descriptive
 name. This is another example of Ada's lousy marketing sense; casual readers,
 especially those outside of Ada, have no conception of what
 @lquotes@;Ravenscar@rquotes@; is, and thus are much less likely to investigate
-to find out how it can help them.]}
+it to find out how it can help them.]}
 @end{Discussion}
 
 @end{StaticSem}
-
-@begin{Linktime}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgAdded{Version=[2],Text=[A @key{pragma} Profile is a configuration pragma.
-There may be more than one @key{pragma} Profile for a partition.]}
-@end{Linktime}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
@@ -2420,7 +2444,7 @@ Max_Task_Entries => 0.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  @key{Pragma} Profile and the Ravenscar profile is new.]}
+  The Ravenscar profile is new.]}
 @end{Extend95}
 
 

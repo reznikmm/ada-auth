@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/02/05 05:48:04 $}
+@Comment{$Date: 2005/03/01 06:05:04 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1727,6 +1727,10 @@ because the actual can be any descendant of the ancestor,
 not necessarily a direct descendant.
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Text=[The actual type for a generic formal derived type
+shall be a descendant of every ancestor of the formal type.]}
+
 If the formal subtype is definite, then the actual subtype shall
 also be definite.
 @begin{Ramification}
@@ -1810,10 +1814,6 @@ We rejected that idea, because it would require implicit (inherited)
 @nt{unknown_discriminant_part},
 the actual may, but need not, have discriminants,
 and may be definite or indefinite.]
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[The actual type for a generic formal derived type
-shall be a descendant of every ancestor of the formal type.]}
 
 @end{Legality}
 

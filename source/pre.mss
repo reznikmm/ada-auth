@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2005/01/29 07:15:05 $}
+@Comment{$Date: 2005/03/01 06:05:07 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.23 $}
+@comment{$Revision: 1.24 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -89,7 +89,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}>
 
 @Noparanum@shrink<@\Interfaces @em @RefSecNum{The Package Interfaces}
-@\@\C @em @RefSecNum{Interfacing with C}
+@\@\C @em @RefSecNum{Interfacing with C and C++}
 @\@\@\Pointers @em @RefSecNum{The Generic Package Interfaces.C.Pointers}
 @\@\@\Strings @em @RefSecNum{The Package Interfaces.C.Strings}
 @\@\COBOL @em @RefSecNum{Interfacing with COBOL}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/02/06 04:31:42 $}
+@Comment{$Date: 2005/03/01 06:05:04 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -461,6 +461,12 @@ be able to refer to X.Q,
 even if P.Q is visible at the place where X is declared.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00408-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[scope], Sec=(of an attribute_@!definition_@!clause)}
+The scope of an @nt{attribute_definition_clause} is identical to the scope of a
+declaration that would occur at the point of the
+@nt{attribute_definition_clause}.]}
+
 @Defn2{Term=[immediate scope], Sec=[of (a view of) an entity]}
 The immediate scope of a declaration is also the immediate scope
 of the entity or view declared by the declaration.
@@ -590,6 +596,13 @@ even though Q is declared in the declarative region of Standard,
 because R does not mention Q in a @nt{with_clause}.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00408-01]}
+  @ChgAdded{Version=[2],Text=[The scope of an @nt{attribute_definition_clause}
+  is defined so that it can be used to define the visibility of such a clause,
+  so @i<that> can be used by the stream attribute availability rules
+  (see @RefSecNum{Stream-Oriented Attributes}).]}
+@end{DiffWord95}
 
 @LabeledClause{Visibility}
 
@@ -928,11 +941,10 @@ from direct visibility, as follows:
   where hidden from all visibility.
 @end{Itemize}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01]}
-@Chg{Version=[2],New=[An @nt{attribute_definition_clause} is @i{visible} at a
-place if a declaration at the point of the @nt{attribute_definition_clause}
-would be immediately visible at the
-place.@DefN2{Term=[visible],Sec=[attribute_definition_clause]}],Old=[]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01],ARef=[AI95-00408-01]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[visible], Sec=(attribute_@!definition_@!clause)}
+An @nt{attribute_definition_clause} is @i{visible}
+everywhere within its scope.]}
 
 @end{StaticSem}
 
@@ -1375,7 +1387,6 @@ case where this is not true:]}
 complex than they already are.],Old=[]}
 @end{Incompatible95}
 
-
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}
@@ -1394,10 +1405,10 @@ an error will be produced rather than a hard to find bug.],Old=[]}
 for two components with the same name to be visible; any such program is
 illegal.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
-@Chg{Version=[2],New=[The visibility of an @nt{attribute_definition_clause} is
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01],ARef=[AI95-00408-01]}
+@ChgAdded{Version=[2],Text=[The visibility of an @nt{attribute_definition_clause} is
 defined so that it can be used by the stream attribute availability rules
-(see @RefSecNum{Stream-Oriented Attributes}).],Old=[]}
+(see @RefSecNum{Stream-Oriented Attributes}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[The visibility of a limited view of a library package
@@ -2644,7 +2655,7 @@ overload resolution.
 @Defn{type resolution rules}
 @Redundant[
 The type resolution rules provide support for class-wide programming,
-universal @Chg{Version=[2],New=[numeric ],Old=[]}literals, dispatching
+universal @Chg{Version=[2],New=[],Old=[numeric ]}literals, dispatching
 operations, and anonymous access types:]
 @begin{Ramification}
   Expected types are defined throughout the RM95.

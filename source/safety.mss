@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.26 $ $Date: 2005/01/25 07:00:14 $ $Author: Randy $ }
+@Comment{ $Revision: 1.27 $ $Date: 2005/03/01 06:05:10 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/01/25 07:00:14 $}
+@Comment{$Date: 2005/03/01 06:05:10 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -674,7 +674,7 @@ a restriction can be imposed.
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00347-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00347-01],ARef=[AI95-00394-01]}
 The following restrictions, the same as in @RefSecNum{Tasking Restrictions},
 apply in this Annex:
  No_Task_@!Hierarchy,
@@ -684,13 +684,29 @@ apply in this Annex:
  Max_@!Asynchronous_@!Select_@!Nesting is 0, and
  Max_@!Tasks is 0.
 @redundant[The last three restrictions are checked prior to program execution.]
-@Chg{Version=[2],New=[Pragma Profile(Ravenscar) applies in this Annex.],Old=[]}
+@Chg{Version=[2],New=[The following uses of restriction identifier
+No_Dependence apply in this Annex: No_Dependence => Ada.Unchecked_Deallocation
+and No_Dependence => Ada.Unchecked_Conversion.
+Pragma Profile(Ravenscar) applies in this Annex.],Old=[]}
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
   @ChgAdded{Version=[2],Text=[The reference to pragma Profile(Ravenscar) is
   intended to show that properly restricted tasking is appropriate for use
   in high integrity systems. The Ada 95
   Annex seemed to suggest that tasking was inappropriate for such systems.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
+  @ChgAdded{Version=[2],Text=[Other uses of No_Dependence can also be
+  appropriate for high-integrity systems. The specific mention of two uses
+  is meant to replace the identifiers now banished to
+  @RefSec{Dependence Restrictions Identifiers}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
+  @ChgAdded{Version=[2],Text=[Restriction No_Dependence => Ada.Unchecked_Deallocation
+  would be useful in those
+  contexts in which heap storage is needed on program start-up, but need not be
+  increased subsequently. The danger of a dangling pointer can therefore be
+  avoided.]}@ChgNote{Moved up from below.}
 @end{Discussion}
 
 @Trailing@;The following additional restrictions apply in this Annex.
@@ -727,13 +743,16 @@ rather than inhibiting what can be in the generic while
 liberalizing where they can be instantiated.]}
 @end[Reason]
 
-@Defn2{Term=[Restrictions],Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic dependence on Unchecked_Deallocation is not allowed.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-02]}
+@ChgDeleted{Version=[2],Text=[@Defn2{Term=[Restrictions],
+Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic
+dependence on Unchecked_Deallocation is not allowed.]}
 @begin{Discussion}
-
-This restriction would be useful in those contexts in which heap storage is
-needed on program start-up, but need not be increased subsequently. The
-danger of a dangling pointer can therefore be avoided.
-
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[This restriction would be useful in those
+  contexts in which heap storage is needed on program start-up, but need not be
+  increased subsequently. The danger of a dangling pointer can therefore be
+  avoided.]}
 @end{Discussion}
 
 @Trailing@;Immediate_Reclamation @\Except for storage occupied by objects created by
@@ -799,21 +818,31 @@ machine level, fixed point is virtually the same as integer arithmetic.
 
 @end{Discussion}
 
-@Defn2{Term=[Restrictions],Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic dependence on the
- predefined generic Unchecked_Conversion is not allowed.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-02]}
+@ChgDeleted{Version=[2],Text=[@Defn2{Term=[Restrictions],
+Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic dependence
+on the predefined generic Unchecked_Conversion is not allowed.]}
 @begin{Discussion}
-
-Most critical applications would require some restrictions or additional
-validation checks on uses of unchecked conversion. If the application does
-not require the functionality, then this restriction provides a means of
-ensuring the design requirement has been satisfied.
-The same applies to several of the following restrictions.
-
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[Most critical applications would require
+  some restrictions or additional validation checks on uses of unchecked
+  conversion. If the application does not require the functionality, then
+  this restriction provides a means of ensuring the design requirement has
+  been satisfied. The same applies to several of the following restrictions.]}
 @end{Discussion}
 
 No_Access_Subprograms @\The declaration of access-to-subprogram types
 is not allowed.
 @Defn2{Term=[Restrictions],Sec=(No_Access_Subprograms)}
+@begin{Discussion}@ChgNote{Moved from above}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[Most critical applications would require
+  some restrictions or additional validation checks on uses of
+  access-to-subprogram types. If the application does not require the
+  functionality, then this restriction provides a means of ensuring the design
+  requirement has been satisfied. The same applies to several of the following
+  restrictions, and to restriction No_Dependence => Ada.Unchecked_Conversion.]}
+@end{Discussion}
 
 @Defn2{Term=[Restrictions],Sec=(No_Unchecked_Access)}No_Unchecked_Access @\The @attr[Unchecked_Access] attribute
 is not allowed.
@@ -998,6 +1027,11 @@ proscribed
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
   @ChgAdded{Version=[2],Text=[The title of this clause was changed to match the
   change to the Annex title. Pragma Profile(Ravenscar) is part of this annex.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
+  @ChgAdded{Version=[2],Text=[Restriction No_Dependence is used instead of
+  of special @i<restriction_>@nt<identifier>s. The old names are banished to
+  Obsolescent Features (see @RefSecNum{Dependence Restrictions Identifiers}).]}
 @end{DiffWord95}
 
 @LabeledAddedClause{Version=[2],Name=[Pragma Detect_Blocking]}

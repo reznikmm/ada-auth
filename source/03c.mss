@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/02/08 06:35:34 $}
+@Comment{$Date: 2005/03/01 06:05:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -352,7 +352,7 @@ to the given external tag, or raises Tag_Error if the given string
 is not the external tag for any specific
 type of the partition.@Chg{Version=[2],New=[ Tag_Error is also raised
 if the specific type identified is a library-level type whose tag
-has not yet been created (see @RefSecNum{Freezing Rules}.],Old=[]}
+has not yet been created (see @RefSecNum{Freezing Rules}).],Old=[]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
@@ -360,7 +360,10 @@ has not yet been created (see @RefSecNum{Freezing Rules}.],Old=[]}
   prevents a reference to the type before execution reaches the freezing point
   of the type. This is important so that T'Class'Input or an instance of
   Tags.Generic_Dispatching_Constructor do not try to create an object of a type
-  that hasn't been frozen (which may not have yet elaborated its constraints).]}
+  that hasn't been frozen (which may not have yet elaborated its constraints).
+  We don't require this behavior for non-library-level types as the tag can
+  be created multiple times and possibly multiple copies can exist at the
+  same time, making the check complex.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
@@ -610,8 +613,8 @@ required by streams for T'Class'Input
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the internal tag provided to an instance of
 Tags.Generic_Dispatching_Constructor identifies a specific type whose
-tag has not been elaborated, or does not exist in the partition at the time of
-the call, execution is erroneous.]}
+tag has not been created (see @RefSecNum{Freezing Rules}), or does not exist
+in the partition at the time of the call, execution is erroneous.]}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -620,6 +623,9 @@ possible presuming that the tag value came from the current execution
 of the partition. T'Tag freezes the type (and thus creates the tag), and
 Internal_Tag and Descendant_Tag
 cannot return the tag of a library-level type that has not been created.
+All ancestors of a tagged type must be frozen no later than the (full)
+declaration of a type that uses them, so Parent_Tag and Interface_Ancestor_Tags
+cannot return a tag that has not been created.
 Finally, library-level types never cease to exist. Thus, if the tag comes from
 a library-level type, there cannot be erroneous execution (the use of
 Descendant_Tag rather than Internal_Tag can help ensure that the tag is
@@ -1078,8 +1084,8 @@ tagged types.]}
 @Defn{polymorphism}
 @Defn{run-time polymorphism}
 @Defn2{Term=[controlling tag], Sec=(for a call on a dispatching operation)}
-The primitive subprograms of a tagged type@Chg{Version=[2],New=[, and the
-subprograms declared by a @nt{formal_abstract_subprogram_declaration}],Old=[]}
+The primitive subprograms of a tagged type@Chg{Version=[2],New=[ and the
+subprograms declared by @nt{formal_abstract_subprogram_declaration}s],Old=[]}
 are called @i(dispatching operations).
 @Redundant[A dispatching operation can be called using a statically
 determined @i{controlling} tag, in which case the body to be
@@ -1286,7 +1292,7 @@ or more distinct tagged types.
   class-wide types.
 @end{reason}
 @begin{ramification}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0098],ARef=[AI95-00183]}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0098],ARef=[AI95-00183-01]}
   @ChgAdded{Version=[1],Text=[This restriction applies even if the partial view (see
   @RefSecNum{Private Types and Private Extensions}) of one or both
   of the types is untagged. This follows from the definition of dispatching
@@ -1309,7 +1315,7 @@ appearently 6.0 is different.
     @ChgDeleted{Version=[1],Text=[Old @b{Change}.]}
 @end{Discussion}}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344]}@ChgNote{Tags now have two parts, logically}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}@ChgNote{Tags now have two parts, logically}
 This rule is needed
 because (1) we don't want people dispatching to things that haven't
 been declared yet, and (2) we want to allow @Chg{Version=[2],New=[the static
@@ -1333,7 +1339,7 @@ As in Ada 83, for an untagged type, the above call upon P will call the
 old P (which is arguably confusing).
 @end{Reason}
 @begin{ImplNote}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326]}@ChgNote{We have tagged incomplete types now, and they don't freeze}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}@ChgNote{We have tagged incomplete types now, and they don't freeze}
 Because of this rule,
 the type descriptor can be created (presumably containing linker
 symbols pointing at the not-yet-compiled bodies) at the first
@@ -1343,7 +1349,7 @@ type declared in a
 @nt{package_specification}, overriding in the body or by a child subprogram.
 @end{ImplNote}
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251]}@ChgNote{Interfaces cause this too}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}@ChgNote{Interfaces cause this too}
 A consequence is that for a @Chg{Version=[2],New=[tagged type declaration],
 Old=[@nt{derived_type_declaration}]} in a
 @nt{declarative_part}, only the @Chg{Version=[2],New=[last (overriding)],Old=[first]}
@@ -1718,7 +1724,7 @@ that was not primitive on some tagged type.
 Other rules could be formulated to solve this problem,
 but the current ones seem like the simplest.
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-01]}
 @ChgAdded{Version=[2],Text=[In Ada 2005, abstract primitive subprograms of
 an untagged type may be used to @lquotes@;undefine@rquotes@; an operation.]}
 @end{Reason}
@@ -2074,15 +2080,15 @@ clearly applies to abstract predefined equality.],Old=[]}
 @LabeledAddedSubClause{Version=[2],Name=[Interface Types]}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[An interface type is an abstract tagged type that
-provides a restricted form of multiple inheritance. A tagged, task, or
-protected type have one or more interface types as ancestors.]}
+provides a restricted form of multiple inheritance. A tagged type, task type,
+or protected type may have one or more interface types as ancestors.]}
 @end{Intro}
 
 @begin{Syntax}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<interface_type_definition>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
     [@key{limited} | @key{task} | @key{protected} | @key{synchronized}] @key{interface} [@key{and} @Syn2{interface_list}]>,Old=<>}"}
@@ -2090,13 +2096,13 @@ rhs="@Chg{Version=[2],New=<
 
 @begin{StaticSem}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @Chg{Version=[2],New=[An interface type (also called an @i{interface})
 is@RootDefn{interface}@PDefn2{Term=[interface],Sec=[type]}
 a specific abstract tagged type that is defined by
 an @nt{interface_type_definition}.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[An interface with the reserved word @key{limited},
 @key{task}, @key{protected},
 or @key{synchronized} in its definition is termed, respectively, a @i{limited
@@ -2119,7 +2125,7 @@ corresponding class-wide type) is a task object. Similarly, a view of an
 object that is of a protected interface type (or of a corresponding
 class-wide type) is a protected object.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[@Defn{synchronized type}
 @PDefn2{Term=[type],Sec=[synchronized]}
 @PDefn2{Term=[tagged type],Sec=[synchronized]}
@@ -2149,7 +2155,7 @@ type shall be abstract subprograms or null procedures.],Old=[]}
 @Chg{Version=[2],New=[The type of a subtype named in an @nt{interface_list}
 shall be an interface type.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[A descendant of a nonlimited interface shall be
 nonlimited. A descendant of a task interface shall be a task type or a task
 interface. A descendant of a protected interface shall be a protected type or a
@@ -2266,6 +2272,14 @@ unit.@PDefn{generic contract issue}]}
 @ChgAdded{Version=[2],Text=[The elaboration of an
 @nt{interface_type_definition} has no effect.]}
 @end{Runtime}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00411-01]}
+@ChgAdded{Version=[2],Text=[Nonlimited interface types have predefined
+nonabstract equality operators. These may be overridden with user-defined
+abstract equality operators. Such operators will then require
+an explicit overriding for any nonabstract descendant of the interface.]}
+@end{Notes}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
@@ -2679,7 +2693,8 @@ access value designating no entity at all@Chg{Version=[2],New=[, which can be
 obtained by converting the literal @key{null} to the access type],Old=[]}.
 @Redundant[The null value of @Chg{Version=[2],New=[an],Old=[a named]} access
 type is the default initial value of the type.]
-Other values of an access@Chg{Version=[2],New=[-to-object],Old=[]} type are
+@Chg{Version=[2],New=[Non-null],Old=[Other]} values of an
+access@Chg{Version=[2],New=[-to-object],Old=[]} type are
 obtained by evaluating @Chg{Version=[2],New=[],Old=[an
 @nt<attribute_reference> for the Access or Unchecked_Access
 attribute of an aliased view of an object or non-intrinsic
@@ -2689,7 +2704,7 @@ returns an access value designating a newly created object
 (see @RefSecNum(Operations of Access Types))]@Chg{Version=[2],New=[, or in the
 case of a general access-to-object type, evaluating an
 @nt{attribute_reference} for the Access or Unchecked_Access
-attribute of an aliased view of an object. Other values of an
+attribute of an aliased view of an object. Non-null values of an
 access-to-subprogram type are obtained by evaluating an
 @nt{attribute_reference} for the Access attribute of a
 non-intrinsic subprogram.],Old=[]}.
@@ -3608,7 +3623,7 @@ subprogram.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
 @ChgAdded{Version=[2],Text=[The accessibility level of the anonymous access type
 of an access parameter specifying an access-to-subprogram type is
-statically deeper than any master.]}
+statically deeper than that of any master.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This rule means that it is illegal to convert an
@@ -3623,7 +3638,7 @@ These represent @lquotes@;downward closures@rquotes@; and
 thus require passing of static links or global display information (along
 with generic sharing information if the implementation does sharing) along
 with the address of the subprogram. We must prevent conversions of these to
-types with @lquotes@;normal@rquotes@; accessibility, as those typically don;t
+types with @lquotes@;normal@rquotes@; accessibility, as those typically don't
 include the extra information needed to make a call.]}
 @end{Reason}
 
@@ -3809,7 +3824,7 @@ is the library level.
   For implementations that share generics,
   run-time code is needed to detect the error.
 
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344-01]}
   Checks during function return@Chg{Version=[2],New=[ and @nt{allocator}s,
   for nested type extensions],Old=[]}.
   @end{Itemize}

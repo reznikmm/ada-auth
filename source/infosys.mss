@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2005/01/21 06:07:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2005/03/01 06:05:06 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2005/01/21 06:07:28 $}
+@Comment{$Date: 2005/03/01 06:05:06 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -31,7 +31,7 @@ See also: @RefSec{Fixed Point Types}; @RefSec{Operations of Fixed Point Types};
 @RefSec{Operational and Representation Attributes};
 @RefSec(Input-Output for Real Types);
 @RefSec{Interfacing with COBOL};
-@RefSec{Interfacing with C};
+@RefSec{Interfacing with C and C++};
 @RefSec{Numerics}.
 
 The character and string handling packages in

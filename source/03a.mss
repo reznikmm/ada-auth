@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/02/03 07:11:15 $}
+@Comment{$Date: 2005/03/01 06:04:59 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -598,10 +598,10 @@ are given in @RefSecNum(Scalar Types) for @nt<range_constraint>s,
 for @nt<index_constraint>s, and
 @RefSecNum(Discriminant Constraints) for
 @nt<discriminant_constraint>s].@Chg{Version=[2],New=[The set of possible values
-for an object of an access type can also be subject to a condition that is
+for an object of an access type can also be subjected to a condition that is
 called a null exclusion (see @RefSecNum{Access Types}).],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00415-01]}
 @Defn{subtype}
 A @i(subtype) of a given type is a combination of the type,
 a constraint on values of the type, and certain
@@ -865,8 +865,8 @@ as simply @lquotes@;the type T@rquotes@;.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00326-01]}
 @Defn{full type}
 A named type that is declared by a @nt<full_type_@!declaration>,
-or an anonymous type that is defined as part of declaring
-an object @Chg{Version=[2],New=[(or view of an object) ],Old=[]}of the type,
+or an anonymous type that is defined @Chg{Version=[2],New=[by an
+@nt{access_definition} or],Old=[]}as part of declaring an object of the type,
 is called a
 @i(full type).@Defn{full type definition}@Chg{Version=[2],New=[ The
 declaration of a full type also declares the @i<full view> of the type.],Old=[]}
@@ -881,9 +881,8 @@ of some full type.]
 @end{Honest}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
-  @ChgAdded{Version=[2],Text=[We need @lquotes@;view of an object@rquotes@;
-  above so that anonymous types declared in renames are covered, as renames
-  do not declare objects.]}
+  @ChgAdded{Version=[2],Text=[We need to mention @nt{access_definition}
+  separately, as it may occur in renames, which do not declare objects.]}
 @end{Reason}
 
 @PDefn{predefined operator}
@@ -2887,7 +2886,7 @@ then @i(T1) is called an @i(ancestor) of @i(T2).
 @Chg{Version=[2],New=[An],Old=[The]} @i(ultimate ancestor) of a type
 is @Chg{Version=[2],New=[an],Old=[the]} ancestor of the type that is not
 @Chg{Version=[2],New=[itself ],Old=[]}a descendant of any other
-type.@Chg{Version=[2],New=[ Each untagged type
+type.@Chg{Version=[2],New=[ Every untagged type
 has a unique ultimate ancestor.],Old=[]}
 @begin{Ramification}
   A specific type is a descendant of itself.

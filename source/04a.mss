@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/02/08 06:35:35 $}
+@Comment{$Date: 2005/03/01 06:05:02 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3198,7 +3198,7 @@ in an arbitrary order.
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
     @ChgAdded{Version=[2],Text=[if the type of the @nt{simple_expression} is
     class-wide, the value has a tag that identifies a type covered by the
-    tested type.]}
+    tested type;]}
     @begin{Ramification}
       Note that the tag is not checked if the @nt{simple_expression} is of a
       specific type.
