@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2000/05/20 04:32:36 $}
+@Comment{$Date: 2000/05/25 00:56:00 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1763,7 +1763,7 @@ And we would still need a special rule to prevent seeing things
 that were with-ed by our parent, etc.
 @end{DiffWord83}
 
-@NewPage{}
+@NewPage
 @LabeledClause{Program Execution}
 
 @begin{Intro}

@@ -1,7 +1,7 @@
 @Part(frontmatter, root="ada.mss")
 @UnNumberedSection(Foreword)
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2000/05/19 04:12:07 $}
+@comment{$Revision: 1.14 $ $Date: 2000/05/25 00:56:00 $}
 
 @begin{Intro}
 
@@ -479,7 +479,7 @@ application areas:
 @end{Itemize}
 @end{Intro}
 
-@NewPage{}
+@NewPage
 @SubHeading(Instructions for Comment Submission)
 
 @begin{Intro}
@@ -496,7 +496,7 @@ the defect correction procedure.
 
 Comments should use the following format:
 @begin(display)
-@TabSet(0.5in)
+@TabSet(L6)
 @\@b(!topic) @i[Title summarizing comment]
 @\@b(!reference) RM95-@i{ss.ss(pp)}
 @\@b(!from) @i{Author Name yy-mm-dd}
@@ -521,7 +521,7 @@ curly braces { } to indicate text to be added, and provide enough
 context to make the nature of the suggestion self-evident or put
 additional information in the body of the comment, for example:
 @begin{Display}
-@TabSet(0.5in)
+@TabSet(L6)
 @\@b(!topic) [c]{C}haracter
 @\@b(!topic) it[']s meaning is not defined
 @end{Display}
@@ -539,7 +539,7 @@ a Technical Corrigendum will be issued in accordance with the procedures.
 @end{Intro}
 
 @begin{NotISO}
-@NewPage()
+@NewPage
 @SubHeading(Acknowledgements)
 
 @begin{Intro}
@@ -628,7 +628,7 @@ AFB, NM) was the project manager.
 
 @end{Intro}
 
-@NewPage()
+@NewPage
 @SubHeading{Changes}
 
 @begin{Intro}

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2000/05/23 04:52:38 $}
+@Comment{$Date: 2000/05/25 00:56:00 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.8 $}
+@Comment{$Revision: 1.9 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -30,9 +30,9 @@ is a form of declaration defined as follows.
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()
+@tabclear()@tabset(P27)
 @Syn{lhs=<basic_declaration>,rhs="
-     @Syn2{type_declaration}                 @^| @Syn2{subtype_declaration}
+     @Syn2{type_declaration} @\| @Syn2{subtype_declaration}
    | @Syn2{object_declaration} @\| @Syn2{number_declaration}
    | @Syn2{subprogram_declaration} @\| @Syn2{abstract_subprogram_declaration}
    | @Syn2{package_declaration} @\| @Syn2{renaming_declaration}
@@ -752,11 +752,11 @@ A @nt<type_declaration> declares a type and its first subtype.
    | @Syn2{task_type_declaration}
    | @Syn2{protected_type_declaration}"}
 
-@tabclear()
+@tabclear()@tabset(P29)
 @Syn{lhs=<type_definition>,rhs="
-     @Syn2{enumeration_type_definition} @^| @Syn2{integer_type_definition}
-   | @Syn2{real_type_definition}    @\| @Syn2{array_type_definition}
-   | @Syn2{record_type_definition}  @\| @Syn2{access_type_definition}
+     @Syn2{enumeration_type_definition}@\| @Syn2{integer_type_definition}
+   | @Syn2{real_type_definition}  @\| @Syn2{array_type_definition}
+   | @Syn2{record_type_definition} @\| @Syn2{access_type_definition}
    | @Syn2{derived_type_definition}"}
 @end{Syntax}
 

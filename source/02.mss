@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:04 $}
+@Comment{$Date: 2000/05/25 00:56:00 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 @redundant[
@@ -168,13 +168,10 @@ The first name given is the name from ISO 10646-1; the subsequent
 names, if any, are those used within the
 standard, depending on context.
 @end{Discussion}
-@Define{TwoColSC, Columns=2, Boxed, ColumnBalance, NoFill, ColumnWidth=3.0in}
-@Case{Device,
-    File=<@Modify(TwoColSC, ColumnWidth=38chars)>}
-@TabClear()
 @begin{DisplayWithoutParaNum}
-@begin(TwoColSC)
-symbol     @^name
+@TabClear()@TabSet(P9)
+@begin(TwoCol)
+symbol @\name
 
   " @\quotation mark
   # @\number sign
@@ -202,7 +199,7 @@ symbol @\name
   ] @\right square bracket
   { @\left curly bracket
   } @\right curly bracket
-@end(TwoColSC)
+@end(TwoCol)
 @end{DisplayWithoutParaNum}
 @end{StaticSem}
 
@@ -348,7 +345,7 @@ of a compound delimiter, or as a character of a @nt{comment},
 The following names are used when referring to compound
 delimiters:
 @begin{Display}
-@TabClear()delimiter     @^name
+@TabClear()@TabSet(P11)delimiter @\name
 
    => @\arrow
    .. @\double dot
@@ -507,8 +504,8 @@ obtain the value of the @nt{decimal_literal} with the @nt{exponent}.
 @begin{Examples}
 @i{Examples of decimal literals:}
 @begin{Display}
-@tabclear()
-12        0      1E6    123_456           @^--@i{  integer literals}
+@tabclear()@tabset(P31)
+12        0      1E6    123_456 @\--@i{  integer literals}
 
 12.0      0.0    0.456  3.14159_26 @\--@i{  real literals}
 @end{Display}
@@ -579,9 +576,9 @@ lower case or in upper case, with the same meaning.
 @begin{Examples}
 @i{Examples of based literals:}
 @begin{Display}
-@tabclear()
-2#1111_1111#   @^16#FF#       016#0ff#                    @^--@i{  integer literals of value 255}
-16#E#E1     @\2#1110_0000#     @\--@i{  integer literals of value 224}
+@tabclear()@tabset(P16, P45)
+2#1111_1111#@\16#FF#      016#0ff#  @\--@i{  integer literals of value 255}
+16#E#E1     @\2#1110_0000#  @\--@i{  integer literals of value 224}
 16#F.FF#E+2 @\2#1.1111_1111_1110#E11 @\--@i{  real literals of value 4095.0}
 @end{Display}
 @end{Examples}
@@ -670,10 +667,10 @@ An end of line cannot appear in a @nt{string_literal}.
 @begin{Examples}
 @i{Examples of string literals:}
 @begin{Display}
-@tabclear()
+@tabclear()@tabset(P16)
 "Message of the day:"
 
-""                           @^--@i{  a null string literal}
+""   @\--@i{  a null string literal}
 "@ "   "A"   """"     @\--@i{  three string literals of length 1}
 
 "Characters such as $, %, and } are allowed in string literals"
@@ -1103,13 +1100,15 @@ to act as examples, and to remove the normative material from
 informative annex.
 @end{DiffWord83}
 
-@NewPage{}
+@NewPage
 @LabeledClause{Reserved Words}
 
-@Define{FourColRW, Columns=4, Boxed, ColumnBalance, NoFill, ColumnWidth=1.5in, LeftMargin=+.5in}
 @begin{Syntax}
 @begin{Bundle}
 @begin{SyntaxText}
+@chgref{Version=[1], Kind=[Deleted]}
+@chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk number from original RM}>]
+
 @Defn{reserved word}
 The following are the @i{reserved words}
 (ignoring upper/lower case distinctions):
@@ -1125,9 +1124,9 @@ The following are the @i{reserved words}
   of confusion for some users, and differs from the way they
   are treated in the C and Pascal language definitions.
 @end{Discussion}
-@*
 
-@begin{FourColRW}
+@begin{DisplayWithoutParanum}
+@begin{FourCol}
 @key{abort}
 @key{abs}
 @key{abstract}
@@ -1222,7 +1221,8 @@ The following are the @i{reserved words}
 @key{with}
 
 @key{xor}
-@end{FourColRW}
+@end{FourCol}
+@end{DisplayWithoutParanum}
 @end{Bundle}
 @end{Syntax}
 

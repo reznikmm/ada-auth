@@ -1,16 +1,11 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:06 $}
+@Comment{$Date: 2000/05/25 00:56:00 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.12 $}
+@comment{$Revision: 1.13 $}
 @comment{$RLB: Eliminated includes. $}
-
-@Define{TwoColRW, use=Display}
-@Case{Device, Postscript="@Modify{TwoColRW, Size 9, Columns=2, Boxed}",
-              else="@Modify{TwoColRW}"}
-@Comment{Beware: formatting the table below is pretty tricky.}
 
 @begin{Intro}
 @redundant[
@@ -22,10 +17,11 @@ There are three root library units:
 Ada, Interfaces, and System;
 other library units are children of these:
 @*
+@begin{DisplaywithoutParanum}
 @TabClear{}
-@TabSet{.25in,+.25in,+.25in,+.25in,+.25in}
-@begin{TwoColRW}
-Standard @em @RefSecNum{The Package Standard}
+@TabSet{L2, L4, L6, L8, L10, L12, L14, L16}
+@begin{TwoCol}
+@shrink<Standard @em @RefSecNum{The Package Standard}
 @\Ada @em @RefSecNum{The Package Ada}
 @\@\Asynchronous_Task_Control @em @RefSecNum{Asynchronous Task Control}
 @\@\Calendar @em @RefSecNum{Delay Statements, Duration, and Time}
@@ -47,7 +43,8 @@ Standard @em @RefSecNum{The Package Standard}
 @\@\@\Discrete_Random @em @RefSecNum{Random Number Generation}
 @\@\@\Elementary_Functions @em @RefSecNum{Elementary Functions}
 @\@\@\Float_Random @em @RefSecNum{Random Number Generation}
-@\@\@\Generic_Complex_Elementary_Functions @em @RefSecNum{Complex Elementary Functions}
+@\@\@\Generic_Complex_Elementary_Functions @em
+@\@\@\@\@\@\@RefSecNum{Complex Elementary Functions}
 @\@\@\Generic_Complex_Types @em @RefSecNum{Complex Types}
 @\@\@\Generic_Elementary_Functions @em @RefSecNum{Elementary Functions}
 @\@\Real_Time @em @RefSecNum{Monotonic Time}
@@ -65,9 +62,9 @@ Standard @em @RefSecNum{The Package Standard}
 @\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
 @\@\@\Wide_Maps @em @RefSecNum{Wide_String Handling}
 @\@\@\@\Wide_Constants @em @RefSecNum{Wide_String Handling}
-@\@\@\Wide_Unbounded @em @RefSecNum{Wide_String Handling}
+@\@\@\Wide_Unbounded @em @RefSecNum{Wide_String Handling}>
 @NewColumn
-Standard (@i{...continued})
+@shrink<Standard (@i{...continued})
 @\Ada (@i{...continued})
 @\@\Synchronous_Task_Control @em @RefSecNum{Synchronous Task Control}
 @\@\Tags @em @RefSecNum{Tagged Types and Type Extensions}
@@ -82,22 +79,23 @@ Standard (@i{...continued})
 @\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{Complex Input-Output}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Text_IO.Editing}
-@\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}
+@\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}>
 
-@\Interfaces @em @RefSecNum{The Package Interfaces}
+@shrink<@\Interfaces @em @RefSecNum{The Package Interfaces}
 @\@\C @em @RefSecNum{Interfacing with C}
 @\@\@\Pointers @em @RefSecNum{The Generic Package Interfaces.C.Pointers}
 @\@\@\Strings @em @RefSecNum{The Package Interfaces.C.Strings}
 @\@\COBOL @em @RefSecNum{Interfacing with COBOL}
-@\@\Fortran @em @RefSecNum{Interfacing with Fortran}
+@\@\Fortran @em @RefSecNum{Interfacing with Fortran}>
 
-@\System @em @RefSecNum{The Package System}
+@shrink<@\System @em @RefSecNum{The Package System}
 @\@\Address_To_Access_Conversions @em @RefSecNum{The Package System.Address_To_Access_Conversions}
 @\@\Machine_Code @em @RefSecNum{Machine Code Insertions}
 @\@\RPC @em @RefSecNum{Partition Communication Subsystem}
 @\@\Storage_Elements @em @RefSecNum{The Package System.Storage_Elements}
-@\@\Storage_Pools @em @RefSecNum{Storage Management}
-@end{TwoColRW}
+@\@\Storage_Pools @em @RefSecNum{Storage Management}>
+@end{TwoCol}
+@end{DisplaywithoutParanum}
 ]
 @begin{Discussion}
 In running text, we generally leave out the ``Ada.'' when referring to a

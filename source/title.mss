@@ -20,7 +20,7 @@
     else=<@Modify(I2Copyright, Fill)>}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2000/05/19 04:12:07 $}
+@comment{$Revision: 1.6 $ $Date: 2000/05/25 00:56:00 $}
 @begin(I2Title)
 @begin{FlushRight, Fixed 0.75inch}
 @HelveticaBold{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)
@@ -58,4 +58,4 @@ Version @Value(Version)
     else=<@I2Copyright{Copyright @Latin1(169) 1992,1993,1994,1995@:  Intermetrics, Inc.}>}
 @end(I2TBox)
 @end(I2Title)
-@NewPage()
+@NewPage

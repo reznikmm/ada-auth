@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2000/05/19 04:12:05 $}
+@Comment{$Date: 2000/05/25 00:56:00 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -27,9 +27,9 @@ Finally, @nt<name>s can denote attributes of any of the foregoing.
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()
+@tabclear()@tabset(P22)
 @Syn{lhs=<name>,rhs="
-     @Syn2{direct_name}                @^| @Syn2{explicit_dereference}
+     @Syn2{direct_name} @\| @Syn2{explicit_dereference}
    | @Syn2{indexed_component} @\| @Syn2{slice}
    | @Syn2{selected_component} @\| @Syn2{attribute_reference}
    | @Syn2{type_conversion} @\| @Syn2{function_call}
@@ -136,25 +136,25 @@ denotes the object or subprogram designated by the value of the @nt{name}.
 
 @begin{Examples}
 @i(Examples of direct names:)
-@begin(Display)
-@tabclear()
-Pi             @^@i(-- the direct name of a number)                  @^(see @RefSecNum(Number Declarations))
+@begin(Example)
+@tabclear()@tabset(P9, P47)
+Pi @\@i(-- the direct name of a number) @\(see @RefSecNum(Number Declarations))
 Limit @\@i(-- the direct name of a constant) @\(see @RefSecNum(Object Declarations))
 Count @\@i(-- the direct name of a scalar variable) @\(see @RefSecNum(Object Declarations))
 Board @\@i(-- the direct name of an array variable) @\(see @RefSecNum(Index Constraints and Discrete Ranges))
 Matrix @\@i(-- the direct name of a type) @\(see @RefSecNum(Array Types))
 Random @\@i(-- the direct name of a function) @\(see @RefSecNum(Subprogram Declarations))
 Error @\@i(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
-@end(Display)
+@end(Example)
 
 @i{Examples of dereferences:}
-@begin{Display}
-@tabclear()
-Next_Car.@key[all]         @^@i[--  explicit dereference denoting the object designated by]
+@begin{Example}
+@tabclear()@tabset(P16)
+Next_Car.@key[all]@\@i[--  explicit dereference denoting the object designated by]
                @\@i[--  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
 Next_Car.Owner @\@i[--  selected component with implicit dereference;]
                @\@i[--  same as Next_Car.@key[all].Owner]
-@end{Display}
+@end{Example}
 @end{Examples}
 
 @begin{Extend83}
@@ -305,8 +305,8 @@ Constraint_Error is raised if this check fails.
 @begin{Examples}
 @i(Examples of indexed components:)
 @begin{Example}
-@tabclear()
- My_Schedule(Sat)     @i[--  a component of a one-dimensional array  @^(see @RefSecNum{Index Constraints and Discrete Ranges})]
+@tabclear()@tabset(P56)
+ My_Schedule(Sat)     @i[--  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
  Page(10)             @i[--  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
  Board(M, J + 1)      @i[--  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
  Page(10)(20)         @i[--  a component of a component @\(see @RefSecNum{Array Types})]
@@ -403,8 +403,8 @@ component of the array A and has the corresponding component type.
 @begin{Examples}
 @i(Examples of slices:)
 @begin{Example}
-@tabclear()
-  Stars(1 .. 15)        @i[--  a slice of 15 characters                  @^(see @RefSecNum{String Types})]
+@tabclear()@tabset(P50)
+  Stars(1 .. 15)        @i[--  a slice of 15 characters @\(@lSeeSecNum{String Types})]
   Page(10 .. 10 + Size) @i[--  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
   Page(L)(A .. B)       @i[--  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
   Stars(1 .. 0)         @i[--  a null slice @\(see @RefSecNum{String Types})]
@@ -551,8 +551,8 @@ The exception Constraint_Error is raised if this check fails.
 @begin{Examples}
 @i(Examples of selected components:)
 @begin{Example}
-@tabclear()
-  Tomorrow.Month     @i[--  a record component                             @^(see @RefSecNum{Record Types})]
+@tabclear()@tabset(P50)
+  Tomorrow.Month     @i[--  a record component @\(see @RefSecNum{Record Types})]
   Next_Car.Owner     @i[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
   Next_Car.Owner.Age @i[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
                      @i[--  the previous two lines involve implicit dereferences]
@@ -565,8 +565,8 @@ The exception Constraint_Error is raised if this check fails.
 
 @i(Examples of expanded names:)
 @begin{Example}
-@tabclear()
-  Key_Manager."<"      @i[--  an operator of the visible part of a package @^(see @RefSecNum{Private Operations})]
+@tabclear()@tabset(P58)
+  Key_Manager."<"      @i[--  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
   Dot_Product.Sum      @i[--  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
   Buffer.Pool          @i[--  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
   Buffer.Read          @i[--  an entry of a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
@@ -755,8 +755,8 @@ access type.
 @begin{Examples}
 @i(Examples of attributes:)
 @begin{Example}
-@tabclear()
-Color'First        @i[-- minimum value of the enumeration type Color   @^(see @RefSecNum{Enumeration Types})]
+@tabclear()@tabset(P58)
+Color'First        @i[-- minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
 Rainbow'Base'First @i[-- same as Color'First @\(see @RefSecNum{Enumeration Types})]
 Real'Digits        @i[-- precision of the type Real @\(see @RefSecNum{Floating Point Types})]
 Board'Last(2)      @i[-- upper bound of the second dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
@@ -939,13 +939,13 @@ rules for expanded names (see @RefSecNum{Selected Components}).
 
 @begin{Examples}
 @i(Examples of literals:)
-@begin{Display}
-@tabclear()
+@begin{Example}
+@tabclear()@tabset(P16)
 3.14159_26536    @^@i[--  a real literal]
 1_345 @\@i[--  an integer literal]
 'A' @\@i[--  a character literal]
 "Some Text" @\@i[--  a string literal ]
-@end{Display}
+@end{Example}
 @end{Examples}
 
 @begin{Incompatible83}
@@ -1968,9 +1968,9 @@ of any of the other five syntactic categories defined below.
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()
+@tabclear()@tabset(P23)
 @Syn{lhs=<expression>,rhs="
-     @Syn2{relation} {@key{and} @Syn2{relation}} @^| @Syn2{relation} {@key{and} @key{then} @Syn2{relation}}
+     @Syn2{relation} {@key{and} @Syn2{relation}} @\| @Syn2{relation} {@key{and} @key{then} @Syn2{relation}}
    | @Syn2{relation} {@key{or} @Syn2{relation}} @\| @Syn2{relation} {@key{or} @key{else} @Syn2{relation}}
    | @Syn2{relation} {@key{xor} @Syn2{relation}}"}
 @Hinge{}
@@ -2125,9 +2125,9 @@ of functions for user-defined operators.  See @RefSec(Overloading of Operators).
 @end{Intro}
 
 @begin{Syntax}
-@tabclear()
+@tabclear()@tabset(P36)
 @Syn{lhs=<logical_operator>,
-    rhs="                               @^ @key{and} | @key{or}  | @key{xor}"}
+    rhs="@\ @key{and} | @key{or}  | @key{xor}"}
 @Syn{lhs=<relational_operator>,rhs="@\ =   | /=  | <   | <= | > | >="}
 @Syn{lhs=<binary_adding_operator>,rhs="@\ +   | @en   | &"}
 @Syn{lhs=<unary_adding_operator>,rhs="@\ +   | @en"}
@@ -3155,24 +3155,24 @@ Y : Real := 2.0;
 F : Fraction := 0.25;                 @i[--     see @RefSecNum{Fixed Point Types}]
 G : Fraction := 0.5;
 @end{Example}
-@begin{Display}
-@tabclear()
-@i(Expression)                @^@i(Value)           @^@i(Result Type)
+@begin{Example}
+@tabclear()@tabset(P19, P31)
+@i(Expression)  @\@i(Value)  @\@i(Result Type)
 
-I*J               @\2         @\@i(same as I and J, that is, Integer)
-K/J               @\1         @\@i(same as K and J, that is, Integer)
-K @key(mod) J     @\1         @\@i(same as K and J, that is, Integer)
+I*J            @\2      @\@i(same as I and J, that is, Integer)
+K/J            @\1      @\@i(same as K and J, that is, Integer)
+K @key(mod) J  @\1      @\@i(same as K and J, that is, Integer)
 
-X/Y               @\0.5       @\@i(same as X and Y, that is, Real)
-F/2               @\0.125     @\@i(same as F, that is, Fraction)
+X/Y            @\0.5    @\@i(same as X and Y, that is, Real)
+F/2            @\0.125  @\@i(same as F, that is, Fraction)
 
-3*F               @\0.75      @\@i(same as F, that is, Fraction)
-0.75*G            @\0.375     @\@i(universal_fixed, implicitly convertible)
-                  @\          @\@i(to any fixed point type)
-Fraction(F*G)     @\0.125     @\@i(Fraction, as stated by the conversion)
-Real(J)*Y         @\4.0       @\@i(Real, the type of both operands after)
-                  @\          @\@i(conversion of J)
-@end{Display}
+3*F            @\0.75   @\@i(same as F, that is, Fraction)
+0.75*G         @\0.375  @\@i(universal_fixed, implicitly convertible)
+               @\       @\@i(to any fixed point type)
+Fraction(F*G)  @\0.125  @\@i(Fraction, as stated by the conversion)
+Real(J)*Y      @\4.0    @\@i(Real, the type of both operands after)
+               @\       @\@i(conversion of J)
+@end{Example}
 @end{Examples}
 
 @begin{Extend83}
