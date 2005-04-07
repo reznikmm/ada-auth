@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.11 $ $Date: 2005/04/05 06:38:02 $ $Author: Randy $ }
+@comment{ $Revision: 1.12 $ $Date: 2005/04/05 23:37:48 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/04/05 06:38:02 $}
+@Comment{$Date: 2005/04/05 23:37:48 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -1033,10 +1033,11 @@ for malformed patterns.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[For Rename, if both New_Name and Old_Name are
-simple names, then Rename should not propagate Use_Error.]}
+simple names, and New_Name does not identify an existing external file,
+then Rename should not propagate Use_Error.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Directories.Rename should not raise Use_Error if New_Name and Old_Name
-are simple names.]}]}
+are simple names and New_Name does not identify an existing file.]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1055,7 +1056,9 @@ are simple names.]}]}
 Full_Name, Simple_Name,
 Base_Name, Extension, and Compose operate on file names, not external files.
 The files identified by these operations do not need to exist. Name_Error is
-raised only if the file name is malformed and cannot possibly identify a file.]}
+raised only if the file name is malformed and cannot possibly identify a file.
+Of these operations, only the result of Full_Name depends on the current
+default directory; the result of the others depends only on their parameters.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Using access types, values of Search_Type and

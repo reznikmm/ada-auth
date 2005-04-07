@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/03/18 06:37:19 $}
+@Comment{$Date: 2005/04/05 23:37:46 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 
@@ -209,16 +209,20 @@ Private part is defined in Section 8.
 @ChgAdded{Version=[2],Text=[If a @nt{task_type_declaration} includes an @nt{interface_list}, the task type
 is derived from each interface named in the @nt{interface_list}.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[For a @nt{task_type_declaration}, if the first parameter
-of a primitive inherited subprogram is of the task type or an access parameter
-designating he task type, and there is an @nt{entry_declaration} for a single
-entry with the same identifier within the @nt{task_type_declaration}, having a
-profile that is type conformant with that of the inherited subprogram after
-omitting this first parameter, the inherited subprogram is said to be
-@i{implemented} by the conforming task entry.@PDefn2{Term=[implemented],
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Text=[For a @nt{task_type_declaration}, if the first
+parameter of a primitive inherited subprogram is of the task type or an access
+parameter designating he task type, and there is an @nt{entry_declaration} for
+a single entry with the same identifier within the @nt{task_type_declaration},
+whose profile is type conformant with the
+prefixed view profile of inherited subprogram, the inherited subprogram is
+said to be @i{implemented} by the conforming task entry.@PDefn2{Term=[implemented],
 Sec=[by a task entry]}]}
-
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
+  interface; a @nt{type_type_declaration} inherits no subprograms of its own.]}
+@end{Ramification}
 @end{StaticSem}
 
 @begin{Legality}
@@ -254,16 +258,17 @@ inherited by the type declared by a
 @nt{task_type_declaration}, at most one of the following shall apply:]}
 
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[the inherited subprogram shall be overridden with a
 primitive subprogram of the task type, in which case the overriding subprogram
 shall be subtype conformant with the inherited subprogram and not abstract;
 or]}
 
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[the inherited subprogram is implemented by a single entry of the
-task type; in which case its profile after omitting the first
-parameter shall be subtype conformant with that of the task entry.]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Text=[the inherited subprogram is implemented by a
+single entry of the task type; in which case its prefixed view profile
+shall be subtype conformant with that of the task entry.]}
+
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -451,11 +456,12 @@ because a @nt{declarative_part} can be empty.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Task types and single tasks can be derived from one or more interfaces.
   Entries of the task type can implement the primitive operations of an
-  interface.]}
+  interface. @nt{Overriding_indicator}s can be used to specify whether or not
+  an entry implements a primitive operation.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -884,18 +890,26 @@ named in the @nt{interface_list}.],Old=[]}
 Private part is defined in Section 8.
 @end{theproof}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[For a @nt{protected_type_declaration}, the first
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Text=[For a @nt{protected_type_declaration}, if the first
 parameter of a primitive inherited subprogram is of the protected type or an
 access parameter designating the protected type, and there is a
 @nt{protected_operation_declaration} for a protected subprogram or single entry
-with the same identifier within the @nt{protected_type_declaration}, having a
-profile that is type conformant with that of the inherited subprogram after
-omitting this first parameter, the inherited subprogram is said to be
+with the same identifier within the @nt{protected_type_declaration}, whose
+profile is type conformant with the prefixed view profile of the
+inherited subprogram, the inherited subprogram is said to be
 @i{implemented} by the conforming protected subprogram or
 entry.@PDefn2{Term=[implemented],
 Sec=[by a protected subprogram]}@PDefn2{Term=[implemented],
 Sec=[by a protected entry]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
+  interface; a @nt{protected_type_declaration} inherits no subprograms of its
+  own.]}
+@end{Ramification}
+
 
 @end{StaticSem}
 
@@ -933,18 +947,17 @@ type declared by a @nt{protected_type_declaration}, at most one of the
 following shall apply:]}
 
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[the inherited subprogram is overridden with a
 primitive subprogram of the protected type, in which case the overriding
 subprogram shall be subtype conformant with the inherited
 subprogram and not abstract; or]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01]}
 @ChgAdded{Version=[2],Text=[the inherited subprogram is implemented by a
 protected subprogram or single entry of the protected type,
-in which case its profile after omitting the first parameter
-shall be subtype conformant with that of the protected
-subprogram or entry.]}
+in which case its prefixed view profile shall be subtype conformant with that
+of the protected subprogram or entry.]}
 
 @end{Itemize}
 
@@ -972,6 +985,23 @@ object can be read or written (see
 that is implemented by a protected procedure or entry must have a profile
 which reflects that in order to avoid confusion.]}
 @end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If a protected subprogram
+declaration has an @nt{overriding_indicator}, then:]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
+@key{overriding}, then the subprogram shall
+implement an inherited subprogram, at the point of the declaration;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
+@key{not overriding}, then the subprogram shall
+not implement any inherited subprogram (at any point).]}
+
+@end{Itemize}
 
 @end{Legality}
 
@@ -1257,11 +1287,13 @@ protected units do not exist in Ada 83.
 @end{Extend83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Protected types and single protected objects can be derived from one or
   more interfaces. Operations declared in the protected type can implement
-  the primitive operations of an interface.]}
+  the primitive operations of an interface. @nt{Overriding_indicator}s can
+  be used to specify whether or not a protected operation implements a
+  primitive operation.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -1621,7 +1653,9 @@ tasks and protected objects.
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<entry_declaration>,rhs="
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00397-01]}
+@Syn{lhs=<entry_declaration>,rhs="@Chg{Version=[2],New=[
+   @Syn2<overriding_indicator>],Old=[]}
    @key{entry} @Syn2{defining_identifier} [(@Syn2{discrete_subtype_definition})] @Syn2{parameter_profile};"}
 
 
@@ -1646,6 +1680,14 @@ tasks and protected objects.
     @Syn2{handled_sequence_of_statements}
   @key{end} [@SynI{entry_}@Syn2{identifier}];"}
 
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00397-01]}
+  @ChgAdded{Version=[2],Text=[We don't allow an @nt{overriding_indicator} on
+  an @nt{entry_body} because entries always implement procedures at the
+  point of the type declaration; there is no late implementation. And we
+  don't want to have to think about @nt{overriding_indicator}s on
+  @nt{accept_statement}s.]}
+@end{Discussion}
 
 @Syn{lhs=<entry_body_formal_part>,
   rhs="[(@Syn2{entry_index_specification})] @Syn2{parameter_profile}"}
@@ -1745,6 +1787,27 @@ Note that such problems do not arise with protected entries, because
 @nt<protected_body> (since no entry calls are permitted inside
 a @nt<protected_body>).
 @end(Reason)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If an @nt{entry_declaration} has an
+@nt{overriding_indicator}, then:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
+@key{overriding}, then the entry shall implement an inherited subprogram, at
+the point of the declaration;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
+@key{not overriding}, then the operation shall not implement any inherited
+subprogram (at any point).]}
+
+@end{Itemize}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[An entry family never implements anything, so
+  only @key{not overriding} can be given on the declaration of a family.]}
+@end{Ramification}
 
 For an @nt<accept_statement>,
 the innermost enclosing body shall be a @nt<task_body>,
@@ -2051,7 +2114,13 @@ The syntax rule for @nt{entry_body} is new.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the elaboration of
   per-object constraints.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00397-01]}
+  @ChgAdded{Version=[2],Text=[@nt{Overriding_indicator}s can be used on
+  entries; this is only useful when a task or protected type inherits
+  from an interface.]}
 @end{DiffWord95}
+
 
 @LabeledSubClause{Entry Calls}
 
