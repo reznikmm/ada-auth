@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/03/14 06:22:57 $}
+@Comment{$Date: 2005/04/07 04:31:10 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1690,10 +1690,10 @@ rooted at the ancestor type.]
   rhs="[[@key{abstract}] @key{tagged}] [@key{limited}] @key{private}"}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01]}
 @Syn{lhs=<formal_derived_type_definition>,
   rhs="@Chg{Version=[2],New=[
-     ],Old=[]}[@key{abstract}] @key{new} @Syn2{subtype_mark} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}]>,Old=<>}@key{with} @key{private}]"}
+     ],Old=[]}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited}] >,Old=[]}@key{new} @Syn2{subtype_mark} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}]>,Old=<>}@key{with} @key{private}]"}
 @end{Syntax}
 
 @begin{Legality}
@@ -2037,8 +2037,9 @@ run-time check to a compile-time check.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  A generic formal derived type can include interface ancestors as well
-  as a primary ancestor.]}
+  A generic formal derived type can include progenitors (interfaces) as well
+  as a primary ancestor. It also may include @key{limited} to indicate that
+  it is a limited type.]}
 @end{Extend95}
 
 @begin{DiffWord95}

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/10 06:19:54 $}
+@Comment{$Date: 2005/04/07 04:31:08 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2170,9 +2170,9 @@ whose characteristics are @i(derived) from those of a @i(parent type).
 @Syn{lhs=<@Chg{Version=[2],New=<interface_list>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<@SynI{interface_}@Syn2{subtype_mark} {@key{and} @SynI{interface_}@Syn2{subtype_mark}}>,Old=<>}"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01]}
 @Syn{lhs=<derived_type_definition>,rhs="[@Chg{Version=[2],New=<
-    >,Old=<>}[@key{abstract}] @key{new} @SynI{parent_}@Syn2{subtype_indication} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}] >,Old=<>}@Syn2{record_extension_part}]"}
+    >,Old=<>}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited}] >,Old=<>}@key{new} @SynI{parent_}@Syn2{subtype_indication} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}] >,Old=<>}@Syn2{record_extension_part}]"}
 @end{Syntax}
 
 @begin{Legality}
@@ -2226,6 +2226,24 @@ the parent type is a tagged type.
 This rule needs to be rechecked in the visible part of an
 instance of a generic unit.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+@ChgAdded{Version=[2],Text=[If the reserved word @key{limited} appears in a
+@nt{derived_type_definition}, the parent type shall be a limited type.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We allow @key{limited} because we don't inherit
+  limitedness from interfaces, so we must have a way to derive a limited type
+  from interfaces. The word @key{limited} has to be legal when the parent
+  @i{could be} an interface, and that includes generic formal abstract types.
+  Since we have to allow it in this case, we might as well allow it everywhere
+  as documentation, to make it explicit that the type is limited.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[However, we do not want to allow @key{limited}
+  when the parent is nonlimited: limitedness cannot change in a derivation
+  tree.]}
+@end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
@@ -2347,14 +2365,37 @@ following the parent @nt<subtype_indication>.
   and subtype as a discriminant of the parent type.
 @end{Discussion}
 
-The derived type is limited if and only if the
-parent type is limited.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+The derived type is limited if @Chg{Version=[2],New=[the parent is a limited
+type that is not an interface type, or if the reserved word @key{limited}
+appears.],Old=[and only if the parent type is limited]}.
 @begin{Honest}
-  The derived type can become nonlimited if the derivation
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+  The derived type can become nonlimited if @Chg{Version=[2],New=[@key{limited}
+  does not appear and ],Old=[]}the derivation
   takes place in the visible part of a child package,
   and the parent type is nonlimited as viewed from the
   private part of the child package @em see @RefSecNum(Limited Types).
 @end{Honest}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[We considered a rule where limitedness was always
+  inherited from the parent, but in the case of a type whose parent is an
+  interface, this meant that the first interface was more equal than other
+  interfaces. It also would have forced users to declare dummy nonlimited
+  interfaces just to get the limitedness right. We also considered a syntax
+  like @key{not limited} to specify nonlimitedness when the parent was limited,
+  but that was unsavory. The rule given is more uniform and simpler to
+  understand.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[ The rules are unsymmetrical, but the language is
+  not: if the parent interface is limited, the presence of the word
+  @key{limited} determines the limitedness, and nonlimited progenitors are
+  illegal by the rules in @RefSecNum{Interface Types}. If the parent interface
+  is nonlimited, the word @key{limited} is illegal by the rules in this
+  clause. The net effect is that the order of the interfaces doesn't matter.]}
+@end{Reason}
 
 @Redundant[For each predefined operator of the parent type,
 there is a corresponding predefined operator of the derived type.]
@@ -2701,6 +2742,11 @@ These concepts are similar, but not the same.
   A derived type may inherit from multiple
   interface ancestors, as well as the parent type @em
   see @RefSec{Interface Types}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[A derived type may specify that it is a limited
+  type. This is required for interface ancestors (from which limitedness is
+  not inherited), but it is generally useful as documentation of limitedness.]}
 @end{Extend95}
 
 @begin{DiffWord95}

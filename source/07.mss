@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/03/24 06:43:09 $}
+@Comment{$Date: 2005/04/07 04:31:10 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -383,10 +383,10 @@ and those will presumably be implemented in terms of dispatching).
 @Syn{lhs=<private_type_declaration>,rhs="
    @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}] @key{is} [[@key{abstract}] @key{tagged}] [@key{limited}] @key{private};"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01]}
 @Syn{lhs=<private_extension_declaration>,rhs="
    @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}] @key{is}
-     [@key{abstract}] @key{new} @SynI(ancestor_)@Syn2{subtype_indication}@Chg{Version=[2],New=<
+     [@key{abstract}]@Chg{Version=[2],New=<[@key{limited}]>,Old=[]} @key{new} @SynI(ancestor_)@Syn2{subtype_indication}@Chg{Version=[2],New=<
      [@key{and} @Syn2[interface_list]]>,Old=<>} @key{with private};"}
 @end{Syntax}
 
@@ -441,9 +441,12 @@ representation item.]
 
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
 @Redundant[A private type is limited if its declaration includes
 the reserved word @key[limited];
-a private extension is limited if its ancestor type is limited.]
+a private extension is limited if its ancestor type is @Chg{Version=[2],
+New=[a limited type that is not an interface type, or if the reserved word
+@key{limited} appears in its definition],Old=[limited]}.]
 If the partial view is nonlimited, then
 the full view shall be nonlimited.
 If a tagged partial view is limited,
@@ -610,6 +613,9 @@ private part of an instance of a generic unit.
   @nt{generic_instantiation}s.
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+@ChgAdded{Version=[2],Text=[If the reserved word @key{limited} appears in a
+@nt{private_extension_declaration}, the ancestor type shall be a limited type.]}
 
 If the declaration of a partial view includes
 a @nt{known_discriminant_part}, then
@@ -663,6 +669,19 @@ if and only if the ancestor subtype is constrained.
   otherwise, a client might constrain the partial view in a way that
   conflicts with the constraint on the full view.
 @end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+@ChgAdded{Version=[2],Text=[If the full view of a private extension is limited,
+then the reserved word @key{limited} shall appear in the
+@nt{full_type_declaration} if and only if it also appears in the
+@nt{private_extension_declaration}.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The word @key{limited} is optional (unless the
+  ancestor is an interface), but if you use it, do so consistently.  Otherwise
+  things would be too confusing for the reader.]}
+@end{Reason}
+
 
 @Redundant[If a partial view has unknown discriminants,
 then the @nt{full_type_declaration} may define
@@ -908,12 +927,21 @@ and the rule that the parent type of a derived type declaration shall be
 completely defined, unless the derived type is a private extension.
 @end{DiffWord83}
 
-@begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[Added @nt{interface_list} to private extensions to
-support interfaces and multiple inheritance
-(see @RefSecNum{Interface Types}).]}
-@end{DiffWord95}
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Added @nt{interface_list} to private extensions to
+  support interfaces and multiple inheritance
+  (see @RefSecNum{Interface Types}).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[A private extension may specify that it is a
+  limited type. This is required for interface ancestors (from which
+  limitedness is not inherited), but it is generally useful as documentation of
+  limitedness.]}
+@end{Extend95}
+
+
 
 @LabeledSubClause{Private Operations}
 
@@ -1501,7 +1529,7 @@ In Ada 95, most limited types are passed by reference,
 and even return-ed by reference.
 @end{Discussion}
 @begin{Honest}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00419-01]}
 For a limited partial view whose full view is nonlimited,
 @Chg{Version=[2],New=[copying],Old=[assignment]} is possible on parameter
 passing and function return. To prevent any copying whatsoever, one should
@@ -1510,6 +1538,44 @@ make both the partial @i{and} full views limited.
 @end{Intro}
 
 @begin{Legality}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+If a tagged record type has any limited components,
+then the reserved word @key[limited] shall
+appear in its @nt<record_type_definition>.@Chg{Version=[2],New=[ If the
+reserved word @key[limited] appears in the definition of
+a type extension, its parent type @Redundant[and any progenitor interfaces] shall be
+limited.],Old=[]}
+@begin{Reason}
+@leading@;This prevents tagged limited types from becoming nonlimited.
+Otherwise, the following could happen:
+@begin{Example}
+@key[package] P @key[is]
+    @key[type] T @key[is] @key[limited] @key[private];
+    @key[type] R @key[is] @key[tagged]
+        @key[record] --@RI{ Illegal!}
+               --@RI{ This should say @lquotes@;@key[limited record]@rquotes@;.}
+            X : T;
+        @key[end] @key[record];
+@key[private]
+    @key[type] T @key[is] @key[new] Integer; --@RI{ R becomes nonlimited here.}
+@key[end] P;
+
+@ChgRef{Version=[2],Kind=[Revised]}
+@key[package] Q @key[is]
+    @key[type] R2@Chg{Version=[2],New=[],Old=[(Access_Discrim : @key[access] ...)]} @key[is] @key[new] R @key[with]
+        @key[record]
+            Y : Some_Task_Type;
+        @key[end] @key[record];
+@key[end] Q;
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+If the above were legal,
+then assignment would be defined for R'Class in the body of P,
+which is bad news, given @Chg{Version=[2],New=[],Old=[the access discriminant
+and ]}the task.
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[In the following contexts,
@@ -1559,39 +1625,7 @@ built-in-place.]}
 @end{Discussion}
 @end{Itemize}
 
-If a tagged record type has any limited components,
-then the reserved word @key[limited] shall
-appear in its @nt<record_type_definition>.
-@begin{Reason}
-@leading@;This prevents tagged limited types from becoming nonlimited.
-Otherwise, the following could happen:
-@begin{Example}
-@key[package] P @key[is]
-    @key[type] T @key[is] @key[limited] @key[private];
-    @key[type] R @key[is] @key[tagged]
-        @key[record] --@RI{ Illegal!}
-               --@RI{ This should say @lquotes@;@key[limited record]@rquotes@;.}
-            X : T;
-        @key[end] @key[record];
-@key[private]
-    @key[type] T @key[is] @key[new] Integer; --@RI{ R becomes nonlimited here.}
-@key[end] P;
 
-@ChgRef{Version=[2],Kind=[Revised]}
-@key[package] Q @key[is]
-    @key[type] R2@Chg{Version=[2],New=[],Old=[(Access_Discrim : @key[access] ...)]} @key[is] @key[new] R @key[with]
-        @key[record]
-            Y : Some_Task_Type;
-        @key[end] @key[record];
-@key[end] Q;
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
-If the above were legal,
-then assignment would be defined for R'Class in the body of P,
-which is bad news, given @Chg{Version=[2],New=[],Old=[the access discriminant
-and ]}the task.
-@end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
@@ -1610,7 +1644,8 @@ is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
   @ChgAdded{Version=[2],Text=[This includes interfaces of the above kinds,
-  as well as task and protected types.]}
+  derived types with the reserved word @key{limited}, as well as task and
+  protected types.]}
   @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00419-01]}
@@ -1811,7 +1846,8 @@ than being a subclause of
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00411-01],ARef=[AI95-00419-01]}
   @ChgAdded{Version=[2],Text=[Rewrote the definition of limited to insure that
-  interfaces are covered, but that limitedness is not inherited from interfaces.]}
+  interfaces are covered, but that limitedness is not inherited from interfaces.
+  Derived types that explicitly include @key{limited} are now also covered.]}
 @end{DiffWord95}
 
 @LabeledClause{User-Defined Assignment and Finalization}

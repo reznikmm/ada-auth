@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/22 05:53:14 $}
+@Comment{$Date: 2005/04/07 04:31:09 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2403,6 +2403,14 @@ primitive subprogram shall not be declared in the private part.],Old=[]}
 normally apply (see @RefSecNum{Generic Instantiation}), these rules apply also
 in the private part of an instance of a generic
 unit.@PDefn{generic contract issue}]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This paragraph is intended to apply to all of the
+  @LegalityTitle@; in this clause. We cannot allow interfaces which do not
+  obey these rules, anywhere. Luckily, deriving from a formal type (which might
+  be an interface) is not allowed for any tagged types in a generic body. So
+  checking in the private part of a generic covers all of the cases.]}
+@end{Ramification}
 
 @end{Legality}
 
