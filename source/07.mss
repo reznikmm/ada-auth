@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/04/07 04:31:10 $}
+@Comment{$Date: 2005/04/13 06:22:20 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -776,12 +776,15 @@ what attributes and other predefined operations are allowed,
 and whether the first subtype is static.
 See @RefSecNum{Private Operations}.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401]}
 A private extension inherits components (including
 discriminants unless there is a new @nt<discriminant_part>
 specified) and user-defined primitive
-subprograms from its ancestor type, in the same way that
+subprograms from its ancestor type@Chg{Version=[2],New=[ and its progenitor
+types (if any)],Old=[]}, in the same way that
 a record extension inherits components and user-defined primitive
-subprograms from its parent type
+subprograms from its parent type@Chg{Version=[2],New=[ and its progenitor
+types],Old=[]}
 (see @RefSecNum{Derived Types and Classes}).
 @begin{Honest}
 If an operation of the parent type is abstract,
@@ -874,6 +877,14 @@ come from the corresponding primitive subprogram of the specified ancestor
 type, while the body comes from the corresponding primitive subprogram
 of the parent type of the full view.
 See @RefSecNum{Dispatching Operations of Tagged Types}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00401]}
+@ChgAdded{Version=[2],Text=[The progenitor types specified in a
+@nt{private_extension_declaration} and the progenitor types specified in the
+corresponding declaration of a record extension given in the private part need
+not be the same @em the only requirement is that the private extension must
+be descended from each interface from which the record extension is
+descended.]}
 @end{Notes}
 
 @begin{Examples}
@@ -928,7 +939,7 @@ completely defined, unless the derived type is a private extension.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Added @nt{interface_list} to private extensions to
   support interfaces and multiple inheritance

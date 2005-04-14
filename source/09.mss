@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/04/05 23:37:46 $}
+@Comment{$Date: 2005/04/13 06:22:21 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 
@@ -205,10 +205,6 @@ Private part is defined in Section 8.
 @nt{task_definition}, a
 @nt{task_definition} without @nt{task_item}s is assumed.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[If a @nt{task_type_declaration} includes an @nt{interface_list}, the task type
-is derived from each interface named in the @nt{interface_list}.]}
-
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01]}
 @ChgAdded{Version=[2],Text=[For a @nt{task_type_declaration}, if the first
 parameter of a primitive inherited subprogram is of the task type or an access
@@ -273,7 +269,9 @@ shall be subtype conformant with that of the task entry.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[If neither applies, the inherited subprogram shall be a
-null procedure.]}
+null procedure. @PDefn{generic contract issue}In addition to the places where
+@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+these rules also apply in the private part of an instance of a generic unit.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Each inherited subprogram can only have a single
@@ -873,7 +871,8 @@ protected declaration.]}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01],ARef=[AI95-00401-01]}@Comment{This
+is no change here, but both of these AIs reference this paragraph, adding and removing text.}
 A @nt<protected_definition> defines a protected type and its first subtype.
 @PDefn2{Term=[visible part], Sec=(of a protected unit)}
 The list of @nt{protected_@!operation_@!declaration}s of a
@@ -883,9 +882,7 @@ is called the visible part of the protected unit.
 @Redundant[@PDefn2{Term=[private part], Sec=(of a protected unit)}
 The optional list of @nt{protected_@!element_@!declaration}s after the reserved
 word @key{private} is called the private part of the protected
-unit.]@Chg{Version=[2],New=[ If a @nt{protected_type_declaration} includes
-an @nt{interface_list}, the protected type is derived from each interface
-named in the @nt{interface_list}.],Old=[]}
+unit.]
 @begin{TheProof}
 Private part is defined in Section 8.
 @end{theproof}
@@ -962,14 +959,16 @@ of the protected subprogram or entry.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[If neither applies, the inherited subprogram is a
-null procedure.]}
+@ChgAdded{Version=[2],Text=[If neither applies, the inherited subprogram shall
+be a null procedure. @PDefn{generic contract issue}In addition to the places
+where @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+these rules also apply in the private part of an instance of a generic unit.]}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Each inherited subprogram can only have a single
-implementation (either from overriding a subprogram, implementing a subprogram,
-or implementing an entry), and must have an implementation unless the
-subprogram is a null procedure.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Each inherited subprogram can only have a single
+  implementation (either from overriding a subprogram, implementing a
+  subprogram, or implementing an entry), and must have an implementation unless
+  the subprogram is a null procedure.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
@@ -1000,6 +999,12 @@ implement an inherited subprogram, at the point of the declaration;]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
 @key{not overriding}, then the subprogram shall
 not implement any inherited subprogram (at any point).]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@PDefn{generic contract issue}In addition to the
+places where @LegalityTitle normally apply (see
+@RefSecNum{Generic Instantiation}), these rules also apply in the private part
+of an instance of a generic unit.]}
 
 @end{Itemize}
 
@@ -1287,7 +1292,7 @@ protected units do not exist in Ada 83.
 @end{Extend83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Protected types and single protected objects can be derived from one or
   more interfaces. Operations declared in the protected type can implement
@@ -1801,6 +1806,12 @@ the point of the declaration;]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
 @key{not overriding}, then the operation shall not implement any inherited
 subprogram (at any point).]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@PDefn{generic contract issue}In addition to the
+places where @LegalityTitle normally apply (see
+@RefSecNum{Generic Instantiation}), these rules also apply in the private part
+of an instance of a generic unit.]}
 
 @end{Itemize}
 @begin{Ramification}
@@ -2812,6 +2823,15 @@ by a corresponding clock.
   @key(subtype) @AdaDefn{Day_Number}   @key(is) Integer @key(range) 1 .. 31;
   @key(subtype) @AdaDefn{Day_Duration} @key(is) Duration @key(range) 0.0 .. 86_400.0;
 
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+  @ChgAdded{Version=[2],Text=[A range of 500 years as chosen, as that only
+  requires one extra bit for the year as compared to Ada 95. This was done
+  to minimize disruptions with existing implementations. (One implementor
+  reports that their time values represent nanoseconds, and this year range
+  requires 63.77 bits to represent.)]}
+@end{Reason}
+
   @key(function) @AdaSubDefn{Clock} @key(return) Time;
 
   @key(function) @AdaSubDefn{Year}   (Date : Time) @key(return) Year_Number;
@@ -2961,9 +2981,11 @@ outside of the range of the subtype Year_Number.
 @end(Honest)
 @begin(Reason)
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0030],ARef=[AI95-00113-01]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00351-01]}
   We allow Year and Split to raise Time_Error because the arithmetic operators
   are allowed (but not required) to produce times that are outside the range
-  of years from 1901 to 2099. This is similar to the way integer operators may
+  of years from 1901 to @Chg{Version=[2],New=[2399],Old=[2099]}. This is
+  similar to the way integer operators may
   return values outside the base range of their type so long as the value is
   mathematically correct.
   @Chg{New=[We allow the functions Month, Day and Seconds to raise Time_Error
@@ -3164,6 +3186,13 @@ environment (such as POSIX).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Time_Offset} @key<is range> -1440 .. 1440;]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[You might think that 720 (12 hours) would be
+  enough, but there are places (like Tonga, which is UTC+13hr) which are than
+  12 hours different. So we err on the safe side.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaDefn{Unknown_Zone_Error} : @key<exception>;]}

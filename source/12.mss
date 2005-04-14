@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/04/07 04:31:10 $}
+@Comment{$Date: 2005/04/13 06:22:22 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1708,6 +1708,7 @@ the declaration of a stand-alone variable has to provide a constraint
 on such a subtype, either explicitly, or by its initial value.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 @Defn2{Term=[ancestor subtype], Sec=(of a formal derived type)}
 The @i(ancestor subtype) of a formal derived type is the
 subtype denoted by the @nt<subtype_mark> of
@@ -1718,7 +1719,7 @@ if the ancestor type is a tagged type; in this case
 the formal derived type is a private extension of the
 ancestor type and the ancestor shall not be a class-wide
 type.
-@Redundant[Similarly,
+@Redundant[Similarly, @Chg{Version=[2],New=[an @nt{interface_list} or ],Old=[]}
 the optional reserved word @key{abstract} shall
 appear only if the ancestor type is a tagged type].
 @begin{Reason}
@@ -1727,9 +1728,9 @@ because the actual can be any descendant of the ancestor,
 not necessarily a direct descendant.
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
 @ChgAdded{Version=[2],Text=[The actual type for a generic formal derived type
-shall be a descendant of every ancestor of the formal type.]}
+shall be a descendant of every progenitor of the formal type.]}
 
 If the formal subtype is definite, then the actual subtype shall
 also be definite.
@@ -1847,28 +1848,30 @@ as for a derived type defined by a @nt<derived_type_definition>
 @RefSecNum{Private Operations}],Old=[]}).
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0038],ARef=[AI95-00202]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01]}
-For a formal derived type, the predefined
-operators and inherited user-defined subprograms are determined
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01],ARef=[AI95-00401-01]}
+For a formal derived type@Chg{Version=[2],New=[ and progentor types],Old=[]},
+the predefined operators and inherited user-defined subprograms are determined
 by the ancestor type, and are implicitly declared
 at the earliest place, if any,
 @Chg{Version=[2],New=[immediately within the declarative region in which],
 Old=[within the immediate scope of]} the formal
 type@Chg{Version=[2],New=[ is declared],Old=[]}, where the corresponding
 primitive subprogram
-of the ancestor is visible (see @RefSecNum{Private Operations}).
+of the ancestor @Chg{Version=[2],New=[ or progentor],Old=[]}is visible (see
+@RefSecNum{Private Operations}).
 In an instance, the copy of such an implicit declaration declares a view
-of the corresponding primitive subprogram of the ancestor@Chg{New=[ of the
-formal derived type],Old=[]},
+of the corresponding primitive subprogram of the ancestor@Chg{New=[or
+progenitor of the formal derived type],Old=[]},
 even if this primitive has been overridden for the actual type.
-@Chg{New=[When the ancestor of the formal derived type is itself a formal type,
-the copy of the implicit declaration declares a view of the corresponding
-copied operation of the ancestor.],Old=[]}
+@Chg{New=[When the ancestor or progenitor of the formal derived type is
+itself a formal type, the copy of the implicit declaration declares a view of
+the corresponding copied operation of the ancestor or progenitor.],Old=[]}
 @Redundant[In the case of a formal private extension, however,
 the tag of the formal type is that of the actual type,
 so if the tag in a call is statically determined to be that of the formal type,
 the body executed will be that corresponding to the actual type.]
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 The above rule defining the properties of primitive subprograms in an
 instance applies even if the subprogram has been overridden or
 hidden for the actual type.
@@ -1882,7 +1885,8 @@ the type and tag of the operands.
 Even for tagged types, the formal parameter names and
 @nt{default_expression}s are determined
 by those of the primitive subprograms of the specified
-ancestor type.
+ancestor type @Chg{Version=[2],New=[ (or progentor type, for subprograms
+inherited from an interface type)],Old=[]}.
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
@@ -2035,7 +2039,7 @@ run-time check to a compile-time check.
 @end{Incompatible83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   A generic formal derived type can include progenitors (interfaces) as well
   as a primary ancestor. It also may include @key{limited} to indicate that
@@ -2338,9 +2342,9 @@ rhs="@Chg{Version=[2],New=<@Syn2{interface_type_definition}>,Old=<>}"}
   not match a formal interface.]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251],ARef=[AI95-00401]}
 @ChgAdded{Version=[2],Text=[The actual type shall be a descendant of every
-ancestor of the formal type.]}
+progenitor of the formal type.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345]}
 @ChgAdded{Version=[2],Text=[The actual type shall be a limited, task,
@@ -2356,7 +2360,7 @@ protected, or synchronized interface.]}
 @end{Legality}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The formal interface type is new.]}
 @end{Extend95}

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/04/07 04:31:08 $}
+@Comment{$Date: 2005/04/13 06:22:18 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2765,13 +2765,14 @@ types can be grouped into @i(derivation classes).
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
 @Defn2{Term=[derived from], Sec=(directly or indirectly)}
 A derived type is @i(derived from) its parent type @i(directly);
 it is derived
 @i(indirectly) from any type from which its parent type is derived.@Chg{Version=[2],
-New=[ A derived type or interface type is also derived from each of its
-interface ancestor types, if any.],Old=[]}
+New=[ A derived type, interface type, type extension, task type, protected type,
+or formal derived type is also derived from each of its progenitor types,
+if any.],Old=[]}
 @Defn2{Term=[derivation class], Sec=(for a type)}
 @Defn2{Term=[root type], Sec=(of a class)}
 @Defn{rooted at a type}
@@ -3009,7 +3010,7 @@ of other specific integer types, thereby resolving the ambiguity.
   @i{universal_access} type. This was defined to make @key{null} for
   anonymous access types sensible.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[The definitions of ancestors and descendants
   were updated to allow multiple ancestors (necessary to support interfaces).]}
 @end{DiffWord95}

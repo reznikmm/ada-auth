@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/04/05 23:37:46 $}
+@Comment{$Date: 2005/04/13 06:22:20 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2254,16 +2254,16 @@ is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{local_}@Syn2{name}{, @SynI{local_}@Syn2{name}]);''}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}]);''}
 @end{Syntax}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgAdded{Version=[2],Text=[@Defn{non-returning}Each
-@SynI{local_}@nt{name} shall denote one or
+@SynI{procedure_}@nt{local_name} shall denote one or
 more procedures or generic procedures; the denoted entities are
-@i<non-returning>. The local_name shall not denote a null procedure nor an
-instance of a generic unit.]}
+@i<non-returning>. The @SynI{procedure_}@nt{local_name} shall not denote a
+null procedure nor an instance of a generic unit.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/04/04 04:38:46 $}
+@Comment{$Date: 2005/04/13 06:22:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @LabeledClause{The Package System}
 
@@ -894,15 +894,20 @@ It is erroneous to evaluate a @nt<primary> that is a @nt<name>
 denoting an abnormal object,
 or to evaluate a @nt{prefix} that denotes an abnormal object.
 @begin{Ramification}
-Although a composite object with no subcomponents of an access type,
-and with static constraints all the way down cannot become abnormal,
-a scalar subcomponent of such an object can become abnormal.
+@Comment{There appears to be no justification for this statement; everything
+can become abnormal. We leave the prefix for the next paragraph.}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
+@ChgDeleted{Version=[2],NoPrefix=[T],Text=[Although a composite object with no
+subcomponents of an access type, and with static constraints all the way down
+cannot become abnormal, a scalar subcomponent of such an object can become
+abnormal.]}
 
 The @key[in out] or @key[out] parameter case does not apply to scalars;
 bad scalars are merely invalid representations,
 rather than abnormal, in this case.
 @end{Ramification}
 @begin{Reason}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The reason we allow access objects, and objects containing subcomponents of an
 access type, to become abnormal is because the correctness of an access
 value cannot necessarily be determined merely by looking at the bits of
@@ -912,13 +917,12 @@ allow the compiler to optimize assuming that the value of a scalar
 object belongs to the object's subtype,
 if the compiler can prove that the object is initialized with a value
 that belongs to the subtype.
-The reason we allow composite objects to become abnormal if some
-constraints are nonstatic is that such object might be represented with
-implicit levels of indirection;
+The reason we allow composite objects to become abnormal
+@Chg{Version=[2],New=[],Old=[if some constraints are nonstatic ]}is
+that such object might be represented with implicit levels of indirection;
 if those are corrupted, then even assigning into a component of the
 object, or simply asking for its Address, might have an unpredictable
-effect.
-The same is true if the discriminants have been destroyed.
+effect. The same is true if the discriminants have been destroyed.
 @end{Reason}
 @end{Erron}
 
@@ -955,6 +959,16 @@ the semantics of operations on such representations is
 implementation-defined, but does not by itself lead to
 erroneous or unpredictable
 execution, or to other objects becoming abnormal.
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
+  @ChgAdded{Version=[2],Text=[This means that the implementation must take care
+  not to use an invalid representation in a way that might cause erroneous
+  execution. For instance, the exception mandated for @nt{case_statement}s
+  must be raised. Array indexing must not cause memory outside of
+  the array to be written (and usually, not read either). These cases and
+  similar cases may require explicit checks by the implementation.]}
+@end{ImplNote}
+
 @end{Itemize}
 @end{Bounded}
 

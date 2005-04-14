@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/03/24 06:43:08 $}
+@Comment{$Date: 2005/04/13 06:22:19 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1099,11 +1099,11 @@ into a composite value of an array type, record type, or record extension.]
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00389]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @PDefn2{Term=[expected type],Sec=(aggregate)}
 The expected type for an @nt{aggregate} shall be a
-single @Chg{Version=[2],New=[composite],Old=[nonlimited array]}
-type@Chg{Version=[2],New=[],Old=[, record type, or record extension]}.
+single @Chg{Version=[2],New=[],Old=[nonlimited ]}array
+type, record type, or record extension.
 @begin{Discussion}
 See @RefSec{The Context of Overload Resolution}
 for the meaning of @lquotes@;shall be a single ... type.@rquotes@;
@@ -1202,11 +1202,11 @@ will work (see @RefSecNum{User-Defined Assignment and Finalization}).
 @end{DiffWord83}
 
 @begin{Incompatible95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{incompatibilities with Ada 95}
-In Ada 95, a limited type is not considered when resolving an @nt{aggregate}.
-Since Ada 2005 now allows limited @nt{aggregate}s, we can have
-incompatibilities. For example:]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{incompatibilities with Ada 95}
+  In Ada 95, a limited type is not considered when resolving an @nt{aggregate}.
+  Since Ada 2005 now allows limited @nt{aggregate}s, we can have
+  incompatibilities. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@key{type} Lim @key{is} @key{limited}
@@ -1228,18 +1228,18 @@ incompatibilities. For example:]}
 @ChgAdded{Version=[2],Text=[P((Comp => 123)); -- @RI[Illegal in Ada 2005, legal in Ada 95]]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[The call to P is ambiguous in Ada 2005, while it would
-not be ambiguous in Ada 95 as the @nt{aggregate} could not have a limited type.
-Qualifying the @nt{aggregate} will eliminate any ambiguity. This construction
-would be rather confusing to a maintenance programmer, so it should be
-avoided, and thus we expect it to be rare.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]} @ChgAdded{Version=[2],Text=[The call
+  to P is ambiguous in Ada 2005, while it would not be ambiguous in Ada 95 as
+  the @nt{aggregate} could not have a limited type. Qualifying the
+  @nt{aggregate} will eliminate any ambiguity. This construction would be
+  rather confusing to a maintenance programmer, so it should be avoided, and
+  thus we expect it to be rare.]}
 @end{Incompatible95}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01],ARef=[AI95-00389-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}@nt{Aggregate}s can be of a
-limited type and of any composite type.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}@nt{Aggregate}s can
+  be of a limited type.]}
 @end{Extend95}
 
 
@@ -1308,11 +1308,11 @@ if there is only one association, it shall be a named association.
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00389-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @PDefn2{Term=[expected type],Sec=(record_aggregate)}
 The expected type for a @nt{record_aggregate} shall be
-a single @Chg{Version=[2],New=[non-array composite],Old=[nonlimited record]}
-type@Chg{Version=[2],New=[],Old=[ or record extension]}.
+a single @Chg{Version=[2],New=[],Old=[nonlimited ]}record
+type or record extension.
 @begin{Ramification}
 This rule is used to resolve whether an @nt{aggregate} is
 an @nt{array_aggregate} or a @nt{record_aggregate}.
@@ -1352,14 +1352,6 @@ This is necessary to ensure that the positions in
 the @nt<record_@!component_@!association_@!list>
 are well defined, and that discriminants that govern @nt{variant_part}s
 can be given by static expressions.
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
-@ChgAdded{Version=[2],Text=[For a partial view, all of the components of the full
-type are needed, even though not all of them can be named in the
-@nt{aggregate}. For a generic formal type, all of the components of the actual
-type are needed, even though not all of them can be named in the
-@nt{aggregate}. The @nt{aggregate} would include @key{others} => <>
-in the case of needed but unnameable components.]}
 @end{Ramification}
 
 @Leading@Keepnext@PDefn2{Term=[expected type],
@@ -1410,7 +1402,7 @@ than a list of @nt<record_@!component_@!association>s.
   record extension of T.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00389-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 Each @nt<record_component_association>@Chg{Version=[2],New=[ other than an
 @key{others} choice with a <>],Old=[]} shall have at least
 one associated component, and each needed component
@@ -1419,20 +1411,21 @@ one @nt<record_@!component_@!association>.
 If a @nt<record_@!component_@!association> @Chg{Version=[2],New=[with an @nt{expression} ],Old=[]}has
 two or more associated components, all of them shall be of the same type.
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00389-01]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
   These rules apply to an association with an @key(others)
   choice@Chg{Version=[2],New=[ with an expression. An @key(others) choice with
   a <> can match zero components or several components with different
-  types],Old=[]}.
+  types.],Old=[]}.
 @end{Ramification}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
   Without these rules, there would be no way to know what
   was the expected type for the @nt<expression> of the association.
-  @Chg{Version=[2],New=[Note that the second rule does not apply to <>
-  associations, as we do not need to resolve anything. That means that
-  (@key{others} => <>) always represents a default-initialized composite
-  value.],Old=[]}
+  @Chg{Version=[2],New=[Note that the some of the rules do not apply to <>
+  associations, as we do not need to resolve anything. We allow @key{others}
+  => <> to match no components as this is similar to array aggregates.
+  That means that (@key{others} => <>) always represents a default-initialized
+  record or array value.],Old=[]}
 @end{Reason}
 @begin{Discussion}
   AI83-00244 also requires that the @nt{expression} shall
@@ -1480,90 +1473,6 @@ than <>.]}
 but <> means uninitialized for a discrete type unless the component has a
 default value.]}
 @end{Reason}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[If the type of the
-@nt{record_aggregate} is a partial view of a type, a task type, a protected
-type, a formal private type, or a formal derived type:]}
-@begin{Itemize}
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
-  @ChgAdded{Version=[2],Text=[The @nt{record_component_association_list} shall
-  include @key{others} => <>; and]}
-  @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[For partial views and generic formals, this is needed
-   to avoid "leaking" information about the full type to the @nt{aggregate}.
-   Without this rule, if the full type was @key{null record}, @key{null record}
-   could be used; and if the full type had only one component, @key{others} =>
-   @i<<some-expression>> could be used. That would clearly break privacy.
-   Similar issues apply to formal types; if information about the actual type
-   could be used in the aggregate, we'd have a generic contract issue. Since
-   each component can only occur in a single association, this rule prevents
-   those issues.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[For tasks and protected types, this recognizes
-   that there may be components (such as the lock for a protected type) that
-   are known only to the implementation; these components necessarily have
-   to be given default initialization. For portability, we don't want
-   aggregates to be written that depend on whether the implementation has
-   such components.]}
-  @end{Reason}
-
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
-  @ChgAdded{Version=[2],Text=[The type of the @nt{record_aggregate} shall have known
-  discriminants or be a tagged, task, or protected type that does not have
-  unknown discriminants; and]}
-
-  @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We only want to allow @nt{aggregate}s of partial
-   views when the full type is certain to be composite. Otherwise, we would
-   have anomalies where additional visibility would cause the ability to have
-   @nt{aggregate}s to disappear (if the full type is elementary).
-   The full type is certain to be composite if the partial view has known
-   discriminants or is tagged. Task and protected types are also allowed, as
-   they are always composite.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We also disallow types with unknown
-   discriminants. Unknown discriminants are often used to prevent uncontrolled
-   initialization of objects, and we don't want to provide an uncontrolled
-   initialization mechanism for such types. Moreover, we would have break
-   privacy to make them work. For instance:]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} P @key{is}
-   @key{type} T (<>) @key{is tagged private};
-@key{private}
-   @key{type} T (D : Natural) @key{is tagged record}
-      C : String (1..D);
-   @key{end record};
-@key{end} P;]}
-@end{Example}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We couldn't allow giving an aggregate for T
-  outside of P, because we don't know what value to give the discriminant D.
-  But that would require looking in the private part to see if D had a default.
-  It's better to disallow unknown discriminants generally.]}
-  @end{Reason}
-
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00389-01]}
-  @ChgAdded{Version=[2],Text=[The @nt{record_component_association_list} shall not
-  include a positional component association.]}
-
-  @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Otherwise, positional notation could be used to give
-   associations for components of the full view that are not visible to the
-   @nt{aggregate}. That would be bad. We disallow positional notation
-   completely to avoid confusion and complexity; this shouldn't be a hardship
-   since typically there will be no more than a couple discriminants along with
-   @key{others} => <> in such an @nt{aggregate}.]}
-  @end{Reason}
-@end{Itemize}
 
 @end{Legality}
 
@@ -1679,23 +1588,16 @@ a record aggregate. Now we do.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}<> can be used in place of
-an @nt{expression} in a @nt{record_aggregate}, default initializing the
-component.],Old=[]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
-@Chg{Version=[2],New=[A @nt{record_aggregate} can be of any non-array
-composite type, other than partial views whose full type @i{might} be an
-elementary type. For partial views, task types, protected types, and generic
-formal types, @key{others} => <> is required, as all of the components are
-not (necessarily) visible to the @nt{record_aggregate}.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}<> can be used in
+  place of an @nt{expression} in a @nt{record_aggregate}, default
+  initializing the component.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[Limited @nt{record_aggregate}s are allowed (since
-all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[Limited @nt{record_aggregate}s are allowed (since
+  all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
 @end{DiffWord95}
 
 
@@ -1729,11 +1631,11 @@ determines the value of the ancestor/prefix.
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00389-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @PDefn2{Term=[expected type], Sec=(extension_aggregate)}
 The expected type for an @nt{extension_aggregate} shall be
 a single @Chg{Version=[2],New=[],Old=[nonlimited ]}type that is a
-@Chg{Version=[2],New=[type],Old=[record]} extension.
+record extension.
 @PDefn2{Term=[expected type],
   Sec=(extension_aggregate ancestor expression)}
 If the @nt<ancestor_part> is an @nt<expression>,
@@ -1750,37 +1652,20 @@ it becomes harder to produce good error messages.
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00306-01],ARef=[AI95-00389-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00306-01]}
 If the @nt<ancestor_part> is a @nt<subtype_mark>, it shall
 denote a specific tagged subtype.
-The type of the @nt{extension_aggregate} shall be @Chg{Version=[2],New=[a
-descendant of],Old=[derived from]} the type of the
-@nt<ancestor_part>@Chg{Version=[2],New=[],Old=[, through one
-or more record extensions (and no private extensions)]}.
 @Chg{Version=[2],New=[If the @nt{ancestor_part} is an @nt{expression}, it
-shall not be dynamically tagged. If the type of the
-@nt{extension_aggregate} is derived from the type of the @nt{ancestor_part}
-through one or more private extensions, then the
-@nt{record_component_association_list} shall include @key{others} => <>, and
-shall not include a positional component association.],Old=[]}
+shall not be dynamically tagged. ],Old=[]}
+The type of the @nt{extension_aggregate} shall be derived from the type of the
+@nt<ancestor_part>, through one
+or more record extensions (and no private extensions).
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
   @ChgAdded{Version=[2],Text=[The expression cannot be dynamically tagged to
   prevent implicit "truncation" of a dynamically-tagged value to the specific
   ancestor type. This is similar to the
   rules in @RefSecNum{Dispatching Operations of Tagged Types}.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
-  @ChgAdded{Version=[2],Text=[We allow the type of the @nt{ancestor_part} to be
-  the type itself, so that these @nt{aggregate}s are allowed for generic
-  formal derived types, where the actual type might be the same as the
-  ancestor type.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
-  @ChgAdded{Version=[2],Text=[If the type involves any private extensions, we
-  require the use of @key{others} => <> and disallow positional associations
-  in order to avoid breaking privacy of the extensions.
-  See @RefSecNum{Record Aggregates} for a more complete discussion.]}
 @end{Reason}
 @end{Legality}
 
@@ -1865,15 +1750,6 @@ Addition'(Binop @key{with null record})
 @Defn{extensions to Ada 83}
 The extension aggregate syntax is new.
 @end{Extend83}
-
-@begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00389-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}An
-@nt{extension_aggregate} can be of any type extension, including partial
-views. For partial views (including generic formal derived types),
-@key{others} => <> is required, as all of the extension components are
-not (necessarily) visible to the @nt{extension_aggregate}.],Old=[]}
-@end{Extend95}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
