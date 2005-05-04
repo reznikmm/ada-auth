@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/04/13 06:22:18 $}
+@Comment{$Date: 2005/04/14 03:40:45 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1160,12 +1160,13 @@ since it always denotes a subtype.
 @LabeledSubClause{Classification of Operations}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
 @Defn{operates on a type}
 An operation @i(operates
 on a type) @i(T) if it yields a value of type @i(T), if it has an operand
 whose expected type
 (see @RefSecNum{The Context of Overload Resolution})
-is @i(T), or if it has an access parameter
+is @i(T), or if it has an access parameter@Chg{Version=[2],New=[ or access result type],Old=[]}
 (see @RefSecNum(Subprogram Declarations))
 designating @i(T).
 @Defn2{Term=[predefined operation], Sec=(of a type)}
@@ -1325,6 +1326,10 @@ The description of S'Base has been moved to
   @ChgAdded{Version=[2],Text=[Added wording to make it clear that
   stream-oriented attributes are dispatching (if they weren't, T'Class'Input
   and T'Class'Output couldn't work).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to include access result types
+  in the kinds of operations that operation on a type T.]}
 @end{DiffWord95}
 
 
@@ -2148,12 +2153,16 @@ there is no expression to be evaluated and no object to be created,
 it seems simpler to say that the elaboration has no effect.
 @end{DiffWord83}
 
+
 @LabeledClause{Derived Types and Classes}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 @Defn{derived type}
 A @nt<derived_type_definition> defines a new type (and its first subtype)
-whose characteristics are @i(derived) from those of a @i(parent type).
+whose characteristics are @i(derived) from those of a
+@Chg{Version=[2],New=[parent type, and possibly from progenitor types],
+Old=[@i(parent type)]}.
 @IndexSee{Term=[inheritance],See=[derived types and classes]}
 @ToGlossary{Term=<Derived type>,
   Text=<A derived type is a type defined in terms of another type,
@@ -2176,13 +2185,18 @@ rhs="@Chg{Version=[2],New=<@SynI{interface_}@Syn2{subtype_mark} {@key{and} @SynI
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
 @Defn{parent subtype}
 @Defn{parent type}
-The @i(parent_)@nt<subtype_indication> defines the @i(parent subtype);
-its type is the parent type.@Chg{Version=[2],New=[ A derived type
-has one parent type and zero or more interface ancestor types.],Old=[]}
+@Chg{Version=[2],New=[@Defn{progenitor subtype}@Defn{progenitor type}
+An @Syni(interface_)@nt{subtype_mark} in an @nt{interface_list} names a
+@i(progenitor subtype); its type is the @i(progenitor type). ],Old=[]}
+The @Syni(parent_)@nt<subtype_indication> defines the @i(parent subtype);
+its type is the @Chg{Version=[2],New=[@i(parent type)],Old=[parent type]}.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
+@ChgAdded{Version=[2],Text=[A derived type
+has one parent type and zero or more progenitor types.]}
 
 A type shall be completely defined
 (see @RefSecNum(Completions of Declarations))
@@ -2207,10 +2221,12 @@ precede the @nt<derived_type_definition>.]
   subsequently became nonlimited.
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 @Defn{record extension}
 If there is a @nt<record_extension_part>, the derived type is
 called a @i(record extension) of the parent type.
-A @nt<record_extension_part> shall be provided if and only if
+A @nt<record_extension_part> @Chg{Version=[2],New=[(and an @nt{interface_list}) ],
+Old=[]}shall be provided if and only if
 the parent type is a tagged type.
 @begin(ImplNote)
   We allow a record extension to inherit discriminants;
@@ -2223,8 +2239,34 @@ the parent type is a tagged type.
   do not appear in the component association list.
 @end(ImplNote)
 @begin{Ramification}
-This rule needs to be rechecked in the visible part of an
-instance of a generic unit.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[]}@Comment{Conditional leading}
+  This rule needs to be rechecked in the visible
+  part of an instance of a generic unit@Chg{Version=[2],New=[ because of the
+  @lquotes@;only if@rquotes@; part of the rule. For example:],Old=[]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{generic}
+   @key{type} T @key{is private};
+@key{package} P @key{is}
+   @key{type} Der @key{is new} T;
+@key{end} P;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package} I @key{is new} P (Some_Tagged_Type); -- @RI[illegal]]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
+  @ChgAdded{Version=[2],Text=[The instantiation is illegal because a tagged
+  type is being extended in the visible part without a
+  @nt{record_extension_part}. Note that this is legal in the private part or
+  body of an instance, both to avoid a contract model violation, and because
+  no code that can see that the type is actually tagged can also see the
+  derived type declaration.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[No recheck is needed for derived types with
+  a @nt{record_extension_part}, as that has to be derived from something that
+  is known to be tagged (otherwise the template is illegal).]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
@@ -2269,10 +2311,9 @@ of the derived type.
 
 @Leading@keepnext@;The characteristics of the derived type are defined as follows:
 @begin(itemize)
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
 Each class of types that includes the parent type @Chg{Version=[2],New=[or
-interface ancestor type ],Old=[]}also includes
-the derived type.
+progenitor type ],Old=[]}also includes the derived type.
 @begin{Discussion}
 This is inherent in our notion
   of a @lquotes@;class@rquotes@; of types. It is not mentioned in the
@@ -2423,10 +2464,11 @@ there is a corresponding predefined operator of the derived type.]
   primitive subprograms.
 @end(Reason)
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 @Defn{inherited subprogram}
 For each user-defined primitive subprogram (other than a user-defined
-equality operator @em see below) of the parent type
-that already exists at the place of the @nt{derived_type_definition},
+equality operator @em see below) of the parent type@Chg{Version=[2],New=[ or a progenitor type],
+Old=[]} that already exists at the place of the @nt{derived_type_definition},
 there exists a corresponding @i(inherited) primitive
 subprogram of the derived type
 with the same defining name.
@@ -2471,16 +2513,17 @@ the implementation of the predefined equality operator of the record extension
   were used in the user-defined equality operators of the parent type.
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 @noprefix@;The profile of an inherited subprogram
 (including an inherited enumeration literal) is obtained
 from the profile of the corresponding
-(user-defined) primitive subprogram of the parent type,
-after systematic replacement of each
+(user-defined) primitive subprogram of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]}
+type, after systematic replacement of each
 subtype of its profile (see @RefSecNum{Subprogram Declarations})
-that is of the parent type
+that is of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]} type
 with a @i(corresponding subtype) of the derived type.
 @Defn{corresponding subtype}
-For a given subtype of the parent type,
+For a given subtype of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]} type,
 the corresponding subtype of the derived type is defined as follows:
 @begin(inneritemize)
   If the declaration of the derived type has neither a
@@ -2509,34 +2552,36 @@ the corresponding subtype of the derived type is defined as follows:
   @end{Reason}
 @end(inneritemize)
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 @noprefix@;The same formal parameters have @nt<default_expression>s in
 the profile of the inherited subprogram. @Redundant[Any type mismatch due
-to the systematic replacement of the parent type by the
-derived type is handled as part of the normal
+to the systematic replacement of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]}
+type by the derived type is handled as part of the normal
 type conversion associated with parameter
 passing @em see @RefSecNum(Parameter Associations).]
 @begin(Reason)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
   We don't introduce the type conversion explicitly here
   since conversions to record extensions or on access parameters
   are not generally legal. Furthermore, any type conversion would
-  just be "undone" since the parent's subprogram is ultimately being
-  called anyway.
+  just be "undone" since the @Chg{Version=[2],New=[],Old=[parent's ]}subprogram
+  @Chg{Version=[2],New=[of the parent or progenitor ],Old=[]}is ultimately being
+  called anyway.@Chg{Version=[2],New=[ (Null procedures can be inherited from
+  a progenitor without being overridden, so it is possible to call subprograms
+  of an interface.)],Old=[]}
 @end(Reason)
 
 @end(itemize)  @Comment{end of characteristics of derived type}
 
-If a primitive subprogram of the parent type is visible at the
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
+If a primitive subprogram of the parent@Chg{Version=[2],New=[ or progenitor],
+Old=[]} type is visible at the
 place of the @nt{derived_type_definition},
 then the corresponding inherited subprogram is implicitly declared
 immediately after the @nt{derived_type_definition}.
 Otherwise, the inherited subprogram is implicitly declared later
 or not at all,
 as explained in @RefSecNum{Private Operations}.
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[If a type declaration names an interface type
-in an @nt{interface_list}, then the declared type inherits any
-user-defined primitive subprograms of the interface type in the same way.]}
 
 @PDefn{derived type}
 A derived type can also be defined by a @nt<private_@!extension_@!declaration>
@@ -2562,17 +2607,20 @@ If the @nt{subtype_@!indication} depends on a discriminant,
 then only those expressions that do not depend on a discriminant
 are evaluated.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00391-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00391-01],ARef=[AI95-00401-01]}
 @PDefn2{Term=[execution], Sec=(call on an inherited subprogram)}
 For the execution of a call on an inherited subprogram,
-a call on the corresponding primitive subprogram of the parent type is
+a call on the corresponding primitive subprogram of the
+parent@Chg{Version=[2],New=[ or progenitor],Old=[]} type is
 performed; the normal conversion of each actual parameter
 to the subtype of the corresponding formal parameter
 (see @RefSecNum(Parameter Associations))
 performs any necessary type conversion as well.
 If the result type of the inherited subprogram
-is the derived type, the result of calling the parent's subprogram
-is converted to the derived type@Chg{Version=[2],New=[, or in the case of a
+is the derived type, the result of calling the
+@Chg{Version=[2],New=[],Old=[parent's]} subprogram@Chg{Version=[2],
+New=[ of the parent or progenitor],Old=[]} is converted to the
+derived type@Chg{Version=[2],New=[, or in the case of a
 null extension, extended to the derived type using the equivalent of an
 @nt{extension_aggregate} with the original result as the @nt{ancestor_part}
 and @key{null record} as the @nt{record_component_association_list}],Old=[]}.
@@ -2648,8 +2696,8 @@ subtype of the derived type.
 If the reserved word @key{abstract} is given in the declaration of a
 type, the type is abstract (see @RefSecNum{Abstract Types and Subprograms}).
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[An interface type which has an interface ancestor
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
+@ChgAdded{Version=[2],Text=[An interface type which has a progenitor type
 @lquotes@;is derived from@rquotes@; that type, and therefore is a derived type.
 A @nt{derived_type_definition}, however, never defines an interface type.]}
 
@@ -2737,11 +2785,10 @@ These concepts are similar, but not the same.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  A derived type may inherit from multiple
-  interface ancestors, as well as the parent type @em
-  see @RefSec{Interface Types}.]}
+  A derived type may inherit from multiple (interface) progenitors,
+  as well as the parent type @em see @RefSec{Interface Types}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
   @ChgAdded{Version=[2],Text=[A derived type may specify that it is a limited
@@ -4228,17 +4275,13 @@ same @nt{character_literal} or language-defined name as defined for
 Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[
-In types Wide_Character and Wide_Wide_Character, the characters whose code
-positions are 16#FFFE# and 16#FFFF# are assigned the language-defined names
-@i(FFFE) and @i(FFFF). The other characters whose code position is larger
-than 16#FF#
-and which are not @nt{graphic_character}s have language-defined names which are
-formed by appending to the string "Character_" the representation of their code
-position in hexadecimal as eight extended digits. As with other
-language-defined names, these names are usable only with the attributes
-(Wide_)Wide_Image and (Wide_)Wide_Value; they are not usable as enumeration
-literals.]}
+@ChgAdded{Version=[2],Text=[The characters whose code position is larger
+than 16#FF# and which are not @nt{graphic_character}s have language-defined
+names which are formed by appending to the string "Hex_" the
+representation of their code position in hexadecimal as eight extended digits.
+As with other language-defined names, these names are usable only with the
+attributes (Wide_)Wide_Image and (Wide_)Wide_Value; they are not usable as
+enumeration literals.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -4363,6 +4406,16 @@ Context is used to resolve their type.
   for a string representing a @nt{character_literal} of a non-graphic character,
   while Ada 95 would have accepted it. Similarly, the result of
   Wide_Character'Wide_Image will change for such non-graphic characters.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[The language-defined names FFFE and FFFF were
+  replaced by a consistent set of language-defined names for all non-graphic
+  characters with positions greater than 16#FF#. That means that
+  in Ada 2005, Wide_Character'Wide_Value("FFFE") will raise Constraint_Error
+  while Ada 95 would have accepted it. Similarly, the result of
+  Wide_Character'Wide_Image will change for the position numbers 16#FFFE#
+  and 16#FFFF#. It is very unlikely that this will matter in practice,
+  as these names do not represent useable characters.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[The declaration of Wide_Wide_Character in

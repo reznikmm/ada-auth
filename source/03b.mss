@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/03/11 23:38:21 $}
+@Comment{$Date: 2005/04/14 03:40:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @LabeledClause{Array Types}
 
@@ -1269,25 +1269,24 @@ and @RefSecNum{Objects and Named Numbers}).]
 @end{StaticSem}
 
 @begin{RunTime}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
-@Chg{Version=[2],New=[For an access discriminant of a limited type, its],
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00416-01]}
+@Chg{Version=[2],New=[For an access discriminant, its],
 Old=[An]} @nt<access_definition> is
 elaborated when the value of @Chg{Version=[2],New=[the],Old=[a corresponding]}
-access discriminant is defined,
-either by evaluation of its @nt<default_expression> or by
-elaboration of a @nt<discriminant_constraint>.@Chg{Version=[2],New=[ For
-an access discriminant of a nonlimited
-type, its @nt{access_definition} is elaborated when the
-@nt{full_type_declaration}
-with the @nt{known_discriminant_part} is elaborated.],Old=[]}
+access discriminant is defined@Chg{Version=[2],New=[:],Old=[, either]}
+by evaluation of its @nt<default_expression>@Chg{Version=[2],New=[,],Old=[ or]}
+by elaboration of a @nt<discriminant_constraint>@Chg{Version=[2],New=[, or
+by an assignment that initializes the enclosing object.],Old=[.
 @Redundant[The elaboration of an @nt<access_definition> creates the
 anonymous access type. When the expression defining the
 access discriminant is evaluated, it is converted to this
-anonymous access type (see @RefSecNum{Type Conversions}).]
+anonymous access type (see @RefSecNum{Type Conversions}).]]}
 @PDefn2{Term=[implicit subtype conversion],Sec=(access discriminant)}
 @begin(Ramification)
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
-  This conversion raises @Chg{Version=[2],New=[Program_Error],
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00416-01]}
+  @Chg{Version=[2],New=[The],Old=[This]} conversion@Chg{Version=[2],New=[
+  of the @nt{expression} defining the access discriminant to the anonymous
+  access type],Old=[]} raises @Chg{Version=[2],New=[Program_Error],
   Old=[Constraint_Error if the initial value is @key(null), or,]} for an
   object created by an allocator of an access type T, if the
   initial value is an access parameter that designates a view whose
@@ -1431,7 +1430,7 @@ when the discriminant is initialized.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00402-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Access discriminants (anonymous access types
   used as a discriminant) can be used on any type allowing discriminants.
   Defaults aren't allowed on discriminants of non-limited types, however, so

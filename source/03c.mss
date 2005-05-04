@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/04/07 04:31:09 $}
+@Comment{$Date: 2005/04/14 03:40:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -807,7 +807,8 @@ Tagged types are a new concept.
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
-  @ChgAdded{Version=[2],Text=[Ada.Tags is now defined to be preelaborated.]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Ada.Tags is now defined to be preelaborated.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
   @ChgAdded{Version=[2],Text=[Generic function
@@ -1132,20 +1133,21 @@ Type extension is a new concept.
 @end{Extend83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}Type extensions now can be
-declared in more nested scopes than their parent types. Additional
-accessibility checks on @nt{allocator}s and @nt{return_statement}s prevent
-objects from outliving their type.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Type extensions now can be
+  declared in more nested scopes than their parent types. Additional
+  accessibility checks on @nt{allocator}s and @nt{return_statement}s prevent
+  objects from outliving their type.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[Added wording to prevent extending synchronized
-tagged types.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to prevent extending synchronized
+  tagged types.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
-@ChgAdded{Version=[2],Text=[Defined null extension for use elsewhere.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
+  @ChgAdded{Version=[2],Text=[Defined null extension for use elsewhere.]}
 @end{DiffWord95}
 
 
@@ -1193,7 +1195,7 @@ may depend on operands or result context.
 @end{MetaRules}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00416-01]}
 @Defn{call on a dispatching operation}
 @Defn{dispatching operation}
 A @i{call on a dispatching operation} is a call whose @nt<name> or
@@ -1213,7 +1215,10 @@ rather than the actual parameter itself.
 @Defn{controlling result}
 If the call is to a (primitive) function with result type @i(T),
 then the call has a @i(controlling result) @em
-the context of the call can control the dispatching.
+the context of the call can control the dispatching.@Chg{Version=[2],
+New=[ Similarly, if the call is to a function with access result type
+designating @i(T), then the call has a @i(controlling access result), and
+the context can similarly control dispatching.],Old=[]}
 @begin{Ramification}
   This definition implies that a call through the dereference of an
   access-to-subprogram value is never considered a call on
@@ -1236,24 +1241,31 @@ statically, dynamically, or indeterminately tagged according
 to its operand. For other kinds of @nt<name>s and expressions, this
 is determined as follows:
 @begin(Itemize)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
   @Defn{statically tagged}
   The @nt<name> or expression is @i(statically
   tagged) if it is of a specific tagged type and,
-  if it is a call with a controlling result, it has at least
+  if it is a call with a controlling result@Chg{Version=[2],New=[ or
+  controlling access result],Old=[]}, it has at least
   one statically tagged controlling operand;
-    @begin{Discussion}
-It is illegal to have both statically tagged and
-  dynamically tagged controlling operands in the same call -- see below.@end{discussion}
+  @begin{Discussion}
+    It is illegal to have both statically tagged and
+    dynamically tagged controlling operands in the same call -- see below.
+  @end{discussion}
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
   @Defn{dynamically tagged}
   The @nt<name> or expression is @i(dynamically tagged)
   if it is of a class-wide type, or it is a call with
-  a controlling result and at least one dynamically tagged controlling
-  operand;
+  a controlling result@Chg{Version=[2],New=[ or
+  controlling access result],Old=[]} and at least one dynamically
+  tagged controlling operand;
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
   @Defn{tag indeterminate}
   The @nt<name> or expression is @i(tag indeterminate)
-  if it is a call with a controlling result, all of whose
+  if it is a call with a controlling result@Chg{Version=[2],New=[ or
+  controlling access result],Old=[]}, all of whose
   controlling operands (if any) are tag indeterminate.
 @end(itemize)
 
@@ -1343,21 +1355,24 @@ explicitly or by default @em see @RefSecNum{Conformance Rules})].]}
   are outside of its first subtype.
 @end{reason}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 The @nt<default_expression> for a controlling formal parameter
-of a dispatching operation shall be tag indeter@!minate.
-A controlling formal parameter that is an access parameter
-shall not have a @nt<default_expression>.
+of a dispatching operation shall be tag indeter@!minate.@Chg{Version=[2],
+New=[],Old=[ A controlling formal parameter that is an access parameter
+shall not have a @nt<default_expression>.]}
 @begin(Reason)
-  The first part ensures that the @nt{default_expression}
-  always produces the "correct"
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+  @Chg{Version=[2],New=[This rule],Old=[The first part]} ensures
+  that the @nt{default_expression} always produces the "correct"
   tag when called with or without dispatching,
   or when inherited by a descendant. If
   it were statically tagged, the default would be useless for
   a dispatching call; if it were dynamically tagged, the default
   would be useless for a nondispatching call.
 
-  The second part is consistent with the first part,
-  since designated objects are never tag-indeterminate.
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00416-01]}
+  @ChgDeleted{Version=[2],Text=[The second part is consistent with the
+  first part, since designated objects are never tag-indeterminate.]}
 @end(Reason)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00404-01]}
@@ -1491,39 +1506,42 @@ The controlling tag value is defined as follows:
 If all of the controlling operands @Chg{Version=[2],New=[(if any) ],Old=[]}are
 tag-indeterminate, then:
   @begin(inneritemize)
-    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00239-01]}
-    If the call has a controlling result and is itself a (possibly
-    parenthesized or qualified)
+    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00239-01],ARef=[AI95-00416-01]}
+    If the call has a controlling result@Chg{Version=[2],New=[ or a controlling
+    access result],Old=[]} and is itself@Chg{Version=[2],New=[, or designates,],Old=[]}
+    a (possibly parenthesized or qualified)
     controlling operand of an enclosing call on a dispatching operation
     of @Chg{Version=[2],New=[a descendant of ],Old=[]}type @i(T),
     then its controlling tag value is determined by the controlling tag
     value of this enclosing call;
 
     @begin{Discussion}
-    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00239-01]}
-    @ChgAdded{Version=[2],Text=[For code that a user can write explicitly, the only
-    contexts that can control dispatching of a function with a controlling
-    result of type T are those that involve controlling operands of the same
-    type T: if the two types differ there is an illegality and the dynamic
-    semantics are irrelevant.]}
+      @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00239-01]}
+      @ChgAdded{Version=[2],Text=[For code that a user can write explicitly,
+      the only contexts that can control dispatching of a function with a
+      controlling result of type T are those that involve controlling operands
+      of the same type T: if the two types differ there is an illegality and
+      the dynamic semantics are irrelevant.]}
 
-    @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[In the case of an inherited subprogram however, if a
-    default expression is a function call, it may be of type T while the
-    parameter is of a type derived from T. To cover this case, we talk about "a
-    descendant of T" above. This is safe, because if the type of the parameter
-    is descended from the type of the function result, it is guaranteed to
-    inherit or override the function, and this ensures that there will be an
-    appropriate body to dispatch to. Note that abstract functions are not an
-    issue here because the call to the function is a dispatching call, so it is
-    guaranteed to always land on a concrete body.]}
+      @ChgRef{Version=[2],Kind=[AddedNormal]}
+      @ChgAdded{Version=[2],Text=[In the case of an inherited subprogram
+      however, if a default expression is a function call, it may be of type T
+      while the parameter is of a type derived from T. To cover this case, we
+      talk about "a descendant of T" above. This is safe, because if the type
+      of the parameter is descended from the type of the function result, it is
+      guaranteed to inherit or override the function, and this ensures that
+      there will be an appropriate body to dispatch to. Note that abstract
+      functions are not an issue here because the call to the function is a
+      dispatching call, so it is guaranteed to always land on a concrete
+      body.]}
     @end{Discussion}
 
-    @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00196-01]}
-    @ChgAdded{Version=[2],Text=[If the call has a controlling result and is the
-    (possibly parenthesized or qualified) expression of an
-    @nt{assignment_statement} whose target is of a class-wide type, then its
-    controlling tag value is determined by the target;]}
+    @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00196-01],ARef=[AI95-00416-01]}
+    @ChgAdded{Version=[2],Text=[If the call has a controlling result or
+    controlling access result and (possibly parenthesized, qualified, or
+    dereferenced) is the expression of an @nt{assignment_statement} whose
+    target is of a class-wide type, then its controlling tag value is
+    determined by the target;]}
 
     @PDefn{statically determined tag}
     Otherwise, the controlling tag value is statically determined to be
@@ -1666,6 +1684,13 @@ The concept of dispatching operations is new.
   to be dispatching, or on a generic that is used to define a dispatching
   operation.]}
 @end{Incompatible95}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Functions that have an access result type can be dispatching in
+  the same way as a function that returns a tagged object directly.]}
+@end{Extend95}
 
 @begin{Diffword95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
@@ -2825,11 +2850,22 @@ specification of an access discriminant
 parameter (see @RefSecNum(Subprogram Declarations)).]]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-   @ChgAdded{Version=[2],Text=[An @nt{access_definition} used in a controlling
-   parameter is null-excluding because it is necessary to read the tag to
-   dispatch, and null has no tag. We would have preferred to
-   require @key{not null} to be specified for such
-   parameters, but that would have been too incompatible with Ada 95.]}
+  @ChgAdded{Version=[2],Text=[An @nt{access_definition} used in a controlling
+  parameter is null-excluding because it is necessary to read the tag to
+  dispatch, and null has no tag. We would have preferred to
+  require @key{not null} to be specified for such
+  parameters, but that would have been too incompatible with Ada 95.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Note that we considered imposing a similar
+  implicit null exclusion for controlling access results, but chose not to do
+  that, because there is no Ada95 compatibility issue, and there is no
+  automatic null check inherent in the use of a controlling access result. If a
+  null check is necessary, it is because there is a dereference of the result,
+  or because the value is passed to a null-excluding parameter.
+  If there is no dereference of the result, a null return value is perfectly
+  acceptable, and can be a useful indication of a particular status of the
+  call.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/02/03 07:11:14 $}
+@Comment{$Date: 2005/04/14 03:40:44 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -18,11 +18,14 @@ described in this section.]
 @LabeledClause{Character Set}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @Defn{character set}
-The @Chg{Version=[2],New=[character repertoire for the text of an Ada program consists of the
+The @Chg{Version=[2],New=[character repertoire for the text of an Ada
+program consists of the
 collection of characters described by the ISO/IEC 10646:2003 Universal
-Multiple-Octet Coded Character Set.],Old=[only characters
+Multiple-Octet Coded Character Set. This collection is organized in
+@i<planes>, each plane comprising 65536 characters.@Defn2{Term=[plane],Sec=[character]}
+@Defn{character plane}],Old=[only characters
 allowed outside of @nt{comment}s are the @nt{graphic_character}s and
 @nt{format_effector}s]}.
 
@@ -60,15 +63,15 @@ rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{graphic_character} | @Syn2{format_effect
 rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{identifier_letter} | @Syn2{digit} | @Syn2{space_character} | @Syn2{special_character}>}"}
 
 @begin{SyntaxText}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgAdded{Version=[2],Text=[A @nt{character} is any character defined within
-ISO/IEC 10646:2003 other than those whose code position is 16#FFFE# or
-16#FFFF#.]}
+ISO/IEC 10646:2003 other than those whose relative code position in their
+plane is 16#FFFE# or 16#FFFF#.]}
 @end{SyntaxText}
 @end{Syntax}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 The@Chg{Version=[2],New=[],Old=[ character repertoire for the text of
 an Ada program consists of the
 collection of characters
@@ -80,9 +83,9 @@ a set of @nt<other_control_function>s; the]} coded representation for
 @Chg{Version=[2],New=[],Old=[these ]}characters is implementation defined
 @Redundant[(it need not be a
 representation defined within @Chg{Version=[2],New=[ISO/IEC 10646:2003],
-Old=[ISO-10646-1]})].@Chg{Version=[2],New=[ The characters whose
-code position is 16#FFFE# or 16#FFFF# are not allowed anywhere in the text
-of a program.],Old=[]}
+Old=[ISO-10646-1]})].@Chg{Version=[2],New=[ A character whose relative
+code position in their plane is 16#FFFE# or 16#FFFF# is not allowed anywhere
+in the text of a program.],Old=[]}
 @ImplDef{The coded representation for the text of an Ada program.}
 
 @begin{Ramification}@ChgNote{Moved from above}
@@ -248,12 +251,13 @@ character whose General Category is defined to be @lquotes@;Other, Surrogate@rqu
 @ChgAdded{Version=[2],Text=[@Defn{punctuation_connector}@nt{punctuation_connector}@\Any
 character whose General Category is defined to be @lquotes@;Punctuation, Connector@rquotes@;.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @Chg{Version=[2],New=[@Defn{graphic_character}@nt{graphic_character}],
 Old=[@Defn{other_control_function}@nt<other_control_function>]}@\@Chg{Version=[2],
 New=[Any character which is not in the categories @nt{other_control},
-@nt{other_private_use}, @nt{other_surrogate}, @nt{other_format},
-@nt{format_effector}, and whose code position is neither 16#FFFE# nor 16#FFFF#.],
+@nt{other_private_use}, @nt{other_surrogate},
+@nt{format_effector}, and whose relative code position in its plane is neither
+16#FFFE# nor 16#FFFF#.],
 Old=[Any control function,
 other than a @nt<format_effector>, that is allowed in a comment; the set of
 @nt<other_control_function>s allowed in comments is implementation defined.
@@ -560,7 +564,7 @@ permitted in identifiers (in the standard mode).]}
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Program text can use most characters defined by ISO-10646:2003. This
   clause has been rewritten to use the categories defined in that Standard.
@@ -728,6 +732,7 @@ From URG recommendation.
   categories defined in the preceding clause.]}
 @end{Diffword95}
 
+
 @LabeledClause{Identifiers}
 
 @begin{Intro}
@@ -735,36 +740,42 @@ From URG recommendation.
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<identifier_start>,Old=<>}>,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@Syn{lhs=<identifier>,rhs="
+   @Chg{Version=[2],New=<@Syn2{identifier_start} {@Syn2{identifier_start} | @Syn2{identifier_extend}}>,
+   Old=<@Syn2{identifier_letter} {[@Syn2{underline}] @Syn2{letter_or_digit}}>}"}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<identifier_start>,Old=<letter_or_digit>}>,
 rhs="@Chg{Version=[2],New=<
      @Syn2{letter_uppercase}
    | @Syn2{letter_lowercase}
    | @Syn2{letter_titlecase}
    | @Syn2{letter_modifier}
    | @Syn2{letter_other}
-   | @Syn2{number_letter}>,Old=<>}"}
+   | @Syn2{number_letter}>,Old=<@Syn2{identifier_letter} | @Syn2{digit}>}"}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<identifier_extend>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
-     @Syn2{identifier_start}
-   | @Syn2{mark_non_spacing}
+     @Syn2{mark_non_spacing}
    | @Syn2{mark_spacing_combining}
    | @Syn2{number_decimal_digit}
    | @Syn2{other_format}>,Old=<>}"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Syn{lhs=<identifier>,rhs="
-   @Chg{Version=[2],New=<@Syn2{identifier_start} {[@Syn2{punctuation_connector}] @Syn2{identifier_extend}}>,
-   Old=<@Syn2{identifier_letter} {[@Syn2{underline}] @Syn2{letter_or_digit}}>}"}
-
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<letter_or_digit>}>,
-rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{identifier_letter} | @Syn2{digit}>}"}
-
 @begin{SyntaxText}
-An @nt{identifier} shall not be a reserved word.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00395-01]}
+@Chg{Version=[2],New=[After eliminating the characters in category
+@nt{other_format}, an @nt{identifier} shall not contain two consecutive
+characters in category punctuation_connector, or end with a character
+in that category.],Old=[An @nt{identifier} shall not be a reserved word.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This rule was stated in the syntax in Ada 95,
+  but that has gotten too complex in Ada 2005. Since @nt{other_format}
+  characters usually do not display, we do not want to count them as separating
+  two underscores.]}
+@end{Reason}
 @end{SyntaxText}
 @end{Syntax}
 
@@ -783,10 +794,9 @@ corresponding upper and lower case letters are considered the same.]}
 @ChgAdded{Version=[2],Text=[The characters in category @nt{other_format}
 are eliminated.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[Locale-independent full case folding, as defined
-by documents  referenced in the note in section 1 of ISO/IEC 10646:2003, is
-applied to obtain the uppercase version of each character.
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[The remaining sequence of characters is
+converted to upper case.
 @Defn{case insensitive}]}
 @end{Itemize}
 @begin(Discussion)
@@ -797,6 +807,33 @@ applied to obtain the uppercase version of each character.
   no corresponding upper case letter (in particular, they
   are not considered equivalent to one another).]}
 @end(Discussion)
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[After applying these transformations, an identifier
+shall not be identical to a reserved word (in upper case).]}
+@begin(ImplNote)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We match the reserved words after doing these
+  transformations so that the rules for @nt{identifier}s and reserved words are
+  the same. (This allows @nt{other_format} characters, which usually don't
+  display, in a reserved word without changing it to an @nt{identifier}.) Since
+  a compiler usually will lexically process @nt{identifier}s and reserved words the
+  same way (often with the same code), this will prevent a lot of headaches.]}
+@end(ImplNote)
+@begin(Ramification)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The rules for reserved words differ in one way:
+  they define case conversion on letters rather than sequences. This means that
+  some unusual sequences are neither @nt{identifier}s nor reserved words.
+  For instance, @lquotes@;@smldotlessi@;f@rquotes@; and
+  @lquotes@;acce@latin1(223)@rquotes@; have upper case conversions of
+  @lquotes@;IF@rquotes@; and @lquotes@;ACCESS@rquotes@; respectively.
+  These are not @nt{identifier}s, because the transformed values are identical
+  to a reserved word. But they are not reserved words, either, because the
+  original values do not match any reserved word as defined or with any number
+  of characters of the reserved word in upper case. Thus, these odd
+  constructions are just illegal, and should not appear in the source of
+  a program.]}
+@end(Ramification)
 @end{StaticSem}
 
 @begin{ImplPerm}
@@ -1597,13 +1634,15 @@ informative annex.
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Type=[Leading],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00284-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00284-02],ARef=[AI95-00395-02]}
 @ChgNote{The table of words has no paragraph number, so we need to put the
 change here}
 @Leading
 @Defn{reserved word}
-The following are the @i{reserved words}
-(ignoring upper/lower case distinctions):
+The following are the @i{reserved words}@Chg{Version=[2],New=[. Within a program,
+some or all of the letters of a reserved word may be in upper case, and one or
+more characters in category @nt{other_format} may be inserted within or at the
+end of the reserved word.],Old=[ (ignoring upper/lower case distinctions):]}
 @begin{Discussion}
   Reserved words have special meaning in the syntax.
   In addition, certain reserved words are used as attribute names.
@@ -1745,12 +1784,19 @@ to @RefSec(Obsolescent Features).
 @end{DiffWord83}
 
 @begin{Incompatible95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
-@ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 83}
-The following words are not reserved in Ada 95, but are reserved in Ada
-2005: @key{interface}, @key{overriding}, @key{synchronized}. A special
-allowance is made for @key{pragma} Interface (see @RefSecNum{Pragma Interface}).
-Uses of these words as identifiers will need to be changed, but we do not
-expect them to be common.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 83}
+  The following words are not reserved in Ada 95, but are reserved in Ada
+  2005: @key{interface}, @key{overriding}, @key{synchronized}. A special
+  allowance is made for @key{pragma} Interface (see @RefSecNum{Pragma Interface}).
+  Uses of these words as identifiers will need to be changed, but we do not
+  expect them to be common.]}
 @end{Incompatible95}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[The definition of upper case equivalence has
+  been modified to allow identifiers using all of the characters of ISO 10646.
+  This change has no effect on the character sequences that are reserved
+  words, but does make some unusual sequences of characters illegal.]}
+@end{DiffWord95}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/04/13 06:22:20 $}
+@Comment{$Date: 2005/04/14 03:41:00 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -95,10 +95,28 @@ library units (see @RefSecNum{Compilation Units - Library Units}).]
 @Syn{lhs=<operator_symbol>,rhs="@Syn2{string_literal}"}
 
 @begin{SyntaxText}
-The sequence of characters in an @nt{operator_symbol} shall correspond to an
-operator belonging to one of the six classes of operators
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00395-01]}
+The sequence of characters in an @nt{operator_symbol} shall
+@Chg{Version=[2],New=[be identical, after
+conversion to upper case and removal of the surrounding quotation marks,
+to the sequence of characters for],Old=[correspond to an operator
+belonging to]} one of the six classes of operators
 defined in clause @RefSecNum{Operators and Expression Evaluation}
-(spaces are not allowed and the case of letters is not significant).
+(@Chg{Version=[2],New=[in upper case],Old=[spaces are not allowed and the
+case of letters is not significant]}).@Chg{Version=[2],New=[ Spaces are not
+allowed. One or more characters in category @nt{other_format} may be inserted
+after any @nt{graphic_character} in the @nt{operator_symbol}
+other than the surrounding quotation marks if the
+@nt{operator_symbol} is a reserved word.],Old=[]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[The rule about @nt{other_format} characters is
+  intended to match the one that applies to normal occurrences of the
+  operators: they are allowed (and ignored) in reserved words, and disallowed
+  in compound delimiters or after or before an operator symbol.]}
+@end{Reason}
+
 @end{SyntaxText}
 
 @Syn{lhs=<defining_operator_symbol>,rhs="@Syn2{operator_symbol}"}
@@ -372,16 +390,19 @@ anonymous access type.],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
-@Chg{Version=[2],New=[Split the production for @nt{subprogram_specification}
-in order to make the declaration of null procedures (see
-@RefSecNum{Null Procedures}) easier.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+  @ChgAdded{Version=[2],Text=[Split the production for @nt{subprogram_specification}
+  in order to make the declaration of null procedures (see
+  @RefSecNum{Null Procedures}) easier.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[A description of the purpose of anonymous
-access-to-subprogram parameters and the definition of the profile of
-subprograms containing them was added.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00254-01]}
+  @ChgAdded{Version=[2],Text=[A description of the purpose of anonymous
+  access-to-subprogram parameters and the definition of the profile of
+  subprograms containing them was added.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[Revised to allow @nt{other_format} characters
+  in @nt{operator_symbol}s in the same way as the underlying constructs.]}
 @end{DiffWord95}
 
 

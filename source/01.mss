@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/03/11 23:38:21 $}
+@Comment{$Date: 2005/04/14 03:40:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1345,6 +1345,19 @@ character whose name is @lquotes@;LATIN CAPITAL LETTER E@rquotes@;, not
 @ChgAdded{Version=[2],Text=[This just means that programs can be written in plain
 ASCII characters; no characters outside of the 7-bit range are required.]}
 @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[When this International Standard mentions the
+conversion of some character or sequence of characters to upper case, it means
+the character or sequence of characters obtained by using locale-independent
+full case folding, as defined by documents referenced in the note in section 1
+of ISO/IEC 10646:2003.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Unless otherwise specified for sequences of
+  characters, case folding is applied to the sequence, not to individual
+  characters. It sometimes can make a difference.]}
+@end{Discussion}
 @end{Wide}
 
 @begin{Wide}
@@ -1444,12 +1457,16 @@ The preferred places for other line breaks are after semicolons.
 @end{Notes}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[We now explicitly say that the lexical elements of the
-language (with a few exceptions) are made up of characters in the lower half of
-the Latin-1 character set. This is needed to avoid confusion given the new
-capability to use most ISO 10646 characters in identifiers and
-strings.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[We now explicitly say that the lexical elements
+  of the language (with a few exceptions) are made up of characters in the
+  lower half of the Latin-1 character set. This is needed to avoid confusion
+  given the new capability to use most ISO 10646 characters in identifiers and
+  strings.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[We now explicitly define what the Standard means
+  by upper case, as there are many possibilities for ISO 10646 characters.]}
 @end{DiffWord95}
 
 @LabeledSubClause{Classification of Errors}

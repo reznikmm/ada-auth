@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/04/13 06:22:21 $}
+@Comment{$Date: 2005/04/14 03:41:05 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 
@@ -499,18 +499,26 @@ of its @nt<declarative_part>,
 the activation of the task is defined to have @i(failed),
 and it becomes a completed task.
 
-A task object (which represents one task)
-can be created either as part of the elaboration
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+A task object (which represents one task) can be @Chg{Version=[2],New=[
+a part of a stand-alone object, of an object created by],Old=[created either as part of the elaboration
 of an @nt<object_@!declaration> occurring immediately within some
-declarative region,
-or as part of the evaluation of an @nt<allocator>.
-All tasks created by the elaboration of @nt<object_@!declaration>s
-of a single declarative region (including subcomponents
-of the declared objects) are activated together. Similarly,
+declarative region, or as part of the evaluation of]}
+an @nt{allocator}@Chg{Version=[2],New=[, or of an anonymous object of a limited
+type],Old=[]}. All tasks@Chg{Version=[2],New=[ that are part of any
+of the stand-alone objects],Old=[]}
+created by the elaboration of @nt<object_@!declaration>s@Chg{Version=[2],
+New=[ (or @nt{generic_association}s of formal objects of
+mode @key{in})],Old=[]}
+of a single declarative region@Chg{Version=[2],
+New=[],Old=[ (including subcomponents of the declared objects)]}
+are activated together.
+@Chg{Version=[2],New=[All tasks that are part of a single object that is not a
+stand-alone object are activated together.],Old=[Similarly,
 all tasks created by the evaluation of a single @nt<allocator>
 are activated together. The activation of a task is associated
 with the innermost @nt<allocator> or @nt<object_@!declaration>
-that is responsible for its creation.
+that is responsible for its creation.]}
 @begin{Discussion}
 The initialization of an @nt{object_declaration} or @nt{allocator} can
 indirectly include the creation of other objects that contain tasks.
@@ -520,7 +528,9 @@ completely different @nt{allocator}. Tasks created by the two
 allocators are @i{not} activated together.
 @end{Discussion}
 
-For tasks created by the elaboration of @nt<object_declaration>s
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+For @Chg{Version=[2],New=[the ],Old=[]} tasks@Chg{Version=[2],New=[],Old=[
+created by the elaboration of @nt<object_declaration>s]}
 of a given declarative region, the activations are initiated
 within the context of the @nt<handled_@!sequence_of_@!statements>
 (and its associated @nt<exception_@!handler>s if any @em
@@ -535,12 +545,30 @@ as defined in @RefSecNum(Package Bodies).]
   the @nt<handled_@!sequence_of_@!statements>.
 @end(Ramification)
 
-For tasks created by the evaluation of an @nt<allocator>,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+For tasks @Chg{Version=[2],New=[that are part of a single object that is
+not a stand-alone object, activations are initiated after completing any
+initialization of the outermost object enclosing these tasks, prior
+to performing any other operation on the outermost object. In
+particular, for tasks that are part of the object ],Old=[]}created
+by the evaluation of an @nt<allocator>,
 the activations are initiated as the last step of
-evaluating the @nt<allocator>, after completing
+evaluating the @nt<allocator>, @Chg{Version=[2],New=[],Old=[after completing
 any initialization for the object created by the @nt<allocator>,
-and prior to returning the new access
-value.
+and ]}prior to returning the new access
+value.@Chg{Version=[2],New=[ For tasks that are part of an
+object that is the result of a function call, the activations are
+not initiated until after the function returns.],Old=[]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[The intent is that @lquotes@;temporary@rquotes@;
+  objects with task parts are treated similarly to an object created by an
+  allocator. The @lquotes@;whole@rquotes@; object is initialized, and then all
+  of the task parts are activated together. Each such @lquotes@;whole@rquotes@;
+  object has its own task activation sequence, involving the activating task
+  being suspended until all the new tasks complete their activation.]}
+@end{Discussion}
 
 @Defn2{Term=[activator], Sec=(of a task)}
 @PDefn2{term=[blocked], Sec=(waiting for activations to complete)}
@@ -612,6 +640,14 @@ on some processor, due to the lack of resources.
 
 This clause has been rewritten in an attempt to improve presentation.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Adjusted the wording for activating tasks to
+  handle the case of anonymous function return objects. This was critical;
+  we don't want to be waiting for the tasks in a return object when we exit
+  the function normally.]}
+@end{DiffWord95}
 
 
 @LabeledClause{Task Dependence - Termination of Tasks}

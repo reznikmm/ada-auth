@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/04/13 06:22:20 $}
+@Comment{$Date: 2005/04/14 03:41:03 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2450,7 +2450,7 @@ the compile-time concept of completion
 defined in @RefSecNum{Completions of Declarations}.
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
 @Defn{leaving}
 @Defn{left}
 After execution of a construct or entity is complete,
@@ -2462,9 +2462,8 @@ Leaving an execution happens immediately after its completion,
 except in the case of a @i{master}:
 the execution of
 a @Chg{Version=[2],New=[body other than a @nt{package_body};
-the elaboration of a declaration other than the declaration of a package;
-the execution of an @nt{accept_statement}, a
-@nt{block_statement}, or a @nt{simple_statement};
+the elaboration of a declaration other than the declaration of a package
+or of a type; the execution of an @nt{statement};
 or the evaluation of an @nt{expression} or @nt{range} that is not part
 of an enclosing @nt{expression}, @nt{range}, or @nt{simple_statement}],
 Old=[@nt{task_body}, a @nt{block_statement},
@@ -2478,12 +2477,14 @@ complete, and before it is left.
   possibly causing anonymous controlled objects to be created,
   and we don't want those objects to escape outside the rendezvous.
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
-  @ChgAdded{Version=[2],Text=[Similarly, @nt{expression}s and @nt{simple_statement}s
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Similarly, @nt{expression}s and @nt{statement}s
   are masters so that objects created by subprogram calls (in @nt{aggregate}s,
   @nt{allocator}s for anonymous access-to-object types, and so on) are
   finalized and have their tasks awaited before the @nt{expression}s or
-  @nt{simple_statement}s is left.]}
+  @nt{statement}s is left. Note that @nt{expression}s like the @nt{condition}
+  of an @nt{if_statement} are a masters, because they are not enclosed by a
+  @nt{simple_statement}.]}
 @end{Reason}
 
 @Defn2{Term=[finalization], Sec=(of a master)}
@@ -3099,30 +3100,31 @@ the rules here refer to the task-waiting rules of Section 9.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0021],ARef=[AI95-00182-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Fixed the wording to say that anonymous
-objects aren't finalized until the object can't be used anymore.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0021],ARef=[AI95-00182-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed the wording to say that
+  anonymous objects aren't finalized until the object can't be used anymore.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0023],ARef=[AI95-00169-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Added wording to clarify what happens
-when Adjust or Finalize raises an exception; some cases had been omitted.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0023],ARef=[AI95-00169-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to clarify what
+  happens when Adjust or Finalize raises an exception; some cases had been
+  omitted.]}
 
-@ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0024],ARef=[AI95-00193-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Stated that if Adjust raises an
-exception during initialization, nothing further is required. This is
-corrected in Ada 2005 to include all kinds of assignment other than
-@nt{assignment_statement}s.],Old=[]}
+  @ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0024],ARef=[AI95-00193-01]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Stated that if Adjust raises an
+  exception during initialization, nothing further is required. This is
+  corrected in Ada 2005 to include all kinds of assignment other than
+  @nt{assignment_statement}s.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
-@Chg{Version=[2],New=[Revised the definition of master to include
-@nt{expression}s and @nt{simple_statement}s, in order to cleanly define what
-happens for tasks and controlled objects created as part of a subprogram call.
-Having do that, all of the special wording to cover those cases is
-eliminated (at least until the Ada comments start rolling in).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Revised the definition of master to include
+  @nt{expression}s and @nt{statement}s, in order to cleanly define what
+  happens for tasks and controlled objects created as part of a subprogram call.
+  Having do that, all of the special wording to cover those cases is
+  eliminated (at least until the Ada comments start rolling in).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[We define @i{finalization of the collection} here,
-so as to be able to conveniently refer to it in other rules (especially in
-@RefSec{Allocators}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
+  @ChgAdded{Version=[2],Text=[We define @i{finalization of the collection}
+  here, so as to be able to conveniently refer to it in other rules (especially
+  in @RefSec{Allocators}).]}
 @end{DiffWord95}
