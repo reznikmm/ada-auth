@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2005/03/03 06:18:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2005/05/05 00:45:42 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/03/03 06:18:24 $}
+@Comment{$Date: 2005/05/05 00:45:42 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2280,7 +2280,7 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  @nt{Pragma} Unchecked_Union is new to Ada 2005.]}
+  @nt{Pragma} Unchecked_Union is new to Ada 2006.]}
 @end{Extend95}
 
 

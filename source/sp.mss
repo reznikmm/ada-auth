@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2005/03/25 07:16:01 $ $Author: Randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2005/05/05 00:45:41 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/03/25 07:16:01 $}
+@Comment{$Date: 2005/05/05 00:45:41 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -957,7 +957,7 @@ code is executed at run time for the elaboration of entities.]}]}
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[Added wording to exclude the additional kinds
-  of types allowed in preelaborated units by Ada 2005 from the @ImplReqTitle.]}
+  of types allowed in preelaborated units by Ada 2006 from the @ImplReqTitle.]}
 @end{DiffWord95}
 
 

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/04/05 06:38:00 $}
+@Comment{$Date: 2005/05/05 00:45:34 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -990,7 +990,7 @@ Some of the more stringent requirements are moved to
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01],ARef=[AI95-00326-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Add wording to say that the
   partial and full views have the same operational and representation aspects.
-  Ada 2005 extends this to cover all views, including the incomplete view.]}
+  Ada 2006 extends this to cover all views, including the incomplete view.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed operational items
@@ -1678,7 +1678,7 @@ is likely to be supported for such objects, but not for subtypes.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
 @ChgAdded{Version=[2],Text=[For other objects, an implementation should at
-least support the alignments that supported for their
+least support the alignments supported for their
 subtype, subject to the following:]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
@@ -2498,12 +2498,16 @@ same in two different partitions.}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00270-01]}
 The following language-defined attributes are specifiable,
 at least for some of the kinds of entities to which they apply:
-Address, Size, Component_Size, Alignment, External_Tag,
-Small, Bit_Order, Storage_Pool, Storage_Size,
-@Chg{Version=[2],New=[Stream_Size, ],Old=[]}
-Write, @Chg{Version=[2],New=[],Old=[Output, ]}Read,
-@Chg{Version=[2],New=[Output, ],Old=[]}Input,
-and Machine_Radix.
+Address,
+@Chg{Version=[2],New=[],Old=[Size, Component_Size, ]}Alignment,
+@Chg{Version=[2],New=[Bit_Order, Component_Size, ],Old=[]}
+External_Tag,
+@Chg{Version=[2],New=[Input, Machine_Radix, Output, Read, Size, ],Old=[]}
+Small, @Chg{Version=[2],New=[],Old=[Bit_Order, ]}
+Storage_Pool, Storage_Size,
+@Chg{Version=[2],New=[Stream_Size, and ],Old=[]}
+Write, @Chg{Version=[2],New=[],Old=[, Output, Read,
+Input, and Machine_Radix]}.
 
 It follows from the general rules in @RefSecNum{Operational and Representation Items}
 that if one writes @lquotes@;@key[for] X'Size @key[use] Y;@rquotes@; then

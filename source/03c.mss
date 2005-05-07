@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/04/14 03:40:52 $}
+@Comment{$Date: 2005/05/05 00:45:29 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -126,7 +126,7 @@ declared in the specification of the generic unit.
 @Defn{tagged type}
 A record type or private type that has the reserved word @key(tagged)
 in its declaration is called a @i(tagged) type.@Chg{Version=[2],New=[ In
-addition, an interface type is tagged type (see @RefSecNum{Interface Types}).],Old=[]}
+addition, an interface type is a tagged type (see @RefSecNum{Interface Types}).],Old=[]}
 @Redundant[When deriving
 from a tagged type, @Chg{Version=[2],New=[as],Old=[additional components
 may be defined. As]} for any derived type,
@@ -264,7 +264,7 @@ of the generic body result in distinct tags.
     Old=[The language does not specify whether]}
     repeated elaborations of the same @nt<full_type_declaration>
     correspond to distinct tags. @Chg{Version=[2],New=[This was done so that
-    Ada 2005 implementations of tagged types could maintain representation
+    Ada 2006 implementations of tagged types could maintain representation
     compatibility with Ada 95 implementations. Only type extensions that were
     not allowed in Ada 95 require additional information with the tag.],
     Old=[In most cases, we
@@ -318,7 +318,7 @@ of the generic body result in distinct tags.
 @ChgAdded{Version=[2],Text=[    @key[type] @AdaTypeDefn{Tag_Array} @key[is array] (Positive @key[range] <>) @key[of] Tag;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00405-01]}
-@ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Interface_Ancestor_Tag} (T : Tag) @key[return] Tag_Array;]}
+@ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Interface_Ancestor_Tags} (T : Tag) @key[return] Tag_Array;]}
 
     @AdaDefn{Tag_Error} : @key[exception];
 
@@ -397,8 +397,8 @@ Wide_Expanded_Name, Wide_Wide_Expanded_Name, and External_Tag has lower bound
 1.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01]}
-The function Internal_Tag returns the tag that corresponds
-to the given external tag, or raises Tag_Error if the given string
+The function Internal_Tag returns @Chg{Version=[2],New=[a],Old=[the]} tag that
+corresponds to the given external tag, or raises Tag_Error if the given string
 is not the external tag for any specific
 type of the partition.@Chg{Version=[2],New=[ Tag_Error is also raised
 if the specific type identified is a library-level type whose tag
@@ -445,11 +445,12 @@ False.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Is_Descendant_At_Same_Level is used
-    by T'Class'Output to determine whether the item being written is at
-    the same accessibility level as T. It may be used to determine prior to
-    using T'Class'Output whether Tag_Error will be raised, and also can
-    be used in constructing a user-defined replacement for T'Class'Output.]}
+  @ChgAdded{Version=[2],Text=[Is_Descendant_At_Same_Level (or something similar
+    to it) is used by T'Class'Output to determine whether the item being
+    written is at the same accessibility level as T. It may be used to
+    determine prior to using T'Class'Output whether Tag_Error will be raised,
+    and also can be used in constructing a user-defined replacement
+    for T'Class'Output.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
@@ -886,8 +887,10 @@ If the parent is a limited formal type,
 then the actual might be nonlimited.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
-@Chg{Version=[2],New=[We use accessibility checks on @nt{allocator}s and
-@nt{return_statement}s to prevent objects from living longer than their type.],
+@Chg{Version=[2],New=[Ada 95 required the record extensions to be the
+same level as the parent type. Now we use accessibility checks on class-wide
+@nt{allocator}s and @nt{return_statement}s to prevent objects from living
+longer than their type.],
 Old=[A similar accessibility rule is not needed for
 private extensions, because in a package, the rule will apply to the
 @nt{full_type_declaration},
@@ -1333,6 +1336,7 @@ operand in a call on a dispatching operation.
 @end(Ramification)
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011],ARef=[AI95-00117-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00430-01]}
 In the declaration of a dispatching operation of a tagged type,
 everywhere a subtype of the tagged type appears as a
 subtype of the profile (see @RefSecNum(Subprogram Declarations)),
@@ -1341,8 +1345,14 @@ it shall statically match the first subtype of the tagged type.
 If the dispatching operation overrides an inherited subprogram,
 it shall be subtype conformant with the inherited subprogram.
 @Defn2{Term=[subtype conformance],Sec=(required)}
-@Chg{New=[The convention of an inherited or overriding dispatching operation is
-the convention of the corresponding primitive operation of the parent type. An
+@Chg{New=[The convention of an inherited @Chg{Version=[2],New=[],
+Old=[or overriding ]}dispatching operation is
+the convention of the corresponding primitive operation of the parent
+@Chg{Version=[2],New=[or progenitor ],Old=[]}type. @Chg{Version=[2],New=[The
+default convention of a dispatching operation that overrides an inherited
+primitive operation is the convention of the inherited operation; if the
+operation overrides multiple inherited operations, then they shall all
+have the same convention. ],Old=[]}An
 explicitly declared],Old=[A]} dispatching operation shall not be of convention
 Intrinsic.@Chg{New=[],Old=[ If a dispatching operation overrides the predefined
 equals operator, then it shall be of convention Ada @Redundant[(either
@@ -1676,7 +1686,7 @@ The concept of dispatching operations is new.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00404-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Ada 2005 requires that subprograms that are renamed or instantiated to be
+  Ada 2006 requires that subprograms that are renamed or instantiated to be
   dispatching operations have all controlling access parameters be null
   excluding. (Since Ada 95 didn't have the notion of null-excluding access
   types, it had no such rule.) This rule will require the addition of an
@@ -1700,9 +1710,11 @@ The concept of dispatching operations is new.
   was an oversight in the definition of Ada 95. (See @RefSecNum{Operations of Access Types} and
   @RefSecNum{Allocators}).]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01],ARef=[AI95-00430-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the conventions of
-  dispatching operations.]}
+  dispatching operations. This is extended in Ada 2006 to cover operations
+  inherited from progenitors, and to insure that the conventions of all
+  inherited operations are the same.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00196-01]}
   @ChgAdded{Version=[2],Text=[Clarified the wording to ensure that functions with
@@ -1846,7 +1858,7 @@ Other rules could be formulated to solve this problem,
 but the current ones seem like the simplest.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-01]}
-@ChgAdded{Version=[2],Text=[In Ada 2005, abstract primitive subprograms of
+@ChgAdded{Version=[2],Text=[In Ada 2006, abstract primitive subprograms of
 an untagged type may be used to @lquotes@;undefine@rquotes@; an operation.]}
 @end{Reason}
 
@@ -1967,7 +1979,7 @@ allowed.]
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00310-01]}
   If an abstract subprogram is not a dispatching operation of
   some tagged type, then it cannot be called at
-  all.@Chg{Version=[2],New=[ In Ada 2005, such subprograms are not
+  all.@Chg{Version=[2],New=[ In Ada 2006, such subprograms are not
   even considered by name resolution (see @RefSecNum{Subprogram Calls}).],Old=[]}
 @end{Ramification}
 
@@ -3077,7 +3089,7 @@ Access discriminants and non-controlling access parameters are no longer
 null excluding. A program which passed @key{null} to such an access
 discriminant or access parameter and expected it to raise Constraint_Error
 may fail @ChgNote{but not if the parameter is dereferenced in the subprogram or
-record }when compiled with Ada 2005. One hopes that there no such programs
+record }when compiled with Ada 2006. One hopes that there no such programs
 outside of the ACATS. (Of course, a program which actually wants to pass
 @key{null} will work, which is far more likely.)],Old=[]}
 
@@ -3100,7 +3112,7 @@ any major compiler upgrade.],Old=[]}
 The rule defining when a current instance of a limited type is considered to be
 aliased has been tightened to only apply to types which cannot become
 nonlimited. A program which attempts to take 'Access of the current instance
-of a limited type that can become nonlimited will be illegal in Ada 2005.
+of a limited type that can become nonlimited will be illegal in Ada 2006.
 While Ada 95 allowed the current instance of any limited type
 to be treated as aliased, this was inconsistently implemented in compilers,
 and was likely to not work as expected for types that are ultimately
@@ -4608,7 +4620,7 @@ while X'Last is not. See AI83-00154.
 @begin{Incompatible95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
 @Chg{Version=[2],New=[@Leading@;@Defn{incompatibilities with Ada 95} Aliased
-variables are not necessarily constrained in Ada 2005 (see
+variables are not necessarily constrained in Ada 2006 (see
 @RefSecNum{Array Types}). Therefore, a subcomponent of an aliased variable
 may disappear or change shape, and taking 'Access of such a subcomponent
 thus is illegal, while the same operation would have been legal in Ada 95.
@@ -4630,9 +4642,9 @@ legality of 'Access didn't change for them. For example:],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[   A_T : @key{aliased} T1;
-   Ptr : Acc_Int := A_T.C1'Access; -- @RI[Legal in Ada 2005, illegal in Ada 95]
+   Ptr : Acc_Int := A_T.C1'Access; -- @RI[Legal in Ada 2006, illegal in Ada 95]
    A_T := (D1 => True);            -- @RI[Raised Constraint_Error in Ada 95, but does not]
-                                   -- @RI[in Ada 2005, so Ptr becomes invalid when this]
+                                   -- @RI[in Ada 2006, so Ptr becomes invalid when this]
                                    -- @RI[is assigned.]],Old=[]}
 @end{Example}
 
@@ -4682,8 +4694,8 @@ For example:]}
 @ChgAdded{Version=[2],Text=[Value : @key{aliased} Integer := 10;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Result1 : Float := Zap (Value'access); -- @RI[Ambigious in Ada 95; resolves in Ada 2005.]
-Result2 : Float := Zap (Int_Ptr'(Value'access)); -- @RI[Resolves in Ada 95 and Ada 2005.]]}
+@ChgAdded{Version=[2],Text=[Result1 : Float := Zap (Value'access); -- @RI[Ambigious in Ada 95; resolves in Ada 2006.]
+Result2 : Float := Zap (Int_Ptr'(Value'access)); -- @RI[Resolves in Ada 95 and Ada 2006.]]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This change is upward compatible; any expression
@@ -4913,7 +4925,7 @@ with a body.
 Thus, a declaration can actually come in @i{three} parts.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@Chg{Version=[2],New=[In Ada 2005 the limited view of the package contains
+@Chg{Version=[2],New=[In Ada 2006 the limited view of the package contains
 an incomplete view of the private type, so we can have @i{four} parts now.],Old=[]}
 @end{Discussion}
 @end{Intro}

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/04/14 03:41:03 $}
+@Comment{$Date: 2005/05/05 00:45:32 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -551,7 +551,7 @@ that seemed like too much mechanism.
   and we would also have succeeded in ]}doing an assignment of a task
   object, @Chg{Version=[2],New=[],Old=[both of ]}which @Chg{Version=[2],New=[is],
   Old=[are]} supposed to be @Chg{Version=[2],New=[a no-no],Old=[no-no's]}.
-  @ChgNote{A runtime check prevents the first from being a problem in Ada 2005.}
+  @ChgNote{A runtime check prevents the first from being a problem in Ada 2006.}
 
   This rule is not needed for private extensions,
   because they inherit their limitedness from their ancestor,
@@ -1243,7 +1243,7 @@ Old=[assignment (unless the view is limited)]},
 membership tests, selected components for the selection of
 discriminants and inherited components, qualification,
 and explicit conversion.@Chg{Version=[2],New=[ Nonlimited partial views
-also provide @nt{assignment_statement}s.],Old=[]}
+also allow use of @nt{assignment_statement}s.],Old=[]}
 
 For a subtype S of a partial view, S'Size is defined
 (see @RefSecNum{Operational and Representation Attributes}).
@@ -1988,7 +1988,7 @@ of Controlled only.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A type is said to
-@i{need finalization} if:@Defn{Needs Finalization}@Defn2{Term=[type],Sec=[needs finalization]}]}
+@i{need finalization} if:@Defn{needs finalization}@Defn2{Term=[type],Sec=[needs finalization]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
@@ -3113,7 +3113,7 @@ the rules here refer to the task-waiting rules of Section 9.
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Stated that if Adjust raises an
   exception during initialization, nothing further is required. This is
-  corrected in Ada 2005 to include all kinds of assignment other than
+  corrected in Ada 2006 to include all kinds of assignment other than
   @nt{assignment_statement}s.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}

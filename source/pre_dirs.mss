@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2005/04/05 23:37:48 $ $Author: Randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2005/05/05 00:45:37 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/04/05 23:37:48 $}
+@Comment{$Date: 2005/05/05 00:45:37 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -1032,19 +1032,21 @@ Text=[Directories.Start_Search and Directories.Search should raise Use_Error
 for malformed patterns.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[For Rename, if both New_Name and Old_Name are
-simple names, and New_Name does not identify an existing external file,
-then Rename should not propagate Use_Error.]}
+@ChgAdded{Version=[2],Text=[Rename should be supported at least when both
+New_Name and Old_Name are simple names and New_Name does not identify an
+existing external file.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Directories.Rename should not raise Use_Error if New_Name and Old_Name
-are simple names and New_Name does not identify an existing file.]}]}
+Text=[Directories.Rename should be supported at least when both New_Name and
+Old_Name are simple names and New_Name does not identify an existing
+external file.]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This cannot be a requirement, since we have to
-  allow Use_Error to be raised (for instance, because the user may not have
-  permission to rename the file, even if New_Name doesn't exist and is a valid
-  name).]}
+  @ChgAdded{Version=[2],Text=[@Lquotes@;Supported@rquotes@; includes raising
+  an exception if either name is malformed, the file to rename doesn't exist,
+  insufficient permission for the operation exists, or similar problems. But
+  this advice requires implementations to document what they do, and tells
+  implementers that simply raising Use_Error isn't acceptable.]}
 @end{Discussion}
 
 @end{ImplAdvice}

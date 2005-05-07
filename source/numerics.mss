@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2005/04/05 06:38:01 $ $Author: Randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2005/05/05 00:45:37 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/04/05 06:38:01 $}
+@Comment{$Date: 2005/05/05 00:45:37 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -2539,7 +2539,7 @@ are also provided as children of Numerics.]}
 @LabeledAddedSubClause{Version=[2],Name=[Real Vectors and Matrices]}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01],ARef=[AI95-00418-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
 package Numerics.Generic_Real_Arrays has the following declaration:]}
 @begin{Example}
@@ -2568,11 +2568,14 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
    @key{function} "@key{abs}" (Right : Real_Vector)       @key{return} Real_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} "+"  (Left, Right : Real_Vector) @key{return} Real_Vector;
-   @key{function} "-"  (Left, Right : Real_Vector) @key{return} Real_Vector;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "+"   (Left, Right : Real_Vector) @key{return} Real_Vector;
+   @key{function} "-"   (Left, Right : Real_Vector) @key{return} Real_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left, Right : Real_Vector) @key{return} Real'Base;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*"   (Left, Right : Real_Vector) @key{return} Real'Base;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{abs}" (Right : Real_Vector)       @key{return} Real'Base;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Real_Vector scaling operations]]}
@@ -2730,6 +2733,35 @@ Constraint_Error is raised if Left'Length is not equal to Right'Length.]}
 @ChgAdded{Version=[2],Text=[This operation returns the inner product of Left
 and Right. Constraint_Error is raised if Left'Length is not equal to
 Right'Length. This operation involves an inner product.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "@key{abs}" (Right : Real_Vector) @key{return} Real'Base;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00418-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the L2-norm of Right (the
+square root of the inner product of the vector with itself).]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Normalization of vectors is a frequent enough
+  operation that it is useful to provide the norm as a basic operation.
+  Furthermore, implementing the norm is not entirely straightforward, because
+  the inner product might overflow while the final norm does not. An
+  implementation cannot merely return Sqrt (X * X), it has to cope with a
+  possible overflow of the inner product.]}
+@end{Discussion}
+
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[While the definition is given in terms of
+  an inner product, the norm doesn't @lquotes@;involve an inner product@rquotes@;
+  in the technical sense. The reason is that it has accuracy requirements
+  substantially different from those applicable to inner products; and that
+  cancellations cannot occur, because all the terms are positive, so there
+  is no possibility of intermediate overflow.]}
+@end{ImplNote}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2988,6 +3020,20 @@ of the absolute error of the inner product @i<X>*@i<Y> shall not exceed
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@i<g> = @i<X>'Length * Real'Machine_Radix**(1-Real'Model_Mantissa)]}
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00418-01]}
+@ChgAdded{Version=[2],Text=[For the L2-norm, no accuracy
+requirements are specified in the relaxed mode. In the strict mode the relative
+error on the norm shall not exceed @i<g> / 2.0 + 3.0 * Real'Model_Epsilon where
+@i<g> is defined as above.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is simply the combination of the error on
+  the inner product with the error on Sqrt. A first order computation would
+  lead to 2.0 * Real'Model_Epsilon above, but we are adding an extra
+  Real'Model_Epsilon to account for higher order effects.]}
+@end{Reason}
 @end{ImplReq}
 
 @begin{DocReq}
@@ -3137,7 +3183,10 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
    @key{function} "-"  (Left, Right : Complex_Vector) @key{return} Complex_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left, Right : Complex_Vector) @key{return} Complex;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*"  (Left, Right : Complex_Vector) @key{return} Complex;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{abs}"     (Right : Complex_Vector) @key{return} Complex;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Mixed Real_Vector and Complex_Vector arithmetic operations}]}
@@ -3481,6 +3530,26 @@ Right'Length.]}
 @ChgAdded{Version=[2],Text=[This operation returns the inner product of Left
 and Right. Constraint_Error is raised if Left'Length is not equal to
 Right'Length. This operation involves an inner product.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "@key{abs}" (Right : Complex_Vector) @key{return} Complex;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00418-01]}
+@ChgAdded{Version=[2],Text=[This operation returns the Hermitian L2-norm of
+Right (the square root of the inner product of the vector with its
+conjugate).]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[While the definition is given in terms of
+  an inner product, the norm doesn't @lquotes@;involve an inner product@rquotes
+  in the technical sense. The reason is that it has accuracy requirements
+  substantially different from those applicable to inner products; and that
+  cancellations cannot occur, because all the terms are positive, so there
+  is no possibility of intermediate overflow.]}
+@end{ImplNote}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3985,6 +4054,15 @@ of the absolute error of the inner product @i{X}*@i{Y} shall not exceed
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1-Real'Model_Mantissa) for two complex operands]}
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00418-01]}
+@ChgAdded{Version=[2],Text=[For the L2-norm, no accuracy requirements are
+specified in the relaxed mode. In
+the strict mode the relative error on the norm shall not
+exceed @i<g> / 2.0 + 3.0 * Real'Model_Epsilon
+where @i<g> has the definition appropriate for two complex operands.]}
+
+
 @end{ImplReq}
 
 @begin{DocReq}

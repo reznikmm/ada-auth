@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/03/22 05:53:15 $}
+@Comment{$Date: 2005/05/05 00:45:33 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1213,9 +1213,9 @@ we don't want it to apply to type extensions that appear in an instance;
 components are not overloadable.
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[If a @nt{subprogram_declaration},
-@nt{abstract_subprogram_declaration},
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03],ARef=[AI95-00397-03]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If a @nt{subprogram_declaration}
+other than a protected subprogram, @nt{abstract_subprogram_declaration},
 @nt{subprogram_body}, @nt{subprogram_body_stub},
 @nt{subprogram_renaming_declaration}, or @nt{generic_instantiation} of a
 subprogram has an @nt{overriding_indicator}, then:]}
@@ -1258,6 +1258,12 @@ additional operations are declared.]}
 @ChgAdded{Version=[2],Text=[The @LQuotes@;no lying@RQuotes@; rules are
 needed to prevent a @nt{subprogram_declaration} and @nt{subprogram_body}
 from having contradictory @nt{overriding_indicator}s.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Rules for @nt{overriding_indicator}s of task and
+protected entries and of protected subprograms are found in
+@RefSecNum{Entries and Accept Statements}
+and @RefSecNum{Protected Units and Protected Objects}, respectively.]}
 @end{Discussion}
 @end{Legality}
 
@@ -1392,7 +1398,7 @@ case where this is not true:]}
 @Chg{Version=[2],New=[@key{package} I @key{is new} G (Integer, Integer); -- @RI[Exports homographs of P.]],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{type} D @key{is new} I.T; -- @RI[Legal in Ada 95, illegal in Ada 2005.]],Old=[]}
+@Chg{Version=[2],New=[@key{type} D @key{is new} I.T; -- @RI[Legal in Ada 95, illegal in Ada 2006.]],Old=[]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This case doesn't seem worth making the rules any more
@@ -1953,7 +1959,7 @@ unconstrained nominal subtype.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Leading@;@Defn{incompatibilities with Ada 95}
 Aliased variables are not necessarily constrained in Ada
-2005 (see @RefSecNum{Array Types}). Therefore, renaming a subcomponent of
+2006 (see @RefSecNum{Array Types}). Therefore, renaming a subcomponent of
 an aliased variable is no longer necessarily safe, and thus may be illegal
 if the component may disappear or change shape, while the same renaming
 would have been legal in Ada 95. Note that most allocated
@@ -1963,8 +1969,8 @@ using the type T2 of the previous example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   AT : @key{aliased} T2;
-   C1_Ren : Integer @key{renames} AT.C1; -- @RI[Legal in Ada 2005, illegal in Ada 95]
-   AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95, but does not in Ada 2005,]
+   C1_Ren : Integer @key{renames} AT.C1; -- @RI[Legal in Ada 2006, illegal in Ada 95]
+   AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95, but does not in Ada 2006,]
                                    -- @RI[so C1_Ren becomes invalid when this is assigned.]]}
 @end{Example}
 @end{Incompatible95}
@@ -3098,11 +3104,11 @@ things like @lquotes@;any integer type.@rquotes@;
 @key{procedure} Proc (Acc : @key{access} Integer) ...
 @key{procedure} Proc (Acc : Cacc) ...
 List : Cacc := ...;
-Proc (List); -- @RI[OK in Ada 95, ambigious in Ada 2005.]]}
+Proc (List); -- @RI[OK in Ada 95, ambigious in Ada 2006.]]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If there is any code like this (such code should
-  be rare), it will be ambiguous in Ada 2005.]}
+  be rare), it will be ambiguous in Ada 2006.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -3116,14 +3122,14 @@ Proc (List); -- @RI[OK in Ada 95, ambigious in Ada 2005.]]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[We now allow the creation of
   self-referencing types via anonymous access types. This is an extension
   because in some unusual cases (in task and protected types) it will make
-  programs that were illegal in Ada 95 legal in Ada 2005. For example:]}
+  programs that were illegal in Ada 95 legal in Ada 2006. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{task type} T;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{task body} T @key{is}
-   @key{procedure} P (X : @key{access} T) @key{is} -- @RI[Illegal in Ada 95, legal in Ada 2005]
+   @key{procedure} P (X : @key{access} T) @key{is} -- @RI[Illegal in Ada 95, legal in Ada 2006]
       ...
    @key{end} P;
 @key{begin}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2005/03/18 06:37:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2005/05/05 00:45:39 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/03/18 06:37:22 $}
+@Comment{$Date: 2005/05/05 00:45:39 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -331,10 +331,12 @@ package Containers.Vectors has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{subtype} @AdaDefn{Index_Subtype} @key{is} Index_Type;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Vector} @key{is tagged private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Vector} @key{is tagged private};
+   @key{pragma} Preelaborable_Initialization(Vector);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
+   @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Vector} : @key{constant} Vector;]}
@@ -1115,7 +1117,7 @@ exception raised during the copying is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designated an element in Target. Otherwise, if
+Before is equal to No_Element or designates an element in Target. Otherwise, if
 Length(New_Item) is 0, then Insert does nothing. If Before is No_Element, then
 the call is equivalent to Insert (Container, Last_Index (Container) + 1),
 New_Item); otherwise the call is equivalent to Insert (Container, To_Index
@@ -1141,7 +1143,7 @@ New_Item); otherwise the call is equivalent to Insert (Container, To_Index
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designated an element in Target. If Before
+Before is equal to No_Element or designates an element in Target. If Before
 equals No_Element, then let @i<T> be Last_Index (Container) + 1; otherwise, let
 @i<T> be To_Index (Before). Insert (Container, @i<T>, New_Item) is called, and
 then Position is set to To_Cursor (Container, @i<T>).]}
@@ -1258,7 +1260,7 @@ empty elements in the positions starting at Before.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designated an element in Target. If Before
+Before is equal to No_Element or designates an element in Target. If Before
 equals No_Element, then let @i<T> be Last_Index (Container) + 1; otherwise, let
 @i<T> be To_Index (Before). Insert_Space (Container, @i<T>, Count) is called,
 and then Position is set to To_Cursor (Container, @i<T>).]}
@@ -1957,10 +1959,12 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
    @key{pragma} Preelaborate(Doubly_Linked_Lists);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{List} @key{is tagged private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{List} @key{is tagged private};
+   @key{pragma} Preelaborable_Initialization(List);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
+   @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_List} : @key{constant} List;]}
@@ -2367,7 +2371,7 @@ No_Element, New_Item, Count).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designated an element in Container. Otherwise,
+Before is equal to No_Element or designates an element in Container. Otherwise,
 Insert inserts Count copies of New_Item prior to the element designated by
 Before. If Before equals No_Element, the new elements are inserted after the
 last node (if any). Any exception raised during allocation of internal storage
@@ -2394,7 +2398,7 @@ is propagated, and Container is not modified.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designated an element in Container. Otherwise,
+Before is equal to No_Element or designates an element in Container. Otherwise,
 Insert allocates Count copies of New_Item, and inserts them prior to the
 element designated by Before. If Before equals No_Element, the new elements are
 inserted after the last element (if any). Position designates the first
@@ -2411,7 +2415,7 @@ storage is propagated, and Container is not modified.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designated an element in Container. Otherwise,
+Before is equal to No_Element or designates an element in Container. Otherwise,
 Insert inserts Count new elements prior to the element designated by Before. If
 Before equals No_Element, the new elements are inserted after the last node (if
 any). The new elements are initialized with any implicit initial value for any
@@ -2431,8 +2435,8 @@ propagated, and Container is not modified.]}
 Constraint_Error is propagated. If Position does not designate an element in
 Container, then Program_Error is propagated. Otherwise Delete removes (from
 Container) Count elements starting at the element designated by Position (or
-all of the elements if there are less than Count elements starting at
-Position).]}
+all of the elements starting at Position if there are fewer than Count elements
+starting at Position).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2572,7 +2576,7 @@ the nodes designated by I and J.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designated an element in Target. Otherwise, if
+Before is equal to No_Element or designates an element in Target. Otherwise, if
 Source denotes the same object as Target, the operation has no effect.
 Otherwise, Splice reorders elements such that they are removed from Source and
 moved to Target, immediately prior to Before. If Before equals No_Element, the
@@ -3537,10 +3541,12 @@ package Containers.Hashed_Maps has the following declaration:]}
    @key{pragma} Preelaborate (Hashed_Maps);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private};
+   @key{pragma} Preelaborable_Initialization(Map);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
+   @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Map} : @key{constant} Map;]}
@@ -4073,10 +4079,12 @@ package Containers.Ordered_Maps has the following declaration:]}
    @key{pragma} Preelaborate (Ordered_Maps);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private};
+   @key{pragma} Preelaborable_Initialization(Map);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
+   @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Map} : @key{constant} Map;]}
@@ -5160,7 +5168,7 @@ Key parameter is used locate an element in the set.]}
 Constraint_Error is propagated. If Position does not designate an element in
 Container, then Program_Error is propagated. Otherwise,
 Update_Element_Preserving_Key uses Key to save the key value @i<K> of the
-element designated by Position. Update_Element_Preserving_Key then calls
+element  designated by Position. Update_Element_Preserving_Key then calls
 Process.@key{all} with that element as the argument. Program_Error is
 propagated if Process.@key{all} tampers with the elements of Container. Any
 exception raised by Process.@key{all} is propagated. After Process.@key{all}
@@ -5289,10 +5297,12 @@ package Containers.Hashed_Sets has the following declaration:]}
    @key{pragma} Preelaborate (Hashed_Sets);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private};
+   @key{pragma} Preelaborable_Initialization(Set);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
+   @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Set} : @key{constant} Set;]}
@@ -5767,10 +5777,12 @@ package Containers.Ordered_Sets has the following declaration:]}
    @key{pragma} Preelaborate (Ordered_Sets);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private};
+   @key{pragma} Preelaborable_Initialization(Set);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
+   @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Set} : @key{constant} Set;]}

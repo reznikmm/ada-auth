@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2005/04/04 04:38:47 $ $Author: Randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2005/05/05 00:45:40 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/04/04 04:38:47 $}
+@Comment{$Date: 2005/05/05 00:45:40 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2356,10 +2356,10 @@ is defined for @PrefixType{a @nt{prefix} P that denotes a protected object}:]}
 @begin(description)
 @ChgAttribute{Version=[2],Kind=[AddedNormal],ChginAnnex=[T],
   Leading=<F>, Prefix=<P>, AttrName=<Priority>, ARef=[AI95-00327-01],
-  Text=[@Chg{Version=[2],New=[Denotes a non-aliased component of the enclosing
+  Text=[@Chg{Version=[2],New=[Denotes a non-aliased component of the
   protected object P. This component is of type System.Any_Priority and its
-  value is the priority of P. Reference to this attribute shall appear only
-  inside the body of P.],Old=[]}]}
+  value is the priority of P. A reference to this attribute shall appear only
+  within the body of P.],Old=[]}]}
 @EndPrefixType{}
 @end{Description}
 
@@ -2425,7 +2425,7 @@ completion of the protected action in which it is executed.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The ability to dynamically change and query the priority of a protected
-  object is new to Ada 2005.]}
+  object is new to Ada 2006.]}
 @end{Extend95}
 
 
@@ -2662,7 +2662,7 @@ Max_Protected_Entries @\Specifies the maximum number of entries per
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0076],ARef=[AI95-00067-01]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The following
-@SynI{restriction_}@nt{identifier}s are language defined:]}@Comment{Use ChgAdded so
+@SynI{restriction_}@nt{identifier} is language defined:]}@Comment{Use ChgAdded so
 we get conditional Leading.}@Chg{Version=[1],New=[],Old=[If the following restrictions
 are violated, the behavior is implementation defined.
 @IndexCheck{Storage_Check}
@@ -2774,7 +2774,7 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   @i<might> be implemented with a controlled type. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
   applies to the partition, and one of these language-defined types does not
-  have a controlled part, it will not be allowed in local objects in Ada 2005
+  have a controlled part, it will not be allowed in local objects in Ada 2006
   whereas it would be allowed in Ada 95. Such code is not portable, as other
   Ada compilers may have had a controlled part, and thus would be
   illegal under the restriction.]}

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2004/11/08 04:56:37 $}
+@Comment{$Date: 2005/05/05 00:45:31 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -546,7 +546,7 @@ Foo(2).@key{all} := Foo(1).@key{all};],Old=[]}.
 @end{Example}
 @Chg{Version=[2],New=[where NonLim is a nonlimited type and Lim is a limited
 type. The assignment is legal in Ada 95 (only the first Foo would be considered),
-and is ambiguous in Ada 2005. We make the change because limited expressions
+and is ambiguous in Ada 2006. We make the change because limited expressions
 are now allowed in all other contexts (with a similar incompatibility), and it
 would be odd if assignments had different resolution rules. Moreover, examples
 like this one are rare, as they depend on assigning into overloaded function

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2005/03/22 05:53:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2005/05/05 00:45:36 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/03/22 05:53:17 $}
+@Comment{$Date: 2005/05/05 00:45:36 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1760,7 +1760,7 @@ the user, an implementation shall support remote subprogram calls as specified.]
 implementation permission to use a different specification for System.RPC,
 it still needs to use it for remote subprogram calls, and allow the user
 to replace the body of System.RPC. It just isn't guaranteed to be portable
-to do so in Ada 2005 - an advantage which was more theoretical than real
+to do so in Ada 2006 - an advantage which was more theoretical than real
 anyway.]}
 @end{Discussion}
 @end{ImplReq}
@@ -1875,7 +1875,7 @@ of space when writing an item.]}]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   The specification of System.RPC can now be
   tailored for an implementation. If program replaces the body of System.RPC
-  with a user-defined body, it may not compile in Ada 2005 (if the
+  with a user-defined body, it may not compile in Ada 2006 (if the
   specification of System.RPC has been changed).]}
 @end{Incompatible95}
 

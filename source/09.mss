@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/04/14 03:41:05 $}
+@Comment{$Date: 2005/05/05 00:45:33 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 
@@ -205,10 +205,15 @@ Private part is defined in Section 8.
 @nt{task_definition}, a
 @nt{task_definition} without @nt{task_item}s is assumed.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01]}
-@ChgAdded{Version=[2],Text=[For a @nt{task_type_declaration}, if the first
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00419-01]}
+@ChgAdded{Version=[2],Text=[For a @nt{task_type_declaration}
+with an @nt{interface_list}, the task type
+inherits user-defined primitive subprograms from each progenitor
+type (see @RefSecNum{Interface Types}), in the same way that a derived type
+inherits user-defined primitive subprograms from its progenitor types (see
+@RefSecNum{Derived Types and Classes}). If the first
 parameter of a primitive inherited subprogram is of the task type or an access
-parameter designating he task type, and there is an @nt{entry_declaration} for
+parameter designating the task type, and there is an @nt{entry_declaration} for
 a single entry with the same identifier within the @nt{task_type_declaration},
 whose profile is type conformant with the
 prefixed view profile of inherited subprogram, the inherited subprogram is
@@ -365,8 +370,8 @@ of the unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 A task type is a limited type (see @RefSecNum(Limited Types)),
-and hence has neither @Chg{Version=[2],New=[@nt{assignment_statement}s],
-Old=[an assignment operation]} nor predefined equality operators.
+and hence @Chg{Version=[2],New=[precludes use of @nt{assignment_statement}s and],
+Old=[has neither an assignment operation nor]} nor predefined equality operators.
 If an application needs to store and exchange task identities, it
 can do so by defining an access type designating the corresponding
 task objects and by using access values for identification purposes.
@@ -454,7 +459,7 @@ because a @nt{declarative_part} can be empty.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00419-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Task types and single tasks can be derived from one or more interfaces.
   Entries of the task type can implement the primitive operations of an
@@ -923,8 +928,12 @@ unit.]
 Private part is defined in Section 8.
 @end{theproof}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01]}
-@ChgAdded{Version=[2],Text=[For a @nt{protected_type_declaration}, if the first
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00419-01]}
+@ChgAdded{Version=[2],Text=[For a @nt{protected_type_declaration}
+with an @nt{interface_list}, the protected type inherits user-defined primitive
+subprograms from each progenitor type (see @RefSecNum{Interface Types}), in the
+same way that a derived type inherits user-defined primitive subprograms from
+its progenitor types (see @RefSecNum{Derived Types and Classes}). If the first
 parameter of a primitive inherited subprogram is of the protected type or an
 access parameter designating the protected type, and there is a
 @nt{protected_operation_declaration} for a protected subprogram or single entry
@@ -1240,8 +1249,8 @@ of the unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 A protected type is a limited type (see @RefSecNum(Limited Types)),
-and hence has neither @Chg{Version=[2],New=[@nt{assignment_statement}s],
-Old=[an assignment operation]} nor predefined equality operators.
+and hence @Chg{Version=[2],New=[precludes use of @nt{assignment_statement}s and],
+Old=[has neither an assignment operation nor]} predefined equality operators.
 
 The bodies of the protected operations given in the @nt<protected_body>
 define the actions that take place upon calls to the protected operations.
@@ -1328,7 +1337,7 @@ protected units do not exist in Ada 83.
 @end{Extend83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00401-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00401-01],ARef=[AI95-00419-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Protected types and single protected objects can be derived from one or
   more interfaces. Operations declared in the protected type can implement
@@ -1752,6 +1761,15 @@ declaration.]
 @begin(TheProof)
   This follows from the BNF.
 @end(TheProof)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Text=[An @nt{overriding_indicator} is not allowed in an
+@nt{entry_declaration} that includes a @nt{discrete_subtype_definition}.]}
+@begin(Reason)
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[An entry family can never implement something,
+  so allowing an indicator is felt by the majority of the ARG to be redundant.]}
+@end(Reason)
 @end{SyntaxText}
 @end{Syntax}
 
@@ -3189,7 +3207,7 @@ environment (such as POSIX).]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}The upper bound
   of Year_Number has been changed to avoid an year 2100 problem. A program
-  which expects years past 2099 to raise Constraint_Error will fail on Ada 2005.
+  which expects years past 2099 to raise Constraint_Error will fail on Ada 2006.
   We don't expect there to be many programs which are depending on an exception
   to be raised. A program that uses Year_Number'Last as a magic number may also
   fail if values of Time are stored outside of the program.

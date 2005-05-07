@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/04/14 03:41:00 $}
+@Comment{$Date: 2005/05/05 00:45:31 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -97,24 +97,25 @@ library units (see @RefSecNum{Compilation Units - Library Units}).]
 @begin{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00395-01]}
-The sequence of characters in an @nt{operator_symbol} shall
-@Chg{Version=[2],New=[be identical, after
-conversion to upper case and removal of the surrounding quotation marks,
-to the sequence of characters for],Old=[correspond to an operator
+The sequence of characters @Chg{Version=[2],New=[(see @RefSecNum(String Literals)) ],Old=[]}in
+an @nt{operator_symbol} shall @Chg{Version=[2],New=[be identical, after
+conversion to upper case, to the characters of],Old=[correspond to an operator
 belonging to]} one of the six classes of operators
 defined in clause @RefSecNum{Operators and Expression Evaluation}
 (@Chg{Version=[2],New=[in upper case],Old=[spaces are not allowed and the
 case of letters is not significant]}).@Chg{Version=[2],New=[ Spaces are not
 allowed. One or more characters in category @nt{other_format} may be inserted
-after any @nt{graphic_character} in the @nt{operator_symbol}
-other than the surrounding quotation marks if the
-@nt{operator_symbol} is a reserved word.],Old=[]}
+after any @nt{graphic_character} in the sequence of characters of the
+@nt{operator_symbol} if the sequence of characters of the @nt{operator_symbol}
+is a reserved word.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
   @ChgAdded{Version=[2],Text=[The rule about @nt{other_format} characters is
   intended to match the one that applies to normal occurrences of the
   operators: they are allowed (and ignored) in reserved words, and disallowed
-  in compound delimiters or after or before an operator symbol.]}
+  in compound delimiters or after or before an operator symbol. Note that
+  @lquotes@;sequence of characters@rquotes@; is a technical term meaning
+  the contents of a string literals (without the surrounding quotes).]}
 @end{Reason}
 
 @end{SyntaxText}
@@ -1318,7 +1319,7 @@ Such a @nt{pragma} applies to all of the denoted entities.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
 @Chg{Version=[2],New=[@Defn{incompatibilities with Ada 83}
 A pragma Inline may not refer to a @nt{subprogram_body} outside of that
-body. The pragma can be given inside of the subprogram body. Ada 2005
+body. The pragma can be given inside of the subprogram body. Ada 2006
 adds an @ImplPermName to allow this usage for compatibility, but
 implementations do not have to allow such @nt{pragma}s.],Old=[]}
 @end{Incompatible83}

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/04/13 06:22:23 $}
+@Comment{$Date: 2005/05/05 00:45:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @LabeledClause{The Package System}
 
@@ -2264,8 +2264,13 @@ simpler run-time environments.]
 
 @PragmaSyn`@key{pragma} @prag(Restrictions)(@Syn2{restriction}{, @Syn2{restriction}});'
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00381-01]}
 @Syn{lhs=(restriction), rhs="@SynI{restriction_}@Syn2{identifier}
-    | @SynI{restriction_parameter_}@Syn2{identifier} => @Syn2{expression}"}
+    | @SynI{restriction_parameter_}@Syn2{identifier} => @Chg{Version=[2],New=[@Syn2{restriction_parameter_argument}],Old=[@Syn2{expression}]}"}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00381-01]}
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<restriction_parameter_argument>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<@Syn2{name} | @Syn2{expression}>,Old=<>}"}
 
 @end{Syntax}
 
@@ -2447,6 +2452,11 @@ use of the more efficient and safe one.
   incompatible, documenting it as such would be unnecessarily alarming -
   there should not be any programs depending on the runtime failure of
   restrictions.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+  @ChgAdded{Version=[2],Text=[The syntax of a @nt{restriction_parameter_argument}
+  has been defined to better support restriction No_Dependence (see
+  @RefSecNum{Restriction No_Dependence}).]}
 @end{DiffWord95}
 
 
@@ -2462,7 +2472,7 @@ use of the more efficient and safe one.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Dependence)}No_Dependence @\Specifies
-   a library-unit on which there is no semantic dependence.]}
+   a library unit on which there is no semantic dependence.]}
 @end{Description}
 
 @end{StaticSem}
@@ -2470,15 +2480,14 @@ use of the more efficient and safe one.
 @begin{Legality}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
-@ChgAdded{Version=[2],Text=[The @nt{expression} of the
-@nt{restriction_parameter_argument} of a No_Dependence restriction shall have
-the form of a full expanded name of a library unit.]}
+@ChgAdded{Version=[2],Text=[The @nt{restriction_parameter_argument} of a
+No_Dependence restriction shall be a @nt{name}; the @nt{name} shall have
+the form of a full expanded name of a library unit, but need not denote a unit
+present in the environment.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This expression is not resolved; it is just a
-  sequence of identifiers. There is no requirement for any of the identifiers
-  to be defined in this unit or elsewhere.]}
+  @ChgAdded{Version=[2],Text=[This @nt{name} is not resolved.]}
 @end{Ramification}
 
 @end{Legality}
@@ -2487,13 +2496,13 @@ the form of a full expanded name of a library unit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
 @ChgAdded{Version=[2],Text=[No compilation unit included in the partition shall
-depend semantically on the library unit identified by the @nt{expression}.]}
+depend semantically on the library unit identified by the @nt{name}.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[There is no requirement that the library unit
   actually exist. One possible use of the pragma is to prevent the use of
-  implementation-defined units; when the program is posted to a different
+  implementation-defined units; when the program is ported to a different
   compiler, it is perfectly reasonable that no unit with the name exist.]}
 @end{Ramification}
 
@@ -3127,7 +3136,7 @@ following conditions is true: @Defn2{Term=[available],Sec=[stream attribute]}]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The @nt{attribute_designator} is Read, Write or
+@ChgAdded{Version=[2],Text=[The @nt{attribute_designator} is Read, Write, or
 Output, and @i<T> is nonlimited.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3364,7 +3373,7 @@ execution cannot be erroneous.]}
   of calls to the underlying stream Read and Write operations may differ from
   the number determined by the canonical operations. If Ada 95 code somehow
   depended on the number of calls to Read or Write, it could fail with an
-  Ada 2005 implementation. Such code is likely to be very rare; moreover, such
+  Ada 2006 implementation. Such code is likely to be very rare; moreover, such
   code is really wrong, as the permission applies to Ada 95 as well (as it was
   a Binding Interpretation).]}
 @end{Inconsistent95}
@@ -3380,7 +3389,7 @@ execution cannot be erroneous.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01],ARef=[AI95-00195-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Limited types may have default
   constructed attributes if all of the parent and (for extensions) extension
-  components have available attributes. Ada 2005 adds the notion of
+  components have available attributes. Ada 2006 adds the notion of
   availability to patch up some holes in the Corrigendum model.]}
 @end{Extend95}
 
@@ -4212,8 +4221,8 @@ because the @nt{attribute_representation_clause} has been generalized.
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   @b<Corrigendum:> Various freezing rules were added to fix holes in the rules.
   Most importantly, implicit calls are now freezing, which make some
-  representation clauses illegal in Ada 2005 that were legal (but dubious) in
-  Ada 95. Similarly, Ada 2005 says that the primitive subprograms of a specific
+  representation clauses illegal in Ada 2006 that were legal (but dubious) in
+  Ada 95. Similarly, Ada 2006 says that the primitive subprograms of a specific
   tagged type are frozen when type is frozen, preventing dubious convention
   changes (and address clauses) after the freezing point. In both cases, the
   code is dubious and the workaround is easy.]}

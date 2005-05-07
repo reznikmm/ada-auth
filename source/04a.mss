@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/04/13 06:22:19 $}
+@Comment{$Date: 2005/05/05 00:45:30 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1205,7 +1205,7 @@ will work (see @RefSecNum{User-Defined Assignment and Finalization}).
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{incompatibilities with Ada 95}
   In Ada 95, a limited type is not considered when resolving an @nt{aggregate}.
-  Since Ada 2005 now allows limited @nt{aggregate}s, we can have
+  Since Ada 2006 now allows limited @nt{aggregate}s, we can have
   incompatibilities. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1225,11 +1225,11 @@ will work (see @RefSecNum{User-Defined Assignment and Finalization}).
 @key{procedure} P(X: Not_Lim);],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[P((Comp => 123)); -- @RI[Illegal in Ada 2005, legal in Ada 95]]}
+@ChgAdded{Version=[2],Text=[P((Comp => 123)); -- @RI[Illegal in Ada 2006, legal in Ada 95]]}
 @end{Example}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]} @ChgAdded{Version=[2],Text=[The call
-  to P is ambiguous in Ada 2005, while it would not be ambiguous in Ada 95 as
+  to P is ambiguous in Ada 2006, while it would not be ambiguous in Ada 95 as
   the @nt{aggregate} could not have a limited type. Qualifying the
   @nt{aggregate} will eliminate any ambiguity. This construction would be
   rather confusing to a maintenance programmer, so it should be avoided, and
@@ -3677,7 +3677,7 @@ Any attempt to use user-defined fixed-fixed multiplying operators
 will be ambiguous with the universal ones. The only way to use the user-defined
 operators is to fully qualify them in a prefix call. This problem was not
 documented during the design of Ada 95, and has been mitigated by
-Ada 2005.],Old=[]}
+Ada 2006.],Old=[]}
 @end{Incompatible83}
 
 @begin{Extend83}
