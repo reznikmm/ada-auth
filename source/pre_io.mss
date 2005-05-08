@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:38 $}
+@Comment{$Date: 2005/05/07 05:18:29 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2815,6 +2815,163 @@ instantiated for this type.
 @end{DiffWord95}
 
 
+@LabeledAddedSubClause{Version=[2],Name=[Input-Output for Bounded Strings]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[The package Text_IO.Bounded_IO provides
+input-output in human-readable form for Bounded_Strings.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
+package Text_IO.Bounded_IO has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} Ada.Strings.Bounded;
+@key{generic}
+   @key{with package} Bounded @key{is}
+                     @key{new} Ada.Strings.Bounded.Generic_Bounded_Length (<>);
+@key{package} Ada.Text_IO.Bounded_IO @key{is}@ChildUnit{Parent=[Ada.Text_IO],Child=[Bounded_IO]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put}
+      (File : @key{in} File_Type;
+       Item : @key{in} Bounded.Bounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put}
+      (Item : @key{in} Bounded.Bounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put_Line}
+      (File : @key{in} File_Type;
+       Item : @key{in} Bounded.Bounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Put_Line}
+      (Item : @key{in} Bounded.Bounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Get_Line}
+      (File : @key{in} File_Type)
+      @key{return} Bounded.Bounded_String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Get_Line}
+      @key{return} Bounded.Bounded_String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Get_Line}
+      (File : @key{in} File_Type; Item : @key{out} Bounded.Bounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Get_Line}
+      (Item : @key{out} Bounded.Bounded_String);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{end} Ada.Text_IO.Bounded_IO;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For an item of type
+Bounded_String, the following subprograms are provided:]}
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Put
+   (File : @key{in} File_Type;
+    Item : @key{in} Bounded.Bounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Text_IO.Put (File,
+Bounded.To_String(Item));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Put
+   (Item : @key{in} Bounded.Bounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Text_IO.Put
+(Bounded.To_String(Item));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Put_Line
+   (File : @key{in} File_Type;
+    Item : @key{in} Bounded.Bounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Text_IO.Put_Line (File,
+Bounded.To_String(Item));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Put_Line
+   (Item : @key{in} Bounded.Bounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Text_IO.Put_Line
+(Bounded.To_String(Item));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Get_Line
+   (File : @key{in} File_Type)
+   @key{return} Bounded.Bounded_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[Returns
+Bounded.To_Bounded_String(Text_IO.Get_Line(File));]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Get_Line
+   @key{return} Bounded.Bounded_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[Returns
+Bounded.To_Bounded_String(Text_IO.Get_Line);]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Get_Line
+   (File : @key{in} File_Type; Item : @key{out} Bounded.Bounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Item := Get_Line (File);]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Get_Line
+   (Item : @key{out} Bounded.Bounded_String);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[Equivalent to Item := Get_Line;]}
+@end{DescribeCode}
+@end{StaticSem}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Package Text_IO.Bounded_IO is new.]}
+@end{Extend95}
+
+
 @LabeledAddedSubClause{Version=[2],Name=[Input-Output for Unbounded Strings]}
 
 @begin{Intro}
@@ -3029,6 +3186,19 @@ Ada.Long_@!Integer_@!Wide_Text_IO,
 Ada.Float_@!Wide_Text_IO,
 Ada.Long_@!Float_@!Wide_Text_IO.]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00428-01]}
+@ChgAdded{Version=[2],Text=[
+@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Bounded_IO]}
+@ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Bounded_IO]}
+The specification of package Wide_Text_IO.Wide_Bounded_IO is the same as that
+for Text_IO.Bounded_IO, except that any occurrence of Bounded_String is
+replaced by Wide_Bounded_String, and any occurrence of package Bounded is
+replaced by Wide_Bounded. The specification of package
+Wide_Wide_Text_IO.Wide_Bounded_IO is the same as that for
+Text_IO.Bounded_IO, except that any occurrence of Bounded_String is
+replaced by Wide_Wide_Bounded_String, and any occurrence of package Bounded
+is replaced by Wide_Wide_Bounded.]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00301-01]}
 @ChgAdded{Version=[2],Text=[
 @ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Unbounded_IO]}
@@ -3058,6 +3228,10 @@ Support for Wide_Character and Wide_String I/O is new in Ada 95.
   @ChgAdded{Version=[2],Text=[Packages
   Wide_Text_IO.Unbounded_IO and Wide_Wide_Text_IO.Unbounded_IO are
   also new.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
+  @ChgAdded{Version=[2],Text=[Packages
+  Wide_Text_IO.Bounded_IO and Wide_Wide_Text_IO.Bounded_IO are new as well.]}
 @end{Extend95}
 
 
@@ -3583,7 +3757,7 @@ The implementation shall document the conditions under which
 Name_Error, Use_Error and Device_Error are propagated.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
 The conditions under which Io_Exceptions.Name_Error, Io_Exceptions.Use_Error
-and Io_Exceptions.Device_Error are propagated shall be documented.]}]}
+and Io_Exceptions.Device_Error are propagated.]}]}
 @end{DocReq}
 
 

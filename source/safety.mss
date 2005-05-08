@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.27 $ $Date: 2005/03/01 06:05:10 $ $Author: Randy $ }
+@Comment{ $Revision: 1.28 $ $Date: 2005/05/07 05:18:31 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:10 $}
+@Comment{$Date: 2005/05/07 05:18:31 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -198,8 +198,8 @@ See also @RefSecNum(Conformity of an Implementation with the Standard), and
 @ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
 Text=[Information regarding bounded errors and erroneous execution.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
-The range of effects for each bounded error and each unspecified effect
-shall be documented. If the effects of a given erroneous construct are
+The range of effects for each bounded error and each unspecified effect.
+If the effects of a given erroneous construct are
 constrained, the constraints shall be documented.]}]}
 
 @end{DocReq}
@@ -929,8 +929,7 @@ by the processor).
 Text=[Implementation-defined aspects of pragma Restrictions.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
 If a pragma Restrictions(No_Exceptions) is specified, the effects of all
-constructs where language-defined checks are still performed shall be
-documented.]}]}
+constructs where language-defined checks are still performed.]}]}
 @begin{Discussion}
 
 The documentation requirements here are quite difficult to satisfy. One
@@ -1128,22 +1127,41 @@ task activation and interrupt attachment to be changed. If the
 Partition_Elaboration_Policy defined for the partition, then the rules defined
 elsewhere in this Standard apply.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
-@ChgAdded{Version=[2],Text=[If the partition elaboration policy is Sequential,
-all task activations for library-level tasks and all interrupt handler
-attachments for library-level interrupt handlers are deferred. The deferred
-task activations and handler attachments occur after the elaboration of all
-@nt{library_item}s prior to calling the main subprogram. At this point the
-Environment task is suspended until all deferred task activations and handler
-attachments are complete.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01],ARef=[AI95-00421-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If the partition elaboration policy
+is Sequential, then task activation and interrupt attachment are performed in
+the following sequence of steps:]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
-@ChgAdded{Version=[2],Text=[If any deferred task activation fails,
-Tasking_Error is raised in the Environment task. The Environment task and all
-tasks whose activations fail are terminated. If a number of dynamic interrupt
-handler attachments for the same interrupt are deferred then the most recent
-call of Attach_Handler or Exchange_Handler determines which handler is
-attached.]}
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The activation of all library-level tasks and the
+  attachment of interrupt handlers are deferred until all library units are
+  elaborated.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The interrupt handlers are attached by the
+  environment task.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The environment task is suspended while the
+  library-level tasks are activated.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The environment task executes the main subprogram
+  (if any) concurrently with these executing tasks.]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01],ARef=[AI95-00421-01]}
+@ChgAdded{Version=[2],Text=[If several dynamic interrupt handler attachments for
+the same interrupt are deferred, then the most recent call of
+Attach_Handler or Exchange_Handler determines which handler is attached.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01],ARef=[AI95-00421-01]}
+@ChgAdded{Version=[2],Text=[If any deferred task activation fails, Tasking_Error
+is raised at the beginning of the sequence of statements of the
+body of the environment task prior to calling the
+main subprogram.]}
+
 @end{RunTime}
 
 @begin{ImplAdvice}
@@ -1167,8 +1185,17 @@ the active partition to mitigate the hazard posed by continuing to execute with
 a subset of the tasks being active.]}
 @end{ImplPerm}
 
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00421-01]}
+@ChgAdded{Version=[2],Text=[If any deferred task activation fails, the
+environment task is unable to handle the Tasking_Error exception and completes
+immediately. By contrast, if the partition elaboration policy is Concurrent,
+then this exception could be handled within a library unit.]}
+@end{Notes}
+
+
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01],ARef=[AI95-00421-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   @nt{Pragma} Partition_Elaboration_Policy is new.]}
 @end{Extend95}

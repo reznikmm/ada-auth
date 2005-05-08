@@ -1,10 +1,10 @@
 @Part(impldef, Root="ada.mss")
 
-@Comment{$Date: 2005/01/21 06:07:28 $}
+@Comment{$Date: 2005/05/07 05:18:29 $}
 @LabeledRevisedInformativeAnnex{Version=[2],New=[Summary of Documentation Requirements],Old=[Implementation-Defined Characteristics]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/impldef.mss,v $}
-@comment{$Revision: 1.15 $}
+@comment{$Revision: 1.16 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -21,7 +21,7 @@ whether implementation advice is followed. The following clauses provide
 summaries of these documentation requirements.]}
 @end{Intro}
 
-@LabeledAddedClause{Version=[2],Name=[Documentation Requirements]}
+@LabeledAddedClause{Version=[2],Name=[Specific Documentation Requirements]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

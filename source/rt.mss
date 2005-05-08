@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2005/05/05 00:45:40 $ $Author: Randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2005/05/07 05:18:30 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/05/05 00:45:40 $}
+@Comment{$Date: 2005/05/07 05:18:30 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -24,7 +24,7 @@ Text=[Values of all @MetricsTitle.]}]}@ChgNote{We're going to document the
 individual metrics sections.}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The details of the configuration used to generate the values of all
-metrics shall be documented.]}]}
+metrics.]}]}
 @begin{Reason}
 The actual values of the metrics are likely to depend on hardware
 configuration details that are variable and generally outside the control
@@ -960,7 +960,7 @@ can experience due to activity
 of the implementation (on behalf of lower priority tasks), and]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The maximum priority inversion a user task can experience from
-the implementation shall be documented.]}]}
+the implementation.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[whether execution of a task can be preempted
@@ -968,7 +968,7 @@ by the implementation processing of delay
 expirations for lower priority tasks, and if so, for how long.]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The amount of time that a task can be preempted for processing on
-behalf of lower-priority tasks shall be documented.]}]}
+behalf of lower-priority tasks.]}]}
 @end{Itemize}
 
 @end{DocReq}
@@ -1239,14 +1239,14 @@ for a single partition.]}
 @ChgAdded{Version=[2],Text=[An implementation shall document the quantum values
 supported.]}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[The quantum values supported for round robin dispatching shall be documented.]}]}
+Text=[The quantum values supported for round robin dispatching.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[An implementation shall document the accuracy with
 which it detects the exhaustion of the budget of a task.]}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The accuracy of the detection of the exhaustion of the budget of a task
-for round robin dispatching shall be documented.]}]}
+for round robin dispatching.]}]}
 
 @end{DocReq}
 
@@ -1540,7 +1540,7 @@ document any conditions that cause the completion of the setting of a task's
 deadline to be delayed later than what is specified for a single procressor.]}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Any conditions that cause the completion of the setting of a task's
-deadline to be delayed for a multiprocessor shall be documented.]}]}
+deadline to be delayed for a multiprocessor.]}]}
 @end{DocReq}
 
 @begin{Notes}
@@ -2255,7 +2255,7 @@ document any conditions that cause the completion of the setting of a task's
 priority to be delayed later than what is specified for a single processor.]}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Any conditions that cause the completion of the setting of a task's
-priority to be delayed for a multiprocessor shall be documented.]}]}
+priority to be delayed for a multiprocessor.]}]}
 @end{DocReq}
 
 @begin{Metrics}
@@ -2270,7 +2270,7 @@ calling task, and the affected task is not on any entry queue and is not
 executing a protected operation.
 @end{Itemize}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The metrics for Set_Priority shall be documented.]}]}
+Text=[The metrics for Set_Priority.]}]}
 @end{Metrics}
 
 @begin{Notes}
@@ -2409,8 +2409,7 @@ calls to the following procedures in protected object P:]}
 @end{Example}
 @end{Itemize}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The metrics for setting the priority of a protected object shall be
-documented.]}]}
+Text=[The metrics for setting the priority of a protected object.]}]}
 @end{Metrics}
 
 @begin{Notes}
@@ -2456,7 +2455,7 @@ what is specified for a single processor.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[On a multiprocessor, any conditions that
 cause the completion of an aborted construct to be delayed later than
-what is specified for a single processorshall be documented.]}]}
+what is specified for a single processor.]}]}
 @end{DocReq}
 
 @begin{Metrics}
@@ -2494,7 +2493,7 @@ part, and the point where the task continues execution immediately after
 it. The execution time of the abortable part is subtracted.
 @end{Itemize}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The metrics for aborts shall be documented.]}]}
+Text=[The metrics for aborts.]}]}
 @end{Metrics}
 
 @begin{ImplAdvice}
@@ -3054,7 +3053,7 @@ Time_Span_@!First, Time_Span_@!Last, Time_Span_@!Unit, and Tick.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The values of Time_First, Time_Last,
 Time_Span_@!First, Time_Span_@!Last, Time_Span_@!Unit, and Tick
-for package Real_Time shall be documented.]}]}
+for package Real_Time.]}]}
 
 The implementation shall document the properties of the underlying
 time base used for the clock and for type Time,
@@ -3063,7 +3062,7 @@ and any relevant aspects of the underlying hardware
 or operating system facilities used.
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The properties of the underlying
-time base used package Real_Time shall be documented.]}]}
+time base used package Real_Time.]}]}
 @begin{Discussion}
 If there is an underlying operating system,
 this might include information about which system call is used
@@ -3077,8 +3076,7 @@ with external time references, and if such synchronization exists, the sources
 of synchronization information, the frequency of synchronization, and the
 synchronization method applied.
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[Any synchronization of package Real_Time with external time references
-shall be documented.]}]}
+Text=[Any synchronization of package Real_Time with external time references.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised]}
 The implementation shall document any aspects of the @Chg{New=[], Old=[the]}
@@ -3087,7 +3085,7 @@ external environment that could interfere with the clock behavior as defined
 in this clause.
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Any aspects of the external environment that could interfere with
-package Real_Time shall be documented.]}]}
+package Real_Time.]}]}
 @begin{Discussion}
 For example, the implementation is allowed to rely on the time services of
 an underlying operating system, and this operating system clock can
@@ -3144,7 +3142,7 @@ than 64-bit arithmetic in the underlying machine instruction set.
 @end{ImplNote}
 @end{Itemize}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[The metrics for package Real_Time shall be documented.]}]}
+Text=[The metrics for package Real_Time.]}]}
 @end{Metrics}
 
 @begin{ImplPerm}
@@ -3275,8 +3273,7 @@ The implementation shall document the minimum value of the delay expression
 of a @nt{delay_relative_statement} that causes the task to actually be blocked.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The minimum value of the delay expression of a
-@nt{delay_relative_statement} that causes a task to actually be blocked shall
-be documented.]}]}
+@nt{delay_relative_statement} that causes a task to actually be blocked.]}]}
 
 The implementation shall document the minimum difference between the value of
 the delay expression of a @nt{delay_until_statement} and the value of
@@ -3286,7 +3283,7 @@ Text=[Implementation-defined aspects of @nt{delay_statement}s.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The minimum difference between the value of the delay expression of a
 @nt{delay_until_statement} and the value of Real_Time.Clock, that causes the
-task to actually be blocked shall be documented.]}]}
+task to actually be blocked.]}]}
 
 @end{DocReq}
 
@@ -3327,7 +3324,7 @@ subtracting the requested expiration time from the real time that the task
 resumes execution following this statement.
 @end{Itemize}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The metrics for delay statements shall be documented.]}]}
+Text=[The metrics for delay statements.]}]}
 @end{Metrics}
 
 @begin{Notes}
@@ -3642,7 +3639,7 @@ Text=[The upper bound on the duration of interrupt blocking caused by
 the implementation.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The upper bound on the duration of interrupt blocking caused by
-the implementation shall be documented.]}]}
+the implementation.]}]}
 
 @end{DocReq}
 
@@ -3690,7 +3687,7 @@ case where no contention (on the execution resource) exists
 @Redundant[from tasks executing on other processors].
 @end{Itemize}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The metrics for entry-less protected objects shall be documented.]}]}
+Text=[The metrics for entry-less protected objects.]}]}
 @end{Metrics}
 
 
@@ -3871,7 +3868,8 @@ language-defined library exists:]}
      (T : @key{in} CPU_Time; SC : @key{out} Seconds_Count; TS : @key{out} Time_Span);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Time_Of} (SC : Seconds_Count; TS : Time_Span) @key{return} CPU_Time;]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Time_Of} (SC : Seconds_Count;
+                     TS : Time_Span := Time_Span_Zero) @key{return} CPU_Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
@@ -3967,7 +3965,7 @@ millisecond.]}
 CPU_Time_First, CPU_Time_Last, CPU_Time_Unit, and CPU_Tick.]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The values of CPU_Time_First, CPU_Time_Last, CPU_Time_Unit, and CPU_Tick
-of package Execution_Time shall be documented.]}]}
+of package Execution_Time.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[The implementation shall document the properties of
@@ -3975,8 +3973,7 @@ the underlying mechanism used to measure execution times, such as the range of
 values supported and any relevant aspects of the underlying hardware or
 operating system facilities used.]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The properties of the mechanism used to implement package Execution_Time
-shall be documented.]}]}
+Text=[The properties of the mechanism used to implement package Execution_Time.]}]}
 
 @end{DocReq}
 
@@ -4058,7 +4055,7 @@ language-defined library exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer} (T : @key{access} Ada.Task_Identification.Task_Id) @key{is}
-      @key{limited private};]}
+      @key{tagged limited private};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer_Handler} @key{is}
@@ -4110,6 +4107,17 @@ otherwise. All Timer objects are initially cleared.
 procedure to be executed by the implementation when the timer expires. Such a
 protected procedure is called a @i<handler>.
 @PDefn2{Term=[handler],Sec=[execution timer]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Type Timer is tagged. This makes it possible to
+  share a handler between several events. In simple cases, 'Access can be used
+  to compare the parameter with a specific timer object (this works because a
+  tagged type is a by-reference type). In more complex cases, a type extension
+  of type Timer can be declared; a double type conversion can be used to access
+  the extension data. An example of how this can be done can be found for the
+  similar type Timing_Event, see @RefSecNum{Timing Events}.]}
+@end{Discussion}
 
 @end{StaticSem}
 
@@ -4252,7 +4260,7 @@ language-defined library exists:]}
 @key{package} Ada.Execution_Time.Group_Budgets @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Group_Budgets]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget} @key{is limited private};]}
+@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget} @key{is tagged limited private};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget_Handler} @key{is access}
@@ -4323,6 +4331,17 @@ object is said to be @i<set> if it is not null and @i<cleared> otherwise. The
 handler of all Group_Budget objects is initially cleared.
 @PDefn2{Term=[set],Sec=[group budget object]}
 @PDefn2{Term=[clear],Sec=[group budget object]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]} @ChgAdded{Version=[2],Text=[Type
+  Group_Budget is tagged. This makes it possible to share a handler between
+  several events. In simple cases, 'Access can be used to compare the parameter
+  with a specific group budget object (this works because a tagged type is a
+  by-reference type). In more complex cases, a type extension of type
+  Group_Budget can be declared; a double type conversion can be used to access
+  the extension data. An example of how this can be done can be found for the
+  similar type Timing_Event, see @RefSecNum{Timing Events}.]}
+@end{Discussion}
 
 @end{StaticSem}
 
@@ -4489,7 +4508,7 @@ language-defined library exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Real_Time.Timing_Events @key{is}@ChildUnit{Parent=[Ada.Real_Time],Child=[Timing_Events]}
-  @key{type} @AdaTypeDefn{Timing_Event} @key{is limited private};
+  @key{type} @AdaTypeDefn{Timing_Event} @key{is tagged limited private};
   @key{type} @AdaTypeDefn{Timing_Event_Handler}
        @key{is access protected procedure} (Event : @key{in out} Timing_Event);
   @key{procedure} @AdaSubDefn{Set_Handler} (Event    : @key{in out} Timing_Event;
@@ -4525,6 +4544,47 @@ and @i<cleared> otherwise. All Timing_Event objects are initially cleared.
 protected procedure to be executed by the implementation when the timing event
 occurs. Such a protected procedure is called a @i{handler}.
 @PDefn2{Term=[handler],Sec=[timing event]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[Type Timing_Event is tagged. This
+  makes it possible to share a handler between several events. In simple cases,
+  'Access can be used to compare the parameter with a specific timing event
+  object (this works because a tagged type is a by-reference type). In more
+  complex cases, a type extension of type Timing_Event can be declared; a
+  double type conversion can be used to access the extension data. For
+  example:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Toaster_Timing_Event @key{is new} Timing_Event @key{with record}
+   Slot : Natural;
+@key{end record};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[...]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{protected body} Toaster @key{is}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} Timer(Event : @key{in out} Timing_Event) @key{is}
+   @key{begin}
+      Pop_Up_Toast (Toaster_Timing_Event(Timing_Event'Class(Event)).Slot);
+   @key{end} Timer;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   ...
+@key{end} Toaster;]}
+@end{Example}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The extra conversion to the class-wide type
+  is necessary to make the conversions legal. While this usage is clearly
+  ugly, we think that the need for this sort of usage will be rare, so
+  we can live with it. It's certainly better than having no way to associate
+  data with an event.]}
+@end{Discussion}
 
 @end{StaticSem}
 
@@ -4630,7 +4690,7 @@ executed and the time specified when the event was set.]}
 
 @end{Itemize}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The metrics for timing events shall be documented.]}]}
+Text=[The metrics for timing events.]}]}
 @end{Metrics}
 
 @begin{ImplAdvice}

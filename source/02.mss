@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:26 $}
+@Comment{$Date: 2005/05/07 05:18:21 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -189,6 +189,14 @@ Old=[One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9]}.
 @ChgAdded{Version=[2],Text=[@Defn{number_letter}@nt{number_letter}@\Any
 character whose General Category is defined to be @lquotes@;Number, Letter@rquotes@;.]}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@Defn{punctuation_connector}@nt{punctuation_connector}@\Any
+character whose General Category is defined to be @lquotes@;Punctuation, Connector@rquotes@;.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgAdded{Version=[2],Text=[@Defn{other_format}@nt{other_format}@\Any
+character whose General Category is defined to be @lquotes@;Other, Format@rquotes@;.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Chg{Version=[2],New=[@Defn{separator_space}@nt<separator_space>],
 Old=[@Defn{space_character}@nt{space_character}]}@\@Chg{Version=[2],New=[Any
@@ -236,20 +244,12 @@ to be @lquotes@;Other, Control@rquotes@;, and which is not defined to be a
 @nt<format_effector>.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{other_format}@nt{other_format}@\Any
-character whose General Category is defined to be @lquotes@;Other, Format@rquotes@;.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[@Defn{other_private_use}@nt{other_private_use}@\Any
 character whose General Category is defined to be @lquotes@;Other, Private Use@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[@Defn{other_surrogate}@nt{other_surrogate}@\Any
 character whose General Category is defined to be @lquotes@;Other, Surrogate@rquotes@;.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{punctuation_connector}@nt{punctuation_connector}@\Any
-character whose General Category is defined to be @lquotes@;Punctuation, Connector@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @Chg{Version=[2],New=[@Defn{graphic_character}@nt{graphic_character}],
@@ -761,6 +761,7 @@ rhs="@Chg{Version=[2],New=<
      @Syn2{mark_non_spacing}
    | @Syn2{mark_spacing_combining}
    | @Syn2{number_decimal_digit}
+   | @Syn2{punctuation_connector}
    | @Syn2{other_format}>,Old=<>}"}
 
 @begin{SyntaxText}

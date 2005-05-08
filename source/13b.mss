@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:35 $}
+@Comment{$Date: 2005/05/07 05:18:27 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @LabeledClause{The Package System}
 
@@ -1587,9 +1587,9 @@ and how storage is allocated by standard storage pools.
 Text=[Implementation-defined aspects of storage pools.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
 The set of values that a user-defined Allocate procedure needs
-to accept for the Alignment parameter shall be documented.
+to accept for the Alignment parameter.
 How the standard storage pool is chosen, and how storage is allocated
-by standard storage pools shall be documented.]}]}
+by standard storage pools.]}]}
 @end{DocReq}
 
 @begin{ImplAdvice}
@@ -1658,12 +1658,13 @@ at the point of an allocator for the type, and be reclaimed when
 the designated object becomes inaccessible.]}
 
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@ChgAdded{Version=[2],Text=[If the @nt{allocator} is initializing an access
-discriminant of an object of a limited type, and the discriminant is itself
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[If the @nt{allocator} is defining a
+coextension (see @RefSecNum{Operations of Access Types}) of an object of a
+limited type, and the discriminant is itself
 a subcomponent of an object being created by an outer @nt{allocator}, then
 the storage pool used for the outer @nt{allocator} should also be used for
-the @nt{allocator} initializing the access discriminant;]}
+the coextension;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
 @ChgAdded{Version=[2],Text=[Otherwise, the storage pool should be created at
@@ -1855,9 +1856,9 @@ objects incorrectly by missing various cases.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
   these are representation attributes.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added wording to clarify that an @nt{allocator}
-  for an access discriminant nested inside an outer @nt{allocator} shares
+  for a coextension nested inside an outer @nt{allocator} shares
   the pool with the outer @nt{allocator}. (Why this is a good idea is unclear
   to this writer.)]}
 @end{DiffWord95}
@@ -1948,10 +1949,15 @@ After executing Free(X), the value of X is @key{null}.
 
 Free(X), when X is already equal to @key{null}, has no effect.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 Free(X), when X is not equal to @key{null} first
-performs finalization, as described in
-@RefSecNum{User-Defined Assignment and Finalization}.
-It then deallocates the storage occupied by the object designated by X.
+performs finalization@Chg{Version=[2],New=[ of the object designated by X (and
+any coextensions of the object @em see @RefSecNum{Operations of Access Types}],
+Old=[]}, as described in
+@Chg{Version=[2],New=[@RefSecNum{Completion and Finalization}],
+Old=[@RefSecNum{User-Defined Assignment and Finalization}]}.
+It then deallocates the storage occupied by the object designated by
+X@Chg{Version=[2],New=[ (and any coextensions)],Old=[]}.
 If the storage pool is a user-defined object, then
 the storage is deallocated by calling Deallocate,
 passing @i[access_to_@!variable_@!subtype_name]'Storage_Pool as the Pool parameter.
@@ -1975,11 +1981,12 @@ or it might deallocate @i{y} and then @i{x}.
 @end{Ramification}
 @end{Enumerate}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 @IndexSee{Term=[freed],See=(nonexistent)}
 @Defn{nonexistent}
 After Free(X), the object designated by X, and any
-subcomponents thereof, no longer exist;
-their storage can be reused for other purposes.
+subcomponents @Chg{Version=[2],New=[(and coextensions) ],Old=[]}thereof, no
+longer exist; their storage can be reused for other purposes.
 @end{RunTime}
 
 @begin{Bounded}
@@ -2039,21 +2046,6 @@ since we do not how much storage is used by a given pool element,
 nor whether fragmentation can occur.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00162-01]}
-@ChgAdded{Version=[2],Text=[If the object being reclaimed has an access
-discriminant which designates an object which was created by an @nt{allocator}
-of the (anonymous) type of the access discriminant, then the designated object
-should also be reclaimed.]}
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[If an object being reclaimed by an instance of Unchecked_Deallocation
-has an access discriminant which designates an object which was created by an
-@nt{allocator} of the access discriminant, then the designated object should
-also be reclaimed.]}]}
-@begin{Discussion}
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[The storage pool for access discriminant should
-have been the same as that of the reclaimed object.]}
-@end{Discussion}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -2066,10 +2058,10 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
 @end{Notes}
 
 @begin{DiffWord95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
-  @ChgAdded{Version=[2],Text=[Added @ImplAdviceTitle that any anonymous
-  access discriminant objects that were allocated at the same time as a
-  deallocated object also are deallocated.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[The rules for coextensions are clarified
+  (mainly by adding that term). In theory, this reflects no change from
+  Ada 95 (coextensions existed in Ada 95, they just didn't have a name).]}
 @end{DiffWord95}
 
 

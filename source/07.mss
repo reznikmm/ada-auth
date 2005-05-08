@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:32 $}
+@Comment{$Date: 2005/05/07 05:18:26 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1677,6 +1677,36 @@ is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
 
 @end(itemize)
 
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[A derived type can become nonlimited if
+  @key{limited} does not appear and the derivation
+  takes place in the visible part of a child package,
+  and the parent type is nonlimited as viewed from the
+  private part of the child package.]}
+@end{Honest}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[We considered a rule where limitedness was always
+  inherited from the parent for derived types, but in the case of a type whose
+  parent is an interface, this meant that the first interface is treated
+  differently than other interfaces. It also would have forced users to declare
+  dummy nonlimited interfaces just to get the limitedness right. We also
+  considered a syntax like @key{not limited} to specify nonlimitedness when the
+  parent was limited, but that was unsavory. The rule given is more uniform and
+  simpler to understand.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[The rules for interfaces are unsymmetrical, but
+  the language is not: if the parent interface is limited, the presence of the
+  word @key{limited} determines the limitedness, and nonlimited progenitors are
+  illegal by the rules in @RefSecNum{Interface Types}. If the parent interface
+  is nonlimited, the word @key{limited} is illegal by the rules in
+  @RefSecNum{Derived Types and Classes}. The net effect is that the order of
+  the interfaces doesn't matter.]}
+@end{Reason}
+
+
 @Defn{nonlimited type}
 Otherwise, the type is nonlimited.
 
@@ -2554,6 +2584,7 @@ For the @i{finalization} of an object:
   If the object is of a protected type, the actions defined in
   @RefSecNum{Protected Units and Protected Objects} are performed;
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
   If the object is of a composite type, then after performing the
   above actions, if any, every component of the object
   is finalized in an arbitrary order, except as follows:
@@ -2562,12 +2593,19 @@ For the @i{finalization} of an object:
   expression, this component is finalized before any components that
   do not have such discriminants; for an object with several components
   with such a discriminant, they are finalized in the
-  reverse of the order of their @nt<component_declaration>s.
+  reverse of the order of their
+  @nt<component_declaration>s@Chg{Version=[2],New=[;],Old=[.]}
   @begin{Reason}
     This allows the finalization of a component with an access discriminant
     to refer to other components of the enclosing object prior to
     their being finalized.
   @end{Reason}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[If the object has coextensions (see
+  @RefSecNum{Operations of Access Types}), each coextension is
+  finalized after the object whose access discriminant designates it.]}
+
 @end{Itemize}
 
 @PDefn2{Term=[execution], Sec=(instance of Unchecked_Deallocation)}
@@ -3127,4 +3165,10 @@ the rules here refer to the task-waiting rules of Section 9.
   @ChgAdded{Version=[2],Text=[We define @i{finalization of the collection}
   here, so as to be able to conveniently refer to it in other rules (especially
   in @RefSec{Allocators}).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that a coextension is finalized at
+  the same time as the outer object. (This was intended for Ada 95, but since
+  the concept did not have a name, it was overlooked.)]}
+
 @end{DiffWord95}

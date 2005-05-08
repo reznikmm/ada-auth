@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/03/03 06:18:24 $}
+@Comment{$Date: 2005/05/07 05:18:32 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -495,14 +495,13 @@ the same as for calling Current_Task from an entry body.
 The implementation shall document to which interrupts a
 task entry may be attached.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The interrupts to which a task entry may be attached shall be documented.]}]}
+Text=[The interrupts to which a task entry may be attached.]}]}
 
 The implementation shall document whether the invocation of an interrupt entry
 has the effect of an ordinary entry call, conditional call, or a timed call,
 and whether the effect varies in the presence of pending interrupts.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The type of entry call invoked for an interrupt entry shall be
-documented.]}]}
+Text=[The type of entry call invoked for an interrupt entry.]}]}
 
 @end{DocReq}
 

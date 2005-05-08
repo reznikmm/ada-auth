@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2005/05/05 00:45:36 $ $Author: Randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2005/05/07 05:18:28 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/05/05 00:45:36 $}
+@Comment{$Date: 2005/05/07 05:18:28 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -585,9 +585,10 @@ is also a remote access type.]}
 remote access-to-subprogram type:
 @begin{Itemize}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00431-01]}
 A value of a remote access-to-subprogram type
-shall be converted only to another (subtype-conformant) remote
-access-to-subprogram type;
+shall be converted only to @Chg{Version=[2],New=[or from ],Old=[]}another
+(subtype-conformant) remote access-to-subprogram type;
 
 The @nt<prefix> of an Access @nt<attribute_reference> that yields
 a value of a remote access-to-subprogram type shall statically denote a
@@ -675,6 +676,11 @@ indirection.
   @ChgAdded{Version=[2],Text=[Defined Storage_Size to be 0 for
   remote access-to-class-wide types, rather than having it undefined. This
   eliminates issues with pure units requiring a defined storage size.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00431-01]}
+  @ChgAdded{Version=[2],Text=[Corrected the wording so that a value of a local
+  access-to-subprogram type cannot be converted to a remote
+  access-to-subprogram type, as intended (and required by the ACATS).]}
 @end{DiffWord95}
 
 
@@ -1775,7 +1781,7 @@ well, together with the mechanisms to configure it (if this is supported).
 Text=[Implementation-defined aspects of the PCS.]}]}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Whether the RPC-receiver is invoked from concurrent tasks, and if so,
-the number of such tasks shall be documented.]}]}
+the number of such tasks.]}]}
 
 @end{DocReq}
 

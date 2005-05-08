@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:29 $}
+@Comment{$Date: 2005/05/07 05:18:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -707,7 +707,7 @@ Ada.Tags may raise Tag_Error if no specific type
 corresponding to the tag@Chg{Version=[2],New=[ or external tag],Old=[]} passed
 as a parameter exists in the partition at the time the function is called.
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-01],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
 In most implementations,
 repeated elaborations of the same@Chg{Version=[2],New=[ non-extension],Old=[]}
 @nt{type_declaration} will all produce the same tag.
@@ -718,8 +718,8 @@ However, some implementations might create a new tag value at run time
 for each elaboration of a @nt{type_declaration}.@Chg{Version=[2],New=[ (This is
 required if the type is derived from a type at a shallower level.)],Old=[]}
 In that case, Tag_Error could also be raised if the created type
-longer exists because the subprogram containing it has returned,
-for example.
+no longer exists because the subprogram
+containing it has returned, for example.
 We don't require the latter behavior@Chg{Version=[2],New=[ for non-library-level
 types],Old=[]}; hence the word @lquotes@;may@rquotes@; in this rule.
 @end{Reason}
@@ -2226,6 +2226,11 @@ ancestors.]]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<interface_type_definition>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
     [@key{limited} | @key{task} | @key{protected} | @key{synchronized}] @key{interface} [@key{and} @Syn2{interface_list}]>,Old=<>}"}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00419-01]}
+@Syn{lhs=<@Chg{Version=[2],New=<interface_list>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<@SynI{interface_}@Syn2{subtype_mark} {@key{and} @SynI{interface_}@Syn2{subtype_mark}}>,Old=<>}"}
+
 @end{Syntax}
 
 @begin{StaticSem}
@@ -2277,13 +2282,21 @@ synchronized interfaces.]}
 derived from interfaces.]}
 @end{TheProof}
 
-
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @Chg{Version=[2],New=[@Redundant[An interface type has no components.]],Old=[]}
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
    @ChgAdded{Version=[2],Text=[This follows from the syntax.]}
 @end{TheProof}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+@ChgAdded{Version=[2],Text=[@Defn{progenitor subtype}@Defn{progenitor type}
+An @Syni(interface_)@nt{subtype_mark} in an @nt{interface_list} names a
+@i(progenitor subtype); its type is the @i(progenitor type).
+An interface type inherits user-defined primitive subprograms from each
+progenitor type in the same way that a derived type inherits user-defined
+primitive subprograms from its progenitor types
+(see @RefSecNum{Derived Types and Classes}).]}
 
 @end{StaticSem}
 

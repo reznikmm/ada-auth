@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/05/05 00:45:39 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/05/07 05:18:30 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:39 $}
+@Comment{$Date: 2005/05/07 05:18:30 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -706,7 +706,7 @@ periodicity is unobservable in practice can be described in such terms, without
 giving a numerical bound.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[The
 algorithm used for random number generation, including a description of its
-period, shall be documented.]}]}
+period.]}]}
 
 The implementation also shall document the minimum time interval between calls
 to the time-dependent Reset procedure that are guaranteed to initiate
@@ -719,7 +719,7 @@ different random number sequences.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[The
 minimum time interval between
 calls to the time-dependent Reset procedure that is guaranteed to initiate
-different random number sequences shall be documented.]}]}
+different random number sequences.]}]}
 @end{DocReq}
 
 @begin{ImplAdvice}

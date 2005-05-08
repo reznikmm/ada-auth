@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:27 $}
+@Comment{$Date: 2005/05/07 05:18:22 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1375,7 +1375,9 @@ All of the following are objects:
   the result of dereferencing an
   access-to-object value (see @RefSecNum{Names});
 
-  the result of evaluating a @nt<function_call> (or the equivalent
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+  the @Chg{Version=[2],New=[return object created as the ],Old=[]}result
+  of evaluating a @nt<function_call> (or the equivalent
   operator invocation @em see @RefSecNum{Overloading of Operators});
 
   the result of evaluating an @nt<aggregate>;
@@ -1554,6 +1556,12 @@ is no need to mention it here in the definition of read and update.
 Reading and updating now includes the case of evaluating or
 assigning to an enclosing object.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that the return object is the object
+  created by a function call.]}
+@end{DiffWord95}
 
 @LabeledSubClause{Object Declarations}
 
@@ -2159,8 +2167,8 @@ it seems simpler to say that the elaboration has no effect.
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01],ARef=[AI95-00419-01]}
 @Defn{derived type}
-A @nt<derived_type_definition> defines a new @Chg{Version=[2],
-New=[@i{derived type}],Old=[type]} (and its first subtype)
+A @nt<derived_type_definition> defines a @Chg{Version=[2],
+New=[@i{derived type}],Old=[new type]} (and its first subtype)
 whose characteristics are @i(derived) from those of a
 @Chg{Version=[2],New=[parent type, and possibly from progenitor types],
 Old=[@i(parent type)]}.
@@ -2176,28 +2184,21 @@ Old=[@i(parent type)]}.
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Syn{lhs=<@Chg{Version=[2],New=<interface_list>,Old=<>}>,
-rhs="@Chg{Version=[2],New=<@SynI{interface_}@Syn2{subtype_mark} {@key{and} @SynI{interface_}@Syn2{subtype_mark}}>,Old=<>}"}
-
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01]}
 @Syn{lhs=<derived_type_definition>,rhs="[@Chg{Version=[2],New=<
     >,Old=<>}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited}] >,Old=<>}@key{new} @SynI{parent_}@Syn2{subtype_indication} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}] >,Old=<>}@Syn2{record_extension_part}]"}
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00419-01]}
 @Defn{parent subtype}
 @Defn{parent type}
-@Chg{Version=[2],New=[@Defn{progenitor subtype}@Defn{progenitor type}
-An @Syni(interface_)@nt{subtype_mark} in an @nt{interface_list} names a
-@i(progenitor subtype); its type is the @i(progenitor type). ],Old=[]}
 The @Syni(parent_)@nt<subtype_indication> defines the @i(parent subtype);
 its type is the @Chg{Version=[2],New=[@i(parent type)],Old=[parent type]}.
+@Chg{Version=[2],New=[The @nt{interface_list} defines the progenitor types
+(see @RefSecNum{Interface Types}). A derived type
+has one parent type and zero or more progenitor types.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
-@ChgAdded{Version=[2],Text=[A derived type
-has one parent type and zero or more progenitor types.]}
 
 A type shall be completely defined
 (see @RefSecNum(Completions of Declarations))
@@ -2407,37 +2408,18 @@ following the parent @nt<subtype_indication>.
   and subtype as a discriminant of the parent type.
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
-The derived type is limited if @Chg{Version=[2],New=[the parent is a limited
-type that is not an interface type, or if the reserved word @key{limited}
-appears.],Old=[and only if the parent type is limited]}.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00419-01]}
+@ChgDeleted{Version=[2],Text=[The derived type is limited if and
+only if the parent type is limited]}.
+@ChgNote{This rule is normatively in 7.5, and we don't want it scattered
+everywhere.}
 @begin{Honest}
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
-  The derived type can become nonlimited if @Chg{Version=[2],New=[@key{limited}
-  does not appear and ],Old=[]}the derivation
-  takes place in the visible part of a child package,
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00419-01]}
+  @ChgDeleted{Version=[2],Text=[The derived type can become nonlimited if
+  the derivation takes place in the visible part of a child package,
   and the parent type is nonlimited as viewed from the
-  private part of the child package @em see @RefSecNum(Limited Types).
+  private part of the child package @em see @RefSecNum(Limited Types).]}
 @end{Honest}
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
-  @ChgAdded{Version=[2],Text=[We considered a rule where limitedness was always
-  inherited from the parent, but in the case of a type whose parent is an
-  interface, this meant that the first interface was more equal than other
-  interfaces. It also would have forced users to declare dummy nonlimited
-  interfaces just to get the limitedness right. We also considered a syntax
-  like @key{not limited} to specify nonlimitedness when the parent was limited,
-  but that was unsavory. The rule given is more uniform and simpler to
-  understand.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
-  @ChgAdded{Version=[2],Text=[ The rules are unsymmetrical, but the language is
-  not: if the parent interface is limited, the presence of the word
-  @key{limited} determines the limitedness, and nonlimited progenitors are
-  illegal by the rules in @RefSecNum{Interface Types}. If the parent interface
-  is nonlimited, the word @key{limited} is illegal by the rules in this
-  clause. The net effect is that the order of the interfaces doesn't matter.]}
-@end{Reason}
 
 @Redundant[For each predefined operator of the parent type,
 there is a corresponding predefined operator of the derived type.]
@@ -2699,7 +2681,7 @@ type, the type is abstract (see @RefSecNum{Abstract Types and Subprograms}).
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
 @ChgAdded{Version=[2],Text=[An interface type which has a progenitor type
-@lquotes@;is derived from@rquotes@; that type, and therefore is a derived type.
+@lquotes@;is derived from@rquotes@; that type.
 A @nt{derived_type_definition}, however, never defines an interface type.]}
 
 @end{Notes}

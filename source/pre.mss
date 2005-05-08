@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2005/04/05 06:38:02 $}
+@Comment{$Date: 2005/05/07 05:18:29 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.25 $}
+@comment{$Revision: 1.26 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -42,11 +42,11 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Doubly_Linked_Lists @em @RefSecNum{The Package Containers.Doubly_Linked_Lists}
 @\@\@\Generic_Array_Sort @em @RefSecNum{Array Sorting}
 @\@\@\Generic_Constrained_Array_Sort
-@\@\@\@\@\@\@@em @RefSecNum{Array Sorting}
+@\@\@\@\@\@\@em @RefSecNum{Array Sorting}
 @\@\@\Hashed_Maps @em @RefSecNum{The Package Containers.Hashed_Maps}
 @\@\@\Hashed_Sets @em @RefSecNum{The Package Containers.Hashed_Sets}
 @\@\@\Indefinite_Doubly_Linked_Lists
-@\@\@\@\@\@\@@em @RefSecNum{The Package Containers.Indefinite_Doubly_Linked_Lists}
+@\@\@\@\@\@\@em @RefSecNum{The Package Containers.Indefinite_Doubly_Linked_Lists}
 @\@\@\Indefinite_Hashed_Maps @em @RefSecNum{The Package Containers.Indefinite_Hashed_Maps}
 @\@\@\Indefinite_Hashed_Sets @em @RefSecNum{The Package Containers.Indefinite_Hashed_Sets}
 @\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Package Containers.Indefinite_Ordered_Maps}

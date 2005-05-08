@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:30 $}
+@Comment{$Date: 2005/05/07 05:18:24 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2853,15 +2853,30 @@ scalar type @i(T), and for every discrete array type
 @end{StaticSem}
 
 @begin{Resolution}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00420-01]}
 @ChgAdded{Version=[2],Text=[At least one of the operands of the equality
-operators for @i<universal_access> shall be of a specific anonymous access type.]}
+operators for @i<universal_access> shall be of a specific anonymous access type.
+These equality operators shall not be used if either operand is of a type whose
+designated type @i<D> has a user-defined primitive equality operator with
+result type Boolean, that is declared immediately within the same list of
+declarations as @i<D>, and at least one of whose operands is an access
+parameter also with designated type @i<D>, unless the predefined equality
+operator is identified using an expanded name with prefix denoting the package
+Standard.]}
+
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[This prevents compatibility problems by insuring that
-these operators are not used for named access types. Also, universal access
-types do not count for the purposes of this rule. Otherwise, equality
-expressions like (X = @key{null}) would be ambiguous for normal access types.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The first sentence prevents compatibility
+  problems by insuring that these operators are not used for named access
+  types. Also, universal access types do not count for the purposes of this
+  rule. Otherwise, equality expressions like (X = @key{null}) would be
+  ambiguous for normal access types.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The rest of the rule makes it possible to
+  call user-defined "=" operators (they'd be hidden otherwise), and to write
+  user-defined "=" operations (by making it possible to see the universal
+  operator using the Standard prefix.]}
 @end{Reason}
 @end{Resolution}
 
@@ -3203,7 +3218,7 @@ We have changed the term @lquotes@;catenate@rquotes@; to @lquotes@;concatenate@r
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00420-01]}
 @Chg{Version=[2],New=[@Defn{extensions to Ada 95}The @i{universal_access}
 equality operators are new. They provide equality operations (most importantly,
 testing against @key{null}) for anonymous access types.],Old=[]}
@@ -3517,7 +3532,7 @@ any fixed point type.
 @end{StaticSem}
 
 @begin{Resolution}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00364-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00364-01],ARef=[AI95-00420-01]}
 @ChgAdded{Version=[2],Text=[The above two fixed-fixed multiplying operators shall
 not be used in a context where the expected type for the result is itself
 @i(universal_fixed) @Redundant[@em the context has to identify some other
@@ -3526,7 +3541,9 @@ implicitly]. An explicit conversion is required on the result when using the
 above fixed-fixed multiplication operator when either operand is of a type
 having a user-defined primitive multiplication operator declared immediately
 within the same list of declarations as the type and with both formal
-parameters of a fixed-point type. A corresponding requirement applies to
+parameters of a fixed-point type, unless the predefined universal
+operator is prefixed using an expanded name with the @nt{prefix} denoting
+the package Standard. A corresponding requirement applies to
 the universal fixed-fixed division operator.]}
 
 @begin(Discussion)
@@ -3547,10 +3564,12 @@ are all of different fixed point types, since the expected type
 for the result of the multiplication is the type of X, which is necessarily
 not @i(universal_fixed).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00364-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00364-01],ARef=[AI95-00420-01]}
 @ChgAdded{Version=[2],Text=[We have made these into Name Resolution rules to
 ensure that user-defined primitive fixed-fixed operators are not made unusable
-due to the presence of these universal fixed-fixed operators.]}
+due to the presence of these universal fixed-fixed operators. But we do allow these
+operators to be used if prefixed by package Standard, so that they can be
+used in the definitions of user-defined operators.]}
 @end(Discussion)
 @end{Resolution}
 
@@ -3670,7 +3689,7 @@ G : Fraction := 0.5;
 @end{Examples}
 
 @begin{Incompatible83}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00364-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00364-01],ARef=[AI95-00420-01]}
 @Chg{Version=[2],New=[@Defn{incompatibilities with Ada 83}The universal
 fixed-fixed multiplying operators are now directly available (see below).
 Any attempt to use user-defined fixed-fixed multiplying operators

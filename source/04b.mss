@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:31 $}
+@Comment{$Date: 2005/05/07 05:18:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.9 $}
+@Comment{$Revision: 1.10 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1345,7 +1345,8 @@ and assigned to the object.
 @PDefn2{Term=[implicit subtype conversion],Sec=(initialization expression of allocator)}
 @Chg{Version=[2],New=[If the designated type of the type of the @nt{allocator}
 is class-wide, then a check is made that the accessibility level of the type
-identified by the tag of the value of the @nt{qualified_expression} is not
+determined by the @nt{subtype_indication}, or by the tag of the value of the
+@nt{qualified_expression}, is not
 deeper than that of the type of the @nt{allocator}. Program_Error is raised
 if this check fails.@IndexCheck{Accessibility_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}
