@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:27 $}
+@Comment{$Date: 2005/05/08 05:56:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @LabeledClause{The Package System}
 
@@ -737,24 +737,46 @@ The representation of S is a representation of
 an object of the target subtype.
 @end{Itemize}
 
-Otherwise, the effect is implementation defined;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00426-01]}
+Otherwise, @Chg{Version=[2],New=[if the result type is scalar, the result
+of the function is implementation defined, and can have an invalid
+representation (see @RefSecNum{Data Validity}).
+If the result type is non-scalar, ],Old=[]}the effect is implementation defined;
 in particular, the result can be abnormal
 (see @RefSecNum{Data Validity}).
+
+@ChgImplDef{Version=[2],Kind=[Added],Text=[@Chg{Version=[2],New=[The result
+of unchecked conversion for instances with scalar result types whose
+result is not defined by the language.],Old=[]}]}
 @ChgImplDef{Version=[2],Kind=[Revised],Text=[The effect of unchecked
 conversion@Chg{Version=[2],New=[ for instances
-whose effect is not defined by the language],Old=[]}.]}
+with non-scalar result types whose effect is not defined by
+the language],Old=[]}.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00426-01]}
+  @ChgAdded{Version=[2],Text=[Note the difference between these sentences;
+  the first only says that the bits returned are implementation defined, while
+  the latter allows any effect. The difference is because scalar objects should
+  never be abnormal unless their assignment was disrupted or if they are a
+  subcomponent of an abnormal composite object. Neither exception applies to
+  instances of Unchecked_Conversion.]}
+@end{Reason}
 @begin{Ramification}
-Whenever unchecked conversions are used, it is the programmer's
-responsibility to ensure that these conversions maintain the properties
-that are guaranteed by the language for objects of the target type.
-This requires the user to understand the underlying run-time model of
-the implementation.
-The execution of a program that violates these properties by means of
-unchecked conversions is erroneous.
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00426-01]}
+  Whenever unchecked conversions are used, it is the programmer's
+  responsibility to ensure that these conversions maintain the properties
+  that are guaranteed by the language for objects of the target type.
+  @Chg{Version=[2],New=[For non-scalar types, this],Old=[This]} requires the
+  user to understand the underlying run-time model of  the implementation.
+  The execution of a program that violates these properties by means of
+  unchecked conversions @Chg{Version=[2],New=[returning a non-scalar type ],
+  Old=[]}is erroneous.@Chg{Version=[2],New=[ Properties of scalar types can
+  be checked by using the Valid attribute (see @RefSecNum{The Valid Attribute});
+  programs can avoid violating properties of the type (and erroneous
+  execution) by careful use of this attribute.],Old=[]}
 
-An instance of Unchecked_Conversion can be applied to an object of a
-private type,
-assuming the implementation allows it.
+  An instance of Unchecked_Conversion can be applied to an object of a
+  private type, assuming the implementation allows it.
 @end{Ramification}
 @end{RunTime}
 
@@ -837,6 +859,10 @@ followed.]}]}
   @ChgAdded{Version=[2],Text=[The implementation advice about the size of
   array objects was moved to 13.3 so that all of the advice about Size is
   in one place.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that the result of Unchecked_Conversion
+  for scalar types can be invalid, but not abnormal.]}
 @end{DiffWord95}
 
 
@@ -874,12 +900,47 @@ An assignment to the object is disrupted due to an abort
 or due to the failure of a language-defined check
 (see @RefSecNum{Exceptions and Optimization}).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00426-01]}
 The object is not scalar, and is passed to an @key[in out]
-or @key[out] parameter
-of an imported procedure or language-defined input procedure,
+or @key[out] parameter of an imported procedure@Chg{Version=[2],New=[,
+the Read procedure of an instance of Sequential_IO,
+Direct_IO, or Storage_IO, or the stream attribute T'Read], Old=[ or
+language-defined input procedure]},
 if after return from the procedure the representation of the parameter
 does not represent a value of the parameter's subtype.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00426-01]}
+@ChgAdded{Version=[2],Text=[The object is the return object of a function call
+of a non-scalar type, and the function is an imported function, an instance of
+Unchecked_Conversion, or the stream attribute T'Input, if after return from the
+function the representation of the return object does not represent a value of
+the function's subtype.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We explicitly list the routines involved in order
+  to avoid future arguments. All possibilities are listed.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We did not include Stream_IO.Read in the list
+  above. A Stream_Element should include all possible bit patterns, and thus it
+  cannot be invalid. Therefore, the parameter will always represent a value of
+  its subtype. By omitting this routine, we make it possible to write arbitrary
+  I/O operations without any possibility of abnormal objects.]}
+@end{Discussion}
+
 @end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00426-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[For an imported object, it is the
+programmer's responsibility to ensure that the object remains in a normal
+state.]]}
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This follows (and echos) the standard rule
+  of interfacing; the programmer must ensure that Ada semantics are
+  followed (see @RefSecNum{Interfacing Pragmas}).]}
+@end{TheProof}
 
 @PDefn{unspecified}
 Whether or not an object actually becomes abnormal in these cases is
@@ -894,13 +955,14 @@ It is erroneous to evaluate a @nt<primary> that is a @nt<name>
 denoting an abnormal object,
 or to evaluate a @nt{prefix} that denotes an abnormal object.
 @begin{Ramification}
-@Comment{There appears to be no justification for this statement; everything
-can become abnormal. We leave the prefix for the next paragraph.}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
-@ChgDeleted{Version=[2],NoPrefix=[T],Text=[Although a composite object with no
+@Comment{There appears to be no justification for this statement; everything
+can become abnormal. We leave the prefix for the next paragraph, so we use
+Chg rather than ChgDeleted.}
+@Chg{Version=[2],New=[Although a composite object with no
 subcomponents of an access type, and with static constraints all the way down
 cannot become abnormal, a scalar subcomponent of such an object can become
-abnormal.]}
+abnormal.],Old=[]}
 
 The @key[in out] or @key[out] parameter case does not apply to scalars;
 bad scalars are merely invalid representations,
@@ -949,6 +1011,13 @@ The AARM is more explicit about what happens when
 the value of the case expression is an invalid representation.
 
 @end{Discussion}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
+  @ChgAdded{Version=[2],Text=[This includes the result object of functions,
+  including the result of Unchecked_Conversion, T'Input, and imported
+  functions.]}
+@end{Ramification}
+
 @begin{Itemize}
 If the representation of the object represents a value of the object's
 type, the value of the type is used.
@@ -1004,12 +1073,16 @@ but it resulted in too much arcane verbiage,
 and since implementations have little incentive to behave
 irrationally, such verbiage is not important to have.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01]}
 If a stand-alone scalar object is initialized to a an in-range
 value, then the implementation can take advantage of the fact
-that any out-of-range value has to be abnormal.
+that @Chg{Version=[2],New=[the use of ],Old=[]}any out-of-range value
+has to be @Chg{Version=[2],New=[erroneous],Old=[abnormal]}.@ChgNote{Do you
+see "abnormal" in the rules above? Thought not.}
 Such an out-of-range value can be produced only by things like
-unchecked conversion, input, and
-disruption of an assignment due to abort or to failure of a
+unchecked conversion, @Chg{Version=[2],New=[imported functions],Old=[input]},
+and @Chg{Version=[2],New=[abnormal values caused by ],Old=[]}disruption
+of an assignment due to abort or to failure of a
 language-defined check.
 This depends on out-of-range values being checked before
 assignment (that is, checks are not optimized away unless they
@@ -1022,26 +1095,30 @@ are proven redundant).
 @key[function] Safe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Integer);
 @key[function] Unsafe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Positive);
 X : Positive := Safe_Convert(0); --@RI{ Raises Constraint_Error.}
-Y : Positive := Unsafe_Convert(0); --@Chg{Version=[2],New=[@RI{ Invalid.}
+Y : Positive := Unsafe_Convert(0); --@Chg{Version=[2],New=[@RI{ Bounded Error, may be invalid.}
 B : Boolean := Y'Valid; --@RI{ OK, B = False.}
 Z : Position := Y; --@RI{ Erroneous to use Y.}],Old=[@RI{ Erroneous.}]}
 
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01]}
-The call to Unsafe_Convert causes erroneous execution@Chg{Version=[2],New=[ as
-soon as Y is used],Old=[]}.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01],ARef=[AI95-00426-01]}
+The call to Unsafe_Convert @Chg{Version=[2],New=[ is a bounded error, which
+might raise Constraint_Error, Program_Error, or return an invalid value.
+Moreover, if an exception is not raised, most uses of that invalid value
+(including the use of Y) cause],Old=[causes]} erroneous execution.
 The call to Safe_Convert is not erroneous.
 The result object is an object of subtype Integer containing the value 0.
 The assignment to X is required to do a constraint check;
 the fact that the conversion is unchecked does not obviate the need for
 subsequent checks required by the language rules.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00167-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00167-01],ARef=[AI95-00426-01]}
 @ChgAdded{Version=[2],Text=[The reason for delaying erroneous execution until
 the object is used is so that the invalid representation can be tested
 for validity using the Valid attribute (see @RefSecNum{The Valid Attribute})
-without causing execution to become erroneous.]}
+without causing execution to become erroneous. Note that this delay does not
+imply an exception will not be raised; an implementation could treat both
+conversions in the example the same and raise Constraint_Error.]}
 @end{Ramification}
 @begin{ImplNote}
   If an implementation wants to have a @lquotes@;friendly@rquotes@; mode, it
@@ -1117,6 +1194,10 @@ to assign to the object as a whole.
   @ChgAdded{Version=[2],Text=[The description of erroneous execution for
   Unchecked_Conversion and imported objects was tightened up so that
   using the Valid attribute to test such a value is not erroneous.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
+  @ChgAdded{Version=[2],Text=[Better defined the objects that can become
+  abnormal; made sure that all of the possibilities are included.]}
 @end{DiffWord95}
 
 
@@ -1174,6 +1255,16 @@ use of an object whose Address has been specified.
 X'Valid is not considered to be a read of X;
 hence, it is not an error to check the validity
 of invalid data.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
+@ChgAdded{Version=[2],Text=[The Valid attribute may be used to check the
+result of calling an instance of Unchecked_Conversion (see
+@RefSecNum{Unchecked Type Conversions}) if there is a possibility that the
+result might be invalid. However, an exception handler should also be provided
+because implementations are permitted to raise Constraint_Error or
+Program_Error if they detect the use of an invalid representation (see
+@RefSecNum{Data Validity}).]}
+
 @begin{Ramification}
 If X is of an enumeration type with a representation clause, then
 X'Valid checks that the value of X when viewed as an integer is one of
@@ -1192,10 +1283,12 @@ for validity are represented in a way that does not involve
 implementation-defined components, or gaps between components.
 Furthermore, such types should not contain access subcomponents.
 
-Note that one can safely check the validity of a composite object with
-an abnormal value only if the constraints on the object and all of its
-subcomponents are static.
-Otherwise, evaluation of the @nt{prefix} of the @nt{attribute_reference}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+Note that one @Chg{Version=[2],New=[cannot],Old=[can safely]} check the validity
+of @Chg{Version=[2],New=[subcomponents of ],Old=[]}a composite object with
+an abnormal value@Chg{Version=[2],New=[, as],Old=[ only if the constraints on
+the object and all of its subcomponents are static.
+Otherwise,]} evaluation of the @nt{prefix} of the @nt{attribute_reference}
 causes erroneous execution (see @RefSecNum{Names}).
 @end{Reason}
 @end{Notes}
@@ -1204,6 +1297,16 @@ causes erroneous execution (see @RefSecNum{Names}).
 @Defn{extensions to Ada 83}
 X'Valid is new in Ada 95.
 @end{Extend83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
+  @ChgAdded{Version=[2],Text=[Added a note explaining that handlers for
+  Constraint_Error and Program_Error are needed in the general case of
+  testing for validity. (An implementation could document cases where these
+  are not necessary, but there is no language requiremnt.]}
+@end{DiffWord95}
+
+
 
 @LabeledClause{Unchecked Access Value Creation}
 
