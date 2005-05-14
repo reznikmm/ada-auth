@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:33 $}
+@Comment{$Date: 2005/05/12 05:15:39 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1771,11 +1771,6 @@ irrelevant, since failing these tests is highly unlikely.
 @Syn{lhs=<object_renaming_declaration>,rhs="@Chg{Version=[2],New=[
     ],Old=[]}@Syn2{defining_identifier} : @Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name};@Chg{Version=[2],New=[
     @Syn2{defining_identifier} : @Syn2{access_definition} @key{renames} @SynI{object_}@Syn2{name};],Old=[]}"}
-@begin{SyntaxText}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00409-01]}
-@ChgAdded{Version=[2],Text=[The @nt{access_definition} shall not include a
-@nt{null_exclusion}.]}
-@end{SyntaxText}
 @end{Syntax}
 
 @begin{Resolution}
@@ -1835,6 +1830,60 @@ access-to-constant types; or]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Text=[shall both be access-to-subprogram types with
 subtype conformant designated profiles.]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For an
+@nt{object_renaming_declaration} with an @nt{access_definition} that
+has a @nt{null_exclusion}:]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[if the @nt{object_renaming_declaration} occurs
+within the body of a generic unit, and the @Syni{object_}@nt{name} denotes a
+generic formal object of that generic unit, then the declaration of that formal
+object shall have a @nt{null_exclusion};]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[otherwise, the subtype of the
+@Syni{object_}@nt{name} shall exclude null.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[This rule prevents
+  @lquotes@;lying@rquotes.
+  @b<Null> must never be the value of an object with an explicit
+  @nt{null_exclusion}. The first bullet is an assume-the-worst rule
+  which prevents trouble in one obscure case:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Acc_I @key{is access} Integer;
+@key{subtype} Acc_NN_I @key{is not null} Acc_I;
+Obj : Acc_I := @key{null};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{generic}
+   B : @key{in out} Acc_NN_I;
+@key{package} Outer @key{is}
+   ...
+@key{end};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package body} Outer @key{is}
+   D : @key{not null} Acc_I @key{renames} B;
+@key{end} Outer;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package} Gen @key{is} (B => Obj);]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Without the first bullet rule, D would
+  be legal, and contain the value @key{null}, because the rule about lying
+  is satisfied for generic matching (Obj matches B; B does not explicitly
+  state @key{not null}),
+  @LegalityTitle are not rechecked in the body of any instance, and the
+  template passes the lying rule as well.]}
+@end{Reason}
 @end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
@@ -1981,6 +2030,12 @@ using the type T2 of the previous example:]}
   A renaming can have an anonymous access type. In that case, the accessibility
   of the renaming is that of the original object (accessibility is not
   lost as it is for a component or stand-alone object).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00423-01]}
+  @ChgAdded{Version=[2],Text=[A renaming can have exclude null.
+  If the renaming does that explicitly,
+  the renamed object must also exclude null, so that the @nt{null_exclusion}
+  does not lie.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -2113,6 +2168,33 @@ is the profile given in the @nt<subprogram_specification>.
 The profile of a renaming-as-declaration
 shall be mode-conformant with that of the renamed callable entity.
 @Defn2{Term=[mode conformance],Sec=(required)}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For a parameter or result type of
+the @nt{subprogram_specification} that has a @nt{null_exclusion}:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[if the @nt{subprogram_renaming_declaration}
+  occurs within the body of a generic unit, and the
+  @Syni{callable_entity_}@nt{name} denotes a generic formal subprogram of that
+  generic unit, then the corresponding parameter or result type of that formal
+  subprogram shall have a @nt{null_exclusion};]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[otherwise, the subtype of the corresponding
+  parameter or result type of the renamed callable entity shall exclude null.]}
+@end{Itemize}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[This rule prevents
+  @lquotes@;lying@rquotes.
+  @b<Null> must never be the value of a parameter or result with an explicit
+  @nt{null_exclusion}. The first bullet is an assume-the-worst rule
+  which prevents trouble in generic bodies when the formal subtype excludes
+  null implicitly.]}
+@end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0027],Ref=[8652/0028],ARef=[AI95-00135-01],ARef=[AI95-00145-01]}
 The profile of a renaming-as-body
@@ -2412,6 +2494,9 @@ We'll live with the oddity.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00228-01]}
   @ChgAdded{Version=[2],Text=[Clarified that renaming a shall-be-overridden
   subprogram is illegal.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
+  @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
 @end{DiffWord95}
 
 

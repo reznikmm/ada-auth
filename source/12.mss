@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/04/13 06:22:22 $}
+@Comment{$Date: 2005/05/12 05:15:41 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1780,12 +1780,14 @@ the actual can be either definite or indefinite.
   excludes null.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We require that the null exclusion property
-  match, because it would be difficult to write a correct generic for a formal
-  access type without knowing this property. Many typical algorithms and
-  techniques will not work for a null excluding subtype (setting an unused
-  component to @key{null}, default-initialized objects, and so on). We want this
-  sort of requirement be reflected in the contract of the generic.]}
+  @ChgAdded{Version=[2],Text=[We require that the
+  @lquotes@;excludes null@rquotes property match, because it would be difficult
+  to write a correct generic for a formal access type without knowing this
+  property. Many typical algorithms and techniques will not work for a
+  subtype that excludes null (setting an unused component to @key{null},
+  default-initialized objects, and so on). We want this sort of requirement be
+  reflected in the contract of the generic.]}
+
 @end{Reason}
 
 @end(Itemize)
@@ -2237,14 +2239,14 @@ access-to-constant type cannot be allowed. If it were allowed, it would
 be possible to create an access-to-variable value designating a constant.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
-@ChgAdded{Version=[2],Text=[We require that the null exclusion property
-match, because it would be difficult to write a correct generic for a formal
-access type without knowing this property. Many typical algorithms and
-techniques will not work for a null excluding subtype (setting an unused
+@ChgAdded{Version=[2],Text=[We require that the @lquotes@;excludes null@rquotes
+property match, because it would be difficult to write a correct generic for a
+formal access type without knowing this property. Many typical algorithms and
+techniques will not work for a subtype that excludes null (setting an unused
 component to @key{null}, default-initialized objects, and so on). Even
-Ada.Unchecked_Deallocation would fail for a null excluding subtype. Most
+Ada.Unchecked_Deallocation would fail for a subtype that excludes null. Most
 generics would end up with comments saying that they are not intended to work
-for null excluding subtypes. We would rather that this sort of requirement
+for subtypes that exclude null. We would rather that this sort of requirement
 be reflected in the contract of the generic.]}
 @end{Reason}
 

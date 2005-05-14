@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/08 05:56:25 $}
+@Comment{$Date: 2005/05/12 05:15:42 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @LabeledClause{The Package System}
 
@@ -1258,8 +1258,8 @@ of invalid data.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
 @ChgAdded{Version=[2],Text=[The Valid attribute may be used to check the
-result of calling an instance of Unchecked_Conversion (see
-@RefSecNum{Unchecked Type Conversions}) if there is a possibility that the
+result of calling an instance of Unchecked_Conversion (or any other
+operation that can create invalid values) if there is a possibility that the
 result might be invalid. However, an exception handler should also be provided
 because implementations are permitted to raise Constraint_Error or
 Program_Error if they detect the use of an invalid representation (see
@@ -1283,13 +1283,14 @@ for validity are represented in a way that does not involve
 implementation-defined components, or gaps between components.
 Furthermore, such types should not contain access subcomponents.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
-Note that one @Chg{Version=[2],New=[cannot],Old=[can safely]} check the validity
-of @Chg{Version=[2],New=[subcomponents of ],Old=[]}a composite object with
-an abnormal value@Chg{Version=[2],New=[, as],Old=[ only if the constraints on
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
+@ChgNote{This was never true, even in Ada 95}
+@ChgDeleted{Version=[2],Text=[Note that one can safely check the validity
+of a composite object with
+an abnormal value only if the constraints on
 the object and all of its subcomponents are static.
-Otherwise,]} evaluation of the @nt{prefix} of the @nt{attribute_reference}
-causes erroneous execution (see @RefSecNum{Names}).
+Otherwise, evaluation of the @nt{prefix} of the @nt{attribute_reference}
+causes erroneous execution (see @RefSecNum{Names}).]}
 @end{Reason}
 @end{Notes}
 
@@ -2865,15 +2866,22 @@ The recommended level of support for the Stream_Size attribute is:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
-@ChgAdded{Version=[2],Text=[A Stream_Size clause should be supported for an
-elementary type @i<T> if the specified Stream_Size is a multiple of
-Stream_Element'Size and is no less than the size of the first subtype of @i<T>,
-and no greater than the size of the largest type of the same elementary class
-(signed integer, modular integer, floating point, ordinary fixed point, decimal
-fixed point, or access).]}
+@ChgAdded{Version=[2],Text=[A Stream_Size clause should be supported for a
+discrete or fixed point type @i<T> if the specified Stream_Size is a multiple
+of Stream_Element'Size and is no less than the size of the first subtype
+of @i<T>, and no greater than the size of the largest type of the same
+elementary class (signed integer, modular integer, enumeration,
+ordinary fixed point, or decimal fixed point).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The recommended level of support for the Stream_Size attribute should be
 followed.]}]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[There are no requirements beyond supporting
+  confirming Stream_Size clauses for floating point and access types.
+  Floating point and access types usually only have a handful of defined
+  formats, which don't obviously fit the description given above.]}
+@end{Ramification}
 
 @end{Itemize}
 @end{ImplAdvice}

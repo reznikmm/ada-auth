@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:25 $}
+@Comment{$Date: 2005/05/12 05:15:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.10 $}
+@Comment{$Revision: 1.11 $}
 
 @LabeledClause{Type Conversions}
 
@@ -293,8 +293,9 @@ that are not reformatted. (Except the first rule is at the top.)}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Leading@Defn2{Term=[type conversion],sec=[composite (non-array)]}
 @Defn2{Term=[conversion],sec=[composite (non-array)]}
-@Chg{Version=[2],New=[If there is a type that is an ancestor of both the target type and the operand
-type, then:],Old=[@Defn2{Term=[type conversion],sec=(enumeration)}
+@Chg{Version=[2],New=[If there is a type that is an ancestor of both the target
+type and the operand type, or both types are class-wide types, then at least
+one of the following rules shall apply:],Old=[@Defn2{Term=[type conversion],sec=(enumeration)}
 @Defn2{Term=[conversion],sec=(enumeration)}
 If the target type is not included in any of the above four
 cases, there shall be a type that is an ancestor of both
@@ -348,9 +349,9 @@ Further, if the target type is tagged, then either:]}
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[If there is no type that is an ancestor of both
-the target type and the operand type, then],
-Old=[In a view conversion for
+@Chg{Version=[2],New=[If there is no type that is the ancestor of both the
+target type and the operand type, and they are not both class-wide types, one
+of the following rules shall apply:], Old=[In a view conversion for
 an untagged type, the target type shall be convertible (back) to the operand type.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Deleted]}
@@ -784,7 +785,7 @@ Access Type Conversion
   calling a subprogram with an access parameter.
   @end{Ramification}
 
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00230-01]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
   If the @Chg{Version=[2],New=[],Old=[target type is an anonymous access type,
   a check is made that the value of the operand is not null;
   if the target is not an anonymous access type, then the
@@ -818,7 +819,7 @@ Access Type Conversion
 @end(inneritemize)
 @end(itemize)
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @IndexCheck{Range_Check}
 @IndexCheck{Discriminant_Check}
 @IndexCheck{Index_Check}
@@ -826,8 +827,8 @@ Access Type Conversion
 After conversion of the value to the target type,
 if the target subtype is constrained,
 a check is performed that the value satisfies this constraint.
-@Chg{Version=[2],New=[If the target subtype excludes the null value, then a
-check is made that the value is not null.],Old=[]}
+@Chg{Version=[2],New=[If the target subtype excludes null,
+then a check is made that the value is not null.],Old=[]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised]}
 The @Chg{Version=[2],New=[first],Old=[above]} check
@@ -835,7 +836,7 @@ The @Chg{Version=[2],New=[first],Old=[above]} check
 Discriminant_Check or Index_Check for access subtypes, and a Discriminant_Check
 for discriminated subtypes. The Length_Check for an array conversion is
 performed as part of the conversion to the target type.
-@Chg{Version=[2],New=[The null-exclusion check is an Access_Check.],Old=[]}
+@Chg{Version=[2],New=[The null exclusion check is an Access_Check.],Old=[]}
 @end{Ramification}
 
 @PDefn2{Term=[evaluation], Sec=(view conversion)}
@@ -1103,7 +1104,7 @@ These allow the use anonymous access in equality tests (see
 @RefSecNum{Relational Operators and Membership Tests}).],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[Wording was added to check null-excluding subtypes
+@Chg{Version=[2],New=[Wording was added to check subtypes that exclude null
 (see @RefSecNum{Access Types}).],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}

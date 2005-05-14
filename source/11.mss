@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/03/18 06:37:20 $}
+@Comment{$Date: 2005/05/12 05:15:41 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1425,7 +1425,7 @@ exception Constraint_Error is raised upon failure.]
 Access_Check @\@Redundant[When evaluating a dereference (explicit
 or implicit),
 check that the value of the @nt{name} is not @key{null}.
-@Chg{Version=[2],New=[When converting to a null-excluding subtype,
+@Chg{Version=[2],New=[When converting to a subtype that excludes null,
 check that the converted value is not @key{null}.],
 Old=[When passing an actual parameter to a formal access parameter,
 check that the value of the actual parameter is not @key{null}.
@@ -1699,8 +1699,8 @@ Program_Error checks was corrected to be alphabetical.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0036],ARef=[AI95-00176-01],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],Text=[The description of Access_Check was corrected by the
 Corrigendum to include the discriminant case. This change was then replaced
-by the more general notion of checking conversions to null-excluding subtypes
-in the Amendment.]}
+by the more general notion of checking conversions to subtypes that exclude
+null in Ada 2006.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],Text=[The On parameter of pragma Suppress was moved to

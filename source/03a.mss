@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:22 $}
+@Comment{$Date: 2005/05/12 05:15:36 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -598,8 +598,8 @@ are given in @RefSecNum(Scalar Types) for @nt<range_constraint>s,
 for @nt<index_constraint>s, and
 @RefSecNum(Discriminant Constraints) for
 @nt<discriminant_constraint>s].@Chg{Version=[2],New=[The set of possible values
-for an object of an access type can also be subjected to a condition that is
-called a null exclusion (see @RefSecNum{Access Types}).],Old=[]}
+for an object of an access type can also be subjected to a condition that
+excludes the null value (see @RefSecNum{Access Types}).],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00415-01]}
 @Defn{subtype}
@@ -611,7 +611,8 @@ Similarly, the associated constraint is called the
 constraint @i(of) the subtype. The set of values
 of a subtype consists of the values of its type
 that satisfy its constraint@Chg{Version=[2],New=[ and, in the case
-of a subtype of an access type, any applicable null exclusion],Old=[]}.
+of a subtype that excludes null, the values do not include the null value],
+Old=[]}.
 @Defn2{Term=[belong], Sec=(to a subtype)}
 Such values @i(belong) to the subtype.
 @begin{Discussion}

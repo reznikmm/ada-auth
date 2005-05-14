@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:26 $}
+@Comment{$Date: 2005/05/12 05:15:40 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 
@@ -252,6 +252,25 @@ a limited interface type that is not a protected interface.]]}
   protected interfaces are not allowed, as they offer operations that a task
   does not have.]}
 @end(TheProof)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Text=[The prefixed view profile of an explicitly
+declared primitive subprogram of a tagged task type shall not be type
+conformant with any entry of the task type, if the first
+parameter of the subprogram is of the task type or is an
+access parameter designating the task type.]}
+@begin(Reason)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This prevents the existence of two operations
+  with the same name and profile which could be called with a prefixed view.
+  If the operation was inherited, this would be illegal by the following rules;
+  this rule puts inherited and non-inherited routines on the same footing.
+  Note that this only applies to tagged task types (that is, those with an
+  interface in their declaration); we do that as there is no problem with
+  prefixed view calls of primitive operations for @lquotes@;normal@rquotes
+  task types, and having this rule apply to all tasks would be incompatible
+  with Ada 95.]}
+@end(Reason)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For each primitive subprogram
@@ -986,6 +1005,27 @@ is not a task interface.]]}
   task interfaces are not allowed, as they offer operations that a protected
   type does not have.]}
 @end(TheProof)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Text=[The prefixed view profile of an explicitly declared
+primitive subprogram of a tagged protected type shall not be type conformant
+with any protected operation of the protected type, if the first parameter of
+the subprogram is of the protected type or is an access parameter designating
+the protected type.]}
+@begin(Reason)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This prevents the existence of two operations
+  with the same name and profile which could be called with a prefixed view.
+  If the operation was inherited, this would be illegal by the following rules;
+  this rule puts inherited and non-inherited routines on the same footing.
+  Note that this only applies to tagged protected types (that is, those with an
+  interface in their declaration); we do that as there is no problem with
+  prefixed view calls of primitive operations for @lquotes@;normal@rquotes
+  protected types, and having this rule apply to all protected types would be
+  incompatible with Ada 95.]}
+@end(Reason)
+
+
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For each primitive subprogram

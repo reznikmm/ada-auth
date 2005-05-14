@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2005/05/07 05:18:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2005/05/12 05:15:42 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/05/07 05:18:30 $}
+@Comment{$Date: 2005/05/12 05:15:42 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2974,31 +2974,44 @@ A @i{clock tick} is a real time interval during
 which the clock value (as observed by calling the Clock function) remains
 constant. Tick is the average length of such intervals.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00432-01]}
 The function To_Duration converts the value TS to a value of type
 Duration. Similarly, the function To_Time_Span converts the value D
-to a value of type Time_Span. For both operations, the result is
-rounded to the nearest exactly representable value (away from zero if exactly
-halfway between two exactly representable values).
+to a value of type Time_Span. For @Chg{Version=[2],New=[To_Duration],
+Old=[both operations]}, the result is
+rounded to the nearest @Chg{Version=[2],New=[value of type Duration],
+Old=[exactly representable value]} (away from zero if exactly
+halfway between two @Chg{Version=[2],New=[],
+Old=[exactly representable ]}values).@Chg{Version=[2],New=[ For To_Time_Span,
+the value of D is first rounded to the nearest integral multiple of Time_Unit,
+away from zero if exactly halfway between two multiples. If the
+rounded value is outside the range of Time_Span, Constraint_Error is
+raised. Otherwise, the value is converted to the type Time_Span.],Old=[]}
 
 To_Duration(Time_Span_Zero) returns 0.0,
 and To_Time_Span(0.0) returns Time_Span_Zero.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01],ARef=[AI95-00432-01]}
 The functions Nanoseconds, Microseconds, @Chg{Version=[2],New=[],
 Old=[and ]}Milliseconds@Chg{Version=[2],New=[, Seconds, and Minutes],Old=[]}
 convert the input
 parameter to a value of the type Time_Span. NS, US,@Chg{Version=[2],New=[],Old=[ and]}
 MS@Chg{Version=[2],New=[, S, and M],Old=[]} are interpreted as a number of
 nanoseconds, microseconds,@Chg{Version=[2],New=[],Old=[ and]}
-milliseconds@Chg{Version=[2],New=[, seconds, and minutes],Old=[]} respectively.
-The result is rounded to the nearest exactly
-representable value (away from zero if exactly halfway between two exactly
-representable values).
+milliseconds@Chg{Version=[2],New=[, seconds, and minutes],Old=[]}
+respectively.@Chg{Version=[2],New=[ The input parameter is first converted to
+seconds and rounded to the nearest integral multiple of Time_Unit, ],
+Old=[The result is rounded to the nearest exactly
+representable value (]}away from zero if exactly halfway between two
+@Chg{Version=[2],New=[multiples. If the rounded value
+is outside the range of Time_Span, Constraint_Error is raised.
+Otherwise, the rounded value is converted to the type Time_Span],
+Old=[exactly representable values)]}.
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00386-01]}
-  The above does not imply that the Time_Span type will have to
-  accommodate Integer'Last of @Chg{Version=[2],New=[minutes],Old=[milliseconds]};
-  Constraint_Error is allowed to be raised.
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00432-01]}
+  @ChgDeleted{Version=[2],Text=[The above does not imply that the Time_Span
+  type will have to accommodate Integer'Last of milliseconds; Constraint_Error
+  is allowed to be raised.]}
 @end{Discussion}
 
 The effects of the operators on Time and Time_Span are as for the
@@ -3218,6 +3231,15 @@ There is no requirement that these be the same.
   use-visible, resulting in errors. This should be rare and is easily fixed if
   it does occur.]}
 @end{Incompatible95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00432-01]}
+  @ChgAdded{Version=[2],Text=[Added wording explaining how and when many of
+  these functions can raise Constraint_Error. While there always was an
+  intent to raise Constraint_Error if the values did not fit, there never
+  was any wording to that effect, and since Time_Span was a private type,
+  the normal numeric type rules do not apply to it.]}
+@end{DiffWord95}
 
 
 @LabeledClause{Delay Accuracy}

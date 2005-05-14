@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:23 $}
+@Comment{$Date: 2005/05/12 05:15:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1390,7 +1390,7 @@ shall not have a @nt<default_expression>.]}
 @nt{subprogram_renaming_declaration} or the instantiation of a generic
 subprogram, any access parameter of the renamed subprogram or the generic
 subprogram that corresponds to a controlling access parameter of the
-dispatching operation, shall be null excluding.]}
+dispatching operation, shall be have a subtype that excludes null.]}
 
 A given subprogram shall not be a dispatching operation of two
 or more distinct tagged types.
@@ -1687,12 +1687,12 @@ The concept of dispatching operations is new.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00404-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Ada 2006 requires that subprograms that are renamed or instantiated to be
-  dispatching operations have all controlling access parameters be null
-  excluding. (Since Ada 95 didn't have the notion of null-excluding access
-  types, it had no such rule.) This rule will require the addition of an
-  explicit @key{not null} on non-dispatching operations that are later renamed
-  to be dispatching, or on a generic that is used to define a dispatching
-  operation.]}
+  dispatching operations have all controlling access parameters have subtypes
+  that exclude null. (Since Ada 95 didn't have the notion of access subtypes
+  that exclude null, it had no such rule.) This rule will require the addition
+  of an explicit @key{not null} on non-dispatching operations that are later
+  renamed to be dispatching, or on a generic that is used to define a
+  dispatching operation.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -2863,35 +2863,11 @@ its @i(designated subtype)@Chg{Version=[2],New=[; if the
 access-to-constant type; otherwise it is
 an access-to-variable type. For an access-to-subprogram type, the
 @nt{parameter_profile} or @nt{parameter_and_result_profile} denotes its
-@i{designated profile}.@Defn2{Term=[designated profile], Sec=(of an anonymous access type)}
-If a @nt{null_exclusion} is present, or the
-@nt{access_definition} is for a controlling access parameter
-(see @RefSecNum{Dispatching Operations of Tagged Types}), the
-@nt{access_definition} defines an access subtype which excludes the null value;
-otherwise the subtype includes a null value.],
+@i{designated profile}.@Defn2{Term=[designated profile], Sec=(of an anonymous access type)}],
 Old=[. @Redundant[An @nt<access_definition> is used in the
 specification of an access discriminant
 (see @RefSecNum(Discriminants)) or an access
 parameter (see @RefSecNum(Subprogram Declarations)).]]}
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-  @ChgAdded{Version=[2],Text=[An @nt{access_definition} used in a controlling
-  parameter is null-excluding because it is necessary to read the tag to
-  dispatch, and null has no tag. We would have preferred to
-  require @key{not null} to be specified for such
-  parameters, but that would have been too incompatible with Ada 95.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[Note that we considered imposing a similar
-  implicit null exclusion for controlling access results, but chose not to do
-  that, because there is no Ada95 compatibility issue, and there is no
-  automatic null check inherent in the use of a controlling access result. If a
-  null check is necessary, it is because there is a dereference of the result,
-  or because the value is passed to a null-excluding parameter.
-  If there is no dereference of the result, a null return value is perfectly
-  acceptable, and can be a useful indication of a particular status of the
-  call.]}
-@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
 @Defn2{Term=[null value], Sec=(of an access type)}
@@ -2935,8 +2911,45 @@ Hence, the type conversion will raise Constraint_Error if the value of
 the actual parameter is null.]}
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+@Defn2{Term=[excludes null],Sec=[subtype]}
+A @nt{null_exclusion} in an @nt{access_definition}, @nt{access_type_definition},
+@nt{subtype_indication} (see @RefSecNum{Subtype Declarations}),
+@nt{parameter_specification} (see @RefSecNum{Subprogram Declarations}), or
+@nt{parameter_and_result_profile} (see @RefSecNum{Subprogram Declarations}),
+specifies that the access subtype defined by the construct does not allow the
+null value, that is, the access subtype @i{excludes null}. In addition, the
+anonymous access subtype defined by the @nt{access_definition} for a controlling
+access parameter (see @RefSecNum{Dispatching Operations of Tagged Types})
+excludes null. Other subtypes do not exclude null.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[An @nt{access_definition} used in a controlling
+  parameter excludes null because it is necessary to read the tag to
+  dispatch, and null has no tag. We would have preferred to
+  require @key{not null} to be specified for such
+  parameters, but that would have been too incompatible with Ada 95.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Note that we considered imposing a similar
+  implicit null exclusion for controlling access results, but chose not to do
+  that, because there is no Ada 95 compatibility issue, and there is no
+  automatic null check inherent in the use of a controlling access result. If a
+  null check is necessary, it is because there is a dereference of the result,
+  or because the value is passed to a parameter whose subtype excludes null.
+  If there is no dereference of the result, a null return value is perfectly
+  acceptable, and can be a useful indication of a particular status of the
+  call.]}
+@end{Reason}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[Note that we say that all other subtypes
+  do not exclude null above. That means that we don't have to complicate
+  wording by specifying that we are only talking about access subtypes
+  when we mention a @lquotes@;subtype that excludes null@rquotes.]}
+@end{Discussion}
+
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0013],ARef=[AI95-00012-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @PDefn2{Term=[constrained],Sec=(subtype)}
 @PDefn2{Term=[unconstrained],Sec=(subtype)}
 @Redundant[All subtypes of an access-to-subprogram type
@@ -2944,10 +2957,7 @@ are constrained.] The first subtype of a type defined by
 an @Chg{New=[@nt<access_definition>],Old=[@nt<access_type_definition>]} or an
 @nt<access_to_object_definition> is unconstrained if the designated subtype
 is an unconstrained array or discriminated @Chg{New=[subtype],Old=[type]};
-otherwise it is constrained.@Chg{Version=[2],New=[ The first subtype of a type
-defined by an @nt{access_type_definition} excludes the null value if
-a @nt{null_exclusion} is present; otherwise, the first subtype includes the
-null value.],Old=[]}
+otherwise it is constrained.
 @begin(TheProof)
   The @LegalityTitle on @nt<range_constraint>s (see @RefSecNum(Scalar Types))
   do not permit the @nt<subtype_mark> of the @nt<subtype_indication> to denote
@@ -2985,7 +2995,7 @@ null value.],Old=[]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
 @ChgAdded{Version=[2],Text=[A @nt{null_exclusion} is only allowed in a
 @nt{subtype_indication} whose @nt{subtype_mark} denotes an access subtype that
-includes a null value.]}
+does not exclude null.]}
 @begin(Reason)
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[This is similar to doubly constraining a subtype,
@@ -3000,13 +3010,13 @@ includes a null value.]}
 A @nt<composite_constraint> is @i(compatible) with an unconstrained
 access subtype if it is compatible with the designated
 subtype.@Chg{Version=[2],New=[ A @nt{null_exclusion} is compatible with any
-access subtype that includes a null value.],Old=[]}
+access subtype that does not exclude null.],Old=[]}
 @PDefn2{Term=[satisfies], Sec=(for an access value)}
 An access value @i(satisfies) a @nt<composite_constraint> of an access
 subtype if it equals the null value of its type
 or if it designates an object whose value satisfies the
-constraint.@Chg{Version=[2],New=[ An access value satisfies a
-@nt{null_exclusion} imposed on an access subtype if it does not equal the
+constraint.@Chg{Version=[2],New=[ An access value satisfies an access subtype
+that excludes null if it does not equal the
 null value of its type.],Old=[]}
 
 @PDefn2{Term=[elaboration], Sec=(access_type_definition)}
@@ -3098,8 +3108,8 @@ see @RefSecNum(Storage Management) for more discussion.)
 @begin{Inconsistent95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
 @Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
-Access discriminants and non-controlling access parameters are no longer
-null excluding. A program which passed @key{null} to such an access
+Access discriminants and non-controlling access parameters no longer
+exclude null. A program which passed @key{null} to such an access
 discriminant or access parameter and expected it to raise Constraint_Error
 may fail @ChgNote{but not if the parameter is dereferenced in the subprogram or
 record }when compiled with Ada 2006. One hopes that there no such programs
