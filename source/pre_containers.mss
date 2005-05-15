@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2005/05/05 00:45:39 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2005/05/14 05:20:14 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:39 $}
+@Comment{$Date: 2005/05/14 05:20:14 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -555,8 +555,21 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
       @key{with function} "<" (Left, Right : Element_Type)
-         @key{return} Boolean @key{is} <>;
-   @key{procedure} @AdaSubDefn{Generic_Sort} (Container : @key{in} Vector);]}
+         @key{return} Boolean is <>;
+   @key{package} @AdaDefn{Generic_Sorting} @key{is}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Is_Sorted} (Container : Vector) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Sort} (Container : @key{in out} Vector);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Merge} (Target  : @key{in out} Vector;
+                       Source  : @key{in out} Vector);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{end} Generic_Sorting;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find_Index} (Container : Vector;
@@ -679,11 +692,17 @@ it calls the Insert, Insert_Space, Clear, Delete, or Set_Length procedures with
 @ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<V> as
 a parameter.]}
 
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Swap, Sort, and Merge copy elements rather
+  than reordering them, so they don't tamper with cursors.]}
+@end{Discussion}
+
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a vector]}
-Some operations are assumed to not change elements.  For such an operation, a
+Some operations are assumed to not replace elements. For such an operation, a
 subprogram is said to @i<tamper with elements> of a vector object @i<V> if:]}
 
 @begin{Itemize}
@@ -692,16 +711,17 @@ subprogram is said to @i<tamper with elements> of a vector object @i<V> if:]}
 @ChgAdded{Version=[2],Text=[it tampers with cursors of @i<V>; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it modifies one or more elements of @i<V>, that is,
-it calls the Replace_Element, Update_Element, or Swap procedures or an instance
-of Generic_Sort with @i<V> as a parameter.]}
+@ChgAdded{Version=[2],Text=[it replaces one or more elements of @i<V>, that is,
+it calls the Replace_Element or Swap procedures or the Sort or Merge
+procedures of an instance of Generic_Sorting with @i<V> as a parameter.]}
 
-@begin{Discussion}
+@begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Swap and Generic_Sort copy elements rather
-  than reordering them, so they don't tamper with cursors, only with
-  elements.]}
-@end{Discussion}
+  @ChgAdded{Version=[2],Text=[Complete replacement of an element can cause its
+  memory to be deallocated while another operation is holding onto a reference
+  to it. That can't be allowed. However, a simple modification of (part of) an
+  element is not a problem, so Update_Element does not cause a problem.]}
+@end{Reason}
 
 @end{Itemize}
 
@@ -1116,8 +1136,9 @@ exception raised during the copying is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designates an element in Target. Otherwise, if
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
+does not designate an element in Container, then Program_Error is propagated.
+Otherwise, if
 Length(New_Item) is 0, then Insert does nothing. If Before is No_Element, then
 the call is equivalent to Insert (Container, Last_Index (Container) + 1),
 New_Item); otherwise the call is equivalent to Insert (Container, To_Index
@@ -1142,8 +1163,9 @@ New_Item); otherwise the call is equivalent to Insert (Container, To_Index
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designates an element in Target. If Before
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
+does not designate an element in Container, then Program_Error is propagated.
+If Before
 equals No_Element, then let @i<T> be Last_Index (Container) + 1; otherwise, let
 @i<T> be To_Index (Before). Insert (Container, @i<T>, New_Item) is called, and
 then Position is set to To_Cursor (Container, @i<T>).]}
@@ -1259,8 +1281,9 @@ empty elements in the positions starting at Before.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designates an element in Target. If Before
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
+does not designate an element in Container, then Program_Error is propagated.
+If Before
 equals No_Element, then let @i<T> be Last_Index (Container) + 1; otherwise, let
 @i<T> be To_Index (Before). Insert_Space (Container, @i<T>, Count) is called,
 and then Position is set to To_Cursor (Container, @i<T>).]}
@@ -1296,7 +1319,7 @@ elements are are removed from Container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Index is not in the range
-First_Index (Container) .. Last_Index (Container), then Constraint_Error is
+First_Index (Container) .. Last_Index (Container) + 1, then Constraint_Error is
 propagated. If Count is 0, Delete has no effect. Otherwise Delete slides the
 elements (if any) starting at position Index + Count down to Index. Any
 exception raised during element assignment is propagated.]}
@@ -1451,35 +1474,73 @@ values of the elements designated by I and J.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{generic}
-   @key{with function} "<" (Left, Right : Element_Type) @key{return} Boolean is <>;
-@key{procedure} Generic_Sort (Container : @key{in} Vector);]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Is_Sorted (Container : Vector) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if the elements are
+sorted smallest first as determined by the
+generic formal "<" operator; otherwise, Is_Sorted returns False.
+Any exception raised during evaluation of "<" is propagated.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Sort (Container : @key{in out} Vector);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Reorders the elements of Container
-such that the elements are sorted smallest first as determined by the generic
-formal "<" operator provided. Any exception raised during evalution of "<" is
-propagated.]}
+such that the elements are
+sorted smallest first as determined by the generic formal "<" operator
+provided. Any exception raised during evaluation of "<" is propagated.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[After a call to Swap, I designates the element
-  This implies swapping the elements, usually including an intermediate copy.
-  This means that the elements will usually be copied. (As with Swap, if the
-  implementation can do this some other way, it is allowed to.) Since the
-  elements are non-limited, this usually will not be a problem. Note that there
-  is @ImplAdviceName below that the implementation should use a sort that
-  minimizes copying of elements.]}
+  @ChgAdded{Version=[2],Text=[This implies swapping the elements, usually
+  including an intermediate copy. This means that the elements will usually be
+  copied. (As with Swap, if the implementation can do this some other way, it
+  is allowed to.) Since the elements are non-limited, this usually will not be
+  a problem. Note that there is @ImplAdviceName below that the implementation
+  should use a sort that minimizes copying of elements.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[ The sort is not required to be stable (and the
+  @ChgAdded{Version=[2],Text=[The sort is not required to be stable (and the
   fast algorithm required will not be stable). If a stable sort is needed, the
   user can include the original location of the element as an extra "sort key".
   We considered requiring the implementation to do that, but it is mostly extra
   overhead -- usually there is something already in the element that provides
   the needed stability.]}
 @end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Merge (Target  : @key{in out} Vector;
+                 Source  : @key{in out} Vector);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Merge removes elements from Source
+and inserts them into Target; afterwards, Target contains the union of the
+elements that were initially in Source and Target; Source is left empty. If
+Target and Source are initially sorted smallest first, then Target is ordered
+smallest first as determined by the generic formal "<" operator; otherwise,
+the order of elements in Target is unspecified. Any exception raised during
+evaluation of "<" is propagated.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[It is a bounded error if either of the vectors is
+  unsorted, see below. The bounded error can be recovered by sorting Target
+  after the merge call, or the vectors can be pretested with Is_Sorted.]}
+@end{Discussion}
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This operation will usually require copying the
+  elements into a temporary location. One implementation strategy would be to
+  allocate a new internal data array of the appropriate length, copy the
+  elements into it in an appropriate order, and then replacing the data array
+  in Target with the temporary.]}
+@end{ImplNote}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1647,10 +1708,6 @@ exception raised by Process is propagated.]}
   decremented when Iterate completes. If the counter is nonzero when an
   operation that inserts or deletes is called, Finalize is called, or one of
   the other operations in the list occurs, Program_Error is raised.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Swap and Generic_Sort are not included here, as
-  they only copy elements.]}
 @end{Discussion}
 
 @begin{Example}
@@ -1674,10 +1731,10 @@ order.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 Reading the value of an empty element by calling
-Element, Query_Element, Update_Element, Generic_Sort, "=", Find, or
-Reverse_Find is a bounded error. The implementation may treat the element as
-having any valid value of the element type, or raise Constraint_Error or
-Program_Error before modifying the vector.]}
+Element, Query_Element, Update_Element, Swap, Is_Sorted, Sort, Merge,
+"=", Find, or Reverse_Find is a bounded error. The implementation may treat
+the element as having any valid value of the element type, or raise
+Constraint_Error or Program_Error before modifying the vector.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1698,6 +1755,14 @@ Program_Error before modifying the vector.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+Calling Merge in an instance of Generic_Sorting
+with either Source or Target not ordered smallest first using the provided
+generic formal "<" operator is a bounded error. Either Program_Error is raised
+after Target is updated as described for Merge, or the operation works as
+defined.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
 @Defn2{Term=[ambiguous cursor],Sec=[of a vector]}
 @Defn2{Term=[cursor],Sec=[ambiguous]}
@@ -1714,7 +1779,8 @@ to the index value of the element designated by the cursor; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The vector that contains the element it designates
-has been passed to an instance of Generic_Sort.]}
+has been passed to the Sort or Merge procedures of an instance of
+Generic_Sorting.]}
 
 @end{Itemize}
 
@@ -1847,12 +1913,12 @@ to an array. In particular, if the length of a vector is @i{N}, then]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The worst-case time complexity of a call on an
-instantiation of Containers.Vectors.Generic_Sort should be O(@i{N}**2), and the
+@ChgAdded{Version=[2],Text=[The worst-case time complexity of a call on procedure
+Sort of an instantiation of Containers.Vectors.Generic_Sorting should be O(@i{N}**2), and the
 average time complexity should be better than O(@i{N}**2).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The worst-case time complexity of a call on an
-instantiation of Containers.Vectors.Generic_Sort should be O(@i{N}**2), and the
+Text=[The worst-case time complexity of a call on procedure Sort of an
+instantiation of Containers.Vectors.Generic_Sorting should be O(@i{N}**2), and the
 average time complexity should be better than O(@i{N}**2).]}]}
 
 @begin{Ramification}
@@ -1863,10 +1929,12 @@ average time complexity should be better than O(@i{N}**2).]}]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[Containers.Vectors.Generic_Sort should minimize
+@ChgAdded{Version=[2],Text=[Containers.Vectors.Generic_Sorting.Sort and
+Containers.Vectors.Generic_Sorting.Merge should minimize
 copying of elements.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Containers.Vectors.Generic_Sort should minimize copying of elements.]}]}
+Text=[Containers.Vectors.Generic_Sorting.Sort and
+Containers.Vectors.Generic_Sorting.Merge should minimize copying of elements.]}]}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1890,6 +1958,22 @@ copying of internal data structures.]}]}
   moving the pointer(s) to the internal data structures from the Source vector
   to the Target vector.]}
 @end{ImplNote}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If an exception is propagated from a vector
+operation, no storage should be lost, nor any elements removed from a vector
+unless specified by the operation.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If an exception is propagated from a vector
+operation, no storage should be lost, nor any elements removed from a vector
+unless specified by the operation.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is important so that programs can recover
+  from errors. But we don't want to require heroic efforts, so we just require
+  documentation of cases where this can't be accomplished.]}
+@end{Reason}
 
 @end{ImplAdvice}
 
@@ -2052,14 +2136,20 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
       @key{with function} "<" (Left, Right : Element_Type)
          @key{return} Boolean is <>;
-   @key{procedure} @AdaSubDefn{Generic_Sort} (Container : @key{in out} List);]}
+   @key{package} @AdaDefn{Generic_Sorting} @key{is}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{generic}
-      @key{with function} "<" (Left, Right : Element_Type)
-         @key{return} Boolean @key{is} <>;
-   @key{procedure} @AdaSubDefn{Generic_Merge} (Target  : @key{in out} List;
-                            Source  : @key{in out} List);]}
+@ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Is_Sorted} (Container : List) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Sort} (Container : @key{in out} List);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Merge} (Target  : @key{in out} List;
+                       Source  : @key{in out} List);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{end} Generic_Sorting;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_List} (Container : @key{in out} List);]}
@@ -2079,13 +2169,13 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Target   : @key{in out} List;
                      Before   : @key{in}     Cursor;
-                     Position : @key{in}     Cursor);]}
+                     Source   : @key{in out} List;
+                     Position : @key{in out} Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Target   : @key{in out} List;
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Container: @key{in out} List;
                      Before   : @key{in}     Cursor;
-                     Source   : @key{in out} List;
-                     Position : @key{in}     Cursor);]}
+                     Position : @key{in out} Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First} (Container : List) @key{return} Cursor;]}
@@ -2189,8 +2279,8 @@ parameter; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it reorders the elements of @i<L>, that is, it
-calls the Splice, Swap_Links, or Reverse_List procedures or an instance of
-Generic_Sort or Generic_Merge with @i<L> as a parameter; or]}
+calls the Splice, Swap_Links, or Reverse_List procedures or the Sort or
+Merge procedures of an instance of Generic_Sorting with @i<L> as a parameter; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it finalizes @i<L>; or]}
@@ -2200,9 +2290,15 @@ Generic_Sort or Generic_Merge with @i<L> as a parameter; or]}
 parameter.]}
 @end{Itemize}
 
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Swap copies elements rather than reordering them,
+  so it doesn't tamper with cursors.]}
+@end{Reason}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a list]}
-Some operations are assumed to not change elements. For such an operation, a
+Some operations are assumed to not replace elements. For such an operation, a
 subprogram is said to @i{tamper with elements} of a list object @i<L> if:]}
 
 @begin{Itemize}
@@ -2210,15 +2306,20 @@ subprogram is said to @i{tamper with elements} of a list object @i<L> if:]}
 @ChgAdded{Version=[2],Text=[it tampers with cursors of @i<L>; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it modifies one or more elements of @i<L>, that is,
-it calls the Replace_Element, Update_Element, or Swap procedures with @i<L> as
+@ChgAdded{Version=[2],Text=[it replaces one or more elements of @i<L>, that is,
+it calls the Replace_Element or Swap procedures with @i<L> as
 a parameter.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Swap copies elements rather than reordering them,
-  so it can be allowed for Iterate.]}
+  @ChgAdded{Version=[2],Text=[Complete replacement of an element can cause
+  its memory to be deallocated while another operation is holding onto a
+  reference to it. That can't be allowed. However, a simple modification of
+  (part of) an element is not a problem, so Update_Element does not cause a
+  problem.]}
 @end{Reason}
+
+
 @end{Itemize}
 
 @begin{DescribeCode}
@@ -2370,8 +2471,9 @@ No_Element, New_Item, Count).]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designates an element in Container. Otherwise,
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
+does not designate an element in Target, then Program_Error is propagated.
+Otherwise,
 Insert inserts Count copies of New_Item prior to the element designated by
 Before. If Before equals No_Element, the new elements are inserted after the
 last node (if any). Any exception raised during allocation of internal storage
@@ -2397,8 +2499,9 @@ is propagated, and Container is not modified.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designates an element in Container. Otherwise,
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
+does not designate an element in Container, then Program_Error is propagated.
+Otherwise,
 Insert allocates Count copies of New_Item, and inserts them prior to the
 element designated by Before. If Before equals No_Element, the new elements are
 inserted after the last element (if any). Position designates the first
@@ -2414,8 +2517,9 @@ storage is propagated, and Container is not modified.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designates an element in Container. Otherwise,
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
+does not designate an element in Container, then Program_Error is propagated.
+Otherwise,
 Insert inserts Count new elements prior to the element designated by Before. If
 Before equals No_Element, the new elements are inserted after the last node (if
 any). The new elements are initialized with any implicit initial value for any
@@ -2459,18 +2563,28 @@ First (Container), Count).]}
 Delete_Last is equivalent to Clear (Container). Otherwise it removes the last
 Count nodes from Container.]}
 
+
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{generic}
-   @key{with function} "<" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
-@key{procedure} Generic_Sort (Container : @key{in out} List);]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Is_Sorted (Container : List) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if the elements are
+sorted smallest first as determined by the generic formal "<" operator;
+otherwise, Is_Sorted returns False. Any exception raised during evaluation of
+"<" is propagated.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Sort (Container : @key{in out} List);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Reorders the nodes of Container
 such that the elements are sorted smallest first as determined by the generic
-formal "<" operator provided. The sort must be stable. Any exception raised
-during evaluation of "<" is propagated.]}
+formal "<" operator provided. The sort is stable. Any exception raised during
+evaluation of "<" is propagated.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2486,30 +2600,25 @@ during evaluation of "<" is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{generic}
-   @key{with function} "<" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
-@key{procedure} Generic_Merge (Target  : @key{in out} List;
-                         Source  : @key{in out} List);]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure Merge} (Target  : @key{in out} List;
+                 Source  : @key{in out} List);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[Generic_Merge removes elements from
-Source and inserts them into Target so that Target be sorted smallest first as
-determined by the generic formal "<" operator.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Any exception raised during evaluation of "<" is propagated. If Target and
-Source are not sorted smallest first, then Program_Error is propagated. In
-these cases, Target is left in an unspecified order, but contains the union of
-the elements that were initially in Source and Target; Source is left empty.
-@PDefn{unspecified}]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Merge removes elements from Source
+and inserts them into Target; afterwards,
+Target contains the union of the elements that were initially
+in Source and Target; Source is left empty.
+If Target and Source are initially sorted smallest first, then Target is
+ordered smallest first as determined by the generic formal "<" operator;
+otherwise, the order of elements in Target is unspecified.
+Any exception raised during evaluation of "<" is propagated.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[If Program_Error is propagated by Generic_Merge
-  because one of the lists was unsorted, it is possible to recover by sorting
-  Target. If Source and Target designate the same object, Generic_Merge is
-  essentially a no-op, but it still has to check that the list is sorted.]}
+  @ChgAdded{Version=[2],Text=[It is a bounded error if either of the lists is
+  unsorted, see below. The bounded error can be recovered by sorting Target
+  after the merge call, or the lists can be pretested with Is_Sorted.]}
 @end{Ramification}
 
 @begin{Example}
@@ -2575,8 +2684,9 @@ the nodes designated by I and J.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Program_Error is propagated unless
-Before is equal to No_Element or designates an element in Target. Otherwise, if
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
+does not designate an element in Target, then Program_Error is propagated.
+Otherwise, if
 Source denotes the same object as Target, the operation has no effect.
 Otherwise, Splice reorders elements such that they are removed from Source and
 moved to Target, immediately prior to Before. If Before equals No_Element, the
@@ -2588,7 +2698,36 @@ set to 0.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Splice (Target   : @key{in out} List;
                   Before   : @key{in}     Cursor;
-                  Position : @key{in}     Cursor);]}
+                  Source   : @key{in out} List;
+                  Position : @key{in out} Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is No_Element then
+Constraint_Error is propagated. If Before does not equal No_Element, and does
+not designate an element in Target, then Program_Error is propagated. If
+Position does not equal No_Element, and does not designate a node in Source,
+then Program_Error is propagated. If Source denotes the same object as Target,
+then there is no effect if Position equals Before, else the element
+designated by Position is moved immediately prior to Before, or, if Before
+equals No_Element, after the last element. Otherwise the element
+designated by Position is removed from Source and moved to Target, immediately
+prior to Before, or, if Before equals No_Element, after the last element of
+Target. The length of Target is incremented, the length of Source is
+decremented, and Position is updated to represent an element in Target.]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If Source is the same as Target, and
+  Position = Before, or Next(Position} = Before, Splice has no effect, as
+  the element does not have to move to meet the postcondition.]}
+@end{Ramification}
+
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Splice (Container: @key{in out} List;
+                  Before   : @key{in}     Cursor;
+                  Position : @key{in out} Cursor);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2598,26 +2737,6 @@ is propagated. If Position equals No_Element, or if Position equals Before, or
 if the successor of Position equals Before, the operation has no effect.
 Otherwise the element designated by Position is moved immediately prior to
 Before, or, if Before equals No_Element, after the last element.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Splice (Target   : @key{in out} List;
-                  Before   : @key{in}     Cursor;
-                  Source   : @key{in out} List;
-                  Position : @key{in}     Cursor);]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is No_Element then
-Constraint_Error is propagated. If Before does not equal No_Element, and does
-not designate an element in Target, then Program_Error is propagated. If
-Position does not equal No_Element, and does not designate a node in Source,
-then Program_Error is propagated. If Source denotes the same object as Target,
-then Splice is equivalent to Splice (Target, Before, Position). Otherwise the
-element designated by Position is removed from Source and moved to Target,
-immediately prior to Before, or, if Before equals No_Element, after the last
-element of Target. The length of Target is incremented, and the length of
-Source is decremented.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2801,6 +2920,16 @@ function.]}
 
 @end{StaticSem}
 
+@begin{Bounded}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+Calling Merge in an instance of Generic_Sorting
+with either Source or Target not ordered smallest first using the provided
+generic formal "<" operator is a bounded error. Either Program_Error is raised
+after Target is updated as described for Merge, or the operation works as
+defined.]}
+@end{Bounded}
+
 @begin{Erron}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A Cursor value is
@@ -2875,13 +3004,15 @@ O(log @i<N>).]}]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The worst-case time complexity of a call on an
-instantiation of Containers.Doubly_Linked_Lists.Generic_Sort should be
+@ChgAdded{Version=[2],Text=[The worst-case time complexity of a call on
+procedure Sort of an
+instantiation of Containers.Doubly_Linked_Lists.Generic_Sorting should be
 O(@i<N>**2), and the average time complexity should be better than O(@i<N>**2).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort
-should have an average time complexity better than O(@i{N}**2) and worst case no
-worse than O(@i{N}**2).]}]}
+Text=[a call on procedure Sort of an
+instantiation of Containers.Doubly_Linked_Lists.Generic_Sorting
+should have an average time complexity better than O(@i{N}**2) and
+worst case no worse than O(@i{N}**2).]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2903,6 +3034,23 @@ minimize copying of internal data structures.]}]}
   moving the pointer(s) to the internal data structures from the Source
   container to the Target container.]}
 @end{ImplNote}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If an exception is propagated from a list
+operation, no storage should be lost, nor any elements removed from a list
+unless specified by the operation.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If an exception is propagated from a list
+operation, no storage should be lost, nor any elements removed from a list
+unless specified by the operation.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is important so that programs can recover
+  from errors. But we don't want to require heroic efforts, so we just require
+  documentation of cases where this can't be accomplished.]}
+@end{Reason}
+
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -3002,10 +3150,16 @@ with the cursors of @i<M>.]}
 
 @end{Itemize}
 
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Replace only modifies a key and element rather
+  than rehashing, so it does not tamper with cursors.]}
+@end{Ramification}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
 @Defn2{Term=[tamper with elements],Sec=[of a map]}
-Some operations are assumed to not change elements. For such an operation, a
+Some operations are assumed to not replace elements. For such an operation, a
 subprogram is said to @i{tamper with elements} of a map object @i<M> if:]}
 
 @begin{Itemize}
@@ -3014,15 +3168,17 @@ subprogram is said to @i{tamper with elements} of a map object @i<M> if:]}
 @ChgAdded{Version=[2],Text=[it tampers with cursors of @i<M>; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it modifies one or more elements of @i<M>, that is,
-it calls the Replace, Replace_Element, or Update_Element procedures with @i<M>
+@ChgAdded{Version=[2],Text=[it replaces one or more elements of @i<M>, that is,
+it calls the Replace or Replace_Element procedures with @i<M>
 as a parameter.]}
 
-@begin{Ramification}
+@begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Replace only modifies a key and element rather
-  than rehashing, so it can be allowed for Iterate.]}
-@end{Ramification}
+  @ChgAdded{Version=[2],Text=[Complete replacement of an element can cause its
+  memory to be deallocated while another operation is holding onto a reference
+  to it. That can't be allowed. However, a simple modification of (part of) an
+  element is not a problem, so Update_Element does not cause a problem.]}
+@end{Reason}
 
 @end{Itemize}
 
@@ -3511,6 +3667,23 @@ minimize copying of internal data structures.]}]}
   moving the pointer(s) to the internal data structures from the Source
   container to the Target container.]}
 @end{ImplNote}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If an exception is propagated from a map
+operation, no storage should be lost, nor any elements removed from a map
+unless specified by the operation.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If an exception is propagated from a map
+operation, no storage should be lost, nor any elements removed from a map
+unless specified by the operation.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is important so that programs can recover
+  from errors. But we don't want to require heroic efforts, so we just require
+  documentation of cases where this can't be accomplished.]}
+@end{Reason}
+
 @end{ImplAdvice}
 
 @begin{DiffWord95}
@@ -4640,7 +4813,7 @@ parameter; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a set]}
-Some operations are assumed to not change elements. For such an operation, a
+Some operations are assumed to not replace elements. For such an operation, a
 subprogram is said to @i<tamper with elements> of a set object @i<S> if:]}
 
 @begin{Itemize}
@@ -4649,9 +4822,17 @@ subprogram is said to @i<tamper with elements> of a set object @i<S> if:]}
 @ChgAdded{Version=[2],Text=[it tampers with cursors of @i<S>; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it modifies one or more elements of @i<S>, that is,
-it calls the Replace or Update_Element_Preserving_Key procedures with @i<S> as
-a parameter.]}
+@ChgAdded{Version=[2],Text=[it replaces one or more elements of @i<S>, that is,
+it calls the Replace or Replace_Element procedures with @i<S> as a parameter.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Complete replacement of an element can cause its
+  memory to be deallocated while another operation is holding onto a reference
+  to it. That can't be allowed. However, a simple modification of (part of) an
+  element is not a problem, so Update_Element_Preserving_Key does not cause a
+  problem.]}
+@end{Reason}
 
 @end{Itemize}
 
@@ -5269,6 +5450,22 @@ copying of internal data structures.]}]}
   moving the pointer(s) to the internal data structures from the Source
   container to the Target container.]}
 @end{ImplNote}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[If an exception is propagated from a set
+operation, no storage should be lost, nor any elements removed from a set
+unless specified by the operation.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[If an exception is propagated from a set
+operation, no storage should be lost, nor any elements removed from a set
+unless specified by the operation.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is important so that programs can recover
+  from errors. But we don't want to require heroic efforts, so we just require
+  documentation of cases where this can't be accomplished.]}
+@end{Reason}
 
 @end{ImplAdvice}
 

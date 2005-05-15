@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/05/12 05:15:40 $}
+@Comment{$Date: 2005/05/14 05:20:09 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 
@@ -218,7 +218,7 @@ a single entry with the same identifier within the @nt{task_type_declaration},
 whose profile is type conformant with the
 prefixed view profile of inherited subprogram, the inherited subprogram is
 said to be @i{implemented} by the conforming task entry.@PDefn2{Term=[implemented],
-Sec=[by a task entry]}]}
+Sec=[by a task entry]}@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
@@ -282,12 +282,13 @@ inherited by the type declared by a
 @ChgAdded{Version=[2],Text=[the inherited subprogram shall be overridden with a
 primitive subprogram of the task type, in which case the overriding subprogram
 shall be subtype conformant with the inherited subprogram and not abstract;
-or]}
+or@Defn2{Term=[subtype conformance],Sec=(required)}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01]}
 @ChgAdded{Version=[2],Text=[the inherited subprogram is implemented by a
 single entry of the task type; in which case its prefixed view profile
-shall be subtype conformant with that of the task entry.]}
+shall be subtype conformant with that of the task entry.
+@Defn2{Term=[subtype conformance],Sec=(required)}]}
 
 @end{Itemize}
 
@@ -967,7 +968,8 @@ inherited subprogram, the inherited subprogram is said to be
 @i{implemented} by the conforming protected subprogram or
 entry.@PDefn2{Term=[implemented],
 Sec=[by a protected subprogram]}@PDefn2{Term=[implemented],
-Sec=[by a protected entry]}]}
+Sec=[by a protected entry]}
+@Defn2{Term=[type conformance],Sec=(required)}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1011,7 +1013,7 @@ is not a task interface.]]}
 primitive subprogram of a tagged protected type shall not be type conformant
 with any protected operation of the protected type, if the first parameter of
 the subprogram is of the protected type or is an access parameter designating
-the protected type.]}
+the protected type.@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin(Reason)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This prevents the existence of two operations
@@ -1038,13 +1040,15 @@ following shall apply:]}
 @ChgAdded{Version=[2],Text=[the inherited subprogram is overridden with a
 primitive subprogram of the protected type, in which case the overriding
 subprogram shall be subtype conformant with the inherited
-subprogram and not abstract; or]}
+subprogram and not abstract; or@Defn2{Term=[subtype conformance],Sec=(required)}]}
+
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01]}
 @ChgAdded{Version=[2],Text=[the inherited subprogram is implemented by a
 protected subprogram or single entry of the protected type,
 in which case its prefixed view profile shall be subtype conformant with that
-of the protected subprogram or entry.]}
+of the protected subprogram or entry.
+@Defn2{Term=[subtype conformance],Sec=(required)}]}
 
 @end{Itemize}
 

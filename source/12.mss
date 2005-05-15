@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/05/12 05:15:41 $}
+@Comment{$Date: 2005/05/14 05:20:10 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1218,8 +1218,10 @@ of the @nt{explicit_generic_actual_parameter}.
 @end{MetaRules}
 
 @begin{Syntax}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00423-01]}
 @Syn{lhs=<formal_object_declaration>,rhs="
-    @Syn2{defining_identifier_list} : @Syn2{mode} @Syn2{subtype_mark} [:= @Syn2{default_expression}];"}
+    @Syn2{defining_identifier_list} : @Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [:= @Syn2{default_expression}];@Chg{Version=[2],New=<
+    @Syn2{defining_identifier_list} : @Syn2{mode} @Syn2{access_definition} [:= @Syn2{default_expression}];>,Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -1233,8 +1235,16 @@ object is the type of the formal object.
 For a generic formal object of mode @key[in],
 the expected type for the actual is the type of the formal.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00423-01]}
 For a generic formal object of mode @key[in out],
-the type of the actual shall resolve to the type of the formal.
+the type of the actual shall resolve to the type @Chg{Version=[2],
+New=[determined by the @nt{subtype_mark}, or for a
+@nt{formal_object_declaration} with an @nt{access_definition}, to a specific
+anonymous access type which in the case of an access-to-object type shall
+have the same designated type as that of the @nt{access_definition} and in the
+case of an access-to-subprogram type shall have a designated profile which
+is type conformant with that of the @nt{access_definition}.
+@Defn2{Term=[type conformance],Sec=(required)}],Old=[of the formal]}.
 @begin{Reason}
 See the corresponding rule for @nt{object_renaming_declaration}s for a
 discussion of the reason for this rule.
@@ -1264,31 +1274,80 @@ but that's too pedantic to worry about.
 is most certainly @i{not} a @ResolutionName.)
 @end{Honest}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
-@ChgDeleted{Version=[2],Text=[The type of a generic formal object of mode
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00423-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{Conditional leading}
+@Chg{Version=[2],New=[In the case where the type of the formal is defined by an
+@nt{access_definition}, the type of the actual and the type of the formal:],
+Old=[The type of a generic formal object of mode
 @key{in} shall be nonlimited.]}
+
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
+  @ChgAdded{Version=[2],Text=[shall both be access-to-object types with
+  statically matching designated subtypes and with both or neither being
+  access-to-constant types; or
+  @PDefn2{Term=[statically matching],Sec=(required)}]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
+  @ChgAdded{Version=[2],Text=[shall both be access-to-subprogram types with
+  subtype conformant designated profiles.
+  @Defn2{Term=[subtype conformance],Sec=(required)}]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For a
+@nt{formal_object_declaration} with a @nt{null_exclusion} or an
+@nt{access_definition} that has a @nt{null_exclusion}:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[for an instantiation that occurs
+  within the body of a generic unit or within the body of a generic unit
+  declared within the declarative region of the generic unit, and the
+  actual denotes a generic formal object of that generic unit,
+  then the declaration of that formal object shall have a @nt{null_exclusion};]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[otherwise, the subtype of the actual
+  shall exclude null.
+  @PDefn{generic contract issue}
+  In addition to the places where @LegalityTitle normally apply
+  (see @RefSecNum{Generic Instantiation}),
+  this rule applies also in the private part of an
+  instance of a generic unit.]}
+
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[Since a generic formal object is like a
-constant of mode @key{in} initialized to the value of the actual,
-a limited type would not make sense, since initializing a constant is
-not allowed for a limited type.
-That is, generic formal objects of mode @key{in} are passed by copy,
-and limited types are not supposed to be copied.]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00423-01]}
+  @Chg{Version=[2],New=[This rule prevents @lquotes@;lying@rquotes.
+  @b<Null> must never be the value of an object with an explicit
+  @nt{null_exclusion}. The first bullet is an assume-the-worst rule
+  which prevents trouble in generic bodies (including bodies of child
+  units) when the subtype of the formal object excludes null implicitly.],
+  Old=[Since a generic formal object is like a
+  constant of mode @key{in} initialized to the value of the actual,
+  a limited type would not make sense, since initializing a constant is
+  not allowed for a limited type.
+  That is, generic formal objects of mode @key{in} are passed by copy,
+  and limited types are not supposed to be copied.]}
 @end{Reason}
+@end{Itemize}
+
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00255-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00255-01],ARef=[AI95-00423-01]}
 A @nt{formal_object_declaration} declares a generic formal object.
 The default mode is @key{in}.
 @PDefn2{Term=[nominal subtype], Sec=(of a generic formal object)}
 For a formal object of mode @key{in},
 the nominal subtype is the one denoted by the
-@nt{subtype_mark} in the declaration of the formal.
+@nt{subtype_mark} @Chg{Version=[2],New=[or @nt{access_definition} ],Old=[]}in
+the declaration of the formal.
 @PDefn2{Term=[static], Sec=(subtype)}
 For a formal object of mode @key{in out}, its type
-is determined by the @nt<subtype_mark> in the declaration;
+is determined by the @nt<subtype_mark> @Chg{Version=[2],
+New=[or @nt{access_definition} ],Old=[]}in the declaration;
 its nominal subtype is nonstatic, even if the
 @nt<subtype_mark> denotes a static subtype@Chg{Version=[2],
 New=[; for a composite type, its nominal subtype is unconstrained if the first
@@ -1305,7 +1364,12 @@ denotes a constrained subtype]],Old=[]}.
   rename or take 'Access of components that could disappear due to an
   assignment to the whole object.]}
 @end{Reason}
-
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
+  @ChgAdded{Version=[2],Text=[The two @lquotes@;even if@rquotes clauses are
+  OK even though they don't mention @nt{access_definition}s; an access subtype
+  can neither be a static subtype nor be a composite type.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00269-01]}
 @Chg{Version=[2],New=[@Defn2{Term=[full constant declaration],
@@ -1415,6 +1479,10 @@ important benefit, and any change has some cost.
   A generic formal @key{in} object can have
   a limited type. The actual for such an object must be built-in-place
   via a @nt{function_call} or @nt{aggregate}, see @RefSecNum{Limited Types}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
+  @ChgAdded{Version=[2],Text=[A generic formal object can have
+  a @nt{null_exclusion} or an anonymous access type.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -1862,7 +1930,7 @@ primitive subprogram
 of the ancestor @Chg{Version=[2],New=[ or progentor],Old=[]}is visible (see
 @RefSecNum{Private Operations}).
 In an instance, the copy of such an implicit declaration declares a view
-of the corresponding primitive subprogram of the ancestor@Chg{New=[or
+of the corresponding primitive subprogram of the ancestor@Chg{New=[ or
 progenitor of the formal derived type],Old=[]},
 even if this primitive has been overridden for the actual type.
 @Chg{New=[When the ancestor or progenitor of the formal derived type is
@@ -2456,15 +2524,49 @@ time of the @nt{generic_declaration}.
 The profiles of the formal and actual shall be mode-conformant.
 @Defn2{Term=[mode conformance],Sec=(required)}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For a parameter or result subtype of
+a @nt{formal_subprogram_declaration} that has an explicit @nt{null_exclusion}:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[for an instantiation that occurs within the body
+  of a generic unit or within the body of a generic unit declared within the
+  declarative region of the generic unit, and the actual denotes a generic
+  formal subprogram of that generic unit, then the corresponding parameter or
+  result type of that formal subprogram shall have a @nt{null_exclusion};]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[otherwise, the subtype of the corresponding
+  parameter or result type of the actual shall exclude null.
+  @PDefn{generic contract issue}
+  In addition to the places where @LegalityTitle normally apply
+  (see @RefSecNum{Generic Instantiation}),
+  this rule applies also in the private part of an
+  instance of a generic unit.]}
+@end{Itemize}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[This rule prevents
+  @lquotes@;lying@rquotes.
+  @b<Null> must never be the value of a parameter or result with an explicit
+  @nt{null_exclusion}. The first bullet is an assume-the-worst rule
+  which prevents trouble in generic bodies (including bodies of child generics)
+  when the formal subtype excludes null implicitly.]}
+@end{Reason}
+
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[If a formal parameter of an
 @nt{formal_@!abstract_@!subprogram_@!declaration} is of a
-specific tagged type T or of an anonymous access designating a specific tagged
-type T, T is called a @i<controlling type> of the
+specific tagged type @i<T> or of an anonymous access designating a specific tagged
+type @i<T>, @i<T> is called a @i<controlling type> of the
 @nt{formal_@!abstract_@!subprogram_@!declaration}. Similarly, if the result
 of an @nt{formal_@!abstract_@!subprogram_@!declaration} for a function is of
 a specific tagged
-type T or of an anonymous access designating a specific tagged type T, T is
+type @i<T> or of an anonymous access designating a specific tagged type @i<T>,
+@i<T> is
 called a controlling type of
 the @nt{formal_@!abstract_@!subprogram_@!declaration}. A
 @nt{formal_@!abstract_@!subprogram_@!declaration} shall have exactly
@@ -2688,6 +2790,9 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
   @ChgAdded{Version=[2],Text=[Formal procedures can be used as entries;
   removed wording that said otherwise.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
+  @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
 @end{Diffword95}
 
 

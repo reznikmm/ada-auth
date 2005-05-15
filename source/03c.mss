@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/12 05:15:37 $}
+@Comment{$Date: 2005/05/14 05:20:06 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2912,16 +2912,21 @@ the actual parameter is null.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
-@Defn2{Term=[excludes null],Sec=[subtype]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[excludes null],Sec=[subtype]}
 A @nt{null_exclusion} in an @nt{access_definition}, @nt{access_type_definition},
 @nt{subtype_indication} (see @RefSecNum{Subtype Declarations}),
-@nt{parameter_specification} (see @RefSecNum{Subprogram Declarations}), or
+@nt{parameter_specification} (see @RefSecNum{Subprogram Declarations}),
 @nt{parameter_and_result_profile} (see @RefSecNum{Subprogram Declarations}),
-specifies that the access subtype defined by the construct does not allow the
-null value, that is, the access subtype @i{excludes null}. In addition, the
+@nt{object_renaming_declaration} (see @RefSecNum{Object Renaming Declarations}),
+or @nt{formal_object_declaration} (see @RefSecNum{Formal Objects}) specifies
+that the null value does not belong to the access subtype defined by the
+construct, that is, the access subtype @i{excludes null}. In addition, the
 anonymous access subtype defined by the @nt{access_definition} for a controlling
 access parameter (see @RefSecNum{Dispatching Operations of Tagged Types})
-excludes null. Other subtypes do not exclude null.]}
+excludes null. Finally, for a @nt{subtype_indication} without a
+@nt{null_exclusion}, the subtype denoted by the @nt{subtype_indication}
+excludes null if and only if the subtype denoted by the @nt{subtype_mark} in
+the @nt{subtype_indication} does.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[An @nt{access_definition} used in a controlling
@@ -2941,13 +2946,6 @@ excludes null. Other subtypes do not exclude null.]}
   acceptable, and can be a useful indication of a particular status of the
   call.]}
 @end{Reason}
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-  @ChgAdded{Version=[2],Text=[Note that we say that all other subtypes
-  do not exclude null above. That means that we don't have to complicate
-  wording by specifying that we are only talking about access subtypes
-  when we mention a @lquotes@;subtype that excludes null@rquotes.]}
-@end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0013],ARef=[AI95-00012-01]}
 @PDefn2{Term=[constrained],Sec=(subtype)}
@@ -3836,7 +3834,7 @@ subtype.
   those in the extension part have the accessibility determined
   by the scope where the type extension is declared.
   Similarly, the components of a derived untagged type other than
-  discrimiantns of a limited type have the same accessibility as they did
+  discriminants of a limited type have the same accessibility as they did
   in the parent.]}
 @end{Ramification}
 
@@ -4717,7 +4715,7 @@ For example:]}
 @ChgAdded{Version=[2],Text=[Value : @key{aliased} Integer := 10;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Result1 : Float := Zap (Value'access); -- @RI[Ambigious in Ada 95; resolves in Ada 2006.]
+@ChgAdded{Version=[2],Text=[Result1 : Float := Zap (Value'access); -- @RI[Ambiguous in Ada 95; resolves in Ada 2006.]
 Result2 : Float := Zap (Int_Ptr'(Value'access)); -- @RI[Resolves in Ada 95 and Ada 2006.]]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

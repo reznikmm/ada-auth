@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:34 $}
+@Comment{$Date: 2005/05/14 05:20:10 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1842,10 +1842,10 @@ Text=[The Size of an array object should not include its bounds.]}]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[]}@Comment{A fake to get a conditional Leading}
 @PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
 The recommended level of support for the Size attribute
-of objects is@Chg{Version=[2],New=[the same as for subtypes (see below)],
+of objects is@Chg{Version=[2],New=[ the same as for subtypes (see below).],
 Old=[:]}
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00051-02]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00051-02]}
 @ChgDeleted{Version=[2],Text=[A Size clause should be supported for an object
 if the specified Size is at least as large as its subtype's Size, and
 corresponds to a size in storage elements that is a multiple of the object's

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2005/05/05 00:45:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2005/05/14 05:20:16 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:42 $}
+@Comment{$Date: 2005/05/14 05:20:16 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1372,7 +1372,7 @@ specification.
 as specified for the full view of the type.]}
 
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[If C interfacing is supported, the interface corrspondences between Ada
+Text=[If C interfacing is supported, the interface correspondences between Ada
 and C should be supported.]}]}
 @end{ImplAdvice}
 
@@ -2775,7 +2775,7 @@ to the Ada parameter type; for scalars, a local copy is
 used if necessary to ensure by-copy semantics.
 @end[itemize]
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[If COBOL interfacing is supported, the interface corrspondences between
+Text=[If COBOL interfacing is supported, the interface correspondences between
 Ada and COBOL should be supported.]}]}
 @end{ImplAdvice}
 
@@ -3065,8 +3065,8 @@ procedure whose interface corresponds to the designated subprogram's
 specification.
 @end[itemize]
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[If Fortran interfacing is supported, the interface corrspondences between
-Ada and Fortran should be supported.]}]}
+Text=[If Fortran interfacing is supported, the interface correspondences
+between Ada and Fortran should be supported.]}]}
 @end{ImplAdvice}
 
 @begin[Notes]

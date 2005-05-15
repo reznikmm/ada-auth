@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/12 05:15:38 $}
+@Comment{$Date: 2005/05/14 05:20:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.11 $}
+@Comment{$Revision: 1.12 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1123,11 +1123,11 @@ not a view conversion (and thus is illegal).],Old=[]}
 with discriminants of aliased components changing were removed, as we now
 generally allow discriminants of aliased components to be changed.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00392-01]}
-@Chg{Version=[2],New=[Added rules to make accessibility checks on conversions
-involving types with anonmyous access components. These have the level of the
-type, and conversions can be between types at different levels, which
-could cause dangling pointers.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00392-01]}
+  @ChgAdded{Version=[2],Text=[Added rules to make accessibility checks on
+  conversions involving types with anonymous access components. These have
+  the level of the type, and conversions can be between types at different
+  levels, which could cause dangling pointers.]}
 @end{DiffWord95}
 
 
@@ -1274,14 +1274,27 @@ the @nt<allocator> shall be an uninitialized allocator.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
-@Chg{Version=[2],New=[If the designated type of the type of the @nt{allocator} is
-class-wide, the accessibility level of the type determined by the
+@ChgAdded{Version=[2],Text=[If the designated type of the type of the
+@nt{allocator} is class-wide, the accessibility level of the type determined by the
 @nt{subtype_indication} or @nt{qualified_expression} shall not be statically
-deeper than that of the type of the @nt{allocator}.],Old=[]}
+deeper than that of the type of the @nt{allocator}.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This prevents the allocated object from outliving
   its type.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[If the designated subtype of the type of the
+allocator has one or more unconstrained access discriminants, then the
+accessibility level of the anonymous access type of each access discriminant,
+as determined by the @nt{subtype_indication} or @nt{qualified_expression} of the
+allocator, shall not be statically deeper than that of the type of the
+allocator (see @RefSecNum{Operations of Access Types}).]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This prevents the allocated object from outliving
+  its discriminants.]}
 @end{Reason}
 
 @end{Legality}
@@ -1348,8 +1361,13 @@ and assigned to the object.
 is class-wide, then a check is made that the accessibility level of the type
 determined by the @nt{subtype_indication}, or by the tag of the value of the
 @nt{qualified_expression}, is not
-deeper than that of the type of the @nt{allocator}. Program_Error is raised
-if this check fails.@IndexCheck{Accessibility_Check}
+deeper than that of the type of the @nt{allocator}. If the
+designated subtype of the @nt{allocator} has one or more unconstrained
+access discriminants, then a check is made that the accessibility
+level of the anonymous access type of each access discriminant is
+not deeper than that of the type of the @nt{allocator}.
+Program_Error is raised
+if either such check fails.@IndexCheck{Accessibility_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}
 @begin{Ramification}
   The conversion might raise Constraint_Error.
@@ -1522,46 +1540,52 @@ has been moved to @RefSec{Storage Management}.
 @end{DiffWord83}
 
 @begin{Inconsistent95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}If the
-designated type has a constrained partial view,
-the allocated object can be unconstrained. This might cause the object to
-take up a different amount of memory, and might cause the operations to work
-where they previously would have raised Constraint_Error. It's unlikely that
-the latter would actually matter in a real program (Constraint_Error usually
-indicates a bug that would be fixed, not left in a program.) The former
-might cause Storage_Error to be raised at a different time than in an Ada 95
-program.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}If the
+  designated type has a constrained partial view,
+  the allocated object can be unconstrained. This might cause the object to
+  take up a different amount of memory, and might cause the operations to work
+  where they previously would have raised Constraint_Error. It's unlikely that
+  the latter would actually matter in a real program (Constraint_Error usually
+  indicates a bug that would be fixed, not left in a program.) The former
+  might cause Storage_Error to be raised at a different time than in an Ada 95
+  program.]}
 @end{Inconsistent95}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95} @b<Corrigendum:> An
-@nt{allocator} can be a controlling parameter of a dispatching call. This
-was an oversight in Ada 95.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95} @b<Corrigendum:> An
+  @nt{allocator} can be a controlling parameter of a dispatching call. This
+  was an oversight in Ada 95.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}@nt{Allocator}s can be for a
-limited type.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[@nt{Allocator}s can be
+  for a limited type.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified the elaboration of per-object
-constraints for an uninitialized allocator.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0002],ARef=[AI95-00171-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the elaboration of
+  per-object constraints for an uninitialized allocator.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[Program_Error is now raised if the @nt{allocator}
-occurs after the finalization of the collection or the waiting for tasks.
-This is not listed as an incompatibility as the Ada 95 behavior was unspecified,
-and Ada 95 implementations tend to generate programs that crash in this
-case.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
+  @ChgAdded{Version=[2],Text=[Program_Error is now raised if the @nt{allocator}
+  occurs after the finalization of the collection or the waiting for tasks.
+  This is not listed as an incompatibility as the Ada 95 behavior was
+  unspecified, and Ada 95 implementations tend to generate programs that crash
+  in this case.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
-@Chg{Version=[2],New=[Added accessibility checks to class-wide @nt{allocator}s.
-These checks could not fail in Ada 95 (as all of the types had to be declared
-at the same level, so the access type would necessarily have been at the
-same level or more nested than the type of allocated object.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
+  @ChgAdded{Version=[2],Text=[Added accessibility checks to class-wide
+  @nt{allocator}s. These checks could not fail in Ada 95 (as all of the
+  types had to be declared at the same level, so the access type would
+  necessarily have been at the same level or more nested than the type
+  of allocated object.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Added accessibility checks to access
+  discriminants of @nt{allocator}s. These checks could not fail in Ada 95
+  as the discriminants always have the accessibility of the object.]}
 @end{DiffWord95}
 
 

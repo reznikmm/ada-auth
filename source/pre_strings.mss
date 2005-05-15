@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2005/05/05 00:45:43 $ $Author: Randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2005/05/14 05:20:16 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/05/05 00:45:43 $}
+@Comment{$Date: 2005/05/14 05:20:16 $}
 
 @LabeledClause{String Handling}
 
@@ -114,7 +114,7 @@ entities needed for character sets and character-to-character mappings.
    @key[function] "@key[and]" (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
    @key[function] "@key[or]"  (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
    @key[function] "@key[xor]" (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
-   @key[function] "@en"   (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
+   @key[function] "-"   (Left, Right : @key[in] Character_Set) @key[return] Character_Set;
 
    @key[function] @AdaSubDefn{Is_In} (Element : @key[in] Character;
                    Set     : @key[in] Character_Set)
@@ -1717,8 +1717,10 @@ determining the effect when the string length exceeds Max_Length.
 Strings.@!Bounded.@!Generic_@!Bounded_@!Length is applied, with the result
 assigned into the Source parameter.],Old=[]}
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The "/=" operations between Bounded_String and String, and between String
-and Bounded_String, are automatically defined based on the corrsponding
+and Bounded_String, are automatically defined based on the @Chg{Version=[2],
+New=[corresponding],Old=[corrsponding]}
 "=" operations.
 @end{Ramification}
 @end{StaticSem}
@@ -2365,7 +2367,7 @@ The package Strings.Wide_Maps has the following declaration.
       @key[return] Wide_Character_Set;
    @key[function] "@key[xor]" (Left, Right : @key[in] Wide_Character_Set)
       @key[return] Wide_Character_Set;
-   @key[function] "@key[@en]"   (Left, Right : @key[in] Wide_Character_Set)
+   @key[function] "-"   (Left, Right : @key[in] Wide_Character_Set)
       @key[return] Wide_Character_Set;
 
    @key[function] @AdaSubDefn{Is_In} (Element : @key[in] Wide_Character;

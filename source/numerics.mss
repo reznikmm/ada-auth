@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2005/05/05 00:45:37 $ $Author: Randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2005/05/14 05:20:12 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:37 $}
+@Comment{$Date: 2005/05/14 05:20:12 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -718,7 +718,7 @@ function, the branch cuts should be invariant by reflection in the origin.]}
 
 @Leading@;The computed results of the mathematically multivalued functions are rendered
 single-valued by the following conventions, which are meant to imply the
-principal branch@Chg{Version=[2],New=[is an analytic continuation of
+principal branch@Chg{Version=[2],New=[ is an analytic continuation of
 the corresponding real-valued function in
 Ada.Numerics.Generic_Elementary_Functions. (For Arctan and Arccot,
 the single-argument function in question is that obtained from the two-argument

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:25 $}
+@Comment{$Date: 2005/05/14 05:20:07 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1927,15 +1927,32 @@ statically match the result subtype of the function. The accessibility level of
 this anonymous access subtype is that of the result subtype.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[If the type of the return expression is limited, then the
+@ChgAdded{Version=[2],Text=[If the type of the return expression is limited, then the
 return expression shall be an aggregate, a function call (or equivalent use of
 an operator), or a @nt{qualified_expression} or parenthesized expression whose
-operand is one of these.],Old=[]}
+operand is one of these.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In other words, if limited, the return expression
   must produce a @lquotes@;new@rquotes@; object, rather than being the name
   of a preexisting object (which would imply copying).]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-02]}
+@ChgAdded{Version=[2],Text=[If the result type is class-wide, the accessibility
+level of the type of the return expression shall not be statically deeper than
+that of the master that elaborated the function body. If the result subtype has
+one or more unconstrained access discriminants, the accessibility level of the
+anonymous access type of each access discriminant, as determined by the
+@nt{return_subtype_indication} or the return expression, shall not be
+statically deeper than that of the master that elaborated the function body.]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We know that if the result type is class wide,
+  then there must be a return expression. Similarly, if the result subtype is
+  unconstrained, then either the @nt{return_subtype_indication} (if any) is
+  constrained, or there must be a return expression.]}
 @end{Discussion}
 
 @end{Legality}
@@ -1949,19 +1966,35 @@ with the given identifier, with nominal subtype defined by the
 @end{StaticSem}
 
 @begin{RunTime}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[execution], Sec=(extended_return_statement)}
 For the execution of an @nt{extended_return_statement}, the
 @nt{subtype_indication} or @nt{access_definition} is elaborated. This creates
 the nominal subtype of the return object. If there is a return expression, it
 is evaluated and converted to the nominal subtype (which might raise
-Constraint_Error @em see @RefSecNum{Type Conversions}@PDefn2{Term=[implicit subtype conversion],Sec=(function return)})
-and becomes the initial value of
-the return object; otherwise, the return object is initialized by default as
+Constraint_Error @em see @RefSecNum{Type Conversions}@PDefn2{Term=[implicit subtype conversion],Sec=(function return)});
+the return object is created and the converted value becomes the initial value
+of the return object; otherwise, the return object is initialized by default as
 for a stand-alone object of its nominal subtype (see @RefSecNum{Object Declarations}).
 If the nominal subtype is indefinite, the return object is constrained by its
 initial value. The @nt{handled_@!sequence_@!of_@!statements}, if any, is then
 executed.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If the result type is controlled or has a
+  controlled part, appropriate calls on Initialize or Adjust are performed
+  prior to executing the @nt{handled_sequence_of_statements}, except when the
+  initial expression is an @nt{aggregate} (which requires build-in-place
+  with no call on Adjust).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If the return statement exits without resulting
+  in a return (for example, due to an exception propagated from the return
+  expression or the handled sequence of statements, or a goto out of the
+  handled sequence of statements), the return object is finalized prior to
+  leaving the return statement.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @PDefn2{Term=[execution], Sec=(return_statement)}
@@ -1977,10 +2010,28 @@ The conversion might raise
 Constraint_Error @em (see @RefSecNum{Type Conversions}).
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-@ChgDeleted{Version=[2],Text=[If the result type is class-wide, then
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
+@Chg{Version=[2],New=[@Redundant[If the return object has any parts that are tasks, the
+activation of those tasks does not occur until after the function returns (see
+@RefSecNum{Task Execution - Task Activation}).]],
+Old=[If the result type is class-wide, then
 the tag of the result is the tag of the value
 of the @nt<expression>.]}
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is specified by the rules in
+  @RefSecNum{Task Execution - Task Activation}.]}
+@end{TheProof}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Only the caller can know when task activations
+  should take place, as it depends on the context of the call. If the function
+  is being used to initialize the component of some larger object, then that
+  entire object must be initialized before any task activations. Even after the
+  outer object is fully initialized, task activations are still postponed until
+  the @key{begin} at the end of the declarative part if the function is being
+  used to initialize part of a declared object.]}
+@end{Reason}
 
 @leading@keepnext@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}If
 the result type @Chg{Version=[2],New=[of a function ],Old=[]}is a specific
@@ -2102,13 +2153,14 @@ The exception Program_Error is raised if this check fails.]}
   except for dereferences of an access parameter.]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01],ARef=[AI95-00402-01]}
-@ChgAdded{Version=[2],Text=[If the result type is class-wide, a check is made that
-the accessibility level of the type identified by the tag of the result is not
-deeper than that of the master that elaborated the function body.
-If the result expression is of a type with an access discriminant, a check is
-made that the accessibility level of the object associated with the value of
-the expression is not deeper than that of the master that elaborated the
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[If the result type is class-wide, a check is made
+that the accessibility level of the type identified by the tag of the result is
+not deeper than that of the master that elaborated the function body.
+If the result subtype has one or more unconstrained access discriminants,
+a check is made that the accessibility level of the anonymous access type
+of each access discriminant, as determined by the @nt{return_subtype_indication}
+or return expression, is not deeper than that of the master that elaborated the
 function body. If either of these checks fails, Program_Error is raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 @IndexCheck{Accessibility_Check}]}
@@ -2150,6 +2202,29 @@ and returns to the caller.@Chg{Version=[2],New=[ In the case of a function,
 the @nt{function_call} denotes a constant view of the return object.],Old=[]}
 @end{RunTime}
 
+@begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[If the result subtype of a function is
+unconstrained, and a call on the function is used to provide the initial value
+of an object with a constrained nominal subtype, Constraint_Error may be raised
+at the point of the call while elaborating a @nt{return_subtype_indication} or
+evaluating a return expression within the function, if it is determined that
+the value of the result will violate the constraint of this object's subtype.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Without such a permission, it would be very
+  difficult to implement @lquotes@;build-in-place@rquotes semantics. Such an
+  exception is not handleable within the function, because in the
+  return-by-copy case, the constraint check to verify that the result satisfies
+  the constraints of the object being initialized happens after the function
+  returns, and we want the semantics to change as little as possible when
+  switching between return-by-copy and build-in-place. This implies further
+  that upon detecting such a situation, the implementation may need to simulate
+  a goto to a point outside any local exception handlers prior to raising the
+  exception.]}
+@end{Reason}
+@end{ImplPerm}
+
 @begin{Examples}
 @leading@keepnext@i{Examples of return statements:}
 @begin{Example}
@@ -2165,10 +2240,12 @@ the @nt{function_call} denotes a constant view of the return object.],Old=[]}
 @end{Examples}
 
 @begin{Incompatible83}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Defn{incompatibilities with Ada 83}
 In Ada 95, if the result type of a function has a part that is a task,
 then an attempt to return a local variable will raise Program_Error.
-In Ada 83, if a function returns a local variable containing a task,
+@Chg{Version=[2],New=[This is illegal in Ada 2006, see below. ],
+Old=[]}In Ada 83, if a function returns a local variable containing a task,
 execution is erroneous according to AI83-00867. However,
 there are other situations where functions that return tasks
 (or that return a variant record only one of whose variants
@@ -2203,53 +2280,59 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{DiffWord83}
 
 @begin{Incompatible95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
-The entire business about return-by-reference types has been dropped.
-Instead, a return expression of a limited type can only be an @nt{aggregate} or
-@nt{function_call} (see @RefSecNum{Limited Types}). This means that returning
-a global object or @nt{type_conversion}, legal in Ada 95, is now illegal.
-Such functions can be converted to use anonymous access return types by
-adding @key{access} in the function definition and @nt{return_statement},
-adding .@key{all} in uses, and adding @key{aliased} in the object declarations.
-This has the advantage of making the reference return semantics much clearer
-to the causal reader.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95} The entire
+  business about return-by-reference types has been dropped. Instead, a return
+  expression of a limited type can only be an @nt{aggregate} or
+  @nt{function_call} (see @RefSecNum{Limited Types}). This means that returning
+  a global object or @nt{type_conversion}, legal in Ada 95, is now illegal.
+  Such functions can be converted to use anonymous access return types by
+  adding @key{access} in the function definition and @nt{return_statement},
+  adding .@key{all} in uses, and adding @key{aliased} in the object
+  declarations. This has the advantage of making the reference return semantics
+  much clearer to the causal reader.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[We changed these rules so that functions, combined with
-the new rules for limited types (@RefSecnum{Limited Types}), can be
-used as build-in-place constructors for limited types. This reduces the
-differences between limited and nonlimited types, which hopefully will make
-limited types useful in more circumstances.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We changed these rules so that functions,
+  combined with the new rules for limited types (@RefSecnum{Limited Types}),
+  can be used as build-in-place constructors for limited types. This reduces
+  the differences between limited and nonlimited types, which hopefully will
+  make limited types useful in more circumstances.]}
 @end{Incompatible95}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-The @nt{extended_return_statement} is new. This provides a name for
-the object being returned, which reduces the copying needed to return
-complex objects (including no copying at all for limited objects). It also
-allows component-by-component construction of the return object.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The @nt{extended_return_statement} is new. This provides a name for
+  the object being returned, which reduces the copying needed to return
+  complex objects (including no copying at all for limited objects). It also
+  allows component-by-component construction of the return object.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[The wording was updated to support anonymous access
-return subtypes.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[The wording was updated to support anonymous
+  access return subtypes.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added accessibility checks to class-wide
   @nt{return_statement}s. These checks could not fail in Ada 95 (as all of the
   types had to be declared at the same level, so the access type would
   necessarily have been at the same level or more nested than the type of the
-  object.]}
+  object).]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00402-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added accessibility checks to
   @nt{return_statement}s for types with access discriminants. Since such
   types have to be limited in Ada 95, the return expressions would have
   been illegal in order for this check to fail.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Added an @ImplPermTitle allowing
+  early raising of Constraint_Error if the result cannot fit in the ultimate
+  object. This gives implementations more flexibility to do built-in-place
+  returns, and is essential for limited types (which cannot be built in a
+  temporary).]}
 @end{DiffWord95}
 
 

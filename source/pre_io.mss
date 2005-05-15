@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:29 $}
+@Comment{$Date: 2005/05/14 05:20:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -3532,7 +3532,7 @@ was opened again after it had been closed.]}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[These rules are analogous to the rule for the result of the
 Current_Input, Current_Output, and Current_Error functions. These rules make
-it possible to represent a value of (some decendant of) Root_Stream_Type which
+it possible to represent a value of (some descendant of) Root_Stream_Type which
 represents a file as an access value, with a null value corresponding to a
 closed file.]}
 @end{Reason}

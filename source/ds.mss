@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2005/05/07 05:18:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2005/05/14 05:20:11 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/05/07 05:18:28 $}
+@Comment{$Date: 2005/05/14 05:20:11 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -239,7 +239,7 @@ to query information about the partition.
   @ChgAdded{Version=[2],Text=[Corrected wording so that a partition that
   has an elaboration problem will either deadlock or raise an exception.
   While an Ada 95 implementation could allow some partitions to continue to
-  execute, they could be accesing unelaborated data, which is very bad
+  execute, they could be accessing unelaborated data, which is very bad
   (and erroneous in a practical sense). Therefore, this isn't listed as an
   inconsistency.]}
 @end{DiffWord95}

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.28 $ $Date: 2005/05/07 05:18:31 $ $Author: Randy $ }
+@Comment{ $Revision: 1.29 $ $Date: 2005/05/14 05:20:15 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:31 $}
+@Comment{$Date: 2005/05/14 05:20:15 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -932,11 +932,13 @@ If a pragma Restrictions(No_Exceptions) is specified, the effects of all
 constructs where language-defined checks are still performed.]}]}
 @begin{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The documentation requirements here are quite difficult to satisfy. One
 method is to review the object code generated and determine the checks that
 are still present, either explicitly, or implicitly within the architecture.
 As another example from that of overflow, consider the question of
-deferencing a null pointer. This could be undertaken by a memory access trap
+@Chg{Version=[2],New=[dereferencing],Old=[deferencing]} a null pointer.
+This could be undertaken by a memory access trap
 when checks are performed. When checks are suppressed via the argument
 No_Exceptions, it would not be necessary to have the memory access trap
 mechanism enabled.

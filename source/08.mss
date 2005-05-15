@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/05/12 05:15:39 $}
+@Comment{$Date: 2005/05/14 05:20:08 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1767,9 +1767,9 @@ irrelevant, since failing these tests is highly unlikely.
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00423-01]}
 @Syn{lhs=<object_renaming_declaration>,rhs="@Chg{Version=[2],New=[
-    ],Old=[]}@Syn2{defining_identifier} : @Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name};@Chg{Version=[2],New=[
+    ],Old=[]}@Syn2{defining_identifier} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name};@Chg{Version=[2],New=[
     @Syn2{defining_identifier} : @Syn2{access_definition} @key{renames} @SynI{object_}@Syn2{name};],Old=[]}"}
 @end{Syntax}
 
@@ -1825,28 +1825,36 @@ the type of the renamed object and the type defined by the
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Text=[shall both be access-to-object types with
 statically matching designated subtypes and with both or neither being
-access-to-constant types; or]}
+access-to-constant types; or
+@PDefn2{Term=[statically matching],Sec=(required)}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Text=[shall both be access-to-subprogram types with
-subtype conformant designated profiles.]}
+subtype conformant designated profiles.
+@Defn2{Term=[subtype conformance],Sec=(required)}]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For an
-@nt{object_renaming_declaration} with an @nt{access_definition} that
-has a @nt{null_exclusion}:]}
+@nt{object_renaming_declaration} with a @nt{null_exclusion} or an
+@nt{access_definition} that has a @nt{null_exclusion}:]}
 
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[if the @nt{object_renaming_declaration} occurs
-within the body of a generic unit, and the @Syni{object_}@nt{name} denotes a
-generic formal object of that generic unit, then the declaration of that formal
-object shall have a @nt{null_exclusion};]}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[if the @nt{object_renaming_declaration} occurs
+  within the body of a generic unit or within the body of a generic unit
+  declared within the declarative region of the generic unit, and the
+  @Syni{object_}@nt{name} denotes a generic formal object of that generic unit,
+  then the declaration of that formal object shall have a @nt{null_exclusion};]}
 
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[otherwise, the subtype of the
-@Syni{object_}@nt{name} shall exclude null.]}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[otherwise, the subtype of the
+  @Syni{object_}@nt{name} shall exclude null.
+  @PDefn{generic contract issue}
+  In addition to the places where @LegalityTitle normally apply
+  (see @RefSecNum{Generic Instantiation}),
+  this rule applies also in the private part of an
+  instance of a generic unit.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1882,7 +1890,8 @@ Obj : Acc_I := @key{null};]}
   is satisfied for generic matching (Obj matches B; B does not explicitly
   state @key{not null}),
   @LegalityTitle are not rechecked in the body of any instance, and the
-  template passes the lying rule as well.]}
+  template passes the lying rule as well. The rule is so complex because it
+  has to apply to bodies of child generics as well.]}
 @end{Reason}
 @end{Itemize}
 
@@ -2170,20 +2179,26 @@ shall be mode-conformant with that of the renamed callable entity.
 @Defn2{Term=[mode conformance],Sec=(required)}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[For a parameter or result type of
-the @nt{subprogram_specification} that has a @nt{null_exclusion}:]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For a parameter or result subtype of
+the @nt{subprogram_specification} that has an explicit @nt{null_exclusion}:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[if the @nt{subprogram_renaming_declaration}
-  occurs within the body of a generic unit, and the
+  occurs within the body of a generic unit or within the body of a generic unit
+  declared within the declarative region of the generic unit, and the
   @Syni{callable_entity_}@nt{name} denotes a generic formal subprogram of that
   generic unit, then the corresponding parameter or result type of that formal
   subprogram shall have a @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[otherwise, the subtype of the corresponding
-  parameter or result type of the renamed callable entity shall exclude null.]}
+  parameter or result type of the renamed callable entity shall exclude null.
+  @PDefn{generic contract issue}
+  In addition to the places where @LegalityTitle normally apply
+  (see @RefSecNum{Generic Instantiation}),
+  this rule applies also in the private part of an
+  instance of a generic unit.]}
 @end{Itemize}
 
 @begin{Reason}
@@ -2192,8 +2207,8 @@ the @nt{subprogram_specification} that has a @nt{null_exclusion}:]}
   @lquotes@;lying@rquotes.
   @b<Null> must never be the value of a parameter or result with an explicit
   @nt{null_exclusion}. The first bullet is an assume-the-worst rule
-  which prevents trouble in generic bodies when the formal subtype excludes
-  null implicitly.]}
+  which prevents trouble in generic bodies (including bodies of child
+  units) when the formal subtype excludes null implicitly.]}
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0027],Ref=[8652/0028],ARef=[AI95-00135-01],ARef=[AI95-00145-01]}
@@ -3189,7 +3204,7 @@ things like @lquotes@;any integer type.@rquotes@;
 @key{procedure} Proc (Acc : @key{access} Integer) ...
 @key{procedure} Proc (Acc : Cacc) ...
 List : Cacc := ...;
-Proc (List); -- @RI[OK in Ada 95, ambigious in Ada 2006.]]}
+Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2006.]]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If there is any code like this (such code should

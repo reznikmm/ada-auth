@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/12 05:15:36 $}
+@Comment{$Date: 2005/05/14 05:20:05 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1154,7 +1154,8 @@ since it always denotes a subtype.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  An optional @nt{null_exclusion} can be used in a @nt{subtype_indication}.]}
+  An optional @nt{null_exclusion} can be used in a @nt{subtype_indication}.
+  This is described in @RefSecNum{Access Types}]}
 @end{Extend95}
 
 
@@ -2311,6 +2312,10 @@ of the derived type.
   implicitly if there is no explicit one given.
   See @RefSec(Fixed Point Types).
 @end(Discussion)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+@ChgAdded{Version=[2],Text=[The first subtype of the derived type excludes null
+(see @RefSecNum{Access Types}) if and only if the parent subtype excludes null.]}
 
 @Leading@keepnext@;The characteristics of the derived type are defined as follows:
 @begin(itemize)
@@ -4550,8 +4555,10 @@ A @nt<signed_integer_type_definition> also defines a constrained first
 subtype of the type, with a range whose bounds are given by
 the values of the @nt<simple_expression>s, converted to the type being defined.
 @begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   The base range of a signed integer type might be much larger than is
-  necessary to satisfy the aboved requirements.
+  necessary to satisfy the @Chg{Version=[2],New=[above],Old=[aboved]}
+  requirements.
 @end{ImplNote}
 @begin{Honest}
   @ChgRef{Version=[1],Kind=[Added]}@ChgNote{This is discussed in AC-00002, which we can't reference here}

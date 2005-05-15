@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.13 $ $Date: 2005/05/05 00:45:37 $ $Author: Randy $ }
+@comment{ $Revision: 1.14 $ $Date: 2005/05/14 05:20:13 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:37 $}
+@Comment{$Date: 2005/05/14 05:20:13 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -668,7 +668,7 @@ external file or directory. The exception Use_Error is propagated if the
 external environment does not support the searching of the directory with the
 given name (in the absence of Name_Error).]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
-intepretation of a non-null search pattern in Directories.],Old=[]}]}
+interpretation of a non-null search pattern in Directories.],Old=[]}]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} End_Search (Search : @key{in out} Search_Type);]}
