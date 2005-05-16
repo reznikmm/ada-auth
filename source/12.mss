@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:10 $}
+@Comment{$Date: 2005/05/15 06:35:36 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1919,7 +1919,7 @@ as for a derived type defined by a @nt<derived_type_definition>
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0038],ARef=[AI95-00202]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01],ARef=[AI95-00401-01]}
-For a formal derived type@Chg{Version=[2],New=[ and progentor types],Old=[]},
+For a formal derived type@Chg{Version=[2],New=[ and progenitor types],Old=[]},
 the predefined operators and inherited user-defined subprograms are determined
 by the ancestor type, and are implicitly declared
 at the earliest place, if any,
@@ -1927,7 +1927,7 @@ at the earliest place, if any,
 Old=[within the immediate scope of]} the formal
 type@Chg{Version=[2],New=[ is declared],Old=[]}, where the corresponding
 primitive subprogram
-of the ancestor @Chg{Version=[2],New=[ or progentor],Old=[]}is visible (see
+of the ancestor @Chg{Version=[2],New=[or progenitor ],Old=[]}is visible (see
 @RefSecNum{Private Operations}).
 In an instance, the copy of such an implicit declaration declares a view
 of the corresponding primitive subprogram of the ancestor@Chg{New=[ or
@@ -1955,7 +1955,7 @@ the type and tag of the operands.
 Even for tagged types, the formal parameter names and
 @nt{default_expression}s are determined
 by those of the primitive subprograms of the specified
-ancestor type @Chg{Version=[2],New=[ (or progentor type, for subprograms
+ancestor type @Chg{Version=[2],New=[ (or progenitor type, for subprograms
 inherited from an interface type)],Old=[]}.
 @end{Ramification}
 

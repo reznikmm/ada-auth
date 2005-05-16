@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:08 $}
+@Comment{$Date: 2005/05/15 06:35:35 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -716,7 +716,7 @@ Old=[An explicit declaration overrides an implicit declaration of a primitive
 subprogram]}, @Redundant[regardless of which declaration occurs first];
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044-01]}
-And regardless of whether the @Chg{New=[non-overriddable],Old=[explicit]}
+And regardless of whether the @Chg{New=[non-overridable],Old=[explicit]}
 declaration is overloadable or not.
 @Chg{New=[For example, @nt{statement_identifier}s are covered by this rule.],Old=[]}
 

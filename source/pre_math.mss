@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2005/05/07 05:18:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2005/05/15 06:35:40 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:30 $}
+@Comment{$Date: 2005/05/15 06:35:40 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -726,7 +726,7 @@ different random number sequences.]}]}
 Any storage associated with an object of type Generator should be
 reclaimed on exit from the scope of the object.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],Text=[Any
-Any storage associated with an object of type Generator of the random
+storage associated with an object of type Generator of the random
 number packages should be reclaimed on exit from the scope of the object.]}]}
 @begin{Ramification}
   A level of indirection is implicit in the semantics of the

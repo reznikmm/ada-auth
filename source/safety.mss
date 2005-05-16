@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.29 $ $Date: 2005/05/14 05:20:15 $ $Author: Randy $ }
+@Comment{ $Revision: 1.30 $ $Date: 2005/05/15 06:35:43 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:15 $}
+@Comment{$Date: 2005/05/15 06:35:43 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1031,7 +1031,7 @@ proscribed
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
   @ChgAdded{Version=[2],Text=[Restriction No_Dependence is used instead of
-  of special @i<restriction_>@nt<identifier>s. The old names are banished to
+  special @i<restriction_>@nt<identifier>s. The old names are banished to
   Obsolescent Features (see @RefSecNum{Dependence Restrictions Identifiers}).]}
 @end{DiffWord95}
 

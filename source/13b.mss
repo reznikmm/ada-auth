@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/12 05:15:42 $}
+@Comment{$Date: 2005/05/15 06:35:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @LabeledClause{The Package System}
 
@@ -822,7 +822,7 @@ when possible.
 Restrictions on unchecked conversions should be avoided
 unless required by the target environment.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[There should not be unncessary run-time checks on the result of
+Text=[There should not be unnecessary run-time checks on the result of
 an Unchecked_Conversion; the result should be returned by reference when
 possible. Restrictions on Unchecked_Conversions should be avoided.]}]}
 @begin{ImplNote}

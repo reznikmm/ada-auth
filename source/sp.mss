@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2005/05/07 05:18:31 $ $Author: Randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2005/05/15 06:35:43 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/05/07 05:18:31 $}
+@Comment{$Date: 2005/05/15 06:35:43 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -483,7 +483,7 @@ pragma need not be at the library level. Thus, an implementation needs to be
 able to restore handlers during the execution of the program.@Chg{Version=[2],
 New=[ (An object with an Interrupt_@!Handler pragma also need not be at the
 library-level, but such
-a handler cannot be attached to an interrupt usign the Interrupts package.)],
+a handler cannot be attached to an interrupt using the Interrupts package.)],
 Old=[]}],Old=[]}
 @end{Discussion}
 
@@ -1804,7 +1804,7 @@ termination.]}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00237-01]}
   @ChgAdded{Version=[2],Text=[This is necessary because the normative wording
-  only says that that attributes are finalized @lquotes@;after@rquotes@;
+  only says that attributes are finalized @lquotes@;after@rquotes@;
   task termination. Without this advice, waiting until the instance is
   finalized would meet the requirements (it is after termination, but may be
   a very long time after termination). We can't say anything more specific

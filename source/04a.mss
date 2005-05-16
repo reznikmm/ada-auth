@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:24 $}
+@Comment{$Date: 2005/05/15 06:35:33 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2619,13 +2619,13 @@ component type is a boolean type:
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00145-01]}
   @ChgAdded{Version=[2],Text=[For these operators, we are talking about
   the type itself, and not some subtype of it. Since it's possible that the
-  type itself cannot be named, we denote the type with an italized @i(T).
-  This applies to the italized @i(T) in many other predefined operators and
-  attributes as well.@Defn2{Term=[T],Sec=[italized]}]}
+  type itself cannot be named, we denote the type with an italicized @i(T).
+  This applies to the italicized @i(T) in many other predefined operators and
+  attributes as well.@Defn2{Term=[T],Sec=[italicized]}]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00145-01]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[In many cases, there is a subtype
-  with the correct properties available. The italized @i(T) means:]}
+  with the correct properties available. The italicized @i(T) means:]}
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[@i(T)'Base, for scalars;]}
@@ -2641,8 +2641,8 @@ component type is a boolean type:
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Note that the last case often is the same as
   the first subtype of @i(T), but that isn't the case for constrained array
-  types (where the type is unconstrained) and for access types with a null
-  exclusion (where the type does not have a null exclusion).]}
+  types (where the type is unconstrained) and for access types with a
+  @nt{null_exclusion} (where the type does not exclude null).]}
 @end{Ramification}
 
 For boolean types, the predefined logical operators

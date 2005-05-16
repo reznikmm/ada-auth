@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2005/05/14 05:20:11 $ $Author: Randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2005/05/15 06:35:38 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/05/14 05:20:11 $}
+@Comment{$Date: 2005/05/15 06:35:38 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1813,7 +1813,7 @@ substantially equivalent to the specification defined in this clause.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Experience has proved that the definition
-  of System.RPC given here is inadequate for interfacing to to existing
+  of System.RPC given here is inadequate for interfacing to existing
   distribution mechanisms (such as CORBA), especially on heterogeneous
   systems. Rather than mandate a change in the mechanism (which would
   break existing systems), require implementations to support multiple

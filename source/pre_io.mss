@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:13 $}
+@Comment{$Date: 2005/05/15 06:35:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -160,7 +160,7 @@ Text=[Any implementation-defined characteristics of the
 input-output packages.]}]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The last sentence here is refering to the
+@ChgAdded{Version=[2],Text=[The last sentence here is referring to the
 documentation requirements in @RefSec{Exceptions in Input-Output}, and
 the documentation summary item is provided there.]}
 @end{Discussion}
@@ -255,7 +255,7 @@ a property of a file object, not of an external file.
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
-  @ChgAdded{Version=[2],Text=[Italized @lquotes@;stream file@rquotes@;
+  @ChgAdded{Version=[2],Text=[Italicized @lquotes@;stream file@rquotes@;
   to clarify that this is another kind of file.]}
 @end{DiffWord95}
 
@@ -1652,7 +1652,7 @@ file objects, but not necessarily different external files.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0053],ARef=[AI95-00063-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that execution
-  is erroneous only when a closed default file file is accessed.]}
+  is erroneous only when a closed default file is accessed.]}
 @end{DiffWord95}
 
 

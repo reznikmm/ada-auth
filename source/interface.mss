@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2005/05/14 05:20:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2005/05/15 06:35:44 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:16 $}
+@Comment{$Date: 2005/05/15 06:35:44 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1802,7 +1802,7 @@ Free, not by a called C function.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0064],ARef=[AI95-00039-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed the missing semantics
-  of Update whrn Item is Null_Ptr.]}
+  of Update when Item is Null_Ptr.]}
 @end{DiffWord95}
 
 

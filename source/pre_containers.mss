@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2005/05/14 05:20:14 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2005/05/15 06:35:41 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:14 $}
+@Comment{$Date: 2005/05/15 06:35:41 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -1299,13 +1299,13 @@ and then Position is set to To_Cursor (Container, @i<T>).]}
 capacity of Container, Set_Length calls Reserve_Capacity (Container, Length),
 then sets the length of the Container to Length. If Length is greater than the
 original length of Container, empty elements are added to Container; otherwise
-elements are are removed from Container.]}
+elements are removed from Container.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[No elements are moved by this operation; any new
   empty elements are added at the end. This follows from the rules that a
-  cursor continues to designate the same element unless the the routine is
+  cursor continues to designate the same element unless the routine is
   defined to make the cursor ambiguous or invalid; this operation does not do
   that.]}
 @end{Ramification}
@@ -1535,9 +1535,11 @@ evaluation of "<" is propagated.]}
 @end{Discussion}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This operation will usually require copying the
-  elements into a temporary location. One implementation strategy would be to
-  allocate a new internal data array of the appropriate length, copy the
+  @ChgAdded{Version=[2],Text=[The Merge operation will usually require copying
+  almost all of the elements. One implementation strategy would be to
+  extend Target to the appropriate length, then copying elements from the back
+  of the vectors working towards the front. An alternative approach would be
+  to allocate a new internal data array of the appropriate length, copy the
   elements into it in an appropriate order, and then replacing the data array
   in Target with the temporary.]}
 @end{ImplNote}

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2005/05/12 05:15:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2005/05/15 06:35:42 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/05/12 05:15:42 $}
+@Comment{$Date: 2005/05/15 06:35:42 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1537,7 +1537,7 @@ the execution of the program is erroneous.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[On a multiprocessor, the implementation shall
 document any conditions that cause the completion of the setting of a task's
-deadline to be delayed later than what is specified for a single procressor.]}
+deadline to be delayed later than what is specified for a single processor.]}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Any conditions that cause the completion of the setting of a task's
 deadline to be delayed for a multiprocessor.]}]}
@@ -2805,7 +2805,7 @@ The above Storage_Checks can be suppressed with pragma Suppress.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
   @ChgAdded{Version=[2],Text=[Restriction No_Asynchronous_Control is now
-  obsolscent.]}
+  obsolescent.]}
 @end{DiffWord95}
 
 
@@ -4159,7 +4159,7 @@ otherwise it is set. The first procedure Set_Handler loads the timer TM with an
 interval specified by the Time_Span parameter. In this mode, when the execution
 time of the task identified by TM.T has increased by In_Time, the timer TM is
 said to have expired. The second procedure Set_Handler loads the timer TM with
-the absolute value specified by At_Time. In this mode, when the the execution
+the absolute value specified by At_Time. In this mode, when the execution
 time of the task identified by TM.T reaches At_Time, the timer TM is said to
 have @i<expired>; if the value of At_Time has already been reached when
 Set_Handler is called, the timer TM is said to be expired.@Defn2{Term=[expired],

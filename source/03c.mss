@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:06 $}
+@Comment{$Date: 2005/05/15 06:35:32 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3773,70 +3773,158 @@ and deeper than that of each master upon which the task executing the
 given master directly depends
 (see @RefSecNum{Task Dependence - Termination of Tasks}).
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
-An entity or view created by a declaration
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
+An entity or view @Chg{Version=[2],New=[defined],Old=[created]} by a
+declaration@Chg{Version=[2],New=[ and created as part of its elaboration],Old=[]}
 has the same accessibility level
-as the innermost enclosing master@Chg{Version=[2],
-New=[ other than the declaration itself],Old=[]} except in the
+as the innermost @Chg{Version=[2],New=[],Old=[enclosing ]}master@Chg{Version=[2],
+New=[ (other than the declaration itself)],Old=[]} except in the
 cases of renaming and derived access types described below.
 A parameter of a master has the same
 accessibility level as the master.
 
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[This rule defines the @lquotes@;normal@rquotes
+  accessibility of entities. In the absence of special rules below, we intend
+  for this rule to apply.]}
+@end{Reason}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[This rule defines the accessibility of all
+  named access types, as well as the accessibility level of all anonymous
+  access types other than those for access parameters and access discriminants.
+  Special rules exist for the accessibility level of such anonymous types.
+  Components, stand-alone objects, and function results whose
+  (anonymous) type is defined by an @nt{access_definition} have
+  accessibility levels corresponding to named access types defined at
+  the same point.]}
+@end{Discussion}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[Because accessibility level is determined
+  by where the @nt{access_definition} is elaborated, for a type extension,
+  the anonymous access types of components (other than access discriminants)
+  inherited from the parent have the same accessibility as they did in the
+  parent; those in the extension part have the accessibility
+  determined by the scope where the type extension is declared.
+  Similarly, the types of the non-discriminant access components
+  of a derived untagged type have the same accessibility as they
+  did in the parent.]}
+@end{Ramification}
 
 The accessibility level of
 a view of an object or subprogram defined by a @nt{renaming_declaration}
 is the same as that of
 the renamed view.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 The accessibility level of
-a view conversion
+a view conversion@Chg{Version=[2],New=[, @nt{qualified_expression}, or
+@nt{parenthesized_expression},],Old=[]}
 is the same as that of
 the operand.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[],Old=[For a function whose result type is a
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
+@Chg{Version=[2],New=[The],Old=[For a function whose result type is a
 return-by-reference type,
 the accessibility level of the result object is the same as
-that of the master that elaborated the function body. ]}For
-any@Chg{Version=[2],New=[],Old=[ other]} function,
-the accessibility level of the result object is that of the execution of
-the called function.
+that of the master that elaborated the function body. For
+any other function, the]} accessibility level of the result
+@Chg{Version=[2],New=[of a function call that is
+used as a @nt{prefix} of a @nt{name}, as the actual parameter in a call,
+or as the @nt{expression} of an @nt{assignment_statement},],Old=[object]}
+is that of the
+@Chg{Version=[2],New=[immediately enclosing master. In other contexts, the
+accessibility level is that of the object being initialized from
+the],Old=[execution of the called]} function@Chg{Version=[2],
+New=[ result],Old=[]}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[Within a return statement, the accessibility level
+of the return object is that of the execution of the return statement. If the
+return statement completes normally by returning from the
+function, prior to leaving the function, the accessibility level
+of the return object changes to be a level determined by the point
+of call, as does the level of any coextensions (see below) of the
+return object.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[We define the accessibility level of the return
+  object during the return statement to be that of the return statement itself
+  so that the object may be designated by objects local to the return
+  statement, but not by objects outside the return statement. In addition, the
+  intent is that the return object gets finalized if the return statement ends
+  without actually returning (for example, due to propagating an exception, or
+  a goto). For a normal return, of course, no finalization is done before
+  returning.]}
+@end{Reason}
 
 The accessibility level of
 a derived access type
 is the same as that of
 its ultimate ancestor.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00385-01]}
-@Chg{Version=[2],New=[The accessibility level of the anonymous access type
-defined by an @nt{access_definition} of an @nt{object_declaration} is
-the same as that of the declared object.],Old=[]}
-
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@Chg{Version=[2],New=[The accessibility level of the anonymous access type
-defined by an @nt{access_definition} of an @nt{object_renaming_declaration} is
-the same as that of the renamed view.],Old=[]}
+@ChgAdded{Version=[2],Text=[The accessibility level of the anonymous access
+type defined by an @nt{access_definition} of an
+@nt{object_renaming_declaration} is the same as that of the renamed view.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
-The accessibility level of the anonymous access type
-@Chg{Version=[2],New=[ of a component is that of the master that
-elaborated its @nt{access_definition}. This is the same as the
-level of the type whose definition encloses the @nt{access_definition}
-except in the case],Old=[]} of an access discriminant@Chg{Version=[2],
-New=[ specified for a limited type, in which case it],Old=[]} is
-the same as that of the containing object or associated constrained
-subtype.
-@begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
-  @ChgAdded{Version=[2],Text=[For a type extension, the components (other than
-  discriminants of a limited type) inherited from
-  the parent have the same accessibility as they did in the parent;
-  those in the extension part have the accessibility determined
-  by the scope where the type extension is declared.
-  Similarly, the components of a derived untagged type other than
-  discriminants of a limited type have the same accessibility as they did
-  in the parent.]}
-@end{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00416-01]}
+@ChgNote{Use ChgAdded below to get conditional Leading}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For an access
+discriminant,]}@Chg{Version=[2],New=[ the],Old=[The]}
+the accessibility level of @Chg{Version=[2],New=[its],Old=[the]}
+anonymous access type @Chg{Version=[2],New=[is determined as follows:],
+Old=[of an access discriminant is
+the same as that of the containing object or associated constrained subtype.]}
+
+@begin{InnerItemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[For an access discriminant whose value is
+determined by a @nt{discriminant_association} in a @nt{subtype_indication},
+the accessibility level of the object or subprogram designated by
+the associated value (or library level if the value is null);]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[This deals with the following cases;]}
+  @begin{InnerItemize}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[An @nt{extension_aggregate} where the
+    @nt{ancestor_part} is a @nt{subtype_mark} denoting a constrained subtype;]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[An uninitialized @nt{allocator} where the
+    @nt{subtype_indication} defines a constrained subtype;]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[A discriminant of an object with a constrained
+    nominal subtype, including constrained components, the result of calling
+    a function with a constrained result subtype, the dereference of an
+    access-to-constrained subtype, etc.]}
+  @end{InnerItemize}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[For an access discriminant of an object defined by
+an @nt{aggregate} where the value of the discriminant is determined by a
+@nt{component_association} in the @nt{aggregate}, the accessibility
+level of the object or subprogram designated by the associated
+value (or library level if the value is null);]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[For an access discriminant of any other object
+with an unconstrained nominal subtype, the accessibility level of the object.]}
+
+@end{InnerItemize}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[In other words, if you know the value of the
+  discriminant from a discriminant constraint or an @nt{aggregate} component
+  association, then that determines the accessibility level; if you don't know
+  it, then it is based on the object itself.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00254-01]}
 The accessibility level of
@@ -3870,15 +3958,52 @@ types with @lquotes@;normal@rquotes@; accessibility, as those typically don't
 include the extra information needed to make a call.]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[The accessibility level of the anonymous access type of
-an access result type (see @RefSecNum{Return Statements}) is the same as that
-of the associated function or access-to-subprogram type.],Old=[]}
-
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+@ChgNote{Use ChgAdded below to get conditional Leading}
+@ChgAdded{Version=[2],Type=[Leading],Text=[]}
 The accessibility level of
 an object created by an @nt{allocator}
 is the same as that of
-the access type.
+the access type@Chg{Version=[2],New=[, except for an @nt{allocator} of an
+anonymous access type that defines the value of an access
+parameter or an access discriminant. For an @nt{allocator} defining the
+value of an access parameter, the accessibility level is that of
+the master immediately enclosing the call. For one defining an
+access discriminant, the accessibility level is determined as
+follows:],Old=[.]}
+
+@begin{InnerItemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[for an @nt{allocator} used to define the constraint
+in a @nt{subtype_declaration}, the level of the @nt{subtype_declaration};]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[for an @nt{allocator} used to define the constraint
+in a @nt{component_definition}, the level of the enclosing type;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[for an @nt{allocator} used to define the
+discriminant of an object, the level of the object.]}
+
+@end{InnerItemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[coextension],Sec=(of an object)}
+In this last case, the allocated object is said to
+be a @i{coextension} of the object whose discriminant designates it, as well as of any
+object of which the discriminated object is itself a coextension or
+subcomponent. All coextensions of an object are finalized
+when the object is finalized (see @RefSecNum{Completion and Finalization}).]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[The rules of access discriminants are such that
+  when the space for an object with a coextension is reclaimed, the space for
+  the coextensions can be reclaimed. Hence, there is implementation advice (see
+  13.11) that an object and its coextensions all be allocated from the same
+  storage pool (or stack frame, in the case of a declared object).]}
+@end{Ramification}
 
 The accessibility level of
 a view of an object or subprogram denoted by a dereference of an access value
@@ -4052,9 +4177,9 @@ is the library level.
   For implementations that share generics,
   run-time code is needed to detect the error.
 
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344-01]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
   Checks during function return@Chg{Version=[2],New=[ and @nt{allocator}s,
-  for nested type extensions],Old=[]}.
+  for nested type extensions and access discriminants],Old=[]}.
   @end{Itemize}
 
   Note that run-time checks are not required
@@ -4074,11 +4199,13 @@ is the library level.
   respectively, than something else.
 @end{Discussion}
 @begin(ImplNote)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
   If an accessibility @LegalityName is satisfied,
   then the corresponding run-time check (if any)
   cannot fail (and a reasonable implementation will not
   generate any checking code)
-  unless access parameters or shared generic bodies are involved.
+  unless @Chg{Version=[2],New=[one of the cases requiring run-time checks mentioned
+  previously is],Old=[access parameters or shared generic bodies are]} involved.
 
   Accessibility levels are defined in terms of the relations
   @lquotes@;the same as@rquotes@; and @lquotes@;deeper than@rquotes@;.
@@ -4728,7 +4855,7 @@ that does not resolve by the new rules would have failed a Legality Rule.]}
 @Chg{Version=[2],New=[Adjusted the wording to reflect the fact that expressions
 and declarations are masters.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02],ARef=[AI95-00385-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02],ARef=[AI95-00385-01],ARef=[AI95-00416-01]}
 @Chg{Version=[2],New=[Defined the accessibility of the various new kinds and
 uses of anonymous access types.],Old=[]}
 @end{DiffWord95}

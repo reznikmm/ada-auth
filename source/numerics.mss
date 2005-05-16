@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2005/05/14 05:20:12 $ $Author: Randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2005/05/15 06:35:39 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:12 $}
+@Comment{$Date: 2005/05/15 06:35:39 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -560,8 +560,8 @@ Generic_Complex_Types as defined in ISO/IEC CD 13813
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added a @nt{pragma} Preelaboratable_Initialization to
-  type Imaginary, so that it can be used in prelaborated units.]}
+  Added a @nt{pragma} Preelaborable_Initialization to
+  type Imaginary, so that it can be used in preelaborated units.]}
 @end{Extend95}
 
 @begin{DiffWord95}

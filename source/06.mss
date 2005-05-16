@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:07 $}
+@Comment{$Date: 2005/05/15 06:35:34 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1462,9 +1462,9 @@ defines which @nt{subprogram_body} is executed.
 @ChgAdded{Version=[2],Text=[If the @nt{name} or @nt{prefix} of a subprogram
 call denotes a prefixed view (see @RefSecNum{Selected Components}), the
 subprogram call is equivalent to a call on the underlying subprogram, with the
-first actual parameter being provided by the the prefix of the prefixed view
-(or the Access attribute of this prefix if the first formal parameter is an
-access parameter), and the remaining actual parameters given by the
+first actual parameter being provided by the @nt{prefix} of the prefixed view
+(or the Access attribute of this @nt{prefix} if the first formal parameter is
+an access parameter), and the remaining actual parameters given by the
 @nt{actual_parameter_part}, if any.]}
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -1601,7 +1601,7 @@ that falls off the end to here from RM83-6.5.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00407-01]}
   @ChgAdded{Version=[2],Text=[Defined the meaning of a call on a prefixed
-  view of a subrprogram (see @RefSecNum{Selected Components}).]}
+  view of a subprogram (see @RefSecNum{Selected Components}).]}
 @end{DiffWord95}
 
 

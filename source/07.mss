@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:26 $}
+@Comment{$Date: 2005/05/15 06:35:34 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -421,7 +421,7 @@ generic formal private extension is also a partial view.
   @RefSec{Type Declarations}, as all types now have them. This definition
   isn't marked as redundant only because we didn't want to have to add
   and delete the sentence in question (making a phony change), and that
-  would be necessary to add redunant brackets.]}
+  would be necessary to add redundant brackets.]}
 @end{TheProof}
 
 @Redundant[A type shall be completely defined before it is frozen
@@ -1729,7 +1729,7 @@ shall be constructed directly in the new object.]}
 @ChgAdded{Version=[2],Text=[For a @nt{function_call}, we only require
 @i{build-in-place}@Defn{build-in-place} for a limited type that would have
 been a return-by-reference type in Ada 95. We do this because
-@Chg{Version=[2],New=[],Old=[Tucker said so ]}we want to mimimize disruption
+@Chg{Version=[2],New=[],Old=[Tucker said so ]}we want to minimize disruption
 to Ada 95 implementations and users.]}
 @end{Discussion}
 @end{ImplReq}

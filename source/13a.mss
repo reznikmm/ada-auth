@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:10 $}
+@Comment{$Date: 2005/05/15 06:35:36 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -524,7 +524,7 @@ or has any user-defined primitive subprograms.
 parameter are the same as those of the actual.
 @Chg{New=[Operational and representation aspects @Chg{Version=[2],New=[],
 Old=[of a partial view ]}are the
-same @Chg{Version=[2],New=[same for all views of a type],Old=[as those of the full view]}.],Old=[]}
+same @Chg{Version=[2],New=[for all views of a type],Old=[as those of the full view]}.],Old=[]}
 A type-related representation item is not allowed for a
 descendant of a generic formal untagged type.
 @begin{Ramification}
@@ -777,7 +777,7 @@ is qualified as follows:
 be supported.]}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[A confirming representation item not not be
+  @ChgAdded{Version=[2],Text=[A confirming representation item may not be
   possible for some entities. For instance, consider an unconstrained array.
   The size of such a type is implementation-defined, and may not actually
   be a representable value, or may not be static.]}
@@ -1063,7 +1063,7 @@ a @nt{pragma} Pack.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
 @ChgAdded{Version=[2],Text=[If a packed type has a component which is not of a
-by-reference type and has no aliased part then such a component need not be be
+by-reference type and has no aliased part then such a component need not be
 aligned according to the Alignment of the component's subtype; in particular it
 need not be allocated on a storage element boundary.]}
 @Comment{No "should" here; thus no ImplAdvice entry. This really qualifies the
