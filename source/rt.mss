@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2005/05/15 06:35:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2005/05/16 03:42:24 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/05/15 06:35:42 $}
+@Comment{$Date: 2005/05/16 03:42:24 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -3123,7 +3123,7 @@ An upper bound on the size of a clock jump.
 An upper bound on the @i{drift rate} of Clock with respect to real time.
 This is a real number D such that
 @begin{display}
-E*(1-D) <= (Clock@-{t+E} @en@; Clock@-{t}) <= E*(1+D)
+E*(1@en@;D) <= (Clock@-{t+E} @en@; Clock@-{t}) <= E*(1+D)
         provided that: Clock@-{t} + E*(1+D) <= Time_Last.
 @end{display}
 

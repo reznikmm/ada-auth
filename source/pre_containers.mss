@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2005/05/15 06:35:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2005/05/16 03:42:22 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:41 $}
+@Comment{$Date: 2005/05/16 03:42:22 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -244,10 +244,10 @@ Containers.Count_Type'Last.]}]}
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Hash_Type'Modulus should be at least 2**32.
-Count_Type'Last should be at least 2**31-1.]}
+Count_Type'Last should be at least 2**31@en@;1.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Containers.Hash_Type'Modulus should be at least 2**32.
-Containers.Count_Type'Last should be at least 2**31-1.]}]}
+Containers.Count_Type'Last should be at least 2**31@en@;1.]}]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -658,7 +658,7 @@ to the Index_Type'Last.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-  @ChgAdded{Version=[2],Text=[We require the existence of Index_Type'First - 1,
+  @ChgAdded{Version=[2],Text=[We require the existence of Index_Type'First @en 1,
   so that No_Index and Last_Index of an empty vector is well-defined. We don't
   require the existence of Index_Type'Last + 1, as it is only used as the
   position of insertions (and needs to be allowed only when inserting an empty
@@ -1327,8 +1327,8 @@ exception raised during element assignment is propagated.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If Index + Count >= Last_Index(Container), this
-  effectively truncates the vector (setting Last_Index to Index - 1 and
-  consequently sets Length to Index - Index_Type'First).]}
+  effectively truncates the vector (setting Last_Index to Index @en 1 and
+  consequently sets Length to Index @en Index_Type'First).]}
 @end{Ramification}
 
 @begin{Example}
@@ -1362,7 +1362,7 @@ To_Index (Position), Count) is called.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Length (Container) <= Count then
 Delete_Last is equivalent to Clear (Container). Otherwise it is equivalent to
-Delete (Container, Index_Type'Val(Index_Type'Pos(Last_Index(Container)) - Count
+Delete (Container, Index_Type'Val(Index_Type'Pos(Last_Index(Container)) @en Count
 + 1), Count).]}
 
 @begin{Example}
@@ -1642,7 +1642,7 @@ To_Index (Position) + 1 in the same vector as Position.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element or
 designates the first element of the container, then Previous returns the value
 No_Element. Otherwise, returns a cursor that designates the element with index
-(To_Index (Position) - 1) in the same vector as Position.]}
+(To_Index (Position) @en 1) in the same vector as Position.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2525,7 +2525,7 @@ Otherwise,
 Insert inserts Count new elements prior to the element designated by Before. If
 Before equals No_Element, the new elements are inserted after the last node (if
 any). The new elements are initialized with any implicit initial value for any
-part (as for an object_declaration with no initialization expression - see
+part (as for an @nt{object_declaration} with no initialization expression @em see
 3.3.1). Any exception raised during allocation of internal storage is
 propagated, and Container is not modified.]}
 
@@ -3364,7 +3364,7 @@ propagated and Container is not modified.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Insert inserts Key into Container
 as per the five-parameter Insert, with the difference that an element
 initialized with any implicit initial values for any part (as for an
-object_declaration with no initialization expression - see 3.3.1) is
+@nt{object_declaration} with no initialization expression @em see 3.3.1) is
 inserted.]}
 
 @begin{Example}

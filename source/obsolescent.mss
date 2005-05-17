@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:32 $}
+@Comment{$Date: 2005/05/16 03:42:26 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -789,7 +789,7 @@ this pragma.]}
 @LabeledAddedClause{Version=[2],Name=[Dependence Restrictions Identifiers]}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[The following @nt<restrictions> involve dependence
 on specific language-defined units. The more general restriction No_Dependence
 (see @RefSecNum{Restriction No_Dependence}) should be used for this purpose.]}
@@ -798,23 +798,23 @@ on specific language-defined units. The more general restriction No_Dependence
 
 @begin{StaticSem}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Type=[Leading],
 Text=[The following @Syni<restrictions_>@nt<identifiers> exist:]}
 
 @begin{Description}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
 Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\There are no
 semantic dependences on package Asynchronous_Task_Control.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
 Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic
 dependence on the predefined generic Unchecked_Conversion is not allowed.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
 Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic
 dependence on Unchecked_Deallocation is not allowed.]}
@@ -827,5 +827,50 @@ dependence on Unchecked_Deallocation is not allowed.]}
   @ChgAdded{Version=[2],Text=[This clause is new. These @nt{restrictions}
   are replaced by the more general No_Dependence
   (see @RefSecNum{Restriction No_Dependence}).]}
+@end{DiffWord95}
+
+@LabeledAddedClause{Version=[2],Name=[Character and Wide_Character Conversion Functions]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Leading],
+Text=[The following declarations exist in the declaration of package
+Ada.Characters.Handling:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} Is_Character (Item : @key{in} Wide_Character) @key{return} Boolean
+      @key{renames} Conversions.Is_Character;
+   @key{function} Is_String    (Item : @key{in} Wide_String)    @key{return} Boolean
+      @key{renames} Conversions.Is_String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} To_Character (Item       : @key{in} Wide_Character;
+                         Substitute : @key{in} Character := ' ')
+                         @key{return} Character
+      @key{renames} Conversions.To_Character;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} To_String    (Item       : @key{in} Wide_String;
+                          Substitute : @key{in} Character := ' ')
+                          @key{return} String
+      @key{renames} Conversions.To_String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} To_Wide_Character (Item : @key{in} Character) @key{return} Wide_Character
+      @key{renames} Conversions.To_Wide_Character;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} To_Wide_String    (Item : @key{in} String)    @key{return} Wide_String
+      @key{renames} Conversions.To_Wide_String;]}
+@end{Example}
+@end{StaticSem}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
+  @ChgAdded{Version=[2],Text=[This clause is new. These subprograms were
+  moved to Characters.Conversions
+  (see @RefSecNum{The Package Characters.Conversions}).]}
 @end{DiffWord95}
 

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:34 $}
+@Comment{$Date: 2005/05/16 03:42:19 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2492,8 +2492,9 @@ Leaving an execution happens immediately after its completion,
 except in the case of a @i{master}:
 the execution of
 a @Chg{Version=[2],New=[body other than a @nt{package_body};
-the elaboration of a declaration other than the declaration of a package
-or of a type; the execution of an @nt{statement};
+the elaboration of a declaration other than a @nt{single_task_declaration},
+@nt{single_protected_declaration}, the declaration of a package, or
+the declaration of a type; the execution of an @nt{statement};
 or the evaluation of an @nt{expression} or @nt{range} that is not part
 of an enclosing @nt{expression}, @nt{range}, or @nt{simple_statement}],
 Old=[@nt{task_body}, a @nt{block_statement},

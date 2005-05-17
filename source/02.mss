@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:21 $}
+@Comment{$Date: 2005/05/16 03:42:15 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -641,7 +641,7 @@ a reserved word, or a @nt{numeric_literal} and an adjacent
 A @i{delimiter} is either one of the following@Chg{Version=[2],New=[],Old=[ special]}
 characters
 @begin{Display}
-&@ @ @ @ '@ @ @ @ (@ @ @ @ )@ @ @ @ *@ @ @ @ +@ @ @ @ ,@ @ @ @ -@ @ @ @ .@ @ @ @ /@ @ @ @ :@ @ @ @ ;@ @ @ @ <@ @ @ @ =@ @ @ @ >@ @ @ @ |
+&@ @ @ @ '@ @ @ @ (@ @ @ @ )@ @ @ @ *@ @ @ @ +@ @ @ @ ,@ @ @ @ @en@ @ @ @ .@ @ @ @ /@ @ @ @ :@ @ @ @ ;@ @ @ @ <@ @ @ @ =@ @ @ @ >@ @ @ @ |
 @end{Display}
 
 @Defn{compound delimiter}

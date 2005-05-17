@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:32 $}
+@Comment{$Date: 2005/05/16 03:42:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1120,7 +1120,7 @@ Origin : @key(constant) Painted_Point := (X | Y => 0.0, Paint => Black);
 @key(type) Subtraction @key(is new) Binary_Operation @key(with null record);
   @RI[-- No additional components needed for these extensions]
 
-Tree : Expr_Ptr :=         @RI[-- A tree representation of @lquotes@;5.0 + (13.0-7.0)@rquotes@;]
+Tree : Expr_Ptr :=         @RI[-- A tree representation of @lquotes@;5.0 + (13.0@en@;7.0)@rquotes@;]
    @key(new) Addition'(
       Left  => @key(new) Literal'(Value => 5.0),
       Right => @key(new) Subtraction'(
@@ -3821,7 +3821,7 @@ the renamed view.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 The accessibility level of
 a view conversion@Chg{Version=[2],New=[, @nt{qualified_expression}, or
-@nt{parenthesized_expression},],Old=[]}
+parenthesized expression,],Old=[]}
 is the same as that of
 the operand.
 
@@ -3939,12 +3939,15 @@ subprogram.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
 @ChgAdded{Version=[2],Text=[The accessibility level of the anonymous access type
 of an access parameter specifying an access-to-subprogram type is
-statically deeper than that of any master.]}
+statically deeper than that of any master; all such
+anonymous access types have this same level.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This rule means that it is illegal to convert an
 access parameter specifying an access to subprogram to a
-named access to subprogram type.]}
+named access to subprogram type, but it is allowed to pass such an access
+parameter to another access parameter (the implicit conversion's accessibility
+will succeed).]}
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3989,7 +3992,7 @@ discriminant of an object, the level of the object.]}
 @end{InnerItemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[coextension],Sec=(of an object)}
+@ChgAdded{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=[coextension],Sec=(of an object)}
 In this last case, the allocated object is said to
 be a @i{coextension} of the object whose discriminant designates it, as well as of any
 object of which the discriminated object is itself a coextension or

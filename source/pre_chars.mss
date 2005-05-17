@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2005/04/05 06:38:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2005/05/16 03:42:27 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2005/04/05 06:38:03 $}
+@Comment{$Date: 2005/05/16 03:42:27 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -30,7 +30,7 @@ This clause is new to Ada 95.
 @end{Diffword95}
 
 
-@LabeledSubClause(The Package Characters)
+@LabeledRevisedSubClause{Version=[2],New=[The Packages Characters, Wide_Characters, and Wide_Wide_Characters],Old=[The Package Characters]}
 
 @begin{StaticSem}
 @leading@keepnext@;The library package Characters has the following declaration:
@@ -40,14 +40,56 @@ This clause is new to Ada 95.
 @key(end) Ada.Characters;
 @end{example}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The library package
+Wide_Characters has the following declaration:]}
+@begin{example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Wide_Characters]}@key(package) Ada.Wide_Characters @key[is]
+  @key[pragma] Pure(Wide_Characters);
+@key[end] Ada.Wide_Characters;]}
+@end{example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The library package
+Wide_Characters has the following declaration:]}
+@begin{example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Wide_Wide_Characters]}@key(package) Ada.Wide_Wide_Characters @key[is]
+  @key[pragma] Pure(Wide_Wide_Characters);
+@key[end] Ada.Wide_Wide_Characters;]}
+@end{example}
 @end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[If an implementation chooses to provide
+implementation-defined operations on Wide_Character or Wide_String (such as
+case mapping, classification, collating and sorting, etc.) it should do so by
+providing child units of Wide_Characters. Similarly if it chooses to
+provide implementation-defined operations on Wide_Wide_Character or
+Wide_Wide_String it should do so by providing child units of
+Wide_Wide_Characters.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Implementation-defined operations on Wide_Character, Wide_String,
+Wide_Wide_Character, and Wide_Wide_String should be child units of
+Wide_Characters or Wide_Wide_Characters.]}]}
+@end{ImplAdvice}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The packages Wide_Characters and Wide_Wide_Characters are new.]}
+@end{Extend95}
+
 
 @LabeledSubClause{The Package Characters.Handling}
 @begin{StaticSem}
 @leading@keepnext@;The library package Characters.Handling has the following declaration:
 @begin{example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@key[package] Ada.Characters.Handling @key[is]@ChildUnit{Parent=[Ada.Characters],Child=[Handling]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01],ARef=[AI95-00395-01]}
+@Chg{Version=[2],New=[@key[with] Ada.Characters.Conversions;
+],Old=[]}@key[package] Ada.Characters.Handling @key[is]@ChildUnit{Parent=[Ada.Characters],Child=[Handling]}
   @key[pragma] @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(Handling);
 
 @keepnext--@RI{Character classification functions}
@@ -94,63 +136,29 @@ This clause is new to Ada 95.
     @key[return] String;
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Keepnext--@RI{Classifications of and conversions between @Chg{Version=[2],New=[Wide_Wide_Character, ],Old=[]}Wide_Character@Chg{Version=[2],New=[,],Old=[]} and Character.}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@Keepnext--@RI{@Chg{Version=[2],New=[The functions Is_Character, Is_String, To_Character, To_String, To_Wide_Character,],Old=[Classifications of and conversions between Wide_Character and Character.]}}@Chg{Version=[2],New=[
+--@RI{and To_Wide_String are obsolescent; see @RefSecnum{Character and Wide_Character Conversion Functions}.}],Old=[]}
 
-  @key[function] @AdaSubDefn{Is_Character} (Item : @key[in] Wide_Character) @key[return] Boolean;
-  @key[function] @AdaSubDefn{Is_String}    (Item : @key[in] Wide_String)    @key[return] Boolean;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{Is_Character} (Item : @key[in] Wide_Character) @key[return] Boolean;
+  @key[function] @AdaSubDefn{Is_String}    (Item : @key[in] Wide_String)    @key[return] Boolean;]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] Is_Character (Item : @key[in] Wide_Wide_Character) @key[return] Boolean;
-   @key[function] Is_String    (Item : @key[in] Wide_Wide_String)    @key[return] Boolean;
-   @key[function] Is_Wide_Character (Item : @key[in] Wide_Wide_Character) @key[return] Boolean;
-   @key[function] Is_Wide_String    (Item : @key[in] Wide_Wide_String)    @key[return] Boolean;]}
-
-  @key[function] @AdaSubDefn{To_Character} (Item       : @key[in] Wide_Character;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{To_Character} (Item       : @key[in] Wide_Character;
                          Substitute : @key[in] Character := ' ')
-    @key[return] Character;
+    @key[return] Character;]}
 
-  @key[function] @AdaSubDefn{To_String}    (Item       : @key[in] Wide_String;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{To_String}    (Item       : @key[in] Wide_String;
                          Substitute : @key[in] Character := ' ')
-    @key[return] String;
+    @key[return] String;]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] To_Character (Item :       @key[in] Wide_Wide_Character;
-                          Substitute : @key[in] Character := ' ') @key[return] Character;]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{To_Wide_Character} (Item : @key[in] Character) @key[return] Wide_Character;]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] To_String    (Item :       @key[in] Wide_Wide_String;
-                          Substitute : @key[in] Character := ' ') @key[return] String;]}
-
-  @key[function] @AdaSubDefn{To_Wide_Character} (Item : @key[in] Character) @key[return] Wide_Character;
-
-  @key[function] @AdaSubDefn{To_Wide_String}    (Item : @key[in] String)    @key[return] Wide_String;
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] To_Wide_Character (Item :       @key[in] Wide_Wide_Character;
-                               Substitute : @key[in] Wide_Character := ' ')
-                               @key[return] Wide_Character;]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] To_Wide_String    (Item :       @key[in] Wide_Wide_String;
-                               Substitute : @key[in] Wide_Character := ' ')
-                               @key[return] Wide_String;]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] To_Wide_Wide_Character (Item : @key[in] Character)
-         @key[return] Wide_Wide_Character;]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] To_Wide_Wide_String    (Item : @key[in] String)
-         @key[return] Wide_Wide_String;]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] To_Wide_Wide_Character (Item : @key[in] Wide_Character)
-         @key[return] Wide_Wide_Character;]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] To_Wide_Wide_String    (Item : @key[in] Wide_String)
-         @key[return] Wide_Wide_String;]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{To_Wide_String}    (Item : @key[in] String)    @key[return] Wide_String;]}
 
 @key[end] Ada.Characters.Handling;
 @end{Example}
@@ -262,181 +270,39 @@ whose elements is given by To_ISO_646 of the corresponding element in
 Item.
 @end{description}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-The following set of functions test @Chg{Version=[2],New=[Wide_Wide_Character or ],
-Old=[]}Wide_Character values
-for membership in @Chg{Version=[2],New=[Wide_Character or ],Old=[]}Character,
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgDeleted{Version=[2],Text=[The following set of functions test
+Wide_Character values for membership in Character,
 or convert between corresponding characters of
-@Chg{Version=[2],New=[Wide_Wide_Character, ],Old=[]}Wide_Character@Chg{Version=[2],
-New=[,],Old=[]} and Character.
+Wide_Character and Character.]}
 @begin{description}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[Is_Character@\Returns True if
 Wide_Character'Pos(Item) <= Character'Pos(Character'Last).]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[Is_String@\Returns True if Is_Character(Item(I))
 is True for each I in Item'Range.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[To_Character@\Returns the Character corresponding
 to Item if Is_Character(Item), and returns the Substitute Character otherwise.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[To_String@\Returns the String whose range is
 1..Item'Length and each of whose elements is given by To_Character of the
 corresponding element in Item.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[To_Wide_Character@\Returns the Wide_Character X
 such that Character'Pos(Item) = Wide_Character'Pos(X).]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[To_Wide_String@\Returns the Wide_String whose
 range is 1..Item'Length and each of whose elements is given by
 To_Wide_Character of the corresponding element in Item.]}
 
 @end{description}
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] Is_Character (Item : @key[in] Wide_Character) @key[return] Boolean;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Wide_Character'Pos(Item) <= Character'Pos(Character'Last).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] Is_Character (Item : @key[in] Wide_Wide_Character) @key[return] Boolean;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Wide_Wide_Character'Pos(Item) <= Character'Pos(Character'Last).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] Is_Wide_Character (Item : @key[in] Wide_Wide_Character) @key[return] Boolean;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Wide_Wide_Character'Pos(Item) <=
-Wide_Character'Pos(Wide_Character'Last).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] Is_String (Item : @key[in] Wide_String)      @key[return] Boolean;
-@key[function] Is_String (Item : @key[in] Wide_Wide_String) @key[return] Boolean;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Is_Character(Item(I)) is True for each I in Item'Range.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] Is_Wide_String (Item : @key[in] Wide_Wide_String) @key[return] Boolean;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Is_Wide_Character(Item(I)) is True for each I in Item'Range.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_Character (Item :       @key[in] Wide_Character;
-                       Substitute : @key[in] Character := ' ') @key[return] Character;
-@key[function] To_Character (Item :       @key[in] Wide_Wide_Character;
-                       Substitute : @key[in] Character := ' ') @key[return] Character;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Character corresponding to Item if Is_Character(Item), and returns
-the Substitute Character otherwise.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Character (Item : @key[in] Character) @key[return] Wide_Character;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Character X such that Character'Pos(Item) = Wide_Character'Pos
-(X).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Character (Item :       @key[in] Wide_Wide_Character;
-                            Substitute : @key[in] Wide_Character := ' ')
-                            @key[return] Wide_Character;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Character corresponding to Item if Is_Wide_Character(Item),
-and returns the Substitute Wide_Character otherwise.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Wide_Character (Item : @key[in] Character) @key[return]
-    Wide_Wide_Character;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Wide_Character X such that Character'Pos(Item) =
-Wide_Wide_Character'Pos (X).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Wide_Character (Item : @key[in] Wide_Character)
-                                 @key[return] Wide_Wide_Character;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Wide_Character X such that Wide_Character'Pos(Item) =
-Wide_Wide_Character'Pos (X).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_String (Item :       @key[in] Wide_String;
-                    Substitute : @key[in] Character := ' ') @key[return] String;
-@key[function] To_String (Item :       @key[in] Wide_Wide_String;
-                    Substitute : @key[in] Character := ' ') @key[return] String;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the String whose range is 1..Item'Length and each of whose elements is
-given by To_Character of the corresponding element in Item.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_Wide_String (Item : @key[in] String) @key[return] Wide_String;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_String whose range is 1..Item'Length and each of whose
-elements is given by To_Wide_Character of the corresponding element in Item.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_Wide_String (Item :       @key[in] Wide_Wide_String;
-                         Substitute : @key[in] Wide_Character := ' ')
-                         @key[return] Wide_String;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_String whose range is 1..Item'Length and each of whose
-elements is given by To_Wide_Character of the corresponding element in Item
-with the given Substitute Wide_Character.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Wide_String (Item : @key[in] String) @key[return] Wide_Wide_String;
-@key[function] To_Wide_Wide_String (Item : @key[in] Wide_String) @key[return] Wide_Wide_String;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Wide_String whose range is 1..Item'Length and each of whose
-elements is given by To_Wide_Wide_Character of the corresponding element in
-Item.]}
-
-@end{DescribeCode}
 @end{StaticSem}
 
 @begin{ImplAdvice}
@@ -483,29 +349,23 @@ is either a letter or decimal digit but not both; each letter is
 either upper case or lower case but not both.@end{ramification}
 @end{Notes}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  A number of new routines and overloaded routines are newly added to
-  Characters.Handling. If Characters.Handling is referenced in a
-  @nt{use_clause}, and an entity @i<E> with a @nt{defining_identifier} that is
-  the same as one of the newly added is defined in a package that is also
-  referenced in a @nt{use_clause}, the entity @i<E> may no longer be
-  use-visible, resulting in errors. This should be rare and is easily fixed if
-  it does occur.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-  @ChgAdded{Version=[2],Text=[The newly added overloadings of Is_Character,
-  Is_String, To_Character, and To_String make calling these routines
-  with string and character literals ambiguous. A qualified expression needs
-  to be added to eliminate this ambiguity.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Strings.Maps is now Pure, so it can be used in pure units.]}
+  Characters.Handling is now Pure, so it can be used in pure units.]}
 @end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[The conversion functions are made obsolescent;
+  a more complete set is available in Characters.Conversions @em
+  see @RefSecNum{The Package Characters.Conversions}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[2],Text=[We no longer talk about localized character
+  sets; these are a non-standard mode, which is none of our business.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{The Package Characters.Latin_1}
 @begin{Intro}
@@ -804,5 +664,216 @@ or other character sets.
 
 @LabeledAddedSubClause{Version=[2],Name=[The Package Characters.Conversions]}
 
-*** TBD: Added by AI-395.
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The library package
+Characters.Conversions has the following declaration:]}
+@begin{example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[package] Ada.Characters.Conversions @key[is]@ChildUnit{Parent=[Ada.Characters],Child=[Conversions]}
+   @key[pragma] Pure(Conversions);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Is_Character} (Item : @key[in] Wide_Character)      @key[return] Boolean;
+   @key[function] @AdaSubDefn{Is_String}    (Item : @key[in] Wide_String)         @key[return] Boolean;
+   @key[function] @AdaSubDefn{Is_Character} (Item : @key[in] Wide_Wide_Character) @key[return] Boolean;
+   @key[function] @AdaSubDefn{Is_String}    (Item : @key[in] Wide_Wide_String)    @key[return] Boolean;
+   @key[function] @AdaSubDefn{Is_Wide_Character} (Item : @key[in] Wide_Wide_Character)
+      @key[return] Boolean;
+   @key[function] @AdaSubDefn{Is_Wide_String}    (Item : @key[in] Wide_Wide_String)
+      @key[return] Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{To_Wide_Character} (Item : @key[in] Character) @key[return] Wide_Character;
+   @key[function] @AdaSubDefn{To_Wide_String}    (Item : @key[in] String)    @key[return] Wide_String;
+   @key[function] @AdaSubDefn{To_Wide_Wide_Character} (Item : @key[in] Character)
+      @key[return] Wide_Wide_Character;
+   @key[function] @AdaSubDefn{To_Wide_Wide_String}    (Item : @key[in] String)
+      @key[return] Wide_Wide_String;
+   @key[function] @AdaSubDefn{To_Wide_Wide_Character} (Item : @key[in] Wide_Character)
+      @key[return] Wide_Wide_Character;
+   @key[function] @AdaSubDefn{To_Wide_Wide_String}    (Item : @key[in] Wide_String)
+      @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{To_Character} (Item       : @key[in] Wide_Character;
+                         Substitute : @key[in] Character := ' ')
+      @key[return] Character;
+   @key[function] @AdaSubDefn{To_String}    (Item       : @key[in] Wide_String;
+                          Substitute : @key[in] Character := ' ')
+      @key[return] String;
+   @key[function] @AdaSubDefn{To_Character} (Item :       @key[in] Wide_Wide_Character;
+                          Substitute : @key[in] Character := ' ')
+      @key[return] Character;
+   @key[function] @AdaSubDefn{To_String}    (Item :       @key[in] Wide_Wide_String;
+                          Substitute : @key[in] Character := ' ')
+      @key[return] String;
+   @key[function] @AdaSubDefn{To_Wide_Character} (Item :       @key[in] Wide_Wide_Character;
+                               Substitute : @key[in] Wide_Character := ' ')
+      @key[return] Wide_Character;
+   @key[function] @AdaSubDefn{To_Wide_String}    (Item :       @key[in] Wide_Wide_String;
+                               Substitute : @key[in] Wide_Character := ' ')
+      @key[return] Wide_String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[end] Ada.Characters.Conversions;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[The functions in package Characters.Conversions
+test Wide_Wide_Character or Wide_Character values for membership in
+Wide_Character or Character, or convert between corresponding characters of
+Wide_Wide_Character, Wide_Character, and Character.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] Is_Character (Item : @key[in] Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Wide_Character'Pos(Item) <= Character'Pos(Character'Last).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] Is_Character (Item : @key[in] Wide_Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Wide_Wide_Character'Pos(Item) <= Character'Pos(Character'Last).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] Is_Wide_Character (Item : @key[in] Wide_Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Wide_Wide_Character'Pos(Item) <=
+Wide_Character'Pos(Wide_Character'Last).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] Is_String (Item : @key[in] Wide_String)      @key[return] Boolean;
+@key[function] Is_String (Item : @key[in] Wide_Wide_String) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Is_Character(Item(I)) is True for each I in Item'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] Is_Wide_String (Item : @key[in] Wide_Wide_String) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Is_Wide_Character(Item(I)) is True for each I in Item'Range.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] To_Character (Item :       @key[in] Wide_Character;
+                       Substitute : @key[in] Character := ' ') @key[return] Character;
+@key[function] To_Character (Item :       @key[in] Wide_Wide_Character;
+                       Substitute : @key[in] Character := ' ') @key[return] Character;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Character corresponding to Item if Is_Character(Item), and returns
+the Substitute Character otherwise.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Character (Item : @key[in] Character) @key[return] Wide_Character;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Character X such that Character'Pos(Item) = Wide_Character'Pos
+(X).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Character (Item :       @key[in] Wide_Wide_Character;
+                            Substitute : @key[in] Wide_Character := ' ')
+   @key[return] Wide_Character;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Character corresponding to Item if Is_Wide_Character(Item),
+and returns the Substitute Wide_Character otherwise.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Wide_Character (Item : @key[in] Character)
+   @key[return] Wide_Wide_Character;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Wide_Character X such that Character'Pos(Item) =
+Wide_Wide_Character'Pos (X).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Wide_Character (Item : @key[in] Wide_Character)
+   @key[return] Wide_Wide_Character;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Wide_Character X such that Wide_Character'Pos(Item) =
+Wide_Wide_Character'Pos (X).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] To_String (Item :       @key[in] Wide_String;
+                    Substitute : @key[in] Character := ' ') @key[return] String;
+@key[function] To_String (Item :       @key[in] Wide_Wide_String;
+                    Substitute : @key[in] Character := ' ') @key[return] String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the String whose range is 1..Item'Length and each of whose elements is
+given by To_Character of the corresponding element in Item.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] To_Wide_String (Item : @key[in] String) @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_String whose range is 1..Item'Length and each of whose
+elements is given by To_Wide_Character of the corresponding element in Item.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] To_Wide_String (Item :       @key[in] Wide_Wide_String;
+                         Substitute : @key[in] Wide_Character := ' ')
+   @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_String whose range is 1..Item'Length and each of whose
+elements is given by To_Wide_Character of the corresponding element in Item
+with the given Substitute Wide_Character.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Wide_String (Item : @key[in] String) @key[return] Wide_Wide_String;
+@key[function] To_Wide_Wide_String (Item : @key[in] Wide_String)
+   @key[return] Wide_Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the Wide_Wide_String whose range is 1..Item'Length and each of whose
+elements is given by To_Wide_Wide_Character of the corresponding element in
+Item.]}
+
+@end{DescribeCode}
+@end{StaticSem}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The package Characters.Conversions is new, replacing functions
+  previously found in Characters.Handling.]}
+@end{Extend95}
+
+
 

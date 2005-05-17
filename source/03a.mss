@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:05 $}
+@Comment{$Date: 2005/05/16 03:42:16 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -4790,8 +4790,8 @@ any, are supported.],Old=[]}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[On a one's complement machine, the natural full word
 type would have
-a modulus of 2**Word_Size-1. However, we would want to allow the all-ones bit
-pattern (which represents negative zero as a number) in logical operations.
+a modulus of 2**Word_Size@en@;1. However, we would want to allow the all-ones
+bit pattern (which represents negative zero as a number) in logical operations.
 These permissions are intended to allow that and the natural modulus value
 without burdening implementations with supporting expensive modulus values.]}
 @end{Reason}
@@ -5812,14 +5812,14 @@ of Float_IO).
 @begin(Example)
 @key(type) Volt @key(is) @key(delta) 0.125 @key(range) 0.0 .. 255.0;
 
-  @RI[--  A pure fraction which requires all the available]
-  @RI[--  space in a word can be declared as the type Fraction:]
+  -- @RI[A pure fraction which requires all the available]
+  -- @RI[space in a word can be declared as the type Fraction:]
 @key(type) Fraction @key(is) @key(delta) System.Fine_Delta @key(range) -1.0 .. 1.0;
-  @RI[--  Fraction'Last = 1.0 - System.Fine_Delta]
+  -- @RI[Fraction'Last = 1.0 @en System.Fine_Delta]
 
-@key(type) Money @key(is) @key(delta) 0.01 @key(digits) 15;  @RI[-- decimal fixed point]
+@key(type) Money @key(is) @key(delta) 0.01 @key(digits) 15;  -- @RI[decimal fixed point]
 @key(subtype) Salary @key(is) Money @key(digits) 10;
-  @RI[-- Money'Last = 10.0**13 - 0.01, Salary'Last = 10.0**8 - 0.01]
+  -- @RI[Money'Last = 10.0**13 @en 0.01, Salary'Last = 10.0**8 @en 0.01]
 @end(Example)
 @end{Examples}
 

@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2005/03/18 06:37:24 $}
+@Comment{$Date: 2005/05/16 03:42:25 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.23 $}
+@comment{$Revision: 1.24 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -156,7 +156,7 @@ For every value @RI{x} of a floating point type @i{T}, the
 
    for nonzero @RI{x}, the normalized exponent of @RI{x} is the unique
    integer @RI{k} such that
-   @RI{T}@R['Machine_Radix]@+{@RI{k}-1} @leq @Abs{@RI{x}} @Lt
+   @RI{T}@R['Machine_Radix]@+{@RI{k}@en@;1} @leq @Abs{@RI{x}} @Lt
    @RI{T}@R['Machine_Radix]@+{@RI{k}}.
 @end{Itemize}
 @begin{Ramification}
@@ -191,7 +191,7 @@ S of a floating point type @i{T}.
   @key(return) @RI(T)
 @end(DescExample)
 
-   @NoPrefix@;The function yields the value @RI(X) @Times @RI(T)@R('Machine_Radix)@+(-@RI(k)), where
+   @NoPrefix@;The function yields the value @RI(X) @Times @RI(T)@R('Machine_Radix)@+(@en@RI(k)), where
    @RI(k) is the normalized exponent of @i(X). A zero result@Redundant(, which
    can only occur when @i(X) is zero,) has the sign of @i(X).]}
 @begin{Discussion}
@@ -222,7 +222,7 @@ S of a floating point type @i{T}.
 
    @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    Let @RI{v} be the value @RI{Fraction} @Times
-   @RI{T}@R('Machine_Radix)@+{@RI{Exponent}-@RI{k}},
+   @RI{T}@R('Machine_Radix)@+{@RI{Exponent}@en@RI{k}},
    where @RI{k} is the normalized exponent of @i{Fraction}.
    If @RI{v} is a machine number of the type @i{T}, or if
    @Abs{@RI{v}} @geq @RI{T}@R('Model_Small), the function yields @RI{v};
@@ -378,8 +378,8 @@ S of a floating point type @i{T}.
 
    @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
    For nonzero @i{Y}, let @RI{v} be the value
-   @RI{X} - @RI{n} @Times @RI{Y}, where @RI{n} is the integer nearest to
-   the exact value of @RI{X}/@RI{Y}; if @Abs{@RI{n} - @RI{X}/@RI{Y}} = 1/2,
+   @RI{X} @en @RI{n} @Times @RI{Y}, where @RI{n} is the integer nearest to
+   the exact value of @RI{X}/@RI{Y}; if @Abs{@RI{n} @en @RI{X}/@RI{Y}} = 1/2,
    then @RI(n) is chosen to be even. If @RI{v} is a machine number of
    the type @i{T}, the function yields @RI{v}; otherwise, it yields zero.
 @IndexCheck{Division_Check}Constraint_Error is raised if @i{Y} is zero.
@@ -450,7 +450,7 @@ is outside the base range of S.
   @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@;Let @RI{v} be the value @RI{T}@R('Machine_Radix)@+{@RI{k}-@RI{Radix_Digits}},
+   @NoPrefix@;Let @RI{v} be the value @RI{T}@R('Machine_Radix)@+{@RI{k}@en@RI{Radix_Digits}},
    where @RI{k} is the normalized exponent of @i{X}. The function yields
    the value
    @begin{Itemize}
@@ -559,7 +559,7 @@ a floating point type @i{T}.
 
 @Attribute{Prefix=<S>, AttrName=<Model_Epsilon>,
   Text=[Yields the value
-   @RI{T}@R('Machine_Radix)@+{1 - @RI{T}@R('Model_Mantissa)}. The value of this
+   @RI{T}@R('Machine_Radix)@+{1 @en @RI{T}@R('Model_Mantissa)}. The value of this
    attribute is of the type @i{universal_real}.]}
 @begin{Discussion}
    In most implementations, this attribute yields the absolute value of the
@@ -571,7 +571,7 @@ a floating point type @i{T}.
 
 @Attribute{Prefix=<S>, AttrName=<Model_Small>,
   Text=[Yields the value
-   @RI{T}@R('Machine_Radix)@+{@RI{T}@R('Model_Emin) - 1}. The value of this
+   @RI{T}@R('Machine_Radix)@+{@RI{T}@R('Model_Emin) @en 1}. The value of this
    attribute is of the type @i{universal_real}.]}
 @begin{Discussion}
    In most implementations, this attribute yields the

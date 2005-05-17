@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:29 $}
+@Comment{$Date: 2005/05/16 03:42:22 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.26 $}
+@comment{$Revision: 1.27 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -32,7 +32,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @Chg{Version=[2],New=(@\@\@\Arithmetic @em @RefSecNum{Formatting, Time Zones, and other operations for Time}
 @\@\@\Formatting @em @RefSecNum{Formatting, Time Zones, and other operations for Time}
 @\@\@\Time_Zones @em @RefSecNum{Formatting, Time Zones, and other operations for Time}
-), Old=()}@\@\Characters @em @RefSecNum{The Package Characters}
+), Old=()}@\@\Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
 @Chg{Version=[2],New=(@\@\@\Conversions @em @RefSecNum{The Package Characters.Conversions}
 ), Old=()}@\@\@\Handling @em @RefSecNum{The Package Characters.Handling}
 @\@\@\Latin_1 @em @RefSecNum{The Package Characters.Latin_1}
@@ -142,11 +142,13 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @Chg{Version=[2],New=(@\@\@\Unbounded_IO @em @RefSecNum{Input-Output for Unbounded Strings}
 ), Old=()}@\@\Unchecked_Conversion @em @RefSecNum{Unchecked Type Conversions}
 @\@\Unchecked_Deallocation @em @RefSecNum{Unchecked Storage Deallocation}
-@\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
+@Chg{Version=[2],New=(@\@\Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
+),Old=()}@\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{The Package Wide_Text_IO.Complex_IO}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}
 @Chg{Version=[2],New=(@\@\@\Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
+@\@\Wide_Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
 @\@\Wide_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{The Package Wide_Wide_Text_IO.Complex_IO}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Wide_Text_IO.Editing}

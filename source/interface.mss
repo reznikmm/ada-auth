@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2005/05/15 06:35:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2005/05/16 03:42:26 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:44 $}
+@Comment{$Date: 2005/05/16 03:42:26 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -792,7 +792,7 @@ the reference also applies to the same entity in C++.],Old=[]}
    @RI{-- Declarations based on C's <limits.h>}
 
    @AdaDefn{CHAR_BIT}  : @key(constant) := @RI{implementation-defined};  @RI{-- typically 8}
-   @AdaDefn{SCHAR_MIN} : @key(constant) := @RI{implementation-defined};  @RI{-- typically -128}
+   @AdaDefn{SCHAR_MIN} : @key(constant) := @RI{implementation-defined};  @RI{-- typically @en@;128}
    @AdaDefn{SCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 127}
    @AdaDefn{UCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 255}
 
@@ -1971,7 +1971,7 @@ This procedure copies the first Length elements from the array pointed
 It is erroneous to dereference a Pointer that does not designate
 an aliased Element.
 @begin{Discussion}
-Such a Pointer could arise via "+", "-", Increment, or
+Such a Pointer could arise via "+", "@en@;", Increment, or
 Decrement.@end{discussion}
 
 @PDefn2{Term=(erroneous execution),Sec=(cause)}

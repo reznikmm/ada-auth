@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2005/05/14 05:20:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2005/05/16 03:42:27 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/05/14 05:20:16 $}
+@Comment{$Date: 2005/05/16 03:42:27 $}
 
 @LabeledClause{String Handling}
 
@@ -932,7 +932,7 @@ Insert(Source, Before=>Low, New_Item=>By).]}
 @begin{Itemize}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0049],ARef=[AI95-00128-01]}
 @ChgAdded{Version=[1],Text=[If High >= Low, then the returned string comprises
-Source(Source'First..Low-1) & By & Source(High+1..Source'Last), but with
+Source(Source'First..Low@en@;1) & By & Source(High+1..Source'Last), but with
 lower bound 1.@Trailing]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0049],ARef=[AI95-00128-01]}
@@ -2474,15 +2474,22 @@ To_Unbounded_Wide_String replaces To_Unbounded_String
 
 @end{Itemize}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @Leading@keepnext@;The following additional declaration is present in
 Strings.Wide_Maps.Wide_Constants:
 @begin{example}
 @AdaDefn{Character_Set} : @key[constant] Wide_Maps.Wide_Character_Set;
 --@RI{Contains each Wide_Character value WC such that}@Chg{Version=[2],New=[
---],Old=[]}@RI{ Characters.@Chg{Version=[2],New=[Handling.],Old=[]}Is_Character(WC) is True}
+--],Old=[]}@RI{ Characters.@Chg{Version=[2],New=[Conversions.],Old=[]}Is_Character(WC) is True}
 @end{example}
 @end{StaticSem}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[Each Wide_Character_Set constant in the package
+Strings.Wide_Maps.Wide_Constants contains no values outside the Character
+portion of Wide_Character. Similarly, each Wide_Character_Mapping constant in
+this package is the identity mapping when applied to any element outside the
+Character portion of Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00362-01]}
 @ChgAdded{Version=[2],Text=[@nt{Pragma} Pure is replaced by
@@ -2493,11 +2500,12 @@ Strings.Wide_Maps.Wide_Constants:
 If a null Wide_Character_Mapping_Function is passed to any of the
 Wide_String handling subprograms, Constraint_Error is propagated.
 
-Each Wide_Character_Set constant in the package
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[Each Wide_Character_Set constant in the package
 Strings.Wide_Maps.Wide_Constants contains no values outside the Character
 portion of Wide_Character. Similarly, each Wide_Character_Mapping
 constant in this package is the identity mapping when applied to
-any element outside the Character portion of Wide_Character.
+any element outside the Character portion of Wide_Character.]}
 @end{Notes}
 
 @begin{Incompatible95}
@@ -2530,6 +2538,13 @@ any element outside the Character portion of Wide_Character.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
   @ChgAdded{Version=[2],Text=[Added wording so
   Strings.Wide_Maps.Wide_Constants does not change to Pure.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[The second Note is now normative text, since
+  there is no way to derive it from the other rules. It's a little
+  weird given the use of Unicode character classifications in Ada 2006;
+  but changing it would be inconsistent with Ada 95 and a one-to-one
+  mapping isn't necessarily correct anyway.]}
 @end{DiffWord95}
 
 
@@ -2741,20 +2756,27 @@ the corresponding wide wide string package has the same contents except that]}
 
 @end{Itemize}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The following
 additional declarations are present in
 Strings.Wide_Wide_Maps.Wide_Wide_Constants:]}
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@AdaDefn{Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
 -- @RI[Contains each Wide_Wide_Character value WWC such that]
--- @RI[Characters.Handling.Is_Character(WWC) is True]
+-- @RI[Characters.Conversions.Is_Character(WWC) is True]
 @AdaDefn{Wide_Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
 -- @RI[Contains each Wide_Wide_Character value WWC such that]
--- @RI[Characters.Handling.Is_Wide_Character(WWC) is True]]}
+-- @RI[Characters.Conversions.Is_Wide_Character(WWC) is True]]}
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[Each Wide_Wide_Character_Set constant in the package
+Strings.Wide_Wide_Maps.Wide_Wide_Constants contains no values outside the Character
+portion of Wide_Wide_Character. Similarly, each Wide_Wide_Character_Mapping constant in
+this package is the identity mapping when applied to any element outside the
+Character portion of Wide_Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
 @ChgAdded{Version=[2],Text=[@nt{Pragma} Pure is replaced by
@@ -2767,15 +2789,6 @@ Strings.Wide_Wide_Maps.Wide_Wide_Constants:]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If a null Wide_Wide_Character_Mapping_Function is passed to any of the
 Wide_Wide_String handling subprograms, Constraint_Error is propagated.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
-@ChgAdded{Version=[2],Text=[Each Wide_Wide_Character_Set constant in the
-package Strings.Wide_Wide_Maps.Wide_Wide_Constants contains no values outside
-the Character portion of Wide_Wide_Character. Similarly, each
-Wide_Wide_Character_Mapping constant in this package is the identity mapping
-when applied to any element outside the Character portion of
-Wide_Wide_Character. Use Ada.Characters.Wide_Wide_Handling to do more general
-case mapping.]}
 @end{Notes}
 
 @begin{Extend95}

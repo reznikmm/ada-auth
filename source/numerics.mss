@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2005/05/15 06:35:39 $ $Author: Randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2005/05/16 03:42:21 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:39 $}
+@Comment{$Date: 2005/05/16 03:42:21 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -248,7 +248,7 @@ Real'Base.}
       without requiring the former to be represented as (or promoted to)
       complex values with a real component of zero. For example, the
       multiplication of @RI{a} + @RI{b}*i by @RI{d}*i should yield
-      -@RI{b}@Times @RI{d} + @RI{a}@Times @RI{d}*i, but if one cannot avoid representing the
+      @en@RI{b}@Times @RI{d} + @RI{a}@Times @RI{d}*i, but if one cannot avoid representing the
       pure-imaginary value @RI{d}*i as the complex value
       0.0 + @RI{d}*i, then a NaN ("Not-a-Number") could be produced
       as the result of multiplying @RI{a} by 0.0 (e.g., when @RI{a} is
@@ -334,12 +334,12 @@ principal branch:
    The result of the Argument function is in the quadrant containing the point
    in the complex plane represented by the parameter X. This may be any
    quadrant (I through IV); thus, the range of the Argument function is
-   approximately -@Pi to @Pi
-   (-@R[Cycle]/2.0 to @R[Cycle]/2.0, if the parameter Cycle is
+   approximately @en@Pi to @Pi
+   (@en@R[Cycle]/2.0 to @R[Cycle]/2.0, if the parameter Cycle is
    specified). When the point represented by the parameter X lies on the
    negative real axis, the result approximates
    @begin{InnerItemize}
-      @Pi (resp., -@Pi) when the sign of the imaginary
+      @Pi (resp., @en@Pi) when the sign of the imaginary
       component of X is positive (resp., negative), if Real'Signed_Zeros is
       True;
 
@@ -667,24 +667,24 @@ following conventions:
    New=[],Old=[)]} component of the result of the Arcsin@Chg{Version=[2],
    New=[,],Old=[ and]} Arccos@Chg{Version=[2],New=[],Old=[(resp.]}, Arctanh@Chg{Version=[2],
    New=[],Old=[)]} functions is discontinuous as the parameter X crosses the
-   real axis to the left of -1.0 or the right of 1.0.
+   real axis to the left of @en@;1.0 or the right of 1.0.
 
    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00185-01]}
    The real @Chg{Version=[2],New=[],Old=[(resp., imaginary) ]}component of the
    result of the Arctan @Chg{Version=[2],New=[and],Old=[(resp.,]}
    Arcsinh@Chg{Version=[2], New=[ functions],Old=[) function]} is discontinuous
-   as the parameter X crosses the imaginary axis below -@RI{i} or above @RI{i}.
+   as the parameter X crosses the imaginary axis below @en@RI{i} or above @RI{i}.
 
    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00185-01]}
    The real component of the result of the Arccot function is discontinuous as
    the parameter X crosses the imaginary axis @Chg{Version=[2],New=[below],
-   Old=[between]} -@RI{i} @Chg{Version=[2],New=[or above],Old=[and]} @RI{i}.
+   Old=[between]} @en@RI{i} @Chg{Version=[2],New=[or above],Old=[and]} @RI{i}.
 
    The imaginary component of the Arccosh function is discontinuous as the
    parameter X crosses the real axis to the left of 1.0.
 
    The imaginary component of the result of the Arccoth function is
-   discontinuous as the parameter X crosses the real axis between -1.0
+   discontinuous as the parameter X crosses the real axis between @en@;1.0
    and 1.0.
 @end{Itemize}
 @begin{Discussion}
@@ -734,13 +734,13 @@ version by fixing the second argument to be its default value.)],Old=[:]}
 
    The range of the real (resp., imaginary) component of the result of the
    Arcsin and Arctan (resp., Arcsinh and Arctanh) functions is
-   approximately -@Pi/2.0 to @Pi/2.0.
+   approximately @en@Pi/2.0 to @Pi/2.0.
 
    The real (resp., imaginary) component of the result of the Arccos and Arccot
    (resp., Arccoth) functions ranges from 0.0 to approximately @Pi.
 
    The range of the imaginary component of the result of the Arccosh function
-   is approximately -@Pi to @Pi.
+   is approximately @en@Pi to @Pi.
 @end{Itemize}
 
 In addition, the exponentiation operator inherits the single-valuedness of the
@@ -835,10 +835,10 @@ raised:
    of one; the Log, Arccos, and Arccosh functions yield a result of zero; and
    the Arcsin function yields a real result.
 
-   When the parameter X has the value -1.0, the Sqrt function yields the
+   When the parameter X has the value @en@;1.0, the Sqrt function yields the
    result
    @begin{InnerItemize}
-      @RI{i} (resp., -@RI{i}), when the sign of the imaginary component of
+      @RI{i} (resp., @en@RI{i}), when the sign of the imaginary component of
       X is positive (resp., negative), if Complex_Types.Real'Signed_Zeros is
       True;
 
@@ -1609,7 +1609,7 @@ and the @nt{floating_point_definition} includes a
 @nt{real_range_specification} specifying a lower bound of @RI{lb},
 then the value of this attribute shall be less than or
 equal to @RI{lb}; otherwise, it shall be less than or equal to
--10.0 @+[4 @Times @RI{d}], where @RI{d} is the requested decimal precision
+@en@;10.0 @+[4 @Times @RI{d}], where @RI{d} is the requested decimal precision
 of @i{T}. This attribute yields a value of the type
 @i{universal_real}.
 
@@ -2066,13 +2066,13 @@ them.
 Caption=<@b{Tightly Approximated Elementary Function Results}>,
 Headers=<@b{Function}@\@b{Value of X}@\@b{Value of Y}@\@b{Exact Result @*when Cycle @*Specified}@\@b{Exact Result @*when Cycle @*Omitted}>,
 Body=<Arcsin@\1.0@\n.a.@\Cycle/4.0@\@Pi/2.0
-Arcsin@\-1.0@\n.a.@\-@R[Cycle]/4.0@\-@Pi/2.0
+Arcsin@\@en@;1.0@\n.a.@\@en@R[Cycle]/4.0@\@en@Pi/2.0
 Arccos@\0.0@\n.a.@\Cycle/4.0@\@Pi/2.0
-Arccos@\-1.0@\n.a.@\Cycle/2.0@\@Pi
+Arccos@\@en@;1.0@\n.a.@\Cycle/2.0@\@Pi
 Arctan and Arccot@\0.0@\positive@\Cycle/4.0@\@Pi/2.0
-Arctan and Arccot@\0.0@\negative@\-@R[Cycle]/4.0@\-@Pi/2.0
+Arctan and Arccot@\0.0@\negative@\@en@R[Cycle]/4.0@\@en@Pi/2.0
 Arctan and Arccot@\negative@\+0.0@\Cycle/2.0@\@Pi
-Arctan and Arccot@\negative@\-0.0@\-@R[Cycle]/2.0@\-@Pi@Last
+Arctan and Arccot@\negative@\@en@;0.0@\@en@R[Cycle]/2.0@\@en@Pi@Last
 Arctan and Arccot@\negative@\0.0@\Cycle/2.0@\@Pi>]
 
 @Leading@;Finally, the following specifications also take precedence over the maximum
@@ -2132,7 +2132,7 @@ at least one second and not more than fifty
 years.
 
 The implementation's representations of generator states and its algorithms for
-generating random numbers shall yield a period of at least 2@+{31}-2;
+generating random numbers shall yield a period of at least 2@+{31}@en@;2;
 much longer periods are desirable but not required.
 
 The implementations of Numerics.Float_Random.Random and
@@ -2168,21 +2168,21 @@ fewer than 5.
       random numbers falling into each subinterval are tallied and compared
       with the expected counts, which are proportional to the widths of the
       subintervals. The number of degrees of freedom for the chi-square test
-      is @RI{K}-1.
+      is @RI{K}@en@;1.
 
       Gap Test. The bounds of a range @RI{A} .. @RI{B}, with
       0.0 @leq @RI{A} @Lt @RI{B} @leq 1.0, are chosen randomly for each repetition
-      of the test, subject to the constraint that 0.2 @leq @RI{B}-@RI{A} @leq 0.6.
+      of the test, subject to the constraint that 0.2 @leq @RI{B}@en@RI{A} @leq 0.6.
       Random floating point numbers are generated until 5000 falling into the
       range @RI{A} .. @RI{B} have been encountered. Each of these 5000 is
       preceded by a @lquotes@;gap@rquotes@; (of length greater than or equal to 0) of
       consecutive random numbers not falling into the range
       @RI{A} .. @RI{B}. The counts of gaps of each length from 0 to 15,
       and of all lengths greater than 15 lumped together, are tallied and
-      compared with the expected counts. Let @RI{P} = @RI{B}-@RI{A}. The
-      probability that a gap has a length of @RI{L} is (1-@RI{P}) @+[@RI{L}]
+      compared with the expected counts. Let @RI{P} = @RI{B}@en@RI{A}. The
+      probability that a gap has a length of @RI{L} is (1@en@RI{P}) @+[@RI{L}]
       @Times @RI{P} for @RI{L} @leq 15, while the probability that a gap has a
-      length of 16 or more is (1-@RI{P}) @+[16]. The number of degrees of
+      length of 16 or more is (1@en@RI{P}) @+[16]. The number of degrees of
       freedom for the chi-square test is 16.
 
       Permutation Test. 5000 tuples of 4 different random floating point
@@ -2205,7 +2205,7 @@ fewer than 5.
       counts of increasing runs of each length from 1 to 4, and of all lengths
       greater than 4 lumped together, are tallied and compared with the
       expected counts. The probability that an increasing run has a length of
-      @RI{L} is 1/@RI{L}! - 1/(@RI{L}+1)! for @RI{L} @leq 4, while
+      @RI{L} is 1/@RI{L}! @en 1/(@RI{L}+1)! for @RI{L} @leq 4, while
       the probability that an increasing run has a length of 5 or more is
       1/5!. The number of degrees of freedom for the chi-square test
       is 4.
@@ -2235,7 +2235,7 @@ fewer than 5.
       integers are generated randomly from this range. The counts of
       occurrences of each integer in the range are tallied and compared with
       the expected counts, which have equal probabilities. The number of
-      degrees of freedom for the chi-square test is @RI{R}-1.
+      degrees of freedom for the chi-square test is @RI{R}@en@;1.
 
       Simplified Poker Test. Numerics.Discrete_Random is instantiated once
       with an enumeration subtype representing the 13 denominations (Two
@@ -2275,7 +2275,7 @@ fewer than 5.
       @RI{D} @-{@RI{S}} be the probability that a roll of a pair of dice shows
       the sum @RI{S}, and let
       @RI{Q} @-[@RI{S}](@RI{L}) = @RI{D} @-[@RI{S}] @Times
-      (1 - (@RI{D} @-[@RI{S}] + @RI{D} @-[7])) @+[@RI{L}-2] @Times
+      (1 @en (@RI{D} @-[@RI{S}] + @RI{D} @-[7])) @+[@RI{L}@en@;2] @Times
       (@RI{D} @-[@RI{S}] + @RI{D} @-[7]). Then, the probability that a
       game has a length of 1 is @RI{D} @-[7] +
       @RI{D} @-[11] + @RI{D} @-[2] +
@@ -2294,7 +2294,7 @@ fewer than 5.
       from 0 to 7, and of all lengths greater than 7 lumped together, are
       tallied and compared with the expected counts. For @RI{L} @geq 0, the
       probability that a pass has a length of @RI{L} is
-      @RI{W} @+[@RI{L}] @Times (1-@RI{W}), where @RI{W}, the probability that a game
+      @RI{W} @+[@RI{L}] @Times (1@en@RI{W}), where @RI{W}, the probability that a game
       ends in a win, is 244.0/495.0. The number of degrees of freedom for the
       chi-square test is 8.
 
@@ -2460,9 +2460,9 @@ question are as follows:
    the Arcsin function is in the model interval of @i{CT}.Real associated with
    the value @Pi/2.0.
 
-   When the parameter X has the value -1.0, the real component of the
+   When the parameter X has the value @en@;1.0, the real component of the
    result of the Arcsin (resp., Arccos) function is in the model interval of
-   @i{CT}.Real associated with the value -@Pi/2.0 (resp.,
+   @i{CT}.Real associated with the value @en@Pi/2.0 (resp.,
    @Pi).
 @end{Itemize}
 @begin{Discussion}
@@ -2795,7 +2795,7 @@ scalar Right. The index range of the result is Left'Range.]}
 @ChgAdded{Version=[2],Text=[This function returns a @i<unit vector>@Defn2{Term=[unit vector],Sec=[real vector]}
 with Order components and a lower bound of First. All components are set to 0.0
 except for the Index component which is set to 1.0. Constraint_Error is raised
-if Index < First, Index > First + Order - 1 or if First + Order - 1 >
+if Index < First, Index > First + Order @en 1 or if First + Order @en 1 >
 Integer'Last.]}
 
 @begin{Example}
@@ -2988,8 +2988,8 @@ Argument_Error is raised if the matrix A is not symmetric.]}
 with Order**2 components and lower bounds of
 First_1 and First_2 (for the first and second index ranges respectively). All
 components are set to 0.0 except for the main diagonal, whose components are
-set to 1.0. Constraint_Error is raised if First_1 + Order - 1 > Integer'Last or
-First_2 + Order - 1 > Integer'Last.]}
+set to 1.0. Constraint_Error is raised if First_1 + Order @en 1 > Integer'Last or
+First_2 + Order @en 1 > Integer'Last.]}
 
 @end{DescribeCode}
 
@@ -3018,7 +3018,7 @@ of the absolute error of the inner product @i<X>*@i<Y> shall not exceed
 @i<g>*@b<abs>(@i<X>)*@b<abs>(@i<Y>) where @i<g> is defined as]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i<g> = @i<X>'Length * Real'Machine_Radix**(1-Real'Model_Mantissa)]}
+@ChgAdded{Version=[2],Text=[@i<g> = @i<X>'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa)]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00418-01]}
@@ -3639,7 +3639,7 @@ Left'Range.]}
 vector}@Defn2{Term=[unit vector],Sec=[complex vector]} with Order components
 and a lower bound of First. All components are set to (0.0,0.0) except for the
 Index component which is set to (1.0,0.0). Constraint_Error is raised if Index
-< First, Index > First + Order - 1, or if First + Order - 1 > Integer'Last.]}
+< First, Index > First + Order @en 1, or if First + Order @en 1 > Integer'Last.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4021,7 +4021,7 @@ with Order**2 components and
 lower bounds of First_1 and First_2 (for the first and second index ranges
 respectively). All components are set to (0.0,0.0) except for the main diagonal,
 whose components are set to (1.0,0.0). Constraint_Error is raised
-if First_1 + Order - 1 > Integer'Last or First_2 + Order - 1 > Integer'Last.]}
+if First_1 + Order @en 1 > Integer'Last or First_2 + Order @en 1 > Integer'Last.]}
 
 @end{DescribeCode}
 
@@ -4049,10 +4049,10 @@ of the absolute error of the inner product @i{X}*@i{Y} shall not exceed
 @i{g}*@key{abs}(@i{X})*abs(@i{Y}) where @i{g} is defined as]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i{g} = @i{X}'Length * Real'Machine_Radix**(1-Real'Model_Mantissa) for mixed complex and real operands]}
+@ChgAdded{Version=[2],Text=[@i{g} = @i{X}'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa) for mixed complex and real operands]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1-Real'Model_Mantissa) for two complex operands]}
+@ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa) for two complex operands]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00418-01]}

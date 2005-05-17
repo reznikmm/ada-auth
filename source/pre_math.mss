@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2005/05/15 06:35:40 $ $Author: Randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2005/05/16 03:42:22 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:40 $}
+@Comment{$Date: 2005/05/16 03:42:22 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -164,8 +164,8 @@ the principal branch:
    The result of the Arcsin function is in the quadrant containing the point
    (1.0, @i[x]), where @i[x] is the value of the parameter X. This quadrant is
    I or IV; thus, the range of the Arcsin function is approximately
-   -@Pi/2.0 to @Pi/2.0
-   (-@R[Cycle]/4.0 to @R[Cycle]/4.0,
+   @en@Pi/2.0 to @Pi/2.0
+   (@en@R[Cycle]/4.0 to @R[Cycle]/4.0,
    if the parameter Cycle is specified).
 
    The result of the Arccos function is in the quadrant containing the point
@@ -179,13 +179,13 @@ the principal branch:
    IV) when the parameter X (resp., Y) of Arctan (resp., Arccot) is specified,
    but it is restricted to quadrants I and IV (resp., I and II) when that
    parameter is omitted. Thus, the range when that parameter is specified is
-   approximately -@Pi to @Pi
-   (-@R[Cycle]/2.0 to @R[Cycle]/2.0,
+   approximately @en@Pi to @Pi
+   (@en@R[Cycle]/2.0 to @R[Cycle]/2.0,
    if the parameter Cycle is specified); when omitted, the range of Arctan
    (resp., Arccot) is that of Arcsin (resp., Arccos), as given above. When the
    point (@i[x], @i[y]) lies on the negative x-axis, the result approximates
    @begin{Itemize}
-      @Pi (resp., -@Pi) when the sign of the parameter Y is
+      @Pi (resp., @en@Pi) when the sign of the parameter Y is
       positive (resp., negative), if Float_Type'Signed_Zeros is True;
 
       @Pi, if Float_Type'Signed_Zeros is False.
@@ -775,7 +775,7 @@ to transform the result of the floating point Random function. For
 @end{Example}
 
 @NoPrefix@;transforms the result of Random(G) to an integer uniformly distributed over the
-range 0 .. @R[M]-1; it is valid even if Random delivers 0.0 or 1.0.
+range 0 .. @R[M]@en@;1; it is valid even if Random delivers 0.0 or 1.0.
 Each value of the result range is possible, provided that M is not too large.
 Exponentially distributed (floating point) random numbers with mean and
 standard deviation 1.0 can be obtained by the transformation

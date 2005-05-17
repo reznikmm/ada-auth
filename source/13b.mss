@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:37 $}
+@Comment{$Date: 2005/05/16 03:42:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.20 $}
 
 @LabeledClause{The Package System}
 
@@ -3112,13 +3112,13 @@ see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Output attribute of
 the specific type identified by the tag.@Chg{Version=[2],New=[ Tag_Error is
 raised if the tag of Item identifies a type declared at an accessibility
-level deeper than that of S.],Old=[]}
+level deeper than that of S.],Old=[]}>}@Comment{End of S'Class'Output attribute}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgAdded{Version=[2],Text=[We raise Tag_Error here for nested types as
   such a type cannot be successfully read with S'Input, and it doesn't make
   sense to allow writing a value that cannot be read.]}
-@end{Reason}>}@Comment{End of S'Class'Output attribute}
+@end{Reason}
 
 @AttributeLeading{Prefix=<S'Class>, AttrName=<Input>,
   Text=<S'Class'Input denotes a function with the following specification:

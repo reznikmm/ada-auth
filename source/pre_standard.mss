@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2005/02/09 00:00:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2005/05/16 03:42:27 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2005/02/09 00:00:20 $}
+@Comment{$Date: 2005/05/16 03:42:27 $}
 
 @LabeledClause{The Package Standard}
 
@@ -232,18 +232,19 @@ the visible part of package Standard.}
    --@RI{ any enumeration type.}
 @Softpage@;
 
-@ChgRef{Version=[2],Kind=[Added]}@Comment{Odd missing paragraph number here}
-@Chg{Version=[2],New=[],Old=[@noparanum@;]}   --@RI{ The declaration of type Wide_Character is based on the standard ISO 10646 BMP character set.}
-   --@RI{ The first 256 positions have the same contents as type Character. See @refsecnum[Character types].}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}@Comment{Odd missing paragraph number here}
+@Chg{Version=[2],New=[],Old=[@noparanum@;]}   --@RI{ The declaration of type Wide_Character is based on the standard @Chg{Version=[2],New=[ISO/IEC],Old=[ISO]} 10646@Chg{Version=[2],New=[:2003],Old=[]} BMP character@Chg{Version=[2],New=[],Old=[ set.]}}
+   --@RI{ @Chg{Version=[2],New=[set. ],Old=[]}The first 256 positions have the same contents as type Character. See @refsecnum[Character types].}
 @comment[blank line]
-   @key[type] @AdaTypeDefn{Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[FFFE], @RI[FFFF]);
+   @key[type] @AdaTypeDefn{Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[@Chg{Version=[2],New=[Hex_0000FFFE],Old=[FFFE]}], @RI[@Chg{Version=[2],New=[Hex_0000FFFF],Old=[FFFF]}]);
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgAdded{Version=[2],Text=[   -- @RI[The declaration of type Wide_Wide_Character is based on the full]
    -- @RI[ISO/IEC 10646:2003 character set. The first 65536 positions have the]
    -- @RI[same contents as type Wide_Character. See @refsecnum[Character types].]
 @comment[blank line]
-   @key[type] Wide_Wide_Character @key[is] (@RI[nul], @RI[soh] ... @RI[FFFE], @RI[FFFF], ...);]}
+   @key[type] Wide_Wide_Character @key[is] (@RI[nul], @RI[soh] ... @RI[Hex_7FFFFFFE], @RI[Hex_7FFFFFFF]);
+   @key[for] Wide_Wide_Character'Size @key[use] 32;]}
 
 @ChgRef{Version=[2],Kind=[Added]}@Comment{Odd missing paragraph number here}
 @Chg{Version=[2],New=[],Old=[@noparanum@;]}   @key[package] ASCII @key[is] ... @key[end] ASCII;  @RI{--Obsolescent; see @RefSecNum[ASCII]}
@@ -324,7 +325,7 @@ for hyphen (position 45)
 and soft hyphen (position 173) correspond to different values.
 Unless indicated otherwise, each occurrence of
 the character literal
-'-' in this International Standard
+'@en@;' in this International Standard
 refers to the hyphen character.
 @end{StaticSem}
 

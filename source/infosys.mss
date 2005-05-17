@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/03/01 06:05:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/05/16 03:42:20 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2005/03/01 06:05:06 $}
+@Comment{$Date: 2005/05/16 03:42:20 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -148,10 +148,10 @@ instructions that exploit the packed decimal representation.
 @end{Example}
 @ImplDef{The values of named numbers in the package Decimal.}
 
-Max_Scale is the largest N such that 10.0**(-N) is allowed as a decimal
+Max_Scale is the largest N such that 10.0**(@en@;N) is allowed as a decimal
   type's delta. Its type is @i{universal_integer}.
 
-Min_Scale is the smallest N such that 10.0**(-N) is allowed as a decimal
+Min_Scale is the smallest N such that 10.0**(@en@;N) is allowed as a decimal
   type's delta. Its type is @i{universal_integer}.
 
 Min_Delta is the smallest value allowed for @i{delta} in a
@@ -246,7 +246,7 @@ based on their effect on the edited output string:
 @TabSet{3, 21, 27, 33, 39, 45, 51}
 @\Decimal Digit: @\'9'
 @\Radix Control: @\'.' @\'V'
-@\Sign Control: @\'+' @\'-' @\'<' @\'>' @\"CR" @\"DB"
+@\Sign Control: @\'+' @\'@en@;' @\'<' @\'>' @\"CR" @\"DB"
 @\Currency Control: @\'$' @\'#'
 @\Zero Suppression: @\'Z' @\'*'
 @\Simple Insertion: @\'_' @\'B' @\'0' @\'/'
@@ -265,7 +265,7 @@ position for '.', or an assumed position for 'V'.
 
 A sign control Character in the picture String affects the form of the
 sign in the edited output string. The '<' and '>' Character values indicate
-parentheses for negative values. A Character '+', '-', or '<' appears
+parentheses for negative values. A Character '+', '@en@;', or '<' appears
 either singly, signifying a fixed-position sign in the edited output,
 or repeated, signifying a floating-position sign that is preceded by
 zero or more space characters and that replaces a leading 0.
@@ -487,7 +487,7 @@ conventions specified in this clause.
 @nt{all_sign_aft_char} ::=  @nt{sign_char} | @nt{context_sensitive_insertion}
 @end{display}
 @begin{display}
-@nt{sign_char} ::= + | - | <
+@nt{sign_char} ::= + | @en | <
 @comment{Blank Line}
 @end{display}
 @begin{display}
@@ -535,7 +535,7 @@ If a picture String has '<' in a @nt{floating_LHS_sign} or in an
 @nt{all_sign_number}, then it has an occurrence of '>'.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0088],ARef=[AI95-00153]}
-If a picture String has '+' or '-' as @nt{fixed_LHS_sign}, in a
+If a picture String has '+' or '@en@;' as @nt{fixed_LHS_sign}, in a
 @nt{floating_LHS_sign}, or in an @nt{all_sign_number}, then it has no
 @nt{RHS_sign}@Chg{New=[ or '>' character],Old=[]}.
 
@@ -615,7 +615,7 @@ or a negative sign would be
 truncated; in such cases no edited output string is defined.
 
 The edited output string has lower bound 1 and upper bound N where
-     N = Pic_String'Length + Currency_Length_Adjustment -
+     N = Pic_String'Length + Currency_Length_Adjustment @en
          Radix_Adjustment, and
 @begin{Itemize}
         Currency_Length_Adjustment =
@@ -670,8 +670,8 @@ is produced.
 @Table{Columns=<3>,
 Caption=<@b{Table F-1: Edited Output for Sign Control Symbols}>,
 Headers=<@b{Sign Control Symbol}@\@b{Edited Output for @*Non-Negative Number}@\@b{Edited Output for @*Negative Number}>,
-Body=['+'@\'+'@\'-'
-'-'@\'b'@\'-'
+Body=['+'@\'+'@\'@en@;'
+'@en@;'@\'b'@\'@en@;'
 '<'@\'b'@\'('
 '>'@\'b'@\')'
 "CR"@\"bb"@\"CR"@Last
@@ -1095,7 +1095,7 @@ Pic_String(Pic_1) = Pic_String(Pic_2), and
                  Currency : @key(in) String := Default_Currency)
    @key(return) Natural;
 @end{Example}
-@Leading@;Length returns Pic_String(Pic)'Length + Currency_Length_Adjustment -
+@Leading@;Length returns Pic_String(Pic)'Length + Currency_Length_Adjustment @en
 Radix_Adjustment where
 @begin[itemize]
 @Leading@;Currency_Length_Adjustment =
