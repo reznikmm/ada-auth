@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:34 $}
+@Comment{$Date: 2005/05/17 05:50:43 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1927,10 +1927,10 @@ statically match the result subtype of the function. The accessibility level of
 this anonymous access subtype is that of the result subtype.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@ChgAdded{Version=[2],Text=[If the type of the return expression is limited, then the
-return expression shall be an aggregate, a function call (or equivalent use of
-an operator), or a @nt{qualified_expression} or parenthesized expression whose
-operand is one of these.]}
+@ChgAdded{Version=[2],Text=[If the result subtype of the function is limited,
+then the return expression shall be an @nt{aggregate}, a function call (or
+equivalent use of an operator), or a @nt{qualified_expression} or
+parenthesized expression whose operand is one of these.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In other words, if limited, the return expression
@@ -1939,13 +1939,14 @@ operand is one of these.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-02]}
-@ChgAdded{Version=[2],Text=[If the result type is class-wide, the accessibility
-level of the type of the return expression shall not be statically deeper than
-that of the master that elaborated the function body. If the result subtype has
-one or more unconstrained access discriminants, the accessibility level of the
-anonymous access type of each access discriminant, as determined by the
-@nt{return_subtype_indication} or the return expression, shall not be
-statically deeper than that of the master that elaborated the function body.]}
+@ChgAdded{Version=[2],Text=[If the result type of the function is class-wide,
+the accessibility level of the type of the return expression shall not be
+statically deeper than that of the master that elaborated the function body. If
+the result subtype has one or more unconstrained access discriminants, the
+accessibility level of the anonymous access type of each access discriminant,
+as determined by the @nt{return_subtype_indication} or the return expression,
+shall not be statically deeper than that of the master that elaborated the
+function body.]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

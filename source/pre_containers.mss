@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2005/05/16 03:42:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2005/05/17 05:50:46 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:22 $}
+@Comment{$Date: 2005/05/17 05:50:46 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -2602,7 +2602,7 @@ evaluation of "<" is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure Merge} (Target  : @key{in out} List;
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Merge (Target  : @key{in out} List;
                  Source  : @key{in out} List);]}
 @end{Example}
 
@@ -2733,12 +2733,9 @@ decremented, and Position is updated to represent an element in Target.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If either of Before or Position is
-not No_Element, and does not designate an element in Target, then Program_Error
-is propagated. If Position equals No_Element, or if Position equals Before, or
-if the successor of Position equals Before, the operation has no effect.
-Otherwise the element designated by Position is moved immediately prior to
-Before, or, if Before equals No_Element, after the last element.]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to
+Splice (Target => Container, Before => Before,
+Source => Container, Position => Position);]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

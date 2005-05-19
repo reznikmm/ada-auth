@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:33 $}
+@Comment{$Date: 2005/05/17 05:50:42 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2867,7 +2867,7 @@ Standard.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The first sentence prevents compatibility
-  problems by insuring that these operators are not used for named access
+  problems by ensuring that these operators are not used for named access
   types. Also, universal access types do not count for the purposes of this
   rule. Otherwise, equality expressions like (X = @key{null}) would be
   ambiguous for normal access types.]}

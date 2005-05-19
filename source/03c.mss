@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:17 $}
+@Comment{$Date: 2005/05/17 05:50:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2915,6 +2915,7 @@ the actual parameter is null.]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[excludes null],Sec=[subtype]}
 A @nt{null_exclusion} in an @nt{access_definition}, @nt{access_type_definition},
 @nt{subtype_indication} (see @RefSecNum{Subtype Declarations}),
+@nt{discriminant_specification} (see @RefSecNum{Discriminants}),
 @nt{parameter_specification} (see @RefSecNum{Subprogram Declarations}),
 @nt{parameter_and_result_profile} (see @RefSecNum{Subprogram Declarations}),
 @nt{object_renaming_declaration} (see @RefSecNum{Object Renaming Declarations}),
@@ -2992,10 +2993,21 @@ otherwise it is constrained.
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
 @ChgAdded{Version=[2],Text=[A @nt{null_exclusion} is only allowed in a
-@nt{subtype_indication} whose @nt{subtype_mark} denotes an access subtype that
-does not exclude null.]}
+@nt{subtype_indication},
+@nt{discriminant_specification}, @nt{parameter_specification},
+@nt{parameter_and_result_profile}, @nt{object_renaming_declaration}, or
+@nt{formal_object_declaration} whose @nt{subtype_mark} denotes an access
+subtype that does not exclude null.]}
+@begin(Honest)
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[This means @lquotes@;directly allowed in@rquotes;
+  we are not talking about a @nt{null_exclusion} that occurs in an
+  @nt{access_definition} in one of these constructs (for an
+  @nt{access_definition}, the @nt{subtype_mark} in such an
+  @nt{access_definition} is not restricted).]}
+@end(Honest)
 @begin(Reason)
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[This is similar to doubly constraining a subtype,
   which we also don't allow.]}
 @end(Reason)
@@ -3777,8 +3789,8 @@ given master directly depends
 An entity or view @Chg{Version=[2],New=[defined],Old=[created]} by a
 declaration@Chg{Version=[2],New=[ and created as part of its elaboration],Old=[]}
 has the same accessibility level
-as the innermost @Chg{Version=[2],New=[],Old=[enclosing ]}master@Chg{Version=[2],
-New=[ (other than the declaration itself)],Old=[]} except in the
+as the innermost @Chg{Version=[2],New=[],Old=[enclosing ]}master
+@Chg{Version=[2],New=[ of the declaration],Old=[]} except in the
 cases of renaming and derived access types described below.
 A parameter of a master has the same
 accessibility level as the master.
@@ -3835,10 +3847,18 @@ any other function, the]} accessibility level of the result
 used as a @nt{prefix} of a @nt{name}, as the actual parameter in a call,
 or as the @nt{expression} of an @nt{assignment_statement},],Old=[object]}
 is that of the
-@Chg{Version=[2],New=[immediately enclosing master. In other contexts, the
-accessibility level is that of the object being initialized from
+@Chg{Version=[2],New=[innermost master of the function call. In other
+contexts, the accessibility level is that of the object being initialized from
 the],Old=[execution of the called]} function@Chg{Version=[2],
 New=[ result],Old=[]}.
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[We really mean the innermost master here,
+  which could be a very  short lifetime. Consider a function call used as
+  a parameter of a procedure call. In this case the innermost master for
+  the function call is the procedure call.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
 @ChgAdded{Version=[2],Text=[Within a return statement, the accessibility level
@@ -3971,7 +3991,7 @@ the access type@Chg{Version=[2],New=[, except for an @nt{allocator} of an
 anonymous access type that defines the value of an access
 parameter or an access discriminant. For an @nt{allocator} defining the
 value of an access parameter, the accessibility level is that of
-the master immediately enclosing the call. For one defining an
+the innermost master of the call. For one defining an
 access discriminant, the accessibility level is determined as
 follows:],Old=[.]}
 
@@ -4019,6 +4039,13 @@ of (a view of) a composite object
 is the same as that of
 (the view of) the composite object.
 @end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[For determining whether an @nt{expression} is used
+in a certain context, the operand of a view conversion, parenthesized
+expression or @nt{qualified_expression} is considered to be used in a context
+if the view conversion, parenthesized expression or @nt{qualified_expression}
+itself is used in that context.]}
 
 @begin{Wide}
 @Leading@Defn{statically deeper}

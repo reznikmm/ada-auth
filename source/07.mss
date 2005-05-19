@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:19 $}
+@Comment{$Date: 2005/05/17 05:50:44 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2492,9 +2492,7 @@ Leaving an execution happens immediately after its completion,
 except in the case of a @i{master}:
 the execution of
 a @Chg{Version=[2],New=[body other than a @nt{package_body};
-the elaboration of a declaration other than a @nt{single_task_declaration},
-@nt{single_protected_declaration}, the declaration of a package, or
-the declaration of a type; the execution of an @nt{statement};
+the execution of an @nt{statement};
 or the evaluation of an @nt{expression} or @nt{range} that is not part
 of an enclosing @nt{expression}, @nt{range}, or @nt{simple_statement}],
 Old=[@nt{task_body}, a @nt{block_statement},
@@ -2514,7 +2512,7 @@ complete, and before it is left.
   @nt{allocator}s for anonymous access-to-object types, and so on) are
   finalized and have their tasks awaited before the @nt{expression}s or
   @nt{statement}s is left. Note that @nt{expression}s like the @nt{condition}
-  of an @nt{if_statement} are a masters, because they are not enclosed by a
+  of an @nt{if_statement} are masters, because they are not enclosed by a
   @nt{simple_statement}.]}
 @end{Reason}
 

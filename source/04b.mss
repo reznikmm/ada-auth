@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:07 $}
+@Comment{$Date: 2005/05/17 05:50:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.12 $}
+@Comment{$Revision: 1.13 $}
 
 @LabeledClause{Type Conversions}
 
@@ -108,10 +108,11 @@ If the target type is a numeric type, then the operand type
 shall be a numeric type.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=<Untagged view conversions appear only as [in] out
+  @ChgAdded{Version=[2],Text=<Untagged view conversions appear only as [@key{in}]
+  @key{out}
   parameters. Hence, the reverse conversion must be legal as well.
-  The forward conversion must be legal even if an out parameter,
-  because actual parameters of an access type are always
+  The forward conversion must be legal even for an @key{out} parameter,
+  because (for example) actual parameters of an access type are always
   copied in anyway.>}
 @end{Reason}
 @begin{Discussion}
@@ -125,7 +126,7 @@ Much of the wording of the legality section is unchanged, but it is reordered
 and reformatted. Because of the limitations of our tools, we had to delete and
 replace nearly the entire section. The text of Ada 95 paragraphs 8 through 12,
 14, 15, 17, 19, 20, and 24 are unchanged (just moved); these are now
-24.1 through 24.4, 24.11, 24.12, 24.16, 24.18, 24.19, and 8.]}
+24.1 through 24.5, 24.12, 24.13, 24.17, 24.19, 24.20, and 8.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
@@ -344,7 +345,7 @@ Further, if the target type is tagged, then either:]}
     interface ancestor, because some extension of T might have the needed
     ancestor. This is similar to a conversion of a class-wide type toward the
     leaves of the tree, and we need to be consistent. Of course, there is
-    a check that the actual object has the needed interface.]}
+    a run-time check that the actual object has the needed interface.]}
   @end{Ramification}
 @end(itemize)
 
@@ -391,20 +392,22 @@ be an array type. Further:]}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00392-01]}
   @Chg{Version=[2],New=[If the component types are anonymous access types, then the
   accessibility level of the operand type shall not be statically deeper
-  than that of the target type; and
+  than that of the target type;
   @PDefn2{Term=[accessibility rule],Sec=(type conversion, array components)}],Old=[]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[The component types could have different accessibility
-    in this case, and we had better not allow a conversion of a local type into
-    a global type, in case the local type points at local objects. We don't
-    need a check for other types of components; for them, the check on the
-    conversion (if any) will be sufficient. (I don't buy this - RLB)]}
+    @ChgAdded{Version=[2],Text=[For unrelated array types, the component types
+    could have different accessibility, and we had better not allow a
+    conversion of a local type into a global type, in case the local type
+    points at local objects. We don't need a check for other types of
+    components; such components necessarily are for related types, and
+    either have the same accessibility or (for access discriminants) cannot
+    be changed so the discriminant check will prevent problems.]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00246-01]}
-  @Chg{Version=[2],New=[Neither the target type nor the operand type shall be
-  limited;],Old=[]}
+  @ChgAdded{Version=[2],Text=[Neither the target type nor the operand type shall be
+  limited;]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[We cannot allow conversions between unrelated limited
@@ -412,16 +415,10 @@ be an array type. Further:]}
     are limited), a copy cannot be made to reconcile the representations.]}
   @end{Reason}
 
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00246-01],ARef=[AI95-00251-01],ARef=[AI95-00363-01]}
-  @Chg{Version=[2],New=[In a view conversion: if the target type has aliased
-  components, then so shall the operand type; and the operand type shall not
-  have a tagged, private, or volatile subcomponent.],Old=[]}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[If the target type of a view conversion has
+  aliased components, then so shall the operand type; and]}
   @begin{Reason}
-    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00246-01]}
-    @ChgAdded{Version=[2],Text=[We cannot allow view conversions between unrelated
-    might-be-by-reference types, as they may have different representations,
-    and a copy cannot be made to reconcile the representations.]}
-
     @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
     @ChgAdded{Version=[2],Text=[We cannot allow a view conversion from an object
     with unaliased components to an object with aliased components, because
@@ -429,6 +426,21 @@ be an array type. Further:]}
     was missing from Ada 95.]}
   @end{Reason}
 
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00246-01],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[The operand type of a view conversion shall not
+  have a tagged, private, or volatile subcomponent.]}
+  @begin{Reason}
+    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00246-01]}
+    @ChgAdded{Version=[2],Text=[We cannot allow view conversions between unrelated
+    might-be-by-reference types, as they may have different representations,
+    and a copy cannot be made to reconcile the representations.]}
+  @end{Reason}
+  @begin{Ramification}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[These rules only apply to unrelated array
+    conversions; different (weaker) rules apply to conversions between related
+    types.]}
+  @end{Ramification}
 @end(inneritemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
@@ -445,7 +457,7 @@ operand type shall be an access type.],Old=[]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}If the target type is a general access-to-object type, then
 the operand type shall be @i<universal_access> or an access-to-object type.
-Further, if not @i<universal_access>:]}
+Further, if the operand type is not @i<universal_access>:]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -640,6 +652,7 @@ Numeric Type Conversion
   the result is rounded to the nearest integer (away from zero
   if exactly halfway between two integers).
 @begin{Discussion}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00267-01]}
   This was implementation defined in Ada 83.
     There seems no reason to preserve the nonportability
     in Ada 95. Round-away-from-zero is the conventional
@@ -648,12 +661,18 @@ Numeric Type Conversion
     to pick this. This is also the most easily @lquotes@;undone@rquotes@; by hand.
     Round-to-nearest-even is an alternative, but that is quite complicated
     if not supported by the hardware. In any case, this operation is not
-    expected to be part of an inner loop, so predictability and portability
-    are judged most important. We anticipate that
-    a floating point attribute function Unbiased_Rounding will be provided
-    for those applications that require round-to-nearest-even.
-    @lquotes@;Deterministic@rquotes@; rounding is required for static conversions to
-    integer as well.
+    @Chg{Version=[2],New=[usually],Old=[expected to be]} part of an inner loop,
+    so predictability and portability are judged most important.
+    @Chg{Version=[2],New=[A],Old=[We anticipate that
+    a]} floating point attribute function Unbiased_Rounding @Chg{Version=[2],
+    New=[is],Old=[will be]} provided@Chg{Version=[2],
+    New=[ (see @RefSecNum{Attributes of Floating Point Types})],Old=[]}
+    for those applications that require round-to-nearest-even@Chg{Version=[2],
+    New=[, and a floating point attribute function Machine_Rounding (also see
+    @RefSecNum{Attributes of Floating Point Types}) is provided for those
+    applications that require the highest possible performance], Old=[]}.
+    @lquotes@;Deterministic@rquotes@; rounding is required for static
+    conversions to integer as well.
     See @RefSecNum{Static Expressions and Static Subtypes}.
 @end{Discussion}
 @end(inneritemize)
@@ -796,8 +815,8 @@ Access Type Conversion
     @ChgRef{Version=[2],Kind=[Revised]}
     A conversion to an anonymous access type
     happens implicitly as part of initializing
-    @Chg{Version=[2],New=[or assigning to an anonymous access component or
-    object],Old=[an access discriminant or access parameter]}.
+    @Chg{Version=[2],New=[or assigning to an anonymous access object],
+    Old=[an access discriminant or access parameter]}.
   @end{Ramification}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
@@ -830,13 +849,13 @@ a check is performed that the value satisfies this constraint.
 @Chg{Version=[2],New=[If the target subtype excludes null,
 then a check is made that the value is not null.],Old=[]}
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Revised]}
-The @Chg{Version=[2],New=[first],Old=[above]} check
-@Chg{Version=[2],New=[above],Old=[]}is a Range_Check for scalar subtypes, a
-Discriminant_Check or Index_Check for access subtypes, and a Discriminant_Check
-for discriminated subtypes. The Length_Check for an array conversion is
-performed as part of the conversion to the target type.
-@Chg{Version=[2],New=[The null exclusion check is an Access_Check.],Old=[]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+  The @Chg{Version=[2],New=[first],Old=[above]} check
+  @Chg{Version=[2],New=[above ],Old=[]}is a Range_Check for scalar subtypes, a
+  Discriminant_Check or Index_Check for access subtypes, and a Discriminant_Check
+  for discriminated subtypes. The Length_Check for an array conversion is
+  performed as part of the conversion to the target type.
+  @Chg{Version=[2],New=[The check for exclusion of null is an Access_Check.],Old=[]}
 @end{Ramification}
 
 @PDefn2{Term=[evaluation], Sec=(view conversion)}
@@ -1055,79 +1074,81 @@ as a @nt<name>.
 @end{DiffWord83}
 
 @begin{Incompatible95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00246-01]}
-@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
-Conversions between unrelated array types that are limited or
-(for view conversions) might be by-reference types are now illegal.
-The representations of two such arrays may differ, making the conversions
-impossible. We have to make the check here, as legality should not be based
-on representation properties, and such conversions are likely to be rare.
-There is a potential that this change would make a working program illegal
-(if the types have the same representation).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00246-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95} Conversions
+  between unrelated array types that are limited or (for view conversions)
+  might be by-reference types are now illegal. The representations of two such
+  arrays may differ, making the conversions impossible. We make the check here,
+  because legality should not be based on representation properties, and
+  because such conversions are likely to be rare. There is a potential that
+  this change would make a working program illegal (if the types have the same
+  representation).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[If a discriminated full type has a partial view (private
-type) that is constrained, we do not allow conversion between
-access-to-unconstrained and access-to-constrained subtypes designating the type.
-Ada 95 allowed this conversion and various
-access subtypes, requiring that the heap object be constrained and thus making
-details of the implementation of the private type visible to the client of
-the private type. See @RefSecNum{Allocators} for more on this topic.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[If a discriminated full type has a partial view
+  (private type) that is constrained, we do not allow conversion between
+  access-to-unconstrained and access-to-constrained subtypes designating the
+  type. Ada 95 allowed this conversion and the declaration of various access
+  subtypes, requiring that the heap object be constrained and thus making
+  details of the implementation of the private type visible to the client of
+  the private type. See @RefSecNum{Allocators} for more on this topic.]}
 @end{Incompatible95}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00384-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}A type conversion from an
-access-to-discriminated and unconstrained object to a access-to-discriminants
-and constrained is allowed. Ada 95 only allowed the reverse conversion, which
-was weird and asymmetric. Of course, a constraint check will be performed for
-this conversion.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00384-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}A type conversion from
+  an access-to-discriminated and unconstrained object to an
+  access-to-discriminanted and constrained one is allowed. Ada 95 only allowed
+  the reverse conversion, which was weird and asymmetric. Of course, a
+  constraint check will be performed for this conversion.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0017],ARef=[AI95-00184-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Wording was added to ensure that
-view conversions are constrained, and that a tagged view conversion has a
-tagged object. Both rules are needed to avoid having a way to change the
-discriminants of a constrained object.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0017],ARef=[AI95-00184-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Wording was added to ensure that
+  view conversions are constrained, and that a tagged view conversion has a
+  tagged object. Both rules are needed to avoid having a way to change the
+  discriminants of a constrained object.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0008],ARef=[AI95-00168-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Wording was added to ensure that the
-aliased status of array components cannot change in a view conversion. This
-rule was needed to avoid having a way to change the discriminants of an
-aliased object. This rule was repealed later, as Ada 2006 allows changing
-the discriminants of an aliased object.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0008],ARef=[AI95-00168-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Wording was added to ensure
+  that the aliased status of array components cannot change in a view
+  conversion. This rule was needed to avoid having a way to change the
+  discriminants of an aliased object. This rule was repealed later, as
+  Ada 2006 allows changing the discriminants of an aliased object.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
-@Chg{Version=[2],New=[Conversion rules for @i<universal_access> were defined.
-These allow the use anonymous access in equality tests (see
-@RefSecNum{Relational Operators and Membership Tests}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[Conversion rules for @i<universal_access> were
+  defined. These allow the use of anonymous access values in equality tests
+  (see @RefSecNum{Relational Operators and Membership Tests}).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[Wording was added to check subtypes that exclude null
-(see @RefSecNum{Access Types}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[Wording was added to check subtypes that exclude
+  null (see @RefSecNum{Access Types}).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[The organization of the legality rules was changed,
-both to make it clearer, and to eliminate an unintentional incompatibility
-with Ada 83. The old organization prevented type conversions between some
-types that were related by derivation (which Ada 83 always allowed).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[The organization of the legality rules was
+  changed, both to make it clearer, and to eliminate an unintentional
+  incompatibility with Ada 83. The old organization prevented type conversions
+  between some types that were related by derivation (which Ada 83 always
+  allowed).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00330-01]}
-@Chg{Version=[2],New=[Clarified that an untagged type conversion appearing as
-a generic actual parameter for a generic @key{in out} formal parameter is
-not a view conversion (and thus is illegal).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00330-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that an untagged type conversion
+  appearing as a generic actual parameter for a generic @key{in out} formal
+  parameter is not a view conversion (and thus is illegal).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[Rules added by the Corrigendum to eliminate problems
-with discriminants of aliased components changing were removed, as we now
-generally allow discriminants of aliased components to be changed.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[Rules added by the Corrigendum to eliminate
+  problems with discriminants of aliased components changing were removed, as
+  we now generally allow discriminants of aliased components to be changed.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00392-01]}
-  @ChgAdded{Version=[2],Text=[Added rules to make accessibility checks on
-  conversions involving types with anonymous access components. These have
+  @ChgAdded{Version=[2],Text=[Accessibility checks on conversions involving
+  types with anonymous access components were added. These components have
   the level of the type, and conversions can be between types at different
-  levels, which could cause dangling pointers.]}
+  levels, which could cause dangling access values in the absence of such
+  checks.]}
 @end{DiffWord95}
 
 
@@ -1286,11 +1307,11 @@ deeper than that of the type of the @nt{allocator}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
 @ChgAdded{Version=[2],Text=[If the designated subtype of the type of the
-allocator has one or more unconstrained access discriminants, then the
+@nt{allocator} has one or more unconstrained access discriminants, then the
 accessibility level of the anonymous access type of each access discriminant,
-as determined by the @nt{subtype_indication} or @nt{qualified_expression} of the
-allocator, shall not be statically deeper than that of the type of the
-allocator (see @RefSecNum{Operations of Access Types}).]}
+as determined by the @nt{subtype_indication} or @nt{qualified_expression} of
+the @nt{allocator}, shall not be statically deeper than that of the type of the
+@nt{allocator} (see @RefSecNum{Operations of Access Types}).]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This prevents the allocated object from outliving
@@ -1305,7 +1326,7 @@ If the designated type of the type of the @nt<allocator> is elementary,
 then the subtype of the created object is the designated
 subtype.
 If the designated type is composite, then the
-@Chg{Version=[2],New=[subtype of ],Old=[]}created object is
+@Chg{Version=[2],New=[subtype of the ],Old=[]}created object is
 @Chg{Version=[2],New=[the designated
 subtype when the designated subtype is constrained or there is a partial
 view of the designated type that is constrained; otherwise, the
@@ -1331,7 +1352,7 @@ otherwise, the]} object is constrained by its initial value
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
   @ChgAdded{Version=[2],Text=[If there is a constrained partial view of the type, this
     allows the objects to be unconstrained. This eliminates privacy breaking
-    (we don't want the objects to act different simply because they're
+    (we don't want the objects to act differently simply because they're
     allocated). Such a created object is effectively constrained by its initial
     value if the access type is an access-to-constant type, or the designated
     type is limited (in all views), but we don't need to state that here. It is
@@ -1343,7 +1364,7 @@ otherwise, the]} object is constrained by its initial value
 @end{StaticSem}
 
 @begin{RunTime}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
 @PDefn2{Term=[evaluation], Sec=(allocator)}
 For the evaluation of an @nt<allocator>, the elaboration of
 the @nt<subtype_indication> or the evaluation of the @nt<qualified_expression>
@@ -1374,9 +1395,13 @@ if either such check fails.@IndexCheck{Accessibility_Check}
 @end{Ramification}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
-  @ChgAdded{Version=[2],Text=[The check prevents the allocated object from
-  outliving its type. We need the check in instance bodies (other cases are
-  statically detected).]}
+  @ChgAdded{Version=[2],Text=[The accesibility check on class-wide types
+  prevents the allocated object from outliving its type. We need the run-time
+  check in instance bodies (other cases are statically detected).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[The accesibility check on access discriminants
+  prevents the allocated object from outliving its discriminants.]}
 @end{Reason}
 
 @PDefn2{Term=[evaluation], Sec=(uninitialized allocator)}
@@ -1411,7 +1436,7 @@ AI83-00150.
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[If the object to be created by the @nt<allocator> has a
+@Chg{Version=[2],New=[If the object to be created by an @nt<allocator> has a
 controlled or protected part, and the finalization of the collection of the
 type of the @nt{allocator} (see @RefSecNum{Completion and Finalization}) has
 started, Program_Error is raised.@IndexCheck{Allocation_Check}
@@ -1426,17 +1451,26 @@ started, Program_Error is raised.@IndexCheck{Allocation_Check}
   be trivial, we do not require (but allow) the check, as no real harm
   could come from late allocation.]}
 @end{Reason}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This check can only fail if an @nt{allocator}
+  is evaluated in code reached from a Finalize routine for a type declared
+  in the same master. That's highly unlikely; Finalize routines are much
+  more likely to be deallocating objects than allocating them.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[If the created object contains any tasks, and the master
-of the type of the @nt<allocator> has finished waiting for dependent tasks
+@Chg{Version=[2],New=[If the created object contains any tasks, the master
+of the type of the @nt<allocator> is completed, and all of the dependent
+tasks of the master are terminated
 (see @RefSecNum{Task Dependence - Termination of Tasks}),
 Program_Error is raised.@IndexCheck{Allocation_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[A task created after waiting for tasks finishes could
-  depend on freed data structures, and certainly would never be awaited.]}
+  @ChgAdded{Version=[2],Text=[A task created after waiting for tasks has
+  finished could depend on freed data structures, and certainly would never
+  be awaited.]}
 @end{Reason}
 
 @Redundant[If the created object contains any tasks,
@@ -1559,7 +1593,7 @@ has been moved to @RefSec{Storage Management}.
   was an oversight in Ada 95.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-  @ChgAdded{Version=[2],Text=[@nt{Allocator}s can be
+  @ChgAdded{Version=[2],Text=[Initialized @nt{allocator}s can be
   for a limited type.]}
 @end{Extend95}
 
@@ -1578,9 +1612,9 @@ has been moved to @RefSec{Storage Management}.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgAdded{Version=[2],Text=[Added accessibility checks to class-wide
   @nt{allocator}s. These checks could not fail in Ada 95 (as all of the
-  types had to be declared at the same level, so the access type would
-  necessarily have been at the same level or more nested than the type
-  of allocated object.]}
+  designated types had to be declared at the same level, so the access type
+  would necessarily have been at the same level or more nested than the type
+  of allocated object).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added accessibility checks to access
@@ -1920,32 +1954,39 @@ single specific type],Old=[]},
 then its value shall be within the base range of its expected type.
 Otherwise, the value may be arbitrarily large or small.
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
-@ChgAdded{Version=[2],Text=[If the expression is expected to be of a universal type,
-or of any integer type, there are no limits on the value of the expression.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
+  @ChgAdded{Version=[2],Text=[If the expression is expected to be of a universal
+  type, or of @lquotes@;any integer type@rquotes, there are no limits on the
+  value of the expression.]}
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00269-01]}
 If the expression is of type @i<universal_real> and its expected type is
 a decimal fixed point type,
-then its value shall be a multiple of the @i<small> of the decimal type.
+then its value shall be a multiple of the @Chg{Version=[2],New=[small],
+Old=[@i<small>]} of the decimal type.@Chg{Version=[2],New=[ This restriction
+does not apply if the expected type is a
+descendant of a formal scalar type
+(or a corresponding actual type in an instance).],Old=[]}
 @begin{Ramification}
   This means that a @nt{numeric_literal} for a decimal type cannot have
   @lquotes@;extra@rquotes@; significant digits.
 @end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
+  @ChgAdded{Version=[2],Text=[The small is not known for a generic formal
+  type, so we have to exclude formal types from this check.]}
+@end{Reason}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00269-01]}
-The last @Chg{Version=[2],New=[],Old=[two ]}restriction@Chg{Version=[2],New=[],Old=[s]} above
-@Chg{Version=[2],New=[does],Old=[do]} not apply if the expected type is a
-descendant of a formal scalar type
-(or a corresponding actual type in an instance).
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00269-01]}
 @Chg{Version=[2],New=[@PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 the above restrictions also apply in the private part of an
-instance of a generic unit.],Old=[]}
+instance of a generic unit.],Old=[The last two restrictions above
+do not apply if the expected type is a descendant of a formal scalar type
+(or a corresponding actual type in an instance).]}
 
 @begin{Discussion}
   Values outside the base range are not permitted
@@ -1968,22 +2009,19 @@ X is a static constant equal to True.
 
 @end{Discussion}
 @begin{Ramification}
-  There is no requirement to recheck these rules in an instance;
-  the base range check will generally be performed at run time anyway.
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00269-01]}
+  @ChgDeleted{Version=[2],Text=[There is no requirement to recheck these rules
+  in an instance; the base range check will generally be performed at run time
+  anyway.]}
 @end{Ramification}
-
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
-  @ChgAdded{Version=[2],Text=[The @i<small> is not known for a generic formal type,
-  so we have to exclude formal types from that check.]}
-@end{Reason}
 @end{Legality}
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00268-01],ARef=[AI95-00269-01]}
 For a real static expression that is not part of a larger static
 expression,
-and whose expected type is not a descendant of a formal scalar type,
+and whose expected type is not a descendant of a formal
+@Chg{Version=[2],New=[],Old=[scalar ]}type,
 the implementation shall round or truncate
 the value (according to the Machine_Rounds
 attribute of the expected type) to the nearest machine
@@ -1992,7 +2030,8 @@ if the value is exactly half-way between two machine
 numbers, @Chg{Version=[2],New=[the],Old=[any]} rounding
 @Chg{Version=[2],New=[],Old=[shall be ]}performed
 @Chg{Version=[2],New=[is implementation-defined],Old=[away from zero]}.
-If the expected type is a descendant of a formal scalar type,
+If the expected type is a descendant of a formal
+@Chg{Version=[2],New=[],Old=[scalar ]}type,
 @Chg{Version=[2],New=[or if the static expression appears in
 the body of an instance of a generic unit and the corresponding expression is
 nonstatic in the corresponding generic body, then],Old=[]}
@@ -2028,7 +2067,9 @@ real static expressions which are exactly half-way between two machine numbers.]
   of plus and minus zero for a type whose Signed_Zeros attribute is
   True.
 
-  Note that the only values of a fixed point type are the multiples of
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00100-01]}
+  Note that the only @Chg{Version=[2],New=[machine numbers],Old=[values]} of
+  a fixed point type are the multiples of
   the small, so a static conversion to a fixed-point type, or division
   by an integer, must do truncation to a multiple of small.
   It is not correct for the implementation to do all static calculations
@@ -2042,7 +2083,7 @@ real static expressions which are exactly half-way between two machine numbers.]
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00268-01]}
 @ChgAdded{Version=[2],Text=[For a real static expression that is not part of a
 larger static expression, and whose expected type is not a descendant of a
-formal scalar type, the rounding should be the same as the default rounding
+formal type, the rounding should be the same as the default rounding
 for the target system.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[For a real static expression with a non-formal type that is not part of a
@@ -2218,35 +2259,35 @@ raising.
 @end{DiffWord83}
 
 @begin{Inconsistent95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00268-01]}
-@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}Rounding of static
-real expressions is implementation-defined in Ada 2006, while it was specified
-as away from zero
-in Ada 95. This could make subtle differences in programs. However, the
-Ada 95 rule required rounding that (probably) differed from the target
-processor, thus creating anomalies where the value of a static expression
-was required to be different than the same expression evaluated at
-run-time.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00268-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}Rounding of
+  static real expressions is implementation-defined in Ada 2006, while it was
+  specified as away from zero in Ada 95. This could make subtle differences
+  in programs. However, the Ada 95 rule required rounding that (probably)
+  differed from the target processor, thus creating anomalies where the
+  value of a static expression was required to be different than the
+  same expression evaluated at run-time.]}
 @end{Inconsistent95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00263-01]}
-@Chg{Version=[2],New=[The Ada 95 wording that defined static subtype
-unintentionally failed to exclude formal derived types that happen to be scalar
-(these aren't formal scalar types); and had a parenthetical remark excluding
-formal string types - but that wasn't necessary nor parenthetical (it didn't
-follow from other wording).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00263-01],ARef=[AI95-00268-01]}
+  @ChgAdded{Version=[2],Text=[The Ada 95 wording that defined static subtypes
+  unintentionally failed to exclude formal derived types that happen to be
+  scalar (these aren't formal scalar types); and had a parenthetical remark
+  excluding formal string types - but that was neither necessary nor
+  parenthetical (it didn't follow from other wording). This issue also
+  applies to the rounding rules for real static expressions.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
-@Chg{Version=[2],New=[Ada 95 didn't clearly define the bounds of a value of
-a static expression for universal types and for "any integer/float/fixed
-type". We also make it clear that we do not intend exact evaluation of
-static expressions in an instance body if the expressions aren't static in the
-generic body.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00269-01]}
+  @ChgAdded{Version=[2],Text=[Ada 95 didn't clearly define the bounds of a value of
+  a static expression for universal types and for "any integer/float/fixed
+  type". We also make it clear that we do not intend exact evaluation of
+  static expressions in an instance body if the expressions aren't static in the
+  generic body.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00311-01]}
-@Chg{Version=[2],New=[We clarify that the first subtype of a scalar formal
-type has a nonstatic, non-null constraint.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00311-01]}
+  @ChgAdded{Version=[2],Text=[We clarify that the first subtype of a scalar
+  formal type has a nonstatic, non-null constraint.]}
 @end{DiffWord95}
 
 
@@ -2296,6 +2337,14 @@ subtype conformant, and either both or neither exclude null],Old=[]}.
   Statically matching constraints and subtypes are the basis
   for subtype conformance of profiles (see @RefSecNum(Conformance Rules)).
 @end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Even though anonymous access types always
+  represent different types, they can statically match. That's important so
+  that they can be used widely. For instance, if this wasn't true, access
+  parameters and access discriminants could never conform, so they couldn't
+  be used in separate specifications.]}
+@end{Reason}
 
 @Defn2{Term=[statically matching], Sec=(for ranges)}
 Two ranges of the same type @i{statically match} if both result

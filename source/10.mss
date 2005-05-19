@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/03/24 06:43:10 $}
+@Comment{$Date: 2005/05/17 05:50:44 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3198,7 +3198,7 @@ in a pure package can be used in remote operations only if they are externally
 streamable. That simply means that there is a means to transport values of the
 type; that's automatically true for non-limited types that don't have an
 access part. The only tricky part about this is to avoid privacy leakage; that
-was handled by insuring that any private types declared in a pure package have
+was handled by ensuring that any private types declared in a pure package have
 to be externally streamable.],
 Old=[Furthermore, a named access-to-object type without a pool would be a new
 concept, adding complexity from the user's point of view. Finally, the

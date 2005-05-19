@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/05/12 05:15:41 $}
+@Comment{$Date: 2005/05/17 05:50:45 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -715,7 +715,7 @@ The sequence of characters of the value returned by Exceptions.Exception_Name
 characters of Exceptions.Wide_Wide_Exception_Name are not defined in Character
 (respectively, Wide_Character).],Old=[]}]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00378-01],ARef=[AI95-00417-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00378-01],ARef=[AI95-00417-01]}
 @ChgAdded{Version=[2],Text=[The string returned by the functions Exception_Name,
 Wide_Exception_Name, and Wide_Wide_Exception_Name has lower bound 1.]}
 
