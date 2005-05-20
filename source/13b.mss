@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:19 $}
+@Comment{$Date: 2005/05/19 06:19:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.20 $}
+@Comment{$Revision: 1.21 $}
 
 @LabeledClause{The Package System}
 
@@ -628,10 +628,12 @@ An implementation is not required to provide package System.Machine_Code.
 An implementation may provide implementation-defined pragmas
 specifying register conventions and calling conventions.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
 Machine code functions are exempt from the rule that a
-@nt{return_statement} is required.
-In fact, @nt{return_statement}s are forbidden,
-since only @nt{code_statement}s are allowed.
+@Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]}
+is required. In fact,
+@Chg{Version=[2],New=[return statements],Old=[@nt{return_@!statement}s]} are
+forbidden, since only @nt{code_statement}s are allowed.
 @begin{Discussion}
 The idea is that the author of a machine code subprogram knows
 the calling conventions, and refers to parameters and results

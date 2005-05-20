@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/05/05 00:45:26 $}
+@Comment{$Date: 2005/05/19 06:19:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1265,8 +1265,8 @@ denote syntactic categories, for example:
 @leading@keepnext@;Square brackets enclose optional items. Thus the two following
 rules are equivalent.
 @begin(Display)
-@nt<return_statement> ::= @key(return) [@nt<expression>];
-@nt<return_statement> ::= @key(return); | @key(return) @nt<expression>;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}@Chg{Version=[2],New=[@nt<simple_return_statement>],Old=[@nt<return_statement>]} ::= @key(return) [@nt<expression>];
+@Chg{Version=[2],New=[@nt<simple_return_statement>],Old=[@nt<return_statement>]} ::= @key(return); | @key(return) @nt<expression>;
 @end(Display)
 
 @leading@keepnext@;Curly brackets enclose a repeated item. The item may appear zero
@@ -1467,7 +1467,12 @@ The preferred places for other line breaks are after semicolons.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
   @ChgAdded{Version=[2],Text=[We now explicitly define what the Standard means
   by upper case, as there are many possibilities for ISO 10646 characters.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+  @ChgAdded{Version=[2],Text=[The example for square brackets has been changed
+  was there is no longer a @nt{return_statement} syntax rule.]}
 @end{DiffWord95}
+
 
 @LabeledSubClause{Classification of Errors}
 

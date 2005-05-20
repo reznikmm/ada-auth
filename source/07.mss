@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/05/17 05:50:44 $}
+@Comment{$Date: 2005/05/19 06:19:22 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -596,6 +596,127 @@ can get one's hands on it via a @nt{type_conversion}.
 
 @end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00396-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If a full type has a partial view
+that is tagged, then:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the partial view shall be a synchronized tagged
+type (see @RefSecNum{Interface Types}) if and only if the full type is a
+synchronized tagged type;]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[ Since we do not allow record extensions of
+  synchronized tagged types, this property has to be visible in the partial
+  view to avoid privacy breaking. Generic formals do not need a similar rule as
+  any extensions are rechecked for legality in the specification, and
+  extensions of tagged formals are always illegal in a generic body.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the partial view shall be a descendant of an
+interface type (see 3.9.4) if and only if the full type is a descendant of the
+interface type.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[Consider the following example:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package} P @key{is}
+   @key{package} Pkg @key{is}
+      @key{type} Ifc @key{is interface};
+      @key{procedure} Foo (X : Ifc) @key{is abstract};
+   @key{end} Pkg;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} Parent_1 @key{is tagged null record};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} T1 @key{is new} Parent_1 @key{with private};
+@key{private}
+   @key{type} Parent_2 @key{is new} Parent_1 @key{and} Pkg.Ifc @key{with null record};
+   @key{procedure} Foo (X : Parent_2); -- @RI[Foo #1]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{type} T1 @key{is new} Parent_2 @key{with null record}; -- @RI[Illegal.]
+@key{end} P;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} P;
+@key{package} P_Client @key{is}
+   @key{type} T2 @key{is new} P.T1 @key{and} P.Pkg.Ifc @key{with null record};
+   @key{procedure} Foo (X : T2); -- @RI[Foo #2]
+   X : T2;
+@key{end} P_Client;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} P_Client;
+@key{package body} P @key{is}
+   ...]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} Bar (X : T1'Class) @key{is}
+   @key{begin}
+      Pkg.Foo (X); -- @RI[should call Foo #1 or an override thereof]
+   @key{end};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{begin}
+   Pkg.Foo (Pkg.Ifc'Class (P_Client.X));      -- @RI[should call Foo #2]
+   Bar (T1'Class (P_Client.X));
+@key{end} P;]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If this example were legal
+    (it is illegal because the completion of T1 is descended from an interface
+    that the partial view is not descended from), T2 would implement Ifc twice.
+    Once in the visible part of P, and once in the visible part of P_Client. We
+    would need to decide how Foo #1 and Foo #2 relate to each other. There are
+    two options: either Foo #2 overrides Foo #1, or it doesn't.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If Foo #2 overrides Foo #1,
+    we have a problem because the client redefines a behavior that it doesn't
+    know about, and we try to avoid this at all costs, as it would lead to a
+    breakdown of whatever abstraction was implemented. If the abstraction
+    didn't expose that it implements Ifc, there must be a reason, and it should
+    be able to depend on the fact that no overriding takes place in clients.
+    Also, during maintenance, things may change and the full view might
+    implement a different set of interfaces. Furthermore, the situation is even
+    worse if the full type implements another interface Ifc2 that happens to
+    have a conforming Foo (otherwise unrelated, except for its name and
+    profile).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If Foo #2 doesn't override Foo #1,
+    there is some similarity with the case of normal tagged private types,
+    where a client can declare an operation that happens to conform to some
+    private operation, and that's OK, it gets a different slot. The problem
+    here is that T2 would implement Ifc in two different ways, and through
+    conversions to Ifc'Class we could end up with visibility on both of these
+    two different implementations. This is the @lquotes@;diamond inheritance@rquotes
+    problem of C++ all over again, and we would need some kind of a preference
+    rule to pick one implementation. We don't want to go there (if we did,
+    we might as well provide full-fledged multiple inheritance).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Note that there wouldn't be any difficulty to
+    implement the first option, so the restriction is essentially
+    methodological. The second option might be harder to implement, depending
+    on the language rules that we would choose.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This rule also prevents completing a private type
+  with an interface. A interface, like all types, is a descendant of itself,
+  and thus this rule is triggered.]}
+@end{Ramification}
+
+@end{Itemize}
+
 @Defn2{Term=[ancestor subtype], Sec=(of a @nt<private_extension_declaration>)}
 The @i(ancestor subtype) of a @nt<private_extension_declaration>
 is the subtype defined by the @i(ancestor_)@!@nt<subtype_@!indication>;
@@ -939,7 +1060,7 @@ completely defined, unless the derived type is a private extension.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00396-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Added @nt{interface_list} to private extensions to
   support interfaces and multiple inheritance
@@ -1621,7 +1742,7 @@ or the @nt{expression} of an @nt{array_component_association} (see
 (see @RefSecNum{Allocators})],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[the @nt{expression} of a @nt{return_statement} (see
+@Chg{Version=[2],New=[the @nt{expression} of a return statement (see
 @RefSecNum{Return Statements})],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -1879,7 +2000,7 @@ than being a subclause of
   accomplished by restricting uses to @nt{aggregate}s and @nt{function_call}s.
   @nt{Aggregate}s were not allowed to have a limited type in Ada 95, which
   causes a compatibility issue discussed in @RefSec{Aggregates}.
-  Compatibility issues with @nt{return_statement}s for limited
+  Compatibility issues with return statements for limited
   @nt{function_call}s are discussed
   in @RefSec{Return Statements}.]}
 @end{Extend95}
@@ -2022,51 +2143,56 @@ of Controlled only.
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[it is a controlled type, a task type or a protected type;
-or],Old=[]}
+@ChgAdded{Version=[2],Text=[it is a controlled type, a task type or
+a protected type; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[it has a component that needs finalization; or],Old=[]}
+@ChgAdded{Version=[2],Text=[it has a component that needs finalization; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[it is a limited type that has an access discriminant
-whose designated type needs finalization; or],Old=[]}
+@ChgAdded{Version=[2],Text=[it is a limited type that has an access discriminant
+whose designated type needs finalization; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[it is one of a number of language-defined types that are
-explicitly defined to need finalization.],Old=[]}
+@ChgAdded{Version=[2],Text=[it is one of a number of language-defined types
+that are explicitly defined to need finalization.]}
 
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The fact that a type needs finalization
-does not require
-it to be implemented with a controlled type. It just has to be recognized by
-the No_Nested_Finalization restriction.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The fact that a type needs finalization
+  does not require it to be implemented with a controlled type. It just has to
+  be recognized by the No_Nested_Finalization restriction.]}
 @end{Ramification}
 
 @end{Itemize}
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=[elaboration], Sec=(object_declaration)}
-During the elaboration of an @nt{object_declaration},
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}
+@Chg{Version=[2],New=[],Old=[@PDefn2{Term=[elaboration],
+Sec=(object_declaration)}]}During
+the elaboration @Chg{Version=[2],New=[or evaluation of a construct that
+causes an object to be initialized by default],Old=[of
+an @nt{object_declaration}]},
 for every controlled subcomponent of
 the object that is not assigned an initial value
 (as defined in @RefSecNum{Object Declarations}),
 Initialize is called on that subcomponent.
-Similarly, if the object as a whole is controlled
-and is not assigned an initial value,
-Initialize is called on the object.
+Similarly, if the object @Chg{Version=[2],New=[that is initialized by
+default ],Old=[]}as a whole is controlled@Chg{Version=[2],New=[],Old=[ and
+is not assigned an initial value]}, Initialize is called on the object.
 The same applies to the evaluation of an @nt{allocator},
 as explained in @RefSecNum{Allocators}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}
 For an @nt{extension_aggregate} whose @nt{ancestor_part} is a
 @nt{subtype_mark},
-@Chg{New=[for each controlled subcomponent of the ancestor part, either
+@Chg{Version=[2],New=[],Old=[@Chg{New=[for each controlled subcomponent of the ancestor part, either
 Initialize is called, or its initial value is assigned, as appropriate],
-Old=[Initialize is called on all controlled subcomponents of the ancestor part]};
-if the type of the ancestor part is itself controlled,
+Old=[Initialize is called on all controlled subcomponents of the
+ancestor part]}; ]}if the type of the @Chg{Version=[2],New=[@nt{ancestor_part}],
+Old=[ancestor part]} is itself controlled,
 the Initialize procedure of the ancestor type is called,
 unless that Initialize procedure is abstract.
 @begin{Discussion}
@@ -2099,7 +2225,11 @@ all. Instead the assignment adjusts B's value;
 that is, it applies Adjust to B.X, B.Y, and B.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0021],ARef=[AI95-00182-01]}
-@ChgAdded{Version=[1],Text=[The @nt{ancestor_part} of an @nt{extension_aggregate} is handled similarly.]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00373-01]}
+@ChgAdded{Version=[1],Text=[The @nt{ancestor_part} of an
+@nt{extension_aggregate}@Chg{Version=[2],New=[, <> in aggregates, and the
+return object of an @nt{extended_return_statement} are],Old=[ is]} handled
+similarly.]}
 @end{Discussion}
 
 Initialize and other initialization
@@ -2235,8 +2365,13 @@ contract model violations.
 
 @begin{ImplReq}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0022],ARef=[AI95-00083-01]}
-@ChgAdded{Version=[1],Text=[For an @nt{aggregate} of a controlled type whose value is assigned,
-other than by an @nt{assignment_statement} or a @nt{return_statement}, the
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
+@ChgAdded{Version=[1],Text=[For an @nt{aggregate} of a controlled type
+whose value is assigned,
+other than by an @nt{assignment_statement} or a
+@Chg{Version=[2],New=[return statement of a return type with no
+part that is of a task, protected, or limited record type],
+Old=[@nt{return_statement}]}, the
 implementation shall not create a separate anonymous object for the
 @nt{aggregate}. The aggregate value shall be constructed directly in the target
 of the assignment operation and Adjust is not called on the target object.]}
@@ -2402,39 +2537,50 @@ Controlled types and user-defined finalization are new to Ada 95.
 @end{Extend83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Ada.Finalization is
-a remote types package.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Ada.Finalization
+  is a remote types package.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0021],ARef=[AI95-00182-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to clarify that the
-default initialization (whatever that is) of an ancestor part is used.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0021],ARef=[AI95-00182-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to clarify that
+  the default initialization (whatever that is) of an ancestor part is used.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0022],ARef=[AI95-00083-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Adjust is never called
-on an aggregate used for the initialization of an object or subaggregate,
-or passed as a parameter.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0022],ARef=[AI95-00083-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Adjust is never
+  called on an aggregate used for the initialization of an object or
+  subaggregate, or passed as a parameter.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00147-01]}
-@ChgAdded{Version=[2],Text=[Additional optimizations are allowed for nonlimited
-controlled types. These allow traditional dead variable elimination to
-be applied to such types.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00147-01]}
+  @ChgAdded{Version=[2],Text=[Additional optimizations are allowed for
+  nonlimited controlled types. These allow traditional dead variable
+  elimination to be applied to such types.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
-@ChgAdded{Version=[2],Text=[Types Controlled and Limited_Controlled now have
-Preelaborable_Initialization, so that they can be used in preelaborated
-packages.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[Types Controlled and Limited_Controlled now have
+  Preelaborable_Initialization, so that they can be used in preelaborated
+  packages.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
-@ChgAdded{Version=[2],Text=[The operations of types Controlled and Limited_Controlled
-are not declared as null procedures (see @RefSecNum{Null Procedures}) to make
-the semantics clear (and to provide a good example of what null procedures can
-be used for.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[Corrected the build-in-place requirement
+  for controlled @nt{aggregate}s to be consistent with the requirements
+  for limited types.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
-@ChgAdded{Version=[2],Text=[Types that need finalization are defined; this is
-used by the No_Nested_Finalization restriction
-(see @RefSec{Tasking Restrictions}).]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+  @ChgAdded{Version=[2],Text=[The operations of types Controlled and
+  Limited_Controlled are now declared as null procedures (see
+  @RefSecNum{Null Procedures}) to make the semantics clear (and to provide
+  a good example of what null procedures can be used for).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
+  @ChgAdded{Version=[2],Text=[Types that need finalization are defined; this is
+  used by the No_Nested_Finalization restriction
+  (see @RefSec{Tasking Restrictions}).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00373-01]}
+  @ChgAdded{Version=[2],Text=[Generalized the description of objects that
+  have Initialize called for them to say that it is done for all objects that
+  are initialized by default. This is needed so that all of the new cases
+  are covered.]}
 @end{DiffWord95}
 
 
@@ -2454,6 +2600,7 @@ Other constructs and entities are left immediately upon completion.
 @end{Intro}
 
 @begin{RunTime}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
 @Defn{completion and leaving (completed and left)}
 @Defn2{Term=[completion], Sec=(run-time concept)}
 The execution of a construct or entity
@@ -2466,8 +2613,9 @@ causes it to be abandoned.
 @Defn{abnormal completion}
 @Defn2{Term=[completion], Sec=(abnormal)}
 Completion due to reaching the end of execution,
-or due to the transfer of control of an @nt{exit_},
-@nt{return_}, @nt{goto_},
+or due to the transfer of control of an @Chg{Version=[2],
+New=[@nt{exit_statement}, return statement, @nt{goto_statement}],
+Old=[@nt{exit_}, @nt{return_}, @nt{goto_}]},
 or @nt{requeue_statement} or of the
 selection of a @nt{terminate_alternative}
 is @i{normal completion}.
@@ -2852,9 +3000,12 @@ For a Finalize invoked due to reaching the end of the execution of a
 master, any other finalizations associated with the master are performed, and
 Program_Error is raised immediately after leaving the master.],Old=[]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 For a Finalize invoked by the transfer of control of
-an @nt{exit_}, @nt{return_}, @nt{goto_},
+an @Chg{Version=[2],
+New=[@nt{exit_statement}, return statement, @nt{goto_statement}],
+Old=[@nt{exit_}, @nt{return_}, @nt{goto_}]},
 or @nt{requeue_@!statement},
 Program_Error is raised no earlier than after the finalization of the
 master being finalized when the exception occurred,

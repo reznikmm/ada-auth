@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:09 $}
+@Comment{$Date: 2005/05/19 06:19:23 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 
@@ -222,7 +222,7 @@ Sec=[by a task entry]}@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
-  interface; a @nt{type_type_declaration} inherits no subprograms of its own.]}
+  interface; a @nt{task_type_declaration} inherits no subprograms of its own.]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -2156,7 +2156,9 @@ A consequence of the rule regarding the allowed placements of
 @nt{accept_statement}s is that a task can execute @nt{accept_statement}s
 only for its own entries.
 
-A @nt<return_statement> (see @RefSecNum(Return Statements))
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+A @Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}
+(see @RefSecNum(Return Statements))
 or a @nt<requeue_statement> (see @RefSecNum(Requeue Statements))
 may be used to complete the execution of
 an @nt<accept_statement> or an @nt<entry_body>.

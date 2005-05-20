@@ -1,19 +1,21 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:31 $}
+@Comment{$Date: 2005/05/19 06:19:21 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
 its execution.]
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
 @Redundant[This section describes the general rules applicable to all
 @nt{statement}s.
 Some @nt{statement}s are discussed in later sections:
-@nt{Procedure_@!call_@!statement}s and @nt{return_@!statement}s are
+@nt{Procedure_@!call_@!statement}s and
+@Chg{Version=[2],New=[return statements],Old=[@nt{return_@!statement}s]} are
 described in @RefSec{Subprograms}.
 @nt{Entry_@!call_@!statement}s, @nt{requeue_@!statement}s,
 @nt{delay_@!statement}s, @nt{accept_@!statement}s,
@@ -27,7 +29,10 @@ section.]
 @end{Intro}
 
 @begin{DiffWord83}
-The description of @nt<return_statement>s has been moved to
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+The description of
+@Chg{Version=[2],New=[return statements],Old=[@nt{return_@!statement}s]}
+has been moved to
 @RefSec{Return Statements}, so that it is closer to the
 description of subprograms.
 @end{DiffWord83}
@@ -48,17 +53,20 @@ no other @nt<statement>. A @nt<compound_statement> can enclose
 @Syn{lhs=<statement>,rhs="
    {@Syn2{label}} @Syn2{simple_statement} | {@Syn2{label}} @Syn2{compound_statement}"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
 @Syn{tabs=[P31], lhs=<simple_statement>,rhs="@Syn2{null_statement}
    | @Syn2{assignment_statement}@\| @Syn2{exit_statement}
    | @Syn2{goto_statement}@\| @Syn2{procedure_call_statement}
-   | @Syn2{return_statement}@\| @Syn2{entry_call_statement}
+   | @Chg{Version=[2],New=[@Syn2{simple_return_statement}],Old=[@Syn2{return_statement}]}@\| @Syn2{entry_call_statement}
    | @Syn2{requeue_statement}@\| @Syn2{delay_statement}
    | @Syn2{abort_statement}@\| @Syn2{raise_statement}
    | @Syn2{code_statement}"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
 @Syn{tabs=[P31], lhs=<compound_statement>,rhs="
      @Syn2{if_statement}@\| @Syn2{case_statement}
-   | @Syn2{loop_statement}@\| @Syn2{block_statement}
+   | @Syn2{loop_statement}@\| @Syn2{block_statement}@Chg{Version=[2],New=[
+   | @Syn2{extended_return_statement}],Old=[]}
    | @Syn2{accept_statement}@\| @Syn2{select_statement}"}
 
 @Syn{lhs=<null_statement>,rhs="@key{null};"}
@@ -155,10 +163,12 @@ or @nt<block_statement> with the given @nt<statement_identifier>.
 @PDefn2{Term=[execution], Sec=(null_statement)}
 The execution of a @nt{null_statement} has no effect.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
 @Defn{transfer of control}
 A @i{transfer of control} is
 the run-time action of an @nt{exit_statement},
-@nt{return_statement}, @nt{goto_statement},
+@Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]},
+@nt{goto_statement},
 or @nt{requeue_statement},
 selection of a @nt{terminate_alternative},
 raising of an exception,
@@ -247,6 +257,14 @@ of statement names.
 Completion includes completion caused by a transfer of control,
 although RM83-5.1(6) did not take this view.
 @end{DiffWord83}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The @nt{extended_return_statement} is new (@nt{simple_return_statement}
+  is merely renamed).]}
+@end{Extend95}
+
 
 @LabeledClause{Assignment Statements}
 
@@ -434,12 +452,11 @@ in particular, an
 @nt{assignment_statement}
 does not change the tag of the target.
 
-The values of the discriminants of an object designated by an access
-value cannot be changed (not even by assigning a complete value to
-the object itself) since such objects are
-always constrained;
-however, subcomponents of such objects
-may be unconstrained.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
+@ChgDeleted{Version=[2],Text=[The values of the discriminants of an object
+designated by an access value cannot be changed (not even by assigning a
+complete value to the object itself) since such objects are always constrained;
+however, subcomponents of such objects may be unconstrained.]}
 @begin{Ramification}
 The implicit subtype conversion described above for
 @nt{assignment_statement}s
@@ -544,13 +561,15 @@ a legality rule is not quite upward compatible. For example],Old=[]}.
 @key{function} Foo (Arg : in Integer) @key{return} AccLim;
 Foo(2).@key{all} := Foo(1).@key{all};],Old=[]}.
 @end{Example}
-@Chg{Version=[2],New=[where NonLim is a nonlimited type and Lim is a limited
-type. The assignment is legal in Ada 95 (only the first Foo would be considered),
-and is ambiguous in Ada 2006. We make the change because limited expressions
-are now allowed in all other contexts (with a similar incompatibility), and it
-would be odd if assignments had different resolution rules. Moreover, examples
+@ChgAdded{Version=[2],Text=[where NonLim is a nonlimited type and Lim is a
+limited type. The assignment is legal in Ada 95 (only the first Foo would be
+considered), and is ambiguous in Ada 2006. We made the change because we want
+limited types to be as similar to non-limited types as possible. Limited
+expressions are now allowed in all other contexts (with a similar
+incompatibility), and it would be odd if assignments had different resolution
+rules (which would eliminate ambiguities in some cases). Moreover, examples
 like this one are rare, as they depend on assigning into overloaded function
-calls.],Old=[]}.
+calls.]}
 @end{Incompatible95}
 
 

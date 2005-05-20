@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/05/17 05:50:43 $}
+@Comment{$Date: 2005/05/19 06:19:22 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -483,11 +483,13 @@ However, this would cause problems for untagged types.
 In particular, we would have to do a constraint check on every read of a
 type conversion (or a renaming thereof) in certain cases.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
 We do not want this definition to depend on the view of the type;
 privateness is essentially ignored for this definition.
 Otherwise, things would be confusing (does the rule apply at the call
 site, at the site of the declaration of the subprogram,
-at the site of the @nt{return_statement}?),
+at the site of the
+@Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}?),
 and requiring different calls to use different mechanisms would be an
 implementation burden.
 
@@ -1002,7 +1004,9 @@ corresponding designated types are the same@Chg{Version=[2],New=[, or
 corresponding designated profiles are type conformant],Old=[]}.
 @IndexSee{Term=[type profile],See=(profile, type conformant)}
 @begin{Discussion}
-For access parameters, the designated types have to be the same for type
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00409-01]}
+For @Chg{Version=[2],New=[anonymous access-to-object],Old=[access]}
+parameters, the designated types have to be the same for type
 conformance, not the access types,
 since in general each access parameter has its own anonymous access
 type, created when the subprogram is called.
@@ -1467,10 +1471,12 @@ first actual parameter being provided by the @nt{prefix} of the prefixed view
 an access parameter), and the remaining actual parameters given by the
 @nt{actual_parameter_part}, if any.]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The exception Program_Error is raised at the point of a
 @nt{function_call} if the function
-completes normally without executing a @nt{return_statement}.
+completes normally without executing a
+@Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]}.
 @begin{Discussion}
 We are committing to raising the exception at the point
 of call, for uniformity @em see AI83-00152.
@@ -1831,20 +1837,18 @@ as it is subsumed by earlier clauses and subclauses.
 @LabeledClause{Return Statements}
 
 @begin{Intro}
-A @nt{return_statement} is used to complete the execution of the
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+A @Chg{Version=[2],New=[@nt{simple_@!return_@!statement} or
+@nt{extended_@!return_@!statement} (collectively called a @i<return statement>)
+@Defn{return statement}],Old=[@nt{return_statement}]} is used to
+complete the execution of the
 innermost enclosing @nt{subprogram_@!body},
 @nt{entry_@!body}, or @nt{accept_@!statement}.
 @end{Intro}
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@Syn{lhs=<return_statement>,rhs="@Chg{Version=[2],
-New=[@Syn2{simple_return_statement} | @Syn2{extended_return_statement}],
-Old=<@key{return} [@Syn2{expression}];>}"}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[]}>,
-rhs="@Chg{Version=[2],New=<@key{return} [@Syn2{expression}];>,Old=[]}"}
+@Syn{lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[return_statement]}>,rhs="@key{return} [@Syn2{expression}];"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[extended_return_statement],Old=[]}>,
@@ -1881,28 +1885,34 @@ The same applies to generic functions.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@Defn2{Term=[apply], Sec=(to a callable construct by a @nt{return_statement})}
-A @nt{return_statement} shall be within a callable construct,
+@Chg{Version=[2],New=[@Defn2{Term=[apply],
+Sec=(to a callable construct by a return statement)}],
+Old=[@Defn2{Term=[apply], Sec=(to a callable construct by a @nt{return_statement})}]}
+A @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]}
+shall be within a callable construct,
 and it @i{applies to} the innermost @Chg{Version=[2],New=[callable construct
 or @nt{extended_return_statement} that contains it],Old=[one]}.
-A @nt{return_@!statement} shall not be within a body
-that is within the construct to which the @nt{return_@!statement}
-applies.
+A @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} shall
+not be within a body that is within the construct to which the
+@Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} applies.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-A function body shall contain at least one @nt{return_statement} that
+A function body shall contain at least one
+@Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} that
 applies to the function body,
 unless the function contains @nt{code_statement}s.
-A @Chg{Version=[2],New=[@nt{simple_return_statement}],Old=[@nt{return_statement}]} shall
+A @Chg{Version=[2],New=[@nt{simple_@!return_@!statement}],Old=[@nt{return_@!statement}]} shall
 include a return expression if and only if it applies to a function
 body.@Chg{Version=[2],New=[ An @nt<extended_return_statement> shall apply to
 a function body.],Old=[]}
 @begin{Reason}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
   The requirement that a function body has to have at least one
-  @nt{return_statement} is a @lquotes@;helpful@rquotes@; restriction.
+  @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]}
+  is a @lquotes@;helpful@rquotes@; restriction.
   There was been some interest in lifting this restriction,
   or allowing a raise statement to substitute for the
-  @nt{return_statement}.
+  @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]}.
   However, there was enough interest in leaving it as is
   that we decided not to change it.
 @end{Reason}
@@ -1998,8 +2008,8 @@ executed.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@PDefn2{Term=[execution], Sec=(return_statement)}
-@Chg{Version=[2],New=[@PDefn2{Term=[execution], Sec=(simple_return_statement)}],Old=[]}
+@Chg{Version=[2],New=[@PDefn2{Term=[execution], Sec=(simple_return_statement)}],
+Old=[@PDefn2{Term=[execution], Sec=(return_statement)}]}
 For the execution of a @Chg{Version=[2],New=[@nt{simple_return_statement}],
 Old=[@nt{return_statement}]}, the @nt{expression}
 (if any) is first evaluated and converted to the result subtype@Chg{Version=[2],
@@ -2198,7 +2208,7 @@ that object.]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 Finally, a transfer of control is performed which completes the
 execution of the callable construct to which the
-@nt{return_statement} applies,
+@Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} applies,
 and returns to the caller.@Chg{Version=[2],New=[ In the case of a function,
 the @nt{function_call} denotes a constant view of the return object.],Old=[]}
 @end{RunTime}
@@ -2271,11 +2281,15 @@ A function now creates an anonymous object.
 This is necessary so that controlled types
 will work.
 
-We have clarified that a @nt{return_statement} applies to a callable
-construct, not to a callable entity.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+We have clarified that a
+@Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}
+applies to a callable construct, not to a callable entity.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
 There is no need to mention generics in the rules about where a
-@nt{return_statement} can appear and what it applies to;
+@Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}
+can appear and what it applies to;
 the phrase @lquotes@;body of a subprogram or generic subprogram@rquotes@; is
 syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{DiffWord83}
@@ -2288,10 +2302,10 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @nt{function_call} (see @RefSecNum{Limited Types}). This means that returning
   a global object or @nt{type_conversion}, legal in Ada 95, is now illegal.
   Such functions can be converted to use anonymous access return types by
-  adding @key{access} in the function definition and @nt{return_statement},
+  adding @key{access} in the function definition and return statement,
   adding .@key{all} in uses, and adding @key{aliased} in the object
   declarations. This has the advantage of making the reference return semantics
-  much clearer to the causal reader.]}
+  much clearer to the casual reader.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We changed these rules so that functions,
@@ -2317,14 +2331,14 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added accessibility checks to class-wide
-  @nt{return_statement}s. These checks could not fail in Ada 95 (as all of the
+  return statements. These checks could not fail in Ada 95 (as all of the
   types had to be declared at the same level, so the access type would
   necessarily have been at the same level or more nested than the type of the
   object).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added accessibility checks to
-  @nt{return_statement}s for types with access discriminants. Since such
+  return statements for types with access discriminants. Since such
   types have to be limited in Ada 95, the return expressions would have
   been illegal in order for this check to fail.]}
 
@@ -2388,7 +2402,7 @@ null procedure nor an instance of a generic unit.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[A @nt{return_statement} shall not apply to a
+@ChgAdded{Version=[2],Text=[A return statement shall not apply to a
 non-returning procedure or generic procedure.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
@@ -2576,7 +2590,7 @@ Program_Error doesn't seem very useful or worth the complication.]}
 @end{StaticSem}
 
 @begin{RunTime}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
 @ChgAdded{Version=[2],Text=[The execution of a null procedure is invoked by a subprogram call.
 For the execution of a subprogram call on a null procedure, the execution of
 the @nt<subprogram_body> has no effect.]}
@@ -2596,7 +2610,7 @@ place of a procedure specification.]}
 @end{RunTime}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 Null procedures are new.]}
 @end{Extend95}

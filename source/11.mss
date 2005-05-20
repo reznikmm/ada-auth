@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/05/17 05:50:45 $}
+@Comment{$Date: 2005/05/19 06:19:24 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -522,10 +522,11 @@ handler is executed;
 this execution replaces the abandoned portion of the execution of
 the @nt{sequence_of_statements}.
 @begin{Ramification}
-  This @lquotes@;replacement@rquotes@; semantics implies that the handler can do
-  pretty much anything the abandoned sequence could do; for example, in a
-  function, the handler can execute a @nt{return_statement} that
-  applies to the function.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+  This @lquotes@;replacement@rquotes@; semantics implies that the handler can
+  do pretty much anything the abandoned sequence could do; for example, in a
+  function, the handler can execute a @Chg{Version=[2],New=[return statement],
+  Old=[@nt{return_statement}]} that applies to the function.
 @end{Ramification}
 @begin{Ramification}
 The rules for exceptions raised in library units,

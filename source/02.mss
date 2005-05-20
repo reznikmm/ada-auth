@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:15 $}
+@Comment{$Date: 2005/05/19 06:19:16 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1605,10 +1605,12 @@ Some compilers might even ignore the pragma altogether.
 @begin{Examples}
 @Leading@keepnext@i{Examples of pragmas:}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
 @key[pragma] List(Off); --@RI{ turn off listing generation}
 @key[pragma] Optimize(Off); --@RI{ turn off optional optimizations}
 @key[pragma] Inline(Set_Mask); --@RI{ generate code for Set_Mask inline}
-@key[pragma] Suppress(Range_Check, On => Index); --@RI{ turn off range checking on Index}
+@Chg{Version=[2],New=[@key[pragma] Import(C, Put_Char, External_Name => "putchar"); --@RI{ import C putchar function}],
+Old=[@key[pragma] Suppress(Range_Check, On => Index); --@RI{ turn off range checking on Index}]}
 @end{Example}
 @end{Examples}
 
@@ -1626,6 +1628,13 @@ to act as examples, and to remove the normative material from
 @RefSec{Language-Defined Pragmas}, so it can be entirely an
 informative annex.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+  @ChgAdded{Version=[2],Text=[Updated the example of named pragma parameters,
+  because the second parameter of is obsolescent.]}
+@end{DiffWord95}
+
 
 @NewPage
 @LabeledClause{Reserved Words}

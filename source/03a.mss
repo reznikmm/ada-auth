@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:16 $}
+@Comment{$Date: 2005/05/19 06:19:17 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1121,13 +1121,15 @@ only if the composite subtype is unconstrained
 @begin{Examples}
 @Leading@keepnext@i(Examples of subtype declarations:)
 @begin(Example)
-@key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        @RI[--  see @RefSecNum(Type Declarations)]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        --@RI[  see @RefSecNum(Type Declarations)]
 @key(subtype) Red_Blue  @key(is) Rainbow;
 @key(subtype) Int       @key(is) Integer;
 @key(subtype) Small_Int @key(is) Integer @key(range) -10 .. 10;
-@key(subtype) Up_To_K   @key(is) Column @key(range) 1 .. K;            @RI[--  see @RefSecNum(Type Declarations)]
-@key(subtype) Square    @key(is) Matrix(1 .. 10, 1 .. 10);       @RI[--  see @RefSecNum(Array Types)]
-@key(subtype) Male      @key(is) Person(Sex => M);               @RI[--  see @RefSecNum(Incomplete Type Declarations)]
+@key(subtype) Up_To_K   @key(is) Column @key(range) 1 .. K;            --@RI[  see @RefSecNum(Type Declarations)]
+@key(subtype) Square    @key(is) Matrix(1 .. 10, 1 .. 10);       --@RI[  see @RefSecNum(Array Types)]
+@key(subtype) Male      @key(is) Person(Sex => M);               --@RI[  see @RefSecNum(Incomplete Type Declarations)]@Chg{Version=[2],New=[
+@key(subtype) Binop_Ref @key(is not null) Binop_Ptr;             --@RI[  see @RefSecNum(Access Types)]],Old=[]}
 @end(Example)
 
 @end{Examples}
@@ -1754,7 +1756,9 @@ sequence of steps:
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}
   The object is created, and, if there is not an initialization expression,
-  any per-object @Chg{New=[constraints],Old=[expressions]}
+  @Chg{Version=[2],New=[the object is @i{initialized by default}.
+  @Defn{initialized by default}When an object is initialized by
+  default, ],Old=[]}any per-object @Chg{New=[constraints],Old=[expressions]}
   (see @RefSecNum(Record Types)) are
   @Chg{New=[elaborated], Old=[evaluated]} and any implicit initial values for
   the object or for its subcomponents are obtained as determined by
@@ -1968,33 +1972,38 @@ be abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @begin(Example)
 @RI[--  the multiple object declaration ]
 
-John, Paul : Person_Name := @key(new) Person(Sex => M);  @RI[--  see @RefSecNum(Incomplete Type Declarations)]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+John, Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);  @RI[--  see @RefSecNum(Incomplete Type Declarations)]
 
 @RI[--  is equivalent to the two single object declarations in the order given]
 
-John : Person_Name := @key(new) Person(Sex => M);
-Paul : Person_Name := @key(new) Person(Sex => M);
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+John : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);
+Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);
 @end(Example)
 
 @begin{Wide}
 @leading@keepnext@i(Examples of variable declarations:)
 @end{Wide}
 @begin(Example)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
 Count, Sum  : Integer;
 Size        : Integer @key(range) 0 .. 10_000 := 0;
 Sorted      : Boolean := False;
 Color_Table : @key(array)(1 .. Max) @key(of) Color;
 Option      : Bit_Vector(1 .. 10) := (@key(others) => True);
-Hello       : @key(constant) String := "Hi, world.";
+Hello       : @Chg{Version=[2],New=[@key(aliased)],Old=[@key(constant)]} String := "Hi, world.";
 @end(Example)
 
 @begin{Wide}
 @leading@keepnext@i(Examples of constant declarations:)
 @end{Wide}
 @begin(Example)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
 Limit     : @key(constant) Integer := 10_000;
 Low_Limit : @key(constant) Integer := Limit/10;
-Tolerance : @key(constant) Real := Dispersion(1.15);
+Tolerance : @key(constant) Real := Dispersion(1.15);@Chg{Version=[2],New=[
+Hello_Msg : @key(constant access) String := Hello'Access; --@RI[ see @RefSecNum{Operations of Access Types}]],Old=[]}
 @end(Example)
 @end{Examples}
 
@@ -2072,6 +2081,9 @@ without an initialization expression.
   @ChgAdded{Version=[2],Text=[The rules for evaluating default initialization
   have been tightened. In particular, components whose default initialization
   can refer to the rest of the object are required to be initialized last.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+  @ChgAdded{Version=[2],Text=[Added examples of various new constructs.]}
 @end{DiffWord95}
 
 
@@ -2229,7 +2241,7 @@ precede the @nt<derived_type_definition>.]
 @Defn{record extension}
 If there is a @nt<record_extension_part>, the derived type is
 called a @i(record extension) of the parent type.
-A @nt<record_extension_part> @Chg{Version=[2],New=[(and an @nt{interface_list}) ],
+A @nt<record_extension_part> @Chg{Version=[2],New=[or an @nt{interface_list} ],
 Old=[]}shall be provided if and only if
 the parent type is a tagged type.
 @begin(ImplNote)
@@ -2501,6 +2513,12 @@ the implementation of the predefined equality operator of the record extension
   revert to Left and Right, even if different formal parameter names
   were used in the user-defined equality operators of the parent type.
 @end{Ramification}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00401-01]}
+  @ChgAdded{Version=[2],Text=[This rule only describes what operations
+  are inherited; the rules that describe what happens when there are
+  conflicting inherited subprograms are found in @RefSecNum{Visibility}.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 @noprefix@;The profile of an inherited subprogram

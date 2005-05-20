@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/05 00:45:28 $}
+@Comment{$Date: 2005/05/19 06:19:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @LabeledClause{Array Types}
 
@@ -314,9 +314,12 @@ is of its own unique type.
 @leading@keepnext@i(Examples of object declarations with array type definitions: )
 @end{Wide}
 @begin(Example)
-Grid : @key(array)(1 .. 80, 1 .. 100) @key(of) Boolean;
-Mix  : @key(array)(Color @key(range) Red .. Green) @key(of) Boolean;
-Page : @key(array)(Positive @key(range) <>) @key(of) Line :=  @RI[--  an array of arrays]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+Grid @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(1 .. 80, 1 .. 100) @key(of) Boolean;
+Mix  @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Color @key(range) Red .. Green) @key(of) Boolean;@Chg{Version=[2],New=[
+Msg_Table : @key(constant array)(Error_Code) @key(of access constant) String :=
+      (Too_Big => @key(new) String'("Result too big"), Too_Small => ...);],Old=[]}
+Page @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Positive @key(range) <>) @key(of) Line :=  @RI[--  an array of arrays]
   (1 | 50  => Line'(1 | Line'Last => '+', others => '-'),  @RI[-- see @RefSecNum(Array Aggregates)]
    2 .. 49 => Line'(1 | Line'Last => '|', others => ' '));
     @RI[-- Page is constrained by its initial value to (1..50)]
@@ -1401,11 +1404,17 @@ used only for discriminants defined by an @nt<access_definition>.
       Right : Square(Number);
    @key(end) @key(record);
 
-@key(type) Item(Number : Positive) @key(is)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@Chg{Version=[2],New=[@key(task type) Worker(Prio : System.Priority; Buf : @key(access) Buffer) key(is)
+   --@RI[ discriminants used to parameterize the task type (see @RefSecNum{Task Units and Task Objects})]
+   @key(pragma) Priority(Prio);  --@RI[ see @RefSecNum{Task Priorities}]
+   @key(entry) Fill;
+   @key(entry) Drain;
+@key(end) Worker;],Old=[@key(type) Item(Number : Positive) @key(is)
    @key(record)
       Content : Integer;
       @RI[--  no component depends on the discriminant]
-   @key(end) @key(record);
+   @key(end) @key(record);]}
 @end(Example)
 @end{Examples}
 

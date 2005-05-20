@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/17 05:50:42 $}
+@Comment{$Date: 2005/05/19 06:19:20 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -596,7 +596,7 @@ The exception Constraint_Error is raised if this check fails.
 @Leading@keepnext@i(Examples of selected components:)
 @begin{Example}
 @tabclear()@tabset(P60)
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
   Tomorrow.Month     @RI[--  a record component @\(see @RefSecNum{Record Types})]
   Next_Car.Owner     @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
   Next_Car.Owner.Age @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
@@ -604,8 +604,8 @@ The exception Constraint_Error is raised if this check fails.
   Writer.Unit        @RI[--  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
   Min_Cell(H).Value  @RI[--  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
                      @RI[--  of the function call Min_Cell(H)]
-@Chg{Version=[2],New=<  X.Activate         @RI[--  a prefixed view of a procedure @\(see @RefSecNum{Subprogram Calls})]
-                     @RI[--  assuming X has a tagged type]
+@Chg{Version=[2],New=<  Teller.Append      @RI[--  a prefixed view of a procedure @\(see @RefSecNum{Interface Types})]
+                     @RI[--  assuming X is an object of Queue'Class]
 >,Old=<>}  Control.Seize      @RI[--  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
   Pool(K).Write      @RI[--  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
 @end{Example}
@@ -1899,15 +1899,18 @@ to determine the bounds of the array value specified by the aggregate.]
 Each of the following contexts (and none other)
 defines an applicable index constraint:
 @begin(itemize)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
   For an @nt{explicit_actual_parameter},
   an @nt{explicit_generic_actual_parameter},
-  the @nt{expression} of a @nt{return_statement}, the
+  the @nt{expression} of a
+  @Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}, the
   initialization expression
   in an @nt{object_@!declaration}, or a @nt{default_@!expression}
   @Redundant[(for a parameter or a component)],
   when the nominal subtype
   of the corresponding formal parameter, generic formal parameter,
-  function result, object, or component is a constrained array subtype, the
+  function @Chg{Version=[2],New=[return object],Old=[result]}, object, or
+  component is a constrained array subtype, the
   applicable index constraint is the constraint of the subtype;
 
   For the @nt{expression} of an @nt{assignment_statement} where
@@ -2208,16 +2211,23 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}<> can be used in place of
-an @nt{expression} in an @nt{array_aggregate}, default-initializing the
-component.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}<> can be used in
+  place of an @nt{expression} in an @nt{array_aggregate}, default-initializing
+  the component.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[Limited @nt{array_aggregate}s are allowed (since
-all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[Limited @nt{array_aggregate}s are allowed (since
+  all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
+
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+  @ChgAdded{Version=[2],Text=[Fixed @nt{aggregate}s to use the subtype of
+  the return object of a function, rather than the result subtype, because
+  they can be different for an @nt{extended_return_statement}, and we want
+  to use the subtype that's explicitly in the code at the point of the
+  @nt{expression}.]}
 @end{DiffWord95}
 
 

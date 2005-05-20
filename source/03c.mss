@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/17 05:50:40 $}
+@Comment{$Date: 2005/05/19 06:19:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -889,7 +889,7 @@ then the actual might be nonlimited.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 @Chg{Version=[2],New=[Ada 95 required the record extensions to be the
 same level as the parent type. Now we use accessibility checks on class-wide
-@nt{allocator}s and @nt{return_statement}s to prevent objects from living
+@nt{allocator}s and return statements to prevent objects from living
 longer than their type.],
 Old=[A similar accessibility rule is not needed for
 private extensions, because in a package, the rule will apply to the
@@ -1140,7 +1140,7 @@ Type extension is a new concept.
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Type extensions now can be
   declared in more nested scopes than their parent types. Additional
-  accessibility checks on @nt{allocator}s and @nt{return_statement}s prevent
+  accessibility checks on @nt{allocator}s and return statements prevent
   objects from outliving their type.]}
 @end{Extend95}
 
@@ -2331,106 +2331,6 @@ type, a protected type, or a synchronized interface.],Old=[]}
    interface (see @RefSecNum{Formal Interface Types}).]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00396-01]}
-@ChgAdded{Version=[2],Text=[A full view shall be a descendant of an interface
-type if and only if the corresponding partial view (if any) is also a
-descendant of the interface type, or if the partial view is untagged.]}
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[Consider the following example:]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} P @key{is}
-   @key{package} Pkg @key{is}
-      @key{type} Ifc @key{is interface};
-      @key{procedure} Foo (X : Ifc) @key{is abstract};
-   @key{end} Pkg;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} Parent_1 @key{is tagged null record};]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} T1 @key{is new} Parent_1 @key{with private};
-@key{private}
-   @key{type} Parent_2 @key{is new} Parent_1 @key{and} Pkg.Ifc @key{with null record}; -- @RI[Illegal.]
-   @key{procedure} Foo (X : Parent_2); -- @RI[Foo #1]]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} T1 @key{is new} Parent_2 @key{with null record};
-@key{end} P;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{with} P;
-@key{package} P_Client @key{is}
-   @key{type} T2 @key{is new} P.T1 @key{and} P.Pkg.Ifc @key{with null record};
-   @key{procedure} Foo (X : T2); -- @RI[Foo #2]
-   X : T2;
-@key{end} P_Client;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{with} P_Client;
-@key{package body} P @key{is}
-   ...]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} Bar (X : T1'Class) @key{is}
-   @key{begin}
-      Pkg.Foo (X); -- @RI[should call Foo #1 or an override thereof]
-   @key{end};]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{begin}
-   Pkg.Foo (Pkg.Ifc'Class (P_Client.X));      -- @RI[should call Foo #2]
-   Bar (T1'Class (P_Client.X));
-@key{end} P;]}
-@end{Example}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[If this example were legal
-    (it is illegal because the completion of T1 is descended from an interface
-    that the partial view is not descended from), T2 would implement Ifc twice.
-    Once in the visible part of P, and once in the visible part of P_Client. We
-    would need to decide how Foo #1 and Foo #2 relate to each other. There are
-    two options: either Foo #2 overrides Foo #1, or it doesn't.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[If Foo #2 overrides Foo #1,
-    we have a problem because the client redefines a behavior that it doesn't
-    know about, and we try to avoid this at all costs, as it would lead to a
-    breakdown of whatever abstraction was implemented. If the abstraction
-    didn't expose that it implements Ifc, there must be a reason, and it should
-    be able to depend on the fact that no overriding takes place in clients.
-    Also, during maintenance, things may change and the full view might
-    implement a different set of interfaces. Furthermore, the situation is even
-    worse if the full type implements another interface Ifc2 that happens to
-    have a conforming Foo (otherwise unrelated, except for its name and
-    profile).]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[If Foo #2 doesn't override Foo #1,
-    there is some similarity with the case of normal tagged private types,
-    where a client can declare an operation that happens to conform to some
-    private operation, and that's OK, it gets a different slot. The problem
-    here is that T2 would implement Ifc in two different ways, and through
-    conversions to Ifc'Class we could end up with visibility on these two
-    different implementations. This is the "diamond inheritance" problem of C++
-    all over again, and we would need some kind of a preference rule to pick
-    one implementation. We don't want to go there (if we did, we might as well
-    provide full-fledged multiple inheritance).]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Note that there wouldn't be any difficulty to
-    implement the first option, so the restriction is essentially
-    methodological. The second option might be harder to implement, depending
-    on the language rules that we would choose.]}
-@end{Reason}
-
-@begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This rule also prevents completing a private type
-  with an interface. A interface, like all types, is a descendant of itself,
-  and thus this rule is triggered.]}
-@end{Ramification}
-
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @Chg{Version=[2],New=[For an interface type declared in a visible part, a
 primitive subprogram shall not be declared in the private part.],Old=[]}
@@ -2479,7 +2379,7 @@ an explicit overriding for any nonabstract descendant of the interface.]}
 @end{Notes}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01],ARef=[AI95-00396-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}Interface types
   are new. They provide multiple inheritance of interfaces, similar to the
   facility provided in Java and other recent language designs.]}

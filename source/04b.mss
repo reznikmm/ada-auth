@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/17 05:50:43 $}
+@Comment{$Date: 2005/05/19 06:19:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.13 $}
+@Comment{$Revision: 1.14 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1079,8 +1079,8 @@ as a @nt<name>.
   between unrelated array types that are limited or (for view conversions)
   might be by-reference types are now illegal. The representations of two such
   arrays may differ, making the conversions impossible. We make the check here,
-  because legality should not be based on representation properties, and
-  because such conversions are likely to be rare. There is a potential that
+  because legality should not be based on representation properties.
+  Such conversions are likely to be rare, anyway. There is a potential that
   this change would make a working program illegal (if the types have the same
   representation).]}
 
