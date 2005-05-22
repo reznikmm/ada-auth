@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:20 $}
+@Comment{$Date: 2005/05/20 05:49:36 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1758,7 +1758,7 @@ The extension aggregate syntax is new.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
   @ChgAdded{Version=[2],Text=[Eliminated implicit @lquotes@;truncation@rquotes
-  of a dynamically-tagged value when it is used as an ancestor @nt{expression}.]}
+  of a dynamically tagged value when it is used as an ancestor @nt{expression}.]}
 @end{DiffWord95}
 
 

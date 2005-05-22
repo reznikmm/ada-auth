@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:17 $}
+@Comment{$Date: 2005/05/20 05:49:33 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2241,9 +2241,10 @@ precede the @nt<derived_type_definition>.]
 @Defn{record extension}
 If there is a @nt<record_extension_part>, the derived type is
 called a @i(record extension) of the parent type.
-A @nt<record_extension_part> @Chg{Version=[2],New=[or an @nt{interface_list} ],
-Old=[]}shall be provided if and only if
-the parent type is a tagged type.
+A @nt<record_extension_part> shall be provided if and only if
+the parent type is a tagged type.@Chg{Version=[2],New=[ An
+@nt{interface_list} shall be provided only if
+the parent type is a tagged type.],Old=[]}
 @begin(ImplNote)
   We allow a record extension to inherit discriminants;
   an early version of Ada 9X did not.
@@ -2468,14 +2469,15 @@ there is a corresponding predefined operator of the derived type.]
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 @Defn{inherited subprogram}
 For each user-defined primitive subprogram (other than a user-defined
-equality operator @em see below) of the parent type@Chg{Version=[2],New=[ or a progenitor type],
-Old=[]} that already exists at the place of the @nt{derived_type_definition},
-there exists a corresponding @i(inherited) primitive
-subprogram of the derived type
+equality operator @em see below) of the parent type@Chg{Version=[2],New=[ or a
+progenitor type],Old=[]} that already exists at the place of the
+@nt{derived_type_definition}, there exists a corresponding @i(inherited)
+primitive subprogram of the derived type
 with the same defining name.
 @Defn2{Term=[equality operator],Sec=(special inheritance rule for tagged types)}
 Primitive user-defined equality operators of the parent
-type are also inherited by the derived type, except when
+type@Chg{Version=[2],New=[ and any progenitor types],Old=[]} are also
+inherited by the derived type, except when
 the derived type is a nonlimited record extension, and
 the inherited operator would have a profile that is type
 conformant with the profile of the corresponding
@@ -2508,8 +2510,10 @@ the implementation of the predefined equality operator of the record extension
   equality operator to take its place.
 @end{Reason}
 @begin{Ramification}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00114-01]}
   Because user-defined equality operators are not inherited
-  by record extensions, the formal parameter names of = and /=
+  by @Chg{Version=[2],New=[nonlimited ],Old=[]}record extensions, the
+  formal parameter names of = and /=
   revert to Left and Right, even if different formal parameter names
   were used in the user-defined equality operators of the parent type.
 @end{Ramification}
@@ -2825,8 +2829,8 @@ A derived type is @i(derived from) its parent type @i(directly);
 it is derived
 @i(indirectly) from any type from which its parent type is derived.@Chg{Version=[2],
 New=[ A derived type, interface type, type extension, task type, protected type,
-or formal derived type is also derived from each of its progenitor types,
-if any.],Old=[]}
+or formal derived type is also derived from every ancestor of each of its
+progenitor types, if any.],Old=[]}
 @Defn2{Term=[derivation class], Sec=(for a type)}
 @Defn2{Term=[root type], Sec=(of a class)}
 @Defn{rooted at a type}

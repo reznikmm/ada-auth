@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:22 $}
+@Comment{$Date: 2005/05/20 05:49:38 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1678,6 +1678,12 @@ appear in its @nt<record_type_definition>.@Chg{Version=[2],New=[ If the
 reserved word @key[limited] appears in the definition of
 a type extension, its parent type @Redundant[and any progenitor interfaces] shall be
 limited.],Old=[]}
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[Rules about progenitor interfaces can be found in
+  @RefSecNum{Interface Types}, specifically, a nonlimited interface can appear
+  only on a nonlimited type.]}
+@end{TheProof}
 @begin{Reason}
 @leading@;This prevents tagged limited types from becoming nonlimited.
 Otherwise, the following could happen:
@@ -2192,7 +2198,7 @@ For an @nt{extension_aggregate} whose @nt{ancestor_part} is a
 Initialize is called, or its initial value is assigned, as appropriate],
 Old=[Initialize is called on all controlled subcomponents of the
 ancestor part]}; ]}if the type of the @Chg{Version=[2],New=[@nt{ancestor_part}],
-Old=[ancestor part]} is itself controlled,
+Old=[ancestor part]} is @Chg{Version=[2],New=[],Old=[itself ]}controlled,
 the Initialize procedure of the ancestor type is called,
 unless that Initialize procedure is abstract.
 @begin{Discussion}

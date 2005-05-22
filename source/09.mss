@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:23 $}
+@Comment{$Date: 2005/05/20 05:49:39 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 
@@ -216,7 +216,7 @@ parameter of a primitive inherited subprogram is of the task type or an access
 parameter designating the task type, and there is an @nt{entry_declaration} for
 a single entry with the same identifier within the @nt{task_type_declaration},
 whose profile is type conformant with the
-prefixed view profile of inherited subprogram, the inherited subprogram is
+prefixed view profile of the inherited subprogram, the inherited subprogram is
 said to be @i{implemented} by the conforming task entry.@PDefn2{Term=[implemented],
 Sec=[by a task entry]}@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin{Ramification}
@@ -246,8 +246,8 @@ a limited interface type that is not a protected interface.]]}
 @begin(TheProof)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[@RefSecNum{Interface Types} requires that an
-  @nt{interface_list} only name interfaces, and limits the descendants of
-  the various kinds of interfaces. Only limited, task, or
+  @nt{interface_list} only name interface types, and limits the descendants of
+  the various kinds of interface types. Only a limited, task, or
   synchronized interface can have a task type descendant. Nonlimited or
   protected interfaces are not allowed, as they offer operations that a task
   does not have.]}
@@ -1001,8 +1001,8 @@ is not a task interface.]]}
 @begin(TheProof)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[@RefSecNum{Interface Types} requires that an
-  @nt{interface_list} only name interfaces, and limits the descendants of
-  the various kinds of interfaces. Only limited, protected, or
+  @nt{interface_list} only name interface types, and limits the descendants of
+  the various kinds of interface types. Only a limited, protected, or
   synchronized interface can have a protected type descendant. Nonlimited or
   task interfaces are not allowed, as they offer operations that a protected
   type does not have.]}

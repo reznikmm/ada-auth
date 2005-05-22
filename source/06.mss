@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:22 $}
+@Comment{$Date: 2005/05/20 05:49:38 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1592,7 +1592,7 @@ that falls off the end to here from RM83-6.5.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00310-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Non-dispatching abstract operations are no longer considered when
+  Nondispatching abstract operations are no longer considered when
   resolving a subprogram call. That makes it possible to use @key{abstract}
   to @lquotes@;undefine@rquotes@; a predefined operation for an untagged type.
   That's especially helpful when defining custom arithmetic packages.]}
@@ -2332,7 +2332,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added accessibility checks to class-wide
   return statements. These checks could not fail in Ada 95 (as all of the
-  types had to be declared at the same level, so the access type would
+  types had to be declared at the same level, so the tagged type would
   necessarily have been at the same level or more nested than the type of the
   object).]}
 

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:21 $}
+@Comment{$Date: 2005/05/20 05:49:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.14 $}
+@Comment{$Revision: 1.15 $}
 
 @LabeledClause{Type Conversions}
 
@@ -322,13 +322,16 @@ Further, if the target type is tagged, then either:]}
     This is a conversion of a class-wide type toward the leaves,
     which requires a tag check. See @RunTimeTitle.
 
-    These two rules imply that a conversion from a parent type
+    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+    These two rules imply that a conversion from @Chg{Version=[2],New=[an
+    ancestor],Old=[a parent]} type
     to a type extension is not permitted, as this would require
     specifying the values for additional components, in general,
     and changing the tag. An @nt<extension_aggregate> has to be used
     instead, constructing a new value, rather than converting an
     existing value. However, a conversion
-    from the class-wide type rooted at the parent type is permitted;
+    from the class-wide type rooted at @Chg{Version=[2],New=[an
+    ancestor],Old=[the parent]} type is permitted;
     such a conversion just verifies that the operand's tag is
     a descendant of the target.
   @end{Ramification}
@@ -1397,7 +1400,8 @@ if either such check fails.@IndexCheck{Accessibility_Check}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgAdded{Version=[2],Text=[The accesibility check on class-wide types
   prevents the allocated object from outliving its type. We need the run-time
-  check in instance bodies (other cases are statically detected).]}
+  check in instance bodies, or when the type of the @nt{qualified_expression}
+  is class-wide (other cases are statically detected).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[The accesibility check on access discriminants

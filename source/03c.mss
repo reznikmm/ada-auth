@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:19 $}
+@Comment{$Date: 2005/05/20 05:49:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -51,14 +51,14 @@ point at it. (That way, the @lquotes@;dynamic@rquotes@; part of the tag could
 be static, at the cost of indirect access.)]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[If the tagged type is descended from any interfaces,
-it also will need to include a @lquotes@;subtag@rquotes@; that describes the
-mapping of the primitive operations of the interface to the primitives of
-the type. These subtags could directly reference the primitive operations
-(for faster performance), or simply provide the tag @lquotes@;slot@rquotes@;
-numbers for the primitive operations (for easier derivation). In either case,
-the subtags would be used for calls that dispatch through a class-wide type
-of the interface.]}
+@ChgAdded{Version=[2],Text=[If the tagged type is descended from any interface
+types, it also will need to include a @lquotes@;subtag@rquotes@; that describes
+the mapping of the primitive operations of the interface to the
+primitives of the type. These subtags could directly reference the primitive operations (for
+faster performance), or simply provide the tag @lquotes@;slot@rquotes@; numbers
+for the primitive operations (for easier derivation). In either case, the
+subtags would be used for calls that dispatch through a class-wide type of the
+interface.]}
 
 Other implementation models are possible.
 
@@ -104,8 +104,10 @@ Given that Ada has overloading, determining whether a given
 subprogram overrides another is based both on the names and the type
 profiles of the operations.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00401-01]}
 When a type extension is declared, if there is any place within its
-immediate scope where a certain subprogram of the parent is visible,
+immediate scope where a certain subprogram of the parent
+@Chg{Version=[2],New=[or progenitor ],Old=[]}is visible,
 then a matching subprogram should override. If there is no such
 place, then a matching subprogram should be totally unrelated, and
 occupy a different slot in the type descriptor. This is important to
@@ -865,11 +867,12 @@ variants.
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01],ARef=[AI95-00345-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01],ARef=[AI95-00345-01],ARef=[AI95-00419-01]}
 The parent type of a record extension shall not be
 a class-wide type@Chg{Version=[2],New=[ nor shall it be a synchronized
 tagged type (see @RefSecNum{Interface Types})],Old=[]}.
-If the parent type is nonlimited, then each of the
+If the @Chg{Version=[2],New=[record extension],Old=[parent type]} is
+nonlimited, then each of the
 components of the @nt{record_extension_part} shall be
 nonlimited.@Chg{Version=[2],New=[],Old=[
 @PDefn2{Term=[accessibility rule],Sec=(record extension)}
@@ -984,11 +987,11 @@ case@Chg{Version=[2],New=[],Old=[ as well]}.
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[Similarly, since the actual type for a
-formal tagged limited private type can be a non-limited type, we would have
+formal tagged limited private type can be a nonlimited type, we would have
 a problem if a type extension of a limited private formal type could be
 declared in a generic body. Such an
 extension could have a task component, for example, and an object of that
-type could be passed to a dispatching operation of a non-limited ancestor
+type could be passed to a dispatching operation of a nonlimited ancestor
 type. That operation could try to copy the object with the task component.
 That would be bad. So we disallow this as well.]}
 
@@ -1017,7 +1020,7 @@ generic units obviate the need for extension in the body somewhat.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00344]}
 @ChgAdded{Version=[2],Text=[This rule applies to types with ancestors (directly
-or indirectly) of formal interfaces
+or indirectly) of formal interface types
 (see @RefSecNum{Formal Interface Types}), formal tagged private types
 (see @RefSecNum{Formal Private and Derived Types}), and
 formal derived private types whose ancestor type is tagged
@@ -1566,6 +1569,7 @@ tag-indeterminate, then:
   @end(inneritemize)
 @end(itemize)
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 For the execution of a call on a dispatching operation,
 the body executed is the one for the
 corresponding primitive subprogram of the specific type
@@ -1574,10 +1578,15 @@ The body for an explicitly declared dispatching operation is
 the corresponding explicit body for the subprogram.
 The body for an implicitly declared dispatching operation that is
 overridden is the body for the overriding subprogram,
-@Redundant[even if the overriding occurs in a private part.]
-The body for an inherited dispatching operation that is not
-overridden is the body of the corresponding subprogram of the parent
-or ancestor type.
+@Redundant[even if the overriding occurs in a private part.]@Chg{Version=[2],
+New=[ Similarly, the body for an
+implicitly declared dispatching operation that is implemented by an
+entry (see @RefSecNum{Task Units and Task Objects}) or
+protected operation (see @RefSecNum{Protected Units and Protected Objects})
+is the body for the implemented entry or operation.],Old=[]} The body for
+an inherited dispatching operation that is not overridden
+@Chg{Version=[2],New=[or implemented ],Old=[]}is the body of the
+corresponding subprogram of the parent or ancestor type.
 @begin{Honest}
 In the unusual case in which a dispatching subprogram is explicitly
 declared (overridden) by a body (with no preceding
@@ -1713,7 +1722,7 @@ The concept of dispatching operations is new.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01],ARef=[AI95-00430-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the conventions of
   dispatching operations. This is extended in Ada 2006 to cover operations
-  inherited from progenitors, and to insure that the conventions of all
+  inherited from progenitors, and to ensure that the conventions of all
   inherited operations are the same.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00196-01]}
@@ -1731,6 +1740,11 @@ The concept of dispatching operations is new.
   @ChgAdded{Version=[2],Text=[An abstract formal subprogram is a dispatching
   operation, even though it is not a primitive operation. See
   @RefSec{Formal Subprograms}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[Dispatching calls include operations
+  implemented by entries and protected operations, so we have to update the
+  wording to reflect that.]}
 @end{Diffword95}
 
 
@@ -2198,7 +2212,7 @@ to complete a private type.],Old=[]}
 @begin{Diffword95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[Updated the wording to reflect the addition of
-interfaces (see @RefSecNum{Interface Types}).],Old=[]}
+interface types (see @RefSecNum{Interface Types}).],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
 @Chg{Version=[2],New=[Updated the wording to reflect the addition of
@@ -2356,7 +2370,7 @@ unit.@PDefn{generic contract issue}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This paragraph is intended to apply to all of the
-  @LegalityTitle@; in this clause. We cannot allow interfaces which do not
+  @LegalityTitle@; in this clause. We cannot allow interface types which do not
   obey these rules, anywhere. Luckily, deriving from a formal type (which might
   be an interface) is not allowed for any tagged types in a generic body. So
   checking in the private part of a generic covers all of the cases.]}
