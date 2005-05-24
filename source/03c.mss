@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:35 $}
+@Comment{$Date: 2005/05/22 05:06:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2392,6 +2392,116 @@ abstract equality operators. Such operators will then require
 an explicit overriding for any nonabstract descendant of the interface.]}
 @end{Notes}
 
+@begin{Examples}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example of limited
+interface and synchronized interface extending it:}]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Queue @key{is limited interface};
+@key{procedure} Append(Q : @key{in out} Queue; Element : @key{in} Person_Name) @key{is abstract};
+@key{procedure} Remove_First(Q : @key{in out} Queue; Element : @key{out} Person_Name) @key{is abstract};
+@key{function} Cur_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
+@key{function} Max_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
+-- @RI[See @RefSecNum{Incomplete Type Declarations} for Person_Name.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Queue_Error : @key{exception};
+--@RI[ Append raises Queue_Error if Count(Q) = Max_Count(Q)]}
+--@RI[ Remove_First raises Queue_Error if Count(Q) = 0]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is synchronized interface and} Queue; --@RI[ see @RefSecNum{Example of Tasking and Synchronization}]
+@key{procedure} Append_Wait(Q : @key{in out} Queue; Element : @key{in} Person_Name) @key{is abstract};
+@key{procedure} Remove_First_Wait(Q : @key{in out} Queue; Element : @key{out} Person_Name) @key{is abstract};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[...]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{procedure} Transfer(From : @key{in out} Queue'Class;
+                   To : @key{in out} Queue'Class;
+                   Number : @key{in} Natural := 1) @key{is}
+   Element : Person_Name_Name;
+@key{begin}
+   @key{for} I @key{in} 1..Number @key{loop}
+      Remove_First(From, Element);
+      Append(To, Element);
+   @key{end loop};
+@key{end} Transfer;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This defines a Queue interface defining a queue of
+people. (A similar design could be created to define any kind of queue simply
+by replacing Person_Name by an appropriate type.) The Queue interface has four
+dispatching operations, Append, Remove_First, Cur_Count, and Max_Count. The
+body of a class-wide operation, Transfer is also shown. Every non-abstract
+extension of Queue must provide implementations for at least its four
+dispatching operations, as they are abstract. Any object of a type derived from
+Queue may be passed to Transfer, as either the From or the To operand. The two
+operands need not be of the same type in any given call.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The Synchronized_Queue interface inherits the four
+dispatching operations from Queue, and adds two additional dispatching
+operations, which wait if necessary rather than raising the Queue_Error
+exception. This synchronized interface may only be implemented by a task or
+protected type, and as such ensures safe concurrent access.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example use of an interface:}]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Fast_Food_Queue @key{is new} Queue @key{with record} ...;
+@key{procedure} Append (Q : @key{in out} Fast_Food_Queue; Element : @key{in} Person_Name);
+@key{procedure} Remove_First (Q : @key{in out} Fast_Food_Queue; Element : @key{in} Person_Name);
+@key{function} Cur_Count (Q : @key{in} Fast_Food_Queue) @key{return} Natural;
+@key{function} Max_Count (Q : @key{in} Fast_Food_Queue) @key{return} Natural;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[...]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Cashier, Counter : Fast_Food_Queue;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[...
+-- @RI[Add George (see @RefSecNum{Incomplete Type Declarations}) to the cashier's queue:]
+Append (Cashier, George);
+-- @RI[After payment, move George to the sandwich counter queue:]
+Transfer (Cashier, Counter);
+...]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[An interface such as Queue can be used directly as
+the parent of a new type (as shown here), or can be added when a new type is
+derived from another type. In either case, the primitive operations of the
+interface are inherited. For Queue, the implementation of the four inherited
+routines must be provided. Inside the call of Transfer, dispatching calls to
+the implementations of Append and Remove_First for type Fast_Food_Queue will be
+made.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example of a task interface:}]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Serial_Device @key{is task interface};  --@RI[ see @RefSecNum{Task Units and Task Objects}]
+@key{procedure} Read (Dev : @key{in} Serial_Device; C : @key{out} Character) @key{is abstract};
+@key{procedure} Write(Dev : @key{in} Serial_Device; C : @key{in}  Character) @key{is abstract};]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The Serial_Device interface has two dispatching
+operations which are intended to be implemented using task entries (see 9.1).]}
+
+@end{Examples}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}Interface types
@@ -2981,7 +3091,8 @@ can be applied to access types
 @begin{Examples}
 @Leading@keepnext@i{Examples of access-to-object types:}
 @begin{Example}
-@key[type] Peripheral_Ref @key[is access] Peripheral;  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
 @key[type] Binop_Ptr @key[is access all] Binary_Operation'Class;
                                            @RI[-- general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
@@ -3420,13 +3531,16 @@ Next   : Link  := Head.Succ;
 
 @i(Examples of mutually dependent access types:)
 @begin(Example)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(type) Person(<>);    @RI[-- incomplete type declaration]
-@key(type) Car;           @RI[-- incomplete type declaration]
+@key(type) Car@Chg{Version=[2],New=[ @key{is tagged};],Old=[;          ]} @RI[-- incomplete type declaration]
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(type) Person_Name @key(is) @key(access) Person;
-@key(type) Car_Name    @key(is) @key(access) @key(all) Car;
+@key(type) Car_Name    @key(is) @key(access) @key(all) Car@Chg{Version=[2],New=['Class],Old=[]};
 
-@key(type) Car @key(is)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@key(type) Car @key(is)@Chg{Version=[2],New=[ @key(tagged)],Old=[]}
    @key(record)
       Number  : Integer;
       Owner   : Person_Name;

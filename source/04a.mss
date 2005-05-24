@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:36 $}
+@Comment{$Date: 2005/05/22 05:06:50 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -604,8 +604,7 @@ The exception Constraint_Error is raised if this check fails.
   Writer.Unit        @RI[--  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
   Min_Cell(H).Value  @RI[--  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
                      @RI[--  of the function call Min_Cell(H)]
-@Chg{Version=[2],New=<  Teller.Append      @RI[--  a prefixed view of a procedure @\(see @RefSecNum{Interface Types})]
-                     @RI[--  assuming X is an object of Queue'Class]
+@Chg{Version=[2],New=<  Cashier.Append     @RI[--  a prefixed view of a procedure @\(see @RefSecNum{Interface Types})]
 >,Old=<>}  Control.Seize      @RI[--  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
   Pool(K).Write      @RI[--  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
 @end{Example}
