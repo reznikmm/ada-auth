@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:33 $}
+@Comment{$Date: 2005/05/24 05:42:58 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -597,7 +597,7 @@ are given in @RefSecNum(Scalar Types) for @nt<range_constraint>s,
 @RefSecNum(Index Constraints and Discrete Ranges)
 for @nt<index_constraint>s, and
 @RefSecNum(Discriminant Constraints) for
-@nt<discriminant_constraint>s].@Chg{Version=[2],New=[The set of possible values
+@nt<discriminant_constraint>s].@Chg{Version=[2],New=[ The set of possible values
 for an object of an access type can also be subjected to a condition that
 excludes the null value (see @RefSecNum{Access Types}).],Old=[]}
 
@@ -867,7 +867,7 @@ as simply @lquotes@;the type T@rquotes@;.
 @Defn{full type}
 A named type that is declared by a @nt<full_type_@!declaration>,
 or an anonymous type that is defined @Chg{Version=[2],New=[by an
-@nt{access_definition} or],Old=[]}as part of declaring an object of the type,
+@nt{access_definition} or ],Old=[]}as part of declaring an object of the type,
 is called a
 @i(full type).@Defn{full type definition}@Chg{Version=[2],New=[ The
 declaration of a full type also declares the @i<full view> of the type.],Old=[]}
@@ -1164,7 +1164,7 @@ since it always denotes a subtype.
 @LabeledSubClause{Classification of Operations}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 @Defn{operates on a type}
 An operation @i(operates
 on a type) @i(T) if it yields a value of type @i(T), if it has an operand
@@ -1970,12 +1970,12 @@ be abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @begin{Examples}
 @Leading@keepnext@i(Example of a multiple object declaration:)
 @begin(Example)
-@RI[--  the multiple object declaration ]
+--@RI[  the multiple object declaration ]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
-John, Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);  @RI[--  see @RefSecNum(Incomplete Type Declarations)]
+John, Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);  --@RI[  see @RefSecNum(Incomplete Type Declarations)]
 
-@RI[--  is equivalent to the two single object declarations in the order given]
+--@RI[  is equivalent to the two single object declarations in the order given]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
 John : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);
@@ -2334,7 +2334,7 @@ of the derived type.
 @begin(itemize)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
 Each class of types that includes the parent type @Chg{Version=[2],New=[or
-progenitor type ],Old=[]}also includes the derived type.
+a progenitor type ],Old=[]}also includes the derived type.
 @begin{Discussion}
 This is inherent in our notion
   of a @lquotes@;class@rquotes@; of types. It is not mentioned in the
@@ -2469,7 +2469,7 @@ there is a corresponding predefined operator of the derived type.]
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 @Defn{inherited subprogram}
 For each user-defined primitive subprogram (other than a user-defined
-equality operator @em see below) of the parent type@Chg{Version=[2],New=[ or a
+equality operator @em see below) of the parent type@Chg{Version=[2],New=[ or of a
 progenitor type],Old=[]} that already exists at the place of the
 @nt{derived_type_definition}, there exists a corresponding @i(inherited)
 primitive subprogram of the derived type
@@ -3793,7 +3793,7 @@ S'Pred for a modular integer subtype wraps around
     leading and trailing spaces) has the syntax
     of an enumeration literal and if it corresponds to a literal of the
     type of S (or corresponds to the result of S'Wide_Image
-    for a value of the type),
+    for a @Chg{Version=[2],New=[value],Old=[nongraphic character]} of the type),
     the result is the corresponding enumeration value;
     @IndexCheck{Range_Check}
     otherwise Constraint_Error is raised.
@@ -3996,7 +3996,7 @@ of the attributes Succ, Pred, and Image need not belong to the subtype.
 For any value V (including any nongraphic character) of an
 enumeration subtype S, S'Value(S'Image(V)) equals V,
 as @Chg{Version=[2],New=[does],Old=[do]} S'Wide_Value(S'Wide_Image(V))@Chg{Version=[2],
-New=[and S'Wide_Wide_Value(S'Wide_Wide_Image (V))],Old=[]}.
+New=[and S'Wide_Wide_Value(S'Wide_Wide_Image(V))],Old=[]}.
 @Chg{Version=[2],New=[None of these
 expressions],Old=[Neither expression]} ever @Chg{Version=[2],New=[raise],Old=[raises]}
 Constraint_Error.

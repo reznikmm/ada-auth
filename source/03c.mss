@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/22 05:06:49 $}
+@Comment{$Date: 2005/05/24 05:43:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -138,7 +138,7 @@ and inherited primitive subprograms may be overridden.]
 @Defn2{Term=[extension], Sec=(of a type)}
 The derived type is called an @i(extension)
 of @Chg{Version=[2],New=[its],Old=[the]} ancestor
-@Chg{Version=[2],New=[types],Old=[type]}, or simply a @i(type
+@Chg{Version=[2],New=[type(s)],Old=[type]}, or simply a @i(type
 extension).@Chg{Version=[2],New=[],Old=[ @Defn2{Term=[extension], Sec=(of a record type)}
 @Defn{private extension}
 @Defn2{Term=[extension], Sec=(of a private type)}

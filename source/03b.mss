@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:18 $}
+@Comment{$Date: 2005/05/24 05:43:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @LabeledClause{Array Types}
 
@@ -322,7 +322,7 @@ Msg_Table : @key(constant array)(Error_Code) @key(of access constant) String :=
 Page @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Positive @key(range) <>) @key(of) Line :=  @RI[--  an array of arrays]
   (1 | 50  => Line'(1 | Line'Last => '+', others => '-'),  @RI[-- see @RefSecNum(Array Aggregates)]
    2 .. 49 => Line'(1 | Line'Last => '|', others => ' '));
-    @RI[-- Page is constrained by its initial value to (1..50)]
+    --@RI[ Page is constrained by its initial value to (1..50)]
 @end(Example)
 @end{Examples}
 
@@ -1405,7 +1405,7 @@ used only for discriminants defined by an @nt<access_definition>.
    @key(end) @key(record);
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
-@Chg{Version=[2],New=[@key(task type) Worker(Prio : System.Priority; Buf : @key(access) Buffer) key(is)
+@Chg{Version=[2],New=[@key(task type) Worker(Prio : System.Priority; Buf : @key(access) Buffer) @key(is)
    --@RI[ discriminants used to parameterize the task type (see @RefSecNum{Task Units and Task Objects})]
    @key(pragma) Priority(Prio);  --@RI[ see @RefSecNum{Task Priorities}]
    @key(entry) Fill;
@@ -2000,8 +2000,9 @@ New=[ if the component subtype is defined by an @nt{access_definition} or],
 Old=[]} if the @nt{constraint}
 @Chg{New=[or @nt{range}],Old=[]} of the @nt{subtype_indication}
 @Chg{New=[or @nt{discrete_@!subtype_@!definition}],Old=[]} is not a per-object
-constraint, then the@Chg{Version=[2],New=[ @nt{access_definition},],Old=[]} @nt{subtype_indication}
-@Chg{New=[or@Chg{Version=[2],New=[,],Old=[]} @nt{discrete_@!subtype_@!definition}],Old=[]}
+constraint, then the@Chg{Version=[2],New=[ @nt{access_definition},],Old=[]}
+@nt{subtype_indication}@Chg{Version=[2],New=[,],Old=[]}
+@Chg{New=[or @nt{discrete_@!subtype_@!definition}],Old=[]}
 is elaborated. On the other hand, if the @nt{constraint}
 @Chg{New=[or @nt{range}],Old=[]} is a per-object constraint,
 then the elaboration consists of the evaluation of any included

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.43 $ $Date: 2005/05/05 00:45:42 $}
+@comment{$Revision: 1.44 $ $Date: 2005/05/24 05:43:09 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -219,7 +219,7 @@ and explains the rationale behind them. Programmers @Chg{Version=[2],New=[unfami
 Old=[]} should read this first.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@ChgAdded{Version=[2],Text=[Ada 2006 Rationale. This give an introduction
+@ChgAdded{Version=[2],Text=[Ada 2006 Rationale. This gives an introduction
 to the changes and new features in Ada 2006 (compared with the 1995 edition),
 and explains the rationale behind them. Programmers should read this rationale
 before reading this Standard in depth.]}
@@ -591,10 +591,10 @@ applicable to all types of a given class.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 @Leading@;This @Chg{Version=[2],New=[amended ],Old=[]}International Standard
-@Chg{Version=[2],New=[modifies the edition of 1995 which replaced],
+@Chg{Version=[2],New=[updates the edition of 1995 which replaced],
 Old=[International Standard replaces]} the first edition of 1987.
 In @Chg{Version=[2],New=[the 1995],Old=[this]} edition, the following major
-language changes have been incorporated:
+language changes @Chg{Version=[2],New=[were],Old=[have been]} incorporated:
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
 Support for standard 8-bit and 16-bit

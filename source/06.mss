@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:38 $}
+@Comment{$Date: 2005/05/24 05:43:04 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -174,6 +174,7 @@ technologies.
 A @nt{default_expression} is only allowed in a @nt{parameter_specification}
 for a formal parameter of mode @key(in).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
 @PDefn2{Term=[requires a completion], Sec=(@nt{subprogram_declaration})}
 @PDefn2{Term=[requires a completion], Sec=(@nt{generic_subprogram_declaration})}
 A @nt{subprogram_declaration}
@@ -183,9 +184,12 @@ requires a completion:
 (see @RefSecNum(Renaming Declarations)), or a @key(pragma) Import
 (see @RefSecNum{Interfacing Pragmas})].
 @Redundant[A completion is not allowed
-for an @nt<abstract_subprogram_declaration>.]
+for an @nt<abstract_subprogram_declaration>@Chg{Version=[2],New=[ or
+@nt{null_procedure_declaration} (see @RefSecNum{Null Procedures})],Old=[]}.]
 @begin(Ramification)
-  Abstract subprograms are not declared by
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+  Abstract subprograms @Chg{Version=[2],New=[and null procedures ],Old=[]}are
+  not declared by
   @nt{subprogram_declaration}s, and so do not require completion.
   Protected subprograms are declared by @nt{subprogram_declaration}s,
   and so require completion.
@@ -1448,19 +1452,31 @@ If the subprogram is inherited, see @RefSec{Derived Types and Classes}.
 
 If the subprogram is protected, see @RefSec{Protected Subprograms and Protected Actions}.
 
-If the subprogram is really a renaming of an entry,
-see @RefSec{Entry Calls}.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00397-01]}
+If the subprogram is really @Chg{Version=[2],New=[],Old=[a renaming of ]}an
+entry, see @RefSec{Entry Calls}.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
 Normally, the @nt{subprogram_body} that is executed by the above rule
 is the one for the subprogram being called.
 For an enumeration literal,
-implicitly declared (but noninherited) subprogram,
-or an attribute that is a subprogram,
+implicitly declared (but noninherited) subprogram,@Chg{Version=[2],New=[
+null procedure,],Old=[]} or an attribute that is a subprogram,
 an implicit body is assumed.
 For a dispatching call,
 @RefSec{Dispatching Operations of Tagged Types}
 defines which @nt{subprogram_body} is executed.
 @end{Honest}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Text=[If the @nt{name} or @nt{prefix} of a subprogram
+call denotes an inherited subprogram implemented by an entry or protected
+subprogram (see @RefSecNum{Task Units and Task Objects} and
+@RefSecNum{Protected Units and Protected Objects}), the subprogram call is
+equivalent to a call on the underlying entry or protected subprogram, with the
+target object being given by the first actual parameter of the call, and the
+actual parameters of the entry or protected subprogram being given by the
+remaining actual parameters of the call, if any.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00407-01]}
 @ChgAdded{Version=[2],Text=[If the @nt{name} or @nt{prefix} of a subprogram
@@ -1605,6 +1621,11 @@ that falls off the end to here from RM83-6.5.
   @RefSecNum{Subprogram Declarations}, to take into account
   @nt{null_exclusion}s and access result types.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00397-01]}
+  @ChgAdded{Version=[2],Text=[Defined the meaning of a call on a
+  subprogram @lquotes@;implemented by@rquotes an entry or protected
+  operation.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00407-01]}
   @ChgAdded{Version=[2],Text=[Defined the meaning of a call on a prefixed
   view of a subprogram (see @RefSecNum{Selected Components}).]}
@@ -1711,7 +1732,7 @@ of the formal parameter is evaluated,
 and the formal parameter denotes that conversion.
 @PDefn2{Term=[implicit subtype conversion],Sec=(parameter passing)}
 @begin{Discussion}
-We are always allowing sliding, even for @b([in] out) by-reference
+We are always allowing sliding, even for [@key(in)[ @key(out) by-reference
 parameters.
 @end{Discussion}
 
@@ -2607,6 +2628,10 @@ the @nt<subprogram_body> has no effect.]}
 @ChgAdded{Version=[2],Text=[with the exception that a null procedure can be used in
 place of a procedure specification.]}
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+@ChgAdded{Version=[2],Text=[The elaboration of a
+@nt{null_procedure_declaration} has no effect.]}
 @end{RunTime}
 
 @begin{Extend95}

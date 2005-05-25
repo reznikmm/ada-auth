@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:16 $}
+@Comment{$Date: 2005/05/24 05:42:57 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -84,7 +84,7 @@ a set of @nt<other_control_function>s; the]} coded representation for
 @Redundant[(it need not be a
 representation defined within @Chg{Version=[2],New=[ISO/IEC 10646:2003],
 Old=[ISO-10646-1]})].@Chg{Version=[2],New=[ A character whose relative
-code position in their plane is 16#FFFE# or 16#FFFF# is not allowed anywhere
+code position in its plane is 16#FFFE# or 16#FFFF# is not allowed anywhere
 in the text of a program.],Old=[]}
 @ImplDef{The coded representation for the text of an Ada program.}
 
