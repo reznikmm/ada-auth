@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:24 $}
+@Comment{$Date: 2005/05/25 23:29:16 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -369,9 +369,11 @@ an unexplained parameter in this subclause.]}
 @begin{Examples}
 @leading@keepnext@i{Examples of raise statements:}
 @begin{Example}
-@key[raise] Ada.IO_Exceptions.Name_Error;   @RI[-- see @RefSecNum{Exceptions In Input-Output}]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@key[raise] Ada.IO_Exceptions.Name_Error;   --@RI[ see @RefSecNum{Exceptions In Input-Output}]@Chg{Version=[2],New=[
+@key[raise] Queue_Error @key[with] "Buffer Full"; --@RI[ see @RefSecNum{Example of Tasking and Synchronization}]],Old=[]}
 
-@key[raise];                                @RI[-- re-raise the current exception]
+@key[raise];                                --@RI[ re-raise the current exception]
 @end{Example}
 @end{Examples}
 

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/05/17 05:50:44 $}
+@Comment{$Date: 2005/05/25 23:29:15 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -927,6 +927,7 @@ Standard.Standard.
   generic unit will work as expected.]}
 @end{DiffWord95}
 
+
 @LabeledSubClause{Context Clauses - With Clauses}
 
 @begin{Intro}
@@ -1343,6 +1344,58 @@ above.
 @end{Ramification}
 @end{Notes}
 
+@begin{Examples}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgAdded{Version=[2],Text=[@key(limited with) Office.Departments;  --@RI[ types are incomplete]
+@key(private with) Office.Locations;    --@RI[ only visible in private part]
+@key(package) Office.Employees @key(is)
+   @key(type) Employee @key(is private);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key(function) Dept_Of(Emp : Employee) @key(return access) Departments.Department;
+   @key(procedure) Assign_Dept(Emp  : @key(in out) Employee;
+                         Dept : @key(access) Departments.Department);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   ...
+@key(private
+   type) Employee @key(is
+      record)
+         Dept : @key(access) Departments.Department;
+         Loc : Locations.Location;
+         ...
+      @key(end record);
+@key(end) Office.Employees;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key(limited with) Office.Employees;
+@key(package) Office.Departments @key(is)
+   @key(type) Department @key(is private);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key(function) Manager_Of(Dept : Department) @key(return access) Employees.Employee;
+   @key(procedure) Assign_Manager(Dept : @key(in out) Department;
+                            Mgr  : @key(access) Employees.Employee);
+   ...
+@key(end) Office.Departments;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgAdded{Version=[2],Text=[The @nt{limited_with_clause} may be used to support
+mutually dependent abstractions that are split across multiple packages. In
+this case, an employee is assigned to a department, and a department has a
+manager who is an employee. If a @nt{with_clause} with the reserved word
+@key(private) appears on one library unit and mentions a second library unit,
+it provides visibility to the second library unit, but restricts that
+visibility to the private part and body of the first unit. The compiler checks
+that no use is made of the second unit in the visible part of the first unit.]}
+
+@end{Examples}
+
+
+
 @begin{Extend83}
 @Defn{extensions to Ada 83}
 The syntax rule for @nt{with_clause} is modified to allow expanded name
@@ -1386,6 +1439,7 @@ definition in @RefSecNum{Use Clauses}.
   item in the visible part of their @nt{compilation_unit}. They also allow
   using private units in more locations than in Ada 95.]}
 @end{Extend95}
+
 
 @LabeledSubClause{Subunits of Compilation Units}
 

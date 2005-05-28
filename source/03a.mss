@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/24 05:42:58 $}
+@Comment{$Date: 2005/05/25 23:29:08 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -606,10 +606,10 @@ excludes the null value (see @RefSecNum{Access Types}).],Old=[]}
 A @i(subtype) of a given type is a combination of the type,
 a constraint on values of the type, and certain
 attributes specific to the subtype.
-The given type is called the type @i(of) the subtype.
-Similarly, the associated constraint is called the
-constraint @i(of) the subtype. The set of values
-of a subtype consists of the values of its type
+The given type is called the type @Chg{Version=[2],New=[of],Old=[@i(of)]} the
+subtype. Similarly, the associated constraint is called the
+constraint @Chg{Version=[2],New=[of],Old=[@i(of)]} the subtype. The set of
+values of a subtype consists of the values of its type
 that satisfy its constraint@Chg{Version=[2],New=[ and, in the case
 of a subtype that excludes null, the values do not include the null value],
 Old=[]}.
@@ -2617,7 +2617,13 @@ and the @nt<record_@!extension_@!part>, if any.
 If the @nt{subtype_@!indication} depends on a discriminant,
 then only those expressions that do not depend on a discriminant
 are evaluated.
-
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[We don't mention the @nt{interface_list}, because
+  it does not need elaboration (see @RefSecNum{Interface Types}. This is
+  consistent with the handling of @nt{discriminant_part}s, which aren't
+  elaborated either.]}
+@end{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00391-01],ARef=[AI95-00401-01]}
 @PDefn2{Term=[execution], Sec=(call on an inherited subprogram)}
 For the execution of a call on an inherited subprogram,

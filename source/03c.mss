@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/24 05:43:02 $}
+@Comment{$Date: 2005/05/25 23:29:10 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -636,15 +636,16 @@ result type is a specific tagged type @i(T) identifies @i(T).
   For a nonlimited
   type, a new anonymous object with the appropriate tag
   is created as part of the function
-  return, and then assigned the value of the
-  return expression.
+  return@Chg{Version=[2],New=[],Old=[, and then assigned the value of the
+  return expression]}.
   See @RefSec{Return Statements}.
 @end{ImplNote}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @PDefn2{Term=[tag of an object], Sec=(returned by a function)}
 The tag of the result returned by a
 function with a class-wide result
-type is that of the return expression.
+type is that of the return @Chg{Version=[2],New=[object],Old=[expression]}.
 @end(Itemize)
 
 @PDefn2{Term=[tag of an object], Sec=(preserved by type conversion and parameter
@@ -819,6 +820,11 @@ Tagged types are a new concept.
 @end{Extend95}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[We talk about return objects rather than
+  return expressions, as functions can return using an
+  @nt{extended_return_statement}.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgAdded{Version=[2],Text=[Added wording to define that tags for all
   descendants of a tagged type must be distinct. This is needed to ensure
@@ -1889,7 +1895,7 @@ that is inherited or is the predefined equality operator, and the corresponding
 primitive subprogram of],Old=[For a derived type, if]}
 the parent or ancestor type
 @Chg{Version=[2],New=[is abstract or is a function with a controlling access
-result, or a type other than a null extension inherits a],
+result, or if a type other than a null extension inherits a],
 Old=[has an abstract primitive subprogram, or a primitive]}
 function with a controlling result, then:
 @begin{Itemize}
@@ -2382,6 +2388,13 @@ unit.@PDefn{generic contract issue}]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[The elaboration of an
 @nt{interface_type_definition} has no effect.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[An @nt{interface_list} is made up of
+  @nt{subtype_mark}s, which do not need to be elaborated, so the
+  @nt{interface_list} does not either. This is consistent with the
+  handling of @nt{discriminant_part}s.]}
+@end{Discussion}
 @end{Runtime}
 
 @begin{Notes}
@@ -2609,7 +2622,7 @@ with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
 (see @RefSecNum{Type Conversions}) of an aliased view.
-@Chg{Version=[2],New=[The],Old=[Finally, the]} current instance of a
+@Chg{Version=[2],New=[A],Old=[Finally, the]} current instance of a
 limited@Chg{Version=[2],New=[ tagged],Old=[]} type, @Chg{Version=[2],New=[a
 protected type, a task type, or a type that has the reserved word @key{limited}
 in its full definition is also defined to be aliased. Finally,],Old=[and]}
@@ -3092,9 +3105,9 @@ can be applied to access types
 @Leading@keepnext@i{Examples of access-to-object types:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
+@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  --@RI[  see @RefSecNum{Variant Parts and Discrete Choices}]
 @key[type] Binop_Ptr @key[is access all] Binary_Operation'Class;
-                                           @RI[-- general access-to-class-wide, see @RefSecNum{Type Extensions}]
+                                           --@RI[ general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
 
 @begin{Wide}
@@ -3393,8 +3406,8 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[If such a name denotes a
-tagged incomplete view, it may also be used:]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[If such a @nt{name}
+denotes a tagged incomplete view, it may also be used:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
@@ -3405,7 +3418,8 @@ tagged incomplete view, it may also be used:]}
   as the @nt{prefix} of an @nt{attribute_reference}
   whose @nt{attribute_@!designator}
   is Class; such an @nt{attribute_@!reference}
-  is similarly restricted to the uses allowed here;
+  is @Chg{Version=[2],New=[],Old=[similarly ]}restricted to the uses
+  allowed here;
   @Chg{Version=[2],New=[it denotes a tagged incomplete view],
   Old=[when used in this way,
   the corresponding @nt{full_type_@!declaration} shall
@@ -3421,8 +3435,8 @@ tagged incomplete view, it may also be used:]}
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[If such a name occurs within the
-list of @nt{declarative_item}s containing the completion of the
+@ChgAdded{Version=[2],Type=[Leading],Text=[If such a @nt{name} occurs within
+the list of @nt{declarative_item}s containing the completion of the
 incomplete view, it may also be used:]}
 
 @begin{Itemize}
@@ -3532,8 +3546,8 @@ Next   : Link  := Head.Succ;
 @i(Examples of mutually dependent access types:)
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key(type) Person(<>);    @RI[-- incomplete type declaration]
-@key(type) Car@Chg{Version=[2],New=[ @key{is tagged};],Old=[;          ]} @RI[-- incomplete type declaration]
+@key(type) Person(<>);    --@RI[ incomplete type declaration]
+@key(type) Car@Chg{Version=[2],New=[ @key{is tagged};],Old=[;          ]} --@RI[ incomplete type declaration]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(type) Person_Name @key(is) @key(access) Person;
@@ -3559,7 +3573,7 @@ Next   : Link  := Head.Succ;
       @key(end) @key(case);
    @key(end) @key(record);
 
-My_Car, Your_Car, Next_Car : Car_Name := @key[new] Car;  @RI[-- see @RefSecNum{Allocators}]
+My_Car, Your_Car, Next_Car : Car_Name := @key[new] Car;  --@RI[ see @RefSecNum{Allocators}]
 George : Person_Name := @key[new] Person(M);
    ...
 George.Vehicle := Your_Car;
@@ -3923,7 +3937,7 @@ type defined by an @nt{access_definition} of an
 @ChgNote{Use ChgAdded below to get conditional Leading}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For an access
 discriminant,]}@Chg{Version=[2],New=[ the],Old=[The]}
-the accessibility level of @Chg{Version=[2],New=[its],Old=[the]}
+accessibility level of @Chg{Version=[2],New=[its],Old=[the]}
 anonymous access type @Chg{Version=[2],New=[is determined as follows:],
 Old=[of an access discriminant is
 the same as that of the containing object or associated constrained subtype.]}

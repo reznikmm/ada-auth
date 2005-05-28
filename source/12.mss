@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:40 $}
+@Comment{$Date: 2005/05/25 23:29:16 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2429,6 +2429,26 @@ protected, or synchronized interface.]}
 @end{Discussion}
 @end{Legality}
 
+@begin{Examples}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Text=[@key{generic}
+   @key{type} Managed_Task @key{is task interface};
+   @key{type} Work_Item(<>) @key{is new} Root_Work_Item @key{with private};
+@key{package} Server_Manager @key{is}
+   @key{task type} Server @key{is new} Managed_Task @key{with}
+      @key{entry} Start(Data : @key{access} Work_Item);
+   @key{end} Server;
+@key{end} Server_Manager;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Text=[This generic allows an application to establish a
+standard interface that all tasks need to implement so they can be managed
+appropriately by an application-specific scheduler.]}
+
+@end{Examples}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -2752,9 +2772,15 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.
 @begin{Examples}
 @Leading@Keepnext@i{Examples of generic formal subprograms:}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key[with] @key[function] "+"(X, Y : Item) @key[return] Item @key[is] <>;
 @key[with] @key[function] Image(X : Enum) @key[return] String @key[is] Enum'Image;
-@key[with] @key[procedure] Update @key[is] Default_Update;
+@key[with] @key[procedure] Update @key[is] Default_Update;@Chg{Version=[2],New=[
+@key[with] @key[procedure] Pre_Action(X : @key[in] Item) @key[is null];  --@RI[ defaults to no action]
+@key[with] @key[procedure] Write(S    : @key[access] Root_Stream_Type'Class;
+                     Desc : Descriptor)
+                     @b<is abstract> Descriptor'Write;  --@RI[ see @RefSecNum{Stream-Oriented Attributes}]
+--@RI[ Dispatching operation on Descriptor with default]],Old=[]}
 
 --@RI{  given the generic procedure declaration }
 
@@ -2953,6 +2979,57 @@ for those not specified, the copies of the formal parameters of the
 template included in the visible part of @i<A>.]}
 
 @end{StaticSem}
+
+@begin{Examples}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@i{Example of generic
+package with formal package parameters:}]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[generic]
+   @key[with package] Mapping_1 @key[is new] Generic_Mapping(<>);
+   @key[with package] Mapping_2 @key[is new] Generic_Mapping
+                                    (Key_Type => Mapping_1.Element_Type,
+                                     @key[others] => <>);
+@key[package] Generic_Join @key[is]
+   --@RI[ Provide a "join" between two mappings]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[subtype] Key_Type @key[is] Mapping_1.Key_Type;
+   @key[subtype] Element_Type @key[is] Mapping_2.Element_Type;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[function] Lookup(Key : Key_Type) @key[return] Element_Type;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   ...
+@key[end] Generic_Join;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@i{Example of
+instantiation of package with formal packages:}]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[package] String_Table @key[is new] Generic_Mapping(Key_Type => String,
+                                            Element_Type => String_ID);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[package] Symbol_Table @key[is new] Generic_Mapping(Key_Type => String_ID,
+                                            Element_Type => Symbol_Info);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[package] String_Info @key[is new] Generic_Join(Mapping_1 => String_Table,
+                                        Mapping_2 => Symbol_Table);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Apple_Info : @key[constant] Symbol_Info := String_Info.Lookup("Apple");]}
+@end{Example}
+@end{Examples}
+
+
 
 @begin{Extend83}
   @Defn{extensions to Ada 83}

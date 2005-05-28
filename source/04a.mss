@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/22 05:06:50 $}
+@Comment{$Date: 2005/05/25 23:29:11 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -496,7 +496,7 @@ corresponding entry, entry family, or protected subprogram.
   has to be used for that).
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
 @ChgAdded{Version=[2],Text=[A view of a subprogram whose first formal parameter is of
 a tagged type or is an access parameter whose designated type is tagged:]}
 
@@ -2154,6 +2154,16 @@ D : Bit_Vector(M .. N) := (M .. N => True);         @RI[-- see @RefSecNum{Array 
 E : Bit_Vector(M .. N) := (@key(others) => True);
 F : String(1 .. 1) := (1 => 'F');  @RI[-- a one component aggregate: same as "F"]
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],Text=[@i{Example of array
+aggregate with defaulted others choice, with applicable index constraint
+provided by an enclosing record aggregate:}]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Buffer'(Size => 50, Pos => 1, Value => String'('x', @key(others) => <>))  --@RI[ see @RefSecNum{Discriminants}]]}
+@end{Example}
 @end{Examples}
 
 @begin{Incompatible83}
@@ -2221,7 +2231,7 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   @ChgAdded{Version=[2],Text=[Limited @nt{array_aggregate}s are allowed (since
   all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
 
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00318-02]}
   @ChgAdded{Version=[2],Text=[Fixed @nt{aggregate}s to use the subtype of
   the return object of a function, rather than the result subtype, because
   they can be different for an @nt{extended_return_statement}, and we want
@@ -3120,7 +3130,7 @@ in an arbitrary order.
 @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{To get conditional Leading}.
+  @ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{To get conditional Leading}
   The tested type is not scalar, and
   the value of the @nt<simple_expression> satisfies any constraints
   of the named subtype, and@Chg{Version=[2],New=[:],Old=[, if the type of

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:35 $}
+@Comment{$Date: 2005/05/25 23:29:13 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1213,12 +1213,13 @@ we don't want it to apply to type extensions that appear in an instance;
 components are not overloadable.
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03],ARef=[AI95-00397-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[If a @nt{subprogram_declaration}
-other than a protected subprogram, @nt{abstract_subprogram_declaration},
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If an
+@nt{abstract_subprogram_declaration}, @nt{null_procedure_declaration},
 @nt{subprogram_body}, @nt{subprogram_body_stub},
-@nt{subprogram_renaming_declaration}, or @nt{generic_instantiation} of a
-subprogram has an @nt{overriding_indicator}, then:]}
+@nt{subprogram_renaming_declaration}, @nt{generic_instantiation} of a
+subprogram, or @nt{subprogram_declaration}
+other than a protected subprogram has an @nt{overriding_indicator}, then:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}

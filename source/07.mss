@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:38 $}
+@Comment{$Date: 2005/05/25 23:29:12 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -933,14 +933,15 @@ The full view of the type might or might not be composite.
 A private extension is also composite,
 as is its full view.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 Declaring a private type with an @nt{unknown_discriminant_part} is a
 way of preventing clients from creating uninitialized objects of the
 type; they are then forced to initialize each object by calling some
 operation declared in the visible part of the package.
-If such a type is also limited, then no objects of the type can
-be declared outside the scope of the @nt{full_type_declaration}, restricting
-all object creation to the package defining the type. This allows
-complete control over all storage allocation for the type.
+@Chg{Version=[2],New=[],Old=[If such a type is also limited, then no objects
+of the type can be declared outside the scope of the @nt{full_type_declaration},
+restricting all object creation to the package defining the type. ]}This
+allows complete control over all storage allocation for the type.
 Objects of such a type can still be passed as parameters, however.
 @begin{Discussion}
 @Defn{generic contract/private type contract analogy}
@@ -1652,13 +1653,17 @@ extends beyond its physical representation. In some
 sense, values of a limited type cannot be divorced from
 their object. The value @i(is) the object.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 In Ada 83, in the two places where limited types were defined
 by the language, namely tasks and files, an implicit
 level of indirection was implied by the semantics to
 avoid the separation of the value from an associated
 object.
 In Ada 95, most limited types are passed by reference,
-and even return-ed by reference.
+and even return-ed by reference.@Chg{Version=[2],New=[ In Ada 2006,
+most limited types are built-in-place upon return, rather than returned
+by reference. Thus the object @lquotes@;identity@rquotes is part of the
+logical value of most limited types.],Old=[]}
 @end{Discussion}
 @begin{Honest}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00419-01]}
@@ -1854,10 +1859,10 @@ shall be constructed directly in the new object.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[For a @nt{function_call}, we only require
-@i{build-in-place}@Defn{build-in-place} for a limited type that would have
+@i{build-in-place}@Defn{build-in-place}
+for a limited type that would have
 been a return-by-reference type in Ada 95. We do this because
-@Chg{Version=[2],New=[],Old=[Tucker said so ]}we want to minimize disruption
-to Ada 95 implementations and users.]}
+we want to minimize disruption to Ada 95 implementations and users.]}
 @end{Discussion}
 @end{ImplReq}
 

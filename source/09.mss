@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:39 $}
+@Comment{$Date: 2005/05/25 23:29:14 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 
@@ -413,7 +413,9 @@ Old=[@RefSecNum(Task Information)]}).
    @key(entry) Shut_Down;
 @key(end) Server;
 
-@key(task) @key(type) Keyboard_Driver(ID : Keyboard_ID := New_ID) @key(is)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@key(task) @key(type) Keyboard_Driver(ID : Keyboard_ID := New_ID) @key(is)@Chg{Version=[2],New=[
+      @key(new) Serial_Device @key(with)  --@RI[ see @RefSecNum{Interface Types}]],Old=[]}
    @key(entry) Read (C : @key(out) Character);
    @key(entry) Write(C : @key(in)  Character);
 @key(end) Keyboard_Driver;
