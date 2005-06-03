@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/05/19 06:19:16 $}
+@Comment{$Date: 2005/05/28 06:01:53 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1756,7 +1756,7 @@ which would exclude them from being letters as defined in
 @ChgAdded{Version=[2],Text=[@Defn{ISO/IEC 14882:2003}
 @Defn{14882:2003, ISO/IEC standard}
 @Defn{C++ standard}
-ISO/IEC 14882:2003 @i{Programming languages @em C++}.]}
+ISO/IEC 14882:2003, @i{Programming languages @em C++}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This title is also missing the

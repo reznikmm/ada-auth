@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/19 06:19:25 $}
+@Comment{$Date: 2005/05/28 06:02:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @LabeledClause{The Package System}
 
@@ -3428,16 +3428,16 @@ execution cannot be erroneous.]}
 @key(generic)
     @key(type) Msg_Type(<>) @key(is private);
 @key(package) Network_IO @key(is)
-    @RI[-- Connect/Disconnect are used to establish the stream]
+    --@RI[ Connect/Disconnect are used to establish the stream]
     @key(procedure) Connect(...);
     @key(procedure) Disconnect(...);
 
-    @RI[-- Send/Receive transfer messages across the network]
+    --@RI[ Send/Receive transfer messages across the network]
     @key(procedure) Send(X : @key[in] Msg_Type);
     @key(function) Receive @key(return) Msg_Type;
 @key(private)
     @key(type) Network_Stream @key(is new) Root_Stream_Type @key(with) ...
-    @key(procedure) Read(...);  @RI[-- define Read/Write for Network_Stream]
+    @key(procedure) Read(...);  --@RI[ define Read/Write for Network_Stream]
     @key(procedure) Write(...);
 @key(end) Network_IO;
 

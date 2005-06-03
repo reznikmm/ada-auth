@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:37 $}
+@Comment{$Date: 2005/05/28 06:02:04 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -208,20 +208,20 @@ expanded name.
 expanded name associated with an entity declared in the task body:
 @begin{Example}
 @key(task body) Compute @key(is)
-   Sum : Integer := 0;                       @RI[-- Compute.Sum]
+   Sum : Integer := 0;                       --@RI[ Compute.Sum]
 @key(begin)
- Outer:                                      @RI[-- Compute.Outer]
-   @key(for) I @key(in) 1..10 @key(loop)     @RI[-- Compute.Outer.I]
-    Blk:                                     @RI[-- Compute.Blk]
+ Outer:                                      --@RI[ Compute.Outer]
+   @key(for) I @key(in) 1..10 @key(loop)     --@RI[ Compute.Outer.I]
+    Blk:                                     --@RI[ Compute.Blk]
       @key(declare)
-         Sum : Integer := 0;                 @RI[-- Compute.Blk.Sum]
+         Sum : Integer := 0;                 --@RI[ Compute.Blk.Sum]
       @key(begin)
          @key(accept) Ent(I : out Integer; J : in Integer) @key(do)
-                                             @RI[-- Compute.Ent.I, Compute.Ent.J]
+                                             --@RI[ Compute.Ent.I, Compute.Ent.J]
             Compute.Ent.I := Compute.Outer.I;
-          Inner:                             @RI[-- Compute.Blk.Inner]
+          Inner:                             --@RI[ Compute.Blk.Inner]
             @key(for) J @key(in) 1..10 @key(loop)
-                                             @RI[-- Compute.Blk.Inner.J]
+                                             --@RI[ Compute.Blk.Inner.J]
                Sum := Sum + Compute.Blk.Inner.J * Compute.Ent.J;
             @key(end loop) Inner;
          @key(end) Ent;
@@ -337,7 +337,7 @@ For example:
 
   X : R1;
 @key[begin]
-  F.all := X;  @RI[-- Right hand side helps resolve left hand side]
+  F.all := X;  --@RI[ Right hand side helps resolve left hand side]
 @end{Example}
 @end{ImplNote}
 @end{Resolution}

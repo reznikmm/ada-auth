@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:11 $}
+@Comment{$Date: 2005/05/28 06:02:01 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -150,10 +150,10 @@ Error @\@RI(-- the direct name of an exception) @\(see @RefSecNum(Exception Decl
 @leading@keepnext@i{Examples of dereferences:}
 @end{Wide}
 @begin{Example}@tabclear()@tabset(P19)
-Next_Car.@key[all]@\@RI[--  explicit dereference denoting the object designated by]
-               @\@RI[--  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
-Next_Car.Owner @\@RI[--  selected component with implicit dereference;]
-               @\@RI[--  same as Next_Car.@key[all].Owner]
+Next_Car.@key[all]@\--@RI[  explicit dereference denoting the object designated by]
+               @\--@RI[  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
+Next_Car.Owner @\--@RI[  selected component with implicit dereference;]
+               @\--@RI[  same as Next_Car.@key[all].Owner]
 @end{Example}
 @end{Examples}
 
@@ -310,12 +310,12 @@ Constraint_Error is raised if this check fails.
 @Leading@keepnext@i(Examples of indexed components:)
 @begin{Example}
 @tabclear()@tabset(P64)
- My_Schedule(Sat)     @RI[--  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
- Page(10)             @RI[--  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
- Board(M, J + 1)      @RI[--  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
- Page(10)(20)         @RI[--  a component of a component @\(see @RefSecNum{Array Types})]
- Request(Medium)      @RI[--  an entry in a family of entries @\(see @RefSecNum{Task Units and Task Objects})]
- Next_Frame(L)(M, N)  @RI[--  a component of a function call @\(see @RefSecNum{Subprogram Declarations})]
+ My_Schedule(Sat)     --@RI[  a component of a one-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)             --@RI[  a component of a one-dimensional array @\(see @RefSecNum{Array Types})]
+ Board(M, J + 1)      --@RI[  a component of a two-dimensional array @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+ Page(10)(20)         --@RI[  a component of a component @\(see @RefSecNum{Array Types})]
+ Request(Medium)      --@RI[  an entry in a family of entries @\(see @RefSecNum{Task Units and Task Objects})]
+ Next_Frame(L)(M, N)  --@RI[  a component of a function call @\(see @RefSecNum{Subprogram Declarations})]
 @end{Example}
 @end{Examples}
 
@@ -406,13 +406,13 @@ component of the array A and has the corresponding component type.
 @Leading@keepnext@i(Examples of slices:)
 @begin{Example}
 @tabclear()@tabset(P58)
-  Stars(1 .. 15)        @RI[--  a slice of 15 characters @\(see @RefSecNum{String Types})]
-  Page(10 .. 10 + Size) @RI[--  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
-  Page(L)(A .. B)       @RI[--  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
-  Stars(1 .. 0)         @RI[--  a null slice @\(see @RefSecNum{String Types})]
-  My_Schedule(Weekday)  @RI[--  bounds given by subtype @\(see @RefSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
-  Stars(5 .. 15)(K)     @RI[--  same as Stars(K) @\(see @RefSecNum{String Types})]
-                        @RI[--  provided that K is in 5 .. 15]
+  Stars(1 .. 15)        --@RI[  a slice of 15 characters @\(see @RefSecNum{String Types})]
+  Page(10 .. 10 + Size) --@RI[  a slice of 1 + Size components @\(see @RefSecNum{Array Types})]
+  Page(L)(A .. B)       --@RI[  a slice of the array Page(L) @\(see @RefSecNum{Array Types})]
+  Stars(1 .. 0)         --@RI[  a null slice @\(see @RefSecNum{String Types})]
+  My_Schedule(Weekday)  --@RI[  bounds given by subtype @\(see @RefSecNum{Index Constraints and Discrete Ranges} and @RefSecNum{Enumeration Types})]
+  Stars(5 .. 15)(K)     --@RI[  same as Stars(K) @\(see @RefSecNum{String Types})]
+                        --@RI[  provided that K is in 5 .. 15]
 @end{Example}
 @end{Examples}
 
@@ -597,16 +597,16 @@ The exception Constraint_Error is raised if this check fails.
 @begin{Example}
 @tabclear()@tabset(P60)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
-  Tomorrow.Month     @RI[--  a record component @\(see @RefSecNum{Record Types})]
-  Next_Car.Owner     @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
-  Next_Car.Owner.Age @RI[--  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
-                     @RI[--  the previous two lines involve implicit dereferences]
-  Writer.Unit        @RI[--  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
-  Min_Cell(H).Value  @RI[--  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
-                     @RI[--  of the function call Min_Cell(H)]
-@Chg{Version=[2],New=<  Cashier.Append     @RI[--  a prefixed view of a procedure @\(see @RefSecNum{Interface Types})]
->,Old=<>}  Control.Seize      @RI[--  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
-  Pool(K).Write      @RI[--  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
+  Tomorrow.Month     --@RI[  a record component @\(see @RefSecNum{Record Types})]
+  Next_Car.Owner     --@RI[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
+  Next_Car.Owner.Age --@RI[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
+                     --@RI[  the previous two lines involve implicit dereferences]
+  Writer.Unit        --@RI[  a record component (a discriminant) @\(see @RefSecNum{Variant Parts and Discrete Choices})]
+  Min_Cell(H).Value  --@RI[  a record component of the result @\(see @RefSecNum{Subprogram Declarations})]
+                     --@RI[  of the function call Min_Cell(H)]
+@Chg{Version=[2],New=<  Cashier.Append     --@RI[  a prefixed view of a procedure @\(see @RefSecNum{Interface Types})]
+>,Old=<>}  Control.Seize      --@RI[  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
+  Pool(K).Write      --@RI[  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
 @end{Example}
 
 @begin{Wide}
@@ -614,12 +614,12 @@ The exception Constraint_Error is raised if this check fails.
 @end{Wide}
 @begin{Example}
 @tabclear()@tabset(P67)
-  Key_Manager."<"      @RI[--  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
-  Dot_Product.Sum      @RI[--  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
-  Buffer.Pool          @RI[--  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
-  Buffer.Read          @RI[--  an entry of a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
-  Swap.Temp            @RI[--  a variable declared in a block statement @\(see @RefSecNum{Block Statements})]
-  Standard.Boolean     @RI[--  the name of a predefined type @\(see @RefSecNum{The Package Standard})]
+  Key_Manager."<"      --@RI[  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
+  Dot_Product.Sum      --@RI[  a variable declared in a function body @\(see @RefSecNum{Subprogram Declarations})]
+  Buffer.Pool          --@RI[  a variable declared in a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
+  Buffer.Read          --@RI[  an entry of a protected unit @\(see @RefSecNum{Example of Tasking and Synchronization})]
+  Swap.Temp            --@RI[  a variable declared in a block statement @\(see @RefSecNum{Block Statements})]
+  Standard.Boolean     --@RI[  the name of a predefined type @\(see @RefSecNum{The Package Standard})]
 @end{Example}
 @end{Examples}
 
@@ -840,14 +840,14 @@ conformant with the designated profile of the access type.
 @Leading@keepnext@i(Examples of attributes:)
 @begin{Example}
 @tabclear()@tabset(P64)
-Color'First        @RI[-- minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
-Rainbow'Base'First @RI[-- same as Color'First @\(see @RefSecNum{Enumeration Types})]
-Real'Digits        @RI[-- precision of the type Real @\(see @RefSecNum{Floating Point Types})]
-Board'Last(2)      @RI[-- upper bound of the second dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
-Board'Range(1)     @RI[-- index range of the first dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
-Pool(K)'Terminated @RI[-- True if task Pool(K) is terminated @\(see @RefSecNum{Task Units and Task Objects})]
-Date'Size          @RI[-- number of bits for records of type Date @\(see @RefSecNum{Record Types})]
-Message'Address    @RI[-- address of the record variable Message @\(see @RefSecNum{Discriminant Constraints})]
+Color'First        --@RI[ minimum value of the enumeration type Color @\(see @RefSecNum{Enumeration Types})]
+Rainbow'Base'First --@RI[ same as Color'First @\(see @RefSecNum{Enumeration Types})]
+Real'Digits        --@RI[ precision of the type Real @\(see @RefSecNum{Floating Point Types})]
+Board'Last(2)      --@RI[ upper bound of the second dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Board'Range(1)     --@RI[ index range of the first dimension of Board @\(see @RefSecNum{Index Constraints and Discrete Ranges})]
+Pool(K)'Terminated --@RI[ True if task Pool(K) is terminated @\(see @RefSecNum{Task Units and Task Objects})]
+Date'Size          --@RI[ number of bits for records of type Date @\(see @RefSecNum{Record Types})]
+Message'Address    --@RI[ address of the record variable Message @\(see @RefSecNum{Discriminant Constraints})]
 @end{Example}
 @end{Examples}
 
@@ -1043,10 +1043,10 @@ rules for expanded names (see @RefSecNum{Selected Components}).
 @Leading@keepnext@i(Examples of literals:)
 @begin{Example}
 @tabclear()@tabset(P16)
-3.14159_26536 @\@RI[--  a real literal]
-1_345 @\@RI[--  an integer literal]
-'A' @\@RI[--  a character literal]
-"Some Text" @\@RI[--  a string literal ]
+3.14159_26536 @\--@RI[  a real literal]
+1_345 @\--@RI[  an integer literal]
+'A' @\--@RI[  a character literal]
+"Some Text" @\--@RI[  a string literal ]
 @end{Example}
 @end{Examples}
 
@@ -1527,7 +1527,7 @@ be in the same order as in the @nt<known_discriminant_part>.
 @begin{Examples}
 @Leading@keepnext@i(Example of a record aggregate with positional associations:)
 @begin{Example}
-(4, July, 1776)                                       @RI[--  see @RefSecNum{Record Types} ]
+(4, July, 1776)                                       --@RI[  see @RefSecNum{Record Types} ]
 @end{Example}
 
 @begin{Wide}
@@ -1537,7 +1537,7 @@ be in the same order as in the @nt<known_discriminant_part>.
 (Day => 4, Month => July, Year => 1776)
 (Month => July, Day => 4, Year => 1776)
 
-(Disk, Closed, Track => 5, Cylinder => 12)            @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
+(Disk, Closed, Track => 5, Cylinder => 12)            --@RI[  see @RefSecNum{Variant Parts and Discrete Choices}]
 (Unit => Disk, Status => Closed, Cylinder => 9, Track => 1)
 @end{Example}
 
@@ -1548,15 +1548,15 @@ several choices:)
 @end{Wide}
 @begin{Example}
 @tabclear()@tabset(P50)
-(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) @\@RI[--  see @RefSecNum{Incomplete Type Declarations}]
+(Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) @\--@RI[  see @RefSecNum{Incomplete Type Declarations}]
 
- @RI[--  The allocator is evaluated twice: Succ and Pred designate different cells]
-
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[(Value => 0, Succ|Pred => <>) @\@RI[--  see @RefSecNum{Incomplete Type Declarations}]],Old=[]}
+ --@RI[  The allocator is evaluated twice: Succ and Pred designate different cells]
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[ @RI[--  Succ and Pred will be set to @key{null}]],Old=[]}
+@Chg{Version=[2],New=[(Value => 0, Succ|Pred => <>) @\--@RI[  see @RefSecNum{Incomplete Type Declarations}]],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@Chg{Version=[2],New=[ --@RI[  Succ and Pred will be set to @key{null}]],Old=[]}
 
 @end{Example}
 
@@ -1740,7 +1740,7 @@ Painted_Point'(Point @key{with} Red)
 
 (Expression @key{with} Left => 1.2, Right => 3.4)
 Addition'(Binop @key{with null record})
-             @RI[-- presuming Binop is of type Binary_Operation]
+             --@RI[ presuming Binop is of type Binary_Operation]
 @end(example)
 
 @end{Examples}
@@ -2115,27 +2115,27 @@ an array with a single component.
 @Leading@keepnext@i(Examples of array aggregates with positional associations:)
 @begin{Example}
 (7, 9, 5, 1, 3, 2, 4, 8, 6, 0)
-Table'(5, 8, 4, 1, @key(others) => 0)  @RI[--  see @RefSecNum{Array Types} ]
+Table'(5, 8, 4, 1, @key(others) => 0)  --@RI[  see @RefSecNum{Array Types} ]
 @end{Example}
 
 @begin{Wide}
 @leading@keepnext@i(Examples of array aggregates with named associations:)
 @end{Wide}
 @begin{Example}
-(1 .. 5 => (1 .. 8 => 0.0))      @RI[--  two-dimensional]
-(1 .. N => @key(new) Cell)             @RI[--  N new cells, in particular for N = 0]
+(1 .. 5 => (1 .. 8 => 0.0))      --@RI[  two-dimensional]
+(1 .. N => @key(new) Cell)             --@RI[  N new cells, in particular for N = 0]
 
 Table'(2 | 4 | 10 => 1, @key(others) => 0)
-Schedule'(Mon .. Fri => True,  @key(others) => False)  @RI[--  see @RefSecNum{Array Types}]
+Schedule'(Mon .. Fri => True,  @key(others) => False)  --@RI[  see @RefSecNum{Array Types}]
 Schedule'(Wed | Sun  => False, @key(others) => True)
-Vector'(1 => 2.5)                                @RI[--  single-component vector]
+Vector'(1 => 2.5)                                --@RI[  single-component vector]
 @end{Example}
 
 @begin{Wide}
 @leading@keepnext@i(Examples of two-dimensional array aggregates:)
 @end{Wide}
 @begin{Example}
-@RI[-- Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
+--@RI[ Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
 
 ((1.1, 1.2, 1.3), (2.1, 2.2, 2.3))
 (1 => (1.1, 1.2, 1.3), 2 => (2.1, 2.2, 2.3))
@@ -2146,13 +2146,13 @@ Vector'(1 => 2.5)                                @RI[--  single-component vector
 @leading@keepnext@i(Examples of aggregates as initial values:)
 @end{Wide}
 @begin{Example}
-A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        @RI[-- A(1)=7, A(10)=0]
-B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        @RI[-- B(1)=0, B(10)=1]
-C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); @RI[-- C'Last(1)=5, C'Last(2)=8]
+A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        --@RI[ A(1)=7, A(10)=0]
+B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        --@RI[ B(1)=0, B(10)=1]
+C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); --@RI[ C'Last(1)=5, C'Last(2)=8]
 
-D : Bit_Vector(M .. N) := (M .. N => True);         @RI[-- see @RefSecNum{Array Types}]
+D : Bit_Vector(M .. N) := (M .. N => True);         --@RI[ see @RefSecNum{Array Types}]
 E : Bit_Vector(M .. N) := (@key(others) => True);
-F : String(1 .. 1) := (1 => 'F');  @RI[-- a one component aggregate: same as "F"]
+F : String(1 .. 1) := (1 => 'F');  --@RI[ a one component aggregate: same as "F"]
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
@@ -2385,31 +2385,33 @@ or return the value of the object.
 @begin{Examples}
 @Leading@keepnext@i(Examples of primaries:)
 @begin{Example}
-@Trailing@;4.0                @RI[--  real literal]
-Pi                 @RI[--  named number]
-(1 .. 10 => 0)     @RI[--  array aggregate]
-Sum                @RI[--  variable]
-Integer'Last       @RI[--  attribute]
-Sine(X)            @RI[--  function call]
-Color'(Blue)       @RI[--  qualified expression]
-Real(M*N)          @RI[--  conversion]
-(Line_Count + 10)  @RI[--  parenthesized expression ]
+@Trailing@;4.0                --@RI[  real literal]
+Pi                 --@RI[  named number]
+(1 .. 10 => 0)     --@RI[  array aggregate]
+Sum                --@RI[  variable]
+Integer'Last       --@RI[  attribute]
+Sine(X)            --@RI[  function call]
+Color'(Blue)       --@RI[  qualified expression]
+Real(M*N)          --@RI[  conversion]
+(Line_Count + 10)  --@RI[  parenthesized expression ]
 @end{Example}
 
 @leading@keepnext@i(Examples of expressions:)
 @begin{Example}
-Volume                      @RI[-- primary]
-@key(not) Destroyed               @RI[-- factor]
-2*Line_Count                @RI[-- term  ]
--4.0                        @RI[-- simple expression]
--4.0 + A                    @RI[-- simple expression]
-B**2 - 4.0*A*C              @RI[-- simple expression]
-Password(1 .. 3) = "Bwv"    @RI[-- relation]
-Count @key(in) Small_Int          @RI[-- relation]
-Count @key(not) @key(in) Small_Int      @RI[-- relation]
-Index = 0 @key(or) Item_Hit       @RI[-- expression]
-(Cold @key(and) Sunny) @key(or) Warm    @RI[-- expression (parentheses are required)]
-A**(B**C)                   @RI[-- expression (parentheses are required)]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+Volume                      --@RI[ primary]
+@key(not) Destroyed               --@RI[ factor]
+2*Line_Count                --@RI[ term  ]
+-4.0                        --@RI[ simple expression]
+-4.0 + A                    --@RI[ simple expression]
+B**2 - 4.0*A*C              --@RI[ simple expression]@Chg{Version=[2],New=[
+R*Sin(@unicode<952>)*Cos(@unicode<966>)             --@RI[ simple expression]],Old=[]}
+Password(1 .. 3) = "Bwv"    --@RI[ relation]
+Count @key(in) Small_Int          --@RI[ relation]
+Count @key(not) @key(in) Small_Int      --@RI[ relation]
+Index = 0 @key(or) Item_Hit       --@RI[ expression]
+(Cold @key(and) Sunny) @key(or) Warm    --@RI[ expression (parentheses are required)]
+A**(B**C)                   --@RI[ expression (parentheses are required)]
 @end{Example}
 @end{Examples}
 
@@ -2569,14 +2571,14 @@ as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
 @begin{Examples}
 @Leading@keepnext@i(Examples of precedence:)
 @begin{Example}
-@key(not) Sunny @key(or) Warm    @RI[--  same as (not Sunny) or Warm]
-X > 4.0 @key(and) Y > 0.0  @RI[--  same as (X > 4.0) and (Y > 0.0)]
+@key(not) Sunny @key(or) Warm    --@RI[  same as (not Sunny) or Warm]
+X > 4.0 @key(and) Y > 0.0  --@RI[  same as (X > 4.0) and (Y > 0.0)]
 
--4.0*A**2            @RI[--  same as @en@;(4.0 * (A**2))]
-@key(abs)(1 + A) + B       @RI[--  same as (abs (1 + A)) + B]
-Y**(-3)              @RI[--  parentheses are necessary]
-A / B * C            @RI[--  same as (A/B)*C]
-A + (B + C)          @RI[--  evaluate B + C before adding it to A ]
+-4.0*A**2            --@RI[  same as @en@;(4.0 * (A**2))]
+@key(abs)(1 + A) + B       --@RI[  same as (abs (1 + A)) + B]
+Y**(-3)              --@RI[  parentheses are necessary]
+A / B * C            --@RI[  same as (A/B)*C]
+A + (B + C)          --@RI[  evaluate B + C before adding it to A ]
 @end{Example}
 @end{Examples}
 
@@ -2730,14 +2732,14 @@ following truth table:
 @Leading@keepnext@i(Examples of logical operators:)
 @begin{Example}
 Sunny @key(or) Warm
-Filter(1 .. 10) @key(and) Filter(15 .. 24)   @RI[--   see @RefSecNum{Index Constraints and Discrete Ranges} ]
+Filter(1 .. 10) @key(and) Filter(15 .. 24)   --@RI[   see @RefSecNum{Index Constraints and Discrete Ranges} ]
 @end{Example}
 
 @begin{Wide}
 @leading@keepnext@i(Examples of short-circuit control forms:)
 @end{Wide}
 @begin{Example}
-Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   @RI[--   see @RefSecNum{Incomplete Type Declarations}]
+Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   --@RI[   see @RefSecNum{Incomplete Type Declarations}]
 N = 0 @key(or) @key(else) A(N) = Hit_Value
 @end{Example}
 @end{Examples}
@@ -3197,18 +3199,18 @@ membership tests:)
 @begin{Example}
 X /= Y
 
-"" < "A" @key(and) "A" < "Aa"     @RI[--  True]
-"Aa" < "B" @key(and) "A" < "A  "  @RI[--  True]
+"" < "A" @key(and) "A" < "Aa"     --@RI[  True]
+"Aa" < "B" @key(and) "A" < "A  "  --@RI[  True]
 
-My_Car = @key(null)               @RI[-- true if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
-My_Car = Your_Car           @RI[-- true if we both share the same car]
-My_Car.@key[all] = Your_Car.@key[all]   @RI[-- true if the two cars are identical]
+My_Car = @key(null)               --@RI[ true if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
+My_Car = Your_Car           --@RI[ true if we both share the same car]
+My_Car.@key[all] = Your_Car.@key[all]   --@RI[ true if the two cars are identical]
 
-N @key(not) @key(in) 1 .. 10            @RI[-- range membership test]
-Today @key(in) Mon .. Fri         @RI[-- range membership test]
-Today @key(in) Weekday            @RI[-- subtype membership test (see @RefSecNum{Enumeration Types})]
-Archive @key(in) Disk_Unit        @RI[-- subtype membership test (see @RefSecNum{Variant Parts and Discrete Choices})]
-Tree.@key(all) @key(in) Addition'Class  @RI[-- class membership test (see @RefSecNum{Type Extensions})]
+N @key(not) @key(in) 1 .. 10            --@RI[ range membership test]
+Today @key(in) Mon .. Fri         --@RI[ range membership test]
+Today @key(in) Weekday            --@RI[ subtype membership test (see @RefSecNum{Enumeration Types})]
+Archive @key(in) Disk_Unit        --@RI[ subtype membership test (see @RefSecNum{Variant Parts and Discrete Choices})]
+Tree.@key(all) @key(in) Addition'Class  --@RI[ class membership test (see @RefSecNum{Type Extensions})]
 @end{Example}
 @end{Examples}
 
@@ -3371,11 +3373,11 @@ performed can be followed by a conditional addition of the modulus.
 @begin{Examples}
 @Leading@keepnext@i(Examples of expressions involving binary adding operators:)
 @begin{Example}
-Z + 0.1      @RI[--  Z has to be of a real type ]
+Z + 0.1      --@RI[  Z has to be of a real type ]
 
-"A" & "BCD"  @RI[--  concatenation of two string literals]
-'A' & "BCD"  @RI[--  concatenation of a character literal and a string literal]
-'A' & 'A'    @RI[--  concatenation of two character literals ]
+"A" & "BCD"  --@RI[  concatenation of two string literals]
+'A' & "BCD"  --@RI[  concatenation of a character literal and a string literal]
+'A' & 'A'    --@RI[  concatenation of two character literals ]
 @end{Example}
 @end{Examples}
 
@@ -3684,10 +3686,10 @@ I : Integer := 1;
 J : Integer := 2;
 K : Integer := 3;
 
-X : Real := 1.0;                      @RI[--     see @RefSecNum{Floating Point Types}]
+X : Real := 1.0;                      --@RI[     see @RefSecNum{Floating Point Types}]
 Y : Real := 2.0;
 
-F : Fraction := 0.25;                 @RI[--     see @RefSecNum{Fixed Point Types}]
+F : Fraction := 0.25;                 --@RI[     see @RefSecNum{Fixed Point Types}]
 G : Fraction := 0.5;
 @end{Example}
 @begin{Example}

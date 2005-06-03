@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:12 $}
+@Comment{$Date: 2005/05/28 06:02:05 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -51,19 +51,14 @@ function.]
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
-@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<overriding_indicator>,Old=<>}>,
-rhs="@Chg{Version=[2],New=<[@key{not}] @key{overriding}>,Old=<>}"}
-
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
 @Syn{lhs=<subprogram_declaration>,rhs="@Chg{Version=[2],New=<
     [@Syn2{overriding_indicator}]
     >,Old=<>}@Syn2{subprogram_specification};"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
-@Syn{lhs=<abstract_subprogram_declaration>,rhs="@Chg{Version=[2],New=<
-    [@Syn2{overriding_indicator}]
-    >,Old=<>}@Syn2{subprogram_specification} @key{is} @key{abstract};"}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00348-01]}
+@DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<abstract_subprogram_declaration>}>,
+rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{subprogram_specification} @key{is} @key{abstract};>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<procedure_specification>,Old=<>}>,
@@ -184,7 +179,8 @@ requires a completion:
 (see @RefSecNum(Renaming Declarations)), or a @key(pragma) Import
 (see @RefSecNum{Interfacing Pragmas})].
 @Redundant[A completion is not allowed
-for an @nt<abstract_subprogram_declaration>@Chg{Version=[2],New=[ or
+for an @nt<abstract_subprogram_declaration>@Chg{Version=[2],New=[ (see
+@RefSecNum{Abstract Types and Subprograms}) or a
 @nt{null_procedure_declaration} (see @RefSecNum{Null Procedures})],Old=[]}.]
 @begin(Ramification)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
@@ -290,21 +286,26 @@ The @i(subtypes of a profile) are:
 @Redundant[@Defn2{Term=[types], Sec=(of a profile)}
 The @i{types of a profile} are the types of those subtypes.]
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
 @Redundant[A subprogram declared by an
 @nt<abstract_subprogram_declaration>
 is abstract; a subprogram declared by a @nt<subprogram_declaration>
-is not. See @RefSec{Abstract Types and Subprograms}.]
+is not. See @RefSec{Abstract Types and Subprograms}.@Chg{Version=[2],New=[
+Similarly, a procedure defined by a
+@nt{null_procedure_declaration} is a null procedure; a procedure declared by
+a @nt{subprogram_declaration} is not. See @RefSec{Null Procedures}.],Old=[]}]
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
 @ChgAdded{Version=[2],Text=[@Redundant[An @nt{overriding_indicator} is used to
-indicate whether overriding is intended. See @RefSec{Visibility}.]]}
+indicate whether overriding is intended. See @RefSec{Overriding Indicators}.]]}
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=[elaboration], Sec=(subprogram_declaration)}
-@PDefn2{Term=[elaboration], Sec=(abstract_subprogram_declaration)}
-The elaboration of a @nt{subprogram_declaration}
-or an @nt{abstract_subprogram_declaration} has no effect.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+@PDefn2{Term=[elaboration], Sec=(subprogram_declaration)}@Chg{Version=[2],New=[],Old=[
+@PDefn2{Term=[elaboration], Sec=(abstract_subprogram_declaration)}]}
+The elaboration of a @nt{subprogram_declaration}@Chg{Version=[2],New=[ or
+an @nt{abstract_subprogram_declaration}],Old=[]} has no effect.
 @end{RunTime}
 
 @begin{Notes}
@@ -380,30 +381,38 @@ The syntax rules for @nt{defining_designator} and
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-The syntax for @nt{overriding_indicator} is new.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Subprograms now allow @nt{overriding_indicator}s for better error checking
+  of overriding.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[An optional @nt{null_exclusion} can be used in a formal
-parameter declaration. Similarly, an optional @nt{null_exclusion} can be used
-in a function result.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[An optional @nt{null_exclusion} can be used in a
+  formal parameter declaration. Similarly, an optional @nt{null_exclusion} can
+  be used in a function result.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[The return type of a function can be an
-anonymous access type.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[The return type of a function can be an
+  anonymous access type.]}
 @end{Extend95}
 
 @begin{DiffWord95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
-  @ChgAdded{Version=[2],Text=[Split the production for @nt{subprogram_specification}
-  in order to make the declaration of null procedures (see
-  @RefSecNum{Null Procedures}) easier.]}
-
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00254-01]}
   @ChgAdded{Version=[2],Text=[A description of the purpose of anonymous
   access-to-subprogram parameters and the definition of the profile of
   subprograms containing them was added.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+  @ChgAdded{Version=[2],Text=[Split the production for
+  @nt{subprogram_specification} in order to make the declaration
+  of null procedures (see @RefSecNum{Null Procedures}) easier.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+  @ChgAdded{Version=[2],Text=[Moved the @SyntaxTitle and
+  @RuntimeTitle for @nt{abstract_subprogram_declaration} to
+  @RefSecNum{Abstract Types and Subprograms}, so that the syntax
+  and semantics are together. This also keeps abstract and null
+  subprograms similar.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
   @ChgAdded{Version=[2],Text=[Revised to allow @nt{other_format} characters
@@ -2026,11 +2035,11 @@ the nominal subtype of the return object. If there is an @nt{expression}, it
 is evaluated and converted to the nominal subtype (which might raise
 Constraint_Error @em see @RefSecNum{Type Conversions}@PDefn2{Term=[implicit subtype conversion],Sec=(function return)});
 the return object is created and the converted value becomes the initial value
-of the return object; otherwise, the return object is initialized by default as
-for a stand-alone object of its nominal subtype (see @RefSecNum{Object Declarations}).
-If the nominal subtype is indefinite, the return object is constrained by its
-initial value. The @nt{handled_@!sequence_@!of_@!statements}, if any, is then
-executed.]}
+of the return object; otherwise, the return object is created and initialized
+by default as for a stand-alone object of its nominal subtype (see
+@RefSecNum{Object Declarations}). If the nominal subtype is indefinite, the
+return object is constrained by its initial value. The
+@nt{handled_@!sequence_@!of_@!statements}, if any, is then executed.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2260,8 +2269,9 @@ the @nt{function_call} denotes a constant view of the return object.],Old=[]}
 @ChgAdded{Version=[2],Text=[If the result subtype of a function is
 unconstrained, and a call on the function is used to provide the initial value
 of an object with a constrained nominal subtype, Constraint_Error may be raised
-at the point of the call while elaborating a @nt{return_subtype_indication} or
-evaluating the @nt{expression} of a return statement within the function, if it
+at the point of the call (after abandoning the execution of the function body)
+if, while elaborating a @nt{return_subtype_indication} or
+evaluating the @nt{expression} of a return statement within the function, it
 is determined that the value of the result will violate the constraint of this
 object's subtype.]}
 @begin{Reason}
@@ -2675,8 +2685,8 @@ place of a procedure specification.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
-@ChgAdded{Version=[2],Text=[The elaboration of a
-@nt{null_procedure_declaration} has no effect.]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[elaboration], Sec=(null_procedure_declaration)}
+The elaboration of a @nt{null_procedure_declaration} has no effect.]}
 @end{RunTime}
 
 @begin{Examples}

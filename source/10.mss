@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:15 $}
+@Comment{$Date: 2005/05/28 06:02:11 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -779,25 +779,25 @@ declarative region of package Standard.
 @begin{Examples}
 @leading@keepnext@i{Examples of library units:}
 @begin{Example}
-@key[package] Rational_Numbers.IO @key[is]  @RI[-- public child of Rational_Numbers, see @RefSecNum{Package Specifications and Declarations}]
+@key[package] Rational_Numbers.IO @key[is]  --@RI[ public child of Rational_Numbers, see @RefSecNum{Package Specifications and Declarations}]
    @key[procedure] Put(R : @key[in]  Rational);
    @key[procedure] Get(R : @key[out] Rational);
 @key[end] Rational_Numbers.IO;
 
 @key[private procedure] Rational_Numbers.Reduce(R : @key[in out] Rational);
-                                @RI[-- private child of Rational_Numbers]
+                                --@RI[ private child of Rational_Numbers]
 
-@key[with] Rational_Numbers.Reduce;   @RI[-- refer to a private child]
+@key[with] Rational_Numbers.Reduce;   --@RI[ refer to a private child]
 @key[package body] Rational_Numbers @key[is]
    ...
 @key[end] Rational_Numbers;
 
 @key[with] Rational_Numbers.IO; @key[use] Rational_Numbers;
-@key[with] Ada.Text_io;               @RI[-- see @RefSecNum{Text Input-Output}]
-@key[procedure] Main @key[is]               @RI[-- a root library procedure]
+@key[with] Ada.Text_io;               --@RI[ see @RefSecNum{Text Input-Output}]
+@key[procedure] Main @key[is]               --@RI[ a root library procedure]
    R : Rational;
 @key[begin]
-   R := 5/3;                    @RI[-- construct a rational number, see @RefSecNum{Package Specifications and Declarations}]
+   R := 5/3;                    --@RI[ construct a rational number, see @RefSecNum{Package Specifications and Declarations}]
    Ada.Text_IO.Put("The answer is: ");
    IO.Put(R);
    Ada.Text_IO.New_Line;
@@ -805,7 +805,7 @@ declarative region of package Standard.
 
 @key[with] Rational_Numbers.IO;
 @key[package] Rational_IO @key[renames] Rational_Numbers.IO;
-                                @RI[-- a library unit renaming declaration]
+                                --@RI[ a library unit renaming declaration]
 @end{Example}
 
 Each of the above @nt{library_item}s can be submitted to the compiler

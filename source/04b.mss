@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:37 $}
+@Comment{$Date: 2005/05/28 06:02:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.15 $}
+@Comment{$Revision: 1.16 $}
 
 @LabeledClause{Type Conversions}
 
@@ -882,7 +882,7 @@ performed as above for a value conversion.
   subtype of the view is constrained if either the target subtype
   or the operand object is constrained,
   @Chg{New=[or if the target subtype is indefinite,],Old=[]}
-  or if the operand type is a descendant of the target type,
+  or if the operand type is a descendant of the target type@Chg{New=[],Old=[,]}
   and has discriminants that were not inherited from
   the target type;
 

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:13 $}
+@Comment{$Date: 2005/05/28 06:02:07 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1212,60 +1212,6 @@ The reason it says @lquotes@;overloadable declarations@rquotes@; is because
 we don't want it to apply to type extensions that appear in an instance;
 components are not overloadable.
 @end{Discussion}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03],ARef=[AI95-00397-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[If an
-@nt{abstract_subprogram_declaration}, @nt{null_procedure_declaration},
-@nt{subprogram_body}, @nt{subprogram_body_stub},
-@nt{subprogram_renaming_declaration}, @nt{generic_instantiation} of a
-subprogram, or @nt{subprogram_declaration}
-other than a protected subprogram has an @nt{overriding_indicator}, then:]}
-
-@begin{Itemize}
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[the operation shall be a primitive operation for some
-type;],Old=[]}
-
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[if the @nt{overriding_indicator} is @key{overriding},
-then the operation shall override a homograph at the point of the declaration
-or body;],Old=[]}
-
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[if the @nt{overriding_indicator} is @key{not overriding},
-then the operation shall not override any homograph (at any point).],Old=[]}
-@end{Itemize}
-
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[@PDefn{generic contract issue}In addition to the
-places where @LegalityTitle normally
-apply, these rules also apply in the private part of an instance of a generic
-unit.],Old=[]}
-
-@begin{Discussion}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The @Key{overriding} and @Key{not overriding} rules
-differ slightly. For @Key{overriding}, we want the indicator to reflect the
-overriding state at the point of the declaration; otherwise the indicator would
-be @LQuotes@;lying@RQuotes@;. Whether a homograph is implicitly declared after
-the declaration (see 7.3.1 to see how this can happen)
-has no impact on this check. However, @Key{not overriding} is different;
-@LQuotes@;lying@RQuotes@; would happen if a homograph declared later actually
-is overriding. So, we require this check to take into account later overridings.
-That can be implemented either by looking ahead, or by rechecking when
-additional operations are declared.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The @LQuotes@;no lying@RQuotes@; rules are
-needed to prevent a @nt{subprogram_declaration} and @nt{subprogram_body}
-from having contradictory @nt{overriding_indicator}s.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Rules for @nt{overriding_indicator}s of task and
-protected entries and of protected subprograms are found in
-@RefSecNum{Entries and Accept Statements}
-and @RefSecNum{Protected Units and Protected Objects}, respectively.]}
-@end{Discussion}
 @end{Legality}
 
 @begin{Notes}
@@ -1406,14 +1352,6 @@ case where this is not true:]}
 complex than they already are.],Old=[]}
 @end{Incompatible95}
 
-@begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-The rules for @nt{overriding_indicator} are new. These rules let the programmer
-state her overriding intentions to the compiler; if the compiler disagrees,
-an error will be produced rather than a hard to find bug.],Old=[]}
-@end{Extend95}
-
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0025],ARef=[AI95-00044-01]}
 @Chg{Version=[2],New=[@b<Corrigendum:> Clarified the overriding rules so that
@@ -1438,6 +1376,137 @@ is defined (see @RefSecNum{Compilation Units - Library Units}).],Old=[]}
 homograph of an implicitly declared generic child (see
 @RefSecNum{Compilation Units - Library Units}).],Old=[]}
 @end{DiffWord95}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Overriding Indicators]}
+
+@begin{Intro}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@ChgAdded{Version=[2],Text=[An @nt{overriding_indicator} is used to declare
+that an operation is intended to override (or not override) an inherited
+operation.]}
+@end{Intro}
+
+@begin{Syntax}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<overriding_indicator>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<[@key{not}] @key{overriding}>,Old=<>}"}
+@end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03],ARef=[AI95-00348-01],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If an
+@nt{abstract_subprogram_declaration}, @nt{null_procedure_declaration},
+@nt{subprogram_body}, @nt{subprogram_body_stub},
+@nt{subprogram_renaming_declaration}, @nt{generic_instantiation} of a
+subprogram, or @nt{subprogram_declaration}
+other than a protected subprogram has an @nt{overriding_indicator}, then:]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[the operation shall be a primitive operation for some
+type;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
+@key{overriding}, then the operation shall override a homograph at the point of
+the declaration or body;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
+@key{not overriding}, then the operation shall not override any homograph
+(at any point).]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@PDefn{generic contract issue}In addition to the
+places where @LegalityTitle normally
+apply, these rules also apply in the private part of an instance of a generic
+unit.]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The @Key{overriding} and @Key{not overriding} rules
+differ slightly. For @Key{overriding}, we want the indicator to reflect the
+overriding state at the point of the declaration; otherwise the indicator would
+be @LQuotes@;lying@RQuotes@;. Whether a homograph is implicitly declared after
+the declaration (see 7.3.1 to see how this can happen)
+has no impact on this check. However, @Key{not overriding} is different;
+@LQuotes@;lying@RQuotes@; would happen if a homograph declared later actually
+is overriding. So, we require this check to take into account later overridings.
+That can be implemented either by looking ahead, or by rechecking when
+additional operations are declared.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The @LQuotes@;no lying@RQuotes@; rules are
+needed to prevent a @nt{subprogram_declaration} and @nt{subprogram_body}
+from having contradictory @nt{overriding_indicator}s.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Rules for @nt{overriding_indicator}s of task and
+protected entries and of protected subprograms are found in
+@RefSecNum{Entries and Accept Statements}
+and @RefSecNum{Protected Units and Protected Objects}, respectively.]}
+@end{Discussion}
+@end{Legality}
+
+@begin{Examples}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The use of
+@nt{overriding_indicator}s allow the detection of errors at compile-time that
+otherwise might not be detected at all. For instance, we might declare a
+security queue derived from the Queue interface of 3.9.4 as:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Security_Queue @key{is new} Queue @key{with record} ...;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{overriding}
+@key{procedure} Append (Q : @key{in out} Security_Queue; Element : @key{in} Person_Name);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{overriding}
+@key{procedure} Remove_First (Q : @key{in out} Security_Queue; Element : @key{in} Person_Name);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{overriding}
+@key{function} Cur_Count (Q : @key{in} Security_Queue) @key{return} Natural;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{overriding}
+@key{function} Max_Count (Q : @key{in} Security_Queue) @key{return} Natural;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{not overriding}
+@key{procedure} Arrest (Q : @key{in out} Security_Queue; Element : @key{in} Person_Name);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The first four subprogram declarations guarantees
+that these subprograms will override the four subprograms inherited from the
+Queue interface. If a spelling error occurs in one of these declarations, an
+error will occur. Similarly, the declaration of Arrest guarantees that this is
+a new operation.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[In this case, the subprograms are abstract, so
+  spelling errors will get detected anyway. But for other subprograms
+  (especially when deriving from concrete types), the error may never be
+  detected, and a body other than the one the programmer intended might be
+  executed without warning. Thus our new motto: @lquotes@;Overriding
+  indicators @em don't derive a type without them!@rquotes]}
+@end{Discussion}
+@end{Examples}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @nt{Overriding_indicator}s are new. These let the
+  programmer state her overriding intentions to the compiler; if the compiler
+  disagrees, an error will be produced rather than a hard to find bug.]}
+@end{Extend95}
 
 
 @LabeledClause{Use Clauses}

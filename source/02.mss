@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/05/24 05:42:57 $}
+@Comment{$Date: 2005/05/28 06:01:54 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -639,7 +639,7 @@ a reserved word, or a @nt{numeric_literal} and an adjacent
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Defn{delimiter}
 A @i{delimiter} is either one of the following@Chg{Version=[2],New=[],Old=[ special]}
-characters
+characters@Chg{Version=[2],New=[:],Old=[]}
 @begin{Display}
 &@ @ @ @ '@ @ @ @ (@ @ @ @ )@ @ @ @ *@ @ @ @ +@ @ @ @ ,@ @ @ @ @en@ @ @ @ .@ @ @ @ /@ @ @ @ :@ @ @ @ ;@ @ @ @ <@ @ @ @ =@ @ @ @ >@ @ @ @ |
 @end{Display}
@@ -809,8 +809,8 @@ converted to upper case.
   are not considered equivalent to one another).]}
 @end(Discussion)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
-@ChgAdded{Version=[2],Text=[After applying these transformations, an identifier
-shall not be identical to a reserved word (in upper case).]}
+@ChgAdded{Version=[2],Text=[After applying these transformations, an
+@nt{identifier} shall not be identical to a reserved word (in upper case).]}
 @begin(ImplNote)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We match the reserved words after doing these
@@ -904,11 +904,19 @@ d@smldotlessi@;yarbak@smldotlessi@;r]}
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of identifiers:}
-@begin{Display}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@ChgNote{Old version:@begin{Display}
 Count      X    Get_Symbol   Ethelyn   Marion
 @Comment{Blank line}
 Snobol_4   X1   Page_Count    Store_Next_Item
-@end{Display}
+@end{Display}}
+@begin{Example}
+Count      X    Get_Symbol   Ethelyn   Marion
+Snobol_4   X1   Page_Count   Store_Next_Item@Chg{Version=[2],New=[
+@unicode(928)@unicode(955)@unicode(940)@unicode(964)@unicode(969)@unicode(957)      --@RI[ Plato]
+@unicode(1063)@unicode(1072)@unicode(1081)@unicode(1082)@unicode(1086)@unicode(1074)@unicode(1089)@unicode(1082)@unicode(1080)@unicode(1081)  --@RI[ Tchaikovsky]
+@unicode(952)  @unicode(966)        --@RI[ Angles]],Old=[]}
+@end{Example}
 @end{Examples}
 
 @begin{DiffWord83}
@@ -1005,12 +1013,17 @@ obtain the value of the @nt{decimal_literal} with the @nt{exponent}.
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of decimal literals:}
-@begin{Display}
+@ChgNote{ Old version: @begin{Display}
 @tabclear()@tabset(P31)
 12        0      1E6    123_456 @\--@i{  integer literals}
 @Comment{Blank line}
 12.0      0.0    0.456  3.14159_26 @\--@i{  real literals}
-@end{Display}
+@end{Display}}
+@begin{Example}
+12        0      1E6    123_456    --@RI{  integer literals}
+@Comment{Blank line}
+12.0      0.0    0.456  3.14159_26 --@RI{  real literals}
+@end{Example}
 @end{Examples}
 
 @begin{DiffWord83}
@@ -1077,12 +1090,17 @@ lower case or in upper case, with the same meaning.
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of based literals:}
-@begin{Display}
+@ChgNote{ Old version: @begin{Display}
 @tabclear()@tabset(P16, P45)
 2#1111_1111# @\16#FF#       016#0ff# @\--@i{  integer literals of value 255}
 16#E#E1     @\2#1110_0000#     @\--@i{  integer literals of value 224}
 16#F.FF#E+2 @\2#1.1111_1111_1110#E11 @\--@i{  real literals of value 4095.0}
-@end{Display}
+@end{Display}}
+@begin{Example}
+2#1111_1111#  16#FF#       016#0ff#   --@RI{  integer literals of value 255}
+16#E#E1       2#1110_0000#            --@RI{  integer literals of value 224}
+16#F.FF#E+2   2#1.1111_1111_1110#E11  --@RI{  real literals of value 4095.0}
+@end{Example}
 @end{Examples}
 
 @begin{DiffWord83}
@@ -1109,9 +1127,15 @@ of a character type. See @RefSecNum(Character Types).
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of character literals:}
-@begin{Display}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@ChgNote{ Orginal version: @begin{Display}
 'A'@ @ @ @ @ '*'@ @ @ @ @ '''@ @ @ @ @ '@ '
-@end{Display}
+@end{Display}}
+@begin{Example}
+'A'     '*'     '''     ' '@Chg{Version=[2],New=[
+'L'     '@Unicode(1051)'     '@Unicode(923)'    --@RI[ Various els.]
+'@Unicode(8734)'     '@Unicode(1488)'            --@RI[ Big numbers - infinity and aleph.]],Old=[]}
+@end{Example}
 @end{Examples}
 
 @begin{DiffWord83}
@@ -1170,7 +1194,8 @@ sequence of characters in a @nt{string_literal}.]}
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of string literals:}
-@begin{Display}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@ChgNote< Original version: @begin{Display}
 @tabclear()@tabset(P16)
 "Message of the day:"
 @comment{Blank line}
@@ -1178,7 +1203,17 @@ sequence of characters in a @nt{string_literal}.]}
 "@ "   "A"   """"     @\--@i{  three string literals of length 1}
 @comment{Blank line}
 "Characters such as $, %, and } are allowed in string literals"
-@end{Display}
+@end{Display}>
+@begin{Example}
+"Message of the day:"
+@comment{Blank line}
+""                    --@RI{  a null string literal}
+" "   "A"   """"      --@RI{  three string literals of length 1}
+@comment{Blank line}
+"Characters such as $, %, and } are allowed in string literals"
+"Archimedes said ""@unicode(917)@unicode(973)@unicode(961)@unicode(951)@unicode(954)@unicode(945)"""
+"Volume of cylinder (@pi@;r@latin1(178)h) = "
+@end{Example}
 @end{Examples}
 
 @begin{DiffWord83}
@@ -1222,7 +1257,7 @@ of a program; their sole purpose is the enlightenment of the human reader.
 
 @begin{Examples}
 @Leading@keepnext@i{Examples of comments:}
-@begin{Display}
+@ChgNote{Original version: @begin{Display}
 --@i{  the last sentence above echoes the Algol 68 report }
 @comment{Blank line}
 @key[end];  --@i{  processing of Line is complete }
@@ -1231,7 +1266,17 @@ of a program; their sole purpose is the enlightenment of the human reader.
 --@i{  two or more consecutive lines   }
 @comment{Blank line}
 ----------------@i{  the first two hyphens start the comment  }
-@end{Display}
+@end{Display}}
+@begin{Example}
+--@RI[  the last sentence above echoes the Algol 68 report ]
+@comment{Blank line}
+@key[end];  --@RI[  processing of Line is complete ]
+@comment{Blank line}
+--@RI[  a long comment may be split onto]
+--@RI[  two or more consecutive lines   ]
+@comment{Blank line}
+----------------@RI[  the first two hyphens start the comment  ]
+@end{Example}
 @end{Examples}
 
 @LabeledClause{Pragmas}

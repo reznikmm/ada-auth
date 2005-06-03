@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:14 $}
+@Comment{$Date: 2005/05/28 06:02:09 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 
@@ -424,7 +424,7 @@ Old=[@RefSecNum(Task Information)]}).
 @i{Examples of declarations of single tasks:}
 @begin{Example}
 @key(task) Controller @key(is)
-   @key(entry) Request(Level)(D : Item);  @RI[--  a family of entries]
+   @key(entry) Request(Level)(D : Item);  --@RI[  a family of entries]
 @key(end) Controller;
 
 @key(task) Parser @key(is)
@@ -432,7 +432,7 @@ Old=[@RefSecNum(Task Information)]}).
    @key(entry) Next_Action(A : @key(out) Parser_Action);
 @key(end);
 
-@key(task) User;  @RI[--  has no entries]
+@key(task) User;  --@RI[  has no entries]
 @end{Example}
 
 @begin{wide}
@@ -652,10 +652,10 @@ exception or because it is aborted
 @leading@keepnext@i{Example of task activation:}
 @begin{Example}
 @key(procedure) P @key(is)
-   A, B : Server;    @RI[--  elaborate the task objects A, B]
-   C    : Server;    @RI[--  elaborate the task object C]
+   A, B : Server;    --@RI[  elaborate the task objects A, B]
+   C    : Server;    --@RI[  elaborate the task object C]
 @key(begin)
-   @RI[--  the tasks A, B, C are activated together before the first statement]
+   --@RI[  the tasks A, B, C are activated together before the first statement]
    ...
 @key(end);
 @end{Example}
@@ -796,23 +796,23 @@ the abort of the task.
 @leading@keepnext@i{Example of task dependence:}
 @begin{Example}
 @key(declare)
-   @key(type) Global @key(is) @key(access) Server;        @RI[--  see @RefSecNum(Task Units and Task Objects)]
+   @key(type) Global @key(is) @key(access) Server;        --@RI[  see @RefSecNum(Task Units and Task Objects)]
    A, B : Server;
    G    : Global;@Softpage
 @key(begin)
-   @RI[--  activation of A and B]
+   --@RI[  activation of A and B]
    @key(declare)
       @key(type) Local @key(is) @key(access) Server;
-      X : Global := @key(new) Server;  @RI[--  activation of X.@key{all}]
-      L : Local  := @key(new) Server;  @RI[--  activation of L.@key{all}]
+      X : Global := @key(new) Server;  --@RI[  activation of X.@key{all}]
+      L : Local  := @key(new) Server;  --@RI[  activation of L.@key{all}]
       C : Server;@Softpage
    @key(begin)
-      @RI[--  activation of C]
-      G := X;  @RI[--  both G and X designate the same task object]
+      --@RI[  activation of C]
+      G := X;  --@RI[  both G and X designate the same task object]
       ...
-   @key(end;)  @RI[--  await termination of C and L.@key{all} (but not X.@key{all})]
+   @key(end;)  --@RI[  await termination of C and L.@key{all} (but not X.@key{all})]
    ...
-@key(end;)  @RI[--  await termination of A, B, and G.@key{all}]
+@key(end;)  --@RI[  await termination of A, B, and G.@key{all}]
 @end{Example}
 
 @end{Examples}
@@ -1352,7 +1352,7 @@ since an entry involves an implicit component @em the entry queue.
 @end{wide}
 @begin{Example}
 @key(protected) Shared_Array @key(is)
-   @RI[--  Index, Item, and Item_Array are global types]
+   --@RI[  Index, Item, and Item_Array are global types]
    @key(function)  Component    (N : @key(in) Index) return Item;
    @key(procedure) Set_Component(N : @key(in) Index; E : @key(in)  Item);
 @key(private)
@@ -2201,7 +2201,7 @@ when its parameters indicate that it cannot be handled immediately.
 @begin{Example}
 @key(entry) Read(V : @key(out) Item);
 @key(entry) Seize;
-@key(entry) Request(Level)(D : Item);  @RI[--  a family of entries]
+@key(entry) Request(Level)(D : Item);  --@RI[  a family of entries]
 @end{Example}
 
 @begin{Wide}
@@ -2630,11 +2630,11 @@ have been updated by an action performed from outside of a protected action.
 @begin{Examples}
 @leading@keepnext@i{Examples of entry calls:}
 @begin{Example}
-Agent.Shut_Down;                      @RI[--  see @RefSecNum(Task Units and Task Objects)]
-Parser.Next_Lexeme(E);                @RI[--  see @RefSecNum(Task Units and Task Objects)]
-Pool(5).Read(Next_Char);              @RI[--  see @RefSecNum(Task Units and Task Objects)]
-Controller.Request(Low)(Some_Item);   @RI[--  see @RefSecNum(Task Units and Task Objects)]
-Flags(3).Seize;                       @RI[--  see @RefSecNum(Protected Units and Protected Objects)]
+Agent.Shut_Down;                      --@RI[  see @RefSecNum(Task Units and Task Objects)]
+Parser.Next_Lexeme(E);                --@RI[  see @RefSecNum(Task Units and Task Objects)]
+Pool(5).Read(Next_Char);              --@RI[  see @RefSecNum(Task Units and Task Objects)]
+Controller.Request(Low)(Some_Item);   --@RI[  see @RefSecNum(Task Units and Task Objects)]
+Flags(3).Seize;                       --@RI[  see @RefSecNum(Protected Units and Protected Objects)]
 @end{Example}
 @end{Examples}
 
@@ -2837,10 +2837,10 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 @leading@keepnext@i{Examples of requeue statements:}
 @begin{Example}
 @key[requeue] Request(Medium) @key[with abort];
-                    @RI[-- requeue on a member of an entry family of the current task, see @RefSecNum{Task Units and Task Objects}]
+                    --@RI[ requeue on a member of an entry family of the current task, see @RefSecNum{Task Units and Task Objects}]
 
 @key[requeue] Flags(I).Seize;
-                    @RI[-- requeue on an entry of an array component, see @RefSecNum{Protected Units and Protected Objects}]
+                    --@RI[ requeue on an entry of an array component, see @RefSecNum{Protected Units and Protected Objects}]
 @end{Example}
 @end{Examples}
 
@@ -3191,7 +3191,7 @@ are given in @RefSec(Delay Accuracy).
 @begin{Examples}
 @leading@keepnext@i{Example of a relative delay statement:}
 @begin{example}
-@key(delay) 3.0;  @RI[-- delay 3.0 seconds]
+@key(delay) 3.0;  --@RI[ delay 3.0 seconds]
 @end{example}
 
 @begin{Wide}
@@ -3203,11 +3203,11 @@ are given in @RefSec(Delay Accuracy).
 @key(declare)
    @key(use) Ada.Calendar;
    Next_Time : Time := Clock + Period;
-                      @RI[-- Period is a global constant of type Duration]
+                      --@RI[ Period is a global constant of type Duration]
 @key(begin)
-   @key(loop)               @RI[-- repeated every Period seconds]
+   @key(loop)               --@RI[ repeated every Period seconds]
       @key(delay) @key(until) Next_Time;
-      ... @RI[-- perform some actions]
+      ... --@RI[ perform some actions]
       Next_Time := Next_Time + Period;
    @key(end) @key(loop;)
 @key(end;)
@@ -4103,9 +4103,9 @@ to have several open
           Process_Work_Item(Current_Work_Item);
       @key(or)
          @key(accept) Shut_Down;
-         @key(exit);       @RI[-- Premature shut down requested]
+         @key(exit);       --@RI[ Premature shut down requested]
       @key(or)
-         @key(terminate);  @RI[-- Normal shutdown at end of scope]
+         @key(terminate);  --@RI[ Normal shutdown at end of scope]
       @key(end) @key(select);
    @key(end) @key(loop);
 @key(end) Server;
@@ -4232,7 +4232,7 @@ meant.
    Controller.Request(Medium)(Some_Item);
 @key(or)
    @key(delay) 45.0;
-   @RI[--  controller too busy, try something else]
+   --@RI[  controller too busy, try something else]
 @key(end) @key(select);
 @end{Example}
 @end{Examples}
@@ -4301,7 +4301,7 @@ the entry, even if the conditional call is not selected.
          R.Seize;
          @key(return);
       @key(else)
-         @key(null);  @RI[--  busy waiting]
+         @key(null);  --@RI[  busy waiting]
       @key(end) @key(select);
    @key(end) @key(loop);
 @key(end);
@@ -4990,13 +4990,14 @@ following structure:
 @begin(Example)
 @key(task) Producer;
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(task body) Producer @key(is)
-   Char : Character;
+   @Chg{Version=[2],New=[Element : Person_Name; --@RI[ see @RefSecNum{Incomplete Type Declarations}]],Old=[Char : Character;]}
 @key(begin)
    @key(loop)
-      ... @RI[--  produce the next character Char]
-      Buffer.Write(Char);
-      @key(exit) @key(when) Char = ASCII.EOT;
+      ... --@RI[  produce the next @Chg{Version=[2],New=[person (for instance, simulating arrivals)],Old=[character Char]}]
+      Buffer.@Chg{Version=[2],New=[Append_Wait(Element)],Old=[Write(Char)]};
+      @key(exit) @key(when) @Chg{Version=[2],New=[Element = @key(null)],Old=[Char = ASCII.EOT]};
    @key(end) @key(loop);
 @key(end) Producer;
 @end(Example)
@@ -5006,49 +5007,101 @@ following structure:
 @begin(Example)
 @key(task) Consumer;
 
-@Trailing@key(task body) Consumer @key(is)
-   Char : Character;
+@Trailing@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}@key(task body) Consumer @key(is)
+   @Chg{Version=[2],New=[Element : Person_Name;],Old=[Char : Character;]}
 @key(begin)
    @key(loop)
-      Buffer.Read(Char);
-      @key(exit) @key(when) Char = ASCII.EOT;
-      ... @RI[--  consume the character Char]
+      Buffer.@Chg{Version=[2],New=[Remove_First_Wait(Element)],Old=[Read(Char)]};
+      @key(exit) @key(when) @Chg{Version=[2],New=[Element = @key(null)],Old=[Char = ASCII.EOT]};
+      ... --@RI[  consume the @Chg{Version=[2],New=[person (for instance, simulating serving a customer)],Old=[character Char]}]
    @key(end) @key(loop);
 @key(end) Consumer;
 @end(Example)
 
-@leading@;The buffer object contains an internal pool of characters managed in a
-round-robin fashion. The pool has two indices, an In_Index denoting the
-space for the next input character and an Out_Index denoting the space for
-the next output character.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+The buffer object contains an internal pool of
+@Chg{Version=[2],New=[people],Old=[characters]} managed in a round-robin
+fashion. The pool has two indices, an In_Index denoting the space for the next
+input @Chg{Version=[2],New=[element (person)],Old=[character]} and an Out_Index
+denoting the space for the next output
+@Chg{Version=[2],New=[element],Old=[character]}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Text=[The Buffer is defined as an extension of the
+Synchronized_Queue interface (see @RefSecNum{Interface Types}), and as such, is
+promising to implement the abstraction defined by that interface. By doing so,
+the Buffer can be passed to the Transfer class-wide operation defined for
+objects of a type covered by Queue'Class.]}
 
 @begin(Example)
-@key(protected) Buffer @key(is)
-   @key(entry) Read (C : @key(out) Character);
-   @key(entry) Write(C : @key(in)  Character);
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@key(protected) Buffer @key(is)@Chg{Version=[2],New=[ @key(new) Synchronized_Queue @key(with)  --@RI[ see @RefSecNum{Interface Types}]],Old=[]}
+   @key(entry) @Chg{Version=[2],New=[Append_Wait(Element : @key(in) Person_Name);],Old=[Read (C : @key(out) Character);]}
+   @key(entry) @Chg{Version=[2],New=[Remove_First_Wait(Element : @key(out) Person_Name);
+   @key(function) Cur_Count @key(return) Natural;
+   @key(function) Max_Count @key(return) Natural;
+   @key(procedure) Append(Element : @key(in) Person_Name);
+   @key(procedure) Remove_First(Element : @key(out) Person_Name);],Old=[Write(C : @key(in)  Character);]}
 @key(private)
-   Pool      : String(1 .. 100);
+   Pool      : @Chg{Version=[2],New=[Person_Name_Array],Old=[String]}(1 .. 100);
    Count     : Natural := 0;
    In_Index, Out_Index : Positive := 1;
 @key(end) Buffer;
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(protected body) Buffer @key(is)
-   @key(entry) Write(C : @key(in) Character)
+   @key(entry) @Chg{Version=[2],New=[Append_Wait(Element : @key(in) Person_Name)],Old=[Write(C : @key(in) Character)]}
       @key(when) Count < Pool'Length @key(is)
    @key(begin)
-      Pool(In_Index) := C;
+      @Chg{Version=[2],New=[Append(Element);],Old=[Pool(In_Index) := C;
+      In_Index := (In_Index @key(mod) Pool'Length) + 1;
+      Count    := Count + 1;]}
+   @key(end) @Chg{Version=[2],New=[Append_Wait],Old=[Write]};
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Text=[   @key(procedure) Append(Element : @key(in) Person_Name) @key(is)
+   @key(begin)
+      @key(if) Count = Pool'Length @key(then)
+         @key(raise) Queue_Error @key(with) "Buffer Full";  --@RI[ see @RefSecNum{Raise Statements}]
+      @key(end if);
+      Pool(In_Index) := Element;
       In_Index := (In_Index @key(mod) Pool'Length) + 1;
       Count    := Count + 1;
-   @key(end) Write;
+   @key(end) Append;]}
 
-   @key(entry) Read(C : @key(out) Character)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+   @key(entry) @Chg{Version=[2],New=[Remove_First_Wait(Element : @key(out) Person_Name)],Old=[Read(C : @key(out) Character)]}
       @key(when) Count > 0 @key(is)
    @key(begin)
-      C := Pool(Out_Index);
+      @Chg{Version=[2],New=[Remove_First(Element);],Old=[C := Pool(Out_Index);
+      Out_Index := (Out_Index @key(mod) Pool'Length) + 1;
+      Count     := Count - 1;]}
+   @key(end) @Chg{Version=[2],New=[Remove_First_Wait],Old=[Read;
+@key(end) Buffer]};
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Text=[   @key(procedure) Remove_First(Element : @key(out) Person_Name) @key(is)
+   @key(begin)
+      @key(if) Count = 0 @key(then)
+         @key(raise) Queue_Error @key(with) "Buffer Empty"; --@RI[ see @RefSecNum{Raise Statements}]
+      @key(end if);
+      Element := Pool(Out_Index);
       Out_Index := (Out_Index @key(mod) Pool'Length) + 1;
       Count     := Count - 1;
-   @key(end) Read;
-@key(end) Buffer;
+   @key(end) Remove_First;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Text=[   @key(function) Cur_Count @key(return) Natural @key(is)
+   @key(begin)
+       @key(return) Buffer.Count;
+   @key(end) Cur_Count;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Text=[   @key(function) Max_Count @key(return) Natural @key(is)
+   @key(begin)
+       @key(return) Pool'Length;
+   @key(end) Max_Count;
+@key(end) Buffer;]}
 @end(Example)
 
 @end{Examples}

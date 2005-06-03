@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:12 $}
+@Comment{$Date: 2005/05/28 06:02:06 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1563,11 +1563,11 @@ variables declared in the private part of a package.
 @begin{Examples}
 @leading@keepnext@i{Examples of deferred constant declarations:}
 @begin{Example}
-Null_Key : @key[constant] Key;      @RI[-- see @RefSecNum{Private Operations}]
+Null_Key : @key[constant] Key;      --@RI[ see @RefSecNum{Private Operations}]
 
 CPU_Identifier : @key[constant] String(1..8);
 @key[pragma] Import(Assembler, CPU_Identifier, Link_Name => "CPU_ID");
-                              @RI[-- see @RefSecNum{Interfacing Pragmas}]
+                              --@RI[ see @RefSecNum{Interfacing Pragmas}]
 @end{Example}
 @end{Examples}
 
@@ -2085,7 +2085,7 @@ or Finalize is applied to the containing object.
 
 @begin{StaticSem}
 @leading@keepnext@;The following language-defined library package exists:
-@begin{Example}@tabclear()@tabset(P22)@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
+@begin{Example}@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
 @key[package] Ada.Finalization @key[is]@ChildUnit{Parent=[Ada],Child=[Finalization]}
     @key[pragma] Preelaborate(Finalization);@Chg{New=[
     @key[pragma] Remote_Types(Finalization);],Old=[]}
@@ -2095,17 +2095,17 @@ or Finalize is applied to the containing object.
     @key{pragma} Preelaborable_Initialization(Controlled);],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
-    @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
-    @key(procedure) @AdaSubDefn{Adjust}@\(Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
-    @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
+    @key(procedure) @AdaSubDefn{Initialize} (Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
+    @key(procedure) @AdaSubDefn{Adjust}     (Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
+    @key(procedure) @AdaSubDefn{Finalize}   (Object : @key(in out) Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
     @key[type] @AdaTypeDefn{Limited_Controlled} @key[is abstract tagged limited private];@Chg{Version=[2],New=[
     @key{pragma} Preelaborable_Initialization(Limited_Controlled);],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
-    @key(procedure) @AdaSubDefn{Initialize}@\(Object : @key(in out) Limited_Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
-    @key(procedure) @AdaSubDefn{Finalize}@\(Object : @key(in out) Limited_Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
+    @key(procedure) @AdaSubDefn{Initialize} (Object : @key(in out) Limited_Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
+    @key(procedure) @AdaSubDefn{Finalize}   (Object : @key(in out) Limited_Controlled)@Chg{Version=[2],New=[ @key{is null}],Old=[]};
 @key(private)
     ... -- @RI{not specified by the language}
 @key[end] Ada.Finalization;
@@ -2496,7 +2496,7 @@ operations on an object of nonlimited controlled type provided that:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[any omitted Initialize call is not a call on a
-user-defined Initialize procedure, an]}
+user-defined Initialize procedure, and]}
 @begin{Honest}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This does not apply to any calls to a user-defined
@@ -2534,7 +2534,7 @@ if the implicit calls have additional external effects.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The goal of the above permissions is to allow
 typical dead assignment and dead variable removal algorithms to work for
-nonlimited controlled types. We require that lquotes@;pairs@rquotes@; of
+nonlimited controlled types. We require that @lquotes@;pairs@rquotes@; of
 Initialize/Adjust/Finalize operations are removed. (These aren't always pairs,
 which is why we talk about @lquotes@;any execution of the program@rquotes@;.)]}
 @end{Reason}
@@ -2651,7 +2651,7 @@ Leaving an execution happens immediately after its completion,
 except in the case of a @i{master}:
 the execution of
 a @Chg{Version=[2],New=[body other than a @nt{package_body};
-the execution of an @nt{statement};
+the execution of a @nt{statement};
 or the evaluation of an @nt{expression} or @nt{range} that is not part
 of an enclosing @nt{expression}, @nt{range}, or @nt{simple_statement}],
 Old=[@nt{task_body}, a @nt{block_statement},

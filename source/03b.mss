@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/24 05:43:00 $}
+@Comment{$Date: 2005/05/28 06:01:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @LabeledClause{Array Types}
 
@@ -298,7 +298,7 @@ is of its own unique type.
 @key(type) Vector     @key(is) @key(array)(Integer  @key(range) <>) @key(of) Real;
 @key(type) Matrix     @key(is) @key(array)(Integer  @key(range) <>, Integer @key(range) <>) @key(of) Real;
 @key(type) Bit_Vector @key(is) @key(array)(Integer  @key(range) <>) @key(of) Boolean;
-@key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; @RI[-- see @RefSecNum(Character Types)]
+@key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; --@RI[ see @RefSecNum(Character Types)]
 @end(Example)
 
 @begin{Wide}
@@ -319,9 +319,9 @@ Grid @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(1 .. 80, 1 .. 100) @key(o
 Mix  @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Color @key(range) Red .. Green) @key(of) Boolean;@Chg{Version=[2],New=[
 Msg_Table : @key(constant array)(Error_Code) @key(of access constant) String :=
       (Too_Big => @key(new) String'("Result too big"), Too_Small => ...);],Old=[]}
-Page @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Positive @key(range) <>) @key(of) Line :=  @RI[--  an array of arrays]
-  (1 | 50  => Line'(1 | Line'Last => '+', others => '-'),  @RI[-- see @RefSecNum(Array Aggregates)]
-   2 .. 49 => Line'(1 | Line'Last => '|', others => ' '));
+Page @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Positive @key(range) <>) @key(of) Line :=  --@RI[  an array of arrays]
+  (1 | 50  => Line'(1 | Line'Last => '+', @key(others) => '-'),  --@RI[ see @RefSecNum(Array Aggregates)]
+   2 .. 49 => Line'(1 | Line'Last => '|', @key(others) => ' '));
     --@RI[ Page is constrained by its initial value to (1..50)]
 @end(Example)
 @end{Examples}
@@ -473,9 +473,9 @@ array subtype match. See @RefSecNum(Type Conversions).
 @begin{Examples}
 @leading@keepnext@i(Examples of array declarations including an index constraint: )
 @begin(Example)
-Board     : Matrix(1 .. 8,  1 .. 8);  @RI[--  see @RefSecNum(Array Types)]
+Board     : Matrix(1 .. 8,  1 .. 8);  --@RI[  see @RefSecNum(Array Types)]
 Rectangle : Matrix(1 .. 20, 1 .. 30);
-Inverse   : Matrix(1 .. N,  1 .. N);  @RI[--  N need not be static ]
+Inverse   : Matrix(1 .. N,  1 .. N);  --@RI[  N need not be static ]
 
 Filter    : Bit_Vector(0 .. 31);
 @end(Example)
@@ -484,7 +484,7 @@ Filter    : Bit_Vector(0 .. 31);
 @leading@keepnext@i(Example of array declaration with a constrained array subtype: )
 @end{Wide}
 @begin(Example)
-My_Schedule : Schedule;  @RI[--  all arrays of type Schedule have the same bounds]
+My_Schedule : Schedule;  --@RI[  all arrays of type Schedule have the same bounds]
 @end(Example)
 
 @begin{Wide}
@@ -496,7 +496,7 @@ My_Schedule : Schedule;  @RI[--  all arrays of type Schedule have the same bound
       Image : String(1 .. Length);
    @key(end) @key(record);
 
-Null_Line : Var_Line(0);  @RI[--  Null_Line.Image is a null array]
+Null_Line : Var_Line(0);  --@RI[  Null_Line.Image is a null array]
 @end(Example)
 @end{Examples}
 
@@ -677,11 +677,11 @@ these ordering operators correspond to lexicographic order
 @TabClear()@TabSet(P50)
 Stars      : String(1 .. 120) := (1 .. 120 => '*' );
 Question   : @key(constant) String  := "How many characters?";
-@\@RI[-- Question'First = 1, Question'Last = 20]
-@\@RI[-- Question'Length = 20 (the number of characters)]
+@\--@RI[ Question'First = 1, Question'Last = 20]
+@\--@RI[ Question'Length = 20 (the number of characters)]
 
-Ask_Twice  : String  := Question & Question;@\@RI[-- constrained to (1..40)]
-Ninety_Six : @key(constant) Roman   := "XCVI";@\@RI[-- see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
+Ask_Twice  : String  := Question & Question;@\--@RI[ constrained to (1..40)]
+Ninety_Six : @key(constant) Roman   := "XCVI";@\--@RI[ see @RefSecNum(Character Types) and @RefSecNum(Array Types)]
 @end(Example)
 @end{Examples}
 
@@ -1384,7 +1384,7 @@ used only for discriminants defined by an @nt<access_definition>.
 @begin{Examples}
 @Leading@keepnext@i(Examples of discriminated types:)
 @begin(Example)
-@key(type) Buffer(Size : Buffer_Size := 100)  @key(is)        @RI[-- see @RefSecNum(Integer Types)]
+@key(type) Buffer(Size : Buffer_Size := 100)  @key(is)        --@RI[ see @RefSecNum(Integer Types)]
    @key(record)
       Pos   : Buffer_Size := 0;
       Value : String(1 .. Size);
@@ -1392,7 +1392,7 @@ used only for discriminants defined by an @nt<access_definition>.
 
 @key(type) Matrix_Rec(Rows, Columns : Integer) @key(is)
    @key(record)
-      Mat : Matrix(1 .. Rows, 1 .. Columns);       @RI[-- see @RefSecNum(Array Types)]
+      Mat : Matrix(1 .. Rows, 1 .. Columns);       --@RI[ see @RefSecNum(Array Types)]
    @key(end) @key(record);
 
 @key(type) Square(Side : Integer) @key(is) @key(new)
@@ -1413,7 +1413,7 @@ used only for discriminants defined by an @nt<access_definition>.
 @key(end) Worker;],Old=[@key(type) Item(Number : Positive) @key(is)
    @key(record)
       Content : Integer;
-      @RI[--  no component depends on the discriminant]
+      --@RI[  no component depends on the discriminant]
    @key(end) @key(record);]}
 @end(Example)
 @end{Examples}
@@ -1541,7 +1541,8 @@ In addition to the places where @LegalityTitle@; normally apply
 these rules apply also in the private part of an instance
 of a generic unit. In a generic body, this rule is checked presuming all
 formal access types of the generic might be general access types, and all
-untagged discriminated formal types of the generic might have defaults.
+untagged discriminated formal types of the generic might have
+@nt{default_expression}s for its discriminants.
 @PDefn{generic contract issue}],
 Old=[there is a place within the
 immediate scope of the designated subtype where the designated subtype's view
@@ -1649,12 +1650,12 @@ in extensions that are not constrained to any particular value.
 @begin{Examples}
 @Leading@keepnext@i{Examples (using types declared above in clause @RefSecNum(Discriminants)):}
 @begin(Example)
-Large   : Buffer(200);  @RI[--  constrained, always 200 characters]
-                        @RI[--   (explicit discriminant value)]
-Message : Buffer;       @RI[--  unconstrained, initially 100 characters]
-                        @RI[--   (default discriminant value)]
-Basis   : Square(5);    @RI[--  constrained, always 5 by 5]
-Illegal : Square;       @RI[--  illegal, a Square has to be constrained]
+Large   : Buffer(200);  --@RI[  constrained, always 200 characters]
+                        --@RI[   (explicit discriminant value)]
+Message : Buffer;       --@RI[  unconstrained, initially 100 characters]
+                        --@RI[   (default discriminant value)]
+Basis   : Square(5);    --@RI[  constrained, always 5 by 5]
+Illegal : Square;       --@RI[  illegal, a Square has to be constrained]
 @end(Example)
 @end{Examples}
 
@@ -2092,7 +2093,7 @@ New=[],Old=[, unless the record type is limited]}.
 Tomorrow, Yesterday : Date;
 A, B, C : Complex;
 
-@RI[-- both components of A, B, and C are implicitly initialized to zero ]
+--@RI[ both components of A, B, and C are implicitly initialized to zero ]
 @end(Example)
 @end{Examples}
 

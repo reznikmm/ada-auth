@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:08 $}
+@Comment{$Date: 2005/05/28 06:01:55 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1992,7 +1992,8 @@ Size        : Integer @key(range) 0 .. 10_000 := 0;
 Sorted      : Boolean := False;
 Color_Table : @key(array)(1 .. Max) @key(of) Color;
 Option      : Bit_Vector(1 .. 10) := (@key(others) => True);
-Hello       : @Chg{Version=[2],New=[@key(aliased)],Old=[@key(constant)]} String := "Hi, world.";
+Hello       : @Chg{Version=[2],New=[@key(aliased)],Old=[@key(constant)]} String := "Hi, world.";@Chg{Version=[2],New=[
+@unicode(952), @unicode(966)        : Float @b<range> -@pi .. +@pi;],Old=[]}
 @end(Example)
 
 @begin{Wide}
@@ -2145,12 +2146,12 @@ The elaboration of a @nt<number_declaration> has no effect.
 @begin{Examples}
 @Leading@keepnext@i(Examples of number declarations:)
 @begin(Example)
-Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   @RI[-- a real number (see @RefSecNum{The Numerics Packages})]
+Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   --@RI[ a real number (see @RefSecNum{The Numerics Packages})]
 
-Max           : @key(constant) := 500;                   @RI[-- an integer number]
-Max_Line_Size : @key(constant) := Max/6                  @RI[-- the integer 83]
-Power_16      : @key(constant) := 2**16;                 @RI[-- the integer 65_536]
-One, Un, Eins : @key(constant) := 1;                     @RI[-- three different names for 1]
+Max           : @key(constant) := 500;                   --@RI[ an integer number]
+Max_Line_Size : @key(constant) := Max/6                  --@RI[ the integer 83]
+Power_16      : @key(constant) := 2**16;                 --@RI[ the integer 65_536]
+One, Un, Eins : @key(constant) := 1;                     --@RI[ three different names for 1]
 @end(Example)
 @end{Examples}
 
@@ -2723,14 +2724,14 @@ A @nt{derived_type_definition}, however, never defines an interface type.]}
 @begin{Examples}
 @Leading@keepnext@i(Examples of derived type declarations:)
 @begin(Example)
-@key(type) Local_Coordinate @key(is) @key(new) Coordinate;   @RI[--  two different types]
-@key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu;  @RI[--  see @RefSecNum(Enumeration Types)]
-@key(type) Counter @key(is) @key(new) Positive;              @RI[--  same range as Positive ]
+@key(type) Local_Coordinate @key(is) @key(new) Coordinate;   --@RI[  two different types]
+@key(type) Midweek @key(is) @key(new) Day @key(range) Tue .. Thu;  --@RI[  see @RefSecNum(Enumeration Types)]
+@key(type) Counter @key(is) @key(new) Positive;              --@RI[  same range as Positive ]
 
-@key(type) Special_Key @key(is) @key(new) Key_Manager.Key;   @RI[--  see @RefSecNum(Private Operations)]
-  @RI[-- the inherited subprograms have the following specifications: ]
-  @RI[--         procedure Get_Key(K : out Special_Key);]
-  @RI[--         function "<"(X,Y : Special_Key) return Boolean;]
+@key(type) Special_Key @key(is) @key(new) Key_Manager.Key;   --@RI[  see @RefSecNum(Private Operations)]
+  --@RI[ the inherited subprograms have the following specifications: ]
+  --@RI[         procedure Get_Key(K : out Special_Key);]
+  --@RI[         function "<"(X,Y : Special_Key) return Boolean;]
 @end(Example)
 @end{Examples}
 
@@ -2995,7 +2996,8 @@ then @i(T1) is called an @i(ancestor) of @i(T2).
 @Defn2{Term=[ultimate ancestor], Sec=(of a type)}
 @Defn2{Term=[ancestor], Sec=(ultimate)}
 @Chg{Version=[2],New=[An],Old=[The]} @i(ultimate ancestor) of a type
-is @Chg{Version=[2],New=[an],Old=[the]} ancestor of the type that is not
+is @Chg{Version=[2],New=[an],Old=[the]} ancestor of
+@Chg{Version=[2],New=[that],Old=[the]} type that is not
 @Chg{Version=[2],New=[itself ],Old=[]}a descendant of any other
 type.@Chg{Version=[2],New=[ Every untagged type
 has a unique ultimate ancestor.],Old=[]}
@@ -4014,9 +4016,9 @@ Constraint_Error.
 -10 .. 10
 X .. X + 1
 0.0 .. 2.0*Pi
-Red .. Green     @RI[-- see @RefSecNum{Enumeration Types}]
-1 .. 0           @RI[-- a null range]
-Table'Range      @RI[-- a range attribute reference (see @RefSecNum{Array Types})]
+Red .. Green     --@RI[ see @RefSecNum{Enumeration Types}]
+1 .. 0           --@RI[ a null range]
+Table'Range      --@RI[ a range attribute reference (see @RefSecNum{Array Types})]
 
 @end{Example}
 @Leading@keepnext@i(Examples of range constraints:)
@@ -4202,14 +4204,14 @@ the ambiguity (see @RefSecNum(Qualified Expressions)).
 @key(type) Gender @key(is) (M, F);
 @key(type) Level  @key(is) (Low, Medium, Urgent);
 @key(type) Color  @key(is) (White, Red, Yellow, Green, Blue, Brown, Black);
-@key(type) Light  @key(is) (Red, Amber, Green); @RI[-- Red and Green are overloaded]
+@key(type) Light  @key(is) (Red, Amber, Green); --@RI[ Red and Green are overloaded]
 
 @key(type) Hexa   @key(is) ('A', 'B', 'C', 'D', 'E', 'F');
 @key(type) Mixed  @key(is) ('A', 'B', '*', B, None, '?', '%');
 
 @key(subtype) Weekday @key(is) Day   @key(range) Mon .. Fri;
 @key(subtype) Major   @key(is) Suit  @key(range) Hearts .. Spades;
-@key(subtype) Rainbow @key(is) Color @key(range) Red .. Blue;  @RI[--  the Color Red, not the Light]
+@key(subtype) Rainbow @key(is) Color @key(range) Red .. Blue;  --@RI[  the Color Red, not the Light]
 @end(Example)
 @end{Examples}
 
@@ -4917,8 +4919,8 @@ signed integer types match "@key(type) T @key(is range) <>;"
 @key(subtype) Column_Ptr  @key(is) Line_Size @key(range) 1 .. 10;
 @key(subtype) Buffer_Size @key(is) Integer   @key(range) 0 .. Max;
 
-@key(type) Byte        @key(is) @key(mod) 256; @RI[-- an unsigned byte]
-@key(type) Hash_Index  @key(is) @key(mod) 97;  @RI[-- modulus is prime]
+@key(type) Byte        @key(is) @key(mod) 256; --@RI[ an unsigned byte]
+@key(type) Hash_Index  @key(is) @key(mod) 97;  --@RI[ modulus is prime]
 @end(Example)
 @end{Examples}
 
@@ -5091,7 +5093,7 @@ are satisfied (in the absence of an exception) by these attributes:
 @begin{Examples}
 @Leading@keepnext@i(Examples of attributes of discrete subtypes: )
 @begin(Example)
-@RI[--  For the types and subtypes declared in subclause @RefSecNum(Enumeration Types) the following hold: ]
+--@RI[  For the types and subtypes declared in subclause @RefSecNum(Enumeration Types) the following hold: ]
 
 --  Color'First   = White,   Color'Last   = Black
 --  Rainbow'First = Red,     Rainbow'Last = Blue
@@ -5470,7 +5472,7 @@ Overflow_Checks, never Range_Checks.
 @key(type) Real @key(is) @key(digits) 8;
 @key(type) Mass @key(is) @key(digits) 7 @key(range) 0.0 .. 1.0E35;
 
-@key(subtype) Probability @key(is) Real @key(range) 0.0 .. 1.0;   @RI[--   a subtype with a smaller range]
+@key(subtype) Probability @key(is) Real @key(range) 0.0 .. 1.0;   --@RI[   a subtype with a smaller range]
 @end(Example)
 @end{Examples}
 

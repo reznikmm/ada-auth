@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:10 $}
+@Comment{$Date: 2005/05/28 06:01:59 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -295,7 +295,7 @@ of the generic body result in distinct tags.
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @key[is]
-    @Chg{Version=[2],New=[@key[pragma] Preelaborate (Tags);
+    @Chg{Version=[2],New=[@key[pragma] Preelaborate(Tags);
     ],Old=[]}@key[type] @AdaTypeDefn{Tag} @key[is] @key[private];
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
@@ -770,7 +770,7 @@ Tags.Generic_Dispatching_Constructor is sometimes known as a
   @key(end record);
 
 @key(type) Expression @key(is tagged null record);
-  @RI[-- Components will be added by each extension]
+  --@RI[ Components will be added by each extension]
 @end(Example)
 @end{Examples}
 
@@ -1108,28 +1108,28 @@ from the parent type or declared in the
   @key(record)
     Paint : Color := White;
   @key(end record);
-    @RI[-- Components X and Y are inherited]
+    --@RI[ Components X and Y are inherited]
 
 Origin : @key(constant) Painted_Point := (X | Y => 0.0, Paint => Black);
 
 @key(type) Literal @key(is new) Expression @key(with)
-  @key(record)                 @RI[-- a leaf in an Expression tree]
+  @key(record)                 --@RI[ a leaf in an Expression tree]
     Value : Real;
   @key(end record);
 
 @key(type) Expr_Ptr @key(is access all) Expression'Class;
-                               @RI[-- see @RefSecNum(Access Types)]
+                               --@RI[ see @RefSecNum(Access Types)]
 
 @key(type) Binary_Operation @key(is new) Expression @key(with)
-  @key(record)                 @RI[-- an internal node in an Expression tree]
+  @key(record)                 --@RI[ an internal node in an Expression tree]
     Left, Right : Expr_Ptr;
   @key(end record);
 
 @key(type) Addition @key(is new) Binary_Operation @key(with null record);
 @key(type) Subtraction @key(is new) Binary_Operation @key(with null record);
-  @RI[-- No additional components needed for these extensions]
+  --@RI[ No additional components needed for these extensions]
 
-Tree : Expr_Ptr :=         @RI[-- A tree representation of @lquotes@;5.0 + (13.0@en@;7.0)@rquotes@;]
+Tree : Expr_Ptr :=         --@RI[ A tree representation of @lquotes@;5.0 + (13.0@en@;7.0)@rquotes@;]
    @key(new) Addition'(
       Left  => @key(new) Literal'(Value => 5.0),
       Right => @key(new) Subtraction'(
@@ -1526,7 +1526,7 @@ If all of the controlling operands @Chg{Version=[2],New=[(if any) ],Old=[]}are
 tag-indeterminate, then:
   @begin(inneritemize)
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00239-01],ARef=[AI95-00416-01]}
-    If the call has a controlling result@Chg{Version=[2],New=[ or a controlling
+    If the call has a controlling result@Chg{Version=[2],New=[ or controlling
     access result],Old=[]} and is itself@Chg{Version=[2],New=[, or designates,],Old=[]}
     a (possibly parenthesized or qualified)
     controlling operand of an enclosing call on a dispatching operation
@@ -1787,6 +1787,14 @@ This means that we only have to disallow nondispatching calls
 on abstract subprograms (dispatching calls will never reach them).
 @end{MetaRules}
 
+@begin{Syntax}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03],ARef=[AI95-00348-01]}
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<abstract_subprogram_specification>,Old=<>}>,
+rhs="@Chg{Version=[2],New=<
+    [@Syn2{overriding_indicator}]
+    @Syn2{subprogram_specification} @key{is} @key{abstract};>,Old=<>}"}
+@end{Syntax}
+
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[@Defn{abstract type}
@@ -1822,13 +1830,14 @@ Static Semantics paragraph, but I won't move them, as it's not worth the time.}
   and this tag will necessarily be different from T'Tag.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00348-01]}
 @Defn{abstract subprogram}
 @Defn2{Term=[subprogram], Sec=(abstract)}
 A subprogram declared by an @nt{abstract_subprogram_declaration}
-(see @RefSecNum{Subprogram Declarations}) @Chg{Version=[2],New=[or declared
-by a @nt{formal_abstract_subprogram_declaration} (see
-@RefSecNum{Formal Subprograms}) ],Old=[]}is an @i{abstract subprogram}.
+@Chg{Version=[2],New=[or declared by a
+@nt{formal_abstract_subprogram_declaration} (see @RefSecNum{Formal Subprograms})],
+Old=[(see @RefSecNum{Subprogram Declarations})]}
+is an @i{abstract subprogram}.
 If it is a primitive subprogram of a tagged type,
 then the tagged type shall be abstract.
 @begin{Ramification}
@@ -2138,6 +2147,12 @@ actual subprogram can be abstract.],Old=[]}
 @end{Ramification}
 @end{Legality}
 
+@begin{Runtime}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[elaboration], Sec=(abstract_subprogram_declaration)}
+The elaboration of an @nt{abstract_subprogram_declaration} has no effect.]}
+@end{Runtime}
+
 @begin{Notes}
 Abstractness is not inherited; to declare an abstract type,
 the reserved word @key[abstract] has to be used
@@ -2208,25 +2223,30 @@ but then clients of the package would not have visibility to T.
 @end{Notes}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-It is not necessary to override functions with a controlling result
-for a null extension. This makes it easier to derive a tagged type
-to complete a private type.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  It is not necessary to override functions with a controlling result
+  for a null extension. This makes it easier to derive a tagged type
+  to complete a private type.]}
 @end{Extend95}
 
 @begin{Diffword95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[Updated the wording to reflect the addition of
-interface types (see @RefSecNum{Interface Types}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[Updated the wording to reflect the addition of
+  interface types (see @RefSecNum{Interface Types}).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
-@Chg{Version=[2],New=[Updated the wording to reflect the addition of
-abstract formal subprograms (see @RefSecNum{Formal Subprograms}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+  @ChgAdded{Version=[2],Text=[Updated the wording to reflect the addition of
+  abstract formal subprograms (see @RefSecNum{Formal Subprograms}).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00334-01]}
-@Chg{Version=[2],New=[Clarified the wording of shall-be-overridden so that it
-clearly applies to abstract predefined equality.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00334-01]}
+  @ChgAdded{Version=[2],Text=[The wording of shall-be-overridden was clarified
+  so that it clearly applies to abstract predefined equality.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+  @ChgAdded{Version=[2],Text=[Moved the syntax and elaboration rule for
+  @nt{abstract_subprogram_declaration} here, so the syntax and most of the
+  semantics are together (which is consistent with null procedures).]}
 @end{Diffword95}
 
 
@@ -2292,7 +2312,7 @@ class-wide type) is a protected object.]}
 @Defn{protected tagged type}
 @Redundant[A task or protected type derived from an interface is a tagged type.]
 Such a tagged type is called a @i<synchronized> tagged
-type as are synchronized interfaces and private extensions derived from
+type, as are synchronized interfaces and private extensions derived from
 synchronized interfaces.]}
 
 @begin{TheProof}
@@ -2422,7 +2442,7 @@ interface and synchronized interface extending it:}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Queue_Error : @key{exception};
---@RI[ Append raises Queue_Error if Count(Q) = Max_Count(Q)]}
+--@RI[ Append raises Queue_Error if Count(Q) = Max_Count(Q)]
 --@RI[ Remove_First raises Queue_Error if Count(Q) = 0]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2688,8 +2708,8 @@ either by the designated subtype, or by its initial value.]]}
 @key(type) T2 @key(is new) T1 @key(with) ...;
 @key(procedure) P(X : @key(access) T2) @key(is)
 @key(begin)
-    P(T1(X.@key(all))'Access);  @RI[-- hand off to T1's P]
-    . . .     @RI[-- now do extra T2-specific processing]
+    P(T1(X.@key(all))'Access);  --@RI[ hand off to T1's P]
+    . . .     --@RI[ now do extra T2-specific processing]
 @key(end) P;
 @end{Example}
 
@@ -3114,7 +3134,7 @@ can be applied to access types
 @leading@keepnext@i{Example of an access subtype:}
 @end{Wide}
 @begin{Example}
-@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  @RI[--  see @RefSecNum{Variant Parts and Discrete Choices}]
+@key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  --@RI[  see @RefSecNum{Variant Parts and Discrete Choices}]
 @end{Example}
 
 @begin{Wide}
@@ -3529,7 +3549,7 @@ all types declared prior to it in the same @nt<declarative_part>
 @begin{Examples}
 @Leading@keepnext@i(Example of a recursive type:)
 @begin(Example)
-@key(type) Cell;  @RI[--  incomplete type declaration]
+@key(type) Cell;  --@RI[  incomplete type declaration]
 @key(type) Link @key(is) @key(access) Cell;
 
 @key(type) Cell @key(is)
@@ -4819,7 +4839,7 @@ comparison.@end{ramification}
 @begin{Examples}
 @Leading@keepnext@i{Example of use of the Access attribute:}
 @begin{Example}
-Martha : Person_Name := @key[new] Person(F);       @RI[-- see @RefSecNum{Incomplete Type Declarations}]
+Martha : Person_Name := @key[new] Person(F);       --@RI[ see @RefSecNum{Incomplete Type Declarations}]
 Cars   : @key[array] (1..2) @key[of] @key[aliased] Car;
    ...
 Martha.Vehicle := Cars(1)'Access;

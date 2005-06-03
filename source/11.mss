@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:16 $}
+@Comment{$Date: 2005/05/28 06:02:13 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -270,11 +270,11 @@ that are propagated by the @nt{sequence_of_@!statement}s.]
 @leading@keepnext@i{Example of an exception handler:}
 @begin{Example}
 @key[begin]
-   Open(File, In_File, "input.txt");   @RI[-- see @RefSecNum{File Management}]
+   Open(File, In_File, "input.txt");   --@RI[ see @RefSecNum{File Management}]
 @key[exception]
    @key[when] E : Name_Error =>
       Put("Cannot open input file : ");
-      Put_Line(Exception_Message(E));  @RI[-- see @RefSecNum{The Package Exceptions}]
+      Put_Line(Exception_Message(E));  --@RI[ see @RefSecNum{The Package Exceptions}]
       @key[raise];
 @key[end];
 @end{Example}
