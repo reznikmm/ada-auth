@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:09 $}
+@Comment{$Date: 2005/06/03 05:41:43 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 
@@ -279,7 +279,7 @@ inherited by the type declared by a
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[the inherited subprogram shall be overridden with a
+@ChgAdded{Version=[2],Text=[the inherited subprogram is overridden with a
 primitive subprogram of the task type, in which case the overriding subprogram
 shall be subtype conformant with the inherited subprogram and not abstract;
 or@Defn2{Term=[subtype conformance],Sec=(required)}]}
@@ -391,7 +391,7 @@ of the unit.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 A task type is a limited type (see @RefSecNum(Limited Types)),
 and hence @Chg{Version=[2],New=[precludes use of @nt{assignment_statement}s and],
-Old=[has neither an assignment operation nor]} nor predefined equality operators.
+Old=[has neither an assignment operation nor]} predefined equality operators.
 If an application needs to store and exchange task identities, it
 can do so by defining an access type designating the corresponding
 task objects and by using access values for identification purposes.
@@ -542,7 +542,7 @@ mode @key{in})],Old=[]}
 of a single declarative region@Chg{Version=[2],
 New=[],Old=[ (including subcomponents of the declared objects)]}
 are activated together.
-@Chg{Version=[2],New=[All tasks that are part or coextentions of a single
+@Chg{Version=[2],New=[All tasks that are part or coextensions of a single
 object that is not a stand-alone object are activated together.],Old=[Similarly,
 all tasks created by the evaluation of a single @nt<allocator>
 are activated together. The activation of a task is associated
@@ -3285,8 +3285,7 @@ environment (such as POSIX).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Calendar],Child=[Time_Zones]}
-@key(package) Ada.Calendar.Time_Zones @key(is)]}
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Calendar],Child=[Time_Zones]}@key(package) Ada.Calendar.Time_Zones @key(is)]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Time zone manipulation:]]}
@@ -4188,9 +4187,9 @@ the target object of the call and the entry to be called.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[execution], Sec=(timed_entry_call)}
-For the execution of a @nt{timed_entry_call}, the @SynI(entry_)@nt<name>
-@Chg{Version=[2],New=[, @Syni{procedure_}@nt{name},
-or @Syni{procedure_}@nt{prefix} ,],Old=[]} and actual parameters are evaluated
+For the execution of a @nt{timed_entry_call}, the @SynI(entry_)@nt<name>@Chg{Version=[2],
+New=[, @Syni{procedure_}@nt{name}, or @Syni{procedure_}@nt{prefix} ,],Old=[]}
+and actual parameters are evaluated
 as for a simple entry call (see @RefSecNum(Entry Calls))@Chg{Version=[2],New=[
 or procedure call (see @RefSecNum{Subprogram Calls})],Old=[]}.
 The expiration time
@@ -4199,7 +4198,7 @@ for the call is determined by evaluating
 the @i(delay_)@nt<expression> of the
 @nt<delay_alternative>@Chg{Version=[2],New=[. If the call is an entry call or
 a call on a procedure implemented by an entry,],Old=[;]}
-the entry call is then issued.@Chg{Version=[2],New=[Otherwise, the call
+the entry call is then issued.@Chg{Version=[2],New=[ Otherwise, the call
 proceeds as described in @RefSecNum{Subprogram Calls} for a procedure call,
 followed by the @nt{sequence_of_statements} of the @nt{entry_call_alternative},
 and the @nt{delay_alternative} @nt{sequence_of_statements} is ignored.],Old=[]}
@@ -4354,7 +4353,7 @@ For the execution of an @nt{asynchronous_select}
 whose @nt<triggering_statement> is @Chg{Version=[2],
 New=[a @nt<procedure_or_entry_call>],Old=[an @nt<entry_call_statement>]},
 the @Syni(entry_)@nt<name>@Chg{Version=[2],New=[, @Syni{procedure_}@nt{name},
-or @Syni{procedure_}@nt{prefix} ,],Old=[]} and actual parameters are evaluated
+or @Syni{procedure_}@nt{prefix}, ],Old=[]} and actual parameters are evaluated
 as for a simple entry call (see @RefSecNum(Entry Calls))@Chg{Version=[2],New=[
 or procedure call (see @RefSecNum{Subprogram Calls}).
 If the call is an entry call or a call on a procedure implemented by an
@@ -4496,7 +4495,7 @@ causes a @nt{sequence_of_statements} to be aborted.]
 @PDefn2{Term=[expected type], Sec=(abort_statement task_name)}
 Each @SynI{task_}@nt{name} is expected to be of any task
 type@Chg{Version=[2],New=[ or task interface type],Old=[]}@Redundant[;
-they need not all be of the same task type.]
+they need not all be of the same @Chg{Version=[2],New=[],Old=[task]} type.]
 
 @end{Resolution}
 

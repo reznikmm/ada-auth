@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:13 $}
+@Comment{$Date: 2005/06/03 05:41:45 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -558,8 +558,7 @@ are not handled by the handlers of the
 @leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01],ARef=[AI95-00400-01]}
-@ChildUnit{Parent=[Ada],Child=[Exceptions]}
-@key[package] Ada.Exceptions @key[is]@Chg{Version=[2],New=[
+@ChildUnit{Parent=[Ada],Child=[Exceptions]}@key[package] Ada.Exceptions @key[is]@Chg{Version=[2],New=[
     @key[pragma] Preelaborate(Exceptions);],Old=[]}
     @key[type] @AdaTypeDefn{Exception_Id} @key[is] @key[private];@Chg{Version=[2],New=[
     @key[pragma] Preelaborable_Initialization(Exception_Id);],Old=[]}
@@ -578,7 +577,7 @@ are not handled by the handlers of the
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00329-01]}
     @key[procedure] @AdaSubDefn{Raise_Exception}(E : @key[in] Exception_Id;
                               Message : @key[in] String := "");@Chg{Version=[2],New=[
-    @key[pragma] No_Return(Raise_Exception);],Old=[]}
+        @key[pragma] No_Return(Raise_Exception);],Old=[]}
     @key[function] @AdaSubDefn{Exception_Message}(X : Exception_Occurrence) @key[return] String;
     @key[procedure] @AdaSubDefn{Reraise_Occurrence}(X : @key[in] Exception_Occurrence);
 
@@ -641,7 +640,7 @@ For a @nt{raise_statement} with an @i{exception_}@nt{name}@Chg{Version=[2],New=[
 without a @SynI{string_}@nt{expression}],Old=[]},
 Exception_Message returns implementation-defined information
 about the exception occurrence.
-@Chg{Version=[2],New=[In either case, Exception_Message returns a string with
+@Chg{Version=[2],New=[In all cases, Exception_Message returns a string with
 lower bound 1.],Old=[]}
 Reraise_Occurrence reraises the specified exception occurrence.
 @ImplDef{The information returned by Exception_Message.}
@@ -683,9 +682,9 @@ occurrence.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00400-01]}
 The @Chg{Version=[2],New=[Wide_@!Wide_@!Exception_Name],Old=[Exception_Name]}
-functions return the full expanded name of the
-exception, in upper case, starting with a root library unit.
-For an exception declared immediately within package Standard,
+functions return
+the full expanded name of the exception, in upper case, starting with a root
+library unit. For an exception declared immediately within package Standard,
 the @nt{defining_@!identifier} is returned.
 The result is implementation defined if the exception is declared within
 an unnamed @nt{block_statement}.
@@ -1125,8 +1124,7 @@ language-defined library package exists:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Assertions]}
-@key[package] Ada.Assertions @key[is]
+@ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada],Child=[Assertions]}@key[package] Ada.Assertions @key[is]
    @key[pragma] Pure(Assertions);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1200,6 +1198,8 @@ which had an implementation-defined Assert pragma to continue to use their
 originally defined exception. Without this permission, such an implementation
 would be incorrect, as Exception_Name would return the wrong name.]}
 @end{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
+@ChgAdded{Version=[2],Text=[Implementations may define their own assertion policies.]}
 @end{ImplPerm}
 
 @begin{Notes}

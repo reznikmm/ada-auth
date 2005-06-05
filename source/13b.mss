@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:14 $}
+@Comment{$Date: 2005/06/03 05:41:48 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @LabeledClause{The Package System}
 
@@ -19,8 +19,7 @@ characteristics.]
 of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]}.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@RootLibUnit{System}
-@key[package] System @key[is]
+@RootLibUnit{System}@key[package] System @key[is]
    @key{pragma} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(System);
 
    @key[type] @AdaTypeDefn{Name} @key[is] @RI{implementation-defined-enumeration-type};
@@ -320,7 +319,7 @@ have been moved to the Real Time Annex.
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @ChildUnit{Parent=[System],Child=[Storage_Elements]}@key[package] System.Storage_Elements @key[is]
-   @key{pragma} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(System.Storage_Elements);
+   @key{pragma} @Chg{Version=[2],New=[Pure(],Old=[Preelaborate(System.]}Storage_Elements);
 
    @key[type] @AdaTypeDefn{Storage_Offset} @key[is] @key[range] @RI(implementation-defined);
 
@@ -804,7 +803,7 @@ which unchecked conversion doesn't make sense may be disallowed.
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02]}
 @Chg{Version=[2],New=[Since the],Old=[The]} Size of an array object
-@Chg{Version=[2],New=[generally does],Old=[should]} include its
+@Chg{Version=[2],New=[generally does],Old=[should]} not include its
 bounds@Chg{Version=[2],New=[],Old=[; hence]}, the bounds should not be part
 of the converted data.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
@@ -1766,9 +1765,8 @@ the designated object becomes inaccessible.]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00416-01]}
 @ChgAdded{Version=[2],Text=[If the @nt{allocator} is defining a
-coextension (see @RefSecNum{Operations of Access Types}) of an object of a
-limited type, and the discriminant is itself
-a subcomponent of an object being created by an outer @nt{allocator}, then
+coextension (see @RefSecNum{Operations of Access Types}) of an object
+being created by an outer @nt{allocator}, then
 the storage pool used for the outer @nt{allocator} should also be used for
 the coextension;]}
 
@@ -2058,7 +2056,7 @@ Free(X), when X is already equal to @key{null}, has no effect.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 Free(X), when X is not equal to @key{null} first
 performs finalization@Chg{Version=[2],New=[ of the object designated by X (and
-any coextensions of the object @em see @RefSecNum{Operations of Access Types}],
+any coextensions of the object @em see @RefSecNum{Operations of Access Types})],
 Old=[]}, as described in
 @Chg{Version=[2],New=[@RefSecNum{Completion and Finalization}],
 Old=[@RefSecNum{User-Defined Assignment and Finalization}]}.
@@ -2570,7 +2568,7 @@ use of the more efficient and safe one.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Dependence)}No_Dependence @\Specifies
-   a library unit on which there is no semantic dependence.]}
+   a library unit on which there are no semantic dependences.]}
 @end{Description}
 
 @end{StaticSem}
@@ -3109,7 +3107,7 @@ specification:
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 @noprefix@;First writes the external tag of @i{Item} to @i{Stream}
-(by calling String'Output(Tags.@!External_Tag(@Chg{Version=[2],New=[@I{Stream}, ],Old=[]}@i{Item}'Tag) @em
+(by calling String'Output(@Chg{Version=[2],New=[@I{Stream}, ],Old=[]}Tags.@!External_Tag(@i{Item}'Tag) @em
 see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Output attribute of
 the specific type identified by the tag.@Chg{Version=[2],New=[ Tag_Error is

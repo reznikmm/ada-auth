@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:01 $}
+@Comment{$Date: 2005/06/03 05:41:39 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2401,7 +2401,7 @@ Real(M*N)          --@RI[  conversion]
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Volume                      --@RI[ primary]
 @key(not) Destroyed               --@RI[ factor]
-2*Line_Count                --@RI[ term  ]
+2*Line_Count                --@RI[ term]
 -4.0                        --@RI[ simple expression]
 -4.0 + A                    --@RI[ simple expression]
 B**2 - 4.0*A*C              --@RI[ simple expression]@Chg{Version=[2],New=[
@@ -3563,7 +3563,7 @@ above fixed-fixed multiplication operator when either operand is of a type
 having a user-defined primitive multiplication operator declared immediately
 within the same list of declarations as the type and with both formal
 parameters of a fixed-point type, unless the predefined universal
-operator is prefixed using an expanded name with the @nt{prefix} denoting
+operator is identified using an expanded name with the @nt{prefix} denoting
 the package Standard. A corresponding requirement applies to
 the universal fixed-fixed division operator.]}
 

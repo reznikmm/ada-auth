@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:01:59 $}
+@Comment{$Date: 2005/06/03 05:41:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -163,7 +163,8 @@ tagged type, a @i(private extension), or a task or protected type
 derived from an interface type (a synchronized tagged type @em see
 @RefSecNum{Interface Types}).
 A record extension is defined by a @nt<derived_type_definition>
-with a @nt<record_extension_part> (see @RefSecNum{Type Extensions}).
+with a @nt<record_extension_part> (see @RefSecNum{Type Extensions})@Redundant[,
+which may include the definition of additional components].
 A private extension, which is a partial view of a record extension or
 of a synchronized tagged type,
 can be declared in the visible part of a package
@@ -1789,7 +1790,7 @@ on abstract subprograms (dispatching calls will never reach them).
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03],ARef=[AI95-00348-01]}
-@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<abstract_subprogram_specification>,Old=<>}>,
+@AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<abstract_subprogram_declaration>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
     [@Syn2{overriding_indicator}]
     @Syn2{subprogram_specification} @key{is} @key{abstract};>,Old=<>}"}

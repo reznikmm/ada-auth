@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:11 $}
+@Comment{$Date: 2005/06/03 05:41:44 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -519,7 +519,7 @@ Old=[declaration or renaming of a generic unit as a child]} of some parent
 generic package@Chg{Version=[2],New=[ @i<P>],Old=[]}, there is
 a corresponding declaration @Chg{Version=[2],New=[@i<C>],Old=[]} nested
 immediately within each instance @Chg{Version=[2],New=[of @i<P>. For the
-purposes of this rule, if the child @i<C> itself has a child @i<D>, each
+purposes of this rule, if a child @i<C> itself has a child @i<D>, each
 corresponding declaration for @i<C> has a corresponding
 child @i<D>], Old=[of the parent]}.
 @Redundant[@Chg{Version=[2],New=[The corresponding],Old=[This]}
@@ -969,8 +969,8 @@ of a unit visible.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
 @ChgAdded{Version=[2],Text=[@Defn{private with_clause}A @nt{with_clause}
-containing the keyword @key{private} is called a @i{private with_clause}. It
-can be thought of as making items visible only in the private part, although
+containing the reserved word @key{private} is called a @i{private with_clause}.
+It can be thought of as making items visible only in the private part, although
 it really
 makes items visible everywhere except the visible part. It can used both for
 documentation purposes (to say that a unit is not used in the visible part),
@@ -1075,7 +1075,8 @@ library unit, but not a subprogram body acting as a subprogram declaration (see
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @ChgAdded{Version=[2],Text=[the declaration of a public descendant of that
-library unit, and the @nt<with_clause> shall include the keyword @key<private>.]}
+library unit, and the @nt<with_clause> shall include the reserved word
+@key<private>.]}
 @end{Itemize}
 
 @begin{Reason}
@@ -1148,7 +1149,7 @@ unit.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A @nt<name> denoting a
 library item that is visible
-only due to being mentioned in @nt<with_clause>s that include the keyword
+only due to being mentioned in @nt<with_clause>s that include the reserved word
 @key<private> shall appear only within]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1434,10 +1435,10 @@ definition in @RefSecNum{Use Clauses}.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The syntax rules for @nt{with_clause} also are modified to allow the keyword
-  @key{private}. Private @nt{with_clause}s do not allow the use of their library
-  item in the visible part of their @nt{compilation_unit}. They also allow
-  using private units in more locations than in Ada 95.]}
+  The syntax rules for @nt{with_clause} also are modified to allow the reserved
+  word @key{private}. Private @nt{with_clause}s do not allow the use of their
+  library item in the visible part of their @nt{compilation_unit}. They also
+  allow using private units in more locations than in Ada 95.]}
 @end{Extend95}
 
 
@@ -3186,9 +3187,9 @@ A @nt{pragma} Pure is a library unit pragma.
 @Defn{pure}
 A @i{pure} @nt{library_item} is a preelaborable @nt{library_item}
 that does not contain the declaration of any
-variable or named access@Chg{Version=[2],New=[-to-object
-type for which the Storage_Size has not been specified by a static
-expression with value zero (0) and is not defined to be zero (0),
+variable@Chg{Version=[2],New=[,],Old=[]} or named access@Chg{Version=[2],
+New=[-to-object type for which the Storage_Size has not been specified by
+a static expression with value zero (0) and is not defined to be zero (0),
 excepting declarations],Old=[ type, except]} within a
 subprogram, generic
 subprogram,@Chg{Version=[2],New=[ generic formal part,],Old=[]}
@@ -3268,7 +3269,7 @@ If a library unit is declared pure, then the implementation
 is permitted to omit a call on a library-level
 subprogram of the library unit if the
 results are not needed after the call. @Chg{Version=[2],New=[In addition,
-the implementation],Old=[Similarly, it]}, may omit @Chg{Version=[2],New=[],
+the implementation],Old=[Similarly, it]} may omit @Chg{Version=[2],New=[],
 Old=[such ]}a call@Chg{Version=[2],New=[ on such a subprogram],Old=[]} and
 simply reuse the results produced by an earlier call on
 the same subprogram, provided that none of the

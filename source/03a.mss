@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:01:55 $}
+@Comment{$Date: 2005/06/03 05:41:37 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2719,6 +2719,19 @@ type, the type is abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @lquotes@;is derived from@rquotes@; that type.
 A @nt{derived_type_definition}, however, never defines an interface type.]}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[It is illegal for the parent type of a
+@nt{derived_type_definition} to be a synchronized tagged type.]}
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[@RefSecNum{Type extensions} prohibits record
+  extensions whose parent type is a synchronized tagged type, and this clause
+  requires tagged types to have a record extension. Thus there are no legal
+  derivations. Note that a synchronized interface can be used as a progenitor
+  in an @nt{interface_definition} as well as in task and protected types,
+  but we do not allow concrete extensions of any synchronized tagged type.]}
+@end{TheProof}
+
 @end{Notes}
 
 @begin{Examples}
@@ -4003,7 +4016,7 @@ of the attributes Succ, Pred, and Image need not belong to the subtype.
 
 For any value V (including any nongraphic character) of an
 enumeration subtype S, S'Value(S'Image(V)) equals V,
-as @Chg{Version=[2],New=[does],Old=[do]} S'Wide_Value(S'Wide_Image(V))@Chg{Version=[2],
+as @Chg{Version=[2],New=[do],Old=[does]} S'Wide_Value(S'Wide_Image(V))@Chg{Version=[2],
 New=[and S'Wide_Wide_Value(S'Wide_Wide_Image(V))],Old=[]}.
 @Chg{Version=[2],New=[None of these
 expressions],Old=[Neither expression]} ever @Chg{Version=[2],New=[raise],Old=[raises]}

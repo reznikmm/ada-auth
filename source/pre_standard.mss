@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2005/05/16 03:42:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2005/06/03 05:41:49 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:27 $}
+@Comment{$Date: 2005/06/03 05:41:49 $}
 
 @LabeledClause{The Package Standard}
 
@@ -239,15 +239,15 @@ the visible part of package Standard.}
    @key[type] @AdaTypeDefn{Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[@Chg{Version=[2],New=[Hex_0000FFFE],Old=[FFFE]}], @RI[@Chg{Version=[2],New=[Hex_0000FFFF],Old=[FFFF]}]);
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
-@ChgAdded{Version=[2],Text=[   -- @RI[The declaration of type Wide_Wide_Character is based on the full]
-   -- @RI[ISO/IEC 10646:2003 character set. The first 65536 positions have the]
-   -- @RI[same contents as type Wide_Character. See @refsecnum[Character types].]
+@ChgAdded{Version=[2],Text=[   --@RI[ The declaration of type Wide_Wide_Character is based on the full]
+   --@RI[ ISO/IEC 10646:2003 character set. The first 65536 positions have the]
+   --@RI[ same contents as type Wide_Character. See @refsecnum[Character types].]
 @comment[blank line]
    @key[type] Wide_Wide_Character @key[is] (@RI[nul], @RI[soh] ... @RI[Hex_7FFFFFFE], @RI[Hex_7FFFFFFF]);
    @key[for] Wide_Wide_Character'Size @key[use] 32;]}
 
 @ChgRef{Version=[2],Kind=[Added]}@Comment{Odd missing paragraph number here}
-@Chg{Version=[2],New=[],Old=[@noparanum@;]}   @key[package] ASCII @key[is] ... @key[end] ASCII;  @RI{--Obsolescent; see @RefSecNum[ASCII]}
+@Chg{Version=[2],New=[],Old=[@noparanum@;]}   @key[package] ASCII @key[is] ... @key[end] ASCII;  --@RI{Obsolescent; see @RefSecNum[ASCII]}
 @Defn2{Term=[ASCII], Sec=(package physically nested within the declaration of Standard)}
 @comment[blank line]
 
@@ -275,15 +275,15 @@ the visible part of package Standard.}
    @key[type] @AdaTypeDefn{Wide_String} @key[is] @key[array](Positive @key[range] <>) @key[of] Wide_Character;
    @key[pragma] Pack(Wide_String);
 
-   --@RI{ The predefined operators for this type correspond to those for String}
+   --@RI{ The predefined operators for this type correspond to those for String.}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[    @key[type] Wide_Wide_String @key[is array] (Positive @key[range] <>)
-      @key[of] Wide_Wide_Character;
+@ChgAdded{Version=[2],Text=[   @key[type] Wide_Wide_String @key[is array] (Positive @key[range] <>)
+     @key[of] Wide_Wide_Character;
    @key[pragma] Pack (Wide_Wide_String);]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[    -- @RI[The predefined operators for this type correspond to those for String.]]}
+@ChgAdded{Version=[2],Text=[   --@RI[ The predefined operators for this type correspond to those for String.]]}
 
 
    @key[type] @AdaTypeDefn{Duration} @key[is] @key[delta] @RI{implementation-defined} @key[range] @RI{implementation-defined};

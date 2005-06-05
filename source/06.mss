@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:05 $}
+@Comment{$Date: 2005/06/03 05:41:41 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -176,8 +176,8 @@ A @nt{subprogram_declaration}
 or a @nt{generic_subprogram_declaration}
 requires a completion:
 @Redundant[a body, a @nt<renaming_declaration>
-(see @RefSecNum(Renaming Declarations)), or a @key(pragma) Import
-(see @RefSecNum{Interfacing Pragmas})].
+(see @RefSecNum(Renaming Declarations)), or a @Chg{Version=[2],New=[@nt{pragma}],
+Old=[@key(pragma)]} Import (see @RefSecNum{Interfacing Pragmas})].
 @Redundant[A completion is not allowed
 for an @nt<abstract_subprogram_declaration>@Chg{Version=[2],New=[ (see
 @RefSecNum{Abstract Types and Subprograms}) or a
@@ -2300,10 +2300,13 @@ object's subtype.]}
 @leading@keepnext@i{Examples of return statements:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@key[return];                         --@RI{ in a procedure body, @nt{entry_body},}@Chg{Version=[2],New=[
-                                --@RI{ @nt{accept_statement}, or @nt{extended_return_statement}}],Old=[@RI{ or @nt{accept_statement}}]}
-@key[return] Key_Value(Last_Index);   --@RI{ in a function body}@Chg{Version=[2],New=<
-@key[return] Node : Cell @key{do}           --@RI{ in a function body, see @RefSecNum{Incomplete Type Declarations} for Cell}
+@key[return];                         --@RI{ in a procedure body, }@nt{entry_body}@RI{,}@Chg{Version=[2],New=[
+                                -- @nt{accept_statement}@RI{, or }@nt{extended_return_statement}],Old=[@RI{ or }@nt{accept_statement}]}
+
+@key[return] Key_Value(Last_Index);   --@RI{ in a function body}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+@Chg{Version=[2],New=<@key[return] Node : Cell @key{do}           --@RI{ in a function body, see @RefSecNum{Incomplete Type Declarations} for Cell}
    Node.Value := Result;
    Node.Succ := Next_Node;
 @key{end} @key{return};>,Old=<>}
@@ -2439,7 +2442,7 @@ is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}]);''}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}});''}
 @end{Syntax}
 
 @begin{Legality}

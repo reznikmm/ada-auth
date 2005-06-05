@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2005/05/14 05:20:13 $ $Author: Randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2005/06/03 05:41:49 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/05/14 05:20:13 $}
+@Comment{$Date: 2005/06/03 05:41:49 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -601,10 +601,10 @@ discontiguous file.],Old=[]}]}
 external file represented by Name was most
 recently modified. If the external file is not an ordinary file, the result is
 implementation-defined. The exception Name_Error is propagated if the string
-given as Name does not allow the identification of an existing external file. Th
-exception Use_Error is propagated if the external environment does not support
-the reading the modification time of the file with the name given by Name (in
-the absence of Name_Error).]}
+given as Name does not allow the identification of an existing external file.
+The exception Use_Error is propagated if the external environment does not
+support the reading the modification time of the file with the name given by
+Name (in the absence of Name_Error).]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
 result for Directories.Modification_Time for a directory or special file.],
 Old=[]}]}

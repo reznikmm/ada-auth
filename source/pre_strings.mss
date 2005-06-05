@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2005/05/16 03:42:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2005/06/03 05:41:49 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/05/16 03:42:27 $}
+@Comment{$Date: 2005/06/03 05:41:49 $}
 
 @LabeledClause{String Handling}
 
@@ -10,7 +10,7 @@
 This clause presents the specifications of the package Strings and
 several child packages, which provide facilities for dealing with
  string data. Fixed-length,
-bounded-length, and unbounded-length strings are supported, for both
+bounded-length, and unbounded-length strings are supported, for @Chg{Version=[2],New=[],Old=[both]}
 String@Chg{Version=[2],New=[,],Old=[ and]} Wide_String@Chg{Version=[2],New=[,
 and Wide_Wide_String],Old=[]}.
 The string-handling subprograms include searches for pattern strings
@@ -2166,7 +2166,7 @@ as the corresponding bounded-length string subprograms.
 positions Low through High in the string represented by Source as an
 Unbounded_String. The procedure Unbounded_Slice sets Target to the
 Unbounded_String representing the slice at positions Low through High in the
-string represented by Source. Both routines propagate Index_Error if Low
+string represented by Source. Both routines propagate Index_Error if Low >
 Length(Source)+1 or High > Length(Source).]}
 
 Each of the functions "=", "<", ">","<=", and ">="
@@ -2552,14 +2552,14 @@ any element outside the Character portion of Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgAdded{Version=[2],Text=[Facilities for handling strings of
-Wide_Wide_Character components are found in
+Wide_Wide_Character elements are found in
 the packages Strings.Wide_Wide_Maps, Strings.Wide_Wide_Fixed,
 Strings.Wide_Wide_Bounded, Strings.Wide_Wide_Unbounded, and
 Strings.Wide_Wide_Maps.Wide_Wide_Constants, and in the
 functions Strings.Wide_Wide_Hash and Strings.Wide_Wide_Unbounded.Wide_Wide_Hash.
 They provide the same
 string-handling operations as the corresponding packages and functions
-for strings of Character components.
+for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Fixed]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Bounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Unbounded]}
@@ -2639,7 +2639,7 @@ for strings of Character components.
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Alternative representation for a set of Wide_Wide_Character values:]
-   sub@key<type> @AdaDefn{Wide_Wide_Character_Sequence} @key<is> Wide_Wide_String;]}
+   @key<subtype> @AdaDefn{Wide_Wide_Character_Sequence} @key<is> Wide_Wide_String;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Set} (Sequence : @key<in> Wide_Wide_Character_Sequence)
@@ -2700,7 +2700,8 @@ Strings.Wide_Wide_Maps instead of Strings.Maps.]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For each of the packages
 Strings.Fixed, Strings.Bounded, Strings.Unbounded, and Strings.Maps.Constants,
 and for functions Strings.Hash and Strings.Unbounded.Hash,
-the corresponding wide wide string package has the same contents except that]}
+the corresponding wide wide string package or function has the same contents
+except that]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

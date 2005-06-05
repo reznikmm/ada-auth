@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:03 $}
+@Comment{$Date: 2005/06/03 05:41:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.16 $}
+@Comment{$Revision: 1.17 $}
 
 @LabeledClause{Type Conversions}
 
@@ -558,7 +558,7 @@ Further, if the operand type is not @i<universal_access>:]}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is an access-to-subprogram type, then the operand type
 shall be @i<universal_access> or an access-to-subprogram type. Further, if
-not @i<universal_access>:]}
+the operand type is not @i<universal_access>:]}
 
 @begin(inneritemize)
 
@@ -1464,10 +1464,10 @@ started, Program_Error is raised.@IndexCheck{Allocation_Check}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[If the created object contains any tasks, the master
+@Chg{Version=[2],New=[If the created object contains any tasks, and the master
 of the type of the @nt<allocator> is completed, and all of the dependent
 tasks of the master are terminated
-(see @RefSecNum{Task Dependence - Termination of Tasks}),
+(see @RefSecNum{Task Dependence - Termination of Tasks}), then
 Program_Error is raised.@IndexCheck{Allocation_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}
 @begin{Reason}

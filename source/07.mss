@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:06 $}
+@Comment{$Date: 2005/06/03 05:41:41 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2063,19 +2063,22 @@ a (nonlimited) controlled object.]
   finalization.
   Objects are always finalized before being destroyed.>}
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01],ARef=[AI95-00287-01]}
 Here's the basic idea of initialization, value adjustment, and finalization,
 whether or not user defined:
 When an object is created,
 if it is explicitly assigned an initial value,
-the assignment copies and adjusts the initial value.
-Otherwise, Initialize is applied to it
+@Chg{Version=[2],New=[the object is either built-in-place from an @nt{aggregate}
+or function call (in which case neither Adjust nor Initialize is applied), or ],Old=[]}
+the assignment copies and
+adjusts the initial value. Otherwise, Initialize is applied to it
 (except in the case of an @nt{aggregate} as a whole).
 An @nt{assignment_statement} finalizes the target before
 copying in and adjusting the new value.
 Whenever an object goes away, it is finalized.
 Calls on Initialize and Adjust happen bottom-up; that is,
 components first, followed by the containing object.
-Calls on Finalize happens top-down; that is,
+Calls on Finalize @Chg{Version=[2],New=[happen],Old=[happens]} top-down; that is,
 first the containing object, and then its components.
 These ordering rules ensure that any components will be in a
 well-defined state when Initialize, Adjust,
@@ -2146,6 +2149,15 @@ of Controlled only.
   no harm in it, and it might make an implementation's life easier to
   know that there are no objects of these types @em in case the
   implementation wishes to make them @lquotes@;magic@rquotes@; in some way.
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[For Ada 2006, we considered making these types
+  interfaces. That would have the advantage of allowing them to be added
+  to existing trees. But that was rejected both because it would cause
+  massive disruption to existing implementations, and because it would be
+  very incompatible due to the "no hidden interfaces" rule. The latter rule
+  would prevent a tagged private type from being completed with a derivation
+  from Controlled or Limited_Controlled @em a very common idiom.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
@@ -2173,6 +2185,12 @@ that are explicitly defined to need finalization.]}
   @ChgAdded{Version=[2],Text=[The fact that a type needs finalization
   does not require it to be implemented with a controlled type. It just has to
   be recognized by the No_Nested_Finalization restriction.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This property is defined for the type, not
+  for a particular view. That's necessary as restrictions look in private parts
+  to enforce their restrictions; the point is to eliminate all controlled
+  parts, not just ones that are visible.]}
 @end{Ramification}
 
 @end{Itemize}
@@ -2380,7 +2398,7 @@ contract model violations.
 @ChgAdded{Version=[1],Text=[For an @nt{aggregate} of a controlled type
 whose value is assigned,
 other than by an @nt{assignment_statement} or a
-@Chg{Version=[2],New=[return statement of a return type with no
+@Chg{Version=[2],New=[@nt{simple_return_statement} of a return type with no
 part that is of a task, protected, or limited record type],
 Old=[@nt{return_statement}]}, the
 implementation shall not create a separate anonymous object for the
@@ -2491,7 +2509,7 @@ by using one of the following permissions.],Old=[]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Furthermore, an implementation is
 permitted to
 omit implicit Initialize, Adjust, and Finalize calls and associated assignment
-operations on an object of nonlimited controlled type provided that:]}
+operations on an object of a nonlimited controlled type provided that:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2518,7 +2536,7 @@ does not change the external effect of the program, and]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[after the omission of such calls and operations, any
 execution of the program that executes an Initialize or Adjust call on an
-object or initializes an object by an aggregate will also later execute a
+object or initializes an object by an @nt{aggregate} will also later execute a
 Finalize call on the object and will always do so prior to assigning a new
 value to the object, and]}
 
@@ -2554,7 +2572,7 @@ Controlled types and user-defined finalization are new to Ada 95.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0021],ARef=[AI95-00182-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to clarify that
-  the default initialization (whatever that is) of an ancestor part is used.]}
+  the default initialization (whatever it is) of an ancestor part is used.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0022],ARef=[AI95-00083-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Adjust is never
@@ -2568,8 +2586,8 @@ Controlled types and user-defined finalization are new to Ada 95.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[Types Controlled and Limited_Controlled now have
-  Preelaborable_Initialization, so that they can be used in preelaborated
-  packages.]}
+  Preelaborable_Initialization, so that objects of types derived from these
+  types can be used in preelaborated packages.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
   @ChgAdded{Version=[2],Text=[Corrected the build-in-place requirement
@@ -2670,7 +2688,7 @@ complete, and before it is left.
   are masters so that objects created by subprogram calls (in @nt{aggregate}s,
   @nt{allocator}s for anonymous access-to-object types, and so on) are
   finalized and have their tasks awaited before the @nt{expression}s or
-  @nt{statement}s is left. Note that @nt{expression}s like the @nt{condition}
+  @nt{statement}s are left. Note that @nt{expression}s like the @nt{condition}
   of an @nt{if_statement} are masters, because they are not enclosed by a
   @nt{simple_statement}.]}
 @end{Reason}

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/05/25 23:29:16 $}
+@Comment{$Date: 2005/06/03 05:41:46 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2973,7 +2973,7 @@ as an actual to another generic formal package.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00317-01]}
 @ChgAdded{Version=[2],Text=[
 For the purposes of matching, if the actual instance @i<A> is itself a
-formal package, then the actual parameters of A are those specified
+formal package, then the actual parameters of @i<A> are those specified
 explicitly or implicitly in the @nt{formal_package_actual_part} for @i<A>, plus,
 for those not specified, the copies of the formal parameters of the
 template included in the visible part of @i<A>.]}

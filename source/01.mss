@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/05/28 06:01:53 $}
+@Comment{$Date: 2005/06/03 05:41:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1675,7 +1675,7 @@ Old=[@Defn{ISO/IEC 1539:1991}
 @Defn{FORTRAN standard}]}
 ISO/IEC @Chg{Version=[2],New=[1539-1:2004],Old=[1539:1991]},
 @i{Information technology @em Programming languages @em @Chg{Version=[2],
-New=[Fortran -- Part 1: Base language],Old=[FORTRAN]}}.
+New=[Fortran @em Part 1: Base language],Old=[FORTRAN]}}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
 @Chg{Version=[2],New=[@Defn{ISO 1989:2002}
@@ -1696,7 +1696,7 @@ ISO/IEC 6429:1992,
 @ChgAdded{Version=[2],Text=[@Defn{ISO 8601:2004}
 @Defn{date and time formatting standard}
 ISO 8601:2004, @i{Data elements and interchange formats @em Information
-interchange @em Representation of dates and times.}]}
+interchange @em Representation of dates and times}.]}
 
 @Defn{ISO/IEC 8859-1:1987}
 @Defn{8859-1:1987, ISO/IEC standard}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:07 $}
+@Comment{$Date: 2005/06/03 05:41:42 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -64,7 +64,7 @@ called its @i{declarative region},
   a @nt{loop_statement};
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-  @ChgAdded{Version=[2],Text=[an @nt{extended_return_statement}]}
+  @ChgAdded{Version=[2],Text=[an @nt{extended_return_statement};]}
 
   an @nt{accept_statement};
 

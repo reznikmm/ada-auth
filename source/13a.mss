@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:36 $}
+@Comment{$Date: 2005/06/03 05:41:47 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -905,7 +905,7 @@ Atomic components have similar restrictions
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
 @ChgAdded{Version=[2],Text=[For purposes of these rules, the determination of
-whether a representation item applied to a type could cause an object to have
+whether a representation item applied to a type @i{could cause} an object to have
 some property is based solely on the properties of the type itself, not on any
 available information about how the type is used. In particular, it presumes
 that minimally aligned objects of this type might be declared at some point.]}
@@ -1610,8 +1610,8 @@ or else know what Alignment the implementation will choose by default.
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
 @Chg{Version=[2],New=[For],Old=[If the Alignment is specified for]} an
 object that is not allocated under control of the implementation,
-execution is erroneous if the object is not aligned according to the
-Alignment.
+execution is erroneous if the object is not aligned according to
+@Chg{Version=[2],New=[its],Old=[the]} Alignment.
 
 @end{Erron}
 
@@ -1838,12 +1838,13 @@ its bounds.]}
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The Size of an array object should not include its bounds.]}]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00051-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00051-02],ARef=[AI-00291-02]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[]}@Comment{A fake to get a conditional Leading}
 @PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
 The recommended level of support for the Size attribute
-of objects is@Chg{Version=[2],New=[ the same as for subtypes (see below).],
-Old=[:]}
+of objects is@Chg{Version=[2],New=[ the same as for subtypes (see below),
+except that only a confirming Size clause need be supported for an aliased
+elementary object.],Old=[:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00051-02]}
 @ChgDeleted{Version=[2],Text=[A Size clause should be supported for an object
@@ -2506,7 +2507,7 @@ External_Tag,
 Small, @Chg{Version=[2],New=[],Old=[Bit_Order, ]}
 Storage_Pool, Storage_Size,
 @Chg{Version=[2],New=[Stream_Size, and ],Old=[]}
-Write, @Chg{Version=[2],New=[],Old=[, Output, Read,
+Write@Chg{Version=[2],New=[],Old=[, Output, Read,
 Input, and Machine_Radix]}.
 
 It follows from the general rules in @RefSecNum{Operational and Representation Items}
@@ -3256,7 +3257,7 @@ but the user may control their values by giving a
   ARef=[AI95-00133-01],
   Text=<@Chg{Version=[2],New=[If the nondefault bit ordering applies to the
   composite type, and if a @nt{component_clause} specifies the placement of C,
-  denotes the value given for the position of the @nt{component_clause};
+  denotes the value given for the @nt{position} of the @nt{component_clause};
   otherwise, denotes],Old=[Denotes]} the same value as R.C'Address @en@;
   R'Address. The value of this attribute is of the type
   @i{universal_integer}.>}
@@ -3481,6 +3482,14 @@ but the splitting problem need not occur]}.
 Text=[The recommended level of support for the nondefault bit ordering
 should be followed.]}]}
 @end{ImplAdvice}
+
+@begin{Notes}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
+  @ChgAdded{Version=[2],Text=[Bit_Order clauses make it possible to write
+  @nt{record_representation_clause}s that can be ported between machines having
+  different bit ordering. They do not guarantee transparent exchange of data
+  between such machines.]}
+@end{Notes}
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
