@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:41 $}
+@Comment{$Date: 2005/06/05 05:39:49 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -3187,14 +3187,19 @@ to the same object.
   and adjusting it).
 @end{Reason}
 @begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 Either Initialize or Adjust,
 but not both, is applied to (almost) every controlled object
 when it is created:
 Initialize is done when no initial value is assigned to the object,
 whereas Adjust is done as part of assigning the initial value.
-The one exception is the anonymous object created by an @nt{aggregate};
-Initialize is not applied to the @nt{aggregate} as a whole,
-nor is the value of the @nt<aggregate> adjusted.
+The one exception is the @Chg{Version=[2],New=[],Old=[anonymous ]}object
+@Chg{Version=[2],New=[initialized],Old=[created]} by an
+@nt{aggregate}@Chg{Version=[2],New=[ (both the anonymous object created for
+an aggregate, or an object initialized by an @nt{aggregate} that is
+built-in-place)],Old=[]}; Initialize is not applied to the @nt{aggregate}
+as a whole, nor is the value of the @nt<aggregate> @Chg{Version=[2],
+New=[or object ],Old=[]}adjusted.
 
 @leading@Defn2{Term=[assignment operation], Sec=(list of uses)}
 All of the following use the assignment operation,
@@ -3211,13 +3216,14 @@ or pool element
 (in this case, the value of each component is assigned, and therefore adjusted,
 but the value of the object as a whole is not adjusted);
 
-function return, when the result type is not a
-return-by-reference
-type (see @RefSecNum{Return Statements});
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+function return, when the result @Chg{Version=[2],New=[is not built-in-place],
+Old=[type is not a return-by-reference
+type (see @RefSecNum{Return Statements});]}
 (adjustment of the result happens before finalization of
-the function;
+the function@Chg{Version=[2],New=[],Old=[;
 values of return-by-reference types are not
-adjusted);
+adjusted]});
 
 predefined operators (although the only one that matters is
 concatenation; see @RefSecNum{Binary Adding Operators});
@@ -3226,7 +3232,9 @@ generic formal objects of mode @key{in}
 (see @RefSecNum{Formal Objects});
 these are defined in terms of @nt{constant_declaration}s; and
 
-@nt{aggregate}s (see @RefSecNum{Aggregates})
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@nt{aggregate}s (see @RefSecNum{Aggregates})@Chg{Version=[2],New=[, when
+the result is not built-in-place],Old=[]}
 (in this case, the value of each component, and the parent part, for an
 @nt{extension_aggregate}, is assigned, and therefore adjusted,
 but the value of the @nt{aggregate} as a whole is not adjusted;
@@ -3253,9 +3261,20 @@ object or @nt{aggregate} object.
 (see @RefSecNum{Loop Statements}), but since the type
 of the loop parameter is never controlled,
 nothing interesting happens there, either.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgAdded{Version=[2],Text=[Objects initialized by function results and
+@nt{aggregates} which are built-in-place. In this case, the assignment
+operation is never executed, and no adjustment takes place. While
+built-in-place
+is always allowed, it is required for some types @em see
+@RefSecNum{Limited Types} and
+@RefSecNum{User-Defined Assignment and Finalization} @em and that's
+important since limited types have no Adjust to call.]}
 @end{Itemize}
 
-Because Controlled and Limited_Controlled
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@ChgDeleted{Version=[2],Text=[Because Controlled and Limited_Controlled
 are library-level tagged types,
 all controlled types will be library-level types,
 because of the accessibility rules
@@ -3263,7 +3282,7 @@ because of the accessibility rules
 This ensures that the Finalize operations may be applied without
 providing any @lquotes@;display@rquotes@; or @lquotes@;static-link.@rquotes@;
 This simplifies finalization as a result of garbage collection,
-abort, and asynchronous transfer of control.
+abort, and asynchronous transfer of control.]}
 
 Finalization of the parts of a protected object are not done as
 protected actions.
@@ -3337,7 +3356,7 @@ the rules here refer to the task-waiting rules of Section 9.
   @ChgAdded{Version=[2],Text=[Revised the definition of master to include
   @nt{expression}s and @nt{statement}s, in order to cleanly define what
   happens for tasks and controlled objects created as part of a subprogram call.
-  Having do that, all of the special wording to cover those cases is
+  Having done that, all of the special wording to cover those cases is
   eliminated (at least until the Ada comments start rolling in).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}

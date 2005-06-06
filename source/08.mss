@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:42 $}
+@Comment{$Date: 2005/06/05 05:39:50 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -349,7 +349,12 @@ However, the name R.X.Q would be visible in some other
 library unit where both R and P.Q are visible
 (assuming R were made legal by removing the offending declaration).
 @end{Reason}
-
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+  @ChgAdded{Version=[2],Text=[This rule applies to limited views as well as
+  @lquotes@;normal@rquotes library items. In that case, the semantic dependents
+  are the units that have a @nt{limited_with_clause} for the limited view.]}
+@end{Ramification}
 The immediate scope of
 a declaration in the private part of a library unit does
 not include the visible part of any
@@ -368,16 +373,19 @@ The purpose of this rule is to prevent children from giving
 private information to clients.
 @end{Reason}
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
 For a public child subprogram,
 this means that the parent's private part is not visible in the
-@nt{formal_part}s of the declaration and of the body.
+@Chg{Version=[2],New=[profile],Old=[@nt{formal_part}s]} of the declaration
+and of the body.
 This is true even for @nt{subprogram_bodies} that are not
 completions.
 For a public child generic unit,
 it means that the parent's private part is not visible in the
 @nt{generic_formal_part}, as well as in
 the first list of @nt{basic_declarative_item}s (for a generic package),
-or the @nt{formal_part}(s) (for a generic subprogram).
+or the @Chg{Version=[2],New=[(syntactic) profile],Old=[@nt{formal_part}(s)]}
+(for a generic subprogram).
 @end{Ramification}
 @end{Itemize}
 
@@ -534,7 +542,9 @@ declarations of the visible part of a package can be denoted by expanded names
 appearing outside the package,
 and can be made directly visible by a @nt{use_clause}.
 @begin{Ramification}
-There are some obscure involving generics cases in which there is
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+There are some obscure @Chg{Version=[2],New=[cases ],Old=[]}involving
+generics @Chg{Version=[2],New=[],Old=[cases ]}in which there is
 no such notation.
 See Section 12.
 @end{Ramification}
@@ -765,14 +775,14 @@ implicitly declared at the same place:]}
 
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[If one is a non-null non-abstract subprogram, then it
-overrides all which are null or abstract subprograms.],Old=[]}
+@ChgAdded{Version=[2],Text=[If one is a non-null non-abstract subprogram,
+then it overrides all which are null or abstract subprograms.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[If all are null procedures or abstract subprograms, then
+@ChgAdded{Version=[2],Text=[If all are null procedures or abstract subprograms, then
 any null procedure overrides all abstract subprograms; if more than one
-homograph remains that is not thus overridden, then one is chosen
-arbitrarily to override the others.],Old=[]}
+such homograph remains that is not thus overridden, then one is chosen
+arbitrarily to override the others.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -800,13 +810,19 @@ arbitrarily to override the others.],Old=[]}
    @Key{end} P2;],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[   @Key{type} T @Key{is new} P1.Ifc1 @Key{and} P2.Ifc2 @Key{with null record};
+@Chg{Version=[2],New=[   @Key{type} T @Key{is abstract new} P1.Ifc1 @Key{and} P2.Ifc2 @Key{with null record};
 @Key{end} Outer;],Old=[]}
 @end{Example}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[without requiring that T explicitly override
     any of its inherited operations.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Full conformance is required here, as we
+  cannot allow the parameter names to differ. If they did differ, the
+  routine which was selected for overriding could be determined by named
+  parameter notation in a call.]}
 @end{Discussion}
 
 @end{InnerItemize}
@@ -901,7 +917,7 @@ is hidden from all visibility at places that are not within the scope
 of a @nt{limited_with_clause} that mentions it; in addition, the limited view
 is hidden from all visibility within the declarative region of the package, as
 well as within the scope of any @nt{nonlimited_with_clause} that
-mentions it. Where the declaration of the limited view of a
+mentions the package. Where the declaration of the limited view of a
 package is visible, any name that denotes the package denotes the
 limited view, including those provided by a package renaming.],Old=[@Redundant[For
 each declaration or renaming of a generic unit as a child of
@@ -1020,15 +1036,14 @@ were not type conformant].
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @Chg{Version=[2],New=[If two or more homographs are implicitly declared at the same place (and not
 overridden by a non-overridable declaration) then at most one shall be a
-non-null non-abstract subprogram. If all are null or abstract, then all of the
-null subprograms shall be fully conformant with one another. If all are
-abstract, then all of the subprograms shall be fully conformant with one
-another.@Defn2{Term=[full conformance],Sec=(required)}],Old=[]}
+non-null non-abstract subprogram. If all are null procedures or abstract
+subprograms, then all of the null procedures shall be fully conformant with
+one another. If all are abstract subprograms, then all of the subprograms
+shall be fully conformant with one another.@Defn2{Term=[full conformance],Sec=(required)}],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[Full conformance is required so it is not possible
-to tell which subprogram is actually the overriding one. See discussion
-above.]}
+to tell which subprogram is actually the overriding one. See discussion above.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
@@ -1152,7 +1167,7 @@ does not (visibly) inherit the component I from A.T, while it does inherit the
 component I from D.NT3. Of course, both components exist, and can be accessed
 by a type conversion as shown above. This behavior stems from the fact that
 every characteristic of a type (including components) must be declared
-somewhere in the innermost declarative region containing the type - if the
+somewhere in the innermost declarative region containing the type @em if the
 characteristic is never visible in that declarative region, it is never
 declared. Therefore, such characteristics do not suddenly become available even
 if they are in fact visible in some other scope.
@@ -1178,8 +1193,7 @@ instantiated. This is easier to understand with an example:]}
 @key{package} I1 @key{is new} G1;],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[@key{package} I1.G2 @key{is}
-@key{end} I1.G2;],Old=[]}
+@ChgAdded{Version=[2],Text=[@key{package} I1.G2 @key{renames} ...]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[@key{with} G1.G2;
@@ -1328,7 +1342,7 @@ Added rules to handle the inheritance and overriding of
 multiple homographs for a single type declaration, in order to support
 multiple inheritance from interfaces. The new rules are intended to be
 compatible with the existing rules so that programs that do not use
-interfaces do not change their legality. However, there is an very rare
+interfaces do not change their legality. However, there is a very rare
 case where this is not true:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1985,7 +1999,7 @@ disappear, which might leave dangling references.
 Similar restrictions exist for the Access attribute.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0017],ARef=[AI95-00184-01]}
-@ChgAdded{Version=[1],Type=[Leading],Text=[;The @lquotes@;recheck on
+@ChgAdded{Version=[1],Type=[Leading],Text=[The @lquotes@;recheck on
 instantiation@rquotes@; and @lquotes@;assume-the-worst in the body@rquotes@;
 restrictions on generics are necessary to avoid renaming of components which
 could disappear even when the nominal subtype would prevent the problem:]}
@@ -2087,19 +2101,20 @@ unconstrained nominal subtype.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Leading@;@Defn{incompatibilities with Ada 95}
 Aliased variables are not necessarily constrained in Ada
-2006 (see @RefSecNum{Array Types}). Therefore, renaming a subcomponent of
-an aliased variable is no longer necessarily safe, and thus may be illegal
-if the component may disappear or change shape, while the same renaming
-would have been legal in Ada 95. Note that most allocated
-objects are still constrained by their initial value (see @RefSecNum{Allocators},
-and thus have no change in the legality of renaming for them. For example,
+2006 (see @RefSecNum{Array Types}). Therefore, a subcomponent of an aliased
+variable may disappear or change shape, and renaming such a subcomponent thus
+is illegal, while the same operation would have been legal in Ada 95. Note that
+most allocated objects are still constrained by their initial value (see
+@RefSecNum{Allocators}), and thus have no change in the
+legality of renaming for them. For example,
 using the type T2 of the previous example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   AT : @key{aliased} T2;
-   C1_Ren : Integer @key{renames} AT.C1; -- @RI[Legal in Ada 2006, illegal in Ada 95]
-   AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95, but does not in Ada 2006,]
-                                   -- @RI[so C1_Ren becomes invalid when this is assigned.]]}
+   C1_Ren : Integer @key{renames} AT.C1; -- @RI[Illegal in Ada 2006, legal in Ada 95]
+   AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95,]
+                                   -- @RI[but does not in Ada 2006, so C1_Ren becomes]
+                                   -- @RI[invalid when this is assigned.]]}
 @end{Example}
 @end{Incompatible95}
 
@@ -2406,9 +2421,9 @@ waiting.
 unless otherwise stated by this International Standard. In particular, if the
 renamed entity is abstract@Chg{Version=[2],New=[],Old=[ or requires
 overriding (see @RefSecNum{Abstract Types and Subprograms})]}, the new view
-also is abstract @Chg{Version=[2],New=[],Old=[or requires overridding ]}. (The renaming
-will often be illegal in @Chg{Version=[2],New=[this case],Old=[these cases]},
-as a renaming cannot be overridden.)],Old=[]}
+also is abstract@Chg{Version=[2],New=[.],Old=[ or requires overridding. (The
+renaming will often be illegal in these cases,
+as a renaming cannot be overridden.)]}],Old=[]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -2422,7 +2437,7 @@ value of the call.],Old=[]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[This implies that the subprogram completed by the
-renames-as-body has its own elaboration check.]}
+renaming-as-body has its own elaboration check.]}
 @end{Ramification}
 
 For a call on a renaming of a dispatching subprogram that is overridden,
@@ -2470,7 +2485,7 @@ Storage_Error is raised, or that the call results in infinite recursion.]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027],ARef=[AI95-00135-01]}
 @ChgAdded{Version=[1],Text=[This has to be a bounded error, as it is possible
-for a renames-as-body appearing in a package body to cause this problem.
+for a renaming-as-body appearing in a package body to cause this problem.
 Thus it is not possible in general to detect this problem at compile time.]}
 @end{Reason}
 @end{Bounded}
@@ -2557,18 +2572,18 @@ We'll live with the oddity.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  @b<Corrigendum:> Allowed a renames-as-body to be just
+  @b<Corrigendum:> Allowed a renaming-as-body to be just
   mode conformant with the specification if the subprogram is not yet frozen.]}
 @end{Extend95}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0014],ARef=[AI95-00064-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Described the semantics of
-  renames-as-body, so that the location of elaboration checks is clear.]}
+  renaming-as-body, so that the location of elaboration checks is clear.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0027],ARef=[AI95-00135-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that circular
-  renames-as-body is illegal (if it can be detected in time) or a
+  renaming-as-body is illegal (if it can be detected in time) or a
   bounded error.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
@@ -2747,12 +2762,14 @@ here, without using compiler-writer's jargon like @lquotes@;parse tree@rquotes@;
 for each usage name, which declaration it denotes
 (and, therefore, which view and which entity it denotes); and
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00382-01]}
 In most cases, a usage name denotes the view declared by the denoted
 declaration.
 However, in certain cases, a usage name that denotes a declaration and
 appears inside the declarative region of that same declaration, denotes
 the current instance of the declaration.
-For example, within a @nt{task_body}, a usage name that denotes the
+For example, within a @nt{task_body}@Chg{Version=[2],New=[ other than in
+any @nt{access_definition}],Old=[]}, a usage name that denotes the
 @nt{task_type_declaration} denotes the object containing the
 currently executing task,
 and not the task type declared by the declaration.
@@ -3027,7 +3044,8 @@ Therefore, @Chg{Version=[2],New=[a string literal],
 Old=[the literal @key{null}]} is not allowed as the operand of a
 @nt{type_conversion}.
 This is true even if there is only one @Chg{Version=[2],New=[string],
-Old=[access]} type in scope.
+Old=[access]} type in scope@Chg{Version=[2],New=[ (which is never the
+case)],Old=[]}.
 The reason for these rules is so that the compiler will not have to
 search @lquotes@;everywhere@rquotes@; to see if there is exactly one type
 in a class in scope.
@@ -3095,9 +3113,11 @@ Such a @nt{name} denotes
 all of the declarations determined by its interpretations,
 and all of the views declared by these declarations.
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}@ChgNote{Pragma is obsolete}
 This applies to Inline, Suppress,
 Import, Export, and Convention @nt{pragma}s.
-For example, it is OK to say @lquotes@;@key[pragma] Suppress(Elaboration_Check, On
+For example, it is OK to say @lquotes@;@key[pragma] @Chg{Version=[2],
+New=[Export(C, Entity_Name],Old=[Suppress(Elaboration_Check, On]}
 => P.Q);@rquotes@;, even if there are two directly visible P's, and
 there are two Q's declared in the visible part of each P.
 In this case, P.Q denotes four different declarations.
