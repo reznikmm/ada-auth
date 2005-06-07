@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:01:57 $}
+@Comment{$Date: 2005/06/06 02:54:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @LabeledClause{Array Types}
 
@@ -1864,7 +1864,7 @@ the constraint of the parent subtype in a
 then its name shall appear alone as a @nt<direct_name> (not as
 part of a larger expression or expanded name).
 A discriminant shall not be used to define the constraint of
-a scalar component.@Defn{Term=[discriminant],Sec=[use in a record definition]}@ChgNote{New index entry}
+a scalar component.@Defn2{Term=[discriminant],Sec=[use in a record definition]}@ChgNote{New index entry}
 @begin{Reason}
 The penultimate restriction simplifies implementation,
   and allows the outer discriminant and the inner discriminant

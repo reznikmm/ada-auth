@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:37 $}
+@Comment{$Date: 2005/06/06 02:54:21 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -729,7 +729,7 @@ operands to produce an effect, or yield a result, or both.
 
 @noprefix@;These language-defined classes are organized like this:
 @begin{Display}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @TabClear{}
 @TabSet{3, 6, 9, 12, 15, 18, 21}
 all types
@@ -751,20 +751,30 @@ all types
 @\@\access
 @\@\@\access-to-object
 @\@\@\access-to-subprogram
-@\composite
-@\@\array
-@\@\@\string
-@\@\@\other array
-@\@\untagged record
-@\@\tagged@Chg{Version=[2],New=[
-@\@\@\interface],Old=[]}
-@\@\task
-@\@\protected
+@\composite@Chg{Version=[2],New=[
+@\@\noninterface],Old=[]}
+@Chg{Version=[2],New=[@\],Old=[]}@\@\array
+@Chg{Version=[2],New=[@\],Old=[]}@\@\@\string
+@Chg{Version=[2],New=[@\],Old=[]}@\@\@\other array
+@\@\@Chg{Version=[2],New=[@\],Old=[untagged ]}record@Chg{Version=[2],New=[],Old=[
+@\@\tagged]}
+@Chg{Version=[2],New=[@\],Old=[]}@\@\task
+@Chg{Version=[2],New=[@\],Old=[]}@\@\protected@Chg{Version=[2],New=[
+@\@\interface
+@\@\@\nonlimited interface
+@\@\@\limited interface
+@\@\@\@\synchronized interface
+@\@\@\@\@\task interface
+@\@\@\@\@\protected interface],Old=[]}
 @end{Display}
 
-@noprefix@;The classes @lquotes@;numeric@rquotes@; and @lquotes@;nonlimited@rquotes@;
-represent other classification dimensions
-and do not fit into the above strictly hierarchical picture.
+@noprefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@Chg{Version=[2],New=[There are other],Old=[The]} classes@Chg{Version=[2],
+New=[, such as],Old=[]} @lquotes@;numeric@rquotes@; and
+@lquotes@;@Chg{Version=[2],New=[tagged],Old=[nonlimited]}@rquotes@;@Chg{Version=[2],
+New=[, which],Old=[]}
+represent other classification dimensions@Chg{Version=[2],New=[, but],
+Old=[ and]} do not fit into the above strictly hierarchical picture.
 @end{Notes}
 
 @begin{DiffWord83}

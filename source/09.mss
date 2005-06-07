@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:43 $}
+@Comment{$Date: 2005/06/06 02:54:24 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 
@@ -205,8 +205,8 @@ Private part is defined in Section 8.
 @nt{task_definition}, a
 @nt{task_definition} without @nt{task_item}s is assumed.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00419-01]}
-@ChgAdded{Version=[2],Text=[For a @nt{task_type_declaration}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00419-01]}
+@ChgAdded{Version=[2],Text=[For a task declaration
 with an @nt{interface_list}, the task type
 inherits user-defined primitive subprograms from each progenitor
 type (see @RefSecNum{Interface Types}), in the same way that a derived type
@@ -214,7 +214,7 @@ inherits user-defined primitive subprograms from its progenitor types (see
 @RefSecNum{Derived Types and Classes}). If the first
 parameter of a primitive inherited subprogram is of the task type or an access
 parameter designating the task type, and there is an @nt{entry_declaration} for
-a single entry with the same identifier within the @nt{task_type_declaration},
+a single entry with the same identifier within the task declaration,
 whose profile is type conformant with the
 prefixed view profile of the inherited subprogram, the inherited subprogram is
 said to be @i{implemented} by the conforming task entry.@PDefn2{Term=[implemented],
@@ -222,7 +222,7 @@ Sec=[by a task entry]}@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
-  interface; a @nt{task_type_declaration} inherits no subprograms of its own.]}
+  interface; a task declaration inherits no subprograms of its own.]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -239,9 +239,9 @@ task declaration.]}
   if the implementation supports it.]}
 @end(Honest)
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
 @ChgAdded{Version=[2],Text=[@Redundant[Each @nt{interface_subtype_mark} of an
-@nt{interface_list} appearing within a @nt{task_type_declaration} shall denote
+@nt{interface_list} appearing within a task declaration shall denote
 a limited interface type that is not a protected interface.]]}
 @begin(TheProof)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -272,10 +272,10 @@ access parameter designating the task type.]}
   with Ada 95.]}
 @end(Reason)
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For each primitive subprogram
-inherited by the type declared by a
-@nt{task_type_declaration}, at most one of the following shall apply:]}
+inherited by the type declared by a task declaration, at most one of the
+following shall apply:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
@@ -289,6 +289,15 @@ or@Defn2{Term=[subtype conformance],Sec=(required)}]}
 single entry of the task type; in which case its prefixed view profile
 shall be subtype conformant with that of the task entry.
 @Defn2{Term=[subtype conformance],Sec=(required)}]}
+
+@begin(Ramification)
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[An entry may implement two subprograms from the
+  ancestors, one whose first parameter is of type @i<T> and one whose first
+  parameter is of type @key{access} @i{T}. That's OK because
+  @lquotes@;implemented by@rquotes (unlike @lquotes@;overridden@rquote)
+  probably entails the creation of wrappers.]}
+@end(Ramification)
 
 @end{Itemize}
 
@@ -370,13 +379,17 @@ task of the corresponding type
 
 @begin{Notes}
 
-Within the declaration or body of a task unit, the name of
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00382-01]}
+Within the declaration or body of a task unit@Chg{Version=[2],New=[ other than
+in an @nt{access_definition}],Old=[]}, the name of
 the task unit denotes the current instance of the unit
 (see @RefSecNum(The Context of Overload Resolution)),
 rather than the first subtype of the corresponding task type (and
 thus the name cannot be used as a @nt<subtype_mark>).
 @begin(Discussion)
-However, it is possible to refer to
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00382-01]}
+@Chg{Version=[2],New=[It can be used as a @nt{subtype_mark} in an anonymous
+access type. In addition],Old=[However]}, it is possible to refer to
 some other subtype of the task type within its body,
 presuming such a subtype has been
 declared between the @nt<task_type_declaration> and the @nt<task_body>.
@@ -503,6 +516,11 @@ because a @nt{declarative_part} can be empty.
   @ChgAdded{Version=[2],Text=[Revised the note on operations of task types to
   reflect that limited types do have an assignment operation, but not
   copying (@nt{assignment_statement}s).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
+  @ChgAdded{Version=[2],Text=[Revised the note on use of the name of
+  a protected type within itself to reflect the exception for anonymous
+  access types.]}
 @end{DiffWord95}
 
 
@@ -564,7 +582,8 @@ of a given declarative region, the activations are initiated
 within the context of the @nt<handled_@!sequence_of_@!statements>
 (and its associated @nt<exception_@!handler>s if any @em
 see @RefSecNum{Exception Handlers}), just prior to executing the
-statements of the @nt<_sequence>.
+statements of the @Chg{Version=[2],New=[@nt{handled_sequence_of_statements}],
+Old=[@nt<_sequence>]}.
 @Redundant[For a package without an explicit body or an explicit
 @nt<handled_@!sequence_of_@!statements>,
 an implicit body or an implicit @nt<null_@!statement> is assumed,
@@ -627,6 +646,13 @@ whether to raise Tasking_Error.
   Tasking_Error is raised only once, even if two or more
   of the tasks being activated fail their activation.
 @end(Discussion)
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+  @ChgAdded{Version=[2],Text=[The pragma Partition_Elaboration_Policy (see
+  @RefSecNum{Pragma Partition_Elaboration_Policy})
+  can be used to defer task activation to a later point, thus changing
+  many of these rules.]}
+@end{Honest}
 
 Should the task that created
 the new tasks never reach the point
@@ -736,7 +762,8 @@ occur when the task is blocked at a @nt<select_@!statement> with an
 (see @RefSecNum(Selective Accept)); the open @nt<terminate_alternative>
 is selected if and only if the following conditions are satisfied:
 @begin{itemize}
-  The task depends on some completed master;
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
+  The task depends on some completed master;@Chg{Version=[2],New=[ and],Old=[]}
 
   Each task that depends on the master considered is either already
   terminated or similarly blocked at a @nt<select_statement>
@@ -955,8 +982,8 @@ unit.]
 Private part is defined in Section 8.
 @end{theproof}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00419-01]}
-@ChgAdded{Version=[2],Text=[For a @nt{protected_type_declaration}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00419-01]}
+@ChgAdded{Version=[2],Text=[For a protected declaration
 with an @nt{interface_list}, the protected type inherits user-defined primitive
 subprograms from each progenitor type (see @RefSecNum{Interface Types}), in the
 same way that a derived type inherits user-defined primitive subprograms from
@@ -964,7 +991,7 @@ its progenitor types (see @RefSecNum{Derived Types and Classes}). If the first
 parameter of a primitive inherited subprogram is of the protected type or an
 access parameter designating the protected type, and there is a
 @nt{protected_operation_declaration} for a protected subprogram or single entry
-with the same identifier within the @nt{protected_type_declaration}, whose
+with the same identifier within the protected declaration, whose
 profile is type conformant with the prefixed view profile of the
 inherited subprogram, the inherited subprogram is said to be
 @i{implemented} by the conforming protected subprogram or
@@ -976,7 +1003,7 @@ Sec=[by a protected entry]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
-  interface; a @nt{protected_type_declaration} inherits no subprograms of its
+  interface; a protected declaration inherits no subprograms of its
   own.]}
 @end{Ramification}
 
@@ -996,10 +1023,10 @@ protected declaration.]}
   if the implementation supports it.]}
 @end(Honest)
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[@Redundant[Each @nt{interface_subtype_mark} of an @nt{interface_list} appearing within a
-@nt{protected_type_declaration} shall denote a limited interface type that
-is not a task interface.]]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[Each @nt{interface_subtype_mark} of an
+@nt{interface_list} appearing within a protected declaration shall denote a
+limited interface type that is not a task interface.]]}
 @begin(TheProof)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[@RefSecNum{Interface Types} requires that an
@@ -1031,10 +1058,9 @@ the protected type.@Defn2{Term=[type conformance],Sec=(required)}]}
 
 
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For each primitive subprogram
-inherited by the
-type declared by a @nt{protected_type_declaration}, at most one of the
+inherited by the type declared by a protected declaration, at most one of the
 following shall apply:]}
 
 @begin{Itemize}
@@ -1279,13 +1305,17 @@ package body will occur before that of the package specification).]}
 
 @begin{Notes}
 
-Within the declaration or body of a protected unit, the name of
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00382-01]}
+Within the declaration or body of a protected unit@Chg{Version=[2],New=[ other
+than in an @nt{access_definition}],Old=[]}, the name of
 the protected unit denotes the current instance of the unit
 (see @RefSecNum(The Context of Overload Resolution)),
 rather than the first subtype of the corresponding protected type (and
 thus the name cannot be used as a @nt<subtype_mark>).
 @begin(Discussion)
-  However, it is possible to refer to
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00382-01]}
+  @Chg{Version=[2],New=[It can be used as a @nt{subtype_mark} in an anonymous
+  access type. In addition],Old=[However]}, it is possible to refer to
   some other subtype of the protected type within its body,
   presuming such a subtype has been
   declared between the @nt<protected_type_declaration>
@@ -1412,6 +1442,11 @@ protected units do not exist in Ada 83.
   protected types to
   reflect that limited types do have an assignment operation, but not
   copying (@nt{assignment_statement}s).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
+  @ChgAdded{Version=[2],Text=[Revised the note on use of the name of
+  a protected type within itself to reflect the exception for anonymous
+  access types.]}
 @end{DiffWord95}
 
 
@@ -1683,14 +1718,14 @@ a language-defined subprogram is nonblocking.
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00178-01]}
 @ChgAdded{Version=[2],Text=[Any subprogram in a language-defined input-output
-package that has a file parameter or result or
-operates on a default file is considered to manipulate a file. An instance
-of a language-defined input-output provides subprograms that are covered
-by this rule. The only subprograms in language-defined input-output packages
-not covered by this rule (and thus not potentially blocking) are the Get and
-Put routines that take string parameters defined in the packages nested in
-Ada.Text_IO.]}@ChgNote{This was the resolution of a ramification.}
-@end{Discussion}
+package that has a file parameter or result or operates on a default file is
+considered to manipulate a file. An instance of a language-defined input-output
+generic package provides subprograms that are covered by this rule. The only
+subprograms in language-defined input-output packages not covered by this rule
+(and thus not potentially blocking) are the Get and Put routines that take
+string parameters defined in the packages nested in Ada.Text_IO.]}@ChgNote{This
+was the resolution of a ramification.}
+ @end{Discussion}
 @end{Bounded}
 
 @begin{Notes}
@@ -1731,6 +1766,11 @@ target object is not considered a potentially blocking operation.
   object are considered potentially blocking, since they
   can deadlock the task indefinitely.
 @end(Reason)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[The @nt{pragma} Detect_Blocking may be used to ensure
+that all executions of potentially blocking operations raise Program_Error.
+See @RefSecNum{Pragma Detect_Blocking}.]}
 @end{Notes}
 
 @begin{Examples}
@@ -1743,6 +1783,15 @@ Control.Release;
 @end{Example}
 
 @end{Examples}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+  @ChgAdded{Version=[2],Text=[Added a note pointing out the existence of
+  @nt{pragma} Detect_Blocking. This pragma can be used to insure portable
+  (somewhat pessimistic) behavior of protected actions by converting the
+  Bounded Error into a required check.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Entries and Accept Statements}
 
@@ -2455,10 +2504,12 @@ while any other protected action is occurring on the protected object.
 Like any protected action, it includes servicing of the entry queues
 (in case some entry barrier depends on a Count attribute).]
 @begin(ImplNote)
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   In the case of an attempted cancellation due to abort,
   this removal might have to be performed by the calling task
   itself if the ceiling priority of the protected object
-  is lower than the task initiating the abort.
+  is lower than the @Chg{Version=[2],New=[priority of the ],Old=[]}task
+  initiating the abort.
 @end(ImplNote)
 
 @Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
@@ -3345,16 +3396,10 @@ environment (such as POSIX).]}
                          Leap_Seconds : @key<out> Leap_Seconds_Count);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<function> "+" (Left : Time; Right : Day_Count) @key<return> Time;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<function> "+" (Left : Day_Count; Right : Time) @key<return> Time;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<function> "-" (Left : Time; Right : Day_Count) @key<return> Time;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<function> "-" (Left, Right : Time) @key<return> Day_Count;]}
+@ChgAdded{Version=[2],Text=[   @key<function> "+" (Left : Time; Right : Day_Count) @key<return> Time;
+   @key<function> "+" (Left : Day_Count; Right : Time) @key<return> Time;
+   @key<function> "-" (Left : Time; Right : Day_Count) @key<return> Time;
+   @key<function> "-" (Left, Right : Time) @key<return> Day_Count;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<end> Ada.Calendar.Arithmetic;]}
@@ -3524,7 +3569,8 @@ unknown, then Unknown_Zone_Error is raised.]}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[The Date parameter is needed to take
     into account time differences caused by daylight-savings time and other
-    time changes.]}
+    time changes. This parameter is measured in the time zone of Calendar,
+    if any, not necessarily the UTC time zone.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[Other time zones can be supported with a
