@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/06/05 05:39:49 $}
+@Comment{$Date: 2005/06/07 06:07:51 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2209,9 +2209,9 @@ the object that is not assigned an initial value
 Initialize is called on that subcomponent.
 Similarly, if the object @Chg{Version=[2],New=[that is initialized by
 default ],Old=[]}as a whole is controlled@Chg{Version=[2],New=[],Old=[ and
-is not assigned an initial value]}, Initialize is called on the object.
-The same applies to the evaluation of an @nt{allocator},
-as explained in @RefSecNum{Allocators}.
+is not assigned an initial value]}, Initialize is called on the object.@Chg{Version=[2],
+New=[],Old=[ The same applies to the evaluation of an @nt{allocator},
+as explained in @RefSecNum{Allocators}.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}

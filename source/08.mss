@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/06/05 05:39:50 $}
+@Comment{$Date: 2005/06/07 06:07:52 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -776,7 +776,7 @@ implicitly declared at the same place:]}
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[If one is a non-null non-abstract subprogram,
-then it overrides all which are null or abstract subprograms.]}
+then it overrides all that are null or abstract subprograms.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[If all are null procedures or abstract subprograms, then

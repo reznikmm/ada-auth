@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/06/06 02:54:24 $}
+@Comment{$Date: 2005/06/07 06:07:53 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 
@@ -3708,8 +3708,9 @@ less than 1.0.]}
     @key<return> Day_Duration;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Day_Duration value for the
-Hour:Minute:Second.Sub_Second. This value can be used in Calendar.Time_Of as
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Day_Duration value for
+the combination of the given Hour, Minute, Second, and Sub_Second.
+This value can be used in Calendar.Time_Of as
 well as the argument to Calendar."+" and Calendar."@en". If Seconds_Of is
 called with a Sub_Second value of 1.0, the value returned is equal to the value
 of Seconds_Of for the next second with a Sub_Second value of 0.0.]}
@@ -3722,9 +3723,16 @@ of Seconds_Of for the next second with a Sub_Second value of 0.0.]}
                  Sub_Second : @key<out> Second_Duration);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Seconds into
-Hour:Minute:Second.Sub_Second. The value returned through the Sub_Second
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Seconds into Hour, Minute,
+Second and Sub_Second in such a way that the resulting values all belong to
+their respective subtypes. The value returned through the Sub_Second
 parameter is always less than 1.0.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[There is only one way to do the split which
+  meets all of the requirements.]}
+@end{Ramification}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;
@@ -3832,10 +3840,10 @@ returned through the Seconds parameter is always less than 86_400.0.]}
 the given Time_Zone.
 The format is "Year-Month-Day Hour:Minute:Second", where each value
 other than Year is a 2-digit form of the value of the functions
-defined in Calendar and Calendar.Formatting, including a leading '0',
+defined in Calendar and Calendar.Formatting, including a leading zero,
 if needed. Year is a 4-digit value.
-If Include_Time_Fraction is True, Sub_Seconds*100 is suffixed to the
-string as a 2-digit value following a '.'.]}
+If Include_Time_Fraction is True, the integer part of Sub_Seconds*100 is
+suffixed to the string as a 2-digit value following a point.]}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[The Image provides a string in ISO 8601 format, the
@@ -3848,8 +3856,17 @@ string as a 2-digit value following a '.'.]}
     mentioned above cannot produce those results).]}
 @end{Discussion}
 
+@begin{Ramification}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[The fractional part is truncated, not rounded.
+    It would be quite hard to define the proper rounding semantics, as it can
+    change all of the values of the image. Values can be rounded up by adding
+    an appropriate constant (0.5 if Include_Time_Fraction is False,
+    0.005 otherwise) to the time before taking the image.]}
+@end{Ramification}
+
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Value (Date : String)
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Value (Date : String;
                 Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> Time;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
@@ -3865,16 +3882,15 @@ given string as a Time value.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a string form of the Elapsed_Time.
 The format is "Hour:Minute:Second", where each value
-is a 2-digit form of the value, including a leading '0', if needed.
-If Include_Time_Fraction is True, Sub_Seconds*100 is suffixed to the
-string as a 2-digit value following a '.'.
+is a 2-digit form of the value, including a leading zero, if needed.
+If Include_Time_Fraction is True, the integer part of Sub_Seconds*100 is
+suffixed to the string as a 2-digit value following a point.
 If Elapsed_Time < 0.0, the result is Image (@key<abs> Elapsed_Time,
-Include_Time_Fraction) prefixed with "@en". If @key<abs> Elapsed_Time represents
-100 hours or more, the result is implementation-defined.
-]}
+Include_Time_Fraction) prefixed with a minus sign. If @key<abs> Elapsed_Time
+represents 100 hours or more, the result is implementation-defined.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The result of Calendar.Formating.Image if its argument is represents more than
-100 hours.]}]}
+Text=[The result of Calendar.Formating.Image if its argument represents more
+than 100 hours.]}]}
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This cannot be implemented (directly) by calling
@@ -3913,15 +3929,22 @@ consistent with no leap seconds.]}]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-@ChgAdded{Version=[2],Text=[The time in the time zone known as Greenwich Mean Time (GMT)
-is generally equivalent to UTC time.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
 @ChgAdded{Version=[2],Text=[The implementation-defined time zone of package Calendar
 may, but need not, be the local time zone. UTC_Time_Offset always returns the
 difference relative to the implementation-defined time zone of package
 Calendar. If UTC_Time_Offset does not raise Unknown_Zone_Error, UTC time
 can be safely calculated (within the accuracy of the underlying time-base).]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+  @ChgAdded{Version=[2],Text=[The time in the time zone known as Greenwich
+  Mean Time (GMT) is generally very close to UTC time; for most purposes they
+  can be treated the same. GMT is the time based on the rotation of the Earth;
+  UTC is the time based on atomic clocks, with leap seconds periodically
+  inserted to realign with GMT (because most human activites depend on the
+  rotation of the Earth). At any point in time, there will be a sub-second
+  difference between GMT and UTC.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
 @ChgAdded{Version=[2],Text=[Calling Split on the results of subtracting
@@ -4247,7 +4270,7 @@ a call on a procedure implemented by an entry,],Old=[;]}
 the entry call is then issued.@Chg{Version=[2],New=[ Otherwise, the call
 proceeds as described in @RefSecNum{Subprogram Calls} for a procedure call,
 followed by the @nt{sequence_of_statements} of the @nt{entry_call_alternative},
-and the @nt{delay_alternative} @nt{sequence_of_statements} is ignored.],Old=[]}
+and the @nt{sequence_of_statements} of the @nt{delay_alternative} is ignored.],Old=[]}
 
 
 If the call is queued (including due to a requeue-with-abort),
@@ -4259,13 +4282,15 @@ executed; if the entry call completes normally, the optional
 @nt<sequence_of_statements> of the @nt<entry_call_alternative> is
 executed.
 @begin{Ramification}
-The fact that the syntax calls for an @nt{entry_call_statement} means
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00345-01]}
+@ChgDeleted{Version=[2],Text=[The fact that the syntax calls for
+an @nt{entry_call_statement} means
 that this fact is used in overload resolution.
 For example,
 if there is a procedure X and an entry X (both with no parameters),
 then "select X; ..." is legal,
 because overload resolution knows that the entry is the one that was
-meant.
+meant.]}
 @end{Ramification}
 
 @end{RunTime}
@@ -4287,21 +4312,29 @@ This clause comes before the one for Conditional Entry Calls,
 so we can define conditional entry calls in terms of timed entry calls.
 @end{DiffWord83}
 
-@begin{Extend95}
+@begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   A procedure call that might be an entry can be used in a timed or
-  conditional entry call.]}
-@end{Extend95}
+  conditional entry call. Since the fact that something is an entry
+  could be used in resolving these calls in Ada 95, it is possible for
+  timed or conditional entry calls that resolved in Ada 95 to be ambiguous
+  in Ada 2006. That could happen if both an entry and procedure with the
+  same name and profile exist, which should be rare.]}
+@end{Incompatible95}
 
 
 @LabeledSubClause{Conditional Entry Calls}
 
 @begin{Intro}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @Redundant[A @nt{conditional_entry_call} issues an entry call that is
 then cancelled if it is not selected immediately (or if a requeue-with-abort
-of the call is not selected immediately).]
+of the call is not selected immediately).@Chg{Version=[2],New=[ A procedure
+call may appear rather than
+an entry call for cases where the procedure might be implemented by
+an entry.],Old=[]}]
 @begin(Honest)
   In the case of an entry call on a protected object, it is OK if the entry
   is closed at the start of the corresponding protected action, so long as
@@ -4399,7 +4432,7 @@ For the execution of an @nt{asynchronous_select}
 whose @nt<triggering_statement> is @Chg{Version=[2],
 New=[a @nt<procedure_or_entry_call>],Old=[an @nt<entry_call_statement>]},
 the @Syni(entry_)@nt<name>@Chg{Version=[2],New=[, @Syni{procedure_}@nt{name},
-or @Syni{procedure_}@nt{prefix}, ],Old=[]} and actual parameters are evaluated
+or @Syni{procedure_}@nt{prefix},],Old=[]} and actual parameters are evaluated
 as for a simple entry call (see @RefSecNum(Entry Calls))@Chg{Version=[2],New=[
 or procedure call (see @RefSecNum{Subprogram Calls}).
 If the call is an entry call or a call on a procedure implemented by an
@@ -4762,8 +4795,16 @@ is of a task type
 any implicit dereference)]>},
 the following attributes are defined:
 @begin{Description}
-@ChgAttribute{Version=[2], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+@Comment{@ChgAttribute{Version=[2], Kind=[Revised], ChginAnnex=[F], Leading=[F],
   Prefix=<T>, AttrName=<Callable>, ARef=[AI95-00345],
+  Text=<Yields the value True when the task denoted by T
+                is @i(callable), and False otherwise;>}
+                @PDefn2{Term=[task state], Sec=(callable)}
+                @Defn{callable}
+                a task is callable unless it is completed or abnormal.
+                The value of this attribute is of the predefined
+                type Boolean.}
+@Attribute{Prefix=<T>, AttrName=<Callable>,
   Text=<Yields the value True when the task denoted by T
                 is @i(callable), and False otherwise;>}
                 @PDefn2{Term=[task state], Sec=(callable)}
@@ -4772,8 +4813,7 @@ the following attributes are defined:
                 The value of this attribute is of the predefined
                 type Boolean.
 
-@ChgAttribute{Version=[2], Kind=[Revised], ChginAnnex=[F], Leading=[F],
-  Prefix=<T>, AttrName=<Terminated>, ARef=[AI95-00345],
+@Attribute{Prefix=<T>, AttrName=<Terminated>,
   Text=<Yields the value True if the task denoted by T is
                 terminated, and False otherwise. The value of this
                 attribute is of the predefined type Boolean.>}

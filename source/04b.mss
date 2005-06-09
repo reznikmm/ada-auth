@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:40 $}
+@Comment{$Date: 2005/06/07 06:07:51 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.17 $}
+@Comment{$Revision: 1.18 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1367,21 +1367,66 @@ otherwise, the]} object is constrained by its initial value
 @end{StaticSem}
 
 @begin{RunTime}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}
 @PDefn2{Term=[evaluation], Sec=(allocator)}
-For the evaluation of an @nt<allocator>, the elaboration of
-the @nt<subtype_indication> or the evaluation of the @nt<qualified_expression>
-is performed first.
+For the evaluation of an @Chg{Version=[2],New=[initialized allocator],
+Old=[@nt<allocator>]}, the @Chg{Version=[2],New=[],Old=[elaboration of
+the @nt<subtype_indication> or the ]}evaluation of the
+@nt<qualified_expression> is performed first.
 @PDefn2{Term=[evaluation], Sec=(initialized allocator)}
 @Defn2{Term=[assignment operation], Sec=(during evaluation of an
 initialized allocator)}
-For the evaluation of an initialized allocator, an object of
-the designated type
-is created and the value
-of the @nt<qualified_expression> is converted to the designated subtype
+@Chg{Version=[2],New=[An],Old=[For the evaluation of an initialized allocator,
+an]} object of the designated type is created and the value of the
+@nt<qualified_expression> is converted to the designated subtype
 and assigned to the object.
 @PDefn2{Term=[implicit subtype conversion],Sec=(initialization expression of allocator)}
-@Chg{Version=[2],New=[If the designated type of the type of the @nt{allocator}
+@begin{Ramification}
+  The conversion might raise Constraint_Error.
+@end{Ramification}
+
+@PDefn2{Term=[evaluation], Sec=(uninitialized allocator)}
+@Leading@keepnext@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}
+For the evaluation of an uninitialized allocator@Chg{Version=[2],New=[, the
+elaboration of the @nt{subtype_indication} is performed first. Then],Old=[]}:
+@begin(itemize)
+@Defn2{Term=[assignment operation], Sec=(during evaluation of an
+uninitialized allocator)}
+  If the designated type is elementary, an object of the
+  designated subtype is created and any implicit initial value is assigned;
+
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}
+@Chg{Version=[2],New=[],Old=[@Defn2{Term=[assignment operation],
+Sec=(during evaluation of an uninitialized allocator)}]}
+  If the designated type is composite, an object of the
+  designated type is created with tag, if any, determined
+  by the @nt<subtype_mark> of the @nt<subtype_indication>@Chg{Version=[2],New=[.
+  This object is then initialized by default (see
+  @RefSecNum{Object Declarations}) using],Old=[;
+  any per-object constraints on subcomponents are elaborated
+  @Chg{New=[(see @RefSecNum{Record Types}) ],Old=[]}and any implicit initial
+  values for the subcomponents of the object are obtained as determined by]}
+  the @nt<subtype_indication>
+  @Chg{Version=[2],New=[as its nominal subtype],
+  Old=[and assigned to the corresponding subcomponents]}.
+  @IndexCheck{Index_Check}
+  @IndexCheck{Discriminant_Check}
+  A check is made that the value of the object belongs to the designated
+  subtype.
+  @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+  Constraint_Error is raised if this check fails.
+  This check and the initialization of the object are performed in
+  an arbitrary order.
+
+@begin{Discussion}
+AI83-00150.
+@end{Discussion}
+@end(itemize)
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[For any @nt{allocator}, if the designated type of
+the type of the @nt{allocator}
 is class-wide, then a check is made that the accessibility level of the type
 determined by the @nt{subtype_indication}, or by the tag of the value of the
 @nt{qualified_expression}, is not
@@ -1392,10 +1437,7 @@ level of the anonymous access type of each access discriminant is
 not deeper than that of the type of the @nt{allocator}.
 Program_Error is raised
 if either such check fails.@IndexCheck{Accessibility_Check}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}
-@begin{Ramification}
-  The conversion might raise Constraint_Error.
-@end{Ramification}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgAdded{Version=[2],Text=[The accesibility check on class-wide types
@@ -1407,37 +1449,6 @@ if either such check fails.@IndexCheck{Accessibility_Check}
   @ChgAdded{Version=[2],Text=[The accesibility check on access discriminants
   prevents the allocated object from outliving its discriminants.]}
 @end{Reason}
-
-@PDefn2{Term=[evaluation], Sec=(uninitialized allocator)}
-@Leading@keepnext@;For the evaluation of an uninitialized allocator:
-@begin(itemize)
-@Defn2{Term=[assignment operation], Sec=(during evaluation of an
-uninitialized allocator)}
-  If the designated type is elementary, an object of the
-  designated subtype is created and any implicit initial value is assigned;
-
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
-@Defn2{Term=[assignment operation], Sec=(during evaluation of an
-uninitialized allocator)}
-  If the designated type is composite, an object of the
-  designated type is created with tag, if any, determined
-  by the @nt<subtype_mark> of the @nt<subtype_indication>;
-  any per-object constraints on subcomponents are elaborated
-  @Chg{New=[(see @RefSecNum{Record Types}) ],Old=[]}and any implicit initial
-  values for the subcomponents of the object are obtained as determined by
-  the @nt<subtype_indication> and assigned to the corresponding subcomponents.
-  @IndexCheck{Index_Check}
-  @IndexCheck{Discriminant_Check}
-  A check is made that the value of the object belongs to the designated
-  subtype.
-  @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
-  Constraint_Error is raised if this check fails.
-  This check and the initialization of the object are performed in
-  an arbitrary order.
-@begin{Discussion}
-AI83-00150.
-@end{Discussion}
-@end(itemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
 @Chg{Version=[2],New=[If the object to be created by an @nt<allocator> has a
@@ -1619,6 +1630,12 @@ has been moved to @RefSec{Storage Management}.
   designated types had to be declared at the same level, so the access type
   would necessarily have been at the same level or more nested than the type
   of allocated object).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00373-01]}
+  @ChgAdded{Version=[2],Text=[Revised the description of evaluation of
+  uninitialized allocators to use @lquotes@;initialized by default@rquotes
+  so that the ordering requirements are the same for all kinds of objects
+  that are default-initialized.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added accessibility checks to access
