@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:41 $}
+@Comment{$Date: 2005/06/09 05:03:45 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2230,7 +2230,7 @@ function body. If either check fails, Program_Error is raised.
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The class-wide check prevents the returned object
   from outliving its type. The access discriminant check prevents the returned
-  object (for a non-limited type) from outliving the object designated by one
+  object (for a nonlimited type) from outliving the object designated by one
   of its discriminants.]}
 @end{Reason}
 

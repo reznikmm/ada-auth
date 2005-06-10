@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2005/05/20 05:49:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2005/06/09 05:03:48 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/05/20 05:49:41 $}
+@Comment{$Date: 2005/06/09 05:03:48 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -59,29 +59,29 @@ calls @lquotes@;iterators@rquotes@; are
 called @lquotes@;cursors@rquotes@; here.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The following major non-limited
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following major nonlimited
 containers are provided:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[(Expandable) Vectors of any non-limited type;]}
+  @ChgAdded{Version=[2],Text=[(Expandable) Vectors of any nonlimited type;]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Doubly-linked Lists of any non-limited type;]}
+  @ChgAdded{Version=[2],Text=[Doubly-linked Lists of any nonlimited type;]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Hashed Maps keyed by any non-limited hashable type,
-  and containing any non-limited type;]}
+  @ChgAdded{Version=[2],Text=[Hashed Maps keyed by any nonlimited hashable type,
+  and containing any nonlimited type;]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Ordered Maps keyed by any non-limited ordered type,
-  and containing any non-limited type;]}
+  @ChgAdded{Version=[2],Text=[Ordered Maps keyed by any nonlimited ordered type,
+  and containing any nonlimited type;]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Hashed Sets of any non-limited hashable type; and]}
+  @ChgAdded{Version=[2],Text=[Hashed Sets of any nonlimited hashable type; and]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Ordered Sets of any non-limited ordered type.]}
+  @ChgAdded{Version=[2],Text=[Ordered Sets of any nonlimited ordered type.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -153,10 +153,10 @@ element, while Delete for an Ordered_Set does.)]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This is not likely to be a hardship, as the element
-type has to be non-limited. Types used to manage scarce resources generally
+type has to be nonlimited. Types used to manage scarce resources generally
 need to be limited. Otherwise, the amount of resources needed is hard to
 control, as the language allows a lot of variation in the number or order of
-adjusts/finalizations. For common uses of non-limited controlled types such as
+adjusts/finalizations. For common uses of nonlimited controlled types such as
 managing storage, the types already have to manage arbitrary copies.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1499,7 +1499,7 @@ provided. Any exception raised during evaluation of "<" is propagated.]}
   @ChgAdded{Version=[2],Text=[This implies swapping the elements, usually
   including an intermediate copy. This means that the elements will usually be
   copied. (As with Swap, if the implementation can do this some other way, it
-  is allowed to.) Since the elements are non-limited, this usually will not be
+  is allowed to.) Since the elements are nonlimited, this usually will not be
   a problem. Note that there is @ImplAdviceName below that the implementation
   should use a sort that minimizes copying of elements.]}
 
@@ -6845,7 +6845,7 @@ provided. Any exception raised during evaluation of "<" is propagated.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This implies swapping the elements, usually
   including an intermediate copy. This of course means that the elements will be
-  copied. Since the elements are non-limited, this usually will not be a problem.
+  copied. Since the elements are nonlimited, this usually will not be a problem.
   Note that there is Implementation Advice below that the implementation should
   use a sort that minimizes copying of elements.]}
 

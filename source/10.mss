@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:44 $}
+@Comment{$Date: 2005/06/09 05:03:46 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -409,7 +409,7 @@ limited view of that package, with the same @nt{defining_program_unit_name}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00326-01]}
 @ChgAdded{Version=[2],Text=[For each @nt{type_declaration} in the visible part, an
-incomplete view of the type is declared. If the @nt{type_declaration} is
+incomplete view of the type; if the @nt{type_declaration} is
 tagged, then the view is a tagged incomplete view.]}
 @end(Itemize)
 
@@ -437,13 +437,20 @@ library @nt{package_declaration} is immediately preceded by the reserved word
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[@Redundant[There is no syntax for declaring limited views
 of packages, because they are always implicit.] The implicit declaration of a
-limited view of a package is @Redundant[not the declaration of a library
-unit (the library package_declaration is); nonetheless, it is] a
+limited view of a package @Redundant[is not the declaration of a library
+unit (the library package_declaration is); nonetheless, it] is a
 @nt{library_item}.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[A library @nt{package_declaration} is the completion of
 the declaration of its limited view.]}
+
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is notwithstanding the rule in
+  @RefSecNum{Completions of Declarations} that says that implicit declarations
+  don't have completions.]}
+@end{Honest}
 
 @end{Intro}
 
@@ -467,6 +474,7 @@ We disallow them to keep things simpler
 and because they wouldn't be particularly useful.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
 A @nt{parent_unit_name} @Redundant[(which can be used within a
 @nt<defining_program_unit_name> of a @nt<library_item>
 and in the @key[separate] clause of a @nt<subunit>)],
@@ -474,8 +482,8 @@ and each of its @nt{prefix}es,
 shall not denote a @nt{renaming_declaration}.
 @Redundant[On the other hand,
 a name that denotes a @nt{library_unit_renaming_declaration} is allowed
-in a @nt{with_clause} and other places where the name of a library unit
-is allowed.]
+in a @Chg{Version=[2],New=[@nt{nonlimited_with_clause}],Old=[@nt{with_clause}]}
+and other places where the name of a library unit is allowed.]
 
 If a library package is an instance of
 a generic package, then every child of the
@@ -613,10 +621,10 @@ parent declaration.
 A subunit depends semantically upon its parent body.
 A @nt{library_unit_body} depends semantically upon the corresponding
 @nt{library_unit_declaration}, if any.
-@Chg{Version=[2],New=[The implicit declaration of the limited view of a
-library package depends semantically upon the implicit declaration of the
+@Chg{Version=[2],New=[The declaration of the limited view of a
+library package depends semantically upon the declaration of the
 limited view of its parent.
-The declaration of a library package depends semantically upon the implicit
+The declaration of a library package depends semantically upon the
 declaration of its limited view.],Old=[]}
 A compilation unit depends semantically upon each @nt<library_item>
 mentioned in a @nt{with_clause} of the compilation unit.
@@ -675,8 +683,8 @@ the semantic dependences of a full unit.]}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[The elaboration of the limited view of a package
-has no effect.]}
+@ChgAdded{Version=[2],Text=[The elaboration of the declaration of the limited
+view of a package has no effect.]}
 @end{RunTime}
 
 @begin{Notes}
@@ -945,6 +953,17 @@ the compiler should not have to look ahead at
 subsequent @nt{context_item}s, nor at the compilation unit
 to which the @nt{context_clause} is attached.
 (We have not completely achieved this.)
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@ChgAdded{Version=[2],Text=[@Defn{ripple effect}A @i<ripple effect> occurs
+when the legality of a compilation unit could be affected by adding or removing
+an otherwise unneeded @nt{with_clause} on some compilation unit on which the
+unit depends, directly or indirectly. We try to avoid ripple effects because
+they make understanding and maintenance more difficult. However, ripple effects
+can occur because of direct visibility (as in child units); this seems
+impossible to eliminate. The ripple effect for @nt{with_clause}s is somewhat
+similar to the Beaujolais effect (see @nt{Use Clauses}) for @nt{use_clause}s,
+which we also try to avoid.]}
 @end{MetaRules}
 
 @begin{Syntax}
@@ -963,11 +982,11 @@ to which the @nt{context_clause} is attached.
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<nonlimited_with_clause>,Old=<>}>,rhs="@Chg{Version=[2],New=<[@key{private}] @key{with} @SynI{library_unit_}@Syn2{name} {, @SynI{library_unit_}@Syn2{name}};>,Old=<>}"}
 
 @begin{Discussion}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[A @nt{limited_with_clause} makes a limited view
 of a unit visible.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00262-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @ChgAdded{Version=[2],Text=[@Defn{private with_clause}A @nt{with_clause}
 containing the reserved word @key{private} is called a @i{private with_clause}.
 It can be thought of as making items visible only in the private part, although
@@ -1075,7 +1094,7 @@ library unit, but not a subprogram body acting as a subprogram declaration (see
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @ChgAdded{Version=[2],Text=[the declaration of a public descendant of that
-library unit, and the @nt<with_clause> shall include the reserved word
+library unit, in which case  the @nt<with_clause> shall include the reserved word
 @key<private>.]}
 @end{Itemize}
 
@@ -1221,15 +1240,16 @@ If the user really meant A.B, they still can say that.]}
 @nt{library_unit_body}, @nt{subunit}, or @nt{library_unit_renaming_declaration}.]}
 
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00412-01]}
-@ChgAdded{Version=[2],Text=[We don't allow a @nt{limited_with_clause} on a
-@nt{library_unit_renaming_declaration} because it would be useless. A
-renaming cannot appear in a @nt{limited_with_clause} (by the rule above), and
-a renaming cannot appear in a @nt{nonlimited_with_clause} (because the name
-would not be within the scope of a @nt{with_clause} denoting the package, see
-@RefSecNum{Package Renaming Declarations}). Nor could it be the parent of
-another unit. That doesn't leave anywhere that the name of such a renaming
-@b<could> appear.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00412-01]}
+  @ChgAdded{Version=[2],Text=[We don't allow a @nt{limited_with_clause} on a
+  @nt{library_unit_renaming_declaration} because it would be useless. A
+  renaming cannot appear in a @nt{limited_with_clause} (by the rule prior
+  to this one), and a renaming of a limited view cannot appear in a
+  @nt{nonlimited_with_clause} (because the name
+  would not be within the scope of a @nt{with_clause} denoting the package, see
+  @RefSecNum{Package Renaming Declarations}). Nor could it be the parent of
+  another unit. That doesn't leave anywhere that the name of such a renaming
+  @b<could> appear, so we simply make writing it illegal.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
@@ -1237,28 +1257,6 @@ another unit. That doesn't leave anywhere that the name of such a renaming
 @nt{limited_with_clause} which names a @nt{library_item} shall not appear:]}
 
 @begin(Itemize)
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[in the same @nt{context_clause} as a @nt{nonlimited_with_clause} which
-mentions the same @nt{library_item}; or]}
-
-@begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Such a @nt{limited_with_clause} could have no effect, and
-would be confusing.]}
-@end{Reason}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[in the same @nt{context_clause} as a @nt{use_clause} which names an
-entity declared within the declarative region of the @nt{library_item}; or]}
-
-@begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[This prevents visibility issues, where whether an entity
-is an incomplete or full view depends on how the name of the entity is written.
-The @nt{limited_with_clause} cannot be useful, as we must have the full view
-available in the parent in order for the @nt{use_clause} to be given.]}
-@end{Reason}
-
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[in the @nt{context_clause} for the named
 @nt{library_item}; or]}
@@ -1271,39 +1269,48 @@ available in the parent in order for the @nt{use_clause} to be given.]}
 @ChgAdded{Version=[2],Text=[@key{limited} @key{with} P;
 @key{package} P @key{is} ...]}
 @end{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[as we can't depend on the semantic dependence rules to do it for us as with
-regular withs. This says "named" and not "mentioned" in order that]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[as we can't depend on the semantic dependence
+  rules to do it for us as with regular withs. This says @lquotes@;named@rquotes
+  and not @lquotes@;mentioned@rquotes in order that]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{limited} @key{private} @key{with} P.Child;
 @key{package} P @key{is} ...]}
 @end{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[can be used to allow a mutual dependence between the private part of P and
-the private child P.Child, which occurs in interfacing and other problems.
-Since the child always semantically depends on the parent, this is the only
-way such a dependence can be broken.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[can be used to allow a mutual dependence between
+  the private part of P and the private child P.Child, which occurs in
+  interfacing and other problems. Since the child always semantically depends
+  on the parent, this is the only way such a dependence can be broken.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[in the scope of a @nt{nonlimited_with_clause} which mentions the same
-@nt{library_item}; or]}
+@ChgAdded{Version=[2],Text=[in the same @nt{context_clause} as, or within the
+scope of, a @nt{nonlimited_with_clause} which
+mentions the same @nt{library_item}; or]}
 
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Such a @nt{limited_with_clause} could have no effect as
-the full view is available, and it would be confusing.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Such a @nt{limited_with_clause} could have no
+  effect, and would be confusing. If it is within the scope of a
+  @nt{nonlimited_with_clause}, or if such a clause is in the @nt{context_clause},
+  the full view is available, which strictly provides more information than
+  the limited view.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[in the scope of a @nt{use_clause} which names an entity declared
-within the declarative region of the @nt{library_item}.]}
+@ChgAdded{Version=[2],Text=[in the same @nt{context_clause} as, or within
+the scope of, a @nt{use_clause} which names an entity declared within the
+declarative region of the @nt{library_item}.]}
 
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[This prevents visibility problems, similar to the ones
-noted earlier.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This prevents visibility issues, where whether an
+  entity is an incomplete or full view depends on how the name of the entity is
+  written. The @nt{limited_with_clause} cannot be useful, as we must have the
+  full view available in the parent in order for the @nt{use_clause} to be
+  given.]}
 @end{Reason}
 
 @end(Itemize)
@@ -1311,12 +1318,14 @@ noted earlier.]}
 @end{Legality}
 
 @begin{Notes}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
 A @nt<library_item> mentioned in
 a @nt{with_clause} of a compilation unit
 is visible within the
 compilation unit and hence acts
 just like an ordinary declaration.
-Thus, within a compilation unit that mentions its
+Thus, within a compilation unit that mentions @Chg{Version=[2],New=[a
+view other than a limited view of ],Old=[]}its
 declaration, the name of a
 library package can be given in @nt{use_clause}s and can be used to
 form expanded names, a library subprogram can be called,
@@ -1488,9 +1497,11 @@ The @i{parent body} of a subunit is the body of the program unit
 denoted by its @nt{parent_unit_name}.
 @Defn{subunit} The term @i{subunit} is used to refer to
 a @nt{subunit} and also to the @nt{proper_body} of a @nt{subunit}.
-@Chg{Version=[2],New=<A @i<subunit
-of a program unit> includes subunits declared directly in the program unit as
-well as any subunits declared in those subunits (recursively).>,Old=[]}
+@Chg{Version=[2],New=<The phrase @i<subunit
+of a program unit> refers both to a subunit that
+names that program unit as its parent, as well as to any subunit that
+names such a subunit as its parent (recursively).@Defn2{Term=[subunit],
+Sec=(of a program unit)}>,Old=[]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00243-01]}
 @ChgAdded{Version=[2],Text=[We want any rule that applies to a subunit to apply
@@ -1643,11 +1654,14 @@ to have distinct identifiers.
 Instead, we require only that the full expanded names be distinct.
 @end{Extend83}
 
-@begin{DiffWord95}
+@begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-  @ChgAdded{Version=[2],Text=[An @nt{overriding_indicator} (see
-  @RefSecNum{Visibility}) is allowed on a subprogram stub.]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  An @nt{overriding_indicator} (see
+  @RefSecNum{Overriding Indicators}) is allowed on a subprogram stub.]}
+@end{Extend95}
 
+@begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00243-01]}
   @ChgAdded{Version=[2],Text=[Clarified that a subunit of a subunit is still a
   subunit.]}
@@ -1785,6 +1799,11 @@ Similarly, the implementation has to be able to compile a call to a
 subprogram for which a @nt{pragma} Inline has been specified without
 seeing the body of that subprogram @em inlining would not be
 achieved in this case, but the call is still legal.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@ChgAdded{Version=[2],Text=[The second rule applies to limited views as well
+as the normal view of a unit. That means that an implementation needs a way to
+enforce consistency of limited views, not just of normal views.]}
 @end{Ramification}
 @end{Legality}
 
@@ -1859,10 +1878,10 @@ the act of compiling a unit is one of the
 @lquotes@;@Chg{Version=[2],New=[mechanisms],Old=[mechansisms]}@rquotes for
 removing units other than those specified by this International Standard.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00214-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00214-01]}
 @ChgAdded{Version=[2],Text=[These rules are intended to ensure that an
 implementation never need keep more than one compilation unit with any full
-expanded name. In particular, it is not necessary to be able to have an subunit
+expanded name. In particular, it is not necessary to be able to have a subunit
 and a child unit with the same name in the environment at one time.]}
 
 @end{Discussion}
@@ -1992,8 +2011,8 @@ The @nt{name} has to denote the immediately preceding
 @end{Ramification}
 
 @ChgRef{Version=[1], Kind=[Revised], Ref=[8652/0033], ARef=[AI95-00136-01]}
-Immediately within the declaration of a program unit and
-before any nested declaration@Chg{New=[ (but not within a
+Immediately within the @Chg{New=[visible part],Old=[declaration]} of a
+program unit and before any nested declaration@Chg{New=[ (but not within a
 generic formal part)], Old=[]}, in which case the argument,
 if any, shall be a @nt{direct_name}
 that denotes the immediately enclosing program unit declaration.
@@ -2355,7 +2374,7 @@ corresponding @nt{proper_bodies}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[If the limited view of a unit is needed, then
-the full view of the unit is needed.]}
+so is the full view of the unit.]}
 
 @end{Itemize}
 @begin{Discussion}
@@ -2489,8 +2508,8 @@ that this task is anonymous.
 environment task of a partition)}
 The environment @nt{declarative_part} at (1) is a sequence of
 @nt{declarative_item}s consisting of copies of
-the @nt{library_item}s included in the partition.
-@Redundant[The order of elaboration of @nt{library_item}s is
+the @nt{library_item}s included in the partition@Redundant[.
+The order of elaboration of @nt{library_item}s is
 the order in which they appear in the environment
 @nt{declarative_part}]:
 @begin{Itemize}
@@ -3098,7 +3117,9 @@ specify which entities have @i{preelaborable initialization}:]}
 @ChgAdded{Version=[2],Text=[The partial view of a private type or private extension, a protected
 type without @nt<entry_declaration>s, a generic formal private type, or a
 generic formal derived type, have preelaborable initialization if and only if
-the @nt<pragma> Preelaborable_Initialization has been applied to them.]}
+the @nt<pragma> Preelaborable_Initialization has been applied to them.
+A task type or protected type with entry_declarations never have
+preelaborable initialization.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[A component (including a discriminant) of a record or
@@ -3147,12 +3168,12 @@ derived type declared in the same @nt<generic_formal_part> as the @nt<pragma>.
 In a @nt<generic_instantiation> the corresponding actual type shall have
 preelaborable initialization.]}
 
-@begin{Discussion}
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[Protected types with entry_declarations and task types do
-not have preelaborable initialization, and cannot have pragma
-Preelaborable_Initialization applied to them.]}
-@end{Discussion}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Not only do protected types with entry_declarations
+and task types do not have preelaborable initialization, but they cannot have
+pragma Preelaborable_Initialization applied to them.]}
+@end{Ramification}
 @end{Legality}
 
 @begin{ImplAdvice}
@@ -3195,6 +3216,12 @@ subprogram, generic
 subprogram,@Chg{Version=[2],New=[ generic formal part,],Old=[]}
 task unit, or protected unit.
 
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgAdded{Version=[2],Text=[A remote access-to-class-wide type (see
+  @RefSecNum{Remote Types Library Units}) has its Storage_Size defined to
+  be zero.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 @Defn{declared pure}
@@ -3203,9 +3230,10 @@ If a @nt{pragma} Pure applies to a library unit,
 then its compilation units shall be pure,
 and they shall depend semantically only on
 compilation units of other library units that are
-declared pure.@Chg{Version=[2],New=[ Furthermore, the full view of any private
-type declared in the visible part of the library unit shall support external
-streaming (see @RefSecNum{Stream-Oriented Attributes}).],Old=[]}
+declared pure.@Chg{Version=[2],New=[ Furthermore, the full view of any
+nonlimited partial view declared in the visible part of the library unit
+shall support external streaming
+(see @RefSecNum{Stream-Oriented Attributes}).],Old=[]}
 @begin{Honest}
 A @i{declared-pure} library unit is one to which a
 @nt{pragma} Pure applies.
@@ -3251,16 +3279,29 @@ to disallow such uses in the relatively rare cases where they cause problems,
 rather than making life harder for the majority of users. Types declared
 in a pure package can be used in remote operations only if they are externally
 streamable. That simply means that there is a means to transport values of the
-type; that's automatically true for non-limited types that don't have an
+type; that's automatically true for nonlimited types that don't have an
 access part. The only tricky part about this is to avoid privacy leakage; that
-was handled by ensuring that any private types declared in a pure package have
-to be externally streamable.],
+was handled by ensuring that any nonlimited private types (and private
+extensions) declared in a pure package have to be externally streamable.],
 Old=[Furthermore, a named access-to-object type without a pool would be a new
 concept, adding complexity from the user's point of view. Finally, the
 prevention of @nt{allocator}s would have to be
 a run-time check, in order to avoid violations of the generic contract
 model.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgAdded{Version=[2],Text=[It might seem that the requirement that
+  a nonlimited partial view support external streaming would be incompatible
+  with Ada 95. However, the only types allowed in an Ada 95 pure package
+  that don't allow external streaming naturally are an explicitly limited
+  record type, a protected type without entries, or a type with access
+  discriminants. But all of these types have to be limited in Ada 95, so
+  they couldn't complete (or be part of) a nonlimited private type or
+  private extension. In any case, the requirement can be met by
+  declaring user-defined Read and Write attributes for the offending type;
+  which also will allow external streaming of a limited type.]}
+@end{Ramification}
 @end{Legality}
 
 @begin{ImplPerm}
@@ -3419,18 +3460,6 @@ Pragmas Elaborate are allowed to be mixed in with the other
 things in the @nt{context_clause} @em in Ada 83, they were
 required to appear last.
 @end{Extend83}
-
-@begin{Incompatible95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95} If the full
-  type for a private type declared in a pure package does not support external
-  streaming, the package is now illegal. The only way that can happen for an
-  Ada 95 pure package would be for the full type to be a limited record type, a
-  protected type without entries, or to be visibly derived from one of them.
-  (Access discriminants also could cause trouble, but they are only allowed on
-  the listed types in a pure package.) The problem can be eliminated by
-  declaring user-defined Read and Write attributes for the offending type.]}
-@end{Incompatible95}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}

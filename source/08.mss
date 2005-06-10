@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/06/07 06:07:52 $}
+@Comment{$Date: 2005/06/09 05:03:46 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -776,7 +776,7 @@ implicitly declared at the same place:]}
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[If one is a non-null non-abstract subprogram,
-then it overrides all that are null or abstract subprograms.]}
+then it overrides those that are null or abstract subprograms.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[If all are null procedures or abstract subprograms, then
@@ -932,7 +932,8 @@ within the scope of a @nt{with_clause} that mentions the child.]}
 This is the rule that prevents @nt{with_clause}s from being
 transitive; the [immediate] scope includes indirect semantic dependents.
 @Chg{Version=[2],New=[This rule also prevents the limited view of a package
-from being visible in the same place as the full view of the package.],Old=[]}
+from being visible in the same place as the full view of the package, which
+prevents various ripple effects.],Old=[]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00412-01]}@ChgNote{Just moved from above}
@@ -2190,7 +2191,7 @@ package) the nearest library package enclosing @i{P}.]}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[The use of a renaming that designates a limited
   view is restricted to locations where we know whether the view is limited
-  or non-limited (based on a @nt{with_clause}). We don't want to make an
+  or nonlimited (based on a @nt{with_clause}). We don't want to make an
   implicit limited view, as those are not transitive like a regular view.
   Implementations should be able to see all limited views needed based on the
   @nt{context_clause}.]}
@@ -2574,6 +2575,11 @@ We'll live with the oddity.
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   @b<Corrigendum:> Allowed a renaming-as-body to be just
   mode conformant with the specification if the subprogram is not yet frozen.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
+  @ChgAdded{Version=[2],Text=[@nt{Overriding_indicator} (see
+  @RefSecNum{Overriding Indicators}) is
+  optionally added to subprogram renamings.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -2585,11 +2591,6 @@ We'll live with the oddity.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that circular
   renaming-as-body is illegal (if it can be detected in time) or a
   bounded error.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-  @ChgAdded{Version=[2],Text=[@nt{Overriding_indicator} (see
-  @RefSecNum{Subprogram Declarations} and @RefSecNum{Visibility}) is
-  optionally added to subprogram renamings.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00228-01]}
   @ChgAdded{Version=[2],Text=[Clarified that renaming a shall-be-overridden

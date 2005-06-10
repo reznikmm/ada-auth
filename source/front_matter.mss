@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.44 $ $Date: 2005/05/24 05:43:09 $}
+@comment{$Revision: 1.45 $ $Date: 2005/06/09 05:03:50 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -788,7 +788,7 @@ Comments should use the following format:
 @begin(display)
 @ChgRef{Version=[2],Kind=[Revised]}
 @TabSet(L6)@\@b(!topic) @i[Title summarizing comment]
-@\@b(!reference) @Chg{Version=[2],New=[RM05],Old=[RM95]}-@i{ss.ss(pp)}
+@\@b(!reference) @Chg{Version=[2],New=[RM06],Old=[RM95]}-@i{ss.ss(pp)}
 @\@b(!from) @i{Author Name yy-mm-dd}
 @\@b(!keywords) @i{keywords related to topic}
 @\@b(!discussion)

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:46 $}
+@Comment{$Date: 2005/06/09 05:03:47 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1193,11 +1193,12 @@ Besides, there's really no need to define the concept of matching for
 generic parameters.
 @end{DiffWord83}
 
-@begin{DiffWord95}
+@begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-  @ChgAdded{Version=[2],Text=[An @nt{overriding_indicator} (see
-  @RefSecNum{Visibility}) is allowed on a subprogram instantiation.]}
-@end{DiffWord95}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  An @nt{overriding_indicator} (see
+  @RefSecNum{Overriding Indicators}) is allowed on a subprogram instantiation.]}
+@end{Extend95}
 
 
 @LabeledClause{Formal Objects}
