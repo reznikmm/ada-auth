@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:45 $}
+@Comment{$Date: 2005/06/10 06:30:44 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -346,17 +346,12 @@ as explained in @RefSecNum{Exception Handling}].
 For the execution of a @nt{raise_statement} with an
 @SynI{exception_}@nt{name}, the named exception is raised.
 @Chg{Version=[2],New=[@redundant{If a @SynI<string_>@nt<expression> is present, a call of
-Ada.Exceptions.Exception_Message returns that string.}],Old=[]}
+a subsequent call of Ada.Exception.Exception_Message on the occurrence being
+raised will return that string.}],Old=[]}
 @PDefn2{Term=[execution], Sec=(re-raise statement)}
 For the execution of a re-raise statement,
 the exception occurrence that caused transfer of control to the
 innermost enclosing handler is raised @Redundant[again].
-@begin{ImplNote}
-For a re-raise statement, the implementation does not create a new
-Exception_Occurrence, but instead propagates the same
-Exception_Occurrence value.
-This allows the original cause of the exception to be determined.
-@end{ImplNote}
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
 @ChgAdded{Version=[2],Text=[The definition of Ada.Exceptions.Exception_Message
@@ -364,6 +359,12 @@ includes a statement that the string is returned (see
 @RefSecNum{The Package Exceptions}). We repeat it here so that we don't have
 an unexplained parameter in this subclause.]}
 @end{TheProof}
+@begin{ImplNote}
+For a re-raise statement, the implementation does not create a new
+Exception_Occurrence, but instead propagates the same
+Exception_Occurrence value.
+This allows the original cause of the exception to be determined.
+@end{ImplNote}
 @end{RunTime}
 
 @begin{Examples}
@@ -388,13 +389,14 @@ any force.
 @end{DiffWord83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The syntax of a
-@nt{raise_statement} is extended to include a string message. This is more
-convenient than calling Ada.Exceptions.Exception_Message
-(@SynI{exception_}@nt{name}'Identity, @SynI{string_}@nt{expression}); and
-should encourage the use of message strings when raising exceptions.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The syntax of a
+  @nt{raise_statement} is extended to include a string message. This is more
+  convenient than calling Ada.Exceptions.Exception_Message
+  (@SynI{exception_}@nt{name}'Identity, @SynI{string_}@nt{expression}), and
+  should encourage the use of message strings when raising exceptions.]}
 @end{Extend95}
+
 
 @LabeledClause{Exception Handling}
 
@@ -632,11 +634,13 @@ and then back to the first, where its identity is known.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00361-01],ARef=[AI95-00378-01]}
 Raise_Exception raises a new occurrence of the identified exception.
-In this case, Exception_Message returns the Message parameter of
-Raise_Exception.
-@Chg{Version=[2],New=[For a @nt{raise_statement} with an @i{exception_}@nt{name}
-and a @SynI{string_}@nt{expression}, Exception_Message returns that string.],Old=[]}
-For a @nt{raise_statement} with an @i{exception_}@nt{name}@Chg{Version=[2],New=[ but
+@Chg{Version=[2],New=[For such an occurrence],Old=[In this case]},
+Exception_Message returns the Message parameter of Raise_Exception.
+@Chg{Version=[2],New=[For the occurrence raised by a @nt{raise_statement} with
+an @i{exception_}@nt{name} and a @SynI{string_}@nt{expression},
+Exception_Message returns that string.],Old=[]}
+For @Chg{Version=[2],New=[the occurrence raised by ],Old=[]}a
+@nt{raise_statement} with an @i{exception_}@nt{name}@Chg{Version=[2],New=[ but
 without a @SynI{string_}@nt{expression}],Old=[]},
 Exception_Message returns implementation-defined information
 about the exception occurrence.
@@ -655,6 +659,22 @@ Reraise_Occurrence reraises the specified exception occurrence.
 @end{Wide}
 @begin{Example}
 Raise_Exception(E'Identity, Message => @RI{implementation-defined-string});
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Similarly, the
+@nt{raise_statement}:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key[raise] E @key[with] "some information";]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[is equivalent to
+this call to Raise_Exception:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Raise_Exception(E'Identity, Message => "some information");]}
 @end{Example}
 
 @begin{Wide}
@@ -987,10 +1007,11 @@ an error log for later analysis, or may be passed
 to subprograms for immediate error analysis.
 @end{Ramification}
 @begin{ImplNote}
-If an implementation chooses to have a mode in which it supports
-non-Latin-1 characters in identifiers, then it needs to define what the
-above functions return in the case where the name of an exception
-contains such a character.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00400-01]}
+@ChgDeleted{Version=[2],Text=[If an implementation chooses to have a mode in
+which it supports non-Latin-1 characters in identifiers, then it needs to
+define what the above functions return in the case where the name of an
+exception contains such a character.]}
 @end{ImplNote}
 @end{ImplAdvice}
 
@@ -1015,7 +1036,7 @@ contains such a character.
   Raise_Exception now raises Constraint_Error if passed Null_Id. This means
   that it always raises an exception, and thus we can apply pragma No_Return to
   it. We expect that programs that call Raise_Exception with Null_Id will be
-  rare, and programs that does that and expect no exception to be raised will be
+  rare, and programs that do that and expect no exception to be raised will be
   rarer; such programs can be easily fixed by explicitly testing for Null_Id
   before calling Raise_Exception.]}
 @end{Inconsistent95}
@@ -1078,7 +1099,7 @@ some implementation-defined manner.]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assert>([Check =>] @SynI{Boolean_}@Syn2{expression}[, [Message =>] @SynI{string_}@Syn2{expression}]);''}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assert>([Check =>] @SynI{boolean_}@Syn2{expression}[, [Message =>] @SynI{string_}@Syn2{expression}]);''}
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1100,10 +1121,26 @@ A @nt{pragma} Assertion_Policy is a configuration pragma.]}
 
 @end{Syntax}
 
+@begin{Resolution}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
+@ChgAdded{Version=[2],Text=[The expected type for the
+@Syni{boolean_}@nt{expression} of a @nt{pragma} Assert
+is any boolean type. The expected type for the @Syni{string_}@nt{expression}
+of a @nt{pragma} Assert is type String.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We allow any boolean type to be like
+  @nt{if_statement}s and other conditionals; we only allow String for the
+  message in order to match @nt{raise_statement}s.]}
+@end{Reason}
+@end{Resolution}
+
+
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgAdded{Version=[2],Text=[The @SynI<policy_>@nt<identifier> of an Assertion_Policy
-pragma shall be either Check, Ignore, or an implementation-defined identifier.]}
+@ChgAdded{Version=[2],Text=[The @SynI<policy_>@nt<identifier> of a @nt{pragma}
+Assertion_Policy shall be either Check, Ignore, or an implementation-defined
+identifier.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[Implementation-defined
 @SynI<policy_>@nt<identifier>s allowed in a @nt{pragma} Assertion_Policy.],Old=[]}]}
 @end{Legality}
@@ -1143,21 +1180,21 @@ language-defined library package exists:]}
 semantic dependence on the Ada.Assertions library unit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgAdded{Version=[2],Text=[The assertion policy that applies within an instance is
-the policy that applies within the generic unit.]}
+@ChgAdded{Version=[2],Text=[The assertion policy that applies to a generic unit
+also applies to all its instances.]}
 @end{StaticSem}
 
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgAdded{Version=[2],Text=[An assertion policy @defn{assertion policy}specifies how a @nt{pragma} Assert
-is interpreted by the implementation. If the assertion policy is Ignore at the
-point of a pragma Assert, the pragma is ignored. If the assertion policy is
-Check at the point of a @nt{pragma} Assert, the elaboration of the pragma
-consists of evaluating the Boolean expression, and if it evaluates to False,
-evaluating the Message string, if any, and raising the exception
-Ada.Assertions.Assertion_Error, with a message if the Message argument is
-provided.]}
+@ChgAdded{Version=[2],Text=[An assertion policy @defn{assertion policy}specifies
+how a @nt{pragma} Assert is interpreted by the implementation. If the assertion
+policy is Ignore at the point of a @nt{pragma} Assert, the pragma is ignored.
+If the assertion policy is Check at the point of a @nt{pragma} Assert, the
+elaboration of the pragma consists of evaluating the boolean expression, and if
+the result is False, evaluating the Message argument, if any, and raising the
+exception Ada.Assertions.Assertion_Error, with a message if the Message
+argument is provided.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Calling the procedure
@@ -1204,10 +1241,10 @@ would be incorrect, as Exception_Name would return the wrong name.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgAdded{Version=[2],Text=[Normally, the Boolean expression in an Assert pragma
-should not call functions that have significant side-effects when the result of
-the expression is True, so that the particular assertion policy in effect will
-not affect normal operation of the program.]}
+@ChgAdded{Version=[2],Text=[Normally, the boolean expression in a @nt{pragma}
+Assert should not call functions that have significant side-effects when the
+result of the expression is True, so that the particular assertion policy in
+effect will not affect normal operation of the program.]}
 @end{Notes}
 
 @begin{Extend95}
@@ -1239,14 +1276,15 @@ from the response to that error:
 @key[end] File_System;
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key[package] @key[body] File_System @key[is]
     @key[procedure] Open(F : @key[in] @key[out] File_Handle; Name : String) @key[is]
     @key[begin]
         @key[if] File_Exists(Name) @key[then]
             ...
         @key[else]
-            Exceptions.Raise_Exception(File_Not_Found'Identity,
-                                      "File not found: " & Name & ".");
+            @Chg{Version=[2],New=[@key[raise] ],Old=[Exceptions.Raise_Exception(]}File_Not_Found@Chg{Version=[2],New=[ @key[with] ],Old=['Identity,
+                                      ]}"File not found: " & Name & "."@Chg{Version=[2],New=[],Old=[)]};
         @key[end] @key[if];
     @key[end] Open;
 
@@ -1347,6 +1385,8 @@ in clauses and subclauses throughout the standard.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
 @PDefn2{Term=[configuration pragma], Sec=(Suppress)}
 @PDefn2{Term=[pragma, configuration], Sec=(Suppress)}
+@Chg{Version=[2],New=[@PDefn2{Term=[configuration pragma], Sec=(Unsuppress)}
+@PDefn2{Term=[pragma, configuration], Sec=(Unsuppress)}],Old=[]}
 A @Chg{Version=[2],New=<checking pragma>,Old=<@nt{pragma} Suppress>} is
 allowed only immediately within a
 @nt{declarative_part}, immediately within a @nt{package_@!specification},
@@ -1370,7 +1410,7 @@ within the @nt{package_specification}.>}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],Text=[A checking pragma applies to the named check in a
-specific region (see below),
+specific region,
 and applies to all entities in that region. A checking pragma given in a
 @nt<declarative_part> or immediately within a @nt<package_specification>
 applies from the place of the @nt<pragma> to the end of the innermost enclosing
@@ -1501,8 +1541,8 @@ entity or view.]]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
 @ChgAdded{Version=[2],Text=[@RootDefn{Allocation_Check}
 Allocation_Check @\@Redundant[For an @nt<allocator>, check that the master of
-any tasks has not yet finished waiting for dependents, and that the
-finalization of the collection has not started.]]}
+any tasks created by the @nt{allocator} has not yet finished waiting for
+dependents, and that the finalization of the collection has not started.]]}
 
 @RootDefn{Elaboration_Check}
 Elaboration_Check @\@Redundant[When a subprogram or protected entry is
@@ -1573,7 +1613,8 @@ When Overflow_Check has been suppressed,
 an implementation may also suppress an unspecified
 subset of the Range_Checks.
 @begin{Reason}
-The permission to restrict is given
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00224-01]}
+@ChgDeleted{Version=[2],Text=[The permission to restrict is given
 so the implementation can give an error message when the
 requested suppression is nonsense, such as suppressing a Range_Check
 on a task type.
@@ -1581,7 +1622,7 @@ It would be verbose and pointless to list all the cases of
 nonsensical language-defined checks in the standard,
 and since the list of checks is open-ended,
 we can't list the restrictions for implementation-defined checks
-anyway.
+anyway.]}
 @end{Reason}
 @ImplDef{Implementation-defined check names.}
 @begin{Discussion}
@@ -1629,11 +1670,12 @@ and Unsuppress for the same check immediately within the same
 @nt{declarative_part}.
 In that case, the last @nt{pragma} given determines whether or not the check is
 suppressed. Similarly, it is possible to resuppress a check which has been
-unsuppressed by giving a pragma Suppress in an inner declarative region.]}
+unsuppressed by giving a @nt{pragma} Suppress in an inner declarative region.]}
 @end{Notes}
 
 @begin{Examples}
-@Leading@Keepnext@i{Examples of suppressing checks:}
+@Leading@Keepnext@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
+@i{Examples of suppressing @Chg{Version=[2],New=[and unsuppressing ],Old=[]}checks:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
 @key[pragma] Suppress(@Chg{Version=[2],New=[Index_Check);
@@ -1694,8 +1736,7 @@ which was included in @nt{selected_component} in RM83.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
 @ChgAdded{Version=[2],Text=[Allocation_Check was added to support suppressing
-the new check on @nt{allocator}s (see @RefSecNum{Allocators}. The order of the
-Program_Error checks was corrected to be alphabetical.]}
+the new check on @nt{allocator}s (see @RefSecNum{Allocators}.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -1716,6 +1757,10 @@ Suppress (which is never required to do anything), it would be a significant
 problem for Unsuppress (we want the checks to be made for all implementations).
 By moving it, we avoid needing to define the meaning of Unsuppress with an
 On parameter.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
+@ChgAdded{Version=[2],Text=[The order of the
+Program_Error checks was corrected to be alphabetical.]}
 @end{DiffWord95}
 
 @LabeledClause{Exceptions and Optimization}

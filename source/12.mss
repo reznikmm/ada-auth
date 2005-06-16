@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/06/09 05:03:47 $}
+@Comment{$Date: 2005/06/10 06:30:45 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2631,10 +2631,10 @@ corresponding to the controlling type.]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[This means that the actual is
   either a primitive operation of the
   controlling type, or an abstract formal subprogram. Also note that this
-  prevents the controlling type from being class-wide,
-  as only specific types have primitive operations (and a formal subprogram
-  eventually has to have an actual that is a primitive of some type). This could
-  happen in a case like:]}
+  prevents the controlling type from being class-wide (with one exception
+  explained below), as only specific types have primitive operations (and a
+  formal subprogram eventually has to have an actual that is a primitive of
+  some type). This could happen in a case like:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[@key{generic}
@@ -2651,6 +2651,42 @@ corresponding to the controlling type.]}
   because Some_Proc could never be a primitive operation of Something'Class
   (there are no such operations). That's good, because we want calls to Foo
   always to be dispatching calls.]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[Since it is possible for a formal
+  tagged type to be instantiated with a class-wide type, it is possible for the
+  (real) controlling type to be class-wide in one unusual case:]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key{generic}
+   @key{type} NT(<>) @key{is new} T {with private};
+   -- @RI[Presume that T has the following primitive operation:]
+   -- @key{with procedure} Bar (Obj : @key{in} T);
+@key{package} Gr ...]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key{package body} Gr @key{is}
+   @key{package} New_P2 @key{is new} P (NT, Foo => Bar);]}
+@key{end} Gr;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key{package} New_Gr @key{is new} Gr (Something'Class);]}
+@end{Example}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[The instantiation of New_P2 is legal, since
+  Bar is a dispatching operation of the actual type of the controlling type
+  of the abstract formal subprogram Foo. This is not a problem, since the
+  rules given in @RefSecNum{Formal Private and Derived Types} explain how
+  this routine dispatches even though its parameter is class-wide.]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[Note that this legality rule never needs to be
+  rechecked in an instance (in which an instantiation is nested). The rule
+  only talks about the actual type of the instantiation; it does not require
+  looking further; if the actual type is in fact a formal type, we do not
+  intend looking at the actual for that formal.]}
 @end{Ramification}
 @end{Legality}
 

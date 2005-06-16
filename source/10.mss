@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/06/09 05:03:46 $}
+@Comment{$Date: 2005/06/10 06:30:44 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -222,6 +222,19 @@ Standard is a library unit.
 
 
 @Syn{lhs=<parent_unit_name>,rhs="@Syn2{name}"}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
+@ChgAdded{Version=[2],Text=[An @nt{overriding_indicator} is not allowed in a
+@nt{subprogram_declaration}, @nt{generic_instantiation}, or
+@nt{subprogram_renaming_declaration} which declares a library unit.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[All of the listed items syntactically include
+  @nt{overriding_indicator}, but a library unit can never override anything.
+  A majority of the ARG thought that allowing @key{not overriding} in that
+  case would be confusing instead of helpful.]}
+@end{Reason}
 @end{Syntax}
 
 @begin{Intro}
@@ -451,6 +464,11 @@ the declaration of its limited view.]}
   @RefSecNum{Completions of Declarations} that says that implicit declarations
   don't have completions.]}
 @end{Honest}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This rule explains where to find the completions
+  of the incomplete views defined by the limited view.]}
+@end{Reason}
 
 @end{Intro}
 
@@ -1497,9 +1515,9 @@ The @i{parent body} of a subunit is the body of the program unit
 denoted by its @nt{parent_unit_name}.
 @Defn{subunit} The term @i{subunit} is used to refer to
 a @nt{subunit} and also to the @nt{proper_body} of a @nt{subunit}.
-@Chg{Version=[2],New=<The phrase @i<subunit
-of a program unit> refers both to a subunit that
-names that program unit as its parent, as well as to any subunit that
+@Chg{Version=[2],New=<The @i<subunits
+of a program unit> include any subunit that
+names that program unit as its parent, as well as any subunit that
 names such a subunit as its parent (recursively).@Defn2{Term=[subunit],
 Sec=(of a program unit)}>,Old=[]}
 @begin{Reason}
@@ -1802,8 +1820,8 @@ achieved in this case, but the call is still legal.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[The second rule applies to limited views as well
-as the normal view of a unit. That means that an implementation needs a way to
-enforce consistency of limited views, not just of normal views.]}
+as the full view of a unit. That means that an implementation needs a way to
+enforce consistency of limited views, not just of full views.]}
 @end{Ramification}
 @end{Legality}
 
