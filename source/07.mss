@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/06/07 06:07:51 $}
+@Comment{$Date: 2005/06/16 22:43:29 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -391,6 +391,7 @@ and those will presumably be implemented in terms of dispatching).
 @end{Syntax}
 
 @begin{Legality}
+@ChgNote{We don't mark this as a change, since it only involves the AARM}
 @Defn2{Term=[partial view], Sec=(of a type)}
 @PDefn2{Term=[requires a completion], Sec=(declaration of a partial view)}
 A @nt<private_type_declaration>
@@ -401,9 +402,10 @@ such a declaration is allowed only as a
 and it requires a completion,
 which shall be a @nt{full_type_declaration} that occurs as
 a @nt{declarative_item} of the private part of the package.
-@Defn2{Term=[full view], Sec=(of a type)}
+@Chg{Version=[2],New=[],Old=[@Defn2{Term=[full view], Sec=(of a type)}]}
+@Redundant[@ChgNote{This really should be a change, but that's too hard.}
 The view of the type declared by the @nt<full_type_declaration>
-is called the @i(full view).
+is called the @i(full view).]
 A generic formal private type or a
 generic formal private extension is also a partial view.
 @begin(Honest)
@@ -418,10 +420,7 @@ generic formal private extension is also a partial view.
 @begin{TheProof}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00326-01]}
   @ChgAdded{Version=[2],Text=[Full view is now defined in
-  @RefSec{Type Declarations}, as all types now have them. This definition
-  isn't marked as redundant only because we didn't want to have to add
-  and delete the sentence in question (making a phony change), and that
-  would be necessary to add redundant brackets.]}
+  @RefSec{Type Declarations}, as all types now have them.]}
 @end{TheProof}
 
 @Redundant[A type shall be completely defined before it is frozen
@@ -669,12 +668,12 @@ interface type.]}
 @key{end} P;]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[If this example were legal
-    (it is illegal because the completion of T1 is descended from an interface
-    that the partial view is not descended from), T2 would implement Ifc twice.
-    Once in the visible part of P, and once in the visible part of P_Client. We
-    would need to decide how Foo #1 and Foo #2 relate to each other. There are
-    two options: either Foo #2 overrides Foo #1, or it doesn't.]}
+  @ChgAdded{Version=[2],Text=[This example is illegal because the completion
+    of T1 is descended from an interface that the partial view is not descended
+    from. If it were legal, T2 would implement Ifc twice, once in the visible
+    part of P, and once in the visible part of P_Client. We would need to
+    decide how Foo #1 and Foo #2 relate to each other. There are two options:
+    either Foo #2 overrides Foo #1, or it doesn't.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If Foo #2 overrides Foo #1,
@@ -693,13 +692,14 @@ interface type.]}
   @ChgAdded{Version=[2],Text=[If Foo #2 doesn't override Foo #1,
     there is some similarity with the case of normal tagged private types,
     where a client can declare an operation that happens to conform to some
-    private operation, and that's OK, it gets a different slot. The problem
-    here is that T2 would implement Ifc in two different ways, and through
-    conversions to Ifc'Class we could end up with visibility on both of these
-    two different implementations. This is the @lquotes@;diamond inheritance@rquotes
-    problem of C++ all over again, and we would need some kind of a preference
-    rule to pick one implementation. We don't want to go there (if we did,
-    we might as well provide full-fledged multiple inheritance).]}
+    private operation, and that's OK, it gets a different slot in the type
+    descriptor. The problem here is that T2 would implement Ifc in two
+    different ways, and through conversions to Ifc'Class we could end up with
+    visibility on both of these two different implementations. This is the
+    @lquotes@;diamond inheritance@rquotes problem of C++ all over again, and we
+    would need some kind of a preference rule to pick one implementation. We
+    don't want to go there (if we did, we might as well provide full-fledged
+    multiple inheritance).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Note that there wouldn't be any difficulty to
@@ -940,9 +940,9 @@ type; they are then forced to initialize each object by calling some
 operation declared in the visible part of the package.
 @Chg{Version=[2],New=[],Old=[If such a type is also limited, then no objects
 of the type can be declared outside the scope of the @nt{full_type_declaration},
-restricting all object creation to the package defining the type. ]}This
+restricting all object creation to the package defining the type. This
 allows complete control over all storage allocation for the type.
-Objects of such a type can still be passed as parameters, however.
+Objects of such a type can still be passed as parameters, however.]}
 @begin{Discussion}
 @Defn{generic contract/private type contract analogy}
 Packages with private types are analogous to generic packages with
@@ -1810,12 +1810,12 @@ is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
 @end(itemize)
 
 @begin{Honest}
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
   @ChgAdded{Version=[2],Text=[A derived type can become nonlimited if
   @key{limited} does not appear and the derivation
   takes place in the visible part of a child package,
   and the parent type is nonlimited as viewed from the
-  private part of the child package.]}
+  private part or body of the child package.]}
 @end{Honest}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
@@ -1829,7 +1829,7 @@ is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
   simpler to understand.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
-  @ChgAdded{Version=[2],Text=[The rules for interfaces are unsymmetrical, but
+  @ChgAdded{Version=[2],Text=[The rules for interfaces are asymmetrical, but
   the language is not: if the parent interface is limited, the presence of the
   word @key{limited} determines the limitedness, and nonlimited progenitors are
   illegal by the rules in @RefSecNum{Interface Types}. If the parent interface
@@ -1852,10 +1852,10 @@ a limited type.]
 For an @nt{aggregate} of a limited type used to initialize an object as allowed
 above, the implementation shall not create a separate anonymous object for the
 @nt{aggregate}. For a @nt{function_call} of a type with a part that is of a
-task, protected, or limited record type that is used to initialize an object as
-allowed above, the implementation shall not create a separate return object
-(see 6.5) for the @nt{function_call}. The @nt{aggregate} or @nt{function_call}
-shall be constructed directly in the new object.]}
+task, protected, or explicitly limited record type that is used to initialize
+an object as allowed above, the implementation shall not create a separate
+return object (see 6.5) for the @nt{function_call}. The @nt{aggregate} or
+@nt{function_call} shall be constructed directly in the new object.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[For a @nt{function_call}, we only require
@@ -2018,7 +2018,7 @@ than being a subclause of
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00411-01],ARef=[AI95-00419-01]}
-  @ChgAdded{Version=[2],Text=[Rewrote the definition of limited to insure that
+  @ChgAdded{Version=[2],Text=[Rewrote the definition of limited to ensure that
   interfaces are covered, but that limitedness is not inherited from interfaces.
   Derived types that explicitly include @key{limited} are now also covered.]}
 @end{DiffWord95}
@@ -2399,7 +2399,7 @@ contract model violations.
 whose value is assigned,
 other than by an @nt{assignment_statement} or a
 @Chg{Version=[2],New=[@nt{simple_return_statement} of a return type with no
-part that is of a task, protected, or limited record type],
+part that is of a task, protected, or explicitly limited record type],
 Old=[@nt{return_statement}]}, the
 implementation shall not create a separate anonymous object for the
 @nt{aggregate}. The aggregate value shall be constructed directly in the target
@@ -2428,7 +2428,7 @@ elaboration problems with deferred constants of controlled types. Consider:]}
 @Chg{New=[When Null_String is elaborated, the bodies of Finalize and Adjust
 clearly have not been elaborated. Without this rule, this declaration would
 necessarily raise Program_Error (unless the permissions given below are
-used by the compiler).],Old=[]}
+used by the implementation).],Old=[]}
 @end{Reason}
 @end{ImplReq}
 
@@ -2678,19 +2678,18 @@ A master is finalized after it is
 complete, and before it is left.
 
 @begin{Reason}
-  Note that although an @nt{accept_statement} has no
-  @nt{declarative_part}, it can call functions and evaluate @nt{aggregate}s,
-  possibly causing anonymous controlled objects to be created,
-  and we don't want those objects to escape outside the rendezvous.
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[Similarly, @nt{expression}s and @nt{statement}s
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
+  @Chg{Version=[2],New=[@nt{Expression}s and @nt{statement}s
   are masters so that objects created by subprogram calls (in @nt{aggregate}s,
   @nt{allocator}s for anonymous access-to-object types, and so on) are
   finalized and have their tasks awaited before the @nt{expression}s or
   @nt{statement}s are left. Note that @nt{expression}s like the @nt{condition}
   of an @nt{if_statement} are masters, because they are not enclosed by a
-  @nt{simple_statement}.]}
+  @nt{simple_statement}.],
+  Old=[Note that although an @nt{accept_statement} has no
+  @nt{declarative_part}, it can call functions and evaluate @nt{aggregate}s,
+  possibly causing anonymous controlled objects to be created,
+  and we don't want those objects to escape outside the rendezvous.]}
 @end{Reason}
 
 @Defn2{Term=[finalization], Sec=(of a master)}
@@ -2924,11 +2923,11 @@ is not known at the call site.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00162-01]}
-@Chg{Version=[2],New=[In the case of a potentially blocking operation which is
+@Chg{Version=[2],New=[In the case of a potentially blocking operation that is
 a master, finalization of an (anonymous) object occurs before blocking if the
 last use of the object occurs before blocking. In particular, for
 a @nt{delay_statement}, any finalization occurs before delaying the task.
-In the case of an @nt{expression} which is a master,
+In the case of an @nt{expression} that is a master,
 finalization of any (anonymous) objects occurs as the final part of
 evaluation of the @nt{expression}.],
 Old=[@Chg{New=[If a transfer of control or raising of an exception occurs prior to
@@ -3264,7 +3263,7 @@ nothing interesting happens there, either.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[Objects initialized by function results and
-@nt{aggregates} which are built-in-place. In this case, the assignment
+@nt{aggregates} that are built-in-place. In this case, the assignment
 operation is never executed, and no adjustment takes place. While
 built-in-place
 is always allowed, it is required for some types @em see

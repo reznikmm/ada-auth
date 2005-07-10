@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/06/06 02:54:21 $}
+@Comment{$Date: 2005/06/16 22:43:24 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -500,10 +500,11 @@ of their values (@i(enumeration) types).
 Real types are either @i(floating point) types
 or @i(fixed point) types.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00326-01]}
 The composite types are the @i(record) types, @i(record extensions),
-@i(array) types, @i(task) types, and @i(protected) types.@Chg{Version=[2],
-New=[],Old=[@Defn{private type}
+@i(array) types, @Chg{Version=[2],New=[@i(interface) types, ],Old=[]}@i(task)
+types, and @i(protected) types.@Chg{Version=[2], New=[],
+Old=[@Defn{private type}
 @Defn{private extension}
 A @i(private) type or @i(private extension) represents a partial view
 (see @RefSecNum{Private Types and Private Extensions})
@@ -793,6 +794,10 @@ a type T, we call T the "type of the subtype S."
   @ChgAdded{Version=[2],Text=[Added a mention of null exclusions when we're
   talking about constraints (these are not constraints, but they are similar).]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[Defined an interface type to be a composite
+  type.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
   @ChgAdded{Version=[2],Text=[Revised the wording so that it is clear
   that an incomplete view is similar to a partial view in terms of the
@@ -879,9 +884,10 @@ A named type that is declared by a @nt<full_type_@!declaration>,
 or an anonymous type that is defined @Chg{Version=[2],New=[by an
 @nt{access_definition} or ],Old=[]}as part of declaring an object of the type,
 is called a
-@i(full type).@Defn{full type definition}@Chg{Version=[2],New=[ The
-declaration of a full type also declares the @i<full view> of the type.],Old=[]}
-The @nt<type_@!definition>, @nt<task_@!definition>, @nt<protected_@!definition>,
+@i(full type).@Defn{full type definition} @Chg{Version=[2],New=[The
+declaration of a full type also declares the @i<full view> of the
+type.@Defn2{Term=[full view],Sec=(of a type)} ],Old=[]}The
+@nt<type_@!definition>, @nt<task_@!definition>, @nt<protected_@!definition>,
 or @nt<access_@!definition> that defines a full type is called
 a @i(full type definition).
 @redundant[Types declared by other forms of @nt<type_@!declaration> are

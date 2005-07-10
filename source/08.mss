@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/06/09 05:03:46 $}
+@Comment{$Date: 2005/06/16 22:43:29 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -819,8 +819,8 @@ arbitrarily to override the others.]}
     any of its inherited operations.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Full conformance is required here, as we
-  cannot allow the parameter names to differ. If they did differ, the
+  @ChgAdded{Version=[2],Text=[Full conformance is required here (see below),
+  as we cannot allow the parameter names to differ. If they did differ, the
   routine which was selected for overriding could be determined by named
   parameter notation in a call.]}
 @end{Discussion}
@@ -1424,13 +1424,13 @@ type;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
-@key{overriding}, then the operation shall override a homograph at the point of
+@key{overriding}, then the operation shall override a homograph at the place of
 the declaration or body;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
 @key{not overriding}, then the operation shall not override any homograph
-(at any point).]}
+(at any place).]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1443,7 +1443,7 @@ unit.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The @Key{overriding} and @Key{not overriding} rules
 differ slightly. For @Key{overriding}, we want the indicator to reflect the
-overriding state at the point of the declaration; otherwise the indicator would
+overriding state at the place of the declaration; otherwise the indicator would
 be @LQuotes@;lying@RQuotes@;. Whether a homograph is implicitly declared after
 the declaration (see 7.3.1 to see how this can happen)
 has no impact on this check. However, @Key{not overriding} is different;
@@ -1498,7 +1498,7 @@ security queue derived from the Queue interface of 3.9.4 as:]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The first four subprogram declarations guarantees
+@ChgAdded{Version=[2],Text=[The first four subprogram declarations guarantee
 that these subprograms will override the four subprograms inherited from the
 Queue interface. If a spelling error occurs in one of these declarations, an
 error will occur. Similarly, the declaration of Arrest guarantees that this is
@@ -1508,7 +1508,7 @@ a new operation.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In this case, the subprograms are abstract, so
   spelling errors will get detected anyway. But for other subprograms
-  (especially when deriving from concrete types), the error may never be
+  (especially when deriving from concrete types), the error might never be
   detected, and a body other than the one the programmer intended might be
   executed without warning. Thus our new motto: @lquotes@;Overriding
   indicators @em don't derive a type without them!@rquotes]}
@@ -1864,10 +1864,10 @@ irrelevant, since failing these tests is highly unlikely.
 The type of the @SynI{object_}@nt{name} shall resolve to
 the type determined by the @nt{subtype_mark}@Chg{Version=[2],New=[,
 or in the case where the type is defined by an @nt{access_definition}, to an
-anonymous access type which in the case of an access-to-object type
-shall have the same designated type as that of the @nt{access_definition} and
+anonymous access type, which in the case of an access-to-object type
+shall have the same designated type as that of the @nt{access_definition}, and
 in the case of an access-to-subprogram type shall have a designated profile
-which is type conformant with that of the @nt{access_definition}],Old=[]}.
+that is type conformant with that of the @nt{access_definition}],Old=[]}.
 
 @begin{Reason}
 @leading@;A previous version of Ada 9X used the usual
@@ -1927,9 +1927,9 @@ subtype conformant designated profiles.
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[if the @nt{object_renaming_declaration} occurs
-  within the body of a generic unit or within the body of a generic unit
-  declared within the declarative region of the generic unit, and the
-  @Syni{object_}@nt{name} denotes a generic formal object of that generic unit,
+  within the body of a generic unit @i<G> or within the body of a generic unit
+  declared within the declarative region of the generic unit @i<G>, and the
+  @Syni{object_}@nt{name} denotes a generic formal object of @i<G>,
   then the declaration of that formal object shall have a @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}
@@ -1957,17 +1957,17 @@ Obj : Acc_I := @key{null};]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    B : @key{in out} Acc_NN_I;
-@key{package} Outer @key{is}
+@key{package} Gen @key{is}
    ...
-@key{end};]}
+@key{end} Gen;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package body} Outer @key{is}
+@ChgAdded{Version=[2],Text=[@key{package body} Gen @key{is}
    D : @key{not null} Acc_I @key{renames} B;
-@key{end} Outer;]}
+@key{end} Gen;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} Gen @key{is} (B => Obj);]}
+@ChgAdded{Version=[2],Text=[@key{package} Inst @key{is new} Gen (B => Obj);]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Without the first bullet rule, D would
@@ -1976,7 +1976,8 @@ Obj : Acc_I := @key{null};]}
   state @key{not null}),
   @LegalityTitle are not rechecked in the body of any instance, and the
   template passes the lying rule as well. The rule is so complex because it
-  has to apply to bodies of child generics as well.]}
+  has to apply to formals used in bodies of child generics as well as in
+  the bodies of generics.]}
 @end{Reason}
 @end{Itemize}
 
@@ -2111,11 +2112,11 @@ legality of renaming for them. For example,
 using the type T2 of the previous example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   AT : @key{aliased} T2;
-   C1_Ren : Integer @key{renames} AT.C1; -- @RI[Illegal in Ada 2006, legal in Ada 95]
-   AT := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95,]
-                                   -- @RI[but does not in Ada 2006, so C1_Ren becomes]
-                                   -- @RI[invalid when this is assigned.]]}
+@ChgAdded{Version=[2],Text=[   AT2 : @key{aliased} T2;
+   C1_Ren : Integer @key{renames} AT2.C1; -- @RI[Illegal in Ada 2006, legal in Ada 95]
+   AT2 := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95,]
+                                    -- @RI[but does not in Ada 2006, so C1_Ren becomes]
+                                    -- @RI[invalid when this is assigned.]]}
 @end{Example}
 @end{Incompatible95}
 
@@ -2127,10 +2128,10 @@ using the type T2 of the previous example:]}
   lost as it is for a component or stand-alone object).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00423-01]}
-  @ChgAdded{Version=[2],Text=[A renaming can have exclude null.
-  If the renaming does that explicitly,
+  @ChgAdded{Version=[2],Text=[A renaming can have a @nt{null_exclusion}; if so,
   the renamed object must also exclude null, so that the @nt{null_exclusion}
-  does not lie.]}
+  does not lie. On the other hand, if the renaming does not have a
+  @nt{null_exclusion}. it excludes null of the renamed object does.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -2186,7 +2187,7 @@ The renamed entity shall be a package.
 then a name that denotes the @nt{package_renaming_declaration} shall occur
 only within the immediate scope of the renaming or the scope of a
 @nt{with_clause} that mentions the package @i{P} or (if @i{P} is a nested
-package) the nearest library package enclosing @i{P}.]}
+package) the innermost library package enclosing @i{P}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[The use of a renaming that designates a limited
@@ -2271,11 +2272,11 @@ the @nt{subprogram_specification} that has an explicit @nt{null_exclusion}:]}
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[if the @nt{subprogram_renaming_declaration}
-  occurs within the body of a generic unit or within the body of a generic unit
-  declared within the declarative region of the generic unit, and the
-  @Syni{callable_entity_}@nt{name} denotes a generic formal subprogram of that
-  generic unit, then the corresponding parameter or result type of that formal
-  subprogram shall have a @nt{null_exclusion};]}
+  occurs within the body of a generic unit @i<G> or within the body of a
+  generic unit declared within the declarative region of the generic unit
+  @i<G>, and the @Syni{callable_entity_}@nt{name} denotes a generic formal
+  subprogram of @i<G>, then the corresponding parameter or result subtype of
+  that formal subprogram shall have a @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[otherwise, the subtype of the corresponding
@@ -2416,8 +2417,8 @@ For example, it is illegal for the @nt{entry_call_statement} of a
 But what looks like a procedure call will do things like barrier
 waiting.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00228-01]}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0105],ARef=[AI95-00211-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00228-01]}
 @Chg{New=[All properties of the renamed entity are inherited by the new view
 unless otherwise stated by this International Standard. In particular, if the
 renamed entity is abstract@Chg{Version=[2],New=[],Old=[ or requires
@@ -2770,7 +2771,7 @@ However, in certain cases, a usage name that denotes a declaration and
 appears inside the declarative region of that same declaration, denotes
 the current instance of the declaration.
 For example, within a @nt{task_body}@Chg{Version=[2],New=[ other than in
-any @nt{access_definition}],Old=[]}, a usage name that denotes the
+an @nt{access_definition}],Old=[]}, a usage name that denotes the
 @nt{task_type_declaration} denotes the object containing the
 currently executing task,
 and not the task type declared by the declaration.
@@ -3312,8 +3313,7 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2006.]]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[We now allow the creation of
   self-referencing types via anonymous access types. This is an extension
-  because in some unusual cases (in task and protected types) it will make
-  programs that were illegal in Ada 95 legal in Ada 2006. For example:]}
+  in unusual cases involving task and protected types. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{task type} T;]}

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/06/10 06:30:44 $}
+@Comment{$Date: 2005/06/16 22:43:31 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1052,11 +1052,11 @@ even though those are not in the scope of the @nt{with_clause}.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
-@Defn{mentioned in a @nt<with_clause>}
+@Defn{Term=[mentioned],Sec=[in a @nt<with_clause>]}
 @Defn2{Term=[with_clause], Sec=(mentioned in)}
 A @nt<library_item> is
 @Chg{Version=[2],New=[@i{named}
-@Defn{named in a @nt<with_clause>}
+@Defn2{Term=[named],Sec=[in a @nt<with_clause>]}
 @Defn2{Term=[with_clause], Sec=(named in)}],Old=[@i{mentioned} ]}in a
 @nt<with_clause> if it is denoted by
 a @i(library_unit_)@nt<name> @Chg{Version=[2],New=[],Old=[or a @nt<prefix> ]}

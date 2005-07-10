@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2005/05/16 03:42:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2005/06/16 22:43:33 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/05/16 03:42:24 $}
+@Comment{$Date: 2005/06/16 22:43:33 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -3395,8 +3395,9 @@ queues.]
 @end{example}
 
 The type Suspension_Object is a by-reference type.@begin{ImplNote}
-The
-implementation can ensure this by, for example, making the full view a
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}@ChgNote{This is a real term now, let's get it right}
+The implementation can ensure this by, for example, making the full view
+@Chg{Version=[2],New=[an explicitly],Old=[a]}
 limited record type.@end{implnote}
 
 @end{StaticSem}

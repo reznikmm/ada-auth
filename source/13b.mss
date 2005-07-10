@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:48 $}
+@Comment{$Date: 2005/06/16 22:43:32 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @LabeledClause{The Package System}
 
@@ -1089,16 +1089,16 @@ This depends on out-of-range values being checked before
 assignment (that is, checks are not optimized away unless they
 are proven redundant).
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01]}
 @Leading@;Consider the following example:
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01]}
 @key[type] My_Int @key[is] @key[range] 0..99;
 @key[function] Safe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Integer);
 @key[function] Unsafe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Positive);
 X : Positive := Safe_Convert(0); --@RI{ Raises Constraint_Error.}
 Y : Positive := Unsafe_Convert(0); --@Chg{Version=[2],New=[@RI{ Bounded Error, may be invalid.}
 B : Boolean := Y'Valid; --@RI{ OK, B = False.}
-Z : Position := Y; --@RI{ Erroneous to use Y.}],Old=[@RI{ Erroneous.}]}
+Z : Positive := Y+1; --@RI{ Erroneous to use Y.}],Old=[@RI{ Erroneous.}]}
 
 @end{Example}
 

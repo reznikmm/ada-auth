@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/06/10 06:30:44 $}
+@Comment{$Date: 2005/06/16 22:43:32 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -632,22 +632,29 @@ and then back to the first, where its identity is known.
 @end{Ramification}
 @end{Description}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00361-01],ARef=[AI95-00378-01]}
-Raise_Exception raises a new occurrence of the identified exception.
-@Chg{Version=[2],New=[For such an occurrence],Old=[In this case]},
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00361-01]}
+Raise_Exception raises a new occurrence of the identified
+exception.@Chg{Version=[2],New=[],Old=[ In this case
 Exception_Message returns the Message parameter of Raise_Exception.
-@Chg{Version=[2],New=[For the occurrence raised by a @nt{raise_statement} with
-an @i{exception_}@nt{name} and a @SynI{string_}@nt{expression},
-Exception_Message returns that string.],Old=[]}
-For @Chg{Version=[2],New=[the occurrence raised by ],Old=[]}a
-@nt{raise_statement} with an @i{exception_}@nt{name}@Chg{Version=[2],New=[ but
-without a @SynI{string_}@nt{expression}],Old=[]},
+For a @nt{raise_statement} with an @i{exception_}@nt{name},
 Exception_Message returns implementation-defined information
 about the exception occurrence.
-@Chg{Version=[2],New=[In all cases, Exception_Message returns a string with
-lower bound 1.],Old=[]}
-Reraise_Occurrence reraises the specified exception occurrence.
+Reraise_Occurrence reraises the specified exception occurrence.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01],ARef=[AI95-00378-01]}
+@ChgAdded{Version=[2],Text=[Exception_Message returns the message associated
+with the given Exception_Occurrence. For an occurrence raised by a call to
+Raise_Exception, the message is the Message parameter passed to Raise_Exception.
+For the occurrence raised by a @nt{raise_statement} with an
+@SynI{exception_}@nt{name} and a @SynI{string_}@nt{expression}, the message is
+the @Syni{string_}@nt{expression}. For the occurrence raised by a
+@nt{raise_statement} with
+an @Syni{exception_}@nt{name} but without a @Syni{string_}@nt{expression},
+the message is a string giving implementation-defined information about the
+exception occurrence. In all cases, Exception_Message returns a string with
+lower bound 1.]}
 @ImplDef{The information returned by Exception_Message.}
+
 @begin{Ramification}
 @Leading@Keepnext@;Given an exception E, the @nt{raise_statement}:
 @begin{Example}
@@ -676,7 +683,13 @@ this call to Raise_Exception:]}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[Raise_Exception(E'Identity, Message => "some information");]}
 @end{Example}
+@end{Ramification}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
+@ChgAdded{Version=[2],Text=[Reraise_Occurrence reraises the specified exception
+occurrence.]}
+
+@begin{Ramification}
 @begin{Wide}
 @Leading@keepnext@;The following handler:
 @end{Wide}

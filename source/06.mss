@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/06/09 05:03:45 $}
+@Comment{$Date: 2005/06/16 22:43:28 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -60,6 +60,13 @@ function.]
 @DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<abstract_subprogram_declaration>}>,
 rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{subprogram_specification} @key{is} @key{abstract};>}"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+@Syn{lhs=<subprogram_specification>,rhs="@Chg{Version=[2],New=[
+    @Syn2{procedure_specification}
+  | @Syn2{function_specification}],Old=[
+    @key{procedure} @Syn2{defining_program_unit_name} @Syn2{parameter_profile}
+  | @key{function} @Syn2{defining_designator} @Syn2{parameter_and_result_profile}]}"}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<procedure_specification>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<@key{procedure} @Syn2{defining_program_unit_name} @Syn2{parameter_profile}>,Old=<>}"}
@@ -67,13 +74,6 @@ rhs="@Chg{Version=[2],New=<@key{procedure} @Syn2{defining_program_unit_name} @Sy
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<function_specification>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<@key{function} @Syn2{defining_designator} @Syn2{parameter_and_result_profile}>,Old=<>}"}
-
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
-@Syn{lhs=<subprogram_specification>,rhs="@Chg{Version=[2],New=[
-    @Syn2{procedure_specification}
-  | @Syn2{function_specification}],Old=[
-    @key{procedure} @Syn2{defining_program_unit_name} @Syn2{parameter_profile}
-  | @key{function} @Syn2{defining_designator} @Syn2{parameter_and_result_profile}]}"}
 
 @Syn{lhs=<designator>,rhs="[@Syn2{parent_unit_name} . ]@Syn2{identifier} | @Syn2{operator_symbol}"}
 
@@ -94,8 +94,9 @@ library units (see @RefSecNum{Compilation Units - Library Units}).]
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00395-01]}
 The sequence of characters in an @nt{operator_symbol} shall @Chg{Version=[2],
 New=[form a reserved
-word, a delimiter, or compound delimiter that corresponds],Old=[correspond to
-an operator belonging]} to one of the six classes of operators
+word, a delimiter, or compound delimiter that corresponds],Old=[correspond]} to
+an operator belonging to one of the six @Chg{Version=[2],New=[categories],
+Old=[classes]} of operators
 defined in clause @RefSecNum{Operators and Expression Evaluation}@Chg{Version=[2],
 New=[],Old=[(spaces are not allowed and the case of letters
 is not significant)]}.
@@ -971,14 +972,15 @@ the reserved word @key(protected) in its definition.
 The default calling convention is @i{entry} for an entry.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
-@ChgAdded{Version=[2],Text=[The calling convention for an access parameter or
-access result of an access-to-subprogram type is @i<protected> if the reserved
+@ChgAdded{Version=[2],Text=[The calling convention for an
+anonymous access-to-subprogram parameter
+or anonymous access-to-subprogram result @i<protected> if the reserved
 word @key{protected} appears in its definition and otherwise is the convention
 of the subprogram that contains the parameter.]}
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The calling convention for other
-access-to-subprogram types is Ada.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The calling convention for other
+  anonymous access-to-subprogram types is Ada.]}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0011],ARef=[AI95-00117-01]}
@@ -1028,8 +1030,8 @@ parameters or both not access parameters.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Text=[Similarly, for anonymous access-to-subprogram
-parameters, the profiles of the types, not the types themselves, have to
-be conformant.]}
+parameters, the designated profiles of the types, not the types themselves,
+have to be conformant.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00409-01]}
@@ -1335,7 +1337,7 @@ Such a @nt{pragma} applies to all of the denoted entities.
 @begin{Incompatible83}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
 @Chg{Version=[2],New=[@Defn{incompatibilities with Ada 83}
-A pragma Inline may not refer to a @nt{subprogram_body} outside of that
+A pragma Inline cannot refer to a @nt{subprogram_body} outside of that
 body. The pragma can be given inside of the subprogram body. Ada 2006
 adds an @ImplPermName to allow this usage for compatibility, but
 implementations do not have to allow such @nt{pragma}s.],Old=[]}
@@ -2050,7 +2052,7 @@ return object is constrained by its initial value. The
   with no call on Adjust).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[If the return statement exits without resulting
+  @ChgAdded{Version=[2],Text=[If the return statement is left without resulting
   in a return (for example, due to an exception propagated from the
   @nt{expression} or the @nt{handled_sequence_of_statements}, or a goto out of
   the @nt{handled_sequence_of_statements}), the return object is finalized
@@ -2374,7 +2376,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @ChgAdded{Version=[2],Text=[We changed these rules so that functions,
   combined with the new rules for limited types (@RefSecnum{Limited Types}),
   can be used as build-in-place constructors for limited types. This reduces
-  the differences between limited and nonlimited types, which hopefully will
+  the differences between limited and nonlimited types, which will
   make limited types useful in more circumstances.]}
 @end{Incompatible95}
 
@@ -2401,7 +2403,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @ChgAdded{Version=[2],Text=[Added accessibility checks to class-wide
   return statements. These checks could not fail in Ada 95 (as all of the
   types had to be declared at the same level, so the tagged type would
-  necessarily have been at the same level or more nested than the type of the
+  necessarily have been at the same level as the type of the
   object).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
@@ -2411,7 +2413,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   would have been illegal in order for this check to fail.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[Added an @ImplPermTitle allowing
+  @ChgAdded{Version=[2],Text=[Added an @ImplPermName allowing
   early raising of Constraint_Error if the result cannot fit in the ultimate
   object. This gives implementations more flexibility to do built-in-place
   returns, and is essential for limited types (which cannot be built in a
@@ -2538,7 +2540,8 @@ normally, Program_Error is raised at the point of the call.
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Similarly, if one passes a non-returning
   procedure to a generic formal parameter, the compiler cannot know this at
-  call sites; the raise-in-body solution deals with this neatly.]}
+  call sites (in shared code implementations); the raise-in-body solution
+  deals with this neatly.]}
 @end{ImplNote}
 
 @begin{Examples}

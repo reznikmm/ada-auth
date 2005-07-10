@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:39 $}
+@Comment{$Date: 2005/06/16 22:43:27 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2634,13 +2634,16 @@ component type is a boolean type:
   @ChgDeleted{Version=[2],Text=[For predefined operators, the parameter
   and result subtypes shown as @i(T) are actually the unconstrained
   subtype of the type.]}
-  @ChgNote{Sorry, Bob, but there is no "honesty" issue here.}
+  @ChgNote{Sorry, Bob, but there is no "honesty" issue here. And
+  "unconstrained" is wrong.}
 @end{Honest}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00145-01]}
   @ChgAdded{Version=[2],Text=[For these operators, we are talking about
-  the type itself, and not some subtype of it. Since it's possible that the
-  type itself cannot be named, we denote the type with an italicized @i(T).
+  the type without any (interesting) subtype, and not some subtype with a
+  constraint or exclusion. Since it's possible that there is no name for
+  the @lquotes@;uninteresting@rquotes subtype, we denote the type
+  with an italicized @i(T).
   This applies to the italicized @i(T) in many other predefined operators and
   attributes as well.@Defn2{Term=[T],Sec=[italicized]}]}
 
@@ -2655,15 +2658,27 @@ component type is a boolean type:
   @ChgAdded{Version=[2],Text=[the first subtype of @i(T), for tagged types;]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[the type @i(T) without any constraint or
-  null exclusion, in other cases.]}
+  @ChgAdded{Version=[2],Text=[a subtype of the type @i(T) without any
+  constraint or null exclusion, in other cases.]}
 @end{Itemize}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Note that the last case often is the same as
+  @ChgAdded{Version=[2],Text=[Note that @lquotes@;without a constraint@rquotes
+  is not the same as unconstrained. For instance, a record type with no
+  discriminant part is considered constrained; no subtype of it has a
+  constraint, but the subtype is still constrained.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Thus, the last case often is the same as
   the first subtype of @i(T), but that isn't the case for constrained array
-  types (where the type is unconstrained) and for access types with a
-  @nt{null_exclusion} (where the type does not exclude null).]}
+  types (where the correct subtype is unconstrained) and for access types
+  with a @nt{null_exclusion} (where the correct subtype does not
+  exclude null).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This italicized @i(T) is used for defining
+  operators and attributes of the language. The meaning is intended to be
+  as described here.]}
 @end{Ramification}
 
 For boolean types, the predefined logical operators

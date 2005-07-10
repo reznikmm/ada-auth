@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/06/07 06:07:53 $}
+@Comment{$Date: 2005/06/16 22:43:30 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 
@@ -222,7 +222,7 @@ Sec=[by a task entry]}@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
-  interface; a task declaration inherits no subprograms of its own.]}
+  interface given as part of the task declaration.]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -294,9 +294,9 @@ shall be subtype conformant with that of the task entry.
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[An entry may implement two subprograms from the
   ancestors, one whose first parameter is of type @i<T> and one whose first
-  parameter is of type @key{access} @i{T}. That's OK because
-  @lquotes@;implemented by@rquotes (unlike @lquotes@;overridden@rquote)
-  probably entails the creation of wrappers.]}
+  parameter is of type @key{access} @i{T}. That doesn't cause implementation
+  problems because @lquotes@;implemented by@rquotes (unlike
+  @lquotes@;overridden@rquote) probably entails the creation of wrappers.]}
 @end(Ramification)
 
 @end{Itemize}
@@ -519,7 +519,7 @@ because a @nt{declarative_part} can be empty.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00382-01]}
   @ChgAdded{Version=[2],Text=[Revised the note on use of the name of
-  a protected type within itself to reflect the exception for anonymous
+  a task type within itself to reflect the exception for anonymous
   access types.]}
 @end{DiffWord95}
 
@@ -702,7 +702,7 @@ This clause has been rewritten in an attempt to improve presentation.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Adjusted the wording for activating tasks to
-  handle the case of anonymous function return objects. This was critical;
+  handle the case of anonymous function return objects. This is critical;
   we don't want to be waiting for the tasks in a return object when we exit
   the function normally.]}
 @end{DiffWord95}
@@ -1003,8 +1003,7 @@ Sec=[by a protected entry]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
-  interface; a protected declaration inherits no subprograms of its
-  own.]}
+  interface given as part of the protected declaration.]}
 @end{Ramification}
 
 
@@ -1246,9 +1245,9 @@ Program_Error is raised. Otherwise, the call proceeds normally, which may leave
 a task queued forever.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[This very similar to the previous case. It is
-a bounded error so that implementations can avoid the overhead of the check
-if it can ensure that the call still will operate properly. Such an
+@ChgAdded{Version=[2],Text=[This is very similar to the finalization rule. It
+is a bounded error so that an implementation can avoid the overhead of the
+check if it can ensure that the call still will operate properly. Such an
 implementation cannot need to return resources (such as locks) to an
 executive that it needs to execute calls.]}
 
@@ -1787,7 +1786,7 @@ Control.Release;
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
   @ChgAdded{Version=[2],Text=[Added a note pointing out the existence of
-  @nt{pragma} Detect_Blocking. This pragma can be used to insure portable
+  @nt{pragma} Detect_Blocking. This pragma can be used to ensure portable
   (somewhat pessimistic) behavior of protected actions by converting the
   Bounded Error into a required check.]}
 @end{DiffWord95}
@@ -1968,11 +1967,6 @@ places where @LegalityTitle normally apply (see
 of an instance of a generic unit.]}
 
 @end{Itemize}
-@begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[An entry family never implements anything, so
-  only @key{not overriding} can be given on the declaration of a family.]}
-@end{Ramification}
 
 For an @nt<accept_statement>,
 the innermost enclosing body shall be a @nt<task_body>,
@@ -3310,8 +3304,8 @@ environment (such as POSIX).]}
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}The upper bound
-  of Year_Number has been changed to avoid an year 2100 problem. A program
-  which expects years past 2099 to raise Constraint_Error will fail on Ada 2006.
+  of Year_Number has been changed to avoid a year 2100 problem. A program
+  which expects years past 2099 to raise Constraint_Error will fail in Ada 2006.
   We don't expect there to be many programs which are depending on an exception
   to be raised. A program that uses Year_Number'Last as a magic number may also
   fail if values of Time are stored outside of the program.
@@ -3774,8 +3768,9 @@ a Sub_Second value of 0.0.]}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[A leap second always occurs at midnight UTC, and is
-    23:59:60 UTC in ISO notation. So, if the time zone is UTC, if any of
-    Hour /= 23, Minute /= 59, or Second /= 59, then Time_Error should be raised.
+    23:59:60 UTC in ISO notation. So, if the time zone is UTC and Leap_Second
+    is True, if any of Hour /= 23, Minute /= 59, or Second /= 59, then
+    Time_Error should be raised.
     However, we do not say that, because other time zones will have different
     values where a leap second is allowed.]}
 @end{Discussion}
@@ -3859,7 +3854,7 @@ suffixed to the string as a 2-digit value following a point.]}
 @begin{Ramification}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[The fractional part is truncated, not rounded.
-    It would be quite hard to define the proper rounding semantics, as it can
+    It would be quite hard to define the result with proper rounding, as it can
     change all of the values of the image. Values can be rounded up by adding
     an appropriate constant (0.5 if Include_Time_Fraction is False,
     0.005 otherwise) to the time before taking the image.]}
@@ -4315,8 +4310,9 @@ so we can define conditional entry calls in terms of timed entry calls.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  A procedure call that might be an entry can be used in a timed or
-  conditional entry call. Since the fact that something is an entry
+  A procedure can be used as the in a timed or
+  conditional entry call, if the procedure
+  might actually be an entry. Since the fact that something is an entry
   could be used in resolving these calls in Ada 95, it is possible for
   timed or conditional entry calls that resolved in Ada 95 to be ambiguous
   in Ada 2006. That could happen if both an entry and procedure with the
@@ -4549,8 +4545,9 @@ executed after the @nt<abortable_part> is left.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  A procedure call that might be an entry can be used the
-  @nt{triggering_statement} of an @nt<asynchronous_select>.]}
+  A procedure can be used as the
+  @nt{triggering_statement} of an @nt<asynchronous_select>, if the procedure
+  might actually be an entry]}
 @end{Extend95}
 
 
@@ -5056,7 +5053,7 @@ see @RefSecNum(Shared Variable Control).
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0031],ARef=[AI95-00118-01]}
-  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that A task T2 can rely on
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that a task T2 can rely on
   values of variables that are updated by another task T1, if task T2 first
   verifies that T1'Terminated is True.]}
 @end{DiffWord95}

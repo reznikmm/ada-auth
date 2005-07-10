@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:02:04 $}
+@Comment{$Date: 2005/06/16 22:43:28 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -733,6 +733,7 @@ It cannot, however, happen if the @nt{case_statement} has the
 @nt{discrete_choice} @key{others}, because @key{others} covers all values,
 even those outside the subtype.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 If the compiler chooses to represent the value of an expression of an
 unconstrained subtype in a way that includes values outside the bounds of the
 subtype, then those values can be outside the covered range.

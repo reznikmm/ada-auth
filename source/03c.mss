@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:38 $}
+@Comment{$Date: 2005/06/16 22:43:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4883,7 +4883,7 @@ legality of 'Access didn't change for them. For example:],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[   A_T : @key{aliased} T1;
-   Ptr : Acc_Int := A_T.C1'Access; -- @RI[Legal in Ada 2006, illegal in Ada 95]
+   Ptr : Acc_Int := A_T.C1'Access; -- @RI[Illegal in Ada 2006, legal in Ada 95]
    A_T := (D1 => True);            -- @RI[Raised Constraint_Error in Ada 95, but does not]
                                    -- @RI[in Ada 2006, so Ptr becomes invalid when this]
                                    -- @RI[is assigned.]],Old=[]}

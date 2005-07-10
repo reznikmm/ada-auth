@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/06/06 02:54:23 $}
+@Comment{$Date: 2005/06/16 22:43:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @LabeledClause{Array Types}
 
@@ -737,11 +737,12 @@ the meaning of the program will be different.]}
 @LabeledClause{Discriminants}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00326-01]}
 @redundant[@Defn{discriminant}
 @IndexSee{Term=[type parameter],See=(discriminant)}
 @IndexSeeAlso{Term=[parameter],See=(discriminant)}
-A composite type (other than an array type) can have discriminants,
+A composite type (other than an array@Chg{Version=[2],New=[ or
+interface],Old=[]} type) can have discriminants,
 which parameterize the type.
 A @nt<known_discriminant_part> specifies the discriminants
 of a composite type.
@@ -835,8 +836,10 @@ discriminant.
 
 @begin{Legality}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0007],ARef=[AI95-00098-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 A @Chg{New=[@nt{discriminant_part}],Old=[@nt{known_discriminant_part}]} is only
-permitted in a declaration for a composite type that is not an array type
+permitted in a declaration for a composite type that is not an
+array@Chg{Version=[2],New=[ or interface],Old=[]} type
 @Redundant[(this includes generic formal types)]@Chg{New=[. A],Old=[; a]}
 type declared with a @nt<known_discriminant_part> is called
 a @i(discriminated) type,@Defn{discriminated type} as is a type that inherits
@@ -895,7 +898,8 @@ denoted by the @nt<subtype_mark> of the @nt<access_definition>]}.
 
 @ChgNote{This paragraph is just moved up}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00402-01]}
-@ChgAdded{Version=[2],Text=[@nt{Default_expression}s shall be provided either for all or for none
+@ChgAdded{Version=[2],Text=[@nt{Default_expression}s shall be provided either
+for all or for none
 of the discriminants of a @nt{known_@!discriminant_@!part}.
 No @nt<default_@!expression>s are permitted in a
 @nt<known_@!discriminant_@!part> in a declaration of a tagged
@@ -926,14 +930,15 @@ type @Redundant[or a generic formal type].]}
   a constrained subtype can be declared for future use.]}
 @end(Reason)
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00402-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00402-01],ARef=[AI95-00419-01]}
 A @nt<discriminant_specification> for
 an access discriminant
 @Chg{Version=[2],New=[may have a @nt{default_expression}],Old=[shall appear]}
 only in the declaration for a task or protected type,
-or for a type with the reserved word @key[limited] in its
+or for a type @Chg{Version=[2],New=[that is a descendant of an explicitly
+limited record type],Old=[with the reserved word @key[limited] in its
 @Redundant[(full)] definition
-or in that of one of its ancestors.
+or in that of one of its ancestors]}.
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 this rule applies also in the private part of an
@@ -945,7 +950,9 @@ instance of a generic unit.@PDefn{generic contract issue}
   if the type is limited,
   but not if the only reason it's limited is because of a limited component.
   Compare with the definition of limited type in
-  @RefSecNum{Limited Types}.
+  @RefSecNum{Limited Types}.@Chg{Version=[2],New=[ Also, recall that a
+  @lquotes@;descendant@rquote includes the type itself, so an explicitly
+  limited record type can have defaults.],Old=[]}
 @end{Discussion}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted]}
@@ -982,7 +989,7 @@ instance of a generic unit.@PDefn{generic contract issue}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[A type may have an access discriminant if
     it is a limited partial view, or a task, protected, or
-    limited record type. This was the rule chosen for Ada 95.]}
+    explicitly limited record type. This was the rule chosen for Ada 95.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant.
@@ -995,20 +1002,20 @@ instance of a generic unit.@PDefn{generic contract issue}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
     as above. However, special accessibility rules only apply to types
-    that are @lquotes@;really@rquotes@; limited (task, protected, and limited
-    records). However, this breaks privacy; worse, @LegalityTitle depend on
-    the definition of accessibility.]}
+    that are @lquotes@;really@rquotes@; limited (task, protected, and
+    explicitly limited records). However, this breaks privacy; worse,
+    @LegalityTitle depend on the definition of accessibility.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
     as above. Limited types have special accessibility, while nonlimited
     types have normal accessibility. However, a limited partial view with an
-    access discriminant can only be completed by a task, protected, or limited
-    record type. That prevents accessibility from changing. A runtime
-    accessibility check is required on generic formal types with access
-    discriminants. However, changing between limited and nonlimited types
-    would have far-reaching consequences for access discriminants - which
-    is uncomfortable.]}
+    access discriminant can only be completed by a task, protected, or
+    explicitly limited record type. That prevents accessibility from changing.
+    A runtime accessibility check is required on generic formal types with
+    access discriminants. However, changing between limited and nonlimited
+    types would have far-reaching consequences for access discriminants @em
+    which is uncomfortable.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant.
@@ -1425,8 +1432,9 @@ is modified to allow an @i{access discriminant},
 with a type specified by an @nt{access_definition}
 (see @RefSecNum{Access Types}).
 
-Discriminants are allowed on all composite types other than array
-types.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+Discriminants are allowed on all composite types other than array@Chg{Version=[2],New=[ and
+interface],Old=[]} types.
 
 Discriminants may be of an access type.
 @end{Extend83}
@@ -1456,6 +1464,10 @@ when the discriminant is initialized.
   that types that cannot have discriminants cannot have an
   @nt{unknown_discriminant_part}.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to prevent interfaces from
+  having discriminants. We don't want interfaces to have any components.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00254-01]}
   @ChgAdded{Version=[2],Text=[Removed wording which implied or required an
   access discriminant to have an access-to-object type (anonymous access
@@ -1466,6 +1478,12 @@ when the discriminant is initialized.
   clause to reflect that both incomplete and partial views can have
   unknown discriminants. That was always true, but for some reason this
   wording specified partial views.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+  @ChgAdded{Version=[2],Text=[Changed the wording to use the new term
+  @lquotes@;explicitly limited record@rquotes, which makes the intent
+  much clearer (and eliminates confusion with derived types that happen to
+  contain the reserved word @key(limited).]}
 @end{DiffWord95}
 
 
@@ -1924,8 +1942,11 @@ and the @nt{attribute_reference} shall appear alone.
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@ChgAdded{Version=[2],Text=[If a @nt{record_type_declaration} includes the
-reserved word @key{limited}, the type is called a @i<limited record> type.]}
+@ChgAdded{Version=[2],Text=[@Defn{explicitly limited record}
+@Defn2{Term=[record],Sec=(explicitly limited)}
+If a @nt{record_type_declaration} includes the
+reserved word @key{limited}, the type is called an
+@i<explictly limited record> type.]}
 
 @PDefn2{Term=[nominal subtype], Sec=(of a record component)}
 The @nt{component_definition} of a @nt<component_declaration>
@@ -2156,8 +2177,8 @@ representation pragmas to be as similar as possible.
   representation.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-  @ChgAdded{Version=[2],Text=[Defined @i{limited record} type to use in
-  other rules.]}
+  @ChgAdded{Version=[2],Text=[Defined @i{explicitly limited record} type to
+  use in other rules.]}
 @end{DiffWord95}
 
 
