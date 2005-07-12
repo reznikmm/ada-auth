@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/06/07 06:07:51 $}
+@Comment{$Date: 2005/07/10 05:16:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.18 $}
+@Comment{$Revision: 1.19 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1984,8 +1984,8 @@ Otherwise, the value may be arbitrarily large or small.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00269-01]}
 If the expression is of type @i<universal_real> and its expected type is
 a decimal fixed point type,
-then its value shall be a multiple of the @Chg{Version=[2],New=[small],
-Old=[@i<small>]} of the decimal type.@Chg{Version=[2],New=[ This restriction
+then its value shall be a multiple of the @i<small> of the decimal
+type.@Chg{Version=[2],New=[ This restriction
 does not apply if the expected type is a
 descendant of a formal scalar type
 (or a corresponding actual type in an instance).],Old=[]}

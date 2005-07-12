@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:31 $}
+@Comment{$Date: 2005/07/10 05:16:24 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1336,14 +1336,12 @@ declarative region of the @nt{library_item}.]}
 @end{Legality}
 
 @begin{Notes}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
 A @nt<library_item> mentioned in
 a @nt{with_clause} of a compilation unit
 is visible within the
 compilation unit and hence acts
 just like an ordinary declaration.
-Thus, within a compilation unit that mentions @Chg{Version=[2],New=[a
-view other than a limited view of ],Old=[]}its
+Thus, within a compilation unit that mentions its
 declaration, the name of a
 library package can be given in @nt{use_clause}s and can be used to
 form expanded names, a library subprogram can be called,
@@ -1375,6 +1373,16 @@ above.
 @begin{Examples}
 
 @begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgAdded{Version=[2],Text=[@key(package) Office @key(is)
+@key{end} Office;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgAdded{Version=[2],Text=[@key(with) Ada.Strings.Unbounded;
+@key(package) Office.Locations @key(is)
+   @key(type) Location @key(is new) Ada.Strings.Unbounded.Unbounded_String;
+@key(end) Office.Locations;]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
 @ChgAdded{Version=[2],Text=[@key(limited with) Office.Departments;  --@RI[ types are incomplete]
 @key(private with) Office.Locations;    --@RI[ only visible in private part]
@@ -3136,8 +3144,8 @@ specify which entities have @i{preelaborable initialization}:]}
 type without @nt<entry_declaration>s, a generic formal private type, or a
 generic formal derived type, have preelaborable initialization if and only if
 the @nt<pragma> Preelaborable_Initialization has been applied to them.
-A task type or protected type with entry_declarations never have
-preelaborable initialization.]}
+@Redundant[A protected type with @nt{entry_declaration}s or a task type never
+has preelaborable initialization.]]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[A component (including a discriminant) of a record or

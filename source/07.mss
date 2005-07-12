@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:29 $}
+@Comment{$Date: 2005/07/10 05:16:21 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2923,11 +2923,7 @@ is not known at the call site.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00162-01]}
-@Chg{Version=[2],New=[In the case of a potentially blocking operation that is
-a master, finalization of an (anonymous) object occurs before blocking if the
-last use of the object occurs before blocking. In particular, for
-a @nt{delay_statement}, any finalization occurs before delaying the task.
-In the case of an @nt{expression} that is a master,
+@Chg{Version=[2],New=[In the case of an @nt{expression} that is a master,
 finalization of any (anonymous) objects occurs as the final part of
 evaluation of the @nt{expression}.],
 Old=[@Chg{New=[If a transfer of control or raising of an exception occurs prior to

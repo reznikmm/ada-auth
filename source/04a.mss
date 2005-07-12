@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:27 $}
+@Comment{$Date: 2005/07/10 05:16:20 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2156,8 +2156,8 @@ F : String(1 .. 1) := (1 => 'F');  --@RI[ a one component aggregate: same as "F"
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],Text=[@i{Example of array
-aggregate with defaulted others choice, with applicable index constraint
+@ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],Text=[@i{Example of an array
+aggregate with defaulted others choice and with an applicable index constraint
 provided by an enclosing record aggregate:}]}
 
 @begin{Example}

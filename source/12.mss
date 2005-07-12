@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/06/10 06:30:45 $}
+@Comment{$Date: 2005/07/10 05:16:25 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2433,12 +2433,15 @@ protected, or synchronized interface.]}
 @begin{Examples}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
+@ChgAdded{Version=[2],Text=[@key{type} Root_Work_Item @key{is tagged private};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Managed_Task @key{is task interface};
    @key{type} Work_Item(<>) @key{is new} Root_Work_Item @key{with private};
 @key{package} Server_Manager @key{is}
    @key{task type} Server @key{is new} Managed_Task @key{with}
-      @key{entry} Start(Data : @key{access} Work_Item);
+      @key{entry} Start(Data : @key{in out} Work_Item);
    @key{end} Server;
 @key{end} Server_Manager;]}
 @end{Example}
@@ -3019,17 +3022,18 @@ template included in the visible part of @i<A>.]}
 
 @begin{Examples}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@i{Example of generic
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@i{Example of a generic
 package with formal package parameters:}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[generic]
-   @key[with package] Mapping_1 @key[is new] Generic_Mapping(<>);
-   @key[with package] Mapping_2 @key[is new] Generic_Mapping
+@ChgAdded{Version=[2],Text=[@key[with] Ada.Containers.Ordered_Maps;  --@RI[ see @RefSecNum{The Package Containers.Ordered_Maps}]
+@key[generic]
+   @key[with package] Mapping_1 @key[is new] Ada.Containers.Ordered_Maps(<>);
+   @key[with package] Mapping_2 @key[is new] Ada.Containers.Ordered_Maps
                                     (Key_Type => Mapping_1.Element_Type,
                                      @key[others] => <>);
-@key[package] Generic_Join @key[is]
+@key[package] Ordered_Join @key[is]
    --@RI[ Provide a "join" between two mappings]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3041,28 +3045,42 @@ package with formal package parameters:}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   ...
-@key[end] Generic_Join;]}
+@key[end] Ordered_Join;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@i{Example of
-instantiation of package with formal packages:}]}
+an instantiation of a package with formal packages:}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[package] String_Table @key[is new] Generic_Mapping(Key_Type => String,
-                                            Element_Type => String_ID);]}
+@ChgAdded{Version=[2],Text=[@key[with] Ada.Containers.Ordered_Maps;
+@key[package] Symbol_Package @key[is]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[package] Symbol_Table @key[is new] Generic_Mapping(Key_Type => String_ID,
-                                            Element_Type => Symbol_Info);]}
+@ChgAdded{Version=[2],Text=[   @key[type] String_Id @key[is] ...]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[package] String_Info @key[is new] Generic_Join(Mapping_1 => String_Table,
-                                        Mapping_2 => Symbol_Table);]}
+@ChgAdded{Version=[2],Text=[   @key[type] Symbol_Info @key[is] ...]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Apple_Info : @key[constant] Symbol_Info := String_Info.Lookup("Apple");]}
+@ChgAdded{Version=[2],Text=[   @key[package] String_Table @key[is new] Ada.Containers.Ordered_Maps(Key_Type => String,
+                                                           Element_Type => String_Id);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[package] Symbol_Table @key[is new] Ada.Containers.Ordered_Maps(Key_Type => String_Id,
+                                                           Element_Type => Symbol_Info);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[package] String_Info @key[is new] Generic_Join(Mapping_1 => String_Table,
+                                           Mapping_2 => Symbol_Table);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   Apple_Info : @key[constant] Symbol_Info := String_Info.Lookup("Apple");]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[end] Symbol_Package;]}
+
 @end{Example}
 @end{Examples}
 

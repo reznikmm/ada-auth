@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:24 $}
+@Comment{$Date: 2005/07/10 05:16:18 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -607,15 +607,20 @@ excludes the null value (see @RefSecNum{Access Types}).],Old=[]}
 A @i(subtype) of a given type is a combination of the type,
 a constraint on values of the type, and certain
 attributes specific to the subtype.
-The given type is called the type @Chg{Version=[2],New=[of],Old=[@i(of)]} the
-subtype. Similarly, the associated constraint is called the
-constraint @Chg{Version=[2],New=[of],Old=[@i(of)]} the subtype. The set of
+The given type is called the @Chg{Version=[2],New=[@i(type of the subtype)],
+Old=[type @i(of) the subtype]}.@Chg{Version=[2],New=[@Defn2{Term=[type], Sec=(of a subtype)}
+@Defn2{Term=[subtype], Sec=(type of)}],Old=[]}
+Similarly, the associated constraint is
+called the @Chg{Version=[2],New=[@i(constraint of the subtype)],
+Old=[constraint @i(of) the subtype]}.@Chg{Version=[2],New=[@Defn2{Term=[constraint], Sec=(of a subtype)}
+@Defn2{Term=[subtype], Sec=(constraint of)}],Old=[]} The set of
 values of a subtype consists of the values of its type
 that satisfy its constraint@Chg{Version=[2],New=[ and, in the case
 of a subtype that excludes null, the values do not include the null value],
 Old=[]}.
 @Defn2{Term=[belong], Sec=(to a subtype)}
-Such values @i(belong) to the subtype.
+Such values @i(belong) to the subtype.@Chg{Version=[2],New=[@Defn2{Term=[values], Sec=(belonging to a subtype)}
+@Defn2{Term=[subtype], Sec=(values belonging to)}],Old=[]}
 @begin{Discussion}
   We make a strong distinction between a type and its
   subtypes.
@@ -2164,8 +2169,9 @@ The elaboration of a @nt<number_declaration> has no effect.
 @begin(Example)
 Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   --@RI[ a real number (see @RefSecNum{The Numerics Packages})]
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
 Max           : @key(constant) := 500;                   --@RI[ an integer number]
-Max_Line_Size : @key(constant) := Max/6                  --@RI[ the integer 83]
+Max_Line_Size : @key(constant) := Max/6@Chg{Version=[2],New=[;],Old=[ ]}                  --@RI[ the integer 83]
 Power_16      : @key(constant) := 2**16;                 --@RI[ the integer 65_536]
 One, Un, Eins : @key(constant) := 1;                     --@RI[ three different names for 1]
 @end(Example)

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:32 $}
+@Comment{$Date: 2005/07/10 05:16:25 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1272,9 +1272,10 @@ Pragmas Assert and Assertion_Policy, and package Ada.Assertions are new.]}
 @Leading@;Exception handling may be used to separate the detection of an error
 from the response to that error:
 @begin{Example}
-@key[with] Ada.Exceptions;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@Chg{Version=[2],New=[],Old=[@key[with] Ada.Exceptions;
 @key[use] Ada;
-@key[package] File_System @key[is]
+]}@key[package] File_System @key[is]
     @key[type] File_Handle @key[is] @key[limited] @key[private];
 
     File_Not_Found : @key[exception];

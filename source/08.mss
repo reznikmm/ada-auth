@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:29 $}
+@Comment{$Date: 2005/07/10 05:16:22 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1478,36 +1478,36 @@ security queue derived from the Queue interface of 3.9.4 as:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{overriding}
-@key{procedure} Append (Q : @key{in out} Security_Queue; Element : @key{in} Person_Name);]}
+@key{procedure} Append(Q : @key{in out} Security_Queue; Person : @key{in} Person_Name);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{overriding}
-@key{procedure} Remove_First (Q : @key{in out} Security_Queue; Element : @key{in} Person_Name);]}
+@key{procedure} Remove_First(Q : @key{in out} Security_Queue; Person : @key{in} Person_Name);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{overriding}
-@key{function} Cur_Count (Q : @key{in} Security_Queue) @key{return} Natural;]}
+@key{function} Cur_Count(Q : @key{in} Security_Queue) @key{return} Natural;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{overriding}
-@key{function} Max_Count (Q : @key{in} Security_Queue) @key{return} Natural;]}
+@key{function} Max_Count(Q : @key{in} Security_Queue) @key{return} Natural;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{not overriding}
-@key{procedure} Arrest (Q : @key{in out} Security_Queue; Element : @key{in} Person_Name);]}
+@key{procedure} Arrest(Q : @key{in out} Security_Queue; Person : @key{in} Person_Name);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The first four subprogram declarations guarantee
 that these subprograms will override the four subprograms inherited from the
-Queue interface. If a spelling error occurs in one of these declarations, an
-error will occur. Similarly, the declaration of Arrest guarantees that this is
-a new operation.]}
+Queue interface. A misspelling in one of these subprograms will be detected
+by the implementation. Conversely, the declaration of Arrest guarantees that
+this is a new operation.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In this case, the subprograms are abstract, so
-  spelling errors will get detected anyway. But for other subprograms
+  misspellings will get detected anyway. But for other subprograms
   (especially when deriving from concrete types), the error might never be
   detected, and a body other than the one the programmer intended might be
   executed without warning. Thus our new motto: @lquotes@;Overriding

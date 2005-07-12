@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:32 $}
+@Comment{$Date: 2005/07/10 05:16:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @LabeledClause{The Package System}
 
@@ -2876,11 +2876,20 @@ ordinary fixed point, or decimal fixed point).]}
 Text=[The recommended level of support for the Stream_Size attribute should be
 followed.]}]}
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[There are no requirements beyond supporting
   confirming Stream_Size clauses for floating point and access types.
   Floating point and access types usually only have a handful of defined
-  formats, which don't obviously fit the description given above.]}
+  formats, streaming anything else makes no sense for them.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[For discrete and fixed point types, this
+  may require support for sizes other than the @lquotes@;natural@rquotes
+  ones. For instance, on a typical machine with 32-bit integers and a
+  Stream_Element'Size of 8, setting Stream_Size to 24 must be supported.
+  This is required as such formats can be useful for interoperability with
+  unusual machines, and there is no difficulty with the implementation
+  (drop extra bits on output, sign extend on input).]}
 @end{Ramification}
 
 @end{Itemize}

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:26 $}
+@Comment{$Date: 2005/07/10 05:16:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2429,14 +2429,14 @@ an explicit overriding for any nonabstract descendant of the interface.]}
 @begin{Examples}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example of limited
-interface and synchronized interface extending it:}]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example of a limited
+interface and a synchronized interface extending it:}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Queue @key{is limited interface};
-@key{procedure} Append(Q : @key{in out} Queue; Element : @key{in} Person_Name) @key{is abstract};
-@key{procedure} Remove_First(Q : @key{in out} Queue; Element : @key{out} Person_Name) @key{is abstract};
+@key{procedure} Append(Q : @key{in out} Queue; Person : @key{in} Person_Name) @key{is abstract};
+@key{procedure} Remove_First(Q : @key{in out} Queue; Person : @key{out} Person_Name) @key{is abstract};
 @key{function} Cur_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
 @key{function} Max_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
 -- @RI[See @RefSecNum{Incomplete Type Declarations} for Person_Name.]]}
@@ -2448,21 +2448,21 @@ interface and synchronized interface extending it:}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is synchronized interface and} Queue; --@RI[ see @RefSecNum{Example of Tasking and Synchronization}]
-@key{procedure} Append_Wait(Q : @key{in out} Queue; Element : @key{in} Person_Name) @key{is abstract};
-@key{procedure} Remove_First_Wait(Q : @key{in out} Queue; Element : @key{out} Person_Name) @key{is abstract};]}
+@key{procedure} Append_Wait(Q : @key{in out} Queue; Person : @key{in} Person_Name) @key{is abstract};
+@key{procedure} Remove_First_Wait(Q : @key{in out} Queue; Person : @key{out} Person_Name) @key{is abstract};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[...]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{procedure} Transfer(From : @key{in out} Queue'Class;
-                   To : @key{in out} Queue'Class;
-                   Number : @key{in} Natural := 1) @key{is}
-   Element : Person_Name_Name;
+@ChgAdded{Version=[2],Text=[@key{procedure} Transfer(From   : @key{in out} Queue'Class;
+                   To     : @key{in out} Queue'Class;
+                   Number : @key{in}     Natural := 1) @key{is}
+   Person : Person_Name;
 @key{begin}
    @key{for} I @key{in} 1..Number @key{loop}
-      Remove_First(From, Element);
-      Append(To, Element);
+      Remove_First(From, Person);
+      Append(To, Person);
    @key{end loop};
 @key{end} Transfer;]}
 @end{Example}
@@ -2475,26 +2475,26 @@ dispatching operations, Append, Remove_First, Cur_Count, and Max_Count. The
 body of a class-wide operation, Transfer is also shown. Every non-abstract
 extension of Queue must provide implementations for at least its four
 dispatching operations, as they are abstract. Any object of a type derived from
-Queue may be passed to Transfer, as either the From or the To operand. The two
+Queue may be passed to Transfer as either the From or the To operand. The two
 operands need not be of the same type in any given call.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The Synchronized_Queue interface inherits the four
-dispatching operations from Queue, and adds two additional dispatching
+dispatching operations from Queue and adds two additional dispatching
 operations, which wait if necessary rather than raising the Queue_Error
 exception. This synchronized interface may only be implemented by a task or
 protected type, and as such ensures safe concurrent access.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example use of an interface:}]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example use of the interface:}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Fast_Food_Queue @key{is new} Queue @key{with record} ...;
-@key{procedure} Append (Q : @key{in out} Fast_Food_Queue; Element : @key{in} Person_Name);
-@key{procedure} Remove_First (Q : @key{in out} Fast_Food_Queue; Element : @key{in} Person_Name);
-@key{function} Cur_Count (Q : @key{in} Fast_Food_Queue) @key{return} Natural;
-@key{function} Max_Count (Q : @key{in} Fast_Food_Queue) @key{return} Natural;]}
+@key{procedure} Append(Q : @key{in out} Fast_Food_Queue; Person : @key{in} Person_Name);
+@key{procedure} Remove_First(Q : @key{in out} Fast_Food_Queue; Person : @key{in} Person_Name);
+@key{function} Cur_Count(Q : @key{in} Fast_Food_Queue) @key{return} Natural;
+@key{function} Max_Count(Q : @key{in} Fast_Food_Queue) @key{return} Natural;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[...]}
@@ -2513,8 +2513,8 @@ Transfer (Cashier, Counter);
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[An interface such as Queue can be used directly as
-the parent of a new type (as shown here), or can be added when a new type is
-derived from another type. In either case, the primitive operations of the
+the parent of a new type (as shown here), or can be used as a progenitor when a
+type is derived. In either case, the primitive operations of the
 interface are inherited. For Queue, the implementation of the four inherited
 routines must be provided. Inside the call of Transfer, dispatching calls to
 the implementations of Append and Remove_First for type Fast_Food_Queue will be
@@ -2532,7 +2532,7 @@ made.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The Serial_Device interface has two dispatching
-operations which are intended to be implemented using task entries (see 9.1).]}
+operations which are intended to be implemented by task entries (see 9.1).]}
 
 @end{Examples}
 

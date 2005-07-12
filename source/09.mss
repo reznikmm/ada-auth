@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:30 $}
+@Comment{$Date: 2005/07/10 05:16:23 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 
@@ -5074,12 +5074,12 @@ following structure:
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(task body) Producer @key(is)
-   @Chg{Version=[2],New=[Element : Person_Name; --@RI[ see @RefSecNum{Incomplete Type Declarations}]],Old=[Char : Character;]}
+   @Chg{Version=[2],New=[Person : Person_Name; --@RI[ see @RefSecNum{Incomplete Type Declarations}]],Old=[Char : Character;]}
 @key(begin)
    @key(loop)
-      ... --@RI[  produce the next @Chg{Version=[2],New=[person (for instance, simulating arrivals)],Old=[character Char]}]
-      Buffer.@Chg{Version=[2],New=[Append_Wait(Element)],Old=[Write(Char)]};
-      @key(exit) @key(when) @Chg{Version=[2],New=[Element = @key(null)],Old=[Char = ASCII.EOT]};
+      ... --@RI[  @Chg{Version=[2],New=[simulate arrival of the next customer)],Old=[produce the next character Char]}]
+      Buffer.@Chg{Version=[2],New=[Append_Wait(Person)],Old=[Write(Char)]};
+      @key(exit) @key(when) @Chg{Version=[2],New=[Person = @key(null)],Old=[Char = ASCII.EOT]};
    @key(end) @key(loop);
 @key(end) Producer;
 @end(Example)
@@ -5090,40 +5090,41 @@ following structure:
 @key(task) Consumer;
 
 @Trailing@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}@key(task body) Consumer @key(is)
-   @Chg{Version=[2],New=[Element : Person_Name;],Old=[Char : Character;]}
+   @Chg{Version=[2],New=[Person : Person_Name;],Old=[Char : Character;]}
 @key(begin)
    @key(loop)
-      Buffer.@Chg{Version=[2],New=[Remove_First_Wait(Element)],Old=[Read(Char)]};
-      @key(exit) @key(when) @Chg{Version=[2],New=[Element = @key(null)],Old=[Char = ASCII.EOT]};
-      ... --@RI[  consume the @Chg{Version=[2],New=[person (for instance, simulating serving a customer)],Old=[character Char]}]
+      Buffer.@Chg{Version=[2],New=[Remove_First_Wait(Person)],Old=[Read(Char)]};
+      @key(exit) @key(when) @Chg{Version=[2],New=[Person = @key(null)],Old=[Char = ASCII.EOT]};
+      ... --@RI[  @Chg{Version=[2],New=[simulate serving a customer],Old=[consume the character Char]}]
    @key(end) @key(loop);
 @key(end) Consumer;
 @end(Example)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-The buffer object contains an internal pool of
-@Chg{Version=[2],New=[people],Old=[characters]} managed in a round-robin
-fashion. The pool has two indices, an In_Index denoting the space for the next
-input @Chg{Version=[2],New=[element (person)],Old=[character]} and an Out_Index
-denoting the space for the next output
-@Chg{Version=[2],New=[element],Old=[character]}.
+The buffer object contains an internal @Chg{Version=[2],New=[array],Old=[pool]}
+of @Chg{Version=[2],New=[person names],Old=[characters]} managed in a
+round-robin fashion. The @Chg{Version=[2],New=[array],Old=[pool]} has two
+indices, an In_Index denoting the @Chg{Version=[2],New=[index],Old=[space]}
+for the next input @Chg{Version=[2],New=[person name],Old=[character]} and an
+Out_Index denoting the @Chg{Version=[2],New=[index],Old=[space]} for the next
+output @Chg{Version=[2],New=[person name],Old=[character]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[The Buffer is defined as an extension of the
-Synchronized_Queue interface (see @RefSecNum{Interface Types}), and as such, is
-promising to implement the abstraction defined by that interface. By doing so,
+Synchronized_Queue interface (see @RefSecNum{Interface Types}), and as such
+promises to implement the abstraction defined by that interface. By doing so,
 the Buffer can be passed to the Transfer class-wide operation defined for
 objects of a type covered by Queue'Class.]}
 
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(protected) Buffer @key(is)@Chg{Version=[2],New=[ @key(new) Synchronized_Queue @key(with)  --@RI[ see @RefSecNum{Interface Types}]],Old=[]}
-   @key(entry) @Chg{Version=[2],New=[Append_Wait(Element : @key(in) Person_Name);],Old=[Read (C : @key(out) Character);]}
-   @key(entry) @Chg{Version=[2],New=[Remove_First_Wait(Element : @key(out) Person_Name);
+   @key(entry) @Chg{Version=[2],New=[Append_Wait(Person : @key(in) Person_Name);],Old=[Read (C : @key(out) Character);]}
+   @key(entry) @Chg{Version=[2],New=[Remove_First_Wait(Person : @key(out) Person_Name);
    @key(function) Cur_Count @key(return) Natural;
    @key(function) Max_Count @key(return) Natural;
-   @key(procedure) Append(Element : @key(in) Person_Name);
-   @key(procedure) Remove_First(Element : @key(out) Person_Name);],Old=[Write(C : @key(in)  Character);]}
+   @key(procedure) Append(Person : @key(in) Person_Name);
+   @key(procedure) Remove_First(Person : @key(out) Person_Name);],Old=[Write(C : @key(in)  Character);]}
 @key(private)
    Pool      : @Chg{Version=[2],New=[Person_Name_Array],Old=[String]}(1 .. 100);
    Count     : Natural := 0;
@@ -5132,42 +5133,42 @@ objects of a type covered by Queue'Class.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(protected body) Buffer @key(is)
-   @key(entry) @Chg{Version=[2],New=[Append_Wait(Element : @key(in) Person_Name)],Old=[Write(C : @key(in) Character)]}
+   @key(entry) @Chg{Version=[2],New=[Append_Wait(Person : @key(in) Person_Name)],Old=[Write(C : @key(in) Character)]}
       @key(when) Count < Pool'Length @key(is)
    @key(begin)
-      @Chg{Version=[2],New=[Append(Element);],Old=[Pool(In_Index) := C;
+      @Chg{Version=[2],New=[Append(Person);],Old=[Pool(In_Index) := C;
       In_Index := (In_Index @key(mod) Pool'Length) + 1;
       Count    := Count + 1;]}
    @key(end) @Chg{Version=[2],New=[Append_Wait],Old=[Write]};
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Text=[   @key(procedure) Append(Element : @key(in) Person_Name) @key(is)
+@ChgAdded{Version=[2],Text=[   @key(procedure) Append(Person : @key(in) Person_Name) @key(is)
    @key(begin)
       @key(if) Count = Pool'Length @key(then)
          @key(raise) Queue_Error @key(with) "Buffer Full";  --@RI[ see @RefSecNum{Raise Statements}]
       @key(end if);
-      Pool(In_Index) := Element;
-      In_Index := (In_Index @key(mod) Pool'Length) + 1;
-      Count    := Count + 1;
+      Pool(In_Index) := Person;
+      In_Index       := (In_Index @key(mod) Pool'Length) + 1;
+      Count          := Count + 1;
    @key(end) Append;]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-   @key(entry) @Chg{Version=[2],New=[Remove_First_Wait(Element : @key(out) Person_Name)],Old=[Read(C : @key(out) Character)]}
+   @key(entry) @Chg{Version=[2],New=[Remove_First_Wait(Person : @key(out) Person_Name)],Old=[Read(C : @key(out) Character)]}
       @key(when) Count > 0 @key(is)
    @key(begin)
-      @Chg{Version=[2],New=[Remove_First(Element);],Old=[C := Pool(Out_Index);
+      @Chg{Version=[2],New=[Remove_First(Person);],Old=[C := Pool(Out_Index);
       Out_Index := (Out_Index @key(mod) Pool'Length) + 1;
       Count     := Count - 1;]}
    @key(end) @Chg{Version=[2],New=[Remove_First_Wait],Old=[Read;
 @key(end) Buffer]};
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Text=[   @key(procedure) Remove_First(Element : @key(out) Person_Name) @key(is)
+@ChgAdded{Version=[2],Text=[   @key(procedure) Remove_First(Person : @key(out) Person_Name) @key(is)
    @key(begin)
       @key(if) Count = 0 @key(then)
          @key(raise) Queue_Error @key(with) "Buffer Empty"; --@RI[ see @RefSecNum{Raise Statements}]
       @key(end if);
-      Element := Pool(Out_Index);
+      Person    := Pool(Out_Index);
       Out_Index := (Out_Index @key(mod) Pool'Length) + 1;
       Count     := Count - 1;
    @key(end) Remove_First;]}
