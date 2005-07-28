@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:22 $}
+@Comment{$Date: 2005/07/27 00:06:23 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1456,14 +1456,16 @@ additional operations are declared.]}
 @ChgAdded{Version=[2],Text=[The @LQuotes@;no lying@RQuotes@; rules are
 needed to prevent a @nt{subprogram_declaration} and @nt{subprogram_body}
 from having contradictory @nt{overriding_indicator}s.]}
+@end{Discussion}
+@end{Legality}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00397-01]}
 @ChgAdded{Version=[2],Text=[Rules for @nt{overriding_indicator}s of task and
 protected entries and of protected subprograms are found in
 @RefSecNum{Entries and Accept Statements}
 and @RefSecNum{Protected Units and Protected Objects}, respectively.]}
-@end{Discussion}
-@end{Legality}
+@end{Notes}
 
 @begin{Examples}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -1864,9 +1866,11 @@ irrelevant, since failing these tests is highly unlikely.
 The type of the @SynI{object_}@nt{name} shall resolve to
 the type determined by the @nt{subtype_mark}@Chg{Version=[2],New=[,
 or in the case where the type is defined by an @nt{access_definition}, to an
-anonymous access type, which in the case of an access-to-object type
-shall have the same designated type as that of the @nt{access_definition}, and
-in the case of an access-to-subprogram type shall have a designated profile
+anonymous access type. If the anonymous access type is an access-to-object type,
+the type of the @SynI{object_}@nt{name}
+shall have the same designated type as that of the @nt{access_definition}.
+If the anonymous access type is an access-to-subprogram type,
+the type of the @SynI{object_}@nt{name} shall have a designated profile
 that is type conformant with that of the @nt{access_definition}],Old=[]}.
 
 @begin{Reason}
@@ -2186,8 +2190,8 @@ The renamed entity shall be a package.
 @nt{package_renaming_declaration} denotes a limited view of a package @i{P},
 then a name that denotes the @nt{package_renaming_declaration} shall occur
 only within the immediate scope of the renaming or the scope of a
-@nt{with_clause} that mentions the package @i{P} or (if @i{P} is a nested
-package) the innermost library package enclosing @i{P}.]}
+@nt{with_clause} that mentions the package @i{P} or, if @i{P} is a nested
+package, the innermost library package enclosing @i{P}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[The use of a renaming that designates a limited

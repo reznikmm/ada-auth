@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:19 $}
+@Comment{$Date: 2005/07/27 00:06:20 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.41 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -878,7 +878,7 @@ variants.
 The parent type of a record extension shall not be
 a class-wide type@Chg{Version=[2],New=[ nor shall it be a synchronized
 tagged type (see @RefSecNum{Interface Types})],Old=[]}.
-If the @Chg{Version=[2],New=[record extension],Old=[parent type]} is
+If the parent type@Chg{Version=[2],New=[ or any progenitor],Old=[]} is
 nonlimited, then each of the
 components of the @nt{record_extension_part} shall be
 nonlimited.@Chg{Version=[2],New=[],Old=[
@@ -2971,13 +2971,7 @@ the actual parameter is null.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[excludes null],Sec=[subtype]}
-A @nt{null_exclusion} in an @nt{access_definition}, @nt{access_type_definition},
-@nt{subtype_indication} (see @RefSecNum{Subtype Declarations}),
-@nt{discriminant_specification} (see @RefSecNum{Discriminants}),
-@nt{parameter_specification} (see @RefSecNum{Subprogram Declarations}),
-@nt{parameter_and_result_profile} (see @RefSecNum{Subprogram Declarations}),
-@nt{object_renaming_declaration} (see @RefSecNum{Object Renaming Declarations}),
-or @nt{formal_object_declaration} (see @RefSecNum{Formal Objects}) specifies
+A @nt{null_exclusion} in a construct specifies
 that the null value does not belong to the access subtype defined by the
 construct, that is, the access subtype @i{excludes null}. In addition, the
 anonymous access subtype defined by the @nt{access_definition} for a controlling
@@ -2985,7 +2979,7 @@ access parameter (see @RefSecNum{Dispatching Operations of Tagged Types})
 excludes null. Finally, for a @nt{subtype_indication} without a
 @nt{null_exclusion}, the subtype denoted by the @nt{subtype_indication}
 excludes null if and only if the subtype denoted by the @nt{subtype_mark} in
-the @nt{subtype_indication} does.]}
+the @nt{subtype_indication} excludes null.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[An @nt{access_definition} used in a controlling
@@ -3051,10 +3045,10 @@ otherwise it is constrained.
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
 @ChgAdded{Version=[2],Text=[A @nt{null_exclusion} is only allowed in a
-@nt{subtype_indication},
-@nt{discriminant_specification}, @nt{parameter_specification},
-@nt{parameter_and_result_profile}, @nt{object_renaming_declaration}, or
-@nt{formal_object_declaration} whose @nt{subtype_mark} denotes an access
+@nt{subtype_indication}, @nt{discriminant_specification},
+@nt{parameter_specification}, @nt{parameter_and_result_profile},
+@nt{object_renaming_declaration}, or @nt{formal_object_declaration} if
+the @nt{subtype_mark} in the construct denotes an access
 subtype that does not exclude null.]}
 @begin(Honest)
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
@@ -3083,8 +3077,8 @@ access subtype that does not exclude null.],Old=[]}
 An access value @i(satisfies) a @nt<composite_constraint> of an access
 subtype if it equals the null value of its type
 or if it designates an object whose value satisfies the
-constraint.@Chg{Version=[2],New=[ An access value satisfies an access subtype
-that excludes null if it does not equal the
+constraint.@Chg{Version=[2],New=[ An access value satisfies an exclusion
+of the null value if it does not equal the
 null value of its type.],Old=[]}
 
 @PDefn2{Term=[elaboration], Sec=(access_type_definition)}
@@ -4022,16 +4016,8 @@ subprogram.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
 @ChgAdded{Version=[2],Text=[The accessibility level of the anonymous access type
 of an access parameter specifying an access-to-subprogram type is
-statically deeper than that of any master; all such
+deeper than that of any master; all such
 anonymous access types have this same level.]}
-@begin{Ramification}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[This rule means that it is illegal to convert an
-access parameter specifying an access to subprogram to a
-named access to subprogram type, but it is allowed to pass such an access
-parameter to another access parameter (the implicit conversion's accessibility
-will succeed).]}
-@end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@Defn{downward closure}
@@ -4104,8 +4090,8 @@ is the same as that of
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
-@ChgAdded{Version=[2],Text=[For determining whether an @nt{expression} is used
-in a certain context, the operand of a view conversion, parenthesized
+@ChgAdded{Version=[2],Text=[In the above rules, the operand of a view
+conversion, parenthesized
 expression or @nt{qualified_expression} is considered to be used in a context
 if the view conversion, parenthesized expression or @nt{qualified_expression}
 itself is used in that context.]}
@@ -4133,12 +4119,27 @@ level is statically deeper than each level defined to be the same as
 the other level.
 @end{Honest}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
+@ChgAdded{Version=[2],Text=[The accessibility level of the anonymous access type
+of an access parameter specifying an access-to-subprogram type is
+statically deeper than that of any master; all such
+anonymous access types have this same level.]}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This rule means that it is illegal to convert an
+access parameter specifying an access to subprogram to a
+named access to subprogram type, but it is allowed to pass such an access
+parameter to another access parameter (the implicit conversion's accessibility
+will succeed).]}
+@end{Ramification}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
 The statically deeper relationship does not apply to the accessibility
 level of the anonymous type of an access parameter@Chg{Version=[2],
 New=[ specifying an access-to-object type],Old=[]};
 that is, such an accessibility level is not considered to be statically
 deeper, nor statically shallower, than any other.
+
 
 For determining whether one level is statically deeper than another when
 within a generic package body, the generic package is presumed to be

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2005/06/16 22:43:33 $ $Author: Randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2005/07/27 00:06:29 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/06/16 22:43:33 $}
+@Comment{$Date: 2005/07/27 00:06:29 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1437,16 +1437,15 @@ which policy EDF_Across_Priorities applies whenever:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[a change to the deadline of @i<T> occurs; or]}
+@ChgAdded{Version=[2],Text=[a change to the deadline of @i<T> occurs;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[a decrease to the deadline of any task on a ready
-queue for that processor occurs and the new deadline is earlier than that of
-the running task; or]}
+@ChgAdded{Version=[2],Text=[there is a task on the ready queue for the
+active priority of @i<T> with a deadline earlier than the deadline of @i<T>; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[there is a non-empty ready queue for that processor
-with a higher priority than the priority of the running task.]}
+with a higher priority than the active priority of the running task.]}
 
 @end{Itemize}
 
@@ -1456,52 +1455,53 @@ to be preempted and is returned to
 the ready queue for its active priority.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[Whenever a task @i<T> to which
-policy EDF_Across_Priorities applies is added to a ready queue, other than when
-it is preempted, it is placed on the ready queue with the highest priority
-@i<P>, if one exists, such that:]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For a task @i<T> to which policy
+EDF_Across_Priorities applies, the active priority when first activated or
+while it is blocked is defined as the maximum of the following:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[a task is executing within a protected object with
-ceiling priority @i<P>; and]}
+@ChgAdded{Version=[2],Text=[the lowest priority in the range specified as
+EDF_Across_Priorities that includes the base priority of @i<T>;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[task @i<T> has an earlier deadline than any task
-executing within a protected object with ceiling priority @i<P>; and]}
+@ChgAdded{Version=[2],Text=[the priorities, if any, currently inherited by
+@i<T>;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[the base priority of task @i<T> is greater than
-@i<P>.]}
+@ChgAdded{Version=[2],Text=[the highest priority @i<P>, if any, less than the
+base priority of @i<T> such that one or more tasks are executing within a
+protected object with ceiling priority @i<P> and task @i<T>
+has an earlier deadline than all such tasks.]}
 @end{Itemize}
 
+@begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[If no such ready queue exists the task is added to
-the ready queue for the lowest priority in the range specified as
-EDF_Across_Priorities.]}
+@ChgAdded{Version=[2],Text=[The active priority of @i<T> might be lower than
+its base priority.]}
+@end{Ramification}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[When a task @i<T> is first activated or becomes
+unblocked, it is added to the ready queue corresponding to this active
+priority. Until it becomes blocked again, the active priority of @i<T>
+remains no less than this value; it will exceed this value only while it is
+inheriting a higher priority.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[These rules insure that a task executing in
+  @ChgAdded{Version=[2],Text=[These rules ensure that a task executing in
   a protected object is preempted only by a task with a shorter deadline and a
-  higher priority. This matches the traditional preemption level description
-  without the need to define a new kind of protected object locking.
-  [Note to reviewers: I sure wish the AI made it clearer what the preemption
-  level model was, and the explanation of how this meets that model was
-  written in English, rather than some inscrutable code. Improvements of
-  both the AI description and these AARM notes are welcome. - ED]]}
+  higher base priority. This matches the traditional preemption level
+  description without the need to define a new kind of protected object
+  locking.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[When the setting of the base priority of a task
-takes effect and the new priority is in the range specified as
-EDF_Across_Priorities, the task is added to the ready queue.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[When a task is chosen for execution it runs with
-the active priority of the ready queue from which the task was taken. If it
-inherits a higher active priority it will return to its original active
-priority when it no longer inherits the higher level.]}
+takes effect and the new priority is in a range specified as
+EDF_Across_Priorities, the task is added to the ready queue
+corresponding to its new active priority, as determined above.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[For all the operations defined in this package,

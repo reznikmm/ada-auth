@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:28 $}
+@Comment{$Date: 2005/07/27 00:06:21 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2036,12 +2036,11 @@ For the execution of an @nt{extended_return_statement}, the
 the nominal subtype of the return object. If there is an @nt{expression}, it
 is evaluated and converted to the nominal subtype (which might raise
 Constraint_Error @em see @RefSecNum{Type Conversions}@PDefn2{Term=[implicit subtype conversion],Sec=(function return)});
-the return object is created and the converted value becomes the initial value
-of the return object; otherwise, the return object is created and initialized
+the return object is created and the converted value is assigned to
+the return object; otherwise, the return object is created and initialized
 by default as for a stand-alone object of its nominal subtype (see
 @RefSecNum{Object Declarations}). If the nominal subtype is indefinite, the
-return object is constrained by its initial value. The
-@nt{handled_@!sequence_@!of_@!statements}, if any, is then executed.]}
+return object is constrained by its initial value.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2064,8 +2063,9 @@ return object is constrained by its initial value. The
 Old=[@PDefn2{Term=[execution], Sec=(return_statement)}]}
 For the execution of a @Chg{Version=[2],New=[@nt{simple_return_statement}],
 Old=[@nt{return_statement}]}, the @nt{expression}
-(if any) is first evaluated and converted to the result subtype@Chg{Version=[2],
-New=[ to become the value of the anonymous @i{return object}.
+(if any) is first evaluated@Chg{Version=[2],New=[,],Old=[ and]} converted to
+the result subtype@Chg{Version=[2],
+New=[, and then is assigned to the anonymous @i{return object}.
 @PDefn2{Term=[return object], Sec=(simple_return_statement)}],Old=[.]}
 @PDefn2{Term=[implicit subtype conversion],Sec=(function return)}
 @begin{Ramification}
@@ -2259,11 +2259,21 @@ that object.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-Finally, a transfer of control is performed which completes the
-execution of the @Chg{Version=[2],New=[],Old=[callable ]}construct to which the
-@Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} applies,
-and returns to the caller.@Chg{Version=[2],New=[ In the case of a function,
-the @nt{function_call} denotes a constant view of the return object.],Old=[]}
+@Chg{Version=[2],New=[For the execution of an
+@nt{extended_@!return_@!statement}, the
+@nt{handled_@!sequence_@!of_@!statements} is executed. Within this
+@nt{handled_@!sequence_@!of_@!statements}, the execution of a
+@nt{simple_@!return_@!statement} that applies to the
+@nt{extended_@!return_@!statement} causes a transfer of control that completes
+the @nt{extended_@!return_@!statement}. Upon completion
+of a return statement that applies to a callable construct],Old=[Finally]}, a
+transfer of control is performed which completes the execution of the callable
+construct@Chg{Version=[2],New=[], Old=[ to which the @nt{return_@!statement}
+applies]}, and returns to the caller.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+@ChgAdded{Version=[2],Text=[In the case of a function, the @nt{function_call}
+denotes a constant view of the return object.]}
 @end{RunTime}
 
 @begin{ImplPerm}

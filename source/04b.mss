@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:21 $}
+@Comment{$Date: 2005/07/27 00:06:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.19 $}
+@Comment{$Revision: 1.21 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1408,7 +1408,7 @@ Sec=(during evaluation of an uninitialized allocator)}]}
   @Chg{New=[(see @RefSecNum{Record Types}) ],Old=[]}and any implicit initial
   values for the subcomponents of the object are obtained as determined by]}
   the @nt<subtype_indication>
-  @Chg{Version=[2],New=[as its nominal subtype],
+  @Chg{Version=[2],New=[to determine its nominal subtype],
   Old=[and assigned to the corresponding subcomponents]}.
   @IndexCheck{Index_Check}
   @IndexCheck{Discriminant_Check}
@@ -1475,9 +1475,9 @@ started, Program_Error is raised.@IndexCheck{Allocation_Check}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
-@Chg{Version=[2],New=[If the created object contains any tasks, and the master
-of the type of the @nt<allocator> is completed, and all of the dependent
-tasks of the master are terminated
+@Chg{Version=[2],New=[If the object to be created by an @nt<allocator>
+contains any tasks, and the master of the type of the @nt<allocator> is
+completed, and all of the dependent tasks of the master are terminated
 (see @RefSecNum{Task Dependence - Termination of Tasks}), then
 Program_Error is raised.@IndexCheck{Allocation_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}

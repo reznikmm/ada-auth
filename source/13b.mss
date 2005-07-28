@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:26 $}
+@Comment{$Date: 2005/07/27 00:06:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @LabeledClause{The Package System}
 
@@ -1260,11 +1260,10 @@ of invalid data.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
 @ChgAdded{Version=[2],Text=[The Valid attribute may be used to check the
 result of calling an instance of Unchecked_Conversion (or any other
-operation that can create invalid values) if there is a possibility that the
-result might be invalid. However, an exception handler should also be provided
-because implementations are permitted to raise Constraint_Error or
-Program_Error if they detect the use of an invalid representation (see
-@RefSecNum{Data Validity}).]}
+operation that can return invalid values). However, an exception handler
+should also be provided because implementations are permitted to raise
+Constraint_Error or Program_Error if they detect the use of an invalid
+representation (see @RefSecNum{Data Validity}).]}
 
 @begin{Ramification}
 If X is of an enumeration type with a representation clause, then

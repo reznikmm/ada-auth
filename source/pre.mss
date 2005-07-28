@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:22 $}
+@Comment{$Date: 2005/07/27 00:06:27 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.27 $}
+@comment{$Revision: 1.28 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -106,21 +106,27 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\Ada (@i{...continued})
 @\@\Strings @em @RefSecNum{The Package Strings}
 @\@\@\Bounded @em @RefSecNum{Bounded-Length String Handling}
-@\@\@\Fixed @em @RefSecNum{Fixed-Length String Handling}
-@Chg{Version=[2],New=(@\@\@\Hash @em @RefSecNum{String Hashing}
+@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
+), Old=()}@\@\@\Fixed @em @RefSecNum{Fixed-Length String Handling}
+@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
+@\@\@\Hash @em @RefSecNum{String Hashing}
 ), Old=()}@\@\@\Maps @em @RefSecNum{The Package Strings.Maps}
 @\@\@\@\Constants @em @RefSecNum{String-Handling Sets and Mappings}
 @\@\@\Unbounded @em @RefSecNum{Unbounded-Length String Handling}
 @Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
 ), Old=()}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
-@\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
-@Chg{Version=[2],New=(@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
+), Old=()}@\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
+@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
 ), Old=()}@\@\@\Wide_Maps @em @RefSecNum{Wide_String Handling}
 @\@\@\@\Wide_Constants @em @RefSecNum{Wide_String Handling}
 @\@\@\Wide_Unbounded @em @RefSecNum{Wide_String Handling}
 @Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
 @\@\@\Wide_Wide_Bounded @em @RefSecNum{Wide_Wide_String Handling}
+@\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
 @\@\@\Wide_Wide_Fixed @em @RefSecNum{Wide_Wide_String Handling}
+@\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
 @\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
 @\@\@\Wide_Wide_Maps @em @RefSecNum{Wide_Wide_String Handling}
 @\@\@\@\Wide_Wide_Constants @em @RefSecNum{Wide_Wide_String Handling}

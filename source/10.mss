@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:24 $}
+@Comment{$Date: 2005/07/27 00:06:24 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.55 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -226,7 +226,7 @@ Standard is a library unit.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
 @ChgAdded{Version=[2],Text=[An @nt{overriding_indicator} is not allowed in a
 @nt{subprogram_declaration}, @nt{generic_instantiation}, or
-@nt{subprogram_renaming_declaration} which declares a library unit.]}
+@nt{subprogram_renaming_declaration} that declares a library unit.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Added]}
@@ -448,11 +448,13 @@ library @nt{package_declaration} is immediately preceded by the reserved word
 @key{private}.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@Redundant[There is no syntax for declaring limited views
-of packages, because they are always implicit.] The implicit declaration of a
-limited view of a package @Redundant[is not the declaration of a library
-unit (the library package_declaration is); nonetheless, it] is a
-@nt{library_item}.]}
+@ChgAdded{Version=[2],Text=[@Redundant[There is no syntax for declaring limited
+views of packages, because they are always implicit.] The implicit declaration
+of a limited view of a library package @Redundant[is not the declaration of a
+library unit (the library @nt{package_declaration} is); nonetheless, it] is a
+@nt{library_item}. The implicit declaration of the limited view of a library
+package forms an (implicit) compilation unit whose @nt{context_clause} is
+empty.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[A library @nt{package_declaration} is the completion of
@@ -1054,19 +1056,21 @@ even though those are not in the scope of the @nt{with_clause}.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
 @Defn{Term=[mentioned],Sec=[in a @nt<with_clause>]}
 @Defn2{Term=[with_clause], Sec=(mentioned in)}
-A @nt<library_item> is
+A @nt<library_item> @Chg{Version=[2],New=[(and the corresponding library
+unit) ],Old=[]}is
 @Chg{Version=[2],New=[@i{named}
 @Defn2{Term=[named],Sec=[in a @nt<with_clause>]}
 @Defn2{Term=[with_clause], Sec=(named in)}],Old=[@i{mentioned} ]}in a
 @nt<with_clause> if it is denoted by
 a @i(library_unit_)@nt<name> @Chg{Version=[2],New=[],Old=[or a @nt<prefix> ]}
 in the @nt<with_clause>.
-@Chg{Version=[2],New=[A @nt{library_item} is @i<mentioned> in a @nt{with_clause}
+@Chg{Version=[2],New=[A @nt{library_item} (and the corresponding library unit)
+is @i<mentioned> in a @nt{with_clause}
 if it is named in the @nt{with_clause} or if it is denoted by a @nt{prefix} in
 the @nt{with_clause}.],Old=[]}
 
 @begin{Discussion}
-@nt{With_clause}s control the visibility of
+ @nt{With_clause}s control the visibility of
 declarations or renamings of library units.
 Mentioning a root library unit in a
 @nt{with_clause} makes its declaration
@@ -1185,24 +1189,32 @@ unit.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A @nt<name> denoting a
-library item that is visible
-only due to being mentioned in @nt<with_clause>s that include the reserved word
-@key<private> shall appear only within]}
+library item that is visible only due to being mentioned in
+one or more @nt<with_clause>s that include the reserved word
+@key<private> shall appear only within:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[a private part,]}
+@ChgAdded{Version=[2],Text=[a private part;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[a body, but not within the
-@nt<subprogram_specification> of a library subprogram body,]}
+@nt<subprogram_specification> of a library subprogram body;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[a private descendant of the unit on which one of these
-@nt<with_clause>s appear, or]}
+@nt<with_clause>s appear; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[a pragma within a context clause.]}
 @end{Itemize}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[These rules apply only if all of the
+@nt{with_clause}s that mention the name include the reserved word
+@key{private}. They do not apply if the name is mentioned in any
+@nt{with_clause} that does not include @key{private}.]}
+@end{Ramification}
 
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1247,11 +1259,17 @@ If the user really meant A.B, they still can say that.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[A @nt{library_item} mentioned in a
-@nt{limited_with_clause} shall be a
-@nt{package_declaration}@Redundant[, not a @nt{subprogram_declaration},
-@nt{generic_declaration}, @nt{generic_instantiation}, or
-@nt{package_renaming_declaration}].]}
+@ChgAdded{Version=[2],Text=[@Redundant[A @nt{library_item} mentioned in a
+@nt{limited_with_clause} shall be the implicit declaration of the limited view
+of a library package, not the declaration of a subprogram, generic unit,
+generic instance, or a renaming.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is redundant because only such implicit
+  declarations are visible in a @nt{limited_with_clause}. See
+  @RefSecNum{Environment-Level Visibility Rules}.]}
+@end{TheProof}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06],ARef=[AI95-00412-06]}
 @ChgAdded{Version=[2],Text=[A @nt{limited_with_clause} shall not appear on a
@@ -1272,12 +1290,12 @@ If the user really meant A.B, they still can say that.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[A
-@nt{limited_with_clause} which names a @nt{library_item} shall not appear:]}
+@nt{limited_with_clause} that names a library package shall not appear:]}
 
 @begin(Itemize)
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[in the @nt{context_clause} for the named
-@nt{library_item}; or]}
+@ChgAdded{Version=[2],Text=[in the @nt{context_clause} for the
+explicit declaration of the named library package;]}
 
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1305,8 +1323,8 @@ If the user really meant A.B, they still can say that.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[in the same @nt{context_clause} as, or within the
-scope of, a @nt{nonlimited_with_clause} which
-mentions the same @nt{library_item}; or]}
+scope of, a @nt{nonlimited_with_clause} that
+mentions the same library package; or]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1319,8 +1337,8 @@ mentions the same @nt{library_item}; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[in the same @nt{context_clause} as, or within
-the scope of, a @nt{use_clause} which names an entity declared within the
-declarative region of the @nt{library_item}.]}
+the scope of, a @nt{use_clause} that names an entity declared within the
+declarative region of the library package.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1328,7 +1346,7 @@ declarative region of the @nt{library_item}.]}
   entity is an incomplete or full view depends on how the name of the entity is
   written. The @nt{limited_with_clause} cannot be useful, as we must have the
   full view available in the parent in order for the @nt{use_clause} to be
-  given.]}
+  legal.]}
 @end{Reason}
 
 @end(Itemize)
@@ -2172,19 +2190,28 @@ are given here.]
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00312-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06],ARef=[AI95-00312-01]}
 @PDefn2{Term=[directly visible], Sec=(within the
 @nt{parent_unit_name} of a library unit)}
 @PDefn2{Term=[visible], Sec=(within the
 @nt{parent_unit_name} of a library unit)}
 @PDefn2{Term=[directly visible], Sec=(within a @nt{with_clause})}
 @PDefn2{Term=[visible], Sec=(within a @nt{with_clause})}
-Within the @nt{parent_unit_name} at the beginning of a @nt{library_item},
-and within a @nt{with_clause}, the only declarations
-that are visible are those that are @nt<library_item>s of the environment,
+Within the @nt{parent_unit_name} at the beginning of
+@Chg{Version=[2],New=[an explicit],Old=[a]} @nt{library_item},
+and within a @Chg{Version=[2],New=[@nt{nonlimited_with_clause}],
+Old=[@nt{with_clause}]}, the only declarations
+that are visible are those that are@Chg{Version=[2],New=[ explicit],Old=[]}
+@nt<library_item>s of the environment,
 and the only declarations that are directly visible are those that
-are root @nt<library_item>s of the environment.
-@Chg{Version=[2],New=[],Old=[@Defn{notwithstanding}
+are@Chg{Version=[2],New=[ explicit],Old=[]} root @nt<library_item>s
+of the environment.
+@Chg{Version=[2],New=[Within a @nt{limited_with_clause}, the only declarations
+that are visible are those that are the implicit declaration of the
+limited view of a library package of the environment, and the only
+declarations that are directly visible are those that are the
+implicit declaration of the limited view of a root library package.],
+Old=[@Defn{notwithstanding}
 Notwithstanding the rules of @RefSecNum(Selected Components),
 an expanded name in a @nt{with_clause} may consist of a
 @nt<prefix> that denotes a generic package and a @nt<selector_name> that
@@ -2201,13 +2228,22 @@ Note that visibility does not apply between the @lquotes@;@key{end}@rquotes@;
 and the @lquotes@;;@rquotes@;.
 
 Physically nested declarations are not visible at these places.
-@end{Ramification}
-@begin{Reason}
+
+@ChgNote{Changed the classification of this note from Reason to Ramification,
+as it certainly isn't a "reason". Besides, there were two reasons, which was
+goofy.}
 Although Standard is visible at these places,
 it is impossible to name it,
 since it is not directly visible,
 and it has no parent.
-@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgAdded{Version=[2],Text=[Only compilation units defining limited views
+can be mentioned in a @nt{limited_with_clause}, while only compilation
+units defining full views (that is, the explicit declarations) can be mentioned
+in a @nt{nonlimited_with_clause}. This resolves the conflict inherent in having
+two compilation units with the same defining name.]}
+@end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00312-01]}
 @ChgDeleted{Version=[2],Text=[The @lquotes@;notwithstanding@rquotes@; part
@@ -2315,6 +2351,11 @@ that were with-ed by our parent, etc.
 @end{DiffWord83}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+  @ChgAdded{Version=[2],Text=[Added separate visibility rules for
+  @nt{limited_with_clause}s; the existing rules apply only to
+  @nt{nonlimited_with_clause}s.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00312-01]}
   @ChgAdded{Version=[2],Text=[Clarified that the name of a generic child unit
   may appear in a @nt{pragma} in a @nt{context_clause}.]}
@@ -2399,21 +2440,22 @@ corresponding @nt{proper_bodies}.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[If the limited view of a unit is needed, then
-so is the full view of the unit.]}
+@ChgAdded{Version=[2],Text=[If the (implicit) declaration of the limited view
+of a library package is needed, then so is the explicit declaration of the
+library package.]}
 
 @end{Itemize}
 @begin{Discussion}
-Note that a child unit is not included
-just because its parent is included @em to include a child,
-mention it in a @nt{with_clause}.
+  Note that a child unit is not included
+  just because its parent is included @em to include a child,
+  mention it in a @nt{with_clause}.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[A unit is included in a partition even if the only
-reference to it is in a @nt{limited_with_clause}. While this isn't strictly
-necessary (no objects of types imported from such a unit can be created),
-it ensures that all incomplete types are eventually completed, and is the
-least surprising option.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+  @ChgAdded{Version=[2],Text=[A unit is included in a partition even if the
+  only reference to it is in a @nt{limited_with_clause}. While this isn't
+  strictly necessary (no objects of types imported from such a unit can be
+  created), it ensures that all incomplete types are eventually completed, and
+  is the least surprising option.]}
 @end{Discussion}
 
 @Defn2{Term=[main subprogram], Sec=(for a partition)}
@@ -3028,12 +3070,12 @@ units.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
 The creation of a@Chg{Version=[2],New=[n object @Redundant[(including a component)] of
-a type which does not have preelaborable initialization. S],
+a type which does not have preelaborable initialization. Similarly, ],
 Old=[ default-initialized object @Redundant[(including
 a component)] of a descendant of a private type,
 private extension, controlled type,
 task type, or protected type with
-@nt{entry_@!declaration}s; s]}imilarly the evaluation of
+@nt{entry_@!declaration}s; similarly]} the evaluation of
 an @nt<extension_@!aggregate> with
 an ancestor @nt<subtype_@!mark> denoting a subtype of such a type.
 

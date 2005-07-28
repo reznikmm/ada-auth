@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:25 $}
+@Comment{$Date: 2005/07/27 00:06:25 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -346,8 +346,7 @@ as explained in @RefSecNum{Exception Handling}].
 For the execution of a @nt{raise_statement} with an
 @SynI{exception_}@nt{name}, the named exception is raised.
 @Chg{Version=[2],New=[@redundant{If a @SynI<string_>@nt<expression> is present, a call of
-a subsequent call of Ada.Exception.Exception_Message on the occurrence being
-raised will return that string.}],Old=[]}
+the value of the @nt{expression} is associated with the exception occurrence.}],Old=[]}
 @PDefn2{Term=[execution], Sec=(re-raise statement)}
 For the execution of a re-raise statement,
 the exception occurrence that caused transfer of control to the
@@ -356,8 +355,8 @@ innermost enclosing handler is raised @Redundant[again].
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
 @ChgAdded{Version=[2],Text=[The definition of Ada.Exceptions.Exception_Message
 includes a statement that the string is returned (see
-@RefSecNum{The Package Exceptions}). We repeat it here so that we don't have
-an unexplained parameter in this subclause.]}
+@RefSecNum{The Package Exceptions}). We describe the use of the string
+here so that we don't have an unexplained parameter in this subclause.]}
 @end{TheProof}
 @begin{ImplNote}
 For a re-raise statement, the implementation does not create a new
@@ -661,9 +660,7 @@ lower bound 1.]}
 @key[raise] E;
 @end{Example}
 
-@begin{Wide}
 @Leading@keepnext@;is equivalent to this call to Raise_Exception:
-@end{Wide}
 @begin{Example}
 Raise_Exception(E'Identity, Message => @RI{implementation-defined-string});
 @end{Example}
@@ -690,9 +687,7 @@ this call to Raise_Exception:]}
 occurrence.]}
 
 @begin{Ramification}
-@begin{Wide}
 @Leading@keepnext@;The following handler:
-@end{Wide}
 @begin{Example}
 @key[when] @key[others] =>
     Cleanup;
@@ -1555,8 +1550,9 @@ entity or view.]]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
 @ChgAdded{Version=[2],Text=[@RootDefn{Allocation_Check}
 Allocation_Check @\@Redundant[For an @nt<allocator>, check that the master of
-any tasks created by the @nt{allocator} has not yet finished waiting for
-dependents, and that the finalization of the collection has not started.]]}
+any tasks created by the @nt{allocator} is not yet completed or some
+dependents have not yet terminated, and that the finalization of the
+collection has not started.]]}
 
 @RootDefn{Elaboration_Check}
 Elaboration_Check @\@Redundant[When a subprogram or protected entry is

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:25 $}
+@Comment{$Date: 2005/07/27 00:06:26 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1241,9 +1241,11 @@ For a generic formal object of mode @key[in out],
 the type of the actual shall resolve to the type @Chg{Version=[2],
 New=[determined by the @nt{subtype_mark}, or for a
 @nt{formal_object_declaration} with an @nt{access_definition}, to a specific
-anonymous access type which in the case of an access-to-object type shall
-have the same designated type as that of the @nt{access_definition} and in the
-case of an access-to-subprogram type shall have a designated profile which
+anonymous access type. If the anonymous access type is an access-to-object type,
+the type of the actual shall
+have the same designated type as that of the @nt{access_definition}.
+If the anonymous access type is an access-to-subprogram type, the type
+of the actual shall have a designated profile which
 is type conformant with that of the @nt{access_definition}.
 @Defn2{Term=[type conformance],Sec=(required)}],Old=[of the formal]}.
 @begin{Reason}

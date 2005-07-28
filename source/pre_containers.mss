@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/06/09 05:03:48 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/07/27 00:06:27 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/06/09 05:03:48 $}
+@Comment{$Date: 2005/07/27 00:06:27 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -425,11 +425,11 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Container : @key{in} Vector;
                               Index     : @key{in} Index_Type;
-                              By        : @key{in} Element_Type);]}
+                              New_Item  : @key{in} Element_Type);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Position : @key{in} Cursor;
-                              By       : @key{in} Element_Type);]}
+                              New_item : @key{in} Element_Type);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Vector;
@@ -1031,13 +1031,13 @@ is not an empty element after successful completion of this operation.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Replace_Element (Container : @key{in} Vector;
                            Index     : @key{in} Index_Type;
-                           By        : @key{in} Element_Type);]}
+                           New_Item  : @key{in} Element_Type);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Index is not in the range
 First_Index (Container) .. Last_Index (Container), then Constraint_Error is
-propagated. Otherwise Replace_Element assigns the value By to the element at
+propagated. Otherwise Replace_Element assigns the value New_Item to the element at
 position Index. Any exception raised during the assignment is propagated. The
 element at position Index is not an empty element after successful call to
 Replace_Element.]}
@@ -1045,12 +1045,12 @@ Replace_Element.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Replace_Element (Position : @key{in} Cursor;
-                           By       : @key{in} Element_Type);]}
+                           New_Item : @key{in} Element_Type);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
-Constraint_Error is propagated. Otherwise Replace_Element assigns By to the
+Constraint_Error is propagated. Otherwise Replace_Element assigns New_Item to the
 element designated by Position. Any exception raised during the assignment is
 propagated. The element at Position is not an empty element after successful
 call to Replace_Element.]}
@@ -1720,7 +1720,7 @@ exception raised by Process is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Iterates over the nodes in
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Iterates over the elements in
 Container as per Iterate, except that elements are traversed in reverse index
 order.]}
 
@@ -2086,7 +2086,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Position : @key{in} Cursor;
-                              By       : @key{in} Element_Type);]}
+                              New_Item : @key{in} Element_Type);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} List;
@@ -2421,12 +2421,12 @@ unconstrained.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Replace_Element (Position : Cursor;
-                           By       : Element_Type);]}
+                           New_Item : Element_Type);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
-Constraint_Error is propagated. Otherwise Replace_Element assigns the value By
+Constraint_Error is propagated. Otherwise Replace_Element assigns the value New_Item
 to the element designated by Position.]}
 
 @begin{Example}
@@ -3311,12 +3311,12 @@ shall be unconstrained.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Replace_Element (Position : @key{in} Cursor;
-                           By       : @key{in} Element_Type);]}
+                           New_Item : @key{in} Element_Type);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
-Constraint_Error is propagated. Otherwise Replace_Element assigns By to the
+Constraint_Error is propagated. Otherwise Replace_Element assigns New_Item to the
 element of the node designated by Position.]}
 
 @begin{Example}
@@ -3758,7 +3758,7 @@ package Containers.Hashed_Maps has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Position : @key{in} Cursor;
-                              By       : @key{in} Element_Type);]}
+                              New_Item : @key{in} Element_Type);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Map;
@@ -4296,7 +4296,7 @@ package Containers.Ordered_Maps has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Position : @key{in} Cursor;
-                              By       : @key{in} Element_Type);]}
+                              New_Item : @key{in} Element_Type);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Map;
@@ -4927,20 +4927,36 @@ Container. Any exceptions raised by Process.@key{all} are propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Replace_Element (Container : @key{in} Set;
-                           Position  : @key{in} Cursor;
-                           By        : @key{in} Element_Type);]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Replace_Element (Container : @key{in out} Set;
+                           Position  : @key{in out} Cursor;
+                           New_Item  : @key{in}     Element_Type);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
 Constraint_Error is propagated. If Position does not designate an element in
-Container, then Program_Error is propagated. Otherwise, the element designated
-by Position is tested for equivalence to By; if they are found to be
-equivalent, Replace_Element assigns By to the element designated by Position.
-Otherwise, the element designated by Position is removed from the container,
-then By is inserted into the container. If the insertion fails, Program_Error
-is propagated.]}
+Container, then Program_Error is propagated.
+If an element equivalent to New_Item is already present in Container at a
+position other than Position, Program_Error is propagated. Otherwise,
+Replace_Element assigns New_Item to the element designated by Position. Any
+exception raised by the assignment is propagated.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The final assignment may require that node of
+  the element be moved in the Set's data structures. That could mean that
+  implementing this operation exactly as worded above could require the
+  overhead of searching twice. Implementations are encouraged to avoid this
+  extra overhead when possible, by prechecking if the old element is equivalent
+  to the new one, by inserting a placeholder node while checking for an
+  equivalent element, and similar optimizations.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The mode of the Position parameter is
+  @key{in out} so that implementations can use a new node if necessary (that
+  is, delete the old node and insert the new one). But implementations should
+  reuse the node if possible.]}
+@end{ImplNote}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5043,9 +5059,10 @@ the element from the set; otherwise, Constraint_Error is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element,
-Delete has no effect. If Position does not designate an element in Container,
-then Program_Error is propagated. Otherwise, Delete removes the node designated
-by Position from the set. Position is set to No_Element on return.]}
+then Constraint_Error is propagated. If Position does not designate an element
+in Container, then Program_Error is propagated. Otherwise, Delete removes the
+element designated by Position from the set. Position is set to No_Element on
+return.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5097,7 +5114,7 @@ matching element is returned; otherwise, No_Element is returned.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Length (Container) = 0, then
 First returns No_Element. Otherwise, First returns a cursor that designates the
-first node in Container.]}
+first element in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5144,7 +5161,7 @@ an element, and returns False otherwise.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Iterate calls Process.@key{all}
 with a cursor that designates each element in Container, starting with the
-first node and moving the cursor according to the successor relation.
+first element and moving the cursor according to the successor relation.
 Program_Error is propagated if Process.@key{all} tampers with the elements of
 Container. Any exception raised by Process.@key{all} is propagated.]}
 
@@ -5530,9 +5547,9 @@ package Containers.Hashed_Sets has the following declaration:]}
       Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Container : @key{in} Set;
-                              Position  : @key{in} Cursor;
-                              By        : @key{in} Element_Type);]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Container : @key{in out} Set;
+                              Position  : @key{in out} Cursor;
+                              New_Item  : @key{in}     Element_Type);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Set;
@@ -6010,9 +6027,9 @@ package Containers.Ordered_Sets has the following declaration:]}
       Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Container : @key{in} Set;
-                              Position  : @key{in} Cursor;
-                              By        : @key{in} Element_Type);]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Container : @key{in out} Set;
+                              Position  : @key{in out} Cursor;
+                              New_Item  : @key{in}     Element_Type);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Set;
@@ -6368,7 +6385,7 @@ Element (First (Container)).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a cursor that designates
-the last node in Container. If Container is empty, returns No_Element.]}
+the last element in Container. If Container is empty, returns No_Element.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6456,7 +6473,7 @@ designates the first element, then Previous returns No_Element.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Iterates over the elements in
 Container as per Iterate, with the difference that the elements are traversed
-in predecessor order, starting with the last node.]}
+in predecessor order, starting with the last element.]}
 
 @end{DescribeCode}
 

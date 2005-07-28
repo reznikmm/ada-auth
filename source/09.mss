@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:23 $}
+@Comment{$Date: 2005/07/27 00:06:23 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 
@@ -380,9 +380,11 @@ task of the corresponding type
 @begin{Notes}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00382-01]}
-Within the declaration or body of a task unit@Chg{Version=[2],New=[ other than
-in an @nt{access_definition}],Old=[]}, the name of
-the task unit denotes the current instance of the unit
+@Chg{Version=[2],New=[Other than
+in an @nt{access_definition}, the name of a task unit within],Old=[Within]}
+the declaration or body of @Chg{Version=[2],New=[the],Old=[a]} task
+unit@Chg{Version=[2],New=[],Old=[, the name of
+the task unit]} denotes the current instance of the unit
 (see @RefSecNum(The Context of Overload Resolution)),
 rather than the first subtype of the corresponding task type (and
 thus the name cannot be used as a @nt<subtype_mark>).
@@ -1768,7 +1770,8 @@ target object is not considered a potentially blocking operation.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgAdded{Version=[2],Text=[The @nt{pragma} Detect_Blocking may be used to ensure
-that all executions of potentially blocking operations raise Program_Error.
+that all executions of potentially blocking operations during a protected
+action  raise Program_Error.
 See @RefSecNum{Pragma Detect_Blocking}.]}
 @end{Notes}
 
@@ -3719,7 +3722,7 @@ of Seconds_Of for the next second with a Sub_Second value of 0.0.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Seconds into Hour, Minute,
 Second and Sub_Second in such a way that the resulting values all belong to
-their respective subtypes. The value returned through the Sub_Second
+their respective subtypes. The value returned in the Sub_Second
 parameter is always less than 1.0.]}
 
 @begin{Ramification}
@@ -3740,10 +3743,10 @@ parameter is always less than 1.0.]}
                  Time_Zone  : @key<in> Time_Zones.Time_Offset := 0);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Date into its constituent parts (Year,
-Month, Day, Hour, Minute,
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Date into its constituent
+parts (Year, Month, Day, Hour, Minute,
 Second, Sub_Second), relative to the specified time zone offset. The value
-returned through the Sub_Second parameter is always less than 1.0.]}
+returned in the Sub_Second parameter is always less than 1.0.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Time_Of (Year       : Year_Number;
@@ -3758,19 +3761,23 @@ returned through the Sub_Second parameter is always less than 1.0.]}
                           @key<return> Time;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Time built from the date and time
-values, relative to the
-specified time zone offset. Time_Error is raised if Leap_Second is True,
-and Hour, Minute, and Second are not appropriate for a Leap_Second.
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Leap_Second is False,
+returns a Time built from the date and time
+values, relative to the specified time zone offset. If Leap_Second is True,
+returns the Time that represents the time within the leap second that is one
+second later than the time specified by the other parameters.
+Time_Error is raised if the parameters do not form a proper date or time.
 If Time_Of is called with a Sub_Second value of 1.0, the value
 returned is equal to the value of Time_Of for the next second with
 a Sub_Second value of 0.0.]}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[A leap second always occurs at midnight UTC, and is
-    23:59:60 UTC in ISO notation. So, if the time zone is UTC and Leap_Second
-    is True, if any of Hour /= 23, Minute /= 59, or Second /= 59, then
-    Time_Error should be raised.
+    @ChgAdded{Version=[2],Text=[Time_Error should be raised if Leap_Second
+    is True, and the date and time values do not represent the second before
+    a leap second. A leap second always occurs at midnight UTC,
+    and is 23:59:60 UTC in ISO notation. So, if the time zone is UTC and
+    Leap_Second is True, if any of Hour /= 23, Minute /= 59, or Second /= 59,
+    then Time_Error should be raised.
     However, we do not say that, because other time zones will have different
     values where a leap second is allowed.]}
 @end{Discussion}
@@ -3785,9 +3792,12 @@ a Sub_Second value of 0.0.]}
                           @key<return> Time;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a Time built from the date and time
-values, relative to the specified time zone offset. Time_Error is raised if
-Leap_Second is True, and Seconds is not appropriate for a Leap_Second.
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Leap_Second is False, returns
+a Time built from the date and time
+values, relative to the specified time zone offset. If Leap_Second is True,
+returns the Time that represents the time within the leap second that is one
+second later than the time specified by the other parameters.
+Time_Error is raised if the parameters do not form a proper date or time.
 If Time_Of is called with a Seconds value of 86_400.0, the value
 returned is equal to the value of Time_Of for the next day with
 a Seconds value of 0.0.]}
@@ -3808,7 +3818,7 @@ a Seconds value of 0.0.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Split Date into its constituent parts (Year,
 Month, Day, Hour, Minute, Second, Sub_Second), relative to the specified time
 zone offset. Leap_Second is True if Date identifies a leap second. The value
-returned through the Sub_Second parameter is always less than 1.0.]}
+returned in the Sub_Second parameter is always less than 1.0.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;
@@ -3823,7 +3833,7 @@ returned through the Sub_Second parameter is always less than 1.0.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Split Date into its constituent parts (Year,
 Month, Day, Seconds), relative to the specified time zone offset. Leap_Second
 is True if Date identifies a leap second. The value
-returned through the Seconds parameter is always less than 86_400.0.]}
+returned in the Seconds parameter is always less than 86_400.0.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Image (Date : Time;
@@ -3833,12 +3843,13 @@ returned through the Seconds parameter is always less than 86_400.0.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a string form of the Date relative to
 the given Time_Zone.
-The format is "Year-Month-Day Hour:Minute:Second", where each value
-other than Year is a 2-digit form of the value of the functions
+The format is "Year-Month-Day Hour:Minute:Second", where the Year is a
+4-digit value, and all others are 2-digit values, of the functions
 defined in Calendar and Calendar.Formatting, including a leading zero,
-if needed. Year is a 4-digit value.
+if needed. The separators between the values are
+a minus, another minus, a colon, and a single space between the Day and Hour.
 If Include_Time_Fraction is True, the integer part of Sub_Seconds*100 is
-suffixed to the string as a 2-digit value following a point.]}
+suffixed to the string as a point followed by a 2-digit value.]}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[The Image provides a string in ISO 8601 format, the
@@ -3876,10 +3887,11 @@ given string as a Time value.]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a string form of the Elapsed_Time.
-The format is "Hour:Minute:Second", where each value
-is a 2-digit form of the value, including a leading zero, if needed.
+The format is "Hour:Minute:Second", where all values are
+2-digit values, including a leading zero, if needed.
+The separators between the values are colons.
 If Include_Time_Fraction is True, the integer part of Sub_Seconds*100 is
-suffixed to the string as a 2-digit value following a point.
+suffixed to the string as a point followed by a 2-digit value.
 If Elapsed_Time < 0.0, the result is Image (@key<abs> Elapsed_Time,
 Include_Time_Fraction) prefixed with a minus sign. If @key<abs> Elapsed_Time
 represents 100 hours or more, the result is implementation-defined.]}
@@ -4219,14 +4231,16 @@ an entry.],Old=[]}
 @ChgAdded{Version=[2],Text=[If a @nt{procedure_call_statement} is used for a
 @nt{procedure_or_entry_call}, the @SynI{procedure_}@nt{name} or
 @SynI{procedure_}@nt{prefix} of the @nt{procedure_call_statement} shall denote
-an entry renamed as a procedure, a formal subprogram, or (a view of) a
+an entry renamed as a procedure or (a view of) a
 primitive subprogram of a limited interface whose first parameter is a
 controlling parameter (see @RefSecNum{Dispatching Operations of Tagged Types}).]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This would be a confusing way to call a procedure,
 so we only allow it when it is possible that the procedure is actually an
-entry.]}
+entry. We could have allowed formal subprograms here, but we didn't because
+we'd have to allow all of them, and it would increase the difficulty of
+generic code sharing.]}
 @end{Reason}
 @end{Legality}
 
@@ -4264,8 +4278,8 @@ the @i(delay_)@nt<expression> of the
 a call on a procedure implemented by an entry,],Old=[;]}
 the entry call is then issued.@Chg{Version=[2],New=[ Otherwise, the call
 proceeds as described in @RefSecNum{Subprogram Calls} for a procedure call,
-followed by the @nt{sequence_of_statements} of the @nt{entry_call_alternative},
-and the @nt{sequence_of_statements} of the @nt{delay_alternative} is ignored.],Old=[]}
+followed by the @nt{sequence_of_statements} of the @nt{entry_call_alternative};
+the @nt{sequence_of_statements} of the @nt{delay_alternative} is ignored.],Old=[]}
 
 
 If the call is queued (including due to a requeue-with-abort),
@@ -4440,7 +4454,7 @@ and never requeued-with-abort,
 then the @nt<abortable_part> is never started.]@Chg{Version=[2],New=[ If the
 call is on a procedure that is not implemented by an entry, the call proceeds
 as described in @RefSecNum{Subprogram Calls}, followed by the
-@nt{sequence_of_statements} of the @nt{triggering_alternative}@Redundant[, and
+@nt{sequence_of_statements} of the @nt{triggering_alternative}@Redundant[;
 the @nt{abortable_part} is never started].],Old=[]}
 
 

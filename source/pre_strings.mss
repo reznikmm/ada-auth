@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2005/06/03 05:41:49 $ $Author: Randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2005/07/27 00:06:30 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/06/03 05:41:49 $}
+@Comment{$Date: 2005/07/27 00:06:30 $}
 
 @LabeledClause{String Handling}
 
@@ -2313,7 +2313,8 @@ Facilities for handling strings of Wide_Character elements are
 found in the packages Strings.@!Wide_Maps, Strings.@!Wide_Fixed,
 Strings.@!Wide_@!Bounded, Strings.@!Wide_@!Unbounded,
 and Strings.@!Wide_Maps.@!Wide_@!Constants@Chg{Version=[2],New=[, and in the
-functions Strings.Wide_Hash and Strings.Wide_Unbounded.Wide_Hash],Old=[]}.
+functions Strings.Wide_Hash, Strings.Wide_Fixed.Wide_Hash,
+Strings.Wide_Bounded.Wide_Hash, and Strings.Wide_Unbounded.Wide_Hash],Old=[]}.
 They provide the same string-handling operations
 as the corresponding packages @Chg{Version=[2],New=[ and functions],Old=[]}
 for strings of Character elements.
@@ -2321,6 +2322,8 @@ for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Bounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Unbounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_@!Fixed],Child=[Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_@!Bounded],Child=[Wide_@!Hash]}
 @ChildUnit{Parent=[Ada.Strings.Wide_@!Unbounded],Child=[Wide_@!Hash]}
 @ChildUnit{Parent=[Ada.Strings.Wide_@!Maps],Child=[Wide_@!Constants]}
 @end{Intro}
@@ -2432,7 +2435,7 @@ identifies Strings.Wide_Maps instead of Strings.Maps.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00302-03]}
 @Leading@;For each of the packages Strings.Fixed, Strings.Bounded,
 Strings.Unbounded, and Strings.Maps.Constants@Chg{Version=[2],New=[, and
-for functions Strings.Hash and
+for functions Strings.Hash, Strings.Fixed.Hash, Strings.Bounded.Hash,
 Strings.Unbounded.Hash,],Old=[]}
 the corresponding wide string package has the same contents except that
 @begin{itemize}
@@ -2556,7 +2559,9 @@ Wide_Wide_Character elements are found in
 the packages Strings.Wide_Wide_Maps, Strings.Wide_Wide_Fixed,
 Strings.Wide_Wide_Bounded, Strings.Wide_Wide_Unbounded, and
 Strings.Wide_Wide_Maps.Wide_Wide_Constants, and in the
-functions Strings.Wide_Wide_Hash and Strings.Wide_Wide_Unbounded.Wide_Wide_Hash.
+functions Strings.Wide_Wide_Hash, Strings.Fixed.Wide_Wide_Hash,
+Strings.Bounded.Wide_Wide_Hash, and
+Strings.Wide_Wide_Unbounded.Wide_Wide_Hash.
 They provide the same
 string-handling operations as the corresponding packages and functions
 for strings of Character elements.
@@ -2564,6 +2569,8 @@ for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Bounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Unbounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Hash]}]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash]}]}
 @ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}]}
 @ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Maps],Child=[Wide_Wide_@!Constants]}
 
@@ -2699,7 +2706,8 @@ Strings.Wide_Wide_Maps instead of Strings.Maps.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For each of the packages
 Strings.Fixed, Strings.Bounded, Strings.Unbounded, and Strings.Maps.Constants,
-and for functions Strings.Hash and Strings.Unbounded.Hash,
+and for functions Strings.Hash, Strings.Fixed.Hash, Strings.Bounded.Hash,
+and Strings.Unbounded.Hash,
 the corresponding wide wide string package or function has the same contents
 except that]}
 
@@ -2814,17 +2822,51 @@ function Strings.Hash has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<function> Ada.Strings.Hash (Key : String) @key<return> Containers.Hash_Type;@ChildUnit{Parent=[Ada.Strings],Child=[Hash]}
-@key<pragma> Pure (Ada.Strings.Hash);]}
+@key<pragma> Pure (Hash);]}
 @end{Example}
 
 @begin{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Return an implementation-defined
-value which is a function of the value of Key. If A and B are strings such that
-A equals B, Hash(A) equals Hash(B).]}
+value which is a function of the value of Key. If @i<A> and @i<B> are strings
+such that @i<A> equals @i<B>, Hash(@i<A>) equals Hash(@i<B>).]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The values returned by Strings.Hash.]}]}
+
+@end{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The library
+function Strings.Fixed.Hash has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<with> Ada.Containers, Ada.Strings.Hash;
+@key<function> Ada.Strings.Fixed.Hash (Key : String) @key<return> Containers.Hash_Type
+   @key<renames> Ada.Strings.Hash;
+@key<pragma> Pure (Hash);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
+function Strings.Bounded.Hash has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
+@key<generic>
+   @key<with package> Bounded @key<is>
+                     @key<new> Ada.Strings.Bounded.Generic_Bounded_Length (<>);
+@key<function> Ada.Strings.Bounded.Hash (Key : Bounded.Bounded_String) @key<return>
+    Containers.Hash_Type;
+@key<pragma> Preelaborate (Hash);]}
+@end{Example}
+
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Strings.Bounded.Hash is
+equivalent to the function call
+Strings.Hash (Bounded.To_String (Key));]}
 
 @end{DescribeCode}
 
@@ -2836,17 +2878,14 @@ function Strings.Unbounded.Hash has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<function> Ada.Strings.Unbounded.Hash (Key : Unbounded_String) @key<return>@ChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash]}
     Containers.Hash_Type;
-@key<pragma> Preelaborate (Ada.Strings.Unbounded.Hash);]}
+@key<pragma> Preelaborate (Hash);]}
 @end{Example}
 
 @begin{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Return an implementation-defined
-value which is a function of the value of Key. If A and B are unbounded strings
-such that A equals B, Hash(A) equals Hash(B).]}
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The values returned by Strings.Unbounded.Hash.]}]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Strings.Unbounded.Hash is
+equivalent to the function call Strings.Hash (To_String (Key));]}
 
 @end{DescribeCode}
 
@@ -2856,19 +2895,25 @@ Text=[The values returned by Strings.Unbounded.Hash.]}]}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The various Hash functions should be good hash
+@ChgAdded{Version=[2],Text=[The Hash functions should be good hash
 functions, returning a wide spread of values for different string values. It
 should be unlikely for similar strings to return the same value.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Strings.Hash and Strings.Unbounded.Hash should be good hash
-functions, returning a wide spread of values for different string values,
+Text=[Strings.Hash should be good a hash
+function, returning a wide spread of values for different string values,
 and similar strings should rarely return the same value.]}]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The other functions are defined in terms of
+  Strings.Hash, so they don't need separate advice in the Annex.]}
+@end{Ramification}
 @end{ImplAdvice}
 
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The Strings.Hash and Strings.Unbounded.Hash functions are new.]}
+  The Strings.Hash, Strings.Fixed.Hash, Strings.Bounded.Hash, and
+  Strings.Unbounded.Hash functions are new.]}
 @end{Extend95}
 

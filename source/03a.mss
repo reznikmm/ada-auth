@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:18 $}
+@Comment{$Date: 2005/07/27 00:06:18 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -615,8 +615,8 @@ called the @Chg{Version=[2],New=[@i(constraint of the subtype)],
 Old=[constraint @i(of) the subtype]}.@Chg{Version=[2],New=[@Defn2{Term=[constraint], Sec=(of a subtype)}
 @Defn2{Term=[subtype], Sec=(constraint of)}],Old=[]} The set of
 values of a subtype consists of the values of its type
-that satisfy its constraint@Chg{Version=[2],New=[ and, in the case
-of a subtype that excludes null, the values do not include the null value],
+that satisfy its constraint@Chg{Version=[2],New=[ and any exclusion of the
+null value],
 Old=[]}.
 @Defn2{Term=[belong], Sec=(to a subtype)}
 Such values @i(belong) to the subtype.@Chg{Version=[2],New=[@Defn2{Term=[values], Sec=(belonging to a subtype)}
@@ -2265,9 +2265,16 @@ precede the @nt<derived_type_definition>.]
 If there is a @nt<record_extension_part>, the derived type is
 called a @i(record extension) of the parent type.
 A @nt<record_extension_part> shall be provided if and only if
-the parent type is a tagged type.@Chg{Version=[2],New=[ An
+the parent type is a tagged type.@Chg{Version=[2],New=[ @Redundant[An
 @nt{interface_list} shall be provided only if
-the parent type is a tagged type.],Old=[]}
+the parent type is a tagged type.]],Old=[]}
+@begin(TheProof)
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00401-01]}
+  @ChgAdded{Version=[2],Text=[The syntax only allows an @nt{interface_list}
+  to appear with a @nt{record_extension_part}, and a @nt{record_extension_part}
+  can only be provided if the parent type is a tagged type. We give the last
+  sentence anyway for completeness.]}
+@end(TheProof)
 @begin(ImplNote)
   We allow a record extension to inherit discriminants;
   an early version of Ada 9X did not.

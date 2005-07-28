@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/07/10 05:16:21 $}
+@Comment{$Date: 2005/07/27 00:06:22 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1859,7 +1859,7 @@ return object (see 6.5) for the @nt{function_call}. The @nt{aggregate} or
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[For a @nt{function_call}, we only require
-@i{build-in-place}@Defn{build-in-place}
+@i{build-in-place}@PDefn{build-in-place}
 for a limited type that would have
 been a return-by-reference type in Ada 95. We do this because
 we want to minimize disruption to Ada 95 implementations and users.]}
@@ -2216,12 +2216,12 @@ as explained in @RefSecNum{Allocators}.]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00373-01]}
 For an @nt{extension_aggregate} whose @nt{ancestor_part} is a
-@nt{subtype_mark},
-@Chg{Version=[2],New=[],Old=[@Chg{New=[for each controlled subcomponent of the ancestor part, either
+@nt{subtype_mark}@Chg{Version=[2],New=[ denoting a],
+Old=[, @Chg{New=[for each controlled subcomponent of the ancestor part, either
 Initialize is called, or its initial value is assigned, as appropriate],
 Old=[Initialize is called on all controlled subcomponents of the
-ancestor part]}; ]}if the type of the @Chg{Version=[2],New=[@nt{ancestor_part}],
-Old=[ancestor part]} is @Chg{Version=[2],New=[],Old=[itself ]}controlled,
+ancestor part]}; if the type of the ancestor part is itself]}
+controlled@Chg{Version=[2],New=[ subtype],Old=[]},
 the Initialize procedure of the ancestor type is called,
 unless that Initialize procedure is abstract.
 @begin{Discussion}
@@ -2397,16 +2397,17 @@ contract model violations.
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[1],Text=[For an @nt{aggregate} of a controlled type
 whose value is assigned,
-other than by an @nt{assignment_statement} or a
-@Chg{Version=[2],New=[@nt{simple_return_statement} of a return type with no
-part that is of a task, protected, or explicitly limited record type],
-Old=[@nt{return_statement}]}, the
+other than by an @nt{assignment_statement}
+@Chg{Version=[2],New=[],Old=[ or a @nt{return_statement}]}, the
 implementation shall not create a separate anonymous object for the
 @nt{aggregate}. The aggregate value shall be constructed directly in the target
 of the assignment operation and Adjust is not called on the target object.]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
-@ChgAdded{Version=[1],Type=[Leading],Text=[This is necessary to prevent
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
+@ChgAdded{Version=[1],Type=[Leading],Text=[@Chg{Version=[2],
+New=[@PDefn{build-in-place}],Old=[]}This@Chg{Version=[2],
+New=[ @i<build-in-place> requirement],Old=[]} is necessary to prevent
 elaboration problems with deferred constants of controlled types. Consider:]}
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}
@@ -2430,6 +2431,16 @@ clearly have not been elaborated. Without this rule, this declaration would
 necessarily raise Program_Error (unless the permissions given below are
 used by the implementation).],Old=[]}
 @end{Reason}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[An @nt{aggregate} used in the return expression
+of a @nt{simple_return_statement} has to be built-in-place in the anonymous
+return object, as this is similar to an object declaration. (This is a change
+from Ada 95, but it is not an inconsistency as it only serves to restrict
+implementation choices.) But this only covers the @nt{aggregate}; a separate
+anonymous return object can still be used unless it too is required to be
+built-in-place (see @RefSecNum{Limited Types}).]}
+@end{Ramification}
 @end{ImplReq}
 
 @begin{ImplPerm}
