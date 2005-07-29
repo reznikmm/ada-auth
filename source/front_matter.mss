@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.45 $ $Date: 2005/06/09 05:03:50 $}
+@comment{$Revision: 1.46 $ $Date: 2005/07/28 04:44:16 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -28,7 +28,7 @@ Corrigendum 1 was published in June 2001.]}
 @ChgAdded{Version=[2],Text=[In October 2002, WG 9 approved a schedule and
 guidelines for the preparation of an Amendment to the International Standard.
 WG 9 approved the scope of this Amendment in June 2004, with the completion
-of the Amendment expected in summer 2005 and final approval in early 2006.]}
+of the Amendment expected in fall 2005 and final approval in mid-2006.]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[The Technical Corrigendum lists the individual
@@ -182,8 +182,8 @@ Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],
 Old=[]}should read this first.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@ChgAdded{Version=[2],Text=[Ada 2006 Rationale. This gives an introduction to the
-changes and new features in Ada 2006 (compared with the 1995 edition), and
+@ChgAdded{Version=[2],Text=[Ada 2005 Rationale. This gives an introduction to the
+changes and new features in Ada 2005 (compared with the 1995 edition), and
 explains the rationale behind them. Programmers should read this rationale
 before reading this Standard in depth.]}
 
@@ -219,8 +219,8 @@ and explains the rationale behind them. Programmers @Chg{Version=[2],New=[unfami
 Old=[]} should read this first.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@ChgAdded{Version=[2],Text=[Ada 2006 Rationale. This gives an introduction
-to the changes and new features in Ada 2006 (compared with the 1995 edition),
+@ChgAdded{Version=[2],Text=[Ada 2005 Rationale. This gives an introduction
+to the changes and new features in Ada 2005 (compared with the 1995 edition),
 and explains the rationale behind them. Programmers should read this rationale
 before reading this Standard in depth.]}
 

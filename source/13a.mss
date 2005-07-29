@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:47 $}
+@Comment{$Date: 2005/07/28 04:44:10 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -990,7 +990,7 @@ Some of the more stringent requirements are moved to
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01],ARef=[AI95-00326-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Add wording to say that the
   partial and full views have the same operational and representation aspects.
-  Ada 2006 extends this to cover all views, including the incomplete view.]}
+  Ada 2005 extends this to cover all views, including the incomplete view.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed operational items

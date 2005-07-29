@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:39 $}
+@Comment{$Date: 2005/07/28 04:44:12 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -351,7 +351,7 @@ any nesting depth, so this note is obsolete.}
   an instance of Sequential_IO is defined to need finalization. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
   applies to the partition, and File_Type does not have a controlled part, it
-  will not be allowed in local objects in Ada 2006 whereas it would be allowed
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
   in Ada 95. Such code is not portable, as another Ada compiler may have a
   controlled part in File_Type, and thus would be illegal.]}
 @end{Incompatible95}
@@ -724,7 +724,7 @@ declared in some other (non-generic) package.],Old=[]}]}
   an instance of Direct_IO is defined to need finalization. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
   applies to the partition, and File_Type does not have a controlled part, it
-  will not be allowed in local objects in Ada 2006 whereas it would be allowed
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
   in Ada 95. Such code is not portable, as another Ada compiler may have a
   controlled part in File_Type, and thus would be illegal.]}
 @end{Incompatible95}
@@ -1430,7 +1430,7 @@ generic packages Modular_IO and Decimal_IO are new in Ada 95.
   Text_IO.File_Type is defined to need finalization. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
   applies to the partition, and File_Type does not have a controlled part, it
-  will not be allowed in local objects in Ada 2006 whereas it would be allowed
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
   in Ada 95. Such code is not portable, as another Ada compiler may have a
   controlled part in File_Type, and thus would be illegal.]}
 @end{Incompatible95}
@@ -3544,13 +3544,13 @@ closed file.]}
   The description of the file control
   subprograms was corrected so that they do not require truncation of the
   external file - a stream file is not a sequential file. Ada 95 that
-  expects truncation of the stream file may not work under Ada 2006.
+  expects truncation of the stream file may not work under Ada 2005.
   Note that the Ada 95 standard was ambiguous on this point (the normative
   wording seemed to require truncation, but didn't explain where; the
   AARM notes seemed to expect behavior like Direct_IO), and implementations
   varied widely. Therefore, as a practical matter, code that depends on
   stream truncation may not work even in Ada 95; deleting the file before
-  opening it provides truncation which works in both Ada 95 and Ada 2006.]}
+  opening it provides truncation which works in both Ada 95 and Ada 2005.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
@@ -3559,7 +3559,7 @@ closed file.]}
   Stream_IO.File_Type is defined to need finalization. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
   applies to the partition, and File_Type does not have a controlled part, it
-  will not be allowed in local objects in Ada 2006 whereas it would be allowed
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
   in Ada 95. Such code is not portable, as another Ada compiler may have a
   controlled part in File_Type, and thus would be illegal.]}
 @end{Incompatible95}

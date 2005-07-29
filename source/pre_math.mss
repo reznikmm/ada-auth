@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2005/05/16 03:42:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2005/07/28 04:44:13 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:22 $}
+@Comment{$Date: 2005/07/28 04:44:13 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -887,7 +887,7 @@ generators in each Worker task.
   Numerics.Discrete_Random is defined to need finalization. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
   applies to the partition, and Generator does not have a controlled part, it
-  will not be allowed in local objects in Ada 2006 whereas it would be allowed
+  will not be allowed in local objects in Ada 2005 whereas it would be allowed
   in Ada 95. Such code is not portable, as another Ada compiler may have a
   controlled part in Generator, and thus would be illegal.]}
 @end{Incompatible95}

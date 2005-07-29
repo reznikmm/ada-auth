@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/05/28 06:01:54 $}
+@Comment{$Date: 2005/07/28 04:44:00 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -546,7 +546,7 @@ comments) is added, and @nt{basic_graphic_character},
 and @nt{basic_character} are removed.
 @nt{Special_character} is expanded to include Ada 83's
 @nt{other_special_character}, as well as new 8-bit characters not
-present in Ada 83.@Chg{Version=[2],New=[ Ada 2006 removes
+present in Ada 83.@Chg{Version=[2],New=[ Ada 2005 removes
 @nt{special_character} altogether; we want to stick to ISO/IEC 10646:2003
 character classifications.],Old=[]}
 Note that the term @lquotes@;basic letter@rquotes@; is used
@@ -773,7 +773,7 @@ in that category.],Old=[An @nt{identifier} shall not be a reserved word.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This rule was stated in the syntax in Ada 95,
-  but that has gotten too complex in Ada 2006. Since @nt{other_format}
+  but that has gotten too complex in Ada 2005. Since @nt{other_format}
   characters usually do not display, we do not want to count them as separating
   two underscores.]}
 @end{Reason}
@@ -1842,7 +1842,7 @@ to @RefSec(Obsolescent Features).
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 83}
   The following words are not reserved in Ada 95, but are reserved in Ada
-  2006: @key{interface}, @key{overriding}, @key{synchronized}. A special
+  2005: @key{interface}, @key{overriding}, @key{synchronized}. A special
   allowance is made for @key{pragma} Interface (see @RefSecNum{Pragma Interface}).
   Uses of these words as identifiers will need to be changed, but we do not
   expect them to be common.]}

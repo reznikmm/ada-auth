@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:25 $}
+@Comment{$Date: 2005/07/28 04:44:09 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1754,7 +1754,7 @@ the new check on @nt{allocator}s (see @RefSecNum{Allocators}.]}
 @ChgAdded{Version=[2],Text=[The description of Access_Check was corrected by the
 Corrigendum to include the discriminant case. This change was then replaced
 by the more general notion of checking conversions to subtypes that exclude
-null in Ada 2006.]}
+null in Ada 2005.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],Text=[The On parameter of pragma Suppress was moved to

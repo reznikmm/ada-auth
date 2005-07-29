@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:28 $}
+@Comment{$Date: 2005/07/28 04:44:05 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -563,7 +563,7 @@ Foo(2).@key{all} := Foo(1).@key{all};],Old=[]}.
 @end{Example}
 @ChgAdded{Version=[2],Text=[where NonLim is a nonlimited type and Lim is a
 limited type. The assignment is legal in Ada 95 (only the first Foo would be
-considered), and is ambiguous in Ada 2006. We made the change because we want
+considered), and is ambiguous in Ada 2005. We made the change because we want
 limited types to be as similar to nonlimited types as possible. Limited
 expressions are now allowed in all other contexts (with a similar
 incompatibility), and it would be odd if assignments had different resolution

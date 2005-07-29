@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:26 $}
+@Comment{$Date: 2005/07/28 04:44:11 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @LabeledClause{The Package System}
 
@@ -3484,7 +3484,7 @@ execution cannot be erroneous.]}
   of calls to the underlying stream Read and Write operations may differ from
   the number determined by the canonical operations. If Ada 95 code somehow
   depended on the number of calls to Read or Write, it could fail with an
-  Ada 2006 implementation. Such code is likely to be very rare; moreover, such
+  Ada 2005 implementation. Such code is likely to be very rare; moreover, such
   code is really wrong, as the permission applies to Ada 95 as well (as it was
   a Binding Interpretation).]}
 @end{Inconsistent95}
@@ -3500,7 +3500,7 @@ execution cannot be erroneous.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01],ARef=[AI95-00195-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Limited types may have default
   constructed attributes if all of the parent and (for extensions) extension
-  components have available attributes. Ada 2006 adds the notion of
+  components have available attributes. Ada 2005 adds the notion of
   availability to patch up some holes in the Corrigendum model.]}
 @end{Extend95}
 
@@ -4332,8 +4332,8 @@ because the @nt{attribute_representation_clause} has been generalized.
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   @b<Corrigendum:> Various freezing rules were added to fix holes in the rules.
   Most importantly, implicit calls are now freezing, which make some
-  representation clauses illegal in Ada 2006 that were legal (but dubious) in
-  Ada 95. Similarly, Ada 2006 says that the primitive subprograms of a specific
+  representation clauses illegal in Ada 2005 that were legal (but dubious) in
+  Ada 95. Similarly, Ada 2005 says that the primitive subprograms of a specific
   tagged type are frozen when type is frozen, preventing dubious convention
   changes (and address clauses) after the freezing point. In both cases, the
   code is dubious and the workaround is easy.]}

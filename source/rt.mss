@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.50 $ $Date: 2005/07/27 00:06:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.51 $ $Date: 2005/07/28 04:44:15 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/07/27 00:06:29 $}
+@Comment{$Date: 2005/07/28 04:44:15 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2424,7 +2424,7 @@ completion of the protected action in which it is executed.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The ability to dynamically change and query the priority of a protected
-  object is new to Ada 2006.]}
+  object is new.]}
 @end{Extend95}
 
 
@@ -2773,7 +2773,7 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   @i<might> be implemented with a controlled type. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
   applies to the partition, and one of these language-defined types does not
-  have a controlled part, it will not be allowed in local objects in Ada 2006
+  have a controlled part, it will not be allowed in local objects in Ada 2005
   whereas it would be allowed in Ada 95. Such code is not portable, as other
   Ada compilers may have had a controlled part, and thus would be
   illegal under the restriction.]}

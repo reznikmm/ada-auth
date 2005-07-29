@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:25 $}
+@Comment{$Date: 2005/07/28 04:44:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @LabeledClause{Array Types}
 
@@ -1038,7 +1038,7 @@ instance of a generic unit.@PDefn{generic contract issue}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
     but access discriminants may have defaults only if they are a
     @lquotes@;really@rquotes@; limited type. This is the rule chosen for
-    Ada 2006, as it is not incompatible, and it doesn't require weird
+    Ada 2005, as it is not incompatible, and it doesn't require weird
     accessibility checks.]}
   @end{Itemize}
 @end{Reason}
@@ -1582,7 +1582,7 @@ attempted to prevent this by banning every case where an aliased object
 could be unconstrained or be changed by an enclosing assignment. New ways
 to cause this problem were being discovered frequently, meaning that new rules
 had to be dreamed up to cover them. Meanwhile, aliased objects and components
-were getting more and more limited. In Ada 2006, we sweep away all of that
+were getting more and more limited. In Ada 2005, we sweep away all of that
 cruft and replace it by a simple rule @lquotes@;thou shalt not create an
 access subtype that can point to an item whose discriminants can be changed by
 assignment@rquotes@;.]}
@@ -1701,12 +1701,12 @@ seem worth putting it in a "NOTE."
 The Corrigendum added a restriction on @nt{discriminant_constraint}s for
 general access subtypes. Such constraints are prohibited
 if the designated type can be treated as constrained somewhere in the program.
-Ada 2006 goes further and prohibits such @nt{discriminant_constraint}s if
+Ada 2005 goes further and prohibits such @nt{discriminant_constraint}s if
 the designated type has (or might have, in the case of a formal type)
 defaults for its discriminants. The use of general access subtypes is rare,
 and this eliminates a boatload of problems that required many restrictions
 on the use of aliased objects and components (now lifted). Similarly,
-Ada 2006 prohibits @nt{discriminant_constraint}s on any access type whose
+Ada 2005 prohibits @nt{discriminant_constraint}s on any access type whose
 designated type has a partial view that is constrained. Such a type will
 not be constrained in the heap to avoid privacy problems. Again, the use
 of such subtypes is rare (they can only happen within the package and its

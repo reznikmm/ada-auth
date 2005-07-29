@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:21 $}
+@Comment{$Date: 2005/07/28 04:44:06 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1338,7 +1338,7 @@ Such a @nt{pragma} applies to all of the denoted entities.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
 @Chg{Version=[2],New=[@Defn{incompatibilities with Ada 83}
 A pragma Inline cannot refer to a @nt{subprogram_body} outside of that
-body. The pragma can be given inside of the subprogram body. Ada 2006
+body. The pragma can be given inside of the subprogram body. Ada 2005
 adds an @ImplPermName to allow this usage for compatibility, but
 implementations do not have to allow such @nt{pragma}s.],Old=[]}
 @end{Incompatible83}
@@ -2330,7 +2330,7 @@ object's subtype.]}
 @Defn{incompatibilities with Ada 83}
 In Ada 95, if the result type of a function has a part that is a task,
 then an attempt to return a local variable will raise Program_Error.
-@Chg{Version=[2],New=[This is illegal in Ada 2006, see below. ],
+@Chg{Version=[2],New=[This is illegal in Ada 2005, see below. ],
 Old=[]}In Ada 83, if a function returns a local variable containing a task,
 execution is erroneous according to AI83-00867. However,
 there are other situations where functions that return tasks

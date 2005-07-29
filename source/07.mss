@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:22 $}
+@Comment{$Date: 2005/07/28 04:44:06 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -550,7 +550,7 @@ that seemed like too much mechanism.
   and we would also have succeeded in ]}doing an assignment of a task
   object, @Chg{Version=[2],New=[],Old=[both of ]}which @Chg{Version=[2],New=[is],
   Old=[are]} supposed to be @Chg{Version=[2],New=[a no-no],Old=[no-no's]}.
-  @ChgNote{A runtime check prevents the first from being a problem in Ada 2006.}
+  @ChgNote{A runtime check prevents the first from being a problem in Ada 2005.}
 
   This rule is not needed for private extensions,
   because they inherit their limitedness from their ancestor,
@@ -1660,7 +1660,7 @@ level of indirection was implied by the semantics to
 avoid the separation of the value from an associated
 object.
 In Ada 95, most limited types are passed by reference,
-and even return-ed by reference.@Chg{Version=[2],New=[ In Ada 2006,
+and even return-ed by reference.@Chg{Version=[2],New=[ In Ada 2005,
 most limited types are built-in-place upon return, rather than returned
 by reference. Thus the object @lquotes@;identity@rquotes is part of the
 logical value of most limited types.],Old=[]}
@@ -2151,7 +2151,7 @@ of Controlled only.
   implementation wishes to make them @lquotes@;magic@rquotes@; in some way.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-  @ChgAdded{Version=[2],Text=[For Ada 2006, we considered making these types
+  @ChgAdded{Version=[2],Text=[For Ada 2005, we considered making these types
   interfaces. That would have the advantage of allowing them to be added
   to existing trees. But that was rejected both because it would cause
   massive disruption to existing implementations, and because it would be
@@ -3355,7 +3355,7 @@ the rules here refer to the task-waiting rules of Section 9.
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Stated that if Adjust raises an
   exception during initialization, nothing further is required. This is
-  corrected in Ada 2006 to include all kinds of assignment other than
+  corrected in Ada 2005 to include all kinds of assignment other than
   @nt{assignment_statement}s.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}

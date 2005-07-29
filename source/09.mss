@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:23 $}
+@Comment{$Date: 2005/07/28 04:44:08 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 
@@ -3308,7 +3308,7 @@ environment (such as POSIX).]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}The upper bound
   of Year_Number has been changed to avoid a year 2100 problem. A program
-  which expects years past 2099 to raise Constraint_Error will fail in Ada 2006.
+  which expects years past 2099 to raise Constraint_Error will fail in Ada 2005.
   We don't expect there to be many programs which are depending on an exception
   to be raised. A program that uses Year_Number'Last as a magic number may also
   fail if values of Time are stored outside of the program.
@@ -4329,7 +4329,7 @@ so we can define conditional entry calls in terms of timed entry calls.
   might actually be an entry. Since the fact that something is an entry
   could be used in resolving these calls in Ada 95, it is possible for
   timed or conditional entry calls that resolved in Ada 95 to be ambiguous
-  in Ada 2006. That could happen if both an entry and procedure with the
+  in Ada 2005. That could happen if both an entry and procedure with the
   same name and profile exist, which should be rare.]}
 @end{Incompatible95}
 

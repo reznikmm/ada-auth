@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:18 $}
+@Comment{$Date: 2005/07/28 04:44:00 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -4461,9 +4461,9 @@ Context is used to resolve their type.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
   Ada 95 defined most characters in Wide_Character to be graphic characters,
-  while Ada 2006 uses the categorizations from ISO-10646:2003. It also
+  while Ada 2005 uses the categorizations from ISO-10646:2003. It also
   provides language-defined names for all non-graphic characters. That
-  means that in Ada 2006, Wide_Character'Wide_Value will raise Constraint_Error
+  means that in Ada 2005, Wide_Character'Wide_Value will raise Constraint_Error
   for a string representing a @nt{character_literal} of a non-graphic character,
   while Ada 95 would have accepted it. Similarly, the result of
   Wide_Character'Wide_Image will change for such non-graphic characters.]}
@@ -4472,7 +4472,7 @@ Context is used to resolve their type.
   @ChgAdded{Version=[2],Text=[The language-defined names FFFE and FFFF were
   replaced by a consistent set of language-defined names for all non-graphic
   characters with positions greater than 16#FF#. That means that
-  in Ada 2006, Wide_Character'Wide_Value("FFFE") will raise Constraint_Error
+  in Ada 2005, Wide_Character'Wide_Value("FFFE") will raise Constraint_Error
   while Ada 95 would have accepted it. Similarly, the result of
   Wide_Character'Wide_Image will change for the position numbers 16#FFFE#
   and 16#FFFF#. It is very unlikely that this will matter in practice,

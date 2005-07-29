@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2005/07/27 00:06:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2005/07/28 04:44:17 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/07/27 00:06:30 $}
+@Comment{$Date: 2005/07/28 04:44:17 $}
 
 @LabeledClause{String Handling}
 
@@ -2216,7 +2216,7 @@ the package and several of the subprograms appears in the Rationale.
   Type Unbounded_String is defined to need finalization. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
   applies to the partition, and Unbounded_String does not have a controlled
-  part, it will not be allowed in local objects in Ada 2006 whereas it would
+  part, it will not be allowed in local objects in Ada 2005 whereas it would
   be allowed in Ada 95. Such code is not portable, as most Ada compilers have
   a controlled part in Unbounded_String, and thus would be illegal.]}
 
@@ -2545,7 +2545,7 @@ any element outside the Character portion of Wide_Character.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
   @ChgAdded{Version=[2],Text=[The second Note is now normative text, since
   there is no way to derive it from the other rules. It's a little
-  weird given the use of Unicode character classifications in Ada 2006;
+  weird given the use of Unicode character classifications in Ada 2005;
   but changing it would be inconsistent with Ada 95 and a one-to-one
   mapping isn't necessarily correct anyway.]}
 @end{DiffWord95}

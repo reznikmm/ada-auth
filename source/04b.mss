@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:21 $}
+@Comment{$Date: 2005/07/28 04:44:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.21 $}
+@Comment{$Revision: 1.22 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1118,7 +1118,7 @@ as a @nt<name>.
   that the aliased status of array components cannot change in a view
   conversion. This rule was needed to avoid having a way to change the
   discriminants of an aliased object. This rule was repealed later, as
-  Ada 2006 allows changing the discriminants of an aliased object.]}
+  Ada 2005 allows changing the discriminants of an aliased object.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
   @ChgAdded{Version=[2],Text=[Conversion rules for @i<universal_access> were
@@ -2282,7 +2282,7 @@ raising.
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00268-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}Rounding of
-  static real expressions is implementation-defined in Ada 2006, while it was
+  static real expressions is implementation-defined in Ada 2005, while it was
   specified as away from zero in Ada 95. This could make subtle differences
   in programs. However, the Ada 95 rule required rounding that (probably)
   differed from the target processor, thus creating anomalies where the
@@ -2414,7 +2414,7 @@ This subclause is new to Ada 95.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
 @Chg{Version=[2],New=[Added static matching rules for null exclusions and
 anonymous access-to-subprogram types; both of these are new in
-Ada 2006.],Old=[]}
+Ada 2005.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00311-01]}
 @Chg{Version=[2],New=[We clarify that the constraint of the first subtype

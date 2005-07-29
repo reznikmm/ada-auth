@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:23 $}
+@Comment{$Date: 2005/07/28 04:44:07 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -775,14 +775,21 @@ implicitly declared at the same place:]}
 
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[If one is a non-null non-abstract subprogram,
-then it overrides those that are null or abstract subprograms.]}
+@ChgAdded{Version=[2],Text=[If at least one is a subprogram that is not a null
+procedure nor an abstract subprogram, and does not require overriding (see
+@RefSecNum{Abstract Types and Subprograms}), then they override those that are
+null procedures, abstract subprograms, or require overriding. If more than one
+such homograph remains that is not thus overridden, then they are all hidden
+from all visibility.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[If all are null procedures or abstract subprograms, then
-any null procedure overrides all abstract subprograms; if more than one
-such homograph remains that is not thus overridden, then one is chosen
-arbitrarily to override the others.]}
+@ChgAdded{Version=[2],Text=[Otherwise (all are null procedures, abstract
+subprograms, or require overriding), then any null procedure overrides all
+abstract subprograms and all subprograms that require overriding; if more than
+one such homograph remains that is not thus overridden, then if they are all
+fully conformant with one another, one is chosen arbitarily; if not, they are
+all hidden from all visibility.
+@Defn2{Term=[full conformance],Sec=(required)}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -790,7 +797,7 @@ arbitrarily to override the others.]}
     implementation arbitrarily chooses one overrider from among a group
     of inherited subprograms, users should not be able to determine which
     member was chosen, as the set of inherited subprograms which are chosen
-    from must be fully conformant (see below). This rule is needed in order to
+    from must be fully conformant. This rule is needed in order to
     allow]}
 
 @begin{Example}
@@ -819,10 +826,33 @@ arbitrarily to override the others.]}
     any of its inherited operations.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Full conformance is required here (see below),
+  @ChgAdded{Version=[2],Text=[Full conformance is required here,
   as we cannot allow the parameter names to differ. If they did differ, the
-  routine which was selected for overriding could be determined by named
-  parameter notation in a call.]}
+  routine which was selected for overriding could be determined by using
+  named parameter notation in a call.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[When the subprograms do not conform,
+  we chose not to adopt the @lquotes@;use clause@rquotes rule which would make
+  them all visible resulting in likely ambiguity. If we had used such a rule,
+  any successful calls would be confusing; and the fact that there are no
+  Beaujolais-like effect to worry about means we can consider other rules.
+  The hidden-from-all-visibility homographs are still inherited
+  by further derivations, which avoids order-of-declaration dependencies
+  and other anomolies.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We have to be careful to not include arbitrary
+  selection if the routines have real bodies. (This can happen in generics, see
+  the example in the incompatibilies section below.) We don't want the ability
+  to sucessfully call routines where the body executed depends on the compiler
+  or a phase of the moon.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Note that if the type is concrete, abstract
+  subprograms are inherited as subprograms that require overriding. We include
+  functions that require overriding as well; these don't have real bodies, so
+  they can use the more liberal rules.]}
 @end{Discussion}
 
 @end{InnerItemize}
@@ -1010,7 +1040,7 @@ hiding, since there is no way to declare homographs.
 
 @begin{Legality}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],Ref=[8652/0026],ARef=[AI95-00044-01],ARef=[AI95-00150-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00377-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00377-01]}
 @Chg{New=[A non-overridable],Old=[An explicit]} declaration is illegal if there is a
 homograph occurring immediately within the same
 declarative region that is visible at the place of the
@@ -1024,37 +1054,14 @@ New=[compilation unit],Old=[@nt<subunit>]} is illegal if it mentions (in a
 of the library unit that is visible at the place of the @Chg{Version=[2],
 New=[compilation unit],Old=[corresponding stub]}, and the
 homograph and the mentioned library unit are both
-declared immediately within the same declarative region.
-@Chg{Version=[2],New=[],Old=[@PDefn{generic contract issue}
+declared immediately within the same declarative region.@PDefn{generic contract issue}
 These rules also apply to dispatching operations declared
 in the visible part of an instance of a generic unit.
 However, they do not apply to other overloadable declarations in
 an instance@Redundant[; such declarations may have type conformant profiles
 in the instance, so long as the corresponding declarations in the generic
 were not type conformant].
-@PDefn{type conformance}]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[If two or more homographs are implicitly declared at the same place (and not
-overridden by a non-overridable declaration) then at most one shall be a
-non-null non-abstract subprogram. If all are null procedures or abstract
-subprograms, then all of the null procedures shall be fully conformant with
-one another. If all are abstract subprograms, then all of the subprograms
-shall be fully conformant with one another.@Defn2{Term=[full conformance],Sec=(required)}],Old=[]}
-@begin{Reason}
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[Full conformance is required so it is not possible
-to tell which subprogram is actually the overriding one. See discussion above.]}
-@end{Reason}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[@PDefn{generic contract issue}
-All of the above @LegalityTitle also apply to dispatching operations declared
-in the visible part of an instance of a generic unit. However, they do not
-apply to other overloadable declarations in an instance@Redundant[; such declarations may
-have type conformant profiles in the instance, so long as the corresponding
-declarations in the generic were not type conformant].
-@PDefn{type conformance}],Old=[]}
+@PDefn{type conformance}
 
 @begin{Discussion}
 @leading@;Normally, these rules just mean you can't explicitly
@@ -1347,24 +1354,33 @@ interfaces do not change their legality. However, there is a very rare
 case where this is not true:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{generic}
+@ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} T1 @key{is private};
    @key{type} T2 @key{is private};
 @key{package} G @key{is}
    @key{type} T @key{is null record};
    @key{procedure} P (X : T; Y : T1);
-   @key{procedure} P (X : T; Y : T2);
-@key{end} G;],Old=[]}
+   @key{procedure} P (X : T; Z : T2);
+@key{end} G;]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{package} I @key{is new} G (Integer, Integer); -- @RI[Exports homographs of P.]],Old=[]}
+@ChgAdded{Version=[2],Text=[@key{package} I @key{is new} G (Integer, Integer); -- @RI[Exports homographs of P.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{type} D @key{is new} I.T; -- @RI[Legal in Ada 95, illegal in Ada 2006.]],Old=[]}
+@ChgAdded{Version=[2],Text=[@key{type} D @key{is new} I.T; -- @RI[Both Ps are inherited.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Obj : D;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[P (Obj, Z => 10); -- @RI[Legal in Ada 95, illegal in Ada 2005.]]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This case doesn't seem worth making the rules any more
-complex than they already are.],Old=[]}
+@ChgAdded{Version=[2],Text=[The call to P would resolve in Ada 95 by using the
+parameter name, while the procedures P would be hidden from all visibility
+in Ada 2005 and thus would not resolve.
+This case doesn't seem worth making the rules any more
+complex than they already are.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -2107,7 +2123,7 @@ unconstrained nominal subtype.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Leading@;@Defn{incompatibilities with Ada 95}
 Aliased variables are not necessarily constrained in Ada
-2006 (see @RefSecNum{Array Types}). Therefore, a subcomponent of an aliased
+2005 (see @RefSecNum{Array Types}). Therefore, a subcomponent of an aliased
 variable may disappear or change shape, and renaming such a subcomponent thus
 is illegal, while the same operation would have been legal in Ada 95. Note that
 most allocated objects are still constrained by their initial value (see
@@ -2117,9 +2133,9 @@ using the type T2 of the previous example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   AT2 : @key{aliased} T2;
-   C1_Ren : Integer @key{renames} AT2.C1; -- @RI[Illegal in Ada 2006, legal in Ada 95]
+   C1_Ren : Integer @key{renames} AT2.C1; -- @RI[Illegal in Ada 2005, legal in Ada 95]
    AT2 := (D1 => True);             -- @RI[Raised Constraint_Error in Ada 95,]
-                                    -- @RI[but does not in Ada 2006, so C1_Ren becomes]
+                                    -- @RI[but does not in Ada 2005, so C1_Ren becomes]
                                     -- @RI[invalid when this is assigned.]]}
 @end{Example}
 @end{Incompatible95}
@@ -2368,18 +2384,26 @@ circular renames are handled below; see @BoundedTitle.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00228-01]}
-@Chg{Version=[2],New=[If the @Syni{callable_entity_}@nt{name} of a renaming
-denotes a subprogram which shall be overridden
-(see @RefSecNum{Abstract Types and Subprograms}), then the renaming is
-illegal.],Old=[]}
+@ChgAdded{Version=[2],Text=[The @Syni{callable_entity_}@nt{name} of a renaming
+shall not denote a subprogram that requires overriding
+(see @RefSecNum{Abstract Types and Subprograms}).]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00228-01]}
 @ChgAdded{Version=[2],Text=[Such a rename cannot be of the inherited subprogram
-(which is shall-be-overridden because it cannot be called),
+(which requires overriding because it cannot be called),
 and thus cannot squirrel away a subprogram (see below). That would be
 confusing, so we make it illegal. The renaming is allowed after the
 overriding, as then the @nt{name} will denote the overriding subprogram,
 not the inherited one.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00228-01]}
+@ChgAdded{Version=[2],Text=[The @Syni{callable_entity_}@nt{name} of a
+renaming-as-body shall not denote an abstract subprogram.]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00228-01]}
+@ChgAdded{Version=[2],Text=[Such a subprogram has no body, so it hardly
+can replace one in the program.]}
 @end{Reason}
 
 A @nt{name} that denotes a formal parameter
@@ -2599,7 +2623,7 @@ We'll live with the oddity.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00228-01]}
   @ChgAdded{Version=[2],Text=[Clarified that renaming a shall-be-overridden
-  subprogram is illegal.]}
+  subprogram is illegal, as well as renaming-as-body an abstract subprogram.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
   @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
@@ -3300,11 +3324,11 @@ things like @lquotes@;any integer type.@rquotes@;
 @key{procedure} Proc (Acc : @key{access} Integer) ...
 @key{procedure} Proc (Acc : Cacc) ...
 List : Cacc := ...;
-Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2006.]]}
+Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If there is any code like this (such code should
-  be rare), it will be ambiguous in Ada 2006.]}
+  be rare), it will be ambiguous in Ada 2005.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -3324,7 +3348,7 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2006.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{task body} T @key{is}
-   @key{procedure} P (X : @key{access} T) @key{is} -- @RI[Illegal in Ada 95, legal in Ada 2006]
+   @key{procedure} P (X : @key{access} T) @key{is} -- @RI[Illegal in Ada 95, legal in Ada 2005]
       ...
    @key{end} P;
 @key{begin}
