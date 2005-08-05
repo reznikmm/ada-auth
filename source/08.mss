@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:07 $}
+@Comment{$Date: 2005/07/29 06:02:01 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -775,8 +775,8 @@ implicitly declared at the same place:]}
 
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[If at least one is a subprogram that is not a null
-procedure nor an abstract subprogram, and does not require overriding (see
+@ChgAdded{Version=[2],Text=[If at least one is a subprogram that is neither a
+null procedure nor an abstract subprogram, and does not require overriding (see
 @RefSecNum{Abstract Types and Subprograms}), then they override those that are
 null procedures, abstract subprograms, or require overriding. If more than one
 such homograph remains that is not thus overridden, then they are all hidden
