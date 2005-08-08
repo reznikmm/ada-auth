@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:02 $}
+@Comment{$Date: 2005/08/05 05:04:15 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3050,12 +3050,12 @@ otherwise it is constrained.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
-@ChgAdded{Version=[2],Text=[A @nt{null_exclusion} is only allowed in a
+@ChgAdded{Version=[2],Text=[If a
 @nt{subtype_indication}, @nt{discriminant_specification},
 @nt{parameter_specification}, @nt{parameter_and_result_profile},
-@nt{object_renaming_declaration}, or @nt{formal_object_declaration} if
-the @nt{subtype_mark} in the construct denotes an access
-subtype that does not exclude null.]}
+@nt{object_renaming_declaration}, or @nt{formal_object_declaration}
+has a @nt{null_exclusion}, the @nt{subtype_mark} in that construct
+shall denote an access subtype that does not exclude null.]}
 @begin(Honest)
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[This means @lquotes@;directly allowed in@rquotes;
@@ -3956,12 +3956,13 @@ type defined by an @nt{access_definition} of an
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00416-01]}
 @ChgNote{Use ChgAdded below to get conditional Leading}
-@ChgAdded{Version=[2],Type=[Leading],Text=[For an access
-discriminant,]}@Chg{Version=[2],New=[ the],Old=[The]}
-accessibility level of @Chg{Version=[2],New=[its],Old=[the]}
-anonymous access type @Chg{Version=[2],New=[is determined as follows:],
-Old=[of an access discriminant is
-the same as that of the containing object or associated constrained subtype.]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[]}The accessibility level
+of the anonymous access type of an access discriminant
+@Chg{Version=[2],New=[in the @nt{subtype_indication} or
+@nt{qualified_expression} of an @nt{allocator}, or in the @nt{expression} or
+@nt{return_subtype_indication} of a return statement is determined as
+follows:],Old=[is the same as that of the containing object or associated
+constrained subtype.]}
 
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added]}

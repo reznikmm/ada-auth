@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:08 $}
+@Comment{$Date: 2005/08/05 05:04:16 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 
@@ -3473,17 +3473,6 @@ environment (such as POSIX).]}
                     Sub_Second : @key<out> Second_Duration);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
-                    Year       : @key<out> Year_Number;
-                    Month      : @key<out> Month_Number;
-                    Day        : @key<out> Day_Number;
-                    Hour       : @key<out> Hour_Number;
-                    Minute     : @key<out> Minute_Number;
-                    Second     : @key<out> Second_Number;
-                    Sub_Second : @key<out> Second_Duration;
-                    Time_Zone  : @key<in> Time_Zones.Time_Offset := 0);]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Time_Of} (Year       : Year_Number;
                      Month      : Month_Number;
                      Day        : Day_Number;
@@ -3503,6 +3492,17 @@ environment (such as POSIX).]}
                      Leap_Second: Boolean := False;
                      Time_Zone  : Time_Zones.Time_Offset := 0)
                              @key<return> Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
+                    Year       : @key<out> Year_Number;
+                    Month      : @key<out> Month_Number;
+                    Day        : @key<out> Day_Number;
+                    Hour       : @key<out> Hour_Number;
+                    Minute     : @key<out> Minute_Number;
+                    Second     : @key<out> Second_Number;
+                    Sub_Second : @key<out> Second_Duration;
+                    Time_Zone  : @key<in> Time_Zones.Time_Offset := 0);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Split} (Date       : @key<in> Time;
@@ -3732,23 +3732,6 @@ parameter is always less than 1.0.]}
 @end{Ramification}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;
-                 Year       : @key<out> Year_Number;
-                 Month      : @key<out> Month_Number;
-                 Day        : @key<out> Day_Number;
-                 Hour       : @key<out> Hour_Number;
-                 Minute     : @key<out> Minute_Number;
-                 Second     : @key<out> Second_Number;
-                 Sub_Second : @key<out> Second_Duration;
-                 Time_Zone  : @key<in> Time_Zones.Time_Offset := 0);]}
-@end{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Date into its constituent
-parts (Year, Month, Day, Hour, Minute,
-Second, Sub_Second), relative to the specified time zone offset. The value
-returned in the Sub_Second parameter is always less than 1.0.]}
-
-@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Time_Of (Year       : Year_Number;
                   Month      : Month_Number;
                   Day        : Day_Number;
@@ -3825,15 +3808,39 @@ returned in the Sub_Second parameter is always less than 1.0.]}
                  Year       : @key<out> Year_Number;
                  Month      : @key<out> Month_Number;
                  Day        : @key<out> Day_Number;
+                 Hour       : @key<out> Hour_Number;
+                 Minute     : @key<out> Minute_Number;
+                 Second     : @key<out> Second_Number;
+                 Sub_Second : @key<out> Second_Duration;
+                 Time_Zone  : @key<in> Time_Zones.Time_Offset := 0);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Date does not represent a time
+within a leap second, splits Date into its constituent parts (Year, Month, Day,
+Hour, Minute, Second, Sub_Second), relative to the specified time zone offset,
+and sets Leap_Second to False. If Date represents a time within a leap second,
+set the constituent parts to values corresponding to a time one second earlier
+than that given by Date, relative to the specified time zone offset, and sets
+Leap_Seconds to True. The value returned in the Sub_Second parameter is always
+less than 1.0.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;
+                 Year       : @key<out> Year_Number;
+                 Month      : @key<out> Month_Number;
+                 Day        : @key<out> Day_Number;
                  Seconds    : @key<out> Day_Duration;
                  Leap_Second: @key<out> Boolean;
                  Time_Zone  : @key<in> Time_Zones.Time_Offset := 0);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Split Date into its constituent parts (Year,
-Month, Day, Seconds), relative to the specified time zone offset. Leap_Second
-is True if Date identifies a leap second. The value
-returned in the Seconds parameter is always less than 86_400.0.]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Date does not represent a time
+within a leap second, splits Date into its constituent parts (Year, Month, Day,
+Seconds), relative to the specified time zone offset, and sets Leap_Second to
+False. If Date represents a time within a leap second, set the constituent
+parts to values corresponding to a time one second earlier than that given by
+Date, relative to the specified time zone offset, and sets Leap_Seconds to
+True. The value returned in the Seconds parameter is always less than 86_400.0.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Image (Date : Time;

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:06 $}
+@Comment{$Date: 2005/08/05 05:04:16 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2037,7 +2037,7 @@ the nominal subtype of the return object. If there is an @nt{expression}, it
 is evaluated and converted to the nominal subtype (which might raise
 Constraint_Error @em see @RefSecNum{Type Conversions}@PDefn2{Term=[implicit subtype conversion],Sec=(function return)});
 the return object is created and the converted value is assigned to
-the return object; otherwise, the return object is created and initialized
+the return object. Otherwise, the return object is created and initialized
 by default as for a stand-alone object of its nominal subtype (see
 @RefSecNum{Object Declarations}). If the nominal subtype is indefinite, the
 return object is constrained by its initial value.]}

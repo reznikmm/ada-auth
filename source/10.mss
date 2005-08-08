@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:24 $}
+@Comment{$Date: 2005/08/05 05:04:18 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1354,19 +1354,22 @@ declarative region of the library package.]}
 @end{Legality}
 
 @begin{Notes}
-A @nt<library_item> mentioned in
-a @nt{with_clause} of a compilation unit
-is visible within the
-compilation unit and hence acts
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
+A @nt<library_item> mentioned in a @Chg{Version=[2],
+New=[@nt{nonlimited_with_clause}],Old=[@nt{with_clause}]} of a compilation unit
+is visible within the compilation unit and hence acts
 just like an ordinary declaration.
-Thus, within a compilation unit that mentions its
-declaration, the name of a
+Thus, within a compilation unit that mentions its declaration, the name of a
 library package can be given in @nt{use_clause}s and can be used to
 form expanded names, a library subprogram can be called,
 and instances of a generic library unit can be declared.
-If a child of a parent generic package is mentioned in a @nt{with_clause},
+If a child of a parent generic package is mentioned in a
+@Chg{Version=[2], New=[@nt{nonlimited_with_clause}],Old=[@nt{with_clause}]},
 then the corresponding declaration nested within each visible instance
-is visible within the compilation unit.
+is visible within the compilation unit.@Chg{Version=[2], New=[ Similarly,
+a @nt{library_item} mentioned in a
+@nt{limited_with_clause} of a compilation unit is visible within the
+compilation unit and thus can be used to form expanded names.],Old=[]}
 
 @begin{Ramification}
 The rules given for @nt{with_clause}s are such that the same effect
@@ -1381,8 +1384,8 @@ in the @nt<with_clause>
 (and the renamed view itself);
 the @nt{with_clause} is not defined to mention the ancestors of the
 renamed entity.
-Thus, if X renames Y.Z, then @lquotes@;with X;@rquotes@; does not make the declarations
-of Y or Z visible.
+Thus, if X renames Y.Z, then @lquotes@;with X;@rquotes@; does not make the
+declarations of Y or Z visible.
 Note that this does not cause the dreaded visibility holes mentioned
 above.
 @end{Ramification}
