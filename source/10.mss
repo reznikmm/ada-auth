@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/08/05 05:04:18 $}
+@Comment{$Date: 2005/08/08 05:27:28 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3274,25 +3274,104 @@ A @nt{pragma} Pure is a library unit pragma.
 @end{SyntaxText}
 @end{Syntax}
 
-@begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
-@Defn{pure}
-A @i{pure} @nt{library_item} is a preelaborable @nt{library_item}
-that does not contain the declaration of any
-variable@Chg{Version=[2],New=[,],Old=[]} or named access@Chg{Version=[2],
-New=[-to-object type for which the Storage_Size has not been specified by
-a static expression with value zero (0) and is not defined to be zero (0),
-excepting declarations],Old=[ type, except]} within a
-subprogram, generic
-subprogram,@Chg{Version=[2],New=[ generic formal part,],Old=[]}
-task unit, or protected unit.
+@begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{pure}
+A @i{pure} @nt{library_item} is a preelaborable @nt{library_item} whose
+elaboration does not perform any of the following actions:]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the elaboration of a variable declaration;]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the evaluation of an @nt{allocator} of an
+access-to-variable type; for the purposes of this rule, the partial view of a
+type is presumed to have non-visible components whose default initialization
+evaluates such an @nt{allocator};]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This rule is needed because aggregates can
+  specify the default initialization of a private type or extension using <> or
+  the ancestor subtype of an extension aggregate. The subtype of a component
+  could use an @nt{allocator} to initialize an access discriminant. Ada 95 did
+  not allow such private types to have preelaborable initialization, so they
+  could not have occurred. Thus this rule is not incompatible with Ada 95.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the elaboration of the declaration of a named
+access-to-variable type for which the Storage_Size has not been specified by a
+static expression with value zero and is not defined by the language to be
+zero;]}
 
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
-  @ChgAdded{Version=[2],Text=[A remote access-to-class-wide type (see
-  @RefSecNum{Remote Types Library Units}) has its Storage_Size defined to
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[A remote access-to-class-wide type
+  (see @RefSecNum{Remote Types Library Units}) has its Storage_Size defined to
   be zero.]}
 @end{Discussion}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgAdded{Version=[2],Text=[We disallow most named access-to-object types
+  because an @nt{allocator} has a side effect; the pool constitutes variable
+  data. We allow access-to-subprogram types because they
+  don't have @nt{allocator}s. We even allow named access-to-object types if
+  they have an empty predefined pool (they can't have a user-defined pool as
+  System.Storage_Pools is not pure). In this case, most attempts to use an
+  @nt{allocator} are illegal, and any others (in a generic body) will raise
+  Storage_Error.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the elaboration of the declaration of a named
+access-to-constant type for which the Storage_Size has been specified by an
+expression other than a static expression with value zero.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We allow access-to-constant types so long as
+  there is no user-specified non-zero Storage_Size; if there were a
+  user-specified non-zero Storage_Size restricting the size of the storage
+  pool, allocators would be problematic since the package is supposedly
+  @lquote@;stateless@rquote, and the allocated size count for the storage pool
+  would represent state.]}
+@end{Discussion}
+
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
+@ChgAdded{Version=[2],Text=[
+The Storage_Size for an anonymous access-to-variable type declared at
+library level in an unit that is declared pure is defined to be zero.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This makes @nt{allocator}s illegal for such types
+  (see @RefSecNum{Allocators}), making a storage pool unnecessary for these
+  types. A storage pool would represent state.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Note that access discriminants and access
+  parameters are never library-level, even when they are declared in a
+  type or subprogram declared at library-level. That's because they have their
+  own special accessibility rules (see @RefSecNum{Operations of Access Types}).]}
+@end{Ramification}
+
+@end{StaticSem}
+
+
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00366-01]}
+@ChgDeleted{Version=[2],Text=[@Defn{pure}
+A @i{pure} @nt{library_item} is a preelaborable @nt{library_item}
+that does not contain the declaration of any
+variable or named access within a
+subprogram, generic
+subprogram,
+task unit, or protected unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 @Defn{declared pure}
@@ -3329,18 +3408,12 @@ access parameters) are allowed.
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
-The primary reason for disallowing named
-access@Chg{Version=[2],New=[-to-object],Old=[]} types is that an
-@nt{allocator} has a side effect;
-the pool constitutes variable data.
-@Chg{Version=[2],New=[We allow access-to-subprogram types because they
-don't have @nt{allocator}s. We even allow access-to-object types if they have
-an empty predefined pool (they can't have a user-defined pool as
-System.Storage_Pools is not pure). In this case, any attempt to use an
-@nt{allocator} will raise Storage_Error. (We can't make this illegal without
-causing generic contract model problems.) Ada 95 didn't allow any access types
-as],Old=[We considered somehow allowing @nt{allocator}-less access types.
-However,]} these (including access-to-subprogram types)
+@Chg{Version=[2],New=[Ada 95 didn't allow any access types as],
+Old=[The primary reason for disallowing named
+access types is that an @nt{allocator} has a side effect;
+the pool constitutes variable data. We considered somehow allowing
+@nt{allocator}-less access types. However,]} these
+(including access-to-subprogram types)
 @Chg{Version=[2],New=[],Old=[would ]}cause trouble
 for @RefSec{Distributed Systems}, because such types @Chg{Version=[2],New=[],
 Old=[would ]} allow access values in a shared passive
@@ -3371,7 +3444,7 @@ model.]}
   they couldn't complete (or be part of) a nonlimited private type or
   private extension. In any case, the requirement can be met by
   declaring user-defined Read and Write attributes for the offending type;
-  which also will allow external streaming of a limited type.]}
+  that also will allow external streaming of a limited type.]}
 @end{Ramification}
 @end{Legality}
 
@@ -3451,6 +3524,21 @@ pragma, nor a library unit pragma.
 @PDefn2{Term=[requires a completion], Sec=(declaration to which a @nt{pragma} Elaborate_Body applies)}
 If a @nt{pragma} Elaborate_Body applies to a declaration,
 then the declaration requires a completion @Redundant[(a body)].
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
+@ChgAdded{Version=[2],Text=[The @SynI{library_unit_}@nt{name} of a
+@nt{pragma} Elaborate or Elaborate_All shall denote a nonlimited view
+of a library unit.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[These @nt{pragma}s are intended to prevent
+  elaboration check failures. But a limited view does not make anything visible
+  that has an elaboration check, so the @nt{pragma}s cannot do anything useful.
+  Moreover, the @nt{pragma}s would probably reintroduce
+  the circularlity that the @nt{limited_with_clause} was intended to break.
+  So we make such uses illegal.]}
+@end{Reason}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -3551,6 +3639,10 @@ required to appear last.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00002-01]}
   @ChgAdded{Version=[2],Text=[@B<Corrigendum:> The wording was changed so that
   subunits of a preelaborated subprogram are also preelaborated.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+  @ChgAdded{Version=[2],Text=[Disallowed pragma Elaborate and Elaborate_All
+  for packages that are mentioned in a @nt{limited_with_clause}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00403-01]}
   @ChgAdded{Version=[2],Text=[Added wording to cover missing cases for

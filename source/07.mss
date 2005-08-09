@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:06 $}
+@Comment{$Date: 2005/08/08 05:27:27 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -792,17 +792,19 @@ if and only if the ancestor subtype is constrained.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
-@ChgAdded{Version=[2],Text=[If the full view of a private extension is limited,
-then the reserved word @key{limited} shall appear in the
-@nt{full_type_declaration} if and only if it also appears in the
-@nt{private_extension_declaration}.]}
+@ChgAdded{Version=[2],Text=[If the @nt{full_type_declaration} for a private
+extension is a @nt{derived_type_declaration}, then the reserved word
+@key{limited} shall appear in the @nt{full_type_declaration} if and only if it
+also appears in the @nt{private_extension_declaration}.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The word @key{limited} is optional (unless the
-  ancestor is an interface), but if you use it, do so consistently.  Otherwise
-  things would be too confusing for the reader.]}
+  ancestor is an interface), but it should be used consistently. Otherwise
+  things would be too confusing for the reader. Of course, we only require
+  that if the full type is a @nt{derived_type_declaration}, as we want to
+  allow task and protected types to complete extensions of synchronized
+  interfaces.]}
 @end{Reason}
-
 
 @Redundant[If a partial view has unknown discriminants,
 then the @nt{full_type_declaration} may define

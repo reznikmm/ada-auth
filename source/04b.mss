@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:05 $}
+@Comment{$Date: 2005/08/08 05:27:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.22 $}
+@Comment{$Revision: 1.23 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1321,6 +1321,32 @@ the @nt{allocator}, shall not be statically deeper than that of the type of the
   its discriminants.]}
 @end{Reason}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
+@ChgAdded{Version=[2],Text=[An @nt{allocator} shall not be of an access type
+for which the Storage_Size has been specified by a static expression with value
+zero or is defined by the language to be zero. @PDefn{generic contract issue}In
+addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}), this rule applies also in the private
+part of an instance of a generic unit. This rule does not apply in the body of
+a generic unit or within a body declared within the declarative region of a
+generic unit, if the type of the allocator is a descendant of a formal access
+type declared within the formal part of the generic unit.]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[An @nt{allocator} for an access type that has
+  Storage_Size specified to be zero is required to raise Storage_Error anyway.
+  It's better to detect the error at compile-time, as the @nt{allocator}
+  might be executed infrequently. This also simplifies the rules for Pure
+  units, where we do not want to allow any allocators for library-level access
+  types, as they would represent state.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The last sentence covers the case of children of
+  generics, and formal access types of formal packages of the generic unit.]}
+@end{Reason}
+
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -1600,6 +1626,15 @@ has been moved to @RefSec{Storage Management}.
   might cause Storage_Error to be raised at a different time than in an Ada 95
   program.]}
 @end{Inconsistent95}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}An
+  @nt{allocator} for an access type that has Storage_Size specified to be
+  zero is now illegal. Ada 95 allowed the @nt{allocator}, but it had to
+  raise Storage_Error if executed. The primary impact of this change should
+  be to detect bugs.]}
+@end{Incompatible95}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}

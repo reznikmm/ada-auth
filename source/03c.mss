@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/08/05 05:04:15 $}
+@Comment{$Date: 2005/08/08 05:27:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1577,23 +1577,40 @@ tag-indeterminate, then:
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{Dummy add to allow conditional "leading"}
 For the execution of a call on a dispatching operation,
-the body executed is the one for the
-corresponding primitive subprogram of the specific type
+the @Chg{Version=[2],New=[the action performed is determined by the properties
+of the corresponding dispatching operation],Old=[body executed is the one for
+the corresponding primitive subprogram]} of the specific type
 identified by the controlling tag value.
-The body for an explicitly declared dispatching operation is
-the corresponding explicit body for the subprogram.
-The body for an implicitly declared dispatching operation that is
-overridden is the body for the overriding subprogram,
-@Redundant[even if the overriding occurs in a private part.]@Chg{Version=[2],
-New=[ Similarly, the body for an
-implicitly declared dispatching operation that is implemented by an
-entry (see @RefSecNum{Task Units and Task Objects}) or
-protected operation (see @RefSecNum{Protected Units and Protected Objects})
-is the body for the implemented entry or operation.],Old=[]} The body for
-an inherited dispatching operation that is not overridden
-@Chg{Version=[2],New=[or implemented ],Old=[]}is the body of the
-corresponding subprogram of the parent or ancestor type.
+@Chg{Version=[2],New=[If the corresponding operation is],Old=[The body
+for an]} explicitly declared
+@Chg{Version=[2],New=[for this type, @Redundant[even if the declaration occurs
+in a private part], then the action comprises an invocation of the],
+Old=[dispatching operation is the corresponding]}
+explicit body for the
+@Chg{Version=[2],New=[operation. If the corresponding operation is
+implicitly declared for this type:],Old=[subprogram. The body for an implicitly
+declared dispatching operation that is overridden is the body for the
+overriding subprogram, @Redundant[even if the overriding occurs in a private
+part.] The body for an inherited dispatching operation that is not overridden
+is the body of the corresponding subprogram of the parent or ancestor type.]}
+
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[if the operation is implemented by an entry or
+protected subprogram (see @RefSecNum{Task Units and Task Objects} and
+@RefSecNum{Protected Units and Protected Objects}), then the action comprises a
+call on this entry or protected subprogram, with the target object being given
+by the first actual parameter of the call, and the actual parameters of the
+entry or protected subprogram being given by the remaining actual parameters of
+the call, if any;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[otherwise, the action is the same as the action for
+the corresponding operation of the parent type.]}
+@end{Itemize}
+
 @begin{Honest}
 In the unusual case in which a dispatching subprogram is explicitly
 declared (overridden) by a body (with no preceding

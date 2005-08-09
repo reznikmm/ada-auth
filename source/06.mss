@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/08/05 05:04:16 $}
+@Comment{$Date: 2005/08/08 05:27:27 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1441,6 +1441,7 @@ This rule is an overloading rule
 @end{Resolution}
 
 @begin{RunTime}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[execution], Sec=(subprogram call)}
 For the execution of a subprogram call,
 the @nt{name} or @nt{prefix} of the call is evaluated,
@@ -1449,45 +1450,42 @@ and each @nt{parameter_@!association} is evaluated
 If a @nt{default_@!expression} is used,
 an implicit @nt{parameter_@!association} is assumed for this rule.
 These evaluations are done in an arbitrary order.
-The @nt{subprogram_@!body} is then executed.
+The @nt{subprogram_@!body} is then executed@Chg{Version=[2],New=[, or a call
+on an entry or protected subprogram is performed (see
+@RefSecNum{Dispatching Operations of Tagged Types})],Old=[]}.
 Finally, if the subprogram completes normally, then after it is left,
 any necessary assigning back of formal to actual parameters occurs
 (see @RefSecNum{Parameter Associations}).
+
 @begin{Discussion}
-The implicit association for a default is only for this run-time rule.
-At compile time, the visibility rules are applied to the default at
-the place where it occurs, not at the place of a call.
+  The implicit association for a default is only for this run-time rule.
+  At compile time, the visibility rules are applied to the default at
+  the place where it occurs, not at the place of a call.
 @end{Discussion}
 @begin{Honest}
-If the subprogram is inherited, see @RefSec{Derived Types and Classes}.
+  If the subprogram is inherited, see @RefSec{Derived Types and Classes}.
 
-If the subprogram is protected, see @RefSec{Protected Subprograms and Protected Actions}.
+  If the subprogram is protected, see @RefSec{Protected Subprograms and Protected Actions}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00397-01]}
-If the subprogram is really @Chg{Version=[2],New=[],Old=[a renaming of ]}an
-entry, see @RefSec{Entry Calls}.
+  If the subprogram is really a renaming of an entry, see @RefSec{Entry Calls}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
-Normally, the @nt{subprogram_body} that is executed by the above rule
-is the one for the subprogram being called.
-For an enumeration literal,
-implicitly declared (but noninherited) subprogram,@Chg{Version=[2],New=[
-null procedure,],Old=[]} or an attribute that is a subprogram,
-an implicit body is assumed.
-For a dispatching call,
-@RefSec{Dispatching Operations of Tagged Types}
-defines which @nt{subprogram_body} is executed.
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[If the subprogram is implemented by an entry or
+  protected subprogram, it will be treated as a dispatching call to the
+  corresponding entry (see @RefSec{Entry Calls}) or protected subprogram (see
+  @RefSec{Protected Subprograms and Protected Actions}).]}
+
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+  Normally, the @nt{subprogram_body} that is executed by the above rule
+  is the one for the subprogram being called.
+  For an enumeration literal,
+  implicitly declared (but noninherited) subprogram,
+  @Chg{Version=[2],New=[null procedure, ],Old=[]}or an attribute that is
+  a subprogram, an implicit body is assumed.
+  For a dispatching call,
+  @RefSec{Dispatching Operations of Tagged Types}
+  defines which @nt{subprogram_body} is executed.
 @end{Honest}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
-@ChgAdded{Version=[2],Text=[If the @nt{name} or @nt{prefix} of a subprogram
-call denotes an inherited subprogram implemented by an entry or protected
-subprogram (see @RefSecNum{Task Units and Task Objects} and
-@RefSecNum{Protected Units and Protected Objects}), the subprogram call is
-equivalent to a call on the underlying entry or protected subprogram, with the
-target object being given by the first actual parameter of the call, and the
-actual parameters of the entry or protected subprogram being given by the
-remaining actual parameters of the call, if any.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00407-01]}
 @ChgAdded{Version=[2],Text=[If the @nt{name} or @nt{prefix} of a subprogram
@@ -1632,10 +1630,11 @@ that falls off the end to here from RM83-6.5.
   @RefSecNum{Subprogram Declarations}, to take into account
   @nt{null_exclusion}s and access result types.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00397-01]}
-  @ChgAdded{Version=[2],Text=[Defined the meaning of a call on a
-  subprogram @lquotes@;implemented by@rquotes an entry or protected
-  operation.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[Added wording to clarify that the meaning of
+  a call on a subprogram @lquotes@;implemented by@rquotes an entry or
+  protected operation is defined by
+  @RefSecNum{Dispatching Operations of Tagged Types}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00407-01]}
   @ChgAdded{Version=[2],Text=[Defined the meaning of a call on a prefixed
