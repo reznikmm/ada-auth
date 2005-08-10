@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:54 $}
+@Comment{$Date: 2005/08/10 05:13:57 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1510,7 +1510,7 @@ and @RefSecNum{Protected Units and Protected Objects}, respectively.]}
 @begin{Examples}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The use of
-@nt{overriding_indicator}s allow the detection of errors at compile-time that
+@nt{overriding_indicator}s allows the detection of errors at compile-time that
 otherwise might not be detected at all. For instance, we might declare a
 security queue derived from the Queue interface of 3.9.4 as:]}
 

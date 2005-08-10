@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:55 $}
+@Comment{$Date: 2005/08/10 05:13:58 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -492,9 +492,12 @@ The parent type of a private extension has to be specific
 (see @RefSecNum{Private Types and Private Extensions}).
 This rule is not checked in the instance body.
 
-A type with an access discriminant has to be a descendant of
-a type declared with @key[limited], or be a task or protected type.
-This rule is irrelevant in the instance body.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00402-01]}
+A type with @Chg{Version=[2],New=[a @nt{default_expression} of ],Old=[]}an
+access discriminant has to be a
+descendant of @Chg{Version=[2],New=[an explictly limited record type],Old=[a
+type declared with @key[limited]]}, or be a task or protected
+type. This rule is irrelevant in the instance body.]}
 
 In the declaration of a record extension,
 if the parent type is nonlimited, then each of the
@@ -508,6 +511,13 @@ A preelaborated library unit has to be preelaborable
 In the generic body, this rule is checked in an assume-the-worst
 manner.
 @end{InnerItemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00402-01]}
+@ChgAdded{Version=[2],NoPrefix=[T],Text=[The corrections made by the
+Corrigendum added a number of such rules, and the Amendment added many more.
+There doesn't seem to be much value in repeating all of these rules here (as
+of this writing, there are roughly 17 such rules).
+As noted below, all such rules are indexed in the AARM.]}
 
 @PDefn2{Term=[accessibility rule],Sec=(checking in generic units)}
 For the accessibility rules,
@@ -707,10 +717,12 @@ Other properties of the copy (for example, staticness, classes to
 which types belong) are recalculated for each instance;
 this is implied by the fact that it's a copy.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
 Although the @nt{generic_formal_part} is included in an instance,
 the declarations in the @nt{generic_formal_part} are only visible
 outside the instance in the case of a generic formal package whose
-@nt{formal_package_actual_part} is (<>)
+@nt{formal_package_actual_part} @Chg{Version=[2],New=[includes one or more
+<>],Old=[is (<>)]}
 @em see @RefSecNum{Formal Packages}.
 @end{Discussion}
 
@@ -1361,9 +1373,10 @@ denotes a constrained subtype]],Old=[]}.
   @ChgAdded{Version=[2],Text=[We require that the subtype is
   unconstrained because a formal @key{in out} acts like a renaming, and
   thus the given subtype is ignored for purposes of matching; any value of
-  the type can be passed. Thus we only can assume the object is constrained
-  if the first subtype is constrained (and thus there can be no unconstrained
-  subtypes for the type). If we didn't do this, it would be possible to
+  the type can be passed. Thus we can assume only that the object is
+  constrained if the first subtype is constrained (and thus there can be
+  no unconstrained subtypes for the type). If we didn't do this, it
+  would be possible to
   rename or take 'Access of components that could disappear due to an
   assignment to the whole object.]}
 @end{Reason}
@@ -1608,7 +1621,9 @@ and are therefore technically classes
 since they are uninteresting).
 We don't want this rule to apply to @i{those} classes.
 
-@lquotes@;Limited@rquotes@; is not a @lquotes@;interesting@rquotes@; class, but @lquotes@;nonlimited@rquotes@; is;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+@lquotes@;Limited@rquotes@; is not @Chg{Version=[2],New=[a],Old=[an]}
+@lquotes@;interesting@rquotes@; class, but @lquotes@;nonlimited@rquotes@; is;
 it is legal to pass a nonlimited type to a limited formal type,
 but not the other way around.
 The reserved word @nt{limited} really represents a class containing
@@ -1856,8 +1871,8 @@ the actual can be either definite or indefinite.
   to write a correct generic for a formal access type without knowing this
   property. Many typical algorithms and techniques will not work for a
   subtype that excludes null (setting an unused component to @key{null},
-  default-initialized objects, and so on). We want this sort of requirement be
-  reflected in the contract of the generic.]}
+  default-initialized objects, and so on). We want this sort of requirement to
+  be reflected in the contract of the generic.]}
 
 @end{Reason}
 
@@ -1971,12 +1986,14 @@ the following attribute is defined:
     to S is definite; otherwise it yields False. The value of this
     attribute is of the predefined type Boolean.]}
 @begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 Whether an actual subtype is definite or indefinite may
 have a major effect on the algorithm used in a generic.
 For example, in a generic I/O package, whether to use fixed-length or
 variable-length records could depend on whether the actual is
 definite or indefinite.
-This attribute is essentially a replacement for the Constrained attribute
+This attribute is essentially a replacement for the Constrained
+attribute@Chg{Version=[2],New=[,],Old=[]}
 which is now considered obsolete.
 @end{Discussion}
 @end{Description}
@@ -2026,7 +2043,7 @@ of a generic formal tagged type with unknown discriminants is intrinsic.]}
 primitive of T with no controlling
 formal parameters, the context of the call provides the controlling
 tag value for the dispatch. If no tag is provided by context,
-Program_Error is raised rather than resorting to a non-dispatching
+Program_Error is raised rather than resorting to a nondispatching
 call. For example:]}
 
 @begin{Example}
@@ -2120,7 +2137,7 @@ run-time check to a compile-time check.
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0038],ARef=[AI95-00202-01]}
-  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected wording define the
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected wording to define the
   operations that are inherited when the ancestor of a formal type is itself
   a formal type to avoid anomalies.]}
 
@@ -2134,7 +2151,7 @@ run-time check to a compile-time check.
   exclude null.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00233-01]}
-  @ChgAdded{Version=[2],Text=[The wording for the declaration on implicit
+  @ChgAdded{Version=[2],Text=[The wording for the declaration of implicit
   operations is corrected to be consistent with @RefSecNum{Private Operations}
   as modified by Corrigendum 1.]}
 @end{DiffWord95}
@@ -2308,7 +2325,7 @@ access-to-variable type.
 access-to-constant type cannot be allowed. If it were allowed, it would
 be possible to create an access-to-variable value designating a constant.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
 @ChgAdded{Version=[2],Text=[We require that the @lquotes@;excludes null@rquotes
 property match, because it would be difficult to write a correct generic for a
 formal access type without knowing this property. Many typical algorithms and
@@ -2512,7 +2529,7 @@ dispatching operation that doesn't correspond to a slot in the tag of the
 controlling type, which would be a new concept. Finally, additional rules
 would be needed to define the meaning of a dispatching null procedure (for
 instance, the convention of such a subprogram should be intrinsic, but that's
-not what the language says.) It doesn't seem worth the effort.]}
+not what the language says). It doesn't seem worth the effort.]}
 @end{Reason}
 @end{SyntaxText}
 
@@ -2583,31 +2600,30 @@ a @nt{formal_subprogram_declaration} that has an explicit @nt{null_exclusion}:]}
 
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
-@ChgAdded{Version=[2],Text=[If a formal parameter of an
+@ChgAdded{Version=[2],Text=[If a formal parameter of a
 @nt{formal_@!abstract_@!subprogram_@!declaration} is of a
-specific tagged type @i<T> or of an anonymous access designating a specific tagged
-type @i<T>, @i<T> is called a @i<controlling type> of the
+specific tagged type @i<T> or of an anonymous access type designating a
+specific tagged type @i<T>, @i<T> is called a @i<controlling type> of the
 @nt{formal_@!abstract_@!subprogram_@!declaration}. Similarly, if the result
-of an @nt{formal_@!abstract_@!subprogram_@!declaration} for a function is of
-a specific tagged
-type @i<T> or of an anonymous access designating a specific tagged type @i<T>,
-@i<T> is
-called a controlling type of
+of a @nt{formal_@!abstract_@!subprogram_@!declaration} for a function is of
+a specific tagged type @i<T> or of an anonymous access type designating a
+specific tagged type @i<T>, @i<T> is called a controlling type of
 the @nt{formal_@!abstract_@!subprogram_@!declaration}. A
 @nt{formal_@!abstract_@!subprogram_@!declaration} shall have exactly
 one controlling type.
 @Defn2{Term=[controlling type],Sec=[of a @nt{formal_abstract_subprogram_declaration}]}]}
 
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The specific tagged type could be any of
   a formal tagged private type,
-  a formal derived type, or a normal tagged type. While the last case doesn't
+  a formal derived type, a formal interface type,
+  or a normal tagged type. While the last case doesn't
   seem to be very useful, there isn't any good reason for disallowing it.
   This rule ensures that the operation is a dispatching operation of some
   type, and that we unambiguously know what that type is.]}
 
-  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We informally call a subprogram declared by
   a @nt{formal_@!abstract_@!subprogram_@!declaration} an
   @i{abstract formal subprogram},
@@ -2623,7 +2639,7 @@ dispatching operation of the controlling type or of the actual type
 corresponding to the controlling type.]}
 
 @begin{Honest}
-  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We mean the controlling type of the
   @nt{formal_@!abstract_@!subprogram_@!declaration}, of course.
   Saying that gets unwieldy and redundant (so says at least one reviewer,
@@ -2631,7 +2647,7 @@ corresponding to the controlling type.]}
 @end{Honest}
 
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[This means that the actual is
   either a primitive operation of the
   controlling type, or an abstract formal subprogram. Also note that this
@@ -2640,52 +2656,52 @@ corresponding to the controlling type.]}
   formal subprogram eventually has to have an actual that is a primitive of
   some type). This could happen in a case like:]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} T(<>) @key{is tagged private};
    @key{with procedure} Foo (Obj : @key{in} T) @key{is abstract};
 @key{package} P ...]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} New_P @key{is new} P (Something'Class, Some_Proc);]}
 @end{Example}
 
-  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The instantiation here is always illegal,
   because Some_Proc could never be a primitive operation of Something'Class
   (there are no such operations). That's good, because we want calls to Foo
   always to be dispatching calls.]}
 
-  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[Since it is possible for a formal
   tagged type to be instantiated with a class-wide type, it is possible for the
   (real) controlling type to be class-wide in one unusual case:]}
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} NT(<>) @key{is new} T {with private};
    -- @RI[Presume that T has the following primitive operation:]
    -- @key{with procedure} Bar (Obj : @key{in} T);
 @key{package} Gr ...]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package body} Gr @key{is}
    @key{package} New_P2 @key{is new} P (NT, Foo => Bar);]}
 @key{end} Gr;]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} New_Gr @key{is new} Gr (Something'Class);]}
 @end{Example}
 
-  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The instantiation of New_P2 is legal, since
   Bar is a dispatching operation of the actual type of the controlling type
   of the abstract formal subprogram Foo. This is not a problem, since the
   rules given in @RefSecNum{Formal Private and Derived Types} explain how
   this routine dispatches even though its parameter is class-wide.]}
 
-  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Note that this legality rule never needs to be
   rechecked in an instance (in which an instantiation is nested). The rule
   only talks about the actual type of the instantiation; it does not require
@@ -2695,7 +2711,6 @@ corresponding to the controlling type.]}
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 A @nt{formal_subprogram_declaration} declares a generic formal subprogram.
 The types of the formal parameters and result, if any, of
 the formal subprogram are
@@ -2714,8 +2729,8 @@ and calling convention
 from the original profile of the actual entity,
 while taking the formal parameter
 @nt{name}s and @nt{default_@!expression}s from the profile given in the
-@nt{formal_@!subprogram_@!declaration}.@Chg{Version=[2],New=[],Old=[ The
-view is a function or procedure, never an entry.]}
+@nt{formal_@!subprogram_@!declaration}. The
+view is a function or procedure, never an entry.
 @begin{Discussion}
 This rule is intended to be the same as the one for
 renamings-as-declarations, where the @nt{formal_subprogram_declaration}
@@ -2804,8 +2819,7 @@ convention Intrinsic (see @RefSecNum{Conformance Rules}).]}
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[This is an implicitly declared subprogram,
-so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.
-*** This note appears to be wrong for @nt{formal_abstract_subprogram_declaration}s.***]}
+so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
 @end{TheProof}
 
 @end{Notes}
@@ -2854,10 +2868,6 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.
 @end{Extend95}
 
 @begin{Diffword95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-  @ChgAdded{Version=[2],Text=[Formal procedures can be used as entries;
-  removed wording that said otherwise.]}
-
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
   @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
 @end{Diffword95}
@@ -2919,9 +2929,10 @@ If the @nt<formal_package_actual_part> is (<>)@Chg{Version=[2],
 New=[ or (@key{others} => <>)],Old=[]},
 @Redundant[then the actual may be any instance of the template]; otherwise,
 @Chg{Version=[2],New=[certain of the actual parameters],
-Old=[each actual parameter ]}
+Old=[each actual parameter]}
 of the actual instance shall match the corresponding
-actual parameter of the formal package@Chg{Version=[2],New=[, determined],
+actual @Chg{Version=[2],New=[parameters],Old=[parameter]}
+of the formal package@Chg{Version=[2],New=[, determined],
 Old=[ @Redundant[(whether the
 actual parameter is given explicitly or by default)],]} as follows:
 
@@ -2934,7 +2945,7 @@ then only the actual parameters specified explicitly with
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00317-01]}
 @ChgAdded{Version=[2],Text=[Otherwise, all actual parameters shall
-match@Redundant[, whether the actual parameter is given explicitly
+match@Redundant[, whether any actual parameter is given explicitly
 or by default].]}
 @end{Itemize}
 
@@ -2944,7 +2955,9 @@ actual parameters between the actual instance and the formal package
 are as follows:]}
 
 @begin{Itemize}
-For a formal object of mode @key[in] the actuals match if they are
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
+For a formal object of mode @key[in]@Chg{Version=[2],New=[,],Old=[]} the
+actuals match if they are
 static expressions with the same value, or if they statically denote
 the same constant,
 or if they are both the literal @key[null].
@@ -2988,11 +3001,15 @@ it also includes the @nt{generic_@!formal_@!part} of the template
 for]} the formal package.
 
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
 If the @nt<formal_package_actual_part> is (<>),
 then the declarations that occur immediately within the
 @nt<generic_formal_part> of the template for the formal package
 are visible outside the formal package,
-and can be denoted by expanded names outside the formal package.
+and can be denoted by expanded names outside the formal
+package.@Chg{Version=[2],New=[If only some of the actual parameters are
+given by <>, then the declaration corresponding to those parameters (but
+not the others) are made visible.],Old=[]}
 @end{Ramification}
 @begin{Reason}
 We always want either the actuals

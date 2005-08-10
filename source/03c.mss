@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:50 $}
+@Comment{$Date: 2005/08/10 05:13:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1724,7 +1724,7 @@ The concept of dispatching operations is new.
   dispatching operations have all controlling access parameters have subtypes
   that exclude null. (Since Ada 95 didn't have the notion of access subtypes
   that exclude null, it had no such rule.) This rule will require the addition
-  of an explicit @key{not null} on non-dispatching operations that are later
+  of an explicit @key{not null} on nondispatching operations that are later
   renamed to be dispatching, or on a generic that is used to define a
   dispatching operation.]}
 @end{Incompatible95}
@@ -2395,23 +2395,6 @@ type, a protected type, or a synchronized interface.],Old=[]}
    require the kind of the actual interface to match the kind of the formal
    interface (see @RefSecNum{Formal Interface Types}).]}
 @end{Reason}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[For an interface type declared in a visible part, a
-primitive subprogram shall not be declared in the private part.],Old=[]}
-  @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[A dispatching call to a primitive of an interface
-   type will execute the body of a corresponding routine associated with the
-   specific type of the controlling operand. Without this restriction, it is
-   possible that the specific type might provide no such routine. It would be
-   OK to follow the example of the rules in @RefSecNum{Abstract Types and Subprograms}
-   and allow this in the case where the subprogram declared in the private part
-   @lquotes@;is overriding an abstract subprogram implicitly declared in the
-   visible part@rquotes, but this doesn't seem to be worth the bother because
-   this could only be used to override an abstract procedure with a
-   null procedure.]}
-  @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[In addition to the places where @LegalityTitle

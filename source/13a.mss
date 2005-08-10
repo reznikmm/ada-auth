@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:10 $}
+@Comment{$Date: 2005/08/10 05:13:59 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -210,7 +210,7 @@ New=[, the additional bits are padding bits.],Old=[.
 object, rather than being gaps between objects,
 if these bits]} are normally read and updated@Chg{Version=[2],New=[ along
 with the others. For a
-composite object padding bits might not be read or updated in any given
+composite object, padding bits might not be read or updated in any given
 composite operation, depending on the implementation],Old=[]}.
 
 @begin{Honest}
@@ -777,10 +777,10 @@ is qualified as follows:
 be supported.]}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[A confirming representation item may not be
+  @ChgAdded{Version=[2],Text=[A confirming representation item might not be
   possible for some entities. For instance, consider an unconstrained array.
-  The size of such a type is implementation-defined, and may not actually
-  be a representable value, or may not be static.]}
+  The size of such a type is implementation-defined, and might not actually
+  be a representable value, or might not be static.]}
 @end{Honest}
 An implementation need not support representation items containing
 nonstatic expressions,
@@ -845,9 +845,9 @@ want to make sure @Chg{New=[it's],Old=[its]} feasible.)
 @end{Reason}
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
-@Chg{Version=[2],New=[We want subprograms to able to assume the properties of
-the types of their parameters inside of subprograms. While many objects can be
-copied to allow this
+@Chg{Version=[2],New=[We want subprograms to be able to assume the properties
+of the types of their parameters inside of subprograms. While many objects
+can be copied to allow this
 (and thus do not need limitations), aliased or by-reference objects cannot
 be copied (their memory location is part of their identity). Thus,],
 Old=[Note that]}
@@ -876,10 +876,17 @@ would have been chosen by default.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Unlike elementary objects, there is no
-  requirement that all bits participate in operations. Thus, as long as the
-  object is the same or larger in size than that expected by the access type,
-  all is well.]}
+  requirement that all bits of a composite object participate in operations.
+  Thus, as long as the object is the same or larger in size than that expected
+  by the access type, all is well.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This rule presumes that the implementation
+  allocates an object of a size specified to be larger than the default size in
+  such a way that access of the default size suffice to correctly read and
+  write the value of the object.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
 @ChgAdded{Version=[2],Text=[An implementation need not support a nonconfirming
@@ -988,7 +995,7 @@ Some of the more stringent requirements are moved to
   renamed to @nt{aspect_clause}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01],ARef=[AI95-00326-01]}
-  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Add wording to say that the
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to say that the
   partial and full views have the same operational and representation aspects.
   Ada 2005 extends this to cover all views, including the incomplete view.]}
 
@@ -1062,9 +1069,9 @@ a @nt{pragma} Pack.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[If a packed type has a component which is not of a
-by-reference type and has no aliased part then such a component need not be
-aligned according to the Alignment of the component's subtype; in particular it
+@ChgAdded{Version=[2],Text=[If a packed type has a component, which is not of a
+by-reference type and has no aliased part, then such a component need not be
+aligned according to the Alignment of its subtype; in particular it
 need not be allocated on a storage element boundary.]}
 @Comment{No "should" here; thus no ImplAdvice entry. This really qualifies the
 item above}
@@ -1561,7 +1568,8 @@ N-storage-element boundary.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
-@NoPrefix@PDefn2{Term=[specifiable], Sec=(of Alignment for first subtypes and objects)}
+@NoPrefix@Chg{Version=[2],New=[@PDefn2{Term=[specifiable], Sec=(of Alignment for objects)}],
+Old=[@PDefn2{Term=[specifiable], Sec=(of Alignment for first subtypes and objects)}]}
 @Defn{Alignment clause}
 Alignment may be specified for@Chg{Version=[2],New=[],Old=[ first subtypes and]}
 @Redundant[stand-alone] objects via an @nt{attribute_@!definition_@!clause};
@@ -1593,6 +1601,15 @@ Text=[For @PrefixType{every subtype S}:]}
   @ChgAdded{Version=[2],NoPrefix=[T], Text=[For an object X of subtype S,
   if S'Alignment is not zero, then X'Alignment is a nonzero integral multiple
   of S'Alignment unless specified otherwise by a representation item.]}]}@Comment{End S'Alignment}
+
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
+  @ChgAdded{Version=[2],NoPrefix=[T], Text=[@PDefn2{Term=[specifiable], Sec=(of Alignment for first subtypes)}
+  @Defn{Alignment clause}
+  Alignment may be specified for first subtypes via an
+  @nt{attribute_@!definition_@!clause};
+  the expression of such a clause shall be static, and its value
+  nonnegative.]}
+
 @end{Description}
 
 @end{StaticSem}
@@ -1685,7 +1702,7 @@ subtype, subject to the following:]}
 @ChgAdded{Version=[2],Text=[An implementation need not support Alignments
 specified for objects of a by-reference type or for objects of types containing
 aliased subcomponents if the specified Alignment is not a multiple of the
-Alignment of the object's subtype.]}
+Alignment of the subtype of the object.]}
 @end{Itemize}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The recommended level of support for the Alignment attribute should be
@@ -2587,14 +2604,14 @@ except for certain explicit exceptions.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00051-01],ARef=[AI95-00291-01]}
   @ChgAdded{Version=[2],Text=[Adjusted the Recommended Level of Support for
-  Alignment to eliminate nonsense requirements and to insure that useful
+  Alignment to eliminate nonsense requirements and to ensure that useful
   capabilities are required.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00051-01],ARef=[AI95-00291-01]}
   @ChgAdded{Version=[2],Text=[Adjusted the Recommended Level of Support for
-  Size to eliminate nonsense requirements and to insure that useful
+  Size to eliminate nonsense requirements and to ensure that useful
   capabilities are required. Also eliminated any dependence on whether an
-  aspect was specified (a confirming rep. item should not affect the
+  aspect was specified (a confirming representation item should not affect the
   semantics).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
@@ -2610,7 +2627,7 @@ except for certain explicit exceptions.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
   @ChgAdded{Version=[2],Text=[Removed recommended level of support rules about
-  types with by-reference and aliased parts, because these are now blanket
+  types with by-reference and aliased parts, because there are now blanket
   rules covering all recommended level of support rules.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
@@ -2976,18 +2993,6 @@ values of the @nt{position}, @nt{first_bit},
 and @nt{last_bit} expressions
 after normalizing those values so that
 @nt{first_bit} is less than Storage_Unit.]}
-@begin{Ramification}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00133-01]}
-@ChgDeleted{Version=[2],Text=[For example,
-if Storage_Unit is 8, then
-@lquotes@;C @key[at] 0 @key[range] 24..31;@rquotes@;
-defines C'Position = 3, C'First_Bit = 0, and C'Last_Bit = 7.
-This is true of machines with either bit ordering.]}
-
-A @nt{component_clause} also determines the value of the Size
-attribute of the component,
-since this attribute is related to First_Bit and Last_Bit.
-@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
 @ChgAdded{Version=[2],Text=[If the default bit ordering applies to the type,
@@ -3005,7 +3010,7 @@ applies to the type then the layout is determined as follows:]}
 directly specify the position and size of the corresponding component;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[for other @nt{component_clause}s, all the
+@ChgAdded{Version=[2],Text=[for other @nt{component_clause}s, all of the
 components having the same value of @nt{position} are considered to be part of
 a single machine scalar, located at that @nt{position}; this machine scalar
 has a size which is the smallest machine scalar size larger than the largest
@@ -3013,6 +3018,20 @@ has a size which is the smallest machine scalar size larger than the largest
 @nt{first_bit} and @nt{last_bit} of each @nt{component_clause} are then
 interpreted as bit offsets in this machine scalar.]}
 @end{Itemize}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00133-01]}
+@ChgNote{We want the header title to remain, so we use @Chg instead if @ChgDeleted.}
+@Chg{Version=[2],New=[],Old=[For example,
+if Storage_Unit is 8, then
+@lquotes@;C @key[at] 0 @key[range] 24..31;@rquotes@;
+defines C'Position = 3, C'First_Bit = 0, and C'Last_Bit = 7.
+This is true of machines with either bit ordering.]}
+
+A @nt{component_clause} also determines the value of the Size
+attribute of the component,
+since this attribute is related to First_Bit and Last_Bit.
+@end{Ramification}
 
 @Redundant[A @nt{record_representation_clause} for a record extension
 does not override the layout of the parent part;]
@@ -3069,7 +3088,7 @@ The recommended level of support for @nt{record_representation_clause}s is:
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
 @ChgAdded{Version=[2],Text=[An implementation should support machine scalars
-that correspond to all the integer, floating point, and address formats
+that correspond to all of  the integer, floating point, and address formats
 supported by the machine.]}
 
 An implementation should support storage places that can be extracted
@@ -3149,7 +3168,7 @@ much dope in a protected type @em entry queues,
 bit maps for barrier values, etc.
 In order to control the representation of the user-defined components, simply
 declare a record type, give it a
-@nt{@Chg{New=[record_representation_clause],Old=[representation_clause]}},
+@nt{@Chg{New=[record_@!representation_@!clause],Old=[representation_clause]}},
 and give the protected type one component whose type is the record type.
 Alternatively, if the protected object is protecting something like a
 device register, it makes more sense to keep the thing being
@@ -3227,11 +3246,11 @@ We have corrected that oversight.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  The meaning of a @nt{record_representation_clause} for the non-default
+  The meaning of a @nt{record_representation_clause} for the nondefault
   bit order is now clearly defined. Thus, such clauses can be portably
   written. In order to do that though, the equivalence of bit 1 in word 1 to
   bit 9 in word 0 (for a machine with Storage_Unit = 8) had to be dropped for
-  the non-default bit order. Any @nt{record_representation_clause}s which
+  the nondefault bit order. Any @nt{record_representation_clause}s which
   depends on that equivalence will break (although such code would imply a
   non-contiguous representation for a component, and it seems unlikely that
   compilers were supporting that anyway).]}
@@ -3351,10 +3370,10 @@ of its storage place attributes.]}]}
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  The meaning of the storage place attribute for the non-default
+  The meaning of the storage place attributes for the nondefault
   bit order is now clearly defined, and can be different than that given by
   strictly following the Ada 95 wording. Any code which depends on the
-  Ada 95 values for a type using the non-default bit order where they are
+  Ada 95 values for a type using the nondefault bit order where they are
   different will break.]}
 @end{Incompatible95}
 
@@ -3373,10 +3392,12 @@ It is not intended to fully support data interoperability across
 different machines,
 although it can be used for that purpose in some situations.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 We can't require all implementations on a given machine to use the same
 bit ordering by default;
-if the user cares, a @nt{pragma} Bit_Order can be used to force all
-implementations to use the same bit ordering.
+if the user cares, a @Chg{Version=[2],New=[],Old=[@nt{pragma} ]}Bit_Order
+@Chg{Version=[2],New=[@nt{attribute_definition_clause} ],Old=[]}can be used
+to force all implementations to use the same bit ordering.
 @end{Reason}
 @end{Intro}
 
@@ -3468,13 +3489,13 @@ whose Ada 83 bit order did not correspond to the required Ada 95
 default bit order), because
 implementations]} are required to support storage positions that cross
 storage element boundaries when Word_Size > Storage_Unit@Chg{Version=[2],
-New=[but the definition of the storage place attributes for the non-default
-bit order insures that such],Old=[. Such]} storage positions will @Chg{Version=[2],
+New=[ but the definition of the storage place attributes for the nondefault
+bit order ensures that such],Old=[. Such]} storage positions will @Chg{Version=[2],
 New=[not ],Old=[]}be split into two or three pieces@Chg{Version=[2],New=[. Thus,
-there is no significant implementation burden to supporting the non-default
-bit order],Old=[ if the
-nondefault bit ordering is used, which could be onerous to support.
-However, if Word_Size = Storage_Unit,
+there is no significant implementation burden to supporting the nondefault
+bit order, given that the set of machine scalars is implementation-defined],
+Old=[ if the nondefault bit ordering is used, which could be onerous to
+support. However, if Word_Size = Storage_Unit,
 there might not be a natural bit ordering,
 but the splitting problem need not occur]}.
 @end{Ramification}
@@ -3499,7 +3520,7 @@ The Bit_Order attribute is new to Ada 95.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
   @ChgAdded{Version=[2],Text=[We now suggest that all implementations
-  support the non-default bit order.]}
+  support the nondefault bit order.]}
 @end{Diffword95}
 
 

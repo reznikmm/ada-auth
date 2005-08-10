@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:56 $}
+@Comment{$Date: 2005/08/10 05:14:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @LabeledClause{The Package System}
 
@@ -198,9 +198,9 @@ and to declare uninitialized address variables.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00221-01]}
-See @RefSecNum{Bit Ordering} for an explanation of Bit_Order and
-Default_Bit_Order.@Chg{Version=[2],New=[ Default_Bit_Order shall
-be a static constant.],Old=[]}
+@Chg{Version=[2],New=[ Default_Bit_Order shall
+be a static constant. ],Old=[]}See @RefSecNum{Bit Ordering} for an
+explanation of Bit_Order and Default_Bit_Order.
 @end{StaticSem}
 
 @begin{ImplPerm}
@@ -299,17 +299,15 @@ have been moved to the Real Time Annex.
   type Address, so that it can be used to declare default-initialized objects
   in preelaborated units.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00221-01]}
+  @ChgAdded{Version=[2],Text=[Default_Bit_Order is now a static
+  constant.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
   @ChgAdded{Version=[2],Text=[Package System is now Pure, so it can be
   portably used in more places. (Ada 95 allowed it to be Pure, but did not
   require that.)]}
 @end{Extend95}
-
-@begin{DiffWord95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00221-01]}
-  @ChgAdded{Version=[2],Text=[Clarified that Default_Bit_Order is a static
-  constant.]}
-@end{DiffWord95}
 
 
 @LabeledSubClause{The Package System.Storage_Elements}
@@ -492,6 +490,7 @@ converts from that record type to type Address.
 
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 The To_Pointer and To_Address subprograms
 convert back and forth between
 values of types Object_Pointer and Address.
@@ -501,13 +500,16 @@ To_Pointer(Null_Address) returns @key[null].
 @PDefn{unspecified}
 For other addresses,
 the behavior is unspecified.
-To_Address(@key[null]) returns Null_Address (for @key[null] of the
-appropriate type).
+To_Address(@key[null]) returns Null_Address@Chg{Version=[2],New=[],Old=[ (for
+@key[null] of the appropriate type)]}.
 To_Address(Y), where Y /= @key[null], returns Y.@key[all]'Address.
 @begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The programmer should ensure that
 the address passed to To_Pointer is either Null_Address,
-or the address of an object of type Object.
+or the address of an object of type Object. @Chg{Version=[2],New=[(If Object is not
+a not by-reference type, the object ought to be aliased; recall that the
+Address attribute is not required to provide a useful result other objects.)],Old=[]}
 Otherwise, the behavior of the program is unspecified;
 it might raise an exception or crash, for example.
 @end{Discussion}
@@ -742,7 +744,7 @@ an object of the target subtype.
 Otherwise, @Chg{Version=[2],New=[if the result type is scalar, the result
 of the function is implementation defined, and can have an invalid
 representation (see @RefSecNum{Data Validity}).
-If the result type is non-scalar, ],Old=[]}the effect is implementation defined;
+If the result type is nonscalar, ],Old=[]}the effect is implementation defined;
 in particular, the result can be abnormal
 (see @RefSecNum{Data Validity}).
 
@@ -751,7 +753,7 @@ of unchecked conversion for instances with scalar result types whose
 result is not defined by the language.],Old=[]}]}
 @ChgImplDef{Version=[2],Kind=[Revised],Text=[The effect of unchecked
 conversion@Chg{Version=[2],New=[ for instances
-with non-scalar result types whose effect is not defined by
+with nonscalar result types whose effect is not defined by
 the language],Old=[]}.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00426-01]}
@@ -767,10 +769,10 @@ the language],Old=[]}.]}
   Whenever unchecked conversions are used, it is the programmer's
   responsibility to ensure that these conversions maintain the properties
   that are guaranteed by the language for objects of the target type.
-  @Chg{Version=[2],New=[For non-scalar types, this],Old=[This]} requires the
+  @Chg{Version=[2],New=[For nonscalar types, this],Old=[This]} requires the
   user to understand the underlying run-time model of  the implementation.
   The execution of a program that violates these properties by means of
-  unchecked conversions @Chg{Version=[2],New=[returning a non-scalar type ],
+  unchecked conversions @Chg{Version=[2],New=[returning a nonscalar type ],
   Old=[]}is erroneous.@Chg{Version=[2],New=[ Properties of scalar types can
   be checked by using the Valid attribute (see @RefSecNum{The Valid Attribute});
   programs can avoid violating properties of the type (and erroneous
@@ -912,7 +914,7 @@ does not represent a value of the parameter's subtype.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00426-01]}
 @ChgAdded{Version=[2],Text=[The object is the return object of a function call
-of a non-scalar type, and the function is an imported function, an instance of
+of a nonscalar type, and the function is an imported function, an instance of
 Unchecked_Conversion, or the stream attribute T'Input, if after return from the
 function the representation of the return object does not represent a value of
 the function's subtype.]}
@@ -960,10 +962,10 @@ or to evaluate a @nt{prefix} that denotes an abnormal object.
 @Comment{There appears to be no justification for this statement; everything
 can become abnormal. We leave the prefix for the next paragraph, so we use
 Chg rather than ChgDeleted.}
-@Chg{Version=[2],New=[Although a composite object with no
+@Chg{Version=[2],New=[],Old=[Although a composite object with no
 subcomponents of an access type, and with static constraints all the way down
 cannot become abnormal, a scalar subcomponent of such an object can become
-abnormal.],Old=[]}
+abnormal.]}
 
 The @key[in out] or @key[out] parameter case does not apply to scalars;
 bad scalars are merely invalid representations,
@@ -1056,10 +1058,12 @@ target of the assignment, then any use of the target object prior to a further
 assignment to the target object, other than as the @nt{prefix} of a Valid
 attribute reference, is erroneous],Old=[]}.
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01]}
 In a typical implementation, every bit pattern that fits in an object of
-an integer subtype will represent a value of the type,
-if not of the subtype.
-However, for an enumeration or floating point type,
+@Chg{Version=[2],New=[a signed],Old=[an]} integer subtype will represent a
+value of the type, if not of the subtype.
+However, for an enumeration or floating point type,@Chg{Version=[2],New=[ as
+well as some modular types,],Old=[]}
 there are typically bit patterns that do not represent any
 value of the type.
 In such cases, the implementation ought to define the semantics of
@@ -1119,7 +1123,7 @@ the object is used is so that the invalid representation can be tested
 for validity using the Valid attribute (see @RefSecNum{The Valid Attribute})
 without causing execution to become erroneous. Note that this delay does not
 imply an exception will not be raised; an implementation could treat both
-conversions in the example the same and raise Constraint_Error.]}
+conversions in the example in the same way and raise Constraint_Error.]}
 @end{Ramification}
 @begin{ImplNote}
   If an implementation wants to have a @lquotes@;friendly@rquotes@; mode, it
@@ -1197,8 +1201,8 @@ to assign to the object as a whole.
   using the Valid attribute to test such a value is not erroneous.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
-  @ChgAdded{Version=[2],Text=[Better defined the objects that can become
-  abnormal; made sure that all of the possibilities are included.]}
+  @ChgAdded{Version=[2],Text=[Clarified the definition of objects that can
+  become abnormal; made sure that all of the possibilities are included.]}
 @end{DiffWord95}
 
 
@@ -1358,14 +1362,15 @@ There is no Unchecked_Access attribute for subprograms.
   Old=[]}@lquotes@;downward closures@rquotes@;,
   where an access value designating a more nested subprogram is passed
   to a less nested subprogram.@Chg{Version=[2],New=[ (Anonymous
-  access-to-subprogram parameters provide a structured
-  @lquotes@;downward closures@rquotes@;._],Old=[]}
+  access-to-subprogram parameters provide structured
+  @lquotes@;downward closures@rquotes@;.)],Old=[]}
   This requires some means of reconstructing the global environment for
   the more nested subprogram,
   so that it can do up-level references to objects.
   The two methods of implementing up-level references are displays and
   static links.
-  If downward closures were supported,
+  If @Chg{Version=[2],New=[unstructured ],Old=[]}downward closures were
+  supported,
   each access-to-subprogram value would have to carry the static link
   or display with it.
   @Chg{Version=[2],New=[We don't want to require the space and time
@@ -3838,13 +3843,16 @@ its dispatching operations.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[The declaration of a specific descendant of an
-interface type freezes the interface type.]}
+@ChgAdded{Version=[2],Text=[A @nt{derived_type_definition},
+@nt{interface_type_definition}, task declaration, or
+protected declaration causes freezing of any progenitor types.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[This rules has the same purpose as the one
 above: ensuring that all descendants of an interface tagged type implement all
-of its dispatching operations.]}
+of its dispatching operations. As with the previous rule, a private extension
+does not freeze its progenitors; the full type declaration (which must have the
+same progenitors) will do that.]}
 @end{Reason}
 @end{Itemize}
 
