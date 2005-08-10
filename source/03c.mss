@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/08/08 05:27:25 $}
+@Comment{$Date: 2005/08/09 05:47:50 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -682,16 +682,17 @@ required by streams for T'Class'Input
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the internal tag provided to an instance of
-Tags.Generic_Dispatching_Constructor identifies a specific type whose
-tag has not been created (see @RefSecNum{Freezing Rules}), or does not exist
-in the partition at the time of the call, execution is erroneous.]}
+Tags.Generic_Dispatching_Constructor identifies a type that is not
+library-level and whose tag has not been created
+(see @RefSecNum{Freezing Rules}), or does not exist in the partition at the
+time of the call, execution is erroneous.]}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[For a library-level type, this shouldn't be
-possible presuming that the tag value came from the current execution
-of the partition. T'Tag freezes the type (and thus creates the tag), and
-Internal_Tag and Descendant_Tag
+@ChgAdded{Version=[2],Text=[We exclude tags of library-level types from
+from the current execution of the partition, because misuse of such tags
+should always be detected. T'Tag freezes the type (and thus creates the tag),
+and Internal_Tag and Descendant_Tag
 cannot return the tag of a library-level type that has not been created.
 All ancestors of a tagged type must be frozen no later than the (full)
 declaration of a type that uses them, so Parent_Tag and Interface_Ancestor_Tags

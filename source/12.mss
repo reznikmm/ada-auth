@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:26 $}
+@Comment{$Date: 2005/08/09 05:47:55 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1929,20 +1929,19 @@ are implicitly declared at the earliest place, if any,
 @Chg{Version=[2],New=[immediately within the declarative region in which],
 Old=[within the immediate scope of]} the formal
 type@Chg{Version=[2],New=[ is declared],Old=[]}, where the corresponding
-primitive subprogram
-of the ancestor @Chg{Version=[2],New=[or progenitor ],Old=[]}is visible (see
-@RefSecNum{Private Operations}).
-In an instance, the copy of such an implicit declaration declares a view
-of the corresponding primitive subprogram of the ancestor@Chg{New=[ or
-progenitor of the formal derived type],Old=[]},
-even if this primitive has been overridden for the actual type.
-@Chg{New=[When the ancestor or progenitor of the formal derived type is
-itself a formal type, the copy of the implicit declaration declares a view of
-the corresponding copied operation of the ancestor or progenitor.],Old=[]}
-@Redundant[In the case of a formal private extension, however,
-the tag of the formal type is that of the actual type,
-so if the tag in a call is statically determined to be that of the formal type,
-the body executed will be that corresponding to the actual type.]
+primitive subprogram of the ancestor @Chg{Version=[2],New=[or progenitor
+],Old=[]}is visible (see @RefSecNum{Private Operations}). In an instance, the
+copy of such an implicit declaration declares a view of the corresponding
+primitive subprogram of the ancestor@Chg{New=[@Chg{Version=[2], New=[ or
+progenitor],Old=[]} of the formal derived type],Old=[]}, even if this primitive
+has been overridden for the actual type. @Chg{New=[When the
+ancestor@Chg{Version=[2], New=[ or progenitor],Old=[]} of the formal derived
+type is itself a formal type, the copy of the implicit declaration declares a
+view of the corresponding copied operation of the ancestor@Chg{Version=[2],
+New=[ or progenitor],Old=[]}.],Old=[]} @Redundant[In the case of a formal
+private extension, however, the tag of the formal type is that of the actual
+type, so if the tag in a call is statically determined to be that of the formal
+type, the body executed will be that corresponding to the actual type.]
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 The above rule defining the properties of primitive subprograms in an

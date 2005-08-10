@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2005/08/05 05:04:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2005/08/09 05:47:57 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/08/05 05:04:19 $}
+@Comment{$Date: 2005/08/09 05:47:57 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -16,8 +16,17 @@ collections of elements.]}
 @ChgAdded{Version=[2],Text=[A variety of sequence and associative containers are
 provided. Each container includes a @i{cursor} type. A cursor is a reference
 to an element within a container. Many operations on cursors are common to
-all of the containers.@PDefn2{Term=[cursor],Sec=[for a container]}
+all of the containers. A cursor referencing
+an element in a container is considered to be overlapping
+with the container object itself.@PDefn2{Term=[cursor],Sec=[for a container]}
 @Defn2{Term=[container],Sec=[cursor]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The last sentence is intended to clarify that
+  operations that just use a cursor are on the same footing as operations that
+  use a container in terms of the reentrancy rules of Annex A.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Within this clause we provide Implementation Advice

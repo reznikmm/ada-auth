@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/07/29 06:02:01 $}
+@Comment{$Date: 2005/08/09 05:47:54 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -900,16 +900,39 @@ declaration, except:
   the declaration is hidden from all visibility only
   until the reserved word @b(record);
 
-  For a @nt{package_declaration}, task declaration,
-  protected declaration, @nt{generic_@!package_@!declaration},
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00345-01]}
+  For a @nt{package_declaration}, @Chg{Version=[2],New=[],Old=[task declaration,
+  protected declaration, ]}@nt{generic_@!package_@!declaration},
   or @nt{subprogram_@!body}, the declaration is
-  hidden from all visibility only until the reserved word @b(is)
-  of the declaration.
-@begin{Ramification}
-We're talking about the @key{is} of the construct itself, here,
-not some random @key{is} that might appear in a
-@nt{generic_formal_part}.
-@end{Ramification}
+  hidden from all visibility only until the reserved word @key(is)
+  of the declaration@Chg{Version=[2],New=[;],Old=[.]}
+  @begin{Ramification}
+    We're talking about the @key{is} of the construct itself, here,
+    not some random @key{is} that might appear in a
+    @nt{generic_formal_part}.
+  @end{Ramification}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI-00345-01]}
+  @ChgAdded{Version=[2],Text=[For a task declaration or protected declaration,
+  the declaration is hidden from all visibility only
+  until the reserved word @key(with) of the declaration if there is one, or the
+  reserved word @key(is) of the declaration if there is no @key(with).]}
+
+  @begin{Honest}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[If there is neither a @key(with) nor @key(is),
+    then the exception does not apply and the name is hidden from all
+    visibility until the end of the declaration. This oddity was inherited
+    from Ada 95.]}
+  @end{Honest}
+  @begin{Reason}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[We need the @lquotes@key(with) or @key(is)@rquotes
+    rule so that the visibility within an @nt{interface_list} does not
+    vary by construct. That would make it harder to complete private extensions
+    and would complicate implementations.]}
+  @end{Reason}
+
 @end(InnerItemize)
 
 @PDefn2{Term=[hidden from all visibility], Sec=(for a declaration completed
@@ -1131,8 +1154,9 @@ where both components are visible. For instance:]}
 @key[end] A;],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@key[package] A @key[is]
-@key[package] @key[body] A @key[is]
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00114-01]}
+@Chg{New=[@Chg{Version=[2],New=[],Old=[@key[package] A @key[is]
+]}@key[package] @key[body] A @key[is]
    @key[package] @key[body] B @key[is]
       -- @RI{T.I becomes visible here.}
    @key[end] B;
@@ -1212,7 +1236,7 @@ instantiated. This is easier to understand with an example:]}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],NoPrefix=[T],Text=[The context clause for Bad is illegal
 as I1 has an implicit declaration of I1.G2 based on the generic child G1.G2,
-as well was the mention of the explicit child I1.G2. As in the previous cases,
+as well as the mention of the explicit child I1.G2. As in the previous cases,
 this is illegal only if the context clause makes both children visible; the
 explicit child can be mentioned as long as the generic child is not (and
 vice-versa).]}

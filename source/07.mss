@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/08/08 05:27:27 $}
+@Comment{$Date: 2005/08/09 05:47:53 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1512,12 +1512,25 @@ corresponding full declaration:
   then the full declaration is still allowed to impose a constraint.
   The constant itself will be constrained, like all constants;]
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
   If the deferred constant declaration
   includes the reserved word @key(aliased), then the
-  full declaration shall also.
+  full declaration shall also@Chg{Version=[2],New=[;],Old=[.]}
   @begin{Ramification}
-  On the other hand, the full constant can be aliased
-  even if the deferred constant is not.
+    On the other hand, the full constant can be aliased
+    even if the deferred constant is not.
+  @end{Ramification}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[If the subtype of the deferred constant
+  declaration excludes null, the subtype of the full declaration shall also
+  exclude null.]}
+  @begin{Ramification}
+    @ChgRef{Version=[2],Kind=[Added]}
+    @ChgAdded{Version=[2],Text=[On the other hand, the full constant can
+    exclude null even if the deferred constant does not. But that can only
+    happen for a @nt{subtype_indication}, as anonymous access types are
+    required to statically match (which includes any @nt{null_exclusion}).]}
   @end{Ramification}
 @end(itemize)
 
@@ -1636,6 +1649,12 @@ they are simply a special case of @nt<object_declaration>s.
   Deferred constants were enhanced to allow
   the use of anonymous access types in them.]}
 @end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[Added matching rules for subtypes that
+  exclude null.]}
+@end{DiffWord95}
 
 
 @LabeledClause{Limited Types}
@@ -1985,10 +2004,13 @@ structure of the type. They also implement the notion of an
 encapsulated data type where the only operations on the type are
 those given in the package specification.
 
-@NoPrefix@;The fact that the full view of File_Name is explicitly declared
-@key[limited] means that
-parameter passing and function return will always be by reference
+@NoPrefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+The fact that the full view of File_Name is explicitly declared
+@key[limited] means that parameter passing @Chg{Version=[2],New=[],
+Old=[and function return ]}will always be by reference@Chg{Version=[2],New=[
+and function results will always be built directly in the result object],Old=[]}
 (see @RefSecNum{Formal Parameter Modes} and @RefSecNum{Return Statements}).
+
 @end{Notes}
 
 @begin{Extend83}

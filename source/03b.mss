@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:02 $}
+@Comment{$Date: 2005/08/09 05:47:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @LabeledClause{Array Types}
 
@@ -1911,7 +1911,7 @@ in order to avoid unnecessary changes to existing compilers.
   of @RefSecNum{Object Declarations})],Old=[]},
   since one @nt{default_expression} cannot depend on the value of
   another one.
-  It also prevent circularities.
+  @Chg{Version=[2],New=[They],Old=[It]} also prevent circularities.
 @end{Reason}
 @begin{Ramification}
   Inherited discriminants are not allowed to be denoted,

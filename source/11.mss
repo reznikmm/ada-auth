@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:09 $}
+@Comment{$Date: 2005/08/09 05:47:55 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1746,7 +1746,7 @@ which was included in @nt{selected_component} in RM83.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00280-01]}
 @ChgAdded{Version=[2],Text=[Allocation_Check was added to support suppressing
-the new check on @nt{allocator}s (see @RefSecNum{Allocators}.]}
+the new check on @nt{allocator}s (see @RefSecNum{Allocators}).]}
 @end{Extend95}
 
 @begin{DiffWord95}

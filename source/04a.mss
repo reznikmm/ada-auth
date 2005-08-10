@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:04 $}
+@Comment{$Date: 2005/08/09 05:47:51 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1407,8 +1407,9 @@ Each @nt<record_component_association>@Chg{Version=[2],New=[ other than an
 one associated component, and each needed component
 shall be associated with exactly
 one @nt<record_@!component_@!association>.
-If a @nt<record_@!component_@!association> @Chg{Version=[2],New=[with an @nt{expression} ],Old=[]}has
-two or more associated components, all of them shall be of the same type.
+If a @nt<record_@!component_@!association> @Chg{Version=[2],New=[with an
+@nt{expression} ],Old=[]}has two or more associated components, all of them
+shall be of the same type.
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
   These rules apply to an association with an @key(others)
@@ -1420,7 +1421,7 @@ two or more associated components, all of them shall be of the same type.
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
   Without these rules, there would be no way to know what
   was the expected type for the @nt<expression> of the association.
-  @Chg{Version=[2],New=[Note that the some of the rules do not apply to <>
+  @Chg{Version=[2],New=[Note that some of the rules do not apply to <>
   associations, as we do not need to resolve anything. We allow @key{others}
   => <> to match no components as this is similar to array aggregates.
   That means that (@key{others} => <>) always represents a default-initialized

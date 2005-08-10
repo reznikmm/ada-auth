@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:11 $}
+@Comment{$Date: 2005/08/09 05:47:56 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @LabeledClause{The Package System}
 
@@ -1702,7 +1702,7 @@ allocates heap storage for a purpose other than the evaluation of an
 @nt{allocator}.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Any cases in which heap storage is dynamically allocated other than
-the evaluation of an @nt{allocator} should be documented.]}]}
+as part of the evaluation of an @nt{allocator} should be documented.]}]}
 @begin{Reason}
 This is @lquotes@;@ImplAdviceTitle@rquotes@; because the term @lquotes@;heap storage@rquotes@;
 is not formally definable;
@@ -1770,15 +1770,23 @@ the storage pool used for the outer @nt{allocator} should also be used for
 the coextension;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@ChgAdded{Version=[2],Text=[Otherwise, the storage pool should be created at
-the point of the @nt{allocator}, and be reclaimed when the allocated object
-becomes inaccessible.]}
+@ChgAdded{Version=[2],Text=[For access parameters and other access
+discriminants, the storage pool should be created at the point of the
+@nt{allocator}, and be reclaimed when the allocated object becomes
+inaccessible.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgAdded{Version=[2],Text=[Otherwise, a default storage pool should be
+create at the point where the anonymous access type is elaborated; such
+a storage pool need not support deallocation of individual objects.]}
 @end{Itemize}
 
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[Usually, a storage pool for an anonymous access type should be created
-at the point of an @nt{allocator} for the type, and be reclaimed when
-the designated object becomes inaccessible.]}]}
+Text=[Usually, a storage pool for an access discriminant or access parameter
+should be created at the point of an @nt{allocator}, and be reclaimed when
+the designated object becomes inaccessible. For other anonymous access types,
+the pool should be created at the where the type is elaborated and need not
+support deallocation of individual objects.]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
@@ -1794,7 +1802,7 @@ the designated object becomes inaccessible.]}]}
   This is similar to the way storage for @nt{aggregate}s is typically
   managed.
 
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
   @ChgAdded{Version=[2],Text=[For other sorts of anonymous access types, this
   implementation is not possible in general, as the accessibility of the
   anonymous access type is that of its declaration, while the @nt{allocator}
@@ -1962,8 +1970,7 @@ objects incorrectly by missing various cases.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added wording to clarify that an @nt{allocator}
   for a coextension nested inside an outer @nt{allocator} shares
-  the pool with the outer @nt{allocator}. (Why this is a good idea is unclear
-  to this writer.)]}
+  the pool with the outer @nt{allocator}.]}
 @end{DiffWord95}
 
 
@@ -1998,7 +2005,7 @@ S'Max_Size_In_Storage_Elements might be very large.
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
-  @ChgAdded{Version=[2],Text=[Corrected the wording so that an
+  @ChgAdded{Version=[2],Text=[Corrected the wording so that a
   fortune-telling compiler that can see the future execution of the
   program is not required.]}
 @end{DiffWord95}
@@ -2501,11 +2508,13 @@ provided that every execution of the partition would violate the restriction.]}
 @end{ImplPerm}
 
 @begin{Notes}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00347-01]}
 Restrictions intended to facilitate the construction of
 efficient tasking run-time systems are defined
 in @RefSecNum{Tasking Restrictions}.
-Safety- and security-related
-restrictions are defined in
+@Chg{Version=[2],New=[Restrictions intended for use when constructing
+high intergrity systems],Old=[Safety- and security-related
+restrictions]} are defined in
 @RefSecNum{High Integrity Restrictions}.
 
 An implementation has to enforce the restrictions in cases where
@@ -2686,7 +2695,7 @@ been transferred, or until the end of the stream is reached. If any elements
 are transferred, the],Old=[The]} index of the last stream element transferred is
 returned in Last. @Chg{Version=[2],New=[Otherwise, Item'First - 1 is returned
 in Last. ],Old=[]}Last is less than Item'Last only if the end of the stream is
-reached.
+reached.@Comment{This last sentence should be marked Redundant.}
 
 The Write operation appends Item to the specified stream.
 
@@ -2748,9 +2757,7 @@ Item'First is Stream_Element_Offset'First, Read will raise Constraint_Error.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added @nt{pragma} Preelaborable_Initialization to
-  type Address, so that it can be used to declare default-initialized objects
-  in preelaborated units.]}
+  Added @nt{pragma} Preelaborable_Initialization to type Root_Stream_Type.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -3146,7 +3153,7 @@ see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Input attribute of
 the specific type identified by the internal tag;
 returns that result.@Chg{Version=[2],New=[ If the specific type identified
-by the internal tag is not covered by T'Class or is abstract, Constraint_Error
+by the internal tag is not covered by @i<T>'Class or is abstract, Constraint_Error
 is raised.],Old=[]}>}@Comment{End S'Class'Input attribute}
 @end{Description}
 @EndPrefixType{}
@@ -3233,8 +3240,8 @@ The same rule applies to the result of the Input function.]}
   implementations of the stream-oriented attributes. The rules defining when
   a stream-oriented attribute is available (see below) determine when an
   attribute of a limited type is in fact well defined and usable. The rules are
-  complicated so that the attributes can be called in the maximum number of
-  cases. For instance, when the language provides a default implementation of
+  designed to maximize the number of cases in which the attributes are usable.
+  For instance, when the language provides a default implementation of
   an attribute for a limited type based on a specified attribute for the parent
   type, we want to be able to call that attribute.]}
 @end{Discussion}
@@ -3298,20 +3305,20 @@ is visible.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[A stream-oriented attribute for a subtype of a class-wide type T'Class is
-available at places where one of the following conditions is true:]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[A stream-oriented attribute for a subtype of a class-wide type
+@i<T>'Class is available at places where one of the following conditions is true:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i<T> is nonlimited; or]}
+@ChgAdded{Version=[2],Text=[@i<T> is nonlimited;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The attribute has been specified via an
+@ChgAdded{Version=[2],Text=[the attribute has been specified via an
 @nt{attribute_definition_clause}, and the @nt{attribute_definition_clause}
 is visible; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[where the corresponding attribute of @i<T> is
+@ChgAdded{Version=[2],Text=[the corresponding attribute of @i<T> is
 available, provided that if @i<T> has a partial view, the corresponding
 attribute is available at the end of the visible part where @i<T> is
 declared.]}
@@ -3320,7 +3327,7 @@ declared.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The rules are stricter for class-wide attributes
-  because (for the default implementation) we must insure that any specific
+  because (for the default implementation) we must ensure that any specific
   attribute that might ever be dispatched to is available. Because we require
   specification of attributes for extensions of limited parent types with
   available attributes, we can in fact know this. Otherwise, we would not be
@@ -3364,8 +3371,8 @@ the result of the Input function.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the internal tag returned by Descendant_Tag to T'Class'Input identifies a
-specific type whose tag has not been created, or does not exist in the
-partition at the time of the call, execution is erroneous.]}
+type that is not library-level and whose tag has not been created, or does not
+exist in the partition at the time of the call, execution is erroneous.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The definition of Descendant_Tag prevents such
@@ -3412,12 +3419,6 @@ pass bounds, discriminants, or tags.
 
 User-specified attributes of S'Class are not inherited by other
 class-wide types descended from S.
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
-@ChgAdded{Version=[2],Text=[If the prefix subtype S of function S'Class'Input
-is a library-level subtype, then reading a value of a type which has not yet
-been frozen with the S'Class'Input function will always raise Tag_Error;
-execution cannot be erroneous.]}
 @end{Notes}
 
 @begin{Examples}
@@ -3944,7 +3945,7 @@ the nominal subtype associated with the @nt{implicit_dereference} is frozen.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This rule insures that X.D freezes the same
+  @ChgAdded{Version=[2],Text=[This rule ensures that X.D freezes the same
   entities that X.@key{all}.D does. Note that an @nt{implicit_dereference} is
   neither a @nt{name} nor @nt{expression} by itself, so it isn't covered by
   other rules.]}
@@ -4216,7 +4217,7 @@ an entity should most certainly @i{not} be a freezing point for the entity.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
 @ChgAdded{Version=[2],Text=[The tag (see
 @RefSecNum{Tagged Types and Type Extensions}) of a tagged type T
-is created at the point where T is frozen.]}
+is created at the point where T is frozen.@PDefn2{Term=[creation],Sec=[of a tag]}]}
 @end{RunTime}
 
 @begin{Incompatible83}

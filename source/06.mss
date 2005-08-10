@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/08/08 05:27:27 $}
+@Comment{$Date: 2005/08/09 05:47:52 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1965,9 +1965,14 @@ a function body.],Old=[]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@ChgAdded{Version=[2],Text=[If the result subtype of a function is defined by a
-@nt{subtype_mark}, the @nt{return_subtype_indication} of an
-@nt{extended_return_statement} that applies to the function body shall be a
+@ChgAdded{Version=[2],Type=[Leading],Text=[For an
+@nt{extended_@!return_@!statement} that applies to a function body:]}
+
+@begin{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgAdded{Version=[2],Text=[If the result subtype of the function is defined by a
+@nt{subtype_mark}, the @nt{return_subtype_indication} shall be a
 @nt{subtype_indication}. The type of the @nt{subtype_indication} shall be the
 result type of the function. If the result subtype of the function is
 constrained, then the subtype defined by the @nt{subtype_indication} shall also
@@ -1983,6 +1988,14 @@ by an @nt{access_definition}, the @nt{return_subtype_indication} shall be an
 @nt{access_definition}. The subtype defined by the @nt{access_definition} shall
 statically match the result subtype of the function. The accessibility level of
 this anonymous access subtype is that of the result subtype.]}
+
+@end{Itemize}
+
+@begin{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For any return statement
+that applies to a function body:]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is limited,
@@ -2017,6 +2030,8 @@ statically deeper than that of the master that elaborated the function body.]}
   @nt{expression}.]}
 @end{Discussion}
 
+@end{Itemize}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -2039,7 +2054,7 @@ the return object is created and the converted value is assigned to
 the return object. Otherwise, the return object is created and initialized
 by default as for a stand-alone object of its nominal subtype (see
 @RefSecNum{Object Declarations}). If the nominal subtype is indefinite, the
-return object is constrained by its initial value.]}
+return object is constrained by its initial value.@PDefn2{Term=[creation],Sec=[of a return object]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2095,10 +2110,18 @@ of the @nt<expression>.]}
   used to initialize part of a declared object.]}
 @end{Reason}
 
-@leading@keepnext@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}If
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344-01]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[]}@ChgNote{A dummy
+ChgDeleted to get conditional "Leading".}If
 the result type @Chg{Version=[2],New=[of a function ],Old=[]}is a specific
 tagged type@Chg{Version=[2],New=[, the tag of the return object is that
-of the result type.],Old=[:]}
+of the result type. If the result type is class-wide, the tag of the
+return object is that of the value of the expression. A check is made that
+the accessibility level of the type identified by the tag of the result is
+not deeper than that of the master that elaborated the function body. If
+this check fails, Program_Error is raised.@Defn2{Term=[Program_Error],
+Sec=(raised by failure of run-time check)}
+@IndexCheck{Accessibility_Check}],Old=[:]}
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[@IndexCheck{Tag_Check}
@@ -2113,23 +2136,29 @@ of the result type.],Old=[:]}
   the tag of the result is that of the result type.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-  This is true even if the tag of the @Chg{Version=[2],New=[@nt{expression}],
+  @Chg{Version=[2],New=[The first sentence],Old=[This]} is true even if the
+  tag of the @Chg{Version=[2],New=[@nt{expression}],
   Old=[return expression]} is different@Chg{Version=[2],New=[, which
   could happen if the @nt{expression} were a view conversion or a
   dereference of an access value. Note that for a limited type, because
-  of the restriction to aggregates and function calls (and no conversions),
+  of the restriction to @nt{aggregate}s and function calls (and no conversions),
   the tag will already match],Old=[]}.
 @end{Ramification}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-  Th@Chg{Version=[2],New=[is],Old=[ese]} rule@Chg{Version=[2],New=[],Old=[s]}
-  ensure@Chg{Version=[2],New=[s],Old=[]} that a function whose result type is
+  @Chg{Version=[2],New=[The first rule ensures],Old=[These rules ensure]}
+  that a function whose result type is
   a specific tagged type always returns an object whose tag is that of the
-  result type. This is important
-  for dispatching on controlling result,
+  result type. This is important for dispatching on controlling result,
   and@Chg{Version=[2],New=[],Old=[, if nonlimited,]}
   allows the caller to allocate the appropriate amount of space to hold
   the value being returned (assuming there are no discriminants).
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The check prevents the returned object
+  from outliving its type. Note that this check cannot fail for a specific
+  tagged type, as the tag represents the function's type, which necessarily
+  must be declared outside of the function.]}
 @end{Reason}
 @end(itemize)
 
@@ -2215,24 +2244,24 @@ The exception Program_Error is raised if this check fails.]}
   except for dereferences of an access parameter.]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
-@ChgAdded{Version=[2],Text=[If the result type is class-wide, a check is made
-that the accessibility level of the type identified by the tag of the result is
-not deeper than that of the master that elaborated the function body.
-If the result subtype has one or more unconstrained access discriminants,
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[
+If the result subtype of a function has one or more unconstrained access
+discriminants,
 a check is made that the accessibility level of the anonymous access type
-of each access discriminant, as determined by the @nt{expression} of the
-@nt{simple_return_statement} or the @nt{return_subtype_indication},
+of each access discriminant, as determined by the @nt{expression} or the
+@nt{return_subtype_indication} of the function,
 is not deeper than that of the master that elaborated the
-function body. If either check fails, Program_Error is raised.
+function body. If this check fails, Program_Error is raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 @IndexCheck{Accessibility_Check}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The class-wide check prevents the returned object
-  from outliving its type. The access discriminant check prevents the returned
+  @ChgAdded{Version=[2],Text=[The check prevents the returned
   object (for a nonlimited type) from outliving the object designated by one
-  of its discriminants.]}
+  of its discriminants. The check is made on the values of the discriminants,
+  which may come from the the @nt{return_subtype_indication} (if constrained),
+  or the @nt{expression}, but it is never necessary to check both.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
