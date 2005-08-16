@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:53 $}
+@Comment{$Date: 2005/08/11 00:12:51 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1700,15 +1700,18 @@ make both the partial @i{and} full views limited.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
 If a tagged record type has any limited components,
 then the reserved word @key[limited] shall
-appear in its @nt<record_type_definition>.@Chg{Version=[2],New=[ If the
-reserved word @key[limited] appears in the definition of
-a type extension, its parent type @Redundant[and any progenitor interfaces] shall be
-limited.],Old=[]}
+appear in its @nt<record_type_definition>.@Chg{Version=[2],New=[ @Redundant[If
+the reserved word @key[limited] appears in the definition of a
+@nt{derived_type_definition}, its parent type and any progenitor interfaces
+shall be limited.]],Old=[]}
 @begin{TheProof}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
-  @ChgAdded{Version=[2],Text=[Rules about progenitor interfaces can be found in
+  @ChgAdded{Version=[2],Text=[The rule about the parent type being required
+  to be limited can be found in @RefSecNum{Derived Types and Classes}. Rules
+  about progenitor interfaces can be found in
   @RefSecNum{Interface Types}, specifically, a nonlimited interface can appear
-  only on a nonlimited type.]}
+  only on a nonlimited type. We repeat these rules here to gather these
+  scattered rules in one obvious place.]}
 @end{TheProof}
 @begin{Reason}
 @leading@;This prevents tagged limited types from becoming nonlimited.

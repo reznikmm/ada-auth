@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/08/10 05:13:55 $}
+@Comment{$Date: 2005/08/11 00:12:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2455,8 +2455,8 @@ interface and a synchronized interface extending it:}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is synchronized interface and} Queue; --@RI[ see @RefSecNum{Example of Tasking and Synchronization}]
-@key{procedure} Append_Wait(Q : @key{in out} Queue; Person : @key{in} Person_Name) @key{is abstract};
-@key{procedure} Remove_First_Wait(Q : @key{in out} Queue; Person : @key{out} Person_Name) @key{is abstract};]}
+@key{procedure} Append_Wait(Q : @key{in out} Synchronized_Queue; Person : @key{in} Person_Name) @key{is abstract};
+@key{procedure} Remove_First_Wait(Q : @key{in out} Synchronized_Queue; Person : @key{out} Person_Name) @key{is abstract};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[...]}

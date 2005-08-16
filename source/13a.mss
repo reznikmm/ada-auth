@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/08/10 05:13:59 $}
+@Comment{$Date: 2005/08/11 00:12:58 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -884,7 +884,7 @@ would have been chosen by default.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This rule presumes that the implementation
   allocates an object of a size specified to be larger than the default size in
-  such a way that access of the default size suffice to correctly read and
+  such a way that access of the default size suffices to correctly read and
   write the value of the object.]}
 @end{Ramification}
 

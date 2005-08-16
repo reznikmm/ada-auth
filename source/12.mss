@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/08/10 05:13:58 $}
+@Comment{$Date: 2005/08/11 00:12:56 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1794,7 +1794,7 @@ the declaration of a stand-alone variable has to provide a constraint
 on such a subtype, either explicitly, or by its initial value.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01],ARef=[AI95-00419-01]}
 @Defn2{Term=[ancestor subtype], Sec=(of a formal derived type)}
 The @i(ancestor subtype) of a formal derived type is the
 subtype denoted by the @nt<subtype_mark> of
@@ -1807,11 +1807,23 @@ ancestor type and the ancestor shall not be a class-wide
 type.
 @Redundant[Similarly, @Chg{Version=[2],New=[an @nt{interface_list} or ],Old=[]}
 the optional reserved word @key{abstract} shall
-appear only if the ancestor type is a tagged type].
+appear only if the ancestor type is a tagged type].@Chg{Version=[2],
+New=[ Finally, the reserved word @key{limited} shall appear only if
+the ancestor type @Redundant[and any progenitor types] are limited types.],Old=[]}
 @begin{Reason}
 We use the term @lquotes@;ancestor@rquotes@; here instead of @lquotes@;parent@rquotes@;
 because the actual can be any descendant of the ancestor,
 not necessarily a direct descendant.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+@ChgAdded{Version=[2],Text=[We require the ancestor type to be limited when
+@key{limited} appears so that we avoid oddies like limited integer types.
+Normally, @key{limited} means @lquotes@;match anything@rquotes for a generic
+formal, but it was felt that allowing limited elementary types to be declared
+was just too weird. Integer still matches a formal limited private type;
+it is only a problem when the type is known to be elementary.
+Note that the progenitors are required to be limited by rules in
+@RefSecNum{Interface Types}, thus that part of the rule is redundant.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
@@ -2128,7 +2140,7 @@ run-time check to a compile-time check.
 @end{Incompatible83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00419-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   A generic formal derived type can include progenitors (interfaces) as well
   as a primary ancestor. It also may include @key{limited} to indicate that

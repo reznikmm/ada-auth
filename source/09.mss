@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/08/05 05:04:16 $}
+@Comment{$Date: 2005/08/11 00:12:54 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 
@@ -1546,6 +1546,13 @@ with a corresponding distinction between an @i(internal requeue)
 and an @i(external requeue).
 @end{StaticSem}
 
+@begin{Legality}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[The view of the target protected object associated
+with a call of a protected procedure or entry shall be a variable.]}
+@end{Legality}
+
+
 @begin{RunTime}
 Within the body of a protected operation, the current instance
 (see @RefSecNum(The Context of Overload Resolution))
@@ -1571,6 +1578,18 @@ as is a requeue on such an entry.
   which again might change the value of a Count attribute.
 @end(Reason)
 @end{RunTime}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[Added a @LegalityName to make it crystal-clear
+  that the protected object of an entry or procedure call must be a variable.
+  This rule was implied by the @RuntimeTitle here, along with the
+  @StaticSemTitle of @RefSecNum{Objects and Named Numbers}, but it is much
+  better to explicitly say it. While many implementations have gotten this
+  wrong, this is not an incompatibility @em allowing updates of protected
+  constants has always been wrong.]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Protected Subprograms and Protected Actions}
 
@@ -4237,8 +4256,8 @@ an entry.],Old=[]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[If a @nt{procedure_call_statement} is used for a
 @nt{procedure_or_entry_call}, the @SynI{procedure_}@nt{name} or
-@SynI{procedure_}@nt{prefix} of the @nt{procedure_call_statement} shall denote
-an entry renamed as a procedure or (a view of) a
+@SynI{procedure_}@nt{prefix} of the @nt{procedure_call_statement} shall
+statically denote an entry renamed as a procedure or (a view of) a
 primitive subprogram of a limited interface whose first parameter is a
 controlling parameter (see @RefSecNum{Dispatching Operations of Tagged Types}).]}
 @begin{Reason}
@@ -4246,8 +4265,14 @@ controlling parameter (see @RefSecNum{Dispatching Operations of Tagged Types}).]
 @ChgAdded{Version=[2],Text=[This would be a confusing way to call a procedure,
 so we only allow it when it is possible that the procedure is actually an
 entry. We could have allowed formal subprograms here, but we didn't because
-we'd have to allow all of them, and it would increase the difficulty of
-generic code sharing.]}
+we'd have to allow all formal subprograms, and it would increase the
+difficulty of generic code sharing.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[We say @lquotes@;statically denotes@rquotes
+because an access-to-subprogram cannot be primitive, and we don't have
+anything like access-to-entry. So only names of entries or procedures are
+possible.]}
 @end{Reason}
 @end{Legality}
 

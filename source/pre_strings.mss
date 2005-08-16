@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2005/07/28 04:44:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2005/08/11 00:13:09 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/07/28 04:44:17 $}
+@Comment{$Date: 2005/08/11 00:13:09 $}
 
 @LabeledClause{String Handling}
 
@@ -446,20 +446,6 @@ procedures.
                    Mapping : @key[in] Maps.Character_Mapping_Function)
       @key[return] Natural;]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] String;
-                   Set     : @key[in] Maps.Character_Set;
-                   From    : @key[in] Positive;
-                   Test    : @key[in] Membership := Inside;
-                   Going   : @key[in] Direction := Forward)
-      @key[return] Natural;]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] String;
-                             From   : @key[in] Positive;
-                             Going  : @key[in] Direction := Forward)
-      @key[return] Natural;]}
-
    @key[function] @AdaSubDefn{Index} (Source   : @key[in] String;
                    Pattern  : @key[in] String;
                    Going    : @key[in] Direction := Forward;
@@ -473,12 +459,26 @@ procedures.
                    Mapping  : @key[in] Maps.Character_Mapping_Function)
       @key[return] Natural;
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] String;
+                   Set     : @key[in] Maps.Character_Set;
+                   From    : @key[in] Positive;
+                   Test    : @key[in] Membership := Inside;
+                   Going   : @key[in] Direction := Forward)
+      @key[return] Natural;]}
+
    @key[function] @AdaSubDefn{Index} (Source : @key[in] String;
                    Set    : @key[in] Maps.Character_Set;
                    Test   : @key[in] Membership := Inside;
                    Going  : @key[in] Direction  := Forward)
       @key[return] Natural;
 
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] String;
+                             From   : @key[in] Positive;
+                             Going  : @key[in] Direction := Forward)
+      @key[return] Natural;]}
 
    @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] String;
                              Going  : @key[in] Direction := Forward)
@@ -714,7 +714,7 @@ to From such that the slice of Source starting at I matches Pattern. If Going =
 Backward, then Index returns the largest index I such that the slice of Source
 starting at I matches Pattern and has an upper bound less than or equal to
 From. If there is no such slice, then 0 is returned. If Pattern is the null
-string then Pattern_Error is propagated.]}
+string, then Pattern_Error is propagated.]}
 
 @begin{Discussion}
    @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1123,12 +1123,12 @@ string handling subprograms, Constraint_Error is propagated.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Overloaded versions of Index are newly added to Strings.Fixed. If
-  Strings.Fixed is referenced in a @nt{use_clause}, and an entity @i<E> with a
-  @nt{defining_identifier} of Index is defined in a package that is also
-  referenced in a @nt{use_clause}, the entity @i<E> may no longer be
-  use-visible, resulting in errors. This should be rare and is easily fixed if
-  it does occur.]}
+  Overloaded versions of Index and Index_Non_Blank are newly added to
+  Strings.Fixed. If Strings.Fixed is referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of Index or Index_Non_Blank is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -1345,20 +1345,6 @@ the copying and comparison of bounded strings.@end{reason}
                       Mapping : @key[in] Maps.Character_Mapping_Function)
          @key[return] Natural;]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
-@ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Index} (Source  : @key[in] Bounded_String;
-                      Set     : @key[in] Maps.Character_Set;
-                      From    : @key[in] Positive;
-                      Test    : @key[in] Membership := Inside;
-                      Going   : @key[in] Direction := Forward)
-         @key[return] Natural;]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
-@ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Bounded_String;
-                                From   : @key[in] Positive;
-                                Going  : @key[in] Direction := Forward)
-         @key[return] Natural;]}
-
       @key[function] @AdaSubDefn{Index} (Source   : @key[in] Bounded_String;
                       Pattern  : @key[in] String;
                       Going    : @key[in] Direction := Forward;
@@ -1372,11 +1358,25 @@ the copying and comparison of bounded strings.@end{reason}
                       Mapping  : @key[in] Maps.Character_Mapping_Function)
          @key[return] Natural;
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Index} (Source  : @key[in] Bounded_String;
+                      Set     : @key[in] Maps.Character_Set;
+                      From    : @key[in] Positive;
+                      Test    : @key[in] Membership := Inside;
+                      Going   : @key[in] Direction := Forward)
+         @key[return] Natural;]}
+
       @key[function] @AdaSubDefn{Index} (Source : @key[in] Bounded_String;
                       Set    : @key[in] Maps.Character_Set;
                       Test   : @key[in] Membership := Inside;
                       Going  : @key[in] Direction  := Forward)
          @key[return] Natural;
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Bounded_String;
+                                From   : @key[in] Positive;
+                                Going  : @key[in] Direction := Forward)
+         @key[return] Natural;]}
 
       @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Bounded_String;
                                 Going  : @key[in] Direction := Forward)
@@ -1755,8 +1755,9 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Procedure Set_Bounded_String, function Bounded_Slice, and overloaded
-  versions of Index are newly added to Strings.Bounded. If Strings.Bounded
+  Procedure Set_Bounded_String, two Bounded_Slice subprograms, and overloaded
+  versions of Index and Index_Non_Blank are newly added to Strings.Bounded.
+  If Strings.Bounded is
   referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Strings.Bounded is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
@@ -1775,7 +1776,7 @@ Null_Bounded_String : @key[constant] Bounded_String :=
   effects of procedures and functions separately.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00238-01]}
-  @ChgAdded{Version=[2],Text=[Defined the bounds of the returned string from
+  @ChgAdded{Version=[2],Text=[Defined the bounds of the string returned from
   Slice.]}
 @end{DiffWord95}
 
@@ -1947,20 +1948,6 @@ as the length does not exceed the allocated length.
                    Mapping : @key[in] Maps.Character_Mapping_Function)
       @key[return] Natural;]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] Unbounded_String;
-                   Set     : @key[in] Maps.Character_Set;
-                   From    : @key[in] Positive;
-                   Test    : @key[in] Membership := Inside;
-                   Going    : @key[in] Direction := Forward)
-      @key[return] Natural;]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
-@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Unbounded_String;
-                             From   : @key[in] Positive;
-                             Going  : @key[in] Direction := Forward)
-      @key[return] Natural;]}
-
    @key[function] @AdaSubDefn{Index} (Source   : @key[in] Unbounded_String;
                    Pattern  : @key[in] String;
                    Going    : @key[in] Direction := Forward;
@@ -1974,11 +1961,24 @@ as the length does not exceed the allocated length.
                    Mapping  : @key[in] Maps.Character_Mapping_Function)
       @key[return] Natural;
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] Unbounded_String;
+                   Set     : @key[in] Maps.Character_Set;
+                   From    : @key[in] Positive;
+                   Test    : @key[in] Membership := Inside;
+                   Going    : @key[in] Direction := Forward)
+      @key[return] Natural;]}
+
    @key[function] @AdaSubDefn{Index} (Source : @key[in] Unbounded_String;
                    Set    : @key[in] Maps.Character_Set;
                    Test   : @key[in] Membership := Inside;
                    Going  : @key[in] Direction  := Forward) @key[return] Natural;
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Unbounded_String;
+                             From   : @key[in] Positive;
+                             Going  : @key[in] Direction := Forward)
+      @key[return] Natural;]}
 
    @key[function] @AdaSubDefn{Index_Non_Blank} (Source : @key[in] Unbounded_String;
                              Going  : @key[in] Direction := Forward)
@@ -2204,8 +2204,10 @@ with an Unbounded_String object shall be
 lost upon assignment or scope exit.
 @begin{ImplNote}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00301-01]}
 A sample implementation of the private part of
-the package and several of the subprograms appears in the Rationale.
+the package and several of the subprograms appears in the @Chg{Version=[2],
+New=[Ada 95 ],Old=[]}Rationale.
 
 @end{ImplNote}
 @end{ImplReq}
@@ -2222,8 +2224,9 @@ the package and several of the subprograms appears in the Rationale.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Text=[
-  Procedure Set_Unbounded_String, function Unbounded_Slice, and overloaded
-  versions of Index are newly added to Strings.Unbounded. If Strings.Unbounded
+  Procedure Set_Unbounded_String, two Unbounded_Slice subprograms, and overloaded
+  versions of Index and Index_Non_Blank are newly added to Strings.Unbounded.
+  If Strings.Unbounded is
   referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Strings.Unbounded is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no

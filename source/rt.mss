@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2005/07/28 04:44:15 $ $Author: Randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2005/08/11 00:13:04 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/07/28 04:44:15 $}
+@Comment{$Date: 2005/08/11 00:13:04 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2738,8 +2738,8 @@ Text=[The behavior when restriction Max_Tasks is violated.]}]}
 Sec=(Max_Entry_Queue_Length)}Max_Entry_Queue_Length @\Max_Entry_Queue_Length
   defines the maximum number of calls
   that are queued on an entry. Violation of this restriction
-  results in the raising of Program_Error at the point of the
-  call.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+  results in the raising of Program_Error at the point of the call or
+  requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @end{Description}
 
 It is implementation defined whether the use of pragma Restrictions
