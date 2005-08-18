@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2005/08/11 00:13:09 $ $Author: Randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2005/08/17 00:07:42 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/08/11 00:13:09 $}
+@Comment{$Date: 2005/08/17 00:07:42 $}
 
 @LabeledClause{String Handling}
 
@@ -2480,10 +2480,10 @@ To_Unbounded_Wide_String replaces To_Unbounded_String
 
 @end{Itemize}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @Leading@keepnext@;The following additional declaration is present in
 Strings.Wide_Maps.Wide_Constants:
 @begin{example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @AdaDefn{Character_Set} : @key[constant] Wide_Maps.Wide_Character_Set;
 --@RI{Contains each Wide_Character value WC such that}@Chg{Version=[2],New=[
 --],Old=[]}@RI{ Characters.@Chg{Version=[2],New=[Conversions.],Old=[]}Is_Character(WC) is True}
@@ -2542,7 +2542,7 @@ any element outside the Character portion of Wide_Character.]}
   Strings.Unbounded.Hash.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
-  @ChgAdded{Version=[2],Text=[Added wording so
+  @ChgAdded{Version=[2],Text=[Added wording so that
   Strings.Wide_Maps.Wide_Constants does not change to Pure.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
@@ -2598,15 +2598,17 @@ for strings of Character elements.
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Wide_Wide_Character_Range} @key<is>
       @key<record>
-         Low : Wide_Wide_Character;
+         Low  : Wide_Wide_Character;
          High : Wide_Wide_Character;
       @key<end record>;
    -- @RI[Represents Wide_Wide_Character range Low..High]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Wide_Wide_Character_Ranges} @key<is array> (Positive @key<range> <>)
-         @key<of> Wide_Wide_Character_Range;
-   @key<function> @AdaSubDefn{To_Set} (Ranges : @key<in> Wide_Wide_Character_Ranges)
+         @key<of> Wide_Wide_Character_Range;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Set} (Ranges : @key<in> Wide_Wide_Character_Ranges)
          @key<return> Wide_Wide_Character_Set;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2634,16 +2636,16 @@ for strings of Character elements.
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Is_In} (Element : @key<in> Wide_Wide_Character;
-                   Set : @key<in> Wide_Wide_Character_Set)
+                   Set     : @key<in> Wide_Wide_Character_Set)
          @key<return> Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Is_Subset} (Elements : @key<in> Wide_Wide_Character_Set;
-                       Set : @key<in> Wide_Wide_Character_Set)
+                       Set      : @key<in> Wide_Wide_Character_Set)
          @key<return> Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<function> "<=" (Left : @key<in> Wide_Wide_Character_Set;
+@ChgAdded{Version=[2],Text=[   @key<function> "<=" (Left  : @key<in> Wide_Wide_Character_Set;
                   Right : @key<in> Wide_Wide_Character_Set)
          @key<return> Boolean @key<renames> Is_Subset;]}
 
@@ -2670,7 +2672,7 @@ for strings of Character elements.
    @key<pragma> Preelaborable_Initialization(Wide_Wide_Character_Mapping);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Value} (Map : @key<in> Wide_Wide_Character_Mapping;
+@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Value} (Map     : @key<in> Wide_Wide_Character_Mapping;
                    Element : @key<in> Wide_Wide_Character)
          @key<return> Wide_Wide_Character;]}
 
@@ -2806,7 +2808,7 @@ Wide_Wide_String handling subprograms, Constraint_Error is propagated.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The double wide string handling packages (Strings.Wide_Wide_Maps,
+  The double-wide string-handling packages (Strings.Wide_Wide_Maps,
   Strings.Wide_Wide_Fixed, Strings.Wide_Wide_Bounded,
   Strings.Wide_Wide_Unbounded, and Strings.Wide_Wide_Maps.Wide_Wide_Constants),
   and functions Strings.Wide_Wide_Hash and
@@ -2831,7 +2833,7 @@ function Strings.Hash has the following declaration:]}
 @begin{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Return an implementation-defined
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns an implementation-defined
 value which is a function of the value of Key. If @i<A> and @i<B> are strings
 such that @i<A> equals @i<B>, Hash(@i<A>) equals Hash(@i<B>).]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -2859,8 +2861,8 @@ function Strings.Bounded.Hash has the following declaration:]}
 @key<generic>
    @key<with package> Bounded @key<is>
                      @key<new> Ada.Strings.Bounded.Generic_Bounded_Length (<>);
-@key<function> Ada.Strings.Bounded.Hash (Key : Bounded.Bounded_String) @key<return>
-    Containers.Hash_Type;
+@key<function> Ada.Strings.Bounded.Hash (Key : Bounded.Bounded_String)
+   @key<return> Containers.Hash_Type;
 @key<pragma> Preelaborate (Hash);]}
 @end{Example}
 
@@ -2879,8 +2881,8 @@ function Strings.Unbounded.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
-@key<function> Ada.Strings.Unbounded.Hash (Key : Unbounded_String) @key<return>@ChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash]}
-    Containers.Hash_Type;
+@key<function> Ada.Strings.Unbounded.Hash (Key : Unbounded_String)@ChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash]}
+   @key<return> Containers.Hash_Type;
 @key<pragma> Preelaborate (Hash);]}
 @end{Example}
 

@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/07/28 04:43:59 $}
+@Comment{$Date: 2005/08/17 00:06:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1768,7 +1768,7 @@ ISO/IEC 14882:2003, @i{Programming languages @em C++}.]}
 @ChgAdded{Version=[2],Text=[@Defn{ISO/IEC TR 19769:2004}
 @Defn{19769:2004, ISO/IEC technical report}
 ISO/IEC TR 19769:2004, @i{Information technology @em Programming languages,
-their environments and system software inferfaces @em Extensions for the
+their environments and system software interfaces @em Extensions for the
 programming language C to support new character data types}.]}
 
 @begin{Discussion}

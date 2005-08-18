@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/08/10 05:14:00 $}
+@Comment{$Date: 2005/08/17 00:07:22 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @LabeledClause{The Package System}
 
@@ -1308,7 +1308,7 @@ X'Valid is new in Ada 95.
   @ChgAdded{Version=[2],Text=[Added a note explaining that handlers for
   Constraint_Error and Program_Error are needed in the general case of
   testing for validity. (An implementation could document cases where these
-  are not necessary, but there is no language requiremnt.]}
+  are not necessary, but there is no language requirement.]}
 @end{DiffWord95}
 
 
@@ -3843,17 +3843,24 @@ its dispatching operations.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[A @nt{derived_type_definition},
+@ChgAdded{Version=[2],Text=[A record extension declaration,
 @nt{interface_type_definition}, task declaration, or
 protected declaration causes freezing of any progenitor types.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[This rules has the same purpose as the one
+@ChgAdded{Version=[2],Text=[This rule has the same purpose as the one
 above: ensuring that all descendants of an interface tagged type implement all
 of its dispatching operations. As with the previous rule, a private extension
 does not freeze its progenitors; the full type declaration (which must have the
 same progenitors) will do that.]}
 @end{Reason}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[An interface type can be a parent as well as a
+progentitor; these rules are similar so that the location of an interface
+in a record extension does not have an effect on the freezing of the interface
+type.]}
+@end{Ramification}
 @end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}

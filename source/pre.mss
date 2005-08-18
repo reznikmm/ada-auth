@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2005/07/27 00:06:27 $}
+@Comment{$Date: 2005/08/17 00:07:29 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.28 $}
+@comment{$Revision: 1.29 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -142,7 +142,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @Noparanum@shrink<@Chg{Version=[2],New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 ], Old=()}@\@\Text_IO @em @RefSecNum{The Package Text_IO}
-@\@\@\Complex_IO @em @RefSecNum{Complex Input-Output}
+@Chg{Version=[2],New=(@\@\@\Bounded_IO @em @RefSecNum{Input-Output for Bounded Strings}
+),Old=()}@\@\@\Complex_IO @em @RefSecNum{Complex Input-Output}
 @\@\@\Editing @em @RefSecNum{The Package Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Text_IO.Text_Streams}
 @Chg{Version=[2],New=(@\@\@\Unbounded_IO @em @RefSecNum{Input-Output for Unbounded Strings}
@@ -153,13 +154,15 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Complex_IO @em @RefSecNum{The Package Wide_Text_IO.Complex_IO}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}
-@Chg{Version=[2],New=(@\@\@\Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
+@Chg{Version=[2],New=(@\@\@\Wide_Bounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
+@\@\@\Wide_Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\Wide_Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
 @\@\Wide_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{The Package Wide_Wide_Text_IO.Complex_IO}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Wide_Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Wide_Text_IO.Text_Streams}
-@\@\@\Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}), Old=()}>
+@\@\@\Wide_Wide_Bounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
+@\@\@\Wide_Wide_Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}), Old=()}>
 
 @Noparanum@shrink<@\Interfaces @em @RefSecNum{The Package Interfaces}
 @\@\C @em @RefSecNum{Interfacing with C and C++}

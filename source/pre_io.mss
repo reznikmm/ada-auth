@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:12 $}
+@Comment{$Date: 2005/08/17 00:07:34 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -93,7 +93,7 @@ Input-output for direct access files is likewise defined by a generic
 package called Direct_IO. Input-output in human-readable form is
 defined by the (nongeneric) packages Text_IO for Character and String
 data, @Chg{Version=[2],New=[],Old=[and ]}Wide_Text_IO for Wide_Character and
-Wide_String data@Chg{Version=[2],New=[ and Wide_Wide_Text_IO for
+Wide_String data@Chg{Version=[2],New=[, and Wide_Wide_Text_IO for
 Wide_Wide_Character and Wide_Wide_String data],Old=[]}.
 Input-output for files containing streams of
 elements representing values of possibly different types is defined by means of
@@ -550,11 +550,11 @@ Any such restriction should be documented.
   a full path; this is now accomplished by Directories.Full_Name(Name(File))
   (see @RefSecNum{The Package Directories}). This is not documented as
   an inconsistency, because there is no requirement for implementations to
-  change - the Ada 95 behavior is still allowed, it just is no longer
+  change @em the Ada 95 behavior is still allowed, it just is no longer
   required.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
-  @ChgAdded{Version=[2],Text=[Added text to specific the default mode for
+  @ChgAdded{Version=[2],Text=[Added text to specify the default mode for
   a stream file.]}
 @end{DiffWord95}
 
@@ -2199,7 +2199,7 @@ Old=[procedures]} are provided:
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Get_Line(File : @key{in}  File_Type) @key{return} String;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Get_Line(File : @key{in} File_Type) @key{return} String;
 @key{function} Get_Line @b<return> String;]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
@@ -2290,7 +2290,7 @@ return as soon as a line terminator is read.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   The Get_Line functions are newly added to Ada.Text_IO.
-  If Ada.Text_IO is referenced in a @nt{use_clause}, and an entity Get_Line
+  If Ada.Text_IO is referenced in a @nt{use_clause}, and a function Get_Line
   is defined in a package that is also referenced in a @nt{use_clause}, the
   user-defined Get_Line may no longer be use-visible, resulting in errors.
   This should be rare and is easily fixed if it does occur.]}
@@ -3139,12 +3139,12 @@ into lines, and as a sequence of lines grouped into pages.
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00301-01]}
 @ChildUnit{Parent=[Ada],Child=[Wide_@!Text_IO]}
 The specification of package Wide_Text_IO is the same as that for
 Text_IO, except that in each Get,
 Look_Ahead, Get_Immediate,
-Get_Line, Put, and Put_Line procedure,
+Get_Line, Put, and Put_Line @Chg{Version=[2],New=[subprogram],Old=[procedure]},
 any occurrence of Character is replaced by Wide_Character, and any
 occurrence of String is replaced by Wide_String.@Chg{Version=[2],New=[
 @ChildUnit{Parent=[Ada],Child=[Integer_@!Wide_@!Text_IO]}
@@ -3157,13 +3157,13 @@ Ada.Long_@!Integer_@!Wide_Text_IO,
 Ada.Float_@!Wide_Text_IO,
 Ada.Long_@!Float_@!Wide_Text_IO.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00301-01]}
 @Chg{Version=[2],New=[
 @ChildUnit{Parent=[Ada],Child=[Wide_Wide_@!Text_IO]}
 The specification of package Wide_Wide_Text_IO is the same as that for
 Text_IO, except that in each Get,
 Look_Ahead, Get_Immediate,
-Get_Line, Put, and Put_Line procedure,
+Get_Line, Put, and Put_Line subprogram,
 any occurrence of Character is replaced by Wide_Wide_Character, and any
 occurrence of String is replaced by Wide_Wide_String.
 @ChildUnit{Parent=[Ada],Child=[Integer_@!Wide_Wide_@!Text_IO]}
@@ -3207,7 +3207,7 @@ The specification of package Wide_Text_IO.Wide_Unbounded_IO is the same as that
 for Text_IO.Unbounded_IO, except that any occurrence of Unbounded_String is
 replaced by Wide_Unbounded_String, and any occurrence of package Unbounded is
 replaced by Wide_Unbounded. The specification of package
-Wide_Wide_Text_IO.Wide_Unbounded_IO is the same as that for
+Wide_Wide_Text_IO.Wide_Wide_Unbounded_IO is the same as that for
 Text_IO.Unbounded_IO, except that any occurrence of Unbounded_String is
 replaced by Wide_Wide_Unbounded_String, and any occurrence of package Unbounded
 is replaced by Wide_Wide_Unbounded.]}
@@ -3226,12 +3226,13 @@ Support for Wide_Character and Wide_String I/O is new in Ada 95.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Text=[Packages
-  Wide_Text_IO.Unbounded_IO and Wide_Wide_Text_IO.Unbounded_IO are
-  also new.]}
+  Wide_Text_IO.Wide_Unbounded_IO and
+  Wide_Wide_Text_IO.Wide_Wide_Unbounded_IO are also new.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00428-01]}
   @ChgAdded{Version=[2],Text=[Packages
-  Wide_Text_IO.Bounded_IO and Wide_Wide_Text_IO.Bounded_IO are new as well.]}
+  Wide_Text_IO.Wide_Bounded_IO and
+  Wide_Wide_Text_IO.Wide_Wide_Bounded_IO are new as well.]}
 @end{Extend95}
 
 
@@ -3386,7 +3387,7 @@ Old=[, and End_of_File have the same effect as the corresponding
 subprograms in Sequential_IO (see @RefSecNum(File Management))]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00283-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The End_of_File function:]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The End_Of_File function:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[Propagates Mode_Error if the mode of the file
@@ -3541,16 +3542,17 @@ closed file.]}
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
-  The description of the file control
-  subprograms was corrected so that they do not require truncation of the
-  external file - a stream file is not a sequential file. Ada 95 that
-  expects truncation of the stream file may not work under Ada 2005.
+  The description of the subprograms for managing files
+  was corrected so that they do not require truncation of the
+  external file @em a stream file is not a sequential file. An Ada 95
+  program that expects truncation of the stream file may not work under
+  Ada 2005.
   Note that the Ada 95 standard was ambiguous on this point (the normative
   wording seemed to require truncation, but didn't explain where; the
   AARM notes seemed to expect behavior like Direct_IO), and implementations
   varied widely. Therefore, as a practical matter, code that depends on
   stream truncation may not work even in Ada 95; deleting the file before
-  opening it provides truncation which works in both Ada 95 and Ada 2005.]}
+  opening it provides truncation that works in both Ada 95 and Ada 2005.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
@@ -3644,7 +3646,7 @@ in Streams.Stream_IO.
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[The package Wide_Wide_Text_IO.Text_Streams provides
-a function for treating a double wide text file as a stream.]}
+a function for treating a wide wide text file as a stream.]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -3756,7 +3758,7 @@ attempt to Put too many characters to a string.
 The implementation shall document the conditions under which
 Name_Error, Use_Error and Device_Error are propagated.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
-The conditions under which Io_Exceptions.Name_Error, Io_Exceptions.Use_Error
+The conditions under which Io_Exceptions.Name_Error, Io_Exceptions.Use_Error,
 and Io_Exceptions.Device_Error are propagated.]}]}
 @end{DocReq}
 

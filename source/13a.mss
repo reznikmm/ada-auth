@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/08/11 00:12:58 $}
+@Comment{$Date: 2005/08/17 00:07:16 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2850,11 +2850,13 @@ of components (including discriminants, if any).
 @end{Intro}
 
 @begin{MetaRules}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 It should be feasible for an implementation to use negative offsets
 in the representation of composite types.
 However, no implementation should be forced to support negative
 offsets.
-Therefore, negative offsets should be disallowed in
+Therefore@Chg{Version=[2],New=[, in the interest of uniformity],Old=[]},
+negative offsets should be disallowed in
 @nt{record_representation_clause}s.
 @end{MetaRules}
 
@@ -3101,11 +3103,18 @@ of the component subtype,
 and it starts and ends on a boundary that obeys the Alignment of the
 component subtype.
 
-If the default bit ordering applies to the declaration of
-a given type, then for a component
-whose subtype's Size is less than the word size,
-any storage place that does not cross an aligned word boundary should
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
+@Chg{Version=[2],New=[For],Old=[If the default bit ordering applies to
+the declaration of a given type, then for]} a component
+@Chg{Version=[2],New=[with a subtype ],Old=[]}whose
+@Chg{Version=[2],New=[],Old=[subtype's ]}Size is less than the
+@Chg{Version=[2],New=[],Old=[word ]}size@Chg{Version=[2],New=[ of the
+largest machine scalar],Old=[]},
+any storage place that does not cross an
+@Chg{Version=[2],New=[alignment],Old=[aligned word]} boundary
+@Chg{Version=[2],New=[for the largest machine scalar ],Old=[]}should
 be supported.
+
 @begin{Reason}
 The above recommendations are sufficient to
 define interfaces to most interesting hardware.

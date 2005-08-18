@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2005/08/09 05:47:57 $ $Author: Randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2005/08/17 00:07:38 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:57 $}
+@Comment{$Date: 2005/08/17 00:07:38 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -1658,7 +1658,7 @@ Otherwise Find searches the elements of Container for an element equal to Item
 (in the sense of the generic formal equality operator). The search starts at
 the first element if Cursor equals No_Element, and at the element designated by
 Cursor otherwise. It proceeds towards the last element of Container. If no
-equal element is found, then Find returns No_Cursor. Otherwise, it returns a
+equal element is found, then Find returns No_Element. Otherwise, it returns a
 cursor designating the first equal element encountered.]}
 
 @begin{Example}
@@ -1693,7 +1693,7 @@ Otherwise Reverse_Find searches the elements of Container for an element equal
 to Item (in the sense of the generic formal equality operator). The search
 starts at the last element if Cursor equals No_Element, and at the element
 designated by Cursor otherwise. It proceeds towards the first element of
-Container. If no equal element is found, then Reverse_Find returns No_Cursor.
+Container. If no equal element is found, then Reverse_Find returns No_Element.
 Otherwise, it returns a cursor designating the first equal element
 encountered.]}
 

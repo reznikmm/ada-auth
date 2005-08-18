@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:25 $}
+@Comment{$Date: 2005/08/17 00:07:41 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.24 $}
+@comment{$Revision: 1.25 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -676,7 +676,7 @@ primitive function attributes.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00388-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The 'Machine_Rounding attribute is new.]}
+  The Machine_Rounding attribute is new.]}
 @end{Extend95}
 
 

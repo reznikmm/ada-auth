@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/08/10 05:13:57 $}
+@Comment{$Date: 2005/08/17 00:07:00 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1897,7 +1897,7 @@ irrelevant, since failing these tests is highly unlikely.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00423-01]}
 @Syn{lhs=<object_renaming_declaration>,rhs="@Chg{Version=[2],New=[
     ],Old=[]}@Syn2{defining_identifier} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name};@Chg{Version=[2],New=[
-    @Syn2{defining_identifier} : @Syn2{access_definition} @key{renames} @SynI{object_}@Syn2{name};],Old=[]}"}
+  | @Syn2{defining_identifier} : @Syn2{access_definition} @key{renames} @SynI{object_}@Syn2{name};],Old=[]}"}
 @end{Syntax}
 
 @begin{Resolution}

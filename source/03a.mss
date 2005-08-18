@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:00 $}
+@Comment{$Date: 2005/08/17 00:06:48 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2222,7 +2222,7 @@ Old=[@i(parent type)]}.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01]}
-@Syn{lhs=<derived_type_definition>,rhs="[@Chg{Version=[2],New=<
+@Syn{lhs=<derived_type_definition>,rhs="@Chg{Version=[2],New=<
     >,Old=<>}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited}] >,Old=<>}@key{new} @SynI{parent_}@Syn2{subtype_indication} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}] >,Old=<>}@Syn2{record_extension_part}]"}
 @end{Syntax}
 

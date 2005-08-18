@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2005/06/03 05:41:49 $ $Author: Randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2005/08/17 00:07:30 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:49 $}
+@Comment{$Date: 2005/08/17 00:07:30 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -26,8 +26,10 @@ Directories has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Directory and file operations:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Current_Directory} @key{return} String;
-   @key{procedure} @AdaSubDefn{Set_Directory} (Directory : in String);]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Current_Directory} @key{return} String;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Set_Directory} (Directory : in String);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Create_Directory} (New_Directory : @key{in} String;
@@ -110,10 +112,10 @@ Directories has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Search_Type} @key{is limited private};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Start_Search} (Search : @key{in out} Search_Type;
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Start_Search} (Search    : @key{in out} Search_Type;
                            Directory : @key{in} String;
-                           Pattern : @key{in} String;
-                           Filter : @key{in} Filter_Type := (@key{others} => True));]}
+                           Pattern   : @key{in} String;
+                           Filter    : @key{in} Filter_Type := (@key{others} => True));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{End_Search} (Search : @key{in out} Search_Type);]}
@@ -128,9 +130,9 @@ Directories has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} Search (
       Directory : @key{in} String;
-      Pattern : @key{in} String;
-      Filter : @key{in} Filter_Type := (@key{others} => True);
-      Process : @key{not null access procedure} (Directory_Entry : @key{in} Directory_Entry_Type));]}
+      Pattern   : @key{in} String;
+      Filter    : @key{in} Filter_Type := (@key{others} => True);
+      Process   : @key{not null access procedure} (Directory_Entry : @key{in} Directory_Entry_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Operations on Directory Entries:}]}
@@ -157,8 +159,8 @@ Directories has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaDefn{Status_Error} : @key{exception renames} Ada.IO_Exceptions.Status_Error;
-   @AdaDefn{Name_Error} : @key{exception renames} Ada.IO_Exceptions.Name_Error;
-   @AdaDefn{Use_Error} : @key{exception renames} Ada.IO_Exceptions.Use_Error;
+   @AdaDefn{Name_Error}   : @key{exception renames} Ada.IO_Exceptions.Name_Error;
+   @AdaDefn{Use_Error}    : @key{exception renames} Ada.IO_Exceptions.Use_Error;
    @AdaDefn{Device_Error} : @key{exception renames} Ada.IO_Exceptions.Device_Error;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -173,7 +175,7 @@ Directories has the following declaration:]}
 special files, or ordinary
 files. A @i<directory> is an external file that is a container for files on
 the target system. A @i<special file> is an external file that cannot be
-created or read by a predefined Ada Input-Output package. External files that
+created or read by a predefined Ada input-output package. External files that
 are not special files or directories are called @i<ordinary files>.
 @Defn{directory}
 @Defn{special file}
@@ -187,7 +189,7 @@ are not special files or directories are called @i<ordinary files>.
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Devices and soft links are examples of
-  special files on Windows and Unix.]}
+  special files on Microsoft Windows and Unix.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Even if an implementation provides a package
@@ -209,12 +211,12 @@ interpretation of file names and directory names.],Old=[]}]}
 full specification of the name of
 the file. If the external environment allows alternative specifications of the
 name (for example, abbreviations), the full name should not use such
-alternatives. A full name typically will include the names of all of
+alternatives. A full name typically will include the names of all of the
 directories that contain the item. The @i<simple name> of an external file is
 the name of the item, not including any containing directory names. Unless
-otherwise specified, a file name or directory name parameter to a predefined
-Ada input-output subprogram can be a full name, a simple name, or any other
-form of name supported by the implementation.
+otherwise specified, a file name or directory name parameter in a call to
+a predefined Ada input-output subprogram can be a full name, a simple name,
+or any other form of name supported by the implementation.
 @Defn2{Term=[full name],Sec=[of a file]}
 @Defn2{Term=[simple name],Sec=[of a file]}]}
 @begin{Discussion}
@@ -322,8 +324,8 @@ its contents) with the given name (in the absence of Name_Error).]}
 name New_Directory. Each
 non-existent directory named by New_Directory is created.@Redundant[ For example, on a
 typical Unix system, Create_Path ("/usr/me/my"); would create directory "me" in
-directory "usr", then create directory "my" in directory "me".] The Form can be
-used to give system-dependent characteristics of the directory; the
+directory "usr", then create directory "my" in directory "me".] The Form parameter
+can be used to give system-dependent characteristics of the directory; the
 interpretation of the Form parameter is implementation-defined. A null string
 for Form specifies the use of the default options of the implementation of the
 new directory. The exception Name_Error is propagated if the string given as
@@ -343,15 +345,15 @@ exception Name_Error is propagated if the string given as Directory does not
 identify an existing directory. The exception Use_Error is propagated if the
 external environment does not support the deletion of the directory or some
 portion of its contents with the given name (in the absence of Name_Error). If
-Use_Error is propagated, it is unspecified if a portion of the contents of the
-directory are deleted.]}
+Use_Error is propagated, it is unspecified whether a portion of the contents of
+the directory is deleted.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Delete_File (Name : @key{in} String);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Deletes an existing ordinary or
-special file with Name. The exception
+special file with name Name. The exception
 Name_Error is propagated if the string given as Name does not identify an
 existing ordinary or special external file. The exception Use_Error is
 propagated if the external environment does not support the deletion of the
@@ -362,12 +364,13 @@ file with the given name (in the absence of Name_Error).]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Renames an existing external file
-(including directories) with Old_Name
+(including directories) with name Old_Name
 to New_Name. The exception Name_Error is propagated if the string given as
 Old_Name does not identify an existing external file. The exception Use_Error
 is propagated if the external environment does not support the renaming of the
 file with the given name (in the absence of Name_Error). In particular,
-Use_Error is propagated if a file or directory already exists with New_Name.]}
+Use_Error is propagated if a file or directory already exists with name
+New_Name.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Copy_File (Source_Name, Target_Name : @key{in} String;
@@ -375,15 +378,15 @@ Use_Error is propagated if a file or directory already exists with New_Name.]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Copies the contents of the existing
-external file with Source_Name to
-Target_Name. The resulting external file is a duplicate of the source external
-file. The Form can be used to give system-dependent characteristics of the
+external file with name Source_Name to an external file with name Target_Name.
+The resulting external file is a duplicate of the source external file. The
+Form parameter can be used to give system-dependent characteristics of the
 resulting external file; the interpretation of the Form parameter is
 implementation-defined. Exception Name_Error is propagated if the string given
-as Source_Name does not identify an existing external ordinary or special file
+as Source_Name does not identify an existing external ordinary or special file,
 or if the string given as Target_Name does not allow the identification of an
 external file. The exception Use_Error is propagated if the external
-environment does not support the creating of the file with the name given by
+environment does not support creating the file with the name given by
 Target_Name and form given by Form, or copying of the file with the name given
 by Source_Name (in the absence of Name_Error).]}
 @begin{Ramification}
@@ -414,7 +417,7 @@ special files).]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Full name means that no abbreviations are
   used in the returned name, and that it is a full specification of the name.
-  Thus, for Unix and Windows, the result should be a full path which does not
+  Thus, for Unix and Windows, the result should be a full path that does not
   contain any "." or ".." directories. Typically, the default directory
   is used to fill in any missing information.]}
 @end{Discussion}
@@ -510,7 +513,7 @@ name (if Extension is null) or base name (if Extension is non-null).]}
 @end{Ramification}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[If Name is null, Name_Error should be raised
+  @ChgAdded{Version=[2],Text=[If Name is null, Name_Error should be raised,
   as nothing is not a possible simple name or base name.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -553,7 +556,7 @@ maximum value for a file size in Directories.],Old=[]}]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Exists (Name : @key{in} String) @key{return} Boolean;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if external file
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if an external file
 represented by Name exists, and False
 otherwise. The exception Name_Error is propagated if the string given as Name
 does not allow the identification of an external file (including directories
@@ -594,7 +597,7 @@ discontiguous file.],Old=[]}]}
 @end{Discussion}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Modification_Time (Name : @key{in} String) @key{return} Ada.Calendar;]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Modification_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the time that the
@@ -603,7 +606,7 @@ recently modified. If the external file is not an ordinary file, the result is
 implementation-defined. The exception Name_Error is propagated if the string
 given as Name does not allow the identification of an existing external file.
 The exception Use_Error is propagated if the external environment does not
-support the reading the modification time of the file with the name given by
+support reading the modification time of the file with the name given by
 Name (in the absence of Name_Error).]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
 result for Directories.Modification_Time for a directory or special file.],
@@ -624,7 +627,7 @@ operations and types are provided:]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[The type Directory_Entry_Type represents a single item in a directory.
 These items can only be created by the Get_Next_Entry procedure in this
 package. Information about the item can be obtained from the functions declared
-in this package. A default initialized object of this type is invalid; objects
+in this package. A default-initialized object of this type is invalid; objects
 returned from Get_Next_Entry are valid.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -643,22 +646,22 @@ component is True, directory entries representing special files are provided.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[The type Search_Type contains the
 state of a directory search. A
-default-initialized Search_Type object has no entries available (More_Entries
-returns False). Type Search_Type needs finalization
+default-initialized Search_Type object has no entries available (function
+More_Entries returns False). Type Search_Type needs finalization
 (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Start_Search (Search : @key{in out} Search_Type;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Start_Search (Search    : @key{in out} Search_Type;
                         Directory : @key{in} String;
-                        Pattern : @key{in} String;
-                        Filter : @key{in} Filter_Type := (@key{others} => True));]}
+                        Pattern   : @key{in} String;
+                        Filter    : @key{in} Filter_Type := (@key{others} => True));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Starts a search in the
 directory entry in the directory named by
 Directory for entries matching Pattern. Pattern represents a file name matching
 pattern. If Pattern is null, all items in the directory are matched; otherwise,
-the interpretation of Pattern is implementation-defined. Only items which match
+the interpretation of Pattern is implementation-defined. Only items that match
 Filter will be returned. After a successful call on Start_Search, the object
 Search may have entries available, but it may have no entries available if no
 files or directories match Pattern and Filter. The exception Name_Error is
@@ -706,19 +709,19 @@ altered while a search is in progress.],Old=[]}]}
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Search (
     Directory : @key{in} String;
-    Pattern : @key{in} String;
-    Filter : @key{in} Filter_Type := (others => True);
-    Process : @key{not null access procedure}
+    Pattern   : @key{in} String;
+    Filter    : @key{in} Filter_Type := (others => True);
+    Process   : @key{not null access procedure}
       (Directory_Entry : @key{in} Directory_Entry_Type));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Searches in the directory entry
 in the directory named by Directory,
-calling the subprogram designated by Process passing each entry matching
-Pattern. Pattern represents a file name matching
+passing each entry matching Pattern to a call of the subprogram
+designated by Process. Pattern represents a file name matching
 pattern. If Pattern is null, all items in the directory are matched;
 otherwise, the interpretation of Pattern is implementation-defined. Only
-items which match Filter will be returned.
+items that  match Filter will be returned.
 The exception Name_Error is propagated if the string given by Directory
 does not identify an existing directory, or if Pattern does not allow the
 identification of any possible external file or directory. The exception
@@ -783,7 +786,7 @@ file represented by Directory_Entry
 was most recently modified. If the external file represented by Directory_Entry
 is not an ordinary file, the result is implementation-defined. The exception
 Status_Error is propagated if Directory_Entry is invalid. The exception
-Use_Error is propagated if the external environment does not support the
+Use_Error is propagated if the external environment does not support
 reading the modification time of the file represented by Directory_Entry.]}
 
 @end{DescribeCode}
@@ -794,9 +797,9 @@ reading the modification time of the file represented by Directory_Entry.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[For Copy_File, if Source_Name identifies an
-existing external ordinary file created by a predefined Ada Input-Output
+existing external ordinary file created by a predefined Ada input-output
 package, and Target_Name and Form can be used in the Create operation of that
-Input-Output package with mode Out_File without raising an exception, then
+input-output package with mode Out_File without raising an exception, then
 Copy_File shall not propagate Use_Error.]}
 
 @begin{Discussion}
@@ -810,8 +813,9 @@ Copy_File shall not propagate Use_Error.]}
 @begin{ImplAdvice}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[If other information about a file is available
-(such as the owner or creation date) in a directory entry, the implementation
+@ChgAdded{Version=[2],Text=[If other information about a file
+(such as the owner or creation date) is available in a directory entry,
+the implementation
 should provide functions in a child package Directories.Information to
 retrieve it.@ChildUnit{Parent=[Ada.Directories],Child=[Information]}]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -827,8 +831,8 @@ Directories.Information should contain at least the following routines:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @key{is}
-    -- @RI[System specific directory information.]
-    -- @RI[Windows version.]]}
+    -- @RI[System-specific directory information.]
+    -- @RI[Microsoft Windows version.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Creation_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
@@ -915,15 +919,15 @@ Directories.Information should contain at least the following routines:]}
 
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[For Unix-like systems (POSIX,
-Linux, etc.), Directories.Information should contain at least the
+@ChgAdded{Version=[2],Type=[Leading],Text=[For Unix-like systems (Unix,
+POSIX, Linux, etc.), Directories.Information should contain at least the
 following routines:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @key{is}
-    -- @RI[System specific directory information.]
-    -- @RI[Unix version.]]}
+    -- @RI[System-specific directory information.]
+    -- @RI[Unix and similar systems version.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Last_Access_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}
@@ -1054,7 +1058,7 @@ external file.]}]}
 @begin{Notes}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The file name operations Containing_Directory,
+@ChgAdded{Version=[2],Text=[The operations Containing_Directory,
 Full_Name, Simple_Name,
 Base_Name, Extension, and Compose operate on file names, not external files.
 The files identified by these operations do not need to exist. Name_Error is

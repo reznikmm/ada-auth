@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:52 $}
+@Comment{$Date: 2005/08/17 00:06:56 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -122,8 +122,8 @@ is not significant)]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00318-02]}
 @Syn{lhs=<parameter_and_result_profile>,rhs="@Chg{Version=[2],New=[
-    ],Old=[]}[@Syn2{formal_part}] @key{return}@Chg{Version=[2],New=< [@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark}]@Chg{Version=[2],New=<
-    [@Syn2{formal_part}] @key{return} @Syn2{access_definition}>,Old=<>}"}
+    ],Old=[]}[@Syn2{formal_part}] @key{return}@Chg{Version=[2],New=< [@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark}@Chg{Version=[2],New=<
+  | [@Syn2{formal_part}] @key{return} @Syn2{access_definition}>,Old=<>}"}
 
 @Syn{lhs=<formal_part>,rhs="
    (@Syn2{parameter_specification} {; @Syn2{parameter_specification}})"}
@@ -2533,7 +2533,7 @@ procedure declaration, then the renamed procedure shall be non-returning.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This insures that no extra code is needed to
+  @ChgAdded{Version=[2],Text=[This ensures that no extra code is needed to
   implement the renames (that is, no wrapper is needed) as the body has
   the same property.]}
 @end{Reason}

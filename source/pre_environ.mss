@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.6 $ $Date: 2005/05/07 05:18:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.7 $ $Date: 2005/08/17 00:07:32 $ $Author: Randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:29 $}
+@Comment{$Date: 2005/08/17 00:07:32 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -10,7 +10,7 @@
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
 @ChgAdded{Version=[2],Text=[@Defn{environment variable}
 The package Environment_Variables allows a program to
-read or modify the environment variables. Environment variables are name-value
+read or modify environment variables. Environment variables are name-value
 pairs, where both the name and value are strings. The definition of what
 constitutes an @i{environment variable}, and the meaning of the name and value,
 are implementation defined.]}
@@ -136,7 +136,7 @@ for each existing environment variable, passing the name and value of that
 environment variable. Otherwise Program_Error is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[If several environment variables exist which have
+@ChgAdded{Version=[2],Text=[If several environment variables exist that have
 the same name, Process is called once for each such variable.]}
 
 @end{DescribeCode}
@@ -184,7 +184,7 @@ are changed by external mechanisms.]}]}
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
-@ChgAdded{Version=[2],Text=[An implementation running on a system which does
+@ChgAdded{Version=[2],Text=[An implementation running on a system that does
 not support environment variables is permitted to define the operations of
 package Environment_Variables with the semantics corresponding to the case
 where the external execution environment does support environment variables. In
@@ -196,7 +196,7 @@ environment variables prior to the execution of a partition.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
 @ChgAdded{Version=[2],Text=[If the execution environment supports subprocesses,
 the currently defined environment variables should be used to initialize the
-environment variables of the subprocess.]}
+environment variables of a subprocess.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[If the execution environment supports subprocesses,
 the current environment variables should be used to initialize the

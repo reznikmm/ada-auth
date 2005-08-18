@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/08/11 00:12:54 $}
+@Comment{$Date: 2005/08/17 00:07:06 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 
@@ -1825,8 +1825,8 @@ tasks and protected objects.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00397-01]}
-@Syn{lhs=<entry_declaration>,rhs="@Chg{Version=[2],New=[
-   @Syn2<overriding_indicator>],Old=[]}
+@Syn{lhs=<entry_declaration>,rhs="@Chg{Version=[2],New=<
+   [@Syn2{overriding_indicator}]>,Old=[]}
    @key{entry} @Syn2{defining_identifier} [(@Syn2{discrete_subtype_definition})] @Syn2{parameter_profile};"}
 
 
