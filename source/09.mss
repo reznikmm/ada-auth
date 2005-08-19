@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:06 $}
+@Comment{$Date: 2005/08/18 06:14:46 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 
@@ -4634,6 +4634,7 @@ then @i(aborted), which consists of making the task @i(abnormal)
 and aborting the execution of the corresponding @nt<task_body>,
 unless it is already completed.
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 Note that aborting those tasks is not defined to be an
 abort-deferred operation.
 Therefore, if one of the named tasks is the task executing the
@@ -4642,8 +4643,9 @@ Therefore, if one of the named tasks is the task executing the
 then it is possible for the execution of the @nt{abort_statement} to be
 aborted, thus leaving some of the tasks unaborted.
 This allows the implementation to use either a sequence of calls to an
-@lquotes@;abort task@rquotes@; RTS primitive, or
-a single call to an @lquotes@;abort list of tasks@rquotes@; RTS primitive.
+@lquotes@;abort task@rquotes@; @Chg{Version=[2],New=[run-time
+system],Old=[RTS]} primitive, or a single call to an @lquotes@;abort list of
+tasks@rquotes@; @Chg{Version=[2],New=[run-time system],Old=[RTS]} primitive.
 @end{Ramification}
 
 @leading@PDefn2{Term=[execution], Sec=(aborting the execution of a construct)}

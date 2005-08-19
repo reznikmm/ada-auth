@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2005/08/17 00:07:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2005/08/18 06:14:47 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:30 $}
+@Comment{$Date: 2005/08/18 06:14:47 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -657,10 +657,10 @@ More_Entries returns False). Type Search_Type needs finalization
                         Filter    : @key{in} Filter_Type := (@key{others} => True));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Starts a search in the
-directory entry in the directory named by
-Directory for entries matching Pattern. Pattern represents a file name matching
-pattern. If Pattern is null, all items in the directory are matched; otherwise,
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Starts a search
+in the directory named by
+Directory for entries matching Pattern. Pattern represents a pattern for
+matching file names. If Pattern is null, all items in the directory are matched; otherwise,
 the interpretation of Pattern is implementation-defined. Only items that match
 Filter will be returned. After a successful call on Start_Search, the object
 Search may have entries available, but it may have no entries available if no
@@ -669,7 +669,8 @@ propagated if the string given by Directory does not identify an existing
 directory, or if Pattern does not allow the identification of any possible
 external file or directory. The exception Use_Error is propagated if the
 external environment does not support the searching of the directory with the
-given name (in the absence of Name_Error).]}
+given name (in the absence of Name_Error). When Start_Search propagates
+Name_Error or Use_Error, the object Search will have no entries available.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
 interpretation of a non-null search pattern in Directories.],Old=[]}]}
 
@@ -680,6 +681,13 @@ interpretation of a non-null search pattern in Directories.],Old=[]}]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Ends the search represented
 by Search. After a successful call on
 End_Search, the object Search will have no entries available.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The only way that a call to End_Search could be
+  unsuccessful if Device_Error (see @RefSecNum{Exceptions in Input-Output}) is
+  raised because of an underlying failure (or bug).]}
+@end{Ramification}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} More_Entries (Search : @key{in} Search_Type) @key{return} Boolean;]}
@@ -715,11 +723,10 @@ altered while a search is in progress.],Old=[]}]}
       (Directory_Entry : @key{in} Directory_Entry_Type));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Searches in the directory entry
-in the directory named by Directory,
-passing each entry matching Pattern to a call of the subprogram
-designated by Process. Pattern represents a file name matching
-pattern. If Pattern is null, all items in the directory are matched;
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Searches in the directory named by
+Directory, passing each entry matching Pattern to a call of the subprogram
+designated by Process. Pattern represents a pattern for
+matching file names. If Pattern is null, all items in the directory are matched;
 otherwise, the interpretation of Pattern is implementation-defined. Only
 items that  match Filter will be returned.
 The exception Name_Error is propagated if the string given by Directory

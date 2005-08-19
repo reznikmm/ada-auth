@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2005/07/28 04:44:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2005/08/18 06:14:47 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/07/28 04:44:16 $}
+@Comment{$Date: 2005/08/18 06:14:47 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -80,7 +80,7 @@ specified as exported.
 Text=[If an entity is exported to assembly language, then the implementation
 should allocate it at an addressable location even if not otherwise referenced
 from the Ada code. A call to a machine code or assembler subprogram should
-be treated as if it could to read or update every object that is
+be treated as if it could read or update every object that is
 specified as exported.]}]}
 @end{ImplAdvice}
 
@@ -149,8 +149,8 @@ Direct operations on I/O ports.
 
 @end{itemize}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Intrinsic subprograms should be provided access to any machine operations that
-provide special capabilities or efficiency not normally available.]}]}
+Text=[Intrinsic subprograms should be provided to access any machine operations
+that  provide special capabilities or efficiency not normally available.]}]}
 
 @end{ImplAdvice}
 
@@ -203,7 +203,7 @@ Certain interrupts are @i{reserved}. The set of reserved interrupts is
 implementation defined. A reserved interrupt is either an interrupt for
 which user-defined handlers are not supported, or one which
 already has an attached handler by some other implementation-defined means.
-@Defn{interrupt handler}
+@Defn{interrupt handler}@PDefn2{Term=[handler],Sec=[interrupt]}
 Program units can be connected to non-reserved interrupts. While
 connected, the program unit is said to be @i{attached} to that interrupt.
 The execution of that program unit, the @i{interrupt handler}, is invoked upon
@@ -312,10 +312,11 @@ Text=[The treatment of interrupts.]}]}
 
 @begin{ImplPerm}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 If the underlying system or hardware does not allow interrupts to be
 blocked, then no blocking is required @Redundant[as part of the execution of
-subprograms of a protected object whose one of its
-subprograms is an interrupt handler].
+subprograms of a protected object @Chg{Version=[2],New=[for which],Old=[whose]}
+one of its subprograms is an interrupt handler].
 
 In a multi-processor with more than one interrupt subsystem, it is
 implementation defined whether (and how) interrupt sources from
@@ -340,8 +341,11 @@ These limitations are often necessary to ensure proper behavior of the
 implementation.
 @end{Reason}
 
-Other forms of handlers are allowed to be supported, in which case, the
-rules of this subclause should be adhered to.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+Other forms of handlers are allowed to be supported, in which
+case@Chg{Version=[2],New=[,],Old=[]} the
+rules of this @Chg{Version=[2],New=[subclause],Old=[clause]} should be adhered
+to.
 
 The active priority of the execution of an interrupt handler is allowed to
 vary from one occurrence of the same interrupt to another.
@@ -408,12 +412,13 @@ For the Attach_Handler pragma, the expected type for the
 
 @begin{Legality}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 The Attach_Handler pragma is only allowed immediately within the
 @nt{protected_definition}
 where the corresponding subprogram is declared.
 The corresponding @nt{protected_@!type_@!declaration}
 or @nt{single_@!protected_@!declaration}
-shall be a library level declaration.
+shall be a library@Chg{Version=[2],New=[-],Old=[]}level declaration.
 @begin{Discussion}
 In the case of a @nt{protected_type_declaration},
 an @nt{object_declaration} of an object of that type
@@ -426,9 +431,9 @@ The Interrupt_Handler pragma is only allowed immediately within a
 corresponding subprogram is declared],Old=[]}.
 The cor@!responding @nt{protected_type_declaration} @Chg{Version=[2],New=[or
 @nt{single_protected_declaration} ],Old=[]}shall
-be a library level declaration.@Chg{Version=[2],New=[],Old=[ In addition, any
-@nt{object_@!declaration} of such a type shall be a library level
-declaration.]}
+be a library@Chg{Version=[2],New=[-],Old=[]}level
+declaration.@Chg{Version=[2],New=[],Old=[ In addition, any
+@nt{object_@!declaration} of such a type shall be a library level declaration.]}
 @end{Legality}
 
 @begin{RunTime}
@@ -450,10 +455,12 @@ A check is made that the corresponding interrupt is not reserved.
 Program_Error is raised if the check fails, and the existing treatment
 for the interrupt is not affected.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @Defn2{Term=[initialization], Sec=(of a protected object)}
 @IndexCheck{Ceiling_Check}
 If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
-in effect then upon the initialization of a protected object that either an
+in effect then@Chg{Version=[2],New=[,],Old=[]} upon the initialization of a
+protected object @Chg{Version=[2],New=[for which],Old=[that]} either an
 Attach_Handler or Interrupt_Handler pragma applies to one of its procedures,
 a check is made that the ceiling priority defined in the
 @nt{protected_definition} is in the range of System.Interrupt_Priority.
@@ -472,9 +479,11 @@ attached at the time the protected object was initialized],
 Old=[Otherwise, @Redundant[that is, if an Attach_@!Handler pragma was
 used]]}, the previous handler is restored.
 @begin{Discussion}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068],ARef=[AI95-00121-01],ARef=[AI95-00303-01]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068],ARef=[AI95-00121-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00303-01]}
 @Chg{New=[If all protected objects for interrupt handlers are declared at the
-library-level],Old=[Since only library-level protected procedures can be attached as
+library@Chg{Version=[2],New=[ ],Old=[-]}level],Old=[Since only library-level
+protected procedures can be attached as
 handlers using the Interrupts package]}, the finalization discussed above
 occurs only as part of the finalization of all library-level packages in
 a partition.
@@ -482,7 +491,7 @@ a partition.
 pragma need not be at the library level. Thus, an implementation needs to be
 able to restore handlers during the execution of the program.@Chg{Version=[2],
 New=[ (An object with an Interrupt_@!Handler pragma also need not be at the
-library-level, but such
+library level, but such
 a handler cannot be attached to an interrupt using the Interrupts package.)],
 Old=[]}],Old=[]}
 @end{Discussion}
@@ -520,8 +529,11 @@ one attached by the initialization of a protected object.]}
 
 @begin{Metrics}
 @Leading@Keepnext@;The following metric shall be documented by the implementation:
-@begin{enumerate}
-The worst case overhead for an interrupt handler that is a parameterless
+@ChgNote{This was @begin{enumerate}, which is wrong}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+The worst@Chg{Version=[2],New=[-],Old=[ ]}case overhead for an interrupt
+handler that is a parameterless
 protected procedure, in clock cycles. This is the execution time not
 directly attributable to the handler procedure or the interrupted execution.
 It is estimated as C @en@; (A+B), where A is how long it takes to complete a given
@@ -537,7 +549,8 @@ activity of an interrupt handler could invalidate the contents of cache memory, 
 @end{ImplNote}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The metrics for interrupt handlers.]}]}
-@end{enumerate}
+@ChgNote{This was @end{enumerate}, which is wrong}
+@end{Itemize}
 @end{Metrics}
 
 @begin{ImplPerm}
@@ -600,7 +613,10 @@ The Attach_Handler pragma can provide static attachment of handlers to
 interrupts if the implementation supports preelaboration of protected
 objects. (See @RefSecNum{Preelaboration Requirements}.)
 
-The ceiling priority of a protected object that one of its procedures is
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+The ceiling priority of a protected object
+@Chg{Version=[2],New=[],Old=[that ]}one
+of @Chg{Version=[2],New=[whose],Old=[its]} procedures is
 attached to an interrupt should be at least as high as the highest
 processor priority at which that interrupt will ever be delivered.
 
@@ -616,7 +632,7 @@ a protected procedure that is an interrupt handler.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0068],ARef=[AI95-00121-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the meaning of
-  @lquotes@;the previous handler@rquotes; when finalizing protected objects
+  @lquotes@;the previous handler@rquotes when finalizing protected objects
   containing interrupt handlers.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00253-01]}
@@ -627,7 +643,7 @@ a protected procedure that is an interrupt handler.
   @ChgAdded{Version=[2],Text=[Dropped the requirement that an object of a
   type containing an Interrupt_Handler pragma must be declared at the library
   level. This was a generic contract model violation. This change is not
-  an extension as an attempt to attach such a handler with a routine in
+  an extension, as an attempt to attach such a handler with a routine in
   package Interrupts will fail an accessibility check anyway. Moreover,
   implementations can retain the rule as an implementation-defined
   restriction on the use of the type, as permitted by the @ImplPermTitle
@@ -751,9 +767,10 @@ Attach_Handler), the handler is not detached and Program_Error is
 raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 The Reference function returns a value of type System.Address that can
-be used to attach a task entry, via an address clause
-(see @RefSecNum{Interrupt Entries}) to the interrupt
+be used to attach a task entry@Chg{Version=[2],New=[],Old=[,]} via an
+address clause (see @RefSecNum{Interrupt Entries}) to the interrupt
 specified by Interrupt. This function raises Program_Error if attaching
 task entries to interrupts (or to this particular interrupt) is not supported.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -769,8 +786,10 @@ of the corresponding interrupt be undefined.
 
 @begin{DocReq}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
-in effect the implementation shall document the default ceiling priority
+in effect@Chg{Version=[2],New=[,],Old=[]} the implementation shall document
+the default ceiling priority
 assigned to a protected object that contains either the Attach_Handler or
 Interrupt_Handler pragmas, but not the Interrupt_Priority pragma.
 @Redundant[This default need not be the same for all interrupts.]
@@ -908,7 +927,8 @@ any @nt<discrete_choice> of an @nt<array_aggregate> is static;
 no language-defined check associated with the elaboration of the
 @nt<object_declaration> can fail.
 @begin{Reason}
-The intent is that aggregates all of whose scalar subcomponents are static,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+The intent is that aggregates all of whose scalar subcomponents are static@Chg{Version=[2],New=[],Old=[,]}
 and all of whose access subcomponents are @key(null), allocators for
 access-to-constant types, or X'Access, will be supported with no run-time
 code generated.
@@ -933,7 +953,9 @@ Text=[Whether a partition can be restarted without reloading.]}]}
 @ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of preelaboration.]}]}
 @begin{discussion}
-This covers the issue of the RTS itself being restartable,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+This covers the issue of the @Chg{Version=[2],New=[run-time system],Old=[RTS]}
+itself being restartable,
 so that need not be a separate @DocReqName.
 @end{discussion}
 
@@ -953,7 +975,7 @@ code is executed at run time for the elaboration of entities.]}]}
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[Added wording to exclude the additional kinds
-  of types allowed in preelaborated units by Ada 2005 from the @ImplReqTitle.]}
+  of types allowed in preelaborated units from the @ImplReqTitle.]}
 @end{DiffWord95}
 
 
@@ -1112,7 +1134,7 @@ New=[, other than objects obtained by evaluating a slice],Old=[]}.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00272-01]}
   @ChgAdded{Version=[2],Text=[A slice of an atomic array object is not itself
   atomic. That's necessary as executing a read or write of a dynamic number
-  of types in a single instruction is not possible on many targets.]}
+  of components in a single instruction is not possible on many targets.]}
 @end{Ramification}
 
 @Defn{volatile}
@@ -1511,7 +1533,7 @@ Task_Id value that identifies the environment task.
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
-  @ChgAdded{Version=[2],Text=[Task_Identification is now Preelaborated,
+  @ChgAdded{Version=[2],Text=[Task_Identification is now preelaborated,
   so it can be used in preelaborated units.]}
 @end{Extend95}
 
@@ -1645,7 +1667,7 @@ the execution of the program is erroneous.
 @Chg{Version=[2],New=[attribute],Old=[attributes]} via a value of type
 Attribute_Handle @Chg{Version=[2],New=[is],Old=[are]}
 erroneous if executed concurrently with @Chg{Version=[2],New=[another such access],
-Old=[each other]} or @Chg{Version=[2],New=[call],Old=[with calls]} of any of the
+Old=[each other]} or @Chg{Version=[2],New=[a call],Old=[with calls]} of any of the
 operations declared in package Task_Attributes.@Chg{Version=[2],New=[ An access
 to a task attribute is erroneous if executed
 concurrently with or after the finalization of the task attribute.],Old=[]}]}
@@ -1658,11 +1680,12 @@ concurrently with or after the finalization of the task attribute.],Old=[]}]}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[A task attribute can only be accessed after
   finalization through a value of type Attribute_Handle. Operations in
-  package Task_Attributes cannot be used to access after finalization,
-  because either the master of the instance has been or is in the process
-  of being left (in which case the instance is out of scope and thus cannot
-  be called), or the associated task is already terminated (in which case
-  Tasking_Error is raised for any attempt to call an operation).]}
+  package Task_Attributes cannot be used to access a task attribute after
+  finalization, because either the master of the instance has been or is in the
+  process of being left (in which case the instance is out of scope and thus
+  cannot be called), or the associated task is already terminated (in which
+  case Tasking_Error is raised for any attempt to call a task attribute
+  operation).]}
 @end{Ramification}
 @end{Erron}
 
@@ -1688,7 +1711,7 @@ concurrently by multiple tasks.
 @Chg{Version=[2],New=[After],Old=[When a]} task
 @Chg{Version=[2],New=[attributes are finalized],Old=[terminates]},
 the implementation shall @Chg{Version=[2],New=[],Old=[finalize
-all attributes of the task]}, and reclaim any other storage
+all attributes of the task, and]} reclaim any other storage
 associated with the attributes.
 @end{ImplReq}
 
@@ -1710,15 +1733,17 @@ attributes, and how to configure any limits.]}]}
 
 @begin{Metrics}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 The implementation shall document the following metrics: A task calling the
-following subprograms shall execute in a sufficiently high priority as to not
+following subprograms shall execute @Chg{Version=[2],New=[at],Old=[in]} a
+sufficiently high priority as to not
 be preempted during the measurement period. This period shall start just
 before issuing the call and end just after the call completes. If the
 attributes of task T are accessed by the measurement tests, no other task
 shall access attributes of that task during the measurement period.
 For all measurements described here, the Attribute type shall be a scalar
-whose size is equal to the size of the predefined
-integer size.
+@Chg{Version=[2],New=[type ],Old=[]}whose size is equal to the size of the
+predefined @Chg{Version=[2],New=[type Integer],Old=[integer size]}.
 For each measurement, two cases shall be documented: one
 where the accessed attributes are of the calling task @Redundant[(that is,
 the default value for the T parameter is used)], and the other, where T
@@ -1737,8 +1762,9 @@ Initial_Value;
 a call to Reference, where the return value designates a value not equal
 to Initial_Value;
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 a call to Set_Value where the Val parameter is not equal to Initial_Value
-and the old attribute value is equal to Initial_Value.
+and the old attribute value is equal to Initial_Value@Chg{Version=[2],New=[;],Old=[.]}
 
 a call to Set_Value where the Val parameter is not equal to Initial_Value
 and the old attribute value is not equal to Initial_Value.
@@ -1765,9 +1791,11 @@ simply return Initial_Value, rather than implicitly creating the object.
   operation for the corresponding type has side-effects.
 @end{Discussion}
 @begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   This permission means that even though every task has every
   attribute, storage need only be allocated for those attributes
-  that have been Reference'd or set to a value other than that
+  @Chg{Version=[2],New=[for which function Reference has been invoked],Old=[that
+  have been Reference'd]} or set to a value other than that
   of Initial_Value.
 @end{ImplNote}
 
@@ -1791,6 +1819,15 @@ and the heap for the others. In the latter case, N should be documented.
 Text=[If the target domain requires deterministic memory use at run
 time, storage for task attributes should be pre-allocated
 statically and the number of attributes pre-allocated should be documented.]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We don't mention @lquotes@;restrictions on the
+  size and number@rquotes (that is, limited) in the text for the
+  Annex, because it is covered by the @DocReqName above, and we try not to
+  repeat Annex requirements (they're enough work to meet without having to
+  do things twice).]}
+@end{Discussion}
 @end{ImplAdvice}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00237-01]}
@@ -1808,7 +1845,7 @@ termination.]}]}
   task termination. Without this advice, waiting until the instance is
   finalized would meet the requirements (it is after termination, but may be
   a very long time after termination). We can't say anything more specific
-  than this, as we do not want to require overhead of an interaction with
+  than this, as we do not want to require the overhead of an interaction with
   the tasking system to be done at a specific point.]}
 @end{Reason}
 @begin{Notes}
@@ -1824,15 +1861,17 @@ programmer must make sure that the task whose attribute is being accessed
 is not yet terminated. Failing to do so could make the program execution
 erroneous.
 
-As specified in @RefSecNum{The Package Task_Identification}, if the parameter
-T (in a call on a subprogram of an instance of this package) identifies
-a nonexistent task, the execution of the program is erroneous.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00434-01]}
+@ChgDeleted{Version=[2],Text=[As specified in
+@RefSecNum{The Package Task_Identification}, if the parameter T (in a call
+on a subprogram of an instance of this package) identifies a nonexistent
+task, the execution of the program is erroneous.]}
 @end{Notes}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0071],ARef=[AI95-00165-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that use of task
-  attribute operations from within a task attribute operation (by a an Adjust
+  attribute operations from within a task attribute operation (by an Adjust
   or Finalize call) is a bounded error, and that concurrent use of attribute
   handles is erroneous.]}
 
@@ -1854,27 +1893,27 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Task_Identification;
 @key<with> Ada.Exceptions;
 @key<package> Ada.Task_Termination @key<is>@ChildUnit{Parent=[Ada],Child=[Task_Termination]}
-  @key<pragma> Preelaborate(Task_Termination);]}
+   @key<pragma> Preelaborate(Task_Termination);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[  @key<type> @AdaTypeDefn{Cause_Of_Termination} @key<is> (Normal, Abnormal, Unhandled_Exception);]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Cause_Of_Termination} @key<is> (Normal, Abnormal, Unhandled_Exception);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Termination_Handler} @key<is access protected procedure>
-    (Cause : @key<in> Cause_Of_Termination;
-     T     : @key<in> Ada.Task_Identification.Task_Id;
-     X     : @key<in> Ada.Exceptions.Exception_Occurrence);]}
+     (Cause : @key<in> Cause_Of_Termination;
+      T     : @key<in> Ada.Task_Identification.Task_Id;
+      X     : @key<in> Ada.Exceptions.Exception_Occurrence);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Dependents_Fallback_Handler}
-    (Handler: @key<in> Termination_Handler);
-  @key<function> @AdaSubDefn{Current_Task_Fallback_Handler} return Termination_Handler;]}
+     (Handler: @key<in> Termination_Handler);
+   @key<function> @AdaSubDefn{Current_Task_Fallback_Handler} return Termination_Handler;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Specific_Handler}
-    (T       : @key<in> Ada.Task_Identification.Task_Id;
-     Handler : @key<in> Termination_Handler);
-  @key<function> @AdaSubDefn{Specific_Handler} (T : Ada.Task_Identification.Task_Id)
+     (T       : @key<in> Ada.Task_Identification.Task_Id;
+      Handler : @key<in> Termination_Handler);
+   @key<function> @AdaSubDefn{Specific_Handler} (T : Ada.Task_Identification.Task_Id)
       @key<return> Termination_Handler;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1911,6 +1950,12 @@ with a non-null value of type Termination_Handler, and @i<cleared> otherwise.
 When a task is created, its specific handler and fall-back handler are cleared.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgAdded{Version=[2],Text=[The procedure Set_Dependents_Fallback_Handler
+changes the fall-back handler for the calling task; if Handler is @key{null},
+that fall-back handler is cleared, otherwise it is set to be Handler.@key{all}.
+If a fall-back handler had previously been set it is replaced.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
 @ChgAdded{Version=[2],Text=[The function Current_Task_Fallback_Handler returns
 the fall-back handler that is currently set for the calling task, if one is
 set; otherwise it returns @key{null}.]}
@@ -1930,7 +1975,7 @@ otherwise it returns @key{null}.]}
 @ChgAdded{Version=[2],Text=[As part of the finalization of a @nt{task_body},
 after performing the actions specified in
 @RefSecNum{User-Defined Assignment and Finalization} for finalization of a
-master, the task specific handler, if one is set, is executed.
+master, the specific handler for the task, if one is set, is executed.
 If the specific handler is cleared, a search
 for a fall-back handler proceeds by recursively following the master
 relationship for the task. If a task is found whose fall-back handler is set,

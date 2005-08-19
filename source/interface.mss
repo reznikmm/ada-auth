@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2005/07/28 04:44:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2005/08/18 06:14:48 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:17 $}
+@Comment{$Date: 2005/08/18 06:14:48 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -780,7 +780,7 @@ C@Chg{New=[; and support for the Convention pragma with
 The package Interfaces.C contains the basic types, constants and
 subprograms that allow an Ada program to pass scalars and strings to C
 functions.@Chg{Version=[2],New=[ When this clause mentions a C entity,
-the reference also applies to the same entity in C++.],Old=[]}
+the reference also applies to the corresponding entity in C++.],Old=[]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -982,8 +982,9 @@ Old=[@RI{implementation-defined}]};
 
 @key(end) Interfaces.C;
 @end{Example}
-@ChgImplDef{Version=[1],Kind=[Added],Text=[@Chg{New=[The definitions of types
-and constants in Interfaces.C.],Old=[]}]}
+@ChgImplDef{Version=[2],Kind=[Added],Text=[@Chg{New=[The definitions of
+@Chg{Version=[2],New=[certain ],Old=[]}types and constants in
+Interfaces.C.],Old=[]}]}
 
 Each of the types declared in Interfaces.C is C-compatible.
 
@@ -997,6 +998,16 @@ The types signed_char, unsigned_@!short, unsigned_@!long, unsigned_@!char,
 C_float, and long_@!double correspond respectively
 to the C types signed char,
 unsigned short, unsigned long, unsigned char, float, and long double.
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The C types wchar_t and char16_t seem to be the
+same. However, wchar_t has an implementation-defined size, whereas
+char16_t is guaranteed to be an unsigned type of at least 16
+bits. Also, char16_t and char32_t are encouraged to have UTF-16 and UTF-32
+representations; that means that they are not directly the same as the Ada
+types, which most likely don't use any UTF encoding.]}
+@end{Discussion}
 
 @Trailing@;The type of the subtype plain_char is either signed_char or
 unsigned_char, depending on the C implementation.
@@ -1455,7 +1466,7 @@ specific numbers and types of parameters.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
   @ChgAdded{Version=[2],Text=[Specified that an unchecked union type (see
-  @RefSecNum{Pragma Unchecked_Union}) are eligible for convention
+  @RefSecNum{Pragma Unchecked_Union}) is eligible for convention
   C_Pass_By_Copy.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00258-01]}
@@ -1767,7 +1778,7 @@ Free, not by a called C function.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00242-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
   Update for a String parameter is now defined to not add a nul character.
-  It did add a nul in Ada 95. This means that programs which used
+  It did add a nul in Ada 95. This means that programs that used
   this behavior of Update to truncate a string will no longer work (the
   string will not be truncated). This change makes Update for a string
   consistent with Update for a char_array (no implicit nul is added to the
