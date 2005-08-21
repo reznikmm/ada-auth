@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/08/11 00:12:45 $}
+@Comment{$Date: 2005/08/21 17:59:30 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2650,7 +2650,7 @@ with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
 (see @RefSecNum{Type Conversions}) of an aliased view.
-@Chg{Version=[2],New=[A],Old=[Finally, the]} current instance of a
+@Chg{Version=[2],New=[The],Old=[Finally, the]} current instance of a
 limited@Chg{Version=[2],New=[ tagged],Old=[]} type, @Chg{Version=[2],New=[a
 protected type, a task type, or a type that has the reserved word @key{limited}
 in its full definition is also defined to be aliased. Finally,],Old=[and]}
@@ -2939,7 +2939,8 @@ parameter (see @RefSecNum(Subprogram Declarations)).]]}
 For each @Chg{Version=[2],New=[],Old=[(named) ]}access type, there is
 @Chg{Version=[2],New=[],Old=[a literal @key(null) which has ]}a null
 access value designating no entity at all@Chg{Version=[2],New=[, which can be
-obtained by converting the literal @key{null} to the access type],Old=[]}.
+obtained by (implicitly) converting the literal @key{null} to the access
+type],Old=[]}.
 @Redundant[The null value of @Chg{Version=[2],New=[an],Old=[a named]} access
 type is the default initial value of the type.]
 @Chg{Version=[2],New=[Non-null],Old=[Other]} values of an
@@ -2993,7 +2994,8 @@ the @nt{subtype_indication} excludes null.]}
   parameter excludes null because it is necessary to read the tag to
   dispatch, and null has no tag. We would have preferred to
   require @key{not null} to be specified for such
-  parameters, but that would have been too incompatible with Ada 95.]}
+  parameters, but that would have been too incompatible with Ada 95 code
+  to require.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Note that we considered imposing a similar
@@ -3067,8 +3069,8 @@ shall denote an access subtype that does not exclude null.]}
 @end(Honest)
 @begin(Reason)
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-  @ChgAdded{Version=[2],Text=[This is similar to doubly constraining a subtype,
-  which we also don't allow.]}
+  @ChgAdded{Version=[2],Text=[This is similar to doubly constraining a
+  composite subtype, which we also don't allow.]}
 @end(Reason)
 @end{Legality}
 
@@ -3188,7 +3190,7 @@ outside of the ACATS. (Of course, a program which actually wants to pass
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
 @Chg{Version=[2],New=[Most unconstrained aliased objects
-with discriminants are no longer
+with defaulted discriminants are no longer
 constrained by their initial values. This means that a program that
 raised Constraint_Error from an attempt to change the discriminants
 will no longer do so. The change only affects programs that depended
@@ -3203,8 +3205,8 @@ any major compiler upgrade.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00225-01]}
 @Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
 The rule defining when a current instance of a limited type is considered to be
-aliased has been tightened to only apply to types which cannot become
-nonlimited. A program which attempts to take 'Access of the current instance
+aliased has been tightened to apply only to types that cannot become
+nonlimited. A program that attempts to take 'Access of the current instance
 of a limited type that can become nonlimited will be illegal in Ada 2005.
 While Ada 95 allowed the current instance of any limited type
 to be treated as aliased, this was inconsistently implemented in compilers,
@@ -3228,7 +3230,7 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0012],ARef=[AI95-00062-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Added accidentally omitted wording
+@Chg{Version=[2],New=[@b<Corrigendum:> Added accidentally-omitted wording
 that says that a derived access type shares its storage pool with its
 parent type. This was clearly intended, both because of a note in
 @RefSecNum{Derived Types and Classes}, and because anything else would
@@ -3241,12 +3243,12 @@ the description of when access types are constrained.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
 @Chg{Version=[2],New=[The wording was fixed to allow @nt{allocator}s and
 the literal @key{null} for anonymous access types. The former was clearly
-intended by Ada 95, see the @ImplAdviceTitle in @RefSecNum{Storage Management}.],
+intended by Ada 95; see the @ImplAdviceTitle in @RefSecNum{Storage Management}.],
 Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
 @Chg{Version=[2],New=[The rules about aliased objects being constrained by
-their initial values now only apply to allocated objects, and thus have
+their initial values now apply only to allocated objects, and thus have
 been moved to @RefSec{Allocators}.],Old=[]}
 @end{DiffWord95}
 
@@ -3671,7 +3673,7 @@ not at all) for different designated subtypes.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
   @ChgAdded{Version=[2],Text=[It is now illegal to use an incomplete view
-  (type} in a primitive subprogram of the type unless the incomplete view is
+  (type) in a primitive subprogram of the type unless the incomplete view is
   completed in the package specification. This was allowed in Ada 95 for
   incomplete types where the completion was deferred to the body (the use would
   have to be in an access parameter). This incompatibility was caused by the
@@ -3792,7 +3794,7 @@ is the expected type or profile for the @nt{prefix}.],Old=[]}
 @key{function} Zop @key{return} Char_Ptr; -- @RI[(4)]],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Result : Float := Zap (Zop.@key{all}'access); -- @RI[Resolves to Zap (1) and Zop (3).]],Old=[]}
+@Chg{Version=[2],New=[Result : Float := Zap (Zop.@key{all}'Access); -- @RI[Resolves to Zap (1) and Zop (3).]],Old=[]}
 @end{Example}
 @end(Discussion)
 @end{Resolution}
@@ -3809,11 +3811,12 @@ is the expected type or profile for the @nt{prefix}.],Old=[]}
 @Redundant[The accessibility rules,
 which prevent dangling references,
 are written in terms of @i{accessibility levels},
-which reflect the run-time nesting of @i{masters}@Chg{Version=[2],New=[ (see],
-Old=[. As explained in]}
-@RefSecNum{Completion and Finalization}@Chg{Version=[2],New=[)],Old=[,
-a master is the execution of a @nt{task_body}, a @nt{block_statement},
-a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}]}.
+which reflect the run-time nesting of @i{masters}. As explained in
+@RefSecNum{Completion and Finalization},
+a master is the execution of a
+@Chg{Version=[2],New=[certain construct, such as],Old=[,@nt{task_body}, a @nt{block_statement},]}
+a @nt{subprogram_body}@Chg{Version=[2],New=[],Old=[, an @nt{entry_body}, or an @nt{accept_statement}]}.
+
 An accessibility level is @i{deeper than} another if it is more
 deeply nested at run time.
 For example, an object declared local to a called subprogram has a deeper
@@ -3928,7 +3931,7 @@ New=[ result],Old=[]}.
 @ChgAdded{Version=[2],Text=[Within a return statement, the accessibility level
 of the return object is that of the execution of the return statement. If the
 return statement completes normally by returning from the
-function, prior to leaving the function, the accessibility level
+function, then prior to leaving the function, the accessibility level
 of the return object changes to be a level determined by the point
 of call, as does the level of any coextensions (see below) of the
 return object.]}
@@ -5298,8 +5301,7 @@ for any kind of entity.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0014],ARef=[AI95-00064-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Added a definition of @i{body}, which
-is different than @nt{body} or @key{body}. At least @i{body} is the same as
-body. We wouldn't want it to be too easy to understand!],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0014],ARef=[AI95-00064-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added a definition of @i{body},
+  which is different than @nt{body} or @key{body}.]}
 @end{DiffWord95}

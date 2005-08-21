@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2005/08/17 00:07:38 $ $Author: Randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2005/08/19 06:37:28 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:38 $}
+@Comment{$Date: 2005/08/19 06:37:28 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -31,21 +31,29 @@ with the container object itself.@PDefn2{Term=[cursor],Sec=[for a container]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Within this clause we provide Implementation Advice
 for the desired average or worst case time complexity of certain operations
-on a container. This advice is expressed using a big-O notation.
+on a container. This advice is expressed using the Landau symbol @i{O}(X).
 Presuming f is some function of a length parameter N and t(N) is the time the
 operation takes (on average or worst case, as specified) for the length N, a
 complexity of O(f(N)) means that there exists a finite A such that for any N,
-t(N)/f(N) < A. @Defn{big-O notation}@Defn{O(f(N))}]}
+t(N)/f(N) < A. @Defn{Landau symbol @i{O}(X)}@Defn{@i{O}(f(N))}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Of course, an implementation can do better than a
-  specified O(f(N)): for example, O(1) meets the requirements for O(log N).]}
+  specified @i{O}(f(N)): for example, @i{O}(1) meets the requirements for
+  @i{O}(log N).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This concept seems to have
+  as many names as there are authors. We used @lquotes@;Landau symbol@rquotes
+  because that's what our reference does. But we'd also seen this referred as
+  big-O notation@Defn{big-O notation} (sometimes written as @i<big-oh>), and
+  as Bachmann notation. Whatever the name, it always has the above definition.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[If the advice suggests that the complexity should be
-less than O(f(N)), then for any arbitrarily small positive real D, there
+less than @i{O}(f(N)), then for any arbitrarily small positive real D, there
 should exist a positive integer M such that for all N > M,
 t(N)/f(N) < D.]}
 @end{Intro}
@@ -658,10 +666,11 @@ package Containers.Vectors has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
-"=" on Element_Type values is expected to define a symmetric relationship and
-return the same result value each time it is called with a particular pair of
-values. The exact arguments and number of calls of the generic formal function
-"=" on Element_Type values by the functions defined to use it are
+"=" on Element_Type values is expected to define a reflexive and symmetric
+relationship and return the same result value each time it is called with a
+particular pair of values. If it behaves in some other manner, the functions
+defined to use it return an unspecified value. The exact arguments and number
+of calls of this generic formal function by the functions defined to use it are
 unspecified.@PDefn{unspecified}]}
 
 @begin{Ramification}
@@ -2036,24 +2045,24 @@ to an array. In particular, if the length of a vector is @i{N}, then]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[the worst-case time complexity of Element should
-  be O(log @i{N}); and]}
+  be @i{O}(log @i{N}); and]}
   @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
   Text=[The worst-case time complexity of Element
-  for Containers.Vector should be O(log @i{N}).]}]}
+  for Containers.Vector should be @i{O}(log @i{N}).]}]}
 
   @ChgAdded{Version=[2],Text=[the worst-case time complexity of Append with
   Count=1 when @i{N} is less than the capacity of the vector should be
-  O(log @i{N}); and]}
+  @i{O}(log @i{N}); and]}
   @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
   Text=[The worst-case time complexity of Append with Count = 1 when
-  @i{N} is less than the capacity for Containers.Vector should be O(log @i{N}).]}]}
+  @i{N} is less than the capacity for Containers.Vector should be @i{O}(log @i{N}).]}]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[the worst-case time complexity of Prepend with
-  Count=1 and Delete_First with Count=1 should be O(@i{N} log @i{N}).]}
+  Count=1 and Delete_First with Count=1 should be @i{O}(@i{N} log @i{N}).]}
   @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
   Text=[The worst-case time complexity of Prepend with Count = 1 and
-  Delete_First with Count=1 for Containers.Vectors should be O(@i{N} log @i{N}).]}]}
+  Delete_First with Count=1 for Containers.Vectors should be @i{O}(@i{N} log @i{N}).]}]}
 
 @end{Itemize}
 
@@ -2063,25 +2072,25 @@ to an array. In particular, if the length of a vector is @i{N}, then]}
   strategies here. However, it is important for portability that the
   performance of large containers has roughly the same factors on different
   implementations. If a program is moved to an implementation that takes
-  O(@i{N}) time to access elements, that program could be unusable when the
-  vectors are large. We allow O(log @i{N}) access because the proportionality
+  @i{O}(@i{N}) time to access elements, that program could be unusable when the
+  vectors are large. We allow @i{O}(log @i{N}) access because the proportionality
   constant and caching effects are likely to be larger than the log factor, and
   we don't want to discourage innovative implementations.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The worst-case time complexity of a call on procedure
-Sort of an instance of Containers.Vectors.Generic_Sorting should be O(@i{N}**2), and the
-average time complexity should be better than O(@i{N}**2).]}
+Sort of an instance of Containers.Vectors.Generic_Sorting should be @i{O}(@i{N}**2), and the
+average time complexity should be better than @i{O}(@i{N}**2).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The worst-case time complexity of a call on procedure Sort of an
-instance of Containers.Vectors.Generic_Sorting should be O(@i{N}**2), and the
-average time complexity should be better than O(@i{N}**2).]}]}
+instance of Containers.Vectors.Generic_Sorting should be @i{O}(@i{N}**2), and the
+average time complexity should be better than @i{O}(@i{N}**2).]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In other words, we're requiring the use of a
-  better than O(@i{N}**2) sorting algorithm, such as Quicksort. No bubble sorts
+  better than @i{O}(@i{N}**2) sorting algorithm, such as Quicksort. No bubble sorts
   allowed!]}
 @end{Ramification}
 
@@ -2405,11 +2414,13 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
-"=" on Element_Type values is expected to define a symmetric relationship and
-return the same result value each time it is called with a particular pair of
-values. The exact arguments and number of calls of the generic formal function
-"=" on Element_Type values by the functions Find, Reverse_Find, and "=" on List
-values are unspecified.@PDefn{unspecified}]}
+"=" on Element_Type values is expected to define a reflexive and symmetric
+relationship and return the same result value each time it is called with a
+particular pair of values. If it behaves in some other manner, the functions
+Find, Reverse_Find, and "=" on list values return an unspecified value. The
+exact arguments and number of calls of this generic formal function by the
+functions Find, Reverse_Find, and "=" on list values are
+unspecified.@PDefn{unspecified}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3223,11 +3234,11 @@ object to the target list object.]}
 @ChgAdded{Version=[2],Text=[Containers.Doubly_Linked_Lists should be
 implemented similarly to a linked list. In particular, if @i<N> is the length
 of a list, then the worst-case time complexity of Element, Insert with Count=1,
-and Delete with Count=1 should be O(log @i<N>).]}
+and Delete with Count=1 should be @i{O}(log @i<N>).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The worst-case time complexity of Element, Insert with Count=1, and
 Delete with Count=1 for Containers.Doubly_Linked_Lists should be
-O(log @i<N>).]}]}
+@i{O}(log @i<N>).]}]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3235,8 +3246,8 @@ O(log @i<N>).]}]}
   strategies here. However, it is important for portability that the
   performance of large containers has roughly the same factors on different
   implementations. If a program is moved to an implementation that takes
-  O(@i<N>) time to access elements, that program could be unusable when the
-  lists are large. We allow O(log @i<N>) access because the proportionality
+  @i{O}(@i<N>) time to access elements, that program could be unusable when the
+  lists are large. We allow @i{O}(log @i<N>) access because the proportionality
   constant and caching effects are likely to be larger than the log factor, and
   we don't want to discourage innovative implementations.]}
 @end{Reason}
@@ -3245,17 +3256,17 @@ O(log @i<N>).]}]}
 @ChgAdded{Version=[2],Text=[The worst-case time complexity of a call on
 procedure Sort of an
 instance of Containers.Doubly_Linked_Lists.Generic_Sorting should be
-O(@i<N>**2), and the average time complexity should be better than O(@i<N>**2).]}
+@i{O}(@i<N>**2), and the average time complexity should be better than @i{O}(@i<N>**2).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[a call on procedure Sort of an
 instance of Containers.Doubly_Linked_Lists.Generic_Sorting
-should have an average time complexity better than O(@i{N}**2) and
-worst case no worse than O(@i{N}**2).]}]}
+should have an average time complexity better than @i{O}(@i{N}**2) and
+worst case no worse than @i{O}(@i{N}**2).]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In other words, we're requiring the use of a
-  better than O(@i{N}**2) sorting algorithm, such as Quicksort. No bubble sorts
+  better than @i{O}(@i{N}**2) sorting algorithm, such as Quicksort. No bubble sorts
   allowed!]}
 @end{Ramification}
 
@@ -3330,11 +3341,12 @@ a description of the semantics specific to Containers.Ordered_Maps.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
-"=" on Element_Type values is expected to define a symmetric relationship and
-return the same result value each time it is called with a particular pair of
-values. The exact arguments and number of calls of the generic formal function
-"=" on Element_Type values by the function "=" on Map values are
-unspecified.@PDefn{unspecified}]}
+"=" on Element_Type values is expected to define a reflexive and symmetric
+relationship and return the same result value each time it is called with a
+particular pair of values. If it behaves in some other manner, the function
+"=" on map values returns an unspecified value. The
+exact arguments and number of calls of this generic formal function by the
+function "=" on map values are unspecified.@PDefn{unspecified}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4177,7 +4189,7 @@ expanded.@Defn2{Term=[capacity],Sec=[of a hashed map]}]}
   hash table which is grown when it is too small, with linked lists hanging off
   of each bucket. Note that in that implementation a cursor needs a back
   pointer to the Map object to implement iteration; that could either be in the
-  nodes, or in the cursor object. To provide an average O(1) access time,
+  nodes, or in the cursor object. To provide an average @i{O}(1) access time,
   capacity would typically equal the number of buckets in such an
   implementation, so that the average bucket linked list length would be no
   more than 1.0.]}
@@ -4499,16 +4511,16 @@ in the cursor in order to implement this function.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[If @i<N> is the length of a map, the average time
 complexity of the subprograms Element, Insert, Include, Replace, Delete,
-Exclude and Find that take a key parameter should be O(log @i<N>). The average
-time complexity of the subprograms that take a cursor parameter should be O(1).
-The average time complexity of Reserve_Capacity should be O(@i<N>).]}
+Exclude and Find that take a key parameter should be @i{O}(log @i<N>). The average
+time complexity of the subprograms that take a cursor parameter should be @i{O}(1).
+The average time complexity of Reserve_Capacity should be @i{O}(@i<N>).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The average time complexity of Element, Insert, Include, Replace,
 Delete, Exclude and Find operations that
 take a key parameter for Containers.Hashed_Maps should be
-O(log @i<N>). The average
+@i{O}(log @i<N>). The average
 time complexity of the subprograms of Containers.Hashed_Maps that take
-a cursor parameter should be O(1).]}]}
+a cursor parameter should be @i{O}(1).]}]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4516,8 +4528,8 @@ a cursor parameter should be O(1).]}]}
   strategies here. However, it is important for portability that the
   performance of large containers has roughly the same factors on different
   implementations. If a program is moved to an implementation for which Find is
-  O(@i<N>), that program could be unusable when the maps are large. We allow
-  O(log @i<N>) access because the proportionality constant and caching effects
+  @i{O}(@i<N>), that program could be unusable when the maps are large. We allow
+  @i{O}(log @i<N>) access because the proportionality constant and caching effects
   are likely to be larger than the log factor, and we don't want to discourage
   innovative implementations.]}
 @end{Reason}
@@ -4991,20 +5003,20 @@ predecessor order, starting with the last node.]}
 @ChgAdded{Version=[2],Text=[If @i<N> is the length of a map, then the
 worst-case time complexity of the
 Element, Insert, Include, Replace, Delete, Exclude and Find operations that
-take a key parameter should be O((log @i<N>)**2) or better. The worst-case
-time complexity of the subprograms that take a cursor parameter should be O(1).]}
+take a key parameter should be @i{O}((log @i<N>)**2) or better. The worst-case
+time complexity of the subprograms that take a cursor parameter should be @i{O}(1).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The worst-case time complexity of Element, Insert, Include, Replace,
 Delete, Exclude and Find operations that
 take a key parameter for Containers.Ordered_Maps should be
-O((log @i<N>)**2) or better. The worst-case
+@i{O}((log @i<N>)**2) or better. The worst-case
 time complexity of the subprograms of Containers.Ordered_Maps that take
-a cursor parameter should be O(1).]}]}
+a cursor parameter should be @i{O}(1).]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[A balanced (red-black) tree for keys has
-  O(log @i<N>) worst-case performance. Note that a O(@i<N>) worst-case
+  @i{O}(log @i<N>) worst-case performance. Note that a @i{O}(@i<N>) worst-case
   implementation (like a list) would be wrong.]}
 @end{ImplNote}
 
@@ -5013,7 +5025,7 @@ a cursor parameter should be O(1).]}]}
   @ChgAdded{Version=[2],Text=[We do not mean to overly constrain implementation
   strategies here. However, it is important for portability that the
   performance of large containers has roughly the same factors on different
-  implementations. If a program is moved to an implementation that takes O(@i<N>)
+  implementations. If a program is moved to an implementation that takes @i{O}(@i<N>)
   to find elements, that program could be unusable when the maps are large. We
   allow the extra log @i<N> factors because the proportionality constant and
   caching effects are likely to be larger than the log factor, and we don't
@@ -5054,11 +5066,12 @@ a description of the semantics specific to Containers.Ordered_Sets.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
-"=" on Element_Type values is expected to define a symmetric relationship and
-return the same result value each time it is called with a particular pair of
-values. The exact arguments and number of calls of the generic formal function
-"=" on Element_Type values by the function "=" on Set values is
-unspecified.@PDefn{unspecified}]}
+"=" on Element_Type values is expected to define a reflexive and symmetric
+relationship and return the same result value each time it is called with a
+particular pair of values. If it behaves in some other manner, the function
+"=" on set values returns an unspecified value. The
+exact arguments and number of calls of this generic formal function by the
+function "=" on set values are unspecified.@PDefn{unspecified}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6323,16 +6336,16 @@ many times they call it, is unspecified.@PDefn{unspecified}]}
 @ChgAdded{Version=[2],Text=[If @i<N> is the length of a set, the
 average time complexity of the subprograms
 Insert, Include, Replace, Delete, Exclude and Find that take an element
-parameter should be O(log @i<N>). The average time complexity of the
-subprograms that take a cursor parameter should be O(1). The average time
-complexity of Reserve_Capacity should be O(@i<N>).]}
+parameter should be @i{O}(log @i<N>). The average time complexity of the
+subprograms that take a cursor parameter should be @i{O}(1). The average time
+complexity of Reserve_Capacity should be @i{O}(@i<N>).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The average time complexity of the Insert, Include, Replace, Delete, Exclude and
 Find operations of Containers.Hashed_Sets that take an element parameter
-should be O(log @i<N>). The average time complexity of the subprograms
-of Containers.Hashed_Sets that take a cursor parameter should be O(1). The
+should be @i{O}(log @i<N>). The average time complexity of the subprograms
+of Containers.Hashed_Sets that take a cursor parameter should be @i{O}(1). The
 average time complexity of Containers.Hashed_Sets.Reserve_Capacity should be
-O(@i<N>).]}]}
+@i{O}(@i<N>).]}]}
 @end{ImplAdvice}
 
 @begin{ImplNote}
@@ -6861,14 +6874,14 @@ return False using the generic formal "<" operator, and returns True otherwise.]
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[If @i<N> is the length of a set, then the
 worst-case time complexity of the Insert, Include, Replace, Delete, Exclude and
-Find operations that take an element parameter should be O((log @i<N>)**2) or
+Find operations that take an element parameter should be @i{O}((log @i<N>)**2) or
 better. The worst-case time complexity of the subprograms that take a cursor
-parameter should be O(1).]}
+parameter should be @i{O}(1).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The worst-case time complexity of the Insert, Include, Replace, Delete,  Exclude and
 Find operations of Containers.Ordered_Sets that take an element parameter
-should be O((log @i<N>)**2). The worst-case time complexity of the subprograms
-of Containers.Ordered_Sets that take a cursor parameter should be O(1).]}]}
+should be @i{O}((log @i<N>)**2). The worst-case time complexity of the subprograms
+of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 @end{ImplAdvice}
 
 @begin{ImplNote}
@@ -7316,17 +7329,17 @@ Generic_Constrained_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
 @ChgAdded{Version=[2],Text=[
 The worst-case time complexity of a call on an instance of
 Containers.Generic_Array_Sort or Containers.Generic_Constrained_Array_Sort
-should be O(@i<N>**2) or better, and the average time complexity should be better
-than O(@i<N>**2), where @i<N> is the length of the Container parameter.]}
+should be @i{O}(@i<N>**2) or better, and the average time complexity should be better
+than @i{O}(@i<N>**2), where @i<N> is the length of the Container parameter.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort
-should have an average time complexity better than O(@i{N}**2) and worst case no
-worse than O(@i{N}**2).]}]}
+should have an average time complexity better than @i{O}(@i{N}**2) and worst case no
+worse than @i{O}(@i{N}**2).]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In other words, we're requiring the use of
-  a sorting algorithm better than O(@i<N>**2), such as Quicksort. No bubble
+  a sorting algorithm better than @i{O}(@i<N>**2), such as Quicksort. No bubble
   sorts allowed!]}
 @end{Discussion}
 

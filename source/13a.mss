@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:16 $}
+@Comment{$Date: 2005/08/19 06:37:25 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -732,7 +732,8 @@ item is said to be @i{confirming}.@Defn2{Term=[confirming], Sec=(representation 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Chg{New=[@PDefn2{Term=[elaboration], Sec=(aspect_clause)}],
 Old=[@PDefn2{Term=[elaboration], Sec=(representation_clause)}]}
-For the elaboration of a @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]},
+For the elaboration of @Chg{New=[an @nt{aspect_clause}],
+Old=[a @nt{representation_clause}]},
 any evaluable constructs within it are evaluated.
 @begin{Ramification}
 Elaboration of representation pragmas is covered by the
@@ -3107,13 +3108,8 @@ component subtype.
 @Chg{Version=[2],New=[For],Old=[If the default bit ordering applies to
 the declaration of a given type, then for]} a component
 @Chg{Version=[2],New=[with a subtype ],Old=[]}whose
-@Chg{Version=[2],New=[],Old=[subtype's ]}Size is less than the
-@Chg{Version=[2],New=[],Old=[word ]}size@Chg{Version=[2],New=[ of the
-largest machine scalar],Old=[]},
-any storage place that does not cross an
-@Chg{Version=[2],New=[alignment],Old=[aligned word]} boundary
-@Chg{Version=[2],New=[for the largest machine scalar ],Old=[]}should
-be supported.
+@Chg{Version=[2],New=[],Old=[subtype's ]}Size is less than the word size, any
+storage place that does not cross an aligned word boundary should be supported.
 
 @begin{Reason}
 The above recommendations are sufficient to

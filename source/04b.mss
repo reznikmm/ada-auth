@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/08/08 05:27:26 $}
+@Comment{$Date: 2005/08/21 17:59:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.23 $}
+@Comment{$Revision: 1.24 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1092,7 +1092,7 @@ as a @nt<name>.
   (private type) that is constrained, we do not allow conversion between
   access-to-unconstrained and access-to-constrained subtypes designating the
   type. Ada 95 allowed this conversion and the declaration of various access
-  subtypes, requiring that the heap object be constrained and thus making
+  subtypes, requiring that the designated object be constrained and thus making
   details of the implementation of the private type visible to the client of
   the private type. See @RefSecNum{Allocators} for more on this topic.]}
 @end{Incompatible95}
@@ -1466,13 +1466,13 @@ if either such check fails.@IndexCheck{Accessibility_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
-  @ChgAdded{Version=[2],Text=[The accesibility check on class-wide types
+  @ChgAdded{Version=[2],Text=[The accessibility check on class-wide types
   prevents the allocated object from outliving its type. We need the run-time
   check in instance bodies, or when the type of the @nt{qualified_expression}
   is class-wide (other cases are statically detected).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[The accesibility check on access discriminants
+  @ChgAdded{Version=[2],Text=[The accessibility check on access discriminants
   prevents the allocated object from outliving its discriminants.]}
 @end{Reason}
 
@@ -1643,8 +1643,8 @@ has been moved to @RefSec{Storage Management}.
   was an oversight in Ada 95.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-  @ChgAdded{Version=[2],Text=[Initialized @nt{allocator}s can be
-  for a limited type.]}
+  @ChgAdded{Version=[2],Text=[Initialized @nt{allocator}s are allowed when
+  the designated type is limited.]}
 @end{Extend95}
 
 @begin{DiffWord95}

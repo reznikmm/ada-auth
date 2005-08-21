@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2005/06/16 22:43:34 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2005/08/19 06:37:30 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2005/06/16 22:43:34 $}
+@Comment{$Date: 2005/08/19 06:37:30 $}
 
 @LabeledClause{The Package Standard}
 
@@ -60,8 +60,9 @@ the visible part of package Standard.}
    -- @key[function] "@key[not]" (Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
 
 
-   --@RI{ The integer type root_integer is predefined.}
-   --@RI{ The corresponding universal type is universal_integer.}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+   --@RI{ The integer type root_integer @Chg{Version=[2],New=[and the],Old=[is predefined.]}}
+   --@RI{ @Chg{Version=[2],New=[],Old=[The ]}corresponding universal type @Chg{Version=[2],New=[],Old=[is ]}universal_integer@Chg{Version=[2],New=[ are predefined],Old=[]}.}
 
 
    @key[type] @AdaTypeDefn{Integer} @key[is] @key{range} @RI{implementation-defined};
@@ -106,9 +107,9 @@ the visible part of package Standard.}
    --@RI{ remains as subtype Natural.}
 
 
-   --@RI{ The floating point type root_real is predefined.}
-   --@RI{ The corresponding universal type is universal_real.}
-
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+   --@RI{ The floating point type root_real @Chg{Version=[2],New=[and the],Old=[is predefined.]}}
+   --@RI{ @Chg{Version=[2],New=[],Old=[The ]}corresponding universal type @Chg{Version=[2],New=[],Old=[is ]}universal_real@Chg{Version=[2],New=[ are predefined],Old=[]}.}
 
 
    @key[type] @AdaTypeDefn{Float} @key[is] @key{digits} @RI{implementation-defined};
@@ -169,7 +170,15 @@ the visible part of package Standard.}
    @key[function] "/" (Left : @RI[universal_fixed]; Right : @RI[universal_fixed])
      @key[return] @RI[universal_fixed];
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00415-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgAdded{Version=[2],Text=[   --@RI{ The type universal_access is predefined.}
+   --@RI{ The following equality operators are predefined:}]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgAdded{Version=[2],Text=[   @key[function] "="  (Left, Right: @RI[universal_access]) @key[return] Boolean;
+   @key[function] "/=" (Left, Right: @RI[universal_access]) @key[return] Boolean;]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
 @tabclear()@tabset(P7, P14, P21, P28, P37, P44, P51, P58, P64)
 @comment{blank line}
       --@RI{ The declaration of type Character is based on the standard ISO 8859-1 character set.}
@@ -450,6 +459,10 @@ the ride.
     types are documented in @RefSecNum{Character Types} and
     @RefSecNum{String Types}.]}
   @end{Discussion}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[Type @i<universal_access> and the equality
+  operations for it are new.]}
 @end{Extend95}
 
 @begin{DiffWord95}

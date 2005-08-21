@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2005/08/18 06:14:47 $ $Author: Randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2005/08/21 17:59:35 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/08/18 06:14:47 $}
+@Comment{$Date: 2005/08/21 17:59:35 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -157,9 +157,10 @@ that  provide special capabilities or efficiency not normally available.]}]}
 @LabeledClause{Required Representation Support}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 This clause specifies minimal requirements on the
-implementation's support for representation items
-and related features.
+@Chg{Version=[2],New=[],Old=[implementation's ]}support for representation
+items and related features.
 @end{Intro}
 
 @begin{ImplReq}
@@ -354,13 +355,15 @@ vary from one occurrence of the same interrupt to another.
 
 @begin{ImplAdvice}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 If the Ceiling_Locking policy is not in effect, the implementation
 should provide means for the application to specify which interrupts
 are to be blocked during protected actions, if the underlying system allows
-for a finer-grain control of interrupt blocking.
+for @Chg{Version=[2],New=[finer-grained],Old=[a finer-grain]} control of
+interrupt blocking.
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[If the Ceiling_Locking policy is not in effect and the target system
-allows for a finer-grain control of interrupt blocking, a means for the
+allows for finer-grained control of interrupt blocking, a means for the
 application to specify which interrupts are to be blocked during protected
 actions should be provided.]}]}
 
@@ -615,8 +618,8 @@ objects. (See @RefSecNum{Preelaboration Requirements}.)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 The ceiling priority of a protected object
-@Chg{Version=[2],New=[],Old=[that ]}one
-of @Chg{Version=[2],New=[whose],Old=[its]} procedures is
+@Chg{Version=[2],New=[for which],Old=[that]} one
+of its procedures is
 attached to an interrupt should be at least as high as the highest
 processor priority at which that interrupt will ever be delivered.
 
@@ -1807,11 +1810,13 @@ total storage size allocated for all the attributes of a task.
 
 @begin{ImplAdvice}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 Some implementations are targeted to domains in which memory use at run
 time must be completely deterministic. For such implementations, it is
 recommended that the storage for task attributes will be pre-allocated
 statically and not from the heap. This can be accomplished by either
-placing restrictions on the number and the size of the task's attributes,
+placing restrictions on the number and the size of the @Chg{Version=[2],
+New=[],Old=[task's ]}attributes@Chg{Version=[2],New=[ of a task],Old=[]},
 or by using the pre-allocated storage for the first N attribute objects,
 and the heap for the others. In the latter case, N should be documented.
 
@@ -1823,10 +1828,10 @@ statically and the number of attributes pre-allocated should be documented.]}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We don't mention @lquotes@;restrictions on the
-  size and number@rquotes (that is, limited) in the text for the
+  size and number@rquotes (that is, limits) in the text for the
   Annex, because it is covered by the @DocReqName above, and we try not to
-  repeat Annex requirements (they're enough work to meet without having to
-  do things twice).]}
+  repeat requirements in the Annex (they're enough work to meet without
+  having to do things twice).]}
 @end{Discussion}
 @end{ImplAdvice}
 

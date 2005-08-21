@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2005/08/18 06:14:48 $ $Author: Randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2005/08/21 17:59:35 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/08/18 06:14:48 $}
+@Comment{$Date: 2005/08/21 17:59:35 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -525,8 +525,9 @@ If both External_Name and Link_Name are specified for an Import
 or Export pragma,
 then the External_Name is ignored.
 
-An interfacing pragma might result in an effect that violates
-Ada semantics.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00320-01]}
+@ChgDeleted{Version=[2],Text=[An interfacing pragma might result in an effect
+that violates Ada semantics.]}
 @end{Notes}
 
 @begin{Examples}

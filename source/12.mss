@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/08/11 00:12:56 $}
+@Comment{$Date: 2005/08/19 06:37:25 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -94,13 +94,14 @@ and makes them more checkable at compile time.
 @end{Syntax}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @Defn{generic package}
 @Defn{generic subprogram}
 @Defn{generic procedure}
 @Defn{generic function}
 A @nt{generic_declaration} declares a generic unit @em a
-generic package, generic procedure or generic function,
-as appropriate.
+generic package, generic procedure@Chg{Version=[2],New=[,],Old=[]}
+or generic function, as appropriate.
 
 @Defn{generic formal}
 An entity is a @i{generic formal} entity if it is declared

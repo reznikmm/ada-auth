@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:29 $}
+@Comment{$Date: 2005/08/19 06:37:28 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.29 $}
+@comment{$Revision: 1.30 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -194,7 +194,9 @@ non-portable under System.
 @end{Intro}
 
 @begin{ImplReq}
-The implementation shall ensure that each language defined subprogram is
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+The implementation shall ensure that each
+language@Chg{Version=[2],New=[-],Old=[]}defined subprogram is
 reentrant@Chg{Version=[2],New=[@Defn{reentrant}],Old=[]}@ChgNote{Suggested by Gary Dismukes} in
 the sense that concurrent calls on the same subprogram perform as specified,
 so long as all parameters that could be passed by reference

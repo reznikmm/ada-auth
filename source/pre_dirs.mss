@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2005/08/18 06:14:47 $ $Author: Randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2005/08/21 17:59:34 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/08/18 06:14:47 $}
+@Comment{$Date: 2005/08/21 17:59:34 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -10,6 +10,16 @@
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
 @ChgAdded{Version=[2],Text=[The package Directories provides operations
 for manipulating files and directories, and their names.]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The notes for this clause contain the expected
+intepretations of some of the operations on various target systems.
+@lquotes@;Unix@rquotes@; refers to the UNIX@latin1(174) operating system,
+and in most cases also covers Unix-like systems such as Linux and POSIX.
+@lquotes@;Windows@latin1(174)@rquotes@; refers to the Microsoft@latin1(174)
+Windows@latin1(174) 2000 operating system and usually also covers most
+other versions that use the Win32 API.]}
+@end{Discussion}
 @end{Intro}
 
 @begin{StaticSem}
@@ -33,14 +43,14 @@ Directories has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Create_Directory} (New_Directory : @key{in} String;
-                               Form : @key{in} String := "");]}
+                               Form          : @key{in} String := "");]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_Directory} (Directory : @key{in} String);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Create_Path} (New_Directory : @key{in} String;
-                          Form : @key{in} String := "");]}
+                          Form          : @key{in} String := "");]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_Tree} (Directory : @key{in} String);]}
@@ -52,8 +62,9 @@ Directories has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Rename} (Old_Name, New_Name : @key{in} String);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Copy_File} (Source_Name, Target_Name : @key{in} String;
-                        Form : @key{in} String := "");]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Copy_File} (Source_Name,
+                        Target_Name : @key{in} String;
+                        Form        : @key{in} String := "");]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI[File and directory name operations:]]}
@@ -75,8 +86,8 @@ Directories has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Compose} (Containing_Directory : @key{in} String := "";
-                     Name : @key{in} String;
-                     Extension : @key{in} String := "") @key{return} String;]}
+                     Name                 : @key{in} String;
+                     Extension            : @key{in} String := "") @key{return} String;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{File and directory queries:}]}
@@ -189,7 +200,7 @@ are not special files or directories are called @i<ordinary files>.
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Devices and soft links are examples of
-  special files on Microsoft Windows and Unix.]}
+  special files on Windows@latin1(174) and Unix.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Even if an implementation provides a package
@@ -222,9 +233,9 @@ or any other form of name supported by the implementation.
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The full name on Unix is a complete path to the
-   root. For Windows, the full name includes a complete path, as well as a disk
+   root. For Windows@latin1(174), the full name includes a complete path, as well as a disk
    name ("C:") or network share name. For both systems, the simple name is
-   the part of the name following the last '/' (or '\' for Windows). For
+   the part of the name following the last '/' (or '\' for Windows@latin1(174)). For
    example, in the name "/usr/randy/ada-directories.ads",
    "ada-directories.ads" is the simple name.]}
 @end{Discussion}
@@ -245,8 +256,8 @@ all of the containing directories).
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The default directory is the one maintained by
-   the familiar @lquotes@;cd@rquotes@; command on Unix and Windows. Note that
-   Windows maintains
+   the familiar @lquotes@;cd@rquotes@; command on Unix and Windows@latin1(174). Note that
+   Windows@latin1(174) maintains
    separate default directories for each disk drive; implementations should
    use the natural implementation.]}
 @end{Discussion}
@@ -290,7 +301,7 @@ directory.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Create_Directory (New_Directory : @key{in} String;
-                            Form : @key{in} String := "");]}
+                            Form          : @key{in} String := "");]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Creates a directory with name
@@ -317,7 +328,7 @@ its contents) with the given name (in the absence of Name_Error).]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Create_Path (New_Directory : @key{in} String;
-                       Form : @key{in} String := "");]}
+                       Form          : @key{in} String := "");]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Creates zero or more directories with
@@ -373,8 +384,9 @@ Use_Error is propagated if a file or directory already exists with name
 New_Name.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Copy_File (Source_Name, Target_Name : @key{in} String;
-                     Form : @key{in} String);]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Copy_File (Source_Name,
+                     Target_Name : @key{in} String;
+                     Form        : @key{in} String);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Copies the contents of the existing
@@ -417,7 +429,7 @@ special files).]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Full name means that no abbreviations are
   used in the returned name, and that it is a full specification of the name.
-  Thus, for Unix and Windows, the result should be a full path that does not
+  Thus, for Unix and Windows@latin1(174), the result should be a full path that does not
   contain any "." or ".." directories. Typically, the default directory
   is used to fill in any missing information.]}
 @end{Discussion}
@@ -448,7 +460,7 @@ if the external file does not have a containing directory.]}
   @ChgAdded{Version=[2],Text=[This is purely a string manipulation function.
   If Name is not given as a full name, the containing directory probably
   won't be one, either. For example, if Containing_Directory ("..\AARM\RM-A-8")
-  is called on Windows, the result should be "..\AARM". If there is no
+  is called on Windows@latin1(174), the result should be "..\AARM". If there is no
   path at all on the name, the result should be "." (which represents the
   current directory). Use Full_Name on the result of Containing_Directory
   if the full name is needed.]}
@@ -467,7 +479,7 @@ Name_Error is propagated if the string given as Name does not allow the
 identification of an external file.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[For Unix and Windows, the extension is the
+  @ChgAdded{Version=[2],Text=[For Unix and Windows@latin1(174), the extension is the
   portion of the simple name following the rightmost period. For example,
   in the simple name "RM-A-8.html", the extension is "html".]}
 @end{Discussion}
@@ -484,7 +496,7 @@ does not allow the identification of an external file (including directories and
 special files).]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[For Unix and Windows, the base name is the
+  @ChgAdded{Version=[2],Text=[For Unix and Windows@latin1(174), the base name is the
   portion of the simple name preceding the rightmost period (except for the
   special directory names "." and "..", whose Base_Name is "." and "..").
   For example, in the simple name "RM-A-8.html", the base name is "RM-A-8".]}
@@ -492,8 +504,8 @@ special files).]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Compose (Containing_Directory : @key{in} String := "";
-                  Name : @key{in} String;
-                  Extension : @key{in} String := "") @key{return} String;]}
+                  Name                 : @key{in} String;
+                  Extension            : @key{in} String := "") @key{return} String;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the name of the external
@@ -509,7 +521,7 @@ name (if Extension is null) or base name (if Extension is non-null).]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The above definition implies that if
-  the Extension is null, for Unix and Windows no '.' is added to Name.]}
+  the Extension is null, for Unix and Windows@latin1(174) no '.' is added to Name.]}
 @end{Ramification}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -519,9 +531,9 @@ name (if Extension is null) or base name (if Extension is non-null).]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Generally, Compose(Containing_Directory(F),
   Base_Name(F),Extension(F)) = F. However, this is not true on Unix or
-  Windows for file names that end with a '.';
+  Windows@latin1(174) for file names that end with a '.';
   Compose(Base_Name("Fooey."),Extension("Fooey.")) = "Fooey".
-  This is not a problem for Windows, as the names have the same meaning with
+  This is not a problem for Windows@latin1(174), as the names have the same meaning with
   or without the '.', but these are different names for Unix. Thus,
   care needs to be taken on Unix; if Extension is null, Base_Name should
   be avoided. (That's not usually a problem with file names generated by a
@@ -578,15 +590,13 @@ identification of an existing external file.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the size of the
 external file represented by Name. The size of
 an external file is the number of stream elements contained in the file.
-If the external file is discontiguous (not all elements exist), the result is
-implementation-defined. If the external file is not an ordinary file, the
+If the external file is not an ordinary file, the
 result is implementation-defined. The exception Name_Error is propagated if the
 string given as Name does not allow the identification of an existing external
 file. The exception Constraint_Error is propagated if the file size is not a
 value of type File_Size.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
-result for Directories.Size for a directory, special file, or
-discontiguous file.],Old=[]}]}
+result for Directories.Size for a directory or special file],Old=[]}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Trailing],Text=[We allow raising Constraint_Error,
@@ -723,7 +733,7 @@ altered while a search is in progress.],Old=[]}]}
       (Directory_Entry : @key{in} Directory_Entry_Type));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Searches in the directory named by
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Searches, in the directory named by
 Directory, passing each entry matching Pattern to a call of the subprogram
 designated by Process. Pattern represents a pattern for
 matching file names. If Pattern is null, all items in the directory are matched;
@@ -776,8 +786,7 @@ exception Status_Error is propagated if Directory_Entry is invalid.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the size of the external
 file represented by Directory_Entry.
 The size of an external file is the number of stream elements contained in
-the file. If the external file is discontiguous (not all elements exist), the
-result is implementation-defined. If the external file represented by
+the file. If the external file represented by
 Directory_Entry is not an ordinary file, the result is implementation-defined.
 The exception Status_Error is propagated if Directory_Entry is invalid. The
 exception Constraint_Error is propagated if the file size is not a value of
@@ -832,14 +841,14 @@ other information about a file.]}]}
 @begin{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[For Microsoft Windows,
+@ChgAdded{Version=[2],Type=[Leading],Text=[For Windows@latin1(174),
 Directories.Information should contain at least the following routines:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Directories.Information @key{is}
     -- @RI[System-specific directory information.]
-    -- @RI[Microsoft Windows version.]]}
+    -- @RI[Version for the Microsoft@latin1(174) Windows@latin1(174) operating system.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Creation_Time (Name : @key{in} String) @key{return} Ada.Calendar.Time;]}

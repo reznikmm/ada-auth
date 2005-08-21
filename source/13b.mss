@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:22 $}
+@Comment{$Date: 2005/08/21 17:59:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.32 $}
 
 @LabeledClause{The Package System}
 
@@ -1407,13 +1407,13 @@ The storage allocated by an @nt{allocator} comes from the pool;
 instances of Unchecked_Deallocation return storage to the pool.
 Several access types can share the same pool.]
 
-@Redundant[A storage pool is a variable of a type in the
-class rooted
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00435-01]}
+@Redundant[A storage pool is a variable of a type in the class rooted
 at Root_Storage_Pool, which is an abstract limited controlled type.
 By default, the implementation chooses a @i{standard storage pool}
-for each access type.
+for each access@Chg{Version=[2],New=[-to-object],Old=[]} type.
 The user may define new pool types,
-and may override the choice of pool for an access
+and may override the choice of pool for an access@Chg{Version=[2],New=[-to-object],Old=[]}
 type by specifying Storage_Pool for the type.]
 @begin{Ramification}
 By default, the implementation might choose to have a single global
@@ -1500,7 +1500,8 @@ more than one memory block with a given pool element.
 @end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@Leading@;For @PrefixType{every access subtype S},
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00435-01]}
+@Leading@;For @PrefixType{every access@Chg{Version=[2],New=[-to-object],Old=[]} subtype S},
 the following @Chg{New=[representation ],Old=[]}attributes are defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Storage_Pool>,
@@ -1775,14 +1776,14 @@ the storage pool used for the outer @nt{allocator} should also be used for
 the coextension;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@ChgAdded{Version=[2],Text=[For access parameters and other access
-discriminants, the storage pool should be created at the point of the
+@ChgAdded{Version=[2],Text=[For other access discriminants and access
+parameters, the storage pool should be created at the point of the
 @nt{allocator}, and be reclaimed when the allocated object becomes
 inaccessible.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
 @ChgAdded{Version=[2],Text=[Otherwise, a default storage pool should be
-create at the point where the anonymous access type is elaborated; such
+created at the point where the anonymous access type is elaborated; such
 a storage pool need not support deallocation of individual objects.]}
 @end{Itemize}
 
@@ -1993,11 +1994,15 @@ the following attribute is defined:
 @begin{Description}
 @ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<Max_Size_In_Storage_Elements>,
-  ARef=[AI95-00256-01],
+  ARef=[AI95-00256-01],ARef=[AI95-00416-01],
   Text=<Denotes the maximum value for Size_In_Storage_Elements
 that @Chg{Version=[2],New=[could],Old=[will]} be requested @Chg{Version=[2],
 New=[by the implementation ],Old=[]}via Allocate for an access type whose
-designated subtype is S.
+designated subtype is S.@Chg{Version=[2],New=[For a type with access
+discriminants, if the implementation allocates space for a coextension
+in the same pool as that of the object having the access discriminant,
+then this accounts for any calls on Allocate that could be performed to
+provide space for such coextensions.],Old=[]}
 The value of this attribute is of type @i{universal_integer}.>}
 @EndPrefixType{}
 @begin{Ramification}
@@ -2398,60 +2403,6 @@ and its value shall be nonnegative.
 The set of @nt{restrictions} is implementation defined.
 @ImplDef{The set of @nt{restrictions} allowed in a @nt{pragma}
 Restrictions.}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The following
-@SynI{restriction_}@nt{identifier}s are language-defined (additional
-restrictions are defined in the Specialized Needs Annexes):]}
-
-@begin{Description}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Attributes)}No_Implementation_Attributes @\There
-   are no implementation-defined attributes. This restriction applies
-   only to the current compilation or environment, not the entire partition.]}
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This restriction (as well as No_Implementation_Pragmas)
-  only applies to the current compilation, because it is likely that the
-  runtime (and possibly user-written low-level code) will need to use
-  implementation-defined entities. But a partition-wide restriction applies
-  everywhere, including the runtime.]}
-@end{Discussion}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Pragmas)}No_Implementation_Pragmas @\There
-   are no implementation-defined pragmas or pragma arguments. This
-   restriction applies only to the current compilation or environment, not the
-   entire partition.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00368-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Obsolescent_Features)}No_Obsolescent_Features @\There
-   is no use of language features defined in Annex J. It is
-   implementation-defined if uses of the renamings of
-   @RefSecNum{Renamings of Ada 83 Library Units} are detected by this
-   restriction. This restriction applies only to the current compilation or
-   environment, not the entire partition.]}
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[A user could compile a rename
-  like]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{with} Ada.Text_IO;
-@key{package} Text_IO @key{renames} Ada.Text_IO;]}
-@end{Example}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Such a rename must not be disallowed
-  by this restriction, nor should the compilation of such a rename be
-  restricted by an implementation. Many implementations implement the renames
-  of @RefSecNum{Renamings of Ada 83 Library Units}
-  by compiling them normally; we do not want to require implementations to use
-  a special mechanism to implement these renames.]}
-@end{Reason}
-
-@end{Description}
-
 @end{StaticSem}
 
 @begin{LinkTime}
@@ -2565,13 +2516,66 @@ use of the more efficient and safe one.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
   @ChgAdded{Version=[2],Text=[The syntax of a @nt{restriction_parameter_argument}
   has been defined to better support restriction No_Dependence (see
-  @RefSecNum{Restriction No_Dependence}).]}
+  @RefSecNum{Language-Defined Restrictions}).]}
 @end{DiffWord95}
 
 
-@LabeledAddedSubclause{Version=[2], Name=[Restriction No_Dependence]}
+@LabeledAddedSubclause{Version=[2], Name=[Language-Defined Restrictions]}
 
 @begin{StaticSem}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The following
+@SynI{restriction_}@nt{identifier}s are language-defined (additional
+restrictions are defined in the Specialized Needs Annexes):]}
+
+@begin{Description}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Attributes)}No_Implementation_Attributes @\There
+   are no implementation-defined attributes. This restriction applies
+   only to the current compilation or environment, not the entire partition.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This restriction (as well as No_Implementation_Pragmas)
+  only applies to the current compilation, because it is likely that the
+  runtime (and possibly user-written low-level code) will need to use
+  implementation-defined entities. But a partition-wide restriction applies
+  everywhere, including the runtime.]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Pragmas)}No_Implementation_Pragmas @\There
+   are no implementation-defined pragmas or pragma arguments. This
+   restriction applies only to the current compilation or environment, not the
+   entire partition.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00368-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Obsolescent_Features)}No_Obsolescent_Features @\There
+   is no use of language features defined in Annex J. It is
+   implementation-defined if uses of the renamings of
+   @RefSecNum{Renamings of Ada 83 Library Units} are detected by this
+   restriction. This restriction applies only to the current compilation or
+   environment, not the entire partition.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[A user could compile a rename
+  like]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} Ada.Text_IO;
+@key{package} Text_IO @key{renames} Ada.Text_IO;]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Such a rename must not be disallowed
+  by this restriction, nor should the compilation of such a rename be
+  restricted by an implementation. Many implementations implement the renames
+  of @RefSecNum{Renamings of Ada 83 Library Units}
+  by compiling them normally; we do not want to require implementations to use
+  a special mechanism to implement these renames.]}
+@end{Reason}
+
+@end{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The following
@@ -2783,31 +2787,6 @@ Item'First is Stream_Element_Offset'First, Read will raise Constraint_Error.]}
 The @Chg{New=[operational attributes ],Old=[]}Write, Read, Output, and
 Input @Chg{New=[],Old=[attributes ]}convert values to a
 stream of elements and reconstruct values from a stream.
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
-@ChgAdded{Version=[2],Text=[@Defn{support external streaming}
-@Defn2{Term=[external streaming],Sec={type supports}}
-A type is said to @i{support external streaming} if Read and Write attributes
-are available that provide for sending values of such a type between active
-partitions, with Write marshalling the representation, and Read unmarshalling
-the representation.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
-@ChgAdded{Version=[2],Text=[A limited type supports external streaming only if
-it has available Read and Write attributes. A type with a part that is of an
-access type supports external streaming only if that access type or the type of
-some part that includes the access type component, has Read and Write
-attributes that have been specified via an @nt{attribute_definition_clause},
-and that @nt{attribute_definition_clause} is visible. @Redundant[An anonymous
-access type does not support external streaming. ]All other types support
-external streaming.]}
-
-@begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[A limited type with a part that is of an access
-  type needs to satisfy both rules.]}
-@end{Ramification}
-
 @end{Intro}
 
 @begin{StaticSem}
@@ -2942,7 +2921,7 @@ implementations of these attributes are used. The default implementations of
 Write and Read attributes execute as follows:]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00270-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01],ARef=[AI95-00270-01]}
 For elementary types, @Chg{Version=[2],New=[Read reads (and Write writes) the
 number of stream elements implied by the Stream_Size for the type @i<T>;],
 Old=[]} the representation @Chg{Version=[2],New=[],Old=[in terms ]}of@Chg{Version=[2],
@@ -2957,13 +2936,14 @@ defaults. If @i(T) is a tagged type, the tag is not included.
 @Chg{New=[For type extensions, the Write or Read attribute for the parent type
 is called, followed by the Write or Read attribute of each component of the
 extension part, in canonical order. For a limited type extension, if the
-attribute of @Chg{Version=[2],New=[the parent],Old=[any ancestor]} type of
+attribute of @Chg{Version=[2],New=[the parent],Old=[any ancestor]} type
+@Chg{Version=[2],New=[or any progenitor type ],Old=[]}of
 @i(T) @Chg{Version=[2],New=[is available anywhere within the immediate scope
 of @i<T>,],Old=[has been directly specified]} and the attribute
-of @Chg{Version=[2],New=[],Old=[any ancestor type of]} the
-type of any of the extension components which are of a limited type
+of @Chg{Version=[2],New=[the parent type or ],Old=[any ancestor type of]} the
+type of any of the extension components
 @Chg{Version=[2],New=[is not available at the freezing point of @i<T>, then],
-Old=[has not been specified,]}
+Old=[which are of a limited type has not been specified,]}
 the attribute of @i(T) shall be directly specified.],Old=[]}
 
 @ChgImplDef{Version=[2],Kind=[Revised],Text=[The @Chg{Version=[2],New=[contents
@@ -2986,6 +2966,11 @@ terms of stream elements]}.]}
   definition of 'Read and 'Write if the parent type has one, as it is possible
   to make a dispatching call through the attributes. The rule is designed to
   automatically do the right thing in as many cases as possible.]}
+
+  @ChgRef{Version=[1],Kind=[Added],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[1],Text=[Similarly, a type that has a progenitor
+  with an available attribute must also have that attribute, for the
+  same reason.]}
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
@@ -3343,7 +3328,9 @@ declared.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
 @ChgAdded{Version=[2],Text=[An @nt{attribute_reference} for one of the
 stream-oriented attributes is illegal unless the attribute is available at
-the place of the @nt{attribute_reference}.]}
+the place of the @nt{attribute_reference}. Furthmore, an
+@nt{attribute_reference} for @i<T>'Input is illegal if @i<T> is an abstract
+type.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3351,6 +3338,15 @@ the place of the @nt{attribute_reference}.]}
   to call them in some cases. Having the attributes not be defined for
   some limited types would seem to be a cleaner solution, but it would lead
   to contract model problems for limited private types.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[@i<T>'Input is available for abstract types
+  so that @i<T>'Class'Input is available. But we certainly don't want to allow
+  calls that could create an object of an abstract type. Remember that
+  @i<T>'Class is never abstract, so the above legality rule doesn't apply to
+  it. We don't have to discuss whether the attribute is specified, as it cannot
+  be: any function returning the type would have to be abstract, and we do not
+  allow specifying an attribute with an abstract subprogram.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
@@ -3369,6 +3365,30 @@ the result of the Input function.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This is to simplify implementation.]}
 @end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+@ChgAdded{Version=[2],Text=[@Defn{support external streaming}
+@Defn2{Term=[external streaming],Sec={type supports}}
+A type is said to @i{support external streaming} if Read and Write attributes
+are available that provide for sending values of such a type between active
+partitions, with Write marshalling the representation, and Read unmarshalling
+the representation.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+@ChgAdded{Version=[2],Text=[A limited type supports external streaming only if
+it has available Read and Write attributes. A type with a part that is of an
+access type supports external streaming only if that access type or the type of
+some part that includes the access type component, has Read and Write
+attributes that have been specified via an @nt{attribute_definition_clause},
+and that @nt{attribute_definition_clause} is visible. @Redundant[An anonymous
+access type does not support external streaming. ]All other types support
+external streaming.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[A limited type with a part that is of an access
+  type needs to satisfy both rules.]}
+@end{Ramification}
 
 @end{StaticSem}
 
@@ -3529,6 +3549,10 @@ class-wide types descended from S.
   @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00195-01]}
   @ChgAdded{Version=[2],Text=[Explicitly stated that what is read from a
   stream when a required check fails is unspecified.]}
+
+  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Text=[Defined availablity and default implementations
+  for types with progenitors.]}
 
   @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00279-01]}
   @ChgAdded{Version=[2],Text=[Specified that Constraint_Error is raised if
@@ -3843,9 +3867,9 @@ its dispatching operations.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[A record extension declaration,
-@nt{interface_type_definition}, task declaration, or
-protected declaration causes freezing of any progenitor types.]}
+@ChgAdded{Version=[2],Text=[The declaration of a record extension,
+interface type, task unit, or protected unit causes freezing of any
+progenitor types specified in the declaration.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[This rule has the same purpose as the one

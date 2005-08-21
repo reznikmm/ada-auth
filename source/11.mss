@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:55 $}
+@Comment{$Date: 2005/08/19 06:37:24 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1492,10 +1492,12 @@ have the values imposed by a discriminant constraint. Also, when
 accessing a record component, check that it exists for the current
 discriminant values.]
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @RootDefn{Division_Check}
 Division_Check @\@Redundant[Check that the second operand is not zero
 for the
-operations /, rem and mod.]
+operations /, @Chg{Version=[2],New=[@key[rem]],Old=[rem]} and
+@Chg{Version=[2],New=[@key[mod]],Old=[mod]}.]
 
 @RootDefn{Index_Check}
 Index_Check @\@Redundant[Check that the bounds of an array value are

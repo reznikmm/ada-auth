@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:26 $}
+@Comment{$Date: 2005/08/21 17:59:36 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -14,7 +14,7 @@ language whose functionality is largely redundant with other features
 defined by this International Standard.
 Use of these features is not recommended in newly written programs.
 @Chg{Version=[2],New=[Use of these features can be prevented by using pragma
-Restrictions(No_Obsolescent_Features), see @RefSecNum{Pragma Restrictions}.],
+Restrictions(No_Obsolescent_Features), see @RefSecNum{Language-Defined Restrictions}.],
 Old=[]}]
 @begin{Ramification}
 These features are still part of the language,
@@ -792,7 +792,7 @@ this pragma.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[The following @nt<restrictions> involve dependence
 on specific language-defined units. The more general restriction No_Dependence
-(see @RefSecNum{Restriction No_Dependence}) should be used for this purpose.]}
+(see @RefSecNum{Language-Defined Restrictions}) should be used for this purpose.]}
 @end{Intro}
 
 
@@ -826,7 +826,7 @@ dependence on Unchecked_Deallocation is not allowed.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
   @ChgAdded{Version=[2],Text=[This clause is new. These @nt{restrictions}
   are replaced by the more general No_Dependence
-  (see @RefSecNum{Restriction No_Dependence}).]}
+  (see @RefSecNum{Language-Defined Restrictions}).]}
 @end{DiffWord95}
 
 @LabeledAddedClause{Version=[2],Name=[Character and Wide_Character Conversion Functions]}

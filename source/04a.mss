@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:51 $}
+@Comment{$Date: 2005/08/21 17:59:32 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -571,8 +571,8 @@ of any prefixed view shall denote a variable.]}
 @ChgAdded{Version=[2],Text=[We want calls through a prefixed view and through
 a normal view to have the same legality. Thus, the implicit 'Access in
 this new notation needs the same legality check that an explicit 'Access
-would have. Similarly, we need to prohibit the first parameter of the
-subprogram to be @key{in out} if the object is a constant, because that is
+would have. Similarly, we need to prohibit the object from being constant
+if the first parameter of the subprogram is @key{in out}, because that is
 (obviously) prohibited for passing a normal parameter.]}
 @end{Reason}
 @end{Legality}
@@ -654,15 +654,17 @@ new terminology, to accommodate class-wide types, etc.
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The prefixed view notation
   for tagged objects is new. This provides a similar notation to that used in other
   popular languages, and also reduces the need for @nt{use_clause}s. This
-  is sometimes known as @lquotes@;distinguished receiver notation@rquotes@;.]}
+  is sometimes known as @lquotes@;distinguished receiver notation@rquotes@;.
+  @Defn{distinguished receiver notation}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Given the following
 definitions for a tagged type T:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@key{procedure} Do_Something (Obj : in out T; Count : in Natural);
-My_Object : T;],Old=[]}
+@ChgAdded{Version=[2],Text=[@key{procedure} Do_Something (Obj : @key{in out} T; Count : @key{in} Natural);
+@key{procedure} Do_Something_Else (Obj : @key{access} T; Flag : @key{in} Boolean);
+My_Object : @key{aliased} T;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[the following calls are equivalent:]}
@@ -670,6 +672,13 @@ My_Object : T;],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Do_Something (My_Object, Count => 10);
 My_Object.Do_Something (Count => 10);]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[as are the following calls:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Do_Something_Else (My_Object'Access, Flag => True);
+My_Object.Do_Something_Else (Flag => True);]}
 @end{Example}
 @end{Extend95}
 
@@ -897,15 +906,14 @@ The Ada 83 rule said that the
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0015],ARef=[AI95-00093-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> The wording
-was changed to allow implementations to continue to implement the Ada 83 Small
-attribute. This was always intended to be allowed (and never was
-disallowed).],Old=[]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> The wording
+  was changed to allow implementations to continue to implement the Ada 83
+  Small attribute. This was always intended to be allowed.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00235-01]}
-@Chg{Version=[2],New=[The note about resolving prefixes of attributes was
-updated to reflect that the prefix of an Access attribute now has an expected
-type (see @RefSecNum{Operations of Access Types}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00235-01]}
+  @ChgAdded{Version=[2],Text=[The note about resolving prefixes of attributes
+  was updated to reflect that the prefix of an Access attribute now has an
+  expected type (see @RefSecNum{Operations of Access Types}).]}
 @end{DiffWord95}
 
 
@@ -3883,8 +3891,8 @@ Constraint_Error is raised if this check fails.
   The definition of "**" allows arbitrary association of the
   multiplications which make up the result. Ada 83 required left-to-right
   associations (confirmed by AI83-00137). Thus it is possible that "**"
-  would provide a slightly different answer in Ada 95 than in the same Ada 83
-  program.]}
+  would provide a slightly different (and more potentially accurate) answer in
+  Ada 95 than in the same Ada 83 program.]}
 @end{Inconsistent83}
 
 @begin{DiffWord83}

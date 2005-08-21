@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/08/11 00:12:51 $}
+@Comment{$Date: 2005/08/19 06:37:23 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -712,7 +712,11 @@ interface type.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This rule also prevents completing a private type
   with an interface. A interface, like all types, is a descendant of itself,
-  and thus this rule is triggered.]}
+  and thus this rule is triggered. One reason this is necessary is that
+  a client of a private extension should be able to inherit limitedness
+  without having to look in the private part to see if the type is an
+  interface (remember that limitedness of interfaces is never inherited, while
+  it is inherited from other types).]}
 @end{Ramification}
 
 @end{Itemize}
