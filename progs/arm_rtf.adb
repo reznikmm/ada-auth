@@ -102,6 +102,7 @@ package body ARM_RTF is
     -- 12/16/04 - RLB - Removed it after it proved not to help.
     --  1/24/05 - RLB - Added Inner_Indent.
     --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
+    --  5/27/05 - RLB - Added arbitrary Unicode characters.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -3205,6 +3206,35 @@ package body ARM_RTF is
 	           Output_Object.Prefix_Large_Char_Count + 1;
 	end if;
     end Special_Character;
+
+
+    procedure Unicode_Character (Output_Object : in out RTF_Output_Type;
+			         Char : in ARM_Output.Unicode_Type) is
+	-- Output a Unicode character, with code position Char.
+	Char_Code : constant String := ARM_Output.Unicode_Type'Image(Char);
+	Len : constant String := Natural'Image(Char_Code'Length+2);
+    begin
+	-- We don't check this, we just output it.
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if not Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in paragraph");
+	end if;
+        Ada.Text_IO.Put (Output_Object.Output_File, "\uc" & Len(2..Len'Last) &
+	   "\u" & Char_Code(2..Char_Code'Last) & " <U" &
+	   Char_Code(2..Char_Code'Last) & ">");
+        Output_Object.Char_Count := Output_Object.Char_Count + 9 + Len'Last-1 +
+	   (Char_Code'Last-1)*2;
+	if Output_Object.Paragraph_Format in ARM_Output.Hanging ..
+	        ARM_Output.Small_Nested_Enumerated and then
+	   (not Output_Object.Saw_Hang_End) then
+	        Output_Object.Prefix_Large_Char_Count :=
+	           Output_Object.Prefix_Large_Char_Count + 1;
+	end if;
+    end Unicode_Character;
 
 
     procedure End_Hang_Item (Output_Object : in out RTF_Output_Type) is

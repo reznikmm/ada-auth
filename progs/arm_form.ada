@@ -7,6 +7,7 @@ with ARM_Format,
      ARM_Text,
      ARM_HTML,
      ARM_RTF,
+     ARM_Corr,
      ARM_Contents;
 procedure ARM_Formatter is
 
@@ -16,7 +17,7 @@ procedure ARM_Formatter is
     -- reference manual files (in various formats).
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -65,6 +66,8 @@ procedure ARM_Formatter is
     --  9/10/04 - RLB - Updated descriptions of standard commands.
     --  9/14/04 - RLB - Moved version to ARM_Contents.
     -- 12/05/04 - RLB - Split/added various source files.
+    --  6/ 2/05 - RLB - Added Corrigendum output module for comparisons to
+    --			Amendment document.
 
     -- Standard commands:
     -- For Original RM:
@@ -98,7 +101,7 @@ procedure ARM_Formatter is
     --	      Arm_Form RM <Format> New-Only 2 Show-Index-Entries
 
 
-    type Output_Format_Type is (HTML, RTF, Text, All_Formats);
+    type Output_Format_Type is (HTML, RTF, Text, Corr, All_Formats);
     No_Command_Error : exception;
 
     Format : Output_Format_Type; -- Format to generate.
@@ -212,6 +215,8 @@ procedure ARM_Formatter is
 		    Format := HTML;
 		elsif Format_Arg = "text" then
 		    Format := Text;
+		elsif Format_Arg = "corr" then
+		    Format := Corr;
 		else
 		    Ada.Text_IO.Put_Line ("** Unrecognized format: " & Format_Arg);
 		    raise No_Command_Error;
@@ -246,6 +251,7 @@ procedure ARM_Formatter is
 	    Ada.Text_IO.Put_Line ("     where: <Format> = 'Text' (text files),");
 	    Ada.Text_IO.Put_Line ("                       'HTML' (HTML files),");
 	    Ada.Text_IO.Put_Line ("                       'RTF' (RTF files for Word 97 or later),");
+	    Ada.Text_IO.Put_Line ("                       'Corr' (Corrigendum-style command files for comparisons),");
 	    Ada.Text_IO.Put_Line ("                       'All' (Files of all formats);");
 	    Ada.Text_IO.Put_Line ("     where: <Changes> = 'No-Changes' (RM text),");
 	    Ada.Text_IO.Put_Line ("                        'New-Only' (Revised RM text only for <Version>),");
@@ -698,7 +704,7 @@ procedure ARM_Formatter is
 
 begin
     Ada.Text_IO.Put_Line ("ARM 95/2005 formatter");
-    Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004  AXE Consultants");
+    Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005  AXE Consultants");
     Ada.Text_IO.Put_Line ("  P.O. Box 1512, Madison WI  53701");
 
     Get_Commands;
@@ -735,6 +741,14 @@ Ada.Text_IO.Put_Line ("  Display Index Entries = " & Boolean'Image(Display_Index
 		Create (Output);
 		Generate (Output);
 		ARM_Text.Close (Output);
+	    end;
+	when Corr =>
+	    declare
+		Output : ARM_Corr.Corr_Output_Type;
+	    begin
+		Create (Output);
+		Generate (Output);
+		ARM_Corr.Close (Output);
 	    end;
 	when All_Formats =>
 	    declare

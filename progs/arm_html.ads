@@ -76,6 +76,7 @@ package ARM_HTML is
     --  9/10/04 - RLB - Added "Both" to possible changes to handle
     --			replacement of changed text.
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
+    --  5/27/05 - RLB - Added arbitrary Unicode characters.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -273,6 +274,10 @@ package ARM_HTML is
     procedure Special_Character (Output_Object : in out HTML_Output_Type;
 			         Char : in ARM_Output.Special_Character_Type);
 	-- Output an special character.
+
+    procedure Unicode_Character (Output_Object : in out HTML_Output_Type;
+			         Char : in ARM_Output.Unicode_Type);
+	-- Output a Unicode character, with code position Char.
 
     procedure End_Hang_Item (Output_Object : in out HTML_Output_Type);
 	-- Marks the end of a hanging item. Call only once per paragraph.

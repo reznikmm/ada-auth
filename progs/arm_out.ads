@@ -88,6 +88,7 @@ package ARM_Output is
     -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
     --  1/24/05 - RLB - Added Inner_Indented.
     --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
+    --  5/27/05 - RLB - Added arbitrary Unicode characters.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -468,6 +469,12 @@ package ARM_Output is
     procedure Special_Character (Output_Object : in out Output_Type;
 			         Char : in ARM_Output.Special_Character_Type) is abstract;
 	-- Output an special character.
+
+    type Unicode_Type is range 0 .. 2**31-2;
+
+    procedure Unicode_Character (Output_Object : in out Output_Type;
+			         Char : in ARM_Output.Unicode_Type) is abstract;
+	-- Output a Unicode character, with code position Char.
 
     procedure End_Hang_Item (Output_Object : in out Output_Type) is abstract;
 	-- Marks the end of a hanging item. Call only once per paragraph.

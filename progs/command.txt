@@ -676,6 +676,9 @@ various mathematical symbols.
 @singlequote - Single quote ('''). Used to avoid confusion in syntax rules.
 @latin1{<number>} - Generate the Latin-1 character with the decimal code
 	"number".
+@unicode{<number>} - Generate the Unicode character with the decimal code
+	"number". Careful: this is unchecked; usually, the characters used
+	should be limited to the 615 generally supported by Windows.
 @times  - The middle dot multiply symbol.
 @porm   - The plus or minus symbol.
 @ceiling{<text>} - The ceiling operator, surrounding <text>.

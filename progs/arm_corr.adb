@@ -3,7 +3,7 @@ with ARM_Output,
      Ada.Text_IO,
      Ada.Exceptions,
      Ada.Strings.Fixed;
-package body ARM_Text is
+package body ARM_Corr is
 
     --
     -- Ada reference manual formatter.
@@ -44,69 +44,16 @@ package body ARM_Text is
     --
     -- Edit History:
     --
-    --  4/14/00 - RLB - Created base package.
-    --  4/18/00 - RLB - Added index and contents marker routines.
-    --		      - Improved formatting.
-    --  4/21/00 - RLB - Added line break and hard space routines.
-    --  4/24/00 - RLB - Added DR references and Insert/Delete text formats.
-    --  4/25/00 - RLB - Added size to format.
-    --  4/29/00 - RLB - Added more formats.
-    --  5/10/00 - RLB - Added even more formats.
-    --          - RLB - Added End_Hang_Item.
-    --  5/12/00 - RLB - Added No_Prefix to Start_Paragraph.
-    --  5/13/00 - RLB - Added Special_Character.
-    --  5/17/00 - RLB - Added New_Page.
-    --  5/22/00 - RLB - Added Includes_Changes to Create.
-    --  5/23/00 - RLB - Added Set_Column and New_Column.
-    --		      - Added Tab_Info and Tab_Stops.
-    --  5/24/00 - RLB - Added Location to Text_Format.
-    --		- RLB - Added No_Breaks and Keep_with_Next to Start_Paragraph.
-    --  5/25/00 - RLB - Added Big_Files to Create. Added Justification.
-    --		- RLB - Added Separator_Lines and TOC routines.
-    --  5/26/00 - RLB - Added table operations.
-    --  6/ 2/00 - RLB - Added Soft_Line_Break.
-    --  8/ 2/00 - RLB - Added Soft_Hyphen_Break and left and right quote
-    --			characters.
-    --		- RLB - Added additional styles.
-    --	8/ 4/00 - RLB - Added additional styles.
-    --  8/ 7/00 - RLB - Added Leading flag to Start_Paragraph, removed "Leading"
-    --			styles.
-    --  8/11/00 - RLB - Added Hanging_in_Bulleted styles.
-    --  8/16/00 - RLB - Added Code_Indented_Nested_Bulleted.
-    --  8/17/00 - RLB - Replaced "Leading" by "Space_After".
-    -- 		- RLB - Added Nested_Enumerated.
-    --  8/22/00 - RLB - Added Revised_Clause_Header.
-    --  8/23/00 - RLB - Fixed a problem with long lines in examples.
-    --  9/26/00 - RLB - Added Syntax_Summary style.
-    --  7/18/02 - RLB - Removed Document parameter from Create, replaced by
-    --			three strings and For_ISO boolean.
-    --		- RLB - Added AI_Reference.
-    --		- RLB - Added Change_Version_Type and uses.
-    --  9/10/04 - RLB - Added "Both" to possible changes to handle
-    --			replacement of changed text.
-    --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
-    -- 11/03/04 - RLB - Added Nested_X2_Bulleted.
-    -- 11/15/04 - RLB - Added Indented_Nested_Bulleted.
-    --  1/24/05 - RLB - Added Inner_Indented.
-    --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
-    --  5/27/05 - RLB - Added arbitrary Unicode characters.
+    --  6/ 2/05 - RLB - Created package from text and HTML versions.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
 
-    procedure Put_Line_Centered (File : in out Ada.Text_IO.File_Type;
-				 Text : in String) is
-	-- Put a line of text centered.
-    begin
-	for I in 1 .. (LINE_LENGTH - Text'Length - 1) / 2 loop
-	    -- Center the heading.
-	    Ada.Text_IO.Put (File, ' ');
-	end loop;
-	Ada.Text_IO.Put_Line (File, Text);
-    end Put_Line_Centered;
+    Special_Set : constant Ada.Strings.Maps.Character_Set :=
+         Ada.Strings.Maps."or" (Ada.Strings.Maps.To_Set ('>'),
+           Ada.Strings.Maps.To_Set ('@'));
 
-
-    procedure Create (Output_Object : in out Text_Output_Type;
+    procedure Create (Output_Object : in out Corr_Output_Type;
 		      Page_Size : in ARM_Output.Page_Size;
 		      Includes_Changes : in Boolean;
 		      Big_Files : in Boolean;
@@ -136,7 +83,7 @@ package body ARM_Text is
     end Create;
 
 
-    procedure Close (Output_Object : in out Text_Output_Type) is
+    procedure Close (Output_Object : in out Corr_Output_Type) is
 	-- Close an Output_Object. No further output to the object is
 	-- allowed after this call.
     begin
@@ -151,7 +98,7 @@ package body ARM_Text is
     end Close;
 
 
-    procedure Section (Output_Object : in out Text_Output_Type;
+    procedure Section (Output_Object : in out Corr_Output_Type;
 		       Section_Title : in String;
 		       Section_Name : in String) is
 	-- Start a new section. The title is Section_Title (this is
@@ -172,12 +119,12 @@ package body ARM_Text is
 	-- Create a new file for this section:
 	Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
 	    ".\Output\" & Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-		"-" & Section_Name & ".TXT");
+		"-Corr-" & Section_Name & ".TXT");
 	Ada.Text_IO.New_Line (Output_Object.Output_File);
     end Section;
 
 
-    procedure Set_Columns (Output_Object : in out Text_Output_Type;
+    procedure Set_Columns (Output_Object : in out Corr_Output_Type;
 			   Number_of_Columns : in ARM_Output.Column_Count) is
 	-- Set the number of columns.
 	-- Raises Not_Valid_Error if in a paragraph.
@@ -194,7 +141,7 @@ package body ARM_Text is
     end Set_Columns;
 
 
-    procedure Make_Indent (Output_Object : in out Text_Output_Type) is
+    procedure Make_Indent (Output_Object : in out Corr_Output_Type) is
 	-- Internal:
 	-- Output the appropriate indent after a New_Line or Put_Line.
     begin
@@ -208,7 +155,7 @@ package body ARM_Text is
     end Make_Indent;
 
 
-    procedure Spill (Output_Object : in out Text_Output_Type) is
+    procedure Spill (Output_Object : in out Corr_Output_Type) is
 	-- Internal:
 	-- Empty the output buffer in preperation for a New_Line or Put_Line.
     begin
@@ -231,7 +178,7 @@ package body ARM_Text is
     end Spill;
 
 
-    procedure Buffer (Output_Object : in out Text_Output_Type;
+    procedure Buffer (Output_Object : in out Corr_Output_Type;
 		      Char : in Character) is
 	-- Internal:
 	-- Add Char to the output buffer. Char will *not* be a word break
@@ -243,6 +190,7 @@ package body ARM_Text is
 	    Spill (Output_Object);
 	    Ada.Text_IO.Put (Output_Object.Output_File, Char);
 	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	    Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + 1;
 	    return;
 	end if;
 	Output_Object.Output_Buffer_Len := Output_Object.Output_Buffer_Len + 1;
@@ -251,7 +199,25 @@ package body ARM_Text is
     end Buffer;
 
 
-    procedure Start_Paragraph (Output_Object : in out Text_Output_Type;
+    procedure Buffer (Output_Object : in out Corr_Output_Type;
+		      Str : in String) is
+	-- Internal:
+	-- Add Char to the output buffer. String will *not* include a word
+	-- break character.
+    begin
+	if Output_Object.Output_Buffer_Len+Str'Length >= Output_Object.Output_Buffer'Last then
+	    -- Oops, buffer is full. Spill it.
+--Ada.Text_IO.Put_Line("** Buffer overflow!!");
+	    Spill (Output_Object);
+	end if;
+	Output_Object.Output_Buffer(Output_Object.Output_Buffer_Len+1..Output_Object.Output_Buffer_Len+Str'Length)
+	    := Str;
+	Output_Object.Output_Buffer_Len := Output_Object.Output_Buffer_Len + Str'Length;
+        Output_Object.Char_Count := Output_Object.Char_Count + Str'Length;
+    end Buffer;
+
+
+    procedure Start_Paragraph (Output_Object : in out Corr_Output_Type;
 			       Format : in ARM_Output.Paragraph_Type;
 			       Number : in String;
 			       No_Prefix : in Boolean := False;
@@ -290,109 +256,155 @@ package body ARM_Text is
 	Output_Object.Out_Char_Count := 0;
 	Output_Object.Output_Buffer_Space_Before := False; -- Nothing in it or on the line.
 	Output_Object.Output_Buffer_Len := 0;
+        Output_Object.Font := ARM_Output.Default;
+        Output_Object.Is_Bold := False;
+        Output_Object.Is_Italic := False;
+        Output_Object.Size := 0;
+        Output_Object.Para_Format := Format;
+        Output_Object.Is_Fixed_Format := False;
+
+	if Output_Object.Clause_Len /= 0 and then
+	   Number /= "" then
+	    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	    Ada.Text_IO.Put (Output_Object.Output_File, "!paragraph ");
+	    Ada.Text_IO.Put (Output_Object.Output_File, Output_Object.Clause_Num(1..Output_Object.Clause_Len));
+	    Ada.Text_IO.Put (Output_Object.Output_File, '(');
+	    Ada.Text_IO.Put (Output_Object.Output_File, Number);
+	    Ada.Text_IO.Put (Output_Object.Output_File, ") [");
+	    Ada.Text_IO.Put (Output_Object.Output_File, ARM_Output.Paragraph_Type'Image(Format));
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "]");
+	    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	else
+	    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	end if;
+
 	case Format is
-	    when ARM_Output.Normal => Output_Object.Indent_Amount := 0;
-	    when ARM_Output.Wide => Output_Object.Indent_Amount := 0;
-	    when ARM_Output.Notes => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Notes_Header => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Annotations => Output_Object.Indent_Amount := 10;
+	    when ARM_Output.Normal => null;
+                Output_Object.Indent_Amount := 0; -- %% Temp.
+	    when ARM_Output.Wide => null;
+		Output_Object.Indent_Amount := 0; -- %% Temp.
+	    when ARM_Output.Notes =>
+	        Ada.Text_IO.Put (Output_Object.Output_File, "@xindent<@s9<");
+	        Output_Object.Char_Count := 13;
+		Output_Object.Indent_Amount := 0; -- %% Temp.
+	    when ARM_Output.Notes_Header => Output_Object.Indent_Amount := 6; --** TBD.
+	    when ARM_Output.Annotations => Output_Object.Indent_Amount := 10; --** TBD.
 		Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		Output_Object.Char_Count := 4;
-	    when ARM_Output.Wide_Annotations => Output_Object.Indent_Amount := 10;
+	    when ARM_Output.Wide_Annotations => Output_Object.Indent_Amount := 10; --** TBD.
 		Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		Output_Object.Char_Count := 4;
-	    when ARM_Output.Index => Output_Object.Indent_Amount := 0;
-	    when ARM_Output.Syntax_Summary => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Examples => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Small_Examples => Output_Object.Indent_Amount := 10;
+	    when ARM_Output.Index => Output_Object.Indent_Amount := 0; --** TBD.
+	    when ARM_Output.Syntax_Summary => Output_Object.Indent_Amount := 6; --** TBD.
+	    when ARM_Output.Examples =>
+	        Ada.Text_IO.Put (Output_Object.Output_File, "@xcode<");
+	        Output_Object.Char_Count := 7;
+		Output_Object.Is_Fixed_Format := True;
+		Output_Object.Indent_Amount := 0; -- %% Temp.
+	    when ARM_Output.Small_Examples => Output_Object.Indent_Amount := 10; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		Output_Object.Char_Count := 4;
-	    when ARM_Output.Indented_Examples => Output_Object.Indent_Amount := 18;
+	    when ARM_Output.Indented_Examples => Output_Object.Indent_Amount := 18; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		Output_Object.Char_Count := 12;
-	    when ARM_Output.Small_Indented_Examples => Output_Object.Indent_Amount := 26;
+	    when ARM_Output.Small_Indented_Examples => Output_Object.Indent_Amount := 26; --** TBD.
 	        Ada.Text_IO.Put (Output_Object.Output_File, "                    "); -- Six units.
 	        Output_Object.Char_Count := 20;
-	    when ARM_Output.Syntax_Indented => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Code_Indented => Output_Object.Indent_Amount := 10;
+	    when ARM_Output.Syntax_Indented =>
+	        Ada.Text_IO.Put (Output_Object.Output_File, "@xcode<");
+	        Output_Object.Char_Count := 7;
+		Output_Object.Is_Fixed_Format := True;
+		Output_Object.Indent_Amount := 0; -- %% Temp.
+	    when ARM_Output.Code_Indented => Output_Object.Indent_Amount := 10; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		Output_Object.Char_Count := 4;
-	    when ARM_Output.Small_Code_Indented => Output_Object.Indent_Amount := 14;
+	    when ARM_Output.Small_Code_Indented => Output_Object.Indent_Amount := 14; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		Output_Object.Char_Count := 8;
-	    when ARM_Output.Indented => Output_Object.Indent_Amount := 14;
-                Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		Output_Object.Char_Count := 8;
-	    when ARM_Output.Small_Indented => Output_Object.Indent_Amount := 18;
+	    when ARM_Output.Indented =>
+	        Ada.Text_IO.Put (Output_Object.Output_File, "@xindent<");
+	        Output_Object.Char_Count := 9;
+	    when ARM_Output.Small_Indented => Output_Object.Indent_Amount := 18; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		Output_Object.Char_Count := 12;
-	    when ARM_Output.Inner_Indented => Output_Object.Indent_Amount := 18;
+	    when ARM_Output.Inner_Indented => Output_Object.Indent_Amount := 18; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		Output_Object.Char_Count := 8;
-	    when ARM_Output.Small_Inner_Indented => Output_Object.Indent_Amount := 22;
+	    when ARM_Output.Small_Inner_Indented => Output_Object.Indent_Amount := 22; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "                ");
 		Output_Object.Char_Count := 12;
-	    when ARM_Output.Bulleted => Output_Object.Indent_Amount := 6;
-		-- No prefix in text mode.
-	    when ARM_Output.Nested_Bulleted => Output_Object.Indent_Amount := 10;
+	    when ARM_Output.Bulleted =>
+		Output_Object.Indent_Amount := 0; -- %% Temp.
+		if No_Prefix then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "@xindent<");
+	            Output_Object.Char_Count := 9;
+		else
+	            Ada.Text_IO.Put (Output_Object.Output_File, "@xbullet<");
+	            Output_Object.Char_Count := 9;
+		end if;
+	    when ARM_Output.Nested_Bulleted => Output_Object.Indent_Amount := 10; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 4;
-	    when ARM_Output.Nested_X2_Bulleted => Output_Object.Indent_Amount := 14;
+	    when ARM_Output.Nested_X2_Bulleted => Output_Object.Indent_Amount := 14; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 8;
-	    when ARM_Output.Small_Bulleted => Output_Object.Indent_Amount := 10;
+	    when ARM_Output.Small_Bulleted => Output_Object.Indent_Amount := 10; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 4;
-	    when ARM_Output.Small_Nested_Bulleted => Output_Object.Indent_Amount := 14;
+	    when ARM_Output.Small_Nested_Bulleted => Output_Object.Indent_Amount := 14; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 8;
-	    when ARM_Output.Small_Nested_X2_Bulleted => Output_Object.Indent_Amount := 18;
+	    when ARM_Output.Small_Nested_X2_Bulleted => Output_Object.Indent_Amount := 18; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 12;
-	    when ARM_Output.Indented_Bulleted => Output_Object.Indent_Amount := 18;
+	    when ARM_Output.Indented_Bulleted => Output_Object.Indent_Amount := 18; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 12;
-	    when ARM_Output.Indented_Nested_Bulleted => Output_Object.Indent_Amount := 22;
+	    when ARM_Output.Indented_Nested_Bulleted => Output_Object.Indent_Amount := 22; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "                ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 16;
-	    when ARM_Output.Code_Indented_Bulleted => Output_Object.Indent_Amount := 14;
+	    when ARM_Output.Code_Indented_Bulleted => Output_Object.Indent_Amount := 14; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 8;
-	    when ARM_Output.Code_Indented_Nested_Bulleted => Output_Object.Indent_Amount := 18;
+	    when ARM_Output.Code_Indented_Nested_Bulleted => Output_Object.Indent_Amount := 18; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 12;
-	    when ARM_Output.Syntax_Indented_Bulleted => Output_Object.Indent_Amount := 10;
+	    when ARM_Output.Syntax_Indented_Bulleted => Output_Object.Indent_Amount := 10; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 4;
-	    when ARM_Output.Notes_Bulleted => Output_Object.Indent_Amount := 10;
+	    when ARM_Output.Notes_Bulleted => Output_Object.Indent_Amount := 10; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 4;
-	    when ARM_Output.Notes_Nested_Bulleted => Output_Object.Indent_Amount := 14;
+	    when ARM_Output.Notes_Nested_Bulleted => Output_Object.Indent_Amount := 14; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		-- No prefix in text mode.
 		Output_Object.Char_Count := 8;
-	    when ARM_Output.Hanging => Output_Object.Indent_Amount := 14;
+	    when ARM_Output.Hanging =>
+		Output_Object.Indent_Amount := 0; -- %% Temp.
 		Output_Object.Is_Hanging := True;
 		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 8;
+		    Output_Object.Char_Count := 0;
 		else -- Has prefix
 		    -- No units on first line.
 		    Output_Object.Saw_Hang_End := False;
+		    Ada.Text_IO.Put (Output_Object.Output_File, "@xhang<@xterm<");
+		    Output_Object.Char_Count := 14;
 		end if;
-	    when ARM_Output.Indented_Hanging => Output_Object.Indent_Amount := 14;
+
+	    when ARM_Output.Indented_Hanging =>
+		Output_Object.Indent_Amount := 14; --** TBD.
 		Output_Object.Is_Hanging := True;
 		if No_Prefix then
 		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
@@ -404,7 +416,7 @@ package body ARM_Text is
 		    Output_Object.Saw_Hang_End := False;
 		end if;
 	    when ARM_Output.Small_Hanging => Output_Object.Indent_Amount := 22;
-		Output_Object.Is_Hanging := True;
+		Output_Object.Is_Hanging := True; --** TBD.
 		if No_Prefix then
 		    Ada.Text_IO.Put (Output_Object.Output_File, "                "); -- Five units.
 		    Output_Object.Saw_Hang_End := True;
@@ -415,7 +427,7 @@ package body ARM_Text is
 		    Output_Object.Saw_Hang_End := False;
 		end if;
 	    when ARM_Output.Small_Indented_Hanging => Output_Object.Indent_Amount := 22;
-		Output_Object.Is_Hanging := True;
+		Output_Object.Is_Hanging := True; --** TBD.
 		if No_Prefix then
 		    Ada.Text_IO.Put (Output_Object.Output_File, "                "); -- Five units.
 		    Output_Object.Saw_Hang_End := True;
@@ -427,7 +439,7 @@ package body ARM_Text is
 		end if;
 
 	    when ARM_Output.Hanging_in_Bulleted => Output_Object.Indent_Amount := 14;
-		Output_Object.Is_Hanging := True;
+		Output_Object.Is_Hanging := True; --** TBD.
 		if No_Prefix then
 		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		    Output_Object.Saw_Hang_End := True;
@@ -437,7 +449,7 @@ package body ARM_Text is
 		    Output_Object.Saw_Hang_End := False;
 		end if;
 	    when ARM_Output.Small_Hanging_in_Bulleted => Output_Object.Indent_Amount := 22;
-		Output_Object.Is_Hanging := True;
+		Output_Object.Is_Hanging := True; --** TBD.
 		if No_Prefix then
 		    Ada.Text_IO.Put (Output_Object.Output_File, "                "); -- Five units.
 		    Output_Object.Saw_Hang_End := True;
@@ -449,7 +461,7 @@ package body ARM_Text is
 		end if;
 
 	    when ARM_Output.Enumerated => Output_Object.Indent_Amount := 10;
-		Output_Object.Is_Hanging := True;
+		Output_Object.Is_Hanging := True; --** TBD.
 		if No_Prefix then
 		    Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		    Output_Object.Saw_Hang_End := True;
@@ -458,7 +470,7 @@ package body ARM_Text is
 		    Output_Object.Saw_Hang_End := False;
 		end if;
 	    when ARM_Output.Small_Enumerated => Output_Object.Indent_Amount := 14;
-		Output_Object.Is_Hanging := True;
+		Output_Object.Is_Hanging := True; --** TBD.
 		if No_Prefix then
 		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		    Output_Object.Saw_Hang_End := True;
@@ -469,7 +481,7 @@ package body ARM_Text is
 		    Output_Object.Char_Count := 4;
 		end if;
 	    when ARM_Output.Nested_Enumerated => Output_Object.Indent_Amount := 14;
-		Output_Object.Is_Hanging := True;
+		Output_Object.Is_Hanging := True; --** TBD.
 		if No_Prefix then
 		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
 		    Output_Object.Saw_Hang_End := True;
@@ -480,7 +492,7 @@ package body ARM_Text is
 		    Output_Object.Char_Count := 4;
 		end if;
 	    when ARM_Output.Small_Nested_Enumerated => Output_Object.Indent_Amount := 18;
-		Output_Object.Is_Hanging := True;
+		Output_Object.Is_Hanging := True; --** TBD.
 		if No_Prefix then
 		    Ada.Text_IO.Put (Output_Object.Output_File, "            ");
 		    Output_Object.Saw_Hang_End := True;
@@ -491,20 +503,6 @@ package body ARM_Text is
 		    Output_Object.Char_Count := 8;
 		end if;
 	end case;
-	if Number /= "" then
-	    Ada.Text_IO.Put (Output_Object.Output_File, Number);
-	    Output_Object.Char_Count := Output_Object.Char_Count + Number'Length;
-	    for I in Integer'Min(Number'Length + 1, 6) .. 6 loop
-		Ada.Text_IO.Put (Output_Object.Output_File, ' ');
-	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
-	    end loop;
-	else -- No paragraph number:
-	    -- Fill in the indent portion alloted to the paragraph number:
-	    while Output_Object.Char_Count < Output_Object.Indent_Amount loop
-		Ada.Text_IO.Put (Output_Object.Output_File, ' ');
-	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
-	    end loop;
-        end if;
 	case Format is
 	    when ARM_Output.Normal | ARM_Output.Wide |
 		 ARM_Output.Notes | ARM_Output.Notes_Header |
@@ -555,7 +553,7 @@ package body ARM_Text is
     end Start_Paragraph;
 
 
-    procedure End_Paragraph (Output_Object : in out Text_Output_Type) is
+    procedure End_Paragraph (Output_Object : in out Corr_Output_Type) is
 	-- End a paragraph.
     begin
 	if not Output_Object.Is_Valid then
@@ -566,6 +564,56 @@ package body ARM_Text is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
+	case Output_Object.Para_Format is
+	    when ARM_Output.Normal => null;
+	    when ARM_Output.Wide => null;
+	    when ARM_Output.Notes =>
+		Buffer (Output_Object, ">>");
+	    when ARM_Output.Notes_Header => null; -- ** TBD.
+	    when ARM_Output.Annotations => null; -- ** TBD.
+	    when ARM_Output.Wide_Annotations => null; -- ** TBD.
+	    when ARM_Output.Index => null; -- ** TBD.
+	    when ARM_Output.Syntax_Summary => null; -- ** TBD.
+	    when ARM_Output.Examples =>
+		Buffer (Output_Object, '>');
+	    when ARM_Output.Small_Examples => null; -- ** TBD.
+	    when ARM_Output.Indented_Examples => null; -- ** TBD.
+	    when ARM_Output.Small_Indented_Examples => null; -- ** TBD.
+	    when ARM_Output.Syntax_Indented =>
+		Buffer (Output_Object, '>');
+	    when ARM_Output.Code_Indented => null; -- ** TBD.
+	    when ARM_Output.Small_Code_Indented => null; -- ** TBD.
+	    when ARM_Output.Indented =>
+		Buffer (Output_Object, '>');
+	    when ARM_Output.Small_Indented => null; -- ** TBD.
+	    when ARM_Output.Inner_Indented => null; -- ** TBD.
+	    when ARM_Output.Small_Inner_Indented => null; -- ** TBD.
+	    when ARM_Output.Bulleted =>
+		Buffer (Output_Object, '>');
+	    when ARM_Output.Nested_Bulleted => null; -- ** TBD.
+ 	    when ARM_Output.Nested_X2_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Small_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Small_Nested_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Small_Nested_X2_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Indented_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Indented_Nested_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Code_Indented_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Code_Indented_Nested_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Syntax_Indented_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Notes_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Notes_Nested_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Hanging =>
+		Buffer (Output_Object, '>');
+	    when ARM_Output.Indented_Hanging => null; -- ** TBD.
+	    when ARM_Output.Small_Hanging => null; -- ** TBD.
+	    when ARM_Output.Small_Indented_Hanging => null; -- ** TBD.
+	    when ARM_Output.Hanging_in_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Small_Hanging_in_Bulleted => null; -- ** TBD.
+	    when ARM_Output.Enumerated => null; -- ** TBD.
+	    when ARM_Output.Small_Enumerated => null; -- ** TBD.
+	    when ARM_Output.Nested_Enumerated => null; -- ** TBD.
+	    when ARM_Output.Small_Nested_Enumerated => null; -- ** TBD.
+	end case;
 	if Output_Object.Output_Buffer_Len /= 0 then
 	    Spill (Output_Object);
 	end if;
@@ -574,7 +622,7 @@ package body ARM_Text is
     end End_Paragraph;
 
 
-    procedure Category_Header (Output_Object : in out Text_Output_Type;
+    procedure Category_Header (Output_Object : in out Corr_Output_Type;
 			       Header_Text : String) is
 	-- Output a Category header (that is, "Legality Rules",
 	-- "Dynamic Semantics", etc.)
@@ -591,14 +639,29 @@ package body ARM_Text is
 		"Header in paragraph");
 	end if;
 	Ada.Text_IO.New_Line (Output_Object.Output_File);
-	Put_Line_Centered (Output_Object.Output_File, Header_Text);
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "!subheader");
+	Ada.Text_IO.Put (Output_Object.Output_File, "@i<@s8<");
+	if Ada.Strings.Fixed.Count (Header_Text, Special_Set) = 0 then
+            Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
+	else
+	    for I in Header_Text'Range loop
+		if Header_Text(I) = '>' then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "@>");
+		elsif Header_Text(I) = '@' then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "@@");
+		else
+	            Ada.Text_IO.Put (Output_Object.Output_File, Header_Text(I));
+		end if;
+	    end loop;
+	end if;
+	Ada.Text_IO.Put (Output_Object.Output_File, ">>");
 	Ada.Text_IO.New_Line (Output_Object.Output_File);
 	Output_Object.Char_Count := 0;
 	Output_Object.Out_Char_Count := 0;
     end Category_Header;
 
 
-    procedure Clause_Header (Output_Object : in out Text_Output_Type;
+    procedure Clause_Header (Output_Object : in out Corr_Output_Type;
 			     Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
@@ -620,9 +683,14 @@ package body ARM_Text is
 	end if;
         Ada.Text_IO.New_Line (Output_Object.Output_File);
 
+	Output_Object.Clause_Len := Clause_Number'Length;
+	Output_Object.Clause_Num(1..Output_Object.Clause_Len) :=
+	    Clause_Number;
 	-- Special for table of contents:
 	if Clause_Number = "" and then Header_Text = "Table of Contents" then
-	    Put_Line_Centered (Output_Object.Output_File,
+	    Ada.Text_IO.Put (Output_Object.Output_File,
+			       "!clause ");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File,
 			       Header_Text);
 	    Ada.Text_IO.New_Line (Output_Object.Output_File, 2);
 	    Output_Object.Char_Count := 0;
@@ -630,29 +698,31 @@ package body ARM_Text is
 	    return;
 	end if;
 
+        Ada.Text_IO.Put (Output_Object.Output_File,
+			 "!clause ");
 	case Level is
 	    when ARM_Contents.Normative_Annex =>
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Clause_Number); -- Note: Clause_Number includes "Annex"
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   "(normative)");
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Header_Text);
 	    when ARM_Contents.Informative_Annex =>
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Clause_Number); -- Note: Clause_Number includes "Annex"
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   "(informative)");
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Header_Text);
 	    when ARM_Contents.Section =>
-	        Put_Line_Centered (Output_Object.Output_File,
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   "Section " & Clause_Number & ": " & Header_Text);
 	    when ARM_Contents.Unnumbered_Section =>
 	        if Header_Text /= "" then
-		    Put_Line_Centered (Output_Object.Output_File,
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				       Header_Text);
 	        end if;
 	    when ARM_Contents.Clause | ARM_Contents.Subclause =>
@@ -666,7 +736,7 @@ package body ARM_Text is
     end Clause_Header;
 
 
-    procedure Revised_Clause_Header (Output_Object : in out Text_Output_Type;
+    procedure Revised_Clause_Header (Output_Object : in out Corr_Output_Type;
 			     New_Header_Text : in String;
 			     Old_Header_Text : in String;
 			     Level : in ARM_Contents.Level_Type;
@@ -696,9 +766,14 @@ package body ARM_Text is
 	end if;
         Ada.Text_IO.New_Line (Output_Object.Output_File);
 
+	Output_Object.Clause_Len := Clause_Number'Length;
+	Output_Object.Clause_Num(1..Output_Object.Clause_Len) :=
+	    Clause_Number;
 	-- Special for table of contents:
 	if Clause_Number = "" and then Header_Text = "Table of Contents" then
-	    Put_Line_Centered (Output_Object.Output_File,
+            Ada.Text_IO.Put (Output_Object.Output_File,
+			     "!clause ");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File,
 			       Header_Text);
 	    Ada.Text_IO.New_Line (Output_Object.Output_File, 2);
 	    Output_Object.Char_Count := 0;
@@ -706,29 +781,31 @@ package body ARM_Text is
 	    return;
 	end if;
 
+        Ada.Text_IO.Put (Output_Object.Output_File,
+			 "!clause ");
 	case Level is
 	    when ARM_Contents.Normative_Annex =>
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Clause_Number); -- Note: Clause_Number includes "Annex"
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   "(normative)");
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Header_Text);
 	    when ARM_Contents.Informative_Annex =>
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Clause_Number); -- Note: Clause_Number includes "Annex"
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   "(informative)");
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
-		Put_Line_Centered (Output_Object.Output_File,
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Header_Text);
 	    when ARM_Contents.Section =>
-	        Put_Line_Centered (Output_Object.Output_File,
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   "Section " & Clause_Number & ": " & Header_Text);
 	    when ARM_Contents.Unnumbered_Section =>
 	        if Header_Text /= "" then
-		    Put_Line_Centered (Output_Object.Output_File,
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				       Header_Text);
 	        end if;
 	    when ARM_Contents.Clause | ARM_Contents.Subclause =>
@@ -742,7 +819,7 @@ package body ARM_Text is
     end Revised_Clause_Header;
 
 
-    procedure TOC_Marker (Output_Object : in out Text_Output_Type;
+    procedure TOC_Marker (Output_Object : in out Corr_Output_Type;
 			  For_Start : in Boolean) is
 	-- Mark the start (if For_Start is True) or end (if For_Start is
 	-- False) of the table of contents data. Output objects that
@@ -757,7 +834,7 @@ package body ARM_Text is
     end TOC_Marker;
 
 
-    procedure New_Page (Output_Object : in out Text_Output_Type;
+    procedure New_Page (Output_Object : in out Corr_Output_Type;
 			Kind : ARM_Output.Page_Kind_Type := ARM_Output.Any_Page) is
 	-- Output a page break.
 	-- Note that this has no effect on non-printing formats.
@@ -790,7 +867,7 @@ package body ARM_Text is
     end New_Page;
 
 
-    procedure New_Column (Output_Object : in out Text_Output_Type) is
+    procedure New_Column (Output_Object : in out Corr_Output_Type) is
 	-- Output a column break.
 	-- Raises Not_Valid_Error if in a paragraph, or if the number of
 	-- columns is 1.
@@ -808,7 +885,7 @@ package body ARM_Text is
     end New_Column;
 
 
-    procedure Start_Table (Output_Object : in out Text_Output_Type;
+    procedure Start_Table (Output_Object : in out Corr_Output_Type;
 			   Columns : in ARM_Output.Column_Count) is
 	-- Starts a table. The number of columns is Columns.
 	-- This command starts a paragraph; the entire table is a single
@@ -848,7 +925,7 @@ package body ARM_Text is
     end Start_Table;
 
 
-    procedure Table_Marker (Output_Object : in out Text_Output_Type;
+    procedure Table_Marker (Output_Object : in out Corr_Output_Type;
 			    Marker : in ARM_Output.Table_Marker_Type) is
 	-- Marks the end of an entity in a table.
 	-- If Marker is End_Caption, the table caption ends and the
@@ -917,7 +994,7 @@ package body ARM_Text is
     end Table_Marker;
 
 
-    procedure Separator_Line (Output_Object : in out Text_Output_Type;
+    procedure Separator_Line (Output_Object : in out Corr_Output_Type;
 			      Is_Thin : Boolean := True) is
 	-- Output a separator line. It is thin if "Is_Thin" is true.
 	-- Raises Not_Valid_Error if in a paragraph.
@@ -943,7 +1020,7 @@ package body ARM_Text is
     -- Text output: These are only allowed after a Start_Paragraph and
     -- before any End_Paragraph. Raises Not_Valid_Error if not allowed.
 
-    procedure Ordinary_Text (Output_Object : in out Text_Output_Type;
+    procedure Ordinary_Text (Output_Object : in out Corr_Output_Type;
 			     Text : in String) is
 	-- Output ordinary text.
 	-- The text must end at a word break, never in the middle of a word.
@@ -969,15 +1046,33 @@ package body ARM_Text is
 	else
 	    Spill (Output_Object);
 	end if;
-        Ada.Text_IO.Put (Output_Object.Output_File, Text);
-        Output_Object.Char_Count := Output_Object.Char_Count + Text'Length;
-        Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + Text'Length;
+	if Ada.Strings.Fixed.Count (Text, Special_Set) = 0 then
+            Ada.Text_IO.Put (Output_Object.Output_File, Text);
+            Output_Object.Char_Count := Output_Object.Char_Count + Text'Length;
+            Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + Text'Length;
+	else
+	    for I in Text'Range loop
+		if Text(I) = '>' then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "@>");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	            Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + 2;
+		elsif Text(I) = '@' then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "@@");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	            Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + 2;
+		else
+	            Ada.Text_IO.Put (Output_Object.Output_File, Text(I));
+	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+	            Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + 1;
+		end if;
+	    end loop;
+	end if;
         Output_Object.Output_Buffer_Space_Before := False; -- No space between
 							   -- this and any following text.
     end Ordinary_Text;
 
 
-    procedure Ordinary_Character (Output_Object : in out Text_Output_Type;
+    procedure Ordinary_Character (Output_Object : in out Corr_Output_Type;
 			          Char : in Character) is
 	-- Output an ordinary character.
 	-- Spaces will be used to break lines as needed.
@@ -1004,7 +1099,11 @@ package body ARM_Text is
 	    -- Add the contents of the buffer to the character count for this line:
 	    Output_Object.Char_Count := Output_Object.Char_Count +
 		Output_Object.Output_Buffer_Len;
-	    if Char /= ' ' then
+	    if Char = '>' then
+	        Buffer (Output_Object, "@>");
+	    elsif Char = '@' then
+	        Buffer (Output_Object, "@@");
+	    elsif Char /= ' ' then
 	        Buffer (Output_Object, Char);
 	    else -- Break character, spill on the new line:
 		if Output_Object.Output_Buffer_Len /= 0 then
@@ -1024,13 +1123,17 @@ package body ARM_Text is
 		-- the next item.
 	        Output_Object.Output_Buffer_Space_Before := True; -- Mid-line now.
 	    end if;
+        elsif Char = '>' then
+	    Buffer (Output_Object, "@>");
+        elsif Char = '@' then
+	    Buffer (Output_Object, "@@");
 	else
 	    Buffer (Output_Object, Char);
 	end if;
     end Ordinary_Character;
 
 
-    procedure Hard_Space (Output_Object : in out Text_Output_Type) is
+    procedure Hard_Space (Output_Object : in out Corr_Output_Type) is
 	-- Output a hard space. No line break should happen at a hard space.
     begin
 	if not Output_Object.Is_Valid then
@@ -1041,11 +1144,16 @@ package body ARM_Text is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-        Buffer (Output_Object, ' ');
+	if Output_Object.Is_Fixed_Format then
+	    -- In this format, all spaces are hard spaces.
+	    Buffer (Output_Object, ' ');
+	else -- A hard space command.
+	    Buffer (Output_Object, "@ ");
+	end if;
     end Hard_Space;
 
 
-    procedure Line_Break (Output_Object : in out Text_Output_Type) is
+    procedure Line_Break (Output_Object : in out Corr_Output_Type) is
 	-- Output a line break. This does not start a new paragraph.
 	-- This corresponds to a "<BR>" in HTML.
     begin
@@ -1058,6 +1166,12 @@ package body ARM_Text is
 		"Not in paragraph");
 	end if;
 --Ada.Text_Io.Put_Line ("Line_Break");
+	if Output_Object.Is_Fixed_Format then
+	    -- In this format, all line breaks are significant.
+	    null;
+	else -- A hard space command.
+            Buffer (Output_Object, "@hr");
+	end if;
 	if Output_Object.Output_Buffer_Len /= 0 then
 	    Spill (Output_Object);
 	end if;
@@ -1066,7 +1180,7 @@ package body ARM_Text is
     end Line_Break;
 
 
-    procedure Index_Line_Break (Output_Object : in out Text_Output_Type;
+    procedure Index_Line_Break (Output_Object : in out Corr_Output_Type;
 				Clear_Keep_with_Next : in Boolean) is
 	-- Output a line break for the index. This does not start a new
 	-- paragraph in terms of spacing. This corresponds to a "<BR>"
@@ -1078,7 +1192,7 @@ package body ARM_Text is
     end Index_Line_Break;
 
 
-    procedure Soft_Line_Break (Output_Object : in out Text_Output_Type) is
+    procedure Soft_Line_Break (Output_Object : in out Corr_Output_Type) is
 	-- Output a soft line break. This is a place (in the middle of a
 	-- "word") that we allow a line break. It is usually used after
 	-- underscores in long non-terminals.
@@ -1091,18 +1205,19 @@ package body ARM_Text is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	if Output_Object.Char_Count >= LINE_LENGTH - 10 then
-	    if Output_Object.Output_Buffer_Len /= 0 then
-	        Spill (Output_Object);
-	    end if;
-	    Ada.Text_IO.New_Line (Output_Object.Output_File);
-            Make_Indent (Output_Object);
-	-- else we don't need a line break.
-	end if;
+--	if Output_Object.Char_Count >= LINE_LENGTH - 10 then
+--	    if Output_Object.Output_Buffer_Len /= 0 then
+--	        Spill (Output_Object);
+--	    end if;
+--	    Ada.Text_IO.New_Line (Output_Object.Output_File);
+--            Make_Indent (Output_Object);
+--	-- else we don't need a line break.
+--	end if;
+	null; -- Ignore this, there is no counterpart in Corrigendum formatting.
     end Soft_Line_Break;
 
 
-    procedure Soft_Hyphen_Break (Output_Object : in out Text_Output_Type) is
+    procedure Soft_Hyphen_Break (Output_Object : in out Corr_Output_Type) is
 	-- Output a soft line break, with a hyphen. This is a place (in the middle of
 	-- a "word") that we allow a line break. If the line break is used,
 	-- a hyphen will be added to the text.
@@ -1115,16 +1230,17 @@ package body ARM_Text is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	if Output_Object.Char_Count >= LINE_LENGTH - 8 then
-	    Spill (Output_Object);
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "-"); -- Add the hyphen and break.
-            Make_Indent (Output_Object);
-	-- else we don't need a line break.
-	end if;
+--	if Output_Object.Char_Count >= LINE_LENGTH - 8 then
+--	    Spill (Output_Object);
+--	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "-"); -- Add the hyphen and break.
+--            Make_Indent (Output_Object);
+--	-- else we don't need a line break.
+--	end if;
+	null; -- Ignore this, there is no counterpart in Corrigendum formatting.
     end Soft_Hyphen_Break;
 
 
-    procedure Tab (Output_Object : in out Text_Output_Type) is
+    procedure Tab (Output_Object : in out Corr_Output_Type) is
 	-- Output a tab, inserting space up to the next tab stop.
 	-- Raises Not_Valid_Error if the paragraph was created with
 	-- Tab_Stops = ARM_Output.NO_TABS.
@@ -1146,81 +1262,66 @@ package body ARM_Text is
 	-- Find the first stop greater than the current character count. (After
 	-- writing a space).
 --Ada.Text_IO.Put_Line ("Tab");
-	Spill (Output_Object);
-        Ada.Text_IO.Put (Output_Object.Output_File, " ");
-        Output_Object.Char_Count := Output_Object.Char_Count + 1;
-        Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + 1;
-	for I in 1 .. Output_Object.Tab_Stops.Number loop
-	    if Output_Object.Tab_Stops.Stops(I).Stop > Output_Object.Char_Count then
-		for J in Output_Object.Char_Count+1 .. Output_Object.Tab_Stops.Stops(I).Stop-1 loop
-	            Ada.Text_IO.Put (Output_Object.Output_File, " ");
-	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
-		    Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + 1;
---Ada.Text_IO.Put ("#");
-		end loop;
-		exit;
-	    end if;
-	end loop; -- If we drop out without finding a tab, we just use the single
-		  -- space already written.
---Ada.Text_IO.New_Line;
+        Buffer (Output_Object, "@tab");
 	Output_Object.Output_Buffer_Space_Before := False; -- Spaces needed were output.
     end Tab;
 
 
-    procedure Special_Character (Output_Object : in out Text_Output_Type;
+    procedure Special_Character (Output_Object : in out Corr_Output_Type;
 			         Char : in ARM_Output.Special_Character_Type) is
 	-- Output an special character.
     begin
+	--** Could use Latin1 and Unicode equivalents for most of these.
 	case Char is
 	    when ARM_Output.EM_Dash =>
-		Ordinary_Character (Output_Object, '-'); -- Not available in plain text.
+		Buffer (Output_Object, "@emdash");
 	    when ARM_Output.EN_Dash =>
-		Ordinary_Character (Output_Object, '-'); -- Not available in plain text.
+		Buffer (Output_Object, "@endash");
 	    when ARM_Output.GEQ =>
-		Ordinary_Text (Output_Object, ">="); -- Not available in plain text, use the Ada one.
+		Ordinary_Text (Output_Object, ">="); -- Not available in Corrigendum, use the Ada one.
 	    when ARM_Output.LEQ =>
-		Ordinary_Text (Output_Object, "<="); -- Not available in plain text, use the Ada one.
+		Ordinary_Text (Output_Object, "<="); -- Not available in Corrigendum, use the Ada one.
 	    when ARM_Output.NEQ =>
-		Ordinary_Text (Output_Object, "/="); -- Not available in plain text, use the Ada one.
+		Ordinary_Text (Output_Object, "/="); -- Not available in Corrigendum, use the Ada one.
 	    when ARM_Output.PI =>
-		Ordinary_Text (Output_Object, "PI"); -- Not available in plain text.
+		Buffer (Output_Object, "@pi");
 	    when ARM_Output.Left_Ceiling =>
-		Ordinary_Text (Output_Object, "Ceiling("); -- Not available in plain text.
+		Ordinary_Text (Output_Object, "Ceiling("); -- Not available in Corrigendum.
 	    when ARM_Output.Right_Ceiling =>
-		Ordinary_Text (Output_Object, ")"); -- Not available in plain text.
+		Ordinary_Text (Output_Object, ")"); -- Not available in Corrigendum.
 	    when ARM_Output.Left_Floor =>
-		Ordinary_Text (Output_Object, "Floor("); -- Not available in plain text.
+		Ordinary_Text (Output_Object, "Floor("); -- Not available in Corrigendum.
 	    when ARM_Output.Right_Floor =>
-		Ordinary_Text (Output_Object, ")"); -- Not available in plain text.
+		Ordinary_Text (Output_Object, ")"); -- Not available in Corrigendum.
 	    when ARM_Output.Thin_Space =>
-		Ordinary_Text (Output_Object, " "); -- Not available in plain text.
+		Ordinary_Text (Output_Object, " "); -- Not available in Corrigendum.
 	    when ARM_Output.Left_Quote =>
-		Ordinary_Text (Output_Object, "`"); -- Not available in plain text, use back-quote.
+		Buffer (Output_Object, "@lquote");
 	    when ARM_Output.Right_Quote =>
-		Ordinary_Text (Output_Object, "'"); -- Not available in plain text, use quote.
+		Buffer (Output_Object, "@rquote");
 	    when ARM_Output.Left_Double_Quote =>
-		Ordinary_Text (Output_Object, """"); -- Not available in plain text, use double quote.
+		Ordinary_Text (Output_Object, """"); -- Not available in Corrigendum, use double quote.
 	    when ARM_Output.Right_Double_Quote =>
-		Ordinary_Text (Output_Object, """"); -- Not available in plain text, use double quote.
+		Ordinary_Text (Output_Object, """"); -- Not available in Corrigendum, use double quote.
 	    when ARM_Output.Small_Dotless_I =>
-		Ordinary_Text (Output_Object, "i"); -- Not available in plain text, use the nearest text.
+		Ordinary_Text (Output_Object, "i"); -- Not available in Corrigendum, use the nearest text.
 	    when ARM_Output.Capital_Dotted_I =>
-		Ordinary_Text (Output_Object, "I"); -- Not available in plain text, use the nearest text.
+		Ordinary_Text (Output_Object, "I"); -- Not available in Corrigendum, use the nearest text.
 	end case;
     end Special_Character;
 
 
-    procedure Unicode_Character (Output_Object : in out Text_Output_Type;
+    procedure Unicode_Character (Output_Object : in out Corr_Output_Type;
 			         Char : in ARM_Output.Unicode_Type) is
 	-- Output a Unicode character, with code position Char.
 	Char_Code : constant String := ARM_Output.Unicode_Type'Image(Char);
     begin
 	-- We don't check, but we assume this is not a normal character.
-	Ordinary_Text (Output_Object, "<Unicode-" & Char_Code(2..Char_Code'Last) & ">");
+	Buffer (Output_Object, "@unicode<" & Char_Code(2..Char_Code'Last) & ">");
     end Unicode_Character;
 
 
-    procedure End_Hang_Item (Output_Object : in out Text_Output_Type) is
+    procedure End_Hang_Item (Output_Object : in out Corr_Output_Type) is
 	-- Marks the end of a hanging item. Call only once per paragraph.
 	-- Raises Not_Valid_Error if the paragraph format is not
 	-- Hanging .. Small_Nested_Enumerated, or if this has already been
@@ -1245,26 +1346,11 @@ package body ARM_Text is
 	end if;
 	Output_Object.Saw_Hang_End := True;
 
-	if Output_Object.Char_Count >= Output_Object.Indent_Amount then
-	    if Output_Object.Output_Buffer_Len /= 0 then
-	        Spill (Output_Object);
-	    end if;
-	    Ada.Text_IO.New_Line (Output_Object.Output_File);
-            Make_Indent (Output_Object);
-	else
-	    Spill (Output_Object);
-	    for I in Output_Object.Char_Count + 1 ..
-		     Output_Object.Indent_Amount loop
-	        Ada.Text_IO.Put (Output_Object.Output_File, ' ');
-	    end loop;
-	    Output_Object.Char_Count := Output_Object.Indent_Amount;
-	    Output_Object.Out_Char_Count := Output_Object.Indent_Amount;
-	    Output_Object.Output_Buffer_Space_Before := False; -- Spaces needed were output.
-	end if;
+        Buffer (Output_Object, ">"); -- Close @Xterm<
     end End_Hang_Item;
 
 
-    procedure Text_Format (Output_Object : in out Text_Output_Type;
+    procedure Text_Format (Output_Object : in out Corr_Output_Type;
 			   Bold : in Boolean;
 			   Italic : in Boolean;
 			   Font : in ARM_Output.Font_Family_Type;
@@ -1283,6 +1369,7 @@ package body ARM_Text is
 	-- Bold off, Italic off should be avoided (as separate commands).
 	use type ARM_Output.Change_Type;
 	use type ARM_Output.Location_Type;
+	use type ARM_Output.Size_Type;
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -1292,11 +1379,43 @@ package body ARM_Text is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	if Location /= Output_Object.Location then
-	    if Output_Object.Location /= ARM_Output.Normal then
-	        Buffer(Output_Object, ')');
+
+	if not Bold and Output_Object.Is_Bold then
+	    Buffer (Output_Object, '>');
+	    Output_Object.Is_Bold := False;
+	end if;
+
+	if not Italic and Output_Object.Is_Italic then
+	    Buffer (Output_Object, '>');
+	    Output_Object.Is_Italic := False;
+	end if;
+
+	if Size /= Output_Object.Size then
+	    if Output_Object.Size /= 0 then
+	        Buffer (Output_Object, '>');
 	    end if;
 	end if;
+
+	if Location /= Output_Object.Location then
+	    if Output_Object.Location /= ARM_Output.Normal then
+	        --Buffer (Output_Object, '>');
+		null; -- Corrigendum doesn't support this.
+	    end if;
+	end if;
+
+	if ARM_Output."/=" (Font, Output_Object.Font) then
+	    case Output_Object.Font is
+		when ARM_Output.Default => null;
+		when ARM_Output.Fixed =>
+		    Buffer (Output_Object, '>');
+		when ARM_Output.Roman =>
+		    Buffer (Output_Object, '>');
+		when ARM_Output.Swiss =>
+		    Buffer (Output_Object, '>');
+	    end case;
+	end if;
+
+	-- For the intended purpose, there should be no Change commands.
 	if Change /= Output_Object.Change then
 	    if Change = ARM_Output.Both then
 		-- Open only the one(s) needed:
@@ -1357,17 +1476,55 @@ package body ARM_Text is
 	    end if;
 	    Output_Object.Change := Change;
 	end if;
+	if ARM_Output."/=" (Font, Output_Object.Font) then
+	    case Font is
+		when ARM_Output.Default => null;
+		when ARM_Output.Fixed =>
+		    Buffer (Output_Object, "@fc<");
+		when ARM_Output.Roman =>
+		    Buffer (Output_Object, "@ft<");
+		when ARM_Output.Swiss =>
+		    Buffer (Output_Object, "@fa<");
+	    end case;
+	    Output_Object.Font := Font;
+	end if;
+
 	if Location /= Output_Object.Location then
-	    if Location /= ARM_Output.Normal then
-		Buffer(Output_Object, '(');
-	    end if;
+	    case Location is
+		when ARM_Output.Superscript =>
+		    --Buffer (Output_Object, "@+<");
+		    null; -- Corrigendum doesn't support this.
+		when ARM_Output.Subscript =>
+		    --Buffer (Output_Object, "@+<");
+		    null; -- Corrigendum doesn't support this.
+		when ARM_Output.Normal =>
+		    null;
+	    end case;
 	    Output_Object.Location := Location;
 	end if;
-	null; -- Nothing else to do for plain text.
+
+	if Size /= Output_Object.Size then
+	    if Size < 0 then
+		Buffer (Output_Object, "@s" & Character'Val(10+Size+Character'Pos('0')) & '<');
+	    else
+		Buffer (Output_Object, "@s1" & Character'Val(Size+Character'Pos('0')) & '<');
+	    end if;
+	    Output_Object.Size := Size;
+	end if;
+
+	if Italic and (not Output_Object.Is_Italic) then
+	    Buffer (Output_Object, "@i<");
+	    Output_Object.Is_Italic := True;
+	end if;
+	if Bold and (not Output_Object.Is_Bold) then
+	    Buffer (Output_Object, "@b<");
+	    Output_Object.Is_Bold := True;
+	end if;
+
     end Text_Format;
 
 
-    procedure Clause_Reference (Output_Object : in out Text_Output_Type;
+    procedure Clause_Reference (Output_Object : in out Corr_Output_Type;
 				Text : in String;
 				Clause_Number : in String) is
 	-- Generate a reference to a clause in the standard. The text of
@@ -1379,7 +1536,7 @@ package body ARM_Text is
     end Clause_Reference;
 
 
-    procedure Index_Target (Output_Object : in out Text_Output_Type;
+    procedure Index_Target (Output_Object : in out Corr_Output_Type;
 			    Index_Key : in Natural) is
 	-- Generate a index target. This marks the location where an index
 	-- reference occurs. Index_Key names the index item involved.
@@ -1398,7 +1555,7 @@ package body ARM_Text is
     end Index_Target;
 
 
-    procedure Index_Reference (Output_Object : in out Text_Output_Type;
+    procedure Index_Reference (Output_Object : in out Corr_Output_Type;
 			       Text : in String;
 			       Index_Key : in Natural;
 			       Clause_Number : in String) is
@@ -1411,7 +1568,7 @@ package body ARM_Text is
     end Index_Reference;
 
 
-    procedure DR_Reference (Output_Object : in out Text_Output_Type;
+    procedure DR_Reference (Output_Object : in out Corr_Output_Type;
 			    Text : in String;
 			    DR_Number : in String) is
 	-- Generate a reference to an DR from the standard. The text
@@ -1423,7 +1580,7 @@ package body ARM_Text is
     end DR_Reference;
 
 
-    procedure AI_Reference (Output_Object : in out Text_Output_Type;
+    procedure AI_Reference (Output_Object : in out Corr_Output_Type;
 			    Text : in String;
 			    AI_Number : in String) is
 	-- Generate a reference to an AI from the standard. The text
@@ -1434,4 +1591,4 @@ package body ARM_Text is
 	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
     end AI_Reference;
 
-end ARM_Text;
+end ARM_Corr;

@@ -116,6 +116,10 @@ package body ARM_HTML is
     --  3/15/05 - RLB - Turned on Unicode characters at Pascal's insistence.
     --  3/17/05 - RLB - Removed ceiling and floor characters because they don't
     --			work on Windows.
+    --  4/ 7/05 - RLB - Added "Related Documents" link, so users can go between
+    --			the RM and AARM (and also so that they see the ARA
+    --			sponsor ads).
+    --  5/27/05 - RLB - Added arbitrary Unicode characters.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -925,6 +929,12 @@ package body ARM_HTML is
 	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
 	        "-SRCH.html");
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Search</A>");
+	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
+	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	        "-STDS.html");
+	Ada.Text_IO.Put (Output_Object.Output_File, """>Related Documents</A>");
 	if Clause /= "" then
 	    begin
 		-- Note: We do the following in one big glup so that if
@@ -992,6 +1002,12 @@ package body ARM_HTML is
 	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
 	        "-SRCH.html");
 	Ada.Text_IO.Put (Output_Object.Output_File, """>Search</A>");
+	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
+	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	        "-STDS.html");
+	Ada.Text_IO.Put (Output_Object.Output_File, """>Related Documents</A>");
 	if Clause /= "" then
 	    begin
 		-- Note: We do the following in one big glup so that if
@@ -3692,6 +3708,32 @@ package body ARM_HTML is
 	Output_Object.Any_Nonspace := True;
 	Output_Object.Last_was_Space := False;
     end Special_Character;
+
+
+    procedure Unicode_Character (Output_Object : in out HTML_Output_Type;
+			         Char : in ARM_Output.Unicode_Type) is
+	-- Output a Unicode character, with code position Char.
+	Char_Code : constant String := ARM_Output.Unicode_Type'Image(Char);
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if not Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in paragraph");
+	end if;
+	if Output_Object.Conditional_Space then
+	    Output_Object.Conditional_Space := False;
+	    Output_Text (Output_Object, " ");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	end if;
+	-- We don't check if this is valid, we just use it. So be sparing!
+        Output_Text (Output_Object, "&#" & Char_Code(2..Char_Code'Length) & ';');
+	Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	Output_Object.Any_Nonspace := True;
+	Output_Object.Last_was_Space := False;
+    end Unicode_Character;
 
 
     procedure End_Hang_Item (Output_Object : in out HTML_Output_Type) is

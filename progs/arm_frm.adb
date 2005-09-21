@@ -177,6 +177,8 @@ package body ARM_Format is
     --  2/ 2/05 - RLB - Corrected so normal AARM numbers don't reset the
     --			RM insertion number.
     --  3/15/05 - RLB - Corrected spelling.
+    --  5/27/05 - RLB - Added @Unicode command for examples.
+    --  8/ 9/05 - RLB - Changed the capitalization of some AARM note headers.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -446,7 +448,7 @@ package body ARM_Format is
 	Extend95_Title, Wording95_Title,
 	-- Character macros:
 	EM_Dash, EN_Dash, LE, LT, GE, GT, NE, PI, Times, PorM, Single_Quote,
-	Latin_1, Ceiling, Floor, Absolute, Log, Thin_Space,
+	Latin_1, Unicode, Ceiling, Floor, Absolute, Log, Thin_Space,
 	Left_Quote, Right_Quote, Left_Double_Quote, Right_Double_Quote,
 	Left_Quote_Pair, Right_Quote_Pair, Small_Dotless_I, Capital_Dotted_I,
 	Unknown);
@@ -788,6 +790,8 @@ package body ARM_Format is
 	    return Single_Quote;
 	elsif Canonical_Name = "latin1" then
 	    return LATIN_1;
+	elsif Canonical_Name = "unicode" then
+	    return Unicode;
 	elsif Canonical_Name = "ceiling" then
 	    return Ceiling;
 	elsif Canonical_Name = "floor" then
@@ -6892,7 +6896,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- by the text. As usual, any of the
 		    -- allowed bracketing characters can be used.
 		    Gen_Chg_xxxx (Param_Cmd => Change_Impladv_Text_Param,
-				  AARM_Prefix => "Implementation advice: ");
+				  AARM_Prefix => "Implementation Advice: ");
 
 		when Change_Documentation_Requirement =>
 		    -- This command is of the form:
@@ -6903,7 +6907,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- by the text. As usual, any of the
 		    -- allowed bracketing characters can be used.
 		    Gen_Chg_xxxx (Param_Cmd => Change_Docreq_Text_Param,
-				  AARM_Prefix => "Documentation requirement: ");
+				  AARM_Prefix => "Documentation Requirement: ");
 
 		when Change_Attribute =>
 		     -- @ChgAttribute{Version=[<version>], Kind=(<kind>),
@@ -7294,6 +7298,33 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 							ARM_Input.Line_String (Input_Object));
 		    end;
 
+        	when Unicode =>
+		    -- The parameter is the decimal code for the Uncode
+		    -- character to generate.
+		    declare
+			Value : String (1..11);
+			Len : Natural := 0;
+			Ch : Character;
+		    begin
+			ARM_Input.Get_Char (Input_Object, Ch);
+			while Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char loop
+			    Len := Len + 1;
+			    Value(Len) := Ch;
+			    ARM_Input.Get_Char (Input_Object, Ch);
+			end loop;
+		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
+		            -- Remove the "Unicode" record.
+			Check_Paragraph;
+			ARM_Output.Unicode_Character (Output_Object,
+			    ARM_Output.Unicode_Type'Value(Value(1..Len)));
+			Format_Object.Last_Non_Space := True;
+		    exception
+			when Constraint_Error =>
+			    Ada.Text_IO.Put_Line ("  ** Bad Unicode value [" &
+						  Value(1..Len) & "] on line " &
+							ARM_Input.Line_String (Input_Object));
+		    end;
+
 		when Ceiling =>
 		     Check_Paragraph;
 		     ARM_Output.Special_Character (Output_Object, ARM_Output.Left_Ceiling);
@@ -7523,7 +7554,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Added_Documentation_Requirements_List |
 		     Change_Attribute |
 		     Change_Prefix_Type |
-		     Latin_1 | Ceiling | Floor | Absolute | Log =>
+		     Latin_1 | Unicode | Ceiling | Floor | Absolute | Log =>
 		    -- These commands must have a parameter.
 		    Ada.Text_IO.Put_Line ("  ** Failed to find parameter for " &
 		        Ada.Strings.Fixed.Trim (Name, Ada.Strings.Right) &
