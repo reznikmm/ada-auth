@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2005/08/21 17:59:35 $ $Author: Randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2005/09/21 04:43:34 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/08/21 17:59:35 $}
+@Comment{$Date: 2005/09/21 04:43:34 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -780,7 +780,8 @@ C@Chg{New=[; and support for the Convention pragma with
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
 The package Interfaces.C contains the basic types, constants and
 subprograms that allow an Ada program to pass scalars and strings to C
-functions.@Chg{Version=[2],New=[ When this clause mentions a C entity,
+@Chg{Version=[2],New=[ and C++],Old=[]} functions.@Chg{Version=[2],New=[ When
+this clause mentions a C entity,
 the reference also applies to the corresponding entity in C++.],Old=[]}
 @end{Intro}
 

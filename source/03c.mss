@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/08/21 17:59:30 $}
+@Comment{$Date: 2005/09/21 04:43:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1580,7 +1580,7 @@ tag-indeterminate, then:
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{Dummy add to allow conditional "leading"}
 For the execution of a call on a dispatching operation,
-the @Chg{Version=[2],New=[the action performed is determined by the properties
+the @Chg{Version=[2],New=[action performed is determined by the properties
 of the corresponding dispatching operation],Old=[body executed is the one for
 the corresponding primitive subprogram]} of the specific type
 identified by the controlling tag value.

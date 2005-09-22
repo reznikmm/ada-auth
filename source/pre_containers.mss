@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2005/08/19 06:37:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2005/09/21 04:43:31 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/08/19 06:37:28 $}
+@Comment{$Date: 2005/09/21 04:43:31 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -34,7 +34,7 @@ for the desired average or worst case time complexity of certain operations
 on a container. This advice is expressed using the Landau symbol @i{O}(X).
 Presuming f is some function of a length parameter N and t(N) is the time the
 operation takes (on average or worst case, as specified) for the length N, a
-complexity of O(f(N)) means that there exists a finite A such that for any N,
+complexity of @i{O}(f(N)) means that there exists a finite A such that for any N,
 t(N)/f(N) < A. @Defn{Landau symbol @i{O}(X)}@Defn{@i{O}(f(N))}]}
 
 @begin{Discussion}
@@ -676,8 +676,8 @@ unspecified.@PDefn{unspecified}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The @lquotes@;functions defined to use it@rquotes
-  are "=" for Vectors, Find, Find_Index, Reverse_Find, and Reverse_Find_Index.
-  This list is a bit too long to give explicitly.]}
+  are Find, Find_Index, Reverse_Find, Reverse_Find_Index, and
+  "=" for Vectors. This list is a bit too long to give explicitly.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If the actual function for "=" is not symmetric
@@ -706,7 +706,7 @@ initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor should
-return True if both cursors or No_Element, or designate the same element in the
+return True if both cursors are No_Element, or designate the same element in the
 same container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -774,7 +774,7 @@ a parameter.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a vector]}
-Some operations are assumed to not replace elements. During the execution of such
+Some operations are assumed not to replace elements. During the execution of such
 an operation, a subprogram is said to @i{tamper with elements} of a vector object @i<V> if:]}
 
 @begin{Itemize}
@@ -1056,7 +1056,8 @@ element after successful call to Replace_Element.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Replace_Element and Update_Element are the only
-  ways that an element can change from empty to non-empty.]}
+  ways that an element can change from empty to non-empty. Also see the note
+  following Update_Element.]}
 @end{Ramification}
 
 @begin{Example}
@@ -1070,9 +1071,9 @@ element after successful call to Replace_Element.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Index is not in the range
 First_Index (Container) .. Last_Index (Container), then Constraint_Error is
-propagated. Otherwise, Query_Element calls Process.all with the element at
-position Index as the argument. Program_Error is propagated if Process.all
-tampers with the elements of Container. Any exception raised by Process.all is
+propagated. Otherwise, Query_Element calls Process.@key{all} with the element at
+position Index as the argument. Program_Error is propagated if Process.@key{all}
+tampers with the elements of Container. Any exception raised by Process.@key{all} is
 propagated.]}
 
 @begin{Reason}
@@ -1225,7 +1226,7 @@ exception raised during the copying is propagated.]}
 does not designate an element in Container, then Program_Error is propagated.
 Otherwise, if
 Length(New_Item) is 0, then Insert does nothing. If Before is No_Element, then
-the call is equivalent to Insert (Container, Last_Index (Container) + 1),
+the call is equivalent to Insert (Container, Last_Index (Container) + 1,
 New_Item); otherwise the call is equivalent to Insert (Container, To_Index
 (Before), New_Item);]}
 
@@ -1306,7 +1307,7 @@ then Position is set to To_Cursor (Container, @i<T>).]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[If Before is not in the range
 First_Index (Container) .. Last_Index (Container) + 1, then Constraint_Error is
-propagated. If Count is 0, then Insert_Space does nothing. Otherwise, it
+propagated. If Count is 0, then Insert does nothing. Otherwise, it
 computes the new length @i<NL> as the sum of the current length and Count; if
 the value of Last appropriate for length @i<NL> would be greater than
 Index_Type'Last then Constraint_Error is propagated.]}
@@ -1314,7 +1315,7 @@ Index_Type'Last then Constraint_Error is propagated.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the current vector capacity is
 less than or equal to @i<NL>, Reserve_Capacity (Container, @i<NL>) is called to
-increase the vector capacity. Then Insert_Space slides the elements in the
+increase the vector capacity. Then Insert slides the elements in the
 range Before .. Last_Index (Container) up by Count positions, and then inserts
 elements that are initialized by default (see @RefSecNum{Object Declarations})
 in the positions starting at Before.]}
@@ -1472,8 +1473,8 @@ To_Index (Position), Count) is called, and then Position is set to No_Element.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Length (Container) <= Count then
 Delete_Last is equivalent to Clear (Container). Otherwise it is equivalent to
-Delete (Container, Index_Type'Val(Index_Type'Pos(Last_Index(Container)) @en Count
-+ 1), Count).]}
+Delete (Container, Index_Type'Val(Index_Type'Pos(Last_Index (Container)) @en
+Count + 1), Count).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1498,7 +1499,7 @@ in reverse order.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If I or J is not in the range
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If either I or J is not in the range
 First_Index (Container) .. Last_Index (Container), then Constraint_Error is
 propagated. Otherwise, Swap exchanges the values of the elements at positions I
 and J.]}
@@ -1748,7 +1749,7 @@ exception raised by Process is propagated.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The purpose of the tamper with cursors check is
-  to prevent erroneous execution from the Position parameter of Process.all
+  to prevent erroneous execution from the Position parameter of Process.@key{all}
   becoming invalid. This check takes place when the operations that tamper with
   the cursors of the container are called. The check cannot be made later (say
   in the body of Iterate), because that could cause the Position cursor to be
@@ -1967,8 +1968,8 @@ invalid, see below) cursor parameter. Possible results are:]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[While it is possible to check for these cases
-  or insure that cursors survive such operations, in many cases the overhead
-  necessary to make the check (or insure cursors continue to designate the
+  or ensure that cursors survive such operations, in many cases the overhead
+  necessary to make the check (or ensure cursors continue to designate the
   same element) is substantial in time or space.]}
 @end{Reason}
 
@@ -2020,7 +2021,7 @@ Sec=(cause)}]}
 lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for a
+@ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for
 a vector shall have the effect of copying the elements from the source vector
 object to the target vector object.]}
 
@@ -2259,6 +2260,25 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
                    Source : @key{in out} List);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
+                     Before    : @key{in}     Cursor;
+                     New_Item  : @key{in}     Element_Type;
+                     Count     : @key{in}     Count_Type := 1);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
+                     Before    : @key{in}     Cursor;
+                     New_Item  : @key{in}     Element_Type;
+                     Position  :    @key{out} Cursor;
+                     Count     : @key{in}     Count_Type := 1);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
+                     Before    : @key{in}     Cursor;
+                     Position  :    @key{out} Cursor;
+                     Count     : @key{in}     Count_Type := 1);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Prepend} (Container : @key{in out} List;
                       New_Item  : @key{in}     Element_Type;
                       Count     : @key{in}     Count_Type := 1);]}
@@ -2266,25 +2286,6 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Append} (Container : @key{in out} List;
                      New_Item  : @key{in}     Element_Type;
-                     Count     : @key{in}     Count_Type := 1);]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
-                     Before    : @key{in}     Cursor;
-                     New_Item  : @key{in}     Element_Type;
-                     Count     : @key{in}     Count_Type := 1);]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
-                     Before    : @key{in}     Cursor;
-                     New_Item  : @key{in}     Element_Type;
-                     Position  :    @key{out} Cursor;
-                     Count     : @key{in}     Count_Type := 1);]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
-                     Before    : @key{in}     Cursor;
-                     Position  :    @key{out} Cursor;
                      Count     : @key{in}     Count_Type := 1);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2342,8 +2343,16 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
       @key{return} Element_Type;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : List;
-                      Item      : Element_Type) @key{return} Boolean;]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : List;
@@ -2358,16 +2367,8 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
       @key{return} Cursor;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor);]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor);]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : List;
+                      Item      : Element_Type) @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
@@ -2451,7 +2452,7 @@ initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor should
-return True if both cursors or No_Element, or designate the same element in the
+return True if both cursors are No_Element, or designate the same element in the
 same container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2508,7 +2509,7 @@ parameter.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a list]}
-Some operations are assumed to not replace elements. During the execution of
+Some operations are assumed not to replace elements. During the execution of
 such an operation, a subprogram is said to @i{tamper with elements} of a list
 object @i<L> if:]}
 
@@ -2657,28 +2658,6 @@ set to 0.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Prepend (Container : @key{in out} List;
-                   New_Item  : @key{in}     Element_Type;
-                   Count     : @key{in}     Count_Type := 1);]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Insert (Container,
-First (Container), New_Item, Count).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Append (Container : @key{in out} List;
-                  New_Item  : @key{in}     Element_Type;
-                  Count     : @key{in}     Count_Type := 1);]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Insert (Container,
-No_Element, New_Item, Count).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert (Container : @key{in out} List;
                   Before    : @key{in}     Cursor;
                   New_Item  : @key{in}     Element_Type;
@@ -2687,7 +2666,7 @@ No_Element, New_Item, Count).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
-does not designate an element in Target, then Program_Error is propagated.
+does not designate an element in Container, then Program_Error is propagated.
 Otherwise,
 Insert inserts Count copies of New_Item prior to the element designated by
 Before. If Before equals No_Element, the new elements are inserted after the
@@ -2740,6 +2719,28 @@ Before equals No_Element, the new elements are inserted after the last node (if
 any). The new elements are initialized by default (see
 @RefSecNum{Object Declarations}). Any exception raised during allocation of
 internal storage is propagated, and Container is not modified.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Prepend (Container : @key{in out} List;
+                   New_Item  : @key{in}     Element_Type;
+                   Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Insert (Container,
+First (Container), New_Item, Count).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Append (Container : @key{in out} List;
+                  New_Item  : @key{in}     Element_Type;
+                  Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Insert (Container,
+No_Element, New_Item, Count).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2830,9 +2831,9 @@ exchanges the values of the elements designated by I and J.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If either I or J is No_Element,
-then Constraint_Error is propagated. If I or J do not designate an element in
-Container, then Program_Error is propagated. Otherwise, Swap_Links exchanges
-the nodes designated by I and J.]}
+then Constraint_Error is propagated. If either I or J do not designate an
+element in Container, then Program_Error is propagated. Otherwise, Swap_Links
+exchanges the nodes designated by I and J.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2939,12 +2940,41 @@ node in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Contains (Container : List;
-                   Item      : Element_Type) @key{return} Boolean;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Next (Position : Cursor) @key{return} Cursor;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Find (Container, Item) /= No_Element.]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element or
+designates the last element of the container, then Next returns the value
+No_Element. Otherwise, it returns a cursor that designates the successor of the
+element designated by Position.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element or
+designates the first element of the container, then Previous returns the value
+No_Element. Otherwise, it returns a cursor that designates the predecessor of
+the element designated by Position.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Next (Position : @key{in out} Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Next (Position).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Previous (Position : @key{in out} Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Previous (Position).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2984,41 +3014,12 @@ designating the first equal element encountered.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Next (Position : Cursor) @key{return} Cursor;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Contains (Container : List;
+                   Item      : Element_Type) @key{return} Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element or
-designates the last element of the container, then Next returns the value
-No_Element. Otherwise, it returns a cursor that designates the successor of the
-element designated by Position.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element or
-designates the first element of the container, then Previous returns the value
-No_Element. Otherwise, it returns a cursor that designates the predecessor of
-the element designated by Position.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Next (Position : @key{in out} Cursor);]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Next (Position).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Previous (Position : @key{in out} Cursor);]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Previous (Position).]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Find (Container, Item) /= No_Element.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3053,7 +3054,7 @@ exception raised by Process.@key{all} is propagated.]}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The purpose of the tamper with cursors check is
-  to prevent erroneous execution from the Position parameter of Process.all
+  to prevent erroneous execution from the Position parameter of Process.@key{all}
   becoming invalid. This check takes place when the operations that tamper with
   the cursors of the container are called. The check cannot be made later (say
   in the body of Iterate), because that could cause the Position cursor to be
@@ -3213,7 +3214,7 @@ Containers.Doubly_Linked_Lists is called with an invalid cursor parameter.
 object shall be lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for a
+@ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for
 a list shall have the effect of copying the elements from the source list
 object to the target list object.]}
 
@@ -3351,12 +3352,12 @@ function "=" on map values are unspecified.@PDefn{unspecified}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If the actual function for "=" is not symmetric
-  and consistent, the result returned by Map "=" cannot be predicted.
+  and consistent, the result returned by "=" for Map objects cannot be predicted.
   The implementation is not required to protect
   against "=" raising an exception, or returning random results, or any
   other @lquotes@;bad@rquotes behavior. And it can call "=" in whatever
-  manner makes sense. But note that only the result of Map "=" is unspecified;
-  other subprograms are not allowed to break if "="
+  manner makes sense. But note that only the result of "=" for Map objects
+  is unspecified; other subprograms are not allowed to break if "="
   is bad (they aren't expected to use "=").]}
 @end{Ramification}
 
@@ -3389,7 +3390,7 @@ different for hashed maps and ordered maps.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
 @Defn2{Term=[tamper with cursors],Sec=[of a map]}
-Some operations are assumed to work on a constant set of elements. During
+Some operations are assumed to work on a constant set of elements. During the
 execution of such an operation, a subprogram is said to @i{tamper with cursors} of a map object @i<M>
 if:]}
 
@@ -3429,7 +3430,7 @@ with the cursors of @i<M>.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
 @Defn2{Term=[tamper with elements],Sec=[of a map]}
-Some operations are assumed to not replace elements. During the execution of
+Some operations are assumed not to replace elements. During the execution of
 such an operation, a subprogram is said to @i{tamper with elements} of a map object @i<M> if:]}
 
 @begin{Itemize}
@@ -3464,7 +3465,7 @@ initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor should
-return True if both cursors or No_Element, or designate the same element in the
+return True if both cursors are No_Element, or designate the same element in the
 same container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3943,7 +3944,7 @@ cursor parameter.@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
 lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for a
+@ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for
 a map shall have the effect of copying the elements from the source map
 object to the target map object.]}
 
@@ -4206,12 +4207,13 @@ Two keys @i<K1> and @i<K2> are defined to be @i<equivalent> if
 Equivalent_Keys (@i<K1>, @i<K2>) returns True.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The actual for the generic formal function Hash is
-expected to return the same value each time it is called with a particular key
-value. For any two equivalent key values, the actual for Hash is expected to
-return the same value. If the actual for Hash behaves in some other manner, the
-behavior of this package is unspecified. Which subprograms of this package call
-Hash, and how many times they call it, is unspecified.@PDefn{unspecified}]}
+@ChgAdded{Version=[2],Text=[The actual function for the generic formal function
+Hash is expected to return the same value each time it is called with a
+particular key value. For any two equivalent key values, the actual for Hash is
+expected to return the same value. If the actual for Hash behaves in some other
+manner, the behavior of this package is unspecified. Which subprograms of this
+package call Hash, and how many times they call it, is
+unspecified.@PDefn{unspecified}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4228,7 +4230,7 @@ Hash, and how many times they call it, is unspecified.@PDefn{unspecified}]}
 @end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The actual for the generic formal function
+@ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 Equivalent_Keys on Key_Type values is expected to return the same value each
 time it is called with a particular pair of key values. It should define an
 equivalence relationship, that is, be reflexive, symmetric, and transitive. If
@@ -4898,7 +4900,7 @@ the last node in Container. If Container is empty, returns No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
-Previous returns No_Element. Otherwise Previous returns the a cursor
+Previous returns No_Element. Otherwise Previous returns a cursor
 designating the node that precedes the one designated by Position. If Position
 designates the first element, then Previous returns No_Element.]}
 
@@ -5076,53 +5078,14 @@ function "=" on set values are unspecified.@PDefn{unspecified}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If the actual function for "=" is not symmetric
-  and consistent, the result returned by the Set "=" cannot be predicted.
-  The implementation is not required to protect
+  and consistent, the result returned by the "=" for Set objects cannot be
+  predicted. The implementation is not required to protect
   against "=" raising an exception, or returning random results, or any
   other @lquotes@;bad@rquotes behavior. And it can call "=" in whatever
-  manner makes sense. But note that only the result of Set "=" is unspecified;
-  other subprograms are not allowed to break if "=" is bad (they aren't
-  expected to use "=").]}
+  manner makes sense. But note that only the result of "=" for Set objects
+  is unspecified; other subprograms are not allowed to break if "=" is bad
+  (they aren't expected to use "=").]}
 @end{Ramification}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The actual function for the generic formal function
-"=" on Element_Type values is expected to define a symmetric relationship and
-return the same result value each time it is called with a particular pair of
-values. The exact arguments and number of calls of the generic formal function
-"=" on Element_Type values by the function "=" on Set values are
-unspecified.@PDefn{unspecified}]}
-
-@begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[If the actual function for "=" is not symmetric
-  and consistent, the result returned by Set "=" cannot be predicted.
-  The implementation is not required to protect
-  against "=" raising an exception, or returning random results, or any
-  other @lquotes@;bad@rquotes behavior. And it can call "=" in whatever
-  manner makes sense. But note that only the result of Set "=" is unspecified;
-  other subprograms are not allowed to break if "="
-  is bad (they aren't expected to use "=").]}
-@end{Ramification}
-
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The actual function for the generic formal function
-"=" on Element_Type values is expected to return the same result value each
-time it is called with a particular pair of values. It should define a
-symmetric relationship. If it behaves in some other manner, the behavior of
-these packages is unspecified. How many times this function is called by the
-function "=" on Set values is unspecified.@PDefn{unspecified}]}
-
-@begin{ImplNote}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The implementation is not required to protect
-  against "=" raising an exception, or returning random results, or any
-  other @lquotes@;bad@rquotes behavior. In addition, the implementation can
-  call "=" whenever it is needed; we don't want to specify how often that
-  happens. The result must remain the same (this is a logically pure function),
-  or the behavior is unspecified.]}
-@end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The type Set is used to represent sets. The type
@@ -5149,7 +5112,7 @@ hashed sets and ordered sets.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a set]}
-Some operations are assumed to work on a constant set of elements. During
+Some operations are assumed to work on a constant set of elements. During the
 execution of such an operation, a subprogram is said to @i{tamper with cursors}
 of a set object @i{S} if:]}
 
@@ -5190,7 +5153,7 @@ parameter; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a set]}
-Some operations are assumed to not replace elements. During the execution of
+Some operations are assumed not to replace elements. During the execution of
 such an operation, a subprogram is said to @i{tamper with elements} of a set
 object @i<S> if:]}
 
@@ -5230,7 +5193,7 @@ initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor should
-return True if both cursors or No_Element, or designate the same element in the
+return True if both cursors are No_Element, or designate the same element in the
 same container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5330,7 +5293,7 @@ exception raised by the assignment is propagated.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The final assignment may require that node of
+  @ChgAdded{Version=[2],Text=[The final assignment may require that the node of
   the element be moved in the Set's data structures. That could mean that
   implementing this operation exactly as worded above could require the
   overhead of searching twice. Implementations are encouraged to avoid this
@@ -5723,16 +5686,26 @@ of Generic_Keys is unspecified if Key behaves in some other
 manner.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[A key is expected to unambiguously determine one
-equivalence class for elements. The behavior of Generic_Keys is unspecified if
-the formal parameters of this package behave in some other
+@ChgAdded{Version=[2],Text=[A key is expected to unambiguously determine a
+single equivalence class for elements. The behavior of Generic_Keys is
+unspecified if the formal parameters of this package behave in some other
 manner.@PDefn{unspecified}]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Key (Position : Cursor) @key{return} Key_Type;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Key (Element (Position)).]}
+@end{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The subprograms in package Generic_Keys named
 Contains, Find, Element, Delete, and Exclude, are equivalent to the
 corresponding subprograms in the parent package, with the difference that the
-Key parameter is used locate an element in the set.]}
+Key parameter is used to locate an element in the set.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -5744,14 +5717,6 @@ Key parameter is used locate an element in the set.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Replace_Element (Container, Find (Container, Key), New_Item).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Key (Position : Cursor) @key{return} Key_Type;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Key (Element (Position)).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5852,7 +5817,7 @@ invalid cursor parameter.@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
 lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for a
+@ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for
 a set shall have the effect of copying the elements from the source set
 object to the target set object.]}
 
@@ -6084,12 +6049,12 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Elements} (Left  : Cursor;
                                  Right : Element_Type)
-    @key{return} Boolean;]}
+     @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Elements} (Left  : Element_Type;
                                  Right : Cursor)
-    @key{return} Boolean;]}
+     @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Iterate}
@@ -6324,7 +6289,7 @@ call it, is unspecified.@PDefn{unspecified}]}
 @ChgAdded{Version=[2],Text=[For any two elements @i{E1} and @i{E2}, the boolean
 values Equivalent_Element (@i{E1}, @i{E2}) and Equivalent_Keys (Key (@i{E1}),
 Key (@i{E2})) are expected to be equal. If the actuals for Key or
-Equivalent_Key behave in some other manner, the behavior of Generic_Keys is
+Equivalent_Keys behave in some other manner, the behavior of Generic_Keys is
 unspecified. Which subprograms of Generic_Keys call Equivalent_Keys, and how
 many times they call it, is unspecified.@PDefn{unspecified}]}
 
@@ -6579,7 +6544,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Iterate}
-     (Container : @key{in} Set;]}
+     (Container : @key{in} Set;
       Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6594,6 +6559,10 @@ package Containers.Ordered_Sets has the following declaration:]}
       @key{with function} "<" (Left, Right : Key_Type)
          @key{return} Boolean @key{is} <>;
    @key{package} @AdaDefn{Generic_Keys} @key{is}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Equivalent_Keys} (Left, Right : Key_Type)
+          @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Key} (Position : Cursor) @key{return} Key_Type;]}
@@ -6904,7 +6873,7 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 @ChgAdded{Version=[2],Text=[The language-defined generic package
 Containers.Indefinite_Vectors provides a private type Vector and a set of
 operations. It provides the same operations as the package Containers.Vectors
-(see @RefSecNum{The Package Containers.Vectors}) does, with the difference that
+(see @RefSecNum{The Package Containers.Vectors}), with the difference that
 the generic formal Element_Type is indefinite.]}
 @end{Intro}
 
@@ -6947,7 +6916,7 @@ the profiles:]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @end{Itemize}
 @end{StaticSem}
@@ -6967,7 +6936,7 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 provides private types List and Cursor, and a set of operations for each
 type. It provides the same operations as the package
 Containers.Doubly_Linked_Lists
-(see @RefSecNum{The Package Containers.Doubly_Linked_Lists}) does,
+(see @RefSecNum{The Package Containers.Doubly_Linked_Lists}),
 with the difference that the generic formal Element_Type is indefinite.]}
 @end{Intro}
 
@@ -6976,9 +6945,9 @@ with the difference that the generic formal Element_Type is indefinite.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
 the generic library package
-Containers.Indefinite_Doubly_Linked_Lists@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Doubly_Linked_Lists]}
+Containers.@!Indefinite_@!Doubly_@!Linked_@!Lists@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Doubly_Linked_Lists]}
 has the same contents as
-Containers.Doubly_Linked_Lists except:]}
+Containers.@!Doubly_@!Linked_@!Lists except:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7010,7 +6979,7 @@ the profile:]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @end{Itemize}
 @end{StaticSem}
@@ -7074,7 +7043,7 @@ the profile:]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @end{Itemize}
 @end{StaticSem}
@@ -7138,7 +7107,7 @@ the profile:]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element may be constrained even if Element_Type is unconstrained.]}
 
 @end{Itemize}
@@ -7176,7 +7145,7 @@ Containers.Hashed_Sets except:]}
 @ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element_Preserving_Key may be constrained even if Element_Type is
 unconstrained.]}
 @end{Itemize}
@@ -7212,7 +7181,7 @@ has the same contents as Containers.Ordered_Sets except:]}
 @ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The Element parameter of access subprogram Process
+@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element_Preserving_Key may be constrained even if Element_Type is
 unconstrained.]}
 @end{Itemize}

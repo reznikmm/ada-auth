@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/08/18 06:14:46 $}
+@Comment{$Date: 2005/09/21 04:43:26 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 
@@ -4298,8 +4298,8 @@ the target object of the call and the entry to be called.]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[execution], Sec=(timed_entry_call)}
 For the execution of a @nt{timed_entry_call}, the @SynI(entry_)@nt<name>@Chg{Version=[2],
-New=[, @Syni{procedure_}@nt{name}, or @Syni{procedure_}@nt{prefix} ,],Old=[]}
-and actual parameters are evaluated
+New=[, @Syni{procedure_}@nt{name}, or @Syni{procedure_}@nt{prefix},],Old=[]}
+and any actual parameters are evaluated,
 as for a simple entry call (see @RefSecNum(Entry Calls))@Chg{Version=[2],New=[
 or procedure call (see @RefSecNum{Subprogram Calls})],Old=[]}.
 The expiration time

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/08/21 17:59:33 $}
+@Comment{$Date: 2005/09/21 04:43:29 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @LabeledClause{The Package System}
 
@@ -1765,7 +1765,7 @@ storage pool @Chg{Version=[2],New=[used ],Old=[]}for
 anonymous access type should be
 @Chg{Version=[2],New=[determined as follows:],Old=[created
 at the point of an allocator for the type, and be reclaimed when
-the designated object becomes inaccessible.]}
+the designated object becomes inaccessible;]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00416-01]}
@@ -1998,7 +1998,7 @@ the following attribute is defined:
   Text=<Denotes the maximum value for Size_In_Storage_Elements
 that @Chg{Version=[2],New=[could],Old=[will]} be requested @Chg{Version=[2],
 New=[by the implementation ],Old=[]}via Allocate for an access type whose
-designated subtype is S.@Chg{Version=[2],New=[For a type with access
+designated subtype is S.@Chg{Version=[2],New=[ For a type with access
 discriminants, if the implementation allocates space for a coextension
 in the same pool as that of the object having the access discriminant,
 then this accounts for any calls on Allocate that could be performed to
@@ -2469,7 +2469,7 @@ Restrictions intended to facilitate the construction of
 efficient tasking run-time systems are defined
 in @RefSecNum{Tasking Restrictions}.
 @Chg{Version=[2],New=[Restrictions intended for use when constructing
-high intergrity systems],Old=[Safety- and security-related
+high integrity systems],Old=[Safety- and security-related
 restrictions]} are defined in
 @RefSecNum{High Integrity Restrictions}.
 
@@ -3328,7 +3328,7 @@ declared.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
 @ChgAdded{Version=[2],Text=[An @nt{attribute_reference} for one of the
 stream-oriented attributes is illegal unless the attribute is available at
-the place of the @nt{attribute_reference}. Furthmore, an
+the place of the @nt{attribute_reference}. Furthermore, an
 @nt{attribute_reference} for @i<T>'Input is illegal if @i<T> is an abstract
 type.]}
 

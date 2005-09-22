@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:34 $}
+@Comment{$Date: 2005/09/21 04:43:30 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -3380,8 +3380,8 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00283-01]}
 The subprograms @Chg{Version=[2],New=[given in subclause
-@RefSecNum(File Management) for the control of external files (],Old=[]}
-Create, Open, Close, Delete, Reset, Mode, Name, Form,@Chg{Version=[2],New=[ and],Old=[]}
+@RefSecNum(File Management) for the control of external files (],Old=[]}Create,
+Open, Close, Delete, Reset, Mode, Name, Form,@Chg{Version=[2],New=[ and],Old=[]}
 Is_Open@Chg{Version=[2],New=[) are available for stream files],
 Old=[, and End_of_File have the same effect as the corresponding
 subprograms in Sequential_IO (see @RefSecNum(File Management))]}.

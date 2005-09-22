@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/08/19 06:37:23 $}
+@Comment{$Date: 2005/09/21 04:43:25 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2428,8 +2428,8 @@ contract model violations.
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[1],Text=[For an @nt{aggregate} of a controlled type
 whose value is assigned,
-other than by an @nt{assignment_statement}
-@Chg{Version=[2],New=[],Old=[ or a @nt{return_statement}]}, the
+other than by an @nt{assignment_statement}@Chg{Version=[2],New=[],Old=[ or
+a @nt{return_statement}]}, the
 implementation shall not create a separate anonymous object for the
 @nt{aggregate}. The aggregate value shall be constructed directly in the target
 of the assignment operation and Adjust is not called on the target object.]}

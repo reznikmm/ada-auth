@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/08/19 06:37:24 $}
+@Comment{$Date: 2005/09/21 04:43:28 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -345,7 +345,7 @@ as explained in @RefSecNum{Exception Handling}].
 @PDefn2{Term=[execution], Sec=(raise_statement with an exception_name)}
 For the execution of a @nt{raise_statement} with an
 @SynI{exception_}@nt{name}, the named exception is raised.
-@Chg{Version=[2],New=[@redundant{If a @SynI<string_>@nt<expression> is present, a call of
+@Chg{Version=[2],New=[@redundant{If a @SynI<string_>@nt<expression> is present,
 the value of the @nt{expression} is associated with the exception occurrence.}],Old=[]}
 @PDefn2{Term=[execution], Sec=(re-raise statement)}
 For the execution of a re-raise statement,
@@ -733,7 +733,7 @@ an unnamed @nt{block_statement}.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00400-01]}
-@ChgAdded{Version=[2],Text=[The functions Exception_Name (respectively,
+@ChgAdded{Version=[2],Text=[The Exception_Name functions (respectively,
 Wide_Exception_Name) return the same sequence of graphic characters as that
 defined for Wide_Wide_Exception_Name, if all the graphic characters are defined
 in Character (respectively, Wide_Character); otherwise, the sequence of
@@ -746,8 +746,8 @@ characters of Exceptions.Wide_Wide_Exception_Name are not defined in Character
 (respectively, Wide_Character).],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00378-01],ARef=[AI95-00417-01]}
-@ChgAdded{Version=[2],Text=[The string returned by the functions Exception_Name,
-Wide_Exception_Name, and Wide_Wide_Exception_Name has lower bound 1.]}
+@ChgAdded{Version=[2],Text=[The string returned by the Exception_Name,
+Wide_Exception_Name, and Wide_Wide_Exception_Name functions has lower bound 1.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00378-01]}
 Exception_Information returns implementation-defined information
@@ -1552,7 +1552,7 @@ entity or view.]]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
 @ChgAdded{Version=[2],Text=[@RootDefn{Allocation_Check}
 Allocation_Check @\@Redundant[For an @nt<allocator>, check that the master of
-any tasks created by the @nt{allocator} is not yet completed or some
+any tasks to be created by the @nt{allocator} is not yet completed or some
 dependents have not yet terminated, and that the finalization of the
 collection has not started.]]}
 

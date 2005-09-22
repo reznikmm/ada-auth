@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/08/09 05:47:49 $}
+@Comment{$Date: 2005/09/21 04:43:22 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @LabeledClause{Array Types}
 
@@ -1946,7 +1946,7 @@ and the @nt{attribute_reference} shall appear alone.
 @Defn2{Term=[record],Sec=(explicitly limited)}
 If a @nt{record_type_declaration} includes the
 reserved word @key{limited}, the type is called an
-@i<explictly limited record> type.]}
+@i<explicitly limited record> type.]}
 
 @PDefn2{Term=[nominal subtype], Sec=(of a record component)}
 The @nt{component_definition} of a @nt<component_declaration>

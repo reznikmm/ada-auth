@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:06:56 $}
+@Comment{$Date: 2005/09/21 04:43:24 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -305,8 +305,8 @@ indicate whether overriding is intended. See @RefSec{Overriding Indicators}.]]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
 @PDefn2{Term=[elaboration], Sec=(subprogram_declaration)}@Chg{Version=[2],New=[],Old=[
 @PDefn2{Term=[elaboration], Sec=(abstract_subprogram_declaration)}]}
-The elaboration of a @nt{subprogram_declaration}@Chg{Version=[2],New=[ or
-an @nt{abstract_subprogram_declaration}],Old=[]} has no effect.
+The elaboration of a @nt{subprogram_declaration}@Chg{Version=[2],New=[],Old=[
+or an @nt{abstract_subprogram_declaration}]} has no effect.
 @end{RunTime}
 
 @begin{Notes}
@@ -974,7 +974,7 @@ The default calling convention is @i{entry} for an entry.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Text=[The calling convention for an
 anonymous access-to-subprogram parameter
-or anonymous access-to-subprogram result @i<protected> if the reserved
+or anonymous access-to-subprogram result is @i<protected> if the reserved
 word @key{protected} appears in its definition and otherwise is the convention
 of the subprogram that contains the parameter.]}
 @begin{Ramification}
@@ -2310,10 +2310,11 @@ denotes a constant view of the return object.]}
 unconstrained, and a call on the function is used to provide the initial value
 of an object with a constrained nominal subtype, Constraint_Error may be raised
 at the point of the call (after abandoning the execution of the function body)
-if, while elaborating a @nt{return_subtype_indication} or
-evaluating the @nt{expression} of a return statement within the function, it
-is determined that the value of the result will violate the constraint of this
-object's subtype.]}
+if, while elaborating the @nt{return_subtype_indication} or
+evaluating the @nt{expression} of a return statement that applies to the
+function body, it
+is determined that the value of the result will violate the constraint of the
+subtype of this object.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Without such a permission, it would be very

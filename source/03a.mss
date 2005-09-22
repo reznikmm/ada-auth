@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:06:48 $}
+@Comment{$Date: 2005/09/21 04:43:21 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -4046,7 +4046,7 @@ of the attributes Succ, Pred, and Image need not belong to the subtype.
 For any value V (including any nongraphic character) of an
 enumeration subtype S, S'Value(S'Image(V)) equals V,
 as @Chg{Version=[2],New=[do],Old=[does]} S'Wide_Value(S'Wide_Image(V))@Chg{Version=[2],
-New=[and S'Wide_Wide_Value(S'Wide_Wide_Image(V))],Old=[]}.
+New=[ and S'Wide_Wide_Value(S'Wide_Wide_Image(V))],Old=[]}.
 @Chg{Version=[2],New=[None of these
 expressions],Old=[Neither expression]} ever @Chg{Version=[2],New=[raise],Old=[raises]}
 Constraint_Error.

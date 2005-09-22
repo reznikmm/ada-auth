@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2005/08/21 17:59:35 $ $Author: Randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2005/09/21 04:43:33 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/08/21 17:59:35 $}
+@Comment{$Date: 2005/09/21 04:43:33 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -344,8 +344,8 @@ implementation.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 Other forms of handlers are allowed to be supported, in which
-case@Chg{Version=[2],New=[,],Old=[]} the
-rules of this @Chg{Version=[2],New=[subclause],Old=[clause]} should be adhered
+case@Chg{Version=[2],New=[],Old=[,]} the
+rules of this @Chg{Version=[2],New=[clause],Old=[subclause]} should be adhered
 to.
 
 The active priority of the execution of an interrupt handler is allowed to
@@ -429,7 +429,8 @@ need not be at library level.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00253-01],ARef=[AI95-00303-01]}
-The Interrupt_Handler pragma is only allowed immediately within a
+The Interrupt_Handler pragma is only allowed immediately within
+@Chg{Version=[2],New=[the],Old=[a]}
 @nt{protected_definition}@Chg{Version=[2],New=[ where the
 corresponding subprogram is declared],Old=[]}.
 The cor@!responding @nt{protected_type_declaration} @Chg{Version=[2],New=[or
@@ -462,7 +463,7 @@ for the interrupt is not affected.
 @Defn2{Term=[initialization], Sec=(of a protected object)}
 @IndexCheck{Ceiling_Check}
 If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
-in effect then@Chg{Version=[2],New=[,],Old=[]} upon the initialization of a
+in effect@Chg{Version=[2],New=[,],Old=[]} then upon the initialization of a
 protected object @Chg{Version=[2],New=[for which],Old=[that]} either an
 Attach_Handler or Interrupt_Handler pragma applies to one of its procedures,
 a check is made that the ceiling priority defined in the
