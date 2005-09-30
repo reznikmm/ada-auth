@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2005/09/21 04:43:31 $ $Author: Randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2005/09/22 05:10:54 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:31 $}
+@Comment{$Date: 2005/09/22 05:10:54 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -705,9 +705,9 @@ element. If an object of type Cursor is not otherwise initialized, it is
 initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor should
-return True if both cursors are No_Element, or designate the same element in the
-same container.]}
+@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor returns
+True if both cursors are No_Element, or designate the same element in the same
+container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Execution of the default implementation of the
@@ -1648,7 +1648,7 @@ No_Element. Otherwise, returns a cursor that designates the element with index
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Searches the elements of Container
-for an element equal to Item (in the sense of the generic formal equality
+for an element equal to Item (using the generic formal equality
 operator). The search starts at position Index and proceeds towards Last_Index
 (Container). If no equal element is found, then Find_Index returns No_Index.
 Otherwise, it returns the index of the first equal element encountered.]}
@@ -1665,7 +1665,7 @@ Otherwise, it returns the index of the first equal element encountered.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
 Otherwise Find searches the elements of Container for an element equal to Item
-(in the sense of the generic formal equality operator). The search starts at
+(using the generic formal equality operator). The search starts at
 the first element if Cursor equals No_Element, and at the element designated by
 Cursor otherwise. It proceeds towards the last element of Container. If no
 equal element is found, then Find returns No_Element. Otherwise, it returns a
@@ -1681,7 +1681,7 @@ cursor designating the first equal element encountered.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Searches the elements of Container
-for an element equal to Item (in the sense of the generic formal equality
+for an element equal to Item (using the generic formal equality
 operator). The search starts at position Index or, if Index is greater than
 Last_Index (Container), at position Last_Index (Container). It proceeds towards
 First_Index (Container). If no equal element is found, then Reverse_Find_Index
@@ -1700,7 +1700,7 @@ encountered.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
 Otherwise Reverse_Find searches the elements of Container for an element equal
-to Item (in the sense of the generic formal equality operator). The search
+to Item (using the generic formal equality operator). The search
 starts at the last element if Cursor equals No_Element, and at the element
 designated by Cursor otherwise. It proceeds towards the first element of
 Container. If no equal element is found, then Reverse_Find returns No_Element.
@@ -2451,9 +2451,9 @@ element. If an object of type Cursor is not otherwise initialized, it is
 initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor should
-return True if both cursors are No_Element, or designate the same element in the
-same container.]}
+@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor returns
+True if both cursors are No_Element, or designate the same element in the same
+container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Execution of the default implementation of the
@@ -2987,8 +2987,8 @@ the element designated by Position.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
-Find searches the elements of Container for an element equal to Item (in the
-sense of the generic formal equality operator). The search starts at the
+Find searches the elements of Container for an element equal to Item (using
+the generic formal equality operator). The search starts at the
 element designated by Position, or at the first element if Position equals
 No_Element. It proceeds towards Last (Container). If no equal element is found,
 then Find returns No_Element. Otherwise, it returns a cursor designating the
@@ -3005,8 +3005,8 @@ first equal element encountered.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
-Find searches the elements of Container for an element equal to Item (in the
-sense of the generic formal equality operator). The search starts at the
+Find searches the elements of Container for an element equal to Item (using
+the generic formal equality operator). The search starts at the
 element designated by Position, or at the last element if Position equals
 No_Element. It proceeds towards First (Container). If no equal element is
 found, then Reverse_Find returns No_Element. Otherwise, it returns a cursor
@@ -3464,9 +3464,9 @@ node. If an object of type Cursor is not otherwise initialized, it is
 initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor should
-return True if both cursors are No_Element, or designate the same element in the
-same container.]}
+@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor returns
+True if both cursors are No_Element, or designate the same element in the same
+container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Execution of the default implementation of the
@@ -5192,9 +5192,9 @@ element. If an object of type Cursor is not otherwise initialized, it is
 initialized to the same value as No_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor should
-return True if both cursors are No_Element, or designate the same element in the
-same container.]}
+@ChgAdded{Version=[2],Text=[The predefined "=" operator for type Cursor returns
+True if both cursors are No_Element, or designate the same element in the same
+container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Execution of the default implementation of the
@@ -5220,7 +5220,7 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Left and Right denote the same
 set object, then the function returns True. If Left and Right have different
 lengths, then the function returns False. Otherwise, for each element @i<E> in
-Left, the function returns False if an element equal to @i<E> (in the sense of
+Left, the function returns False if an element equal to @i<E> (using
 the generic formal equality operator) is not present in Right. If the function
 has not returned a result after checking all of the elements, it returns True.
 Any exception raised during evaluation of element equality is propagated.]}

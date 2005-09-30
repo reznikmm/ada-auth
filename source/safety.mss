@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.30 $ $Date: 2005/05/15 06:35:43 $ $Author: Randy $ }
+@Comment{ $Revision: 1.31 $ $Date: 2005/09/22 05:10:56 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/05/15 06:35:43 $}
+@Comment{$Date: 2005/09/22 05:10:56 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -674,8 +674,9 @@ a restriction can be imposed.
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00347-01],ARef=[AI95-00394-01]}
-The following restrictions, the same as in @RefSecNum{Tasking Restrictions},
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00347-01],ARef=[AI95-00394-01]}
+@ChgDeleted{Version=[2],Text=[The following restrictions,
+the same as in @RefSecNum{Tasking Restrictions},
 apply in this Annex:
  No_Task_@!Hierarchy,
  No_Abort_@!Statement,
@@ -683,33 +684,11 @@ apply in this Annex:
  Max_@!Task_@!Entries is 0,
  Max_@!Asynchronous_@!Select_@!Nesting is 0, and
  Max_@!Tasks is 0.
-@redundant[The last three restrictions are checked prior to program execution.]
-@Chg{Version=[2],New=[The following uses of restriction identifier
-No_Dependence apply in this Annex: No_Dependence => Ada.Unchecked_Deallocation
-and No_Dependence => Ada.Unchecked_Conversion.
-Pragma Profile(Ravenscar) applies in this Annex.],Old=[]}
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
-  @ChgAdded{Version=[2],Text=[The reference to pragma Profile(Ravenscar) is
-  intended to show that properly restricted tasking is appropriate for use
-  in high integrity systems. The Ada 95
-  Annex seemed to suggest that tasking was inappropriate for such systems.]}
+@redundant[The last three restrictions are checked prior to program execution.]]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
-  @ChgAdded{Version=[2],Text=[Other uses of No_Dependence can also be
-  appropriate for high-integrity systems. The specific mention of two uses
-  is meant to replace the identifiers now banished to
-  @RefSec{Dependence Restrictions Identifiers}.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
-  @ChgAdded{Version=[2],Text=[Restriction No_Dependence => Ada.Unchecked_Deallocation
-  would be useful in those
-  contexts in which heap storage is needed on program start-up, but need not be
-  increased subsequently. The danger of a dangling pointer can therefore be
-  avoided.]}@ChgNote{Moved up from below.}
-@end{Discussion}
-
-@Trailing@;The following additional restrictions apply in this Annex.
+@Trailing@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00394-01]}
+The following @Chg{Version=[2],New=[@SynI{restriction_}@nt{identifier}s are
+language defined:],Old=[additional restrictions apply in this Annex.]}
 
 @leading@keepnext@b{Tasking-related restriction:}
 @begin{Description}
@@ -887,6 +866,56 @@ task invokes the same subprogram.
 @end{StaticSem}
 
 @begin{ImplReq}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00394-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[An implementation of this Annex
+shall support:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the restrictions defined in this subclause; and]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the following uses of @SynI{restriction_}@nt{identifier}
+No_Dependence defined in @RefSecNum{Language-Defined Restrictions}:
+No_Dependence => Ada.Unchecked_Deallocation and No_Dependence =>
+Ada.Unchecked_Conversion; and]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Other uses of No_Dependence can also be
+  appropriate for high-integrity systems. The specific mention of two uses
+  is meant to replace the identifiers now banished to
+  @RefSec{Dependence Restrictions Identifiers}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Restriction No_Dependence => Ada.Unchecked_Deallocation
+  would be useful in those
+  contexts in which heap storage is needed on program start-up, but need not be
+  increased subsequently. The danger of a dangling pointer can therefore be
+  avoided.]}@ChgNote{Moved up from below.}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the following restrictions defined in
+@RefSecNum{Tasking Restrictions}: No_Task_Hierarchy,
+No_Abort_Statement, No_Implicit_Heap_Allocation; and]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[the following uses of @SynI{restriction_parameter_}@nt{identifier}s
+defined in @RefSecNum{Tasking Restrictions}, which are
+checked prior to program execution: Max_Task_Entries => 0,
+Max_Asynchronous_Select_Nesting => 0, and Max_Tasks => 0; and]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
+@ChgAdded{Version=[2],Text=[the @key{pragma} Profile(Ravenscar).]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
+  @ChgAdded{Version=[2],Text=[The reference to pragma Profile(Ravenscar) is
+  intended to show that properly restricted tasking is appropriate for use
+  in high integrity systems. The Ada 95
+  Annex seemed to suggest that tasking was inappropriate for such systems.]}
+@end{Discussion}
+@end{Itemize}
+
 If an implementation supports @nt[pragma] Restrictions for a particular
 argument, then except for the restrictions No_Unchecked_Deallocation,
 No_Unchecked_Conversion, No_Access_Subprograms, and No_Unchecked_Access,
@@ -1033,6 +1062,10 @@ proscribed
   @ChgAdded{Version=[2],Text=[Restriction No_Dependence is used instead of
   special @i<restriction_>@nt<identifier>s. The old names are banished to
   Obsolescent Features (see @RefSecNum{Dependence Restrictions Identifiers}).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
+  @ChgAdded{Version=[2],Text=[The bizarre wording @lquotes@;apply in this
+  Annex@rquotes (which no one quite can explain the meaning of) is banished.]}
 @end{DiffWord95}
 
 @LabeledAddedClause{Version=[2],Name=[Pragma Detect_Blocking]}
