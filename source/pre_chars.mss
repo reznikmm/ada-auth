@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2005/06/03 05:41:49 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2005/09/30 05:33:58 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2005/06/03 05:41:49 $}
+@Comment{$Date: 2005/09/30 05:33:58 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -162,6 +162,17 @@ Wide_Characters or Wide_Wide_Characters.]}]}
 
 @key[end] Ada.Characters.Handling;
 @end{Example}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+@ChgAdded{Version=[2],Text=[The @nt{with_clause} for Ada.Characters.Conversions
+is needed for the definition of the obsolescent functions (see
+@RefSecnum{Character and Wide_Character Conversion Functions}). It would
+be odd to put this clause
+into @RefSecnum{Character and Wide_Character Conversion Functions}
+as it was not present in Ada 95,
+and @nt{with_clause}s are semantically neutral to clients anyway.]}
+@end{Discussion}
 
 In the description below for each function that returns a Boolean
 result, the effect is described in terms of the conditions under which

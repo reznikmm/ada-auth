@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2005/09/22 05:10:54 $ $Author: Randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2005/09/30 05:33:54 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/09/22 05:10:54 $}
+@Comment{$Date: 2005/09/30 05:33:54 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -207,7 +207,7 @@ should take care to avoid creating internal dangling accesses by assuming
 behavior from generic formals that can't be guaranteed. We don't
 try to say this normatively because it would be fairly complex, and
 implementers are unlikely to increase their support costs by fielding
-implementations that are unstable if given buggy hash functions, et. al.]}
+implementations that are unstable if given buggy hash functions, et al.]}
 @end{ImplNote}
 
 @begin{Extend95}
@@ -6911,7 +6911,7 @@ the profiles:]}
   @ChgAdded{Version=[2],Text=[These procedures are omitted because there is no
   way to create a default-initialized object of an indefinite type. Note that
   Insert_Space can be used instead of this routine in most cases. Omitting
-  the routine completely allows any problems to be be diagnosed by
+  the routine completely allows any problems to be diagnosed by
   the compiler when converting from a definite to indefinite vector.]}
 @end{Discussion}
 

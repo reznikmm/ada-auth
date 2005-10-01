@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2005/09/21 04:43:34 $ $Author: Randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2005/09/30 05:33:57 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:34 $}
+@Comment{$Date: 2005/09/30 05:33:57 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -416,7 +416,8 @@ erroneous.]}
       real change, so no Chgref}
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If @nt{pragma} Export is supported for a language, the main program should
-be able to be written in that language. Subprograms named "adainit and "adafinal"
+be able to be written in that language. Subprograms named "adainit" and
+"adafinal"
 should be provided for elaboration and finalization of the environment task.]}]}
 @begin{ramification}
 For example, if the main subprogram is written in C,
@@ -525,7 +526,7 @@ If both External_Name and Link_Name are specified for an Import
 or Export pragma,
 then the External_Name is ignored.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00320-01]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00320-01]}
 @ChgDeleted{Version=[2],Text=[An interfacing pragma might result in an effect
 that violates Ada semantics.]}
 @end{Notes}
@@ -2100,7 +2101,7 @@ Text=[The form of a pragma Unchecked_Union is as follows:]}
 specifying the unchecked union aspect of representation.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgAdded{Version=[2],Text=[The @SynI{first_subtype_local_}@nt{name} of a
+@ChgAdded{Version=[2],Text=[The @SynI{first_subtype_}@nt{local_name} of a
 @nt{pragma} Unchecked_Union shall denote an unconstrained discriminated record
 subtype having a @nt{variant_part}.]}
 

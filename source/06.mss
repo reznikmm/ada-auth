@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:24 $}
+@Comment{$Date: 2005/09/30 05:33:46 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2260,7 +2260,7 @@ function body. If this check fails, Program_Error is raised.
   @ChgAdded{Version=[2],Text=[The check prevents the returned
   object (for a nonlimited type) from outliving the object designated by one
   of its discriminants. The check is made on the values of the discriminants,
-  which may come from the the @nt{return_subtype_indication} (if constrained),
+  which may come from the @nt{return_subtype_indication} (if constrained),
   or the @nt{expression}, but it is never necessary to check both.]}
 @end{Reason}
 

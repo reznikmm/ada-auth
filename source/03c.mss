@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:23 $}
+@Comment{$Date: 2005/09/30 05:33:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -690,7 +690,7 @@ time of the call, execution is erroneous.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[We exclude tags of library-level types from
-from the current execution of the partition, because misuse of such tags
+the current execution of the partition, because misuse of such tags
 should always be detected. T'Tag freezes the type (and thus creates the tag),
 and Internal_Tag and Descendant_Tag
 cannot return the tag of a library-level type that has not been created.
@@ -4897,8 +4897,8 @@ legality of 'Access didn't change for them. For example:],Old=[]}
 @Chg{Version=[2],New=[   A_T : @key{aliased} T1;
    Ptr : Acc_Int := A_T.C1'Access; -- @RI[Illegal in Ada 2005, legal in Ada 95]
    A_T := (D1 => True);            -- @RI[Raised Constraint_Error in Ada 95, but does not]
-                                   -- @RI[in Ada 2005, so Ptr becomes invalid when this]
-                                   -- @RI[is assigned.]],Old=[]}
+                                   -- @RI[in Ada 2005, so Ptr would become invalid when this]
+                                   -- @RI[is assigned (thus Ptr is illegal).]],Old=[]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
@@ -4915,7 +4915,7 @@ the private type. See @RefSecNum{Allocators} for more on this topic.],Old=[]}
 unit in the body of that generic is no longer allowed. Such references can
 easily be used to create dangling pointers, as @LegalityTitle are not rechecked
 in instance bodies. At the same time, the rules were loosened a bit where
-that is harmless, and
+that is harmless, and also to
 allow any routine to be passed to an access parameter of an
 access-to-subprogram type. The now illegal uses of 'Access can almost always be
 moved to the private part of the generic unit, where they are still legal

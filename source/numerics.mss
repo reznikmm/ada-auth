@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2005/05/16 03:42:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2005/09/30 05:33:52 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:21 $}
+@Comment{$Date: 2005/09/30 05:33:52 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -577,13 +577,14 @@ Generic_Complex_Types as defined in ISO/IEC CD 13813
 @Leading@;The generic library package
 Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @key[with] Ada.Numerics.Generic_Complex_Types;
 @key[generic]@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Elementary_@!Functions]}
    @key[with] @key[package] Complex_Types @key[is]
          @key[new] Ada.Numerics.Generic_Complex_Types (<>);
    @key[use] Complex_Types;
 @key[package] Ada.Numerics.Generic_Complex_Elementary_Functions @key[is]
-   pragma Pure(Generic_Complex_Elementary_Functions);
+   @Chg{Version=[2],New=[@key{pragma}],Old=[pragma]} Pure(Generic_Complex_Elementary_Functions);
 
    @key[function] @AdaSubDefn{Sqrt} (X : Complex)   @key[return] Complex;
    @key[function] @AdaSubDefn{Log}  (X : Complex)   @key[return] Complex;

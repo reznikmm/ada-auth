@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2005/09/21 04:43:33 $ $Author: Randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2005/09/30 05:33:56 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/09/21 04:43:33 $}
+@Comment{$Date: 2005/09/30 05:33:56 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -618,10 +618,13 @@ interrupts if the implementation supports preelaboration of protected
 objects. (See @RefSecNum{Preelaboration Requirements}.)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-The ceiling priority of a protected object
-@Chg{Version=[2],New=[for which],Old=[that]} one
-of its procedures is
-attached to an interrupt should be at least as high as the highest
+@Chg{Version=[2],New=[A],Old=[The ceiling priority of a]}
+protected object that
+@Chg{Version=[2],New=[has a (protected) procedure],
+Old=[one of its procedures is]}
+attached to an interrupt should
+@Chg{Version=[2],New=[have a ceiling priority],
+Old=[be]} at least as high as the highest
 processor priority at which that interrupt will ever be delivered.
 
 Protected procedures can also be attached dynamically to interrupts

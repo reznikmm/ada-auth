@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:00 $}
+@Comment{$Date: 2005/09/30 05:33:46 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -3105,11 +3105,14 @@ search @lquotes@;everywhere@rquotes@; to see if there is exactly one type
 in a class in scope.
 @end{Ramification}
 @begin{Discussion}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00332-01]}
-@Chg{Version=[2],New=[The part of the first sentence after the semicolon
-serves to define the "expected type" for constructs that don't have one (like
-qualified expressions and object renames). Otherwise, such constructs
-wouldn't allow @nt{aggregate}s, 'Access, and so on.],Old=[]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00332-01]}
+  @ChgAdded{Version=[2],Text=[The first sentence is carefully worded so that it
+  only mentions @lquotes@;expected type@rquotes as part of identifying the
+  interesting case, but doesn't require that the context actually provide such
+  an expected type. This allows such constructs to be used inside of constructs
+  that don't provide an expected type (like qualified expressions and renames).
+  Otherwise, such constructs wouldn't allow @nt{aggregate}s, 'Access, and so
+  on.]}
 @end{Discussion}
 
 A complete context shall have at least one acceptable interpretation;

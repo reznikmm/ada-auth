@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:00 $}
+@Comment{$Date: 2005/09/30 05:33:43 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1677,7 +1677,7 @@ informative annex.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
   @ChgAdded{Version=[2],Text=[Updated the example of named pragma parameters,
-  because the second parameter of is obsolescent.]}
+  because the second parameter of Suppress is obsolescent.]}
 @end{DiffWord95}
 
 

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/08/19 06:37:25 $}
+@Comment{$Date: 2005/09/30 05:33:50 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2899,9 +2899,10 @@ These need not have the same integer type.
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00436-01]}
 The @SynI{first_subtype_}@nt{local_name} of a
 @nt{record_representation_clause} shall denote a specific
-nonlimited record or record extension subtype.
+@Chg{Version=[2],New=[],Old=[nonlimited ]}record or record extension subtype.
 @begin{Ramification}
 As for all type-related representation items,
 the @nt{local_name} is required to denote a first subtype.
@@ -3104,7 +3105,7 @@ of the component subtype,
 and it starts and ends on a boundary that obeys the Alignment of the
 component subtype.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00133-01]}
 @Chg{Version=[2],New=[For],Old=[If the default bit ordering applies to
 the declaration of a given type, then for]} a component
 @Chg{Version=[2],New=[with a subtype ],Old=[]}whose
@@ -3261,7 +3262,13 @@ We have corrected that oversight.
   compilers were supporting that anyway).]}
 @end{Incompatible95}
 
-
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00436-01]}
+  @ChgAdded{Version=[2],Text=[The undocumented (and likely uninitential)
+  incompatibility with Ada 83 caused by not allowing @nt{record_representation_clause}s
+  on limited record types is removed. (This is a Binding Interpretation, so
+  it applies to Ada 95 implementations as well.)]}
+@end{DiffWord95}
 
 @LabeledSubClause{Storage Place Attributes}
 

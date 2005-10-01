@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/08/17 00:06:47 $}
+@Comment{$Date: 2005/09/30 05:33:42 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -729,6 +729,7 @@ illegal in Ada 95.
 We do not generally consider a change that turns erroneous execution
 into an exception, or into an illegality, to be upwardly incompatible.
 
+@ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
 and does not appear in the RM95@Chg{Version=[2],New=[ or RM200Y],Old=[]}.
 @end{Incompatible83}
@@ -1470,7 +1471,7 @@ The preferred places for other line breaks are after semicolons.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
   @ChgAdded{Version=[2],Text=[The example for square brackets has been changed
-  was there is no longer a @nt{return_statement} syntax rule.]}
+  as there is no longer a @nt{return_statement} syntax rule.]}
 @end{DiffWord95}
 
 

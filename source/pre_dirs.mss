@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.18 $ $Date: 2005/08/21 17:59:34 $ $Author: Randy $ }
+@comment{ $Revision: 1.19 $ $Date: 2005/09/30 05:33:54 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/08/21 17:59:34 $}
+@Comment{$Date: 2005/09/30 05:33:54 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -734,8 +734,8 @@ altered while a search is in progress.],Old=[]}]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Searches, in the directory named by
-Directory, passing each entry matching Pattern to a call of the subprogram
-designated by Process. Pattern represents a pattern for
+Directory, for entries matching Pattern. The subprogram designated by Process
+is called with each matching entry in turn. Pattern represents a pattern for
 matching file names. If Pattern is null, all items in the directory are matched;
 otherwise, the interpretation of Pattern is implementation-defined. Only
 items that  match Filter will be returned.
@@ -746,6 +746,12 @@ Use_Error is propagated if the external environment does not support the
 searching of the directory with the given name (in the absence of
 Name_Error).]}
 @Comment{The implementation-defined case is handled above.}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[@lquotes@;In turn@rquotes means that the
+  calls to the subprogram designated by Process are not made in parallel;
+  they can be made in any order but must be in sequence.]}
+@end{Discussion}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Simple_Name (Directory_Entry : @key{in} Directory_Entry_Type)
@@ -1093,7 +1099,7 @@ is not recommended.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[If the target system does not support directories
-inside of directories, Is_Directory will always return False, and
+inside of directories, Kind will never return Directory, and
 Containing_Directory will always raise Use_Error.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

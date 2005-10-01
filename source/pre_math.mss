@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2005/07/28 04:44:13 $ $Author: Randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2005/09/30 05:33:54 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:13 $}
+@Comment{$Date: 2005/09/30 05:33:54 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -600,9 +600,8 @@ generic formal subtype Result_Subtype.
 algorithms for random number generation.]}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[The algorithm is the subject of a documentation
-  requirement, so we don't separately summarize this implementation-defined
-  item.]}]}
+  @ChgAdded{Version=[2],Text=[The algorithm is the subject of a @DocReqName@;,
+  so we don't separately summarize this implementation-defined item.]}
 @end{Discussion}
 @begin{Reason}
    The requirement for a level of indirection in accessing the internal state
@@ -780,7 +779,8 @@ Each value of the result range is possible, provided that M is not too large.
 Exponentially distributed (floating point) random numbers with mean and
 standard deviation 1.0 can be obtained by the transformation
 @begin{Example}
-   -Log(Random(G) + Float'Model_Small))
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+   -Log(Random(G) + Float'Model_Small)@Chg{Version=[2],New=[],Old=[)]}
 @end{Example}
 
 @NoPrefix@;where Log comes from Numerics.Elementary_Functions

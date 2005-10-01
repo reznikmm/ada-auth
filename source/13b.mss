@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:29 $}
+@Comment{$Date: 2005/09/30 05:33:51 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @LabeledClause{The Package System}
 
@@ -2161,9 +2161,10 @@ Free should actually reclaim the storage.
 Text=[For a standard storage pool, an instance of Unchecked_Deallocation
 should actually reclaim the storage.]}]}
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 This is not a testable property,
-since we do not how much storage is used by a given pool element,
-nor whether fragmentation can occur.
+since we do not @Chg{Version=[2],New=[know ],Old=[]}how much storage is used
+by a given pool element, nor whether fragmentation can occur.
 @end{Ramification}
 
 @end{ImplAdvice}
@@ -2491,14 +2492,6 @@ use of the more efficient and safe one.
   Pragma Restrictions is new to Ada 95.
 @end{Extend83}
 
-@begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01],ARef=[AI95-00368-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Restrictions No_Implementation_Attributes, No_Implementation_Pragmas, and
-  No_Obsolescent_Features are new.]}
-@end{Extend95}
-
-
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the wording so that
@@ -2524,14 +2517,14 @@ use of the more efficient and safe one.
 
 @begin{StaticSem}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The following
 @SynI{restriction_}@nt{identifier}s are language-defined (additional
 restrictions are defined in the Specialized Needs Annexes):]}
 
 @begin{Description}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Attributes)}No_Implementation_Attributes @\There
    are no implementation-defined attributes. This restriction applies
    only to the current compilation or environment, not the entire partition.]}
@@ -2544,13 +2537,13 @@ restrictions are defined in the Specialized Needs Annexes):]}
   everywhere, including the runtime.]}
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00257-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Pragmas)}No_Implementation_Pragmas @\There
    are no implementation-defined pragmas or pragma arguments. This
    restriction applies only to the current compilation or environment, not the
    entire partition.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00368-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00368-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Obsolescent_Features)}No_Obsolescent_Features @\There
    is no use of language features defined in Annex J. It is
    implementation-defined if uses of the renamings of
@@ -2622,9 +2615,13 @@ depend semantically on the library unit identified by the @nt{name}.]}
 @end{LinkTime}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01],ARef=[AI95-00368-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Restriction No_Dependence is new.]}
+  Restrictions No_Implementation_Attributes, No_Implementation_Pragmas, and
+  No_Obsolescent_Features are new.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+  @ChgAdded{Version=[2],Text=[Restriction No_Dependence is new.]}
 @end{Extend95}
 
 
@@ -3244,19 +3241,7 @@ following conditions is true: @Defn2{Term=[available],Sec=[stream attribute]}]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The @nt{attribute_designator} is Read, Write, or
-Output, and @i<T> is nonlimited.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The @nt{attribute_designator} is Input, and @i<T>
-is nonlimited and not abstract.]}
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We don't otherwise allow functions returning
-  abstract objects, and we certainly don't want to start now. We don't need
-  this for the procedure attributes; any object has to be a type conversion
-  from a concrete type.]}
-@end{Reason}
+@ChgAdded{Version=[2],Text=[@i<T> is nonlimited.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The @nt{attribute_designator} is Read (resp. Write)
@@ -3551,7 +3536,7 @@ class-wide types descended from S.
   stream when a required check fails is unspecified.]}
 
   @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-  @ChgAdded{Version=[2],Text=[Defined availablity and default implementations
+  @ChgAdded{Version=[2],Text=[Defined availability and default implementations
   for types with progenitors.]}
 
   @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00279-01]}
@@ -3881,7 +3866,7 @@ same progenitors) will do that.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[An interface type can be a parent as well as a
-progentitor; these rules are similar so that the location of an interface
+progenitor; these rules are similar so that the location of an interface
 in a record extension does not have an effect on the freezing of the interface
 type.]}
 @end{Ramification}

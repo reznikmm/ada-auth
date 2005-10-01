@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/08/21 17:59:32 $}
+@Comment{$Date: 2005/09/30 05:33:45 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2919,9 +2919,10 @@ Standard.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The rest of the rule makes it possible to
-  call user-defined "=" operators (they'd be hidden otherwise), and to write
-  user-defined "=" operations (by making it possible to see the universal
-  operator using the Standard prefix.]}
+  call user-defined "=" operators for anonymous access types (they'd be hidden
+  otherwise), and to write user-defined "=" operations for anonymous access
+  types (by making it possible to see the universal operator using the
+  Standard prefix).]}
 @end{Reason}
 @end{Resolution}
 

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:26 $}
+@Comment{$Date: 2005/09/30 05:33:47 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 
@@ -1979,7 +1979,7 @@ the point of the declaration;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
-@key{not overriding}, then the operation shall not implement any inherited
+@key{not overriding}, then the entry shall not implement any inherited
 subprogram (at any point).]}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -5125,7 +5125,7 @@ following structure:
    @Chg{Version=[2],New=[Person : Person_Name; --@RI[ see @RefSecNum{Incomplete Type Declarations}]],Old=[Char : Character;]}
 @key(begin)
    @key(loop)
-      ... --@RI[  @Chg{Version=[2],New=[simulate arrival of the next customer)],Old=[produce the next character Char]}]
+      ... --@RI[  @Chg{Version=[2],New=[simulate arrival of the next customer],Old=[produce the next character Char]}]
       Buffer.@Chg{Version=[2],New=[Append_Wait(Person)],Old=[Write(Char)]};
       @key(exit) @key(when) @Chg{Version=[2],New=[Person = @key(null)],Old=[Char = ASCII.EOT]};
    @key(end) @key(loop);

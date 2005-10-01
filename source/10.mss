@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/08/08 05:27:28 $}
+@Comment{$Date: 2005/09/30 05:33:49 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3535,7 +3535,7 @@ of a library unit.]}
   elaboration check failures. But a limited view does not make anything visible
   that has an elaboration check, so the @nt{pragma}s cannot do anything useful.
   Moreover, the @nt{pragma}s would probably reintroduce
-  the circularlity that the @nt{limited_with_clause} was intended to break.
+  the circularity that the @nt{limited_with_clause} was intended to break.
   So we make such uses illegal.]}
 @end{Reason}
 

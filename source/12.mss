@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/08/19 06:37:25 $}
+@Comment{$Date: 2005/09/30 05:33:50 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -496,7 +496,7 @@ This rule is not checked in the instance body.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00402-01]}
 A type with @Chg{Version=[2],New=[a @nt{default_expression} of ],Old=[]}an
 access discriminant has to be a
-descendant of @Chg{Version=[2],New=[an explictly limited record type],Old=[a
+descendant of @Chg{Version=[2],New=[an explicitly limited record type],Old=[a
 type declared with @key[limited]]}, or be a task or protected
 type. This rule is irrelevant in the instance body.]}
 
@@ -2586,9 +2586,9 @@ a @nt{formal_subprogram_declaration} that has an explicit @nt{null_exclusion}:]}
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[for an instantiation that occurs within the body
-  of a generic unit or within the body of a generic unit declared within the
-  declarative region of the generic unit, and the actual denotes a generic
-  formal subprogram of that generic unit, then the corresponding parameter or
+  of a generic unit @i{G} or within the body of a generic unit declared within
+  the declarative region of the generic unit @i{G}, and the actual denotes a
+  generic formal subprogram of @i{G}, then the corresponding parameter or
   result type of that formal subprogram shall have a @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}
