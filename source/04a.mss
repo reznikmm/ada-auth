@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:45 $}
+@Comment{$Date: 2005/10/01 05:45:30 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2899,10 +2899,12 @@ scalar type @i(T), and for every discrete array type
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00420-01]}
-@ChgAdded{Version=[2],Text=[At least one of the operands of the equality
-operators for @i<universal_access> shall be of a specific anonymous access type.
-These equality operators shall not be used if either operand is of a type whose
-designated type @i<D> has a user-defined primitive equality operator with
+@ChgAdded{Version=[2],Text=[At least one of the operands of an equality
+operator for @i<universal_access> shall be of a specific anonymous access type.
+These equality operators shall not be used if either operand is of an
+access-to-object type whose
+designated type is @i<D> or @i<D>'Class, where @i<D> has a user-defined
+primitive equality operator with
 result type Boolean, that is declared immediately within the same list of
 declarations as @i<D>, and at least one of whose operands is an access
 parameter also with designated type @i<D>, unless the predefined equality
@@ -2919,22 +2921,48 @@ Standard.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The rest of the rule makes it possible to
-  call user-defined "=" operators for anonymous access types (they'd be hidden
+  call (including a dispatching call) user-defined "=" operators for anonymous
+  access-to-object types (they'd be hidden
   otherwise), and to write user-defined "=" operations for anonymous access
   types (by making it possible to see the universal operator using the
   Standard prefix).]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We don't need a similar rule for anonymous
+  access-to-subprogram types because they can't be primitive for any type.
+  Note that any non-primitive user-defined equality operators still are hidden
+  by the universal operators; they'll have to be called with a package
+  prefix, but they are likely to be very uncommon.]}
+@end{Ramification}
 @end{Resolution}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@ChgAdded{Version=[2],Text=[The operands of the equality operators for
-@i<universal_access> shall be convertible to one another (see
-@RefSecNum{Type Conversions}).]}
+@ChgAdded{Version=[2],Text=[At least one of the operands of the equality operators for
+@i<universal_access> shall be null, or both shall be
+access-to-object types, or both shall be access-to-subprogram
+types. Further:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[When both are access-to-object types, the
+designated types shall be the same or one shall cover the
+other, and if the designated types are elementary or array types,
+then the designated subtypes shall statically match;]}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[When both are access-to-subprogram types,
+the designated profiles shall be subtype conformant.]}
+@end{Itemize}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[This ensures that the designated type is the same,
-or one of the operands is @key{null}.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We don't want to allow completely arbitrary
+  comparisons, as we don't want to insist that all access types are represented
+  ways that are convertible to one another. For instance, a compiler could use
+  completely separate address spaces or incompatible representations. Instead,
+  we allow compares if there exists an access parameter to which both operands
+  could be converted. Since the user could write such an subprogram, and
+  any reasonable meaning for "=" would allow using it in such a subprogram,
+  this doesn't impose any further restrictions on Ada implementations.]}
 @end{Reason}
 @end{Legality}
 

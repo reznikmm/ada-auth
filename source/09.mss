@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:47 $}
+@Comment{$Date: 2005/10/01 05:45:32 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 
@@ -1110,18 +1110,21 @@ which reflects that in order to avoid confusion.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[If a protected subprogram
-declaration has an @nt{overriding_indicator}, then:]}
+declaration has an @nt{overriding_indicator}, then at the point of the
+declaration:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
 @key{overriding}, then the subprogram shall
-implement an inherited subprogram, at the point of the declaration;]}
+implement an inherited subprogram;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
 @key{not overriding}, then the subprogram shall
-not implement any inherited subprogram (at any point).]}
+not implement any inherited subprogram.]}
+
+@end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[@PDefn{generic contract issue}In addition to the
@@ -1129,7 +1132,16 @@ places where @LegalityTitle normally apply (see
 @RefSecNum{Generic Instantiation}), these rules also apply in the private part
 of an instance of a generic unit.]}
 
-@end{Itemize}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[These rules are subtly different than those for
+  subprograms (see @RefSecNum{Overriding Indicators}) because there cannot be
+  @lquotes@;late@rquotes inheritance of primitives from interfaces. Hidden
+  (that is, private) interfaces are prohibited explicitly (see
+  @RefSecNum{Private Types and Private Extensions}), as are hidden primitive
+  operations (as private operations of public abstract types are prohibited
+  @em see @RefSecNum{Abstract Types and Subprograms}).]}
+@end{Discussion}
 
 @end{Legality}
 
@@ -1970,17 +1982,19 @@ a @nt<protected_body>).
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[If an @nt{entry_declaration} has an
-@nt{overriding_indicator}, then:]}
+@nt{overriding_indicator}, then at
+the point of the declaration:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
-@key{overriding}, then the entry shall implement an inherited subprogram, at
-the point of the declaration;]}
+@key{overriding}, then the entry shall implement an inherited subprogram;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
 @key{not overriding}, then the entry shall not implement any inherited
-subprogram (at any point).]}
+subprogram.]}
+
+@end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[@PDefn{generic contract issue}In addition to the
@@ -1988,7 +2002,16 @@ places where @LegalityTitle normally apply (see
 @RefSecNum{Generic Instantiation}), these rules also apply in the private part
 of an instance of a generic unit.]}
 
-@end{Itemize}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[These rules are subtly different than those for
+  subprograms (see @RefSecNum{Overriding Indicators}) because there cannot be
+  @lquotes@;late@rquotes inheritance of primitives from interfaces. Hidden
+  (that is, private) interfaces are prohibited explicitly (see
+  @RefSecNum{Private Types and Private Extensions}), as are hidden primitive
+  operations (as private operations of public abstract types are prohibited
+  @em see @RefSecNum{Abstract Types and Subprograms}).]}
+@end{Discussion}
 
 For an @nt<accept_statement>,
 the innermost enclosing body shall be a @nt<task_body>,

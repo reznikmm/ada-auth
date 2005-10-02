@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:43 $}
+@Comment{$Date: 2005/10/01 05:45:30 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -179,10 +179,10 @@ character whose General Category is defined to be @lquotes@;Mark, Non-Spacing@rq
 character whose General Category is defined to be @lquotes@;Mark, Spacing Combining@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[@Defn{number_decimal_digit}@nt{number_decimal_digit}],
+@Chg{Version=[2],New=[@Defn{number_decimal}@nt{number_decimal}],
 Old=[@Defn{digit}@nt{digit}]}@\@Chg{Version=[2],New=[Any
 character whose General Category is defined
-to be @lquotes@;Number, Decimal Digit@rquotes@;],
+to be @lquotes@;Number, Decimal@rquotes@;],
 Old=[One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
@@ -760,7 +760,7 @@ rhs="@Chg{Version=[2],New=<
 rhs="@Chg{Version=[2],New=<
      @Syn2{mark_non_spacing}
    | @Syn2{mark_spacing_combining}
-   | @Syn2{number_decimal_digit}
+   | @Syn2{number_decimal}
    | @Syn2{punctuation_connector}
    | @Syn2{other_format}>,Old=<>}"}
 

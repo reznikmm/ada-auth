@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:50 $}
+@Comment{$Date: 2005/10/01 05:45:33 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -559,6 +559,71 @@ accommodate any value of the subtype.
 A representation @Chg{New=[or operational ],Old=[]}item that is not supported
 by the implementation is illegal, or raises an exception
 at run time.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Text=[A @nt{type_declaration} is illegal if it has one or
+more progenitors, and a representation item applies to a progenitor or
+ancestor, and this representation item conflicts with the representation of
+some other progenitor or ancestor. The cases that cause conflicts are
+implementation defined.]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The cases that cause conflicts between the representation of
+the ancestor and progenitors of a @nt{type_declaration}.]}]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[This rule is needed because it may be the case
+  that only the combination of types in a type declaration causes a conflict.
+  Thus it is not possible, in general, to reject the original representation
+  item. For instance:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{package} Pkg1 @key{is}
+   @key{type} Ifc @key{is interface};
+   @key{type} T @key{is tagged record}
+      Fld : Integer;
+   @key{end record};
+   @key{for} T @key{use record}
+      Fld @key{at} 0 @key{range} 0 .. Integer'Size - 1;
+   @key{end record};
+@key{end} Pkg1;]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[Assume the implementation uses a
+  single tag with a default offset of zero, and it allows the use of
+  non-default locations for the tag (and thus accepts representation items
+  like the one above). The representation item will force a non-default
+  location for the tag (by putting a component other than the tag into the
+  default location). Clearly, this package will be accepted by the
+  implementation. However, other declarations could cause trouble. For
+  instance, the implementation could reject:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{with} Pkg1;
+@key{package} Pkg2 @key{is}
+   @key{type} NewT @key{is new} Pkg1.T @key{and} Pkg1.Ifc @key{with null record};
+@key{end} Pkg2;]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[because the declarations of T and Ifc have a
+  conflict in their representation items. This is clearly necessary (it's hard
+  to imagine how Ifc'Class could work with the tag at a location other than the
+  one it is expecting).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Conflicts will usually involve
+  implementation-defined attributes (for specifying the location of the tag,
+  for instance), although the example above shows that doesn't have to be the
+  case. For this reason, we didn't try to specify exactly what causes a
+  conflict; it will depend on the implementation's implementation model and
+  what representation items it allows.]}
+@end{Reason}
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[An implementation can only use this rule to
+  reject @nt{type_declaration}s where either the ancestor or one of the
+  progenitors has a representation item. An implementation must ensure that
+  the default representations of ancestors and progenitors cannot conflict.]}
+@end{ImplNote}
 @end{Legality}
 
 @begin{StaticSem}
@@ -1003,6 +1068,10 @@ Some of the more stringent requirements are moved to
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed operational items
   to have inheritance specified for each such aspect.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-02]}
+  @ChgAdded{Version=[2],Text=[Added wording to allow the rejection of
+  types with progenitors that have conflicting representation items.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
   @ChgAdded{Version=[2],Text=[Added wording to define confirming representation

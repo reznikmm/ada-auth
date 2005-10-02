@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/08/21 17:59:33 $}
+@Comment{$Date: 2005/10/01 05:45:32 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.24 $}
+@Comment{$Revision: 1.25 $}
 
 @LabeledClause{Type Conversions}
 
@@ -553,6 +553,20 @@ Further, if the operand type is not @i<universal_access>:]}
 
 @end(inneritemize)
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[type conversion],sec=(access)}
+@Defn2{Term=[conversion],sec=(access)}If the target type is a pool-specific
+access-to-object type, then
+the operand type shall be @i<universal_access>.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This allows @b<null> to be converted to pool-specific
+  types. Without it, @b<null> could be converted to general access types but
+  not pool-specific ones, which would be too inconsistent. Remember that these
+  rules only apply to unrelated types, so we don't have to talk about
+  conversions to derived or other related types.]}
+@end{Reason}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
@@ -1098,8 +1112,16 @@ as a @nt<name>.
 @end{Incompatible95}
 
 @begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}Conversion rules for
+  @i<universal_access> were defined. These allow the use of anonymous access
+  values in equality tests (see
+  @RefSecNum{Relational Operators and Membership Tests}), and also allow the
+  use of @b<null> in type conversions and other
+  contexts that do not provide a single expected type.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00384-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}A type conversion from
+  @ChgAdded{Version=[2],Text=[A type conversion from
   an access-to-discriminated and unconstrained object to an
   access-to-discriminanted and constrained one is allowed. Ada 95 only allowed
   the reverse conversion, which was weird and asymmetric. Of course, a
@@ -1119,11 +1141,6 @@ as a @nt<name>.
   conversion. This rule was needed to avoid having a way to change the
   discriminants of an aliased object. This rule was repealed later, as
   Ada 2005 allows changing the discriminants of an aliased object.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
-  @ChgAdded{Version=[2],Text=[Conversion rules for @i<universal_access> were
-  defined. These allow the use of anonymous access values in equality tests
-  (see @RefSecNum{Relational Operators and Membership Tests}).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[Wording was added to check subtypes that exclude
