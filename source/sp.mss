@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2005/09/30 05:33:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2005/10/02 06:53:32 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/09/30 05:33:56 $}
+@Comment{$Date: 2005/10/02 06:53:32 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1916,7 +1916,7 @@ language-defined library package exists:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Dependents_Fallback_Handler}
      (Handler: @key<in> Termination_Handler);
-   @key<function> @AdaSubDefn{Current_Task_Fallback_Handler} return Termination_Handler;]}
+   @key<function> @AdaSubDefn{Current_Task_Fallback_Handler} @key<return> Termination_Handler;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Set_Specific_Handler}

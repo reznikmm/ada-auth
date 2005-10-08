@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2005/08/11 00:13:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2005/10/02 06:53:31 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/08/11 00:13:04 $}
+@Comment{$Date: 2005/10/02 06:53:31 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -231,15 +231,22 @@ Similarly, the task's active priority is used
 to determine the task's position in any queue when Priority_Queuing is
 specified (see @RefSecNum{Entry Queuing Policies}).]
 
-@Leading@;At any time, the active priority of a task is the maximum of all the
-priorities the task is inheriting at that instant. For a task that is not
+@Leading@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00357-01]}
+At any time, the active priority of a task is the maximum of all the
+priorities the task is inheriting at that instant. @Chg{Version=[2],
+New=[Sources],Old=[For a task that is not
 held (see @RefSecNum{Asynchronous Task Control}), its base priority is always
-a source of priority inheritance. Other sources of priority inheritance
+a source of priority inheritance. Other sources]} of priority inheritance
 are specified under the following
 conditions:
 @begin{Discussion}
-Other parts of the annex, e.g. @RefSecNum{Asynchronous Task Control}, define
-other sources of priority inheritance.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00357-01]}
+Other parts of the
+annex @Chg{Version=[2],New=[],Old=[, e.g.
+@RefSecNum{Asynchronous Task Control}, ]}define
+other sources of priority inheritance.@Chg{Version=[2],New=[ For instance,
+most dispaching policies define the base priority as a source of priority
+inheritance.],Old=[]}
 @end{Discussion}
 @begin{itemize}
 
@@ -315,6 +322,11 @@ The description of the Priority pragma has been moved to this annex.
   priority changes are not transitive - that is, they don't apply to tasks
   that are being activated by or in rendezvous with the task that had its
   priority changed.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+  @ChgAdded{Version=[2],Text=[Generalized the definition of priority
+  inheritance to take into account the differences between the existing and
+  new dispatching policies.]}
 @end{DiffWord95}
 
 
@@ -2275,9 +2287,11 @@ Text=[The metrics for Set_Priority.]}]}
 
 @begin{Notes}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
 Setting a task's base priority affects task dispatching. First, it can
-change the task's active priority. Second, under the standard
-task dispatching policy it always causes the task to move to
+change the task's active priority. Second, under the @Chg{Version=[2],
+New=[FIFO_Within_Priorites],Old=[standard
+task dispatching]} policy it always causes the task to move to
 the tail of the ready queue corresponding to its active priority,
 even if the new base priority is unchanged.
 
@@ -2330,6 +2344,11 @@ affected tasks.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00188-02]}
   @ChgAdded{Version=[2],Text=[Priority changes are now required to be done
   immediately so long as the target task is not on an entry queue.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+  @ChgAdded{Version=[2],Text=[There is no @lquotes@;standard@rquotes policy
+  anymore, so that phrase was replaced by the name of a specific policy in
+  the notes.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
   @ChgAdded{Version=[2],Text=[The bounded error for the priority of a task
@@ -3351,10 +3370,11 @@ Text=[The metrics for delay statements.]}]}
 
 @begin{Notes}
 
-The execution time of a @nt{delay_statement} that does not cause the
-task to be blocked (e.g. @lquotes@;@key[delay] 0.0;@rquotes@; ) is of interest in situations
-where delays are used to achieve voluntary round-robin task dispatching among
-equal-priority tasks.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00355-01]}
+@ChgDeleted{Version=[2],Text=[The execution time of a @nt{delay_statement} that
+does not cause the task to be blocked (e.g. @lquotes@;@key[delay]
+0.0;@rquotes@; ) is of interest in situations where delays are used to achieve
+voluntary round-robin task dispatching among equal-priority tasks.]}
 
 @end{Notes}
 
@@ -3365,6 +3385,16 @@ Duration value, have been tightened to always require the check whether
 the rendezvous is immediately possible.
 
 @end{DiffWord83}
+
+@begin{DiffWord95}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+  @ChgAdded{Version=[2],Text=[The note about @lquotes@;voluntary
+  round-robin@rquote, while still true, has been deleted as potentially
+  confusing as it is describing a different kind of round-robin than is defined
+  by the round-robin dispatching policy.]}
+
+@end{DiffWord95}
 
 
 @LabeledClause{Synchronous Task Control}
@@ -3773,7 +3803,7 @@ defines the Ravenscar profile.]@Defn{Ravenscar}]}
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
 @ChgAdded{Version=[2],Text=[The @SynI{profile_}@nt{identifier}
-Ravenscar names a run-time profile.
+Ravenscar is a run-time profile.
 For run-time profile Ravenscar, there shall be no
 @Syni{profile_}@nt{pragma_argument_association}s.]}
 @end{Legality}
@@ -3927,8 +3957,14 @@ implementation-defined range of mathematical integers.]}
 execution-time interval that starts with I*CPU_Time_Unit and is limited by
 (I+1)*CPU_Time_Unit, where CPU_Time_Unit is an implementation-defined
 real number. For each task, the execution time value is set to zero at
-some unspecified point between the creation of the task and the start
-of the activation of the task.]}
+the creation of the task.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Since it is implementation-defined which task
+  is charged execution time for system services, the execution time value
+  may become non-zero even before the start of the activation of the task.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[CPU_Time_First and CPU_Time_Last are the smallest
@@ -4010,12 +4046,13 @@ shall document the following metrics:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text={An upper bound on the execution-time duration of a
 clock tick. This is a value D such that if t1 and t2 are any execution times of
-a given task such that t1<t2 and Clock[t1]=Clock[t2] then t2-t1 <= D.}}
+a given task such that t1 < t2 and Clock@-{t1} = Clock@-{t2} then
+t2 @en@; t1 <= D.}}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[An upper bound on the size of a clock jump. A clock
-jump is the difference between two successive distinct values of an execution
--time clock (as observed by calling the Clock function with the same
+jump is the difference between two successive distinct values of an
+execution-time clock (as observed by calling the Clock function with the same
 Task_Id).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4077,7 +4114,7 @@ language-defined library exists:]}
 @key{package} Ada.Execution_Time.Timers @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Timers]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer} (T : @key{access} Ada.Task_Identification.Task_Id) @key{is}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer} (T : @key{not null access constant} Ada.Task_Identification.Task_Id) @key{is}
       @key{tagged limited private};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4097,7 +4134,7 @@ language-defined library exists:]}
                           Handler : @key{in} Timer_Handler);
    @key{function} @AdaSubDefn{Current_Handler} (TM : Timer) @key{return} Timer_Handler;
    @key{procedure} @AdaSubDefn{Cancel_Handler} (TM        : @key{in out} Timer;
-                             Cancelled : @key{in out} Boolean);]}
+                             Cancelled :    @key{out} Boolean);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Time_Remaining} (TM : Timer) @key{return} Time_Span;]}
@@ -4114,7 +4151,7 @@ language-defined library exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[The type Timer represents an execution-time event
-for a single task and is capable of detecting execution time overruns. The
+for a single task and is capable of detecting execution-time overruns. The
 access discriminant T identifies the task concerned. The type Timer needs
 finalization (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
@@ -4155,15 +4192,16 @@ exceed the available resources, Timer_Resource_Error is raised.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[The procedures Set_Handler associate the handler
-Handler with the timer TM; if Handler is @b<null>, the timer is cleared,
+Handler with the timer TM; if Handler is @key[null], the timer is cleared,
 otherwise it is set. The first procedure Set_Handler loads the timer TM with an
-interval specified by the Time_Span parameter. In this mode, when the execution
-time of the task identified by TM.T has increased by In_Time, the timer TM is
-said to have expired. The second procedure Set_Handler loads the timer TM with
-the absolute value specified by At_Time. In this mode, when the execution
-time of the task identified by TM.T reaches At_Time, the timer TM is said to
-have @i<expired>; if the value of At_Time has already been reached when
-Set_Handler is called, the timer TM is said to be expired.@Defn2{Term=[expired],
+interval specified by the Time_Span parameter. In this mode, the timer TM
+@i<expires> when the execution time of the task identified by TM.T.@key[all]
+has increased by In_Time; if In_Time is less than or equal to zero, the timer
+expires immediately. The second procedure Set_Handler loads the timer TM with
+the absolute value specified by At_Time. In this mode, the timer TM expires
+when the execution time of the task identified by TM.T.@key[all] reaches
+At_Time; if the value of At_Time has already been reached when Set_Handler is
+called, the timer expires immediately.@Defn2{Term=[expires],
 Sec=[execution timer]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
@@ -4195,6 +4233,10 @@ set; otherwise it returns Time_Span_Zero.]}
 @ChgAdded{Version=[2],Text=[The constant Min_Handler_Ceiling is the priority
 value that ensures that no ceiling violation would occur, were a handler to be
 executed.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgAdded{Version=[2],Text=[As part of the finalization of an object of type
+Timer, the timer is cleared.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[For all the subprograms defined in this package,
@@ -4290,7 +4332,7 @@ language-defined library exists:]}
        @key{protected procedure} (GB : @key{in out} Group_Budget);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Task_Array} @key{is array} (Positive @key{range} <}) @key{of}
+@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Task_Array} @key{is array} (Positive @key{range} <>) @key{of}
                                   Ada.Task_Identification.Task_Id;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4396,11 +4438,11 @@ order of the components of the array is unspecified.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The procedure Replenish loads the group budget GB
-with the Time_Span value To. Group_Budget_Error is raised if the Time_Span
-value To is non-positive. Any execution of any member of the group of tasks
-results in the budget counting down. When the budget becomes exhausted (reaches
-Time_Span_Zero), the associated handler is executed if the handler of group
-budget GB is set; the tasks continue to execute.]}
+with To as the Time_Span value. The exception Group_Budget_Error is raised if
+the Time_Span value To is non-positive. Any execution of any member of the
+group of tasks results in the budget counting down. When the budget becomes
+exhausted (reaches Time_Span_Zero), the associated handler is executed if the
+handler of group budget GB is set; the tasks continue to execute.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The procedure Add modifies the budget of the group
@@ -4530,22 +4572,30 @@ without the need for a task or a delay statement.]}
 language-defined library exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} Ada.Real_Time.Timing_Events @key{is}@ChildUnit{Parent=[Ada.Real_Time],Child=[Timing_Events]}
-  @key{type} @AdaTypeDefn{Timing_Event} @key{is tagged limited private};
+@ChgAdded{Version=[2],Text=[@key{package} Ada.Real_Time.Timing_Events @key{is}@ChildUnit{Parent=[Ada.Real_Time],Child=[Timing_Events]}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Timing_Event} @key{is tagged limited private};
   @key{type} @AdaTypeDefn{Timing_Event_Handler}
-       @key{is access protected procedure} (Event : @key{in out} Timing_Event);
-  @key{procedure} @AdaSubDefn{Set_Handler} (Event    : @key{in out} Timing_Event;
+       @key{is access protected procedure} (Event : @key{in out} Timing_Event);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key{procedure} @AdaSubDefn{Set_Handler} (Event   : @key{in out} Timing_Event;
                          At_Time : @key{in} Time;
                          Handler : @key{in} Timing_Event_Handler);
-  @key{procedure} @AdaSubDefn{Set_Handler} (Event    : @key{in out} Timing_Event;
+  @key{procedure} @AdaSubDefn{Set_Handler} (Event   : @key{in out} Timing_Event;
                          In_Time : @key{in} Time_Span;
                          Handler : @key{in} Timing_Event_Handler);
   @key{function} @AdaSubDefn{Current_Handler} (Event : Timing_Event)
        @key{return} Timing_Event_Handler;
   @key{procedure} @AdaSubDefn{Cancel_Handler} (Event     : @key{in out} Timing_Event;
-             Cancelled : @key{out} Boolean);
-  @key{function} @AdaSubDefn{Time_Of_Event} (Event : Timing_Event) @key{return} Time;
-@key{private}
+             Cancelled : @key{out} Boolean);]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key{function} @AdaSubDefn{Time_Of_Event} (Event : Timing_Event) @key{return} Time;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{private}
   ... -- @RI[not specified by the language]
 @key{end} Ada.Real_Time.Timing_Events;]}
 @end{Example}

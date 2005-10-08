@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/10/01 05:45:32 $}
+@Comment{$Date: 2005/10/02 06:53:30 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 
@@ -3930,6 +3930,17 @@ Date, relative to the given time zone. Constraint_Error is raised if the string
 is not formatted as described for Image, or the function cannot interpret the
 given string as a Time value.]}
 
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The intent is that the implementation
+  enforce the same range rules on the string as the appropriate function
+  Time_Of, except for the hour, so
+  @lquotes@;cannot interpret the given string as a Time value@rquotes
+  happens when one of the values is out of the required range.
+  For example, "2005-08-31 24:0:0" should raise Constraint_Error (the hour
+  is out of range).]}
+@end{Discussion}
+
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Image (Elapsed_Time : Duration;
                 Include_Time_Fraction : Boolean := False) @key<return> String;]}
@@ -3966,6 +3977,17 @@ than 100 hours.]}]}
 as Elapsed_Time. Constraint_Error is raised if the string is not formatted as
 described for Image, or the function cannot interpret the given string as a
 Duration value.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The intent is that the implementation
+  enforce the same range rules on the string as the appropriate function
+  Time_Of, except for the hour, so
+  @lquotes@;cannot interpret the given string as a Time value@rquotes
+  happens when one of the values is out of the required range.
+  For example, "10:23:60" should raise Constraint_Error (the seconds value
+  is out of range).]}
+@end{Discussion}
+
 
 @end{DescribeCode}
 
