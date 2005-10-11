@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2005/07/28 04:44:12 $ $Author: Randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2005/10/08 06:29:16 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/07/28 04:44:12 $}
+@Comment{$Date: 2005/10/08 06:29:16 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1852,7 +1852,7 @@ The Write operation on a stream of type Params_Stream_Type should raise
 Storage_Error if it runs out of space trying to write the Item
 into the stream.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[The System.RPC.Write operation should raise Storage_Error if runs out
+Text=[The System.RPC.Write operation should raise Storage_Error if it runs out
 of space when writing an item.]}]}
 @begin{ImplNote}
   An implementation could also dynamically allocate more space
@@ -1880,9 +1880,9 @@ of space when writing an item.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00273-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   The specification of System.RPC can now be
-  tailored for an implementation. If program replaces the body of System.RPC
-  with a user-defined body, it may not compile in Ada 2005 (if the
-  specification of System.RPC has been changed).]}
+  tailored for an implementation. If a program replaces the body of System.RPC
+  with a user-defined body, it might not compile in a given implementation
+  of Ada 2005 (if the specification of System.RPC has been changed).]}
 @end{Incompatible95}
 
 @begin{DiffWord95}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2005/09/30 05:33:54 $ $Author: Randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2005/10/08 06:29:18 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:54 $}
+@Comment{$Date: 2005/10/08 06:29:18 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -143,7 +143,8 @@ Directories has the following declaration:]}
       Directory : @key{in} String;
       Pattern   : @key{in} String;
       Filter    : @key{in} Filter_Type := (@key{others} => True);
-      Process   : @key{not null access procedure} (Directory_Entry : @key{in} Directory_Entry_Type));]}
+      Process   : @key{not null access procedure} (
+          Directory_Entry : @key{in} Directory_Entry_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Operations on Directory Entries:}]}
@@ -729,8 +730,8 @@ altered while a search is in progress.],Old=[]}]}
     Directory : @key{in} String;
     Pattern   : @key{in} String;
     Filter    : @key{in} Filter_Type := (others => True);
-    Process   : @key{not null access procedure}
-      (Directory_Entry : @key{in} Directory_Entry_Type));]}
+    Process   : @key{not null access procedure} (
+        Directory_Entry : @key{in} Directory_Entry_Type));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Searches, in the directory named by

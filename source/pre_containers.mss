@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2005/09/30 05:33:54 $ $Author: Randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2005/10/08 06:29:18 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:54 $}
+@Comment{$Date: 2005/10/08 06:29:18 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -6287,7 +6287,7 @@ call it, is unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[For any two elements @i{E1} and @i{E2}, the boolean
-values Equivalent_Element (@i{E1}, @i{E2}) and Equivalent_Keys (Key (@i{E1}),
+values Equivalent_Elements (@i{E1}, @i{E2}) and Equivalent_Keys (Key (@i{E1}),
 Key (@i{E2})) are expected to be equal. If the actuals for Key or
 Equivalent_Keys behave in some other manner, the behavior of Generic_Keys is
 unspecified. Which subprograms of Generic_Keys call Equivalent_Keys, and how

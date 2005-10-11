@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2005/10/02 06:53:31 $ $Author: Randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2005/10/08 06:29:20 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/10/02 06:53:31 $}
+@Comment{$Date: 2005/10/08 06:29:20 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -374,7 +374,7 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[Dispatching serves as the parent of other
-language-defined library units concerned with dispatching.]}
+language-defined library units concerned with task dispatching.]}
 
 @end{StaticSem}
 
@@ -500,11 +500,13 @@ running task to go back to a ready queue.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
 An implementation is allowed to define additional resources as execution
 resources, and to define the corresponding allocation policies for them.
-Such resources may have an implementation defined effect on
-task dispatching@Chg{Version=[2],New=[],
+Such resources may have an implementation@Chg{Version=[2],New=[-],Old=[ ]}defined
+effect on task dispatching@Chg{Version=[2],New=[],
 Old=[ (see @RefSecNum{Task Dispatching Pragmas})]}.
-@ImplDef{The affect of implementation defined execution resources on
-task dispatching.}
+@ChgImplDef{Version=[2],Kind=[Revised],
+Text=[The @Chg{Version=[2],New=[effect],Old=[affect]} of
+implementation@Chg{Version=[2],New=[-],Old=[ ]}defined
+execution resources on task dispatching.]}
 
 An implementation may place implementation-defined restrictions on
 tasks whose active priority is in the Interrupt_Priority range.
@@ -604,8 +606,8 @@ policies.]]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Priority_Specific_Dispatching> (@SynI{policy_}@Syn2{identifier},
-   @SynI{first_priority_}@Syn2{expression}, @SynI{last_priority_}@Syn2{expression});''}
+@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Priority_Specific_Dispatching> (@*
+@ @ @ @SynI{policy_}@Syn2{identifier}, @SynI{first_priority_}@Syn2{expression}, @SynI{last_priority_}@Syn2{expression});''}
 
 @end{Syntax}
 
@@ -720,8 +722,15 @@ task.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[A task that has its base priority changed may move
-from one dispatching policy to another. It is immediately dispatched according
-to the new policy.]}
+from one dispatching policy to another. It is immediately subject
+to the new dispatching policy.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+  @ChgAdded{Version=[2],Text=[Once subject to the new dispatching policy, it
+  may be immediately preempted or dispatched, according the rules of the new
+  policy.]}
+@end{Ramification}
 
 @ChgNote{The following stuff is moved to the next subclause}
 
@@ -776,10 +785,11 @@ added at the head of the ready queue for its active priority.]}
 @end{RunTime}
 
 @begin{ImplReq}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
-@ChgAdded{Version=[2],Text=[An implementation shall allow specifying both the
-locking policy (see @RefSecNum{Priority Ceiling Locking}) as Ceiling_Locking
-and one or more Priority_Specific_Dispatching pragmas for a single partition.]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00333-01],ARef=[AI95-00355-01]}
+@ChgAdded{Version=[2],Text=[An implementation shall allow, for a single
+partition, both the locking policy (see @RefSecNum{Priority Ceiling Locking})
+to be specified as Ceiling_Locking
+and also one or more Priority_Specific_Dispatching pragmas to be given.]}
 @end{ImplReq}
 
 @begin{DocReq}
@@ -946,14 +956,16 @@ of the ready queue for its active priority.@Defn2{Term=[preempt],Sec=[a running 
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
-@ChgAdded{Version=[2],Text=[An implementation shall allow specifying both the
-task dispatching policy as FIFO_Within_Priorities and the locking policy (see
-@RefSecNum{Priority Ceiling Locking}) as Ceiling_Locking for a single
-partition.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
+@ChgAdded{Version=[2],Text=[An implementation shall allow, for a single
+partition, both the task dispatching policy to be specified as
+FIFO_Within_Priorities and also the locking policy (see
+@RefSecNum{Priority Ceiling Locking}) to be specified as Ceiling_Locking.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This is the standard combination of policies,
-  and we want that to be portable.]}
+  @ChgAdded{Version=[2],Text=[This is the preferred combination of the
+  FIFO_Within_Priorities policy with a locking policy, and we want that
+  conbination to be portable.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1095,14 +1107,15 @@ its active priority. This is a task dispatching point
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
-@ChgAdded{Version=[2],Text=[An implementation shall allow specifying both the
-task dispatching policy as Non_Preemptive_FIFO_Within_Priorities and the
-locking policy (see @RefSecNum{Priority Ceiling Locking}) as Ceiling_Locking
-for a single partition.]}
+@ChgAdded{Version=[2],Text=[An implementation shall allow, for a single
+partition, both the task dispatching policy to be specified as
+Non_Preemptive_FIFO_Within_Priorities and also the locking policy (see
+@RefSecNum{Priority Ceiling Locking}) to be specified as Ceiling_Locking.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This is the standard combination of policies,
-  and we want that to be portable.]}
+  @ChgAdded{Version=[2],Text=[This is the preferred combination of the
+  Non_Preemptive_FIFO_Within_Priorities policy with a locking policy, and we
+  want that conbination to be portable.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1171,8 +1184,8 @@ FIFO_Within_Priorities.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[The procedures Set_Quantum set the required Quantum
-value for a single level Pri or a range of levels Low .. High. If no quantum is
-set for a Round Robin priority level, Default_Quantum is used.]}
+value for a single priority level Pri or a range of levels Low .. High.
+If no quantum is set for a Round Robin priority level, Default_Quantum is used.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[The function Actual_Quantum returns the actual
@@ -1218,15 +1231,24 @@ same as that for execution time clocks (see @RefSecNum{Execution Time}).]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[A task that has its base priority set to a Round
-Robin priority is moved to the tail of the ready queue for its new priority
-level.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[When a task has exhausted its budget and is without
 an inherited priority (and is not executing within a protected operation), it
 is moved to the tail of the ready queue for its priority level. This is a task
 dispatching point.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[In this case, it will be given
+  a budget as described in the first bullet.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The rules for FIFO_Within_Priority (to which
+  these bullets are added) say that a task that has its base priority set to a
+  Round Robin priority is moved to the tail of the ready queue for its new
+  priority level, and then will be given a budget as described in the first
+  bullet. That happens whether or not the task's original base priority was
+  a Round Robin priority.]}
+@end{Ramification}
 
 @end{Itemize}
 
@@ -1234,14 +1256,15 @@ dispatching point.]}
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01],ARef=[AI95-00355-01]}
-@ChgAdded{Version=[2],Text=[An implementation shall allow specifying both the
-task dispatching policy as Round_Robin_Within_Priorities and the
-locking policy (see @RefSecNum{Priority Ceiling Locking}) as Ceiling_Locking
-for a single partition.]}
+@ChgAdded{Version=[2],Text=[An implementation shall allow, for a single
+partition, both the task dispatching policy to be specified as
+Round_Robin_Within_Priorities and also the locking policy (see
+@RefSecNum{Priority Ceiling Locking}) to be specified as Ceiling_Locking.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This is the standard combination of policies,
-  and we want that to be portable.]}
+  @ChgAdded{Version=[2],Text=[This is the preferred combination of the
+  Round_Robin_Within_Priorities policy with a locking policy, and we
+  want that conbination to be portable.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1307,6 +1330,25 @@ task's deadline and a dispatching policy that defines Earliest Deadline First
 @end{Discussion}
 
 @end{Intro}
+
+@begin{MetaRules}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[To predict the behaviour of a multi-tasking program
+it is necessary to control access to the processor which is preemptive, and
+shared objects which are usually non-preemptive and embodied in protected
+objects. Two common dispatching policies for the processor are fixed priority
+and EDF. The most effective control over shared objects is via preemption
+levels. With a pure priority scheme a single notion of priority is used for
+processor dispatching and preemption levels. With EDF and similar schemes
+priority is used for preemption levels (only), with another measure used for
+dispatching. T.P. Baker showed (@i<Real-Time Systems>, March 1991, vol. 3, num.
+1, @i<Stack-Based Scheduling of Realtime Processes>) that for EDF a newly
+released task should only preempt the currently running task if it has an
+earlier deadline and a higher preemption level than any currently
+@lquotes@;locked@rquotes protected object. The rules of this clause implement
+this scheme including the case where the newly released task should execute
+before some existing tasks but not preempt the currently executing task.]}
+@end{MetaRules}
 
 @begin{Syntax}
 
@@ -1516,7 +1558,7 @@ EDF_Across_Priorities, the task is added to the ready queue
 corresponding to its new active priority, as determined above.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[For all the operations defined in this package,
+@ChgAdded{Version=[2],Text=[For all the operations defined in Ada.Dispatching.EDF,
 Tasking_Error is raised if the task identified by T has terminated.
 Program_Error is raised if the value of T is Null_Task_Id.]}
 
@@ -1621,54 +1663,87 @@ A Locking_Policy pragma is a configuration pragma.
 @begin{RunTime}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0073],ARef=[AI95-00091-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
 @Defn{locking policy}
 @Redundant[A locking policy specifies the details of protected object
-locking. These rules specify whether or not protected objects have
-priorities, and the relationships between these priorities and
+locking. @Chg{Version=[2],New=[While all protected objects have a priority,
+these],Old=[These]} rules specify @Chg{Version=[2],New=[the meaning of
+the priority of a],Old=[whether or not]} protected @Chg{Version=[2],
+New=[object],Old=[objects have
+priorities]}, and the relationships between these priorities and
 task priorities. In addition, the policy specifies the state of a task
 when it executes a protected action, and how its active priority is
 affected by the locking.]
 The @i{locking policy} is specified by a Locking_Policy pragma. For
-implementation-defined locking policies, the effect of a Priority or
-Interrupt_Priority pragma on a protected object is
+implementation-defined locking policies, the @Chg{Version=[2],New=[meaning of
+the priority of a],Old=[effect of a Priority or
+Interrupt_Priority pragma on]} a protected object is
 implementation defined.
 If no Locking_Policy pragma @Chg{New=[applies to],Old=[appears in]} any
 of the program units comprising a partition, the locking policy for that
-partition, as well as the effect of specifying either a Priority or
-Interrupt_Priority pragma for a protected object, are implementation defined.
+partition, as well as the @Chg{Version=[2],New=[meaning of
+the priority of a],Old=[effect of specifying either a Priority or
+Interrupt_Priority pragma for]} a protected object, are implementation defined.
+@Chg{Version=[2],New=[@Defn2{Term=[Priority],Sec=[of a protected object]}],Old=[]}
+
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The locking policy if no Locking_Policy pragma applies to any unit of
+a partition.]}]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00327-01]}
+@ChgAdded{Version=[2],Text=[The @nt{expression} of a Priority or Interrupt_Priority
+pragma (see @RefSecNum{Task Priorities}) is evaluated as part of the creation
+of the corresponding
+protected object and converted to the subtype System.Any_Priority or
+System.Interrupt_Priority, respectively. The value of the expression is the
+initial priority of the corresponding protected object. If no Priority or
+Interrupt_Priority pragma applies to a protected object, the initial priority
+is specified by the locking policy.
+@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Priority)}
+@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}]}
 
 @Leading@;There is one predefined locking policy, Ceiling_Locking; this policy is
 defined as follows:
 @begin{itemize}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
 @Defn2{Term=[ceiling priority], Sec=(of a protected object)}
 Every protected object has a @i{ceiling priority}, which
 is determined by either a Priority or Interrupt_Priority pragma as
-defined in @RefSecNum{Task Priorities}.
+defined in @RefSecNum{Task Priorities}@Chg{Version=[2],New=[, or by
+assignment to the Priority attribute as described
+in @RefSecNum{Dynamic Priorities for Protected Objects}],Old=[]}.
 The ceiling priority of a protected object (or ceiling, for short) is an
 upper bound on the active priority a task can have when
 it calls protected operations of that protected object.
 
-The @nt{expression} of a Priority or Interrupt_Priority pragma is evaluated
-as part of the creation of the corresponding protected object and converted
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
+The @Chg{Version=[2],New=[initial ceiling priority of a],Old=[@nt{expression}
+of a Priority or Interrupt_Priority pragma is evaluated
+as part of the creation of the corresponding]}
+protected object
+@Chg{Version=[2],New=[is
+equal to the initial priority for that object.],Old=[and converted
 to the subtype System.Any_Priority or System.Interrupt_Priority, respectively.
 The value of the @nt{expression} is the ceiling priority of
 the corresponding protected object.
 @PDefn2{Term=[implicit subtype conversion],Sec=(pragma Priority)}
-@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}
+@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
 If an Interrupt_Handler or Attach_Handler pragma
 (see @RefSecNum{Protected Procedure Handlers}) appears in a
 @nt{protected_definition} without an Interrupt_Priority pragma, the
-ceiling priority of protected objects of that type is
-implementation defined,
+@Chg{Version=[2],New=[initial],Old=[ceiling]} priority of protected objects
+of that type is implementation defined,
 but in the range of the subtype System.Interrupt_Priority.
 @ImplDef{Default ceiling priorities.}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
 If no @nt{pragma} Priority, Interrupt_Priority,
 Interrupt_Handler, or Attach_Handler is specified in the
-@nt{protected_definition}, then the ceiling priority of the
-corresponding protected object is System.Priority'Last.
+@nt{protected_definition}, then the @Chg{Version=[2],New=[initial],Old=[ceiling]}
+priority of the corresponding protected object is System.Priority'Last.
 
 While a task executes a protected action, it inherits the ceiling
 priority of the corresponding protected object.
@@ -1829,6 +1904,17 @@ only protected subprograms (excluding the case where a protected operation
 calls another protected operation on the same protected object).
 
 @end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  All protected objects now have a priority, which
+  is the value of the Priority attribute of
+  @RefSecNum{Dynamic Priorities for Protected Objects}. How this value
+  is interpreted depends on the locking policy; for instance, the ceiling
+  priority is derived from this value when the locking policy is
+  Ceiling_Locking.]}
+@end{Extend95}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0073],ARef=[AI95-00091-01]}
@@ -2158,19 +2244,24 @@ Program_Error is raised by Set_Priority and Get_Priority if T is equal
 to Null_Task_Id.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00188-02]}
-@Chg{Version=[2],New=[On a system with a single processor, the setting of a],
-Old=[Setting the]} task's base priority to the new value @Chg{Version=[2],
-New=[occurs immediately at the first point that is outside the
+@Chg{Version=[2],New=[On a system with a single processor, the setting of],
+Old=[Setting]} the @Chg{Version=[2],New=[],Old=[task's ]}base
+priority@Chg{Version=[2],New=[ of a task @i{T}],Old=[]}
+to the new value @Chg{Version=[2],
+New=[occurs immediately at the first point that the execution of @i{T} is
+outside the
 execution of an abort-deferred operation],Old=[takes place as soon
 as is practical but not while the task is performing a
 protected action.
 This setting occurs no later then the next abort completion point of
 the task T
 (see @RefSecNum{Abort of a Task - Abort of a Sequence of Statements})]}.
+
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00188-02]}
 @Chg{Version=[2],New=[The priority change is immediate if the target task
-is on a ready or delay queue. However, consider when],Old=[When]}
+is on a delay queue or a ready queue outside of a protected action.
+However, consider when],Old=[When]}
 Set_Priority is called by a task T1 to set the priority of T2,
 if T2 is blocked, waiting on an entry call queued on a protected object,
 the entry queue needs to be reordered.
@@ -2181,7 +2272,13 @@ This is similar to the disentangling of queues that needs to happen when
 a high-priority task aborts a lower-priority task,
 which might have a call queued on a protected object with a low
 ceiling.@Chg{Version=[2],New=[ We have an @ImplPermName in
-@RefSecNum{Entry Queuing Policies} to allow this implementation.],Old=[]}
+@RefSecNum{Entry Queuing Policies} to allow this implementation. We could
+have required an immedaite priority change if on a ready queue during a
+protected action, but that would have required extra checks for ceiling
+violations to meet @BoundedName requirements of
+@RefSecNum{Priority Ceiling Locking} and potentially could cause a protected
+action to be abandoned in the middle (by raising Program_Error). That seems
+bad.],Old=[]}
 @end{ImplNote}
 @begin{Reason}
 @Leading@;A previous version of Ada 9X made it a run-time error
@@ -2372,7 +2469,7 @@ protected object can be modified or queried at run time.]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The following attribute
 is defined for @PrefixType{a @nt{prefix} P that denotes a protected object}:]}
 
-@begin(description)
+@begin(Description)
 @ChgAttribute{Version=[2],Kind=[AddedNormal],ChginAnnex=[T],
   Leading=<F>, Prefix=<P>, AttrName=<Priority>, ARef=[AI95-00327-01],
   Text=[@Chg{Version=[2],New=[Denotes a non-aliased component of the
@@ -2383,8 +2480,9 @@ is defined for @PrefixType{a @nt{prefix} P that denotes a protected object}:]}
 @end{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
-@ChgAdded{Version=[2],Text=[The initial value of this attribute is set by
-pragmas Priority or Interrupt_Priority, and can be changed by an assignment.]}
+@ChgAdded{Version=[2],Text=[The initial value of this attribute is
+the initial value of the priority of the protected object, and can
+be changed by an assignment.]}
 @end{StaticSem}
 
 @begin{Runtime}
@@ -2787,7 +2885,7 @@ The above Storage_Checks can be suppressed with pragma Suppress.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  The No_Nested_Finalization is now defined in terms of type that need
+  The No_Nested_Finalization is now defined in terms of types that need
   finalization. These types include a variety of language-defined types that
   @i<might> be implemented with a controlled type. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
@@ -3094,7 +3192,7 @@ and any relevant aspects of the underlying hardware
 or operating system facilities used.
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The properties of the underlying
-time base used package Real_Time.]}]}
+time base used in package Real_Time.]}]}
 @begin{Discussion}
 If there is an underlying operating system,
 this might include information about which system call is used
@@ -3781,7 +3879,9 @@ defined for each run-time profile.]}
 
 @begin{Linktime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgAdded{Version=[2],Text=[A @key{pragma} Profile is a configuration pragma.
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[configuration pragma], Sec=(Profile)}
+@PDefn2{Term=[pragma, configuration], Sec=(Profile)}
+A @key{pragma} Profile is a configuration pragma.
 There may be more than one @key{pragma} Profile for a partition.]}
 @end{Linktime}
 
@@ -3850,10 +3950,10 @@ Ravenscar is equivalent to the following set of pragmas:]}
 @ChgAdded{Version=[2],Text=[The Ravenscar profile is named for the location
 of the meeting that defined its initial version. The name is now in widespread
 use, so we stick with existing practice, rather than using a more descriptive
-name. This is another example of Ada's lousy marketing sense; casual readers,
-especially those outside of Ada, have no conception of what
+name.@Comment{ This is another example of Ada's lousy marketing sense; casual
+readers, especially those outside of Ada, have no conception of what
 @lquotes@;Ravenscar@rquotes@; is, and thus are much less likely to investigate
-it to find out how it can help them.]}
+it to find out how it can help them.}]}
 @end{Discussion}
 
 @end{StaticSem}
@@ -4230,9 +4330,9 @@ time interval that remains until the timer TM would expire, if that timer is
 set; otherwise it returns Time_Span_Zero.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
-@ChgAdded{Version=[2],Text=[The constant Min_Handler_Ceiling is the priority
-value that ensures that no ceiling violation would occur, were a handler to be
-executed.]}
+@ChgAdded{Version=[2],Text=[The constant Min_Handler_Ceiling is the
+minimum ceiling priority required for a protected object with a handler to
+ensure that no ceiling violation will occur when that handler is invoked.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[As part of the finalization of an object of type
@@ -4484,9 +4584,9 @@ the group budget was set prior to it being cleared; otherwise it is assigned
 False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
-@ChgAdded{Version=[2],Text=[The constant Min_Handler_Ceiling is the priority
-value that ensures that no ceiling violation would occur, were a handler to be
-executed.]}
+@ChgAdded{Version=[2],Text=[The constant Min_Handler_Ceiling is the
+minimum ceiling priority required for a protected object with a handler to
+ensure that no ceiling violation will occur when that handler is invoked.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The precision of the accounting of task execution
@@ -4717,8 +4817,17 @@ cleared; otherwise it is assigned False.]}
 event if the event is set; otherwise it returns Real_Time.Time_First.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
-@ChgAdded{Version=[2],Text=[As the final step of the finalization of an object
+@ChgAdded{Version=[2],Text=[As part of the finalization of an object
 of type Timing_Event, the Timing_Event is cleared.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is the only finalization defined by the
+  language that has a visible effect; but an implementation may have other
+  finalization that it needs to perform. Implementations need to ensure that
+  the event is cleared before anything else is finalized that would prevent
+  a set event from being triggered.]}
+@end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[If several timing events are set for the same time,

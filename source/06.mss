@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:46 $}
+@Comment{$Date: 2005/10/08 06:29:15 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1991,11 +1991,11 @@ this anonymous access subtype is that of the result subtype.]}
 
 @end{Itemize}
 
-@begin{Itemize}
-
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For any return statement
 that applies to a function body:]}
+
+@begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is limited,

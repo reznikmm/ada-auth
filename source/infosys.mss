@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2005/05/16 03:42:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2005/10/08 06:29:16 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2005/05/16 03:42:20 $}
+@Comment{$Date: 2005/10/08 06:29:16 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -26,12 +26,14 @@ support formatted and localized output of decimal data, based on
 @lquotes@;picture String@rquotes@; values.
 @end{itemize}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 See also: @RefSec{Fixed Point Types}; @RefSec{Operations of Fixed Point Types};
 @RefSec{Type Conversions};
 @RefSec{Operational and Representation Attributes};
-@RefSec(Input-Output for Real Types);
-@RefSec{Interfacing with COBOL};
-@RefSec{Interfacing with C and C++};
+@RefSec(Input-Output for Real Types);@Chg{Version=[2],
+New=[],Old=[@RefSec{Interfacing with COBOL};]}
+@RefSec{Interfacing with C and C++};@Chg{Version=[2],
+New=[ @RefSec{Interfacing with COBOL};],Old=[]}
 @RefSec{Numerics}.
 
 The character and string handling packages in
@@ -290,11 +292,14 @@ or the digits group separator character (if '_'). In some contexts it
 is treated as part of a floating sign, floating currency, or zero
 suppression string.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
 An example of a picture String is "<###Z_ZZ9.99>". If the currency string
-is "FF", the separator character is ',', and the radix mark is '.' then
-the edited output string values for the decimal values 32.10 and @en@;5432.10 are
-"bbFFbbb32.10b" and "(bFF5,432.10)", respectively, where 'b' indicates
-the space character.
+is "@Chg{Version=[2],New=[kr],Old=[FF]}", the separator character is ',', and
+the radix mark is '.' then the edited output string values for the decimal
+values 32.10 and @en@;5432.10 are
+"bb@Chg{Version=[2],New=[kr],Old=[FF]}bbb32.10b" and
+"(b@Chg{Version=[2],New=[kr],Old=[FF]}5,432.10)", respectively, where 'b'
+indicates the space character.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 The generic packages Text_IO.Decimal_IO@Chg{Version=[2],New=[,],Old=[ and]}
@@ -608,6 +613,12 @@ of the number is in a fixed position.
 
 The combination of a True value for Blank_When_Zero and a '*' character
 in Pic_String is inconsistent; no edited output string is defined.
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
+  @ChgAdded{Version=[2],Text=[Such a Pic_String is invalid, and any attempt
+  to use such a string will raise Picture_Error.]}
+@end{Reason}
+
 
 A layout error is identified in the rules below if leading
 non-zero digits of Item, character values of the Currency string,

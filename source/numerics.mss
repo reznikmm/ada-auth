@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2005/09/30 05:33:52 $ $Author: Randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2005/10/08 06:29:17 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:52 $}
+@Comment{$Date: 2005/10/08 06:29:17 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -21,11 +21,17 @@ The Numerics Annex specifies
    requirements need be satisfied, as for implementations not conforming to the
    Numerics Annex;
 
+   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00296-01]}
    models of floating point and fixed point arithmetic on which the accuracy
-   requirements of strict mode are based; and
+   requirements of strict mode are based;@Chg{Version=[2],New=[],Old=[ and]}
 
+   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00296-01]}
    the definitions of the model-oriented attributes of floating point types
-   that apply in the strict mode.
+   that apply in the strict mode@Chg{Version=[2],New=[; and],Old=[.]}
+
+   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00296-01]}@ChgAdded{Version=[2],
+   Text=[features for the manipulation of real and complex vectors and
+   matrices.]}
 @end{itemize}
 @end{Intro}
 
@@ -846,7 +852,9 @@ raised:
       @RI{i}, if Complex_Types.Real'Signed_Zeros is False;
    @end{InnerItemize}
 
-   the Log function yields an imaginary result; and the Arcsin and Arccos
+   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+   @Chg{Version=[2],New=[When the parameter X has the value @en@;1.0, ],
+   Old=[]}the Log function yields an imaginary result; and the Arcsin and Arccos
    functions yield a real result.
 
    When the parameter X has the value @PorM @RI{i}, the Log function yields
@@ -1166,9 +1174,11 @@ More specifically,
                Last : @key[out] Positive);
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 Reads a complex value from the beginning of the given string, following the
 same rule as the Get procedure that reads a complex value from a file, but
-treating the end of the string as a line terminator. Returns, in the parameter
+treating the end of the string as a @Chg{Version=[2],New=[file],Old=[line]}
+terminator. Returns, in the parameter
 Item, the value of type Complex that corresponds to the input sequence.
 Returns in Last the index value such that From(Last) is the last character
 read.
@@ -1273,7 +1283,7 @@ Wide_Wide_Text_IO.Complex_IO. Its declaration is obtained from that of
 Text_IO.Complex_IO by systematically replacing Text_IO by Wide_Wide_Text_IO and
 String by Wide_Wide_String; the description of its behavior is obtained by
 additionally replacing references to particular characters (commas,
-parentheses, etc.) by those for the corresponding wide characters.]}
+parentheses, etc.) by those for the corresponding wide wide characters.]}
 @end{StaticSem}
 
 @begin{Extend95}
@@ -1574,8 +1584,9 @@ type @i{universal_integer}.]}
 @end{Display}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],NoPrefix=[T],Text=[where @RI{d}
-is the requested decimal precision of @i{T},and @RI{g}is 0 if Machine_Radix is
-a positive power of 10 and 1 otherwise. In addition, it
+is the requested decimal precision of @i{T}, and @RI{g} is 0 if
+@i{T}'Machine_Radix
+is a positive power of 10 and 1 otherwise. In addition, @i{T}'Model_Mantissa
 shall be less than or equal to the value of
 @i{T}'Machine_Mantissa. This attribute yields a value of the
 type @i{universal_integer}.]}
@@ -2474,14 +2485,15 @@ question are as follows:
    Generic_Complex_Elementary_Functions (for Ada 83) in not doing so, however.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 The amount by which a component of the result of an inverse trigonometric or
 inverse hyperbolic function is allowed to spill over into a quadrant adjacent
 to the one corresponding to the principal branch, as given in
 @RefSecNum{Complex Elementary Functions}, is limited. The rule is that the
 result belongs to the smallest model interval of @i{CT}.Real that contains both
 boundaries of the quadrant corresponding to the principal branch. This rule
-also takes precedence to the maximum error bounds, effectively narrowing the
-result interval allowed by them.
+also takes precedence @Chg{Version=[2],New=[over],Old=[to]} the maximum error
+bounds, effectively narrowing the result interval allowed by them.
 
 Finally, the results allowed by the error bounds are narrowed by one further
 rule: The absolute value of each component of the result of the Exp function,
@@ -2527,6 +2539,21 @@ are generic children of the predefined package Numerics (see
 @RefSecNum[The Numerics Packages]). Nongeneric
 equivalents of these packages for each of the predefined floating point types
 are also provided as children of Numerics.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Vector and matrix manipulation is defined in
+  the Numerics Annex, rather than in the core, because it is considered
+  to be a specialized need of (some) numeric applications.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[These packages provide facilities that are
+  similar to and replace those found in IEC/ISO 13813:1998. (The other
+  facilities provided by that Standard were already provided in Ada 95.) In
+  addition to the main facilities of that Standard, these packages also include
+  subprograms for the solution of linear equations, matrix inversion,
+  determinants, and the determination of the eigenvalues and eigenvectors of
+  real symmetric matrices and Hermitian matrices.]}
+@end{Discussion}
 @end{Intro}
 
 @begin{Extend95}
@@ -2630,7 +2657,7 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Real_Matrix inversion and related operations]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Solve} (A : Real_Matrix; X: Real_Vector) @key{return} Real_Vector;
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Solve} (A : Real_Matrix; X : Real_Vector) @key{return} Real_Vector;
    @key{function} @AdaSubDefn{Solve} (A, X : Real_Matrix) @key{return} Real_Matrix;
    @key{function} @AdaSubDefn{Inverse} (A : Real_Matrix) @key{return} Real_Matrix;
    @key{function} @AdaSubDefn{Determinant} (A : Real_Matrix) @key{return} Real'Base;]}
@@ -2686,8 +2713,8 @@ type Real; it is defined as an unconstrained, two-dimensional array with
 indices of type Integer.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
-@ChgAdded{Version=[2],Text=[The effect of the various functions is as described
-below. In most cases the functions are described in terms of corresponding
+@ChgAdded{Version=[2],Text=[The effect of the various subprograms is as described
+below. In most cases the subprograms are described in terms of corresponding
 scalar operations of the type Real; any exception raised by those operations is
 propagated by the array operation. Moreover, the accuracy of the result for
 each individual component is as defined for the scalar operation unless stated
@@ -2695,9 +2722,9 @@ otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[In the case of those operations which are defined
-to involve an inner product, Constraint_Error may be raised if an intermediate
+to @i{involve an inner product}, Constraint_Error may be raised if an intermediate
 result is outside the range of Real'Base even though the mathematical final
-result would not be.]}
+result would not be.@Defn2{Term=[involve an inner product],Sec=[real]}]}
 
 @begin{DescribeCode}
 
@@ -2855,7 +2882,7 @@ involves inner products.]}
 @ChgAdded{Version=[2],Text=[This operation returns the outer product of a
 (column) vector Left by a (row) vector Right using the operation "*" of the
 type Real for computing the individual components. The first and second index
-ranges of the matrix result are Left'Range and Right'Range respectively.]}
+ranges of the result are Left'Range and Right'Range respectively.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2889,7 +2916,7 @@ inner products.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
 each component of Right by the scalar Left using the "*" operation of the type
-Real. The index ranges of the matrix result are those of Right.]}
+Real. The index ranges of the result are those of Right.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2900,18 +2927,18 @@ Real. The index ranges of the matrix result are those of Right.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
 corresponding operation of the type Real to each component of Left and to the
-scalar Right. The index ranges of the matrix result are those of Left.]}
+scalar Right. The index ranges of the result are those of Left.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Solve (A : Real_Matrix; X: Real_Vector) @key{return} Real_Vector;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Solve (A : Real_Matrix; X : Real_Vector) @key{return} Real_Vector;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This function returns a vector Y such that X is
 (nearly) equal to A * Y. This is the standard mathematical operation for
 solving a single set of linear equations. The index range of the result is
-X'Range. Constraint_Error is raised if A'Length(1), A'Length(2) and X'Length
+A'Range(2). Constraint_Error is raised if A'Length(1), A'Length(2), and X'Length
 are not equal. Constraint_Error is raised if the matrix A is ill-conditioned.]}
 
 @begin{Example}
@@ -2923,7 +2950,7 @@ are not equal. Constraint_Error is raised if the matrix A is ill-conditioned.]}
 @ChgAdded{Version=[2],Text=[This function returns a matrix Y such that X is
 (nearly) equal to A * Y. This is the standard mathematical operation for
 solving several sets of linear equations. The index ranges of the result are
-those of X. Constraint_Error is raised if A'Length(1), A'Length(2) and
+A'Range(2) and X'Range(2). Constraint_Error is raised if A'Length(1), A'Length(2), and
 X'Length(1) are not equal. Constraint_Error is raised if the matrix A is
 ill-conditioned.]}
 
@@ -2934,9 +2961,9 @@ ill-conditioned.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This function returns a matrix B such that A * B is
-(nearly) equal to the unit matrix. The index ranges of the result are those of
-A. Constraint_Error is raised if A'Length(1) is not equal to A'Length(2).
-Constraint_Error is raised if the matrix A is ill-conditioned.]}
+(nearly) equal to the unit matrix. The index ranges of the result are A'Range(2)
+and A'Range(1). Constraint_Error is raised if A'Length(1) is not equal to
+A'Length(2). Constraint_Error is raised if the matrix A is ill-conditioned.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3078,7 +3105,7 @@ if this is done then it should be documented.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Solve and Inverse for Numerics.Generic_Real_Arrays should be
 implemented using established techniques such as LU decomposition and
-the result should be refined by iteration on the residuals.]}]}
+the result should be refined by an iteration on the residuals.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[It is not the intention that any special provision
@@ -3093,10 +3120,10 @@ document with this paragraph.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The test that a matrix is symmetric may be
+@ChgAdded{Version=[2],Text=[The test that a matrix is symmetric should be
 performed by using the equality operator to compare the relevant components.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The equality operator may be used to test that a matrix in
+Text=[The equality operator should be used to test that a matrix in
 Numerics.Generic_Real_Matrix is symmetric.]}]}
 
 @end{ImplAdvice}
@@ -3166,10 +3193,10 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument : Real_Vector)
-                                                    @key{return} Complex_Vector;
+      @key{return} Complex_Vector;
    @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument : Real_Vector;
                                 Cycle             : Real'Base)
-                                                    @key{return} Complex_Vector;]}
+      @key{return} Complex_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Complex_Vector arithmetic operations}]}
@@ -3269,10 +3296,10 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument : Real_Matrix)
-                                                    @key{return} Complex_Matrix;
+      @key{return} Complex_Matrix;
    @key{function} @AdaSubDefn{Compose_From_Polar} (Modulus, Argument : Real_Matrix;
                                 Cycle             : Real'Base)
-                                                    @key{return} Complex_Matrix;]}
+      @key{return} Complex_Matrix;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix arithmetic operations}]}
@@ -3353,7 +3380,7 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Complex_Matrix inversion and related operations}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Solve} (A : Complex_Matrix; X: Complex_Vector)
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Solve} (A : Complex_Matrix; X : Complex_Vector)
       @key{return} Complex_Vector;
    @key{function} @AdaSubDefn{Solve} (A, X : Complex_Matrix) @key{return} Complex_Matrix;
    @key{function} @AdaSubDefn{Inverse} (A : Complex_Matrix) @key{return} Complex_Matrix;
@@ -3414,9 +3441,9 @@ individual component are as defined for the scalar operation.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[In the case of those operations which are defined
-to involve an inner product, Constraint_Error may be raised if an intermediate
+to @i{involve an inner product}, Constraint_Error may be raised if an intermediate
 result has a component outside the range of Real'Base even though the final
-mathematical result would not.]}
+mathematical result would not.@Defn2{Term=[involve an inner product],Sec=[complex]}]}
 
 @begin{DescribeCode}
 
@@ -3474,10 +3501,10 @@ Right'Range.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Polar (Modulus, Argument : Real_Vector)
-                                                 @key{return} Complex_Vector;
+   @key{return} Complex_Vector;
 @key{function} Compose_From_Polar (Modulus, Argument : Real_Vector;
                              Cycle             : Real'Base)
-                                                 @key{return} Complex_Vector;]}
+   @key{return} Complex_Vector;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -3638,8 +3665,8 @@ Left'Range.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This function returns a @i{unit
 vector}@Defn2{Term=[unit vector],Sec=[complex vector]} with Order components
-and a lower bound of First. All components are set to (0.0,0.0) except for the
-Index component which is set to (1.0,0.0). Constraint_Error is raised if Index
+and a lower bound of First. All components are set to (0.0, 0.0) except for the
+Index component which is set to (1.0, ,00.0). Constraint_Error is raised if Index
 < First, Index > First + Order @en 1, or if First + Order @en 1 > Integer'Last.]}
 
 @begin{Example}
@@ -3698,10 +3725,10 @@ X or Right.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Polar (Modulus, Argument : Real_Matrix)
-                                                 @key{return} Complex_Matrix;
+   @key{return} Complex_Matrix;
 @key{function} Compose_From_Polar (Modulus, Argument : Real_Matrix;
                              Cycle             : Real'Base)
-                                                 @key{return} Complex_Matrix;]}
+   @key{return} Complex_Matrix;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -3778,7 +3805,7 @@ involves inner products.]}
 @ChgAdded{Version=[2],Text=[This operation returns the outer product of a
 (column) vector Left by a (row) vector Right using the appropriate operation
 "*" in Numerics.Generic_Complex_Types for computing the individual components.
-The first and second index ranges of the matrix result are Left'Range and
+The first and second index ranges of the result are Left'Range and
 Right'Range respectively.]}
 
 @begin{Example}
@@ -3823,7 +3850,7 @@ inner products.]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
 corresponding operation in Numerics.Generic_Complex_Types to each component of
 Left and the matching component of Right. The index ranges of the result are
-those of Left. The exception Constraint_Error is raised if Left'Length(1) is
+those of Left. Constraint_Error is raised if Left'Length(1) is
 not equal to Right'Length(1) or Left'Length(2) is not equal to
 Right'Length(2).]}
 
@@ -3854,7 +3881,7 @@ involve inner products.]}
 @ChgAdded{Version=[2],Text=[Each operation returns the outer product of a
 (column) vector Left by a (row) vector Right using the appropriate operation
 "*" in Numerics.Generic_Complex_Types for computing the individual components.
-The first and second index ranges of the matrix result are Left'Range and
+The first and second index ranges of the result are Left'Range and
 Right'Range respectively.]}
 
 @begin{Example}
@@ -3935,14 +3962,14 @@ those of Left.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Solve (A : Complex_Matrix; X: Complex_Vector) @key{return} Complex_Vector;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Solve (A : Complex_Matrix; X : Complex_Vector) @key{return} Complex_Vector;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This function returns a vector Y such that X is
 (nearly) equal to A * Y. This is the standard mathematical operation for
 solving a single set of linear equations. The index range of the result is
-X'Range. Constraint_Error is raised if A'Length(1), A'Length(2) and X'Length
+A'Range(2). Constraint_Error is raised if A'Length(1), A'Length(2), and X'Length
 are not equal. Constraint_Error is raised if the matrix A is ill-conditioned.]}
 
 @begin{Example}
@@ -3954,7 +3981,7 @@ are not equal. Constraint_Error is raised if the matrix A is ill-conditioned.]}
 @ChgAdded{Version=[2],Text=[This function returns a matrix Y such that X is
 (nearly) equal to A * Y. This is the standard mathematical operation for
 solving several sets of linear equations. The index ranges of the result are
-those of X. Constraint_Error is raised if A'Length(1), A'Length(2) and
+A'Ramge(2) and X'Ramge(2). Constraint_Error is raised if A'Length(1), A'Length(2), and
 X'Length(1) are not equal. Constraint_Error is raised if the matrix A is
 ill-conditioned.]}
 
@@ -3965,9 +3992,9 @@ ill-conditioned.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This function returns a matrix B such that A * B is
-(nearly) equal to the unit matrix. The index ranges of the result are those of
-A. Constraint_Error is raised if A'Length(1) is not equal to A'Length(2).
-Constraint_Error is raised if the matrix A is ill-conditioned.]}
+(nearly) equal to the unit matrix. The index ranges of the result are A'Ramge(2)
+and A'Range(1). Constraint_Error is raised if A'Length(1) is not equal to
+A'Length(2). Constraint_Error is raised if the matrix A is ill-conditioned.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3989,6 +4016,15 @@ Hermitian matrix A as a vector sorted into order with the largest first.
 Constraint_Error is raised if A'Length(1) is not equal to A'Length(2). The
 index range of the result is A'Range(1). Argument_Error is raised if the matrix
 A is not Hermitian.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[A Hermitian matrix is one whose transpose is
+  equal to its complex conjugate. The eigenvalues of a Hermitian matrix are
+  alwasy real. We only support this case because algorithms for solving the
+  general case are inheritently unstable.]}
+@end{Discussion}
+
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4020,8 +4056,8 @@ if the matrix A is not Hermitian.]}
 @i{unit matrix}@Defn2{Term=[unit matrix],Sec=[complex matrix]}
 with Order**2 components and
 lower bounds of First_1 and First_2 (for the first and second index ranges
-respectively). All components are set to (0.0,0.0) except for the main diagonal,
-whose components are set to (1.0,0.0). Constraint_Error is raised
+respectively). All components are set to (0.0, 0.0) except for the main diagonal,
+whose components are set to (1.0, 0.0). Constraint_Error is raised
 if First_1 + Order @en 1 > Integer'Last or First_2 + Order @en 1 > Integer'Last.]}
 
 @end{DescribeCode}
@@ -4047,13 +4083,15 @@ Real'Base and Complex in both the strict mode and the relaxed mode
 @ChgAdded{Version=[2],Text=[For operations involving an inner product, no
 requirements are specified in the relaxed mode. In the strict mode the modulus
 of the absolute error of the inner product @i{X}*@i{Y} shall not exceed
-@i{g}*@key{abs}(@i{X})*abs(@i{Y}) where @i{g} is defined as]}
+@i{g}*@key{abs}(@i{X})*@key{abs}(@i{Y}) where @i{g} is defined as]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i{g} = @i{X}'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa) for mixed complex and real operands]}
+@ChgAdded{Version=[2],Text=[@i{g} = @i{X}'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa)
+    for mixed complex and real operands]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa) for two complex operands]}
+@ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa)
+    for two complex operands]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00418-01]}
@@ -4126,12 +4164,12 @@ document with this paragraph.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
-@ChgAdded{Version=[2],Text=[The test that a matrix is Hermitian may use the
+@ChgAdded{Version=[2],Text=[The test that a matrix is Hermitian should use the
 equality operator to compare the real components and negation followed by
 equality to compare the imaginary components
 (see @RefSecNum{Model of Floating Point Arithmetic}).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The equality and negation operators may be used to test that a matrix is
+Text=[The equality and negation operators should be used to test that a matrix is
 Hermitian.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -4149,9 +4187,9 @@ the real operand to complex.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The package Ada.Numerics.Generic_Complex_Arrays and its nongeneric equivalents
-  are new. It would be better if this was called
+  are new.@Comment{ It would be better if this was called
   "Ada.Numerics.Generic_Imitation_Arrays", 'cause that's the opposite of Real. :-)
-  Just checking if anyone reads this stuff.]}
+  Just checking if anyone reads this stuff.}]}
 @end{Extend95}
 
 

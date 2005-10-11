@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2005/08/17 00:07:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2005/10/08 06:29:23 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/08/17 00:07:42 $}
+@Comment{$Date: 2005/10/08 06:29:23 $}
 
 @LabeledClause{String Handling}
 
@@ -2572,10 +2572,10 @@ for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Bounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Unbounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Hash]}]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash]}]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Maps],Child=[Wide_Wide_@!Constants]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Maps],Child=[Wide_Wide_@!Constants]}]}
 
 @begin{StaticSem}
 

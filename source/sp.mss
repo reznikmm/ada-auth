@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2005/10/02 06:53:32 $ $Author: Randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2005/10/08 06:29:22 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/10/02 06:53:32 $}
+@Comment{$Date: 2005/10/08 06:29:22 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1004,6 +1004,8 @@ reduction in storage used for the names of certain entities.]
 A @nt{pragma} Discard_Names is allowed only immediately within a
 @nt{declarative_part}, immediately within a @nt{package_specification},
 or as a configuration pragma.
+@PDefn2{Term=[configuration pragma], Sec=(Discard_Names)}
+@PDefn2{Term=[pragma, configuration], Sec=(Discard_Names)}
 @end{SyntaxText}
 @end{Syntax}
 

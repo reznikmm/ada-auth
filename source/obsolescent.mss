@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/08/21 17:59:36 $}
+@Comment{$Date: 2005/10/08 06:29:23 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -21,7 +21,8 @@ These features are still part of the language,
 and have to be implemented by conforming implementations.
 The primary reason for putting these descriptions here
 is to get redundant features out of the way of most readers.
-The designers of the next version of Ada after Ada 95 will have to
+The designers of the next version of Ada@Chg{Version=[2],New=[],
+Old=[ after Ada 95]} will have to
 assess whether or not it makes sense to drop these features from the
 language.
 @end{Ramification}
@@ -54,10 +55,11 @@ compatibility.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00368-01]}
-@Chg{Version=[2],New=[A mention of the No_Obsolescent_Features restriction was
-added.], Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00368-01]}
+  @ChgAdded{Version=[2],Text=[A mention of the No_Obsolescent_Features
+  restriction was added.]}
 @end{DiffWord95}
+
 
 @LabeledClause{Renamings of Ada 83 Library Units}
 
@@ -94,6 +96,7 @@ The following @nt{library_unit_renaming_declaration}s exist:
 The implementation shall allow the user to replace these renamings.
 @end{ImplReq}
 
+
 @LabeledClause{Allowed Replacements of Characters}
 
 @begin{Syntax}
@@ -109,8 +112,12 @@ The number sign characters (#) of a @nt{based_literal} can be replaced
 by colons (:) provided that the replacement is done for both
 occurrences.
 @begin{Honest}
-  The intent is that such a replacement works in the Value and
-  Wide_Value attributes, and in the Get procedures of Text_IO,
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+  The intent is that such a replacement works in the
+  Value@Chg{Version=[2],New=[,],Old=[ and]}
+  Wide_Value@Chg{Version=[2],New=[, and Wide_Wide_Value],Old=[]} attributes,
+  and in the Get procedures of Text_IO@Chg{Version=[2],New=[ (and Wide_Text_IO
+  and Wide_Wide_Text_IO as well)]},
   so that things like @lquotes@;16:.123:@rquotes@; is acceptable.
 @end{Honest}
 
@@ -196,9 +203,10 @@ or a floating point subtype
 (notwithstanding the rule given in @RefSecNum(Fixed Point Types)
 that only allows a decimal fixed point subtype).
 @begin(Discussion)
-  We may need a better way to deal with obsolescent features
-  with rules that contradict those of the non-obsolescent parts
-  of the standard.
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00114-01]}
+  @ChgDeleted{Version=[2],Text=[We may need a better way to deal with
+  obsolescent features with rules that contradict those of the non-obsolescent
+  parts of the standard.]}
 @end(Discussion)
 @end{Legality}
 
@@ -558,7 +566,9 @@ associated interrupt entry as one or more parameters of mode @key[in].
 
 @begin{DiffWord83}
 
-RM83-13.5.1 did not adequately address the problems associate with
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+RM83-13.5.1 did not adequately address the problems
+@Chg{Version=[2],New=[associated],Old=[associate]} with
 interrupts. This feature is now obsolescent and is replaced by the Ada 95
 interrupt model as specified in the Systems Programming Annex.
 @end{DiffWord83}
