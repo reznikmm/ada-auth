@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.32 $ $Date: 2005/10/08 06:29:22 $ $Author: Randy $ }
+@Comment{ $Revision: 1.33 $ $Date: 2005/10/11 06:12:49 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/10/08 06:29:22 $}
+@Comment{$Date: 2005/10/11 06:12:49 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -13,7 +13,7 @@ New=[High Integrity Systems], Old=[Safety and Security]}
 This Annex addresses requirements for @Chg{Version=[2],
 New=[high integrity ],Old=[]}systems @Chg{Version=[2],New=[(including],
 Old=[that are]} safety@Chg{Version=[2],New=[-],Old=[ ]}critical
-@Chg{Version=[2],New=[system and],Old=[or have]}
+@Chg{Version=[2],New=[systems and],Old=[or have]}
 security@Chg{Version=[2],New=[-critical systems)],Old=[ constraints]}. It
 provides facilities and specifies documentation requirements that relate to
 several needs:
@@ -620,7 +620,7 @@ The implementation is not allowed to perform @lquotes@;dead store elimination@rq
 the last assignment to a variable prior to a point where the
 variable is inspectable.
 Thus an inspection point has the effect of an
-implicit @Chg{Version=[2],New=[read],Old=[reference]} to each of its
+implicit @Chg{Version=[2],New=[read of],Old=[reference to]} each of its
 inspectable objects.
 
 Inspection points are useful in maintaining a correspondence between the
@@ -727,7 +727,7 @@ rather than inhibiting what can be in the generic while
 liberalizing where they can be instantiated.]}
 @end[Reason]
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-02]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-01]}
 @ChgDeleted{Version=[2],Text=[@Defn2{Term=[Restrictions],
 Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic
 dependence on Unchecked_Deallocation is not allowed.]}
@@ -804,7 +804,7 @@ machine level, fixed point is virtually the same as integer arithmetic.
 
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-02]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-01]}
 @ChgDeleted{Version=[2],Text=[@Defn2{Term=[Restrictions],
 Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic dependence
 on the predefined generic Unchecked_Conversion is not allowed.]}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2005/10/08 06:29:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2005/10/11 06:12:52 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/10/08 06:29:23 $}
+@Comment{$Date: 2005/10/11 06:12:52 $}
 
 @LabeledClause{String Handling}
 
@@ -2439,7 +2439,7 @@ identifies Strings.Wide_Maps instead of Strings.Maps.
 @Leading@;For each of the packages Strings.Fixed, Strings.Bounded,
 Strings.Unbounded, and Strings.Maps.Constants@Chg{Version=[2],New=[, and
 for functions Strings.Hash, Strings.Fixed.Hash, Strings.Bounded.Hash,
-Strings.Unbounded.Hash,],Old=[]}
+and Strings.Unbounded.Hash,],Old=[]}
 the corresponding wide string package has the same contents except that
 @begin{itemize}
 Wide_Space replaces Space
@@ -2486,7 +2486,7 @@ Strings.Wide_Maps.Wide_Constants:
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @AdaDefn{Character_Set} : @key[constant] Wide_Maps.Wide_Character_Set;
 --@RI{Contains each Wide_Character value WC such that}@Chg{Version=[2],New=[
---],Old=[]}@RI{ Characters.@Chg{Version=[2],New=[Conversions.],Old=[]}Is_Character(WC) is True}
+--],Old=[]}@RI{Characters.@Chg{Version=[2],New=[Conversions.],Old=[]}Is_Character(WC) is True}
 @end{example}
 @end{StaticSem}
 
@@ -2537,7 +2537,7 @@ any element outside the Character portion of Wide_Character.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[Corrected the description of Character_Set.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-02]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[Added wide versions of Strings.Hash and
   Strings.Unbounded.Hash.]}
 
@@ -2562,8 +2562,8 @@ Wide_Wide_Character elements are found in
 the packages Strings.Wide_Wide_Maps, Strings.Wide_Wide_Fixed,
 Strings.Wide_Wide_Bounded, Strings.Wide_Wide_Unbounded, and
 Strings.Wide_Wide_Maps.Wide_Wide_Constants, and in the
-functions Strings.Wide_Wide_Hash, Strings.Fixed.Wide_Wide_Hash,
-Strings.Bounded.Wide_Wide_Hash, and
+functions Strings.Wide_Wide_Hash, Strings.Wide_Wide_Fixed.Wide_Wide_Hash,
+Strings.Wide_Wide_Bounded.Wide_Wide_Hash, and
 Strings.Wide_Wide_Unbounded.Wide_Wide_Hash.
 They provide the same
 string-handling operations as the corresponding packages and functions

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2005/10/08 06:29:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2005/10/11 06:12:48 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/10/08 06:29:20 $}
+@Comment{$Date: 2005/10/11 06:12:48 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -701,7 +701,7 @@ deleted from the ready queues@Chg{Version=[2],New=[],Old=[,
 and whether a task is inserted at the head or the tail of the
 queue for its active priority]}.]
 @Chg{Version=[2],New=[A single],Old=[The]} task dispatching policy is
-specified by a Task_Dispatching_Policy configuration pragma.
+specified by a Task_Dispatching_Policy @Chg{Version=[2],New=[],Old=[configuration ]}pragma.
 @Chg{Version=[2],New=[Pragma Priority_Specific_Dispatching assigns distinct
 dispatching policies to ranges of System.Any_Priority.],
 Old=[@PDefn{unspecified}If no such pragma appears in any of the program
@@ -974,7 +974,7 @@ FIFO_Within_Priorities and also the locking policy (see
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{priority inversion}
 @i{Priority inversion} is the duration for which a task remains at the
-head of the highest priority ready queue while the processor executes
+head of the highest priority nonempty ready queue while the processor executes
 a lower priority task. The implementation shall document:]}
 
 @begin{Itemize}
@@ -2248,11 +2248,10 @@ to Null_Task_Id.
 Old=[Setting]} the @Chg{Version=[2],New=[],Old=[task's ]}base
 priority@Chg{Version=[2],New=[ of a task @i{T}],Old=[]}
 to the new value @Chg{Version=[2],
-New=[occurs immediately at the first point that the execution of @i{T} is
-outside the
-execution of an abort-deferred operation],Old=[takes place as soon
-as is practical but not while the task is performing a
-protected action.
+New=[occurs immediately at the first point that @i{T} is
+outside the execution of],Old=[takes place as soon
+as is practical but not while the task is performing]} a
+protected action@Chg{Version=[2],New=[],Old=[.
 This setting occurs no later then the next abort completion point of
 the task T
 (see @RefSecNum{Abort of a Task - Abort of a Sequence of Statements})]}.
@@ -2723,7 +2722,7 @@ Old=[@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Protected_Type_Allocators)}No_Protected_Type_Allocators @\There
    are no @nt{allocator}s for protected types or types
-   containing protected subcomponents.]}
+   containing protected type subcomponents.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Relative_Delay)}No_Relative_Delay @\There
@@ -3099,7 +3098,8 @@ Old=[both operations]}, the result is
 rounded to the nearest @Chg{Version=[2],New=[value of type Duration],
 Old=[exactly representable value]} (away from zero if exactly
 halfway between two @Chg{Version=[2],New=[],
-Old=[exactly representable ]}values).@Chg{Version=[2],New=[ For To_Time_Span,
+Old=[exactly representable ]}values).@Chg{Version=[2],New=[ If the result
+is outside the range of Duration, Constraint_Error is raised. For To_Time_Span,
 the value of D is first rounded to the nearest integral multiple of Time_Unit,
 away from zero if exactly halfway between two multiples. If the
 rounded value is outside the range of Time_Span, Constraint_Error is
@@ -3886,7 +3886,7 @@ There may be more than one @key{pragma} Profile for a partition.]}
 @end{Linktime}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   @key{Pragma} Profile is new.]}
 @end{Extend95}

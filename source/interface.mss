@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2005/09/30 05:33:57 $ $Author: Randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2005/10/11 06:12:50 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:57 $}
+@Comment{$Date: 2005/10/11 06:12:50 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1518,7 +1518,7 @@ declaration:
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
    @key(type) @AdaTypeDefn{chars_ptr} @key(is) @key(private);@Chg{Version=[2],New=[
-   @key(pragma) Preelaborable_Initialization (chars_ptr);],Old=[]}
+   @key(pragma) Preelaborable_Initialization(chars_ptr);],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00276-01]}
    @key(type) @AdaTypeDefn{chars_ptr_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @Chg{Version=[2],New=[@key(aliased) ],Old=[]}chars_ptr;

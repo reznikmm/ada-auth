@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2005/10/08 06:29:18 $ $Author: Randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2005/10/11 06:12:46 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/10/08 06:29:18 $}
+@Comment{$Date: 2005/10/11 06:12:46 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -245,7 +245,7 @@ Containers has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key{end} Ada.Containers;]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-02]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Hash_Type represents the range of the result of a
 hash function. Count_Type represents the (potential or actual) number of
 elements of a container.]}

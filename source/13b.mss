@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:51 $}
+@Comment{$Date: 2005/10/11 06:12:42 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @LabeledClause{The Package System}
 
@@ -1779,7 +1779,7 @@ the coextension;]}
 @ChgAdded{Version=[2],Text=[For other access discriminants and access
 parameters, the storage pool should be created at the point of the
 @nt{allocator}, and be reclaimed when the allocated object becomes
-inaccessible.]}
+inaccessible;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
 @ChgAdded{Version=[2],Text=[Otherwise, a default storage pool should be
@@ -4367,12 +4367,12 @@ because the @nt{attribute_representation_clause} has been generalized.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
-  that both operational and representation attributes must be specified before
+  both operational and representation attributes must be specified before
   the type is frozen.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
   @ChgAdded{Version=[2],Text=[Added wording that declaring a specific
-  descendant of an interface type is freezes it.]}
+  descendant of an interface type freezes the interface type.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
   @ChgAdded{Version=[2],Text=[Added wording that defines when a tag is created

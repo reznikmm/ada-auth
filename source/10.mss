@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:49 $}
+@Comment{$Date: 2005/10/11 06:12:40 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1271,7 +1271,7 @@ generic instance, or a renaming.]]}
   @RefSecNum{Environment-Level Visibility Rules}.]}
 @end{TheProof}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06],ARef=[AI95-00412-06]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06],ARef=[AI95-00412-01]}
 @ChgAdded{Version=[2],Text=[A @nt{limited_with_clause} shall not appear on a
 @nt{library_unit_body}, @nt{subunit}, or @nt{library_unit_renaming_declaration}.]}
 

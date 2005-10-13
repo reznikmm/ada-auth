@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/10/08 06:29:15 $}
+@Comment{$Date: 2005/10/11 06:12:38 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2010,7 +2010,7 @@ these.]}
   of a preexisting object (which would imply copying).]}
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-02]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is class-wide,
 the accessibility level of the type of the @nt{expression} of the return
 statement shall not be statically deeper than that of the master that

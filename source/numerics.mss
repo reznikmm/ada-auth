@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2005/10/08 06:29:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2005/10/11 06:12:44 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/10/08 06:29:17 $}
+@Comment{$Date: 2005/10/11 06:12:44 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -672,7 +672,7 @@ following conventions:
    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00185-01]}
    The @Chg{Version=[2],New=[],Old=[real (resp., ]}imaginary@Chg{Version=[2],
    New=[],Old=[)]} component of the result of the Arcsin@Chg{Version=[2],
-   New=[,],Old=[ and]} Arccos@Chg{Version=[2],New=[],Old=[(resp.]}, Arctanh@Chg{Version=[2],
+   New=[,],Old=[ and]} Arccos@Chg{Version=[2],New=[ and],Old=[(resp.]}, Arctanh@Chg{Version=[2],
    New=[],Old=[)]} functions is discontinuous as the parameter X crosses the
    real axis to the left of @en@;1.0 or the right of 1.0.
 
@@ -724,7 +724,8 @@ function, the branch cuts should be invariant by reflection in the origin.]}
 @end{Discussion}
 
 @Leading@;The computed results of the mathematically multivalued functions are rendered
-single-valued by the following conventions, which are meant to imply the
+single-valued by the following conventions, which are meant to imply
+@Chg{Version=[2],New=[that ],Old=[]}the
 principal branch@Chg{Version=[2],New=[ is an analytic continuation of
 the corresponding real-valued function in
 Ada.Numerics.Generic_Elementary_Functions. (For Arctan and Arccot,
@@ -2044,11 +2045,13 @@ angle threshold.}
    implementation has to maintain during argument reduction.
 @end{ImplNote}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
 The prescribed results specified in @RefSecNum{Elementary Functions} for certain
 functions at particular parameter values take precedence over the maximum
 relative error bounds; effectively, they narrow to a single value the result
 interval allowed by the maximum relative error bounds. Additional rules with a
-similar effect are given by the table below for the inverse trigonometric
+similar effect are given by @Chg{Version=[2],New=[],Old=[the ]}table
+@Chg{Version=[2],New=[G-1],Old=[below]} for the inverse trigonometric
 functions, at particular parameter values for which the mathematical result is
 possibly not a model number of @i{EF}.Float_Type (or is, indeed, even
 transcendental). In each table entry, the values of the parameters are such
@@ -2075,7 +2078,7 @@ relative error bounds, effectively narrowing the result interval allowed by
 them.
 
 @Table[Columns=<5>,
-Caption=<@b{Tightly Approximated Elementary Function Results}>,
+Caption=<@b{@Chg{Version=[2],New=[Table G-1: ],Old=[]}Tightly Approximated Elementary Function Results}>,
 Headers=<@b{Function}@\@b{Value of X}@\@b{Value of Y}@\@b{Exact Result @*when Cycle @*Specified}@\@b{Exact Result @*when Cycle @*Omitted}>,
 Body=<Arcsin@\1.0@\n.a.@\Cycle/4.0@\@Pi/2.0
 Arcsin@\@en@;1.0@\n.a.@\@en@R[Cycle]/4.0@\@en@Pi/2.0
@@ -2411,7 +2414,8 @@ otherwise,
    False.}
 @end{itemize}
 
-The error bounds for particular complex functions are tabulated below.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
+The error bounds for particular complex functions are tabulated @Chg{Version=[2],New=[in table G-2],Old=[below]}.
 In the table, the error bound is given as the coefficient of
 @i{CT}.Real'Model_Epsilon.
 
@@ -2435,7 +2439,7 @@ complex elementary functions for parameters (or components thereof) beyond
 the angle threshold.}
 
 @Table[Columns=<4>,
-Caption=<@b{Error Bounds for Particular Complex Functions}>,
+Caption=<@b{@Chg{Version=[2],New=[Table G-2: ],Old=[]}Error Bounds for Particular Complex Functions}>,
 Headers=<@b{Function or Operator}@\@b{Nature of @*Result}@\@b{Nature of @*Bound}@\@b{Error Bound}>,
 Body=<Modulus@\real@\max. rel. error@\3.0
 Argument@\real@\max. rel. error@\4.0
@@ -2547,10 +2551,13 @@ are also provided as children of Numerics.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[These packages provide facilities that are
-  similar to and replace those found in IEC/ISO 13813:1998. (The other
-  facilities provided by that Standard were already provided in Ada 95.) In
-  addition to the main facilities of that Standard, these packages also include
-  subprograms for the solution of linear equations, matrix inversion,
+  similar to and replace those found in ISO/IEC 13813:1998
+  @i{Information technology @em Programming languages @em
+  Generic packages of real and complex type declarations and basic
+  operations for Ada (including vector and matrix types)}.
+  (The other facilities provided by that Standard were already provided in Ada
+  95.) In addition to the main facilities of that Standard, these packages also
+  include subprograms for the solution of linear equations, matrix inversion,
   determinants, and the determination of the eigenvalues and eigenvectors of
   real symmetric matrices and Hermitian matrices.]}
 @end{Discussion}
@@ -2940,6 +2947,26 @@ scalar Right. The index ranges of the result are those of Left.]}
 solving a single set of linear equations. The index range of the result is
 A'Range(2). Constraint_Error is raised if A'Length(1), A'Length(2), and X'Length
 are not equal. Constraint_Error is raised if the matrix A is ill-conditioned.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The text says that Y is such that @lquotes@;X is
+  (nearly) equal to A * Y@rquotes rather than @lquotes@;X is equal to A *
+  Y@rquotes because rounding errors may mean that there is no value of Y such
+  that X is exactly equal to A * Y. On the other hand it does not mean that any
+  old rough value will do. The algorithm given under @ImplAdviceTitle
+  should be followed.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The requirement to raise Constraint_Error if the
+  matrix is ill-conditioned is really a reflection of what will happen if the
+  matrix is ill-conditioned. See @ImplAdviceTitle.
+  We do not make any attempt to define ill-conditioned formally.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[These remarks apply to all versions of Solve and
+  Inverse.]}
+@end{Discussion}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3971,6 +3998,26 @@ those of Left.]}
 solving a single set of linear equations. The index range of the result is
 A'Range(2). Constraint_Error is raised if A'Length(1), A'Length(2), and X'Length
 are not equal. Constraint_Error is raised if the matrix A is ill-conditioned.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The text says that Y is such that @lquotes@;X is
+  (nearly) equal to A * Y@rquotes rather than @lquotes@;X is equal to A *
+  Y@rquotes because rounding errors may mean that there is no value of Y such
+  that X is exactly equal to A * Y. On the other hand it does not mean that any
+  old rough value will do. The algorithm given under @ImplAdviceTitle
+  should be followed.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The requirement to raise Constraint_Error if the
+  matrix is ill-conditioned is really a reflection of what will happen if the
+  matrix is ill-conditioned. See @ImplAdviceTitle.
+  We do not make any attempt to define ill-conditioned formally.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[These remarks apply to all versions of Solve and
+  Inverse.]}
+@end{Discussion}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

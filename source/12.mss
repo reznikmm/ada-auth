@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:50 $}
+@Comment{$Date: 2005/10/11 06:12:41 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -3103,7 +3103,7 @@ an instantiation of a package with formal packages:}]}
                                                            Element_Type => Symbol_Info);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key[package] String_Info @key[is new] Generic_Join(Mapping_1 => String_Table,
+@ChgAdded{Version=[2],Text=[   @key[package] String_Info @key[is new] Ordered_Join(Mapping_1 => String_Table,
                                            Mapping_2 => Symbol_Table);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

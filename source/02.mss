@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/10/01 05:45:30 $}
+@Comment{$Date: 2005/10/11 06:12:37 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1689,7 +1689,7 @@ informative annex.
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Type=[Leading],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00284-02],ARef=[AI95-00395-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00284-02],ARef=[AI95-00395-01]}
 @ChgNote{The table of words has no paragraph number, so we need to put the
 change here}
 @Leading

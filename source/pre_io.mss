@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:30 $}
+@Comment{$Date: 2005/10/11 06:12:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2212,13 +2212,13 @@ Old=[procedures]} are provided:
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Type=[Trailing],Text=[Constraint_Error is raised if the
-  length of line exceeds Positive'Last; in the case, the line number and page
+  length of the line exceeds Positive'Last; in this case, the line number and page
   number are unchanged, and the column number is unspecified but no less than
   it was before the call.@PDefn{unspecified} The exception End_Error is
   propagated if an attempt is made to skip a file terminator.]}
 
   @begin{Ramification}
-    @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
     @ChgAdded{Version=[2],Text=[Precisely what is left in the file is unspecified
     if Constraint_Error is raised because the line doesn't fit in a String; it
     should be consistent with column number. This allows implementers to use

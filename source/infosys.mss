@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2005/10/08 06:29:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2005/10/11 06:12:44 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2005/10/08 06:29:16 $}
+@Comment{$Date: 2005/10/11 06:12:44 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -202,7 +202,7 @@ to the expression Dividend/Divisor.
 The child packages Text_IO.Editing@Chg{Version=[2],New=[,],Old=[ and]}
 Wide_Text_IO.Editing@Chg{Version=[2],New=[, and Wide_Wide_Text_IO.Editing],Old=[]}
 provide localizable formatted text
-output, known as @i{edited output} @Defn{edited output},
+output, known as @i{edited output}@Defn{edited output},
 for decimal types. An edited
 output string is a function of a numeric value, program-specifiable
 locale elements, and a format control value. The numeric value is of

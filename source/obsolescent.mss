@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/10/08 06:29:23 $}
+@Comment{$Date: 2005/10/11 06:12:51 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -117,7 +117,7 @@ occurrences.
   Value@Chg{Version=[2],New=[,],Old=[ and]}
   Wide_Value@Chg{Version=[2],New=[, and Wide_Wide_Value],Old=[]} attributes,
   and in the Get procedures of Text_IO@Chg{Version=[2],New=[ (and Wide_Text_IO
-  and Wide_Wide_Text_IO as well)]},
+  and Wide_Wide_Text_IO as well)],Old=[]}},
   so that things like @lquotes@;16:.123:@rquotes@; is acceptable.
 @end{Honest}
 
@@ -652,15 +652,15 @@ via an @nt{attribute_definition_clause}.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[Pragma Suppress can be used to suppress checks on
-specific entities.],Old=[]}
+@ChgAdded{Version=[2],Text=[Pragma Suppress can be used to suppress checks on
+specific entities.]}
 @end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The form of a specific
-Suppress pragma is as follows:]}
+Suppress @nt{pragma} is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -671,70 +671,72 @@ Old=<>}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[The identifier shall be the name of a check (see
+@ChgAdded{Version=[2],Text=[The identifier shall be the name of a check (see
 @RefSecNum{Suppressing Checks}). The name shall
-statically denote some entity.],Old=[]}
+statically denote some entity.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[For a specific Suppress pragma that is immediately within
-a @nt{package_specification}, the name shall denote an entity (or several
-overloaded subprograms) declared immediately within the
-@nt{package_specification}.],Old=[]}
+@ChgAdded{Version=[2],Text=[For a specific Suppress @nt{pragma} that is
+immediately within a @nt{package_specification}, the name shall denote an
+entity (or several overloaded subprograms) declared immediately within the
+@nt{package_specification}.]}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[A specific Suppress pragma applies to the named check
-from the place of the pragma to the end of the innermost enclosing declarative
-region, or, if the pragma is given in a package_specification, to the end of
-the scope of the named entity. The pragma applies only to the named entity, or,
-for a subtype, on objects and values of its type. A specific Suppress pragma
-suppresses the named check for any entities to which it applies (see
-@RefSecNum{Suppressing Checks}). Which checks are associated with a specific
-entity is not defined by this International Standard.],Old=[]}
+@ChgAdded{Version=[2],Text=[A specific Suppress @nt{pragma} applies to the
+named check from the place of the @nt{pragma} to the end of the innermost
+enclosing declarative region, or, if the @nt{pragma} is given in a
+@nt{package_specification}, to the end of the scope of the named entity. The
+@nt{pragma} applies only to the named entity, or, for a subtype, on objects and
+values of its type. A specific Suppress @nt{pragma} suppresses the named check
+for any entities to which it applies (see @RefSecNum{Suppressing Checks}).
+Which checks are associated with a specific entity is not defined by this
+International Standard.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @begin{Discussion}
-@Chg{Version=[2],New=[The language doesn't specify exactly which entities
-control whether a check is performed. For example, in],Old=[]}
+@ChgAdded{Version=[2],Text=[The language doesn't specify exactly which entities
+control whether a check is performed. For example, in]}
 @begin{Example}
 @Chg{Version=[2],New=[@key{pragma} Suppress (Range_Check, On => A);
 A := B;],Old=[]}
 @end{Example}
-@Chg{Version=[2],New=[whether or not the range check is performed is not
+@ChgAdded{Version=[2],Text=[whether or not the range check is performed is not
 specified. The compiler may require that checks are suppressed on B or on the
-type of A in order to omit the range check.],Old=[]}
+type of A in order to omit the range check.]}
 @end{Discussion}
 @end{StaticSem}
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[An implementation is allowed to place restrictions on
-specific Suppress pragmas.],Old=[]}
+@ChgAdded{Version=[2],Text=[An implementation is allowed to place restrictions on
+specific Suppress @nt{pragma}s.]}
 @end{ImplPerm}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[An implementation may support a similar On parameter on
-pragma Unsuppress (see @RefSecNum{Suppressing Checks}).],Old=[]}
+@ChgAdded{Version=[2],Text=[An implementation may support a similar On parameter on
+@nt{pragma} Unsuppress (see @RefSecNum{Suppressing Checks}).],Old=[]}
 @end{Notes}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[This clause is new. This feature was moved here
-because it is important for pragma Unsuppress that there be an unambiguous
-meaning for each checking pragma. For instance, in the example],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
+  @ChgAdded{Version=[2],Text=[This clause is new. This feature was moved here
+  because it is important for pragma Unsuppress that there be an unambiguous
+  meaning for each checking pragma. For instance, in the example]}
 @begin{Example}
-@Chg{Version=[2],New=[@key{pragma} Suppress (Range_Check);
+@ChgAdded{Version=[2],Text=[@key{pragma} Suppress (Range_Check);
 @key{pragma} Unsuppress (Range_Check, On => A);
-A := B;],Old=[]}
+A := B;]}
 @end{Example}
-@Chg{Version=[2],New=[the user needs to be able to depend on the range check
-being made on the assignment. But a compiler survey showed that the
-interpretation of this feature varied widely; trying to define this carefully
-was likely to cause a lot of user and implementer pain. Thus the feature was
-moved here, to emphasize that its use is not portable.],Old=[]}
+  @ChgAdded{Version=[2],Text=[the user needs to be able to depend on the range check
+  being made on the assignment. But a compiler survey showed that the
+  interpretation of this feature varied widely; trying to define this carefully
+  was likely to cause a lot of user and implementer pain. Thus the feature was
+  moved here, to emphasize that its use is not portable.]}
 @end{DiffWord95}
+
 
 @LabeledAddedClause{Version=[2],Name=[The Class Attribute of Untagged Incomplete Types]}
 
@@ -773,9 +775,9 @@ could be anywhere). Pity we didn't think of it in 1994.],Old=[]}
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
-@Chg{Version=[2],New=[In addition to an identifier, the reserved word
+@ChgAdded{Version=[2],Text=[In addition to an identifier, the reserved word
 @key{interface} is allowed as a pragma name, to provide compatibility with a prior
-edition of the International Standard.],Old=[]}
+edition of this International Standard.]}
 @end{SyntaxText}
 @end{Syntax}
 

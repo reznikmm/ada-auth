@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2005/10/08 06:29:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2005/10/11 06:12:43 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/10/08 06:29:16 $}
+@Comment{$Date: 2005/10/11 06:12:43 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -543,8 +543,8 @@ within the visible part of the library unit;
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}
-@Chg{Version=[2],New=[],Old=[if ]}the full view of a type declared in
-the visible part of the
+@Chg{Version=[2],New=[],Old=[if ]}the full view of @Chg{Version=[2],New=[each],Old=[a]}
+type declared in the visible part of the
 library unit @Chg{Version=[2],New=[shall support external streaming (see
 @RefSecNum{Stream-Oriented Attributes})], Old=[has a part that is of a
 non-remote access type, then that access type, or the type of some
@@ -628,7 +628,7 @@ access-to-class-wide type@Chg{Version=[2],New=[. A],Old=[; a]} remote
 access-to-class-wide type shall not be an actual parameter for a generic
 formal access type@Chg{New=[.],Old=[;]}@Chg{Version=[2],New=[ The Storage_Size
 attribute of a remote access-to-class-wide type yields 0; it is not allowed in
-an attribute_definition_clause.],Old=[]}
+an @nt{attribute_definition_clause}.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised]}
   All three of these restrictions are because

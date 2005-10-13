@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/10/02 06:53:30 $}
+@Comment{$Date: 2005/10/11 06:12:39 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 
@@ -900,7 +900,7 @@ a named protected object of that type.
 @Syn{lhs=<protected_type_declaration>,rhs="
   @key{protected} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] @key{is}@Chg{Version=[2],New=<
      [@key{new} @Syn2{interface_list} @key{with}]
-    >,Old=<>} @Syn2{protected_definition}];"}
+    >,Old=<>} @Syn2{protected_definition};"}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00399-01]}

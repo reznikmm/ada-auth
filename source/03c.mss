@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:43 $}
+@Comment{$Date: 2005/10/11 06:12:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3816,7 +3816,6 @@ which reflect the run-time nesting of @i{masters}. As explained in
 a master is the execution of a
 @Chg{Version=[2],New=[certain construct, such as],Old=[,@nt{task_body}, a @nt{block_statement},]}
 a @nt{subprogram_body}@Chg{Version=[2],New=[],Old=[, an @nt{entry_body}, or an @nt{accept_statement}]}.
-
 An accessibility level is @i{deeper than} another if it is more
 deeply nested at run time.
 For example, an object declared local to a called subprogram has a deeper
