@@ -12,7 +12,7 @@ I probably ought to add a style just for this purpose)
 
 @begin{Wide}
 @noparanum@leading@tabclear()@tabset(P45)
-@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200Y], Old=[]}}]>
+@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:@Chg{Version=[2],New=[200y(E), Ed. 3],Old=[@Chg{Version=[1], New=[1995(E) with COR.1:2001], Old=[]}]}}]>
 @end{Wide}
 
 @thickline
@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/09/30 05:33:42 $}
+@Comment{$Date: 2005/10/13 05:15:34 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1721,7 +1721,8 @@ Corrigendum 1:2001 and Technical Corrigendum 2:2004],Old=[]}.
   @ChgAdded{Version=[2],Text=[Unlike Fortran and COBOL, which added the
   @i{Information technology} prefix to the titles of their standard, C did
   not. This was confirmed in the list of standards titles on the ISO web site.
-  No idea why ISO allowed that, or whether C is planning to secede from SC22.]}
+  No idea why ISO allowed that@Comment{, or whether C is planning to secede
+  from SC22}.]}
 @end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001],ARef=[AI95-00124-01]}

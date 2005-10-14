@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:42 $}
+@Comment{$Date: 2005/10/13 05:15:44 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @LabeledClause{The Package System}
 
@@ -1358,23 +1358,24 @@ parameter.
 There is no Unchecked_Access attribute for subprograms.
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
-  Such an attribute would allow @Chg{Version=[2],New=[unstructured ],
+  Such an attribute would allow @Chg{Version=[2],New=[unsafe ],
   Old=[]}@lquotes@;downward closures@rquotes@;,
   where an access value designating a more nested subprogram is passed
   to a less nested subprogram.@Chg{Version=[2],New=[ (Anonymous
-  access-to-subprogram parameters provide structured
+  access-to-subprogram parameters provide safe
   @lquotes@;downward closures@rquotes@;.)],Old=[]}
   This requires some means of reconstructing the global environment for
   the more nested subprogram,
   so that it can do up-level references to objects.
   The two methods of implementing up-level references are displays and
   static links.
-  If @Chg{Version=[2],New=[unstructured ],Old=[]}downward closures were
+  If @Chg{Version=[2],New=[unsafe ],Old=[]}downward closures were
   supported,
   each access-to-subprogram value would have to carry the static link
   or display with it.
   @Chg{Version=[2],New=[We don't want to require the space and time
-  overhead of requiring the extra information, especially as including it
+  overhead of requiring the extra information for all access-to-subprogram
+  types, especially as including it
   would make interfacing to other languages (like C) harder],Old=[In the case
   of displays, this was judged to be infeasible,
   and we don't want to disrupt implementations by forcing them
@@ -1791,8 +1792,8 @@ a storage pool need not support deallocation of individual objects.]}
 Text=[Usually, a storage pool for an access discriminant or access parameter
 should be created at the point of an @nt{allocator}, and be reclaimed when
 the designated object becomes inaccessible. For other anonymous access types,
-the pool should be created at the where the type is elaborated and need not
-support deallocation of individual objects.]}]}
+the pool should be created at the point where the type is elaborated and need
+not support deallocation of individual objects.]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
@@ -4359,7 +4360,7 @@ because the @nt{attribute_representation_clause} has been generalized.
   Most importantly, implicit calls are now freezing, which make some
   representation clauses illegal in Ada 2005 that were legal (but dubious) in
   Ada 95. Similarly, Ada 2005 says that the primitive subprograms of a specific
-  tagged type are frozen when type is frozen, preventing dubious convention
+  tagged type are frozen when the type is frozen, preventing dubious convention
   changes (and address clauses) after the freezing point. In both cases, the
   code is dubious and the workaround is easy.]}
 @end{Incompatible95}
@@ -4377,6 +4378,6 @@ because the @nt{attribute_representation_clause} has been generalized.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
   @ChgAdded{Version=[2],Text=[Added wording that defines when a tag is created
   for a type (at the freezing point of the type). This is used to specify
-  checking for uncreated tags.]}
+  checking for uncreated tags (see @RefSecNum{Tagged Types and Type Extensions}).]}
 @end{DiffWord95}
 

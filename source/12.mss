@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:41 $}
+@Comment{$Date: 2005/10/13 05:15:42 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2507,8 +2507,8 @@ Generic formal subprograms are like renames of the @nt{explicit_generic_actual_p
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
 @Syn{lhs=<formal_subprogram_declaration>,rhs="@Chg{Version=[2],
-New=<@Syn2{formal_abstract_subprogram_declaration}
-    | @Syn2{formal_concrete_subprogram_declaration}>,
+New=<@Syn2{formal_concrete_subprogram_declaration}
+    | @Syn2{formal_abstract_subprogram_declaration}>,
 Old=<@key{with} @Syn2{subprogram_specification} [@key{is} @Syn2{subprogram_default}];>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
@@ -2693,14 +2693,14 @@ corresponding to the controlling type.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{generic}
-   @key{type} NT(<>) @key{is new} T {with private};
+   @key{type} NT(<>) @key{is new} T @key{with private};
    -- @RI[Presume that T has the following primitive operation:]
    -- @key{with procedure} Bar (Obj : @key{in} T);
 @key{package} Gr ...]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package body} Gr @key{is}
-   @key{package} New_P2 @key{is new} P (NT, Foo => Bar);]}
+   @key{package} New_P2 @key{is new} P (NT, Foo => Bar);
 @key{end} Gr;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2716,7 +2716,7 @@ corresponding to the controlling type.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Note that this legality rule never needs to be
-  rechecked in an instance (in which an instantiation is nested). The rule
+  rechecked in an instance (that contains a nested instantiation). The rule
   only talks about the actual type of the instantiation; it does not require
   looking further; if the actual type is in fact a formal type, we do not
   intend looking at the actual for that formal.]}

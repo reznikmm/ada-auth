@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:21 $}
+@Comment{$Date: 2005/10/13 05:15:35 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -428,7 +428,7 @@ of @i(component) values.
 @ToGlossary{Term=<Elementary type>,
   Text=<An elementary type does not have components.>}
 @ToGlossary{Term=<Composite type>,
-  Text=<A composite type has components.>}
+  Text=<A composite type @Chg{Version=[2],New=[may have],Old=[has]} components.>}
 @ToGlossary{Term=<Scalar type>,
   Text=<A scalar type is either a discrete type or a real type.>}
 @ToGlossary{Term=<Access type>,
@@ -1354,7 +1354,7 @@ The description of S'Base has been moved to
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added wording to include access result types
-  in the kinds of operations that operation on a type T.]}
+  in the kinds of operations that operate on a type T.]}
 @end{DiffWord95}
 
 
@@ -1682,7 +1682,7 @@ protected type.
 A component of an object is said to
 @i{require late initialization} if it has an access discriminant value
 constrained by a per-object expression, or if it has an initialization
-expression which includes a name denoting the current instance of the type
+expression that includes a name denoting the current instance of the type
 or denoting an access discriminant.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2087,7 +2087,7 @@ without an initialization expression.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   A constant may have a limited type; the initialization @nt{expression}
-  has to be built in-place (see @RefSecNum{Limited Types}).]}
+  has to be built-in-place (see @RefSecNum{Limited Types}).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00385-01],ARef=[AI95-00406-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -3444,10 +3444,10 @@ S'Pred for a modular integer subtype wraps around
      with a single leading character that is either a minus sign or
      a space.]}
      @begin{ImplNote}
-         @ChgRef{Version=[2],Kind=[Added]}
+         @ChgRef{Version=[2],Kind=[AddedNormal]}
          @ChgAdded{Version=[2],Text=[
          If the machine supports negative zeros for signed integer types,
-         it is not specified whether "@en@;0" or " 0" should be returned
+         it is not specified whether "@ 0" or "@en@;0" should be returned
          for negative zero. We don't have enough experience with
          such machines to know what is appropriate, and what other
          languages do. In any case, the implementation should be
@@ -3468,10 +3468,10 @@ S'Pred for a modular integer subtype wraps around
      of the nongraphic character identified as @i(nul) is @lquotes@;NUL@rquotes@; @em the
      quotes are not part of the image).]}
      @begin{ImplNote}
-       @ChgRef{Version=[2],Kind=[Added]}
+       @ChgRef{Version=[2],Kind=[AddedNormal]}
        @ChgAdded{Version=[2],Text=[
        For an enumeration type T that has @lquotes@;holes@rquotes@;
-       (caused by an @nt{enumeration_representation_clause}),
+       (caused by an @nt{enumeration_@!representation_@!clause}),
        @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
        T'Wide_Image should raise Program_Error if the value
        is one of the holes (which is a bounded error anyway,
@@ -3495,19 +3495,19 @@ S'Pred for a modular integer subtype wraps around
      If S'Signed_Zeros is True, then the leading character is a minus
      sign for a negatively signed zero.]}
      @begin{Honest}
-       @ChgRef{Version=[2],Kind=[Added]}
+       @ChgRef{Version=[2],Kind=[AddedNormal]}
        @ChgAdded{Version=[2],Text=[
        Leading zeros are present in the exponent only if necessary to make
        the exponent at least two digits.]}
      @end{Honest}
      @begin{Reason}
-       @ChgRef{Version=[2],Kind=[Added]}
+       @ChgRef{Version=[2],Kind=[AddedNormal]}
        @ChgAdded{Version=[2],Text=[
        This image is intended to conform to that produced by
        Text_IO.Float_IO.Put in its default format.]}
      @end{reason}
      @begin{ImplNote}
-       @ChgRef{Version=[2],Kind=[Added]}
+       @ChgRef{Version=[2],Kind=[AddedNormal]}
        @ChgAdded{Version=[2],Text=[The rounding direction is specified here
        to ensure portability of output results.]}
      @end{implnote}
@@ -3522,19 +3522,19 @@ S'Pred for a modular integer subtype wraps around
      a decimal point, and S'Aft (see @RefSecNum(Operations of Fixed Point Types))
      digits after the decimal point.]}
      @begin{Reason}
-       @ChgRef{Version=[2],Kind=[Added]}
+       @ChgRef{Version=[2],Kind=[AddedNormal]}
        @ChgAdded{Version=[2],Text=[This image is intended to conform to
        that produced by Text_IO.Fixed_IO.Put.]}
      @end{reason}
      @begin{ImplNote}
-       @ChgRef{Version=[2],Kind=[Added]}
+       @ChgRef{Version=[2],Kind=[AddedNormal]}
        @ChgAdded{Version=[2],Text=[The rounding direction is specified here
        to ensure portability of output results.]}
      @end{implnote}
      @begin{ImplNote}
-       @ChgRef{Version=[2],Kind=[Added]}
+       @ChgRef{Version=[2],Kind=[AddedNormal]}
        @ChgAdded{Version=[2],Text=[For a machine that supports negative zeros,
-       it is not specified whether "@en@;0.000" or " 0.000" is returned.
+       it is not specified whether "@ 0.000" or "@en@;0.000" is returned.
        See corresponding comment above about integer types with
        signed zeros.]}
      @end{implnote}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/01 05:45:33 $}
+@Comment{$Date: 2005/10/13 05:15:43 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1078,8 +1078,9 @@ Some of the more stringent requirements are moved to
   items, and to suggest that they should always be supported. Clarified the
   representation of an object (with great difficulty reaching agreement).
   Added wording to say that representation items on aliased and by-reference
-  objects never need be supported if they would not be implementable even
-  if other recommended level of support says otherwise.]}
+  objects never need be supported if they would not be implementable
+  without distributed overhead even if other recommended level of support
+  says otherwise.]}
 @end{DiffWord95}
 
 
@@ -1139,7 +1140,7 @@ a @nt{pragma} Pack.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[If a packed type has a component, which is not of a
+@ChgAdded{Version=[2],Text=[If a packed type has a component that is not of a
 by-reference type and has no aliased part, then such a component need not be
 aligned according to the Alignment of its subtype; in particular it
 need not be allocated on a storage element boundary.]}

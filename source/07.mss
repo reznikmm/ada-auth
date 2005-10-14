@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:25 $}
+@Comment{$Date: 2005/10/13 05:15:40 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -50,11 +50,13 @@ then this sequence of lexical elements shall repeat the
 @end{Syntax}
 
 @begin{Legality}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
 @PDefn2{Term=[requires a completion], Sec=(@nt{package_declaration})}
 @PDefn2{Term=[requires a completion], Sec=(@nt{generic_package_declaration})}
 A @nt{package_declaration} or @nt{generic_package_declaration}
 requires a completion @Redundant[(a body)]
-if it contains any @nt<declarative_item> that requires a completion,
+if it contains any @Chg{Version=[2],New=[@nt{basic_declarative_item}],
+Old=[@nt<declarative_item>]} that requires a completion,
 but whose completion is not in its @nt{package_specification}.
 @begin(Honest)
   If an implementation supports it, a @nt{pragma} Import may substitute
@@ -63,13 +65,16 @@ but whose completion is not in its @nt{package_specification}.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
 @PDefn2{Term=[visible part], Sec=<of a package
 (other than a generic formal package)>}
-The first list of @nt{declarative_item}s of a
+The first list of @Chg{Version=[2],New=[@nt{basic_declarative_item}s],
+Old=[@nt{declarative_item}s]} of a
 @nt{package_specification} of a package other than a generic formal package
 is called the @i{visible part} of the package.
 @Redundant[@PDefn2{Term=[private part], Sec=(of a package)}
-The optional list of @nt{declarative_item}s after the reserved word
+The optional list of @Chg{Version=[2],New=[@nt{basic_declarative_item}s],
+Old=[@nt{declarative_item}s]} after the reserved word
 @key{private} (of any @nt{package_specification}) is called the
 @i{private part} of the package.
 If the reserved

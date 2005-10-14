@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:22 $}
+@Comment{$Date: 2005/10/13 05:15:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @LabeledClause{Array Types}
 
@@ -783,7 +783,8 @@ are indefinite subtypes.]
   with the discriminant are tied together for their lifetime.
   They should be allocated out of the same storage pool,
   and then at the end of the lifetime of the enclosing object, finalized
-  and reclaimed together.]}
+  and reclaimed together. In this case, the allocated object is called
+  a coextension (see @RefSecNum{Operations of Access Types}).]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The above principles when applied to a
@@ -804,7 +805,7 @@ are indefinite subtypes.]
   "@key{subtype} Constr @key{is} Rec(Acc_Discrim => @key{new} T);"
   or if such an @nt{allocator} appears in the @nt{subtype_indication} for
   a component, the allocator is evaluated when the @nt{subtype_indication}
-  is elaborated, and hence its lifetime is typically longer then
+  is elaborated, and hence its lifetime is typically longer than
   the objects or components that will later be subject to the
   constraint. In these cases, the allocated object should not
   be reclaimed until the @nt{subtype_indication} goes out of scope.]}
@@ -1029,8 +1030,8 @@ instance of a generic unit.@PDefn{generic contract issue}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
-    but access discriminants may not have defaults. All types have special
-    accessibility. This get rid of the problems on assignment (you couldn't
+    but access discriminants cannot have defaults. All types have special
+    accessibility. This gets rid of the problems on assignment (you couldn't
     change such a discriminant), but it would be horribly incompatible with
     Ada 95.]}
 

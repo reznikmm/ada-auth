@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:37 $}
+@Comment{$Date: 2005/10/13 05:15:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -52,13 +52,13 @@ be static, at the cost of indirect access.)]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[If the tagged type is descended from any interface
-types, it also will need to include a @lquotes@;subtag@rquotes@; that describes
-the mapping of the primitive operations of the interface to the
-primitives of the type. These subtags could directly reference the primitive operations (for
-faster performance), or simply provide the tag @lquotes@;slot@rquotes@; numbers
-for the primitive operations (for easier derivation). In either case, the
-subtags would be used for calls that dispatch through a class-wide type of the
-interface.]}
+types, it also will need to include @lquotes@;subtags@rquotes@; (one for
+each interface) that describe the mapping of the primitive operations of the
+interface to the primitives of the type. These subtags could directly reference
+the primitive operations (for faster performance), or simply provide the tag
+@lquotes@;slot@rquotes@; numbers for the primitive operations (for easier
+derivation). In either case, the subtags would be used for calls that dispatch
+through a class-wide type of the interface.]}
 
 Other implementation models are possible.
 
@@ -138,7 +138,7 @@ and inherited primitive subprograms may be overridden.]
 @Defn2{Term=[extension], Sec=(of a type)}
 The derived type is called an @i(extension)
 of @Chg{Version=[2],New=[its],Old=[the]} ancestor
-@Chg{Version=[2],New=[type(s)],Old=[type]}, or simply a @i(type
+@Chg{Version=[2],New=[types],Old=[type]}, or simply a @i(type
 extension).@Chg{Version=[2],New=[],Old=[ @Defn2{Term=[extension], Sec=(of a record type)}
 @Defn{private extension}
 @Defn2{Term=[extension], Sec=(of a private type)}
@@ -442,9 +442,9 @@ created.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
 @ChgAdded{Version=[2],Text=[The function Is_Descendant_At_Same_Level returns
-True if Descendant tag identifies a type that is both a descendant of the type
-identified by Ancestor and at the same accessibility level. If not, it returns
-False.]}
+True if the Descendant tag identifies a type that is both a descendant of the
+type identified by Ancestor and at the same accessibility level. If not, it
+returns False.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -482,6 +482,12 @@ a null array is returned.]]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The result of Interface_Ancestor_Tags includes the
 tag of the parent type, if the parent is an interface.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Indirect interface ancestors are included in the
+result of Interface_Ancestor_Tags. That's because where an interface appears
+in the derivation tree has no effect on the semantics of the type; the only
+interesting property is whether the type has an interface.]}
 @end{Ramification}
 
 For @PrefixType{every subtype S of a tagged type @i(T)
@@ -665,7 +671,7 @@ tag passed is No_Tag.]}
 @ChgAdded{Version=[2],Text=[An instance of Tags.Generic_Dispatching_Constructor
 raises Tag_Error if The_Tag does not represent a concrete descendant of T.
 Otherwise, it dispatches to the primitive function denoted by the formal
-Constructor for the type identified by the tag The_Tag, passing Params, and
+Constructor for the type identified by The_Tag, passing Params, and
 returns the result. Any exception raised by the function is propagated.]}
 
 @begin{Ramification}
@@ -838,10 +844,10 @@ Tagged types are a new concept.
   because identifiers can now contain characters outside of Latin-1.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00417-01]}
-  @ChgAdded{Version=[2],Text=[We now define the lower bound of the string
+  @ChgAdded{Version=[2],Text=<We now define the lower bound of the string
   returned from [[Wide_]Wide_]Expanded_Name and External_Name. This makes
   working with the returned string easier, and is consistent with many other
-  string-returning functions in Ada.]}
+  string-returning functions in Ada.>}
 
 @end{DiffWord95}
 
@@ -958,7 +964,7 @@ as in the following example:
 @ChgRef{Version=[2],Kind=[Revised]}
 @key[package] P @key[is]
     @key[type] T @key[is] @key[tagged] @key[null] @key[record];
-    @key[function] F @key[return] T; --@RI{ Inherited versions will @Chg{Version=[2],New=[need to be overridden],Old=[be abstract]}.}
+    @key[function] F @key[return] T; --@RI{ Inherited versions will @Chg{Version=[2],New=[require overriding],Old=[be abstract]}.}
 @key[end] P;
 
 @key[generic]
@@ -973,8 +979,8 @@ as in the following example:
     @key[type] NT2 @key[is] @key[new] NT @key[with] @key[null] @key[record]; --@RI{ Illegal!}
     @key[procedure] Q(X : @key[in] NT2) @key[is] @key[begin] @key[null]; @key[end] Q;
     --@RI{ Is this legal or not? Can't decide because}
-    --@RI{ we don't know whether TT had any functions that @Chg{Version=[2],New=[are shall-be-],Old=[go abstract]}}
-    --@RI{ @Chg{Version=[2],New=[overridden ],Old=[]}on extension.}
+    --@RI{ we don't know whether TT had any functions that @Chg{Version=[2],New=[require],Old=[go abstract]}}
+    --@RI{ @Chg{Version=[2],New=[overriding ],Old=[]}on extension.}
 @key[end] Gp;
 
 @key[package] I @key[is] @key[new] Gp(TT => P.T);
@@ -1401,7 +1407,7 @@ shall not have a @nt<default_expression>.]}
 @nt{subprogram_renaming_declaration} or the instantiation of a generic
 subprogram, any access parameter of the renamed subprogram or the generic
 subprogram that corresponds to a controlling access parameter of the
-dispatching operation, shall be have a subtype that excludes null.]}
+dispatching operation, shall have a subtype that excludes null.]}
 
 A given subprogram shall not be a dispatching operation of two
 or more distinct tagged types.
@@ -1721,7 +1727,7 @@ The concept of dispatching operations is new.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00404-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Ada 2005 requires that subprograms that are renamed or instantiated to be
-  dispatching operations have all controlling access parameters have subtypes
+  dispatching operations have all controlling access parameters to have subtypes
   that exclude null. (Since Ada 95 didn't have the notion of access subtypes
   that exclude null, it had no such rule.) This rule will require the addition
   of an explicit @key{not null} on nondispatching operations that are later
@@ -1958,7 +1964,7 @@ function with a controlling result, then:
     Old=[(if not overridden)]} because conversion
     from a parent type to a type extension is
     not defined, and function return semantics is defined in terms
-    of conversion@Chg{Version=[2],New=[ (other than for a null extension,
+    of conversion@Chg{Version=[2],New=[ (other than for a null extension;
     see below)],Old=[]}. (Note that parameters of mode @key{in out} or
     @key{out} do not have this problem, because the tag of the actual
     is not changed.)
@@ -2351,7 +2357,8 @@ derived from interfaces.]}
 @Chg{Version=[2],New=[@Redundant[An interface type has no components.]],Old=[]}
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-   @ChgAdded{Version=[2],Text=[This follows from the syntax.]}
+   @ChgAdded{Version=[2],Text=[This follows from the syntax and the fact that
+   discriminants are not allowed for interface types.]}
 @end{TheProof}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
@@ -2523,9 +2530,8 @@ Transfer (Cashier, Counter);
 the parent of a new type (as shown here), or can be used as a progenitor when a
 type is derived. In either case, the primitive operations of the
 interface are inherited. For Queue, the implementation of the four inherited
-routines must be provided. Inside the call of Transfer, dispatching calls to
-the implementations of Append and Remove_First for type Fast_Food_Queue will be
-made.]}
+routines must be provided. Inside the call of Transfer, calls will dispatch to
+the implementations of Append and Remove_First for type Fast_Food_Queue.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@i{Example of a task interface:}]}

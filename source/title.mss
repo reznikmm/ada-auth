@@ -1,13 +1,13 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.26 $ $Date: 2005/10/11 06:12:50 $}
+@comment{$Revision: 1.27 $ $Date: 2005/10/13 05:15:46 $}
 
 @begin{ISOOnly}
-@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[200y(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}}}}
 @end{ISOOnly}
 @begin{NotISO}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}@Chg{Version=[2], New=[ and AMD.1:200y], Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[2],New=[200y(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}}}}
 @end{NotISO}
 
 @Noparanum@ @*

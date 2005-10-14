@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:40 $}
+@Comment{$Date: 2005/10/13 05:15:41 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -689,15 +689,15 @@ Note that no special rule is needed for an
 will require semantic dependence upon the compilation unit containing
 the @nt{type_declaration} of interest.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[Unlike a full view of a unit, a limited view
-does not depend semantically on units mentioned in @nt{with_clause}s
-of the unit. This is necessary so that they can be useful for their
-intended purpose: allowing mutual dependences between units. The lack
-of semantic dependence limits the contents of a limited view to the
-items that can be determined solely from the syntax of the source of the
-unit, without any semantic analysis. That allows it to be created without
-the semantic dependences of a full unit.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@ChgAdded{Version=[2],Text=[Unlike a full view of a package, a limited view
+does not depend semantically on units mentioned in @nt{with_clause}s of the
+@nt{compilation_unit} that defines the package. This is necessary so that they
+can be useful for their intended purpose: allowing mutual dependences between
+packages. The lack of semantic dependence limits the contents of a limited view
+to the items that can be determined solely from the syntax of the source of the
+package, without any semantic analysis. That allows it to be created without
+the semantic dependences of a full package.]}
 @end{Discussion}
 @end{StaticSem}
 
@@ -982,8 +982,8 @@ unit depends, directly or indirectly. We try to avoid ripple effects because
 they make understanding and maintenance more difficult. However, ripple effects
 can occur because of direct visibility (as in child units); this seems
 impossible to eliminate. The ripple effect for @nt{with_clause}s is somewhat
-similar to the Beaujolais effect (see @nt{Use Clauses}) for @nt{use_clause}s,
-which we also try to avoid.]}
+similar to the Beaujolais effect (see @RefSecNum{Use Clauses}) for
+@nt{use_clause}s, which we also try to avoid.]}
 @end{MetaRules}
 
 @begin{Syntax}
@@ -1011,7 +1011,7 @@ of a unit visible.]}
 containing the reserved word @key{private} is called a @i{private with_clause}.
 It can be thought of as making items visible only in the private part, although
 it really
-makes items visible everywhere except the visible part. It can used both for
+makes items visible everywhere except the visible part. It can be used both for
 documentation purposes (to say that a unit is not used in the visible part),
 and to allow access to private units that otherwise would be
 prohibited.]}
@@ -1278,7 +1278,8 @@ generic instance, or a renaming.]]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00412-01]}
   @ChgAdded{Version=[2],Text=[We don't allow a @nt{limited_with_clause} on a
-  @nt{library_unit_renaming_declaration} because it would be useless. A
+  @nt{library_unit_renaming_declaration} because it would be useless and
+  therefore probably is a mistake. A
   renaming cannot appear in a @nt{limited_with_clause} (by the rule prior
   to this one), and a renaming of a limited view cannot appear in a
   @nt{nonlimited_with_clause} (because the name
@@ -1491,7 +1492,7 @@ definition in @RefSecNum{Use Clauses}.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The syntax rules for @nt{with_clause} also are modified to allow the reserved
+  The syntax rules for @nt{with_clause} are modified to allow the reserved
   word @key{private}. Private @nt{with_clause}s do not allow the use of their
   library item in the visible part of their @nt{compilation_unit}. They also
   allow using private units in more locations than in Ada 95.]}
@@ -1754,12 +1755,12 @@ declarations of library units visible
 The mechanisms for creating an environment
 and for adding and replacing compilation units within an environment
 are implementation defined.@Chg{Version=[2],New=[ The mechanisms for adding a
-unit mentioned in a @nt{limited_with_clause} to an
+compilation unit mentioned in a @nt{limited_with_clause} to an
 environment are implementation defined.],Old=[]}
 @ImplDef{The mechanisms for creating an environment
 and for adding and replacing compilation units.}
 @ChgImplDef{Version=[2],Kind=[Added],Text=[@Chg{Version=[2],New=[The
-mechanisms for adding a unit mentioned in a @nt{limited_with_clause}
+mechanisms for adding a compilation unit mentioned in a @nt{limited_with_clause}
 to an environment.],Old=[]}]}
 @begin{Ramification}
 The traditional model, used by most Ada 83 implementations,
@@ -1849,8 +1850,8 @@ achieved in this case, but the call is still legal.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[The second rule applies to limited views as well
-as the full view of a unit. That means that an implementation needs a way to
-enforce consistency of limited views, not just of full views.]}
+as the full view of a compilation unit. That means that an implementation needs
+a way to enforce consistency of limited views, not just of full views.]}
 @end{Ramification}
 @end{Legality}
 
@@ -2317,8 +2318,8 @@ The ancestor root @nt<library_item> is directly visible.
 @ChgAdded{Version=[2],Text=[@Defn{notwithstanding}
 Notwithstanding the rules of @RefSecNum(Selected Components),
 an expanded name in a @nt{with_clause}, a @nt{pragma} in a @nt{context_clause},
-or a @nt{pragma} that appears at the place of a compilation unit}
-may consist of a @nt<prefix> that denotes a generic package and
+or a @nt{pragma} that appears at the place of a compilation unit
+may consist of a @nt{prefix} that denotes a generic package and
 a @nt<selector_name> that denotes a child of that generic package.
 @Redundant[(The child is necessarily a generic unit;
 see @RefSecNum{Compilation Units - Library Units}.)]]}
@@ -2454,7 +2455,7 @@ library package.]}
   mention it in a @nt{with_clause}.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-  @ChgAdded{Version=[2],Text=[A unit is included in a partition even if the
+  @ChgAdded{Version=[2],Text=[A package is included in a partition even if the
   only reference to it is in a @nt{limited_with_clause}. While this isn't
   strictly necessary (no objects of types imported from such a unit can be
   created), it ensures that all incomplete types are eventually completed, and
@@ -3073,7 +3074,7 @@ units.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
 The creation of a@Chg{Version=[2],New=[n object @Redundant[(including a component)] of
-a type which does not have preelaborable initialization. Similarly, ],
+a type that does not have preelaborable initialization. Similarly, ],
 Old=[ default-initialized object @Redundant[(including
 a component)] of a descendant of a private type,
 private extension, controlled type,
@@ -3215,16 +3216,18 @@ initialization, or a record type whose components all have preelaborable
 initialization.]}
 @end{Itemize}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
 @ChgAdded{Version=[2],Text=[A @nt<pragma> Preelaborable_Initialization specifies that a type has
 preelaborable initialization. This pragma shall appear in the visible part
 of a package or generic package.]}
 
-@ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[If the pragma appears in the first list of declarative_items of a
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
+@ChgAdded{Version=[2],Text=[If the pragma appears in the first list of
+@nt{basic_declarative_item}s of a
 @nt<package_specification>, then the @nt<direct_name> shall denote the first
 subtype of a private type, private extension, or protected type without
-@nt<entry_declaration>s, and the type shall be declared within the same package
+@nt<entry_declaration>s, and the  type shall be declared immediately within
+the same package
 as the @nt<pragma>. If the @nt<pragma> is applied to a private type or a
 private extension, the full view of the type shall have preelaborable
 initialization. If the @nt<pragma> is applied to a protected type, each
@@ -3232,7 +3235,7 @@ component of the protected type shall have preelaborable initialization. In
 addition to the places where Legality Rules normally apply, these rules apply
 also in the private part of an instance of a generic unit.]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
 @ChgAdded{Version=[2],Text=[If the @nt<pragma> appears in a @nt<generic_formal_part>, then the
 @nt<direct_name> shall denote a generic formal private type or a generic formal
 derived type declared in the same @nt<generic_formal_part> as the @nt<pragma>.
@@ -3241,8 +3244,9 @@ preelaborable initialization.]}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Not only do protected types with entry_declarations
-and task types do not have preelaborable initialization, but they cannot have
+@ChgAdded{Version=[2],Text=[Not only do protected types with
+@nt{entry_declaration}s
+and task types not have preelaborable initialization, but they cannot have
 pragma Preelaborable_Initialization applied to them.]}
 @end{Ramification}
 @end{Legality}
@@ -3303,9 +3307,9 @@ evaluates such an @nt{allocator};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[the elaboration of the declaration of a named
-access-to-variable type for which the Storage_Size has not been specified by a
-static expression with value zero and is not defined by the language to be
-zero;]}
+access-to-variable type unless the Storage_Size of the type
+has been specified by a static expression with value zero or
+is defined by the language to be zero;]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3345,7 +3349,7 @@ expression other than a static expression with value zero.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
 @ChgAdded{Version=[2],Text=[
 The Storage_Size for an anonymous access-to-variable type declared at
-library level in an unit that is declared pure is defined to be zero.]}
+library level in a library unit that is declared pure is defined to be zero.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3403,8 +3407,8 @@ that isn't true of Ada 83's deferred constants.
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 Anonymous access types
-(@Chg{Version=[2],New=[including],Old=[that is,]} access discriminants and
-access parameters) are allowed.
+@Chg{Version=[2],New=[],Old=[(that is, access discriminants and
+access parameters) ]}are allowed.
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}

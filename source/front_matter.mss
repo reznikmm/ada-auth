@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.47 $ $Date: 2005/09/30 05:33:57 $}
+@comment{$Revision: 1.48 $ $Date: 2005/10/13 05:15:46 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -1049,15 +1049,17 @@ the original Ada Reference Manual.],Old=[]}
 @end{RMOnly}
 @begin{AARMOnly}
 @ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[Changes to the original 8652:1995 can be identified by the version
-number @Chg{Version=[2],New=[],Old=[/1]} following the paragraph
+number @Chg{Version=[2],New=[],Old=[/1 ]}following the paragraph
 number.@Chg{Version=[2],New=[ Paragraphs with a version number of /1 were
 changed by Technical Corrigendum 1 or were editorial corrections at that time,
 while paragraphs with a version number of /2 were changed by Amendment 1 or were
 more recent editorial corrections.],Old=[]} Paragraphs not so marked are
 unchanged by @Chg{Version=[2],New=[Amendment 1, ],Old=[]}Technical Corrigendum
-1@Chg{Version=[2],New=[,],Old=[]} or editorial corrections. Paragraph numbers
-of unchanged paragraphs should be the same as in the original International
+1@Chg{Version=[2],New=[,],Old=[]} or editorial corrections@Chg{Version=[2],New=[;
+that is, they are identical to the 1995 version],Old=[]}. Paragraph numbers
+of unchanged paragraphs are the same as in the original International
 Standard. Inserted text is indicated by underlining, and deleted text is
 indicated by strikethroughs. @Chg{Version=[2],New=[Some versions also use
 color to indicate the version of the change.],Old=[]}Where paragraphs are

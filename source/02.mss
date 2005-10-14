@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:37 $}
+@Comment{$Date: 2005/10/13 05:15:34 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1189,7 +1189,7 @@ An end of line cannot appear in a @nt{string_literal}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[No transformation is performed on the
-sequence of characters in a @nt{string_literal}.]}
+sequence of characters of a @nt{string_literal}.]}
 @end{Notes}
 
 @begin{Examples}
@@ -1346,9 +1346,10 @@ is a @i{pragma argument}.
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
-  @ChgAdded{Version=[2],Text=[For compatibility for Ada 83, the name of a
+  @ChgAdded{Version=[2],Text=[For compatibility with Ada 83, the name of a
   pragma may also be @lquotes@key{interface}@rquotes@;, which is not an
-  identifier. See @RefSecNum{Pragma Interface}.]}
+  identifier (because it is a reserved word).
+  See @RefSecNum{Pragma Interface}.]}
 @end{Honest}
 
 @Defn{identifier specific to a pragma}
@@ -1677,7 +1678,7 @@ informative annex.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
   @ChgAdded{Version=[2],Text=[Updated the example of named pragma parameters,
-  because the second parameter of Suppress is obsolescent.]}
+  because the second parameter of @nt{pragma} Suppress is obsolescent.]}
 @end{DiffWord95}
 
 
