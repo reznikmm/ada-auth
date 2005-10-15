@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/10/13 05:15:42 $}
+@Comment{$Date: 2005/10/14 22:18:51 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1319,9 +1319,9 @@ Old=[The type of a generic formal object of mode
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[for an instantiation that occurs
-  within the body of a generic unit or within the body of a generic unit
-  declared within the declarative region of the generic unit, and the
-  actual denotes a generic formal object of that generic unit,
+  within the body of a generic unit @i{G} or within the body of a generic unit
+  declared within the declarative region of the generic unit @i{G}, and the
+  actual denotes a generic formal object of @i{G},
   then the declaration of that formal object shall have a @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}

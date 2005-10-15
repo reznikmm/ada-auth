@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/13 05:15:37 $}
+@Comment{$Date: 2005/10/14 22:18:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @LabeledClause{Array Types}
 
@@ -787,7 +787,7 @@ are indefinite subtypes.]
   a coextension (see @RefSecNum{Operations of Access Types}).]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The above principles when applied to a
+  @ChgAdded{Version=[2],Text=[The above principle when applied to a
   nonlimited type implies that such an object may be copied only to a
   shorter-lived object, because attempting to assign it to a longer-lived
   object would fail because the access discriminants would not match.

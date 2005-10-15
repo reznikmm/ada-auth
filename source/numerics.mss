@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2005/10/11 06:12:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2005/10/14 22:18:52 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:44 $}
+@Comment{$Date: 2005/10/14 22:18:52 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -672,7 +672,8 @@ following conventions:
    @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00185-01]}
    The @Chg{Version=[2],New=[],Old=[real (resp., ]}imaginary@Chg{Version=[2],
    New=[],Old=[)]} component of the result of the Arcsin@Chg{Version=[2],
-   New=[,],Old=[ and]} Arccos@Chg{Version=[2],New=[ and],Old=[(resp.]}, Arctanh@Chg{Version=[2],
+   New=[,],Old=[ and]} Arccos@Chg{Version=[2],New=[],Old=[(resp.]},
+   @Chg{Version=[2],New=[and ],Old=[]}Arctanh@Chg{Version=[2],
    New=[],Old=[)]} functions is discontinuous as the parameter X crosses the
    real axis to the left of @en@;1.0 or the right of 1.0.
 
@@ -3172,7 +3173,8 @@ Numerics.Generic_Real_Matrix is symmetric.]}]}
 package Numerics.Generic_Complex_Arrays has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{generic}
+@ChgAdded{Version=[2],Text=[@key{with} Ada.Numerics.Generic_Real_Arrays, Ada.Numerics.Generic_Complex_Types;
+@key{generic}
    @key{with package} Real_Arrays   @key{is new} Ada.Numerics.Generic_Real_Arrays   (<>);
    @key{use} Real_Arrays;
    @key{with package} Complex_Types @key{is new} Ada.Numerics.Generic_Complex_Types (Real);

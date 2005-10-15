@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/13 05:15:35 $}
+@Comment{$Date: 2005/10/14 22:18:45 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2903,13 +2903,15 @@ any associated universal or class-wide types (defined below).
   respectively.
 @end{Honest}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 Every type is either a @i(specific) type, a @i(class-wide) type,
 or a @i(universal) type.
 @Defn{specific type}
 A specific type is
 one defined by a @nt<type_declaration>,
 a @nt<formal_type_declaration>, or a full type definition
-embedded in a declaration for an object.
+embedded in @Chg{Version=[2],New=[another construct],Old=[a declaration
+for an object]}.
 Class-wide and universal types are implicitly defined, to act
 as representatives for an entire class of types, as follows:
 @begin(Honest)

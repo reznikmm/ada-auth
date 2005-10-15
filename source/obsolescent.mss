@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:51 $}
+@Comment{$Date: 2005/10/14 22:18:56 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -665,19 +665,19 @@ Suppress @nt{pragma} is as follows:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],
-New=`@ @ @key{pragma} @prag{Suppress}(@Syn2{identifier} [, [On =>] @Syn2{name}]);',
+New=`@ @ @key{pragma} @prag{Suppress}(@Syn2{identifier}, [On =>] @Syn2{name});',
 Old=<>}
 @end{Syntax}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-@ChgAdded{Version=[2],Text=[The identifier shall be the name of a check (see
-@RefSecNum{Suppressing Checks}). The name shall
+@ChgAdded{Version=[2],Text=[The @nt{identifier} shall be the name of a check
+(see @RefSecNum{Suppressing Checks}). The @nt{name} shall
 statically denote some entity.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],Text=[For a specific Suppress @nt{pragma} that is
-immediately within a @nt{package_specification}, the name shall denote an
+immediately within a @nt{package_specification}, the @nt{name} shall denote an
 entity (or several overloaded subprograms) declared immediately within the
 @nt{package_specification}.]}
 @end{Legality}

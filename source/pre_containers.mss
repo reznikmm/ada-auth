@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2005/10/11 06:12:46 $ $Author: Randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2005/10/14 22:18:53 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:46 $}
+@Comment{$Date: 2005/10/14 22:18:53 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -1117,7 +1117,7 @@ by Process.@key{all} is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[If Element_Type is unconstrained and definite, then
-the Element parameter of Process.@key{all} shall be unconstrained.]}
+the actual Element parameter of Process.@key{all} shall be unconstrained.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1155,7 +1155,7 @@ Container. Any exception raised by Process.@key{all} is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[If Element_Type is unconstrained and definite, then
-the Element parameter of Process.@key{all} shall be unconstrained.]}
+the actual Element parameter of Process.@key{all} shall be unconstrained.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[The element designated by Position
@@ -2633,7 +2633,7 @@ propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Element_Type is unconstrained
-and definite, then the Element parameter of Process.@key{all} shall be
+and definite, then the actual Element parameter of Process.@key{all} shall be
 unconstrained.]}
 
 @begin{Ramification}
@@ -4017,7 +4017,7 @@ package Containers.Hashed_Maps has the following declaration:]}
    @key{with function} "=" (Left, Right : Element_Type)
       @key{return} Boolean is <>;
 @key{package} Ada.Containers.Hashed_Maps @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Hashed_Maps]}
-   @key{pragma} Preelaborate (Hashed_Maps);]}
+   @key{pragma} Preelaborate(Hashed_Maps);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private};
@@ -4559,7 +4559,7 @@ package Containers.Ordered_Maps has the following declaration:]}
    @key{with function} "<" (Left, Right : Key_Type) @key{return} Boolean @key{is} <>;
    @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Ordered_Maps @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Ordered_Maps]}
-   @key{pragma} Preelaborate (Ordered_Maps);]}
+   @key{pragma} Preelaborate(Ordered_Maps);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Keys} (Left, Right : Key_Type) @key{return} Boolean;]}
@@ -5750,7 +5750,7 @@ from the set and Program_Error is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Element_Type is unconstrained
-and definite, then the Element parameter of Process.@key{all} shall be
+and definite, then the actual Element parameter of Process.@key{all} shall be
 unconstrained.]}
 
 @begin{Ramification}
@@ -5889,7 +5889,7 @@ package Containers.Hashed_Sets has the following declaration:]}
                  @key{return} Boolean;
    @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Hashed_Sets @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Hashed_Sets]}
-   @key{pragma} Preelaborate (Hashed_Sets);]}
+   @key{pragma} Preelaborate(Hashed_Sets);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private};
@@ -6339,7 +6339,7 @@ package Containers.Ordered_Sets has the following declaration:]}
    @key{with function} "<" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
    @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Ordered_Sets @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Ordered_Sets]}
-   @key{pragma} Preelaborate (Ordered_Sets);]}
+   @key{pragma} Preelaborate(Ordered_Sets);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Elements} (Left, Right : Element_Type) @key{return} Boolean;]}
@@ -7172,7 +7172,8 @@ that the generic formal type Element_Type is indefinite.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[
+@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration
+of the generic library package
 Containers.Indefinite_Ordered_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Ordered_Sets]}
 has the same contents as Containers.Ordered_Sets except:]}
 

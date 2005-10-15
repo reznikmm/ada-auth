@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/10/01 05:45:30 $}
+@Comment{$Date: 2005/10/14 22:18:49 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2949,6 +2949,7 @@ types. Further:]}
 designated types shall be the same or one shall cover the
 other, and if the designated types are elementary or array types,
 then the designated subtypes shall statically match;]}
+
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[When both are access-to-subprogram types,
 the designated profiles shall be subtype conformant.]}
@@ -2957,11 +2958,11 @@ the designated profiles shall be subtype conformant.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We don't want to allow completely arbitrary
   comparisons, as we don't want to insist that all access types are represented
-  ways that are convertible to one another. For instance, a compiler could use
-  completely separate address spaces or incompatible representations. Instead,
-  we allow compares if there exists an access parameter to which both operands
-  could be converted. Since the user could write such an subprogram, and
-  any reasonable meaning for "=" would allow using it in such a subprogram,
+  in ways that are convertible to one another. For instance, a compiler could
+  use completely separate address spaces or incompatible representations.
+  Instead, we allow compares if there exists an access parameter to which both
+  operands could be converted. Since the user could write such an subprogram,
+  and any reasonable meaning for "=" would allow using it in such a subprogram,
   this doesn't impose any further restrictions on Ada implementations.]}
 @end{Reason}
 @end{Legality}

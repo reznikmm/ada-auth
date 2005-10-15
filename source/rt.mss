@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2005/10/11 06:12:48 $ $Author: Randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2005/10/14 22:18:55 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/10/11 06:12:48 $}
+@Comment{$Date: 2005/10/14 22:18:55 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1682,7 +1682,7 @@ implementation defined.
 If no Locking_Policy pragma @Chg{New=[applies to],Old=[appears in]} any
 of the program units comprising a partition, the locking policy for that
 partition, as well as the @Chg{Version=[2],New=[meaning of
-the priority of a],Old=[effect of specifying either a Priority or
+the priority of],Old=[effect of specifying either a Priority or
 Interrupt_Priority pragma for]} a protected object, are implementation defined.
 @Chg{Version=[2],New=[@Defn2{Term=[Priority],Sec=[of a protected object]}],Old=[]}
 
@@ -2386,7 +2386,7 @@ Text=[The metrics for Set_Priority.]}]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
 Setting a task's base priority affects task dispatching. First, it can
 change the task's active priority. Second, under the @Chg{Version=[2],
-New=[FIFO_Within_Priorites],Old=[standard
+New=[FIFO_Within_Priorities],Old=[standard
 task dispatching]} policy it always causes the task to move to
 the tail of the ready queue corresponding to its active priority,
 even if the new base priority is unchanged.
@@ -3881,14 +3881,14 @@ defined for each run-time profile.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[configuration pragma], Sec=(Profile)}
 @PDefn2{Term=[pragma, configuration], Sec=(Profile)}
-A @key{pragma} Profile is a configuration pragma.
-There may be more than one @key{pragma} Profile for a partition.]}
+A @nt{pragma} Profile is a configuration pragma.
+There may be more than one @nt{pragma} Profile for a partition.]}
 @end{Linktime}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  @key{Pragma} Profile is new.]}
+  @nt{Pragma} Profile is new.]}
 @end{Extend95}
 
 

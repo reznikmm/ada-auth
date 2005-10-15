@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/10/13 05:15:41 $}
+@Comment{$Date: 2005/10/14 22:18:50 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -692,7 +692,9 @@ the @nt{type_declaration} of interest.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[Unlike a full view of a package, a limited view
 does not depend semantically on units mentioned in @nt{with_clause}s of the
-@nt{compilation_unit} that defines the package. This is necessary so that they
+@nt{compilation_unit} that defines the package. Formally, this is
+achieved by saying that the limited view has an empty @nt{context_clause}.
+This is necessary so that they
 can be useful for their intended purpose: allowing mutual dependences between
 packages. The lack of semantic dependence limits the contents of a limited view
 to the items that can be determined solely from the syntax of the source of the

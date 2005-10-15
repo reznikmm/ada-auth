@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/13 05:15:39 $}
+@Comment{$Date: 2005/10/14 22:18:48 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1726,12 +1726,17 @@ The concept of dispatching operations is new.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00404-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Ada 2005 requires that subprograms that are renamed or instantiated to be
-  dispatching operations have all controlling access parameters to have subtypes
-  that exclude null. (Since Ada 95 didn't have the notion of access subtypes
-  that exclude null, it had no such rule.) This rule will require the addition
-  of an explicit @key{not null} on nondispatching operations that are later
-  renamed to be dispatching, or on a generic that is used to define a
+  If a dispatching operation is defined by a
+  @nt{subprogram_renaming_declaration}, and it has a controlling access
+  parameter, Ada 2005 requires the subtype of the parameter to exclude null.
+  The same applies to instantiations. This is required so that all
+  calls to the subprogram operate the same way (controlling access parameters
+  have to exclude null so that dispatching calls will work).
+  Since Ada 95 didn't have the notion of access subtypes
+  that exclude null, and all access parameters excluded null, it had no such
+  rules. These rules will require the
+  addition of an explicit @key{not null} on nondispatching operations that are
+  later renamed to be dispatching, or on a generic that is used to define a
   dispatching operation.]}
 @end{Incompatible95}
 
