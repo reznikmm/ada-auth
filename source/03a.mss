@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/14 22:18:45 $}
+@Comment{$Date: 2005/10/15 06:08:59 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1256,12 +1256,12 @@ specific type are defined as follows:
   @ChgAdded{Version=[2],Text=[For a specific type, the stream-oriented
   attributes of the type that are
   available (see @RefSecNum{Stream-Oriented Attributes}) at the end of the
-  list of @nt{declarative_item}s where the type is declared;]}
+  declaration list where the type is declared;]}
   @begin{Ramification}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[For a type declared immediately within a
-    @nt{package_specification} which has a partial view, the list of
-    @nt{declarative_item}s to consider is the visible part of the package.]}
+    @nt{package_specification} which has a partial view, the declaration
+    list to consider is the visible part of the package.]}
   @end{Ramification}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}

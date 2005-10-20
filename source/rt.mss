@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.56 $ $Date: 2005/10/14 22:18:55 $ $Author: Randy $ }
+@comment{ $Revision: 1.57 $ $Date: 2005/10/15 06:09:04 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/10/14 22:18:55 $}
+@Comment{$Date: 2005/10/15 06:09:04 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -646,7 +646,7 @@ value greater than or equal to @SynI{first_priority_}@!@nt{expression}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[@nt{Pragma} Task_Dispatching_Policy specifies the
-task dispatching policy.]}
+single task dispatching policy.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[@nt{Pragma} Priority_Specific_Dispatching specifies
@@ -703,7 +703,7 @@ queue for its active priority]}.]
 @Chg{Version=[2],New=[A single],Old=[The]} task dispatching policy is
 specified by a Task_Dispatching_Policy @Chg{Version=[2],New=[],Old=[configuration ]}pragma.
 @Chg{Version=[2],New=[Pragma Priority_Specific_Dispatching assigns distinct
-dispatching policies to ranges of System.Any_Priority.],
+dispatching policies to subranges of System.Any_Priority.],
 Old=[@PDefn{unspecified}If no such pragma appears in any of the program
 units comprising a partition, the task dispatching policy for
 that partition is unspecified.]}
@@ -1473,7 +1473,7 @@ again it will have deadline Delay_Until_Time + Deadline_Offset.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[On a system with a single processor, the setting of
 a task's deadline to the new value occurs immediately at the first point that
-is outside the execution of an abort-deferred operation. If the task is
+is outside the execution of a protected action. If the task is
 currently on a ready queue it is removed and re-entered on to the ready queue
 determined by the rules defined below.]}
 

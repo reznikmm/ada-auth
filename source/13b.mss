@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/13 05:15:44 $}
+@Comment{$Date: 2005/10/15 06:09:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @LabeledClause{The Package System}
 
@@ -2912,11 +2912,17 @@ the following attributes are defined.
 
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
-@ChgAdded{Version=[1],Text=[For untagged derived types, the Write and Read
-attributes of the parent type are inherited as specified in
-@RefSecNum(Operational and Representation Items); otherwise, the default
-implementations of these attributes are used. The default implementations of
-Write and Read attributes execute as follows:]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@ChgAdded{Version=[1],Text=[For untagged derived types, the
+@Chg{Version=[2],New=[default implementations of the ],Old=[]}Write
+and Read attributes @Chg{Version=[2],New=[],Old=[of the parent type ]}are
+inherited @Chg{Version=[2],New=[from the parent type ],Old=[]}as
+specified in
+@RefSecNum(Operational and Representation Items);
+@Chg{Version=[2],New=[for other types],Old=[otherwise]}, the default
+implementations of @Chg{Version=[2],New=[],Old=[these attributes are used.
+The default implementations of ]}Write and Read attributes execute
+as follows:]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01],ARef=[AI95-00270-01]}
@@ -3070,14 +3076,19 @@ S'Output to determine how much to read.>}
 @end{Description}
 @EndPrefixType{}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
-@Chg{New=[@Leading@;For untagged derived types, the Output and Input attributes
-of the parent type are inherited as specified in @RefSecNum(Operational and Representation Items);
-otherwise, the default implementations of these attributes are used. The
-default implementations of Output and Input attributes execute as follows:],
-Old=[@Leading@;Unless overridden by an @nt<attribute_definition_clause>, these
+@Leading@;@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@Chg{New=[For untagged derived types,
+@Chg{Version=[2],New=[default implementations of the ],Old=[]}Output
+and Input attributes @Chg{Version=[2],New=[],Old=[of the parent type ]}are
+inherited @Chg{Version=[2],New=[from the parent type ],Old=[]}as
+specified in @RefSecNum(Operational and Representation Items);
+@Chg{Version=[2],New=[for other types],Old=[otherwise]}, the
+@Chg{Version=[2],New=[],Old=[default implementations of these
+attributes are used. The ]}default implementations of Output and Input
+attributes execute as follows:],
+Old=[Unless overridden by an @nt<attribute_definition_clause>, these
 subprograms execute as follows:]}
-
 @begin(Itemize)
 If @i(T) is an array type, S'Output first writes the bounds,
 and S'Input first reads the bounds.

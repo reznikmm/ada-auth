@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/10/13 05:15:34 $}
+@Comment{$Date: 2005/10/15 06:08:59 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -22,8 +22,8 @@ described in this section.]
 @Defn{character set}
 The @Chg{Version=[2],New=[character repertoire for the text of an Ada
 program consists of the
-collection of characters described by the ISO/IEC 10646:2003 Universal
-Multiple-Octet Coded Character Set. This collection is organized in
+entire coding space described by the ISO/IEC 10646:2003 Universal
+Multiple-Octet Coded Character Set. This coding space is organized in
 @i<planes>, each plane comprising 65536 characters.@Defn2{Term=[plane],Sec=[character]}
 @Defn{character plane}],Old=[only characters
 allowed outside of @nt{comment}s are the @nt{graphic_character}s and
@@ -64,9 +64,10 @@ rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{identifier_letter} | @Syn2{digit} | @Syn
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
-@ChgAdded{Version=[2],Text=[A @nt{character} is any character defined within
-ISO/IEC 10646:2003 other than those whose relative code position in their
-plane is 16#FFFE# or 16#FFFF#.]}
+@ChgAdded{Version=[2],Text=[A @nt{character} is defined by this International
+Standard for each cell in the coding space described by ISO/IEC 10646:2003,
+regardless of whether or not ISO/IEC 10646:2003 allocates a character to that
+cell.]}
 @end{SyntaxText}
 @end{Syntax}
 
@@ -123,6 +124,15 @@ the text of an Ada program is not specified.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Leading@keepnext@;@Chg{Version=[2],New=[Characters],Old=[The categories of
 characters]} are @Chg{Version=[2],New=[categorized],Old=[defined]} as follows:
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Our character classification considers that the
+cells not allocated in ISO/IEC 10646:2003 are graphic characters, except for
+those whose relative code position in their plane is 16#FFFE# or 16#FFFF#. This
+seems to provide the best compatibility with future versions of ISO/IEC 10646,
+as future characters can be already be used in Ada character and string
+literals.]}
+@end{Discussion}
 @begin{Description}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
 @ChgDeleted{Version=[2],Text=[@Defn{identifier_letter}@nt<identifier_letter>@\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}]}

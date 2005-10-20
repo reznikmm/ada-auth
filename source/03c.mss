@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/14 22:18:48 $}
+@Comment{$Date: 2005/10/15 06:09:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3471,7 +3471,7 @@ denotes a tagged incomplete view, it may also be used:]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[If such a @nt{name} occurs within
-the list of @nt{declarative_item}s containing the completion of the
+the declaration list containing the completion of the
 incomplete view, it may also be used:]}
 
 @begin{Itemize}
@@ -3676,7 +3676,7 @@ not at all) for different designated subtypes.
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   It is now illegal to use an incomplete view (type) as the parameter or result
   of an access-to-subprogram type unless the incomplete view is completed in
-  the same list of declarations as the use. This was allowed in Ada 95 for
+  the same declaration list as the use. This was allowed in Ada 95 for
   incomplete types where the completion was deferred to the body. By
   disallowing this rare use of incomplete views, we can allow the use of
   incomplete views in many more places, which is especially valuable for
@@ -5000,6 +5000,13 @@ uses of anonymous access types.],Old=[]}
     @Syn2{subprogram_body} | @Syn2{package_body} | @Syn2{task_body} | @Syn2{protected_body}"}
 @end{Syntax}
 
+@begin{StaticSem}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00420-01]}
+@ChgAdded{Version=[2],Text=[The list of @nt{declarative_item}s of a
+@nt{declarative_part} is called the @i{declaration list} of the
+@nt{declarative_part}.@PDefn2{Term=[declaration list],Sec=[declarative_part]}]}
+@end{StaticSem}
+
 @begin{RunTime}
 @PDefn2{Term=[elaboration], Sec=(declarative_part)}
 The elaboration of a @nt{declarative_part} consists of the elaboration of
@@ -5139,13 +5146,18 @@ is equivalent to one with an empty one.
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Changed representation clauses to
-aspect clauses to reflect that they are used for more than just
-representation.],Old=[]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed representation clauses
+  to aspect clauses to reflect that they are used for more than just
+  representation.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0014],ARef=[AI95-00064-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that the elaboration check
-applies to all kinds of subprogram bodies.],Old=[]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the elaboration
+  check applies to all kinds of subprogram bodies.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00420-01]}
+  @ChgAdded{Version=[2],Text=[Defined @lquotes@;declaration list@rquotes to
+  avoid confusion for various rules. Other kinds of declaration list are
+  defined elsewhere.]}
 @end{DiffWord95}
 
 

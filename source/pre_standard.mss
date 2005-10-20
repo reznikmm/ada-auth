@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2005/08/19 06:37:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2005/10/15 06:09:05 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2005/08/19 06:37:30 $}
+@Comment{$Date: 2005/10/15 06:09:05 $}
 
 @LabeledClause{The Package Standard}
 
@@ -51,13 +51,13 @@ the visible part of package Standard.}
    --@RI{ negation operator are as follows:}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028],ARef=[AI95-00145-01]}
-   -- @key[function] "@key[and]" (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
-   -- @key[function] "@key[or]"  (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
-   -- @key[function] "@key[xor]" (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
+   -- @key[function] "@key[and]" (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean@Chg{New=['Base],Old=[]};
+   -- @key[function] "@key[or]"  (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean@Chg{New=['Base],Old=[]};
+   -- @key[function] "@key[xor]" (Left, Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean@Chg{New=['Base],Old=[]};
 
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0028],ARef=[AI95-00145-01]}
-   -- @key[function] "@key[not]" (Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean;
+   -- @key[function] "@key[not]" (Right : Boolean@Chg{New=['Base],Old=[]}) @key[return] Boolean@Chg{New=['Base],Old=[]};
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}

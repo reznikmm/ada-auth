@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/10/14 22:18:49 $}
+@Comment{$Date: 2005/10/15 06:09:02 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2905,8 +2905,8 @@ These equality operators shall not be used if either operand is of an
 access-to-object type whose
 designated type is @i<D> or @i<D>'Class, where @i<D> has a user-defined
 primitive equality operator with
-result type Boolean, that is declared immediately within the same list of
-declarations as @i<D>, and at least one of whose operands is an access
+result type Boolean, that is declared immediately within the same
+declaration list as @i<D>, and at least one of whose operands is an access
 parameter also with designated type @i<D>, unless the predefined equality
 operator is identified using an expanded name with prefix denoting the package
 Standard.]}
@@ -3615,7 +3615,7 @@ numeric type to which the result is to be converted, either explicitly or
 implicitly]. An explicit conversion is required on the result when using the
 above fixed-fixed multiplication operator when either operand is of a type
 having a user-defined primitive multiplication operator declared immediately
-within the same list of declarations as the type and with both formal
+within the same declaration list as the type and with both formal
 parameters of a fixed-point type, unless the predefined universal
 operator is identified using an expanded name with the @nt{prefix} denoting
 the package Standard. A corresponding requirement applies to

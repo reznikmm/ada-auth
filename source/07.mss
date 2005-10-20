@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/10/13 05:15:40 $}
+@Comment{$Date: 2005/10/15 06:09:03 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -65,7 +65,7 @@ but whose completion is not in its @nt{package_specification}.
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00420-01],ARef=[AI-00434-01]}
 @PDefn2{Term=[visible part], Sec=<of a package
 (other than a generic formal package)>}
 The first list of @Chg{Version=[2],New=[@nt{basic_declarative_item}s],
@@ -79,7 +79,10 @@ Old=[@nt{declarative_item}s]} after the reserved word
 @i{private part} of the package.
 If the reserved
 word @key{private} does not appear, the package has an implicit empty
-private part.]
+private part.]@Chg{Version=[2],New=[Each list of @nt{basic_declarative_item}s
+of a @nt{package_specification} forms a @i{declaration list} of the
+package.@PDefn2{Term=[declaration list],Sec=(package_specification)}],Old=[]}
+
 @begin{Ramification}
 This definition of visible part does not apply to generic formal
 packages @em @RefSecNum{Formal Packages} defines
@@ -185,6 +188,12 @@ Finally, since we now allow a @nt{pragma} Import for any explicit
 declaration, the completion rules need to take this into account as
 well.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00420-01]}
+  @ChgAdded{Version=[2],Text=[Defined @lquotes@;declaration list@rquotes
+  to avoid ambiguity in other rules as to whether packages are included.]}
+@end{DiffWord95}
 
 @LabeledClause{Package Bodies}
 
