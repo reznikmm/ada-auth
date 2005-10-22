@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2005/10/11 06:12:50 $ $Author: Randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2005/10/20 06:09:25 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:50 $}
+@Comment{$Date: 2005/10/20 06:09:25 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -449,19 +449,22 @@ since the language interface packages declare scalar types corresponding
 to those provided by the respective foreign languages.
 @end[reason]
 @begin{ImplNote}
-If an implementation supports interfacing to C++,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+If an implementation supports interfacing to @Chg{Version=[2],New=[the ],
+Old=[]}C++@Chg{Version=[2],New=[ entities not supported by
+@RefSecNum{Interfacing with C and C++}],Old=[]},
 it should do so via the convention identifier C_Plus_Plus
-(in additional to any C++-implementation-specific
-ones).
+(in additional to any C++-implementation-specific ones).
 @end{ImplNote}
 @begin{Reason}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The reason for giving the advice about C++ is to encourage
 uniformity among implementations, given that the name of the language is
-not syntactically legal as an @nt{identifier}.
+not syntactically legal as an @nt{identifier}.@Chg{Version=[2],New=[],Old=[
 We place this advice in the AARM, rather than the RM95 proper,
 because (as of this writing) C++ is not an international standard,
 and we don't want to refer to a such a language from an international
-standard.
+standard.]}
 @end{Reason}
 @end{ImplAdvice}
 

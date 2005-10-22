@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/10/01 05:45:32 $}
+@Comment{$Date: 2005/10/20 06:09:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.25 $}
+@Comment{$Revision: 1.26 $}
 
 @LabeledClause{Type Conversions}
 
@@ -73,6 +73,11 @@ other @nt<type_conversion>s are called @i(value conversions).
   @nt<assignment_statement>. View conversions to other types only
   occur as actual parameters. Allowing view conversions of untagged
   types in all contexts seemed to incur an undue implementation burden.
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00330-01]}
+  @ChgAdded{Version=[2],Text=[A type conversion appearing as an @key{in out}
+  parameter in a generic instantiation is not a view conversion; the second
+  part of the rule only applies to subprogram calls, not instantiations.]}
 @end{Ramification}
 @end{Intro}
 

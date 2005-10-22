@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/10/14 22:18:50 $}
+@Comment{$Date: 2005/10/20 06:09:22 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3214,8 +3214,8 @@ initialization.]}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[A view of a type has preelaborable initialization if it
 is an elementary type, an array type whose component type has preelaborable
-initialization, or a record type whose components all have preelaborable
-initialization.]}
+initialization, a record type whose components all have preelaborable
+initialization, or an interface type.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
@@ -3227,8 +3227,9 @@ of a package or generic package.]}
 @ChgAdded{Version=[2],Text=[If the pragma appears in the first list of
 @nt{basic_declarative_item}s of a
 @nt<package_specification>, then the @nt<direct_name> shall denote the first
-subtype of a private type, private extension, or protected type without
-@nt<entry_declaration>s, and the  type shall be declared immediately within
+subtype of a private type, private extension, or protected type that is not
+an interface type and is without
+@nt<entry_declaration>s, and the type shall be declared immediately within
 the same package
 as the @nt<pragma>. If the @nt<pragma> is applied to a private type or a
 private extension, the full view of the type shall have preelaborable

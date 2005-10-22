@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/10/14 22:18:56 $}
+@Comment{$Date: 2005/10/20 06:09:25 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -641,12 +641,21 @@ and in any case, the value is implementation defined.
 Hence, it is always implementation defined.
 @end{Honest}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[specifiable], Sec=(of Storage_Size for a task
 first subtype)}
 @NoPrefix@;Storage_Size may be specified for a task first subtype
-via an @nt{attribute_definition_clause}.
+@Chg{Version=[2],New=[ that is not an interface ],Old=[]}via
+an @nt{attribute_definition_clause}.
 @end{Description}
 @end{StaticSem}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[We don't allow specifying Storage_Size on
+  task interfaces. We don't need to mention class-wide task types, because
+  these cannot be a first subtype.]}
+@end{DiffWord95}
 
 @LabeledAddedClause{Version=[2],Name=[Specific Suppression of Checks]}
 

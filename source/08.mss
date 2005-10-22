@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:46 $}
+@Comment{$Date: 2005/10/20 06:09:20 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -707,6 +707,12 @@ and, if both are overloadable,
 their profiles are type conformant.
 @PDefn{type conformance}
 @redundant[An inner declaration hides any outer homograph from direct visibility.]
+
+
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Overriding operation>,
+Text=[@ChgAdded{Version=[2],Text=[An overriding operation
+is one that replaces an inherited operation. Operations may be marked
+explicitly as overriding or not overriding.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044-01]}
 @leading@Redundant[Two homographs are not generally allowed
@@ -1827,6 +1833,12 @@ such as an object, exception, package, subprogram, entry,
 or generic unit.
 Alternatively, a @nt{subprogram_renaming_declaration} can be the
 completion of a previous @nt{subprogram_declaration}.]
+
+@ChgToGlossary{Version=[2],Kind=[Added],Term=<Renaming>,
+Text=<@ChgAdded{Version=[2],Text=[A @nt{renaming_declaration} is a declaration
+that does not define a new entity, but instead defines a view of an existing
+entity (see @RefSecNum{Renaming Declarations}).]}>}
+
 @end{Intro}
 
 @begin{Syntax}

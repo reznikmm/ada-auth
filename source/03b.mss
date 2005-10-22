@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/14 22:18:47 $}
+@Comment{$Date: 2005/10/20 06:09:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @LabeledClause{Array Types}
 
@@ -755,7 +755,7 @@ for the given view;
 all subtypes of such a@Chg{Version=[2],New=[],Old=[ partial]} view
 are indefinite subtypes.]
 @ChgRef{Version=[2],Kind=[Revised]}
-@ToGlossary{Term=<Discriminant>,
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Discriminant>,
   Text=<A discriminant is a parameter of a composite type.
   It can control, for example, the bounds of a component
   of the type if @Chg{Version=[2],New=[the component],Old=[that]} type is

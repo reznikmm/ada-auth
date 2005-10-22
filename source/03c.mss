@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/15 06:09:00 $}
+@Comment{$Date: 2005/10/20 06:09:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -159,7 +159,7 @@ or in a generic formal part
 @Defn2{Term=[extension], Sec=(of a private type)}
 Every type extension is also a tagged type, and
 is either a @i(record extension) of some other
-tagged type, a @i(private extension), or a task or protected type
+tagged type, a @i(private extension), or a non-interface task or protected type
 derived from an interface type (a synchronized tagged type @em see
 @RefSecNum{Interface Types}).
 A record extension is defined by a @nt<derived_type_definition>
@@ -1802,6 +1802,10 @@ but is intended to be overridden at some point when inherited.
 Because objects of an abstract type cannot be created,
 a dispatching call to an abstract subprogram always
 dispatches to some overriding body.]
+@ChgToGlossary{Version=[2],Kind=[Added],Term=<Abstract type>,
+  Text=<@ChgAdded{Version=[2],Text=[An abstract type is a tagged type
+  intended for use as an ancestor of other types, but which it not allowed to
+  have objects of its own.]}>}
 @end{Intro}
 
 @begin{MetaRules}
@@ -1864,7 +1868,7 @@ Static Semantics paragraph, but I won't move them, as it's not worth the time.}
 @Defn{abstract subprogram}
 @Defn2{Term=[subprogram], Sec=(abstract)}
 A subprogram declared by an @nt{abstract_subprogram_declaration}
-@Chg{Version=[2],New=[or declared by a
+@Chg{Version=[2],New=[or a
 @nt{formal_abstract_subprogram_declaration} (see @RefSecNum{Formal Subprograms})],
 Old=[(see @RefSecNum{Subprogram Declarations})]}
 is an @i{abstract subprogram}.
@@ -2294,7 +2298,30 @@ but then clients of the package would not have visibility to T.
 type that provides a restricted form of multiple inheritance. A tagged type,
 task type, or protected type may have one or more interface types as
 ancestors.]]}
+@ChgToGlossary{Version=[2],Kind=[Added],Term=<Interface type>,
+  Text=<@ChgAdded{Version=[2],Text=[An interface type is a form of abstract
+  tagged type which has no components or concrete operations
+  except possibly null procedures. Interface types are used for
+  composing other interfaces and tagged types and thereby
+  provide multiple inheritance. Only an interface type can be used as a
+  progenitor of a derived type.]}>}
 @end{Intro}
+
+@begin{MetaRules}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[The rules are designed so that an
+  interface can be used as either a parent type or a progenitor type without
+  changing the meaning. That's important so that the order that interfaces are
+  specified in a @nt{derived_type_definition} is not significant. In particular,
+  we want:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Con1 @key{is new} Int1 @key{and} Int2 @key{with null record};
+@key{type} Con2 @key{is new} Int2 @key{and} Int1 @key{with null record};]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Type=[Trailing],Text=[to mean exactly the same thing.]}
+@end{MetaRules}
 
 @begin{Syntax}
 
@@ -2335,10 +2362,7 @@ In addition,@PDefn2{Term=[interface],Sec=[synchronized]}
 @Defn{nonlimited interface}
 all task and protected interfaces
 are synchronized interfaces, and all synchronized interfaces are limited
-interfaces. A view of an object that is of a task interface type (or of a
-corresponding class-wide type) is a task object. Similarly, a view of an
-object that is of a protected interface type (or of a corresponding
-class-wide type) is a protected object.]}
+interfaces.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[@Defn{synchronized tagged type}
@@ -2374,6 +2398,10 @@ An interface type inherits user-defined primitive subprograms from each
 progenitor type in the same way that a derived type inherits user-defined
 primitive subprograms from its progenitor types
 (see @RefSecNum{Derived Types and Classes}).]}
+@ChgToGlossary{Version=[2],Kind=[Added],Term=<Progenitor>,
+  Text=<@ChgAdded{Version=[2],Text=[A progenitor type of a derived type is
+  one of the types mentioned in the definition of the derived type other
+  than the first. A progenitor type is always an interface type.]}>}
 
 @end{StaticSem}
 
@@ -2388,11 +2416,12 @@ type shall be abstract subprograms or null procedures.],Old=[]}
 shall be an interface type.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[A descendant of a nonlimited interface shall be
+@ChgAdded{Version=[2],Text=[A descendant of a nonlimited interface shall be
 nonlimited. A descendant of a task interface shall be a task type or a task
 interface. A descendant of a protected interface shall be a protected type or a
 protected interface. A descendant of a synchronized interface shall be a task
-type, a protected type, or a synchronized interface.],Old=[]}
+type, a protected type, or a synchronized interface. No type shall be both
+a task type and a protected type.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
    @ChgAdded{Version=[2],Text=[We require that a descendant of a task, protected, or
@@ -2406,6 +2435,13 @@ type, a protected type, or a synchronized interface.],Old=[]}
    know whether it is a task, protected, or synchronized interface. Hence, we
    require the kind of the actual interface to match the kind of the formal
    interface (see @RefSecNum{Formal Interface Types}).]}
+
+   @ChgAdded{Version=[2],Text=[The last sentence prevents a single private type
+   from inheriting from both a task and a protected interface. For a private
+   type, there can be no completion. For a generic formal type, there can be no
+   possible matching type (so no instantiation could be legal). This rule
+   provides early detection of the errors.]}
+
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}

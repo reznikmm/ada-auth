@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:39 $}
+@Comment{$Date: 2005/10/20 06:09:21 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 
@@ -4658,11 +4658,9 @@ causes a @nt{sequence_of_statements} to be aborted.]
 
 @begin{Resolution}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[expected type], Sec=(abort_statement task_name)}
 Each @SynI{task_}@nt{name} is expected to be of any task
-type@Chg{Version=[2],New=[ or task interface type],Old=[]}@Redundant[;
-they need not all be of the same @Chg{Version=[2],New=[],Old=[task]} type.]
+type@Redundant[; they need not all be of the same task type.]
 
 @end{Resolution}
 
@@ -4867,22 +4865,15 @@ This clause has been rewritten to accommodate the concept
 of aborting the execution of a construct, rather than just of a task.
 @end{DiffWord83}
 
-@begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Abort can be used on a task interface.]}
-@end{Extend95}
-
 
 @LabeledClause{Task and Entry Attributes}
 
 @begin{RunTime}
 
-@leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
-For @ChgPrefixType{Version=[2],Kind=[Revised],Text=<a @nt<prefix> T that
-is of a task type
-@Chg{Version=[2],New=[or task interface type ],Old=[]}@Redundant[(after
-any implicit dereference)]>},
+@leading@;
+For @PrefixType{a @nt<prefix> T that
+is of a task type @Redundant[(after
+any implicit dereference)]},
 the following attributes are defined:
 @begin{Description}
 @Comment{@ChgAttribute{Version=[2], Kind=[Revised], ChginAnnex=[F], Leading=[F],
@@ -4945,12 +4936,6 @@ in the @nt<entry_barrier> for the entry E should take precautions to
 allow for the evaluation of the @nt<condition> of the barrier both before
 and after queuing a given caller.
 @end{Notes}
-
-@begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Task attributes can be used on a task interface.]}
-@end{Extend95}
 
 
 

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/15 06:09:03 $}
+@Comment{$Date: 2005/10/20 06:09:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @LabeledClause{The Package System}
 
@@ -2912,7 +2912,7 @@ the following attributes are defined.
 
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00434-01]}
 @ChgAdded{Version=[1],Text=[For untagged derived types, the
 @Chg{Version=[2],New=[default implementations of the ],Old=[]}Write
 and Read attributes @Chg{Version=[2],New=[],Old=[of the parent type ]}are
@@ -3107,6 +3107,25 @@ and finalization take place for this object (see @RefSecNum{Object Declarations}
 @RefSecNum{Completion and Finalization}).],Old=[]}
 @end(Itemize)
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgAdded{Version=[2],Text=[If @i<T> is an abstract type, then S'Input is
+an abstract function.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[For an abstract type @i<T>, S'Input can be
+  called in a dispatching call, or passed to a abstract formal
+  subprogram. But it cannot be used in non-dispatching
+  contexts, because we don't allow objects of abstract types to exist.
+  The designation of this function as abstract has no
+  impact on descendants of @i<T>, as @i<T>'Input is not inherited for
+  tagged types, but rather recreated (and the default
+  implementation of @i<T>'Input calls @i<T>'Read, not the parent type's
+  @i<T>'Input). Note that @i<T>'Input cannot be specified in this case, as any
+  function with the proper profile is necessarily abstract, and specifying
+  abstract subprograms is illegal.]}
+@end{Ramification}
+
 @Leading@;For @PrefixType{every subtype S'Class of a class-wide type
 @i(T)'Class}:
 @begin{Description}
@@ -3130,8 +3149,8 @@ level deeper than that of S.],Old=[]}>}@Comment{End of S'Class'Output attribute}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgAdded{Version=[2],Text=[We raise Tag_Error here for nested types as
-  such a type cannot be successfully read with S'Input, and it doesn't make
-  sense to allow writing a value that cannot be read.]}
+  such a type cannot be successfully read with S'Class'Input, and it doesn't
+  make sense to allow writing a value that cannot be read.]}
 @end{Reason}
 
 @AttributeLeading{Prefix=<S'Class>, AttrName=<Input>,
@@ -3191,7 +3210,7 @@ is raised if the end of the stream is reached before the reading of a value of
 the type is completed.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01]}
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Write for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Input for a type)}
@@ -3203,7 +3222,10 @@ the type is completed.]}
 The stream-oriented attributes may be specified
 for any type via an @nt{attribute_definition_clause}.
 @Chg{Version=[2],New=[The subprogram name given in such a
-clause shall not denote an abstract subprogram.],
+clause shall not denote an abstract subprogram. Furthermore, if a
+stream-oriented attribute is specified for an interface type by an
+@nt{attribute_definition_clause}, the subprogram name in the clause shall
+statically denote a null procedure.],
 Old=[All nonlimited types have default implementations
 for these operations. An @nt{attribute_reference} for one of
 these attributes is illegal if the type is limited,
@@ -3223,7 +3245,7 @@ The same rule applies to the result of the Input function.]}
 
 @begin{Discussion}@ChgNote{This is junk}
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00195-01]}
   @ChgDeleted{Version=[2],Text=[@Chg{Version=[1],New=[@lquotes@;Specified@rquotes
   includes inherited attributes, and default implementations are never inherited.
   So, for untagged limited types, the second part of the @nt{attribute_reference}
@@ -3232,6 +3254,43 @@ The same rule applies to the result of the Input function.]}
   for the attributes can be called when those are constructed from a directly
   specified ancestor.],Old=[]}]}
 @end{Discussion}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[Stream attributes (other than
+  Input) are always null procedures for interface types (they have no
+  components). We need to allow explicit setting of the Read and Write
+  attributes in order that the class-wide attributes like LI'Class'Input
+  can be made available. (In that case, any descendant of the interface type
+  would require available attributes.) But we don't allow any concrete
+  implementation because these don't participate in extensions (unless the
+  interface is the parent type). If we didn't ban concrete implementations,
+  the order of declaration of a pair of interfaces would become signficant.
+  For example, if Int1 and Int2 are interfaces with concrete implementations
+  of 'Read, then the following declarations would have different
+  implementations for 'Read:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} Con1 @key{is new} Int1 @key{and} Int2 @key{with null record};
+@key{type} Con2 @key{is new} Int2 @key{and} Int1 @key{with null record};]}
+@end{Example}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Trailing],Text=[This would violate our design
+  principle that the location of the use of an interface doesn't matter.]}
+@end{Discussion}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[The Input attribute cannot be
+  specified for an interface. As it is a function, a null procedure is
+  impossible; a concrete function is not possible anyway as any function
+  returning an abstract type must be abstract. And we don't allow specifying
+  stream attributes to be abstract subprograms. This has no impact, as the
+  availibility of Int'Class'Input (where Int is a limited interface) depends
+  on whether Int'Read (not Int'Input) is specified. There is no reason to
+  allow Int'Output to be specified, either, but there is equally no reason to
+  disallow it, so we don't have a special rule for that.]}
+@end{Ramification}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}

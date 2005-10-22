@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/10/15 06:08:59 $}
+@Comment{$Date: 2005/10/20 06:09:15 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -236,16 +236,21 @@ character whose General Category is defined to be @lquotes@;Separator, Paragraph
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Defn{format_effector}@nt<format_effector>@\The
 @Chg{Version=[2],New=[characters whose code positions are
-16#09# (CHARACTER TABULATION), 16#0A# (LINE FEED(LF)), 16#0B# (LINE TABULATION),
-16#0C# (FORM FEED(FF)), 16#0D# (CARRIAGE RETURN(CR)), 16#85# (NEXT LINE(NEL)),
+16#09# (CHARACTER TABULATION), 16#0A# (LINE FEED), 16#0B# (LINE TABULATION),
+16#0C# (FORM FEED), 16#0D# (CARRIAGE RETURN), 16#85# (NEXT LINE),
 and the characters in categories @nt{separator_line} and
-@nt{separator_paragraph}. The names mentioned in parentheses in this list
-are not defined by ISO/IEC 10646:2003; they are only used for convenience in
-this International Standard],
+@nt{separator_paragraph}],
 Old=[control functions of ISO 6429 called
   character tabulation (HT), line tabulation (VT), carriage return (CR),
   line feed (LF), and form feed (FF)]}.
 @IndexSeeAlso{Term=[control character],See=(format_effector)}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[ISO/IEC 10646:2003 does not define the names
+  of control characters, but rather refers to the names defined by
+  ISO/IEC 6429:1992. These are the names that we use here.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[@Defn{other_control}@nt{other_control}@\Any

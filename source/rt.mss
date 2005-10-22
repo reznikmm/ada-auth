@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.57 $ $Date: 2005/10/15 06:09:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.58 $ $Date: 2005/10/20 06:09:24 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/10/15 06:09:04 $}
+@Comment{$Date: 2005/10/20 06:09:24 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -720,13 +720,25 @@ currently running task of a processor whenever there is a non-empty ready queue
 for that processor with a higher priority than the priority of the running
 task.]}
 
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[If we have priority specific dispatching then we
+  want preemption across the entire range of priorities. That prevents higher
+  priority tasks from being blocked by lower priority tasks that have a
+  different policy. On the other hand, if we have a single policy for the
+  entire partition, we want the characteristics of that policy to apply for
+  preemption; specifically, we may not require any preemption. Note that policy
+  Non_Preemptive_FIFO_Within_Priorities is not allowed in a priority specific
+  dispatching pragma.]}
+@end{Discussion}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[A task that has its base priority changed may move
 from one dispatching policy to another. It is immediately subject
 to the new dispatching policy.]}
 
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Once subject to the new dispatching policy, it
   may be immediately preempted or dispatched, according the rules of the new
   policy.]}
@@ -1199,7 +1211,8 @@ Round_Robin_Within_Priorities; otherwise it returns False.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[A call of Actual_Quantum or Set_Quantum raises
 exception Dispatching.Dispatching_Policy_Error if a predefined policy other
-than Round_Robin_Within_Priorities applies to the specified priority.]}
+than Round_Robin_Within_Priorities applies to the specified priority,
+or any of the priorities in the specified range.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For Round_Robin_Within_Priorities,

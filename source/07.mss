@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/10/15 06:09:03 $}
+@Comment{$Date: 2005/10/20 06:09:19 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1679,7 +1679,7 @@ they are simply a special case of @nt<object_declaration>s.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
-@redundant[@ToGlossaryAlso{Term=<Limited type>,
+@redundant[@ChgToGlossaryAlso{Version=[2],Kind=[Revised],Term=<Limited type>,
   Text=<A limited type is (a view of) a type for which
   @Chg{Version=[2],New=[copying (such as for an @nt{assignment_statement})],
     Old=[the assignment operation]} is not allowed.

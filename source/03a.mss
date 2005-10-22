@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/15 06:08:59 $}
+@Comment{$Date: 2005/10/20 06:09:16 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -91,8 +91,6 @@ a @nt{generic_@!formal_@!parameter_@!declaration}.
   Completions are sometimes declarations, and sometimes not.
 @end(Discussion)
 
-@ToGlossaryAlso{Term=<Definition>,
-  Text=<@Defn(view)
 All declarations contain a @i(definition) for a @i(view) of an entity.
 A view consists of an identification of the entity
 (the entity @i(of) the view),
@@ -104,8 +102,14 @@ In most cases, a declaration also contains the definition for the
 entity itself (a @nt(renaming_declaration) is an example of a declaration
 that does not define a new entity,
 but instead defines a view of an existing entity
-(see @RefSecNum(Renaming Declarations))).>}
-@ToGlossary{Term=<View>,Text=<(See @b[Definition].)>}
+(see @RefSecNum(Renaming Declarations))).
+
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<View>,
+Text=<@Chg{Version=[2],New=[A view consists of an identification of an entity
+(the entity of the view), plus view-specific characteristics that affect the
+use of the entity through that view (such as mode of access to an object,
+formal parameter names and defaults for a subprogram, or visibility to
+components of a type).],Old=[(See @b[Definition]]}.)>}
 @begin{Discussion}
   Most declarations define a view (of some entity) whose
   view-specific characteristics are unchanging for the
@@ -116,6 +120,20 @@ but instead defines a view of an existing entity
   By contrast, a private type provides a single, unchanging (partial)
   view of its full type.
 @end{Discussion}
+@ChgToGlossaryAlso{Version=[2],Kind=[Deleted],Term=<Definition>,
+  Text=<@ChgDeleted{Version=[2],Text=[@Defn(view)
+All declarations contain a @i(definition) for a @i(view) of an entity.
+A view consists of an identification of the entity
+(the entity @i(of) the view),
+plus view-specific characteristics that affect the use
+of the entity through that view (such as mode of access to an object,
+formal parameter names and defaults for a subprogram, or visibility to
+components of a type).
+In most cases, a declaration also contains the definition for the
+entity itself (a @nt(renaming_declaration) is an example of a declaration
+that does not define a new entity,
+but instead defines a view of an existing entity
+(see @RefSecNum(Renaming Declarations))).]}>}
 
 @PDefn2{Term=[scope], Sec=(informal definition)}
 For each declaration, the language rules define a certain
@@ -427,7 +445,7 @@ of @i(component) values.
   such as their primitive operations.>}
 @ToGlossary{Term=<Elementary type>,
   Text=<An elementary type does not have components.>}
-@ToGlossary{Term=<Composite type>,
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Composite type>,
   Text=<A composite type @Chg{Version=[2],New=[may have],Old=[has]} components.>}
 @ToGlossary{Term=<Scalar type>,
   Text=<A scalar type is either a discrete type or a real type.>}
@@ -480,6 +498,9 @@ of @i(component) values.
 @ToGlossary{Term=<Protected type>,
   Text=<A protected type is a composite type whose components are
   protected from concurrent access by multiple tasks.>}
+@ChgToGlossary{Version=[2],Kind=[Added],Term=<Synchronized type>,
+  Text=<@ChgAdded{Version=[2],Text=[A synchronized type is a task type or a
+  protected type.]}>}
 @ToGlossary{Term=<Private type>,
   Text=<A private type is a partial view of a type whose full view is
   hidden from its clients.>}
@@ -487,6 +508,11 @@ of @i(component) values.
   Text=<A private extension is like a record extension,
   except that the components of the extension part
   are hidden from its clients.>}
+
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Incomplete type>,
+  Text=<@ChgAdded{Version=[2],Text=[An incomplete type is a limited view of a
+  type whose full view is given elsewhere. Incomplete types are valuable for
+  defining recursive data structures.]}>}
 
 @Defn{scalar type}
 The elementary types are the @i(scalar) types (@i(discrete) and @i(real))
@@ -2210,14 +2236,20 @@ whose characteristics are @i(derived) from those of a
 @Chg{Version=[2],New=[parent type, and possibly from progenitor types],
 Old=[@i(parent type)]}.
 @IndexSee{Term=[inheritance],See=[derived types and classes]}
-@ToGlossary{Term=<Derived type>,
-  Text=<A derived type is a type defined in terms of another type,
-  which is the parent type of the derived type.
-  Each class containing the parent type also contains the derived type.
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Derived type>,
+  Text=<A derived type is a type defined in terms of @Chg{Version=[2],
+  New=[one or more other types given in a derived type definition. The
+  first type given],Old=[another type, which]}
+  is the parent type of the derived type@Chg{Version=[2],New=[and
+  any others are progenitor types],Old=[]}.
+  Each class containing the parent type @Chg{Version=[2],New=[or a progenitor
+  type ],Old=[]}also contains the derived type.
   The derived type inherits properties such as components and
-  primitive operations from the parent.
+  primitive operations from the parent@Chg{Version=[2],New=[ and progenitors],Old=[]}.
   A type together with the types derived from it
   (directly or indirectly) form a derivation class.>}
+
+
 @end{Intro}
 
 @begin{Syntax}
@@ -2235,6 +2267,12 @@ its type is the @Chg{Version=[2],New=[@i(parent type)],Old=[parent type]}.
 @Chg{Version=[2],New=[The @nt{interface_list} defines the progenitor types
 (see @RefSecNum{Interface Types}). A derived type
 has one parent type and zero or more progenitor types.],Old=[]}
+
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Parent>,
+  Text=<@ChgAdded{Version=[2],Text=[The parent type of a derived type is the
+  first type mentioned in the definition of the derived type. The parent type
+  can be any specific type other than a tagged synchronized non-interface type,
+  including an interface type.]}>}
 
 
 A type shall be completely defined
@@ -3078,6 +3116,16 @@ has a unique ultimate ancestor.],Old=[]}
     A similar statement applies to @i(root_real).
   @end(Itemize)
 @end(Discussion)
+
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Ancestor>,
+  Text=<@ChgAdded{Version=[2],Text=[An ancestor of a type is the type itself
+  or, in the case of a derived type, its parent type or one of its progenitor
+  types or one of their ancestors.]}>}
+
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Descendant>,
+  Text=<@ChgAdded{Version=[2],Text=[A descendant of a type is any type of which
+  the given type is an ancestor type. Note that a type is a descendant of
+  itself.]}>}
 
 @Defn2{Term=[inherited], Sec=(from an ancestor type)}
 An inherited component @Redundant[(including an inherited discriminant)] of a
