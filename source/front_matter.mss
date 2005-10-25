@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.48 $ $Date: 2005/10/13 05:15:46 $}
+@comment{$Revision: 1.49 $ $Date: 2005/10/22 04:25:11 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -529,8 +529,8 @@ based on the tag of the operand.
 @ChgAdded{Version=[2],Text=[
 Interface types provide abstract models from which other interfaces and
 types may be composed and derived. This provides a reliable form of multiple
-inheritance. Interface types may also be implemented by synchronized types
-(task types and protected types) thereby enabling concurrent programming and
+inheritance. Interface types may also be implemented by
+task types and protected types thereby enabling concurrent programming and
 inheritance to be merged.]}
 
 The concept of a type is further refined by the concept of a

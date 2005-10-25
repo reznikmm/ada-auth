@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:16 $}
+@Comment{$Date: 2005/10/22 04:25:06 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -498,21 +498,25 @@ of @i(component) values.
 @ToGlossary{Term=<Protected type>,
   Text=<A protected type is a composite type whose components are
   protected from concurrent access by multiple tasks.>}
-@ChgToGlossary{Version=[2],Kind=[Added],Term=<Synchronized type>,
-  Text=<@ChgAdded{Version=[2],Text=[A synchronized type is a task type or a
-  protected type.]}>}
-@ToGlossary{Term=<Private type>,
-  Text=<A private type is a partial view of a type whose full view is
-  hidden from its clients.>}
-@ToGlossary{Term=<Private extension>,
-  Text=<A private extension is like a record extension,
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Private type>,
+  Text=<A private type @Chg{Version=[2],New=[gives a],Old=[is a partial]} view
+    of a type @Chg{Version=[2],New=[that reveals only some of its properties.
+    The remaining properties are provided by the],Old=[whose]} full view
+    @Chg{Version=[2],New=[given elsewhere. Private types are valuable for
+    defining abstractions which hide unnecesssary detail],Old=[hidden]} from
+    @Chg{Version=[2],New=[a client],Old=[its clients]}.>}@ChgNote{This was
+    changed to parallel "incomplete type"}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Private extension>,
+  Text=<A private extension is @Chg{Version=[2],New=[a type that extends
+  another type, with the additional properties],Old=[like a record extension,
   except that the components of the extension part
-  are hidden from its clients.>}
+  are]} hidden from its clients.>}
 
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Incomplete type>,
-  Text=<@ChgAdded{Version=[2],Text=[An incomplete type is a limited view of a
-  type whose full view is given elsewhere. Incomplete types are valuable for
-  defining recursive data structures.]}>}
+  Text=<@ChgAdded{Version=[2],Text=[An incompete type gives a view of a type
+  that reveals only some of its properties. The remaining properties are
+  provided by the full view given elsewhere. Incomplete types are valuable
+  for defining recursive data structures.]}>}
 
 @Defn{scalar type}
 The elementary types are the @i(scalar) types (@i(discrete) and @i(real))
@@ -745,9 +749,11 @@ operands to produce an effect, or yield a result, or both.
   parameter passing modes, and
   the constraint checks that apply in various places.
 
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
   Not every property of types represents a class.
   For example, the set of all abstract types does not form a class,
-  because this set is not closed under derivation.
+  because this set is not closed under derivation.@Chg{Version=[2],New=[
+  Similarly, the set of all interface types does not form a class.],Old=[]}
 
   The set of limited types forms a class in the sense that it is closed
   under derivation, but the more interesting
@@ -784,7 +790,7 @@ all types
 @\@\@\access-to-object
 @\@\@\access-to-subprogram
 @\composite@Chg{Version=[2],New=[
-@\@\noninterface],Old=[]}
+@\@\untagged],Old=[]}
 @Chg{Version=[2],New=[@\],Old=[]}@\@\array
 @Chg{Version=[2],New=[@\],Old=[]}@\@\@\string
 @Chg{Version=[2],New=[@\],Old=[]}@\@\@\other array
@@ -792,21 +798,30 @@ all types
 @\@\tagged]}
 @Chg{Version=[2],New=[@\],Old=[]}@\@\task
 @Chg{Version=[2],New=[@\],Old=[]}@\@\protected@Chg{Version=[2],New=[
-@\@\interface
-@\@\@\nonlimited interface
-@\@\@\limited interface
-@\@\@\@\synchronized interface
-@\@\@\@\@\task interface
-@\@\@\@\@\protected interface],Old=[]}
+@\@\tagged (including interfaces)
+@\@\@\nonlimited tagged record
+@\@\@\limited tagged
+@\@\@\@\limited tagged record
+@\@\@\@\synchronized tagged
+@\@\@\@\@\tagged task
+@\@\@\@\@\tagged protected],Old=[]}
 @end{Display}
 
 @noprefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @Chg{Version=[2],New=[There are other],Old=[The]} classes@Chg{Version=[2],
 New=[, such as],Old=[]} @lquotes@;numeric@rquotes@; and
-@lquotes@;@Chg{Version=[2],New=[tagged],Old=[nonlimited]}@rquotes@;@Chg{Version=[2],
+@lquotes@;@Chg{Version=[2],New=[discriminated],Old=[nonlimited]}@rquotes@;@Chg{Version=[2],
 New=[, which],Old=[]}
 represent other classification dimensions@Chg{Version=[2],New=[, but],
 Old=[ and]} do not fit into the above strictly hierarchical picture.
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[Note that this is also true for some classes
+  mentioned in the chart. The class @lquotes@;task@rquotes@; includes both
+  untagged tasks and tagged tasks. Similarly for @lquotes@;protected@rquotes@;,
+  @lquotes@;limited@rquotes@;, and @lquotes@;nonlimited@rquotes@; (note that
+  limited and nonlimited are not shown for untagged composite types).]}
+@end{Discussion}
 @end{Notes}
 
 @begin{DiffWord83}
@@ -2271,8 +2286,7 @@ has one parent type and zero or more progenitor types.],Old=[]}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Parent>,
   Text=<@ChgAdded{Version=[2],Text=[The parent type of a derived type is the
   first type mentioned in the definition of the derived type. The parent type
-  can be any specific type other than a tagged synchronized non-interface type,
-  including an interface type.]}>}
+  can be almost any specific type, including an interface type.]}>}
 
 
 A type shall be completely defined

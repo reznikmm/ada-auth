@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/10/14 22:18:51 $}
+@Comment{$Date: 2005/10/22 04:25:08 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1797,6 +1797,7 @@ on such a subtype, either explicitly, or by its initial value.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01],ARef=[AI95-00419-01]}
 @Defn2{Term=[ancestor subtype], Sec=(of a formal derived type)}
+@PDefn{private extension}
 The @i(ancestor subtype) of a formal derived type is the
 subtype denoted by the @nt<subtype_mark> of
 the @nt<formal_derived_type_definition>.
@@ -2422,7 +2423,15 @@ types are new concepts.
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[@Redundant[The class determined for a formal
-interface type is the class of all interface types.]]}
+interface type is the class of all tagged types.]]}
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We can't say @lquotes@;the class of all interface
+  types@rquotes because interface types do not form a class @en it is not
+  closed under derivation.]}
+@end{Reason}
+
 
 @end{Intro}
 
@@ -2439,8 +2448,9 @@ rhs="@Chg{Version=[2],New=<@Syn2{interface_type_definition}>,Old=<>}"}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The class of all interface types includes
-  non-interface descendants of interface types. Such types must
+  @ChgAdded{Version=[2],Text=[The class of all tagged types includes
+  non-interface descendants of interface types, as well as types that have
+  nothing to do with interfaces at all. Such types must
   not match a formal interface.]}
 @end{Reason}
 

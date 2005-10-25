@@ -1,8 +1,9 @@
+
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2005/10/14 22:18:53 $ $Author: Randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2005/10/22 04:25:09 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/10/14 22:18:53 $}
+@Comment{$Date: 2005/10/22 04:25:09 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -5241,6 +5242,14 @@ element equivalence is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} To_Set (New_Item : Element_Type) @key{return} Set;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns a set containing the single element New_Item.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Length (Container : Set) @key{return} Count_Type;]}
 @end{Example}
 
@@ -5912,6 +5921,9 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Sets} (Left, Right : Set) @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{To_Set} (New_Item : Element_Type) @key{return} Set;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Capacity} (Container : Set) @key{return} Count_Type;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6363,6 +6375,9 @@ package Containers.Ordered_Sets has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Sets} (Left, Right : Set) @key{return} Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{To_Set} (New_Item : Element_Type) @key{return} Set;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Length} (Container : Set) @key{return} Count_Type;]}

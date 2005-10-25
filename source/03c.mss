@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:18 $}
+@Comment{$Date: 2005/10/22 04:25:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2298,7 +2298,7 @@ but then clients of the package would not have visibility to T.
 type that provides a restricted form of multiple inheritance. A tagged type,
 task type, or protected type may have one or more interface types as
 ancestors.]]}
-@ChgToGlossary{Version=[2],Kind=[Added],Term=<Interface type>,
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Interface type>,
   Text=<@ChgAdded{Version=[2],Text=[An interface type is a form of abstract
   tagged type which has no components or concrete operations
   except possibly null procedures. Interface types are used for
@@ -2363,11 +2363,19 @@ In addition,@PDefn2{Term=[interface],Sec=[synchronized]}
 all task and protected interfaces
 are synchronized interfaces, and all synchronized interfaces are limited
 interfaces.]}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Synchronized>,
+  Text=<@ChgAdded{Version=[2],Text=[Informally, a synchronized entity is one
+  that will work safely with multiple tasks at one time. A synchronized
+  interface can be used with either a task or a protected type, while a
+  synchronized tagged type is any of a tagged task type, tagged protected type,
+  or a synchronized interface.]}>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[@Defn{synchronized tagged type}
-@PDefn2{Term=[type],Sec=[synchronized]}
+@PDefn2{Term=[type],Sec=[synchronized tagged]}
 @PDefn2{Term=[tagged type],Sec=[synchronized]}
+@PDefn2{Term=[tagged type],Sec=[task]}
+@PDefn2{Term=[tagged type],Sec=[protected]}
 @Defn{task tagged type}
 @Defn{protected tagged type}
 @Redundant[A task or protected type derived from an interface is a tagged type.]
@@ -2381,6 +2389,36 @@ synchronized interfaces.]}
 @RefSecNum{Tagged Types and Type Extensions} includes task and protected types
 derived from interfaces.]}
 @end{TheProof}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The class-wide type associated with a tagged task
+type (including a task interface type) is a task type, because
+@lquotes@;task@rquotes is one of the language-defined classes of types (see
+@RefSecNum{Types and Subtypes}. However, the class-wide type associated with an
+interface is @i<not> an interface type, as @lquotes@;interface@rquotes is
+@i<not> one of the language-defined classes (as it is not closed under
+derivation). In this sense, @lquotes@;interface@rquotes is similar to
+@lquotes@;abstract@rquotes. The class-wide type associated with an interface is
+a concrete (nonabstract) indefinite tagged composite type.]}
+@end{Ramification}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[A task interface is a @Redundant[(tagged,
+abstract)] task type. A proctected interface is a @Redundant[(tagged,
+abstract)] protected type.]}
+
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The @lquotes@;(tagged, abstract)@rquotes follows
+  from the definition of an interface type.]}
+@end{TheProof}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This ensures that task operations (like abort and
+  the Terminated attribute) can be applied to a task interface type and the
+  associated class-wide type. While there are no protected type operations,
+  we apply the same rule to protected interfaces for consistency.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @Chg{Version=[2],New=[@Redundant[An interface type has no components.]],Old=[]}
@@ -2417,18 +2455,31 @@ shall be an interface type.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[A descendant of a nonlimited interface shall be
-nonlimited. A descendant of a task interface shall be a task type or a task
-interface. A descendant of a protected interface shall be a protected type or a
-protected interface. A descendant of a synchronized interface shall be a task
-type, a protected type, or a synchronized interface. No type shall be both
-a task type and a protected type.]}
+nonlimited. An interface descended from a task interface shall be a task
+interface (that is, it shall include the reserved word @key{task} in its
+definition); other types descended from a task interface shall be a private
+extension or a task type declared by a task declaration (see
+@RefSecNum{Task Units and Task Objects}). An interface descended from a
+protected interface shall be a protected interface (that is, it shall include
+the reserved word @key{protected} in its definition); other types descended
+from a protected interface shall be a private extension or a protected type
+declared by a protected declaration (see
+@RefSecNum{Protected Units and Protected Objects}). An interface descended from
+a synchronized interface shall be a task, protected, or synchronized interface
+(that is, it shall include one of the reserved words @key{task},
+@key{protected}, or @key{synchronized} in its definition); other types
+descended from a synchronized interface shall be a private extension, a task
+type declared by a task declaration, or protected type declared by a protected
+declaration. No type shall be descended from both a task interface and a
+protected interface.]}
+
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-   @ChgAdded{Version=[2],Text=[We require that a descendant of a task, protected, or
-   synchronized interface repeat the explicit kind of interface it will be,
-   rather than simply inheriting it, so that a reader is always aware of
-   whether the interface provides synchronization and whether it may be
-   implemented only by a task or protected type. The only place where
+   @ChgRef{Version=[2],Kind=[AddedNormal]}
+   @ChgAdded{Version=[2],Text=[We require that an interface descendant of a
+   task, protected, or synchronized interface repeat the explicit kind of
+   interface it will be, rather than simply inheriting it, so that a reader is
+   always aware of whether the interface provides synchronization and whether
+   it may be implemented only by a task or protected type. The only place where
    inheritance of the kind of interface might be useful would be in a generic
    if you didn't know the kind of the actual interface. However, the value of
    that is low because you cannot implement an interface properly if you don't
@@ -2436,12 +2487,11 @@ a task type and a protected type.]}
    require the kind of the actual interface to match the kind of the formal
    interface (see @RefSecNum{Formal Interface Types}).]}
 
-   @ChgAdded{Version=[2],Text=[The last sentence prevents a single private type
-   from inheriting from both a task and a protected interface. For a private
-   type, there can be no completion. For a generic formal type, there can be no
-   possible matching type (so no instantiation could be legal). This rule
-   provides early detection of the errors.]}
-
+   @ChgAdded{Version=[2],Text=[The last sentence prevents a single private
+   extension from inheriting from both a task and a protected interface. For a
+   private type, there can be no legal completion. For a generic formal derived
+   type, there can be no possible matching type (so no instantiation could be
+   legal). This rule provides early detection of the errors.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
