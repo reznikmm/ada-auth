@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/13 05:15:43 $}
+@Comment{$Date: 2005/10/25 05:47:12 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2632,9 +2632,10 @@ Device_Register : Medium;
 @key[for] Car_Name'Storage_Size @key[use] --@RI{ specify access type's storage pool size}
         2000*((Car'Size/System.Storage_Unit) +1); --@RI{ approximately 2000 cars}
 
-@key[function] My_Read(Stream : @key[access] Ada.Streams.Root_Stream_Type'Class)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
+@key[function] @Chg{Version=[2],New=[My_Input],Old=[My_Read]}(Stream : @key[@Chg{Version=[2],New=[not null ],Old=[]}access] Ada.Streams.Root_Stream_Type'Class)
   @key[return] T;
-@key(for) T'Read @key(use) My_Read; --@RI{ see @RefSecNum{Stream-Oriented Attributes}}
+@key(for) T'@Chg{Version=[2],New=[Input],Old=[Read]} @key(use) @Chg{Version=[2],New=[My_Input],Old=[My_Read]}; --@RI{ see @RefSecNum{Stream-Oriented Attributes}}
 @end{Example}
 @end{Examples}
 

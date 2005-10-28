@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/09/21 04:43:28 $}
+@Comment{$Date: 2005/10/25 05:47:11 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -558,8 +558,9 @@ are not handled by the handlers of the
 @begin{StaticSem}
 @leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01],ARef=[AI95-00400-01]}
-@ChildUnit{Parent=[Ada],Child=[Exceptions]}@key[package] Ada.Exceptions @key[is]@Chg{Version=[2],New=[
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01],ARef=[AI95-00400-01],ARef=[AI95-00438-01]}
+@ChildUnit{Parent=[Ada],Child=[Exceptions]}@Chg{Version=[2],New=[@key[with] Ada.Streams;
+],Old=[]}@key[package] Ada.Exceptions @key[is]@Chg{Version=[2],New=[
     @key[pragma] Preelaborate(Exceptions);],Old=[]}
     @key[type] @AdaTypeDefn{Exception_Id} @key[is] @key[private];@Chg{Version=[2],New=[
     @key[pragma] Preelaborable_Initialization(Exception_Id);],Old=[]}
@@ -595,13 +596,31 @@ are not handled by the handlers of the
         --@RI{ Same as Wide_Wide_Exception_Name(Exception_Identity(X)).}],Old=[]}
     @key[function] @AdaSubDefn{Exception_Information}(X : Exception_Occurrence) @key[return] String;
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00438-01]}
     @key[procedure] @AdaSubDefn{Save_Occurrence}(Target : @key[out] Exception_Occurrence;
                               Source : @key[in] Exception_Occurrence);
     @key[function] @AdaSubDefn{Save_Occurrence}(Source : Exception_Occurrence)
-                             @key[return] Exception_Occurrence_Access;
+                             @key[return] Exception_Occurrence_Access;@Chg{Version=[2],New=[],Old=[
 @key[private]
-   ... --@RI{ @RI{not specified by the language}}
-@key[end] Ada.Exceptions;
+   ... --@RI{ not specified by the language}
+@key[end] Ada.Exceptions;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
+@ChgAdded{Version=[2],Text=[    package Stream_Attributes is
+       procedure Read (Stream : not null access Ada.Streams.Root_Stream_Type'Cla
+                       Item : out Exception_Occurrence);
+       procedure Write (Stream : not null access Ada.Streams.Root_Stream_Type'Cl
+                       Item : in Exception_Occurrence);
+    end Stream_Attributes;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
+@ChgAdded{Version=[2],Text=[    @key[for] Exception_Occurrence'Read @key[use] Stream_Attributes.Read;
+    @key[for] Exception_Occurrence'Write @b[use] Stream_Attributes.Write;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
+@ChgAdded{Version=[2],Text=[@key[private]
+   ... --@RI{ not specified by the language}
+@key[end] Ada.Exceptions;]}
 @end{Example}
 
 Each distinct exception is represented by a distinct value
@@ -799,36 +818,75 @@ subprograms;
 they don't raise an exception,
 but simply save the Null_Occurrence.
 @end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
+@ChgAdded{Version=[2],Text=[Stream_Attributes.Write writes a representation of
+an exception occurrence to a stream; Stream_Attributes.Read reconstructs an
+exception occurrence from a stream (including one written in a different
+partition).]}
+@ChgNote{All of these notes (except the first) are moved from below.}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This routines are used to define the stream
+  attributes (see @RefSecNum{Stream-Oriented Attributes}) for
+  Exception_Occurrence.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The identity of the exception,
+  as well as the Exception_Name and Exception_Message,
+  have to be preserved across partitions.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The string returned by Exception_Name
+  or Exception_Message on the result of calling the Read
+  attribute on a given stream has to be the same as the value returned
+  by calling the corresponding function on the exception occurrence
+  that was written into the stream with the Write attribute.
+  The string returned by Exception_Information need not be
+  the same, since it is implementation defined anyway.]}
+@end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This is important for supporting writing exception occurrences
+  to external files for post-mortem analysis, as well as
+  propagating exceptions across remote subprogram calls
+  in a distributed system
+  (see @RefSecNum{Remote Subprogram Calls}).]}
+@end{Reason}
 @end{StaticSem}
 
 @begin{ImplReq}
-The implementation of the Write attribute
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00438-01]}
+@ChgDeleted{Version=[2],Text=[The implementation of the Write attribute
 (see @RefSecNum{Stream-Oriented Attributes})
 of Exception_Occurrence shall support writing
 a representation of an exception occurrence
 to a stream; the implementation of the Read attribute
 of Exception_Occurrence shall support reconstructing
 an exception occurrence from a stream (including one written in
-a different partition).
+a different partition).]}
 @begin{Ramification}
-  The identity of the exception,
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[The identity of the exception,
   as well as the Exception_Name and Exception_Message,
-  have to be preserved across partitions.
+  have to be preserved across partitions.]}
 
-  The string returned by Exception_Name
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[The string returned by Exception_Name
   or Exception_Message on the result of calling the Read
   attribute on a given stream has to be the same as the value returned
   by calling the corresponding function on the exception occurrence
   that was written into the stream with the Write attribute.
   The string returned by Exception_Information need not be
-  the same, since it is implementation defined anyway.
+  the same, since it is implementation defined anyway.]}
 @end{Ramification}
 @begin{Reason}
-  This is important for supporting writing exception occurrences
-  to external files for post-mortem analysis, as well as
+  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgDeleted{Version=[2],Text=[This is important for supporting writing
+  exception occurrences to external files for post-mortem analysis, as well as
   propagating exceptions across remote subprogram calls
   in a distributed system
-  (see @RefSecNum{Remote Subprogram Calls}).
+  (see @RefSecNum{Remote Subprogram Calls}).]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1050,9 +1108,10 @@ exception contains such a character.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01],ARef=[AI95-00400-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01],ARef=[AI95-00400-01],ARef=[AI95-00438-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Functions Wide_Exception_Name and Wide_Wide_Exception_Name
+  Functions Wide_Exception_Name and Wide_Wide_Exception_Name, and package
+  Stream_Attributes
   are newly added to Ada.Exceptions. If Ada.Exceptions is referenced in a
   @nt{use_clause}, and an entity @i<E> with the same @nt{defining_identifier}
   as a new entity in Ada.Exceptions is defined in a

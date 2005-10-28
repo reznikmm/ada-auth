@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/10/22 04:25:08 $}
+@Comment{$Date: 2005/10/25 05:47:11 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2855,7 +2855,7 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
 @key[with] @key[function] Image(X : Enum) @key[return] String @key[is] Enum'Image;
 @key[with] @key[procedure] Update @key[is] Default_Update;@Chg{Version=[2],New=[
 @key[with] @key[procedure] Pre_Action(X : @key[in] Item) @key[is null];  --@RI[ defaults to no action]
-@key[with] @key[procedure] Write(S    : @key[access] Root_Stream_Type'Class;
+@key[with] @key[procedure] Write(S    : @key[not null access] Root_Stream_Type'Class;
                      Desc : Descriptor)
                      @b<is abstract> Descriptor'Write;  --@RI[ see @RefSecNum{Stream-Oriented Attributes}]
 --@RI[ Dispatching operation on Descriptor with default]],Old=[]}

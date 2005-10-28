@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2005/10/11 06:12:43 $ $Author: Randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2005/10/25 05:47:14 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/10/11 06:12:43 $}
+@Comment{$Date: 2005/10/25 05:47:14 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -545,7 +545,8 @@ within the visible part of the library unit;
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}
 @Chg{Version=[2],New=[],Old=[if ]}the full view of @Chg{Version=[2],New=[each],Old=[a]}
 type declared in the visible part of the
-library unit @Chg{Version=[2],New=[shall support external streaming (see
+library unit @Chg{Version=[2],New=[that has any available stream attributes
+shall support external streaming (see
 @RefSecNum{Stream-Oriented Attributes})], Old=[has a part that is of a
 non-remote access type, then that access type, or the type of some
 part that includes the access type subcomponent,
@@ -555,6 +556,13 @@ shall have user-specified Read and Write attributes]}.
   attributes of an access type as part of the Read and Write
   attributes of a visible type.
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgAdded{Version=[2],Text=[Types that do not have available stream
+  attributes are excluded; that means that attributes do not need to be
+  specified for most limited types. It is only necessary to specify attributes
+  for types that have a part that is of any access type.]}
+@end{Ramification}
 @end{itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0082],ARef=[AI95-00164-01]}

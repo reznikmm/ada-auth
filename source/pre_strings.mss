@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2005/10/11 06:12:52 $ $Author: Randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2005/10/25 05:47:17 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/10/11 06:12:52 $}
+@Comment{$Date: 2005/10/25 05:47:17 $}
 
 @LabeledClause{String Handling}
 
@@ -2827,7 +2827,7 @@ function Strings.Hash has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<function> Ada.Strings.Hash (Key : String) @key<return> Containers.Hash_Type;@ChildUnit{Parent=[Ada.Strings],Child=[Hash]}
-@key<pragma> Pure (Hash);]}
+@key<pragma> Pure(Hash);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -2849,7 +2849,7 @@ function Strings.Fixed.Hash has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers, Ada.Strings.Hash;
 @key<function> Ada.Strings.Fixed.Hash (Key : String) @key<return> Containers.Hash_Type
    @key<renames> Ada.Strings.Hash;
-@key<pragma> Pure (Hash);]}
+@key<pragma> Pure(Hash);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2863,7 +2863,7 @@ function Strings.Bounded.Hash has the following declaration:]}
                      @key<new> Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key<function> Ada.Strings.Bounded.Hash (Key : Bounded.Bounded_String)
    @key<return> Containers.Hash_Type;
-@key<pragma> Preelaborate (Hash);]}
+@key<pragma> Preelaborate(Hash);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -2883,7 +2883,7 @@ function Strings.Unbounded.Hash has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<function> Ada.Strings.Unbounded.Hash (Key : Unbounded_String)@ChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash]}
    @key<return> Containers.Hash_Type;
-@key<pragma> Preelaborate (Hash);]}
+@key<pragma> Preelaborate(Hash);]}
 @end{Example}
 
 @begin{DescribeCode}

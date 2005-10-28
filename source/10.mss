@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:22 $}
+@Comment{$Date: 2005/10/25 05:47:10 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3388,8 +3388,8 @@ then its compilation units shall be pure,
 and they shall depend semantically only on
 compilation units of other library units that are
 declared pure.@Chg{Version=[2],New=[ Furthermore, the full view of any
-nonlimited partial view declared in the visible part of the library unit
-shall support external streaming
+partial view declared in the visible part of the library unit that has
+any available stream attributes shall support external streaming
 (see @RefSecNum{Stream-Oriented Attributes}).],Old=[]}
 @begin{Honest}
 A @i{declared-pure} library unit is one to which a
@@ -3432,27 +3432,16 @@ in a pure package can be used in remote operations only if they are externally
 streamable. That simply means that there is a means to transport values of the
 type; that's automatically true for nonlimited types that don't have an
 access part. The only tricky part about this is to avoid privacy leakage; that
-was handled by ensuring that any nonlimited private types (and private
-extensions) declared in a pure package have to be externally streamable.],
+was handled by ensuring that any private types (and private
+extensions) declared in a pure package that have available stream attributes
+(which include all nonlimited types by definition) have to be externally
+streamable.],
 Old=[Furthermore, a named access-to-object type without a pool would be a new
 concept, adding complexity from the user's point of view. Finally, the
 prevention of @nt{allocator}s would have to be
 a run-time check, in order to avoid violations of the generic contract
 model.]}
 @end{Reason}
-@begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
-  @ChgAdded{Version=[2],Text=[It might seem that the requirement that
-  a nonlimited partial view support external streaming would be incompatible
-  with Ada 95. However, the only types allowed in an Ada 95 pure package
-  that don't allow external streaming naturally are an explicitly limited
-  record type, a protected type without entries, or a type with access
-  discriminants. But all of these types have to be limited in Ada 95, so
-  they couldn't complete (or be part of) a nonlimited private type or
-  private extension. In any case, the requirement can be met by
-  declaring user-defined Read and Write attributes for the offending type;
-  that also will allow external streaming of a limited type.]}
-@end{Ramification}
 @end{Legality}
 
 @begin{ImplPerm}
@@ -3626,6 +3615,24 @@ Pragmas Elaborate are allowed to be mixed in with the other
 things in the @nt{context_clause} @em in Ada 83, they were
 required to appear last.
 @end{Extend83}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  The requirement that a partial view with available stream attributes
+  can cause an incompatibility in rare cases. If there is a limited tagged
+  type declared in a pure package with available attributes, and that
+  type is used to declare a private extension in another pure package,
+  and the full type for the private extension has a component of an
+  explicitly limited record type, a protected type, or a type with
+  access discriminants, then the stream attributes will have to
+  user-specified in the visible part of the package. That is not a requirement
+  for Ada 95, but this combination seems very unlikely in pure packages.
+  Note that this cannot be an incompatibility for a nonlimited type,
+  as all of the types that are allowed in Ada 95 that would require
+  explicitly defined stream attributes are limited (and thus cannot be used
+  as components in a nonlimited type).]}
+@end{Incompatible95}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}

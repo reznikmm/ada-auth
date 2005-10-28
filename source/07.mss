@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:19 $}
+@Comment{$Date: 2005/10/25 05:47:08 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -79,7 +79,7 @@ Old=[@nt{declarative_item}s]} after the reserved word
 @i{private part} of the package.
 If the reserved
 word @key{private} does not appear, the package has an implicit empty
-private part.]@Chg{Version=[2],New=[Each list of @nt{basic_declarative_item}s
+private part.]@Chg{Version=[2],New=[ Each list of @nt{basic_declarative_item}s
 of a @nt{package_specification} forms a @i{declaration list} of the
 package.@PDefn2{Term=[declaration list],Sec=(package_specification)}],Old=[]}
 

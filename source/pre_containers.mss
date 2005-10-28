@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2005/10/22 04:25:09 $ $Author: Randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2005/10/25 05:47:14 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/10/22 04:25:09 $}
+@Comment{$Date: 2005/10/25 05:47:14 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -3604,7 +3604,7 @@ propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Type=[Trailing],Text=[If Element_Type is
-unconstrained and definite, then the Element parameter of Process.@key{all}
+unconstrained and definite, then the actual Element parameter of Process.@key{all}
 shall be unconstrained.]}
 
 @begin{Ramification}

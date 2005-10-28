@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:23 $}
+@Comment{$Date: 2005/10/25 05:47:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @LabeledClause{The Package System}
 
@@ -2807,13 +2807,13 @@ an elementary type @i(T)}, the following representation attribute is defined:]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],NoPrefix=[T],Text=[The value of this attribute is of
-  type @i{universal_integer} and is a multiple of Stream_Element'Size.]}
+  type @i{universal_integer} and is a multiple of Stream_Element'Size.]}]}@Comment{end attribute Stream_Size}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],NoPrefix=[T],Text=[Stream_Size may be specified for
   first subtypes via an @nt{attribute_definition_clause}; the @nt{expression}
   of such a clause shall be static, non-negative, and a multiple of
-  Stream_Element'Size.]}]}@Comment{end attribute Stream_Size}
+  Stream_Element'Size.]}
 @end{Description}
 @EndPrefixType{}
 
@@ -2891,8 +2891,9 @@ the following attributes are defined.
 @AttributeLeading{Prefix=<S>, AttrName=<Write>,
   Text=<S'Write denotes a procedure with the following specification:
 @begin{DescExample}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
 @key(procedure) S'Write(
-   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item} : @key{in} @RI(T))
 @end{DescExample}
 
@@ -2901,8 +2902,9 @@ the following attributes are defined.
 @AttributeLeading{Prefix=<S>, AttrName=<Read>,
   Text=<S'Read denotes a procedure with the following specification:
 @begin{DescExample}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
 @key(procedure) S'Read(
-   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item} : @key{out} @RI(T))
 @end{DescExample}
 
@@ -3002,8 +3004,9 @@ Stream_Size bits; otherwise the range is signed.]}
   Text=<S'Class'Write denotes a procedure with the following
 specification:
 @begin{DescExample}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
 @key(procedure) S'Class'Write(
-   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item}   : @key{in} @RI(T)'Class)
 @end{DescExample}
 
@@ -3013,8 +3016,9 @@ the specific type identified by the tag of Item.>}
 @AttributeLeading{Prefix=<S'Class>, AttrName=<Read>,
   Text=<S'Class'Read denotes a procedure with the following specification:
 @begin{DescExample}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
 @key(procedure) S'Class'Read(
-   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item} : @key{out} @RI(T)'Class)
 @end{DescExample}
 
@@ -3050,8 +3054,9 @@ the following attributes are defined.
 @AttributeLeading{Prefix=<S>, AttrName=<Output>,
   Text=<S'Output denotes a procedure with the following specification:
 @begin{DescExample}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
 @key(procedure) S'Output(
-   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item} : @key{in} @RI(T))
 @end{DescExample}
 
@@ -3065,8 +3070,9 @@ first subtype is constrained.
 @AttributeLeading{Prefix=<S>, AttrName=<Input>,
   Text=<S'Input denotes a function with the following specification:
 @begin{DescExample}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
 @key(function) S'Input(
-   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)
+   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class)
    @key(return) @RI(T)
 @end{DescExample}
 
@@ -3079,7 +3085,7 @@ S'Output to determine how much to read.>}
 @Leading@;@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @Chg{New=[For untagged derived types,
-@Chg{Version=[2],New=[default implementations of the ],Old=[]}Output
+@Chg{Version=[2],New=[the default implementations of ],Old=[]}the Output
 and Input attributes @Chg{Version=[2],New=[],Old=[of the parent type ]}are
 inherited @Chg{Version=[2],New=[from the parent type ],Old=[]}as
 specified in @RefSecNum(Operational and Representation Items);
@@ -3133,8 +3139,9 @@ an abstract function.]}
   Text=<S'Class'Output denotes a procedure with the following
 specification:
 @begin{DescExample}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
 @key(procedure) S'Class'Output(
-   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class;
+   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item}   : @key{in} @RI(T)'Class)
 @end{DescExample}
 
@@ -3156,8 +3163,9 @@ level deeper than that of S.],Old=[]}>}@Comment{End of S'Class'Output attribute}
 @AttributeLeading{Prefix=<S'Class>, AttrName=<Input>,
   Text=<S'Class'Input denotes a function with the following specification:
 @begin{DescExample}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
 @key(function) S'Class'Input(
-   @RI{Stream} : @key{access} Ada.Streams.Root_Stream_Type'Class)
+   @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class)
    @key{return} @RI(T)'Class
 @end{DescExample}
 
@@ -3224,7 +3232,7 @@ for any type via an @nt{attribute_definition_clause}.
 @Chg{Version=[2],New=[The subprogram name given in such a
 clause shall not denote an abstract subprogram. Furthermore, if a
 stream-oriented attribute is specified for an interface type by an
-@nt{attribute_definition_clause}, the subprogram name in the clause shall
+@nt{attribute_definition_clause}, the subprogram name given in the clause shall
 statically denote a null procedure.],
 Old=[All nonlimited types have default implementations
 for these operations. An @nt{attribute_reference} for one of
@@ -3505,8 +3513,10 @@ class-wide types descended from S.
 @begin{Examples}
 @leading@keepnext@i{Example of user-defined Write attribute:}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key[procedure] My_Write(
-  Stream : @key[access] Ada.Streams.Root_Stream_Type'Class; Item : My_Integer'Base);
+  Stream : @key[@Chg{Version=[2],New=[not null ],Old=[]}access] Ada.Streams.Root_Stream_Type'Class;@Chg{Version=[2],New=[
+  ],Old=[]}Item@Chg{Version=[2],New=[  ],Old=[]} : My_Integer'Base);
 @key(for) My_Integer'Write @key(use) My_Write;
 @end{Example}
 @begin{Discussion}
@@ -3561,7 +3571,7 @@ class-wide types descended from S.
   components were not included in the stream (as in original Ada 95), it
   would fail to work in the language as corrected by the Corrigendum.]}
 
-  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
   @ChgAdded{Version=[2],Text=[Explicitly provided a permission that the number
   of calls to the underlying stream Read and Write operations may differ from
   the number determined by the canonical operations. If Ada 95 code somehow
@@ -3591,26 +3601,26 @@ class-wide types descended from S.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify that
   these are operational attributes.]}
 
-  @ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0045],ARef=[AI95-00132-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0045],ARef=[AI95-00132-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that End_Error
   is raised by the default implementation of Read and Input if the end of
   the stream is reached. (The result could have been abnormal without this
   clarification, thus this is not an inconsistency, as the programmer could
   not have depended on the previous behavior.)]}
 
-  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
   @ChgAdded{Version=[2],Text=[Clarified that the default implementation of
   S'Input does normal initialization on the object that it passes to S'Read.]}
 
-  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
   @ChgAdded{Version=[2],Text=[Explicitly stated that what is read from a
   stream when a required check fails is unspecified.]}
 
-  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
   @ChgAdded{Version=[2],Text=[Defined availability and default implementations
   for types with progenitors.]}
 
-  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00279-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
   @ChgAdded{Version=[2],Text=[Specified that Constraint_Error is raised if
   the internal tag retrieved for S'Class'Input is for some type not covered
   by S'Class or is abstract. We also explicitly state that the program is
@@ -3619,16 +3629,24 @@ class-wide types descended from S.
   cases; it's very unlikely to have provided some useful result, so this is
   not considered an inconsistency.)]}
 
-  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00344-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgAdded{Version=[2],Text=[Added wording to support nested type extensions.
   S'Input and S'Output always raise Tag_Error for such extensions, and such
   extensions were not permitted in Ada 95, so this is neither an extension
   nor an incompatibility.]}
 
-  @ChgRef{Version=[1],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
   @ChgAdded{Version=[2],Text=[Defined @i<supports external streaming> to
   put all of the rules about @lquotes@;good@rquotes stream attributes in one
   place. This is used for distribution and for defining pragma Pure.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00441-01]}
+  @ChgAdded{Version=[2],Text=[Added the @key[not null] qualifier to the
+  first parameter of all of the stream attributes, so that the semantics
+  doesn't change between Ada 95 and Ada 2005. This change is compatible,
+  because mode conformance is required for subprograms specified as
+  stream attributes, and @nt{null_exclusion}s are not considered for
+  mode conformance.]}
 @end{DiffWord95}
 
 

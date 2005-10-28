@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:21 $}
+@Comment{$Date: 2005/10/25 05:47:09 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 
@@ -3840,10 +3840,14 @@ a Seconds value of 0.0.]}
                  Time_Zone  : @key<in> Time_Zones.Time_Offset := 0);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Split Date into its constituent parts (Year,
-Month, Day, Hour, Minute, Second, Sub_Second), relative to the specified time
-zone offset. Leap_Second is True if Date identifies a leap second. The value
-returned in the Sub_Second parameter is always less than 1.0.]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Date does not represent a time
+within a leap second, splits Date into its constituent parts (Year, Month, Day,
+Hour, Minute, Second, Sub_Second), relative to the specified time zone offset,
+and sets Leap_Second to False. If Date represents a time within a leap second,
+set the constituent parts to values corresponding to a time one second earlier
+than that given by Date, relative to the specified time zone offset, and sets
+Leap_Seconds to True. The value returned in the Sub_Second parameter is always
+less than 1.0.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;
@@ -3857,14 +3861,10 @@ returned in the Sub_Second parameter is always less than 1.0.]}
                  Time_Zone  : @key<in> Time_Zones.Time_Offset := 0);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Date does not represent a time
-within a leap second, splits Date into its constituent parts (Year, Month, Day,
-Hour, Minute, Second, Sub_Second), relative to the specified time zone offset,
-and sets Leap_Second to False. If Date represents a time within a leap second,
-set the constituent parts to values corresponding to a time one second earlier
-than that given by Date, relative to the specified time zone offset, and sets
-Leap_Seconds to True. The value returned in the Sub_Second parameter is always
-less than 1.0.]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Date into its constituent parts (Year,
+Month, Day, Hour, Minute, Second, Sub_Second), relative to the specified time
+zone offset. The value returned in the Sub_Second parameter is always less
+than 1.0.]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<procedure> Split (Date       : @key<in> Time;

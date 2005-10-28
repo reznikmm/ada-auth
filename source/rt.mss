@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.58 $ $Date: 2005/10/20 06:09:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.59 $ $Date: 2005/10/25 05:47:16 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/10/20 06:09:24 $}
+@Comment{$Date: 2005/10/25 05:47:16 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1689,7 +1689,7 @@ when it executes a protected action, and how its active priority is
 affected by the locking.]
 The @i{locking policy} is specified by a Locking_Policy pragma. For
 implementation-defined locking policies, the @Chg{Version=[2],New=[meaning of
-the priority of a],Old=[effect of a Priority or
+the priority of],Old=[effect of a Priority or
 Interrupt_Priority pragma on]} a protected object is
 implementation defined.
 If no Locking_Policy pragma @Chg{New=[applies to],Old=[appears in]} any
@@ -2199,7 +2199,7 @@ implementation-defined queuing policies.]}]}
 @LabeledAddedSubClause{Version=[2],Name=[Dynamic Priorities for Tasks]}
 
 @begin{Intro}
-@Redundant[This clause specifies how the base priority of a task can be
+@Redundant[This clause describes how the base priority of a task can be
 modified or queried at run time.]
 @end{Intro}
 
@@ -3997,7 +3997,7 @@ measure execution time.]}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
-language-defined library exists:]}
+language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Task_Identification;
@@ -4220,7 +4220,7 @@ amount of CPU time.]}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
-language-defined library exists:]}
+language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{with} System;
@@ -4431,7 +4431,7 @@ assign execution time budgets to groups of tasks.]}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
-language-defined library exists:]}
+language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{with} System;
@@ -4682,7 +4682,7 @@ without the need for a task or a delay statement.]}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
-language-defined library exists:]}
+language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} Ada.Real_Time.Timing_Events @key{is}@ChildUnit{Parent=[Ada.Real_Time],Child=[Timing_Events]}]}
@@ -4907,7 +4907,7 @@ real-time clock interrupt mechanism.]}]}
 operation, it can be called from within a handler.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
-@ChgAdded{Version=[2],Text=[Timing_Event_Handler can be associated with several
+@ChgAdded{Version=[2],Text=[A Timing_Event_Handler can be associated with several
 Timing_Event objects.]}
 
 @end{Notes}

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/22 04:25:07 $}
+@Comment{$Date: 2005/10/25 05:47:06 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -572,8 +572,8 @@ generic function exists:]}
 @key{function} Ada.Tags.Generic_Dispatching_Constructor
    (The_Tag : Tag;
     Params : @key{access} Parameters) @key{return} T'Class;
-@key{pragma} Preelaborate (Generic_Dispatching_Constructor);
-@key{pragma} Convention (Intrinsic, Generic_Dispatching_Constructor);]}
+@key{pragma} Preelaborate(Generic_Dispatching_Constructor);
+@key{pragma} Convention(Intrinsic, Generic_Dispatching_Constructor);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
@@ -2364,7 +2364,7 @@ all task and protected interfaces
 are synchronized interfaces, and all synchronized interfaces are limited
 interfaces.]}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Synchronized>,
-  Text=<@ChgAdded{Version=[2],Text=[Informally, a synchronized entity is one
+  Text=<@ChgAdded{Version=[2],Text=[A synchronized entity is one
   that will work safely with multiple tasks at one time. A synchronized
   interface can be used with either a task or a protected type, while a
   synchronized tagged type is any of a tagged task type, tagged protected type,
@@ -2404,7 +2404,7 @@ a concrete (nonabstract) indefinite tagged composite type.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[A task interface is a @Redundant[(tagged,
-abstract)] task type. A proctected interface is a @Redundant[(tagged,
+abstract)] task type. A protected interface is a @Redundant[(tagged,
 abstract)] protected type.]}
 
 @begin{TheProof}
@@ -2454,24 +2454,31 @@ type shall be abstract subprograms or null procedures.],Old=[]}
 shall be an interface type.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[A descendant of a nonlimited interface shall be
-nonlimited. An interface descended from a task interface shall be a task
-interface (that is, it shall include the reserved word @key{task} in its
-definition); other types descended from a task interface shall be a private
+@ChgAdded{Version=[2],Text=[A type derived from a nonlimited interface shall be
+nonlimited.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[An interface derived from a task interface shall
+include the reserved word @key{task} in its
+definition; other types derived from a task interface shall be a private
 extension or a task type declared by a task declaration (see
-@RefSecNum{Task Units and Task Objects}). An interface descended from a
-protected interface shall be a protected interface (that is, it shall include
-the reserved word @key{protected} in its definition); other types descended
+@RefSecNum{Task Units and Task Objects}).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[An interface derived from a
+protected interface shall include
+the reserved word @key{protected} in its definition; other types derived
 from a protected interface shall be a private extension or a protected type
 declared by a protected declaration (see
-@RefSecNum{Protected Units and Protected Objects}). An interface descended from
-a synchronized interface shall be a task, protected, or synchronized interface
-(that is, it shall include one of the reserved words @key{task},
-@key{protected}, or @key{synchronized} in its definition); other types
-descended from a synchronized interface shall be a private extension, a task
+@RefSecNum{Protected Units and Protected Objects}).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[An interface derived from
+a synchronized interface shall include one of the reserved words @key{task},
+@key{protected}, or @key{synchronized} in its definition; other types
+derived from a synchronized interface shall be a private extension, a task
 type declared by a task declaration, or protected type declared by a protected
-declaration. No type shall be descended from both a task interface and a
-protected interface.]}
+declaration.]}
 
 @begin{Reason}
    @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2486,8 +2493,14 @@ protected interface.]}
    know whether it is a task, protected, or synchronized interface. Hence, we
    require the kind of the actual interface to match the kind of the formal
    interface (see @RefSecNum{Formal Interface Types}).]}
+@end{Reason}
 
-   @ChgAdded{Version=[2],Text=[The last sentence prevents a single private
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@ChgAdded{Version=[2],Text=[No type shall be derived from both a task interface
+and a protected interface.]}
+
+@begin{Reason}
+   @ChgAdded{Version=[2],Text=[This prevents a single private
    extension from inheriting from both a task and a protected interface. For a
    private type, there can be no legal completion. For a generic formal derived
    type, there can be no possible matching type (so no instantiation could be
