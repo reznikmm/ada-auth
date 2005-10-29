@@ -68,6 +68,8 @@ procedure ARM_Formatter is
     -- 12/05/04 - RLB - Split/added various source files.
     --  6/ 2/05 - RLB - Added Corrigendum output module for comparisons to
     --			Amendment document.
+    -- 10/12/05 - RLB - Changed the title to reflect what we learned from ISO.
+    -- 10/28/05 - RLB - Added Annex Q.
 
     -- Standard commands:
     -- For Original RM:
@@ -411,6 +413,10 @@ procedure ARM_Formatter is
 	    Section_Number => 36, -- represents P
 	    Starts_New_Section => True);
 		-- Mostly generated from the sections and annexes.
+	ARM_Format.Scan (Format, "LangDef.MSS",
+	    Section_Number => 37, -- represents Q
+	    Starts_New_Section => True);
+		-- Mostly generated from the sections and annexes.
 
 	ARM_Format.Insert_Index (Format);
 
@@ -596,6 +602,10 @@ procedure ARM_Formatter is
 	    Section_Name => "P", Section_Number => 36, -- represents P
 	    Starts_New_Section => True);
 		-- Mostly generated from the sections and annexes.
+	ARM_Format.Process (Format, "LangDef.MSS", Output_Object,
+	    Section_Name => "Q", Section_Number => 37, -- represents Q
+	    Starts_New_Section => True);
+		-- Mostly generated from the sections and annexes.
 
 	-- The index is generated here.
 	ARM_Format.Write_Index (Format, Output_Object);
@@ -636,7 +646,7 @@ procedure ARM_Formatter is
 				       For_ISO => False,
 				       File_Prefix => "AA",
 				       Title => "Annotated Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001 and AMD.1:Draft");
+				       Header_Prefix => "ISO/IEC 8652:200y(E) Ed. 3");
 		end if;
 	    when ARM_Format.RM =>
 		if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
@@ -666,7 +676,7 @@ procedure ARM_Formatter is
 				       For_ISO => False,
 				       File_Prefix => "RM",
 				       Title => "Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001 and AMD.1:Draft");
+				       Header_Prefix => "ISO/IEC 8652:200y(E) Ed. 3");
 		end if;
 	    when ARM_Format.RM_ISO =>
 		if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
@@ -696,14 +706,14 @@ procedure ARM_Formatter is
 				       For_ISO => False,
 				       File_Prefix => "RM",
 				       Title => "Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001 and AMD.1:Draft");
+				       Header_Prefix => "ISO/IEC 8652:200y(E) Ed. 3");
 		end if;
 	end case;
     end Create;
 
 
 begin
-    Ada.Text_IO.Put_Line ("ARM 95/2005 formatter");
+    Ada.Text_IO.Put_Line ("ARM 95/200Y formatter");
     Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005  AXE Consultants");
     Ada.Text_IO.Put_Line ("  P.O. Box 1512, Madison WI  53701");
 
@@ -769,7 +779,7 @@ Ada.Text_IO.Put_Line ("  Display Index Entries = " & Boolean'Image(Display_Index
 
     end case;
 
-    Ada.Text_IO.Put_Line ("ARM 95/2005 document created");
+    Ada.Text_IO.Put_Line ("ARM 95/200Y document created");
 exception
     when No_Command_Error =>
 	null; -- Error message displayed by command line processor.

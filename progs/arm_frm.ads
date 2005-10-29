@@ -2,7 +2,8 @@ with ARM_Output,
      ARM_Contents;
 --private -- Ada 2005
 with ARM_Input,
-     ARM_Database;
+     ARM_Database,
+     ARM_Subindex;
 package ARM_Format is
 
     --
@@ -77,6 +78,8 @@ package ARM_Format is
     -- 11/16/04 - RLB - Added Attr_Prefix_Text_Change_Kind.
     -- 12/06/04 - RLB - Added reference chain for Format_Type.
     -- 12/11/04 - RLB - Increased Syntax_NT length.
+    -- 10/17/05 - RLB - Added Glossary change items.
+    -- 10/28/05 - RLB - Added Language-Define subindexes.
 
     type Format_Type is tagged limited private;
 
@@ -320,7 +323,16 @@ private
 
 	-- Glossary:
 	Glossary_Term : String (1..20); -- Glossary term; used only when
-	Glossary_Term_Len : Natural := 0; -- processing ToGlossary[Also] commands.
+	Glossary_Term_Len : Natural := 0; -- processing [Chg]ToGlossary[Also] commands.
+	Glossary_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
+			-- The change kind of the ToGlossary.
+	Glossary_Version : ARM_Contents.Change_Version_Type;
+			-- If the kind is not "None", this is the version
+			-- number of the changed paragraph.
+	Add_to_Glossary : Boolean;
+			-- Add this item to the Glossary.
+	Glossary_Displayed : Boolean;
+			-- The text was displayed in the document.
 	Glossary_DB : ARM_Database.Database_Type;
 
 	-- Implementation advice:
@@ -339,5 +351,13 @@ private
 			-- number of the changed paragraph.
 	Impdef_Paragraph_String : String (1 .. 10); -- Paragraph number.
 	Impdef_Paragraph_Len : Natural;
+
+	-- Language-Defined entity subindexes:
+	Package_Index : ARM_Subindex.Subindex_Type;
+	Type_Index : ARM_Subindex.Subindex_Type;
+	Subprogram_Index : ARM_Subindex.Subindex_Type;
+	Exception_Index : ARM_Subindex.Subindex_Type;
+	Object_Index : ARM_Subindex.Subindex_Type;
+
     end record;
 end ARM_Format;

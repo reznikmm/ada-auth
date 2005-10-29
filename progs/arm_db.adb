@@ -48,6 +48,7 @@ package body ARM_Database is
     -- 12/06/04 - RLB - Added Revised_Inserted_Number change kind.
     -- 12/14/04 - RLB - Made the hang item bigger.
     --  1/19/05 - RLB - Added Added_Version.
+    -- 10/17/05 - RLB - Fixed indexing of the Glossary.
 
     type String_Ptr is access String;
     type Item is record
@@ -250,11 +251,11 @@ package body ARM_Database is
 		Format_Text ("@end(intro)" & Ascii.LF, "Suffix");
 	    when Normal_Indexed_List =>
 		Format_Text ("@begin(intro)" & Ascii.LF, "Prefix");
-		Format_Text ("@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}" & Ascii.LF, "Index");
 		Temp := Database_Object.List;
 		while Temp /= null loop
 		    Format_Text (Change_if_Needed (Temp) &
-				 Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);
+			"@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}" & Ascii.LF &
+			Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);
 		    Temp := Temp.Next;
 		end loop;
 		Format_Text ("@end(intro)" & Ascii.LF, "Suffix");

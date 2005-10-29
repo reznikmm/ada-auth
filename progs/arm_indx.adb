@@ -14,7 +14,7 @@ package body ARM_Index is
     -- This package contains the routines to manage and generate the index.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003, 2004 AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004, 2005 AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -51,6 +51,7 @@ package body ARM_Index is
     --  4/11/03 - RLB - Added a hard space in the indexing routine, in order
     --			that the empty paragraph isn't ignored.
     --  9/09/04 - RLB - Removed unused junk noted by Stephen Leake.
+    -- 10/28/05 - RLB - Added key reuse.
 
     Next_Index_Key : Index_Key;
 
@@ -148,16 +149,25 @@ package body ARM_Index is
     end Clean;
 
 
-    procedure Add (Term  : in String;
-		   Subterm : in String := "";
-		   Kind : in Index_Item_Kind_Type := Primary_Term;
-		   Clause : in String := "";
-		   Paragraph : in String := "";
-                   Key : out Index_Key) is
-	-- Add an index reference to the index. Returns a Key value to
-	-- refer to this index entry.
-	-- Raises Not_Valid_Error if Subterm, Clause, or Paragraph is not
-	-- empty when the kind does not use it.
+    function Get_Key return Index_Key is
+	-- Returns a Key value to refer to one or more index entries
+	-- (for a single entity).
+	Temp : Index_Key := Next_Index_Key;
+    begin
+	Next_Index_Key := Next_Index_Key + 1;
+	return Temp;
+    end Get_Key;
+
+
+    procedure Add_Reusing_Key (Term  : in String;
+			       Subterm : in String := "";
+			       Kind : in Index_Item_Kind_Type := Primary_Term;
+			       Clause : in String := "";
+			       Paragraph : in String := "";
+	                       Key : in Index_Key) is
+	-- Add an index reference to the index, (re)using the specified Key
+	-- to refer to this index entry. Key must have previously
+	-- returned by Add or Get_Key.
 	Temp_Term : Term_Type;
 	CTerm : constant String := Clean(Term);
 	CSubterm : constant String := Clean(Subterm);
@@ -215,9 +225,7 @@ package body ARM_Index is
 					Temp_Term.Subclause_Number);
 
 	end if;
-	Temp_Term.Key := Next_Index_Key;
-	Key := Next_Index_Key;
-	Next_Index_Key := Next_Index_Key + 1;
+	Temp_Term.Key := Key;
 
 	Temp_Term.Next := Index_List;
 	Index_List := new Term_Type'(Temp_Term);
@@ -226,6 +234,22 @@ package body ARM_Index is
 	when Ada.Strings.Length_Error =>
 	    Ada.Text_IO.Put_Line ("**** Index doesn't fit: Term: " & CTerm &
 				  " [Subterm: " & CSubterm & "]");
+    end Add_Reusing_Key;
+
+
+    procedure Add (Term  : in String;
+		   Subterm : in String := "";
+		   Kind : in Index_Item_Kind_Type := Primary_Term;
+		   Clause : in String := "";
+		   Paragraph : in String := "";
+                   Key : out Index_Key) is
+	-- Add an index reference to the index. Returns a Key value to
+	-- refer to this index entry.
+	-- Raises Not_Valid_Error if Subterm, Clause, or Paragraph is not
+	-- empty when the kind does not use it.
+    begin
+	Key := Get_Key;
+	Add_Reusing_Key (Term, Subterm, Kind, Clause, Paragraph, Key);
     end Add;
 
 
@@ -463,6 +487,29 @@ package body ARM_Index is
 		    -- No clause reference here.
 	    end case;
 	end New_Kind;
+
+	function Is_Last_for_Term (Item : in Term_Ptr) return Boolean is
+	    -- Returns True if this is the last line for Item's Term.
+ 	begin
+	    if Item.Next = null then
+		return True;
+	    elsif To_Lower (Item.Term (1..Item.Term_Len)) /= To_Lower (Item.Next.Term (1..Item.Next.Term_Len)) then
+		-- The next item has a different term.
+		return True;
+	    elsif Temp.Kind /= Temp.Next.Kind then
+		-- The next item has a different kind, so another line will
+		-- be generated.
+		return False;
+	    elsif To_Lower (Item.Subterm (1..Item.Subterm_Len)) /= To_Lower (Item.Next.Subterm (1..Item.Next.Subterm_Len)) then
+		-- The next item has a different subterm, so another line will
+		-- be generated.
+		return False;
+	    else
+		-- The following term will just add another clause reference.
+		-- So we must look at the term following that:
+		return Is_Last_for_Term (Item.Next);
+	    end if;
+	end Is_Last_for_Term;
 
     begin
 	Ada.Text_IO.Put_Line ("  -- Start index sorting - " & Natural'Image(Term_Count) & " items.");
@@ -773,8 +820,7 @@ package body ARM_Index is
 	            ARM_Output.Ordinary_Character (Output_Object, ' ');
 		    Clause_Ref (Temp);
 		else
-		    if Temp.Next = null or else
-		       To_Lower (Temp.Term (1..Last.Term_Len)) /= To_Lower(Temp.Next.Term (1..Temp.Term_Len)) then
+		    if Is_Last_for_Term(Temp) then
 		        -- Last (only) item of this term, always clear Keep:
 	                New_Kind (Temp, Reset_Keep => True);
 		        Keep_Set := False;

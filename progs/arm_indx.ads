@@ -7,7 +7,7 @@ package ARM_Index is
     -- This package contains the routines to manage and generate the index.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2005 AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -40,6 +40,7 @@ package ARM_Index is
     --
     --  5/28/00 - RLB - Created package.
     --  8/11/00 - RLB - Made Clean visible.
+    -- 10/28/05 - RLB - Added key reuse.
 
     Not_Valid_Error : exception;
 
@@ -66,6 +67,10 @@ package ARM_Index is
 	See_Also_Other_Term);		-- A "see also <subterm>" without reference.
 	-- Note: These are declared in the sorting order.
 
+    function Get_Key return Index_Key;
+	-- Returns a Key value to refer to one or more index entries
+	-- (for a single entity).
+
     procedure Add (Term  : in String;
 		   Subterm : in String := "";
 		   Kind : in Index_Item_Kind_Type := Primary_Term;
@@ -74,6 +79,18 @@ package ARM_Index is
                    Key : out Index_Key);
 	-- Add an index reference to the index. Returns a Key value to
 	-- refer to this index entry.
+	-- Raises Not_Valid_Error if Subterm, Clause, or Paragraph is not
+	-- empty when the kind does not use it.
+
+    procedure Add_Reusing_Key (Term  : in String;
+			       Subterm : in String := "";
+			       Kind : in Index_Item_Kind_Type := Primary_Term;
+			       Clause : in String := "";
+			       Paragraph : in String := "";
+	                       Key : in Index_Key);
+	-- Add an index reference to the index, (re)using the specified Key
+	-- to refer to this index entry. Key must have previously
+	-- returned by Add or Get_Key.
 	-- Raises Not_Valid_Error if Subterm, Clause, or Paragraph is not
 	-- empty when the kind does not use it.
 

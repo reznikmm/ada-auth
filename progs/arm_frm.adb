@@ -6,6 +6,7 @@ with ARM_Output,
      ARM_Database,
      ARM_Syntax,
      ARM_Index,
+     ARM_Subindex,
      Ada.Text_IO,
      Ada.Characters.Handling,
      Ada.Strings.Fixed;
@@ -179,6 +180,10 @@ package body ARM_Format is
     --  3/15/05 - RLB - Corrected spelling.
     --  5/27/05 - RLB - Added @Unicode command for examples.
     --  8/ 9/05 - RLB - Changed the capitalization of some AARM note headers.
+    -- 10/17/05 - RLB - Added Glossary change commands.
+    -- 10/28/05 - RLB - Made index changes for Ada 200Y.
+    --		- RLB - Added added Annex headers.
+    --		- RLB - Added Language-Defined Entity indexes.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -366,6 +371,11 @@ package body ARM_Format is
 	ARM_Database.Create (Format_Object.Docreq_DB);
 	ARM_Syntax.Create;
 	ARM_Index.Create;
+	ARM_Subindex.Create (Format_Object.Package_Index);
+	ARM_Subindex.Create (Format_Object.Type_Index);
+	ARM_Subindex.Create (Format_Object.Subprogram_Index);
+	ARM_Subindex.Create (Format_Object.Exception_Index);
+	ARM_Subindex.Create (Format_Object.Object_Index);
     end Create;
 
 
@@ -380,6 +390,11 @@ package body ARM_Format is
 	ARM_Database.Destroy (Format_Object.Docreq_DB);
 	ARM_Syntax.Destroy;
 	ARM_Index.Destroy;
+	ARM_Subindex.Destroy (Format_Object.Package_Index);
+	ARM_Subindex.Destroy (Format_Object.Type_Index);
+	ARM_Subindex.Destroy (Format_Object.Subprogram_Index);
+	ARM_Subindex.Destroy (Format_Object.Exception_Index);
+	ARM_Subindex.Destroy (Format_Object.Object_Index);
     end Destroy;
 
 
@@ -396,7 +411,9 @@ package body ARM_Format is
         -- Indexing:
 	Defn, RootDefn, PDefn, Defn2, RootDefn2, PDefn2, Index_See,
 	Index_See_Also, See_Other, See_Also,
-	Index_Root_Unit, Index_Child_Unit, Index_Type, Index_Subprogram,
+	Index_Root_Unit, Index_Child_Unit, Index_Subprogram_Child_Unit,
+	Index_Type, Index_Subprogram,
+	Index_Exception, Index_Object, Index_Package,
 	Index_Other, Index_Check, Index_Attr, Index_Pragma,
 	-- Clause labels:
 	Labeled_Section, Labeled_Section_No_Break, Labeled_Clause,
@@ -404,7 +421,9 @@ package body ARM_Format is
         Labeled_Added_Clause, Labeled_Added_Subclause,
 	Preface_Section,
 	Labeled_Informative_Annex, Labeled_Revised_Informative_Annex,
+        Labeled_Added_Informative_Annex,
 	Labeled_Normative_Annex, Labeled_Revised_Normative_Annex,
+        Labeled_Added_Normative_Annex,
 	Unnumbered_Section, Subheading, Heading, Center, Right,
         Added_Subheading,
 	-- Clause references:
@@ -414,11 +433,14 @@ package body ARM_Format is
 	Syntax_Summary, Syntax_Xref,
 	Added_Syntax_Rule, Deleted_Syntax_Rule,
 	Implementation_Defined,	Implementation_Defined_List,
-	To_Glossary, To_Glossary_Also, Glossary_Text_Param, -- The last is a parameter of the first two.
+	To_Glossary, To_Glossary_Also,
+	Change_To_Glossary, Change_To_Glossary_Also,
+	Glossary_Text_Param, -- This is a parameter of the last four.
 	Glossary_List,
         Prefix_Type, Reset_Prefix_Type, Attribute, Attribute_Leading, Attribute_Text_Param, -- The last is a parameter of Attribute.
 	Attribute_List,
 	Pragma_Syntax, Pragma_List, Added_Pragma_Syntax,
+	Package_List, Type_List, Subprogram_List, Exception_List, Object_List,
 	-- Corrigendum changes:
 	Change, Change_Param_Old, Change_Param_New, -- The latter are the parameters of "Change".
 	Change_Reference, Change_Note,
@@ -548,10 +570,18 @@ package body ARM_Format is
 	    return Index_Root_Unit;
 	elsif Canonical_Name = "childunit" then
 	    return Index_Child_Unit;
+	elsif Canonical_Name = "subchildunit" then
+	    return Index_Subprogram_Child_Unit;
 	elsif Canonical_Name = "adatypedefn" then
 	    return Index_Type;
 	elsif Canonical_Name = "adasubdefn" then
 	    return Index_Subprogram;
+	elsif Canonical_Name = "adaexcdefn" then
+	    return Index_Exception;
+	elsif Canonical_Name = "adaobjdefn" then
+	    return Index_Object;
+	elsif Canonical_Name = "adapackdefn" then
+	    return Index_Package;
 	elsif Canonical_Name = "adadefn" then
 	    return Index_Other;
 	elsif Canonical_Name = "indexcheck" then
@@ -578,6 +608,10 @@ package body ARM_Format is
 	    return To_Glossary;
 	elsif Canonical_Name = "toglossaryalso" then
 	    return To_Glossary_Also;
+	elsif Canonical_Name = "chgtoglossary" then
+	    return Change_To_Glossary;
+	elsif Canonical_Name = "chgtoglossaryalso" then
+	    return Change_To_Glossary_Also;
 	elsif Canonical_Name = "glossarylist" then
 	    return Glossary_List;
 	elsif Canonical_Name = "prefixtype" then
@@ -614,6 +648,16 @@ package body ARM_Format is
 	    return Change_Documentation_Requirement;
 	elsif Canonical_Name = "addeddocreqlist" then
 	    return Added_Documentation_Requirements_List;
+	elsif Canonical_Name = "packagelist" then
+	    return Package_List;
+	elsif Canonical_Name = "typelist" then
+	    return Type_List;
+	elsif Canonical_Name = "subprogramlist" then
+	    return Subprogram_List;
+	elsif Canonical_Name = "exceptionlist" then
+	    return Exception_List;
+	elsif Canonical_Name = "objectlist" then
+	    return Object_List;
 	elsif Canonical_Name = "labeledsection" then
 	    return Labeled_Section;
 	elsif Canonical_Name = "labeledsectionnobreak" then
@@ -632,6 +676,10 @@ package body ARM_Format is
 	    return Labeled_Revised_Informative_Annex;
 	elsif Canonical_Name = "labeledrevisednormativeannex" then
 	    return Labeled_Revised_Normative_Annex;
+	elsif Canonical_Name = "labeledaddedinformativeannex" then
+	    return Labeled_Added_Informative_Annex;
+	elsif Canonical_Name = "labeledaddednormativeannex" then
+	    return Labeled_Added_Normative_Annex;
 	elsif Canonical_Name = "labeledrevisedclause" then
 	    return Labeled_Revised_Clause;
 	elsif Canonical_Name = "labeledrevisedsubclause" then
@@ -1075,11 +1123,11 @@ package body ARM_Format is
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 		    end;
 
-		when Labeled_Added_Clause |
+		when Labeled_Added_Informative_Annex |
+		     Labeled_Added_Normative_Annex |
+		     Labeled_Added_Clause |
 		     Labeled_Added_Subclause =>
 		    declare
-			Old_Title : ARM_Contents.Title_Type;
-			Old_Title_Length : Natural;
 			Ch : Character;
 			Version : ARM_Contents.Change_Version_Type := '0';
 		    begin
@@ -1105,15 +1153,9 @@ package body ARM_Format is
 			    ARM_File.Replace_Char (Input_Object);
 		        end if;
 
-		        if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
-			    Format_Object.Subclause := Format_Object.Subclause + 1;
-		        else -- if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
-			    Format_Object.Clause := Format_Object.Clause + 1;
-			    Format_Object.Subclause := 0;
-		        end if;
-
 		        -- Load the title into the contents package:
 		        if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
+			    Format_Object.Subclause := Format_Object.Subclause + 1;
 			    ARM_Contents.Add (Title, ARM_Contents.Subclause,
 					      Format_Object.Section,
 					      Format_Object.Clause,
@@ -1124,7 +1166,9 @@ package body ARM_Format is
 					      Format_Object.Section,
 					      Format_Object.Clause,
 					      Format_Object.SubClause);
-		        else --if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
+		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
+			    Format_Object.Clause := Format_Object.Clause + 1;
+			    Format_Object.Subclause := 0;
 			    ARM_Contents.Add (Title, ARM_Contents.Clause,
 					      Format_Object.Section,
 					      Format_Object.Clause,
@@ -1133,6 +1177,36 @@ package body ARM_Format is
 					      ARM_Contents.Clause,
 					      Format_Object.Section,
 					      Format_Object.Clause);
+		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
+		            if Saw_a_Section_Header then
+			        Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
+				        ARM_File.Line_String (Input_Object));
+			    end if;
+			    Saw_a_Section_Header := True;
+			    Format_Object.Clause := 0;
+			    Format_Object.Subclause := 0;
+			    ARM_Contents.Add (Title,
+					      ARM_Contents.Normative_Annex,
+					      Format_Object.Section,
+					      Version => Version);
+			    ARM_Contents.Add_Old ((others => ' '),
+					      ARM_Contents.Normative_Annex,
+					      Format_Object.Section);
+		        else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex then
+		            if Saw_a_Section_Header then
+			        Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
+				        ARM_File.Line_String (Input_Object));
+			    end if;
+			    Saw_a_Section_Header := True;
+			    Format_Object.Clause := 0;
+			    Format_Object.Subclause := 0;
+			    ARM_Contents.Add (Title,
+					      ARM_Contents.Informative_Annex,
+					      Format_Object.Section,
+					      Version => Version);
+			    ARM_Contents.Add_Old ((others => ' '),
+					      ARM_Contents.Informative_Annex,
+					      Format_Object.Section);
 		        end if;
 
 			Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
@@ -1451,20 +1525,23 @@ package body ARM_Format is
         ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Normal, Number => "");
 	if Format_Object.Document /= ARM_Format.RM_ISO then
 	    ARM_Output.Ordinary_Text (Output_Object,
-		"Index entries are given by paragraph number. A list of all " &
-		"language-defined library units may be found under " &
-		"Language-Defined Library Units. A list of all language-defined " &
-		"types may be found under Language-Defined Types.");
+		"Index entries are given by paragraph number.");
 	else -- ISO: No paragraph numbers!
 	    ARM_Output.Ordinary_Text (Output_Object,
-		"Index entries are given by subclause. A list of all " &
+		"Index entries are given by subclause.");
+	end if;
+	if Format_Object.Change_Version < '1' then
+	    ARM_Output.Ordinary_Text (Output_Object,
+		"A list of all " &
 		"language-defined library units may be found under " &
 		"Language-Defined Library Units. A list of all language-defined " &
 		"types may be found under Language-Defined Types.");
-	end if;
-	if Format_Object.Change_Version < '1' then
-	    null;
-	else
+	elsif Format_Object.Change_Version < '1' then
+	    ARM_Output.Ordinary_Text (Output_Object,
+		"A list of all " &
+		"language-defined library units may be found under " &
+		"Language-Defined Library Units. A list of all language-defined " &
+		"types may be found under Language-Defined Types.");
             case Format_Object.Changes is
 	        when ARM_Format.Old_Only =>
 		    null;
@@ -1483,6 +1560,50 @@ package body ARM_Format is
 	            ARM_Output.Ordinary_Text (Output_Object,
 		        " A list of all language-defined subprograms " &
 		        "may be found under Language-Defined Subprograms.");
+		    ARM_Output.Text_Format (Output_Object,
+		           Bold => False, Italic => False,
+		           Font => ARM_Output.Default,
+		           Size => 0,
+		           Change => ARM_Output.None,
+		           Location => ARM_Output.Normal);
+	    end case;
+	else
+            case Format_Object.Changes is
+	        when ARM_Format.Old_Only =>
+		    null;
+	        when ARM_Format.New_Only =>
+		    null;
+	        when ARM_Format.Show_Changes | ARM_Format.New_Changes | ARM_Format.Changes_Only =>
+		    ARM_Output.Text_Format (Output_Object,
+		           Bold => False, Italic => False,
+		           Font => ARM_Output.Default,
+		           Size => 0,
+		           Change => ARM_Output.Deletion,
+		           Version => '2',
+		           Location => ARM_Output.Normal);
+		    ARM_Output.Ordinary_Text (Output_Object,
+			"A list of all " &
+			"language-defined library units may be found under " &
+			"Language-Defined Library Units. A list of all language-defined " &
+			"types may be found under Language-Defined Types.");
+		    ARM_Output.Text_Format (Output_Object,
+		           Bold => False, Italic => False,
+		           Font => ARM_Output.Default,
+		           Size => 0,
+		           Change => ARM_Output.Both,
+		           Version => '2',
+		           Added_Version => '1',
+		           Location => ARM_Output.Normal);
+	            ARM_Output.Ordinary_Text (Output_Object,
+		        " A list of all language-defined subprograms " &
+		        "may be found under Language-Defined Subprograms.");
+		    ARM_Output.Text_Format (Output_Object, -- We need both so these pair properly.
+		           Bold => False, Italic => False,
+		           Font => ARM_Output.Default,
+		           Size => 0,
+		           Change => ARM_Output.Deletion,
+		           Version => '2',
+		           Location => ARM_Output.Normal);
 		    ARM_Output.Text_Format (Output_Object,
 		           Bold => False, Italic => False,
 		           Font => ARM_Output.Default,
@@ -2972,7 +3093,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    -- If Text_Kind is Deletion, the text should be displayed as deletion.
 	    -- If Text_Kind is Do_Not_Display_Text (same as Both), the
 	    --   text should not be shown at all.
-	    -- Program_Error is raised if Text_Kind is None or Both.
+	    -- Program_Error is raised if Operation is None or Both.
 	    -- This routine assumes (and checks) that we are not nested
 	    -- in some other change item; Program_Error is raised if
 	    -- we are.
@@ -3088,6 +3209,217 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    end if;
 	    end case;
 	end Calc_Change_Disposition;
+
+
+        procedure Write_Subindex (
+		            Subindex_Object : in out ARM_Subindex.Subindex_Type;
+		            Format_Object : in out Format_Type;
+		            Output_Object : in out ARM_Output.Output_Type'Class) is
+	    -- Writes a subindex for the document.
+        begin
+	    Check_End_Paragraph;
+
+	    -- Insert a blank paragraph:
+            ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Normal, Number => "");
+	    ARM_Output.Hard_Space (Output_Object);
+            ARM_Output.End_Paragraph (Output_Object);
+
+	    ARM_Output.Set_Columns (Output_Object, Number_of_Columns => 2);
+
+	    ARM_Subindex.Write_Subindex (
+		    Subindex_Object,
+		    Output_Object,
+		    Use_Paragraphs => Format_Object.Document /= ARM_Format.RM_ISO);
+
+	    ARM_Output.Set_Columns (Output_Object, Number_of_Columns => 1);
+
+	    -- Not in a paragraph here, either.
+        end Write_Subindex;
+
+
+        procedure Simple_Subindex_Item (
+	            Subindex_Object : in out ARM_Subindex.Subindex_Type;
+	            Format_Object : in out Format_Type;
+	            Output_Object : in out ARM_Output.Output_Type'Class;
+		    Entity_Kind_Name : in String) is
+	    -- Create a simple subindex item; the command has a single
+	    -- parameter <defn>.
+	    -- Create an "In_Unit" entry for the item;
+	    -- Also create two regular index entries:
+	    --    One for <defn> with a secondary entry of "@i{in} <Unit>"
+	    --    (where Unit is the unit saved by a previous RootLibUnit or
+	    --    ChildUnit.),
+	    -- and a Second (only for version < 2 and if the entity name is
+	    --    non-null) for
+	    --    "Language-Defined <Entity>" with a
+	    --     secondary entry of "<defn> @i{in} <Unit>".
+	    -- Also outputs the <defn> parameter to the output file.
+	    Entity : String(1..80);
+	    Len : Natural := 0;
+	    Key : ARM_Index.Index_Key := ARM_Index.Get_Key;
+	    Disposition : ARM_Output.Change_Type;
+	    use type ARM_Output.Change_Type;
+        begin
+	    ARM_Input.Copy_to_String_until_Close_Char (
+	        Input_Object,
+	        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char,
+	        Entity,
+	        Len);
+
+	    -- Determine what to do with the "Language-Defined" entry:
+	    Calc_Change_Disposition (
+	        Version => '2',
+	        Operation => ARM_Output.Deletion,
+	        Text_Kind => Disposition);
+	    if Entity_Kind_Name'Length = 0 or else
+               Disposition = Do_Not_Display_Text then
+	        null; -- Ignore this.
+	    elsif Disposition = ARM_Output.None then
+	        -- Normal reference:
+	        ARM_Index.Add_Reusing_Key (
+		    Term => "Language-Defined " & Entity_Kind_Name,
+		    Subterm => Entity(1..Len) & " in " &
+			      Format_Object.Unit(1..Format_Object.Unit_Len),
+	            Kind => ARM_Index.SubDeclaration_in_Package,
+		    Clause => Clause_String,
+		    Paragraph => Paragraph_String,
+		    Key => Key);
+		    -- Note that the Subdeclaration type changes the
+		    -- "in" into italics.
+	    elsif Disposition = ARM_Output.Deletion then
+	        null; -- Ignore this (no change info in the index).
+	    else -- Insertion.
+	        raise Program_Error; -- An insertion inside of a deletion command!
+	    end if;
+
+	    Check_Paragraph;
+	    ARM_Output.Index_Target (Output_Object, Key);
+
+	    ARM_Index.Add_Reusing_Key (
+	        Term => Entity(1..Len),
+	        Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
+	        Kind => ARM_Index.Declaration_in_Package,
+	        Clause => Clause_String,
+	        Paragraph => Paragraph_String,
+	        Key => Key);
+
+	    ARM_Subindex.Insert (
+		Subindex_Object => Subindex_Object,
+		Entity => Entity(1..Len),
+		From_Unit => Format_Object.Unit(1..Format_Object.Unit_Len),
+		Kind => ARM_Subindex.In_Unit,
+		Clause => Clause_String,
+		Paragraph => Paragraph_String,
+		Key => Key);
+
+	    ARM_Output.Ordinary_Text (Output_Object, Entity(1..Len));
+	    Format_Object.Last_Non_Space := True;
+	end Simple_Subindex_Item;
+
+
+        procedure Child_Unit (
+	            Subindex_Object : in out ARM_Subindex.Subindex_Type;
+	            Format_Object : in out Format_Type;
+	            Output_Object : in out ARM_Output.Output_Type'Class) is
+	    -- Generates three index entries: An index entry for <child>, with
+	    -- a secondary of "@i{child of} <parent>", an index entry for
+	    -- "Language-Defined Library Units" with a secondary entry of
+	    -- <parent>.<child>, and an index entry for <parent>.<child>. The
+	    -- Unit is set to <parent>.<child>. (For version 2 or later, the
+	    -- Language-Defined entry is not generated.) The first entry is
+	    -- added to the subindex list as well.
+	    Close_Ch : Character;
+	    Parent, Child : String(1..80);
+	    PLen, CLen : Natural := 0;
+	    Key : ARM_Index.Index_Key := ARM_Index.Get_Key;
+            Disposition : ARM_Output.Change_Type;
+            use type ARM_Output.Change_Type;
+        begin
+	    ARM_Input.Check_Parameter_Name (Input_Object,
+	        Param_Name => "Parent" & (7..ARM_Input.Command_Name_Type'Last => ' '),
+	        Is_First => True,
+	        Param_Close_Bracket => Close_Ch);
+	    if Close_Ch /= ' ' then
+	        -- Copy over the term:
+	        ARM_Input.Copy_to_String_until_Close_Char (
+		    Input_Object,
+		    Close_Ch,
+		    Parent,
+		    PLen);
+	    -- else no parameter. Weird.
+	    end if;
+
+	    ARM_Input.Check_Parameter_Name (Input_Object,
+	        Param_Name => "Child" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+	        Is_First => False,
+	        Param_Close_Bracket => Close_Ch);
+	    if Close_Ch /= ' ' then
+	        -- Copy over the term:
+	        ARM_Input.Copy_to_String_until_Close_Char (
+		    Input_Object,
+		    Close_Ch,
+		    Child,
+		    CLen);
+	    -- else no parameter. Weird.
+	    end if;
+
+	    -- Set the current unit for future use:
+	    Format_Object.Unit_Len := PLen + CLen + 1;
+	    Format_Object.Unit (1..Format_Object.Unit_Len) :=
+	        Parent(1..PLen) & '.' & Child(1..CLen);
+
+	    ARM_Index.Add_Reusing_Key (
+		    Term => Child(1..CLen),
+		    Subterm => Parent(1..PLen),
+		    Kind => ARM_Index.Child_Unit_Parent,
+		    Clause => Clause_String,
+		    Paragraph => Paragraph_String,
+		    Key => Key);
+
+	    Check_Paragraph;
+	    ARM_Output.Index_Target (Output_Object, Key);
+
+	    -- Determine what to do with the "Language-Defined" entry:
+	    Calc_Change_Disposition (
+	        Version => '2',
+	        Operation => ARM_Output.Deletion,
+	        Text_Kind => Disposition);
+	    if Disposition = Do_Not_Display_Text then
+	        null; -- Ignore this.
+	    elsif Disposition = ARM_Output.None then
+	        -- Make reference:
+	        ARM_Index.Add_Reusing_Key (
+		    Term => "Language-Defined Library Units",
+		    Subterm => Parent(1..PLen) & '.' & Child(1..CLen),
+		    Kind => ARM_Index.Primary_Term_and_Subterm,
+		    Clause => Clause_String,
+		    Paragraph => Paragraph_String,
+		    Key => Key);
+	    elsif Disposition = ARM_Output.Deletion then
+	        null; -- Ignore this (no change info in the index).
+	    else -- Insertion.
+	        raise Program_Error; -- An insertion inside of a deletion command!
+    	    end if;
+
+	    ARM_Index.Add_Reusing_Key (
+		    Term => Parent(1..PLen) & '.' & Child(1..CLen),
+		    Kind => ARM_Index.Primary_Term,
+		    Clause => Clause_String,
+		    Paragraph => Paragraph_String,
+		    Key => Key);
+
+	    ARM_Subindex.Insert (
+		    Subindex_Object => Subindex_Object,
+		    Entity => Child(1..CLen),
+		    From_Unit => Parent(1..PLen),
+		    Kind => ARM_Subindex.Child_of_Parent,
+		    Clause => Clause_String,
+		    Paragraph => Paragraph_String,
+		    Key => Key);
+
+	    -- Leave the command end marker, let normal processing
+	    -- get rid of it.
+        end Child_Unit;
 
 
 	procedure Process_Begin is
@@ -4853,7 +5185,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    declare
 			Term : String(1..80);
 			Len : Natural := 0;
-			Key : ARM_Index.Index_Key;
+			Key : ARM_Index.Index_Key := ARM_Index.Get_Key;
+		        Disposition : ARM_Output.Change_Type;
+		        use type ARM_Output.Change_Type;
 		    begin
 		        ARM_Input.Copy_to_String_until_Close_Char (
 			    Input_Object,
@@ -4865,22 +5199,45 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			Format_Object.Unit (1..Len) := Term(1..Len);
 			Format_Object.Unit_Len := Len;
 
-			ARM_Index.Add (Term => "Language-Defined Library Units",
-				       Subterm => Term(1..Len),
-				       Kind => ARM_Index.Primary_Term_and_Subterm,
-				       Clause => Clause_String,
-				       Paragraph => Paragraph_String,
-				       Key => Key);
+		        -- Determine what to do with the "Language-Defined" entry:
+		        Calc_Change_Disposition (
+			    Version => '2',
+			    Operation => ARM_Output.Deletion,
+			    Text_Kind => Disposition);
+			if Disposition = Do_Not_Display_Text then
+			    null; -- Ignore this.
+		        elsif Disposition = ARM_Output.None then
+			    -- Make reference:
+			    ARM_Index.Add_Reusing_Key (
+				Term => "Language-Defined Library Units",
+				Subterm => Term(1..Len),
+			        Kind => ARM_Index.Primary_Term_and_Subterm,
+			        Clause => Clause_String,
+			        Paragraph => Paragraph_String,
+			        Key => Key);
+			elsif Disposition = ARM_Output.Deletion then
+			    null; -- Ignore this (no change info in the index).
+		        else -- Insertion.
+			    raise Program_Error; -- An insertion inside of a deletion command!
+	    		end if;
 
 			Check_Paragraph;
 			ARM_Output.Index_Target (Output_Object, Key);
 
-			ARM_Index.Add (Term => Term(1..Len),
-				       Kind => ARM_Index.Primary_Term,
-				       Clause => Clause_String,
-				       Paragraph => Paragraph_String,
-				       Key => Key);
-			ARM_Output.Index_Target (Output_Object, Key);
+			ARM_Index.Add_Reusing_Key (
+				Term => Term(1..Len),
+				Kind => ARM_Index.Primary_Term,
+			        Clause => Clause_String,
+			        Paragraph => Paragraph_String,
+			        Key => Key);
+
+		        ARM_Subindex.Insert (
+				Subindex_Object => Format_Object.Package_Index,
+				Entity => Term(1..Len),
+				Kind => ARM_Subindex.Top_Level,
+				Clause => Clause_String,
+				Paragraph => Paragraph_String,
+				Key => Key);
 
 		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 		            -- Remove the "RootLibUnit" record.
@@ -4892,168 +5249,103 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- of "@i{child of} <parent>", an index entry for "Language-Defined
 		    -- Library Units" with a secondary entry of <parent>.<child>,
 		    -- and an index entry for <parent>.<child>.
-		    declare
-			Close_Ch : Character;
-			Parent, Child : String(1..80);
-			PLen, CLen : Natural := 0;
-			Key : ARM_Index.Index_Key;
-		    begin
-			ARM_Input.Check_Parameter_Name (Input_Object,
-			    Param_Name => "Parent" & (7..ARM_Input.Command_Name_Type'Last => ' '),
-			    Is_First => True,
-			    Param_Close_Bracket => Close_Ch);
-			if Close_Ch /= ' ' then
-			    -- Copy over the term:
-			    ARM_Input.Copy_to_String_until_Close_Char (
-				Input_Object,
-			        Close_Ch,
-				Parent,
-				PLen);
-			-- else no parameter. Weird.
-			end if;
+		    Child_Unit (Format_Object.Package_Index,
+	                Format_Object,
+	                Output_Object);
 
-			ARM_Input.Check_Parameter_Name (Input_Object,
-			    Param_Name => "Child" & (6..ARM_Input.Command_Name_Type'Last => ' '),
-			    Is_First => False,
-			    Param_Close_Bracket => Close_Ch);
-			if Close_Ch /= ' ' then
-			    -- Copy over the term:
-			    ARM_Input.Copy_to_String_until_Close_Char (
-				Input_Object,
-			        Close_Ch,
-				Child,
-				CLen);
-			-- else no parameter. Weird.
-			end if;
 
-			-- Set the current unit for future use:
-			Format_Object.Unit_Len := PLen + CLen + 1;
-			Format_Object.Unit (1..Format_Object.Unit_Len) :=
-			    Parent(1..PLen) & '.' & Child(1..CLen);
-
-			ARM_Index.Add (Term => Child(1..CLen),
-				       Subterm => Parent(1..PLen),
-				       Kind => ARM_Index.Child_Unit_Parent,
-				       Clause => Clause_String,
-				       Paragraph => Paragraph_String,
-				       Key => Key);
-
-			Check_Paragraph;
-			ARM_Output.Index_Target (Output_Object, Key);
-
-			ARM_Index.Add (Term => "Language-Defined Library Units",
-				       Subterm => Parent(1..PLen) & '.' & Child(1..CLen),
-				       Kind => ARM_Index.Primary_Term_and_Subterm,
-				       Clause => Clause_String,
-				       Paragraph => Paragraph_String,
-				       Key => Key);
-			ARM_Output.Index_Target (Output_Object, Key);
-
-			ARM_Index.Add (Term => Parent(1..PLen) & '.' & Child(1..CLen),
-				       Kind => ARM_Index.Primary_Term,
-				       Clause => Clause_String,
-				       Paragraph => Paragraph_String,
-				       Key => Key);
-			ARM_Output.Index_Target (Output_Object, Key);
-
-			-- Leave the command end marker, let normal processing
-			-- get rid of it.
-		    end;
+		when Index_Subprogram_Child_Unit =>
+		    -- @ChildUnit{Parent=[<parent>],Child=[<child>]}
+		    -- Generates three index entries: An index entry for <child>, with a secondary
+		    -- of "@i{child of} <parent>", an index entry for "Language-Defined
+		    -- Library Units" with a secondary entry of <parent>.<child>,
+		    -- and an index entry for <parent>.<child>.
+		    Child_Unit (Format_Object.Subprogram_Index,
+	                Format_Object,
+	                Output_Object);
 
 		when Index_Type =>
 		    -- @AdaTypeDefn{<defn>}
 		    -- Generates two index entries: one for <defn> with a
 		    -- secondary entry of "@i{in} <Unit>" (where Unit is
 		    -- the unit saved by a previous RootLibUnit or ChildUnit.),
+		    -- adds a similar entry to the exception list,
 		    -- and second for "Language-Defined Type" with a
 		    -- secondary entry of "<defn> @i{in} <Unit>".
 		    -- Also outputs the <defn> to the output file.
-		    declare
-			Type_Name : String(1..80);
-			Len : Natural := 0;
-			Key : ARM_Index.Index_Key;
-		    begin
-		        ARM_Input.Copy_to_String_until_Close_Char (
-			    Input_Object,
-		            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char,
-			    Type_Name,
-			    Len);
 
-			ARM_Index.Add (Term => "Language-Defined Type",
-				       Subterm => Type_Name(1..Len) & " in " &
-						  Format_Object.Unit(1..Format_Object.Unit_Len),
-				       Kind => ARM_Index.SubDeclaration_in_Package,
-				       Clause => Clause_String,
-				       Paragraph => Paragraph_String,
-				       Key => Key);
-			    -- Note that the Subdeclaration type changes the
-			    -- "in" into italics.
-			Check_Paragraph;
-			ARM_Output.Index_Target (Output_Object, Key);
-
-			ARM_Index.Add (Term => Type_Name(1..Len),
-				       Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
-				       Kind => ARM_Index.Declaration_in_Package,
-				       Clause => Clause_String,
-				       Paragraph => Paragraph_String,
-				       Key => Key);
-			ARM_Output.Index_Target (Output_Object, Key);
-
-			ARM_Output.Ordinary_Text (Output_Object, Type_Name(1..Len));
-			Format_Object.Last_Non_Space := True;
-
-		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
-		            -- Remove the "AdaSubDefn" record.
-		    end;
+		    Simple_Subindex_Item (
+	                Format_Object.Type_Index,
+	                Format_Object,
+	                Output_Object,
+		        Entity_Kind_Name => "Type");
+		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
+		        -- Remove the "AdaTypeDefn" record.
 
 		when Index_Subprogram =>
 		    -- @AdaSubDefn{<defn>}
 		    -- Generates two index entries: one for <defn> with a
 		    -- secondary entry of "@i{in} <Unit>" (where Unit is
 		    -- the unit saved by a previous RootLibUnit or ChildUnit.),
+		    -- adds a similar entry to the exception list,
 		    -- and second for "Language-Defined Subprogram" with a
 		    -- secondary entry of "<defn> @i{in} <Unit>".
 		    -- Also outputs the <defn> to the output file.
-		    declare
-			Subprogram : String(1..80);
-			Len : Natural := 0;
-			Key : ARM_Index.Index_Key;
-		    begin
-		        ARM_Input.Copy_to_String_until_Close_Char (
-			    Input_Object,
-		            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char,
-			    Subprogram,
-			    Len);
+		    Simple_Subindex_Item (
+	                Format_Object.Subprogram_Index,
+	                Format_Object,
+	                Output_Object,
+		        Entity_Kind_Name => "Subprogram");
+		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
+		        -- Remove the "AdaSubDefn" record.
 
-			ARM_Index.Add (Term => "Language-Defined Subprogram",
-				       Subterm => Subprogram(1..Len) & " in " &
-						  Format_Object.Unit(1..Format_Object.Unit_Len),
-				       Kind => ARM_Index.SubDeclaration_in_Package,
-				       Clause => Clause_String,
-				       Paragraph => Paragraph_String,
-				       Key => Key);
-			    -- Note that the Subdeclaration type changes the
-			    -- "in" into italics.
-			Check_Paragraph;
-			ARM_Output.Index_Target (Output_Object, Key);
+		when Index_Exception =>
+		    -- @AdaExcDefn{<defn>}
+		    -- Generates and index entries for <defn> with a
+		    -- secondary entry of "@i{in} <Unit>" (where Unit is
+		    -- the unit saved by a previous RootLibUnit or ChildUnit.),
+		    -- and adds a similar entry to the exception list.
+		    -- Also outputs the <defn> to the output file.
+		    Simple_Subindex_Item (
+	                Format_Object.Exception_Index,
+	                Format_Object,
+	                Output_Object,
+		        Entity_Kind_Name => "");
+		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
+		        -- Remove the "AdaExcDefn" record.
 
-			ARM_Index.Add (Term => Subprogram(1..Len),
-				       Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
-				       Kind => ARM_Index.Declaration_in_Package,
-				       Clause => Clause_String,
-				       Paragraph => Paragraph_String,
-				       Key => Key);
-			ARM_Output.Index_Target (Output_Object, Key);
+		when Index_Object =>
+		    -- @AdaObjDefn{<defn>}
+		    -- Generates and index entries for <defn> with a
+		    -- secondary entry of "@i{in} <Unit>" (where Unit is
+		    -- the unit saved by a previous RootLibUnit or ChildUnit.),
+		    -- and adds a similar entry to the exception list.
+		    -- Also outputs the <defn> to the output file.
+		    Simple_Subindex_Item (
+	                Format_Object.Object_Index,
+	                Format_Object,
+	                Output_Object,
+		        Entity_Kind_Name => "");
+		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
+		        -- Remove the "AdaObjDefn" record.
 
-			ARM_Output.Ordinary_Text (Output_Object, Subprogram(1..Len));
-			Format_Object.Last_Non_Space := True;
-
-		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
-		            -- Remove the "AdaSubDefn" record.
-		    end;
+		when Index_Package =>
+		    -- @AdaObjDefn{<defn>}
+		    -- Generates and index entries for <defn> with a
+		    -- secondary entry of "@i{in} <Unit>" (where Unit is
+		    -- the unit saved by a previous RootLibUnit or ChildUnit.),
+		    -- and adds a similar entry to the package list.
+		    -- Also outputs the <defn> to the output file.
+		    Simple_Subindex_Item (
+	                Format_Object.Package_Index,
+	                Format_Object,
+	                Output_Object,
+		        Entity_Kind_Name => "");
+		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
+		        -- Remove the "AdaPackDefn" record.
 
 		when Index_Other =>
-		    -- @AdaSubDefn{<defn>}
+		    -- @AdaDefn{<defn>}
 		    -- Generate an index entries for <defn> with a
 		    -- secondary entry of "@i{in} <Unit>" (where Unit is
 		    -- the unit saved by a previous RootLibUnit or ChildUnit.).
@@ -5372,6 +5664,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				Format_Object.Glossary_Term_Len);
 			-- else no parameter. Weird.
 			end if;
+			Format_Object.Glossary_Change_Kind := ARM_Database.None;
+			    -- No change for this command.
+			Format_Object.Add_to_Glossary := True;
+			    -- Always add it.
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
@@ -5404,6 +5700,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					       Paragraph => Paragraph_String,
 					       Key => Key);
 				ARM_Output.Index_Target (Output_Object, Key);
+				Format_Object.Glossary_Displayed := True;
 			    else
 			        case Format_Object.Document is
 				    when ARM_Format.AARM =>
@@ -5416,6 +5713,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					Format_Object.Next_Paragraph_Subhead_Type := Glossary_Marker;
 					Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 				        Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
+					Format_Object.Glossary_Displayed := True;
 				    when others =>
 					if Format_Object.Display_Index_Entries then
 				            Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
@@ -5428,10 +5726,212 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        ARM_Input.Skip_until_Close_Char (Input_Object,
 					    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
 				        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+					Format_Object.Glossary_Displayed := False;
 				end case;
 
 				-- Note: The term is indexed in the glossary,
 				-- but not here.
+			    end if;
+			end if;
+		    end;
+
+		when Change_To_Glossary | Change_To_Glossary_Also =>
+		    -- This is a change glossary command.
+		    -- It is of the form
+		    -- @ChgToGlossary(Version=[<version>],Kind=(<kind>),Term=[<term>], Text=[<text>])
+		    -- We will store the term and definition in the glossary
+		    -- database. We also have to pass through the Text
+		    -- parameter, either to the regular text (for
+		    -- ChgToGlossaryAlso) or the AARM (for ChgToGlossary).
+
+		    declare
+			Close_Ch : Character;
+			Key : ARM_Index.Index_Key;
+		        Kind : ARM_Database.Paragraph_Change_Kind_Type;
+			use type ARM_Database.Paragraph_Change_Kind_Type;
+		    begin
+		        Get_Change_Version (Is_First => True,
+			    Version => Format_Object.Glossary_Version);
+			    -- Read a parameter named "Version".
+
+		        Get_Change_Kind (Kind);
+			    -- Read a parameter named "Kind".
+
+			Format_Object.Glossary_Change_Kind := Kind;
+
+			if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = Change_To_Glossary_Also then
+			    -- The text just goes straight to the file. It will
+			    -- get formatted appropriately. So we only need to
+			    -- figure out whether it will get indexed and displayed
+			    -- in the Glossary.
+			    Format_Object.Glossary_Displayed := True;
+		            if Format_Object.Changes = ARM_Format.Old_Only and then
+			        Format_Object.Glossary_Version > '0' then
+			        -- Old only, don't display it (and it won't be
+			        -- inserted, either).
+			        Format_Object.Add_to_Glossary := False;
+		            elsif (Format_Object.Glossary_Change_Kind = ARM_Database.Inserted or else
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Inserted_Normal_Number) then
+			        if Format_Object.Glossary_Version <= Format_Object.Change_Version then
+			            Format_Object.Add_to_Glossary := True;
+			        else --This reference is too new, ignore it.
+			            Format_Object.Glossary_Displayed := False;
+			            Format_Object.Add_to_Glossary := False;
+			        end if;
+				Format_Object.Glossary_Change_Kind := ARM_Database.Inserted;
+		            elsif (Format_Object.Glossary_Change_Kind = ARM_Database.Deleted or else
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number) then
+			        Format_Object.Add_to_Glossary := True;
+				Format_Object.Glossary_Change_Kind := ARM_Database.Deleted;
+		            else -- we always display it.
+			        Format_Object.Add_to_Glossary := True;
+		            end if;
+			else
+		            if Format_Object.Changes = ARM_Format.Old_Only and then
+			        Format_Object.Glossary_Version > '0' then
+			        -- Old only, don't display it (and it won't be
+			        -- inserted, either).
+			        Format_Object.Glossary_Displayed := False;
+			        Format_Object.Add_to_Glossary := False;
+		            elsif (Format_Object.Glossary_Change_Kind = ARM_Database.Inserted or else
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Inserted_Normal_Number) then
+			        if Format_Object.Glossary_Version <= Format_Object.Change_Version then
+			            case Format_Object.Document is
+				        when ARM_Format.AARM =>
+				            Format_Object.Glossary_Displayed := True;
+				        when ARM_Format.RM | ARM_Format.RM_ISO =>
+				            Format_Object.Glossary_Displayed := False; -- No impldef notes in RM.
+			            end case;
+			            Format_Object.Add_to_Glossary := True;
+			        else --This reference is too new, ignore it.
+			            Format_Object.Glossary_Displayed := False;
+			            Format_Object.Add_to_Glossary := False;
+			        end if;
+				Format_Object.Glossary_Change_Kind := ARM_Database.Inserted;
+		            elsif (Format_Object.Glossary_Change_Kind = ARM_Database.Deleted or else
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number) then
+			        case Format_Object.Document is
+			            when ARM_Format.AARM =>
+				        Format_Object.Glossary_Displayed := True;
+			            when ARM_Format.RM | ARM_Format.RM_ISO =>
+				        Format_Object.Glossary_Displayed := False; -- No impldef notes in RM.
+			        end case;
+			        Format_Object.Add_to_Glossary := True;
+				Format_Object.Glossary_Change_Kind := ARM_Database.Deleted;
+		            else -- we always display it.
+			        case Format_Object.Document is
+			            when ARM_Format.AARM =>
+				        Format_Object.Glossary_Displayed := True;
+			            when ARM_Format.RM | ARM_Format.RM_ISO =>
+				        Format_Object.Glossary_Displayed := False; -- No impldef notes in RM.
+			        end case;
+			        Format_Object.Add_to_Glossary := True;
+		            end if;
+			end if;
+
+			ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "Term" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => False,
+			    Param_Close_Bracket => Close_Ch);
+			if Close_Ch /= ' ' then
+			    -- Copy the term:
+			    ARM_Input.Copy_to_String_until_Close_Char (
+				Input_Object,
+			        Close_Ch,
+				Format_Object.Glossary_Term,
+				Format_Object.Glossary_Term_Len);
+			-- else no parameter. Weird.
+			end if;
+
+			ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => False,
+			    Param_Close_Bracket => Close_Ch);
+			if Close_Ch /= ' ' then
+			    -- Now, handle the parameter:
+		            -- Stack it so we can process the end:
+			    Set_Nesting_for_Parameter
+			        (Command => Glossary_Text_Param,
+				 Close_Ch => Close_Ch);
+
+			    ARM_Input.Start_Recording (Input_Object);
+
+			    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = Change_To_Glossary_Also then
+				-- The text just goes straight to the file.
+				if Format_Object.Add_to_Glossary then
+				    if Format_Object.Display_Index_Entries then
+				        Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
+				        ARM_Output.Ordinary_Text (Output_Object,
+					    "[Glossary Entry]");
+				        Format_Object.Last_Non_Space := True;
+				    -- else no marker.
+				    end if;
+
+				    -- Index the term (because it does appear here):
+				    Check_Paragraph; -- We've got to be in a paragraph to write this.
+				    ARM_Index.Add (Term => Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len),
+					           Kind => ARM_Index.Primary_Term,
+					           Clause => Clause_String,
+					           Paragraph => Paragraph_String,
+					           Key => Key);
+				    ARM_Output.Index_Target (Output_Object, Key);
+				-- else no indexing.
+				end if;
+			    elsif Format_Object.Glossary_Displayed then -- Change_To_Glossary
+				-- Create the AARM annotation:
+				Check_End_Paragraph; -- End any paragraph that we're in.
+				Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
+				Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph := Format_Object.Next_Paragraph_Subhead_Type;
+				Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format := Format_Object.Next_Paragraph_Format_Type;
+				Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
+				Format_Object.Next_Paragraph_Format_Type := Glossary_Marker;
+				Format_Object.Next_Paragraph_Subhead_Type := Glossary_Marker;
+				Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
+			        Format_Object.Next_Paragraph_Version := Format_Object.Glossary_Version;
+			        Format_Object.Next_Paragraph_Change_Kind := Kind;
+
+			        if Format_Object.Glossary_Change_Kind = ARM_Database.Inserted then
+                                    -- We assume no outer changes;
+			            -- set new change state:
+			            Format_Object.Change := ARM_Output.Insertion;
+			            Format_Object.Current_Change_Version :=
+				       Format_Object.Glossary_Version;
+			            Format_Object.Current_Old_Change_Version := '0';
+				elsif Format_Object.Glossary_Change_Kind = ARM_Database.Deleted then
+			            Format_Object.Change := ARM_Output.Deletion;
+			            Format_Object.Current_Change_Version :=
+				       Format_Object.Glossary_Version;
+			            Format_Object.Current_Old_Change_Version := '0';
+				-- else nothing special.
+				end if;
+			            -- Change the state *before* outputting the
+				    -- paragraph header, so the AARM prefix is included.
+			        Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
+
+			        Format_Object.Change := ARM_Output.None; -- Undo (header) change.
+			        Format_Object.Current_Change_Version := '0';
+
+			    elsif Format_Object.Add_to_Glossary then -- Change_To_Glossary
+				-- No AARM annotation:
+				if Format_Object.Display_Index_Entries then
+			            Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
+				    ARM_Output.Ordinary_Text (Output_Object,
+					"[Glossary Entry]");
+				    Format_Object.Last_Non_Space := True;
+				-- else no marker.
+				end if;
+			        -- Skip the text:
+			        ARM_Input.Skip_until_Close_Char (Input_Object,
+				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
+			        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+
+				-- Note: The term is indexed in the glossary,
+				-- but not here.
+			    else
+			        -- Skip the text (it won't be used at all):
+			        ARM_Input.Skip_until_Close_Char (Input_Object,
+				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
+			        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
 			    end if;
 			end if;
 		    end;
@@ -5968,7 +6468,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 		    end;
 
-		when Labeled_Added_Clause |
+		when Labeled_Added_Informative_Annex |
+		     Labeled_Added_Normative_Annex |
+		     Labeled_Added_Clause |
 		     Labeled_Added_Subclause =>
 		    -- Load the title into the Title string:
 		    declare
@@ -5999,14 +6501,25 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    ARM_Input.Replace_Char (Input_Object);
 		        end if;
 
-		        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
-			    Format_Object.Subclause := Format_Object.Subclause + 1;
-		        else -- Labeled_Added_Clause
-			    Format_Object.Clause := Format_Object.Clause + 1;
-			    Format_Object.Subclause := 0;
-			end if;
-
+			declare
+			    Level : ARM_Contents.Level_Type;
 			begin
+		            if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
+			        Format_Object.Subclause := Format_Object.Subclause + 1;
+				Level := ARM_Contents.Subclause;
+		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
+			        Format_Object.Clause := Format_Object.Clause + 1;
+			        Format_Object.Subclause := 0;
+				Level := ARM_Contents.Clause;
+		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
+			        Format_Object.Clause := 0;
+			        Format_Object.Subclause := 0;
+			        Level := ARM_Contents.Normative_Annex;
+		            else
+			        Format_Object.Clause := 0;
+			        Format_Object.Subclause := 0;
+			        Level := ARM_Contents.Informative_Annex;
+			    end if;
 			    declare
 			        Clause_Number : constant String :=
 				    ARM_Contents.Lookup_Clause_Number (New_Title);
@@ -6019,62 +6532,34 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    Operation => ARM_Output.Insertion,
 				    Text_Kind => Disposition);
 
-			        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
-			            if Disposition = Do_Not_Display_Text then
-					null; -- Ignore this.
-			            elsif Disposition = ARM_Output.None then
-					-- Normal reference:
-					Check_End_Paragraph; -- End any paragraph that we're in.
-				        ARM_Output.Clause_Header (Output_Object,
-				            New_Title(1..New_Title_Length),
-					    Level => ARM_Contents.Subclause,
-					    Clause_Number => Clause_Number);
-			            elsif Disposition = ARM_Output.Deletion then
-			                raise Program_Error; -- A deletion inside of an insertion command!
-			            else -- Insertion.
-					Check_End_Paragraph; -- End any paragraph that we're in.
-				        ARM_Output.Revised_Clause_Header (Output_Object,
-				            New_Header_Text => New_Title(1..New_Title_Length),
-				            Old_Header_Text => "",
-					    Level => ARM_Contents.Subclause,
-					    Version => Version,
-					    Clause_Number => Clause_Number);
-				    end if;
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (New_Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Subclause, Format_Object.Section,
-					  Format_Object.Clause, Format_Object.Subclause)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-			        else -- Labeled_Added_Clause
-			            if Disposition = Do_Not_Display_Text then
-					null; -- Ignore this.
-			            elsif Disposition = ARM_Output.None then
-					-- Normal reference:
-					Check_End_Paragraph; -- End any paragraph that we're in.
-				        ARM_Output.Clause_Header (Output_Object,
-				            New_Title(1..New_Title_Length),
-					    Level => ARM_Contents.Clause,
-					    Clause_Number => Clause_Number);
-			            elsif Disposition = ARM_Output.Deletion then
-			                raise Program_Error; -- A deletion inside of an insertion command!
-			            else -- Insertion.
-					Check_End_Paragraph; -- End any paragraph that we're in.
-				        ARM_Output.Revised_Clause_Header (Output_Object,
-				            New_Header_Text => New_Title(1..New_Title_Length),
-				            Old_Header_Text => "",
-					    Level => ARM_Contents.Clause,
-					    Version => Version,
-					    Clause_Number => Clause_Number);
-				    end if;
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (New_Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Clause, Format_Object.Section, Format_Object.Clause)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
+			        if Disposition = Do_Not_Display_Text then
+				    null; -- Ignore this.
+			        elsif Disposition = ARM_Output.None then
+				    -- Normal reference:
+				    Check_End_Paragraph; -- End any paragraph that we're in.
+				    ARM_Output.Clause_Header (Output_Object,
+				        New_Title(1..New_Title_Length),
+				        Level => Level,
+				        Clause_Number => Clause_Number);
+			        elsif Disposition = ARM_Output.Deletion then
+			            raise Program_Error; -- A deletion inside of an insertion command!
+			        else -- Insertion.
+				    Check_End_Paragraph; -- End any paragraph that we're in.
+				    ARM_Output.Revised_Clause_Header (Output_Object,
+				        New_Header_Text => New_Title(1..New_Title_Length),
+				        Old_Header_Text => "",
+				        Level => Level,
+				        Version => Version,
+				        Clause_Number => Clause_Number);
 				end if;
+
+			        -- Check that the section numbers match the title:
+			        if Ada.Characters.Handling.To_Lower (New_Title) /=
+			           Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
+				      Level, Format_Object.Section,
+				      Format_Object.Clause, Format_Object.Subclause)) then
+				    Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
+			        end if;
 			    end;
 			exception
 			    when ARM_Contents.Not_Found_Error =>
@@ -7354,6 +7839,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Thin_Line | Thick_Line | Table_Last |
 		     Syntax_Summary | Syntax_XRef | Glossary_List |
 		     Attribute_List | Pragma_List | Implementation_Defined_List |
+		     Package_List | Type_List | Subprogram_List |
+		     Exception_List | Object_List |
 		     Intro_Name | Syntax_Name | Resolution_Name |
 		     Legality_Name | Static_Name | Link_Name | Run_Name |
 		     Bounded_Name | Erroneous_Name | Req_Name |
@@ -7522,26 +8009,57 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				ARM_Database.Bullet_List,
 				Sorted => True);
 
+		when Package_List =>
+		    Write_Subindex (Format_Object.Package_Index,
+				    Format_Object,
+				    Output_Object);
+
+		when Type_List =>
+		    Write_Subindex (Format_Object.Type_Index,
+				    Format_Object,
+				    Output_Object);
+
+		when Subprogram_List =>
+		    Write_Subindex (Format_Object.Subprogram_Index,
+				    Format_Object,
+				    Output_Object);
+
+		when Exception_List =>
+		    Write_Subindex (Format_Object.Exception_Index,
+				    Format_Object,
+				    Output_Object);
+
+		when Object_List =>
+		    Write_Subindex (Format_Object.Object_Index,
+				    Format_Object,
+				    Output_Object);
+
 		when Text_Begin | Text_End | Redundant | Part | Bold | Italic |
 		     Roman | Swiss | Fixed | Roman_Italic | Shrink | Grow |
 		     Keyword | Non_Terminal | Up | Down | Tab_Clear | Tab_Set |
 		     Table |
 		     Defn | RootDefn | PDefn | Defn2 | RootDefn2 | PDefn2 |
 		     Index_See | Index_See_Also | See_Other | See_Also |
-		     Index_Root_Unit | Index_Child_Unit | Index_Type |
-		     Index_Subprogram | Index_Other | Index_Check |
+		     Index_Root_Unit | Index_Child_Unit | Index_Subprogram_Child_Unit |
+		     Index_Type |
+		     Index_Subprogram | Index_Exception | Index_Object |
+		     Index_Package | Index_Other | Index_Check |
 		     Index_Attr | Index_Pragma |
 		     Syntax_Rule | Syntax_Term | Syntax_Prefix |
 		     Added_Syntax_Rule | Deleted_Syntax_Rule |
-		     To_Glossary | To_Glossary_Also | Implementation_Defined |
+		     To_Glossary | To_Glossary_Also |
+		     Change_To_Glossary | Change_To_Glossary_Also |
+		     Implementation_Defined |
 		     Prefix_Type | Reset_Prefix_Type | Attribute | Attribute_Leading |
 		     Pragma_Syntax | Added_Pragma_Syntax |
 		     Labeled_Section | Labeled_Section_No_Break |
 		     Labeled_Clause | Labeled_Subclause |
 		     Labeled_Revised_Clause | Labeled_Revised_Subclause |
 		     Labeled_Added_Clause | Labeled_Added_Subclause |
-		     Labeled_Informative_Annex |  Labeled_Revised_Informative_Annex |
+		     Labeled_Informative_Annex | Labeled_Revised_Informative_Annex |
+		     Labeled_Added_Informative_Annex |
 		     Labeled_Normative_Annex | Labeled_Revised_Normative_Annex |
+		     Labeled_Added_Normative_Annex |
 		     Unnumbered_Section | Subheading | Added_Subheading | Heading |
 		     Center | Right |
 		     Preface_Section | Ref_Section | Ref_Section_Number | Ref_Section_by_Number |
@@ -8343,38 +8861,65 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		when Glossary_Text_Param =>
 		    -- Save the glossary entry in the Glossary database.
 		    declare
+			use type ARM_Database.Paragraph_Change_Kind_Type;
 			Text_Buffer : String (1..ARM_Input.MAX_RECORDING_SIZE);
 			Text_Buffer_Len : Natural;
 		    begin
 			Arm_Input.Stop_Recording_and_Read_Result
 			    (Input_Object, Text_Buffer, Text_Buffer_Len);
 			Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
-			ARM_Database.Insert (Format_Object.Glossary_DB,
-			    Sort_Key => Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len),
-			    Hang_Item => "",
-			    Text => "@b{" & Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len) &
-				".} " & Text_Buffer(1..Text_Buffer_Len));
+			if Format_Object.Add_to_Glossary then
+			    if Format_Object.Glossary_Change_Kind = ARM_Database.Inserted then
+			        ARM_Database.Insert (Format_Object.Glossary_DB,
+			            Sort_Key => Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len),
+			            Hang_Item => "",
+			            Text => "@chg{Version=[" & Format_Object.Glossary_Version & "],New=[@b{" &
+					Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len) &
+				        ".}],Old=[]} " & Text_Buffer(1..Text_Buffer_Len),
+			            Change_Kind => Format_Object.Glossary_Change_Kind,
+			            Version => Format_Object.Glossary_Version);
+
+			    elsif Format_Object.Glossary_Change_Kind = ARM_Database.Deleted then
+			        ARM_Database.Insert (Format_Object.Glossary_DB,
+			            Sort_Key => Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len),
+			            Hang_Item => "",
+			            Text => "@chg{Version=[" & Format_Object.Glossary_Version & "],New=[],Old=[@b{" &
+					Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len) &
+				        ".}]} " & Text_Buffer(1..Text_Buffer_Len),
+			            Change_Kind => Format_Object.Glossary_Change_Kind,
+			            Version => Format_Object.Glossary_Version);
+
+			    else
+			        ARM_Database.Insert (Format_Object.Glossary_DB,
+			            Sort_Key => Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len),
+			            Hang_Item => "",
+			            Text => "@b{" & Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len) &
+				        ".} " & Text_Buffer(1..Text_Buffer_Len),
+			            Change_Kind => Format_Object.Glossary_Change_Kind,
+			            Version => Format_Object.Glossary_Version);
+			    end if;
+			end if;
 		    end;
 
 		    -- Finish the text processing:
-		    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = To_Glossary_Also then
+		    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = To_Glossary_Also or else
+		       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = Change_To_Glossary_Also then
 			null; -- Normal text, no special handling needed.
 		    else
-		        case Format_Object.Document is
-			    when ARM_Format.AARM =>
-				-- End the annotation.
-			        Check_End_Paragraph;
-			        Format_Object.Last_Paragraph_Subhead_Type :=
-	 			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph;
-			        Format_Object.Next_Paragraph_Subhead_Type :=
-	 			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph;
-			        Format_Object.Next_Paragraph_Format_Type :=
-				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format;
-			        Format_Object.Paragraph_Tab_Stops :=
-				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops;
-			    when others =>
-				null; -- No text, no special handling needed.
-			end case;
+			if Format_Object.Glossary_Displayed then
+			    -- End the annotation.
+			    Check_End_Paragraph;
+			    Format_Object.Last_Paragraph_Subhead_Type :=
+	 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph;
+			    Format_Object.Next_Paragraph_Subhead_Type :=
+	 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph;
+			    Format_Object.Next_Paragraph_Format_Type :=
+			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format;
+			    Format_Object.Paragraph_Tab_Stops :=
+			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops;
+		        else
+			    null; -- No text, no special handling needed.
+			end if;
 		    end if;
 
 		when Attribute_Text_Param =>
@@ -8511,7 +9056,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				end;
 
 			    when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
-				-- *** We don't support this yet.
+				-- *** We don't support this yet. (It doesn't make much sense;
+				-- *** it would be unlikely that we'd stop defining
+				-- *** an attribute).
 				Write_to_DB (Prefix_Kind => Format_Object.Attr_Prefix_Change_Kind,
  					     Text_Kind => Format_Object.Attr_Change_Kind,
 					     Prefix_Version => Format_Object.Attr_Prefix_Version,
@@ -9209,14 +9756,21 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		case Command (Command_Name) is
 		    when Text_Begin | Text_End | New_Page | New_Column | RM_New_Page |
 			Thin_Line | Thick_Line | Table |
-			To_Glossary | Implementation_Defined | Labeled_Section |
+			To_Glossary | Change_To_Glossary |
+			Implementation_Defined |
+			Change_Implementation_Defined |
+			Change_Implementation_Advice |
+			Change_Documentation_Requirement |
+			Labeled_Section |
 			Labeled_Section_No_Break |
 			Labeled_Clause | Labeled_Subclause |
 			Labeled_Revised_Clause | Labeled_Revised_Subclause |
 			Labeled_Added_Clause | Labeled_Added_Subclause |
 			Preface_Section |
-			Labeled_Informative_Annex | Labeled_Revised_Informative_Annex |
-			Labeled_Normative_Annex | Labeled_Revised_Normative_Annex |
+			Labeled_Informative_Annex |
+			Labeled_Revised_Informative_Annex | Labeled_Added_Informative_Annex |
+			Labeled_Normative_Annex |
+		        Labeled_Revised_Normative_Annex | Labeled_Added_Normative_Annex |
 			Unnumbered_Section | Subheading | Heading | Center | Right =>
 			-- Ends a paragraph. No line break needed here (or
 			-- we'd end up with two).

@@ -231,6 +231,18 @@ Text commands:
 	references ought to be in new text.) The formatter assigns subclause
         numbers. Version is the version number of the change (see @ChgRef for
         details).
+@LabeledAddedNormativeAnnex{Version=[<version>],Name=[<new_text>]]} -
+	Start a labeled normative annex. The title will be "new_text". If we
+        are generating an old version of the RM, this annex does not appear.
+        (Any annex references in commands ought to be "new text".) The
+        formatter assigns annex letters. Version is the
+        version number of the change (see @ChgRef for details).
+@LabeledAddedInformativeAnnex{Version=[<version>],Name=[<new_text>]} -
+	Start a labeled informative annex. The title will be "new_text". If we
+        are generating an old version of the RM, this annex does not appear.
+        (Any annex references in commands ought to be "new text".) The
+        formatter assigns annex letters. Version is the
+        version number of the change (see @ChgRef for details).
 
 @UnnumberedSection{<text>} - Start an unnumbered section. (These are the
 	Forward and Introduction). This *can* be referenced by a reference,
@@ -381,9 +393,16 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	of "@i{child of} <parent>", an index entry for "Language-Defined
 	Library Units" with a secondary entry of <parent>.<child>, and an index
 	entry for <parent>.<child>. The Unit is set to <parent>.<child>.
+        (For version 2 or later, the Language-Defined entry is not generated.)
+        The first entry is added to the package list as well.
+@SubChildUnit{Parent=[<parent>],Child=[<child>]}
+        Same as @ChildUnit, except that the first entry is added to the
+	subprogram list, rather than the package list.
 @RootLibUnit{<unit>} - Generates two index entries: An index entry for
 	"Language-Defined Library Units" with a secondary entry of <unit>,
 	and an index entry for <unit>. The Unit is set to <parent>.<child>.
+        (For version 2 or later, the Language-Defined entry is not generated.)
+        The first entry is added to the package list as well.
 @AdaDefn{<defn>} - Generates an index entry for <defn> with a secondary entry
 	of "@i{in} <Unit>" (where Unit is the unit saved by a previous
 	RootLibUnit or ChildUnit.) Also outputs the <defn> to the output file.
@@ -391,12 +410,32 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	secondary entry of "@i{in} <Unit>" (where Unit is the unit saved by
 	a previous RootLibUnit or ChildUnit.), and second for "Language-Defined
 	Subprogram" with a secondary entry of "<defn> @i{in} <Unit>".
+        (For version 2 or later, the Language-Defined entry is not generated.)
+        The first entry is added to the subprogram list as well.
 	Also outputs the <defn> to the output file.
 @AdaTypeDefn{<defn>} - Generates two index entries: one for <defn> with a
 	secondary entry of "@i{in} <Unit>" (where Unit is the unit saved by
 	a previous RootLibUnit or ChildUnit.), and second for "Language-Defined
 	Type" with a secondary entry of "<defn> @i{in} <Unit>".
+        (For version 2 or later, the Language-Defined entry is not generated.)
+        The first entry is added to the type list as well.
 	Also outputs the <defn> to the output file.
+@AdaExcDefn{<defn>} - Generates an index entry for <defn> with a
+	secondary entry of "@i{in} <Unit>" (where Unit is the unit saved by
+	a previous RootLibUnit or ChildUnit.)
+        The entry is added to the exception list as well.
+	Also outputs the <defn> to the output file.
+@AdaObjDefn{<defn>} - Generates an index entry for <defn> with a
+	secondary entry of "@i{in} <Unit>" (where Unit is the unit saved by
+	a previous RootLibUnit or ChildUnit.)
+        The entry is added to the object list as well.
+	Also outputs the <defn> to the output file.
+@AdaPackDefn{<defn>} - Generates an index entry for <defn> with a
+	secondary entry of "@i{in} <Unit>" (where Unit is the unit saved by
+	a previous RootLibUnit or ChildUnit.)
+        The entry is added to the package list as well.
+	Also outputs the <defn> to the output file.
+	Use this for *nested* packages.
 @IndexCheck{<check>} - Generates an index entry for "check, language defined"
 	with a secondary entry of <check>. (Essentially a Defn2). Also,
 	indexes <check> as a partial definition. (PDefn).
@@ -407,6 +446,12 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 @Prag{<name>} -- Generates an index entry for "pragmas"
 	with a secondary entry of <name> (a Defn2), and also an index entry
         of "<name> pragma" (a Defn). Also puts <name> to the output.
+
+@PackageList -- Generates the list of language-defined packages.
+@TypeList -- Generates the list of language-defined types and subtypes.
+@SubprogramList -- Generates the list of language-defined subprograms.
+@ExceptionList -- Generates the list of language-defined exceptions.
+@ObjectList -- Generates the list of language-defined objects.
 
 -- Glossary:
 @ToGlossary(Term=[<term>], Text=[<text>])
@@ -521,6 +566,16 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 @AddedSubheading{Version=[<version>],<text>}
 	Same as Subheading, except that this heading is present only in
 	new versions of the document.
+@ChgToGlossary{Version=[<version>],Kind=(<kind>),Term=[<term>],Text=[<text>]}
+	Marks a changed glossary entry. (Essentially a
+	combination of ChgRef and ToGlossary.) <term> and <text> are the
+	glossary entry; they can contain @Chg commands. See ChgRef and
+        ToGlossary for details on the handling of the arguments.
+@ChgToGlossaryAlso{Version=[<version>],Kind=(<kind>),Term=[<term>],Text=[<text>]}
+	Marks a changed glossary entry. (Essentially a
+	combination of ChgRef and ToGlossaryAlso.) <term> and <text> are the
+	glossary entry; they can contain @Chg commands. See ChgRef and
+        ToGlossaryAlso for details on the handling of the arguments.
 
 -- Tabs:
 @tabclear() - Clears all tab settings. Tabs are also cleared by leaving the
