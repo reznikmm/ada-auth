@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2005/10/14 22:18:52 $ $Author: Randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2005/10/28 05:45:40 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/10/14 22:18:52 $}
+@Comment{$Date: 2005/10/28 05:45:40 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -3074,7 +3074,7 @@ of the absolute error of the inner product @i<X>*@i<Y> shall not exceed
 @i<g>*@b<abs>(@i<X>)*@b<abs>(@i<Y>) where @i<g> is defined as]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i<g> = @i<X>'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa)]}
+@ChgAdded{Version=[2],Text=[@i<g> = @i<X>'Length * Real'Machine_Radix**(1 @en@; Real'Model_Mantissa)]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00418-01]}
@@ -3695,7 +3695,7 @@ Left'Range.]}
 @ChgAdded{Version=[2],Text=[This function returns a @i{unit
 vector}@Defn2{Term=[unit vector],Sec=[complex vector]} with Order components
 and a lower bound of First. All components are set to (0.0, 0.0) except for the
-Index component which is set to (1.0, ,00.0). Constraint_Error is raised if Index
+Index component which is set to (1.0, 0.0). Constraint_Error is raised if Index
 < First, Index > First + Order @en 1, or if First + Order @en 1 > Integer'Last.]}
 
 @begin{Example}
@@ -4030,7 +4030,7 @@ are not equal. Constraint_Error is raised if the matrix A is ill-conditioned.]}
 @ChgAdded{Version=[2],Text=[This function returns a matrix Y such that X is
 (nearly) equal to A * Y. This is the standard mathematical operation for
 solving several sets of linear equations. The index ranges of the result are
-A'Ramge(2) and X'Ramge(2). Constraint_Error is raised if A'Length(1), A'Length(2), and
+A'Range(2) and X'Range(2). Constraint_Error is raised if A'Length(1), A'Length(2), and
 X'Length(1) are not equal. Constraint_Error is raised if the matrix A is
 ill-conditioned.]}
 
@@ -4041,7 +4041,7 @@ ill-conditioned.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This function returns a matrix B such that A * B is
-(nearly) equal to the unit matrix. The index ranges of the result are A'Ramge(2)
+(nearly) equal to the unit matrix. The index ranges of the result are A'Range(2)
 and A'Range(1). Constraint_Error is raised if A'Length(1) is not equal to
 A'Length(2). Constraint_Error is raised if the matrix A is ill-conditioned.]}
 
@@ -4071,7 +4071,7 @@ A is not Hermitian.]}
   @ChgAdded{Version=[2],Text=[A Hermitian matrix is one whose transpose is
   equal to its complex conjugate. The eigenvalues of a Hermitian matrix are
   alwasy real. We only support this case because algorithms for solving the
-  general case are inheritently unstable.]}
+  general case are inherently unstable.]}
 @end{Discussion}
 
 
@@ -4135,11 +4135,11 @@ of the absolute error of the inner product @i{X}*@i{Y} shall not exceed
 @i{g}*@key{abs}(@i{X})*@key{abs}(@i{Y}) where @i{g} is defined as]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i{g} = @i{X}'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa)
+@ChgAdded{Version=[2],Text=[@i{g} = @i{X}'Length * Real'Machine_Radix**(1 @en@; Real'Model_Mantissa)
     for mixed complex and real operands]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1@en@;Real'Model_Mantissa)
+@ChgAdded{Version=[2],Text=[@i{g} = sqrt(2.0) * @i{X}'Length * Real'Machine_Radix**(1 @en@; Real'Model_Mantissa)
     for two complex operands]}
 @end{Display}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2005/10/08 06:29:18 $ $Author: Randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2005/10/28 05:45:41 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/10/08 06:29:18 $}
+@Comment{$Date: 2005/10/28 05:45:41 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -13,7 +13,7 @@ for manipulating files and directories, and their names.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The notes for this clause contain the expected
-intepretations of some of the operations on various target systems.
+interpretations of some of the operations on various target systems.
 @lquotes@;Unix@rquotes@; refers to the UNIX@latin1(174) operating system,
 and in most cases also covers Unix-like systems such as Linux and POSIX.
 @lquotes@;Windows@latin1(174)@rquotes@; refers to the Microsoft@latin1(174)
@@ -969,7 +969,7 @@ following routines:]}
 @ChgAdded{Version=[2],Text=[    @key{type} Permission_Set_Type @key{is array} (Permission) @key{of} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[    @key{function} Permission_Set (Name : @key{in} String) @key{return} Permision_Set_Type;]}
+@ChgAdded{Version=[2],Text=[    @key{function} Permission_Set (Name : @key{in} String) @key{return} Permission_Set_Type;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[    @key{function} Owner (Name : @key{in} String) @key{return} String;

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/25 05:47:06 $}
+@Comment{$Date: 2005/10/28 05:45:32 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -571,7 +571,7 @@ generic function exists:]}
         @key{return} T @key{is abstract};
 @key{function} Ada.Tags.Generic_Dispatching_Constructor
    (The_Tag : Tag;
-    Params : @key{access} Parameters) @key{return} T'Class;
+    Params  : @key{access} Parameters) @key{return} T'Class;
 @key{pragma} Preelaborate(Generic_Dispatching_Constructor);
 @key{pragma} Convention(Intrinsic, Generic_Dispatching_Constructor);]}
 @end{Example}
@@ -1804,7 +1804,7 @@ a dispatching call to an abstract subprogram always
 dispatches to some overriding body.]
 @ChgToGlossary{Version=[2],Kind=[Added],Term=<Abstract type>,
   Text=<@ChgAdded{Version=[2],Text=[An abstract type is a tagged type
-  intended for use as an ancestor of other types, but which it not allowed to
+  intended for use as an ancestor of other types, but which is not allowed to
   have objects of its own.]}>}
 @end{Intro}
 
@@ -2460,14 +2460,14 @@ nonlimited.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[An interface derived from a task interface shall
 include the reserved word @key{task} in its
-definition; other types derived from a task interface shall be a private
+definition; any other type derived from a task interface shall be a private
 extension or a task type declared by a task declaration (see
 @RefSecNum{Task Units and Task Objects}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[An interface derived from a
 protected interface shall include
-the reserved word @key{protected} in its definition; other types derived
+the reserved word @key{protected} in its definition; any other type derived
 from a protected interface shall be a private extension or a protected type
 declared by a protected declaration (see
 @RefSecNum{Protected Units and Protected Objects}).]}
@@ -2475,9 +2475,9 @@ declared by a protected declaration (see
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[An interface derived from
 a synchronized interface shall include one of the reserved words @key{task},
-@key{protected}, or @key{synchronized} in its definition; other types
+@key{protected}, or @key{synchronized} in its definition; any other type
 derived from a synchronized interface shall be a private extension, a task
-type declared by a task declaration, or protected type declared by a protected
+type declared by a task declaration, or a protected type declared by a protected
 declaration.]}
 
 @begin{Reason}

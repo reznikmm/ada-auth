@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2005/10/25 05:47:14 $ $Author: Randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2005/10/28 05:45:39 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/10/25 05:47:14 $}
+@Comment{$Date: 2005/10/28 05:45:39 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -559,9 +559,11 @@ shall have user-specified Read and Write attributes]}.
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
   @ChgAdded{Version=[2],Text=[Types that do not have available stream
-  attributes are excluded; that means that attributes do not need to be
-  specified for most limited types. It is only necessary to specify attributes
-  for types that have a part that is of any access type.]}
+  attributes are excluded from this rule; that means that attributes do not
+  need to be specified for most limited types. It is only necessary to specify
+  attributes for nonlimited types that have a part that is of any access type,
+  and for extensions of limited types with available stream attributes where
+  the @nt{extension_part} includes a subcomponent of an access type.]}
 @end{Ramification}
 @end{itemize}
 

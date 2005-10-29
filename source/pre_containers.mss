@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2005/10/25 05:47:14 $ $Author: Randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2005/10/28 05:45:41 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/10/25 05:47:14 $}
+@Comment{$Date: 2005/10/28 05:45:41 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -302,7 +302,7 @@ elements that can be inserted into the vector prior to it being automatically
 expanded.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
- @ChgAdded{Version=[2],Text=[Elements in a vector container can be refered to by
+@ChgAdded{Version=[2],Text=[Elements in a vector container can be referred to by
 an index value of a generic formal type. The first element of a vector always
 has its index value equal to the lower bound of the formal type.]}
 
@@ -1609,7 +1609,7 @@ Last_Index (Container)).]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element or
 designates the last element of the container, then Next returns the value
-No_Element. Otherwise, returns a cursor that designates the element with index
+No_Element. Otherwise, it returns a cursor that designates the element with index
 To_Index (Position) + 1 in the same vector as Position.]}
 
 @begin{Example}
@@ -1628,7 +1628,7 @@ To_Index (Position) + 1 in the same vector as Position.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element or
 designates the first element of the container, then Previous returns the value
-No_Element. Otherwise, returns a cursor that designates the element with index
+No_Element. Otherwise, it returns a cursor that designates the element with index
 (To_Index (Position) @en 1) in the same vector as Position.]}
 
 @begin{Example}
@@ -6291,11 +6291,11 @@ first hashed element in Container.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[For any element @i{E}, the actual function for the
-generic formal function Generic_Keys.Hash should be such that Hash (@i{E}) =
-Generic_Keys.Hash (Key (@i{E})). If the actuals for Key or Generic_Keys.Hash
-behave in some other manner, the behavior of Generic_Keys is unspecified. Which
-subprograms of Generic_Keys call Generic_Keys.Hash, and how many times they
-call it, is unspecified.@PDefn{unspecified}]}
+generic formal function Generic_Keys.Hash is expected to be such that Hash
+(@i{E}) = Generic_Keys.Hash (Key (@i{E})). If the actuals for Key or
+Generic_Keys.Hash behave in some other manner, the behavior of Generic_Keys is
+unspecified. Which subprograms of Generic_Keys call Generic_Keys.Hash, and how
+many times they call it, is unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[For any two elements @i{E1} and @i{E2}, the boolean
@@ -7233,7 +7233,7 @@ procedure Containers.Generic_Array_Sort has the following declaration:]}
    @key{with function} "<" (Left, Right : Element_Type)
       @key{return} Boolean @key{is} <>;
 @key{procedure} Ada.Containers.Generic_Array_Sort (Container : @key{in out} Array_Type);@ChildUnit{Parent=[Ada.Containers],Child=[Generic_Array_Sort]}
-@key{pragma} Pure (Ada.Containers.Generic_Array_Sort);]}
+@key{pragma} Pure(Ada.Containers.Generic_Array_Sort);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -7284,7 +7284,7 @@ declaration:]}
       @key{return} Boolean @key{is} <>;
 @key{procedure} Ada.Containers.Generic_Constrained_Array_Sort@ChildUnit{Parent=[Ada.Containers],Child=[Generic_Constrained_Array_Sort]}
       (Container : @key{in out} Array_Type);
-@key{pragma} Pure (Ada.Containers.Generic_Constrained_Array_Sort);]}
+@key{pragma} Pure(Ada.Containers.Generic_Constrained_Array_Sort);]}
 @end{Example}
 
 @begin{DescribeCode}

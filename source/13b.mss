@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/25 05:47:13 $}
+@Comment{$Date: 2005/10/28 05:45:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @LabeledClause{The Package System}
 
@@ -3129,7 +3129,7 @@ an abstract function.]}
   implementation of @i<T>'Input calls @i<T>'Read, not the parent type's
   @i<T>'Input). Note that @i<T>'Input cannot be specified in this case, as any
   function with the proper profile is necessarily abstract, and specifying
-  abstract subprograms is illegal.]}
+  abstract subprograms in an @nt{attribute_definition_clause} is illegal.]}
 @end{Ramification}
 
 @Leading@;For @PrefixType{every subtype S'Class of a class-wide type
@@ -3273,7 +3273,7 @@ The same rule applies to the result of the Input function.]}
   would require available attributes.) But we don't allow any concrete
   implementation because these don't participate in extensions (unless the
   interface is the parent type). If we didn't ban concrete implementations,
-  the order of declaration of a pair of interfaces would become signficant.
+  the order of declaration of a pair of interfaces would become significant.
   For example, if Int1 and Int2 are interfaces with concrete implementations
   of 'Read, then the following declarations would have different
   implementations for 'Read:]}
@@ -3284,7 +3284,8 @@ The same rule applies to the result of the Input function.]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Trailing],Text=[This would violate our design
-  principle that the location of the use of an interface doesn't matter.]}
+  principle that the order of the specification
+  of the interfaces in a @nt{derived_type_definition} doesn't matter.]}
 @end{Discussion}
 
 @begin{Ramification}
@@ -3294,7 +3295,7 @@ The same rule applies to the result of the Input function.]}
   impossible; a concrete function is not possible anyway as any function
   returning an abstract type must be abstract. And we don't allow specifying
   stream attributes to be abstract subprograms. This has no impact, as the
-  availibility of Int'Class'Input (where Int is a limited interface) depends
+  availability of Int'Class'Input (where Int is a limited interface) depends
   on whether Int'Read (not Int'Input) is specified. There is no reason to
   allow Int'Output to be specified, either, but there is equally no reason to
   disallow it, so we don't have a special rule for that.]}
@@ -3429,12 +3430,21 @@ the result of the Input function.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This is to simplify implementation.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The category of the type at the point of the
+  @nt{attribute_definition_clause} determines whether the first subtype or base
+  subtype is required. Thus, for a scalar type with a partial view (which is
+  never scalar), whether the first subtype or the base subtype is required is
+  determined by whether the @nt{attribute_definition_clause} occurs before or
+  after the full definition of the scalar type.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
 @ChgAdded{Version=[2],Text=[@Defn{support external streaming}
 @Defn2{Term=[external streaming],Sec={type supports}}
 A type is said to @i{support external streaming} if Read and Write attributes
-are available that provide for sending values of such a type between active
+are provided for sending values of such a type between active
 partitions, with Write marshalling the representation, and Read unmarshalling
 the representation.]}
 

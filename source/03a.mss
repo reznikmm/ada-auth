@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/22 04:25:06 $}
+@Comment{$Date: 2005/10/28 05:45:31 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -109,7 +109,7 @@ Text=<@Chg{Version=[2],New=[A view consists of an identification of an entity
 (the entity of the view), plus view-specific characteristics that affect the
 use of the entity through that view (such as mode of access to an object,
 formal parameter names and defaults for a subprogram, or visibility to
-components of a type).],Old=[(See @b[Definition]]}.)>}
+components of a type],Old=[(See @b[Definition]]}.)>}
 @begin{Discussion}
   Most declarations define a view (of some entity) whose
   view-specific characteristics are unchanging for the
@@ -406,28 +406,36 @@ which implement the fundamental aspects of its semantics.
 @PDefn{object}
 An @i(object) of a given type is a run-time entity that contains (has)
 a value of the type.
-@ToGlossary{Term=<Type>,
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Type>,
   Text=<Each object has a type.
   A @i(type) has an associated set of values, and a set of @i(primitive
   operations) which implement the fundamental aspects of its semantics.
-  Types are grouped into @i(classes).
-  The types of a given class share a set of primitive operations.
-  @Defn(closed under derivation)
+  Types are grouped into @Chg{Version=[2],New=[@i(categories)],Old=[@i(classes)]}.
+  The types of a given @Chg{Version=[2],New=[category],Old=[class]} share a set
+  of primitive operations. @Chg{Version=[2],New=[Most categories of types
+  form @i<classes> of types. ],Old=[@Defn(closed under derivation)
   Classes are closed under derivation;
   that is, if a type is in a class, then all of its derivatives
-  are in that class.>}
-@ToGlossary{Term=<Subtype>,
-  Text=<A subtype is a type together with a constraint,
+  are in that class]}.>}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Subtype>,
+  Text=<A subtype is a type together with a constraint@Chg{Version=[2],
+  New=[ and/or null exclusion],Old=[]},
   which constrains the values of the subtype to satisfy a certain
   condition.
   The values of a subtype are a subset of the values of its type.>}
 
-@Defn2{Term=[class], Sec=(of types)}
-Types are grouped into @i(classes) of types, reflecting the
-similarity of their values and primitive operations.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@Chg{Version=[2],New=[@Defn2{Term=[category], Sec=(of types)}],
+Old=[]}@Defn2{Term=[class], Sec=(of types)}
+Types are grouped into @Chg{Version=[2],New=[@i(categories)],
+Old=[@i(classes)]} of types@Chg{Version=[2],New=[],Old=[, reflecting the
+similarity of their values and primitive operations]}.
 @Defn2{Term=[language-defined class], Sec=(of types)}
-There exist several @i(language-defined classes) of types
-(see NOTES below).
+There exist several @i(language-defined @Chg{Version=[2],New=[categories],
+Old=[classes]}) of types (see NOTES below)@Chg{Version=[2],New=[, reflecting
+the simularity of their values and primitive operations],Old=[]}.@Chg{Version=[2],
+New=[@Defn2{Term=[language-defined category], Sec=(of types)}@Redundant[Most
+categories of types form @i(classes) of types.]],Old=[]}
 @Defn{elementary type}
 @i(Elementary) types are those whose values are logically indivisible;
 @Defn{composite type}
@@ -435,6 +443,11 @@ There exist several @i(language-defined classes) of types
 @i(composite) types are those whose values are composed
 of @i(component) values.
 @IndexSeeAlso{Term={aggregate},See=(composite type)}
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[The formal definition of @i<category> and
+  @i<class> is found in @RefSecNum{Derived Types and Classes}.]}
+@end{TheProof}
 @ToGlossary{Term=<Class>,
   Text=<@Defn(closed under derivation)
   A class is a set of types that is
@@ -495,15 +508,16 @@ of @i(component) values.
   which are active entities
   that may execute concurrently with other tasks.
   The top-level task of a partition is called the environment task.>}
-@ToGlossary{Term=<Protected type>,
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Protected type>,
   Text=<A protected type is a composite type whose components are
-  protected from concurrent access by multiple tasks.>}
+  protected from @Chg{Version=[2],New=[being accessed concurrently],
+  Old=[concurrent access]} by multiple tasks.>}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Private type>,
   Text=<A private type @Chg{Version=[2],New=[gives a],Old=[is a partial]} view
     of a type @Chg{Version=[2],New=[that reveals only some of its properties.
     The remaining properties are provided by the],Old=[whose]} full view
     @Chg{Version=[2],New=[given elsewhere. Private types are valuable for
-    defining abstractions which hide unnecesssary detail],Old=[hidden]} from
+    defining abstractions which hide unnecessary detail],Old=[hidden]} from
     @Chg{Version=[2],New=[a client],Old=[its clients]}.>}@ChgNote{This was
     changed to parallel "incomplete type"}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Private extension>,
@@ -513,7 +527,7 @@ of @i(component) values.
   are]} hidden from its clients.>}
 
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Incomplete type>,
-  Text=<@ChgAdded{Version=[2],Text=[An incompete type gives a view of a type
+  Text=<@ChgAdded{Version=[2],Text=[An incomplete type gives a view of a type
   that reveals only some of its properties. The remaining properties are
   provided by the full view given elsewhere. Incomplete types are valuable
   for defining recursive data structures.]}>}
@@ -541,8 +555,9 @@ A @i(private) type or @i(private extension) represents a partial view
 of a type, providing support for data abstraction.
 A partial view is a composite type.]}
 @begin{Honest}
-  The set of all record types do not form a class (because tagged
-  record types can have private extensions), though
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00442-01]}
+  @ChgDeleted{Version=[2],Text=[The set of all record types do not form a
+  class (because tagged record types can have private extensions), though
   the set of untagged record types do.
   In any case, what record types had in common in Ada 83 (component selection)
   is now a property of the composite class, since all composite types
@@ -554,7 +569,7 @@ A partial view is a composite type.]}
   @lquotes@;interesting@rquotes@; @em more interesting is the set of
   all nonlimited
   types, since that is what a generic formal (nonlimited) private
-  type matches.
+  type matches.]}
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
@@ -670,13 +685,17 @@ Such values @i(belong) to the subtype.@Chg{Version=[2],New=[@Defn2{Term=[values]
   not be a proper subset.
 @end{Ramification}
 @begin{Honest}
-Any name of a class of types (such as @lquotes@;discrete@rquotes@; or @lquotes@;real@rquotes@;), or
-other category of types (such as @lquotes@;limited@rquotes@; or @lquotes@;incomplete@rquotes@;)
-is also used to qualify its subtypes, as well as its objects,
-values, declarations, and definitions, such as an @lquotes@;integer type declaration@rquotes@;
-or an @lquotes@;integer value.@rquotes@;
-In addition, if a term such as @lquotes@;parent subtype@rquotes@; or @lquotes@;index subtype@rquotes@;
-is defined, then the corresponding term for the type of the
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+Any name of a @Chg{Version=[2],New=[category],Old=[class]} of types (such as
+@lquotes@;discrete@rquotes@;@Chg{Version=[2],New=[, ],Old=[ or]}
+@lquotes@;real@rquotes@;@Chg{Version=[2],New=[, or],Old=[), or other category of
+types (such as]} @lquotes@;limited@rquotes@;@Chg{Version=[2],New=[],
+Old=[ or @lquotes@;incomplete@rquotes@;]})
+is also used to qualify its subtypes, as well as its objects, values,
+declarations, and definitions, such as an @lquotes@;integer type
+declaration@rquotes@; or an @lquotes@;integer value.@rquotes@; In addition, if
+a term such as @lquotes@;parent subtype@rquotes@; or @lquotes@;index
+subtype@rquotes@; is defined, then the corresponding term for the type of the
 subtype is @lquotes@;parent type@rquotes@; or @lquotes@;index type.@rquotes@;
 @end{Honest}
 @begin{Discussion}
@@ -713,9 +732,13 @@ otherwise, the subtype is called a @i(constrained) subtype
 @end{StaticSem}
 
 @begin{Notes}
-Any set of types that is closed under derivation
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@Chg{Version=[2],New=[Any set of types can be called a
+@lquotes@;category@rquotes@; of types, and any],Old=[Any]}
+set of types that is closed under derivation
 (see @RefSecNum(Derived Types and Classes)) can be called
-a @lquotes@;class@rquotes@; of types. However, only certain classes are used in the
+a @lquotes@;class@rquotes@; of types. However, only certain
+@Chg{Version=[2],New=[categories and ],Old=[]}classes are used in the
 description of the rules of the language @em generally those
 that have their own particular set of primitive operations
 (see @RefSecNum(Classification of Operations)), or that
@@ -729,7 +752,10 @@ fixed point, ordinary fixed point, decimal fixed point,
 numeric, access, access-to-object, access-to-subprogram,
 composite, array, string, (untagged) record, tagged, task, protected,
 nonlimited. Special syntax is provided to define types in
-each of these classes.
+each of these classes.@Chg{Version=[2],New=[ In addition to these
+classes, the following are examples of @lquotes@;interesting@rquotes@;
+@i(language-defined categories): @PDefn{language-defined categories}
+abstract, incomplete, interface, limited, private, record.],Old=[]}
 @begin{Discussion}
 @Defn{value}
 A @i(value) is a run-time entity with a given type which can be
@@ -739,7 +765,8 @@ An @i(operation) is a program entity that operates on zero or more
 operands to produce an effect, or yield a result, or both.
 @end{Discussion}
 @begin{Ramification}
-  Note that a type's class
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+  Note that a type's @Chg{Version=[2],New=[category (and ],Old=[]}class@Chg{Version=[2],New=[)],Old=[]}
   depends on the place of the reference @em a
   private type is composite outside and possibly elementary inside.
   It's really the @i{view} that is elementary or composite.
@@ -749,23 +776,43 @@ operands to produce an effect, or yield a result, or both.
   parameter passing modes, and
   the constraint checks that apply in various places.
 
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
-  Not every property of types represents a class.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01],ARef=[AI95-00442-01]}
+  @Chg{Version=[2],New=[Every property of types forms a category, but not],
+  Old=[Not]} every property of types represents a class.
   For example, the set of all abstract types does not form a class,
   because this set is not closed under derivation.@Chg{Version=[2],New=[
   Similarly, the set of all interface types does not form a class.],Old=[]}
 
-  The set of limited types forms a class in the sense that it is closed
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+  The set of limited types @Chg{Version=[2],New=[does not form a class
+  (since nonlimited types can inherit from limited interfaces), but the
+  set of nonlimited types does. The set of tagged record types and the set
+  of tagged private types do not form a class (because each of them can
+  be extended to create a type of the other category); that implies that
+  the set of record types and the set of private types also do not form a
+  class (even though untagged record types and untagged private types do
+  form a class). In all of these cases, we can talk about the category
+  of the type; for instance, we can talk about the @lquotes@;category
+  of limited types@rquotes.],
+  Old=[forms a class in the sense that it is closed
   under derivation, but the more interesting
   class, from the point of generic formal type matching, is the
   set of all types, limited and nonlimited, since that is what
   matches a generic formal @lquotes@;limited@rquotes@; private type.
   Note also that a limited type can @lquotes@;become nonlimited@rquotes@; under
   certain circumstances, which
-  makes @lquotes@;limited@rquotes@; somewhat problematic as a class of types.
+  makes @lquotes@;limited@rquotes@; somewhat problematic as a class of types]}.
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[Normatively, the @i<language-defined classes>
+  are those that are defined to be inherited on derivation by
+  @RefSecNum{Derived Types and Classes}; other properties either aren't
+  interesting or form categories, not classes.]}
 @end{Ramification}
 
-@noprefix@;These language-defined classes are organized like this:
+@noprefix@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+These language-defined @Chg{Version=[2],New=[categories],Old=[classes]} are
+organized like this:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @TabClear{}
@@ -807,17 +854,17 @@ all types
 @\@\@\@\@\tagged protected],Old=[]}
 @end{Display}
 
-@noprefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
-@Chg{Version=[2],New=[There are other],Old=[The]} classes@Chg{Version=[2],
-New=[, such as],Old=[]} @lquotes@;numeric@rquotes@; and
+@noprefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01],ARef=[AI95-00442-01]}
+@Chg{Version=[2],New=[There are other categories, such as],Old=[The classes]}
+@lquotes@;numeric@rquotes@; and
 @lquotes@;@Chg{Version=[2],New=[discriminated],Old=[nonlimited]}@rquotes@;@Chg{Version=[2],
 New=[, which],Old=[]}
 represent other classification dimensions@Chg{Version=[2],New=[, but],
 Old=[ and]} do not fit into the above strictly hierarchical picture.
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-  @ChgAdded{Version=[2],Text=[Note that this is also true for some classes
-  mentioned in the chart. The class @lquotes@;task@rquotes@; includes both
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00345-01]}
+  @ChgAdded{Version=[2],Text=[Note that this is also true for some categories
+  mentioned in the chart. The category @lquotes@;task@rquotes@; includes both
   untagged tasks and tagged tasks. Similarly for @lquotes@;protected@rquotes@;,
   @lquotes@;limited@rquotes@;, and @lquotes@;nonlimited@rquotes@; (note that
   limited and nonlimited are not shown for untagged composite types).]}
@@ -853,6 +900,14 @@ a type T, we call T the "type of the subtype S."
   @ChgAdded{Version=[2],Text=[Added a definition of component of a type,
   subcomponent of a type, and part of a type. These are commonly used in
   the standard, but they were not previously defined.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[Reworded most of this clause to use
+  category rather than class, since so many interesting properties are
+  not, strictly speaking, classes. Moreover, there was no normative
+  description of exactly which properties formed classes, and which did
+  not. The real definition of class, along with a list of properties, is now
+  in @RefSecNum{Derived Types and Classes}.]}
 @end{DiffWord95}
 
 
@@ -2255,7 +2310,7 @@ Old=[@i(parent type)]}.
   Text=<A derived type is a type defined in terms of @Chg{Version=[2],
   New=[one or more other types given in a derived type definition. The
   first type given],Old=[another type, which]}
-  is the parent type of the derived type@Chg{Version=[2],New=[and
+  is the parent type of the derived type@Chg{Version=[2],New=[ and
   any others are progenitor types],Old=[]}.
   Each class containing the parent type @Chg{Version=[2],New=[or a progenitor
   type ],Old=[]}also contains the derived type.
@@ -2264,6 +2319,24 @@ Old=[@i(parent type)]}.
   A type together with the types derived from it
   (directly or indirectly) form a derivation class.>}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00442-01]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[class],Sec=[of types]}
+@Defn2{Term=[category],Sec=[of types]}
+A @i<class of types> is a set of types that is closed under
+derivation; that is, if the parent or a progenitor type of a
+derived type belongs to a class, then so does the derived type.
+By saying that a particular group of types forms a class,
+we are saying that all derivatives of such a type inherit
+the characteristics that define that class. The
+more general term @i<category of types> is used for a set of types
+whose defining characteristics are not necessarily inherited by
+derivatives; limited, abstract, and interface are all
+categories of types, but not classes of types.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[A class of types is also a category of types.]}
+@end{Ramification}
 
 @end{Intro}
 
@@ -2414,16 +2487,27 @@ of the derived type.
 
 @Leading@keepnext@;The characteristics of the derived type are defined as follows:
 @begin(itemize)
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
-Each class of types that includes the parent type @Chg{Version=[2],New=[or
-a progenitor type ],Old=[]}also includes the derived type.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00442-01]}
+@Chg{Version=[2],New=[@Redundant[If the parent type or a progenitor type
+belongs to a class of types, then the derived type also belongs to that class.]
+The following sets of types, as well as any higher-level sets composed from
+them, are classes in this sense@Redundant[, and hence the characteristics
+defining these classes are inherited by derived types from their parent or
+progenitor types]: signed integer, modular integer, ordinary fixed, decimal
+fixed, floating point, enumeration, boolean, character, access-to-constant,
+general access-to-variable, pool-specific access-to-variable,
+access-to-subprogram, array, string, non-array composite, nonlimited, untagged
+record, tagged, task, protected, and synchronized tagged],
+Old=[Each class of types that includes the parent type also includes
+the derived type]}.
 @begin{Discussion}
-This is inherent in our notion
+  This is inherent in our notion
   of a @lquotes@;class@rquotes@; of types. It is not mentioned in the
   initial definition of @lquotes@;class@rquotes@; since at that point
   type derivation has not been defined. In any case, this rule
   ensures that every class of types is closed under
-  derivation.@end{discussion}
+  derivation.
+@end{Discussion}
 
 If the parent type is an elementary type or an array type, then the
 set of possible values of the derived type
@@ -2796,7 +2880,7 @@ If the reserved word @key{abstract} is given in the declaration of a
 type, the type is abstract (see @RefSecNum{Abstract Types and Subprograms}).
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
-@ChgAdded{Version=[2],Text=[An interface type which has a progenitor type
+@ChgAdded{Version=[2],Text=[An interface type that has a progenitor type
 @lquotes@;is derived from@rquotes@; that type.
 A @nt{derived_type_definition}, however, never defines an interface type.]}
 
@@ -2913,6 +2997,12 @@ These concepts are similar, but not the same.
   @ChgAdded{Version=[2],Text=[Defined the result of functions for
   null extensions (which we no longer require to be overridden - see
   @RefSecNum{Abstract Types and Subprograms}).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[Defined the term @lquotes@;category of
+  types@rquotes and used it in wording elsewhere; also specified the
+  language-defined categories that form classes of types (this was never
+  normatively specified in Ada 95.]}
 @end{DiffWord95}
 
 
@@ -3984,16 +4074,16 @@ S'Pred for a modular integer subtype wraps around
     has the syntax of one of the following:]}
 @begin[itemize]
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[@nt[numeric_literal]]}
+@ChgDeleted{Version=[2],Text=<@nt[numeric_literal]>}
 
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[@nt[numeral].[@nt[exponent]]]}
+@ChgDeleted{Version=[2],Text=<@nt[numeral].[@nt[exponent]]>}
 
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[.@nt[numeral][@nt[exponent]]]}
+@ChgDeleted{Version=[2],Text=<.@nt[numeral][@nt[exponent]]>}
 
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[@nt[base]#@nt[based_numeral].#[@nt[exponent]]]}
+@ChgDeleted{Version=[2],Text=<@nt[base]#@nt[based_numeral].#[@nt[exponent]]>}
 
 @ChgRef{Version=[2],Kind=[Deleted]}
 @ChgDeleted{Version=[2],Text=[@nt[base]#.@nt[based_numeral]#[@nt[exponent]]]}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/25 05:47:12 $}
+@Comment{$Date: 2005/10/28 05:45:37 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -3335,7 +3335,7 @@ We have corrected that oversight.
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00436-01]}
-  @ChgAdded{Version=[2],Text=[The undocumented (and likely uninitential)
+  @ChgAdded{Version=[2],Text=[The undocumented (and likely unintentional)
   incompatibility with Ada 83 caused by not allowing @nt{record_representation_clause}s
   on limited record types is removed. (This is a Binding Interpretation, so
   it applies to Ada 95 implementations as well.)]}

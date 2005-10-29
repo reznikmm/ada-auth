@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:20 $}
+@Comment{$Date: 2005/10/28 05:45:34 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -793,7 +793,7 @@ from all visibility.]}
 subprograms, or require overriding), then any null procedure overrides all
 abstract subprograms and all subprograms that require overriding; if more than
 one such homograph remains that is not thus overridden, then if they are all
-fully conformant with one another, one is chosen arbitarily; if not, they are
+fully conformant with one another, one is chosen arbitrarily; if not, they are
 all hidden from all visibility.
 @Defn2{Term=[full conformance],Sec=(required)}]}
 
@@ -845,14 +845,14 @@ all hidden from all visibility.
   Beaujolais-like effect to worry about means we can consider other rules.
   The hidden-from-all-visibility homographs are still inherited
   by further derivations, which avoids order-of-declaration dependencies
-  and other anomolies.]}
+  and other anomalies.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We have to be careful to not include arbitrary
   selection if the routines have real bodies. (This can happen in generics, see
-  the example in the incompatibilies section below.) We don't want the ability
-  to sucessfully call routines where the body executed depends on the compiler
-  or a phase of the moon.]}
+  the example in the incompatibilities section below.) We don't want the
+  ability to successfully call routines where the body executed depends on the
+  compiler or a phase of the moon.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Note that if the type is concrete, abstract
@@ -1837,7 +1837,7 @@ completion of a previous @nt{subprogram_declaration}.]
 @ChgToGlossary{Version=[2],Kind=[Added],Term=<Renaming>,
 Text=<@ChgAdded{Version=[2],Text=[A @nt{renaming_declaration} is a declaration
 that does not define a new entity, but instead defines a view of an existing
-entity (see @RefSecNum{Renaming Declarations}).]}>}
+entity.]}>}
 
 @end{Intro}
 
@@ -2487,7 +2487,7 @@ waiting.
 unless otherwise stated by this International Standard. In particular, if the
 renamed entity is abstract@Chg{Version=[2],New=[],Old=[ or requires
 overriding (see @RefSecNum{Abstract Types and Subprograms})]}, the new view
-also is abstract@Chg{Version=[2],New=[.],Old=[ or requires overridding. (The
+also is abstract@Chg{Version=[2],New=[.],Old=[ or requires overriding. (The
 renaming will often be illegal in these cases,
 as a renaming cannot be overridden.)]}],Old=[]}
 @end{Ramification}

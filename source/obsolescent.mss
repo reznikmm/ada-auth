@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:25 $}
+@Comment{$Date: 2005/10/28 05:45:44 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -726,7 +726,7 @@ specific Suppress @nt{pragma}s.]}
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],Text=[An implementation may support a similar On parameter on
-@nt{pragma} Unsuppress (see @RefSecNum{Suppressing Checks}).],Old=[]}
+@nt{pragma} Unsuppress (see @RefSecNum{Suppressing Checks}).]}
 @end{Notes}
 
 @begin{DiffWord95}

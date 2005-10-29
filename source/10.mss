@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/10/25 05:47:10 $}
+@Comment{$Date: 2005/10/28 05:45:35 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3620,12 +3620,13 @@ required to appear last.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   The requirement that a partial view with available stream attributes
-  can cause an incompatibility in rare cases. If there is a limited tagged
+  be externally streamable can cause an incompatibility in rare cases.
+  If there is a limited tagged
   type declared in a pure package with available attributes, and that
   type is used to declare a private extension in another pure package,
   and the full type for the private extension has a component of an
   explicitly limited record type, a protected type, or a type with
-  access discriminants, then the stream attributes will have to
+  access discriminants, then the stream attributes will have to be
   user-specified in the visible part of the package. That is not a requirement
   for Ada 95, but this combination seems very unlikely in pure packages.
   Note that this cannot be an incompatibility for a nonlimited type,

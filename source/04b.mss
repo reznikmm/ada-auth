@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:19 $}
+@Comment{$Date: 2005/10/28 05:45:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.26 $}
+@Comment{$Revision: 1.27 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1128,7 +1128,7 @@ as a @nt<name>.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00384-01]}
   @ChgAdded{Version=[2],Text=[A type conversion from
   an access-to-discriminated and unconstrained object to an
-  access-to-discriminanted and constrained one is allowed. Ada 95 only allowed
+  access-to-discriminated and constrained one is allowed. Ada 95 only allowed
   the reverse conversion, which was weird and asymmetric. Of course, a
   constraint check will be performed for this conversion.]}
 @end{Extend95}

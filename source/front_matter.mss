@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.49 $ $Date: 2005/10/22 04:25:11 $}
+@comment{$Revision: 1.50 $ $Date: 2005/10/28 05:45:44 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -45,7 +45,7 @@ as well as correct errors.]}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[When ISO published Technical Corrigendum 1, it did not also publish
-a document that merges the @Chg{Version=[2],New=[change from ],Old=[]}Technical
+a document that merges the @Chg{Version=[2],New=[changes from ],Old=[]}Technical
 Corrigendum @Chg{Version=[2],New=[],Old=[changes ]}into
 the text of the International Standard.@Chg{Version=[2],New=[ It is not
 expected that ISO will publish a document that merges the changes from
@@ -68,7 +68,8 @@ editors that may introduce editorial changes to the text. This version of the
 Ada Reference Manual is therefore neither an official ISO document, nor a
 version guaranteed to be identical to an official ISO document, should ISO
 decide to reprint the International Standard incorporating an approved Technical
-Corrigendum. It is nevertheless a best effort to be as close as possible to the
+Corrigendum@Chg{Version=[2],New=[ and Amendment],Old=[]}. It is nevertheless a
+best effort to be as close as possible to the
 technical content of such an updated document. In the case of a conflict between this
 document and @Chg{Version=[2],New=[Amendment 1 or ],Old=[]}Technical
 Corrigendum 1 as approved by ISO (or between this document

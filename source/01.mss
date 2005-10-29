@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/10/13 05:15:34 $}
+@Comment{$Date: 2005/10/28 05:45:30 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1372,7 +1372,7 @@ Names of syntactic categories are set in a different font,
 @ToGlossaryAlso{Term=<Construct>,
   Text=<A @i(construct) is a piece of text
   (explicit or implicit) that is an instance of a syntactic category
-  defined under @lquotes@;@SyntaxTitle.@rquotes@;>}
+  defined under @lquotes@;@SyntaxTitle@rquotes@;.>}
 @begin{Ramification}
 For example, an @nt{expression} is a construct.
 A declaration is a construct,

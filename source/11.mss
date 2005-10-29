@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/10/25 05:47:11 $}
+@Comment{$Date: 2005/10/28 05:45:36 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -606,16 +606,16 @@ are not handled by the handlers of the
 @key[end] Ada.Exceptions;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
-@ChgAdded{Version=[2],Text=[    package Stream_Attributes is
-       procedure Read (Stream : not null access Ada.Streams.Root_Stream_Type'Cla
-                       Item : out Exception_Occurrence);
-       procedure Write (Stream : not null access Ada.Streams.Root_Stream_Type'Cl
-                       Item : in Exception_Occurrence);
-    end Stream_Attributes;]}
+@ChgAdded{Version=[2],Text=[    @key[package] Stream_Attributes @key[is]
+       @key[procedure] Read (Stream : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
+                       Item : @key[out] Exception_Occurrence);
+       @key[procedure] Write (Stream : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
+                       Item : @key[in] Exception_Occurrence);
+    @key[end] Stream_Attributes;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
 @ChgAdded{Version=[2],Text=[    @key[for] Exception_Occurrence'Read @key[use] Stream_Attributes.Read;
-    @key[for] Exception_Occurrence'Write @b[use] Stream_Attributes.Write;]}
+    @key[for] Exception_Occurrence'Write @key[use] Stream_Attributes.Write;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
 @ChgAdded{Version=[2],Text=[@key[private]

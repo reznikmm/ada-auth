@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/10/25 05:47:11 $}
+@Comment{$Date: 2005/10/28 05:45:37 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -714,7 +714,9 @@ Since the @nt{generic_formal_parameter_declaration} in the instance
 declares a view of the actual,
 the name will denote a view of the actual.
 
-Other properties of the copy (for example, staticness, classes to
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+Other properties of the copy (for example, staticness,
+@Chg{Version=[2],New=[categories],Old=[classes]} to
 which types belong) are recalculated for each instance;
 this is implied by the fact that it's a copy.
 
@@ -723,7 +725,7 @@ Although the @nt{generic_formal_part} is included in an instance,
 the declarations in the @nt{generic_formal_part} are only visible
 outside the instance in the case of a generic formal package whose
 @nt{formal_package_actual_part} @Chg{Version=[2],New=[includes one or more
-<>],Old=[is (<>)]}
+<> indicators],Old=[is (<>)]}
 @em see @RefSecNum{Formal Packages}.
 @end{Discussion}
 
@@ -787,8 +789,8 @@ properties are identical to the corresponding declaration within the
 declaration of the actual.
 @begin{Ramification}
   In an instance,
-  there are no @lquotes@;properties@rquotes@; of types and subtypes that come from
-  the formal.
+  there are no @lquotes@;properties@rquotes@; of types and subtypes
+  that come from the formal.
   The primitive operations of the type come from the
   formal, but these are declarations in their own right,
   and are therefore handled separately.
@@ -903,8 +905,10 @@ which can be called from outside the instance
 
 AI83-00398.
 
-Since an actual type is always in the class determined for the formal,
-the new subprograms hide all of the copied ones,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+Since an actual type is always in the @Chg{Version=[2],New=[category, and thus
+the derivation ],Old=[]}class@Chg{Version=[2],New=[,],Old=[]} determined for
+the formal, the new subprograms hide all of the copied ones,
 except for a declaration of "/=" that corresponds to an explicit
 declaration of "=".
 Such "/=" operators are special, because unlike other implicit
@@ -1518,8 +1522,10 @@ important benefit, and any change has some cost.
 @LabeledClause{Formal Types}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 @redundant[A generic formal subtype can be used to pass to a generic unit
-a subtype whose type is in a certain class of types.]
+a subtype whose type is in a certain @Chg{Version=[2],New=[category],
+Old=[class]} of types.]}
 @begin{Reason}
 We considered having intermediate syntactic categories
 @nt{formal_integer_type_definition},
@@ -1583,18 +1589,22 @@ A subtype (other than the first subtype)
 of a generic formal type is not a generic formal subtype.
 @end{Ramification}
 
-@Defn{determined class for a formal type}
-@Defn{class determined for a formal type}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@Chg{Version=[2],New=[@Defn{determined category for a formal type}
+@Defn{category determined for a formal type}],
+Old=[@Defn{determined class for a formal type}
+@Defn{class determined for a formal type}]}
 The form of a @nt{formal_type_definition} @i{determines a
-class} to which the formal type belongs.
+@Chg{Version=[2],New=[category],Old=[class]}} to which the formal type belongs.
 For a @nt{formal_private_type_definition} the reserved words
-@key{tagged} and @key{limited} indicate the class
+@key{tagged} and @key{limited} indicate the @Chg{Version=[2],New=[category],Old=[class]}
 (see @RefSecNum{Formal Private and Derived Types}).
-For a @nt{formal_derived_type_definition} the class is
+For a @nt{formal_derived_type_definition} the
+@Chg{Version=[2],New=[category],Old=[class]} is
 the derivation class rooted at the ancestor type.
 For other formal types,
 the name of the syntactic category indicates the
-class;
+@Chg{Version=[2],New=[category],Old=[class]};
 a @nt{formal_discrete_type_definition} defines a discrete type,
 and so on.
 @begin{Reason}
@@ -1602,49 +1612,70 @@ This rule is clearer with the flat syntax rule for
 @nt{formal_type_definition} given above.
 Adding @nt{formal_integer_type_definition} and others would make this
 rule harder to state clearly.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+@ChgAdded{Version=[2],Text=[We use @lquotes@;category@rquote rather than
+@lquotes@;class@rquotes above, as not all of these categories are closed
+under derivation. For instance, limited and interface are categories that do
+not form classes.]}
 @end{Reason}
 @end{StaticSem}
 
 @begin{Legality}
-The actual type shall be in the class determined for the formal.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+The actual type shall be in the @Chg{Version=[2],New=[category],Old=[class]}
+determined for the formal.
 @begin{Ramification}
-For example, if the class determined for the formal is the class of
-all discrete types, then the actual has to be discrete.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+For example, if the @Chg{Version=[2],New=[category],Old=[class]} determined
+for the formal is the @Chg{Version=[2],New=[category],Old=[class]} of all
+discrete types, then the actual has to be discrete.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 Note that this rule does not require the actual to belong to every
-class to which the formal belongs.
-For example, formal private types are in the class of composite types,
+@Chg{Version=[2],New=[category],Old=[class]} to which the formal belongs.
+For example, formal private types are in the
+@Chg{Version=[2],New=[category],Old=[class]} of composite types,
 but the actual need not be composite.
-Furthermore, one can imagine an infinite number of classes that are just
-arbitrary sets of types that obey the closed-under-derivation rule,
-and are therefore technically classes
+Furthermore, one can imagine an infinite number of @Chg{Version=[2],
+New=[categories],Old=[classes]} that are just
+arbitrary sets of types @Chg{Version=[2],New=[],Old=[that obey the
+closed-under-derivation rule,
+and are therefore technically classes]}
 (even though we don't give them names,
 since they are uninteresting).
-We don't want this rule to apply to @i{those} classes.
+We don't want this rule to apply to @i{those}
+@Chg{Version=[2],New=[categories],Old=[classes]}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
-@lquotes@;Limited@rquotes@; is not @Chg{Version=[2],New=[a],Old=[an]}
-@lquotes@;interesting@rquotes@; class, but @lquotes@;nonlimited@rquotes@; is;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01],ARef=[AI95-00442-01]}
+@lquotes@;Limited@rquotes@; is not @Chg{Version=[2],New=[an],Old=[a]}
+@lquotes@;interesting@rquotes@; @Chg{Version=[2],New=[category],Old=[class]},
+but @lquotes@;nonlimited@rquotes@; is;
 it is legal to pass a nonlimited type to a limited formal type,
 but not the other way around.
-The reserved word @nt{limited} really represents a class containing
+The reserved word @nt{limited} really represents a
+@Chg{Version=[2],New=[category],Old=[class]} containing
 both limited and nonlimited types.
-@lquotes@;Private@rquotes@; is not a class; a generic formal private type accepts
+@lquotes@;Private@rquotes@; is not a @Chg{Version=[2],New=[category for this purpose],
+Old=[class]}; a generic formal private type accepts
 both private and nonprivate actual types.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 It is legal to pass a class-wide subtype as the actual
-if it is in the right class,
+if it is in the right @Chg{Version=[2],New=[category],Old=[class]},
 so long as the formal has unknown discriminants.
 @end{Ramification}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0037],ARef=[AI95-00043-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01]}
-@Redundant[The formal type also belongs to each class that contains
-the determined class.]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01],ARef=[AI95-00442-01]}
+@Redundant[The formal type also belongs to each
+@Chg{Version=[2],New=[category],Old=[class]} that contains
+the determined @Chg{Version=[2],New=[category],Old=[class]}.]
 The primitive subprograms of the type are as for any
-type in the determined class. For a formal type other than a formal
+type in the determined @Chg{Version=[2],New=[category],Old=[class]}. For a
+formal type other than a formal
 derived type, these are the predefined operators of the type@Chg{New=[.
 For an elementary formal type, the predefined operators are implicitly declared
 immediately after the declaration of the formal type. For a composite formal
@@ -1661,17 +1692,25 @@ the actual type.
 @Redundant[The rules specific to formal derived types are given
 in @RefSecNum{Formal Private and Derived Types}.]
 @begin{Ramification}
-All properties of the type are as for any type in the class.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+All properties of the type are as for any type in the @Chg{Version=[2],New=[category],Old=[class]}.
 Some examples:
 The primitive operations available are as defined by the language for each
-class.
+@Chg{Version=[2],New=[category],Old=[class]}.
 The form of @nt{constraint} applicable to a formal type in a
-@nt{subtype_indication} depends on the class of the type as for a
+@nt{subtype_indication} depends on the @Chg{Version=[2],New=[category],Old=[class]} of the type as for a
 nonformal type.
 The formal type is tagged if and only if it is declared as a tagged
 private type, or as a type derived from a (visibly) tagged type.
 (Note that the actual type might be tagged even if the formal type is
 not.)
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+@ChgAdded{Version=[2],Text=[Recall that all categories to which a type
+belongs includes the categories that are @lquotes@;classes@rquotes;
+(see @RefSecNum{Derived Types and Classes}). So all of the
+properties of any interesting class implied by the formal type definition
+apply to the formal type.]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -1758,18 +1797,32 @@ had to.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
   @ChgAdded{Version=[2],Text=[Formal interface types are defined; see
   @RefSec{Formal Interface Types}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[We use @lquotes@;determines a category@rquotes
+  rather than class, since not all interesting properties form a class.]}
 @end{DiffWord95}
 
 
 @LabeledSubClause{Formal Private and Derived Types}
 
 @begin{Intro}
-@Redundant[The class determined for a formal private type
-can be either
-limited or nonlimited, and either tagged or untagged;
-no more specific class is known for such a type.
-The class determined for a formal derived type is the derivation class
-rooted at the ancestor type.]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@Redundant[@Chg{Version=[2],New=[In its most general form, the category],
+Old=[The class]}
+determined for a formal private type @Chg{Version=[2],New=[is all types,
+but it can be restricted to only nonlimited types or to only tagged types],
+Old=[can be either limited or nonlimited, and either tagged or untagged;
+no more specific class is known for such a type]}.
+The @Chg{Version=[2],New=[category],Old=[class]} determined for a formal
+derived type is the derivation class rooted at the ancestor type.]
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[The first rule is given normatively below,
+  and the second rule is given normatively in
+  @RefSecNum{Formal Types}; they are repeated here to give a capsule
+  summary of what this subclause is about.]}
+@end{TheProof}
 @end{Intro}
 
 @begin{Syntax}
@@ -1831,6 +1884,12 @@ Note that the progenitors are required to be limited by rules in
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
 @ChgAdded{Version=[2],Text=[The actual type for a generic formal derived type
 shall be a descendant of every progenitor of the formal type.]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The actual type has to be a descendant of the
+  parent type, in order that it be in the correct class. So we don't have to
+  mention that explicitly.]}
+@end{Ramification}
 
 If the formal subtype is definite, then the actual subtype shall
 also be definite.
@@ -1921,14 +1980,17 @@ and may be definite or indefinite.]
 @end{Legality}
 
 @begin{StaticSem}
-@leading@;The class determined for a formal private type is as follows:
+@leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+The @Chg{Version=[2],New=[category],Old=[class]} determined for a formal
+private type is as follows:
+@ChgRef{Version=[2],Kind=[Revised]}
 @TabClear{}@Tabset(P32)
 @begin{Display}
-@i(Type Definition) @\@i(Determined Class)@*
-@key{limited private} @\the class of all types
-@key{private} @\the class of all nonlimited types
-@key{tagged limited private} @\the class of all tagged types
-@key{tagged private} @\the class of all nonlimited tagged types
+@i(Type Definition) @\@i(Determined @Chg{Version=[2],New=[Category],Old=[Class]})@*
+@key{limited private} @\the @Chg{Version=[2],New=[category],Old=[class]} of all types
+@key{private} @\the @Chg{Version=[2],New=[category],Old=[class]} of all nonlimited types
+@key{tagged limited private} @\the @Chg{Version=[2],New=[category],Old=[class]} of all tagged types
+@key{tagged private} @\the @Chg{Version=[2],New=[category],Old=[class]} of all nonlimited tagged types
 @end{Display}
 
 @Redundant[The presence of the reserved word @key{abstract} determines
@@ -2093,8 +2155,9 @@ call. For example:]}
 @end{RunTime}
 
 @begin{Notes}
-@Leading@;In accordance with the general rule that the actual type shall
-belong to the class determined for the formal
+@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+In accordance with the general rule that the actual type shall
+belong to the @Chg{Version=[2],New=[category],Old=[class]} determined for the formal
 (see @RefSec(Formal Types)):
 @begin(itemize)
   If the formal type is nonlimited, then so shall be the actual;
@@ -2168,18 +2231,39 @@ run-time check to a compile-time check.
   @ChgAdded{Version=[2],Text=[The wording for the declaration of implicit
   operations is corrected to be consistent with @RefSecNum{Private Operations}
   as modified by Corrigendum 1.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[We change to
+  @lquotes@;determines a category@rquotes as that is the new terminology
+  (it avoids confusion, since not all interesting properties form a class).]}
 @end{DiffWord95}
 
 
 @LabeledSubClause{Formal Scalar Types}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 A @i{formal scalar type} is one defined by any of the
 @nt{formal_type_definition}s in this subclause.
-@Redundant[The class determined for a formal scalar type
-is discrete, signed integer, modular, floating point,
-ordinary fixed point, or decimal.]
+@Redundant[The @Chg{Version=[2],New=[category],Old=[class]} determined for a
+formal scalar type is @Chg{Version=[2],New=[the category of all ],Old=[]}discrete,
+signed integer, modular, floating point, ordinary fixed point, or
+decimal@Chg{Version=[2],New=[ types],Old=[]}.]
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[The second rule follows from the rule in
+  @RefSecNum{Formal Types} that says that the category is determined by the
+  one given in the name of the syntax production. The effect of the rule
+  is repeated here to give a capsule
+  summary of what this subclause is about.]}
+@end{TheProof}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[The @lquotes@;category of a type@rquotes
+  includes any classes that the type belongs to.]}
+@end{Ramification}
 @end{Intro}
+
 
 @begin{Syntax}
 @Syn{lhs=<formal_discrete_type_definition>,rhs="(<>)"}
@@ -2217,11 +2301,28 @@ by the syntactic category of the formal type definition
 @nt<formal_modular_type_definition> shall be a modular type.
 @end{Notes}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[We change to
+  @lquotes@;determines a category@rquotes as that is the new terminology
+  (it avoids confusion, since not all interesting properties form a class).]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Formal Array Types}
 
 @begin{Intro}
-@Redundant[The class determined for a formal array type
-is the class of all array types.]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@Redundant[The @Chg{Version=[2],New=[category],Old=[class]} determined for a
+formal array type is the @Chg{Version=[2],New=[category],Old=[class]} of all array types.]
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[This rule follows from the rule in
+  @RefSecNum{Formal Types} that says that the category is determined by the
+  one given in the name of the syntax production. The effect of the rule
+  is repeated here to give a capsule
+  summary of what this subclause is about.]}
+@end{TheProof}
 @end{Intro}
 
 @begin{Syntax}
@@ -2303,11 +2404,28 @@ Likewise, the rules requiring that component types be
 the same is subsumed.
 @end{Incompatible83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[We change to
+  @lquotes@;determines a category@rquotes as that is the new terminology
+  (it avoids confusion, since not all interesting properties form a class).]}
+@end{DiffWord95}
+
+
 @LabeledSubClause{Formal Access Types}
 
 @begin{Intro}
-@Redundant[The class determined for a formal access type
-is the class of all access types.]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@Redundant[The @Chg{Version=[2],New=[category],Old=[class]} determined for a
+formal access type is the @Chg{Version=[2],New=[category],Old=[class]} of all access types.]
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[This rule follows from the rule in
+  @RefSecNum{Formal Types} that says that the category is determined by the
+  one given in the name of the syntax production. The effect of the rule
+  is repeated here to give a capsule
+  summary of what this subclause is about.]}
+@end{TheProof}
 @end{Intro}
 
 @begin{Syntax}
@@ -2415,22 +2533,35 @@ types are new concepts.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[Added a matching rule for subtypes that exclude
   null.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[We change to
+  @lquotes@;determines a category@rquotes as that is the new terminology
+  (it avoids confusion, since not all interesting properties form a class).]}
 @end{DiffWord95}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Formal Interface Types]}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
-@ChgAdded{Version=[2],Text=[@Redundant[The class determined for a formal
-interface type is the class of all tagged types.]]}
-
-@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00442-01]}
+@ChgAdded{Version=[2],Text=[@Redundant[The category determined for a formal
+interface type is the category of all interface types.]]}
+@begin{TheProof}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
+  @ChgAdded{Version=[2],Text=[This rule follows from the rule in
+  @RefSecNum{Formal Types} that says that the category is determined by the
+  one given in the name of the syntax production. The effect of the rule
+  is repeated here to give a capsule
+  summary of what this subclause is about.]}
+@end{TheProof}
+@begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We can't say @lquotes@;the class of all interface
-  types@rquotes because interface types do not form a class @en it is not
-  closed under derivation.]}
-@end{Reason}
+  @ChgAdded{Version=[2],Text=[By saying @lquotes@;category@rquotes rather
+  than @lquotes@;class@rquotes, we
+  require that any actual type be an interface type, not just some type
+  derived from an interface type.]}
+@end{Ramification}
 
 
 @end{Intro}
@@ -2442,17 +2573,6 @@ rhs="@Chg{Version=[2],New=<@Syn2{interface_type_definition}>,Old=<>}"}
 @end{Syntax}
 
 @begin{Legality}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251]}
-@ChgAdded{Version=[2],Text=[The actual type shall be an interface type.]}
-
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The class of all tagged types includes
-  non-interface descendants of interface types, as well as types that have
-  nothing to do with interfaces at all. Such types must
-  not match a formal interface.]}
-@end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251],ARef=[AI95-00401]}
 @ChgAdded{Version=[2],Text=[The actual type shall be a descendant of every
@@ -2495,7 +2615,7 @@ appropriately by an application-specific scheduler.]}
 @end{Examples}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01],ARef=[AI95-00401-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01],ARef=[AI95-00401-01],ARef=[AI95-00442-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The formal interface type is new.]}
 @end{Extend95}

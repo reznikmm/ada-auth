@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/10/25 05:47:09 $}
+@Comment{$Date: 2005/10/28 05:45:34 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 
@@ -3022,7 +3022,7 @@ by a corresponding clock.
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-  @ChgAdded{Version=[2],Text=[A range of 500 years as chosen, as that only
+  @ChgAdded{Version=[2],Text=[A range of 500 years was chosen, as that only
   requires one extra bit for the year as compared to Ada 95. This was done
   to minimize disruptions with existing implementations. (One implementor
   reports that their time values represent nanoseconds, and this year range
@@ -4019,7 +4019,7 @@ can be safely calculated (within the accuracy of the underlying time-base).]}
   Mean Time (GMT) is generally very close to UTC time; for most purposes they
   can be treated the same. GMT is the time based on the rotation of the Earth;
   UTC is the time based on atomic clocks, with leap seconds periodically
-  inserted to realign with GMT (because most human activites depend on the
+  inserted to realign with GMT (because most human activities depend on the
   rotation of the Earth). At any point in time, there will be a sub-second
   difference between GMT and UTC.]}
 @end{Discussion}

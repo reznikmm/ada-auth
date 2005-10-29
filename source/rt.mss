@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.59 $ $Date: 2005/10/25 05:47:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.60 $ $Date: 2005/10/28 05:45:43 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/10/25 05:47:16 $}
+@Comment{$Date: 2005/10/28 05:45:43 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -245,7 +245,7 @@ Other parts of the
 annex @Chg{Version=[2],New=[],Old=[, e.g.
 @RefSecNum{Asynchronous Task Control}, ]}define
 other sources of priority inheritance.@Chg{Version=[2],New=[ For instance,
-most dispaching policies define the base priority as a source of priority
+most dispatching policies define the base priority as a source of priority
 inheritance.],Old=[]}
 @end{Discussion}
 @begin{itemize}
@@ -977,7 +977,7 @@ FIFO_Within_Priorities and also the locking policy (see
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This is the preferred combination of the
   FIFO_Within_Priorities policy with a locking policy, and we want that
-  conbination to be portable.]}
+  combination to be portable.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1127,7 +1127,7 @@ Non_Preemptive_FIFO_Within_Priorities and also the locking policy (see
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This is the preferred combination of the
   Non_Preemptive_FIFO_Within_Priorities policy with a locking policy, and we
-  want that conbination to be portable.]}
+  want that combination to be portable.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1277,7 +1277,7 @@ Round_Robin_Within_Priorities and also the locking policy (see
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This is the preferred combination of the
   Round_Robin_Within_Priorities policy with a locking policy, and we
-  want that conbination to be portable.]}
+  want that combination to be portable.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1346,7 +1346,7 @@ task's deadline and a dispatching policy that defines Earliest Deadline First
 
 @begin{MetaRules}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[To predict the behaviour of a multi-tasking program
+@ChgAdded{Version=[2],Text=[To predict the behavior of a multi-tasking program
 it is necessary to control access to the processor which is preemptive, and
 shared objects which are usually non-preemptive and embodied in protected
 objects. Two common dispatching policies for the processor are fixed priority
@@ -2285,7 +2285,7 @@ a high-priority task aborts a lower-priority task,
 which might have a call queued on a protected object with a low
 ceiling.@Chg{Version=[2],New=[ We have an @ImplPermName in
 @RefSecNum{Entry Queuing Policies} to allow this implementation. We could
-have required an immedaite priority change if on a ready queue during a
+have required an immediate priority change if on a ready queue during a
 protected action, but that would have required extra checks for ceiling
 violations to meet @BoundedName requirements of
 @RefSecNum{Priority Ceiling Locking} and potentially could cause a protected
