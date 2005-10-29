@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2005/10/28 05:45:40 $ $Author: Randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2005/10/29 06:01:22 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:40 $}
+@Comment{$Date: 2005/10/29 06:01:22 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -229,9 +229,12 @@ Numerics.@!Short_@!Complex_@!Types, Numerics.@!Long_@!Complex_@!Types, etc.
    context clause.
 @end{Reason}
 
-@Redundant{Complex is a visible type with cartesian components.}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@Redundant{Complex is a visible type with
+@Chg{Version=[2],New=[Cartesian],Old=[cartesian]} components.}
 @begin{Reason}
-   The cartesian representation is far more common than the polar
+   The @Chg{Version=[2],New=[Cartesian],Old=[cartesian]} representation is
+   far more common than the polar
    representation, in practice. The accuracy of the results of the complex
    arithmetic operations and of the complex elementary functions
    is dependent on the representation; thus, implementers need to know that
@@ -478,6 +481,7 @@ The nongeneric equivalent packages may, but need not, be actual
 instantiations of the generic package for the appropriate predefined type.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0091]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 Implementations may obtain the result of exponentiation of a complex
 or pure-imaginary operand by repeated complex multiplication, with arbitrary
 association of the factors and with a possible final complex reciprocation
@@ -487,7 +491,8 @@ operand, by converting the left operand to a polar representation;
 exponentiating the modulus by the given exponent; multiplying the argument by
 the given exponent@Chg{New=[],Old=[, when the exponent is positive, or dividing
 the argument by the absolute value of the given exponent, when the exponent is
-negative]}; and reconverting to a cartesian representation. Because of this
+negative]}; and reconverting to a @Chg{Version=[2],New=[Cartesian],Old=[cartesian]}
+representation. Because of this
 implementation freedom, no accuracy requirement is imposed on complex
 exponentiation (except for the prescribed results given above, which apply
 regardless of the implementation method chosen).
@@ -3484,7 +3489,7 @@ mathematical result would not.@Defn2{Term=[involve an inner product],Sec=[comple
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function returns a vector of the specified
-cartesian components of X. The index range of the result is X'Range.]}
+Cartesian components of X. The index range of the result is X'Range.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3493,9 +3498,9 @@ cartesian components of X. The index range of the result is X'Range.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
-@ChgAdded{Version=[2],Text=[Each procedure replaces the specified (cartesian)
+@ChgAdded{Version=[2],Text=[Each procedure replaces the specified (Cartesian)
 component of each of the components of X by the value of the matching component
-of Re or Im; the other (cartesian) component of each of the components is
+of Re or Im; the other (Cartesian) component of each of the components is
 unchanged. Constraint_Error is raised if X'Length is not equal to Re'Length or
 Im'Length.]}
 
@@ -3507,7 +3512,7 @@ Im'Length.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function constructs a vector of Complex
-results (in cartesian representation) formed from given vectors of cartesian
+results (in Cartesian representation) formed from given vectors of Cartesian
 components; when only the real components are given, imaginary components of
 zero are assumed. The index range of the result is Re'Range. Constraint_Error
 is raised if Re'Length is not equal to Im'Length.]}
@@ -3538,7 +3543,7 @@ Right'Range.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function constructs a vector of Complex
-results (in cartesian representation) formed from given vectors of polar
+results (in Cartesian representation) formed from given vectors of polar
 components using the corresponding function in Numerics.Generic_Complex_Types
 on matching components of Modulus and Argument. The index range of the result
 is Modulus'Range. Constraint_Error is raised if Modulus'Length is not equal to
@@ -3706,7 +3711,7 @@ Index component which is set to (1.0, 0.0). Constraint_Error is raised if Index
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function returns a matrix of the specified
-cartesian components of X. The index ranges of the result are those of X.]}
+Cartesian components of X. The index ranges of the result are those of X.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3715,9 +3720,9 @@ cartesian components of X. The index ranges of the result are those of X.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
-@ChgAdded{Version=[2],Text=[Each procedure replaces the specified (cartesian)
+@ChgAdded{Version=[2],Text=[Each procedure replaces the specified (Cartesian)
 component of each of the components of X by the value of the matching component
-of Re or Im; the other (cartesian) component of each of the components is
+of Re or Im; the other (Cartesian) component of each of the components is
 unchanged. Constraint_Error is raised if X'Length(1) is not equal to
 Re'Length(1) or Im'Length(1) or if X'Length(2) is not equal to Re'Length(2) or
 Im'Length(2).]}
@@ -3730,7 +3735,7 @@ Im'Length(2).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function constructs a matrix of Complex
-results (in cartesian representation) formed from given matrices of cartesian
+results (in Cartesian representation) formed from given matrices of Cartesian
 components; when only the real components are given, imaginary components of
 zero are assumed. The index ranges of the result are those of Re.
 Constraint_Error is raised if Re'Length(1) is not equal to Im'Length(1) or
@@ -3762,7 +3767,7 @@ X or Right.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function constructs a matrix of Complex
-results (in cartesian representation) formed from given matrices of polar
+results (in Cartesian representation) formed from given matrices of polar
 components using the corresponding function in Numerics.Generic_Complex_Types
 on matching components of Modulus and Argument. The index ranges of the result
 are those of Modulus. Constraint_Error is raised if Modulus'Length(1) is not

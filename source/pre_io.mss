@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:45 $}
+@Comment{$Date: 2005/10/29 06:01:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -306,13 +306,13 @@ a property of a file object, not of an external file.
 
 @keepnext   --@RI{ Exceptions}
 
-   @AdaDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
-   @AdaDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
-   @AdaDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
-   @AdaDefn{Use_Error}    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
-   @AdaDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
-   @AdaDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
-   @AdaDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
+   @AdaExcDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
+   @AdaExcDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
+   @AdaExcDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
+   @AdaExcDefn{Use_Error}    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
+   @AdaExcDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
+   @AdaExcDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
+   @AdaExcDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -682,13 +682,13 @@ The exception Mode_Error is propagated if the mode is not In_File.
 
 @keepnext   --@RI{ Exceptions}
 
-   @AdaDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
-   @AdaDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
-   @AdaDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
-   @AdaDefn{Use_Error}    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
-   @AdaDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
-   @AdaDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
-   @AdaDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
+   @AdaExcDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
+   @AdaExcDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
+   @AdaExcDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
+   @AdaExcDefn{Use_Error}    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
+   @AdaExcDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
+   @AdaExcDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
+   @AdaExcDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -842,7 +842,7 @@ the construction of user-defined input-output packages.
 @key[package] Ada.Storage_IO @key[is]@ChildUnit{Parent=[Ada],Child=[Storage_IO]}
    @key[pragma] Preelaborate(Storage_IO);
 
-   @AdaDefn{Buffer_Size} : @key(constant) System.Storage_Elements.Storage_Count :=
+   @AdaObjDefn{Buffer_Size} : @key(constant) System.Storage_Elements.Storage_Count :=
       @RI(implementation-defined);
    @key(subtype) @AdaDefn{Buffer_Type} @key(is)
       System.Storage_Elements.Storage_Array(1..Buffer_Size);
@@ -855,7 +855,7 @@ the construction of user-defined input-output packages.
 
 @keepnext   --@RI{ Exceptions}
 
-   @AdaDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
+   @AdaExcDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 @key[end] Ada.Storage_IO;
 @end{Example}
 
@@ -1041,7 +1041,7 @@ Append_File is new in Ada 95.
 
    @key[type] @AdaTypeDefn{Count} @key[is] @key[range] 0 .. @RI[implementation-defined];
    @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
-   @AdaDefn{Unbounded} : @key[constant] Count := 0; --@RI{ line and page length}
+   @AdaObjDefn{Unbounded} : @key[constant] Count := 0; --@RI{ line and page length}
 
    @key[subtype] @AdaDefn{Field}       @key[is] Integer @key[range] 0 .. @RI[implementation-defined];
    @key[subtype] @AdaDefn{Number_Base} @key[is] Integer @key[range] 2 .. 16;
@@ -1204,10 +1204,10 @@ Append_File is new in Ada 95.
 
    @key[generic]
       @key[type] Num @key[is] @key[range] <>;
-   @key[package] @AdaDefn{Integer_IO} @key[is]
+   @key[package] @AdaPackDefn{Integer_IO} @key[is]
 
-      @AdaDefn{Default_Width} : Field := Num'Width;
-      @AdaDefn{Default_Base}  : Number_Base := 10;
+      @AdaObjDefn{Default_Width} : Field := Num'Width;
+      @AdaObjDefn{Default_Base}  : Number_Base := 10;
 
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
@@ -1233,10 +1233,10 @@ Append_File is new in Ada 95.
 
    @key[generic]
       @key[type] Num @key[is] @key[mod] <>;
-   @key[package] @AdaDefn{Modular_IO} @key[is]
+   @key[package] @AdaPackDefn{Modular_IO} @key[is]
 
-      @AdaDefn{Default_Width} : Field := Num'Width;
-      @AdaDefn{Default_Base}  : Number_Base := 10;
+      @AdaObjDefn{Default_Width} : Field := Num'Width;
+      @AdaObjDefn{Default_Base}  : Number_Base := 10;
 
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
@@ -1264,11 +1264,11 @@ Append_File is new in Ada 95.
 
    @key[generic]
       @key[type] Num @key[is] @key[digits] <>;
-   @key[package] @AdaDefn{Float_IO} @key[is]
+   @key[package] @AdaPackDefn{Float_IO} @key[is]
 
-      @AdaDefn{Default_Fore} : Field := 2;
-      @AdaDefn{Default_Aft}  : Field := Num'Digits-1;
-      @AdaDefn{Default_Exp}  : Field := 3;
+      @AdaObjDefn{Default_Fore} : Field := 2;
+      @AdaObjDefn{Default_Aft}  : Field := Num'Digits-1;
+      @AdaObjDefn{Default_Exp}  : Field := 3;
 
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
@@ -1297,11 +1297,11 @@ Append_File is new in Ada 95.
 
    @key[generic]
       @key[type] Num @key[is] @key[delta] <>;
-   @key[package] @AdaDefn{Fixed_IO} @key[is]
+   @key[package] @AdaPackDefn{Fixed_IO} @key[is]
 
-      @AdaDefn{Default_Fore} : Field := Num'Fore;
-      @AdaDefn{Default_Aft}  : Field := Num'Aft;
-      @AdaDefn{Default_Exp}  : Field := 0;
+      @AdaObjDefn{Default_Fore} : Field := Num'Fore;
+      @AdaObjDefn{Default_Aft}  : Field := Num'Aft;
+      @AdaObjDefn{Default_Exp}  : Field := 0;
 
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
@@ -1330,11 +1330,11 @@ Append_File is new in Ada 95.
 
    @key[generic]
       @key[type] Num @key[is] @key[delta] <> @key[digits] <>;
-   @key[package] @AdaDefn{Decimal_IO} @key[is]
+   @key[package] @AdaPackDefn{Decimal_IO} @key[is]
 
-      @AdaDefn{Default_Fore} : Field := Num'Fore;
-      @AdaDefn{Default_Aft}  : Field := Num'Aft;
-      @AdaDefn{Default_Exp}  : Field := 0;
+      @AdaObjDefn{Default_Fore} : Field := Num'Fore;
+      @AdaObjDefn{Default_Aft}  : Field := Num'Aft;
+      @AdaObjDefn{Default_Exp}  : Field := 0;
 
       @key[procedure] @AdaSubDefn{Get}(File  : @key[in]  File_Type;
                     Item  : @key[out] Num;
@@ -1365,10 +1365,10 @@ Append_File is new in Ada 95.
 
    @key[generic]
       @key[type] Enum @key[is] (<>);
-   @key[package] @AdaDefn{Enumeration_IO} @key[is]
+   @key[package] @AdaPackDefn{Enumeration_IO} @key[is]
 
-      @AdaDefn{Default_Width}   : Field := 0;
-      @AdaDefn{Default_Setting} : Type_Set := Upper_Case;
+      @AdaObjDefn{Default_Width}   : Field := 0;
+      @AdaObjDefn{Default_Setting} : Type_Set := Upper_Case;
 
       @key[procedure] @AdaSubDefn{Get}(File : @key[in]  File_Type;
                     Item : @key[out] Enum);
@@ -1392,14 +1392,14 @@ Append_File is new in Ada 95.
 
 @keepnext@;--@RI{ Exceptions}
 
-   @AdaDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
-   @AdaDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
-   @AdaDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
-   @AdaDefn{Use_Error}    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
-   @AdaDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
-   @AdaDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
-   @AdaDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
-   @AdaDefn{Layout_Error} : @key[exception] @key[renames] IO_Exceptions.Layout_Error;
+   @AdaExcDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
+   @AdaExcDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
+   @AdaExcDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
+   @AdaExcDefn{Use_Error}    : @key[exception] @key[renames] IO_Exceptions.Use_Error;
+   @AdaExcDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
+   @AdaExcDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
+   @AdaExcDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
+   @AdaExcDefn{Layout_Error} : @key[exception] @key[renames] IO_Exceptions.Layout_Error;
 @key[private]
    ... -- @RI{not specified by the language}
 @key[end] Ada.Text_IO;
@@ -3361,13 +3361,13 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 
 
     -- @RI(exceptions)
-    @AdaDefn{Status_Error} : @key(exception) @key(renames) IO_Exceptions.Status_Error;
-    @AdaDefn{Mode_Error}   : @key(exception) @key(renames) IO_Exceptions.Mode_Error;
-    @AdaDefn{Name_Error}   : @key(exception) @key(renames) IO_Exceptions.Name_Error;
-    @AdaDefn{Use_Error}    : @key(exception) @key(renames) IO_Exceptions.Use_Error;
-    @AdaDefn{Device_Error} : @key(exception) @key(renames) IO_Exceptions.Device_Error;
-    @AdaDefn{End_Error}    : @key(exception) @key(renames) IO_Exceptions.End_Error;
-    @AdaDefn{Data_Error}   : @key(exception) @key(renames) IO_Exceptions.Data_Error;
+    @AdaExcDefn{Status_Error} : @key(exception) @key(renames) IO_Exceptions.Status_Error;
+    @AdaExcDefn{Mode_Error}   : @key(exception) @key(renames) IO_Exceptions.Mode_Error;
+    @AdaExcDefn{Name_Error}   : @key(exception) @key(renames) IO_Exceptions.Name_Error;
+    @AdaExcDefn{Use_Error}    : @key(exception) @key(renames) IO_Exceptions.Use_Error;
+    @AdaExcDefn{Device_Error} : @key(exception) @key(renames) IO_Exceptions.Device_Error;
+    @AdaExcDefn{End_Error}    : @key(exception) @key(renames) IO_Exceptions.End_Error;
+    @AdaExcDefn{Data_Error}   : @key(exception) @key(renames) IO_Exceptions.Data_Error;
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -3688,14 +3688,14 @@ predefined input-output packages.
 @key[package] Ada.IO_Exceptions @key[is]@ChildUnit{Parent=[Ada],Child=[IO_Exceptions]}
    @key[pragma] Pure(IO_Exceptions);
 
-   @AdaDefn{Status_Error} : @key[exception];
-   @AdaDefn{Mode_Error}   : @key[exception];
-   @AdaDefn{Name_Error}   : @key[exception];
-   @AdaDefn{Use_Error}    : @key[exception];
-   @AdaDefn{Device_Error} : @key[exception];
-   @AdaDefn{End_Error}    : @key[exception];
-   @AdaDefn{Data_Error}   : @key[exception];
-   @AdaDefn{Layout_Error} : @key[exception];
+   @AdaExcDefn{Status_Error} : @key[exception];
+   @AdaExcDefn{Mode_Error}   : @key[exception];
+   @AdaExcDefn{Name_Error}   : @key[exception];
+   @AdaExcDefn{Use_Error}    : @key[exception];
+   @AdaExcDefn{Device_Error} : @key[exception];
+   @AdaExcDefn{End_Error}    : @key[exception];
+   @AdaExcDefn{Data_Error}   : @key[exception];
+   @AdaExcDefn{Layout_Error} : @key[exception];
 
 @key[end] Ada.IO_Exceptions;
 @end{Example}

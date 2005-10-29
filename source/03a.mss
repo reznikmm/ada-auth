@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:31 $}
+@Comment{$Date: 2005/10/29 06:00:59 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -240,6 +240,14 @@ Thus, the term "action" is used only informally in the standard
 (except where it is defined as part of a larger term,
 such as "protected action").
 @end(Discussion)
+@ChgToGlossary{Version=[2],Kind=[Added],Term=<Elaboration>,
+Text=<@ChgAdded{Version=[2],Text=[The process by which a declaration has its
+run-time effect is called elaboration. Elaboration is one of the forms of
+execution.]}>}
+@ChgToGlossary{Version=[2],Kind=[Added],Term=<Evaluation>,
+Text=<@ChgAdded{Version=[2],Text=[The process by which an expression has its
+run-time effect is called evaluation. Evaluation is one of the forms of
+execution.]}>}
 @begin{Honest}
 @Defn{elaborable}
 A construct is @i(elaborable) if elaboration is defined for it.

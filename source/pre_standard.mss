@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2005/10/15 06:09:05 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2005/10/29 06:01:33 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2005/10/15 06:09:05 $}
+@Comment{$Date: 2005/10/29 06:01:33 $}
 
 @LabeledClause{The Package Standard}
 
@@ -304,10 +304,10 @@ the visible part of package Standard.}
 
 @Keepnext   --@RI{ The predefined exceptions:}
 
-   @AdaDefn{Constraint_Error}: @key[exception];
-   @AdaDefn{Program_Error}   : @key[exception];
-   @AdaDefn{Storage_Error}   : @key[exception];
-   @AdaDefn{Tasking_Error}   : @key[exception];
+   @AdaExcDefn{Constraint_Error}: @key[exception];
+   @AdaExcDefn{Program_Error}   : @key[exception];
+   @AdaExcDefn{Storage_Error}   : @key[exception];
+   @AdaExcDefn{Tasking_Error}   : @key[exception];
 
 @key[end] Standard;
 @end{Example}

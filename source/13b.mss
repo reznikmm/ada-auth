@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:38 $}
+@Comment{$Date: 2005/10/29 06:01:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @LabeledClause{The Package System}
 
@@ -23,24 +23,24 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
    @key{pragma} @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(System);
 
    @key[type] @AdaTypeDefn{Name} @key[is] @RI{implementation-defined-enumeration-type};
-   @AdaDefn{System_Name} : @key[constant] Name := @RI{implementation-defined};
+   @AdaObjDefn{System_Name} : @key[constant] Name := @RI{implementation-defined};
 
 
    --@RI{ System-Dependent Named Numbers:}
 
-   @AdaDefn{Min_Int}               : @key[constant] := @RI{root_integer}'First;
-   @AdaDefn{Max_Int}               : @key[constant] := @RI{root_integer}'Last;
+   @AdaObjDefn{Min_Int}               : @key[constant] := @RI{root_integer}'First;
+   @AdaObjDefn{Max_Int}               : @key[constant] := @RI{root_integer}'Last;
 
-   @AdaDefn{Max_Binary_Modulus}    : @key[constant] := @RI{implementation-defined};
-   @AdaDefn{Max_Nonbinary_Modulus} : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Max_Binary_Modulus}    : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Max_Nonbinary_Modulus} : @key[constant] := @RI{implementation-defined};
 
-   @AdaDefn{Max_Base_Digits}       : @key[constant] := @RI{root_real}'Digits;
-   @AdaDefn{Max_Digits}            : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Max_Base_Digits}       : @key[constant] := @RI{root_real}'Digits;
+   @AdaObjDefn{Max_Digits}            : @key[constant] := @RI{implementation-defined};
 
-   @AdaDefn{Max_Mantissa}          : @key[constant] := @RI{implementation-defined};
-   @AdaDefn{Fine_Delta}            : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Max_Mantissa}          : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Fine_Delta}            : @key[constant] := @RI{implementation-defined};
 
-   @AdaDefn{Tick}                  : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Tick}                  : @key[constant] := @RI{implementation-defined};
 
 
    --@RI{ Storage-related Declarations:}
@@ -48,11 +48,11 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
    @key[type] @AdaTypeDefn{Address} @key[is] @RI{implementation-defined};@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization(Address);],Old=[]}
-   @AdaDefn{Null_Address} : @key[constant] Address;
+   @AdaObjDefn{Null_Address} : @key[constant] Address;
 
-   @AdaDefn{Storage_Unit} : @key[constant] := @RI{implementation-defined};
-   @AdaDefn{Word_Size}    : @key[constant] := @RI{implementation-defined} * Storage_Unit;
-   @AdaDefn{Memory_Size}  : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Storage_Unit} : @key[constant] := @RI{implementation-defined};
+   @AdaObjDefn{Word_Size}    : @key[constant] := @RI{implementation-defined} * Storage_Unit;
+   @AdaObjDefn{Memory_Size}  : @key[constant] := @RI{implementation-defined};
 
    --@RI{ @Defn2{Term=[address], Sec=(comparison)}Address Comparison:}
    @key(function) "<" (Left, Right : Address) @key(return) Boolean;
@@ -68,8 +68,8 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00221-01]}
    --@RI{ Other System-Dependent Declarations:}
-   @key[type] @AdaTypeDefn{Bit_Order} @key[is] (High_Order_First, Low_Order_First);
-   @AdaDefn{Default_Bit_Order} : @key[constant] Bit_Order@Chg{Version=[2],New=[ := @RI{implementation-defined}],Old=[]};
+   @key[type] @AdaTypeDefn{Bit_Order} @key[is] (@AdaObjDefn{High_Order_First}, @AdaObjDefn{Low_Order_First});
+   @AdaObjDefn{Default_Bit_Order} : @key[constant] Bit_Order@Chg{Version=[2],New=[ := @RI{implementation-defined}],Old=[]};
 
 
    --@RI{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
@@ -79,7 +79,7 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
    @key{subtype} @AdaDefn{Interrupt_Priority} @key{is} Any_Priority @key{range} Priority'Last+1 ..
              Any_Priority'Last;
 
-   @AdaDefn{Default_Priority} : @key{constant} Priority :=
+   @AdaObjDefn{Default_Priority} : @key{constant} Priority :=
              (Priority'First + Priority'Last)/2;
 
 @key[private]
@@ -697,7 +697,7 @@ of the generic function Unchecked_Conversion.]
 @key[generic]
    @key[type] Source(<>) @key[is] @key[limited] @key[private];
    @key[type] Target(<>) @key[is] @key[limited] @key[private];
-@ChildUnit{Parent=[Ada],Child=[Unchecked_Conversion]}@key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target;
+@SubChildUnit{Parent=[Ada],Child=[Unchecked_Conversion]}@key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target;
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Conversion);
 @key[pragma] Pure(Ada.Unchecked_Conversion);
 @end{Example}
@@ -2042,7 +2042,7 @@ the generic procedure Unchecked_Deallocation.]
 @key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
    @key[type] Name   @key[is] @key[access]  Object;
-@ChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name);
+@SubChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name);
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);
 @key[pragma] Preelaborate(Ada.Unchecked_Deallocation);
 @end{Example}
@@ -3432,7 +3432,7 @@ the result of the Input function.]}
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The category of the type at the point of the
+  @ChgAdded{Version=[2],Text=[The view of the type at the point of the
   @nt{attribute_definition_clause} determines whether the first subtype or base
   subtype is required. Thus, for a scalar type with a partial view (which is
   never scalar), whether the first subtype or the base subtype is required is

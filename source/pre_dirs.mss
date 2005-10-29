@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2005/10/28 05:45:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2005/10/29 06:01:24 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:41 $}
+@Comment{$Date: 2005/10/29 06:01:24 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -170,10 +170,10 @@ Directories has the following declaration:]}
        @key{return} Ada.Calendar.Time;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Status_Error} : @key{exception renames} Ada.IO_Exceptions.Status_Error;
-   @AdaDefn{Name_Error}   : @key{exception renames} Ada.IO_Exceptions.Name_Error;
-   @AdaDefn{Use_Error}    : @key{exception renames} Ada.IO_Exceptions.Use_Error;
-   @AdaDefn{Device_Error} : @key{exception renames} Ada.IO_Exceptions.Device_Error;]}
+@ChgAdded{Version=[2],Text=[   @AdaExcDefn{Status_Error} : @key{exception renames} Ada.IO_Exceptions.Status_Error;
+   @AdaExcDefn{Name_Error}   : @key{exception renames} Ada.IO_Exceptions.Name_Error;
+   @AdaExcDefn{Use_Error}    : @key{exception renames} Ada.IO_Exceptions.Use_Error;
+   @AdaExcDefn{Device_Error} : @key{exception renames} Ada.IO_Exceptions.Device_Error;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2005/10/25 05:47:17 $ $Author: Randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2005/10/29 06:01:34 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/10/25 05:47:17 $}
+@Comment{$Date: 2005/10/29 06:01:34 $}
 
 @LabeledClause{String Handling}
 
@@ -2325,9 +2325,9 @@ for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Bounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Unbounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_@!Fixed],Child=[Wide_@!Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_@!Bounded],Child=[Wide_@!Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_@!Unbounded],Child=[Wide_@!Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_@!Fixed],Child=[Wide_@!Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_@!Bounded],Child=[Wide_@!Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_@!Unbounded],Child=[Wide_@!Hash]}
 @ChildUnit{Parent=[Ada.Strings.Wide_@!Maps],Child=[Wide_@!Constants]}
 @end{Intro}
 
@@ -2572,9 +2572,9 @@ for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Bounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Unbounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}
 @ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Maps],Child=[Wide_Wide_@!Constants]}]}
 
 @begin{StaticSem}
@@ -2826,7 +2826,7 @@ function Strings.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
-@key<function> Ada.Strings.Hash (Key : String) @key<return> Containers.Hash_Type;@ChildUnit{Parent=[Ada.Strings],Child=[Hash]}
+@key<function> Ada.Strings.Hash (Key : String) @key<return> Containers.Hash_Type;@SubChildUnit{Parent=[Ada.Strings],Child=[Hash]}
 @key<pragma> Pure(Hash);]}
 @end{Example}
 
@@ -2858,7 +2858,7 @@ function Strings.Bounded.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
-@key<generic>
+@key<generic>@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Hash]}
    @key<with package> Bounded @key<is>
                      @key<new> Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key<function> Ada.Strings.Bounded.Hash (Key : Bounded.Bounded_String)
@@ -2881,7 +2881,7 @@ function Strings.Unbounded.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
-@key<function> Ada.Strings.Unbounded.Hash (Key : Unbounded_String)@ChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash]}
+@key<function> Ada.Strings.Unbounded.Hash (Key : Unbounded_String)@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash]}
    @key<return> Containers.Hash_Type;
 @key<pragma> Preelaborate(Hash);]}
 @end{Example}

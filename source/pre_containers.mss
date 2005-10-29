@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2005/10/28 05:45:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2005/10/29 06:01:28 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:41 $}
+@Comment{$Date: 2005/10/29 06:01:28 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -345,7 +345,7 @@ package Containers.Vectors has the following declaration:]}
       Index_Type'Base @key{range}
          Index_Type'First-1 ..
          Index_Type'Min (Index_Type'Base'Last - 1, Index_Type'Last) + 1;
-   @AdaDefn{No_Index} : @key{constant} Extended_Index := Extended_Index'First;]}
+   @AdaObjDefn{No_Index} : @key{constant} Extended_Index := Extended_Index'First;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Vector} @key{is tagged private};
@@ -356,10 +356,10 @@ package Containers.Vectors has the following declaration:]}
    @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Vector} : @key{constant} Vector;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Vector} : @key{constant} Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{No_Element} : @key{constant} Cursor;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : Vector) @key{return} Boolean;]}
@@ -639,7 +639,7 @@ package Containers.Vectors has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
       @key{with function} "<" (Left, Right : Element_Type)
          @key{return} Boolean is <>;
-   @key{package} @AdaDefn{Generic_Sorting} @key{is}]}
+   @key{package} @AdaPackDefn{Generic_Sorting} @key{is}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Is_Sorted} (Container : Vector) @key{return} Boolean;]}
@@ -1939,7 +1939,7 @@ invalid, see below) cursor parameter. Possible results are:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The cursor may be treated as if it was No_Element;]}
+@ChgAdded{Version=[2],Text=[The cursor may be treated as if it were No_Element;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The cursor may designate some element in the vector
@@ -2219,10 +2219,10 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
    @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_List} : @key{constant} List;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_List} : @key{constant} List;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{No_Element} : @key{constant} Cursor;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : List) @key{return} Boolean;]}
@@ -2388,7 +2388,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
       @key{with function} "<" (Left, Right : Element_Type)
          @key{return} Boolean is <>;
-   @key{package} @AdaDefn{Generic_Sorting} @key{is}]}
+   @key{package} @AdaPackDefn{Generic_Sorting} @key{is}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Is_Sorted} (Container : List) @key{return} Boolean;]}
@@ -4029,10 +4029,10 @@ package Containers.Hashed_Maps has the following declaration:]}
    @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Map} : @key{constant} Map;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Map} : @key{constant} Map;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{No_Element} : @key{constant} Cursor;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : Map) @key{return} Boolean;]}
@@ -4574,10 +4574,10 @@ package Containers.Ordered_Maps has the following declaration:]}
    @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Map} : @key{constant} Map;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Map} : @key{constant} Map;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{No_Element} : @key{constant} Cursor;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : Map) @key{return} Boolean;]}
@@ -5909,10 +5909,10 @@ package Containers.Hashed_Sets has the following declaration:]}
    @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Set} : @key{constant} Set;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Set} : @key{constant} Set;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{No_Element} : @key{constant} Cursor;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : Set) @key{return} Boolean;]}
@@ -6080,7 +6080,7 @@ package Containers.Hashed_Sets has the following declaration:]}
       @key{with function} Hash (Key : Key_Type) @key{return} Hash_Type;
       @key{with function} Equivalent_Keys (Left, Right : Key_Type)
                                      @key{return} Boolean;
-   @key{package} @AdaDefn{Generic_Keys} @key{is}]}
+   @key{package} @AdaPackDefn{Generic_Keys} @key{is}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Key} (Position : Cursor) @key{return} Key_Type;]}
@@ -6365,10 +6365,10 @@ package Containers.Ordered_Sets has the following declaration:]}
    @key{pragma} Preelaborable_Initialization(Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Empty_Set} : @key{constant} Set;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Empty_Set} : @key{constant} Set;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{No_Element} : @key{constant} Cursor;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : Set) @key{return} Boolean;]}
@@ -6573,7 +6573,7 @@ package Containers.Ordered_Sets has the following declaration:]}
       @key{with function} Key (Element : Element_Type) @key{return} Key_Type;
       @key{with function} "<" (Left, Right : Key_Type)
          @key{return} Boolean @key{is} <>;
-   @key{package} @AdaDefn{Generic_Keys} @key{is}]}
+   @key{package} @AdaPackDefn{Generic_Keys} @key{is}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[       @key{function} @AdaSubDefn{Equivalent_Keys} (Left, Right : Key_Type)
@@ -7232,7 +7232,7 @@ procedure Containers.Generic_Array_Sort has the following declaration:]}
    @key{type} Array_Type @key{is array} (Index_Type @key{range} <>) @key{of} Element_Type;
    @key{with function} "<" (Left, Right : Element_Type)
       @key{return} Boolean @key{is} <>;
-@key{procedure} Ada.Containers.Generic_Array_Sort (Container : @key{in out} Array_Type);@ChildUnit{Parent=[Ada.Containers],Child=[Generic_Array_Sort]}
+@key{procedure} Ada.Containers.Generic_Array_Sort (Container : @key{in out} Array_Type);@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Array_Sort]}
 @key{pragma} Pure(Ada.Containers.Generic_Array_Sort);]}
 @end{Example}
 
@@ -7282,7 +7282,7 @@ declaration:]}
    @key{type} Array_Type @key{is array} (Index_Type) @key{of} Element_Type;
    @key{with function} "<" (Left, Right : Element_Type)
       @key{return} Boolean @key{is} <>;
-@key{procedure} Ada.Containers.Generic_Constrained_Array_Sort@ChildUnit{Parent=[Ada.Containers],Child=[Generic_Constrained_Array_Sort]}
+@key{procedure} Ada.Containers.Generic_Constrained_Array_Sort@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Constrained_Array_Sort]}
       (Container : @key{in out} Array_Type);
 @key{pragma} Pure(Ada.Containers.Generic_Constrained_Array_Sort);]}
 @end{Example}

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:36 $}
+@Comment{$Date: 2005/10/29 06:01:12 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -564,7 +564,7 @@ are not handled by the handlers of the
     @key[pragma] Preelaborate(Exceptions);],Old=[]}
     @key[type] @AdaTypeDefn{Exception_Id} @key[is] @key[private];@Chg{Version=[2],New=[
     @key[pragma] Preelaborable_Initialization(Exception_Id);],Old=[]}
-    @AdaDefn{Null_Id} : @key[constant] Exception_Id;
+    @AdaObjDefn{Null_Id} : @key[constant] Exception_Id;
     @key[function] @AdaSubDefn{Exception_Name}(Id : Exception_Id) @key[return] String;@Chg{Version=[2],New=[
     @key[function] @AdaSubDefn{Wide_Exception_Name}(Id : Exception_Id) @key[return] Wide_String;
     @key[function] @AdaSubDefn{Wide_Wide_Exception_Name}(Id : Exception_Id)
@@ -574,7 +574,7 @@ are not handled by the handlers of the
     @key[type] @AdaTypeDefn{Exception_Occurrence} @key[is] @key[limited] @key[private];@Chg{Version=[2],New=[
     @key[pragma] Preelaborable_Initialization(Exception_Occurrence);],Old=[]}
     @key[type] @AdaTypeDefn{Exception_Occurrence_Access} @key[is] @key[access] @key[all] Exception_Occurrence;
-    @AdaDefn{Null_Occurrence} : @key[constant] Exception_Occurrence;
+    @AdaObjDefn{Null_Occurrence} : @key[constant] Exception_Occurrence;
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00329-01]}
     @key[procedure] @AdaSubDefn{Raise_Exception}(E : @key[in] Exception_Id;

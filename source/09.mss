@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:34 $}
+@Comment{$Date: 2005/10/29 06:01:09 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 
@@ -3058,7 +3058,7 @@ by a corresponding clock.
   @key(function) ">" (Left, Right : Time) @key(return) Boolean;
   @key(function) ">="(Left, Right : Time) @key(return) Boolean;
 
-  @AdaDefn{Time_Error} : @key(exception;)
+  @AdaExcDefn{Time_Error} : @key(exception;)
 
 @key(private)
    ... -- @RI{not specified by the language}
@@ -3396,7 +3396,7 @@ environment (such as POSIX).]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Unknown_Zone_Error} : @key<exception>;]}
+@ChgAdded{Version=[2],Text=[   @AdaExcDefn{Unknown_Zone_Error} : @key<exception>;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{UTC_Time_Offset} (Date : Time := Clock) @key<return> Time_Offset;]}
@@ -3452,8 +3452,8 @@ environment (such as POSIX).]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Day of the week:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Day_Name} @key<is> (@AdaDefn{Monday}, @AdaDefn{Tuesday}, @AdaDefn{Wednesday}, @AdaDefn{Thursday},
-       @AdaDefn{Friday}, @AdaDefn{Saturday}, @AdaDefn{Sunday});]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Day_Name} @key<is> (@AdaObjDefn{Monday}, @AdaObjDefn{Tuesday}, @AdaObjDefn{Wednesday}, @AdaObjDefn{Thursday},
+       @AdaObjDefn{Friday}, @AdaObjDefn{Saturday}, @AdaObjDefn{Sunday});]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Day_of_Week} (Date : Time) @key<return> Day_Name;]}

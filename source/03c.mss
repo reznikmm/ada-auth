@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:32 $}
+@Comment{$Date: 2005/10/29 06:01:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -300,7 +300,7 @@ of the generic body result in distinct tags.
     ],Old=[]}@key[type] @AdaTypeDefn{Tag} @key[is] @key[private];
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
-@ChgAdded{Version=[2],Text=[    @AdaDefn{No_Tag} : @key[constant] Tag;]}
+@ChgAdded{Version=[2],Text=[    @AdaObjDefn{No_Tag} : @key[constant] Tag;]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00400-01]}
     @key[function] @AdaSubDefn{Expanded_Name}(T : Tag) @key[return] String;@Chg{Version=[2],New=[
@@ -323,7 +323,7 @@ of the generic body result in distinct tags.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00405-01]}
 @ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Interface_Ancestor_Tags} (T : Tag) @key[return] Tag_Array;]}
 
-    @AdaDefn{Tag_Error} : @key[exception];
+    @AdaExcDefn{Tag_Error} : @key[exception];
 
 @key[private]
    ... -- @RI{not specified by the language}

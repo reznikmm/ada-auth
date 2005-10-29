@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:37 $}
+@Comment{$Date: 2005/10/29 06:01:13 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -906,8 +906,8 @@ which can be called from outside the instance
 AI83-00398.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
-Since an actual type is always in the @Chg{Version=[2],New=[category, and thus
-the derivation ],Old=[]}class@Chg{Version=[2],New=[,],Old=[]} determined for
+Since an actual type is always in the
+@Chg{Version=[2],New=[category],Old=[class]} determined for
 the formal, the new subprograms hide all of the copied ones,
 except for a declaration of "/=" that corresponds to an explicit
 declaration of "=".
@@ -1595,16 +1595,17 @@ of a generic formal type is not a generic formal subtype.
 Old=[@Defn{determined class for a formal type}
 @Defn{class determined for a formal type}]}
 The form of a @nt{formal_type_definition} @i{determines a
-@Chg{Version=[2],New=[category],Old=[class]}} to which the formal type belongs.
+@Chg{Version=[2],New=[category (of types)],Old=[class]}} to which the
+formal type belongs.
 For a @nt{formal_private_type_definition} the reserved words
-@key{tagged} and @key{limited} indicate the @Chg{Version=[2],New=[category],Old=[class]}
+@key{tagged} and @key{limited} indicate the @Chg{Version=[2],New=[category of types],Old=[class]}
 (see @RefSecNum{Formal Private and Derived Types}).
 For a @nt{formal_derived_type_definition} the
-@Chg{Version=[2],New=[category],Old=[class]} is
+@Chg{Version=[2],New=[category of types],Old=[class]} is
 the derivation class rooted at the ancestor type.
 For other formal types,
 the name of the syntactic category indicates the
-@Chg{Version=[2],New=[category],Old=[class]};
+@Chg{Version=[2],New=[category of types],Old=[class]};
 a @nt{formal_discrete_type_definition} defines a discrete type,
 and so on.
 @begin{Reason}
@@ -1615,9 +1616,10 @@ rule harder to state clearly.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
 @ChgAdded{Version=[2],Text=[We use @lquotes@;category@rquote rather than
-@lquotes@;class@rquotes above, as not all of these categories are closed
-under derivation. For instance, limited and interface are categories that do
-not form classes.]}
+@lquotes@;class@rquotes above, because the requirement that classes are
+closed under derivation is not important here. Moreover, there are
+interesting categories that are not closed under derivation. For instance,
+limited and interface are categories that do not form classes.]}
 @end{Reason}
 @end{StaticSem}
 
@@ -1704,13 +1706,6 @@ The formal type is tagged if and only if it is declared as a tagged
 private type, or as a type derived from a (visibly) tagged type.
 (Note that the actual type might be tagged even if the formal type is
 not.)
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
-@ChgAdded{Version=[2],Text=[Recall that all categories to which a type
-belongs includes the categories that are @lquotes@;classes@rquotes;
-(see @RefSecNum{Derived Types and Classes}). So all of the
-properties of any interesting class implied by the formal type definition
-apply to the formal type.]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -2557,8 +2552,10 @@ interface type is the category of all interface types.]]}
 @end{TheProof}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[By saying @lquotes@;category@rquotes rather
-  than @lquotes@;class@rquotes, we
+  @ChgAdded{Version=[2],Text=[Here we're taking advantage
+  of our switch in terminology from @lquotes@;determined class@rquotes to
+  @lquotes@;determined category@rquotes; by saying @lquotes@;category@rquotes
+  rather than @lquotes@;class@rquotes, we
   require that any actual type be an interface type, not just some type
   derived from an interface type.]}
 @end{Ramification}

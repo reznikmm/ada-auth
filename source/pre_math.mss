@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2005/09/30 05:33:54 $ $Author: Randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2005/10/29 06:01:27 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:54 $}
+@Comment{$Date: 2005/10/29 06:01:27 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -25,11 +25,11 @@ children are defined in @RefSec{Numerics}.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00388-01]}
 @key[package] Ada.Numerics @key[is]@ChildUnit{Parent=[Ada],Child=[Numerics]}
    @key[pragma] Pure(Numerics);
-   @AdaDefn{Argument_Error} : @key[exception];
-   @AdaDefn{Pi} : @key[constant] :=
+   @AdaExcDefn{Argument_Error} : @key[exception];
+   @AdaObjDefn{Pi} : @key[constant] :=
           3.14159_26535_89793_23846_26433_83279_50288_41971_69399_37511;@Chg{Version=[2],New=[
    @pi  : @key[constant] := Pi;],Old=[]}
-   @AdaDefn{e}  : @key[constant] :=
+   @AdaObjDefn{e}  : @key[constant] :=
           2.71828_18284_59045_23536_02874_71352_66249_77572_47093_69996;
 @key[end] Ada.Numerics;
 @end{Example}
@@ -461,7 +461,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
                     From_State : @key[in]  State);
 
 
-   @AdaDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};
+   @AdaObjDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};
 
 
    @key[function] @AdaSubDefn{Image} (Of_State    : State)  @key[return] String;
@@ -509,7 +509,7 @@ declaration:
                     From_State : @key[in]  State);
 
 
-   @AdaDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};
+   @AdaObjDefn{Max_Image_Width} : @key[constant] := @RI{implementation-defined integer value};
 
 
    @key[function] @AdaSubDefn{Image} (Of_State    : State)  @key[return] String;
