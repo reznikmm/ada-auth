@@ -3,6 +3,7 @@ with ARM_Index;
 with ARM_Contents;
 with Ada.Characters.Handling;
 with Ada.Strings.Fixed;
+with Ada.Text_IO; -- ** Temp.
 package body ARM_Subindex is
 
     --
@@ -139,15 +140,21 @@ package body ARM_Subindex is
     procedure Write_Subindex (
 		Subindex_Object : in out Subindex_Type;
 		Output_Object   : in out ARM_Output.Output_Type'Class;
-		Use_Paragraphs : in Boolean := True) is
+		Use_Paragraphs : in Boolean := True;
+		Minimize_Lines : in Boolean := False) is
 	-- Generate the given subindex to Output_Object.
 	-- References include paragraph numbers if Use_Paragraphs is true.
+	-- Try to minimize lines if Minimize_Lines is True.
 	-- Note: This should not leave us in a paragraph.
 	Temp : Item_List;
 	Last : Item_List := null;
 	Items : array (1..Subindex_Object.Item_Count) of Item_List;
 
 	Keep_Set : Boolean := False;
+
+	CHARS_ON_SINGLE_LINE : constant := 38;
+	    -- The number of characters allowed on a single line if
+	    -- "Minimize_Lines" is True.
 
 	function To_Lower (A : in String) return String renames
 	    Ada.Characters.Handling.To_Lower;
@@ -463,6 +470,24 @@ package body ARM_Subindex is
 		    ARM_Output.Ordinary_Character (Output_Object, ' ');
 		    Clause_Ref (Item);
 
+	        when Subtype_In_Unit =>
+		    if Last_Had_Same_Unit then
+		        -- ** Must be before any other items with a unit,
+			-- so can't get here.
+		        Italic_Text ("*SORT ERROR*");
+		    end if;
+		    ARM_Output.Index_Line_Break (Output_Object, Clear_Keep_with_Next => Reset_Keep);
+		    ARM_Output.Hard_Space (Output_Object);
+		    ARM_Output.Hard_Space (Output_Object);
+		    ARM_Output.Hard_Space (Output_Object);
+		    Italic_Text ("in");
+		    ARM_Output.Ordinary_Character (Output_Object, ' ');
+		    Term_Text (Item.From_Unit.all);
+		    ARM_Output.Hard_Space (Output_Object);
+		    ARM_Output.Hard_Space (Output_Object);
+		    ARM_Output.Ordinary_Character (Output_Object, ' ');
+		    Clause_Ref (Item);
+
 	        when Description_In_Unit =>
 		    ARM_Output.Index_Line_Break (Output_Object, Clear_Keep_with_Next => Reset_Keep);
 		    if not Last_Had_Same_Unit then
@@ -511,23 +536,29 @@ package body ARM_Subindex is
 	function Is_Last_for_Entity (Item : in Item_List) return Boolean is
 	    -- Returns True if this is the last line for Item's Entity.
  	begin
+--Ada.Text_IO.Put_Line("Enter Is_Last");
 	    if Item.Next = null then
+--Ada.Text_IO.Put_Line("  No follower (True)");
 		return True;
-	    elsif To_Lower (Temp.Entity.all) /= To_Lower(Temp.Next.Entity.all) then
+	    elsif To_Lower (Item.Entity.all) /= To_Lower(Item.Next.Entity.all) then
 		-- The next item has a different entity.
+--Ada.Text_IO.Put_Line("  Different entity (True)");
 		return True;
-	    elsif Temp.Kind /= Temp.Next.Kind then
+	    elsif Item.Kind /= Item.Next.Kind then
 		-- The next item has a different kind, so another line will
 		-- be generated.
+--Ada.Text_IO.Put_Line("  Different kind (False)");
 		return False;
-	    elsif Temp.Kind /= Top_Level and
-		  Temp.From_Unit /= Temp.Next.From_Unit then
+	    elsif Item.Kind /= Top_Level and then
+		  Item.From_Unit.all /= Item.Next.From_Unit.all then
 		-- The next item has a different unit, so another line will
 		-- be generated.
+--Ada.Text_IO.Put_Line("  Different unit (False)");
 		return False;
 	    else
 		-- The following entity will just add another clause reference.
 		-- So we must look at the entity following that:
+--Ada.Text_IO.Put_Line("  Recurse");
 		return Is_Last_for_Entity (Item.Next);
 	    end if;
 	end Is_Last_for_Entity;
@@ -567,21 +598,54 @@ package body ARM_Subindex is
 	    -- First, check for the new entity:
 	    if Last = null or else
 		To_Lower(Last.Entity.all) /= To_Lower(Temp.Entity.all) then
-		-- New term: (Note that we ignore case differences here. Perhaps
-		-- there ought to be a warning?)
+		-- New term: (Note that we ignore case differences here.
+		-- Perhaps there ought to be a warning?)
 		if Last /= null then
 		    ARM_Output.End_Paragraph (Output_Object);
 		    if Temp.Kind = Top_Level then
 		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "",
 					            No_Breaks => True);
 			Keep_Set := False;
+--Ada.Text_IO.Put_Line("New Item: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" Keep_Set=" & Boolean'Image(Keep_Set));
+		    elsif Minimize_Lines and then
+		          Temp.Kind = In_Unit and then
+		          Temp.Entity'Length + 4 + Temp.From_Unit'Length < CHARS_ON_SINGLE_LINE then
+			-- Write as a single line.
+		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "",
+					            No_Breaks => True);
+			Keep_Set := False;
+--Ada.Text_IO.Put_Line("New Item: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" From_Unit=" & Temp.From_Unit.all & " Keep_Set=" & Boolean'Image(Keep_Set));
 		    else -- The item has at least two lines; keep them together.
 		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "",
 					            No_Breaks => True, Keep_with_Next => True);
 			Keep_Set := True;
+--Ada.Text_IO.Put_Line("New Item: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" From_Unit=" & Temp.From_Unit.all & " Keep_Set=" & Boolean'Image(Keep_Set));
 		    end if;
 		end if;
-	        Term_Text (Temp.Entity.all);
+		if Temp.Kind /= Subtype_In_Unit then
+		    Term_Text (Temp.Entity.all);
+		else
+		    declare
+			Of_Loc : Natural :=
+			    Ada.Strings.Fixed.Index (Temp.Entity.all,
+				" subtype of ");
+		    begin
+			if Of_Loc = 0 then
+			    -- Weird, "subtype of" not found.
+			    Term_Text (Temp.Entity.all);
+			else
+			    Term_Text (Temp.Entity (Temp.Entity'First .. Of_Loc));
+			    Italic_Text ("subtype of");
+			    Term_Text (Temp.Entity (Of_Loc+11 .. Temp.Entity'Last));
+			end if;
+		    end;
+		end if;
 		if Temp.Kind = Top_Level then
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
@@ -590,9 +654,29 @@ package body ARM_Subindex is
 		else
 		    if Is_Last_for_Entity (Temp) then
 		        -- Last (only) item of this term, always clear Keep:
-	                New_Kind (Temp, Reset_Keep => True, Last_Had_Same_Unit => False);
-		        Keep_Set := False;
+--Ada.Text_IO.Put_Line("Only New Item: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" From_Unit=" & Temp.From_Unit.all & " Keep_Set=" & Boolean'Image(Keep_Set));
+			if Minimize_Lines and then
+			   Temp.Kind = In_Unit and then
+			    Temp.Entity'Length + 4 + Temp.From_Unit'Length < CHARS_ON_SINGLE_LINE then
+			    -- Write this as a single line:
+			    ARM_Output.Ordinary_Character (Output_Object, ' ');
+			    Italic_Text ("in");
+			    ARM_Output.Ordinary_Character (Output_Object, ' ');
+			    Term_Text (Temp.From_Unit.all);
+			    ARM_Output.Hard_Space (Output_Object);
+			    ARM_Output.Hard_Space (Output_Object);
+			    ARM_Output.Ordinary_Character (Output_Object, ' ');
+			    Clause_Ref (Temp);
+			else
+	                    New_Kind (Temp, Reset_Keep => True, Last_Had_Same_Unit => False);
+		            Keep_Set := False;
+			end if;
 		    else -- Leave keep set:
+--Ada.Text_IO.Put_Line("More New Item: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" From_Unit=" & Temp.From_Unit.all & " Keep_Set=" & Boolean'Image(Keep_Set));
 		        New_Kind (Temp, Reset_Keep => False, Last_Had_Same_Unit => False);
 		    end if;
 		end if;
@@ -600,16 +684,32 @@ package body ARM_Subindex is
 		If Last.Kind /= Top_Level and then
 		   Temp.Kind /= Top_Level and then
 		   Last.From_Unit.all = Temp.From_Unit.all then
+--Ada.Text_IO.Put_Line("New Kind, same unit: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" From_Unit=" & Temp.From_Unit.all & " Keep_Set=" & Boolean'Image(Keep_Set));
 	            New_Kind (Temp, Reset_Keep => Keep_Set, Last_Had_Same_Unit => True);
 		else
+--if Temp.Kind /= Top_Level then
+--Ada.Text_IO.Put_Line("New Kind: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" From_Unit=" & Temp.From_Unit.all & " Keep_Set=" & Boolean'Image(Keep_Set));
+--else
+--Ada.Text_IO.Put_Line("New Kind: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" Keep_Set=" & Boolean'Image(Keep_Set));
+--end if;
 	            New_Kind (Temp, Reset_Keep => Keep_Set, Last_Had_Same_Unit => False);
 		end if;
 		Keep_Set := False;
 	    elsif (Temp.Kind = In_Unit or else
 		   Temp.Kind = Child_of_Parent or else
+		   Temp.Kind = Subtype_In_Unit or else
 		   Temp.Kind = Description_In_Unit or else
 		   Temp.Kind = Raised_Belonging_to_Unit) and then
 		Last.From_Unit.all /= Temp.From_Unit.all then
+--Ada.Text_IO.Put_Line("Same Kind, new unit: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" From_Unit=" & Temp.From_Unit.all & " Keep_Set=" & Boolean'Image(Keep_Set));
 	        New_Kind (Temp, Reset_Keep => Keep_Set, Last_Had_Same_Unit => False);
 		Keep_Set := False;
 	    elsif Last.Clause (1..Last.Clause_Len) = Temp.Clause (1..Temp.Clause_Len) and then
@@ -618,6 +718,15 @@ package body ARM_Subindex is
 		-- forget this item.
 		null;
 	    else
+--if Temp.Kind /= Top_Level then
+--Ada.Text_IO.Put_Line("Same: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" From_Unit=" & Temp.From_Unit.all & " Keep_Set=" & Boolean'Image(Keep_Set));
+--else
+--Ada.Text_IO.Put_Line("Same: Entity=" & Temp.Entity.all &
+--" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
+--" Keep_Set=" & Boolean'Image(Keep_Set));
+--end if;
 		-- Just add the next clause.
 	        ARM_Output.Ordinary_Character (Output_Object, ',');
 	        ARM_Output.Ordinary_Character (Output_Object, ' ');

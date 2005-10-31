@@ -412,7 +412,7 @@ package body ARM_Format is
 	Defn, RootDefn, PDefn, Defn2, RootDefn2, PDefn2, Index_See,
 	Index_See_Also, See_Other, See_Also,
 	Index_Root_Unit, Index_Child_Unit, Index_Subprogram_Child_Unit,
-	Index_Type, Index_Subprogram,
+	Index_Type, Index_Subtype, Index_Subprogram,
 	Index_Exception, Index_Object, Index_Package,
 	Index_Other, Index_Check, Index_Attr, Index_Pragma,
 	-- Clause labels:
@@ -574,6 +574,8 @@ package body ARM_Format is
 	    return Index_Subprogram_Child_Unit;
 	elsif Canonical_Name = "adatypedefn" then
 	    return Index_Type;
+	elsif Canonical_Name = "adasubtypedefn" then
+	    return Index_Subtype;
 	elsif Canonical_Name = "adasubdefn" then
 	    return Index_Subprogram;
 	elsif Canonical_Name = "adaexcdefn" then
@@ -3214,7 +3216,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
         procedure Write_Subindex (
 		            Subindex_Object : in out ARM_Subindex.Subindex_Type;
 		            Format_Object : in out Format_Type;
-		            Output_Object : in out ARM_Output.Output_Type'Class) is
+		            Output_Object : in out ARM_Output.Output_Type'Class;
+			    Minimize_Lines : in Boolean) is
 	    -- Writes a subindex for the document.
         begin
 	    Check_End_Paragraph;
@@ -3229,7 +3232,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    ARM_Subindex.Write_Subindex (
 		    Subindex_Object,
 		    Output_Object,
-		    Use_Paragraphs => Format_Object.Document /= ARM_Format.RM_ISO);
+		    Use_Paragraphs => Format_Object.Document /= ARM_Format.RM_ISO,
+		    Minimize_Lines => Minimize_Lines);
 
 	    ARM_Output.Set_Columns (Output_Object, Number_of_Columns => 1);
 
@@ -5281,6 +5285,75 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        Entity_Kind_Name => "Type");
 		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 		        -- Remove the "AdaTypeDefn" record.
+
+		when Index_Subtype =>
+		    -- @AdaSubTypeDefn{Name=<defn>,Of=<type>}
+		    -- Generates an index entry of "<defn> @i{subtype of}
+		    -- <type>" with a secondary entry of "@i{in} <Unit>" (where
+		    -- Unit is the unit saved by a previous RootLibUnit or
+		    -- ChildUnit.) The entry is added to the type list as well.
+		    -- Also outputs the <defn> to the output file.
+		    declare
+		        Subtype_Name, Type_Name : String(1..80);
+		        SLen, TLen : Natural := 0;
+	    		Key : ARM_Index.Index_Key := ARM_Index.Get_Key;
+			Close_Ch : Character;
+		    begin
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+			            Param_Name => "Name" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			            Is_First => True,
+			            Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+		            -- Copy over the term:
+		            ARM_Input.Copy_to_String_until_Close_Char (
+			        Input_Object,
+			        Close_Ch,
+			        Subtype_Name,
+			        SLen);
+		        -- else no parameter. Weird.
+		        end if;
+
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+		            Param_Name => "Of" & (3..ARM_Input.Command_Name_Type'Last => ' '),
+		            Is_First => False,
+		            Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+		            -- Copy over the term:
+		            ARM_Input.Copy_to_String_until_Close_Char (
+			        Input_Object,
+			        Close_Ch,
+			        Type_Name,
+			        TLen);
+		        -- else no parameter. Weird.
+		        end if;
+
+		        Check_Paragraph;
+		        ARM_Output.Index_Target (Output_Object, Key);
+
+			ARM_Index.Add_Reusing_Key (
+			        Term => Subtype_Name(1..SLen) & " subtype of " &
+			            Type_Name(1..TLen),
+			        Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
+			        Kind => ARM_Index.Subtype_Declaration_in_Package,
+			        Clause => Clause_String,
+			        Paragraph => Paragraph_String,
+			        Key => Key);
+
+		        ARM_Subindex.Insert (
+			    Subindex_Object => Format_Object.Type_Index,
+			    Entity => Subtype_Name(1..SLen) & " subtype of " &
+			        Type_Name(1..TLen),
+			    From_Unit => Format_Object.Unit(1..Format_Object.Unit_Len),
+			    Kind => ARM_Subindex.Subtype_In_Unit,
+			    Clause => Clause_String,
+			    Paragraph => Paragraph_String,
+			    Key => Key);
+
+		        ARM_Output.Ordinary_Text (Output_Object, Subtype_Name(1..SLen));
+		        Format_Object.Last_Non_Space := True;
+		        -- Leave the command end marker, let normal processing
+		        -- get rid of it.
+		    end;
 
 		when Index_Subprogram =>
 		    -- @AdaSubDefn{<defn>}
@@ -8012,27 +8085,32 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		when Package_List =>
 		    Write_Subindex (Format_Object.Package_Index,
 				    Format_Object,
-				    Output_Object);
+				    Output_Object,
+				    Minimize_Lines => False);
 
 		when Type_List =>
 		    Write_Subindex (Format_Object.Type_Index,
 				    Format_Object,
-				    Output_Object);
+				    Output_Object,
+				    Minimize_Lines => False);
 
 		when Subprogram_List =>
 		    Write_Subindex (Format_Object.Subprogram_Index,
 				    Format_Object,
-				    Output_Object);
+				    Output_Object,
+				    Minimize_Lines => True);
 
 		when Exception_List =>
 		    Write_Subindex (Format_Object.Exception_Index,
 				    Format_Object,
-				    Output_Object);
+				    Output_Object,
+				    Minimize_Lines => False);
 
 		when Object_List =>
 		    Write_Subindex (Format_Object.Object_Index,
 				    Format_Object,
-				    Output_Object);
+				    Output_Object,
+				    Minimize_Lines => True);
 
 		when Text_Begin | Text_End | Redundant | Part | Bold | Italic |
 		     Roman | Swiss | Fixed | Roman_Italic | Shrink | Grow |
@@ -8041,7 +8119,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Defn | RootDefn | PDefn | Defn2 | RootDefn2 | PDefn2 |
 		     Index_See | Index_See_Also | See_Other | See_Also |
 		     Index_Root_Unit | Index_Child_Unit | Index_Subprogram_Child_Unit |
-		     Index_Type |
+		     Index_Type | Index_Subtype |
 		     Index_Subprogram | Index_Exception | Index_Object |
 		     Index_Package | Index_Other | Index_Check |
 		     Index_Attr | Index_Pragma |

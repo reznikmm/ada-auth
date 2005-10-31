@@ -420,6 +420,11 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
         (For version 2 or later, the Language-Defined entry is not generated.)
         The first entry is added to the type list as well.
 	Also outputs the <defn> to the output file.
+@AdaSubTypeDefn{Name=<defn>,Of=<type>} - Generates an index entry of
+        "<defn> @i{subtype of} <type>" with a secondary entry of
+        "@i{in} <Unit>" (where Unit is the unit saved by a previous
+        RootLibUnit or ChildUnit.) The entry is added to the type list as well.
+	Also outputs the <defn> to the output file.
 @AdaExcDefn{<defn>} - Generates an index entry for <defn> with a
 	secondary entry of "@i{in} <Unit>" (where Unit is the unit saved by
 	a previous RootLibUnit or ChildUnit.)

@@ -41,6 +41,7 @@ package ARM_Index is
     --  5/28/00 - RLB - Created package.
     --  8/11/00 - RLB - Made Clean visible.
     -- 10/28/05 - RLB - Added key reuse.
+    -- 10/30/05 - RLB - Added subtype declaration.
 
     Not_Valid_Error : exception;
 
@@ -61,6 +62,7 @@ package ARM_Index is
 	Child_Unit_Parent,		-- A child unit, with a subterm of "child of <subterm>".
 	Declaration_in_Package,		-- A declaration, with a subterm of "in <package>".
 	SubDeclaration_in_Package,	-- A term, with a subterm of "<item> in <package>".
+	Subtype_Declaration_in_Package,	-- A term (of the form "<item> subtype of <item2>, with a subterm of "in <package>".
 	See_Term,			-- A "see <subterm>" with reference.
 	See_Also_Term,			-- A "see also <subterm>" with reference.
 	See_Other_Term,			-- A "see <subterm>" without reference.

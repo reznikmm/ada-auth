@@ -52,6 +52,7 @@ package body ARM_Index is
     --			that the empty paragraph isn't ignored.
     --  9/09/04 - RLB - Removed unused junk noted by Stephen Leake.
     -- 10/28/05 - RLB - Added key reuse.
+    -- 10/30/05 - RLB - Added subtype declaration.
 
     Next_Index_Key : Index_Key;
 
@@ -183,6 +184,7 @@ package body ARM_Index is
 	   Kind /= Child_Unit_Parent and then
 	   Kind /= Declaration_in_Package and then
 	   Kind /= Subdeclaration_in_Package and then
+	   Kind /= Subtype_Declaration_in_Package and then
 	   Kind /= See_Term and then
 	   Kind /= See_Also_Term and then
 	   Kind /= See_Other_Term and then
@@ -435,6 +437,19 @@ package body ARM_Index is
 			    Term_Text (Item.Subterm (In_Loc+3 .. Item.Subterm_Len));
 			end if;
 		    end;
+		    ARM_Output.Hard_Space (Output_Object);
+		    ARM_Output.Hard_Space (Output_Object);
+		    ARM_Output.Ordinary_Character (Output_Object, ' ');
+		    Clause_Ref (Item);
+
+	        when Subtype_Declaration_In_Package =>
+		    ARM_Output.Index_Line_Break (Output_Object, Clear_Keep_with_Next => Reset_Keep);
+		    ARM_Output.Hard_Space (Output_Object);
+		    ARM_Output.Hard_Space (Output_Object);
+		    ARM_Output.Hard_Space (Output_Object);
+		    Italic_Text ("in");
+		    ARM_Output.Ordinary_Character (Output_Object, ' ');
+		    Term_Text (Item.Subterm (1..Item.Subterm_Len));
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Ordinary_Character (Output_Object, ' ');
@@ -813,7 +828,24 @@ package body ARM_Index is
 			Keep_Set := True;
 		    end if;
 		end if;
-	        Term_Text (Temp.Term (1..Temp.Term_Len));
+		if Temp.Kind /= Subtype_Declaration_in_Package then
+	            Term_Text (Temp.Term (1..Temp.Term_Len));
+		else
+		    declare
+			Of_Loc : Natural :=
+			    Ada.Strings.Fixed.Index (Temp.Term (1..Temp.Term_Len),
+				" subtype of ");
+		    begin
+			if Of_Loc = 0 then
+			    -- Weird, "subtype of" not found.
+			    Term_Text (Temp.Term (1..Temp.Term_Len));
+			else
+			    Term_Text (Temp.Term (1 .. Of_Loc));
+			    Italic_Text ("subtype of");
+			    Term_Text (Temp.Term (Of_Loc+11 .. Temp.Term_Len));
+			end if;
+		    end;
+		end if;
 		if Temp.Kind = Primary_Term then
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
@@ -836,7 +868,8 @@ package body ARM_Index is
 		   Temp.Kind = Syntax_NT_Used or else
 		   Temp.Kind = Child_Unit_Parent or else
 		   Temp.Kind = Declaration_in_Package or else
-		   Temp.Kind = SubDeclaration_in_Package) and then
+		   Temp.Kind = SubDeclaration_in_Package or else
+		   Temp.Kind = Subtype_Declaration_in_Package) and then
 		Last.Subterm (1..Last.Subterm_Len) /= Temp.Subterm (1..Temp.Subterm_Len) then
 	        New_Kind (Temp, Reset_Keep => Keep_Set);
 		Keep_Set := False;

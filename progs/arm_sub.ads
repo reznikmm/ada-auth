@@ -53,7 +53,8 @@ package ARM_Subindex is
 	-- Destroy a Subindex object, freeing any resources used.
 
     type Subindex_Item_Kind_Type is (Top_Level, In_Unit,
-	Child_of_Parent, Description_In_Unit, Raised_Belonging_to_Unit);
+	Child_of_Parent, Subtype_In_Unit,
+	Description_In_Unit, Raised_Belonging_to_Unit);
 
     procedure Insert (Subindex_Object : in out Subindex_Type;
 		      Entity          : in String;
@@ -70,9 +71,11 @@ package ARM_Subindex is
     procedure Write_Subindex (
 		Subindex_Object : in out Subindex_Type;
 		Output_Object   : in out ARM_Output.Output_Type'Class;
-		Use_Paragraphs : in Boolean := True);
+		Use_Paragraphs : in Boolean := True;
+		Minimize_Lines : in Boolean := False);
 	-- Generate the given subindex to Output_Object.
 	-- References include paragraph numbers if Use_Paragraphs is true.
+	-- Try to minimize lines if Minimize_Lines is True.
 
 private
 
