@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2005/10/29 06:01:34 $ $Author: Randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2005/10/31 17:34:30 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/10/29 06:01:34 $}
+@Comment{$Date: 2005/10/31 17:34:30 $}
 
 @LabeledClause{String Handling}
 
@@ -44,11 +44,11 @@ common to the string handling packages.
    @key[pragma] Pure(Strings);
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-   @AdaDefn{Space}      : @key[constant] Character      := ' ';
-   @AdaDefn{Wide_Space} : @key[constant] Wide_Character := ' ';@Chg{Version=[2],New=[
-   @AdaDefn{Wide_Wide_Space} : @key[constant] Wide_Wide_Character := ' ';],Old=[]}
+   @AdaObjDefn{Space}      : @key[constant] Character      := ' ';
+   @AdaObjDefn{Wide_Space} : @key[constant] Wide_Character := ' ';@Chg{Version=[2],New=[
+   @AdaObjDefn{Wide_Wide_Space} : @key[constant] Wide_Wide_Character := ' ';],Old=[]}
 
-   @AdaDefn{Length_Error}, @AdaDefn{Pattern_Error}, @AdaDefn{Index_Error}, @AdaDefn{Translation_Error} : @key[exception];
+   @AdaExcDefn{Length_Error}, @AdaExcDefn{Pattern_Error}, @AdaExcDefn{Index_Error}, @AdaExcDefn{Translation_Error} : @key[exception];
 
    @key[type] @AdaTypeDefn{Alignment}  @key[is] (Left, Right, Center);
    @key[type] @AdaTypeDefn{Truncation} @key[is] (Left, Right, Error);
@@ -91,7 +91,7 @@ entities needed for character sets and character-to-character mappings.
    @key[type] @AdaTypeDefn{Character_Set} @key[is] @key[private];@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization(Character_Set);],Old=[]}
 
-   @AdaDefn{Null_Set} : @key[constant] Character_Set;
+   @AdaObjDefn{Null_Set} : @key[constant] Character_Set;
 
    @key[type] @AdaTypeDefn{Character_Range} @key[is]
      @Key[record]
@@ -130,7 +130,7 @@ entities needed for character sets and character-to-character mappings.
 
 
    --@RI{ Alternative representation for a set of character values:}
-   @key[subtype] @AdaDefn{Character_Sequence} @key[is] String;
+   @key[subtype] @AdaSubtypeDefn{Name=[Character_Sequence],Of=[String]} @key[is] String;
 
    @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Character_Sequence)@key[return] Character_Set;
 
@@ -148,7 +148,7 @@ entities needed for character sets and character-to-character mappings.
                    Element : @key[in] Character)
       @key[return] Character;
 
-   @AdaDefn{Identity} : @key[constant] Character_Mapping;
+   @AdaObjDefn{Identity} : @key[constant] Character_Mapping;
 
    @key[function] @AdaSubDefn{To_Mapping} (From, To : @key[in] Character_Sequence)
       @key[return] Character_Mapping;
@@ -1179,15 +1179,15 @@ the copying and comparison of bounded strings.@end{reason}
 
    @key[generic]
       Max   : Positive;    --@RI{ Maximum length of a Bounded_String}
-   @key[package] @AdaDefn{Generic_Bounded_Length} @key[is]
+   @key[package] @AdaPackDefn{Generic_Bounded_Length} @key[is]
 
-      @AdaDefn{Max_Length} : @key[constant] Positive := Max;
+      @AdaObjDefn{Max_Length} : @key[constant] Positive := Max;
 
       @key[type] @AdaTypeDefn{Bounded_String} @key[is] @key[private];
 
-      @AdaDefn{Null_Bounded_String} : @key[constant] Bounded_String;
+      @AdaObjDefn{Null_Bounded_String} : @key[constant] Bounded_String;
 
-      @key[subtype] @AdaDefn{Length_Range} @key[is] Natural @key[range] 0 .. Max_Length;
+      @key[subtype] @AdaSubtypeDefn{Name=[Length_Range],Of=[Natural]} @key[is] Natural @key[range] 0 .. Max_Length;
 
       @key[function] @AdaSubDefn{Length} (Source : @key[in] Bounded_String) @key[return] Length_Range;
 
@@ -1814,7 +1814,7 @@ as the length does not exceed the allocated length.
    @key[type] @AdaTypeDefn{Unbounded_String} @key[is] @key[private];@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization(Unbounded_String);],Old=[]}
 
-   @AdaDefn{Null_Unbounded_String} : @key[constant] Unbounded_String;
+   @AdaObjDefn{Null_Unbounded_String} : @key[constant] Unbounded_String;
 
    @key[function] @AdaSubDefn{Length} (Source : @key[in] Unbounded_String) @key[return] Natural;
 
@@ -2269,23 +2269,23 @@ in a preelaborable way (i.e. via aggregates versus function calls).
 @ChildUnit{Parent=[Ada.Strings.Maps],Child=[Constants]}@key[package] Ada.Strings.Maps.Constants @key[is]
    @key[pragma] @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(Constants);
 
-   @AdaDefn{Control_Set}           : @key[constant] Character_Set;
-   @AdaDefn{Graphic_Set}           : @key[constant] Character_Set;
-   @AdaDefn{Letter_Set}            : @key[constant] Character_Set;
-   @AdaDefn{Lower_Set}             : @key[constant] Character_Set;
-   @AdaDefn{Upper_Set}             : @key[constant] Character_Set;
-   @AdaDefn{Basic_Set}             : @key[constant] Character_Set;
-   @AdaDefn{Decimal_Digit_Set}     : @key[constant] Character_Set;
-   @AdaDefn{Hexadecimal_Digit_Set} : @key[constant] Character_Set;
-   @AdaDefn{Alphanumeric_Set}      : @key[constant] Character_Set;
-   @AdaDefn{Special_Set}           : @key[constant] Character_Set;
-   @AdaDefn{ISO_646_Set}           : @key[constant] Character_Set;
+   @AdaObjDefn{Control_Set}           : @key[constant] Character_Set;
+   @AdaObjDefn{Graphic_Set}           : @key[constant] Character_Set;
+   @AdaObjDefn{Letter_Set}            : @key[constant] Character_Set;
+   @AdaObjDefn{Lower_Set}             : @key[constant] Character_Set;
+   @AdaObjDefn{Upper_Set}             : @key[constant] Character_Set;
+   @AdaObjDefn{Basic_Set}             : @key[constant] Character_Set;
+   @AdaObjDefn{Decimal_Digit_Set}     : @key[constant] Character_Set;
+   @AdaObjDefn{Hexadecimal_Digit_Set} : @key[constant] Character_Set;
+   @AdaObjDefn{Alphanumeric_Set}      : @key[constant] Character_Set;
+   @AdaObjDefn{Special_Set}           : @key[constant] Character_Set;
+   @AdaObjDefn{ISO_646_Set}           : @key[constant] Character_Set;
 
-   @AdaDefn{Lower_Case_Map}        : @key[constant] Character_Mapping;
+   @AdaObjDefn{Lower_Case_Map}        : @key[constant] Character_Mapping;
      --@RI{Maps to lower case for letters, else identity}
-   @AdaDefn{Upper_Case_Map}        : @key[constant] Character_Mapping;
+   @AdaObjDefn{Upper_Case_Map}        : @key[constant] Character_Mapping;
      --@RI{Maps to upper case for letters, else identity}
-   @AdaDefn{Basic_Map}             : @key[constant] Character_Mapping;
+   @AdaObjDefn{Basic_Map}             : @key[constant] Character_Mapping;
      --@RI{Maps to basic letter for letters, else identity}
 
 @key[private]
@@ -2342,7 +2342,7 @@ The package Strings.Wide_Maps has the following declaration.
    @key[type] @AdaTypeDefn{Wide_Character_Set} @key[is] @key[private];@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization(Wide_Character_Set);],Old=[]}
 
-   @AdaDefn{Null_Set} : @key[constant] Wide_Character_Set;
+   @AdaObjDefn{Null_Set} : @key[constant] Wide_Character_Set;
 
    @key[type] @AdaTypeDefn{Wide_Character_Range} @key[is]
      @key[record]
@@ -2390,7 +2390,7 @@ The package Strings.Wide_Maps has the following declaration.
 
 
    --@RI{ Alternative representation for a set of Wide_Character values:}
-   @key[subtype] @AdaDefn{Wide_Character_Sequence} @key[is] Wide_String;
+   @key[subtype] @AdaSubtypeDefn{Name=[Wide_Character_Sequence],Of=[Wide_String]} @key[is] Wide_String;
 
    @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Wide_Character_Sequence)
       @key[return] Wide_Character_Set;
@@ -2411,7 +2411,7 @@ The package Strings.Wide_Maps has the following declaration.
                    Element : @key[in] Wide_Character)
       @key[return] Wide_Character;
 
-   @AdaDefn{Identity} : @key[constant] Wide_Character_Mapping;
+   @AdaObjDefn{Identity} : @key[constant] Wide_Character_Mapping;
 
    @key[function] @AdaSubDefn{To_Mapping} (From, To : @key[in] Wide_Character_Sequence)
       @key[return] Wide_Character_Mapping;
@@ -2484,7 +2484,7 @@ To_Unbounded_Wide_String replaces To_Unbounded_String
 Strings.Wide_Maps.Wide_Constants:
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
-@AdaDefn{Character_Set} : @key[constant] Wide_Maps.Wide_Character_Set;
+@AdaObjDefn{Character_Set} : @key[constant] Wide_Maps.Wide_Character_Set;
 --@RI{Contains each Wide_Character value WC such that}@Chg{Version=[2],New=[
 --],Old=[]}@RI{Characters.@Chg{Version=[2],New=[Conversions.],Old=[]}Is_Character(WC) is True}
 @end{example}
@@ -2593,7 +2593,7 @@ for strings of Character elements.
    @key<pragma> Preelaborable_Initialization(Wide_Wide_Character_Set);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Null_Set} : @key<constant> Wide_Wide_Character_Set;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Null_Set} : @key<constant> Wide_Wide_Character_Set;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Wide_Wide_Character_Range} @key<is>
@@ -2651,7 +2651,7 @@ for strings of Character elements.
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Alternative representation for a set of Wide_Wide_Character values:]
-   @key<subtype> @AdaDefn{Wide_Wide_Character_Sequence} @key<is> Wide_Wide_String;]}
+   @key<subtype> @AdaSubtypeDefn{Name=[Wide_Wide_Character_Sequence],Of=[Wide_Wide_String]} @key<is> Wide_Wide_String;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Set} (Sequence : @key<in> Wide_Wide_Character_Sequence)
@@ -2677,7 +2677,7 @@ for strings of Character elements.
          @key<return> Wide_Wide_Character;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Identity} : @key<constant> Wide_Wide_Character_Mapping;]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Identity} : @key<constant> Wide_Wide_Character_Mapping;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_Mapping} (From, To : @key<in> Wide_Wide_Character_Sequence)
@@ -2777,10 +2777,10 @@ Strings.Wide_Wide_Maps.Wide_Wide_Constants:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@AdaDefn{Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
+@ChgAdded{Version=[2],Text=[@AdaObjDefn{Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
 -- @RI[Contains each Wide_Wide_Character value WWC such that]
 -- @RI[Characters.Conversions.Is_Character(WWC) is True]
-@AdaDefn{Wide_Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
+@AdaObjDefn{Wide_Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
 -- @RI[Contains each Wide_Wide_Character value WWC such that]
 -- @RI[Characters.Conversions.Is_Wide_Character(WWC) is True]]}
 @end{Example}

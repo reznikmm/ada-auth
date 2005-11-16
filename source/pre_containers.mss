@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2005/10/29 06:01:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2005/10/31 17:34:24 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:28 $}
+@Comment{$Date: 2005/10/31 17:34:24 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -341,7 +341,7 @@ package Containers.Vectors has the following declaration:]}
    @key{pragma} Preelaborate(Vectors);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{subtype} @AdaDefn{Extended_Index} @key{is}
+@ChgAdded{Version=[2],Text=[   @key{subtype} @AdaSubtypeDefn{Name=[Extended_Index],Of=[Index_Type'Base]} @key{is}
       Index_Type'Base @key{range}
          Index_Type'First-1 ..
          Index_Type'Min (Index_Type'Base'Last - 1, Index_Type'Last) + 1;

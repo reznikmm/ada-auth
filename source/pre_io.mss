@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:25 $}
+@Comment{$Date: 2005/10/31 17:34:22 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -638,7 +638,7 @@ The exception Mode_Error is propagated if the mode is not In_File.
 
    @key[type] @AdaTypeDefn{File_Mode} @key[is] (In_File, Inout_File, Out_File);
    @key[type] @AdaTypeDefn{Count}     @key[is] @key[range] 0 .. @RI[implementation-defined];
-   @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
+   @key[subtype] @AdaSubtypeDefn{Name=[Positive_Count],Of=[Count]} @key[is] Count @key[range] 1 .. Count'Last;
 
    --@RI{ File management}
 
@@ -844,7 +844,7 @@ the construction of user-defined input-output packages.
 
    @AdaObjDefn{Buffer_Size} : @key(constant) System.Storage_Elements.Storage_Count :=
       @RI(implementation-defined);
-   @key(subtype) @AdaDefn{Buffer_Type} @key(is)
+   @key(subtype) @AdaSubtypeDefn{Name=[Buffer_Type],Of=[Storage_Array]} @key(is)
       System.Storage_Elements.Storage_Array(1..Buffer_Size);
 
    --@RI{ Input and output operations}
@@ -1040,11 +1040,11 @@ Append_File is new in Ada 95.
    @key[type] @AdaTypeDefn{File_Mode} @key[is] (In_File, Out_File, Append_File);
 
    @key[type] @AdaTypeDefn{Count} @key[is] @key[range] 0 .. @RI[implementation-defined];
-   @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
+   @key[subtype] @AdaSubtypeDefn{Name=[Positive_Count],Of=[Count]} @key[is] Count @key[range] 1 .. Count'Last;
    @AdaObjDefn{Unbounded} : @key[constant] Count := 0; --@RI{ line and page length}
 
-   @key[subtype] @AdaDefn{Field}       @key[is] Integer @key[range] 0 .. @RI[implementation-defined];
-   @key[subtype] @AdaDefn{Number_Base} @key[is] Integer @key[range] 2 .. 16;
+   @key[subtype] @AdaSubtypeDefn{Name=[Field],Of=[Integer]}       @key[is] Integer @key[range] 0 .. @RI[implementation-defined];
+   @key[subtype] @AdaSubtypeDefn{Name=[Number_Base],Of=[Integer]} @key[is] Integer @key[range] 2 .. 16;
 
    @key[type] @AdaTypeDefn{Type_Set} @key[is] (Lower_Case, Upper_Case);
 
@@ -3292,7 +3292,7 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
     @key(type) @AdaTypeDefn{File_Mode} @key(is) (In_File, Out_File, Append_File);
 
     @key[type]    @AdaTypeDefn{Count}          @key[is] @key[range] 0 .. @RI[implementation-defined];
-    @key[subtype] @AdaDefn{Positive_Count} @key[is] Count @key[range] 1 .. Count'Last;
+    @key[subtype] @AdaSubtypeDefn{Name=[Positive_Count],Of=[Count]} @key[is] Count @key[range] 1 .. Count'Last;
       -- @RI(Index into file, in stream elements.)
 
     @key(procedure) @AdaSubDefn{Create} (File : @key(in) @key(out) File_Type;

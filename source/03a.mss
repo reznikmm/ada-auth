@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:00:59 $}
+@Comment{$Date: 2005/10/31 17:34:09 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -464,6 +464,11 @@ of @i(component) values.
   then all types derived from that type are also in the class.
   The set of types of a class share common properties,
   such as their primitive operations.>}
+@ChgToGlossary{Version=[2],Kind=[Added],Term=<Category (of types)>,
+  Text=<@ChgAdded{Version=[2],Text=[A category of types is a set of types with
+  one or more common properties, such as their primitive operations. A
+  category of types that is closed under derivation is also known as
+  a @i<class>.]}>}
 @ToGlossary{Term=<Elementary type>,
   Text=<An elementary type does not have components.>}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Composite type>,

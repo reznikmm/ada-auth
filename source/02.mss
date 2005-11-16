@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:15 $}
+@Comment{$Date: 2005/10/31 17:34:08 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -27,7 +27,7 @@ Multiple-Octet Coded Character Set. This coding space is organized in
 @i<planes>, each plane comprising 65536 characters.@Defn2{Term=[plane],Sec=[character]}
 @Defn{character plane}],Old=[only characters
 allowed outside of @nt{comment}s are the @nt{graphic_character}s and
-@nt{format_effector}s]}.
+@nt{format_effector}s.]}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}

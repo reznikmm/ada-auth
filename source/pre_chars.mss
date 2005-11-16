@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2005/09/30 05:33:58 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2005/10/31 17:34:29 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2005/09/30 05:33:58 $}
+@Comment{$Date: 2005/10/31 17:34:29 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -121,7 +121,7 @@ Wide_Characters or Wide_Wide_Characters.]}]}
 
 @keepnext--@RI{Classifications of and conversions between Character and ISO 646}
 
-  @key[subtype] @AdaDefn{ISO_646} @key[is]
+  @key[subtype] @AdaSubtypeDefn{Name=[ISO_646],Of=[Character]} @key[is]
     Character @key[range] Character'Val(0) .. Character'Val(127);
 
   @key[function] @AdaSubDefn{Is_ISO_646} (Item : @key[in] Character) @key[return] Boolean;
@@ -400,268 +400,268 @@ declaration:
 @keepnext--@RI{ Control characters:}@PDefn2{term=[control character],
 sec=[a category of Character]}
 
-    @AdaDefn{NUL}                  : @key[constant] Character := Character'Val(0);
-    @AdaDefn{SOH}                  : @key[constant] Character := Character'Val(1);
-    @AdaDefn{STX}                  : @key[constant] Character := Character'Val(2);
-    @AdaDefn{ETX}                  : @key[constant] Character := Character'Val(3);
-    @AdaDefn{EOT}                  : @key[constant] Character := Character'Val(4);
-    @AdaDefn{ENQ}                  : @key[constant] Character := Character'Val(5);
-    @AdaDefn{ACK}                  : @key[constant] Character := Character'Val(6);
-    @AdaDefn{BEL}                  : @key[constant] Character := Character'Val(7);
-    @AdaDefn{BS}                   : @key[constant] Character := Character'Val(8);
-    @AdaDefn{HT}                   : @key[constant] Character := Character'Val(9);
-    @AdaDefn{LF}                   : @key[constant] Character := Character'Val(10);
-    @AdaDefn{VT}                   : @key[constant] Character := Character'Val(11);
-    @AdaDefn{FF}                   : @key[constant] Character := Character'Val(12);
-    @AdaDefn{CR}                   : @key[constant] Character := Character'Val(13);
-    @AdaDefn{SO}                   : @key[constant] Character := Character'Val(14);
-    @AdaDefn{SI}                   : @key[constant] Character := Character'Val(15);
+    @AdaObjDefn{NUL}                  : @key[constant] Character := Character'Val(0);
+    @AdaObjDefn{SOH}                  : @key[constant] Character := Character'Val(1);
+    @AdaObjDefn{STX}                  : @key[constant] Character := Character'Val(2);
+    @AdaObjDefn{ETX}                  : @key[constant] Character := Character'Val(3);
+    @AdaObjDefn{EOT}                  : @key[constant] Character := Character'Val(4);
+    @AdaObjDefn{ENQ}                  : @key[constant] Character := Character'Val(5);
+    @AdaObjDefn{ACK}                  : @key[constant] Character := Character'Val(6);
+    @AdaObjDefn{BEL}                  : @key[constant] Character := Character'Val(7);
+    @AdaObjDefn{BS}                   : @key[constant] Character := Character'Val(8);
+    @AdaObjDefn{HT}                   : @key[constant] Character := Character'Val(9);
+    @AdaObjDefn{LF}                   : @key[constant] Character := Character'Val(10);
+    @AdaObjDefn{VT}                   : @key[constant] Character := Character'Val(11);
+    @AdaObjDefn{FF}                   : @key[constant] Character := Character'Val(12);
+    @AdaObjDefn{CR}                   : @key[constant] Character := Character'Val(13);
+    @AdaObjDefn{SO}                   : @key[constant] Character := Character'Val(14);
+    @AdaObjDefn{SI}                   : @key[constant] Character := Character'Val(15);
 
-    @AdaDefn{DLE}                  : @key[constant] Character := Character'Val(16);
-    @AdaDefn{DC1}                  : @key[constant] Character := Character'Val(17);
-    @AdaDefn{DC2}                  : @key[constant] Character := Character'Val(18);
-    @AdaDefn{DC3}                  : @key[constant] Character := Character'Val(19);
-    @AdaDefn{DC4}                  : @key[constant] Character := Character'Val(20);
-    @AdaDefn{NAK}                  : @key[constant] Character := Character'Val(21);
-    @AdaDefn{SYN}                  : @key[constant] Character := Character'Val(22);
-    @AdaDefn{ETB}                  : @key[constant] Character := Character'Val(23);
-    @AdaDefn{CAN}                  : @key[constant] Character := Character'Val(24);
-    @AdaDefn{EM}                   : @key[constant] Character := Character'Val(25);
-    @AdaDefn{SUB}                  : @key[constant] Character := Character'Val(26);
-    @AdaDefn{ESC}                  : @key[constant] Character := Character'Val(27);
-    @AdaDefn{FS}                   : @key[constant] Character := Character'Val(28);
-    @AdaDefn{GS}                   : @key[constant] Character := Character'Val(29);
-    @AdaDefn{RS}                   : @key[constant] Character := Character'Val(30);
-    @AdaDefn{US}                   : @key[constant] Character := Character'Val(31);
+    @AdaObjDefn{DLE}                  : @key[constant] Character := Character'Val(16);
+    @AdaObjDefn{DC1}                  : @key[constant] Character := Character'Val(17);
+    @AdaObjDefn{DC2}                  : @key[constant] Character := Character'Val(18);
+    @AdaObjDefn{DC3}                  : @key[constant] Character := Character'Val(19);
+    @AdaObjDefn{DC4}                  : @key[constant] Character := Character'Val(20);
+    @AdaObjDefn{NAK}                  : @key[constant] Character := Character'Val(21);
+    @AdaObjDefn{SYN}                  : @key[constant] Character := Character'Val(22);
+    @AdaObjDefn{ETB}                  : @key[constant] Character := Character'Val(23);
+    @AdaObjDefn{CAN}                  : @key[constant] Character := Character'Val(24);
+    @AdaObjDefn{EM}                   : @key[constant] Character := Character'Val(25);
+    @AdaObjDefn{SUB}                  : @key[constant] Character := Character'Val(26);
+    @AdaObjDefn{ESC}                  : @key[constant] Character := Character'Val(27);
+    @AdaObjDefn{FS}                   : @key[constant] Character := Character'Val(28);
+    @AdaObjDefn{GS}                   : @key[constant] Character := Character'Val(29);
+    @AdaObjDefn{RS}                   : @key[constant] Character := Character'Val(30);
+    @AdaObjDefn{US}                   : @key[constant] Character := Character'Val(31);
 
 @keepnext--@RI{ ISO 646 graphic characters:}
 
-    @AdaDefn{Space}                : @key[constant] Character := ' ';  --@RI{ Character'Val(32)}
-    @AdaDefn{Exclamation}          : @key[constant] Character := '!';  --@RI{ Character'Val(33)}
-    @AdaDefn{Quotation}            : @key[constant] Character := '"';  --@RI{ Character'Val(34)}
-    @AdaDefn{Number_Sign}          : @key[constant] Character := '#';  --@RI{ Character'Val(35)}
-    @AdaDefn{Dollar_Sign}          : @key[constant] Character := '$';  --@RI{ Character'Val(36)}
-    @AdaDefn{Percent_Sign}         : @key[constant] Character := '%';  --@RI{ Character'Val(37)}
-    @AdaDefn{Ampersand}            : @key[constant] Character := '&';  --@RI{ Character'Val(38)}
-    @AdaDefn{Apostrophe}           : @key[constant] Character := ''';  --@RI{ Character'Val(39)}
-    @AdaDefn{Left_Parenthesis}     : @key[constant] Character := '(';  --@RI{ Character'Val(40)}
-    @AdaDefn{Right_Parenthesis}    : @key[constant] Character := ')';  --@RI{ Character'Val(41)}
-    @AdaDefn{Asterisk}             : @key[constant] Character := '*';  --@RI{ Character'Val(42)}
-    @AdaDefn{Plus_Sign}            : @key[constant] Character := '+';  --@RI{ Character'Val(43)}
-    @AdaDefn{Comma}                : @key[constant] Character := ',';  --@RI{ Character'Val(44)}
-    @AdaDefn{Hyphen}               : @key[constant] Character := '-';  --@RI{ Character'Val(45)}
-    @AdaDefn{Minus_Sign}           : Character @key[renames] Hyphen;
-    @AdaDefn{Full_Stop}            : @key[constant] Character := '.';  --@RI{ Character'Val(46)}
-    @AdaDefn{Solidus}              : @key[constant] Character := '/';  --@RI{ Character'Val(47)}
+    @AdaObjDefn{Space}                : @key[constant] Character := ' ';  --@RI{ Character'Val(32)}
+    @AdaObjDefn{Exclamation}          : @key[constant] Character := '!';  --@RI{ Character'Val(33)}
+    @AdaObjDefn{Quotation}            : @key[constant] Character := '"';  --@RI{ Character'Val(34)}
+    @AdaObjDefn{Number_Sign}          : @key[constant] Character := '#';  --@RI{ Character'Val(35)}
+    @AdaObjDefn{Dollar_Sign}          : @key[constant] Character := '$';  --@RI{ Character'Val(36)}
+    @AdaObjDefn{Percent_Sign}         : @key[constant] Character := '%';  --@RI{ Character'Val(37)}
+    @AdaObjDefn{Ampersand}            : @key[constant] Character := '&';  --@RI{ Character'Val(38)}
+    @AdaObjDefn{Apostrophe}           : @key[constant] Character := ''';  --@RI{ Character'Val(39)}
+    @AdaObjDefn{Left_Parenthesis}     : @key[constant] Character := '(';  --@RI{ Character'Val(40)}
+    @AdaObjDefn{Right_Parenthesis}    : @key[constant] Character := ')';  --@RI{ Character'Val(41)}
+    @AdaObjDefn{Asterisk}             : @key[constant] Character := '*';  --@RI{ Character'Val(42)}
+    @AdaObjDefn{Plus_Sign}            : @key[constant] Character := '+';  --@RI{ Character'Val(43)}
+    @AdaObjDefn{Comma}                : @key[constant] Character := ',';  --@RI{ Character'Val(44)}
+    @AdaObjDefn{Hyphen}               : @key[constant] Character := '-';  --@RI{ Character'Val(45)}
+    @AdaObjDefn{Minus_Sign}           : Character @key[renames] Hyphen;
+    @AdaObjDefn{Full_Stop}            : @key[constant] Character := '.';  --@RI{ Character'Val(46)}
+    @AdaObjDefn{Solidus}              : @key[constant] Character := '/';  --@RI{ Character'Val(47)}
 
 @keepnext    --@RI{ Decimal digits '0' though '9' are at positions 48 through 57}
 
-    @AdaDefn{Colon}                : @key[constant] Character := ':';  --@RI{ Character'Val(58)}
-    @AdaDefn{Semicolon}            : @key[constant] Character := ';';  --@RI{ Character'Val(59)}
-    @AdaDefn{Less_Than_Sign}       : @key[constant] Character := '<';  --@RI{ Character'Val(60)}
-    @AdaDefn{Equals_Sign}          : @key[constant] Character := '=';  --@RI{ Character'Val(61)}
-    @AdaDefn{Greater_Than_Sign}    : @key[constant] Character := '>';  --@RI{ Character'Val(62)}
-    @AdaDefn{Question}             : @key[constant] Character := '?';  --@RI{ Character'Val(63)}
-    @AdaDefn{Commercial_At}        : @key[constant] Character := '@@';  --@RI{ Character'Val(64)}
+    @AdaObjDefn{Colon}                : @key[constant] Character := ':';  --@RI{ Character'Val(58)}
+    @AdaObjDefn{Semicolon}            : @key[constant] Character := ';';  --@RI{ Character'Val(59)}
+    @AdaObjDefn{Less_Than_Sign}       : @key[constant] Character := '<';  --@RI{ Character'Val(60)}
+    @AdaObjDefn{Equals_Sign}          : @key[constant] Character := '=';  --@RI{ Character'Val(61)}
+    @AdaObjDefn{Greater_Than_Sign}    : @key[constant] Character := '>';  --@RI{ Character'Val(62)}
+    @AdaObjDefn{Question}             : @key[constant] Character := '?';  --@RI{ Character'Val(63)}
+    @AdaObjDefn{Commercial_At}        : @key[constant] Character := '@@';  --@RI{ Character'Val(64)}
 
 @keepnext    --@RI{ Letters 'A' through 'Z' are at positions 65 through 90}
 
-    @AdaDefn{Left_Square_Bracket}  : @key[constant] Character := '[';  --@RI{ Character'Val(91)}
-    @AdaDefn{Reverse_Solidus}      : @key[constant] Character := '\';  --@RI{ Character'Val(92)}
-    @AdaDefn{Right_Square_Bracket} : @key[constant] Character := ']';  --@RI{ Character'Val(93)}
-    @AdaDefn{Circumflex}           : @key[constant] Character := '^';  --@RI{ Character'Val(94)}
-    @AdaDefn{Low_Line}             : @key[constant] Character := '_';  --@RI{ Character'Val(95)}
+    @AdaObjDefn{Left_Square_Bracket}  : @key[constant] Character := '[';  --@RI{ Character'Val(91)}
+    @AdaObjDefn{Reverse_Solidus}      : @key[constant] Character := '\';  --@RI{ Character'Val(92)}
+    @AdaObjDefn{Right_Square_Bracket} : @key[constant] Character := ']';  --@RI{ Character'Val(93)}
+    @AdaObjDefn{Circumflex}           : @key[constant] Character := '^';  --@RI{ Character'Val(94)}
+    @AdaObjDefn{Low_Line}             : @key[constant] Character := '_';  --@RI{ Character'Val(95)}
 
-    @AdaDefn{Grave}                : @key[constant] Character := '`';  --@RI{ Character'Val(96)}
-    @AdaDefn{LC_A}                 : @key[constant] Character := 'a';  --@RI{ Character'Val(97)}
-    @AdaDefn{LC_B}                 : @key[constant] Character := 'b';  --@RI{ Character'Val(98)}
-    @AdaDefn{LC_C}                 : @key[constant] Character := 'c';  --@RI{ Character'Val(99)}
-    @AdaDefn{LC_D}                 : @key[constant] Character := 'd';  --@RI{ Character'Val(100)}
-    @AdaDefn{LC_E}                 : @key[constant] Character := 'e';  --@RI{ Character'Val(101)}
-    @AdaDefn{LC_F}                 : @key[constant] Character := 'f';  --@RI{ Character'Val(102)}
-    @AdaDefn{LC_G}                 : @key[constant] Character := 'g';  --@RI{ Character'Val(103)}
-    @AdaDefn{LC_H}                 : @key[constant] Character := 'h';  --@RI{ Character'Val(104)}
-    @AdaDefn{LC_I}                 : @key[constant] Character := 'i';  --@RI{ Character'Val(105)}
-    @AdaDefn{LC_J}                 : @key[constant] Character := 'j';  --@RI{ Character'Val(106)}
-    @AdaDefn{LC_K}                 : @key[constant] Character := 'k';  --@RI{ Character'Val(107)}
-    @AdaDefn{LC_L}                 : @key[constant] Character := 'l';  --@RI{ Character'Val(108)}
-    @AdaDefn{LC_M}                 : @key[constant] Character := 'm';  --@RI{ Character'Val(109)}
-    @AdaDefn{LC_N}                 : @key[constant] Character := 'n';  --@RI{ Character'Val(110)}
-    @AdaDefn{LC_O}                 : @key[constant] Character := 'o';  --@RI{ Character'Val(111)}
+    @AdaObjDefn{Grave}                : @key[constant] Character := '`';  --@RI{ Character'Val(96)}
+    @AdaObjDefn{LC_A}                 : @key[constant] Character := 'a';  --@RI{ Character'Val(97)}
+    @AdaObjDefn{LC_B}                 : @key[constant] Character := 'b';  --@RI{ Character'Val(98)}
+    @AdaObjDefn{LC_C}                 : @key[constant] Character := 'c';  --@RI{ Character'Val(99)}
+    @AdaObjDefn{LC_D}                 : @key[constant] Character := 'd';  --@RI{ Character'Val(100)}
+    @AdaObjDefn{LC_E}                 : @key[constant] Character := 'e';  --@RI{ Character'Val(101)}
+    @AdaObjDefn{LC_F}                 : @key[constant] Character := 'f';  --@RI{ Character'Val(102)}
+    @AdaObjDefn{LC_G}                 : @key[constant] Character := 'g';  --@RI{ Character'Val(103)}
+    @AdaObjDefn{LC_H}                 : @key[constant] Character := 'h';  --@RI{ Character'Val(104)}
+    @AdaObjDefn{LC_I}                 : @key[constant] Character := 'i';  --@RI{ Character'Val(105)}
+    @AdaObjDefn{LC_J}                 : @key[constant] Character := 'j';  --@RI{ Character'Val(106)}
+    @AdaObjDefn{LC_K}                 : @key[constant] Character := 'k';  --@RI{ Character'Val(107)}
+    @AdaObjDefn{LC_L}                 : @key[constant] Character := 'l';  --@RI{ Character'Val(108)}
+    @AdaObjDefn{LC_M}                 : @key[constant] Character := 'm';  --@RI{ Character'Val(109)}
+    @AdaObjDefn{LC_N}                 : @key[constant] Character := 'n';  --@RI{ Character'Val(110)}
+    @AdaObjDefn{LC_O}                 : @key[constant] Character := 'o';  --@RI{ Character'Val(111)}
 
-    @AdaDefn{LC_P}                 : @key[constant] Character := 'p';  --@RI{ Character'Val(112)}
-    @AdaDefn{LC_Q}                 : @key[constant] Character := 'q';  --@RI{ Character'Val(113)}
-    @AdaDefn{LC_R}                 : @key[constant] Character := 'r';  --@RI{ Character'Val(114)}
-    @AdaDefn{LC_S}                 : @key[constant] Character := 's';  --@RI{ Character'Val(115)}
-    @AdaDefn{LC_T}                 : @key[constant] Character := 't';  --@RI{ Character'Val(116)}
-    @AdaDefn{LC_U}                 : @key[constant] Character := 'u';  --@RI{ Character'Val(117)}
-    @AdaDefn{LC_V}                 : @key[constant] Character := 'v';  --@RI{ Character'Val(118)}
-    @AdaDefn{LC_W}                 : @key[constant] Character := 'w';  --@RI{ Character'Val(119)}
-    @AdaDefn{LC_X}                 : @key[constant] Character := 'x';  --@RI{ Character'Val(120)}
-    @AdaDefn{LC_Y}                 : @key[constant] Character := 'y';  --@RI{ Character'Val(121)}
-    @AdaDefn{LC_Z}                 : @key[constant] Character := 'z';  --@RI{ Character'Val(122)}
-    @AdaDefn{Left_Curly_Bracket}   : @key[constant] Character := '{';  --@RI{ Character'Val(123)}
-    @AdaDefn{Vertical_Line}        : @key[constant] Character := '|';  --@RI{ Character'Val(124)}
-    @AdaDefn{Right_Curly_Bracket}  : @key[constant] Character := '}';  --@RI{ Character'Val(125)}
-    @AdaDefn{Tilde}                : @key[constant] Character := '~';  --@RI{ Character'Val(126)}
-    @AdaDefn{DEL}                  : @key[constant] Character := Character'Val(127);
+    @AdaObjDefn{LC_P}                 : @key[constant] Character := 'p';  --@RI{ Character'Val(112)}
+    @AdaObjDefn{LC_Q}                 : @key[constant] Character := 'q';  --@RI{ Character'Val(113)}
+    @AdaObjDefn{LC_R}                 : @key[constant] Character := 'r';  --@RI{ Character'Val(114)}
+    @AdaObjDefn{LC_S}                 : @key[constant] Character := 's';  --@RI{ Character'Val(115)}
+    @AdaObjDefn{LC_T}                 : @key[constant] Character := 't';  --@RI{ Character'Val(116)}
+    @AdaObjDefn{LC_U}                 : @key[constant] Character := 'u';  --@RI{ Character'Val(117)}
+    @AdaObjDefn{LC_V}                 : @key[constant] Character := 'v';  --@RI{ Character'Val(118)}
+    @AdaObjDefn{LC_W}                 : @key[constant] Character := 'w';  --@RI{ Character'Val(119)}
+    @AdaObjDefn{LC_X}                 : @key[constant] Character := 'x';  --@RI{ Character'Val(120)}
+    @AdaObjDefn{LC_Y}                 : @key[constant] Character := 'y';  --@RI{ Character'Val(121)}
+    @AdaObjDefn{LC_Z}                 : @key[constant] Character := 'z';  --@RI{ Character'Val(122)}
+    @AdaObjDefn{Left_Curly_Bracket}   : @key[constant] Character := '{';  --@RI{ Character'Val(123)}
+    @AdaObjDefn{Vertical_Line}        : @key[constant] Character := '|';  --@RI{ Character'Val(124)}
+    @AdaObjDefn{Right_Curly_Bracket}  : @key[constant] Character := '}';  --@RI{ Character'Val(125)}
+    @AdaObjDefn{Tilde}                : @key[constant] Character := '~';  --@RI{ Character'Val(126)}
+    @AdaObjDefn{DEL}                  : @key[constant] Character := Character'Val(127);
 
 
 @keepnext--@RI{ ISO 6429 control characters:}@PDefn2{term=[control character],
 sec=[a category of Character]}
 
-    @AdaDefn{IS4}                  : Character @key[renames] FS;
-    @AdaDefn{IS3}                  : Character @key[renames] GS;
-    @AdaDefn{IS2}                  : Character @key[renames] RS;
-    @AdaDefn{IS1}                  : Character @key[renames] US;
+    @AdaObjDefn{IS4}                  : Character @key[renames] FS;
+    @AdaObjDefn{IS3}                  : Character @key[renames] GS;
+    @AdaObjDefn{IS2}                  : Character @key[renames] RS;
+    @AdaObjDefn{IS1}                  : Character @key[renames] US;
 
-    @AdaDefn{Reserved_128}         : @key[constant] Character := Character'Val(128);
-    @AdaDefn{Reserved_129}         : @key[constant] Character := Character'Val(129);
-    @AdaDefn{BPH}                  : @key[constant] Character := Character'Val(130);
-    @AdaDefn{NBH}                  : @key[constant] Character := Character'Val(131);
-    @AdaDefn{Reserved_132}         : @key[constant] Character := Character'Val(132);
-    @AdaDefn{NEL}                  : @key[constant] Character := Character'Val(133);
-    @AdaDefn{SSA}                  : @key[constant] Character := Character'Val(134);
-    @AdaDefn{ESA}                  : @key[constant] Character := Character'Val(135);
-    @AdaDefn{HTS}                  : @key[constant] Character := Character'Val(136);
-    @AdaDefn{HTJ}                  : @key[constant] Character := Character'Val(137);
-    @AdaDefn{VTS}                  : @key[constant] Character := Character'Val(138);
-    @AdaDefn{PLD}                  : @key[constant] Character := Character'Val(139);
-    @AdaDefn{PLU}                  : @key[constant] Character := Character'Val(140);
-    @AdaDefn{RI}                   : @key[constant] Character := Character'Val(141);
-    @AdaDefn{SS2}                  : @key[constant] Character := Character'Val(142);
-    @AdaDefn{SS3}                  : @key[constant] Character := Character'Val(143);
+    @AdaObjDefn{Reserved_128}         : @key[constant] Character := Character'Val(128);
+    @AdaObjDefn{Reserved_129}         : @key[constant] Character := Character'Val(129);
+    @AdaObjDefn{BPH}                  : @key[constant] Character := Character'Val(130);
+    @AdaObjDefn{NBH}                  : @key[constant] Character := Character'Val(131);
+    @AdaObjDefn{Reserved_132}         : @key[constant] Character := Character'Val(132);
+    @AdaObjDefn{NEL}                  : @key[constant] Character := Character'Val(133);
+    @AdaObjDefn{SSA}                  : @key[constant] Character := Character'Val(134);
+    @AdaObjDefn{ESA}                  : @key[constant] Character := Character'Val(135);
+    @AdaObjDefn{HTS}                  : @key[constant] Character := Character'Val(136);
+    @AdaObjDefn{HTJ}                  : @key[constant] Character := Character'Val(137);
+    @AdaObjDefn{VTS}                  : @key[constant] Character := Character'Val(138);
+    @AdaObjDefn{PLD}                  : @key[constant] Character := Character'Val(139);
+    @AdaObjDefn{PLU}                  : @key[constant] Character := Character'Val(140);
+    @AdaObjDefn{RI}                   : @key[constant] Character := Character'Val(141);
+    @AdaObjDefn{SS2}                  : @key[constant] Character := Character'Val(142);
+    @AdaObjDefn{SS3}                  : @key[constant] Character := Character'Val(143);
 
-    @AdaDefn{DCS}                  : @key[constant] Character := Character'Val(144);
-    @AdaDefn{PU1}                  : @key[constant] Character := Character'Val(145);
-    @AdaDefn{PU2}                  : @key[constant] Character := Character'Val(146);
-    @AdaDefn{STS}                  : @key[constant] Character := Character'Val(147);
-    @AdaDefn{CCH}                  : @key[constant] Character := Character'Val(148);
-    @AdaDefn{MW}                   : @key[constant] Character := Character'Val(149);
-    @AdaDefn{SPA}                  : @key[constant] Character := Character'Val(150);
-    @AdaDefn{EPA}                  : @key[constant] Character := Character'Val(151);
+    @AdaObjDefn{DCS}                  : @key[constant] Character := Character'Val(144);
+    @AdaObjDefn{PU1}                  : @key[constant] Character := Character'Val(145);
+    @AdaObjDefn{PU2}                  : @key[constant] Character := Character'Val(146);
+    @AdaObjDefn{STS}                  : @key[constant] Character := Character'Val(147);
+    @AdaObjDefn{CCH}                  : @key[constant] Character := Character'Val(148);
+    @AdaObjDefn{MW}                   : @key[constant] Character := Character'Val(149);
+    @AdaObjDefn{SPA}                  : @key[constant] Character := Character'Val(150);
+    @AdaObjDefn{EPA}                  : @key[constant] Character := Character'Val(151);
 
-    @AdaDefn{SOS}                  : @key[constant] Character := Character'Val(152);
-    @AdaDefn{Reserved_153}         : @key[constant] Character := Character'Val(153);
-    @AdaDefn{SCI}                  : @key[constant] Character := Character'Val(154);
-    @AdaDefn{CSI}                  : @key[constant] Character := Character'Val(155);
-    @AdaDefn{ST}                   : @key[constant] Character := Character'Val(156);
-    @AdaDefn{OSC}                  : @key[constant] Character := Character'Val(157);
-    @AdaDefn{PM}                   : @key[constant] Character := Character'Val(158);
-    @AdaDefn{APC}                  : @key[constant] Character := Character'Val(159);
+    @AdaObjDefn{SOS}                  : @key[constant] Character := Character'Val(152);
+    @AdaObjDefn{Reserved_153}         : @key[constant] Character := Character'Val(153);
+    @AdaObjDefn{SCI}                  : @key[constant] Character := Character'Val(154);
+    @AdaObjDefn{CSI}                  : @key[constant] Character := Character'Val(155);
+    @AdaObjDefn{ST}                   : @key[constant] Character := Character'Val(156);
+    @AdaObjDefn{OSC}                  : @key[constant] Character := Character'Val(157);
+    @AdaObjDefn{PM}                   : @key[constant] Character := Character'Val(158);
+    @AdaObjDefn{APC}                  : @key[constant] Character := Character'Val(159);
 
 @keepnext--@RI{ Other graphic characters:}
 
 --@RI{ Character positions 160 (16#A0#) .. 175 (16#AF#):}
-    @AdaDefn{No_Break_Space}              : @key[constant] Character := ' ';  --@RI{Character'Val(160)}
-    @AdaDefn{NBSP}                        : Character @key[renames] No_Break_Space;
-    @AdaDefn{Inverted_Exclamation}        : @key[constant] Character := '@latin1(161)';  --@RI{Character'Val(161)}
-    @AdaDefn{Cent_Sign}                   : @key[constant] Character := '@latin1(162)';  --@RI{Character'Val(162)}
-    @AdaDefn{Pound_Sign}                  : @key[constant] Character := '@latin1(163)';  --@RI{Character'Val(163)}
-    @AdaDefn{Currency_Sign}               : @key[constant] Character := '@latin1(164)';  --@RI{Character'Val(164)}
-    @AdaDefn{Yen_Sign}                    : @key[constant] Character := '@latin1(165)';  --@RI{Character'Val(165)}
-    @AdaDefn{Broken_Bar}                  : @key[constant] Character := '@latin1(166)';  --@RI{Character'Val(166)}
-    @AdaDefn{Section_Sign}                : @key[constant] Character := '@latin1(167)';  --@RI{Character'Val(167)}
-    @AdaDefn{Diaeresis}                   : @key[constant] Character := '@latin1(168)';  --@RI{Character'Val(168)}
-    @AdaDefn{Copyright_Sign}              : @key[constant] Character := '@latin1(169)';  --@RI{Character'Val(169)}
-    @AdaDefn{Feminine_Ordinal_Indicator}  : @key[constant] Character := '@latin1(170)';  --@RI{Character'Val(170)}
-    @AdaDefn{Left_Angle_Quotation}        : @key[constant] Character := '@latin1(171)';  --@RI{Character'Val(171)}
-    @AdaDefn{Not_Sign}                    : @key[constant] Character := '@latin1(172)';  --@RI{Character'Val(172)}
-    @AdaDefn{Soft_Hyphen}                 : @key[constant] Character := '@latin1(173)';  --@RI{Character'Val(173)}
-    @AdaDefn{Registered_Trade_Mark_Sign}  : @key[constant] Character := '@latin1(174)';  --@RI{Character'Val(174)}
-    @AdaDefn{Macron}                      : @key[constant] Character := '@latin1(175)';  --@RI{Character'Val(175)}
+    @AdaObjDefn{No_Break_Space}              : @key[constant] Character := ' ';  --@RI{Character'Val(160)}
+    @AdaObjDefn{NBSP}                        : Character @key[renames] No_Break_Space;
+    @AdaObjDefn{Inverted_Exclamation}        : @key[constant] Character := '@latin1(161)';  --@RI{Character'Val(161)}
+    @AdaObjDefn{Cent_Sign}                   : @key[constant] Character := '@latin1(162)';  --@RI{Character'Val(162)}
+    @AdaObjDefn{Pound_Sign}                  : @key[constant] Character := '@latin1(163)';  --@RI{Character'Val(163)}
+    @AdaObjDefn{Currency_Sign}               : @key[constant] Character := '@latin1(164)';  --@RI{Character'Val(164)}
+    @AdaObjDefn{Yen_Sign}                    : @key[constant] Character := '@latin1(165)';  --@RI{Character'Val(165)}
+    @AdaObjDefn{Broken_Bar}                  : @key[constant] Character := '@latin1(166)';  --@RI{Character'Val(166)}
+    @AdaObjDefn{Section_Sign}                : @key[constant] Character := '@latin1(167)';  --@RI{Character'Val(167)}
+    @AdaObjDefn{Diaeresis}                   : @key[constant] Character := '@latin1(168)';  --@RI{Character'Val(168)}
+    @AdaObjDefn{Copyright_Sign}              : @key[constant] Character := '@latin1(169)';  --@RI{Character'Val(169)}
+    @AdaObjDefn{Feminine_Ordinal_Indicator}  : @key[constant] Character := '@latin1(170)';  --@RI{Character'Val(170)}
+    @AdaObjDefn{Left_Angle_Quotation}        : @key[constant] Character := '@latin1(171)';  --@RI{Character'Val(171)}
+    @AdaObjDefn{Not_Sign}                    : @key[constant] Character := '@latin1(172)';  --@RI{Character'Val(172)}
+    @AdaObjDefn{Soft_Hyphen}                 : @key[constant] Character := '@latin1(173)';  --@RI{Character'Val(173)}
+    @AdaObjDefn{Registered_Trade_Mark_Sign}  : @key[constant] Character := '@latin1(174)';  --@RI{Character'Val(174)}
+    @AdaObjDefn{Macron}                      : @key[constant] Character := '@latin1(175)';  --@RI{Character'Val(175)}
 
 --@RI{ Character positions 176 (16#B0#) .. 191 (16#BF#):}
-    @AdaDefn{Degree_Sign}                 : @key[constant] Character := '@latin1(176)';  --@RI{Character'Val(176)}
-    @AdaDefn{Ring_Above}                  : Character @key[renames] Degree_Sign;
-    @AdaDefn{Plus_Minus_Sign}             : @key[constant] Character := '@latin1(177)';  --@RI{Character'Val(177)}
-    @AdaDefn{Superscript_Two}             : @key[constant] Character := '@latin1(178)';  --@RI{Character'Val(178)}
-    @AdaDefn{Superscript_Three}           : @key[constant] Character := '@latin1(179)';  --@RI{Character'Val(179)}
-    @AdaDefn{Acute}                       : @key[constant] Character := '@latin1(180)';  --@RI{Character'Val(180)}
-    @AdaDefn{Micro_Sign}                  : @key[constant] Character := '@latin1(181)';  --@RI{Character'Val(181)}
-    @AdaDefn{Pilcrow_Sign}                : @key[constant] Character := '@latin1(182)';  --@RI{Character'Val(182)}
-    @AdaDefn{Paragraph_Sign}              : Character @key[renames] Pilcrow_Sign;
-    @AdaDefn{Middle_Dot}                  : @key[constant] Character := '@latin1(183)';  --@RI{Character'Val(183)}
-    @AdaDefn{Cedilla}                     : @key[constant] Character := '@latin1(184)';  --@RI{Character'Val(184)}
-    @AdaDefn{Superscript_One}             : @key[constant] Character := '@latin1(185)';  --@RI{Character'Val(185)}
-    @AdaDefn{Masculine_Ordinal_Indicator} : @key[constant] Character := '@latin1(186)';  --@RI{Character'Val(186)}
-    @AdaDefn{Right_Angle_Quotation}       : @key[constant] Character := '@latin1(187)';  --@RI{Character'Val(187)}
-    @AdaDefn{Fraction_One_Quarter}        : @key[constant] Character := '@latin1(188)';  --@RI{Character'Val(188)}
-    @AdaDefn{Fraction_One_Half}           : @key[constant] Character := '@latin1(189)';  --@RI{Character'Val(189)}
-    @AdaDefn{Fraction_Three_Quarters}     : @key[constant] Character := '@latin1(190)';  --@RI{Character'Val(190)}
-    @AdaDefn{Inverted_Question}           : @key[constant] Character := '@latin1(191)';  --@RI{Character'Val(191)}
+    @AdaObjDefn{Degree_Sign}                 : @key[constant] Character := '@latin1(176)';  --@RI{Character'Val(176)}
+    @AdaObjDefn{Ring_Above}                  : Character @key[renames] Degree_Sign;
+    @AdaObjDefn{Plus_Minus_Sign}             : @key[constant] Character := '@latin1(177)';  --@RI{Character'Val(177)}
+    @AdaObjDefn{Superscript_Two}             : @key[constant] Character := '@latin1(178)';  --@RI{Character'Val(178)}
+    @AdaObjDefn{Superscript_Three}           : @key[constant] Character := '@latin1(179)';  --@RI{Character'Val(179)}
+    @AdaObjDefn{Acute}                       : @key[constant] Character := '@latin1(180)';  --@RI{Character'Val(180)}
+    @AdaObjDefn{Micro_Sign}                  : @key[constant] Character := '@latin1(181)';  --@RI{Character'Val(181)}
+    @AdaObjDefn{Pilcrow_Sign}                : @key[constant] Character := '@latin1(182)';  --@RI{Character'Val(182)}
+    @AdaObjDefn{Paragraph_Sign}              : Character @key[renames] Pilcrow_Sign;
+    @AdaObjDefn{Middle_Dot}                  : @key[constant] Character := '@latin1(183)';  --@RI{Character'Val(183)}
+    @AdaObjDefn{Cedilla}                     : @key[constant] Character := '@latin1(184)';  --@RI{Character'Val(184)}
+    @AdaObjDefn{Superscript_One}             : @key[constant] Character := '@latin1(185)';  --@RI{Character'Val(185)}
+    @AdaObjDefn{Masculine_Ordinal_Indicator} : @key[constant] Character := '@latin1(186)';  --@RI{Character'Val(186)}
+    @AdaObjDefn{Right_Angle_Quotation}       : @key[constant] Character := '@latin1(187)';  --@RI{Character'Val(187)}
+    @AdaObjDefn{Fraction_One_Quarter}        : @key[constant] Character := '@latin1(188)';  --@RI{Character'Val(188)}
+    @AdaObjDefn{Fraction_One_Half}           : @key[constant] Character := '@latin1(189)';  --@RI{Character'Val(189)}
+    @AdaObjDefn{Fraction_Three_Quarters}     : @key[constant] Character := '@latin1(190)';  --@RI{Character'Val(190)}
+    @AdaObjDefn{Inverted_Question}           : @key[constant] Character := '@latin1(191)';  --@RI{Character'Val(191)}
 
 --@RI{ Character positions 192 (16#C0#) .. 207 (16#CF#):}
-    @AdaDefn{UC_A_Grave}                  : @key[constant] Character := '@latin1(192)';  --@RI{Character'Val(192)}
-    @AdaDefn{UC_A_Acute}                  : @key[constant] Character := '@latin1(193)';  --@RI{Character'Val(193)}
-    @AdaDefn{UC_A_Circumflex}             : @key[constant] Character := '@latin1(194)';  --@RI{Character'Val(194)}
-    @AdaDefn{UC_A_Tilde}                  : @key[constant] Character := '@latin1(195)';  --@RI{Character'Val(195)}
-    @AdaDefn{UC_A_Diaeresis}              : @key[constant] Character := '@latin1(196)';  --@RI{Character'Val(196)}
-    @AdaDefn{UC_A_Ring}                   : @key[constant] Character := '@latin1(197)';  --@RI{Character'Val(197)}
-    @AdaDefn{UC_AE_Diphthong}             : @key[constant] Character := '@latin1(198)';  --@RI{Character'Val(198)}
-    @AdaDefn{UC_C_Cedilla}                : @key[constant] Character := '@latin1(199)';  --@RI{Character'Val(199)}
-    @AdaDefn{UC_E_Grave}                  : @key[constant] Character := '@latin1(200)';  --@RI{Character'Val(200)}
-    @AdaDefn{UC_E_Acute}                  : @key[constant] Character := '@latin1(201)';  --@RI{Character'Val(201)}
-    @AdaDefn{UC_E_Circumflex}             : @key[constant] Character := '@latin1(202)';  --@RI{Character'Val(202)}
-    @AdaDefn{UC_E_Diaeresis}              : @key[constant] Character := '@latin1(203)';  --@RI{Character'Val(203)}
-    @AdaDefn{UC_I_Grave}                  : @key[constant] Character := '@latin1(204)';  --@RI{Character'Val(204)}
-    @AdaDefn{UC_I_Acute}                  : @key[constant] Character := '@latin1(205)';  --@RI{Character'Val(205)}
-    @AdaDefn{UC_I_Circumflex}             : @key[constant] Character := '@latin1(206)';  --@RI{Character'Val(206)}
-    @AdaDefn{UC_I_Diaeresis}              : @key[constant] Character := '@latin1(207)';  --@RI{Character'Val(207)}
+    @AdaObjDefn{UC_A_Grave}                  : @key[constant] Character := '@latin1(192)';  --@RI{Character'Val(192)}
+    @AdaObjDefn{UC_A_Acute}                  : @key[constant] Character := '@latin1(193)';  --@RI{Character'Val(193)}
+    @AdaObjDefn{UC_A_Circumflex}             : @key[constant] Character := '@latin1(194)';  --@RI{Character'Val(194)}
+    @AdaObjDefn{UC_A_Tilde}                  : @key[constant] Character := '@latin1(195)';  --@RI{Character'Val(195)}
+    @AdaObjDefn{UC_A_Diaeresis}              : @key[constant] Character := '@latin1(196)';  --@RI{Character'Val(196)}
+    @AdaObjDefn{UC_A_Ring}                   : @key[constant] Character := '@latin1(197)';  --@RI{Character'Val(197)}
+    @AdaObjDefn{UC_AE_Diphthong}             : @key[constant] Character := '@latin1(198)';  --@RI{Character'Val(198)}
+    @AdaObjDefn{UC_C_Cedilla}                : @key[constant] Character := '@latin1(199)';  --@RI{Character'Val(199)}
+    @AdaObjDefn{UC_E_Grave}                  : @key[constant] Character := '@latin1(200)';  --@RI{Character'Val(200)}
+    @AdaObjDefn{UC_E_Acute}                  : @key[constant] Character := '@latin1(201)';  --@RI{Character'Val(201)}
+    @AdaObjDefn{UC_E_Circumflex}             : @key[constant] Character := '@latin1(202)';  --@RI{Character'Val(202)}
+    @AdaObjDefn{UC_E_Diaeresis}              : @key[constant] Character := '@latin1(203)';  --@RI{Character'Val(203)}
+    @AdaObjDefn{UC_I_Grave}                  : @key[constant] Character := '@latin1(204)';  --@RI{Character'Val(204)}
+    @AdaObjDefn{UC_I_Acute}                  : @key[constant] Character := '@latin1(205)';  --@RI{Character'Val(205)}
+    @AdaObjDefn{UC_I_Circumflex}             : @key[constant] Character := '@latin1(206)';  --@RI{Character'Val(206)}
+    @AdaObjDefn{UC_I_Diaeresis}              : @key[constant] Character := '@latin1(207)';  --@RI{Character'Val(207)}
 
 --@RI{ Character positions 208 (16#D0#) .. 223 (16#DF#):}
-    @AdaDefn{UC_Icelandic_Eth}            : @key[constant] Character := '@latin1(208)';  --@RI{Character'Val(208)}
-    @AdaDefn{UC_N_Tilde}                  : @key[constant] Character := '@latin1(209)';  --@RI{Character'Val(209)}
-    @AdaDefn{UC_O_Grave}                  : @key[constant] Character := '@latin1(210)';  --@RI{Character'Val(210)}
-    @AdaDefn{UC_O_Acute}                  : @key[constant] Character := '@latin1(211)';  --@RI{Character'Val(211)}
-    @AdaDefn{UC_O_Circumflex}             : @key[constant] Character := '@latin1(212)';  --@RI{Character'Val(212)}
-    @AdaDefn{UC_O_Tilde}                  : @key[constant] Character := '@latin1(213)';  --@RI{Character'Val(213)}
-    @AdaDefn{UC_O_Diaeresis}              : @key[constant] Character := '@latin1(214)';  --@RI{Character'Val(214)}
-    @AdaDefn{Multiplication_Sign}         : @key[constant] Character := '@latin1(215)';  --@RI{Character'Val(215)}
-    @AdaDefn{UC_O_Oblique_Stroke}         : @key[constant] Character := '@latin1(216)';  --@RI{Character'Val(216)}
-    @AdaDefn{UC_U_Grave}                  : @key[constant] Character := '@latin1(217)';  --@RI{Character'Val(217)}
-    @AdaDefn{UC_U_Acute}                  : @key[constant] Character := '@latin1(218)';  --@RI{Character'Val(218)}
-    @AdaDefn{UC_U_Circumflex}             : @key[constant] Character := '@latin1(219)';  --@RI{Character'Val(219)}
-    @AdaDefn{UC_U_Diaeresis}              : @key[constant] Character := '@latin1(220)';  --@RI{Character'Val(220)}
-    @AdaDefn{UC_Y_Acute}                  : @key[constant] Character := '@latin1(221)';  --@RI{Character'Val(221)}
-    @AdaDefn{UC_Icelandic_Thorn}          : @key[constant] Character := '@latin1(222)';  --@RI{Character'Val(222)}
-    @AdaDefn{LC_German_Sharp_S}           : @key[constant] Character := '@latin1(223)';  --@RI{Character'Val(223)}
+    @AdaObjDefn{UC_Icelandic_Eth}            : @key[constant] Character := '@latin1(208)';  --@RI{Character'Val(208)}
+    @AdaObjDefn{UC_N_Tilde}                  : @key[constant] Character := '@latin1(209)';  --@RI{Character'Val(209)}
+    @AdaObjDefn{UC_O_Grave}                  : @key[constant] Character := '@latin1(210)';  --@RI{Character'Val(210)}
+    @AdaObjDefn{UC_O_Acute}                  : @key[constant] Character := '@latin1(211)';  --@RI{Character'Val(211)}
+    @AdaObjDefn{UC_O_Circumflex}             : @key[constant] Character := '@latin1(212)';  --@RI{Character'Val(212)}
+    @AdaObjDefn{UC_O_Tilde}                  : @key[constant] Character := '@latin1(213)';  --@RI{Character'Val(213)}
+    @AdaObjDefn{UC_O_Diaeresis}              : @key[constant] Character := '@latin1(214)';  --@RI{Character'Val(214)}
+    @AdaObjDefn{Multiplication_Sign}         : @key[constant] Character := '@latin1(215)';  --@RI{Character'Val(215)}
+    @AdaObjDefn{UC_O_Oblique_Stroke}         : @key[constant] Character := '@latin1(216)';  --@RI{Character'Val(216)}
+    @AdaObjDefn{UC_U_Grave}                  : @key[constant] Character := '@latin1(217)';  --@RI{Character'Val(217)}
+    @AdaObjDefn{UC_U_Acute}                  : @key[constant] Character := '@latin1(218)';  --@RI{Character'Val(218)}
+    @AdaObjDefn{UC_U_Circumflex}             : @key[constant] Character := '@latin1(219)';  --@RI{Character'Val(219)}
+    @AdaObjDefn{UC_U_Diaeresis}              : @key[constant] Character := '@latin1(220)';  --@RI{Character'Val(220)}
+    @AdaObjDefn{UC_Y_Acute}                  : @key[constant] Character := '@latin1(221)';  --@RI{Character'Val(221)}
+    @AdaObjDefn{UC_Icelandic_Thorn}          : @key[constant] Character := '@latin1(222)';  --@RI{Character'Val(222)}
+    @AdaObjDefn{LC_German_Sharp_S}           : @key[constant] Character := '@latin1(223)';  --@RI{Character'Val(223)}
 
 --@RI{ Character positions 224 (16#E0#) .. 239 (16#EF#):}
-    @AdaDefn{LC_A_Grave}                  : @key[constant] Character := '@latin1(224)';  --@RI{Character'Val(224)}
-    @AdaDefn{LC_A_Acute}                  : @key[constant] Character := '@latin1(225)';  --@RI{Character'Val(225)}
-    @AdaDefn{LC_A_Circumflex}             : @key[constant] Character := '@latin1(226)';  --@RI{Character'Val(226)}
-    @AdaDefn{LC_A_Tilde}                  : @key[constant] Character := '@latin1(227)';  --@RI{Character'Val(227)}
-    @AdaDefn{LC_A_Diaeresis}              : @key[constant] Character := '@latin1(228)';  --@RI{Character'Val(228)}
-    @AdaDefn{LC_A_Ring}                   : @key[constant] Character := '@latin1(229)';  --@RI{Character'Val(229)}
-    @AdaDefn{LC_AE_Diphthong}             : @key[constant] Character := '@latin1(230)';  --@RI{Character'Val(230)}
-    @AdaDefn{LC_C_Cedilla}                : @key[constant] Character := '@latin1(231)';  --@RI{Character'Val(231)}
-    @AdaDefn{LC_E_Grave}                  : @key[constant] Character := '@latin1(232)';  --@RI{Character'Val(232)}
-    @AdaDefn{LC_E_Acute}                  : @key[constant] Character := '@latin1(233)';  --@RI{Character'Val(233)}
-    @AdaDefn{LC_E_Circumflex}             : @key[constant] Character := '@latin1(234)';  --@RI{Character'Val(234)}
-    @AdaDefn{LC_E_Diaeresis}              : @key[constant] Character := '@latin1(235)';  --@RI{Character'Val(235)}
-    @AdaDefn{LC_I_Grave}                  : @key[constant] Character := '@latin1(236)';  --@RI{Character'Val(236)}
-    @AdaDefn{LC_I_Acute}                  : @key[constant] Character := '@latin1(237)';  --@RI{Character'Val(237)}
-    @AdaDefn{LC_I_Circumflex}             : @key[constant] Character := '@latin1(238)';  --@RI{Character'Val(238)}
-    @AdaDefn{LC_I_Diaeresis}              : @key[constant] Character := '@latin1(239)';  --@RI{Character'Val(239)}
+    @AdaObjDefn{LC_A_Grave}                  : @key[constant] Character := '@latin1(224)';  --@RI{Character'Val(224)}
+    @AdaObjDefn{LC_A_Acute}                  : @key[constant] Character := '@latin1(225)';  --@RI{Character'Val(225)}
+    @AdaObjDefn{LC_A_Circumflex}             : @key[constant] Character := '@latin1(226)';  --@RI{Character'Val(226)}
+    @AdaObjDefn{LC_A_Tilde}                  : @key[constant] Character := '@latin1(227)';  --@RI{Character'Val(227)}
+    @AdaObjDefn{LC_A_Diaeresis}              : @key[constant] Character := '@latin1(228)';  --@RI{Character'Val(228)}
+    @AdaObjDefn{LC_A_Ring}                   : @key[constant] Character := '@latin1(229)';  --@RI{Character'Val(229)}
+    @AdaObjDefn{LC_AE_Diphthong}             : @key[constant] Character := '@latin1(230)';  --@RI{Character'Val(230)}
+    @AdaObjDefn{LC_C_Cedilla}                : @key[constant] Character := '@latin1(231)';  --@RI{Character'Val(231)}
+    @AdaObjDefn{LC_E_Grave}                  : @key[constant] Character := '@latin1(232)';  --@RI{Character'Val(232)}
+    @AdaObjDefn{LC_E_Acute}                  : @key[constant] Character := '@latin1(233)';  --@RI{Character'Val(233)}
+    @AdaObjDefn{LC_E_Circumflex}             : @key[constant] Character := '@latin1(234)';  --@RI{Character'Val(234)}
+    @AdaObjDefn{LC_E_Diaeresis}              : @key[constant] Character := '@latin1(235)';  --@RI{Character'Val(235)}
+    @AdaObjDefn{LC_I_Grave}                  : @key[constant] Character := '@latin1(236)';  --@RI{Character'Val(236)}
+    @AdaObjDefn{LC_I_Acute}                  : @key[constant] Character := '@latin1(237)';  --@RI{Character'Val(237)}
+    @AdaObjDefn{LC_I_Circumflex}             : @key[constant] Character := '@latin1(238)';  --@RI{Character'Val(238)}
+    @AdaObjDefn{LC_I_Diaeresis}              : @key[constant] Character := '@latin1(239)';  --@RI{Character'Val(239)}
 
 --@RI{ Character positions 240 (16#F0#) .. 255 (16#FF#):}
-    @AdaDefn{LC_Icelandic_Eth}            : @key[constant] Character := '@latin1(240)';  --@RI{Character'Val(240)}
-    @AdaDefn{LC_N_Tilde}                  : @key[constant] Character := '@latin1(241)';  --@RI{Character'Val(241)}
-    @AdaDefn{LC_O_Grave}                  : @key[constant] Character := '@latin1(242)';  --@RI{Character'Val(242)}
-    @AdaDefn{LC_O_Acute}                  : @key[constant] Character := '@latin1(243)';  --@RI{Character'Val(243)}
-    @AdaDefn{LC_O_Circumflex}             : @key[constant] Character := '@latin1(244)';  --@RI{Character'Val(244)}
-    @AdaDefn{LC_O_Tilde}                  : @key[constant] Character := '@latin1(245)';  --@RI{Character'Val(245)}
-    @AdaDefn{LC_O_Diaeresis}              : @key[constant] Character := '@latin1(246)';  --@RI{Character'Val(246)}
-    @AdaDefn{Division_Sign}               : @key[constant] Character := '@latin1(247)';  --@RI{Character'Val(247)}
-    @AdaDefn{LC_O_Oblique_Stroke}         : @key[constant] Character := '@latin1(248)';  --@RI{Character'Val(248)}
-    @AdaDefn{LC_U_Grave}                  : @key[constant] Character := '@latin1(249)';  --@RI{Character'Val(249)}
-    @AdaDefn{LC_U_Acute}                  : @key[constant] Character := '@latin1(250)';  --@RI{Character'Val(250)}
-    @AdaDefn{LC_U_Circumflex}             : @key[constant] Character := '@latin1(251)';  --@RI{Character'Val(251)}
-    @AdaDefn{LC_U_Diaeresis}              : @key[constant] Character := '@latin1(252)';  --@RI{Character'Val(252)}
-    @AdaDefn{LC_Y_Acute}                  : @key[constant] Character := '@latin1(253)';  --@RI{Character'Val(253)}
-    @AdaDefn{LC_Icelandic_Thorn}          : @key[constant] Character := '@latin1(254)';  --@RI{Character'Val(254)}
-    @AdaDefn{LC_Y_Diaeresis}              : @key[constant] Character := '@latin1(255)';  --@RI{Character'Val(255)}
+    @AdaObjDefn{LC_Icelandic_Eth}            : @key[constant] Character := '@latin1(240)';  --@RI{Character'Val(240)}
+    @AdaObjDefn{LC_N_Tilde}                  : @key[constant] Character := '@latin1(241)';  --@RI{Character'Val(241)}
+    @AdaObjDefn{LC_O_Grave}                  : @key[constant] Character := '@latin1(242)';  --@RI{Character'Val(242)}
+    @AdaObjDefn{LC_O_Acute}                  : @key[constant] Character := '@latin1(243)';  --@RI{Character'Val(243)}
+    @AdaObjDefn{LC_O_Circumflex}             : @key[constant] Character := '@latin1(244)';  --@RI{Character'Val(244)}
+    @AdaObjDefn{LC_O_Tilde}                  : @key[constant] Character := '@latin1(245)';  --@RI{Character'Val(245)}
+    @AdaObjDefn{LC_O_Diaeresis}              : @key[constant] Character := '@latin1(246)';  --@RI{Character'Val(246)}
+    @AdaObjDefn{Division_Sign}               : @key[constant] Character := '@latin1(247)';  --@RI{Character'Val(247)}
+    @AdaObjDefn{LC_O_Oblique_Stroke}         : @key[constant] Character := '@latin1(248)';  --@RI{Character'Val(248)}
+    @AdaObjDefn{LC_U_Grave}                  : @key[constant] Character := '@latin1(249)';  --@RI{Character'Val(249)}
+    @AdaObjDefn{LC_U_Acute}                  : @key[constant] Character := '@latin1(250)';  --@RI{Character'Val(250)}
+    @AdaObjDefn{LC_U_Circumflex}             : @key[constant] Character := '@latin1(251)';  --@RI{Character'Val(251)}
+    @AdaObjDefn{LC_U_Diaeresis}              : @key[constant] Character := '@latin1(252)';  --@RI{Character'Val(252)}
+    @AdaObjDefn{LC_Y_Acute}                  : @key[constant] Character := '@latin1(253)';  --@RI{Character'Val(253)}
+    @AdaObjDefn{LC_Icelandic_Thorn}          : @key[constant] Character := '@latin1(254)';  --@RI{Character'Val(254)}
+    @AdaObjDefn{LC_Y_Diaeresis}              : @key[constant] Character := '@latin1(255)';  --@RI{Character'Val(255)}
 @key[end] Ada.Characters.Latin_1;
 @end{Example}
 

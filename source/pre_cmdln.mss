@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2005/01/22 02:25:18 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2005/10/31 17:34:29 $ $Author: Randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2005/01/22 02:25:18 $}
+@Comment{$Date: 2005/10/31 17:34:29 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -26,8 +26,8 @@ bounds of type Command_Line.Exit_Status],Old=[]}.]}
 
   @key[type] @AdaTypeDefn{Exit_Status} @key[is] @RI{implementation-defined integer type};
 
-  @AdaDefn{Success} : @key[constant] Exit_Status;
-  @AdaDefn{Failure} : @key[constant] Exit_Status;
+  @AdaObjDefn{Success} : @key[constant] Exit_Status;
+  @AdaObjDefn{Failure} : @key[constant] Exit_Status;
 
   @key[procedure] @AdaSubDefn{Set_Exit_Status} (Code : @key[in] Exit_Status);
 
@@ -74,7 +74,7 @@ otherwise Command_Name returns the null string.
 @Comment{This is missing; leading the following paragraph glued to "Command_Name"}
 @begin{Example}@Keepnext
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@key[type] @AdaTypeDefn{Exit_Status} @key[is] @RI{implementation-defined integer type};],Old=[]}
+@Chg{New=[@key[type] Exit_Status @key[is] @RI{implementation-defined integer type};],Old=[]}
 @end{Example}
 @Trailing@;
 The type Exit_Status represents the range of exit

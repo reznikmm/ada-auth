@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:09 $}
+@Comment{$Date: 2005/10/31 17:34:15 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 
@@ -3015,10 +3015,10 @@ by a corresponding clock.
   @key(type) @AdaTypeDefn{Time} @key(is) @key(private);
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00351-01]}
-  @key(subtype) @AdaDefn{Year_Number}  @key(is) Integer @key(range) 1901 .. @Chg{Version=[2],New=[2399],Old=[2099]};
-  @key(subtype) @AdaDefn{Month_Number} @key(is) Integer @key(range) 1 .. 12;
-  @key(subtype) @AdaDefn{Day_Number}   @key(is) Integer @key(range) 1 .. 31;
-  @key(subtype) @AdaDefn{Day_Duration} @key(is) Duration @key(range) 0.0 .. 86_400.0;
+  @key(subtype) @AdaSubtypeDefn{Name=[Year_Number],Of=[Integer]}  @key(is) Integer @key(range) 1901 .. @Chg{Version=[2],New=[2399],Old=[2099]};
+  @key(subtype) @AdaSubtypeDefn{Name=[Month_Number],Of=[Integer]} @key(is) Integer @key(range) 1 .. 12;
+  @key(subtype) @AdaSubtypeDefn{Name=[Day_Number],Of=[Integer]}   @key(is) Integer @key(range) 1 .. 31;
+  @key(subtype) @AdaSubtypeDefn{Name=[Day_Duration],Of=[Duration]} @key(is) Duration @key(range) 0.0 .. 86_400.0;
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
@@ -3418,7 +3418,7 @@ environment (such as POSIX).]}
      366*(1+Year_Number'Last - Year_Number'First);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<subtype> @AdaDefn{Leap_Seconds_Count} @key<is> Integer @key<range> -2047 .. 2047;]}
+@ChgAdded{Version=[2],Text=[   @key<subtype> @AdaSubtypeDefn{Name=[Leap_Seconds_Count],Of=[Integer]} @key<is> Integer @key<range> -2047 .. 2047;]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3462,10 +3462,10 @@ environment (such as POSIX).]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Hours:Minutes:Seconds access:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<subtype> @AdaDefn{Hour_Number}         @key<is> Natural @key<range> 0 .. 23;
-   @key<subtype> @AdaDefn{Minute_Number}       @key<is> Natural @key<range> 0 .. 59;
-   @key<subtype> @AdaDefn{Second_Number}       @key<is> Natural @key<range> 0 .. 59;
-   @key<subtype> @AdaDefn{Second_Duration}     @key<is> Day_Duration @key<range> 0.0 .. 1.0;]}
+@ChgAdded{Version=[2],Text=[   @key<subtype> @AdaSubtypeDefn{Name=[Hour_Number],Of=[Natural]}         @key<is> Natural @key<range> 0 .. 23;
+   @key<subtype> @AdaSubtypeDefn{Name=[Minute_Number],Of=[Natural]}       @key<is> Natural @key<range> 0 .. 59;
+   @key<subtype> @AdaSubtypeDefn{Name=[Second_Number],Of=[Natural]}       @key<is> Natural @key<range> 0 .. 59;
+   @key<subtype> @AdaSubtypeDefn{Name=[Second_Duration],Of=[Day_Duration]}     @key<is> Day_Duration @key<range> 0.0 .. 1.0;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Year}       (Date : Time;

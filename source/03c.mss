@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:04 $}
+@Comment{$Date: 2005/10/31 17:34:11 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -558,7 +558,7 @@ the following attribute is defined:
 @end(description)
 @EndPrefixType{}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02],ARef=[AI95-00441-02]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The following language-defined
 generic function exists:]}
 
@@ -567,11 +567,11 @@ generic function exists:]}
 @ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Tags],Child=[Generic_@!Dispatching_@!Constructor]}@key{generic}
     @key{type} T (<>) @key{is abstract tagged limited private};
     @key{type} Parameters (<>) @key{is limited private};
-    @key{with function} Constructor (Params : @key{access} Parameters)
+    @key{with function} Constructor (Params : @key{not null access} Parameters)
         @key{return} T @key{is abstract};
 @key{function} Ada.Tags.Generic_Dispatching_Constructor
    (The_Tag : Tag;
-    Params  : @key{access} Parameters) @key{return} T'Class;
+    Params  : @key{not null access} Parameters) @key{return} T'Class;
 @key{pragma} Preelaborate(Generic_Dispatching_Constructor);
 @key{pragma} Convention(Intrinsic, Generic_Dispatching_Constructor);]}
 @end{Example}
@@ -4020,20 +4020,32 @@ the accessibility level of the result object is the same as
 that of the master that elaborated the function body. For
 any other function, the]} accessibility level of the result
 @Chg{Version=[2],New=[of a function call that is
-used as a @nt{prefix} of a @nt{name}, as the actual parameter in a call,
-or as the @nt{expression} of an @nt{assignment_statement},],Old=[object]}
+used to directly initialize part of an ],Old=[]}object
 is that of the
-@Chg{Version=[2],New=[innermost master of the function call. In other
-contexts, the accessibility level is that of the object being initialized from
-the],Old=[execution of the called]} function@Chg{Version=[2],
-New=[ result],Old=[]}.
-
+@Chg{Version=[2],New=[object being initialized from
+the execution of the called function result. The accessibility level of the
+result of a function call that is renamed in whole or in part is that of
+the innermost master of the @nt{object_renaming_declaration}. Otherwise, the
+accessibility level of the result of a function call is that of the innermost
+master of the],Old=[execution of the called]} function@Chg{Version=[2],
+New=[ call],Old=[]}.
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[We're talking about the entire result of the
+  function in the first sentence. If the function is used as a @nt{prefix}
+  other than in an object renaming, the third sentence applies. Similarly, an
+  @nt{assignment_statement} is not an initialization of an object, so the third
+  sentence applies.]}
+
   @ChgAdded{Version=[2],Text=[We really mean the innermost master here,
   which could be a very  short lifetime. Consider a function call used as
   a parameter of a procedure call. In this case the innermost master for
   the function call is the procedure call.]}
+
+  @Comment{This will be true, I think, but it isn't right now.
+  @ChgAdded{Version=[2],Text=[The second sentence is necessary because a
+  the @nt{name} here is a master, so the innermost master is the function
+  call itself. And that's too short.]}}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2005/10/28 05:45:39 $ $Author: Randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2005/10/31 17:34:19 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/10/28 05:45:39 $}
+@Comment{$Date: 2005/10/31 17:34:19 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1605,7 +1605,7 @@ and its acronym are more familiar.
 
    @key(type) @AdaTypeDefn{Partition_Id} @key(is range) 0 .. @RI(implementation-defined);
 
-   @AdaDefn{Communication_Error} : @key(exception);
+   @AdaExcDefn{Communication_Error} : @key(exception);
 
    @key(type) @AdaTypeDefn{Params_Stream_Type} (
       Initial_Size : Ada.Streams.Stream_Element_Count) @key(is) @key(new)

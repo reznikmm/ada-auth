@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.50 $ $Date: 2005/10/28 05:45:44 $}
+@comment{$Revision: 1.51 $ $Date: 2005/10/31 17:34:27 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -569,7 +569,7 @@ specialized requirements.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @Chg{Version=[2],New=[The predefined standard library packages provide
 facilities such as string manipulation, containers of various kinds (vectors,
-lists, maps etc.), mathematical functions, random number generation, and access
+lists, maps, etc.), mathematical functions, random number generation, and access
 to the execution environment.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}

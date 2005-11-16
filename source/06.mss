@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:38 $}
+@Comment{$Date: 2005/10/31 17:34:13 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -22,6 +22,18 @@ and a @nt{subprogram_body} defining its execution.
 @begin{Honest}
   A function call is an expression, but more specifically it is a @nt<name>.
 @end{Honest}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Subprogram>,
+Text=<@ChgAdded{Version=[2],Text=[A subprogram is a section of program that can
+be executed in various contexts. It is invoked by a subprogram call that may
+qualify the effect of the subprogram through the passing of parameters. There
+are two forms of subprograms; functions, which return values, and procedures,
+which do not.]}>}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Function>,
+Text=<@ChgAdded{Version=[2],Text=[A function is a form of subprogram that
+returns a result and is used as part of an expression.]}>}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Procedure>,
+Text=<@ChgAdded{Version=[2],Text=[A procedure is a form of subprogram that
+does not return a result and is called by a @nt{statement} standing alone.]}>}
 
 @Defn{callable entity}
 A @i(callable entity) is a subprogram or entry (see Section 9).

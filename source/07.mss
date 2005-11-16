@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/10/25 05:47:08 $}
+@Comment{$Date: 2005/10/31 17:34:14 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2727,7 +2727,8 @@ the execution of
 a @Chg{Version=[2],New=[body other than a @nt{package_body};
 the execution of a @nt{statement};
 or the evaluation of an @nt{expression} or @nt{range} that is not part
-of an enclosing @nt{expression}, @nt{range}, or @nt{simple_statement}],
+of an enclosing @nt{expression}, @nt{name}, @nt{range}, or
+@nt{simple_statement}],
 Old=[@nt{task_body}, a @nt{block_statement},
 a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}]}.
 A master is finalized after it is
@@ -2746,6 +2747,14 @@ complete, and before it is left.
   @nt{declarative_part}, it can call functions and evaluate @nt{aggregate}s,
   possibly causing anonymous controlled objects to be created,
   and we don't want those objects to escape outside the rendezvous.]}
+
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[We have to include @nt{name}s in the contexts that
+  do not cause masters to occur so that @nt{expression}s contained in a
+  @nt{name} (that is not part of an @nt{expression} or @nt{simple_statement})
+  do not become masters. For a @nt{function_call} used as a @nt{name}, we
+  certainly do not want the parameter @nt{expression}s to be masters, as they
+  would then be finalized before the function is called.]}
 @end{Reason}
 
 @Defn2{Term=[finalization], Sec=(of a master)}

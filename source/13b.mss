@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:18 $}
+@Comment{$Date: 2005/10/31 17:34:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @LabeledClause{The Package System}
 
@@ -73,10 +73,10 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
 
 
    --@RI{ Priority-related declarations (see @RefSecNum{Task Priorities}):}
-   @key{subtype} @AdaDefn{Any_Priority} @key{is} Integer @key{range} @RI{implementation-defined};
-   @key{subtype} @AdaDefn{Priority} @key{is} Any_Priority @key{range} Any_Priority'First ..
+   @key{subtype} @AdaSubtypeDefn{Name=[Any_Priority],Of=[Integer]} @key{is} Integer @key{range} @RI{implementation-defined};
+   @key{subtype} @AdaSubtypeDefn{Name=[Priority],Of=[Any_Priority]} @key{is} Any_Priority @key{range} Any_Priority'First ..
              @RI{implementation-defined};
-   @key{subtype} @AdaDefn{Interrupt_Priority} @key{is} Any_Priority @key{range} Priority'Last+1 ..
+   @key{subtype} @AdaSubtypeDefn{Name=[Interrupt_Priority],Of=[Any_Priority]} @key{is} Any_Priority @key{range} Priority'Last+1 ..
              Any_Priority'Last;
 
    @AdaObjDefn{Default_Priority} : @key{constant} Priority :=
@@ -321,7 +321,7 @@ have been moved to the Real Time Annex.
 
    @key[type] @AdaTypeDefn{Storage_Offset} @key[is] @key[range] @RI(implementation-defined);
 
-   @key[subtype] @AdaDefn{Storage_Count} @key[is] Storage_Offset @key[range] 0..Storage_Offset'Last;
+   @key[subtype] @AdaSubtypeDefn{Name=[Storage_Count],Of=[Storage_Offset]} @key[is] Storage_Offset @key[range] 0..Storage_Offset'Last;
 
 
    @key[type] @AdaTypeDefn{Storage_Element} @key[is] @key[mod] @RI{implementation-defined};
@@ -2675,7 +2675,7 @@ or can call the Read and Write attributes of other types.)
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0044],ARef=[AI95-00181-01]}
     @key[type] @AdaTypeDefn{Stream_Element} @key[is] @key[mod] @RI{implementation-defined};
     @key[type] @AdaTypeDefn{Stream_Element_Offset} @key[is] @key[range] @RI{implementation-defined};
-    @key[subtype] @AdaDefn{Stream_Element_Count} @key[is]
+    @key[subtype] @AdaSubtypeDefn{Name=[Stream_Element_Count],Of=[Stream_Element_Offset]} @key[is]
         Stream_Element_Offset @key[range] 0..Stream_Element_Offset'Last;
     @key[type] @AdaTypeDefn{Stream_Element_Array} @key[is]
         @key[array](Stream_Element_Offset @key[range] <>) @key[of]@Chg{New=[@key[ aliased]],Old=[]} Stream_Element;

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2005/10/11 06:12:44 $ $Author: Randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2005/10/31 17:34:20 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:44 $}
+@Comment{$Date: 2005/10/31 17:34:20 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -127,13 +127,13 @@ instructions that exploit the packed decimal representation.
 @key(package) Ada.Decimal @key(is)@ChildUnit{Parent=[Ada],Child=[Decimal]}
    @key(pragma) Pure(Decimal);
 
-   @AdaDefn{Max_Scale} : @key(constant) := @RI{implementation-defined};
-   @AdaDefn{Min_Scale} : @key(constant) := @RI{implementation-defined};
+   @AdaObjDefn{Max_Scale} : @key(constant) := @RI{implementation-defined};
+   @AdaObjDefn{Min_Scale} : @key(constant) := @RI{implementation-defined};
 
-   @AdaDefn{Min_Delta} : @key(constant) := 10.0**(-Max_Scale);
-   @AdaDefn{Max_Delta} : @key(constant) := 10.0**(-Min_Scale);
+   @AdaObjDefn{Min_Delta} : @key(constant) := 10.0**(-Max_Scale);
+   @AdaObjDefn{Max_Delta} : @key(constant) := 10.0**(-Min_Scale);
 
-   @AdaDefn{Max_Decimal_Digits} : @key(constant) := @RI{implementation-defined};
+   @AdaObjDefn{Max_Decimal_Digits} : @key(constant) := @RI{implementation-defined};
 
    @key(generic)
       @key(type) Dividend_Type  @key(is) @key(delta) <> @key(digits) <>;
@@ -988,14 +988,14 @@ in @RefSecNum(Edited Output Generation).
    @key(function) @AdaSubDefn{Pic_String}      (Pic : @key(in) Picture) @key(return) String;
    @key(function) @AdaSubDefn{Blank_When_Zero} (Pic : @key(in) Picture) @key(return) Boolean;
 
-   @AdaDefn{Max_Picture_Length}  : @key(constant) := @RI{implementation_defined};
+   @AdaObjDefn{Max_Picture_Length}  : @key(constant) := @RI{implementation_defined};
 
-   @AdaDefn{Picture_Error}       : @key(exception);
+   @AdaExcDefn{Picture_Error}       : @key(exception);
 
-   @AdaDefn{Default_Currency}    : @key(constant) String    := "$";
-   @AdaDefn{Default_Fill}        : @key(constant) Character := '*';
-   @AdaDefn{Default_Separator}   : @key(constant) Character := ',';
-   @AdaDefn{Default_Radix_Mark}  : @key(constant) Character := '.';
+   @AdaObjDefn{Default_Currency}    : @key(constant) String    := "$";
+   @AdaObjDefn{Default_Fill}        : @key(constant) Character := '*';
+   @AdaObjDefn{Default_Separator}   : @key(constant) Character := ',';
+   @AdaObjDefn{Default_Radix_Mark}  : @key(constant) Character := '.';
 
    @key(generic)
       @key(type) Num @key(is) @key(delta) <> @key(digits) <>;
@@ -1005,7 +1005,7 @@ in @RefSecNum(Edited Output Generation).
                               Text_IO.Editing.Default_Separator;
       Default_Radix_Mark : @key(in) Character :=
                               Text_IO.Editing.Default_Radix_Mark;
-   @key(package) @AdaDefn{Decimal_Output} @key(is)
+   @key(package) @AdaPackDefn{Decimal_Output} @key(is)
       @key(function) @AdaSubDefn{Length} (Pic      : @key(in) Picture;
                        Currency : @key(in) String := Default_Currency)
          @key(return) Natural;

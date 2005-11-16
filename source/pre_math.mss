@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2005/10/29 06:01:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2005/10/31 17:34:23 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:27 $}
+@Comment{$Date: 2005/10/31 17:34:23 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -441,7 +441,7 @@ sequences (for debugging) to unique sequences in each execution of a program.
    @key[type] @AdaTypeDefn{Generator} @key[is] @key[limited] @key[private];
 
 
-   @key[subtype] @AdaDefn{Uniformly_Distributed} @key[is] Float @key[range] 0.0 .. 1.0;
+   @key[subtype] @AdaSubtypeDefn{Name=[Uniformly_Distributed],Of=[Float]} @key[is] Float @key[range] 0.0 .. 1.0;
    @key[function] @AdaSubDefn{Random} (Gen : Generator) @key[return] Uniformly_Distributed;
 
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2005/10/29 06:01:33 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2005/10/31 17:34:29 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:33 $}
+@Comment{$Date: 2005/10/31 17:34:29 $}
 
 @LabeledClause{The Package Standard}
 
@@ -68,8 +68,8 @@ the visible part of package Standard.}
    @key[type] @AdaTypeDefn{Integer} @key[is] @key{range} @RI{implementation-defined};
 
 
-   @key[subtype] @AdaDefn{Natural}  @key[is] Integer @key[range] 0 .. Integer'Last;
-   @key[subtype] @AdaDefn{Positive} @key[is] Integer @key[range] 1 .. Integer'Last;
+   @key[subtype] @AdaSubtypeDefn{Name=[Natural],Of=[Integer]}  @key[is] Integer @key[range] 0 .. Integer'Last;
+   @key[subtype] @AdaSubtypeDefn{Name=[Positive],Of=[Integer]} @key[is] Integer @key[range] 1 .. Integer'Last;
 
 
 @Keepnext   --@RI{ The predefined operators for type Integer are as follows:}
@@ -253,11 +253,11 @@ the visible part of package Standard.}
    --@RI[ ISO/IEC 10646:2003 character set. The first 65536 positions have the]
    --@RI[ same contents as type Wide_Character. See @refsecnum[Character types].]
 @comment[blank line]
-   @key[type] Wide_Wide_Character @key[is] (@RI[nul], @RI[soh] ... @RI[Hex_7FFFFFFE], @RI[Hex_7FFFFFFF]);
+   @key[type] @AdaTypeDefn{Wide_Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[Hex_7FFFFFFE], @RI[Hex_7FFFFFFF]);
    @key[for] Wide_Wide_Character'Size @key[use] 32;]}
 
 @ChgRef{Version=[2],Kind=[Added]}@Comment{Odd missing paragraph number here}
-@Chg{Version=[2],New=[],Old=[@noparanum@;]}   @key[package] ASCII @key[is] ... @key[end] ASCII;  --@RI{Obsolescent; see @RefSecNum[ASCII]}
+@Chg{Version=[2],New=[],Old=[@noparanum@;]}   @key[package] @AdaPackDefn{ASCII} @key[is] ... @key[end] ASCII;  --@RI{Obsolescent; see @RefSecNum[ASCII]}
 @Defn2{Term=[ASCII], Sec=(package physically nested within the declaration of Standard)}
 @comment[blank line]
 
@@ -288,7 +288,7 @@ the visible part of package Standard.}
    --@RI{ The predefined operators for this type correspond to those for String.}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[   @key[type] Wide_Wide_String @key[is array] (Positive @key[range] <>)
+@ChgAdded{Version=[2],Text=[   @key[type] @AdaTypeDefn{Wide_Wide_String} @key[is array] (Positive @key[range] <>)
      @key[of] Wide_Wide_Character;
    @key[pragma] Pack (Wide_Wide_String);]}
 

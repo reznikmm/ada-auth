@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2005/10/20 06:09:25 $ $Author: Randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2005/10/31 17:34:28 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:25 $}
+@Comment{$Date: 2005/10/31 17:34:28 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -797,10 +797,10 @@ the reference also applies to the corresponding entity in C++.],Old=[]}
 
    @RI{-- Declarations based on C's <limits.h>}
 
-   @AdaDefn{CHAR_BIT}  : @key(constant) := @RI{implementation-defined};  @RI{-- typically 8}
-   @AdaDefn{SCHAR_MIN} : @key(constant) := @RI{implementation-defined};  @RI{-- typically @en@;128}
-   @AdaDefn{SCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 127}
-   @AdaDefn{UCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 255}
+   @AdaObjDefn{CHAR_BIT}  : @key(constant) := @RI{implementation-defined};  @RI{-- typically 8}
+   @AdaObjDefn{SCHAR_MIN} : @key(constant) := @RI{implementation-defined};  @RI{-- typically @en@;128}
+   @AdaObjDefn{SCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 127}
+   @AdaObjDefn{UCHAR_MAX} : @key(constant) := @RI{implementation-defined};  @RI{-- typically 255}
 
    @RI{-- Signed and Unsigned Integers}
    @key(type) @AdaTypeDefn{int}   @key(is) @key(range) @RI{implementation-defined};
@@ -837,7 +837,7 @@ the reference also applies to the corresponding entity in C++.],Old=[]}
    @key(type) @AdaTypeDefn{char} @key(is) @RI{<implementation-defined character type>};
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060],ARef=[AI95-00037-01]}
-   @AdaDefn{nul} : @key(constant) char := @Chg{New=[@RI{implementation-defined}],Old=[char'First]};
+   @AdaObjDefn{nul} : @key(constant) char := @Chg{New=[@RI{implementation-defined}],Old=[char'First]};
 
    @key[function] @AdaSubDefn{To_C}   (Item : @key[in] Character) @key[return] char;
 
@@ -874,7 +874,7 @@ the reference also applies to the corresponding entity in C++.],Old=[]}
 Old=[@RI{implementation-defined}]};
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0060],ARef=[AI95-00037-01]}
-   @AdaDefn{wide_nul} : @key(constant) wchar_t := @Chg{New=[@RI{implementation-defined}],Old=[wchar_t'First]};
+   @AdaObjDefn{wide_nul} : @key(constant) wchar_t := @Chg{New=[@RI{implementation-defined}],Old=[wchar_t'First]};
 
    @key(function) @AdaSubDefn{To_C}   (Item : @key(in) Wide_Character) @key(return) wchar_t;
    @key(function) @AdaSubDefn{To_Ada} (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
@@ -910,7 +910,7 @@ Old=[@RI{implementation-defined}]};
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char16_t} @key<is> @RI{<implementation-defined character type>};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{char16_nul} : @key<constant> char16_t := @RI{implementation-defined};]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{char16_nul} : @key<constant> char16_t := @RI{implementation-defined};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_C} (Item : @key<in> Wide_Character) @key<return> char16_t;
@@ -949,7 +949,7 @@ Old=[@RI{implementation-defined}]};
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char32_t} @key<is> @RI{<implementation-defined character type>};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{char32_nul} : @key<constant> char32_t := @RI{implementation-defined};]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{char32_nul} : @key<constant> char32_t := @RI{implementation-defined};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{To_C} (Item : @key<in> Wide_Wide_Character) @key<return> char32_t;
@@ -984,7 +984,7 @@ Old=[@RI{implementation-defined}]};
                      Count    : @key<out> Natural;
                      Trim_Nul : @key<in>  Boolean := True);]}
 
-   @AdaDefn{Terminator_Error} : @key(exception);
+   @AdaExcDefn{Terminator_Error} : @key(exception);
 
 @key(end) Interfaces.C;
 @end{Example}
@@ -1526,7 +1526,7 @@ declaration:
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00276-01]}
    @key(type) @AdaTypeDefn{chars_ptr_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @Chg{Version=[2],New=[@key(aliased) ],Old=[]}chars_ptr;
 
-   @AdaDefn{Null_Ptr} : @key(constant) chars_ptr;
+   @AdaObjDefn{Null_Ptr} : @key(constant) chars_ptr;
 
    @key(function) @AdaSubDefn{To_Chars_Ptr} (Item      : @key(in) char_array_access;
                           Nul_Check : @key(in) Boolean := False)
@@ -1863,7 +1863,7 @@ following declaration:
       @key(return) Element_Array;
 
 
-   @AdaDefn{Pointer_Error} : @key(exception);
+   @AdaExcDefn{Pointer_Error} : @key(exception);
 
    @RI{-- C-style Pointer arithmetic}
 
@@ -2344,8 +2344,8 @@ either an internal or external COBOL representation
    @key(type) @AdaTypeDefn{Binary}      @key(is) @key(range) @RI{implementation-defined};
    @key(type) @AdaTypeDefn{Long_Binary} @key(is) @key(range) @RI{implementation-defined};
 
-   @AdaDefn{Max_Digits_Binary}      : @key(constant) := @RI{implementation-defined};
-   @AdaDefn{Max_Digits_Long_Binary} : @key(constant) := @RI{implementation-defined};
+   @AdaObjDefn{Max_Digits_Binary}      : @key(constant) := @RI{implementation-defined};
+   @AdaObjDefn{Max_Digits_Long_Binary} : @key(constant) := @RI{implementation-defined};
 
    @key(type) @AdaTypeDefn{Decimal_Element}  @key(is) @key(mod) @RI{implementation-defined};
    @key(type) @AdaTypeDefn{Packed_Decimal} @key(is) @key(array) (Positive @key(range) <>) @key(of) Decimal_Element;
@@ -2354,9 +2354,9 @@ either an internal or external COBOL representation
 
    @key(type) @AdaTypeDefn{COBOL_Character} @key(is) @RI{implementation-defined character type};
 
-   @AdaDefn{Ada_To_COBOL} : @key(array) (Character) @key(of) COBOL_Character := @RI{implementation-defined};
+   @AdaObjDefn{Ada_To_COBOL} : @key(array) (Character) @key(of) COBOL_Character := @RI{implementation-defined};
 
-   @AdaDefn{COBOL_To_Ada} : @key(array) (COBOL_Character) @key(of) Character := @RI{implementation-defined};
+   @AdaObjDefn{COBOL_To_Ada} : @key(array) (COBOL_Character) @key(of) Character := @RI{implementation-defined};
 
    @key(type) @AdaTypeDefn{Alphanumeric} @key(is) @key(array) (Positive range <>) @key(of) COBOL_Character;
    @key(pragma) Pack(Alphanumeric);
@@ -2379,22 +2379,22 @@ either an internal or external COBOL representation
 
    @key(type) @AdaTypeDefn{Display_Format} @key(is) @key(private);
 
-   @AdaDefn{Unsigned}             : @key(constant) Display_Format;
-   @AdaDefn{Leading_Separate}     : @key(constant) Display_Format;
-   @AdaDefn{Trailing_Separate}    : @key(constant) Display_Format;
-   @AdaDefn{Leading_Nonseparate}  : @key(constant) Display_Format;
-   @AdaDefn{Trailing_Nonseparate} : @key(constant) Display_Format;
+   @AdaObjDefn{Unsigned}             : @key(constant) Display_Format;
+   @AdaObjDefn{Leading_Separate}     : @key(constant) Display_Format;
+   @AdaObjDefn{Trailing_Separate}    : @key(constant) Display_Format;
+   @AdaObjDefn{Leading_Nonseparate}  : @key(constant) Display_Format;
+   @AdaObjDefn{Trailing_Nonseparate} : @key(constant) Display_Format;
 
    @key(type) @AdaTypeDefn{Binary_Format} @key(is) @key(private);
 
-   @AdaDefn{High_Order_First}  : @key(constant) Binary_Format;
-   @AdaDefn{Low_Order_First}   : @key(constant) Binary_Format;
-   @AdaDefn{Native_Binary}     : @key(constant) Binary_Format;
+   @AdaObjDefn{High_Order_First}  : @key(constant) Binary_Format;
+   @AdaObjDefn{Low_Order_First}   : @key(constant) Binary_Format;
+   @AdaObjDefn{Native_Binary}     : @key(constant) Binary_Format;
 
    @key(type) @AdaTypeDefn{Packed_Format} @key(is) @key(private);
 
-   @AdaDefn{Packed_Unsigned}   : @key(constant) Packed_Format;
-   @AdaDefn{Packed_Signed}     : @key(constant) Packed_Format;
+   @AdaObjDefn{Packed_Unsigned}   : @key(constant) Packed_Format;
+   @AdaObjDefn{Packed_Signed}     : @key(constant) Packed_Format;
 
 
 @RI{-- Types for external representation of COBOL binary data}
@@ -2403,11 +2403,11 @@ either an internal or external COBOL representation
    @key(type) @AdaTypeDefn{Byte_Array} @key(is) @key(array) (Positive @key(range) <>) @key(of) Byte;
    @key(pragma) Pack (Byte_Array);
 
-   @AdaDefn{Conversion_Error} : @key(exception);
+   @AdaExcDefn{Conversion_Error} : @key(exception);
 
    @key(generic)
       @key(type) Num @key(is) @key(delta) <> @key(digits) <>;
-   @key(package) Decimal_Conversions @key(is)
+   @key(package) @AdaPackDefn{Decimal_Conversions} @key(is)
 
       @RI{-- Display Formats: data values are represented as Numeric}
 
@@ -2972,14 +2972,14 @@ declaration:
 
    @key[type] @AdaTypeDefn{Logical} @key[is] @key[new] Boolean;
 
-   @key[package] @AdaDefn{Single_Precision_Complex_Types} @key[is]
+   @key[package] @AdaPackDefn{Single_Precision_Complex_Types} @key[is]
       @key[new] Ada.Numerics.Generic_Complex_Types (Real);
 
    @key[type] @AdaTypeDefn{Complex} @key[is] @key[new] Single_Precision_Complex_Types.Complex;
 
-   @key[subtype] @AdaDefn{Imaginary} @key[is] Single_Precision_Complex_Types.Imaginary;
-   @AdaDefn{i} : Imaginary @key[renames] Single_Precision_Complex_Types.i;
-   @AdaDefn{j} : Imaginary @key[renames] Single_Precision_Complex_Types.j;
+   @key[subtype] @AdaSubtypeDefn{Name=[Imaginary],Of=[Imaginary]} @key[is] Single_Precision_Complex_Types.Imaginary;
+   @AdaObjDefn{i} : Imaginary @key[renames] Single_Precision_Complex_Types.i;
+   @AdaObjDefn{j} : Imaginary @key[renames] Single_Precision_Complex_Types.j;
 
    @key[type] @AdaTypeDefn{Character_Set} @key[is] @RI{implementation-defined character type};
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2005/10/29 06:01:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2005/10/31 17:34:20 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:22 $}
+@Comment{$Date: 2005/10/31 17:34:20 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -100,8 +100,8 @@ Numerics.Generic_Complex_Types has the following declaration:
    @key{type} @AdaTypeDefn{Imaginary} @key{is} @key{private};@Chg{Version=[2],New=[
    @key{pragma} Preelaborable_Initialization(Imaginary);],Old=[]}
 
-   @AdaDefn{i} : @key{constant} Imaginary;
-   @AdaDefn{j} : @key{constant} Imaginary;
+   @AdaObjDefn{i} : @key{constant} Imaginary;
+   @AdaObjDefn{j} : @key{constant} Imaginary;
 
 
    @key{function} @AdaSubDefn{Re} (X : Complex)   @key{return} Real'Base;
@@ -1015,9 +1015,9 @@ Text_IO.Complex_IO has the following declaration:
 
    @key[use] Complex_Types;
 
-   @AdaDefn{Default_Fore} : Field := 2;
-   @AdaDefn{Default_Aft}  : Field := Real'Digits - 1;
-   @AdaDefn{Default_Exp}  : Field := 3;
+   @AdaObjDefn{Default_Fore} : Field := 2;
+   @AdaObjDefn{Default_Aft}  : Field := Real'Digits - 1;
+   @AdaObjDefn{Default_Exp}  : Field := 3;
 
 
    @key[procedure] @AdaSubDefn{Get} (File  : @key[in]  File_Type;

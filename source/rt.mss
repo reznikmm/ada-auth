@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.60 $ $Date: 2005/10/28 05:45:43 $ $Author: Randy $ }
+@comment{ $Revision: 1.61 $ $Date: 2005/10/31 17:34:26 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/10/28 05:45:43 $}
+@Comment{$Date: 2005/10/31 17:34:26 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -368,7 +368,7 @@ language-defined library package exists:]}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[@key<package> Ada.Dispatching @key<is>@ChildUnit{Parent=[Ada],Child=[Dispatching]}
   @key<pragma> Pure(Dispatching);
-  @AdaDefn{Dispatching_Policy_Error} : @key<exception>;
+  @AdaExcDefn{Dispatching_Policy_Error} : @key<exception>;
 @key<end> Ada.Dispatching;]}
 @end{Example}
 
@@ -1171,7 +1171,7 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[@key{with} System;
 @key{with} Ada.Real_Time;
 @key{package} Ada.Dispatching.Round_Robin @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[Round_Robin]}
-  @AdaDefn{Default_Quantum} : @key{constant} Ada.Real_Time.Time_Span :=
+  @AdaObjDefn{Default_Quantum} : @key{constant} Ada.Real_Time.Time_Span :=
              @RI[implementation-defined];
   @key{procedure} @AdaSubDefn{Set_Quantum} (Pri     : @key{in} System.Priority;
                          Quantum : @key{in} Ada.Real_Time.Time_Span);
@@ -1408,8 +1408,8 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Real_Time;
 @key{with} Ada.Task_Identification;
 @key{package} Ada.Dispatching.EDF @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[EDF]}
-  @key{subtype} @AdaDefn{Deadline} @key{is} Ada.Real_Time.Time;
-  @AdaDefn{Default_Deadline} : @key{constant} Deadline :=
+  @key{subtype} @AdaSubtypeDefn{Name=[Deadline],Of=[Time]} @key{is} Ada.Real_Time.Time;
+  @AdaObjDefn{Default_Deadline} : @key{constant} Deadline :=
               Ada.Real_Time.Time_Last;
   @key{procedure} @AdaSubDefn{Set_Deadline} (D : @key{in} Deadline;
               T : @key{in} Ada.Task_Identification.Task_Id :=
@@ -2950,20 +2950,20 @@ monotonic clock package.]
 @key[package] Ada.Real_Time @key[is]@ChildUnit{Parent=[Ada],Child=[Real_Time]}
 
   @key[type] @AdaTypeDefn{Time} @key[is] @key[private];
-  @AdaDefn{Time_First} : @key[constant] Time;
-  @AdaDefn{Time_Last} : @key[constant] Time;
-  @AdaDefn{Time_Unit} : @key[constant] := @RI{implementation-defined-real-number};
+  @AdaObjDefn{Time_First} : @key[constant] Time;
+  @AdaObjDefn{Time_Last} : @key[constant] Time;
+  @AdaObjDefn{Time_Unit} : @key[constant] := @RI{implementation-defined-real-number};
 
 
 
   @key[type] @AdaTypeDefn{Time_Span} @key[is] @key[private];
-  @AdaDefn{Time_Span_First} : @key[constant] Time_Span;
-  @AdaDefn{Time_Span_Last} : @key[constant] Time_Span;
-  @AdaDefn{Time_Span_Zero} : @key[constant] Time_Span;
-  @AdaDefn{Time_Span_Unit} : @key[constant] Time_Span;
+  @AdaObjDefn{Time_Span_First} : @key[constant] Time_Span;
+  @AdaObjDefn{Time_Span_Last} : @key[constant] Time_Span;
+  @AdaObjDefn{Time_Span_Zero} : @key[constant] Time_Span;
+  @AdaObjDefn{Time_Span_Unit} : @key[constant] Time_Span;
 
 
-  @AdaDefn{Tick} : @key[constant] Time_Span;
+  @AdaObjDefn{Tick} : @key[constant] Time_Span;
   @key[function] @AdaSubDefn{Clock} @key[return] Time;
 
 
@@ -4006,10 +4006,10 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{CPU_Time} @key{is private};
-   @AdaDefn{CPU_Time_First} : @key{constant} CPU_Time;
-   @AdaDefn{CPU_Time_Last}  : @key{constant} CPU_Time;
-   @AdaDefn{CPU_Time_Unit}  : @key{constant} := @RI{implementation-defined-real-number};
-   @AdaDefn{CPU_Tick} : @key{constant} Time_Span;]}
+   @AdaObjDefn{CPU_Time_First} : @key{constant} CPU_Time;
+   @AdaObjDefn{CPU_Time_Last}  : @key{constant} CPU_Time;
+   @AdaObjDefn{CPU_Time_Unit}  : @key{constant} := @RI{implementation-defined-real-number};
+   @AdaObjDefn{CPU_Tick} : @key{constant} Time_Span;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Clock}
@@ -4235,7 +4235,7 @@ language-defined library package exists:]}
       @key{access protected procedure} (TM : @key{in out} Timer);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
    @RI[implementation-defined];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4253,7 +4253,7 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Time_Remaining} (TM : Timer) @key{return} Time_Span;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @AdaDefn{Timer_Resource_Error} : @key{exception};]}
+@ChgAdded{Version=[2],Text=[   @AdaExcDefn{Timer_Resource_Error} : @key{exception};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
@@ -4317,6 +4317,17 @@ At_Time; if the value of At_Time has already been reached when Set_Handler is
 called, the timer expires immediately.@Defn2{Term=[expires],
 Sec=[execution timer]}]}
 
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Since an access-to-constant can designate a
+  variable, the Task_Id value designated by the discriminant of a Timer
+  object can be changed after the object is created. Thus, an implementation
+  cannot use the value of the Task_Id other than where this Standard specifies.
+  For instance, the Task_Id should be read when the timer is set, but it
+  should not be used when the timer expires (as it may designate a different
+  task at that point.]}
+@end{ImplNote}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[A call of a procedure Set_Handler for a timer that
 is already set replaces the handler and the (absolute or relative) execution
@@ -4353,8 +4364,8 @@ Timer, the timer is cleared.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[For all the subprograms defined in this package,
-Tasking_Error is raised if the task identified by TM.T has terminated, and
-Program_Error is raised if the value of TM.T is
+Tasking_Error is raised if the task identified by TM.T.@key[all] has terminated, and
+Program_Error is raised if the value of TM.T.@key[all] is
 Task_Identification.Null_Task_Id.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
@@ -4368,7 +4379,8 @@ part of the expiration of a timer has no effect.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 For a call of any of the subprograms defined in this package, if the task
-identified by TM.T no longer exists, the execution of the program is erroneous.]}
+identified by TM.T.@key[all] no longer exists, the execution of the program is
+erroneous.]}
 
 @end{Erron}
 
@@ -4449,7 +4461,7 @@ language-defined library package exists:]}
                                   Ada.Task_Identification.Task_Id;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[  @AdaDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
+@ChgAdded{Version=[2],Text=[  @AdaObjDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
     @RI[implementation-defined];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4478,7 +4490,7 @@ language-defined library package exists:]}
                             Cancelled : @key{out} Boolean);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[  @AdaDefn{Group_Budget_Error} : @key{exception};]}
+@ChgAdded{Version=[2],Text=[  @AdaExcDefn{Group_Budget_Error} : @key{exception};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
