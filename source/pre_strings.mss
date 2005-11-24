@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2005/10/31 17:34:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2005/11/16 06:43:04 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/10/31 17:34:30 $}
+@Comment{$Date: 2005/11/16 06:43:04 $}
 
 @LabeledClause{String Handling}
 
@@ -14,7 +14,7 @@ bounded-length, and unbounded-length strings are supported, for @Chg{Version=[2]
 String@Chg{Version=[2],New=[,],Old=[ and]} Wide_String@Chg{Version=[2],New=[,
 and Wide_Wide_String],Old=[]}.
 The string-handling subprograms include searches for pattern strings
-and for characters in program-specified  sets,
+and for characters in program-specified sets,
 translation (via a character-to-character mapping), and transformation
 (replacing, inserting, overwriting, and deleting of substrings).
 @end{Intro}
@@ -2319,7 +2319,7 @@ and Strings.@!Wide_Maps.@!Wide_@!Constants@Chg{Version=[2],New=[, and in the
 functions Strings.Wide_Hash, Strings.Wide_Fixed.Wide_Hash,
 Strings.Wide_Bounded.Wide_Hash, and Strings.Wide_Unbounded.Wide_Hash],Old=[]}.
 They provide the same string-handling operations
-as the corresponding packages @Chg{Version=[2],New=[ and functions],Old=[]}
+as the corresponding packages@Chg{Version=[2],New=[ and functions],Old=[]}
 for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Fixed]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Bounded]}

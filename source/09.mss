@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:15 $}
+@Comment{$Date: 2005/11/16 06:42:52 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 
@@ -578,7 +578,7 @@ allocators are @i{not} activated together.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
-For @Chg{Version=[2],New=[the ],Old=[]} tasks@Chg{Version=[2],New=[],Old=[
+For @Chg{Version=[2],New=[the ],Old=[]}tasks@Chg{Version=[2],New=[],Old=[
 created by the elaboration of @nt<object_declaration>s]}
 of a given declarative region, the activations are initiated
 within the context of the @nt<handled_@!sequence_of_@!statements>
@@ -718,21 +718,18 @@ This clause has been rewritten in an attempt to improve presentation.
 @Defn2{Term=[task], Sec=(dependence)}
 @Defn2{Term=[task], Sec=(completion)}
 @Defn2{Term=[task], Sec=(termination)}
-Each task (other than an environment task  @em see @RefSecNum(Program Execution))
+Each task (other than an environment task @em see @RefSecNum(Program Execution))
 @i(depends) on one or more masters
 (see @RefSecNum(Completion and Finalization)), as follows:
 @begin(itemize)
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
 If the task is created by the evaluation of an @nt<allocator>
 for a given access type,
 it depends on each master that includes the
 elaboration of the declaration of the ultimate ancestor of the given
-access type@Chg{Version=[2],New=[ other than the declaration itself],Old=[]}.
+access type.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
 If the task is created by the elaboration of an @nt<object_declaration>,
-it depends on each master that includes this elaboration@Chg{Version=[2],
-New=[ other than the declaration itself],Old=[]}.
+it depends on each master that includes this elaboration.
 @end(itemize)
 
 @Defn2{term=[dependence], Sec=(of a task on another task)}
@@ -865,11 +862,6 @@ finalization still occurs for such tasks, and this happens after
 selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord83}
 
-@begin{DiffWord95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
-  @ChgAdded{Version=[2],Text=[Updated the wording to reflect the improved
-  definition of masters.]}
-@end{DiffWord95}
 
 @LabeledClause{Protected Units and Protected Objects}
 
@@ -1802,7 +1794,7 @@ target object is not considered a potentially blocking operation.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgAdded{Version=[2],Text=[The @nt{pragma} Detect_Blocking may be used to ensure
 that all executions of potentially blocking operations during a protected
-action  raise Program_Error.
+action raise Program_Error.
 See @RefSecNum{Pragma Detect_Blocking}.]}
 @end{Notes}
 

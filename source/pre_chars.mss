@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2005/10/31 17:34:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2005/11/16 06:43:03 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:29 $}
+@Comment{$Date: 2005/11/16 06:43:03 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -225,10 +225,10 @@ decimal digit or that is in one of the ranges 'A' .. 'F' or 'a' .. 'f'.
 
 @Defn2{term=[alphanumeric character], sec=[a category of Character]}Is_Alphanumeric @\True if Item is an alphanumeric character.
 An @i[alphanumeric character] is a character that is either
-a letter or a  decimal digit.
+a letter or a decimal digit.
 
 @Defn2{term=[special graphic character], sec=[a category of Character]}Is_Special @\True if Item is a special graphic character.
-A @i[special graphic character] is a  graphic character that is
+A @i[special graphic character] is a graphic character that is
 not alphanumeric.
 @end{description}
 
@@ -238,7 +238,7 @@ functions: one that converts from Character to Character, and the
 other that converts from String to String. The result of each
 Character-to-Character function is described below, in terms of the
 conversion applied to Item, its formal Character parameter. The
-result of each  String-to-String conversion is  obtained by applying
+result of each  String-to-String conversion is obtained by applying
 to each element of the function's
  String parameter the corresponding Character-to-Character conversion;
 the result is the null String if the value of the formal parameter

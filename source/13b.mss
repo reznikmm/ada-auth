@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:18 $}
+@Comment{$Date: 2005/11/16 06:42:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @LabeledClause{The Package System}
 
@@ -2946,7 +2946,7 @@ attribute of @Chg{Version=[2],New=[the parent],Old=[any ancestor]} type
 @Chg{Version=[2],New=[or any progenitor type ],Old=[]}of
 @i(T) @Chg{Version=[2],New=[is available anywhere within the immediate scope
 of @i<T>,],Old=[has been directly specified]} and the attribute
-of @Chg{Version=[2],New=[the parent type or ],Old=[any ancestor type of]} the
+of @Chg{Version=[2],New=[the parent type or],Old=[any ancestor type of]} the
 type of any of the extension components
 @Chg{Version=[2],New=[is not available at the freezing point of @i<T>, then],
 Old=[which are of a limited type has not been specified,]}

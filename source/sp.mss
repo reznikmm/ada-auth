@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2005/10/08 06:29:22 $ $Author: Randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2005/11/16 06:43:02 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/10/08 06:29:22 $}
+@Comment{$Date: 2005/11/16 06:43:02 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -150,7 +150,7 @@ Direct operations on I/O ports.
 @end{itemize}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Intrinsic subprograms should be provided to access any machine operations
-that  provide special capabilities or efficiency not normally available.]}]}
+that provide special capabilities or efficiency not normally available.]}]}
 
 @end{ImplAdvice}
 
@@ -1720,8 +1720,8 @@ concurrently by multiple tasks.
 @Chg{Version=[2],New=[After],Old=[When a]} task
 @Chg{Version=[2],New=[attributes are finalized],Old=[terminates]},
 the implementation shall @Chg{Version=[2],New=[],Old=[finalize
-all attributes of the task, and]} reclaim any other storage
-associated with the attributes.
+all attributes of the task, and ]}reclaim any
+@Chg{Version=[2],New=[],Old=[other ]}storage associated with the attributes.
 @end{ImplReq}
 
 @begin{DocReq}

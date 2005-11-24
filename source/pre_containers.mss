@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2005/10/31 17:34:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2005/11/16 06:42:58 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:24 $}
+@Comment{$Date: 2005/11/16 06:42:58 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -1201,7 +1201,7 @@ Index_Type'Last then Constraint_Error is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the current vector capacity is
-less than or equal to @i<NL>, Reserve_Capacity (Container, @i<NL>) is called to
+less than @i<NL>, Reserve_Capacity (Container, @i<NL>) is called to
 increase the vector capacity. Then Insert slides the elements in the range
 Before .. Last_Index (Container) up by Length(New_Item) positions, and then
 copies the elements of New_Item to the positions starting at Before. Any
@@ -1315,7 +1315,7 @@ Index_Type'Last then Constraint_Error is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the current vector capacity is
-less than or equal to @i<NL>, Reserve_Capacity (Container, @i<NL>) is called to
+less than @i<NL>, Reserve_Capacity (Container, @i<NL>) is called to
 increase the vector capacity. Then Insert slides the elements in the
 range Before .. Last_Index (Container) up by Count positions, and then inserts
 elements that are initialized by default (see @RefSecNum{Object Declarations})
@@ -1401,7 +1401,7 @@ Index_Type'Last then Constraint_Error is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the current vector capacity is
-less than or equal to @i<NL>, Reserve_Capacity (Container, @i<NL>) is called to
+less than @i<NL>, Reserve_Capacity (Container, @i<NL>) is called to
 increase the vector capacity. Then Insert_Space slides the elements in the
 range Before .. Last_Index (Container) up by Count positions, and then inserts
 empty elements in the positions starting at Before.]}
@@ -1629,7 +1629,7 @@ To_Index (Position) + 1 in the same vector as Position.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element or
 designates the first element of the container, then Previous returns the value
 No_Element. Otherwise, it returns a cursor that designates the element with index
-(To_Index (Position) @en 1) in the same vector as Position.]}
+To_Index (Position) @en 1 in the same vector as Position.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5741,7 +5741,7 @@ Key parameter is used to locate an element in the set.]}
 Constraint_Error is propagated; if Position does not designate an element in
 Container, then Program_Error is propagated. Otherwise,
 Update_Element_Preserving_Key uses Key to save the key value @i<K> of the
-element  designated by Position. Update_Element_Preserving_Key then calls
+element designated by Position. Update_Element_Preserving_Key then calls
 Process.@key{all} with that element as the argument. Program_Error is
 propagated if Process.@key{all} tampers with the elements of Container. Any
 exception raised by Process.@key{all} is propagated. After Process.@key{all}
@@ -6862,7 +6862,7 @@ Find operations that take an element parameter should be @i{O}((log @i<N>)**2) o
 better. The worst-case time complexity of the subprograms that take a cursor
 parameter should be @i{O}(1).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The worst-case time complexity of the Insert, Include, Replace, Delete,  Exclude and
+Text=[The worst-case time complexity of the Insert, Include, Replace, Delete, Exclude and
 Find operations of Containers.Ordered_Sets that take an element parameter
 should be @i{O}((log @i<N>)**2). The worst-case time complexity of the subprograms
 of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}

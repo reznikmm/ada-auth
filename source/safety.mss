@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.33 $ $Date: 2005/10/11 06:12:49 $ $Author: Randy $ }
+@Comment{ $Revision: 1.34 $ $Date: 2005/11/16 06:43:01 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/10/11 06:12:49 $}
+@Comment{$Date: 2005/11/16 06:43:01 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -892,7 +892,7 @@ Ada.Unchecked_Conversion; and]}
   @ChgAdded{Version=[2],Text=[Other uses of No_Dependence can also be
   appropriate for high-integrity systems. The specific mention of two uses
   is meant to replace the identifiers now banished to
-  @RefSec{Dependence Restrictions Identifiers}.]}
+  @RefSec{Dependence Restriction Identifiers}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Restriction No_Dependence => Ada.Unchecked_Deallocation
@@ -1069,7 +1069,7 @@ proscribed
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
   @ChgAdded{Version=[2],Text=[Restriction No_Dependence is used instead of
   special @i<restriction_>@nt<identifier>s. The old names are banished to
-  Obsolescent Features (see @RefSecNum{Dependence Restrictions Identifiers}).]}
+  Obsolescent Features (see @RefSecNum{Dependence Restriction Identifiers}).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
   @ChgAdded{Version=[2],Text=[The bizarre wording @lquotes@;apply in this

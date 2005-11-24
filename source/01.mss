@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/10/28 05:45:30 $}
+@Comment{$Date: 2005/11/16 06:42:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -63,7 +63,7 @@ numeric elementary functions, and random number generation.
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised]}
 This Annotated Ada Reference Manual (AARM) contains the entire text of
-the Ada Reference Manual @Chg{Version=[2],New=[ with Amendment 1 (RM200Y],Old=[(RM95]}),
+the Ada Reference Manual @Chg{Version=[2],New=[ with Amendment 1 (the Ada 2005 RM],Old=[(RM95]}),
 plus certain annotations.
 The annotations give a more in-depth analysis of the language.
 They describe the reason for each non-obvious rule,
@@ -80,7 +80,7 @@ readability and understandability.
 We're not trying to make the language @lquotes@;appear@rquotes@; simple here;
 on the contrary, we're trying to expose hidden complexities,
 so we can more easily detect language bugs.
-The @Chg{Version=[2],New=[RM200Y],Old=[RM95]}, on the other hand, is intended to be a more
+The @Chg{Version=[2],New=[Ada 2005 RM],Old=[RM95]}, on the other hand, is intended to be a more
 readable document for programmers.
 
 @Leading@keepnext@;The annotations in the AARM are as follows:
@@ -89,11 +89,11 @@ readable document for programmers.
 Text that is logically redundant is shown
 @Redundant[in square brackets, like this].
 Technically, such text could be written as a @NotesName
-in the @Chg{Version=[2],New=[RM200Y (and the RM95 before it)],Old=[RM95]}, since it
+in the @Chg{Version=[2],New=[Ada 2005 RM (and the Ada 95 RM before it)],Old=[RM95]}, since it
 is really a theorem that can
 be proven from the non-redundant rules of the language.
 We use the square brackets instead when it seems to make the
-@Chg{Version=[2],New=[RM200Y],Old=[RM95]} more readable.
+@Chg{Version=[2],New=[Ada 2005 RM],Old=[RM95]} more readable.
 
 The rules of the language (and some AARM-only text) are categorized,
 and placed under certain @i{sub-headings} that indicate
@@ -139,7 +139,7 @@ The unlabeled text at the beginning of each clause or subclause,
 
 @ChgRef{Version=[2],Kind=[Revised]}
 Text under the following sub-headings
-does not appear in the @Chg{Version=[2],New=[RM200Y],Old=[RM95]}:
+does not appear in the @Chg{Version=[2],New=[Ada 2005 RM],Old=[RM95]}:
 @begin(Inneritemize)
 @MetaRulesTitle,
 
@@ -213,7 +213,7 @@ in @RefSec{Glossary}.
 @end{GlossaryMarker}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised]}
-In general, @Chg{Version=[2],New=[RM200Y],Old=[RM95]} text appears in the normal font,
+In general, @Chg{Version=[2],New=[the Ada 2005 RM],Old=[RM95]} text appears in the normal font,
 whereas AARM-only text appears in a smaller font.
 @NotesName@;s also appear in the smaller font,
 as recommended by ISO/IEC style guidelines.
@@ -450,7 +450,7 @@ such cases are explained.
 
 @ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
-and does not appear in the @Chg{Version=[2],New=[RM200Y],Old=[RM95]}.
+and does not appear in the @Chg{Version=[2],New=[Ada 2005 RM],Old=[RM95]}.
 @end{MetaRules}
 
 @begin{Syntax}
@@ -717,7 +717,7 @@ we are asking whether the set of behaviors changes.)
 
 @ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
-and does not appear in the RM95@Chg{Version=[2],New=[ or RM200Y],Old=[]}.
+and does not appear in the @Chg{Version=[2],New=[Ada 95 or Ada 2005 RM],Old=[RM95]}.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
@@ -731,7 +731,7 @@ into an exception, or into an illegality, to be upwardly incompatible.
 
 @ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
-and does not appear in the RM95@Chg{Version=[2],New=[ or RM200Y],Old=[]}.
+and does not appear in the @Chg{Version=[2],New=[Ada 95 or Ada 2005 RM],Old=[RM95]}.
 @end{Incompatible83}
 
 @begin{Extend83}
@@ -744,7 +744,7 @@ The vast majority of language changes fall into this category.
 
 @ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
-and does not appear in the RM95@Chg{Version=[2],New=[ or RM200Y],Old=[]}.
+and does not appear in the @Chg{Version=[2],New=[Ada 95 or Ada 2005 RM],Old=[RM95]}.
 
 @Leading@ @* @Comment{Two blank lines: why? Because it was in the original.}
 @*
@@ -753,15 +753,17 @@ the next heading does not represent any language change:
 @end{Extend83}
 
 @begin{DiffWord83}
+@ChgRef{Version=[2],Kind=[Revised]}
 @Defn{wording changes from Ada 83}
-This heading lists some of the non-semantic changes between RM83 and
-the RM95.
+This heading lists some of the non-semantic changes between @Chg{Version=[2],
+New=[the Ada 83 RM],Old=[RM83]} and
+the @Chg{Version=[2],New=[the Ada 95 RM],Old=[RM95]}.
 It is incomplete; we have not attempted to list all wording
 changes, but only the @lquotes@;interesting@rquotes@; ones.
 
 @ChgRef{Version=[2],Kind=[Revised]}
 This is not part of the definition of the language,
-and does not appear in the RM95@Chg{Version=[2],New=[ or RM200Y],Old=[]}.
+and does not appear in the @Chg{Version=[2],New=[Ada 95 or Ada 2005 RM],Old=[RM95]}.
 @end{DiffWord83}
 
 @begin{Discussion}
@@ -784,7 +786,7 @@ is a legal Ada 2005 program with different semantics.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,
-and does not appear in the RM200Y.],Old=[]}
+and does not appear in the Ada 2005 RM.],Old=[]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
@@ -797,7 +799,7 @@ illegal in Ada 2005.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,
-and does not appear in the RM200Y.],Old=[]}
+and does not appear in the Ada 2005 RM.],Old=[]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -811,7 +813,7 @@ The vast majority of language changes fall into this category.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,
-and does not appear in the RM200Y.],Old=[]}
+and does not appear in the Ada 2005 RM.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
@@ -823,15 +825,15 @@ the next heading does not represent any language change:]}
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@Defn{wording changes from Ada 95}
-This heading lists some of the non-semantic changes between RM95 and
-the RM200Y. This heading lists only @lquotes@;interesting@rquotes@; changes
+This heading lists some of the non-semantic changes between the Ada 95 RM and
+the Ada 2005 RM. This heading lists only @lquotes@;interesting@rquotes@; changes
 (for instance, editorial corrections are not listed). Changes which
 come from Technical Corrigendum 1 are marked @b{Corrigendum}; unmarked changes
 come from Amendment 1.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,
-and does not appear in the RM200Y.],Old=[]}
+and does not appear in the Ada 2005 RM.],Old=[]}
 @end{DiffWord95}
 
 @LabeledSubClause{Conformity of an Implementation with the Standard}
@@ -1028,7 +1030,9 @@ International Standard for the semantics of the given program.
   the relative rate of progress of two concurrent tasks, thereby
   altering the order in which two external interactions occur.
 
-  Note that RM83 explicitly mentions the case of an @lquotes@;exact effect@rquotes@;
+@ChgRef{Version=[2],Kind=[Revised]}
+  Note that @Chg{Version=[2],New=[the Ada 83 RM],Old=[RM83]} explicitly
+  mentions the case of an @lquotes@;exact effect@rquotes@;
   of a program, but since so few programs have their effects defined
   that exactly,
   we don't even mention this @lquotes@;special@rquotes@; case. In particular,
@@ -1299,7 +1303,8 @@ information. For example @i(subtype_)@nt<name> and
 @Defn{ambiguous grammar}
 @Defn2{Term=[grammar],Sec=(resolution of ambiguity)}
 @Defn2{Term=[grammar],Sec=(ambiguous)}
-The grammar given in the RM95 is not LR(1).
+The grammar given in @Chg{Version=[2],New=[this International Standard],
+old=[the RM95]} is not LR(1).
 In fact, it is ambiguous; the ambiguities are resolved
 by the overload resolution rules
 (see @RefSecNum{The Context of Overload Resolution}).
@@ -1831,6 +1836,7 @@ is marked like this.
 
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Revised]}
+@ChgRef{Version=[2],Kind=[Revised]}
 Here are some AARM-only definitions:
 @Defn{Ada Rapporteur Group (ARG)}
 @Defn(ARG)
@@ -1843,7 +1849,8 @@ are denoted as "AI95" in this document.>,Old=<>}
 @Defn{Ada Commentary Integration Document (ACID)}
 @Defn(ACID)
 The Ada Commentary Integration Document (ACID)
-is an edition of RM83 in which clearly marked insertions
+is an edition of @Chg{Version=[2],New=[the Ada 83 RM],Old=[RM83]}
+in which clearly marked insertions
 and deletions indicate the effect of integrating the approved AIs.
 @Defn{Uniformity Rapporteur Group (URG)}
 @Defn(URG)

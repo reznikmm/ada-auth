@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:37 $}
+@Comment{$Date: 2005/11/16 06:42:54 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -208,7 +208,7 @@ New=[, the additional bits are padding bits.],Old=[.
 @Chg{Version=[2],New=[For an elementary object, these],Old=[Such]} padding bits
 @Chg{Version=[2],New=[],Old=[are considered to be part of the representation of the
 object, rather than being gaps between objects,
-if these bits]} are normally read and updated@Chg{Version=[2],New=[ along
+if these bits ]}are normally read and updated@Chg{Version=[2],New=[ along
 with the others. For a
 composite object, padding bits might not be read or updated in any given
 composite operation, depending on the implementation],Old=[]}.
@@ -3163,7 +3163,7 @@ The recommended level of support for @nt{record_representation_clause}s is:
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
 @ChgAdded{Version=[2],Text=[An implementation should support machine scalars
-that correspond to all of  the integer, floating point, and address formats
+that correspond to all of the integer, floating point, and address formats
 supported by the machine.]}
 
 An implementation should support storage places that can be extracted

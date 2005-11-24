@@ -1,9 +1,9 @@
-@Part(03, Root="ada.mss")
+ @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:11 $}
+@Comment{$Date: 2005/11/16 06:42:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -159,7 +159,8 @@ or in a generic formal part
 @Defn2{Term=[extension], Sec=(of a private type)}
 Every type extension is also a tagged type, and
 is either a @i(record extension) of some other
-tagged type, a @i(private extension), or a non-interface task or protected type
+tagged type, a @i(private extension) of some other
+tagged type, or a non-interface task or protected type
 derived from an interface type (a synchronized tagged type @em see
 @RefSecNum{Interface Types}).
 A record extension is defined by a @nt<derived_type_definition>
@@ -232,7 +233,7 @@ For a tagged type that is local to a generic package body@Chg{Version=[2],
 New=[ and with all of its ancestors (if any) also local to the
 generic body],Old=[]},
 the language does not specify whether repeated instantiations
-of the generic body result in distinct tags.
+of the generic body result in distinct tags.@PDefn{Unspecified}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00344-01]}
   @ChgDeleted{Version=[2],Text=[This eases generic code sharing.]}
@@ -297,7 +298,8 @@ of the generic body result in distinct tags.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
 @ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @key[is]
     @Chg{Version=[2],New=[@key[pragma] Preelaborate(Tags);
-    ],Old=[]}@key[type] @AdaTypeDefn{Tag} @key[is] @key[private];
+    ],Old=[]}@key[type] @AdaTypeDefn{Tag} @key[is] @key[private];@Chg{Version=[2],New=[
+    @key[pragma] Preelaborable_Initialization(Tag);],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[    @AdaObjDefn{No_Tag} : @key[constant] Tag;]}
@@ -476,7 +478,7 @@ array containing the tag of each interface ancestor type of the type whose tag
 is T, other than T itself. The lower bound of the returned array is 1, and the
 order of the returned tags is unspecified. Each tag appears in the result
 exactly once.@Redundant[ If the type whose tag is T has no interface ancestors,
-a null array is returned.]]}
+a null array is returned.]]}@PDefn{Unspecified}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -487,7 +489,7 @@ tag of the parent type, if the parent is an interface.]}
 @ChgAdded{Version=[2],Text=[Indirect interface ancestors are included in the
 result of Interface_Ancestor_Tags. That's because where an interface appears
 in the derivation tree has no effect on the semantics of the type; the only
-interesting property is whether the type has an interface.]}
+interesting property is whether the type has an interface as an ancestor.]}
 @end{Ramification}
 
 For @PrefixType{every subtype S of a tagged type @i(T)
@@ -854,6 +856,7 @@ Tagged types are a new concept.
 @LabeledSubClause{Type Extensions}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @Redundant[@Defn{type extension}
 @Defn2{Term=[extension], Sec=(of a type)}
 @Defn{record extension}
@@ -862,7 +865,8 @@ Tagged types are a new concept.
 @Defn2{Term=[extension], Sec=(of a private type)}
 Every type extension is a tagged type, and
 is either a @i(record extension) or a @i(private extension) of
-some other tagged type.]
+some other tagged type@Chg{Version=[2],New=[, or a non-interface
+ task or protected type derived from an interface type.],Old=[]}.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -3966,7 +3970,7 @@ An entity or view @Chg{Version=[2],New=[defined],Old=[created]} by a
 declaration@Chg{Version=[2],New=[ and created as part of its elaboration],Old=[]}
 has the same accessibility level
 as the innermost @Chg{Version=[2],New=[],Old=[enclosing ]}master
-@Chg{Version=[2],New=[ of the declaration],Old=[]} except in the
+@Chg{Version=[2],New=[of the declaration ],Old=[]}except in the
 cases of renaming and derived access types described below.
 A parameter of a master has the same
 accessibility level as the master.
@@ -4937,7 +4941,7 @@ See @RefSecNum{Dispatching Operations of Tagged Types}.
 @Chg{Version=[2],New=[The],Old=[The accessibility rules imply that it
 is not possible to use the]} Access
 attribute@Chg{Version=[2],New=[ for subprograms and parameters of an
-anonymous  access-to-subprogram type may together be used],Old=[]}
+anonymous access-to-subprogram type may together be used],Old=[]}
 to implement @lquotes@;downward closures@rquotes@; @em that is,
 to pass a more-nested subprogram as a parameter to a
 less-nested subprogram, as might be @Chg{Version=[2],
@@ -5079,7 +5083,7 @@ that does not resolve by the new rules would have failed a Legality Rule.]}
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
 @Chg{Version=[2],New=[Adjusted the wording to reflect the fact that expressions
-and declarations are masters.],Old=[]}
+and names are masters.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02],ARef=[AI95-00385-01],ARef=[AI95-00416-01]}
 @Chg{Version=[2],New=[Defined the accessibility of the various new kinds and

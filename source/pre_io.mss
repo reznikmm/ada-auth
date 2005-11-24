@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:22 $}
+@Comment{$Date: 2005/11/16 06:42:58 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -199,7 +199,7 @@ The corresponding file types and the associated
 operations are provided by the generic packages Sequential_IO and
 Direct_IO. A file
 object to be used for sequential access is called a @i{sequential file},
-and one  to be used for direct access is called a @i{direct file}.
+and one to be used for direct access is called a @i{direct file}.
 Access to @Chg{Version=[2],New=[@i{stream file}s],Old=[stream files]}
 is described in @RefSecNum(The Package Streams.Stream_IO).
 
@@ -363,7 +363,7 @@ any nesting depth, so this note is obsolete.}
 
 The procedures and functions described in this subclause provide for the
 control of external files; their declarations are repeated in each of
-the  packages for sequential, direct,
+the packages for sequential, direct,
 text, and stream
 input-output. For
 text input-output, the procedures Create, Open, and Reset have
@@ -1461,7 +1461,7 @@ effects:
 @begin{Itemize}
      For the procedures Create and Open: After a file with mode Out_File or
      Append_File is opened, the page length and line length are unbounded (both have
-     the conventional value zero). After a file (of any  mode)
+     the conventional value zero). After a file (of any mode)
      is opened, the current column, current line, and current
      page numbers are set to one. If the mode is Append_File, it
      is implementation defined whether a page terminator will separate
@@ -3134,7 +3134,7 @@ The @Chg{Version=[2],New=[packages],Old=[package]} Wide_Text_IO
 @Chg{Version=[2],New=[and Wide_Wide_Text_IO provide],Old=[provides]} facilities
 for input and output in human-readable form. Each file is read or
 written sequentially, as a sequence of wide characters
-@Chg{Version=[2],New=[(or wide wide characters) ],Old=[]} grouped
+@Chg{Version=[2],New=[(or wide wide characters) ],Old=[]}grouped
 into lines, and as a sequence of lines grouped into pages.
 @end{Intro}
 

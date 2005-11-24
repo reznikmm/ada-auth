@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:13 $}
+@Comment{$Date: 2005/11/16 06:42:50 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -26,7 +26,7 @@ and a @nt{subprogram_body} defining its execution.
 Text=<@ChgAdded{Version=[2],Text=[A subprogram is a section of program that can
 be executed in various contexts. It is invoked by a subprogram call that may
 qualify the effect of the subprogram through the passing of parameters. There
-are two forms of subprograms; functions, which return values, and procedures,
+are two forms of subprograms: functions, which return values, and procedures,
 which do not.]}>}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Function>,
 Text=<@ChgAdded{Version=[2],Text=[A function is a form of subprogram that

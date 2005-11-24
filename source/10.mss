@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:35 $}
+@Comment{$Date: 2005/11/16 06:42:53 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1118,7 +1118,7 @@ library unit, but not a subprogram body acting as a subprogram declaration (see
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @ChgAdded{Version=[2],Text=[the declaration of a public descendant of that
-library unit, in which case  the @nt<with_clause> shall include the reserved word
+library unit, in which case the @nt<with_clause> shall include the reserved word
 @key<private>.]}
 @end{Itemize}
 
@@ -3076,7 +3076,7 @@ units.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
 The creation of a@Chg{Version=[2],New=[n object @Redundant[(including a component)] of
-a type that does not have preelaborable initialization. Similarly, ],
+a type that does not have preelaborable initialization. Similarly,],
 Old=[ default-initialized object @Redundant[(including
 a component)] of a descendant of a private type,
 private extension, controlled type,

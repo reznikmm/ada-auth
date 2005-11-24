@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:09 $}
+@Comment{$Date: 2005/11/16 06:42:45 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -420,8 +420,9 @@ a value of the type.
   operations) which implement the fundamental aspects of its semantics.
   Types are grouped into @Chg{Version=[2],New=[@i(categories)],Old=[@i(classes)]}.
   The types of a given @Chg{Version=[2],New=[category],Old=[class]} share a set
-  of primitive operations. @Chg{Version=[2],New=[Most categories of types
-  form @i<classes> of types. ],Old=[@Defn(closed under derivation)
+  of primitive operations. @Chg{Version=[2],New=[Most language-defined
+  categories of types are also @i<classes> of types],
+  Old=[@Defn(closed under derivation)
   Classes are closed under derivation;
   that is, if a type is in a class, then all of its derivatives
   are in that class]}.>}
@@ -441,8 +442,8 @@ similarity of their values and primitive operations]}.
 @Defn2{Term=[language-defined class], Sec=(of types)}
 There exist several @i(language-defined @Chg{Version=[2],New=[categories],
 Old=[classes]}) of types (see NOTES below)@Chg{Version=[2],New=[, reflecting
-the simularity of their values and primitive operations],Old=[]}.@Chg{Version=[2],
-New=[@Defn2{Term=[language-defined category], Sec=(of types)}@Redundant[Most
+the similarity of their values and primitive operations],Old=[]}.@Chg{Version=[2],
+New=[@Defn2{Term=[language-defined category], Sec=(of types)} @Redundant[Most
 categories of types form @i(classes) of types.]],Old=[]}
 @Defn{elementary type}
 @i(Elementary) types are those whose values are logically indivisible;
@@ -466,7 +467,7 @@ of @i(component) values.
   such as their primitive operations.>}
 @ChgToGlossary{Version=[2],Kind=[Added],Term=<Category (of types)>,
   Text=<@ChgAdded{Version=[2],Text=[A category of types is a set of types with
-  one or more common properties, such as their primitive operations. A
+  one or more common properties, such as primitive operations. A
   category of types that is closed under derivation is also known as
   a @i<class>.]}>}
 @ToGlossary{Term=<Elementary type>,
@@ -1383,7 +1384,7 @@ specific type are defined as follows:
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00200-01]}
   @Defn2{Term=[override], Sec=(a primitive subprogram)}
-  @Chg{Version=[2],New=[In the case of a nonformal type, any],Old=[Any]}
+  @Chg{Version=[2],New=[For a nonformal type, any],Old=[Any]}
   subprograms not covered above
   @Redundant[that are explicitly declared immediately within the same
   declarative region as the type] and that override (see @RefSecNum{Visibility})
@@ -2280,7 +2281,7 @@ Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   --@RI[ a real number (s
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
 Max           : @key(constant) := 500;                   --@RI[ an integer number]
-Max_Line_Size : @key(constant) := Max/6@Chg{Version=[2],New=[;],Old=[ ]}                  --@RI[ the integer 83]
+Max_Line_Size : @key(constant) := Max/6@Chg{Version=[2],New=[;],Old=[ ]}                 --@RI[ the integer 83]
 Power_16      : @key(constant) := 2**16;                 --@RI[ the integer 65_536]
 One, Un, Eins : @key(constant) := 1;                     --@RI[ three different names for 1]
 @end(Example)
@@ -2608,7 +2609,7 @@ following the parent @nt<subtype_indication>.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00419-01]}
 @ChgDeleted{Version=[2],Text=[The derived type is limited if and
-only if the parent type is limited]}.
+only if the parent type is limited.]}
 @ChgNote{This rule is normatively in 7.5, and we don't want it scattered
 everywhere.}
 @begin{Honest}
@@ -2814,7 +2815,7 @@ to the subtype of the corresponding formal parameter
 performs any necessary type conversion as well.
 If the result type of the inherited subprogram
 is the derived type, the result of calling the
-@Chg{Version=[2],New=[],Old=[parent's]} subprogram@Chg{Version=[2],
+@Chg{Version=[2],New=[],Old=[parent's ]}subprogram@Chg{Version=[2],
 New=[ of the parent or progenitor],Old=[]} is converted to the
 derived type@Chg{Version=[2],New=[, or in the case of a
 null extension, extended to the derived type using the equivalent of an

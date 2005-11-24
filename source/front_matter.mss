@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.51 $ $Date: 2005/10/31 17:34:27 $}
+@comment{$Revision: 1.52 $ $Date: 2005/11/16 06:43:02 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -45,10 +45,10 @@ as well as correct errors.]}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[When ISO published Technical Corrigendum 1, it did not also publish
-a document that merges the @Chg{Version=[2],New=[changes from ],Old=[]}Technical
+a document that merges the @Chg{Version=[2],New=[changes from the ],Old=[]}Technical
 Corrigendum @Chg{Version=[2],New=[],Old=[changes ]}into
 the text of the International Standard.@Chg{Version=[2],New=[ It is not
-expected that ISO will publish a document that merges the changes from
+known whether ISO will publish a document that merges the changes from
 Technical Corrigendum and Amendment 1 into the text of the International
 Standard.],Old=[]}
 However, ISO rules require that the
@@ -130,9 +130,10 @@ section also would be replaced by the current ISO boilerplate.]}
 @end{Discussion}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00440-01]}
 Annexes A to J form an integral part of this
 International Standard.
-Annexes K to P are for information only.
+Annexes K to @Chg{Version=[2],New=[Q],Old=[P]} are for information only.
 
 
 @begin{Discussion}
@@ -200,7 +201,7 @@ This is the International Standard @em ISO/IEC 8652:1995.
 This document lists corrections to the International Standard.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[Amendment 1 @em ISO/IEC 8652:1995:AMD.1:200x. This
+@ChgAdded{Version=[2],Text=[Amendment 1 @em ISO/IEC 8652:1995:AMD.1:200y. This
 document outlines additional features and corrections to the International
 Standard.]}
 
@@ -216,8 +217,8 @@ document combining the above three documents into a single document.]}
 @Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
 Programming Language @em 1995 edition, which]} gives an introduction to the
 new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition of this Standard],Old=[]},
-and explains the rationale behind them. Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],
-Old=[]} should read this first.
+and explains the rationale behind them. Programmers @Chg{Version=[2],New=[unfamiliar
+with Ada 95 ],Old=[]}should read this first.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
 @ChgAdded{Version=[2],Text=[Ada 2005 Rationale. This gives an introduction
@@ -681,7 +682,7 @@ with respect to the 1995 edition are incorporated:]}
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[Support for program text is extended to cover the
 entire ISO/IEC 10646:2003 repertoire. Execution support now includes the
-32-bit character set.  See clauses @RefSecNum{Character Set},
+32-bit character set. See clauses @RefSecNum{Character Set},
 @RefSecNum{Character Types},
 @RefSecNum{String Types},
 @RefSecNum{The Package Standard},
@@ -789,7 +790,7 @@ Comments should use the following format:
 @begin(display)
 @ChgRef{Version=[2],Kind=[Revised]}
 @TabSet(L6)@\@b(!topic) @i[Title summarizing comment]
-@\@b(!reference) @Chg{Version=[2],New=[RM06],Old=[RM95]}-@i{ss.ss(pp)}
+@\@b(!reference) @Chg{Version=[2],New=[Ada 2005 RM],Old=[RM95-]}@i{ss.ss(pp)}
 @\@b(!from) @i{Author Name yy-mm-dd}
 @\@b(!keywords) @i{keywords related to topic}
 @\@b(!discussion)
@@ -1015,14 +1016,14 @@ clause is not included in the International Standard.],Old=[]}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
-(ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and Amendment 1 (ISO/IEC 8652/AMD.1:200x)],Old=[]}.
+(ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and Amendment 1 (ISO/IEC 8652/AMD.1:200y)],Old=[]}.
 In addition, a variety of editorial errors have been corrected.],Old=[]}
 @end{RMOnly}
 @begin{AARMOnly}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
-(ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and Amendment 1 (ISO/IEC 8652/AMD.1:200x)],Old=[]}.
+(ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and Amendment 1 (ISO/IEC 8652/AMD.1:200y)],Old=[]}.
 In addition, additional annotations have been added and
 a variety of editorial errors have been corrected.],Old=[]}
 @end{AARMOnly}
@@ -1031,7 +1032,7 @@ a variety of editorial errors have been corrected.],Old=[]}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[RevisedAdded]}
 @Chg{New=[Changes to the original 8652:1995 can be identified by the version
-number @Chg{Version=[2],New=[],Old=[/1]} following the paragraph
+number @Chg{Version=[2],New=[],Old=[/1 ]}following the paragraph
 number.@Chg{Version=[2],New=[ Paragraphs with a version number of /1 were
 changed by Technical Corrigendum 1 or were editorial corrections at that time,
 while paragraphs with a version number of /2 were changed by Amendment 1 or were

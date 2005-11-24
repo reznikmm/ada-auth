@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2005/10/31 17:34:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2005/11/16 06:42:56 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/10/31 17:34:19 $}
+@Comment{$Date: 2005/11/16 06:42:56 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1567,7 +1567,7 @@ dynamically added, removed or replaced without requiring the modification of
 the clients' code.
 
 The Tape_Client procedure references only declarations in the Tapes and
-Name_Server  packages. Before using a tape for the first time, it needs to
+Name_Server packages. Before using a tape for the first time, it needs to
 query the Name_Server for a system-wide identity for that tape. From then on,
 it can use that identity to access the tape device.
 

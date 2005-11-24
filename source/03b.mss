@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/10/20 06:09:17 $}
+@Comment{$Date: 2005/11/16 06:42:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @LabeledClause{Array Types}
 
@@ -529,7 +529,7 @@ so long as the variable is explicitly initialized.
 @begin{Legality}
 @Redundant[The argument N used in the @nt<attribute_designator>s for
 the N-th dimension of an array shall be a static @nt<expression> of
-some integer type.]  The value of N shall be positive (nonzero)
+some integer type.] The value of N shall be positive (nonzero)
 and no greater than the dimensionality of the array.
 @end{Legality}
 

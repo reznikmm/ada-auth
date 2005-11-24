@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.61 $ $Date: 2005/10/31 17:34:26 $ $Author: Randy $ }
+@comment{ $Revision: 1.62 $ $Date: 2005/11/16 06:43:00 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/10/31 17:34:26 $}
+@Comment{$Date: 2005/11/16 06:43:00 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -68,7 +68,7 @@ that the value of the metric is greater than V@rquotes@;.
 This kind of metric can only be partially tested, by finding the value
 of V for one or more test programs.
 
-The metrics do not cover the whole language;  they are limited
+The metrics do not cover the whole language; they are limited
 to features that are specified in @RefSec{Systems Programming}
 and in this Annex. The metrics are intended
 to provide guidance to potential users as to whether a particular
@@ -1325,7 +1325,7 @@ priority will not be subject to round robin dispatching.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[The deadline of a task is an indication of the
 urgency of the task; it represents a point on an ideal physical time line.
-Unless otherwise specified, whenever tasks compete for processors or other
+For policies that use deadlines, whenever tasks compete for processors or other
 implementation-defined resources, the resources are allocated to the task with
 the earliest deadline.]}
 
@@ -4792,7 +4792,7 @@ occurs. Such a protected procedure is called a @i{handler}.
 @ChgAdded{Version=[2],Text=[The procedures Set_Handler associate the handler
 Handler with the event Event; if Handler is @key{null}, the event is cleared,
 otherwise it is set. The first procedure Set_Handler sets the execution time
-for the event to be At_Time. The second  procedure Set_Handler sets the
+for the event to be At_Time. The second procedure Set_Handler sets the
 execution time for the event to be Real_Time.Clock + In_Time.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}

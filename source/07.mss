@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:14 $}
+@Comment{$Date: 2005/11/16 06:42:51 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1007,11 +1007,13 @@ class-wide, whereas the completion of a private type always declares
 a specific type.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401]}
 The ancestor type specified in a @nt<private_extension_declaration>
 and the parent type specified in the corresponding declaration
 of a record extension given in the private part need not be the
-same @em the parent type of the full view can be any descendant
-of the ancestor type.
+same@Chg{Version=[2],New=[. If the ancestor
+type is not an interface type,],Old=[ @em]} the parent type of the full view
+can be any descendant of the ancestor type.
 In this case, for a primitive subprogram that is inherited from the
 ancestor type and
 not overridden, the formal parameter names and default expressions (if any)
@@ -1019,6 +1021,11 @@ come from the corresponding primitive subprogram of the specified ancestor
 type, while the body comes from the corresponding primitive subprogram
 of the parent type of the full view.
 See @RefSecNum{Dispatching Operations of Tagged Types}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00401]}
+@ChgAdded{Version=[2],Noprefix=[T],Text=[Similarly, if the ancestor type is an
+interface type, the parent type can be anything so long as the full view is a
+descendant of the ancestor type.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00401]}
 @ChgAdded{Version=[2],Text=[The progenitor types specified in a
@@ -2726,8 +2733,8 @@ except in the case of a @i{master}:
 the execution of
 a @Chg{Version=[2],New=[body other than a @nt{package_body};
 the execution of a @nt{statement};
-or the evaluation of an @nt{expression} or @nt{range} that is not part
-of an enclosing @nt{expression}, @nt{name}, @nt{range}, or
+or the evaluation of an @nt{expression}, @nt{name}, or @nt{range} that is not
+part of an enclosing @nt{expression}, @nt{name}, @nt{range}, or
 @nt{simple_statement}],
 Old=[@nt{task_body}, a @nt{block_statement},
 a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}]}.
@@ -2748,7 +2755,7 @@ complete, and before it is left.
   possibly causing anonymous controlled objects to be created,
   and we don't want those objects to escape outside the rendezvous.]}
 
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[We have to include @nt{name}s in the contexts that
   do not cause masters to occur so that @nt{expression}s contained in a
   @nt{name} (that is not part of an @nt{expression} or @nt{simple_statement})
@@ -2756,6 +2763,14 @@ complete, and before it is left.
   certainly do not want the parameter @nt{expression}s to be masters, as they
   would then be finalized before the function is called.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[The fact that a @nt{name} is a master generally
+  does not change the accessibility of the entity denoted by the @nt{name};
+  that depends on the declaration of the entity. The @nt{name} is the master
+  of any short-lived entities (such as @nt{aggregate}s used as parameters of
+  types with task or controlled parts).]}
+@end{Ramification}
 
 @Defn2{Term=[finalization], Sec=(of a master)}
 For the @i{finalization} of a master,

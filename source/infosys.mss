@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2005/10/31 17:34:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2005/11/16 06:42:57 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:20 $}
+@Comment{$Date: 2005/11/16 06:42:57 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -176,7 +176,7 @@ The effect of Divide is as follows.
 The value of Quotient is Quotient_Type(Dividend/Divisor).
 The value of Remainder is Remainder_Type(Intermediate),
 where Intermediate is the difference between Dividend and the product of
-Divisor and Quotient;  this result is computed exactly.
+Divisor and Quotient; this result is computed exactly.
 @end{StaticSem}
 
 @begin(ImplReq)

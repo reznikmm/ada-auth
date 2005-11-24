@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:12 $}
+@Comment{$Date: 2005/11/16 06:42:54 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -925,7 +925,7 @@ Text=[Exception_Information should provide
 information useful for debugging, and should include the Exception_Name
 and Exception_Message.]}]}
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[Exception_Message should be short, by default provide
+Text=[Exception_Message by default should be short, provide
 information useful for debugging, and should not include the Exception_Name.]}]}
 
 @begin{Reason}

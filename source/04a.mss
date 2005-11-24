@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/10/15 06:09:02 $}
+@Comment{$Date: 2005/11/16 06:42:49 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3564,7 +3564,7 @@ for every specific fixed point type @i(T):
 
 @Leading@Redundant[All of the above multiplying operators
 are usable with an operand
-of an appropriate universal numeric type.]  The following additional
+of an appropriate universal numeric type.] The following additional
 multiplying operators for @i(root_real) are predefined@Redundant[,
 and are usable when both operands are of an appropriate universal or
 root numeric type, and the result is allowed to be of

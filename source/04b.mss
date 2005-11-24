@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:33 $}
+@Comment{$Date: 2005/11/16 06:42:50 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.27 $}
+@Comment{$Revision: 1.28 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2396,7 +2396,7 @@ of a @nt<subtype_@!indication> or the same evaluation of a @nt<range>
 of a @nt<discrete_@!subtype_@!definition>; or],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00311-01]}
-@Chg{Version=[2],New=[both are nonstatic and both come from the same
+@Chg{Version=[2],New=[both are nonstatic and come from the same
 @nt{formal_type_declaration}.],Old=[]}
 @end{Itemize}
 

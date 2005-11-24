@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2005/10/29 06:01:24 $ $Author: Randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2005/11/16 06:42:57 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:24 $}
+@Comment{$Date: 2005/11/16 06:42:57 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -739,7 +739,7 @@ Directory, for entries matching Pattern. The subprogram designated by Process
 is called with each matching entry in turn. Pattern represents a pattern for
 matching file names. If Pattern is null, all items in the directory are matched;
 otherwise, the interpretation of Pattern is implementation-defined. Only
-items that  match Filter will be returned.
+items that match Filter will be returned.
 The exception Name_Error is propagated if the string given by Directory
 does not identify an existing directory, or if Pattern does not allow the
 identification of any possible external file or directory. The exception

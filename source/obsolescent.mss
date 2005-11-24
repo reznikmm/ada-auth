@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:44 $}
+@Comment{$Date: 2005/11/16 06:43:03 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -645,7 +645,7 @@ Hence, it is always implementation defined.
 @PDefn2{Term=[specifiable], Sec=(of Storage_Size for a task
 first subtype)}
 @NoPrefix@;Storage_Size may be specified for a task first subtype
-@Chg{Version=[2],New=[ that is not an interface ],Old=[]}via
+@Chg{Version=[2],New=[that is not an interface ],Old=[]}via
 an @nt{attribute_definition_clause}.
 @end{Description}
 @end{StaticSem}
@@ -807,7 +807,7 @@ this pragma.]}
 @end{DiffWord95}
 
 
-@LabeledAddedClause{Version=[2],Name=[Dependence Restrictions Identifiers]}
+@LabeledAddedClause{Version=[2],Name=[Dependence Restriction Identifiers]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
@@ -821,24 +821,26 @@ on specific language-defined units. The more general restriction No_Dependence
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Type=[Leading],
-Text=[The following @Syni<restrictions_>@nt<identifiers> exist:]}
+Text=[The following @Syni<restriction_>@nt<identifiers> exist:]}
 
 @begin{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
-Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\There are no
-semantic dependences on package Asynchronous_Task_Control.]}
+Sec=(No_Asynchronous_Control)}No_Asynchronous_Control @\Semantic dependence
+on the predefined package Asynchronous_Task_Control is not allowed.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
 Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic
-dependence on the predefined generic Unchecked_Conversion is not allowed.]}
+dependence on the predefined generic function Unchecked_Conversion is not
+allowed.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
 Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic
-dependence on Unchecked_Deallocation is not allowed.]}
+dependence on the predefined generic procedure Unchecked_Deallocation is
+not allowed.]}
 
 @end{Description}
 @end{StaticSem}
